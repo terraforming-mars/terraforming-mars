@@ -1,12 +1,10 @@
 <template>
   <div class='board-space-bonuses'>
-    <i v-for="(spaceBonus, idx) in bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" />
+    <i v-for="(spaceBonus, idx) in props.bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" />
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 const css: Record<SpaceBonus, string> = {
@@ -31,32 +29,23 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.TEMPERATURE_4MC]: 'bonustemperature4mc',
 };
 
-export default defineComponent({
-  name: 'bonus',
-  props: {
-    bonus: {
-      type: Array as () => Array<SpaceBonus>,
-      required: true,
-    },
-  },
-  methods: {
-    getClass(idx: number, bonus: SpaceBonus): string {
-      const doubleWideBonuses = [
-        SpaceBonus.OCEAN,
-        SpaceBonus.TEMPERATURE,
-        SpaceBonus.TEMPERATURE_4MC,
-        SpaceBonus.COLONY,
-      ];
-      // If only one bonus is present, center it.
-      // Except: some bonuses occupy 2 spaces.
-      let position: string | number = idx;
-      if (this.bonus.length === 1 && !doubleWideBonuses.includes(bonus)) {
-        position = 'only';
-      }
-      return `board-space-bonus board-space-bonus--${css[bonus]} board-space-bonus-pos--${position}`;
-    },
-  },
-});
+const props = defineProps<{
+  bonus: Array<SpaceBonus>;
+}>();
 
+function getClass(idx: number, bonus: SpaceBonus): string {
+  const doubleWideBonuses = [
+    SpaceBonus.OCEAN,
+    SpaceBonus.TEMPERATURE,
+    SpaceBonus.TEMPERATURE_4MC,
+    SpaceBonus.COLONY,
+  ];
+  // If only one bonus is present, center it.
+  // Except: some bonuses occupy 2 spaces.
+  let position: string | number = idx;
+  if (props.bonus.length === 1 && !doubleWideBonuses.includes(bonus)) {
+    position = 'only';
+  }
+  return `board-space-bonus board-space-bonus--${css[bonus]} board-space-bonus-pos--${position}`;
+}
 </script>
-

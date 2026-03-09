@@ -1,3 +1,5 @@
+import {ALL_LANGUAGES, LANGUAGE} from '@/common/constants';
+
 export type Preferences = {
   learner_mode: boolean,
   enable_sounds: boolean,
@@ -20,7 +22,7 @@ export type Preferences = {
   symbol_overlay: boolean,
   animated_title: boolean,
   experimental_ui: boolean,
-  lang: string,
+  lang: LANGUAGE,
 }
 
 export type Preference = keyof Preferences;
@@ -75,7 +77,9 @@ export class PreferencesManager {
 
   private _set(key: Preference, val: string | boolean) {
     if (key === 'lang') {
-      this._values.lang = String(val);
+      if (ALL_LANGUAGES.includes(val as LANGUAGE)) {
+        this._values.lang = val as LANGUAGE;
+      }
     } else {
       this._values[key] = typeof(val) === 'boolean' ? val : (val === '1');
     }

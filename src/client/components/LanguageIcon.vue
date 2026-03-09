@@ -11,35 +11,17 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref, computed} from 'vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {LANGUAGES} from '@/common/constants';
 
-export default defineComponent({
-  name: 'LanguageIcon',
-  components: {
-    'language-selection-dialog': LanguageSelectionDialog,
-  },
-  data() {
-    return {
-      languagePanelOpen: false,
-    };
-  },
-  computed: {
-    preferencesManager(): PreferencesManager {
-      return PreferencesManager.INSTANCE;
-    },
-    lang(): keyof typeof LANGUAGES {
-      return PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES;
-    },
-    title(): string {
-      const lang = LANGUAGES[this.lang];
-      return `${lang[0]} (${lang[1]})`;
-    },
-  },
+const languagePanelOpen = ref(false);
+const preferencesManager = computed(() => PreferencesManager.INSTANCE);
+const lang = computed(() => preferencesManager.value.values().lang);
+const title = computed(() => {
+  const l = LANGUAGES[lang.value];
+  return `${l[0]} (${l[1]})`;
 });
-
 </script>

@@ -24,7 +24,7 @@ import {Hollandia} from './boards/Hollandia';
 
 type BoardFactory = (new (spaces: ReadonlyArray<Space>) => MarsBoard) & {newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard};
 
-const boards: Record<BoardName, BoardFactory> = {
+const boards = {
   [BoardName.THARSIS]: TharsisBoard,
   [BoardName.HELLAS]: HellasBoard,
   [BoardName.ELYSIUM]: ElysiumBoard,
@@ -36,7 +36,7 @@ const boards: Record<BoardName, BoardFactory> = {
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
   [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
   [BoardName.HOLLANDIA]: Hollandia,
-};
+} satisfies Record<BoardName, BoardFactory>;
 
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): MarsBoard {

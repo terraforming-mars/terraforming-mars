@@ -18,6 +18,10 @@
             <label for="radio-hotkeys" v-on:click="setTab('hotkeys')">
                 <span v-i18n>Hot Keys</span>
             </label>
+            <input type="radio" name="help-tab" id="radio-rulebooks">
+            <label for="radio-rulebooks" v-on:click="setTab('rulebooks')">
+                <span v-i18n>Rules</span>
+            </label>
         </div>
 
         <HelpIconology v-if="isOpen('iconology')"></HelpIconology>
@@ -25,6 +29,8 @@
         <HelpStandardProjects v-if="isOpen('standard projects')"></HelpStandardProjects>
 
         <HelpPhases v-if="isOpen('phases')"></HelpPhases>
+
+        <HelpRulebooks v-if="isOpen('rulebooks')"></HelpRulebooks>
 
         <div v-if="isOpen('hotkeys')">
           <div class="help-hotkeys">
@@ -44,9 +50,10 @@
 import {defineComponent} from '@/client/vue3-compat';
 import HelpIconology from '@/client/components/help/HelpIconology.vue';
 import HelpPhases from '@/client/components/help/HelpPhases.vue';
+import HelpRulebooks from '@/client/components/help/HelpRulebooks.vue';
 import HelpStandardProjects from '@/client/components/help/HelpStandardProjects.vue';
 
-type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
+type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys' | 'rulebooks';
 
 export interface HelpPageModel {
     currentPage: Tab;
@@ -61,8 +68,9 @@ export default defineComponent({
   },
   components: {
     HelpIconology,
-    HelpStandardProjects,
     HelpPhases,
+    HelpRulebooks,
+    HelpStandardProjects,
   },
   methods: {
     setTab(tab: Tab): void {

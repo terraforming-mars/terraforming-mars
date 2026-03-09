@@ -28,14 +28,14 @@ export type Delegate = IPlayer | NeutralPlayer;
 
 export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
+export const ALL_PARTIES = {
   [PartyName.MARS]: MarsFirst,
   [PartyName.SCIENTISTS]: Scientists,
   [PartyName.UNITY]: Unity,
   [PartyName.GREENS]: Greens,
   [PartyName.REDS]: Reds,
   [PartyName.KELVINISTS]: Kelvinists,
-};
+} satisfies Record<PartyName, PartyFactory>;
 
 function createParties(): ReadonlyArray<IParty> {
   return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];

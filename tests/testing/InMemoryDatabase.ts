@@ -43,9 +43,8 @@ export class InMemoryDatabase implements IDatabase {
     if (row === undefined || row.length === 0) {
       return Promise.reject(new Error('not found'));
     } else {
-      const result: Array<number | undefined> =
-        row!.map((value, idx) => value !== undefined ? idx : undefined);
-      return Promise.resolve(result.filter((result) => result !== undefined) as Array<number>);
+      const result = row!.map((value, idx) => value !== undefined ? idx : undefined);
+      return Promise.resolve(result.filter((result) => result !== undefined));
     }
   }
   getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {

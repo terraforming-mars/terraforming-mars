@@ -43,8 +43,7 @@ export abstract class Board {
     spaces.forEach((space) => {
       const adjacentSpaces = this.computeAdjacentSpaces(space);
       const filtered = adjacentSpaces.filter((space) => space !== undefined);
-      // "as ReadonlyArray<Space> is OK because the line above filters out the undefined values."
-      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<Space>);
+      this.adjacentSpaces.set(space.id, filtered);
       this.map.set(space.id, space);
     });
 

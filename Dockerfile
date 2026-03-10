@@ -37,6 +37,7 @@ WORKDIR /usr/src/app
 
 # Add user tfm
 RUN adduser -S -D -h /usr/src/app tfm \
+  && mkdir /usr/src/app/db \
   && chown -R tfm:nogroup .
 
 USER tfm

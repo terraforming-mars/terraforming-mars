@@ -127,8 +127,8 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
     [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
     [BoardName.UTOPIA_PLANITIA]: ['Edgedancer', 'Investor', 'Botanist', 'Incorporator', 'Metropolist'],
-    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Blacksmith'],
-    [BoardName.TERRA_CIMMERIA_NOVUS]: ['Electrician', 'Founder', 'Mogul', 'A. Zoologist', 'Forecaster'],
+    [BoardName.VASTITAS_BOREALIS_NOVA]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Blacksmith'],
+    [BoardName.TERRA_CIMMERIA_NOVA]: ['Electrician', 'Founder', 'Mogul', 'A. Zoologist', 'Forecaster'],
     [BoardName.HOLLANDIA]: [],
   },
   expansions: {

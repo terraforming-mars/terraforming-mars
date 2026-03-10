@@ -1,11 +1,11 @@
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {expect} from 'chai';
-import {TerraCimmeriaNovusBoard} from '../../src/server/boards/TerraCimmeriaNovusBoard';
+import {TerraCimmeriaNovaBoard} from '../../src/server/boards/TerraCimmeriaNovaBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('TerraCimmeriaNovusBoard', () => {
+describe('TerraCimmeriaNovaBoard', () => {
   it('sanity test', () => {
-    const board = TerraCimmeriaNovusBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    const board = TerraCimmeriaNovaBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {id: '01', spaceType: 'colony', x: -1, y: -1, bonus: []},
       {id: '02', spaceType: 'colony', x: -1, y: -1, bonus: []},

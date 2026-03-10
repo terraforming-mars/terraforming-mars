@@ -133,11 +133,11 @@ describe('MilestoneAwardSelector', () => {
     expect(intersection(milestones, avoidedMilestones)).is.empty;
   });
 
-  it('novus maps with no randomness render correctly', () => {
+  it('nova maps with no randomness render correctly', () => {
     const mas = chooseMilestonesAndAwards({
       ...DEFAULT_GAME_OPTIONS,
       'aresExtension': true,
-      'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
+      'boardName': BoardName.TERRA_CIMMERIA_NOVA,
       'includeFanMA': false,
       'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,

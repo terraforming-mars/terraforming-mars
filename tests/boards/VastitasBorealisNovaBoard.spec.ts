@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {VastitasBorealisNovusBoard} from '../../src/server/boards/VastitasBorealisNovusBoard';
+import {VastitasBorealisNovaBoard} from '../../src/server/boards/VastitasBorealisNovaBoard';
 import {addGreenery, cast, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {testGame} from '../TestGame';
@@ -10,9 +10,9 @@ import {SeededRandom} from '../../src/common/utils/Random';
 import {TileType} from '../../src/common/TileType';
 import {toID} from '../../src/common/utils/utils';
 
-describe('VastitasBorealisNovusBoard', () => {
+describe('VastitasBorealisNovaBoard', () => {
   it('sanity test', () => {
-    const board = VastitasBorealisNovusBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    const board = VastitasBorealisNovaBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {id: '01', spaceType: 'colony', x: -1, y: -1, bonus: []},
       {id: '02', spaceType: 'colony', x: -1, y: -1, bonus: []},
@@ -82,8 +82,8 @@ describe('VastitasBorealisNovusBoard', () => {
   });
 
   it('Delegate bonuses work without Turmoil', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVUS});
-    const board = cast(game.board, VastitasBorealisNovusBoard);
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA});
+    const board = cast(game.board, VastitasBorealisNovaBoard);
     const delegateSpace = board.spaces.filter((space) => space.bonus.includes(SpaceBonus.DELEGATE))[0];
     expect(board.getAvailableSpacesOnLand(player, {cost: 0})).includes(delegateSpace);
 
@@ -93,8 +93,8 @@ describe('VastitasBorealisNovusBoard', () => {
   });
 
   it('Delegate bonuses work with Turmoil', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVUS, turmoilExtension: true});
-    const board = cast(game.board, VastitasBorealisNovusBoard);
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true});
+    const board = cast(game.board, VastitasBorealisNovaBoard);
     const delegateSpace = board.spaces.filter((space) => space.bonus.includes(SpaceBonus.DELEGATE))[0];
     expect(board.getAvailableSpacesOnLand(player, {cost: 0})).includes(delegateSpace);
 
@@ -104,8 +104,8 @@ describe('VastitasBorealisNovusBoard', () => {
   });
 
   it('Grants temperature bonus', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVUS});
-    const board = cast(game.board, VastitasBorealisNovusBoard);
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA});
+    const board = cast(game.board, VastitasBorealisNovaBoard);
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE_4MC))!;
 
     player.megaCredits = 3;

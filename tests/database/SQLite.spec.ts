@@ -2,7 +2,7 @@ import {describeDatabaseSuite} from './databaseSuite';
 import {IGame} from '../../src/server/IGame';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/server/database/SQLite';
 import {GameId} from '../../src/common/Types';
-import {RunResult} from 'sqlite3';
+import BetterSqlite3 = require('better-sqlite3');
 import {ITestDatabase, Status} from './ITestDatabase';
 
 class TestSQLite extends SQLite implements ITestDatabase {
@@ -36,8 +36,8 @@ class TestSQLite extends SQLite implements ITestDatabase {
     return row.completed_time;
   }
 
-  setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<RunResult> {
-    return this.asyncRun('UPDATE completed_game SET completed_time = to_timestamp(?) WHERE game_id = ?', [timestampSeconds, gameId]);
+  setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<BetterSqlite3.RunResult> {
+    return this.asyncRun('UPDATE completed_game SET completed_time = ? WHERE game_id = ?', [timestampSeconds, gameId]);
   }
 }
 

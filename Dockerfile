@@ -1,5 +1,5 @@
 # Intermediate image - base for building and installing dependencies
-FROM node:16.13.2-alpine3.15 AS install
+FROM node:24-alpine AS install
 
 # Install required tools
 RUN apk add --no-cache --virtual .gyp git python3 make g++ \
@@ -27,11 +27,11 @@ RUN npm run build
 # Create image to prepare prod dependencies to be copied from
 FROM install AS installProd
 
-RUN npm ci --production --prefer-offline
+RUN npm ci --omit=dev --prefer-offline
 
 
 # Target image
-FROM node:16.13.2-alpine3.15
+FROM node:24-alpine
 
 WORKDIR /usr/src/app
 

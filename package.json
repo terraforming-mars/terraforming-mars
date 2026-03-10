@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Terraforming Mars Game",
   "engines": {
-    "node": ">=16.x <=22.x"
+    "node": ">=24.x"
   },
   "private": true,
   "dependencies": {
+    "24": "^0.0.0",
     "ansi-escape-sequences": "^6.2.2",
     "chart.js": "^4.4.7",
     "console-stamp": "3.1.2",
@@ -22,6 +23,7 @@
     "webpack-cli": "^4.5.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/ansi-escape-sequences": "^4.0.4",
     "@types/chai": "^4.3.1",
     "@types/chai-as-promised": "^7.1.5",
@@ -39,11 +41,10 @@
     "chai-deep-equal-ignore-undefined": "^1.1.1",
     "compression-webpack-plugin": "^8.0.0",
     "css-loader": "^5.2.6",
-    "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
     "eslint-plugin-vue": "^10.0.0",
-    "globals": "^16.0.0",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
+    "globals": "^16.0.0",
     "jsdom": "^22.1.0",
     "less": "^3.10.3",
     "less-loader": "^10.0.0",

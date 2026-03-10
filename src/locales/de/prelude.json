@@ -1,10 +1,14 @@
 {
+  "Albedo Plants": "Albedo-Pflanzen",
+  "Effect: When you play a plant tag, including this, gain 3 heat.": "EFFEKT: Wenn du eine Pflanzensymbol spielst, einschließlich dieses, erhältst du 3 Wärme.",
+  "Increase plant production 1 step. Gain 1 plant.": "Erhöhe deine Pflanzenproduktion um 1. Erhalte 1 Pflanze.",
+  
   "Applied Science": "Angewandte Wissenschaft",
   "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "AKTION: Entferne 1 Wissenschaft von dieser Karte, um einer Karte deiner Wahl mit einer Ressource 1 Ressource hinzuzufügen oder 1 Standard-Ressource zu erhalten.",
   "Add 6 science resources here.": "Füge dieser Karte 6 Wissenschaft hinzu.",
 
   "Atmospheric Enhancers": "Atmosphären-Aufwerter",
-  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Ziehe 2 Karten mit Schwebern.",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "EFFEKT: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Ziehe 2 Karten mit Schwebern.",
 
   "Board of Directors": "Vorstandssitzung",
   "ACTION:": "AKTION:",
@@ -53,7 +57,7 @@
   "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter- und 1 Venuskarte.",
 
   "Preservation Program": "Erhaltungsprogramm",
-  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEIN ERSTES ERHÖHEN DES TW IN DER AKTIONSPHASE JEDER GENERATION.",
+  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "EFFEKT: ÜBERSPRINGE DEIN ERSTES ERHÖHEN DES TW IN DER AKTIONSPHASE JEDER GENERATION.",
   "Raise your TR 5 steps.": "Erhöhe deinen TW um 5.",
 
   "Project Eden": "Projekt Eden",

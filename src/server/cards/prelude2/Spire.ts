@@ -46,7 +46,7 @@ export class Spire extends CorporationCard implements ICorporationCard {
       });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
     if (count >= 2) {
       player.addResourceTo(this, {qty: 1, log: true});

@@ -340,7 +340,7 @@
   "${0} is using their ${1} effect to draw a card by discarding a card.": "${0} utilise son effet ${1} pour piocher une carte en n'en défaussant une autre.",
   "You discarded ${0}": "Vous avez défaussé ${0}",
   "${0} spent 1 ${1} to gain 7 M€": "${0} a dépensé 1 ${1} pour gagner 7 M€",
-  "${0} found life!": "${0} a chatté de la vie !",
+  "${0} found life!": "${0} a trouvé de la vie !",
   "${0} gained ${1} energy": "${0} a gagné ${1} énergies",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} a diminué sa production d'énergie de 1 pour gagner 8 M€",
   "${0} stole ${1} ${2} from the neutral player": "${0} a volé ${1} {2} d'un joueur neutre",

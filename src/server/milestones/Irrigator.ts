@@ -19,7 +19,7 @@ export class Irrigator extends BaseMilestone {
   }
 }
 
-// Variant from Terra Cimmeria Novus.
+// Variant from Terra Cimmeria Nova.
 export class Coastguard extends Irrigator {
   constructor() {
     super('Coastguard', 3);

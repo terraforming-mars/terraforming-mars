@@ -28,11 +28,11 @@ export enum SpaceBonus {
     _RESTRICTED, // 14
     ASTEROID, // 15 // Used by Deimos Down Ares
 
-    // Vastitas Borealis Novus-specific
+    // Vastitas Borealis Nova-specific
     DELEGATE, // 16
-    // Terra Cimmeria Novus-specific
+    // Terra Cimmeria Nova-specific
     COLONY, // 17
-    TEMPERATURE_4MC, // 18, Vastitas Borealis Novus-specific, costs 4MC not 3
+    TEMPERATURE_4MC, // 18, Vastitas Borealis Nova-specific, costs 4MC not 3
 }
 
 const TO_STRING_MAP: Record<SpaceBonus, string> = {

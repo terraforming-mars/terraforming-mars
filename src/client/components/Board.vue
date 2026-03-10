@@ -172,7 +172,7 @@
                   </g>
                 </template>
 
-                <template v-if="boardName === BoardName.VASTITAS_BOREALIS_NOVUS">
+                <template v-if="boardName === BoardName.VASTITAS_BOREALIS_NOVA">
                   <g id="hectates_tholius_vastitas_borealis_novus"  transform="translate(270, 70)">
                       <text class="board-caption">
                           <tspan dy="15">Hectates</tspan>

@@ -51,6 +51,11 @@ export interface IGame extends Logger {
   gameLog: Array<LogMessage>;
   undoCount: number; // Each undo increases it
   inputsThisRound: number;
+  /**
+   * Monotonically increasing counter, incremented each time a player is presented with action choices.
+   * This is only used for tracking once-per-action effects, and is stable through card effects and deferred actions within the same action.
+   */
+  actionId: number;
   resettable: boolean;
   generation: number;
   readonly players: ReadonlyArray<IPlayer>;

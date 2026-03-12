@@ -16,6 +16,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
   player.actionsTakenThisRound++;
+  player.game.actionId++;
 }
 
 describe('SuitableInfrastructure', () => {

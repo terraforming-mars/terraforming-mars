@@ -26,10 +26,11 @@ jobs:
       with:
         node-version: 18
     - run: npm ci
-    # - run: npm run lint
+    - run: npm run make:static
+    - run: npm run lint
     - run: npm run build
-    # - run: npm run build:tests
-    # - run: npm test
+    - run: npm run build:tests
+    - run: npm test
 
   build-docker:
     runs-on: ubuntu-latest

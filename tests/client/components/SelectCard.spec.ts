@@ -20,6 +20,7 @@ describe('SelectCard', () => {
           showOnlyInLearnerMode: false,
           selectBlueCardAction: false,
           showOwner: false,
+          showSelectAll: false,
         },
         onsave: () => {},
         showsave: true,

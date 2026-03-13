@@ -12,6 +12,8 @@ import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 import {SpaceLanes} from '../../../src/server/cards/prelude2/SpaceLanes';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SimpleDeferredAction} from '../../../src/server/deferredActions/DeferredAction';
+import {Phase} from '../../../src/common/Phase';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
@@ -144,6 +146,53 @@ describe('SuitableInfrastructure', () => {
     runAllActions(game);
 
     expect(player.production.megacredits).eq(0);
+    expect(player.megaCredits).eq(4);
+  });
+
+  it('triggers for both a deferred production increase and a direct production increase on consecutive actions', () => {
+    const card = new SuitableInfrastructure();
+    const [game, player] = testGame(1);
+
+    player.playedCards.push(card);
+    player.megaCredits = 0;
+    game.phase = Phase.ACTION;
+
+    // Start the player's turn via the real takeAction flow.
+    player.takeAction();
+
+    // takeAction presents getActions() and sets up waitingFor + callback.
+    // Pop the waiting state to get the action options and callback.
+    const [action1, cb1] = player.popWaitingFor2();
+    expect(action1).is.not.undefined;
+
+    // Simulate action 1: the player chose an action whose effect defers a
+    // production increase (e.g., a card that places a tile which triggers a
+    // deferred production bonus). We queue the deferred action directly.
+    game.defer(new SimpleDeferredAction(player, () => {
+      player.production.add(Resource.STEEL, 1);
+      return undefined;
+    }));
+
+    // Suitable Infrastructure has NOT triggered yet because the deferred action hasn't run.
+    expect(player.megaCredits).eq(0);
+
+    // Call the callback — this runs incrementActionsTaken() then takeAction().
+    // takeAction() first processes deferred actions (which calls production.add,
+    // triggering onProductionGain and Suitable Infrastructure), then presents the next action choice.
+    cb1!();
+
+    // Suitable Infrastructure should have triggered during the deferred action resolution.
+    expect(player.megaCredits).eq(2);
+
+    // Now the player is waiting for their second action.
+    const [action2, cb2] = player.popWaitingFor2();
+    expect(action2).is.not.undefined;
+
+    // Simulate action 2: a direct production increase (before any deferred actions).
+    player.production.add(Resource.ENERGY, 1);
+
+    // Suitable Infrastructure should trigger again for this new action because game.actionId was
+    // incremented by takeAction() before presenting the second action choice.
     expect(player.megaCredits).eq(4);
   });
 });

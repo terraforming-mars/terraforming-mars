@@ -177,6 +177,8 @@ export class Player implements IPlayer {
   public totalDelegatesPlaced: number = 0;
   public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
 
+  public actionId: number = 0;
+
   public user?: DiscordId;
 
   public get megaCredits(): number {
@@ -1425,7 +1427,7 @@ export class Player implements IPlayer {
 
         const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
-        game.actionId++;
+        this.actionId++;
         this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
           this.incrementActionsTaken();
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
@@ -1495,7 +1497,7 @@ export class Player implements IPlayer {
         orOptions.options.push(this.passOption());
       }
 
-      game.actionId++;
+      this.actionId++;
       this.setWaitingFor(orOptions, () => {
         if (this.pendingInitialActions.length === 0) {
           this.incrementActionsTaken();
@@ -1506,7 +1508,7 @@ export class Player implements IPlayer {
       return;
     }
 
-    game.actionId++;
+    this.actionId++;
     this.setWaitingFor(this.getActions(), () => {
       this.incrementActionsTaken();
       this.takeAction();

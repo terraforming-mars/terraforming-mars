@@ -12,20 +12,20 @@ import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 import {SpaceLanes} from '../../../src/server/cards/prelude2/SpaceLanes';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {SimpleDeferredAction} from '../../../src/server/deferredActions/DeferredAction';
 import {Phase} from '../../../src/common/Phase';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
   player.actionsTakenThisRound++;
-  player.game.actionId++;
+  player.actionId++;
 }
 
 describe('SuitableInfrastructure', () => {
   it('effect', () => {
     const card = new SuitableInfrastructure();
-    const [/* game */, player] = testGame(1);
+    const [game, player] = testGame(1);
 
+    game.phase = Phase.ACTION;
     player.playedCards.push(card);
 
     expect(player.stock.megacredits).eq(0);
@@ -48,6 +48,7 @@ describe('SuitableInfrastructure', () => {
     const card = new SuitableInfrastructure();
     const [game, player] = testGame(1);
 
+    game.phase = Phase.ACTION;
     player.playedCards.push(card);
     player.megaCredits = 11;
     cast(new PowerPlantStandardProject().action(player), undefined);
@@ -64,6 +65,7 @@ describe('SuitableInfrastructure', () => {
     const card = new SuitableInfrastructure();
     const [game, player, player2] = testGame(2);
 
+    game.phase = Phase.ACTION;
     const saturnSystems = new SaturnSystems();
     player.playedCards.push(card);
     // Gain 1 MC prouduction when anybody plays a card with a jovian tag.
@@ -87,6 +89,7 @@ describe('SuitableInfrastructure', () => {
     const refugeeCamps = new RefugeeCamps();
     const [game, player] = testGame(1);
 
+    game.phase = Phase.ACTION;
     const saturnSystems = new SaturnSystems();
     player.playedCards.push(card, refugeeCamps);
     player.playedCards.push(saturnSystems);
@@ -99,8 +102,9 @@ describe('SuitableInfrastructure', () => {
 
   it('Works when player has other cards with onProductionGain #7140', () => {
     const card = new SuitableInfrastructure();
-    const [/* game */, player] = testGame(1);
+    const [game, player] = testGame(1);
 
+    game.phase = Phase.ACTION;
     // Manutech: also has an onProductionGain() method
     const manutech = new Manutech();
     player.playedCards.push(manutech);
@@ -116,6 +120,7 @@ describe('SuitableInfrastructure', () => {
   it('Works when playing initial preludes', () => {
     const [game, player] = testGame(1, {preludeExtension: true, coloniesExtension: true});
 
+    game.phase = Phase.PRELUDES;
     const aridor = new Aridor();
     const suitableInfrastructure = new SuitableInfrastructure();
     const spaceLanes = new SpaceLanes();
@@ -153,9 +158,9 @@ describe('SuitableInfrastructure', () => {
     const card = new SuitableInfrastructure();
     const [game, player] = testGame(1);
 
+    game.phase = Phase.ACTION;
     player.playedCards.push(card);
     player.megaCredits = 0;
-    game.phase = Phase.ACTION;
 
     // Start the player's turn via the real takeAction flow.
     player.takeAction();
@@ -168,10 +173,10 @@ describe('SuitableInfrastructure', () => {
     // Simulate action 1: the player chose an action whose effect defers a
     // production increase (e.g., a card that places a tile which triggers a
     // deferred production bonus). We queue the deferred action directly.
-    game.defer(new SimpleDeferredAction(player, () => {
+    player.defer(() => {
       player.production.add(Resource.STEEL, 1);
       return undefined;
-    }));
+    });
 
     // Suitable Infrastructure has NOT triggered yet because the deferred action hasn't run.
     expect(player.megaCredits).eq(0);
@@ -185,7 +190,7 @@ describe('SuitableInfrastructure', () => {
     expect(player.megaCredits).eq(2);
 
     // Now the player is waiting for their second action.
-    const [action2, cb2] = player.popWaitingFor2();
+    const [action2, _] = player.popWaitingFor2();
     expect(action2).is.not.undefined;
 
     // Simulate action 2: a direct production increase (before any deferred actions).

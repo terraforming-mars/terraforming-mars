@@ -34,26 +34,21 @@ export class SuitableInfrastructure extends PreludeCard {
   // actionId increments each time a player is presented with new action choices, and stays stable
   // through card effects and deferred actions within the same action.
   // Not serialized — resets on server restart, which is safe since the player must take a new action.
-  private lastActionId = -1;
+  private lastAction = -1;
 
   public onProductionGain(player: IPlayer, _resource: Resource, amount: number) {
-    if (amount <= 0) return;
-
-    const game = player.game;
-
-    // Do not trigger during production phase, solar phase, or other non-action phases
-    if (game.phase === Phase.PRODUCTION || game.phase === Phase.SOLAR || game.phase === Phase.END || game.phase === Phase.INTERGENERATION) {
+    if (player.game.activePlayer.id !== player.id || amount <= 0) {
       return;
     }
-    // Only trigger for the active player (prevents triggering on other players' turns)
-    if (game.activePlayer.id !== player.id) return;
 
-    // Once per action: actionId is stable through card effects and deferred actions
-    if (this.lastActionId !== game.actionId) {
-      player.stock.add(Resource.MEGACREDITS, 2);
-      game.log('${0} gained ${1} ${2} from ${3}',
-        (b) => b.player(player).number(2).string('M€').card(this));
-      this.lastActionId = game.actionId;
+    // Only trigger during phases where the player can take actions that can increase production
+    if (player.game.phase === Phase.ACTION || player.game.phase === Phase.PRELUDES) {
+      if (this.lastAction !== player.actionId) {
+        player.stock.add(Resource.MEGACREDITS, 2);
+        player.game.log('${0} gained ${1} ${2} from ${3}',
+          (b) => b.player(player).number(2).string('M€').card(this));
+        this.lastAction = player.actionId;
+      }
     }
   }
 }

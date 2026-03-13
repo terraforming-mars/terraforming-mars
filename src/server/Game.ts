@@ -108,7 +108,6 @@ export class Game implements IGame, Logger {
   public gameLog: Array<LogMessage> = createGameLog();
   public undoCount: number = 0; // Each undo increases it
   public inputsThisRound = 0;
-  public actionId: number = 0;
   public resettable: boolean = false;
   public globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = [];
 

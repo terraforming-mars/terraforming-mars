@@ -65,7 +65,7 @@
   },
   "optionalDependencies": {
     "pg": "^8.2.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^6.0.1"
   },
   "scripts": {
     "start": "node build/src/server/server.js",

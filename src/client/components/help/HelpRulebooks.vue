@@ -3,7 +3,7 @@
     <div class="help-rulebooks-section">
       <div class="help-icons-section-heading" v-i18n>Official Expansions</div>
       <div class="help-rulebook-rows">
-        <a v-for="entry in officialExpansions" :key="entry.module" :href="entry.url" class="help-rulebook-row" target="_blank">
+        <a v-for="entry in officialExpansions" :key="entry.module" :href="entry.url" class="help-rulebook-row" target="_blank" v-i18n>
           <div :class="`create-game-expansion-icon expansion-icon-${entry.iconClass}`"></div>
           {{ entry.name }}
         </a>
@@ -12,7 +12,7 @@
     <div class="help-rulebooks-section">
       <div class="help-icons-section-heading" v-i18n>Fan Expansions</div>
       <div class="help-rulebook-rows">
-        <a v-for="entry in fanExpansions" :key="entry.module" :href="entry.url" class="help-rulebook-row" target="_blank">
+        <a v-for="entry in fanExpansions" :key="entry.module" :href="entry.url" class="help-rulebook-row" target="_blank" v-i18n>
           <div :class="`create-game-expansion-icon expansion-icon-${entry.iconClass}`"></div>
           {{ entry.name }}
         </a>

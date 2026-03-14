@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
+import {Phase} from '../../../common/Phase';
 
 export class SuitableInfrastructure extends PreludeCard {
   constructor() {
@@ -29,20 +30,25 @@ export class SuitableInfrastructure extends PreludeCard {
     });
   }
 
-  // Behavior is similar in Demetron labs
-  // This doesn't need to be serialized. It ensures this is only evaluated once per action.
-  // When the server restarts, the player has to take an action anyway.
+  // Tracks the game's actionId when this card last triggered, to ensure once-per-action behavior.
+  // actionId increments each time a player is presented with new action choices, and stays stable
+  // through card effects and deferred actions within the same action.
+  // Not serialized — resets on server restart, which is safe since the player must take a new action.
   private lastAction = -1;
+
   public onProductionGain(player: IPlayer, _resource: Resource, amount: number) {
     if (player.game.activePlayer.id !== player.id || amount <= 0) {
       return;
     }
-    const actionCount = player.game.getActionCount();
-    if (this.lastAction !== actionCount) {
-      player.stock.add(Resource.MEGACREDITS, 2);
-      player.game.log('${0} gained ${1} ${2} from ${3}',
-        (b) => b.player(player).number(2).string('M€').card(this));
-      this.lastAction = actionCount;
+
+    // Only trigger during phases where the player can take actions that can increase production
+    if (player.game.phase === Phase.ACTION || player.game.phase === Phase.PRELUDES) {
+      if (this.lastAction !== player.actionId) {
+        player.stock.add(Resource.MEGACREDITS, 2);
+        player.game.log('${0} gained ${1} ${2} from ${3}',
+          (b) => b.player(player).number(2).string('M€').card(this));
+        this.lastAction = player.actionId;
+      }
     }
   }
 }

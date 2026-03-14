@@ -1,5 +1,8 @@
+# ARG NODE_VERSION=18.19.1-alpine3.16
+ARG NODE_VERSION=18-alpine
+
 # Intermediate image - base for building and installing dependencies
-FROM node:16.13.2-alpine3.15 AS install
+FROM node:${NODE_VERSION} AS install
 
 # Install required tools
 RUN apk add --no-cache --virtual .gyp git python3 make g++ \
@@ -21,17 +24,17 @@ FROM install AS builder
 COPY . .
 
 # Run building
-RUN npm run build 
+RUN npm run build
 
 
 # Create image to prepare prod dependencies to be copied from
-FROM install AS installProd
+FROM install AS installprod
 
 RUN npm ci --production --prefer-offline
 
 
 # Target image
-FROM node:16.13.2-alpine3.15
+FROM node:${NODE_VERSION}
 
 WORKDIR /usr/src/app
 
@@ -47,7 +50,7 @@ USER tfm
 COPY ["package.json", "package-lock.json", "./"]
 
 # Copy dependencies from intermediate image
-COPY --from=installProd /usr/src/app/node_modules ./node_modules
+COPY --from=installprod /usr/src/app/node_modules ./node_modules
 
 # Copy built app from intermediate image
 COPY --from=builder /usr/src/app/build ./build
@@ -58,4 +61,4 @@ COPY --from=builder /usr/src/app/assets ./assets
 
 EXPOSE 8080
 
-CMD npm run start
+CMD ["npm", "run", "start"]

@@ -1,5 +1,5 @@
-# ARG NODE_VERSION=18.19.1-alpine3.16
-ARG NODE_VERSION=18-alpine
+# Define the version once at the top
+ARG NODE_VERSION=20-alpine
 
 # Intermediate image - base for building and installing dependencies
 FROM node:${NODE_VERSION} AS install

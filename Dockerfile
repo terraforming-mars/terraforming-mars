@@ -1,11 +1,11 @@
 # Define the version once at the top
-ARG NODE_VERSION=20-alpine
+ARG NODE_VERSION=22.14.0-alpine3.21
 
 # Intermediate image - base for building and installing dependencies
 FROM node:${NODE_VERSION} AS install
 
 # Install required tools
-RUN apk add --no-cache --virtual .gyp git python3 make g++ \
+RUN apk add --no-cache --virtual .gyp git python3 py3-setuptools make g++ \
   && ln -sf python3 /usr/bin/python
 
 WORKDIR /usr/src/app

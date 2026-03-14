@@ -173,11 +173,10 @@ export class Player implements IPlayer {
 
   // Stats
   public actionsTakenThisGame: number = 0;
+  public actionId: number = 0;
   public victoryPointsByGeneration: Array<number> = [];
   public totalDelegatesPlaced: number = 0;
   public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
-
-  public actionId: number = 0;
 
   public user?: DiscordId;
 

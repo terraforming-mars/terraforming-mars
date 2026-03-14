@@ -171,15 +171,14 @@ export interface IPlayer {
 
   // Stats
   actionsTakenThisGame: number;
-  victoryPointsByGeneration: Array<number>;
-  totalDelegatesPlaced: number;
-
   /**
    * Monotonically increasing counter, incremented each time this player is presented with action choices.
    * Used for tracking once-per-action effects (e.g. Suitable Infrastructure).
    * Stable through card effects and deferred actions within the same action.
    */
   actionId: number;
+  victoryPointsByGeneration: Array<number>;
+  totalDelegatesPlaced: number;
 
   underworldData: UnderworldPlayerData;
   readonly alliedParty?: AlliedParty;

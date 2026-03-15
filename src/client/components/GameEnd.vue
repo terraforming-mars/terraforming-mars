@@ -200,6 +200,7 @@
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
+            <DeltaProjectBoard :playersCount="players.length"></DeltaProjectBoard>
           </div>
           <div class="game_end_block--log game-end-column">
             <log-panel :color="color" :viewModel="viewModel"></log-panel>
@@ -220,6 +221,7 @@ import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/Pla
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import VictoryPointChart, {DataSet} from '@/client/components/gameend/VictoryPointChart.vue';
@@ -372,6 +374,7 @@ export default defineComponent({
     AppButton,
     MoonBoard,
     PlanetaryTracks,
+    DeltaProjectBoard,
     VictoryPointChart,
   },
   mounted() {

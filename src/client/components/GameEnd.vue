@@ -200,7 +200,7 @@
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
-            <DeltaProjectBoard :playersCount="players.length"></DeltaProjectBoard>
+            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :playersCount="players.length"></DeltaProjectBoard>
           </div>
           <div class="game_end_block--log game-end-column">
             <log-panel :color="color" :viewModel="viewModel"></log-panel>

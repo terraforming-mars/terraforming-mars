@@ -267,6 +267,7 @@ export class Game implements IGame, Logger {
         ceo: options.ceoExtension ?? false,
         starwars: options.starWarsExpansion ?? false,
         underworld: options.underworldExpansion ?? false,
+        deltaProject: options.deltaProjectExpansion ?? false,
       };
     }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
@@ -360,8 +361,9 @@ export class Game implements IGame, Logger {
       game.pathfindersData = PathfindersExpansion.initialize(game);
     }
 
-    // TODO(deltaProject): Gate behind expansion flag once added in step 7.
-    game.deltaProjectData = DeltaProjectExpansion.initialize(game);
+    if (game.gameOptions.deltaProjectExpansion) {
+      game.deltaProjectData = DeltaProjectExpansion.initialize(game);
+    }
 
     // Failsafe for exceeding corporation pool
     // (I do not think this is necessary any further given how corporation cards are stored now)

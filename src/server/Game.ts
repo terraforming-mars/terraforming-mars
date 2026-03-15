@@ -56,6 +56,7 @@ import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBon
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {DeltaProjectData} from './delta/DeltaProjectData';
+import {DeltaProjectExpansion} from './delta/DeltaProjectExpansion';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
@@ -358,6 +359,9 @@ export class Game implements IGame, Logger {
     if (gameOptions.pathfindersExpansion) {
       game.pathfindersData = PathfindersExpansion.initialize(game);
     }
+
+    // TODO(deltaProject): Gate behind expansion flag once added in step 7.
+    game.deltaProjectData = DeltaProjectExpansion.initialize(game);
 
     // Failsafe for exceeding corporation pool
     // (I do not think this is necessary any further given how corporation cards are stored now)

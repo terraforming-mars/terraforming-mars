@@ -1456,6 +1456,25 @@ export class Player implements IPlayer {
       }
 
       if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
+        if (!game.hasPassedThisActionPhase(this) && this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
+          const confirmOptions = new OrOptions()
+            .setTitle('Confirm your actions or undo your last action')
+            .setButtonLabel('Confirm');
+
+          confirmOptions.options.push(new SelectOption('Confirm', 'Confirm').andThen(() => {
+            this.actionsTakenThisRound = 0;
+            this.availableActionsThisRound = 2;
+            game.resettable = true;
+            game.playerIsFinishedTakingActions();
+            return undefined;
+          }));
+
+          confirmOptions.options.push(new UndoActionOption());
+
+          this.setWaitingFor(confirmOptions);
+          return;
+        }
+
         this.actionsTakenThisRound = 0;
         this.availableActionsThisRound = 2;
         game.resettable = true;

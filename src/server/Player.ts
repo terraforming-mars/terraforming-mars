@@ -173,7 +173,6 @@ export class Player implements IPlayer {
 
   // Stats
   public actionsTakenThisGame: number = 0;
-  public actionId: number = 0;
   public victoryPointsByGeneration: Array<number> = [];
   public totalDelegatesPlaced: number = 0;
   public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
@@ -1426,7 +1425,6 @@ export class Player implements IPlayer {
 
         const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
-        this.actionId++;
         this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
           this.incrementActionsTaken();
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
@@ -1496,22 +1494,20 @@ export class Player implements IPlayer {
         orOptions.options.push(this.passOption());
       }
 
-      this.actionId++;
-      this.setWaitingFor(orOptions, () => {
+      this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
         if (this.pendingInitialActions.length === 0) {
           this.incrementActionsTaken();
         }
         this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
         this.takeAction();
-      });
+      }));
       return;
     }
 
-    this.actionId++;
-    this.setWaitingFor(this.getActions(), () => {
+    this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
       this.incrementActionsTaken();
       this.takeAction();
-    });
+    }));
   }
 
   private incrementActionsTaken(): void {

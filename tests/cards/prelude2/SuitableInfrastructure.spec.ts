@@ -17,7 +17,6 @@ import {Phase} from '../../../src/common/Phase';
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
   player.actionsTakenThisRound++;
-  player.actionId++;
 }
 
 describe('SuitableInfrastructure', () => {

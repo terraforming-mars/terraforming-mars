@@ -53,7 +53,7 @@ import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
-  corporation: 'background-color-global-event',
+  corporation: 'background-color-corporation',
   active: 'background-color-active',
   automated: 'background-color-automated',
   prelude: 'background-color-prelude',

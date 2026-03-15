@@ -36,7 +36,7 @@ export class PlaceOceanTile extends DeferredAction<Space | undefined> {
     }
 
     let title = this.options.title ?? this.getTitle('ocean');
-    let availableSpaces: ReadonlyArray<Space> = [];
+    let availableSpaces: ReadonlyArray<Space>;
     if (this.options.spaces !== undefined) {
       availableSpaces = this.options.spaces;
     } else {

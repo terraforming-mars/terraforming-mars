@@ -30,15 +30,14 @@ export class ApiGameLogs extends Handler {
     }
 
     if (searchParams.get('full') !== null) {
-      let logs = '';
       try {
-        logs = this.gameLogs.getLogsForGameEnd(game).join('\n');
+        const logs = this.gameLogs.getLogsForGameEnd(game).join('\n');
+        res.setHeader('Content-Type', 'text/plain');
+        res.end(logs);
       } catch (e) {
         responses.badRequest(req, res, 'cannot fetch game-end log');
         return;
       }
-      res.setHeader('Content-Type', 'text/plain');
-      res.end(logs);
     } else {
       const generation = searchParams.get('generation');
       const logs = this.gameLogs.getLogsForGameView(id, game, generation);

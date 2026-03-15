@@ -176,7 +176,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     try {
       return new milestoneManifest.all[name as MilestoneName].Factory();
     } catch (e) {
-      throw new Error(`Milestone ${name} not found.`);
+      throw new Error(`Milestone ${name} not found.`, {cause: e});
     }
   },
 } as const;

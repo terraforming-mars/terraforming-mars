@@ -148,7 +148,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     try {
       return new awardManifest.all[name as AwardName].Factory();
     } catch (e) {
-      throw new Error(`Award ${name} not found.`);
+      throw new Error(`Award ${name} not found.`, {cause: e});
     }
   },
 } as const;

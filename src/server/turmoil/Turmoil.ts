@@ -221,7 +221,7 @@ export class Turmoil {
 
     const currentIndex = this.parties.indexOf(currentDominantParty);
 
-    let partiesToCheck = [];
+    let partiesToCheck: Array<IParty>;
 
     // Manage if it's the first party or the last
     if (currentIndex === 0) {
@@ -387,7 +387,7 @@ export class Turmoil {
   private findSecondDominantParty(currentDominantParty: IParty): IParty | undefined {
     const currentIndex = this.parties.indexOf(currentDominantParty);
 
-    let partiesToCheck: Array<IParty> = [];
+    let partiesToCheck: Array<IParty>;
     if (currentIndex === 0) {
       partiesToCheck = this.parties.slice(1);
     } else if (currentIndex === this.parties.length - 1) {

@@ -42,7 +42,7 @@ function getAllTranslations(): {[key: string]: Translation} {
             }
           }
         } catch (e) {
-          throw new Error(`While parsing ${filename}:` + e);
+          throw new Error(`While parsing ${filename}:` + e, {cause: e});
         }
       }
     }

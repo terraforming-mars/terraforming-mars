@@ -56,6 +56,15 @@ export class MessageBuilder {
     return this.cardName(value.name, attrs);
   }
 
+  public cardNames(value: ReadonlyArray<CardName>, attrs?: LogMessageDataAttrs): this {
+    const data: LogMessageData = {type: LogMessageDataType.CARDS, value};
+    if (attrs !== undefined) {
+      data.attrs = attrs;
+    }
+    this.message.data.push(data);
+    return this;
+  }
+
   public cardName(value: CardName, attrs?: LogMessageDataAttrs): this {
     const data: LogMessageData = {type: LogMessageDataType.CARD, value};
     if (attrs !== undefined) {

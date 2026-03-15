@@ -25,6 +25,8 @@
             </svg>
             {{ getSpaceName(data.value) }}
         </span>
+        <span v-else-if="data.type === LogMessageDataType.CARDS" v-html="cardsToHtml(data)"></span>
+
         <span v-else-if="data.type === LogMessageDataType.RAW_STRING">{{ data.value }}</span>
         <span v-else v-i18n>{{ data.value }}</span>
       </span>
@@ -40,7 +42,7 @@ import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {ViewModel} from '@/common/models/PlayerModel';
 import {tileTypeToString} from '@/common/TileType';
@@ -75,12 +77,17 @@ export default defineComponent({
   },
   methods: {
     cardToHtml(data: LogMessageData & {type: LogMessageDataType.CARD, value: CardName}) {
-      const card = getCard(data.value);
+      return this.innerCardToHtml(data.value, data.attrs);
+    },
+    cardsToHtml(data: LogMessageData & {type: LogMessageDataType.CARDS, value: ReadonlyArray<CardName>}) {
+      return data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs)).join(' ');
+    },
+    innerCardToHtml(cardName: CardName, attrs?: LogMessageDataAttrs) {
+      const card = getCard(cardName);
       if (card === undefined) {
         return '';
       }
 
-      const attrs = data.attrs;
       const suffixFreeCardName = card.name.split(':')[0];
       const className = cardTypeToCss[card.type];
 

@@ -46,14 +46,10 @@ export abstract class Party {
     const max = this.delegates.top(1)[0][1];
 
     if (this.delegates.count(this.partyLeader) !== max) {
-      let currentIndex = 0;
-      if (this.partyLeader === 'NEUTRAL') {
-        currentIndex = players.indexOf(game.activePlayer);
-      } else {
-        currentIndex = players.indexOf(this.partyLeader);
-      }
+      const player = this.partyLeader === 'NEUTRAL' ? game.activePlayer : this.partyLeader;
+      const currentIndex = players.indexOf(player);
 
-      let playersToCheck: Array<IPlayer | NeutralPlayer> = [];
+      let playersToCheck: Array<IPlayer | NeutralPlayer>;
 
       // Manage if it's the first player or the last
       if (players.length === 1 || currentIndex === 0) {

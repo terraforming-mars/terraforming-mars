@@ -1188,7 +1188,7 @@ export default defineComponent({
             const json = JSON.parse(text);
             onSuccess(json);
           } catch (err) {
-            throw new Error(text);
+            throw new Error(text, {cause: err});
           }
         })
         .catch((error: Error) => {

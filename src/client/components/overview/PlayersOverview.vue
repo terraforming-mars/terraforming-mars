@@ -86,16 +86,14 @@ export default defineComponent({
         return players;
       }
 
-      let result = [];
-      let currentPlayerOffset = 0;
       const currentPlayerIndex = playerIndex(
         this.thisPlayer.color,
         this.players,
       );
 
       // shift the array by putting the player on focus at the tail
-      currentPlayerOffset = currentPlayerIndex + 1;
-      result = players
+      const currentPlayerOffset = currentPlayerIndex + 1;
+      const result = players
         .slice(currentPlayerOffset)
         .concat(players.slice(0, currentPlayerOffset));
       // return all but the focused user

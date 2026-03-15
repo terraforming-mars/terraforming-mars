@@ -174,7 +174,7 @@ export function hashToModel(windowLocationHash: string): CardListModel {
   };
   if (windowLocationHash.length > 1) {
     const hash = decodeURIComponent(windowLocationHash).slice(1);
-    let remainder: Array<string> = [];
+    let remainder: Array<string>;
     [model.filterText, ...remainder] = hash.split('~');
 
     for (const e of remainder) {

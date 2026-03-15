@@ -5,8 +5,15 @@ import {Color} from '../../common/Color';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
 import {SelectAmount} from '../inputs/SelectAmount';
+import {SelectOption} from '../inputs/SelectOption';
+import {SelectCard} from '../inputs/SelectCard';
+import {OrOptions} from '../inputs/OrOptions';
 import {PlayerInput} from '../PlayerInput';
 import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
+import {DrawCards} from '../deferredActions/DrawCards';
+import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
+import {CardResource} from '../../common/CardResource';
+import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../cards/ICard';
 
 /**
  * The ordered tags for each track position (1-indexed).
@@ -139,7 +146,6 @@ export class DeltaProjectExpansion {
     data.playerPositions.set(player.color, newPos);
     player.deltaProjectActionUsedThisGeneration = true;
 
-    // Claim VP spot if landing on one (moving to 5VP replaces 2VP)
     if (newPos === 10 && !data.claimed2VP.includes(player.color)) {
       data.claimed2VP.push(player.color);
     }
@@ -151,12 +157,111 @@ export class DeltaProjectExpansion {
       }
     }
 
-    // Jovian bonus
-    if (newPos === 8 && !data.jovianBonus.includes(player.color)) {
-      data.jovianBonus.push(player.color);
-    }
+    DeltaProjectExpansion.resolveReward(player, newPos);
 
     game.log('${0} advanced ${1} step(s) on the Delta Project track', (b) => b.player(player).number(steps));
+  }
+
+  private static resolveReward(player: IPlayer, position: number): void {
+    const game = player.game;
+    const data = DeltaProjectExpansion.getData(game);
+
+    switch (position) {
+    case 1: // Building: Choose 2 steel or 2 plants
+      player.defer(() => new OrOptions(
+        new SelectOption('Gain 2 steel', 'Gain steel').andThen(() => {
+          player.stock.add(Resource.STEEL, 2, {log: true});
+          return undefined;
+        }),
+        new SelectOption('Gain 2 plants', 'Gain plants').andThen(() => {
+          player.stock.add(Resource.PLANTS, 2, {log: true});
+          return undefined;
+        }),
+      ));
+      break;
+
+    case 2: // Power: Choose +1 energy production or +1 heat production
+      player.defer(() => new OrOptions(
+        new SelectOption('Increase energy production 1 step', 'Increase').andThen(() => {
+          player.production.add(Resource.ENERGY, 1, {log: true});
+          return undefined;
+        }),
+        new SelectOption('Increase heat production 1 step', 'Increase').andThen(() => {
+          player.production.add(Resource.HEAT, 1, {log: true});
+          return undefined;
+        }),
+      ));
+      break;
+
+    case 3: // Earth: +2 MC production
+      player.production.add(Resource.MEGACREDITS, 2, {log: true});
+      break;
+
+    case 4: // Space: +1 titanium production
+      player.production.add(Resource.TITANIUM, 1, {log: true});
+      break;
+
+    case 5: // Science: Look at top 4 cards, take 2, discard rest
+      game.defer(DrawCards.keepSome(player, 4, {keepMax: 2}));
+      break;
+
+    case 6: { // Plant: Gain 1 plant per plant tag
+      const plantCount = player.tags.count(Tag.PLANT);
+      if (plantCount > 0) {
+        player.stock.add(Resource.PLANTS, plantCount, {log: true});
+      }
+      break;
+    }
+
+    case 7: { // Microbe: Reuse a used blue card action
+      const actionCards = DeltaProjectExpansion.getUsedActionCards(player);
+      if (actionCards.length > 0) {
+        player.defer(() => new SelectCard<IActionCard & ICard>(
+          'Use a blue card action that has already been used this generation',
+          'Take action',
+          actionCards,
+        ).andThen(([card]) => {
+          game.log('${0} reused ${1} action via Delta Project', (b) => b.player(player).card(card));
+          return card.action(player);
+        }));
+      }
+      break;
+    }
+
+    case 8: // Jovian: Gain one Jovian tag
+      if (!data.jovianBonus.includes(player.color)) {
+        data.jovianBonus.push(player.color);
+        player.tags.extraJovianTags++;
+        for (const card of player.tableau) {
+          card.onNonCardTagAdded?.(player, Tag.JOVIAN);
+        }
+        for (const p of game.playersInGenerationOrder) {
+          for (const card of p.tableau) {
+            card.onNonCardTagAddedByAnyPlayer?.(p, Tag.JOVIAN);
+          }
+        }
+        game.log('${0} gained a Jovian tag from the Delta Project', (b) => b.player(player));
+      }
+      break;
+
+    case 9: // Animal: Add 2 animals to any card
+      game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
+      break;
+
+      // Positions 10/11 (VP spots) have no additional reward beyond VP claiming
+    }
+  }
+
+  private static getUsedActionCards(player: IPlayer): Array<IActionCard & ICard> {
+    const result: Array<IActionCard & ICard> = [];
+    for (const playedCard of player.tableau) {
+      if (!isIActionCard(playedCard)) continue;
+      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) continue;
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
+        result.push(playedCard);
+      }
+    }
+    return result;
   }
 
   public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder): void {

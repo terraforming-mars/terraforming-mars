@@ -37,5 +37,11 @@ export class SpaceRelay extends Card implements IProjectCard {
       player.drawCard();
     }
   }
+
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.JOVIAN) {
+      player.drawCard();
+    }
+  }
 }
 

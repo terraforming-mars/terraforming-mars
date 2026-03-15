@@ -46,4 +46,10 @@ export class Ringcom extends CorporationCard implements ICorporationCard {
       player.stock.add(Resource.TITANIUM, 1, {log: true});
     }
   }
+
+  public onNonCardTagAddedByAnyPlayer(cardOwner: IPlayer, tag: Tag) {
+    if (tag === Tag.JOVIAN) {
+      cardOwner.stock.add(Resource.TITANIUM, 1, {log: true});
+    }
+  }
 }

@@ -127,6 +127,9 @@ export interface IPlayer {
   turmoilPolicyActionUsed: boolean;
   politicalAgendasActionUsedCount: number;
 
+  // Delta Project
+  deltaProjectActionUsedThisGeneration: boolean;
+
   /** Lakefront Resorts increases ocean adjacency to 3 MC  */
   oceanBonus: number;
 

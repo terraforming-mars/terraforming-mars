@@ -76,6 +76,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   totalDelegatesPlaced: number;
   tradesThisGeneration: number;
   turmoilPolicyActionUsed: boolean;
+  deltaProjectActionUsedThisGeneration: boolean;
   underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   user?: DiscordId;

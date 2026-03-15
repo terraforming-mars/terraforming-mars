@@ -1,11 +1,9 @@
-import {CardName} from '../common/cards/CardName';
 import {Resource} from '../common/Resource';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
-import {Logger} from './logs/Logger';
 import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
@@ -57,19 +55,6 @@ export class LogHelper {
 
   static logVenusIncrease(player: IPlayer, steps: number) {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
-  }
-
-  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
-    logger.log('${0} card(s) were discarded', (b) => {
-      b.rawString(cards.length.toString());
-      for (const card of cards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
-      }
-    });
   }
 
   static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard>, privateMessage: boolean = false) {

@@ -55,6 +55,7 @@ import {MultiSet} from 'mnemonist';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
+import {DeltaProjectData} from './delta/DeltaProjectData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
@@ -150,6 +151,7 @@ export class Game implements IGame, Logger {
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
+  public deltaProjectData: DeltaProjectData | undefined;
   public underworldData: UnderworldData = UnderworldExpansion.initializeGameWithoutUnderworld();
   public inTurmoil: boolean = false;
 
@@ -474,6 +476,7 @@ export class Game implements IGame, Logger {
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
       pathfindersData: PathfindersData.serialize(this.pathfindersData),
+      deltaProjectData: DeltaProjectData.serialize(this.deltaProjectData),
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       preludeDeck: this.preludeDeck.serialize(),
@@ -1730,6 +1733,10 @@ export class Game implements IGame, Logger {
 
     if (d.pathfindersData !== undefined && gameOptions.pathfindersExpansion === true) {
       game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
+    }
+
+    if (d.deltaProjectData !== undefined) {
+      game.deltaProjectData = DeltaProjectData.deserialize(d.deltaProjectData);
     }
 
     if (d.underworldData !== undefined) {

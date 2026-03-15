@@ -1,6 +1,6 @@
 import {CardResource} from '@/common/CardResource';
 
-export const cardResourceCSS: Record<CardResource, string> = {
+export const cardResourceCSS = {
   [CardResource.ANIMAL]: 'card-resource-animal',
   [CardResource.MICROBE]: 'card-resource-microbe',
   [CardResource.FIGHTER]: 'card-resource-fighter',
@@ -27,4 +27,4 @@ export const cardResourceCSS: Record<CardResource, string> = {
   [CardResource.JOURNALISM]: 'card-resource-journalism',
   [CardResource.SUPPLY_CHAIN]: 'card-resource-supply-chain',
   [CardResource.DIRECTOR]: 'card-resource-director',
-};
+} satisfies Record<CardResource, string>;

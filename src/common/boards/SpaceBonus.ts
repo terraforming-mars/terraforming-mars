@@ -35,7 +35,7 @@ export enum SpaceBonus {
     TEMPERATURE_4MC, // 18, Vastitas Borealis Nova-specific, costs 4MC not 3
 }
 
-const TO_STRING_MAP: Record<SpaceBonus, string> = {
+const TO_STRING_MAP = {
   [SpaceBonus.TITANIUM]: 'Titanium',
   [SpaceBonus.STEEL]: 'Steel',
   [SpaceBonus.PLANT]: 'Plant',
@@ -55,7 +55,7 @@ const TO_STRING_MAP: Record<SpaceBonus, string> = {
   [SpaceBonus.DELEGATE]: 'Delegate',
   [SpaceBonus.COLONY]: 'Colony',
   [SpaceBonus.TEMPERATURE_4MC]: 'Temperature',
-};
+} satisfies Record<SpaceBonus, string>;
 
 export namespace SpaceBonus {
   export function toString(spaceBonus: SpaceBonus): string {

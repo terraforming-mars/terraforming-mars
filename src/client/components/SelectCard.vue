@@ -17,6 +17,7 @@
         <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
+            <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
@@ -193,6 +194,13 @@ export default defineComponent({
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
+    toggleSelectAll() {
+      if (this.allSelected) {
+        this.cards = [];
+      } else {
+        this.cards = this.selectableCards.slice();
+      }
+    },
   },
   computed: {
     selectOnlyOneCard() : boolean {
@@ -202,6 +210,17 @@ export default defineComponent({
       return this.playerinput.max !== undefined &&
              this.playerinput.max > 1 &&
              this.playerinput.min === 0;
+    },
+    selectableCards(): Array<CardModel> {
+      return this.playerinput.cards.filter((card) => !card.isDisabled);
+    },
+    showSelectAll(): boolean {
+      return this.playerinput.showSelectAll === true &&
+             !this.selectOnlyOneCard &&
+             this.selectableCards.length > 1;
+    },
+    allSelected(): boolean {
+      return Array.isArray(this.cards) && this.cards.length === this.selectableCards.length;
     },
   },
 });

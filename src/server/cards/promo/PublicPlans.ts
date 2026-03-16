@@ -34,6 +34,7 @@ export class PublicPlans extends Card implements IProjectCard {
     return new SelectCard('Select cards to reveal', 'Reveal', player.cardsInHand, {
       min: 0,
       max: player.cardsInHand.length,
+      showSelectAll: true,
     }).andThen((cards) => {
       player.stock.add(Resource.MEGACREDITS, cards.length, {log: true, from: {card: this}});
       if (cards.length > 0) {

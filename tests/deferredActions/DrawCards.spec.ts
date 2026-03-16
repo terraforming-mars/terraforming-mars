@@ -93,7 +93,7 @@ describe('DrawCards', () => {
 
     // Since the gameLog has two entries, these two filters account for both of them.
     const privateMessage = game.gameLog.filter((entry) => entry.playerId === player.id)[0];
-    expect(formatMessage(privateMessage)).matches(/You drew .* and .*/);
+    expect(formatMessage(privateMessage)).matches(/You drew .*,.*/);
 
     const publicMessage = game.gameLog.filter((entry) => entry.playerId === undefined)[0];
     expect(formatMessage(publicMessage)).eq('blue drew 2 card(s)');
@@ -109,6 +109,6 @@ describe('DrawCards', () => {
     expect(formatMessage(discardMessage)).matches(/.* card\(s\) were discarded/);
 
     const publicMessage = game.gameLog[1];
-    expect(formatMessage(publicMessage)).matches(/blue drew .* and .*/);
+    expect(formatMessage(publicMessage)).matches(/blue drew .*,.*/);
   });
 });

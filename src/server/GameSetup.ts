@@ -46,7 +46,7 @@ const boards: Record<BoardName, BoardFactory> = {
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
   [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
   [BoardName.HOLLANDIA]: Hollandia,
-};
+} satisfies Record<BoardName, BoardFactory>;
 
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): MarsBoard {

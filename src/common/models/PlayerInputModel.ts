@@ -16,6 +16,7 @@ export type BaseInputModel = {
   title: string | Message;
   warning?: string | Message;
   buttonLabel: string;
+  polling?: boolean;
 }
 
 export type AndOptionsModel = BaseInputModel & {
@@ -39,6 +40,8 @@ export type SelectInitialCardsModel = BaseInputModel & {
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
   warnings?: ReadonlyArray<Warning>;
+  cards?: ReadonlyArray<CardModel>;
+  greyedOutCards?: ReadonlyArray<CardModel>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {

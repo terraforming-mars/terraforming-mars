@@ -251,7 +251,7 @@ export default defineComponent({
     const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
     document.title = `${gameType} | ${this.$t(constants.APP_NAME)}`;
     window.clearInterval(documentTitleTimer);
-    if (this.waitingfor === undefined) {
+    if (this.waitingfor === undefined || this.waitingfor.polling) {
       this.waitForUpdate();
     }
     if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {

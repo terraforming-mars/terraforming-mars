@@ -143,7 +143,7 @@ export default defineComponent({
     },
     cardClasses(): string {
       const classes = [];
-      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
+      classes.push('card-' + this.card.name.toLowerCase().replaceAll(' ', '-'));
 
       if (this.card.isDisabled) {
         classes.push('card-unavailable');

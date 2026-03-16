@@ -69,7 +69,7 @@ export class LogHelper {
       }
 
       if (cards.length > 0) {
-        b.cardNames(cards.map((card) => card.name));
+        b.cards(cards);
       }
     }, options);
   }

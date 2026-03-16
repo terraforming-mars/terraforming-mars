@@ -20,7 +20,7 @@ export function isPayment(obj: unknown): obj is Payment {
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
 
-export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
+export const DEFAULT_PAYMENT_VALUES = {
   megaCredits: 1,
   steel: 2,
   titanium: 3,
@@ -35,7 +35,7 @@ export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
   auroraiData: DATA_VALUE,
   graphene: GRAPHENE_VALUE,
   kuiperAsteroids: 1,
-} as const;
+} satisfies Record<SpendableResource, number>;
 
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {

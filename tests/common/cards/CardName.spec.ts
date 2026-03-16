@@ -33,7 +33,7 @@ describe('CardName', () => {
     const globalEvents = getEnumStringValues(GlobalEventName);
     const cards = getEnumStringValues(CardName);
     // Sad. Not empty. Yet.
-    expect(intersection(globalEvents, cards as Array<string>)).deep.eq([
+    expect(intersection(globalEvents as Array<string>, cards as Array<string>)).deep.eq([
       'Asteroid Mining',
       'Interplanetary Trade',
       'Sabotage',

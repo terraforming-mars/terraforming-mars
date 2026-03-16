@@ -1,7 +1,6 @@
 import {SerializedDeck} from './SerializedDeck';
 import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
-import {LogHelper} from '../LogHelper';
 import {Random} from '../../common/utils/Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
@@ -133,7 +132,7 @@ export class Deck<T extends ICard> {
       }
     }
     if (discardedCards.size > 0) {
-      LogHelper.logDiscardedCards(logger, Array.from(discardedCards));
+      logger.log('${0} card(s) were discarded', (b) => b.rawString(String(discardedCards.size)));
     }
 
     return result;

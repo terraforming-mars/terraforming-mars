@@ -46,6 +46,7 @@ describe('PlayerInfo', () => {
         player: thisPlayer,
         playerView: playerView,
         playerIndex: 0,
+        actionLabel: 'none',
       },
     });
     const test = playerInfo.find('div[class*="played-cards-count"]');

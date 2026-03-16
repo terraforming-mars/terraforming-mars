@@ -17,6 +17,7 @@ export interface PlayerInput {
      * Used only when this option is a child option of an OrOptions.
      */
     eligibleForDefault?: boolean;
+    polling?: boolean;
 
     cb(...item: any): PlayerInput | undefined;
 
@@ -42,6 +43,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public warning?: string | Message;
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
+  public polling?: boolean;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;

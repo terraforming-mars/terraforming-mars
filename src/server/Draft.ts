@@ -8,6 +8,7 @@ import {SelectCard} from './inputs/SelectCard';
 import {message} from './logs/MessageBuilder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
+import {SelectOption} from './inputs/SelectOption';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
 
@@ -134,8 +135,34 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.players.some((p) => p.needsToDraft)) {
+      const option = new SelectOption(
+        'Undo Draft selected card',
+        'Undo',
+        undefined, // warnings
+        player.draftedCards, // chosen cards
+        player.draftHand // remaining undrafted cards
+      );
+      option.polling = true;
+      player.setWaitingFor(
+        option.andThen(() => {
+            const cardsToKeep = this.cardsToKeep(player);
+            player.draftHand.push(...player.draftedCards.splice(-cardsToKeep));
+            player.needsToDraft = true;
+            this.askPlayerToDraft(player);
+            this.game.save();
+            return undefined;
+          })
+      );
       this.game.save();
       return;
+    }
+
+    // Clear any pending Undo options for all players
+    for (const p of this.game.players) {
+      if (p.getWaitingFor()?.type === 'option') {
+        (p as any).waitingFor = undefined;
+        (p as any).waitingForCb = undefined;
+      }
     }
 
     // If more than 1 card is to be passed to the next player, that means we're still drafting

@@ -37,19 +37,7 @@ export class PublicPlans extends Card implements IProjectCard {
     }).andThen((cards) => {
       player.stock.add(Resource.MEGACREDITS, cards.length, {log: true, from: {card: this}});
       if (cards.length > 0) {
-        let msg = '${0} revealed ';
-        for (let i = 0; i < cards.length; i++) {
-          if (i > 0) {
-            msg += i < cards.length - 1 ? ', ' : ' and ';
-          }
-          msg += '${' + (i + 1) + '}';
-        }
-        player.game.log(msg, (b) => {
-          b.player(player);
-          for (const card of cards) {
-            b.card(card);
-          }
-        });
+        player.game.log('${0} revealed ${1}', (b) => b.player(player).cards(cards));
       }
       return undefined;
     });

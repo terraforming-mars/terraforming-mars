@@ -1,6 +1,6 @@
 import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
 import CardList from '@/client/components/cardlist/CardList.vue';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';

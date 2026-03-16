@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import {expect} from 'chai';
 import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';

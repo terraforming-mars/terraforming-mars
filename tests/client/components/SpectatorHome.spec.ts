@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import {fakeGameModel, fakePublicPlayerModel} from './testHelpers';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 
 describe('SpectatorHome', () => {
   it('mounts without errors', () => {

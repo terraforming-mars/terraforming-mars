@@ -1,4 +1,4 @@
-import * as prometheus from 'prom-client';
+import prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
 import {IGame} from '../IGame';

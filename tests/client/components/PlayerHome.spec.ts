@@ -4,7 +4,7 @@ import {globalConfig} from './getLocalVue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
 import {fakePlayerViewModel} from './testHelpers';
 import {FakeLocalStorage} from './FakeLocalStorage';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 
 describe('PlayerHome', () => {
   let localStorage: FakeLocalStorage;

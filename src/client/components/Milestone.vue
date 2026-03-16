@@ -72,7 +72,7 @@ export default defineComponent({
       return this.milestone.name.replace(/[0-9]+$/, '');
     },
     nameCss(): string {
-      return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
+      return 'ma-name ma-name--' + this.milestone.name.replaceAll(' ', '-').replaceAll('.', '').toLowerCase();
     },
     sortedScores(): Array<MilestoneScore> {
       return [...this.milestone.scores].sort((s1, s2) => s2.score - s1.score);

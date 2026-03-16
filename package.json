@@ -22,7 +22,7 @@
     "webpack-cli": "^4.5.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^10.0.0",
     "@types/ansi-escape-sequences": "^4.0.4",
     "@types/better-sqlite3": "^7.6.13",
     "@types/chai": "^4.3.1",
@@ -40,8 +40,8 @@
     "chai-deep-equal-ignore-undefined": "^1.1.1",
     "compression-webpack-plugin": "^8.0.0",
     "css-loader": "^5.2.6",
-    "eslint": "^9.0.0",
-    "eslint-plugin-vue": "^10.0.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-vue": "^10.8.0",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
     "globals": "^16.0.0",
     "jsdom": "^22.1.0",

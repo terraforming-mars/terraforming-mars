@@ -188,13 +188,6 @@ export default defineComponent({
   overflow-x: auto;
 }
 
-.delta-project-board__header {
-  font-family: Prototype, sans-serif;
-  font-size: 18px;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
 .delta-project-board__track {
   border-spacing: 0;
   background: #303030;

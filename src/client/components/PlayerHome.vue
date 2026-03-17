@@ -62,7 +62,7 @@
 
         <template v-if="game.gameOptions.expansions.deltaProject">
           <a class="hotkey-target"></a>
-          <DeltaProjectBoard :playersCount="playerView.players.length"/>
+          <DeltaProjectBoard :model="game.deltaProject" :playersCount="playerView.players.length"/>
         </template>
 
         <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
@@ -251,7 +251,7 @@
           <a name="moonBoard" class="player_home_anchor"></a>
           <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
 
-          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
+          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :model="game.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
         </div>
       </details>
     </div>

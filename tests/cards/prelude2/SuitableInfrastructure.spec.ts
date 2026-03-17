@@ -13,10 +13,17 @@ import {SpaceLanes} from '../../../src/server/cards/prelude2/SpaceLanes';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Phase} from '../../../src/common/Phase';
+import {PlayerInput} from '../../../src/server/PlayerInput';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
   player.actionsTakenThisRound++;
+}
+
+function assertIsTakeAction(input: PlayerInput | undefined) {
+  const orOptions = cast(input, OrOptions);
+  expect(orOptions.buttonLabel).eq('Take action');
 }
 
 describe('SuitableInfrastructure', () => {
@@ -165,7 +172,7 @@ describe('SuitableInfrastructure', () => {
     player.takeAction();
 
     const [action1, cb1] = player.popWaitingFor2();
-    expect(action1).is.not.undefined;
+    assertIsTakeAction(action1);
 
     // Simulate action that would defer a steel production.
     player.defer(() => {
@@ -179,7 +186,7 @@ describe('SuitableInfrastructure', () => {
 
     expect(player.megaCredits).eq(2);
 
-    cast(player.popWaitingFor(), undefined);
+    assertIsTakeAction(player.popWaitingFor());
 
     // Simulate action 2: a direct production increase (before any deferred actions).
     player.production.add(Resource.ENERGY, 1);

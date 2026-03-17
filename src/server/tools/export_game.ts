@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import * as ansi from 'ansi-escape-sequences';
+import ansi from 'ansi-escape-sequences';
 import {mkdirSync, writeFileSync} from 'fs';
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {Database} from '../database/Database';

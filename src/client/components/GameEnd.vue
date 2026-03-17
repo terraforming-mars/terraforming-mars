@@ -212,7 +212,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';

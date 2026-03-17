@@ -224,6 +224,12 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
 
   const component = mount(PlayerInputFactory, {
     ...globalConfig,
+    global: {
+      ...globalConfig.global,
+      components: {
+        'player-input-factory': PlayerInputFactory,
+      },
+    },
     props: {
       players: [],
       playerView: playerView,

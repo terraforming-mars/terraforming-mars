@@ -1,8 +1,8 @@
-// Generates the files settings.json and translations.json, stored in src/genfilesimport * as fs from 'fs';
+// Generates the files settings.json and translations.json, stored in src/genfiles
 require('dotenv').config();
-import * as fs from 'fs';
-import * as child_process from 'child_process';
-import * as path from 'path';
+import fs from 'fs';
+import child_process from 'child_process';
+import path from 'path';
 
 type Translation = {[lang: string]: string}
 function getAllTranslations(): {[key: string]: Translation} {

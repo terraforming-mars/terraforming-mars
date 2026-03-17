@@ -10,6 +10,8 @@ describe('TagCount', () => {
       ...globalConfig,
       props: {
         count: 0,
+        tag: 'building',
+        size: 'normal',
       },
     });
     expect(tagCount.find('div[class="tag-display tag-no-show"]').exists()).is.true;
@@ -20,6 +22,8 @@ describe('TagCount', () => {
       ...globalConfig,
       props: {
         count: 2,
+        tag: 'building',
+        size: 'normal',
       },
     });
     expect(tagCount.find('div[class="tag-display"]').exists()).is.true;

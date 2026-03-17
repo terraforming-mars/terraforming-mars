@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 

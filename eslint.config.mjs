@@ -59,6 +59,8 @@ const projectRules = {
   'no-case-declarations': 'off',
   'no-redeclare': 'off',
   'no-prototype-builtins': 'off',
+  'no-useless-assignment': 'off',
+  'preserve-caught-error': 'off',
 };
 
 // TypeScript and Vue rules

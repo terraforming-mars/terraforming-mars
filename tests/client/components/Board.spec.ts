@@ -6,6 +6,7 @@ import BoardSpace from '@/client/components/BoardSpace.vue';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
+import {BoardName} from '@/common/boards/BoardName';
 
 const spaces: SpaceModel[] = [
   {
@@ -55,7 +56,7 @@ describe('Board', () => {
   it('has visible tiles on the board', () => {
     const wrapper = shallowMount(Board, {
       ...globalConfig,
-      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide'},
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide', venusScaleLevel: 0, boardName: BoardName.THARSIS},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).filter((wrapper) => {
@@ -70,7 +71,7 @@ describe('Board', () => {
   it('has hidden tiles on the board', () => {
     const wrapper = shallowMount(Board, {
       ...globalConfig,
-      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show'},
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show', venusScaleLevel: 0, boardName: BoardName.THARSIS},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).filter((wrapper) => {
@@ -85,7 +86,7 @@ describe('Board', () => {
   it('emits toggleTileView on toggle button click', async () => {
     const wrapper = shallowMount(Board, {
       ...globalConfig,
-      props: {spaces, expansions: DEFAULT_EXPANSIONS},
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, venusScaleLevel: 0, boardName: BoardName.THARSIS},
     });
 
     await wrapper.find('[data-test=hide-tiles-button]').trigger('click');
@@ -95,7 +96,7 @@ describe('Board', () => {
   it('renders "show tiles" in toggle button if tiles are hidden', () => {
     const wrapper = shallowMount(Board, {
       ...globalConfig,
-      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show'},
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show', venusScaleLevel: 0, boardName: BoardName.THARSIS},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('show tiles');
@@ -104,7 +105,7 @@ describe('Board', () => {
   it('renders "hide tiles" in toggle button if tiles are visible', () => {
     const wrapper = shallowMount(Board, {
       ...globalConfig,
-      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide'},
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide', venusScaleLevel: 0, boardName: BoardName.THARSIS},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('hide tiles');

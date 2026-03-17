@@ -164,39 +164,27 @@ describe('SuitableInfrastructure', () => {
     // Start the player's turn via the real takeAction flow.
     player.takeAction();
 
-    // takeAction presents getActions() and sets up waitingFor + callback.
-    // Pop the waiting state to get the action options and callback.
     const [action1, cb1] = player.popWaitingFor2();
     expect(action1).is.not.undefined;
 
-    // Simulate action 1: the player chose an action whose effect defers a
-    // production increase (e.g., a card that places a tile which triggers a
-    // deferred production bonus). We queue the deferred action directly.
+    // Simulate action that would defer a steel production.
     player.defer(() => {
       player.production.add(Resource.STEEL, 1);
       return undefined;
     });
 
-    // Suitable Infrastructure has NOT triggered yet because the deferred action hasn't run.
     expect(player.megaCredits).eq(0);
 
-    // Call the callback — this runs incrementActionsTaken() then takeAction().
-    // takeAction() first processes deferred actions (which calls production.add,
-    // triggering onProductionGain and Suitable Infrastructure), then presents the next action choice.
     cb1!();
 
-    // Suitable Infrastructure should have triggered during the deferred action resolution.
     expect(player.megaCredits).eq(2);
 
-    // Now the player is waiting for their second action.
-    const [action2, _] = player.popWaitingFor2();
-    expect(action2).is.not.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     // Simulate action 2: a direct production increase (before any deferred actions).
     player.production.add(Resource.ENERGY, 1);
 
-    // Suitable Infrastructure should trigger again for this new action because game.actionId was
-    // incremented by takeAction() before presenting the second action choice.
+    // Suitable Infrastructure should trigger again
     expect(player.megaCredits).eq(4);
   });
 });

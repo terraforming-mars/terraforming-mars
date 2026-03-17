@@ -27,7 +27,7 @@
 <script lang="ts">
 /* global RequestInit */
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';

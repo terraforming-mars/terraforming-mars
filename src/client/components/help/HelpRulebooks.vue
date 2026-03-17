@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {RULEBOOK_URLS} from '@/client/utils/WikiLinks';
 
 interface RulebookEntry {

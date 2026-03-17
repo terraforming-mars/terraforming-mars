@@ -185,7 +185,7 @@
 <script lang="ts">
 
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'TurmoilAgenda',

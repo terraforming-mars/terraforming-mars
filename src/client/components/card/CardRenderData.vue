@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {ICardRenderRoot} from '@/common/cards/render/Types';
 import CardRowData from '@/client/components/card/CardRowData.vue';
 

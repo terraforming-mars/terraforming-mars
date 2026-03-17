@@ -8,7 +8,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 

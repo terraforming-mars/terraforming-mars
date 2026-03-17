@@ -8,7 +8,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import AlliedPartyAgenda from '@/client/components/turmoil/AlliedPartyAgenda.vue';
 

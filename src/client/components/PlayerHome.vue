@@ -272,7 +272,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import * as raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';

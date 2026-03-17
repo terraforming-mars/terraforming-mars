@@ -2,7 +2,7 @@
   <div class="delta-project-board">
     <table class="delta-project-board__track">
       <tr>
-        <td v-for="step in steps" :key="step.id" class="delta-project-board__step">
+        <td v-for="(step, idx) in steps" :key="step.id" class="delta-project-board__step">
           <div class="delta-project-board__tag-cell">
             <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
             <div v-else class="resource-tag" :class="step.tagClass"></div>
@@ -10,11 +10,17 @@
         </td>
       </tr>
       <tr>
-        <td v-for="step in steps" :key="step.id + '-slots'" class="delta-project-board__slots-cell">
+        <td v-for="(step, idx) in steps" :key="step.id + '-slots'" class="delta-project-board__slots-cell">
           <div class="delta-project-board__slots">
+            <i
+              v-for="color in playersAtPosition(idx + 1)"
+              :key="color"
+              :class="'board-cube board-cube--' + color"
+              class="delta-project-board__cube"
+            ></i>
             <div
-              v-for="slot in getSlotCount(step)"
-              :key="slot"
+              v-for="n in emptySlots(idx + 1, step)"
+              :key="'empty-' + n"
               class="delta-project-board__slot"
             ></div>
           </div>
@@ -39,6 +45,8 @@
 
 <script lang="ts">
 import {defineComponent} from '@/client/vue3-compat';
+import {Color} from '@/common/Color';
+import {DeltaProjectModel} from '@/common/models/DeltaProjectModel';
 
 type RewardIcon = {
   cssClass: string;
@@ -163,6 +171,10 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
 export default defineComponent({
   name: 'DeltaProjectBoard',
   props: {
+    model: {
+      type: Object as () => DeltaProjectModel | undefined,
+      default: undefined,
+    },
     playersCount: {
       type: Number,
       default: 5,
@@ -174,8 +186,20 @@ export default defineComponent({
     };
   },
   methods: {
-    getSlotCount(step: DeltaBoardStep): number {
-      return step.dynamicSlots ? Math.max(2, this.playersCount) : 1;
+    playersAtPosition(position: number): Array<Color> {
+      if (this.model === undefined) return [];
+      const result: Array<Color> = [];
+      for (const [color, pos] of Object.entries(this.model.playerPositions)) {
+        if (pos === position) {
+          result.push(color as Color);
+        }
+      }
+      return result;
+    },
+    emptySlots(position: number, step: DeltaBoardStep): number {
+      const occupied = this.playersAtPosition(position).length;
+      const minSlots = step.dynamicSlots ? Math.max(2, this.playersCount) : 1;
+      return Math.max(0, minSlots - occupied);
     },
   },
 });
@@ -253,6 +277,14 @@ export default defineComponent({
   flex-wrap: wrap;
   justify-content: center;
   gap: 3px;
+}
+
+.delta-project-board__cube {
+  position: relative;
+  width: 21px;
+  height: 21px;
+  margin: 0;
+  filter: drop-shadow(2px 2px 3px black);
 }
 
 .delta-project-board__slot {

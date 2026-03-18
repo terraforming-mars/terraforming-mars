@@ -1566,11 +1566,7 @@ export class Player implements IPlayer {
 
     // Delta Project
     if (DeltaProjectExpansion.canAct(this)) {
-      action.options.push(
-        new SelectOption('Use Delta Project action', 'Confirm').andThen(() => {
-          return DeltaProjectExpansion.action(this);
-        }),
-      );
+      action.options.push(DeltaProjectExpansion.action(this));
     }
 
     // Action cards

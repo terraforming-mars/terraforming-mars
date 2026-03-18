@@ -4,16 +4,17 @@ import {DeltaProjectData} from './DeltaProjectData';
 import {Color} from '../../common/Color';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
-import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectCard} from '../inputs/SelectCard';
 import {OrOptions} from '../inputs/OrOptions';
 import {PlayerInput} from '../PlayerInput';
+import {DeltaProjectInput} from './DeltaProjectInput';
 import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../common/CardResource';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../cards/ICard';
+import {createDeltaProjectModel} from '../models/DeltaProjectModel';
 
 /**
  * The ordered tags for each track position (1-indexed).
@@ -123,13 +124,15 @@ export class DeltaProjectExpansion {
   }
 
   public static action(player: IPlayer): PlayerInput {
+    const game = player.game;
     const max = DeltaProjectExpansion.maxSteps(player);
 
-    return new SelectAmount(
+    return new DeltaProjectInput(
       'Delta Project: Pay energy to advance on the track',
       'Advance',
       1,
       max,
+      createDeltaProjectModel(game)!,
     ).andThen((amount) => {
       DeltaProjectExpansion.advance(player, amount);
       return undefined;

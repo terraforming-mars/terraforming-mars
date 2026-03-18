@@ -268,7 +268,7 @@
     "drew": "카드 뽑기",
     "bought": "구매",
     "sold": "판매",
-    "${0} card(s) were discarded": "${0}장의 카드가 버려짐",
+    "Discarded ${0} cards ${1}": "${0}장의 카드가 버려짐 ${1}",
     "Select space next to greenery for special tile": "녹지 타일 옆에 놓을 특수 타일의 위치 선택",
     "Gain plants": "식물 자원 획득",
     "Add animals": "동물 자원 추가",

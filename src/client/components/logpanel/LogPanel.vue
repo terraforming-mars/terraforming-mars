@@ -20,7 +20,7 @@
       </div>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <card-panel :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
+    <card-panel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
   </div>
 </template>
 

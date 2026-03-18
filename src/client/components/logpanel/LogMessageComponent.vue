@@ -80,7 +80,11 @@ export default defineComponent({
       return this.innerCardToHtml(data.value, data.attrs);
     },
     cardsToHtml(data: LogMessageData & {type: LogMessageDataType.CARDS, value: ReadonlyArray<CardName>}) {
-      return data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs)).join(' ');
+      if (data.attrs?.ellipsis) {
+        return '<span class="log-card background-color-standard-project">...</span>';
+      } else {
+        return data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs)).join(' ');
+      }
     },
     innerCardToHtml(cardName: CardName, attrs?: LogMessageDataAttrs) {
       const card = getCard(cardName);

@@ -15,7 +15,7 @@
             <i
               v-for="color in playersAtPosition(idx + 1)"
               :key="color"
-              :class="'board-cube board-cube--' + color"
+              :class="cubeCss(color)"
               class="delta-project-board__cube"
             ></i>
             <div
@@ -47,6 +47,7 @@
 import {defineComponent} from '@/client/vue3-compat';
 import {Color} from '@/common/Color';
 import {DeltaProjectModel} from '@/common/models/DeltaProjectModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type RewardIcon = {
   cssClass: string;
@@ -186,6 +187,10 @@ export default defineComponent({
     };
   },
   methods: {
+    cubeCss(color: Color): string {
+      const css = 'board-cube board-cube--' + color;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
+    },
     playersAtPosition(position: number): Array<Color> {
       if (this.model === undefined) return [];
       const result: Array<Color> = [];
@@ -285,6 +290,18 @@ export default defineComponent({
   height: 21px;
   margin: 0;
   filter: drop-shadow(2px 2px 3px black);
+}
+
+.delta-project-board__cube::after {
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delta-project-board__slot {

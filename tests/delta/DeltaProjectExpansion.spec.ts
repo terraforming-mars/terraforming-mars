@@ -6,7 +6,7 @@ import {DeltaProjectExpansion} from '../../src/server/delta/DeltaProjectExpansio
 import {Tag} from '../../src/common/cards/Tag';
 import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
-import {SelectAmount} from '../../src/server/inputs/SelectAmount';
+import {DeltaProjectInput} from '../../src/server/delta/DeltaProjectInput';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {CardResource} from '../../src/common/CardResource';
 import {CardName} from '../../src/common/cards/CardName';
@@ -472,7 +472,7 @@ describe('DeltaProjectExpansion', () => {
   });
 
   describe('action flow', () => {
-    it('returns SelectAmount with correct range', () => {
+    it('returns DeltaProjectInput with correct range', () => {
       player.energy = 3;
       player.playedCards.push(
         fakeCard({tags: [Tag.BUILDING]}),
@@ -480,7 +480,7 @@ describe('DeltaProjectExpansion', () => {
         fakeCard({tags: [Tag.EARTH]}),
       );
 
-      const input = cast(DeltaProjectExpansion.action(player), SelectAmount);
+      const input = cast(DeltaProjectExpansion.action(player), DeltaProjectInput);
       expect(input.min).eq(1);
       expect(input.max).eq(3);
     });

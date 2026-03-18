@@ -149,10 +149,10 @@ export class DeltaProjectExpansion {
     data.playerPositions.set(player.color, newPos);
     player.deltaProjectActionUsedThisGeneration = true;
 
-    if (newPos === 10 && !data.claimed2VP.includes(player.color)) {
+    if (newPos === 10 && data.claimed2VP.length === 0) {
       data.claimed2VP.push(player.color);
     }
-    if (newPos === 11 && !data.claimed5VP.includes(player.color)) {
+    if (newPos === 11 && data.claimed5VP.length === 0) {
       data.claimed5VP.push(player.color);
       const idx = data.claimed2VP.indexOf(player.color);
       if (idx !== -1) {

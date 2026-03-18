@@ -70,5 +70,5 @@
     "drew":"ha pescato",
     "bought":"ha comprato",
     "sold":"ha venduto",
-    "${0} card(s) were discarded": "Sono state scartate ${0} carta/e"
+    "Discarded ${0} cards ${1}": "Sono state scartate ${0} carta/e ${1}"
 }

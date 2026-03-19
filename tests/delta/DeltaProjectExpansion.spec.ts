@@ -10,7 +10,6 @@ import {DeltaProjectInput} from '../../src/server/delta/DeltaProjectInput';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {CardResource} from '../../src/common/CardResource';
 import {CardName} from '../../src/common/cards/CardName';
-import {Resource} from '../../src/common/Resource';
 import {SaturnSystems} from '../../src/server/cards/corporation/SaturnSystems';
 import {Ringcom} from '../../src/server/cards/pathfinders/Ringcom';
 import {SpaceRelay} from '../../src/server/cards/pathfinders/SpaceRelay';

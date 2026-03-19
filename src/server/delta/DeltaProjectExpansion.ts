@@ -1,6 +1,6 @@
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
-import {DeltaProjectData} from './DeltaProjectData';
+import {DeltaProjectData, DeltaPlayerProgress} from './DeltaProjectData';
 import {Color} from '../../common/Color';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
@@ -42,16 +42,11 @@ export class DeltaProjectExpansion {
   private constructor() {}
 
   public static initialize(game: IGame): DeltaProjectData {
-    const playerPositions = new Map<Color, number>();
+    const players = new Map<Color, DeltaPlayerProgress>();
     for (const player of game.playersInGenerationOrder) {
-      playerPositions.set(player.color, 0);
+      players.set(player.color, {position: 0, claimed2VP: false, claimed5VP: false, jovianBonus: false});
     }
-    return {
-      playerPositions,
-      claimed2VP: [],
-      claimed5VP: [],
-      jovianBonus: [],
-    };
+    return {players};
   }
 
   public static getData(game: IGame): DeltaProjectData {
@@ -61,8 +56,23 @@ export class DeltaProjectExpansion {
     return game.deltaProjectData;
   }
 
+  private static getProgress(data: DeltaProjectData, color: Color): DeltaPlayerProgress {
+    const progress = data.players.get(color);
+    if (progress === undefined) {
+      throw new Error('No Delta Project progress for player ' + color);
+    }
+    return progress;
+  }
+
+  private static isSpotClaimed(data: DeltaProjectData, spot: 'claimed2VP' | 'claimed5VP'): boolean {
+    for (const progress of data.players.values()) {
+      if (progress[spot]) return true;
+    }
+    return false;
+  }
+
   public static getPosition(game: IGame, player: IPlayer): number {
-    return DeltaProjectExpansion.getData(game).playerPositions.get(player.color) ?? 0;
+    return DeltaProjectExpansion.getProgress(DeltaProjectExpansion.getData(game), player.color).position;
   }
 
   /**
@@ -91,7 +101,8 @@ export class DeltaProjectExpansion {
   public static maxSteps(player: IPlayer): number {
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
-    const currentPos = data.playerPositions.get(player.color) ?? 0;
+    const progress = DeltaProjectExpansion.getProgress(data, player.color);
+    const currentPos = progress.position;
 
     if (currentPos >= TRACK_LENGTH) return 0;
 
@@ -104,10 +115,10 @@ export class DeltaProjectExpansion {
       if (!DeltaProjectExpansion.canReachPosition(player, pos)) break;
 
       if (pos === 10) {
-        if (data.claimed2VP.length >= 1) continue; // claimed, skip past
+        if (DeltaProjectExpansion.isSpotClaimed(data, 'claimed2VP')) continue;
       }
       if (pos === 11) {
-        if (data.claimed5VP.length >= 1) break; // claimed, can't go further
+        if (DeltaProjectExpansion.isSpotClaimed(data, 'claimed5VP')) break;
       }
 
       maxPos = pos;
@@ -142,22 +153,20 @@ export class DeltaProjectExpansion {
   public static advance(player: IPlayer, steps: number): void {
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
-    const currentPos = data.playerPositions.get(player.color) ?? 0;
+    const progress = DeltaProjectExpansion.getProgress(data, player.color);
+    const currentPos = progress.position;
     const newPos = currentPos + steps;
 
     player.stock.deduct(Resource.ENERGY, steps);
-    data.playerPositions.set(player.color, newPos);
+    progress.position = newPos;
     player.deltaProjectActionUsedThisGeneration = true;
 
-    if (newPos === 10 && data.claimed2VP.length === 0) {
-      data.claimed2VP.push(player.color);
+    if (newPos === 10 && !DeltaProjectExpansion.isSpotClaimed(data, 'claimed2VP')) {
+      progress.claimed2VP = true;
     }
-    if (newPos === 11 && data.claimed5VP.length === 0) {
-      data.claimed5VP.push(player.color);
-      const idx = data.claimed2VP.indexOf(player.color);
-      if (idx !== -1) {
-        data.claimed2VP.splice(idx, 1);
-      }
+    if (newPos === 11 && !DeltaProjectExpansion.isSpotClaimed(data, 'claimed5VP')) {
+      progress.claimed5VP = true;
+      progress.claimed2VP = false;
     }
 
     DeltaProjectExpansion.resolveReward(player, newPos);
@@ -231,9 +240,10 @@ export class DeltaProjectExpansion {
       break;
     }
 
-    case 8: // Jovian: Gain one Jovian tag
-      if (!data.jovianBonus.includes(player.color)) {
-        data.jovianBonus.push(player.color);
+    case 8: { // Jovian: Gain one Jovian tag
+      const progress = DeltaProjectExpansion.getProgress(data, player.color);
+      if (!progress.jovianBonus) {
+        progress.jovianBonus = true;
         player.tags.extraJovianTags++;
         for (const card of player.tableau) {
           card.onNonCardTagAdded?.(player, Tag.JOVIAN);
@@ -246,6 +256,7 @@ export class DeltaProjectExpansion {
         game.log('${0} gained a Jovian tag from the Delta Project', (b) => b.player(player));
       }
       break;
+    }
 
     case 9: // Animal: Add 2 animals to any card
       game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
@@ -271,9 +282,12 @@ export class DeltaProjectExpansion {
     const data = player.game.deltaProjectData;
     if (data === undefined) return;
 
-    if (data.claimed5VP.includes(player.color)) {
+    const progress = data.players.get(player.color);
+    if (progress === undefined) return;
+
+    if (progress.claimed5VP) {
       builder.setVictoryPoints('victoryPoints', 5, 'Delta Project (5VP)');
-    } else if (data.claimed2VP.includes(player.color)) {
+    } else if (progress.claimed2VP) {
       builder.setVictoryPoints('victoryPoints', 2, 'Delta Project (2VP)');
     }
   }

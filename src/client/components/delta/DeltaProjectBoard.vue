@@ -194,8 +194,8 @@ export default defineComponent({
     playersAtPosition(position: number): Array<Color> {
       if (this.model === undefined) return [];
       const result: Array<Color> = [];
-      for (const [color, pos] of Object.entries(this.model.playerPositions)) {
-        if (pos === position) {
+      for (const [color, progress] of Object.entries(this.model.players)) {
+        if (progress && progress.position === position) {
           result.push(color as Color);
         }
       }

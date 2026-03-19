@@ -3,7 +3,7 @@
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <DeltaProjectBoard
       :model="playerinput.deltaProjectModel"
-      :playersCount="Object.keys(playerinput.deltaProjectModel.playerPositions).length"
+      :playersCount="Object.keys(playerinput.deltaProjectModel.players).length"
     />
     <div class="flex">
       <input type="number" class="nes-input" :min="playerinput.min" :max="playerinput.max" v-model="amount" />

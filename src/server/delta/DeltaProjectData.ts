@@ -1,11 +1,15 @@
 import {Color} from '../../common/Color';
-import {SerializedDeltaProjectData} from './SerializedDeltaProjectData';
+import {SerializedDeltaProjectData, SerializedDeltaPlayerProgress} from './SerializedDeltaProjectData';
+
+export type DeltaPlayerProgress = {
+  position: number;
+  claimed2VP: boolean;
+  claimed5VP: boolean;
+  jovianBonus: boolean;
+}
 
 export type DeltaProjectData = {
-  playerPositions: Map<Color, number>;
-  claimed2VP: Array<Color>;
-  claimed5VP: Array<Color>;
-  jovianBonus: Array<Color>;
+  players: Map<Color, DeltaPlayerProgress>;
 }
 
 export namespace DeltaProjectData {
@@ -13,20 +17,18 @@ export namespace DeltaProjectData {
     if (data === undefined) {
       return undefined;
     }
-    return {
-      playerPositions: Object.fromEntries(data.playerPositions),
-      claimed2VP: [...data.claimed2VP],
-      claimed5VP: [...data.claimed5VP],
-      jovianBonus: [...data.jovianBonus],
-    };
+    const players: Partial<Record<Color, SerializedDeltaPlayerProgress>> = {};
+    for (const [color, progress] of data.players) {
+      players[color] = {...progress};
+    }
+    return {players};
   }
 
   export function deserialize(data: SerializedDeltaProjectData): DeltaProjectData {
-    return {
-      playerPositions: new Map(Object.entries(data.playerPositions)) as Map<Color, number>,
-      claimed2VP: [...data.claimed2VP],
-      claimed5VP: [...data.claimed5VP],
-      jovianBonus: [...data.jovianBonus],
-    };
+    const players = new Map<Color, DeltaPlayerProgress>();
+    for (const [color, progress] of Object.entries(data.players)) {
+      players.set(color as Color, {...progress!});
+    }
+    return {players};
   }
 }

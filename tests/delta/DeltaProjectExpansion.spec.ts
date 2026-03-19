@@ -438,7 +438,7 @@ describe('DeltaProjectExpansion', () => {
       expect(player2.production.megacredits).eq(mcProdBefore + 1);
     });
 
-    it('triggers Ringcom for other players', () => {
+    it('does not trigger Ringcom', () => {
       const ringcom = new Ringcom();
       player2.playedCards.push(ringcom);
 
@@ -449,25 +449,33 @@ describe('DeltaProjectExpansion', () => {
       const titaniumBefore = player2.titanium;
       DeltaProjectExpansion.advance(player, 1);
 
-      expect(player2.titanium).eq(titaniumBefore + 1);
+      expect(player2.titanium).eq(titaniumBefore);
     });
 
-    it('triggers SpaceRelay only for the active player', () => {
-      const spaceRelay1 = new SpaceRelay();
-      player.playedCards.push(spaceRelay1);
-      const spaceRelay2 = new SpaceRelay();
-      player2.playedCards.push(spaceRelay2);
+    it('does not raise the Pathfinders Jovian track', () => {
+      const [pfGame, pfPlayer] = testGame(2, {deltaProjectExpansion: true, pathfindersExpansion: true});
+      const pfData = DeltaProjectExpansion.getData(pfGame);
+      pfData.playerPositions.set(pfPlayer.color, 7);
+      pfPlayer.energy = 8;
+
+      const jovianBefore = pfGame.pathfindersData!.jovian;
+      DeltaProjectExpansion.advance(pfPlayer, 1);
+
+      expect(pfGame.pathfindersData!.jovian).eq(jovianBefore);
+    });
+
+    it('does not trigger SpaceRelay', () => {
+      const spaceRelay = new SpaceRelay();
+      player.playedCards.push(spaceRelay);
 
       player.energy = 8;
       const data = DeltaProjectExpansion.getData(game);
       data.playerPositions.set(player.color, 7);
 
       const handBefore = player.cardsInHand.length;
-      const hand2Before = player2.cardsInHand.length;
       DeltaProjectExpansion.advance(player, 1);
 
-      expect(player.cardsInHand.length).eq(handBefore + 1);
-      expect(player2.cardsInHand.length).eq(hand2Before);
+      expect(player.cardsInHand.length).eq(handBefore);
     });
   });
 

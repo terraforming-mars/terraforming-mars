@@ -14,9 +14,11 @@ import {Resource} from '../../src/common/Resource';
 import {SaturnSystems} from '../../src/server/cards/corporation/SaturnSystems';
 import {Ringcom} from '../../src/server/cards/pathfinders/Ringcom';
 import {SpaceRelay} from '../../src/server/cards/pathfinders/SpaceRelay';
+import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPointsBreakdownBuilder';
 import {DeltaProjectData} from '../../src/server/delta/DeltaProjectData';
 import {Color} from '../../src/common/Color';
+import {Game} from '../../src/server/Game';
 
 function progress(data: DeltaProjectData, color: Color) {
   return data.players.get(color)!;
@@ -276,6 +278,37 @@ describe('DeltaProjectExpansion', () => {
       expect(player.plants).gte(3);
     });
 
+    it('position 7: reuse a used blue card action', () => {
+      player.energy = 7;
+      const data = DeltaProjectExpansion.getData(game);
+      progress(data, player.color).position = 6;
+
+      const regolith = new RegolithEaters();
+      player.playedCards.push(regolith);
+      player.actionsThisGeneration.add(CardName.REGOLITH_EATERS);
+
+      DeltaProjectExpansion.advance(player, 1);
+      runAllActions(game);
+
+      const selectCard = cast(player.popWaitingFor(), SelectCard);
+      expect(selectCard.cards).includes(regolith);
+      selectCard.cb([regolith]);
+      runAllActions(game);
+
+      expect(regolith.resourceCount).eq(1);
+    });
+
+    it('position 7: no action if no used blue cards', () => {
+      player.energy = 7;
+      const data = DeltaProjectExpansion.getData(game);
+      progress(data, player.color).position = 6;
+
+      DeltaProjectExpansion.advance(player, 1);
+      runAllActions(game);
+
+      expect(player.popWaitingFor()).is.undefined;
+    });
+
     it('position 8: grants jovian tag', () => {
       player.energy = 8;
       const data = DeltaProjectExpansion.getData(game);
@@ -410,6 +443,34 @@ describe('DeltaProjectExpansion', () => {
       expect(progress(data, player2.color).claimed5VP).is.true;
       expect(progress(data, player2.color).claimed2VP).is.false;
     });
+
+    it('2VP spot is freed when holder advances to 5VP', () => {
+      const data = DeltaProjectExpansion.getData(game);
+
+      progress(data, player.color).position = 10;
+      progress(data, player.color).claimed2VP = true;
+      player.energy = 10;
+      for (let i = 1; i <= 9; i++) {
+        player.playedCards.push(fakeCard({tags: [Tag.BUILDING, Tag.POWER, Tag.EARTH, Tag.SPACE, Tag.SCIENCE, Tag.PLANT, Tag.MICROBE, Tag.JOVIAN, Tag.ANIMAL]}));
+      }
+
+      DeltaProjectExpansion.advance(player, 1);
+
+      expect(progress(data, player.color).position).eq(11);
+      expect(progress(data, player.color).claimed5VP).is.true;
+      expect(progress(data, player.color).claimed2VP).is.false;
+
+      progress(data, player2.color).position = 9;
+      player2.energy = 10;
+      for (let i = 1; i <= 9; i++) {
+        player2.playedCards.push(fakeCard({tags: [Tag.BUILDING, Tag.POWER, Tag.EARTH, Tag.SPACE, Tag.SCIENCE, Tag.PLANT, Tag.MICROBE, Tag.JOVIAN, Tag.ANIMAL]}));
+      }
+
+      DeltaProjectExpansion.advance(player2, 1);
+
+      expect(progress(data, player2.color).position).eq(10);
+      expect(progress(data, player2.color).claimed2VP).is.true;
+    });
   });
 
   describe('jovian tag card callbacks', () => {
@@ -521,6 +582,29 @@ describe('DeltaProjectExpansion', () => {
       expect(serialized.deltaProjectData!.players[player.color]!.position).eq(5);
       expect(serialized.deltaProjectData!.players[player.color]!.jovianBonus).is.true;
       expect(serialized.deltaProjectData!.players[player2.color]!.claimed2VP).is.true;
+    });
+
+    it('full deserialization round-trip preserves DeltaProjectData', () => {
+      const data = DeltaProjectExpansion.getData(game);
+      progress(data, player.color).position = 7;
+      progress(data, player.color).jovianBonus = true;
+      progress(data, player2.color).position = 10;
+      progress(data, player2.color).claimed2VP = true;
+
+      const restored = Game.deserialize(game.serialize());
+      const restoredData = DeltaProjectExpansion.getData(restored);
+
+      const p1 = restoredData.players.get(player.color)!;
+      expect(p1.position).eq(7);
+      expect(p1.jovianBonus).is.true;
+      expect(p1.claimed2VP).is.false;
+      expect(p1.claimed5VP).is.false;
+
+      const p2 = restoredData.players.get(player2.color)!;
+      expect(p2.position).eq(10);
+      expect(p2.claimed2VP).is.true;
+      expect(p2.claimed5VP).is.false;
+      expect(p2.jovianBonus).is.false;
     });
   });
 });

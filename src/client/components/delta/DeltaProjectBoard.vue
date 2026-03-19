@@ -203,7 +203,7 @@ export default defineComponent({
     },
     emptySlots(position: number, step: DeltaBoardStep): number {
       const occupied = this.playersAtPosition(position).length;
-      const minSlots = step.dynamicSlots ? Math.max(2, this.playersCount) : 1;
+      const minSlots = step.dynamicSlots ? this.playersCount : 1;
       return Math.max(0, minSlots - occupied);
     },
   },

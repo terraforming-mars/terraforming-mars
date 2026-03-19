@@ -86,7 +86,7 @@ export class DeltaProjectExpansion {
    * - Cannot move beyond position 11 (5VP).
    */
 
-  //Whether the player has enough tags (using wilds to fill gaps) to reach targetPos.
+  // Whether the player has enough tags (using wilds to fill gaps) to reach targetPos.
   private static canReachPosition(player: IPlayer, targetPos: number): boolean {
     let missing = 0;
     for (let pos = 1; pos <= Math.min(targetPos, 9); pos++) {
@@ -143,7 +143,7 @@ export class DeltaProjectExpansion {
       'Advance',
       1,
       max,
-      createDeltaProjectModel(game)!,
+      createDeltaProjectModel(game) ?? (() => { throw new Error('Delta Project model not available'); })(),
     ).andThen((amount) => {
       DeltaProjectExpansion.advance(player, amount);
       return undefined;

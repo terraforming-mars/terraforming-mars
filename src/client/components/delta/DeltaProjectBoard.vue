@@ -2,7 +2,7 @@
   <div class="delta-project-board">
     <table class="delta-project-board__track">
       <tr>
-        <td v-for="(step, idx) in steps" :key="step.id" class="delta-project-board__step">
+        <td v-for="step in steps" :key="step.id" class="delta-project-board__step">
           <div class="delta-project-board__tag-cell">
             <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
             <div v-else class="resource-tag" :class="step.tagClass"></div>

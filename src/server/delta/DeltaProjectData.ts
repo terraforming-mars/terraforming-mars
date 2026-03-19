@@ -27,7 +27,8 @@ export namespace DeltaProjectData {
   export function deserialize(data: SerializedDeltaProjectData): DeltaProjectData {
     const players = new Map<Color, DeltaPlayerProgress>();
     for (const [color, progress] of Object.entries(data.players)) {
-      players.set(color as Color, {...progress!});
+      if (progress === undefined) continue;
+      players.set(color as Color, {...progress});
     }
     return {players};
   }

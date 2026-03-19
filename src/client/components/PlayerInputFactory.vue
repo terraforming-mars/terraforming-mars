@@ -57,8 +57,8 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'policy': 'select-policy',
   'resource': 'select-resource',
   'resources': 'select-resources',
-    'claimedUndergroundToken': 'select-claimed-underground-token',
-    'deltaProject': 'delta-project-input',
+  'claimedUndergroundToken': 'select-claimed-underground-token',
+  'deltaProject': 'delta-project-input',
 };
 
 export default defineComponent({

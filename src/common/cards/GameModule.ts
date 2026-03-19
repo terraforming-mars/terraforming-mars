@@ -40,7 +40,7 @@ export const MODULE_NAMES = {
   ceo: 'CEOs',
   starwars: 'Star Wars',
   underworld: 'Underworld',
-  DeltaProject: 'Delta Project',
+  deltaProject: 'Delta Project',
 } satisfies Record<GameModule, string>;
 
 export const DEFAULT_EXPANSIONS = {

@@ -58,7 +58,7 @@ export const awardNames = [
   'Naturalist',
   'Voyager',
 
-  // Vastitas Borealis Novus
+  // Vastitas Borealis Nova
   'Traveller', // And modular
   'Landscaper',
   'Highlander',

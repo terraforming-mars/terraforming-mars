@@ -286,7 +286,7 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 export default defineComponent({
   name: 'HelpIconology',
 });

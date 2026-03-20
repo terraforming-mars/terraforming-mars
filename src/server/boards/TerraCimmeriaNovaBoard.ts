@@ -7,8 +7,8 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TERRA_CIMMERIA_COLONY_COST} from '../../common/constants';
 
-export class TerraCimmeriaNovusBoard extends MarsBoard {
-  public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaNovusBoard {
+export class TerraCimmeriaNovaBoard extends MarsBoard {
+  public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaNovaBoard {
     const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
@@ -42,7 +42,7 @@ export class TerraCimmeriaNovusBoard extends MarsBoard {
     if (gameOptions.coloniesExtension !== true) {
       spaces.forEach((space) => space.bonus = space.bonus.filter((bonus) => bonus !== COLONY));
     }
-    return new TerraCimmeriaNovusBoard(spaces);
+    return new TerraCimmeriaNovaBoard(spaces);
   }
 
   public override spaceCosts(space: Space) {

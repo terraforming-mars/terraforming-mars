@@ -25,6 +25,8 @@
             </svg>
             {{ getSpaceName(data.value) }}
         </span>
+        <span v-else-if="data.type === LogMessageDataType.CARDS" v-html="cardsToHtml(data)"></span>
+
         <span v-else-if="data.type === LogMessageDataType.RAW_STRING">{{ data.value }}</span>
         <span v-else v-i18n>{{ data.value }}</span>
       </span>
@@ -34,13 +36,13 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {Color} from '@/common/Color';
 import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {ViewModel} from '@/common/models/PlayerModel';
 import {tileTypeToString} from '@/common/TileType';
@@ -51,7 +53,7 @@ import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
-  corporation: 'background-color-global-event',
+  corporation: 'background-color-corporation',
   active: 'background-color-active',
   automated: 'background-color-automated',
   prelude: 'background-color-prelude',
@@ -75,12 +77,21 @@ export default defineComponent({
   },
   methods: {
     cardToHtml(data: LogMessageData & {type: LogMessageDataType.CARD, value: CardName}) {
-      const card = getCard(data.value);
+      return this.innerCardToHtml(data.value, data.attrs);
+    },
+    cardsToHtml(data: LogMessageData & {type: LogMessageDataType.CARDS, value: ReadonlyArray<CardName>}) {
+      if (data.attrs?.ellipsis) {
+        return '<span class="log-card background-color-standard-project">...</span>';
+      } else {
+        return data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs)).join(' ');
+      }
+    },
+    innerCardToHtml(cardName: CardName, attrs?: LogMessageDataAttrs) {
+      const card = getCard(cardName);
       if (card === undefined) {
         return '';
       }
 
-      const attrs = data.attrs;
       const suffixFreeCardName = card.name.split(':')[0];
       const className = cardTypeToCss[card.type];
 

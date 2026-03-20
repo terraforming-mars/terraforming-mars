@@ -33,7 +33,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';

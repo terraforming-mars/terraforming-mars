@@ -5,7 +5,7 @@ import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCar
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
-import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
 import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
@@ -907,11 +907,7 @@ export class Player implements IPlayer {
 
     /* A player responding to their own cards played. */
     for (const effectCard of this.playedCards) {
-      if (isICorporationCard(effectCard)) {
-        this.defer(effectCard.onCardPlayedForCorps?.(this, card));
-      } else {
-        this.defer(effectCard.onCardPlayed?.(this, card));
-      }
+      this.defer(effectCard.onCardPlayed?.(this, card));
     }
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
@@ -1498,20 +1494,20 @@ export class Player implements IPlayer {
         orOptions.options.push(this.passOption());
       }
 
-      this.setWaitingFor(orOptions, () => {
+      this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
         if (this.pendingInitialActions.length === 0) {
           this.incrementActionsTaken();
         }
         this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
         this.takeAction();
-      });
+      }));
       return;
     }
 
-    this.setWaitingFor(this.getActions(), () => {
+    this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
       this.incrementActionsTaken();
       this.takeAction();
-    });
+    }));
   }
 
   private incrementActionsTaken(): void {

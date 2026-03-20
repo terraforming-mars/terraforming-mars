@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
 import {getAward} from '@/client/MilestoneAwardManifest';
 import {playerSymbol} from '@/client/utils/playerSymbol';
@@ -60,7 +60,7 @@ export default defineComponent({
   },
   computed: {
     nameCss(): string {
-      return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
+      return 'ma-name--' + this.award.name.replaceAll(' ', '-').replaceAll('.', '').toLowerCase();
     },
     sortedScores(): Array<AwardScore> {
       return [...this.award.scores].sort((s1, s2) => s2.score - s1.score);

@@ -155,8 +155,8 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
     [BoardName.UTOPIA_PLANITIA]: ['Land Specialist', 'Pioneer', 'Tradesman', 'Smith', 'Researcher'],
-    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'V. Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
-    [BoardName.TERRA_CIMMERIA_NOVUS]: ['Planetologist', 'Architect', 'Coastguard', 'C. Forester', 'Fundraiser'],
+    [BoardName.VASTITAS_BOREALIS_NOVA]: ['Agronomist', 'V. Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
+    [BoardName.TERRA_CIMMERIA_NOVA]: ['Planetologist', 'Architect', 'Coastguard', 'C. Forester', 'Fundraiser'],
     [BoardName.HOLLANDIA]: [],
   },
   expansions: {

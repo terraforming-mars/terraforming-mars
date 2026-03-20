@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 
-const dialogPolyfill = require('dialog-polyfill');
+import dialogPolyfill from 'dialog-polyfill';
 
 
 type Refs = {
@@ -66,7 +66,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.typedRefs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
   },
 });
 </script>

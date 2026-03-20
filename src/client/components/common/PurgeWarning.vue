@@ -10,7 +10,7 @@
 </template>
 <script lang="ts">
 import {translateTextWithParams} from '@/client/directives/i18n';
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'PurgeWarning',

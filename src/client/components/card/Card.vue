@@ -25,7 +25,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
@@ -143,7 +143,7 @@ export default defineComponent({
     },
     cardClasses(): string {
       const classes = [];
-      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
+      classes.push('card-' + this.card.name.toLowerCase().replaceAll(' ', '-'));
 
       if (this.card.isDisabled) {
         classes.push('card-unavailable');

@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import PlayerTimer from '@/client/components/overview/PlayerTimer.vue';
 import {TimerModel} from '@/common/models/TimerModel';

@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';

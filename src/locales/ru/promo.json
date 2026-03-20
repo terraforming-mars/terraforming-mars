@@ -238,5 +238,9 @@
 
     "Weather Balloons": "Метеозонды",
     "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "Действие: Добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы получить 1 М€ за каждый город на Марсе.",
-    "Draw 1 card.": "Возьмите 1 карту."
+    "Draw 1 card.": "Возьмите 1 карту.",
+
+    "Albedo Plants": "Альбедо растения",
+    "(Effect: When you play a plant tag, including this, gain 3 heat.)": "(Эффект: Каждый раз, когда вы разыгрываете метку растений (включая эту), получите 3 тепла.)",
+    "(Increase plant production 1 step. Gain 1 plant.)": "(Повысьте своё производство растений на 1. Получите 1 растение.)"
 }

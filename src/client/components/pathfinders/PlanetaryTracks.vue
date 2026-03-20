@@ -45,7 +45,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PathfindersModel} from '@/common/models/PathfindersModel';
 import {Tag} from '@/common/cards/Tag';

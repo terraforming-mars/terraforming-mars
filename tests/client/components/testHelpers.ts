@@ -22,7 +22,7 @@ function emptyProtection(): Record<Resource, Protection> {
     plants: 'off',
     energy: 'off',
     heat: 'off',
-  } as Record<Resource, Protection>;
+  } satisfies Record<Resource, Protection>;
 }
 
 export function emptyTags(): Record<Tag, number> {

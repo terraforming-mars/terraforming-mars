@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
+import {AlbedoPlants} from './AlbedoPlants';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AqueductSystems} from './AqueductSystems';
 import {ArcadianCommunities} from './ArcadianCommunities';
@@ -185,6 +186,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods}, // X54
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
     [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
+    [CardName.ALBEDO_PLANTS]: {Factory: AlbedoPlants},
   },
 
   cardsToRemove: [

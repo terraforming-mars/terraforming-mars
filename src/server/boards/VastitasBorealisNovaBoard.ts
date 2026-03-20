@@ -7,12 +7,12 @@ import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
 import {Space} from './Space';
 import {
-  VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST,
+  VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST,
 } from '../../common/constants';
 import {SpaceCosts} from './Board';
 
-export class VastitasBorealisNovusBoard extends MarsBoard {
-  public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisNovusBoard {
+export class VastitasBorealisNovaBoard extends MarsBoard {
+  public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisNovaBoard {
     const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
@@ -43,7 +43,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     builder.land(DELEGATE).land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
 
     const spaces = builder.build();
-    return new VastitasBorealisNovusBoard(spaces);
+    return new VastitasBorealisNovaBoard(spaces);
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {
@@ -61,7 +61,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC)) {
-      costs.megacredits = VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST;
+      costs.megacredits = VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }
     return costs;

@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';

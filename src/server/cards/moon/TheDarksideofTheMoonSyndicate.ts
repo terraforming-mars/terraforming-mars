@@ -97,11 +97,23 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard implements IC
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
       const costs = new MultiSet<IPlayer>();
-      MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
-        if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
-          costs.add(space.player, 2);
+      const spaces = MoonExpansion.moonData(game).moon.getAdjacentSpaces(space);
+
+      for (const space of spaces) {
+        if (space.tile !== undefined) {
+          // These include the current player if they have an adjacent tile, but that's ignored below.
+          if (space.player !== undefined) {
+            costs.add(space.player, 2);
+          }
+          if (space.coOwner !== undefined) {
+            costs.add(space.coOwner, 2);
+          }
         }
-      });
+      }
+
+      // The card owner doesn't steal from themselves.
+      costs.delete(cardOwner);
+
       costs.forEachMultiplicity((qty, target) => {
         const adjustedQuantity = Math.min(qty, target.megaCredits);
         target.attack(cardOwner, Resource.MEGACREDITS, adjustedQuantity, {log: true, stealing: true});

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';

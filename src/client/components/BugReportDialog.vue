@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -26,7 +26,7 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
 import {getPreferences} from '../utils/PreferencesManager';
 
-const dialogPolyfill = require('dialog-polyfill');
+import dialogPolyfill from 'dialog-polyfill';
 
 
 function browser(): string {
@@ -112,7 +112,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.typedRefs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
     this.setMessage();
   },
 });

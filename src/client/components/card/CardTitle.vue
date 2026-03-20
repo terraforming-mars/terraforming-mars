@@ -10,7 +10,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {CardType} from '@/common/cards/CardType';
 import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';

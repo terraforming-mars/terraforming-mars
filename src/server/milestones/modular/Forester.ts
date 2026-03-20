@@ -12,7 +12,7 @@ export class Forester extends BaseMilestone {
   }
 }
 
-// Forester variant from Terra Cimmeria Novus.
+// Forester variant from Terra Cimmeria Nova.
 export class CForester extends Forester {
   constructor() {
     super('C. Forester', 3);

@@ -21,7 +21,7 @@ describe('TheGrandLunaCapitalGroup', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
-    // Space 0 intentionallyleft blank
+    // Space 0 intentionally left blank
     MoonExpansion.addMineTile(player, adjacentSpaces[1].id);
     MoonExpansion.addHabitatTile(player, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(player, adjacentSpaces[3].id);

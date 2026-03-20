@@ -8,7 +8,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectOptionModel} from '@/common/models/PlayerInputModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';

@@ -1,4 +1,4 @@
-import * as prometheus from 'prom-client';
+import prometheus from 'prom-client';
 import {Clock} from '../../common/Timer';
 import {paths} from '../../common/app/paths';
 import {Request} from '../Request';

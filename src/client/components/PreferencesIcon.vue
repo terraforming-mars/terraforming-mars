@@ -7,7 +7,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
 

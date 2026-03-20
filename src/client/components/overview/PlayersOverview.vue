@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import OverviewSettings from '@/client/components/overview/OverviewSettings.vue';
 import OtherPlayer from '@/client/components/OtherPlayer.vue';

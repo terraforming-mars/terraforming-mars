@@ -25,7 +25,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 import {ICardRenderEffect, ICardRenderItem, ICardRenderProductionBox, ICardRenderSymbol, ICardRenderTile, isICardRenderItem, isICardRenderProductionBox} from '@/common/cards/render/Types';

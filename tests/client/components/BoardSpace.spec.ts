@@ -9,6 +9,7 @@ describe('BoardSpace', () => {
       ...globalConfig,
       props: {
         space: {id: 'm1', bonus: []},
+        tileView: 'show',
       },
     });
 

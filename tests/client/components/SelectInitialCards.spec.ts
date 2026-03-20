@@ -168,6 +168,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     showOnlyInLearnerMode: false,
     selectBlueCardAction: false,
     showOwner: false,
+    showSelectAll: false,
   }, {
     type: 'card',
     title: titles.SELECT_PROJECTS_TITLE,
@@ -178,6 +179,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     showOnlyInLearnerMode: false,
     selectBlueCardAction: false,
     showOwner: false,
+    showSelectAll: false,
   }];
 
   if (preludeCards) {
@@ -191,6 +193,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
       showOnlyInLearnerMode: false,
       selectBlueCardAction: false,
       showOwner: false,
+      showSelectAll: false,
     });
   }
   if (ceoCards) {
@@ -204,6 +207,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
       showOnlyInLearnerMode: false,
       selectBlueCardAction: false,
       showOwner: false,
+      showSelectAll: false,
     });
   }
 

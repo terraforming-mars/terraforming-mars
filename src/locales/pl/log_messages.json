@@ -107,8 +107,6 @@
 
   "${0} drew ${1}": "${0} dobiera ${1}",
   "${0} drew no cards": "${0} nie dobiera żadnych kart.",
-  "${0} drew ${1} and ${2}": "${0} dobiera ${1} i ${2}",
-  "${0} drew ${1}, ${2} and ${3}": "${0} dobiera ${1}, ${2} i ${3}",
   "${0} sold ${1} patents": "${0} sprzedaje następującą liczbę patentów: ${1}.",
   "${0}'s ${1} production increased by ${2}": "Produkcja ${1} gracza ${0} wzrosła o ${2} poziomy",
   "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} w ${3}",
@@ -121,7 +119,7 @@
   "drew": "dobiera",
   "bought": "kupuje",
   "sold": "sprzedaje",
-  "${0} card(s) were discarded": "Odrzucono kart: ${0}.",
+  "Discarded ${0} cards ${1}": "Odrzucono kart: ${0}. ${1}",
   "Select space next to greenery for special tile": "Wybierz obszar sąsiadujący z obszarem zieleni do umieszczenia obszaru specjalnego.",
   "Gain plants": "Otrzymujesz jednostki roślinności",
   "Add animals": "Dodaj jednostki zwierząt",

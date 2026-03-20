@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardDescription from './CardDescription.vue';

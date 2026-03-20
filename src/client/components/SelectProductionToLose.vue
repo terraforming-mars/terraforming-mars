@@ -52,7 +52,7 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';

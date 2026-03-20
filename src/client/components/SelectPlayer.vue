@@ -12,7 +12,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';

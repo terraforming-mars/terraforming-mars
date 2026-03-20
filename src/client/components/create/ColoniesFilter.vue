@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import ModuleItemFilter from './ModuleItemFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
@@ -67,8 +67,8 @@ export default defineComponent({
     },
   },
   methods: {
-    compatibility(name: string): Expansion | undefined {
-      return getColony(name as ColonyName)?.expansion;
+    compatibility(name: ColonyName): Expansion | undefined {
+      return getColony(name)?.expansion;
     },
   },
 });

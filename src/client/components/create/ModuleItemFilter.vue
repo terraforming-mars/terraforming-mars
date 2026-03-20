@@ -61,86 +61,88 @@
   </PopupPanel>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts" generic="T extends string">
+import {type Ref, ref, watch} from 'vue';
 import PopupPanel from '../common/PopupPanel.vue';
 
 type Group = {key: string; label: string};
 
-export default defineComponent({
-  name: 'ModuleItemFilter',
-  components: {PopupPanel},
-  emits: ['update:selected', 'close'],
-  props: {
-    title: {type: String, required: true},
-    groups: {type: Array as () => Array<Group>, required: true},
-    itemsByGroup: {type: Object as () => Record<string, Array<string>>, required: true},
-    selected: {type: Array as () => Array<string>, required: true},
-  },
-  data() {
-    return {
-      filterText: '',
-      localSelected: [...this.selected] as Array<string>,
-    };
-  },
-  methods: {
-    allItems(): Array<string> {
-      return this.groups.flatMap((g) => this.itemsByGroup[g.key] ?? []);
-    },
-    getItemsByGroup(key: string): Array<string> {
-      if (key === 'All') return this.allItems();
-      return (this.itemsByGroup[key] ?? []).slice();
-    },
-    selectAll(key: string) {
-      for (const item of this.getItemsByGroup(key)) {
-        if (!this.localSelected.includes(item)) {
-          this.localSelected.push(item);
-        }
-      }
-    },
-    removeFromSelection(item: string) {
-      const idx = this.localSelected.indexOf(item);
-      if (idx !== -1) {
-        this.localSelected.splice(idx, 1);
-      }
-    },
-    selectNone(key: string) {
-      for (const item of this.getItemsByGroup(key)) {
-        this.removeFromSelection(item);
-      }
-    },
-    invertSelection(key: string) {
-      for (const item of this.getItemsByGroup(key)) {
-        if (this.localSelected.includes(item)) {
-          this.removeFromSelection(item);
-        } else {
-          this.localSelected.push(item);
-        }
-      }
-    },
-    /** Called by a parent via $refs to sync a group with an expansion toggle. */
-    watchSelect(key: string, enabled: boolean) {
-      enabled ? this.selectAll(key) : this.selectNone(key);
-    },
-    include(name: string): boolean {
-      const normalized = this.filterText.toLocaleUpperCase();
-      return normalized.length === 0 || name.toLocaleUpperCase().includes(normalized);
-    },
-    icon(module: string | undefined): string | undefined {
-      if (module === undefined) return undefined;
-      let suffix = module;
-      if (module === 'colonies') suffix = 'colony';
-      if (module === 'moon') suffix = 'themoon';
-      return `create-game-expansion-icon expansion-icon-${suffix}`;
-    },
-  },
-  watch: {
-    localSelected: {
-      deep: true,
-      handler(value: Array<string>) {
-        this.$emit('update:selected', [...value]);
-      },
-    },
-  },
-});
+const props = defineProps<{
+  title: string;
+  groups: Array<Group>;
+  itemsByGroup: Record<string, Array<T>>;
+  selected: Array<T>;
+}>();
+
+const emit = defineEmits<{
+  'update:selected': [value: Array<T>];
+  'close': [];
+}>();
+
+const filterText = ref('');
+const localSelected = ref([...props.selected]) as Ref<Array<T>>;
+
+function allItems(): Array<T> {
+  return props.groups.flatMap((g) => props.itemsByGroup[g.key] ?? []);
+}
+
+function getItemsByGroup(key: string): Array<T> {
+  if (key === 'All') return allItems();
+  return (props.itemsByGroup[key] ?? []).slice();
+}
+
+function selectAll(key: string) {
+  for (const item of getItemsByGroup(key)) {
+    if (!localSelected.value.includes(item)) {
+      localSelected.value.push(item);
+    }
+  }
+}
+
+function removeFromSelection(item: T) {
+  const idx = localSelected.value.indexOf(item);
+  if (idx !== -1) {
+    localSelected.value.splice(idx, 1);
+  }
+}
+
+function selectNone(key: string) {
+  for (const item of getItemsByGroup(key)) {
+    removeFromSelection(item);
+  }
+}
+
+function invertSelection(key: string) {
+  for (const item of getItemsByGroup(key)) {
+    if (localSelected.value.includes(item)) {
+      removeFromSelection(item);
+    } else {
+      localSelected.value.push(item);
+    }
+  }
+}
+
+/** Called by a parent via $refs to sync a group with an expansion toggle. */
+function watchSelect(key: string, enabled: boolean) {
+  enabled ? selectAll(key) : selectNone(key);
+}
+
+function include(name: string): boolean {
+  const normalized = filterText.value.toLocaleUpperCase();
+  return normalized.length === 0 || name.toLocaleUpperCase().includes(normalized);
+}
+
+function icon(module: string | undefined): string | undefined {
+  if (module === undefined) return undefined;
+  let suffix = module;
+  if (module === 'colonies') suffix = 'colony';
+  if (module === 'moon') suffix = 'themoon';
+  return `create-game-expansion-icon expansion-icon-${suffix}`;
+}
+
+watch(localSelected, (value) => {
+  emit('update:selected', [...value]);
+}, {deep: true});
+
+defineExpose({watchSelect});
 </script>

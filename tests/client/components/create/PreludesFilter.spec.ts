@@ -35,7 +35,7 @@ describe('PreludesFilter', () => {
   });
 
   it('uses the provided selection when selected is non-empty', () => {
-    const provided: Array<CardName> = [CardName.ALLIED_BANKS];
+    const provided: Array<CardName> = [CardName.ALLIED_BANK];
     const wrapper = shallowMount(PreludesFilter, {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, selected: provided},
@@ -57,7 +57,7 @@ describe('PreludesFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, selected: []},
     });
-    const payload: Array<CardName> = [CardName.ALLIED_BANKS];
+    const payload: Array<CardName> = [CardName.ALLIED_BANK];
     await wrapper.findComponent(ModuleItemFilter).vm.$emit('update:selected', payload);
     const emitted = wrapper.emitted('prelude-list-changed');
     expect(emitted).to.have.length(1);

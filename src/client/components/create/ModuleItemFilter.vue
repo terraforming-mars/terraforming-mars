@@ -1,16 +1,4 @@
-<!--
-  Generic popup filter for grouped item selection.
-
-  Manages All/None/Invert selection, text filtering, and the checkbox list.
-  Callers supply per-item rendering via the #item scoped slot:
-
-    <template #item="{ itemName, icon }">
-      <span>{{ itemName }}</span>
-      <div v-for="m in compat(itemName)" :class="icon(m)"></div>
-    </template>
-
-  Groups whose itemsByGroup entry is empty are hidden automatically.
--->
+<!-- Generic popup filter for grouped item selection. -->
 <template>
   <PopupPanel @close="$emit('close')">
     <template v-slot:header>
@@ -27,11 +15,7 @@
     <div>
       <div class="corporations-filter">
         <template v-for="group in groups">
-          <div
-            class="corporations-filter-group"
-            v-if="(itemsByGroup[group.key] ?? []).length > 0"
-            v-bind:key="group.key"
-          >
+          <div class="corporations-filter-group" v-if="showGroup(group.key)" v-bind:key="group.key" >
             <div class="corporations-filter-toolbox-cont">
               <div>
                 <span v-i18n>{{ group.label }}</span>&nbsp;
@@ -43,11 +27,7 @@
                 <a href="#" v-i18n v-on:click.prevent="invertSelection(group.key)">Invert</a>
               </div>
             </div>
-            <div
-              v-for="item in itemsByGroup[group.key]"
-              v-bind:key="item"
-              v-show="include(item)"
-            >
+            <div v-for="item in itemsByGroup[group.key]" v-bind:key="item" v-show="include(item)">
               <label class="form-checkbox">
                 <input type="checkbox" v-model="localSelected" :value="item"/>
                 <i class="form-icon"></i>
@@ -138,6 +118,11 @@ function icon(module: string | undefined): string | undefined {
   if (module === 'colonies') suffix = 'colony';
   if (module === 'moon') suffix = 'themoon';
   return `create-game-expansion-icon expansion-icon-${suffix}`;
+}
+
+function showGroup(key: string) {
+  const items = props.itemsByGroup[key];
+  return (items ?? []).length > 0;
 }
 
 watch(localSelected, (value) => {

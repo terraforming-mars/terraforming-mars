@@ -307,6 +307,14 @@
                               </label>
                             </template>
 
+                            <template v-if="expansions.ceo">
+                            <input type="checkbox" v-model="showCeosList" id="customCeos-checkbox">
+                              <label for="customCeos-checkbox">
+                                  <span v-i18n>Custom CEOs list</span>
+                                  <span v-if="customCeos.length">&nbsp;({{ customCeos.length }})</span>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
@@ -521,6 +529,16 @@
                 @close="showColoniesList = false"
             ></ColoniesFilter>
 
+            <CeosFilter
+                ref="ceosFilter"
+                v-show="showCeosList"
+                v-if="showCeosList"
+                v-on:ceo-list-changed="updateCustomCeos"
+                v-bind:expansions="expansions"
+                v-bind:selected="customCeos"
+                @close="showCeosList = false"
+            ></CeosFilter>
+
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
@@ -550,6 +568,7 @@ import {Color, PLAYER_COLORS} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
+import CeosFilter from '@/client/components/create/CeosFilter.vue';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
@@ -598,6 +617,7 @@ export default defineComponent({
   components: {
     AppButton,
     CardsFilter,
+    CeosFilter,
     ColoniesFilter,
     CorporationsFilter,
     PreludesFilter,
@@ -761,6 +781,9 @@ export default defineComponent({
     },
     updateCustomColonies(customColonies: Array<ColonyName>) {
       this.customColonies = customColonies;
+    },
+    updateCustomCeos(customCeos: Array<CardName>) {
+      this.customCeos = customCeos;
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
@@ -1120,6 +1143,7 @@ export default defineComponent({
         showOtherPlayersVP,
         customCorporationsList: customCorporations,
         customColoniesList: customColonies,
+        customCeos: customCeos,
         customPreludes,
         bannedCards,
         includedCards,
@@ -1157,7 +1181,6 @@ export default defineComponent({
             penaltyVPPerPeriod: this.escapeVelocityPenalty,
           } : undefined,
         twoCorpsVariant,
-        customCeos,
         startingCeos,
         startingPreludes,
       };

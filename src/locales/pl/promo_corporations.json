@@ -6,7 +6,7 @@
     "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "Akcja: Umieść znacznik wspólnoty (Twój znacznik gracza) na niezarezerwowanym polu na planszy sąsiadującym z Twoim obszarem lub innym znacznikiem wspólnoty.",
     "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "Pola ze znacznikami wspólnoty są dla Ciebie zarezerwowane. Gdy umieszczasz na nich dowolny obszar, otrzymujesz 3 M€.",
 
-	"Astrodrill": "",
+	"AstroDrill": "",
     "Astrodrill ENT": "Astrodrill",
     "You start with 35 M€ and 3 asteroid resources.": "Zaczynasz z 35 M€ oraz 3 jednostkami asteroid.",
     "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Akcja: Umieść 1 jednostkę asteroid na dowolnej karcie, lub otrzymaj 1 dowolną jednostkę zasobów, lub wydaj 1 jednostkę asteroid z tej karty, aby otrzymać 3 jednostki tytanu.",

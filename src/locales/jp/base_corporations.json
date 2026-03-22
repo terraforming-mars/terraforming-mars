@@ -12,8 +12,7 @@
     "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "効果：20MC以上の標準プロジェクトを実行時 または 元のプレイコスト20MC以上のカードをプレイ時、4MC獲得.",
 
     "ECOLINE": "",
-    "Ecoline": "",
-    "EcoLine": "エコライン",
+    "Ecoline": "エコライン",
     " EcoLine ": "エコライン",
     "You start with 2 plant production, 3 plants, and 36 M€.": "初期資源：36MC. 3植物. 初期産出：植物産出+2.",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "効果：緑地を配置するコストが8植物→7植物へ減る.",
@@ -55,7 +54,7 @@
     "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "効果：火星上への都市タイル1枚配置される毎に、MC産出+1. 火星外含む都市タイル1枚配置する毎に、3MC獲得.",
 
     "THORGATE": "",
-    "Thorgate": "トールゲート",
+    "ThorGate": "トールゲート",
     " Thorgate ": "トールゲート",
     "You start with 1 energy production and 48 M€.":"初期資源：48MC. 初期産出：電力産出+1.",
     "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "効果：電力タグカードのプレイコスト-3MC. 標準プロジェクト「発電所の設置」のコスト-3MC.",

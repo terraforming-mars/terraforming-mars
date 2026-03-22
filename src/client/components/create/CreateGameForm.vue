@@ -1038,7 +1038,7 @@ export default defineComponent({
 
       if (energyProductionBug === true) {
         const confirm = window.confirm(translateText(
-          'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
+          'It is possible with ThorGate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
         if (confirm === false) return;
       }
 

@@ -307,6 +307,14 @@
                               </label>
                             </template>
 
+                            <template v-if="expansions.ceo">
+                            <input type="checkbox" v-model="showCeosList" id="customCeos-checkbox">
+                              <label for="customCeos-checkbox">
+                                  <span v-i18n>Custom CEOs list</span>
+                                  <span v-if="customCeos.length">&nbsp;({{ customCeos.length }})</span>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
@@ -521,6 +529,16 @@
                 @close="showColoniesList = false"
             ></ColoniesFilter>
 
+            <CeosFilter
+                ref="ceosFilter"
+                v-show="showCeosList"
+                v-if="showCeosList"
+                v-on:ceo-list-changed="updateCustomCeos"
+                v-bind:expansions="expansions"
+                v-bind:selected="customCeos"
+                @close="showCeosList = false"
+            ></CeosFilter>
+
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
@@ -550,6 +568,7 @@ import {Color, PLAYER_COLORS} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
+import CeosFilter from '@/client/components/create/CeosFilter.vue';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
@@ -598,6 +617,7 @@ export default defineComponent({
   components: {
     AppButton,
     CardsFilter,
+    CeosFilter,
     ColoniesFilter,
     CorporationsFilter,
     PreludesFilter,
@@ -761,6 +781,9 @@ export default defineComponent({
     },
     updateCustomColonies(customColonies: Array<ColonyName>) {
       this.customColonies = customColonies;
+    },
+    updateCustomCeos(customCeos: Array<CardName>) {
+      this.customCeos = customCeos;
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
@@ -988,39 +1011,36 @@ export default defineComponent({
         if (confirm === false) return;
       }
 
-      if (getCard(CardName.SUITABLE_INFRASTRUCTURE) !== undefined) {
-        throw new Error('Restore the infinite energy warning if Suitable Infrastructure is in play.');
+      // Check Prelude 2 + Pathfinders infinite energy production
+      let energyProductionBug = true;
+      if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+        energyProductionBug = false;
       }
-      // // Check Prelude 2 + Pathfinders
-      // let energyProductionBug = true;
-      // if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
-      //   energyProductionBug = false;
-      // }
-      // if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
-      //   energyProductionBug = false;
-      // }
+      if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
+        energyProductionBug = false;
+      }
 
-      // if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
-      //   energyProductionBug = false;
-      // } else {
-      //   if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
-      //     energyProductionBug = false;
-      //   }
-      // }
+      if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+          energyProductionBug = false;
+        }
+      }
 
-      // if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
-      //   energyProductionBug = false;
-      // } else {
-      //   if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
-      //     energyProductionBug = false;
-      //   }
-      // }
+      if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+          energyProductionBug = false;
+        }
+      }
 
-      // if (energyProductionBug === true) {
-      //   const confirm = window.confirm(translateText(
-      //     'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
-      //   if (confirm === false) return;
-      // }
+      if (energyProductionBug === true) {
+        const confirm = window.confirm(translateText(
+          'It is possible with ThorGate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
+        if (confirm === false) return;
+      }
 
       // Check custom corp count
       if (customCorporations.length > 0) {
@@ -1123,6 +1143,7 @@ export default defineComponent({
         showOtherPlayersVP,
         customCorporationsList: customCorporations,
         customColoniesList: customColonies,
+        customCeos: customCeos,
         customPreludes,
         bannedCards,
         includedCards,
@@ -1160,7 +1181,6 @@ export default defineComponent({
             penaltyVPPerPeriod: this.escapeVelocityPenalty,
           } : undefined,
         twoCorpsVariant,
-        customCeos,
         startingCeos,
         startingPreludes,
       };

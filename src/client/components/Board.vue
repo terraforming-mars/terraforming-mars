@@ -397,7 +397,7 @@ export default defineComponent({
     },
     temperature: {
       type: Number,
-      default: 0,
+      default: constants.MIN_TEMPERATURE,
     },
     expansions: {
       type: Object as () => Record<Expansion, boolean>,

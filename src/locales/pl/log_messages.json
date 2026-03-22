@@ -119,7 +119,7 @@
   "drew": "dobiera",
   "bought": "kupuje",
   "sold": "sprzedaje",
-  "${0} card(s) were discarded": "Odrzucono kart: ${0}.",
+  "Discarded ${0} cards ${1}": "Odrzucono kart: ${0}. ${1}",
   "Select space next to greenery for special tile": "Wybierz obszar sąsiadujący z obszarem zieleni do umieszczenia obszaru specjalnego.",
   "Gain plants": "Otrzymujesz jednostki roślinności",
   "Add animals": "Dodaj jednostki zwierząt",

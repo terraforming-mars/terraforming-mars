@@ -258,7 +258,7 @@
     "drew": "ドロー",
     "bought": "購入",
     "sold": "売却",
-    "${0} card(s) were discarded": "${0}枚のカードが捨てられました",
+    "Discarded ${0} cards ${1}": "${0}枚のカードが捨てられました ${1}",
     "Select space next to greenery for special tile": "特殊タイルの為に緑地に隣接する箇所を選択してください",
     "Gain plants": "植物獲得",
     "Add animals": "動物追加",

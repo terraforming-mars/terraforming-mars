@@ -7,7 +7,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "アクション：自身の所有タイル または 共同体 に隣接する非予定地の空きマスに共同体を配置.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "効果：共同体マスにタイル配置ができるのはあなただけ. 共同体マスにタイル配置を行う毎に3MC獲得.",
 
-  "Astrodrill": "アストロドリル",
+  "AstroDrill": "アストロドリル",
   " Astrodrill ": "アストロドリル",
   "Astrodrill ENT": "",
   "You start with 35 M€ and 3 asteroid resources.": "初期資源：35MC. このカード上に3小惑星獲得.",

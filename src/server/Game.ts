@@ -1682,6 +1682,10 @@ export class Game implements IGame, Logger {
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((milestoneName) => {
       milestoneName = maybeRenamedMilestone(milestoneName);
+      // TODO(kberg): Tycoon10 had the wrong name. Remove this by 2026-04-15
+      if (milestoneName === 'Tycoon' && gameOptions.modularMA) {
+        milestoneName = 'Tycoon10';
+      }
       const milestone = milestoneManifest.create(milestoneName);
       if (milestone !== undefined) {
         milestones.push(milestone);

@@ -52,6 +52,6 @@ describe('LogMessageComponent', () => {
     const cardSpans = wrapper.findAll('.log-card');
     expect(cardSpans).to.have.length(2);
     expect(cardSpans[0].text()).to.equal('Ants');
-    expect(cardSpans[1].text()).to.equal('EcoLine');
+    expect(cardSpans[1].text()).to.equal('Ecoline');
   });
 });

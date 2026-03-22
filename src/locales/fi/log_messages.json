@@ -306,7 +306,7 @@
   "drew": "nosti",
   "bought": "osti",
   "sold": "myi",
-  "${0} card(s) were discarded": "${0} korttia heitettiin pois",
+  "Discarded ${0} cards ${1}": "${0} korttia heitettiin pois ${1}",
   "Select space next to greenery for special tile": "Valitse tila viheralueen vierestä erikoislaattaa varten",
   "Gain plants": "Saat kasveja",
   "Add animals": "Lisää eläimiä",

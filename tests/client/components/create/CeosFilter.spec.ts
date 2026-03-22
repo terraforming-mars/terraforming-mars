@@ -1,17 +1,19 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
-import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
+import CeosFilter from '@/client/components/create/CeosFilter.vue';
 import ModuleItemFilter from '@/client/components/create/ModuleItemFilter.vue';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {CardName} from '@/common/cards/CardName';
 
-describe('CorporationsFilter', () => {
+const EXPANSIONS = {...DEFAULT_EXPANSIONS, ceo: true};
+
+describe('CeosFilter', () => {
   it('mounts without errors', () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
       props: {
-        expansions: {...DEFAULT_EXPANSIONS},
+        expansions: EXPANSIONS,
         selected: [],
       },
     });
@@ -19,35 +21,35 @@ describe('CorporationsFilter', () => {
   });
 
   it('renders a ModuleItemFilter child', () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
+      props: {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, selected: []},
     });
     expect(wrapper.findComponent(ModuleItemFilter).exists()).to.be.true;
   });
 
-  it('passes "Corporations" as the title', () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+  it('passes "CEOs" as the title', () => {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
+      props: {expansions: EXPANSIONS, selected: []},
     });
-    expect(wrapper.findComponent(ModuleItemFilter).props('title')).to.eq('Corporations');
+    expect(wrapper.findComponent(ModuleItemFilter).props('title')).to.eq('CEOs');
   });
 
   it('uses the provided selection when selected is non-empty', () => {
     const provided: Array<CardName> = [CardName.HELION];
-    const wrapper = shallowMount(CorporationsFilter, {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: provided},
+      props: {expansions: EXPANSIONS, selected: provided},
     });
     const inner = wrapper.findComponent(ModuleItemFilter);
     expect(inner.props('selected')).to.deep.eq(provided);
   });
 
-  it('auto-selects base corporations when selected is empty', () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+  it('auto-selects base Ceos when selected is empty', () => {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
+      props: {expansions: EXPANSIONS, selected: []},
     });
     const inner = wrapper.findComponent(ModuleItemFilter);
     const selected: Array<string> = inner.props('selected');
@@ -56,22 +58,22 @@ describe('CorporationsFilter', () => {
     expect(selected).not.to.include(CardName.BEGINNER_CORPORATION);
   });
 
-  it('emits corporation-list-changed when ModuleItemFilter emits update:selected', async () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+  it('emits ceo-list-changed when ModuleItemFilter emits update:selected', async () => {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
+      props: {expansions: EXPANSIONS, selected: []},
     });
     const payload: Array<CardName> = [CardName.HELION];
     await wrapper.findComponent(ModuleItemFilter).vm.$emit('update:selected', payload);
-    const emitted = wrapper.emitted('corporation-list-changed');
+    const emitted = wrapper.emitted('ceo-list-changed');
     expect(emitted).to.have.length(1);
     expect(emitted![0][0]).to.deep.eq(payload);
   });
 
   it('emits close when ModuleItemFilter emits close', async () => {
-    const wrapper = shallowMount(CorporationsFilter, {
+    const wrapper = shallowMount(CeosFilter, {
       ...globalConfig,
-      props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
+      props: {expansions: EXPANSIONS, selected: []},
     });
     await wrapper.findComponent(ModuleItemFilter).vm.$emit('close');
     expect(wrapper.emitted('close')).to.have.length(1);

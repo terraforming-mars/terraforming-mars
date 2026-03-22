@@ -14,6 +14,13 @@ const CARD_RENAMES = new Map<string, CardName>([
   // eg
   // TODO(yournamehere): remove after 2021-04-05
   // ['Space Corridors', CardName.SPACE_LANES],
+
+  // #2839: Fix card names to match printed English versions
+  ['Thorgate', CardName.THORGATE],
+  ['Terralabs Research', CardName.TERRALABS_RESEARCH],
+  ['Astrodrill', CardName.ASTRODRILL],
+  ['EcoLine', CardName.ECOLINE],
+  ['Colony', CardName.BUILD_COLONY_STANDARD_PROJECT],
 ]);
 
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {

@@ -44,6 +44,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   heat: number;
   heatProduction: number;
   id: PlayerId;
+  jovianTagCount: number;
   lastCardPlayed?: CardName;
   ceoCardsInHand: Array<CardName>;
   megaCreditProduction: number;
@@ -76,6 +77,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   totalDelegatesPlaced: number;
   tradesThisGeneration: number;
   turmoilPolicyActionUsed: boolean;
+  deltaProjectActionUsedThisGeneration: boolean;
   underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   user?: DiscordId;

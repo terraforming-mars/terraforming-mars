@@ -149,6 +149,7 @@ export interface ICard {
   onColonyAdded?: never;
 
   onNonCardTagAdded?(player: IPlayer, tag: Tag): void;
+  onNonCardTagAddedByAnyPlayer?(cardOwner: IPlayer, tag: Tag): void;
 
   readonly cost?: number; /** Used with IProjectCard and PreludeCard. */
   readonly type: CardType;

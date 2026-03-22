@@ -46,6 +46,7 @@ import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
+import {DeltaProjectExpansion} from './delta/DeltaProjectExpansion';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
@@ -144,6 +145,9 @@ export class Player implements IPlayer {
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
+
+  // Delta Project
+  public deltaProjectActionUsedThisGeneration: boolean = false;
 
   public oceanBonus: number = constants.OCEAN_BONUS;
 
@@ -603,6 +607,7 @@ export class Player implements IPlayer {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
+    this.deltaProjectActionUsedThisGeneration = false;
 
     if (this.playedCards.has(CardName.SUPERCAPACITORS)) {
       Supercapacitors.onProduction(this);
@@ -1559,6 +1564,11 @@ export class Player implements IPlayer {
       action.options.push(turmoilInput);
     }
 
+    // Delta Project
+    if (DeltaProjectExpansion.canAct(this)) {
+      action.options.push(DeltaProjectExpansion.action(this));
+    }
+
     // Action cards
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(this.playActionCard());
@@ -1756,12 +1766,14 @@ export class Player implements IPlayer {
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
+      deltaProjectActionUsedThisGeneration: this.deltaProjectActionUsedThisGeneration,
       hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
       oceanBonus: this.oceanBonus,
       // Custom cards
       // Leavitt Station.
       scienceTagCount: this.tags.extraScienceTags,
       plantTagCount: this.tags.extraPlantTags,
+      jovianTagCount: this.tags.extraJovianTags,
       // Ecoline
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
@@ -1832,6 +1844,7 @@ export class Player implements IPlayer {
     player.removingPlayers = d.removingPlayers;
     player.tags.extraScienceTags = d.scienceTagCount;
     player.tags.extraPlantTags = d.plantTagCount;
+    player.tags.extraJovianTags = d.jovianTagCount ?? 0;
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
@@ -1841,6 +1854,7 @@ export class Player implements IPlayer {
     player.colonies.usedTradeFleets = d.tradesThisGeneration;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.deltaProjectActionUsedThisGeneration = d.deltaProjectActionUsedThisGeneration ?? false;
     player.user = d.user;
 
     // Rebuild removed from play cards (Playwrights, Odyssey)

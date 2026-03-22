@@ -55,6 +55,8 @@ import {MultiSet} from 'mnemonist';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
+import {DeltaProjectData} from './delta/DeltaProjectData';
+import {DeltaProjectExpansion} from './delta/DeltaProjectExpansion';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
@@ -150,6 +152,7 @@ export class Game implements IGame, Logger {
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
+  public deltaProjectData: DeltaProjectData | undefined;
   public underworldData: UnderworldData = UnderworldExpansion.initializeGameWithoutUnderworld();
   public inTurmoil: boolean = false;
 
@@ -264,6 +267,7 @@ export class Game implements IGame, Logger {
         ceo: options.ceoExtension ?? false,
         starwars: options.starWarsExpansion ?? false,
         underworld: options.underworldExpansion ?? false,
+        deltaProject: options.deltaProjectExpansion ?? false,
       };
     }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
@@ -355,6 +359,10 @@ export class Game implements IGame, Logger {
 
     if (gameOptions.pathfindersExpansion) {
       game.pathfindersData = PathfindersExpansion.initialize(game);
+    }
+
+    if (game.gameOptions.deltaProjectExpansion) {
+      game.deltaProjectData = DeltaProjectExpansion.initialize(game);
     }
 
     // Failsafe for exceeding corporation pool
@@ -474,6 +482,7 @@ export class Game implements IGame, Logger {
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
       pathfindersData: PathfindersData.serialize(this.pathfindersData),
+      deltaProjectData: DeltaProjectData.serialize(this.deltaProjectData),
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       preludeDeck: this.preludeDeck.serialize(),
@@ -1730,6 +1739,10 @@ export class Game implements IGame, Logger {
 
     if (d.pathfindersData !== undefined && gameOptions.pathfindersExpansion === true) {
       game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
+    }
+
+    if (d.deltaProjectData !== undefined) {
+      game.deltaProjectData = DeltaProjectData.deserialize(d.deltaProjectData);
     }
 
     if (d.underworldData !== undefined) {

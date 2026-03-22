@@ -1,4 +1,7 @@
 {
+  "Rules": "Regeln",
+  "Official Expansions": "Offizielle Erweiterungen",
+  "Fan Expansions": "Fan-Erweiterungen",
   "Card Tags": "Kartensymbole",
   "Fan Expansion Tags": "Kartensymbole von Fan-Erweiterungen",
   "Resources": "Ressourcen",
@@ -22,7 +25,7 @@
   "Moon": "Mond",
   "Mars": "",
   "Clone": "Klon",
-  "MegaCredits (M€)": "",
+  "MegaCredits (M€)": "Mega Credits (M€)",
   "Steel": "Stahl",
   "Titanium": "Titan",
   "Energy": "Energie",

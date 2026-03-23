@@ -81,9 +81,9 @@ whether the code matches existing standards, and how it fits into the codebase. 
 
 ### Code quality
 
-AI-generated code has recognizable patterns: verbosity, nonexistent APIs, overzealous defensive tests,  We apply the
-same standards to all contributions regardless of how they were written. Code that looks like it didn't get a careful
-pass before submission will be sent back for revision.
+AI-generated code has recognizable anti-patterns: verbosity, nonexistent APIs, overzealous defensive tests,  We apply
+the same standards to all contributions regardless of how they were written. Code that looks like it didn't get a
+careful pass before submission will be sent back for revision.
 
 ## Questions?
 

@@ -227,7 +227,7 @@ describeDatabaseSuite({
       }
 
       // Player's first action
-      expect(game.activePlayer).eq(player.id);
+      expect(game.activePlayer.id).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       // Taking an action triggers a save (when undo is enabled.)
@@ -242,7 +242,7 @@ describeDatabaseSuite({
       expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Player's second action
-      expect(game.activePlayer).eq(player.id);
+      expect(game.activePlayer.id).eq(player.id);
       expect(player.actionsTakenThisRound).eq(1);
 
       takeAction(player);
@@ -253,7 +253,7 @@ describeDatabaseSuite({
       // It is now the second player's turn. This test doesn't care about what the
       // second player does, but it is just a cue that the server has done a few things.
       // This test cares about the database things it does.
-      expect(game.activePlayer).eq(player2.id);
+      expect(game.activePlayer.id).eq(player2.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       // Notice how save-count was 3 and is now 5. It saved twice.
@@ -283,14 +283,14 @@ describeDatabaseSuite({
       game.playerIsFinishedWithResearchPhase(player2);
       runAllActions(game);
       expect(game.phase).eq(Phase.ACTION);
-      expect(game.activePlayer).eq(player2.id);
+      expect(game.activePlayer.id).eq(player2.id);
 
       await db.awaitAllSaves();
 
       player2.pass();
       game.playerIsFinishedTakingActions();
       runAllActions(game);
-      expect(game.activePlayer).eq(player.id);
+      expect(game.activePlayer.id).eq(player.id);
 
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
@@ -307,7 +307,7 @@ describeDatabaseSuite({
         });
       }
 
-      expect(game.activePlayer).eq(player.id);
+      expect(game.activePlayer.id).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
@@ -389,7 +389,7 @@ describeDatabaseSuite({
         });
       }
 
-      expect(game.activePlayer).eq(player.id);
+      expect(game.activePlayer.id).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);

@@ -77,6 +77,7 @@ export type SelectPaymentModel = BaseInputModel & {
   auroraiData: number;
   kuiperAsteroids: number;
   spireScience: number;
+  reserveUnits: Readonly<Units> | undefined; // Built to support the Merchant milestone.
 }
 
 export type SelectPlayerModel = BaseInputModel & {

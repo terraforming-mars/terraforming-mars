@@ -1042,7 +1042,8 @@ export class Player implements IPlayer {
     if (this.game.allMilestonesClaimed()) {
       return [];
     }
-    if ((this.canAfford(this.milestoneCost()) || this.playedCards.has(CardName.VANALLEN))) {
+    const cost = this.milestoneCost();
+    if (cost === 0 || this.canAfford(cost)) {
       return this.game.milestones
         .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
     }
@@ -1053,21 +1054,30 @@ export class Player implements IPlayer {
     if (this.game.milestoneClaimed(milestone)) {
       throw new Error(milestone.name + ' is already claimed');
     }
-    this.game.claimedMilestones.push({
-      player: this,
-      milestone: milestone,
-    });
-    // VanAllen CEO Hook for Milestones
-    const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
-    if (vanAllen !== undefined) {
-      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
-    }
-    if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
+
+    const recordClaim = () => {
+      this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
+      this.game.claimedMilestones.push({
+        player: this,
+        milestone: milestone,
+      });
+      // VanAllen CEO Hook for Milestones
+      const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
+      if (vanAllen !== undefined) {
+        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+      }
+    };
+
+    if (this.playedCards.has(CardName.VANALLEN)) {
+      recordClaim();
+    } else {
       const baseCost = this.milestoneCost();
       const cost = baseCost + ((milestone.name === 'Briber') ? 12 : 0);
-      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+      const reserveUnits = milestone.name === 'Merchant' ? Units.every(2) : Units.EMPTY;
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone', reserveUnits: reserveUnits})).andThen(() => {
+        recordClaim();
+      });
     }
-    this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
   }
 
   private isStagedProtestsActive() {
@@ -1080,7 +1090,7 @@ export class Player implements IPlayer {
   }
 
   public milestoneCost() {
-    if (this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
+    if (this.playedCards.has(CardName.VANALLEN) || this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
       return 0;
     }
     return this.isStagedProtestsActive() ? MILESTONE_COST + 8 : MILESTONE_COST;
@@ -1245,6 +1255,9 @@ export class Player implements IPlayer {
     return true;
   }
 
+  /**
+   * Returns the most you can spend if the given reserved units are excluded.
+   */
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
       megaCredits: this.megaCredits - reserveUnits.megacredits,
@@ -1363,6 +1376,10 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
+    // Short circuit when players have enough MC.
+    if (typeof(o) === 'number' && o <= this.stock.megacredits) {
+      return true;
+    }
     const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
     return this.canAffordInternal(options).canAfford;
   }
@@ -1520,7 +1537,6 @@ export class Player implements IPlayer {
       .setTitle(this.actionsTakenThisRound === 0 ? 'Take your first action' : 'Take your next action')
       .setButtonLabel('Take action');
 
-    // VanAllen can claim milestones for free:
     const claimableMilestones = this.claimableMilestones();
     if (claimableMilestones.length > 0) {
       const milestoneOption = new OrOptions().setTitle('Claim a milestone');

@@ -2,8 +2,8 @@
   <div class="resource_items_cont">
     <player-resource
       :type="Resource.MEGACREDITS"
-      :count="player.megaCredits"
-      :production="player.megaCreditProduction"
+      :count="player.megacredits"
+      :production="player.megacreditProduction"
       :resourceProtection="player.protectedResources.megacredits"
       :productionProtection="player.protectedProduction.megacredits"/>
     <player-resource

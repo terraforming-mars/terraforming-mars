@@ -42,7 +42,7 @@ describe('ToolWithTheFirstOrder', () => {
     player.takeAction();
     const [waitingFor, cb] = player.popWaitingFor2();
     const playProjectCard = findOption(waitingFor!, 'Play project card');
-    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megaCredits: 5}));
+    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megacredits: 5}));
     cb!();
     runAllActions(game);
 

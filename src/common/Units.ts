@@ -63,6 +63,20 @@ export namespace Units {
   }
 
   /**
+   * Returns a Units where every field is the same value.
+   */
+  export function every(value: number): Units {
+    return {
+      megacredits: value,
+      steel: value,
+      titanium: value,
+      plants: value,
+      energy: value,
+      heat: value,
+    };
+  }
+
+  /**
    * Returns the units, with every value inverted.
    */
   export function negative(units: Units): Units {

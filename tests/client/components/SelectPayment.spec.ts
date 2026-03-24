@@ -289,6 +289,7 @@ describe('SelectPayment', () => {
       kuiperAsteroids: 0,
       seeds: 0,
       spireScience: 0,
+      reserveUnits: undefined,
       ...playerInputFields,
     };
 

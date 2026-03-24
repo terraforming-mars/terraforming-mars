@@ -59,7 +59,7 @@ describe('AeronGenomics', () => {
     selectProjectCardToPlay.process({
       type: 'projectCard',
       card: birds.name,
-      payment: Payment.of({megaCredits: birds.cost}),
+      payment: Payment.of({megacredits: birds.cost}),
     });
     expect(card.resourceCount).eq(1);
   });

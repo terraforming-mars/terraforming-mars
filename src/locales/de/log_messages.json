@@ -454,7 +454,7 @@
   "${0} blackmailed the neutral player and was paid 10 M€.": "${0} hat den neutralen Spieler erpresst und 10 M€ erhalten.",
   "${0} blackmailed ${1} and took 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption genommen hat.",
   "${0} blackmailed ${1} and was paid 10 M€.": "${0} erpresste ${1} und erhielt 10 M€.",
-  "${0} sued ${1} who had ${2} MC.": "${0} beklagt ${1}, der ${2} M€ hatte.",
+  "${0} sued ${1} who had 0 MC.": "${0} beklagt ${1}, der 0 M€ hatte.",
   "${0} selected Global Event ${1} for the current global event": "${0} wählte globales Ereignis ${1} für das aktuelle globale Ereignis aus",
   "Neutral delegate added to ${0}": "Neutrale Delegierte zu ${0} hinzugefügt",
   "${0} sent 1 Neutral delegate in ${1} area": "${0} schickt 1 neutralen Delegierten in die ${1} Partei",

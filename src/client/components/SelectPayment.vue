@@ -14,6 +14,10 @@
         @minus="reduceValue(unit)"
         @max="onMaxClicked(unit)">
       </payment-unit-component>
+      <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)" v-bind:key="unit + '-reserve'">
+        (Some ${0} are reserved for the action and unavailable here.)
+      </div>
+
     </template>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -103,6 +107,20 @@ export default defineComponent({
     hasWarning() {
       return this.warning !== undefined;
     },
+    showReserveWarning(unit: SpendableResource): boolean {
+      const reserveUnits = this.playerinput.reserveUnits;
+      if (reserveUnits === undefined) return false;
+      switch (unit) {
+      case 'megaCredits':
+        return reserveUnits['megacredits'] > 0 && this.canUse('megaCredits');
+      case 'steel':
+      case 'titanium':
+      case 'plants':
+      case 'heat':
+        return reserveUnits[unit] > 0 && this.canUse(unit);
+      }
+      return false;
+    },
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
     },
@@ -112,7 +130,8 @@ export default defineComponent({
       if (!this.canUse(unit)) {
         return 0;
       }
-      const availableUnits = this.getAvailableUnits(unit);
+      const reserve = (this.playerinput.reserveUnits as Partial<Record<SpendableResource, number>>)?.[unit] ?? 0;
+      const availableUnits = Math.max(this.getAvailableUnits(unit) - reserve, 0);
       if (availableUnits === 0) {
         return 0;
       }

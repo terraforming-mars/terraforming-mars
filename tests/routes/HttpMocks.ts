@@ -1,4 +1,4 @@
-import EventEmitter from 'events';
+import {EventEmitter} from 'events';
 import {Request} from '../../src/server/Request';
 import {Response} from '../../src/server/Response';
 

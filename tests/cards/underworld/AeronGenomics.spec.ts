@@ -4,9 +4,12 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectClaimedUndergroundToken} from '../../../src/server/inputs/SelectClaimedUndergroundToken';
 
 describe('AeronGenomics', () => {
   let card: AeronGenomics;
@@ -40,8 +43,44 @@ describe('AeronGenomics', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  // TODO: test action
-  it('TODO action', () => {
+  it('action - discard 2 underground  tokens, add 2 animals to selected card', () => {
+    const birds = new Birds();
+    player.playedCards.push(card, birds);
+    player.underworldData.tokens.push(
+      {token: 'nothing', shelter: false, active: false},
+      {token: 'nothing', shelter: false, active: false},
+    );
+
+    const andOptions = cast(card.action(player), AndOptions);
+    const selectCard = cast(andOptions.options[0], SelectCard);
+    const selectTokens = cast(andOptions.options[1], SelectClaimedUndergroundToken);
+
+    selectCard.cb([birds]);
+    selectTokens.cb([0, 1]);
+    andOptions.cb(undefined);
+
+    expect(birds.resourceCount).eq(2);
+    expect(player.underworldData.tokens).has.length(0);
+  });
+
+  it('action - discard 1 underworld token, add 1 animal to selected card', () => {
+    const birds = new Birds();
+    player.playedCards.push(card, birds);
+    player.underworldData.tokens.push(
+      {token: 'nothing', shelter: false, active: false},
+      {token: 'nothing', shelter: false, active: false},
+    );
+
+    const andOptions = cast(card.action(player), AndOptions);
+    const selectCard = cast(andOptions.options[0], SelectCard);
+    const selectTokens = cast(andOptions.options[1], SelectClaimedUndergroundToken);
+
+    selectCard.cb([birds]);
+    selectTokens.cb([0]);
+    andOptions.cb(undefined);
+
+    expect(birds.resourceCount).eq(1);
+    expect(player.underworldData.tokens).has.length(1);
   });
 
   it('effect', () => {

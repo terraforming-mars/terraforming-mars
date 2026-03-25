@@ -8,3 +8,5 @@ export enum Resource {
 }
 
 export const ALL_RESOURCES = [Resource.MEGACREDITS, Resource.STEEL, Resource.TITANIUM, Resource.PLANTS, Resource.ENERGY, Resource.HEAT] as const;
+
+export type StandardResource = 'megacredits' | 'steel' | 'titanium' | 'plants' | 'energy' | 'heat';

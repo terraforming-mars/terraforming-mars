@@ -31,9 +31,9 @@ type Translation = {[lang: string]: string}
  * },
  */
 
-function getAllTranslations(): {[lang: string]: Translation} {
+function getAllTranslations(): {[phrase: string]: Translation} {
   const translationsPath = path.resolve('src/locales');
-  const translations: {[lang: string]: Translation} = {};
+  const translations: {[phrase: string]: Translation} = {};
 
   const languageDirectories = readdir(
     translationsPath,

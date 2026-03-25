@@ -37,6 +37,7 @@ import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
 import {testGame} from '../TestGame';
 import {MultiSet} from 'mnemonist';
+import {TowingAComet} from '../../src/server/cards/base/TowingAComet';
 
 describe('Turmoil', () => {
   let player: TestPlayer;
@@ -430,7 +431,30 @@ describe('Turmoil', () => {
     expect(player.canPlay(card)).is.true;
   });
 
-  // TODO(kberg): Use Towing a Comet as an example of a multi-TR thing.
+  it('canPlay: reds tax applies for multi-TR card', () => {
+    // TowingAComet raises oxygen 1 step AND places 1 ocean, each costing 3 M€ reds tax.
+    const card = new TowingAComet();
+    const [game, player] = testGame(1, {turmoilExtension: true});
+    const turmoil = Turmoil.getTurmoil(game);
+    game.phase = Phase.ACTION;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+
+    player.megaCredits = card.cost + 5;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 6;
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
+
+    // When oxygen is already maxed, only the ocean costs reds.
+    setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
+    player.megaCredits = card.cost + 2;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
+  });
 
   it('canPlay: reds tax applies by default when raising the venus scale.', () => {
     // GiantSolarShade raises venus three steps.

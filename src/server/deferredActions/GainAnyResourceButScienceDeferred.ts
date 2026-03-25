@@ -4,7 +4,6 @@ import {CardResource} from '../../common/CardResource';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {PlayerInput} from '../PlayerInput';
-import {Units} from '../../common/Units';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
@@ -28,7 +27,7 @@ export class GainAnyResourceButScienceDeferred extends DeferredAction {
     }
     orOptions.options.push(new SelectResource('Gain 1 standard resource')
       .andThen((resource) => {
-        this.player.stock.add(Units.ResourceMap[resource], 1, {log: true});
+        this.player.stock.add(resource, 1, {log: true});
         return undefined;
       }));
     orOptions.options.push(new SelectOption('Gain 1 corruption')

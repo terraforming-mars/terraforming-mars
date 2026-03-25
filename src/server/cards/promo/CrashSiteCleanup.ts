@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Resource} from '../../../common/Resource';
+import {Resource, StandardResource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class CrashSiteCleanup extends Card implements IProjectCard {
@@ -47,7 +47,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     return new OrOptions(gainTitanium, gain2Steel);
   }
 
-  public static resourceHook(player: IPlayer, resource: Resource, amount: number, from: IPlayer) {
+  public static resourceHook(player: IPlayer, resource: Resource | StandardResource, amount: number, from: IPlayer) {
     if (from === player || amount >= 0) {
       return;
     }

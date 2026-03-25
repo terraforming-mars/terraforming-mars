@@ -25,8 +25,6 @@ export class Ingrid extends CeoCard {
     });
   }
 
-  public opgActionIsActive = false;
-
   public action(): PlayerInput | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;

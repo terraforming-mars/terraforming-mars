@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": [
+				"$eslint-stylish",
+				"$tsc"
+			],
+			"group": "build",
+			"label": "npm: build",
+			"detail": "node make_locales.js && eslint src/*.ts && lessc src/styles/common.less styles.css && tsc --build src/tsconfig.json && webpack --config webpack.config.js"
+		},
+		{
+			"type": "npm",
+			"script": "build:tests",
+			"group": "build",
+			"problemMatcher": [
+				"$eslint-stylish",
+				"$tsc"
+			],
+		},
+		{
+			"type": "npm",
+			"script": "test:server",
+			"group": "build",
+			"problemMatcher": [
+				"$eslint-stylish",
+				"$tsc"
+			],
+		},
+		{
+			"type": "npm",
+			"script": "clean",
+			"group": "build",
+			"label": "npm: clean",
+			"detail": "npm run clean"
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"group": "build",
+			"label": "npm: lint",
+			"detail": "npm run lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": "test",
+			"label": "npm: test",
+			"detail": "npm run test",
+		},{
+			"type": "npm",
+			"script": "build:server",
+			"group": "build",
+			"problemMatcher": [
+				"$eslint-stylish",
+				"$tsc"
+			],
+			"label": "npm: build:server",
+			"detail": "npm run build:server"
+		}
+	]
+}

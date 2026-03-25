@@ -10,7 +10,7 @@
   "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "条件：あなたが議長. 次の太陽系フェイズの間、与党が変わらず、議長も変わらない.",
 
   "Tosche Station (IV)": "",
-  "Action: Spend X Energy and gain X-1 plants (max 4.)": "アクション：x電力支払い、x-1植物獲得(最大4).",
+  "Action: Spend X energy and gain X-1 plants (max 4.)": "アクション：x電力支払い、x-1植物獲得(最大4).",
   "max 4": "最大4",
 
   "Cloud City (V)": "",
@@ -26,5 +26,5 @@
   "Take another action this turn. Gain 1 TR.": "1アクションする. TR+1.",
 
   "Rey ... Skywalker?! (IX)": "",
-  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.": "MC産出+4. 非予定地の空きマスに銅キューブを配置. そこに誰もタイルを配置できない."
+  "// Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.": "MC産出+4. 非予定地の空きマスに銅キューブを配置. そこに誰もタイルを配置できない."
 }

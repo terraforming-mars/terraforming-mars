@@ -1,0 +1,50 @@
+{
+
+"CLAIM": "VARAA",
+
+"Battery Shipment": "Akkutoimitus",
+"Gain 12 energy. Increase your energy production 2 steps.": "Saat 12 energiaa. Lisää energiatuotantoasi 2 askelta.",
+
+"Central Reservoir": "Keskussäiliö",
+"Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Then identify the underground resources in all adjacent spaces. Claim 2 of them.": "Aseta meri ALUEELLE JOKA EI OLE VARATTU MERELLE. Sitten tunnista maanalaiset resurssit kaikissa vierekkäisissä tiloissa. Varaa 2 niistä.",
+
+"Cloud Vortex Outpost": "Pilvipyörre-etuvartio",
+"Raise Venus 2 steps. Place 3 floaters on this card.": "Nosta Venusta 2 askelta. Aseta 3 kellujaa tälle kortille.",
+"Action: Remove 1 floater from THIS card to add 1 floater to ANOTHER card": "TOIMINTO: Poista 1 kelluja TÄLTÄ kortilta lisätäksesi 1 kellujan TOISELLE kortille",
+
+"Deepwater Dome": "Syvänmeren kupoli",
+"Effect: When you excavate next to an ocean, gain 2 M€.": "VAIKUTUS: Kun kaivat meren vieressä, Saat 2 M€.",
+"Increase your plant production 1 step. Place an ocean.": "Lisää kasvituotantoasi 1 askel. Aseta meri.",
+
+"Election Sponsorship": "Vaalisponsori",
+"Gain 1 corruption. Place 2 delegates in any party.": "Saat 1 korruption. Aseta 2 edustajaa mihin tahansa puolueeseen.",
+"Effect: You have +1 influence.": "VAIKUTUS: Sinulla on +1 vaikutus.",
+
+"Free Trade Port": "Vapaakauppasatama",
+"Gain 1 corruption. Place a colony.": "Saat 1 korruption. Aseta siirtokunta.",
+
+"Ganymede Trading Company": "Ganymeden Kauppayhtiö",
+"Gain 1 corruption, 3 titanium, and a trade fleet.": "Saat 1 korruption, 3 titaania ja kauppalaivasto.",
+
+"Geological Expertise": "Geologinen asiantuntemus",
+"Identify 4 underground resources. Claim one of them. Draw 2 cards with science tags.": "Tunnista 4 maanalaista resurssia. Varaa yksi niistä. Nosta 2 korttia joissa tiede-tunniste.",
+
+"Inherited Fortune": "Peritty omaisuus",
+"Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "Saat 1 korruption ja 10 M€. Lisää M€-tuotantoasi 1 askel.",
+
+"Investor Plaza": "Sijoittajatori",
+"Place a city and gain 1 corruption.": "Aseta kaupunki ja Saat 1 korruption.",
+
+"Prospecting": "Etsintä",
+"Pay 4 M€. Put an additional colony tile of your choice into play. Then place a colony on it.": "Maksa 4 M€. Tuo valitsemasi ylimääräinen siirtokuntalaatta peliin. Sitten aseta siirtokunta siihen.",
+
+"Secret Research": "Salainen tutkimus",
+"Gain 1 corruption and draw 3 cards.": "Saat 1 korruption ja nosta 3 korttia.",
+
+"Tunneling Operation": "Tunnelointioperaatio",
+"Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.": "Tunnista 1 maanalainen resurssi. Sitten kaiva 2 maanalaista resurssia. Lisää terästuotantoasi 2 askelta.",
+
+"Underground Settlement": "Maanalainen asutus",
+"Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.": "Aseta kaupunki. Sitten tunnista maanalaiset resurssit kaikissa vierekkäisissä tiloissa. Varaa 1 niistä."
+
+}

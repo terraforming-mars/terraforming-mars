@@ -7,19 +7,22 @@ export class LeavittII extends Colony {
   constructor() {
     super({
       name: ColonyName.LEAVITT_II,
-      description: [
-        'Gain 2 science tags and 1 clone tag',
-        'Raise any planetary track n steps',
-        'Gain 2 M€',
-      ],
-
-      buildType: ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG,
-
-      tradeType: ColonyBenefit.RAISE_PLANETARY_TRACK,
-      tradeQuantity: [0, 1, 1, 2, 2, 3, 4],
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusQuantity: 2,
-      colonyBonusResource: Resource.MEGACREDITS,
+      build: {
+        description: 'Gain 2 science tags and 1 clone tag',
+        type: ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG,
+      },
+      trade: {
+        description: 'Raise any planetary track n steps',
+        type: ColonyBenefit.RAISE_PLANETARY_TRACK,
+        quantity: [0, 1, 1, 2, 2, 3, 4],
+      },
+      colony: {
+        description: 'Gain 2 M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 2,
+        resource: Resource.MEGACREDITS,
+      },
+      expansion: 'pathfinders',
     });
   }
 }

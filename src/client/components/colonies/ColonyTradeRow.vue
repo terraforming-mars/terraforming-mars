@@ -27,24 +27,24 @@
       <div><div class="production-box"><div class="production plant"></div></div></div>
       <div><div class="production-box"><div class="production plant"></div></div></div>
     </template>
-    <template v-else v-for="idx in range(7)">
-      <div :key="idx">{{metadata.tradeQuantity[idx]}}</div>
+    <template v-else v-for="idx in range(7)" :key="idx">
+      <div>{{metadata.trade.quantity[idx]}}</div>
     </template>
   </div>
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {range} from '@/common/utils/utils';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ColonyTradeRow',
   props: {
     metadata: {
-      type: Object as () => IColonyMetadata,
+      type: Object as () => ColonyMetadata,
       required: true,
     },
   },

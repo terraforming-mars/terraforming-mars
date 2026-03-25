@@ -16,9 +16,9 @@ describe('TerraformingControlStation', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     card.play(player);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
   it('card discount', () => {

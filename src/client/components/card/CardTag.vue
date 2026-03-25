@@ -4,16 +4,16 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardTag',
   props: {
     index: {
       type: Number,
       required: true,
-      validator: (i) => i < 4,
+      validator: (i: number) => i < 4,
     },
     type: {
       type: String,

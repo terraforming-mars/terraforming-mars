@@ -25,12 +25,12 @@ describe('OffWorldCityLiving', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     expect(moonData.habitatRate).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.production.megacredits).eq(0);
 
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
@@ -45,7 +45,7 @@ describe('OffWorldCityLiving', () => {
     card.play(player);
 
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.production.megacredits).eq(2);
   });
 

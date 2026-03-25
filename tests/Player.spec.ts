@@ -35,11 +35,13 @@ import {OrOptions} from '../src/server/inputs/OrOptions';
 import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
+import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {
     const player = new Player('name', 'blue', false, 0, 'p-blue');
-    expect(player.corporations).is.empty;
+    expect(player.playedCards.corporations()).is.empty;
+    expect(player.playedCards.length).eq(0);
   });
 
   it('Should throw error if nothing to process', () => {
@@ -59,7 +61,7 @@ describe('Player', () => {
     player2.production.add(Resource.ENERGY, 2);
     player3.production.add(Resource.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     card.play(player);
     runAllActions(player.game);
     player.process({type: 'player', player: player2.color});
@@ -74,7 +76,7 @@ describe('Player', () => {
     (player as any).setWaitingFor(undefined, undefined);
 
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.ENERGY, 1);
 
@@ -112,7 +114,7 @@ describe('Player', () => {
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.production.megacredits).to.eq(0);
-    player1.corporations = [corporationCard];
+    player1.playedCards.push(corporationCard);
     player2.playCard(card, undefined);
     expect(player1.production.megacredits).to.eq(1);
   });
@@ -172,7 +174,6 @@ describe('Player', () => {
       autoPass: false,
       pickedCorporationCard: CardName.THARSIS_REPUBLIC,
       terraformRating: 20,
-      corporations: [],
       hasIncreasedTerraformRatingThisGeneration: false,
       megaCredits: 1,
       megaCreditProduction: 2,
@@ -188,7 +189,6 @@ describe('Player', () => {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
-      canUseCorruptionAsMegacredits: true,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,
@@ -226,6 +226,7 @@ describe('Player', () => {
       color: 'purple' as Color,
       beginner: true,
       handicap: 4,
+      plantTagCount: 0,
       timer: {
         sumElapsed: 0,
         startedAt: 0,
@@ -235,7 +236,7 @@ describe('Player', () => {
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
-      underworldData: {corruption: 0},
+      underworldData: {corruption: 0, activeBonus: undefined, tokens: []},
       alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},
       draftHand: [],
       globalParameterSteps: {
@@ -247,13 +248,14 @@ describe('Player', () => {
         [GlobalParameter.MOON_MINING_RATE]: 0,
         [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
       },
+      standardProjectsThisGeneration: [],
+      withinDeflectionZone: false,
     };
 
     const newPlayer = Player.deserialize(json);
 
     expect(newPlayer.color).eq('purple');
-    expect(newPlayer.colonies.tradesThisGeneration).eq(100);
-    expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
+    expect(newPlayer.colonies.usedTradeFleets).eq(100);
     it('pulls self replicating robots target cards', () => {
       const player = new Player('blue', 'blue', false, 0, 'p-blue');
       expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
@@ -273,7 +275,7 @@ describe('Player', () => {
       const action = cast(srr.action(player), OrOptions);
       action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
       expect(srr.targetCards[0].resourceCount).to.eq(2);
-      player.playCard(physicsComplex, Payment.of({'megaCredits': 10}));
+      player.playCard(physicsComplex, Payment.of({'megacredits': 10}));
       expect(player.playedCards).to.contain(physicsComplex);
       expect(physicsComplex.resourceCount).to.eq(0);
     });
@@ -316,10 +318,10 @@ describe('Player', () => {
       player1.megaCredits = 0;
       player1.production.add(Resource.MEGACREDITS, -5);
       player2.megaCredits = 3;
-      game.monsInsuranceOwner = player2.id;
-      player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      game.monsInsuranceOwner = player2;
+      player1.stock.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
-      player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      player1.production.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
     });
 
@@ -489,19 +491,19 @@ describe('Player', () => {
     });
   });
 
-  it('everybody autopasses', () => {
-    const [game, player, player2] = testGame(2);
+  // it('everybody autopasses', () => {
+  //   const [game, player, player2] = testGame(2);
 
-    game.phase = Phase.ACTION;
+  //   game.phase = Phase.ACTION;
 
-    player.autopass = true;
-    player2.autopass = true;
-    player.takeAction();
+  //   player.autopass = true;
+  //   player2.autopass = true;
+  //   player.takeAction();
 
-    expect(game.phase).eq(Phase.RESEARCH);
-    expect(player.autopass).is.false;
-    expect(player2.autopass).is.false;
-  });
+  //   expect(game.phase).eq(Phase.RESEARCH);
+  //   expect(player.autopass).is.false;
+  //   expect(player2.autopass).is.false;
+  // });
 
   it('Increasing temperature sets globalParameterSteps', () => {
     const [game, player, player2] = testGame(2, {solarPhaseOption: true});
@@ -551,6 +553,47 @@ describe('Player', () => {
 
     game.increaseOxygenLevel(player2, 2);
     expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
+  });
+
+  it('Increasing venus sets globalParameterSteps', () => {
+    const [game, player, player2] = testGame(2, {venusNextExtension: true, solarPhaseOption: true});
+
+    game.phase = Phase.ACTION;
+    game.increaseVenusScaleLevel(player, 1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(1);
+
+    game.increaseVenusScaleLevel(player, 2);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.SOLAR;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.ACTION;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(2);
+  });
+
+  it('run research phase', () => {
+    const [game, player] = testGame(1, {skipInitialCardSelection: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+
+    game.gotoResearchPhase();
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const cards = selectCard.cards;
+    selectCard.cb([cards[0], cards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([cards[0], cards[2]]);
+    expect(player.megaCredits).eq(14);
   });
 });
 

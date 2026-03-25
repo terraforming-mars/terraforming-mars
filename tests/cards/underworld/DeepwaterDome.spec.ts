@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {DeepwaterDome} from '../../../src/server/cards/underworld/DeepwaterDome';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TileType} from '../../../src/common/TileType';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
+import {assertPlaceOcean} from '../../assertions';
+import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('DeepwaterDome', () => {
   it('play', () => {
@@ -15,31 +15,32 @@ describe('DeepwaterDome', () => {
     expect(player.production.plants).eq(1);
 
     runAllActions(game);
-    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    const space = selectSpace.spaces[4];
-    expect(space.id).eq('28');
-    space.bonus = [];
-    space.undergroundResources = undefined;
-
-    selectSpace.cb(space);
-
-    expect(space?.tile?.tileType).eq(TileType.OCEAN);
-    expect(space.undergroundResources).is.not.undefined;
-
-    runAllActions(game);
-
-    const selectAdjacentSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(game.board.getAdjacentSpaces(space)).to.have.members(selectAdjacentSpace.spaces);
-    const adjacentSpace = selectAdjacentSpace.spaces[0];
-    adjacentSpace.undergroundResources = undefined;
-
-    selectAdjacentSpace.cb(adjacentSpace);
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
-
-    expect(space.player).is.undefined;
-    expect(adjacentSpace.player).eq(player);
-    expect(adjacentSpace.tile).is.undefined;
-    expect(adjacentSpace.undergroundResources).is.not.undefined;
+    assertPlaceOcean(player, player.popWaitingFor());
   });
+
+  for (const run of [
+    {oceans: 0, excavate: true, expected: 0},
+    {oceans: 1, excavate: false, expected: 0},
+    {oceans: 1, excavate: true, expected: 2},
+    {oceans: 2, excavate: true, expected: 2},
+  ] as const) {
+    it('effect ' + JSON.stringify(run), () => {
+      const card = new DeepwaterDome();
+      const [game, player, player2] = testGame(2, {underworldExpansion: true});
+      player.playedCards.push(card);
+      // Arbitrary space number with room to place oceans.
+      const space = game.board.getSpaceOrThrow('10');
+      const adjacentspaces = game.board.getAdjacentSpaces(space);
+      for (let idx = 0; idx < run.oceans; idx++) {
+        addOcean(player2, adjacentspaces[idx].id);
+      }
+
+      if (run.excavate) {
+        UnderworldExpansion.excavate(player, space);
+      } else {
+        UnderworldExpansion.claim(player, space);
+      }
+      expect(player.megaCredits).eq(run.expected);
+    });
+  }
 });

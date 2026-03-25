@@ -30,10 +30,10 @@ describe('BehemothExcavator', () => {
     const selectSpace1 = cast(player.popWaitingFor(), SelectSpace);
     const space1 = selectSpace1.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space1.undergroundResources = 'plant1';
+    space1.undergroundResources = 'plant2';
     selectSpace1.cb(space1);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2}));
     expect(space1.excavator).eq(player);
 
     runAllActions(game);
@@ -44,7 +44,7 @@ describe('BehemothExcavator', () => {
     space2.undergroundResources = 'titanium2';
     selectSpace2.cb(space2);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2, titanium: 2}));
     expect(space2.excavator).eq(player);
 
     runAllActions(game);
@@ -55,7 +55,7 @@ describe('BehemothExcavator', () => {
     space3.undergroundResources = 'steel2';
     selectSpace3.cb(space3);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, steel: 2, titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2, steel: 2, titanium: 2}));
     expect(space3.excavator).eq(player);
 
     runAllActions(game);

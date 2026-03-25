@@ -8,7 +8,7 @@ describe('Pristar', () => {
     const [game, player] = testGame(2);
 
     const play = card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(play).is.undefined;
     player.megaCredits = 10;
     game.increaseTemperature(player, 1);

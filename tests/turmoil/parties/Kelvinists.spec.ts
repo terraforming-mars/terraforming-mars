@@ -64,10 +64,10 @@ describe('Kelvinists', () => {
     player.stock.add(Resource.HEAT, 6);
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
     kelvinistsPolicy.action(player);
     expect(player.heat).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(initialTR + 1);
+    expect(player.terraformRating).to.eq(initialTR + 1);
     expect(game.getTemperature()).to.eq(-28);
   });
 
@@ -75,7 +75,7 @@ describe('Kelvinists', () => {
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_3.id);
 
     const stormcraft = new StormCraftIncorporated();
-    player.corporations.push(stormcraft);
+    player.playedCards.push(stormcraft);
     stormcraft.resourceCount = 2;
     player.stock.add(Resource.HEAT, 8);
 

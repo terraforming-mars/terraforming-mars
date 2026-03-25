@@ -18,7 +18,7 @@ export class SubterraneanSea extends Card implements IProjectCard {
       tr: {oceans: 1},
 
       metadata: {
-        cardNumber: 'U15',
+        cardNumber: 'U015',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).excavate().asterix();
         }),

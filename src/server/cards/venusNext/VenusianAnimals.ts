@@ -6,6 +6,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {ICard} from '../ICard';
 
 export class VenusianAnimals extends Card implements IProjectCard {
   constructor() {
@@ -30,11 +31,13 @@ export class VenusianAnimals extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const qty = player.tags.cardTagCount(card, Tag.SCIENCE);
     player.addResourceTo(this, {qty, log: true});
   }
-  public onColonyAddedToLeavitt(player: IPlayer): void {
-    player.addResourceTo(this, {qty: 1, log: true});
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
   }
 }

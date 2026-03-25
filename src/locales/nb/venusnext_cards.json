@@ -1,5 +1,5 @@
 {
-	"% Venus": "% Venus",
+	"% Venus": "",
 
 	"Stratospheric Birds": "Stratosfærefugler",
 	"Action: Add 1 animal to this card.": "Handling: Legg til 1 dyr på dette kortet",
@@ -46,7 +46,7 @@
 	"Terraforming Contract": "Terraformingskontrakt",
 	"Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Krever at du har minst 25 TR. Øk M€-produksjonen din med 4 trinn.",
 
-	"Solarnet": "Solarnet",
+	"Solarnet": "",
 	"Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Krever Venus-, Jord- og Jupitersymboler. Trekk 2 kort.",
 
 	"Atalanta Planitia Lab": "Atalanta-Planitia-Laboratorium",
@@ -57,7 +57,7 @@
 	"Action: Spend 1 resource from this card to increase Venus 1 step.": "Handling: Bruk 1 ressurs fra dette kortet for å øke Venus med 1 trinn.",
 	"Venus must be 14% or lower": "Venus må være 14% eller lavere",
 
-	"Omnicourt": "Omnicourt",
+	"Omnicourt": "",
 	"Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Krever Venus-, Jord- og Jupitersymboler. Øk TR med 2 trinn.",
 
 	"Jet Stream Microscrappers": "Jetstrøm-mikroskrapere",
@@ -119,29 +119,29 @@
 	"Action: Spend 2 floaters here to increase Venus 1 step.": "Handling: Bruk 2 svevere her for å øke Venus med 1 trinn.",
 
 	"Freyja Biodomes": "Freyja biodomer",
-	"10% Venus": "10% Venus",
+	"10% Venus": "",
 	"Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Krever 10% på Venus-sporet. Legg til 2 mikrober eller 2 dyr på et annet Venus-kort. Produksjon: energi -1, M€ +2.",
 
 	"Giant Solar Shade": "Gigantisk solskjerm",
 	"Raise Venus 3 steps.": "Øk Venus med 3 trinn.",
 
-	"Gyropolis": "Gyropolis",
+	"Gyropolis": "",
 	"Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Senk energiproduksjonen din med 2 trinn. Øk M€-produksjonen din med 1 trinn for hvert Venus- og Jord-symbol du har. Plasser en by.",
 
 	"Io Sulphur Research": "Io-svovelforskning",
 	"Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Trekk 1 kort, eller trekk 3 hvis du har minst 3 Venus-symboler.",
 
 	"Ishtar Mining": "Ishtar-gruvedrift",
-	"8% Venus": "8% Venus",
+	"8% Venus": "",
 	"Requires Venus 8%. Increase your titanium production 1 step.": "Krever Venus 8%. Øk titanproduksjonen din med 1 trinn.",
 
-	"Luna Metropolis": "Luna Metropolis",
+	"Luna Metropolis": "",
 	"Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Øk M€-produksjonen din med 1 trinn for hvert Jord-symbol du har, inkludert dette. Plasser en by på det RESERVERTE OMRÅDE.",
 
 	"Local Shading": "Lokal skygge",
 	"Action: Spend 1 floater here to raise your M€ production 1 step.": "Handling: Bruk 1 svever her for å øke M€-produksjonen din med 1 trinn.",
 
-	"Maxwell Base": "Maxwell base",
+	"Maxwell Base": "",
 	"Action: Add 1 resource to ANOTHER VENUS CARD.": "Handling: Legg til 1 ressurs på ET ANNET VENUS-KORT.",
 	"Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": "Krever Venus 12%. Senk energiproduksjonen din med 1 trinn. Plasser en by på det RESERVERTE OMRÅDE.",
 
@@ -149,7 +149,7 @@
 	"Venus Earth": "Venus Jord",
 	"Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Krever Venus- og Jord-symboler. Øk M€-produksjonen din med 3 trinn.",
 
-	"Stratopolis": "Stratopolis",
+	"Stratopolis": "",
 	"Action: Add 2 floaters to ANY VENUS CARD.": "Handling: Legg til 2 svevere på ET VENUS-KORT.",
 	"1 VP for every 3rd Floater on this card.": "1 SP for hver 3. svever på dette kortet.",
 	"Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": "Krever 2 vitenskapssymboler. Øk M€-produksjonen din med 2 trinn. Plasser en by på det RESERVERTE OMRÅDE",
@@ -158,7 +158,7 @@
 	"Requires 2 Venus tags. Increase your M€ production 2 steps.": "Krever 2 Venus-symboler. Øk M€-produksjonen din med 2 trinn.",
 
 	"Venusian Animals": "Dyr på Venus",
-	"18% Venus": "18% Venus",
+	"18% Venus": "",
 	"Effect: When you play a science tag, including this, add 1 animal to this card.": "Effekt: Når du spiller et vitenskapssymbol, inkludert dette, legg til 1 dyr på dette kortet.",
 	"Requires Venus 18%": "Krever Venus 18%",
 

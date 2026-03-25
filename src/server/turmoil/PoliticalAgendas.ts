@@ -26,7 +26,7 @@ export class PoliticalAgendas {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
-      if (agendaStyle === AgendaStyle.STANDARD) {
+      if (agendaStyle === 'Standard') {
         agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
       } else {
         agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
@@ -71,7 +71,7 @@ export class PoliticalAgendas {
 
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
-    if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
+    if (politicalAgendasData.agendaStyle === 'Chairman' && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
         chairman,

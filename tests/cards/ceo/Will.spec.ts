@@ -65,9 +65,10 @@ describe('Will', () => {
     card.action(player);
     expect(game.deferredActions).has.length(4);
     game.deferredActions.runNext(); // No animals
-    game.deferredActions.runNext(); // No bugs
+    game.deferredActions.runNext(); // No microbes
     game.deferredActions.runNext(); // No Floaters
-    game.deferredActions.runNext(); // Two Wild on comms
+    game.deferredActions.runNext(); // Two Wild on Communication Center
+    game.deferredActions.runNext(); // Communication Center responds
 
     // We should have drawn a card here AND added another science to Comms
     expect(comms.resourceCount).eq(1);

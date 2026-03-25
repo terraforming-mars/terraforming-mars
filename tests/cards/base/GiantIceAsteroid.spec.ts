@@ -40,7 +40,7 @@ describe('GiantIceAsteroid', () => {
     expect(player3.plants).to.eq(0);
 
     expect(game.getTemperature()).to.eq(-26);
-    expect(player.getTerraformRating()).to.eq(24);
+    expect(player.terraformRating).to.eq(24);
   });
 
   const redsRuns = [

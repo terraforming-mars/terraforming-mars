@@ -8,7 +8,7 @@ describe('JovianEmbassy', () => {
     const [/* game */, player] = testGame(2);
 
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

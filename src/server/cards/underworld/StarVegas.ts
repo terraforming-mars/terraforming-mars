@@ -47,7 +47,7 @@ export class StarVegas extends Card {
       type: CardType.AUTOMATED,
       name: CardName.STAR_VEGAS,
       cost: 32,
-      tags: [Tag.SPACE, Tag.CITY],
+      tags: [Tag.CRIME, Tag.SPACE, Tag.CITY],
       requirements: {cities: 3, all: true},
 
       behavior: {
@@ -57,7 +57,7 @@ export class StarVegas extends Card {
       },
 
       metadata: {
-        cardNumber: 'U53',
+        cardNumber: 'U053',
         renderData: CardRenderer.builder((b) => {
           b.city().asterix().corruption(2).br;
           b.production((pb) => pb.megacredits(1).slash().city({all}));

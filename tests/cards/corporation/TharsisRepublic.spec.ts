@@ -18,11 +18,11 @@ describe('TharsisRepublic', () => {
     card = new TharsisRepublic();
     [game, player, player2] = testGame(2);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should take initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);

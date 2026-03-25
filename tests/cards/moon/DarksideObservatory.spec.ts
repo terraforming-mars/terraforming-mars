@@ -32,33 +32,33 @@ describe('DarksideObservatory', () => {
   });
 
   it('can act', () => {
-    player.playedCards = [];
+    player.playedCards.set();
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [physicsComplex];
+    player.playedCards.set(physicsComplex);
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [searchForLife];
+    player.playedCards.set(searchForLife);
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [olympusConference];
+    player.playedCards.set(olympusConference);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [prideoftheEarthArkship];
+    player.playedCards.set(prideoftheEarthArkship);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [processorFactory];
+    player.playedCards.set(processorFactory);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [];
-    player.corporations.push(nanotechIndustries);
+    player.playedCards.set();
+    player.playedCards.push(nanotechIndustries);
     expect(card.canAct(player)).is.true;
   });
 
   it('act', () => {
-    player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory];
-    player.corporations.push(nanotechIndustries);
-    const input = card.action(player);
+    player.playedCards.set(physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory);
+    player.playedCards.push(nanotechIndustries);
+    const input = card.action(player)!;
 
     expect(input.cards).has.members([olympusConference, prideoftheEarthArkship, processorFactory, nanotechIndustries]);
 
@@ -77,6 +77,12 @@ describe('DarksideObservatory', () => {
     nanotechIndustries.resourceCount = 0;
     input.cb([nanotechIndustries]);
     expect(nanotechIndustries.resourceCount).eq(1);
+
+    const processorFactoryResources = processorFactory.resourceCount;
+    player.playedCards.set(processorFactory);
+    const input2 = card.action(player);
+    expect(input2).undefined;
+    expect(processorFactory.resourceCount).eq(processorFactoryResources + 2);
   });
 });
 

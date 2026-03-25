@@ -153,8 +153,7 @@ describe('GameCards', () => {
       corporateEra: true,
       includedCards: [CardName.GREENERY_STANDARD_PROJECT],
     };
-    const names = new GameCards(gameOptions).getProjectCards().map(toName);
-    expect(names).to.not.contain(CardName.GREENERY_STANDARD_PROJECT);
+    expect(() => new GameCards(gameOptions).getProjectCards()).to.throw('Card [Greenery] not found');
   });
 });
 

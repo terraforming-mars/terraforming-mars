@@ -20,7 +20,7 @@ describe('LTFHeadquarters', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.habitatRate).eq(0);
 
     expect(player.colonies.getFleetSize()).eq(1);
@@ -31,7 +31,7 @@ describe('LTFHeadquarters', () => {
     expect(action).is.instanceof(BuildColony);
 
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     expect(player.colonies.getFleetSize()).eq(2);
   });

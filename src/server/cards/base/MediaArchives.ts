@@ -28,7 +28,7 @@ export class MediaArchives extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const allPlayedEvents = sum(player.game.getPlayers().map((player) => player.getPlayedEventsCount()));
+    const allPlayedEvents = sum(player.game.players.map((player) => player.getPlayedEventsCount()));
     player.stock.add(Resource.MEGACREDITS, allPlayedEvents, {log: true});
     return undefined;
   }

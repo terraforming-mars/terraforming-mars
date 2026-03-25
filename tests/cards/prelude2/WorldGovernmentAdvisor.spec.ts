@@ -23,7 +23,7 @@ describe('WorldGovernmentAdvisor', () => {
 
   it('play', () => {
     cast(card.play(player), undefined);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
     expect(player.cardsInHand).has.length(1);
   });
 
@@ -33,7 +33,7 @@ describe('WorldGovernmentAdvisor', () => {
 
     expect(game.phase).eq(Phase.SOLAR);
     expect(orOptions.options[0].title).eq('Increase temperature');
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     orOptions.options[0].cb();
     orOptions.cb(undefined);
@@ -42,12 +42,12 @@ describe('WorldGovernmentAdvisor', () => {
 
     cast(player.popWaitingFor(), undefined);
     expect(game.phase).eq(Phase.ACTION);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getTemperature()).eq(-28);
 
     // After this player raises temperature and it rewards them.
     game.increaseTemperature(player, 1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(game.getTemperature()).eq(-26);
   });
 
@@ -65,7 +65,7 @@ describe('WorldGovernmentAdvisor', () => {
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
   });
 
   it('action - placing an ocean', () => {
@@ -82,7 +82,7 @@ describe('WorldGovernmentAdvisor', () => {
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.megaCredits).eq(0);
   });
 
@@ -99,7 +99,7 @@ describe('WorldGovernmentAdvisor', () => {
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
   });
 
   it('canAct - game is at maximum', () => {

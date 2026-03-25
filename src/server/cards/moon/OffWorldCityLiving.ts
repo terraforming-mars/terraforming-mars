@@ -27,7 +27,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().city({all, secondaryTag: Tag.SPACE}).br;
           b.moonHabitatRate().br;
-          b.vpText('1 VP for every 3rd City in play.');
+          b.vpText('1 VP for every 3rd city in play.');
         }),
       },
     });

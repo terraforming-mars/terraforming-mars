@@ -10,6 +10,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
+import {ICard} from '../ICard';
+import {Resource} from '../../../common/Resource';
 
 export class ViralEnhancers extends Card implements IProjectCard {
   constructor() {
@@ -31,14 +33,19 @@ export class ViralEnhancers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+
+  private addPlant(player: IPlayer, count: number) {
+    player.stock.add(Resource.PLANTS, count, {log: true, from: {card: this}});
+  }
+
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (resourceCount === 0) {
       return undefined;
     }
 
     if (card.resourceType !== CardResource.ANIMAL && card.resourceType !== CardResource.MICROBE) {
-      player.plants += resourceCount;
+      this.addPlant(player, resourceCount);
       return undefined;
     }
 
@@ -46,16 +53,22 @@ export class ViralEnhancers extends Card implements IProjectCard {
       player.defer(
         () => new OrOptions(
           new SelectOption(message('Add resource to card ${0}', (b) => b.card(card)), 'Add resource').andThen(() => {
-            player.addResourceTo(card);
+            player.addResourceTo(card, {log: true});
             return undefined;
           }),
           new SelectOption('Gain plant').andThen(() => {
-            player.plants++;
+            this.addPlant(player, 1);
             return undefined;
           }),
         ),
       );
     }
     return undefined;
+  }
+
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.PLANT) {
+      this.addPlant(player, 1);
+    }
   }
 }

@@ -20,10 +20,10 @@ describe('InterplanetaryCinematics', () => {
   });
 
   it('Has onCardPlayed', () => {
-    player.corporations.push(card);
-    card.onCardPlayed(player, new Bushes());
+    player.playedCards.push(card);
+    player.playCard(new Bushes());
     expect(player.megaCredits).to.eq(0);
-    card.onCardPlayed(player, new Virus());
+    player.playCard(new Virus());
     expect(player.megaCredits).to.eq(2);
   });
 });

@@ -5,9 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ALL_TAGS, Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {Units} from '../../../common/Units';
 import {inplaceRemove} from '../../../common/utils/utils';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -18,38 +15,26 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.UNDERGROUND_RESEARCH_CENTER,
-      tags: [Tag.BUILDING],
-      cost: 18,
+      tags: [Tag.WILD, Tag.BUILDING],
+      cost: 12,
 
-      requirements: {excavation: 5},
+      requirements: {undergroundTokens: 4},
+      behavior: {
+        underworld: {excavate: {count: 1}},
+      },
 
       metadata: {
-        cardNumber: 'U62',
+        cardNumber: 'U062',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1)).excavate().cards(2).asterix();
+          // TODO(kberg): can this look like an any tag superscript thing?
+          b.excavate().cards(1).asterix();
         }),
 
-        description: 'Requires 5 excavation markers. Decrease your energy production 1 step. ' +
+        description: 'Requires you have 4 underground tokens. ' +
         'Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. ' +
-        'Draw 2 cards with that tag.',
+        'Draw a card with that tag.',
       },
     });
-  }
-
-  private excavatableSpacesWithEnergyProduction(player: IPlayer) {
-    return UnderworldExpansion.excavatableSpaces(player).filter(
-      (space) => space.undergroundResources === 'energy1production');
-  }
-
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.production.energy > 0) {
-      return true;
-    }
-    if (this.excavatableSpacesWithEnergyProduction(player).length > 0) {
-      this.warnings.add('underworldMustExcavateEnergy');
-      return true;
-    }
-    return false;
   }
 
   private chooseTagsAndDraw(player: IPlayer) {
@@ -59,7 +44,7 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
 
     const options = tags.map((tag) => {
       return new SelectOption(tag).andThen(() => {
-        player.drawCard(2, {tag: tag});
+        player.drawCard(1, {tag: tag});
         return undefined;
       });
     });
@@ -67,17 +52,8 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const spaces = player.production.energy > 0 ?
-      UnderworldExpansion.excavatableSpaces(player) :
-      this.excavatableSpacesWithEnergyProduction(player);
-
-    return new SelectSpace('Select space to excavate', spaces)
-      .andThen((space) => {
-        UnderworldExpansion.excavate(player, space);
-        // Energy production is granted immediately, so in case this player can only do this because there's energy production on the board, it's now theirs.
-        player.production.adjust(Units.of({energy: -1}));
-        player.defer(this.chooseTagsAndDraw(player), Priority.DRAW_CARDS);
-        return undefined;
-      });
+    // Priority is set below the excavation action, so they can choose cards after excavating.
+    player.defer(this.chooseTagsAndDraw(player), Priority.DEFAULT);
+    return undefined;
   }
 }

@@ -8,7 +8,8 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {MAManifest, isCompatible} from './MAManifest';
+import {isCompatible, MAManifest} from './MAManifest';
+import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -71,16 +72,16 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.THARSIS:
     case BoardName.HELLAS:
     case BoardName.ELYSIUM:
+    case BoardName.UTOPIA_PLANITIA:
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
+    case BoardName.TERRA_CIMMERIA_NOVA:
     case BoardName.VASTITAS_BOREALIS:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
+    case BoardName.VASTITAS_BOREALIS_NOVA:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
-    case BoardName.UTOPIA_PLANITIA:
-      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
-    case BoardName.TERRA_CIMMERIA_NOVUS:
+    default:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (gameOptions.venusNextExtension) {
@@ -121,29 +122,45 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
-    if (!gameOptions.modularMA) {
-      function boardHasMA(board: BoardName) {
-        return manifest.boards[board].includes(name);
-      }
-      if ([BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS].some(boardHasMA)) {
-        return true;
-      }
-      // TODO(kberg): Shares some ideas with ApiCreateGame
-      if (Object.values(BoardName).some(boardHasMA) && gameOptions.includeFanMA === false) {
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
+    }
+
+    const random = manifest.all[name].random;
+    if (gameOptions.modularMA) {
+      if (random === undefined) {
         return false;
       }
+      // TODO(kberg): Exclude Geologist if the board has no volcanic spaces
     } else {
-      if (manifest.modular.includes(name) === false) {
+      // The game boards this MA appears in, if any.
+      const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));
+
+      // Always include the milestones and awards from the official boards
+      if (intersection(boards, [BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS]).length > 0) {
+        return true;
+      }
+      // Conditionally include milestones and awards from unofficial boards.
+      if (boards.length > 0 && gameOptions.includeFanMA === false) {
+        return false;
+      }
+      // Modular MAs are not part of our own built random MAs.
+      if (random === 'modular') {
         return false;
       }
     }
+
     if (!isCompatible(name, manifest, gameOptions)) {
       return false;
     }
+
     return true;
   }
-  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter((name) => include(name, milestoneManifest));
-  const candidateAwards: Array<AwardName> = awardNames.filter((name) => include(name, awardManifest));
+
+  const candidateMilestones = milestoneNames.filter((name) => include(name, milestoneManifest));
+  const candidateAwards = awardNames.filter((name) => include(name, awardManifest));
 
   return [candidateMilestones, candidateAwards];
 }
@@ -160,7 +177,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
   // didn't get past 3.
   // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
+  // 2025-11-30: raised to 6.
+  const maxAttempts = 6;
   if (attempt > maxAttempts) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }

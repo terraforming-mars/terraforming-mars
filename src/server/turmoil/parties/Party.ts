@@ -30,7 +30,7 @@ export abstract class Party {
 
   // Check if you are the new party leader
   public checkPartyLeader(delegate: Delegate, game: IGame): void {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     if (this.delegates.size === 0) {
       this.partyLeader = undefined;
       return;
@@ -48,7 +48,7 @@ export abstract class Party {
     if (this.delegates.count(this.partyLeader) !== max) {
       let currentIndex = 0;
       if (this.partyLeader === 'NEUTRAL') {
-        currentIndex = players.indexOf(game.getPlayerById(game.activePlayer));
+        currentIndex = players.indexOf(game.activePlayer);
       } else {
         currentIndex = players.indexOf(this.partyLeader);
       }

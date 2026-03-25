@@ -11,7 +11,7 @@ export class Risktaker extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    const total = sum(player.tableau
+    const total = sum(player.tableau.asArray()
       .map((card) => card.getVictoryPoints(player))
       .filter((vp) => vp < 0));
     return Math.abs(total);

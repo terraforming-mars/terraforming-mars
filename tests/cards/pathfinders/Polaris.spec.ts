@@ -16,11 +16,11 @@ describe('Polaris', () => {
   beforeEach(() => {
     card = new Polaris();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const space = game.board.getSpaceOrThrow('06');

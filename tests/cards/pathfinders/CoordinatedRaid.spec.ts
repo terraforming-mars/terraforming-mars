@@ -15,18 +15,24 @@ export class TestColony extends Colony {
   constructor() {
     super({
       name: 'TestColony' as ColonyName,
-      description: ['', '', ''],
-      buildType: ColonyBenefit.GAIN_RESOURCES,
-      buildQuantity: [3, 3, 3],
-      buildResource: Resource.TITANIUM,
-      tradeType: ColonyBenefit.GAIN_RESOURCES,
-      tradeQuantity: [4, 5, 6, 7, 8, 9, 10],
-      tradeResource: Resource.MEGACREDITS,
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusQuantity: 7,
-      colonyBonusResource: Resource.STEEL,
-      shouldIncreaseTrack: 'yes',
-    });
+      build: {
+        description: '',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [3, 3, 3],
+        resource: Resource.TITANIUM,
+      },
+      trade: {
+        description: '',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [4, 5, 6, 7, 8, 9, 10],
+        resource: Resource.MEGACREDITS,
+      },
+      colony: {
+        description: '',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 7,
+        resource: Resource.STEEL,
+      }});
   }
 }
 

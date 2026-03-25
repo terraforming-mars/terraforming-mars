@@ -24,7 +24,7 @@ describe('Oscar', () => {
 
   it('Has +1 influence', () => {
     card.play(player);
-    expect(turmoil?.getPlayerInfluence(player)).eq(1);
+    expect(turmoil?.getInfluence(player)).eq(1);
   });
 
   it('Takes OPG action', () => {
@@ -68,25 +68,25 @@ describe('Oscar', () => {
   });
 
   it('OPG does not gain TR', () => {
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     card.action(player);
     runAllActions(game);
     expect(turmoil.chairman).eq(player);
-    expect(player.getTerraformRating()).is.eq(tr);
+    expect(player.terraformRating).is.eq(tr);
   });
 
   it('OPG gains 1 TR with Tempest Consultancy', () => {
     const tempcons = new TempestConsultancy();
-    player.corporations.push(tempcons);
-    const tr = player.getTerraformRating();
+    player.playedCards.push(tempcons);
+    const tr = player.terraformRating;
     card.action(player);
     runAllActions(game);
 
     expect(turmoil.chairman).eq(player);
-    expect(player.getTerraformRating()).is.eq(tr+1);
+    expect(player.terraformRating).is.eq(tr+1);
   });
 
-  it('OPG Counts for POLITICAN Award', () => {
+  it('OPG Counts for POLITICIAN Award', () => {
     const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);

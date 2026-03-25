@@ -32,17 +32,17 @@ describe('Pallas', () => {
   });
 
   it('Should build', () => {
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
-    expect(turmoil.getPlayerInfluence(player2)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player2)).eq(0);
     pallas.addColony(player);
-    expect(turmoil.getPlayerInfluence(player)).eq(1);
-    expect(turmoil.getPlayerInfluence(player2)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(1);
+    expect(turmoil.getInfluence(player2)).eq(0);
     pallas.addColony(player);
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
-    expect(turmoil.getPlayerInfluence(player2)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(2);
+    expect(turmoil.getInfluence(player2)).eq(0);
     pallas.addColony(player2);
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
-    expect(turmoil.getPlayerInfluence(player2)).eq(1);
+    expect(turmoil.getInfluence(player)).eq(2);
+    expect(turmoil.getInfluence(player2)).eq(1);
   });
 
   it('Should trade', () => {

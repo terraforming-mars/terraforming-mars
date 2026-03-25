@@ -114,7 +114,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
-    // Space 0 intentionallyleft blank
+    // Space 0 intentionally left blank
     MoonExpansion.addMineTile(player2, adjacentSpaces[1].id);
     MoonExpansion.addHabitatTile(player2, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(player2, adjacentSpaces[3].id);
@@ -127,7 +127,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(4);
@@ -148,7 +148,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
-    // Space 0 intentionallyleft blank
+    // Space 0 intentionally left blank
     MoonExpansion.addMineTile(player2, adjacentSpaces[1].id);
     MoonExpansion.addHabitatTile(player2, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(player2, adjacentSpaces[3].id);
@@ -161,7 +161,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     player.game.phase = Phase.SOLAR;
 
@@ -169,6 +169,28 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(10);
     expect(player.megaCredits).eq(0);
+  });
+
+  it('Compatible with Hostile Takeover', () => {
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
+    const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
+
+    const space = adjacentSpaces[1];
+
+    MoonExpansion.addMineTile(player2, space.id);
+    space.coOwner = player3;
+
+    player.megaCredits = 0;
+    player2.megaCredits = 10;
+    player3.megaCredits = 10;
+    player.playedCards.push(card);
+
+    // Trigger the effect.
+    MoonExpansion.addMineTile(player, centerSpace.id);
+
+    expect(player.megaCredits).eq(4);
+    expect(player2.megaCredits).eq(8);
+    expect(player3.megaCredits).eq(8);
   });
 });
 

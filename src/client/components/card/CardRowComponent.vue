@@ -1,23 +1,25 @@
 <template>
-  <CardRenderItemComponent v-if="isItem(componentData)" :item="componentData"/>
-  <CardRenderSymbolComponent v-else-if="isSymbol(componentData)" :item="componentData" />
-  <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="componentData.rows" />
-  <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="componentData" />
-  <CardRenderTileComponent v-else-if="isTile(componentData)" :item="componentData" />
+  <CardRenderItemComponent v-if="isItem(componentData)" :item="(componentData as any)"/>
+  <CardRenderSymbolComponent v-else-if="isSymbol(componentData)" :item="(componentData as any)" />
+  <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="(componentData as any).rows" />
+  <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="(componentData as any)" />
+  <CardRenderTileComponent v-else-if="isTile(componentData)" :item="(componentData as any)" />
   <CardDescription v-else-if="isDescription(componentData)" :item="componentData" />
-  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel()" />
+  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="(componentData as any).rows" :label="corpBoxLabel()" />
   <div v-else>n/a</div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {
   ICardRenderCorpBoxAction,
   ICardRenderCorpBoxEffect,
+  ICardRenderCorpBoxEffectAction,
   isICardRenderCorpBoxAction,
   isICardRenderCorpBoxEffect,
+  isICardRenderCorpBoxEffectAction,
   isICardRenderEffect,
   isICardRenderItem,
   isICardRenderProductionBox,
@@ -33,7 +35,7 @@ import CardRenderTileComponent from '@/client/components/card/CardRenderTileComp
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRowComponent',
   props: {
     componentData: {
@@ -61,14 +63,17 @@ export default Vue.extend({
     isProduction: isICardRenderProductionBox,
     isCorpBoxEffect: isICardRenderCorpBoxEffect,
     isCorpBoxAction: isICardRenderCorpBoxAction,
-    isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction {
-      return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item);
+    isCorpBoxEffectAction: isICardRenderCorpBoxEffectAction,
+    isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction | ICardRenderCorpBoxEffectAction {
+      return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item) || this.isCorpBoxEffectAction(item);
     },
     corpBoxLabel(): string {
       if (this.isCorpBoxEffect(this.componentData)) {
         return 'effect';
       } else if (this.isCorpBoxAction(this.componentData)) {
         return 'action';
+      } else if (this.isCorpBoxEffectAction(this.componentData)) {
+        return 'effect/action';
       }
       return 'n/a';
     },

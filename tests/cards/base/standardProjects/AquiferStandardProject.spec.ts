@@ -31,7 +31,7 @@ describe('AquiferStandardProject', () => {
 
     assertPlaceOcean(player, churn(card.action(player), player));
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);
   });
 
@@ -42,14 +42,14 @@ describe('AquiferStandardProject', () => {
     maxOutOceans(player);
 
     player.megaCredits = 18;
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.board.getOceanSpaces()).has.length(9);
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.megaCredits).eq(0);
   });
 

@@ -28,7 +28,7 @@ describe('Helion', () => {
   it('Merger with Helion, Stormcraft Incorporated', () => {
     const stormcraft = new StormCraftIncorporated();
     player.playCorporationCard(card);
-    player.playAdditionalCorporationCard(stormcraft);
+    player.playCorporationCard(stormcraft);
 
     player.heat = 4;
     player.megaCredits = 0;

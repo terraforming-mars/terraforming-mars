@@ -17,6 +17,7 @@ pid
 *.log
 .eslintcache
 tsconfig.tsbuildinfo
+tsconfig.vue-tsc.tsbuildinfo
 assets/locales
 
 # Local Packages
@@ -24,4 +25,4 @@ node_modules/
 
 # misc
 .gitconfig
-logs/
+./logs/

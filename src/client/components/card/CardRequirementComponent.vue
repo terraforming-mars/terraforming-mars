@@ -12,9 +12,7 @@
             <div class="card-production-box-row">
               <div class="card-production-box-row-item">
                 <div class="card-item-container">
-                  <template v-for="num in repeats">
-                    <div :class="productionClass" :key="num"></div>
-                  </template>
+                  <div v-for="num in repeats" :class="productionClass" :key="num"></div>
                 </div>
               </div>
             </div>
@@ -22,9 +20,7 @@
         </template>
         <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
         <template v-else>
-          <template v-for="num in repeats">
-            <div :class="componentClasses" :key="num"></div>
-          </template>
+            <div v-for="num in repeats" :key="num" :class="componentClasses"></div>
         </template>
       </div>
   </div>
@@ -32,14 +28,14 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardRequirementDescriptor, requirementType} from '@/common/cards/CardRequirementDescriptor';
 import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRequirementComponent',
   props: {
     requirement: {
@@ -104,8 +100,6 @@ export default Vue.extend({
       return classes;
     },
     componentClassArray(): Array<string> {
-      // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be
-      // necessary.
       switch (this.type) {
       case RequirementType.OXYGEN:
         return ['card-global-requirement', 'card-oxygen--req'];
@@ -134,7 +128,7 @@ export default Vue.extend({
       case RequirementType.TAG:
         return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
-        return ['card-colony-rate', 'card-colony-rate--req'];
+        return ['card-habitat-rate', 'card-habitat-rate--req'];
       case RequirementType.MINING_RATE:
         return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
@@ -145,8 +139,8 @@ export default Vue.extend({
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
-      case RequirementType.EXCAVATION:
-        return ['card-excavation req'];
+      case RequirementType.UNDERGROUND_TOKENS:
+        return ['card-underground-resources'];
       case RequirementType.CORRUPTION:
         return ['card-resource', 'card-resource-corruption'];
       case RequirementType.PRODUCTION:
@@ -182,6 +176,7 @@ export default Vue.extend({
       case RequirementType.VENUS:
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
+      case RequirementType.UNDERGROUND_TOKENS:
         return false;
       }
       return this.count > 0 && this.count < 4;

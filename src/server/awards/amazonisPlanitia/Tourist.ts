@@ -1,4 +1,3 @@
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {RedTourismWave} from '../../cards/turmoil/RedTourismWave';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
@@ -11,22 +10,21 @@ export class Tourist implements IAward {
 
   public getScore(player: IPlayer): number {
     const spacesOnMars = RedTourismWave.getAdjacentEmptySpacesCount(player);
-    const spacesOnTheMoon: number = MoonExpansion.ifElseMoon(player.game,
-      (moonData) => {
-        const moon = moonData.moon;
-        return moon.spaces.filter((space) => {
-          if (space.spaceType === SpaceType.COLONY) {
-            return false;
-          }
-          if (Board.hasRealTile(space)) {
-            return false;
-          }
-          return moon.getAdjacentSpaces(space).some((adj) => {
-            return adj.tile !== undefined && adj.player === player;
-          });
-        }).length;
-      },
-      () => 0);
+    if (!player.game.moonData) {
+      return spacesOnMars;
+    }
+    const moon = player.game.moonData.moon;
+    const spacesOnTheMoon = moon.spaces.filter((space) => {
+      if (space.spaceType === SpaceType.COLONY) {
+        return false;
+      }
+      if (Board.hasRealTile(space)) {
+        return false;
+      }
+      return moon.getAdjacentSpaces(space).some((adj) => {
+        return adj.tile !== undefined && adj.player === player;
+      });
+    }).length;
 
     return spacesOnMars + spacesOnTheMoon;
   }

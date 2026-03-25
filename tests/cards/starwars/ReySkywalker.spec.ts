@@ -3,7 +3,7 @@ import {ReySkywalker} from '../../../src/server/cards/starwars/ReySkywalker';
 import {testGame} from '../../TestGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
-import {HAZARD_TILES, TileType} from '../../../src/common/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {intersection} from '../../../src/common/utils/utils';
 
@@ -39,7 +39,7 @@ describe('ReySkywalker', () => {
 
     player.megaCredits = 8; // Necessary for this test to be valid due to hazard costs.
 
-    const hazardSpaces = game.board.spaces.filter((space) => space.tile?.tileType && HAZARD_TILES.has(space.tile?.tileType));
+    const hazardSpaces = game.board.getHazards();
     expect(hazardSpaces).has.lengthOf(3);
     const {spaces} = cast(card.play(player), SelectSpace);
     expect(spaces).has.lengthOf(45);

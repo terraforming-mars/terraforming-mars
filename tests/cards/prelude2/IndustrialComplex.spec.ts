@@ -78,7 +78,7 @@ describe('IndustrialComplex', () => {
           player.canUseTitaniumAsMegacredits = true;
         }
         if (corp === CardName.MANUTECH) {
-          player.corporations.push(newCorporationCard(corp)!);
+          player.playedCards.push(newCorporationCard(corp)!);
         }
       }
       player.stock.override(run.stock);
@@ -96,7 +96,7 @@ describe('IndustrialComplex', () => {
             player.canUseTitaniumAsMegacredits = true;
           }
           if (corp === CardName.MANUTECH) {
-            player.corporations.push(newCorporationCard(corp)!);
+            player.playedCards.push(newCorporationCard(corp)!);
           }
         }
         player.stock.override(run.stock);
@@ -108,7 +108,7 @@ describe('IndustrialComplex', () => {
 
           // Payment MC needs to be specified as "megaCredits"
           const adjusted = {...run.payment} as Partial<Payment>;
-          adjusted.megaCredits = run.payment.megacredits;
+          adjusted.megacredits = run.payment.megacredits;
 
           selectPayment.cb(Payment.of(adjusted));
           runAllActions(game);

@@ -4,13 +4,13 @@ require('console-stamp')(
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
 
-import * as https from 'https';
-import * as http from 'http';
-import * as fs from 'fs';
-import * as raw_settings from '../genfiles/settings.json';
-import * as prometheus from 'prom-client';
+import https from 'https';
+import http from 'http';
+import fs from 'fs';
+import raw_settings from '../genfiles/settings.json';
+import prometheus from 'prom-client';
 import * as responses from './server/responses';
-import * as ansi from 'ansi-escape-sequences';
+import ansi from 'ansi-escape-sequences';
 
 import {Database} from './database/Database';
 import {runId, serverId} from './utils/server-ids';
@@ -90,19 +90,26 @@ async function start() {
   await SessionManager.getInstance().initialize();
 
   try {
-    const stats = await Database.getInstance().stats();
-    console.log(JSON.stringify(stats, undefined, 2));
+    Database.getInstance().stats().then((stats) => {
+      console.log(JSON.stringify(stats, undefined, 2));
+    });
   } catch (err) {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);
   }
   GameLoader.getInstance().maintenance();
 
-  const port = process.env.PORT || 8080;
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
-  console.log(`Starting server on port ${port}`);
 
-  server.listen(port);
+  const port = process.env.PORT || 8080;
+  const host = process.env.HOST;
+  if (host) {
+    console.log(`Starting server listening to ${host} on port ${port}`);
+  } else {
+    console.log(`Starting server on port ${port}`);
+  }
+
+  server.listen({port: port, host: host});
 
   if (!process.env.SERVER_ID) {
     console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);

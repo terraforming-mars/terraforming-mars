@@ -4,6 +4,8 @@ import {SelectProductionToLoseDeferred} from '../../src/server/deferredActions/S
 import {Units} from '../../src/common/Units';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
+import {InputResponse} from '../../src/common/inputs/InputResponse';
+import {cast} from '../TestingUtils';
 
 describe('SelectProductionToLoseDeferred', () => {
   let player: TestPlayer;
@@ -44,8 +46,9 @@ describe('SelectProductionToLoseDeferred', () => {
   function cb(units: Partial<Units>, count: number) {
     const deferred = new SelectProductionToLoseDeferred(player, count);
     const sptl = deferred.execute();
+    const response: InputResponse = {type: 'productionToLose', units: Units.of(units)};
 
-    player.runInput({type: 'productionToLose', units: Units.of(units)}, sptl);
+    cast(sptl.process(response, player), undefined);
   }
 });
 

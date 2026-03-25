@@ -34,7 +34,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    game.getPlayers().forEach((player) => {
+    game.players.forEach((player) => {
       game.defer(new SellSteel(player));
     });
     return undefined;

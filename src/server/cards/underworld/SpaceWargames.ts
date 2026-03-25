@@ -18,7 +18,7 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
       resourceType: CardResource.FIGHTER,
 
       behavior: {
-        addResources: 1,
+        addResources: 4,
       },
 
       action: {
@@ -26,13 +26,13 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
           behaviors: [
             {
               spend: {titanium: 1},
-              addResources: 1,
-              title: 'Spend 1 titanium to add 1 fighter resource to this card.',
+              addResources: 2,
+              title: 'Spend 1 titanium to add 2 fighter resources to this card.',
             },
             {
-              spend: {resourcesHere: 1},
-              stock: {megacredits: {start: 1, resourcesHere: {}, each: 3}},
-              title: 'Spend 1 fighter resource on this card to gain 3 M€ for each fighter on this card, including the fighter.',
+              spend: {resourcesHere: 6},
+              underworld: {markThisGeneration: {}},
+              title: 'Spend 6 fighter resources on this card to take first player next generation.',
             },
           ],
           autoSelect: true,
@@ -40,15 +40,16 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U48',
+        cardNumber: 'U048',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to gain 1 fighter resource to this card.',
-            (ab) => ab.titanium(1).startAction.resource(CardResource.FIGHTER)).br;
-          b.action('Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.',
-            (ab) => ab.or().resource(CardResource.FIGHTER).startAction.megacredits(3, {digit}).slash().resource(CardResource.FIGHTER).asterix()).br;
-          b.resource(CardResource.FIGHTER);
+          b.action('Spend 1 titanium to put 2 fighters on this card.',
+            (ab) => ab.titanium(1).startAction.resource(CardResource.FIGHTER, 2)).br;
+          b.action('Spend 6 fighter resource on this card to take first player next generation.',
+            (ab) => ab.or().resource(CardResource.FIGHTER, {amount: 6, digit}).startAction.firstPlayer()).br;
+          b.vpText(' 1 VP for each Jovian tag you have.').br;
+          b.resource(CardResource.FIGHTER, {amount: 4, digit});
         }),
-        description: 'Put 1 fighter resource on this card. 1VP for each Jovian tag you have.',
+        description: 'Put 4 fighters on this card.',
       },
     });
   }

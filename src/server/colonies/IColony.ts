@@ -3,7 +3,7 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerId} from '../../common/Types';
 import {IGame} from '../IGame';
 import {SerializedColony} from '../SerializedColony';
-import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '../../common/colonies/ColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
 
 export type TradeOptions = {
@@ -15,7 +15,7 @@ export type TradeOptions = {
 
 export interface IColony {
   readonly name: ColonyName;
-  readonly metadata: IColonyMetadata;
+  readonly metadata: ColonyMetadata;
 
   isActive: boolean;
   colonies: Array<PlayerId>;

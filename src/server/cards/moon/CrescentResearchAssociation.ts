@@ -4,8 +4,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CrescentResearchAssociation extends CorporationCard {
+export class CrescentResearchAssociation extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CRESCENT_RESEARCH_ASSOCIATION,
@@ -28,9 +29,10 @@ export class CrescentResearchAssociation extends CorporationCard {
   }
 
   public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    if (card.tags.indexOf(Tag.MOON) === -1) {
+    const tags = player.tags.cardTagCount(card, Tag.MOON);
+    if (tags === 0) {
       return 0;
     }
-    return player.tags.count(Tag.MOON);
+    return player.tags.count(Tag.MOON) * tags;
   }
 }

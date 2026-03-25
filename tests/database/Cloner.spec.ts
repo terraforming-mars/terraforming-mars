@@ -20,14 +20,14 @@ describe('Cloner', () => {
     expect(() => newGame.getPlayerById('p-old-player1-id')).to.throw();
     expect(newGame.getPlayerById('p-new-player1-id')).is.not.undefined;
 
-    const newPlayerZero = newGame.getPlayersInGenerationOrder()[0];
+    const newPlayerZero = newGame.playersInGenerationOrder[0];
     expect(newPlayerZero.color).eq('red');
     expect(newPlayerZero.beginner).is.true;
 
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.handicap).eq(9);
 
-    expect(newPlayerZero.getTerraformRating()).eq(17);
+    expect(newPlayerZero.terraformRating).eq(17);
     expect(newPlayerZero.handicap).eq(3);
 
     expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(newPlayerZero.dealtCorporationCards);

@@ -40,7 +40,7 @@ describe('SpaceDebrisCleaningOperation', () => {
 
   it('play', () => {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.set(lunarObservationPost);
 
     player.cardsInHand = [];
     card.play(player);
@@ -55,7 +55,7 @@ describe('SpaceDebrisCleaningOperation', () => {
     const tardigrades = new Tardigrades(); // microbe
     const penguins = new Penguins(); // animal
     const olympusConference = new OlympusConference(); // science
-    player.playedCards = [tardigrades, penguins, olympusConference];
+    player.playedCards.set(tardigrades, penguins, olympusConference);
 
     card.play(player);
     runAllActions(game);

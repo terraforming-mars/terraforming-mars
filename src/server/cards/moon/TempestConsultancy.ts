@@ -7,8 +7,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TempestConsultancy extends CorporationCard {
+export class TempestConsultancy extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TEMPEST_CONSULTANCY,
@@ -36,7 +37,7 @@ export class TempestConsultancy extends CorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const title = 'Tempest Consultancy first action - Select where to send two delegates';
     player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
 

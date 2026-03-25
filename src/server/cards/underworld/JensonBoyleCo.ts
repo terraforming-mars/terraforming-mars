@@ -8,7 +8,7 @@ export class JensonBoyleCo extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.JENSON_BOYLE_CO,
-      tags: [Tag.EARTH],
+      tags: [Tag.CRIME],
       startingMegaCredits: 46,
 
       behavior: {
@@ -20,8 +20,8 @@ export class JensonBoyleCo extends ActiveCorporationCard {
           behaviors: [
             {
               spend: {corruption: 1},
-              stock: {steel: 4},
-              title: 'Spend 1 corruption to gain 4 steel.',
+              stock: {steel: 5},
+              title: 'Spend 1 corruption to gain 5 steel.',
             },
             {
               spend: {corruption: 1},
@@ -30,13 +30,13 @@ export class JensonBoyleCo extends ActiveCorporationCard {
             },
             {
               spend: {corruption: 1},
-              stock: {plants: 3},
-              title: 'Spend 1 corruption to gain 3 plants.',
+              stock: {plants: 4},
+              title: 'Spend 1 corruption to gain 4 plants.',
             },
             {
               spend: {corruption: 1},
-              stock: {heat: 6},
-              title: 'Spend 1 corruption to gain 6 heat.',
+              stock: {heat: 8},
+              title: 'Spend 1 corruption to gain 8 heat.',
             },
           ],
         },
@@ -48,12 +48,12 @@ export class JensonBoyleCo extends ActiveCorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(46).corruption(2).br.br;
           b.corruption(1).arrow()
-            .steel(4, {digit}).or()
+            .steel(5, {digit}).or()
             .titanium(3, {digit}).br;
           b.or()
-            .plants(3, {digit}).or()
-            .heat(6, {digit}).br;
-          b.plainText('(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)').br;
+            .plants(4, {digit}).or()
+            .heat(8, {digit}).br;
+          b.plainText('(Action: Pay 1 corruption to gain either 5 steel, 3 titanium, 4 plants or 8 heat.)').br;
         }),
       },
     });

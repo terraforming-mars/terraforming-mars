@@ -11,6 +11,10 @@ export class Tradesman extends BaseMilestone {
 
   public getScore(player: IPlayer): number {
     const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType));
-    return nonStandardResources.size;
+    if (player.underworldData.corruption > 0) {
+      return nonStandardResources.size + 1;
+    } else {
+      return nonStandardResources.size;
+    }
   }
 }

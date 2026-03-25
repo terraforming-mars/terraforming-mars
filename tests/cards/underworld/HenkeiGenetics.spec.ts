@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {HenkeiGenetics} from '../../../src/server/cards/underworld/HenkeiGenetics';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
-import {Tag} from '../../../src/common/cards/Tag';
-import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {CardResource} from '../../../src/common/CardResource';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('HenkeiGenetics', () => {
   let card: HenkeiGenetics;
@@ -24,8 +25,16 @@ describe('HenkeiGenetics', () => {
     expect(player.underworldData.corruption).eq(1);
   });
 
+  it('initial action', () => {
+    cast(card.initialAction(player), undefined);
+    expect(player.cardsInHand).to.have.length(2);
+    expect(player.cardsInHand[0].tags).includes(Tag.MICROBE);
+    expect(player.cardsInHand[1].tags).includes(Tag.MICROBE);
+  });
+
+
   it('canAct', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card.canAct(player)).is.false;
 
@@ -35,23 +44,23 @@ describe('HenkeiGenetics', () => {
   });
 
   it('action', () => {
-    player.corporations.push(card);
     player.underworldData.corruption = 1;
 
-    cast(card.action(player), undefined);
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
+    const microbeCards = [
+      fakeCard({resourceType: CardResource.MICROBE}),
+      fakeCard({resourceType: CardResource.MICROBE}),
+      fakeCard({resourceType: CardResource.MICROBE}),
+    ];
 
-    expect(player.cardsInHand).has.length(1);
-    expect(player.cardsInHand[0].tags).contains(Tag.MICROBE);
+    player.playedCards.push(...microbeCards);
+    const selectCard = cast(card.action(player), SelectCard);
+
+    expect(selectCard.cards).to.have.members(microbeCards);
+    selectCard.cb([microbeCards[0], microbeCards[2]]);
+
+    expect(microbeCards[0].resourceCount).eq(3);
+    expect(microbeCards[1].resourceCount).eq(0);
+    expect(microbeCards[2].resourceCount).eq(3);
     expect(player.underworldData.corruption).eq(0);
-  });
-
-  it('onCardPlayed', () => {
-    player.corporations.push(card);
-    const tardigrades = new Tardigrades();
-    card.onCardPlayed(player, tardigrades);
-    runAllActions(game);
-    expect(tardigrades.resourceCount).eq(2);
   });
 });

@@ -10,7 +10,7 @@ import {IPlayer} from '../../IPlayer';
 import {Policy, IPolicy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {IProjectCard} from '../../cards/IProjectCard';
+import {ICard} from '../../cards/ICard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {TITLES} from '../../inputs/titles';
 
@@ -20,7 +20,6 @@ export class MarsFirst extends Party implements IParty {
   readonly policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
-// TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 extends Bonus {
   readonly id = 'mb01' as const;
   readonly description = 'Gain 1 M€ for each building tag you have';
@@ -49,7 +48,7 @@ class MarsFirstBonus02 extends Bonus {
 }
 
 class MarsFirstPolicy01 implements IPolicy {
-  readonly id = 'mfp01' as const;
+  readonly id = 'mp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: IPlayer, space: Space) {
@@ -60,16 +59,16 @@ class MarsFirstPolicy01 implements IPolicy {
 }
 
 class MarsFirstPolicy02 implements IPolicy {
-  readonly id = 'mfp02' as const;
+  readonly id = 'mp02' as const;
   readonly description = 'When you play a building tag, gain 2 M€';
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
   }
 }
 
 class MarsFirstPolicy03 extends Policy {
-  readonly id = 'mfp03' as const;
+  readonly id = 'mp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
   override onPolicyStartForPlayer(player: IPlayer): void {
@@ -82,7 +81,7 @@ class MarsFirstPolicy03 extends Policy {
 }
 
 class MarsFirstPolicy04 implements IPolicy {
-  readonly id = 'mfp04' as const;
+  readonly id = 'mp04' as const;
   readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
 
   canAct(player: IPlayer) {

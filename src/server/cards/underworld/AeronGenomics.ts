@@ -1,16 +1,19 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {digit} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Space} from '../../boards/Space';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Size} from '../../../common/cards/render/Size';
+import {AndOptions} from '../../inputs/AndOptions';
+import {ICard} from '../ICard';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
 
-export class AeronGenomics extends ActiveCorporationCard {
+export class AeronGenomics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AERON_GENOMICS,
@@ -22,69 +25,59 @@ export class AeronGenomics extends ActiveCorporationCard {
 
       behavior: {
         stock: {steel: 5},
-        addResources: 1,
+        addResources: 2,
       },
 
       metadata: {
         cardNumber: 'UC07',
-        description: 'You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.',
+        description: 'You start with 35 M€, 5 steel, and 2 animals on this card. 1 VP per 3 animals on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(35).steel(5, {digit}).resource(CardResource.ANIMAL).br;
-          b.effect('After you excavate an underground resource, put an animal on this card.', (eb) => {
-            eb.excavate(1).startEffect.resource(CardResource.ANIMAL);
-          }).br;
-          b.action('Spend 1 M€ to move an animal from here to another card.', (ab) => {
-            ab.megacredits(1).resource(CardResource.ANIMAL).startAction.resource(CardResource.ANIMAL).asterix();
+          b.megacredits(35).steel(5, {digit}).resource(CardResource.ANIMAL, 2).br;
+          b.effect(
+            'When playing an animal card, you can remove animals from here to ' +
+            'change the card\'s global requirement by 1 step for every 1 animal removed.',
+            (eb) => eb.resource(CardResource.ANIMAL).startEffect.text('+/-1 global parameter', Size.SMALL)).br;
+          b.action('Discard up to 2 of your claimed underground resource tokens to place the same number of animals on ANY card.', (ab) => {
+            ab.undergroundResources(2).asterix().startAction.resource(CardResource.ANIMAL, 2).asterix();
           });
         }),
       },
     });
   }
 
-  onExcavation(player: IPlayer, _space: Space) {
-    player.addResourceTo(this, {qty: 1, log: true});
-  }
-
-  public override canAct(player: IPlayer): boolean {
-    if (!player.canAfford(1)) {
-      return false;
+  public canAct(player: IPlayer): boolean {
+    if (player.underworldData.tokens.every((t) => t.shelter || t.active)) {
+      this.warnings.add('underworldtokendiscard');
     }
-    // >1 because this player already has Aeron Genomics.
-    return this.resourceCount > 0 && player.getResourceCards(this.resourceType).length > 1;
+    return player.underworldData.tokens.length > 0;
   }
 
-  public override action(player: IPlayer) {
-    player.game.defer(new SimpleDeferredAction(
-      player,
-      () => {
-        const resourceCards = player.getResourceCards(this.resourceType).filter((card) => card.name !== this.name);
+  public action(player: IPlayer) {
+    const andOptions = new AndOptions();
+    let selected: ICard = this; // Initializing it to this prevents it from being undefined.
+    let indexes: Array<number> = [];
 
-        if (resourceCards.length === 0) {
+    andOptions.options.push(
+      new SelectCard('Select card to gain animals', '', player.getResourceCards(CardResource.ANIMAL))
+        .andThen(([card]) => {
+          selected = card;
           return undefined;
-        }
+        }));
+    andOptions.options.push(new SelectClaimedUndergroundToken(player.underworldData.tokens, 1, 2)
+      .andThen((is) => {
+        indexes = is;
+        return undefined;
+      }));
+    andOptions.cb = (() => {
+      const sorted = indexes.slice().sort().reverse();
+      for (const idx of sorted) {
+        UnderworldExpansion.removeClaimedToken(player, idx);
+      }
+      const amount = indexes.length;
+      player.addResourceTo(selected, {qty: amount, log: true});
 
-        if (resourceCards.length === 1 && player.canAfford(1)) {
-          player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for action'}))
-            .andThen(() => {
-              this.resourceCount--;
-              player.addResourceTo(resourceCards[0], 1);
-              player.game.log('${0} moved 1 animal from ${1} to ${2}.', (b) => b.player(player).card(this).card(resourceCards[0]));
-            });
-          return undefined;
-        }
-
-        return new SelectCard(
-          'Select card to add 1 animal',
-          'Add animal',
-          resourceCards)
-          .andThen(([card]) => {
-            this.resourceCount--;
-            player.addResourceTo(card, 1);
-            player.game.log('${0} moved 1 animal from ${1} to ${2}.', (b) => b.player(player).card(this).card(resourceCards[0]));
-            return undefined;
-          });
-      },
-    ));
-    return undefined;
+      return undefined;
+    });
+    return andOptions;
   }
 }

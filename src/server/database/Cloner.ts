@@ -6,6 +6,7 @@ import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
+import {toID} from '../../common/utils/utils';
 
 export class Cloner {
   public static clone(
@@ -14,8 +15,8 @@ export class Cloner {
     firstPlayerIndex: number,
     serialized: SerializedGame): IGame {
     const serializedGameId: GameId = serialized.id;
-    const serializedPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
-    const playerIds: Array<PlayerId> = players.map((player) => player.id);
+    const serializedPlayerIds: Array<PlayerId> = serialized.players.map(toID);
+    const playerIds: Array<PlayerId> = players.map(toID);
     if (serializedPlayerIds.length !== playerIds.length) {
       throw new Error(`Failing to clone from a ${serializedPlayerIds.length} game ${serializedGameId} to a ${playerIds.length} game.`);
     }

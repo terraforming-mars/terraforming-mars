@@ -29,10 +29,10 @@ describe('MooncrateConvoysToMars', () => {
     player1.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new MarsFirst();
-    expect(player1.getPlayableCardsForTest()).does.include(card);
+    expect(player1.getPlayableCards()).does.include(card);
 
     game.turmoil!.rulingParty = new Reds();
-    expect(player1.getPlayableCardsForTest()).does.not.include(card);
+    expect(player1.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

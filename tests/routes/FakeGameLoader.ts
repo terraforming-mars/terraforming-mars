@@ -20,7 +20,7 @@ export class FakeGameLoader implements IGameLoader {
     if (isGameId(id)) return Promise.resolve(this.games.get(id));
 
     for (const game of Array.from(this.games.values())) {
-      const matches = game.getPlayersInGenerationOrder().some((player) => player.id === id) || game.spectatorId === id;
+      const matches = game.playersInGenerationOrder.some((player) => player.id === id) || game.spectatorId === id;
       if (matches) return Promise.resolve(game);
     }
     return Promise.resolve(undefined);

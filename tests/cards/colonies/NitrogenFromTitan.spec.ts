@@ -20,9 +20,9 @@ describe('NitrogenFromTitan', () => {
   });
 
   it('Can play without floaters', () => {
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(tr + 2);
+    expect(player.terraformRating).to.eq(tr + 2);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });

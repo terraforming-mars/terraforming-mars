@@ -21,7 +21,7 @@ describe('GiantSolarShade', () => {
   it('Should play', () => {
     cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(6);
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
   });
 
   it('Should play with Reds and Dirigibles', () => {
@@ -29,9 +29,14 @@ describe('GiantSolarShade', () => {
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     player.megaCredits = 27;
+
     expect(player.canPlay(card)).is.not.true;
-    player.playedCards.push(new Dirigibles());
-    player.addResourceTo(player.playedCards[0], 3);
-    expect(player.canPlay(card)).deep.eq({redsCost: 9});
+
+    const dirigibles = new Dirigibles();
+    player.playedCards.push(dirigibles);
+    player.addResourceTo(dirigibles, 3);
+
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 9});
   });
 });

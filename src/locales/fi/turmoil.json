@@ -1,0 +1,40 @@
+{
+  "Turmoil": "Myllerrys",
+  "Send a delegate in an area (from lobby)": "Lähetä edustaja alueelle (aulasta)",
+  "Send a delegate in an area (5 M€)": "Lähetä edustaja alueelle (5 M€)",
+  "Send a delegate in an area (3 M€)": "Lähetä edustaja alueelle (3 M€)",
+  "Policies": "Politiikka",
+  "No ruling Policy": "Ei hallitsevaa politiikkaa",
+
+  "Mars First": "Mars Ensin",
+  "Scientists": "Tutkijat",
+  "Unity": "Yhtenäisyys",
+  "Kelvinists": "Kelvinistit",
+  "Reds": "Punaiset",
+  "Greens": "Vihreät",
+
+  "mars first": "Mars ensin",
+  "scientists": "tutkijat",
+  "unity": "yhtenäisyys",
+  "kelvinists": "kelvinistit",
+  "reds": "punaiset",
+  "greens": "vihreät",
+
+  "Chairman": "PJ",
+  "Party leader": "Puoluejohtaja",
+  "2 Party leaders": "2 puoluejohtajaa",
+
+  "Mars First - (All players receive 1 M€ for each building tag they have.)": "Mars Ensin - (Kaikki pelaajat saavat 1 M€ jokaisesta rakennus-tunnisteesta jonka omistavat.)",
+  "Scientists - (All players receive 1 M€ for each science tag they have.)": "Tutkijat - (Kaikki pelaajat saavat 1 M€ jokaisesta tiede-tunnisteesta jonka omistavat.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "Yhtenäisyys - (Kaikki pelaajat saavat 1 M€ jokaisesta Venus-, Maa- ja Jupiter-tunnisteesta jonka omistavat.)",
+  "Kelvinists - (All players receive 1 M€ for each heat production they have.)": "Kelvinistit - (Kaikki pelaajat saavat 1 M€ jokaisesta lämpötuotannosta jonka omistavat.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "Punaiset - (Pelaaja alhaisimmalla MKL-luokituksella nostaa MKL-luokitustaan 1 askeleen. Tasapelissä kaikki hyötyvät.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "Vihreät - (Kaikki pelaajat saavat 1 M€ jokaisesta kasvi-, mikrobi- ja eläin-tunnisteesta jonka omistavat.)",
+
+  "Mars First (Focused on Martian development and independence.)": "Mars Ensin (Keskittyy Marsin kehitykseen ja itsenäisyyteen.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "Tutkijat (Teknologia on ovi tulevaisuuteen, ja tutkijat tekevät kaiken sen avaamiseksi.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "Yhtenäisyys (Haluaa nähdä ihmiskunnan kukoistavan koko aurinkokunnassa.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "Vihreät (Haluavat nähdä uuden Maan mahdollisimman pian.)",
+  "Reds (Wishes to preserve the red planet.)": "Punaiset (Haluavat säilyttää punaisen planeetan.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "Kelvinistit (Kannattavat nopeaa maankaltaistamista, yleensä käyttäen lämpö ensin -strategiaa.)"
+}

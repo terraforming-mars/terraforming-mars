@@ -2,8 +2,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Chimera extends CorporationCard {
+export class Chimera extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CHIMERA,

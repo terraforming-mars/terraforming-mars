@@ -18,8 +18,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from 'vue';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -27,13 +26,8 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
 import {getPreferences} from '../utils/PreferencesManager';
 
-const dialogPolyfill = require('dialog-polyfill');
+import dialogPolyfill from 'dialog-polyfill';
 
-type Refs = {
-  dialog: HTMLElement,
-  textarea: HTMLTextAreaElement,
-  copied: HTMLSpanElement,
-}
 
 function browser(): string {
   // Taken from https://stackoverflow.com/questions/5916900/how-can-you-detect-the-version-of-a-browser
@@ -53,7 +47,12 @@ function browser(): string {
   return match.join(' ');
 }
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  dialog: HTMLDialogElement;
+  textarea: HTMLTextAreaElement;
+};
+
+export default defineComponent({
   name: 'BugReportDialog',
   data() {
     return {
@@ -61,13 +60,18 @@ export default (Vue as WithRefs<Refs>).extend({
       showCopied: false,
     };
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
+  },
   methods: {
     show() {
-      showModal(this.$refs.dialog);
+      showModal(this.typedRefs.dialog);
     },
     copyTextArea() {
-      this.$refs.textarea.select();
-      navigator.clipboard.writeText(this.$refs.textarea.value);
+      this.typedRefs.textarea.select();
+      navigator.clipboard.writeText(this.typedRefs.textarea.value);
       this.showCopied = true;
     },
     url(playerView: PlayerViewModel | undefined) {
@@ -83,19 +87,32 @@ export default (Vue as WithRefs<Refs>).extend({
       const playerView = vueRoot(this).playerView;
       const content = {
         url: this.url(playerView),
-        color: playerView?.thisPlayer.color,
-        step: playerView?.game.step,
-        version: raw_settings.head,
-        builtAt: raw_settings.builtAt,
-        browser: browser(),
-        language: getPreferences().lang,
-        experimental_ui: getPreferences().experimental_ui,
       };
+      if (playerView !== undefined) {
+        Object.assign(
+          content,
+          {
+            color: playerView.thisPlayer.color,
+            expansions: Object.entries(playerView.game.gameOptions.expansions)
+              .filter(([_k, v]) => v === true)
+              .map(([k, _v]) => k)
+              .join(', '),
+            step: playerView.game.step,
+          });
+      }
+      Object.assign(content,
+        {
+          version: raw_settings.head,
+          builtAt: raw_settings.builtAt,
+          browser: browser(),
+          language: getPreferences().lang,
+          experimental_ui: getPreferences().experimental_ui,
+        });
       this.message = JSON.stringify(content, null, 2);
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
     this.setMessage();
   },
 });

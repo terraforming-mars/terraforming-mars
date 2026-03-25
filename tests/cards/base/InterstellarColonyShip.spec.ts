@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
-import {Research} from '../../../src/server/cards/base/Research';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterstellarColonyShip', () => {
@@ -16,12 +14,13 @@ describe('InterstellarColonyShip', () => {
 
   it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 4};
+    expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 5};
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    player.playedCards.push(new Research(), new Research(), new GeneRepair());
-    expect(card.canPlay(player)).is.true;
-
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(4);
   });

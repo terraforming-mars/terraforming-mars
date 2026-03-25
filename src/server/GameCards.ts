@@ -12,7 +12,7 @@ import {CEO_CARD_MANIFEST} from './cards/ceos/CeoCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
-import {isCompatibleWith} from './cards/ICardFactory';
+import {isCompatibleWith} from './cards/CardFactorySpec';
 import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {isIProjectCard, IProjectCard} from './cards/IProjectCard';
@@ -76,11 +76,8 @@ export class GameCards {
 
   public getProjectCards() {
     const cards = this.getCards<IProjectCard>('projectCards');
-    const cardsWithIncludedCards = this.addCustomCards(
-      cards,
-      this.gameOptions.includedCards,
-    );
-    return cardsWithIncludedCards.filter(isIProjectCard);
+    this.addCustomCards(cards, this.gameOptions.includedCards);
+    return cards.filter(isIProjectCard);
   }
   public getStandardProjects() {
     return this.getCards<IStandardProjectCard>('standardProjects');
@@ -88,7 +85,8 @@ export class GameCards {
   public getCorporationCards(): Array<ICorporationCard> {
     const cards = this.getCards<ICorporationCard>('corporationCards')
       .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
-    return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
+    this.addCustomCards(cards, this.gameOptions.customCorporationsList);
+    return cards;
   }
   public getPreludeCards() {
     let preludes = this.getCards<IPreludeCard>('preludeCards');
@@ -98,7 +96,7 @@ export class GameCards {
     if (preludes.length === 0) {
       preludes = this.instantiate(PRELUDE_CARD_MANIFEST.preludeCards);
     }
-    preludes = this.addCustomCards(preludes, this.gameOptions.customPreludes);
+    this.addCustomCards(preludes, this.gameOptions.customPreludes);
 
     if (this.gameOptions.twoCorpsVariant) {
       // As each player who doesn't have Merger is dealt Merger in SelectInitialCards.ts,
@@ -109,25 +107,22 @@ export class GameCards {
   }
 
   public getCeoCards() {
-    let ceos = this.getCards<ICeoCard>('ceoCards');
-    ceos = this.addCustomCards(ceos, this.gameOptions.customCeos);
+    const ceos = this.getCards<ICeoCard>('ceoCards');
+    this.addCustomCards(ceos, this.gameOptions.customCeos);
     return ceos;
   }
 
-  private addCustomCards<T extends ICard>(cards: Array<T>, customList: ReadonlyArray<CardName> = []): Array<T> {
+  /**
+   * Instantiate every card in `customList` and add them to `cards` (except those that already exist in `cards`),
+   */
+  private addCustomCards<T extends ICard>(cards: Array<T>, customList: ReadonlyArray<CardName> = []): void {
     for (const cardName of customList) {
-      const idx = cards.findIndex((c) => c.name === cardName);
-      if (idx === -1) {
-        const card = newCard(cardName);
-        if (card === undefined) {
-          // TODO(kberg): throw an error.
-          console.warn(`Unknown card: ${cardName}`);
-        } else {
-          cards.push(<T> card);
-        }
+      if (cards.findIndex((c) => c.name === cardName) > -1) {
+        continue;
       }
+      const card = newCard(cardName);
+      cards.push(<T> card);
     }
-    return cards;
   }
 
   private getCards<T extends ICard>(cardManifestName: keyof ModuleManifest) : Array<T> {

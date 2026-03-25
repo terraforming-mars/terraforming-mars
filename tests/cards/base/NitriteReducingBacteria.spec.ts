@@ -37,6 +37,6 @@ describe('NitriteReducingBacteria', () => {
 
     expect(churn(() => orOptions.options[0].cb(), player)).is.undefined;
     expect(card.resourceCount).to.eq(2);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 });

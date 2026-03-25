@@ -25,14 +25,14 @@ describe('GeologistTeam', () => {
     game.underworldData.tokens.push('corruption1');
     const spaces = UnderworldExpansion.identifiableSpaces(player);
     UnderworldExpansion.identify(game, spaces[0], player);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     game.underworldData.tokens.push('ocean');
     UnderworldExpansion.identify(game, spaces[1], player);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     game.underworldData.tokens.push('ocean');
     UnderworldExpansion.identify(game, spaces[2], player2);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 });

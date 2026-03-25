@@ -14,12 +14,12 @@ describe('BioSol', () => {
   beforeEach(() => {
     card = new BioSol();
     [game, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('initialAction', () => {
     expect(player.cardsInHand).is.empty;
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.MICROBE))).has.length(2);

@@ -28,7 +28,7 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
  * @param {ReadonlyArray<T>} b: the second array
  * @return {Array<T>} the intersection of both arrays
  */
-export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array<T> {
+export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<NoInfer<T>>): Array<T> {
   return a.filter((e) => b.includes(e));
 }
 
@@ -39,25 +39,31 @@ export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array
  * @param {Array<T>} b: the second array
  * @return {Boolean} true if a includes an element of b.
  */
-export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): boolean {
+export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<NoInfer<T>>): boolean {
   return a.some((e) => b.includes(e));
 }
 
 /**
  * Returns elements in a that are not in b.
  *
- * @param {Array<T>} a: the first array
- * @param {Array<T>} b: the second array
+ * Friendly to duplicates in an array.
+ *
+ * @param {Array} a the first array
+ * @param {Array} b the second array
  */
 export function oneWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   // Not optimized for large arrays.
-  return a.filter((e) => !b.includes(e));
+  const remainder = [...a];
+  for (const elem of b) {
+    inplaceRemove(remainder, elem);
+  }
+  return remainder;
 }
 
 /**
  * Returns elements in neither A nor B.
  */
-export function twoWayDifference<T>(a: Array<T>, b: Array<T>): Array<T> {
+export function twoWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   return a
     .filter((x) => !b.includes(x))
     .concat(b.filter((x) => !a.includes(x)));
@@ -78,7 +84,7 @@ export type ValueOf<T> = T[keyof T];
  *
  * Returns true if the element was removed from the array, false otherwise.
  */
-export function inplaceRemove<T>(array: Array<T>, element: T): boolean {
+export function inplaceRemove<T>(array: Array<T>, element: NoInfer<T>): boolean {
   return inplaceRemoveIf(array, (e) => e === element) !== undefined;
 }
 
@@ -152,6 +158,19 @@ export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
 }
 
 /**
+ * Return a partial of |record| omitting entries whose value is 0.
+ */
+export function partialize<T extends string | number | symbol>(record: Record<T, number>): Partial<Record<T, number>> {
+  const partial: Partial<Record<T, number>> = {};
+  for (const e in record) {
+    if (record[e] !== 0) {
+      partial[e] = record[e];
+    }
+  }
+  return partial;
+}
+
+/**
  * Makes a copy of array, but then empties it.
  * Useful for moving contents.
  */
@@ -168,6 +187,71 @@ export function toName<T>(item: {name: T}): T {
   return item.name;
 }
 
+/**
+ * Returns the ID of any IDed item. Ideal for iterating with the Array.map and other iterative functions.
+ */
 export function toID<T>(item: {id: T}): T {
   return item.id;
+}
+
+/**
+ * Return the names of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns ['M', 'T'].
+ */
+export function getEnumKeys<T extends Record<string, any>>(enumObject: T): Array<string> {
+  return Object.keys(enumObject) as Array<string>;
+}
+
+/**
+ * Return the values of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns ['Monday', 'Tuesday'], and is of type Array<Day>.
+ */
+export function getEnumStringValues<T extends Record<string, string>>(enumObject: T): Array<T[keyof T]> {
+  return Object.values(enumObject) as Array<T[keyof T]>;
+}
+
+/**
+ * Return the entries of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns [['M', 'Monday'], ['T', 'Tuesday']], and is of type Array<[string, Day]>.
+ */
+export function getEnumStringEntries<T extends Record<string, string>>(enumObject: T): Array<[string, T[keyof T]]> {
+  return Object.entries(enumObject) as Array<[string, T[keyof T]]>;
+}
+
+/**
+ * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
+ *
+ * Accepts `undefined` as class and fails when obj is not undefined.
+ */
+export function cast<T>(obj: any, klass: new (...args: any[]) => T): T;
+export function cast<T>(obj: any, klass: undefined): undefined;
+export function cast<T>(obj: any, klass: (new (...args: any[]) => T) | undefined): T | undefined {
+  if (klass === undefined) {
+    if (obj !== undefined) {
+      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
+    }
+    return undefined;
+  }
+  if (!(obj instanceof klass)) {
+    throw new Error(`Not an instance of ${klass.name}: ${obj?.constructor?.name}`);
+  }
+  return obj;
 }

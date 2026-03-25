@@ -19,18 +19,26 @@ describe('Prospecting', () => {
   });
 
   it('Can play', () => {
+    player.megaCredits = 3;
+    expect(card.canPlay(player)).is.false;
+    player.megaCredits = 4;
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
+    player.megaCredits = 4;
     const coloniesInPlay = game.colonies.length;
     cast(card.play(player), undefined);
     runAllActions(player.game);
     const selectColony = cast(player.popWaitingFor(), SelectColony);
     const selectedColony = selectColony.colonies[0];
     selectColony.cb(selectedColony);
+    runAllActions(game);
+
     expect(game.colonies).to.contain(selectedColony);
     expect(game.colonies).has.length(coloniesInPlay + 1);
+
+    expect(player.megaCredits).eq(0);
   });
 
   it('Venus cannot be activated, so is not selectable', () => {
@@ -43,7 +51,7 @@ describe('Prospecting', () => {
   });
 
   it('Venus can be activated, so is not selectable', () => {
-    player.corporations.push(new Celestic());
+    player.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);

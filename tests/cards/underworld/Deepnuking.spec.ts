@@ -24,6 +24,7 @@ describe('Deepnuking', () => {
   });
 
   it('play', () => {
+    player.plants = 5;
     player2.plants = 5;
 
     cast(card.play(player), undefined);

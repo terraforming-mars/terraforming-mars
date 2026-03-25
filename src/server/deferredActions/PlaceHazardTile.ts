@@ -30,7 +30,7 @@ export class PlaceHazardTile extends DeferredAction<Space> {
 
     return new SelectSpace(title, availableSpaces)
       .andThen((space) => {
-        AresHazards.putHazardAt(space, hazardType);
+        AresHazards.putHazardAt(this.player.game, space, hazardType);
         LogHelper.logTilePlacement(this.player, space, this.hazardType);
         this.cb(space);
         return undefined;

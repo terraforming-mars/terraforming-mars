@@ -10,6 +10,6 @@ export class Politician implements IAward {
     Turmoil;
     const turmoil = Turmoil.getTurmoil(player.game);
     const partyLeaderCount = turmoil.parties.filter((party) => party.partyLeader === player).length;
-    return partyLeaderCount + turmoil.getPlayerInfluence(player);
+    return partyLeaderCount + turmoil.getInfluence(player);
   }
 }

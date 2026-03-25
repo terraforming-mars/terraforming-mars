@@ -12,61 +12,53 @@ describe('BreedingFarms', () => {
   beforeEach(() => {
     card = new BreedingFarms();
     [/* game */, player] = testGame(1);
-    player.playedCards.push(card);
     fish = new Fish();
     player.popWaitingFor();
   });
 
-  it('canPlay', () => {
-    player.tagsForTest = {};
-    expect(card.canPlay(player)).is.false;
-
-    player.tagsForTest = {science: 1};
-    expect(card.canPlay(player)).is.false;
-
-    player.tagsForTest = {animal: 1};
-    expect(card.canPlay(player)).is.false;
-
-    player.tagsForTest = {science: 1, animal: 1};
-    expect(card.canPlay(player)).is.true;
-  });
+  const canPlayRuns = [
+    {tags: {}, expected: false},
+    {tags: {science: 1}, expected: false},
+    {tags: {animal: 1}, expected: false},
+    {tags: {science: 1, animal: 1}, expected: true},
+  ] as const;
+  for (const run of canPlayRuns) {
+    it('canPlay ' + JSON.stringify(run), () => {
+      player.tagsForTest = run.tags;
+      expect(card.canPlay(player)).eq(run.expected);
+    });
+  }
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.game.getTemperature()).eq(-30);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.game.getTemperature()).eq(-28);
   });
 
-  it('Can act', () => {
-    player.plants = 0;
-    player.playedCards = [];
-
-    expect(card.canAct(player)).is.false;
-
-    player.plants = 1;
-    player.playedCards = [];
-
-    expect(card.canAct(player)).is.false;
-
-    player.plants = 0;
-    player.playedCards = [fish];
-
-    expect(card.canAct(player)).is.false;
-
-    player.plants = 1;
-    player.playedCards = [fish];
-
-    expect(card.canAct(player)).is.true;
-  });
+  const canActRuns = [
+    {plants: 0, card: false, expected: false},
+    {plants: 1, card: false, expected: false},
+    {plants: 0, card: true, expected: false},
+    {plants: 1, card: true, expected: true},
+  ] as const;
+  for (const run of canActRuns) {
+    it('Can act ' + JSON.stringify(run), () => {
+      player.plants = run.plants;
+      if (run.card) {
+        player.playedCards.push(fish);
+      }
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 
   it('act', () => {
     player.plants = 1;
     fish.resourceCount = 0;
-    player.playedCards = [fish];
+    player.playedCards.push(fish);
 
     player.defer(card.action(player));
     runAllActions(player.game);

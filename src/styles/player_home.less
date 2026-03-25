@@ -318,7 +318,6 @@
     background-position: 0px !important;
 }
 
-
 .tag-excavation-count {
   background-image: url(./assets/underworld/excavate.png);
   border: none !important;
@@ -332,8 +331,34 @@
   background-position: 0px !important;
 }
 
+.tag-underground-token-count {
+  background-image: url(./assets/underworld/underground-token-background.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
 .tag-corruption-count {
   background-image: url(./assets/underworld/corruption.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
+.tag-negative-vp {
+  background-image: url(./assets/underworld/negative-vp.png);
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
@@ -405,6 +430,11 @@
     position: relative;
     top: -100px;
     visibility: hidden;
+}
+
+.hotkey-target {
+  visibility: hidden;
+  scroll-margin-top: 70px;
 }
 
 .highlighter_box {
@@ -580,9 +610,14 @@
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 200px;
-            background-position: -30px -5px;
             border-radius: 10px 10px 0 0;
+        }
+
+        .claimable {
+          border: 1px solid #b0b040;
+        }
+        .not-claimable {
+          border: 0px solid;
         }
 
         @ma-name:
@@ -604,76 +639,41 @@
           economizer, pioneer, land-specialist, martian,
           cosmic-settler, botanist, promoter, zoologist, a-manufacturer,
 
-          v-electrician, smith, tradesman, irrigator, capitalist,
+          v-electrician, v-spacefarer, smith, tradesman, irrigator, capitalist,
           forecaster, edgedancer, visionary, naturalist, voyager,
 
           rugged, purifier,
 
           agronomist, engineer, farmer,
-          ;
-        each(@ma-name, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/@{value}.png");
-          }
-        })
 
-        /* TODO(kberg): move these files up a level. */
-        @ma-name-fanmade:
           colonizer, minimalist, terran, tropicalist,
           curator, tourist, a-engineer, a-zoologist,
 
           t-collector, firestarter, terra-pioneer, spacefarer, gambler,
-          biologist, t-economizer, t-politician, urbanist, warmonger,
+          biologist, t-politician, urbanist, warmonger,
           incorporator, manufacturer, politician,
-        ;
-        each(@ma-name-fanmade, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/fanmade/@{value}.png");
-          }
-        })
 
-        @ma-name-modular:
           administrator, constructor, founder, highlander, hydrologist, investor,
-          landscaper, metropolist, mogul, thawer, traveller,
+          landscaper, metropolist, mogul, thawer, traveller, blacksmith,
 
           collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
           planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
+
+          kingpin, excavator, tunneler, risktaker,
+
+          architect, c-forester, coastguard,
+
+          builder7, legend4, pioneer4, metallurgist, spacefarer4, tactician4,
+          terraformer29, terran5, trader, tycoon10, suburbian, briber, merchant,
         ;
-        each(@ma-name-modular, {
+        each(@ma-name, {
           .ma-name--@{value} {
-            background-image: url("assets/ma/modular/@{value}.png");
+            background-image: url("assets/ma/@{value}.png");
+            // Images are expected to be 140px x 83px
+            // background-size: 200px;
+            // background-position: -30px -5px;
           }
         })
-
-        // TODO(kberg): Set better background sizes.
-        // Underworld
-        .ma-name--kingpin {
-          background-image: url(./assets/ma/underworld/kingpin.png);
-          background-repeat: no-repeat;
-          background-size: 153px !important;
-          background-position: -6px -5px !important;
-        }
-
-        .ma-name--edgelord {
-          background-image: url(./assets/ma/underworld/edgelord.png);
-          background-repeat: no-repeat;
-          background-size: 153px !important;
-          background-position: -6px -5px !important;
-        }
-
-        .ma-name--tunneler {
-          background-image: url(./assets/ma/underworld/tunneler.png);
-          background-repeat: no-repeat;
-          background-size: 180px !important;
-          background-position: -21px -7px !important;
-        }
-
-        .ma-name--risktaker {
-          background-image: url(./assets/ma/underworld/risktaker.png);
-          background-size: 165px !important;
-          background-position: -11px -5px !important;
-          background-repeat: no-repeat;
-        }
 
         .ma-description {
             display: inline-block;
@@ -684,7 +684,6 @@
             font-size: 14px;
             line-height: 15px;
             text-align: center;
-
         }
     }
 }
@@ -844,12 +843,16 @@
     }
 }
 
+.player_home_block--underground-tokens {
+  height: 50px;
+}
+
 .deck-size {
     position: absolute;
     width: 33px;
     margin: 30px 0 0 0;
     font-family: Prototype;
-    font-size: 15px;
+    font-size: 11px;
     text-align: center;
     color: #fff;
 }
@@ -884,7 +887,7 @@
     margin-bottom: 15px;
     z-index: 105;
     top: -12px;
-    display: flex;
+    display: inline-flex;
 
     .top-bar-collapser {
         background: #303030;

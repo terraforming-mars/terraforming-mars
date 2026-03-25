@@ -31,14 +31,13 @@ export class SponsoredAcademies extends Card implements IProjectCard {
     });
   }
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.cardsInHand.length > 1; // this card and at least another
+    return player.cardsInHand.length >= 2;
   }
 
   public override bespokePlay(player: IPlayer) {
-    // TODO(kberg): Use DiscardCards.andThen().
-    player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES);
+    player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES).andThen(() => {});
     player.game.defer(DrawCards.keepAll(player, 3), Priority.SPONSORED_ACADEMIES);
-    for (const p of player.getOpponents()) {
+    for (const p of player.opponents) {
       player.game.defer(DrawCards.keepAll(p));
     }
     return undefined;

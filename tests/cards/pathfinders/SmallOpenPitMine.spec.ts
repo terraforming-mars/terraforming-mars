@@ -20,7 +20,7 @@ describe('SmallOpenPitMine', () => {
 
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
-    player.playedCards = [microbeCard, floaterCard];
+    player.playedCards.push(microbeCard, floaterCard);
   });
 
   it('play - steel', () => {

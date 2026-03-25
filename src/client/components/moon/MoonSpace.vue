@@ -8,34 +8,29 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
     <template v-if="tileView === 'coords'">
-      <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
+      <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
     </template>
-    <div
-      v-if="space.color !== undefined && tileView === 'show'"
-      class="board-cube"
-      :class="`board-cube--${space.color}`"
-    />
-    <div
-      v-if="space.coOwner !== undefined && tileView === 'show'"
-      class="board-cube-coOwner"
-      :class="`board-cube--${space.coOwner}`"
-    />
-
+    <div v-if="space.color !== undefined && tileView === 'show'" :class="playerColorCss"></div>
+    <div v-if="space.coOwner !== undefined && tileView === 'show'" :class="coOwnerColorCss"></div>
+    <div class="board-log-highlight" :data_log_highlight_id="space.id"></div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import Bonus from '@/client/components/Bonus.vue';
 import {TileView} from '../board/TileView';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {getSpaceName} from '@/common/boards/spaces';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'MoonSpace',
   props: {
     space: {
       type: Object as () => SpaceModel,
+      required: true,
     },
     text: {
       type: String,
@@ -62,6 +57,23 @@ export default Vue.extend({
       }
 
       return css;
+    },
+    playerColorCss(): string {
+      if (this.space?.color === undefined) {
+        return '';
+      }
+      const css = 'board-cube board-cube--' + this.space.color;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
+    },
+    coOwnerColorCss(): string {
+      if (this.space?.coOwner === undefined) {
+        return '';
+      }
+      const css = 'board-cube-coOwner board-cube--' + this.space.coOwner;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
+    },
+    getSpaceName(): typeof getSpaceName {
+      return getSpaceName;
     },
   },
 });

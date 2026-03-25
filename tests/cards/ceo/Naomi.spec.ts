@@ -31,7 +31,7 @@ describe('Naomi', () => {
   ] as const;
   for (const run of onColonyAddedRuns) {
     it('Gains 2 energy and 2 M€ when building a colony ' + JSON.stringify(run), () => {
-      const players = game.getPlayers();
+      const players = game.players;
       players[0].playedCards.push(card);
 
       expect(player.stock.asUnits()).deep.eq(Units.of({}));

@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {shallowMount, Wrapper} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {shallowMount, VueWrapper} from '@vue/test-utils';
+import {globalConfig} from '../getLocalVue';
 import CardVictoryPoints from '@/client/components/card/CardVictoryPoints.vue';
-import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {RecursivePartial} from '@/common/utils/utils';
 import {CardResource} from '@/common/CardResource';
 import {Tag} from '@/common/cards/Tag';
 
 describe('CardVictoryPoints', () => {
-  let wrapper: Wrapper<any>;
+  let wrapper: VueWrapper<any>;
 
   beforeEach(() => {
     wrapper = shallowMount(CardVictoryPoints, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         victoryPoints: 0,
       },
     });
@@ -41,24 +41,24 @@ describe('CardVictoryPoints', () => {
   it('renders points with item - points = targed 10/', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.CAMP}, points: 10, target: 10}));
     expect(wrapper.text()).to.equal('10/');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('resource');
-    expect(wrapper.find('[data-test=item]').props().item.resource).eq('Camp');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.type).eq('resource');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.resource).eq('Camp');
   });
   it('renders points with item - points = targed 5/10', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.ASTEROID}, points: 5, target: 10}));
     expect(wrapper.text()).to.equal('5/10');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('resource');
-    expect(wrapper.find('[data-test=item]').props().item.resource).eq('Asteroid');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.type).eq('resource');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.resource).eq('Asteroid');
   });
   it('search for life', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.TAG, tag: Tag.SCIENCE}, targetOneOrMore: true}));
     expect(wrapper.text()).to.equal('*:3');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('tag');
-    expect(wrapper.find('[data-test=item]').props().item.tag).eq('science');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.type).eq('tag');
+    expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.tag).eq('science');
   });
 
 
-  function prop(vps: RecursivePartial<ICardRenderDynamicVictoryPoints>) {
+  function prop(vps: RecursivePartial<CardRenderDynamicVictoryPoints>) {
     return {
       victoryPoints: {
         item: undefined,

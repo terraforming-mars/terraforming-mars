@@ -24,6 +24,6 @@ describe('MagneticFieldDome', () => {
     card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 });

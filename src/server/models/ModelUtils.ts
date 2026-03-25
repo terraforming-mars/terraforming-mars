@@ -33,24 +33,10 @@ export function cardsToModel(
       discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
     }
 
-    let warning = undefined;
-    const playCardMetadata = options?.extras?.get(card.name);
-    if (typeof(playCardMetadata?.details) === 'object') {
-      const thinkTankResources = playCardMetadata.details.thinkTankResources;
-      if ((thinkTankResources ?? 0) > 0) {
-        warning = `Playing ${card.name} consumes ${thinkTankResources} data from Think Tank`;
-      }
-      if (playCardMetadata.details.redsCost) {
-        warning = warning === undefined ? '' : '\n';
-        warning += `Playing ${card.name} will cost ${playCardMetadata.details.redsCost} M€ more because Reds are in power`;
-      }
-    }
-
     const model: CardModel = {
       resources: options.showResources ? card.resourceCount : undefined,
       name: card.name,
       calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-      warning: warning,
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
@@ -60,6 +46,12 @@ export function cardsToModel(
     } else if (options.enabled?.[index] === false) {
       model.isDisabled = true;
     }
+    const playCardMetadata = options?.extras?.get(card.name);
+
+    if (isIProjectCard(card) && card.additionalProjectCosts) {
+      model.additionalProjectCosts = card.additionalProjectCosts;
+    }
+
     const reserveUnits = playCardMetadata?.reserveUnits;
     if (reserveUnits !== undefined) {
       model.reserveUnits = reserveUnits;

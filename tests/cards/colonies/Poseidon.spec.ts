@@ -13,7 +13,7 @@ describe('Poseidon', () => {
 
     cast(card.play(player), undefined);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const ceres = new Ceres();
     ceres.addColony(player);
 
@@ -30,7 +30,7 @@ describe('Poseidon', () => {
     const card = new Poseidon();
     const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
 
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     const selectColony = cast(player.popWaitingFor(), SelectColony);

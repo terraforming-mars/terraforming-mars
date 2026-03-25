@@ -1,22 +1,22 @@
 {
-    "APHRODITE": "Aphrodite",
+    "APHRODITE": "",
     "You start with 1 plant production and 47 M€.": "Rozpoczynasz grę z 47 M€. Podnieś swoją produkcję roślinności o 1 poziom.",
     "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Efekt trwały: Gdy dowolny gracz podnosi Współczynnik Terraformacji Wenus, otrzymujesz 2 M€ za każdy podniesiony poziom.",
 
-    "Celestic": "Celestic",
+    "Celestic": "",
     "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Rozpoczynasz grę z 42 M€. W ramach pierwszej akcji dobierz 2 karty z symbolem Dryfowców.",
     "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Akcja: Umieść jednostkę dryfowców na dowolnej karcie. Otrzymujesz 1 PZ za każde 3 jednostki dryfowców na tej karcie.",
 
-    "Manutech": "Manutech",
+    "Manutech": "",
     "You start with 1 steel production, and 35 M€.": "Rozpoczynasz grę z 35 M€. Podnieś swoją produkcję stali o 1 poziom.",
     "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Efekt trwały: Gdy podnosisz poziom produkcji dowolnego zasobu standardowego, otrzymujesz 1 jednostkę tego zasobu.",
 
-    "MORNING STAR INC.": "Morning Star Inc.",
+    "MORNING STAR INC.": "",
     "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Rozpoczynasz grę z 50 M€. W ramach pierwszej akcji dobierz 3 karty z symbolem Wenus.",
     "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Efekt trwały: Możesz traktować Współczynnik Terraformacji Wenus jakby był o 2 poziomy wyższy lub niższy.",
     "Draw 3 Venus-tag cards": "Dobierz 3 karty z symbolem Wenus",
 
-    "VIRON": "Viron",
+    "VIRON": "",
     "You start with 48 M€.": "Rozpoczynasz grę z 48 M€.",
     "Action: Use a blue card action that has already been used this generation.": "Akcja: Użyj ponownie akcji z aktywnej karty, wykorzystanej już w tym pokoleniu."
 }

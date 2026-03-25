@@ -5,7 +5,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SubnauticPirates', () => {
@@ -17,106 +17,76 @@ describe('SubnauticPirates', () => {
 
   beforeEach(() => {
     card = new SubnauticPirates();
-    [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+    [game, player, player2, player3] = testGame(4, {underworldExpansion: true});
   });
 
   const canPlayRuns = [
-    {it: 'case 1', corruption: 0, marker: undefined, expected: false},
-    {it: 'case 2', corruption: 0, marker: 'land', expected: false},
-    {it: 'case 3', corruption: 0, marker: 'ocean-space', expected: false},
-    {it: 'case 4', corruption: 0, marker: 'ocean-tile', expected: false},
-    {it: 'case 5', corruption: 1, marker: undefined, expected: false},
-    {it: 'case 6', corruption: 1, marker: 'land', expected: false},
-    {it: 'case 7', corruption: 1, marker: 'ocean-space', expected: false},
-    {it: 'case 8', corruption: 1, marker: 'ocean-tile', expected: true},
+    {corruption: 0, tokens: false, expected: false},
+    {corruption: 0, tokens: true, expected: false},
+    {corruption: 1, tokens: false, expected: false},
+    {corruption: 1, tokens: true, expected: false},
   ] as const;
-
   for (const run of canPlayRuns) {
-    it('canPlay ' + run.it, () => {
+    it('canPlay ' + JSON.stringify(run), () => {
       player.underworldData.corruption = run.corruption;
-
-      switch (run.marker) {
-      case 'land':
-        game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
-        break;
-      case 'ocean-space':
-        game.board.getAvailableSpacesForOcean(player)[0].excavator = player;
-        break;
-      case 'ocean-tile':
-        game.board.getAvailableSpacesForOcean(player)[0].excavator = player;
-        game.board.getAvailableSpacesForOcean(player)[0].tile = {tileType: TileType.OCEAN};
-        break;
-      case undefined:
-        break;
+      if (run.tokens) {
+        player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
 
       expect(card.canPlay(player)).eq(run.expected);
     });
   }
 
-  it('one excavation space, no corruption', () => {
+  it('no corruption', () => {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    oceanSpace.excavator = player;
     game.simpleAddTile(player, oceanSpace, {tileType: TileType.OCEAN});
 
     const adjacentSpaces = game.board.getAdjacentSpaces(oceanSpace);
-    const adjacentSpace2 = adjacentSpaces[0];
-    game.simpleAddTile(player2, adjacentSpace2, {tileType: TileType.GREENERY});
-    player2.megaCredits = 6;
+    game.simpleAddTile(player2, adjacentSpaces[0], {tileType: TileType.GREENERY});
+    player2.megaCredits = 7;
 
-    const adjacentSpace3 = adjacentSpaces[1];
-    game.simpleAddTile(player3, adjacentSpace3, {tileType: TileType.GREENERY});
+    game.simpleAddTile(player3, adjacentSpaces[1], {tileType: TileType.GREENERY});
     player3.megaCredits = 7;
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    const selectPlayer = cast(card.play(player), SelectPlayer);
 
-    expect(selectSpace.spaces).to.have.members([oceanSpace]);
+    expect(selectPlayer.players).to.have.members([player2, player3]);
 
-    cast(selectSpace.cb(oceanSpace), undefined);
+    cast(selectPlayer.cb(player2), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     cast(player2.popWaitingFor(), undefined);
     cast(player3.popWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(12);
+    expect(player.megaCredits).eq(7);
     expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(1);
+    expect(player3.megaCredits).eq(7);
   });
 
 
-  it('one excavation space, corruption', () => {
+  it('corruption, block', () => {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    oceanSpace.excavator = player;
     game.simpleAddTile(player, oceanSpace, {tileType: TileType.OCEAN});
 
     const adjacentSpaces = game.board.getAdjacentSpaces(oceanSpace);
-    const adjacentSpace2 = adjacentSpaces[0];
-    game.simpleAddTile(player2, adjacentSpace2, {tileType: TileType.GREENERY});
-    player2.megaCredits = 6;
-
-    const adjacentSpace3 = adjacentSpaces[1];
-    game.simpleAddTile(player3, adjacentSpace3, {tileType: TileType.GREENERY});
-    player3.megaCredits = 7;
-
+    game.simpleAddTile(player2, adjacentSpaces[0], {tileType: TileType.GREENERY});
+    player2.megaCredits = 8;
     player2.underworldData.corruption = 1;
-    player3.underworldData.corruption = 1;
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    const selectPlayer = cast(card.play(player), SelectPlayer);
 
-    expect(selectSpace.spaces).to.have.members([oceanSpace]);
+    expect(selectPlayer.players).to.have.members([player2]);
 
-    cast(selectSpace.cb(oceanSpace), undefined);
+    cast(selectPlayer.cb(player2), undefined);
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
     assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
     runAllActions(game);
-    assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
+    cast(player3.popWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(6);
-    expect(player2.megaCredits).eq(6);
-    expect(player3.megaCredits).eq(1);
+    expect(player.megaCredits).eq(0);
+    expect(player2.megaCredits).eq(8);
     expect(player2.underworldData.corruption).eq(0);
-    expect(player3.underworldData.corruption).eq(1);
   });
 });

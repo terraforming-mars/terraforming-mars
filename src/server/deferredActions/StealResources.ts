@@ -25,7 +25,7 @@ export class StealResources extends DeferredAction {
       return undefined;
     }
 
-    let candidates: Array<IPlayer> = this.player.getOpponents().filter((p) => p.stock.get(this.resource) > 0);
+    let candidates: Array<IPlayer> = this.player.opponents.filter((p) => p.stock.get(this.resource) > 0);
     if (this.resource === Resource.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }
@@ -41,7 +41,7 @@ export class StealResources extends DeferredAction {
       let qtyToSteal = Math.min(target.stock.get(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (this.resource === Resource.PLANTS && target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resource.PLANTS && target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 

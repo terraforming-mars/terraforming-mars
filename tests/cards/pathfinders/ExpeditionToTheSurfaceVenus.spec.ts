@@ -16,13 +16,13 @@ describe('ExpeditiontotheSurfaceVenus', () => {
 
   it('play', () => {
     player.cardsInHand = [];
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.cardsInHand).has.lengthOf(2);
     player.production.override({energy: 1});
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(game.getVenusScaleLevel()).eq(2);
     expect(player.megaCredits).eq(1);
 

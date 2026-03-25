@@ -31,7 +31,7 @@ describe('ProjectInspection', () => {
 
   it('Can not play if available actions can not act', () => {
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
     player.megaCredits = 1;
 
     expect(card.canPlay(player)).is.not.true;
@@ -40,7 +40,7 @@ describe('ProjectInspection', () => {
   it('Should play', () => {
     player.playedCards.push(restrictedArea);
     player.stock.add(Resource.MEGACREDITS, 2);
-    player.addActionThisGeneration(restrictedArea.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
     expect(card.canPlay(player)).is.true;
 
     // returns SelectCard.
@@ -49,18 +49,18 @@ describe('ProjectInspection', () => {
 
   it('Can not play with Playwrights if there is no other card to chain', () => {
     const playwrights = new Playwrights();
-    player.corporations.push(playwrights);
+    player.playedCards.push(playwrights);
 
-    player.addActionThisGeneration(playwrights.name);
+    player.actionsThisGeneration.add(playwrights.name);
     expect(card.canPlay(player)).is.false; // PI -> PW -> ???
   });
 
   it('Can be used to play Playwrights into another available event card', () => {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.corporations.push(playwrights);
+    player.playedCards.push(playwrights);
     player.playedCards.push(indenturedWorkers);
-    player.addActionThisGeneration(playwrights.name);
+    player.actionsThisGeneration.add(playwrights.name);
     expect(card.canPlay(player)).is.true; // PI -> PW -> PI -> PW -> IW
 
     player.playCard(card);
@@ -88,9 +88,9 @@ describe('ProjectInspection', () => {
   it('Can be used to play Odyssey into another available event card', () => {
     const odyssey = new Odyssey();
     const indenturedWorkers = new IndenturedWorkers();
-    player.corporations.push(odyssey);
+    player.playedCards.push(odyssey);
     player.playedCards.push(indenturedWorkers);
-    player.addActionThisGeneration(odyssey.name);
+    player.actionsThisGeneration.add(odyssey.name);
     expect(card.canPlay(player)).is.true; // PI -> OD -> PI -> OD -> IW
     runAllActions(player.game);
 
@@ -118,11 +118,11 @@ describe('ProjectInspection', () => {
 
   it('Can be played by Playwrights into different blue card', () => {
     const playwrights = new Playwrights();
-    player.corporations.push(playwrights);
+    player.playedCards.push(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
-    player.addActionThisGeneration(playwrights.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
+    player.actionsThisGeneration.add(playwrights.name);
     player.stock.add(Resource.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> RA
 
@@ -140,10 +140,10 @@ describe('ProjectInspection', () => {
   it('Can be played by Playwrights into Playwrights into another available event card', () => {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.corporations.push(playwrights);
+    player.playedCards.push(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(indenturedWorkers);
-    player.addActionThisGeneration(playwrights.name);
+    player.actionsThisGeneration.add(playwrights.name);
     player.stock.add(Resource.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> PW -> IW
 

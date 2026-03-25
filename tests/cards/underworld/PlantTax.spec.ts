@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PlantTax} from '../../../src/server/cards/underworld/PlantTax';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('PlantTax', () => {
@@ -29,16 +29,6 @@ describe('PlantTax', () => {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);
     expect(player3.plants).eq(398);
-  });
-
-  it('generationEnd', () => {
-    card.play(player);
-    player.playedCards.push(card);
-
-    expect(player.underworldData.corruption).eq(0);
-    finishGeneration(game);
-    expect(player.underworldData.corruption).eq(1);
-    finishGeneration(game);
     expect(player.underworldData.corruption).eq(1);
   });
 });

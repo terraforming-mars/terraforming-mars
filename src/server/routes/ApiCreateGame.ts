@@ -24,7 +24,8 @@ function getQuotaConfig(): QuotaConfig {
   try {
     if (val !== undefined) {
       const struct = JSON.parse(val);
-      let {limit, per} = struct;
+      let {limit} = struct;
+      const {per} = struct;
       if (limit === undefined) {
         throw new Error('limit is absent');
       }
@@ -73,7 +74,7 @@ export class ApiCreateGame extends Handler {
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
+  public override post(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       if (this.quotaHandler.measure(ctx) === false) {
         responses.quotaExceeded(req, res);
@@ -121,17 +122,15 @@ export class ApiCreateGame extends Handler {
             clonedGamedId: gameReq.clonedGamedId,
             coloniesExtension: gameReq.expansions.colonies,
             communityCardsOption: gameReq.expansions.community,
+            expansions: gameReq.expansions,
+            ceosDraftVariant: gameReq.ceosDraftVariant,
             corporateEra: gameReq.expansions.corpera,
             customCeos: gameReq.customCeos,
             customColoniesList: gameReq.customColoniesList,
             customCorporationsList: gameReq.customCorporationsList,
             customPreludes: gameReq.customPreludes,
             draftVariant: gameReq.draftVariant,
-            escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
-            escapeVelocityMode: gameReq.escapeVelocityMode,
-            escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
-            escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
-            escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+            escapeVelocity: gameReq.escapeVelocity,
             fastModeOption: gameReq.fastModeOption,
             includedCards: gameReq.includedCards,
             includeFanMA: gameReq.includeFanMA,

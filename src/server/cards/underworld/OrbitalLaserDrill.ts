@@ -21,9 +21,9 @@ export class OrbitalLaserDrill extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U33',
+        cardNumber: 'U033',
         renderData: CardRenderer.builder((b) => {
-          b.excavate(2);
+          b.excavate(2).asterix();
         }),
         description: 'Requires 2 science tags. Excavate 2 underground resources, IGNORING PLACEMENT RESTRICTIONS.',
       },

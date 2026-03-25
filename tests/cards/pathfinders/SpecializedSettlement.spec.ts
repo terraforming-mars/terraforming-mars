@@ -122,7 +122,7 @@ describe('SpecializedSettlement', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     cast(player.popWaitingFor(), undefined);
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const roboticWorkforce = new RoboticWorkforce();
     expect(roboticWorkforce.canPlay(player)).is.false;

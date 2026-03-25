@@ -62,7 +62,7 @@ describe('DeimosDownPromo', () => {
 
   it('Compatible with Kingdom of Tauraro', () => {
     const [game, player] = testGame(2);
-    player.corporations.push(new KingdomofTauraro());
+    player.playedCards.push(new KingdomofTauraro());
 
     const space35 = game.board.getSpaceOrThrow('35');
     const adjacentSpace = game.board.getAdjacentSpaces(space35)[0];

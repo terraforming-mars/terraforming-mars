@@ -35,7 +35,7 @@ describe('ColonyTradeHub', () => {
   ] as const;
   for (const run of onColonyAddedRuns) {
     it('Gains 2 M€ when any colony is added building a colony ' + JSON.stringify(run), () => {
-      const players = game.getPlayers();
+      const players = game.players;
       players[0].playedCards.push(card);
 
       expect(player.stock.asUnits()).deep.eq(Units.of({}));

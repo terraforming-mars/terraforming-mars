@@ -53,7 +53,7 @@ describe('WGProject', () => {
 
     selectCard.cb([donation]);
 
-    expect(player.playedCards).deep.eq([donation]);
+    expect(player.playedCards.asArray()).deep.eq([donation]);
     expect(game.preludeDeck.discardPile).to.have.members([businessEmpire, smeltingPlant]);
   });
 
@@ -71,7 +71,7 @@ describe('WGProject', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(15);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(game.preludeDeck.discardPile).to.have.members([galileanMining, businessEmpire, hugeAsteroid]);
   });
 });

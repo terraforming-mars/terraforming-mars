@@ -6,8 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
-import {assertPlaceTile} from '../../assertions';
-import {TileType} from '../../../src/common/TileType';
+import {assertPlaceMoonRoad} from '../../assertions';
 
 describe('TychoRoadNetwork', () => {
   let game: IGame;
@@ -25,15 +24,15 @@ describe('TychoRoadNetwork', () => {
     player.cardsInHand = [card];
     player.steel = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.steel = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.steel = 1;
     expect(player.production.megacredits).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
@@ -43,9 +42,9 @@ describe('TychoRoadNetwork', () => {
 
     runAllActions(game);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceMoonRoad(player, player.popWaitingFor());
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);
   });
 });

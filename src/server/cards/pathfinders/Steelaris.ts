@@ -13,8 +13,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Units} from '../../../common/Units';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Steelaris extends CorporationCard {
+export class Steelaris extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.STEELARIS,

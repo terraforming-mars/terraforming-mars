@@ -7,20 +7,23 @@ export class Ceres extends Colony {
   constructor() {
     super({
       name: ColonyName.CERES,
-      description: [
-        'Gain 1 steel production',
-        'Gain n steel',
-        'Gain 2 steel',
-      ],
-
-      buildType: ColonyBenefit.GAIN_PRODUCTION,
-      buildResource: Resource.STEEL,
-      tradeType: ColonyBenefit.GAIN_RESOURCES,
-      tradeQuantity: [1, 2, 3, 4, 6, 8, 10],
-      tradeResource: Resource.STEEL,
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusQuantity: 2,
-      colonyBonusResource: Resource.STEEL,
+      build: {
+        description: 'Gain 1 steel production',
+        type: ColonyBenefit.GAIN_PRODUCTION,
+        resource: Resource.STEEL,
+      },
+      trade: {
+        description: 'Gain n steel',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [1, 2, 3, 4, 6, 8, 10],
+        resource: Resource.STEEL,
+      },
+      colony: {
+        description: 'Gain 2 steel',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 2,
+        resource: Resource.STEEL,
+      },
     });
   }
 }

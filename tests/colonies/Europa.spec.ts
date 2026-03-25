@@ -50,7 +50,7 @@ describe('Europa', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(0);
   });
 

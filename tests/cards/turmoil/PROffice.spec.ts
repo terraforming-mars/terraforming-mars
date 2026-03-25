@@ -21,6 +21,6 @@ describe('PROffice', () => {
     player.playedCards.push(card2, card3);
     card.play(player);
     expect(player.megaCredits).to.eq(3);
-    expect(player.getTerraformRating()).to.eq(15);
+    expect(player.terraformRating).to.eq(15);
   });
 });

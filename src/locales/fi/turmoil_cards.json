@@ -1,0 +1,55 @@
+{
+  "Aerial Lenses": "Ilmalinssit",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "Vaatii että Kelvinistit hallitsevat tai sinulla on 2 edustajaa siellä. Poista enintään 2 kasvia keneltä tahansa pelaajalta. Lisää lämpötuotantoasi 2 askelta.",
+
+  "Banned Delegate": "Hylätty edustaja",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Vaatii että olet puheenjohtaja. Poista mikä tahansa EI-JOHTAJA edustaja.",
+
+  "Cultural Metropolis": "Kulttuurimetropoli",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Vaatii että Yhtenäisyys hallitsee tai sinulla on 2 edustajaa siellä. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta. Aseta 2 edustajaa yhteen puolueeseen.",
+
+  "Diaspora Movement": "Diaspora-liike",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Vaatii että Punaiset hallitsevat tai sinulla on 2 edustajaa siellä. Saat 1 M€:n jokaisesta Jupiter-tunnisteesta pelissä, sisältäen tämän.",
+
+  "Event Analysts": "Tapahtuma-analyytikot",
+  "Effect: You have +1 influence.": "VAIKUTUS: Sinulla on +1 vaikutus.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "Vaatii että Tutkijat hallitsevat tai sinulla on 2 edustajaa siellä.",
+
+  "GMO Contract": "GMO-sopimus",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "VAIKUTUS: Joka kerta kun pelaat kasvi-, eläin- tai mikrobi-tunnisteen, sisältäen tämän, Saat 2 M€.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "Vaatii että Vihreät hallitsevat tai sinulla on 2 edustajaa siellä.",
+
+  "Martian Media Center": "Marsin mediakeskus",
+  "Action: Pay 3 M€ to add a delegate to any party.": "TOIMINTO: Maksa 3 M€ lisätäksesi edustajan mihin tahansa puolueeseen.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "Vaatii että Mars Ensin hallitsee tai sinulla on 2 edustajaa siellä. Lisää M€-tuotantoasi 2 askelta.",
+
+  "Parliament Hall": "Parlamenttisali",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.": "Vaatii että Mars Ensin hallitsee tai sinulla on 2 edustajaa siellä. Lisää M€-tuotantoasi 1 askel jokaista 3 rakennus-tunnistetta kohden jonka omistat, sisältäen tämän.",
+
+  "PR Office": "PR-toimisto",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "Vaatii että Yhtenäisyys hallitsee tai sinulla on 2 edustajaa siellä. Nosta MKL:ääsi 1 askel. Saat 1 M€:n jokaisesta Maa-tunnisteesta jonka omistat, sisältäen tämän.",
+
+  "Public Celebrations": "Julkiset juhlat",
+  "Requires that you are Chairman.": "Vaatii että olet puheenjohtaja.",
+
+  "Recruitment": "Rekrytointi",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Vaihda yksi NEUTRAALI EI-JOHTAJA edustaja yhteen omaasi reservistä.",
+
+  "Red Tourism Wave": "Punainen turismiaalto",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Vaatii että Punaiset hallitsevat tai sinulla on 2 edustajaa siellä. Saat 1 M€:n jokaisesta TYHJÄSTÄ ALUEESTA LAATTOJESI VIERESSÄ",
+
+  "Sponsored Mohole": "Sponsoroitu porakaivo",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Vaatii että Kelvinistit hallitsevat tai sinulla on 2 edustajaa siellä. Lisää lämpötuotantoasi 2 askelta.",
+
+  "Supported Research": "Tuettu tutkimus",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "Vaatii että Tutkijat hallitsevat tai sinulla on 2 edustajaa siellä. Nosta 2 korttia.",
+
+  "Wildlife Dome": "Villieläinkupoli",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Vaatii että Vihreät hallitsevat tai sinulla on 2 edustajaa siellä. Aseta viheralue ja nosta happea 1 askel.",
+
+  "Vote Of No Confidence": "Epäluottamuslause",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Vaatii että sinulla on puoluejohtaja missä tahansa puolueessa ja että istuva puheenjohtaja on neutraali. Poista NEUTRAALI puheenjohtaja ja siirrä oma edustajasi (reservistä) sinne sen tilalle. Nosta MKL:ääsi 1 askel.",
+
+  "Political Alliance": "Poliittinen liitto",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "Vaatii että sinulla on 2 puoluejohtajaa. Nosta MKL:ääsi 1 askel."
+}

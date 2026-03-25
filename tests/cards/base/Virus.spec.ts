@@ -27,7 +27,7 @@ describe('Virus', () => {
 
     const orOptions = cast(card.play(player2), OrOptions);
 
-    orOptions.options[0].cb([player.playedCards[0]]);
+    orOptions.options[0].cb([birds]);
     expect(birds.resourceCount).to.eq(0);
 
     orOptions.options[1].cb();

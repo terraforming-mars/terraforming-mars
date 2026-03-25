@@ -80,7 +80,7 @@
 
   "Economic Espionage": "Економічна шпигунівля",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(Дія: Витратити 2 M€, щоб додати 1 дані на БУДЬ-ЯКУ карту.)",
-  "(1VP for every 3 data here.)": "(1 ПО за кожні 3 дані тут.)",
+  "1 VP for every 3 data here.": "(1 ПО за кожні 3 дані тут.)",
 
   "Economic Help": "Економічна допомога",
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(Підвищте найнижчий незавершений трек впливу на планету на 3 кроки. При рівній кількості, підвищте всі найнижчі треки на 2 кроки. Збільште виробництво M€ на 1 крок)",
@@ -112,7 +112,7 @@
   "Interplanetary Transport": "Міжпланетний транспорт",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Збільште виробництво M€ на 1 крок за кожну плитку міста поза Землею.)",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "Кікстартер",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "(Виберіть планетний тег. Ця карта вважається маючи 1 такий тег. Підвищте відповідну планетну доріжку на 3 кроки в загальному.)",
 
   "Last Resort Ingenuity": "Останній варіант винахідливості",

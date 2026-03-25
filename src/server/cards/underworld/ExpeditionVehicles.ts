@@ -21,7 +21,7 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
       victoryPoints: 1,
 
       metadata: {
-        cardNumber: 'U79',
+        cardNumber: 'U079',
         renderData: CardRenderer.builder((b) => {
           b.effect(
             'After you place a tile (on Mars or in space) that has no adjacent tiles, draw a card.',

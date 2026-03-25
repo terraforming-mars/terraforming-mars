@@ -32,18 +32,21 @@ describe('ReturntoAbandonedTechnology', () => {
     expect(action.cards).is.empty;
   });
 
-  it('play when discard pile has 1 card', () => {
-    const ants = new Ants();
-    game.projectDeck.discardPile = [];
-    game.projectDeck.discard(ants);
+  for (let idx = 1; idx <= 4; idx++) {
+    it('canPlay when discard pile has ' + idx + ' card(s)', () => {
+      const cards = [(new Ants()), (new Birds()), (new Capital()), (new Decomposers())];
+      game.projectDeck.discardPile = [];
+      for (const c of cards.slice(0, idx)) {
+        game.projectDeck.discard(c);
+      }
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectCard);
-
-    expect(action.cards).deep.eq([ants]);
-    expect(game.projectDeck.discardPile).is.empty;
-  });
+      if (idx === 4) {
+        expect(card.canPlay(player)).is.true;
+      } else {
+        expect(card.canPlay(player)).is.false;
+      }
+    });
+  }
 
   it('play when discard pile has 5 cards', () => {
     const ants = new Ants();

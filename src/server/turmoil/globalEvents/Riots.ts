@@ -24,14 +24,14 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const city = game.board.spaces.filter(
         (space) => Board.isCitySpace(space) &&
                          space.player === player,
       ).length;
-      const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, city) - turmoil.getInfluence(player);
       if (amount > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
       }
     });
   }

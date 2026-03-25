@@ -27,7 +27,7 @@ export class AndOptions extends OptionsInput<undefined> {
       throw new InputError('Incorrect options provided');
     }
     for (let i = 0; i < input.responses.length; i++) {
-      player.runInput(input.responses[i], this.options[i]);
+      player.defer(this.options[i].process(input.responses[i], player));
     }
     return this.cb(undefined);
   }

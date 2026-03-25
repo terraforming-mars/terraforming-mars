@@ -36,7 +36,7 @@ describe('GreeneryStandardProject', () => {
     assertPlaceTile(player, churn(card.action(player), player), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getOxygenLevel()).eq(1);
   });
 

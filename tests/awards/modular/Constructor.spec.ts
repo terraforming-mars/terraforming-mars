@@ -22,7 +22,7 @@ describe('Constructor', () => {
   });
 
   it('It is applied to all cities (on mars and not on mars) and colonies', () => {
-    const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
+    const colonySpaces = board.getSpaces(SpaceType.COLONY);
     const landSpaces = board.getAvailableSpacesOnLand(player);
     const colony1 = new Luna();
     const colony2 = new Pluto();

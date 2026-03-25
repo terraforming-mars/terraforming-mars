@@ -1,83 +1,60 @@
 import {expect} from 'chai';
 import {CloudVortexOutpost} from '../../../src/server/cards/underworld/CloudVortexOutpost';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
-import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
-import {AtmoCollectors} from '../../../src/server/cards/colonies/AtmoCollectors';
-import {MicroMills} from '../../../src/server/cards/base/MicroMills';
-import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/cardSerialization';
+import {cast, runAllActions} from '../../TestingUtils';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 
 describe('CloudVortexOutpost', () => {
   it('play', () => {
     const card = new CloudVortexOutpost();
-    const [game, player] = testGame(1, {venusNextExtension: true});
+    const [game, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
 
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.play(player), undefined);
+    runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
+    expect(card.resourceCount).eq(3);
   });
 
-  it('onCardPlayed', () => {
+  it('Can not move floater if it is empty', () => {
     const card = new CloudVortexOutpost();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true});
-
-    player.playedCards.push(card);
-
-    const cardWithoutResources = new MicroMills();
-    const cardWithOtherResourceType = new SearchForLife();
-    const floaterCard = new JovianLanterns();
-    const secondFloaterCard = new AtmoCollectors();
-
-    // Card that does not hold resources
-    card.onCardPlayed(player, cardWithoutResources);
-
-    expect(card.data.isDisabled).is.false;
-
-    // Card that holds non-floaters
-    card.onCardPlayed(player, cardWithOtherResourceType);
-
-    expect(card.data.isDisabled).is.false;
-    expect(cardWithOtherResourceType.resourceCount).eq(0);
-
-    // Card that holds floaters.
-    card.onCardPlayed(player, floaterCard);
-
-    expect(card.data.isDisabled).is.true;
-    expect(floaterCard.resourceCount).eq(3);
-
-    // Another card that holds floaters.
-    card.onCardPlayed(player, secondFloaterCard);
-
-    expect(card.data.isDisabled).is.true;
-    expect(floaterCard.resourceCount).eq(3);
-    expect(secondFloaterCard.resourceCount).eq(0);
+    const floaterHost = new Dirigibles();
+    const [/* game */, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    card.play(player);
+    player.playCard(floaterHost);
+    card.resourceCount = 0;
+    expect(card.canAct(player)).is.false;
   });
 
-  it('onCardPlayed - serialized', () => {
+  it('Can not move floater if there is no other floater card', () => {
     const card = new CloudVortexOutpost();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true});
+    const [/* game */, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    card.play(player);
+    expect(card.canAct(player)).is.false;
+  });
 
-    player.playedCards.push(card);
+  it('Move floater', () => {
+    const card = new CloudVortexOutpost();
+    const [game, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    const floaterHost = new Dirigibles();
 
-    const floaterCard = new JovianLanterns();
-    const secondFloaterCard = new AtmoCollectors();
+    player.playedCards.push(floaterHost);
 
-    card.onCardPlayed(player, floaterCard);
+    card.resourceCount = 2;
 
-    expect(floaterCard.resourceCount).eq(3);
+    expect(card.canAct(player)).is.true;
+    expect(floaterHost.resourceCount).eq(0);
+    expect(game.deferredActions).has.lengthOf(0);
 
-    const serialized = serializeProjectCard(card);
-    const deserialized = deserializeProjectCard(serialized) as CloudVortexOutpost;
+    card.action(player);
 
-    // Another card that holds floaters.
-    deserialized.onCardPlayed(player, secondFloaterCard);
+    game.deferredActions.peek()!.execute();
 
-    expect(floaterCard.resourceCount).eq(3);
-    expect(secondFloaterCard.resourceCount).eq(0);
+    expect(card.resourceCount).eq(1);
+    expect(floaterHost.resourceCount).eq(1);
   });
 });

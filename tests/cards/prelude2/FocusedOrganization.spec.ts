@@ -84,7 +84,7 @@ describe('FocusedOrganization', () => {
     const card = new FocusedOrganization();
     const solBank = new SolBank();
     const [game, player] = testGame(1, {pathfindersExpansion: true});
-    player.corporations.push(solBank);
+    player.playedCards.push(solBank);
 
     const firstCard = game.projectDeck.drawOrThrow(game);
     const secondCard = game.projectDeck.drawOrThrow(game);

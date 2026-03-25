@@ -5,7 +5,7 @@ import {CardName} from '../cards/CardName';
  */
 export const SPENDABLE_STANDARD_RESOURCES = [
   // Standard currency for paying for stuff
-  'megaCredits',
+  'megacredits',
   // Helion corporation can spend heat as M€.
   'heat',
   // Used for cards with building tags
@@ -39,22 +39,16 @@ export const SPENDABLE_CARD_RESOURCES = [
   'kuiperAsteroids',
 ] as const;
 
-export const OTHER_SPENDABLE_RESOURCES = [
-  // Friends in High Places enables spending corruption for Earth tags.
-  'corruption',
-] as const;
-
-export const SPENDABLE_RESOURCES = [...SPENDABLE_STANDARD_RESOURCES, ...SPENDABLE_CARD_RESOURCES, ...OTHER_SPENDABLE_RESOURCES] as const;
+export const SPENDABLE_RESOURCES = [...SPENDABLE_STANDARD_RESOURCES, ...SPENDABLE_CARD_RESOURCES] as const;
 
 export type SpendableStandardResource = typeof SPENDABLE_STANDARD_RESOURCES[number];
 /** Types of resources on cards that can be spent to pay for things. */
 export type SpendableCardResource = typeof SPENDABLE_CARD_RESOURCES[number];
-export type OtherSpendableResource = typeof OTHER_SPENDABLE_RESOURCES[number];
 
 /** Types of resources spent to pay for things. */
-export type SpendableResource = SpendableStandardResource | SpendableCardResource | OtherSpendableResource;
+export type SpendableResource = SpendableStandardResource | SpendableCardResource;
 
-export const CARD_FOR_SPENDABLE_RESOURCE: Record<SpendableCardResource, CardName> = {
+export const CARD_FOR_SPENDABLE_RESOURCE = {
   microbes: CardName.PSYCHROPHILES,
   floaters: CardName.DIRIGIBLES,
   lunaArchivesScience: CardName.LUNA_ARCHIVES,
@@ -63,4 +57,4 @@ export const CARD_FOR_SPENDABLE_RESOURCE: Record<SpendableCardResource, CardName
   auroraiData: CardName.AURORAI,
   graphene: CardName.CARBON_NANOSYSTEMS,
   kuiperAsteroids: CardName.KUIPER_COOPERATIVE,
-} as const;
+} satisfies Record<SpendableCardResource, CardName>;

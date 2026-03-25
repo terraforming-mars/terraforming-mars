@@ -7,6 +7,7 @@ import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 import {oneWayDifference} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 export enum LogType {
   DREW = 'drew',
@@ -30,12 +31,10 @@ export class ChooseCards extends DeferredAction {
   }
 
   public execute() {
-    const options = this.options;
-    const cards = this.cards;
-    const player = this.player;
+    const {options, cards, player} = this;
 
     let max = options.keepMax || cards.length;
-    let msg = '';
+    let msg: string | Message = message('Select ${0} card(s) to keep', (b) => b.number(max));
     if (options.paying) {
       const spendableMegacredits = this.player.spendableMegacredits();
       const affordableCards = Math.floor(spendableMegacredits / this.player.cardCost);
@@ -45,37 +44,39 @@ export class ChooseCards extends DeferredAction {
       } else if (max < this.cards.length) {
         // We're being offered more cards than we're able to buy
         // So we should be specific on maximum number of cards
-        msg = `Select up to ${max} card(s) to buy`;
+        msg = message('Select up to ${0} card(s) to buy', (b) => b.number(max));
       } else {
         msg = 'Select card(s) to buy';
       }
-    } else {
-      msg = `Select ${max} card(s) to keep`;
     }
+
     const min = options.paying ? 0 : options.keepMax;
 
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
-    const cb = (selected: ReadonlyArray<IProjectCard>) => {
-      if (selected.length > max) {
-        throw new Error('Selected too many cards');
-      }
-      const unselected = oneWayDifference(cards, selected);
-      if (options.paying && selected.length > 0) {
-        const cost = selected.length * player.cardCost;
-        player.game.defer(
-          new SelectPaymentDeferred(
-            player,
-            cost,
-            {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
-            .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
-      } else if (options.logDrawnCard === true) {
-        keep(player, selected, unselected, LogType.DREW_VERBOSE);
-      } else {
-        keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
-      }
-      return undefined;
-    };
-    return new SelectCard(msg, button, cards, {max, min}).andThen(cb);
+    return new SelectCard(msg, button, cards, {max, min})
+      .andThen((selected) => {
+        if (selected.length > max) {
+          throw new Error('Selected too many cards');
+        }
+        const unselected = oneWayDifference(cards, selected);
+        if (options.paying && selected.length > 0) {
+          const cost = selected.length * player.cardCost;
+          player.game.defer(
+            new SelectPaymentDeferred(
+              player,
+              cost,
+              {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
+              .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
+          if (options.logDrawnCard === true) {
+            LogHelper.logDrawnCards(player, cards);
+          }
+        } else if (options.logDrawnCard === true) {
+          keep(player, selected, unselected, LogType.DREW_VERBOSE);
+        } else {
+          keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
+        }
+        return undefined;
+      });
   }
 }
 

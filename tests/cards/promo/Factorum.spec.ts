@@ -19,7 +19,7 @@ describe('Factorum', () => {
   beforeEach(() => {
     card = new Factorum();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -57,7 +57,7 @@ describe('Factorum', () => {
   it('Factorum + Helion', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
 
     player.megaCredits = 2;
     player.energy = 5;
@@ -74,7 +74,7 @@ describe('Factorum', () => {
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(1);

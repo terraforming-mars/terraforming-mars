@@ -8,8 +8,9 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class UtopiaInvest extends CorporationCard implements IActionCard {
+export class UtopiaInvest extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
@@ -47,8 +48,8 @@ export class UtopiaInvest extends CorporationCard implements IActionCard {
     player.game.log('${0} decreased ${1} production 1 step to gain 4 ${2}', (b) => b.player(player).string(type).string(type));
   }
   public action(player: IPlayer) {
-    const result = new OrOptions();
-    result.title = 'Select production to decrease one step and gain 4 resources';
+    const result = new OrOptions()
+      .setTitle('Select production to decrease one step and gain 4 resources');
 
     const options = [];
 

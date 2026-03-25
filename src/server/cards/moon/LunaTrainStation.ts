@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonRoadTile} from '../render/DynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit} from '../Options';
@@ -17,7 +15,7 @@ export class LunaTrainStation extends Card {
       tags: [Tag.BUILDING],
       cost: 24,
       reserveUnits: {steel: 2},
-      victoryPoints: 'special',
+      victoryPoints: {moon: {road: {}}, nextToThis: {}, each: 2},
 
       behavior: {
         production: {megacredits: 4},
@@ -39,19 +37,8 @@ export class LunaTrainStation extends Card {
           b.production((pb) => pb.megacredits(4));
           b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate();
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
+        victoryPoints: moonRoadTile(2, true),
       },
     });
-  }
-
-  public override getVictoryPoints(player: IPlayer) {
-    const moonData = MoonExpansion.moonData(player.game);
-    const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
-    if (usedSpace !== undefined) {
-      const adjacentSpaces = moonData.moon.getAdjacentSpaces(usedSpace);
-      const adjacentMines = adjacentSpaces.filter((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));
-      return 2 * adjacentMines.length;
-    }
-    return 0;
   }
 }

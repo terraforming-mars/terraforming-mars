@@ -2,13 +2,13 @@ import {Color} from '../Color';
 import {AwardName} from '../ma/AwardName';
 
 export type AwardScore = {
-  playerColor: Color;
-  playerScore: number;
+  color: Color;
+  score: number;
 }
 
 export type FundedAwardModel = {
   name: AwardName;
   playerName: string | undefined;
-  playerColor: Color | undefined;
+  color: Color | undefined;
   scores: Array<AwardScore>;
 }

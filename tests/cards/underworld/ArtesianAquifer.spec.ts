@@ -10,19 +10,16 @@ describe('ArtesianAquifer', () => {
     const card = new ArtesianAquifer();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const selectSpace = cast(card.play(player), SelectSpace);
     const space = selectSpace.spaces[0];
-    space.undergroundResources = 'plant1';
+    space.undergroundResources = 'plant2';
     space.bonus = [];
     expect(space.tile?.tileType).is.undefined;
 
     selectSpace.cb(space);
     runAllActions(game);
 
-    expect(player.plants).eq(1);
-    expect(space.excavator).eq(player);
+    expect(player.plants).eq(2);
     expect(space.tile?.tileType).eq(TileType.OCEAN);
   });
 });

@@ -34,6 +34,11 @@ export const BESPOKE_PRODUCTION_CARDS: ReadonlyArray<CardName> = [
   CardName.MICROBIOLOGY_PATENTS,
   CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
   CardName.SMALL_OPEN_PIT_MINE,
+  // Underworld
+  CardName.INFRASTRUCTURE_OVERLOAD,
+  CardName.MONOPOLY,
+  CardName.RACKETEERING,
+  CardName.STAR_VEGAS,
   // Prelude 2
   CardName.CLOUD_TOURISM,
   CardName.MICROGRAVITY_NUTRITION,

@@ -12,10 +12,10 @@ describe('PointLuna', () => {
   beforeEach(() => {
     card = new PointLuna();
     [/* game */, player] = testGame(1);
-    player.corporations.push(card);
   });
 
   it('Gets card when earth tag played', () => {
+    player.playedCards.push(card);
     card.onCardPlayed(player, new Ants());
     expect(player.cardsInHand).has.lengthOf(0);
 
@@ -24,7 +24,7 @@ describe('PointLuna', () => {
   });
 
   it('Should play', () => {
-    card.play(player);
+    player.playCorporationCard(card);
     expect(player.production.titanium).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(1);
   });

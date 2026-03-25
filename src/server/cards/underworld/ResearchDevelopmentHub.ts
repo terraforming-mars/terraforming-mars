@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
+import {all} from '../Options';
 
 export class ResearchDevelopmentHub extends Card implements IProjectCard {
   constructor() {
@@ -19,13 +20,13 @@ export class ResearchDevelopmentHub extends Card implements IProjectCard {
       victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
-        cardNumber: 'U84',
+        cardNumber: 'U084',
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): This is supposed to be at the START of each production phase.
           b.effect(
             'At the end of each production phase, ' +
             'add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.',
-            (eb) => eb.text('7+').cards(1).asterix().startEffect.resource(CardResource.DATA));
+            (eb) => eb.text('7+').cards(1, {all}).asterix().startEffect.resource(CardResource.DATA));
         }),
         description: '1 VP for every 3 data resources on this card.',
       },
@@ -33,7 +34,7 @@ export class ResearchDevelopmentHub extends Card implements IProjectCard {
   }
 
   public onProductionPhase(player: IPlayer) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.playersInGenerationOrder) {
       if (p !== player && p.cardsInHand.length >= 7) {
         player.addResourceTo(this);
       }

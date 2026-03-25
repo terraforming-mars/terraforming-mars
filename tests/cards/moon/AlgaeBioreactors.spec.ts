@@ -25,15 +25,15 @@ describe('AlgaeBioreactors', () => {
     player.megaCredits = card.cost;
 
     player.production.override({plants: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.production.override({plants: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.production.override({plants: 1});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getOxygenLevel()).eq(0);
     moonData.habitatRate = 0;
 
@@ -42,7 +42,7 @@ describe('AlgaeBioreactors', () => {
     expect(player.production.plants).eq(0);
     expect(moonData.habitatRate).eq(1);
     expect(game.getOxygenLevel()).eq(1);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 
   it('canPlay when Reds are in power', () => {

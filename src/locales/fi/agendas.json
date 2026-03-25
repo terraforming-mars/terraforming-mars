@@ -1,0 +1,63 @@
+{
+  "Select a ${0} bonus": "Valitse ${0} bonus",
+  "Select a ${0} policy": "Valitse ${0} politiikka",
+
+  "Gain 1 M€ for each building tag you have": "Saat 1 M€ jokaisesta rakennusympyrästä jonka omistat",
+  "Gain 1 M€ for each tile you have ON MARS": "Saat 1 M€ jokaisesta laatasta jonka omistat MARSISSA",
+  "Gain 1 M€ for each building tag you have (${0})": "Saat 1 M€ jokaisesta rakennusympyrästä jonka omistat (${0})",
+  "Gain 1 M€ for each tile you have ON MARS (${0})": "Saat 1 M€ jokaisesta laatasta jonka omistat MARSISSA (${0})",
+
+  "When you place a tile ON MARS, gain 1 steel": "Kun asetat laatan MARSIIN, saat 1 teräksen",
+  "When you play a building tag, gain 2 M€": "Kun pelaat rakennusympyrän, saat 2 M€",
+  "Your steel resources are worth 1 M€ extra": "Teräsresurssisi ovat 1 M€ arvokkaampia",
+  "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Käytä 4 M€ nostaaksesi rakennuskortin (Myllerrys Mars Ensin)",
+
+  "Gain 1 M€ for each science tag you have": "Saat 1 M€ jokaisesta tiedeympyrästä jonka omistat",
+  "Gain 1 M€ for every 3 cards in hand": "Saat 1 M€ jokaisesta kolmesta kortista kädessäsi",
+  "Gain 1 M€ for each science tag you have (${0})": "Saat 1 M€ jokaisesta tiedeympyrästä jonka omistat (${0})",
+  "Gain 1 M€ for every 3 cards in hand (${0})": "Saat 1 M€ jokaisesta kolmesta kortista kädessäsi (${0})",
+
+  "Your global requirements are +/- 2 steps": "Maailmanlaajuiset vaatimuksesi ovat +/- 2 askelta",
+  "When you raise a global parameter, draw a card per step raised": "Kun nostat maailmanlaajuista parametria, nosta kortti jokaista nostettua askelta kohden",
+  "Cards with Science tag requirements may be played with 1 less Science tag": "Kortit jotka vaativat tiedeympyrää voidaan pelata yhdellä tiedeympyrällä vähemmän",
+
+  "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "Saat 1 M€ jokaisesta Venus-, Maa- ja Jupiter-ympyrästä jonka omistat",
+  "Gain 1 M€ for each Space tag you have": "Saat 1 M€ jokaisesta avaruusympyrästä jonka omistat",
+  "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "Saat 1 M€ jokaisesta Venus-, Maa- ja Jupiter-ympyrästä jonka omistat (${0})",
+  "Gain 1 M€ for each Space tag you have (${0})": "Saat 1 M€ jokaisesta avaruusympyrästä jonka omistat (${0})",
+
+  "Your titanium resources are worth 1 M€ extra": "Titaaniresurssisi ovat 1 M€ arvokkaampia",
+  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Käytä 4 M€ hankkiaksesi 2 titaania tai lisätäksesi 2 kellutinta MILLE TAHANSA kortille (Myllerrys Yhtenäisyys)",
+  "Spend 4 M€ to draw a Space card (Turmoil Unity)": "Käytä 4 M€ nostaaksesi avaruus-kortin (Myllerrys Yhtenäisyys)",
+  "Cards with Space tags cost 2 M€ less to play": "Kortit, joissa on avaruusympyrä, maksavat 2 M€ vähemmän",
+
+  "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Saat 1 M€ jokaisesta kasvi-, mikrobi- ja eläinympyrästä jonka omistat",
+  "Gain 2 M€ for each greenery tile you have": "Saat 2 M€ jokaisesta viherlaatasta jonka omistat",
+  "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "Saat 1 M€ jokaisesta kasvi-, mikrobi- ja eläinympyrästä jonka omistat (${0})",
+  "Gain 2 M€ for each greenery tile you have (${0})": "Saat 2 M€ jokaisesta viherlaatasta jonka omistat (${0})",
+
+  "When you place a greenery tile, gain 4 M€": "Kun asetat viherlaatan, saat 4 M€",
+  "When you place a tile, gain 1 plant": "Kun asetat laatan, saat 1 kasvin",
+  "When you play an animal, plant or microbe tag, gain 2 M€": "Kun pelaat eläin-, kasvi- tai mikrobiympyrän, saat 2 M€",
+  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Käytä 5 M€ hankkiaksesi 3 kasvia tai lisätäksesi 2 mikrobia MILLE TAHANSA kortille (Myllerrys Vihreät)",
+
+  "The player(s) with the lowest TR gains 1 TR": "Pelaaja(t), jo(i)lla on alin MKL, nostaa MKL:äänsä 1 askeleen",
+  "The player(s) with the highest TR loses 1 TR": "Pelaaja(t), jo(i)lla on korkein MKL, laskee MKL:äänsä 1 askeleen",
+  "The player(s) with the lowest TR gains 1 TR (${0})": "Pelaaja(t), jo(i)lla on alin MKL, nostaa MKL:äänsä 1 askeleen (${0})",
+  "The player(s) with the highest TR loses 1 TR (${0})": "Pelaaja(t), jo(i)lla on korkein MKL, laskee MKL:äänsä 1 askeleen (${0})",
+
+  "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Kun teet toiminnon joka nostaa MKL:ääsi, sinun TÄYTYY maksaa 3 M€ jokaista nostettua askelta kohden",
+  "When you place a tile, pay 3 M€ or as much as possible": "Kun asetat laatan, maksa 3 M€ tai niin paljon kuin mahdollista",
+  "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Maksa 4 M€ vähentääksesi ei-maksimoitua maailmanlaajuista parametria 1 askel (et saa välipalkkioita)",
+  "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Kun nostat maailmanlaajuista parametria, vähennä M€-tuotantoasi 1 askel jokaista nostettua askelta kohden jos mahdollista",
+
+  "Gain 1 M€ for each heat production you have": "Saat 1 M€ jokaisesta lämmöntuotantopisteestä jonka omistat",
+  "Gain 1 heat for each heat production you have": "Saat 1 lämmön jokaisesta lämmöntuotantopisteestä jonka omistat",
+  "Gain 1 M€ for each heat production you have (${0})": "Saat 1 M€ jokaisesta lämmöntuotantopisteestä jonka omistat (${0})",
+  "Gain 1 heat for each heat production you have (${0})": "Saat 1 lämmön jokaisesta lämmöntuotantopisteestä jonka omistat (${0})",
+
+  "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Maksa 10 M€ lisätäksesi energia- ja lämmöntuotantoasi 1 askel (Myllerrys Kelvinistit)",
+  "When you raise temperature, gain 3 M€ per step raised": "Kun nostat lämpötilaa, hanki 3 M€ jokaista nostettua askelta kohden",
+  "Convert 6 heat into temperature (Turmoil Kelvinists)": "Muunna 6 lämpöä lämpötilaksi (Myllerrys Kelvinistit)",
+  "When you place a tile, gain 2 heat": "Kun asetat laatan, saat 2 lämpöä"
+}

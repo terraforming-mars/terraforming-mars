@@ -7,24 +7,13 @@
     </template>
   </template>
   <div v-else class="wf-root">
-    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
-      <!--
-        Autopass is only available when you are taking actions because of how autopass is stored.
-        It's connected with when the player takes actions, and is saved along with the rest of the
-        game. This means that if you are waiting for someone else to take actions, you can't change
-        your autopass setting.
-
-        If there was another database table that stored autopass and other settings, this could be
-        changed to be available at all times.
-      -->
-      <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
-      <label for="autopass-checkbox">
-          <span v-i18n>Automatically pass after this action</span>
+    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
+      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" v-on:change="updateSuspend">
+      <label for="suspend-checkbox">
+        <span v-i18n>Suspend</span>
       </label>
+      <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
     </template>
-    <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
-      <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
-    </template> -->
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -36,8 +25,9 @@
 </template>
 
 <script lang="ts">
+/* global RequestInit */
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -52,7 +42,7 @@ import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 
 let ui_update_timeout_id: number | undefined;
@@ -60,35 +50,47 @@ let documentTitleTimer: number | undefined;
 
 type DataModel = {
   waitingForTimeout: typeof raw_settings.waitingForTimeout,
-  autopass: boolean,
   playersWaitingFor: Array<Color>
+  suspend: boolean,
+  savedPlayerView: PlayerViewModel | undefined;
 }
 
-export default Vue.extend({
+const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
+
+export default defineComponent({
   name: 'waiting-for',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     settings: {
       type: Object as () => typeof raw_settings,
+      required: true,
     },
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
+      default: undefined,
     },
   },
   data(): DataModel {
     return {
       waitingForTimeout: this.settings.waitingForTimeout,
-      autopass: this.playerView.autopass,
       playersWaitingFor: [],
+      suspend: false,
+      savedPlayerView: undefined,
     };
   },
   methods: {
     animateTitle() {
+      if (!getPreferences().animated_title) {
+        return;
+      }
+
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
@@ -96,52 +98,25 @@ export default Vue.extend({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + this.$t(constants.APP_NAME);
+      const playerCount = this.playerView.players.length;
+      const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+      document.title = next + ' ' + `${gameType} | ${this.$t(constants.APP_NAME)}`;
     },
-    // TODO(kberg): use loadPlayerViewResponse.
     onsave(out: InputResponse) {
-      const xhr = new XMLHttpRequest();
-      const root = vueRoot(this);
-      const showAlert = root.showAlert;
-
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-
-      root.isServerSideRequestInProgress = true;
-      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          root.screen = 'empty';
-          root.playerView = xhr.response;
-          root.playerkey++;
-          root.screen = 'player-home';
-          if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-            (window).location = (window).location; // eslint-disable-line no-self-assign
-          }
-        } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
-          if (xhr.response.id === INVALID_RUN_ID) {
-            showAlert(xhr.response.message, () => {
-              setTimeout(() => window.location.reload(), 100);
-            });
-          } else {
-            showAlert(xhr.response.message);
-          }
-        } else {
-          showAlert('Unexpected response from server. Please try again.');
-        }
-        root.isServerSideRequestInProgress = false;
-      };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
+      this.fetchPlayerInput(
+        paths.PLAYER_INPUT + '?id=' + this.playerView.id,
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({runId: this.playerView.runId, ...out}),
+        });
     },
     reset() {
-      const xhr = new XMLHttpRequest();
+      this.fetchPlayerInput(
+        paths.RESET + '?id=' + this.playerView.id,
+        {method: 'GET'});
+    },
+    fetchPlayerInput(url: string, options: RequestInit) {
       const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
@@ -149,54 +124,49 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr);
-      };
-      xhr.send();
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
+      fetch(url, options)
+        .then(async (response) => {
+          if (response.ok) {
+            this.updatePlayerView(await response.json());
+            return;
+          }
+
+          const showAlert = vueRoot(this).showAlert;
+          if (response.status === statusCode.badRequest) {
+            const resp = await response.json() as AppErrorResponse;
+            let cb = () => {};
+            if (resp.id === INVALID_RUN_ID) {
+              cb = () => setTimeout(() => window.location.reload(), 100);
+            }
+            showAlert('Error with input', resp.message, cb);
+          } else {
+            showAlert('Error processing response', 'Unexpected response from server. Please try again.');
+            console.error(response.statusText);
+          }
+        })
+        .catch((e) => {
+          root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
+          console.error(e);
+        })
+        .finally(() => {
+          root.isServerSideRequestInProgress = false;
+        });
     },
-    updateAutopass() {
-      const xhr = new XMLHttpRequest();
-      const root = vueRoot(this);
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-      xhr.onload = () => {
-        root.isServerSideRequestInProgress = true;
-      };
-      xhr.open('GET', paths.AUTOPASS + '?id=' + this.playerView.id + '&autopass=' + this.autopass);
-      xhr.responseType = 'json';
-      xhr.send();
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
-    },
-    loadPlayerViewResponse(xhr: XMLHttpRequest) {
-      const root = vueRoot(this);
-      const showAlert = vueRoot(this).showAlert;
-      if (xhr.status === 200) {
+    updatePlayerView(playerView: PlayerViewModel | undefined) {
+      if (this.suspend === false) {
+        const root = vueRoot(this);
         root.screen = 'empty';
-        root.playerView = xhr.response;
+        root.playerView = playerView;
         root.playerkey++;
         root.screen = 'player-home';
         if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-          (window).location = (window).location; // eslint-disable-line no-self-assign
+          window.location = window.location as any as (string & Location);
         }
-      } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
-        showAlert(xhr.response.message);
+        this.savedPlayerView = undefined;
       } else {
-        showAlert('Unexpected response from server. Please try again.');
+        this.savedPlayerView = playerView;
       }
-      root.isServerSideRequestInProgress = false;
     },
-
     waitForUpdate() {
       const vueApp = this;
       const root = vueRoot(this);
@@ -205,7 +175,7 @@ export default Vue.extend({
         const xhr = new XMLHttpRequest();
         xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
-          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
+          root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
           if (xhr.status === statusCode.ok) {
@@ -229,7 +199,7 @@ export default Vue.extend({
             }
             vueApp.waitForUpdate();
           } else {
-            root.showAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+            root.showAlert('Error with input', `Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
           }
         };
         xhr.responseType = 'json';
@@ -267,9 +237,19 @@ export default Vue.extend({
         }
       }
     },
+    updateSuspend() {
+      if (this.suspend === false && this.savedPlayerView !== undefined) {
+        this.updatePlayerView(this.savedPlayerView);
+      }
+    },
+    showRefresh(): boolean {
+      return this.suspend === true && this.savedPlayerView !== undefined;
+    },
   },
   mounted() {
-    document.title = this.$t(constants.APP_NAME);
+    const playerCount = this.playerView.players.length;
+    const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+    document.title = `${gameType} | ${this.$t(constants.APP_NAME)}`;
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

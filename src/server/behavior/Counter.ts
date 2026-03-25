@@ -6,11 +6,20 @@ import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardResource} from '../../common/CardResource';
+import {Space} from '../boards/Space';
+import {once} from './Lazy';
 
 /**
  * Counts things in game state.
  */
 export interface ICounter {
+  /**
+   * Count using the applied countable definition.
+   *
+   * context: describes what to do in different counting contexts. Most of the time 'default' is correct, but
+   * when counting victory points, use 'vp'. 'vp' applies to counting victory points. As of now, this only applies
+   * to how it counts wild tags and other substitutions that only apply during an action.
+   */
   count(countable: Countable, context?: 'default' | 'vps'): number;
   countUnits(countableUnits: Partial<CountableUnits>): Units;
 }
@@ -36,7 +45,30 @@ export class Counter {
   private cardIsUnplayed: boolean;
 
   public constructor(private player: IPlayer, private card: ICard) {
-    this.cardIsUnplayed = !player.cardIsInEffect(card.name);
+    this.cardIsUnplayed = !player.tableau.has(card.name);
+  }
+
+  private getAdjacentSpaces(countable: Exclude<Countable, number>): ReadonlyArray<Space> {
+    if (countable.nextToThis === undefined) {
+      return [];
+    }
+
+    const cardName = this.card.name;
+    const game = this.player.game;
+    const board = game.board;
+    const cardSpace = board.getSpaceByTileCard(cardName);
+    if (cardSpace !== undefined) {
+      return board.getAdjacentSpaces(cardSpace);
+    }
+    if (game.moonData) {
+      const board = game.moonData.moon;
+      const moonSpace = board.getSpaceByTileCard(cardName);
+      if (moonSpace !== undefined) {
+        return board.getAdjacentSpaces(moonSpace);
+      }
+    }
+
+    return [];
   }
 
   public count(countable: Countable, context: 'default' | 'vps' = 'default'): number {
@@ -50,23 +82,40 @@ export class Counter {
     const card = this.card;
     const game = player.game;
 
+    // This is an advanced special case for counting spaces on the boards.
+    // Some cards with special tiles reward VP for spaces adjacent to the
+    // placed tile. In order to support the |nextToThis| attribute,
+    // this computes spaces next to the tile placed with the card,
+    // and returns either the counted spaces, or only those adjacent
+    // to the tile.
+    //
+    // adjacentSpaces is of type Lazy, so adjacent spaces are counted once,
+    // and if it's never used, it's never counted.
+    const adjacentSpaces = once(() => this.getAdjacentSpaces(countable));
+    const maybeAdjacentSpaces =(spaces: ReadonlyArray<Space>): ReadonlyArray<Space> => {
+      if (countable.nextToThis === undefined) {
+        return spaces;
+      }
+      return utils.intersection(spaces, adjacentSpaces());
+    };
+
     if (countable.cities !== undefined) {
       const p = (countable.all === false) ? player : undefined;
       switch (countable.cities.where) {
       case 'offmars':
-        sum = game.board.getCitiesOffMars(p).length;
+        sum += maybeAdjacentSpaces(game.board.getCitiesOffMars(p)).length;
         break;
       case 'onmars':
-        sum += game.board.getCitiesOnMars(p).length;
+        sum += maybeAdjacentSpaces(game.board.getCitiesOnMars(p)).length;
         break;
       case 'everywhere':
       default:
-        sum += game.board.getCities(p).length;
+        sum += maybeAdjacentSpaces(game.board.getCities(p)).length;
       }
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+      sum += maybeAdjacentSpaces(game.board.getOceanSpaces({upgradedOceans: true, wetlands: true})).length;
     }
 
     if (countable.floaters !== undefined) {
@@ -75,7 +124,7 @@ export class Counter {
 
     if (countable.greeneries !== undefined) {
       const p = (countable.all === false) ? player : undefined;
-      sum += game.board.getGreeneries(p).length;
+      sum += maybeAdjacentSpaces(game.board.getGreeneries(p)).length;
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;
@@ -102,7 +151,7 @@ export class Counter {
 
         // When counting all the other players' tags, just count raw, so as to disregard their wild tags.
         if (countable.all === true || countable.others === true) {
-          player.getOpponents()
+          player.opponents
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }
@@ -136,13 +185,13 @@ export class Counter {
         }
       });
       if (moon.habitat) {
-        sum += MoonExpansion.spaces(game, TileType.MOON_HABITAT, {surfaceOnly: true}).length;
+        sum += maybeAdjacentSpaces(MoonExpansion.spaces(game, TileType.MOON_HABITAT, {surfaceOnly: true})).length;
       }
       if (moon.mine) {
-        sum += MoonExpansion.spaces(game, TileType.MOON_MINE, {surfaceOnly: true}).length;
+        sum += maybeAdjacentSpaces(MoonExpansion.spaces(game, TileType.MOON_MINE, {surfaceOnly: true})).length;
       }
       if (moon.road) {
-        sum += MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+        sum += maybeAdjacentSpaces(MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true})).length;
       }
     }
 
@@ -150,7 +199,7 @@ export class Counter {
       const underworld = countable.underworld;
       if (underworld.corruption !== undefined) {
         if (countable.all === true) {
-          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+          sum += utils.sum(game.players.map((p) => p.underworldData.corruption));
         } else {
           sum += player.underworldData.corruption;
         }
@@ -160,6 +209,15 @@ export class Counter {
           sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
         } else {
           sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+        }
+      }
+      if (underworld.undergroundTokens !== undefined) {
+        if (countable.all) {
+          for (const p of game.players) {
+            sum += p.underworldData.tokens.length;
+          }
+        } else {
+          sum += player.underworldData.tokens.length;
         }
       }
     }

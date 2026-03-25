@@ -8,11 +8,11 @@
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params">
-    <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>
-    <global-parameter-value :param="this.globalParameter.OXYGEN" :value="this.oxygen"></global-parameter-value>
-    <global-parameter-value :param="this.globalParameter.OCEANS" :value="this.oceans"></global-parameter-value>
-    <global-parameter-value v-if="gameOptions.expansions.venus" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
-    <MoonGlobalParameterValue v-if="gameOptions.expansions.moon" :moonData="this.moonData"></MoonGlobalParameterValue>
+    <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"></global-parameter-value>
+    <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"></global-parameter-value>
+    <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"></global-parameter-value>
+    <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"></global-parameter-value>
+    <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"></MoonGlobalParameterValue>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
@@ -29,8 +29,10 @@
       </div>
   </a>
   <a href="#cards" :title="$t('Jump to cards')">
-      <div class="sidebar_item goto-cards sidebar_item_shortcut">
-          <i class="sidebar_icon sidebar_icon--cards"><slot></slot></i>
+      <div class="sidebar_item goto-cards sidebar_item_shortcut-long">
+          <i class="sidebar_icon sidebar_icon--cards">
+            <div class="deck-size">🂠{{ deckSize }}<br>🗑{{ discardPileSize }}</div>
+          </i>
       </div>
   </a>
   <a v-if="coloniesCount > 0" href="#colonies" :title="$t('Jump to colonies')">
@@ -69,7 +71,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {Color} from '@/common/Color';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
@@ -83,47 +85,65 @@ import {MoonModel} from '@/common/models/MoonModel';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import LanguageIcon from '@/client/components/LanguageIcon.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'sidebar',
   props: {
     playerNumber: {
       type: Number,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
     acting_player: {
       type: Boolean,
     },
     player_color: {
       type: String as () => Color,
+      required: true,
     },
     generation: {
       type: Number,
+      required: true,
     },
     coloniesCount: {
       type: Number,
+      required: true,
     },
     temperature: {
       type: Number,
+      required: true,
     },
     oxygen: {
       type: Number,
+      required: true,
     },
     oceans: {
       type: Number,
+      required: true,
     },
     venus: {
       type: Number,
+      required: true,
     },
     moonData: {
-      type: Object as () => MoonModel,
+      type: Object as () => MoonModel | undefined,
     },
     turmoil: {
-      type: Object as () => TurmoilModel || undefined,
+      type: Object as () => TurmoilModel | undefined,
     },
     lastSoloGeneration: {
       type: Number,
+      required: true,
+    },
+    deckSize: {
+      type: Number,
+      required: true,
+    },
+    discardPileSize: {
+      type: Number,
+      required: true,
     },
   },
   components: {
@@ -152,14 +172,15 @@ export default Vue.extend({
       return `${this.generation}`;
     },
     rulingPartyToCss(): string {
-      if (this.turmoil.ruling === undefined) {
+      if (this.turmoil?.ruling === undefined) {
         console.warn('no party provided');
         return '';
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
     getRulingParty(): string {
-      switch (this.turmoil.ruling) {
+      const ruling = this.turmoil?.ruling;
+      switch (ruling) {
       case PartyName.MARS:
         return 'Mars';
       case PartyName.SCIENTISTS:
@@ -169,7 +190,7 @@ export default Vue.extend({
       case undefined:
         return '???';
       default:
-        return this.turmoil.ruling;
+        return ruling;
       }
     },
   },

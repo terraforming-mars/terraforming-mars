@@ -36,7 +36,7 @@ describe('MareNubiumMine', () => {
   it('play', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -44,7 +44,7 @@ describe('MareNubiumMine', () => {
 
     expect(player.titanium).eq(2);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const mareNubium = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_NUBIUM);

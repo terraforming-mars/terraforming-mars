@@ -6,6 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
+import {ICard} from '../ICard';
 
 export class TerraformingRobots extends Card implements IProjectCard {
   constructor() {
@@ -32,7 +33,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const qty = player.tags.cardTagCount(card, Tag.MARS);
     player.addResourceTo(this, {log: true, qty});
   }

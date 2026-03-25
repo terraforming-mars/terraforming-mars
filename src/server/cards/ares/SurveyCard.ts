@@ -6,7 +6,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {GainResources} from '../../deferredActions/GainResources';
+import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
 import {Phase} from '../../../common/Phase';
 import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
@@ -68,15 +68,15 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       switch (resource) {
       case Resource.STEEL:
         grant = space.spaceType !== SpaceType.COLONY &&
-            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mfp01');
+            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mp01');
         break;
       case Resource.PLANTS:
         grant = Board.isUncoveredOceanSpace(space) &&
-          cardOwner.cardIsInEffect(CardName.ARCTIC_ALGAE);
+          cardOwner.tableau.has(CardName.ARCTIC_ALGAE);
       }
     }
     if (grant) {
-      cardOwner.game.defer(new GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
+      cardOwner.game.defer(new GainResourcesDeferred(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
     }
   }
 
@@ -90,7 +90,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       cardOwner.game.defer(new AddResourcesToCard(
         cardOwner,
         resource,
-        {log: false}))
+        {log: true}))
         .andThen(() => this.log(cardOwner, resource));
     }
   }

@@ -11,7 +11,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 
-export class Ambient extends CorporationCard {
+export class Ambient extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AMBIENT,
@@ -30,7 +30,7 @@ export class Ambient extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).venus(2, {size: Size.SMALL}).br;
           b.effect('When you play a card with a Venus tag (including this) increase your heat production 1 step.', (eb) => {
-            eb.tag(Tag.VENUS).startEffect.production((pb) => pb.heat(1));
+            eb.tag(Tag.VENUS).asterix().startEffect.production((pb) => pb.heat(1));
           }).br;
           b.action('When temperature is maxed, spend 8 heat gain 1 TR. ' +
             'You may repeat this action like a standard project.', (ab) => {
@@ -41,32 +41,24 @@ export class Ambient extends CorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    this.onCorpCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
-  }
-
   public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
+    if (card.tags.includes(Tag.VENUS)) {
       player.production.add(Resource.HEAT, 1, {log: true});
     }
   }
 
   public canAct(player: IPlayer) {
-    return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
+    return player.availableHeat() >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {
-    player.heat -= 8;
-    player.increaseTerraformRating();
-    // A hack that allows this action to be replayable.
-    player.defer(() => {
-      player.getActionsThisGeneration().delete(this.name);
+    return player.spendHeat(8, () => {
+      // A hack that allows this action to be replayable.
+      player.defer(() => {
+        player.actionsThisGeneration.delete(this.name);
+      });
+      player.increaseTerraformRating();
+      return undefined;
     });
-    return undefined;
   }
 }

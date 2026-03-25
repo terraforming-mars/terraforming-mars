@@ -6,6 +6,7 @@ import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {TileType} from '../../../common/TileType';
 
 export class KaguyaTech extends Card implements IProjectCard {
   constructor() {
@@ -41,8 +42,11 @@ export class KaguyaTech extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
-    // TODO(kberg): Yes But, if the only greenery is Wetlands, warn the player.
-    return this.availableSpaces(player, canAffordOptions).length > 0;
+    const availableSpaces = this.availableSpaces(player, canAffordOptions);
+    if (availableSpaces.every((space) => space.tile?.tileType !== TileType.GREENERY)) {
+      this.warnings.add('kaguyaTech');
+    }
+    return availableSpaces.length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

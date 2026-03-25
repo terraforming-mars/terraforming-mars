@@ -33,7 +33,7 @@ export class HAL9000 extends CeoCard {
       if (player.production.canAdjust(adjustment)) {
         player.production.adjust(adjustment, {log: true});
         adjustment[type] = 4;
-        player.stock.addUnits(adjustment, {log: true});
+        player.stock.adjust(adjustment, {log: true});
       }
     }
     return undefined;

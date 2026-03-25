@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {SpaceWargames} from '../../../src/server/cards/underworld/SpaceWargames';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
-import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 
 describe('SpaceWargames', () => {
   it('play', () => {
@@ -12,46 +11,68 @@ describe('SpaceWargames', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(card.resourceCount).to.eq(1);
+    expect(card.resourceCount).to.eq(4);
   });
 
-  it('canAct', () => {
+  for (const run of [
+    {titanium: 0, resources: 0, expected: false},
+    {titanium: 1, resources: 0, expected: true},
+    {titanium: 0, resources: 5, expected: false},
+    {titanium: 0, resources: 6, expected: true},
+  ] as const) {
+    it('canAct ' + JSON.stringify(run), () => {
+      const card = new SpaceWargames();
+      const [/* game */, player] = testGame(2);
+
+      player.titanium = run.titanium;
+      card.resourceCount = run.resources;
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
+
+  it('action, titanium', () => {
     const card = new SpaceWargames();
-    const [/* game */, player] = testGame(2);
+    const [game, player] = testGame(4);
+    player.playedCards.push(card);
 
-    expect(card.canAct(player)).is.false;
-
-    card.resourceCount = 1;
-
-    expect(card.canAct(player)).is.true;
-
-    card.resourceCount = 0;
-    player.titanium = 1;
-
-    expect(card.canAct(player)).is.true;
-  });
-
-  it('action', () => {
-    const card = new SpaceWargames();
-    const [game, player] = testGame(2);
-
-    card.resourceCount = 1;
     player.titanium = 1;
 
     cast(card.action(player), undefined);
-
-    runAllActions(game);
-    const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb();
     runAllActions(game);
 
-    expect(player.titanium).eq(0);
     expect(card.resourceCount).eq(2);
+    expect(player.titanium).eq(0);
 
-    orOptions.options[1].cb();
+    // Does not impact  first player
+    expect(game.generation).eq(1);
+    expect(game.first).eq(player);
+
+    forceGenerationEnd(game);
+
+    expect(game.generation).eq(2);
+    expect(game.first).does.not.eq(player);
+    expect(game.first).eq(game.players[1]);
+  });
+
+  it('action, first player', () => {
+    const card = new SpaceWargames();
+    const [game, player] = testGame(2);
+    player.playedCards.push(card);
+
+    player.titanium = 0;
+    card.resourceCount = 6;
+
+    cast(card.action(player), undefined);
     runAllActions(game);
 
-    expect(card.resourceCount).eq(1);
-    expect(player.megaCredits).eq(6);
+    expect(card.resourceCount).eq(0);
+    expect(player.titanium).eq(0);
+    expect(game.generation).eq(1);
+    expect(game.first).eq(player);
+
+    forceGenerationEnd(game);
+
+    expect(game.generation).eq(2);
+    expect(game.first).eq(player);
   });
 });

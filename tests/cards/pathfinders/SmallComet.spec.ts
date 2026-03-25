@@ -21,7 +21,7 @@ describe('SmallComet', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
     player.plants = 5;
     player2.plants = 15;
@@ -41,7 +41,7 @@ describe('SmallComet', () => {
 
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.game.getOxygenLevel()).eq(1);
     expect(player.plants).eq(3);

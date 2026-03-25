@@ -22,11 +22,11 @@ describe('DesperateMeasures', () => {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
 
-    const priorTr = player.getTerraformRating();
+    const priorTr = player.terraformRating;
 
     cast(card.play(player), SelectSpace).cb(protectedDustStorm);
 
-    expect(player.getTerraformRating()).eq(priorTr + 1);
+    expect(player.terraformRating).eq(priorTr + 1);
     expect(game.getOxygenLevel()).eq(1);
   });
 
@@ -39,12 +39,12 @@ describe('DesperateMeasures', () => {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedErosion = tiles.get(TileType.EROSION_MILD)![0];
 
-    const priorTr = player.getTerraformRating();
+    const priorTr = player.terraformRating;
     const priorTemp = game.getTemperature();
 
     cast(card.play(player), SelectSpace).cb(protectedErosion);
 
-    expect(player.getTerraformRating()).eq(priorTr + 1);
+    expect(player.terraformRating).eq(priorTr + 1);
     expect(game.getTemperature()).eq(priorTemp + 2);
   });
 

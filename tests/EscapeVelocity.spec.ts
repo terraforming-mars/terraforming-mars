@@ -11,11 +11,12 @@ let timer: Timer;
 describe('EscapeVelocity', () => {
   beforeEach(() => {
     [/* game */, player] = testGame(1, {
-      escapeVelocityMode: true,
-      escapeVelocityThreshold: 3, // 3m
-      escapeVelocityBonusSeconds: 5, // 5s
-      escapeVelocityPenalty: 2, // 2vp
-      escapeVelocityPeriod: 4, // 4m
+      escapeVelocity: {
+        thresholdMinutes: 3,
+        bonusSectionsPerAction: 5,
+        penaltyVPPerPeriod: 2,
+        penaltyPeriodMinutes: 4,
+      },
     });
     (Timer as any).lastStoppedAt = 0;
     clock = new FakeClock();
@@ -81,8 +82,8 @@ describe('EscapeVelocity', () => {
     expect(player.getVictoryPoints().escapeVelocity).eq(-14);
 
     clock.millis += 4 * 60 * 1000;
-    expect(player.getVictoryPoints().total).eq(0);
-    expect(player.getVictoryPoints().escapeVelocity).eq(-14);
+    expect(player.getVictoryPoints().total).eq(-2);
+    expect(player.getVictoryPoints().escapeVelocity).eq(-16);
 
     player.setTerraformRating(17);
 

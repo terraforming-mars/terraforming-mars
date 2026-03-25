@@ -20,8 +20,8 @@ describe('ArboristCollective', () => {
     player.playCorporationCard(card);
     runAllActions(game);
 
-    expect(player.stock.plants).eq(3);
-    expect(player.production.plants).eq(1);
+    expect(player.stock.plants).eq(2);
+    expect(player.production.plants).eq(2);
   });
 
   it('canAct', () => {
@@ -32,7 +32,7 @@ describe('ArboristCollective', () => {
   });
 
   it('action', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     card.resourceCount = 3;
 
@@ -44,7 +44,7 @@ describe('ArboristCollective', () => {
   });
 
   it('onCardPlayed', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card.resourceCount).eq(0);
 

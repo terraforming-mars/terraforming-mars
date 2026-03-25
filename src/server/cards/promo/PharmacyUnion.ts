@@ -14,16 +14,15 @@ import {Resource} from '../../../common/Resource';
 import {all, digit} from '../Options';
 import {SerializedCard} from '../../SerializedCard';
 
-export class PharmacyUnion extends CorporationCard {
+export class PharmacyUnion extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PHARMACY_UNION,
-      startingMegaCredits: 46, // 54 minus 8 for the 2 diseases
+      startingMegaCredits: 54,
       resourceType: CardResource.DISEASE,
 
       behavior: {
         drawCard: {count: 1, tag: Tag.SCIENCE},
-        addResources: 2,
       },
 
       metadata: {
@@ -31,7 +30,7 @@ export class PharmacyUnion extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(54).cards(1, {secondaryTag: Tag.SCIENCE});
           // blank space after MC is on purpose
-          b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
+          b.text('(You start with 54 M€. Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
@@ -57,18 +56,24 @@ export class PharmacyUnion extends CorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
+  private logAddingDisease(player: IPlayer, count: number, megaCreditsLost: number) {
+    if (count === 1) {
+      player.game.log('${0} added a disease to ${1} and lost ${2} M€',
+        (b) => b.player(player).card(this).number(megaCreditsLost));
+    } else {
+      player.game.log('${0} added ${3} diseases to ${1} and lost ${2} M€',
+        (b) => b.player(player).card(this).number(megaCreditsLost).number(count));
+    }
   }
 
   private addDisease(player: IPlayer, count: number) {
     const megaCreditsLost = Math.min(player.megaCredits, count * 4);
     player.addResourceTo(this, count);
     player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-    player.game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+    this.logAddingDisease(player, count, megaCreditsLost);
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard): void {
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard, activePlayer: IPlayer): void {
     if (this.isDisabled) {
       return;
     }
@@ -77,62 +82,60 @@ export class PharmacyUnion extends CorporationCard {
 
     const hasScienceTag = player.tags.cardHasTag(card, Tag.SCIENCE);
     const hasMicrobesTag = card.tags.includes(Tag.MICROBE);
-    const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
 
-    // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
-    if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
-      // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
-      if (player.canAfford({cost: 0, tr: {tr: 3}})) {
-        player.defer(() => {
-          const orOptions = new OrOptions(
-            new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
-              this.isDisabled = true;
-              player.increaseTerraformRating(3);
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
-              player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-              game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
-              return undefined;
-            }),
-            new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
-              player.increaseTerraformRating();
-              player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-              game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
-              game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
-              return undefined;
-            }),
-          );
-          orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
-          return orOptions;
-        }, Priority.PHARMACY_UNION);
-        return undefined;
+    if (player === activePlayer && hasScienceTag) {
+      // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
+      if (hasMicrobesTag && this.resourceCount === 0) {
+        // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
+        if (player.canAfford({cost: 0, tr: {tr: 3}})) {
+          player.defer(() => {
+            return new OrOptions(
+              new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
+                this.disable(player);
+                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+                game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+                return undefined;
+              }),
+              new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
+                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                player.increaseTerraformRating();
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+                this.logAddingDisease(player, 1, megaCreditsLost);
+                game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+                return undefined;
+              }),
+            ).setTitle('Choose the order of tag resolution for Pharmacy Union');
+          }, Priority.PHARMACY_UNION);
+          return undefined;
+        }
+      } else {
+        const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
+        this.onScienceTagAdded(player, scienceTags);
       }
     }
-
-    if (isPharmacyUnion && hasScienceTag) {
-      const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-      this.onScienceTagAdded(player, scienceTags);
-    }
-
 
     if (hasMicrobesTag) {
       player.defer(() => {
         const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
-        const player = game.getCardPlayerOrThrow(this.name);
         this.addDisease(player, microbeTagCount);
         return undefined;
       }, Priority.PHARMACY_UNION);
     }
   }
 
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.onScienceTagAdded(player, 1);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
     const game = player.game;
     for (let i = 0; i < count; i++) {
       player.defer(() => {
-        if (this.isDisabled) return undefined;
+        if (this.isDisabled) {
+          return;
+        }
 
         if (this.resourceCount > 0) {
           if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
@@ -149,13 +152,12 @@ export class PharmacyUnion extends CorporationCard {
         if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
           // TODO (Lynesth): Remove this when #1670 is fixed
           game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
-          return undefined;
+          return;
         }
 
         return new OrOptions(
           new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
-            this.isDisabled = true;
-            player.increaseTerraformRating(3);
+            this.disable(player);
             game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
             return undefined;
           }),
@@ -163,6 +165,13 @@ export class PharmacyUnion extends CorporationCard {
         );
       }, Priority.SUPERPOWER); // Make it a priority
     }
+  }
+
+  private disable(player: IPlayer) {
+    player.playedCards.retagCard(this, () => {
+      this.isDisabled = true;
+    });
+    player.increaseTerraformRating(3);
   }
 
   public serialize(serialized: SerializedCard) {

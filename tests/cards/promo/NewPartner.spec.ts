@@ -38,7 +38,7 @@ describe('NewPartner', () => {
     selectCard.cb([selectCard.cards[0]]);
 
     expect(player.production.megacredits).to.eq(1);
-    expect(player.playedCards.every((card) => isPreludeCard(card))).is.true;
+    expect(player.playedCards.asArray().every((card) => isPreludeCard(card))).is.true;
   });
 
   it('Can play with no playable preludes drawn', () => {

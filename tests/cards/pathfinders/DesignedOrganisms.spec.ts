@@ -15,7 +15,6 @@ describe('DesignedOrganisms', () => {
   beforeEach(() => {
     card = new DesignedOrganisms();
     [game, player] = testGame(1);
-    player.playedCards.push(card);
   });
 
   it('canPlay', () => {
@@ -29,7 +28,7 @@ describe('DesignedOrganisms', () => {
   it('play', () => {
     const tardigrades = new Tardigrades();
     const penguins = new Penguins();
-    player.playedCards = [tardigrades, penguins];
+    player.playedCards.push(tardigrades, penguins);
 
     card.play(player);
     runAllActions(game);

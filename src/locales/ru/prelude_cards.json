@@ -1,4 +1,24 @@
 {
+    "Frontier Town": "Пограничный город",
+    "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Требуется, чтобы правищей партией был Марс вперёд или чтобы у вас было 2 делегата в ней. Уменьшите своё производство энергии на 1. Разместите один тайл города. Получите бонус размещения, указанный на карте, ещё 2 раза.",
+    "Venus Trade Hub": "Венерианский торговый хаб",
+    "Effect: When you trade, gain 3 M€.": "Эффект: когда вы торгуете с колонией, получаете 3 М€.",
+    "Requires 2 Venus tags.": "Требуется 2 метки Венеры.",
+    "Venus Shuttles": "Венерианские шаттлы",
+    "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "Действие: потратьте 12 М€, чтобы повысить уровень Венеры на 1. Стоимость уменьшается на 1 М€ за каждую вашу метку Венеры.",
+    "Add 2 floaters to ANY VENUS CARD.": "Добавьте 2 аэростата на любую карту с меткой Венеры.",
+    "WG Project": "Проект ВП",
+    "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Требуется, чтобы вы были председателем. Возьмите 3 карты Прелюдии и разыграйте 1 из них. Остальные 2 сбросьте.",
+    "Venus Orbital Survey": "Венерианская орбитальная разведка",
+    "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "Действие: откройте верхние 2 карты колоды. Возьмите карты с меткой Венеры на руку бесплатно. Остальные карты вы можете либо купить, либо сбросить.",
+    "City Parks": "Городские парки",
+    "Requires that you have 3 cities. Gain 2 plants.": "Требуется, чтобы у вас было 3 города. Получите 2 растения.",
+    "Cloud Tourism": "Облачный туризм",
+    "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Увеличьте своё производство M€ на 1 за каждую пару ваших меток Земли и Венеры. Получите 1 ПО за каждые 3 аэростата на этой карте.",
+    "Colonial Representation": "Колониальное представительство",
+    "Gain 3 M€ per colony you have.": "Получите 3 M€ за каждую вашу колонию.",
+    "Envoys From Venus": "Делегаты Венеры",
+    "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Требуется 3 метки Венеры. Разместите 2 делегата в одной партии.",
     "prelude": "Пролог",
     "2 Earth": "2 Земли",
     "Space Hotels": "Космические отели",
@@ -12,6 +32,85 @@
     "(Effect: When paying for a plant card, microbes here may be used as 2 M€ each.)": "(Эффект: когда разыгрывается карта с меткой растения, бактерии с этой карты могут быть проданы за 2 M€ каждый.)",
     "(Temperature must be -20 C or lower.)": "(Требование: температура -20 градусов или ниже)",
     "Research Coordination": "Координация исследований",
-    "(After being played, when you perform an action, the wild tag counts as any tag of your choice.)": "(После разыгрывания, когда вы выполняете действие, метки с животными считаются любыми метками.)",
-    "SF Memorial": "Мемориал СФ"
+    "(After being played, when you perform an action, the wild tag counts as any tag of your choice.)": "(После розыгрыша, при выполнении действия, универсальная метка считается любой меткой на ваш выбор.)",
+    "SF Memorial": "Мемориал СФ",
+    "Colonial Envoys": "Делегаты колоний",
+    "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Требуется чтобы Союз был правящей партией или в этой партии было 2 ваших делегата. Разместите по 1 делегату за каждую вашу колонию. Вы можете разместить их в разных партиях.",
+
+    "Atmospheric Enhancers": "Атмосферные усилители",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Повысьте на 2 деления температуру или кислород или Венеру. Доберите 2 карты с аэростатами.",
+	
+	"Board of Directors": "Совет директоров",
+    "ACTION:": "Действие:",
+    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Возьмите 1 карту Прелюдии: либо сбросьте её, либо заплатите 12 М€ и уберите 1 ресурс директора с этой карты, чтобы сыграть её.",
+    "Add 4 director resources here.": "Добавьте на эту карту 4 ресурса директора.",
+
+	"Corridors of Power": "Коридоры власти",
+    "Effect: Each time you become party leader, draw 1 card.": "Эффект: Каждый раз когда вы становитесь лидером партии, добирите 1 карту.",
+    "Raise your TR 1 step and gain 4 M€": "Повысьте свой РТ на 1 и получите 4 М€.",
+	
+	"Early Colonization": "Ранняя колонизация",
+    "INCREASE ALL COLONY TRACKS 2 STEPS": "Увеличьте все треки колоний на 2 шага.",
+    "Place a colony. Gain 3 energy.": "Разместите колонию. Получите 3 энергии.",
+	
+	"Floating Trade Hub": "Облачный торговый хаб",
+    "Action: Add 2 floaters to ANY card.": "Действие: Добавьте 2 аэростата на любую карту.",
+    "Action: Remove any number of floaters here to gain that many of one standard resource.": "Действие: Удалите любое количество аэростатов с этой карты, чтобы получить такое же количество стандартного ресурса.",
+
+	"Industrial Complex": "Промышленный комплекс",
+    "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Сбросьте 18 М€. Повысьте все свои производства, которые ниже 1, до уровня 1.",
+
+	"Main Belt Asteroids": "Астероидный пояс",
+    "Action: Gain 1 asteroid to ANY CARD.": "Действие: Добавьте 1 астероид на любую карту.",
+    "Effect: When gaining an asteroid HERE, gain 1 titanium.": "Когда вы получаете астероид на эту карту, получите 1 титан.",
+    "Lose 5 M€. 1 VP per 2 asteroids here.": "Сбросьте 5 М€. 1 ПО за каждые 2 астероида на этой карте.",
+
+	"Planetary Alliance": "Межпланетный альянс",
+    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Повысьте ваш РТ на 2. Доберите 1 карту с меткой Юпитера и 1 карту с меткой Венеры.",
+
+	"Preservation Program": "Программа сохранения",
+    "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Эффект: Пропустите первое повышение РТ в фазе действий каждого поколения.",
+    "Raise your TR 5 steps.": "Повысьте ваш РТ на 5.",
+
+	"Project Eden": "Проект Эдем",
+    "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Разместите 1 океан, 1 город и 1 тайл озеленения. Сбросьте 3 карты.",
+
+	"Recession": "Рецессия",
+    "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "Каждый противник теряет 5 М€ и уменьшает своё производство М€ на 1. Вы получаете 10 М€.",
+	
+	"Rise To Power": "Восхождение к власти",
+    "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Увеличьте своё производство М€ на 3 и разместите 3 делегата. Их можно разместить в разных партиях.",
+
+	"Soil Bacteria": "Грунтовые бактерии",
+    "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "Эффект: Когда разыгрываете карту с меткой растения или микроба, включая эту, получите 1 растение.",
+    "Draw 2 microbe cards and gain 3 plants.": "Доберите 2 карты с меткой микроба и получите 3 растения.",
+
+	"Space Lanes": "Космические маршруты",
+    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "Эффект: Когда вы разыгрываете карту с меткой Юпитера, Земли или Венеры, платите на 2 M€ меньше за каждую метку.",
+    "Gain 3 titanium.": "Получите 3 титана.",
+
+	"Strategic Base Planning": "Стратегическое планирование базы",
+    "Pay 3M€. Place a city. Place a colony.": "Заплатите 3 M€. Разместите город. Разместите колонию.",
+
+	"Suitable Infrastructure": "Подходящая инфраструктура",
+    "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "Эффект: Раз за действие, которое вы совершаете, получите 2 M€, если вы увеличиваете любое производство.",
+    "Gain 5 steel.": "Получите 5 стали.",
+	
+	"Terraforming Deal": "Сделка по терраформированию",
+    "Effect: Each step your TR is raised, you gain 2 M€.": "За каждый шаг повышения вашего РТ, получите 2 M€.",
+
+	"Venus Contract": "Соглашение о Венере",
+    "Effect: Each step you raise Venus, gain 3 M€.": "За каждый шаг, на который вы повышаете Венеру, получите 3 M€.",
+    "Draw 1 Venus card. Raise your TR 1 step.": "Доберите 1 карту Венеры. Повысьте ваш РТ на 1.",
+	
+	"Venus L1 Shade": "Тень Венеры L1",
+    "Raise Venus 3 steps.": "Увеличьте шкалу Венеры на 3.",
+
+	"World Government Advisor": "Советник Мирового правительства",
+    "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "Действие: Повысить 1 глобальный параметр без получения РТ или других бонусов.",
+    "Raise your TR 2 steps. Draw 1 card.": "Повысьте РТ на 2. Возьмите 1 карту.",
+
+    "High Circles": "Высшие круги",
+    "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Повысьте ваш РТ на 1 и возьмите 1 карту с требованием к партии. Разместите 2 делегатов в одной партии.",
+    "Effect: You have +1 influence.": "Эффект: ваш уровень влияния +1."
 }

@@ -21,7 +21,7 @@ export class RemoveAnyPlants extends DeferredAction {
     let qtyToRemove = Math.min(target.plants, this.count);
 
     // Botanical Experience hook.
-    if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       qtyToRemove = Math.ceil(qtyToRemove / 2);
     }
 
@@ -45,9 +45,8 @@ export class RemoveAnyPlants extends DeferredAction {
 
     if (game.isSoloMode()) {
       const option = new SelectOption(
-        'Remove plants from the neutral oppponent', {
-          buttonLabel: 'Remove plants',
-        })
+        'Remove plants from the neutral oppponent',
+        'Remove plants')
         .andThen(() => {
           game.someoneHasRemovedOtherPlayersPlants = true;
           player.resolveInsuranceInSoloGame();
@@ -55,19 +54,19 @@ export class RemoveAnyPlants extends DeferredAction {
         });
       removalOptions.push(option);
 
-      // Shortcut. Only provide the opportunity  if the player is playing Mons Insurance.
-      if (game.monsInsuranceOwner !== player.id) {
+      // Shortcut. Only provide the opportunity if the player is playing Mons Insurance.
+      if (game.monsInsuranceOwner !== player) {
         option.cb(undefined);
         return undefined;
       }
     }
 
-    const candidates = player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
+    const candidates = player.opponents.filter((p) => !p.plantsAreProtected() && p.plants > 0);
     removalOptions.push(...candidates.map((target) => {
       let qtyToRemove = Math.min(target.plants, this.count);
 
       // Botanical Experience hook.
-      if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 
@@ -78,13 +77,13 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(
-        message, {
-          buttonLabel: 'Remove plants',
-          warnings: (target === player) ? ['removeOwnPlants'] : undefined,
-        }).andThen(() => {
-        target.attack(player, Resource.PLANTS, qtyToRemove, {log: true});
-        return undefined;
-      });
+        message,
+        'Remove plants',
+        (target === player) ? ['removeOwnPlants'] : undefined)
+        .andThen(() => {
+          target.attack(player, Resource.PLANTS, qtyToRemove, {log: true});
+          return undefined;
+        });
     }));
 
     removalOptions.push(new SelectOption('Skip removing plants').andThen(() => {
@@ -101,8 +100,6 @@ export class RemoveAnyPlants extends DeferredAction {
       removalOptions.push(option);
     }
 
-    const orOptions = new OrOptions(...removalOptions);
-    orOptions.title = this.title;
-    return orOptions;
+    return new OrOptions(...removalOptions).setTitle(this.title);
   }
 }

@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {SpaceRelay} from '../../../src/server/cards/pathfinders/SpaceRelay';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
-import {testGame} from '../../TestingUtils';
+import {fakeCard, testGame} from '../../TestingUtils';
 
 describe('SpaceRelay', () => {
   let card: SpaceRelay;
@@ -20,11 +19,11 @@ describe('SpaceRelay', () => {
   });
 
   it('onCardPlayed', () => {
-    card.onCardPlayed(player, {tags: [Tag.VENUS]} as IProjectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
     expect(player.cardsInHand).has.length(0);
-    card.onCardPlayed(player, {tags: [Tag.JOVIAN]} as IProjectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.JOVIAN]}));
     expect(player.cardsInHand).has.length(1);
-    card.onCardPlayed(player, {tags: [Tag.WILD]} as IProjectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.WILD]}));
     expect(player.cardsInHand).has.length(1);
   });
 });

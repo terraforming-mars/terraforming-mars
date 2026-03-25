@@ -8,7 +8,7 @@ describe('Celestic', () => {
     const card = new Celestic();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);

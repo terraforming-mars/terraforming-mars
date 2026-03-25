@@ -1,0 +1,253 @@
+{
+  "Static Harvesting": "Staattisen sähkön keräys",
+  "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Vaatii 3 tai vähemmän valtamerilaattaa. Lisää energiatuotantoasi 1 askel. Saat 1 M€ jokaista rakennusympyrääsi kohti.",
+  
+  "Public Plans": "Julkiset suunnitelmat",
+  "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "PALJASTA MIKÄ TAHANSA MÄÄRÄ MUITA KORTTEJA KÄDESTÄSI. (VASTUSTAJASI VOIVAT TARKASTELLA NIITÄ.) SAA 1 M€ JOKAISESTA PALJASTETUISTA KORTISTA.",
+  
+  "Vermin": "Tuholaiset",
+  "Effect: When any city is placed, add 1 animal here.": "VAIKUTUS: Kun kaupunki asetetaan, lisää 1 eläin tähän.",
+  "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "TOIMINTO: Lisää 1 eläin tähän tai 1 mikrobi TOISELLE kortille.",
+  "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Jokainen pelaaja, sinä mukaan lukien, saa −1 VP jokaista omistamaansa kaupunkia kohti JOS TÄÄLLÄ ON VÄHINTÄÄN 10 ELÄINTÄ.",
+
+  "New Holland": "Uusi Hollanti",
+  "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Vaatii 4 kaupunkilaattaa MARSISSA. Lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta jo asetetun valtamerilaatan päälle, NOUDATTAEN NORMAALEJA KAUPUNGIN SIJOITUSRAJOITUKSIA. Laatta lasketaan sekä kaupungiksi että valtamereksi.",
+
+  "Protected Growth": "Suojattu kasvu",
+  "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Hapen täytyy olla 7 % tai vähemmän. Saat 1 kasvin jokaista energiaympyrääsi kohti.",
+
+  "Public Baths": "Julkiset kylpylät",
+  "Requires 6 oceans. Gain 6 M€.": "Vaatii 6 valtamerta. Saat 6 M€.",
+
+  "Casinos": "Kasinot",
+  "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Vaatii että sinulla on kaupunki. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 4 askelta.",
+
+  "Hospitals": "Sairaalat",
+  "Effect: Each time a city is placed, gain a disease here.": "VAIKUTUS: Joka kerta kun kaupunki asetetaan, saat taudin tähän.",
+  "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "TOIMINTO: Poista tauti MILTÄ TAHANSA KORTILTASI saadaksesi 1 M€ jokaista pelissä olevaa kaupunkia kohti.",
+  "Decrease your energy production 1 step.": "Vähennä energiatuotantoasi 1 askel.",
+
+  "Supermarkets": "Supermarketit",
+  "Requires two cities in play. Increase your M€ production 2 steps.": "Vaatii kaksi kaupunkia pelissä. Lisää M€-tuotantoasi 2 askelta.",
+
+  "City Parks": "Kaupunkipuistot",
+  "Requires that you have 3 cities. Gain 2 plants.": "Vaatii että sinulla on 3 kaupunkia. Saat 2 kasvia.",
+
+  "Soil Enrichment": "Maaperän rikastaminen",
+  "Spend 1 microbe from ANY of your cards to gain 5 plants": "Käytä 1 mikrobi MILTÄ TAHANSA kortiltasi saadaksesi 5 kasvia",
+
+  "Icy Impactors": "Jäiset törmääjät",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "TOIMINTO: Käytä 10 M€ (titaania voi käyttää) lisätäksesi 2 asteroidia tähän.",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "TOIMINTO: Käytä 1 asteroidi täältä asettaaksesi valtamerilaatan. ENSIMMÄINEN PELAAJA VALITSEE MIHIN SINUN TÄYTYY ASETTAA SE.",
+
+  "Floyd Continuum": "Floydin jatkumo",
+  "Action: Gain 3 M€ per completed terraforming parameter.": "TOIMINTO: Saat 3 M€ jokaista valmistunutta maankaltaistusmuuttujaa kohti.",
+
+  "Martian Lumber Corp": "Marsilainen puunjalostus",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "VAIKUTUS: Kun pelaat rakennusympyrän, kasveja voi käyttää 3 M€ kutakin.",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Vaatii että sinulla on 2 viherlaattaa. Lisää kasvatuotantoa 1 askel.",
+
+  "Solar Logistics": "Aurinkologistiikka",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "VAIKUTUS: Kun pelaat Maa-ympyrän, maksat 2 M€ vähemmän.",
+  "Effect: When any player plays a space event, draw a card.": "VAIKUTUS: Kun kuka tahansa pelaaja pelaa avaruustapahtuman, nosta kortti.",
+  "Gain 2 titanium.": "Saat 2 titaania.",
+
+  "Teslaract": "Teslarakti",
+  "Action: Spend 1 energy production to gain 1 plant production.": "TOIMINTO: Käytä 1 energiatuotantoa saadaksesi 1 kasvatuotantoa.",
+
+  "Red Ships": "Punaiset alukset",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "TOIMINTO: Saat 1 M€ jokaisesta KAUPUNKI- JA ERIKOISLAATASTA jotka ovat valtameren vieressä.",
+  "Requires 4% oxygen.": "Vaatii 4 % happea.",
+
+  "Neptunian Power Consultants": "Neptunuksen energiakonsultit",
+  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "VAIKUTUS: Kun valtameri asetetaan, VOIT maksaa 5 M€ (terästä voi käyttää) lisätäksesi energiatuotantoa 1 askel ja lisätäksesi 1 vesivoimaresurssin tälle kortille.",
+  "1 VP per hydroelectric resource on this card": "1 VP jokaista vesivoimaresurssia kohti tällä kortilla.",
+
+  "Mars Nomads": "Marsin paimentolaiset",
+  "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "TOIMINTO: SIIRRÄ PAIMENTOLAISET viereiseen, ei-varattuun tyhjään alueeseen ja kerää SIJOITUSBONUS ikään kuin asettaisit erikoislaatan sinne. Paimentolaisten alueelle ei saa asettaa laattoja.",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "ASETA PAIMENTOLAISET ei-varatulle, tyhjälle alueelle pelilaudalla.",
+
+  "Kaguya Tech": "",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Lisää M€-tuotantoa 2 askelta. Nosta 1 kortti. Poista 1 viheralueesi (ei vaikuta happeen.) Aseta kaupunki samaan paikkaan sijoitussäännöistä välittämättä. Saat sijoitusbonukset tavalliseen tapaan.",
+
+  "Homeostasis Bureau": "Homeostaasitoimisto",
+  "Effect: When you raise the temperature, gain 3 M€.": "VAIKUTUS: Kun nostat lämpötilaa, saat 3 M€.",
+  "Increase your heat production 2 steps.": "Lisää lämpötuotantoasi 2 askelta.",
+
+  "Hermetic Order of Mars": "Marsin hermeettinen veljeskunta",
+  "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Hapen täytyy olla 4 % tai vähemmän. Lisää M€-tuotantoasi 2 askelta. Saat 1 M€ jokaista tyhjää aluetta kohti laattojesi vieressä.",
+
+  "St. Joseph of Cupertino Mission": "Pyhän Josephin Cupertinon missio",
+  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "TOIMINTO: Maksa 5 M€ (TERÄSTÄ VOI KÄYTTÄÄ) rakentaaksesi 1 katedraalin kaupunkiin. Maksimissaan 1 per kaupunki. Kaupungin omistaja voi maksaa 2 M€ nostaakseen 1 kortin.",
+  "1 VP per City with a Cathedral in it.": "1 VP jokaista kaupunkia kohti jossa on katedraali.",
+
+  "Cyberia Systems": "",
+  "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "Lisää terästuotantoasi 1 askel. Kopioi 2 rakennusympyrän omaavan korttisi TUOTANTOLAATIKOT.",
+
+  "Carbon Nanosystems": "Hiili-nanosysteemit",
+  "Effect: When you play a science tag, including this, add a graphene resource here.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, lisää grafeeniresurssi tähän.",
+  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "VAIKUTUS: Kun pelaat avaruus- tai kaupunkiympyrän, grafeenejä voi käyttää 4 M€ kutakin.",
+
+  "Astra Mechanica": "",
+  "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "PALAUTA ENINTÄÄN 2 PELAAMAASI TAPAHTUMAKORTIA KÄTEESI. NE EIVÄT SAA OLLA KORTTEJA JOTKA ASETTAVAT ERIKOISLAATTOJA.",
+
+  "Aqueduct Systems": "Akvaduktijärjestelmät",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Vaatii että sinulla on kaupunki valtameren vieressä. Nosta 3 rakennuskorttia.",
+
+  "Directed Heat Usage": "Suunnattu lämmönkäyttö",
+  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "TOIMINTO: Käytä 3 lämpöä saadaksesi joko 4 M€ tai 2 kasvia.",
+
+  "Supercapacitors": "Superkondensaattorit", 
+  "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "VAIKUTUS: ENERGIAN MUUNTAMINEN LÄMMÖKSI TUOTANNON AIKANA ON VAPAAEHTOISTA JOKAISELLE ENERGIARESURSSILLE.",
+  "Increase M€ production 1 step.": "Nosta M€-tuotantoa 1 askel.",
+
+  "Robot Pollinators": "Robotti-pölyttäjät",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Vaatii 4 % happea. Nosta kasvituotantoasi 1 askel. Saat 1 kasvin jokaisesta kasviympyrästäsi.",
+
+  "16 Psyche": "16 psyyke", 
+  "Increase titanium production 2 steps. Gain 3 titanium.": "Nosta titaanituotantoa 2 askelta. Saat 3 titaania.",
+
+  "Comet Aiming": "Komeetan tähtäys",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "TOIMINTO: Käytä 1 titaani lisätäksesi 1 asteroidin MILLE TAHANSA kortille.",
+  "Action: Remove 1 asteroid here to place an ocean.": "TOIMINTO: Poista 1 asteroidi täältä asettaaksesi valtameren.",
+
+  "Cutting Edge Technology": "Huipputeknologia",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat kortin jossa on vaatimus, maksat siitä 2 M€ vähemmän.",
+
+  "Crash Site Cleanup": "Törmäyspaikan siivous", 
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Vaatii että pelaaja poisti TOISEN PELAAJAN kasveja tässä sukupolvessa. Saat 1 titaanin tai 2 terästä.",
+
+  "Directed Impactors": "Suunnatut iskut",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "TOIMINTO: Käytä 6 M€ lisätäksesi 1 asteroidin MILLE TAHANSA KORTILLE (titaania voi käyttää maksamiseen).",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "TOIMINTO: Poista 1 asteroidi täältä nostaaksesi lämpötilaa 1 askel.",
+
+  "Field-Capped City": "Suojattu kaupunki",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Lisää M€-tuotantoasi 2 askelta, lisää energiatuotantoasi 1 askel, saat 3 kasvia ja aseta kaupunkilaatta.",
+
+  "Great Dam": "Suuri pato",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Vaatii 4 valtamerialuelaattaa. Lisää energiatuotantoasi 2 askelta.",
+
+  "Magnetic Shield": "Magneettisuoja",
+  "3 Power": "3 Energia",
+  "Requires 3 power tags. Raise your TR 4 steps.": "Vaatii 3 energiaympyrää. Nosta MKL:ääsi 4 askelta.",
+
+  "Meltworks": "Sulattamo",
+  "Action: Spend 5 heat to gain 3 steel.": "TOIMINTO: Käytä 5 lämpöä saadaksesi 3 terästä.",
+
+  "Mohole Lake": "Porakaivojärvi",
+  "Action: Add a microbe or animal to ANOTHER card.": "TOIMINTO: Lisää mikrobi tai eläin TOISELLE kortille.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Saat 3 kasvia. Nosta lämpötilaa 1 askel ja aseta 1 valtamerialuelaatta.",
+
+  "Diversity Support": "Monimuotoisuuden tuki",
+  "9 Resource types": "9 resurssityyppiä",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Vaatii että sinulla on 9 erilaista resurssityyppiä. Nosta MKL:ääsi 1 askel.",
+
+  "Topsoil Contract": "Pintamultasopimus",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "VAIKUTUS: Kun saat mikrobin MILLE TAHANSA KORTILLE, saat myös 1 M€.",
+  "Gain 3 plants.": "Saat 3 kasvia.",
+
+  "Imported Nutrients": "Tuodut ravinteet",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Saat 4 kasvia ja lisää 4 mikrobia TOISELLE KORTILLE.",
+
+  "Asteroid Deflection System": "Asteroidien torjuntajärjestelmä",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "TOIMINTO: PALJASTA JA HYLKÄÄ pakan ylin kortti. Jos siinä on avaruusympyrä, lisää asteroidi tähän.",
+  "opponents may not remove your plants": "vastustajat eivät voi poistaa kasvejasi",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Vähennä energiatuotantoasi 1 askel. 1 VP jokaista asteroidia kohti tällä kortilla.",
+
+  "Jovian Embassy": "Jupiterin lähetystö",
+  "Raise your TR 1 step.": "Nosta MKL:ääsi 1 askel.",
+
+  "Sub-Crust Measurements": "Kuoren alamittaukset",
+  "Action: Draw a card.": "TOIMINTO: Nosta kortti.",
+
+  "Potatoes": "Perunat",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Menetät 2 kasvia. Lisää M€-tuotantoasi 2 askelta.",
+
+  "Meat Industry": "Lihateollisuus",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "VAIKUTUS: Kun saat eläimen MILLE TAHANSA KORTILLE, saat 2 M€.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasviesi tuotantoa 2 askelta. Nosta MKL:ääsi 3 askelta ja aseta tämä laatta.",
+
+  "Orbital Cleanup": "Kiertoradan siivous",
+  "Action: Gain 1 M€ per science tag you have.": "TOIMINTO: Saat 1 M€ jokaista tiedeympyrääsi kohti.",
+  "Decrease your M€ production 2 steps.": "Vähennä M€-tuotantoasi 2 askelta.",
+
+  "Law Suit": "Oikeusjuttu",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Varasta 3 M€ pelaajalta joka POISTI RESURSSEJASI TAI VÄHENSI TUOTANTOASI tällä sukupolvella. Aseta tämä kortti kuvapuoli alaspäin KYSEISEN PELAAJAN TAPAHTUMAKANSIOON.",
+
+  "Small Asteroid": "Pieni asteroidi",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "Nosta lämpötilaa 1 askel. Poista enintään 2 kasvia keneltä tahansa pelaajalta.",
+
+  "Asteroid Hollowing": "Asteroidin ontelointi",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "TOIMINTO: Käytä 1 titaania lisätäksesi 1 asteroidihresurssin tähän ja lisätäksesi M€-tuotantoa 1 askel.",
+  "1 VP for each 2 asteroids on this card.": "1 VP jokaista 2 asteroidia kohti tällä kortilla.",
+
+  "Advertising": "Mainonta",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "VAIKUTUS: Kun pelaat kortin jonka perushinta on 20 M€ tai enemmän, lisää M€-tuotantoasi 1 askel.",
+
+  "Project Inspection": "Projektin tarkastus",
+  "Use a card action that has been used this generation.": "Käytä korttitoimintoa jota on käytetty tällä sukupolvella.",
+
+  "Rego Plastics": "Rego-muovit",
+  "Effect: Your steel resources are worth 1 M€ extra.": "VAIKUTUS: Teräsresurssisi ovat 1 M€ arvokkaampia.",
+
+  "Interplanetary Trade": "Planeettojen välinen kauppa",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Lisää M€-tuotantoasi 1 askel jokaista pelaamaasi erilaista ympyrää kohti, tämä mukaan lukien.",
+
+  "Penguins": "Pingviinit",
+  "Action: Add 1 animal to this card.": "TOIMINTO: Lisää 1 eläin tälle kortille.",
+  "Requires 8 oceans.": "Vaatii 8 valtamerta.",
+
+  "Snow Algae": "Lumileväkasvit",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Vaatii 2 valtamerta. Lisää kasvi- ja lämpötuotantoasi 1 askel kumpikin.",
+
+  "Self-replicating Robots": "Itsensä kopiovat robotit",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "TOIMINTO: Paljasta ja aseta AVARUUS- TAI RAKENNUS-kortti tähän kädestäsi ja aseta 2 resurssia sille, TAI kaksinkertaista resurssit kortilla täällä.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "VAIKUTUS: Korttia täällä voi pelata ikään kuin kädestä sen hinta alennettuna sillä olevien resurssien määrällä.",
+
+  "Dusk Laser Mining": "Hämärän laserkaivostoiminta",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Vaatii 2 tiedeympyrää. Vähennä energiatuotantoasi 1 askel ja lisää titaanituotantoasi 1 askel. Saat 4 titaania.",
+
+  "Hi-Tech Lab": "Korkean teknologian laboratorio",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "TOIMINTO: Käytä mikä tahansa määrä energiaa nostaaksesi saman määrän kortteja. OTA 1 KÄTEEN JA HYLKÄÄ LOPUT.",
+
+  "Magnetic Field Generators": "Magneettikentän generaattorit",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasviesi tuotantoa 2 askelta. Nosta MKL:ääsi 3 askelta. Aseta tämä laatta.",
+
+  "Mercurian Alloys": "Merkuriuksen lejeeringit",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "VAIKUTUS: Titaaniresurssisi ovat 1 M€ arvokkaampia.",
+
+  "Energy Market": "Energiamarkkinat",
+  "Action: Spend 2X M€ to gain X energy.": "TOIMINTO: Käytä 2X M€ saadaksesi X energiaa.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "TOIMINTO: Vähennä energiatuotantoa 1 askel saadaksesi 8 M€.",
+
+  "Asteroid Rights": "Asteroidioikeudet",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "TOIMINTO: Käytä 1 M€ lisätäksesi 1 asteroidin MILLE TAHANSA kortille.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "TOIMINTO: Käytä 1 asteroidi täältä lisätäksesi M€-tuotantoa 1 askel TAI saadaksesi 2 titaania.",
+  "Add 2 asteroids to this card.": "Lisää 2 asteroidia tälle kortille.",
+
+  "Stanford Torus": "Stanfordin torus",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "Aseta kaupunkilaatta AVARUUTEEN, planetan ulkopuolelle ja erillään siitä.",
+
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Nosta lämpötilaa 3 askelta ja saat 4 terästä. Aseta tämä laatta EI YHDENKÄÄN kaupunkilaatan viereen. Poista enintään 6 kasvia keneltä tahansa pelaajalta.",
+
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Vaatii 4 valtamerialuelaattaa. Lisää energiatuotantoasi 2 askelta. Aseta tämä laatta valtamerialuelaatan VIEREEN.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasviesi tuotantoa 2 askelta. Nosta MKL:ääsi 3 askelta.",
+
+  "Requires 8 oceans. 1 VP for each animal on this card.": "Vaatii 8 valtamerta. 1 VP jokaista eläintä kohti tällä kortilla.",
+  "Requires 2 science tags.": "Vaatii 2 tiedeympyrää.",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "TOIMINTO: Käytä 2X M€ saadaksesi X energiaa tai vähennä energiatuotantoa 1 askel saadaksesi 8 M€.",
+
+  "Bactoviral Research": "Baktoviraalitutkimus",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Nosta 1 kortti. Valitse 1 pelattu korttisi ja lisää siihen 1 mikrobi jokaista tiedeympyrääsi kohti, tämä mukaan lukien.",
+
+  "Bio Printing Facility": "Biopainanta-laitos",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "TOIMINTO: Käytä 2 energiaa saadaksesi 2 kasvia TAI lisätäksesi 1 eläimen TOISELLE kortille.",
+
+  "Harvest": "Sadonkorjuu",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Vaatii että sinulla on 3 viheraluetta pelissä. Saat 12 M€.",
+
+  "Outdoor Sports": "Ulkoilmaurheilu",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Vaatii minkä tahansa kaupungin valtameren vieressä. Lisää M€-tuotantoasi 2 askelta."
+}

@@ -1,19 +1,35 @@
-export enum AgendaStyle {
-  STANDARD = 'Standard',
-  RANDOM = 'Random',
-  CHAIRMAN = 'Chairman',
-}
+import {PartyName} from './PartyName';
 
-type BonusParty = 'm' | 's' | 'u' | 'k' | 'r' | 'g';
-type BonusSuffix = 'b01' | 'b02';
-export type BonusId = `${BonusParty}${BonusSuffix}`;
+export type AgendaStyle =
+  /** Use the standard policies and bonuses. */
+  'Standard' |
+  /** Randomly choose policies and bonuses, which remain for the entire game. */
+  'Random' |
+  /** The incoming chairman sets the incoming policy and bonus each generation. */
+  'Chairman';
 
-type PolicyParty = 'mf' | 's' | 'u' | 'k' | 'r' | 'g';
-type PolicySuffix = 'p01' | 'p02' | 'p03' | 'p04';
-export type PolicyId = `${PolicyParty}${PolicySuffix}`
+const PARTIES = ['m', 's', 'u', 'k', 'r', 'g'] as const;
+const BONUS_SUFFIXES = ['b01', 'b02'] as const;
+const POLICY_SUFFIXES = ['p01', 'p02', 'p03', 'p04'] as const;
 
+type Party = typeof PARTIES[number];
+type BonusSuffix = typeof BONUS_SUFFIXES[number]
+type PolicySuffix = typeof POLICY_SUFFIXES[number];
+
+export type BonusId = `${Party}${BonusSuffix}`;
+export type PolicyId = `${Party}${PolicySuffix}`
+
+/* A party's policy (and ruling bonus). Can vary based on the agenda style. */
 export type Agenda = {
   bonusId: BonusId;
   policyId: PolicyId;
 }
 
+export const BONUS_IDS: ReadonlyArray<BonusId> = PARTIES.flatMap((p) => BONUS_SUFFIXES.map((s) => `${p}${s}` as BonusId));
+export const POLICY_IDS: ReadonlyArray<PolicyId> = PARTIES.flatMap((p) => POLICY_SUFFIXES.map((s) => `${p}${s}` as PolicyId));
+
+/** When player has Mars Frontier Alliance, this is their political party alliance. */
+export type AlliedParty = {
+  partyName: PartyName;
+  agenda: Agenda;
+};

@@ -13,11 +13,11 @@ describe('PlanetaryRightsBuyout', () => {
     player.underworldData.corruption = 5;
     expect(card.canPlay(player)).is.true;
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(27);
+    expect(player.terraformRating).eq(27);
   });
 });

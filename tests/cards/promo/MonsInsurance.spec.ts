@@ -26,7 +26,7 @@ describe('MonsInsurance', () => {
 
     [/* game */, player, player2, player3] = testGame(3);
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -81,7 +81,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.stock.add(Resource.STEEL, -1, {log: false, from: player3});
+    player2.stock.add(Resource.STEEL, -1, {log: false, from: {player: player3}});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -92,7 +92,10 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.stock.add(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.stock.add(Resource.STEEL, -1, {
+      log: false,
+      from: {globalEvent: GlobalEventName.ECO_SABOTAGE},
+    });
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -103,7 +106,7 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: player3});
+    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: {player: player3}});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -114,7 +117,10 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.production.add(Resource.MEGACREDITS, -1, {
+      log: false,
+      from: {globalEvent: GlobalEventName.ECO_SABOTAGE},
+    });
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -131,7 +137,7 @@ describe('MonsInsurance - Solo', () => {
 
     [game, player] = testGame(1, {preludeExtension: true});
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -183,7 +189,7 @@ describe('MonsInsurance - Solo', () => {
 
     // Predators steals one animal from another player
     const predators = new Predators();
-    player.playedCards = [predators];
+    player.playedCards.push(predators);
     expect(predators.resourceCount).eq(0);
 
     predators.action(player);

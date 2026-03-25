@@ -5,8 +5,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
 import {SelectAmount} from '../../inputs/SelectAmount';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TychoMagnetics extends CorporationCard {
+export class TychoMagnetics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TYCHO_MAGNETICS,

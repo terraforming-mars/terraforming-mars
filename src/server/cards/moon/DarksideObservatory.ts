@@ -38,7 +38,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
   }
 
   public canAct(player: IPlayer) {
-    return player.playedCards.some(this.include) || player.corporations.some(this.include);
+    return player.playedCards.some(this.include);
   }
 
   private addResource(card: ICard, player: IPlayer): void {
@@ -51,10 +51,12 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
   }
 
   public action(player: IPlayer) {
-    const playableCards = [
-      ...player.playedCards.filter((c) => this.include(c)),
-      ...player.corporations.filter((c) => this.include(c)),
-    ];
+    const playableCards = player.playedCards.filter((c) => this.include(c));
+
+    if (playableCards.length === 1) {
+      this.addResource(playableCards[0], player);
+      return;
+    }
 
     return new SelectCard(
       'Select card to add EITHER 1 science resource OR 2 Data resources',

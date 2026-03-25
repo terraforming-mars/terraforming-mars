@@ -13,7 +13,7 @@
   "Gain 2 titanium.": "Få 2 titan.",
 
   "Deimos Down:promo": "Deimos Ned",
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Øk temperaturen med 3 trinn og få 4 stål. Denne brikken kan ikke plasseres inntil by-brikker. Fjern opptil 6 planter fra en spiller.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Øk temperaturen med 3 trinn og få 4 stål. Denne brikken kan ikke plasseres inntil by-brikker. Fjern opptil 6 planter fra en spiller.",
 
   "Teslaract": "Teslarakt",
   "Action: Spend 1 energy production to gain 1 plant production.": "Handling: Reduser din energiproduksjon 1 steg for å øke din planteproduksjon med 1 steg.",
@@ -54,7 +54,7 @@
 
   "Established Methods": "",
 
-  "Astra Mechanica": "Astra Mechanica",
+  "Astra Mechanica": "",
   "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "Returner opp til 2 av dine spilte hendelseskort til din hånd. De kan ikke være kort som plasserer spesialbrikker.",
 
   "Aqueduct Systems": "Akveduktsystemer",
@@ -70,7 +70,7 @@
   "Robot Pollinators": "Robotbestøvere",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Krever 4% oksygen. Øk din planteproduksjon med 1 steg. Få 1 plante for hvert plantesymbol du har.",
 
-  "16 Psyche": "16 Psyche",
+  "16 Psyche": "",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Øk titanproduksjonen med 2 steg. Få 3 titan.",
 
   "Comet Aiming": "Kometstyring",
@@ -121,7 +121,7 @@
   "Asteroid Deflection System": "Asteroidavbøyingssystem",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Handling: VIS FREM OG KAST det øverste kortet i kortstokken. Hvis det har et rom-symbol, legg til en asteroideressurs på dette kortet.",
   "opponents may not remove your plants": "Andre spillere kan ikke fjerne dine planter",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Senk energiproduksjonen din med 1 steg. 1 SP per asteroideressurs på dette kortet.",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Senk energiproduksjonen din med 1 steg. 1 SP per asteroideressurs på dette kortet.",
 
   "Jovian Embassy": "Jovian Ambassade",
 
@@ -149,7 +149,7 @@
 
   "Asteroid Hollowing": "Asteroideutgraving",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Handling: Bruk 1 titan for å legge til 1 asteroideressurs her og øke M€ produksjonen med 1 steg.",
-  "1VP for each 2 asteroids on this card.": "1 SP for hver 2. asteroideressurs på dette kortet.",
+  "1 VP for each 2 asteroids on this card.": "1 SP for hver 2. asteroideressurs på dette kortet.",
 
   "Advertising": "Reklame",
   "When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Effekt: Når du spiller et kort med en grunnkostnad på 20 M€ eller mer, øk din M€ produksjon med 1 steg.",
@@ -192,7 +192,7 @@
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Handling: Bruk 1 asteroideressurs her for å øke M€ produksjonen med 1 steg ELLER få 2 titan.",
   "Add 2 asteroids to this card.": "Legg til 2 asteroideressurser på dette kortet.",
 
-  "Stanford Torus": "Stanford Torus",
+  "Stanford Torus": "",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Plasser en by-brikke I ROMMET, utenfor og separat fra planeten.",
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Krever 4 hav. Øk din energiproduksjon med 2 steg. Plasser denne brikken inntil et hav.",

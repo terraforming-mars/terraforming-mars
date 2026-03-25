@@ -18,6 +18,17 @@ export interface NewPlayerModel {
   first: boolean;
 }
 
+export type EscapeVelocityOptions = {
+  /** Time in minutes a player has to complete a game. */
+  thresholdMinutes: number;
+  /** Number of seconds a player gets back with every action. */
+  bonusSectionsPerAction: number;
+  /** Period in minutes after `escapeVelocityThreshold` after which player loses `escapeVelocityPenalty` VP. */
+  penaltyPeriodMinutes: number;
+  /** VP a player loses for every `escapeVelocityPeriod` minutes after `escapeVelocityThreshold`. */
+  penaltyVPPerPeriod: number;
+};
+
 /**
  * Like GameOptions, but the data structure sent from the new game page.
  */
@@ -49,6 +60,7 @@ export interface NewGameConfig {
   draftVariant: boolean;
   initialDraft: boolean; // initialDraftVariant: boolean;
   preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
@@ -64,11 +76,7 @@ export interface NewGameConfig {
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
-  escapeVelocityMode: boolean;
-  escapeVelocityThreshold: number | undefined;
-  escapeVelocityBonusSeconds: number | undefined;
-  escapeVelocityPeriod: number | undefined;
-  escapeVelocityPenalty: number | undefined;
+  escapeVelocity: EscapeVelocityOptions | undefined;
   twoCorpsVariant: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;

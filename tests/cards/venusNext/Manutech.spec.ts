@@ -13,7 +13,7 @@ describe('Manutech', () => {
   beforeEach(() => {
     card = new Manutech();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {

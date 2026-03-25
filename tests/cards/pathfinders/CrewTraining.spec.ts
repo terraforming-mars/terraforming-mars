@@ -19,20 +19,20 @@ describe('CrewTraining', () => {
   });
 
   it('Should play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
 
     expect(game.deferredActions).has.length(1);
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[0].title).to.match(/earth/);
+    expect(options.options[1].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -40,10 +40,10 @@ describe('CrewTraining', () => {
       vps: [],
     });
 
-    options.options[0].cb();
+    options.options[1].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 2,
       mars: 0,
       jovian: 0,

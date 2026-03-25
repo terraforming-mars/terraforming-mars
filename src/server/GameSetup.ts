@@ -15,27 +15,38 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SerializedGame} from './SerializedGame';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
-import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
-import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
-import {TerraCimmeriaNovusBoard} from './boards/TerraCimmeriaNovusBoard';
+import {VastitasBorealisNovaBoard} from './boards/VastitasBorealisNovaBoard';
+import {TerraCimmeriaNovaBoard} from './boards/TerraCimmeriaNovaBoard';
 import {Board} from './boards/Board';
 import {Space} from './boards/Space';
+import {HollandiaBoard} from './boards/HollandiaBoard';
 
 type BoardFactory = (new (spaces: ReadonlyArray<Space>) => MarsBoard) & {newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard};
+
+// When renaming a board, add the old name here so saved games can still be loaded.
+const BOARD_RENAMES = new Map<string, BoardName>([
+  ['vastitas borealis novus', BoardName.VASTITAS_BOREALIS_NOVA],
+  ['terra cimmeria novus', BoardName.TERRA_CIMMERIA_NOVA],
+]);
+
+export function normalizeBoardName(name: string): BoardName {
+  return BOARD_RENAMES.get(name) ?? name as BoardName;
+}
 
 const boards: Record<BoardName, BoardFactory> = {
   [BoardName.THARSIS]: TharsisBoard,
   [BoardName.HELLAS]: HellasBoard,
   [BoardName.ELYSIUM]: ElysiumBoard,
   [BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard,
-  [BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard,
-  [BoardName.TERRA_CIMMERIA_NOVUS]: TerraCimmeriaNovusBoard,
+  [BoardName.VASTITAS_BOREALIS_NOVA]: VastitasBorealisNovaBoard,
+  [BoardName.TERRA_CIMMERIA_NOVA]: TerraCimmeriaNovaBoard,
   [BoardName.AMAZONIS]: AmazonisBoard,
   [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
   [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
-};
+  [BoardName.HOLLANDIA]: HollandiaBoard,
+} satisfies Record<BoardName, BoardFactory>;
 
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): MarsBoard {
@@ -60,13 +71,19 @@ export class GameSetup {
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
 
-    function placeCityAndForest(game: IGame, direction: -1 | 1) {
+    function placeCityAndForest(game: IGame, direction: 'top' | 'bottom') {
       const board = game.board;
-      const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
+
+      const cost = game.discardForCost(1, TileType.CITY);
+
+      const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+      const citySpace = board.getNthAvailableLandSpace(distance, direction,
+        (space) => {
+          const adjacentSpaces = board.getAdjacentSpaces(space);
+          return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
+              adjacentSpaces.some((sp) => board.canPlaceTile(sp)); // can place forest nearby
+        });
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, citySpace, undefined);
-      }
 
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
       if (adjacentSpaces.length === 0) {
@@ -76,12 +93,9 @@ export class GameSetup {
       idx = Math.max(idx-1, 0); // Some cards cost zero.
       const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, greenerySpace, undefined);
-      }
     }
 
-    placeCityAndForest(game, 1);
-    placeCityAndForest(game, -1);
+    placeCityAndForest(game, 'top');
+    placeCityAndForest(game, 'bottom');
   }
 }

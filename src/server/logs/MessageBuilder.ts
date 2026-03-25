@@ -14,6 +14,10 @@ import {IColony} from '../colonies/IColony';
 import {Message} from '../../common/logs/Message';
 import {Color} from '../../common/Color';
 import {LogMessageData, LogMessageDataAttrs} from '../../common/logs/LogMessageData';
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {Space} from '../boards/Space';
+import {SpaceId} from '../../common/Types';
+import {toName} from '../../common/utils/utils';
 
 export class MessageBuilder {
   protected message: Message;
@@ -51,6 +55,19 @@ export class MessageBuilder {
 
   public card(value: ICard, attrs?: LogMessageDataAttrs): this {
     return this.cardName(value.name, attrs);
+  }
+
+  public cards(value: ReadonlyArray<ICard>, attrs?: LogMessageDataAttrs): this {
+    return this.cardNames(value.map(toName), attrs);
+  }
+
+  public cardNames(value: ReadonlyArray<CardName>, attrs?: LogMessageDataAttrs): this {
+    const data: LogMessageData = {type: LogMessageDataType.CARDS, value};
+    if (attrs !== undefined) {
+      data.attrs = attrs;
+    }
+    this.message.data.push(data);
+    return this;
   }
 
   public cardName(value: CardName, attrs?: LogMessageDataAttrs): this {
@@ -101,6 +118,21 @@ export class MessageBuilder {
 
   public globalEventName(value: GlobalEventName): this {
     this.message.data.push({type: LogMessageDataType.GLOBAL_EVENT, value: value});
+    return this;
+  }
+
+  public undergroundToken(value: UndergroundResourceToken): this {
+    this.message.data.push({type: LogMessageDataType.UNDERGROUND_TOKEN, value: value});
+    return this;
+  }
+
+  public space(value: Space): this {
+    this.message.data.push({type: LogMessageDataType.SPACE, value: value.id});
+    return this;
+  }
+
+  public spaceId(value: SpaceId): this {
+    this.message.data.push({type: LogMessageDataType.SPACE, value: value});
     return this;
   }
 

@@ -1,7 +1,6 @@
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {expect} from 'chai';
 import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
-import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
@@ -17,14 +16,14 @@ describe('Plantation', () => {
     [game, player] = testGame(2);
   });
 
-  it('Can not play', () => {
+  it('canPlay', () => {
+    player.tagsForTest = {science: 1};
     expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 2};
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    player.playedCards.push(new InventorsGuild(), new InventorsGuild());
-    expect(card.canPlay(player)).is.true;
-
     cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);

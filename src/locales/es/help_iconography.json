@@ -11,10 +11,10 @@
     "Science": "Ciencia",
     "Power": "Energía",
     "Earth": "Tierra",
-    "Venus": "Venus",
+    "Venus": "",
     "Plant": "Planta",
     "Microbe": "Microbio",
-    "Animal": "Animal",
+    "Animal": "",
     "Wild": "Comodín",
     "Event": "Evento",
     "MegaCredits (M€)": "Megacréditos (M€)",
@@ -46,7 +46,7 @@
 
     "Hotkeys Mapping" : "Asignación teclas acceso rápido",
     "Main Board": "Tablero principal",
-    "Players Overview Table": "Tablero resumen jugadores", 
-    "Cards in Hand": "Cartas en mano", 
+    "Players Overview Table": "Tablero resumen jugadores",
+    "Cards in Hand": "Cartas en mano",
     "Colonies": "Colonias"
 }

@@ -3,8 +3,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class SolBank extends CorporationCard {
+export class SolBank extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SOLBANK,

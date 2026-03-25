@@ -1,5 +1,6 @@
-import {CardRequirement, YesAnd} from './CardRequirement';
+import {CardRequirement} from './CardRequirement';
 import {IPlayer} from '../../IPlayer';
+import {IProjectCard} from '../IProjectCard';
 
 /**
  * Defines a class of requirements that compare to a given value. Subclasses provide that value
@@ -10,10 +11,10 @@ import {IPlayer} from '../../IPlayer';
  * most `count` (e.g. requires max 3 oceans.)
  */
 export abstract class InequalityRequirement extends CardRequirement {
-  public abstract getScore(player: IPlayer): number;
+  public abstract getScore(player: IPlayer, card: IProjectCard): number;
 
-  public satisfies(player: IPlayer, _thinkTankResources: number): boolean | YesAnd {
-    const score = this.getScore(player);
+  public satisfies(player: IPlayer, card: IProjectCard): boolean {
+    const score = this.getScore(player, card);
     if (this.max) {
       return score <= this.count;
     }

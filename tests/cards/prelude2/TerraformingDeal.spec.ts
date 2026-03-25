@@ -45,7 +45,8 @@ describe('TerraformingDeal', () => {
 
   it('Gives MC during resolving global events', () => {
     player.playedCards.push(card);
-    game.phase = Phase.TURMOIL;
+    game.phase = Phase.SOLAR;
+    game.inTurmoil = true;
 
     const turmoil = game.turmoil!;
     player2.playedCards.push(new Mine());
@@ -53,21 +54,22 @@ describe('TerraformingDeal', () => {
 
     const election = new Election();
     election.resolve(game, turmoil);
-    expect(player2.getTerraformRating()).eq(22);
+    expect(player2.terraformRating).eq(22);
     expect(player2.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(2);
   });
 
   it('Gives resolving chairman', () => {
     player.playedCards.push(card);
-    game.phase = Phase.TURMOIL;
+    game.phase = Phase.SOLAR;
+    game.inTurmoil = true;
 
     const turmoil = game.turmoil!;
     turmoil.setNewChairman(player, game);
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(2);
   });
 });

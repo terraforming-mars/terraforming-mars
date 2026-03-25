@@ -16,6 +16,7 @@ import {DoubleDown} from '../../../src/server/cards/promo/DoubleDown';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {FieldCappedCity} from '../../../src/server/cards/promo/FieldCappedCity';
 import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
+import {Whales} from '../../../src/server/cards/underworld/Whales';
 
 describe('ProjectEden', () => {
   let projectEden: ProjectEden;
@@ -107,7 +108,6 @@ describe('ProjectEden', () => {
     cast(player.popWaitingFor(), undefined);
   });
 
-
   it('play, oceans are at maximum', () => {
     maxOutOceans(player);
 
@@ -120,8 +120,7 @@ describe('ProjectEden', () => {
     ]);
   });
 
-
-  it('Make compatible with Double Down', () => {
+  it('Compatible with Double Down', () => {
     const doubleDown = new DoubleDown();
     player.preludeCardsInHand.push(doubleDown, projectEden);
     player.cardsInHand.push(
@@ -146,6 +145,39 @@ describe('ProjectEden', () => {
     selectCard.cb([projectEden]);
     runAllActions(game);
     playProjectEden();
+  });
+
+  it('Compatible with Whales', () => {
+    const a = new ArcticAlgae();
+    const b = new BiomassCombustors();
+    const c = new Comet();
+    const d = new Decomposers();
+
+    const whales = new Whales();
+
+    player.cardsInHand.push(a, b, c, d);
+    player.playedCards.push(whales);
+
+    maxOutOceans(player);
+    player.setTerraformRating(20);
+    cast(projectEden.play(player), undefined);
+    runAllActions(game);
+    let orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place an ocean', 'Place a city', 'Place a greenery', 'Discard 3 cards',
+    ]);
+
+    orOptions.options[0].cb();
+    runAllActions(game);
+
+    orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(player.getTerraformRating()).eq(20);
+    expect(whales.resourceCount).eq(1);
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place a city', 'Place a greenery', 'Discard 3 cards',
+    ]);
   });
 
   function playProjectEden() {

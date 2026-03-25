@@ -16,8 +16,10 @@ export type Preferences = {
   hide_tile_confirmation: boolean,
   hide_discount_on_cards: boolean,
   hide_animated_sidebar: boolean,
-  experimental_ui: boolean,
   debug_view: boolean,
+  symbol_overlay: boolean,
+  animated_title: boolean,
+  experimental_ui: boolean,
   lang: string,
 }
 
@@ -43,6 +45,10 @@ const defaults: Preferences = {
   hide_tile_confirmation: false,
   hide_discount_on_cards: false,
   hide_animated_sidebar: false,
+
+  symbol_overlay: false,
+  animated_title: true,
+
   experimental_ui: false,
   debug_view: false,
 };

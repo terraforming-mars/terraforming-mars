@@ -20,7 +20,7 @@ export class PublicSpaceline extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U77',
+        cardNumber: 'U077',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).br;
           b.plainText('Increase your M€ production 2 steps').br;

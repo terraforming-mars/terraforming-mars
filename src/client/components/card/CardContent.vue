@@ -1,24 +1,25 @@
 <template>
-  <div :class="getClasses()">
+  <div class="card-content" :class="corporationClass">
     <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
-    <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
-    <CardDescription v-if="hasDescription" :item="metadata.description" />
-    <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
-    <div class="padBottom" v-if="padBottom" style="padding-bottom: 22px;"></div>
+    <CardRenderData v-if="firstRow !== undefined" :renderData="firstRow" />
+    <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
+    <CardRenderData v-if="remainingRows !== undefined" :renderData="remainingRows" />
+    <CardDescription v-if="!isCorporation && hasDescription" :item="metadata.description"/>
+    <div :class="'bottom-padding-' + bottomPadding" v-if="bottomPadding"></div>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
-import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
+import {ICardRenderRoot, isICardRenderRoot} from '@/common/cards/render/Types';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardContent',
   props: {
     metadata: {
@@ -26,35 +27,49 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Array<CardRequirementDescriptor>,
+      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
+      required: true,
     },
     isCorporation: {
       type: Boolean,
       required: true,
     },
-    padBottom: {
-      type: Boolean,
+    bottomPadding: {
+      type: String, // '', 'short', 'long'
     },
   },
   components: {
     CardRequirementsComponent,
-    CardVictoryPoints,
     CardDescription,
     CardRenderData,
   },
   methods: {
-    getClasses(): string {
-      const classes: Array<string> = ['card-content'];
-      if (this.isCorporation) {
-        classes.push('card-content-corporation');
-      }
-      return classes.join(' ');
-    },
   },
   computed: {
+    corporationClass(): string {
+      return this.isCorporation ? 'card-content-corporation' : '';
+    },
     hasDescription(): boolean {
       const description = this.metadata.description;
       return description !== undefined && (typeof(description) !== 'string' || description.length > 0);
+    },
+    firstRow(): ICardRenderRoot | undefined {
+      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 0) {
+        return {
+          is: 'root',
+          rows: [this.metadata.renderData.rows[0]],
+        };
+      }
+      return undefined;
+    },
+    remainingRows(): ICardRenderRoot | undefined {
+      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 1) {
+        return {
+          is: 'root',
+          rows: this.metadata.renderData.rows.slice(1),
+        };
+      }
+      return undefined;
     },
   },
 });

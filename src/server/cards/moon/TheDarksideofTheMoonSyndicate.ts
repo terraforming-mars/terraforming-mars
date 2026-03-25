@@ -15,8 +15,9 @@ import {Phase} from '../../../common/Phase';
 import {all} from '../Options';
 import {Payment} from '../../../common/inputs/Payment';
 import {LogHelper} from '../../LogHelper';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheDarksideofTheMoonSyndicate extends CorporationCard {
+export class TheDarksideofTheMoonSyndicate extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
@@ -68,7 +69,7 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
           player.stock.add(Resource.MEGACREDITS, 2);
           LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 2);
         } else {
-          for (const target of player.getOpponents()) {
+          for (const target of player.opponents) {
             target.attack(player, Resource.MEGACREDITS, 2, {stealing: true});
           }
         }
@@ -96,17 +97,26 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
       const costs = new MultiSet<IPlayer>();
-      MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
-        if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
-          costs.add(space.player, 2);
+      const spaces = MoonExpansion.moonData(game).moon.getAdjacentSpaces(space);
+
+      for (const space of spaces) {
+        if (space.tile !== undefined) {
+          // These include the current player if they have an adjacent tile, but that's ignored below.
+          if (space.player !== undefined) {
+            costs.add(space.player, 2);
+          }
+          if (space.coOwner !== undefined) {
+            costs.add(space.coOwner, 2);
+          }
         }
-      });
+      }
+
+      // The card owner doesn't steal from themselves.
+      costs.delete(cardOwner);
+
       costs.forEachMultiplicity((qty, target) => {
-        // TODO(kberg): Create a Game.steal method that manages this, both here
-        // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
-        target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        target.attack(cardOwner, Resource.MEGACREDITS, adjustedQuantity, {log: true, stealing: true});
       });
     }
     return undefined;

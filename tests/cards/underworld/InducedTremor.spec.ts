@@ -4,30 +4,50 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('InducedTremor', () => {
+  it('cannot play', () => {
+    const card = new InducedTremor();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('can play', () => {
+    const card = new InducedTremor();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+    const spaces = UnderworldExpansion.identifiableSpaces(player);
+    UnderworldExpansion.identify(game, spaces[0], player);
+    expect(card.canPlay(player)).is.true;
+  });
+
   it('Should play', () => {
     const card = new InducedTremor();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
+    const spaces = UnderworldExpansion.identifiableSpaces(player);
+    UnderworldExpansion.identify(game, spaces[0], player);
+    UnderworldExpansion.identify(game, spaces[1], player);
+    UnderworldExpansion.identify(game, spaces[2], player);
+
+    expect(spaces[0].undergroundResources).is.not.undefined;
+    expect(spaces[1].undergroundResources).is.not.undefined;
+    expect(spaces[2].undergroundResources).is.not.undefined;
+    expect(game.underworldData.tokens).has.length(88);
+
     cast(card.play(player), undefined);
     runAllActions(game);
-    const space = game.board.getSpaceOrThrow('30');
-    const neighbor = game.board.getSpaceOrThrow('21');
 
-    expect(space.undergroundResources).is.undefined;
-    expect(neighbor.undergroundResources).is.undefined;
-
-    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions=*/false, space);
-    runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.spaces).includes(neighbor);
-    expect(neighbor.undergroundResources).is.not.undefined;
-    selectSpace.cb(neighbor);
-    expect(neighbor.undergroundResources).is.undefined;
-    // TODO(kberg): test that the underground resource is back in the pool
+    expect(selectSpace.spaces).to.have.members(spaces.slice(0, 3));
+    const nextSelectSpace = selectSpace.cb(spaces[1]);
+
+    expect(spaces[0].undergroundResources).is.not.undefined;
+    expect(spaces[1].undergroundResources).is.undefined;
+    expect(spaces[2].undergroundResources).is.not.undefined;
+    expect(game.underworldData.tokens).has.length(89);
+
+    runAllActions(game);
+    assertIsExcavationAction(player, nextSelectSpace);
   });
-  // TODO(kberg): test that the card isn't playable if there aren't spaces that meet the requirement.
-  // TODO(kberg): test that a space is excluded if there's no neighbor space with a token to remove.
-  // TODO(kberg): test that it's valid to choose a space if its only available neighbor doesn't have an underground token
 });

@@ -5,8 +5,9 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
-export class ColonyTradeHub extends PreludeCard {
+export class ColonyTradeHub extends PreludeCard implements IPreludeCard {
   constructor() {
     super({
       name: CardName.COLONY_TRADE_HUB,
@@ -28,7 +29,7 @@ export class ColonyTradeHub extends PreludeCard {
     });
   }
 
-  onColonyAdded(_player: IPlayer, cardOwner: IPlayer) {
+  onColonyAddedByAnyPlayer(cardOwner: IPlayer) {
     cardOwner.stock.add(Resource.MEGACREDITS, 2, {log: true});
   }
 }

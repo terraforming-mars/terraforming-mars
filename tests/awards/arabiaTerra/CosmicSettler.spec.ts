@@ -21,7 +21,7 @@ describe('CosmicSettler', () => {
   });
 
   it('Applies to cities in the sky', () => {
-    const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
+    const colonySpaces = board.getSpaces(SpaceType.COLONY);
     const landSpaces = board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, landSpaces[0], {tileType: TileType.GREENERY});

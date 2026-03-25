@@ -4,10 +4,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {questionmark} from '../render/DynamicVictoryPoints';
 import {inplaceRemove} from '../../../common/utils/utils';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AgricolaInc extends CorporationCard {
+export class AgricolaInc extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AGRICOLA_INC,
@@ -29,7 +30,7 @@ export class AgricolaInc extends CorporationCard {
             ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', Size.SMALL, true);
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        victoryPoints: questionmark(),
       },
     });
   }

@@ -37,7 +37,7 @@ describe('DarksideSmugglersUnion', () => {
   it('Cannot act without trade fleets', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
-    player.colonies.tradesThisGeneration = player.colonies.getFleetSize();
+    player.colonies.usedTradeFleets = player.colonies.getFleetSize();
     expect(card.canAct(player)).is.false;
   });
 

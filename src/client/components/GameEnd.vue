@@ -67,7 +67,7 @@
                           <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                           <th v-if="game.pathfinders !== undefined"><div class="table-planetary-track"></div></th>
                           <th><div class="vp">VP</div></th>
-                          <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
+                          <th v-if="game.gameOptions.escapeVelocity" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
                           <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                           <th><div class="mc-icon"></div></th>
                           <th v-if="game.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
@@ -92,10 +92,10 @@
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                           <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks}}</td>
                           <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
-                          <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
+                          <td v-if="game.gameOptions.escapeVelocity">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                           <td class="game-end-mc">
-                            <div>{{ p.megaCredits }}</div>
+                            <div>{{ p.megacredits }}</div>
                           </td>
                           <td v-if="game.gameOptions.showTimers"><div class="game-end-timer">{{ getTimer(p) }}</div></td>
                           <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
@@ -125,13 +125,13 @@
                         <div class="game-end-column-vp">&nbsp;</div>
                         <div class="game-end-column-text">&nbsp;</div>
                       </div>
-                      <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v">
+                      <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v.message">
                         <div class="game-end-column-row">
                           <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                           <div class="game-end-column-text">{{translateMilestoneDetails(v)}}</div>
                         </div>
                       </div>
-                      <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v">
+                      <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v.message">
                         <div class="game-end-column-row">
                           <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                           <div class="game-end-column-text">{{translateAwardDetails(v)}}</div>
@@ -145,6 +145,37 @@
                       </div>
                   </div>
               </div>
+          </div>
+          <div class="game_end_victory_points">
+              <h2 v-i18n>Global Parameter Contributions</h2>
+              <table class="table game_end_table">
+                  <thead>
+                      <tr>
+                          <th><div class="card-delegate"></div></th>
+                          <th><div class="tile temperature-tile"></div></th>
+                          <th><div class="tile oxygen-tile"></div></th>
+                          <th><div class="tile ocean-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.venus"><div class="tile venus-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-colony-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-mine-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-road-tile"></div></th>
+                          <th><div class="game-end-total-column">Total</div></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr v-for="data in playerContributionsData" :key="data.color" :class="getEndGamePlayerRowColorClass(data.color)">
+                          <td>{{ data.player }}</td>
+                          <td>{{ data.temp }}</td>
+                          <td>{{ data.oxygen }}</td>
+                          <td>{{ data.oceans }}</td>
+                          <td v-if="game.gameOptions.expansions.venus">{{ data.venus }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonHabitat }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonMining }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistics }}</td>
+                          <td class="game-end-total">{{ data.total }}</td>
+                      </tr>
+                  </tbody>
+              </table>
           </div>
           <div class="game-end-flexrow">
           <div class="game_end_block--board game-end-column">
@@ -165,13 +196,13 @@
                   :oceans_count="game.oceans"
                   :oxygen_level="game.oxygenLevel"
                   :temperature="game.temperature"></board>
-            <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon"></MoonBoard>
+            <MoonBoard v-if="game.moon !== undefined" :model="game.moon"></MoonBoard>
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
           </div>
           <div class="game_end_block--log game-end-column">
-            <log-panel :color="color" :generation="game.generation" v-if="viewModel.id !== undefined" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
+            <log-panel :color="color" :viewModel="viewModel"></log-panel>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -181,7 +212,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
@@ -202,7 +233,7 @@ import {GlobalParameter} from '@/common/GlobalParameter';
 import {$t, translateTextWithParams, translateMessage} from '@/client/directives/i18n';
 import {Message} from '@/common/logs/Message';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
-import {MADetail} from '@/common/game/IVictoryPointsBreakdown';
+import {MADetail} from '@/common/game/VictoryPointsBreakdown';
 import {AwardName} from '@/common/ma/AwardName';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
@@ -211,14 +242,16 @@ function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | 
   throw new Error('Neither playerView nor spectator are defined');
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'game-end',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel | undefined,
+      required: true,
     },
     spectator: {
       type: Object as () => SpectatorModel | undefined,
+      required: true,
     },
   },
   computed: {
@@ -248,8 +281,8 @@ export default Vue.extend({
       copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-        if (a.megaCredits < b.megaCredits) return -1;
-        if (a.megaCredits > b.megaCredits) return 1;
+        if (a.megacredits < b.megacredits) return -1;
+        if (a.megacredits > b.megacredits) return 1;
         return 0;
       });
       return copy.reverse();
@@ -260,7 +293,7 @@ export default Vue.extend({
       const winners: PublicPlayerModel[] = [firstWinner];
       for (let i = 1; i < sortedPlayers.length; i++) {
         if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
-                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
+                    sortedPlayers[i].megacredits === firstWinner.megacredits) {
           winners.push(sortedPlayers[i]);
         }
       }
@@ -302,6 +335,31 @@ export default Vue.extend({
       }
       return dataset;
     },
+    playerContributionsData(): Array<{player: string, color: Color, temp: number, oxygen: number, oceans: number, venus?: number, moonHabitat?: number, moonMining?: number, moonLogistics?: number, total: number}> {
+      return this.players.map((player) => {
+        const steps = player.globalParameterSteps || {};
+        const temp = steps[GlobalParameter.TEMPERATURE] || 0;
+        const oxygen = steps[GlobalParameter.OXYGEN] || 0;
+        const oceans = steps[GlobalParameter.OCEANS] || 0;
+        const venus = steps[GlobalParameter.VENUS] || 0;
+        const moonHabitat = steps[GlobalParameter.MOON_HABITAT_RATE] || 0;
+        const moonMining = steps[GlobalParameter.MOON_MINING_RATE] || 0;
+        const moonLogistics = steps[GlobalParameter.MOON_LOGISTICS_RATE] || 0;
+
+        return {
+          player: player.name,
+          color: player.color,
+          temp,
+          oxygen,
+          oceans,
+          venus,
+          moonHabitat,
+          moonMining,
+          moonLogistics,
+          total: temp + oxygen + oceans + venus + moonHabitat + moonMining + moonLogistics,
+        };
+      });
+    },
   },
   data() {
     return {
@@ -315,6 +373,9 @@ export default Vue.extend({
     MoonBoard,
     PlanetaryTracks,
     VictoryPointChart,
+  },
+  mounted() {
+    document.title = `End of Game | ${constants.APP_NAME}`;
   },
   methods: {
     getEndGamePlayerRowColorClass(color: Color): string {

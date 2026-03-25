@@ -22,7 +22,7 @@ describe('SecretLabs', () => {
     [/* game */, player] = testGame(1);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
-    player.playedCards = [microbeCard, floaterCard];
+    player.playedCards.push(microbeCard, floaterCard);
   });
 
   it('canPlay', () => {
@@ -93,10 +93,10 @@ describe('SecretLabs', () => {
     maxOutOceans(player);
     const orOptions = cast(card.play(player), OrOptions);
     expect(orOptions.options[0].title).eq('Add 2 microbes to ANY card.');
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     cast(orOptions.options[0].cb(), undefined);
     runAllActions(player.game);
-    expect(player.getTerraformRating()).eq(tr);
+    expect(player.terraformRating).eq(tr);
     expect(whales.resourceCount).eq(1);
   });
 });

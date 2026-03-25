@@ -81,7 +81,7 @@ describe('AirScrappingStandardProjectVariant', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(3);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
@@ -95,7 +95,7 @@ describe('AirScrappingStandardProjectVariant', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(5);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 

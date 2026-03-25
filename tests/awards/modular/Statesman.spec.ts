@@ -8,7 +8,7 @@ describe('Politician', () => {
   const [game, player, player2] = testGame(2, {turmoilExtension: true});
 
   it('Influence and party leader check', () => {
-    // Have hope I didn's mess anything -_-
+    // Have hope I didn't mess anything -_-
     award = new Politician();
     const turmoil = game.turmoil!;
     turmoil.chairman = 'NEUTRAL';

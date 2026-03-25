@@ -32,7 +32,7 @@ describe('AsteroidStandardProject', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getTemperature()).eq(-28);
   });
 
@@ -42,14 +42,14 @@ describe('AsteroidStandardProject', () => {
 
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
   });
 

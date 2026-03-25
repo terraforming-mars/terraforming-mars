@@ -31,6 +31,6 @@ describe('Omnicourt', () => {
     expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });

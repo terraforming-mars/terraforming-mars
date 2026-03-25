@@ -6,14 +6,14 @@
   "Policies": "Gesetze",
   "No ruling Policy": "Keine herrschende Politik",
 
-  "Mars First": "MARS FIRST",
+  "Mars First": "",
   "Scientists": "FORSCHUNG",
   "Unity": "EINIGKEIT",
   "Kelvinists": "KELVINISTEN",
   "Reds": "DIE ROTEN",
   "Greens": "DIE GRÜNEN",
 
-  "mars first": "MARS FIRST",
+  "mars first": "",
   "scientists": "FORSCHUNG",
   "unity": "EINIGKEIT",
   "kelvinists": "KELVINISTEN",
@@ -31,12 +31,10 @@
   "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "DIE ROTEN - (Die Spieler mit dem niedrigsten TW erhalten 1 TW.)",
   "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "DIE GRÜNEN - (Alle Spieler erhalten 1 M€ für jedes Pflanzen-, Mikroben- und Tier-Symbol, das sie besitzen.)",
 
-
   "Mars First (Focused on Martian development and independence.)": "MARS FIRST (Fokussiert auf Marsianische Entwicklung und Unabhängigkeit.)",
   "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "FORSCHUNG (Technologie ist die Tür zur Zukunft, und Forschung tut alles, um sie zu öffnen.)",
   "Unity (Wants to see humanity prosper in the whole solar system.)": "EINIGKEIT (Wollen die Menschheit im gesamten Sonnensystem florieren sehen.)",
   "Greens (Want to see a new Earth as soon as possible.)": "DIE GRÜNEN (Wollen so schnell wie möglich eine neue Erde erschaffen.)",
   "Reds (Wishes to preserve the red planet.)": "DIE ROTEN (Wollen den Roten Planeten erhalten.)",
   "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "KELVINISTEN (Drängen auf rapides Terraforming mittels wärmezentrierter Strategie.)"
-
 }

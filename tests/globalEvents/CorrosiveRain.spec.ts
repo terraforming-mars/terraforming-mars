@@ -50,7 +50,7 @@ describe('CorrosiveRain', () => {
     const titanShuttles = new TitanShuttles();
     const titanAirScrapping = new TitanAirScrapping();
     const birds = new Birds();
-    player.playedCards = [titanShuttles, titanAirScrapping, birds];
+    player.playedCards.push(titanShuttles, titanAirScrapping, birds);
 
     titanShuttles.resourceCount = 3;
     titanAirScrapping.resourceCount = 1;

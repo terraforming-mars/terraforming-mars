@@ -14,7 +14,7 @@ describe('MartianInsuranceGroup', () => {
   beforeEach(() => {
     card = new MartianInsuranceGroup();
     [/* game */, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('when you play an event', () => {

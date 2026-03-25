@@ -23,7 +23,7 @@ describe('ConstantStruggle', () => {
     game.pathfindersData!.jovian = 2; // Avoids bonuses for everyone.
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 2,
@@ -37,7 +37,7 @@ describe('ConstantStruggle', () => {
     expect(player2.megaCredits).eq(5);
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 2,
       earth: 2,
       mars: 2,
       jovian: 4,
@@ -64,7 +64,7 @@ describe('ConstantStruggle', () => {
     card.resolve(game, turmoil);
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 2,
       earth: 2,
       mars: 2,
       jovian: 3,

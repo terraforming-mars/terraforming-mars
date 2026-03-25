@@ -40,18 +40,18 @@ describe('NobelLabs', () => {
 
   it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.playedCards = [science];
+    player.playedCards.set(science);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [data];
+    player.playedCards.set(data);
     expect(card.canAct(player)).is.true;
-    player.playedCards = [microbe];
+    player.playedCards.set(microbe);
     expect(card.canAct(player)).is.true;
-    player.playedCards = [floater];
+    player.playedCards.set(floater);
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.playedCards = [floater, data, microbe, science];
+    player.playedCards.push(floater, data, microbe, science);
 
     card.action(player);
 

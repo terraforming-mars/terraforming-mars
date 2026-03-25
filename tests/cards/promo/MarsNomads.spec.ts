@@ -147,14 +147,14 @@ describe('MarsNomads', () => {
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     space3.bonus = [SpaceBonus.TEMPERATURE];
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('Compatible with Land Claim on placement', () => {
@@ -197,7 +197,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       philares = new Philares();
-      player2.corporations.push(philares);
+      player2.playedCards.push(philares);
     });
 
     it('Placement does not trigger Philares', () => {
@@ -238,7 +238,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       miningGuild = new MiningGuild();
-      player.corporations.push(miningGuild);
+      player.playedCards.push(miningGuild);
     });
 
     it('Placement does not trigger Mining Guild', () => {
@@ -269,6 +269,27 @@ describe('MarsNomads', () => {
       expect(game.nomadSpace).eq(space.id);
       expect(player.steel).eq(1);
       expect(player.production.steel).eq(0);
+    });
+  });
+
+  describe('Compatible with Ares', () => {
+    it('Hazards are selectable but grant nothing', () => {
+      const [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+
+      const firstSpace = game.board.getSpaceOrThrow('05');
+      const space = game.board.getSpaceOrThrow('04');
+      space.spaceType = SpaceType.LAND;
+      space.tile = {tileType: TileType.EROSION_MILD};
+      space.bonus = [SpaceBonus.STEEL];
+      game.nomadSpace = firstSpace.id;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(0);
     });
   });
 });

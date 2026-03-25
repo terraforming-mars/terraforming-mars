@@ -9,7 +9,6 @@ export class Legend extends BaseMilestone {
       5);
   }
   public getScore(player: IPlayer): number {
-    // TODO(kberg): include events removed by Odyssey and Playwrights?
     return player.getPlayedEventsCount();
   }
 }

@@ -8,6 +8,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {SerializedCard} from '../../SerializedCard';
+import {newProjectCard} from '../../createCard';
 
 export class SelfReplicatingRobots extends Card implements IProjectCard {
   constructor() {
@@ -31,6 +33,9 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     });
   }
 
+  /**
+   * Cards hosted by Self-Replicating Robots. They are not considered "played" cards.
+   */
   public targetCards: Array<IProjectCard> = [];
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard): number {
@@ -75,5 +80,29 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     }
 
     return orOptions;
+  }
+
+  serialize(serialized: SerializedCard): void {
+    serialized.targetCards = this.targetCards.map((t) => {
+      return {
+        card: {name: t.name},
+        resourceCount: t.resourceCount,
+      };
+    });
+  }
+
+  deserialize(serialized: SerializedCard): void {
+    if (serialized.targetCards !== undefined) {
+      this.targetCards = [];
+      serialized.targetCards.forEach((targetCard) => {
+        const card = newProjectCard(targetCard.card.name);
+        if (card !== undefined) {
+          card.resourceCount = targetCard.resourceCount;
+          this.targetCards.push(card);
+        } else {
+          console.warn('did not find card for SelfReplicatingRobots', targetCard);
+        }
+      });
+    }
   }
 }

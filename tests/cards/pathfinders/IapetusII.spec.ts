@@ -30,7 +30,7 @@ describe('IapetusII', () => {
   });
 
   it('Should build', () => {
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
     iapetusII.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
@@ -44,7 +44,7 @@ describe('IapetusII', () => {
   });
 
   it('Should trade', () => {
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
     iapetusII.trade(player);
 
     // Should have GiveColonyBonus, AddResourcesToCard and decrease track
@@ -62,8 +62,8 @@ describe('IapetusII', () => {
 
   it('Should give trade bonus', () => {
     const economicEspionage = new EconomicEspionage();
-    player.playedCards = [lunarObservationPost];
-    player2.playedCards = [economicEspionage];
+    player.playedCards.push(lunarObservationPost);
+    player2.playedCards.push(economicEspionage);
 
     iapetusII.addColony(player);
     game.deferredActions.pop()!.execute(); // Gain placement data

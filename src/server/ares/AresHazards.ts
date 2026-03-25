@@ -5,18 +5,25 @@ import {Phase} from '../../common/Phase';
 import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 /**
  * Support for placing and upgrading hazard tiles.
  */
 export class AresHazards {
-  public static putHazardAt(space: Space, tileType: TileType) {
+  public static putHazardAt(game: IGame, space: Space, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
+    UnderworldExpansion.onTilePlaced(game, space);
   }
 
-  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 1 | -1, cardCount: 1 | 2 = 1) {
-    const space = game.getSpaceByOffset(direction, tileType, cardCount);
-    this.putHazardAt(space, tileType);
+  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1): Space {
+    const cost = game.discardForCost(cardCount, tileType);
+    const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+    const space = game.board.getNthAvailableLandSpace(
+      distance, direction,
+      (space) => game.nomadSpace !== space.id);
+
+    this.putHazardAt(game, space, tileType);
     return space;
   }
 
@@ -69,8 +76,8 @@ export class AresHazards {
           type = TileType.EROSION_SEVERE;
         }
 
-        const space1 = this.randomlyPlaceHazard(player.game, type, 1);
-        const space2 = this.randomlyPlaceHazard(player.game, type, -1);
+        const space1 = this.randomlyPlaceHazard(player.game, type, 'top');
+        const space2 = this.randomlyPlaceHazard(player.game, type, 'bottom');
         [space1, space2].forEach((space) => {
           LogHelper.logTilePlacement(player, space, type);
         });

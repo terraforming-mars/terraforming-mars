@@ -1,5 +1,6 @@
 import {Color} from '../Color';
 import {TileType} from '../TileType';
+import {SpaceId} from '../Types';
 import {SpaceBonus} from '../boards/SpaceBonus';
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
@@ -7,6 +8,7 @@ import {AwardName} from '../ma/AwardName';
 import {MilestoneName} from '../ma/MilestoneName';
 import {PartyName} from '../turmoil/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {UndergroundResourceToken} from '../underworld/UndergroundResourceToken';
 import {LogMessageDataType} from './LogMessageDataType';
 
 export type LogMessageDataAttrs = {
@@ -14,6 +16,8 @@ export type LogMessageDataAttrs = {
   tags?: boolean,
   /** When true for a card, also show the card's cost */
   cost?: boolean,
+  /** When true, don't show the whole list of cards. Show a clickable toolip. */
+  ellipsis?: boolean,
 }
 
 type Types = {
@@ -47,9 +51,17 @@ type Types = {
   type: LogMessageDataType.PARTY,
   value: PartyName,
 } | {
-  type:
-  LogMessageDataType.GLOBAL_EVENT;
+  type: LogMessageDataType.GLOBAL_EVENT;
   value: GlobalEventName,
+} | {
+  type: LogMessageDataType.UNDERGROUND_TOKEN;
+  value: UndergroundResourceToken,
+} | {
+  type: LogMessageDataType.SPACE;
+  value: SpaceId,
+} | {
+  type: LogMessageDataType.CARDS;
+  value: ReadonlyArray<CardName>;
 };
 
 export type LogMessageData = Types & {

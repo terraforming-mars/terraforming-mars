@@ -49,6 +49,11 @@ export const milestoneNames = [
   'Spacefarer', // TODO(kberg): Rename to T. Spacefarer
   'Gambler',
 
+  // Terra Cimmeria Nova
+  'Architect',
+  'Coastguard', // Also Modular
+  'C. Forester',
+
   // Vastitas Borealis
   'V. Electrician',
   'Smith',
@@ -56,12 +61,12 @@ export const milestoneNames = [
   'Irrigator',
   'Capitalist',
 
-  // Vastitas Borealis Novus
+  // Vastitas Borealis Nova
   'Agronomist',
   'Engineer',
   'V. Spacefarer',
   'Geologist',
-  'Farmer',
+  'Farmer', // And modular
 
   // Underworld
   'Tunneler',
@@ -71,31 +76,29 @@ export const milestoneNames = [
   'Purifier',
 
   // Modular
-  // 'Briber',
-  // 'Builder', // But 7 building tags
-  // 'Coastguard', // NEW 3 tiles adjacent to oceans
-  // 'Farmer',
+  'Briber',
+  'Builder7',
   'Forester',
   'Fundraiser',
   'Hydrologist',
   'Landshaper',
-  // 'Legend', // But 4 events
+  'Legend4',
   'Lobbyist',
-  // 'Merchant',
-  // 'Metallurgist', // Smith, but 6
+  'Merchant',
+  'Metallurgist', // Same as Smith
   'Philantropist',
-  // 'Pioneer', // But 4 colonies
+  'Pioneer4',
   'Planetologist',
   'Producer',
   'Researcher',
-  // 'Spacefarer', // But 4 space tags
+  'Spacefarer4',
   'Sponsor',
-  // 'Tactician', // but 4 cards with requirements
-  // 'Terraformer', // but 29 TR
-  // 'Terran', // But 5 Earth tags.
+  'Tactician4',
+  'Terraformer29',
+  'Terran5',
   'Thawer',
-  // 'Trader', // NEW 3 types of resources on cards.
-  // 'Tycoon', // But, 10 Green and Blue cards combined.
+  'Trader',
+  'Tycoon10',
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];
@@ -106,11 +109,6 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Electrician', 'V. Electrician'],
-
-  // TODO(konigsberg): remove after 2025-04-01
-  ['ThermoEngineer', 'Engineer'],
-  // TODO(konigsberg): remove after 2025-04-01
-  ['Breeder', 'Farmer'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

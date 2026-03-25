@@ -67,7 +67,7 @@ describe('BactoviralResearch', () => {
 
   it('Should ignore cards with microbe tags but does not collect microbe resources.', () => {
     const pharmacyUnion = new PharmacyUnion();
-    player.corporations.push(pharmacyUnion);
+    player.playedCards.push(pharmacyUnion);
     cast(card.play(player), undefined);
 
     runAllActions(game);

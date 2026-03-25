@@ -8,6 +8,6 @@ describe('BribedCommittee', () => {
     const [/* game */, player] = testGame(2);
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(-2);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });

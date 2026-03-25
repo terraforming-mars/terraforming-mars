@@ -23,7 +23,7 @@ describe('FloaterUrbanism', () => {
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
-    player.playedCards = [floater1, floater2, other];
+    player.playedCards.push(floater1, floater2, other);
   });
 
   it('canPlay', () => {

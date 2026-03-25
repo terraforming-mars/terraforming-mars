@@ -76,7 +76,7 @@
 
   "Economic Espionage": "Szpiegostwo Gospodarcze",
   "Action: Spend 2 M€ to Add 1 data to ANY card.": "Akcja: Wydaj 2 M€ aby umieścić 1 jednostkę danych na dowolnej karcie.",
-  "1VP for every 3 data here.": "Otrzymujesz 1 PZ za każde 3 jednostki danych na tej karcie.",
+  "1 VP for every 3 data here.": "Otrzymujesz 1 PZ za każde 3 jednostki danych na tej karcie.",
 
   "Economic Help": "Pomoc Ekonomiczna",
   "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Podnieś rozwój społeczeństwa o najniższym poziomie o 3 poziomy (w przypadku remisu podnieś wszystkie najniższe tory o 2). Podnieś swoją produkcję M€ o 1 poziom.",
@@ -109,7 +109,7 @@
   "Interplanetary Transport": "Transport Kosmiczny",
   "Increase your M€ production 1 step for every offworld city tile.": "Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta poza planszą Marsa.",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.": "Podnieś poziom rozwoju wybranego społeczeństwa o 3 poziomy. Symbol tej karty liczy się jako symbol wybranego społeczeństwa.",
 
   "Last Resort Ingenuity": "Potrzeba Matką Wynalazków",
@@ -214,7 +214,7 @@
   "Solar Storm": "Burza Słoneczna",
   "Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.": "Każdy gracz traci po 2 jednostki roślinności. Usuń do 3 jednostek danych należących do dowolnego gracza. Podnieś swoją produkcję ciepła o 1 poziom. Podnieś temperaturę o 1 poziom.",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "Action: Add 2 data to ANY card.": "Akcja: Umieść 2 jednostki danych na dowolnej karcie.",
   "Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi, Marsa i Jowisza. Umieść 2 jednostki danych na dowolnej karcie. Otrzymujesz 1 PZ za każde 6 jednostek danych na tej karcie.",
 

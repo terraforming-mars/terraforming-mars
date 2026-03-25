@@ -9,6 +9,7 @@ import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis'
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
+import {toID} from '../../../src/common/utils/utils';
 // import {Phase} from '../../../src/server/Phase';
 
 describe('LunaEcumenopolis', () => {
@@ -39,10 +40,10 @@ describe('LunaEcumenopolis', () => {
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('can play when 1st placement enables 2nd placement', () => {
@@ -56,37 +57,37 @@ describe('LunaEcumenopolis', () => {
     // This test works because space 13 is the only available colony space, but after
     // playing it, space 12 can take a colony.
     player.titanium = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('Cannot play: not enough adjacent colony tiles', () => {
     player.titanium = 2;
     moonData.moon.getSpaceOrThrow('m09').tile = {tileType: TileType.MOON_HABITAT};
     moonData.moon.getSpaceOrThrow('m18').tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('Place 2 colony tiles', () => {
     moonData.habitatRate = 2;
     const moon = moonData.moon;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     moon.getSpaceOrThrow('m12').tile = {tileType: TileType.MOON_HABITAT};
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map(toID)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpaceOrThrow('m18'));
     expect(moonData.habitatRate).eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map(toID)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpaceOrThrow('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(18);
+    expect(player.terraformRating).eq(18);
   });
 
   it('can play next to Lunar Mine Urbanization', () => {
@@ -98,33 +99,33 @@ describe('LunaEcumenopolis', () => {
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('Place 2 colony tiles next to Lunar Mine Urbanization', () => {
     moonData.habitatRate = 2;
     const moon = moonData.moon;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     moon.getSpaceOrThrow('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map(toID)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpaceOrThrow('m18'));
     expect(moonData.habitatRate).eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map(toID)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpaceOrThrow('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(18);
+    expect(player.terraformRating).eq(18);
   });
 
   it('Compatible with Subterranean Habitats', () => {

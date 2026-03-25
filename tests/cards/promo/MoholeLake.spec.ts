@@ -27,7 +27,7 @@ describe('MoholeLake', () => {
 
     expect(player.game.getTemperature()).to.eq(-28);
     expect(player.game.board.getOceanSpaces()).has.length(1);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
     expect(player.plants).to.eq(3);
   });
 

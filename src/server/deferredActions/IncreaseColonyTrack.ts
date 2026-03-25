@@ -5,15 +5,18 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {LogHelper} from '../LogHelper';
-import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
 
+/**
+ * Asks the player to increase the colony track as many steps as it can go.
+ *
+ * Player has the option to move zero, one, or as many steps as it can go.
+ */
 export class IncreaseColonyTrack extends DeferredAction {
   constructor(
     player: IPlayer,
     public colony: IColony,
     public steps: number,
-    public title: string | Message = message('Increase ${0} colony track before trade', (b) => b.colony(colony)),
   ) {
     super(player, Priority.INCREASE_COLONY_TRACK);
   }
@@ -24,7 +27,9 @@ export class IncreaseColonyTrack extends DeferredAction {
       return undefined;
     }
 
-    const options = new OrOptions();
+    const options = new OrOptions()
+      .setTitle(message('Increase ${0} colony track before trade', (b) => b.colony(this.colony)));
+
     for (let step = this.steps; step > 0; step--) {
       options.options.push(
         new SelectOption(message('Increase colony track ${0} step(s)', (b) => b.number(step)))
@@ -36,7 +41,7 @@ export class IncreaseColonyTrack extends DeferredAction {
           }),
       );
     }
-    options.title = this.title;
+
     options.options.push(
       new SelectOption('Don\'t increase colony track').andThen(() => {
         this.cb(undefined);

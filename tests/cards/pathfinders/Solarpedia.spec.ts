@@ -40,7 +40,7 @@ describe('Solarpedia', () => {
 
   it('play', () => {
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     card.play(player);
     player.playedCards.push(card);
@@ -49,7 +49,7 @@ describe('Solarpedia', () => {
   });
 
   it('act', () => {
-    player.playedCards = [lunarObservationPost, card];
+    player.playedCards.push(lunarObservationPost, card);
 
     card.action(player);
 

@@ -39,7 +39,7 @@ describe('Co Leadership', () => {
     game.phase = Phase.ACTION;
 
     expect(player.ceoCardsInHand).is.empty;
-    expect(player.playedCards).includes(ceo);
+    expect(player.playedCards.get(ceo.name)).deep.eq(ceo);
     expect(game.ceoDeck.discardPile).has.length(2);
   });
 });

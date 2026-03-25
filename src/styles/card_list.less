@@ -1,8 +1,24 @@
 .card-list-container {
+  .selection-row label {
+    color: #ccc;
+    display: inline-block;
+    background-color: #303030;
+    padding: 10px 20px 10px 20px;
+    font-family: Ubuntu, Sans;
+    font-size: 23px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 4px;
+    min-width: 125px;
+    height: 60px;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
   .selection-row {
     display: flex;
     flex-flow: row wrap !important;
-    padding: 20px 10px;
 
     .expansion-button {
       justify-content: center;
@@ -36,23 +52,6 @@
     opacity: 0;
     position: fixed;
     width: 0;
-  }
-
-  label {
-    color: #ccc;
-    display: inline-block;
-    background-color: #303030;
-    padding: 10px 20px 10px 20px;
-    font-family: Ubuntu, Sans;
-    font-size: 23px;
-    border-radius: 8px;
-    text-align: center;
-    margin: 4px;
-    min-width: 125px;
-    height: 60px;
-    line-height: 40px;
-    display: flex;
-    justify-content: center;
   }
 
   .expansion-button {
@@ -109,5 +108,13 @@
       width: 150px;
       margin-right: 5px;
     }
+  }
+
+  .turmoil_agenda_cont {
+    padding: 2px;
+  }
+
+  .small-card {
+    font-size: 75%;
   }
 }

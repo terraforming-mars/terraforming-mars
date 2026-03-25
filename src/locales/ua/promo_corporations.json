@@ -6,7 +6,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "ДІЯ: Помістіть спільноту (гравцевий маркер) на незабезпечену область, прилеглу до одного з ваших плиток або позначених областей.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "ЕФЕКТ: Позначені області зарезервовані для вас. Коли ви поміщаєте плитку туди, отримайте 3 M€.",
 
-  "Astrodrill": "Астродриль",
+  "AstroDrill": "Астродриль",
   "Astrodrill ENT": "Астродриль",
   "You start with 35 M€ and 3 asteroid resources.": "Ви починаєте з 35 M€ та 3 астероїдними ресурсами.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "ДІЯ: Додайте астероїдний ресурс до БУДЬ-ЯКОЇ карти АБО отримайте будь-який стандартний ресурс, АБО видаліть астероїдний ресурс з цієї карти, щоб отримати 3 титану.",
@@ -31,7 +31,7 @@
   "Pharmacy": "Фармація",
   "Union": "Союз",
   "Pharmacy Union": "Фармацевтичний союз",
-  "You start with 54 M€ . Draw a Science card.": "Ви починаєте з 54 M€. Витягніть карту науки.",
+  "You start with 54 M€. Draw a Science card.": "Ви починаєте з 54 M€. Витягніть карту науки.",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "ЕФЕКТ: Коли ГРАВЕЦЬ грає будь-який мікробний символ, додайте сюди хворобу і втратте 4 M€ або якомога більше. Коли ви граєте науковий символ, видаліть хворобу звідси і отримайте 1 РТ АБО якщо тут немає хвороб, ВИ МОЖЕТЕ покласти цю карту рубашкою вниз у вашу стопку ПОДІЙ, щоб отримати 3 РТ.",
 
   "PHIL": "ФІЛ",

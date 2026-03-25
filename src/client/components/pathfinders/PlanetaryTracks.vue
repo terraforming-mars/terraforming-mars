@@ -1,10 +1,10 @@
 <template>
-  <div class="pathfinders_cont">
-    <div class="track track-background-venus" v-if="gameOptions.expansions.venus">
+  <div v-if="tracks" class="pathfinders_cont">
+    <div class="track track-background-venus" v-if="tracks.venus >= 0">
       <div class="track-tag track-tag-venus"></div>
       <table class="track-venus">
-        <PlanetaryTrack type='risingPlayer' v-if="gameOptions.expansions.venus" :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' v-if="gameOptions.expansions.venus" :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='risingPlayer' :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='everyone' :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
       </table>
     </div>
 
@@ -32,7 +32,7 @@
       </table>
     </div>
 
-    <div class="track track-background-moon" v-if="gameOptions.expansions.moon">
+    <div class="track track-background-moon" v-if="tracks.moon >= 0">
       <div class="track-tag track-tag-moon"></div>
       <table class="track-moon">
         <PlanetaryTrack type='risingPlayer' :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
@@ -45,7 +45,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PathfindersModel} from '@/common/models/PathfindersModel';
 import {Tag} from '@/common/cards/Tag';
@@ -53,7 +53,7 @@ import {range} from '@/common/utils/utils';
 import PlanetaryTrack from '@/client/components/pathfinders/PlanetaryTrack.vue';
 import {PlanetaryTracks as Tracks} from '@/common/pathfinders/PlanetaryTracks';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTracks',
   props: {
     tracks: {
@@ -61,6 +61,7 @@ export default Vue.extend({
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   components: {

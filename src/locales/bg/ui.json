@@ -253,7 +253,7 @@
   "Skip this action": "Пропусни това действие",
   "Select which cards to take into hand": "Избери кои карти да задържиш",
   "End": "Край",
-  "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} на ред ${3} позиция ${4}",
+  "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} на ${3}",
   "placed": "постави",
   "greenery tile": "плочка за озеленяване",
   "Must select at least ${0} corporations": "Трябва да изберете поне ${0} корпорации",
@@ -307,9 +307,8 @@
   "Venus Scale": "Мащаб на Венера",
   "Ruling Party": "Управляваща партия",
   "Spectator link": "Връзка за наблюдатели",
-  "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Внимание: Този сървър автоматично изтрива незавършени игри. Опитайте да завършите тази игра до ${0}.",
   "Warning: This game will be purged in approximately ${0} hours.": "Внимание: Тази игра ще бъде изтрита след приблизително ${0} часа.",
-  "Unable to reach the server. The server may be restarting or down for maintenance.": "Невъзможно е да се свържете със сървъра. Възможно е сървърът да се рестартира или да е изключен за поддръжка.",
+  "Unable to reach the server. It may be restarting or down for maintenance.": "Невъзможно е да се свържете със сървъра. Възможно е сървърът да се рестартира или да е изключен за поддръжка.",
   "Unable to restore game ${game_id}": "Невъзможно е да се възстанови игра ${game_id}",
   "Game not found": "Играта не е намерена",
 
@@ -342,8 +341,7 @@
   "14 Gens": "14 поколения",
   "TR all": "всички точки ТР",
   "63 TR": "63 точки ТР",
-  "Ok": "OK",
-
+  "Ok": "",
   "Production count": "Производство",
   "The number of available actions on active cards": "Брой налични действия на активни карти",
   "Escape Velocity penalty": "Наказание от Втора космическа скорост",
@@ -379,5 +377,6 @@
   "Select resource to discard": "Изберете ресурс за изхвърляне",
   "Select resource to gain": "Изберете ресурс за печалба",
   "Select ${0} cards to discard": "Изберете ${0} карти за изхвърляне",
-  "Select between ${0} and ${1} cards to discard": "Изберете между ${0} и ${1} карти за изхвърляне"
+  "Select between ${0} and ${1} cards to discard": "Изберете между ${0} и ${1} карти за изхвърляне",
+  "Reorder Cards": "Пренаредете картите"
 }

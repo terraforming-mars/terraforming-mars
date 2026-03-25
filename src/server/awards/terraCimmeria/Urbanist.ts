@@ -17,6 +17,7 @@ export class Urbanist implements IAward {
         switch (space.tile?.tileType) {
         case TileType.CITY:
         case TileType.OCEAN_CITY:
+        case TileType.NEW_HOLLAND:
           score += this.countGreeneries(player, space);
           break;
         case TileType.CAPITAL:
@@ -50,7 +51,7 @@ export class Urbanist implements IAward {
     if (cardName === undefined) {
       return 0;
     }
-    const card = player.getPlayedCard(cardName);
+    const card = player.tableau.get(cardName);
     if (card === undefined) {
       return 0;
     }

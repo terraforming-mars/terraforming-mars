@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Sponsors} from '../../src/server/cards/base/Sponsors';
 import {HomeworldSupport} from '../../src/server/turmoil/globalEvents/HomeworldSupport';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
@@ -9,9 +8,8 @@ describe('HomeworldSupport', () => {
     const card = new HomeworldSupport();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new Sponsors());
-    player2.playedCards.push(new Sponsors());
-    player2.playedCards.push(new Sponsors());
+    player.tagsForTest = {earth: 1};
+    player2.tagsForTest = {earth: 2};
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();

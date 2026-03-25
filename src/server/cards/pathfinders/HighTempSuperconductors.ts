@@ -5,6 +5,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {PartyName} from '../../../common/turmoil/PartyName';
+import {IPlayer} from '../../IPlayer';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class HighTempSuperconductors extends Card implements IProjectCard {
   constructor() {
@@ -32,5 +34,12 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
         description: 'Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.',
       },
     });
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.POWER_PLANT_STANDARD_PROJECT) {
+      return 3;
+    }
+    return 0;
   }
 }

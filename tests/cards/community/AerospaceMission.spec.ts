@@ -34,6 +34,23 @@ describe('AerospaceMission', () => {
     expect(card.canPlay(player)).is.true;
   });
 
+  it('Can not play, cannot place colonies', () => {
+    player.megaCredits = 14;
+    for (const colony of game.colonies) {
+      colony.isActive = false; // No colonies can be built
+    }
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can not play, one of two spaces are available.', () => {
+    player.megaCredits = 13;
+    for (const colony of game.colonies) {
+      colony.isActive = false; // No colonies can be built
+    }
+    game.colonies[0].isActive = true; // Make one colony available
+    expect(card.canPlay(player)).is.false;
+  });
+
   it('Should play', () => {
     player.megaCredits = 14;
     card.play(player);

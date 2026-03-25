@@ -2,11 +2,8 @@
   "Supermarkets": "",
   "Requires two cities in play. Increase your M€ production 2 steps.": "조건: 아무 도시 타일 2장 이상.) (메가크레딧 생산력 2 증가.",
 
-  "City Park": "",
-  "Requires that you have 3 cities. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
-
   "City Parks": "",
-  "Requires that you have 3 city tiles. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
+  "Requires that you have 3 cities. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
 
   "Soil Enrichment": "",
   "Action: Remove 1 microbe from your any card to gain 5 plants.": "자신의 아무 카드 위의 미생물 자원 1개를 제거하고, 식물 자원 5개 획득.",
@@ -130,7 +127,7 @@
   "Asteroid Deflection System": "소행성 궤도 굴절 방어체계",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "행동: 카드 1장 공개, 우주 태그 있으면 이 카드에 소행성 자원 1개 추가.",
   "opponents may not remove your plants": "자신의 식물 자원을 다른 플레이어가 제거 불가.",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "에너지 생산력 1감소. 이 카드의 소행성 자원 1개당 승점 1점.",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "에너지 생산력 1감소. 이 카드의 소행성 자원 1개당 승점 1점.",
 
   "Jovian Embassy": "목성 대사관",
 
@@ -158,7 +155,7 @@
 
   "Asteroid Hollowing": "소행성 내부 공동화 사업",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "행동: 티타늄 자원 1개 소비해서 이 카드에 소행성 자원 1개 추가 및 메가크레딧 생산력 1 증가.",
-  "1VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
+  "1 VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
 
   "Advertising": "광고",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "지속 효과: 추진 비용의 기본값이 20MC 이상인 카드를 사용할 때마다, 메가크레딧 생산력 1증가.",
@@ -209,7 +206,7 @@
   "Place a city tile IN SPACE, outside and separate from the planet.": "화성 바깥의 텅 빈 우주공간에 도시 타일 1장 배치.",
 
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 6개까지 제거. 도시 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 6개까지 제거. 도시 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가. 해양 타일과 인접한 빈 구역 한 곳에 타일 배치.",
 

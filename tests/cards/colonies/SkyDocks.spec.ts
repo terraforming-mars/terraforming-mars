@@ -10,7 +10,7 @@ describe('SkyDocks', () => {
     expect(card.canPlay(player)).is.not.true;
     cast(card.play(player), undefined);
     expect(player.colonies.getFleetSize()).to.eq(2);
-    expect(card.getCardDiscount()).to.eq(1);
+    expect(card.getCardDiscount(player, card)).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

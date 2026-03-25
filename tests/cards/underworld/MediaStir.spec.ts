@@ -42,7 +42,7 @@ describe('MediaStir', () => {
       card.resolve(game, turmoil);
 
       expect(player.megaCredits).eq(run.expect.mc);
-      expect(player.getTerraformRating()).eq(run.expect.tr);
+      expect(player.terraformRating).eq(run.expect.tr);
     });
   }
 });

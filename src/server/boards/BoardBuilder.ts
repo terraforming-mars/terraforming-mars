@@ -1,12 +1,13 @@
 import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
 import {GameOptions} from '../game/GameOptions';
 import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
+import {CardName} from '../../common/cards/CardName';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -24,10 +25,13 @@ export class BoardBuilder {
   private bonuses: Array<Array<SpaceBonus>> = [];
   private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
+  private volcanicSpaces: Array<number> = [];
   private gameOptions: GameOptions;
+  private rng: Random;
 
-  constructor(gameOptions: GameOptions) {
+  constructor(gameOptions: GameOptions, rng: Random) {
     this.gameOptions = gameOptions;
+    this.rng = rng;
   }
 
   ocean(...bonus: Array<SpaceBonus>): this {
@@ -48,10 +52,28 @@ export class BoardBuilder {
     return this;
   }
 
+  volcanic(...bonus: Array<SpaceBonus>): this {
+    this.spaceTypes.push(SpaceType.LAND);
+    this.lastSpaceIsVolcanic();
+    this.bonuses.push(bonus);
+    return this;
+  }
+
+  lastSpaceIsVolcanic(): this {
+    this.volcanicSpaces.push(this.spaceTypes.length - 1);
+    return this;
+  }
+
   restricted(): this {
     this.spaceTypes.push(SpaceType.RESTRICTED);
     this.bonuses.push([]);
     return this;
+  }
+
+  deflectionZone(...bonus: Array<SpaceBonus>): this {
+    this.spaceTypes.push(SpaceType.DEFLECTION_ZONE);
+    this.bonuses.push(bonus);
+    return this.doNotShuffleLastSpace();
   }
 
   doNotShuffleLastSpace(): this {
@@ -61,6 +83,10 @@ export class BoardBuilder {
 
 
   build(): Array<Space> {
+    if (this.gameOptions.shuffleMapOption) {
+      this.shuffle(this.rng);
+    }
+
     this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
     this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
 
@@ -74,13 +100,16 @@ export class BoardBuilder {
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
-        const space = {
+        const space: Space = {
           id: BoardBuilder.spaceId(spaceId),
           spaceType: this.spaceTypes[idx],
           x: xCoordinate,
           y: row,
           bonus: this.bonuses[idx],
         };
+        if (this.volcanicSpaces.includes(idx)) {
+          space.volcanic = true;
+        }
         this.spaces.push(space);
         idx++;
       }
@@ -88,13 +117,15 @@ export class BoardBuilder {
 
     // Include space colonies if the expansion is included, or if the card is included.
     for (const entry of expansionSpaceColonies) {
-      let e: keyof GameOptions = 'boardName'; // arbitrary
-      switch (entry.expansion) {
-      case 'promo': e = 'promoCardsOption'; break;
-      case 'pathfinders': e = 'pathfindersExpansion'; break;
-      case 'venus': e = 'venusNextExtension'; break;
+      // Special case for Venera Base when Pathfinders is included, but Turmoil or Venus is not
+      if (entry.card === CardName.VENERA_BASE) {
+        const pathfindersTurmoilVenusInPlay = this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension && this.gameOptions.venusNextExtension;
+        if (this.gameOptions.includedCards.includes(entry.card) || pathfindersTurmoilVenusInPlay) {
+          this.spaces.push(colonySpace(entry.name));
+        }
+        continue;
       }
-      if (this.gameOptions[e] || this.gameOptions.includedCards.includes(entry.card)) {
+      if (this.gameOptions.expansions[entry.expansion] || this.gameOptions.includedCards.includes(entry.card)) {
         this.spaces.push(colonySpace(entry.name));
       }
     }
@@ -119,17 +150,11 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedSpace>) {
-    const preservedSpaces = [...this.unshufflableSpaces];
-    for (const spaceId of preservedSpaceIds) {
-      const idx = Number(spaceId) - 3;
-      if (!preservedSpaces.includes(idx)) {
-        preservedSpaces.push(idx);
-      }
-    }
+  public shuffle(rng: Random) {
+    const preservedSpaces = [...this.unshufflableSpaces, ...this.volcanicSpaces];
     preservedSpaces.sort((a, b) => a - b);
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
-    preservingShuffle(this.bonuses, this.unshufflableSpaces, rng);
+    preservingShuffle(this.bonuses, preservedSpaces, rng);
     return;
   }
 

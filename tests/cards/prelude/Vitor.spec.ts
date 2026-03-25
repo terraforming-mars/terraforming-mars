@@ -33,12 +33,12 @@ describe('Vitor', () => {
 
   it('No initial action for solo games', () => {
     testGame(1);
-    const action = player.deferInitialAction(card);
+    const action = player.defer(card.initialAction(player));
     cast(action, undefined);
   });
 
   it('Give megacredits when card played', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     // Dust Seals has victory points
     card.onCardPlayed(player, new DustSeals());

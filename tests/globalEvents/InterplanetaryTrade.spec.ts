@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
 import {InterplanetaryTrade} from '../../src/server/turmoil/globalEvents/InterplanetaryTrade';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
@@ -9,9 +8,8 @@ describe('InterplanetaryTrade', () => {
     const card = new InterplanetaryTrade();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new MethaneFromTitan());
-    player2.playedCards.push(new MethaneFromTitan());
-    player2.playedCards.push(new MethaneFromTitan());
+    player.tagsForTest = {space: 1};
+    player2.tagsForTest = {space: 2};
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();

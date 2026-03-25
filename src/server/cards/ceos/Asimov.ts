@@ -49,9 +49,9 @@ export class Asimov extends CeoCard {
     const validAwards = this.getValidAwards(player);
     inplaceShuffle(validAwards, UnseededRandom.INSTANCE);
 
-    const freeAward = new OrOptions();
-    freeAward.title = 'Select award to put into play and fund';
-    freeAward.buttonLabel = 'Confirm';
+    const freeAward = new OrOptions()
+      .setTitle('Select award to put into play and fund')
+      .setButtonLabel('Confirm');
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(
@@ -69,7 +69,7 @@ export class Asimov extends CeoCard {
     const award = awardManifest.createOrThrow(awardName);
     const scorer = new AwardScorer(game, award);
     // Sort the players by score:
-    const players: Array<IPlayer> = game.getPlayers().slice();
+    const players: Array<IPlayer> = game.players.slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
     const title = message('Fund ${0} award [${1}]', (b) => b.award(award).string(
       players.map((player) => player.name + ': ' + scorer.get(player)).join(' / ')));

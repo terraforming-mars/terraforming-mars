@@ -3,7 +3,7 @@
   "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Започвате с 50 M€. Увеличете производството си на M€ с 5 стъпки. Печелите 5 титана.",
   "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Ефект: При закупуване на карта за ръка, плащате 5 M€ вместо 3, включително началната ръка.",
 
-  "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
+  "STORMCRAFT INCORPORATED": "",
   "Action: Add a floater to ANY card.": "Действие: Добавете аеростат на КОЯТО И ДА Е карта.",
   "Effect: Floaters on this card may be used as 2 heat each.": "Ефект: Аеростатите на тази карта могат да се използват като по 2 топлинa всеки.",
 
@@ -22,6 +22,5 @@
 
   "Point Luna": "Точка Луна",
   "You start with 1 titanium production and 38 M€.": "Започвате с производство на 1 титан и 38 M€.",
-  "Effect: When you play an Earth tag, including this, draw a card.": "Ефект: При разиграване на етикет Земя, включително тази, изтеглете карта.",
-  "": ""
+  "Effect: When you play an Earth tag, including this, draw a card.": "Ефект: При разиграване на етикет Земя, включително тази, изтеглете карта."
 }

@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 
 describe('EnergyTapping', () => {
   let card: EnergyTapping;
@@ -19,7 +20,7 @@ describe('EnergyTapping', () => {
   });
 
   it('play - no targets', () => {
-    player.playedCards.push(card, card);
+    player.playedCards.push(card, new PowerPlant());
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

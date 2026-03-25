@@ -17,7 +17,7 @@ describe('AgricolaInc', () => {
     [/* game */, player] = testGame(2);
 
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Starts with correct production', () => {
@@ -36,7 +36,7 @@ describe('AgricolaInc', () => {
   it('Scores endgame VP correctly, with Venus', () => {
     [/* game */, player] = testGame(2, {venusNextExtension: true});
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card.getVictoryPoints(player)).to.eq(-20);
 

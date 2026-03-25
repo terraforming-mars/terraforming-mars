@@ -4,17 +4,18 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {undergroundShelters} from '../render/DynamicVictoryPoints';
 import {IPlayer} from '../../IPlayer';
-import {sum} from '../../../common/utils/utils';
+import {IActionCard} from '../ICard';
+import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
 
-export class UndergroundShelters extends Card implements IProjectCard {
+export class UndergroundShelters extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      type: CardType.AUTOMATED,
+      type: CardType.ACTIVE,
       name: CardName.UNDERGROUND_SHELTERS,
       cost: 14,
-      tags: [Tag.MARS, Tag.BUILDING],
+      tags: [Tag.BUILDING],
       victoryPoints: 'special',
 
       behavior: {
@@ -22,23 +23,39 @@ export class UndergroundShelters extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U72',
+        cardNumber: 'U072',
         // TODO(kberg): Custom VP icon.
-        victoryPoints: CardRenderDynamicVictoryPoints.undergroundShelters(),
+        victoryPoints: undergroundShelters(),
         renderData: CardRenderer.builder((b) => {
-          b.excavate(1);
+          b.action(
+            'Place your player cube on one of your claimed underground resource tokens without a cube on it.',
+            (ab) => ab.empty().startAction.undergroundShelters()).br;
+          b.vpText('1 VP per underground resource token with a cube on it.').br;
+          b.excavate(1).br;
         }),
-        description: 'Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.',
+        description: 'Excavate an underground resource.',
       },
     });
   }
 
+  private availableTokens(player: IPlayer) {
+    return player.underworldData.tokens.filter((t) => !t.shelter);
+  }
+
+  public canAct(player: IPlayer) {
+    return this.availableTokens(player).length > 0;
+  }
+
+  public action(player: IPlayer) {
+    const tokens = this.availableTokens(player);
+    return new SelectClaimedUndergroundToken(tokens, 1)
+      .andThen(([index]) => {
+        tokens[index].shelter = true;
+        return undefined;
+      });
+  }
+
   public override getVictoryPoints(player: IPlayer): number {
-    const cities = player.game.board.getCities(player);
-    const counts = cities.map((city) => {
-      return [city, ...player.game.board.getAdjacentSpaces(city)].filter((space) => space.excavator === player).length;
-    });
-    const vps = counts.map((count) => Math.floor(count / 3));
-    return sum(vps);
+    return player.underworldData.tokens.filter((t) => t.shelter).length;
   }
 }

@@ -20,17 +20,17 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Initializes correctly', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
 
     player.playCorporationCard(card);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(40);
   });
 
   it('Gains 1 MC whenever any player raises TR during action phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.ACTION;
 
     player.increaseTerraformRating();
@@ -44,7 +44,7 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Gives MC during initial preludes phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.PRELUDES;
 
     const contractor = new UNMIContractor();
@@ -53,7 +53,7 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Does not give MC during turmoil phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.PRODUCTION;
 
     const turmoil = game.turmoil!;
@@ -62,7 +62,7 @@ describe('UnitedNationsMissionOne', () => {
 
     const election = new Election();
     election.resolve(game, turmoil);
-    expect(player2.getTerraformRating()).eq(22);
+    expect(player2.terraformRating).eq(22);
     expect(player.megaCredits).eq(0); // no increase
   });
 });

@@ -9,7 +9,7 @@
   "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "Вимагає, щоб ви були Головою. Поточна правляча партія автоматично залишиться правлячою партією під час наступної Сонячної фази, і ви залишитесь Головою. (Ніби поточна правляча партія була домінуючою, а ви її лідером партії.)",
 
   "Tosche Station (IV)": "Станція Тоше (IV)",
-  "Action: Spend X Energy and gain X-1 plants (max 4.)": "Дія: Витратити X Енергії та отримати X-1 рослин (макс. 4).",
+  "Action: Spend X energy and gain X-1 plants (max 4.)": "Дія: Витратити X Енергії та отримати X-1 рослин (макс. 4).",
 
   "Cloud City (V)": "Місто у Хмарах (V)",
   "Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.": "Вимагає 6% Венери. Підвищити Венеру на 1 крок. Додати 2 плаваючих об'єкти на будь-яку карту.",
@@ -24,5 +24,5 @@
   "Take another action this turn. Gain 1 TR.": "Виконайте ще одну дію в цьому ході. Отримайте 1 РТ.",
 
   "Rey ... Skywalker?! (IX)": "Рей ... Скайуокер?! (IX)",
-  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.": "Підвищте вашу виробництво M€ на 4 кроки. Покладіть бронзовий куб на порожнє незарезервоване місце на Марсі. На це місце не можна буде розмістити жодну плитку до кінця гри."
+  "// Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.": "Підвищте вашу виробництво M€ на 4 кроки. Покладіть бронзовий куб на порожнє незарезервоване місце на Марсі. На це місце не можна буде розмістити жодну плитку до кінця гри."
 }

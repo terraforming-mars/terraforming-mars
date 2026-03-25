@@ -8,6 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {toID} from '../../../src/common/utils/utils';
 
 describe('LavaFlows', () => {
   let card: LavaFlows;
@@ -48,7 +49,7 @@ describe('LavaFlows', () => {
 
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map((space) => space.id))
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map(toID))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS, SpaceName.THARSIS_THOLUS]);
 
     game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
@@ -64,7 +65,7 @@ describe('LavaFlows', () => {
 
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map((space) => space.id))
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map(toID))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS]);
   });
 

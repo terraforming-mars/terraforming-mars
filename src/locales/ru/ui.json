@@ -267,7 +267,7 @@
     "Skip this action": "Пропустить это действие",
     "Select which cards to take into hand": "Выберите карты, которые оставите в руке",
     "End": "Завершить",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} в координатах: ${3}, ${4}",
+    "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} в ${3}",
     "placed": "разместил",
     "greenery tile": "тайл озеленения",
     "Must select at least ${0} corporations": "Выбрано недостаточно корпораций для начала игры. Нужно хотя бы: ${0}",
@@ -321,9 +321,8 @@
     "Venus Scale": "Уровень Венеры",
     "Ruling Party": "Управляющая группа",
     "Spectator link": "Ссылка для зрителей",
-    "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Внимание: этот сервер автоматически удаляет незаконченные игры. Постарайтесь закончить игру до ${0}.",
     "Warning: This game will be purged in approximately ${0} hours.": "Внимание: эта игровая партия будет удалена примерно через ${0} часов.",
-    "Unable to reach the server. The server may be restarting or down for maintenance.": "Невозможно соединиться с сервером. Сервер мог быть отправлен на перезагрузку или выключен для обслуживания.",
+    "Unable to reach the server. It may be restarting or down for maintenance.": "Невозможно соединиться с сервером. Сервер мог быть отправлен на перезагрузку или выключен для обслуживания.",
     "Unable to restore game ${game_id}": "Невозможно восстановить игру ${game_id}",
     "Game not found": "Игра не найдена",
 
@@ -356,7 +355,7 @@
     "14 Gens": "14 пкл.",
     "TR all": "все очки РТ",
     "63 TR": "63 РТ",
-    "Ok": "OK",
+    "Ok": "",
 
     "Production count": "Производство",
     "The number of available actions on active cards": "Кол-во доступных действий с активными картами",
@@ -397,6 +396,9 @@
     "city-count": "Города",
     "colony-count": "Колонии",
     "corruption-count": "Коррупция",
-    "influence-count": "Влияние",
-    "excavation-count": "Раскопки"
+  "influence-count": "Влияние",
+  "excavation-count": "Раскопки",
+  "You will not take any more actions this generation.": "Вы больше не сможете совершить какие либо действия в этом поколении.",
+  "Remove any number of microbes to gain 3 M€ per microbe removed": "Удалите любое количество микробов, чтобы получить по 3 M€ за каждого удалённого микроба",
+  "Reorder Cards": "Переупорядочить карты"
 }

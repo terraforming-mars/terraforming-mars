@@ -28,7 +28,7 @@ describe('Hadesphere', () => {
   });
 
   it('First action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     assertIsIdentificationAction(player, player.popWaitingFor());
@@ -41,7 +41,7 @@ describe('Hadesphere', () => {
   });
 
   it('action', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     cast(card.action(player), undefined);
     runAllActions(game);

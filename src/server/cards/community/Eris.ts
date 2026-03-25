@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {IGame} from '../../IGame';
 import {CardName} from '../../../common//cards/CardName';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,6 +11,8 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Size} from '../../../common/cards/render/Size';
 import {TileType, tileTypeToString} from '../../../common/TileType';
 import {LogHelper} from '../../LogHelper';
+import {AresHandler} from '../../ares/AresHandler';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 const ARES_CARDS = [
   CardName.BIOENGINEERING_ENCLOSURE,
@@ -42,7 +43,7 @@ const ARES_CARDS = [
   CardName.SOLAR_FARM,
 ];
 
-export class Eris extends CorporationCard {
+export class Eris extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ERIS,
@@ -66,7 +67,7 @@ export class Eris extends CorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     this.drawAresCard(player);
     return undefined;
   }
@@ -74,9 +75,11 @@ export class Eris extends CorporationCard {
   public canAct(player: IPlayer): boolean {
     const game = player.game;
     const availableSpaces = this.getAvailableSpaces(player);
-    const hazardSpaces = Eris.getAllUnprotectedHazardSpaces(game);
+    const hazardSpaces = game.board.getUnprotectedHazards();
 
-    if (availableSpaces.length === 0 && hazardSpaces.length === 0) return false;
+    if (availableSpaces.length === 0 && hazardSpaces.length === 0) {
+      return false;
+    }
     return true;
   }
 
@@ -84,7 +87,7 @@ export class Eris extends CorporationCard {
     const game = player.game;
     const orOptions = new OrOptions();
     const availableSpaces = this.getAvailableSpaces(player);
-    const hazardSpaces = Eris.getAllUnprotectedHazardSpaces(game);
+    const hazardSpaces = game.board.getUnprotectedHazards();
 
     if (availableSpaces.length > 0) {
       orOptions.options.push(new SelectOption('Place a hazard tile adjacent to no other tile', 'Select').andThen(() => {
@@ -98,15 +101,21 @@ export class Eris extends CorporationCard {
       orOptions.options.push(new SelectOption('Remove a hazard tile to gain 1 TR', 'Select').andThen(() => {
         return new SelectSpace(
           'Select hazard tile to remove',
-          Eris.getAllUnprotectedHazardSpaces(game)).andThen(
+          game.board.getUnprotectedHazards()).andThen(
           (space) => {
             const tileType = space.tile?.tileType;
-            space.tile = undefined;
-            player.increaseTerraformRating(1, {log: true});
+
+            // Unnecessary type check
             if (tileType === undefined) {
               return;
             }
+
+            space.tile = undefined;
+            player.increaseTerraformRating(1, {log: true});
             LogHelper.logBoardTileAction(player, space, tileTypeToString[tileType], 'removed');
+            AresHandler.ifAres(game, (aresData) => {
+              AresHandler.incrementPurifier(aresData, player);
+            });
             return undefined;
           },
         );
@@ -131,9 +140,5 @@ export class Eris extends CorporationCard {
         const adjacentSpaces = board.getAdjacentSpaces(space);
         return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
       });
-  }
-
-  public static getAllUnprotectedHazardSpaces(game: IGame) {
-    return game.board.getHazards().filter((space) => space.tile?.protectedHazard !== true);
   }
 }

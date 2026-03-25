@@ -1,0 +1,232 @@
+{
+  "Applied Science": "Sovellettu tiede",
+  "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "TOIMINTO: Poista 1 tiede tältä kortilta lisätäksesi 1 resurssin MILLE TAHANSA KORTILLE, JOSSA ON RESURSSI, tai saat 1 perusresurssin.",
+  "Add 6 science resources here.": "Lisää 6 tiedettä tälle kortille.",
+
+  "Atmospheric Enhancers": "Ilmakehätehostimet",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Nosta lämpötilaa 2 askelta tai nosta happea 2 askelta tai nosta Venusta 2 askelta. Nosta 2 korttia, joissa on kellukeympyrä.",
+
+  "Board of Directors": "Hallitus",
+  "ACTION:": "TOIMINTO:",
+  "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "NOSTA 1 ALKUSOITTOKORTTI: Joko heitä se pois TAI maksa 12 M€ ja poista 1 johtaja täältä pelataksesi sen.",
+  "Add 4 director resources here.": "Lisää 4 johtajaa tälle kortille.",
+
+  "Colony Trade Hub": "Siirtokunnan kauppakeskus",
+  "Increase your energy production 1 step. Gain 2 titanium": "Lisää energiatuotantoasi 1 askel. Saat 2 titaania.",
+  "Effect: When any colony is placed, gain 2 M€.": "VAIKUTUS: Kun mikä tahansa siirtokunta perustetaan, saat2 M€.",
+
+  "Corridors of Power": "Vallan käytävät",
+  "Effect: Each time you become party leader, draw 1 card.": "VAIKUTUS: Joka kerta kun sinusta tulee puoluejohtaja, nosta 1 kortti.",
+  "Raise your TR 1 step and gain 4 M€": "Nosta MKL:ääsi 1 askel ja saat4 M€.",
+
+  "Early Colonization": "Varhainen kolonisointi",
+  "INCREASE ALL COLONY TRACKS 2 STEPS": "NOSTA KAIKKIA SIIRTOKUNTARATOJA 2 ASKELTA",
+  "Place a colony. Gain 3 energy.": "Perusta siirtokunta. Saat 3 energiaa.",
+
+  "Floating Trade Hub": "Kellukekeskus",
+  "Action: Add 2 floaters to ANY card.": "TOIMINTO: Lisää 2 kelluketta MILLE TAHANSA kortille.",
+  "Action: Remove any number of floaters here to gain that many of one standard resource.": "TOIMINTO: Poista mikä tahansa määrä kellukeita täältä saadaksesi saman määrän yhtä perusresurssia.",
+
+  "Focused Organization": "Keskittynyt organisaatio",
+  "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "TOIMINTO: Heitä pois 1 kortti ja käytä 1 perusresurssi nostaaksesi 1 kortin ja saadaksesi 1 perusresurssin.",
+  "Draw 1 card and gain 1 standard resource.": "Nosta 1 kortti ja saat 1 perusresurssin.",
+
+  "High Circles": "Korkeat piirit",
+  "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Nosta MKL:ääsi 1 askel ja nosta 1 kortti, jossa on PUOLUEVAATIMUS. Aseta 2 edustajaa yhteen puolueeseen.",
+  "Effect: You have +1 influence.": "VAIKUTUS: Sinulla on +1 vaikutusvalta.",
+
+  "Industrial Complex": "Teollisuuskeskittymä",
+  "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Menetä 18 M€. NOSTA KAIKKI TUOTANTOSI, JOTKA OVAT ALLE 1, TASOLLE 1.",
+
+  "Main Belt Asteroids": "Päävyöhykkeen asteroidit",
+  "Action: Gain 1 asteroid to ANY CARD.": "TOIMINTO: Saat 1 asteroidin MILLE TAHANSA kortille.",
+  "Effect: When gaining an asteroid HERE, gain 1 titanium.": "VAIKUTUS: Kun saat asteroidin TÄHÄN, saat 1 titaanin.",
+  "Lose 5 M€. 1 VP per 2 asteroids here.": "Menetä 5 M€. 1 VP per 2 asteroidia täällä.",
+
+  "Nobel Prize": "Nobel-palkinto",
+  "Gain 5 M€. Draw 2 cards with requirements.": "Saat 5 M€. Nosta 2 korttia, joissa on vaatimuksia.",
+
+  "Old Mining Colony": "Vanha kaivossiirtokunta",
+  "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Lisää titaanituotantoasi 1 askel. Perusta 1 siirtokunta. Heitä pois 1 kortti.",
+
+  "Planetary Alliance": "Planeettaliitto",
+  "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Nosta MKL:ääsi 2 askelta. Nosta 1 Jupiter-kortti ja 1 Venus-kortti.",
+
+  "Preservation Program": "Suojeluohjelma",
+  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "VAIKUTUS: OHITA ENSIMMÄINEN MKL-NOSTO JOKAISEN SUKUPOLVEN TOIMINTOVAIHEESSA.",
+  "Raise your TR 5 steps.": "Nosta MKL:ääsi 5 askelta.",
+
+  "Project Eden": "Projekti Eden",
+  "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Aseta 1 valtameri, 1 kaupunki ja 1 viheralue. Heitä pois 3 korttia.",
+
+  "Recession": "Lama",
+  "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "JOKAINEN VASTUSTAJA menettää 5 M€ ja vähentää M€-tuotantoaan 1 askel. Sinä saat 10 M€.",
+
+  "Rise To Power": "Nouseminen valtaan",
+  "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Lisää M€-tuotantoasi 3 askelta ja aseta 3 edustajaa. VOIT ASETTAA HEIDÄT ERI PUOLUEISIIN.",
+
+  "Soil Bacteria": "Maaperän bakteerit",
+  "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "VAIKUTUS: Kun pelaat kasvi- tai mikrobiympyrän, tämä mukaan lukien, saat 1 kasvin.",
+  "Draw 2 microbe cards and gain 3 plants.": "Nosta 2 mikrobikorttia ja saat 3 kasvia.",
+
+  "Space Lanes": "Avaruusreitit",
+  "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat Jupiter-, Maa- tai Venus-ympyrän, maksat 2 M€ vähemmän siitä.",
+  "Gain 3 titanium.": "Saat 3 titaania.",
+
+  "Suitable Infrastructure": "Sopiva infrastruktuuri",
+  "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "VAIKUTUS: Kerran per toiminto, saat2 M€ jos lisäät mitä tahansa tuotantoa.",
+  "Gain 5 steel.": "Saat 5 terästä.",
+
+  "Terraforming Deal": "Maankaltaistussopimus",
+  "Effect: Each step your TR is raised, you gain 2 M€.": "VAIKUTUS: Joka kerta kun MKL:ääsi nostetaan, saat 2 M€.",
+
+  "Venus Contract": "Venus-sopimus",
+  "Effect: Each step you raise Venus, gain 3 M€.": "VAIKUTUS: Joka kerta kun nostat Venusta, saat3 M€.",
+  "Draw 1 Venus card. Raise your TR 1 step.": "Nosta 1 Venus-kortti. Nosta MKL:ääsi 1 askel.",
+
+  "Venus L1 Shade": "Venus L1 -varjostin",
+  "Raise Venus 3 steps.": "Nosta Venusta 3 askelta.",
+
+  "World Government Advisor": "Maailmanhallituksen neuvonantaja",
+  "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "TOIMINTO: Nosta 1 yhteistä muuttujaa nostamatta MKL:ääsi tai saamatta muita bonuksia.",
+  "Raise your TR 2 steps. Draw 1 card.": "Nosta MKL:ääsi 2 askelta. Nosta 1 kortti.",
+
+  "Strategic Base Planning": "Strateginen tukikohdan suunnittelu",
+  "Pay 3M€. Place a city. Place a colony.": "Maksa 3 M€. Aseta kaupunki. Perusta siirtokunta.",
+
+  "Anti-desertification Techniques": "Aavikoitumisen vastaisen tekniikat",
+  "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Saat 3 M€. Lisää kasvi- ja terästuotantoasi 1 askel.",
+
+  "Corporate Archives": "Yhtiön arkisto",
+  "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Katso pakan päällimmäisiä 7 korttia. Ota 2 niistä käteesi ja heitä muut 5 pois.",
+  "Look at the top 7 cards from the deck.": "Katso pakan päällimmäisiä 7 korttia.",
+  "Take 2 of them into hand and discard the other 5.": "Ota 2 niistä käteesi ja heitä muut 5 pois.",
+  "Gain 13 M€.": "Saat 13 M€.",
+
+  "Double Down": "Tuplaa panos",
+  "Copy your other prelude's direct effect.": "Kopioi toisen alkusoittokorttisi suora VAIKUTUS.",
+
+  "Giant Solar Collector": "Jättimäinen aurinkokeräin",
+  "Increase your energy production 2 steps. Raise Venus 1 step.": "Lisää energiatuotantoasi 2 askelta. Nosta Venusta 1 askel.",
+
+  "Head Start": "Etumatka",
+  "GAIN 2 STEEL.": "SAA 2 TERÄSTÄ.",
+  "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "SAA 2 M€ PER HANKEKORTTI KÄDESSÄSI.",
+  "IMMEDIATELY TAKE 2 ACTIONS.": "SUORITA VÄLITTÖMÄSTI 2 TOIMINTOA.",
+
+  "Merger": "Fuusio",
+  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Nosta 4 yhtiökorttia. Pelaa yksi niistä ja heitä muut 3 pois. Maksa sitten 42 M€.",
+
+  "New Partner": "Uusi kumppani",
+  "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Lisää M€-tuotantoasi 1 askel. Nosta välittömästi 2 alkusoittokorttia. Pelaa yksi niistä ja heitä toinen pois.",
+
+  "Allied Bank": "Liittoutuneet pankit",
+  "Increase your M€ production 4 steps. Gain 3 M€.": "Lisää M€-tuotantoasi 4 askelta. Saat 3 M€.",
+
+  "Aquifer Turbines": "Pohjavesiturbiinit",
+  "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Aseta valtamerilaatta. Lisää energiatuotantoasi 2 askelta. Maksa 3 M€.",
+
+  "Biofuels": "Biopolttoaineet",
+  "Increase your energy and plant production 1 step. Gain 2 plants.": "Lisää energian- ja kasvintuotantoasi 1 askel. Saat 2 kasvia.",
+
+  "Biolab": "Biolaboratorio",
+  "Increase your plant production 1 step. Draw 3 cards.": "Lisää kasvituotantoasi 1 askel. Nosta 3 korttia.",
+
+  "Biosphere Support": "Biosphäärituuki",
+  "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Lisää kasvituotantoasi 2 askelta. Vähennä M€-tuotantoasi 1 askel.",
+
+  "Business Empire": "Liiketoimintaimperiumi",
+  "Increase your M€ production 6 steps. Pay 6 M€.": "Lisää M€-tuotantoasi 6 askelta. Maksa 6 M€.",
+
+  "Dome Farming": "Kupolimaanviljely",
+  "Increase your M€ production 2 steps and plant production 1 step.": "Lisää M€-tuotantoasi 2 askelta ja kasvituotantoasi 1 askel.",
+
+  "Donation": "Lahjoitus",
+  "Gain 21 M€.": "Saat 21 M€.",
+
+  "Early Settlement": "Varhainen siirtokunta",
+  "Increase your plant production 1 step. Place a city tile.": "Lisää kasvituotantoasi 1 askel. Aseta kaupunkilaatta.",
+
+  "Ecology Experts": "Ekologian asiantuntijat",
+  "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Lisää kasvituotantoasi 1 askel. PELAA KORTTI KÄDESTÄSI OHITTAEN GLOBAALIT VAATIMUKSET.",
+
+  "Eccentric Sponsor": "Omituinen sponsori",
+  "Play a card from hand, reducing its cost by 25 M€": "Pelaa kortti kädestäsi vähentäen sen hintaa 25 M€.",
+
+  "Experimental Forest": "Koemetsä",
+  "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Aseta 1 viheralue ja nosta happea 1 askel. Paljasta kortteja kunnes paljastat kaksi korttia, joissa on kasviympyrä. Ota ne käteesi ja heitä loput pois.",
+
+  "Galilean Mining": "Galilein kuiden kaivostoiminta",
+  "Increase your titanium production 2 steps. Pay 5 M€.": "Lisää titaanituotantoasi 2 askelta. Maksa 5 M€.",
+
+  "Great Aquifer": "Suuri pohjavesikerros",
+  "Place 2 ocean tiles.": "Aseta 2 valtamerilaattaa.",
+
+  "Huge Asteroid": "Valtava asteroidi",
+  "Increase temperature 3 steps. Pay 5 M€.": "Nosta lämpötilaa 3 askelta. Maksa 5 M€.",
+
+  "Io Research Outpost": "Ion tutkimusasema",
+  "Increase your titanium production 1 step. Draw a card.": "Lisää titaanituotantoasi 1 askel. Nosta kortti.",
+
+  "Loan": "Laina",
+  "Gain 30 M€. Decrease your M€ production 2 steps.": "Saat 30 M€. Vähennä M€-tuotantoasi 2 askelta.",
+
+  "Martian Industries": "Marsin teollisuudet",
+  "Increase your energy and steel production 1 step. Gain 6 M€.": "Lisää energia- ja terästuotantoasi 1 askel. Saat 6 M€.",
+
+  "Metal-Rich Asteroid": "Metallipitoinen asteroidi",
+  "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Nosta lämpötilaa 1 askel. Saat 4 titaania ja 4 terästä.",
+
+  "Metals Company": "Metalliyhtiö",
+  "Increase your M€, steel and titanium production 1 step.": "Lisää M€-, teräs- ja titaanituotantoasi 1 askel.",
+
+  "Mining Operations": "Kaivostoiminta",
+  "Increase your steel production 2 steps. Gain 4 steel.": "Lisää terästuotantoasi 2 askelta. Saat 4 terästä.",
+
+  "Mohole": "Porakaivo",
+  "Increase your heat production 3 steps. Gain 3 heat.": "Lisää lämpötuotantoasi 3 askelta. Saat 3 lämpöä.",
+
+  "Mohole Excavation": "Porakaivon kaivaminen",
+  "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Lisää terästuotantoasi 1 askel ja lämpötuotantoasi 2 askelta. Saat 2 lämpöä.",
+
+  "Nitrogen Shipment": "Typpitoimitus",
+  "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Lisää kasvituotantoasi 1 askel. Nosta MKL:ääsi 1 askel. Saat 5 M€.",
+
+  "Orbital Construction Yard": "Kiertoradan telakka",
+  "Increase your titanium production 1 step. Gain 4 titanium.": "Lisää titaanituotantoasi 1 askel. Saat 4 titaania.",
+
+  "Polar Industries": "Napateollisuus",
+  "Increase your heat production 2 steps. Place an ocean tile.": "Lisää lämpötuotantoasi 2 askelta. Aseta valtamerilaatta.",
+
+  "Power Generation": "Energiantuotanto",
+  "Increase your energy production 3 steps.": "Lisää energiatuotantoasi 3 askelta.",
+
+  "Research Network": "Tutkimusverkosto",
+  "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Lisää M€-tuotantoasi 1 askel. Nosta 3 korttia. Pelaamisen jälkeen, kun suoritat toiminnon, villin tagin voi laskea miksi tahansa valitsemaksesi tagiksi.",
+
+  "Self-Sufficient Settlement": "Omavarainen siirtokunta",
+  "Increase your M€ production 2 steps. Place a city tile.": "Lisää M€-tuotantoasi 2 askelta. Aseta kaupunkilaatta.",
+
+  "Smelting Plant": "Sulatto",
+  "Raise oxygen 2 steps. Gain 5 steel.": "Nosta happea 2 askelta. Saat 5 terästä.",
+
+  "Society Support": "Yhteiskunnan tuki",
+  "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Lisää kasvi-, energia- ja lämpötuotantoasi 1 askel. Vähennä M€-tuotantoasi 1 askel.",
+
+  "Supplier": "Toimittaja",
+  "Increase your energy production 2 steps. Gain 4 steel.": "Lisää energiatuotantoasi 2 askelta. Saat 4 terästä.",
+
+  "Supply Drop": "Tarviketoimitus",
+  "Gain 3 titanium, 8 steel and 3 plants.": "Saat 3 titaania, 8 terästä ja 3 kasvia.",
+
+  "UNMI Contractor": "UNMI-urakoitsija",
+  "Increase your TR 3 steps. Draw a card.": "Nosta MKL:ääsi 3 askelta. Nosta kortti.",
+
+  "Acquired Space Agency": "Hankittu avaruusvirasto",
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Saat 6 titaania. Paljasta kortteja kunnes paljastat kaksi korttia, joissa on avaruustagi. Ota ne käteesi ja heitä loput pois.",
+
+  "Add resource to card GHG Producing Bacteria": "Lisää resurssi kortille Kasvihuonekaasuja tuottavat bakteerit",
+  "Add resource to card Fish": "Lisää resurssi kortille Kala",
+  "Add resource": "Lisää resurssi",
+  "Gain plant": "Saat kasvin"
+}

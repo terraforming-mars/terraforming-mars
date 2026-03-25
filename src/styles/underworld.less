@@ -1,14 +1,78 @@
 .card-tile-man-made-volcano {
-	background: url("./assets/underworld/volcanic-tile.png");
-	width: 40px;
-	height: 47px;
-	background-size: 40px;
-	background-repeat: no-repeat;
+  background: url("./assets/underworld/volcanic-tile.png");
+  width: 40px;
+  height: 47px;
+  background-size: 40px;
+  background-repeat: no-repeat;
 }
 
 .board-space-tile--man-made-volcano {
-	background: url("./assets/underworld/volcanic-tile.png");
-	width: 44px;
-	height: 50px;
-	background-size: 44px, 50px;
+  background: url("./assets/underworld/volcanic-tile.png");
+  width: 44px;
+  height: 50px;
+  background-size: 44px, 50px;
+}
+
+.underground-tokens {
+  display: flex;
+  gap: 46px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.underground-token-background {
+  filter: drop-shadow(2px 2px 3px black);
+  background-image: url("assets/underworld/underground-token-background.png");
+}
+
+.underground-token-border {
+  border: solid white;
+  border-width: 2px;
+  width:32px;
+  height:32px;
+}
+
+.underground-token-style--board {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-size: 32px;
+  margin: 8px 0 0 6px;
+}
+
+.underground-token-wrapper--playerhome {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.underground-token-style--player-home {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background-size: 42px;
+  margin: 0px 4px;
+}
+
+.underground-token-wrapper--tag-count {
+  position: relative;
+  width: 34px;
+  height: 34px;
+}
+
+.underground-token-style--tag-count {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background-size: 34px;
+}
+
+.underground-token-shelter {
+  // TODO(kberg): Put a better cube on it.
+  background-image: url("./assets/cube.png");
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
 }

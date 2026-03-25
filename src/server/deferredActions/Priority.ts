@@ -5,11 +5,22 @@ export enum Priority {
   DECLARE_CLONE_TAG,
   /** Cost of a blue card action, or paying Reds costs. Must happen before the effects. */
   COST,
+  /** Special case effects that should occur before Pharmacy Union */
+  BEFORE_PHARMACY_UNION,
   /** Pharmacy Union special case, players typically prefer to resolve this early. */
   PHARMACY_UNION,
   /** Any effect from one of your opponent's card that triggers during your turn. */
   OPPONENT_TRIGGER,
-
+  /**
+   * Resolve Hyperspace Drive Prototype before Olympus Conference
+   *
+   * https://docs.google.com/drawings/d/1VXfVmoJWU_QmMDwZ-liVh5ZvWVmmpl2kuo_3ANz4omY/edit?usp=sharing
+   */
+  HYPERSPACE_DRIVE_PROTOTYPE,
+  /**
+   * Resolve Olympus Conference before Sponsored Academies and Mars U.
+   */
+  OLYMPUS_CONFERENCE,
   /** When you must discard before you can draw. Making a determination that Sponsored Academies should come before Mars U. */
   SPONSORED_ACADEMIES,
   DRAW_CARDS,
@@ -21,6 +32,7 @@ export enum Priority {
 
   /** Anything that doesn't fit into another category. */
   DEFAULT,
+
   /**
    * When you must discard before you can draw. Mars U, Ender (CEO).
    *

@@ -21,7 +21,7 @@ describe('CorridorsOfPower', () => {
 
   it('play', () => {
     card.play(player);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(4);
   });
 
@@ -29,7 +29,7 @@ describe('CorridorsOfPower', () => {
     if (color === undefined) {
       return undefined;
     }
-    return game.getPlayers().find((player) => player.color === color) ?? 'NEUTRAL';
+    return game.players.find((player) => player.color === color) ?? 'NEUTRAL';
   }
 
   const effectRuns = [

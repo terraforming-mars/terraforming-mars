@@ -25,7 +25,7 @@ describe('GhgShipment', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     searchForLife.resourceCount = 2;
     jovianLanterns.resourceCount = 5;

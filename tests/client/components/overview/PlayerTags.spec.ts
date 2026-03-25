@@ -1,15 +1,14 @@
-import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {shallowMount, VueWrapper, DOMWrapper} from '@vue/test-utils';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
-import {Wrapper} from '@vue/test-utils';
 
 describe('PlayerTags', () => {
-  let wrapper: Wrapper<PlayerTags>;
+  let wrapper: VueWrapper<any>;
 
   beforeEach(() => {
     const player: RecursivePartial<PublicPlayerModel> = {
@@ -39,10 +38,28 @@ describe('PlayerTags', () => {
           name: CardName.LUNA_SENATE,
         },
       ],
-      tags: {},
+      tags: {
+        [Tag.BUILDING]: 0,
+        [Tag.SPACE]: 0,
+        [Tag.SCIENCE]: 0,
+        [Tag.POWER]: 0,
+        [Tag.EARTH]: 0,
+        [Tag.JOVIAN]: 0,
+        [Tag.VENUS]: 0,
+        [Tag.PLANT]: 0,
+        [Tag.MICROBE]: 0,
+        [Tag.ANIMAL]: 0,
+        [Tag.CITY]: 0,
+        [Tag.CRIME]: 0,
+        [Tag.EVENT]: 0,
+      },
+      underworldData: {
+        tokens: [],
+      },
       victoryPointsBreakdown: {
         total: 1,
       },
+      terraformRating: 100,
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: player,
@@ -67,17 +84,31 @@ describe('PlayerTags', () => {
           },
           showTimers: false,
         },
+        tags: [
+          Tag.BUILDING,
+          Tag.SPACE,
+          Tag.SCIENCE,
+          Tag.POWER,
+          Tag.EARTH,
+          Tag.JOVIAN,
+          Tag.VENUS,
+          Tag.PLANT,
+          Tag.MICROBE,
+          Tag.ANIMAL,
+          Tag.CITY,
+          Tag.EVENT,
+        ],
       },
       players: [player],
     };
     wrapper = shallowMount(PlayerTags, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         methods: {
           getVisibilityState: () => {},
         },
       },
-      propsData: {
+      props: {
         player: player,
         playerView: playerView,
         hideZeroTags: false,
@@ -88,12 +119,11 @@ describe('PlayerTags', () => {
     wrapper.vm.$data.conciseView = false;
   });
 
-  function elem(tag: Tag | 'all'): any {
-    const newLocal: Wrapper<any> = wrapper.find(`[data-test="discount-${tag}"]`);
-    return newLocal;
+  function elem(tag: Tag | 'all'): DOMWrapper<Element> {
+    return wrapper.find(`[data-test="discount-${tag}"]`);
   }
 
-  function amount(e: Wrapper<any>): string {
+  function amount(e: DOMWrapper<Element>): string {
     return e.attributes()['amount'];
   }
 

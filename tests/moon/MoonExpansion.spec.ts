@@ -13,8 +13,9 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPointsBreakdownBuilder';
 import {testGame} from '../TestingUtils';
+import {GlobalParameter} from '../../src/common/GlobalParameter';
 
 describe('MoonExpansion', () => {
   let game: IGame;
@@ -57,7 +58,7 @@ describe('MoonExpansion', () => {
   // changing these tests, but I would be surprised if that were the case.
   it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
     player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
-    player.corporations.push(new Philares());
+    player.playedCards.push(new Philares());
     player.steel = 0;
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
     expect(player.steel).eq(1);
@@ -65,45 +66,82 @@ describe('MoonExpansion', () => {
 
   it('raiseMiningRate', () => {
     expect(moonData.miningRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
+
     MoonExpansion.raiseMiningRate(player);
     expect(moonData.miningRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(1);
+
+    MoonExpansion.raiseMiningRate(player, 2);
+    expect(moonData.miningRate).to.eq(3);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(3);
   });
 
   it('raiseHabitatRate', () => {
     expect(moonData.habitatRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(0);
+
     MoonExpansion.raiseHabitatRate(player);
     expect(moonData.habitatRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(1);
+
+    MoonExpansion.raiseHabitatRate(player, 3);
+    expect(moonData.habitatRate).to.eq(4);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(4);
   });
 
   it('raiseLogisticsRate', () => {
     expect(moonData.logisticRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(0);
+
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(1);
+
+    MoonExpansion.raiseLogisticRate(player, 2);
+    expect(moonData.logisticRate).to.eq(3);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(3);
+  });
+
+  it('multiple players track separate globalParameterSteps', () => {
+    expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
+    expect(player2.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
+
+    MoonExpansion.raiseMiningRate(player, 2);
+    MoonExpansion.raiseMiningRate(player2, 3);
+
+    expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(2);
+    expect(player2.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(3);
+  });
+
+  it('does not track globalParameterSteps during solar phase', () => {
+    game.phase = Phase.SOLAR;
+    expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(0);
+    MoonExpansion.raiseHabitatRate(player, 2);
+    expect(moonData.habitatRate).to.eq(2);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(0);
   });
 
   it('computeVictoryPoints', () => {
-    const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonHabitats = 0;
-      vps.points.moonMines = 0;
-      vps.points.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player, vps);
+      const builder = new VictoryPointsBreakdownBuilder();
+      MoonExpansion.calculateVictoryPoints(player, builder);
+      const vps = builder.build();
       return {
-        colonies: vps.points.moonHabitats,
-        mines: vps.points.moonMines,
-        roads: vps.points.moonRoads,
+        colonies: vps.moonHabitats,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
       };
     }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
-    MoonExpansion.calculateVictoryPoints(player, vps);
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
 
@@ -179,39 +217,39 @@ describe('MoonExpansion', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 3;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
-    player.playedCards = [specialDesign];
+    player.playedCards.push(specialDesign);
     player.lastCardPlayed = specialDesign.name;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('raiseMiningRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.miningRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseMiningRate(player);
     expect(moonData.miningRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('raiseHabitatRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.habitatRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseHabitatRate(player);
     expect(moonData.habitatRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('raiseLogisticsRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.logisticRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });

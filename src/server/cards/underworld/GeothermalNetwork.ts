@@ -10,10 +10,10 @@ export class GeothermalNetwork extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.GEOTHERMAL_NETWORK,
-      tags: [Tag.MARS, Tag.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 14,
 
-      requirements: {excavation: 3},
+      requirements: {undergroundTokens: 3},
 
       behavior: {
         production: {heat: 3},
@@ -22,11 +22,11 @@ export class GeothermalNetwork extends Card implements IProjectCard {
       victoryPoints: 1,
 
       metadata: {
-        cardNumber: 'U24',
+        cardNumber: 'U024',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.heat(3));
         }),
-        description: 'Requires 3 excavation markers. Increase your heat production 3 steps.',
+        description: 'Requires 3 underground tokens. Increase your heat production 3 steps.',
       },
     });
   }

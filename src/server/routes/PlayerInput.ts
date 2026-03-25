@@ -13,6 +13,8 @@ import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
 import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
+import {isIProjectCard} from '../cards/IProjectCard';
+import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -82,7 +84,12 @@ export class PlayerInput extends Handler {
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     // TODO(kberg): Find a better place for this optimization.
-    player.tableau.forEach((card) => card.warnings.clear());
+    for (const card of player.tableau) {
+      card.warnings.clear();
+      if (isIProjectCard(card)) {
+        card.additionalProjectCosts = undefined;
+      }
+    }
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {
@@ -110,7 +117,11 @@ export class PlayerInput extends Handler {
 
           const id = e instanceof AppError ? e.id : undefined;
           const message = e instanceof Error ? e.message : String(e);
-          res.write(JSON.stringify({id: id, message: message}));
+          const response: AppErrorResponse = {
+            id: id,
+            message: message,
+          };
+          res.write(JSON.stringify(response));
           res.end();
           resolve();
         }
@@ -121,7 +132,7 @@ export class PlayerInput extends Handler {
 function validateRunId(entity: any) {
   if (entity.runId !== undefined && runId !== undefined) {
     if (entity.runId !== runId) {
-      throw new AppError('#invalid-run-id', 'The server has restarted. Click OK to refresh this page.');
+      throw new AppError(INVALID_RUN_ID, 'The server has restarted. Click OK to refresh this page.');
     }
   }
   // Clearing this out to be compatible with the input response processors.

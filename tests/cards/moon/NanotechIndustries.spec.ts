@@ -29,8 +29,8 @@ describe('NanotechIndustries', () => {
   });
 
   it('act', () => {
-    player.corporations.push(nanotechIndustries);
-    player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
+    player.playedCards.push(nanotechIndustries);
+    player.playedCards.push(physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship);
     nanotechIndustries.action(player);
 
     const action = cast(player.game.deferredActions.pop()?.execute(), SelectCard<IProjectCard>);

@@ -16,7 +16,7 @@ describe('UnitedNationsMarsInitiative', () => {
   beforeEach(() => {
     card = new UnitedNationsMarsInitiative();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Can not act if TR was not raised', () => {
@@ -38,16 +38,16 @@ describe('UnitedNationsMarsInitiative', () => {
     card.action(player);
     runAllActions(game);
     expect(player.megaCredits).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 
   it('Helion + UNMI', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     player.megaCredits = 2;
     expect(card.canAct(player)).is.false;
     player.heat = 1;
@@ -57,8 +57,8 @@ describe('UnitedNationsMarsInitiative', () => {
     player.heat = 5;
 
     const selectPayment = cast(churn(card.action(player), player), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
-    expect(player.getTerraformRating()).to.eq(22);
+    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
+    expect(player.terraformRating).to.eq(22);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
   });

@@ -30,7 +30,7 @@ describe('BufferGasStandardProject', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('Test reds', () => {

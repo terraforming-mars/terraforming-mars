@@ -2,9 +2,7 @@ import {Player} from '../src/server/Player';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
 import {Tag} from '../src/common/cards/Tag';
-import {InputResponse} from '../src/common/inputs/InputResponse';
 import {Tags} from '../src/server/player/Tags';
-import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {PlayerId} from '../src/common/Types';
 
 type Options = {name: string, beginner?: boolean, idSuffix?: string};
@@ -60,10 +58,6 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 
-  public override runInput(input: InputResponse, pi: PlayerInput): void {
-    super.runInput(input, pi);
-  }
-
   public popWaitingFor2(): [PlayerInput | undefined, (() => void) | undefined] {
     const waitingFor = this.waitingFor;
     const waitingForCb = this.waitingForCb;
@@ -77,9 +71,5 @@ export class TestPlayer extends Player {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     return waitingFor;
-  }
-
-  public getPlayableCardsForTest(): Array<IProjectCard> {
-    return this.getPlayableCards().map((entry) => entry.card);
   }
 }

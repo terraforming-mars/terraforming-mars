@@ -18,7 +18,7 @@ export abstract class Bonus implements IBonus {
   public abstract getScore(player: IPlayer): number;
 
   public grant(game: IGame): void {
-    for (const player of game.getPlayersInGenerationOrder()) {
+    for (const player of game.playersInGenerationOrder) {
       if (player.alliedParty === undefined) {
         this.grantForPlayer?.(player);
       }

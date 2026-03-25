@@ -41,16 +41,16 @@ describe('Gyropolis', () => {
   });
 
   it('Compatible with Moon Embassy', () => {
-    player.playedCards = [new DeepLunarMining()];
+    player.playedCards.set(new DeepLunarMining());
     card.play(player);
     expect(player.production.megacredits).to.eq(0);
 
-    player.playedCards = [new EarthEmbassy()];
+    player.playedCards.set(new EarthEmbassy());
     card.play(player);
     expect(player.production.megacredits).to.eq(2);
 
     player.production.override({megacredits: 0});
-    player.playedCards = [new DeepLunarMining(), new EarthEmbassy()];
+    player.playedCards.set(new DeepLunarMining(), new EarthEmbassy());
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
   });

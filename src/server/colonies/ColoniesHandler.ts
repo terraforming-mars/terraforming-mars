@@ -6,6 +6,7 @@ import {Tag} from '../../common/cards/Tag';
 import {SelectColony} from '../inputs/SelectColony';
 import {IPlayer} from '../IPlayer';
 import {inplaceRemove} from '../../common/utils/utils';
+import {CardName} from '../../common/cards/CardName';
 
 export class ColoniesHandler {
   public static getColony(game: IGame, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
@@ -13,7 +14,9 @@ export class ColoniesHandler {
     if (colony !== undefined) return colony;
     if (includeDiscardedColonies === true) {
       colony = game.discardedColonies.find((c) => c.name === colonyName);
-      if (colony !== undefined) return colony;
+      if (colony !== undefined) {
+        return colony;
+      }
     }
     throw new Error(`Unknown colony '${colonyName}'`);
   }
@@ -41,8 +44,13 @@ export class ColoniesHandler {
     if (colony.isActive) {
       return true;
     }
-    if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
-      return true;
+    if (colony.metadata.cardResource !== undefined) {
+      if (colony.metadata.cardResource === card.resourceType) {
+        return true;
+      }
+      if (card.name === CardName.MARTIAN_EXPRESS) {
+        return true;
+      }
     }
     if (colony.name === ColonyName.VENUS && card.tags.includes(Tag.VENUS) && card.resourceType !== undefined) {
       return true;
@@ -65,7 +73,7 @@ export class ColoniesHandler {
       colonyTiles = colonyTiles.filter((colonyTile) => colonyTileWillEnterActive(colonyTile, game));
     }
     if (colonyTiles.length === 0) {
-      game.log('No availble colony tiles for ${0} to choose from', (b) => b.player(player));
+      game.log('No available colony tiles for ${0} to choose from', (b) => b.player(player));
       return;
     }
 
@@ -75,7 +83,7 @@ export class ColoniesHandler {
       if (colony.isActive) {
         return true;
       }
-      for (const player of game.getPlayers()) {
+      for (const player of game.players) {
         for (const card of player.tableau) {
           if (ColoniesHandler.cardActivatesColony(colony, card)) {
             return true;

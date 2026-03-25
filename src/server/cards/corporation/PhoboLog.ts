@@ -4,8 +4,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
-export class PhoboLog extends CorporationCard {
+export class PhoboLog extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PHOBOLOG,

@@ -22,8 +22,8 @@ describe('Huan', () => {
     game.colonies[0].trade(player);
     game.colonies[1].trade(player2);
 
-    expect(player.colonies.tradesThisGeneration).eq(1);
-    expect(player2.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(1);
+    expect(player2.colonies.usedTradeFleets).eq(1);
     expect(game.colonies[0].visitor).eq(player.id);
     expect(game.colonies[1].visitor).eq(player2.id);
 
@@ -32,8 +32,8 @@ describe('Huan', () => {
     card.action(player);
     forceGenerationEnd(game);
 
-    expect(player.colonies.tradesThisGeneration).eq(0);
-    expect(player2.colonies.tradesThisGeneration).eq(50);
+    expect(player.colonies.usedTradeFleets).eq(0);
+    expect(player2.colonies.usedTradeFleets).eq(50);
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).is.undefined;
 

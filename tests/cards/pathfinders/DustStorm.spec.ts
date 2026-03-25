@@ -15,7 +15,7 @@ describe('DustStorm', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
     player.energy = 5;
@@ -24,7 +24,7 @@ describe('DustStorm', () => {
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
     expect(player.game.getTemperature()).eq(-26);
     expect(player.energy).eq(0);
     expect(player2.energy).eq(0);

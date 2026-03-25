@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
+import {Tag} from '../../../common/cards/Tag';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -17,20 +18,21 @@ export class HiredRaiders extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.HIRED_RAIDERS_UNDERWORLD,
       cost: 1,
+      tags: [Tag.CRIME],
 
       metadata: {
         cardNumber: 'UX02',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', Size.MEDIUM, true).megacredits(3, {all})
-            .plus().megacredits(2, {all}).slash().corruption();
+          b.text('steal', Size.MEDIUM, true).megacredits(4, {all})
+            .plus().megacredits(1, {all}).slash().corruption();
         }),
-        description: 'Steal 3 M€, plus 2 extra M€ for each corruption resource you have, from any player.',
+        description: 'Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.',
       },
     });
   }
 
   public override bespokePlay(player: IPlayer) {
-    const amount = 3 + (2 * player.underworldData.corruption);
+    const amount = 4 + (1 * player.underworldData.corruption);
     if (player.game.isSoloMode()) {
       player.megaCredits += amount;
       player.game.log('${0} stole ${1} M€ from the neutral player', (b) =>
@@ -40,7 +42,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
     const availableActions = new OrOptions();
 
-    player.getOpponents().forEach((target) => {
+    player.opponents.forEach((target) => {
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(amount, target.megaCredits);
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));

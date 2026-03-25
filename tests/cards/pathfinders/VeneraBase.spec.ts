@@ -28,7 +28,7 @@ describe('VeneraBase', () => {
 
   beforeEach(() => {
     card = new VeneraBase();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {venusNextExtension: true, turmoilExtension: true, pathfindersExpansion: true});
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();
@@ -60,16 +60,16 @@ describe('VeneraBase', () => {
 
   it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.playedCards = [data];
+    player.playedCards.set(data);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [nonVenusFloater];
+    player.playedCards.set(nonVenusFloater);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [venusFloater];
+    player.playedCards.set(venusFloater);
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.playedCards = [venusFloater, venusFloater2, data, nonVenusFloater];
+    player.playedCards.set(venusFloater, venusFloater2, data, nonVenusFloater);
 
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.cards).to.have.members([venusFloater, venusFloater2]);

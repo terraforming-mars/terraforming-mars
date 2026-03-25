@@ -33,10 +33,10 @@ describe('LunarSecurityStations', () => {
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     spaces[2].tile = {tileType: TileType.MOON_ROAD};
 
-    expect(player.getPlayableCardsForTest()).includes(card);
+    expect(player.getPlayableCards()).includes(card);
 
     spaces[1].tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('protects against Hired Raiders', () => {
@@ -45,12 +45,11 @@ describe('LunarSecurityStations', () => {
 
     const hiredRaiders = new HiredRaiders();
 
-    opponent2.playedCards = [];
     let action = cast(hiredRaiders.play(player), OrOptions);
     // Options for both opponents.
     expect(action.options).has.lengthOf(3);
 
-    opponent2.playedCards = [card];
+    opponent2.playedCards.push(card);
     action = cast(hiredRaiders.play(player), OrOptions);
     // Options for only one opponent.
     expect(action.options).has.lengthOf(2);
@@ -60,12 +59,12 @@ describe('LunarSecurityStations', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 });

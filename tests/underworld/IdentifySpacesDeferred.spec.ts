@@ -38,10 +38,11 @@ describe('IdentifySpacesDeferred', () => {
     const space = selectSpace.spaces[0];
 
     expect(space.undergroundResources).is.undefined;
-    const selectSpace2 = cast(selectSpace.cb(space), SelectSpace);
-
+    cast(selectSpace.cb(space), undefined);
     expect(space.undergroundResources).is.not.undefined;
 
+    runAllActions(game);
+    const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
     const space2 = selectSpace2.spaces[0];
     expect(selectSpace2.spaces).does.not.contain(space);
     expect(selectSpace2.spaces).does.contain(space2); // This line just supports the line above.

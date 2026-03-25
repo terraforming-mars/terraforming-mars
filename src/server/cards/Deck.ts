@@ -1,7 +1,6 @@
 import {SerializedDeck} from './SerializedDeck';
 import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
-import {LogHelper} from '../LogHelper';
 import {Random} from '../../common/utils/Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
@@ -117,10 +116,10 @@ export class Deck<T extends ICard> {
 
   public drawByConditionOrThrow(logger: Logger, total: number, include: (card: T) => boolean) {
     const result: Array<T> = [];
-    const discardedCards = new Set<CardName>();
+    const discardedCards = new Array<CardName>();
 
     while (result.length < total) {
-      if (discardedCards.size >= this.drawPile.length + this.discardPile.length) {
+      if (discardedCards.length >= this.drawPile.length + this.discardPile.length) {
         logger.log(`discarded every ${this.type} card without a match`);
         break;
       }
@@ -128,12 +127,12 @@ export class Deck<T extends ICard> {
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
-        discardedCards.add(projectCard.name);
+        discardedCards.push(projectCard.name);
         this.discard(projectCard);
       }
     }
-    if (discardedCards.size > 0) {
-      LogHelper.logDiscardedCards(logger, Array.from(discardedCards));
+    if (discardedCards.length > 0) {
+      logger.log('Discarded ${0} cards ${1}', (b) => b.number(discardedCards.length).cardNames(discardedCards, {ellipsis: true}));
     }
 
     return result;

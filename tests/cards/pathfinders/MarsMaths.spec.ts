@@ -23,7 +23,7 @@ describe('MarsMaths', () => {
       pathfindersExpansion: true,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
 
     // End the generation. Player will draw 5 cards
@@ -39,7 +39,7 @@ describe('MarsMaths', () => {
       draftVariant: true,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
 
     // End the generation. Player will draw 5 cards
@@ -74,10 +74,8 @@ describe('MarsMaths', () => {
       draftVariant: false,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
-
-    player.playedCards = [card];
 
     // End the generation. Player will draw 5 cards
     finishGeneration(game);

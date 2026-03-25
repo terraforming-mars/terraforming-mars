@@ -3,6 +3,8 @@ import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {fakeCard} from '../../TestingUtils';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('SaturnSystems', () => {
   let card: SaturnSystems;
@@ -15,20 +17,26 @@ describe('SaturnSystems', () => {
   });
 
   it('Should play', () => {
-    card.play(player);
+    player.playCorporationCard(card);
     expect(player.production.titanium).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
   });
 
-  it('Runs onCardPlayed', () => {
-    player.corporations.push(card);
-    card.onCardPlayed(player, new MirandaResort());
+  it('Runs onCardPlayedByAnyPlayer', () => {
+    player.playedCards.push(card);
+    player.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 
-  it('Runs onCardPlayed when other player plays card', () => {
-    player.corporations.push(card);
-    card.onCardPlayed(player2, new MirandaResort());
+  it('Multiple tags', () => {
+    player.playedCards.push(card);
+    player.playCard(fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN, Tag.WILD]}));
+    expect(player.production.megacredits).to.eq(2);
+  });
+
+  it('Runs onCardPlayedByAnyPlayer when other player plays card', () => {
+    player.playedCards.push(card);
+    player2.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 });

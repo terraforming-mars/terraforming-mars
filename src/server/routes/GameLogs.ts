@@ -28,7 +28,17 @@ export class GameLogs {
   }
 
   public getLogsForGameView(playerId: ParticipantId, game: IGame, generation: string | null): Array<LogMessage> {
-    const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
+    const messagesForPlayer = (message: LogMessage) => {
+      try {
+        if (message === undefined || message === null) {
+          return false;
+        }
+        return message.playerId === undefined || message.playerId === playerId;
+      } catch (e) {
+        console.error('Error checking message for player', e);
+        return false;
+      }
+    };
 
     // for most recent generation pull last 50 log messages
     if (generation === null || Number(generation) === game.generation) {
@@ -50,7 +60,7 @@ export class GameLogs {
 
       switch (datum.type) {
       case LogMessageDataType.PLAYER:
-        for (const player of game.getPlayers()) {
+        for (const player of game.players) {
           if (datum.value === player.color) {
             return player.name;
           }

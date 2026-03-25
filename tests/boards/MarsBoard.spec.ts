@@ -9,6 +9,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunities';
 import {testGame} from '../TestGame';
 import {AresHandler} from '../../src/server/ares/AresHandler';
+import {toID} from '../../src/common/utils/utils';
 
 describe('MarsBoard', () => {
   let board: MarsBoard;
@@ -89,7 +90,7 @@ describe('MarsBoard', () => {
   });
 
   it('edges', () => {
-    expect(board.getEdges().map((space) => space.id)).to.have.members(
+    expect(board.getEdges().map(toID)).to.have.members(
       [
         '03', '04', '05', '06', '07',
         '08', '13',
@@ -106,7 +107,7 @@ describe('MarsBoard', () => {
   it('Do not include land claimed hazard spaces for Arcadian Communities', () => {
     const card = new ArcadianCommunities();
     const [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const board = player.game.board;
     const space = board.spaces.find(AresHandler.hasHazardTile);
     space!.player = player;

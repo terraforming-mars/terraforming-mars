@@ -10,6 +10,7 @@ import {CommunicationCenter} from '../../../src/server/cards/pathfinders/Communi
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SolarStorm', () => {
   let card: SolarStorm;
@@ -27,7 +28,7 @@ describe('SolarStorm', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
     player.plants = 5;
@@ -36,7 +37,7 @@ describe('SolarStorm', () => {
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);
@@ -45,8 +46,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, nobody has data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
     card.play(player);
 
     runAllActions(player.game);
@@ -54,8 +55,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, only you have data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
 
@@ -71,8 +72,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, two players with data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
     communicationCenter.resourceCount = 6;
@@ -99,5 +100,20 @@ describe('SolarStorm', () => {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(14);
     expect(player3.plants).eq(398);
+  });
+
+  it('Compatible with underworld', () => {
+    const [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    const card = new SolarStorm();
+
+    player2.plants = 3;
+    player2.underworldData.corruption = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    player2.plants = 3;
+    player1.underworldData.corruption = 0;
   });
 });

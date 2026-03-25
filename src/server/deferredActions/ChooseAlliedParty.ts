@@ -26,10 +26,9 @@ export class ChooseAlliedParty extends DeferredAction {
           return undefined;
         });
     });
-    const orPolicies = new OrOptions(...alliedOptions);
-    orPolicies.title = message('Select an allied party');
 
-    return orPolicies;
+    return new OrOptions(...alliedOptions)
+      .setTitle(message('Select an allied party'));
   }
 
   private partyDescription(party: IParty, _player: IPlayer) {

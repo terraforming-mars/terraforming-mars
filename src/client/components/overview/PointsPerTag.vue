@@ -6,18 +6,22 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+const ONE_THIRD = 1/3;
+const TWO_THIRDS = 2/3;
+
+import {defineComponent} from 'vue';
 
 export type Points = {
   points: number;
   halfPoints: number;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PointsPerTag',
   props: {
     points: {
       type: Object as () => Points,
+      required: true,
     },
   },
   computed: {
@@ -33,8 +37,10 @@ export default Vue.extend({
       let vulgarFraction = '';
       if (fraction === 0.5) {
         vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
+      } else if (Math.abs(fraction - ONE_THIRD) < Number.EPSILON) {
         vulgarFraction = '⅓';
+      } else if (Math.abs(fraction - TWO_THIRDS) < Number.EPSILON) {
+        vulgarFraction = '⅔';
       }
       return `${integer || ''}${vulgarFraction}`;
     },

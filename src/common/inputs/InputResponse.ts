@@ -191,6 +191,15 @@ export function isSelectResourcesResponse(response: InputResponse): response is 
   return response.type === 'resources' && matches(response, ['type', 'units']);
 }
 
+export interface SelectClaimedUndergroundTokenResponse {
+  type: 'claimedUndergroundToken',
+  selected: Array<number>;
+}
+
+export function isSelectClaimedUndergroundTokenResponse(response: InputResponse): response is SelectClaimedUndergroundTokenResponse {
+  return response.type === 'claimedUndergroundToken' && matches(response, ['type', 'selected']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -210,4 +219,5 @@ export type InputResponse =
   SelectGlobalEventResponse |
   SelectPolicyResponse |
   SelectResourceResponse |
-  SelectResourcesResponse;
+  SelectResourcesResponse |
+  SelectClaimedUndergroundTokenResponse;

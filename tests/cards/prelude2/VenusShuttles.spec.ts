@@ -24,7 +24,7 @@ describe('VenusShuttles', () => {
 
   it('Should play, one option', () => {
     const celestic = new Celestic(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
 
     card.play(player);
     runAllActions(game);
@@ -35,7 +35,7 @@ describe('VenusShuttles', () => {
   it('Should Play, multiple cards.', () => {
     const celestic = new Celestic(); // Stores floaters. has Venus tag
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
     player.playedCards.push(jsr);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -65,7 +65,7 @@ describe('VenusShuttles', () => {
 
   it('action', () => {
     player.megaCredits = 13;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.action(player), undefined);
@@ -74,7 +74,7 @@ describe('VenusShuttles', () => {
 
     expect(player.megaCredits).eq(1);
     expect(game.getVenusScaleLevel()).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('Action 15 venus tags', () => {

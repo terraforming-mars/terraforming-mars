@@ -1,8 +1,9 @@
-// Generates the files settings.json and translations.json, stored in src/genfilesimport * as fs from 'fs';
+// Generates the files settings.json and translations.json, stored in src/genfiles
 require('dotenv').config();
-import * as fs from 'fs';
-import * as child_process from 'child_process';
-import * as path from 'path';
+
+import fs from 'fs';
+import child_process from 'child_process';
+import path from 'path';
 import * as constants from '../common/constants';
 
 function mkdirQuietly(path: string) {
@@ -18,7 +19,6 @@ function readdir(path: string, predicate: (dirent: string) => boolean) {
 
 type Translation = {[lang: string]: string}
 
-
 /**
  * Reads all the translations in src/locales, and returns a data structure of this
  * structure:
@@ -30,6 +30,7 @@ type Translation = {[lang: string]: string}
  *   },
  * },
  */
+
 function getAllTranslations(): {[lang: string]: Translation} {
   const translationsPath = path.resolve('src/locales');
   const translations: {[lang: string]: Translation} = {};
@@ -60,7 +61,13 @@ function getAllTranslations(): {[lang: string]: Translation} {
           if (translations[phrase][lang] !== undefined) {
             console.log(`${lang}: Repeated translation for [${phrase}]`);
           }
-          translations[phrase][lang] = json[phrase];
+          const translated = json[phrase];
+          if (translated.trim() === phrase.trim()) {
+            throw new Error('Do not repeat a translation with its own text: ' + phrase);
+          }
+          if (translated.trim().length !== 0) {
+            translations[phrase][lang] = translated;
+          }
         }
       } catch (e) {
         throw new Error(`While parsing ${filename}:` + e);

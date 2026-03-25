@@ -26,7 +26,7 @@ describe('JensonBoyleCo', () => {
   });
 
   it('canAct', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card.canAct(player)).is.false;
 
@@ -46,7 +46,7 @@ describe('JensonBoyleCo', () => {
     cast(orOptions.options[0], SelectOption).cb(undefined);
 
     expect(player.underworldData.corruption).eq(3);
-    expect(player.stock.asUnits()).deep.eq(Units.of({steel: 4}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({steel: 5}));
 
     player.stock.override(Units.EMPTY);
     cast(orOptions.options[1], SelectOption).cb(undefined);
@@ -58,12 +58,12 @@ describe('JensonBoyleCo', () => {
     cast(orOptions.options[2], SelectOption).cb(undefined);
 
     expect(player.underworldData.corruption).eq(1);
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 3}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 4}));
 
     player.stock.override(Units.EMPTY);
     cast(orOptions.options[3], SelectOption).cb(undefined);
 
     expect(player.underworldData.corruption).eq(0);
-    expect(player.stock.asUnits()).deep.eq(Units.of({heat: 6}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({heat: 8}));
   });
 });

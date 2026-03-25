@@ -22,17 +22,6 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: IPlayer): number {
-    let discount = 0;
-    if (player.isCorporation(CardName.THORGATE)) {
-      discount += 3;
-    }
-    if (player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
-      discount += 3;
-    }
-    return discount;
-  }
-
   actionEssence(player: IPlayer): void {
     player.production.add(Resource.ENERGY, 1);
   }

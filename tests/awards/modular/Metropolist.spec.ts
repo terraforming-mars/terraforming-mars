@@ -20,7 +20,7 @@ describe('Metropolist', () => {
   });
 
   it('Is applied to all cities', () => {
-    const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
+    const colonySpaces = board.getSpaces(SpaceType.COLONY);
     const landSpaces = board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, landSpaces[0], {tileType: TileType.GREENERY});

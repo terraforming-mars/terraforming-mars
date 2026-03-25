@@ -17,4 +17,5 @@ export type PlayerInputType =
     'globalEvent' |
     'policy' |
     'resource' |
-    'resources';
+    'resources' |
+    'claimedUndergroundToken';

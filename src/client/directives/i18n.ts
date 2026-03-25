@@ -37,7 +37,7 @@ export function translateMessage(message: Message): string {
     case LogMessageDataType.TILE_TYPE:
       return tileTypeToString[datum.value];
     default:
-      return translateText(datum.value.toString());
+      return translateText(String(datum.value));
     }
   });
 }
@@ -108,7 +108,7 @@ export function translateTextWithParams(englishText: string, params: Array<strin
 }
 
 function normalizeText(text: string): string {
-  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ');
+  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ').trim();
 }
 
 function translateChildren(node: Node, params: string[] | undefined) {

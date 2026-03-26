@@ -122,7 +122,7 @@ describe('Merchant', () => {
 
       const selectPayment = new SelectPayment('Pay', 8, {heat: true}, Units.every(2));
       // Paying 2 MC + 6 heat = 8, but spends the reserved 2 MC (leaving 0 MC after)
-      expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 2, heat: 6})}, player))
+      expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 2, heat: 6})}, player))
         .to.throw();
     });
 
@@ -133,7 +133,7 @@ describe('Merchant', () => {
 
       const selectPayment = new SelectPayment('Pay', 8, {}, Units.every(2));
       // Paying 2 MC + 3 titanium (×2) = 8, but spends the reserved 2 MC (leaving 0 MC after)
-      expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 2, titanium: 3})}, player))
+      expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 2, titanium: 3})}, player))
         .to.throw();
     });
   });

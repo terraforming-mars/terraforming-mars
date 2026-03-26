@@ -20,7 +20,7 @@ export type SerializedTurmoil = {
     usedFreeDelegateAction: Array<PlayerId>;
     delegateReserve: Array<SerializedDelegate>;
     parties: Array<SerializedParty>;
-    playersInfluenceBonus: Array<[string, number]>;
+    playersInfluenceBonus: Array<[PlayerId, number]>;
     globalEventDealer: SerializedGlobalEventDealer;
     distantGlobalEvent: GlobalEventName | undefined;
     comingGlobalEvent: GlobalEventName | undefined;

@@ -53,7 +53,7 @@ export class Turmoil {
   public usedFreeDelegateAction = new Set<IPlayer>();
   public delegateReserve = new MultiSet<Delegate>();
   public parties = createParties();
-  public playersInfluenceBonus = new Map<string, number>();
+  public playersInfluenceBonus = new Map<PlayerId, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
   public comingGlobalEvent: IGlobalEvent | undefined;
@@ -600,7 +600,7 @@ export class Turmoil {
       tp.partyLeader = deserializeDelegateOrUndefined(sp.partyLeader, players);
     });
 
-    turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
+    turmoil.playersInfluenceBonus = new Map(d.playersInfluenceBonus);
 
     if (d.distantGlobalEvent) {
       turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);

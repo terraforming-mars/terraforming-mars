@@ -9,11 +9,12 @@ import {oneWayDifference} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
 
-export enum LogType {
-  DREW = 'drew',
-  BOUGHT = 'bought',
-  DREW_VERBOSE = 'drew_verbose',
-}
+export const LogType = {
+  DREW: 'drew',
+  BOUGHT: 'bought',
+  DREW_VERBOSE: 'drew_verbose',
+} as const;
+export type LogType = typeof LogType[keyof typeof LogType];
 
 export type ChooseOptions = {
   keepMax?: number,

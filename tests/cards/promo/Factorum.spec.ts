@@ -74,7 +74,7 @@ describe('Factorum', () => {
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(1);

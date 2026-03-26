@@ -14,10 +14,12 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import * as raw_settings from '@/genfiles/settings.json';
 import {paths} from '@/common/app/paths';
 
 type Data = {
   user: string | undefined;
+  discordClientId: string;
 };
 
 export default defineComponent({
@@ -25,6 +27,7 @@ export default defineComponent({
   data(): Data {
     return {
       user: undefined,
+      discordClientId: raw_settings.discordClientId,
     };
   },
   mounted() {
@@ -56,7 +59,9 @@ export default defineComponent({
       const idx = window.location.href.lastIndexOf('/' + paths.LOGIN);
       const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
       const encoded = encodeURI(url);
-      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&scope=identify&redirect_uri=' + encoded;
+      const clientId = this.discordClientId;
+      if (!clientId) return '';
+      return 'https://discord.com/oauth2/authorize?client_id=' + clientId + '&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {
       return paths.API_LOGOUT;

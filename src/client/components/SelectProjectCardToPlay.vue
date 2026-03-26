@@ -114,7 +114,7 @@ export default defineComponent({
         'lunaArchivesScience',
         'seeds',
         'graphene',
-        'megaCredits',
+        'megacredits',
       ];
     },
     CardName(): typeof CardName {
@@ -230,13 +230,13 @@ export default defineComponent({
       }
 
       // Set MC payment after knowning how much of other resources are consumed
-      this.payment.megaCredits = Math.max(0, Math.min(this.thisPlayer.megaCredits, megacreditBalance));
+      this.payment.megacredits = Math.max(0, Math.min(this.thisPlayer.megacredits, megacreditBalance));
 
       // console.log('units: ' + JSON.stringify(this.payment, null, 2));
       // console.log('balance', megacreditBalance);
 
       // Use as much MC as possible.
-      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megaCredits, 0);
+      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megacredits, 0);
 
       // console.log('balance', megacreditBalance);
 
@@ -282,12 +282,12 @@ export default defineComponent({
           'seeds',
           'graphene',
           'lunaArchivesScience',
-          'megaCredits'] as const) {
+          'megacredits'] as const) {
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
       }
       // See top that sets megacreditBalance
-      // this.payment['megaCredits'] = megacreditBalance;
+      // this.payment['megacredits'] = megacreditBalance;
     },
     canUseTitaniumRegularly(): boolean {
       return this.tags.includes(Tag.SPACE) ||
@@ -295,7 +295,7 @@ export default defineComponent({
     },
     cardCanUse(unit: SpendableResource): boolean {
       switch (unit) {
-      case 'megaCredits':
+      case 'megacredits':
         return true;
       case 'heat':
         return this.playerinput.paymentOptions.heat === true;

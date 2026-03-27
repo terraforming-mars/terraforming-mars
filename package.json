@@ -43,7 +43,7 @@
     "eslint": "^10.0.0",
     "eslint-plugin-vue": "^10.8.0",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
-    "globals": "^16.0.0",
+    "globals": "^17.4.0",
     "jsdom": "^22.1.0",
     "less": "^4.6.4",
     "less-loader": "^12.3.2",

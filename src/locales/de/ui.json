@@ -398,6 +398,8 @@
   "Self-replicating Robots cards": "Selbstreplizierende Roboter Karten",
   "Claimed Underground Resource Tokens": "Beanspruchte unterirdische Ressourcenmarker",
 
+  "Select All": "Wähle alle",
+  "Deselect All": "Auswahl aufheben",
   "Select which cards to take into hand": "Wähle, welche Karten du auf die Hand nehmen möchtest",
   "Select which resource type to steal from all other players.": "Wähle, welche Art von Ressourcen-Produktion du von allen anderen Spielern klauen willst.",
   "Select which production to increase 1 step.": "Wähle, welche Produktion um 1 erhöht werden soll.",
@@ -1199,9 +1201,9 @@
   "Select how to pay for action": "Wähle, wie du für die Aktion bezahlen möchtest",
   "Game Setup Details": "Spielaufbau Details",
 
-  "Distant": "Zukunftiges",
-  "Coming": "Nächstes",
-  "Current": "Aktuelles",
+  "distant": "zukunftiges",
+  "coming": "nächstes",
+  "current": "aktuelles",
   "Turmoil": "Aufruhr",
   "Select an allied party": "Wähle eine verbündete Partei",
   "[Mars First] - Bonus: Gain 1 M€ for each building tag you have - Policy: When you place a tile ON MARS, gain 1 steel": "[Mars First] - Bonus: Erhalte 1 M€ für jedes Gebäudesymbol, das du hast - Politik: Wenn du ein Plättchen auf dem MARS platzierst, erhältst du 1 Stahl.",

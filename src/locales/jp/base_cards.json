@@ -23,7 +23,6 @@
     "Martian Rails": "火星鉄道",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市タイルの数分、1MC獲得.",
 
-    "Capital": "首都",
     "2 Oceans": "海洋2枚",
     "3 Oceans": "海洋3枚",
     "4 Oceans": "海洋4枚",
@@ -32,7 +31,6 @@
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 特殊タイルを配置. 電力産出-2し、MC産出+5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "首都に隣接する海洋1枚毎に1VP.",
 
-    "Asteroid": "標準型小惑星",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "温度+1段階. 2チタン獲得. 望むならプレイヤー1人から最大3植物除去.",
 
     "Comet": "彗星落とし",
@@ -83,7 +81,6 @@
 
     "Predators": "捕食獣",
     "Action: Remove 1 animal from any card and add it to this card.": "アクション：別カード上の1動物除去し、このカード上に+1動物.",
-    "1 VP per animal on this card.": "このカード上の1動物毎に1VP.",
     "(Requires 11% oxygen.)": "条件：酸素11%以上.",
 
     "Space Station": "宇宙ステーション",
@@ -133,10 +130,8 @@
     "Rover Construction": "ローバー建設",
     "Effect: When any city tile is placed, gain 2 M€.": "効果：都市タイル1枚配置毎に2MC獲得.",
 
-    "Deimos Down": "ダイモス落とし",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "温度+3段階. 4建材獲得. 望むならプレイヤー1人から最大8植物除去.",
 
-    "Asteroid Mining": "小惑星採掘",
     "Increase your titanium production 2 steps.": "チタン産出+2.",
 
     "Food Factory": "食料工場",
@@ -148,7 +143,6 @@
     "Carbonate Processing": "炭化プロセス",
     "Decrease your energy production 1 step and increase your heat production 3 steps.": "電力産出-1し、温熱産出+3.",
 
-    "Natural Preserve": "自然保護区",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "条件：酸素4%以下. 他タイルに隣接しないように特殊タイルを配置. MC産出+1.",
 
     "Nuclear Power": "原子力発電",
@@ -210,7 +204,6 @@
     "Mining Expedition": "採掘遠征",
     "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.": "酸素+1段階. 2建材獲得. 望むならプレイヤー1人から最大2植物除去.",
 
-    "Mining Area": "採掘地帯",
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.)",
 
     "Building Industries": "建設ラッシュ",
@@ -219,7 +212,6 @@
     "Land Claim": "所有権主張",
     "Place your marker on a non-reserved area. Only you may place a tile there.": "非予定地に所有権マーカー配置. そのマスに他人は配置できない.",
 
-    "Mining Rights": "鉱山採掘権",
     "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.).",
 
     "Sponsors": "スポンサー",
@@ -256,7 +248,6 @@
     "Increase your energy production 1 step and gain 2 titanium.": "2チタン獲得. 電力産出+1.",
 
     "Ice Asteroid": "氷小惑星",
-    "Place 2 ocean tiles.": "海洋2枚配置.",
 
     "Quantum Extractor": "量子抽出器",
     "Requires 4 science tags. Increase your energy production 4 steps.": "条件：科学タグ4つ以上. 電力産出+4.",
@@ -315,7 +306,6 @@
     "Greenhouses": "温室",
     "Gain 1 plant for each city tile in play.": "配置済みの全都市タイル1枚毎に1植物獲得.",
 
-    "Nuclear Zone": "核実験場",
     "Place this tile and raise temperature 2 steps.": "特殊タイルを配置. 温度+2段階.",
 
     "Tropical Resort": "トロピカル・リゾート",
@@ -387,13 +377,11 @@
     "Urbanized Area": "メトロポリス",
     "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "電力産出-1し、MC産出+2. 他の都市タイル2枚以上に隣接するように都市タイルを配置.",
 
-    "Sabotage": "破壊工作",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "望むならプレイヤー1人から最大3チタン または 4建材 または 7MC除去.",
 
     "Moss": "苔類",
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "条件：海洋3枚以上. 1植物を支払う. 植物産出+1.",
 
-    "Industrial Center": "工業地帯",
     "Action: Spend 7 M€ to increase your steel production 1 step.": "アクション：7MC支払い、建材産出+1.",
     "Place this tile adjacent to a city tile.": "都市タイルに隣接するように特殊タイルを配置.",
 
@@ -409,10 +397,8 @@
     "Subterranean Reservoir": "地下貯水池からの湧水",
     "Place 1 ocean tile.": "海洋1枚配置.",
 
-    "Ecological Zone": "生態ゾーン",
     "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "効果：植物タグ または 動物タグをプレイ時、このカード上に1動物追加.",
     "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "条件：緑地を所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
-    "1 VP per 2 animals on this card.": "このカード上の2動物毎に1VP.",
 
     "Zeppelins": "飛行船",
     "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市タイルの数分、MC産出+1.",
@@ -438,10 +424,8 @@
     "It must be -10 C or colder.": "条件：温度-10℃以下.",
 
     "Advanced Ecosystems": "高度な生態系",
-    "Plant Animal Microbe": "植物タグ、微生物タグ、動物タグ",
     "Requires a plant tag, a microbe tag, and an animal tag.": "条件：植物タグ、微生物タグ、動物タグがそれぞれ1つ以上.",
 
-    "Great Dam": "水力発電",
     "Requires 4 ocean tiles. Increase your energy production 2 steps.": "条件：海洋4枚以上. 電力産出+2.",
 
     "Cartel": "カルテル",
@@ -453,12 +437,10 @@
     "Wave Power": "波力発電",
     "Requires 3 ocean tiles. Increase your energy production 1 step.": "条件：海洋3枚以上. 電力産出+1.",
 
-    "Lava Flows": "溶岩流",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "温度+2段階. 火山地帯に特殊タイル配置. ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
 
     "Power Plant": "火力発電",
 
-    "Mohole Area": "モホール掘削エリア",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "温熱産出+4. 海洋予定地に特殊タイルを配置.",
 
     "Large Convoy": "大輸送船団",
@@ -492,7 +474,6 @@
     "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "温熱産出-xし、MC産出+x.",
 
     "Adaptation Technology": "適応技術",
-    "Global requirements": "グローバルパラメーター参照",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "効果：グローバルパラメーター参照時、それらの条件を+2 または -2段階してもよい.",
 
     "Caretaker Contract": "管理契約",
@@ -510,9 +491,6 @@
     "(Action: Remove 3 microbes to increase your TR 1 step.)": "アクション：このカード上から3微生物除去し、TR+1段階.",
     "Add 3 microbes to this card.": "このカード上に3微生物追加.",
     "Remove 3 microbes to increase your terraform rating 1 step": "3微生物を除去し、TR+1段階",
-    "Remove microbes": "微生物を除去",
-    "Add 1 microbe to this card": "このカード上に1微生物追加.",
-    "Add microbe":"1微生物追加",
 
     "Industrial Microbes": "産業用バクテリア",
     "Increase your energy production and your steel production 1 step each.": "建材産出+1. 電力産出+1.",
@@ -644,7 +622,6 @@
     "Increase your M€ production 5 steps.": "MC産出+5.",
     "1 VP for every 3rd city in play.": "都市3枚毎に1VP.",
 
-    "Restricted Area": "立ち入り制限区",
     "Action: Spend 2 M€ to draw a card.": "アクション：2MC支払い、1ドロー.",
     "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each": "効果：金星タグをプレイ時、このカード上の浮遊体を3MCとして支払ってもよい.",
 
@@ -688,13 +665,9 @@
   "HYDROGEN TO VENUS":"金星への水素",
 
   "Plant Microbe Animal":"植物タグ、微生物タグ、動物タグ.",
-  "Jovian":"木星",
   "max 3 Oceans":"海洋3枚以下.",
-  "Forest":"緑地タイル",
   "2 Power":"電力タグ2つ以上.",
   "7 Science":"科学タグ7つ以上.",
-  "Titanium production":"チタン産出",
-  "Steel production":"建材産出",
   "4 Science":"科学タグ4つ以上.",
   "2 Cities":"都市タイル2枚以上",
   "Standard projects":"標準プロジェクト",
@@ -709,8 +682,5 @@
   "Increase your energy production 2 steps": "電力産出+2.",
   "Increase your energy production 3 steps": "電力産出+3.",
   "Increase your plant production 1 step": "植物産出+1.",
-  "Remove 2 microbes to raise temperature 1 step": "このカード上から2微生物除去し、温度+1段階.",
-  "Select card to add 2 microbes": "2微生物獲得.",
-  "Add microbes": "微生物獲得",
-  "Select a space with a steel or titanium bonus adjacent to one of your tiles": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスを選択."
+  "Select card to add 2 microbes": "2微生物獲得."
 }

@@ -1,6 +1,5 @@
 {
   "Psychrophiles": "Psychrofile",
-    "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
     "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Roślinności, możesz wydać jednostki mikrobów znajdujące się na tej karcie. Każda z nich jest warta 2 M€.",
     "Temperature must be -20 C or lower.": "Temperatura wynosi co najwyżej -20°C.",
 
@@ -8,13 +7,11 @@
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Gdy wykonujesz akcję, traktujesz symbol Uniwersalny jak dowolny wybrany symbol.",
 
   "SF Memorial": "Pomnik Twórców Science Fiction",
-    "Draw 1 card.": "Dobierz 1 kartę.",
 
   "Martian Survey": "Misja Badawcza",
     "Oxygen must be 4% or lower. Draw two cards.": "Poziom tlenu wynosi co najwyżej 4%. Dobierz 2 karty.",
 
   "House Printing": "Drukowane Domy",
-    "Increase your steel production 1 step.": "Podnieś swoją produkcję stali o 1 poziom.",
 
   "Space Hotels": "Hotele Kosmiczne",
     "Requires 2 Earth tags. Increase M€ production 4 steps.": "Musisz posiadać co najmniej 2 symbole Ziemi. Podnieś swoją produkcję M€ o 4 poziomy.",

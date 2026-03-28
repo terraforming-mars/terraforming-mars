@@ -43,7 +43,7 @@ export class Atmoscoop extends Card implements IProjectCard {
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       const cost = player.getCardCost(this);
-      if (!player.canAfford(cost)) {
+      if (!player.canAfford({cost, titanium: true})) {
         return false;
       }
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.

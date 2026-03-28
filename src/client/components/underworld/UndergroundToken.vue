@@ -8,17 +8,19 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'UndergroundToken',
   props: {
     token: {
       type: Object as () => ClaimedToken,
+      required: true,
     },
     location: {
       type: String as () => 'board' | 'player-home' | 'tag-count',
+      required: true,
     },
   },
   computed: {

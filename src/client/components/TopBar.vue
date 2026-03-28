@@ -1,6 +1,6 @@
 <template>
     <div :class="formatCssClass()" :key="componentKey">
-      <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" actionLabel="" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
+      <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
       <div class="top-bar-collapser" v-on:click="toggleBar()">
         <img src="assets/arrows_left.png">
       </div>
@@ -9,16 +9,17 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'top-bar',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
   },
   components: {

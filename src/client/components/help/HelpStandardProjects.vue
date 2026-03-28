@@ -20,11 +20,11 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'HelpStandardProjects',
   components: {
     Card,

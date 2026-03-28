@@ -1,18 +1,16 @@
 <template>
-  <div id="games-overview">
+  <div id="games-overview" class="games-overview-container">
     <h1 v-i18n>{{ constants.APP_NAME }} — Games Overview</h1>
       <p v-i18n>The following games are available on this server:</p>
-      <ul>
-        <li v-for="entry in entries" :key="entry.id">
-          <game-overview :id="entry.id" :game="entry.game" :status="entry.status"></game-overview>
-        </li>
-    </ul>
+      <table>
+        <game-overview v-for="entry in entries" :key="entry.id" :id="entry.id" :game="entry.game" :status="entry.status"></game-overview>
+      </table>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
@@ -21,7 +19,7 @@ import {GameId, ParticipantId} from '@/common/Types';
 type FetchStatus = {
   id: GameId;
   game: SimpleGameModel | undefined;
-  status: string;
+  status: 'loading' | 'error' | 'done';
 }
 type DataModel = {
   entries: Array<FetchStatus>,
@@ -30,7 +28,7 @@ type DataModel = {
 // Copied from routes/Game.ts and probably IDatabase. Should be centralized I suppose
 type Response = {gameId: GameId, participants: Array<ParticipantId>};
 
-export default Vue.extend({
+export default defineComponent({
   name: 'games-overview',
   data(): DataModel {
     return {

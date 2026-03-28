@@ -102,7 +102,7 @@
   "Phobos Space Haven": "Phobos-avaruussatama",
   "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Lisää titaanituotantoasi 1 askel ja aseta kaupunkilaatta VARATULLE ALUEELLE.",
 
-  "Black Polar Dust": "Musta napapolyly",
+  "Black Polar Dust": "Musta napapöly",
   "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Aseta merilaatta. Vähennä M€-tuotantoasi 2 askelta ja lisää lämpötuotantoasi 3 askelta.",
 
   "Arctic Algae": "Arktiset levät",
@@ -143,7 +143,7 @@
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
   "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
 
-  "GHG Producing Bacteria": "Kasvihuonekaasuja tuottavat bakteerit",
+  "GHG Producing Bacteria": "Kasvihuonebakteerit",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
   "Action: Remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
   "Requires 4% oxygen.": "Vaatii 4 % happea.",
@@ -244,7 +244,7 @@
   "Building Industries": "Rakennusteollisuus",
   "Decrease your energy production 1 step and increase your steel production 2 steps.": "Vähennä energiatuotantoasi 1 askel ja lisää terästuotantoasi 2 askelta.",
 
-  "Land Claim": "Maanvaatimus",
+  "Land Claim": "Aluevaatimus",
   "Place your marker on a non-reserved area. Only you may place a tile there.": "Aseta merkkisi vapaalle alueelle. Vain sinä saat asettaa sinne laatan.",
 
   "Mining Rights": "Kaivosoikeudet",
@@ -683,7 +683,7 @@
   "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "VAIKUTUS: Kun kaupunkilaatta asetetaan, tämä mukaan lukien, lisää M€-tuotantoasi 1 askel.",
   "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.": "Vähennä energiatuotantoasi 1 askel ja M€-tuotantoasi 2 askelta. Aseta kaupunkilaatta.",
 
-  "Energy Tapping": "Energian napauttaminen",
+  "Energy Tapping": "Energian vapauttaminen",
   "Decrease any energy production 1 step and increase your own 1 step.": "Vähennä mitä tahansa energiatuotantoa 1 askel ja lisää omaasi 1 askel.",
 
   "Underground Detonations": "Maanalaiset räjäytykset",

@@ -318,6 +318,6 @@
     "Excavate 1 underground resource for every 3 cities in play.": "都市3枚毎に、地下資源を採掘する.",
 
     "Whales": "クジラ",
-    "Effect: Whenever you would gain an ocean when there are already 9 oceans on the board, add an animal to this card": "効果：海洋を配置しようとした時、海洋がすでに9枚配置されていたら、このカード上に1動物追加.",
+    "Effect: Whenever you would place an ocean when there are already 9 oceans on the board, add an animal to this card": "効果：海洋を配置しようとした時、海洋がすでに9枚配置されていたら、このカード上に1動物追加.",
     "Requires 6 oceans. 1 VP for each animal on this card.": "条件：海洋6枚以上. このカード上の1動物毎に1VP"
 }

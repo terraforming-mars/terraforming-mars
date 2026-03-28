@@ -21,7 +21,6 @@ import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuild
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {Priority} from '../deferredActions/Priority';
 import {message} from '../logs/MessageBuilder';
-import {Units} from '../../common/Units';
 
 export const TRACKS = PlanetaryTracks.initialize();
 
@@ -205,7 +204,7 @@ export class PathfindersExpansion {
     case 'resource':
       player.defer(new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(1)))
         .andThen((unit) => {
-          player.stock.add(Units.ResourceMap[unit], 1, {log: true});
+          player.stock.add(unit, 1, {log: true});
           return undefined;
         }));
       break;

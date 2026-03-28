@@ -71,6 +71,6 @@ describe('ElysiumBoard', () => {
       {id: '62', spaceType: 'land', x: 7, y: 8, bonus: [3]},
       {id: '63', spaceType: 'land', x: 8, y: 8, bonus: [1, 1]},
     ]);
-    expect(board.volcanicSpaceIds).deep.eq(['37', '14', '08', '20']);
+    expect(board.volcanicSpaceIds).deep.eq(['08', '14', '20', '37']);
   });
 });

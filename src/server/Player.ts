@@ -5,7 +5,7 @@ import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCar
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
-import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
 import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
@@ -506,7 +506,7 @@ export class Player implements IPlayer {
 
       if (removingPlayer !== undefined && removingPlayer !== this) this.resolveInsurance();
 
-      if (options?.log ?? true === true) {
+      if (options?.log ?? true) {
         this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
           b.player(options?.removingPlayer ?? this)
             .number(amountRemoved)
@@ -787,7 +787,7 @@ export class Player implements IPlayer {
 
   public pay(payment: Payment) {
     const standardUnits = Units.of({
-      megacredits: payment.megaCredits,
+      megacredits: payment.megacredits,
       steel: payment.steel,
       titanium: payment.titanium,
       plants: payment.plants,
@@ -819,7 +819,7 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
     removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
 
-    if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
+    if (payment.megacredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
     }
   }
@@ -827,6 +827,13 @@ export class Player implements IPlayer {
   public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: CardAction = 'add'): void {
     if (payment !== undefined) {
       this.pay(payment);
+    }
+
+    const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
+    if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
+      if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
+        selectedCard.resourceCount = 0;
+      }
     }
 
     ColoniesHandler.maybeActivateColonies(this.game, selectedCard);
@@ -862,13 +869,6 @@ export class Player implements IPlayer {
         this.cardsInHand.splice(projectCardIndex, 1);
       } else if (preludeCardIndex !== -1) {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
-      }
-
-      const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
-      if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
-        if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
-          selectedCard.resourceCount = 0;
-        }
       }
     }
 
@@ -907,11 +907,7 @@ export class Player implements IPlayer {
 
     /* A player responding to their own cards played. */
     for (const effectCard of this.playedCards) {
-      if (isICorporationCard(effectCard)) {
-        this.defer(effectCard.onCardPlayedForCorps?.(this, card));
-      } else {
-        this.defer(effectCard.onCardPlayed?.(this, card));
-      }
+      this.defer(effectCard.onCardPlayed?.(this, card));
     }
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
@@ -927,7 +923,6 @@ export class Player implements IPlayer {
     PathfindersExpansion.onCardPlayed(this, card);
   }
 
-  /* Visible for testing */
   public playActionCard(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',
@@ -1046,7 +1041,8 @@ export class Player implements IPlayer {
     if (this.game.allMilestonesClaimed()) {
       return [];
     }
-    if ((this.canAfford(this.milestoneCost()) || this.playedCards.has(CardName.VANALLEN))) {
+    const cost = this.milestoneCost();
+    if (cost === 0 || this.canAfford(cost)) {
       return this.game.milestones
         .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
     }
@@ -1057,20 +1053,30 @@ export class Player implements IPlayer {
     if (this.game.milestoneClaimed(milestone)) {
       throw new Error(milestone.name + ' is already claimed');
     }
-    this.game.claimedMilestones.push({
-      player: this,
-      milestone: milestone,
-    });
-    // VanAllen CEO Hook for Milestones
-    const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
-    if (vanAllen !== undefined) {
-      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+
+    const recordClaim = () => {
+      this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
+      this.game.claimedMilestones.push({
+        player: this,
+        milestone: milestone,
+      });
+      // VanAllen CEO Hook for Milestones
+      const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
+      if (vanAllen !== undefined) {
+        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+      }
+    };
+
+    if (this.playedCards.has(CardName.VANALLEN)) {
+      recordClaim();
+    } else {
+      const baseCost = this.milestoneCost();
+      const cost = baseCost + ((milestone.name === 'Briber') ? 12 : 0);
+      const reserveUnits = milestone.name === 'Merchant' ? Units.every(2) : Units.EMPTY;
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone', reserveUnits: reserveUnits})).andThen(() => {
+        recordClaim();
+      });
     }
-    if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
-      const cost = this.milestoneCost();
-      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
-    }
-    this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
   }
 
   private isStagedProtestsActive() {
@@ -1082,8 +1088,8 @@ export class Player implements IPlayer {
     return stagedProtests?.generationUsed === this.game.generation;
   }
 
-  private milestoneCost() {
-    if (this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
+  public milestoneCost() {
+    if (this.playedCards.has(CardName.VANALLEN) || this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
       return 0;
     }
     return this.isStagedProtestsActive() ? MILESTONE_COST + 8 : MILESTONE_COST;
@@ -1248,9 +1254,12 @@ export class Player implements IPlayer {
     return true;
   }
 
+  /**
+   * Returns the most you can spend if the given reserved units are excluded.
+   */
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
-      megaCredits: this.megaCredits - reserveUnits.megacredits,
+      megacredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
       plants: this.plants - reserveUnits.plants,
@@ -1291,7 +1300,7 @@ export class Player implements IPlayer {
     };
 
     const usable: {[key in SpendableResource]: boolean} = {
-      megaCredits: true,
+      megacredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
       heat: this.canUseHeatAsMegaCredits,
@@ -1366,6 +1375,10 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
+    // Short circuit when players have enough MC.
+    if (typeof(o) === 'number' && o <= this.stock.megacredits) {
+      return true;
+    }
     const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
     return this.canAffordInternal(options).canAfford;
   }
@@ -1497,20 +1510,20 @@ export class Player implements IPlayer {
         orOptions.options.push(this.passOption());
       }
 
-      this.setWaitingFor(orOptions, () => {
+      this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
         if (this.pendingInitialActions.length === 0) {
           this.incrementActionsTaken();
         }
         this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
         this.takeAction();
-      });
+      }));
       return;
     }
 
-    this.setWaitingFor(this.getActions(), () => {
+    this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
       this.incrementActionsTaken();
       this.takeAction();
-    });
+    }));
   }
 
   private incrementActionsTaken(): void {
@@ -1523,7 +1536,6 @@ export class Player implements IPlayer {
       .setTitle(this.actionsTakenThisRound === 0 ? 'Take your first action' : 'Take your next action')
       .setButtonLabel('Take action');
 
-    // VanAllen can claim milestones for free:
     const claimableMilestones = this.claimableMilestones();
     if (claimableMilestones.length > 0) {
       const milestoneOption = new OrOptions().setTitle('Claim a milestone');

@@ -50,7 +50,7 @@
           <turmoil :turmoil="game.turmoil"/>
         </template>
 
-        <template v-if="game.gameOptions.expansions.moon">
+        <template v-if="game.moon">
           <a class="hotkey-target"></a>
           <MoonBoard :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
         </template>
@@ -244,7 +244,7 @@
           <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
           <a name="moonBoard" class="player_home_anchor"></a>
-          <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"></MoonBoard>
+          <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
         </div>
       </details>
     </div>
@@ -272,7 +272,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';
@@ -306,6 +306,7 @@ import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
+import {APP_NAME} from '@/common/constants';
 
 export interface PlayerHomeModel {
   showHand: boolean;
@@ -321,7 +322,7 @@ class TerraformedAlertDialog {
   static shouldAlert = true;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'player-home',
   data(): PlayerHomeModel {
     const preferences = getPreferences();
@@ -352,9 +353,11 @@ export default Vue.extend({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     settings: {
       type: Object as () => typeof raw_settings,
+      required: true,
     },
   },
   computed: {
@@ -536,10 +539,13 @@ export default Vue.extend({
       return !getCardOrThrow(cardModel.name).hasAction;
     },
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('keydown', this.navigatePage);
   },
   mounted() {
+    const playerCount = this.playerView.players.length;
+    const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+    document.title = `${gameType} | ${APP_NAME}`;
     window.addEventListener('keydown', this.navigatePage);
     if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && getPreferences().show_alerts) {
       alert('Mars is Terraformed!');

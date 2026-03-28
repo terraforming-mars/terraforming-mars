@@ -14,23 +14,26 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectResourceModel} from '@/common/models/PlayerInputModel';
 import {SelectResourceResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectResource',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectResourceModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectResourceResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,

@@ -3,7 +3,7 @@
         <div class="player-tags-main">
             <tag-count tag="vp" :count="hideVpCount ? '?' : player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" />
             <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-              <tag-count tag="escape" :count="escapeVelocityPenalty" :size="'big'" type="'main'" :showWhenZero="true"/>
+              <tag-count tag="escape" :count="escapeVelocityPenalty" :size="'big'" :type="'main'" :showWhenZero="true"/>
             </div>
             <tag-count tag="tr" :count="player.terraformRating" :size="'big'" :type="'main'"/>
             <tag-count v-if="player.handicap !== undefined" :tag="'handicap'" :count="player.handicap" :size="'big'" :type="'main'" :showWhenZero="true"/>
@@ -32,7 +32,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
@@ -45,7 +45,7 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CardName} from '@/common/cards/CardName';
 
-type InterfaceTagsType = Tag | SpecialTags | 'all' | 'separator';
+type InterfaceTagsType = Tag | SpecialTags | 'separator';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
@@ -118,7 +118,6 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.underworldData.corruption;
   case SpecialTags.NEGATIVE_VP:
     return player.victoryPointsBreakdown.negativeVP;
-  case 'all':
   case 'separator':
     return -1;
   default:
@@ -126,14 +125,16 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   }
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerTags',
   props: {
     playerView: {
       type: Object as () => ViewModel,
+      required: true,
     },
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
     hideZeroTags: {
       type: Boolean,
@@ -149,7 +150,7 @@ export default Vue.extend({
     },
   },
   data() {
-    type TagDetails = Record<InterfaceTagsType, TagDetail>;
+    type TagDetails = Record<InterfaceTagsType | 'all', TagDetail>;
 
     // Start by giving every entry a default value
     // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
@@ -157,7 +158,7 @@ export default Vue.extend({
     const details: TagDetails = Object.fromEntries(x);
 
     // Initialize all's card discount.
-    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0, halfPoints: 0};
+    details['all'] = {name: 'all' as InterfaceTagsType, discount: this.player?.cardDiscount ?? 0, points: 0, count: 0, halfPoints: 0};
 
     // For each card
     for (const card of this.player.tableau) {

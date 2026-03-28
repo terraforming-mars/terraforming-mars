@@ -20,6 +20,8 @@ export type Options = {
   played: boolean | CardName.SELF_REPLICATING_ROBOTS
   /** Default is false. If true then show the name of the card owner below. */
   showOwner: boolean,
+  /** Default is false. If true, show a "Select All" / "Deselect All" toggle button. */
+  showSelectAll: boolean,
 }
 export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T>> {
   public config: Options;
@@ -38,6 +40,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
       enabled: config?.enabled,
       played: config?.played ?? true,
       showOwner: config?.showOwner ?? false,
+      showSelectAll: config?.showSelectAll ?? false,
     };
     this.buttonLabel = buttonLabel;
   }
@@ -57,6 +60,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
       showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false) ?? false,
       selectBlueCardAction: this.config.selectBlueCardAction,
       showOwner: this.config.showOwner === true,
+      showSelectAll: this.config.showSelectAll === true,
     };
   }
 

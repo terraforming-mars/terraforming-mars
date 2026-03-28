@@ -8,15 +8,16 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'stacked-cards',
   props: {
     cards: {
-      type: Array as () => Array<CardModel>,
+      type: Array as () => ReadonlyArray<CardModel>,
+      required: true,
     },
   },
   components: {

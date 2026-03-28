@@ -55,7 +55,7 @@ export const GRAPHENE_VALUE = 4;
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST = 6;
 export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
-export const VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST = 4;
+export const VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST = 4;
 export const TERRA_CIMMERIA_COLONY_COST = 5;
 
 // Moon
@@ -102,3 +102,6 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> =
 
 export const APP_NAME = 'Terraforming Mars';
 export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
+export const DEFAULT_WAITING_FOR_TIMEOUT = 1000;
+export const DEFAULT_LOG_LENGTH = 50;
+export const DEFAULT_URL_ROOT = 'http://localhost:8080';

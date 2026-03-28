@@ -11,19 +11,21 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import PlayerTimer from '@/client/components/overview/PlayerTimer.vue';
 import {TimerModel} from '@/common/models/TimerModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'player-status',
   props: {
     timer: {
       type: Object as () => TimerModel,
+      required: true,
     },
     actionLabel: {
       type: String as () => ActionLabel,
+      required: true,
     },
     showTimer: {
       type: Boolean,

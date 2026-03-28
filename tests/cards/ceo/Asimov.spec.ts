@@ -25,7 +25,7 @@ describe('Asimov', () => {
     expect(game.awards).length.greaterThan(0);
 
     function score(model: FundedAwardModel, p: TestPlayer): number {
-      return model.scores.find((s) => s.playerColor === p.color)!.playerScore;
+      return model.scores.find((s) => s.color === p.color)!.score;
     }
 
     const awardModel = Server.getAwards(game);

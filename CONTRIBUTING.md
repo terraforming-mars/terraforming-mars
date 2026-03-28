@@ -3,9 +3,8 @@
 We like external contributions! Every internal contributor started as an external contributor.
 (Except the founder, of course.)
 
-Our contributors vary in experience. Many of our contributors have very little software development
-experience, but a great understanding of the game, and some have over 30 years of software industry
-experience. Wherever you fit in that level of experience, your contribution is welcome.
+Our contributors vary in experience, from people new to software to ones with decades of
+industry experience. Wherever you fit in that level of experience, your contribution is welcome.
 
 Before taking on a substantial amount of work for your favorite feature, please first discuss the
 change you wish to make via issue, email, Discord, or any other method with the repository owners.
@@ -41,6 +40,7 @@ If these things seem difficult, just ask us for help, even if your code is in a 
 Once in a while the group will decide that it doesn’t make sense to include a particular feature or change. This is why we’d prefer you contact us before spending all that time writing a feature! We commit to giving a clear reason why we are declining a feature. While not ideal, remember that you can fork the repo and host your own copy of the game.
 
 ## Technical Considerations
+
 ### Technical Compatibility
 
 We endeavor to have this app run on home Windows, Linux, Mac computers, and support modern popular browsers (sorry, IE11) so any changes that might seem browser / platform specific may get extra scrutiny.
@@ -52,16 +52,39 @@ This project is designed to run on single node servers or locally. Any change sh
 ## Pull Requests
 
 Your pull requests should either consist of:
+
 1. one or more commits addressing the same issue, or
 2. several commits, each independently addressing an issue.
 
 It is tempting to write a pull request that addresses two things at once. You might be asked to either split them into two pull requests, or two separate commits in the same pull request.
 Only do that second one if you know how to rebase and update each commit separately.
 
-If you're writing a complicated pull request, you can do the reviewer a big favor by splitting it into individual
-commits progressing the feature through several steps. Each of those steps should compile, though, so their
-intent is clear.
+### Many Small Pull Requests is Better Than a Big One
+
+If you're writing a complicated pull request that can be broken into smaller ones, you'll be asked to do it. It makes
+review and comprehension that much easier. Smaller PRs also reveal issues that might not have been apparent in large PRs,
+like missing tests, bad abstractions, or even just bugs.
+
+## AI Policy
+
+Contributions made with AI assistance are acceptable, but under some conditions.
+
+### Review is a human conversation
+
+A human reviews all pull requests, and we expect a human on the other side of the discussion.
+**PRs opened by AI Agents will be closed without further discussion.** Ref: [This story](https://www.reddit.com/r/technology/comments/1r39upr/an_ai_agent_just_tried_to_shame_a_software/).
+
+### We expect you to understand what you submit
+
+You are responsible for what you submit. You must be able to explain what it does, why it's structured the way it is,
+whether the code matches existing standards, and how it fits into the codebase. Take some time to understand your work.
+
+### Code quality
+
+AI-generated code has recognizable anti-patterns: verbosity, nonexistent APIs, overzealous defensive tests,  We apply
+the same standards to all contributions regardless of how they were written. Code that looks like it didn't get a
+careful pass before submission will be sent back for revision.
 
 ## Questions?
 
-[Post an issue](https://github.com/bafolts/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/VR8TbrD)
+[Post an issue](https://github.com/terraforming-mars/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/VR8TbrD)

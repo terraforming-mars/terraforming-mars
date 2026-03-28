@@ -27,7 +27,7 @@
 <script lang="ts">
 /* global RequestInit */
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -57,20 +57,24 @@ type DataModel = {
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'waiting-for',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     settings: {
       type: Object as () => typeof raw_settings,
+      required: true,
     },
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
+      default: undefined,
     },
   },
   data(): DataModel {
@@ -94,7 +98,9 @@ export default Vue.extend({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + this.$t(constants.APP_NAME);
+      const playerCount = this.playerView.players.length;
+      const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+      document.title = next + ' ' + `${gameType} | ${this.$t(constants.APP_NAME)}`;
     },
     onsave(out: InputResponse) {
       this.fetchPlayerInput(
@@ -154,7 +160,7 @@ export default Vue.extend({
         root.playerkey++;
         root.screen = 'player-home';
         if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-          window.location = window.location as any as (string & Location); // eslint-disable-line no-self-assign
+          window.location = window.location as any as (string & Location);
         }
         this.savedPlayerView = undefined;
       } else {
@@ -241,7 +247,9 @@ export default Vue.extend({
     },
   },
   mounted() {
-    document.title = this.$t(constants.APP_NAME);
+    const playerCount = this.playerView.players.length;
+    const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+    document.title = `${gameType} | ${this.$t(constants.APP_NAME)}`;
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

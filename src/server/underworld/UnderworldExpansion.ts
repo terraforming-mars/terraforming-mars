@@ -259,7 +259,10 @@ export class UnderworldExpansion {
     const game = player.game;
     validateUnderworldExpansion(game);
     if (space.tile !== undefined) {
-      throw new Error(`cannot excavate space ${space.id} which has a tile.`);
+      // Players may still excavate from Martian Nature Wonders and Rey Skywalker
+      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
+        throw new Error(`cannot excavate space ${space.id} which has a tile.`);
+      }
     }
 
     if (space.undergroundResources === undefined) {

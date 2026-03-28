@@ -14,9 +14,8 @@ export class MarsBoard extends Board {
 
   public constructor(
     spaces: ReadonlyArray<Space>,
-    noctisCitySpaceId?: SpaceId | undefined,
-    volcanicSpaceIds?: ReadonlyArray<SpaceId>) {
-    super(spaces, noctisCitySpaceId, volcanicSpaceIds);
+    noctisCitySpaceId?: SpaceId | undefined) {
+    super(spaces, noctisCitySpaceId);
     this.edges = this.computeEdges();
   }
 
@@ -193,7 +192,7 @@ export class MarsBoard extends Board {
       if (space.id === this.noctisCitySpaceId) {
         return false;
       }
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
+      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE || space.spaceType === SpaceType.DEFLECTION_ZONE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;
     });

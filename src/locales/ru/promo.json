@@ -195,7 +195,7 @@
     "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":
     "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 M€",
 
-    "Astrodrill": "",
+    "AstroDrill": "",
     "You start with 38 M€ and 3 asteroid resources.": "Вы начинаете c 38 М€ и 3 астероидами",
     "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":
     "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
@@ -234,5 +234,13 @@
     "Spend 1 microbe from ANY of your cards to gain 5 plants": "Потратьте 1 микроб с любой вашей карты, чтобы получить 5 растений.",
 
 	"Supermarkets": "Супермаркеты",
-    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2."
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2.",
+
+    "Weather Balloons": "Метеозонды",
+    "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "Действие: Добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы получить 1 М€ за каждый город на Марсе.",
+    "Draw 1 card.": "Возьмите 1 карту.",
+
+    "Albedo Plants": "Альбедо растения",
+    "(Effect: When you play a plant tag, including this, gain 3 heat.)": "(Эффект: Каждый раз, когда вы разыгрываете метку растений (включая эту), получите 3 тепла.)",
+    "(Increase plant production 1 step. Gain 1 plant.)": "(Повысьте своё производство растений на 1. Получите 1 растение.)"
 }

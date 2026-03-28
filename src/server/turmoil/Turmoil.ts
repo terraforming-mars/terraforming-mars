@@ -28,14 +28,14 @@ export type Delegate = IPlayer | NeutralPlayer;
 
 export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
+export const ALL_PARTIES = {
   [PartyName.MARS]: MarsFirst,
   [PartyName.SCIENTISTS]: Scientists,
   [PartyName.UNITY]: Unity,
   [PartyName.GREENS]: Greens,
   [PartyName.REDS]: Reds,
   [PartyName.KELVINISTS]: Kelvinists,
-};
+} satisfies Record<PartyName, PartyFactory>;
 
 function createParties(): ReadonlyArray<IParty> {
   return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];
@@ -53,7 +53,7 @@ export class Turmoil {
   public usedFreeDelegateAction = new Set<IPlayer>();
   public delegateReserve = new MultiSet<Delegate>();
   public parties = createParties();
-  public playersInfluenceBonus = new Map<string, number>();
+  public playersInfluenceBonus = new Map<PlayerId, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
   public comingGlobalEvent: IGlobalEvent | undefined;
@@ -600,7 +600,7 @@ export class Turmoil {
       tp.partyLeader = deserializeDelegateOrUndefined(sp.partyLeader, players);
     });
 
-    turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
+    turmoil.playersInfluenceBonus = new Map(d.playersInfluenceBonus);
 
     if (d.distantGlobalEvent) {
       turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);

@@ -1,11 +1,11 @@
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {expect} from 'chai';
-import {Hollandia} from '../../src/server/boards/Hollandia';
+import {HollandiaBoard} from '../../src/server/boards/HollandiaBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
 describe('HollandiaBoard', () => {
   it('sanity test', () => {
-    const board = Hollandia.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    const board = HollandiaBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {id: '01', spaceType: 'colony', x: -1, y: -1, bonus: []},
       {id: '02', spaceType: 'colony', x: -1, y: -1, bonus: []},

@@ -118,6 +118,7 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showCorporationList: false,
   showPreludesList: false,
   showBannedCards: false,
+  showCeosList: false,
   clonedGameId: undefined,
   showIncludedCards: false,
   customColonies: [],

@@ -22,6 +22,7 @@ import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/Priva
 import {Tag} from '../../src/common/cards/Tag';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/common/boards/SpaceName';
+import {TunnelingLoophole} from '../../src/server/cards/underworld/TunnelingLoophole';
 
 describe('UnderworldExpansion', () => {
   let player1: TestPlayer;
@@ -401,6 +402,10 @@ describe('UnderworldExpansion', () => {
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(space.excavator?.id).eq(player1.id);
   });
 
   it('Martian Nature Wonders space is identifiable and excavatable', () => {
@@ -409,9 +414,27 @@ describe('UnderworldExpansion', () => {
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(space.excavator?.id).eq(player1.id);
   });
 
-  // TODO(kberg): Test excavatablespaces override
+  it('excavatableSpaces - TunnelingLoophole overrides placement restrictions', () => {
+    // Give player1 one excavated space so placement restrictions kick in.
+    UnderworldExpansion.excavatableSpaces(player1)[0].excavator = player1;
+    const restricted = UnderworldExpansion.excavatableSpaces(player1);
+    // Without TunnelingLoophole, only spaces adjacent to player1's excavation are available.
+    expect(restricted.length).to.be.greaterThan(0);
+
+    // With TunnelingLoophole active this generation, all excavatable spaces are available.
+    const card = new TunnelingLoophole();
+    card.generationUsed = game.generation;
+    player1.playedCards.push(card);
+
+    const unrestricted = UnderworldExpansion.excavatableSpaces(player1);
+    expect(unrestricted.length).to.be.greaterThan(restricted.length);
+  });
 
   it('excavate', () => {
     player1.plants = 0;

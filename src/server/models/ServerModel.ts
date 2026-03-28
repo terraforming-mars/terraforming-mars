@@ -148,14 +148,15 @@ export class Server {
       let scores: Array<MilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < MAX_MILESTONES) {
         scores = game.players.map((player) => ({
-          playerColor: player.color,
-          playerScore: milestone.getScore(player),
+          color: player.color,
+          score: milestone.getScore(player),
+          claimable: milestone.canClaim(player),
         }));
       }
 
       milestoneModels.push({
         playerName: claimed?.player.name,
-        playerColor: claimed?.player.color,
+        color: claimed?.player.color,
         name: milestone.name,
         scores,
       });
@@ -174,14 +175,14 @@ export class Server {
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < MAX_AWARDS || funded !== undefined) {
         scores = game.players.map((player) => ({
-          playerColor: player.color,
-          playerScore: scorer.get(player),
+          color: player.color,
+          score: scorer.get(player),
         }));
       }
 
       awardModels.push({
         playerName: funded?.player.name,
-        playerColor: funded?.player.color,
+        color: funded?.player.color,
         name: award.name,
         scores: scores,
       });
@@ -230,8 +231,8 @@ export class Server {
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getInfluence(player), () => 0),
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
-      megaCredits: player.megaCredits,
-      megaCreditProduction: player.production.megacredits,
+      megacredits: player.megaCredits,
+      megacreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
@@ -273,12 +274,14 @@ export class Server {
         negativeVP: 0,
       },
       victoryPointsByGeneration: [],
+      globalParameterSteps: {},
     };
 
     if (game.phase === Phase.END || game.isSoloMode() ||
         game.gameOptions.showOtherPlayersVP === true || modelIsForThisPlayer) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
+      model.globalParameterSteps = player.globalParameterSteps;
     }
 
     return model;

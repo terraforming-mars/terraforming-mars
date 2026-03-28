@@ -1,0 +1,143 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name":"Run Server",
+        "type":"node",
+        "request":"launch",
+        "cwd":"${workspaceRoot}",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
+        "args":[
+           "-r",
+           "tsconfig-paths/register",
+           "${workspaceRoot}/src/server/server.ts"
+        ],
+        "restart":true,
+        "sourceMaps": true,
+        "outFiles": ["**/*", "!build/**", "!node_modules/**"],
+        "env": {
+          // Enable to simulate Heroku's environment with limited memory.
+          // "NODE_OPTIONS": "--max-old-space-size=256"
+        },
+        "outputCapture": "std",
+      },
+      {
+        "name": "Single Unit Test",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
+        "request": "launch",
+        "type": "node",
+        "args": [
+          "-p",
+          "tests/tsconfig.json",
+          "-r",
+          "tsconfig-paths/register",
+          "-r",
+          "tests/testing/setup.ts",
+          "-r",
+          "tests/testing/log-the-log.ts",
+          "${file}",
+          "--no-timeouts",
+          "--reporter-option",
+          "maxDiffSize=100000",
+        ],
+        "outFiles": ["**/*", "!build/**", "!node_modules/**"],
+      },
+      {
+        // This allows you to run a single test in a file, by selecting the
+        // text in the test definition.
+        "name": "Single Unit Test: Grep",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
+        "request": "launch",
+        "type": "node",
+        "args": [
+          "-p",
+          "tests/tsconfig.json",
+          "-r",
+          "tests/testing/setup.ts",
+          "${file}",
+          "--no-timeouts",
+          "-g",
+          "${selectedText}"
+        ],
+        "outFiles": ["**/*", "!build/**", "!node_modules/**"],
+      },
+      {
+        "name": "Single Integration Test",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
+        "request": "launch",
+        "type": "node",
+        "args": [
+          "-p",
+          "tests/tsconfig.json",
+          "${file}",
+          "--no-timeouts",
+          "--reporter-option",
+          "maxDiffSize=100000",
+        ],
+        "outFiles": ["**/*", "!build/**", "!node_modules/**"],
+      },
+      {
+        "name": "Single Integration Test: Grep",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
+        "request": "launch",
+        "type": "node",
+        "args": [
+          "-p",
+          "tests/tsconfig.json",
+          "${file}",
+          "--no-timeouts",
+          "-g",
+          "${selectedText}"
+        ],
+        "outFiles": ["**/*", "!build/**", "!node_modules/**"],
+      },
+      {
+        "name": "Debug Mocha Tests",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "continueOnAttach": true,
+        "autoAttachChildProcesses": false,
+        "resolveSourceMapLocations": [
+          "!**/node_modules/**",
+          "!**/.vscode/extensions/hbenl.vscode-mocha-test-adapter-*/**"
+        ],
+        "skipFiles": [
+          "<node_internals>/**"
+        ]
+      },
+      {
+        "name":"Export Game",
+        "type":"node",
+        "request":"launch",
+        "cwd":"${workspaceRoot}",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
+        "args":[
+            "${workspaceRoot}/src/tools/export_game.ts"
+        ],
+        "restart":true,
+        "sourceMaps": true,
+        "outFiles": ["**/*", "!build/**"]
+      },
+      {
+        "name":"Rewrite Game",
+        "type":"node",
+        "request":"launch",
+        "cwd":"${workspaceRoot}",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
+        "args":[
+            "${workspaceRoot}/src/tools/rewrite_game.ts"
+        ],
+        "env": {
+          "POSTGRES_HOST": "postgresql://tfmtest:tfm-test@localhost/prodcopy"
+        },
+        "restart":true,
+        "sourceMaps": true,
+        "outFiles": ["**/*", "!build/**"]
+      }
+    ]
+}
+

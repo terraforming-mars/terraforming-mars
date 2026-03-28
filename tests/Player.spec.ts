@@ -275,7 +275,7 @@ describe('Player', () => {
       const action = cast(srr.action(player), OrOptions);
       action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
       expect(srr.targetCards[0].resourceCount).to.eq(2);
-      player.playCard(physicsComplex, Payment.of({'megaCredits': 10}));
+      player.playCard(physicsComplex, Payment.of({'megacredits': 10}));
       expect(player.playedCards).to.contain(physicsComplex);
       expect(physicsComplex.resourceCount).to.eq(0);
     });
@@ -553,6 +553,31 @@ describe('Player', () => {
 
     game.increaseOxygenLevel(player2, 2);
     expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
+  });
+
+  it('Increasing venus sets globalParameterSteps', () => {
+    const [game, player, player2] = testGame(2, {venusNextExtension: true, solarPhaseOption: true});
+
+    game.phase = Phase.ACTION;
+    game.increaseVenusScaleLevel(player, 1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(1);
+
+    game.increaseVenusScaleLevel(player, 2);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.SOLAR;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.ACTION;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(2);
   });
 
   it('run research phase', () => {

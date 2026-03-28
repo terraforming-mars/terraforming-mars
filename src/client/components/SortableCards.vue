@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
@@ -38,7 +38,7 @@ type DataModel = {
   dragCard: CardName | undefined;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SortableCards',
   components: {
     Card,
@@ -46,9 +46,11 @@ export default Vue.extend({
   props: {
     cards: {
       type: Array as () => Array<CardModel>,
+      required: true,
     },
     playerId: {
       type: String,
+      required: true,
     },
   },
   data(): DataModel {

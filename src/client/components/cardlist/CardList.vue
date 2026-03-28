@@ -19,13 +19,18 @@
 
         <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
             <span v-if="vps === 0" v-i18n>all</span>
-            <span v-if="vps === 1" v-i18n>VPS</span>
+            <span v-if="vps === 1" v-i18n>+VPs</span>
             <span v-if="vps === 2" v-i18n>-VPs</span>
         </button>
 
-        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 30px;">
-            <span v-if="showMetadata === true">■</span>
-            <span v-else>□</span>
+        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
+            <span v-if="showMetadata === true">🛰️■</span>
+            <span v-else>🛰️□</span>
+        </button>
+
+        <button id="tall-cards" v-on:click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
+            <span v-if="tallCards === true">🂠→<span class="small-card">🂠</span></span>
+              <span v-else><span class="small-card">🂠</span>→🂠</span>
         </button>
 
         <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
@@ -96,100 +101,90 @@
       </div>
       <!-- start cards -->
 
-      <section class="card-list-cards-list">
+      <section v-show="visibleProjectCards.length > 0" class="card-list-cards-list">
           <h2 v-i18n>Project Cards</h2>
-          <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+          <div class="cardbox" v-for="card in visibleProjectCards" :key="card" v-memo="[card, tallCards]">
+              <Card :card="{'name': card}" :autoTall="tallCards" />
           </div>
+          <br>
       </section>
-      <br>
-      <section class="card-list-cards-list">
+      <section v-show="visibleCorporationCards.length > 0" class="card-list-cards-list">
           <h2 v-i18n>Corporations</h2>
-          <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+          <div class="cardbox" v-for="card in visibleCorporationCards" :key="card" v-memo="[card, tallCards]">
+              <Card :card="{'name': card}" :autoTall="tallCards"/>
           </div>
+          <br>
       </section>
-      <br>
-      <section class="card-list-cards-list">
+      <section v-show="visiblePreludeCards.length > 0" class="card-list-cards-list">
           <h2 v-i18n>Preludes</h2>
-          <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+          <div class="cardbox" v-for="card in visiblePreludeCards" :key="card" v-memo="[card, tallCards]">
+              <Card :card="{'name': card}" :autoTall="tallCards"/>
           </div>
+          <br>
       </section>
-      <br>
-      <section class="card-list-cards-list">
+      <section v-show="visibleCeoCards.length > 0" class="card-list-cards-list">
           <h2 v-i18n>CEOs</h2>
-          <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+          <div class="cardbox" v-for="card in visibleCeoCards" :key="card" v-memo="[card, tallCards]">
+              <Card :card="{'name': card}" :autoTall="tallCards" />
           </div>
+          <br>
       </section>
-      <br>
-      <section class="card-list-cards-list">
+      <section v-show="visibleStandardProjectCards.length > 0" class="card-list-cards-list">
         <h2 v-i18n>Standard Projects</h2>
-        <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
-            <Card v-if="showCard(card)" :card="{'name': card}" />
+        <div class="cardbox" v-for="card in visibleStandardProjectCards" :key="card" v-memo="[card, tallCards]">
+            <Card :card="{'name': card}" :autoTall="tallCards" />
         </div>
       </section>
 
-      <section class="card-list-cards-list">
+      <section v-show="visibleGlobalEvents.length > 0" class="card-list-cards-list">
         <h2 v-i18n>Global Events</h2>
-        <template v-if="types.globalEvents">
-          <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-            <global-event v-if="showGlobalEvent(globalEventName)" :globalEventName="globalEventName" type="distant"></global-event>
-          </div>
-        </template>
+        <div class="cardbox" v-for="globalEventName in visibleGlobalEvents" :key="globalEventName" v-memo="[globalEventName]">
+          <global-event :globalEventName="globalEventName" type="distant"></global-event>
+        </div>
       </section>
 
-      <section>
+      <section v-show="visibleColonyNames.length > 0">
         <h2 v-i18n>Colonies</h2>
-        <template v-if="types.colonyTiles">
-          <div class="player_home_colony_cont">
-            <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
-              <colony v-if="showColony(colonyName)" :colony="colonyModel(colonyName)"></colony>
-            </div>
+        <div class="player_home_colony_cont">
+          <div class="player_home_colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
+            <colony :colony="colonyModel(colonyName)"></colony>
           </div>
-        </template>
+        </div>
       </section>
 
-      <section>
+      <section v-show="visibleMilestoneNames.length > 0">
         <h2 v-i18n>Milestones</h2>
-        <template v-if="types.milestones">
-          <div class="player_home_colony_cont">
-            <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
-              <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <milestone v-if="showMilestone(milestoneName)" :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
-              </div>
+        <div class="player_home_colony_cont">
+          <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
+            <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+              <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
             </div>
           </div>
-        </template>
+        </div>
       </section>
 
-      <section>
+      <section v-show="visibleAwardNames.length > 0">
         <h2 v-i18n>Awards</h2>
-        <template v-if="types.awards">
-          <div class="player_home_colony_cont">
-            <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
-              <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <award v-if="showAward(awardName)" :award="awardModel(awardName)" :showDescription="true"></award>
-              </div>
+        <div class="player_home_colony_cont">
+          <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
+            <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+              <award :award="awardModel(awardName)" :showDescription="true"></award>
             </div>
           </div>
-        </template>
+        </div>
       </section>
 
-      <section>
+      <section v-show="visibleAgendaIds.length > 0">
         <h2 v-i18n>Agendas</h2>
-        <template v-if="types.agendas">
-          <div class="player_home_colony_cont">
-            <div class="player_home_colony" v-for="id in allAgendaIds" :key="id">
-              <div class="turmoil_agenda_cont">
-                <div style="padding: 12px; background-image: linear-gradient(rgb(156, 96, 45), black); border-radius: 8px; height: 120px;">
-                  <turmoil-agenda :id="id"></turmoil-agenda><div style="text-align:center">{{ id }}</div>
-                </div>
+        <div class="player_home_colony_cont">
+          <div class="player_home_colony" v-for="id in visibleAgendaIds" :key="id" v-memo="[id]">
+            <div class="turmoil_agenda_cont">
+              <div style="padding: 12px; background-image: linear-gradient(rgb(156, 96, 45), black); border-radius: 8px; height: 120px;">
+                <turmoil-agenda :id="id"></turmoil-agenda><div style="text-align:center">{{ id }}</div>
               </div>
             </div>
           </div>
-        </template>
+        </div>
       </section>
 
       <div class="free-floating-preferences-icon">
@@ -200,7 +195,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getEnumStringValues, partition, toName} from '@/common/utils/utils';
@@ -220,7 +215,6 @@ import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
 import {AwardName, awardNames} from '@/common/ma/AwardName';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {WithRefs} from 'vue-typed-refs';
 import {TypeOption, CardListModel, hashToModel, modelToHash, ResourceOption, TagOption} from '@/client/components/cardlist/CardListModel';
 import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
 import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
@@ -233,12 +227,14 @@ import Award from '@/client/components/Award.vue';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
+import {APP_NAME} from '@/common/constants';
+
 
 type Refs = {
-  filter: HTMLInputElement,
+  filter: HTMLInputElement;
 };
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'card-list',
   components: {
     Card,
@@ -253,10 +249,14 @@ export default (Vue as WithRefs<Refs>).extend({
     return hashToModel(window.location.hash);
   },
   mounted() {
-    this.$refs.filter.focus();
+    document.title = `Cards List | ${APP_NAME}`;
+    this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
     },
@@ -304,6 +304,41 @@ export default (Vue as WithRefs<Refs>).extend({
     cardResourceCSS(): typeof cardResourceCSS {
       return cardResourceCSS;
     },
+    visibleProjectCards(): Array<CardName> {
+      return this.getAllProjectCards().filter((c) => this.showCard(c));
+    },
+    visibleCorporationCards(): Array<CardName> {
+      return this.getAllCorporationCards().filter((c) => this.showCard(c));
+    },
+    visiblePreludeCards(): Array<CardName> {
+      return this.getAllPreludeCards().filter((c) => this.showCard(c));
+    },
+    visibleCeoCards(): Array<CardName> {
+      return this.getAllCeoCards().filter((c) => this.showCard(c));
+    },
+    visibleStandardProjectCards(): Array<CardName> {
+      return this.getAllStandardProjectCards().filter((c) => this.showCard(c));
+    },
+    visibleGlobalEvents(): Array<GlobalEventName> {
+      if (!this.types.globalEvents) return [];
+      return this.getAllGlobalEvents().filter((e) => this.showGlobalEvent(e));
+    },
+    visibleColonyNames(): Array<ColonyName> {
+      if (!this.types.colonyTiles) return [];
+      return this.getAllColonyNames().filter((c) => this.showColony(c));
+    },
+    visibleMilestoneNames(): Array<MilestoneName> {
+      if (!this.types.milestones) return [];
+      return this.allMilestoneNames.filter((m) => this.showMilestone(m));
+    },
+    visibleAwardNames(): Array<AwardName> {
+      if (!this.types.awards) return [];
+      return this.allAwardNames.filter((a) => this.showAward(a));
+    },
+    visibleAgendaIds(): Array<PolicyId | BonusId> {
+      if (!this.types.agendas) return [];
+      return [...this.allAgendaIds];
+    },
   },
   methods: {
     delayedSetLocationHash(delayms: number = 200) {
@@ -313,7 +348,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }, delayms);
     },
     setLocationHash(): boolean {
-      const hash = modelToHash(this);
+      const hash = modelToHash(this as unknown as CardListModel);
       const changed = hash !== window.location.hash;
       window.location.hash = hash;
       return changed;
@@ -472,10 +507,10 @@ export default (Vue as WithRefs<Refs>).extend({
       };
     },
     milestoneModel(name: MilestoneName): ClaimedMilestoneModel {
-      return {name, playerName: undefined, playerColor: undefined, scores: []};
+      return {name, playerName: undefined, color: undefined, scores: []};
     },
     awardModel(name: AwardName): FundedAwardModel {
-      return {name, playerName: undefined, playerColor: undefined, scores: []};
+      return {name, playerName: undefined, color: undefined, scores: []};
     },
     // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
@@ -496,7 +531,9 @@ export default (Vue as WithRefs<Refs>).extend({
     toggleShowMetadata(): void {
       this.showMetadata = !this.showMetadata;
     },
+    toggleTallCards(): void {
+      this.tallCards = !this.tallCards;
+    },
   },
 });
-
 </script>

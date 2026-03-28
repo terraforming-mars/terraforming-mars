@@ -24,7 +24,8 @@ function getQuotaConfig(): QuotaConfig {
   try {
     if (val !== undefined) {
       const struct = JSON.parse(val);
-      let {limit, per} = struct;
+      let {limit} = struct;
+      const {per} = struct;
       if (limit === undefined) {
         throw new Error('limit is absent');
       }

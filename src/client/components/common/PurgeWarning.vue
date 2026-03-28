@@ -10,13 +10,14 @@
 </template>
 <script lang="ts">
 import {translateTextWithParams} from '@/client/directives/i18n';
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PurgeWarning',
   props: {
     expectedPurgeTimeMs: {
       type: Number,
+      required: true,
     },
   },
   computed: {

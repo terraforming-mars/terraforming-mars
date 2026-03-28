@@ -20,13 +20,13 @@
       </div>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <card-panel :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
+    <card-panel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {paths} from '@/common/app/paths';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
@@ -47,14 +47,16 @@ type LogPanelModel = {
   selectedMessage: LogMessage | undefined,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'log-panel',
   props: {
     viewModel: {
       type: Object as () => ViewModel,
+      required: true,
     },
     color: {
       type: String as () => Color,
+      required: true,
     },
     step: {
       type: Number,

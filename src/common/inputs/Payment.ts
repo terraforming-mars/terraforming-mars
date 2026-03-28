@@ -5,7 +5,7 @@ import {SpendableResource, SPENDABLE_RESOURCES} from './Spendable';
  * The units of resources to deduct from the player's play area. These resources are all worth
  * megacredits under certain conditions.
  *
- * At this point, megaCredits means actual money, because (for instance if the player was Helion) they
+ * At this point, megacredits means actual money, because (for instance if the player was Helion) they
  * probably chose to spend money instead of heat.
  *
  * Exception: Player.pay({heat}) still triggers asking the caller if they want to spend Stormcraft resources.
@@ -20,8 +20,8 @@ export function isPayment(obj: unknown): obj is Payment {
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
 
-export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
-  megaCredits: 1,
+export const DEFAULT_PAYMENT_VALUES = {
+  megacredits: 1,
   steel: 2,
   titanium: 3,
   heat: 1,
@@ -35,12 +35,12 @@ export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
   auroraiData: DATA_VALUE,
   graphene: GRAPHENE_VALUE,
   kuiperAsteroids: 1,
-} as const;
+} satisfies Record<SpendableResource, number>;
 
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
     heat: 0,
-    megaCredits: 0,
+    megacredits: 0,
     steel: 0,
     titanium: 0,
     plants: 0,
@@ -61,7 +61,7 @@ export namespace Payment {
       heat: payment.heat ?? 0,
       lunaArchivesScience: payment.lunaArchivesScience ?? 0,
       spireScience: payment.spireScience ?? 0,
-      megaCredits: payment.megaCredits ?? 0,
+      megacredits: payment.megacredits ?? 0,
       microbes: payment.microbes ?? 0,
       seeds: payment.seeds ?? 0,
       steel: payment.steel ?? 0,
@@ -76,7 +76,7 @@ export namespace Payment {
 /**
  * See PaymentOptions.
  */
-type WaysToPay = Exclude<SpendableResource, 'megaCredits'> | 'lunaTradeFederationTitanium';
+type WaysToPay = Exclude<SpendableResource, 'megacredits'> | 'lunaTradeFederationTitanium';
 
 /**
  * PaymentOptions describes the ways you can pay for something.
@@ -89,7 +89,7 @@ type WaysToPay = Exclude<SpendableResource, 'megaCredits'> | 'lunaTradeFederatio
  * (good ol' titanium) and one describes a special behavior for the Luna Archives corporation that lets you
  * spend titanium in a new way.
  *
- * megaCredits is removed because it's always assumed and I think it's possibly special-cased the codebase.
+ * megacredits is removed because it's always assumed and I think it's possibly special-cased the codebase.
  * Could be smart to remove it, /shrug
  */
 export type PaymentOptions = {[k in WaysToPay]: boolean};

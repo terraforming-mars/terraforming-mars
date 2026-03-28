@@ -243,6 +243,8 @@
 
           <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
+          <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+
           <a name="moonBoard" class="player_home_anchor"></a>
           <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
         </div>

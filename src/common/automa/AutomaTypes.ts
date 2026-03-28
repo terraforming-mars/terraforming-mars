@@ -102,9 +102,9 @@ export function isAutomaPreludeGame(preludeExtension: boolean, prelude2Expansion
 
 /** Get the max generation for an automa game. */
 export function getAutomaMaxGeneration(preludeExtension: boolean, prelude2Expansion: boolean): number {
-  return isAutomaPreludeGame(preludeExtension, prelude2Expansion)
-    ? MARSBOT_MAX_GENERATION_PRELUDE
-    : MARSBOT_MAX_GENERATION;
+  return isAutomaPreludeGame(preludeExtension, prelude2Expansion) ?
+    MARSBOT_MAX_GENERATION_PRELUDE :
+    MARSBOT_MAX_GENERATION;
 }
 
 /** Build MC-to-VP table for a given max generation. mcPerVP goes 8→1 over the last 8 generations. */
@@ -124,8 +124,8 @@ export const MC_TO_VP_TABLE_PRELUDE = buildMcToVpTable(MARSBOT_MAX_GENERATION_PR
 
 /** Get the current MC-per-VP ratio for the given generation. Returns undefined if before conversion window. */
 export function getMcPerVP(generation: number, preludeExtension: boolean, prelude2Expansion: boolean): number | undefined {
-  const table = isAutomaPreludeGame(preludeExtension, prelude2Expansion)
-    ? MC_TO_VP_TABLE_PRELUDE : MC_TO_VP_TABLE;
+  const table = isAutomaPreludeGame(preludeExtension, prelude2Expansion) ?
+    MC_TO_VP_TABLE_PRELUDE : MC_TO_VP_TABLE;
   const entry = table.find((e) => generation <= e.maxGeneration);
   return entry?.mcPerVP;
 }

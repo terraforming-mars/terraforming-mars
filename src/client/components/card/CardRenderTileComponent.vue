@@ -142,6 +142,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
   },
+  [TileType.NEURAL_INSTANCE]: {
+    tile: 'card-tile-neural-instance',
+  },
 };
 
 export default defineComponent({

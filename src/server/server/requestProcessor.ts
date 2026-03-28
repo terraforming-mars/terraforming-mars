@@ -108,10 +108,13 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object') {
+  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
     return '!' + socketIpAddress.address + '!';
   }
-  return socketIpAddress;
+  if (typeof socketIpAddress === 'string') {
+    return socketIpAddress;
+  }
+  return '';
 }
 
 function getHandler(pathname: string): IHandler | undefined {

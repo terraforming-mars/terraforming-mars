@@ -44,15 +44,12 @@
   "Coordinated Raid": "Koordinert raid",
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Krever minst 1 koloni i spillet. Send en av dine ubrukte handelsflåter til et valgfritt koloniområde. Motta handelsbonusen og kolonibonusen for hver koloni på dette området. Andre spillere får ikke kolonibonusene sine fra denne handlingen.",
 
-  "Crashlanding": "Nødlanding",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Plasser OG ORIENTER denne brikken på et ikke-reservert område som ikke grenser til mer enn 1 by.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Nødlandingen gir en NÆRHETSBONUS på 1 data, og enten 1 stål eller 1 titan.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Når du plasserer Nødlandingen, for hvert område du eier ved siden av den, får du disse bonusene.",
   "Add 1 data to any card. Add 1 resource to any card.)": "Legg til 1 data på et valgfritt kort. Legg til 1 ressurs på et valgfritt kort.)",
 
   "Cryptocurrency": "Kryptovaluta",
-  "Spend 1 energy to add 1 data to this card.": "Bruk 1 energi for å legge til 1 data på dette kortet.",
-  "Remove all data from this card to gain 3M€ per data removed.": "Fjern all data fra dette kortet for å få 3 M€ per data som fjernes.",
 
   "Cultivation of Venus": "Dyrking av Venus",
   "Spend 3 plants to raise Venus 1 step.": "Bruk 3 planter for å øke Venus med 1 trinn.",
@@ -140,7 +137,6 @@
   "Martian Monuments": "Mars-monumenter",
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Krever at du eier en by PÅ MARS. Øk M€-produksjonen din med 1 trinn for hvert Marssymbol du eier (inkludert dette.))",
 
-  "Martian Nature Wonders": "Naturens underverker på Mars",
   "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Plasser en nøytral spillerkube på et ikke-reservert område. Ingen brikke kan plasseres på det området i dette spillet. Samle eventuelle bonuser på det området, men ikke bonuser fra tilstøtende områder. Legg til 2 data på et valgfritt kort.)",
 
   "Martian Repository": "Mars-arkiv",
@@ -174,7 +170,6 @@
   "(Action: Add 1 animal on this card)": "(Handling: Legg til 1 dyr på dette kortet)",
   "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(Krever 3 plantesymboler. Øk planteproduksjonen din med 1 trinn og M€-produksjonen din med 2 trinn.)",
 
-  "Power Plant": "Varmekraftverk",
   "(Increase your heat production 2 steps and your energy production 1 step.)": "(Øk varmeproduksjonen din med 2 trinn og energiproduksjonen din med 1 trinn.)",
 
   "Prefabrication of Human Habitats": "Prefabrikasjon av habitater for mennesker",

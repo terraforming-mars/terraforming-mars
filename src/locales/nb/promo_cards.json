@@ -21,7 +21,6 @@
 
   "Red Ships": "Røde skip",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Handling: Få 1 M€ for hver by- og spesialbrikke som grenser til en havbrikke.",
-  "Requires 4% oxygen.": "Krever 4% oksygen.",
 
   "Neptunian Power Consultants": "Neptunianske kraftkonsulenter",
   "When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Effekt: Når en havbrikke er plassert, kan du betale 5 M€ (stål kan brukes) for å øke energiproduksjonen med 1 steg og legge til 1 vannkraftressurs på dette kortet.",
@@ -36,7 +35,6 @@
 
   "Homeostasis Bureau": "Homeostasebyrået",
   "When you raise the temperature, gain 3 M€.": "Effekt: Når du øker temperaturen, få 3 M€.",
-  "Increase your heat production 2 steps.": "Øk din varmeproduksjon med 2 steg.",
 
   "Hermetic Order of Mars": "Den hermetiske orden av Mars",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Oksygen må være 4% eller lavere. Øk din M€ produksjon med 2 steg. Få 1 M€ per tomt område som grenser til dine brikker.",
@@ -91,10 +89,8 @@
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Øk din M€ produksjon med 2 steg, øk din energiproduksjon med 1 steg, få 3 planter og plasser en by-brikke.",
 
   "Great Dam:promo": "Stor demning",
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Krever 4 havbrikker. Øk din energiproduksjon med 2 steg.",
 
   "Magnetic Shield": "Magnetskjold",
-  "3 Power": "3 energi",
   "Requires 3 power tags. Raise your TR 4 steps.": "Krever 3 energisymboler. Øk din TR med 4 steg.",
 
   "Magnetic Field Generators:promo": "Magnetfeltgeneratorer",
@@ -108,7 +104,6 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Få 3 planter. Øk temperaturen med 1 trinn og plasser 1 havbrikke.",
 
   "Diversity Support": "Mangfoldsstøtte",
-  "9 Resource types": "9 ressurstyper",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "Krever at du har 9 forskjellige typer ressurser. Få 1 TR.",
 
   "Topsoil Contract": "Toppjordskontrakt",
@@ -197,7 +192,6 @@
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Krever 4 hav. Øk din energiproduksjon med 2 steg. Plasser denne brikken inntil et hav.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Senk energiproduksjonen din med 4 og øk planteproduksjonen din med 2. Øk TR med 3.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Krever 8 hav. 1 SP per dyr på dette kortet.",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Handling: Bruk 2X M€ for å få X energi, eller senk energiproduksjonen din med 1 steg for å få 8 M€.",

@@ -30,25 +30,16 @@
     "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "※ファン拡張の火星タグ含む. 月タグは含まない.",
 
     "Psychrophiles": "低温菌",
-    "Action: Add 1 microbe to this card.": "アクション：このカード上に1微生物追加.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
-    "Temperature must be -20 C or lower.": "条件：温度-20℃以下.",
 
     "Research Coordination": "共同研究",
-    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
 
     "SF Memorial": "SF記念碑",
-    "Draw 1 card.": "1ドロー.",
 
     "Martian Survey": "火星探査",
-    "Oxygen must be 4% or lower. Draw two cards.": "条件：酸素4%以下. 2ドロー.",
 
     "House Printing": "プリンティングハウス",
-    "Increase your steel production 1 step.": "建材産出+1.",
 
     "Space Hotels": "軌道ホテル",
-    "Requires 2 Earth tags. Increase M€ production 4 steps.": "条件：地球タグ2つ以上.MC産出+4.",
 
-    "Lava Tube Settlement": "溶岩洞開拓施設",
-    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能"
+    "Lava Tube Settlement": "溶岩洞開拓施設"
 }

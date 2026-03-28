@@ -2,7 +2,6 @@
   "% Venus": "金星％",
 
   "Stratospheric Birds": "成層圏の鳥",
-  "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
   "Requires Venus 12% and that you spend 1 floater from any card.": "条件：金星12％以上. 1浮遊体を支払う.",
 
   "Venusian Plants": "金星植物",
@@ -11,7 +10,6 @@
   "Extremophiles": "好極限性細菌",
   "Action: Add 1 microbe to ANY card.": "アクション：1微生物獲得.",
   "1 VP for every 3rd Microbe on this card.": "このカード上の3微生物毎に1VP.",
-  "Requires 2 science tags.": "条件：科学タグ2つ以上.",
 
   "Mining Quota": "採掘割り当て量",
   "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "条件：金星タグ、地球タグ、木星タグがそれぞれ1つ以上. 建材産出+2.",
@@ -51,7 +49,6 @@
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "条件：金星タグ、地球タグ、木星タグがそれぞれ1つ以上. 2ドロー.",
 
   "Atalanta Planitia Lab": "アタランテ平原研究所",
-  "Requires 3 science tags. Draw 2 cards.": "条件：科学タグ3つ以上. 2ドロー.",
 
   "Rotator Impacts": "自転加速衝突",
   "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "アクション：6MC支払い、このカード上に1小惑星追加.※チタンでの支払い可能.",
@@ -106,10 +103,7 @@
   "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.": "条件：科学タグ4つ以上. 電力産出-1し、チタン産出+1. 火星外予定地「黎明市」に都市タイルを配置.",
 
   "Deuterium Export": "重水素の輸出",
-  "Action: Add 1 floater to this card.": "アクション：このカード上に1浮遊体追加.",
   "Action: Spend 1 floater here to increase your energy production 1 step.": "アクション：このカード上から1浮遊体除去し、電力産出+1.",
-  "Remove 1 floater to raise energy production 1 step": "このカード上から1浮遊体除去し、電力産出+1.",
-  "Remove floater": "浮遊体を除去",
 
   "Extractor Balloons": "抽出気球",
   "Action: Remove 2 floaters here to raise Venus 1 step.": "アクション：このカード上から2浮遊体除去し、金星+1段階.",

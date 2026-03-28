@@ -157,7 +157,6 @@
     "played cards":"ha jugado las cartas",
 
     "Select which cards to take into hand": "Seleccionar que cartas deseas llevarte a la mano (3 )",
-    "Not enough cards selected": "No hay suficientes cartas seleccionadas",
 
     "Convert 7 heat into temperature": "Convertir 7 de calor a temperatura",
     "Convert 8 heat into temperature": "Convertir 8 de calor a temperatura",
@@ -194,11 +193,6 @@
     "Pay ${0} titanium": "Pagar ${0} de Titanio",
     "Trade with a colony tile": "Comerciar con losetas de colonia",
     "(Enceladus - (Microbes)": "(Enceladus - (Microbios)",
-    "Select action for World Government Terraforming": "Como gobierno mundial, elige una transformación (sin bonificación)",
-    "Increase temperature": "Aumentar temperatura",
-    "Increase oxygen": "Aumentar oxígeno",
-    "Add an ocean": "Añadir un océano",
-    "Increase Venus scale": "Mejorar Venus",
 
     "Login": "Iniciar sesión",
     "My Games": "Mis Partidas",
@@ -264,8 +258,6 @@
     "Pay trade fee": "Pagar tasa comercial",
     "Select colony tile for trade": "Seleccionar loseta de colonia para comerciar",
     "Pass for this generation": "Pasar por esta generación",
-    "Confirm": "Confirmar",
-    "Increase": "Incrementar",
     "Buy": "Comprar",
     "Skip this action": "Saltar esta acción",
     "Keep": "Conservar",

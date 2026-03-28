@@ -51,16 +51,9 @@
     "Martian Rails": "Baan om Mars",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "ACTIE: Betaal 1 energie om 1 M€ per stadstegel OP MARS te krijgen.",
 
-    "Capital": "Hoofdstad",
-    "2 Oceans": "2 Oceanen",
-    "3 Oceans": "3 Oceanen",
-    "4 Oceans": "4 Oceanen",
-    "5 Oceans": "5 Oceanen",
-    "6 Oceans": "6 Oceanen",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Vereist 4 of meer oceaantegels in het spel. Plaats deze stadstegel. Verlaag je energieproductie met 2 en verhoog je M€-productie met 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "1 extra OP voor elke oceaantegel naast deze stadstegel.",
 
-    "Asteroid": "Asteroïde inslag",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Verhoog de temperatuur met 2 °C en ontvang 2 Titanium. Verwijder maximaal 3 planten van een speler.",
 
     "Comet": "Komeet inslag",
@@ -344,7 +337,6 @@
 
     "Nuclear Zone": "Nucleaire zone",
     "Place this tile and raise temperature 2 steps.": "Plaats deze tegel. Verhoog de temperatuur met 4 °C.",
-    "Nuclear Zone tile": "Nucleaire-zone-tegel",
 
     "Tropical Resort": "Tropisch vakantieoord",
     "Reduce your heat production 2 steps and increase your M€ production 3 steps.": "Verlaag je warmteproductie met 2. Verhoog je M€-productie met 3.",
@@ -427,7 +419,6 @@
 
     "Hired Raiders": "Ingehuurde plunderaars",
     "Steal up to 2 steel, or 3 M€ from any player.": "Steel tot 2 staal OF 3 M€ van een speler en plaats het op je tableau.",
-    "Do not steal": "Steel niets",
 
     "Hackers": "",
     "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "Verlaag je energieproductie met 1 en de M€-productie van een speler met 2. Verhoog je M€-productie met 2.",
@@ -485,7 +476,6 @@
     "Lava Flows": "Lavastromen",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Verhoog de temperatuur met 4°C. Plaats deze tegel op Tharsis Tholus of Ascraeus Mons of Pavonis Mons of Arsia Mons.",
 
-    "Power Plant": "Energiecentrale",
     "Increase your energy production 1 step.": "Verhoog je energieproductie met 1.",
 
     "Mohole Area": "Mohole boring",
@@ -540,9 +530,6 @@
     "(Action: Remove 3 microbes to increase your TR 1 step.)": "(ACTIE: verwijder 3 microben om je terraformwaarde met 1 te verhogen.)",
     "Add 3 microbes to this card.": "Voeg 3 microben toe aan deze kaart.",
     "Remove 3 microbes to increase your terraform rating 1 step": "Verwijder 3 microben om je terraformwaarde met 1 te verhogen.",
-    "Remove microbes": "Verwijder microben",
-    "Add 1 microbe to this card": "Voeg 1 microbe toe aan deze kaart.",
-    "Add microbe": "microbe toevoegen",
 
     "Industrial Microbes": "Industriële microben",
     "Increase your energy production and your steel production 1 step each.": "Verhoog je energie- en staalproductie elk met 1.",
@@ -708,25 +695,13 @@
     "AI Central": "AI-Centrale",
 
     "Action: Draw 2 cards.": "ACTIE: Trek 2 kaarten.",
-    "2 Science": "2 Wetenschap",
-    "3 Science": "3 Wetenschap",
-    "5 Science": "5 Wetenschap",
     "(Effect: Draw 2 cards.)": "(EFFECT: Trek 2 kaarten.)",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "Vereist 3 wetenschapssymbolen. Verlaag je energieproductie met 1.",
 
     "HYDROGEN TO VENUS": "Waterstof naar Venus",
 
-    "Plant Microbe Animal": "Plant Microbe Dier",
-    "Jovian": "Jupiter",
     "max 3 Oceans": "maximaal 3 oceaantegels",
-    "Forest": "Bos",
-    "2 Power": "2 Energie",
-    "7 Science": "7 Wetenschap",
-    "Titanium production": "Titaniumproductie",
-    "Steel production": "Staalproductie",
-    "4 Science": "4 Wetenschap",
-    "2 Cities": "2 Steden",
     "Standard projects": "Standaardprojecten",
 
     "Requires 2 Earth tags. Increase M€ production 4 steps.": "Vereist 2 aardesymbolen. Verhoog je M€-productie met 4.",
@@ -739,8 +714,5 @@
     "Increase your energy production 2 steps": "Verhoog uw energieproductie met 2 stappen",
     "Increase your energy production 3 steps": "Verhoog uw energieproductie met 3 stappen",
     "Increase your plant production 1 step": "Verhoog je plantproductie met 1 stap",
-    "Remove 2 microbes to raise temperature 1 step": "Verwijder 2 microben om de temperatuur met 2 °C te verhogen",
-    "Select card to add 2 microbes": "Kies een kaart om 2 microben aan toe te voegen",
-    "Add microbes": "Microben toevoegen",
-    "Select a space with a steel or titanium bonus adjacent to one of your tiles": "Kies een veld met een staal- of titaniumbonus dat grenst aan één van je tegels"
+    "Select card to add 2 microbes": "Kies een kaart om 2 microben aan toe te voegen"
 }

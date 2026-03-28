@@ -27,7 +27,6 @@
   "generations": "Generationen",
   "Player": "Spieler",
   "Corporation": "Konzern",
-  "TR": "TW",
   "VP": "SP",
   "Total": "Gesamt",
   "Timer": "Zeitdauer",
@@ -37,17 +36,12 @@
   "Natural Preserve:ares": "Naturpark",
   "Nuclear Zone:ares": "Atomsperrgebiet",
   "Ecological Zone:ares": "Naturschutzgebiet",
-  "Commercial District:ares": "Geschäftsviertel",
   "Underworld Corruption Bribe": "Unterwelt Korruption Bestechlichkeit",
   "Hackers:u": "Häcker",
 
   "Global Parameter Contributions": "Globale Parameter Beiträge",
   "Completed!": "Vervollständigt!",
   "% completed": "% vervollständigt",
-  "Temperature": "Temperatur",
-  "Oxygen": "Sauerstoff",
-  "Oceans": "Ozeane",
-  "Venus": "",
   "L. Habitat": "Mond Habitat",
   "L. Mining": "Mond Mine",
   "L. Logistics": "Mond Straßen",
@@ -69,7 +63,5 @@
   "Milestones points": "Punkte durch Meilensteine",
   "Awards points": "Punkte durch Auszeichnungen",
 
-  "Actions taken this game": "In diesem Spiel durchgeführte Aktionen",
-  "Escape Velocity penalty": "Minuspunkte für Fluchtgeschwindigkeit (Escape Velocity)",
   "Download game log": "Spielprotokoll herunterladen"
 }

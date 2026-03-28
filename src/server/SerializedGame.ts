@@ -71,4 +71,29 @@ export type SerializedGame = {
     underworldData: UnderworldData;
     venusScaleLevel: number;
     verminInEffect: boolean;
+
+    // Automa
+    automaState?: SerializedAutomaState;
+}
+
+export type SerializedAutomaState = {
+    trackPositions: Array<number>;
+    trackRegressedPositions: Array<Array<number>>;
+    mcSupply: number;
+    goesFirst: boolean;
+    difficulty: 'easy' | 'normal' | 'hard' | 'brutal';
+    actionDeckCardNames: Array<string>;
+    bonusDeckDrawPile: Array<string>;
+    bonusDeckDiscardPile: Array<string>;
+    destroyedBonusCards: Array<string>;
+    neuralInstanceSpaceId: string | undefined;
+    playedProjectCardNames: Array<string>;
+    marsBotPlayerId: string;
+    // Corporation framework
+    corpId?: string;
+    trackCubePositions?: Array<{trackNum: number, position: number, cubeType: import('../common/automa/MarsBotCorpTypes').CubeType}>;
+    triggeredCubePositions?: Array<string>;
+    corpSpecificState?: Record<string, unknown>;
+    floaterCount?: number;
+    vpByGeneration?: Array<number>;
 }

@@ -1,7 +1,6 @@
 import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
-import {SpaceName} from '../src/common/boards/SpaceName';
 import {Mayor} from '../src/server/milestones/Mayor';
 import {Banker} from '../src/server/awards/Banker';
 import {Thermalist} from '../src/server/awards/Thermalist';
@@ -63,8 +62,8 @@ describe('Game', () => {
     const player3 = TestPlayer.YELLOW.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
-    addCity(player, SpaceName.ARSIA_MONS);
-    addGreenery(player, SpaceName.PAVONIS_MONS);
+    addCity(player, '29');
+    addGreenery(player, '21');
 
     // Claim milestone
     const milestone = new Mayor();
@@ -383,7 +382,7 @@ describe('Game', () => {
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = cast(player.getWaitingFor(), OrOptions);
-    const arsiaMons = game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS);
+    const arsiaMons = game.board.getSpaceOrThrow('29');
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 

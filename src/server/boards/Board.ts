@@ -31,8 +31,6 @@ export abstract class Board {
   private maxY: number = 0;
   private map: Map<SpaceId, Space> = new Map();
   public volcanicSpaceIds: ReadonlyArray<SpaceId>;
-  public readonly noctisCitySpaceId: SpaceId | undefined = undefined;
-
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<Space>>();

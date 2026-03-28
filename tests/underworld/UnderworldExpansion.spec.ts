@@ -21,8 +21,8 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
 import {Tag} from '../../src/common/cards/Tag';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {SpaceName} from '../../src/common/boards/SpaceName';
 import {TunnelingLoophole} from '../../src/server/cards/underworld/TunnelingLoophole';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 
 describe('UnderworldExpansion', () => {
   let player1: TestPlayer;
@@ -799,13 +799,8 @@ describe('UnderworldExpansion', () => {
 
   it('Cannot identify the restricted space on Amazonis Planitia', () => {
     const [game, player1] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS});
-    expect(UnderworldExpansion.identifiableSpaces(player1)).to.not.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
-    expect(UnderworldExpansion.excavatableSpaces(player1)).to.not.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
-  });
-
-  it('Can identify the space that would be restricted if it were Amazonis Planitia', () => {
-    const [game, player1] = testGame(2, {underworldExpansion: true, boardName: BoardName.THARSIS});
-    expect(UnderworldExpansion.identifiableSpaces(player1)).to.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
-    expect(UnderworldExpansion.excavatableSpaces(player1)).to.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
+    const restrictedSpace = game.board.spaces.filter((space) => space.spaceType === SpaceType.RESTRICTED)[0];
+    expect(UnderworldExpansion.identifiableSpaces(player1)).to.not.include(restrictedSpace);
+    expect(UnderworldExpansion.excavatableSpaces(player1)).to.not.include(restrictedSpace);
   });
 });

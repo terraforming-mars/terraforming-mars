@@ -11,6 +11,7 @@ import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
 import {Units} from '../Units';
 import {ClaimedToken} from '../underworld/UnderworldPlayerData';
+import {DeltaProjectModel} from './DeltaProjectModel';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -97,6 +98,13 @@ export type SelectAmountModel = BaseInputModel & {
   maxByDefault: boolean;
 }
 
+export type DeltaProjectInputModel = BaseInputModel & {
+  type: 'deltaProject';
+  min: number;
+  max: number;
+  deltaProjectModel: DeltaProjectModel;
+}
+
 export type SelectDelegateModel = BaseInputModel & {
   type: 'delegate';
   players: Array<ColorWithNeutral>;
@@ -160,4 +168,5 @@ export type PlayerInputModel =
   SelectGlobalEventModel |
   SelectResourceModel |
   SelectResourcesModel |
-  SelectClaimedUndergroundTokenModel;
+  SelectClaimedUndergroundTokenModel |
+  DeltaProjectInputModel;

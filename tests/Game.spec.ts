@@ -745,6 +745,7 @@ describe('Game', () => {
     game.syndicatePirateRaider = undefined;
     game.moonData = undefined;
     game.pathfindersData = undefined;
+    game.deltaProjectData = undefined;
     const serialized = game.serialize();
     assertIsJSON(serialized);
     const serializedKeys = Object.keys(serialized);

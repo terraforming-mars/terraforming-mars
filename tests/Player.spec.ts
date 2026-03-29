@@ -249,6 +249,7 @@ describe('Player', () => {
         [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
       },
       standardProjectsThisGeneration: [],
+      jovianTagCount: 0,
       withinDeflectionZone: false,
     };
 

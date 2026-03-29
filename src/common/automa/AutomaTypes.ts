@@ -24,10 +24,6 @@ export type TrackDefinition = {
   readonly layout: TrackLayout;
 };
 
-/** Complete MarsBot board data for a specific map. */
-export type MarsBotBoardData = {
-  readonly trackDefs: ReadonlyArray<TrackDefinition>;
-};
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
 

@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {MarsBotBoardData, TrackDefinition} from '../../../common/automa/AutomaTypes';
+import {TrackDefinition} from '../../../common/automa/AutomaTypes';
 
 const TRACK_BUILDING: TrackDefinition = {
   tags: [Tag.BUILDING],
@@ -44,14 +44,12 @@ const TRACK_PLANT: TrackDefinition = {
   layout: [undefined, undefined, undefined, 'greenery', undefined, 'greenery', 'greenery', 'advance', undefined, 'ocean', 'award', 'temperature', 'tr3', 'greenery', 'greenery', 'ocean', 'greenery', undefined, 'tr6'],
 };
 
-export const THARSIS_MARSBOT_BOARD: MarsBotBoardData = {
-  trackDefs: [
-    TRACK_BUILDING,
-    TRACK_SPACE,
-    TRACK_EVENT,
-    TRACK_SCIENCE,
-    TRACK_ENERGY,
-    TRACK_EARTH,
-    TRACK_PLANT,
-  ],
-};
+export const THARSIS_MARSBOT_BOARD: ReadonlyArray<TrackDefinition> = [
+  TRACK_BUILDING,
+  TRACK_SPACE,
+  TRACK_EVENT,
+  TRACK_SCIENCE,
+  TRACK_ENERGY,
+  TRACK_EARTH,
+  TRACK_PLANT,
+];

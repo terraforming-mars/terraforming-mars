@@ -54,12 +54,12 @@ describe('MarsBotBoard', () => {
 
 describe('MarsBotTrack', () => {
   it('starts at position 0', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     expect(track.position).to.eq(0);
   });
 
   it('can advance and returns action at position', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     // Building track layout: [undef, undef, 'ocean', undef, undef, 'tr2', ...]
     const r1 = track.advance();
     expect(r1.type).to.eq('none');
@@ -83,7 +83,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('returns maxed when at max position', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     for (let i = 0; i < 18; i++) {
       track.advance();
     }
@@ -94,7 +94,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('regresses track and marks position', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     track.advance(); // pos 1
     track.advance(); // pos 2 (ocean)
     track.advance(); // pos 3
@@ -110,7 +110,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('advance returns action, regress and re-advance skips it', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     track.advance(); // pos 1
     const r = track.advance(); // pos 2: ocean
     expect(r.type).to.eq('action');
@@ -123,7 +123,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('peek shows next position action without advancing', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     // pos 0, next is pos 1 which is undefined
     expect(track.peek()).to.be.undefined;
 
@@ -134,7 +134,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('peek returns undefined at max position', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     for (let i = 0; i < 18; i++) {
       track.advance();
     }
@@ -142,7 +142,7 @@ describe('MarsBotTrack', () => {
   });
 
   it('peek after regression still shows the layout action', () => {
-    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD.trackDefs[0]);
+    const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
     track.advance(); // pos 1
     track.advance(); // pos 2 (ocean)
     track.regress(); // back to pos 1, pos 2 is regressed

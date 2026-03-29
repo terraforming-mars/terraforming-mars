@@ -14,16 +14,14 @@ export type MarsBotDraftPriority =
   | { type: 'leastAdvancedTrack' }                  // Aridor (re-evaluated each gen)
   | { type: 'mostTags' };                            // Spire
 
-// Cube/credit placed on a specific track position during setup
-export interface MarsBotTrackCube {
-  trackNum: number;       // 1-based
-  position: number;       // 1-18
+export type MarsBotTrackCube = {
+  trackIndex: number;
+  position: number;
   cubeType: CubeType;
-}
+};
 
-/** Composite key for track cube positions. */
-export function trackCubeKey(trackNum: number, position: number): string {
-  return `${trackNum}:${position}`;
+export function trackCubeKey(trackIndex: number, position: number): string {
+  return `${trackIndex}:${position}`;
 }
 
 // The main corporation interface
@@ -41,9 +39,9 @@ export interface IMarsBotCorp {
 }
 
 export interface MarsBotCorpEffect {
-  onTrackCubeTrigger?(ctx: MarsBotCorpContext, trackNum: number, position: number, cubeType: CubeType): void;
-  onProjectCardResolved?(ctx: MarsBotCorpContext, card: IMarsBotCorpCardRef): void;
-  onHumanCardPlayed?(ctx: MarsBotCorpContext, card: IMarsBotCorpCardRef): void;
+  onTrackCubeTrigger?(ctx: MarsBotCorpContext, trackIndex: number, position: number, cubeType: CubeType): void;
+  onProjectCardResolved?(ctx: MarsBotCorpContext, card: MarsBotCorpCardRef): void;
+  onHumanCardPlayed?(ctx: MarsBotCorpContext, card: MarsBotCorpCardRef): void;
   /** Called when any player places a tile. */
   onTilePlaced?(ctx: MarsBotCorpContext, placedByMarsBot: boolean, tileType: number): void;
   /** Called when Venus scale is raised. */
@@ -56,22 +54,21 @@ export interface MarsBotCorpEffect {
   vpBonus?(ctx: MarsBotCorpContext): number;
 }
 
-export interface MarsBotCorpPerGen {
+export type MarsBotCorpPerGen = {
   timing: 'roundStart' | 'beforeActionPhase';
   resolve(ctx: MarsBotCorpContext): void;
-}
+};
 
-/** Minimal card reference used in corp callbacks to avoid circular imports. */
-export interface IMarsBotCorpCardRef {
+export type MarsBotCorpCardRef = {
   readonly name: string;
   readonly tags: ReadonlyArray<Tag>;
   readonly cost: number;
   readonly hasRequirements: boolean;
   readonly victoryPoints: number;
-}
+};
 
 /** Build a card ref from a project card. Avoids circular imports by taking individual fields. */
-export function toCorpCardRef(name: string, tags: ReadonlyArray<Tag>, cost: number, hasRequirements: boolean, victoryPoints: number): IMarsBotCorpCardRef {
+export function toCorpCardRef(name: string, tags: ReadonlyArray<Tag>, cost: number, hasRequirements: boolean, victoryPoints: number): MarsBotCorpCardRef {
   return {name, tags, cost, hasRequirements, victoryPoints};
 }
 

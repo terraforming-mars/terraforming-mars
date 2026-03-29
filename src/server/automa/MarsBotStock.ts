@@ -141,21 +141,9 @@ export class MarsBotProduction extends Production {
       return;
     }
 
-    // Production decrease → regress track
-    const productionMap: Record<Resource, string> = {
-      [Resource.STEEL]: 'Steel',
-      [Resource.TITANIUM]: 'Titanium',
-      [Resource.MEGACREDITS]: 'MC',
-      [Resource.ENERGY]: 'Electricity',
-      [Resource.HEAT]: 'Heat',
-      [Resource.PLANTS]: 'Plants',
-    };
-
-    const productionType = productionMap[resource];
-    if (productionType) {
-      for (let i = 0; i < -amount; i++) {
-        this.marsBotRef.regressTrack(productionType);
-      }
+    // Production decrease → regress corresponding track
+    for (let i = 0; i < -amount; i++) {
+      this.marsBotRef.regressTrack(resource);
     }
   }
 }

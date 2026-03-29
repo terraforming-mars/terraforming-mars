@@ -91,9 +91,10 @@ export type SerializedAutomaState = {
     marsBotPlayerId: string;
     // Corporation framework
     corpId?: string;
-    trackCubePositions?: Array<{trackNum: number, position: number, cubeType: import('../common/automa/MarsBotCorpTypes').CubeType}>;
+    trackCubePositions?: Array<{trackIndex: number, position: number, cubeType: import('../common/automa/MarsBotCorpTypes').CubeType}>;
     triggeredCubePositions?: Array<string>;
     corpSpecificState?: Record<string, unknown>;
     floaterCount?: number;
     vpByGeneration?: Array<number>;
+    temperatureRaises?: number;
 }

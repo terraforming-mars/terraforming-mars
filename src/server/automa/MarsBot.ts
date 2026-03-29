@@ -1,10 +1,13 @@
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DifficultyLevel, BonusCardId, MARSBOT_MAX_TRACK_POSITION, isAutomaPreludeGame, getAutomaMaxGeneration, getMcPerVP} from '../../common/automa/AutomaTypes';
+import {Resource} from '../../common/Resource';
+import {CardName} from '../../common/cards/CardName';
+import {DifficultyLevel, BonusCardId, isAutomaPreludeGame, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
+import {getMcPerVP} from './MarsBotScoring';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotBoardData} from '../../common/automa/AutomaTypes';
-import {MarsBotModel} from '../../common/automa/MarsBotModel';
+import {MarsBotModel} from '../../common/models/MarsBotModel';
 import {MarsBotBonusCard, createCorpBonusCard} from './MarsBotBonusCard';
 import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {MarsBotBonusResolver} from './MarsBotBonusResolver';
@@ -47,7 +50,7 @@ export class MarsBot {
   /** Corporation card (Rulebook B). */
   public corp: IMarsBotCorp | undefined;
 
-  /** Track cube positions placed by the corporation. Key: "trackNum:position". */
+  /** Track cube positions placed by the corporation. Key: "trackIndex:position". */
   public trackCubePositions: Map<string, MarsBotTrackCube> = new Map();
 
   /** Cube positions that have already been triggered (won't re-trigger after regression). */
@@ -55,6 +58,12 @@ export class MarsBot {
 
   /** VP total per generation (for end-game chart). */
   public vpByGeneration: Array<number> = [];
+
+  /** Number of times MarsBot raised temperature (for Thawer milestone). */
+  public temperatureRaises: number = 0;
+
+  /** Whether colony cubes are placed (Pioneer4/Constructor in game). */
+  public hasColonyCubes: boolean = false;
 
   /** Corp-specific state (M€ on card, resources, cubes, etc.). */
   public corpSpecificState: Map<string, number> = new Map();
@@ -214,14 +223,14 @@ export class MarsBot {
   /** Place final greenery tiles for MarsBot (tracks with greenery as next action). */
   public placeFinalGreeneries(): void {
     for (const track of this.board.tracks) {
-      const nextAction = track.peekNextAction();
+      const nextAction = track.peek();
       if (nextAction === 'greenery') {
         const space = this.tilePlacer.findGreenerySpace();
         if (space) {
           // Do NOT raise oxygen or award TR for final greenery
           this.game.addGreenery(this.player, space, false);
           track.advance(); // Move tracker forward
-          this.game.log('MarsBot places final greenery (Track ${0})', (b) => b.number(track.definition.num));
+          this.game.log('MarsBot places final greenery (${0} track)', (b) => b.rawString(track.definition.tags[0]));
         }
       }
     }
@@ -294,14 +303,14 @@ export class MarsBot {
         if (card === undefined) {
           card = createCorpBonusCard(bonusCardId as BonusCardId);
         }
-        if (card !== undefined) mb.actionDeck.push(card);
+        mb.actionDeck.push(card);
       },
       removeBonusCardFromDeck: (bonusCardId: string) => {
         mb.bonusDeck.removeById(bonusCardId);
       },
       addBonusCardToBonusDeck: (bonusCardId: string) => {
         const card = createCorpBonusCard(bonusCardId as BonusCardId);
-        if (card !== undefined) mb.bonusDeck.drawPile.push(card);
+        mb.bonusDeck.drawPile.push(card);
       },
       getCorpState: (key: string) => mb.corpSpecificState.get(key) ?? 0,
       setCorpState: (key: string, value: number) => { mb.corpSpecificState.set(key, value); },
@@ -339,18 +348,18 @@ export class MarsBot {
   }
 
   /** Check if a cube exists at a given track position. */
-  public hasCubeAt(trackNum: number, position: number): MarsBotTrackCube | undefined {
-    return this.trackCubePositions.get(trackCubeKey(trackNum, position));
+  public hasCubeAt(trackIndex: number, position: number): MarsBotTrackCube | undefined {
+    return this.trackCubePositions.get(trackCubeKey(trackIndex, position));
   }
 
   /** Check if a cube at this position has already been triggered. */
-  public isCubeTriggered(trackNum: number, position: number): boolean {
-    return this.triggeredCubePositions.has(trackCubeKey(trackNum, position));
+  public isCubeTriggered(trackIndex: number, position: number): boolean {
+    return this.triggeredCubePositions.has(trackCubeKey(trackIndex, position));
   }
 
   /** Mark a cube position as triggered. */
-  public markCubeTriggered(trackNum: number, position: number): void {
-    this.triggeredCubePositions.add(trackCubeKey(trackNum, position));
+  public markCubeTriggered(trackIndex: number, position: number): void {
+    this.triggeredCubePositions.add(trackCubeKey(trackIndex, position));
   }
 
   // ---- Scoring ----
@@ -375,13 +384,13 @@ export class MarsBot {
   // ---- Track Regression (human effects) ----
 
   /** Regress a track when human decreases MarsBot's production. */
-  public regressTrack(productionType: string): void {
-    for (const trackDef of this.board.data.trackDefs) {
+  public regressTrack(productionType: Resource): void {
+    for (let i = 0; i < this.board.tracks.length; i++) {
+      const trackDef = this.board.data.trackDefs[i];
       if (trackDef.productions.includes(productionType)) {
-        const track = this.board.getTrack(trackDef.num);
-        track.regress();
-        this.game.log('MarsBot\'s Track ${0} regressed (${1} production decreased)',
-          (b) => b.number(trackDef.num).rawString(productionType));
+        this.board.tracks[i].regress();
+        this.game.log('MarsBot\'s ${0} track regressed (${1} production decreased)',
+          (b) => b.rawString(trackDef.tags[0]).rawString(productionType));
         return;
       }
     }
@@ -395,10 +404,8 @@ export class MarsBot {
     const model: MarsBotModel = {
       difficulty: this.difficulty,
       tracks: this.board.tracks.map((track) => ({
-        num: track.definition.num,
-        tagNames: track.definition.tags.map((t) => t as string),
+        tags: track.definition.tags,
         position: track.position,
-        maxPosition: MARSBOT_MAX_TRACK_POSITION,
         layout: track.definition.layout,
       })),
       terraformRating: this.player.getTerraformRating(),
@@ -409,10 +416,11 @@ export class MarsBot {
       instantWin: this.isInstantWin(),
     };
     if (this.corp !== undefined) {
-      model.corpId = this.corp.id;
-      model.corpName = this.corp.name;
+      model.corpName = this.corp.name as CardName;
       model.corpDescription = this.corp.description;
-      model.trackCubes = Array.from(this.trackCubePositions.values());
+      model.trackCubes = Array.from(this.trackCubePositions.values()).map((c) => ({
+        trackIndex: c.trackIndex - 1, position: c.position, cubeType: c.cubeType,
+      }));
     }
     const opts = this.game.gameOptions;
     const mcPerVP = getMcPerVP(this.game.generation, opts.preludeExtension, opts.prelude2Expansion);
@@ -457,6 +465,9 @@ export class MarsBot {
     if (this.vpByGeneration.length > 0) {
       state.vpByGeneration = this.vpByGeneration;
     }
+    if (this.temperatureRaises > 0) {
+      state.temperatureRaises = this.temperatureRaises;
+    }
     return state;
   }
 
@@ -492,7 +503,7 @@ export class MarsBot {
     if (state.trackCubePositions !== undefined) {
       this.trackCubePositions.clear();
       for (const cube of state.trackCubePositions) {
-        this.trackCubePositions.set(trackCubeKey(cube.trackNum, cube.position), cube);
+        this.trackCubePositions.set(trackCubeKey(cube.trackIndex, cube.position), cube);
       }
     }
     if (state.triggeredCubePositions !== undefined) {
@@ -506,6 +517,9 @@ export class MarsBot {
     }
     if (state.vpByGeneration !== undefined) {
       this.vpByGeneration = [...state.vpByGeneration];
+    }
+    if (state.temperatureRaises !== undefined) {
+      this.temperatureRaises = state.temperatureRaises;
     }
   }
 

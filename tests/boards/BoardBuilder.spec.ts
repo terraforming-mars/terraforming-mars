@@ -57,11 +57,7 @@ describe('BoardBuilder', () => {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      const reservedSpaces = [SpaceName.NOCTIS_CITY,
-        SpaceName.ASCRAEUS_MONS,
-        SpaceName.ARSIA_MONS,
-        SpaceName.PAVONIS_MONS,
-        SpaceName.THARSIS_THOLUS].map((id) => board.getSpaceOrThrow(id).spaceType);
+      const reservedSpaces = [SpaceName.NOCTIS_CITY, ...board.volcanicSpaceIds].map((id) => board.getSpaceOrThrow(id).spaceType);
       expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.LAND, SpaceType.LAND, SpaceType.LAND, SpaceType.LAND, SpaceType.LAND]);
     }
   });
@@ -74,12 +70,7 @@ describe('BoardBuilder', () => {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      const reservedSpaces = [
-        SpaceName.TIKHONAROV,
-        SpaceName.LADON,
-        SpaceName.FLAUGERGUES,
-        SpaceName.CHARYBDIS,
-      ].map((id) => board.getSpaceOrThrow(id).spaceType);
+      const reservedSpaces = board.volcanicSpaceIds.map((id) => board.getSpaceOrThrow(id).spaceType);
       expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.COVE, SpaceType.LAND, SpaceType.LAND, SpaceType.LAND]);
     }
   });

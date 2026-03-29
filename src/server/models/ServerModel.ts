@@ -350,12 +350,11 @@ export class Server {
     gagarin: ReadonlyArray<SpaceId> = [],
     cathedrals: ReadonlyArray<SpaceId> = [],
     nomads: SpaceId | undefined = undefined): Array<SpaceModel> {
-    const volcanicSpaceIds = board.volcanicSpaceIds;
     const noctisCitySpaceId = board.noctisCitySpaceId;
 
     return board.spaces.map((space) => {
       let highlight: SpaceHighlight = undefined;
-      if (volcanicSpaceIds.includes(space.id)) {
+      if (space.volcanic) {
         highlight = 'volcanic';
       } else if (noctisCitySpaceId === space.id) {
         highlight = 'noctis';

@@ -7,14 +7,11 @@ import {Resource} from '../../common/Resource';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectCard} from '../inputs/SelectCard';
 import {OrOptions} from '../inputs/OrOptions';
-import {PlayerInput} from '../PlayerInput';
-import {DeltaProjectInput} from './DeltaProjectInput';
 import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../common/CardResource';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../cards/ICard';
-import {createDeltaProjectModel} from '../models/DeltaProjectModel';
 
 /**
  * The ordered tags for each track position (1-indexed).
@@ -127,29 +124,6 @@ export class DeltaProjectExpansion {
     return maxPos - currentPos;
   }
 
-  public static canAct(player: IPlayer): boolean {
-    if (player.game.deltaProjectData === undefined) return false;
-    if (player.deltaProjectActionUsedThisGeneration) return false;
-    if (player.energy < 1) return false;
-    return DeltaProjectExpansion.maxSteps(player) > 0;
-  }
-
-  public static action(player: IPlayer): PlayerInput {
-    const game = player.game;
-    const max = DeltaProjectExpansion.maxSteps(player);
-
-    return new DeltaProjectInput(
-      'Delta Project: Pay energy to advance on the track',
-      'Advance',
-      1,
-      max,
-      createDeltaProjectModel(game) ?? (() => { throw new Error('Delta Project model not available'); })(),
-    ).andThen((amount) => {
-      DeltaProjectExpansion.advance(player, amount);
-      return undefined;
-    });
-  }
-
   public static advance(player: IPlayer, steps: number): void {
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
@@ -159,7 +133,6 @@ export class DeltaProjectExpansion {
 
     player.stock.deduct(Resource.ENERGY, steps);
     progress.position = newPos;
-    player.deltaProjectActionUsedThisGeneration = true;
 
     if (newPos === 10 && !DeltaProjectExpansion.isSpotClaimed(data, 'claimed2VP')) {
       progress.claimed2VP = true;

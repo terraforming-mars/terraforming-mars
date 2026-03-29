@@ -3,6 +3,7 @@ import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {DeltaProjectExpansion} from '../../src/server/delta/DeltaProjectExpansion';
+import {DeltaProjectPrelude} from '../../src/server/delta/DeltaProjectPrelude';
 import {Tag} from '../../src/common/cards/Tag';
 import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -35,37 +36,6 @@ describe('DeltaProjectExpansion', () => {
   it('initializes player positions to 0', () => {
     expect(DeltaProjectExpansion.getPosition(game, player)).eq(0);
     expect(DeltaProjectExpansion.getPosition(game, player2)).eq(0);
-  });
-
-  describe('canAct', () => {
-    it('returns false when expansion is not enabled', () => {
-      const [, p] = testGame(1);
-      expect(DeltaProjectExpansion.canAct(p)).is.false;
-    });
-
-    it('returns false when already used this generation', () => {
-      player.energy = 5;
-      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
-      player.deltaProjectActionUsedThisGeneration = true;
-      expect(DeltaProjectExpansion.canAct(player)).is.false;
-    });
-
-    it('returns false with no energy', () => {
-      player.energy = 0;
-      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
-      expect(DeltaProjectExpansion.canAct(player)).is.false;
-    });
-
-    it('returns false when no tags to advance', () => {
-      player.energy = 5;
-      expect(DeltaProjectExpansion.canAct(player)).is.false;
-    });
-
-    it('returns true when can advance at least one step', () => {
-      player.energy = 5;
-      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
-      expect(DeltaProjectExpansion.canAct(player)).is.true;
-    });
   });
 
   describe('maxSteps', () => {
@@ -159,15 +129,6 @@ describe('DeltaProjectExpansion', () => {
 
       expect(player.energy).eq(2);
       expect(progress(data, player.color).position).eq(3);
-    });
-
-    it('sets once-per-generation flag', () => {
-      player.energy = 5;
-      expect(player.deltaProjectActionUsedThisGeneration).is.false;
-
-      DeltaProjectExpansion.advance(player, 1);
-
-      expect(player.deltaProjectActionUsedThisGeneration).is.true;
     });
 
     it('claims 2VP when landing on position 10', () => {
@@ -542,8 +503,38 @@ describe('DeltaProjectExpansion', () => {
     });
   });
 
-  describe('action flow', () => {
-    it('returns DeltaProjectInput with correct range', () => {
+  describe('prelude card', () => {
+    it('is added to prelude hand when expansion is enabled', () => {
+      expect(player.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT_PRELUDE)).is.true;
+    });
+
+    it('is not present when expansion is disabled', () => {
+      const [, p] = testGame(1);
+      expect(p.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT_PRELUDE)).is.false;
+    });
+
+    it('canAct returns false with no energy', () => {
+      const card = new DeltaProjectPrelude();
+      player.energy = 0;
+      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
+      expect(card.canAct(player)).is.false;
+    });
+
+    it('canAct returns false when no tags to advance', () => {
+      const card = new DeltaProjectPrelude();
+      player.energy = 5;
+      expect(card.canAct(player)).is.false;
+    });
+
+    it('canAct returns true when can advance', () => {
+      const card = new DeltaProjectPrelude();
+      player.energy = 5;
+      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
+      expect(card.canAct(player)).is.true;
+    });
+
+    it('action returns DeltaProjectInput with correct range', () => {
+      const card = new DeltaProjectPrelude();
       player.energy = 3;
       player.playedCards.push(
         fakeCard({tags: [Tag.BUILDING]}),
@@ -551,20 +542,42 @@ describe('DeltaProjectExpansion', () => {
         fakeCard({tags: [Tag.EARTH]}),
       );
 
-      const input = cast(DeltaProjectExpansion.action(player), DeltaProjectInput);
+      const input = cast(card.action(player), DeltaProjectInput);
       expect(input.min).eq(1);
       expect(input.max).eq(3);
     });
 
-    it('once-per-generation lock resets at production phase', () => {
+    it('action advances the player on the track', () => {
+      const card = new DeltaProjectPrelude();
+      player.energy = 3;
+      player.playedCards.push(
+        fakeCard({tags: [Tag.BUILDING]}),
+        fakeCard({tags: [Tag.POWER]}),
+        fakeCard({tags: [Tag.EARTH]}),
+      );
+
+      const input = cast(card.action(player), DeltaProjectInput);
+      input.cb(2);
+
+      const data = DeltaProjectExpansion.getData(game);
+      expect(progress(data, player.color).position).eq(2);
+      expect(player.energy).eq(1);
+    });
+
+    it('once-per-generation via actionsThisGeneration', () => {
+      const card = new DeltaProjectPrelude();
       player.energy = 5;
       player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
 
-      DeltaProjectExpansion.advance(player, 1);
-      expect(player.deltaProjectActionUsedThisGeneration).is.true;
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.false;
+
+      player.actionsThisGeneration.add(CardName.DELTA_PROJECT_PRELUDE);
+
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.true;
 
       player.runProductionPhase();
-      expect(player.deltaProjectActionUsedThisGeneration).is.false;
+
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.false;
     });
   });
 

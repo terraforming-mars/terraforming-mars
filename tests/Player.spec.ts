@@ -250,7 +250,6 @@ describe('Player', () => {
       },
       standardProjectsThisGeneration: [],
       jovianTagCount: 0,
-      deltaProjectActionUsedThisGeneration: false,
       withinDeflectionZone: false,
     };
 

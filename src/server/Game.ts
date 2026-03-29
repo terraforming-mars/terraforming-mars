@@ -57,6 +57,7 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {DeltaProjectData} from './delta/DeltaProjectData';
 import {DeltaProjectExpansion} from './delta/DeltaProjectExpansion';
+import {DeltaProjectPrelude} from './delta/DeltaProjectPrelude';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
@@ -363,6 +364,9 @@ export class Game implements IGame, Logger {
 
     if (game.gameOptions.deltaProjectExpansion) {
       game.deltaProjectData = DeltaProjectExpansion.initialize(game);
+      for (const player of game.playersInGenerationOrder) {
+        player.preludeCardsInHand.push(new DeltaProjectPrelude());
+      }
     }
 
     // Failsafe for exceeding corporation pool

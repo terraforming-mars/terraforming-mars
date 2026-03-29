@@ -21,6 +21,30 @@
     }
 }
 
+.terraformed-banner {
+    background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
+    color: #000;
+    text-align: center;
+    padding: 12px;
+    font-size: 24px;
+    font-family: Prototype, Ubuntu, Sans-Serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    position: relative;
+    border-bottom: 2px solid #805700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+@keyframes slide-down {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 // text shadows
 .player_shadow_color_red {
     text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
@@ -884,12 +908,17 @@
   animation:smoth-fade-animation 2000ms infinite;
 }
 
-.top-bar {
+.top-bar-container {
     position: sticky;
-    margin: -40px 0 0 auto;
-    margin-bottom: 15px;
-    z-index: 105;
     top: -12px;
+    z-index: 105;
+    margin-top: -30px;
+    margin-left: -20px;
+}
+
+.top-bar {
+    margin: 0 0 0 auto;
+    margin-bottom: 0;
     display: inline-flex;
 
     .top-bar-collapser {
@@ -925,7 +954,7 @@
 }
 
 .top-bar-collapsed {
-    margin: -32px 0 0 -20px;
+    margin: 0; // Handled by container
 
     .player-info {
         display: none;

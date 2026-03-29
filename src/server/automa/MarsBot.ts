@@ -3,10 +3,9 @@ import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Resource} from '../../common/Resource';
 import {CardName} from '../../common/cards/CardName';
-import {DifficultyLevel, BonusCardId, isAutomaPreludeGame, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
+import {DifficultyLevel, BonusCardId, TrackDefinition, isAutomaPreludeGame, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
 import {getMcPerVP} from './MarsBotScoring';
 import {MarsBotBoard} from './MarsBotBoard';
-import {MarsBotBoardData} from '../../common/automa/AutomaTypes';
 import {MarsBotModel} from '../../common/models/MarsBotModel';
 import {MarsBotBonusCard, createCorpBonusCard} from './MarsBotBonusCard';
 import {MarsBotBonusDeck} from './MarsBotBonusDeck';
@@ -80,7 +79,7 @@ export class MarsBot {
     public readonly player: IPlayer,
     /** The human opponent. */
     public readonly humanPlayer: IPlayer,
-    boardData: MarsBotBoardData,
+    boardData: ReadonlyArray<TrackDefinition>,
     public readonly difficulty: DifficultyLevel,
     private readonly random: Random,
   ) {
@@ -386,7 +385,7 @@ export class MarsBot {
   /** Regress a track when human decreases MarsBot's production. */
   public regressTrack(productionType: Resource): void {
     for (let i = 0; i < this.board.tracks.length; i++) {
-      const trackDef = this.board.data.trackDefs[i];
+      const trackDef = this.board.data[i];
       if (trackDef.productions.includes(productionType)) {
         this.board.tracks[i].regress();
         this.game.log('MarsBot\'s ${0} track regressed (${1} production decreased)',

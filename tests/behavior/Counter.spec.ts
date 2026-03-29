@@ -445,7 +445,7 @@ describe('Counter for Underworld', () => {
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
     expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(1);
 
-    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).excavator = player2;
+    game.board.getSpaceOrThrow('09').excavator = player2;
 
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
     expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);

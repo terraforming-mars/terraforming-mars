@@ -1,12 +1,17 @@
 <template>
   <div>
-  <template v-if="waitingfor === undefined">
-    {{ $t('Not your turn to take any actions') }}
+  <template v-if="waitingfor === undefined || waitingfor.polling">
+    <template v-if="waitingfor === undefined">
+      {{ $t('Not your turn to take any actions') }}
+    </template>
+    <template v-else>
+      {{ $t('Waiting for other players') }}
+    </template>
     <template v-if="playersWaitingFor.length > 0">
       (⌛ <span v-for="color in playersWaitingFor" :class="playerColorClass(color, 'bg')" :key="color">&nbsp;&nbsp;&nbsp;</span>)
     </template>
   </template>
-  <div v-else class="wf-root">
+  <div v-if="waitingfor !== undefined" class="wf-root">
     <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
       <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" v-on:change="updateSuspend">
       <label for="suspend-checkbox">
@@ -254,7 +259,7 @@ export default defineComponent({
     if (this.waitingfor === undefined || this.waitingfor.polling) {
       this.waitForUpdate();
     }
-    if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
+    if (this.playerView.players.length > 1 && this.waitingfor !== undefined && !this.waitingfor.polling) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

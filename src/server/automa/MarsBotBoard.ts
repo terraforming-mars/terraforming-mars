@@ -6,6 +6,12 @@ import {
   MARSBOT_MAX_TRACK_POSITION,
 } from '../../common/automa/AutomaTypes';
 
+/** Result of advancing a track. */
+export type AdvanceResult =
+  | {type: 'action', action: TrackAction}
+  | {type: 'none'}
+  | {type: 'maxed'};
+
 /** Runtime state for a single MarsBot track. */
 export class MarsBotTrack {
   public position: number = 0;
@@ -18,18 +24,18 @@ export class MarsBotTrack {
     return this.position < MARSBOT_MAX_TRACK_POSITION;
   }
 
-  /** Advance the track by 1. Returns the action at the new position, or null. */
-  public advance(): TrackAction | null {
+  /** Advance the track by 1. */
+  public advance(): AdvanceResult {
     if (!this.canAdvance()) {
-      return null; // Caller should trigger failed action
+      return {type: 'maxed'};
     }
     this.position++;
-    // If this position was previously regressed from, clear the marker and skip the action
     if (this.regressedPositions.has(this.position)) {
       this.regressedPositions.delete(this.position);
-      return null;
+      return {type: 'none'};
     }
-    return this.definition.layout[this.position] ?? null;
+    const action = this.definition.layout[this.position];
+    return action !== undefined ? {type: 'action', action} : {type: 'none'};
   }
 
   /** Regress the track by 1 (from human decreasing MarsBot production). */
@@ -40,17 +46,17 @@ export class MarsBotTrack {
     }
   }
 
-  /** Get the action at the NEXT position (for final greenery check). */
-  public peekNextAction(): TrackAction | null {
-    if (this.position >= MARSBOT_MAX_TRACK_POSITION) return null;
-    return this.definition.layout[this.position + 1] ?? null;
+  /** Get the action at the next position without advancing. Returns undefined if at max or no action. */
+  public peek(): TrackAction | undefined {
+    if (this.position >= MARSBOT_MAX_TRACK_POSITION) return undefined;
+    return this.definition.layout[this.position + 1];
   }
 }
 
-/** The MarsBot board with 7 tracks. Handles tag-to-track mapping and track state. */
+/** The MarsBot board with tracks. Handles tag-to-track mapping and track state. */
 export class MarsBotBoard {
   public readonly tracks: ReadonlyArray<MarsBotTrack>;
-  private readonly tagToTrack: Map<Tag, number>; // Tag → track index (0-based)
+  private readonly tagToTrack: Map<Tag, number>;
 
   constructor(public readonly data: MarsBotBoardData) {
     this.tracks = data.trackDefs.map((def) => new MarsBotTrack(def));
@@ -67,17 +73,12 @@ export class MarsBotBoard {
     return this.tagToTrack.get(tag);
   }
 
-  /** Get a track by its 1-based number. */
-  public getTrack(num: number): MarsBotTrack {
-    return this.tracks[num - 1];
-  }
-
   /** Check if a tag is mapped to any track. */
   public hasTrackForTag(tag: Tag): boolean {
     return this.tagToTrack.has(tag);
   }
 
-  /** Get the index of the least-advanced track (lowest position, topmost/lowest index if tied). */
+  /** Index of the least-advanced track (first index if tied). */
   public getLeastAdvancedTrackIndex(): number {
     let minPos = this.tracks[0].position;
     let minIndex = 0;
@@ -90,7 +91,7 @@ export class MarsBotBoard {
     return minIndex;
   }
 
-  /** Get the index of the most-advanced track (highest position, topmost/lowest index if tied). */
+  /** Index of the most-advanced track (first index if tied). */
   public getMostAdvancedTrackIndex(): number {
     let maxPos = this.tracks[0].position;
     let maxIndex = 0;
@@ -103,7 +104,7 @@ export class MarsBotBoard {
     return maxIndex;
   }
 
-  /** Get the index of the most-advanced track that hasn't reached max position. */
+  /** Index of the most-advanced track that hasn't reached max, or undefined if all maxed. */
   public getMostAdvancedNonMaxedTrackIndex(): number | undefined {
     let maxPos = -1;
     let maxIndex: number | undefined;

@@ -1,4 +1,7 @@
 import {Tag} from '../cards/Tag';
+import {Resource} from '../Resource';
+import {AwardName} from '../ma/AwardName';
+import {MilestoneName} from '../ma/MilestoneName';
 
 /** Actions that can appear on MarsBot board track positions. */
 export type TrackAction =
@@ -11,25 +14,24 @@ export type TrackAction =
   | 'ocean'
   | 'city'
   | 'venus' | 'venus2'
-  | `tag_${number}`; // Advance another track by its 1-based index
+  | `tag_${number}`;
 
 /** A single track on the MarsBot board (19 positions: 0–18). */
-export type TrackLayout = ReadonlyArray<TrackAction | null>;
+export type TrackLayout = ReadonlyArray<TrackAction | undefined>;
 
 /** Definition of one MarsBot track: which tags and production types map to it. */
-export interface TrackDefinition {
-  readonly num: number; // 1-based track index
+export type TrackDefinition = {
   readonly tags: ReadonlyArray<Tag>;
-  readonly productions: ReadonlyArray<string>; // e.g. 'Steel', 'Titanium'
+  readonly productions: ReadonlyArray<Resource>;
   readonly layout: TrackLayout;
-}
+};
 
 /** Complete MarsBot board data for a specific map. */
-export interface MarsBotBoardData {
+export type MarsBotBoardData = {
   readonly trackDefs: ReadonlyArray<TrackDefinition>;
-  readonly awardFormulas: Record<string, string>;
-  readonly milestoneCriteria: Record<string, string>;
-}
+  readonly awardFormulas: Partial<Record<AwardName, string>>;
+  readonly milestoneCriteria: Partial<Record<MilestoneName, string>>;
+};
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
 
@@ -96,8 +98,8 @@ export const MARSBOT_MAX_GENERATION = 20;
 export const MARSBOT_MAX_GENERATION_PRELUDE = 18;
 
 /** Whether this automa game uses Prelude rules (shorter game, wild tags, etc.). */
-export function isAutomaPreludeGame(preludeExtension: boolean, prelude2Expansion: boolean): boolean {
-  return preludeExtension || prelude2Expansion;
+export function isAutomaPreludeGame(preludeExtension: boolean, _prelude2Expansion: boolean): boolean {
+  return preludeExtension;
 }
 
 /** Get the max generation for an automa game. */
@@ -107,25 +109,3 @@ export function getAutomaMaxGeneration(preludeExtension: boolean, prelude2Expans
     MARSBOT_MAX_GENERATION;
 }
 
-/** Build MC-to-VP table for a given max generation. mcPerVP goes 8→1 over the last 8 generations. */
-function buildMcToVpTable(maxGen: number): ReadonlyArray<{maxGeneration: number, mcPerVP: number}> {
-  const table: Array<{maxGeneration: number, mcPerVP: number}> = [];
-  for (let mcPerVP = 8; mcPerVP >= 1; mcPerVP--) {
-    table.push({maxGeneration: maxGen - mcPerVP, mcPerVP});
-  }
-  return table;
-}
-
-/** MC-to-VP conversion table by generation number at game end (base game, no Prelude). */
-export const MC_TO_VP_TABLE = buildMcToVpTable(MARSBOT_MAX_GENERATION);
-
-/** MC-to-VP conversion table when playing with Prelude (shorter game). */
-export const MC_TO_VP_TABLE_PRELUDE = buildMcToVpTable(MARSBOT_MAX_GENERATION_PRELUDE);
-
-/** Get the current MC-per-VP ratio for the given generation. Returns undefined if before conversion window. */
-export function getMcPerVP(generation: number, preludeExtension: boolean, prelude2Expansion: boolean): number | undefined {
-  const table = isAutomaPreludeGame(preludeExtension, prelude2Expansion) ?
-    MC_TO_VP_TABLE_PRELUDE : MC_TO_VP_TABLE;
-  const entry = table.find((e) => generation <= e.maxGeneration);
-  return entry?.mcPerVP;
-}

@@ -1,77 +1,71 @@
 import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
 import {MarsBotBoardData, TrackDefinition} from '../../../common/automa/AutomaTypes';
 
-const TRACK_1_BUILDING: TrackDefinition = {
-  num: 1,
+const TRACK_BUILDING: TrackDefinition = {
   tags: [Tag.BUILDING],
-  productions: ['Steel'],
-  layout: [null, null, 'ocean', null, null, 'tr2', 'temperature', 'milestone', 'greenery', 'award', 'city', 'tag_2', 'ocean', null, 'greenery', 'city', 'temperature', null, 'tr5'],
+  productions: [Resource.STEEL],
+  layout: [undefined, undefined, 'ocean', undefined, undefined, 'tr2', 'temperature', 'milestone', 'greenery', 'award', 'city', 'tag_1', 'ocean', undefined, 'greenery', 'city', 'temperature', undefined, 'tr5'],
 };
 
-const TRACK_2_SPACE: TrackDefinition = {
-  num: 2,
+const TRACK_SPACE: TrackDefinition = {
   tags: [Tag.SPACE],
-  productions: ['Titanium'],
-  layout: [null, 'advance', null, 'temperature', null, 'ocean', 'city', 'venus', 'milestone', 'temperature', null, 'tr3', 'ocean', null, 'temperature', null, 'tr4', null, 'tr6'],
+  productions: [Resource.TITANIUM],
+  layout: [undefined, 'advance', undefined, 'temperature', undefined, 'ocean', 'city', 'venus', 'milestone', 'temperature', undefined, 'tr3', 'ocean', undefined, 'temperature', undefined, 'tr4', undefined, 'tr6'],
 };
 
-const TRACK_3_EVENT: TrackDefinition = {
-  num: 3,
+const TRACK_EVENT: TrackDefinition = {
   tags: [Tag.EVENT],
-  productions: ['MC'],
-  layout: [null, 'advance', null, 'ocean', 'greenery', 'advance', 'venus2', 'advance', 'ocean', 'tr3', 'award', null, 'tr4', 'temperature', 'greenery', 'advance', 'temperature2', null, 'tr5'],
+  productions: [Resource.MEGACREDITS],
+  layout: [undefined, 'advance', undefined, 'ocean', 'greenery', 'advance', 'venus2', 'advance', 'ocean', 'tr3', 'award', undefined, 'tr4', 'temperature', 'greenery', 'advance', 'temperature2', undefined, 'tr5'],
 };
 
-const TRACK_4_SCIENCE: TrackDefinition = {
-  num: 4,
+const TRACK_SCIENCE: TrackDefinition = {
   tags: [Tag.SCIENCE],
   productions: [],
-  layout: [null, 'advance', null, 'advance', 'city', null, 'greenery', null, 'tr2', 'milestone', 'temperature', 'ocean', 'tr3', 'temperature', 'tr4', 'advance', null, 'temperature', 'tr7'],
+  layout: [undefined, 'advance', undefined, 'advance', 'city', undefined, 'greenery', undefined, 'tr2', 'milestone', 'temperature', 'ocean', 'tr3', 'temperature', 'tr4', 'advance', undefined, 'temperature', 'tr7'],
 };
 
-const TRACK_5_ENERGY: TrackDefinition = {
-  num: 5,
+const TRACK_ENERGY: TrackDefinition = {
   tags: [Tag.POWER, Tag.JOVIAN],
-  productions: ['Electricity'],
-  layout: [null, 'advance', 'venus', 'tr3', 'venus2', 'temperature', 'advance', 'milestone', null, 'temperature', 'greenery', 'advance', 'ocean', null, 'city', 'greenery', null, 'temperature', 'tr8'],
+  productions: [Resource.ENERGY],
+  layout: [undefined, 'advance', 'venus', 'tr3', 'venus2', 'temperature', 'advance', 'milestone', undefined, 'temperature', 'greenery', 'advance', 'ocean', undefined, 'city', 'greenery', undefined, 'temperature', 'tr8'],
 };
 
-const TRACK_6_EARTH: TrackDefinition = {
-  num: 6,
+const TRACK_EARTH: TrackDefinition = {
   tags: [Tag.EARTH, Tag.CITY],
-  productions: ['Heat'],
-  layout: [null, 'city', null, null, 'tr3', 'city', null, 'advance', 'city', 'award', 'advance', 'city', 'greenery', 'tr4', 'greenery', 'advance', null, 'city', 'tr7'],
+  productions: [Resource.HEAT],
+  layout: [undefined, 'city', undefined, undefined, 'tr3', 'city', undefined, 'advance', 'city', 'award', 'advance', 'city', 'greenery', 'tr4', 'greenery', 'advance', undefined, 'city', 'tr7'],
 };
 
-const TRACK_7_PLANT: TrackDefinition = {
-  num: 7,
+const TRACK_PLANT: TrackDefinition = {
   tags: [Tag.PLANT, Tag.ANIMAL, Tag.MICROBE],
-  productions: ['Plants'],
-  layout: [null, null, null, 'greenery', null, 'greenery', 'greenery', 'advance', null, 'ocean', 'award', 'temperature', 'tr3', 'greenery', 'greenery', 'ocean', 'greenery', null, 'tr6'],
+  productions: [Resource.PLANTS],
+  layout: [undefined, undefined, undefined, 'greenery', undefined, 'greenery', 'greenery', 'advance', undefined, 'ocean', 'award', 'temperature', 'tr3', 'greenery', 'greenery', 'ocean', 'greenery', undefined, 'tr6'],
 };
 
 export const THARSIS_MARSBOT_BOARD: MarsBotBoardData = {
   trackDefs: [
-    TRACK_1_BUILDING,
-    TRACK_2_SPACE,
-    TRACK_3_EVENT,
-    TRACK_4_SCIENCE,
-    TRACK_5_ENERGY,
-    TRACK_6_EARTH,
-    TRACK_7_PLANT,
+    TRACK_BUILDING,
+    TRACK_SPACE,
+    TRACK_EVENT,
+    TRACK_SCIENCE,
+    TRACK_ENERGY,
+    TRACK_EARTH,
+    TRACK_PLANT,
   ],
   awardFormulas: {
     'Landlord': 'tiles owned on board',
-    'Banker': 'track 1 + track 3',
-    'Scientist': 'track 4',
-    'Thermalist': 'track 5 + 5',
-    'Miner': 'track 2 + 5',
+    'Banker': 'Building track + Event track',
+    'Scientist': 'Science track',
+    'Thermalist': 'Energy track + 5',
+    'Miner': 'Space track + 5',
   },
   milestoneCriteria: {
     'Terraformer': 'reached 35 TR',
     'Mayor': 'owns 3+ cities',
     'Gardener': 'owns 3+ greenery',
-    'Builder': 'reached space 8 on track 1',
+    'Builder': 'reached space 8 on Building track',
     'Planner': 'reached space 4 on every track',
   },
 };

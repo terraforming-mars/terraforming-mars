@@ -61,7 +61,6 @@
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Requiere 4 losetas de océano. Coloca esta loseta. Reduce tu producción de energía en 2 y aumenta tu producción de M€ en 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "1 PV ADICIONAL POR CADA LOSETA DE OCÉANO ADYACENTE A ESTA LOSETA DE CIUDAD.",
 
-    "Asteroid": "Asteroide",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Aumenta la temperatura 1 nivel y obtén 2 de titanio. Elimina hasta 3 plantas de cualquier jugador.",
 
     "Comet": "Cometa",
@@ -289,7 +288,6 @@
     "Increase your energy production 1 step and gain 2 titanium.": "Aumenta tu producción de energía 1 nivel y obtén 2 de titanio.",
 
     "Ice Asteroid": "Asteroide de Hielo",
-    "Place 2 ocean tiles.": "Coloca 2 losetas de océano.",
 
     "Quantum Extractor": "Extractor de Quantum",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Efecto: al jugar una carta tipo espacio, paga 2 M€ menos por ella.",
@@ -470,7 +468,6 @@
     "It must be -10 C or colder.": "La temperatura debe ser -10°C o más fría.",
 
     "Advanced Ecosystems": "Ecosistemas Avanzados",
-    "Plant Animal Microbe": "Planta Animal Microbio",
     "Requires a plant tag, a microbe tag, and an animal tag.": "Requiere un símbolo de planta, uno de microbio y uno de animal.",
 
     "Great Dam": "Presa Gigante",
@@ -488,7 +485,6 @@
     "Lava Flows": "Ríos de Lava",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Aumenta la temperatura 2 niveles y coloca esta loseta en THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS O ARSIA MONS.",
 
-    "Power Plant": "Central Eléctrica",
 
     "Mohole Area": "Área Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Aumenta tu producción de calor 4 niveles. Coloca esta loseta EN UN ÁREA RESERVADA PARA OCÉANO.",
@@ -524,7 +520,6 @@
     "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "Reduce tu producción de calor cualquier número de niveles y aumenta tu producción de M€ ese mismo número.",
 
     "Adaptation Technology": "Modificador de Tecnología",
-    "Global requirements": "Requisitos globales",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "Efecto: tus requisitos globales son +2 o -2 niveles, a tu elección en cada caso.",
 
     "Caretaker Contract": "Contrato de Supervisión",
@@ -713,11 +708,9 @@
 
   "HYDROGEN TO VENUS":"Hidrógeno a Venus",
 
-  "Plant Microbe Animal":"Planta Microbio Animal",
   "Jovian":"Joviano",
   "max 3 Oceans":"max 3 Océanos",
   "Forest":"Bosque",
-  "2 Power":"2 Energía",
   "7 Science":"7 Ciencia",
   "Titanium production":"Producción de Titanio",
   "Steel production":"Producción de Acero",
@@ -727,8 +720,5 @@
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.":"Requiere 2 símbolos de Tierra. Incrementa tu producción de M€ en 4.",
   "Oxygen must be 4% or lower. Draw two cards.":"El oxígeno debe ser 4% o inferior. Roba 2 cartas.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"",
-  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.":"",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"",
   "Temperature must be -20 C or lower.":"La temperatura debe ser de -20℃ o inferior."
 }

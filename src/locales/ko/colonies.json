@@ -11,7 +11,6 @@
     "Ceres": "세레스",
     "Gain 1 steel production": "강철 생산력 1 증가",
     "Gain n steel": "강철 자원 n개 획득",
-    "Gain 2 steel": "강철 자원 2개 획득",
 
     "Enceladus": "엔셀라두스",
     "Add 3 microbes to ANY card": "아무 카드에 미생물 자원 3개 추가",
@@ -21,12 +20,10 @@
     "Europa": "유로파",
     "Place an ocean tile": "해양 타일 배치",
     "Gain 1 unit of production of the type under the track marker": "트랙 마커 아래의 종류에 해당하는 생산력 1 증가",
-    "Gain 1 M€": "1 M€ 획득",
 
     "Ganymede": "가니메데",
     "Gain 1 plant production": "식물 생산력 1 증가",
     "Gain n plants": "식물 자원 n개 획득",
-    "Gain 1 plant": "식물 자원 1개 획득",
 
     "Io": "이오",
     "Gain 1 heat production": "열 생산력 1 증가",
@@ -41,25 +38,19 @@
     "Miranda": "미란다",
     "Add 1 animal to ANY card": "아무 카드에 동물 자원 1개 추가",
     "Add n animals to ANY card": "아무 카드에 동물 자원 n개 추가",
-    "Draw 1 card": "카드 1장 뽑기",
 
     "Pluto": "플루토",
-    "Draw 2 cards": "카드 2장 뽑기",
     "Draw n cards": "카드 n장 뽑기",
     "Draw 1 card and then discard 1 card": "카드 n장 뽑고 그 후 카드 1장 버리기",
 
     "Titan": "타이탄",
     "Add 3 floaters to ANY card": "아무 카드에 부양체 자원 3개 추가",
     "Add n floaters to ANY card": "아무 카드에 부양체 자원 n개 추가",
-    "Add 1 floater to ANY card": "아무 카드에 부양체 자원 1개 추가",
 
     "Triton": "트리톤",
-    "Gain 3 titanium": "티타늄 자원 3개 획득",
     "Gain n titanium": "티타늄 자원 n개 획득",
-    "Gain 1 titanium": "티타늄 자원 1개 획득",
 
     "Iapetus": "이아페투스",
-    "Gain 1 TR": "테라포밍 등급 1 TR 상승",
     "Gain n TR": "테라포밍 등급 n TR 상승",
     "Pay 1 M€ less for cards this generation": "이번 세대 동안, 각 카드의 추진 비용 1 M€ 할인",
 
@@ -82,7 +73,6 @@
     "Draw n cards, keep 1": "카드 n장 뽑고 그 중 1장 보관",
     "Draw 1 card which you may pay to keep": "카드 1장 뽑고 구매할지 선택",
 
-    "Venus": "금성",
     "Increase Venus 1 step": "금성개척률 1단계 상승",
     "Add n resources to ANY Venus card": "금성 카드 위에 아무 자원 n개 추가",
     "Add 1 resource to ANY Venus card": "금성 카드 위에 아무 자원 1개 추가",
@@ -102,12 +92,10 @@
     "Erode n spaces adjacent to hazard tiles": "위험 타일에 인접한 n개의 구역 침식",
     "Gain 1 M€ per hazard tile on Mars": "화성에 있는 위험 타일마다 1 M€ 획득",
 
-    "Select colony tile to remove": "제거할 개척기치 타일 선택",
     "Bonus": "개척기지 보너스",
     "Colony Bonus": "개척기지 보너스",
     "Trade Income": "무역 수입",
     "Select where to build a colony": "개척기지를 건설할 곳 선택",
-    "Remove colony": "개척기지 제거",
 
     "Colony Fee": "개척기지 세금",
     "Trade Income: Gain the indicated production": "무역 수입: 표시된 생산력을 획득",
@@ -119,7 +107,6 @@
     "Copy Trade": "무역 사업 복제",
     "Party": "정당",
 
-    "Select one option": "다음 중 하나를 선택",
     "Callisto - (Energy)": "칼리스토 - (에너지)",
     "Ceres - (Steel)": "세레스 - (강철)",
     "Enceladus - (Microbes)": "엔셀라두스 - (미생물)",

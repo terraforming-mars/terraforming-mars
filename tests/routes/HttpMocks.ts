@@ -1,4 +1,5 @@
 import {EventEmitter} from 'events';
+import http from 'http';
 import {Request} from '../../src/server/Request';
 import {Response} from '../../src/server/Response';
 
@@ -23,8 +24,9 @@ export class MockResponse implements Response {
   public content = '';
   public statusCode = 200;
 
-  public setHeader(key: string, value: string) {
+  public setHeader(key: string, value: string): http.ServerResponse {
     this.headers.set(key, value);
+    return this as unknown as http.ServerResponse;
   }
   public write(content: string): boolean {
     this.content += content;
@@ -35,7 +37,8 @@ export class MockResponse implements Response {
       this.content += content;
     }
   }
-  public writeHead(statusCode: number): void {
+  public writeHead(statusCode: number): http.ServerResponse {
     this.statusCode = statusCode;
+    return this as unknown as http.ServerResponse;
   }
 }

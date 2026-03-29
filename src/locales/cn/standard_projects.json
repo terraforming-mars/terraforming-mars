@@ -1,7 +1,5 @@
 {
 
-    "Standard Projects": "标准项目",
-    "Asteroid":"小行星",
     "ASTEROID":"小行星",
 
     "Air Scrapping": "气体采集",
@@ -16,10 +14,8 @@
     "Aquifer": "开发含水层",
     "Spend 18 M€ to place an ocean tile.": "花费18 M€来放置一个海洋板块。",
 
-    "Greenery": "森林",
     "Spend 23 M€ to place a greenery tile and raise oxygen 1 step.": "花费23 M€放置一个森林板块，并提升氧气1级。",
 
-    "City": "城市",
     "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "花费25 M€来放置一个城市板块并增加你的M€产量1级。",
 
     "Sell Patents": "贩卖专利",
@@ -27,6 +23,5 @@
 
     "Spend 14 M€ to raise the temperature 1 step.": "花费14 M€来提升温度1级。",
 
-    "Colonies": "殖民地",
     "Spend 17 M€ to place a colony.": "花费17 M€来放置1个殖民地。"
 }

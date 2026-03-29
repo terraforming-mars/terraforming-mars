@@ -27,7 +27,6 @@
   "generations": "sukupolven jälkeen",
   "Player": "Pelaaja",
   "Corporation": "Yritys",
-  "TR": "MKL",
   "VP": "",
   "Total": "Yhteensä",
   "Timer": "Aika",
@@ -37,15 +36,10 @@
   "Natural Preserve:ares": "Luonnonsuojelualue",
   "Nuclear Zone:ares": "Ydinvyöhyke",
   "Ecological Zone:ares": "Ekologinen vyöhyke",
-  "Commercial District:ares": "Liikekeskusta",
   "Underworld Corruption Bribe": "Alamaailman korruptio-lahjus",
 
   "Completed!": "Valmis!",
   "% completed": " % valmis",
-  "Temperature": "Lämpötila",
-  "Oxygen": "Happi",
-  "Oceans": "Valtameret",
-  "Venus": "",
   "L. Habitat": "Kuu-asutus",
   "L. Mining": "Kuu-kaivos",
   "L. Logistics": "Kuu-logistiikka",
@@ -67,8 +61,6 @@
   "Milestones points": "Saavutuspisteet",
   "Awards points": "Palkintopisteet",
 
-  "Actions taken this game": "Tässä pelissä tehdyt toiminnot",
-  "Escape Velocity penalty": "Pakonopeus-rangaistus",
   "Download game log": "Lataa peliloki",
   "Generation": "Sukupolvi"
 }

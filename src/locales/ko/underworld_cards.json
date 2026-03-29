@@ -64,7 +64,6 @@
 "Gaia City": "",
 "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
 
-"Geological Survey": "",
 "Identify 3 underground resources. Claim 1 of them.": "",
 
 "Geologist Team": "",
@@ -85,10 +84,8 @@
 "Action: Spend 1 corruption to gain 3 of the same standard resource.": "",
 "Requires 2 corruption.": "",
 
-"Hackers": "",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "",
 
-"Hired Raiders": "",
 "Steal 3 M€, plus 2 extra M€ for each corruption resource you have, from any player.": "",
 
 "Hyperspace Drive Prototype": "",
@@ -182,7 +179,6 @@
 
 "Private Military Contractor": "",
 "Effect: When blocking damage from other players, you can use fighters here as if they were corruption resources. You cannot use them for score bribing or collusion.": "",
-"Action: Spend 1 titanium to add 1 fighter resource to this card.": "행동: 티타늄 자원 1개 소비해서 이 카드에 전투기 자원 1개 추가.",
 "Add 1 fighter resource to this card.": "",
 
 "Private Resorts": "",
@@ -202,7 +198,6 @@
 
 "Search for Life Underground": "",
 "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "",
-"3 VPs if you have one or more science resources here.": "이 카드에 과학 자원 하나라도 있다면 3점.",
 "Temperature must -18° C or colder.": "",
 
 "Server Sabotage": "",
@@ -224,10 +219,8 @@
 "// Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "",
 
 "Staged Protests": "",
-"Awards and Milestones": "",
 "Requires 1 corruption. Gain 1 corruption. Until the end of this generation, milestones and awards cost +8 M€.": "",
 
-"Standard Technology": "",
 "REPEAT": "",
 "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "",
 

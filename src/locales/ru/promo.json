@@ -94,7 +94,6 @@
 
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
 
-    "Magnetic Field Generators": "Генераторы магнитного поля",
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл.",
 
     "Orbital Cleanup": "Очистка орбиты",
@@ -122,12 +121,9 @@
     "Rego Plastics": "Регопластик",
     "Effect: Your steel resources are worth 1 M€ extra.": "Эффект: Ваша сталь стоит на 1 М€ дороже",
 
-    "OR 2": "ИЛИ 2",
-    "Interplanetary Trade": "Межпланетная торговля",
     "Increase your M€ production 1 step per different tag you have in play, including this.": "Увеличьте своё производство М€ за каждую вашу уникальную метку",
 
     "Penguins": "Пингвины",
-    "8 Oceans": "8 океанов",
     "Action: Add 1 animal to this card.": "Действие: добавьте сюда одно животное",
     "Requires 8 oceans.": "Требует 8 океанов",
     "1 VP for each animal on this card.": "1 ПО за каждое животное на этой карте",
@@ -152,7 +148,6 @@
     "Energy Market": "Энергетический рынок",
     "Action: Spend 2X M€ to gain X energy.": "Действие: Потратьте 2Х М€, чтобы получить Х энергии",
     "Action: Decrease energy production 1 step to gain 8 M€.": "Действие: Уменьшите своё производство энергии на 1, чтобы получить 8 М€",
-    "OR": "ИЛИ",
 
     "Asteroid Rights": "Права на астероиды",
     "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Действие: Потратьте 1 М€, чтобы добавить 1 астероид на любую карту",
@@ -207,7 +202,6 @@
     "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Действие: Потратьте 1 аэростат отсюда, чтобы получить по 1М€ за каждый аэростат здесь, включая только что потраченный. Можно получить не больше 5М€ за раз",
     "Add 1 floater here for every Earth tag you have, including this.": "Добавьте на эту карту по 1 аэростату за каждую метку Земли, включая метку на этой карте",
 
-    "Stanford Torus": "Стэнфордский тор",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Разместите город в локации Стэнфордский тор",
 
     "Bactoviral Research": "Бактериологические исследования",
@@ -238,7 +232,6 @@
 
     "Weather Balloons": "Метеозонды",
     "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "Действие: Добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы получить 1 М€ за каждый город на Марсе.",
-    "Draw 1 card.": "Возьмите 1 карту.",
 
     "Albedo Plants": "Альбедо растения",
     "(Effect: When you play a plant tag, including this, gain 3 heat.)": "(Эффект: Каждый раз, когда вы разыгрываете метку растений (включая эту), получите 3 тепла.)",

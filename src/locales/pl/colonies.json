@@ -16,17 +16,14 @@
     "Triton": "Tryton",
     "Leavitt": "Stacja Leavitt",
     "Titania": "Tytania",
-    "Venus": "Wenus",
     "Hygiea": "",
     "Iapetus": "Japet",
     "Mercury": "Merkury",
     "Pallas": "",
 
-    "Select colony tile to remove": "Wybierz obiekt, który chcesz odrzucić",
     "Colony Bonus": "Premia Kolonialna",
     "Trade Income": "Dochód z Handlu",
     "Select where to build a colony": "Wybierz obiekt, na którym chcesz umieścić kolonię",
-    "Remove colony": "Odrzuć kolonię",
 
     "Colony Fee": "Opłata Kolonialna",
     "Trade Income: Gain the indicated production": "Dochód z Handlu: Podnieś poziom przedstawionej produkcji",
@@ -36,7 +33,6 @@
     "COPY TRADE": "Skopiuj handel",
     "Party": "Partia",
 
-    "Select one option": "Wybierz jedną z dostępnych opcji",
     "Callisto - (Energy)": "Kallisto - (Energia)",
     "Ceres - (Steel)": "Ceres - (Stal)",
     "Enceladus - (Microbes)": "Enceladus - (Mikroby)",

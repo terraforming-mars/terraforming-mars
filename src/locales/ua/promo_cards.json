@@ -26,7 +26,6 @@
 
   "Red Ships": "Червоні кораблі",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Дія: Отримайте 1 M€ за кожне МІСТО І СПЕЦІАЛЬНЕ ПЛИТКА, прилеглі до океану.",
-  "Requires 4% oxygen.": "Вимагає 4% кисню або менше.",
 
   "Neptunian Power Consultants": "Нептунійські енергетичні консультанти",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Ефект: Коли будь-який океан розміщується, ВИ МОЖЕТЕ заплатити 5 M€ (можна використовувати сталь), щоб підвищити виробництво енергії на 1 крок і додати 1 гідроелектричний ресурс на цю карту.",
@@ -41,7 +40,6 @@
 
   "Homeostasis Bureau": "Бюро гомеостазу",
   "Effect: When you raise the temperature, gain 3 M€.": "Ефект: При підвищенні температури отримайте 3 M€.",
-  "Increase your heat production 2 steps.": "Збільшити виробництво тепла на 2 кроки.",
 
   "Hermetic Order of Mars": "Герметичний Орден Марсу",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Кисень повинен бути 4% або менше. Збільшити виробництво M€ на 2 кроки. Отримайте 1 M€ за кожну порожню область, прилеглу до ваших плиток.",
@@ -92,11 +90,8 @@
   "Field-Capped City": "Місто з полем-кришкою",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Збільшити виробництво M€ на 2 кроки, збільшити виробництво енергії на 1 крок, отримати 3 рослини і розмістити міську плитку.",
 
-  "Great Dam": "Велика дамба",
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Вимагає 4 океанських плиток. Збільшити виробництво енергії на 2 кроки.",
 
   "Magnetic Shield": "Магнітний щит",
-  "3 Power": "3 Енергії",
   "Requires 3 power tags. Raise your TR 4 steps.": "Вимагає 3 значки енергії. Підвищте ваш РТ на 4 кроки.",
 
   "Meltworks": "Плавильний завод",
@@ -106,12 +101,10 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Отримати 3 рослини. Підвищити температуру на 1 крок і розмістити 1 океанську плитку.",
 
   "Diversity Support": "Підтримка різноманітності",
-  "9 Resource types": "9 типів ресурсів",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "Вимагає, щоб у вас було 9 різних типів ресурсів. Отримайте 1 РТ.",
 
   "Topsoil Contract": "Контракт на верхній шар ґрунту",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Ефект: Коли ви отримуєте мікроба на БУДЬ-ЯКУ КАРТУ, також отримайте 1 M€.",
-  "Gain 3 plants.": "Отримати 3 рослини.",
 
   "Imported Nutrients": "Імпортовані поживні речовини",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Отримати 4 рослини і додати 4 мікробів на ІНШУ КАРТУ.",
@@ -162,7 +155,6 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Збільшити виробництво M€ на 1 крок за кожен різний значок, який у вас є в грі, включаючи цей.",
 
   "Penguins": "Пінгвіни",
-  "Action: Add 1 animal to this card.": "Дія: Додати 1 тварину на цю карту.",
   "Requires 8 oceans.": "Вимагає 8 океанських плиток.",
   "Snow Algae": "Сніжна водорість",
   "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Вимагає 2 океанських плиток. Збільште виробництво рослин і виробництво тепла на 1 крок кожне.",
@@ -177,7 +169,6 @@
   "Hi-Tech Lab": "Високотехнологічна лабораторія",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Дія: Витратити будь-яку кількість енергії, щоб витягнути таку ж кількість карт. ВЗЯТИ 1 В РУКУ І ВІДКЛАСТИ РЕШТУ.",
 
-  "Magnetic Field Generators": "Генератори магнітного поля",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Зменшити виробництво енергії на 4 кроки і збільшити виробництво рослин на 2 кроки. Підвищити ваш РТ на 3 кроки. Розмістити цю плитку.",
 
   "Mercurian Alloys": "Меркурійські сплави",
@@ -199,7 +190,6 @@
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Вимагає 4 океанських плиток. Збільшити виробництво енергії на 2 кроки. Розмістити цю плитку ПРИЛЕГЛО до океанської плитки.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Зменшити виробництво енергії на 4 кроки і збільшити виробництво рослин на 2 кроки. Підвищити ваш РТ на 3 кроки.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Вимагає 8 океанських плиток. 1 РТ за кожну тварину на цій карті.",
   "Requires 2 science tags.": "Вимагає 2 значки науки.",

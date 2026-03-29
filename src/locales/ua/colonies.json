@@ -11,7 +11,6 @@
   "Ceres": "Церера",
   "Gain 1 steel production": "Отримати 1 одиницю сталевої продукції",
   "Gain n steel": "Отримати n одиниць сталі",
-  "Gain 2 steel": "Отримати 2 одиниці сталі",
 
   "Enceladus": "Енцелад",
   "Add 3 microbes to ANY card": "Додати 3 мікроби на будь-яку карту",
@@ -21,12 +20,10 @@
   "Europa": "Європа",
   "Place an ocean tile": "Розмістити океанську плитку",
   "Gain 1 unit of production of the type under the track marker": "Отримати 1 одиницю продукції відповідного типу під маркером треку",
-  "Gain 1 M€": "Отримати 1 M€",
 
   "Ganymede": "Ганімед",
   "Gain 1 plant production": "Отримати 1 одиницю рослинної продукції",
   "Gain n plants": "Отримати n одиниць рослин",
-  "Gain 1 plant": "Отримати 1 рослину",
 
   "Io": "Іо",
   "Gain 1 heat production": "Отримати 1 одиницю теплової продукції",
@@ -41,25 +38,19 @@
   "Miranda": "Міранда",
   "Add 1 animal to ANY card": "Додати 1 тварину на будь-яку карту",
   "Add n animals to ANY card": "Додати n тварин на будь-яку карту",
-  "Draw 1 card": "Взяти 1 карту",
 
   "Pluto": "Плутон",
-  "Draw 2 cards": "Взяти 2 карти",
   "Draw n cards": "Взяти n карт",
   "Draw 1 card and then discard 1 card": "Взяти 1 карту, а потім відкинути 1 карту",
 
   "Titan": "Титан",
   "Add 3 floaters to ANY card": "Додати 3 плаваючих на будь-яку карту",
   "Add n floaters to ANY card": "Додати n плаваючих на будь-яку карту",
-  "Add 1 floater to ANY card": "Додати 1 плаваючого на будь-яку карту",
 
   "Triton": "Тритон",
-  "Gain 3 titanium": "Отримати 3 одиниці титану",
   "Gain n titanium": "Отримати n одиниць титану",
-  "Gain 1 titanium": "Отримати 1 одиницю титану",
 
   "Iapetus": "Япет",
-  "Gain 1 TR": "Отримати 1 РТ",
   "Gain n TR": "Отримати n РТ",
   "Pay 1 M€ less for cards this generation": "Сплатити на 1 M€ менше за карти в цьому поколінні",
 
@@ -82,7 +73,6 @@
   "Draw n cards, keep 1": "Взяти n карт, залишити 1",
   "Draw 1 card which you may pay to keep": "Взяти 1 карту, яку можна оплатити, щоб залишити",
 
-  "Venus": "Венера",
   "Increase Venus 1 step": "Збільшити рейтинг Венери на 1",
   "Add n resources to ANY Venus card": "Додати n ресурсів на будь-яку карту Венери",
   "Add 1 resource to ANY Venus card": "Додати 1 ресурс на будь-яку карту Венери",
@@ -97,11 +87,9 @@
   "Add n data to ANY card": "Додати n дані на будь-яку карту",
   "Add 1 data to ANY card": "Додати 1 дану на будь-яку карту",
 
-  "Select colony tile to remove": "Виберіть колоніальну плитку для видалення",
   "Colony Bonus": "Бонус колонії",
   "Trade Income": "Торговий дохід",
   "Select where to build a colony": "Виберіть місце для розміщення колонії",
-  "Remove colony": "Видалити колонію",
 
   "Colony Fee": "Колоніальна плата",
   "Trade Income: Gain the indicated production": "Торговий дохід: Отримати вказану продукцію",
@@ -112,7 +100,6 @@
   "Copy Trade": "Скопіювати торгівлю",
   "Party": "Партія",
 
-  "Select one option": "Виберіть одну опцію",
   "Callisto - (Energy)": "Каллісто - (Енергія)",
   "Ceres - (Steel)": "Церера - (Сталь)",
   "Enceladus - (Microbes)": "Енцелад - (Мікроби)",

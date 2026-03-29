@@ -31,6 +31,19 @@ type Translation = {[lang: string]: string}
  * },
  */
 
+// Known duplicate keys that still need to be resolved, keyed by language.
+// Remove entries as duplicates are fixed.
+const DUPLICATE_EXCEPTIONS: Record<string, ReadonlySet<string>> = (() => {
+  const raw: Record<string, string[]> = JSON.parse(
+    fs.readFileSync(path.resolve('src/locales/duplicate_exceptions.json'), 'utf8'),
+  );
+  const result: Record<string, ReadonlySet<string>> = {};
+  for (const [lang, phrases] of Object.entries(raw)) {
+    result[lang] = new Set(phrases);
+  }
+  return result;
+})();
+
 function getAllTranslations(): {[phrase: string]: Translation} {
   const translationsPath = path.resolve('src/locales');
   const translations: {[phrase: string]: Translation} = {};
@@ -42,7 +55,6 @@ function getAllTranslations(): {[phrase: string]: Translation} {
 
   for (const lang of languageDirectories) {
     const translationDir = path.resolve(path.join(translationsPath, lang));
-
     const languageFiles = readdir(
       translationDir,
       (dirent) => dirent.endsWith('.json'),
@@ -59,7 +71,11 @@ function getAllTranslations(): {[phrase: string]: Translation} {
             translations[phrase] = {};
           }
           if (translations[phrase][lang] !== undefined) {
-            console.log(`${lang}: Repeated translation for [${phrase}]`);
+            if (DUPLICATE_EXCEPTIONS[lang]?.has(phrase)) {
+              console.log(`${lang}: Repeated translation for [${phrase}]`);
+            } else {
+              throw new Error(`${lang}: Repeated translation for [${phrase}]`);
+            }
           }
           const translated = json[phrase];
           if (translated.trim() === phrase.trim()) {
@@ -121,7 +137,9 @@ function generateTranslations() {
 
   mkdirQuietly(destinationPath);
 
-  const localesCodes = fs.readdirSync(localesDir);
+  const localesCodes = fs.readdirSync(localesDir).filter(
+    (entry) => fs.statSync(path.join(localesDir, entry)).isDirectory(),
+  );
   localesCodes.forEach((localeCode) => {
     const localeDir = path.join(localesDir, localeCode);
     const localeFiles = fs.readdirSync(localeDir).filter((dirent) => dirent.endsWith('.json'));

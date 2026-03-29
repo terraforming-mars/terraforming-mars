@@ -122,7 +122,6 @@
   "Luna Conference": "Luna konferenssi",
   "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Vaatii että tutkijat hallitsevat tai sinulla on 2 edustajaa siellä. Saat 2 M€ per tielaatta Kuussa. Saat 2M€ per asutuslaatta Kuussa.",
 
-  "Luna Mining Hub": "Luna kaivoskeskus",
   "Requires a mining rate of 5 or higher.": "Vaatii kaivosasteen 5 tai korkeampi.",
   "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "Käytä 1 teräs ja 1 titaani ja nosta teräs- ja titaanituotantoasi 1 askel.",
   "Place this tile on The Moon and raise the mining rate 1 step.": "Aseta tämä laatta Kuuhun ja nosta kaivosastetta 1 askel.",
@@ -145,7 +144,6 @@
   "Luna Staging Station": "Luna väliasema",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Vaatii logistiikka-asteen 2 tai korkeampi. Käytä 1 titaani. Nosta logistiikka-astetta 2 askelta.",
 
-  "Luna Trade Station": "Luna kauppa-asema",
   "Action: Gain 2 M€ for each habitat tile on The Moon.": "TOIMINTO: Saat 2 M€ jokaisesta asutuslaatasta Kuussa.",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Käytä 2 titaania. Aseta tämä laatta VARATULLE ALUEELLE.",
 
@@ -170,7 +168,6 @@
   "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "Vaatii 3 tielaattaa Kuussa. Nosta logistiikka-astetta 1 askel.",
 
   "Lunar Steel": "Kuunteräs",
-  "Effect: Your steel resources are worth 1 M€ extra.": "VAIKUTUS: Teräsresurssisi ovat 1 M€ arvokkaampia.",
 
   "Lunar Trade Fleet": "Kuun kauppalaivasto",
   "2 titanium production": "2 titaanituotanto",
@@ -198,7 +195,6 @@
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Käytä 1 titaani. Nosta lämpötuotantoasi 2 askelta ja M€-tuotantoasi 3 askelta. Aseta asutuslaatta VARATULLE ALUEELLE ja nosta asutusastetta 1 askel.",
 
   "Moon Tether": "Kuun köysi",
-  "Effect: When you play a card, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 2 M€ vähemmän.",
   "Requires 6 space tags.": "Vaatii 6 avaruusympyrää.",
 
   "Mooncrate Block Factory": "Kuukraatterin lohkotehdas",

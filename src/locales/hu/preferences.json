@@ -16,16 +16,12 @@
   "Hide Milestones / Awards scores": "Mérföldkövek/Díjak pontjainak elrejtése",
   "Enable sounds": "Hangok engedélyezése",
   "Hide tile confirmation": "Lapka lehelyezés megerősítésének elrejtése",
-  "Hide discount on cards": "Kedvezmény elrejtése a kártyákon",
   "Show discount on cards": "Kedvezmény mutatása a kártyákon",
-  "Hide sidebar notification": "Oldalsáv értesítés elrejtése",
   "Show sidebar notification": "Oldalsáv értesítés mutatása",
-  "Learner Mode (req. refresh)": "Tanulói mód (oldal frissítés szükséges)",
   "Experimental UI": "Kísérleti felhasználói felület",
   "Tutorial Mode (req. refresh)": "Oktatói mód (oldal frissítés szükséges)",
   "Language": "Nyelv",
   "refresh page": "Oldal frissítése",
   "to see changes": "A változások megtekintéséhez",
-  "Ok": "",
   "Report a bug": "Hiba jelentése"
 }

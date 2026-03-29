@@ -2,7 +2,6 @@ import {Tag} from '../../common/cards/Tag';
 import {
   TrackAction,
   TrackDefinition,
-  MarsBotBoardData,
   MARSBOT_MAX_TRACK_POSITION,
 } from '../../common/automa/AutomaTypes';
 
@@ -58,11 +57,11 @@ export class MarsBotBoard {
   public readonly tracks: ReadonlyArray<MarsBotTrack>;
   private readonly tagToTrack: Map<Tag, number>;
 
-  constructor(public readonly data: MarsBotBoardData) {
-    this.tracks = data.trackDefs.map((def) => new MarsBotTrack(def));
+  constructor(public readonly data: ReadonlyArray<TrackDefinition>) {
+    this.tracks = data.map((def) => new MarsBotTrack(def));
     this.tagToTrack = new Map();
-    for (let i = 0; i < data.trackDefs.length; i++) {
-      for (const tag of data.trackDefs[i].tags) {
+    for (let i = 0; i < data.length; i++) {
+      for (const tag of data[i].tags) {
         this.tagToTrack.set(tag, i);
       }
     }

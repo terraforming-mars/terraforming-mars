@@ -317,11 +317,7 @@ export interface PlayerHomeModel {
   showEventCards: boolean;
   tileView: TileView;
   keyboardShortcutOpened: boolean;
-  hotkeyTargets: Array<Element>
-}
-
-class TerraformedAlertDialog {
-  static shouldAlert = true;
+  hotkeyTargets: Array<Element>;
 }
 
 export default defineComponent({
@@ -549,11 +545,6 @@ export default defineComponent({
     const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
     document.title = `${gameType} | ${APP_NAME}`;
     window.addEventListener('keydown', this.navigatePage);
-    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && getPreferences().show_alerts) {
-      alert('Mars is Terraformed!');
-      // Avoids repeated calls.
-      TerraformedAlertDialog.shouldAlert = false;
-    }
     const targets = this.$el.getElementsByClassName('hotkey-target');
     for (let i = 0; i < targets.length; i++) {
       const element = targets.item(i);

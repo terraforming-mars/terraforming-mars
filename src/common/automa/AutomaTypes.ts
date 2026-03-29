@@ -1,7 +1,5 @@
 import {Tag} from '../cards/Tag';
 import {Resource} from '../Resource';
-import {AwardName} from '../ma/AwardName';
-import {MilestoneName} from '../ma/MilestoneName';
 
 /** Actions that can appear on MarsBot board track positions. */
 export type TrackAction =
@@ -29,8 +27,6 @@ export type TrackDefinition = {
 /** Complete MarsBot board data for a specific map. */
 export type MarsBotBoardData = {
   readonly trackDefs: ReadonlyArray<TrackDefinition>;
-  readonly awardFormulas: Partial<Record<AwardName, string>>;
-  readonly milestoneCriteria: Partial<Record<MilestoneName, string>>;
 };
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';

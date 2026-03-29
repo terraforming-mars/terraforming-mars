@@ -54,18 +54,4 @@ export const THARSIS_MARSBOT_BOARD: MarsBotBoardData = {
     TRACK_EARTH,
     TRACK_PLANT,
   ],
-  awardFormulas: {
-    'Landlord': 'tiles owned on board',
-    'Banker': 'Building track + Event track',
-    'Scientist': 'Science track',
-    'Thermalist': 'Energy track + 5',
-    'Miner': 'Space track + 5',
-  },
-  milestoneCriteria: {
-    'Terraformer': 'reached 35 TR',
-    'Mayor': 'owns 3+ cities',
-    'Gardener': 'owns 3+ greenery',
-    'Builder': 'reached space 8 on Building track',
-    'Planner': 'reached space 4 on every track',
-  },
 };

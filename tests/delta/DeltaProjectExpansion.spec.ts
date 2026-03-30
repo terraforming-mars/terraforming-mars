@@ -565,7 +565,6 @@ describe('DeltaProjectExpansion', () => {
     });
 
     it('once-per-generation via actionsThisGeneration', () => {
-      const card = new DeltaProjectPrelude();
       player.energy = 5;
       player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
 

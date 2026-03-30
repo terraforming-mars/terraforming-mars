@@ -99,8 +99,7 @@ export type SelectAmountModel = BaseInputModel & {
 
 export type DeltaProjectInputModel = BaseInputModel & {
   type: 'deltaProject';
-  min: number;
-  max: number;
+  validSteps: ReadonlyArray<number>;
   deltaProjectModel: DeltaProjectModel;
 }
 

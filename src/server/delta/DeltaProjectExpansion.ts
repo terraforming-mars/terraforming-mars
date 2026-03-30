@@ -61,9 +61,11 @@ export class DeltaProjectExpansion {
     return progress;
   }
 
-  private static isSpotClaimed(data: DeltaProjectData, spot: 'claimed2VP' | 'claimed5VP'): boolean {
-    for (const progress of data.players.values()) {
-      if (progress[spot]) return true;
+  // True if another player (not `excludeColor`) occupies this track position.
+  private static hasOtherPlayerAtPosition(data: DeltaProjectData, position: number, excludeColor: Color): boolean {
+    for (const [color, progress] of data.players) {
+      if (color === excludeColor) continue;
+      if (progress.position === position) return true;
     }
     return false;
   }
@@ -73,13 +75,14 @@ export class DeltaProjectExpansion {
   }
 
   /**
-   * Compute the maximum number of steps a player can advance from their current position.
+   * Highest legal step count for one advance. Not every integer 1..maxSteps is valid when VP
+   * spaces are blocked (use {@link DeltaProjectExpansion.getValidAdvanceSteps} for the full list).
    *
    * Constraints:
    * - Must have the required tag (raw, without wilds) for each step, OR use a wild tag.
    * - Each wild tag covers exactly one missing tag.
    * - Must have enough energy (1 per step).
-   * - Cannot land on a VP spot that already has a claimant.
+   * - Cannot land on position 10 or 11 if another player already occupies that position.
    * - Cannot move beyond position 11 (5VP).
    */
 
@@ -95,36 +98,47 @@ export class DeltaProjectExpansion {
     return missing <= player.tags.count(Tag.WILD, 'raw');
   }
 
-  public static maxSteps(player: IPlayer): number {
+  //Legal step counts for a single advance (each lands on a valid position; blocked VP spaces are skipped, not landed on).
+  public static getValidAdvanceSteps(player: IPlayer): ReadonlyArray<number> {
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
     const progress = DeltaProjectExpansion.getProgress(data, player.color);
     const currentPos = progress.position;
 
-    if (currentPos >= TRACK_LENGTH) return 0;
+    if (currentPos >= TRACK_LENGTH) return [];
 
-    let maxPos = currentPos;
+    const result: number[] = [];
+    const maxByEnergy = Math.min(player.energy, TRACK_LENGTH - currentPos);
 
-    for (let pos = currentPos + 1; pos <= TRACK_LENGTH; pos++) {
-      const energyCost = pos - currentPos;
-      if (energyCost > player.energy) break;
+    for (let steps = 1; steps <= maxByEnergy; steps++) {
+      const newPos = currentPos + steps;
+      if (newPos > TRACK_LENGTH) break;
 
-      if (!DeltaProjectExpansion.canReachPosition(player, pos)) break;
+      if (!DeltaProjectExpansion.canReachPosition(player, newPos)) continue;
 
-      if (pos === 10) {
-        if (DeltaProjectExpansion.isSpotClaimed(data, 'claimed2VP')) continue;
+      if (newPos === 10 && DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 10, player.color)) {
+        continue;
       }
-      if (pos === 11) {
-        if (DeltaProjectExpansion.isSpotClaimed(data, 'claimed5VP')) break;
+      if (newPos === 11 && DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 11, player.color)) {
+        continue;
       }
-
-      maxPos = pos;
+      result.push(steps);
     }
+    return result;
+  }
 
-    return maxPos - currentPos;
+  /** Highest legal step count (0 if none). */
+  public static maxSteps(player: IPlayer): number {
+    const steps = DeltaProjectExpansion.getValidAdvanceSteps(player);
+    return steps.length === 0 ? 0 : Math.max(...steps);
   }
 
   public static advance(player: IPlayer, steps: number): void {
+    const valid = DeltaProjectExpansion.getValidAdvanceSteps(player);
+    if (!valid.includes(steps)) {
+      throw new Error(`Invalid Delta Project advance: ${String(steps)} step(s) (valid: ${valid.join(', ')})`);
+    }
+
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
     const progress = DeltaProjectExpansion.getProgress(data, player.color);
@@ -134,10 +148,10 @@ export class DeltaProjectExpansion {
     player.stock.deduct(Resource.ENERGY, steps);
     progress.position = newPos;
 
-    if (newPos === 10 && !DeltaProjectExpansion.isSpotClaimed(data, 'claimed2VP')) {
+    if (newPos === 10 && !DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 10, player.color)) {
       progress.claimed2VP = true;
     }
-    if (newPos === 11 && !DeltaProjectExpansion.isSpotClaimed(data, 'claimed5VP')) {
+    if (newPos === 11 && !DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 11, player.color)) {
       progress.claimed5VP = true;
       progress.claimed2VP = false;
     }

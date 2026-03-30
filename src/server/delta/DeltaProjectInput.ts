@@ -10,8 +10,7 @@ export class DeltaProjectInput extends BasePlayerInput<number> {
   constructor(
     title: string | Message,
     buttonLabel: string,
-    public min: number,
-    public max: number,
+    public validSteps: ReadonlyArray<number>,
     public deltaProjectModel: DeltaProjectModel,
   ) {
     super('deltaProject', title);
@@ -23,8 +22,7 @@ export class DeltaProjectInput extends BasePlayerInput<number> {
       title: this.title,
       buttonLabel: this.buttonLabel,
       type: 'deltaProject',
-      min: this.min,
-      max: this.max,
+      validSteps: this.validSteps,
       deltaProjectModel: this.deltaProjectModel,
     };
   }
@@ -36,11 +34,8 @@ export class DeltaProjectInput extends BasePlayerInput<number> {
     if (isNaN(input.amount)) {
       throw new InputError('Amount is not a number');
     }
-    if (input.amount > this.max) {
-      throw new InputError('Amount provided too high (max ' + String(this.max) + ')');
-    }
-    if (input.amount < this.min) {
-      throw new InputError('Amount provided too low (min ' + String(this.min) + ')');
+    if (!this.validSteps.includes(input.amount)) {
+      throw new InputError('Amount must be one of: ' + this.validSteps.join(', '));
     }
     return this.cb(input.amount);
   }

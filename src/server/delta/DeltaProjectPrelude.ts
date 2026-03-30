@@ -32,13 +32,12 @@ export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
 
   public action(player: IPlayer): PlayerInput {
     const game = player.game;
-    const max = DeltaProjectExpansion.maxSteps(player);
+    const validSteps = DeltaProjectExpansion.getValidAdvanceSteps(player);
 
     return new DeltaProjectInput(
       'Delta Project: Pay energy to advance on the track',
       'Advance',
-      1,
-      max,
+      validSteps,
       createDeltaProjectModel(game) ?? (() => { throw new Error('Delta Project model not available'); })(),
     ).andThen((amount) => {
       DeltaProjectExpansion.advance(player, amount);

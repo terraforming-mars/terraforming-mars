@@ -24,6 +24,13 @@ function progress(data: DeltaProjectData, color: Color) {
   return data.players.get(color)!;
 }
 
+// One fake card listing every tag required for positions 1–9 on the Delta track.
+function playAllDeltaTrackTags(p: TestPlayer) {
+  p.playedCards.push(fakeCard({
+    tags: [Tag.BUILDING, Tag.POWER, Tag.EARTH, Tag.SPACE, Tag.SCIENCE, Tag.PLANT, Tag.MICROBE, Tag.JOVIAN, Tag.ANIMAL],
+  }));
+}
+
 describe('DeltaProjectExpansion', () => {
   let game: IGame;
   let player: TestPlayer;
@@ -106,6 +113,7 @@ describe('DeltaProjectExpansion', () => {
       }
       player.energy = 20;
       progress(data, player.color).position = 9;
+      progress(data, player2.color).position = 11;
       progress(data, player2.color).claimed5VP = true;
 
       // Can reach 2VP (pos 10) but 5VP is blocked
@@ -123,6 +131,7 @@ describe('DeltaProjectExpansion', () => {
   describe('advance', () => {
     it('deducts energy and updates position', () => {
       player.energy = 5;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
 
       DeltaProjectExpansion.advance(player, 3);
@@ -133,6 +142,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('claims 2VP when landing on position 10', () => {
       player.energy = 5;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 9;
 
@@ -143,11 +153,12 @@ describe('DeltaProjectExpansion', () => {
 
     it('claims 5VP and removes 2VP when landing on position 11', () => {
       player.energy = 5;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
-      progress(data, player.color).position = 9;
+      progress(data, player.color).position = 10;
       progress(data, player.color).claimed2VP = true;
 
-      DeltaProjectExpansion.advance(player, 2);
+      DeltaProjectExpansion.advance(player, 1);
 
       expect(progress(data, player.color).claimed5VP).is.true;
       expect(progress(data, player.color).claimed2VP).is.false;
@@ -155,6 +166,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('does not claim 2VP when skipping past position 10', () => {
       player.energy = 5;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 9;
 
@@ -168,6 +180,7 @@ describe('DeltaProjectExpansion', () => {
   describe('reward resolution', () => {
     it('position 1: choose 2 steel or 2 plants', () => {
       player.energy = 1;
+      playAllDeltaTrackTags(player);
       DeltaProjectExpansion.advance(player, 1);
       runAllActions(game);
 
@@ -178,6 +191,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 2: choose energy or heat production', () => {
       player.energy = 2;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 1;
 
@@ -191,6 +205,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 3: +2 MC production', () => {
       player.energy = 3;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 2;
 
@@ -201,6 +216,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 4: +1 titanium production', () => {
       player.energy = 4;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 3;
 
@@ -211,6 +227,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 5: draw 4, keep 2', () => {
       player.energy = 5;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 4;
 
@@ -225,6 +242,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 6: gain plants per plant tag', () => {
       player.energy = 6;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 5;
       player.playedCards.push(
@@ -240,6 +258,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 7: reuse a used blue card action', () => {
       player.energy = 7;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 6;
 
@@ -260,6 +279,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 7: no action if no used blue cards', () => {
       player.energy = 7;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 6;
 
@@ -271,6 +291,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 8: grants jovian tag', () => {
       player.energy = 8;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 7;
 
@@ -284,6 +305,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 8: jovian tag not granted twice', () => {
       player.energy = 10;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 7;
       progress(data, player.color).jovianBonus = true;
@@ -296,6 +318,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 8: does not grant jovian tag when skipped', () => {
       player.energy = 10;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 7;
 
@@ -307,6 +330,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('position 9: add 2 animals to a card', () => {
       player.energy = 9;
+      playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 8;
       const animalCard = fakeCard({resourceType: CardResource.ANIMAL, name: 'AnimalHost' as CardName});
@@ -320,6 +344,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('only resolves reward for landing position, not intermediate', () => {
       player.energy = 3;
+      playAllDeltaTrackTags(player);
 
       DeltaProjectExpansion.advance(player, 3);
 
@@ -373,8 +398,21 @@ describe('DeltaProjectExpansion', () => {
   });
 
   describe('VP spot contention', () => {
+    it('rejects advance onto position 10 while another player occupies it', () => {
+      const data = DeltaProjectExpansion.getData(game);
+      playAllDeltaTrackTags(player);
+      playAllDeltaTrackTags(player2);
+      progress(data, player.color).position = 10;
+      progress(data, player.color).claimed2VP = true;
+      progress(data, player2.color).position = 9;
+      player2.energy = 5;
+
+      expect(() => DeltaProjectExpansion.advance(player2, 1)).to.throw();
+    });
+
     it('only one player can claim 2VP', () => {
       const data = DeltaProjectExpansion.getData(game);
+      progress(data, player.color).position = 10;
       progress(data, player.color).claimed2VP = true;
 
       player2.energy = 10;
@@ -389,6 +427,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('player can overtake 2VP to reach 5VP', () => {
       const data = DeltaProjectExpansion.getData(game);
+      progress(data, player.color).position = 10;
       progress(data, player.color).claimed2VP = true;
       progress(data, player2.color).position = 9;
       player2.energy = 10;
@@ -436,6 +475,7 @@ describe('DeltaProjectExpansion', () => {
   describe('jovian tag card callbacks', () => {
     it('triggers Saturn Systems for the card owner', () => {
       const saturnSystems = new SaturnSystems();
+      playAllDeltaTrackTags(player);
       player.playedCards.push(saturnSystems);
 
       player.energy = 8;
@@ -450,6 +490,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('triggers Saturn Systems for other players', () => {
       const saturnSystems = new SaturnSystems();
+      playAllDeltaTrackTags(player);
       player2.playedCards.push(saturnSystems);
 
       player.energy = 8;
@@ -464,6 +505,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('does not trigger Ringcom', () => {
       const ringcom = new Ringcom();
+      playAllDeltaTrackTags(player);
       player2.playedCards.push(ringcom);
 
       player.energy = 8;
@@ -478,6 +520,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('does not raise the Pathfinders Jovian track', () => {
       const [pfGame, pfPlayer] = testGame(2, {deltaProjectExpansion: true, pathfindersExpansion: true});
+      playAllDeltaTrackTags(pfPlayer);
       const pfData = DeltaProjectExpansion.getData(pfGame);
       progress(pfData, pfPlayer.color).position = 7;
       pfPlayer.energy = 8;
@@ -490,6 +533,7 @@ describe('DeltaProjectExpansion', () => {
 
     it('does not trigger SpaceRelay', () => {
       const spaceRelay = new SpaceRelay();
+      playAllDeltaTrackTags(player);
       player.playedCards.push(spaceRelay);
 
       player.energy = 8;
@@ -533,7 +577,7 @@ describe('DeltaProjectExpansion', () => {
       expect(card.canAct(player)).is.true;
     });
 
-    it('action returns DeltaProjectInput with correct range', () => {
+    it('action returns DeltaProjectInput with valid step list', () => {
       const card = new DeltaProjectPrelude();
       player.energy = 3;
       player.playedCards.push(
@@ -543,8 +587,7 @@ describe('DeltaProjectExpansion', () => {
       );
 
       const input = cast(card.action(player), DeltaProjectInput);
-      expect(input.min).eq(1);
-      expect(input.max).eq(3);
+      expect(input.validSteps).deep.eq([1, 2, 3]);
     });
 
     it('action advances the player on the track', () => {
@@ -585,6 +628,7 @@ describe('DeltaProjectExpansion', () => {
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 5;
       progress(data, player.color).jovianBonus = true;
+      progress(data, player2.color).position = 10;
       progress(data, player2.color).claimed2VP = true;
       player.tags.extraJovianTags = 1;
 

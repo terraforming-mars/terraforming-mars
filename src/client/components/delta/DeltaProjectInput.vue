@@ -6,7 +6,9 @@
       :playersCount="Object.keys(playerinput.deltaProjectModel.players).length"
     />
     <div class="flex">
-      <input type="number" class="nes-input" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      <select class="nes-input" v-model="amount">
+        <option v-for="s in playerinput.validSteps" :key="s" :value="String(s)">{{ s }}</option>
+      </select>
       &nbsp;
       <AppButton size="big" type="max" @click="setMaxValue" title="MAX" />
       &nbsp;
@@ -46,7 +48,7 @@ export default defineComponent({
   },
   data() {
     return {
-      amount: String(this.playerinput.min),
+      amount: String(this.playerinput.validSteps[0] ?? 1),
     };
   },
   methods: {
@@ -54,7 +56,8 @@ export default defineComponent({
       this.onsave({type: 'deltaProject', amount: parseInt(this.amount)});
     },
     setMaxValue() {
-      this.amount = String(this.playerinput.max);
+      const steps = this.playerinput.validSteps;
+      this.amount = String(steps[steps.length - 1] ?? 1);
     },
   },
 });

@@ -2,6 +2,9 @@
   <div class="delta-project-board">
     <table class="delta-project-board__track">
       <tr>
+        <td class="delta-project-board__step delta-project-board__step--start">
+          <div class="delta-project-board__tag-cell"></div>
+        </td>
         <td v-for="step in steps" :key="step.id" class="delta-project-board__step">
           <div class="delta-project-board__tag-cell">
             <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
@@ -10,6 +13,21 @@
         </td>
       </tr>
       <tr>
+        <td class="delta-project-board__slots-cell delta-project-board__slots-cell--start">
+          <div class="delta-project-board__slots">
+            <i
+              v-for="color in playersAtPosition(0)"
+              :key="color"
+              :class="cubeCss(color)"
+              class="delta-project-board__cube"
+            ></i>
+            <div
+              v-for="n in emptySlotsStart()"
+              :key="'empty-start-' + n"
+              class="delta-project-board__slot"
+            ></div>
+          </div>
+        </td>
         <td v-for="(step, idx) in steps" :key="step.id + '-slots'" class="delta-project-board__slots-cell">
           <div class="delta-project-board__slots">
             <i
@@ -27,6 +45,9 @@
         </td>
       </tr>
       <tr>
+        <td class="delta-project-board__reward-cell delta-project-board__reward-cell--start">
+          <div class="delta-project-board__reward delta-project-board__reward--start"></div>
+        </td>
         <td v-for="step in steps" :key="step.id + '-reward'" class="delta-project-board__reward-cell">
           <div class="delta-project-board__reward">
             <template v-for="(icon, idx) in step.rewardIcons" :key="idx">
@@ -206,6 +227,10 @@ export default defineComponent({
       const minSlots = step.dynamicSlots ? this.playersCount : 1;
       return Math.max(0, minSlots - occupied);
     },
+    emptySlotsStart(): number {
+      const occupied = this.playersAtPosition(0).length;
+      return Math.max(0, this.playersCount - occupied);
+    },
   },
 });
 </script>
@@ -233,6 +258,26 @@ export default defineComponent({
 
 .delta-project-board__step:first-child {
   border-left: none;
+}
+
+.delta-project-board__step--start {
+  min-width: 44px;
+}
+
+.delta-project-board__step--start .delta-project-board__tag-cell {
+  min-height: 36px;
+}
+
+.delta-project-board__slots-cell--start {
+  vertical-align: middle;
+}
+
+.delta-project-board__reward-cell--start {
+  min-height: 28px;
+}
+
+.delta-project-board__reward--start {
+  min-height: 1em;
 }
 
 .delta-project-board__tag-cell {

@@ -33,6 +33,6 @@ export class MarsBotScoring {
   isInstantWin(): boolean { return false; }
 }
 
-export function getMcPerVP(_generation: number, _preludeExtension: boolean, _prelude2Expansion: boolean): number | undefined {
+export function getMcPerVP(_generation: number, _preludeExtension: boolean): number | undefined {
   return undefined;
 }

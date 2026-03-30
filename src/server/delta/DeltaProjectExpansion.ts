@@ -98,7 +98,12 @@ export class DeltaProjectExpansion {
     return missing <= player.tags.count(Tag.WILD, 'raw');
   }
 
-  //Legal step counts for a single advance (each lands on a valid position; blocked VP spaces are skipped, not landed on).
+  /**
+   * Returns the allowed values for `advance(player, steps)` from the current position: each array
+   * element is one legal `steps` argument (energy spent equals steps; landing passes tag checks and VP occupancy).
+   * For example `[1, 2, 3]` when several jump sizes work, or `[2]` when only a two-step jump ends on a legal space.
+   * Returns an empty array when no advance is possible.
+   */
   public static getValidAdvanceSteps(player: IPlayer): ReadonlyArray<number> {
     const game = player.game;
     const data = DeltaProjectExpansion.getData(game);
@@ -127,7 +132,7 @@ export class DeltaProjectExpansion {
     return result;
   }
 
-  /** Highest legal step count (0 if none). */
+  // Highest legal step count (returns 0 if none).
   public static maxSteps(player: IPlayer): number {
     const steps = DeltaProjectExpansion.getValidAdvanceSteps(player);
     return steps.length === 0 ? 0 : Math.max(...steps);

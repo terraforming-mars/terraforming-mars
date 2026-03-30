@@ -89,15 +89,8 @@ export const MARSBOT_STARTING_TR = 20;
 export const MARSBOT_MAX_GENERATION = 20;
 export const MARSBOT_MAX_GENERATION_PRELUDE = 18;
 
-/** Whether this automa game uses Prelude rules (shorter game, wild tags, etc.). */
-export function isAutomaPreludeGame(preludeExtension: boolean, _prelude2Expansion: boolean): boolean {
-  return preludeExtension;
-}
-
 /** Get the max generation for an automa game. */
-export function getAutomaMaxGeneration(preludeExtension: boolean, prelude2Expansion: boolean): number {
-  return isAutomaPreludeGame(preludeExtension, prelude2Expansion) ?
-    MARSBOT_MAX_GENERATION_PRELUDE :
-    MARSBOT_MAX_GENERATION;
+export function getAutomaMaxGeneration(preludeExtension: boolean): number {
+  return preludeExtension ? MARSBOT_MAX_GENERATION_PRELUDE : MARSBOT_MAX_GENERATION;
 }
 

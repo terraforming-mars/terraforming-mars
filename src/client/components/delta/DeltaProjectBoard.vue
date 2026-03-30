@@ -51,10 +51,12 @@
         <td v-for="step in steps" :key="step.id + '-reward'" class="delta-project-board__reward-cell">
           <div class="delta-project-board__reward">
             <template v-for="(icon, idx) in step.rewardIcons" :key="idx">
-              <span v-if="icon.separator" class="delta-project-board__separator">/</span>
+              <span v-if="icon.or" class="delta-project-board__or">or</span>
+              <span v-else-if="icon.separator" class="delta-project-board__separator">/</span>
               <div v-else-if="icon.production" class="delta-project-board__prod-box">
                 <div v-for="n in (icon.count || 1)" :key="n" :class="icon.cssClass">{{ icon.text || '' }}</div>
               </div>
+              <span v-else-if="icon.asterisk" class="delta-project-board__asterisk">*</span>
               <div v-else :class="icon.cssClass"></div>
             </template>
           </div>
@@ -74,6 +76,8 @@ type RewardIcon = {
   cssClass: string;
   production?: boolean;
   separator?: boolean;
+  or?: boolean;
+  asterisk?: boolean;
   count?: number;
   text?: string;
 };
@@ -95,7 +99,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     rewardIcons: [
       {cssClass: 'resource_icon resource_icon--steel'},
       {cssClass: 'resource_icon resource_icon--steel'},
-      {cssClass: '', separator: true},
+      {cssClass: '', or: true},
       {cssClass: 'resource_icon resource_icon--plants'},
       {cssClass: 'resource_icon resource_icon--plants'},
     ],
@@ -107,7 +111,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource_icon resource_icon--energy', production: true},
-      {cssClass: '', separator: true},
+      {cssClass: '', or: true},
       {cssClass: 'resource_icon resource_icon--heat', production: true},
     ],
   },
@@ -172,6 +176,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     rewardIcons: [
       {cssClass: 'resource animal'},
       {cssClass: 'resource animal'},
+      {cssClass: '', asterisk: true},
     ],
   },
   {
@@ -379,6 +384,23 @@ export default defineComponent({
   font-family: Prototype, sans-serif;
   font-size: 24px;
   margin: 0 2px;
+}
+
+.delta-project-board__or {
+  font-family: Prototype, sans-serif;
+  font-size: 16px;
+  margin: 0 3px;
+  text-transform: lowercase;
+}
+
+.delta-project-board__asterisk {
+  font-family: Prototype, sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  margin-left: 2px;
+  align-self: flex-start;
+  padding-top: 2px;
+  color: #c5c5c5;
 }
 
 .delta-project-board__prod-box {

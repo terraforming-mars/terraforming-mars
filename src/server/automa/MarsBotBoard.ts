@@ -47,7 +47,7 @@ export class MarsBotTrack {
 
   /** Get the action at the next position without advancing. Returns undefined if at max or no action. */
   public peek(): TrackAction | undefined {
-    if (this.position >= MARSBOT_MAX_TRACK_POSITION) return undefined;
+    if (!this.canAdvance()) return undefined;
     return this.definition.layout[this.position + 1];
   }
 }
@@ -67,7 +67,6 @@ export class MarsBotBoard {
     }
   }
 
-  /** Get the track index (0-based) for a given card tag, or undefined if unmapped. */
   public getTrackIndexForTag(tag: Tag): number | undefined {
     return this.tagToTrack.get(tag);
   }

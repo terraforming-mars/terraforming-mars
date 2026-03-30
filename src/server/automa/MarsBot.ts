@@ -3,7 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Resource} from '../../common/Resource';
 import {CardName} from '../../common/cards/CardName';
-import {DifficultyLevel, BonusCardId, TrackDefinition, isAutomaPreludeGame, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
+import {DifficultyLevel, BonusCardId, TrackDefinition, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
 import {getMcPerVP} from './MarsBotScoring';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotModel} from '../../common/models/MarsBotModel';
@@ -103,7 +103,7 @@ export class MarsBot {
   public buildInitialActionDeck(): void {
     const opts = this.game.gameOptions;
     // Prelude: MarsBot gets 3 extra project cards instead of Prelude cards
-    const numProjectCards = isAutomaPreludeGame(opts.preludeExtension, opts.prelude2Expansion) ? 6 : 3;
+    const numProjectCards = opts.preludeExtension ? 6 : 3;
     const projectCards = this.game.projectDeck.drawN(this.game, numProjectCards);
     const bonusCard = this.bonusDeck.draw();
     const deck: Array<IProjectCard | MarsBotBonusCard> = [...projectCards];
@@ -250,7 +250,7 @@ export class MarsBot {
     const mb = this;
     this.cachedCorpContext = {
       gameLog: (msg: string) => mb.game.log(msg),
-      advanceTrack: (trackIndex: number) => mb.turnResolver.advanceTrackPublic(trackIndex),
+      advanceTrack: (trackIndex: number) => mb.turnResolver.advanceTrack(trackIndex),
       get mcSupply() { return mb.turnResolver.mcSupply; },
       setMcSupply: (mc: number) => { mb.turnResolver.mcSupply = mc; },
       get trackPositions() { return mb.board.tracks.map((t) => t.position); },
@@ -377,7 +377,7 @@ export class MarsBot {
   /** Check if MarsBot instantly wins (gen 20, or gen 18 with Prelude). */
   public isInstantWin(): boolean {
     const opts = this.game.gameOptions;
-    return this.game.generation >= getAutomaMaxGeneration(opts.preludeExtension, opts.prelude2Expansion);
+    return this.game.generation >= getAutomaMaxGeneration(opts.preludeExtension);
   }
 
   // ---- Track Regression (human effects) ----
@@ -422,7 +422,7 @@ export class MarsBot {
       }));
     }
     const opts = this.game.gameOptions;
-    const mcPerVP = getMcPerVP(this.game.generation, opts.preludeExtension, opts.prelude2Expansion);
+    const mcPerVP = getMcPerVP(this.game.generation, opts.preludeExtension);
     if (mcPerVP !== undefined) {
       model.mcPerVP = mcPerVP;
       model.mcVP = Math.floor(this.turnResolver.mcSupply / mcPerVP);

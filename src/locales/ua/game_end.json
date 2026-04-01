@@ -27,7 +27,6 @@
   "generations": "поколінь",
   "Player": "Гравець",
   "Corporation": "Корпорація",
-  "TR": "РТ",
   "VP": "ПО",
   "Total": "Всього",
   "Timer": "Таймер",
@@ -37,15 +36,10 @@
   "Natural Preserve:ares": "Природний заповідник",
   "Nuclear Zone:ares": "Ядерна зона",
   "Ecological Zone:ares": "Екологічна зона",
-  "Commercial District:ares": "Комерційний район",
   "Underworld Corruption Bribe": "Підземний хабар корупції",
 
   "Completed!": "Завершено!",
   "% completed": "% завершено",
-  "Temperature": "Температура",
-  "Oxygen": "Кисень",
-  "Oceans": "Океани",
-  "Venus": "Венера",
   "L. Habitat": "Лунне житло",
   "L. Mining": "Лунна шахта",
   "L. Logistics": "Лунні логістика",
@@ -67,7 +61,5 @@
   "Milestones points": "Очки віхових пунктів",
   "Awards points": "Очки нагород",
 
-  "Actions taken this game": "Дії, виконані у цій грі",
-  "Escape Velocity penalty": "Штраф за швидкість виходу на орбіту",
   "Download game log": "Завантажити журнал гри"
 }

@@ -42,7 +42,6 @@
   "Coordinated Raid": "Koordinoitu ryöstö",
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Vaatii vähintään 1 siirtokunnan pelissä. Lähetä yksi käyttämättömistä kauppalaivastostasi mille tahansa siirtokuntalaatalle. Kerää kauppabonus ja siirtokuntabonus jokaisesta tämän laatan siirtokunnasta. Muut pelaajat eivät saa siirtokuntabonuksiaan tästä toiminnosta.",
 
-  "Crashlanding": "Pakkolasku",
   "Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "Aseta JA SUUNTAA tämä laatta ei-varatulle paikalle, joka on korkeintaan 1 kaupungin vieressä.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Putoamispaikka antaa VIEREISYYSBONUS 1 datan ja joko 1 terästä tai 1 titaania.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Kun asetat putoamispaikan, saat nämä bonukset jokaisesta omistamastasi viereisestä laatasta.",
@@ -138,7 +137,6 @@
   "Martian Monuments": "Marsin monumentit",
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Vaatii että omistat kaupungin MARSISSA. Lisää M€-tuotantoasi 1 askel jokaisesta Mars-ympyrästäsi (tämä mukaan lukien).)",
 
-  "Martian Nature Wonders": "Marsin luonnonmestat",
   "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Aseta neutraalin pelaajan kuutio ei-varatulle paikalle. Tälle paikalle ei voi asettaa laattaa tässä pelissä. Kerää bonukset tältä paikalta, mutta ei bonuksia viereisistä paikoista. Lisää 2 dataa MILLE TAHANSA kortille.)",
 
   "Martian Repository": "Marsin arkisto",

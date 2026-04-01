@@ -46,7 +46,6 @@
 
 "Corporate Theft": "Unternehmensdiebstahl",
 "Action: Pay 5 M€ to steal ANY 1 resource from another player. If it is a card resource, you may put it on a suitable card.": "AKTION: Zahle 5 M€, um 1 beliebige Ressource von einem anderen Spieler zu stehlen. Wenn es eine Kartenressource ist, darfst du sie auf eine passende Karte legen.",
-"STEAL": "KLAUE",
 "DOES NOT WORK IN SOLO GAMES": "Funktioniert nicht im Solospiel.",
 
 "Crater Survey": "Krater Vermessung",
@@ -97,7 +96,6 @@
 "Gain 1 plant for each underground token you own.": "Erhalte 1 Pflanze für jedes beanspruchte unterirdisches Ressourcenplättchen, das du besitzt.",
 
 "Friends in High Places": "Freunde in hohen Positionen",
-"Effect: When you play a card, you pay 1 M€ less for it.": "EFFEKT: Wenn du eine Karte spielst, zahle 1 M€ weniger für sie.",
 "Requires 2 Earth tags. Gain 1 corruption.": "Benötigt 2 Erdsymbole. Erhalte 1 Korruption.",
 
 "Gaia City": "Gaia-Stadt",
@@ -127,10 +125,8 @@
 "Guerilla Ecologists": "Guerilla-Ökologen",
 "Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Benötigt 1 Korruption. Gib 4 Pflanzen aus, um ein Grunflächenplättchen zu platzieren, UNABHÄNGIG VON EINSCHRÄNKUNGEN.",
 
-"Hackers": "Hacker",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
 
-"Hired Raiders": "Bezahlte Plünderer",
 "Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Klaue 4 M€, plus 1 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
 
 "Hyperspace Drive Prototype": "Hyperraum-Antrieb Prototyp",
@@ -264,7 +260,6 @@
 
 "Search for Life Underground": "Suche nach Leben im Untergrund",
 "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "AKTION: Bezahle 1 M€, um eine unterirdische Ressource zu identifizieren. Wenn mindestens 1 Mikrobe abgebildet ist, füge hier eine wissenschaftliche Ressource hinzu.",
-"3 VPs if you have one or more science resources here.": "3 SP, falls du Du hier mindestens ein Wissenschaftsressource hast.",
 "Temperature must -18° C or colder.": "Die Temperatur muss -18° C oder kälter sein.",
 
 "Server Sabotage": "Serversabotage",
@@ -292,7 +287,6 @@
 "Star Vegas": "Star-Vegas",
 "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.": "Benötigt 3 beliebige Städte im Spiel. Platziere eine Stadt auf einem Feld, das für eine andere Weltraum-Stadt reserviert ist. Erhalte 2 Korruption. Erhöhe deine MC-Produktion um 1 für jede Stadt im Spiel.",
 
-"Standard Technology": "Standardtechnologie",
 "REPEAT": "WIEDERHOLE",
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast, wobei die Kosten um 8 M€ reduziert werden.",
 

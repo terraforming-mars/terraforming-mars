@@ -55,7 +55,6 @@
   "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Requer 4 tiles de oceano. Coloque este tile. Diminua sua produção de energia em 2 e aumente sua produção de M€ em 5.",
   "1 additional VP for each ocean tile adjacent to this city tile.": "1 PV ADICIONAL POR CADA TILE DE OCEANO ADJACENTE A ESTE TILE DE CIDADE.",
 
-  "Asteroid": "Asteroide",
   "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Aumente em 1 nível a temperatura e ganhe 2 de titânio. Remova até 3 plantas de qualquer jogador.",
 
   "Comet": "Cometa",
@@ -197,7 +196,6 @@
   "Increase your M€ production 1 step for each Earth tag you have.": "Aumente sua produção de M€ 1 nível por cada ícone de Terra que você tenha.",
 
   "Fish": "Peixes",
-  "Action: Add 1 animal to this card.": "Ação: adicione 1 animal a esta carta.",
   "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "Requer +2°C ou mais. Diminua qualquer produção de plantas em 1 nível.",
   "1 VP for each animal on this card.": "1 PV por cada animal nesta carta.",
 
@@ -280,7 +278,6 @@
   "Increase your energy production 1 step and gain 2 titanium.": "Aumente sua produção de energia 1 nível e ganhe 2 de titânio.",
 
   "Ice Asteroid": "Asteroide de Gelo",
-  "Place 2 ocean tiles.": "Coloque 2 tiles de oceano.",
 
   "Quantum Extractor": "Extrator Quântico",
   "Requires 4 science tags. Increase your energy production 4 steps.": "Efeito: quando você joga uma carta tipo espaço, pague 2 M€ a menos por ela.",
@@ -363,7 +360,6 @@
   "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Ação: gaste 4 de energia para ganhar 1 de titânio e aumentar o oxigênio 1 nível.",
 
   "Earth Office": "Escritório na Terra",
-  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Efeito: quando você joga um ícone de Terra, pague 3 M€ a menos.",
   "When you play an Earth tag, you pay 3 M€ less for it.": "Quando você joga um ícone de Terra, pague 3 M€ a menos.",
 
   "Acquired Company": "Aquisição de Companhia",
@@ -462,7 +458,6 @@
   "It must be -10 C or colder.": "A temperatura deve estar a -10°C ou menos.",
 
   "Advanced Ecosystems": "Ecossistemas Avançados",
-  "Plant Animal Microbe": "Planta Animal Micróbio",
   "Requires a plant tag, a microbe tag, and an animal tag.": "Requer um ícone de planta, um de micróbio e um de animal.",
 
   "Great Dam": "Grande Barragem",
@@ -516,7 +511,6 @@
   "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "Diminua sua produção de calor qualquer número de níveis e aumente sua produção de M€ este mesmo número.",
 
   "Adaptation Technology": "Tecnologia de Adaptação",
-  "Global requirements": "Requisitos globais",
   "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "Efeito: seus requisitos globais são +2 ou -2 níveis, à sua escolha em cada caso.",
 
   "Caretaker Contract": "Contrato de Zelador",
@@ -704,17 +698,13 @@
 
   "HYDROGEN TO VENUS": "Hidrogênio a Venus",
 
-  "Plant Microbe Animal": "Planta Micróbio Animal",
-  "Jovian": "Joviano",
   "max 3 Oceans": "máx 3 Oceanos",
   "Forest": "Vegeração",
-  "2 Power": "2 Energia",
   "7 Science": "7 Ciência",
   "Titanium production": "Produção de Titânio",
   "Steel production": "Produção de Aço",
   "4 Science": "4 Ciência",
   "2 Cities": "2 Cidades",
-  "Standard projects": "Projetos-padrão",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Requer 2 ícones de Terra. Aumente sua produção de M€ em 4.",
   "Oxygen must be 4% or lower. Draw two cards.": "O nível de oxigênio deve estar em 4% ou menos. Compre 2 cartas.",

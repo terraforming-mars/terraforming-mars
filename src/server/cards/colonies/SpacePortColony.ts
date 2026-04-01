@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -34,13 +33,5 @@ export class SpacePortColony extends Card implements IProjectCard {
         description: 'Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.',
       },
     });
-  }
-
-  public override getVictoryPoints(player: IPlayer) {
-    let coloniesCount = 0;
-    player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.length;
-    });
-    return Math.floor(coloniesCount / 2);
   }
 }

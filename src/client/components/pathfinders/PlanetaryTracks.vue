@@ -1,5 +1,5 @@
 <template>
-  <div class="pathfinders_cont">
+  <div v-if="tracks" class="pathfinders_cont">
     <div class="track track-background-venus" v-if="tracks.venus >= 0">
       <div class="track-tag track-tag-venus"></div>
       <table class="track-venus">
@@ -45,7 +45,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PathfindersModel} from '@/common/models/PathfindersModel';
 import {Tag} from '@/common/cards/Tag';
@@ -53,7 +53,7 @@ import {range} from '@/common/utils/utils';
 import PlanetaryTrack from '@/client/components/pathfinders/PlanetaryTrack.vue';
 import {PlanetaryTracks as Tracks} from '@/common/pathfinders/PlanetaryTracks';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTracks',
   props: {
     tracks: {
@@ -61,6 +61,7 @@ export default Vue.extend({
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   components: {

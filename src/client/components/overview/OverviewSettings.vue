@@ -7,10 +7,10 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'OverviewSettings',
   methods: {
     toggleTagsView() {

@@ -24,7 +24,8 @@ function getQuotaConfig(): QuotaConfig {
   try {
     if (val !== undefined) {
       const struct = JSON.parse(val);
-      let {limit, per} = struct;
+      let {limit} = struct;
+      const {per} = struct;
       if (limit === undefined) {
         throw new Error('limit is absent');
       }
@@ -129,11 +130,7 @@ export class ApiCreateGame extends Handler {
             customCorporationsList: gameReq.customCorporationsList,
             customPreludes: gameReq.customPreludes,
             draftVariant: gameReq.draftVariant,
-            escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
-            escapeVelocityMode: gameReq.escapeVelocityMode,
-            escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
-            escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
-            escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+            escapeVelocity: gameReq.escapeVelocity,
             fastModeOption: gameReq.fastModeOption,
             includedCards: gameReq.includedCards,
             includeFanMA: gameReq.includeFanMA,

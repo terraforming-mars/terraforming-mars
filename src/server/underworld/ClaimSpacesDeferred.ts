@@ -23,7 +23,7 @@ export class ClaimSpacesDeferred extends RunNTimes<void> {
   }
 
   public createSelectSpace(spaces: Array<Space>) {
-    const title = 'Select space to claim' + this.titleSuffix();
+    const title = this.createTitle('Select space to claim');
     return new SelectSpace(title, spaces)
       .andThen((space) => {
         UnderworldExpansion.claim(this.player, space);

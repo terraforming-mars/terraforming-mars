@@ -21,7 +21,7 @@ export class ExcavateSpacesDeferred extends RunNTimes<void> {
   }
 
   protected run() {
-    const title = 'Select space to excavate' + this.titleSuffix();
+    const title = this.createTitle('Select space to excavate');
     this.player.defer(() => {
       const spaces =
         this.spaces ??

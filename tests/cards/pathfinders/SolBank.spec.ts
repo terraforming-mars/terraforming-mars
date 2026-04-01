@@ -43,7 +43,7 @@ describe('SolBank', () => {
     spctp.process({
       type: 'projectCard',
       card: CardName.MICRO_MILLS,
-      payment: Payment.of({megaCredits: 3}),
+      payment: Payment.of({megacredits: 3}),
     });
     runAllActions(game);
 

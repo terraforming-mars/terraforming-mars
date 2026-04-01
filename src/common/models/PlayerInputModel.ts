@@ -61,6 +61,7 @@ export type SelectCardModel = BaseInputModel & {
   showOnlyInLearnerMode: boolean;
   selectBlueCardAction: boolean;
   showOwner: boolean;
+  showSelectAll: boolean;
 }
 
 export type SelectColonyModel = BaseInputModel & {
@@ -76,6 +77,7 @@ export type SelectPaymentModel = BaseInputModel & {
   auroraiData: number;
   kuiperAsteroids: number;
   spireScience: number;
+  reserveUnits: Readonly<Units> | undefined; // Built to support the Merchant milestone.
 }
 
 export type SelectPlayerModel = BaseInputModel & {

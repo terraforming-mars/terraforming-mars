@@ -5,8 +5,8 @@ export class Smith extends BaseMilestone {
   constructor() {
     super(
       'Smith',
-      'Have a total of 7 steel and titanium production',
-      7);
+      'Have a total of 6 steel and titanium production',
+      6);
   }
 
   public getScore(player: IPlayer): number {

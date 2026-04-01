@@ -1,10 +1,14 @@
 {
+  "Albedo Plants": "Albedo-Pflanzen",
+  "Effect: When you play a plant tag, including this, gain 3 heat.": "EFFEKT: Wenn du eine Pflanzensymbol spielst, einschließlich dieses, erhältst du 3 Wärme.",
+  "Increase plant production 1 step. Gain 1 plant.": "Erhöhe deine Pflanzenproduktion um 1. Erhalte 1 Pflanze.",
+  
   "Applied Science": "Angewandte Wissenschaft",
   "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "AKTION: Entferne 1 Wissenschaft von dieser Karte, um einer Karte deiner Wahl mit einer Ressource 1 Ressource hinzuzufügen oder 1 Standard-Ressource zu erhalten.",
   "Add 6 science resources here.": "Füge dieser Karte 6 Wissenschaft hinzu.",
 
   "Atmospheric Enhancers": "Atmosphären-Aufwerter",
-  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Ziehe 2 Karten mit Schwebern.",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "EFFEKT: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Ziehe 2 Karten mit Schwebern.",
 
   "Board of Directors": "Vorstandssitzung",
   "ACTION:": "AKTION:",
@@ -53,7 +57,7 @@
   "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter- und 1 Venuskarte.",
 
   "Preservation Program": "Erhaltungsprogramm",
-  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEIN ERSTES ERHÖHEN DES TW IN DER AKTIONSPHASE JEDER GENERATION.",
+  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "EFFEKT: ÜBERSPRINGE DEIN ERSTES ERHÖHEN DES TW IN DER AKTIONSPHASE JEDER GENERATION.",
   "Raise your TR 5 steps.": "Erhöhe deinen TW um 5.",
 
   "Project Eden": "Projekt Eden",
@@ -92,9 +96,9 @@
   "Raise your TR 2 steps. Draw 1 card.": "Erhöhe deinen TW um 2. Ziehe 1 Karte.",
 
   "Strategic Base Planning": "Strategische Basisplannung",
-  "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Errichte eine Kolonie. Platziere ein Stadtplättchen.",
+  "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Platziere 1 Kolonie und 1 Stadtplättchen.",
 
-  "Anti-desertification Techniques": "Anti-Wüstenbildungstechniken",
+  "Anti-desertification Techniques": "Anti-Desertation-Techniken",
   "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
 
   "Corporate Archives": "Konzernarchiv",
@@ -107,7 +111,7 @@
   "Copy your other prelude's direct effect.": "Kopiere den Effekt deiner anderen Präludiumskarte.",
 
   "Giant Solar Collector": "Riesiger Sonnenkollektor",
-  "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe die Energieproduktion um 2 Stufen. Erhöhe die Venuswertung um 2%.",
+  "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe deine Energieproduktion um 2. Erhöhe die Venuswertung um 2%.",
 
   "Head Start": "Vorsprung",
   "GAIN 2 STEEL.": "Erhalte 2 Stahl.",
@@ -226,7 +230,5 @@
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
 
   "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
-  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen",
-  "Add resource": "Ressource hinzufügen",
-  "Gain plant": "Pflanze erhalten"
+  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen"
 }

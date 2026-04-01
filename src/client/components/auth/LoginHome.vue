@@ -13,38 +13,45 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
+import * as raw_settings from '@/genfiles/settings.json';
 import {paths} from '@/common/app/paths';
-import {statusCode} from '@/common/http/statusCode';
 
 type Data = {
   user: string | undefined;
+  discordClientId: string;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'login-home',
   data(): Data {
     return {
       user: undefined,
+      discordClientId: raw_settings.discordClientId,
     };
   },
   mounted() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', paths.API_PROFILE);
-    xhr.onerror = () => alert('Error getting session profile data');
-    xhr.onload = () => {
-      try {
-        if (xhr.status === statusCode.ok) {
-          this.user = xhr.response._user.userid;
-        } else {
-          console.error('Unexpected server response: ' + xhr.statusText);
+    const url = paths.API_PROFILE;
+    fetch(url)
+      .then((resp) => {
+        if (!resp.ok) {
+          console.error('Unexpected server response: ' + resp.statusText);
+          return null;
         }
-      } catch (e) {
-        console.log('Error processing XHR response: ' + e);
-      }
-    };
-    xhr.responseType = 'json';
-    xhr.send();
+        return resp.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        try {
+          this.user = data._user.userid;
+        } catch (e) {
+          console.log('Error processing fetch response: ' + e);
+        }
+      })
+      .catch((err) => {
+        alert('Error getting session profile data');
+        console.error(err);
+      });
   },
   computed: {
     loginUrl(): string {
@@ -52,7 +59,9 @@ export default Vue.extend({
       const idx = window.location.href.lastIndexOf('/' + paths.LOGIN);
       const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
       const encoded = encodeURI(url);
-      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&scope=identify&redirect_uri=' + encoded;
+      const clientId = this.discordClientId;
+      if (!clientId) return '';
+      return 'https://discord.com/oauth2/authorize?client_id=' + clientId + '&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {
       return paths.API_LOGOUT;

@@ -73,6 +73,7 @@ export class Warmonger implements IAward {
     CardName.HACKERS_UNDERWORLD,
     CardName.HIRED_RAIDERS_UNDERWORLD,
     CardName.INVESTIGATIVE_JOURNALISM,
+    CardName.MERCENARY_SQUAD,
     CardName.MONOPOLY,
     CardName.PLANT_TAX,
     CardName.RECKLESS_DETONATION,

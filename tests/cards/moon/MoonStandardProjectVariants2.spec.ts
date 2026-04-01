@@ -35,8 +35,8 @@ describe('MoonStandardProjectVariants2', () => {
   describe('MoonMineStandardProjectVariant2', () => {
     const canActRuns = [
       {titanium: 1, mc: 20, canAct: false},
-      {titanium: 0, mc: 22, canAct: false},
-      {titanium: 0, mc: 23, canAct: true},
+      {titanium: 0, mc: 23, canAct: false},
+      {titanium: 0, mc: 24, canAct: true},
     ] as const;
     for (const run of canActRuns) {
       it('can act' + JSON.stringify(run), () => {

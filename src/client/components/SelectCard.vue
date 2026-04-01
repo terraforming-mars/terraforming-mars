@@ -14,9 +14,10 @@
               </template>
             </Card>
         </label>
-        <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
+        <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
+            <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
@@ -25,11 +26,12 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
@@ -53,17 +55,20 @@ type WidgetDataModel = {
   owners: Map<CardName, Owner>,
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectCard',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectCardModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectCardResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
@@ -174,11 +179,27 @@ export default Vue.extend({
       // Copied from PlayerMixin.
       return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
-    buttonLabel(): string {
-      return this.selectOnlyOneCard ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    buttonLabel(): string | Message {
+      if (this.selectOnlyOneCard) {
+        return this.playerinput.buttonLabel;
+      }
+      return {
+        message: this.playerinput.buttonLabel + ' ${0}',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(this.cardsSelected()),
+        }],
+      };
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
+    },
+    toggleSelectAll() {
+      if (this.allSelected) {
+        this.cards = [];
+      } else {
+        this.cards = this.selectableCards.slice();
+      }
     },
   },
   computed: {
@@ -189,6 +210,17 @@ export default Vue.extend({
       return this.playerinput.max !== undefined &&
              this.playerinput.max > 1 &&
              this.playerinput.min === 0;
+    },
+    selectableCards(): Array<CardModel> {
+      return this.playerinput.cards.filter((card) => !card.isDisabled);
+    },
+    showSelectAll(): boolean {
+      return this.playerinput.showSelectAll === true &&
+             !this.selectOnlyOneCard &&
+             this.selectableCards.length > 1;
+    },
+    allSelected(): boolean {
+      return Array.isArray(this.cards) && this.cards.length === this.selectableCards.length;
     },
   },
 });

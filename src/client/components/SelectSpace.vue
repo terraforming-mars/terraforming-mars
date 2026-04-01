@@ -19,8 +19,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
@@ -28,9 +27,10 @@ import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
 import {SpaceId} from '@/common/Types';
 
+
 type Refs = {
-  confirmation: InstanceType<typeof ConfirmDialog>,
-}
+  confirmation: InstanceType<typeof ConfirmDialog>;
+};
 
 type DataModel = {
   spaces: Set<SpaceId>;
@@ -39,20 +39,24 @@ type DataModel = {
   warning: string | undefined;
 };
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'SelectSpace',
   props: {
     playerinput: {
       type: Object as () => SelectSpaceModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectSpaceResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   data(): DataModel {
@@ -66,6 +70,11 @@ export default (Vue as WithRefs<Refs>).extend({
   components: {
     'confirm-dialog': ConfirmDialog,
     GoToMap,
+  },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
   },
   methods: {
     animateSpace(tile: Element, activate: boolean) {
@@ -141,7 +150,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        this.$refs.confirmation.show();
+        this.typedRefs.confirmation.show();
       }
     },
     saveData() {

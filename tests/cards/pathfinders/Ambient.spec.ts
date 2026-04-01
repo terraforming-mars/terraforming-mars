@@ -3,7 +3,7 @@ import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
+import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -12,7 +12,9 @@ import {Phase} from '../../../src/common/Phase';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {toName} from '../../../src/common/utils/utils';
+import {cast, toName} from '../../../src/common/utils/utils';
+import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
 
 describe('Ambient', () => {
   let card: Ambient;
@@ -82,7 +84,7 @@ describe('Ambient', () => {
 
     expect(player.terraformRating).eq(20);
 
-    card.action(player);
+    cast(card.action(player), undefined);
 
     expect(player.heat).eq(1);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
@@ -145,4 +147,37 @@ describe('Ambient', () => {
       expect(card.canAct(player)).eq(run.expected);
     });
   }
+
+  it('Compatible with Stormcraft Incorporated', () => {
+    [game, player, player2] = testGame(2);
+    player.playedCards.push(card);
+    const stormcraft = new StormCraftIncorporated();
+    player.playedCards.push(stormcraft);
+    player.canUseHeatAsMegaCredits = true;
+    player.game.phase = Phase.ACTION;
+    setTemperature(game, MAX_TEMPERATURE);
+
+    player.heat = 4;
+    stormcraft.resourceCount = 1;
+
+    expect(card.canAct(player)).is.false;
+
+    stormcraft.resourceCount = 2;
+
+    expect(card.canAct(player)).is.true;
+
+    player.heat = 5;
+    stormcraft.resourceCount = 3;
+
+    const andOptions = cast(card.action(player), AndOptions);
+
+    andOptions.options[0].cb(4);
+    andOptions.options[1].cb(2);
+    andOptions.cb(undefined);
+
+    expect(player.heat).eq(1);
+    expect(stormcraft.resourceCount).eq(1);
+    expect(game.getTemperature()).eq(MAX_TEMPERATURE);
+    expect(player.terraformRating).eq(21);
+  });
 });

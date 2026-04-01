@@ -61,7 +61,7 @@ export class LawSuit extends Card implements IProjectCard {
     return -1;
   }
 
-  public static resourceHook(player: IPlayer, _resource: Resource, amount: number, from: IPlayer) {
+  public static resourceHook(player: IPlayer, amount: number, from: IPlayer) {
     if (from === player || amount >= 0) {
       return;
     }

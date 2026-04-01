@@ -295,7 +295,6 @@
   "Played Cards": "Zagrane karty",
   "played cards": "zagrane karty",
   "Select which cards to take into hand": "Wybierz karty, które weźmiesz na rękę",
-  "Not enough cards selected": "Wybrano za mało kart",
   "Convert 7 heat into temperature": "Wydaj 7 jednostek ciepła, aby podnieść temperaturę",
   "Convert 8 heat into temperature": "Wydaj 8 jednostek ciepła, aby podnieść temperaturę",
   "Convert ${0} plants into greenery": "Wydaj ${0} jednostek roślinności, aby umieścić na planszy obszar zieleni",
@@ -324,11 +323,8 @@
   "Air scrapping (15 M€)": "Uzdatnianie powietrza (15 M€)",
   "Buffer Gas (16 M€)": "Gaz buforowy (16 M€)",
   "Build colony (17 M€)": "Założenie kolonii (17 M€)",
-  "Power Plant": "Elektrownia",
-  "Asteroid": "Asteroida",
   "Aquifer": "Nawodnienie",
   "Greenery": "Zieleń",
-  "City": "Obszar miasta",
   "Buffer Gas": "Gaz buforowy",
 
   "Pay ${0} M€": "Wydaj ${0} M€",
@@ -337,11 +333,6 @@
   "Trade with a colony tile": "Handluj z kaflem obiektu",
   "Standard projects": "Projekty standardowe",
   "(Enceladus - (Microbes)": "(Enceladus - (Mikroby)",
-  "Select action for World Government Terraforming": "Wybierz akcję Działań Rządu Światowego",
-  "Increase temperature": "Podnieś temperaturę",
-  "Increase oxygen": "Podnieś poziom tlenu",
-  "Add an ocean": "Umieść ocean",
-  "Increase Venus scale": "Podnieś Współczynnik Terraformacji Wenus",
   "[ toggle tags view ]": "[ zwiń widok znaczników ]",
   "[ toggle cards in hand ]": "[ zwiń karty w ręce ]",
   "Login": "Zaloguj się",
@@ -409,8 +400,6 @@
   "Pay trade fee": "Zapłać opłatę handlową",
   "Select colony tile for trade": "Wybierz kafel obiektu, z którym będziesz handlować",
   "Pass for this generation": "Spasuj w tym pokoleniu",
-  "Confirm": "Potwierdź",
-  "Increase": "Podnieś",
   "Buy": "Kup",
   "Buy 0": "Kup 0",
   "Buy 1": "Kup 1",
@@ -533,5 +522,6 @@
   "Add information useful for development and debugging.": "Dodaj informacje przydatne do developmentu i debugowania.",
   "Copy the text below and then paste it in": "Skopiuj tekst i wklej go",
   "#bug-reports Discord channel": "na kanale Discorda #bug-reports",
-  "a GitHub issue": "jako błąd na stronie GitHub"
+  "a GitHub issue": "jako błąd na stronie GitHub",
+  "Reorder Cards": "Zmień kolejność kart"
 }

@@ -1,8 +1,6 @@
 // A representation of a value associated with each standard resource type.
 // Could be a player's inventory, or their production, or just a way to pass several resource-related values
 
-import {Resource} from './Resource';
-
 // Units represents any value of each standard unit.
 // Could be positive or negative, depending on how it's used.
 export type Units = {
@@ -63,6 +61,20 @@ export namespace Units {
   }
 
   /**
+   * Returns a Units where every field is the same value.
+   */
+  export function every(value: number): Units {
+    return {
+      megacredits: value,
+      steel: value,
+      titanium: value,
+      plants: value,
+      energy: value,
+      heat: value,
+    };
+  }
+
+  /**
    * Returns the units, with every value inverted.
    */
   export function negative(units: Units): Units {
@@ -118,13 +130,4 @@ export namespace Units {
   export function values(u: Units): ReadonlyArray<number> {
     return keys.map((k) => u[k]);
   }
-
-  export const ResourceMap: Record<keyof Units, Resource> = {
-    megacredits: Resource.MEGACREDITS,
-    steel: Resource.STEEL,
-    titanium: Resource.TITANIUM,
-    plants: Resource.PLANTS,
-    energy: Resource.ENERGY,
-    heat: Resource.HEAT,
-  } as const;
 }

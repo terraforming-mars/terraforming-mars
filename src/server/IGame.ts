@@ -194,6 +194,9 @@ export interface IGame extends Logger {
    * Gives all the bonuses a player may gain when placing a tile on a space.
    *
    * This includes bonuses on the map, from oceans, Ares tiles, Turmoil, Colonies, etc.
+   *
+   * @param coveringExistingTile when true, don't grant placement bonuses like when covering
+   * a hazard tile, or overplacing one tile on top of another.
    */
   grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile?: boolean): void
 

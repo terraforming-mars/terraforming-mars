@@ -209,6 +209,8 @@ type ConstructorOf<T> = new (...args: any[]) => T;
  * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
  *
  * Accepts `undefined` as class and fails when obj is not undefined.
+ *
+ * @deprecated use common/utils/utils:cast
  */
 export function cast<T>(obj: any, klass: ConstructorOf<T>): T;
 export function cast<T>(obj: any, klass: undefined): undefined;

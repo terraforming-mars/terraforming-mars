@@ -157,7 +157,7 @@ export interface IPlayer {
   standardProjectsThisGeneration: Set<CardName>;
 
   /**
-   * For Hollandia Regels. When true, player has tiles on Mars, and all of them are in the deflection zone.
+   * For Hollandia. When true, player has tiles on Mars, and all of them are in the deflection zone.
    * False when the player has any tiles on Mars outside the deflection zone, and also false when the
    * player has no tiles on Mars.
    */
@@ -349,6 +349,9 @@ export interface IPlayer {
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
+
+  /** Returns the cost a player must spend to claim a milestone. Public for Briber. */
+  milestoneCost(): number;
 
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;

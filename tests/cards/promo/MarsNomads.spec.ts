@@ -271,4 +271,25 @@ describe('MarsNomads', () => {
       expect(player.production.steel).eq(0);
     });
   });
+
+  describe('Compatible with Ares', () => {
+    it('Hazards are selectable but grant nothing', () => {
+      const [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+
+      const firstSpace = game.board.getSpaceOrThrow('05');
+      const space = game.board.getSpaceOrThrow('04');
+      space.spaceType = SpaceType.LAND;
+      space.tile = {tileType: TileType.EROSION_MILD};
+      space.bonus = [SpaceBonus.STEEL];
+      game.nomadSpace = firstSpace.id;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(0);
+    });
+  });
 });

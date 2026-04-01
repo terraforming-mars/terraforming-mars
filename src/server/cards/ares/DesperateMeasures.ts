@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {IGame} from '../../IGame';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -28,17 +27,13 @@ export class DesperateMeasures extends Card implements IProjectCard {
     });
   }
 
-  private getHazardTiles(game: IGame) {
-    return game.board.getHazards(/* includeProtected= */ false);
-  }
-
   public override bespokeCanPlay(player: IPlayer): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
-    return this.getHazardTiles(player.game).length > 0;
+    return player.game.board.getUnprotectedHazards().length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game))
+    return new SelectSpace('Select a hazard space to protect', player.game.board.getUnprotectedHazards())
       .andThen((space) => {
         if (space.tile === undefined) {
           throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);

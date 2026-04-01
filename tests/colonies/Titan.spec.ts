@@ -7,6 +7,7 @@ import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
+import {SelfReplicatingRobots} from '../../src/server/cards/promo/SelfReplicatingRobots';
 
 describe('Titan', () => {
   let titan: Titan;
@@ -70,5 +71,17 @@ describe('Titan', () => {
 
     expect(aerialMappers.resourceCount).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(1);
+  });
+
+  // #7840
+  it('Should not add cards to self-replicating robots cards', () => {
+    const srr = new SelfReplicatingRobots();
+    player.playedCards.push(srr);
+    srr.targetCards.push(aerialMappers);
+    titan.trade(player);
+
+    runAllActions(game);
+    cast(game.deferredActions.pop(), undefined);
+    expect(aerialMappers.resourceCount).to.eq(0);
   });
 });

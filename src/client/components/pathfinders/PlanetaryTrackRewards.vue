@@ -7,23 +7,25 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PlanetaryTrackSpace} from '@/common/pathfinders/PlanetaryTrack';
 import PlanetaryTrackReward from './PlanetaryTrackReward.vue';
 import {Reward} from '@/common/pathfinders/Reward';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTrackRewards',
   props: {
     rewards: {
       type: Object as () => PlanetaryTrackSpace,
+      required: true,
     },
     type: {
-      type: String as () => 'risingPlayer' | 'everyone',
+      type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   components: {

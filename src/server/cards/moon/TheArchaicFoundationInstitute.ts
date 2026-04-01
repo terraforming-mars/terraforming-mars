@@ -38,7 +38,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const moonTags = card.tags.filter((t) => t === Tag.MOON);
     const count = moonTags.length;
     if (count > 0) {

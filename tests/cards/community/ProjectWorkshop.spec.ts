@@ -236,7 +236,7 @@ describe('ProjectWorkshop', () => {
 
     const selectOption = cast(churn(card.action(player), player), SelectOption);
     const selectPayment = cast(churn(() => selectOption.cb(undefined), player), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);

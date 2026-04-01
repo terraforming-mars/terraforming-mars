@@ -215,7 +215,6 @@ export interface ICard {
   deserialize?(serialized: SerializedCard): void;
 
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
-  // TODO(kberg): move to json?
   generationUsed?: number;
 }
 

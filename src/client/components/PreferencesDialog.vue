@@ -74,6 +74,15 @@
 
       <div class="preferences_panel_item">
         <label class="form-switch">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.animated_title" data-test="animated_title">
+          <i class="form-icon"></i>
+          <span v-i18n>Animated Title</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Show spinning circle in window title on your turn.')">&#9432;</span>
+        </label>
+      </div>
+
+      <div class="preferences_panel_item">
+        <label class="form-switch">
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui" data-test="experimental_ui">
           <i class="form-icon"></i>
           <span v-i18n>Experimental UI</span>
@@ -91,28 +100,29 @@
 
       <div class="preferences_panel_actions">
         <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>
-        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();" v-i18n>Report a bug</button>
+        <button class="btn btn-lg btn-primary" v-on:click="showBugDialog" v-i18n>Report a bug</button>
       </div>
       <bug-report-dialog ref="bugDialog"></bug-report-dialog>
     </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from 'vue';
 
 import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
-type Refs = {
-  bugDialog: InstanceType<typeof BugReportDialog>,
-}
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  bugDialog: InstanceType<typeof BugReportDialog>;
+};
+
+export default defineComponent({
   name: 'PreferencesDialog',
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
+      required: true,
     },
   },
   components: {
@@ -124,6 +134,9 @@ export default (Vue as WithRefs<Refs>).extend({
     };
   },
   methods: {
+    showBugDialog() {
+      this.typedRefs.bugDialog.show();
+    },
     setBoolPreferencesCSS(
       target: HTMLElement,
       val: boolean,
@@ -160,6 +173,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     getPreferences(): typeof getPreferences {
       return getPreferences;
     },

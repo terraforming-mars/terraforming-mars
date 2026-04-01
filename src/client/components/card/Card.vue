@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses" ref="container">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
@@ -8,7 +8,12 @@
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
-          <CardContent :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :bottomPadding="bottomPadding" />
+          <CardContent
+              ref="content"
+              :metadata="cardMetadata"
+              :requirements="cardRequirements"
+              :isCorporation="isCorporationCard"
+              :bottomPadding="bottomPadding" />
       </div>
       <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
@@ -20,7 +25,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
@@ -42,7 +47,13 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
-export default Vue.extend({
+
+type Refs = {
+  container: HTMLElement;
+  content: {$el: HTMLElement};
+};
+
+export default defineComponent({
   name: 'Card',
   components: {
     CardTitle,
@@ -75,6 +86,12 @@ export default Vue.extend({
       required: false,
       default: 'neutral',
     },
+    // When true, the card is automatically sized regardless of hover.
+    autoTall: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     const cardName = this.card.name;
@@ -83,6 +100,7 @@ export default Vue.extend({
     return {
       cardInstance: card,
       hovering: false,
+      customHeight: 0,
     };
   },
   computed: {
@@ -125,7 +143,7 @@ export default Vue.extend({
     },
     cardClasses(): string {
       const classes = [];
-      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
+      classes.push('card-' + this.card.name.toLowerCase().replaceAll(' ', '-'));
 
       if (this.card.isDisabled) {
         classes.push('card-unavailable');
@@ -156,7 +174,7 @@ export default Vue.extend({
     },
     isProjectCard(): boolean {
       const type = this.cardType;
-      return type !== CardType.PRELUDE && type !== CardType.CORPORATION && type !== CardType.CEO;
+      return type === CardType.AUTOMATED || type === CardType.ACTIVE || type === CardType.EVENT;
     },
     isStandardProject() : boolean {
       return this.cardType === CardType.STANDARD_PROJECT || this.cardType === CardType.STANDARD_ACTION;
@@ -181,11 +199,68 @@ export default Vue.extend({
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     showPlayerCube(): boolean {
       return getPreferences().experimental_ui && this.actionUsed;
     },
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
+    },
+  },
+  methods: {
+    makeFullSize() {
+      if (!this.isProjectCard) {
+        return;
+      }
+      // Was not initialized with a custom height, probably because it was not visible.
+      if (this.customHeight === 0) {
+        this.customHeight = (this.typedRefs.content.$el).scrollHeight;
+        // If for some reason it still doesn't have a custom height, don't resize it.
+        if (this.customHeight === 0) {
+          return;
+        }
+      }
+      const content = this.typedRefs.content.$el;
+      if (content.scrollHeight <= 236) {
+        return;
+      }
+      this.typedRefs.container.style.height = (this.customHeight + 90) + 'px';
+      content.style.height = this.customHeight + 'px';
+    },
+    unmakeFullSize() {
+      if (!this.isProjectCard) {
+        return;
+      }
+      if (this.customHeight === 0) {
+        return;
+      }
+      const content = this.typedRefs.content.$el;
+      this.typedRefs.container.style.removeProperty('height');
+      content.style.removeProperty('height');
+    },
+  },
+  mounted() {
+    this.customHeight = (this.typedRefs.content.$el).scrollHeight;
+  },
+  beforeUpdate() {
+    if (this.autoTall === true) {
+      this.makeFullSize();
+    } else {
+      this.unmakeFullSize();
+    }
+  },
+  watch: {
+    hovering(val: boolean) {
+      if (this.autoTall || !getPreferences().experimental_ui) {
+        return;
+      }
+      if (val) {
+        this.makeFullSize();
+      } else {
+        this.unmakeFullSize();
+      }
     },
   },
 });

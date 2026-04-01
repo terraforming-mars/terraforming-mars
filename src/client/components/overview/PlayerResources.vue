@@ -2,8 +2,8 @@
   <div class="resource_items_cont">
     <player-resource
       :type="Resource.MEGACREDITS"
-      :count="player.megaCredits"
-      :production="player.megaCreditProduction"
+      :count="player.megacredits"
+      :production="player.megacreditProduction"
       :resourceProtection="player.protectedResources.megacredits"
       :productionProtection="player.protectedProduction.megacredits"/>
     <player-resource
@@ -44,17 +44,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardName} from '@/common/cards/CardName';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import PlayerResource from '@/client/components/overview/PlayerResource.vue';
 import {Resource} from '@/common/Resource';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerResources',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
   },
   computed: {

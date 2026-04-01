@@ -52,7 +52,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
@@ -65,14 +65,16 @@ type DataModel = {
   warning: string | undefined;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectProductionToLose',
   props: {
     playerinput: {
       type: Object as () => SelectProductionToLoseModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,

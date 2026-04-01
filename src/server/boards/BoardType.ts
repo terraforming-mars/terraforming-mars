@@ -1,4 +1,5 @@
-export enum BoardType {
-  MARS = 'mars',
-  MOON = 'moon'
-}
+export const BoardType = {
+  MARS: 'mars',
+  MOON: 'moon',
+} as const;
+export type BoardType = typeof BoardType[keyof typeof BoardType];

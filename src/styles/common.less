@@ -6,14 +6,15 @@
 @import "./mixins.less";
 
 html,
-body {
+body,
+#app {
     height: 100%;
     margin: 0px;
 }
 .btn {
     color: @text_action !important;
     background: @bg_action !important;
-    border-color: @boder_action !important;
+    border-color: @border_action !important;
 }
 .btn-tiny {
     background: #5755d9;
@@ -239,6 +240,7 @@ h2 {
 @import "./player_home.less";
 @import "./players_overview.less";
 @import "./preferences.less";
+@import "./popup.less";
 @import "./waiting_for.less";
 @import "./payments.less";
 @import "./other_player.less";
@@ -247,6 +249,7 @@ h2 {
 @import "./load_game_form.less";
 @import "./turmoil.less";
 @import "./ares.less";
+@import "./games-overview.less";
 @import "./help.less";
 @import "./card_list.less";
 @import "./moon.less";

@@ -8,15 +8,16 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import AlliedPartyAgenda from '@/client/components/turmoil/AlliedPartyAgenda.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerAlliedParty',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
   },
   components: {

@@ -10,16 +10,17 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardType} from '@/common/cards/CardType';
 import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
+import {CardName} from '@/common/cards/CardName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardTitle',
   props: {
     title: {
-      type: String,
+      type: String as () => CardName,
       required: true,
     },
     type: {

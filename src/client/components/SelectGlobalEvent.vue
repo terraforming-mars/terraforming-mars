@@ -3,7 +3,7 @@
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="globalEventName in playerinput.globalEventNames" :key="globalEventName" class="cardBox">
           <input type="radio" v-model="selected" :value="globalEventName" />
-          <GlobalEvent :globalEventName="globalEventName" type=""></GlobalEvent>
+          <GlobalEvent :globalEventName="globalEventName" type="distant"></GlobalEvent>
         </label>
         <div v-if="showsave === true" class="nofloat">
           <AppButton :disabled="selected === undefined" type="submit" @click="saveData" title="OK" />
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -25,17 +25,20 @@ type DataModel = {
   selected: GlobalEventName | undefined;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectGlobalEvent',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectGlobalEventModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectGlobalEventResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,

@@ -1,6 +1,6 @@
 <template>
-  <div :class="getClass()">
-    <div class="card-container">
+  <div :class="klass">
+    <div class="card-container global-event-container">
       <div class="card-content-wrapper" v-i18n>
         <CardParty class="card-party--revealed" :party="revealed" />
         <CardParty class="card-party--current" :party="current" />
@@ -9,26 +9,26 @@
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
           <CardDescription :item='description' />
         </div>
-     </div>
+      </div>
     </div>
+    <span v-if="showDistance" class="global-event-distance" v-i18n>{{ type }}</span>
     <slot/>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
-import {CardComponent} from '@/common/cards/render/CardComponent';
 import {getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {ICardRenderRoot} from '@/common/cards/render/Types';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export type RenderType = 'coming' | 'current' | 'distant';
+export type RenderType = 'coming' | 'current' | 'distant' | 'prior';
 
 type DataModel = {
   renderData: ICardRenderRoot;
@@ -37,7 +37,7 @@ type DataModel = {
   current: PartyName;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'global-event',
   components: {
     CardRenderData,
@@ -47,9 +47,15 @@ export default Vue.extend({
   props: {
     globalEventName: {
       type: String as () => GlobalEventName,
+      required: true,
     },
     type: {
       type: String as () => RenderType,
+      required: true,
+    },
+    showDistance: {
+      type: Boolean,
+      default: false,
     },
   },
   data(): DataModel {
@@ -65,26 +71,13 @@ export default Vue.extend({
       description: globalEvent.description,
     };
   },
-  methods: {
-    getCardRenderer(): CardComponent | undefined {
-      return this.renderData;
-    },
-    partyNameClass(partyName: string): string {
-      if (partyName === undefined) {
-        return '';
+  computed: {
+    klass(): string {
+      const common = 'global-event global-event--' + this.type;
+      if (this.showDistance) {
+        return common + ' global-event--show-distance';
       }
-      return 'event-party--' + partyName.toLowerCase().split(' ').join('_');
-    },
-    getClass(): string {
-      const common = 'global-event';
-      switch (this.type) {
-      case 'coming':
-        return common + ' global-event--coming';
-      case 'current':
-        return common + ' global-event--current';
-      default:
-        return common;
-      }
+      return common;
     },
   },
 });

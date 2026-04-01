@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import * as responses from '../server/responses';
 
 import {Context} from './IHandler';
@@ -114,23 +114,21 @@ export class ServeAsset extends Handler {
   }
 
   private toMainFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
-    let file = `build/${urlPath}`;
-    let encoding: Encoding | undefined;
-    if (encodings.has('br')) {
-      encoding = 'br';
-      file += '.br';
-    } else if (encodings.has('gzip')) {
-      encoding = 'gzip';
-      file += '.gz';
+    const file = `build/${urlPath}`;
+
+    // Only serve compressed versions in production. Development mode serves
+    // uncompressed versions because they can be hot-swapped.
+    if (isProduction()) {
+      if (encodings.has('br')) {
+        return {file: file + '.br', encoding: 'br'};
+      } else if (encodings.has('gzip')) {
+        return {file: file + '.gz', encoding: 'gzip'};
+      }
     }
 
-    // Return not-compressed .js files for development mode
-    if (!isProduction() && !this.fileApi.existsSync(file)) {
-      encoding = undefined;
-      file = `build/${urlPath}`;
-    }
-
-    return {file, encoding};
+    // Fallback on uncompressed file if in development or no compressed
+    // file exists.
+    return {file, encoding: undefined};
   }
 
   private toServiceWorkerFile(urlPath: string): { file?: string, encoding?: Encoding } {

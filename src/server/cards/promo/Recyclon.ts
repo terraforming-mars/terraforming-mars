@@ -40,7 +40,7 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.BUILDING) === false) {
       return undefined;
     }

@@ -1,5 +1,4 @@
 {
-  "Buffer Gas": "Gas tampon",
   "Spend 16 M€ to increase your TR 1 step. Solo games only.": "Pour 16 M€, augmentez votre NT de 1. Uniquement pour les parties solo.",
   "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "Pour 25 M€, placez une tuile Cité et augmentez votre production de M€ de 1.",
   "Spend 17 M€ to place a colony.": "Pour 17M€, construisez une colonie.",
@@ -8,8 +7,6 @@
   "Sell Patents": "Vente de brevets",
   "Sell patents": "Vendre des brevets",
   "Discard any number of cards to gain that amount of M€.": "Défaussez n'importe quel nombre de cartes pour gagner le même nombre de M€.",
-  "Asteroid": "Astéroïde",
-  "asteroid": "Astéroïde",
   "Spend 14 M€ to raise the temperature 1 step.": "Pour 14 M€, augmentez la température de 1.",
   "Air Scrapping": "Purification",
   "Air Scrapping (Var)": "Purification (Variante)",
@@ -34,7 +31,7 @@
   "Lunar Mine (var. 2)": "Mine lunaire (var. 2)",
   "Spend 20 M€ and 1 titanium to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "Pour 20 M€ et 1 titane, placez une mine sur la lune, augmentez votre Taux de minage de 1 et augmentez votre production d'acier de 1.",
   "Spend 21 M€ (titanium may be used) AND 1 titanium to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "Dépensez 21 M€ (le titane peut être utilisé) ET 1 titane pour placer une mine sur la Lune, augmentez le taux d'exploitation minière de 1 et augmentez la production d'acier de 1.",
-  "Spend 23 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "Pour 23 M€, placez une mine sur la lune, augmentez votre Taux de minage de 1 et augmentez votre production d'acier de 1.",
+  "Spend 24 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "Pour 24 M€, placez une mine sur la lune, augmentez votre Taux de minage de 1 et augmentez votre production d'acier de 1.",
   "Build Moon Road": "Construire une route lunaire",
   "Road Infrastructure": "Infrastructure routière",
   "Road Infrastructure (var. 1)": "Infrastructures routières (var. 1)",

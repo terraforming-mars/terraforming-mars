@@ -1,9 +1,9 @@
 <template>
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
-        <global-event v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant"></global-event>
-        <global-event v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming"></global-event>
-        <global-event v-if="turmoil.current" :globalEventName="turmoil.current" type="current"></global-event>
+        <global-event v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"></global-event>
+        <global-event v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"></global-event>
+        <global-event v-if="turmoil.current" :globalEventName="turmoil.current" type="current" :showDistance="true"></global-event>
       </div>
 
       <div class="turmoil-board">
@@ -82,18 +82,19 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'turmoil',
   props: {
     turmoil: {
       type: Object as () => TurmoilModel,
+      required: true,
     },
   },
   methods: {

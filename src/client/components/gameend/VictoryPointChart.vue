@@ -1,12 +1,10 @@
 <template>
-    <div class="victory-point-chart-container">
-    <!-- <div></div> -->
-      <canvas :id="id"></canvas>
-    <!-- <div></div> -->
+  <div class="victory-point-chart-container">
+    <canvas :id="id"></canvas>
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {Chart, registerables} from 'chart.js';
 import {Color} from '@/common/Color';
 import {translateText} from '@/client/directives/i18n';
@@ -47,23 +45,23 @@ export type DataSet = {
   color: Color,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'VictoryPointChart',
-  data: function() {
-    return {};
-  },
   props: {
     datasets: {
-      type: Array as () => Array<DataSet>,
+      type: Array as () => ReadonlyArray<DataSet>,
+      required: true,
     },
     generation: {
       type: Number,
+      required: true,
     },
     animation: {
       type: Boolean,
     },
     id: {
       type: String,
+      required: true,
     },
     yAxisLabel: {
       type: String,

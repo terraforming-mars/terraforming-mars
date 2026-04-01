@@ -278,7 +278,22 @@ describe('Executor', () => {
     expect(saturnSurfing.resourceCount).eq(3);
   });
 
-  // TODO(kberg): Add test where type includes multiple resource types
+  it('add resources to any card - type undefined (any resource card)', () => {
+    const tardigrades = new Tardigrades(); // microbes
+    const livestock = new Livestock(); // animals
+    player.playedCards.set(tardigrades, livestock);
+
+    executor.execute({addResourcesToAnyCard: {count: 1, type: undefined}}, player, fake);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.members([tardigrades, livestock]);
+    selectCard.cb([tardigrades]);
+
+    expect(tardigrades.resourceCount).eq(1);
+    expect(livestock.resourceCount).eq(0);
+  });
+
   it('add resources to any card', () => {
     const tardigrades = new Tardigrades(); // Holds microbes
     const ants = new Ants(); // Holds microbes

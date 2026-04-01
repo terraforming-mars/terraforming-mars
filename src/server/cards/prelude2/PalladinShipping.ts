@@ -43,7 +43,7 @@ export class PalladinShipping extends CorporationCard implements ICorporationCar
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
       player.stock.add(Resource.TITANIUM, 1, {log: true});
     }

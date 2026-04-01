@@ -2,26 +2,26 @@
       <div :class="getClasses()">
           <div class="card-corporation-label">{{ label }}</div>
           <div v-for="(rowData, index) in rows[0]" :key="index">
-            <CardRenderItemComponent v-if="rowData.is === 'item'" :item="rowData" />
-            <CardRenderSymbolComponent v-else-if="rowData.is === 'symbol'" :item="rowData" />
-            <CardRenderEffectBoxComponent v-if="rowData.is === 'effect'" :effectData="rowData" />
+            <CardRenderItemComponent v-if="rowData && typeof rowData === 'object' && rowData.is === 'item'" :item="(rowData as any)" />
+            <CardRenderSymbolComponent v-else-if="rowData && typeof rowData === 'object' && rowData.is === 'symbol'" :item="(rowData as any)" />
+            <CardRenderEffectBoxComponent v-if="rowData && typeof rowData === 'object' && rowData.is === 'effect'" :effectData="(rowData as any)" />
           </div>
       </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderEffectBoxComponent from '@/client/components/card/CardRenderEffectBoxComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
-import {ICardRenderEffect, ICardRenderItem, ICardRenderSymbol} from '@/common/cards/render/Types';
+import {ItemType} from '@/common/cards/render/Types';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderCorpBoxComponent',
   props: {
     rows: {
-      type: Array as () => Array<ICardRenderEffect | ICardRenderItem | ICardRenderSymbol>,
+      type: Array as () => Array<Array<ItemType>>,
       required: true,
     },
     label: {

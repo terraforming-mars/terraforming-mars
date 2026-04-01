@@ -1,15 +1,14 @@
 import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
-import {SpaceName} from '../src/common/boards/SpaceName';
 import {Mayor} from '../src/server/milestones/Mayor';
 import {Banker} from '../src/server/awards/Banker';
 import {Thermalist} from '../src/server/awards/Thermalist';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from './TestingUtils';
-import {toName} from '../src/common/utils/utils';
+import {addCity, addGreenery, addOcean, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from './TestingUtils';
+import {cast, toName} from '../src/common/utils/utils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
@@ -33,6 +32,8 @@ import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Tag} from '../src/common/cards/Tag';
+import {restoreTestDatabase, setTestDatabase} from './testing/setup';
+import {InMemoryDatabase} from './testing/InMemoryDatabase';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -61,8 +62,8 @@ describe('Game', () => {
     const player3 = TestPlayer.YELLOW.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
-    addCity(player, SpaceName.ARSIA_MONS);
-    addGreenery(player, SpaceName.PAVONIS_MONS);
+    addCity(player, '29');
+    addGreenery(player, '21');
 
     // Claim milestone
     const milestone = new Mayor();
@@ -381,7 +382,7 @@ describe('Game', () => {
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = cast(player.getWaitingFor(), OrOptions);
-    const arsiaMons = game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS);
+    const arsiaMons = game.board.getSpaceOrThrow('29');
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
@@ -493,6 +494,53 @@ describe('Game', () => {
     expect(game.phase).eq(Phase.END);
   });
 
+  it('Final greenery placement is saved after each player', async () => {
+    try {
+      const db = new InMemoryDatabase();
+      setTestDatabase(db);
+
+      const player1 = new TestPlayer('blue');
+      const player2 = new TestPlayer('green');
+      let game = Game.newInstance('gto', [player1, player2], player1);
+
+      game.players.forEach((p) => {
+        (p as TestPlayer).popWaitingFor();
+        p.plants = 8;
+      });
+
+      // Set up end-game conditions
+      game.generation = 14;
+      setTemperature(game, constants.MAX_TEMPERATURE);
+      setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
+      maxOutOceans(player1);
+      player1.plants = 8;
+
+      // Pass last turn
+      forceGenerationEnd(game);
+
+      // Final greenery placement is considered part of the production phase.
+      expect(game.phase).to.eq(Phase.PRODUCTION);
+
+      expect(game.activePlayer.color).eq('blue');
+
+      // Skipping plants placement. Option 1 is "Don't place plants".
+      // This weird input is what would come from the server, and indicates "Don't place plants".
+      player1.process({type: 'or', index: 1, response: {type: 'option'}});
+
+      expect(game.activePlayer.color).eq('green');
+
+      const serialized = await db.getGame(game.id);
+      game = Game.deserialize(serialized);
+
+      expect(game.activePlayer.color).eq('green');
+
+      const options = cast(game.activePlayer.getWaitingFor(), OrOptions);
+      expect(options.options[0].title).eq('Select space for greenery tile');
+      expect(options.options[1].title).eq('Don\'t place a greenery');
+    } finally {
+      restoreTestDatabase();
+    }
+  });
 
   it('Should return players in turn order', () => {
     const player1 = new Player('p1', 'blue', false, 0, 'p1-id');

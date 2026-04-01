@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
@@ -55,6 +55,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
   [TileType.NEW_HOLLAND]: 'new-holland',
+  [TileType.NEURAL_INSTANCE]: 'neural-instance',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -97,13 +98,15 @@ const descriptions: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
 
   [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
+  [TileType.NEURAL_INSTANCE]: 'Neural Instance: MarsBot gains VP for adjacent non-human spaces',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'board-space-tile',
   props: {
     space: {
       type: Object as () => SpaceModel,
+      required: true,
     },
     aresExtension: {
       type: Boolean,

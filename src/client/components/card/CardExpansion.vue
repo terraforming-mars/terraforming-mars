@@ -6,10 +6,10 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardExpansion',
   props: {
     expansion: {
@@ -25,8 +25,8 @@ export default Vue.extend({
       required: true,
     },
     compatibility: {
-      type: Array<GameModule>,
-      required: false,
+      type: Array as () => Array<GameModule>,
+      required: true,
     },
   },
   methods: {

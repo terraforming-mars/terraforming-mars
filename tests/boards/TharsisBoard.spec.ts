@@ -15,19 +15,19 @@ describe('TharsisBoard', () => {
       {id: '06', spaceType: 'ocean', bonus: [3], x: 7, y: 0},
       {id: '07', spaceType: 'ocean', bonus: [], x: 8, y: 0},
       {id: '08', spaceType: 'land', bonus: [], x: 3, y: 1},
-      {id: '09', spaceType: 'land', bonus: [1], x: 4, y: 1},
+      {id: '09', spaceType: 'land', bonus: [1], x: 4, y: 1, volcanic: true},
       {id: '10', spaceType: 'land', bonus: [], x: 5, y: 1},
       {id: '11', spaceType: 'land', bonus: [], x: 6, y: 1},
       {id: '12', spaceType: 'land', bonus: [], x: 7, y: 1},
       {id: '13', spaceType: 'ocean', bonus: [3, 3], x: 8, y: 1},
-      {id: '14', spaceType: 'land', bonus: [3], x: 2, y: 2},
+      {id: '14', spaceType: 'land', bonus: [3], x: 2, y: 2, volcanic: true},
       {id: '15', spaceType: 'land', bonus: [], x: 3, y: 2},
       {id: '16', spaceType: 'land', bonus: [], x: 4, y: 2},
       {id: '17', spaceType: 'land', bonus: [], x: 5, y: 2},
       {id: '18', spaceType: 'land', bonus: [], x: 6, y: 2},
       {id: '19', spaceType: 'land', bonus: [], x: 7, y: 2},
       {id: '20', spaceType: 'land', bonus: [1], x: 8, y: 2},
-      {id: '21', spaceType: 'land', bonus: [2, 0], x: 1, y: 3},
+      {id: '21', spaceType: 'land', bonus: [2, 0], x: 1, y: 3, volcanic: true},
       {id: '22', spaceType: 'land', bonus: [2], x: 2, y: 3},
       {id: '23', spaceType: 'land', bonus: [2], x: 3, y: 3},
       {id: '24', spaceType: 'land', bonus: [2], x: 4, y: 3},
@@ -35,7 +35,7 @@ describe('TharsisBoard', () => {
       {id: '26', spaceType: 'land', bonus: [2], x: 6, y: 3},
       {id: '27', spaceType: 'land', bonus: [2], x: 7, y: 3},
       {id: '28', spaceType: 'ocean', bonus: [2, 2], x: 8, y: 3},
-      {id: '29', spaceType: 'land', bonus: [2, 2], x: 0, y: 4},
+      {id: '29', spaceType: 'land', bonus: [2, 2], x: 0, y: 4, volcanic: true},
       {id: '30', spaceType: 'land', bonus: [2, 2], x: 1, y: 4},
       {id: '31', spaceType: 'land', bonus: [2, 2], x: 2, y: 4},
       {id: '32', spaceType: 'ocean', bonus: [2, 2], x: 3, y: 4},
@@ -71,5 +71,6 @@ describe('TharsisBoard', () => {
       {id: '62', spaceType: 'land', bonus: [], x: 7, y: 8},
       {id: '63', spaceType: 'ocean', bonus: [0, 0], x: 8, y: 8},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['09', '14', '21', '29']);
   });
 });

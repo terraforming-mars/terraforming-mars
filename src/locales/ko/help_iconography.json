@@ -10,33 +10,17 @@
 
     "Building": "건물",
     "Space": "우주",
-    "Science": "과학",
-    "Power": "전기",
-    "Earth": "지구",
-    "Jovian": "목성",
-    "Venus": "금성",
-    "Plant": "식물",
-    "Microbe": "미생물",
-    "Animal": "동물",
-    "City": "도시",
     "Wild": "만능",
     "Event": "사건",
     "Moon": "달",
     "Mars": "화성",
     "Clone": "복제",
     "MegaCredits (M€)": "메가크레딧 (M€)",
-    "Steel": "강철",
-    "Titanium": "티타늄",
-    "Energy": "에너지",
-    "Heat": "열",
     "Floater": "부양체",
-    "Asteroid": "소행성",
     "Preservation": "환경보존",
     "Camp": "캠프",
     "Disease": "질병",
 
-    "Greenery": "녹지 타일",
-    "Ocean": "해양 타일",
     "Special": "특수 타일",
 
     "Temperature": "기온",
@@ -47,10 +31,8 @@
     "Terraform Rating (TR)": "테라포밍 등급 (TR)",
     "Project Card": "프로젝트 카드",
     "Colony": "개척기지",
-    "Trade": "무역 사업",
     "Trade Fleet": "무역선단",
     "Delegate": "의원",
-    "Influence": "영향력",
 
     "Standard Projects from Expansions and Solo Mode": "확장 및 1인 모드의 일반 프로젝트",
     "Standard Project from Fan-made Expansions": "팬 제작 확장의 일반 프로젝트",
@@ -126,6 +108,5 @@
     "Hotkeys Mapping": "단축키 매핑",
     "Main Board": "중앙 게임판",
     "Players Overview Table": "플레이어 개요표",
-    "Cards in Hand": "손에 있는 카드",
-    "Colonies": "개척기지"
+    "Cards in Hand": "손에 있는 카드"
 }

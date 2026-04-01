@@ -33,7 +33,7 @@ export class PointLuna extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
     if (tagCount > 0) {
       player.drawCard(tagCount);

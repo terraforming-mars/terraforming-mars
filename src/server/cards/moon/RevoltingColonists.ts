@@ -11,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {message} from '../../logs/MessageBuilder';
+import {Board} from '../../boards/Board';
 
 export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
@@ -35,13 +36,13 @@ export class RevoltingColonists extends Card implements IProjectCard {
     const game = player.game;
     const colonies = MoonExpansion.spaces(game, TileType.MOON_HABITAT);
     game.players.forEach((target) => {
-      const owned = colonies.filter((colony) => colony.player?.id === target.id).length;
+      const owned = colonies.filter(Board.ownedBy(target)).length;
       if (owned > 0) {
         const bill = owned * 3;
         const owes = Math.min(bill, target.spendableMegacredits());
 
         if (owes > 0) {
-          const msg = message('${0} MC', (b) => b.number(owes));
+          const msg = message('${0} M€', (b) => b.number(owes));
           target.maybeBlockAttack(player, msg, (proceed) => {
             if (proceed) {
               game.defer(new SelectPaymentDeferred(target, owes, {

@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {Monopoly} from '../../../src/server/cards/underworld/Monopoly';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Monopoly', () => {
   let card: Monopoly;
@@ -97,5 +98,33 @@ describe('Monopoly', () => {
     expect(opponent1.stock.megacredits).eq(1);
     expect(opponent2.stock.megacredits).eq(3);
     expect(opponent3.stock.megacredits).eq(1);
+  });
+
+  it('Works in solo', () => {
+    const [game, player] = testGame(1, {underworldExpansion: true});
+    player.underworldData.corruption = 1;
+
+    expect(card.canPlay(player)).is.false;
+
+    player.underworldData.corruption = 2;
+
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+
+    const selectResource = cast(card.play(player), SelectResource);
+
+    expect(selectResource.include).deep.eq([
+      'megacredits',
+      'steel',
+      'titanium',
+      'plants',
+      'energy',
+      'heat']);
+
+    selectResource.cb('steel');
+    runAllActions(game);
+
+    expect(player.stock.steel).eq(2);
   });
 });

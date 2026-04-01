@@ -141,7 +141,7 @@
         <span class="card-arcadian-logo"><span>Arcadian</span><br><span>Communities</span></span>
       </template>
       <template v-else-if="title === CardName.ASTRODRILL">
-        <span class="card-astrodril-logo">Astrodrill</span>
+        <span class="card-astrodril-logo">AstroDrill</span>
       </template>
       <template v-else-if="title === CardName.ATHENA">
         <div class="card-athena-logo">Athena</div>
@@ -646,7 +646,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardName} from '@/common/cards/CardName';
 
 
@@ -752,7 +752,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.VOLTAGON]: 'bespoke',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardCorporationLogo',
   props: {
     title: {

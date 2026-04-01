@@ -18,15 +18,16 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {PartyModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Party',
   props: {
     party: {
       type: Object as () => PartyModel,
+      required: true,
     },
     isDominant: {
       type: Boolean,

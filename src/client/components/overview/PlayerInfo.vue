@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
@@ -57,14 +57,16 @@ import {Phase} from '@/common/Phase';
 import {ActionLabel} from './ActionLabel';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerInfo',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
     playerView: {
       type: Object as () => ViewModel,
+      required: true,
     },
     firstForGen: {
       type: Boolean,
@@ -72,10 +74,11 @@ export default Vue.extend({
     },
     actionLabel: {
       type: String as () => ActionLabel,
-      default: '',
+      required: true,
     },
     playerIndex: {
       type: Number,
+      required: true,
     },
     hideZeroTags: {
       type: Boolean,

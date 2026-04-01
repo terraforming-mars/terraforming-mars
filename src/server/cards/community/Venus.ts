@@ -20,6 +20,7 @@ export class Venus extends Colony {
         description: 'Add 1 resource to ANY Venus card',
         type: ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD,
       },
+      expansion: 'venus',
     });
   }
 }

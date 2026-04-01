@@ -21,15 +21,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 import {MoonModel} from '@/common/models/MoonModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'MoonGlobalParameterValue',
   props: {
     moonData: {
       type: Object as () => MoonModel,
+      required: true,
     },
   },
   computed: {

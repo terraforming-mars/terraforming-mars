@@ -11,13 +11,13 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import ColonySpace from './ColonySpace.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ColonyRow',
   components: {
     ColonySpace,
@@ -29,6 +29,7 @@ export default Vue.extend({
     },
     colony: {
       type: Object as () => ColonyModel,
+      required: true,
     },
   },
 });

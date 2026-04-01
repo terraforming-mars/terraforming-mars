@@ -32,7 +32,6 @@ import {TileType} from '../../../src/common/TileType';
 import {ErodeSpacesDeferred} from '../underworld/ErodeSpacesDeferred';
 import {CardName} from '../../common/cards/CardName';
 
-export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
   // Players can't build colonies on Miranda until someone has played an Animal card.
   // isActive is the gateway for that action and any other card with that type of constraint

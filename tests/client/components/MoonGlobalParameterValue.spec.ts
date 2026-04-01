@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/common/models/MoonModel';
@@ -15,8 +15,8 @@ const moonData: MoonModel = {
 describe('MoonGlobalParameterValue', () => {
   it('shows colony rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {moonData},
+      ...globalConfig,
+      props: {moonData},
     });
 
     expect(wrapper.text()).to.include(moonData.habitatRate);
@@ -24,8 +24,8 @@ describe('MoonGlobalParameterValue', () => {
 
   it('shows logistics rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {moonData},
+      ...globalConfig,
+      props: {moonData},
     });
 
     expect(wrapper.text()).to.include(moonData.logisticsRate);
@@ -33,8 +33,8 @@ describe('MoonGlobalParameterValue', () => {
 
   it('shows mining rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {moonData},
+      ...globalConfig,
+      props: {moonData},
     });
 
     expect(wrapper.text()).to.include(moonData.miningRate);
@@ -49,8 +49,8 @@ describe('MoonGlobalParameterValue', () => {
     };
 
     const wrapper = mount(MoonGlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {moonData},
+      ...globalConfig,
+      props: {moonData},
     });
 
     expect(wrapper.text()).to.not.include.oneOf([
@@ -69,8 +69,8 @@ describe('MoonGlobalParameterValue', () => {
     };
 
     const wrapper = mount(MoonGlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {moonData},
+      ...globalConfig,
+      props: {moonData},
     });
 
     expect(wrapper.find('[data-test="completed-checkmark"]').exists()).to.be.true;
@@ -100,8 +100,8 @@ describe('MoonGlobalParameterValue', () => {
 
     cases.forEach((moonData) => {
       const wrapper = mount(MoonGlobalParameterValue, {
-        localVue: getLocalVue(),
-        propsData: {moonData},
+        ...globalConfig,
+        props: {moonData},
       });
 
       expect(wrapper.find('[data-test="completed-checkmark"]').exists()).to.be.false;

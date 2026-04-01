@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import {Wrapper} from '@vue/test-utils';
+import {VueWrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {Payment} from '@/common/inputs/Payment';
@@ -7,7 +6,7 @@ import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable'
 
 export class PaymentTester {
   private model: SelectPaymentDataModel;
-  constructor(private wrapper: Wrapper<Vue>) {
+  constructor(private wrapper: VueWrapper<any>) {
     this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
   }
 
@@ -40,10 +39,11 @@ export class PaymentTester {
   }
 
   public getValue(unit: SpendableResource): number {
-    const textBox = this.wrapper.find(PaymentTester.selector(unit) + ' input').element as HTMLInputElement;
-    if (textBox === undefined) {
+    const found = this.wrapper.find(PaymentTester.selector(unit) + ' input');
+    if (!found.exists()) {
       throw new Error('Cannot find text box for ' + unit);
     }
+    const textBox = found.element as HTMLInputElement;
     return Number.parseInt(textBox?.value);
   }
 
@@ -74,7 +74,7 @@ export class PaymentTester {
    * Returns true when the text box for `unit` is visible.
    */
   private isAvailable(unit: SpendableResource): boolean {
-    return this.wrapper.find(PaymentTester.selector(unit) + ' input')?.element !== undefined;
+    return this.wrapper.find(PaymentTester.selector(unit) + ' input').exists();
   }
 
   /**

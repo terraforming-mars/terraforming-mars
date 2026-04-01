@@ -22,6 +22,7 @@ export class LeavittII extends Colony {
         quantity: 2,
         resource: Resource.MEGACREDITS,
       },
+      expansion: 'pathfinders',
     });
   }
 }

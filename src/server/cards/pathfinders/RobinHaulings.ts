@@ -37,7 +37,7 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }

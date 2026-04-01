@@ -1,11 +1,9 @@
-import {CardName} from '../common/cards/CardName';
 import {Resource} from '../common/Resource';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
-import {Logger} from './logs/Logger';
 import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
@@ -59,36 +57,8 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
-    logger.log('${0} card(s) were discarded', (b) => {
-      b.rawString(cards.length.toString());
-      for (const card of cards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
-      }
-    });
-  }
-
-  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>, privateMessage: boolean = false) {
-    // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
-    let message = '${0} drew ';
-    if (cards.length === 0) {
-      message += 'no cards';
-    } else {
-      for (let i = 0, length = cards.length; i < length; i++) {
-        if (i > 0) {
-          if (i < length - 1) {
-            message += ', ';
-          } else {
-            message += ' and ';
-          }
-        }
-        message += '${' + (i + 1) + '}';
-      }
-    }
+  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard>, privateMessage: boolean = false) {
+    const message = cards.length === 0 ? '${0} drew no cards' : '${0} drew ${1}';
     const options = privateMessage ? {reservedFor: player} : {};
 
     player.game.log(message, (b) => {
@@ -97,12 +67,9 @@ export class LogHelper {
       } else {
         b.string('You');
       }
-      for (const card of cards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
+
+      if (cards.length > 0) {
+        b.cards(cards);
       }
     }, options);
   }

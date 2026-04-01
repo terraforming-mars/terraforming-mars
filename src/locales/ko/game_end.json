@@ -28,7 +28,6 @@
     "Generation": "세대",
     "Player": "플레이어",
     "Corporation": "기업",
-    "TR": "",
     "VP": "",
     "Total": "총합",
     "Timer": "시간",
@@ -38,15 +37,10 @@
     "Natural Preserve:ares": "자연 보존 (아레스)",
     "Nuclear Zone:ares": "핵무기 기폭지대 (아레스)",
     "Ecological Zone:ares": "자연 생태 형성지 (아레스)",
-    "Commercial District:ares": "상업지구 (아레스)",
     "Underworld Corruption Bribe": "",
 
     "Completed!": "완료됨!",
     "% completed": "% 완료됨",
-    "Temperature": "기온",
-    "Oxygen": "산소 농도",
-    "Oceans": "해양 타일",
-    "Venus": "금성개척률",
     "L. Habitat": "월면 기지",
     "L. Mining": "월면 광산",
     "L. Logistics": "월면 물류",
@@ -61,16 +55,12 @@
     "Most tags on the moon track": "달 트랙에서 가장 많은 태그 보유",
     "1st place for": "1등 수상: ",
     "2nd place for": "2등 수상: ",
-    "funded by": "후원: ",
     "1st place for ${0} award (funded by ${1})": "${0} 1등 수상 (후원: ${1})",
     "2nd place for ${0} award (funded by ${1})": "${0} 1등 수상 (후원: ${1})",
 
     "M": "업적",
-    "A": "기업상",
     "Milestones points": "업적 점수",
     "Awards points": "기업상 점수",
 
-    "Actions taken this game": "이 게임에서 수행한 행동",
-    "Escape Velocity penalty": "탈주 페널티",
     "Download game log": "게임 로그 다운로드"
 }

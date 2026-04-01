@@ -36,15 +36,17 @@ export class ArcadianCommunities extends CorporationCard implements ICorporation
     });
   }
 
-  public override initialAction(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for claim',
-      player.game.board.getAvailableSpacesOnLand(player))
+  private askToClaimSpace(player: IPlayer, spaces: ReadonlyArray<Space>) {
+    return new SelectSpace('Select space for claim', spaces)
       .andThen((space: Space) => {
         space.player = player;
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
         return undefined;
       });
+  }
+
+  public override initialAction(player: IPlayer) {
+    return this.askToClaimSpace(player, player.game.board.getAvailableSpacesOnLand(player));
   }
 
   public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
@@ -65,10 +67,6 @@ export class ArcadianCommunities extends CorporationCard implements ICorporation
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('Select space for claim', this.getAvailableSpacesForMarker(player))
-      .andThen((space) => {
-        space.player = player;
-        return undefined;
-      });
+    return this.askToClaimSpace(player, this.getAvailableSpacesForMarker(player));
   }
 }

@@ -12,7 +12,7 @@ export class IdentifySpacesDeferred extends RunNTimes<Space | UndergroundResourc
   }
 
   protected run() {
-    const title = 'Select space to identify' + this.titleSuffix();
+    const title = this.createTitle('Select space to identify');
     this.player.defer(() => {
       const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player);
       if (identifiableSpaces.length === 0) {

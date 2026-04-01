@@ -58,7 +58,6 @@ import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MagneticFieldStimulationDelays} from './MagneticFieldStimulationDelays';
 import {MarsDirect} from './MarsDirect';
-import {MarsFrontierAlliance} from './MarsFrontierAlliance';
 import {MarsMaths} from './MarsMaths';
 import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
@@ -215,7 +214,8 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ROBIN_HAULINGS]: {Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
     [CardName.ODYSSEY]: {Factory: Odyssey},
     [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
-    [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance, compatibility: 'turmoil'},
+    // Broken. #7519
+    // [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance, compatibility: 'turmoil'},
     [CardName.MIND_SET_MARS]: {Factory: MindSetMars, compatibility: 'turmoil'},
     [CardName.HABITAT_MARTE]: {Factory: HabitatMarte, compatibility: 'pathfinders'},
     [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: {Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},

@@ -42,7 +42,7 @@
 
     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-    <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"/>
+    <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
 
     <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
@@ -57,7 +57,7 @@
       <dynamic-title title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
-            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
+            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" v-bind:key="idx"></div>
         </div>
       </div>
       <div class="player_home_colony_cont">
@@ -69,12 +69,12 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="(spectator as any)" :settings="settings" :waitingfor="undefined"></waiting-for>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -101,7 +101,7 @@ export interface SpectatorHomeModel {
   waitingForTimeout: number;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SpectatorHome',
   data(): SpectatorHomeModel {
     return {
@@ -112,9 +112,11 @@ export default Vue.extend({
   props: {
     spectator: {
       type: Object as () => SpectatorModel,
+      required: true,
     },
     settings: {
       type: Object as () => typeof raw_settings,
+      required: true,
     },
   },
   computed: {

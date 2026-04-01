@@ -1,5 +1,6 @@
 <template>
   <component :is="componentName"
+    ref="childInput"
     :players="players"
     :playerView="playerView"
     :playerinput="playerinput"
@@ -10,7 +11,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
@@ -58,25 +59,32 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'claimedUndergroundToken': 'select-claimed-underground-token',
 };
 
-export default Vue.component('player-input-factory', {
+export default defineComponent({
+  name: 'player-input-factory',
   props: {
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: InputResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      default: true,
     },
   },
   components: {
@@ -102,14 +110,17 @@ export default Vue.component('player-input-factory', {
   },
   methods: {
     saveData() {
-      (this.$children[0] as any).saveData();
+      this.typedRefs.childInput.saveData();
     },
     canSave(): boolean {
-      const canSave = (this.$children[0] as any).canSave;
+      const canSave = this.typedRefs.childInput.canSave;
       return canSave ? canSave() : true;
     },
   },
   computed: {
+    typedRefs(): {childInput: {saveData: () => void, canSave?: () => boolean}} {
+      return this.$refs as unknown as {childInput: {saveData: () => void, canSave?: () => boolean}};
+    },
     componentName(): string {
       return typeToComponentName[this.playerinput.type];
     },

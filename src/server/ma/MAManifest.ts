@@ -3,9 +3,13 @@ import {Expansion, EXPANSIONS} from '../../common/cards/GameModule';
 import {GameOptions} from '../game/GameOptions';
 
 type MAManifestSpec<V> = {
-  // Creates a new instance of this Milestone or Award.
+  /** Constructor that a new instance of this MA. */
   Factory: new () => V;
-  compatibility?: Expansion | undefined;
+  /** If set, the module this MA needs to function. */
+  compatibility?: Expansion;
+  /** When true, do not include in any new games when picking randomly. */
+  deprecated?: true;
+  random?: 'modular' | 'both';
 }
 type ExpansionsWithMAs = 'venus' | 'ares' | 'moon' | 'underworld';
 
@@ -13,7 +17,6 @@ export type MAManifest<K extends string, V> = {
   all: Record<K, MAManifestSpec<V>>,
   boards: Record<BoardName, ReadonlyArray<K>>,
   expansions: Record<ExpansionsWithMAs, ReadonlyArray<K>>;
-  modular: ReadonlyArray<K>;
   create(name: string): V | undefined;
   createOrThrow(name: string): V;
 }

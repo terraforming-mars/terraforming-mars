@@ -122,7 +122,6 @@
   "Luna Conference": "ルナ会議",
   "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "条件：科学万能党が与党か、そこに2議席ある. 道路タイル1枚毎に、2MC獲得. 生息地タイル1枚毎に、2MC獲得.",
 
-  "Luna Mining Hub": "ルナ・採掘拠点",
   "Requires a mining rate of 5 or higher.": "条件：採掘レート5以上",
   "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "1チタンと1建材支払う. 建材産出+1. チタン産出+1.",
   "Place this tile on The Moon and raise the mining rate 1 step.": " 月に特殊タイルを配置し、採掘レート+1段階.",
@@ -145,7 +144,6 @@
   "Luna Staging Station": "ルナ・仮設住宅",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "条件：物流レート2以上. 1チタン支払う. 物流レート+2段階.",
 
-  "Luna Trade Station": "ルナ・貿易拠点",
   "Action: Gain 2 M€ for each habitat tile on The Moon.": "アクション：生息地タイル1枚毎に、2MC獲得.",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "2チタン支払う. 予定地に特殊タイルを配置.",
 
@@ -170,7 +168,6 @@
   "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "条件：道路タイル3枚以上. 物流レート+1段階.",
 
   "Lunar Steel": "月の鋼",
-  "Effect: Your steel resources are worth 1 M€ extra.": "効果：建材の価値+1MC.",
 
   "Lunar Trade Fleet": "ルナ・貿易船団",
   "2 titanium production": "チタン産出2以上",
@@ -198,7 +195,6 @@
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "1チタン支払う. 温熱産出+2. MC産出+3. 予定地に生息地タイルを配置し、居住地レート+1段階.",
 
   "Moon Tether": "月の鎖",
-  "Effect: When you play a card, you pay 2 M€ less for it.": "効果：カードのプレイコスト-2MC.",
   "Requires 6 space tags.": "条件：宇宙タグ6つ以上.",
 
   "Mooncrate Block Factory": "月コンクリートブロック工場",

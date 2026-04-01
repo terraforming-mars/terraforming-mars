@@ -35,7 +35,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import StackedCards from '@/client/components/StackedCards.vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -46,14 +46,16 @@ import {CardType} from '@/common/cards/CardType';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'OtherPlayer',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
     playerIndex: {
       type: Number,
+      required: true,
     },
   },
   components: {

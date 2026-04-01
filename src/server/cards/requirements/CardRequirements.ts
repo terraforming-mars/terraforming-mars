@@ -86,7 +86,7 @@ export class CardRequirements {
     } else if (descriptor.cities !== undefined) {
       return new CitiesRequirement({...descriptor, count: descriptor.cities});
     } else if (descriptor.colonies !== undefined) {
-      return new ColoniesRequirement({...descriptor, count: descriptor.colonies});
+      return new ColoniesRequirement({...descriptor, count: descriptor.colonies, all: descriptor.all});
     } else if (descriptor.floaters !== undefined) {
       return new FloatersRequirement({...descriptor, count: descriptor.floaters});
     } else if (descriptor.partyLeader !== undefined) {

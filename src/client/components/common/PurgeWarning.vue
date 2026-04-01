@@ -1,7 +1,7 @@
 <template>
   <span v-if="expectedPurgeTimeMs != 0">
     <div :class="hoursLeft < 48 ? 'general-warning' : ''">
-      <span v-i18n>{{translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(hoursLeft).toString()])}}</span>
+      <span>{{translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(hoursLeft).toString()])}}</span>
       <a href="https://github.com/terraforming-mars/terraforming-mars/wiki/FAQ#purge" target="_blank">
         <span v-i18n>Why?</span>
       </a>
@@ -10,13 +10,14 @@
 </template>
 <script lang="ts">
 import {translateTextWithParams} from '@/client/directives/i18n';
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PurgeWarning',
   props: {
     expectedPurgeTimeMs: {
       type: Number,
+      required: true,
     },
   },
   computed: {

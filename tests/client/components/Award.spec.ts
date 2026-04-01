@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
@@ -12,7 +12,7 @@ function createAward(
   return {
     name: `Cosmic Settler`,
     playerName: funded ? 'Bob' : undefined,
-    playerColor: funded ? 'red': undefined,
+    color: funded ? 'red': undefined,
     scores,
   };
 }
@@ -21,8 +21,8 @@ describe('Award', () => {
   it('shows passed award', () => {
     const award = createAward({funded: false});
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
+      ...globalConfig,
+      props: {award},
     });
 
     expect(wrapper.text()).to.include(award.name);
@@ -31,8 +31,8 @@ describe('Award', () => {
   it('does not show award description', () => {
     const award = createAward({funded: false});
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
+      ...globalConfig,
+      props: {award},
     });
 
     const expected = getAward('Cosmic Settler').description;
@@ -46,8 +46,8 @@ describe('Award', () => {
   ] as const;
   for (const run of showScoresRuns) {
     it('Show scores ' + run.value, () => {
-      const award = createAward({funded: true, scores: [{playerColor: 'red', playerScore: 2}]});
-      const wrapper = mount(Award, {localVue: getLocalVue(), propsData: {award, showScores: run.value}});
+      const award = createAward({funded: true, scores: [{color: 'red', score: 2}]});
+      const wrapper = mount(Award, {...globalConfig, props: {award, showScores: run.value}});
 
       expect(wrapper.find('[data-test=player-score]').exists()).to.eq(run.expected);
     });
@@ -57,37 +57,37 @@ describe('Award', () => {
     const award = createAward({
       funded: true,
       scores: [
-        {playerColor: 'red', playerScore: 2},
+        {color: 'red', score: 2},
       ],
     });
 
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award, showScores: true},
+      ...globalConfig,
+      props: {award, showScores: true},
     });
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
-    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].playerColor}`);
+    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].color}`);
   });
 
   it('shows sorted players scores', () => {
     const award = createAward({
       funded: false,
       scores: [
-        {playerColor: 'red', playerScore: 2},
-        {playerColor: 'blue', playerScore: 4},
-        {playerColor: 'yellow', playerScore: 0},
-        {playerColor: 'green', playerScore: 4},
+        {color: 'red', score: 2},
+        {color: 'blue', score: 4},
+        {color: 'yellow', score: 0},
+        {color: 'green', score: 4},
       ],
     });
 
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award, showScores: true},
+      ...globalConfig,
+      props: {award, showScores: true},
     });
 
     const scores = wrapper.findAll('[data-test=player-score]')
-      .wrappers.map((scoreWrapper) => parseInt(scoreWrapper.text()));
+      .map((scoreWrapper) => parseInt(scoreWrapper.text()));
 
     expect(scores).to.be.deep.eq([4, 4, 2, 0]);
   });
@@ -95,18 +95,18 @@ describe('Award', () => {
   it('shows player cube if award is funded', () => {
     const award = createAward({funded: true});
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
+      ...globalConfig,
+      props: {award},
     });
 
-    expect(wrapper.find(`.board-cube--${award.playerColor}`).exists()).to.be.true;
+    expect(wrapper.find(`.board-cube--${award.color}`).exists()).to.be.true;
   });
 
   it('creates correct css class from award name', () => {
     const award = createAward({funded: true});
     const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
+      ...globalConfig,
+      props: {award},
     });
 
     expect(wrapper.find('.ma-name--cosmic-settler').exists()).to.be.true;

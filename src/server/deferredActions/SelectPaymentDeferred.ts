@@ -6,6 +6,7 @@ import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {Units} from '../../common/Units';
 
 export type Options = {
   canUseSteel?: boolean;
@@ -15,6 +16,7 @@ export type Options = {
   canUseGraphene?: boolean;
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
+  reserveUnits?: Units | undefined;
   title?: string | Message;
 }
 
@@ -66,7 +68,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
       if (this.player.megaCredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
-      const payment = Payment.of({megaCredits: this.amount});
+      const payment = Payment.of({megacredits: this.amount});
       this.player.pay(payment);
       this.cb(payment);
       return undefined;
@@ -84,7 +86,8 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
-      })
+        graphene: this.options.canUseGraphene || false,
+      }, this.options.reserveUnits)
       .andThen((payment) => {
         this.player.pay(payment);
         this.cb(payment);

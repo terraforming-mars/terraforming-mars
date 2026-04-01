@@ -35,7 +35,7 @@ export class InterplanetaryCinematics extends CorporationCard implements ICorpor
       },
     });
   }
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT) {
       player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: {card: this}});
     }

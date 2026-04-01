@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardDescription from './CardDescription.vue';
@@ -19,7 +19,7 @@ import CardRenderData from './CardRenderData.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {ICardRenderRoot, isICardRenderRoot} from '@/common/cards/render/Types';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardContent',
   props: {
     metadata: {
@@ -27,7 +27,8 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Array<CardRequirementDescriptor>,
+      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
+      required: true,
     },
     isCorporation: {
       type: Boolean,

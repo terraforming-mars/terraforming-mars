@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {IGame} from '../../IGame';
 import {CardName} from '../../../common//cards/CardName';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -76,9 +75,11 @@ export class Eris extends CorporationCard implements ICorporationCard {
   public canAct(player: IPlayer): boolean {
     const game = player.game;
     const availableSpaces = this.getAvailableSpaces(player);
-    const hazardSpaces = Eris.getAllUnprotectedHazardSpaces(game);
+    const hazardSpaces = game.board.getUnprotectedHazards();
 
-    if (availableSpaces.length === 0 && hazardSpaces.length === 0) return false;
+    if (availableSpaces.length === 0 && hazardSpaces.length === 0) {
+      return false;
+    }
     return true;
   }
 
@@ -86,7 +87,7 @@ export class Eris extends CorporationCard implements ICorporationCard {
     const game = player.game;
     const orOptions = new OrOptions();
     const availableSpaces = this.getAvailableSpaces(player);
-    const hazardSpaces = Eris.getAllUnprotectedHazardSpaces(game);
+    const hazardSpaces = game.board.getUnprotectedHazards();
 
     if (availableSpaces.length > 0) {
       orOptions.options.push(new SelectOption('Place a hazard tile adjacent to no other tile', 'Select').andThen(() => {
@@ -100,7 +101,7 @@ export class Eris extends CorporationCard implements ICorporationCard {
       orOptions.options.push(new SelectOption('Remove a hazard tile to gain 1 TR', 'Select').andThen(() => {
         return new SelectSpace(
           'Select hazard tile to remove',
-          Eris.getAllUnprotectedHazardSpaces(game)).andThen(
+          game.board.getUnprotectedHazards()).andThen(
           (space) => {
             const tileType = space.tile?.tileType;
 
@@ -139,9 +140,5 @@ export class Eris extends CorporationCard implements ICorporationCard {
         const adjacentSpaces = board.getAdjacentSpaces(space);
         return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
       });
-  }
-
-  public static getAllUnprotectedHazardSpaces(game: IGame) {
-    return game.board.getHazards(/* includeProtected= */ false);
   }
 }

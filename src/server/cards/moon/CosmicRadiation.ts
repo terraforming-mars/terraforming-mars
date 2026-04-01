@@ -11,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {message} from '../../logs/MessageBuilder';
+import {Board} from '../../boards/Board';
 
 export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
@@ -35,17 +36,26 @@ export class CosmicRadiation extends Card implements IProjectCard {
     const game = player.game;
     const mines = MoonExpansion.spaces(game, TileType.MOON_MINE);
     game.playersInGenerationOrder.forEach((mineTileOwner) => {
-      const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;
+      const owned = mines.filter(Board.ownedBy(mineTileOwner)).length;
       if (owned > 0) {
         const bill = owned * 4;
         const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
 
-        game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
-          title: message('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))}))
-          .andThen(() =>
-            game.log(
-              '${0} spends ${1} M€ for the ${2} mining tiles they own.',
-              (b) => b.player(mineTileOwner).number(owes).number(owned)));
+        if (owes === 0) {
+          return;
+        }
+        const msg = message('${0} M€', (b) => b.number(owes));
+        mineTileOwner.maybeBlockAttack(player, msg, (proceed: boolean) => {
+          if (proceed) {
+            game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
+              title: message('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))}))
+              .andThen(() =>
+                game.log(
+                  '${0} spends ${1} M€ for the ${2} mining tiles they own.',
+                  (b) => b.player(mineTileOwner).number(owes).number(owned)));
+          }
+          return undefined;
+        });
       }
     });
     return undefined;

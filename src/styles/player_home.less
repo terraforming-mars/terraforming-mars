@@ -38,10 +38,10 @@
     text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
 }
 .player_shadow_color_orange {
-    text-shadow: -1px -1px 6px @player_orange 1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_orange, 1px 1px 1px #333a;
 }
 .player_shadow_color_pink {
-    text-shadow: -1px -1px 6px @player_pink 1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_pink, 1px 1px 1px #333a;
 }
 
 .game-title {
@@ -120,7 +120,7 @@
     }
 
     .grid-item.player_tag_bg_color_pink {
-        background-color: rgb(245, 116, 187, 0.2);
+        background-color: rgba(245, 116, 187, 0.2);
     }
     .city-count {
         background: url(./assets/icon_city.png) center no-repeat;
@@ -613,6 +613,13 @@
             border-radius: 10px 10px 0 0;
         }
 
+        .claimable {
+          border: 1px solid #b0b040;
+        }
+        .not-claimable {
+          border: 0px solid;
+        }
+
         @ma-name:
           terraformer, mayor, gardener, builder, planner,
           landlord, banker, scientist, thermalist, miner,
@@ -647,12 +654,17 @@
           incorporator, manufacturer, politician,
 
           administrator, constructor, founder, highlander, hydrologist, investor,
-          landscaper, metropolist, mogul, thawer, traveller,
+          landscaper, metropolist, mogul, thawer, traveller, blacksmith,
 
           collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
           planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
 
           kingpin, excavator, tunneler, risktaker,
+
+          architect, c-forester, coastguard,
+
+          builder7, legend4, pioneer4, metallurgist, spacefarer4, tactician4,
+          terraformer29, terran5, trader, tycoon10, suburbian, briber, merchant,
         ;
         each(@ma-name, {
           .ma-name--@{value} {
@@ -875,7 +887,7 @@
     margin-bottom: 15px;
     z-index: 105;
     top: -12px;
-    display: flex;
+    display: inline-flex;
 
     .top-bar-collapser {
         background: #303030;

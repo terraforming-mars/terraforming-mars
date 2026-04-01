@@ -6,6 +6,7 @@ import {CrescentResearchAssociation} from '../../../src/server/cards/moon/Cresce
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
 import {Predators} from '../../../src/server/cards/base/Predators';
+import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
 
 describe('CrescentResearchAssociation', () => {
   let player: TestPlayer;
@@ -51,28 +52,30 @@ describe('CrescentResearchAssociation', () => {
     expect(player.getPlayableCards()).has.members([mareNectarisMine]);
   });
 
-  it('getVictoryPoints', () => {
-    player.playedCards.push(card);
-    player.tagsForTest = {moon: 0};
-    expect(card.getVictoryPoints(player)).eq(0);
-    player.tagsForTest = {moon: 1};
-    expect(card.getVictoryPoints(player)).eq(0);
+  it('Discount is doubled on cards with two moon tags', () => {
     player.tagsForTest = {moon: 2};
-    expect(card.getVictoryPoints(player)).eq(0);
-
-    player.tagsForTest = {moon: 3};
-    expect(card.getVictoryPoints(player)).eq(1);
-    player.tagsForTest = {moon: 4};
-    expect(card.getVictoryPoints(player)).eq(1);
-    player.tagsForTest = {moon: 5};
-    expect(card.getVictoryPoints(player)).eq(1);
-
-    player.tagsForTest = {moon: 6};
-    expect(card.getVictoryPoints(player)).eq(2);
-    player.tagsForTest = {moon: 7};
-    expect(card.getVictoryPoints(player)).eq(2);
-    player.tagsForTest = {moon: 8};
-    expect(card.getVictoryPoints(player)).eq(2);
+    const mareNectarisMine = new MareNectarisMine();
+    expect(card.getCardDiscount(player, mareNectarisMine)).eq(2);
+    const lunaTradeStation = new LunaTradeStation();
+    expect(card.getCardDiscount(player, lunaTradeStation)).eq(4);
   });
+
+  for (const run of [
+    {tags: 0, expected: 0},
+    {tags: 1, expected: 0},
+    {tags: 2, expected: 0},
+    {tags: 3, expected: 1},
+    {tags: 4, expected: 1},
+    {tags: 5, expected: 1},
+    {tags: 6, expected: 2},
+    {tags: 7, expected: 2},
+    {tags: 8, expected: 2},
+  ] as const) {
+    it('getVictoryPoints ' + JSON.stringify(run), () => {
+      player.playedCards.push(card);
+      player.tagsForTest = {moon: run.tags};
+      expect(card.getVictoryPoints(player)).eq(run.expected);
+    });
+  }
 });
 

@@ -108,7 +108,7 @@
   "1 VP for each camp resource on this card.": "1 SP für jede Lager-Ressource auf dieser Karte.",
 
   "Research Colony": "Forschungskolonie",
-  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Platziere eine Kolonie. DARF AUCH AUF EINER EIGENEN KOLONIE PLATZIERT WERDEN. Ziehe 2 Karten.",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Platziere eine Kolonie. DARF AUCH AUF EINEM KOLONIEPLÄTTCHEN MIT BEREITS EIGENER KOLONIE PLATZIERT WERDEN. Ziehe 2 Karten.",
 
   "Rim Freighters": "Randzonen-Frachter",
 
@@ -131,11 +131,8 @@
 
   "Spin-off Department": "Zweigstelle",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "EFFEKT: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, ziehe eine Karte.",
-  "Increase your M€ production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
 
   "Sub-zero Salt Fish": "Eis-Salzwasserfisch",
-  "Action: Add 1 animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
-  "1 VP per 2 animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
   "Requires -6 C. Decrease any plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
 
   "Titan Air-scrapping": "Titan-Luft-Recycling",

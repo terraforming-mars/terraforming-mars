@@ -48,7 +48,6 @@ type SharedProperties = {
   cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
-  // TODO(kberg): move initialActionText to Corp shared properties
   initialActionText?: string;
   firstAction?: Behavior & {text: string};
   globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
@@ -346,6 +345,13 @@ export abstract class Card implements ICard {
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
         throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
+      }
+      return;
+    } else if (typeof(vps) === 'object' && vps.nextToThis !== undefined) {
+      // nextToThis VP needs explicit metadata.victoryPoints for rendering since auto-generation
+      // cannot express adjacency-scoped VP icons.
+      if (properties.metadata.victoryPoints === undefined) {
+        throw new Error('When card.victoryPoints uses nextToThis, metadata.victoryPoints must also be supplied for rendering');
       }
       return;
     } else {

@@ -54,7 +54,7 @@ export class RemoveAnyPlants extends DeferredAction {
         });
       removalOptions.push(option);
 
-      // Shortcut. Only provide the opportunity  if the player is playing Mons Insurance.
+      // Shortcut. Only provide the opportunity if the player is playing Mons Insurance.
       if (game.monsInsuranceOwner !== player) {
         option.cb(undefined);
         return undefined;

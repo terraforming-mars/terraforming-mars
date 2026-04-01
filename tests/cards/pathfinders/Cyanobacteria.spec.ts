@@ -1,14 +1,18 @@
 import {expect} from 'chai';
 import {Cyanobacteria} from '../../../src/server/cards/pathfinders/Cyanobacteria';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, runAllActions, testGame} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testGame} from '../../TestingUtils';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {TileType} from '../../../src/common/TileType';
+import {IGame} from '../../../src/server/IGame';
+import {OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS, TEMPERATURE_FOR_OCEAN_BONUS} from '../../../src/common/constants';
+import {assertPlaceOcean} from '../../assertions';
 
 describe('Cyanobacteria', () => {
+  let game: IGame;
   let card: Cyanobacteria;
   let player: TestPlayer;
   let ghgProducingBacteria: GHGProducingBacteria;
@@ -17,29 +21,40 @@ describe('Cyanobacteria', () => {
 
   beforeEach(() => {
     card = new Cyanobacteria();
-    [/* game */, player] = testGame(1);
+    [game, player] = testGame(1);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();
-    maxOutOceans(player);
+    maxOutOceans(player, 5);
   });
 
   it('play -- the simple part', () => {
     expect(player.game.getOxygenLevel()).eq(0);
 
-    const options = card.play(player);
+    cast(card.play(player), undefined);
 
     expect(player.game.getOxygenLevel()).eq(1);
-    expect(options).is.undefined;
   });
 
   it('play, one microbe card', () => {
     player.playedCards.push(ghgProducingBacteria);
-    const options = card.play(player);
-    expect(options).is.undefined;
-    // 9 oceans, so, maxed out.
-    runAllActions(player.game);
-    expect(ghgProducingBacteria.resourceCount).eq(9);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(ghgProducingBacteria.resourceCount).eq(5);
+  });
+
+  it('play, raising oxygen raises temperature, places ocean, ', () => {
+    setOxygenLevel(game, OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS - 1);
+    setTemperature(game, TEMPERATURE_FOR_OCEAN_BONUS - 2);
+    player.playedCards.push(ghgProducingBacteria);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    assertPlaceOcean(player, player.popWaitingFor());
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(ghgProducingBacteria.resourceCount).eq(6);
   });
 
   it('play, one microbe card, include Wetlands', () => {
@@ -49,44 +64,46 @@ describe('Cyanobacteria', () => {
       player.game.board.getAvailableSpacesOnLand(player)[0],
       {tileType: TileType.WETLANDS});
 
-    const options = card.play(player);
-    expect(options).is.undefined;
-    runAllActions(player.game);
-    // 9 oceans plus wetlands, so 10.
-    expect(ghgProducingBacteria.resourceCount).eq(10);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    // 5 oceans plus wetlands, so 6.
+    expect(ghgProducingBacteria.resourceCount).eq(6);
   });
 
   it('play, many microbe cards', () => {
     player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     cast(card.play(player), undefined);
-
-    const options = cast(player.game.deferredActions.peek()!.execute(), AndOptions);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), AndOptions);
 
     expect(options.options).has.length(3);
-    options?.options[0].cb(1);
-    options?.options[1].cb(3);
-    options?.options[2].cb(5);
-    options?.cb(undefined);
+    options.options[0].cb(1);
+    options.options[1].cb(2);
+    options.options[2].cb(2);
+    options.cb(undefined);
 
     expect(ghgProducingBacteria.resourceCount).eq(1);
-    expect(tardigrades.resourceCount).eq(3);
-    expect(ants.resourceCount).eq(5);
+    expect(tardigrades.resourceCount).eq(2);
+    expect(ants.resourceCount).eq(2);
   });
 
   it('play, many microbe cards, wrong input', () => {
     player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     card.play(player);
-    const options = cast(player.game.deferredActions.peek()!.execute(), AndOptions);
-    expect(options?.options).has.length(3);
 
-    options?.options[0].cb(1);
-    options?.options[1].cb(3);
-    options?.options[2].cb(6);
-    expect(() => options?.cb(undefined)).to.throw(/Expecting 9 .*, got 10/);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), AndOptions);
+    expect(options.options).has.length(3);
 
-    options?.options[2].cb(4);
-    expect(() => options?.cb(undefined)).to.throw(/Expecting 9 .*, got 8/);
+    options.options[0].cb(1);
+    options.options[1].cb(2);
+    options.options[2].cb(3);
+    expect(() => options.cb(undefined)).to.throw(/Expecting 5 .*, got 6/);
+
+    options.options[2].cb(1);
+    expect(() => options.cb(undefined)).to.throw(/Expecting 5 .*, got 4/);
   });
 });

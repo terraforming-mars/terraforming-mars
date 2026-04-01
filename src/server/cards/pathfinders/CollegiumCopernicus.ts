@@ -46,7 +46,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.tableau.has(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }

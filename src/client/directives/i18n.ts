@@ -37,7 +37,7 @@ export function translateMessage(message: Message): string {
     case LogMessageDataType.TILE_TYPE:
       return tileTypeToString[datum.value];
     default:
-      return translateText(datum.value.toString());
+      return translateText(String(datum.value));
     }
   });
 }

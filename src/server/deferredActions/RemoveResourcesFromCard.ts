@@ -23,7 +23,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private title: string | Message;
   private log: boolean;
 
-  public override priority = Priority.ATTACK_OPPONENT;
+  public override priority: Priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: IPlayer,
     cardResource: CardResource | undefined,

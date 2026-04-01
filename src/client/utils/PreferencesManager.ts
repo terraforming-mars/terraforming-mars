@@ -18,6 +18,7 @@ export type Preferences = {
   hide_animated_sidebar: boolean,
   debug_view: boolean,
   symbol_overlay: boolean,
+  animated_title: boolean,
   experimental_ui: boolean,
   lang: string,
 }
@@ -46,6 +47,7 @@ const defaults: Preferences = {
   hide_animated_sidebar: false,
 
   symbol_overlay: false,
+  animated_title: true,
 
   experimental_ui: false,
   debug_view: false,

@@ -1,5 +1,4 @@
 {
-  "Buffer Gas": "Пуферний газ",
   "Spend 16 M€ to increase your TR 1 step. Solo games only.": "Витратити 16 M€, щоб збільшити ваш TR на 1 крок. Тільки для одиночних ігор.",
   "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "Витратити 25 M€, щоб розмістити плитку міста та збільшити вашу виробництво M€ на 1 крок.",
   "Spend 17 M€ to place a colony.": "Витратити 17 M€, щоб розмістити колонію.",
@@ -8,8 +7,6 @@
   "Sell Patents": "Продати патенти",
   "Sell patents": "Продати патенти",
   "Discard any number of cards to gain that amount of M€.": "Відкинути будь-яку кількість карток, щоб отримати таку ж кількість M€.",
-  "Asteroid": "Астероїд",
-  "asteroid": "Астероїд",
   "Spend 14 M€ to raise the temperature 1 step.": "Витратити 14 M€, щоб підняти температуру на 1 крок.",
   "Air Scrapping": "Очищення повітря",
   "Air Scrapping (Var)": "Очищення повітря (Варіант)",
@@ -32,7 +29,7 @@
   "Lunar Mine": "Місячна шахта",
   "Lunar Mine (var.)": "Місячна шахта (Варіант)",
   "Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "Витратити 20 M€ та 1 титан, щоб розмістити шахту на Місяці, підняти швидкість видобутку на 1 крок та збільшити виробництво сталі на 1 крок.",
-  "Spend 23 M€ to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "Витратити 23 M€, щоб розмістити шахту на Місяці, підняти швидкість видобутку на 1 крок та збільшити виробництво сталі на 1 крок.",
+  "Spend 24 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "Витратити 24 M€, щоб розмістити шахту на Місяці, підняти швидкість видобутку на 1 крок та збільшити виробництво сталі на 1 крок.",
   "Build Moon Road": "Побудувати місячну дорогу",
   "Road Infrastructure": "Дорожня інфраструктура",
   "Road Infrastructure (var.)": "Дорожня інфраструктура (Варіант)",

@@ -42,7 +42,6 @@
   "Coordinated Raid": "組織的襲撃",
   "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(条件：所有コロニー1つ以上. 未使用の交易艦隊で交易をする(すでに交易されている天体でも可). これで発生する他のプレイヤーのコロニー・ボーナスを代わりに獲得する.)",
 
-  "Crashlanding": "不時着",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(特殊タイルを非予定地かつ都市の隣接数が1つ以下にするように配置.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "このタイルは1データと、1建材 または 1チタンの隣接ボーナスがある.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "すでに配置している所有するタイルに隣接する場合、この隣接ボーナスを獲得.",
@@ -138,7 +137,6 @@
   "Martian Monuments": "火星記念碑",
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(条件：火星上に都市1つ以上所持. 火星タグの数分、MC産出+1.)",
 
-  "Martian Nature Wonders": "火星の神秘",
   "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(非予定地に中立のプレイヤーマーカーを配置し、配置ボーナスを獲得(隣接ボーナスは貰えない). 2データ獲得.)",
 
   "Martian Repository": "火星博物館",

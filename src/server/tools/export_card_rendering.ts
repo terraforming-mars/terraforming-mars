@@ -1,5 +1,5 @@
 require('dotenv').config();
-import * as fs from 'fs';
+import fs from 'fs';
 
 import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
 import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
@@ -156,6 +156,7 @@ class ColoniesProcessor {
       trade: metadata.trade,
       colony: metadata.colony,
       shouldIncreaseTrack: metadata.shouldIncreaseTrack,
+      expansion: metadata.expansion,
     };
 
     ColoniesProcessor.json.push(clientMetadata);

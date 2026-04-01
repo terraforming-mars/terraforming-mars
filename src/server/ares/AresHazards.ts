@@ -16,7 +16,7 @@ export class AresHazards {
     UnderworldExpansion.onTilePlaced(game, space);
   }
 
-  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1) {
+  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1): Space {
     const cost = game.discardForCost(cardCount, tileType);
     const distance = Math.max(cost - 1, 0); // Some cards cost zero.
     const space = game.board.getNthAvailableLandSpace(

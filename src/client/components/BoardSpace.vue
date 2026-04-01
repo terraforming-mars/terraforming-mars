@@ -8,7 +8,7 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <template v-if="tileView === 'coords'">
-      <div class="board-space-coords">{{  getSpaceName(space.id) }}</div>
+      <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
     </template>
     <template v-if="tileView === 'show'">
       <div :class="playerColorCss" v-if="space.color !== undefined"></div>
@@ -32,7 +32,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
@@ -42,20 +42,23 @@ import {getPreferences} from '../utils/PreferencesManager';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 import {getSpaceName} from '@/common/boards/spaces';
 import {SpaceType} from '@/common/boards/SpaceType';
-export default Vue.extend({
+export default defineComponent({
   name: 'board-space',
   props: {
     space: {
       type: Object as () => SpaceModel,
+      required: true,
     },
     text: {
       type: String,
+      default: '',
     },
     aresExtension: {
       type: Boolean,
     },
     tileView: {
       type: String as () => TileView,
+      required: true,
     },
   },
   data() {

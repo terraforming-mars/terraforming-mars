@@ -43,9 +43,7 @@
   "7 Heat Into Temperature": "7 de calor em temperatura",
   "NEXT CARD:": "PRÓXIMA CARTA:",
   "GENERATION 1 OF 12": "Geração ${0} de ${1}",
-  "You": "Você",
   "you": "você",
-  "researching": "pesquisando",
 
   "Milestones": "Marcos",
   "Builder": "Construtor",
@@ -145,7 +143,6 @@
   "played cards": "cartas em jogo",
 
   "Select which cards to take into hand": "Escolha quais cartas levar para a mão",
-  "Not enough cards selected": "Não foram selecionadas cartas suficientes",
 
   "Convert 7 heat into temperature": "Converter 7 de calor em elevação da temperatura",
   "Convert 8 heat into temperature": "Converter 8 de calor em elevação da temperatura",
@@ -182,11 +179,6 @@
   "Pay ${0} Titanium": "Pagar ${0} de Titânio",
   "Trade with a colony tile": "Negociar com uma Peça de Colônia",
   "(Enceladus - (Microbes)": "(Encéladus - (Micróbios)",
-  "Select action for World Government Terraforming": "Escolha uma ação para a Terraformação pelo Governo Mundial",
-  "Increase temperature": "Aumentar temperatura",
-  "Increase oxygen": "Aumentar oxigênio",
-  "Add an ocean": "Adicione um oceano",
-  "Increase Venus scale": "Aumentar escala de Vênus",
 
   "Login": "Iniciar sessão",
   "My Games": "Minhas Partidas",
@@ -254,8 +246,6 @@
   "Pay trade fee": "Pagar taxa de negociação",
   "Select colony tile for trade": "Escolher peça de colônia para negociar",
   "Pass for this generation": "Passar por esta geração",
-  "Confirm": "Confirmar",
-  "Increase": "Aumentar",
   "Buy": "Comprar",
   "Skip this action": "Pular esta ação",
   "Keep": "Manter",
@@ -308,13 +298,12 @@
   "Build colony": "Contruir colônia",
 
   "Place any final greenery from plants": "Converter as plantas restantes em vegetações:",
-  "Don't place a greenery": "Não colocar vegetação",
 
   "City: 1 VP per adjacent greenery": "Cidade: 1 PV por tile de vegetação adjacente",
   "Greenery: 1 VP": "Vegetação: 1 PV",
   "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por tile de cidade adjacente",
 
-  "Unable to reach the server. The server may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
+  "Unable to reach the server. It may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
   "Unable to restore game ${game_id}": "Não foi possível recuperar partida ${game_id}",
   "Game not found": "Partida não encontrada",
   "toggle cards filters": "alterar filtros de cartas",
@@ -379,6 +368,6 @@
   "Select where to send a delegate": "Escolha o partido para enviar o delegado.",
 
   "Convert heat": "Conveter calor",
-  "Take action": "Fazer ação",
-  "Self-replicating Robots cards": "Cartas ligadas ao Robôs Autorreplicadores"
+  "Self-replicating Robots cards": "Cartas ligadas ao Robôs Autorreplicadores",
+  "Reorder Cards": "Reordenar Cartas"
 }

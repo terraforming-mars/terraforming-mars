@@ -12,6 +12,7 @@
 .cardbox {
     display: inline-block;
     vertical-align: top;
+    position:relative;
 }
 
 .cards-stack {
@@ -87,7 +88,6 @@
         #cccccc
     );
     width: 240px;
-    height: 310px;
     font-family: Arial, Helvetica, sans-serif;
     margin: 15px 30px 10px 0px;
     border-top: 4px solid rgb(221, 221, 221);
@@ -129,33 +129,6 @@ input[type="radio"]:checked + .filterDiv::after {
     z-index: 1;
 }
 
-.filterDiv3 {
-    position: relative;
-    background: #eeeeee;
-    background: linear-gradient(
-        to bottom right,
-        #ffffff,
-        #aaaaaa,
-        #eeeeee,
-        #cecece,
-        #dddddd,
-        #eeeeee,
-        #cccccc
-    );
-    width: 240px;
-    height: 310px;
-    font-family: Arial, Helvetica, sans-serif;
-    left: 33%;
-    margin-top: 240px;
-    transform: scale(2);
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
-    border-radius: 20px;
-    box-shadow: 0 0 30px 15px black;
-    transition: transform 200ms ease-in-out;
-}
 
 .filterDiv-stacked {
     transform: perspective(3500px) rotateY(45deg);
@@ -2977,6 +2950,57 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 10px;
     height: 350px;
     display: inline-block;
-    vertical-align: top
+    vertical-align: top;
+    z-index: 1;
+    position: absolute;
+  }
+
+  .reorder-banners-container {
+    display:flex;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    // filterDiv:hover has z-index 100
+    // and we need this to be on top when visible
+    z-index: 101;
+    // ideally, this would exist in CardContainer with width: 100%
+    // but that would be a bigger change to pipe through SortableCards.vue
+    // for now, hard code to filterDiv's width + border
+    width: 248px;
+  }
+
+  .reorder-banners-left,
+  .reorder-banners-right {
+    position: absolute;
+    height: 80%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+    // capsule shape
+    border-radius: 9999px;
+  }
+
+  .reorder-banners-left {
+    left: 0;
+
+    &::before {
+      content: '\00AB';
+    }
+  }
+
+  .reorder-banners-right {
+    right: 0;
+
+    &::before {
+      content: '\00BB';
+    }
+  }
+
+  .do-not-drag-and-drop {
+    pointer-events: none;
   }
 }

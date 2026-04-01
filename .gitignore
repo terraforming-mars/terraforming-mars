@@ -16,7 +16,7 @@ dist/
 pid
 *.log
 .eslintcache
-tsconfig.tsbuildinfo
+tsconfig*.tsbuildinfo
 assets/locales
 
 # Local Packages

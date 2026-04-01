@@ -73,7 +73,7 @@ export class ColoniesHandler {
       colonyTiles = colonyTiles.filter((colonyTile) => colonyTileWillEnterActive(colonyTile, game));
     }
     if (colonyTiles.length === 0) {
-      game.log('No availble colony tiles for ${0} to choose from', (b) => b.player(player));
+      game.log('No available colony tiles for ${0} to choose from', (b) => b.player(player));
       return;
     }
 

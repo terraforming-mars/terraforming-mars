@@ -6,84 +6,70 @@ import {Birds} from '../src/server/cards/base/Birds';
 import {Game} from '../src/server/Game';
 import {LogHelper} from '../src/server/LogHelper';
 import {TestPlayer} from './TestPlayer';
+import {LogMessageDataType} from '../src/common/logs/LogMessageDataType';
+import {toName} from '../src/common/utils/utils';
 
 describe('LogHelper', () => {
-  it('logs drawn cards by card', () => {
-    const player1 = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const card1 = new Algae();
-    const card2 = new Ants();
-    const card3 = new Birds();
-    const game = Game.newInstance('gameid', [player1, player2], player1);
+  const player1 = TestPlayer.BLUE.newPlayer();
+  const player2 = TestPlayer.RED.newPlayer();
+  const algae = new Algae();
+  const ants = new Ants();
+  const birds = new Birds();
+  const game = Game.newInstance('gameid', [player1, player2], player1);
+
+  it('logs no drawn cards ', () => {
     LogHelper.logDrawnCards(player1, []);
-    let msg = game.gameLog.pop();
-    expect(msg!.message).to.eq('${0} drew no cards');
-    LogHelper.logDrawnCards(player1, [card1]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(2);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.message).to.eq('${0} drew ${1}');
-    LogHelper.logDrawnCards(player1, [card1, card2]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(3);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.data[2].value).to.eq(card2.name);
-    expect(msg.message).to.eq('${0} drew ${1} and ${2}');
-    LogHelper.logDrawnCards(player1, [card1, card2, card3]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(4);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.data[2].value).to.eq(card2.name);
-    expect(msg.data[3].value).to.eq(card3.name);
-    expect(msg.message).to.eq('${0} drew ${1}, ${2} and ${3}');
+    const msg = game.gameLog.pop()!;
+    msg.timestamp = 0;
+
+    const expected = {
+      message: '${0} drew no cards',
+      data: [{type: LogMessageDataType.PLAYER, value: 'blue'}],
+      playerId: undefined, timestamp: 0,
+    };
+    expect(msg).deep.eq(expected);
   });
 
-  it('logs drawn cards by card name', () => {
-    const player1 = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const card1 = new Algae();
-    const card2 = new Ants();
-    const card3 = new Birds();
-    const game = Game.newInstance('gameid', [player1, player2], player1);
-    LogHelper.logDrawnCards(player1, []);
-    let msg = game.gameLog.pop();
-    expect(msg!.message).to.eq('${0} drew no cards');
-    LogHelper.logDrawnCards(player1, [card1.name]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(2);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.message).to.eq('${0} drew ${1}');
-    LogHelper.logDrawnCards(player1, [card1.name, card2.name]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(3);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.data[2].value).to.eq(card2.name);
-    expect(msg.message).to.eq('${0} drew ${1} and ${2}');
-    LogHelper.logDrawnCards(player1, [card1.name, card2.name, card3.name]);
-    msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(4);
-    expect(msg.data[0].value).to.eq(player1.color);
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.data[2].value).to.eq(card2.name);
-    expect(msg.data[3].value).to.eq(card3.name);
-    expect(msg.message).to.eq('${0} drew ${1}, ${2} and ${3}');
-  });
+  for (const run of [
+    {cards: [algae], expected: ['Algae']},
+    {cards: [algae, ants], expected: ['Algae', 'Ants']},
+    {cards: [algae, ants, birds], expected: ['Algae', 'Ants', 'Birds']},
+  ] as const) {
+    it('logs drawn cards ' + JSON.stringify(run.cards.map(toName)), () => {
+      LogHelper.logDrawnCards(player1, run.cards);
+      const msg = game.gameLog.pop()!;
+      msg.timestamp = 0;
+
+      const expected = {
+        message: '${0} drew ${1}',
+        data: [
+          {type: LogMessageDataType.PLAYER, value: 'blue'},
+          {type: LogMessageDataType.CARDS, value: run.expected},
+        ],
+        playerId: undefined, timestamp: 0,
+      };
+      expect(msg).deep.eq(expected);
+    });
+  }
 
   it('logs drawn cards privately', () => {
     const player1 = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
     const game = Game.newInstance('gameid', [player1, player2], player1);
-    LogHelper.logDrawnCards(player1, [card1.name], true);
+    LogHelper.logDrawnCards(player1, [card1], true);
     const msg = game.gameLog.pop()!;
-    expect(msg.data).has.length(2);
-    expect(msg.data[0].value).to.eq('You');
-    expect(msg.data[1].value).to.eq(card1.name);
-    expect(msg.message).to.eq('${0} drew ${1}');
+
+    msg.timestamp = 0; // for testing.
+
+    expect(msg).deep.eq({
+      message: '${0} drew ${1}',
+      data: [
+        {type: LogMessageDataType.STRING, value: 'You'},
+        {type: LogMessageDataType.CARDS, value: ['Algae']},
+      ],
+      timestamp: 0,
+      playerId: 'p-blue-id',
+    });
   });
 });

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 const css: Record<SpaceBonus, string> = {
@@ -28,13 +28,15 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.DELEGATE]: 'delegate',
   [SpaceBonus.COLONY]: 'colony',
   [SpaceBonus._RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
+  [SpaceBonus.TEMPERATURE_4MC]: 'bonustemperature4mc',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'bonus',
   props: {
     bonus: {
       type: Array as () => Array<SpaceBonus>,
+      required: true,
     },
   },
   methods: {
@@ -42,6 +44,7 @@ export default Vue.extend({
       const doubleWideBonuses = [
         SpaceBonus.OCEAN,
         SpaceBonus.TEMPERATURE,
+        SpaceBonus.TEMPERATURE_4MC,
         SpaceBonus.COLONY,
       ];
       // If only one bonus is present, center it.

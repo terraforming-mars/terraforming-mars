@@ -63,7 +63,7 @@ describe('DeepFoundations', () => {
       space.undergroundResources = 'card1';
     }
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    selectPayment.cb(Payment.of({megaCredits: 16, steel: 2}));
+    selectPayment.cb(Payment.of({megacredits: 16, steel: 2}));
     runAllActions(game);
 
     assertPlaceCity(player, player.popWaitingFor());

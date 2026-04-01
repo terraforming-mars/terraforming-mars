@@ -32,7 +32,7 @@ export class Zan extends CeoCard {
     while (turmoil.getAvailableDelegateCount(player) > 0) {
       turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     }
-    // If we dont do this player will not get the bonus for POLITICAN Awards
+    // If we dont do this player will not get the bonus for POLITICIAN Awards
     player.totalDelegatesPlaced += totalAvailableDelegates;
     player.stock.add(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;

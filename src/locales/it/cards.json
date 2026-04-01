@@ -21,7 +21,6 @@
     "Martian Rails": "Ferrovie Marziane",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Azione: spendi una risorsa Energia per ottenere 1 M€ per ogni tessera Città SU MARTE.",
 
-    "Asteroid": "Asteroide",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Incrementa la Temperatura di 1 livello e ottieni 2 risorse Titanio. Rimuovi fino a 3 Piante da un qualunque giocatore.",
 
     "Comet": "Cometa",
@@ -167,7 +166,6 @@
     "(Requires 0° C or warmer. Place 2 ocean tiles.)": "(Richiede una Temperatura maggiore o uguale a 0°C. Colloca due tessere Oceano.)",
 
     "Small Animals": "Piccoli Animali",
-    "Action: Add 1 animal to this card.": "Azione: aggiungi un Animale a questa carta.",
     "(Requires 6% oxygen. Decrease any plant production 1 step.)": "(Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
     "1 VP per 2 animals on this card.":"1 PV per ogni coppia di Animali su questa carta.",
 
@@ -304,7 +302,7 @@
     "Decrease your M€ production 1 step and increase your energy production 1 steps.": "Diminuisci la tua Produzione di M€ di 1 livello e incrementa la tua Produzione di Energia di 1 livello.",
 
     "Ironworks": "Acciaieria",
-    "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Azione: spendi 4 risorse Energia per ottenere 2 risorse Acciaio e incrementare l'Ossigeno di 1 livello.",
+    "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Azione: spendi 4 risorse Energia per ottenere 1 risorsa Acciaio e incrementare l'Ossigeno di 1 livello.",
 
     "Power Grid": "Rete Elettrica",
     "Increase your energy production step for each power tag you have, including this.": "Incrementa la tua Produzione di Energia di 1 livello per ogni simbolo Potenza in tuo possesso, incluso questo.",
@@ -641,7 +639,6 @@
   "HYDROGEN TO VENUS":"Idrogeno per Venere",
 
   "Plant Microbe Animal":"Pianta Microbo Animale",
-  "Jovian":"Gioviano",
   "max 3 Oceans":"al massimo 3 tessere Oceano",
   "Forest":"Foresta",
   "2 Power":"2 simboli Potenza",
@@ -649,7 +646,6 @@
   "Titanium production":"Produzione di Titanio",
   "Steel production":"Produzione di Acciaio",
   "4 Science":"4 simboli Scienza",
-  "2 Cities":"2 tessere Città",
   "Standard projects":"Progetti Standard",
    "steal":"ruba",
    "next card":"prossima carta",

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ICardRenderTile} from '@/common/cards/render/Types';
 import {TileType} from '@/common/TileType';
 
@@ -142,9 +142,12 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
   },
+  [TileType.NEURAL_INSTANCE]: {
+    tile: 'card-tile-neural-instance',
+  },
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderTileComponent',
   props: {
     item: {

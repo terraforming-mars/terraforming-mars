@@ -96,6 +96,7 @@
                     <li v-i18n>• The Moon (63TR condition): No changes.</li>
                     <li v-i18n>• The Moon (Terraforming condition): The game ends 2 generations later. The Moon must tracks must be completed for solo mode victory.</li>
                   </ul>
+                </li>
                 <li>
                   <span v-i18n>ii. World Government Terraforming (start player chooses)</span>
                   <div class="expansion-icon expansion-icon-venus"></div>
@@ -151,8 +152,8 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import {defineComponent} from 'vue';
+export default defineComponent({
   name: 'HelpPhases',
 });
 </script>

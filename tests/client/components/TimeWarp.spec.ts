@@ -46,8 +46,8 @@ function createPublicPlayer(
       id: 'player-1',
       influence: 0,
       isActive: false,
-      megaCredits: 0,
-      megaCreditProduction: 0,
+      megacredits: 0,
+      megacreditProduction: 0,
       name: 'Player',
       noTagsCount: 0,
       plants: 0,
@@ -165,7 +165,7 @@ describe('TimeWarp', () => {
       id: 'player-1',
       color: 'red' as any,
       name: 'Player 1',
-      megaCredits: 20,
+      megacredits: 20,
     });
     const playerTwo = createPublicPlayer({
       id: 'player-2',
@@ -204,7 +204,7 @@ describe('TimeWarp', () => {
 
     const waitingFors = wrapper.findAllComponents(WaitingFor);
     expect(waitingFors.length).to.be.greaterThan(1);
-    const timeWarpWaitingFor = waitingFors.at(1);
+    const timeWarpWaitingFor = waitingFors[1];
     const projectComponent = timeWarpWaitingFor.findComponent(
       SelectProjectCardToPlay,
     );
@@ -231,7 +231,7 @@ describe('TimeWarp', () => {
 
     const remountedWaitingFors = remounted.findAllComponents(WaitingFor);
     expect(remountedWaitingFors.length).to.be.greaterThan(1);
-    const remountedTimeWarpWaitingFor = remountedWaitingFors.at(1);
+    const remountedTimeWarpWaitingFor = remountedWaitingFors[1];
     const remountedProjectComponent = remountedTimeWarpWaitingFor.findComponent(
       SelectProjectCardToPlay,
     );

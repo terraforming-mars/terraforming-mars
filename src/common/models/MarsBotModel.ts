@@ -35,6 +35,6 @@ export type MarsBotModel = {
   trackCubes?: ReadonlyArray<{trackIndex: number, position: number, cubeType: CubeType}>;
   mcPerVP?: number;
   mcVP?: number;
-  globalParameterSteps?: Partial<Record<GlobalParameter, number>>;
+  globalParameterSteps?: Record<GlobalParameter, number>;
   vpByGeneration?: ReadonlyArray<number>;
 };

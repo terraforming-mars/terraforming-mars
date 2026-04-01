@@ -1,6 +1,7 @@
 import {Tag} from '../../common/cards/Tag';
 import {CardName} from '../../common/cards/CardName';
 import {BonusCardId, CubeType} from '../../common/automa/AutomaTypes';
+export {CubeType};
 
 export type MarsBotDraftPriority =
   | { type: 'tags'; tags: ReadonlyArray<Tag> }

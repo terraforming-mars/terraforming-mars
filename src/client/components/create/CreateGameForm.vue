@@ -476,6 +476,7 @@
 
                         <div class="create-game-action">
                             <AppButton title="Create game" size="big" @click="createGame"/>
+                            <AppButton title="Reset" size="big" @click="resetSettings"/>
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
@@ -649,6 +650,27 @@ export default defineComponent({
   },
   mounted() {
     document.title = `Create New Game | ${constants.APP_NAME}`;
+    const lastSettings = localStorage.getItem('lastGameSettings');
+    if (lastSettings) {
+      try {
+        const results = JSON.parse(lastSettings);
+        const processor = new JSONProcessor(this);
+        processor.applyJSON(results);
+
+        nextTick(() => {
+          try {
+            if (this.showBannedCards) this.typedRefs.cardsFilter.selected = processor.bannedCards;
+            if (this.showIncludedCards) this.typedRefs.cardsFilter2.selected = processor.includedCards;
+            if (!this.seededGame) this.seed = Math.random();
+            this.solarPhaseOption = Boolean(processor.solarPhaseOption);
+          } catch (e) {
+            console.error('Failed to apply lastGameSettings in nextTick', e);
+          }
+        });
+      } catch (e) {
+        console.error('Failed to load lastGameSettings', e);
+      }
+    }
   },
   computed: {
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {
@@ -1170,6 +1192,8 @@ export default defineComponent({
       const dataToSend = await this.serializeSettings();
 
       if (dataToSend === undefined) return;
+
+      localStorage.setItem('lastGameSettings', dataToSend);
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;
@@ -1194,6 +1218,13 @@ export default defineComponent({
         .catch((error: Error) => {
           alert(error.message);
         });
+    },
+    resetSettings() {
+      Object.assign(this, defaultCreateGameModel());
+      this.preludeToggled = false;
+      this.uploading = false;
+      if (this.typedRefs.cardsFilter) this.typedRefs.cardsFilter.selected = [];
+      if (this.typedRefs.cardsFilter2) this.typedRefs.cardsFilter2.selected = [];
     },
   },
 });

@@ -16,7 +16,7 @@ import {MarsBotScoring, MarsBotVPBreakdown} from './MarsBotScoring';
 import {Space} from '../boards/Space';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
-import {IMarsBotCorp, MarsBotTrackCube, MarsBotCorpContext, trackCubeKey} from '../../common/automa/MarsBotCorpTypes';
+import {IMarsBotCorp, MarsBotTrackCube, MarsBotCorpContext, trackCubeKey} from './MarsBotCorpTypes';
 import {MarsBotCorpResolver} from './corps/MarsBotCorpResolver';
 import {getMarsBotCorp} from './corps/MarsBotCorpRegistry';
 
@@ -451,7 +451,7 @@ export class MarsBot {
       marsBotPlayerId: this.player.id,
     };
     if (this.corp !== undefined) {
-      state.corpId = this.corp.id;
+      state.corpId = this.corp.name;
       state.trackCubePositions = Array.from(this.trackCubePositions.values());
       state.triggeredCubePositions = Array.from(this.triggeredCubePositions);
     }
@@ -494,7 +494,7 @@ export class MarsBot {
 
     // Restore corporation state
     if (state.corpId !== undefined) {
-      const corp = getMarsBotCorp(state.corpId);
+      const corp = getMarsBotCorp(state.corpId as CardName);
       if (corp !== undefined) {
         this.corp = corp;
       }

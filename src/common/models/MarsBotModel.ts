@@ -1,9 +1,7 @@
-import {DifficultyLevel, TrackAction} from '../automa/AutomaTypes';
+import {DifficultyLevel, TrackAction, CubeType} from '../automa/AutomaTypes';
 import {Tag} from '../cards/Tag';
 import {CardName} from '../cards/CardName';
 import {GlobalParameter} from '../GlobalParameter';
-
-type CubeType = 'white' | 'black' | 'credit';
 
 export type MarsBotTrackModel = {
   tags: ReadonlyArray<Tag>;

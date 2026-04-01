@@ -50,6 +50,9 @@ import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
 import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {gameLocaleToIntlLocale} from '@/client/utils/LocaleUtils';
+import {range} from '@/common/utils/utils';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
@@ -82,9 +85,21 @@ export default defineComponent({
     cardsToHtml(data: LogMessageData & {type: LogMessageDataType.CARDS, value: ReadonlyArray<CardName>}) {
       if (data.attrs?.ellipsis) {
         return '<span class="log-card background-color-standard-project">...</span>';
-      } else {
-        return data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs)).join(' ');
       }
+      const cardHtmls = data.value.map((cardName) => this.innerCardToHtml(cardName, data.attrs));
+      const htmlsAsIndexes = range(cardHtmls.length).map(String);
+      // These parts will be either type 'element', or type 'literal'.
+      // The 'element' parts represent the indexes of the cards (which will be filled in later)
+      // The 'literal' parts represent the text that combines everything together.
+      //
+      // So for English, if the cards are Algae , Birds, and Celestic, it returns
+      // ["Algae, ", "Birds, ", "and ", "Celestic"] with types ["element", "element", "literal", "element"]
+      //
+      // The tests show what this produces.
+      const parts = this.formatter.formatToParts(htmlsAsIndexes);
+      return parts
+        .map((part) => part.type === 'element' ? cardHtmls[Number(part.value)] : part.value)
+        .join('');
     },
     innerCardToHtml(cardName: CardName, attrs?: LogMessageDataAttrs) {
       const card = getCard(cardName);
@@ -131,7 +146,6 @@ export default defineComponent({
     icon() {
       return this.message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
     },
-
     LogMessageType(): typeof LogMessageType {
       return LogMessageType;
     },
@@ -149,6 +163,9 @@ export default defineComponent({
     },
     tileTypeToString(): typeof tileTypeToString {
       return tileTypeToString;
+    },
+    formatter(): Intl.ListFormat {
+      return new Intl.ListFormat(gameLocaleToIntlLocale(getPreferences().lang), {type: 'conjunction', style: 'long'});
     },
   },
 });

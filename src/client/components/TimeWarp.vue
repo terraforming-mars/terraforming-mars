@@ -29,20 +29,20 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
-import * as raw_settings from "@/genfiles/settings.json";
-import { vueRoot } from "@/client/components/vueRoot";
-import { paths } from "@/common/app/paths";
-import { Phase } from "@/common/Phase";
-import WaitingFor from "@/client/components/WaitingFor.vue";
+import {defineComponent, PropType} from 'vue';
+import * as raw_settings from '@/genfiles/settings.json';
+import { vueRoot } from '@/client/components/vueRoot';
+import { paths } from '@/common/app/paths';
+import { Phase } from '@/common/Phase';
+import WaitingFor from '@/client/components/WaitingFor.vue';
 import {
   PublicPlayerModel,
   PlayerViewModel,
-} from "@/common/models/PlayerModel";
+} from '@/common/models/PlayerModel';
 import {
   OrOptionsModel,
   PlayerInputModel,
-} from "@/common/models/PlayerInputModel";
+} from '@/common/models/PlayerInputModel';
 
 type StoredInputState = {
   path: number[];
@@ -55,38 +55,38 @@ type WaitingForUiState = {
   inputs: StoredInputState[];
 };
 
-const WAITING_FOR_STATE_STORAGE_KEY = "timeWarpWaitingForState";
+const WAITING_FOR_STATE_STORAGE_KEY = 'timeWarpWaitingForState';
 
 function isInputElement(element: Element): element is HTMLInputElement {
-  return element.tagName === "INPUT";
+  return element.tagName === 'INPUT';
 }
 
 function isTextAreaElement(element: Element): element is HTMLTextAreaElement {
-  return element.tagName === "TEXTAREA";
+  return element.tagName === 'TEXTAREA';
 }
 
 function isSelectElement(element: Element): element is HTMLSelectElement {
-  return element.tagName === "SELECT";
+  return element.tagName === 'SELECT';
 }
 
 function createBubbledEvent(target: Element, eventName: string): Event | null {
-  const doc = target.ownerDocument || (typeof document !== "undefined" ? document : undefined);
+  const doc = target.ownerDocument || (typeof document !== 'undefined' ? document : undefined);
   const view = doc?.defaultView;
-  const EventCtor = view?.Event ?? (typeof Event === "function" ? Event : undefined);
+  const EventCtor = view?.Event ?? (typeof Event === 'function' ? Event : undefined);
   if (EventCtor) {
     try {
       return new EventCtor(eventName, { bubbles: true });
     } catch (err) {
-      console.warn("Unable to construct event via constructor", err);
+      console.warn('Unable to construct event via constructor', err);
     }
   }
   if (doc) {
     try {
-      const legacyEvent = doc.createEvent("Event");
+      const legacyEvent = doc.createEvent('Event');
       legacyEvent.initEvent(eventName, true, false);
       return legacyEvent;
     } catch (err) {
-      console.warn("Unable to construct legacy event", err);
+      console.warn('Unable to construct legacy event', err);
     }
   }
   return null;
@@ -98,7 +98,7 @@ function dispatchBubbledEvent(target: Element, eventName: string): void {
   target.dispatchEvent(event);
 }
 
-let DATA_STATE = {
+const DATA_STATE = {
   loadedCachedWaitingFor: false,
   cachedWaitingFor: undefined as OrOptionsModel | undefined,
   queue: undefined as any[] | undefined,
@@ -119,7 +119,7 @@ function loadWaitingForUiState(): WaitingForUiState | undefined {
         };
       }
     } catch (err) {
-      console.warn("Unable to read waiting-for UI state", err);
+      console.warn('Unable to read waiting-for UI state', err);
     }
   }
   return CACHED_WAITING_FOR_UI_STATE;
@@ -131,14 +131,14 @@ function saveWaitingForUiState(state: WaitingForUiState | undefined): void {
     try {
       localStorage.removeItem(WAITING_FOR_STATE_STORAGE_KEY);
     } catch (err) {
-      console.warn("Unable to clear waiting-for UI state", err);
+      console.warn('Unable to clear waiting-for UI state', err);
     }
     return;
   }
   try {
     localStorage.setItem(WAITING_FOR_STATE_STORAGE_KEY, JSON.stringify(state));
   } catch (err) {
-    console.warn("Unable to persist waiting-for UI state", err);
+    console.warn('Unable to persist waiting-for UI state', err);
   }
 }
 
@@ -160,7 +160,7 @@ function collectWaitingForUiState(root: Element): WaitingForUiState {
     if (isInputElement(element)) {
       const input = element as HTMLInputElement;
       const type = input.type;
-      if (type === "checkbox" || type === "radio") {
+      if (type === 'checkbox' || type === 'radio') {
         inputs.push({
           path: [...path],
           type,
@@ -177,14 +177,14 @@ function collectWaitingForUiState(root: Element): WaitingForUiState {
       const textarea = element as HTMLTextAreaElement;
       inputs.push({
         path: [...path],
-        type: "textarea",
+        type: 'textarea',
         value: textarea.value,
       });
     } else if (isSelectElement(element)) {
       const select = element as HTMLSelectElement;
       inputs.push({
         path: [...path],
-        type: "select",
+        type: 'select',
         value: select.value,
       });
     }
@@ -203,7 +203,7 @@ const MAX_WAITING_FOR_RESTORE_ATTEMPTS = 5;
 function restoreWaitingForUiState(
   root: Element,
   state: WaitingForUiState,
-  attempt = 0
+  attempt = 0,
 ): void {
   let needsRetry = false;
 
@@ -218,20 +218,20 @@ function restoreWaitingForUiState(
 
     if (isInputElement(element)) {
       const input = element as HTMLInputElement;
-      if (storedState.type === "checkbox" || storedState.type === "radio") {
+      if (storedState.type === 'checkbox' || storedState.type === 'radio') {
         const shouldCheck = Boolean(storedState.checked);
         if (input.checked !== shouldCheck) {
           input.checked = shouldCheck;
-          dispatchBubbledEvent(input, "change");
-          dispatchBubbledEvent(input, "input");
+          dispatchBubbledEvent(input, 'change');
+          dispatchBubbledEvent(input, 'input');
         }
       } else if (
         storedState.value !== undefined &&
         input.value !== storedState.value
       ) {
         input.value = storedState.value;
-        dispatchBubbledEvent(input, "input");
-        dispatchBubbledEvent(input, "change");
+        dispatchBubbledEvent(input, 'input');
+        dispatchBubbledEvent(input, 'change');
       }
     } else if (isTextAreaElement(element) || isSelectElement(element)) {
       const formElement = element as HTMLTextAreaElement | HTMLSelectElement;
@@ -240,8 +240,8 @@ function restoreWaitingForUiState(
         formElement.value !== storedState.value
       ) {
         formElement.value = storedState.value;
-        dispatchBubbledEvent(formElement, "input");
-        dispatchBubbledEvent(formElement, "change");
+        dispatchBubbledEvent(formElement, 'input');
+        dispatchBubbledEvent(formElement, 'change');
       }
     }
   });
@@ -252,9 +252,9 @@ function restoreWaitingForUiState(
     }
 
     const scheduleRetry =
-      typeof window !== "undefined"
-        ? window.setTimeout.bind(window)
-        : undefined;
+      typeof window !== 'undefined' ?
+        window.setTimeout.bind(window) :
+        undefined;
 
     if (scheduleRetry) {
       scheduleRetry(() => restoreWaitingForUiState(root, state, attempt + 1), 16);
@@ -262,21 +262,30 @@ function restoreWaitingForUiState(
   }
 }
 
-export default Vue.extend({
-  name: "time-warp",
+export default defineComponent({
+  name: 'time-warp',
   components: { WaitingFor },
 
   props: {
-    playerView: Object as PropType<PlayerViewModel>,
-    players: Array as PropType<PublicPlayerModel[]>,
-    settings: Object as PropType<typeof raw_settings>,
+    playerView: {
+      type: Object as PropType<PlayerViewModel>,
+      required: true,
+    },
+    players: {
+      type: Array as PropType<Array<PublicPlayerModel>>,
+      required: true,
+    },
+    settings: {
+      type: Object as PropType<typeof raw_settings>,
+      required: true,
+    },
     waitingfor: Object as PropType<PlayerInputModel | undefined>,
   },
 
   data() {
     if (!DATA_STATE.loadedCachedWaitingFor) {
       DATA_STATE.cachedWaitingFor =
-        JSON.parse(localStorage.getItem("cachedWaitingFor")!) || undefined;
+        JSON.parse(localStorage.getItem('cachedWaitingFor') ?? 'null') || undefined;
       DATA_STATE.loadedCachedWaitingFor = true;
     }
     return DATA_STATE;
@@ -290,7 +299,7 @@ export default Vue.extend({
       return this.showTrinary() === false;
     },
     styleF(): Record<string, string> {
-      return this.showDeactivate ? { backgroundColor: "#444444" } : {};
+      return this.showDeactivate ? { backgroundColor: '#444444' } : {};
     },
   },
   mounted() {
@@ -299,7 +308,7 @@ export default Vue.extend({
       this.$nextTick(() => this.restoreWaitingForState());
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.rememberWaitingForState();
   },
   watch: {
@@ -327,7 +336,7 @@ export default Vue.extend({
         const state = collectWaitingForUiState(root);
         saveWaitingForUiState(state);
       } catch (err) {
-        console.warn("Unable to remember waiting-for UI state", err);
+        console.warn('Unable to remember waiting-for UI state', err);
       }
     },
     restoreWaitingForState() {
@@ -338,7 +347,7 @@ export default Vue.extend({
       try {
         restoreWaitingForUiState(root, state);
       } catch (err) {
-        console.warn("Unable to restore waiting-for UI state", err);
+        console.warn('Unable to restore waiting-for UI state', err);
       }
     },
     showTrinary(): boolean | null {
@@ -352,16 +361,16 @@ export default Vue.extend({
     handleNewVal(newVal: PlayerInputModel | undefined): void {
       if (
         newVal &&
-        newVal.type === "or" &&
-        newVal.buttonLabel === "Take action"
+        newVal.type === 'or' &&
+        newVal.buttonLabel === 'Take action'
       ) {
         if (!this.queue) {
           const clone =
-            typeof structuredClone === "function"
-              ? structuredClone(newVal)
-              : JSON.parse(JSON.stringify(newVal));
+            typeof structuredClone === 'function' ?
+              structuredClone(newVal) :
+              JSON.parse(JSON.stringify(newVal));
           this.cachedWaitingFor = clone;
-          localStorage.setItem("cachedWaitingFor", JSON.stringify(clone));
+          localStorage.setItem('cachedWaitingFor', JSON.stringify(clone));
         } else {
           const payload = this.queue.shift();
           if (!payload) {
@@ -369,9 +378,9 @@ export default Vue.extend({
             return;
           }
           const selectedOptionTitle =
-            this.cachedWaitingFor?.options[payload.index].title;
+            this.cachedWaitingFor?.options[payload.index]?.title;
           const optionsTitles = newVal.options.map((o) => o.title);
-          const index = optionsTitles.indexOf(selectedOptionTitle!);
+          const index = optionsTitles.indexOf(selectedOptionTitle ?? '');
           if (index === -1) {
             this.deactivate();
             return;
@@ -379,15 +388,15 @@ export default Vue.extend({
           payload.index = index;
           const root = vueRoot(this);
           if (root.isServerSideRequestInProgress) {
-            console.warn("Server request in progress");
+            console.warn('Server request in progress');
             return;
           }
           root.isServerSideRequestInProgress = true;
 
-          fetch(paths.PLAYER_INPUT + "?id=" + this.playerView.id, {
-            method: "POST",
+          fetch(paths.PLAYER_INPUT + '?id=' + this.playerView.id, {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify(payload),
           })
@@ -401,10 +410,10 @@ export default Vue.extend({
               root.isServerSideRequestInProgress = false;
               if (!this.queue || this.queue.length === 0) this.deactivate();
 
-              root.screen = "empty";
+              root.screen = 'empty';
               root.playerView = playerView;
               root.playerkey++;
-              root.screen = "player-home";
+              root.screen = 'player-home';
             })
             .catch(() => {
               root.isServerSideRequestInProgress = false;

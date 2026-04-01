@@ -392,7 +392,7 @@ export default defineComponent({
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
-    'time-warp':TimeWarp,
+    'time-warp': TimeWarp,
     Milestones,
     Awards,
     'sidebar': Sidebar,

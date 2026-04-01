@@ -1,29 +1,30 @@
-import SelectProjectCardToPlay from "@/client/components/SelectProjectCardToPlay.vue";
-import TimeWarp from "@/client/components/TimeWarp.vue";
-import WaitingFor from "@/client/components/WaitingFor.vue";
-import { CardName } from "@/common/cards/CardName";
-import { CardModel } from "@/common/models/CardModel";
+import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
+import TimeWarp from '@/client/components/TimeWarp.vue';
+import WaitingFor from '@/client/components/WaitingFor.vue';
+import { CardName } from '@/common/cards/CardName';
+import { CardModel } from '@/common/models/CardModel';
 import {
   OrOptionsModel,
   SelectProjectCardToPlayModel,
-} from "@/common/models/PlayerInputModel";
+} from '@/common/models/PlayerInputModel';
 import {
   PlayerViewModel,
   PublicPlayerModel,
-} from "@/common/models/PlayerModel";
-import { Phase } from "@/common/Phase";
-import { Units } from "@/common/Units";
-import { RecursivePartial } from "@/common/utils/utils";
-import * as rawSettings from "@/genfiles/settings.json";
-import { mount } from "@vue/test-utils";
-import { expect } from "chai";
-import { FakeLocalStorage } from "./FakeLocalStorage";
-import { getLocalVue } from "./getLocalVue";
+} from '@/common/models/PlayerModel';
+import { Phase } from '@/common/Phase';
+import { Units } from '@/common/Units';
+import { RecursivePartial } from '@/common/utils/utils';
+import * as rawSettings from '@/genfiles/settings.json';
+import { mount } from '@vue/test-utils';
+import { expect } from 'chai';
+import { FakeLocalStorage } from './FakeLocalStorage';
+import {globalConfig} from './getLocalVue';
 
 const SELECTION_INDEX = 1;
 
 function createPublicPlayer(
-  overrides: Partial<PublicPlayerModel>
+  overrides: Partial<PublicPlayerModel>,
 ): PublicPlayerModel {
   return Object.assign(
     {
@@ -36,18 +37,18 @@ function createPublicPlayer(
       cardsInHandNbr: 0,
       citiesCount: 0,
       coloniesCount: 0,
-      color: "red",
+      color: 'red',
       energy: 0,
       energyProduction: 0,
       fleetSize: 0,
       heat: 0,
       heatProduction: 0,
-      id: "player-1",
+      id: 'player-1',
       influence: 0,
       isActive: false,
       megaCredits: 0,
       megaCreditProduction: 0,
-      name: "Player",
+      name: 'Player',
       noTagsCount: 0,
       plants: 0,
       plantProduction: 0,
@@ -73,14 +74,14 @@ function createPublicPlayer(
       handicap: undefined,
       lastCardPlayed: undefined,
     },
-    overrides
+    overrides,
   ) as PublicPlayerModel;
 }
 
 function createPlayerView(players: PublicPlayerModel[]): PlayerViewModel {
   const playerView: RecursivePartial<PlayerViewModel> = {
-    id: players[0].id ?? "player-1",
-    runId: "run-1",
+    id: players[0].id ?? 'player-1',
+    runId: 'run-1',
     autopass: false,
     cardsInHand: [],
     dealtCorporationCards: [],
@@ -108,7 +109,7 @@ function createPlayerView(players: PublicPlayerModel[]): PlayerViewModel {
 function createProjectCardOptions(): {
   orOptions: OrOptionsModel;
   cardName: CardName;
-} {
+  } {
   const cards: Array<CardModel> = [
     {
       name: CardName.AI_CENTRAL,
@@ -123,9 +124,9 @@ function createProjectCardOptions(): {
   ];
 
   const selectProject: SelectProjectCardToPlayModel = {
-    type: "projectCard",
-    title: "Play project card",
-    buttonLabel: "Play card",
+    type: 'projectCard',
+    title: 'Play project card',
+    buttonLabel: 'Play card',
     cards,
     paymentOptions: {},
     microbes: 0,
@@ -138,30 +139,16 @@ function createProjectCardOptions(): {
 
   return {
     orOptions: {
-      type: "or",
-      title: "Take action",
-      buttonLabel: "Take action",
+      type: 'or',
+      title: 'Take action',
+      buttonLabel: 'Take action',
       options: [selectProject],
     },
     cardName: cards[SELECTION_INDEX].name,
   };
 }
 
-function createRootMock(playerView: PlayerViewModel) {
-  return {
-    playerView,
-    playerkey: 0,
-    screen: "player-home",
-    settings: rawSettings,
-    isServerSideRequestInProgress: false,
-    componentsVisibility: {},
-    showAlert: () => {},
-    updatePlayer: () => {},
-    updateSpectator: () => {},
-  };
-}
-
-describe("TimeWarp", () => {
+describe('TimeWarp', () => {
   let localStorage: FakeLocalStorage;
 
   beforeEach(() => {
@@ -173,32 +160,37 @@ describe("TimeWarp", () => {
     FakeLocalStorage.deregister(localStorage);
   });
 
-  it("keeps selected card highlighted through a playerkey redraw", async () => {
-    const localVue = getLocalVue();
+  it('keeps selected card highlighted through a playerkey redraw', async () => {
     const playerOne = createPublicPlayer({
-      id: "player-1",
-      color: "red" as any,
-      name: "Player 1",
+      id: 'player-1',
+      color: 'red' as any,
+      name: 'Player 1',
       megaCredits: 20,
     });
     const playerTwo = createPublicPlayer({
-      id: "player-2",
-      color: "blue" as any,
-      name: "Player 2",
+      id: 'player-2',
+      color: 'blue' as any,
+      name: 'Player 2',
     });
     const playerView = createPlayerView([playerOne, playerTwo]);
     const { orOptions, cardName } = createProjectCardOptions();
 
+    const withPlayerInputFactory = {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        components: {'player-input-factory': PlayerInputFactory},
+      },
+    };
+
     const wrapper = mount(TimeWarp, {
-      localVue,
-      propsData: {
+      ...withPlayerInputFactory,
+      attachTo: document.body,
+      props: {
         playerView,
         players: playerView.players,
         settings: rawSettings,
         waitingfor: undefined,
-      },
-      mocks: {
-        $root: createRootMock(playerView),
       },
     });
 
@@ -214,7 +206,7 @@ describe("TimeWarp", () => {
     expect(waitingFors.length).to.be.greaterThan(1);
     const timeWarpWaitingFor = waitingFors.at(1);
     const projectComponent = timeWarpWaitingFor.findComponent(
-      SelectProjectCardToPlay
+      SelectProjectCardToPlay,
     );
     const radioInputs = projectComponent.findAll('input[type="radio"]');
     expect(radioInputs.length).to.be.greaterThan(1);
@@ -222,18 +214,16 @@ describe("TimeWarp", () => {
     await projectComponent.vm.$nextTick();
     expect((projectComponent.vm as any).cardName).to.eq(cardName);
 
-    wrapper.destroy();
+    wrapper.unmount();
 
     const remounted = mount(TimeWarp, {
-      localVue,
-      propsData: {
+      ...withPlayerInputFactory,
+      attachTo: document.body,
+      props: {
         playerView,
         players: playerView.players,
         settings: rawSettings,
         waitingfor: undefined,
-      },
-      mocks: {
-        $root: createRootMock(playerView),
       },
     });
 
@@ -243,54 +233,50 @@ describe("TimeWarp", () => {
     expect(remountedWaitingFors.length).to.be.greaterThan(1);
     const remountedTimeWarpWaitingFor = remountedWaitingFors.at(1);
     const remountedProjectComponent = remountedTimeWarpWaitingFor.findComponent(
-      SelectProjectCardToPlay
+      SelectProjectCardToPlay,
     );
     const remountedRadios = remountedProjectComponent.findAll(
-      'input[type="radio"]'
+      'input[type="radio"]',
     );
     expect(remountedRadios.length).to.be.greaterThan(1);
     expect(
-      (remountedRadios.at(SELECTION_INDEX).element as HTMLInputElement).checked
+      (remountedRadios.at(SELECTION_INDEX).element as HTMLInputElement).checked,
     ).to.be.true;
 
-    remounted.destroy();
+    remounted.unmount();
   });
 
-  it("restores waiting-for UI state when stored scroll data is missing", async () => {
-    const localVue = getLocalVue();
+  it('restores waiting-for UI state when stored scroll data is missing', async () => {
     const playerOne = createPublicPlayer({
-      id: "player-1",
-      color: "red" as any,
-      name: "Player 1",
+      id: 'player-1',
+      color: 'red' as any,
+      name: 'Player 1',
     });
     const playerView = createPlayerView([playerOne]);
 
     localStorage.setItem(
-      "timeWarpWaitingForState",
-      JSON.stringify({ inputs: [] })
+      'timeWarpWaitingForState',
+      JSON.stringify({ inputs: [] }),
     );
 
     const wrapper = mount(TimeWarp, {
-      localVue,
-      propsData: {
+      ...globalConfig,
+      props: {
         playerView,
         players: playerView.players,
         settings: rawSettings,
         waitingfor: undefined,
       },
-      mocks: {
-        $root: createRootMock(playerView),
-      },
     });
 
     await wrapper.vm.$nextTick();
 
-    (wrapper.vm as any).$refs.waitingForPanel = document.createElement("div");
+    (wrapper.vm as any).$refs.waitingForPanel = document.createElement('div');
 
     expect(() => {
       (wrapper.vm as any).restoreWaitingForState();
     }).to.not.throw();
 
-    wrapper.destroy();
+    wrapper.unmount();
   });
 });

@@ -110,7 +110,7 @@ export default defineComponent({
 
       if (this.timeWarpQueue) {
         this.timeWarpQueue.push(JSON.parse(JSON.stringify(payload)));
-        this.$emit("queue-updated", this.timeWarpQueue);
+        this.$emit('queue-updated', this.timeWarpQueue);
         return;
       }
 
@@ -261,7 +261,7 @@ export default defineComponent({
     },
     isAboveViewportBottom(element: HTMLElement): boolean {
       const rect = element.getBoundingClientRect();
-      return rect.top >= 0
+      return rect.top >= 0;
     },
     innerHeight(element: HTMLElement): number {
       return element.getBoundingClientRect().height;

@@ -42,7 +42,6 @@
   "Coordinated Raid": "Координований рейд",
   "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(Потребує принаймні 1 колонії в грі. Відправте один зі своїх невикористаних торгових флотів на будь-яку колоніальну плитку. Отримайте торговий бонус та бонус колонії за кожну колонію на цій плитці. Інші гравці не отримують свої бонуси за колонію з цієї дії.)",
 
-  "Crashlanding": "Катастрофа при посадці",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Розмістіть ЦЮ ПЛИТКУ І ОРІЄНТУЙТЕ її на незарезервованому просторі, прилеглому не більше ніж до 1 міста.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Місце катастрофи надає БОНУС ЗА СУМІЖНІСТЬ 1 дані та або 1 сталь або 1 титан.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "При розміщенні Місця катастрофи, отримайте ці бонуси за кожну плитку, яку ви володієте поруч з нею.",
@@ -112,7 +111,7 @@
   "Interplanetary Transport": "Міжпланетний транспорт",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Збільште виробництво M€ на 1 крок за кожну плитку міста поза Землею.)",
 
-  "Kickstarter": "",
+  "Kickstarter": "Кікстартер",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "(Виберіть планетний тег. Ця карта вважається маючи 1 такий тег. Підвищте відповідну планетну доріжку на 3 кроки в загальному.)",
 
   "Last Resort Ingenuity": "Останній варіант винахідливості",
@@ -137,7 +136,6 @@
   "Martian Monuments": "Марсіанські пам'ятники",
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Вимагає, щоб ви володіли містом НА МАРСІ. Збільште виробництво M€ на 1 крок за кожен тег Марсу, який ви володієте (включаючи цей).)",
 
-  "Martian Nature Wonders": "Марсіанські природні дива",
   "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Розмістіть нейтральний куб гравця на незарезервованому місці. На цьому місці не можна розміщувати плитки в цій грі. Зберіть будь-який бонус на цьому місці, але не бонуси з сусідніх місць. Додайте 2 дані на БУДЬ-ЯКУ карту.)",
 
   "Martian Repository": "Марсіанський репозиторій",
@@ -170,7 +168,6 @@
   "(Action: Add 1 animal on this card)": "(Дія: Додати 1 тварину на цю карту)",
   "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(Вимагає 3 символи рослин. Збільшити виробництво рослин на 1 крок і виробництво M€ на 2 кроки.)",
 
-  "Power Plant": "Електростанція",
   "(Increase your heat production 2 steps and your energy production 1 step.)": "(Збільшити виробництво тепла на 2 кроки і виробництво енергії на 1 крок.)",
 
   "Prefabrication of Human Habitats": "Виготовлення житла для людей",

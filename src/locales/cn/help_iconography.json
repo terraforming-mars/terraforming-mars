@@ -9,7 +9,6 @@
     "Space": "太空",
     "Power": "电力",
     "Earth": "地球",
-    "Jovian": "木星",
     "Plant": "植物",
     "Moon": "月亮",
 
@@ -30,8 +29,6 @@
 
     "Tiles": "板块",
     "Greenery": "森林",
-    "City": "城市",
-    "Ocean": "海洋",
     "Special": "特殊",
 
     "Global Parameters": "全球参数",
@@ -45,7 +42,6 @@
     "Terraform Rating (TR)": "改造度 (TR)",
     "Project Card": "项目卡牌",
     "Colony": "殖民地",
-    "Trade": "贸易",
     "Trade Fleet": "贸易舰队",
     "Delegate": "代表",
     "Influence": "影响力",
@@ -123,7 +119,6 @@
     "Hot Keys": "快捷键",
     "Main Board": "主面板",
     "Players Overview Table": "玩家一览面板",
-    "Cards in Hand": "手牌",
-    "Colonies": "殖民地"
+    "Cards in Hand": "手牌"
 
 }

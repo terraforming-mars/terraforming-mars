@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import CardRowComponent from '@/client/components/card/CardRowComponent.vue';
 import {ItemType} from '@/common/cards/render/Types';
 

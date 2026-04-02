@@ -10,7 +10,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default defineComponent({

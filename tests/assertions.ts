@@ -7,6 +7,8 @@ import {ICard} from '../src/server/cards/ICard';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {TileType} from '../src/common/TileType';
 import {Space} from '../src/server/boards/Space';
+import {CardName} from '../src/common/cards/CardName';
+import {toName} from '../src/common/utils/utils';
 
 export function assertIsAddResourceToCard(input: PlayerInput | undefined, count: number, expectedCards: Array<ICard>, card: ICard) {
   const selectCard = cast(input, SelectCard);
@@ -56,4 +58,14 @@ export function assertPlaceTile(player: IPlayer, input: PlayerInput | undefined,
   }
 
   return space;
+}
+
+export function assertSelectStandardProject(input: PlayerInput | undefined, selected: CardName, expectedProjects?: Array<CardName>) {
+  const selectCard = cast(input, SelectCard);
+  if (expectedProjects !== undefined) {
+    expect(selectCard.cards.map(toName)).to.have.members(expectedProjects);
+  }
+  const card = selectCard.cards.find((c) => c.name === selected);
+  expect(card).is.not.undefined;
+  selectCard.cb([card!]);
 }

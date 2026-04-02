@@ -14,7 +14,7 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectResourceModel} from '@/common/models/PlayerInputModel';
 import {SelectResourceResponse} from '@/common/inputs/InputResponse';

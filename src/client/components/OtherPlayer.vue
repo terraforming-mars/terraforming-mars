@@ -35,7 +35,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 import StackedCards from '@/client/components/StackedCards.vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';

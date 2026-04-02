@@ -39,7 +39,7 @@ export class VoltaicMetallurgy extends Card implements IProjectCard, IActionCard
   public action(player: IPlayer) {
     const max = Math.min(player.tags.count(Tag.POWER), player.stock.steel);
     return new SelectAmount(
-      message('Select up to ${1} steel to convert to titanium', (b) => b.number(max)),
+      message('Select up to ${0} steel to convert to titanium', (b) => b.number(max)),
       'Convert Steel', 1, max, false)
       .andThen((amount) => {
         player.stock.deduct(Resource.STEEL, amount);

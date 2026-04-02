@@ -46,7 +46,6 @@
 	"Martian Rails": "Kolej Marsjańska",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Akcja: Wydaj 1 jednostkę energii, aby otrzymać po 1 jednostce M€ za każdy obszar miasta na powierzchni Marsa.",
 
-	"Capital": "Stolica",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Na planszy muszą się znajdować co najmniej 4 obszary oceanów. Umieść ten obszar specjalny na planszy. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję M€ o 5 poziomów.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "Otrzymujesz 1 PZ za każdy obszar oceanu sąsiadujący z tym obszarem.",
 
@@ -154,7 +153,6 @@
 	"Deimos Down": "Upadek Deimosa",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Podnieś temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 8 jednostek roślinności dowolnego gracza.",
 
-	"Asteroid Mining": "Górnictwo Kosmiczne",
     "Increase your titanium production 2 steps.": "Podnieś swoją produkcję tytanu o 2 poziomy.",
 
 	"Food Factory": "Fabryka Żywności",
@@ -273,7 +271,6 @@
     "Increase your energy production 1 step and gain 2 titanium.": "Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 2 jednostki tytanu.",
 
 	"Ice Asteroid": "Asteroida Lodowa",
-    "Place 2 ocean tiles.": "Umieść na planszy 2 obszary oceanów.",
 
 	"Quantum Extractor": "Ekstraktor Kwantowy",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać co najmniej 4 symbole Nauki. Podnieś swoją produkcję energii o 4 poziomy.",
@@ -405,7 +402,6 @@
 	"Urbanized Area": "Obszar Zurbanizowany",
     "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Umieść obszar miasta na planszy, na polu sąsiadującym z co najmniej 2 innymi obszarami miast.",
 
-	"Sabotage": "Sabotaż",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Usuń do 3 jednostek tytanu lub do 4 jednostek stali, lub do 7 M€ dowolnego gracza.",
 
 	"Moss": "Mech",

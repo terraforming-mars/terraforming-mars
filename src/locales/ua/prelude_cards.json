@@ -29,25 +29,16 @@
   "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "ПРИМІТКА ПРО РОЗШИРЕННЯ ФАНАТІВ: Це включає Марс, але не Місяць.",
 
   "Psychrophiles": "Психрофіли",
-  "Action: Add 1 microbe to this card.": "Дія: Додайте 1 мікроб до цієї картки.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Ефект: При оплаті картки рослини, мікроби тут можуть бути використані по 2 M€ кожен.",
-  "Temperature must be -20 C or lower.": "Температура повинна бути -20 °C або нижче.",
 
   "Research Coordination": "Координація Досліджень",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Після того, як вона була зіграна, коли ви виконуєте дію, дикий тег вважається будь-яким тегом за вашим вибором.",
 
   "SF Memorial": "Меморіал Наукової Фантастики",
-  "Draw 1 card.": "Витягніть 1 картку.",
 
   "Martian Survey": "Марсіанське Дослідження",
-  "Oxygen must be 4% or lower. Draw two cards.": "Кисень повинен бути 4% або нижче. Витягніть дві картки.",
 
   "House Printing": "Друк Будинків",
-  "Increase your steel production 1 step.": "Збільште ваше виробництво сталі на 1 крок.",
 
   "Space Hotels": "Космічні Готелі",
-  "Requires 2 Earth tags. Increase M€ production 4 steps.": "Вимагає 2 земних тегів. Збільште ваше виробництво M€ на 4 кроки.",
 
-  "Lava Tube Settlement": "Поселення у Лавовій Трубі",
-  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть плитку міста на ВУЛКАНІЧНІЙ ОБЛАСТІ незалежно від прилеглих міст."
+  "Lava Tube Settlement": "Поселення у Лавовій Трубі"
 }

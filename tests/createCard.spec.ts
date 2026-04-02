@@ -1,6 +1,6 @@
 import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
-import {newCeo, newProjectCard} from '../src/server/createCard';
+import {newCeo, newCorporationCard, newProjectCard} from '../src/server/createCard';
 
 describe('createCard', () => {
   it('newProjectCard: success', () => {
@@ -24,5 +24,11 @@ describe('createCard', () => {
     // expect(newProjectCard('Designed Micr-organisms'as CardName)?.name).to.equal(CardName.DESIGNED_MICROORGANISMS);
     // expect(newProjectCard('Cryo Sleep' as CardName)?.name).to.equal(CardName.CRYO_SLEEP);
     // expect(newProjectCard('City Park' as CardName)?.name).to.equal(CardName.CITY_PARKS);
+
+    // #2839: Fix card names to match printed English versions
+    expect(newCorporationCard('Thorgate' as CardName)?.name).to.equal(CardName.THORGATE);
+    expect(newCorporationCard('Terralabs Research' as CardName)?.name).to.equal(CardName.TERRALABS_RESEARCH);
+    expect(newCorporationCard('Astrodrill' as CardName)?.name).to.equal(CardName.ASTRODRILL);
+    expect(newCorporationCard('EcoLine' as CardName)?.name).to.equal(CardName.ECOLINE);
   });
 });

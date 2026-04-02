@@ -46,7 +46,6 @@
 
 "Corporate Theft": "Yritysvarkaus",
 "Action: Pay 5 M€ to steal ANY 1 resource from another player. If it is a card resource, you may put it on a suitable card.": "TOIMINTO: Maksa 5 M€ varastaaksesi MINKÄ TAHANSA 1 resurssin toiselta pelaajalta. Jos se on korttiresurssi, voit asettaa sen sopivalle kortille.",
-"STEAL": "VARASTA",
 "DOES NOT WORK IN SOLO GAMES": "Ei toimi yksinpeleissä.",
 
 "Crater Survey": "Kraatterikartoitus",
@@ -97,7 +96,6 @@
 "Gain 1 plant for each underground token you own.": "Saat 1 kasvin jokaista lunastettua maanalaista resurssimerkintääsi kohti.",
 
 "Friends in High Places": "Ystäviä korkeissa paikoissa",
-"Effect: When you play a card, you pay 1 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 1 M€ vähemmän.",
 "Requires 2 Earth tags. Gain 1 corruption.": "Vaatii 2 Maa-ympyrää. Saat 1 korruption.",
 
 "Gaia City": "Gaia-kaupunki",
@@ -127,10 +125,8 @@
 "Guerilla Ecologists": "Sissiekologit",
 "Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Vaatii 1 korruption. Käytä 4 kasvia asettaaksesi viheralueen SIVUUTTAEN VIEREKKÄISYYSRAJOITUKSET.",
 
-"Hackers": "Hakkerit",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Vaatii 2 korruptiota. Vähennä jonkun M€-tuotantoa 2 askelta. Lisää M€-tuotantoasi 1 askel jokaista korruptio-yksikköäsi kohti.",
 
-"Hired Raiders": "Palkatut ryöstäjät",
 "Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Varasta 4 M€, plus 1 ylimääräinen M€ jokaista korruptioresurssiasi kohti, keneltä tahansa pelaajalta.",
 
 "Hyperspace Drive Prototype": "Hyperavaruusajurin prototyyppi",
@@ -236,7 +232,6 @@
 
 "Private Military Contractor": "Yksityinen sotilasurakoitsija",
 "Effect: When blocking damage from other players, you can use fighters here as if they were corruption resources. You cannot use them for score bribing or collusion.": "VAIKUTUS: Kun estät vahinkoa muilta pelaajilta, voit käyttää täällä olevia hävittäjiä ikään kuin ne olisivat korruptioresursseja. Et voi käyttää niitä pistemittelöön lahjontaan tai salayhteistyöhön.",
-"Action: Spend 1 titanium to add 1 fighter resource to this card.": "TOIMINTO: Käytä 1 titaania lisätäksesi 1 hävittäjäresurssin tälle kortille.",
 "Add 1 fighter resource to this card.": "Lisää 1 hävittäjäresurssi tälle kortille.",
 
 "Private Resorts": "Yksityiset lomakeskukset",
@@ -264,7 +259,6 @@
 
 "Search for Life Underground": "Maanalaisen elämän etsintä",
 "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "TOIMINTO: Käytä 1 M€ tunnistaaksesi maanalaisen resurssin. Jos siinä on vähintään 1 mikrobi, lisää tiederesurssi tähän.",
-"3 VPs if you have one or more science resources here.": "3 VP jos sinulla on yksi tai useampi tiederesurssi täällä.",
 "Temperature must -18° C or colder.": "Lämpötilan täytyy olla -18° C tai kylmempi.",
 
 "Server Sabotage": "Palvelinsabotaasi",
@@ -282,7 +276,6 @@
 "Space Wargames": "Avaruussotapelit",
 "Action: Spend 1 titanium to put 2 fighters on this card.": "TOIMINTO: Käytä 1 titaania asettaaksesi 2 hävittäjää tälle kortille.",
 "Action: Spend 6 fighter resource on this card to take first player next generation.": "TOIMINTO: Käytä 6 hävittäjäresurssia tältä kortilta tullaksesi ensimmäiseksi pelaajaksesi seuraavassa sukupolvessa.",
-"1 VP for each Jovian tag you have.": "1 VP jokaista Jupiter-ympyrääsi kohti.",
 "Put 4 fighters on this card.": "Aseta 4 hävittäjää tälle kortille.",
 
 "Staged Protests": "Lavasterrokset",
@@ -292,7 +285,6 @@
 "Star Vegas": "Tähti-Vegas",
 "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.": "Vaatii mitkä tahansa 3 kaupunkia pelissä. Aseta kaupunki tilaan joka on varattu toiselle avaruuskaupungille. Saat 2 korruptiota. Lisää M€-tuotantoasi yksi askel jokaista pelissä olevaa kaupunkia kohti.",
 
-"Standard Technology": "Standarditeknologia",
 "REPEAT": "TOISTA",
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "TOIMINTO: Käytä standardiprojektia jota olet jo käyttänyt tällä sukupolvella, sen hinta alennettuna 8 M€:llä.",
 

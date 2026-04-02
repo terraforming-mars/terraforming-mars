@@ -2,7 +2,6 @@
 	"% Venus": "",
 
 	"Stratospheric Birds": "Stratosfærefugler",
-	"Action: Add 1 animal to this card.": "Handling: Legg til 1 dyr på dette kortet",
 	"Requires Venus 12% and that you spend 1 floater from any card.": "Krever Venus 12% og at du bruker 1 svever fra valgfritt kort.",
 
 	"Venusian Plants": "Planter på Venus",
@@ -11,7 +10,6 @@
 	"Extremophiles": "Ekstremofiler",
 	"Action: Add 1 microbe to ANY card.": "Handling: Legg til 1 mikrobe på et valgfritt kort.",
 	"1 VP for every 3rd Microbe on this card.": "1 SP for hver 3. mikrobe på dette kortet.",
-	"Requires 2 science tags.": "Krever 2 vitenskapssymboler.",
 
 	"Mining Quota": "Gruvekvote",
 	"Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Krever Venus-, Jord- og Jupitersymboler. Øk stålproduksjonen din med 2 trinn.",
@@ -50,7 +48,6 @@
 	"Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Krever Venus-, Jord- og Jupitersymboler. Trekk 2 kort.",
 
 	"Atalanta Planitia Lab": "Atalanta-Planitia-Laboratorium",
-	"Requires 3 science tags. Draw 2 cards.": "Krever 3 vitenskapssymboler. Trekk 2 kort.",
 
 	"Rotator Impacts": "Rotatorstøt",
 	"Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Handling: Bruk 6 M€ for å legge til en asteroide-ressurs på dette kortet [TITAN KAN BRUKES].",
@@ -107,8 +104,6 @@
 	"Deuterium Export": "Deuterium-eksport",
 	"Action: Add 1 floater to this card.": "Handling: Legg til 1 svever på dette kortet.",
 	"Action: Spend 1 floater here to increase your energy production 1 step.": "Handling: Bruk 1 svever her for å øke energiproduksjonen din med 1 trinn.",
-	"Remove 1 floater to raise energy production 1 step": "Fjern 1 svever for å øke energiproduksjonen med 1 trinn",
-	"Remove floater": "Fjern svever",
 
 	"Extractor Balloons": "Ekstraktorballonger",
 	"Action: Remove 2 floaters here to raise Venus 1 step.": "Handling: Fjern 2 svevere her for å øke Venus med 1 trinn.",

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
 export default defineComponent({

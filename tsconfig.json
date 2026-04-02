@@ -25,6 +25,7 @@
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,
+        "esModuleInterop": true,
         "allowUnreachableCode": false,
         "baseUrl": ".",
         "paths": {

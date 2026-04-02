@@ -5,7 +5,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.":"AZIONE: COLLOCA UNA COMUNITA' (RAPPRESENTATA DA UN SEGNALINO DEL TUO COLORE) SU UN'AREA NON RISERVATA ADIACENTE AD UNA DELLE TUE TESSERE O AD UNA DELLE AREE CONTENENTI UNA TUA COMUNITA'.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":"EFFETTO: LE AREE CONTENENTI UNA TUA COMUNITA' SONO RISERVATE PER TE. QUANDO COLLOCHI UNA TESSERA IN UNA DI QUELLE AREE, OTTIENI 3 M€.",
 
-  "Astrodrill":"",
+  "AstroDrill":"",
    "You start with 38 M€ and 3 asteroid resources.":"Inizi con 38 M€ e 3 risorse Asteroide.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":"Azione: aggiungi una risorsa Asteroide a una QUALUNQUE carta OPPURE ottieni una delle risorse standard OPPURE rimuovi una risorsa Asteroide da questa carta per ottenere 3 Titanio.",
 
@@ -57,7 +57,6 @@
   "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)":"(Aumenta la tua Produzione di M€ di 2 livelli, aumenta la tua Produzione di Energia di 1 livello, ottieni 3 Piante e colloca una tessera Città.)",
 
   "Magnetic Shield":"Scudo Magnetico",
-  "2 Power":"2 simboli Potenza",
   "(Requires 2 power tags. Raise your TR 4 steps.)":"(Richiede 2 simboli Potenza. Aumenta il tuo TT di 4 livelli.)",
 
   "Meltworks":"Fusioni",
@@ -91,14 +90,11 @@
   "(Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.)": "(Azione: spendi 1 Asteroide da qui per aumentare la Produzione di M€ di 1 livello OPPURE ottenere 2 Titanio.)",
   "(Add 2 asteroids to this card.)": "(Aggiungi 2 Asteroidi a questa carta.)",
 
-  "Energy Market":"Mercato dell'Energia",
   "(Action: Spend 2X M€ to gain X energy.)":"(Azione: spendi 2X M€ per ottenere X risorse Energia.)",
   "(Action: Decrease energy production 1 step to gain 8 M€.)":"(Azione: diminuisci la tua produzione di Energia di 1 livello per ottenere 8 M€.)",
 
   "Penguin":"Pinguini",
   "(Requires 8 oceans.)":"(Richiede 8 Oceani.)",
-  "Requires 8 oceans. 1 VP for each animal on this card":"Richiede 8 Oceani. 1 PV per ogni Animale su questa carta",
-  "1 VP for each animal on this card.":"1 PV per ogni Animale su questa carta.",
 
 
   "Sub-Crust Measurements":"Misurazioni Sottocrosta",

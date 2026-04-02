@@ -20,7 +20,7 @@ import {VastitasBorealisNovaBoard} from './boards/VastitasBorealisNovaBoard';
 import {TerraCimmeriaNovaBoard} from './boards/TerraCimmeriaNovaBoard';
 import {Board} from './boards/Board';
 import {Space} from './boards/Space';
-import {Hollandia} from './boards/Hollandia';
+import {HollandiaBoard} from './boards/HollandiaBoard';
 
 type BoardFactory = (new (spaces: ReadonlyArray<Space>) => MarsBoard) & {newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard};
 
@@ -45,7 +45,7 @@ const boards: Record<BoardName, BoardFactory> = {
   [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
   [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
-  [BoardName.HOLLANDIA]: Hollandia,
+  [BoardName.HOLLANDIA]: HollandiaBoard,
 } satisfies Record<BoardName, BoardFactory>;
 
 export class GameSetup {

@@ -1,6 +1,6 @@
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
 import CardList from '@/client/components/cardlist/CardList.vue';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
@@ -21,7 +21,7 @@ import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
-const dialogPolyfill = require('dialog-polyfill');
+import dialogPolyfill from 'dialog-polyfill';
 
 type Screen = 'admin' |
             'create-game-form' |
@@ -194,7 +194,7 @@ export default defineComponent({
   mounted() {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) {
-      dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+      dialogPolyfill.registerDialog(document.getElementById('alert-dialog') as HTMLDialogElement);
     }
     const currentPathname = getLastPathSegment();
     const app = this as unknown as MainAppData & {updatePlayer(): void; updateSpectator(): void};

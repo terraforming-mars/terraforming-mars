@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-import * as http from 'http';
-import * as fs from 'fs';
+import http from 'http';
+import fs from 'fs';
 import * as responses from '../server/responses';
 
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';

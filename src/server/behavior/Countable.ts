@@ -43,6 +43,9 @@ export type _Countable = {
     undergroundTokens?: NoAttributes,
   },
 
+  /** When counting tiles (cities, oceans, greeneries, moon tiles), only count tiles adjacent to this card's tile. */
+  nextToThis?: NoAttributes,
+
   // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   all?: boolean;
   /**

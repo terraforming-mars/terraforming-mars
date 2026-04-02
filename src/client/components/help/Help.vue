@@ -36,7 +36,7 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import HelpIconology from '@/client/components/help/HelpIconology.vue';
 import HelpPhases from '@/client/components/help/HelpPhases.vue';
 import HelpHotkeys from '@/client/components/help/HelpHotkeys.vue';

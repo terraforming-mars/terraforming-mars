@@ -1,13 +1,13 @@
 {
-  "LAKEFRONT": "MEERESBLICK",
-  "RESORTS": "",
+  "LAKEFRONT": "Meeresblick",
+  "RESORTS": "Urlaubsorte",
   "Lakefront Resorts": "Meeresblick Resorts",
   "You start with 54 M€.": "Du beginnst mit 54 M€.",
   "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "EFFEKT: Wenn ein Ozeanplättchen platziert wird, erhöhe deine M€-Produktion um 1. Dein Platzierungsbonus für an Ozeane angrenzende Plättchen beträgt 3 M€ anstatt 2 M€.",
 
-  "TERRALABS": "",
-  "RESEARCH": "FORSCHUNG",
-  "Terralabs Research": "Terralabs Forschung",
+  "TERRALABS": "Terralabs",
+  "RESEARCH": "Forschung",
+  "TerraLabs Research": "Terralabs Forschung",
   "You start with 14 M€. Lower your TR 1 step.": "Du beginnst mit 14 M€. Senke deine TW um 1.",
   "Effect: Buying cards to hand costs 1 M€.": "EFFEKT: Karten kosten 1 M€, um sie auf die Hand aufzunehmen.",
 

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {isMarsSpace} from '@/common/boards/spaces';
 

@@ -30,7 +30,7 @@ And add this line to the bottom
 
 ```
 # Integration testing for terraforming-mars
-local   all             tfmtest                                 md5
+local   all             tfmtest                                 scram-sha-256
 ```
 
 Save the file and restart postgresql:
@@ -55,14 +55,8 @@ Add this line to `tests/integration/.env`, still assuming the password is "diabl
 POSTGRES_INTEGRATION_TEST_PASSWORD=diablo
 ```
 
-Now you can run the postgresql test.
+Now you can run the postgresql test viz integration tests.
 
 ```
 npm run test:integration
-```
-
-or just
-
-```
-npm run test:postgresql
 ```

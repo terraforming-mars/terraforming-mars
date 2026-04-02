@@ -347,6 +347,13 @@ export abstract class Card implements ICard {
         throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
       }
       return;
+    } else if (typeof(vps) === 'object' && vps.nextToThis !== undefined) {
+      // nextToThis VP needs explicit metadata.victoryPoints for rendering since auto-generation
+      // cannot express adjacency-scoped VP icons.
+      if (properties.metadata.victoryPoints === undefined) {
+        throw new Error('When card.victoryPoints uses nextToThis, metadata.victoryPoints must also be supplied for rendering');
+      }
+      return;
     } else {
       if (properties.metadata.victoryPoints !== undefined) {
         throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');

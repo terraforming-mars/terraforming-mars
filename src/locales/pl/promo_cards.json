@@ -27,7 +27,6 @@
     "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "Podnieś swoją produkcję M€ o 2 poziomy. Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
 
 	"Magnetic Shield": "Tarcza Magnetyczna",
-    "3 Power": "3 symbole Energii",
     "(Requires 3 power tags. Raise your TR 4 steps.)": "Musisz posiadać co najmniej 3 symbole Energii. Podnieś swój WT o 4 poziomy.",
 
 	"Meltworks": "Wytapialnia",
@@ -38,12 +37,10 @@
     "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Otrzymujesz 3 jednostki roślinności. Podnieś temperaturę o 1 poziom i umieść obszar oceanu na planszy.",
 
 	"Diversity Support": "Wspieranie Różnorodności",
-    "9 Resource types": "9 typów zasobów",
     "Requires that you have 9 different types of resources. Gain 1 TR.": "Musisz posiadać 9 różnych jednostek zasobów. Podnieś swój WT o 1 poziom.",
 
 	"Topsoil Contract": "Kontrakt Glebotwórczy",
     "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Efekt trwały: Gdy umieszczasz jednostkę mikrobów na dowolnej karcie otrzymujesz 1 M€.",
-    "Gain 3 plants.": "Otrzymujesz 3 jednostki roślinności.",
 
 	"Imported Nutrients": "Importowane Nawozy",
     "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Otrzymujesz 4 jednostki roślinności. Umieść 4 jednostki mikrobów na dowolnej karcie.",
@@ -92,7 +89,6 @@
     "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję M€ o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
 
 	"Penguins": "Pingwiny",
-    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "Requires 8 oceans.": "Na planszy musi znajdować się co najmniej 8 obszarów oceanów.",
 
 	"Snow Algae": "Zawłotnia Śnieżna",

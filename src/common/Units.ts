@@ -119,12 +119,12 @@ export namespace Units {
     return keys.map((k) => u[k]);
   }
 
-  export const ResourceMap: Record<keyof Units, Resource> = {
+  export const ResourceMap = {
     megacredits: Resource.MEGACREDITS,
     steel: Resource.STEEL,
     titanium: Resource.TITANIUM,
     plants: Resource.PLANTS,
     energy: Resource.ENERGY,
     heat: Resource.HEAT,
-  } as const;
+  } satisfies Record<keyof Units, Resource>;
 }

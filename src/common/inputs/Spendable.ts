@@ -48,7 +48,7 @@ export type SpendableCardResource = typeof SPENDABLE_CARD_RESOURCES[number];
 /** Types of resources spent to pay for things. */
 export type SpendableResource = SpendableStandardResource | SpendableCardResource;
 
-export const CARD_FOR_SPENDABLE_RESOURCE: Record<SpendableCardResource, CardName> = {
+export const CARD_FOR_SPENDABLE_RESOURCE = {
   microbes: CardName.PSYCHROPHILES,
   floaters: CardName.DIRIGIBLES,
   lunaArchivesScience: CardName.LUNA_ARCHIVES,
@@ -57,4 +57,4 @@ export const CARD_FOR_SPENDABLE_RESOURCE: Record<SpendableCardResource, CardName
   auroraiData: CardName.AURORAI,
   graphene: CardName.CARBON_NANOSYSTEMS,
   kuiperAsteroids: CardName.KUIPER_COOPERATIVE,
-} as const;
+} satisfies Record<SpendableCardResource, CardName>;

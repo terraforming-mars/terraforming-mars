@@ -190,8 +190,8 @@ describe('MilestoneAwardSelector', () => {
       (name) => awardManifest.all[name as AwardName].deprecated,
     );
 
-    expect(intersection(milestones, deprecatedMilestones)).is.empty;
-    expect(intersection(awards, deprecatedAwards)).is.empty;
+    expect(intersection(milestones as Array<string>, deprecatedMilestones)).is.empty;
+    expect(intersection(awards as Array<string>, deprecatedAwards)).is.empty;
   });
 
   function choose(options: Partial<GameOptions>) {

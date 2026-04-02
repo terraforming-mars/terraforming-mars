@@ -57,6 +57,9 @@ type Types = {
 } | {
   type: LogMessageDataType.SPACE;
   value: SpaceId,
+} | {
+  type: LogMessageDataType.CARDS;
+  value: ReadonlyArray<CardName>;
 };
 
 export type LogMessageData = Types & {

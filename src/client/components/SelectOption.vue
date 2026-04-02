@@ -1,14 +1,6 @@
 <template>
   <div class="wf-component wf-component--select-option">
     <div v-if="showtitle === true" class="wf-component-title">{{ $t(playerinput.title) }}</div>
-    <div v-if="playerinput.cards || playerinput.greyedOutCards" class="select-option-cards" style="display: flex; flex-wrap: wrap; margin-bottom: 15px; justify-content: center;">
-      <div v-for="card in playerinput.cards" :key="card.name" class="cardbox">
-        <Card :card="card" />
-      </div>
-      <div v-for="card in playerinput.greyedOutCards" :key="card.name" class="cardbox">
-        <Card :card="card" :actionUsed="true" />
-      </div>
-    </div>
     <warnings-component :warnings="playerinput.warnings"></warnings-component>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
@@ -21,7 +13,6 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectOptionModel} from '@/common/models/PlayerInputModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from './WarningsComponent.vue';
-import Card from '@/client/components/card/Card.vue';
 
 export default defineComponent({
   name: 'select-option',
@@ -44,7 +35,6 @@ export default defineComponent({
   components: {
     AppButton,
     WarningsComponent,
-    Card,
   },
   methods: {
     saveData() {

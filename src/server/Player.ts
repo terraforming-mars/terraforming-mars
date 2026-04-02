@@ -651,7 +651,7 @@ export class Player implements IPlayer {
 
     let selectable = this.draftedCards.length;
     if (this.playedCards.has(CardName.MARS_MATHS) && !this.playedCards.has(CardName.LUNA_PROJECT_OFFICE)) {
-      selectable--;
+      selectable = Math.min(selectable, 4);
     }
 
     const cards = copyAndClear(this.draftedCards);

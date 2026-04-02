@@ -84,8 +84,11 @@
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
         <dynamic-title title="Drafted cards" :color="thisPlayer.color" />
-        <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
-          <Card :card="card"/>
+        <div v-for="(card, index) in playerView.draftedCards" :key="card.name" class="cardbox">
+          <Card :card="card" :class="{ 'last-drafted-card' : index === playerView.draftedCards.length - 1 }"/>
+        </div>
+        <div v-for="card in playerView.unchosenDraftCards" :key="card.name" class="cardbox">
+          <Card :card="card" :actionUsed="true"/>
         </div>
       </div>
 
@@ -175,8 +178,11 @@
       </template>
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
         <dynamic-title title="Drafted Cards" :color="thisPlayer.color"/>
-        <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
-            <Card :card="card"/>
+        <div v-for="(card, index) in playerView.draftedCards" :key="card.name" class="cardbox">
+          <Card :card="card" :class="{ 'last-drafted-card' : index === playerView.draftedCards.length - 1 }"/>
+        </div>
+        <div v-for="card in playerView.unchosenDraftCards" :key="card.name" class="cardbox">
+          <Card :card="card" :actionUsed="true"/>
         </div>
       </div>
 

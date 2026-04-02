@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import BetterSqlite3 = require('better-sqlite3');
 
 import {GameIdLedger, IDatabase} from './IDatabase';

@@ -1,6 +1,5 @@
 {
   "game id:": "spillets id: ",
-  "Terraforming Mars": "",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Instruksjoner: For å starte spillet, kopier og del linkene med alle spillerne, og klikk på ditt navn.",
   "Save this page in case you or one of your opponents loses a link.": "Lagre denne siden i tilfelle du eller en av dine motstandere mister en link.",
   "Read our changelog to get the latest updates.": "Les vår endringslogg for å se de siste oppdateringene.",
@@ -32,7 +31,6 @@
   "real-time vp": "Sanntids seierspoeng",
   "fast mode": "Hurtigmodus",
   "Banned cards:": "Forbudte kort: ",
-  "Game Setup Details": "Spillinnstillinger",
   "Board-defined": "Definert av spillebrettet",
   "Require terraforming Venus to end the game": "Krev terraforming av Venus for å fullføre spillet",
   "Require terraforming The Moon to end the game": "Krev terraforming av Månen for å fullføre spillet",

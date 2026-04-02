@@ -66,7 +66,6 @@
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Изисква 4 океански плочки. Увеличете производството си на енергия с 2 стъпки. Поставете тази плочка БЛИЗО ДО океанска плочка.",
 
-  "Magnetic Field Generators": "Генератори на магнитно поле",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Намалете производството на енергия си с 4 стъпки и увеличете производството на растения си с 2 стъпки. Увеличете своя TR с 3 стъпки и поставете тази плочка.",
   "Orbital Cleanup": "Орбитално почистване",
   "Action: Gain 1 M€ per science tag you have.": "Действие: Получете 1 M€ за всяка научна етикет, която притежавате.",
@@ -85,14 +84,10 @@
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Ефект: Когато разыграете карта с основна стойност от 20 M€ или повече, увеличете производството си на M€ с 1 стъпка.",
   "Rego Plastics": "Рего Пластик",
   "Effect: Your steel resources are worth 1 M€ extra.": "Ефект: Вашите стоманени ресурси струват 1 M€ повече.",
-  "OR 2": "ИЛИ 2",
   "Interplanetary Trade": "Междупланетна търговия",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Увеличете производството си на M€ с 1 стъпка за всяка различна етикет, която имате в игра, включително и тази.",
   "Penguins": "Пингвини",
-  "8 Oceans": "8 океана",
-  "Action: Add 1 animal to this card.": "Действие: Добавете 1 животно на тази карта.",
   "Requires 8 oceans.": "Изисква 8 океана.",
-  "1 VP for each animal on this card.": "1 ТП за всяко животно на тази карта.",
   "Snow Algae": "Снежни водорасли",
   "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Изисква 2 океана. Увеличете производството на растения и топлина с по 1 стъпка.",
   "Self-replicating Robots": "Саморепликиращи се роботи",
@@ -108,7 +103,6 @@
   "Energy Market": "Енергийния пазар",
   "Action: Spend 2X M€ to gain X energy.": "Действие: Изразходвайте 2X M€, за да получите X енергия.",
   "Action: Decrease energy production 1 step to gain 8 M€.": "Действие: Намалете производството си на енергия с 1 стъпка, за да получите 8 M€.",
-  "OR": "ИЛИ",
   "Asteroid Rights": "Права на астероиди",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Действие: Изразходвайте 1 M€, за да добавите 1 астероид към ЛЮБА карта.",
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Действие: Изразходвайте 1 астероид оттук, за да увеличите производството на M€ с 1 стъпка ИЛИ получете 2 титаниума.",
@@ -134,7 +128,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "ДЕЙСТВИЕ: ПОСТАВЕТЕ ОБЩНОСТ (ИГРАЧЕСКИ МАРКЕР) НА НЕЗАРЕЗЕРВИРАНА ОБЛАСТ, ПРИЛЕЖАЩА КЪМ ЕДНА ОТ ВАШИТЕ ПЛОЧКИ ИЛИ МАРКИРАНИ ОБЛАСТИ.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "ЕФЕКТ: МАРКИРАНИТЕ ОБЛАСТИ СА ЗАПАЗЕНИ ЗА ВАС. КОГАТО ПОСТАВИТЕ ТАМ ПЛОЧКА, ПОЛУЧАВАТЕ 3 M€",
 
-  "Astrodrill": "Астробур",
+  "AstroDrill": "Астробур",
   "You start with 38 M€ and 3 asteroid resources.": "Започвате с 38 M€ и 3 астероидни ресурса.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Действие: Добавете астероиден ресурс към ЛЮБА карта ИЛИ получете какъвто и да е стандартен ресурс ИЛИ премахнете астероиден ресурс от тази карта, за да получите 3 титаниума.",
 
@@ -145,7 +139,6 @@
   "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Действие: Изразходвайте 1 плуващо тяло оттук, за да получите 1 M€ от всяко плуващо тяло тук, ВКЛЮЧИТЕЛНО ПЛАТЕНОТО. Максимум 5.",
   "Add 1 floater here for every Earth tag you have, including this.": "Добавете 1 плуващо тяло тук за всяка етикет на Земя, която притежавате, включително тази.",
 
-  "Stanford Torus": "Стенфорд Торус",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Поставете плочка за град В КОСМОСА, извън и отделно от планетата.",
 
   "Bactoviral Research": "Бактериовирусни изследвания",

@@ -1,5 +1,5 @@
 import {expect, use} from 'chai';
-import chaiAsPromised = require('chai-as-promised');
+import chaiAsPromised from 'chai-as-promised';
 use(chaiAsPromised);
 import chaiDeepEqualIgnoreUndefined from 'chai-deep-equal-ignore-undefined';
 use(chaiDeepEqualIgnoreUndefined);

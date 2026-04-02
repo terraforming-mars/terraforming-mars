@@ -14,6 +14,10 @@
         @minus="reduceValue(unit)"
         @max="onMaxClicked(unit)">
       </payment-unit-component>
+      <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)" v-bind:key="unit + '-reserve'">
+        (Some ${0} are reserved for the action and unavailable here.)
+      </div>
+
     </template>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -76,7 +80,7 @@ export default defineComponent({
         'auroraiData',
         'kuiperAsteroids',
         'spireScience',
-        'megaCredits',
+        'megacredits',
       ];
     },
   },
@@ -94,7 +98,7 @@ export default defineComponent({
   mounted() {
     nextTick(() => {
       this.setInitialCost();
-      this.payment.megaCredits = this.getMegaCreditsMax();
+      this.payment.megacredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
   },
@@ -102,6 +106,19 @@ export default defineComponent({
     ...PaymentWidgetMixin.methods,
     hasWarning() {
       return this.warning !== undefined;
+    },
+    showReserveWarning(unit: SpendableResource): boolean {
+      const reserveUnits = this.playerinput.reserveUnits;
+      if (reserveUnits === undefined) return false;
+      switch (unit) {
+      case 'megacredits':
+      case 'steel':
+      case 'titanium':
+      case 'plants':
+      case 'heat':
+        return reserveUnits[unit] > 0 && this.canUse(unit);
+      }
+      return false;
     },
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
@@ -112,7 +129,8 @@ export default defineComponent({
       if (!this.canUse(unit)) {
         return 0;
       }
-      const availableUnits = this.getAvailableUnits(unit);
+      const reserve = (this.playerinput.reserveUnits as Partial<Record<SpendableResource, number>>)?.[unit] ?? 0;
+      const availableUnits = Math.max(this.getAvailableUnits(unit) - reserve, 0);
       if (availableUnits === 0) {
         return 0;
       }
@@ -121,7 +139,7 @@ export default defineComponent({
       const targetResourceRate = this.getResourceRate(unit);
 
       // Compute the required minimum quantity needed to contribute.
-      let contributingUnits = Math.ceil(Math.max(cost - this.getAvailableUnits('megaCredits') - mcAlreadyCovered, 0) / targetResourceRate);
+      let contributingUnits = Math.ceil(Math.max(cost - this.getAvailableUnits('megacredits') - mcAlreadyCovered, 0) / targetResourceRate);
       contributingUnits = Math.min(contributingUnits, availableUnits);
       let contributingMCValue = contributingUnits * targetResourceRate;
 
@@ -140,25 +158,25 @@ export default defineComponent({
     setDefaultValues(reserveMegacredits: boolean = false) {
       const cost = this.cost;
 
-      const megaCredits = this.getAvailableUnits('megaCredits');
+      const megacredits = this.getAvailableUnits('megacredits');
 
-      let amountCovered = reserveMegacredits ? megaCredits : 0;
+      let amountCovered = reserveMegacredits ? megacredits : 0;
       for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience', 'kuiperAsteroids'] as const) {
         amountCovered += this.setDefaultValue(amountCovered, unit);
       }
       if (!reserveMegacredits) {
-        this.payment.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+        this.payment.megacredits = Math.min(megacredits, Math.max(cost - amountCovered, 0));
       }
     },
     setMaxMCValue() {
-      this.setMaxValue('megaCredits');
+      this.setMaxValue('megacredits');
       this.setDefaultValues(/* reserveMegacredits */ true);
     },
     canAffordWithMcOnly() {
-      return this.thisPlayer.megaCredits >= this.cost;
+      return this.thisPlayer.megacredits >= this.cost;
     },
     canUse(unit: SpendableResource): boolean {
-      if (unit === 'megaCredits') {
+      if (unit === 'megacredits') {
         return true;
       }
       if (unit === 'titanium') {
@@ -190,11 +208,11 @@ export default defineComponent({
       // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
       //
       // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
-      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
+      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megacredits
       // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
         this.payment.heat = 0;
-        this.payment.megaCredits = 0;
+        this.payment.megacredits = 0;
       }
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
@@ -219,7 +237,7 @@ export default defineComponent({
       this.onsave({type: 'payment', payment: this.payment});
     },
     onMaxClicked(unit: SpendableResource) {
-      if (unit === 'megaCredits') {
+      if (unit === 'megacredits') {
         this.setMaxMCValue();
       } else {
         this.setMaxValue(unit);

@@ -22,6 +22,8 @@ describe('AndOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           title: 'foo',
           options: [{

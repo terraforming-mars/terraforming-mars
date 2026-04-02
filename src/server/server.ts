@@ -4,13 +4,13 @@ require('console-stamp')(
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
 
-import * as https from 'https';
-import * as http from 'http';
-import * as fs from 'fs';
-import * as raw_settings from '../genfiles/settings.json';
-import * as prometheus from 'prom-client';
+import https from 'https';
+import http from 'http';
+import fs from 'fs';
+import raw_settings from '../genfiles/settings.json';
+import prometheus from 'prom-client';
 import * as responses from './server/responses';
-import * as ansi from 'ansi-escape-sequences';
+import ansi from 'ansi-escape-sequences';
 
 import {Database} from './database/Database';
 import {runId, serverId} from './utils/server-ids';

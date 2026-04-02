@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {Chart, registerables} from 'chart.js';
 import {Color} from '@/common/Color';
 import {translateText} from '@/client/directives/i18n';

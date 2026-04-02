@@ -31,7 +31,6 @@
 
   "Red Ships": "",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "행동: 해양 타일과 인접한 자신의 도시/특수 타일의 수만큼 M€ 획득.",
-  "Requires 4% oxygen.": "조건: 산소 농도 4% 이상.",
 
   "Neptunian Power Consultants": "",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "지속 효과: 해양 타일 1장이 배치될 때마다, 5 M€(강철 자원 사용 가능)을 제거하는 것으로 에너지 생산력 1 증가 및 이 카드 위에 수력발전 자원 1개 추가 가능.",
@@ -46,7 +45,6 @@
 
   "Homeostasis Bureau": "",
   "Effect: When you raise the temperature, gain 3 M€.": "지속 효과: 자신이 기온을 1단계 상승시킬 때마다, 3 메가크레딧 획득.",
-  "Increase your heat production 2 steps.": "열 생산력 1 상승.",
 
   "Hermetic Order of Mars": "",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "조건: 산소 농도 4% 이하.) (메가크레딧 생산력 2 상승. 자신의 타일과 인접한 빈 칸의 수만큼 메가크레딧 획득.",
@@ -99,8 +97,6 @@
   "Field-Capped City": "자기장 방호탑 도시",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "에너지 생산력 1증가. 메가크레딧 생산력 2증가. 식물 자원 3개 획득. 도시 타일 1장 배치.",
 
-  "Great Dam": "대형 댐",
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가.",
 
   "Magnetic Shield": "자기장 방호막",
   "3 Power": "에너지 태그 3개 이상",
@@ -170,7 +166,6 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "이 카드도 포함해서 보유한 태그 종류 하나당 메가크레딧 생산력 1증가.",
 
   "Penguins": "펭귄",
-  "Action: Add 1 animal to this card.": "행동: 이 카드 위에 동물 자원 1개 추가.",
   "Requires 8 oceans.": "조건: 해양 타일 8장 이상.",
 
   "Snow Algae": "눈 조류",
@@ -186,7 +181,6 @@
   "Hi-Tech Lab": "첨단기술 연구소",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "행동: 원하는 수만큼 에너지 자원을 소비해 같은 수만큼 카드를 가져와 확인. 그중 1장만 획득하고 나머지는 버림.",
 
-  "Magnetic Field Generators": "자기장 생성기",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
 
   "Mercurian Alloys": "수성합금",
@@ -210,7 +204,6 @@
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가. 해양 타일과 인접한 빈 구역 한 곳에 타일 배치.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "조건: 해양 타일 8장 이상.) (이 카드의 동물 자원 1개당 승점 1점.",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "행동: 2X MC을 소비해서 에너지 자원 X개 획득 또는 에너지 생산력 1감소해서 8MC 획득.",

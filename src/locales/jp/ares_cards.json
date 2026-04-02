@@ -6,7 +6,6 @@
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.). このタイルの隣接ボーナスはこうして生産量を挙げた資源となる.",
 
     "Industrial Center:ares": "工業地帯",
-    "Action: Spend 7 M€ to increase your steel production 1 step.": "アクション：7MC支払い、建材産出+1.",
     "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "都市タイルに隣接するように特殊タイルを配置. このタイルは1建材の隣接ボーナスがある.",
 
     "Marketing Experts": "マーケティングの専門家",
@@ -37,18 +36,13 @@
     "Natural Preserve:ares": "自然保護区",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "条件：酸素4%以下. 他タイルに隣接しないように特殊タイルを配置. このタイルは1MCの隣接ボーナスがある. MC産出+1. ",
 
-    "Ocean Sanctuary": "海洋生物保護区",
-    "1 VP per animal on this card.": "このカード上の1動物毎に1VP.",
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "条件：海洋5枚以上. 特殊タイルを海洋上に配置. このタイルは1動物の隣接ボーナスがある.",
 
     "Nuclear Zone:ares": "核実験場",
     "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "温度+2段階. 特殊タイルを配置. 所有権のあるタイルをこのタイルに隣接して配置する場合、追加で2MCを支払う.",
 
-    "Restricted Area:ares": "立ち入り制限区",
-    "Action: Spend 2 M€ to draw a card.": "アクション：2MC支払い、1ドロー.",
     "Place this tile which grants an ADJACENCY BONUS of 1 card.": "1ドローの隣接ボーナスがある特殊タイルを配置.",
 
-    "Solar Farm": "太陽光発電所",
     "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "2電力の隣接ボーナスがある特殊タイルを配置. これを配置した場所の植物配置ボーナス分、電力産出+1.",
 
     "Ecological Zone:ares": "生態ゾーン",
@@ -59,14 +53,11 @@
     "Bio-Fertilizer Facility": "バイオ肥料生産工場",
     "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "条件：科学タグ1つ以上. 植物産出+1. 2微生物獲得. 1植物と1微生物の隣接ボーナスがある特殊タイルを配置.",
 
-    "Metallic Asteroid": "金属小惑星",
     "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "温度+1段階. 1チタン獲得. 望むならプレイヤー1人から最大4植物除去. 1チタンの隣接ボーナスがある特殊タイルを配置.",
 
-    "Ocean Farm": "海上農場",
     "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "条件：海洋4枚以上. 温熱産出+1. 植物産出+1. 特殊タイルを海洋上に配置. このタイルは1植物の隣接ボーナスがある.",
 
     "Commercial District:ares": "商業特区",
-    "1 VP per adjacent city tile.": "この特殊タイルに隣接する都市タイル1枚毎に1VP.",
     "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "2MCの隣接ボーナスがある特殊タイルを配置. 電力産出-1し、MC産出+4.",
 
     "Ocean City": "海上都市",
@@ -79,9 +70,7 @@
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "温熱産出+4. 海洋予定地に特殊タイルを配置. このタイルは2温熱の隣接ボーナスがある.",
 
     "Capital:ares": "首都",
-    "1 additional VP for each ocean tile adjacent to this city tile.": "首都に隣接する海洋1枚毎に1VP.",
     "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "条件：海洋4枚以上. 2MCの隣接ボーナスがある特殊タイルを配置. 電力産出-2し、MC産出+5.",
-    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 電力産出-2し、MC産出+5.",
 
     "Magnetic Field Generators:ares": "磁場発生装置",
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置. このタイルは1植物と1微生物の隣接ボーナスがある.",

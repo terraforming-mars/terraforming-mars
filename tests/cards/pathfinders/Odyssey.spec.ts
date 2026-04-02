@@ -103,7 +103,7 @@ describe('Odyssey', () => {
     expect(player.playedCards.asArray()).has.members([odyssey, importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megacredits: importOfAdvancedGHG.cost});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -123,7 +123,7 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megacredits: 9});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);

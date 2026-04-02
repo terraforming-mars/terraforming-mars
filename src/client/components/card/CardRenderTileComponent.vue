@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {ICardRenderTile} from '@/common/cards/render/Types';
 import {TileType} from '@/common/TileType';
 
@@ -141,6 +141,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.REY_SKYWALKER]: {}, // This isn't shown on a card
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
+  },
+  [TileType.NEURAL_INSTANCE]: {
+    tile: 'card-tile-neural-instance',
   },
 };
 

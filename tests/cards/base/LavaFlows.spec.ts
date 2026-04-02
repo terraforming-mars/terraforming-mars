@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {IGame} from '../../../src/server/IGame';
-import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -22,13 +21,14 @@ describe('LavaFlows', () => {
   });
 
   it('Cannot play if no available spaces', () => {
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
+    const [first, ...rest] = game.board.volcanicSpaceIds.map((id) => game.board.getSpaceOrThrow(id));
+    for (const space of rest) {
+      game.addTile(player, space, {tileType: TileType.LAVA_FLOWS});
+    }
 
     expect(card.canPlay(player)).is.true;
 
-    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = otherPlayer; // land claim
+    first.player = otherPlayer; // land claim
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -50,15 +50,16 @@ describe('LavaFlows', () => {
     card.play(player);
     runAllActions(game);
     expect(cast(player.popWaitingFor(), SelectSpace).spaces.map(toID))
-      .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS, SpaceName.THARSIS_THOLUS]);
+      .has.members(game.board.volcanicSpaceIds);
 
-    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
+    const [testSpace, ...rest] = game.board.volcanicSpaceIds;
+    game.board.getSpaceOrThrow(testSpace).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
 
     card.play(player);
     runAllActions(game);
     expect(cast(player.popWaitingFor(), SelectSpace).spaces).has.length(4);
 
-    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.CITY};
+    game.board.getSpaceOrThrow(testSpace).tile = {tileType: TileType.CITY};
     card.play(player);
     runAllActions(game);
     expect(cast(player.popWaitingFor(), SelectSpace).spaces).has.length(3);
@@ -66,7 +67,7 @@ describe('LavaFlows', () => {
     card.play(player);
     runAllActions(game);
     expect(cast(player.popWaitingFor(), SelectSpace).spaces.map(toID))
-      .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS]);
+      .has.members(rest);
   });
 
   it('Should play', () => {

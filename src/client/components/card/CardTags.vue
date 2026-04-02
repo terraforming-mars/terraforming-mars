@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import CardTag from '@/client/components/card/CardTag.vue';
 import {Tag} from '@/common/cards/Tag';
 

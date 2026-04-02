@@ -11,22 +11,18 @@
   "Ceres": "",
   "Gain 1 steel production": "Saat 1 terästuotannon",
   "Gain n steel": "Saat n terästä",
-  "Gain 2 steel": "Saat 2 terästä",
 
   "Enceladus": "",
   "Add 3 microbes to ANY card": "Lisää 3 mikrobia MILLE TAHANSA kortille",
   "Add n microbes to ANY card": "Lisää n mikrobia MILLE TAHANSA kortille",
-  "Add 1 microbe to ANY card": "Lisää 1 mikrobi MILLE TAHANSA kortille",
 
   "Europa": "",
   "Place an ocean tile": "Aseta merilaatta",
   "Gain 1 unit of production of the type under the track marker": "Saat 1 yksikön tuotantoa merkin alla olevan tyypin mukaan",
-  "Gain 1 M€": "Saat 1 M€",
 
   "Ganymede": "",
   "Gain 1 plant production": "Saat 1 kasvintuotannon",
   "Gain n plants": "Saat n kasvia",
-  "Gain 1 plant": "Saat 1 kasvin",
 
   "Io": "",
   "Gain 1 heat production": "Saat 1 lämmöntuotannon",
@@ -36,30 +32,23 @@
   "Luna": "",
   "Gain 2 M€ production": "Saat 2 M€-tuotantoa",
   "Gain n M€": "Saat n M€",
-  "Gain 2 M€": "Saat 2 M€",
 
   "Miranda": "",
   "Add 1 animal to ANY card": "Lisää 1 eläin MILLE TAHANSA kortille",
   "Add n animals to ANY card": "Lisää n eläintä MILLE TAHANSA kortille",
-  "Draw 1 card": "Nosta 1 kortti",
 
   "Pluto": "",
-  "Draw 2 cards": "Nosta 2 korttia",
   "Draw n cards": "Nosta n korttia",
   "Draw 1 card and then discard 1 card": "Nosta 1 kortti ja hylkää sitten 1 kortti",
 
   "Titan": "",
   "Add 3 floaters to ANY card": "Lisää 3 kellujaa MILLE TAHANSA kortille",
   "Add n floaters to ANY card": "Lisää n kellujaa MILLE TAHANSA kortille",
-  "Add 1 floater to ANY card": "Lisää 1 kelluja MILLE TAHANSA kortille",
 
   "Triton": "",
-  "Gain 3 titanium": "Saat 3 titaania",
   "Gain n titanium": "Saat n titaania",
-  "Gain 1 titanium": "Saat 1 titaanin",
 
   "Iapetus": "",
-  "Gain 1 TR": "Nosta MKL:ääsi 1 askel",
   "Gain n TR": "Nosta MKL:ääsi n askelta",
   "Pay 1 M€ less for cards this generation": "Maksa 1 M€ vähemmän korteista tämän sukupolven aikana",
 
@@ -82,7 +71,6 @@
   "Draw n cards, keep 1": "Nosta n korttia, pidä 1",
   "Draw 1 card which you may pay to keep": "Nosta 1 kortti jonka voit maksaa pitääksesi",
 
-  "Venus": "",
   "Increase Venus 1 step": "Nosta Venusta 1 askel",
   "Add n resources to ANY Venus card": "Lisää n resurssia MILLE TAHANSA Venus-kortille",
   "Add 1 resource to ANY Venus card": "Lisää 1 resurssi MILLE TAHANSA Venus-kortille",
@@ -102,11 +90,9 @@
   "Erode n spaces adjacent to hazard tiles (gaining placement bonuses)": "Käytä n tilaa vaaralaattojen vierestä (saat sijoitusbonukset)",
   "Gain 1 M€ per hazard tile on Mars": "Saat 1 M€ jokaista vaaralaattaa kohden Marsissa",
 
-  "Select colony tile to remove": "Valitse poistettava siirtokuntalaatta",
   "Colony Bonus": "Siirtokuntabonus",
   "Trade Income": "Kauppatulot",
   "Select where to build a colony": "Valitse siirtokunta",
-  "Remove colony": "Poista siirtokunta",
 
   "Colony Fee": "Siirtokuntamaksu",
   "Trade Income: Gain the indicated production": "Kauppatulot: Saat merkityn tuotannon",
@@ -118,7 +104,6 @@
   "Copy Trade": "Kopioi kauppa",
   "Party": "Puolue",
 
-  "Select one option": "Valitse yksi vaihtoehto",
   "Callisto - (Energy)": "Callisto - (Energia)",
   "Ceres - (Steel)": "Ceres - (Teräs)",
   "Enceladus - (Microbes)": "Enceladus - (Mikrobit)",

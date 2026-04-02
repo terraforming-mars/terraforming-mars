@@ -34,7 +34,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 

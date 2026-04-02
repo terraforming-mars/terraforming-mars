@@ -9,7 +9,7 @@
 const ONE_THIRD = 1/3;
 const TWO_THIRDS = 2/3;
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 
 export type Points = {
   points: number;

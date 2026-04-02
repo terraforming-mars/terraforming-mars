@@ -43,7 +43,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent} from 'vue';
 import {PolicyId} from '@/common/turmoil/Types';
 
 export default defineComponent({

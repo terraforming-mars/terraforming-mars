@@ -114,6 +114,33 @@ describe('SurveyMission', () => {
     expect(player.plants).eq(1);
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
-  // TODO Hazards are playable, but you won't get anything.
-  // TODO Arcadian communities should not interfere with Survey Mission.
+  it('Protected hazard spaces are included in valid triplets', () => {
+    const space10 = board.getSpaceOrThrow('10');
+    space10.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];
+
+    // Place a protected hazard on space 10 (the center of the test area).
+    space10.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: true};
+
+    expect(card.canPlay(player)).is.true;
+
+    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(selectSpace.spaces).to.include(space10);
+
+    selectSpace.cb(space10);
+    expect(player.heat).eq(0);
+    expect(player.plants).eq(0);
+  });
+
+  it('ArcadianCommunities-marked spaces are excluded from valid triplets', () => {
+    // Mark space 04 (part of triplet [4,5,10] only), leaving other triplets valid.
+    const space04 = board.getSpaceOrThrow('04');
+    space04.player = player;
+
+    // Space 04 is excluded but triplets [5,10,11], [10,16,17], [10,11,17] remain.
+    expect(card.canPlay(player)).is.true;
+
+    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(selectSpace.spaces).not.to.include(space04);
+    expect(selectSpace.spaces.map(toSpaceIdDigit)).to.have.members([5, 10, 11, 16, 17]);
+  });
 });

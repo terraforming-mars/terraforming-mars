@@ -79,8 +79,8 @@ export const BONUS_SECONDS_PER_ACTION = 5;
 export const ASIMOV_AWARD_BONUS = 2;
 
 export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua', 'fi'] as const;
-
-export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> = {
+export type LANGUAGE = typeof ALL_LANGUAGES[number];
+export const LANGUAGES: Record<LANGUAGE, [string, string]> = {
   en: ['English', 'English'],
   de: ['Deutsch', 'German'],
   fr: ['Français', 'French'],
@@ -102,3 +102,6 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> =
 
 export const APP_NAME = 'Terraforming Mars';
 export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
+export const DEFAULT_WAITING_FOR_TIMEOUT = 1000;
+export const DEFAULT_LOG_LENGTH = 50;
+export const DEFAULT_URL_ROOT = 'http://localhost:8080';

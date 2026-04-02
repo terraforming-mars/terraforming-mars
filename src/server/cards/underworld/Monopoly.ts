@@ -55,8 +55,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
     return new SelectResource(
       'Select which resource type to steal 2 units from all other players.',
       this.stealableResources(player))
-      .andThen((unitKey) => {
-        const resource = Units.ResourceMap[unitKey];
+      .andThen((resource) => {
         if (player.game.isSoloMode()) {
           player.stock.add(resource, 2, {log: true});
           player.resolveInsuranceInSoloGame();

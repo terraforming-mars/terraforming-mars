@@ -37,7 +37,6 @@
   "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA CHE GIÀ CONTENGA UN'ALTRA TUA COLONIA. Pesca 2 carte.",
 
   "Urban Decomposers": "Decompositori Urbani",
-  "City": "Città",
   "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Richiede che tu abbia in gioco almeno 1 tessera Città e 1 Colonia. Incrementa la tua Produzione di Piante di 1 livello e aggiungi 2 Microbi ad una carta QUALUNQUE.",
 
   "Trading Colony": "Colonia Commerciale",
@@ -71,7 +70,6 @@
   "Gain all your colony bonuses.":"Ottieni tutti i bonus relativi alle tue Colonie.",
 
   "Space Port Colony":"Colonia dello Spazioporto",
-  "Colony":"Colonia",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale.",
   "1 VP per 2 colonies in play.":"1 PV per ogni coppia di Colonie in gioco.",
 
@@ -131,7 +129,6 @@
   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":"Richiede 2 simboli Terra. La prossima carta che giochi durante la Generazione attuale costa 16 M€ in meno.",
 
   "Corona Extractor":"Estrattore della Corona",
-  "4 Science":"4 Scienza",
 
   "Cryo-Sleep":"Crio-Sonno",
   "Effect: When you trade, you pay 1 less resource for it.":"Effetto: quando commerci, paghi 1 risorsa in meno.",

@@ -5,7 +5,7 @@ import {CardName} from '../cards/CardName';
  */
 export const SPENDABLE_STANDARD_RESOURCES = [
   // Standard currency for paying for stuff
-  'megaCredits',
+  'megacredits',
   // Helion corporation can spend heat as M€.
   'heat',
   // Used for cards with building tags

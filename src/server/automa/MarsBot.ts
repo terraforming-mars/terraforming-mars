@@ -34,7 +34,7 @@ export class MarsBot {
   private readonly bonusResolver: MarsBotBonusResolver;
   private readonly tilePlacer: MarsBotTilePlacer;
 
-  /** The current generation's action deck (3 project cards + 1 bonus card). */
+  /** The current generation's action deck (project cards + optional bonus card). */
   public actionDeck: Array<IProjectCard | MarsBotBonusCard> = [];
 
   /** Space where the Neural Instance tile was placed (if any). */
@@ -107,7 +107,9 @@ export class MarsBot {
     const projectCards = this.game.projectDeck.drawN(this.game, numProjectCards);
     const bonusCard = this.bonusDeck.draw();
     const deck: Array<IProjectCard | MarsBotBonusCard> = [...projectCards];
-    if (bonusCard) deck.push(bonusCard);
+    if (bonusCard) {
+      deck.push(bonusCard);
+    }
     inplaceShuffle(deck, this.random);
     this.actionDeck = deck;
   }
@@ -185,24 +187,28 @@ export class MarsBot {
     this.game.playerIsFinishedTakingActions();
   }
 
-  /** Hard mode: on first turn of each gen, if 8 MC and meets milestone conditions, claim. */
+  /** Hard mode: on first turn of each gen, if 8 MC and meets milestone conditions, claim.
+   * MarsBot starts at 0 MC and accumulates from failed actions (5 MC each) and placement bonuses. */
   private hardModeFirstTurnMilestone(): void {
-    if (this.player.actionsTakenThisRound !== 0) return; // Only first turn
-    if (this.turnResolver.mcSupply < 8) return;
+    if (this.player.actionsTakenThisRound !== 0) {
+      return;
+    }
+    if (this.turnResolver.mcSupply < 8) {
+      return;
+    }
+    if (this.game.allMilestonesClaimed()) {
+      return;
+    }
 
     const unclaimed = this.game.milestones.filter((m) => !this.game.milestoneClaimed(m));
-    if (this.game.allMilestonesClaimed()) return;
-
     const claimedCount = this.game.claimedMilestones.length;
-    const canClaimCount = unclaimed.filter((m) => m.canClaim(this.player)).length;
+    const canClaimCount = unclaimed.filter((m) => this.turnResolver.marsBotMeetsMilestone(m)).length;
 
-    let shouldClaim = false;
-    if (claimedCount === 0 && canClaimCount >= 3) shouldClaim = true;
-    if (claimedCount === 1 && canClaimCount >= 2) shouldClaim = true;
-    if (claimedCount === 2 && canClaimCount >= 1) shouldClaim = true;
+    // MarsBot claims when it can fill all 3 milestone slots (needs 3 - claimedCount eligible).
+    const shouldClaim = claimedCount < 3 && claimedCount + canClaimCount >= 3;
 
     if (shouldClaim) {
-      const toClaim = unclaimed.find((m) => m.canClaim(this.player));
+      const toClaim = unclaimed.find((m) => this.turnResolver.marsBotMeetsMilestone(m));
       if (toClaim) {
         this.game.claimedMilestones.push({player: this.player, milestone: toClaim});
         this.turnResolver.mcSupply -= 8;
@@ -280,8 +286,8 @@ export class MarsBot {
         mb.bonusResolver.resolve(bonusCard);
         return true;
       },
-      raiseTemperature: (steps: number) => {
-        mb.game.increaseTemperature(mb.player, steps as 1 | 2 | 3);
+      raiseTemperature: (steps: 1 | 2 | 3) => {
+        mb.game.increaseTemperature(mb.player, steps);
       },
       placeOcean: () => {
         mb.turnResolver.placeOcean();
@@ -524,6 +530,7 @@ export class MarsBot {
 
   // ---- Utilities ----
 
+  /** Type guard to distinguish project cards from bonus cards in the action deck. */
   private isProjectCard(card: IProjectCard | MarsBotBonusCard): card is IProjectCard {
     return 'cost' in card && 'tags' in card;
   }

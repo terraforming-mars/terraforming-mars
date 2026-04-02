@@ -8,14 +8,12 @@ import type {MarsBot} from '../MarsBot';
  * Orchestrates MarsBot corporation lifecycle: selection, setup, cube triggers, per-gen effects.
  */
 export class MarsBotCorpResolver {
-  /**
-   * Select a random corp for MarsBot, excluding the human's corp name.
-   * Returns undefined if no corps are registered.
-   */
-  public static selectCorp(humanCorpName: CardName, rng: Random): IMarsBotCorp | undefined {
+  public static selectCorp(humanCorpName: CardName, rng: Random): IMarsBotCorp {
     const allCorps = getAllMarsBotCorps();
     const eligible = allCorps.filter((c) => c.name !== humanCorpName);
-    if (eligible.length === 0) return undefined;
+    if (eligible.length === 0) {
+      throw new Error('No MarsBot corps registered');
+    }
     return eligible[rng.nextInt(eligible.length)];
   }
 

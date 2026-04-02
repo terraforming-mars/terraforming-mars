@@ -4,7 +4,7 @@ import {BonusCardId, CubeType} from '../../common/automa/AutomaTypes';
 export {CubeType};
 
 export type MarsBotDraftPriority =
-  | { type: 'tags'; tags: ReadonlyArray<Tag> }
+  | { type: 'tags'; tags: Array<Tag> }
   | { type: 'mostExpensive' }
   | { type: 'leastAdvancedTrack' }
   | { type: 'mostTags' };
@@ -73,7 +73,7 @@ export interface MarsBotCorpContext {
   readonly drawAndResolveProjectCard: () => boolean;
   readonly drawAndResolveProjectCardIgnoringFirstNTags: (n: number) => boolean;
   readonly drawAndResolveBonusCard: () => boolean;
-  readonly raiseTemperature: (steps: number) => void;
+  readonly raiseTemperature: (steps: 1 | 2 | 3) => void;
   readonly placeOcean: () => void;
   readonly placeCity: () => void;
   readonly placeGreenery: () => void;

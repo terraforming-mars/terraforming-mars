@@ -41,8 +41,8 @@ export class MarsBotStock extends Stock {
   }
 
   /** MarsBot has mcSupply, not separate resource pools. */
-  public override has(_units: Units): boolean {
-    const total = Units.values(_units).reduce((a, b) => a + b, 0);
+  public override has(units: Units): boolean {
+    const total = Units.values(units).reduce((a, b) => a + b, 0);
     return (this.marsBotRef?.turnResolver.mcSupply ?? 0) >= total;
   }
 

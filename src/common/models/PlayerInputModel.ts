@@ -40,8 +40,6 @@ export type SelectInitialCardsModel = BaseInputModel & {
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
   warnings?: ReadonlyArray<Warning>;
-  cards?: ReadonlyArray<CardModel>;
-  greyedOutCards?: ReadonlyArray<CardModel>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {

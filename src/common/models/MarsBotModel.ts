@@ -1,6 +1,8 @@
 import {DifficultyLevel, TrackAction, CubeType} from '../automa/AutomaTypes';
 import {Tag} from '../cards/Tag';
 import {CardName} from '../cards/CardName';
+import {Color} from '../Color';
+import {MADetail} from '../game/VictoryPointsBreakdown';
 import {GlobalParameter} from '../GlobalParameter';
 
 export type MarsBotTrackModel = {
@@ -19,9 +21,13 @@ export type MarsBotVPModel = {
   mcToVP: number;
   cardVP: number;
   total: number;
+  detailsMilestones: ReadonlyArray<MADetail>;
+  detailsAwards: ReadonlyArray<MADetail>;
 };
 
 export type MarsBotModel = {
+  name: string;
+  color: Color;
   difficulty: DifficultyLevel;
   tracks: ReadonlyArray<MarsBotTrackModel>;
   terraformRating: number;

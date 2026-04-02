@@ -54,6 +54,8 @@ export interface IGame extends Logger {
   resettable: boolean;
   generation: number;
   readonly players: ReadonlyArray<IPlayer>;
+  /** All players including MarsBot (automa). Use this for targeting cards. */
+  readonly allPlayers: ReadonlyArray<IPlayer>;
   readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
 
   /**

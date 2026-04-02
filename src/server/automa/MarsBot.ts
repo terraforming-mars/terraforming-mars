@@ -407,6 +407,8 @@ export class MarsBot {
   public toModel(): MarsBotModel {
     const vp = this.getVictoryPoints();
     const model: MarsBotModel = {
+      name: this.player.name,
+      color: this.player.color,
       difficulty: this.difficulty,
       tracks: this.board.tracks.map((track) => ({
         tags: track.definition.tags,

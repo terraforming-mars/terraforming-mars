@@ -20,10 +20,6 @@ import {MarsBot} from './MarsBot';
 export class MarsBotStock extends Stock {
   private marsBotRef: MarsBot | undefined;
 
-  constructor(player: IPlayer) {
-    super(player);
-  }
-
   public setMarsBot(marsBot: MarsBot): void {
     this.marsBotRef = marsBot;
 
@@ -123,12 +119,33 @@ export class MarsBotStock extends Stock {
 export class MarsBotProduction extends Production {
   private marsBotRef: MarsBot | undefined;
 
-  constructor(player: IPlayer) {
-    super(player);
-  }
-
   public setMarsBot(marsBot: MarsBot): void {
     this.marsBotRef = marsBot;
+
+    // Precompute resource -> track index mapping.
+    const resourceToTrack = new Map<Resource, number>();
+    for (let i = 0; i < marsBot.board.data.length; i++) {
+      for (const res of marsBot.board.data[i].productions) {
+        resourceToTrack.set(res, i);
+      }
+    }
+
+    // Report track position as production so canHaveProductionReduced() works correctly.
+    // Per automa rules, production decrease regresses the corresponding track.
+    // MarsBot is targetable only if the mapped track has room to regress (position > 0).
+    for (const resource of ALL_RESOURCES) {
+      const trackIndex = resourceToTrack.get(resource);
+      Object.defineProperty(this, resource, {
+        get: () => {
+          if (trackIndex === undefined || this.marsBotRef === undefined) {
+            return 0;
+          }
+          return this.marsBotRef.board.tracks[trackIndex].position;
+        },
+        set() { /* no-op */ },
+        configurable: true,
+      });
+    }
   }
 
   public override add(

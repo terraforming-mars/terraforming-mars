@@ -42,7 +42,7 @@ export class MarsBotCorpResolver {
       const humanPlayer = marsBot.humanPlayer;
       const fakeCard = {tags: [...corp.startingTags], name: corp.name} as any;
       for (const effectCard of humanPlayer.playedCards) {
-        effectCard.onCardPlayedByAnyPlayer?.(humanPlayer, fakeCard, marsBot.player);
+        humanPlayer.defer(effectCard.onCardPlayedByAnyPlayer?.(humanPlayer, fakeCard, marsBot.player));
       }
     }
 

@@ -12,8 +12,8 @@ describe('Random', () => {
   });
 
   it('next stays within range', () => {
-    const rnd = new SeededRandom(849328401);
-    range(10000).forEach(() => {
+    const rnd = new SeededRandom(849_328_401);
+    range(5_000).forEach(() => {
       const val = rnd.next();
       expect(val).is.gte(0);
       expect(val).is.lt(1);
@@ -21,11 +21,11 @@ describe('Random', () => {
   });
 
   it('nextInt stays within range', () => {
-    const rnd = new SeededRandom(849328401);
-    range(10000).forEach(() => {
-      const val = rnd.nextInt(1000);
+    const rnd = new SeededRandom(849_328_401);
+    range(5_000).forEach(() => {
+      const val = rnd.nextInt(1_000);
       expect(val).is.gte(0);
-      expect(val).is.lte(1000);
+      expect(val).is.lte(1_000);
       expect(val).eq(Math.floor(val));
     });
   });

@@ -19,6 +19,7 @@ import {inplaceShuffle} from '../utils/shuffle';
 import {IMarsBotCorp, MarsBotTrackCube, MarsBotCorpContext, trackCubeKey} from './MarsBotCorpTypes';
 import {MarsBotCorpResolver} from './corps/MarsBotCorpResolver';
 import {getMarsBotCorp} from './corps/MarsBotCorpRegistry';
+import {SerializedAutomaState} from '../SerializedGame';
 
 /**
  * MarsBot: the automa manager. Owns the board, decks, and coordinates turns.
@@ -442,8 +443,8 @@ export class MarsBot {
 
   // ---- Serialization ----
 
-  public serialize(): import('../SerializedGame').SerializedAutomaState {
-    const state: import('../SerializedGame').SerializedAutomaState = {
+  public serialize(): SerializedAutomaState {
+    const state: SerializedAutomaState = {
       trackPositions: this.board.tracks.map((t) => t.position),
       trackRegressedPositions: this.board.tracks.map((t) => Array.from(t.regressedPositions)),
       mcSupply: this.turnResolver.mcSupply,
@@ -478,7 +479,7 @@ export class MarsBot {
     return state;
   }
 
-  public restoreState(state: import('../SerializedGame').SerializedAutomaState): void {
+  public restoreState(state: SerializedAutomaState): void {
     // Restore track positions
     for (let i = 0; i < state.trackPositions.length && i < this.board.tracks.length; i++) {
       const track = this.board.tracks[i];

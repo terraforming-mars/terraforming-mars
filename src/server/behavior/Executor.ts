@@ -160,7 +160,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.decreaseAnyProduction !== undefined) {
       if (!game.isSoloMode()) {
         const dap = behavior.decreaseAnyProduction;
-        const targets = game.allPlayers.filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+        const targets = game.players.filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
 
         if (targets.length === 0) {
           return false;

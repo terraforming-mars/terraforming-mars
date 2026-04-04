@@ -94,9 +94,6 @@ export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
   public readonly players: ReadonlyArray<IPlayer>;
-  public get allPlayers(): ReadonlyArray<IPlayer> {
-    return this.players;
-  }
   // The API makes this readonly.
   public playersInGenerationOrder: ReadonlyArray<IPlayer> = [];
 
@@ -864,7 +861,6 @@ export class Game implements IGame, Logger {
 
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
-
     this.setNextFirstPlayer();
 
     this.players.forEach((player) => {

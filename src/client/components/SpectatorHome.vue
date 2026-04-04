@@ -79,7 +79,7 @@ import {defineComponent} from 'vue';
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Awards from '@/client/components/Awards.vue';
 import Board from '@/client/components/Board.vue';

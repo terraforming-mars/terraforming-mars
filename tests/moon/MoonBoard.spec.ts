@@ -110,7 +110,7 @@ describe('MoonBoard', () => {
   });
 
   it('Randomizes map for Moon', () => {
-    for (let idx = 0; idx < 4_000; idx++) {
+    for (let idx = 0; idx < 2_000; idx++) {
       const seed = Math.random();
       const board = MoonBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,

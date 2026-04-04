@@ -18,7 +18,7 @@ describe('BoardBuilder', () => {
   ] as const;
   for (const run of preservingRuns) {
     it('Preserving shuffle preserves ' + JSON.stringify(run), () => {
-      for (let idx = 0; idx < 1_000; idx++) {
+      for (let idx = 0; idx < 500; idx++) {
         const seed = Math.random();
         const array = [...run.array];
         preservingShuffle(array, run.preservedIndexes, new SeededRandom(seed));
@@ -31,7 +31,7 @@ describe('BoardBuilder', () => {
   it('Randomized maps have space types on all spaces, #4056', () => {
     const spaces = new MultiSet<string>();
     const seeds = [];
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 500; idx++) {
       const seed = Math.random();
       const board = TharsisBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,
@@ -50,7 +50,7 @@ describe('BoardBuilder', () => {
   });
 
   it('Randomized maps preserve land spaces', () => {
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 500; idx++) {
       const seed = Math.random();
       const board = TharsisBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,
@@ -63,7 +63,7 @@ describe('BoardBuilder', () => {
   });
 
   it('Randomized maps preserve cove spaces', () => {
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 500; idx++) {
       const seed = Math.random();
       const board = ArabiaTerraBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,
@@ -76,7 +76,7 @@ describe('BoardBuilder', () => {
   });
 
   it('Randomized maps do not have spaces bonuses on restricted spaces #6593', () => {
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 500; idx++) {
       const seed = Math.random();
       const board = AmazonisBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,

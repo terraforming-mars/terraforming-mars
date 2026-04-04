@@ -18,6 +18,7 @@ export interface PlayerInput {
      */
     eligibleForDefault?: boolean;
     polling?: boolean;
+    autoTimerSeconds?: number;
 
     cb(...item: any): PlayerInput | undefined;
 
@@ -44,6 +45,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
   public polling?: boolean;
+  public autoTimerSeconds?: number;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;

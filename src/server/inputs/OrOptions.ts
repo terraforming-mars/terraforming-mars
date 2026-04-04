@@ -21,6 +21,9 @@ export class OrOptions extends OptionsInput<undefined> {
     if (initialIdx > -1) {
       model.initialIdx = initialIdx;
     }
+    if (this.autoTimerSeconds !== undefined) {
+      model.autoTimerSeconds = this.autoTimerSeconds;
+    }
     return model;
   }
 

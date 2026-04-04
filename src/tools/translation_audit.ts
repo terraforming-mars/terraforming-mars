@@ -68,7 +68,7 @@ for (const lang of dirs) {
       const content = fs.readFileSync(filename, 'utf8');
       const results = parseJson(content);
       for (const key of results.keys()) {
-        if (results.get(key)!.length > 1) { // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        if ((results.get(key) ?? []).length > 1) {
           const uniqueCount = new Set(results.get(key)).size;
           console.log(filename, '[', uniqueCount, '] [', key, ']');
           errors++;

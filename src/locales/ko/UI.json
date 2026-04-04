@@ -27,7 +27,7 @@
     "terraformRating": "테라포밍 등급",
     "milestones": "업적",
     "Claimed ": "달성 ",
-    " milestone" : " 업적",
+    " milestone": " 업적",
     "greenery": "녹지 형성",
     "city": "도시 건설",
 
@@ -328,7 +328,7 @@
     "Air scrapping (15 M€)": "대기 감쇄 (15 М€)",
     "Buffer Gas (16 M€)": "버퍼 가스 공급 (16 M€)",
     "Build colony (17 M€)": "개척기지 건설 (17 М€)",
-    "Power Plant": "발전소 건설",
+    "Power Plant": "발전소",
     "Aquifer": "지하수 추출",
     "Greenery": "녹지 형성",
     "City": "도시 건설",
@@ -345,7 +345,6 @@
     "supply chain": "공급처",
     "Trade with a colony tile": "위성 타일의 무역사업 수행",
     "(Enceladus - (Microbes)": "(엔셀라두스 - (미생물)",
-
 
     "Login": "로그인",
     "My Games": "내 게임",
@@ -386,12 +385,12 @@
     "go to map": "지도로 이동하기",
 
     "Remove colony": "위성 제거",
-    "Select colony to gain trade income from":  "무역수입을 획득할 위성 타일 선택",
-    "Select colony tile to remove":  "제거할 위성 타일 선택",
-    "Select colony tile to trade with for free":  "비용없이 무역사업을 수행할 위성 타일 선택",
+    "Select colony to gain trade income from": "무역수입을 획득할 위성 타일 선택",
+    "Select colony tile to remove": "제거할 위성 타일 선택",
+    "Select colony tile to trade with for free": "비용없이 무역사업을 수행할 위성 타일 선택",
     "Select where to build the first colony": "건설할 첫 번째 위성을 선택",
     "Select where to build the second colony": "건설할 두 번째 위성을 선택",
-    "Pluto colony bonus. Select a card to discard":  "플루토 위성 타일 보너스로 버릴 카드 선택",
+    "Pluto colony bonus. Select a card to discard": "플루토 위성 타일 보너스로 버릴 카드 선택",
 
     "Select ${0}": "${0} 선택",
     "Select 0": "0 선택",
@@ -484,9 +483,6 @@
     "Select a space on The Moon for ${0}": "${0} 타일을 배치할 달 위의 구역 선택",
     "Select a space to gain its placement bonus": "배치 보너스를 얻을 구역 선택",
     "Select space for ${0}": "${0} 특수 타일을 배치할 구역 선택",
-
-
-
 
     "Select new space for ${0}": "${0} 타일을 배치할 새로운 구역 선택",
     "Select space for Luna Train Station.": "Luna Train Station 타일을 배치할 구역 선택",
@@ -919,13 +915,13 @@
     "Game log": "게임 기록",
     "Pass for this generation": "이번 세대 넘기기",
     "Buy": "구매",
-    "Buy 0" : "0장 구매",
-    "Buy 1" : "1장 구매",
-    "Buy 2" : "2장 구매",
-    "Buy 3" : "3장 구매",
-    "Buy 4" : "4장 구매",
-    "Buy 5" : "5장 구매",
-    "Do not buy a card" : "카드 구매하지 않기",
+    "Buy 0": "0장 구매",
+    "Buy 1": "1장 구매",
+    "Buy 2": "2장 구매",
+    "Buy 3": "3장 구매",
+    "Buy 4": "4장 구매",
+    "Buy 5": "5장 구매",
+    "Do not buy a card": "카드 구매하지 않기",
     "Skip this action": "이 행동 건너뛰기",
     "Keep": "보관",
     "Keep ${0}": "${0}장 보관",
@@ -1164,7 +1160,6 @@
     "63 TR": "63TR",
     "Ok": "확인",
 
-
     "Escape Velocity penalty": "탈주 페널티",
     "Actions taken this game": "이 게임에서 수행한 작업",
     "Show information that can be helpful to players who are still learning the games": "아직 게임을 배우고 있는 플레이어에게 도움이 될 수 있는 정보 표시",
@@ -1201,7 +1196,6 @@
     "Greenery:SP": "",
     "City:SP": "",
 
-
     "Select production to decrease one step and gain 4 resources": "수치를 1 낮춰서 해당 자원 4개를 얻을 생산력 선택",
     "Decrease M€ production": "메가크레딧 생산력 감소",
     "Decrease steel production": "강철 생산력 감소",
@@ -1223,8 +1217,6 @@
     "Increase plants production 1 step": "식물 생산력 1 상승",
     "Increase energy production 1 step": "에너지 생산력 1 상승",
     "Increase heat production 1 step": "열 생산력 1 상승",
-
-
 
     "Official": "공식",
     "Star Wars": "스타워즈",

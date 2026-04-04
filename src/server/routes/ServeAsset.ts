@@ -157,6 +157,8 @@ export class ServeAsset extends Handler {
 
     case 'main.js':
     case 'main.js.map':
+    case 'vendors.js':
+    case 'vendors.js.map':
       return this.toMainFile(urlPath, encodings);
 
     // sw.js is empty. Although not confirmed, it seems sw.js is necessary
@@ -170,6 +172,17 @@ export class ServeAsset extends Handler {
       return {file: 'assets/favicon.ico'};
 
     default:
+      // Serve JS chunks produced by webpack code splitting.
+      if (urlPath.startsWith('chunks/')) {
+        const chunksRoot = path.resolve('./build/chunks');
+        const resolvedFile = path.resolve(path.normalize('build/' + urlPath));
+        if (resolvedFile.startsWith(chunksRoot)) {
+          if (urlPath.endsWith('.js') || urlPath.endsWith('.js.map')) {
+            return this.toMainFile(urlPath, encodings);
+          }
+        }
+      }
+
       if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg') || urlPath.endsWith('.json')) {
         const assetsRoot = path.resolve('./assets');
         const resolvedFile = path.resolve(path.normalize(urlPath));

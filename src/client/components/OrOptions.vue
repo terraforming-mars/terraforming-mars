@@ -116,6 +116,11 @@ export default defineComponent({
   },
   watch: {
     selectedOption(newOption: PlayerInputModel) {
+      if (this.interval) {
+        clearInterval(this.interval);
+        this.interval = 0;
+        this.autoTimerLeft = 0;
+      }
       this.selectedIdx = this.displayedOptions.indexOf(newOption);
       // Clicking the option can shift elements on the page.
       // This preserves the location of the option button the user just clicked by

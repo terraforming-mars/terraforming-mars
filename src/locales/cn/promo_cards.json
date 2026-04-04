@@ -84,9 +84,6 @@
   "Great Dam": "大坝",
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "需要4个海洋板块。提升2点电力产能。将此板块放置在与海洋相邻的位置。",
 
-  "Harvest": "丰收",
-  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "需要你拥有3个绿化板块。获得12M€。",
-
   "Hermetic Order of Mars": "火星秘教",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "需要氧气浓度≤4%。提升2点M€产能。每个与你板块相邻的空地获得1M€。",
 
@@ -95,7 +92,6 @@
 
   "Homeostasis Bureau": "稳态管理局",
   "Effect: When you raise the temperature, gain 3 M€.": "效果：每当你提升温度时，获得3M€。",
-  "Increase your heat production 2 steps.": "提升2点热能产能。",
 
   "Hospitals": "医院",
   "Effect: Each time a city is placed, gain a disease here.": "效果：每当有城市被放置时，在此卡获得1个疾病资源。",
@@ -156,10 +152,6 @@
   "Orbital Cleanup": "轨道清洁",
   "Action: Gain 1 M€ per science tag you have.": "行动：你每有1个科学标志，获得1M€。",
   "Decrease your M€ production 2 steps.": "降低2点M€产能。",
-
-  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "需要任意城市与海洋相邻。提升2点M€产能。",
-
-  "Action: Add 1 animal to this card.": "行动：在此卡添加1个动物资源。",
   "Requires 8 oceans.": "需要8个海洋板块。",
 
   "Potatoes": "土豆",
@@ -170,7 +162,6 @@
 
   "Red Ships": "红色舰队",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "行动：每个与海洋相邻的城市/特殊板块获得1M€。",
-  "Requires 4% oxygen.": "需要4%氧气浓度。",
 
   "Rego Plastics": "表土塑料",
   "Effect: Your steel resources are worth 1 M€ extra.": "效果：你的钢资源价值+1M€。",

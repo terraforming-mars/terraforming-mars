@@ -431,7 +431,6 @@
   "Ecological Zone": "Zona Ecológica",
   "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "Efeito: quando você jogar um ícone de animal ou de planta (incluindo estes dois), adicione 1 animal a esta carta.",
   "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "Requer que você tenha um tile de vegetação. Coloque este tile ADJACENTE A QUALQUER TILE DE VEGETAÇÃO.",
-  "1 VP per 2 animals on this card.": "1 PV por cada 2 animais nesta carta.",
   "THE TILE GRANTS AN ADJACENCY BONUS OF 1 ANIMAL. 1 VP PER 2 ANIMALS ON THIS CARD.": "O TILE CONCEDE UM BÔNUS DE ADJACÊNCIA DE 1 ANIMAL. 1 PV POR CADA 2 ANIMAIS NESTA CARTA.",
 
   "Zeppelins": "Zepelins",
@@ -474,8 +473,6 @@
 
   "Lava Flows": "Fluxos de Lava",
   "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Aumente a temperatura 2 níveis e coloque este tile em THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OU ARSIA MONS.",
-
-  "Power Plant": "Usina Elétrica",
 
   "Mohole Area": "Área Mohole",
   "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Aumente sua produção de calor 4 níveis. Coloque este tile EM UM ÁREA RESERVADA PARA OCEANO.",
@@ -708,7 +705,7 @@
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Requer 2 ícones de Terra. Aumente sua produção de M€ em 4.",
   "Oxygen must be 4% or lower. Draw two cards.": "O nível de oxigênio deve estar em 4% ou menos. Compre 2 cartas.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Depois de jogada, o ícone curinga vale qualquer ícone que você escolher ao fazer uma ação.",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Depois de posta em jogo, quando você realizar uma ação, o ícone curinga passa a ser um ícone qualquer de sua escolha.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Diminua sua produção de eneriga 1 nível e aumente sua produção de M€ 2 níveis. Coloque um tile de cidade numa ÁREA VULCÂNICA, não importando cidades adjacentes.",
   "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efeito: Quando você jogar uma carta de planta, micróbios aqui podem ser usados como 2 M€ cada.",
   "Temperature must be -20 C or lower.": "A temperatura deve ser de -20℃ ou menos."

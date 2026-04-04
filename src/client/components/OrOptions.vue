@@ -1,6 +1,9 @@
 <template>
   <div class='wf-options'>
     <label v-if="showtitle"><div>{{ $t(playerinput.title) }}</div></label>
+    <div v-if="autoTimerLeft > 0" class="text-error" style="margin-bottom: 8px">
+      Auto select in {{ autoTimerLeft }}s
+    </div>
     <label v-if="playerinput.warning !== undefined" class="card-warning"><div>({{ $t(playerinput.warning) }})</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
       <label class="form-radio" ref="optionLabels">
@@ -91,7 +94,25 @@ export default defineComponent({
       radioElementName: 'selectOption' + unique++,
       selectedOption: displayedOptions[selectedIdx],
       selectedIdx,
+      autoTimerLeft: (this.playerinput.autoTimerSeconds || 0),
+      interval: 0,
     };
+  },
+  mounted() {
+    if (this.autoTimerLeft > 0) {
+      this.interval = window.setInterval(() => {
+        this.autoTimerLeft--;
+        if (this.autoTimerLeft <= 0) {
+          clearInterval(this.interval);
+          this.saveData();
+        }
+      }, 1000);
+    }
+  },
+  unmounted() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   },
   watch: {
     selectedOption(newOption: PlayerInputModel) {

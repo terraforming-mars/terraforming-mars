@@ -1478,11 +1478,10 @@ export class Player implements IPlayer {
             .setTitle('Confirm your actions or undo your last action')
             .setButtonLabel('Confirm');
 
+          confirmOptions.autoTimerSeconds = 8;
+
           confirmOptions.options.push(new SelectOption('Confirm', 'Confirm').andThen(() => {
-            this.actionsTakenThisRound = 0;
-            this.availableActionsThisRound = 2;
-            game.resettable = true;
-            game.playerIsFinishedTakingActions();
+            this.finishTakingActions();
             return undefined;
           }));
 
@@ -1492,10 +1491,7 @@ export class Player implements IPlayer {
           return;
         }
 
-        this.actionsTakenThisRound = 0;
-        this.availableActionsThisRound = 2;
-        game.resettable = true;
-        game.playerIsFinishedTakingActions();
+        this.finishTakingActions();
         return;
       }
     }
@@ -1549,6 +1545,13 @@ export class Player implements IPlayer {
   private incrementActionsTaken(): void {
     this.actionsTakenThisRound++;
     this.actionsTakenThisGame++;
+  }
+
+  private finishTakingActions(): void {
+    this.actionsTakenThisRound = 0;
+    this.availableActionsThisRound = 2;
+    this.game.resettable = true;
+    this.game.playerIsFinishedTakingActions();
   }
 
   public /* for testing */ getActions() {

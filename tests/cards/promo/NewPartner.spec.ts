@@ -41,6 +41,17 @@ describe('NewPartner', () => {
     expect(player.playedCards.asArray().every((card) => isPreludeCard(card))).is.true;
   });
 
+  it('Should discard the prelude that was not chosen', () => {
+    game.preludeDeck.drawPile.push(smeltingPlant, donation);
+
+    const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
+
+    expect(selectCard.cards).deep.eq([donation, smeltingPlant]);
+    selectCard.cb([donation]);
+
+    expect(game.preludeDeck.discardPile).to.have.members([smeltingPlant]);
+  });
+
   it('Can play with no playable preludes drawn', () => {
     player.megaCredits = 0;
     // Both of these cards cost MC which the player does not have, and so

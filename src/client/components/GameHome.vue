@@ -18,7 +18,10 @@
             <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
           </li>
         </ul>
-
+        <div class="copy-all-container">
+          <AppButton title="Copy all" size="big" @click="copyAllUrls()"/>
+          <span v-if="isPlayerUrlCopied('all')" class="copied-notice"><span v-i18n>Copied!</span></span>
+        </div>
         <div class="spacing-setup"></div>
 
         <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
@@ -51,12 +54,7 @@ import {playerSymbol} from '@/client/utils/playerSymbol';
 // 4. execute document.execCommand('copy') which does the clipboard thing
 // 5. remove the dummy input
 function copyToClipboard(text: string): void {
-  const input = document.createElement('input');
-  input.setAttribute('value', text);
-  document.body.appendChild(input);
-  input.select();
-  document.execCommand('copy');
-  document.body.removeChild(input);
+  navigator.clipboard.writeText(text);
 }
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
@@ -114,6 +112,14 @@ export default defineComponent({
       const path = window.location.href.replace(/game\?id=.*/, '');
       copyToClipboard(path + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
+    },
+    copyAllUrls(): void {
+      if (this.game === undefined) return;
+      const path = window.location.href.replace(/game\?id=.*/, '');
+      const players = [...this.game.players].sort((a, b) => a.name.localeCompare(b.name));
+      const text = players.map(player => `${player.name} - ${path}${this.getHref(player.id)}`).join('\n\n');
+      copyToClipboard(text);
+      this.urlCopiedPlayerId = 'all';
     },
     isPlayerUrlCopied(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;

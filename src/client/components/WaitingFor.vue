@@ -29,7 +29,7 @@
 
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {playerColorClass} from '@/common/utils/utils';

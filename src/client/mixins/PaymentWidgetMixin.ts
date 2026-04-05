@@ -169,9 +169,11 @@ export const PaymentWidgetMixin = {
       case 'plants':
         if ('available' in model) {
           amount = model.available?.[unit] ?? -1;
-          break;
+        } else {
+          amount = thisPlayer[unit];
         }
-      // eslint-disable-next-line no-fallthrough
+        break;
+
       case 'megacredits':
         amount = thisPlayer[unit];
         break;

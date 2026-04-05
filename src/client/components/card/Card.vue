@@ -163,7 +163,7 @@ export default defineComponent({
     cardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
-    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> {
+    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> | undefined {
       return this.cardInstance.requirements;
     },
     resourceAmount(): number {

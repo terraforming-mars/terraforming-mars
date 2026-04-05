@@ -14,8 +14,6 @@ describe('CardRenderSymbolComponent', () => {
           is: 'symbol',
           type: CardRenderSymbolType.ARROW,
           size: Size.MEDIUM,
-          isIcon: false,
-          isSuperscript: false,
         },
       },
     });

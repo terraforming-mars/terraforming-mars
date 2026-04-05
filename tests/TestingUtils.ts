@@ -108,7 +108,7 @@ export function runNextAction(game: IGame) {
 }
 
 export function forceGenerationEnd(game: IGame) {
-  while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
+  while (game.deferredActions.pop() !== undefined) { /* empty */ }
   game.playersInGenerationOrder.forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
 }

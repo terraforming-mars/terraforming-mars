@@ -1478,7 +1478,7 @@ export class Player implements IPlayer {
             .setTitle('Confirm your actions or undo your last action')
             .setButtonLabel('Confirm');
 
-          confirmOptions.autoTimerSeconds = 8;
+          confirmOptions.autoTimerSeconds = 5;
 
           confirmOptions.options.push(new SelectOption('Confirm', 'Confirm').andThen(() => {
             this.finishTakingActions();

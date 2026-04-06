@@ -88,13 +88,17 @@ export abstract class Draft {
       return;
     }
 
+    const anybodyStillNeedsToDraft = players.some((p) => p.needsToDraft);
+
     for (const player of players) {
       if (player.needsToDraft) {
         this.askPlayerToDraft(player);
+      } else if (anybodyStillNeedsToDraft) {
+        this.askPlayerToRepick(player);
       }
     }
 
-    if (!players.some((p) => p.needsToDraft)) {
+    if (!anybodyStillNeedsToDraft) {
       this.endRound();
     }
   }
@@ -107,6 +111,30 @@ export abstract class Draft {
   /** The player this player is givign their cards to when everybody passes their draft hands */
   private givingTo(player: IPlayer): IPlayer {
     return this.passDirection() === 'after' ? this.game.getPlayerAfter(player) : this.game.getPlayerBefore(player);
+  }
+
+  /**
+   * Ask the player if they want to repick their card.
+   */
+  private askPlayerToRepick(player: IPlayer): void {
+    const giveTo = this.givingTo(player);
+    const option = new SelectOption(
+      message('Passing cards to ${0}. Repick draft card?', (b) => b.player(giveTo)),
+      'Repick',
+      undefined, // warnings
+    );
+    option.polling = true;
+    player.setWaitingFor(
+      option.andThen(() => {
+        const cardsToKeep = this.cardsToKeep(player);
+        player.draftHand.push(...player.draftedCards.splice(-cardsToKeep));
+        player.unchosenDraftCards = [];
+        player.needsToDraft = true;
+        this.askPlayerToDraft(player);
+        this.game.save();
+        return undefined;
+      }),
+    );
   }
 
   /**
@@ -143,23 +171,7 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.players.some((p) => p.needsToDraft)) {
-      const option = new SelectOption(
-        'Repick draft card?',
-        'Repick',
-        undefined, // warnings
-      );
-      option.polling = true;
-      player.setWaitingFor(
-        option.andThen(() => {
-            const cardsToKeep = this.cardsToKeep(player);
-            player.draftHand.push(...player.draftedCards.splice(-cardsToKeep));
-            player.unchosenDraftCards = [];
-            player.needsToDraft = true;
-            this.askPlayerToDraft(player);
-            this.game.save();
-            return undefined;
-          })
-      );
+      this.askPlayerToRepick(player);
       this.game.save();
       return;
     }

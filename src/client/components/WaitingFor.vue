@@ -8,7 +8,7 @@
       {{ $t('Waiting for other players') }}
     </template>
     <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="color in playersWaitingFor" :class="playerColorClass(color, 'bg')" :key="color">&nbsp;&nbsp;&nbsp;</span>)
+      (⌛ <span v-for="player in playersWaitingFor" class="log-player" :class="'player_bg_color_' + player.color" :key="player.color"> {{ player.name }} </span>)
     </template>
   </template>
   <div v-if="waitingfor !== undefined" class="wf-root">
@@ -55,7 +55,7 @@ let documentTitleTimer: number | undefined;
 
 type DataModel = {
   waitingForTimeout: typeof raw_settings.waitingForTimeout,
-  playersWaitingFor: Array<Color>
+  playersWaitingFor: Array<{name: string, color: Color}>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
 }

@@ -84,7 +84,7 @@ describe('CardRenderer', () => {
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.amount).to.equal(6);
       expect(item.size).to.equal(Size.SMALL);
-      expect(item.cancelled).to.be.false;
+      expect(item.cancelled).to.be.undefined;
     });
     it('cancelled', () => {
       const renderer = CardRenderer.builder((b) => b.tr(6, {size: Size.SMALL, cancelled: true}));
@@ -100,7 +100,7 @@ describe('CardRenderer', () => {
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.MEGACREDITS);
       expect(item.amount).to.equal(45);
-      expect(item.showDigit).to.be.false;
+      expect(item.showDigit).to.be.undefined;
       expect(item.amountInside).to.be.true;
     });
     it('size - s', () => {
@@ -108,7 +108,7 @@ describe('CardRenderer', () => {
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.MEGACREDITS);
       expect(item.amount).to.equal(16);
-      expect(item.showDigit).to.be.false;
+      expect(item.showDigit).to.be.undefined;
       expect(item.amountInside).to.be.true;
       expect(item.size).to.equal(Size.SMALL);
     });

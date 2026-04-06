@@ -70,7 +70,11 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        options: {appendTsSuffixTo: [/\.vue$/], transpileOnly: true},
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+          compilerOptions: {module: 'esnext', removeComments: false}
+        },
       },
       {
         test: /\.css$/,
@@ -86,5 +90,19 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     hashFunction: 'xxhash64',
+    publicPath: '/',
+    chunkFilename: 'chunks/[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
 };

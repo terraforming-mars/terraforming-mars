@@ -5,19 +5,20 @@
 import {CardRenderSymbolType} from '../../../common/cards/render/CardRenderSymbolType';
 import {ICardRenderSymbol} from '../../../common/cards/render/Types';
 import {Size} from '../../../common/cards/render/Size';
+import {LiteBoolean} from '../../../common/LiteBoolean';
 
 export class CardRenderSymbol implements ICardRenderSymbol {
   public readonly is = 'symbol';
   public readonly type: CardRenderSymbolType;
   public readonly size: Size;
-  public readonly isIcon: boolean;
-  public readonly isSuperscript: boolean;
+  public readonly isIcon: LiteBoolean;
+  public readonly isSuperscript: LiteBoolean;
 
   private constructor(type: CardRenderSymbolType, options: {size?: Size, isIcon?: boolean, isSuperscript?: boolean}) {
     this.type = type;
     this.size = options.size ?? Size.MEDIUM;
-    this.isIcon = options.isIcon ?? false;
-    this.isSuperscript = options.isSuperscript ?? false;
+    this.isIcon = options.isIcon ? true : undefined;
+    this.isSuperscript = options.isSuperscript ? true : undefined;
   }
 
   public static asterix(size?: Size): CardRenderSymbol {

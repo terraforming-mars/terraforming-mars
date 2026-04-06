@@ -90,6 +90,8 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
+    ['vendors.js', ServeAsset.INSTANCE],
+    ['vendors.js.map', ServeAsset.INSTANCE],
     [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
@@ -122,7 +124,10 @@ function getHandler(pathname: string): IHandler | undefined {
   if (handler !== undefined) {
     return handler;
   }
-  if (pathname.startsWith('assets/') || pathname === 'sw.js') {
+  if (pathname.startsWith('assets/')) {
+    return ServeAsset.INSTANCE;
+  }
+  if (pathname.startsWith('chunks/')) {
     return ServeAsset.INSTANCE;
   }
   return undefined;

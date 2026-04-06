@@ -12,8 +12,6 @@ describe('CardRenderTileComponent', () => {
         item: {
           is: 'tile',
           tile: TileType.CITY,
-          hasSymbol: false,
-          isAres: false,
         },
       },
     });

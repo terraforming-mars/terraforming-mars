@@ -7,8 +7,6 @@
     "Card Tags": "卡牌标志",
     "Building": "建筑",
     "Space": "太空",
-    "Power": "电力",
-    "Earth": "地球",
     "Plant": "植物",
     "Moon": "月亮",
 
@@ -23,7 +21,6 @@
     "Heat": "热能",
     "Animal" : "动物",
     "Microbe": "微生物",
-    "Science": "科学",
     "Floater": "云资源",
     "Asteroid": "小行星",
 
@@ -35,7 +32,6 @@
     "Temperature": "温度",
     "Oxygen": "氧气",
     "Oceans": "海洋",
-    "Venus": "金星",
 
     "Others": "其他",
     "Victory Point (VP)": "胜利点数 (VP)",

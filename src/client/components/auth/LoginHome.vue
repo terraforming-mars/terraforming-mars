@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import {paths} from '@/common/app/paths';
 
 type Data = {

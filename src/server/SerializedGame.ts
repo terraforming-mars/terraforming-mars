@@ -3,6 +3,7 @@ import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
+import {CubeType} from '../common/automa/AutomaTypes';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
@@ -91,7 +92,7 @@ export type SerializedAutomaState = {
     marsBotPlayerId: string;
     // Corporation framework
     corpId?: string;
-    trackCubePositions?: Array<{trackIndex: number, position: number, cubeType: import('../common/automa/AutomaTypes').CubeType}>;
+    trackCubePositions?: Array<{trackIndex: number, position: number, cubeType: CubeType}>;
     triggeredCubePositions?: Array<string>;
     corpSpecificState?: Record<string, unknown>;
     floaterCount?: number;

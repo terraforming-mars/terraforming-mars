@@ -23,7 +23,7 @@
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Увеличете производството си на M€ с 2 стъпки, увеличете производството си на енергия с 1 стъпка, спечелете 3 растения и поставете градска плочка.",
 
   "Magnetic Shield": "Магнитен щит",
-  "(Requires 3 power tags. Raise your TR 4 steps.)": "(Изисква 3 енергийни тагове. Повишава вашия TR с 4 стъпки.)",
+  "Requires 3 power tags. Raise your TR 4 steps.": "Изисква 3 енергийни тагове. Повишава вашия TR с 4 стъпки.",
   "2 Power": "2 Енергия",
 
   "Meltworks": "Стоманолеен завод",
@@ -142,17 +142,17 @@
   "Place a city tile IN SPACE, outside and separate from the planet.": "Поставете плочка за град В КОСМОСА, извън и отделно от планетата.",
 
   "Bactoviral Research": "Бактериовирусни изследвания",
-  "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Вземете 1 карта. Изберете 1 от съграните ви карти и добавете 1 микроб към нея за всяка научна етикет, която имате, включително тази.)",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Вземете 1 карта. Изберете 1 от съграните ви карти и добавете 1 микроб към нея за всяка научна етикет, която имате, включително тази.",
 
   "Harvest": "Събиране",
-  "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Изисква наличие на 3 плочки за озеленяване в игра. Получете 12 M€.)",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Изисква наличие на 3 плочки за озеленяване в игра. Получете 12 M€.",
 
   "16 Psyche": "16 Психе",
-  "(Increase titanium production 2 steps. Gain 3 titanium.)": "(Увеличете производството на титаниум с 2 стъпки. Получете 3 титаниума.)",
+  "Increase titanium production 2 steps. Gain 3 titanium.": "Увеличете производството на титаниум с 2 стъпки. Получете 3 титаниума.",
   "Robot Pollinators": "Роботи-опрашители",
-  "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)": "(Изисква 4% кислород. Увеличете производството на растения си с 1 стъпка. Получете 1 растение за всяка етикет на растение, която имате.)",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Изисква 4% кислород. Увеличете производството на растения си с 1 стъпка. Получете 1 растение за всяка етикет на растение, която имате.",
   "Outdoor Sports": "Външни спортове",
-  "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Изисква наличие на град в съседство с океан. Увеличете производството на M€ си с 2 стъпки.)",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Изисква наличие на град в съседство с океан. Увеличете производството на M€ си с 2 стъпки.",
   "Supercapacitors": "Суперкондензатори",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "ЕФЕКТ: ПРЕВРЪЩАНЕТО НА ЕНЕРГИЯ В ТОПЛИНА ПРИ ПРОИЗВОДСТВОТО Е ОПЦИОНАЛНО ЗА ВСЕКИ ЕНЕРГИЕН РЕСУРС.",
   "Increase M€ production 1 step.": "Увеличете производството на M€ си с 1 стъпка."

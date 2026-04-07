@@ -78,9 +78,14 @@ function getAllTranslations(): {[phrase: string]: Translation} {
 
   if (duplicates.length > 0) {
     for (const {lang, phrase} of duplicates) {
-      console.log(`${lang}: Repeated translation for [${phrase}]`);
+      console.error(`${lang}: Repeated translation for [${phrase}]`);
     }
-    throw new Error(`Found ${duplicates.length} duplicate translation(s)`);
+    const msg = `Found ${duplicates.length} duplicate translation(s)`;
+    if (!process.argv.includes('--allow-duplicates')) {
+      throw new Error(msg);
+    } else {
+      console.error(msg);
+    }
   }
 
   return translations;

@@ -68,18 +68,12 @@ export class MarsBotCorpResolver {
       corp.effect?.onTrackCubeTrigger?.(marsBot.getCorpContext(), trackIndex, position, cube.cubeType);
     }
 
-    // Colony cubes (Pioneer4/Constructor): black cubes at Space #7, #10, Energy #8
-    if (marsBot.hasColonyCubes && MarsBotCorpResolver.isColonyCube(trackIndex, position)) {
+    // Colony cubes (Pioneer4/Constructor): positions set by AutomaGameSetup
+    if (marsBot.hasColonyCubes && marsBot.colonyCubePositions.has(trackCubeKey(trackIndex, position))) {
       const cost = 5;
       marsBot.turnResolver.mcSupply = Math.max(0, marsBot.turnResolver.mcSupply - cost);
-      marsBot.game.log('MarsBot loses ${0} MC and builds a colony (Pioneer4/Constructor cube)', (b) => b.number(cost));
+      marsBot.game.log('MarsBot loses ${0} MC and builds a colony', (b) => b.number(cost));
     }
-  }
-
-  private static isColonyCube(trackIndex: number, position: number): boolean {
-    return (trackIndex === 2 && position === 7) ||
-      (trackIndex === 2 && position === 10) ||
-      (trackIndex === 5 && position === 8);
   }
 
   /**

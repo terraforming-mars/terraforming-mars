@@ -16,15 +16,15 @@
           />
           <p
             :class="getClass(score)"
+            v-text="score.score"
             data-test="player-score"
-          >{{ score.score }}{{ score.claimable ? '✓' : '✗' }}</p>
+          />
       </template>
     </div>
     </div>
 
     <div v-if="showDescription" class="ma-description">
       <span v-i18n>{{ description }}</span>
-      <div v-if="isAutoma && automaRule" class="ma-automa-hint">MarsBot: <span v-i18n>{{ automaRule }}</span></div>
     </div>
   </div>
 </template>
@@ -36,7 +36,6 @@ import {ClaimedMilestoneModel, MilestoneScore} from '@/common/models/ClaimedMile
 import {getMilestone} from '@/client/MilestoneAwardManifest';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 import {Color} from '@/common/Color';
-import {MARSBOT_MILESTONE_DESCRIPTIONS} from '@/common/automa/MarsBotMADescriptions';
 
 export default defineComponent({
   name: 'Milestone',
@@ -51,10 +50,6 @@ export default defineComponent({
     },
     showDescription: {
       type: Boolean,
-    },
-    isAutoma: {
-      type: Boolean,
-      default: false,
     },
   },
   methods: {
@@ -84,9 +79,6 @@ export default defineComponent({
     },
     description(): string {
       return getMilestone(this.milestone.name).description;
-    },
-    automaRule(): string | undefined {
-      return MARSBOT_MILESTONE_DESCRIPTIONS[this.milestone.name];
     },
   },
 });

@@ -297,12 +297,10 @@ export default defineComponent({
       }
     },
     amountAbs(): number {
-      if (this.item.amountInside) return 1;
-      return Math.abs(this.item.amount);
+      return this.item.amountInside ? 1 : Math.abs(this.item.amount);
     },
     itemsToShow(): number {
-      if (this.item.showDigit) return 1;
-      return this.amountAbs;
+      return this.item.showDigit ? 1 : this.amountAbs;
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {

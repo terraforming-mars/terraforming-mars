@@ -60,7 +60,7 @@
     "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "電力産出-1し、MC産出+3. タルシスマップの場合、配置条件を無視して予定地「ノクティス市」へ都市タイルを配置. 他マップの場合は都市タイルを配置.",
 
     "Methane From Titan": "タイタンよりのメタン",
-    "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "条件：酸素2%以上. 温熱産出+2. 植物産出+2.",
+    "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "条件：酸素2%以上. 温熱産出+2. 植物産出+2.",
 
     "Imported Hydrogen": "水素の輸入",
     "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "3植物、3微生物、2動物を獲得. 海洋1枚配置.",
@@ -77,11 +77,11 @@
 
     "Arctic Algae": "極地の藻類",
     "(Effect: When anyone places an ocean tile, gain 2 plants.)": "効果：海洋1枚配置毎に2植物獲得.",
-    "(It must be -12 C or colder to play. Gain 1 plant.)": "条件：温度-12℃以下. 1植物獲得.",
+    "It must be -12 C or colder to play. Gain 1 plant.": "条件：温度-12℃以下. 1植物獲得.",
 
     "Predators": "捕食獣",
     "Action: Remove 1 animal from any card and add it to this card.": "アクション：別カード上の1動物除去し、このカード上に+1動物.",
-    "(Requires 11% oxygen.)": "条件：酸素11%以上.",
+    "Requires 11% oxygen.": "条件：酸素11%以上.",
 
     "Space Station": "宇宙ステーション",
     "Effect: When you play a space card, you pay 2 M€ less for it.": "効果：宇宙タグカードのプレイコスト-2MC.",
@@ -114,7 +114,7 @@
 
     "GHG Producing Bacteria": "温室効果ガス生成バクテリア",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "アクション：このカード上に1微生物追加 または このカード上から2微生物除去し、温度+1段階.",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)":"アクション：2微生物除去し、温度+1段階.",
+    "(Action: Remove 2 microbes to raise temperature 1 step.)": "アクション：2微生物除去し、温度+1段階.",
     "Requires 4% oxygen.": "条件：酸素4%以上.",
 
     "Ants": "蟻",
@@ -122,7 +122,7 @@
     "1 VP per 2 microbes on this card.": "このカード上の2微生物毎に1VP.",
 
     "Release of Inert Gases": "不活性ガスの開放",
-    "(Raise your terraforming rating 2 steps.)": "(TR+2段階.)",
+    "Raise your terraforming rating 2 steps.": "TR+2段階.",
 
     "Nitrogen-Rich Asteroid": "富窒素小惑星",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "TR+2段階. 温度+1段階. もし、植物タグ3つ以上であれば植物産出+4. それ以外の場合は植物産出+1.",
@@ -169,11 +169,11 @@
 
     "Fish": "魚類",
     "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
-    "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "条件：温度+2℃以上. プレイヤー1人の植物産出-1.",
+    "Requires +2 C° or warmer. Decrease any plant production 1 step.": "条件：温度+2℃以上. プレイヤー1人の植物産出-1.",
     "1 VP for each animal on this card.": "このカード上の1動物毎に1VP.",
 
     "Lake Marineris": "マリネリス湖",
-    "(Requires 0° C or warmer. Place 2 ocean tiles.)": "条件：温度0℃以上. 海洋2枚配置.",
+    "Requires 0° C or warmer. Place 2 ocean tiles.": "条件：温度0℃以上. 海洋2枚配置.",
 
     "Small Animals": "小動物",
     "Requires 6% oxygen. Decrease any plant production 1 step.": "条件：酸素6%以上. プレイヤー1人の植物産出-1.",
@@ -181,13 +181,13 @@
     "Kelp Farming": "海藻畑",
     "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.": "条件：海洋6枚以上. 2植物獲得. MC産出+2. 植物産出+3.",
 
-    "Mine": "マグネシウム鉱山",
+    "Mine": "鉱山",
     "Increase your steel production 1 step.": "建材産出+1.",
 
     "Vesta Shipyard": "ヴェスタ造船",
 
     "Beam From A Thorium Asteroid": "トリウム小惑星より電力転送",
-    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "条件：木星タグ1つ以上. 電力産出+3. 温熱産出+3.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "条件：木星タグ1つ以上. 電力産出+3. 温熱産出+3.",
 
     "Mangrove": "マングローブ",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "条件：温度+4℃以上. 海洋予定地に緑地タイルを配置. ",
@@ -263,7 +263,7 @@
     "Increase your M€ production 3 steps.": "MC産出+3.",
 
     "Giant Space Mirror": "巨大宇宙鏡",
-    "(Increase your energy production 3 steps.)": "電力産出+3.",
+    "Increase your energy production 3 steps.": "電力産出+3.",
 
     "Trans-Neptune Probe": "海王星軌道通過探査船",
 
@@ -275,10 +275,10 @@
     "Duplicate only the production box of one of your building cards.": "土建タグカード1枚を選択し、その産出効果をコピー.",
 
     "Grass": "野の草花",
-    "(Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "条件：温度-16℃以上. 3植物獲得. 植物産出+1.",
+    "Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.": "条件：温度-16℃以上. 3植物獲得. 植物産出+1.",
 
     "Heather": "ヒース",
-    "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "条件：温度-14℃以上. 1植物獲得. 植物産出+1.",
+    "Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.": "条件：温度-14℃以上. 1植物獲得. 植物産出+1.",
 
     "Peroxide Power": "過酸化物発電",
     "Decrease your M€ production 1 step and increase your energy production 2 steps.": "MC産出-1し、電力産出+2.",
@@ -293,8 +293,7 @@
     "Increase your titanium production 2 steps and your M€ production 2 steps.": "MC産出+2. チタン産出+2. 木星タグ1つ毎に1VP.",
 
     "Bushes": "低木林",
-    "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.":
-     "条件：温度-10℃以上. 2植物獲得. 植物産出+2",
+    "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "条件：温度-10℃以上. 2植物獲得. 植物産出+2",
 
     "Mass Converter": "質量変換器",
     "Requires 5 science tags. Increase your energy production 6 steps.": "条件：科学タグ5つ以上. 電力産出+6.",
@@ -369,13 +368,13 @@
     "Increase your energy production 2 steps.": "電力産出+2.",
 
     "Farming": "農場",
-    "(Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.)": "温度+4℃以上. 2植物獲得. MC産出+2. 植物産出+2.",
+    "Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.": "温度+4℃以上. 2植物獲得. MC産出+2. 植物産出+2.",
 
     "Dust Seals": "防塵シール",
     "Requires 3 or less ocean tiles.": "条件：海洋3枚以下.",
 
     "Urbanized Area": "メトロポリス",
-    "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "電力産出-1し、MC産出+2. 他の都市タイル2枚以上に隣接するように都市タイルを配置.",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "電力産出-1し、MC産出+2. 他の都市タイル2枚以上に隣接するように都市タイルを配置.",
 
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "望むならプレイヤー1人から最大3チタン または 4建材 または 7MC除去.",
 
@@ -398,7 +397,7 @@
     "Place 1 ocean tile.": "海洋1枚配置.",
 
     "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "効果：植物タグ または 動物タグをプレイ時、このカード上に1動物追加.",
-    "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "条件：緑地を所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "条件：緑地を所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
 
     "Zeppelins": "飛行船",
     "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市タイルの数分、MC産出+1.",
@@ -416,7 +415,7 @@
 
     "Symbiotic Fungus": "共生菌",
     "Action: Add a microbe to ANOTHER card.": "アクション：別カード上に1微生物追加.",
-    "(Requires -14 C° or warmer.)": "条件：温度-14℃以上.",
+    "Requires -14 C° or warmer.": "条件：温度-14℃以上.",
 
     "Extreme-Cold Fungus": "極寒菌",
     "(Action: Gain 1 plant.)": "アクション：1植物獲得.",
@@ -456,7 +455,7 @@
 
     "Herbivores": "草食動物",
     "Effect: When you place a greenery tile, add an animal to this card.": "効果：緑地タイルを配置する毎に、このカード上に1動物追加.",
-    "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "条件：酸素8%以上. このカード上に1動物追加. プレイヤー1人の植物産出-1",
+    "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "条件：酸素8%以上. このカード上に1動物追加. プレイヤー1人の植物産出-1",
 
     "Insects": "昆虫",
     "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "条件：酸素6%以上. 植物タグ1つ毎に植物産出+1.",
@@ -526,10 +525,10 @@
     "Requires 7% oxygen. Increase your energy production 1 step.": "条件：酸素7%以上. 電力産出+1.",
 
     "Tundra Farming": "ツンドラ開墾",
-    "(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.)": "条件：温度-6℃以上. 1植物獲得. 植物産出+1. MC産出+2.",
+    "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.": "条件：温度-6℃以上. 1植物獲得. 植物産出+1. MC産出+2.",
 
     "Aerobraked Ammonia Asteroid": "空中燃焼するアンモニア小惑星",
-    "(Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.)": "(2微生物獲得. 温熱産出+3. 植物産出+1.)",
+    "Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.": "2微生物獲得. 温熱産出+3. 植物産出+1.",
 
     "Magnetic Field Dome": "電磁場ドーム",
     "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.": "TR+1段階. 電力産出-2し、植物産出+1.",
@@ -537,14 +536,14 @@
     "Pets": "愛玩動物",
     "Animals may not be removed from this card": "このカード上の動物は除去されない.",
     "Effect: When any city tile is placed, add an animal to this card.": "効果：都市タイル1枚配置毎にこのカード上に1動物追加.",
-    "(Add 1 animal to this card.)": "このカード上に1動物追加.",
+    "Add 1 animal to this card.": "このカード上に1動物追加.",
     "1 VP per 2 animals here.": "このカード上の2動物毎に1VP.",
 
     "Protected Habitats": "保護棲息域",
     "Opponents may not remove your": "除去無効：あなたの",
 
     "Protected Valley": "保全指定渓谷",
-    "(Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "MC産出+2. 海洋予定地に緑地タイルを配置.",
+    "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "MC産出+2. 海洋予定地に緑地タイルを配置.",
 
     "Satellites": "人工衛星",
     "Increase your M€ production 1 step for each space tag you have, including this one.": "宇宙タグ1つ毎にMC産出+1.",
@@ -577,7 +576,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "条件：酸素6%以上. プレイヤー1人の植物産出-1. 電力産出+2.",
 
     "Livestock": "家畜",
-    "(Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps)": "条件：酸素9%以上. 植物産出-1し、MC産出+2.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "条件：酸素9%以上. 植物産出-1し、MC産出+2.",
 
     "Olympus Conference": "オリンポス会議",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "効果：科学タグをプレイ時、このカード上に1科学リソース追加 または このカード上から1科学リソース除去し、1ドロー.",
@@ -662,25 +661,25 @@
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "条件：科学タグ3つ以上. 電力産出-1.",
 
-  "HYDROGEN TO VENUS":"金星への水素",
+    "HYDROGEN TO VENUS": "金星への水素",
 
-  "Plant Microbe Animal":"植物タグ、微生物タグ、動物タグ.",
-  "max 3 Oceans":"海洋3枚以下.",
-  "2 Power":"電力タグ2つ以上.",
-  "7 Science":"科学タグ7つ以上.",
-  "4 Science":"科学タグ4つ以上.",
-  "2 Cities":"都市タイル2枚以上",
-  "Standard projects":"標準プロジェクト",
+    "Plant Microbe Animal": "植物タグ、微生物タグ、動物タグ.",
+    "max 3 Oceans": "海洋3枚以下.",
+    "2 Power": "電力タグ2つ以上.",
+    "7 Science": "科学タグ7つ以上.",
+    "4 Science": "科学タグ4つ以上.",
+    "2 Cities": "都市タイル2枚以上",
+    "Standard projects": "標準プロジェクト",
 
-  "Requires 2 Earth tags. Increase M€ production 4 steps.":"条件：地球タグ2つ以上. MC産出+4.",
-  "Oxygen must be 4% or lower. Draw two cards.":"条件：酸素4%以下. 2ドロー.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
-  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
-  "Temperature must be -20 C or lower.":"条件：温度-20℃以下.",
-  "Increase your energy production 1 step": "電力産出+1.",
-  "Increase your energy production 2 steps": "電力産出+2.",
-  "Increase your energy production 3 steps": "電力産出+3.",
-  "Increase your plant production 1 step": "植物産出+1.",
-  "Select card to add 2 microbes": "2微生物獲得."
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "条件：地球タグ2つ以上. MC産出+4.",
+    "Oxygen must be 4% or lower. Draw two cards.": "条件：酸素4%以下. 2ドロー.",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
+    "Temperature must be -20 C or lower.": "条件：温度-20℃以下.",
+    "Increase your energy production 1 step": "電力産出+1.",
+    "Increase your energy production 2 steps": "電力産出+2.",
+    "Increase your energy production 3 steps": "電力産出+3.",
+    "Increase your plant production 1 step": "植物産出+1.",
+    "Select card to add 2 microbes": "2微生物獲得."
 }

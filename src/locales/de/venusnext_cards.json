@@ -105,8 +105,6 @@
   "Deuterium Export": "Deuterium-Export",
   "Action: Add 1 floater to this card.": "AKTION: Füge dieser Karte 1 Schweber hinzu.",
   "Action: Spend 1 floater here to increase your energy production 1 step.": "AKTION: Entferne 1 Schweber von dieser Karte, um deine Energie-Produktion um 1 zu erhöhen.",
-  "Remove 1 floater to raise energy production 1 step": "Entferne 1 Schweber, um deine Energie-Produktion um 1 zu erhöhen",
-  "Remove floater": "Entferne Schweber",
 
   "Extractor Balloons": "Extraktionsballons",
   "Action: Remove 2 floaters here to raise Venus 1 step.": "AKTION: Entferne 2 Schweber von dieser Karte, um die Venuswertung um 2% zu erhöhen.",
@@ -164,7 +162,7 @@
   "Requires Venus 10%.": "Erfordert Venuswertung von 10%.",
 
   "Luxury Foods": "Luxusnahrung",
-  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "(Erfordert, dass du ein Venus-, ein Erd- und ein Jupitersymbol besitzt.)",
+  "Requires that you have a Venus tag, an Earth tag and a Jovian tag.": "Erfordert, dass du ein Venus-, ein Erd- und ein Jupitersymbol besitzt.",
 
   "Neutralizer Factory": "Neutralisationsfabrik",
   "Requires Venus 10%. Increase the Venus track 1 step.": "Erfordert Venuswertung von 10%. Erhöhe die Venuswertung um 2%.",

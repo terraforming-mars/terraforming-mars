@@ -273,7 +273,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';

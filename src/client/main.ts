@@ -1,11 +1,12 @@
-import {createApp} from 'vue';
+import {createApp, defineAsyncComponent} from 'vue';
 
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import App from '@/client/components/App';
-import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
+
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
+const PlayerInputFactory = defineAsyncComponent(() => import(/* webpackChunkName: "player-input" */ '@/client/components/PlayerInputFactory.vue'));
 
 declare global {
   interface Window {

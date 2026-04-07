@@ -49,9 +49,15 @@ export abstract class Draft {
     } else {
       arrays.push(...this.game.players.map((player) => player.draftHand));
       if (this.passDirection() === 'after') {
-        arrays.unshift(arrays.pop()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        const array = arrays.pop();
+        if (array) {
+          arrays.unshift(array);
+        }
       } else {
-        arrays.push(arrays.shift()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        const array = arrays.shift();
+        if (array) {
+          arrays.push(array);
+        }
       }
     }
 

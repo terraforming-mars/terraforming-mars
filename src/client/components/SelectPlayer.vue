@@ -4,7 +4,7 @@
     <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
       <input type="radio" v-model="selectedPlayer" :value="player" />
       <i class="form-icon"></i>
-      <SelectPlayerRow :player="players.find((otherPlayer) => otherPlayer.color === player)"></SelectPlayerRow>
+      <SelectPlayerRow :player="players.find((otherPlayer) => otherPlayer.color === player)" :fallbackName="playerView?.game?.marsBot?.name"></SelectPlayerRow>
     </label>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
@@ -15,7 +15,7 @@
 import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
@@ -30,6 +30,9 @@ export default defineComponent({
     players: {
       type: Array as () => Array<PublicPlayerModel>,
       required: true,
+    },
+    playerView: {
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => SelectPlayerModel,

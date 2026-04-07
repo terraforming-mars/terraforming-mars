@@ -1,5 +1,5 @@
 <template>
-  <span>{{player === undefined ? "" : player.name}}</span>
+  <span>{{playerName}}</span>
 </template>
 
 <script lang="ts">
@@ -13,6 +13,15 @@ export default defineComponent({
     player: {
       type: Object as () => PublicPlayerModel | undefined,
       required: true,
+    },
+    fallbackName: {
+      type: String,
+      default: '',
+    },
+  },
+  computed: {
+    playerName(): string {
+      return this.player?.name ?? this.fallbackName;
     },
   },
 });

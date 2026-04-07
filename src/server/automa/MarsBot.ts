@@ -65,6 +65,9 @@ export class MarsBot {
   /** Whether colony cubes are placed (Pioneer4/Constructor in game). */
   public hasColonyCubes: boolean = false;
 
+  /** Colony cube positions (set by AutomaGameSetup when Pioneer4/Constructor in game). */
+  public colonyCubePositions: Set<string> = new Set();
+
   /** Corp-specific state (M€ on card, resources, cubes, etc.). */
   public corpSpecificState: Map<string, number> = new Map();
 
@@ -422,6 +425,8 @@ export class MarsBot {
       bonusDeckSize: this.bonusDeck.drawPile.length,
       vpBreakdown: vp,
       instantWin: this.isInstantWin(),
+      globalParameterSteps: this.player.globalParameterSteps,
+      vpByGeneration: this.vpByGeneration,
     };
     if (this.corp !== undefined) {
       model.corpName = this.corp.name as CardName;
@@ -436,8 +441,6 @@ export class MarsBot {
       model.mcPerVP = mcPerVP;
       model.mcVP = Math.floor(this.turnResolver.mcSupply / mcPerVP);
     }
-    model.globalParameterSteps = this.player.globalParameterSteps;
-    model.vpByGeneration = this.vpByGeneration;
     return model;
   }
 

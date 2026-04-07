@@ -35,12 +35,12 @@ export type MarsBotModel = {
   actionDeckSize: number;
   bonusDeckSize: number;
   vpBreakdown: MarsBotVPModel;
-  instantWin?: boolean;
+  instantWin: boolean;
   corpName?: CardName;
   corpDescription?: string;
   trackCubes?: ReadonlyArray<{trackIndex: number, position: number, cubeType: CubeType}>;
   mcPerVP?: number;
   mcVP?: number;
-  globalParameterSteps?: Record<GlobalParameter, number>;
-  vpByGeneration?: ReadonlyArray<number>;
+  globalParameterSteps: Record<GlobalParameter, number>;
+  vpByGeneration: ReadonlyArray<number>;
 };

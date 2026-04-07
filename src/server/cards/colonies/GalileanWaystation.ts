@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -27,5 +28,11 @@ export class GalileanWaystation extends Card implements IProjectCard {
         }),
       },
     });
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    // Automa: use half MarsBot's Jovian track position instead of full
+    player.game.automaHooks?.adjustGalileanWaystation(player);
+    return undefined;
   }
 }

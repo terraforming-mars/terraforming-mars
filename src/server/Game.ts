@@ -81,8 +81,6 @@ import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
-import {AutomaGameHooks} from './automa/AutomaGameHooks';
-import {AutomaGameSetup} from './automa/AutomaGameSetup';
 
 // Can be overridden by tests
 
@@ -96,14 +94,6 @@ export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
   public readonly players: ReadonlyArray<IPlayer>;
-  private _marsBotPlayer: IPlayer | undefined;
-  public get allPlayers(): ReadonlyArray<IPlayer> {
-    const marsBotPlayer = this.marsBot?.player ?? this._marsBotPlayer;
-    if (marsBotPlayer !== undefined) {
-      return [...this.players, marsBotPlayer];
-    }
-    return this.players;
-  }
   // The API makes this readonly.
   public playersInGenerationOrder: ReadonlyArray<IPlayer> = [];
 
@@ -191,11 +181,6 @@ export class Game implements IGame, Logger {
 
   public underworldDraftEnabled = true;
 
-  public automaHooks: AutomaGameHooks | undefined;
-
-  // Backward compat — marsBot accessor for ServerModel and tests
-  public get marsBot() { return this.automaHooks?.marsBot; }
-
   private constructor(
     id: GameId,
     players: Array<IPlayer>,
@@ -208,19 +193,16 @@ export class Game implements IGame, Logger {
     corporationDeck: CorporationDeck,
     preludeDeck: PreludeDeck,
     ceoDeck: CeoDeck,
-    tags: ReadonlyArray<Tag>,
-    marsBotPlayer?: IPlayer) {
+    tags: ReadonlyArray<Tag>) {
     this.id = id;
     this.gameOptions = {...gameOptions};
     this.players = players;
-    this._marsBotPlayer = marsBotPlayer;
     const playerIds = players.map(toID);
-    const allPlayerIds = this.allPlayers.map(toID);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
     }
-    if (allPlayerIds.includes(activePlayer) === false) {
-      throw new Error('Cannot find active player ' + activePlayer + ' in [' + allPlayerIds + ']');
+    if (playerIds.includes(activePlayer) === false) {
+      throw new Error('Cannot find active player ' + activePlayer + ' in [' + playerIds + ']');
     }
     if (new Set(playerIds).size !== players.length) {
       throw new Error('Duplicate player found: [' + playerIds + ']');
@@ -285,9 +267,6 @@ export class Game implements IGame, Logger {
       };
     }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
-    if (gameOptions.automaOption) {
-      AutomaGameSetup.sanitizeGameOptions(gameOptions);
-    }
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
@@ -301,11 +280,7 @@ export class Game implements IGame, Logger {
     const corporationDeck = new CorporationDeck(gameCards.getCorporationCards(), [], rng);
     corporationDeck.shuffle(gameOptions.customCorporationsList);
 
-    let preludeCards = gameCards.getPreludeCards();
-    if (gameOptions.automaOption) {
-      preludeCards = AutomaGameSetup.filterPreludeCards(preludeCards, gameOptions);
-    }
-    const preludeDeck = new PreludeDeck(preludeCards, [], rng);
+    const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
     preludeDeck.shuffle(gameOptions.customPreludes);
 
     const ceoDeck = new CeoDeck(gameCards.getCeoCards(), [], rng);
@@ -322,11 +297,13 @@ export class Game implements IGame, Logger {
       }
     }
 
-    if (players.length === 1 && !gameOptions.automaOption) {
+    if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.preludeDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
+
+      // Single player game player starts with 14TR
       players[0].setTerraformRating(14);
     }
 
@@ -342,10 +319,6 @@ export class Game implements IGame, Logger {
     const {milestones, awards} = chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestones.map(milestoneManifest.createOrThrow);
     game.awards = awards.map(awardManifest.createOrThrow);
-    if (gameOptions.automaOption) {
-      game.milestones = AutomaGameSetup.filterMilestones(game.milestones, gameOptions);
-      game.awards = AutomaGameSetup.filterAwards(game.awards, gameOptions);
-    }
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
@@ -365,9 +338,9 @@ export class Game implements IGame, Logger {
       game.underworldData = UnderworldExpansion.initialize(rng);
     }
 
-    if (players.length === 1 && gameOptions.automaOption) {
-      game.automaHooks = AutomaGameSetup.setup(game, players[0], gameOptions, game.rng);
-    } else if (players.length === 1) {
+    // and 2 neutral cities and forests on board
+    if (players.length === 1) {
+      //  Setup solo player's starting tiles
       GameSetup.setupNeutralPlayer(game);
     }
 
@@ -527,20 +500,16 @@ export class Game implements IGame, Logger {
     if (this.turmoil !== undefined) {
       result.turmoil = this.turmoil.serialize();
     }
-    if (this.automaHooks !== undefined) {
-      result.automaState = this.automaHooks.serialize();
-    }
     return result;
   }
 
   public isSoloMode() :boolean {
-    if (this.automaHooks !== undefined) return false;
     return this.players.length === 1;
   }
 
   // Function to retrieve a player by it's id
   public getPlayerById(id: PlayerId): IPlayer {
-    const player = this.allPlayers.find((p) => p.id === id);
+    const player = this.players.find((p) => p.id === id);
     if (player === undefined) {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
     }
@@ -590,7 +559,6 @@ export class Game implements IGame, Logger {
   }
 
   public lastSoloGeneration(): number {
-    if (this.automaHooks !== undefined) return this.automaHooks.lastSoloGeneration();
     let lastGeneration = 14;
     const options = this.gameOptions;
     if (options.preludeExtension) {
@@ -661,13 +629,15 @@ export class Game implements IGame, Logger {
   }
 
   public allAwardsFunded(): boolean {
-    if (this.players.length === 1 && this.automaHooks === undefined) return true;
+    // Awards are disabled for 1 player games
+    if (this.players.length === 1) return true;
 
     return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
-    if (this.players.length === 1 && this.automaHooks === undefined) return true;
+    // Milestones are disabled for 1 player games
+    if (this.players.length === 1) return true;
 
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
@@ -682,7 +652,6 @@ export class Game implements IGame, Logger {
         }
         somePlayer.playCorporationCard(somePlayer.pickedCorporationCard);
       }
-      this.automaHooks?.handlePostCorporationSetup();
     }
   }
 
@@ -749,12 +718,9 @@ export class Game implements IGame, Logger {
     this.phase = Phase.RESEARCH;
     this.researchedPlayers.clear();
     this.save();
-    const automaDraftHandled = this.automaHooks?.handleResearchPhase() ?? false;
-    if (!automaDraftHandled) {
-      this.players.forEach((player) => {
-        player.runResearchPhase();
-      });
-    }
+    this.players.forEach((player) => {
+      player.runResearchPhase();
+    });
   }
 
   private gotoDraftPhase(): void {
@@ -764,7 +730,6 @@ export class Game implements IGame, Logger {
   }
 
   public gameIsOver(): boolean {
-    if (this.automaHooks !== undefined) return this.automaHooks.isGameOver();
     if (this.isSoloMode()) {
       // Solo games continue until the designated generation end even if Mars is already terraformed
       return this.generation === this.lastSoloGeneration();
@@ -781,7 +746,6 @@ export class Game implements IGame, Logger {
     this.passedPlayers.clear();
     this.someoneHasRemovedOtherPlayersPlants = false;
     this.players.forEach((player) => {
-      if (this.automaHooks?.handleProductionPhase(player)) return;
       player.colonies.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
@@ -869,7 +833,6 @@ export class Game implements IGame, Logger {
     this.players.forEach((player) => {
       player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
     });
-    this.automaHooks?.updateVPForGeneration();
   }
 
   private updateGlobalsForTheGeneration(): void {
@@ -898,14 +861,6 @@ export class Game implements IGame, Logger {
 
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
-
-    // Automa instant win: MarsBot wins when max generation is reached, game ends immediately.
-    if (this.automaHooks !== undefined && this.marsBot?.isInstantWin()) {
-      this.log('MarsBot wins! (Generation limit reached)');
-      this.gotoEndGame();
-      return;
-    }
-
     this.setNextFirstPlayer();
 
     this.players.forEach((player) => {
@@ -915,7 +870,7 @@ export class Game implements IGame, Logger {
       }
     });
 
-    if (this.gameOptions.draftVariant && this.automaHooks === undefined) {
+    if (this.gameOptions.draftVariant) {
       this.gotoDraftPhase();
     } else {
       this.gotoResearchPhase();
@@ -1025,7 +980,6 @@ export class Game implements IGame, Logger {
   }
 
   private allPlayersHavePassed(): boolean {
-    if (this.automaHooks?.allPlayersHavePassed() === false) return false;
     for (const player of this.players) {
       if (!this.hasPassedThisActionPhase(player)) {
         return false;
@@ -1051,10 +1005,7 @@ export class Game implements IGame, Logger {
         this.passedPlayers.clear();
         this.potentiallyChangeFirstPlayer();
 
-        this.automaHooks?.handleBeforeActionPhase();
-
-        const firstPlayer = this.automaHooks?.getFirstPlayerForActionPhase() ?? this.first;
-        this.startActionsForPlayer(firstPlayer);
+        this.startActionsForPlayer(this.first);
       }
     });
   }
@@ -1087,17 +1038,6 @@ export class Game implements IGame, Logger {
     }
 
     this.inputsThisRound = 0;
-
-    // Automa turn alternation
-    if (this.automaHooks !== undefined) {
-      const next = this.automaHooks.getNextPlayer();
-      if (next !== undefined) {
-        this.startActionsForPlayer(next);
-      } else {
-        this.gotoProductionPhase();
-      }
-      return;
-    }
 
     // This next section can be done more simply.
     if (this.allPlayersHavePassed()) {
@@ -1159,7 +1099,6 @@ export class Game implements IGame, Logger {
    * If nobody can add a greenery, end the game.
    */
   public /* for testing */ takeNextFinalGreeneryAction(): void {
-    this.automaHooks?.handleFinalGreenery(this.donePlayers);
     for (const player of this.playersInGenerationOrder) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -1188,12 +1127,11 @@ export class Game implements IGame, Logger {
     this.gotoEndGame();
   }
 
-  public startActionsForPlayer(player: IPlayer) {
+  private startActionsForPlayer(player: IPlayer) {
     this.activePlayer = player;
     player.actionsTakenThisGame++;
     player.actionsTakenThisRound = 0;
 
-    if (this.automaHooks?.handleStartActions(player)) return;
     player.takeAction();
   }
 
@@ -1286,8 +1224,6 @@ export class Game implements IGame, Logger {
 
     this.venusScaleLevel += steps * 2;
 
-    this.automaHooks?.handleVenusRaised();
-
     return steps;
   }
 
@@ -1312,15 +1248,11 @@ export class Game implements IGame, Logger {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < constants.TEMPERATURE_BONUS_FOR_HEAT_1 &&
         this.temperature + steps * 2 >= constants.TEMPERATURE_BONUS_FOR_HEAT_1) {
-        if (!this.automaHooks?.handleTemperatureHeatBonus(player)) {
-          player.production.add(Resource.HEAT, 1, {log: true});
-        }
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
       if (this.temperature < constants.TEMPERATURE_BONUS_FOR_HEAT_2 &&
         this.temperature + steps * 2 >= constants.TEMPERATURE_BONUS_FOR_HEAT_2) {
-        if (!this.automaHooks?.handleTemperatureHeatBonus(player)) {
-          player.production.add(Resource.HEAT, 1, {log: true});
-        }
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
 
       for (const card of player.playedCards) {
@@ -1355,13 +1287,8 @@ export class Game implements IGame, Logger {
 
   public getPassedPlayers():Array<Color> {
     const passedPlayersColors: Array<Color> = [];
-    this.passedPlayers.forEach((playerId) => {
-      const automaColor = this.automaHooks?.getPassedPlayerColor(playerId);
-      if (automaColor !== undefined) {
-        passedPlayersColors.push(automaColor);
-      } else {
-        passedPlayersColors.push(this.getPlayerById(playerId).color);
-      }
+    this.passedPlayers.forEach((player) => {
+      passedPlayersColors.push(this.getPlayerById(player).color);
     });
     return passedPlayersColors;
   }
@@ -1421,7 +1348,7 @@ export class Game implements IGame, Logger {
     this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
-    if (this.phase !== Phase.SOLAR && (this.automaHooks?.shouldGrantPlacementBonuses(player) ?? true)) {
+    if (this.phase !== Phase.SOLAR) {
       this.grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus);
 
       AresHandler.ifAres(this, (aresData) => {
@@ -1433,11 +1360,9 @@ export class Game implements IGame, Logger {
         const part = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
         player.withinDeflectionZone = part[0].length > 0 && part[1].length === 0;
       }
-    } else if (this.phase === Phase.SOLAR) {
-      // World government greeneries during solar phase are unowned
+    } else {
       space.player = undefined;
     }
-    // else: MarsBot tiles skip bonuses but keep ownership for display
 
     // Clear out underworld components.
     UnderworldExpansion.onTilePlaced(this, space);
@@ -1447,8 +1372,6 @@ export class Game implements IGame, Logger {
         playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       }
     }
-
-    this.automaHooks?.handleTilePlaced(player, tile.tileType);
 
     if (initialTileType !== undefined) {
       AresHandler.ifAres(this, () => {
@@ -1751,13 +1674,7 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    // Create MarsBot player before the Game constructor so getPlayerById can find it
-    let marsBotPlayer: IPlayer | undefined;
-    if (d.automaState !== undefined && gameOptions.automaOption) {
-      marsBotPlayer = AutomaGameSetup.createMarsBotPlayer(d.id);
-    }
-
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags, marsBotPlayer);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);
@@ -1776,7 +1693,7 @@ export class Game implements IGame, Logger {
     });
 
     game.milestones = milestones;
-    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, game.allPlayers, milestones);
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
     d.awards.forEach((awardName) => {
@@ -1788,7 +1705,7 @@ export class Game implements IGame, Logger {
     });
 
     game.awards = awards;
-    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.allPlayers, awards);
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;
@@ -1832,13 +1749,6 @@ export class Game implements IGame, Logger {
     game.undoCount = d.undoCount ?? 0;
     game.temperature = d.temperature;
     game.venusScaleLevel = d.venusScaleLevel;
-
-    // Restore automa with pre-created player, then set real activePlayer
-    if (d.automaState !== undefined && gameOptions.automaOption && marsBotPlayer !== undefined) {
-      game.automaHooks = AutomaGameSetup.setup(game, players[0], gameOptions, rng, marsBotPlayer);
-      game.automaHooks.restoreState(d.automaState);
-    }
-
     game.activePlayer = game.getPlayerById(d.activePlayer);
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
@@ -1852,7 +1762,6 @@ export class Game implements IGame, Logger {
     game.globalsPerGeneration = d.globalsPerGeneration;
     game.verminInEffect = d.verminInEffect;
     game.exploitationOfVenusInEffect = d.exploitationOfVenusInEffect;
-
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.playedCards.filter(isICorporationCard).length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

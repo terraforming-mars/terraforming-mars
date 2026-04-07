@@ -750,7 +750,6 @@ describe('Game', () => {
     const serializedKeys = Object.keys(serialized);
 
     const unserializedFieldsInGame: Array<keyof Game> = [
-      '_marsBotPlayer',
       'createdTime',
       'discardedColonies',
       'inDoubleDown',

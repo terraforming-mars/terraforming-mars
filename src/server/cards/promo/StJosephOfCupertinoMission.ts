@@ -61,9 +61,6 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
             if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
               return undefined;
             }
-            if (player.game.automaHooks?.handleStJosephCathedral(spaceOwner)) {
-              return undefined;
-            }
             if (spaceOwner.canAfford(2)) {
               spaceOwner.defer(
                 new OrOptions(

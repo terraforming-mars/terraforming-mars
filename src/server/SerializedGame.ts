@@ -97,4 +97,5 @@ export type SerializedAutomaState = {
     floaterCount?: number;
     vpByGeneration?: Array<number>;
     temperatureRaises?: number;
+    colonyCubePositions?: Array<string>;
 }

@@ -1776,7 +1776,7 @@ export class Game implements IGame, Logger {
     });
 
     game.milestones = milestones;
-    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, game.allPlayers, milestones);
 
     const awards: Array<IAward> = [];
     d.awards.forEach((awardName) => {
@@ -1788,7 +1788,7 @@ export class Game implements IGame, Logger {
     });
 
     game.awards = awards;
-    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.allPlayers, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;

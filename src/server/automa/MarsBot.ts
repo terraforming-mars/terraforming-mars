@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Resource} from '../../common/Resource';
 import {CardName} from '../../common/cards/CardName';
+import {newCard} from '../createCard';
 import {DifficultyLevel, BonusCardId, TrackDefinition, getAutomaMaxGeneration} from '../../common/automa/AutomaTypes';
 import {getMcPerVP} from './MarsBotScoring';
 import {MarsBotBoard} from './MarsBotBoard';
@@ -479,6 +480,9 @@ export class MarsBot {
     if (this.temperatureRaises > 0) {
       state.temperatureRaises = this.temperatureRaises;
     }
+    if (this.colonyCubePositions.size > 0) {
+      state.colonyCubePositions = Array.from(this.colonyCubePositions);
+    }
     return state;
   }
 
@@ -531,6 +535,54 @@ export class MarsBot {
     }
     if (state.temperatureRaises !== undefined) {
       this.temperatureRaises = state.temperatureRaises;
+    }
+
+    // Restore action deck (project cards + bonus cards)
+    if (state.actionDeckCardNames !== undefined) {
+      this.actionDeck = [];
+      for (const name of state.actionDeckCardNames) {
+        if (Object.values(BonusCardId).includes(name as BonusCardId)) {
+          this.actionDeck.push(createCorpBonusCard(name as BonusCardId));
+        } else {
+          const card = newCard(name as CardName);
+          if (card !== undefined) {
+            this.actionDeck.push(card as IProjectCard);
+          }
+        }
+      }
+    }
+
+    // Restore bonus deck
+    if (state.bonusDeckDrawPile !== undefined) {
+      this.bonusDeck.drawPile = state.bonusDeckDrawPile.map((id) => createCorpBonusCard(id as BonusCardId));
+    }
+    if (state.bonusDeckDiscardPile !== undefined) {
+      this.bonusDeck.discardPile = state.bonusDeckDiscardPile.map((id) => createCorpBonusCard(id as BonusCardId));
+    }
+    if (state.destroyedBonusCards !== undefined) {
+      const destroyed = new Set(state.destroyedBonusCards);
+      for (const card of [...this.bonusDeck.drawPile, ...this.bonusDeck.discardPile]) {
+        if (destroyed.has(card.id)) {
+          card.destroyed = true;
+        }
+      }
+    }
+
+    // Restore played project cards
+    if (state.playedProjectCardNames !== undefined) {
+      this.playedProjectCards = [];
+      for (const name of state.playedProjectCardNames) {
+        const card = newCard(name as CardName);
+        if (card !== undefined) {
+          this.playedProjectCards.push(card as IProjectCard);
+        }
+      }
+    }
+
+    // Restore colony cube positions
+    if (state.colonyCubePositions !== undefined) {
+      this.colonyCubePositions = new Set(state.colonyCubePositions);
+      this.hasColonyCubes = this.colonyCubePositions.size > 0;
     }
   }
 

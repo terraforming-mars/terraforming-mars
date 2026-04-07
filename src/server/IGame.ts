@@ -54,6 +54,8 @@ export interface IGame extends Logger {
   resettable: boolean;
   generation: number;
   readonly players: ReadonlyArray<IPlayer>;
+  /** All players including MarsBot (automa). Use this for targeting cards. */
+  readonly allPlayers: ReadonlyArray<IPlayer>;
   readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
 
   /**
@@ -83,6 +85,8 @@ export interface IGame extends Logger {
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
   underworldData: UnderworldData;
+
+  automaHooks: import('./automa/AutomaGameHooks').AutomaGameHooks | undefined;
 
   // Card-specific data
 

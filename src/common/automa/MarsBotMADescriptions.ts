@@ -1,6 +1,7 @@
 import {MilestoneName} from '../ma/MilestoneName';
 import {AwardName} from '../ma/AwardName';
 
+/** MarsBot-specific descriptions for how milestones are evaluated. */
 export const MARSBOT_MILESTONE_DESCRIPTIONS: Partial<Record<MilestoneName, string>> = {
   // Tharsis
   'Terraformer': 'TR \u2265 35',
@@ -48,6 +49,7 @@ export const MARSBOT_MILESTONE_DESCRIPTIONS: Partial<Record<MilestoneName, strin
   'Tycoon10': '10 blue/green cards in played pile',
 };
 
+/** MarsBot-specific descriptions for how awards are scored. */
 export const MARSBOT_AWARD_DESCRIPTIONS: Partial<Record<AwardName, string>> = {
   // Tharsis
   'Landlord': 'Total tiles on board',

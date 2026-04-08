@@ -97,7 +97,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       }
       if (options.length === 1 && cards.length === 0 && marsBotOption !== undefined) {
         // Only MarsBot target available, auto-execute it
-        this.player.game.automaHooks!.executeRemoveResource(
+        this.player.game.automaHooks?.executeRemoveResource(
           this.player, this.count, () => this.cb({card: undefined, owner: undefined, proceed: true}),
         );
         return undefined;

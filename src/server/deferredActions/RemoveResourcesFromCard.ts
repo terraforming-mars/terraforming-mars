@@ -139,7 +139,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
     const resourceCards: Array<ICard> = [];
-    for (const p of player.game.allPlayers) {
+    for (const p of player.game.players) {
       // Making this a function just to delay calling getCardsWithResources unless it's needed.
       const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
       if (p === player) {

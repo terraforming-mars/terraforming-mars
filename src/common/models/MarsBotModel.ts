@@ -20,6 +20,7 @@ export type MarsBotVPModel = {
   neuralInstance: number;
   mcToVP: number;
   cardVP: number;
+  vermin: number;
   total: number;
   detailsMilestones: ReadonlyArray<MADetail>;
   detailsAwards: ReadonlyArray<MADetail>;

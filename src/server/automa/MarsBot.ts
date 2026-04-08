@@ -398,9 +398,10 @@ export class MarsBot {
     for (let i = 0; i < this.board.tracks.length; i++) {
       const trackDef = this.board.data[i];
       if (trackDef.productions.includes(productionType)) {
-        this.board.tracks[i].regress();
-        this.game.log('MarsBot\'s ${0} track regressed (${1} production decreased)',
-          (b) => b.rawString(trackDef.tags[0]).rawString(productionType));
+        if (this.board.tracks[i].regress()) {
+          this.game.log('MarsBot\'s ${0} track regressed (${1} production decreased)',
+            (b) => b.rawString(trackDef.tags[0]).rawString(productionType));
+        }
         return;
       }
     }

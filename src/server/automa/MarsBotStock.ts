@@ -3,8 +3,10 @@ import {Production} from '../player/Production';
 import {ALL_RESOURCES, Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {IPlayer} from '../IPlayer';
-import {From} from '../logs/From';
+import {From, isFromPlayer} from '../logs/From';
 import {MarsBot} from './MarsBot';
+import {CrashSiteCleanup} from '../cards/promo/CrashSiteCleanup';
+import {LawSuit} from '../cards/promo/LawSuit';
 
 /**
  * Override Stock for MarsBot's player.
@@ -81,6 +83,12 @@ export class MarsBotStock extends Stock {
       if (options?.log) {
         this.player.game.log('MarsBot loses ${0} MC (${1} removed)',
           (b) => b.number(mc).rawString(resource));
+      }
+
+      // Trigger hooks that Stock.add() normally fires (bypassed by this override)
+      if (isFromPlayer(options?.from)) {
+        LawSuit.resourceHook(this.player, amount, options.from.player);
+        CrashSiteCleanup.resourceHook(this.player, resource, amount, options.from.player);
       }
     }
     // Positive amounts (resource gains from placement bonuses etc.) are ignored

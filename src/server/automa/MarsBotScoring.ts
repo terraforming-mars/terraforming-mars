@@ -16,6 +16,7 @@ export interface MarsBotVPBreakdown {
   neuralInstance: number;
   mcToVP: number;
   cardVP: number; // Only in Hard/Brutal mode
+  vermin: number;
   total: number;
   detailsMilestones: Array<MADetail>;
   detailsAwards: Array<MADetail>;
@@ -52,10 +53,12 @@ export class MarsBotScoring {
     const milestoneResult = this.calculateMilestoneVP();
     const awardResult = this.calculateAwardVP();
     const greenery = this.countGreeneryVP();
-    const cityAdjacentGreenery = this.countCityAdjacentGreeneryVP();
+    const cities = this.game.board.getCities(this.marsBot);
+    const cityAdjacentGreenery = this.countCityAdjacentGreeneryVP(cities);
     const neuralInstance = this.calculateNeuralInstanceVP();
     const mcToVP = this.calculateMCtoVP();
     const cardVP = this.calculateCardVP();
+    const vermin = this.calculateVerminPenalty(cities);
 
     return {
       terraformRating: tr,
@@ -66,7 +69,8 @@ export class MarsBotScoring {
       neuralInstance,
       mcToVP,
       cardVP,
-      total: tr + milestoneResult.total + awardResult.total + greenery + cityAdjacentGreenery + neuralInstance + mcToVP + cardVP + this.corpVpBonus,
+      vermin,
+      total: tr + milestoneResult.total + awardResult.total + greenery + cityAdjacentGreenery + neuralInstance + mcToVP + cardVP + vermin + this.corpVpBonus,
       detailsMilestones: milestoneResult.details,
       detailsAwards: awardResult.details,
     };
@@ -104,9 +108,9 @@ export class MarsBotScoring {
     return this.game.board.getGreeneries(this.marsBot).length;
   }
 
-  private countCityAdjacentGreeneryVP(): number {
+  private countCityAdjacentGreeneryVP(cities: ReadonlyArray<Space>): number {
     let vp = 0;
-    for (const space of this.game.board.getCities(this.marsBot)) {
+    for (const space of cities) {
       const adj = this.game.board.getAdjacentSpaces(space);
       vp += adj.filter((s) => Board.isGreenerySpace(s)).length;
     }
@@ -126,6 +130,12 @@ export class MarsBotScoring {
     const mcPerVP = getMcPerVP(this.game.generation, opts.preludeExtension);
     if (mcPerVP === undefined) return 0;
     return Math.floor(this.turnResolver.mcSupply / mcPerVP);
+  }
+
+  /** Vermin: -1 VP per city when 10+ animals on Vermin card. Applies to ALL players. */
+  private calculateVerminPenalty(cities: ReadonlyArray<Space>): number {
+    if (!this.game.verminInEffect) return 0;
+    return -1 * cities.length;
   }
 
   /** Hard/Brutal mode: 1 VP per card with non-negative VP icon in MarsBot's played pile. */

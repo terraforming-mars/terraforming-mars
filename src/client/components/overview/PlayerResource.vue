@@ -18,23 +18,26 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/common/constants';
 import {Resource} from '@/common/Resource';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Protection} from '@/common/models/PlayerModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerResource',
   props: {
     type: {
       type: String as () => Resource,
+      required: true,
     },
     count: {
       type: Number,
+      required: true,
     },
     production: {
       type: Number,
+      required: true,
     },
     resourceProtection: {
       type: String as () => Protection,

@@ -16,6 +16,10 @@ export type Space = {
 
   /** The type of space: ocean, space colony, etc. */
   spaceType: SpaceType;
+
+  /** When true, this is a volcanic space. */
+  volcanic?: boolean;
+
   /** The tile placed on top of the space. Could be a hazard tile. */
   tile?: Tile;
   /** The player who owns this tile. Will show a token, even the neutral player */

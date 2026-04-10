@@ -30,23 +30,24 @@ export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
   private map: Map<SpaceId, Space> = new Map();
+  public volcanicSpaceIds: ReadonlyArray<SpaceId>;
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<Space>>();
 
-  protected constructor(
+  public constructor(
     public readonly spaces: ReadonlyArray<Space>,
-    public readonly noctisCitySpaceId: SpaceId | undefined,
-    public readonly volcanicSpaceIds: ReadonlyArray<SpaceId>) {
+    public readonly noctisCitySpaceId?: SpaceId | undefined) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
       const adjacentSpaces = this.computeAdjacentSpaces(space);
       const filtered = adjacentSpaces.filter((space) => space !== undefined);
-      // "as ReadonlyArray<Space> is OK because the line above filters out the undefined values."
-      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<Space>);
+      this.adjacentSpaces.set(space.id, filtered);
       this.map.set(space.id, space);
     });
+
+    this.volcanicSpaceIds = this.spaces.filter((space) => space.volcanic).map((space) => space.id);
   }
 
   /* Returns the space given a Space ID. */
@@ -338,7 +339,9 @@ export abstract class Board {
         if (space.coOwner !== undefined) {
           serialized.coOwner = space.coOwner.id;
         }
-
+        if (space.volcanic) {
+          serialized.volcanic = true;
+        }
         return serialized;
       }),
     };
@@ -377,6 +380,9 @@ export abstract class Board {
     }
     if (coOwner !== undefined) {
       space.coOwner = coOwner;
+    }
+    if (serialized.volcanic !== undefined) {
+      space.volcanic = serialized.volcanic;
     }
     return space;
   }

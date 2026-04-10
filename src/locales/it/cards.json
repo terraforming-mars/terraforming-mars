@@ -21,7 +21,6 @@
     "Martian Rails": "Ferrovie Marziane",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Azione: spendi una risorsa Energia per ottenere 1 M€ per ogni tessera Città SU MARTE.",
 
-    "Asteroid": "Asteroide",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Incrementa la Temperatura di 1 livello e ottieni 2 risorse Titanio. Rimuovi fino a 3 Piante da un qualunque giocatore.",
 
     "Comet": "Cometa",
@@ -44,13 +43,13 @@
     "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Azione: diminuisci la tua produzione di Energia di 1 livello per incrementare il tuo TT di 1 livello.",
 
     "Domed Crater": "Cratere Coperto da Cupola",
-    "(Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.)": "(Il livello di Ossigeno deve essere minore o uguale al 7%. Ottieni 3 Piante e colloca una tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 3 livelli.)",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Il livello di Ossigeno deve essere minore o uguale al 7%. Ottieni 3 Piante e colloca una tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 3 livelli.",
 
     "Noctis City": "Città di Noctis",
     "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua produzione di M€ di 3 livelli. Colloca 1 tessera Città SULL'AREA RISERVATA, ignorando le normali restrizioni di piazzamento.",
 
     "Methane from Titan": "Metano da Titano",
-    "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "(Richiede almeno il 2% di Ossigeno. Incrementa la tua Produzione di Calore di 2 livelli e quella di Piante di 2 livelli.)",
+    "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "Richiede almeno il 2% di Ossigeno. Incrementa la tua Produzione di Calore di 2 livelli e quella di Piante di 2 livelli.",
 
     "Imported Hydrogen": "Idrogeno Importato",
     "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Ottieni 3 Piante, oppure aggiungi 3 Microbi o 2 Animali ad UN'ALTRA carta. Colloca una tessera Oceano.",
@@ -67,11 +66,11 @@
 
     "Arctic Algae": "Alghe Artiche",
     "(Effect: When anyone places an ocean tile, gain 2 plants.)": "(Effetto: quando un qualunque giocatore colloca una tessera Oceano, ottieni 2 Piante.)",
-    "(It must be -12 C or colder to play. Gain 1 plant.)": "(Per poter giocare questa carta, la Temperatura deve essere minore o uguale a -12°C. Ottieni 1 Pianta.)",
+    "It must be -12 C or colder to play. Gain 1 plant.": "Per poter giocare questa carta, la Temperatura deve essere minore o uguale a -12°C. Ottieni 1 Pianta.",
 
     "Predators": "Predatori",
     "Action: Remove 1 animal from any card and add it to this card.": "Azione: rimuovi 1 Animale da una qualunque carta e aggiungilo a questa carta.",
-    "(Requires 11% oxygen.)": "(Richiede che il livello di Ossigeno sia almeno dell'11%.)",
+    "Requires 11% oxygen.": "Richiede che il livello di Ossigeno sia almeno dell'11%.",
     "1 VP per animal on this card.":"1 PV per ogni Animale su questa carta.",
 
     "Space Station": "Stazione Spaziale",
@@ -114,7 +113,7 @@
     "1 VP per 2 microbes on this card.":"1 PV per ogni coppia di Microbi su questa carta.",
 
     "Release of Inert Gases": "Rilascio di Gas Inerti",
-    "(Raise your terraforming rating 2 steps.)": "(Incrementa il tuo TT di 2 livelli.)",
+    "Raise your terraforming rating 2 steps.": "Incrementa il tuo TT di 2 livelli.",
 
     "Nitrogen-Rich Asteroid": "Asteroide Ricco di Azoto",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Incrementa il tuo TT di 2 livelli e la Temperatura di 1 livello. Incrementa la tua Produzione di Piante di 1 livello, oppure di 4 livelli se possiedi almeno 3 simboli Pianta.",
@@ -160,15 +159,14 @@
     "Increase your M€ production 1 step for each Earth tag you have.": "Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso.",
 
     "Fish": "Pesce",
-    "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "(Richiede una Temperatura maggiore o uguale a +2°C. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
+    "Requires +2 C° or warmer. Decrease any plant production 1 step.": "Richiede una Temperatura maggiore o uguale a +2°C. Diminuisci una qualunque Produzione di Piante di 1 livello.",
 
 
     "Lake Marineris": "Lago Marineris",
-    "(Requires 0° C or warmer. Place 2 ocean tiles.)": "(Richiede una Temperatura maggiore o uguale a 0°C. Colloca due tessere Oceano.)",
+    "Requires 0° C or warmer. Place 2 ocean tiles.": "Richiede una Temperatura maggiore o uguale a 0°C. Colloca due tessere Oceano.",
 
     "Small Animals": "Piccoli Animali",
-    "Action: Add 1 animal to this card.": "Azione: aggiungi un Animale a questa carta.",
-    "(Requires 6% oxygen. Decrease any plant production 1 step.)": "(Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
+    "Requires 6% oxygen. Decrease any plant production 1 step.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello.",
     "1 VP per 2 animals on this card.":"1 PV per ogni coppia di Animali su questa carta.",
 
 
@@ -182,7 +180,7 @@
     "Increase your titanium production 1 step.": "Incrementa la tua Produzione di Titanio di 1 livello.",
 
     "Beam From A Thorium Asteroid": "Fascio da Asteroide Ricco di Torio",
-    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "(Richiede almeno un simbolo Gioviano. Incrementa le tue Produzioni di Calore e di Energia di 3 livelli ciascuna.)",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Richiede almeno un simbolo Gioviano. Incrementa le tue Produzioni di Calore e di Energia di 3 livelli ciascuna.",
 
     "Mangrove": "Mangrovia",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Richiede una Temperatura maggiore o uguale a +4°C. Colloca 1 tessera Vegetazione SU UN'AREA RISERVATA AD UNA TESSERA OCEANO e incrementa di 1 il livello di Ossigeno. Ignora le normali restrizioni di piazzamento.",
@@ -248,7 +246,7 @@
     "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.": "Aumenta la Temperatura di 2 livelli e colloca 2 tessere Oceano. Rimuovi fino a un massimo di 6 Piante da un qualunque giocatore.",
 
     "Ganymede Colony": "Colonia di Ganimede",
-    "(Place a city tile ON THE RESERVED AREA.)": "(Colloca una tessera Città SULL'AREA RISERVATA.)",
+    "Place a city tile ON THE RESERVED AREA.": "Colloca una tessera Città SULL'AREA RISERVATA.",
 
     "Callisto Penal Mines": "Miniere Penali di Callisto",
     "Increase your M€ production 3 steps.": "Incrementa la tua Produzione di M€ di 3 livelli.",
@@ -262,10 +260,10 @@
     "Duplicate only the production box of one of your building cards.": "Duplica soltanto il riquadro di Produzione di una delle tue carte Edificio.",
 
     "Grass": "Erba",
-    "(Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "Richiede una Temperatura maggiore o uguale a -16°C. Incrementa la tua Produzione di Piante di 1 livello. Ottieni 3 Piante.",
+    "Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.": "Richiede una Temperatura maggiore o uguale a -16°C. Incrementa la tua Produzione di Piante di 1 livello. Ottieni 3 Piante.",
 
     "Heather": "Erica",
-    "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "(Richiede una Temperatura maggiore o uguale a -14°C. Incrementa la tua Produzione di Piante di 1 livello. Ottieni 1 Pianta.)",
+    "Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.": "Richiede una Temperatura maggiore o uguale a -14°C. Incrementa la tua Produzione di Piante di 1 livello. Ottieni 1 Pianta.",
 
     "Peroxide Power": "Centrale di Perossido",
     "Decrease your M€ production 1 step and increase your energy production 2 steps.": "Diminuisci la tua Produzione di M€ di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
@@ -304,7 +302,7 @@
     "Decrease your M€ production 1 step and increase your energy production 1 steps.": "Diminuisci la tua Produzione di M€ di 1 livello e incrementa la tua Produzione di Energia di 1 livello.",
 
     "Ironworks": "Acciaieria",
-    "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Azione: spendi 4 risorse Energia per ottenere 2 risorse Acciaio e incrementare l'Ossigeno di 1 livello.",
+    "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Azione: spendi 4 risorse Energia per ottenere 1 risorsa Acciaio e incrementare l'Ossigeno di 1 livello.",
 
     "Power Grid": "Rete Elettrica",
     "Increase your energy production step for each power tag you have, including this.": "Incrementa la tua Produzione di Energia di 1 livello per ogni simbolo Potenza in tuo possesso, incluso questo.",
@@ -354,13 +352,13 @@
     "Increase your energy production 2 steps.": "Incrementa la tua Produzione di Energia di 2 livelli.",
 
     "Farming": "Coltivazione",
-    "(Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.)": "(Richiede una Temperatura maggiore o uguale a +4°C. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 2 livelli. Ottieni 2 Piante.)",
+    "Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.": "Richiede una Temperatura maggiore o uguale a +4°C. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 2 livelli. Ottieni 2 Piante.",
 
     "Dust Seals": "Guarnizioni Antipolvere",
     "Requires 3 or less ocean tiles.": "Richiede un numero di tessere Oceano pari o inferiore a 3.",
 
     "Urbanized Area": "Area Urbanizzata",
-    "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "(Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Città ADIACENTE AD ALMENO ALTRE DUE TESSERE CITTÀ.)",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Città ADIACENTE AD ALMENO ALTRE DUE TESSERE CITTÀ.",
 
     "Sabotage": "Sabotaggio",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Rimuovi fino a 3 risorse Titanio da un qualunque giocatore, oppure fino a 4 risorse Acciaio, oppure fino a 7 M€.",
@@ -388,7 +386,7 @@
 
     "Decomposers": "Decompositori",
     "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "Effetto: quando giochi un simbolo Animale, Pianta o Microbo, incluso questo, aggiungi 1 Microbo a questa carta.",
-    "(Requires 3% oxygen.)": "(Richiede almeno il 3% di Ossigeno.)",
+    "Requires 3% oxygen.": "Richiede almeno il 3% di Ossigeno.",
     "1 VP per 3 microbes on this card.": "1 PV ogni 3 Microbi su questa carta.",
 
     "Fusion Power": "Centrale a Fusione",
@@ -396,7 +394,7 @@
 
     "Symbiotic Fungus": "Fungo Simbiotico",
     "Action: Add a microbe to ANOTHER card.": "Azione: aggiungi un Microbo ad UN'ALTRA carta.",
-    "(Requires -14 C° or warmer.)": "(Richiede una Temperatura maggiore o uguale a -14°C.)",
+    "Requires -14 C° or warmer.": "Richiede una Temperatura maggiore o uguale a -14°C.",
 
     "Extreme-Cold Fungus": "Fungo del Freddo Estremo",
     "(Action: Gain 1 plant.)": "(Azione: ottieni 1 Pianta.)",
@@ -435,7 +433,7 @@
 
     "Herbivores": "Erbivori",
     "Effect: When you place a greenery tile, add an animal to this card.": "Effetto: quando collochi una tessera Vegetazione, aggiungi 1 Animale a questa carta.",
-    "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "(Richiede almeno l'8% di Ossigeno. Aggiungi 1 Animale a questa carta. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.)",
+    "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Richiede almeno l'8% di Ossigeno. Aggiungi 1 Animale a questa carta. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.",
 
     "Insects": "Insetti",
     "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Richiede almeno il 6% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni simbolo Pianta che possiedi.",
@@ -507,7 +505,7 @@
   "Requires 7% oxygen. Increase your energy production 1 step.": "Richiede almeno il 7% di Ossigeno. Incrementa la tua Produzione di Energia di 1 livello.",
 
   "Tundra Farming": "Coltivazione Tundra",
-  "(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.)": "(Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.)",
+  "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.": "Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.",
 
   "Aerobraked Ammonia Asteroid": "Asteroide Ammonizzato Aerofrenato",
   "(Increase your heat production 3 steps and your plant productions 1 step. Add 2 microbes to ANOTHER card.)": "(Aggiungi 2 Microbi ad UN'ALTRA carta. Aumenta la tua Produzione di Calore di 3 livelli e la tua Produzione di Piante di 1 livello.)",
@@ -518,14 +516,14 @@
   "Pets": "Animali Domestici",
   "Animals may not be removed from this card": "Gli Animali non possono essere rimossi da questa carta.",
   "Effect: When any city tile is placed, add an animal to this card.": "Effetto: quando viene collocata una qualunque Città, aggiungi un Animale a questa carta.",
-  "(Add 1 animal to this card.)": "(Aggiungi 1 Animale a questa carta.)",
+  "Add 1 animal to this card.": "Aggiungi 1 Animale a questa carta.",
   "1 VP per 2 animals here.": "1 PV per ogni coppia di Animali su questa carta.",
 
   "Protected Habitats": "Habitat Protetti",
   "Opponents may not remove your": "Gli avversari non possono rimuovere i tuoi",
 
   "Protected Valley": "Valle Protetta",
-  "(Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "(Incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Vegetazione SU UN'AREA RISERVATA ALLE TESSERE OCEANO, ignorando le normali restrizioni di piazzamento, e incrementa di 1 il livello di Ossigeno.)",
+  "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Vegetazione SU UN'AREA RISERVATA ALLE TESSERE OCEANO, ignorando le normali restrizioni di piazzamento, e incrementa di 1 il livello di Ossigeno.",
 
   "Satellites": "Satelliti",
   "Increase your M€ production 1 step for each space tag you have, including this one.": "Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Spazio in tuo possesso, incluso questo.",
@@ -556,7 +554,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
 
   "Livestock": "Bestiame",
-  "(Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps)": "(Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.)",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
   "1 VP for each animal on this card.": "1 PV per ogni Animale su questa carta.",
   "(Action: Add 1 animal to this card.)": "(Azione: aggiungi un Animale a questa carta.)",
 
@@ -600,7 +598,7 @@
   "Raise your TR 1 step for each Jovian tag you have, including this.": "Incrementa il tuo TT di 1 livello per ogni simbolo Gioviano in tuo possesso, incluso questo.",
 
   "Immigration Shuttles": "Navette per l'Immigrazione",
-  "(Increase your M€ production 5 steps.)": "(Incrementa la tua Produzione di M€ di 5 livelli.)",
+  "Increase your M€ production 5 steps.": "Incrementa la tua Produzione di M€ di 5 livelli.",
   "1 VP for every 3rd city in play.": "1 PV per ogni terna di Città in gioco.",
 
   "Place this tile.": "Colloca questa tessera",
@@ -641,7 +639,6 @@
   "HYDROGEN TO VENUS":"Idrogeno per Venere",
 
   "Plant Microbe Animal":"Pianta Microbo Animale",
-  "Jovian":"Gioviano",
   "max 3 Oceans":"al massimo 3 tessere Oceano",
   "Forest":"Foresta",
   "2 Power":"2 simboli Potenza",
@@ -649,7 +646,6 @@
   "Titanium production":"Produzione di Titanio",
   "Steel production":"Produzione di Acciaio",
   "4 Science":"4 simboli Scienza",
-  "2 Cities":"2 tessere Città",
   "Standard projects":"Progetti Standard",
    "steal":"ruba",
    "next card":"prossima carta",

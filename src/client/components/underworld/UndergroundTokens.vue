@@ -13,17 +13,19 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ClaimedToken, UnderworldPlayerData} from '@/common/underworld/UnderworldPlayerData';
+import UndergroundToken from './UndergroundToken.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'UndergroundTokens',
   components: {
-    UndergroundToken: () => import('./UndergroundToken.vue'),
+    UndergroundToken,
   },
   props: {
     underworldData: {
       type: Object as () => UnderworldPlayerData,
+      required: true,
     },
   },
   methods: {

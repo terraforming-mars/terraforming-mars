@@ -51,7 +51,7 @@ export const PaymentWidgetMixin = {
      */
     getMegaCreditsMax(): number {
       const model = this.asModel();
-      return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
+      return Math.min(this.getAvailableUnits('megacredits'), model.cost);
     },
     getResourceRate(unit: SpendableResource): number {
       switch (unit) {
@@ -84,7 +84,7 @@ export const PaymentWidgetMixin = {
       const adjustedDelta = Math.min(1, currentValue);
       if (adjustedDelta === 0) return;
       this.asModel().payment[unit] -= adjustedDelta;
-      if (unit !== 'megaCredits') this.setRemainingMCValue();
+      if (unit !== 'megacredits') this.setRemainingMCValue();
     },
     /**
      * Increase `unit` by one.
@@ -99,7 +99,7 @@ export const PaymentWidgetMixin = {
       // MC has a special-case because the max isn't how many MC the player has,
       // but how much they need to spend.
       const maxValue =
-        unit === 'megaCredits' ?
+        unit === 'megacredits' ?
           this.getMegaCreditsMax() :
           this.getAvailableUnits(unit);
 
@@ -114,7 +114,7 @@ export const PaymentWidgetMixin = {
         return;
       }
       this.asModel().payment[unit] += delta;
-      if (unit !== 'megaCredits') {
+      if (unit !== 'megacredits') {
         this.setRemainingMCValue();
       }
     },
@@ -124,13 +124,13 @@ export const PaymentWidgetMixin = {
       let remainingMC = ta.cost;
 
       for (const resource of SPENDABLE_RESOURCES) {
-        if (resource === 'megaCredits') {
+        if (resource === 'megacredits') {
           continue;
         }
         const value = (ta.payment[resource] ?? 0) * this.getResourceRate(resource);
         remainingMC -= value;
       }
-      ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      ta.payment.megacredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
     setMaxValue(unit: SpendableResource): void {
       let currentValue: number | undefined = this.asModel().payment[unit];
@@ -157,7 +157,7 @@ export const PaymentWidgetMixin = {
       const thisPlayer = model.playerView.thisPlayer;
       switch (unit) {
       case 'heat':
-        if (model.hasOwnProperty('available')) {
+        if ('available' in model) {
           amount = model.available?.[unit] ?? -1;
         } else {
           amount = this.availableHeat();
@@ -167,12 +167,14 @@ export const PaymentWidgetMixin = {
       case 'steel':
       case 'titanium':
       case 'plants':
-        if (model.hasOwnProperty('available')) {
+        if ('available' in model) {
           amount = model.available?.[unit] ?? -1;
-          break;
+        } else {
+          amount = thisPlayer[unit];
         }
-      // eslint-disable-next-line no-fallthrough
-      case 'megaCredits':
+        break;
+
+      case 'megacredits':
         amount = thisPlayer[unit];
         break;
 
@@ -261,7 +263,7 @@ export const PaymentWidgetMixin = {
         auroraiData: 'Data',
         kuiperAsteroids: 'Asteroids',
         spireScience: 'Science',
-        megaCredits: 'M€',
+        megacredits: 'M€',
         floaters: 'Floaters',
         graphene: 'Graphene',
         lunaArchivesScience: 'Science',

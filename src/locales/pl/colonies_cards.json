@@ -17,7 +17,6 @@
     "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Musisz posiadać co najmniej 2 symbole Ziemi. Następna karta którą zagrasz podczas tego pokolenia będzie kosztować o 16 M€ mniej.",
 
     "Corona Extractor": "Ekstraktor Korony",
-    "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać co najmniej 4 symbole Nauki. Podnieś swoją produkcję energii o 4 poziomy.",
 
     "Cryo-Sleep": "Hibernacja",
     "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
@@ -55,7 +54,7 @@
     "Jovian Lanterns": "Reflektory Atmosferyczne",
     "1 VP per 2 floaters here.": "1 PZ za każde 2 jednostki dryfowców na tej karcie.",
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Musisz posiadać co najmniej 1 symbol Jowisza. Podnieś swój WT o 1 poziom. Umieść 2 jednostki dryfowców na dowolnej karcie.",
-	"Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
+    "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
 
     "Jupiter Floating Station": "Stacja Dryfowa na Jowiszu",
     "Action: Add 1 floater to a JOVIAN CARD.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza.",
@@ -114,7 +113,6 @@
     "Rim Freighters": "Przewoźnicy Rubieży",
 
     "Sky Docks": "Podniebna Stacja Przeładunkowa",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę, płacisz za nią o 1 M€ mniej.",
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Musisz posiadać co najmniej 2 symbole Ziemi. Otrzymujesz 1 flotę handlową.",
 
     "Solar Probe": "Sonda Słoneczna",
@@ -132,11 +130,9 @@
 
     "Spin-off Department": "Spółka Spin Off",
     "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, dobierz kartę.",
-    "Increase your M€ production 2 steps.": "Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Sub-zero Salt Fish": "Słonowodne Ryby Zimnolubne",
     "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "1 VP per 2 animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
     "Requires -6 C. Decrease any plant production 1 step.": "Temperatura musi wynosić co najmniej -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",

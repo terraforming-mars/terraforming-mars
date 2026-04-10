@@ -1,16 +1,19 @@
 <template>
 <div>
-  <div v-if="experimentalUI()">
+  <div v-if="experimentalUI()" v-i18n>
     <label>
-      <input type="checkbox" v-model="showReorder" />Reorder cards
+      <input type="checkbox" v-model="showReorder" /> Reorder Cards
     </label>
   </div>
   <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
+    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
-        <div v-if="showReorder" class="reorder-banners"></div>
+        <div v-if="showReorder" class="reorder-banners-container">
+          <div class="reorder-banners-left" v-if="index > 0"></div>
+          <div class="reorder-banners-right" v-if="index < cards.length - 1"></div>
+        </div>
       </div>
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
@@ -19,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
@@ -35,7 +38,7 @@ type DataModel = {
   dragCard: CardName | undefined;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SortableCards',
   components: {
     Card,
@@ -43,9 +46,11 @@ export default Vue.extend({
   props: {
     cards: {
       type: Array as () => Array<CardModel>,
+      required: true,
     },
     playerId: {
       type: String,
+      required: true,
     },
   },
   data(): DataModel {

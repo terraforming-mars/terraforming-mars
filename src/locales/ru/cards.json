@@ -1,5 +1,4 @@
 {
-    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Вы начинаете с 42 M€. Вместо выбора и покупки стартовых карт, вы получаетe 10 случайных карт бесплатно.",
     "Colonizer Training Camp": "Тренировочный лагерь колонистов",
     "Oxygen must be 5% or less.": "Уровень кислорода должен быть 5% или ниже.",
 
@@ -24,7 +23,6 @@
     "Martian Rails": "Марсианский монорельс",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 M€ за каждый город на поверхности Марса.",
 
-    "Capital": "Столица",
     "2 Oceans": "2 Океана",
     "3 Oceans": "3 Океана",
     "4 Oceans": "4 Океана",
@@ -33,7 +31,6 @@
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Необходимо 4 тайла океана. Постройте этот особый тайл города. Снизьте своё производство энергии на 2 и повысьте свой доход на 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "Дополнительно принесёт 1 ПО за каждый тайл океана, соседний с этим городом.",
 
-    "Asteroid": "Астероид",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Повысьте температуру на 1 и получите 2 титана. Удалите до 3 растений у любого игрока.",
 
     "Comet": "Комета",
@@ -69,7 +66,7 @@
     "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Получите 3 растения или же положите 3 жетона бактерий или 2 жетона животных на другую карту. Выложите тайл океана.",
 
     "Research Outpost": "Исследовательская станция",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Свойство: когда играете карту, вы платите на 1 M€ меньше.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Эффект: Разыгрывая карту, платите за нее на 1 M€ меньше",
     "Place a city tile NEXT TO NO OTHER TILE.": "Постройте город, не соседний ни с каким другим тайлом.",
 
     "Phobos Space Haven": "Космопорт на Фобосе",
@@ -84,7 +81,7 @@
 
     "Predators": "Хищники",
     "Action: Remove 1 animal from any card and add it to this card.": "Действие: удалите 1 жетон животных с любой карты и положите на эту карту 1 жетон животных.",
-    "(Requires 11% oxygen.)": "(Уровень кислорода должен быть 11%.)",
+    "Requires 11% oxygen.": "Уровень кислорода должен быть 11%.",
 
     "Space Station": "Космическая станция",
     "Effect: When you play a space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 M€ меньше.",
@@ -134,7 +131,6 @@
     "Deimos Down": "Падение Деймоса",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Повысьте температуру на 3 и получите 4 стали. Удалите до 8 растений у любого игрока.",
 
-    "Asteroid Mining": "Разработка астероидов",
     "Increase your titanium production 2 steps.": "Повысьте своё производство титана на 2.",
 
     "Food Factory": "Пищевой комбинат",
@@ -172,9 +168,8 @@
     "Increase your M€ production 1 step for each Earth tag you have.": "Повысьте свой доход на 1 за каждый имеющийся у вас символ Земли.",
 
     "Fish": "Рыба",
-    "Action: Add 1 animal to this card.": "Действие: положите 1 жетон животных на эту карту.",
+    "Action: Add 1 animal to this card.": "Действие: добавьте 1 животное на эту карту",
     "Requires +2 C° or warmer. Decrease any plant production 1 step.": "Температура должна быть +2 градуса или выше. Снизьте у любого игрока производство растений на 1",
-    "1 VP for each animal on this card.": "1 ПО за каждый жетон животных на этой карте.",
 
     "Lake Marineris": "Озеро Маринер",
     "Requires 0° C or warmer. Place 2 ocean tiles.": "Температура должна быть 0°C или выше. Выложите 2 тайла океана.",
@@ -224,7 +219,7 @@
     "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Выложите этот тайл на участок, где титан или сталь являются бонусом за размещение тайла. Повысьте производство стали или титана на 1.",
 
     "Sponsors": "Спонсоры",
-    "Increase your M€ production 2 steps.": "Повысьте свой доход на 2.",
+    "Increase your M€ production 2 steps.": "Увеличьте своё производство M€ на 2",
 
     "Electro Catapult": "Электрокатапульта",
     "Action: Spend 1 plant or 1 steel to gain 7 M€.": "Действие: потратьте 1 растение или сталь, чтобы получить 7 M€.",
@@ -257,10 +252,10 @@
     "Increase your energy production 1 step and gain 2 titanium.": "Повысьте своё производство энергии на 1 и получите 2 титана.",
 
     "Ice Asteroid": "Ледяной астероид",
-    "Place 2 ocean tiles.": "Выложите 2 тайла океана.",
+    "Place 2 ocean tiles.": "Выложите 2 жетона океана.",
 
     "Quantum Extractor": "Квантовый экстрактор",
-    "Requires 4 science tags. Increase your energy production 4 steps.": "Необходимо 4 символа науки. Повысьте своё производство энергии на 4.",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "Требует 4 метки Науки. Увеличьте своё производство энергии на 4",
 
     "Giant Ice Asteroid": "Гигантский ледяной астероид",
     "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.": "Повысьте температуру на 2 и выложите 2 тайла океана. Удалите до 6 растений у любого игрока.",
@@ -341,7 +336,6 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 титан и повысить уровень кислорода на 1.",
 
     "Earth Office": "Офис на Земле",
-    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 M€ меньше.",
 
     "Acquired Company": "Приобретённая компания",
 
@@ -374,7 +368,6 @@
     "Increase your plant production 1 step or your energy production 2 steps.": "Повысьте своё производство растений на 1 или своё производство энергии на 2.",
     "Increase your energy production 2 steps": "Повысьте своё производство энергии на 2",
     "Increase your energy production 1 step": "Повысьте своё производство энергии на 1",
-    "Increase": "Повысить",
     "Increase your plant production 1 step": "Повысьте своё производство растений на 1",
 
     "Artificial Lake": "Искусственное озеро",
@@ -393,7 +386,6 @@
     "Urbanized Area": "Городской массив",
     "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Снизьте своё производство энергии на 1 и повысьте свой доход на 2. Постройте город, соседний как минимум с двумя другими городами.",
 
-    "Sabotage": "Саботаж",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Удалите у любого игрока до 3 титана, или до 4 стали или до 7 M€.",
 
     "Moss": "Мох",
@@ -436,7 +428,7 @@
 
     "Symbiotic Fungus": "Грибы-симбионты",
     "Action: Add a microbe to ANOTHER card.": "Действие: положите жетон бактерий на другую карту.",
-    "(Requires -14 C° or warmer.)": "(Температура должна быть -14 градусов или выше.)",
+    "Requires -14 C° or warmer.": "Температура должна быть -14 градусов или выше.",
 
     "Extreme-Cold Fungus": "Грибок для сверхнизких температур",
     "Action: Gain 1 plant.": "Действие: получите 1 растение",
@@ -498,7 +490,6 @@
 
     "Adaptation Technology": "Технология адаптации",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "Свойство: ваши требования к температуре, кислороду и океанам – +2 или -2, вы каждый раз выбираете.",
-    "Global requirements": "Глобальные параметры",
 
     "Caretaker Contract": "Договор попечительства",
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "Действие: потратьте 8 тепла, чтобы повысить свой рейтинг на 1.",
@@ -679,7 +670,6 @@
     "Action: Draw 2 cards.": "Действие: Доберите 2 карты",
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
     "Jovian": "Юпитер",
-    "Sell": "Продать",
     "Project Requirement": "Требования пректа",
     "PRELUDE": "ПРОЛОГ",
     "EFFECT": "ЭФФЕКТ",
@@ -698,31 +688,30 @@
     "Floyd Continuum": "Континуум Флойда",
     "Action: Gain 3 M€ per completed terraforming parameter.": "Действие: Получите 3 М€ за каждый завершённый параметр терраформирования.",
 
-	"GHG Shipment": "Поставка CO₂",
+    "GHG Shipment": "Поставка CO₂",
     "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Требование: Кельвинисты в правящей партии или 2 делегата в ней. Увеличьте производство тепла на 1. Получите 1 тепло за каждый ваш аэростат.",
 
-	"Jovian Envoys": "Делегаты Юпитера",
+    "Jovian Envoys": "Делегаты Юпитера",
     "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Требуется 2 метки Юпитера. Разместите 2-х делегатов в одной партии.",
 
-	"Microgravity Nutrition": "Космическое питание",
+    "Microgravity Nutrition": "Космическое питание",
     "Increase your M€ production 1 step for each colony you have.": "Увеличьте производство М€ на 1 за каждую вашу колонию.",
 
-	"Special Permit": "Специальное разрешение",
+    "Special Permit": "Специальное разрешение",
     "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Требование: Зелёные в правящий партии или 2 делегата в ней. Украдите 4 растения у любого игрока.",
 
-	"Sponsoring Nation": "Нация-спонсор",
+    "Sponsoring Nation": "Нация-спонсор",
     "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Требуется 4 символа Земли. Получите 3 РТ. Разместите 2 делегатов.",
 
-	"Stratospheric Expedition": "Экспедиция в стратосферу",
+    "Stratospheric Expedition": "Экспедиция в стратосферу",
     "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Добавьте 2 аэростата на любую карту. Доберите 2 карты Венеры.",
 
-	"Unexpected Application": "Неожиданное применение",
+    "Unexpected Application": "Неожиданное применение",
     "Discard 1 card to terraform Venus 1 step.": "Сбросьте 1 карту, чтобы повысить показатель Венеры на 1 шаг.",
 
-	"Venus Allies": "Венерианские союзники",
+    "Venus Allies": "Венерианские союзники",
     "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Повысьте шкалу Венеры на 2 шага. Получите 4 M€ за каждую свою колонию.",
 
     "Soil Studies": "Исследование почвы",
     "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Требование: температура должна быть –4 °C или ниже. Получите 1 растение за каждую вашу метку Венеры, метку растений и за каждую вашу колонию."
-
 }

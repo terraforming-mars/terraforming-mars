@@ -10,7 +10,6 @@
   "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Vaatii että Yhtenäisyys hallitsee tai että sinulla on 2 edustajaa siellä. Aseta 1 edustaja siirtokuntaasi kohti. SAAT ASETTAA NE ERI PUOLUEISIIN.",
 
   "Colonial Representation": "Siirtokuntaedustus",
-  "Effect: You have +1 influence.": "VAIKUTUS: Sinulla on +1 vaikutusvalta.",
   "Gain 3 M€ per colony you have.": "Saat 3 M€ jokaista siirtokuntaasi kohti.",
 
   "Envoys From Venus": "Venuksen lähettiläät",
@@ -49,7 +48,6 @@
   "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Vaatii että lämpötila on -4°C tai alhaisempi. Saat 1 kasvin jokaista Venus-ympyrääsi, kasviympyrääsi ja siirtokuntaasi kohti.",
 
   "Special Permit": "Erityislupa",
-  "steal": "varasta",
   "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Vaatii että Vihreät hallitsevat tai että sinulla on 2 edustajaa siellä. Varasta 4 kasvia keneltä tahansa pelaajalta.",
 
   "Sponsoring Nation": "Sponsoroiva kansakunta",
@@ -83,25 +81,16 @@
   "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Vaatii että olet Puheenjohtaja. NOSTA 3 PRELUDE-KORTTIA JA PELAA 1 NIISTÄ, hylkää muut 2.",
 
   "Psychrophiles": "Psykrofilit",
-  "Action: Add 1 microbe to this card.": "TOIMINTO: Lisää 1 mikrobi tälle kortille.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "VAIKUTUS: Kun maksat kasvikorttia, täällä olevia mikrobeja saa käyttää 2 M€:n arvosta kukin.",
-  "Temperature must be -20 C or lower.": "Lämpötilan tulee olla -20°C tai alhaisempi.",
 
   "Research Coordination": "Tutkimuskoordinaatio",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Kun olet pelannut tämän, kun suoritat toiminnon, jokeriympyrä lasketaan valitsemaksesi ympyräksi.",
 
   "SF Memorial": "SF-muistomerkki",
-  "Draw 1 card.": "Nosta 1 kortti.",
 
   "Martian Survey": "Mars-tutkimus",
-  "Oxygen must be 4% or lower. Draw two cards.": "Hapen tulee olla 4 % tai vähemmän. Nosta kaksi korttia.",
 
   "House Printing": "Talon tulostus",
-  "Increase your steel production 1 step.": "Lisää terästuotantoasi 1 askel.",
 
   "Space Hotels": "Avaruushotellit",
-  "Requires 2 Earth tags. Increase M€ production 4 steps.": "Vaatii 2 Maa-ympyrää. Lisää M€-tuotantoasi 4 askelta.",
 
-  "Lava Tube Settlement": "Laavaputkiasumus",
-  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta. Aseta kaupunkilaatta TULIVUORIALUEELLE riippumatta vierekkäisistä kaupungeista."
+  "Lava Tube Settlement": "Laavaputkiasumus"
 }

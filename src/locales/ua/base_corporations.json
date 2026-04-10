@@ -11,7 +11,6 @@
 
   "ECOLINE": "ЕКОЛАЙН",
   "Ecoline": "ЕкоЛайн",
-  "EcoLine": "ЕкоЛайн",
   "You start with 2 plant production, 3 plants, and 36 M€.": "Ви починаєте з виробництва 2 рослин, 3 рослин і 36 M€.",
   "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Ефект: Ви завжди можете платити 7 рослин, замість 8, для розміщення зелених зон.",
 
@@ -44,14 +43,13 @@
   "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Ефект: Коли будь-яка міська плитка розміщується НА МАРСІ, збільште вашу виробництво M€ на 1 крок. Коли ви розміщуєте міську плитку, отримайте 3 M€.",
 
   "THORGATE": "ТОРГЕЙТ",
-  "Thorgate": "Торгейт",
+  "ThorGate": "Торгейт",
   "You start with 1 energy production and 48 M€.": "Ви починаєте з виробництва 1 енергії і 48 M€.",
   "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Ефект: Коли граєте енергетичну картку АБО СТАНДАРТНИЙ ПРОЕКТ ЕЛЕКТРОСТАНЦІЇ, ви платите на 3 M€ менше за неї.",
 
   "UNITED NATIONS MARS INITIATIVE": "ІНІЦІАТИВА ООН ЗА КОЛОНІЗАЦІЮ МАРСУ",
   "United Nations Mars Initiative": "Ініціатива ООН з колонізації Марсу",
   "UNMI": "ІООНКМ",
-  "You start with 40 M€.": "Ви починаєте з 40 M€.",
   "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Дія: Якщо ваш рейтинг терраформування був підвищений у цьому поколінні, ви можете заплатити 3 M€, щоб підвищити його ще на 1 крок.",
 
   "MINING": "ГІРНИЦТВО",

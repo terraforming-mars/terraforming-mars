@@ -8,15 +8,15 @@ import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceId} from '../../common/Types';
 import {oneWayDifference} from '../../common/utils/utils';
+import {Tile} from '../Tile';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
 
-  protected constructor(
+  public constructor(
     spaces: ReadonlyArray<Space>,
-    noctisCitySpaceId: SpaceId | undefined,
-    volcanicSpaceIds: ReadonlyArray<SpaceId>) {
-    super(spaces, noctisCitySpaceId, volcanicSpaceIds);
+    noctisCitySpaceId?: SpaceId | undefined) {
+    super(spaces, noctisCitySpaceId);
     this.edges = this.computeEdges();
   }
 
@@ -176,11 +176,9 @@ export class MarsBoard extends Board {
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    const volcanicSpaceIds = this.volcanicSpaceIds;
-
     const spaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
-    if (volcanicSpaceIds.length > 0) {
-      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+    if (this.volcanicSpaceIds.length > 0) {
+      return spaces.filter((space) => space.volcanic === true);
     }
     return spaces;
   }
@@ -193,9 +191,25 @@ export class MarsBoard extends Board {
       if (space.id === this.noctisCitySpaceId) {
         return false;
       }
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
+      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE || space.spaceType === SpaceType.DEFLECTION_ZONE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;
     });
+  }
+
+  // Returns true if |newTile| can cover go on |space|, particularly if |space| already has a tile.
+  public static canCover(space: Space, newTile: Tile): boolean {
+    if (space.tile === undefined) {
+      return true;
+    }
+
+    // A hazard protected by the Desperate Measures action can't be covered.
+    if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
+      return true;
+    }
+    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import fs from 'fs';
 import {FileAPI, ServeAsset} from '../../src/server/routes/ServeAsset';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
@@ -121,7 +122,7 @@ describe('ServeAsset', () => {
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,
-      existsSync: 1,
+      existsSync: 0,
     });
   });
 
@@ -150,5 +151,52 @@ describe('ServeAsset', () => {
       readFile: 1,
       existsSync: 0,
     });
+  });
+
+  it('vendors.js', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/vendors.js';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.content).eq('data: build/vendors.js');
+  });
+
+  it('chunk js file', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/chunks/player-home.js';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.content).eq('data: build/chunks/player-home.js');
+  });
+
+  it('chunk js.map file', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/chunks/player-home.js.map';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.content).eq('data: build/chunks/player-home.js.map');
+  });
+
+  it('rejects path traversal in chunks', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/chunks/../main.js';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.statusCode).eq(statusCode.notFound);
+  });
+
+  it('serves all script sources referenced in index.html', async () => {
+    const html = fs.readFileSync('assets/index.html', 'utf8');
+    const srcs = [...html.matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]);
+    expect(srcs).to.not.be.empty;
+    for (const src of srcs) {
+      const perRes = new MockResponse();
+      const perScaffolding = new RouteTestScaffolding();
+      instance = new ServeAsset(undefined, false, fileApi);
+      perScaffolding.url = '/' + src;
+      perScaffolding.req.headers['accept-encoding'] = '';
+      await perScaffolding.get(instance, perRes);
+      expect(perRes.statusCode, `${src} should return 200`).eq(statusCode.ok);
+    }
   });
 });

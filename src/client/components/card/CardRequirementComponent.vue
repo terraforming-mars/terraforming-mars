@@ -12,9 +12,7 @@
             <div class="card-production-box-row">
               <div class="card-production-box-row-item">
                 <div class="card-item-container">
-                  <template v-for="num in repeats">
-                    <div :class="productionClass" :key="num"></div>
-                  </template>
+                  <div v-for="num in repeats" :class="productionClass" :key="num"></div>
                 </div>
               </div>
             </div>
@@ -22,9 +20,7 @@
         </template>
         <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
         <template v-else>
-          <template v-for="num in repeats">
-            <div :class="componentClasses" :key="num"></div>
-          </template>
+            <div v-for="num in repeats" :key="num" :class="componentClasses"></div>
         </template>
       </div>
   </div>
@@ -32,14 +28,14 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardRequirementDescriptor, requirementType} from '@/common/cards/CardRequirementDescriptor';
 import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRequirementComponent',
   props: {
     requirement: {

@@ -28,7 +28,7 @@ export class Huan extends CeoCard {
     game.syndicatePirateRaider = player.id;
 
     game.log(
-      'All players except ${0} may not trade next generation.',
+      'No players may trade next generation, except ${0}.',
       (b) => b.player(player),
     );
 

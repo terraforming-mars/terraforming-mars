@@ -78,6 +78,17 @@ describe('utils', () => {
     expect(utils.oneWayDifference([1, 1], [1])).deep.eq([1]);
   });
 
+  it('twoWayDifference', () => {
+    expect(utils.twoWayDifference([], [])).is.empty;
+    expect(utils.twoWayDifference([1], [1])).is.empty;
+    expect(utils.twoWayDifference([1], [2, 3])).deep.eq([1, 2, 3]);
+    expect(utils.twoWayDifference([1, 2, 3], [2, 3])).deep.eq([1]);
+    expect(utils.twoWayDifference([1, 2, 3], [1, 3, 4, 2])).deep.eq([4]);
+    expect(utils.twoWayDifference([1, 2, 3, 4], [1, 4, 2])).deep.eq([3]);
+    expect(utils.twoWayDifference([1, 1], [1])).deep.eq([]);
+    expect(utils.twoWayDifference([1, 2, 3], [2, 3, 4])).deep.eq([1, 4]);
+  });
+
   it('deNull', () => {
     expect(utils.deNull([])).deep.eq([]);
     expect(utils.deNull([1])).deep.eq([1]);

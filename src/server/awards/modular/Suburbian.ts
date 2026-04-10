@@ -15,9 +15,10 @@ const EDGE_IDS = new Set([
   '59', '60', '61', '62', '63',
 ]);
 
+// Is this exactly the same as Edgedancer?
 export class Suburbian implements IAward {
   public readonly name = 'Suburbian';
-  public readonly description = 'Most tiles on areas along the edges of the map.';
+  public readonly description = 'Most tiles on areas along the edges of the map';
   public getScore(player: IPlayer): number {
     const board = player.game.board;
     return board.spaces.filter((space) => {

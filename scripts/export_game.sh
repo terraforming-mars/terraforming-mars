@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Exports a game from a Heroku Postgres database.
+#
+
 die() { echo "$*" 1>&2 ; exit 1; }
 
 [ "$#" -eq 2 ] || die "parameters required: [app] [player id | spectator id | game id]"

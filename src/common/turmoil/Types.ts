@@ -33,3 +33,20 @@ export type AlliedParty = {
   partyName: PartyName;
   agenda: Agenda;
 };
+
+const names: Record<Party, PartyName> = {
+  m: PartyName.MARS,
+  s: PartyName.SCIENTISTS,
+  u: PartyName.UNITY,
+  k: PartyName.KELVINISTS,
+  r: PartyName.REDS,
+  g: PartyName.GREENS,
+} as const;
+
+export function agendaIdDescription(id: BonusId | PolicyId): string {
+  const p = id[0] as Party;
+  const type = id[1] === 'b' ? 'Bonus' : 'Policy';
+  const num = id.substring(2);
+  const name = names[p];
+  return name + ' ' + type + ' ' + num;
+}

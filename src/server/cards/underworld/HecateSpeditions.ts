@@ -42,7 +42,7 @@ export class HecateSpeditions extends CorporationCard implements ICorporationCar
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const count = card.tags.filter((tag) => isPlanetaryTag(tag)).length;
     player.addResourceTo(this, {qty: count, log: true, logZero: false});
   }

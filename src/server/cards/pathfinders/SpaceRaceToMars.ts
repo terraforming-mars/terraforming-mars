@@ -41,7 +41,6 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
 
     const moonSpaces = player.game.moonData?.moon.spaces ?? [];
     const moonCount = moonSpaces
-      // TODO(kberg): include co-owner.
       .filter(Board.ownedBy(player))
       .filter(isSpecialTileSpace)
       .length;

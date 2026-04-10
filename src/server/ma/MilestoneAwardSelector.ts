@@ -8,7 +8,7 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {MAManifest, isCompatible} from './MAManifest';
+import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
@@ -72,11 +72,13 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.THARSIS:
     case BoardName.HELLAS:
     case BoardName.ELYSIUM:
+    case BoardName.UTOPIA_PLANITIA:
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
+    case BoardName.TERRA_CIMMERIA_NOVA:
     case BoardName.VASTITAS_BOREALIS:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
+    case BoardName.VASTITAS_BOREALIS_NOVA:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
     default:
@@ -120,12 +122,19 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
-    // When using modular, don't include non-modular MAs.
-    if (gameOptions.modularMA) {
-      throw new Error('Not supporting modular awards yet.');
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
     }
 
-    if (!gameOptions.modularMA) {
+    const random = manifest.all[name].random;
+    if (gameOptions.modularMA) {
+      if (random === undefined) {
+        return false;
+      }
+      // TODO(kberg): Exclude Geologist if the board has no volcanic spaces
+    } else {
       // The game boards this MA appears in, if any.
       const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));
 
@@ -137,9 +146,8 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
       if (boards.length > 0 && gameOptions.includeFanMA === false) {
         return false;
       }
-
-      // Disable the new modular awards until they're weighted.
-      if (manifest.modular.includes(name)) {
+      // Modular MAs are not part of our own built random MAs.
+      if (random === 'modular') {
         return false;
       }
     }
@@ -169,7 +177,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
   // didn't get past 3.
   // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
+  // 2025-11-30: raised to 6.
+  const maxAttempts = 6;
   if (attempt > maxAttempts) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }

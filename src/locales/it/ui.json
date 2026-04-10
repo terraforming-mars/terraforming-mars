@@ -134,7 +134,6 @@
     "Convert 7 heat into temperature": "Converti 7 Calore in Temperatura",
     "Convert 8 heat into temperature": "Converti 8 Calore in Temperatura",
     "Convert ${0} plants into greenery": "Converti ${0} Piante in Vegetazione",
-    "Colonies": "",
     "funded by": "finanziato da",
     "claimed by": "rivendicato da",
     "Error with input": "Errore di inserimento",
@@ -316,6 +315,7 @@
 
     "Cards to include in the game": "Carte da includere dalla partita",
 
-    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": " Non affiliato a FryxGames, Asmodee Digital o Steam in alcun modo. "
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": " Non affiliato a FryxGames, Asmodee Digital o Steam in alcun modo. ",
+    "Reorder Cards": "Riordina carte"
 
 }

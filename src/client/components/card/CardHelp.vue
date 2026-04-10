@@ -4,14 +4,15 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardName} from '@/common/cards/CardName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardHelp',
   props: {
     name: {
       type: String as () => CardName,
+      required: true,
     },
   },
   methods: {

@@ -49,14 +49,14 @@ describe('ArboristCollective', () => {
     expect(card.resourceCount).eq(0);
 
     // Card is too expensive
-    card.onCardPlayedForCorps(player, fakeCard({type: CardType.EVENT, cost: 15}));
+    card.onCardPlayed(player, fakeCard({type: CardType.EVENT, cost: 15}));
     expect(card.resourceCount).eq(0);
 
     // Card is not an event
-    card.onCardPlayedForCorps(player, fakeCard({type: CardType.ACTIVE, cost: 14}));
+    card.onCardPlayed(player, fakeCard({type: CardType.ACTIVE, cost: 14}));
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayedForCorps(player, fakeCard({type: CardType.EVENT, cost: 14}));
+    card.onCardPlayed(player, fakeCard({type: CardType.EVENT, cost: 14}));
     expect(card.resourceCount).eq(1);
   });
 });

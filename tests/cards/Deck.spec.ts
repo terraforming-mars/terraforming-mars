@@ -91,9 +91,6 @@ describe('CeoDeck', () => {
       log: () => {},
     };
 
-    // TODO(dl): Once CEOs is deployed, we can hard-value these deckLength checks.
-    // But while we're constantly adding CEOs we cannot expect the drawPile to have a static length
-    // Instead, I'm getting the length of the deck prior to the draws, and just making sure it shrinks after we draw.
     const drawCardsCount = 3;
     const deckLength = deck.drawPile.length - drawCardsCount;
     for (let i = 0; i < drawCardsCount; i++) {

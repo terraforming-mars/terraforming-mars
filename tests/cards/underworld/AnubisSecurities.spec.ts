@@ -5,6 +5,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('AnubisSecurities', () => {
   it('First action', () => {
@@ -32,8 +33,19 @@ describe('AnubisSecurities', () => {
     // But it does touch global requirements.
     expect(player.canPlay(ants)).is.true;
 
-    // TODO(kberg): Add test that selects the card, and then shows that the global parameter
-    // bonus no longer applies.
+    // Select ants to play. After playing, the global requirement bonus expires.
+    selectProjectCardToPlay.process({
+      type: 'projectCard',
+      card: ants.name,
+      payment: Payment.of({megacredits: ants.cost}),
+    });
+    runAllActions(player.game);
+
+    // Put ants back in hand to re-test canPlay after bonus has expired.
+    player.cardsInHand.push(ants);
+    player.megaCredits = ants.cost;
+    // Oxygen is still 0%, so ants can no longer be played without the bonus.
+    expect(player.canPlay(ants)).is.false;
   });
 
   it('TR effect, self', () => {

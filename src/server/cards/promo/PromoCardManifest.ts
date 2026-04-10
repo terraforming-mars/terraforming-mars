@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
+import {AlbedoPlants} from './AlbedoPlants';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AqueductSystems} from './AqueductSystems';
 import {ArcadianCommunities} from './ArcadianCommunities';
@@ -26,6 +27,7 @@ import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
 import {EnergyMarket} from './EnergyMarket';
+import {EstablishedMethods} from './EstablishedMethods';
 import {Factorum} from './Factorum';
 import {FieldCappedCity} from './FieldCappedCity';
 import {FloydContinuum} from './FloydContinuum';
@@ -91,6 +93,8 @@ import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Hospitals} from './Hospitals';
 import {NewHolland} from './NewHolland';
 import {Vermin} from './Vermin';
+import {WeatherBalloons} from './WeatherBalloons';
+
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -167,6 +171,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.VERMIN]: {Factory: Vermin},
     [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
     [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
+    [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
   },
 
   preludeCards: {
@@ -179,9 +184,10 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
 
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
-    // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods}, // X54
+    [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
     [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
+    [CardName.ALBEDO_PLANTS]: {Factory: AlbedoPlants},
   },
 
   cardsToRemove: [

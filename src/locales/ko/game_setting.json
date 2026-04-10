@@ -1,6 +1,5 @@
 {
   "Game Id:${0}": "게임 ID: ${0}",
-  "Terraforming Mars": "테라포밍 마스",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "지침: 게임을 시작하려면 링크를 복사하여 모든 플레이어와 공유한 후, 입장할 플레이어 이름을 클릭하십시오.",
   "Save this page in case you or one of your opponents loses a link.": "플레이어 중 한 명이 링크를 잊어버릴 경우를 대비하여, 현재 페이지를 저장하세요.",
   "Read our changelog to get the latest updates.": "최신 업데이트를 확인하려면 변경점 기록을 읽어 보세요.",
@@ -45,6 +44,5 @@
   "real-time vp": "실시간 승점",
   "fast mode": "고속 모드 (행동 1개 수행 후 넘기기 불가)",
   "Banned cards:": "금지 카드: ",
-  "Game Setup Details": "게임 설정 세부사항",
   "Board-defined": "기본"
 }

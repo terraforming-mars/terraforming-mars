@@ -1,8 +1,6 @@
 import {expect, use} from 'chai';
-import chaiAsPromised = require('chai-as-promised');
+import chaiAsPromised from 'chai-as-promised';
 use(chaiAsPromised);
-import chaiDeepEqualIgnoreUndefined from 'chai-deep-equal-ignore-undefined';
-use(chaiDeepEqualIgnoreUndefined);
 
 import {ITestDatabase} from './ITestDatabase';
 import {Game} from '../../src/server/Game';
@@ -14,6 +12,26 @@ import {statusCode} from '../../src/common/http/statusCode';
 import {cast} from '../TestingUtils';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {DiscordUser} from '../../src/server/server/auth/discord';
+
+// Removes any fields that have undefined values, and filters undefined from arrays.
+function stripUndefined(obj: unknown): unknown {
+  if (obj === null) {
+    return obj;
+  }
+  if (Array.isArray(obj)) {
+    return obj.filter((v) => v !== undefined).map(stripUndefined);
+  }
+  if (typeof obj === 'object') {
+    const result: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(obj)) {
+      if (v !== undefined) {
+        result[k] = stripUndefined(v);
+      }
+    }
+    return result;
+  }
+  return obj;
+}
 
 /**
  * Describes a database test
@@ -218,7 +236,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       const actual = await db.getGame(game.id);
       expect(actual.gameLog[actual.gameLog.length -1].message).eq('databaseSuite.getGame test');
       expect(actual.gameOptions.underworldExpansion).eq(true);
-      expect(actual).deepEqualIgnoreUndefined(expected);
+      expect(stripUndefined(actual)).deep.eq(stripUndefined(expected));
     });
 
     it('getGameVersion', async () => {

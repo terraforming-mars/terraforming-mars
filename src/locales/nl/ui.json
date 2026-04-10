@@ -265,7 +265,6 @@
     "played cards": "gespeelde kaarten",
 
     "Select which cards to take into hand": "Selecteer welke kaarten je in handen wilt nemen",
-    "Not enough cards selected": "Niet genoeg kaarten geselecteerd",
 
     "Convert 7 heat into temperature": "Zet 7 warmte om in temperatuur",
     "Convert 8 heat into temperature": "Zet 8 warmte om in temperatuur",
@@ -294,7 +293,6 @@
     "Buffer Gas (16 M€)": "Buffergas (16 М€)",
     "Build colony (17 M€)": "Kolonie stichten (17 М€)",
     "Power Plant": "Energiecentrale",
-    "Asteroid": "Asteroïde",
     "Aquifer": "Oceaan",
     "Greenery": "Groentegel",
     "City": "Stad",
@@ -311,11 +309,6 @@
     "Trade with a colony tile": "Handel met een koloniekaart",
     "(Enceladus - (Microbes)": "(Enceladus - (Microben)",
 
-    "Select action for World Government Terraforming": "Kies een actie voor de terraforming wereldregering",
-    "Increase temperature": "Verhoog de temperatuur",
-    "Increase oxygen": "Verhoog het zuurstofgehalte",
-    "Add an ocean": "Plaats een oceaan",
-    "Increase Venus scale": "Verhoog de Venus-score",
 
     "Login": "Inloggen",
     "My Games": "Mijn spellen",
@@ -440,7 +433,6 @@
     "Add floaters": "Floaters toevoegen",
     "Gain": "Ontvang",
     "Gain plant": "Ontvang plant",
-    "Gain plants": "Ontvang planten",
     "Gain 1 plant": "Ontvang 1 plant",
     "Gain 2 plants": "Ontvang 2 planten",
     "Gain 3 plants": "Ontvang 3 planten",
@@ -537,7 +529,6 @@
     "Spend 1 titanium to gain 1 asteroid resource": "Betaal 1 titanium om 1 asteroïde te ontvangen",
     "Spend one titanium to add 2 floaters to this card": "Betaal 1 titanium om 2 floaters aan deze kaart toe te voegen",
     "Spend titanium": "Betaal titatium",
-    "Spend energy": "Betaal energie",
     "Spend 1 energy to add 1 data to this card.": "Betaal 1 energie om 1 data aan deze kaart toe te voegen",
     "Remove all data from this card to gain 3M€ per data removed.": "Verwijder alle data van deze kaart om 3 M€ per verwijderde data te ontvangen",
     "Remove any number of microbes to gain 3 M€ per microbe removed": "Verwijder een willekeurig aantal microben om 3 M€ per verwijderde microbe te krijgen",
@@ -546,7 +537,6 @@
     "Remove 1 asteroid to raise temperature 1 step": "Verwijder 1 asteroïde om de temperatuur met 2°C te verhogen",
     "Pay 6 to add 1 asteroid to a card": "Betaal 6 M€ om 1 asteroïde toe te voegen aan een willekeurige kaart",
     "Select how to pay for ${0} action": "Kies hoe je wilt betalen voor de ${0}-actie",
-    "Select amount of energy to spend": "Kies de hoeveelheid energie die u wilt betalen",
     "Remove an asteroid resource to place an ocean": "Verwijder 1 asteroïde om een oceaan te plaatsen",
     "Do not steal": "Steel niet",
     "Select 1 card to discard": "Kies 1 kaart om af te leggen",
@@ -623,8 +613,6 @@
     "Game Log": "Spel-Log",
     "Game log": "Spel-Log",
     "Pass for this generation": "Pas voor deze generatie",
-    "Confirm": "Bevestig",
-    "Increase": "Verhogen",
     "Buy": "Kopen",
     "Buy 0": "Koop 0",
     "Buy 1": "Koop 1",
@@ -699,8 +687,6 @@
     "Hide discount on cards": "Verberg de korting op de kaarten",
     "Hide sidebar notification": "Verberg zijbalkmeldingen",
     "Learner Mode (req. refresh)": "Beginnersmodus (vereist vernieuwen van pagina)",
-    "The id of this game is ${0}": "De game-ID is ${0}",
-    "Good luck ${0}!": "Veel succes ${0}!",
     "Select how to pay for action": "Kies hoe je de actie wilt betalen",
     "Game Setup Details": "Details van spelinstellingen",
 
@@ -786,5 +772,6 @@
     "Increase titanium production 1 step": "Verhoog titaniumproductie met 1",
     "Increase plants production 1 step": "Verhoog plantenproductie met 1",
     "Increase energy production 1 step": "Verhoog energieproductie met 1",
-    "Increase heat production 1 step": "Verhoog warmteproductie met 1"
+    "Increase heat production 1 step": "Verhoog warmteproductie met 1",
+    "Reorder Cards": "Kaarten herschikken"
 }

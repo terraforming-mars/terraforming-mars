@@ -329,14 +329,14 @@
 }
 
 .board-cube--red.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "▲";
   margin-left: 3px;
   margin-top: -2px;
 }
 
 .board-cube--blue.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "+";
   margin-left: 7px;
   margin-top: -2px;
@@ -345,14 +345,14 @@
 }
 
 .board-cube--black.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "∇";
   margin-left: 5px;
   margin-top: 1px;
 }
 
 .board-cube--yellow.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "∗";
   margin-left: 4px;
   margin-top: -1px;
@@ -360,14 +360,14 @@
 }
 
 .board-cube--green.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "◆";
   margin-left: 5px;
   margin-top: -2px;
 }
 
 .board-cube--purple.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "◉";
   margin-left: 5px;
   margin-top: 0px;
@@ -375,7 +375,7 @@
 }
 
 .board-cube--orange.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "▢";
   margin-left: 5px;
   margin-top: 0px;
@@ -383,14 +383,14 @@
 }
 
 .board-cube--pink.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "◈";
   margin-left: 5px;
   margin-top: -2px;
 }
 
 .board-cube--bronze.overlay::after {
-  .overlay_base;
+  .overlay_base();
   content: "▦";
   margin-left: 5px;
   margin-top: 3px;
@@ -398,7 +398,7 @@
 }
 
 .board-cube--neutral.overlay::after {
-  .overlay_base;
+  .overlay_base();
   font-size: 13px;
   content: "★";
   margin-left: 4px;
@@ -611,43 +611,43 @@ each(@token_types, {
 
 .underground-excavator {
 	position: absolute;
-	width: 21px;
-	height: 21px;
+  width: 16px;
+  height: 16px;
 	z-index: 3;
+  border-radius: 50%;
 	margin: 7px 0 0 21px;
 	filter: drop-shadow(2px 2px 3px black);
-  transform: rotate(0.14turn);
+  // box-shadow: -5px 8.66px 5px 0 #00000080
 }
 
-// TODO(kberg): Replace with a different shape
 .underground-excavator--red {
-	background: url(./assets/board_icons.png) -24px -91px no-repeat;
+	background-color: @player_red;
 }
 
 .underground-excavator--blue {
-	background: url(./assets/board_icons.png) -94px -91px no-repeat;
+	background-color: @player_blue;
 }
 
 .underground-excavator--black {
-	background: url(./assets/board_icons.png) -48px -91px no-repeat;
+	background-color: @player_black;
 }
 
 .underground-excavator--yellow {
-	background: url(./assets/board_icons.png) -72px -91px no-repeat;
+	background-color: @player_yellow;
 }
 
 .underground-excavator--green {
-	background: url(./assets/board_icons.png) -1px -91px no-repeat;
+	background-color: @player_green;
 }
 
 .underground-excavator--purple {
-	background: url(./assets/board_icons.png) -118px -91px no-repeat;
+	background-color: @player_purple;
 }
 
 .underground-excavator--orange {
-	background: url(./assets/board_icons.png) -1px -117px no-repeat;
+	background-color: @player_orange;
 }
 
 .underground-excavator--pink {
-	background: url(./assets/board_icons.png) -24px -117px no-repeat;
+	background-color: @player_pink;
 }

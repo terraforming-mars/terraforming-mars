@@ -16,27 +16,37 @@ import {SerializedGame} from './SerializedGame';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
-import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
-import {TerraCimmeriaNovusBoard} from './boards/TerraCimmeriaNovusBoard';
+import {VastitasBorealisNovaBoard} from './boards/VastitasBorealisNovaBoard';
+import {TerraCimmeriaNovaBoard} from './boards/TerraCimmeriaNovaBoard';
 import {Board} from './boards/Board';
 import {Space} from './boards/Space';
-import {Hollandia} from './boards/Hollandia';
+import {HollandiaBoard} from './boards/HollandiaBoard';
 
 type BoardFactory = (new (spaces: ReadonlyArray<Space>) => MarsBoard) & {newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard};
+
+// When renaming a board, add the old name here so saved games can still be loaded.
+const BOARD_RENAMES = new Map<string, BoardName>([
+  ['vastitas borealis novus', BoardName.VASTITAS_BOREALIS_NOVA],
+  ['terra cimmeria novus', BoardName.TERRA_CIMMERIA_NOVA],
+]);
+
+export function normalizeBoardName(name: string): BoardName {
+  return BOARD_RENAMES.get(name) ?? name as BoardName;
+}
 
 const boards: Record<BoardName, BoardFactory> = {
   [BoardName.THARSIS]: TharsisBoard,
   [BoardName.HELLAS]: HellasBoard,
   [BoardName.ELYSIUM]: ElysiumBoard,
   [BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard,
-  [BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard,
-  [BoardName.TERRA_CIMMERIA_NOVUS]: TerraCimmeriaNovusBoard,
+  [BoardName.VASTITAS_BOREALIS_NOVA]: VastitasBorealisNovaBoard,
+  [BoardName.TERRA_CIMMERIA_NOVA]: TerraCimmeriaNovaBoard,
   [BoardName.AMAZONIS]: AmazonisBoard,
   [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
   [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
-  [BoardName.HOLLANDIA]: Hollandia,
-};
+  [BoardName.HOLLANDIA]: HollandiaBoard,
+} satisfies Record<BoardName, BoardFactory>;
 
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): MarsBoard {
@@ -47,10 +57,6 @@ export class GameSetup {
   public static deserializeBoard(players: Array<IPlayer>, gameOptions: GameOptions, d: SerializedGame) {
     const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
     const deserialized = Board.deserialize(d.board, playersForBoard).spaces;
-    // TODO(kberg): Remove after 2025-10-25
-    if (gameOptions.boardName === 'Hollandia regels' as any) {
-      gameOptions.boardName = BoardName.HOLLANDIA;
-    }
     const Factory: BoardFactory = boards[gameOptions.boardName];
     return new Factory(deserialized);
   }

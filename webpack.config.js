@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 // Makes the .vue file format parseable.
@@ -20,12 +21,14 @@ const plugins = [
           'tests/**/*.ts',
         ],
       },
-      extensions: {
-        vue: true,
-      },
     },
   }),
   new VueLoaderPlugin(),
+  new webpack.DefinePlugin({
+    __VUE_OPTIONS_API__: true,
+    __VUE_PROD_DEVTOOLS__: false,
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+  }),
 ];
 
 if (process.env.NODE_ENV === 'production') {
@@ -53,7 +56,9 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()],
     extensions: ['.ts', '.vue', '.js'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      'vue$': 'vue/dist/vue.esm-bundler.js',
+      // Force CJS build of test-utils so webpack doesn't choke on its ESM export map.
+      '@vue/test-utils': path.resolve(__dirname, 'node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js'),
     },
   },
   module: {
@@ -65,15 +70,19 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        options: {appendTsSuffixTo: [/\.vue$/], transpileOnly: true},
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+          compilerOptions: {module: 'esnext', removeComments: false}
+        },
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader?url=false'],
+        use: ['style-loader', 'css-loader?url=false'],
       },
       {
         test: /\.less$/,
-        use: ['vue-style-loader', 'css-loader?url=false', 'less-loader'],
+        use: ['style-loader', 'css-loader?url=false', 'less-loader'],
       },
     ],
   },
@@ -81,5 +90,19 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     hashFunction: 'xxhash64',
+    publicPath: '/',
+    chunkFilename: 'chunks/[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
 };

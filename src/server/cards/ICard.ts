@@ -22,6 +22,7 @@ import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {SerializedCard} from '../SerializedCard';
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -109,13 +110,13 @@ export interface ICard {
 
   /**
    * Optional callback when any player identifies a space.
-  *
+   *
    * @param cardOwner the player who owns THIS CARD.
    * @param identifyingPlayer the player performing the identification action,
    *        or undefined if it is the neutral player (game setup or global event.)
-   * @param space the space that was just identified.
+   * @param token the underground resource token that was revealed.
    */
-  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, space: Space): void;
+  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, token: UndergroundResourceToken): void;
   onIdentification?: never;
 
   /**
@@ -215,7 +216,6 @@ export interface ICard {
   deserialize?(serialized: SerializedCard): void;
 
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
-  // TODO(kberg): move to json?
   generationUsed?: number;
 }
 

@@ -1,6 +1,5 @@
 {
   "game id: ": "Ідентифікатор гри: ",
-  "Terraforming Mars": "Терраформування Марса",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Інструкції: Щоб почати гру, окремо скопіюйте та поділіться посиланнями з усіма гравцями, а потім клацніть на своє ім'я.",
   "Save this page in case you or one of your opponents loses a link.": "Збережіть цю сторінку на випадок, якщо ви або один з ваших суперників втратить посилання.",
   "Read our changelog to get the latest updates.": "Прочитайте наш журнал змін, щоб отримати останні оновлення.",
@@ -45,6 +44,5 @@
   "real-time vp": "реальний час ПО",
   "fast mode": "швидкий режим",
   "Banned cards:": "Заборонені картки:",
-  "Game Setup Details": "Деталі налаштування гри",
   "Board-defined": "Визначено дошкою"
 }

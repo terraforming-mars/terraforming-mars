@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/server/cards/prelude/LavaTubeSettlement';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';
@@ -24,11 +23,12 @@ describe('LavaTubeSettlement', () => {
   it('Cannot play if no volcanic spaces left', () => {
     const [game, player, otherPlayer] = testGame(2);
     player.production.add(Resource.ENERGY, 1);
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
+    const [first, ...rest] = game.board.volcanicSpaceIds.map((id) => game.board.getSpaceOrThrow(id));
+    for (const space of rest) {
+      game.addTile(player, space, {tileType: TileType.LAVA_FLOWS});
+    }
 
-    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = otherPlayer; // land claim
+    first.player = otherPlayer; // land claim
 
     expect(card.canPlay(player)).is.not.true;
   });

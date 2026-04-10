@@ -8,7 +8,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
@@ -16,11 +16,12 @@ import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 import {cardResourceCSS} from '../common/cardResources';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderItemComponent',
   props: {
     item: {
       type: Object as () => ICardRenderItem,
+      required: true,
     },
   },
   methods: {
@@ -296,12 +297,10 @@ export default Vue.extend({
       }
     },
     amountAbs(): number {
-      if (this.item.amountInside) return 1;
-      return Math.abs(this.item.amount);
+      return this.item.amountInside ? 1 : Math.abs(this.item.amount);
     },
     itemsToShow(): number {
-      if (this.item.showDigit) return 1;
-      return this.amountAbs;
+      return this.item.showDigit ? 1 : this.amountAbs;
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {

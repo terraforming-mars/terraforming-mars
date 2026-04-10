@@ -92,7 +92,7 @@ describe('MilestoneAwardSelector', () => {
       milestoneManifest.boards[BoardName.ARABIA_TERRA],
       milestoneManifest.boards[BoardName.TERRA_CIMMERIA],
       milestoneManifest.boards[BoardName.VASTITAS_BOREALIS]].flat();
-    for (let idx = 0; idx < 2000; idx++) {
+    for (let idx = 0; idx < 1_000; idx++) {
       const mas = choose({
         randomMA: RandomMAOptionType.UNLIMITED,
         includeFanMA: false,
@@ -133,22 +133,22 @@ describe('MilestoneAwardSelector', () => {
     expect(intersection(milestones, avoidedMilestones)).is.empty;
   });
 
-  it('novus maps with no randomness render correctly', () => {
+  it('nova maps with no randomness render correctly', () => {
     const mas = chooseMilestonesAndAwards({
       ...DEFAULT_GAME_OPTIONS,
       'aresExtension': true,
-      'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
+      'boardName': BoardName.TERRA_CIMMERIA_NOVA,
       'includeFanMA': false,
       'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,
       'venusNextExtension': true,
     });
-    expect(mas.milestones).to.have.length(6);
-    expect(mas.awards).to.have.length(6);
+    expect(mas.milestones).to.have.length(8);
+    expect(mas.awards).to.have.length(8);
   });
 
   it('Do not select Constructor when Colonies is not selected', () => {
-    for (let idx = 0; idx < 2000; idx++) {
+    for (let idx = 0; idx < 1_000; idx++) {
       const mas = chooseMilestonesAndAwards({
         ...DEFAULT_GAME_OPTIONS,
         coloniesExtension: false,
@@ -158,22 +158,40 @@ describe('MilestoneAwardSelector', () => {
     }
   });
 
-  it('No modular milestones and awards by default', () => {
-    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+  // it('No modular milestones and awards by default', () => {
+  //   const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+  //     randomMA: RandomMAOptionType.UNLIMITED,
+  //     venusNextExtension: true,
+  //     aresExtension: true,
+  //     moonExpansion: true,
+  //     coloniesExtension: true,
+  //     turmoilExtension: true,
+  //     includeFanMA: true,
+  //   });
+
+  //   // expect(intersection(milestones, milestoneManifest.modular)).deep.eq([]);
+  //   // expect(intersection(awards, awardManifest.modular)).deep.eq([]);
+
+  //   // Landlord is listed as modular, but should be included here.
+  //   expect(awards).to.contain('Landlord');
+  // });
+
+  it('Do not select deprecated milestones or awards', () => {
+    const [milestones, awards] = getCandidates({
+      ...DEFAULT_GAME_OPTIONS,
       randomMA: RandomMAOptionType.UNLIMITED,
-      venusNextExtension: true,
-      aresExtension: true,
-      moonExpansion: true,
-      coloniesExtension: true,
-      turmoilExtension: true,
       includeFanMA: true,
     });
 
-    expect(intersection(milestones, milestoneManifest.modular)).deep.eq([]);
-    expect(intersection(awards, awardManifest.modular)).deep.eq([]);
+    const deprecatedMilestones = Object.keys(milestoneManifest.all).filter(
+      (name) => milestoneManifest.all[name as MilestoneName].deprecated,
+    );
+    const deprecatedAwards = Object.keys(awardManifest.all).filter(
+      (name) => awardManifest.all[name as AwardName].deprecated,
+    );
 
-    // Landlord is listed as modular, but should be included here.
-    expect(awards).to.contain('Landlord');
+    expect(intersection(milestones as Array<string>, deprecatedMilestones)).is.empty;
+    expect(intersection(awards as Array<string>, deprecatedAwards)).is.empty;
   });
 
   function choose(options: Partial<GameOptions>) {

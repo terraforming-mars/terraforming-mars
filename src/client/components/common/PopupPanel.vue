@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PopupPanel',
   methods: {
     onclick() {
@@ -30,7 +30,7 @@ export default Vue.extend({
   },
   computed: {
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('keydown', this.keylistener);
   },
   mounted() {

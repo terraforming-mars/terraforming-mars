@@ -51,12 +51,12 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'BuildBenefit',
   props: {
     metadata: {

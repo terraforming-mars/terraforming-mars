@@ -2,7 +2,6 @@
   "% Venus": "% Венера",
 
   "Stratospheric Birds": "Стратосферні птахи",
-  "Action: Add 1 animal to this card.": "Дія: Додати 1 тварину на цю карту.",
   "Requires Venus 12% and that you spend 1 floater from any card.": "Вимагає 12% Венери та витрати 1 плаваючого з будь-якої карти.",
 
   "Venusian Plants": "Венерійські рослини",
@@ -11,7 +10,6 @@
   "Extremophiles": "Екстремофіли",
   "Action: Add 1 microbe to ANY card.": "Дія: Додати 1 мікроба на БУДЬ-ЯКУ карту.",
   "1 VP for every 3rd Microbe on this card.": "1 ПО за кожного 3-го мікроба на цій карті.",
-  "Requires 2 science tags.": "Вимагає 2 наукових тегів.",
 
   "Mining Quota": "Квота на видобуток",
   "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Вимагає тегів Венери, Землі та Юпітера. Збільшити виробництво сталі на 2 кроки.",
@@ -51,7 +49,6 @@
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Вимагає тегів Венери, Землі та Юпітера. Взяти 2 карти.",
 
   "Atalanta Planitia Lab": "Лабораторія Аталанта Планітія",
-  "Requires 3 science tags. Draw 2 cards.": "Вимагає 3 наукових тегів. Взяти 2 карти.",
   "Rotator Impacts": "Ротаторний удар",
   "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Дія: Витратити 6 M€, щоб додати ресурс астероїда на цю карту [МОЖНА ВИКОРИСТОВУВАТИ ТИТАН].",
   "Action: Spend 1 resource from this card to increase Venus 1 step.": "Дія: Витратити 1 ресурс з цієї карти, щоб підвищити Венеру на 1 крок.",
@@ -107,8 +104,6 @@
   "Deuterium Export": "Експорт дейтерію",
   "Action: Add 1 floater to this card.": "Дія: Додати 1 плаваючу сферу на цю карту.",
   "Action: Spend 1 floater here to increase your energy production 1 step.": "Дія: Витратити 1 плаваючу сферу тут, щоб збільшити виробництво енергії на 1 крок.",
-  "Remove 1 floater to raise energy production 1 step": "Вилучити 1 плаваючу сферу, щоб збільшити виробництво енергії на 1 крок",
-  "Remove floater": "Вилучити плаваючу сферу",
 
   "Extractor Balloons": "Екстракторні кулі",
   "Action: Remove 2 floaters here to raise Venus 1 step.": "Дія: Вилучити 2 плаваючі сфери тут, щоб підвищити Венеру на 1 крок.",
@@ -166,7 +161,7 @@
   "Requires Venus 10%.": "Вимагає 10% Венери.",
 
   "Luxury Foods": "Розкішна їжа",
-  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "(Вимагає наявності тегу Венери, тегу Землі та тегу Юпітера.)",
+  "Requires that you have a Venus tag, an Earth tag and a Jovian tag.": "Вимагає наявності тегу Венери, тегу Землі та тегу Юпітера.",
 
   "Neutralizer Factory": "Фабрика нейтралізаторів",
   "Requires Venus 10%. Increase the Venus track 1 step.": "Вимагає 10% Венери. Збільшити трек Венери на 1 крок.",

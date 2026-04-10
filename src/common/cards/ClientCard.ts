@@ -18,7 +18,7 @@ export type ClientCard = Readonly<{
   victoryPoints?: number | 'special' | CountableVictoryPoints,
   cost?: number;
   type: CardType;
-  requirements: ReadonlyArray<CardRequirementDescriptor>;
+  requirements?: ReadonlyArray<CardRequirementDescriptor>;
   metadata: CardMetadata;
   productionBox?: Units; // Replace with behavior?
   resourceType?: CardResource;

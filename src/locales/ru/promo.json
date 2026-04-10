@@ -26,7 +26,7 @@
 
     "Static Harvesting": "Сбор статики",
     "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Требует не более 3 выложенных тайлов океана. Увеличьте ваше производство энергии на 1 шаг. Получите 1 М€ за каждую вашу метку здания.",
-    
+
     "Pharmacy Union": "",
     "You start with 54 M€. Draw a Science card.": "Вы начинаете с 54М€. доберите карту с меткой Науки.",
     "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
@@ -51,7 +51,7 @@
     "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Увеличьте своё производсво М€ на 2, увеличьте своё производство энергии на 1. Получите 3 растения и постройте город",
 
     "Magnetic Shield": "Магнитное поле",
-    "(Requires 3 power tags. Raise your TR 4 steps.)": "(Требует 3 метки энергии. Повысьте свой РТ на 4.)",
+    "Requires 3 power tags. Raise your TR 4 steps.": "Требует 3 метки энергии. Повысьте свой РТ на 4.",
     "2 Power": "2 энергии",
 
     "Meltworks": "Плавление",
@@ -82,7 +82,6 @@
 
     "Sub-Crust Measurements": "Глубинные замеры",
     "Action: Draw a card.": "Действие: Доберите 1 карту",
-    "Requires 2 science tags.": "Требует 2 метки Науки",
 
     "Potatoes": "Картофель",
     "Lose 2 plants. Increase your M€ production 2 steps.": "Требует сброса 2 растений. Увеличьте производство М€ на 2",
@@ -94,7 +93,6 @@
 
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
 
-    "Magnetic Field Generators": "Генераторы магнитного поля",
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл.",
 
     "Orbital Cleanup": "Очистка орбиты",
@@ -122,19 +120,14 @@
     "Rego Plastics": "Регопластик",
     "Effect: Your steel resources are worth 1 M€ extra.": "Эффект: Ваша сталь стоит на 1 М€ дороже",
 
-    "OR 2": "ИЛИ 2",
-    "Interplanetary Trade": "Межпланетная торговля",
     "Increase your M€ production 1 step per different tag you have in play, including this.": "Увеличьте своё производство М€ за каждую вашу уникальную метку",
 
     "Penguins": "Пингвины",
-    "8 Oceans": "8 океанов",
-    "Action: Add 1 animal to this card.": "Действие: добавьте сюда одно животное",
     "Requires 8 oceans.": "Требует 8 океанов",
     "1 VP for each animal on this card.": "1 ПО за каждое животное на этой карте",
 
     "Snow Algae": "Криофильные водоросли",
     "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Требует 2 океана. Увеличьте своё производство растений и производство тепла на 1",
-
 
     "Self-replicating Robots": "Роботы саморепликанты",
     "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Действие: Откройте и положите сюда карту с меткой здания или космоса с руки, поместите сюда 2 ресурса. Или удвойте здешние ресурсы.",
@@ -152,7 +145,6 @@
     "Energy Market": "Энергетический рынок",
     "Action: Spend 2X M€ to gain X energy.": "Действие: Потратьте 2Х М€, чтобы получить Х энергии",
     "Action: Decrease energy production 1 step to gain 8 M€.": "Действие: Уменьшите своё производство энергии на 1, чтобы получить 8 М€",
-    "OR": "ИЛИ",
 
     "Asteroid Rights": "Права на астероиды",
     "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Действие: Потратьте 1 М€, чтобы добавить 1 астероид на любую карту",
@@ -161,44 +153,32 @@
 
     "Splice": "",
     "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Вы начинаете с 44 М€. Первым действием доберите карту с меткой бактерии",
-    "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":
-    "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 M€ или добавляет на ТУ карту бактерию, а вы получаете 2 M€",
+    "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 M€ или добавляет на ТУ карту бактерию, а вы получаете 2 M€",
 
     "Recyclon": "",
     "You start with 38 M€ and 1 steel production.": "Вы начинаете c 36 М€ и 1 дополнительным уровнем производства стали",
-    "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":
-    "Когда вы разыгрываете метку строителя, включая эту, добавьте сюда 1 бактерию, или удалите отсюда 2 бактерии, чтобы повысить ваше производство растений на 1",
+    "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Когда вы разыгрываете метку строителя, включая эту, добавьте сюда 1 бактерию, или удалите отсюда 2 бактерии, чтобы повысить ваше производство растений на 1",
 
     "Philares": "",
-    "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.":
-    "Вы начинаете c 47 М€. Первым действием разместите тайл озеленения и повысьте уровень кислорода на 1",
-    "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].":
-    "Каждое новое соседство вашего тайла с тайлом другого игрока даёт вам стандартный ресурс на ваш выбор вне зависимости от того кто разметил тайл",
+    "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Вы начинаете c 47 М€. Первым действием разместите тайл озеленения и повысьте уровень кислорода на 1",
+    "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Каждое новое соседство вашего тайла с тайлом другого игрока даёт вам стандартный ресурс на ваш выбор вне зависимости от того кто разметил тайл",
 
     "Mons Insurance": "",
-    "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.":
-    "Вы начинаете c 48 М€. Увеличьте ваш доход на 4. Все противники уменьшают свой доход на 2, но это уменьшение не включает эффект с этой карты",
-    "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.":
-    "Когда один из игроков заставляет другого игрока потерять производство или ресурсы, заплатите жертве 3 М€ или столько сколько у вас есть",
+    "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Вы начинаете c 48 М€. Увеличьте ваш доход на 4. Все противники уменьшают свой доход на 2, но это уменьшение не включает эффект с этой карты",
+    "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Когда один из игроков заставляет другого игрока потерять производство или ресурсы, заплатите жертве 3 М€ или столько сколько у вас есть",
 
     "Factorum": "",
-    "You start with 37 M€. Increase your steel production 1 step.":
-    "Вы начинаете c 37 М€ и 1 дополнительным уровнем производства стали",
-    "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.":
-    "Действие: Увеличьте ваше производство энергии, если у вас нет ресурсов-энергии или потратьте 3 M€, чтобы добрать карту с меткой строителя",
+    "You start with 37 M€. Increase your steel production 1 step.": "Вы начинаете c 37 М€ и 1 дополнительным уровнем производства стали",
+    "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Действие: Увеличьте ваше производство энергии, если у вас нет ресурсов-энергии или потратьте 3 M€, чтобы добрать карту с меткой строителя",
 
     "Arcadian Communities": "",
-    "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
-    "Вы начинаете c 37 М€ и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
-    "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.":
-    "Действие: Разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте по соседству c другим вашим тайлом или СООБЩЕСТОВОМ",
-    "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":
-    "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 M€",
+    "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Вы начинаете c 37 М€ и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
+    "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "Действие: Разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте по соседству c другим вашим тайлом или СООБЩЕСТОВОМ",
+    "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 M€",
 
-    "Astrodrill": "",
+    "AstroDrill": "",
     "You start with 38 M€ and 3 asteroid resources.": "Вы начинаете c 38 М€ и 3 астероидами",
-    "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":
-    "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
+    "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
 
     "Bio Printing Facility": "Биопечать",
     "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Действие: Потратьте 2 энергии, чтобы получить 2 растения ИЛИ добавить 1 животное на ДРУГУЮ карту",
@@ -207,21 +187,20 @@
     "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Действие: Потратьте 1 аэростат отсюда, чтобы получить по 1М€ за каждый аэростат здесь, включая только что потраченный. Можно получить не больше 5М€ за раз",
     "Add 1 floater here for every Earth tag you have, including this.": "Добавьте на эту карту по 1 аэростату за каждую метку Земли, включая метку на этой карте",
 
-    "Stanford Torus": "Стэнфордский тор",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Разместите город в локации Стэнфордский тор",
 
     "Bactoviral Research": "Бактериологические исследования",
-    "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.)",
+    "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.",
 
     "Harvest": "Урожай",
-    "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Требуется 3 выложенных жетона озеленения. Получите 12 M€.)",
+    "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Требуется 3 выложенных жетона озеленения. Получите 12 M€.",
 
     "16 Psyche": "Психея 16",
-    "(Increase titanium production 2 steps. Gain 3 titanium.)": "(Увеличьте производство титана на 2. Получите 3 титана.)",
+    "Increase titanium production 2 steps. Gain 3 titanium.": "Увеличьте производство титана на 2. Получите 3 титана.",
     "Robot Pollinators": "Роботы-опылители",
-    "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)": "(Требование: 4% кислорода. Увеличьте производство растений на 1. Получите 1 растение за каждую метку растений.)",
+    "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Требование: 4% кислорода. Увеличьте производство растений на 1. Получите 1 растение за каждую метку растений.",
     "Outdoor Sports": "Уличный спорт",
-    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)",
+    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Требуется город рядом с океаном. Увеличьте производство M€ на 2.",
     "Supercapacitors": "Суперконденсаторы",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Эффект: Конвертация энергии в тепло не обязатаельна для каждой из единиц ресурса",
     "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1",
@@ -229,10 +208,21 @@
     "Icy Impactors": "Ледяные метеоры",
     "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Действие: Потратьте 10 М€ (можно использовать титан), чтобы добавить сюда 2 астероида.",
     "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Действие: Потратьте 1 астероид здесь, чтобы разместить тайл океана. Первый игрок выбирает, где вы должны его разместить.",
-	
-	"Soil Enrichment": "Удобрение почвы",
+
+    "Soil Enrichment": "Удобрение почвы",
     "Spend 1 microbe from ANY of your cards to gain 5 plants": "Потратьте 1 микроб с любой вашей карты, чтобы получить 5 растений.",
 
-	"Supermarkets": "Супермаркеты",
-    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2."
+    "Supermarkets": "Супермаркеты",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2.",
+
+    "Weather Balloons": "Метеозонды",
+    "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "Действие: Добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы получить 1 М€ за каждый город на Марсе.",
+
+    "Albedo Plants": "Альбедо растения",
+    "(Effect: When you play a plant tag, including this, gain 3 heat.)": "(Эффект: Каждый раз, когда вы разыгрываете метку растений (включая эту), получите 3 тепла.)",
+    "Increase plant production 1 step. Gain 1 plant.": "Повысьте своё производство растений на 1. Получите 1 растение.",
+
+    "Established Methods": "Проверенные методы",
+    "Gain 30 M€. Then pay for and perform 2 standard projects.": "Получите 30 М€. Затем оплатите и выполните 2 стандартных проекта.",
+    "NOTE: If you cannot afford a second standard project, spend 10 M€ instead, or as much as possible.": "ПРИМЕЧАНИЕ: Если вы не можете позволить себе второй стандартный проект, заплатите вместо этого 10 М€, или столько, сколько сможете."
 }

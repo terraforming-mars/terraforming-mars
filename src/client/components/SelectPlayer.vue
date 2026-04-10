@@ -12,7 +12,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -24,17 +24,20 @@ type DataModel = {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectPlayer',
   props: {
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectPlayerModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPlayerResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,

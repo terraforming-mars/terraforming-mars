@@ -7,6 +7,7 @@ import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEf
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
+import {liteBoolean, LiteBoolean} from '../../../common/LiteBoolean';
 
 export class CardRenderer {
   public static builder(f: (builder: Builder<CardRenderRoot>) => void): ICardRenderRoot {
@@ -23,7 +24,10 @@ class CardRenderRoot implements ICardRenderRoot {
 
 class CardRenderProductionBox implements ICardRenderProductionBox {
   public readonly is = 'production-box';
-  constructor(public rows: Array<Array<ItemType>>) {}
+  public rows: Array<Array<ItemType>>;
+  constructor(rows: Array<Array<ItemType>>) {
+    this.rows = rows;
+  }
 
   public static builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
     const builder = new ProductionBoxBuilder();
@@ -34,12 +38,23 @@ class CardRenderProductionBox implements ICardRenderProductionBox {
 
 class CardRenderTile implements ICardRenderTile {
   public readonly is = 'tile';
-  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { }
+  public tile: TileType;
+  public hasSymbol: LiteBoolean;
+  public isAres: LiteBoolean;
+  constructor(tile: TileType, hasSymbol: boolean, isAres: boolean) {
+    this.tile = tile;
+    this.hasSymbol = liteBoolean(hasSymbol);
+    this.isAres = liteBoolean(isAres);
+  }
 }
 
 class CardRenderEffect implements ICardRenderEffect {
   public readonly is = 'effect';
-  constructor(public rows: Array<Array<ItemType>>) {}
+  public rows: Array<Array<ItemType>>;
+
+  constructor(rows: Array<Array<ItemType>>) {
+    this.rows = rows;
+  }
 
   public static builder(f: (builder: EffectBuilder) => void): CardRenderEffect {
     const builder = new EffectBuilder();
@@ -67,7 +82,10 @@ class CardRenderEffect implements ICardRenderEffect {
 
 class CardRenderCorpBoxEffect implements ICardRenderCorpBoxEffect {
   public readonly is = 'corp-box-effect';
-  constructor(public rows: Array<Array<ItemType>>) { }
+  public rows: Array<Array<ItemType>>;
+  constructor(rows: Array<Array<ItemType>>) {
+    this.rows = rows;
+  }
 
   public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
     const builder = new CorpEffectBuilderEffect();
@@ -78,7 +96,10 @@ class CardRenderCorpBoxEffect implements ICardRenderCorpBoxEffect {
 
 class CardRenderCorpBoxAction implements ICardRenderCorpBoxAction {
   public readonly is = 'corp-box-action';
-  constructor(public rows: Array<Array<ItemType>>) { }
+  public rows: Array<Array<ItemType>>;
+  constructor(rows: Array<Array<ItemType>>) {
+    this.rows = rows;
+  }
 
   public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
     const builder = new CorpEffectBuilderAction();
@@ -89,7 +110,10 @@ class CardRenderCorpBoxAction implements ICardRenderCorpBoxAction {
 
 class CardRenderCorpBoxEffectAction implements ICardRenderCorpBoxEffectAction {
   public readonly is = 'corp-box-effect-action';
-  constructor(public rows: Array<Array<ItemType>>) { }
+  public rows: Array<Array<ItemType>>;
+  constructor(rows: Array<Array<ItemType>>) {
+    this.rows = rows;
+  }
 
   public static builder(f: (builder: CorpEffectBuilderEffectAction) => void): CardRenderCorpBoxEffectAction {
     const builder = new CorpEffectBuilderEffectAction();
@@ -167,7 +191,7 @@ abstract class Builder<T> {
   public megacredits(amount: number, options?: ItemOptions): this {
     const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount, options);
     item.amountInside = true;
-    item.showDigit = false;
+    item.showDigit = undefined;
     item.size = options?.size ?? Size.MEDIUM;
     return this._appendToRow(item);
   }
@@ -521,18 +545,8 @@ abstract class Builder<T> {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
     item.size = size;
-    item.isUppercase = uppercase;
-    item.isBold = isBold;
-    return this._appendToRow(item);
-  }
-
-  public text2(text: string, options: {size?: Size, caps?: boolean, bold?: boolean, all?: boolean}) {
-    const item = new CardRenderItem(CardRenderItemType.TEXT);
-    item.text = text;
-    item.size = options.size || Size.MEDIUM;
-    item.isUppercase = options.caps || false;
-    item.isBold = options.bold || true;
-    item.anyPlayer = options.all;
+    item.isUppercase = liteBoolean(uppercase);
+    item.isBold = liteBoolean(isBold);
     return this._appendToRow(item);
   }
 

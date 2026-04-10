@@ -216,7 +216,7 @@
   "Supplier": "Toimittaja",
   "Increase your energy production 2 steps. Gain 4 steel.": "Lisää energiatuotantoasi 2 askelta. Saat 4 terästä.",
 
-  "Supply Drop": "Toimituspudotus",
+  "Supply Drop": "Tarviketoimitus",
   "Gain 3 titanium, 8 steel and 3 plants.": "Saat 3 titaania, 8 terästä ja 3 kasvia.",
 
   "UNMI Contractor": "UNMI-urakoitsija",
@@ -226,7 +226,5 @@
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Saat 6 titaania. Paljasta kortteja kunnes paljastat kaksi korttia, joissa on avaruustagi. Ota ne käteesi ja heitä loput pois.",
 
   "Add resource to card GHG Producing Bacteria": "Lisää resurssi kortille Kasvihuonekaasuja tuottavat bakteerit",
-  "Add resource to card Fish": "Lisää resurssi kortille Kala",
-  "Add resource": "Lisää resurssi",
-  "Gain plant": "Saat kasvin"
+  "Add resource to card Fish": "Lisää resurssi kortille Kala"
 }

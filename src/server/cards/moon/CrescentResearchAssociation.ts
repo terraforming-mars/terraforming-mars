@@ -29,9 +29,10 @@ export class CrescentResearchAssociation extends CorporationCard implements ICor
   }
 
   public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    if (card.tags.indexOf(Tag.MOON) === -1) {
+    const tags = player.tags.cardTagCount(card, Tag.MOON);
+    if (tags === 0) {
       return 0;
     }
-    return player.tags.count(Tag.MOON);
+    return player.tags.count(Tag.MOON) * tags;
   }
 }

@@ -1345,6 +1345,7 @@
         &:not(.global-event-card-content) {
           overflow-x: hidden;
         }
+
         &::-webkit-scrollbar-track {
             background-color: transparent;
             border-radius: 0 0 32px 0;
@@ -1363,6 +1364,14 @@
         .bottom-padding-long {
           padding-bottom: 50px;
         }
+    }
+
+    &.card-hover-tall:hover .card-content:not(.global-event-card-content),
+    &.card-auto-tall .card-content:not(.global-event-card-content) {
+        height: auto;
+        min-height: 218px;
+        overflow: visible;
+        padding-bottom: 8px;
     }
 
     .card-corporation-box {
@@ -1546,6 +1555,15 @@
         line-height: 46px;
     }
 
+    .card-money--S {
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+
     // TODO(kberg): this is a duplicate of .card-resources-counter / .card-resource@{value})
     // Not only can this be reduced using the same construct, but let's get rid of the CSS duplication.
     .card-resource-steel {
@@ -1615,7 +1633,7 @@
     }
 
     .card-neutral-delegate {
-      .card-delegate;
+      .card-delegate();
       background-image: url(./assets/underworld/neutral-delegate.png) !important;
     }
 

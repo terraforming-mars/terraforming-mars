@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
@@ -31,7 +31,7 @@ type LoadGameFormDataModel = {
   rollbackCount: number;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LoadGameForm',
   components: {
     AppButton,

@@ -57,7 +57,6 @@
 
   "Red Ships": "Punaiset alukset",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "TOIMINTO: Saat 1 M€ jokaisesta KAUPUNKI- JA ERIKOISLAATASTA jotka ovat valtameren vieressä.",
-  "Requires 4% oxygen.": "Vaatii 4 % happea.",
 
   "Neptunian Power Consultants": "Neptunuksen energiakonsultit",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "VAIKUTUS: Kun valtameri asetetaan, VOIT maksaa 5 M€ (terästä voi käyttää) lisätäksesi energiatuotantoa 1 askel ja lisätäksesi 1 vesivoimaresurssin tälle kortille.",
@@ -72,7 +71,6 @@
 
   "Homeostasis Bureau": "Homeostaasitoimisto",
   "Effect: When you raise the temperature, gain 3 M€.": "VAIKUTUS: Kun nostat lämpötilaa, saat 3 M€.",
-  "Increase your heat production 2 steps.": "Lisää lämpötuotantoasi 2 askelta.",
 
   "Hermetic Order of Mars": "Marsin hermeettinen veljeskunta",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Hapen täytyy olla 4 % tai vähemmän. Lisää M€-tuotantoasi 2 askelta. Saat 1 M€ jokaista tyhjää aluetta kohti laattojesi vieressä.",
@@ -124,11 +122,8 @@
   "Field-Capped City": "Suojattu kaupunki",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Lisää M€-tuotantoasi 2 askelta, lisää energiatuotantoasi 1 askel, saat 3 kasvia ja aseta kaupunkilaatta.",
 
-  "Great Dam": "Suuri pato",
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Vaatii 4 valtamerialuelaattaa. Lisää energiatuotantoasi 2 askelta.",
 
   "Magnetic Shield": "Magneettisuoja",
-  "3 Power": "3 Energia",
   "Requires 3 power tags. Raise your TR 4 steps.": "Vaatii 3 energiaympyrää. Nosta MKL:ääsi 4 askelta.",
 
   "Meltworks": "Sulattamo",
@@ -139,12 +134,10 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Saat 3 kasvia. Nosta lämpötilaa 1 askel ja aseta 1 valtamerialuelaatta.",
 
   "Diversity Support": "Monimuotoisuuden tuki",
-  "9 Resource types": "9 resurssityyppiä",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "Vaatii että sinulla on 9 erilaista resurssityyppiä. Nosta MKL:ääsi 1 askel.",
 
   "Topsoil Contract": "Pintamultasopimus",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "VAIKUTUS: Kun saat mikrobin MILLE TAHANSA KORTILLE, saat myös 1 M€.",
-  "Gain 3 plants.": "Saat 3 kasvia.",
 
   "Imported Nutrients": "Tuodut ravinteet",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Saat 4 kasvia ja lisää 4 mikrobia TOISELLE KORTILLE.",
@@ -195,7 +188,6 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Lisää M€-tuotantoasi 1 askel jokaista pelaamaasi erilaista ympyrää kohti, tämä mukaan lukien.",
 
   "Penguins": "Pingviinit",
-  "Action: Add 1 animal to this card.": "TOIMINTO: Lisää 1 eläin tälle kortille.",
   "Requires 8 oceans.": "Vaatii 8 valtamerta.",
 
   "Snow Algae": "Lumileväkasvit",
@@ -211,7 +203,6 @@
   "Hi-Tech Lab": "Korkean teknologian laboratorio",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "TOIMINTO: Käytä mikä tahansa määrä energiaa nostaaksesi saman määrän kortteja. OTA 1 KÄTEEN JA HYLKÄÄ LOPUT.",
 
-  "Magnetic Field Generators": "Magneettikentän generaattorit",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasviesi tuotantoa 2 askelta. Nosta MKL:ääsi 3 askelta. Aseta tämä laatta.",
 
   "Mercurian Alloys": "Merkuriuksen lejeeringit",
@@ -233,7 +224,6 @@
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Vaatii 4 valtamerialuelaattaa. Lisää energiatuotantoasi 2 askelta. Aseta tämä laatta valtamerialuelaatan VIEREEN.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasviesi tuotantoa 2 askelta. Nosta MKL:ääsi 3 askelta.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Vaatii 8 valtamerta. 1 VP jokaista eläintä kohti tällä kortilla.",
   "Requires 2 science tags.": "Vaatii 2 tiedeympyrää.",

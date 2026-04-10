@@ -60,13 +60,17 @@ export class Faraday extends CeoCard {
 
     for (const tag of tags) {
       if (INVALID_TAGS.includes(tag)) {
-        return;
+        continue;
       }
 
       const count = player.tags.count(tag, 'raw');
-      const lastReward = this.data.counts[tag] ?? 0;
-      if (count >= lastReward + 5) {
-        this.data.counts[tag] = count;
+      const tagsFromCurrentCard = tags.filter((t) => t === tag).length;
+      const priorCount = count - tagsFromCurrentCard;
+      const lastReward = this.data.counts[tag] ?? Math.floor(priorCount / 5) * 5;
+      this.data.counts[tag] = lastReward;  // ensure initialized for future plays
+      const newRewardThreshold = lastReward + 5;
+      if (count >= newRewardThreshold) {
+        this.data.counts[tag] = newRewardThreshold;
         rewards.push(tag);
       }
     }

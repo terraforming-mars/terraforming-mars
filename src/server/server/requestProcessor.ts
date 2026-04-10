@@ -1,4 +1,4 @@
-import * as prometheus from 'prom-client';
+import prometheus from 'prom-client';
 import {Clock} from '../../common/Timer';
 import {paths} from '../../common/app/paths';
 import {Request} from '../Request';
@@ -90,6 +90,8 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
+    ['vendors.js', ServeAsset.INSTANCE],
+    ['vendors.js.map', ServeAsset.INSTANCE],
     [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
@@ -108,10 +110,13 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object') {
+  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
     return '!' + socketIpAddress.address + '!';
   }
-  return socketIpAddress;
+  if (typeof socketIpAddress === 'string') {
+    return socketIpAddress;
+  }
+  return '';
 }
 
 function getHandler(pathname: string): IHandler | undefined {
@@ -119,7 +124,10 @@ function getHandler(pathname: string): IHandler | undefined {
   if (handler !== undefined) {
     return handler;
   }
-  if (pathname.startsWith('assets/') || pathname === 'sw.js') {
+  if (pathname.startsWith('assets/')) {
+    return ServeAsset.INSTANCE;
+  }
+  if (pathname.startsWith('chunks/')) {
     return ServeAsset.INSTANCE;
   }
   return undefined;

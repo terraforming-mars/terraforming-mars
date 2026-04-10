@@ -8,9 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 24
     - run: npm ci
+    - run: npm run make:static
     - run: npm run lint
     - run: npm run build
     - run: npm run build:tests
@@ -20,15 +23,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
       with:
-        node-version: 18
+        node-version: 24
     - run: npm ci
-    # - run: npm run lint
+    - run: npm run make:static
+    - run: npm run lint
     - run: npm run build
-    # - run: npm run build:tests
-    # - run: npm test
+    - run: npm run build:tests
+    - run: npm test
 
   build-docker:
     runs-on: ubuntu-latest

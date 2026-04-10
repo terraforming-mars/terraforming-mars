@@ -8,7 +8,11 @@
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
-          <CardContent :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :bottomPadding="bottomPadding" />
+          <CardContent
+              :metadata="cardMetadata"
+              :requirements="cardRequirements"
+              :isCorporation="isCorporationCard"
+              :bottomPadding="bottomPadding" />
       </div>
       <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
@@ -20,7 +24,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
@@ -42,7 +46,8 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
-export default Vue.extend({
+
+export default defineComponent({
   name: 'Card',
   components: {
     CardTitle,
@@ -74,6 +79,12 @@ export default Vue.extend({
       type: String as () => Color,
       required: false,
       default: 'neutral',
+    },
+    // When true, the card is automatically sized regardless of hover.
+    autoTall: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data() {
@@ -125,7 +136,7 @@ export default Vue.extend({
     },
     cardClasses(): string {
       const classes = [];
-      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
+      classes.push('card-' + this.card.name.toLowerCase().replaceAll(' ', '-'));
 
       if (this.card.isDisabled) {
         classes.push('card-unavailable');
@@ -136,6 +147,11 @@ export default Vue.extend({
       if (this.isStandardProject) {
         classes.push('card-standard-project');
       }
+      if (this.autoTall) {
+        classes.push('card-auto-tall');
+      } else if (getPreferences().experimental_ui) {
+        classes.push('card-hover-tall');
+      }
       const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject && this.card.isDisabled) {
         classes.push('card-hide');
@@ -145,7 +161,7 @@ export default Vue.extend({
     cardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
-    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> {
+    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> | undefined {
       return this.cardInstance.requirements;
     },
     resourceAmount(): number {
@@ -156,7 +172,7 @@ export default Vue.extend({
     },
     isProjectCard(): boolean {
       const type = this.cardType;
-      return type !== CardType.PRELUDE && type !== CardType.CORPORATION && type !== CardType.CEO;
+      return type === CardType.AUTOMATED || type === CardType.ACTIVE || type === CardType.EVENT;
     },
     isStandardProject() : boolean {
       return this.cardType === CardType.STANDARD_PROJECT || this.cardType === CardType.STANDARD_ACTION;

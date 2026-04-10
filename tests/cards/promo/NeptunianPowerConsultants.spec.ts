@@ -45,7 +45,7 @@ describe('NeptunianPowerConsultants', () => {
     addOcean(player2);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 5}));
+    orOptions.options[0].cb(Payment.of({megacredits: 5}));
 
     expect(card.resourceCount).eq(1);
     expect(player.production.energy).eq(1);
@@ -58,7 +58,7 @@ describe('NeptunianPowerConsultants', () => {
     addOcean(player2);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 3, steel: 1}));
+    orOptions.options[0].cb(Payment.of({megacredits: 3, steel: 1}));
 
     expect(card.resourceCount).eq(1);
     expect(player.production.energy).eq(1);
@@ -77,7 +77,7 @@ describe('NeptunianPowerConsultants', () => {
     runAllActions(game);
     cast(player2.popWaitingFor(), undefined);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 5, steel: 0}));
+    orOptions.options[0].cb(Payment.of({megacredits: 5, steel: 0}));
 
     runAllActions(game);
 

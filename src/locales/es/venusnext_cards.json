@@ -2,7 +2,6 @@
   "% Venus":"",
 
   "Stratospheric Birds":"Aves Estratosféricas",
-  "Action: Add 1 animal to this card.":"Acción: añade 1 animal a esta carta.",
   "Requires Venus 12% and that you spend 1 floater from any card.":"Requiere 12% en la escala de Venus. Gasta 1 flotador de cualquier carta. 1 PV por cada animal en esta carta.",
 
   "Venusian Plants":"Plantas Venusianas",
@@ -11,7 +10,6 @@
   "Extremophiles":"Extremófilos",
   "Action: Add 1 microbe to ANY card.":"Acción: añade 1 microbio a CUALQUIER carta.",
   "1 VP for every 3rd Microbe on this card.":"1 PV por cada 3 microbios en esta carta.",
-  "Requires 2 science tags.":"Requiere 2 símbolos tipo ciencia.",
 
   "Mining Quota":"Cuota de Minado",
   "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano. Aumenta tu producción de acero 2 niveles.",
@@ -51,7 +49,6 @@
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano. Roba 2 cartas.",
 
   "Atalanta Planitia Lab":"Laboratorio Atalanta Planitia",
-  "Requires 3 science tags. Draw 2 cards.":"Requiere 3 símbolos de ciencia. Roba 2 cartas.",
 
   "Rotator Impacts":"Impactos Rotatorios",
   "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Acción: gasta 5 M€ para añadir un recurso de asteroide a esta carta (PUEDE USARSE TITANIO).",
@@ -163,7 +160,7 @@
   "Requires Venus 10%.":"Requiere 10% en la escala de Venus.",
 
   "Luxury Foods":"Delicatessen",
-  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano.",
+  "Requires that you have a Venus tag, an Earth tag and a Jovian tag.":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano.",
 
   "Neutralizer Factory":"Fábrica Neutralizante",
   "Requires Venus 10%. Increase the Venus track 1 step.":"Requiere 10% en la escala de Venus. Incrementa la escala de Venus 1 nivel.",

@@ -28,7 +28,7 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
  * @param {ReadonlyArray<T>} b: the second array
  * @return {Array<T>} the intersection of both arrays
  */
-export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array<T> {
+export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<NoInfer<T>>): Array<T> {
   return a.filter((e) => b.includes(e));
 }
 
@@ -39,7 +39,7 @@ export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array
  * @param {Array<T>} b: the second array
  * @return {Boolean} true if a includes an element of b.
  */
-export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): boolean {
+export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<NoInfer<T>>): boolean {
   return a.some((e) => b.includes(e));
 }
 
@@ -63,7 +63,7 @@ export function oneWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): R
 /**
  * Returns elements in neither A nor B.
  */
-export function twoWayDifference<T>(a: Array<T>, b: Array<T>): Array<T> {
+export function twoWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   return a
     .filter((x) => !b.includes(x))
     .concat(b.filter((x) => !a.includes(x)));
@@ -84,7 +84,7 @@ export type ValueOf<T> = T[keyof T];
  *
  * Returns true if the element was removed from the array, false otherwise.
  */
-export function inplaceRemove<T>(array: Array<T>, element: T): boolean {
+export function inplaceRemove<T>(array: Array<T>, element: NoInfer<T>): boolean {
   return inplaceRemoveIf(array, (e) => e === element) !== undefined;
 }
 

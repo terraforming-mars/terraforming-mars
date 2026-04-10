@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {Warning} from '@/common/cards/Warning';
 
 const descriptions: Record<Warning, string> = {
@@ -37,11 +37,11 @@ const descriptions: Record<Warning, string> = {
   'underworldtokendiscard': 'Warning: You will have to discard an underworld resource token you rely on.',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Array as () => Array<Warning>,
+      type: Array as () => ReadonlyArray<Warning>,
       default: () => {
         return [];
       },

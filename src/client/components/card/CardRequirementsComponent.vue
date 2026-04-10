@@ -8,16 +8,16 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRequirementsComponent',
   props: {
     requirements: {
-      type: Array<CardRequirementDescriptor>,
-      required: true,
+      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
+      required: false,
     },
   },
   components: {
@@ -25,11 +25,17 @@ export default Vue.extend({
   },
   computed: {
     getClasses(): string {
-      const hasMax = this.requirements.some((req) => req.max);
+      const hasMax = this.requirements?.some((req) => req.max);
       return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
     },
     indentRight(): ReadonlyArray<boolean> {
-      return [false, ...this.requirements.map((req) => (req.nextTo || false))];
+      const indentations = [false];
+      if (this.requirements) {
+        for (const req of this.requirements) {
+          indentations.push(req.nextTo || false);
+        }
+      }
+      return indentations;
     },
   },
 });

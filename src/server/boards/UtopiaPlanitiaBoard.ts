@@ -3,11 +3,10 @@ import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
-import {Space} from './Space';
 
 export class UtopiaPlanitiaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): UtopiaPlanitiaBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -34,14 +33,7 @@ export class UtopiaPlanitiaBoard extends MarsBoard {
     // y=8
     builder.land().land().land(STEEL, STEEL).ocean(PLANT).land(PLANT);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
     const spaces = builder.build();
     return new UtopiaPlanitiaBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, []);
   }
 }

@@ -8,6 +8,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceId} from '../../common/Types';
 import {oneWayDifference} from '../../common/utils/utils';
+import {Tile} from '../Tile';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
@@ -194,5 +195,21 @@ export class MarsBoard extends Board {
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;
     });
+  }
+
+  // Returns true if |newTile| can cover go on |space|, particularly if |space| already has a tile.
+  public static canCover(space: Space, newTile: Tile): boolean {
+    if (space.tile === undefined) {
+      return true;
+    }
+
+    // A hazard protected by the Desperate Measures action can't be covered.
+    if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
+      return true;
+    }
+    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
+      return true;
+    }
+    return false;
   }
 }

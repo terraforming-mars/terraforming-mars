@@ -161,7 +161,7 @@ export class UnderworldExpansion {
 
     for (const p of game.playersInGenerationOrder) {
       for (const card of p.tableau) {
-        card.onIdentificationByAnyPlayer?.(p, player, space);
+        card.onIdentificationByAnyPlayer?.(p, player, undergroundResource);
       }
     }
     return true;

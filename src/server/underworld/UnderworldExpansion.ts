@@ -654,6 +654,11 @@ export class UnderworldExpansion {
       // TODO(kberg): Log the discard.
       player.underworldData.activeBonus = undefined;
     }
+    if (token.token === 'sciencetag') {
+      player.tags.extraScienceTags = Math.max(player.tags.extraScienceTags - 1, 0);
+    } else if (token.token === 'planttag') {
+      player.tags.extraPlantTags = Math.max(player.tags.extraPlantTags - 1, 0);
+    }
   }
 }
 

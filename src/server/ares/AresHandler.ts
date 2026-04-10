@@ -6,8 +6,7 @@ import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
-import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
-import {Tile} from '../Tile';
+import {TileType, tileTypeToString} from '../../common/TileType';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
 import {MultiSet} from 'mnemonist';
@@ -216,22 +215,6 @@ export class AresHandler {
       player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
       player.game.defer(new SelectPaymentDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
-  }
-
-  // Returns true if |newTile| can cover |boardTile|.
-  public static canCover(space: Space, newTile: Tile): boolean {
-    if (space.tile === undefined) {
-      return true;
-    }
-
-    // A hazard protected by the Desperate Measures action can't be covered.
-    if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
-      return true;
-    }
-    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
-      return true;
-    }
-    return false;
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {

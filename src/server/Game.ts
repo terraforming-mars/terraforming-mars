@@ -1306,7 +1306,7 @@ export class Game implements IGame, Logger {
       throw new Error('This space is land claimed by ' + space.player.name);
     }
 
-    if (!AresHandler.canCover(space, tile)) {
+    if (!MarsBoard.canCover(space, tile)) {
       throw new Error('Selected space is occupied: ' + space.id);
     }
 

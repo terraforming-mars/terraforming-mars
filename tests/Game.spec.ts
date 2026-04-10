@@ -733,6 +733,19 @@ describe('Game', () => {
     expect(player.titanium).eq(1);
   });
 
+  it('Ocean upgrade tiles can be placed on ocean spaces without Ares or Pathfinders', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-ocean-upgrade', [player], player);
+    const oceanSpace = addOcean(player);
+
+    // Placing an ocean city tile on top of an existing ocean should not throw,
+    // even without Ares or Pathfinders expansion enabled.
+    expect(() => {
+      game.addTile(player, oceanSpace, {tileType: TileType.NEW_HOLLAND});
+    }).to.not.throw();
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.NEW_HOLLAND);
+  });
+
   /**
    * ensure as we modify properties we consider
    * serialization. if this fails update SerializedGame

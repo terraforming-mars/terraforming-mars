@@ -84,7 +84,9 @@ export class TurmoilHandler {
   }
 
   public static computeTerraformRatingBump(player: IPlayer, tr: TRSource = {}): number {
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) return 0;
+    if (!PartyHooks.reds01PolicyInEffect(player)) {
+      return 0;
+    }
 
     // Making a local copy since it's going to get mutated.
     tr = {...tr};

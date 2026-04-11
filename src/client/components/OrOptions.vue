@@ -14,11 +14,11 @@
                               :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved(idx)"
-                              :showsave="showsave && isMultiSelectCard(option)"
+                              :showsave="showsave && showChildSaveButton(option)"
                               :showtitle="false" />
       </div>
     </div>
-    <div v-if="showsave && selectedOption && !isMultiSelectCard(selectedOption)">
+    <div v-if="showsave && selectedOption && !showChildSaveButton(selectedOption)">
       <div style="margin: 5px 30px 10px" class="wf-action">
         <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
@@ -136,7 +136,9 @@ export default defineComponent({
         });
       };
     },
-    isMultiSelectCard(option: PlayerInputModel): boolean {
+    // When the child component is a multi-select card, let it render its own save button.
+    // This allows the child to control the button label (e.g. "Sell 3 patents").
+    showChildSaveButton(option: PlayerInputModel): boolean {
       return option.type === 'card' && !(option.max === 1 && option.min === 1);
     },
     saveData() {

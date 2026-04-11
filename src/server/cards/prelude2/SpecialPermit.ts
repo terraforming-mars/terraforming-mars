@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
+import {message} from '../../logs/MessageBuilder';
 
 export class SpecialPermit extends Card implements IProjectCard {
   constructor() {
@@ -30,8 +31,22 @@ export class SpecialPermit extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    if (player.game.isSoloMode()) {
+      return true;
+    }
+    return StealResources.getCandidates(player, Resource.PLANTS, 4, /* mandatory= */ true).length > 0;
+  }
+
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new StealResources(player, Resource.PLANTS, 4));
+    player.game.defer(
+      new StealResources(
+        player,
+        Resource.PLANTS,
+        4,
+        message('Select player to steal ${0} ${1} from', (b) => b.number(4).string(Resource.PLANTS)),
+        /* mandatory= */ true));
+
     return undefined;
   }
 }

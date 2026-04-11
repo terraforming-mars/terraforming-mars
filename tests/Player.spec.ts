@@ -328,6 +328,30 @@ describe('Player', () => {
     expect(player2.megaCredits).eq(3);
   });
 
+  it('addResourceTo, logZero', () => {
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
+    const game = Game.newInstance('gameid', [player], player);
+
+    const log = game.gameLog;
+
+    log.length = 0; // Empty it out.
+
+    const card = new Pets();
+    expect(card.resourceCount).eq(0);
+    expect(log).is.empty;
+
+    player.addResourceTo(card, {qty: 0, log: true, logZero: false});
+    expect(card.resourceCount).eq(0);
+    expect(log).is.empty;
+
+    player.addResourceTo(card, {qty: 0, log: true, logZero: true});
+    expect(card.resourceCount).eq(0);
+    expect(log).has.length(1);
+    const logEntry = log[0];
+    expect(logEntry.data[1].value).eq('0');
+    expect(logEntry.data[3].value).eq('Pets');
+  });
+
   it('removeResourcesFrom', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player);

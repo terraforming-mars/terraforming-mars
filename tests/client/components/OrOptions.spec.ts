@@ -34,9 +34,11 @@ describe('OrOptions', () => {
           }, {
             type: 'option',
             title: 'select a',
+            buttonLabel: '',
           }, {
             title: 'select b',
             type: 'option',
+            buttonLabel: '',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -77,9 +79,11 @@ describe('OrOptions', () => {
           }, {
             type: 'option',
             title: 'select a',
+            buttonLabel: '',
           }, {
             type: 'option',
             title: 'select b',
+            buttonLabel: '',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -166,12 +170,15 @@ describe('OrOptions', () => {
           options: [{
             type: 'option',
             title: 'select a',
+            buttonLabel: '',
           }, {
             type: 'option',
             title: 'select b',
+            buttonLabel: '',
           }, {
             type: 'option',
             title: 'select c',
+            buttonLabel: '',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -211,9 +218,11 @@ describe('OrOptions', () => {
           options: [{
             type: 'option',
             title: 'select a',
+            buttonLabel: '',
           }, {
             type: 'option',
             title: 'select b',
+            buttonLabel: '',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -229,5 +238,50 @@ describe('OrOptions', () => {
     const buttons = component.findAllComponents({name: 'AppButton'});
     await buttons[0].trigger('click');
     expect(savedData).to.deep.eq({type: 'or', index: 1, response: {type: 'option'}});
+  });
+
+  it('showChildSaveButton is true only for multi-select cards', () => {
+    const vm = mount(OrOptions, {
+      ...globalConfig,
+      global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
+      props: {
+        players: [],
+        playerView: {},
+        playerinput: {type: 'or', title: '', options: [{type: 'option', title: 'a'}]},
+        onsave: () => {},
+      },
+    }).vm;
+    expect(vm.showChildSaveButton({type: 'card', min: 0, max: 5})).to.be.true;
+    expect(vm.showChildSaveButton({type: 'card', min: 1, max: 1})).to.be.false;
+    expect(vm.showChildSaveButton({type: 'option'})).to.be.false;
+  });
+
+  it('child save button label includes card count', () => {
+    const component = mount(OrOptions, {
+      ...globalConfig,
+      global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
+      props: {
+        players: [],
+        playerView: {},
+        playerinput: {
+          type: 'or',
+          title: '',
+          options: [{
+            type: 'card',
+            title: 'Sell Patents',
+            buttonLabel: 'Sell',
+            cards: [],
+            min: 0,
+            max: 5,
+            showOnlyInLearnerMode: false,
+            selectBlueCardAction: false,
+            showOwner: false,
+          }],
+        },
+        onsave: () => {},
+        showsave: true,
+      },
+    });
+    expect(component.findComponent({name: 'AppButton'}).text()).to.eq('Sell 0');
   });
 });

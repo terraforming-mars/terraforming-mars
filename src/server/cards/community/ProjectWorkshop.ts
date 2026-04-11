@@ -13,7 +13,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {digit} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../common/turmoil/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
@@ -61,7 +60,7 @@ export class ProjectWorkshop extends CorporationCard implements ICorporationCard
     const cards = player.playedCards.projects()
       .filter((card) => card.type === CardType.ACTIVE);
 
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
+    if (!PartyHooks.reds01PolicyInEffect(player)) {
       return cards;
     }
     return cards.filter((card) => {

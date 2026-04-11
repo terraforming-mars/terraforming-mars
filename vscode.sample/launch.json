@@ -29,7 +29,7 @@
         "request": "launch",
         "type": "node",
         "args": [
-          "--import", "tsx",
+          "--import=tsx",
           "-r", "tests/testing/setup.ts",
           "-r", "tests/testing/log-the-log.ts",
           "${file}",
@@ -47,7 +47,7 @@
         "request": "launch",
         "type": "node",
         "args": [
-          "--import", "tsx",
+          "--import=tsx",
           "-r", "tests/testing/setup.ts",
           "${file}",
           "--no-timeouts",
@@ -62,7 +62,7 @@
         "request": "launch",
         "type": "node",
         "args": [
-          "--import", "tsx",
+          "--import=tsx",
           "${file}",
           "--no-timeouts",
           "--reporter-option",
@@ -76,7 +76,7 @@
         "request": "launch",
         "type": "node",
         "args": [
-          "--import", "tsx",
+          "--import=tsx",
           "${file}",
           "--no-timeouts",
           "-g",

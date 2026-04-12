@@ -6,7 +6,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {ICard} from '../../../src/server/cards/ICard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('AirRaid', () => {
@@ -23,18 +23,23 @@ describe('AirRaid', () => {
     player.playedCards.push(stormcraftIncorporated);
   });
 
-  it('Can not play', () => {
+  it('Can not play: no floater', () => {
+    player2.megaCredits = 5;
+    expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Can not play: no opponent has 5+ M€', () => {
+    player.addResourceTo(stormcraftIncorporated);
+    player2.megaCredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - multiple targets', () => {
     player.addResourceTo(stormcraftIncorporated);
-    expect(card.canPlay(player)).is.true;
-
     const otherCardWithFloater = new Dirigibles();
     player.playedCards.push(otherCardWithFloater);
     player.addResourceTo(otherCardWithFloater);
-    player2.megaCredits = 4;
+    player2.megaCredits = 5;
 
     card.play(player);
     const option1 = cast(player.game.deferredActions.pop()!.execute(), OrOptions);
@@ -42,26 +47,40 @@ describe('AirRaid', () => {
 
     option1.options[0].cb();
     expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.megaCredits).to.eq(5);
 
     option2.cb([stormcraftIncorporated]);
     expect(stormcraftIncorporated.resourceCount).to.eq(0);
   });
 
-  it('Should play - single target for floater removal and MC removal', () => {
+  it('Should play - single target', () => {
     player.addResourceTo(stormcraftIncorporated);
-    expect(card.canPlay(player)).is.true;
+    player2.megaCredits = 5;
 
-    player2.megaCredits = 4;
     card.play(player);
-
-    const option = cast(player.game.deferredActions.pop()!.execute(), OrOptions); // Steal money
-    expect(option.options).has.lengthOf(2);
+    const option = cast(player.game.deferredActions.pop()!.execute(), OrOptions);
+    expect(option.options).has.lengthOf(1);
     option.options[0].cb();
     player.game.deferredActions.pop()!.execute(); // Remove floater
 
     expect(stormcraftIncorporated.resourceCount).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.megaCredits).to.eq(5);
+  });
+
+  it('Solo mode: grants 5 M€ directly', () => {
+    const [soloGame, soloPlayer] = testGame(1);
+    const soloCard = new AirRaid();
+    const soloStormcraft = new StormCraftIncorporated();
+    soloPlayer.playedCards.push(soloStormcraft);
+    soloPlayer.addResourceTo(soloStormcraft);
+    soloPlayer.megaCredits = 0;
+
+    soloCard.play(soloPlayer);
+    runAllActions(soloGame);
+
+    expect(soloPlayer.popWaitingFor()).is.undefined;
+    expect(soloPlayer.megaCredits).to.eq(5);
+    expect(soloStormcraft.resourceCount).to.eq(0);
   });
 });

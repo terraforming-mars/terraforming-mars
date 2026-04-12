@@ -33,6 +33,15 @@ describe('AncientShipyards', () => {
     expect(player.titanium).eq(0);
   });
 
+  it('canAct: false when any opponent has fewer than 2 M€', () => {
+    player2.megaCredits = 2;
+    player3.megaCredits = 1;
+    expect(card.canAct(player)).is.false;
+
+    player3.megaCredits = 2;
+    expect(card.canAct(player)).is.true;
+  });
+
   it('act', () => {
     expect(card.resourceCount).eq(0);
     player.megaCredits = 0;

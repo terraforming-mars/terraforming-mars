@@ -35,7 +35,8 @@ export class SubnauticPirates extends Card implements IProjectCard {
     const spaces = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true, newHolland: true});
     for (const space of spaces) {
       for (const adjacent of player.game.board.getAdjacentSpaces(space)) {
-        if (adjacent.player !== undefined && adjacent.player !== player && Board.hasRealTile(adjacent)) {
+        if (adjacent.player !== undefined && adjacent.player !== player &&
+            Board.hasRealTile(adjacent) && adjacent.player.megaCredits >= 7) {
           targets.add(adjacent.player);
         }
       }

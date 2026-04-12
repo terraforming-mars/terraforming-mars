@@ -50,7 +50,9 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard implements IC
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.titanium > 0 || this.resourceCount > 0;
+    const canUseFleet = this.resourceCount > 0 &&
+      (player.game.isSoloMode() || player.opponents.every((p) => p.megaCredits >= 2));
+    return player.titanium > 0 || canUseFleet;
   }
 
   public action(player: IPlayer) {

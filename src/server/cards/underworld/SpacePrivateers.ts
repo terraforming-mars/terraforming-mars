@@ -46,7 +46,9 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
   };
 
   canAct(player: IPlayer): boolean {
-    return this.resourceCount > 0 && player.game.isSoloMode() === false;
+    return this.resourceCount > 0 &&
+      !player.game.isSoloMode() &&
+      player.opponents.every((p) => p.megaCredits >= this.resourceCount);
   }
 
   action(player: IPlayer): PlayerInput | undefined {

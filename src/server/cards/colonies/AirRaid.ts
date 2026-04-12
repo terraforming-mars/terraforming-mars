@@ -30,11 +30,12 @@ export class AirRaid extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.getResourceCount(CardResource.FLOATER) > 0;
+    return player.getResourceCount(CardResource.FLOATER) > 0 &&
+      StealResources.getCandidates(player, Resource.MEGACREDITS, 5, true).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new StealResources(player, Resource.MEGACREDITS, 5));
+    player.game.defer(new StealResources(player, Resource.MEGACREDITS, 5, undefined, true));
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, {source: 'self', blockable: false}));
     return undefined;
   }

@@ -31,7 +31,12 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     player.titanium = 0;
     card.resourceCount = 1;
+    player2.megaCredits = 2;
+    player3.megaCredits = 2;
     expect(card.canAct(player)).is.true;
+
+    player2.megaCredits = 1; // one opponent can't cover the steal
+    expect(card.canAct(player)).is.false;
 
     player.titanium = 0;
     card.resourceCount = 0;

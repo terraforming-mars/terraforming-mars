@@ -1343,8 +1343,8 @@ export class Game implements IGame, Logger {
 
       if (this.gameOptions.boardName === BoardName.HOLLANDIA) {
         const spaces = this.board.spaces.filter(Board.ownedBy(player));
-        const part = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
-        player.withinDeflectionZone = part[0].length > 0 && part[1].length === 0;
+        const [inside, outside] = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
+        player.withinDeflectionZone = inside.length > 0 && outside.length === 0;
       }
     } else {
       space.player = undefined;

@@ -315,10 +315,6 @@ export class Player implements IPlayer {
     }
   }
 
-  public getTerraformRating(): number {
-    return this.terraformRating;
-  }
-
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean, from?: From} = {}) {
     if (this.preservationProgram === true && this.game.phase === Phase.ACTION) {
       steps--;

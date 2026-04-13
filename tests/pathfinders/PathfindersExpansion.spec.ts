@@ -353,7 +353,7 @@ describe('PathfindersExpansion', () => {
     PathfindersExpansion.grant('tr', player, Tag.EARTH);
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('grant - venus_scale', () => {
@@ -366,6 +366,6 @@ describe('PathfindersExpansion', () => {
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });

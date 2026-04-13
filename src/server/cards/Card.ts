@@ -40,7 +40,7 @@ const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
 
 /* Properties that are the same internally and externally */
 type SharedProperties = {
-  /** @deprecated use behavior */
+  /** Prefer setting adjacencyBonus inside behavior.tile instead. */
   adjacencyBonus?: AdjacencyBonus;
   action?: Behavior | undefined;
   behavior?: Behavior | undefined;

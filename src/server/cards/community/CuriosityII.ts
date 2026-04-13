@@ -50,7 +50,7 @@ export class CuriosityII extends CorporationCard implements ICorporationCard {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE, SpaceBonus.ENERGY];
 
     // onTilePlaced gets called with Mars Nomads, should be ignored here.
-    if (space.tile?.tileType === undefined) {
+    if (space.tile === undefined) {
       return;
     }
 

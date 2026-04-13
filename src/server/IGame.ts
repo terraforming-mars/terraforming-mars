@@ -18,6 +18,7 @@ import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
+import {ICard} from './cards/ICard';
 import {Turmoil} from './turmoil/Turmoil';
 import {AresData} from '../common/ares/AresData';
 import {MoonData} from './moon/MoonData';
@@ -199,6 +200,11 @@ export interface IGame extends Logger {
    * a hazard tile, or overplacing one tile on top of another.
    */
   grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile?: boolean): void
+  /**
+   * Calls f(cardOwner, card) for every card in every player's tableau,
+   * in generation order.
+   */
+  triggerForAllCards(f: (cardOwner: IPlayer, card: ICard) => void): void;
 
   /**
    * Gives all the bonuses from a space on the map.

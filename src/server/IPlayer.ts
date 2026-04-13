@@ -35,6 +35,7 @@ import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
+import {Tag} from '../common/cards/Tag';
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -319,6 +320,7 @@ export interface IPlayer {
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: ICard): void;
+  triggerOnNonCardTagAdded(tag: Tag): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;

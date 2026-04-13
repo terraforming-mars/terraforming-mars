@@ -89,14 +89,8 @@ export class MarsNomads extends Card implements IActionCard {
         player.game.grantPlacementBonuses(player, space, coveringExistingSpace);
 
         // Trigger onTilePlaced callbacks even though no actual tile is placed.
-        // e.g. Geological Expedition. This means that all onTilePlaced must
-        // be made aware that space.tile could be undefined. Not a great
-        // abstraction.
-        for (const p of player.game.players) {
-          for (const playedCard of p.tableau) {
-            playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
-          }
-        }
+        // Note: all onTilePlaced callbacks must handle space.tile being undefined.
+        player.game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MARS));
 
         return undefined;
       });

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {Keplertec} from '../../../src/server/cards/underworld/Keplertec';
+import {MiningMarketInsider} from '../../../src/server/cards/underworld/MiningMarketInsider';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -83,6 +84,19 @@ describe('Keplertec', () => {
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
+  });
+
+  it('effect triggers onIdentificationByAnyPlayer', () => {
+    const card = new Keplertec();
+    const insider = new MiningMarketInsider();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card, insider);
+
+    player.addResourceTo(card, 1);
+    runAllActions(game);
+
+    cast(player.popWaitingFor(), OrOptions);
+    expect(insider.resourceCount).eq(1);
   });
 
   it('effect, 2 at once', () => {

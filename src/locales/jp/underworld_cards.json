@@ -156,7 +156,7 @@
     "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "条件：科学タグ1つ以上. 3植物獲得. 2回地下資源を調査する. そのうち1つを獲得.",
 
     "Mining Market Insider": "鉱山市場インサイダー",
-    "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
+    "Effect: After any player identifies 1 or more underground resources (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
     "Action: Spend 4 data resources on this card to draw a card.": "アクション：このカード上から4データ除去し、1ドロー.",
 
     "Monopoly": "独占",

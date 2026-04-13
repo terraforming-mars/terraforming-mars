@@ -33,6 +33,11 @@ export class Ingrid extends CeoCard {
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (this.opgActionIsActive === false) return;
+    // onTilePlaced gets called with Mars Nomads, should be ignored here.
+    if (space.tile === undefined) {
+      return;
+    }
+
     // This filters for tiles only on mars (not moon), and includes Land+Oceans+'Coves'(landoceans)
     if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
     if (cardOwner.id !== activePlayer.id) return;

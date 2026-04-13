@@ -158,13 +158,16 @@ export class UnderworldExpansion {
 
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
+    this.notifyIdentification(game, player, undergroundResource);
+    return true;
+  }
 
+  public static notifyIdentification(game: IGame, identifyingPlayer: IPlayer | undefined, token: UndergroundResourceToken): void {
     for (const p of game.playersInGenerationOrder) {
       for (const card of p.tableau) {
-        card.onIdentificationByAnyPlayer?.(p, player, undergroundResource);
+        card.onIdentificationByAnyPlayer?.(p, identifyingPlayer, token);
       }
     }
-    return true;
   }
 
   public static identifyAdjacentSpaces(player: IPlayer, space: Space): ReadonlyArray<Space> {

@@ -88,9 +88,10 @@ export class MarsNomads extends Card implements IActionCard {
         const coveringExistingSpace = AresHandler.hasHazardTile(space);
         player.game.grantPlacementBonuses(player, space, coveringExistingSpace);
 
-        // Trigger onTilePlaced callbacks (e.g. Geological Expedition) even though
-        // no actual tile is placed. Cards that require a physical tile (e.g. Mining
-        // Guild, Philares) guard against space.tile === undefined.
+        // Trigger onTilePlaced callbacks even though no actual tile is placed.
+        // e.g. Geological Expedition. This means that all onTilePlaced must
+        // be made aware that space.tile could be undefined. Not a great
+        // abstraction.
         for (const p of player.game.players) {
           for (const playedCard of p.tableau) {
             playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);

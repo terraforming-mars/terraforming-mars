@@ -127,7 +127,7 @@
 
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Vaatii 2 korruptiota. Vähennä jonkun M€-tuotantoa 2 askelta. Lisää M€-tuotantoasi 1 askel jokaista korruptio-yksikköäsi kohti.",
 
-"Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Varasta 4 M€, plus 1 ylimääräinen M€ jokaista korruptioresurssiasi kohti, keneltä tahansa pelaajalta.",
+"Steal up to 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Varasta enintään 4 M€, plus 1 ylimääräinen M€ jokaista korruptioresurssiasi kohti, keneltä tahansa pelaajalta.",
 
 "Hyperspace Drive Prototype": "Hyperavaruusajurin prototyyppi",
 "Requires that 3 science tags. Put a fighter resource on a card you own, or gain 1 titanium if you have no suitable card. Put a science resource on a card you own, or gain 1 TR if you have no suitable card.": "Vaatii 3 tiedeympyrää. Aseta hävittäjäresurssi kortille jonka omistat, tai saat 1 titaanin jos sinulla ei ole sopivaa korttia. Aseta tiederesurssi kortille jonka omistat, tai nosta MKL:ääsi 1 askel, jos sinulla ei ole sopivaa korttia.",
@@ -186,7 +186,7 @@
 
 "Monopoly": "Monopoli",
 "Action: Spend 1 corruption to increase any production 1 step.": "TOIMINTO: Käytä 1 korruptio lisätäksesi jonkun tuotantoa 1 askel.",
-"Requires 2 corruption. Choose a standard resource type. Steal 2 units of that resource from EACH OTHER player.": "Vaatii 2 korruptiota. Valitse standardiresurssityyppi. Varasta 2 yksikköä kyseistä resurssia JOKAISELTA MUULTA pelaajalta.",
+"Requires 2 corruption. Choose a standard resource type. Steal up to 2 units of that resource from EACH OTHER player.": "Vaatii 2 korruptiota. Valitse standardiresurssityyppi. Varasta enintään 2 yksikköä kyseistä resurssia JOKAISELTA MUULTA pelaajalta.",
 
 "Nanofoundry": "Nanovaliomo",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Vaatii 2 tiedeympyrää. Vähennä energiatuotantoasi 5 askelta. Nosta 1 kortti jokaista energiaympyrääsi kohti tämä mukaan lukien.",
@@ -269,7 +269,7 @@
 
 "Space Privateers": "Avaruuskaapparit",
 "Effect: Whenever you play a crime tag, including this, put 1 fighter on this card.": "VAIKUTUS: Aina kun pelaat rikosympyrän, tämä mukaan lukien, aseta 1 hävittäjä tälle kortille.",
-"Action: For each fighter here, steal 1 M€ from EACH OTHER player. For each player that blocks this, remove 1 fighter from here.": "TOIMINTO: Jokaista täällä olevaa hävittäjää kohti varasta 1 M€ JOKAISELTA MUULTA pelaajalta. Jokaista pelaajaa kohti joka estää tämän, poista 1 hävittäjä täältä.",
+"Action: Steal up to 1 M€ per fighter here, from EACH OTHER player. For each player that blocks this, remove 1 fighter from here.": "TOIMINTO: Varasta enintään 1 M€ per hävittäjä täällä, JOKAISELTA MUULTA pelaajalta. Jokaista pelaajaa kohti joka estää tämän, poista 1 hävittäjä täältä.",
 "DO NOT USE FOR SOLO": "ÄLÄ KÄYTÄ YKSINPELIIN",
 "Requires 3 corruption.": "Vaatii 3 korruptiota.",
 
@@ -297,7 +297,7 @@
 "Place this card face-down in that player's project card file.": "Aseta tämä kortti kuvapuoli alaspäin kyseisen pelaajan projektikorttikansioon.",
 
 "Subnautic Pirates": "Veden alaiset merirosvot",
-"Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "Vaatii että sinulla on 1 korruptio ja 1 lunastetussa maanalaisessa resurssimerkintä. Varasta 7 M€ pelaajalta jolla ON LAATTA VALTAMEREN VIERESSÄ.",
+"Requires you have 1 corruption and 1 underground token. Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "Vaatii että sinulla on 1 korruptio ja 1 lunastetussa maanalaisessa resurssimerkintä. Varasta enintään 7 M€ pelaajalta jolla ON LAATTA VALTAMEREN VIERESSÄ.",
 
 "Subterranean Sea": "Maanalainen meri",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Aseta valtamerialuelaatta ALUEELLE JOKA EI OLE VARATTU VALTAMERELLE jossa sinulla on kaivausmerkki.",

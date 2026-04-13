@@ -25,7 +25,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
           b.text('STEAL').megacredits(7).asterix();
         }),
         description: 'Requires you have 1 corruption and 1 underground token. ' +
-          'Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.',
+          'Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.',
       },
     });
   }
@@ -35,8 +35,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
     const spaces = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true, newHolland: true});
     for (const space of spaces) {
       for (const adjacent of player.game.board.getAdjacentSpaces(space)) {
-        if (adjacent.player !== undefined && adjacent.player !== player &&
-            Board.hasRealTile(adjacent) && adjacent.player.megaCredits >= 7) {
+        if (adjacent.player !== undefined && adjacent.player !== player && Board.hasRealTile(adjacent)) {
           targets.add(adjacent.player);
         }
       }

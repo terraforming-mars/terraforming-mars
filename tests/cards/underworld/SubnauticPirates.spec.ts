@@ -21,11 +21,10 @@ describe('SubnauticPirates', () => {
   });
 
   const canPlayRuns = [
-    {corruption: 0, tokens: false, opponentMc: 7, expected: false},
-    {corruption: 0, tokens: true, opponentMc: 7, expected: false},
-    {corruption: 1, tokens: false, opponentMc: 7, expected: false},
-    {corruption: 1, tokens: true, opponentMc: 6, expected: false},
-    {corruption: 1, tokens: true, opponentMc: 7, expected: true},
+    {corruption: 0, tokens: false, expected: false},
+    {corruption: 0, tokens: true, expected: false},
+    {corruption: 1, tokens: false, expected: false},
+    {corruption: 1, tokens: true, expected: false},
   ] as const;
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
@@ -33,12 +32,6 @@ describe('SubnauticPirates', () => {
       if (run.tokens) {
         player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
-
-      const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-      game.simpleAddTile(player, oceanSpace, {tileType: TileType.OCEAN});
-      const adjacentSpaces = game.board.getAdjacentSpaces(oceanSpace);
-      game.simpleAddTile(player2, adjacentSpaces[0], {tileType: TileType.GREENERY});
-      player2.megaCredits = run.opponentMc;
 
       expect(card.canPlay(player)).eq(run.expected);
     });

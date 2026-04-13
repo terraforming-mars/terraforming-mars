@@ -38,22 +38,16 @@ describe('SpacePrivateers', () => {
     expect(card.resourceCount).eq(3);
   });
 
-  for (const run of [
-    {resourceCount: 0, opponentMC: 0, expected: false},
-    {resourceCount: 1, opponentMC: 0, expected: false},
-    {resourceCount: 1, opponentMC: 1, expected: true},
-    {resourceCount: 2, opponentMC: 1, expected: false},
-    {resourceCount: 2, opponentMC: 2, expected: true},
-  ] as const) {
-    it('canAct ' + JSON.stringify(run), () => {
-      const card = new SpacePrivateers();
-      const [/* game */, player, opponent] = testGame(2, {underworldExpansion: true});
 
-      card.resourceCount = run.resourceCount;
-      opponent.megaCredits = run.opponentMC;
-      expect(card.canAct(player)).eq(run.expected);
-    });
-  }
+  it('canAct', () => {
+    const card = new SpacePrivateers();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+
+    card.resourceCount = 0;
+    expect(card.canAct(player)).is.false;
+    card.resourceCount = 1;
+    expect(card.canAct(player)).is.true;
+  });
 
   for (const run of [
     {player2: 'do not block', player3: 'do not block', mc: [6, 1, 1], corruption: [0, 1, 1], fighters: 3},

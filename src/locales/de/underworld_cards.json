@@ -127,7 +127,7 @@
 
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
 
-"Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Klaue 4 M€, plus 1 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
+"Steal up to 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Klaue bis zu 4 M€, plus 1 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
 
 "Hyperspace Drive Prototype": "Hyperraum-Antrieb Prototyp",
 "Requires that 3 science tags. Put a fighter resource on a card you own, or gain 1 titanium if you have no suitable card. Put a science resource on a card you own, or gain 1 TR if you have no suitable card.": "Benötigt 3 Wissenschafts-Symbole. Lege einen Jäger auf eine Karte, die du besitzt, oder erhalte 1 Titan, wenn du keine passende Karte hast. Lege eine Wissenschaftsressource auf eine Karte, die du besitzt, oder erhalte 1 TW, wenn du keine passende Karte hast.",
@@ -186,7 +186,7 @@
 
 "Monopoly": "Monopol",
 "Action: Spend 1 corruption to increase any production 1 step.": "AKTION: Bezahle 1 Korruption, um eine beliebige Produktion um 1 zu erhöhen.",
-"Requires 2 corruption. Choose a standard resource type. Steal 2 units of that resource from EACH OTHER player.": "Benötigt 2 Korruption. Wähle eine Standard-Ressource. Stehle 2 Einheiten dieser Ressource von JEDEM ANDEREN Spieler.",
+"Requires 2 corruption. Choose a standard resource type. Steal up to 2 units of that resource from EACH OTHER player.": "Benötigt 2 Korruption. Wähle eine Standard-Ressource. Stehle bis zu 2 Einheiten dieser Ressource von JEDEM ANDEREN Spieler.",
 
 "Nanofoundry": "Nanogießerei",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Benötigt 2 Wissenschafts-Symbole. Verringere deine Energieproduktion um 5. Ziehe 1 Karte für jedes Energiesymbol, das du hast, einschließlich diesem.",
@@ -270,7 +270,7 @@
 
 "Space Privateers": "Weltraum-Freibeuter",
 "Effect: Whenever you play a crime tag, including this, put 1 fighter on this card.": "EFFEKT: Immer wenn du eine Verbrechenssymbol spielst, einschließlich dieses, lege 1 Jäger auf diese Karte.",
-"Action: For each fighter here, steal 1 M€ from EACH OTHER player. For each player that blocks this, remove 1 fighter from here.": "AKTION: Für jeden Jäger hier stiehlst du 1 M€ von JEDEM ANDEREN Spieler. Für jeden Spieler, der dies blockiert, entferne 1 Jäger von hier.",
+"Action: Steal up to 1 M€ per fighter here, from EACH OTHER player. For each player that blocks this, remove 1 fighter from here.": "AKTION: Stehle bis zu 1 M€ pro Jäger hier, von JEDEM ANDEREN Spieler. Für jeden Spieler, der dies blockiert, entferne 1 Jäger von hier.",
 "DO NOT USE FOR SOLO": "NICHT FÜRS SOLOSPIEL verwenden",
 "Requires 3 corruption.": "Benötigt 3 Korruption.",
 
@@ -299,7 +299,7 @@
 "Place this card face-down in that player's project card file.": "Lege diese Karte verdeckt in die Projektkarten dieses Spielers.",
 
 "Subnautic Pirates": "Subnautische Piraten",
-"Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "Benötigt 1 Korruption und 1 beanspruchte unterirdische Ressourcenplättchen. Stehle 7 M€ von einem Spieler, der ein Plättchen neben einem Ozean hat.",
+"Requires you have 1 corruption and 1 underground token. Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "Benötigt 1 Korruption und 1 beanspruchte unterirdische Ressourcenplättchen. Stehle bis zu 7 M€ von einem Spieler, der ein Plättchen neben einem Ozean hat.",
 
 "Subterranean Sea": "Unterirdisches Meer",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für einen Ozean reserviert ist und auf der du einen Ausgrabungsmarker hast.",

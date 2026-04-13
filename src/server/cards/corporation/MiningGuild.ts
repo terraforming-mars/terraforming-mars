@@ -51,6 +51,10 @@ export class MiningGuild extends CorporationCard implements ICorporationCard {
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
       return;
     }
+    // Don't grant a bonus for Mars Nomads (no tile actually placed)
+    if (cardOwner.game.nomadSpace === space.id && space.tile === undefined) {
+      return;
+    }
     // Don't grant a bonus if the card is overplaced (like Ares Ocean City)
     if (space.tile?.covers !== undefined) {
       return;

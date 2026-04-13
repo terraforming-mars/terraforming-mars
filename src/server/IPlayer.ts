@@ -192,8 +192,6 @@ export interface IPlayer {
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
-  /** @deprecated use #terraformRating. */
-  getTerraformRating(): number;
   increaseTerraformRating(steps?: number, opts?: {log?: boolean, from?: From}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;

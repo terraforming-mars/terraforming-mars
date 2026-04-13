@@ -173,7 +173,7 @@ describe('ProjectEden', () => {
 
     orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(whales.resourceCount).eq(1);
     expect(orOptions.options.map((option) => option.title)).deep.eq([
       'Place a city', 'Place a greenery', 'Discard 3 cards',

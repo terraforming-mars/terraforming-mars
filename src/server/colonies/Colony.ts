@@ -104,9 +104,7 @@ export abstract class Colony implements IColony {
     }
 
     if (this.name === ColonyName.LEAVITT) {
-      for (const card of player.tableau) {
-        card.onNonCardTagAdded?.(player, Tag.SCIENCE);
-      }
+      player.triggerOnNonCardTagAdded(Tag.SCIENCE);
     }
   }
 

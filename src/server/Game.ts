@@ -81,6 +81,7 @@ import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
+import {ICard} from './cards/ICard';
 
 // Can be overridden by tests
 
@@ -1353,16 +1354,20 @@ export class Game implements IGame, Logger {
     // Clear out underworld components.
     UnderworldExpansion.onTilePlaced(this, space);
 
-    for (const p of this.players) {
-      for (const playedCard of p.tableau) {
-        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
-      }
-    }
+    this.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MARS));
 
     if (initialTileType !== undefined) {
       AresHandler.ifAres(this, () => {
         AresHandler.grantBonusForRemovingHazard(player, initialTileType);
       });
+    }
+  }
+
+  public triggerForAllCards(f: (cardOwner: IPlayer, card: ICard) => void) {
+    for (const p of this.playersInGenerationOrder) {
+      for (const playedCard of p.tableau) {
+        f(p, playedCard);
+      }
     }
   }
 

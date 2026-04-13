@@ -158,16 +158,8 @@ export class UnderworldExpansion {
 
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
-    this.notifyIdentification(game, player, undergroundResource);
+    game.triggerForAllCards((p, c) => c.onIdentificationByAnyPlayer?.(p, player, undergroundResource));
     return true;
-  }
-
-  public static notifyIdentification(game: IGame, identifyingPlayer: IPlayer | undefined, token: UndergroundResourceToken): void {
-    for (const p of game.playersInGenerationOrder) {
-      for (const card of p.tableau) {
-        card.onIdentificationByAnyPlayer?.(p, identifyingPlayer, token);
-      }
-    }
   }
 
   public static identifyAdjacentSpaces(player: IPlayer, space: Space): ReadonlyArray<Space> {
@@ -437,15 +429,11 @@ export class UnderworldExpansion {
       break;
     case 'sciencetag':
       player.tags.extraScienceTags++;
-      for (const card of player.tableau) {
-        card.onNonCardTagAdded?.(player, Tag.SCIENCE);
-      }
+      player.triggerOnNonCardTagAdded(Tag.SCIENCE);
       break;
     case 'planttag':
       player.tags.extraPlantTags++;
-      for (const card of player.tableau) {
-        card.onNonCardTagAdded?.(player, Tag.PLANT);
-      }
+      player.triggerOnNonCardTagAdded(Tag.PLANT);
       break;
 
     // This doesn't reward anything.

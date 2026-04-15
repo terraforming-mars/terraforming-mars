@@ -5,10 +5,10 @@
         <td class="delta-project-board__step delta-project-board__step--start">
           <div class="delta-project-board__tag-cell"></div>
         </td>
-        <td v-for="step in steps" :key="step.id" class="delta-project-board__step">
+        <td v-for="step in steps" :key="step.tag ?? 'vp-' + step.vpValue" class="delta-project-board__step">
           <div class="delta-project-board__tag-cell">
             <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
-            <div v-else class="resource-tag" :class="step.tagClass"></div>
+            <div v-else class="resource-tag" :class="'tag-' + step.tag"></div>
           </div>
         </td>
       </tr>
@@ -28,7 +28,7 @@
             ></div>
           </div>
         </td>
-        <td v-for="(step, idx) in steps" :key="step.id + '-slots'" class="delta-project-board__slots-cell">
+        <td v-for="(step, idx) in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-slots'" class="delta-project-board__slots-cell">
           <div class="delta-project-board__slots">
             <i
               v-for="color in playersAtPosition(idx + 1)"
@@ -48,7 +48,7 @@
         <td class="delta-project-board__reward-cell delta-project-board__reward-cell--start">
           <div class="delta-project-board__reward delta-project-board__reward--start"></div>
         </td>
-        <td v-for="step in steps" :key="step.id + '-reward'" class="delta-project-board__reward-cell">
+        <td v-for="step in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-reward'" class="delta-project-board__reward-cell">
           <div class="delta-project-board__reward">
             <template v-for="(icon, idx) in step.rewardIcons" :key="idx">
               <span v-if="icon.or" class="delta-project-board__or">or</span>
@@ -69,6 +69,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {Color} from '@/common/Color';
+import {Tag} from '@/common/cards/Tag';
 import {DeltaProjectModel} from '@/common/models/DeltaProjectModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
@@ -83,18 +84,15 @@ type RewardIcon = {
 };
 
 type DeltaBoardStep = {
-  id: string;
-  tagClass: string;
-  vpValue: number | undefined;
+  tag?: Tag;
+  vpValue?: number;
   dynamicSlots: boolean;
   rewardIcons: Array<RewardIcon>;
 };
 
 const STEPS: ReadonlyArray<DeltaBoardStep> = [
   {
-    id: 'building',
-    tagClass: 'tag-building',
-    vpValue: undefined,
+    tag: Tag.BUILDING,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource_icon resource_icon--steel'},
@@ -105,9 +103,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     ],
   },
   {
-    id: 'power',
-    tagClass: 'tag-power',
-    vpValue: undefined,
+    tag: Tag.POWER,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource_icon resource_icon--energy', production: true},
@@ -116,25 +112,19 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     ],
   },
   {
-    id: 'earth',
-    tagClass: 'tag-earth',
-    vpValue: undefined,
+    tag: Tag.EARTH,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource money', production: true, text: '2'},
     ],
   },
   {
-    id: 'space',
-    tagClass: 'tag-space',
-    vpValue: undefined,
+    tag: Tag.SPACE,
     dynamicSlots: true,
     rewardIcons: [{cssClass: 'resource_icon resource_icon--titanium', production: true}],
   },
   {
-    id: 'science',
-    tagClass: 'tag-science',
-    vpValue: undefined,
+    tag: Tag.SCIENCE,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'delta-project-board__card-icon'},
@@ -144,9 +134,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     ],
   },
   {
-    id: 'plant',
-    tagClass: 'tag-plant',
-    vpValue: undefined,
+    tag: Tag.PLANT,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource_icon resource_icon--plants'},
@@ -155,23 +143,17 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     ],
   },
   {
-    id: 'microbe',
-    tagClass: 'tag-microbe',
-    vpValue: undefined,
+    tag: Tag.MICROBE,
     dynamicSlots: true,
     rewardIcons: [{cssClass: 'red-arrow'}],
   },
   {
-    id: 'jovian',
-    tagClass: 'tag-jovian',
-    vpValue: undefined,
+    tag: Tag.JOVIAN,
     dynamicSlots: true,
     rewardIcons: [{cssClass: 'resource-tag tag-jovian delta-project-board__reward-tag'}],
   },
   {
-    id: 'animal',
-    tagClass: 'tag-animal',
-    vpValue: undefined,
+    tag: Tag.ANIMAL,
     dynamicSlots: true,
     rewardIcons: [
       {cssClass: 'resource animal'},
@@ -180,15 +162,11 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     ],
   },
   {
-    id: 'vp2',
-    tagClass: '',
     vpValue: 2,
     dynamicSlots: false,
     rewardIcons: [],
   },
   {
-    id: 'vp5',
-    tagClass: '',
     vpValue: 5,
     dynamicSlots: false,
     rewardIcons: [],

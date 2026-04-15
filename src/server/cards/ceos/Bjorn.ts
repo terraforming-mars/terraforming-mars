@@ -27,6 +27,7 @@ export class Bjorn extends CeoCard {
 
   public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) return false;
+    if (player.game.isSoloMode()) return true;
     return this.targets(player).length > 0;
   }
 
@@ -34,6 +35,15 @@ export class Bjorn extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const amount = game.generation + 2;
+
+    if (game.isSoloMode()) {
+      player.megaCredits += amount;
+      game.log('${0} stole ${1} M€ from the neutral player', (b) =>
+        b.player(player).number(amount),
+      );
+      return undefined;
+    }
+
     const targets = this.targets(player);
 
     for (const target of targets) {

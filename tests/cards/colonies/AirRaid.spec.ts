@@ -68,6 +68,14 @@ describe('AirRaid', () => {
     expect(player.megaCredits).to.eq(5);
   });
 
+  it('Works in solo mode', () => {
+    const [/* game */, player] = testGame(1);
+    player.playedCards.push(stormcraftIncorporated);
+    player.addResourceTo(stormcraftIncorporated);
+
+    expect(card.canPlay(player)).is.true;
+  });
+
   it('Solo mode: grants 5 M€ directly', () => {
     const [soloGame, soloPlayer] = testGame(1);
     const soloCard = new AirRaid();

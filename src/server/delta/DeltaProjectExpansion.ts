@@ -1,6 +1,7 @@
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
-import {DeltaProjectData, DeltaPlayerProgress} from './DeltaProjectData';
+import {DeltaProjectData} from './DeltaProjectData';
+import {DeltaProjectPlayerModel} from '../../common/models/DeltaProjectModel';
 import {Color} from '../../common/Color';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
@@ -39,7 +40,7 @@ export class DeltaProjectExpansion {
   private constructor() {}
 
   public static initialize(game: IGame): DeltaProjectData {
-    const players = new Map<Color, DeltaPlayerProgress>();
+    const players = new Map<Color, DeltaProjectPlayerModel>();
     for (const player of game.playersInGenerationOrder) {
       players.set(player.color, {position: 0, claimed2VP: false, claimed5VP: false, jovianBonus: false});
     }
@@ -53,7 +54,7 @@ export class DeltaProjectExpansion {
     return game.deltaProjectData;
   }
 
-  private static getProgress(data: DeltaProjectData, color: Color): DeltaPlayerProgress {
+  private static getProgress(data: DeltaProjectData, color: Color): DeltaProjectPlayerModel {
     const progress = data.players.get(color);
     if (progress === undefined) {
       throw new Error('No Delta Project progress for player ' + color);

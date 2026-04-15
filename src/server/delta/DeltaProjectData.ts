@@ -1,31 +1,24 @@
 import {Color} from '../../common/Color';
-import {SerializedDeltaProjectData, SerializedDeltaPlayerProgress} from './SerializedDeltaProjectData';
-
-export type DeltaPlayerProgress = {
-  position: number;
-  claimed2VP: boolean;
-  claimed5VP: boolean;
-  jovianBonus: boolean;
-}
+import {DeltaProjectModel, DeltaProjectPlayerModel} from '../../common/models/DeltaProjectModel';
 
 export type DeltaProjectData = {
-  players: Map<Color, DeltaPlayerProgress>;
+  players: Map<Color, DeltaProjectPlayerModel>;
 }
 
 export namespace DeltaProjectData {
-  export function serialize(data: DeltaProjectData | undefined): SerializedDeltaProjectData | undefined {
+  export function serialize(data: DeltaProjectData | undefined): DeltaProjectModel | undefined {
     if (data === undefined) {
       return undefined;
     }
-    const players: Partial<Record<Color, SerializedDeltaPlayerProgress>> = {};
+    const players: DeltaProjectModel['players'] = {};
     for (const [color, progress] of data.players) {
       players[color] = {...progress};
     }
     return {players};
   }
 
-  export function deserialize(data: SerializedDeltaProjectData): DeltaProjectData {
-    const players = new Map<Color, DeltaPlayerProgress>();
+  export function deserialize(data: DeltaProjectModel): DeltaProjectData {
+    const players = new Map<Color, DeltaProjectPlayerModel>();
     for (const [color, progress] of Object.entries(data.players)) {
       if (progress === undefined) continue;
       players.set(color as Color, {...progress});

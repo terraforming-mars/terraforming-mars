@@ -85,6 +85,18 @@ describe('Bjorn', () => {
     expect(player4.megaCredits).eq(4);
   });
 
+  it('Solo mode: can act and grants generation+2 M€', () => {
+    const [game, player] = testGame(1, {ceoExtension: true});
+    const card = new Bjorn();
+    game.generation = 10;
+    player.megaCredits = 0;
+
+    expect(card.canAct(player)).is.true;
+
+    card.action(player);
+    expect(player.megaCredits).to.eq(12);
+  });
+
   it('Takes OPG action, players that lost money can play Law Suit', () => {
     player.megaCredits = 5;
     player2.megaCredits = 50;

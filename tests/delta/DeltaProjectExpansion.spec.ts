@@ -124,7 +124,6 @@ describe('DeltaProjectExpansion', () => {
       player.energy = 20;
       progress(data, player.color).position = 9;
       progress(data, player2.color).position = 10;
-      progress(data, player2.color).claimed2VP = true;
 
       // 2VP (pos 10) is occupied, skip to 5VP (pos 11) → 2 steps
       expect(DeltaProjectExpansion.maxSteps(player)).eq(2);
@@ -136,7 +135,6 @@ describe('DeltaProjectExpansion', () => {
       player.energy = 20;
       progress(data, player.color).position = 9;
       progress(data, player2.color).position = 11;
-      progress(data, player2.color).claimed5VP = true;
 
       // Can reach 2VP (pos 10) but 5VP is blocked
       expect(DeltaProjectExpansion.maxSteps(player)).eq(1);
@@ -162,7 +160,7 @@ describe('DeltaProjectExpansion', () => {
       expect(progress(data, player.color).position).eq(3);
     });
 
-    it('claims 2VP when landing on position 10', () => {
+    it('reaches position 10 (2VP spot)', () => {
       player.energy = 5;
       playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
@@ -170,23 +168,21 @@ describe('DeltaProjectExpansion', () => {
 
       DeltaProjectExpansion.advance(player, 1);
 
-      expect(progress(data, player.color).claimed2VP).is.true;
+      expect(progress(data, player.color).position).eq(10);
     });
 
-    it('claims 5VP and removes 2VP when landing on position 11', () => {
+    it('reaches position 11 (5VP spot) from position 10', () => {
       player.energy = 5;
       playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 10;
-      progress(data, player.color).claimed2VP = true;
 
       DeltaProjectExpansion.advance(player, 1);
 
-      expect(progress(data, player.color).claimed5VP).is.true;
-      expect(progress(data, player.color).claimed2VP).is.false;
+      expect(progress(data, player.color).position).eq(11);
     });
 
-    it('does not claim 2VP when skipping past position 10', () => {
+    it('reaches position 11 when skipping past position 10', () => {
       player.energy = 5;
       playAllDeltaTrackTags(player);
       const data = DeltaProjectExpansion.getData(game);
@@ -194,8 +190,7 @@ describe('DeltaProjectExpansion', () => {
 
       DeltaProjectExpansion.advance(player, 2);
 
-      expect(progress(data, player.color).claimed2VP).is.false;
-      expect(progress(data, player.color).claimed5VP).is.true;
+      expect(progress(data, player.color).position).eq(11);
     });
   });
 
@@ -379,21 +374,21 @@ describe('DeltaProjectExpansion', () => {
   describe('VP scoring', () => {
     it('awards 2VP for 2VP spot', () => {
       const data = DeltaProjectExpansion.getData(game);
-      progress(data, player.color).claimed2VP = true;
+      progress(data, player.color).position = 10;
 
       expectDeltaVp(player, 2);
     });
 
     it('awards 5VP for 5VP spot', () => {
       const data = DeltaProjectExpansion.getData(game);
-      progress(data, player.color).claimed5VP = true;
+      progress(data, player.color).position = 11;
 
       expectDeltaVp(player, 5);
     });
 
-    it('5VP overrides 2VP (not additive)', () => {
+    it('5VP is not additive with 2VP', () => {
       const data = DeltaProjectExpansion.getData(game);
-      progress(data, player.color).claimed5VP = true;
+      progress(data, player.color).position = 11;
 
       expectDeltaVp(player, 5);
     });
@@ -409,30 +404,27 @@ describe('DeltaProjectExpansion', () => {
       playAllDeltaTrackTags(player);
       playAllDeltaTrackTags(player2);
       progress(data, player.color).position = 10;
-      progress(data, player.color).claimed2VP = true;
       progress(data, player2.color).position = 9;
       player2.energy = 5;
 
       expect(() => DeltaProjectExpansion.advance(player2, 1)).to.throw();
     });
 
-    it('only one player can claim 2VP', () => {
+    it('only one player can reach position 10', () => {
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 10;
-      progress(data, player.color).claimed2VP = true;
 
       player2.energy = 10;
       playAllDeltaTrackTags(player2);
       progress(data, player2.color).position = 9;
 
       expect(DeltaProjectExpansion.maxSteps(player2)).eq(2);
-      expect(progress(data, player2.color).claimed2VP).is.false;
+      expect(progress(data, player2.color).position).eq(9);
     });
 
-    it('player can overtake 2VP to reach 5VP', () => {
+    it('player can overtake position 10 to reach position 11', () => {
       const data = DeltaProjectExpansion.getData(game);
       progress(data, player.color).position = 10;
-      progress(data, player.color).claimed2VP = true;
       progress(data, player2.color).position = 9;
       player2.energy = 10;
 
@@ -441,23 +433,18 @@ describe('DeltaProjectExpansion', () => {
       DeltaProjectExpansion.advance(player2, 2);
 
       expect(progress(data, player2.color).position).eq(11);
-      expect(progress(data, player2.color).claimed5VP).is.true;
-      expect(progress(data, player2.color).claimed2VP).is.false;
     });
 
-    it('2VP spot is freed when holder advances to 5VP', () => {
+    it('position 10 is freed when holder advances to position 11', () => {
       const data = DeltaProjectExpansion.getData(game);
 
       progress(data, player.color).position = 10;
-      progress(data, player.color).claimed2VP = true;
       player.energy = 10;
       playAllDeltaTrackTags(player);
 
       DeltaProjectExpansion.advance(player, 1);
 
       expect(progress(data, player.color).position).eq(11);
-      expect(progress(data, player.color).claimed5VP).is.true;
-      expect(progress(data, player.color).claimed2VP).is.false;
 
       progress(data, player2.color).position = 9;
       player2.energy = 10;
@@ -466,7 +453,6 @@ describe('DeltaProjectExpansion', () => {
       DeltaProjectExpansion.advance(player2, 1);
 
       expect(progress(data, player2.color).position).eq(10);
-      expect(progress(data, player2.color).claimed2VP).is.true;
     });
   });
 
@@ -598,14 +584,13 @@ describe('DeltaProjectExpansion', () => {
       progress(data, player.color).position = 5;
       progress(data, player.color).jovianBonus = true;
       progress(data, player2.color).position = 10;
-      progress(data, player2.color).claimed2VP = true;
       player.tags.extraJovianTags = 1;
 
       const serialized = game.serialize();
       expect(serialized.deltaProjectData).is.not.undefined;
       expect(serialized.deltaProjectData!.players[player.color]!.position).eq(5);
       expect(serialized.deltaProjectData!.players[player.color]!.jovianBonus).is.true;
-      expect(serialized.deltaProjectData!.players[player2.color]!.claimed2VP).is.true;
+      expect(serialized.deltaProjectData!.players[player2.color]!.position).eq(10);
     });
 
     it('full deserialization round-trip preserves DeltaProjectData', () => {
@@ -613,7 +598,6 @@ describe('DeltaProjectExpansion', () => {
       progress(data, player.color).position = 7;
       progress(data, player.color).jovianBonus = true;
       progress(data, player2.color).position = 10;
-      progress(data, player2.color).claimed2VP = true;
 
       const restored = Game.deserialize(game.serialize());
       const restoredData = DeltaProjectExpansion.getData(restored);
@@ -621,13 +605,9 @@ describe('DeltaProjectExpansion', () => {
       const p1 = restoredData.players.get(player.color)!;
       expect(p1.position).eq(7);
       expect(p1.jovianBonus).is.true;
-      expect(p1.claimed2VP).is.false;
-      expect(p1.claimed5VP).is.false;
 
       const p2 = restoredData.players.get(player2.color)!;
       expect(p2.position).eq(10);
-      expect(p2.claimed2VP).is.true;
-      expect(p2.claimed5VP).is.false;
       expect(p2.jovianBonus).is.false;
     });
   });

@@ -42,7 +42,7 @@ export class DeltaProjectExpansion {
   public static initialize(game: IGame): DeltaProjectData {
     const players = new Map<Color, DeltaProjectPlayerModel>();
     for (const player of game.playersInGenerationOrder) {
-      players.set(player.color, {position: 0, claimed2VP: false, claimed5VP: false, jovianBonus: false});
+      players.set(player.color, {position: 0, jovianBonus: false});
     }
     return {players};
   }
@@ -153,14 +153,6 @@ export class DeltaProjectExpansion {
 
     player.stock.deduct(Resource.ENERGY, steps);
     progress.position = newPos;
-
-    if (newPos === 10 && !DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 10, player.color)) {
-      progress.claimed2VP = true;
-    }
-    if (newPos === 11 && !DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 11, player.color)) {
-      progress.claimed5VP = true;
-      progress.claimed2VP = false;
-    }
 
     DeltaProjectExpansion.resolveReward(player, newPos);
 
@@ -278,9 +270,9 @@ export class DeltaProjectExpansion {
     const progress = data.players.get(player.color);
     if (progress === undefined) return;
 
-    if (progress.claimed5VP) {
+    if (progress.position === 11) {
       builder.setVictoryPoints('victoryPoints', 5, 'Delta Project (5VP)');
-    } else if (progress.claimed2VP) {
+    } else if (progress.position === 10) {
       builder.setVictoryPoints('victoryPoints', 2, 'Delta Project (2VP)');
     }
   }

@@ -1,6 +1,6 @@
 import {Color} from '../Color';
 
-export type DeltaPlayerProgressModel = {
+export type DeltaProjectPlayerModel = {
   position: number;
   claimed2VP: boolean;
   claimed5VP: boolean;
@@ -8,5 +8,5 @@ export type DeltaPlayerProgressModel = {
 }
 
 export type DeltaProjectModel = {
-  players: Partial<Record<Color, DeltaPlayerProgressModel>>;
+  players: Partial<Record<Color, DeltaProjectPlayerModel>>;
 }

@@ -221,6 +221,7 @@ describe('Player', () => {
       scienceTagCount: 97,
       plantsNeededForGreenery: 5,
       removingPlayers: [],
+      warmongerCards: 0,
       removedFromPlayCards: [],
       name: 'p-blue',
       color: 'purple' as Color,

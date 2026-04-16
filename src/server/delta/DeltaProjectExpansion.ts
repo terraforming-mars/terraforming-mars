@@ -34,7 +34,7 @@ export const DELTA_TRACK_TAGS: ReadonlyArray<Tag | undefined> = [
   undefined,     // 11: 5VP
 ];
 
-export const TRACK_LENGTH = DELTA_TRACK_TAGS.length - 1; // 11
+export const MAX_TRACK_POSITION = DELTA_TRACK_TAGS.length - 1; // 11 (positions 0–11)
 
 export class DeltaProjectExpansion {
   private constructor() {}
@@ -111,14 +111,14 @@ export class DeltaProjectExpansion {
     const progress = DeltaProjectExpansion.getProgress(data, player.color);
     const currentPos = progress.position;
 
-    if (currentPos >= TRACK_LENGTH) return [];
+    if (currentPos >= MAX_TRACK_POSITION) return [];
 
     const result: number[] = [];
-    const maxByEnergy = Math.min(player.energy, TRACK_LENGTH - currentPos);
+    const maxByEnergy = Math.min(player.energy, MAX_TRACK_POSITION - currentPos);
 
     for (let steps = 1; steps <= maxByEnergy; steps++) {
       const newPos = currentPos + steps;
-      if (newPos > TRACK_LENGTH) break;
+      if (newPos > MAX_TRACK_POSITION) break;
 
       if (!DeltaProjectExpansion.canReachPosition(player, newPos)) continue;
 

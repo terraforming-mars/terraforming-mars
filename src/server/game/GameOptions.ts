@@ -8,6 +8,14 @@ import {AgendaStyle} from '../../common/turmoil/Types';
 import {Expansion} from '../../common/cards/GameModule';
 import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 
+/**
+ * Delta Project prelude is dealt directly when the expansion is on; it must not be listed in
+ * customPreludes (avoids a duplicate in the prelude deck and avoids the card without track data).
+ */
+export function sanitizeCustomPreludes(customPreludes: ReadonlyArray<CardName>): Array<CardName> {
+  return customPreludes.filter((c) => c !== CardName.DELTA_PROJECT);
+}
+
 export type GameOptions = {
   boardName: BoardName;
   clonedGamedId: GameId | undefined;

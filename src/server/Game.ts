@@ -61,7 +61,7 @@ import {DeltaProjectPrelude} from './delta/DeltaProjectPrelude';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions, sanitizeCustomPreludes} from './game/GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
@@ -271,7 +271,11 @@ export class Game implements IGame, Logger {
         deltaProject: options.deltaProjectExpansion ?? false,
       };
     }
-    const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
+    const mergedOptions = {...DEFAULT_GAME_OPTIONS, ...options};
+    const gameOptions: GameOptions = {
+      ...mergedOptions,
+      customPreludes: sanitizeCustomPreludes(mergedOptions.customPreludes),
+    };
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }

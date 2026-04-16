@@ -19,6 +19,7 @@ import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPoints
 import {DeltaProjectData} from '../../src/server/delta/DeltaProjectData';
 import {Color} from '../../src/common/Color';
 import {Game} from '../../src/server/Game';
+import {sanitizeCustomPreludes} from '../../src/server/game/GameOptions';
 
 function progress(data: DeltaProjectData, color: Color) {
   return data.players.get(color)!;
@@ -520,6 +521,20 @@ describe('DeltaProjectExpansion', () => {
     it('is not present when expansion is disabled', () => {
       const [, p] = testGame(1);
       expect(p.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT)).is.false;
+    });
+
+    it('sanitizeCustomPreludes removes Delta Project', () => {
+      expect(sanitizeCustomPreludes([CardName.DELTA_PROJECT, CardName.ALLIED_BANK])).deep.eq([CardName.ALLIED_BANK]);
+    });
+
+    it('Game.newInstance strips Delta Project from customPreludes', () => {
+      const p = TestPlayer.BLUE.newPlayer();
+      const g = Game.newInstance('gameid', [p], p, {
+        deltaProjectExpansion: true,
+        preludeExtension: true,
+        customPreludes: [CardName.DELTA_PROJECT, CardName.ALLIED_BANK],
+      });
+      expect(g.gameOptions.customPreludes).deep.eq([CardName.ALLIED_BANK]);
     });
 
     it('canAct returns false with no energy', () => {

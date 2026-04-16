@@ -75,18 +75,6 @@ export class DeltaProjectExpansion {
     return DeltaProjectExpansion.getProgress(DeltaProjectExpansion.getData(game), player.color).position;
   }
 
-  /**
-   * Highest legal step count for one advance. Not every integer 1..maxSteps is valid when VP
-   * spaces are blocked (use {@link DeltaProjectExpansion.getValidAdvanceSteps} for the full list).
-   *
-   * Constraints:
-   * - Must have the required tag (raw, without wilds) for each step, OR use a wild tag.
-   * - Each wild tag covers exactly one missing tag.
-   * - Must have enough energy (1 per step).
-   * - Cannot land on position 10 or 11 if another player already occupies that position.
-   * - Cannot move beyond position 11 (5VP).
-   */
-
   // Whether the player has enough tags (using wilds to fill gaps) to reach targetPos.
   private static canReachPosition(player: IPlayer, targetPos: number): boolean {
     let missing = 0;
@@ -133,7 +121,18 @@ export class DeltaProjectExpansion {
     return result;
   }
 
-  // Highest legal step count (returns 0 if none).
+  /**
+   * Highest legal step count. Not every integer 1..maxSteps is valid when VP
+   * spaces are blocked (use {@link DeltaProjectExpansion.getValidAdvanceSteps} for the full list).
+   * Returns 0 when no advance is possible.
+   *
+   * Constraints:
+   * - Must have the required tag (raw, without wilds) for each step, OR use a wild tag.
+   * - Each wild tag covers exactly one missing tag.
+   * - Must have enough energy (1 per step).
+   * - Cannot land on position 10 or 11 if another player already occupies that position.
+   * - Cannot move beyond position 11 (5VP).
+   */
   public static maxSteps(player: IPlayer): number {
     const steps = DeltaProjectExpansion.getValidAdvanceSteps(player);
     return steps.length === 0 ? 0 : Math.max(...steps);

@@ -138,6 +138,9 @@ export interface IPlayer {
   plantsNeededForGreenery: number;
   // Lawsuit
   removingPlayers: Array<PlayerId>;
+  // Cards this player has played that count toward the Warmonger award but don't live
+  // in this player's tableau (e.g. Lawsuit, which lives in the sued player's event pile).
+  warmongerCards: number;
   // For Playwrights corp.
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.

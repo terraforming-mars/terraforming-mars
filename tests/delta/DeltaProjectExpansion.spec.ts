@@ -514,12 +514,12 @@ describe('DeltaProjectExpansion', () => {
 
   describe('prelude card', () => {
     it('is added to prelude hand when expansion is enabled', () => {
-      expect(player.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT_PRELUDE)).is.true;
+      expect(player.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT)).is.true;
     });
 
     it('is not present when expansion is disabled', () => {
       const [, p] = testGame(1);
-      expect(p.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT_PRELUDE)).is.false;
+      expect(p.preludeCardsInHand.some((c) => c.name === CardName.DELTA_PROJECT)).is.false;
     });
 
     it('canAct returns false with no energy', () => {
@@ -566,15 +566,15 @@ describe('DeltaProjectExpansion', () => {
       player.energy = 5;
       player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
 
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.false;
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.false;
 
-      player.actionsThisGeneration.add(CardName.DELTA_PROJECT_PRELUDE);
+      player.actionsThisGeneration.add(CardName.DELTA_PROJECT);
 
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.true;
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.true;
 
       player.runProductionPhase();
 
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT_PRELUDE)).is.false;
+      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.false;
     });
   });
 

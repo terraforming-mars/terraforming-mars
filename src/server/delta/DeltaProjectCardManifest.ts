@@ -5,6 +5,6 @@ import {DeltaProjectPrelude} from './DeltaProjectPrelude';
 export const DELTA_PROJECT_CARD_MANIFEST = new ModuleManifest({
   module: 'deltaProject',
   preludeCards: {
-    [CardName.DELTA_PROJECT_PRELUDE]: {Factory: DeltaProjectPrelude},
+    [CardName.DELTA_PROJECT]: {Factory: DeltaProjectPrelude},
   },
 });

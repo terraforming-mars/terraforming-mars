@@ -1054,7 +1054,7 @@ export enum CardName {
   CLOUD_VORTEX_OUTPOST = 'Cloud Vortex Outpost',
 
   // Delta Project
-  DELTA_PROJECT_PRELUDE = 'Delta Project',
+  DELTA_PROJECT = 'Delta Project',
 
   // Underworld Standard Projects
   EXCAVATE_STANDARD_PROJECT = 'Excavate:SP',

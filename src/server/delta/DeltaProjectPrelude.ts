@@ -11,7 +11,7 @@ import {createDeltaProjectModel} from '../models/DeltaProjectModel';
 export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
   constructor() {
     super({
-      name: CardName.DELTA_PROJECT_PRELUDE,
+      name: CardName.DELTA_PROJECT,
 
       metadata: {
         cardNumber: 'DP01',

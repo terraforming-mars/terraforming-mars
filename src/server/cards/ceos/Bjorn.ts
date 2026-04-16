@@ -22,7 +22,7 @@ export class Bjorn extends CeoCard {
 
   private targets(player: IPlayer) {
     const amount = player.game.generation + 2;
-    return player.opponents.filter((p) => p.megaCredits >= amount);
+    return player.opponents.filter((p) => p.megaCredits > player.megaCredits && p.megaCredits >= amount);
   }
 
   public override canAct(player: IPlayer): boolean {

@@ -85,6 +85,15 @@ describe('Bjorn', () => {
     expect(player4.megaCredits).eq(4);
   });
 
+  it('Does not steal from players with less MC than you, even if they have >= generation+2', () => {
+    game.generation = 2;
+    player.megaCredits = 20;
+    player2.megaCredits = 5; // Less than player, but >= generation+2 (4). Should NOT be a target.
+    card.action(player);
+    expect(player.megaCredits).eq(20);
+    expect(player2.megaCredits).eq(5);
+  });
+
   it('Solo mode: can act and grants generation+2 M€', () => {
     const [game, player] = testGame(1, {ceoExtension: true});
     const card = new Bjorn();

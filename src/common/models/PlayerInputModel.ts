@@ -11,7 +11,6 @@ import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
 import {Units} from '../Units';
 import {ClaimedToken} from '../underworld/UnderworldPlayerData';
-import {DeltaProjectModel} from './DeltaProjectModel';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -100,7 +99,6 @@ export type SelectAmountModel = BaseInputModel & {
 export type DeltaProjectInputModel = BaseInputModel & {
   type: 'deltaProject';
   validSteps: ReadonlyArray<number>;
-  deltaProjectModel: DeltaProjectModel;
 }
 
 export type SelectDelegateModel = BaseInputModel & {

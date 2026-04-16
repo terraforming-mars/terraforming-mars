@@ -2,8 +2,8 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <DeltaProjectBoard
-      :model="playerinput.deltaProjectModel"
-      :playersCount="Object.keys(playerinput.deltaProjectModel.players).length"
+      :model="playerView.game.deltaProject"
+      :playersCount="playerCount"
     />
     <div class="flex">
       <select class="nes-input" v-model="amount">
@@ -23,6 +23,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import {DeltaProjectInputModel} from '@/common/models/PlayerInputModel';
 import {DeltaProjectInputResponse} from '@/common/inputs/InputResponse';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 
 export default defineComponent({
   name: 'DeltaProjectInput',
@@ -31,6 +32,10 @@ export default defineComponent({
     DeltaProjectBoard,
   },
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => DeltaProjectInputModel,
       required: true,
@@ -50,6 +55,11 @@ export default defineComponent({
     return {
       amount: String(this.playerinput.validSteps[0] ?? 1),
     };
+  },
+  computed: {
+    playerCount(): number {
+      return this.playerView.players.length;
+    },
   },
   methods: {
     saveData() {

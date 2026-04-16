@@ -6,7 +6,6 @@ import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {DeltaProjectExpansion} from './DeltaProjectExpansion';
 import {DeltaProjectInput} from './DeltaProjectInput';
-import {createDeltaProjectModel} from '../models/DeltaProjectModel';
 
 export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
   constructor() {
@@ -31,14 +30,12 @@ export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
   }
 
   public action(player: IPlayer): PlayerInput {
-    const game = player.game;
     const validSteps = DeltaProjectExpansion.getValidAdvanceSteps(player);
 
     return new DeltaProjectInput(
       'Delta Project: Pay energy to advance on the track',
       'Advance',
       validSteps,
-      createDeltaProjectModel(game) ?? (() => { throw new Error('Delta Project model not available'); })(),
     ).andThen((amount) => {
       DeltaProjectExpansion.advance(player, amount);
       return undefined;

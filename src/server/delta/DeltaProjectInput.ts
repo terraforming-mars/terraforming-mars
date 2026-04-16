@@ -2,7 +2,6 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isDeltaProjectInputResponse} from '../../common/inputs/InputResponse';
 import {DeltaProjectInputModel} from '../../common/models/PlayerInputModel';
-import {DeltaProjectModel} from '../../common/models/DeltaProjectModel';
 import {IPlayer} from '../IPlayer';
 import {InputError} from '../inputs/InputError';
 
@@ -11,7 +10,6 @@ export class DeltaProjectInput extends BasePlayerInput<number> {
     title: string | Message,
     buttonLabel: string,
     public validSteps: ReadonlyArray<number>,
-    public deltaProjectModel: DeltaProjectModel,
   ) {
     super('deltaProject', title);
     this.buttonLabel = buttonLabel;
@@ -23,7 +21,6 @@ export class DeltaProjectInput extends BasePlayerInput<number> {
       buttonLabel: this.buttonLabel,
       type: 'deltaProject',
       validSteps: this.validSteps,
-      deltaProjectModel: this.deltaProjectModel,
     };
   }
 

@@ -12,7 +12,7 @@ export namespace DeltaProjectData {
     }
     const players: DeltaProjectModel['players'] = {};
     for (const [color, progress] of data.players) {
-      players[color] = {...progress};
+      players[color] = progress;
     }
     return {players};
   }
@@ -21,7 +21,7 @@ export namespace DeltaProjectData {
     const players = new Map<Color, DeltaProjectPlayerModel>();
     for (const [color, progress] of Object.entries(data.players)) {
       if (progress === undefined) continue;
-      players.set(color as Color, {...progress});
+      players.set(color as Color, progress);
     }
     return {players};
   }

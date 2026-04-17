@@ -1,7 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {MilestoneName} from '@/common/ma/MilestoneName';
+import {MilestoneName} from '../../common/ma/MilestoneName';
 
 export class Irrigator extends BaseMilestone {
   constructor(

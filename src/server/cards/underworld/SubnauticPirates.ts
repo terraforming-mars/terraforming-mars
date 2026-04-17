@@ -8,6 +8,7 @@ import {Board} from '../../boards/Board';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
+import {all} from '../Options';
 
 export class SubnauticPirates extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U011',
         renderData: CardRenderer.builder((b) => {
-          b.text('STEAL').megacredits(7).asterix();
+          b.text('STEAL').megacredits(7, {all}).asterix();
         }),
         description: 'Requires you have 1 corruption and 1 underground token. ' +
           'Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.',

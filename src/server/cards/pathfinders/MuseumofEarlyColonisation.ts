@@ -5,6 +5,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
+import {Units} from '../../../common/Units';
+import {IPlayer} from '../../IPlayer';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {AdjustProduction} from '../../deferredActions/AdjustProduction';
 
 export class MuseumofEarlyColonisation extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +20,6 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
       requirements: [{oceans: 1}, {cities: 1, all}, {greeneries: 1, all}],
 
       behavior: {
-        production: {energy: -1, steel: 1, titanium: 1, plants: 1},
         tr: 1,
       },
 
@@ -31,5 +34,20 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
          'Gain 1 TR.',
       },
     });
+  }
+
+  public productionBox() {
+    return Units.of({energy: -1, steel: 1, titanium: 1, plants: 1});
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // A Mars-track advance can grant +1 energy production, which offsets the cost.
+    return player.production.energy >= 1 || PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player);
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    // Deferred in case the energy production gain comes from the Planetary track.
+    player.game.defer(new AdjustProduction(player, this.productionBox()));
+    return undefined;
   }
 }

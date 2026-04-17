@@ -7,6 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
+import {Units} from '../../../common/Units';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {AdjustProduction} from '../../deferredActions/AdjustProduction';
 
 export class MartianRepository extends Card implements IProjectCard {
   constructor() {
@@ -16,10 +19,6 @@ export class MartianRepository extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
-
-      behavior: {
-        production: {energy: -1},
-      },
 
       victoryPoints: {resourcesHere: {}, per: 3},
 
@@ -34,6 +33,20 @@ export class MartianRepository extends Card implements IProjectCard {
         description: 'Decrease your energy production 1 step. 1 VP for every 3 data here.',
       },
     });
+  }
+
+  public productionBox() {
+    return Units.of({energy: -1});
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // A Mars-track advance can grant +1 energy production, which offsets the cost.
+    return player.production.energy >= 1 || PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player, 2);
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    player.game.defer(new AdjustProduction(player, this.productionBox()));
+    return undefined;
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {

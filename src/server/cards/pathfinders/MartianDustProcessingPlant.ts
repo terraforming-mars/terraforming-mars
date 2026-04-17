@@ -4,6 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {Units} from '../../../common/Units';
+import {AdjustProduction} from '../../deferredActions/AdjustProduction';
 
 export class MartianDustProcessingPlant extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +18,6 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       tags: [Tag.MARS, Tag.BUILDING],
 
       behavior: {
-        production: {energy: -1, steel: 2},
         tr: 1,
       },
 
@@ -27,5 +30,20 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
         description: 'Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.',
       },
     });
+  }
+
+  public productionBox() {
+    return Units.of({energy: -1, steel: 2});
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // A Mars-track advance can grant +1 energy production, which offsets the cost.
+    return player.production.energy >= 1 || PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player);
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    // Deferred in case the energy production gain comes from the Planetary track.
+    player.game.defer(new AdjustProduction(player, this.productionBox()));
+    return undefined;
   }
 }

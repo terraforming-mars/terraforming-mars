@@ -1,9 +1,9 @@
-import {DifficultyLevel, TrackAction} from '../automa/AutomaTypes';
+import {DifficultyLevel, TrackAction, CubeType} from '../automa/AutomaTypes';
 import {Tag} from '../cards/Tag';
 import {CardName} from '../cards/CardName';
+import {Color} from '../Color';
+import {MADetail} from '../game/VictoryPointsBreakdown';
 import {GlobalParameter} from '../GlobalParameter';
-
-type CubeType = 'white' | 'black' | 'credit';
 
 export type MarsBotTrackModel = {
   tags: ReadonlyArray<Tag>;
@@ -20,10 +20,15 @@ export type MarsBotVPModel = {
   neuralInstance: number;
   mcToVP: number;
   cardVP: number;
+  vermin: number;
   total: number;
+  detailsMilestones: ReadonlyArray<MADetail>;
+  detailsAwards: ReadonlyArray<MADetail>;
 };
 
 export type MarsBotModel = {
+  name: string;
+  color: Color;
   difficulty: DifficultyLevel;
   tracks: ReadonlyArray<MarsBotTrackModel>;
   terraformRating: number;
@@ -31,12 +36,12 @@ export type MarsBotModel = {
   actionDeckSize: number;
   bonusDeckSize: number;
   vpBreakdown: MarsBotVPModel;
-  instantWin?: boolean;
+  instantWin: boolean;
   corpName?: CardName;
   corpDescription?: string;
   trackCubes?: ReadonlyArray<{trackIndex: number, position: number, cubeType: CubeType}>;
   mcPerVP?: number;
   mcVP?: number;
-  globalParameterSteps?: Partial<Record<GlobalParameter, number>>;
-  vpByGeneration?: ReadonlyArray<number>;
+  globalParameterSteps: Record<GlobalParameter, number>;
+  vpByGeneration: ReadonlyArray<number>;
 };

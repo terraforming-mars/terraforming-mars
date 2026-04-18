@@ -3,6 +3,9 @@ import {testGame} from '../../TestGame';
 import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
 import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
+import {Insulation} from '../../../src/server/cards/base/Insulation';
+import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustries';
 
 describe('MarsMaths', () => {
   let card: MarsMaths;
@@ -87,5 +90,22 @@ describe('MarsMaths', () => {
     expect(selectCard.config.max).eq(4);
     const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
     expect(selectCard2.cards).has.length(4);
+  });
+
+  it('does not reduce research selection when fewer than five cards were drawn', () => {
+    const [game, player] = testGame(1, {skipInitialCardSelection: true, skipInitialShuffling: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+    player.playedCards.push(new MarsMaths());
+    game.projectDeck.drawPile = [new LunarBeam(), new Insulation(), new IoMiningIndustries()];
+    game.projectDeck.discardPile = [];
+
+    game.gotoResearchPhase();
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const model = selectCard.toModel(player);
+
+    expect(selectCard.cards).has.length(3);
+    expect(model.max).eq(3);
   });
 });

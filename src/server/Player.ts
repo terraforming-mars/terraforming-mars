@@ -647,6 +647,8 @@ export class Player implements IPlayer {
       this.draftedCards = newStandardDraft(this.game).draw(this);
     }
 
+    // If there are 4 cards to choose from, choose 4. If there are 5 because of Mars maths or Luna Project Office,
+    // choose 4. If there are fewer cards because of an exhausted draw pile, draw whatever is available.
     let selectable = this.draftedCards.length;
     if (this.playedCards.has(CardName.MARS_MATHS) && !this.playedCards.has(CardName.LUNA_PROJECT_OFFICE)) {
       selectable = Math.min(selectable, 4);

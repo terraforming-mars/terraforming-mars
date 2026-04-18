@@ -601,7 +601,6 @@ export class Player implements IPlayer {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
-
     if (this.playedCards.has(CardName.SUPERCAPACITORS)) {
       Supercapacitors.onProduction(this);
     } else {
@@ -1781,6 +1780,7 @@ export class Player implements IPlayer {
       // Leavitt Station.
       scienceTagCount: this.tags.extraScienceTags,
       plantTagCount: this.tags.extraPlantTags,
+      jovianTagCount: this.tags.extraJovianTags,
       // Ecoline
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
@@ -1853,6 +1853,7 @@ export class Player implements IPlayer {
     player.warmongerCards = d.warmongerCards ?? 0;
     player.tags.extraScienceTags = d.scienceTagCount;
     player.tags.extraPlantTags = d.plantTagCount;
+    player.tags.extraJovianTags = d.jovianTagCount ?? 0;
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;

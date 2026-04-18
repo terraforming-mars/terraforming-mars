@@ -60,6 +60,11 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </template>
 
+        <template v-if="game.gameOptions.expansions.deltaProject">
+          <a class="hotkey-target"></a>
+          <DeltaProjectBoard :model="game.deltaProject" :playersCount="playerView.players.length"/>
+        </template>
+
         <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
           <a class="hotkey-target"></a>
           <Milestones :milestones="game.milestones" />
@@ -245,6 +250,8 @@
 
           <a name="moonBoard" class="player_home_anchor"></a>
           <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
+
+          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :model="game.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
         </div>
       </details>
     </div>
@@ -290,6 +297,7 @@ import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';
 import TopBar from '@/client/components/TopBar.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
@@ -400,6 +408,7 @@ export default defineComponent({
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
     MoonBoard,
+    DeltaProjectBoard,
     PlanetaryTracks,
     'stacked-cards': StackedCards,
     PurgeWarning,

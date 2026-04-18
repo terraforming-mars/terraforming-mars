@@ -46,6 +46,8 @@
 
     <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
+    <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :model="game.deltaProject" :playersCount="spectator.players.length"/>
+
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones="game.milestones" />
         <Awards :awards="game.awards" show-scores />
@@ -88,6 +90,7 @@ import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import Milestone from '@/client/components/Milestones.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
@@ -132,6 +135,7 @@ export default defineComponent({
     LogPanel,
     Milestone,
     MoonBoard,
+    DeltaProjectBoard,
     PlanetaryTracks,
     PlayersOverview,
     Sidebar,

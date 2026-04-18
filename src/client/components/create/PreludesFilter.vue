@@ -32,6 +32,10 @@ function preludeCardNames(module: GameModule): Array<CardName> {
 const interim = GAME_MODULES.map((module) => [module, [] as Array<CardName>]);
 const ALL_CARDS_BY_MODULE: Record<GameModule, Array<CardName>> = Object.fromEntries(interim);
 getCards(byType(CardType.PRELUDE)).forEach((card) => {
+  // Dealt automatically when Delta Project expansion is on; not part of the custom prelude pool.
+  if (card.name === CardName.DELTA_PROJECT) {
+    return;
+  }
   ALL_CARDS_BY_MODULE[card.module].push(card.name);
 });
 GAME_MODULES.forEach((module) => ALL_CARDS_BY_MODULE[module].sort());

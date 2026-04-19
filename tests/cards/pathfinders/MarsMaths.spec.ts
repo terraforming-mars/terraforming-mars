@@ -95,6 +95,7 @@ describe('MarsMaths', () => {
   it('does not reduce research selection when fewer than five cards were drawn', () => {
     const [game, player] = testGame(1, {skipInitialCardSelection: true, skipInitialShuffling: true});
     game.generation = 2;
+    // Enough to afford all 3 drawn cards, so only the Mars Maths cap is under test.
     player.megaCredits = 20;
     player.playedCards.push(new MarsMaths());
     game.projectDeck.drawPile = [new LunarBeam(), new Insulation(), new IoMiningIndustries()];
@@ -103,9 +104,8 @@ describe('MarsMaths', () => {
     game.gotoResearchPhase();
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
-    const model = selectCard.toModel(player);
 
     expect(selectCard.cards).has.length(3);
-    expect(model.max).eq(3);
+    expect(selectCard.config.max).eq(3);
   });
 });

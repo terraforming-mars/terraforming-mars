@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
@@ -33,7 +34,7 @@ describe('ExcavatorLeasing', () => {
     player.playedCards.push(card);
     player.megaCredits = 6;
 
-    standardProject.action(player);
+    standardProject.payAndExecute(player, Payment.of({megacredits: standardProject.getAdjustedCost(player)}));
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
@@ -49,7 +50,7 @@ describe('ExcavatorLeasing', () => {
     player.playedCards.push(card);
     player2.megaCredits = 6;
 
-    standardProject.action(player2);
+    standardProject.payAndExecute(player2, Payment.of({megacredits: standardProject.getAdjustedCost(player2)}));
     runAllActions(game);
 
     const selectSpace = cast(player2.popWaitingFor(), SelectSpace);

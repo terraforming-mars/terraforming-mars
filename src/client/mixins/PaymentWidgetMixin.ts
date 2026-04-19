@@ -21,9 +21,9 @@ export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
   // The cards to select from
   cards: ReadonlyArray<CardModel>;
 
-  // Information about the currently selected card
-  cardName: CardName;
-  card: CardModel;
+  // Information about the currently selected card.
+  // undefined when no card is selected. Can happen with standard project selection.
+  cardName: CardName | undefined;
   reserveUnits: Units;
   tags: ReadonlyArray<Tag>;
   available: Omit<Units, 'megacredits' | 'energy'>;
@@ -196,6 +196,8 @@ export const PaymentWidgetMixin = {
           case 'seeds':
           case 'graphene':
           case 'kuiperAsteroids':
+          case 'auroraiData':
+          case 'spireScience':
             amount = input[unit];
           }
         }

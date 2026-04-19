@@ -4,6 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
@@ -50,7 +51,7 @@ describe('ExcavateStandardProject', () => {
   it('action', () => {
     player.megaCredits = 7;
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);

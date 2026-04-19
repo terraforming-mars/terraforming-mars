@@ -110,7 +110,7 @@ describe('SolBank', () => {
     expect(game.getTemperature()).eq(-30);
 
     const asteroidStandardProject = new AsteroidStandardProject();
-    asteroidStandardProject.action(player);
+    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: asteroidStandardProject.cost}));
     runAllActions(game);
 
     expect(game.getTemperature()).eq(-28);

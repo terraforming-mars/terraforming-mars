@@ -15,6 +15,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Phase} from '../../../src/common/Phase';
 import {PlayerInput} from '../../../src/server/PlayerInput';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
@@ -57,7 +58,7 @@ describe('SuitableInfrastructure', () => {
     game.phase = Phase.ACTION;
     player.playedCards.push(card);
     player.megaCredits = 11;
-    cast(new PowerPlantStandardProject().action(player), undefined);
+    new PowerPlantStandardProject().payAndExecute(player, Payment.of({megacredits: 11}));
     runAllActions(game);
 
     expect(player.stock.megacredits).eq(2);

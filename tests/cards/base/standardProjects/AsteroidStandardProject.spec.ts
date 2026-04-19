@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {cast, runAllActions, setTemperature, testRedsCosts} from '../../../TestingUtils';
+import {runAllActions, setTemperature, testRedsCosts} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
+import {Payment} from '../../../../src/common/inputs/Payment';
 
 describe('AsteroidStandardProject', () => {
   let card: AsteroidStandardProject;
@@ -28,7 +29,7 @@ describe('AsteroidStandardProject', () => {
     player.setTerraformRating(20);
     expect(game.getTemperature()).eq(-30);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
@@ -45,7 +46,7 @@ describe('AsteroidStandardProject', () => {
     expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
-    cast(card.action(player), undefined);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);

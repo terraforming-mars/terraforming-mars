@@ -4,6 +4,7 @@ import {runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('BufferGasStandardProject', () => {
   let card: BufferGasStandardProject;
@@ -26,7 +27,7 @@ describe('BufferGasStandardProject', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);

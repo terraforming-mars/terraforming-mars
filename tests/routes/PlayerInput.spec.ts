@@ -9,6 +9,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {cast} from '../TestingUtils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
+import {Payment} from '../../src/common/inputs/Payment';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -37,7 +38,7 @@ describe('PlayerInput', () => {
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process({type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
+    player.process({type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
@@ -65,7 +66,7 @@ describe('PlayerInput', () => {
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process(<OrOptionsResponse>{type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
+    player.process(<OrOptionsResponse>{type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));

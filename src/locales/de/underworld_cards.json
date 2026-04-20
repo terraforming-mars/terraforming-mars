@@ -125,8 +125,10 @@
 "Guerilla Ecologists": "Guerilla-Ökologen",
 "Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Benötigt 1 Korruption. Gib 4 Pflanzen aus, um ein Grunflächenplättchen zu platzieren, UNABHÄNGIG VON EINSCHRÄNKUNGEN.",
 
+"Hackers:u": "Häcker",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
 
+"Hired Raiders:u": "Bezahlte Plünderer",
 "Steal up to 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.": "Klaue bis zu 4 M€, plus 1 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
 
 "Hyperspace Drive Prototype": "Hyperraum-Antrieb Prototyp",
@@ -154,6 +156,7 @@
 "Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede unterschiedliche Produktionsart, von der du mindestens 1 hast.",
 
 "Lobbying Network": "Lobbying-Netzwerk",
+"Gain 1 corruption.": " Erhalte 1 Korruption. ",
 
 "Man-made Volcano": "Künstlicher Vulkan",
 "Increase your energy production 2 steps and your heat production 4 steps.": "Erhöhe deine Energie-Produktion um 2 und Ihre Wärme-Produktion um 4.",
@@ -287,6 +290,7 @@
 "Star Vegas": "Star-Vegas",
 "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.": "Benötigt 3 beliebige Städte im Spiel. Platziere eine Stadt auf einem Feld, das für eine andere Weltraum-Stadt reserviert ist. Erhalte 2 Korruption. Erhöhe deine MC-Produktion um 1 für jede Stadt im Spiel.",
 
+"Standard Technology:u": "Standardtechnologie",
 "REPEAT": "WIEDERHOLE",
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast, wobei die Kosten um 8 M€ reduziert werden.",
 

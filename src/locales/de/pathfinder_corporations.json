@@ -40,6 +40,7 @@
   "You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).": "Du beginnst das Spiel mit 40 M€. Wähle eines der verbleibenen politischen Programmplättchen. Du kannst in dieser Generation dessen Effekte als passive Effekte deines Konzerns nutzen oder das Plättchen als regierende Partei.",
 
   "Mars Maths": "Mars Mathematik",
+  "MATHS": "MATHEMATIK",
   "Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.": "EFFEKT: Zu Beginn der Forschungsphase ziehst du 5 Karten, darfst aber nur 4 Karten kaufen. Wenn mit Draft spielt, behalte 2 Karten in deinen ersten Draft.",
   "Action: Take another two actions this turn.": "AKTION: Mache in diesem Zug zwei weitere Aktionen.",
   "You start with 40 M€. As your first action, draw 2 cards": "Du beginnst mit 40 M€. Als deine erste Aktion im Spiel, ziehe 2 Karten.",
@@ -73,6 +74,8 @@
   "You start with 39 M€.": "Du beginnst mit 39 M€.",
 
   "SolBank": "Sternen-Bank",
+  "SOL": "STERNEN",
+  "Bank": "",
   "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "EFFEKT: Immer wenn du M€ (oder Stahl oder Titan) zahlst, füge 1 Datenressource zu dieser Karte hinzu.",
   "Effect: During the production phase convert each data from this card into 1M€ each.": "EFFEKT: Während der Produktionsphase wandelst du alle Daten auf dieser Karte in je 1 M€ um.",
   "You start with 40 M€.": "Du beginnst mit 40 M€.",

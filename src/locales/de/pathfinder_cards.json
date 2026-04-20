@@ -42,6 +42,7 @@
   "Coordinated Raid": "Koordinierter Überfall",
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Benötigt 1 Kolonie im Spiel. Bewege eine deiner ungenutzten Handelsflotten auf ein beliebiges (auch bereits besetztes) Kolonieplättchen. Erhalte den Handels- und Koloniebonus für jede dortige Kolonie. Andere Spieler erhalten keinen Bonus.",
 
+  "Crashlanding": "Bruchlandung",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "Platziere UND ORIENTIERE dieses Plättchen angrenzend zu maximal einer Stadt.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Datenressource und entweder 1 Stahl oder 1 Titan.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Beim Platzieren erhältst du für alle EIGENEN dort angrenzenden Plättchen im Spiel diese Boni.",
@@ -137,6 +138,7 @@
   "Martian Monuments": "Mars-Monumente",
   "Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)": "Benötigt 1 eigene Stadt auf dem Mars. Erhöhe deine M€-Produktion um 1 je eigenes Marssymbol (einschließlich dieses).",
 
+  "Martian Nature Wonders": "Mars Naturerbe",
   "Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.": "Reserviere ein Gebiet auf dem Mars und erhalte den Platzierungsbonus. Auf diesem Gebiet darf kein Plättchen platziert werden. Füge einer beliebigen Karte 2 Daten hinzu.",
 
   "Martian Repository": "Datenbank",
@@ -170,6 +172,7 @@
   "Action: Add 1 animal on this card": "AKTION: Füge dieser Karte 1 Tier hinzu.",
   "Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.": "Benötigt 3 eigene Pflanzensymbole. Erhöhe deine Pflanzen-Produktion um 1 und deine M€-Produktion um 2. 1 SP je Tier auf dieser Karte.",
 
+  "Power Plant:Pathfinders": "Kraftwerk",
   "Increase your heat production 2 steps and your energy production 1 step.": "Erhöhe deine Energie-Produktion um 1 und deine Wärme-Produktion um 2.",
 
   "Prefabrication of Human Habitats": "Vorgefertigte Wohnungen",

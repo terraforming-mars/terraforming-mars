@@ -229,4 +229,19 @@ describe('DoubleDown', () => {
     expect(astroDrill.resourceCount).eq(3);
     expect(player.tableau.asArray().map(toName)).to.have.members([CardName.HELION, CardName.ASTRODRILL, CardName.MERGER, CardName.DOUBLE_DOWN]);
   });
+
+  it('Compatible with New Partner and Board of Directors', () => {
+    const newPartner = new NewPartner();
+    player.playedCards.push(newPartner);
+    const boardOfDirectors = new BoardOfDirectors();
+    game.preludeDeck.drawPile.push(boardOfDirectors);
+    const selectCard = cast(doubleDown.play(player), SelectCard);
+    selectCard.cb([newPartner]);
+    runAllActions(game);
+    const selectNewPrelude = cast(player.popWaitingFor(), SelectCard);
+    selectNewPrelude.cb([boardOfDirectors]);
+    runAllActions(game);
+
+    expect(boardOfDirectors.resourceCount).eq(4);
+  });
 });

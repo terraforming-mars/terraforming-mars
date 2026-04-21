@@ -45,6 +45,7 @@ export class DoubleDown extends PreludeCard {
       return undefined;
     }
     player.game.inDoubleDown = true;
+    player.game.doubleDownPrelude = undefined;
     return PreludesExpansion.selectPreludeToPlay(player, preludes, undefined, 'double-down');
   }
 }

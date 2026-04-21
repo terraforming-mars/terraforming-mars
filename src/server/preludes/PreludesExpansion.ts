@@ -45,6 +45,9 @@ export class PreludesExpansion {
         if (card.canPlay?.(player) === false) {
           PreludesExpansion.fizzle(player, card);
         } else {
+          if (cardAction === 'double-down') {
+            player.game.doubleDownPrelude = card.name;
+          }
           player.playCard(card, undefined, cardAction);
         }
         if (remainders === 'discard') {

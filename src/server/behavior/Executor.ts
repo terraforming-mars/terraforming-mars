@@ -463,7 +463,7 @@ export class Executor implements BehaviorExecutor {
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
-      if (player.game.inDoubleDown) {
+      if (player.game.inDoubleDown && player.game.doubleDownPrelude === card.name) {
         player.game.log('Resources from ${0} cannot be added to ${1}', (b) => b.card(card).cardName(CardName.DOUBLE_DOWN));
       } else {
         const count = ctx.count(addResources);

@@ -110,6 +110,15 @@ export interface IGame extends Logger {
   beholdTheEmperor: boolean;
   /** Double Down: tracking when an action is due to double down. Does not need to be serialized. */
   inDoubleDown: boolean;
+  /**
+   * Double Down: once the prelude is chosen, it's set here to be tracked during its play.
+   *
+   * Pretty much if you double down on New Partner, and draw a prelude, then the app
+   * needs to differentiate between New Partner and this one.  doubleDownPrelude: CardName;
+
+   */
+  doubleDownPrelude: CardName | undefined;
+
   /** If Vermin is in play and it has 10 or more animals */
   verminInEffect: boolean;
   /** If Exploitation of Venus is in effect */

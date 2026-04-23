@@ -76,18 +76,19 @@ describe('UnderworldExpansion', () => {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     const fake = fakeCard({
-      onIdentificationByAnyPlayer(cardOwner, identifyingPlayer, space) {
-        responses.push(`${identifyingPlayer?.id} - ${cardOwner.id} - ${space.id}`);
+      onIdentificationByAnyPlayer(cardOwner, identifyingPlayer, token) {
+        responses.push(`${identifyingPlayer?.id} - ${cardOwner.id} - ${token}`);
       },
     });
     player1.playedCards.push(fake);
     player2.playedCards.push(fake);
 
+    game.underworldData.tokens.push('ocean');
     UnderworldExpansion.identify(game, space, player1);
 
     expect(responses).deep.eq([
-      'p-player1-id - p-player1-id - 03',
-      'p-player1-id - p-player2-id - 03',
+      'p-player1-id - p-player1-id - ocean',
+      'p-player1-id - p-player2-id - ocean',
     ]);
   });
 
@@ -795,6 +796,26 @@ describe('UnderworldExpansion', () => {
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1']);
+  });
+
+  it('removeClaimedToken - planttag decrements extra plant tag', () => {
+    player1.underworldData.tokens.push({token: 'planttag', shelter: false, active: false});
+    player1.tags.extraPlantTags = 1;
+
+    UnderworldExpansion.removeClaimedToken(player1, 0);
+
+    expect(player1.underworldData.tokens).is.empty;
+    expect(player1.tags.extraPlantTags).eq(0);
+  });
+
+  it('removeClaimedToken - sciencetag decrements extra science tag', () => {
+    player1.underworldData.tokens.push({token: 'sciencetag', shelter: false, active: false});
+    player1.tags.extraScienceTags = 1;
+
+    UnderworldExpansion.removeClaimedToken(player1, 0);
+
+    expect(player1.underworldData.tokens).is.empty;
+    expect(player1.tags.extraScienceTags).eq(0);
   });
 
   it('Cannot identify the restricted space on Amazonis Planitia', () => {

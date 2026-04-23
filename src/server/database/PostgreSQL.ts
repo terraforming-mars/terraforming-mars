@@ -1,4 +1,4 @@
-import type * as pg from 'pg';
+import pg from 'pg';
 import {IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
@@ -58,8 +58,7 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    const {Pool} = await import('pg');
-    this._client = new Pool(this.config);
+    this._client = new pg.Pool(this.config);
 
     const sql = `
     CREATE TABLE IF NOT EXISTS games(

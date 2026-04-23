@@ -117,14 +117,7 @@ export class MoonExpansion {
 
       MoonExpansion.logTilePlacement(player, space, tile.tileType);
 
-      // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
-      // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
-      // it's not a problem until it is.
-      for (const p of game.players) {
-        for (const playedCard of p.tableau) {
-          playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        }
-      }
+      game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MOON));
     });
   }
 

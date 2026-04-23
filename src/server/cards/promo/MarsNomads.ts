@@ -9,6 +9,7 @@ import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';
 import {AresHandler} from '../../ares/AresHandler';
+import {BoardType} from '../../boards/BoardType';
 export class MarsNomads extends Card implements IActionCard {
   /*
    * A good page about this card: https://boardgamegeek.com/thread/3154812.
@@ -86,6 +87,10 @@ export class MarsNomads extends Card implements IActionCard {
         // to move Mars Nomads onto that space.
         const coveringExistingSpace = AresHandler.hasHazardTile(space);
         player.game.grantPlacementBonuses(player, space, coveringExistingSpace);
+
+        // Trigger onTilePlaced callbacks even though no actual tile is placed.
+        // Note: all onTilePlaced callbacks must handle space.tile being undefined.
+        player.game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MARS));
 
         return undefined;
       });

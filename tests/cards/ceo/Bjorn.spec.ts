@@ -53,28 +53,24 @@ describe('Bjorn', () => {
     expect(player4.megaCredits).eq(40-stealValue);
   });
 
-  it('Takes OPG action, First player has plenty of MC, Second player has more MC than me but _less than the current generation_, third player is broke', () => {
+  it('Takes OPG action, First player has plenty of MC, second and third players do not have enough MC to steal from', () => {
     player.megaCredits = 5;
     player2.megaCredits = 40; // Steal stealValue from this player
-    player3.megaCredits = 7; // Steal 7 (everything) from this player
+    player3.megaCredits = 7; // Less than stealValue - not a valid target
     player4.megaCredits = 3; // Steal nothing from this player
     card.action(player);
-    expect(player.megaCredits).eq(5 + stealValue + 7);
+    expect(player.megaCredits).eq(5 + stealValue);
     expect(player2.megaCredits).eq(40 - stealValue);
-    expect(player3.megaCredits).eq(0);
+    expect(player3.megaCredits).eq(7);
     expect(player4.megaCredits).eq(3);
   });
 
-  it('Takes OPG action, Everybody has more money than me, but less than current generation, steal as much as possible', () => {
+  it('Cannot take OPG action, everybody has more money than me, but nobody has enough to steal from', () => {
     player.megaCredits = 0;
     player2.megaCredits = 5;
     player3.megaCredits = 5;
     player4.megaCredits = 5;
-    card.action(player);
-    expect(player.megaCredits).eq(15);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(0);
-    expect(player4.megaCredits).eq(0);
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes OPG action, but nobody has more money than me.', () => {
@@ -89,11 +85,32 @@ describe('Bjorn', () => {
     expect(player4.megaCredits).eq(4);
   });
 
+  it('Does not steal from players with less MC than you, even if they have >= generation+2', () => {
+    game.generation = 2;
+    player.megaCredits = 20;
+    player2.megaCredits = 5; // Less than player, but >= generation+2 (4). Should NOT be a target.
+    card.action(player);
+    expect(player.megaCredits).eq(20);
+    expect(player2.megaCredits).eq(5);
+  });
+
+  it('Solo mode: can act and grants generation+2 M€', () => {
+    const [game, player] = testGame(1, {ceoExtension: true});
+    const card = new Bjorn();
+    game.generation = 10;
+    player.megaCredits = 0;
+
+    expect(card.canAct(player)).is.true;
+
+    card.action(player);
+    expect(player.megaCredits).to.eq(12);
+  });
+
   it('Takes OPG action, players that lost money can play Law Suit', () => {
     player.megaCredits = 5;
     player2.megaCredits = 50;
     player3.megaCredits = 0;
-    player4.megaCredits = 7;
+    player4.megaCredits = 12;
 
     const lawsuit = new LawSuit();
     expect(lawsuit.canPlay(player)).is.not.true;

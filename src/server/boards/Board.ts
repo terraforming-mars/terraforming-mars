@@ -163,9 +163,11 @@ export abstract class Board {
     switch (hazardSeverity(space.tile?.tileType)) {
     case 'mild':
       costs.megacredits += 8;
+      costs.tr.tr = (costs.tr.tr ?? 0) + 1;
       break;
     case 'severe':
       costs.megacredits += 16;
+      costs.tr.tr = (costs.tr.tr ?? 0) + 2;
       break;
     }
 

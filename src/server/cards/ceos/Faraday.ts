@@ -101,7 +101,10 @@ export class Faraday extends CeoCard {
           });
         return undefined;
       }),
-      new SelectOption('Do nothing'),
+      new SelectOption('Do nothing').andThen(() => {
+        player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
+        return undefined;
+      }),
     );
   }
 }

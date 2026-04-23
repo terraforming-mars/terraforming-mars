@@ -23,7 +23,6 @@ describe('SpecializedSettlement', () => {
     card = new SpecializedSettlement();
     [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
-    player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });
 
   it('Can play', () => {
@@ -159,13 +158,37 @@ describe('SpecializedSettlement', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
+  describe('Pathfinders Mars track offset', () => {
+    it('canPlay false when Mars track advance would not grant energy production', () => {
+      game.pathfindersData!.mars = 0;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.false;
+    });
+
+    it('canPlay true when Mars track advance lands on energy_production reward', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.true;
+    });
+
+    it('playing the card nets zero change to energy production', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      const action = cast(card.play(player), SelectSpace);
+      action.cb(action.spaces[0]);
+      runAllActions(game);
+      expect(player.production.energy).eq(0);
+      expect(player.production.megacredits).eq(3);
+    });
+  });
+
   function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
-    const action = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
+    runAllActions(game);
 
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
-    const selectSpace = cast(action, SelectSpace);
     const space = selectSpace.spaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);

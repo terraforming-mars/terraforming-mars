@@ -81,7 +81,7 @@
 
     "Predators": "Хищники",
     "Action: Remove 1 animal from any card and add it to this card.": "Действие: удалите 1 жетон животных с любой карты и положите на эту карту 1 жетон животных.",
-    "(Requires 11% oxygen.)": "(Уровень кислорода должен быть 11%.)",
+    "Requires 11% oxygen.": "Уровень кислорода должен быть 11%.",
 
     "Space Station": "Космическая станция",
     "Effect: When you play a space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 M€ меньше.",
@@ -428,7 +428,7 @@
 
     "Symbiotic Fungus": "Грибы-симбионты",
     "Action: Add a microbe to ANOTHER card.": "Действие: положите жетон бактерий на другую карту.",
-    "(Requires -14 C° or warmer.)": "(Температура должна быть -14 градусов или выше.)",
+    "Requires -14 C° or warmer.": "Температура должна быть -14 градусов или выше.",
 
     "Extreme-Cold Fungus": "Грибок для сверхнизких температур",
     "Action: Gain 1 plant.": "Действие: получите 1 растение",

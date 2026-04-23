@@ -20,12 +20,32 @@ export class Bjorn extends CeoCard {
     });
   }
 
+  private targets(player: IPlayer) {
+    const amount = player.game.generation + 2;
+    return player.opponents.filter((p) => p.megaCredits > player.megaCredits && p.megaCredits >= amount);
+  }
+
+  public override canAct(player: IPlayer): boolean {
+    if (!super.canAct(player)) return false;
+    if (player.game.isSoloMode()) return true;
+    return this.targets(player).length > 0;
+  }
+
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const targets = player.opponents.filter((p) => p.megaCredits > player.megaCredits);
-
     const amount = game.generation + 2;
+
+    if (game.isSoloMode()) {
+      player.megaCredits += amount;
+      game.log('${0} stole ${1} M€ from the neutral player', (b) =>
+        b.player(player).number(amount),
+      );
+      return undefined;
+    }
+
+    const targets = this.targets(player);
+
     for (const target of targets) {
       target.attack(player, Resource.MEGACREDITS, amount, {log: true, stealing: true});
     }

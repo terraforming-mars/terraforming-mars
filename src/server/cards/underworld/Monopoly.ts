@@ -32,7 +32,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
           b.text('STEAL').wild(2, {all}).asterix().br;
         }),
         description: 'Requires 2 corruption. Choose a standard resource type. ' +
-          'Steal 2 units of that resource from EACH OTHER player.',
+          'Steal up to 2 units of that resource from EACH OTHER player.',
       },
     });
   }

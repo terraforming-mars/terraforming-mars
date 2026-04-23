@@ -35,6 +35,7 @@ import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
+import {Tag} from '../common/cards/Tag';
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -139,6 +140,9 @@ export interface IPlayer {
   plantsNeededForGreenery: number;
   // Lawsuit
   removingPlayers: Array<PlayerId>;
+  // Cards this player has played that count toward the Warmonger award but don't live
+  // in this player's tableau (e.g. Lawsuit, which lives in the sued player's event pile).
+  warmongerCards: number;
   // For Playwrights corp.
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
@@ -193,8 +197,6 @@ export interface IPlayer {
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
-  /** @deprecated use #terraformRating. */
-  getTerraformRating(): number;
   increaseTerraformRating(steps?: number, opts?: {log?: boolean, from?: From}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
@@ -321,6 +323,7 @@ export interface IPlayer {
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: ICard): void;
+  triggerOnNonCardTagAdded(tag: Tag): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;

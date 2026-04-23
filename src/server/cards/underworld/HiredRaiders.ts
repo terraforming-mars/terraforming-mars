@@ -26,7 +26,7 @@ export class HiredRaiders extends Card implements IProjectCard {
           b.text('steal', Size.MEDIUM, true).megacredits(4, {all})
             .plus().megacredits(1, {all}).slash().corruption();
         }),
-        description: 'Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.',
+        description: 'Steal up to 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.',
       },
     });
   }

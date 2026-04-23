@@ -182,7 +182,7 @@ export default defineComponent({
     },
     playersCount: {
       type: Number,
-      default: 5,
+      required: true,
     },
   },
   data() {

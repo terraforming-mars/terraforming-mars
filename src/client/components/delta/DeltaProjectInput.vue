@@ -4,7 +4,7 @@
     <DeltaProjectBoard
       v-if="playerView.game.deltaProject !== undefined"
       :model="playerView.game.deltaProject"
-      :playersCount="playerCount"
+      :playersCount="playerView.players.length"
     />
     <div class="flex">
       <select class="nes-input" v-model="amount">
@@ -56,11 +56,6 @@ export default defineComponent({
     return {
       amount: String(this.playerinput.validSteps[0] ?? 1),
     };
-  },
-  computed: {
-    playerCount(): number {
-      return this.playerView.players.length;
-    },
   },
   methods: {
     saveData() {

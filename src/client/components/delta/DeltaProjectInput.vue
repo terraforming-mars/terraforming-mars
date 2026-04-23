@@ -2,6 +2,7 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <DeltaProjectBoard
+      v-if="playerView.game.deltaProject !== undefined"
       :model="playerView.game.deltaProject"
       :playersCount="playerCount"
     />

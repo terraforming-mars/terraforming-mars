@@ -46,7 +46,7 @@
 
     <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
-    <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :model="game.deltaProject" :playersCount="spectator.players.length"/>
+    <DeltaProjectBoard v-if="game.deltaProject !== undefined" :model="game.deltaProject" :playersCount="spectator.players.length"/>
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones="game.milestones" />

@@ -60,7 +60,7 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </template>
 
-        <template v-if="game.gameOptions.expansions.deltaProject">
+        <template v-if="game.deltaProject !== undefined">
           <a class="hotkey-target"></a>
           <DeltaProjectBoard :model="game.deltaProject" :playersCount="playerView.players.length"/>
         </template>
@@ -251,7 +251,7 @@
           <a name="moonBoard" class="player_home_anchor"></a>
           <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
 
-          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :model="game.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
+          <DeltaProjectBoard v-if="game.deltaProject !== undefined" :model="game.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
         </div>
       </details>
     </div>

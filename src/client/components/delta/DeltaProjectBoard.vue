@@ -177,8 +177,8 @@ export default defineComponent({
   name: 'DeltaProjectBoard',
   props: {
     model: {
-      type: Object as () => DeltaProjectModel | undefined,
-      default: undefined,
+      type: Object as () => DeltaProjectModel,
+      required: true,
     },
     playersCount: {
       type: Number,
@@ -196,7 +196,6 @@ export default defineComponent({
       return getPreferences().symbol_overlay ? css + ' overlay' : css;
     },
     playersAtPosition(position: number): Array<Color> {
-      if (this.model === undefined) return [];
       const result: Array<Color> = [];
       for (const [color, progress] of Object.entries(this.model.players)) {
         if (progress && progress.position === position) {

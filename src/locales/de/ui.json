@@ -889,7 +889,7 @@
   "Decrease energy": "Reduziere Energie-Produktion",
   "Select amount of energy to gain": "Wähle Menge an Energie, die du erhalten möchtest",
   "Select amount of energy to convert to heat": "Wähle Menge an Energie, die in Wärme umgewandelt werden soll",
-  "Select up to ${1} steel to convert to titanium": "Wähle bis zu ${1} Stahl, der in Titan umgewandelt werden soll",
+  "Select up to ${0} steel to convert to titanium": "Wähle bis zu ${0} Stahl, der in Titan umgewandelt werden soll",
   "Convert Steel": "Konvertiere Stahl",
   "Spend 1 plant to gain 7 M€.": "Bezahle 1 Pflanze, um 7 M€ zu erhalten",
   "Spend 1 steel to gain 7 M€.": "Bezahle 1 Stahl, um 7 M€ zu erhalten",
@@ -1427,7 +1427,7 @@
   "Select how to pay 4 M€ for ocean bonus": "Wähle, wie du 4 M€ für den Ozean-Bonus bezahlen möchtest",
   "Select how to spend ${0} M€ for ${1} cards": "Wähle, wie du ${0} M€ für ${1} Karten bezahlen möchtest",
   "Select how to spend ${0} heat": "Wähle, wie du ${0} Wärme bezahlen möchtest",
-  "Select how to spend 10 M€": "Wähle, wie du 10 M€ bezahlen möchtest",
+  "Select how to spend ${0} M€": "Wähle, wie du ${0} M€ bezahlen möchtest",
   "Stormcraft Incorporated Floaters (2 heat each)": "Schweber von Stormcraft Incorporated (je 2 Wärme)",
   "Play a card, ignoring global requirements": "Eine Karte ausspielen und dabei globale Bedingungen ignorieren",
 

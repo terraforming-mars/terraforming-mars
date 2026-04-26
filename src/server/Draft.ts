@@ -3,6 +3,7 @@ import {CardName} from '../common/cards/CardName';
 import {IGame} from './IGame';
 import {IPlayer} from './IPlayer';
 import {IProjectCard} from './cards/IProjectCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {SelectCard} from './inputs/SelectCard';
 import {message} from './logs/MessageBuilder';
@@ -177,11 +178,16 @@ export abstract class Draft {
     }
 
     // Clear any pending Undo options for all players
+    let waitingForCleared = false;
     for (const p of this.game.players) {
       if (p.getWaitingFor()?.type === 'option') {
         (p as any).waitingFor = undefined;
         (p as any).waitingForCb = undefined;
+        waitingForCleared = true;
       }
+    }
+    if (waitingForCleared) {
+      this.game.gameAge++;
     }
 
     // If more than 1 card is to be passed to the next player, that means we're still drafting
@@ -269,23 +275,106 @@ class InitialDraft extends Draft {
 
     switch (this.game.initialDraftIteration) {
     case 2:
-      this.startDraft();
+      if (this.game.gameOptions.corpPoolDraftVariant) {
+        newCorpPoolDraft(this.game, 1).startDraft();
+      } else {
+        this.startDraft();
+      }
       break;
     case 3:
-      for (const player of this.game.players) {
-        player.dealtProjectCards = player.draftedCards;
-        player.draftedCards = [];
-        player.unchosenDraftCards = [];
-      }
-      if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
-        newPreludeDraft(this.game).startDraft();
-      } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
-        this.game.initialDraftIteration++;
-        newCEOsDraft(this.game).startDraft();
+      if (this.game.gameOptions.corpPoolDraftVariant) {
+        newCorpPoolDraft(this.game, 2).startDraft();
       } else {
-        this.game.gotoInitialResearchPhase();
+        this.finishProjectDraft();
       }
       break;
+    }
+  }
+
+  public finishProjectDraft() {
+    for (const player of this.game.players) {
+      player.dealtProjectCards = player.draftedCards;
+      player.draftedCards = [];
+      player.unchosenDraftCards = [];
+    }
+    if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
+      newPreludeDraft(this.game).startDraft();
+    } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+      this.game.initialDraftIteration++;
+      newCEOsDraft(this.game).startDraft();
+    } else {
+      this.game.gotoInitialResearchPhase();
+    }
+  }
+}
+
+export class CorpPoolDraft {
+  constructor(private game: IGame, private round: number) {}
+
+  public startDraft() {
+    this.game.corpDraftTurn = this.round === 1 ? 0 : this.game.players.length - 1;
+    this.askPlayer();
+  }
+
+  public restoreDraft() {
+    this.askPlayer();
+  }
+
+  private askPlayer() {
+    if (this.game.corpDraftTurn === undefined) return;
+    if (this.round === 1 && this.game.corpDraftTurn >= this.game.players.length) {
+      this.game.corpDraftTurn = undefined;
+      this.endRound();
+      return;
+    }
+    if (this.round === 2 && this.game.corpDraftTurn < 0) {
+      this.game.corpDraftTurn = undefined;
+      this.endRound();
+      return;
+    }
+
+    const player = this.game.playersInGenerationOrder[this.game.corpDraftTurn];
+    // Find already picked corps to disable them and show owners
+    const owners = new Map<CardName, {name: string, color: import('../common/Color').Color}>();
+    if (this.game.corpDraftPool === undefined) {
+      throw new Error("corpDraftPool is undefined");
+    }
+    const enabled = this.game.corpDraftPool.map(() => true);
+    for (const p of this.game.players) {
+      for (const picked of p.dealtCorporationCards) {
+        const idx = this.game.corpDraftPool.findIndex(c => c.name === picked.name);
+        if (idx >= 0) {
+          enabled[idx] = false;
+          owners.set(picked.name, {name: p.name, color: p.color});
+        }
+      }
+    }
+
+    const title = this.round === 1 ? 'Select a corporation to keep (First pick)' : 'Select a corporation to keep (Second pick)';
+
+    player.setWaitingFor(new SelectCard<ICorporationCard>(
+      title,
+      'Keep',
+      this.game.corpDraftPool,
+      {min: 1, max: 1, enabled, showOwner: true, owners}
+    ).andThen((cards) => {
+      player.dealtCorporationCards.push(cards[0]);
+      if (this.round === 1) {
+        this.game.corpDraftTurn!++;
+      } else {
+        this.game.corpDraftTurn!--;
+      }
+      this.game.save();
+      this.askPlayer();
+      return undefined;
+    }));
+  }
+
+  private endRound() {
+    if (this.round === 1) {
+      newInitialDraft(this.game).startDraft();
+    } else {
+      newInitialDraft(this.game).finishProjectDraft();
     }
   }
 }
@@ -367,4 +456,8 @@ export function newPreludeDraft(game: IGame) {
 
 export function newCEOsDraft(game: IGame) {
   return new CEOsDraft(game);
+}
+
+export function newCorpPoolDraft(game: IGame, round: number) {
+  return new CorpPoolDraft(game, round);
 }

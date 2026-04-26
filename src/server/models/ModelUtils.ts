@@ -19,6 +19,7 @@ export function cardsToModel(
     showResources?: boolean,
     showCalculatedCost?: boolean,
     extras?: Map<CardName, PlayCardMetadata>,
+    owners?: Map<CardName, {name: string, color: Color}>,
     enabled?: ReadonlyArray<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
 ): ReadonlyArray<CardModel> {
@@ -60,6 +61,11 @@ export function cardsToModel(
     if (isSelfReplicatingRobotsCard) {
       model.resources = card.resourceCount;
       model.isSelfReplicatingRobotsCard = true;
+    }
+    const owner = options.owners?.get(card.name);
+    if (owner !== undefined) {
+      model.ownerName = owner.name;
+      model.ownerColor = owner.color;
     }
     if (card.warnings.size > 0) {
       model.warnings = Array.from(card.warnings);

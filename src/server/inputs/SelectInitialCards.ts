@@ -111,7 +111,11 @@ export class SelectInitialCards extends OptionsInput<undefined> {
 
     for (const card of player.dealtCorporationCards) {
       if (card.name !== corporation.name) {
-        game.corporationDeck.discard(card);
+        if (game.gameOptions.corpPoolDraftVariant && game.gameOptions.twoCorpsVariant) {
+          // Keep it for Merger
+        } else {
+          game.corporationDeck.discard(card);
+        }
       }
     }
 

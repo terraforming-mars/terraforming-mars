@@ -31,13 +31,23 @@ export class Merger extends PreludeCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
+    let dealtCorps: Array<ICorporationCard>;
+    if (game.gameOptions.corpPoolDraftVariant && game.gameOptions.twoCorpsVariant) {
+      dealtCorps = player.dealtCorporationCards.filter(c => !player.playedCards.some(pc => pc.name === c.name));
+      if (dealtCorps.length === 0) {
+        dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
+      }
+    } else {
+      dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
+    }
     const enabled = dealtCorps.map((corp) => {
       return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
     });
     if (enabled.some((v) => v === true) === false) {
       PreludesExpansion.fizzle(player, this);
-      dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
+      if (!(game.gameOptions.corpPoolDraftVariant && game.gameOptions.twoCorpsVariant)) {
+        dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
+      }
       return undefined;
     }
     player.defer(() => {
@@ -46,11 +56,13 @@ export class Merger extends PreludeCard {
           // Allow merged corps to add resources to themselves.
           player.game.inDoubleDown = false;
           player.playCorporationCard(card);
-          dealtCorps.forEach((corp) => {
-            if (corp.name !== card.name) {
-              game.corporationDeck.discard(corp);
-            }
-          });
+          if (!(game.gameOptions.corpPoolDraftVariant && game.gameOptions.twoCorpsVariant)) {
+            dealtCorps.forEach((corp) => {
+              if (corp.name !== card.name) {
+                game.corporationDeck.discard(corp);
+              }
+            });
+          }
           game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for Merger'}));
           return undefined;
         });

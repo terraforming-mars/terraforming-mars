@@ -13,12 +13,14 @@ import {SpectatorId} from '../Types';
 import {ColonyName} from '../colonies/ColonyName';
 import {GlobalParameter} from '../GlobalParameter';
 import {Tag} from '../cards/Tag';
+import {CardModel} from './CardModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export type GameModel = {
   aresData: AresData | undefined;
   awards: ReadonlyArray<FundedAwardModel>;
   colonies: ReadonlyArray<ColonyModel>;
+  corpDraftPool?: ReadonlyArray<CardModel>;
   discardedColonies: ReadonlyArray<ColonyName>;
   deckSize: number;
   discardPileSize: number;

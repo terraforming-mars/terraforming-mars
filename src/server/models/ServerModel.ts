@@ -51,10 +51,27 @@ export class Server {
   public static getGameModel(game: IGame): GameModel {
     const turmoil = getTurmoilModel(game);
 
+    let corpDraftPoolModel: ReadonlyArray<CardModel> | undefined = undefined;
+    if (game.corpDraftPool !== undefined) {
+      const owners = new Map<CardName, {name: string, color: Color}>();
+      const enabled = game.corpDraftPool.map(() => true);
+      for (const p of game.players) {
+        for (const picked of p.dealtCorporationCards) {
+          const idx = game.corpDraftPool.findIndex(c => c.name === picked.name);
+          if (idx >= 0) {
+            enabled[idx] = false;
+            owners.set(picked.name, {name: p.name, color: p.color});
+          }
+        }
+      }
+      corpDraftPoolModel = cardsToModel(game.players[0], game.corpDraftPool, {owners, enabled, showResources: true});
+    }
+
     return {
       aresData: game.aresData,
       awards: this.getAwards(game),
       colonies: coloniesToModel(game, game.colonies, false, true),
+      corpDraftPool: corpDraftPoolModel,
       deckSize: game.projectDeck.drawPile.length,
       discardPileSize: game.projectDeck.discardPile.length,
       discardedColonies: game.discardedColonies.map(toName),
@@ -412,6 +429,7 @@ export class Server {
       aresExtremeVariant: options.aresExtremeVariant,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      corpPoolDraftVariant: options.corpPoolDraftVariant,
       draftVariant: options.draftVariant,
       escapeVelocity: options.escapeVelocity,
       expansions: {

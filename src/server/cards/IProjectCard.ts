@@ -6,8 +6,6 @@ import {CardType} from '../../common/cards/CardType';
 import {AdditionalProjectCosts} from '../../common/cards/Types';
 
 export interface IProjectCard extends ICard {
-  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
-
   // The only card that is going to call this is Oumuamua Type Object Survey.
   canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
   cost: number;

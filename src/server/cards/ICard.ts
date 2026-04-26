@@ -2,7 +2,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from './IProjectCard';
 import {Space} from '../boards/Space';
 import {PlayerInput} from '../PlayerInput';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
@@ -46,6 +46,7 @@ export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
 export interface ICard {
   readonly name: CardName;
   readonly tags: ReadonlyArray<Tag>;
+  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
   play(player: IPlayer): PlayerInput | undefined;
   /**
    * Describes the M€ discount `player` could apply to playing `card`.

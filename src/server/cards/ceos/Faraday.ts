@@ -39,10 +39,6 @@ export class Faraday extends CeoCard {
     counts: {},
   };
 
-  public override canAct(): boolean {
-    return false;
-  }
-
   public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.length === 0 || card.type === CardType.EVENT) {
       return;

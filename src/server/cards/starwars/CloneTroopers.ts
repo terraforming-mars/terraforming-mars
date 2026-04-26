@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {ALL_RESOURCES} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -42,7 +42,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     if (this.resourceCount > 0) {
       const options = new OrOptions();
       options.options.push(new SelectOption('Add a Clone Trooper to this card').andThen(() => {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GeologistTeam} from '../../../src/server/cards/underworld/GeologistTeam';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
@@ -34,5 +34,26 @@ describe('GeologistTeam', () => {
     game.underworldData.tokens.push('ocean');
     UnderworldExpansion.identify(game, spaces[2], player2);
     expect(player.terraformRating).eq(22);
+  });
+
+  it('Should gain TR when drawing ocean from pool (Mars fully identified)', () => {
+    const card = new GeologistTeam();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card);
+    player.setTerraformRating(20);
+
+    // Fill all identifiable spaces so none remain for selection
+    for (const space of UnderworldExpansion.identifiableSpaces(player)) {
+      space.undergroundResources = 'nothing';
+    }
+
+    // Put an ocean token in the pool for the action to draw
+    game.underworldData.tokens.push('ocean');
+
+    card.action(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.terraformRating).eq(21);
   });
 });

@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('GiantIceAsteroid', () => {
@@ -23,14 +23,18 @@ describe('GiantIceAsteroid', () => {
     player2.plants = 4;
     player3.plants = 6;
     card.play(player);
-    expect(game.deferredActions).has.lengthOf(3);
+    runAllActions(game);
 
-    const firstOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
+    const firstOcean = cast(player.popWaitingFor(), SelectSpace);
     firstOcean.cb(firstOcean.spaces[0]);
-    const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
+
+    runAllActions(game);
+
+    const secondOcean = cast(player.popWaitingFor(), SelectSpace);
     secondOcean.cb(secondOcean.spaces[1]);
 
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[0].cb();

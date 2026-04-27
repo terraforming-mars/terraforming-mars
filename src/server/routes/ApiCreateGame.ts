@@ -135,6 +135,7 @@ export class ApiCreateGame extends Handler {
             includedCards: gameReq.includedCards,
             includeFanMA: gameReq.includeFanMA,
             initialDraftVariant: gameReq.initialDraft,
+            corpPoolDraftVariant: gameReq.corpPoolDraftVariant,
             modularMA: gameReq.modularMA,
             moonExpansion: gameReq.expansions.moon,
             moonStandardProjectVariant: gameReq.moonStandardProjectVariant,

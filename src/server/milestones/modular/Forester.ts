@@ -1,6 +1,6 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
-import {MilestoneName} from '@/common/ma/MilestoneName';
+import {MilestoneName} from '../../../common/ma/MilestoneName';
 
 export class Forester extends BaseMilestone {
   constructor(name: MilestoneName = 'Forester', threshold: number = 4) {

@@ -131,7 +131,7 @@ export class Player implements IPlayer {
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IPreludeCard> = [];
-  public ceoCardsInHand: Set<IProjectCard> = new Set();
+  public ceoCardsInHand: Set<ICeoCard> = new Set();
   public playedCards: PlayedCards = new PlayedCards();
   public draftedCards: Array<IProjectCard> = [];
   public unchosenDraftCards: Array<IProjectCard> = [];
@@ -155,6 +155,8 @@ export class Player implements IPlayer {
   public plantsNeededForGreenery: number = 8;
   // Lawsuit
   public removingPlayers: Array<PlayerId> = [];
+  // Warmonger
+  public warmongerCards: number = 0;
   // For Playwrights corp.
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
@@ -316,10 +318,6 @@ export class Player implements IPlayer {
     }
   }
 
-  public getTerraformRating(): number {
-    return this.terraformRating;
-  }
-
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean, from?: From} = {}) {
     if (this.preservationProgram === true && this.game.phase === Phase.ACTION) {
       steps--;
@@ -348,7 +346,7 @@ export class Player implements IPlayer {
       }
     };
 
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp01')) {
+    if (PartyHooks.reds01PolicyInEffect(this)) {
       if (!this.canAfford(REDS_RULING_POLICY_COST * steps)) {
         // Cannot pay Reds, will not increase TR
         return;
@@ -582,16 +580,6 @@ export class Player implements IPlayer {
         if (card.canAct(this)) {
           result.push(card);
         }
-      }
-    }
-    return result;
-  }
-
-  public getUsableOPGCeoCards(): Array<ICeoCard> {
-    const result: Array<ICeoCard> = [];
-    for (const playedCard of this.tableau) {
-      if (isCeoCard(playedCard) && playedCard.canAct(this) ) {
-        result.push(playedCard);
       }
     }
     return result;
@@ -901,6 +889,12 @@ export class Player implements IPlayer {
     return undefined;
   }
 
+  public triggerOnNonCardTagAdded(tag: Tag): void {
+    for (const card of this.tableau) {
+      card.onNonCardTagAdded?.(this, tag);
+    }
+  }
+
   public onCardPlayed(card: ICard) {
     if (card.type === CardType.PROXY) {
       return;
@@ -939,15 +933,19 @@ export class Player implements IPlayer {
       });
   }
 
-  private playCeoOPGAction(): PlayerInput {
-    return new SelectCard<ICeoCard>(
+  private getPlayCeoOPGAction(): PlayerInput | undefined {
+    const cards = CeoExtension.getUsableOPGCeoCards(this);
+    if (cards.length === 0) {
+      return undefined;
+    }
+    return new SelectCard<ICeoCard & IActionCard>(
       'Use CEO once per game action',
       'Take action',
-      this.getUsableOPGCeoCards(),
+      cards,
       {selectBlueCardAction: true})
       .andThen(([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
-        const action = card.action?.(this);
+        const action = card.action(this);
         this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
@@ -1603,8 +1601,9 @@ export class Player implements IPlayer {
     }
 
     // CEO cards
-    if (CeoExtension.ceoActionIsUsable(this)) {
-      action.options.push(this.playCeoOPGAction());
+    const ceoOpgAction = this.getPlayCeoOPGAction();
+    if (ceoOpgAction !== undefined) {
+      action.options.push(ceoOpgAction);
     }
 
     // Playable cards
@@ -1805,6 +1804,7 @@ export class Player implements IPlayer {
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
       removingPlayers: this.removingPlayers,
+      warmongerCards: this.warmongerCards,
       // Playwrights
       removedFromPlayCards: this.removedFromPlayCards.map(toName),
       // Standard Technology: Underworld
@@ -1869,6 +1869,7 @@ export class Player implements IPlayer {
       titanium: d.titaniumProduction,
     }));
     player.removingPlayers = d.removingPlayers;
+    player.warmongerCards = d.warmongerCards ?? 0;
     player.tags.extraScienceTags = d.scienceTagCount;
     player.tags.extraPlantTags = d.plantTagCount;
     player.steel = d.steel;

@@ -71,6 +71,7 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newCEOsDraft, newStandardDraft} from './Draft';
 import {partition, sum, toID, toName} from '../common/utils/utils';
+import {corporationCardsFromJSON} from './createCard';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -81,6 +82,8 @@ import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
+import { Merger } from './cards/promo/Merger';
+import {ICard} from './cards/ICard';
 
 // Can be overridden by tests
 
@@ -136,6 +139,8 @@ export class Game implements IGame, Logger {
   // Drafting
   public draftRound: number = 1;
   public initialDraftIteration: number = 1;
+  public corpDraftPool?: Array<ICorporationCard>;
+  public corpDraftTurn?: number;
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -172,6 +177,8 @@ export class Game implements IGame, Logger {
   public beholdTheEmperor: boolean = false;
   // Double Down
   public inDoubleDown: boolean = false;
+  public doubleDownPrelude: CardName | undefined = undefined;
+
   // Vermin
   public verminInEffect: boolean = false;
   public exploitationOfVenusInEffect: boolean = false;
@@ -364,6 +371,11 @@ export class Game implements IGame, Logger {
       gameOptions.startingCorporations = 2;
     }
 
+    if (gameOptions.initialDraftVariant && gameOptions.corpPoolDraftVariant) {
+      const poolSize = players.length * 2 + 2;
+      game.corpDraftPool = corporationDeck.drawN(game, poolSize);
+    }
+
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
@@ -392,13 +404,18 @@ export class Game implements IGame, Logger {
         gameOptions.preludeDraftVariant ||
         gameOptions.underworldExpansion ||
         gameOptions.moonExpansion) {
-        player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
+        if (!(gameOptions.initialDraftVariant && gameOptions.corpPoolDraftVariant)) {
+          player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
+        }
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
         if (gameOptions.preludeExtension) {
           gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
+          if (gameOptions.twoCorpsVariant) {
+            player.dealtPreludeCards.push(new Merger());
+          }
         }
         if (gameOptions.ceoExtension) {
           gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
@@ -455,6 +472,8 @@ export class Game implements IGame, Logger {
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
       draftRound: this.draftRound,
+      corpDraftPool: this.corpDraftPool?.map(toName),
+      corpDraftTurn: this.corpDraftTurn,
       exploitationOfVenusInEffect: this.exploitationOfVenusInEffect,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
@@ -1301,26 +1320,12 @@ export class Game implements IGame, Logger {
     tile: Tile): void {
     // Part 1, basic validation checks.
 
-    if (space.tile !== undefined) {
-      let allow = false;
-      if (tile.tileType === TileType.NEW_HOLLAND) {
-        allow = true;
-      } else if (this.gameOptions.aresExtension) {
-        allow = true;
-      } else if (this.gameOptions.pathfindersExpansion) {
-        allow = true;
-      }
-      if (!allow) {
-        throw new Error('Selected space is occupied');
-      }
-    }
-
     // Land claim a player can claim land for themselves
     if (space.player !== undefined && space.player !== player) {
       throw new Error('This space is land claimed by ' + space.player.name);
     }
 
-    if (!AresHandler.canCover(space, tile)) {
+    if (!MarsBoard.canCover(space, tile)) {
       throw new Error('Selected space is occupied: ' + space.id);
     }
 
@@ -1357,8 +1362,8 @@ export class Game implements IGame, Logger {
 
       if (this.gameOptions.boardName === BoardName.HOLLANDIA) {
         const spaces = this.board.spaces.filter(Board.ownedBy(player));
-        const part = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
-        player.withinDeflectionZone = part[0].length > 0 && part[1].length === 0;
+        const [inside, outside] = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
+        player.withinDeflectionZone = inside.length > 0 && outside.length === 0;
       }
     } else {
       space.player = undefined;
@@ -1367,16 +1372,20 @@ export class Game implements IGame, Logger {
     // Clear out underworld components.
     UnderworldExpansion.onTilePlaced(this, space);
 
-    for (const p of this.players) {
-      for (const playedCard of p.tableau) {
-        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
-      }
-    }
+    this.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MARS));
 
     if (initialTileType !== undefined) {
       AresHandler.ifAres(this, () => {
         AresHandler.grantBonusForRemovingHazard(player, initialTileType);
       });
+    }
+  }
+
+  public triggerForAllCards(f: (cardOwner: IPlayer, card: ICard) => void) {
+    for (const p of this.playersInGenerationOrder) {
+      for (const playedCard of p.tableau) {
+        f(p, playedCard);
+      }
     }
   }
 
@@ -1761,6 +1770,10 @@ export class Game implements IGame, Logger {
     game.activePlayer = game.getPlayerById(d.activePlayer);
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
+    if (d.corpDraftPool !== undefined) {
+      game.corpDraftPool = corporationCardsFromJSON(d.corpDraftPool);
+    }
+    game.corpDraftTurn = d.corpDraftTurn;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;

@@ -31,6 +31,7 @@ export type CreateGameModel = {
   includedCards: Array<CardName>;
   includeFanMA: boolean;
   initialDraft: boolean;
+  corpPoolDraftVariant: boolean;
   modularMA: boolean;
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;

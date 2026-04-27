@@ -368,6 +368,13 @@
                                 </label>
                               </div>
 
+                              <div>
+                                <input type="checkbox" name="corpPoolDraft" v-model="corpPoolDraftVariant" id="corpPoolDraft-checkbox">
+                                <label for="corpPoolDraft-checkbox">
+                                  <span v-i18n>Corp pool draft</span>
+                                </label>
+                              </div>
+
                               <div v-if="expansions.ceo">
                                 <input type="checkbox" name="ceosDraft" v-model="ceosDraftVariant" id="ceosDraft-checkbox">
                                 <label for="ceosDraft-checkbox">
@@ -644,6 +651,9 @@ export default defineComponent({
       }
     },
     initialDraft(value: boolean) {
+      if (value === true && this.corpPoolDraftVariant === undefined) {
+        this.corpPoolDraftVariant = true;
+      }
       if (value === true && this.preludeDraftVariant === undefined) {
         this.preludeDraftVariant = true;
       }
@@ -1184,6 +1194,7 @@ export default defineComponent({
         soloTR,
         clonedGamedId,
         initialDraft,
+        corpPoolDraftVariant: this.corpPoolDraftVariant ?? false,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
         ceosDraftVariant: this.ceosDraftVariant ?? false,
         randomMA,

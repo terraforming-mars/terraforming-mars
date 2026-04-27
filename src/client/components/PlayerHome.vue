@@ -160,9 +160,24 @@
 
     <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">
       <template v-if="isInitialDraftingPhase()">
-        <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">
-          <Card :card="card"/>
-        </div>
+        <template v-if="game.gameOptions.corpPoolDraftVariant && game.corpDraftPool">
+          <dynamic-title title="Corporation Pool" :color="thisPlayer.color"/>
+          <div v-for="card in game.corpDraftPool" :key="card.name" class="cardbox">
+            <Card :card="card">
+              <template v-if="card.ownerName">
+                <div :class="'card-owner-label player_translucent_bg_color_'+ card.ownerColor">
+                  {{card.ownerName}}
+                </div>
+              </template>
+            </Card>
+          </div>
+          <dynamic-title title="Drawn Cards" :color="thisPlayer.color"/>
+        </template>
+        <template v-else>
+          <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">
+            <Card :card="card"/>
+          </div>
+        </template>
 
         <div v-for="card in playerView.dealtPreludeCards" :key="card.name" class="cardbox">
           <Card :card="card"/>

@@ -17,10 +17,10 @@ export class CommercialDistrictAres extends CommercialDistrict {
           b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(4).br;
-          }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;
+          }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, /* hasSymbol=*/false, /* isAres=*/true).br;
           b.vpText('1 VP per adjacent city tile.');
         }),
-        victoryPoints: cities(1, 1, true),
+        victoryPoints: cities(1, 1, /* any= */true, /* asterisk=*/true),
       });
   }
 }

@@ -40,12 +40,12 @@ export class GameLogs {
       }
     };
 
-    // for most recent generation pull last 50 log messages
-    if (generation === null || Number(generation) === game.generation) {
+    // Default view keeps the payload small. An explicit generation request should
+    // always return the full generation, including the current one.
+    if (generation === null) {
       return game.gameLog.filter(messagesForPlayer).slice(-50);
-    } else { // pull all logs for generation
-      return this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
     }
+    return this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
   }
 
   public getLogsForGameEnd(game: IGame): Array<string> {

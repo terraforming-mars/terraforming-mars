@@ -368,4 +368,12 @@ describe('PathfindersExpansion', () => {
     expect(game.getVenusScaleLevel()).eq(2);
     expect(player.terraformRating).eq(15);
   });
+
+  it('willGainEnergyProductionOnNextMarsTag - works at max', () => {
+    const [game, player] = testGame(1, {pathfindersExpansion: true});
+
+    game.pathfindersData!.mars = 17;
+
+    PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player, 1);
+  });
 });

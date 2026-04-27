@@ -1395,7 +1395,7 @@ export class Game implements IGame, Logger {
 
     if (oceanCount > 0) {
       const totalBonus = oceanCount * player.oceanBonus;
-      this.log('${0} earned ${1} M€ for placing next to ${2} ocean(s)', (b) => {
+      this.log('${0} gained ${1} M€ for placing next to ${2} ocean(s)', (b) => {
         b.player(player).number(totalBonus).number(oceanCount);
       });
     }

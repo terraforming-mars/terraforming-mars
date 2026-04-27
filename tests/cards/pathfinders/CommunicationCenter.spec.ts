@@ -154,6 +154,29 @@ describe('CommunicationCenter', () => {
     expect(card.resourceCount).eq(1);
   });
 
+  describe('Pathfinders Mars track offset', () => {
+    it('canPlay false when Mars track advance would not grant energy production', () => {
+      game.pathfindersData!.mars = 0;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.false;
+    });
+
+    it('canPlay true when Mars track advance lands on energy_production reward', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.true;
+    });
+
+    it('playing the card nets zero change to energy production', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      player.playCard(card);
+      runAllActions(game);
+      expect(player.production.energy).eq(0);
+      expect(card.resourceCount).eq(2);
+    });
+  });
+
   it('Can be targeted by Solar Storm after adding a resource for playing the event', () => {
     // If Communication Center has 0 or 1 data on it, it is preferential to add one data before removing.
     card.resourceCount = 1;

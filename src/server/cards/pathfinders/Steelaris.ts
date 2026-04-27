@@ -47,6 +47,10 @@ export class Steelaris extends CorporationCard implements ICorporationCard {
       return;
     }
     const tileType = space.tile?.tileType;
+    // onTilePlaced gets called with Mars Nomads, should be ignored here.
+    if (tileType === undefined) {
+      return;
+    }
     if (tileType === TileType.OCEAN || tileType === TileType.GREENERY) {
       return;
     }

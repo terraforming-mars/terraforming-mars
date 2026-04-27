@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses" ref="container">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
@@ -9,7 +9,6 @@
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
           <CardContent
-              ref="content"
               :metadata="cardMetadata"
               :requirements="cardRequirements"
               :isCorporation="isCorporationCard"
@@ -47,11 +46,6 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
-
-type Refs = {
-  container: HTMLElement;
-  content: {$el: HTMLElement};
-};
 
 export default defineComponent({
   name: 'Card',
@@ -100,7 +94,6 @@ export default defineComponent({
     return {
       cardInstance: card,
       hovering: false,
-      customHeight: 0,
     };
   },
   computed: {
@@ -154,6 +147,11 @@ export default defineComponent({
       if (this.isStandardProject) {
         classes.push('card-standard-project');
       }
+      if (this.autoTall) {
+        classes.push('card-auto-tall');
+      } else if (getPreferences().experimental_ui) {
+        classes.push('card-hover-tall');
+      }
       const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject && this.card.isDisabled) {
         classes.push('card-hide');
@@ -199,68 +197,11 @@ export default defineComponent({
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },
-    typedRefs(): Refs {
-      return this.$refs as unknown as Refs;
-    },
     showPlayerCube(): boolean {
       return getPreferences().experimental_ui && this.actionUsed;
     },
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
-    },
-  },
-  methods: {
-    makeFullSize() {
-      if (!this.isProjectCard) {
-        return;
-      }
-      // Was not initialized with a custom height, probably because it was not visible.
-      if (this.customHeight === 0) {
-        this.customHeight = (this.typedRefs.content.$el).scrollHeight;
-        // If for some reason it still doesn't have a custom height, don't resize it.
-        if (this.customHeight === 0) {
-          return;
-        }
-      }
-      const content = this.typedRefs.content.$el;
-      if (content.scrollHeight <= 236) {
-        return;
-      }
-      this.typedRefs.container.style.height = (this.customHeight + 90) + 'px';
-      content.style.height = this.customHeight + 'px';
-    },
-    unmakeFullSize() {
-      if (!this.isProjectCard) {
-        return;
-      }
-      if (this.customHeight === 0) {
-        return;
-      }
-      const content = this.typedRefs.content.$el;
-      this.typedRefs.container.style.removeProperty('height');
-      content.style.removeProperty('height');
-    },
-  },
-  mounted() {
-    this.customHeight = (this.typedRefs.content.$el).scrollHeight;
-  },
-  beforeUpdate() {
-    if (this.autoTall === true) {
-      this.makeFullSize();
-    } else {
-      this.unmakeFullSize();
-    }
-  },
-  watch: {
-    hovering(val: boolean) {
-      if (this.autoTall || !getPreferences().experimental_ui) {
-        return;
-      }
-      if (val) {
-        this.makeFullSize();
-      } else {
-        this.unmakeFullSize();
-      }
     },
   },
 });

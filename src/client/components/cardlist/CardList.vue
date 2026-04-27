@@ -181,6 +181,7 @@
             <div class="turmoil_agenda_cont">
               <div style="padding: 12px; background-image: linear-gradient(rgb(156, 96, 45), black); border-radius: 8px; height: 120px;">
                 <turmoil-agenda :id="id"></turmoil-agenda><div style="text-align:center">{{ id }}</div>
+                {{ agendaIdDescription(id) }}
               </div>
             </div>
           </div>
@@ -217,7 +218,7 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {TypeOption, CardListModel, hashToModel, modelToHash, ResourceOption, TagOption} from '@/client/components/cardlist/CardListModel';
 import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
-import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
+import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS, agendaIdDescription} from '@/common/turmoil/Types';
 import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -337,7 +338,10 @@ export default defineComponent({
     },
     visibleAgendaIds(): Array<PolicyId | BonusId> {
       if (!this.types.agendas) return [];
-      return [...this.allAgendaIds];
+      return this.allAgendaIds.filter((id) => this.include(id, 'agenda'));
+    },
+    agendaIdDescription(): typeof agendaIdDescription {
+      return agendaIdDescription;
     },
   },
   methods: {
@@ -409,7 +413,7 @@ export default defineComponent({
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
-    include(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
+    include(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma' | 'agenda') {
       const normalized = this.filterText.toLocaleUpperCase();
       if (normalized.length === 0) {
         return true;

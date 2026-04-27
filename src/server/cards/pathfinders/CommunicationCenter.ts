@@ -10,6 +10,9 @@ import {all, digit} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
 import {Priority} from '../../deferredActions/Priority';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {Units} from '../../../common/Units';
+import {AdjustProduction} from '../../deferredActions/AdjustProduction';
 
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +24,6 @@ export class CommunicationCenter extends Card implements IProjectCard {
       resourceType: CardResource.DATA,
 
       behavior: {
-        production: {energy: -1},
         addResources: 2,
       },
 
@@ -36,6 +38,21 @@ export class CommunicationCenter extends Card implements IProjectCard {
         description: 'Decrease your energy production 1 step. Place 2 data on this card.',
       },
     });
+  }
+
+  public productionBox() {
+    return Units.of({energy: -1});
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // A Mars-track advance can grant +1 energy production, which offsets the cost.
+    return player.production.energy >= 1 || PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player);
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    // Deferred in case the energy production gain comes from the Planetary track.
+    player.game.defer(new AdjustProduction(player, this.productionBox()));
+    return undefined;
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard) {

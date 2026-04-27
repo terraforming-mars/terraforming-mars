@@ -39,10 +39,6 @@ export class Faraday extends CeoCard {
     counts: {},
   };
 
-  public override canAct(): boolean {
-    return false;
-  }
-
   public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.length === 0 || card.type === CardType.EVENT) {
       return;
@@ -101,7 +97,10 @@ export class Faraday extends CeoCard {
           });
         return undefined;
       }),
-      new SelectOption('Do nothing'),
+      new SelectOption('Do nothing').andThen(() => {
+        player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
+        return undefined;
+      }),
     );
   }
 }

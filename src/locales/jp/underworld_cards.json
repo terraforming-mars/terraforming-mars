@@ -156,7 +156,7 @@
     "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "条件：科学タグ1つ以上. 3植物獲得. 2回地下資源を調査する. そのうち1つを獲得.",
 
     "Mining Market Insider": "鉱山市場インサイダー",
-    "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
+    "Effect: After any player identifies 1 or more underground resources (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
     "Action: Spend 4 data resources on this card to draw a card.": "アクション：このカード上から4データ除去し、1ドロー.",
 
     "Monopoly": "独占",
@@ -266,7 +266,7 @@
 
     "Subnautic Pirates": "潜水海賊",
     "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
-    "Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+    "Requires you have 1 corruption and 1 underground token. Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
     "Subterranean Sea": "地底の海",
     "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "あなたが地下採掘している、海洋予定地以外に海洋1枚配置.",

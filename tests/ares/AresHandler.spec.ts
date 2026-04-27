@@ -15,9 +15,10 @@ import {TestPlayer} from '../TestPlayer';
 import {AresHazards} from '../../src/server/ares/AresHazards';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
-import {addOcean, cast, runAllActions} from '../TestingUtils';
+import {addOcean, cast, runAllActions, setRulingParty} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
+import {PartyName} from '../../src/common/turmoil/PartyName';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -191,6 +192,37 @@ describe('AresHandler', () => {
     expect(space.tile!.tileType).eq(TileType.GREENERY);
     expect(player.megaCredits).is.eq(0);
     expect(player.terraformRating).eq(22);
+  });
+
+  // Issue #7855: covering a hazard with Reds in power requires paying both the hazard
+  // cost and the Reds TR cost, but assertCanPay only checks the hazard cost.
+  it('cover mild hazard with Reds in power requires enough for hazard and TR cost', () => {
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    game.board = EmptyBoard.newInstance();
+    setRulingParty(game, PartyName.REDS, 'rp01');
+
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, space, TileType.EROSION_MILD);
+
+    // Covering mild erosion costs 8 MC (hazard) + 3 MC (Reds TR increase) = 11 MC total.
+    // With only 10 MC, the placement should be rejected.
+    player.megaCredits = 10;
+    expect(() => game.addTile(player, space, {tileType: TileType.GREENERY})).to.throw('Placing here costs 8 M€, additional M€ for 1 TR');
+  });
+
+  it('hazard space is not available when Reds in power and player cannot afford hazard and TR cost', () => {
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    game.board = EmptyBoard.newInstance();
+    setRulingParty(game, PartyName.REDS, 'rp01');
+
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, space, TileType.EROSION_MILD);
+
+    player.megaCredits = 10;
+    expect(game.board.getAvailableSpacesOnLand(player)).to.not.include(space);
+
+    player.megaCredits = 11;
+    expect(game.board.getAvailableSpacesOnLand(player)).to.include(space);
   });
 
   it('Placing on top of an ocean does not regrant bonuses', () => {

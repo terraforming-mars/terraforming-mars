@@ -32,6 +32,11 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
   }
 
   onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
+    // onTilePlaced gets called with Mars Nomads, should be ignored here.
+    if (space.tile === undefined) {
+      return;
+    }
+
     if (cardOwner === activePlayer) {
       const game = activePlayer.game;
       const board = boardType === BoardType.MARS ? game.board : MoonExpansion.moonData(game).moon;

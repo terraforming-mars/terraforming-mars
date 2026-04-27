@@ -9,6 +9,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {newProjectCard} from '../../../src/server/createCard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
 
 describe('Venus', () => {
   let venus: Venus;
@@ -115,5 +116,20 @@ describe('Venus', () => {
 
     expect(aerialMappers.resourceCount).to.eq(1);
     expect(deuteriumExport.resourceCount).to.eq(2);
+  });
+
+  it('When the track value is zero, do not trade. #7720', () => {
+    const sulphurEatingBacteria = new SulphurEatingBacteria();
+
+    player.playedCards.push(sulphurEatingBacteria);
+    venus.colonies.push(player.id);
+    venus.trackPosition = 2;
+
+    venus.trade(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    cast(player2.popWaitingFor(), undefined);
+
+    expect(sulphurEatingBacteria.resourceCount).to.eq(1);
   });
 });

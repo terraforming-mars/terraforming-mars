@@ -6,8 +6,7 @@ import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
-import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
-import {Tile} from '../Tile';
+import {TileType, tileTypeToString} from '../../common/TileType';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
 import {MultiSet} from 'mnemonist';
@@ -17,6 +16,7 @@ import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductio
 import {AresHazards} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
 import {Board} from '../boards/Board';
+import {PartyHooks} from '../turmoil/parties/PartyHooks';
 
 export class AresHandler {
   private constructor() {}
@@ -154,7 +154,7 @@ export class AresHandler {
     return hazardSeverity(space.tile?.tileType) !== 'none';
   }
 
-  private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  private static computePlacementCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.tableau.has(CardName.ATHENA)) {
       subjectToHazardAdjacency = false;
     }
@@ -174,15 +174,17 @@ export class AresHandler {
 
     const severity = hazardSeverity(space.tile?.tileType);
     megaCreditCost += HAZARD_STEPS[severity] * 8;
+    const tr = HAZARD_STEPS[severity];
 
-    return {megacredits: megaCreditCost, production: productionCost};
+    return {megacredits: megaCreditCost, production: productionCost, tr};
   }
 
   public static assertCanPay(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
-      return {megacredits: 0, production: 0};
+      return {megacredits: 0, production: 0, tr: 0};
     }
-    const cost = AresHandler.computeAdjacencyCosts(player, space, subjectToHazardAdjacency);
+    const cost = AresHandler.computePlacementCosts(player, space, subjectToHazardAdjacency);
+
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.
@@ -193,16 +195,20 @@ export class AresHandler {
             player.production.energy +
             player.production.heat;
 
-    if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+    if (availableProductionUnits >= cost.production && player.canAfford({cost: cost.megacredits, tr: {tr: cost.tr}})) {
       return cost;
     }
+    const messages = [];
     if (cost.production > 0) {
-      throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
+      messages.push(`${cost.production} units of production`);
     }
     if (cost.megacredits > 0) {
-      throw new Error(`Placing here costs ${cost.megacredits} M€`);
+      messages.push(`${cost.megacredits} M€`);
     }
-    return cost;
+    if (cost.tr > 0 && PartyHooks.reds01PolicyInEffect(player)) {
+      messages.push(`additional M€ for ${cost.tr} TR`);
+    }
+    throw new Error(`Placing here costs ${messages.join(', ')}`);
   }
 
   public static payAdjacencyAndHazardCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean) {
@@ -216,22 +222,6 @@ export class AresHandler {
       player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
       player.game.defer(new SelectPaymentDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
-  }
-
-  // Returns true if |newTile| can cover |boardTile|.
-  public static canCover(space: Space, newTile: Tile): boolean {
-    if (space.tile === undefined) {
-      return true;
-    }
-
-    // A hazard protected by the Desperate Measures action can't be covered.
-    if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
-      return true;
-    }
-    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
-      return true;
-    }
-    return false;
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {

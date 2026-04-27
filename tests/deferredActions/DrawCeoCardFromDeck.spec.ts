@@ -17,6 +17,10 @@ class UnPlayableCeo extends CeoCard {
   override canPlay(): boolean {
     return false;
   }
+
+  public action() {
+    return undefined;
+  }
 }
 
 describe('DrawCeoCardFromDeck', () => {

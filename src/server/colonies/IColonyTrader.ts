@@ -1,4 +1,4 @@
-import {Message} from '@/common/logs/Message';
+import {Message} from '../../common/logs/Message';
 import {IColony} from './IColony';
 
 /** Something that can pay for trading with colonies. */

@@ -9,7 +9,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
@@ -41,7 +40,7 @@ export class Atmoscoop extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
+    if (PartyHooks.reds01PolicyInEffect(player)) {
       const cost = player.getCardCost(this);
       if (!player.canAfford({cost, titanium: true})) {
         return false;

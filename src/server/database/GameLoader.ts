@@ -55,7 +55,7 @@ const metrics = {
  * Loads games from database sequentially as needed
  */
 export class GameLoader implements IGameLoader {
-  private static instance?: GameLoader;
+  private static instance: GameLoader;
 
   private cache: Cache;
   private readonly config: CacheConfig;
@@ -74,7 +74,7 @@ export class GameLoader implements IGameLoader {
   }
 
   public static getInstance(): IGameLoader {
-    if (GameLoader.instance === undefined) {
+    if (!GameLoader.instance) {
       const config = parseConfigString(process.env.GAME_CACHE ?? '');
       GameLoader.instance = new GameLoader(config, new Clock());
     }

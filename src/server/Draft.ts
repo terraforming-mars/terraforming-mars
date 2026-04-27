@@ -385,6 +385,9 @@ class PreludeDraft extends Draft {
   }
 
   override draw(player: IPlayer) {
+    if (this.game.gameOptions.twoCorpsVariant) {
+      return player.dealtPreludeCards.filter((c) => c.name !== CardName.MERGER);
+    }
     return player.dealtPreludeCards;
   }
 
@@ -399,8 +402,14 @@ class PreludeDraft extends Draft {
   override endRound() {
     this.game.initialDraftIteration++;
     for (const player of this.game.players) {
+      const merger = this.game.gameOptions.twoCorpsVariant ?
+        player.dealtPreludeCards.find((c) => c.name === CardName.MERGER) :
+        undefined;
       // TODO(kberg): player.draftedCards is not ideal here.
       player.dealtPreludeCards = player.draftedCards as Array<IPreludeCard>;
+      if (merger) {
+        player.dealtPreludeCards.push(merger);
+      }
       player.draftedCards = [];
       player.unchosenDraftCards = [];
     }

@@ -113,7 +113,10 @@ export class Server {
       cardsInHand: cardsToModel(player, player.cardsInHand, {showCalculatedCost: true}),
       ceoCardsInHand: cardsToModel(player, Array.from(player.ceoCardsInHand)),
       dealtCorporationCards: cardsToModel(player, player.dealtCorporationCards),
-      dealtPreludeCards: cardsToModel(player, player.dealtPreludeCards),
+      dealtPreludeCards: cardsToModel(player, player.dealtPreludeCards, {
+        enabled: game.gameOptions.twoCorpsVariant ?
+          player.dealtPreludeCards.map((c) => c.name !== CardName.MERGER) : undefined,
+      }),
       dealtCeoCards: cardsToModel(player, player.dealtCeoCards),
       dealtProjectCards: cardsToModel(player, player.dealtProjectCards),
       draftedCards: cardsToModel(player, player.draftedCards, {showCalculatedCost: true}),

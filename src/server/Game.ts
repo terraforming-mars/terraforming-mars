@@ -82,6 +82,7 @@ import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
+import { Merger } from './cards/promo/Merger';
 
 // Can be overridden by tests
 
@@ -409,6 +410,9 @@ export class Game implements IGame, Logger {
         if (gameOptions.preludeExtension) {
           gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
+          if (gameOptions.twoCorpsVariant) {
+            player.dealtPreludeCards.push(new Merger());
+          }
         }
         if (gameOptions.ceoExtension) {
           gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);

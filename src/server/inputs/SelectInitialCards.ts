@@ -2,7 +2,6 @@ import * as titles from '../../common/inputs/SelectInitialCards';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from './SelectCard';
-import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
 import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
@@ -48,11 +47,6 @@ export class SelectInitialCards extends OptionsInput<undefined> {
           return undefined;
         }),
     );
-
-    // Give each player Merger in this variant
-    if (game.gameOptions.twoCorpsVariant) {
-      player.dealtPreludeCards.push(new Merger());
-    }
 
     if (game.gameOptions.preludeExtension) {
       this.push('prelude',
@@ -111,7 +105,11 @@ export class SelectInitialCards extends OptionsInput<undefined> {
 
     for (const card of player.dealtCorporationCards) {
       if (card.name !== corporation.name) {
-        game.corporationDeck.discard(card);
+        if (game.gameOptions.corpPoolDraftVariant && game.gameOptions.twoCorpsVariant) {
+          // Keep it for Merger
+        } else {
+          game.corporationDeck.discard(card);
+        }
       }
     }
 

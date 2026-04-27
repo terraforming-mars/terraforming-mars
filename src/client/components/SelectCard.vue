@@ -165,6 +165,9 @@ export default defineComponent({
       return 'cardbox';
     },
     findOwner(card: CardModel): Owner | undefined {
+      if (card.ownerName !== undefined && card.ownerColor !== undefined) {
+        return {name: card.ownerName, color: card.ownerColor};
+      }
       for (const player of this.playerView.players) {
         if (player.tableau.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};

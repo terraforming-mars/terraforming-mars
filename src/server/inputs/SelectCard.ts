@@ -6,6 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 import {SelectCardModel} from '../../common/models/PlayerInputModel';
 import {IPlayer} from '../IPlayer';
+import {Color} from '../../common/Color';
 import {cardsToModel} from '../models/ModelUtils';
 import {InputError} from './InputError';
 
@@ -22,6 +23,8 @@ export type Options = {
   showOwner: boolean,
   /** Default is false. If true, show a "Select All" / "Deselect All" toggle button. */
   showSelectAll: boolean,
+  /** If provided, sets the owner of specific cards. */
+  owners: Map<CardName, {name: string, color: Color}>,
 }
 export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T>> {
   public config: Options;
@@ -41,6 +44,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
       played: config?.played ?? true,
       showOwner: config?.showOwner ?? false,
       showSelectAll: config?.showSelectAll ?? false,
+      owners: config?.owners ?? new Map(),
     };
     this.buttonLabel = buttonLabel;
   }
@@ -54,6 +58,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
         showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
         showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
         enabled: this.config.enabled,
+        owners: this.config.owners,
       }),
       max: this.config.max,
       min: this.config.min,

@@ -71,6 +71,7 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newCEOsDraft, newStandardDraft} from './Draft';
 import {partition, sum, toID, toName} from '../common/utils/utils';
+import {corporationCardsFromJSON} from './createCard';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -81,6 +82,7 @@ import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
+import { Merger } from './cards/promo/Merger';
 import {ICard} from './cards/ICard';
 
 // Can be overridden by tests
@@ -137,6 +139,8 @@ export class Game implements IGame, Logger {
   // Drafting
   public draftRound: number = 1;
   public initialDraftIteration: number = 1;
+  public corpDraftPool?: Array<ICorporationCard>;
+  public corpDraftTurn?: number;
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -367,6 +371,11 @@ export class Game implements IGame, Logger {
       gameOptions.startingCorporations = 2;
     }
 
+    if (gameOptions.initialDraftVariant && gameOptions.corpPoolDraftVariant) {
+      const poolSize = players.length * 2 + 2;
+      game.corpDraftPool = corporationDeck.drawN(game, poolSize);
+    }
+
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
@@ -395,13 +404,18 @@ export class Game implements IGame, Logger {
         gameOptions.preludeDraftVariant ||
         gameOptions.underworldExpansion ||
         gameOptions.moonExpansion) {
-        player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
+        if (!(gameOptions.initialDraftVariant && gameOptions.corpPoolDraftVariant)) {
+          player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
+        }
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
         if (gameOptions.preludeExtension) {
           gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
+          if (gameOptions.twoCorpsVariant) {
+            player.dealtPreludeCards.push(new Merger());
+          }
         }
         if (gameOptions.ceoExtension) {
           gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
@@ -458,6 +472,8 @@ export class Game implements IGame, Logger {
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
       draftRound: this.draftRound,
+      corpDraftPool: this.corpDraftPool?.map(toName),
+      corpDraftTurn: this.corpDraftTurn,
       exploitationOfVenusInEffect: this.exploitationOfVenusInEffect,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
@@ -1754,6 +1770,10 @@ export class Game implements IGame, Logger {
     game.activePlayer = game.getPlayerById(d.activePlayer);
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
+    if (d.corpDraftPool !== undefined) {
+      game.corpDraftPool = corporationCardsFromJSON(d.corpDraftPool);
+    }
+    game.corpDraftTurn = d.corpDraftTurn;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;

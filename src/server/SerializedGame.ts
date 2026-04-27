@@ -18,6 +18,7 @@ import {AwardName} from '../common/ma/AwardName';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {MilestoneName} from '../common/ma/MilestoneName';
 import {Tag} from '../common/cards/Tag';
+import {CardName} from '../common/cards/CardName';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
@@ -35,6 +36,8 @@ export type SerializedGame = {
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftRound: number;
+    corpDraftPool?: Array<CardName>;
+    corpDraftTurn?: number;
     exploitationOfVenusInEffect: boolean;
     first: PlayerId;
     fundedAwards: Array<SerializedFundedAward>;

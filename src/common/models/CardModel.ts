@@ -3,6 +3,7 @@ import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
 import {AdditionalProjectCosts, CardDiscount} from '../cards/Types';
 import {Tag} from '../cards/Tag';
+import {Color} from '../Color';
 import {Warning} from '../cards/Warning';
 
 export interface CardModel {
@@ -17,4 +18,6 @@ export interface CardModel {
     reserveUnits?: Readonly<Units>; // Written for The Moon, but useful in other contexts.
     bonusResource?: Array<Resource>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
+    ownerName?: string; // Explicit owner name
+    ownerColor?: Color; // Explicit owner color
 }

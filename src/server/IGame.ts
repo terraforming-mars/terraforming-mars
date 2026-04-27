@@ -9,6 +9,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {Space} from './boards/Space';
 import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
@@ -261,6 +262,9 @@ export interface IGame extends Logger {
   draftRound: number;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
+
+  corpDraftPool?: Array<ICorporationCard>;
+  corpDraftTurn?: number;
 
   underworldDraftEnabled: boolean;
   getActionCount(): number;

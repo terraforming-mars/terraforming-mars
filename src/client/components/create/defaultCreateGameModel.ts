@@ -21,6 +21,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     expansions: {...DEFAULT_EXPANSIONS},
     draftVariant: true,
     initialDraft: false,
+    corpPoolDraftVariant: false,
     randomMA: RandomMAOptionType.NONE,
     modularMA: false,
     randomFirstPlayer: true,

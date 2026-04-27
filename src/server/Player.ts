@@ -131,7 +131,7 @@ export class Player implements IPlayer {
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IPreludeCard> = [];
-  public ceoCardsInHand: Set<IProjectCard> = new Set();
+  public ceoCardsInHand: Set<ICeoCard> = new Set();
   public playedCards: PlayedCards = new PlayedCards();
   public draftedCards: Array<IProjectCard> = [];
   public unchosenDraftCards: Array<IProjectCard> = [];
@@ -585,16 +585,6 @@ export class Player implements IPlayer {
     return result;
   }
 
-  public getUsableOPGCeoCards(): Array<ICeoCard> {
-    const result: Array<ICeoCard> = [];
-    for (const playedCard of this.tableau) {
-      if (isCeoCard(playedCard) && playedCard.canAct(this) ) {
-        result.push(playedCard);
-      }
-    }
-    return result;
-  }
-
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
@@ -943,15 +933,19 @@ export class Player implements IPlayer {
       });
   }
 
-  private playCeoOPGAction(): PlayerInput {
-    return new SelectCard<ICeoCard>(
+  private getPlayCeoOPGAction(): PlayerInput | undefined {
+    const cards = CeoExtension.getUsableOPGCeoCards(this);
+    if (cards.length === 0) {
+      return undefined;
+    }
+    return new SelectCard<ICeoCard & IActionCard>(
       'Use CEO once per game action',
       'Take action',
-      this.getUsableOPGCeoCards(),
+      cards,
       {selectBlueCardAction: true})
       .andThen(([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
-        const action = card.action?.(this);
+        const action = card.action(this);
         this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
@@ -1607,8 +1601,9 @@ export class Player implements IPlayer {
     }
 
     // CEO cards
-    if (CeoExtension.ceoActionIsUsable(this)) {
-      action.options.push(this.playCeoOPGAction());
+    const ceoOpgAction = this.getPlayCeoOPGAction();
+    if (ceoOpgAction !== undefined) {
+      action.options.push(ceoOpgAction);
     }
 
     // Playable cards

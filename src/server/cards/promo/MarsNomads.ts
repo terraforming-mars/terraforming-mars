@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';
 import {AresHandler} from '../../ares/AresHandler';
@@ -74,7 +73,7 @@ export class MarsNomads extends Card implements IActionCard {
     return this.eliglbleDestinationSpaces(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const spaces = this.eliglbleDestinationSpaces(player);
 
     return new SelectSpace(

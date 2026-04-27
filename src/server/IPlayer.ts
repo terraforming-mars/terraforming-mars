@@ -109,7 +109,7 @@ export interface IPlayer {
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;
   preludeCardsInHand: Array<IPreludeCard>;
-  ceoCardsInHand: Set<IProjectCard>;
+  ceoCardsInHand: Set<ICeoCard>;
   playedCards: PlayedCards;
   cardCost: number;
   // This will eventually replace playedCards.

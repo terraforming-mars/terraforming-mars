@@ -82,4 +82,5 @@ export interface NewGameConfig {
   customCeos: Array<CardName>;
   startingCeos: number;
   startingPreludes: number;
+  extraCorporationsInPool: number;
 }

@@ -22,6 +22,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     draftVariant: true,
     initialDraft: false,
     corpPoolDraftVariant: false,
+    extraCorporationsInPool: 2,
     randomMA: RandomMAOptionType.NONE,
     modularMA: false,
     randomFirstPlayer: true,

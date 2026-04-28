@@ -432,13 +432,13 @@ describe('PharmacyUnion', () => {
     setRulingParty(game, PartyName.REDS);
 
     const buildColonyStandardProject = new BuildColonyStandardProject();
-    buildColonyStandardProject.action(player);
+    buildColonyStandardProject.payAndExecute(player, Payment.of({megacredits: buildColonyStandardProject.cost}));
     runAllActions(game);
 
     expect(cast(player.popWaitingFor(), SelectColony).colonies).does.not.include(leavitt);
 
     player.megaCredits = 20;
-    buildColonyStandardProject.action(player);
+    buildColonyStandardProject.payAndExecute(player, Payment.of({megacredits: buildColonyStandardProject.cost}));
     runAllActions(game);
 
     expect(player.tags.count(Tag.SCIENCE)).eq(0);

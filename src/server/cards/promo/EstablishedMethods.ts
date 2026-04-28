@@ -2,8 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
-import {IStandardProjectCard} from '../IStandardProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectStandardProjectToPlay} from '../../inputs/SelectStandardProjectToPlay';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Priority} from '../../deferredActions/Priority';
 import {message} from '../../logs/MessageBuilder';
@@ -45,10 +44,8 @@ export class EstablishedMethods extends PreludeCard {
     }
 
     const title = first ? 'Select your first standard project' : 'Select your second standard project';
-    player.defer(new SelectCard<IStandardProjectCard>(
-      title, 'Confirm', standardProjects, {enabled})
-      .andThen(([card]) => {
-        player.defer(card.action(player));
+    player.defer(new SelectStandardProjectToPlay(player, standardProjects, {enabled, title, buttonLabel: 'Confirm'})
+      .andThen(() => {
         if (first) {
           this.prepareForSecondStandardProject(player);
         }

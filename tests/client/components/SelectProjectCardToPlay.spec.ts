@@ -631,12 +631,34 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 5, megacredits: 7}));
   });
 
+  it('Luna Trade Federation: standard project with canPayWith.titanium uses full titanium rate', async () => {
+    // Moon Habitat Variant 1 costs 23 MC, canPayWith.titanium = true.
+    // With Luna Trade Federation, titanium should still be valued at the full 3 MC each,
+    // not the reduced 2 MC that Luna Trade Federation normally provides.
+    // Player has 5 MC and 8 titanium (titaniumValue=3): should use 6 titanium + 5 MC = 23 MC.
+    const wrapper = setupCardForPurchase(
+      CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1, 23,
+      {megacredits: 5, titanium: 8, titaniumValue: 3},
+      {paymentOptions: {lunaTradeFederationTitanium: true}},
+      {canPayWith: {titanium: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({megacredits: 5, titanium: 6});
+
+    await tester.clickMax('titanium');
+    tester.expectPayment({megacredits: 2, titanium: 7});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megacredits: 2}));
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<SelectProjectCardToPlayModel>,
-    options?: {reserveUnits?: Units}) {
+    options?: {reserveUnits?: Units, canPayWith?: CardModel['standardProjectCanPayWith']}) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
@@ -666,10 +688,13 @@ describe('SelectProjectCardToPlay', () => {
       lunaArchivesScience: 0,
       microbes: 0,
       seeds: 0,
+      auroraiData: 0,
+      spireScience: 0,
       ...playerInputFields,
     };
     if (options !== undefined) {
       playerInput.cards![0].reserveUnits = options.reserveUnits;
+      playerInput.cards![0].standardProjectCanPayWith = options.canPayWith;
     }
 
     return mount(SelectProjectCardToPlay, {

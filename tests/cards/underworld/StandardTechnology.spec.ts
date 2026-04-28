@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {toName} from '../../../src/common/utils/utils';
 import {CardName} from '../../../src/common/cards/CardName';
 
@@ -30,7 +31,7 @@ describe('Underworld / StandardTechnology', () => {
     player.megaCredits = 14;
     expect(asteroidStandardProject.canAct(player)).is.true;
 
-    asteroidStandardProject.action(player);
+    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: 14}));
     runAllActions(game);
     expect(player.megaCredits).eq(0);
 
@@ -54,7 +55,7 @@ describe('Underworld / StandardTechnology', () => {
 
   it('Works for standard projects taken before Standard Technology was played', () => {
     player.megaCredits = 14;
-    asteroidStandardProject.action(player);
+    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: 14}));
     runAllActions(game);
     expect(player.megaCredits).eq(0);
 
@@ -82,17 +83,17 @@ describe('Underworld / StandardTechnology', () => {
 
     expect(card.canAct(player)).is.true;
 
-    const selectCard = cast(card.action(player), SelectCard);
-    expect((selectCard.cards.map(toName))).deep.eq([CardName.ASTEROID_STANDARD_PROJECT]);
+    const selectStandardProjectToPlay = cast(card.action(player), SelectStandardProjectToPlay);
+    expect((selectStandardProjectToPlay.cards.map(toName))).deep.eq([CardName.ASTEROID_STANDARD_PROJECT]);
 
     player.megaCredits = 10;
 
-    const selectCard2 = cast(card.action(player), SelectCard);
-    expect((selectCard2.cards.map(toName))).deep.eq([CardName.ASTEROID_STANDARD_PROJECT, CardName.AQUIFER_STANDARD_PROJECT]);
+    const selectStandardProjectToPlay2 = cast(card.action(player), SelectStandardProjectToPlay);
+    expect((selectStandardProjectToPlay2.cards.map(toName))).deep.eq([CardName.ASTEROID_STANDARD_PROJECT, CardName.AQUIFER_STANDARD_PROJECT]);
 
     expect(player.terraformRating).eq(14);
 
-    selectCard2.cb([selectCard2.cards[0]]);
+    selectStandardProjectToPlay2.payAndPlay(selectStandardProjectToPlay2.cards[0], Payment.of({megacredits: 6}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(4);

@@ -1,7 +1,8 @@
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCanPayWith, StandardProjectCard} from '../StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
+import {StandardProjectCanPayWith} from '../../../common/cards/Types';
 import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 

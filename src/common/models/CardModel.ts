@@ -1,7 +1,7 @@
 import {Units} from '../Units';
 import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
-import {AdditionalProjectCosts, CardDiscount} from '../cards/Types';
+import {AdditionalProjectCosts, CardDiscount, StandardProjectCanPayWith} from '../cards/Types';
 import {Tag} from '../cards/Tag';
 import {Color} from '../Color';
 import {Warning} from '../cards/Warning';
@@ -20,4 +20,5 @@ export interface CardModel {
     cloneTag?: Tag; // Used with Pathfinders
     ownerName?: string; // Explicit owner name
     ownerColor?: Color; // Explicit owner color
+    standardProjectCanPayWith?: StandardProjectCanPayWith; // Set for standard projects; undefined for regular project cards
 }

@@ -4,9 +4,10 @@ import {SellPatentsStandardProject} from '../../../src/server/cards/base/standar
 import {StandardTechnology} from '../../../src/server/cards/base/StandardTechnology';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('StandardTechnology', () => {
   let card: StandardTechnology;
@@ -18,7 +19,7 @@ describe('StandardTechnology', () => {
   });
 
   it('play', () => {
-    expect(churn(card.play(player), player)).is.undefined;
+    expect(card.play(player)).is.undefined;
   });
 
   it('Rebate for Asteroid Standard Project', () => {
@@ -41,7 +42,9 @@ describe('StandardTechnology', () => {
 
     const greeneryStandardProject = new GreeneryStandardProject();
 
-    const selectSpace = cast(churn(greeneryStandardProject.action(player), player), SelectSpace);
+    greeneryStandardProject.payAndExecute(player, Payment.of({megacredits: greeneryStandardProject.cost}));
+    runAllActions(player.game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const availableSpace = selectSpace.spaces[0];
 
     selectSpace?.cb(availableSpace);

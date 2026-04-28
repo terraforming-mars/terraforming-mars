@@ -393,7 +393,7 @@
   "${0} raised the mining rate ${1} step(s)": "${0} erhöhte die Minenwertung um ${1} Schritt(e)",
   "${0} acted as World Government and raised the habitat rate ${1} step(s)": "${0} agierte als Weltregierung und erhöhte die Habitatwertung um ${1} Schritt(e)",
   "${0} raised the habitat rate ${1} step(s)": "${0} erhöhte die Habitatwertung um ${1} Schritt(e)",
-  "${0} acted as World Government and raised the logistic rate ${1} step(s)": "${0} agierte als Weltregierung und erhöhte die Logistikwertung um ${1} Schritt(e)",
+  "${0} acted as World Government and raised the logistics rate ${1} step(s)": "${0} agierte als Weltregierung und erhöhte die Logistikwertung um ${1} Schritt(e)",
   "${0} raised the logistics rate ${1} step(s)": "${0} erhöhte die Logistikwertung um ${1} Schritt(e).",
   "${0} lowered the mining rate ${1} step(s)": "${0} senkte die Minenwertung um ${1} Schritt(e).",
   "${0} lowered the habitat rate ${1} step(s)": "${0} senkte die Habitatwertung um ${1} Schritt(e).",

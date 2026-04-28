@@ -57,7 +57,7 @@ export class PathfindersExpansion {
       return false;
     }
     const idx = data[Tag.MARS] + count;
-    const rewards = TRACKS[Tag.MARS].spaces[idx].risingPlayer;
+    const rewards = TRACKS[Tag.MARS].spaces[idx]?.risingPlayer;
 
     if (rewards === undefined) {
       return false;

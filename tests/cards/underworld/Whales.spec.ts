@@ -5,6 +5,7 @@ import {addOcean, cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AquiferStandardProject} from '../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {Flooding} from '../../../src/server/cards/base/Flooding';
 import {IcyImpactors} from '../../../src/server/cards/promo/IcyImpactors';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
@@ -56,7 +57,7 @@ describe('Whales', () => {
     expect(game.canAddOcean()).is.false;
     expect(aquiferStandardProject.canPlay(player)).is.true;
 
-    cast(aquiferStandardProject.action(player), undefined);
+    aquiferStandardProject.payAndExecute(player, Payment.of({megacredits: aquiferStandardProject.cost}));
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
 

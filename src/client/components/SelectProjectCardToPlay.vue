@@ -4,11 +4,11 @@
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
+    <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>
 
-  <template v-if="card.additionalProjectCosts">
+  <template v-if="card !== undefined && card.additionalProjectCosts">
     <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
       v-i18n="[$t(card.name), card.additionalProjectCosts.aeronGenomicsResources, 'animals', $t(CardName.AERON_GENOMICS)]"
     >
@@ -22,12 +22,12 @@
       Playing ${0} will cost ${1} M€ more because ${2} are in power
     </div>
   </template>
-  <warnings-component :warnings="card.warnings"></warnings-component>
+  <warnings-component v-if="card !== undefined" :warnings="card.warnings"></warnings-component>
 
-  <section v-trim-whitespace>
+  <section v-if="showPaymentSection" v-trim-whitespace>
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
-    <template v-for="unit of SPENDABLE_RESOURCES" :key="unit">
+    <template v-for="unit of ORDERED_SPENDABLE_RESOURCES" :key="unit">
       <div>
         <payment-unit-component
           v-model.number="payment[unit]"
@@ -103,7 +103,7 @@ export default defineComponent({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+    ORDERED_SPENDABLE_RESOURCES(): ReadonlyArray<SpendableResource> {
       return [
         'steel',
         'titanium',
@@ -114,11 +114,30 @@ export default defineComponent({
         'lunaArchivesScience',
         'seeds',
         'graphene',
+        'kuiperAsteroids',
+        'auroraiData',
+        'spireScience',
         'megacredits',
       ];
     },
     CardName(): typeof CardName {
       return CardName;
+    },
+    showPaymentSection(): boolean {
+      // No card selected
+      if (this.card === undefined) {
+        return false;
+      }
+      // Card cannot be played.
+      if (this.card.isDisabled) {
+        return false;
+      }
+      // If this is a standard project, don't show this if the cost is zero.
+      if (this.card.standardProjectCanPayWith !== undefined) {
+        return this.cost > 0;
+      }
+      // Regular project card: always show payment UI.
+      return true;
     },
   },
   data(): SelectProjectCardToPlayDataModel {
@@ -131,15 +150,12 @@ export default defineComponent({
       );
       card = cards[0];
     }
-    if (card === undefined) {
-      throw new Error('no card provided in player input');
-    }
     return {
-      cardName: card.name,
+      cardName: card?.name,
       card: card,
-      reserveUnits: card.reserveUnits ?? Units.EMPTY,
+      reserveUnits: card?.reserveUnits ?? Units.EMPTY,
       cards: cards,
-      cost: 0,
+      cost: card?.calculatedCost ?? 0,
       tags: [],
       payment: {...Payment.EMPTY},
       warning: undefined,
@@ -154,9 +170,15 @@ export default defineComponent({
   },
   mounted() {
     nextTick(() => {
+      if (this.cards.length === 0) {
+        return;
+      }
+      // TODO(kberg): this.card, this.cost, this,reserveUnits
+      // are defined in data() so mounted doesn't make sense.
+      // Tags could be removed if it were defined in data, too.
       this.card = this.getCard();
       this.cost = this.card.calculatedCost ?? 0;
-      this.tags = this.getCardTags(),
+      this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
 
       this.setDefaultValues();
@@ -165,13 +187,18 @@ export default defineComponent({
   methods: {
     ...PaymentWidgetMixin.methods,
     getCard() {
-      const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+      const card = this.cards.find((c) => c.name === this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
       return card;
     },
     getCardTags() {
+      // By the time getCardTags is called, this.cardName is defined. This is an
+      // unnecessary guard.
+      if (this.cardName === undefined) {
+        return [];
+      }
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
@@ -192,8 +219,6 @@ export default defineComponent({
         const _tmp = megacreditBalance / unitValue;
         const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
         const contributingUnits = Math.min(availableUnits, balanceAsUnits);
-
-        // console.log(megacreditBalance, unitValue, availableUnits, overpay, '-', _tmp, balanceAsUnits, contributingUnits);
 
         megacreditBalance -= contributingUnits * unitValue;
         return contributingUnits;
@@ -223,7 +248,7 @@ export default defineComponent({
       // Prioritize special resource types that are only ever used for buying cards.
       // Of course this runs the risk of a player not having special resources for some award,
       // milestone, or requirement.
-      for (const unit of ['seeds', 'lunaArchivesScience', 'graphene'] as const) {
+      for (const unit of ['seeds', 'lunaArchivesScience', 'graphene', 'auroraiData', 'spireScience', 'kuiperAsteroids'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit), false);
         }
@@ -232,13 +257,8 @@ export default defineComponent({
       // Set MC payment after knowning how much of other resources are consumed
       this.payment.megacredits = Math.max(0, Math.min(this.thisPlayer.megacredits, megacreditBalance));
 
-      // console.log('units: ' + JSON.stringify(this.payment, null, 2));
-      // console.log('balance', megacreditBalance);
-
       // Use as much MC as possible.
       megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megacredits, 0);
-
-      // console.log('balance', megacreditBalance);
 
       for (const unit of ['microbes', 'floaters'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
@@ -254,7 +274,9 @@ export default defineComponent({
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
-      if (megacreditBalance > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium())) {
+      // NOTE: if Luna Trade Federation is having trouble here with default values,
+      // this might be the place that needs adjusting.
+      if (megacreditBalance > 0 && this.canUse('titanium')) {
         this.payment.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
       }
 
@@ -282,6 +304,9 @@ export default defineComponent({
           'seeds',
           'graphene',
           'lunaArchivesScience',
+          'auroraiData',
+          'spireScience',
+          'kuiperAsteroids',
           'megacredits'] as const) {
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
@@ -294,6 +319,41 @@ export default defineComponent({
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
     },
     cardCanUse(unit: SpendableResource): boolean {
+      if (this.card === undefined) {
+        return false;
+      }
+      const canPayWith = this.card.standardProjectCanPayWith;
+      if (canPayWith !== undefined) {
+        // Standard project: use explicit payment rules from the server
+        switch (unit) {
+        case 'megacredits':
+          return true;
+        // auroraiData and spireScience are always accepted by standard projects
+        // (see StandardProjectCard.canPlayOptions.)
+        case 'auroraiData':
+        case 'spireScience':
+          return true;
+        case 'heat':
+          return this.playerinput.paymentOptions.heat === true;
+        case 'steel':
+          return canPayWith.steel === true;
+        case 'titanium':
+          return canPayWith.titanium === true ||
+              this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
+        case 'seeds':
+          return canPayWith.seeds === true;
+        case 'kuiperAsteroids':
+          return canPayWith.kuiperAsteroids === true;
+        case 'plants':
+        case 'microbes':
+        case 'floaters':
+        case 'lunaArchivesScience':
+        case 'graphene':
+          return false;
+        default: throw new Error('Unknown unit ' + unit);
+        }
+      }
+      // Regular project card: tag-based payment rules
       switch (unit) {
       case 'megacredits':
         return true;
@@ -314,11 +374,14 @@ export default defineComponent({
       case 'lunaArchivesScience':
         return this.tags.includes(Tag.MOON);
       case 'seeds':
-        return this.tags.includes(Tag.PLANT) ||
-            this.card.name === CardName.GREENERY_STANDARD_PROJECT;
+        return this.tags.includes(Tag.PLANT);
       case 'graphene':
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
+      case 'kuiperAsteroids':
+      case 'auroraiData':
+      case 'spireScience':
+        return false;
       default:
         throw new Error('Unknown unit ' + unit);
       }
@@ -337,7 +400,7 @@ export default defineComponent({
     },
     cardChanged() {
       this.card = this.getCard();
-      this.cost = this.card.calculatedCost || 0;
+      this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
 
@@ -345,7 +408,7 @@ export default defineComponent({
     },
     getTitaniumResourceRate(): number {
       const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
-      if (this.canUseTitaniumRegularly()) {
+      if (this.canUseTitaniumRegularly() || this.card?.standardProjectCanPayWith?.titanium === true) {
         return titaniumValue;
       }
       return titaniumValue - 1;
@@ -365,6 +428,10 @@ export default defineComponent({
       return false;
     },
     saveData() {
+      if (this.card === undefined) {
+        return;
+      }
+
       let totalSpent = 0;
 
       for (const target of SPENDABLE_RESOURCES) {

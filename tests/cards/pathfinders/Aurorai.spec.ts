@@ -3,11 +3,12 @@ import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('Aurorai', () => {
   let card: Aurorai;
@@ -56,19 +57,14 @@ describe('Aurorai', () => {
     card.resourceCount = 3;
     expect(asteroid.canAct(player)).is.true;
 
-    const playerInput = asteroid.action(player);
-    expect(playerInput).is.undefined;
-    runAllActions(game);
-
-    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    expect(selectPayment.paymentOptions.auroraiData).is.true;
+    const selectStandardProjectToPlay = new SelectStandardProjectToPlay(player, [asteroid]);
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megacredits: 4, auroraiData: 2}}, player),
+      selectStandardProjectToPlay.process({type: 'projectCard', card: CardName.ASTEROID_STANDARD_PROJECT, payment: {...Payment.EMPTY, megacredits: 4, auroraiData: 2}}),
     ).to.throw(/Did not spend enough/);
 
-    selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megacredits: 8, auroraiData: 2}}, player),
+    selectStandardProjectToPlay.process({type: 'projectCard', card: CardName.ASTEROID_STANDARD_PROJECT, payment: {...Payment.EMPTY, megacredits: 8, auroraiData: 2}});
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendable('auroraiData')).eq(1);

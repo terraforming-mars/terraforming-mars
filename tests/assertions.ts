@@ -5,6 +5,9 @@ import {PlayerInput} from '../src/server/PlayerInput';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {ICard} from '../src/server/cards/ICard';
 import {SelectCard} from '../src/server/inputs/SelectCard';
+import {SelectStandardProjectToPlay} from '../src/server/inputs/SelectStandardProjectToPlay';
+import {isIStandardProjectCard} from '../src/server/cards/IStandardProjectCard';
+import {Payment} from '../src/common/inputs/Payment';
 import {TileType} from '../src/common/TileType';
 import {Space} from '../src/server/boards/Space';
 import {CardName} from '../src/common/cards/CardName';
@@ -60,12 +63,19 @@ export function assertPlaceTile(player: IPlayer, input: PlayerInput | undefined,
   return space;
 }
 
-export function assertSelectStandardProject(input: PlayerInput | undefined, selected: CardName, expectedProjects?: Array<CardName>) {
-  const selectCard = cast(input, SelectCard);
+export function assertSelectStandardProject(input: PlayerInput | undefined, player: IPlayer, selected: CardName, expectedProjects?: Array<CardName>) {
+  const selectStandardProjectToPlay = cast(input, SelectStandardProjectToPlay);
   if (expectedProjects !== undefined) {
-    expect(selectCard.cards.map(toName)).to.have.members(expectedProjects);
+    expect(selectStandardProjectToPlay.cards.map(toName)).to.have.members(expectedProjects);
   }
-  const card = selectCard.cards.find((c) => c.name === selected);
+  const card = selectStandardProjectToPlay.cards.find((c) => c.name === selected);
   expect(card).is.not.undefined;
-  selectCard.cb([card!]);
+
+  let cost;
+  if (card && isIStandardProjectCard(card)) {
+    cost = card.getAdjustedCost(player);
+  } else {
+    cost = selectStandardProjectToPlay.extras.get(selected)?.overriddenCost;
+  }
+  selectStandardProjectToPlay.payAndPlay(card!, Payment.of({megacredits: cost}));
 }

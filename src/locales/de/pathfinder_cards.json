@@ -42,6 +42,7 @@
   "Coordinated Raid": "Koordinierter Überfall",
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Benötigt 1 Kolonie im Spiel. Bewege eine deiner ungenutzten Handelsflotten auf ein beliebiges (auch bereits besetztes) Kolonieplättchen. Erhalte den Handels- und Koloniebonus für jede dortige Kolonie. Andere Spieler erhalten keinen Bonus.",
 
+  "Crashlanding": "Bruchlandung",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "Platziere UND ORIENTIERE dieses Plättchen angrenzend zu maximal einer Stadt.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Datenressource und entweder 1 Stahl oder 1 Titan.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Beim Platzieren erhältst du für alle EIGENEN dort angrenzenden Plättchen im Spiel diese Boni.",
@@ -71,14 +72,14 @@
   "Every player loses all energy. Raise the temperature 2 steps.": "Erhöhe die Temperatur um 4°C. Alle Spieler verlieren sämtliche Energie.",
 
   "Dyson Screens": "Dyson-Solarschirme",
-  "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(AKTION: Verbrauche 2 Titan, um deine Energie- und Wärme-Produktion um 1 zu erhöhen.)",
+  "Action: Pay 2 titanium to raise your heat and energy production 1 step each.": "AKTION: Verbrauche 2 Titan, um deine Energie- und Wärme-Produktion um 1 zu erhöhen.",
   "Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.": "Erhöhe deine Energie- und Wärme-Produktion um 2. Erhöhe die Temperatur um 2°C. Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reservierten Gebiet.",
 
   "Early Expedition": "Frühe Expedition",
   "Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.": "Temperatur muss -18°C oder kälter sein. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen, aber nicht neben ein anderes Plättchen. Füge einer beliebigen Karte 1 Datenressource hinzu.",
 
   "Economic Espionage": "Wirtschaftsspionage",
-  "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(AKTION: Bezahle 2 M€, um einer beliebigen Karte 1 Datenressource hinzuzufügen.)",
+  "Action: Spend 2 M€ to Add 1 data to ANY card.": "AKTION: Bezahle 2 M€, um einer beliebigen Karte 1 Datenressource hinzuzufügen.",
   "1 VP for every 3 data here.": "(1 SP je 3 Daten auf dieser Karte.)",
 
   "Economic Help": "Wirtschaftshilfe",
@@ -92,15 +93,15 @@
   "Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.": "Benötigt 1 oder weniger eigene Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 je gespielter Generation, einschließlich der aktuellen.",
 
   "Floater-Urbanism": "Schweber-Urbanismus",
-  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(AKTION: Verbrauche 1 Schweber, um dieser Karte 1 Venus-Habitat hinzuzufügen.)",
+  "Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.": "AKTION: Verbrauche 1 Schweber, um dieser Karte 1 Venus-Habitat hinzuzufügen.",
   "1 VP for every Venusian habitat on this card.": "(1 SP je Venus-Habitat auf dieser Karte.)",
   "Requires 4 Venus tags.": "Benötigt 4 eigene Venussymbole.",
 
   "Geological Expedition": "Geologische Expedition",
-  "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(EFFEKT: Wenn du ein Plättchen auf dem Mars platzierst, erhältest du 1 Ressource des Platzierungsbonus zusätzlich. Erhalte 1 Stahl bei Gebieten ohne Platzierungsbonus.)",
+  "Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.": "EFFEKT: Wenn du ein Plättchen auf dem Mars platzierst, erhältest du 1 Ressource des Platzierungsbonus zusätzlich. Erhalte 1 Stahl bei Gebieten ohne Platzierungsbonus.",
 
   "High Temp. Superconductors": "Verbesserte Supraleiter",
-  "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "(EFFEKT: Wenn du ein Energiesymbol ausspielst, oder das Kraftwerk-Standardproject nutzt, bezahlst du 3 M€ weniger.)",
+  "Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.": "EFFEKT: Wenn du ein Energiesymbol ausspielst, oder das Kraftwerk-Standardproject nutzt, bezahlst du 3 M€ weniger.",
   "Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Energie-Produktion um 2.",
 
   "Huygens Observatory": "Huygens-Observatorium",
@@ -128,8 +129,8 @@
   "Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.": "Benötigt Sauerstoffgehalt von 7% oder mehr. Erhalte 1 Titan je eigenes Stadtplättchen und je eigenes Grünflächenplättchen.",
 
   "Martian Culture": "Marsianische Kultur",
-  "(Action: Add 1 data to ANY card.)": "(AKTION: Füge einer beliebigen Karte 1 Datenressource hinzu.)",
-  "(Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.)": "(Benötigt 2 beliebige Marssymbole im Spiel. 1 SP je 2 Daten auf dieser Karte.)",
+  "Action: Add 1 data to ANY card.": "AKTION: Füge einer beliebigen Karte 1 Datenressource hinzu.",
+  "Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.": "Benötigt 2 beliebige Marssymbole im Spiel. 1 SP je 2 Daten auf dieser Karte.",
 
   "Martian Dust Processing Plant": "Staubverarbeitung",
   "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.": "Senke deine Energie-Produktion um 1 und erhöhe deine Stahl-Produktion um 2. Erhöhe deinem TW um 1.",
@@ -137,14 +138,15 @@
   "Martian Monuments": "Mars-Monumente",
   "Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)": "Benötigt 1 eigene Stadt auf dem Mars. Erhöhe deine M€-Produktion um 1 je eigenes Marssymbol (einschließlich dieses).",
 
+  "Martian Nature Wonders": "Mars Naturerbe",
   "Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.": "Reserviere ein Gebiet auf dem Mars und erhalte den Platzierungsbonus. Auf diesem Gebiet darf kein Plättchen platziert werden. Füge einer beliebigen Karte 2 Daten hinzu.",
 
   "Martian Repository": "Datenbank",
-  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(EFFEKT: Wenn du ein Wissenschafts- oder Marssymbol ausspielst (einschließlich diese), füge dieser Karte 1 Datenressource hinzu.)",
+  "Effect: For every science or Mars tag you play (including these) add 1 data to this card.": "EFFEKT: Wenn du ein Wissenschafts- oder Marssymbol ausspielst (einschließlich diese), füge dieser Karte 1 Datenressource hinzu.",
   "Decrease your energy production 1 step. 1 VP for every 3 data here.": "Senke deine Energie-Produktion um 1. 1 SP je 3 Daten auf dieser Karte.",
 
   "Microbiology Patents": "Mikrobiologie-Patente",
-  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(EFFEKT: Wenn du ein Mikrobensymbol ausspielst, erhöhe deine M€-Produktion um 1.)",
+  "Effect: After you play a card with a microbe tag, increase your M€ production 1 step.": "EFFEKT: Wenn du ein Mikrobensymbol ausspielst, erhöhe deine M€-Produktion um 1.",
 
   "Museum of Early Colonisation": "Kolonisierungsmuseum",
   "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Benötigt 1 Ozean-, Stadt- und Grünflächenplättchen auf dem Mars. Senke deine Energie-Produktion um 1. Erhöhe deine Stahl-, Titan- und Pflanzen-Produktion um 1. Erhöhe deinen TW um 1.",
@@ -153,7 +155,7 @@
   "Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Benötigt 3 Ozeanplättchen. Verbrauche 2 Pflanzen. Erhöhe deine Energie-Produktion um 1 und deine M€-Produktion um 2. Platziere dieses Plättchen auf einem Ozeanplättchen, IGNORIERE DIE NORMALEN PLATZIERUNGSBEDINGUNGEN FÜR STÄDTE. Es zählt als Stadt- und Ozeanplättchen.",
 
   "Nobel Labs": "Nobel-Labor",
-  "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(AKTION: Füge einer beliebigen Karte 2 Mikroben 2 Daten oder 2 Schweber hinzu.)",
+  "Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.": "AKTION: Füge einer beliebigen Karte 2 Mikroben 2 Daten oder 2 Schweber hinzu.",
 
   "Orbital Laboratories": "Orbitale Gärten",
   "Increase your plant production 2 steps. Gain 1 plant.": "Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.",
@@ -163,22 +165,23 @@
   "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Benötigt 1 eigenes Weltraum- und Wissenschaftssymbol. Füge einer beliebigen Karte 2 Daten hinzu.",
 
   "Ozone Generators": "Ozongenerator",
-  "(Action: Spend 3 energy to gain 1 TR.)": "(AKTION: Verbrauche 3 Energie, um deinen TW um 1 zu erhöhen.)",
+  "Action: Spend 3 energy to gain 1 TR.": "AKTION: Verbrauche 3 Energie, um deinen TW um 1 zu erhöhen.",
   "Requires 6% Oxygen.": "Benötigt Sauerstoffgehalt von 6% oder mehr.",
 
   "Pollinators": "Bestäuber",
-  "(Action: Add 1 animal on this card)": "(AKTION: Füge dieser Karte 1 Tier hinzu.)",
+  "Action: Add 1 animal on this card": "AKTION: Füge dieser Karte 1 Tier hinzu.",
   "Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.": "Benötigt 3 eigene Pflanzensymbole. Erhöhe deine Pflanzen-Produktion um 1 und deine M€-Produktion um 2. 1 SP je Tier auf dieser Karte.",
 
+  "Power Plant:Pathfinders": "Kraftwerk",
   "Increase your heat production 2 steps and your energy production 1 step.": "Erhöhe deine Energie-Produktion um 1 und deine Wärme-Produktion um 2.",
 
   "Prefabrication of Human Habitats": "Vorgefertigte Wohnungen",
-  "(Effect: Cards with a city tag cost 2M€ less.)": "(EFFEKT: Wenn du ein Stadtsymbol ausspielst, bezahlst du 2 M€ weniger.)",
-  "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(EFFEKT: Wenn du das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
+  "Effect: Cards with a city tag cost 2M€ less.": "EFFEKT: Wenn du ein Stadtsymbol ausspielst, bezahlst du 2 M€ weniger.",
+  "Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.": "EFFEKT: Wenn du das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.",
   "Requires that you have steel production.": "Benötigt eigene Stahlproduktion.",
 
   "Private Security": "Privater Sicherheitsdienst",
-  "Opponents may not remove your basic resource production": "(EFFEKT: Andere Spieler dürfen deine Produktion nicht senken.)",
+  "Opponents may not remove your basic resource production": "EFFEKT: Andere Spieler dürfen deine Produktion nicht senken.",
   "NO": "NICHT",
 
   "Public Sponsored Grant": "Öffentliche Subvention",
@@ -209,7 +212,7 @@
   "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Erhöhe deinen TW um 1 je 2 eigene Marssymbole (einschließlich dieses).",
 
   "Soil Detoxification": "Bodenentgiftung",
-  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(EFFEKT: Wenn du ein Grünflächenplätttchen platzierst, verbrauchst du 1 Pflanze weniger.)",
+  "Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.": "EFFEKT: Wenn du ein Grünflächenplätttchen platzierst, verbrauchst du 1 Pflanze weniger.",
   "Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Erhöhe deine Pflanzen-Produktion um 1.",
 
   "Solar Storm": "Sonnensturm",
@@ -223,32 +226,32 @@
   "Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.": "Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier, keine Wissenschaft). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.",
 
   "Space Relay": "Orbitaler Verstärker",
-  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.)",
-  "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Erhöhe deine M€-Produktion um 1.)",
+  "Effect: Whenever you play a card with a Jovian tag, including this, draw a card.": "EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.",
+  "Erhöhe deine M€-Produktion um 1 Schritt.": "Erhöhe deine M€-Produktion um 1.",
 
   "Specialized Settlement": "Spezialisierte Siedlung",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.": "Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen. Erhöhe deine Produktion der Ressource des Platzierungsbonus der Stadt um 1.",
 
   "Terraforming Control Station": "Terraform-Kontrollstation",
-  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(EFFEKT: Wenn du ein Venus- oder Marssymbol ausspielst, bezahlst du 2 M€ weniger.)",
-  "(Erhöhe deinen TW um 2.)": "",
+  "Effect: When you play a Venus or Mars tag, pay 2 M€ less.": "EFFEKT: Wenn du ein Venus- oder Marssymbol ausspielst, bezahlst du 2 M€ weniger.",
+  "(Raise your TR 2 steps.)": "(Erhöhe deinen TW um 2.)",
 
   "Terraforming Robots": "Terraforming-Roboter",
-  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",
+  "Effect: When you play a Mars tag, add 1 specialized robot on this card.": "EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.",
   "1 VP for every specialized robot on this card.": "1 SP je Roboter auf dieser Karte.",
   "Requires 4 science tags.": "Benötigt 4 eigene Wissenschaftssymbole.",
 
   "Think Tank": "Denkfabrik",
-  "(Action: Spend 2 M€ to place 1 data on any card.)": "(AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.)",
+  "Action: Spend 2 M€ to place 1 data on any card.": "AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.",
   "+/-1 global parameter": "+/-1 globaler Parameter",
-  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(EFFEKT: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
+  "Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.": "EFFEKT: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.",
 
   "Venera Base": "Venera Basis",
-  "(Action: Add 1 floater to ANY Venus card)": "(AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.)",
+  "Action: Add 1 floater to ANY Venus card": "AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.",
   "1 VP per 2 Venus tags you have.": "1 SP je 2 eigene Venussysmbole.",
   "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen auf dem reservierten Gebiet.",
 
   "Wetlands": "Feuchtgebiete",
-  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Benötigt 2 Ozeanplättchen. Verbrauche 4 Pflanzen. Erhöhe den Sauerstoffgehalt um 1%. Erhöhe deinen TW um 1. Platziere dieses Plättchen angrenzend an 2 Ozeanplättchen.)",
-  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(EFFEKT: Es zählt als Grünflächen- und Ozeanplättchen. Andere Plättchen können es nicht überdecken und es zählt nicht zu den 9 zu platzierenden Ozeanen.)"
+  "Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.": "Benötigt 2 Ozeanplättchen. Verbrauche 4 Pflanzen. Erhöhe den Sauerstoffgehalt um 1%. Erhöhe deinen TW um 1. Platziere dieses Plättchen angrenzend an 2 Ozeanplättchen.",
+  "Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.": "EFFEKT: Es zählt als Grünflächen- und Ozeanplättchen. Andere Plättchen können es nicht überdecken und es zählt nicht zu den 9 zu platzierenden Ozeanen."
 }

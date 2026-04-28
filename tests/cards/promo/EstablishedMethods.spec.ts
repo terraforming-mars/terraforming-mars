@@ -4,8 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {IStandardProjectCard} from '../../../src/server/cards/IStandardProjectCard';
+import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
 import {assertPlaceGreenery, assertSelectStandardProject} from '../../assertions';
 import {cast, toName} from '../../../src/common/utils/utils';
@@ -30,8 +29,8 @@ describe('EstablishedMethods', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IStandardProjectCard>);
-    expect(selectCard.cards.map(toName)).to.have.members([
+    const selectInput = cast(player.popWaitingFor(), SelectStandardProjectToPlay);
+    expect(selectInput.cards.map(toName)).to.have.members([
       CardName.POWER_PLANT_STANDARD_PROJECT,
       CardName.ASTEROID_STANDARD_PROJECT,
       CardName.AQUIFER_STANDARD_PROJECT,
@@ -43,13 +42,13 @@ describe('EstablishedMethods', () => {
   it('Standard behavior', () => {
     card.play(player);
     runAllActions(game);
-    assertSelectStandardProject(player.popWaitingFor(), CardName.POWER_PLANT_STANDARD_PROJECT);
+    assertSelectStandardProject(player.popWaitingFor(), player, CardName.POWER_PLANT_STANDARD_PROJECT);
     runAllActions(game);
 
     expect(player.megaCredits).eq(19);
     expect(player.production.energy).eq(1);
 
-    assertSelectStandardProject(player.popWaitingFor(), CardName.POWER_PLANT_STANDARD_PROJECT);
+    assertSelectStandardProject(player.popWaitingFor(), player, CardName.POWER_PLANT_STANDARD_PROJECT);
     runAllActions(game);
 
     expect(player.megaCredits).eq(8);
@@ -61,7 +60,7 @@ describe('EstablishedMethods', () => {
   it('penalty when cannot afford second project', () => {
     card.play(player);
     runAllActions(game);
-    assertSelectStandardProject(player.popWaitingFor(), CardName.GREENERY_STANDARD_PROJECT);
+    assertSelectStandardProject(player.popWaitingFor(), player, CardName.GREENERY_STANDARD_PROJECT);
     runAllActions(game);
     assertPlaceGreenery(player, player.popWaitingFor());
     runAllActions(game);

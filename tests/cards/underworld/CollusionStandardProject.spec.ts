@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -64,7 +65,7 @@ describe('CollusionStandardProject', () => {
 
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.UNITY, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);
@@ -85,7 +86,7 @@ describe('CollusionStandardProject', () => {
     player.underworldData.corruption = 1;
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.UNITY, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);
@@ -108,7 +109,7 @@ describe('CollusionStandardProject', () => {
     player.underworldData.corruption = 1;
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);
@@ -130,7 +131,7 @@ describe('CollusionStandardProject', () => {
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);

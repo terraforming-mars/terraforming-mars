@@ -269,6 +269,9 @@ class InitialDraft extends Draft {
   }
 
   override endRound() {
+    for (const player of this.game.players) {
+      player.unchosenDraftCards = [];
+    }
     this.game.initialDraftIteration++;
     // TODO(kberg): Move this to runDraftRound.
     this.game.draftRound = 1;

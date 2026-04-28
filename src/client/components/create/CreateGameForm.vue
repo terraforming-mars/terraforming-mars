@@ -373,6 +373,10 @@
                                 <label for="corpPoolDraft-checkbox">
                                   <span v-i18n>Corp pool draft</span>
                                 </label>
+                                <label for="extraCorporationsInPool-checkbox" v-if="corpPoolDraftVariant" style="display: block; margin-top: 5px;">
+                                  <input type="number" class="create-game-corporations-count" min="0" :max="20" v-model="extraCorporationsInPool" id="extraCorporationsInPool-checkbox">
+                                  <span v-i18n>Extra Corps in Pool</span>
+                                </label>
                               </div>
 
                               <div v-if="expansions.ceo">
@@ -1005,6 +1009,7 @@ export default defineComponent({
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
       const startingPreludes = this.startingPreludes;
+      const extraCorporationsInPool = this.extraCorporationsInPool;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1216,6 +1221,7 @@ export default defineComponent({
         twoCorpsVariant,
         startingCeos,
         startingPreludes,
+        extraCorporationsInPool,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

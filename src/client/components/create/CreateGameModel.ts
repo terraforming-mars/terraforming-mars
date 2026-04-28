@@ -32,6 +32,7 @@ export type CreateGameModel = {
   includeFanMA: boolean;
   initialDraft: boolean;
   corpPoolDraftVariant: boolean;
+  extraCorporationsInPool: number;
   modularMA: boolean;
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;

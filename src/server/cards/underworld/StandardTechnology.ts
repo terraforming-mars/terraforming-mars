@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {IActionCard} from '../ICard';
 import {IStandardProjectCard} from '../IStandardProjectCard';
-import {SelectStandardProjectToPlay} from '@/server/inputs/SelectStandardProjectToPlay';
+import {SelectStandardProjectToPlay} from '../../inputs/SelectStandardProjectToPlay';
 
 export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {

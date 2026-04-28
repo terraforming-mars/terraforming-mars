@@ -372,7 +372,7 @@ export class Game implements IGame, Logger {
     }
 
     if (gameOptions.initialDraftVariant && gameOptions.corpPoolDraftVariant) {
-      const poolSize = players.length * 2 + 2;
+      const poolSize = players.length * 2 + (gameOptions.extraCorporationsInPool ?? 2);
       game.corpDraftPool = corporationDeck.drawN(game, poolSize);
     }
 

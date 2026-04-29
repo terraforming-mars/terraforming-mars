@@ -20,7 +20,7 @@ import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardName} from '@/common/cards/CardName';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyModel} from '@/common/models/ColonyModel';
+import {ColonyModel, simpleColonyModel} from '@/common/models/ColonyModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -67,13 +67,7 @@ export default defineComponent({
       this.$emit('hide');
     },
     getColony(name: ColonyName): ColonyModel {
-      return {
-        colonies: [],
-        isActive: false,
-        name: name,
-        trackPosition: 0,
-        visitor: undefined,
-      };
+      return simpleColonyModel(name);
     },
     isSelfReplicatingRobotsCard(cardName: CardName) {
       for (const player of this.players) {

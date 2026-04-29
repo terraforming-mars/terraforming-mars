@@ -74,6 +74,16 @@ export class LogHelper {
     }, options);
   }
 
+  static logRevealedCards(player: IPlayer, cards: ReadonlyArray<ICard>) {
+    const message = cards.length === 0 ? '${0} revealed no cards' : '${0} revealed ${1}';
+    player.game.log(message, (b) => {
+      b.player(player);
+      if (cards.length > 0) {
+        b.cards(cards);
+      }
+    });
+  }
+
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
     player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
   }

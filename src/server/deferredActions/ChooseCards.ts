@@ -60,6 +60,9 @@ export class ChooseCards extends DeferredAction {
           throw new Error('Selected too many cards');
         }
         const unselected = oneWayDifference(cards, selected);
+        if (options.logDrawnCard === true) {
+          LogHelper.logRevealedCards(player, cards);
+        }
         if (options.paying && selected.length > 0) {
           const cost = selected.length * player.cardCost;
           player.game.defer(
@@ -68,11 +71,6 @@ export class ChooseCards extends DeferredAction {
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
               .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
-          if (options.logDrawnCard === true) {
-            LogHelper.logDrawnCards(player, cards);
-          }
-        } else if (options.logDrawnCard === true) {
-          keep(player, selected, unselected, LogType.DREW_VERBOSE);
         } else {
           keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
         }

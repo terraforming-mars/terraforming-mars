@@ -1228,9 +1228,7 @@
   "Pay a total of 2 production units": "Maksa yhteensä 2 tuotantoyksikköä",
 
   "How to pay?": "Kuinka maksat?",
-  "Some ${0} are unavailable here in reserve for the project card.": "Osa ${0} ei ole saatavilla täällä, ne on varattu projektikorttia varten.",
-  "Some titanium are unavailable here in reserve for the project card.": "Osa titaanista ei ole saatavilla täällä, se on varattu projektikorttia varten.",
-  "Some steel are unavailable here in reserve for the project card.": "Osa teräksestä ei ole saatavilla täällä, se on varattu projektikorttia varten.",
+  "Some ${0} are reserved and unavailable here.": "Osa ${0} on varattu eikä saatavilla täällä.",
   "Must select a space": "Täytyy valita kenttä",
   "[ toggle cards filters ]": "[ vaihda korttisuodattimet ]",
   "[ toggle tags view ]": "[ vaihda ympyränäkymä ]",

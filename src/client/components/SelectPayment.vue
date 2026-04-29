@@ -2,50 +2,34 @@
 <div class="payments_cont">
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
-
-    <template v-for="unit of SPENDABLE_RESOURCES">
-      <payment-unit-component
-        v-model.number="payment[unit]"
-        v-bind:key="unit"
-        v-if="canUse(unit) === true"
-        :unit="unit"
-        :description="descriptions[unit]"
-        @plus="addValue(unit)"
-        @minus="reduceValue(unit)"
-        @max="onMaxClicked(unit)">
-      </payment-unit-component>
-      <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)" v-bind:key="unit + '-reserve'">
-        (Some ${0} are reserved for the action and unavailable here.)
-      </div>
-
-    </template>
-
-    <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
-    </div>
-
-    <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
-    </div>
-
+    <PaymentForm
+      ref="paymentForm"
+      :cost="cost"
+      :order="order"
+      :ledger="ledger"
+      :showsave="showsave"
+      :buttonLabel="playerinput.buttonLabel"
+      @save="saveData">
+    </PaymentForm>
   </section>
 </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, nextTick} from 'vue';
+import {defineComponent} from 'vue';
 import {Payment} from '@/common/inputs/Payment';
-import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
-import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
+import {SpendableResource} from '@/common/inputs/Spendable';
+import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {getPreferences} from '@/client/utils/PreferencesManager';
-import AppButton from '@/client/components/common/AppButton.vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
-import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
+import PaymentForm from '@/client/components/PaymentForm.vue';
+import {Ledger} from '@/client/components/PaymentLedger';
+import {Units} from '@/common/Units';
 
 export default defineComponent({
   name: 'SelectPayment',
+  mixins: [PaymentWidgetMixin],
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
@@ -67,12 +51,8 @@ export default defineComponent({
     },
   },
   computed: {
-    ...PaymentWidgetMixin.computed,
-    thisPlayer(): PublicPlayerModel {
-      return this.playerView.thisPlayer;
-    },
-    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
-      return [
+    order(): ReadonlyArray<keyof Payment> {
+      return ([
         'steel',
         'titanium',
         'heat',
@@ -81,167 +61,40 @@ export default defineComponent({
         'kuiperAsteroids',
         'spireScience',
         'megacredits',
-      ];
+      ] as const).filter(this.canUse);
+    },
+    ledger(): Ledger {
+      return this.buildLedger(this.order, this.playerinput.reserveUnits ?? Units.EMPTY);
     },
   },
   components: {
-    AppButton,
-    PaymentUnitComponent,
+    PaymentForm,
   },
-  data(): SelectPaymentDataModel {
-    return {
-      cost: 0,
-      payment: {...Payment.EMPTY},
-      warning: undefined,
-    };
-  },
-  mounted() {
-    nextTick(() => {
-      this.setInitialCost();
-      this.payment.megacredits = this.getMegaCreditsMax();
-      this.setDefaultValues();
-    });
+  created() {
+    this.setInitialCost();
   },
   methods: {
-    ...PaymentWidgetMixin.methods,
-    hasWarning() {
-      return this.warning !== undefined;
-    },
-    showReserveWarning(unit: SpendableResource): boolean {
-      const reserveUnits = this.playerinput.reserveUnits;
-      if (reserveUnits === undefined) return false;
-      switch (unit) {
-      case 'megacredits':
-      case 'steel':
-      case 'titanium':
-      case 'plants':
-      case 'heat':
-        return reserveUnits[unit] > 0 && this.canUse(unit);
-      }
-      return false;
-    },
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
-    },
-    setDefaultValue(
-      mcAlreadyCovered: number, // MC values of prior-computed resources.
-      unit: SpendableResource): number {
-      if (!this.canUse(unit)) {
-        return 0;
-      }
-      const reserve = (this.playerinput.reserveUnits as Partial<Record<SpendableResource, number>>)?.[unit] ?? 0;
-      const availableUnits = Math.max(this.getAvailableUnits(unit) - reserve, 0);
-      if (availableUnits === 0) {
-        return 0;
-      }
-
-      const cost = this.cost;
-      const targetResourceRate = this.getResourceRate(unit);
-
-      // Compute the required minimum quantity needed to contribute.
-      let contributingUnits = Math.ceil(Math.max(cost - this.getAvailableUnits('megacredits') - mcAlreadyCovered, 0) / targetResourceRate);
-      contributingUnits = Math.min(contributingUnits, availableUnits);
-      let contributingMCValue = contributingUnits * targetResourceRate;
-
-      // When greedy, use as much as possible without overspending. When selfish, use as little as possible
-      const greedy = unit !== 'heat';
-      if (greedy === true) {
-        while (contributingUnits < availableUnits && contributingMCValue <= cost - targetResourceRate) {
-          contributingUnits++;
-          contributingMCValue += targetResourceRate;
-        }
-      }
-
-      this.payment[unit] = contributingUnits;
-      return contributingMCValue;
-    },
-    setDefaultValues(reserveMegacredits: boolean = false) {
-      const cost = this.cost;
-
-      const megacredits = this.getAvailableUnits('megacredits');
-
-      let amountCovered = reserveMegacredits ? megacredits : 0;
-      for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience', 'kuiperAsteroids'] as const) {
-        amountCovered += this.setDefaultValue(amountCovered, unit);
-      }
-      if (!reserveMegacredits) {
-        this.payment.megacredits = Math.min(megacredits, Math.max(cost - amountCovered, 0));
-      }
-    },
-    setMaxMCValue() {
-      this.setMaxValue('megacredits');
-      this.setDefaultValues(/* reserveMegacredits */ true);
-    },
-    canAffordWithMcOnly() {
-      return this.thisPlayer.megacredits >= this.cost;
     },
     canUse(unit: SpendableResource): boolean {
       if (unit === 'megacredits') {
         return true;
       }
       if (unit === 'titanium') {
-        if (this.thisPlayer.titanium === 0) {
-          return false;
-        }
-        return this.playerinput.paymentOptions.titanium === true|| this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
+        return this.playerinput.paymentOptions.titanium === true || this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       }
-      return this.playerinput.paymentOptions[unit] === true && this.hasUnits(unit);
+      return this.playerinput.paymentOptions[unit] === true;
     },
-    saveData() {
-      let totalSpent = 0;
-      for (const target of SPENDABLE_RESOURCES) {
-        totalSpent += this.payment[target] * this.getResourceRate(target);
+    saveData(payment?: Payment) {
+      // See PR #2353: avoid taking heat/MC when nothing is required.
+      const form = this.$refs.paymentForm as {getPayment: () => Payment} | undefined;
+      const resolved = {...(payment ?? form?.getPayment() ?? Payment.EMPTY)};
+      if ((this.playerinput.amount ?? 0) === 0) {
+        resolved.heat = 0;
+        resolved.megacredits = 0;
       }
-
-      for (const target of SPENDABLE_RESOURCES) {
-        if (this.payment[target] > this.getAvailableUnits(target)) {
-          this.warning = `You do not have enough ${target}`;
-          return;
-        }
-      }
-      const requiredAmt = this.playerinput.amount || 0;
-      if (requiredAmt > 0 && totalSpent < requiredAmt) {
-        this.warning = 'Haven\'t spent enough';
-        return;
-      }
-
-      // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
-      //
-      // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
-      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megacredits
-      // from user when nothing is required. Can probably remove this if server only removes what is required.
-      if (requiredAmt === 0) {
-        this.payment.heat = 0;
-        this.payment.megacredits = 0;
-      }
-
-      if (requiredAmt > 0 && totalSpent > requiredAmt) {
-        const diff = totalSpent - requiredAmt;
-        for (const target of SPENDABLE_RESOURCES) {
-          if (this.payment[target] && diff >= this.getResourceRate(target)) {
-            this.warning = `You cannot overspend ${target}`;
-            return;
-          }
-        }
-      }
-      const showAlert = getPreferences().show_alerts;
-
-      if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
-        const diff = totalSpent - requiredAmt;
-
-        if (!confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.warning = 'Please adjust payment amount';
-          return;
-        }
-      }
-      this.onsave({type: 'payment', payment: this.payment});
-    },
-    onMaxClicked(unit: SpendableResource) {
-      if (unit === 'megacredits') {
-        this.setMaxMCValue();
-      } else {
-        this.setMaxValue(unit);
-      }
+      this.onsave({type: 'payment', payment: resolved});
     },
   },
 });

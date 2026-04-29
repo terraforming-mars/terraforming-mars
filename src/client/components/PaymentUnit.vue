@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
@@ -41,9 +40,6 @@ export default defineComponent({
   },
   components: {
     AppButton,
-  },
-  methods: {
-    ...PaymentWidgetMixin.methods,
   },
   computed: {
     iconClass(): string {

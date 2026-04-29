@@ -1,14 +1,10 @@
 import {VueWrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {Payment} from '@/common/inputs/Payment';
 import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
 export class PaymentTester {
-  private model: SelectPaymentDataModel;
-  constructor(private wrapper: VueWrapper<any>) {
-    this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
-  }
+  constructor(private wrapper: VueWrapper<any>) {}
 
   private static selector(unit: SpendableResource) {
     return `[data-test=${unit}]`;
@@ -61,13 +57,8 @@ export class PaymentTester {
     expect(this.getPayment()).deep.eq(expected);
   }
 
-  // This that the given unit has the given value. It does this two ways:
-  // It verifies that the model has this value, and also that the text box
-  // has the same value.
   public expectValue(unit: SpendableResource, amount: number) {
-    const vmVal = this.model.payment[unit];
     expect(this.getValue(unit), `text box value for ${unit}`).eq(amount);
-    expect(vmVal, 'VM box value for ' + unit).eq(amount);
   }
 
   /**

@@ -9,6 +9,7 @@ import {AresData} from '../ares/AresData';
 import {SpaceModel} from './SpaceModel';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
+import {DeltaProjectModel} from './DeltaProjectModel';
 import {SpectatorId} from '../Types';
 import {ColonyName} from '../colonies/ColonyName';
 import {GlobalParameter} from '../GlobalParameter';
@@ -21,6 +22,7 @@ export type GameModel = {
   colonies: ReadonlyArray<ColonyModel>;
   discardedColonies: ReadonlyArray<ColonyName>;
   deckSize: number;
+  deltaProject: DeltaProjectModel | undefined;
   discardPileSize: number;
   expectedPurgeTimeMs: number;
   experimentalReset?: boolean;

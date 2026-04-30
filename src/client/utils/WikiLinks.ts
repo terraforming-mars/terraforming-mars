@@ -18,6 +18,7 @@ export const RULEBOOK_URLS: Record<GameModule, string> = {
   ceo: `${WIKI}/CEOs`,
   starwars: `${WIKI}/StarWars`,
   underworld: `${WIKI}/Underworld`,
+  deltaProject: `${WIKI}/Delta-Project`,
 };
 
 export const WIKI_URLS = {

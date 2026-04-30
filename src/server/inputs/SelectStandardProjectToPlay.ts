@@ -1,7 +1,5 @@
 import {Payment} from '../../common/inputs/Payment';
 import {IStandardProjectCard} from '../cards/IStandardProjectCard';
-import {Units} from '../../common/Units';
-import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, IPlayer} from '../IPlayer';
 import {SelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
@@ -23,18 +21,6 @@ export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProje
     }) {
     super(player, cards, config);
     this.buttonLabel = config?.buttonLabel ?? 'Play Standard Project';
-    this.cards = cards;
-    this.extras = new Map(
-      cards.map((card) => {
-        return [
-          card.name,
-          {
-            reserveUnits: card.reserveUnits ?
-              MoonExpansion.adjustedReserveCosts(player, card) :
-              Units.EMPTY,
-          },
-        ];
-      }));
   }
 
   public validate(card: IStandardProjectCard, input: SelectProjectCardToPlayResponse, details: PlayCardMetadata) {

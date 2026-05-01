@@ -62,7 +62,7 @@
   },
   "optionalDependencies": {
     "better-sqlite3": "^12.8.0",
-    "pg": "^8.2.1"
+    "pg": "^8.19.0"
   },
   "scripts": {
     "start": "node build/src/server/server.js",

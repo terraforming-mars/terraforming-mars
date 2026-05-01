@@ -78,10 +78,10 @@ export default defineComponent({
       originalIndices.push(i);
     });
     const initialIdx = this.playerinput.initialIdx ?? 0;
-    // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
+    // Special case: If the first recommended displayed option is SelectProjectCardToPlay, and none of them are enabled, skip it.
     let selectedIdx = initialIdx;
     if (displayedOptions.length > 1 &&
-      displayedOptions[initialIdx].type === 'card' &&
+      displayedOptions[initialIdx].type === 'projectCard' &&
       !displayedOptions[initialIdx].cards.some((card) => card.isDisabled !== true)) {
       selectedIdx = initialIdx + 1;
     }

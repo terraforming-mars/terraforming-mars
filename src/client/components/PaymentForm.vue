@@ -6,6 +6,7 @@
         v-model.number="localPayment[unit]"
         :unit="unit"
         :description="descriptions[unit]"
+        :value="ledger[unit].value"
         @plus="addValue(unit)"
         @minus="reduceValue(unit)"
         @max="onMax(unit)">

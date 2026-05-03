@@ -9,6 +9,7 @@
     />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
+    <span v-if="value !== undefined">{{ value * modelValue }}</span><i v-if="value !== undefined" class="resource_icon payments_type_icon resource_icon--megacredits"></i>
   </div>
 </template>
 
@@ -31,6 +32,10 @@ export default defineComponent({
     description: {
       type: String,
       required: true,
+    },
+    value: {
+      type: Number as () => number | undefined,
+      default: undefined,
     },
     showMax: {
       type: Boolean,

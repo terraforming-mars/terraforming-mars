@@ -2,17 +2,16 @@ import {mount} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlayRevised.vue';
 import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
-import {PaymentTester} from './PaymentTester';
+import {PaymentTesterRevised as PaymentTester} from './PaymentTesterRevised';
 import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
-import {SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
 
 describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
@@ -128,7 +127,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using microbes', async () => {
-    // Moss will cost 10. Player has 7M€ and will 2 of the 4 available microbes units.
+    // Moss will cost 10. Player has 7M€ and 4 available microbes units.
+    // Greedy: uses all 4 microbes (=8 MC), MC fills remaining 2.
     const wrapper = setupCardForPurchase(
       CardName.MOSS, 10,
       {megacredits: 7},
@@ -136,14 +136,15 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({microbes: 2, megacredits: 6});
+    tester.expectPayment({microbes: 4, megacredits: 2});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 2, megacredits: 6}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, megacredits: 2}));
   });
 
   it('using floaters', async () => {
-    // Forced Precipitation will cost 10. Player has 7M€ and will 2 of the 4 available floaters.
+    // Forced Precipitation will cost 10. Player has 6M€ and 4 available floaters (rate 3).
+    // Greedy: uses 3 floaters (=9 MC), MC fills remaining 1.
     const wrapper = setupCardForPurchase(
       CardName.FORCED_PRECIPITATION, 10,
       {megacredits: 6},
@@ -151,10 +152,10 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({floaters: 2, megacredits: 4});
+    tester.expectPayment({floaters: 3, megacredits: 1});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 2, megacredits: 4}));
+    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megacredits: 1}));
   });
 
   it('Paying for Stratospheric Birds without floaters', async () => {
@@ -172,6 +173,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for Stratospheric Birds with Dirigibles', async () => {
+    // Stratospheric Birds reserves 1 floater for itself, so only 2 floaters available.
+    // Greedy: uses 2 floaters (=6 MC), MC fills remaining 6.
     const wrapper = setupCardForPurchase(
       CardName.STRATOSPHERIC_BIRDS, 12,
       {megacredits: 9},
@@ -179,10 +182,10 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({floaters: 1, megacredits: 9});
+    tester.expectPayment({floaters: 2, megacredits: 6});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megacredits: 9}));
+    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 2, megacredits: 6}));
 
     await tester.clickMax('floaters');
     tester.expectPayment({floaters: 2, megacredits: 6});
@@ -192,6 +195,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
+    // Aerial Mappers provides a spare floater, so all 3 floaters from Dirigibles are available.
+    // Greedy: uses all 3 floaters (=9 MC), MC fills remaining 3.
     const tableau: Array<Partial<CardModel>> = [
       {name: CardName.DIRIGIBLES, resources: 3},
       {name: CardName.AERIAL_MAPPERS, resources: 1},
@@ -205,7 +210,7 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megacredits: 9}));
+    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megacredits: 3}));
 
     await tester.clickMax('floaters');
 
@@ -214,6 +219,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for other card with Dirigibles uses all floaters', async () => {
+    // Greedy: uses all 3 floaters (=9 MC), MC fills remaining 3.
     const wrapper = setupCardForPurchase(
       CardName.FORCED_PRECIPITATION, 12,
       {megacredits: 9},
@@ -223,7 +229,7 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megacredits: 9}));
+    expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megacredits: 3}));
 
     await tester.clickMax('floaters');
 
@@ -246,6 +252,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for Soil Enrichment with Psychophriles', async () => {
+    // Soil Enrichment reserves 1 microbe for itself, so only 2 microbes available.
+    // Greedy: uses both available microbes (=4 MC), MC fills remaining 2.
     const wrapper = setupCardForPurchase(
       CardName.SOIL_ENRICHMENT, 6,
       {megacredits: 5},
@@ -253,10 +261,10 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({microbes: 1, megacredits: 4});
+    tester.expectPayment({microbes: 2, megacredits: 2});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megacredits: 4}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 2, megacredits: 2}));
 
     await tester.clickMax('microbes');
     tester.expectPayment({microbes: 2, megacredits: 2});
@@ -266,6 +274,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for Soil Enrichment with Psychophriles while another card has microbes', async () => {
+    // Tardigrades provides a spare microbe, so all 3 microbes from Psychrophiles are available.
+    // Greedy: uses all 3 microbes (=6 MC), MC=0.
     const tableau: Array<Partial<CardModel>> = [
       {name: CardName.PSYCHROPHILES, resources: 3},
       {name: CardName.TARDIGRADES, resources: 1},
@@ -279,7 +289,7 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megacredits: 4}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 3, megacredits: 0}));
 
     await tester.clickMax('microbes');
 
@@ -288,6 +298,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Paying for other card with Psychophriles uses all microbes', async () => {
+    // Greedy: uses all 3 microbes (=6 MC), MC fills remaining 4.
     const wrapper = setupCardForPurchase(
       CardName.BUSHES, 10,
       {megacredits: 8},
@@ -297,7 +308,7 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megacredits: 8}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 3, megacredits: 4}));
 
     await tester.clickMax('microbes');
 
@@ -306,8 +317,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using steel', async () => {
-    // Rego Plastics will cost 10. Player has 7M€ and 4 steels.
-    // They should spend at least enough to pay for the card, that is 6 M€ and 2 steel.
+    // Rego Plastics will cost 10. Player has 7M€ and 4 steels (rate 2).
+    // Greedy: uses all 4 steel (=8 MC), MC fills remaining 2.
     const wrapper = setupCardForPurchase(
       CardName.REGO_PLASTICS, 10,
       {steel: 4, megacredits: 7, steelValue: 2},
@@ -315,10 +326,10 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 6, steel: 2});
+    tester.expectPayment({megacredits: 2, steel: 4});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({steel: 2, megacredits: 6}));
+    expect(saveResponse.payment).deep.eq(Payment.of({steel: 4, megacredits: 2}));
   });
 
   it('using titanium metal bonus', async () => {
@@ -364,13 +375,9 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using steel and microbes', async () => {
-    // Protected Valley will cost 23. Player has no mc, 5 microbes, and 10 steels The steel is
-    // artificially inflated to be worth 4M€ each.
-    // The algorithm will try to spend no mc. Then spend as much microbes as possible. Then spend as much steel as possible.
-    // This will come down to 0 MC, 5 microbes (at value 2), and 4 steels (at value 4). So we are effectively spending 26.
-    // That is overspending by 4 mc.
-    // It will try to reduce the amount of overspending resources.
-    // The final answer should be 0mc, 4 microbes (at value 2) and 4 steels (at value 4).
+    // Protected Valley will cost 23. Player has no MC, 5 microbes, and 10 steels (rate 4).
+    // Greedy: steel (first in order) fills to 6 (=24 MC, just over cost). Post-pass cannot
+    // reduce steel (24-4=20 < 23), so steel=6 and microbes=0. Overpays by 1.
     const wrapper = setupCardForPurchase(
       CardName.PROTECTED_VALLEY, 23,
       {megacredits: 0, steel: 10, steelValue: 4},
@@ -380,19 +387,16 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     tester.expectAvailablePaymentComponents('steel', 'microbes');
-    tester.expectPayment({steel: 4, microbes: 4});
+    tester.expectPayment({steel: 6, microbes: 0});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4}));
+    expect(saveResponse.payment).deep.eq(Payment.of({steel: 6}));
   });
 
   it('using floater and microbes', async () => {
-    // Freyja Biodomes will cost 14. Player has 1 mc, 6 microbes, and 4 floater.
-    // The algorithm will try to spend 1 mc. Then spend as much microbes as possible. Then spend as much floater as possible.
-    // This will come down to 1 MC, 6 microbes (at value 2), and 1 floater (at value 3). So we are effectively spending 16.
-    // That is overspending by 2 mc.
-    // It will try to reduce the overspending resources. Then reduce the amount of mc if possible.
-    // The final answer should be 1mc, 5 microbes (at value 2) and 1 floater (at value 3).
+    // Freyja Biodomes will cost 14. Player has 1 MC, 5 microbes (rate 2), and 3 floaters (rate 3).
+    // Greedy: microbes (first in order) fill to 5 (=10 MC). Then floaters: ceil(max(14-1-10,0)/3)=1.
+    // floaters=1 (=3 MC). Total=14. MC=min(1,1)=1.
     const wrapper = setupCardForPurchase(
       CardName.FREYJA_BIODOMES, 14,
       {megacredits: 1},
@@ -407,12 +411,9 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using floater and titanium', async () => {
-    // Giant Solar Shade will cost 27. Player has 1 mc, 8 floaters, and 6 ti.
-    // The algorithm will try to spend 1 mc. Then spend as much floaters as possible. Then spend as much ti as possible.
-    // This will come down to 1 MC, 8 floaters (at value 3), and 1 ti (at value 7). So we are effectively spending 32.
-    // That is overspending by 5 mc.
-    // It will try to reduce the overspending resources. Then reduce the amount of mc if possible.
-    // The final answer should be 0 mc, 7 floaters (at value 3) and 1 ti (at value 7).
+    // Giant Solar Shade will cost 27. Player has 1 MC, 8 floaters (rate 3), and 6 Ti (rate 7).
+    // Titanium is first in order; greedy fills to 4 Ti (=28 MC, just over cost). Post-pass
+    // cannot reduce Ti (28-7=21 < 27), so titanium=4, floaters=0, MC=0. Overpays by 1.
     const wrapper = setupCardForPurchase(
       CardName.GIANT_SOLAR_SHADE, 27,
       {megacredits: 1, titanium: 6, titaniumValue: 7},
@@ -420,13 +421,15 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 0, floaters: 7, titanium: 1});
+    tester.expectPayment({megacredits: 0, floaters: 0, titanium: 4});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({titanium: 1, floaters: 7, megacredits: 0}));
+    expect(saveResponse.payment).deep.eq(Payment.of({titanium: 4}));
   });
 
   it('Luna Train Station limits how much steel you can use', async () => {
+    // 2 units of steel are reserved for the card, so only 2 are available for payment.
+    // Greedy: uses both available steel (=4 MC), MC fills remaining 16.
     const wrapper = setupCardForPurchase(
       CardName.LUNA_TRAIN_STATION, 20,
       {
@@ -439,10 +442,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 20, steel: 0});
+    tester.expectPayment({megacredits: 16, steel: 2});
 
     await tester.clickMax('steel');
-    // 2 units of steel are in reserve
     tester.expectPayment({megacredits: 16, steel: 2});
 
     await tester.clickSave();
@@ -450,15 +452,8 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using titanium metal bonus without using steel', async () => {
-    // Io Mining Industries cost 41 mc. Player has 10 MC, 2 steel and 13 Ti.
-    // The steel is artificially inflated to be worth 4 M€ each.
-    // The titanium is artificially inflated to be worth 5 M€ each.
-    // The algorithm will try to spend 10 mc. Then spend as much Ti as possible.
-    // This will come down to 10 M€ and 7 Ti (at value 5). So we are effectively spending 45 MC.
-    // That is overspending by 4 mc. The algorithm will try to spend 4 M€ less if possible.
-    // IT WILL NOT TRY TO SPEND LESS STEEL EVEN IF IT HAS STEEL AND STEEL VALUE IS 4.
-    // It will reduce the amount of MC.
-    // The final answer should be 6M€ and 7 Ti (at value 5).
+    // Io Mining Industries costs 41 MC. Player has 10 MC, 2 steel (not usable — no building tag),
+    // and 13 Ti (rate 5). Greedy: Ti fills to 8 (=40 MC), MC fills remaining 1.
     const wrapper = setupCardForPurchase(
       CardName.IO_MINING_INDUSTRIES, 41,
       {megacredits: 10, titanium: 13, titaniumValue: 5, steel: 2, steelValue: 4},
@@ -466,13 +461,12 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 6, titanium: 7});
+    tester.expectPayment({megacredits: 1, titanium: 8});
 
-    expect((wrapper.vm as unknown as SelectProjectCardToPlayDataModel).payment.steel).eq(0);
     tester.expectIsNotAvailable('steel');
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megacredits: 6}));
+    expect(saveResponse.payment).deep.eq(Payment.of({titanium: 8, megacredits: 1}));
   });
 
   it('using luna archive science', async () => {
@@ -598,6 +592,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Luna Trade Federation: Can use titanium by default', async () => {
+    // Luna Trade Federation rate is titaniumValue-1=3. Greedy: uses both Ti (=6 MC), MC fills 4.
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {megacredits: 10, titanium: 2, titaniumValue: 4},
@@ -605,7 +600,7 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 10, titanium: 0});
+    tester.expectPayment({megacredits: 4, titanium: 2});
 
     await tester.clickMax('titanium');
     tester.expectPayment({megacredits: 4, titanium: 2});
@@ -615,6 +610,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {
+    // When paymentOptions.titanium=true, full rate=4 applies. Greedy: fills all 5 Ti (=20 MC), MC fills 7.
     const wrapper = setupCardForPurchase(
       CardName.SPACE_ELEVATOR, 27,
       {megacredits: 15, titanium: 5, titaniumValue: 4},
@@ -622,7 +618,7 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 15, titanium: 3});
+    tester.expectPayment({megacredits: 7, titanium: 5});
 
     await tester.clickMax('titanium');
     tester.expectPayment({megacredits: 7, titanium: 5});
@@ -631,11 +627,27 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 5, megacredits: 7}));
   });
 
+  it('saveData() via PlayerInputFactory includes payment in response', async () => {
+    // Reproduces: when OrOptions -> PlayerInputFactory calls saveData() with no arguments,
+    // payment must still be included. Before the fix, payment was undefined in the response.
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {heat: 4, megacredits: 7},
+      {paymentOptions: {heat: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    (wrapper.vm as any).saveData();
+
+    expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megacredits: 7}));
+  });
+
   it('Luna Trade Federation: standard project with canPayWith.titanium uses full titanium rate', async () => {
     // Moon Habitat Variant 1 costs 23 MC, canPayWith.titanium = true.
     // With Luna Trade Federation, titanium should still be valued at the full 3 MC each,
     // not the reduced 2 MC that Luna Trade Federation normally provides.
-    // Player has 5 MC and 8 titanium (titaniumValue=3): should use 6 titanium + 5 MC = 23 MC.
+    // Greedy: fills to 7 Ti (=21 MC), MC fills remaining 2.
     const wrapper = setupCardForPurchase(
       CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1, 23,
       {megacredits: 5, titanium: 8, titaniumValue: 3},
@@ -644,13 +656,81 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 5, titanium: 6});
+    tester.expectPayment({megacredits: 2, titanium: 7});
 
     await tester.clickMax('titanium');
     tester.expectPayment({megacredits: 2, titanium: 7});
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megacredits: 2}));
+  });
+
+  it('standard project with zero cost still shows save button (b8079)', async () => {
+    // Underworld Standard Technology discounts Excavate (cost 7) by 8, flooring at 0.
+    // The save button must still render and accept a zero payment.
+    const wrapper = setupCardForPurchase(
+      CardName.EXCAVATE_STANDARD_PROJECT, 0,
+      {megacredits: 0},
+      {},
+      {canPayWith: {steel: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    expect(wrapper.find('[data-test=save]').exists()).is.true;
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({megacredits: 0}));
+  });
+
+  it('switching cards updates payment defaults to match new card cost', async () => {
+    // Regression: the cardName watch (flush:'pre') must update available units before
+    // PaymentForm remounts via :key, so the new instance computes correct greedy defaults.
+    const playerInput: SelectProjectCardToPlayModel = {
+      type: 'projectCard',
+      title: 'foo',
+      buttonLabel: 'bar',
+      cards: [
+        {name: CardName.BIRDS, calculatedCost: 10},
+        {name: CardName.ANTS, calculatedCost: 3},
+      ],
+      paymentOptions: {},
+      floaters: 0, graphene: 0, kuiperAsteroids: 0, lunaArchivesScience: 0,
+      microbes: 0, seeds: 0, auroraiData: 0, spireScience: 0,
+    };
+    const playerView: Partial<PlayerViewModel> = {
+      id: 'playerid-foo',
+      thisPlayer: {
+        megacredits: 10, steel: 0, titanium: 0, steelValue: 2, titaniumValue: 3, tableau: [],
+      } as unknown as PublicPlayerModel,
+    };
+
+    const wrapper = mount(SelectProjectCardToPlay, {
+      ...globalConfig,
+      props: {
+        playerView: playerView as PlayerViewModel,
+        playerinput: playerInput,
+        onsave: (response: SelectProjectCardToPlayResponse) => { saveResponse = response; },
+        showsave: true,
+        showtitle: true,
+      },
+    });
+
+    await wrapper.vm.$nextTick();
+
+    const vm = wrapper.vm as any;
+    const tester = new PaymentTester(wrapper);
+    expect(vm.cardName).to.eq(CardName.BIRDS);
+    tester.expectValue('megacredits', 10);
+
+    // Setting cardName simulates what v-model does when the radio changes.
+    // The watch fires (pre-flush) before PaymentForm remounts.
+    vm.cardName = CardName.ANTS;
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+
+    expect(vm.cardName).to.eq(CardName.ANTS);
+    tester.expectValue('megacredits', 3);
   });
 
   const setupCardForPurchase = function(

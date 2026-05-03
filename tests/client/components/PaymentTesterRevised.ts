@@ -1,33 +1,29 @@
 import {VueWrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {Payment} from '@/common/inputs/Payment';
 import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
-export class PaymentTester {
-  private model: SelectPaymentDataModel;
-  constructor(private wrapper: VueWrapper<any>) {
-    this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
-  }
+export class PaymentTesterRevised {
+  constructor(private wrapper: VueWrapper<any>) {}
 
   private static selector(unit: SpendableResource) {
     return `[data-test=${unit}]`;
   }
 
   public async clickMax(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-max');
+    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-max');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickMinus(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-minus');
+    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-minus');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickPlus(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-plus');
+    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-plus');
     await button.trigger('click');
     await this.nextTick();
   }
@@ -39,7 +35,7 @@ export class PaymentTester {
   }
 
   public getValue(unit: SpendableResource): number {
-    const found = this.wrapper.find(PaymentTester.selector(unit) + ' input');
+    const found = this.wrapper.find(PaymentTesterRevised.selector(unit) + ' input');
     if (!found.exists()) {
       throw new Error('Cannot find text box for ' + unit);
     }
@@ -61,39 +57,22 @@ export class PaymentTester {
     expect(this.getPayment()).deep.eq(expected);
   }
 
-  // This that the given unit has the given value. It does this two ways:
-  // It verifies that the model has this value, and also that the text box
-  // has the same value.
   public expectValue(unit: SpendableResource, amount: number) {
-    const vmVal = this.model.payment[unit];
     expect(this.getValue(unit), `text box value for ${unit}`).eq(amount);
-    expect(vmVal, 'VM box value for ' + unit).eq(amount);
   }
 
-  /**
-   * Returns true when the text box for `unit` is visible.
-   */
   private isAvailable(unit: SpendableResource): boolean {
-    return this.wrapper.find(PaymentTester.selector(unit) + ' input').exists();
+    return this.wrapper.find(PaymentTesterRevised.selector(unit) + ' input').exists();
   }
 
-  /**
-   * Passes when the text box for `unit` is visible.
-   */
   public expectIsAvailable(unit: SpendableResource) {
     expect(this.isAvailable(unit), `Expect input for ${unit} to be visible`).is.true;
   }
 
-  /**
-   * Passes when the text box for `unit` is not visible.
-   */
   public expectIsNotAvailable(unit: SpendableResource) {
     expect(this.isAvailable(unit), `Expect input for ${unit} to be invisible`).is.false;
   }
 
-  /**
-   * Return the set of payment components visible in the UI.
-   */
   public getAvailablePaymentComponents(): ReadonlyArray<SpendableResource> {
     const available: Array<SpendableResource> = [];
     for (const unit of SPENDABLE_RESOURCES) {
@@ -104,9 +83,6 @@ export class PaymentTester {
     return available;
   }
 
-  /**
-   * Passes when the visible set of UI components is this list and only this list.
-   */
   public expectAvailablePaymentComponents(...units: Array<SpendableResource>) {
     const available = this.getAvailablePaymentComponents();
     expect(available).has.members(units);

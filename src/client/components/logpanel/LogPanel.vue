@@ -143,8 +143,9 @@ export default defineComponent({
         })
         .catch((err) => {
           if (err.name === 'AbortError') {
+            // ignore aborted requests
             return;
-          } // ignore aborted requests
+          }
           console.error('error updating messages, unable to reach server');
         });
     },

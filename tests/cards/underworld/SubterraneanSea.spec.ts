@@ -4,6 +4,9 @@ import {testGame} from '../../TestGame';
 import {cast, maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
+import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
 
 describe('SubterraneanSea', () => {
   it('canPlay', () => {
@@ -47,6 +50,28 @@ describe('SubterraneanSea', () => {
     selectSpace.cb(selectedSpace);
 
     expect(selectedSpace.tile?.tileType).eq(TileType.OCEAN);
+  });
+
+  it('play works when the only excavated space has an additional cost (Hellas)', () => {
+    // Regression: bespokePlay called availableSpaces() after payment was deducted,
+    // so canAfford(card_cost + space_cost) failed with depleted MC, producing
+    // SelectSpace([]) → InputError('No available spaces').
+    const card = new SubterraneanSea();
+    const [game, player] = testGame(2, {underworldExpansion: true, boardName: BoardName.HELLAS});
+
+    const hellasSpace = game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
+    hellasSpace.excavator = player;
+
+    // Exactly enough: card cost + Hellas bonus cost.
+    player.megaCredits = card.cost + HELLAS_BONUS_OCEAN_COST;
+
+    expect(card.canPlay(player)).is.true;
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    // Must reach space selection without throwing 'No available spaces'.
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.spaces).includes(hellasSpace);
   });
 
   it('canPlay when Reds are in power', () => {

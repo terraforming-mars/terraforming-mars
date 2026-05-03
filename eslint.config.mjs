@@ -152,6 +152,17 @@ export default [
     },
   },
 
+  // Card implementation rules
+  {
+    files: ['src/server/cards/**/*.ts'],
+    rules: {
+      'no-restricted-syntax': ['error', {
+        selector: 'MethodDefinition[key.name="bespokePlay"] CallExpression[callee.property.name="getCardCost"]',
+        message: 'Do not call getCardCost() inside bespokePlay() — card payment is already deducted before bespokePlay runs. Pass cost: 0 to space-availability helpers instead.',
+      }],
+    },
+  },
+
   // tests/ override
   {
     files: ['tests/**/*.ts'],

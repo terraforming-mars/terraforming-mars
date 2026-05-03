@@ -40,7 +40,9 @@ export class Xavier extends CeoCard {
   }
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
-    if (this.isDisabled && card.requirements.length > 0) return 1;
+    if (this.isDisabled && card.requirements.length > 0) {
+      return 1;
+    }
     return 0;
   }
 }

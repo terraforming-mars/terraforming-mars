@@ -70,7 +70,9 @@ export default defineComponent({
     },
     canSave(): boolean {
       const refs = this.$refs.childInputs as Array<{canSave?: () => boolean}> | undefined;
-      if (!refs) return true;
+      if (!refs) {
+        return true;
+      }
       for (const child of refs) {
         if (child.canSave instanceof Function) {
           if (child.canSave() === false) {

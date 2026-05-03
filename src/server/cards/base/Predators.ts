@@ -37,7 +37,9 @@ export class Predators extends Card implements IProjectCard, IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    if (player.game.isSoloMode()) return true;
+    if (player.game.isSoloMode()) {
+      return true;
+    }
     return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.ANIMAL).length > 0;
   }
 

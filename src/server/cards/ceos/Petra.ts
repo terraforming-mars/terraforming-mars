@@ -35,7 +35,9 @@ export class Petra extends CeoCard {
     // We need to make sure that the player has enough delegates available to replace ALL neuts.
     //  including Chairman!
     const turmoil = player.game.turmoil;
-    if (turmoil === undefined || this.isDisabled === true) return false;
+    if (turmoil === undefined || this.isDisabled === true) {
+      return false;
+    }
     const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
     const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player);
     return playerTotalDelegateCount >= numNeutralDelegates;

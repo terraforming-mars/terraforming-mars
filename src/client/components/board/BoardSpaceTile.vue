@@ -130,8 +130,12 @@ export default defineComponent({
       return this.space.highlight;
     },
     description(): string {
-      if (this.tileType === undefined) return '';
-      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
+      if (this.tileType === undefined) {
+        return '';
+      }
+      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) {
+        return 'City in space.';
+      }
       return descriptions[this.tileType];
     },
     klass(): string {

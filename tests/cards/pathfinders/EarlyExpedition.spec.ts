@@ -45,7 +45,9 @@ describe('EarlyExpedition', () => {
     let tiles = 0;
     selectSpace.spaces.forEach((space) => {
       game.board.getAdjacentSpaces(space).forEach((s) => {
-        if (s.tile !== undefined) tiles++;
+        if (s.tile !== undefined) {
+          tiles++;
+        }
       });
     });
     expect(tiles).eq(0);

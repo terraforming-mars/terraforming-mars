@@ -48,7 +48,9 @@ export class LargeConvoy extends Card implements IProjectCard {
       return undefined;
     };
 
-    if (animalCards.length === 0 ) return gainPlants();
+    if (animalCards.length === 0 ) {
+      return gainPlants();
+    }
 
     const availableActions = [];
 

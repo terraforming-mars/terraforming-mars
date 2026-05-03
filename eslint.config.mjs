@@ -54,6 +54,8 @@ const projectRules = {
   'prefer-const': 'error',
   'indent': ['error', 2],
   'no-extra-semi': 'error',
+  'curly': 'error',
+  'brace-style': 'error',
 
   // Disabled entries from eslint:recommended
   'no-case-declarations': 'off',

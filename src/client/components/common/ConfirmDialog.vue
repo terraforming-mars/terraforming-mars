@@ -66,7 +66,9 @@ export default defineComponent({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    if (!windowHasHTMLDialogElement()) {
+      dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    }
   },
 });
 </script>

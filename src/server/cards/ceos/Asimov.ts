@@ -38,7 +38,9 @@ export class Asimov extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    if (player.game.isSoloMode()) return false; // Awards are disabled in solo mode
+    if (player.game.isSoloMode()) {
+      return false;
+    } // Awards are disabled in solo mode
     return !player.game.allAwardsFunded();
   }
 
@@ -89,7 +91,9 @@ export class Asimov extends CeoCard {
       inplaceRemove(candidates, award.name);
     }
     const validAwards = candidates.filter((awardName) => isCompatible(awardName, awardManifest, gameOptions));
-    if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');
+    if (validAwards.length === 0) {
+      throw new Error('getValidAwards award list is empty.');
+    }
     return validAwards;
   }
 }

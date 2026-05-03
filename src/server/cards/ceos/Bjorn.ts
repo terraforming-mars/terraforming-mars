@@ -26,8 +26,12 @@ export class Bjorn extends CeoCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    if (!super.canAct(player)) return false;
-    if (player.game.isSoloMode()) return true;
+    if (!super.canAct(player)) {
+      return false;
+    }
+    if (player.game.isSoloMode()) {
+      return true;
+    }
     return this.targets(player).length > 0;
   }
 

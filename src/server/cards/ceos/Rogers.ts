@@ -33,13 +33,17 @@ export class Rogers extends CeoCard {
   }
 
   public override getGlobalParameterRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
-    if (this.opgActionIsActive === false || parameter !== GlobalParameter.VENUS) return 0;
+    if (this.opgActionIsActive === false || parameter !== GlobalParameter.VENUS) {
+      return 0;
+    }
     // Magic number high enough to always ignore requirements.
     return 50;
   }
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
-    if (this.opgActionIsActive === false) return 0;
+    if (this.opgActionIsActive === false) {
+      return 0;
+    }
     return card.tags.filter((tag) => tag === Tag.VENUS).length * 3;
   }
 }

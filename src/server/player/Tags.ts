@@ -123,7 +123,9 @@ export class Tags {
    */
   public cardHasTag(card: ICard, target: Tag): boolean {
     for (const tag of card.tags) {
-      if (tag === target) return true;
+      if (tag === target) {
+        return true;
+      }
       if (tag === Tag.MARS &&
         target === Tag.SCIENCE &&
         this.player.tableau.has(CardName.HABITAT_MARTE)) {
@@ -186,10 +188,14 @@ export class Tags {
     if (mode !== 'award') {
       tagCount += this.rawCount(Tag.WILD, includeEvents);
       // Chimera has 2 wild tags but should only count as one for milestones.
-      if (this.player.tableau.has(CardName.CHIMERA) && mode === 'milestone') tagCount--;
+      if (this.player.tableau.has(CardName.CHIMERA) && mode === 'milestone') {
+        tagCount--;
+      }
     } else {
       // Chimera counts as one wild tag for awards
-      if (this.player.tableau.has(CardName.CHIMERA)) tagCount++;
+      if (this.player.tableau.has(CardName.CHIMERA)) {
+        tagCount++;
+      }
     }
 
     if (tags.includes(Tag.SCIENCE)) {
@@ -252,16 +258,26 @@ export class Tags {
       uniqueTags.add(extraTag);
     }
 
-    if (this.extraScienceTags > 0) uniqueTags.add(Tag.SCIENCE);
-    if (this.extraPlantTags > 0) uniqueTags.add(Tag.PLANT);
+    if (this.extraScienceTags > 0) {
+      uniqueTags.add(Tag.SCIENCE);
+    }
+    if (this.extraPlantTags > 0) {
+      uniqueTags.add(Tag.PLANT);
+    }
 
     // Global events occur outside the action phase. Stop counting here, before wild tags apply.
-    if (mode === 'globalEvent') return uniqueTags.size;
+    if (mode === 'globalEvent') {
+      return uniqueTags.size;
+    }
 
-    if (mode === 'milestone' && this.player.tableau.has(CardName.CHIMERA)) wildTagCount--;
+    if (mode === 'milestone' && this.player.tableau.has(CardName.CHIMERA)) {
+      wildTagCount--;
+    }
 
     let maximum = this.tagsInGame();
-    if (playerIsOdyssey) maximum++;
+    if (playerIsOdyssey) {
+      maximum++;
+    }
     return Math.min(uniqueTags.size + wildTagCount, maximum);
   }
 

@@ -102,7 +102,9 @@ export default defineComponent({
       inplaceRemove(this.selected, cardName);
     },
     addCard(cardName: CardName) {
-      if (this.selected.includes(cardName)) return;
+      if (this.selected.includes(cardName)) {
+        return;
+      }
       this.selected.push(cardName);
       this.selected.sort();
       this.searchTerm = '';

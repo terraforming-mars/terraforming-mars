@@ -15,7 +15,9 @@ describe('Insulation', () => {
 
     const action = card.play(player);
     expect(action).is.not.undefined;
-    if (action === undefined) return;
+    if (action === undefined) {
+      return;
+    }
     action.cb(1);
     expect(player.production.heat).to.eq(0);
     expect(player.production.megacredits).to.eq(1);

@@ -310,7 +310,9 @@ export abstract class Card implements ICard {
       return 0;
     }
 
-    if (typeof(vps) === 'number') return vps;
+    if (typeof(vps) === 'number') {
+      return vps;
+    }
 
     if (vps.targetOneOrMore === true || vps.anyPlayer === true) {
       throw new Error('Not yet handled');

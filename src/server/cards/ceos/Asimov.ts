@@ -39,8 +39,9 @@ export class Asimov extends CeoCard {
       return false;
     }
     if (player.game.isSoloMode()) {
+      // Awards are disabled in solo mode
       return false;
-    } // Awards are disabled in solo mode
+    }
     return !player.game.allAwardsFunded();
   }
 

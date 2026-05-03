@@ -56,7 +56,9 @@ export class CommunicationCenter extends Card implements IProjectCard {
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
-    if (playedCard.name !== this.name) return;
+    if (playedCard.name !== this.name) {
+      return;
+    }
     player.defer(() => {
       while (this.resourceCount >= 3) {
         this.resourceCount -= 3;

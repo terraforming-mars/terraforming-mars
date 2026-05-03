@@ -60,8 +60,12 @@ export class Factorum extends CorporationCard implements ICorporationCard, IActi
         return undefined;
       });
 
-    if (player.energy > 0) return drawBuildingCard;
-    if (!player.canAfford(3)) return increaseEnergy;
+    if (player.energy > 0) {
+      return drawBuildingCard;
+    }
+    if (!player.canAfford(3)) {
+      return increaseEnergy;
+    }
 
     return new OrOptions(increaseEnergy, drawBuildingCard);
   }

@@ -11,7 +11,9 @@ import {CardName} from '../../common/cards/CardName';
 export class ColoniesHandler {
   public static getColony(game: IGame, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
     let colony: IColony | undefined = game.colonies.find((c) => c.name === colonyName);
-    if (colony !== undefined) return colony;
+    if (colony !== undefined) {
+      return colony;
+    }
     if (includeDiscardedColonies === true) {
       colony = game.discardedColonies.find((c) => c.name === colonyName);
       if (colony !== undefined) {
@@ -26,7 +28,9 @@ export class ColoniesHandler {
   }
 
   public static maybeActivateColonies(game: IGame, card: ICard) {
-    if (!game.gameOptions.coloniesExtension) return;
+    if (!game.gameOptions.coloniesExtension) {
+      return;
+    }
     game.colonies.forEach((colony) => {
       if (colony.isActive === false && ColoniesHandler.cardActivatesColony(colony, card)) {
         colony.isActive = true;

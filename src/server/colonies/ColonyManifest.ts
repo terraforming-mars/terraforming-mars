@@ -61,7 +61,11 @@ export const PATHFINDERS_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 export const ALL_COLONIES_TILES = [...BASE_COLONIES_TILES, ...COMMUNITY_COLONIES_TILES, ...PATHFINDERS_COLONIES_TILES];
 
 export function getColonyModule(name: ColonyName): GameModule {
-  if (COMMUNITY_COLONIES_TILES.some((f) => f.colonyName === name)) return 'community';
-  if (PATHFINDERS_COLONIES_TILES.some((f) => f.colonyName === name)) return 'pathfinders';
+  if (COMMUNITY_COLONIES_TILES.some((f) => f.colonyName === name)) {
+    return 'community';
+  }
+  if (PATHFINDERS_COLONIES_TILES.some((f) => f.colonyName === name)) {
+    return 'pathfinders';
+  }
   return 'colonies';
 }

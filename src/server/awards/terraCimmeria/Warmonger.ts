@@ -23,8 +23,12 @@ export class Warmonger implements IAward {
   public static autoInclude(card: ICard) {
     if (card.behavior !== undefined) {
       const behavior = card.behavior;
-      if (behavior.removeAnyPlants !== undefined) return true;
-      if (behavior.decreaseAnyProduction !== undefined) return true;
+      if (behavior.removeAnyPlants !== undefined) {
+        return true;
+      }
+      if (behavior.decreaseAnyProduction !== undefined) {
+        return true;
+      }
     }
     return false;
   }

@@ -63,7 +63,9 @@ describe('ArtificialLake', () => {
     // Take all but one space.
     const spaces = game.board.getAvailableSpacesOnLand(player);
     spaces.forEach((space, idx) => {
-      if (idx !== 0) game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+      if (idx !== 0) {
+        game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+      }
     });
 
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);

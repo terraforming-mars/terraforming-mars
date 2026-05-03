@@ -54,7 +54,9 @@ export class ArcadianCommunities extends CorporationCard implements ICorporation
     const candidateSpaces = board.getAvailableSpacesOnLand(player);
     const spaces = candidateSpaces.filter((space) => {
       // Exclude spaces that already have a player marker.
-      if (space.player !== undefined) return false;
+      if (space.player !== undefined) {
+        return false;
+      }
       const adjacentSpaces = board.getAdjacentSpaces(space);
       return adjacentSpaces.find((adj) => adj.player === player) !== undefined;
     });

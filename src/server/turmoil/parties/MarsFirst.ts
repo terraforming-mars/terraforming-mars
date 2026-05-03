@@ -63,7 +63,9 @@ class MarsFirstPolicy02 implements IPolicy {
   readonly description = 'When you play a building tag, gain 2 M€';
 
   onCardPlayed(player: IPlayer, card: ICard) {
-    if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
+    if (card.tags.includes(Tag.BUILDING)) {
+      player.stock.add(Resource.MEGACREDITS, 2);
+    }
   }
 }
 

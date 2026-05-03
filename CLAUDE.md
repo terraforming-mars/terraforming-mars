@@ -97,5 +97,4 @@ Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Transla
 
 ## Style Guide
 
-- Avoid control flow statements without braces.
 - Follow the style of the code around the file. If this is a new file, follow the style of the code in the directory.

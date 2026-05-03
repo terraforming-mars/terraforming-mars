@@ -40,7 +40,9 @@ export namespace Units {
    * Returns true when all six units fields exist in `arg` and each represents a valid number.
    */
   export function isUnits(arg: any): arg is Units {
-    if (typeof arg !== 'object') return false;
+    if (typeof arg !== 'object') {
+      return false;
+    }
     return keys.every((key) =>
       typeof arg[key] === 'number' && !isNaN(arg[key]));
   }
@@ -96,7 +98,9 @@ export namespace Units {
    * Returns `true` when every unit is 0, undefined, or absent.
    */
   export function isEmpty(u: Partial<Units> | undefined): boolean {
-    if (u === undefined) return true;
+    if (u === undefined) {
+      return true;
+    }
     return (u.megacredits ?? 0) === 0 &&
       (u.steel ?? 0) === 0 &&
       (u.titanium ?? 0) === 0 &&

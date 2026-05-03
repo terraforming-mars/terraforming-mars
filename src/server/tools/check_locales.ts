@@ -29,7 +29,9 @@ let sourceString: keyof typeof raw_translations;
 let missingLocales: Array<string>;
 
 for (sourceString in raw_translations) {
-  if ( ! raw_translations.hasOwnProperty(sourceString)) continue;
+  if ( ! raw_translations.hasOwnProperty(sourceString)) {
+    continue;
+  }
   const translations = raw_translations[sourceString];
   missingLocales = [];
   for (const localeName of localesToWarn) {

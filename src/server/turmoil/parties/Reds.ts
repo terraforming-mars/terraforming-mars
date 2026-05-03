@@ -29,12 +29,16 @@ class RedsBonus01 extends Bonus {
     const game = player.game;
     const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].terraformRating <= 20) return 1;
+    if (game.isSoloMode() && players[0].terraformRating <= 20) {
+      return 1;
+    }
 
     players.sort((p1, p2) => p1.terraformRating - p2.terraformRating);
     const min = players[0].terraformRating;
 
-    if (player.terraformRating === min) return 1;
+    if (player.terraformRating === min) {
+      return 1;
+    }
     return 0;
   }
 
@@ -64,12 +68,16 @@ class RedsBonus02 implements IBonus {
     const game = player.game;
     const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].terraformRating > 20) return -1;
+    if (game.isSoloMode() && players[0].terraformRating > 20) {
+      return -1;
+    }
 
     players.sort((p1, p2) => p2.terraformRating - p1.terraformRating);
     const max = players[0].terraformRating;
 
-    if (player.terraformRating === max) return -1;
+    if (player.terraformRating === max) {
+      return -1;
+    }
     return 0;
   }
 
@@ -78,7 +86,9 @@ class RedsBonus02 implements IBonus {
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
-      if (scores[idx] < 0) player.decreaseTerraformRating();
+      if (scores[idx] < 0) {
+        player.decreaseTerraformRating();
+      }
     });
   }
 }
@@ -94,7 +104,9 @@ class RedsPolicy02 implements IPolicy {
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.tableau.has(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.tableau.has(CardName.HELION)) {
+      amountPlayerHas += player.heat;
+    }
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
@@ -143,7 +155,9 @@ class RedsPolicy03 implements IPolicy {
 
   canAct(player: IPlayer) {
     const game = player.game;
-    if (game.marsIsTerraformed()) return false;
+    if (game.marsIsTerraformed()) {
+      return false;
+    }
 
     const temperature = game.getTemperature();
     const oceansPlaced = game.board.getOceanSpaces().length;
@@ -231,7 +245,9 @@ class RedsPolicy03 implements IPolicy {
           }));
         }
 
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) {
+          return orOptions.options[0].cb();
+        }
 
         player.defer(orOptions);
         return undefined;

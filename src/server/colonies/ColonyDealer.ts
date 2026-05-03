@@ -17,17 +17,32 @@ export class ColonyDealer {
   constructor(private rng: Random, private gameOptions: GameOptions) {
     let colonyTiles = BASE_COLONIES_TILES;
 
-    if (ColonyDealer.includesCommunityColonies(gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
-    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
-    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II); // Leavitt II isn't built yet but this is pre-emptive
-    if (!gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
-    if (!gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
-    if (!gameOptions.aresExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
+    if (ColonyDealer.includesCommunityColonies(gameOptions)) {
+      colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+    }
+    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) {
+      colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
+    }
+    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) {
+      // Leavitt II isn't built yet but this is pre-emptive
+      colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II);
+    }
+    if (!gameOptions.venusNextExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+    }
+    if (!gameOptions.turmoilExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    }
+    if (!gameOptions.aresExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
+    }
     this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 
   private static includesCommunityColonies(gameOptions: GameOptions) : boolean {
-    if (gameOptions.communityCardsOption) return true;
+    if (gameOptions.communityCardsOption) {
+      return true;
+    }
     const communityColonyNames = COMMUNITY_COLONIES_TILES.map((cf) => cf.colonyName);
     return gameOptions.customColoniesList.some((colonyName) => communityColonyNames.includes(colonyName));
   }

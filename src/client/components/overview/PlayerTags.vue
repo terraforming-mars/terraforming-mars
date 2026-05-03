@@ -83,7 +83,9 @@ const ORDER: Array<InterfaceTagsType> = [
 
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   const gameOptions = game.gameOptions;
-  if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
+  if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
+    return false;
+  }
   switch (tag) {
   case SpecialTags.COLONY_COUNT:
     return gameOptions.expansions.colonies !== false;

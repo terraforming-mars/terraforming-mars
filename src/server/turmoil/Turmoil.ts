@@ -367,7 +367,9 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) steps += 1;
+      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) {
+        steps += 1;
+      }
 
       // Raise TR
       chairman.defer(() => {
@@ -458,7 +460,9 @@ export class Turmoil {
 
   public getInfluence(player: IPlayer) {
     let influence = 0;
-    if (this.chairman === player) influence++;
+    if (this.chairman === player) {
+      influence++;
+    }
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player;
@@ -466,9 +470,13 @@ export class Turmoil {
 
     if (isPartyLeader) {
       influence++;
-      if (delegateCount > 1) influence++; // at least 1 non-leader delegate
+      if (delegateCount > 1) {
+        influence++;
+      } // at least 1 non-leader delegate
     } else {
-      if (delegateCount > 0) influence++;
+      if (delegateCount > 0) {
+        influence++;
+      }
     }
 
     if (this.playersInfluenceBonus.has(player.id)) {
@@ -519,7 +527,9 @@ export class Turmoil {
    */
   public getVictoryPoints(player: IPlayer): number {
     let victory = 0;
-    if (this.chairman === player) victory++;
+    if (this.chairman === player) {
+      victory++;
+    }
     this.parties.forEach((party) => {
       if (party.partyLeader === player) {
         victory++;

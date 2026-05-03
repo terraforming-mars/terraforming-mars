@@ -24,8 +24,9 @@ export class ColonyDealer {
       colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
     }
     if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) {
+      // Leavitt II isn't built yet but this is pre-emptive
       colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II);
-    } // Leavitt II isn't built yet but this is pre-emptive
+    }
     if (!gameOptions.venusNextExtension) {
       colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
     }

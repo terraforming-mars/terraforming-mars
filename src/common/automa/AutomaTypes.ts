@@ -25,6 +25,8 @@ export type TrackDefinition = {
 };
 
 
+export type CubeType = 'white' | 'black' | 'credit';
+
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
 
 export enum BonusCardId {

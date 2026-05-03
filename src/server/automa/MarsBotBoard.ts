@@ -37,12 +37,14 @@ export class MarsBotTrack {
     return action !== undefined ? {type: 'action', action} : {type: 'none'};
   }
 
-  /** Regress the track by 1 (from human decreasing MarsBot production). */
-  public regress(): void {
+  /** Regress the track by 1 (from human decreasing MarsBot production). Returns true if the track actually moved. */
+  public regress(): boolean {
     if (this.position > 0) {
       this.regressedPositions.add(this.position);
       this.position--;
+      return true;
     }
+    return false;
   }
 
   /** Get the action at the next position without advancing. Returns undefined if at max or no action. */

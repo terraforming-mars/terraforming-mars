@@ -43,8 +43,8 @@ export function computeDefaultPayment(
   order: ReadonlyArray<SpendableResource>,
   ledger: Ledger,
   reserveMegacredits: boolean = false,
-): Partial<Payment> {
-  const result: Partial<Payment> = {};
+): Payment {
+  const result: Payment = {...Payment.EMPTY};
   const mcAvailable = ledger['megacredits'].available;
 
   let amountCovered = reserveMegacredits ? mcAvailable : 0;

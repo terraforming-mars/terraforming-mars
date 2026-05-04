@@ -53,6 +53,11 @@ const DESCRIPTIONS: Record<SpendableResource, string> = {
   plants: 'Plants',
 };
 
+type DataModel = {
+  localPayment: Payment;
+  warning: string | undefined;
+};
+
 export default defineComponent({
   name: 'PaymentForm',
   components: {
@@ -60,10 +65,6 @@ export default defineComponent({
     PaymentUnitComponent,
   },
   props: {
-    initialPayment: {
-      type: Object as () => Payment,
-      default: undefined,
-    },
     cost: {
       type: Number,
       required: true,
@@ -86,16 +87,11 @@ export default defineComponent({
     },
   },
   emits: ['save'],
-  data() {
+  data(): DataModel {
     return {
-      localPayment: {...(this.initialPayment ?? Payment.EMPTY)} as Payment,
-      warning: undefined as string | undefined,
+      localPayment: computeDefaultPayment(this.cost, this.order, this.ledger),
+      warning: undefined,
     };
-  },
-  created() {
-    if (this.initialPayment === undefined) {
-      Object.assign(this.localPayment, computeDefaultPayment(this.cost, this.order, this.ledger));
-    }
   },
   computed: {
     descriptions(): Record<SpendableResource, string> {
@@ -145,11 +141,10 @@ export default defineComponent({
     onMax(unit: SpendableResource): void {
       this.setMaxValue(unit);
       if (unit === 'megacredits') {
-        const overrides = {
+        this.localPayment = {
           ...computeDefaultPayment(this.cost, this.order, this.ledger, true),
           megacredits: this.localPayment.megacredits,
         };
-        Object.assign(this.localPayment, overrides);
       }
     },
     computeTotalSpent(): number {

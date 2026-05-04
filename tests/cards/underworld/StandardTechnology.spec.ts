@@ -94,7 +94,6 @@ describe('Underworld / StandardTechnology', () => {
     select.payAndPlay(excavateStandardProject, Payment.of({megacredits: 0}));
   });
 
-
   it('action', () => {
     player.playedCards.push(card);
     player.standardProjectsThisGeneration.add(CardName.ASTEROID_STANDARD_PROJECT);

@@ -81,7 +81,7 @@ describe('Tate', () => {
     runAllActions(game);
 
     const publicMessages = game.gameLog.filter((entry) => entry.playerId === undefined);
-    const message = publicMessages.find((msg) => msg.message === '${0} drew ${1}');
+    const message = publicMessages.find((msg) => msg.message === '${0} revealed ${1}');
 
     expect(message).to.not.be.undefined;
     const data = message!.data[1];

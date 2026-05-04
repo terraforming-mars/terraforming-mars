@@ -32,10 +32,18 @@ export class GlobalAudit extends Card implements IProjectCard {
       .reduce((a, b) => Math.min(a, b));
     for (const p of player.game.players) {
       const count = p.tags.count(Tag.CRIME, 'raw-underworld');
-      const tr = (count === 0) ? 2 : count === lowestCrimeTagCount ? 1 : 0;
-      if (tr > 0 && p.canAfford({cost: 0, tr: {tr: tr}})) {
-        // TODO(kberg): Make it so players who get two but can only afford 1 get one.
-        p.increaseTerraformRating(tr, {log: true});
+      const expectedTr = (count === 0) ? 2 : count === lowestCrimeTagCount ? 1 : 0;
+      let tr = expectedTr;
+      while (tr > 0) {
+        if (p.canAfford({cost: 0, tr: {tr: tr}})) {
+          p.increaseTerraformRating(tr, {log: true});
+          break;
+        }
+        tr--;
+      }
+      if (tr < expectedTr) {
+        p.game.log('${0} gains ${1} TR instead of ${2} due to the Reds ruling policy',
+          (b) => b.player(p).number(tr).number(expectedTr));
       }
     }
     return undefined;

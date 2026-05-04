@@ -6,7 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, formatMessage, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
@@ -106,6 +106,28 @@ describe('Leavitt', () => {
     expect(player2.megaCredits).eq(1);
     expect(player.megaCredits).eq(5);
     expect(player2.cardsInHand).is.empty;
+  });
+
+  it('Colony bonus: revealed card is publicly logged even when player does not buy', () => {
+    leavitt.addColony(player);
+    player.megaCredits = 10;
+    game.gameLog = [];
+
+    leavitt.giveColonyBonus(player);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.length(1);
+
+    // Player declines to buy.
+    selectCard.cb([]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).is.empty;
+
+    // The revealed card should appear in the public game log.
+    const publicMessages = game.gameLog.filter((entry) => entry.playerId === undefined);
+    expect(publicMessages.some((msg) => formatMessage(msg).match(/blue revealed /))).is.true;
   });
 
   it('Leavitt is compatible with Vitor', () => {

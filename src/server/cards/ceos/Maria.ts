@@ -20,7 +20,9 @@ export class Maria extends CeoCard {
 
   public override canAct(player: IPlayer): boolean {
     const game = player.game;
-    if (game.discardedColonies === undefined || !game.gameOptions.coloniesExtension) return false;
+    if (game.discardedColonies === undefined || !game.gameOptions.coloniesExtension) {
+      return false;
+    }
     return game.discardedColonies.length > 0 && this.isDisabled === false;
   }
 

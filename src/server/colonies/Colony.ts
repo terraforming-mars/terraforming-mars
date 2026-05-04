@@ -239,12 +239,16 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.GAIN_PRODUCTION:
-      if (resource === undefined) throw new Error('Resource cannot be undefined');
+      if (resource === undefined) {
+        throw new Error('Resource cannot be undefined');
+      }
       player.production.add(resource, quantity, {log: true});
       break;
 
     case ColonyBenefit.GAIN_RESOURCES:
-      if (resource === undefined) throw new Error('Resource cannot be undefined');
+      if (resource === undefined) {
+        throw new Error('Resource cannot be undefined');
+      }
       player.stock.add(resource, quantity, {log: true});
       break;
 
@@ -329,12 +333,16 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.OPPONENT_DISCARD:
-      if (game.isSoloMode()) break;
+      if (game.isSoloMode()) {
+        break;
+      }
       action = new SimpleDeferredAction(
         player,
         () => {
           const playersWithCards = game.players.filter((p) => p.cardsInHand.length > 0);
-          if (playersWithCards.length === 0) return undefined;
+          if (playersWithCards.length === 0) {
+            return undefined;
+          }
           return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
             .andThen((selectedPlayer) => {
               game.defer(new DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
@@ -348,7 +356,9 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.STEAL_RESOURCES:
-      if (resource === undefined) throw new Error('Resource cannot be undefined');
+      if (resource === undefined) {
+        throw new Error('Resource cannot be undefined');
+      }
       action = new StealResources(player, resource, quantity);
       break;
 

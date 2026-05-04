@@ -129,7 +129,9 @@ export default defineComponent({
           return resp.json();
         })
         .then((data) => {
-          if (!data) return;
+          if (!data) {
+            return;
+          }
           messages.splice(0, messages.length);
           messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
@@ -140,7 +142,10 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-          if (err.name === 'AbortError') return; // ignore aborted requests
+          if (err.name === 'AbortError') {
+            // ignore aborted requests
+            return;
+          }
           console.error('error updating messages, unable to reach server');
         });
     },

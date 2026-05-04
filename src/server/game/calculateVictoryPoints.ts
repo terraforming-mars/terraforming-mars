@@ -116,7 +116,9 @@ function maybeSetVP(thisPlayer: IPlayer, awardWinner: IPlayer, fundedAward: Fund
 
 function giveAwards(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
   // Awards are disabled for 1 player games
-  if (player.game.isSoloMode()) return;
+  if (player.game.isSoloMode()) {
+    return;
+  }
 
   player.game.fundedAwards.forEach((fundedAward) => {
     const award = fundedAward.award;

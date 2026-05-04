@@ -51,7 +51,9 @@ export class RobinsonIndustries extends CorporationCard implements ICorporationC
         lowest = [];
         minimum = player.production[resource];
       }
-      if (player.production[resource] === minimum) lowest.push(option);
+      if (player.production[resource] === minimum) {
+        lowest.push(option);
+      }
     });
 
     const result = new OrOptions();

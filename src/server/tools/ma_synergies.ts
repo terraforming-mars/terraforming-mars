@@ -21,7 +21,9 @@ for (const name of manames) {
   for (const name2 of manames) {
     const second = get(name2);
     const x = synergies.get(name, name2);
-    if (x === 1000 || x === 0) continue;
+    if (x === 1000 || x === 0) {
+      continue;
+    }
     entries.push(` ${x} ${second.name} (${second.description})`);
   }
   entries.sort().reverse();

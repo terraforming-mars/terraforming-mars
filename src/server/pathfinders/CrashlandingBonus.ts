@@ -7,7 +7,9 @@ import {Space} from '../boards/Space';
 export class CrashlandingBonus {
   public static onTilePlacedAdjacentToCrashlanding(game: IGame, crashlandingSpace: Space, newTileSpace: Space): Array<SpaceBonus> {
     const position = this.getAdjacentPosition(game.board, crashlandingSpace, newTileSpace);
-    if (position === -1) return [];
+    if (position === -1) {
+      return [];
+    }
     const mod = crashlandingSpace.tile?.rotated ? 1 : 0;
     return [SpaceBonus.DATA, (position % 2 === mod) ? SpaceBonus.STEEL : SpaceBonus.TITANIUM];
   }

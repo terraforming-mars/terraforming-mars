@@ -2,7 +2,9 @@ import {PathfindersModel} from '../../common/models/PathfindersModel';
 import {IGame} from '../IGame';
 
 export function createPathfindersModel(game: IGame): PathfindersModel | undefined {
-  if (game.pathfindersData === undefined) return undefined;
+  if (game.pathfindersData === undefined) {
+    return undefined;
+  }
   const pathfindersData = game.pathfindersData;
   return {
     venus: pathfindersData.venus,

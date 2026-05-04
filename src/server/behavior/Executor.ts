@@ -447,9 +447,15 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.global !== undefined) {
       const g = behavior.global;
-      if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
-      if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
-      if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
+      if (g.temperature !== undefined) {
+        player.game.increaseTemperature(player, g.temperature);
+      }
+      if (g.oxygen !== undefined) {
+        player.game.increaseOxygenLevel(player, g.oxygen);
+      }
+      if (g.venus !== undefined) {
+        player.game.increaseVenusScaleLevel(player, g.venus);
+      }
     }
 
     if (behavior.tr !== undefined) {
@@ -608,9 +614,15 @@ export class Executor implements BehaviorExecutor {
           player.game.defer(new PlaceSpecialMoonTile(player, {tileType: moon.tile.type, card: card?.name}));
         }
       }
-      if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
-      if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
-      if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+      if (moon.habitatRate !== undefined) {
+        MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
+      }
+      if (moon.miningRate !== undefined) {
+        MoonExpansion.raiseMiningRate(player, moon.miningRate);
+      }
+      if (moon.logisticsRate !== undefined) {
+        MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+      }
     }
 
     if (behavior.underworld !== undefined) {

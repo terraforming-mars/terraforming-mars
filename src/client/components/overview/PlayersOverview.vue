@@ -118,7 +118,9 @@ export default defineComponent({
       if (this.playerView.game.passedPlayers.includes(player.color)) {
         return 'passed';
       }
-      if (player.isActive) return 'active';
+      if (player.isActive) {
+        return 'active';
+      }
       const notPassedPlayers = this.players.filter(
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );

@@ -107,7 +107,9 @@ export class Astrodrill extends CorporationCard implements ICorporationCard, IAc
       return undefined;
     });
 
-    if (this.resourceCount > 0) opts.push(spendResource);
+    if (this.resourceCount > 0) {
+      opts.push(spendResource);
+    }
     asteroidCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
     opts.push(gainStandardResource);
 

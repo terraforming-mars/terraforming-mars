@@ -111,8 +111,12 @@ export class ProjectWorkshop extends CorporationCard implements ICorporationCard
       return undefined;
     });
 
-    if (activeCards.length === 0) return drawBlueCard;
-    if (!player.canAfford(3)) return flipBlueCard;
+    if (activeCards.length === 0) {
+      return drawBlueCard;
+    }
+    if (!player.canAfford(3)) {
+      return flipBlueCard;
+    }
 
     return new OrOptions(drawBlueCard, flipBlueCard);
   }

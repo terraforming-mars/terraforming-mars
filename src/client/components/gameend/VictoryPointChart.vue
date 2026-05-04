@@ -116,7 +116,9 @@ export default defineComponent({
                   stepSize: 5,
                   callback: (value: string | number) => {
                     // I don't know what to do when it's of string type yet, so this just ensures it's displayed.
-                    if (typeof(value) === 'string') return value;
+                    if (typeof(value) === 'string') {
+                      return value;
+                    }
                     return value % 10 === 0 ? value : '';
                   },
                 },

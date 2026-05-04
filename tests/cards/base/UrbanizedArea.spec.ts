@@ -6,7 +6,7 @@ import {Resource} from '../../../src/common/Resource';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, churn} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('UrbanizedArea', () => {
@@ -44,6 +44,7 @@ describe('UrbanizedArea', () => {
     expect(selectSpace.spaces).has.lengthOf(1);
 
     selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
     expect(game.board.getCities()).has.length(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);

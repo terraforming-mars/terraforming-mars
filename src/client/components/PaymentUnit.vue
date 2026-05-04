@@ -9,12 +9,12 @@
     />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
+    <span v-if="value !== undefined">{{ value * modelValue }}</span><i v-if="value !== undefined" class="resource_icon payments_type_icon resource_icon--megacredits"></i>
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
@@ -33,6 +33,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    value: {
+      type: Number as () => number | undefined,
+      default: undefined,
+    },
     showMax: {
       type: Boolean,
       default: true,
@@ -41,9 +45,6 @@ export default defineComponent({
   },
   components: {
     AppButton,
-  },
-  methods: {
-    ...PaymentWidgetMixin.methods,
   },
   computed: {
     iconClass(): string {

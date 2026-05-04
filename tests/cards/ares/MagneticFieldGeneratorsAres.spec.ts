@@ -4,10 +4,11 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, fakeCard} from '../../TestingUtils';
+import {runAllActions, fakeCard} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MagneticFieldGeneratorsAres', () => {
   let card: MagneticFieldGeneratorsAres;

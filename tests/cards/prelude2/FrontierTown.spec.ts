@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {FrontierTown} from '../../../src/server/cards/prelude2/FrontierTown';
 import {testGame} from '../../TestGame';
-import {addOcean, cast, churn, runAllActions, setRulingParty} from '../../TestingUtils';
+import {addOcean, churn, runAllActions, setRulingParty} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -10,6 +10,7 @@ import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('FrontierTown', () => {
   const canPlayRuns = [

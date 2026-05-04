@@ -12,12 +12,13 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
 import {ICard} from '../../../src/server/cards/ICard';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {Worms} from '../../../src/server/cards/base/Worms';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Playwrights', () => {
   let card: Playwrights;

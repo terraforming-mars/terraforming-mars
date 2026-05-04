@@ -4,11 +4,12 @@ import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('WildlifeDome', () => {
   let card: WildlifeDome;

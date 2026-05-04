@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {churn, cast} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('InventorsGuild', () => {
   let card: InventorsGuild;

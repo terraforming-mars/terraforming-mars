@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Hygiea} from '../../../src/server/cards/community/Hygiea';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
@@ -10,6 +10,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Hygiea', () => {
   let hygiea: Hygiea;

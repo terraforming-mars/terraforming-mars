@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {forceGenerationEnd, runAllActions, cast, churn} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions, churn} from '../../TestingUtils';
 import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Floyd', () => {
   let card: Floyd;

@@ -3,7 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Merger} from '../../../src/server/cards/promo/Merger';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
@@ -42,6 +42,7 @@ import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
 import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {asArray, toName} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Merger', () => {
   let merger: Merger;

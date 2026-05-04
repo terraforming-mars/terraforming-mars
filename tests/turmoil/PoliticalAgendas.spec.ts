@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {IPlayer} from '../../src/server/IPlayer';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {cast} from '@/common/utils/utils';
 
 describe('PoliticalAgendas', () => {
   let player1: TestPlayer;

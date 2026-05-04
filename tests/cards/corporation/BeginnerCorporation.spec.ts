@@ -1,6 +1,6 @@
 import {BeginnerCorporation} from '../../../src/server/cards/corporation/BeginnerCorporation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('BeginnerCorporation', () => {
   it('Should play', () => {

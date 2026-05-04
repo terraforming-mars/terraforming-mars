@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {IGame} from '../../../src/server/IGame';
@@ -7,6 +7,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('Thermophiles', () => {
   let card: Thermophiles;

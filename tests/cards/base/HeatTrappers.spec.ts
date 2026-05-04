@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('HeatTrappers', () => {

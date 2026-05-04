@@ -1,9 +1,10 @@
 import {CanyonSurvey} from '../../../src/server/cards/underworld/CanyonSurvey';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CanyonSurvey', () => {
   let card: CanyonSurvey;

@@ -3,7 +3,8 @@ import {Recession} from '../../../src/server/cards/prelude2/Recession';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Recession', () => {
   let card: Recession;

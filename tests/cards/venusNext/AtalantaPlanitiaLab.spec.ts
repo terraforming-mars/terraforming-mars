@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AtalantaPlanitiaLab} from '../../../src/server/cards/venusNext/AtalantaPlanitiaLab';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('AtalantaPlanitiaLab', () => {
   it('Should play', () => {

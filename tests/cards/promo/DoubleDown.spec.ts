@@ -8,7 +8,7 @@ import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {PowerGeneration} from '../../../src/server/cards/prelude/PowerGeneration';
 import {ICard} from '../../../src/server/cards/ICard';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Arklight} from '../../../src/server/cards/colonies/Arklight';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
@@ -20,6 +20,7 @@ import {Merger} from '../../../src/server/cards/promo/Merger';
 import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {toName} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DoubleDown', () => {
   let doubleDown: DoubleDown;

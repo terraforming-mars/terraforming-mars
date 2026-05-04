@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {DemetronLabs} from '../../../src/server/cards/underworld/DemetronLabs';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DemetronLabs', () => {
   it('play', () => {

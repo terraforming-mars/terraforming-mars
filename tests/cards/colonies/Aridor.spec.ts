@@ -9,12 +9,13 @@ import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Player} from '../../../src/server/Player';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {InputResponse} from '../../../src/common/inputs/InputResponse';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {cast} from '../../../src/common/utils/utils';
 
 let card: Aridor;
 let game: IGame;

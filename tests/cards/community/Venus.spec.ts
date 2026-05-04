@@ -3,13 +3,14 @@ import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExpo
 import {IGame} from '../../../src/server/IGame';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {runAllActions, setRulingParty} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {newProjectCard} from '../../../src/server/createCard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Venus', () => {
   let venus: Venus;

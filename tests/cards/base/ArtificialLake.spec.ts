@@ -6,9 +6,10 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ArtificialLake', () => {
   let card: ArtificialLake;

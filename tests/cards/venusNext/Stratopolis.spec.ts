@@ -3,8 +3,9 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, churn, runAllActions, testGame} from '../../TestingUtils';
+import {churn, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '@/common/utils/utils';
 
 describe('Stratopolis', () => {
   let card: Stratopolis;

@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -13,6 +13,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MindSetMars', () => {
   let card: MindSetMars;

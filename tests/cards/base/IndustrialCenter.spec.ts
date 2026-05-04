@@ -3,9 +3,10 @@ import {IndustrialCenter} from '../../../src/server/cards/base/IndustrialCenter'
 import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {addCity, cast, runAllActions} from '../../TestingUtils';
+import {addCity, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('IndustrialCenter', () => {
   let card: IndustrialCenter;

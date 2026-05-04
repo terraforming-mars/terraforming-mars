@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, formatMessage, runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
@@ -9,6 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Splice', () => {
   let card: Splice;

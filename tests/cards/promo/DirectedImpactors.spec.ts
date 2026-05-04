@@ -7,9 +7,10 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, setTemperature} from '../../TestingUtils';
+import {setTemperature} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DirectedImpactors', () => {
   let card: DirectedImpactors;

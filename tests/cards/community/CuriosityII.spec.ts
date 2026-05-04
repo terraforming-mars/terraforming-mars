@@ -5,9 +5,10 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, cast, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CuriosityII', () => {
   let card: CuriosityII;

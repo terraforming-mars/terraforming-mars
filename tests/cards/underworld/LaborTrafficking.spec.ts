@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, fakeCard, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {fakeCard, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {LaborTrafficking} from '../../../src/server/cards/underworld/LaborTrafficking';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -12,6 +12,7 @@ import {SellPatentsStandardProject} from '../../../src/server/cards/base/standar
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LaborTrafficking', () => {
   let card: LaborTrafficking;

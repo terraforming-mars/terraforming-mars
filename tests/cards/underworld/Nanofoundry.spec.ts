@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Nanofoundry} from '../../../src/server/cards/underworld/Nanofoundry';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Nanofoundry', () => {
   const canPlayRuns = [

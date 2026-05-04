@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {GuerillaEcologists} from '../../../src/server/cards/underworld/GuerillaEcologists';
 import {testGame} from '../../TestGame';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GuerillaEcologists', () => {
   const canPlayRuns = [

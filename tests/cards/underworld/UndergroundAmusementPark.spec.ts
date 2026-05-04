@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {UndergroundAmusementPark} from '../../../src/server/cards/underworld/UndergroundAmusementPark';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('UndergroundAmusementPark', () => {
   it('canPlay', () => {

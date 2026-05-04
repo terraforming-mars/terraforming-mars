@@ -6,8 +6,9 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {ICard} from '../../../src/server/cards/ICard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AirRaid', () => {
   let card: AirRaid;

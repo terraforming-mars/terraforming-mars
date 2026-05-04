@@ -4,7 +4,7 @@ import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
-import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from '../TestingUtils';
+import {addCity, addGreenery, fakeCard, maxOutOceans, runAllActions} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
@@ -13,6 +13,7 @@ import {OceanCity} from '../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
 import {TileType} from '../../src/common/TileType';
+import {cast} from '../../src/common/utils/utils';
 
 describe('Counter', () => {
   let game: IGame;

@@ -10,7 +10,7 @@ import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
-import {cast, fakeCard, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
+import {fakeCard, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
@@ -36,6 +36,7 @@ import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Helion} from '../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {CardName} from '../../src/common/cards/CardName';
+import {cast} from '@/common/utils/utils';
 
 function asUnits(player: IPlayer): Units {
   return {

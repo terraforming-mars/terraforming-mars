@@ -4,7 +4,7 @@ import {VitalColony} from '../../../src/server/cards/pathfinders/VitalColony';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VitalColony', () => {

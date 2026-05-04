@@ -8,10 +8,11 @@ import {DeferredActionsQueue} from '../../../src/server/deferredActions/Deferred
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {HyperspaceDrivePrototype} from '../../../src/server/cards/underworld/HyperspaceDrivePrototype';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('OlympusConference', () => {
   let card: OlympusConference;

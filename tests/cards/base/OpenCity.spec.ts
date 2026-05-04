@@ -4,8 +4,9 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('OpenCity', () => {
   let card: OpenCity;

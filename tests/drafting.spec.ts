@@ -1,9 +1,9 @@
 import {cardsFromJSON} from '../src/server/createCard';
 import {CardName} from '../src/common/cards/CardName';
-import {cast, finishGeneration} from './TestingUtils';
+import {finishGeneration} from './TestingUtils';
 import {expect} from 'chai';
 import {testGame} from './TestGame';
-import {toName} from '../src/common/utils/utils';
+import {cast, toName} from '../src/common/utils/utils';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';

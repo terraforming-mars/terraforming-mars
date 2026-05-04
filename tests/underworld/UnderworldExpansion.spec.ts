@@ -5,7 +5,7 @@ import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansi
 import {Game} from '../../src/server/Game';
 import {IGame} from '../../src/server/IGame';
 import {UnderworldData} from '../../src/server/underworld/UnderworldData';
-import {cast, fakeCard, forceGenerationEnd, formatMessage, runAllActions} from '../TestingUtils';
+import {fakeCard, forceGenerationEnd, formatMessage, runAllActions} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {Cryptocurrency} from '../../src/server/cards/pathfinders/Cryptocurrency';
 import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture';
@@ -23,6 +23,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {TunnelingLoophole} from '../../src/server/cards/underworld/TunnelingLoophole';
 import {SpaceType} from '../../src/common/boards/SpaceType';
+import {cast} from '@/common/utils/utils';
 
 describe('UnderworldExpansion', () => {
   let player1: TestPlayer;

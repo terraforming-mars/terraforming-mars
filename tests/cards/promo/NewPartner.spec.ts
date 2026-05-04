@@ -6,10 +6,11 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('NewPartner', () => {
   let card: NewPartner;

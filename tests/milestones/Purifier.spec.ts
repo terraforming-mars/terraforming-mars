@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../TestGame';
 import {Purifier} from '../../src/server/milestones/Purifier';
 import {Eris} from '../../src/server/cards/community/Eris';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 

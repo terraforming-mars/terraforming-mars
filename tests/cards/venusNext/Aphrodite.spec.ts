@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Aphrodite', () => {
   it('Should play', () => {

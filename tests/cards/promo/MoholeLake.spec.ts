@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {ICard} from '../../../src/server/cards/ICard';
@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MoholeLake', () => {
   let card: MoholeLake;

@@ -10,10 +10,11 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setRulingParty, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
+import {runAllActions, setRulingParty, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '@/common/utils/utils';
 
 describe('Atmoscoop', () => {
   let card: Atmoscoop;

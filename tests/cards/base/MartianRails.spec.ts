@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {addCity, cast} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MartianRails', () => {
   let card: MartianRails;

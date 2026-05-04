@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TechnologyDemonstration} from '../../../src/server/cards/base/TechnologyDemonstration';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('TechnologyDemonstration', () => {
   it('Should play', () => {

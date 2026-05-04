@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LagrangeObservatory} from '../../../src/server/cards/base/LagrangeObservatory';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('LagrangeObservatory', () => {
   it('Should play', () => {

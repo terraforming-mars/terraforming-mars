@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IoSulphurResearch} from '../../../src/server/cards/venusNext/IoSulphurResearch';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('IoSulphurResearch', () => {
   it('Should play', () => {

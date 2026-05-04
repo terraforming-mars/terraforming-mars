@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {LobbyHalls} from '../../src/server/cards/pathfinders/LobbyHalls';
 import {Tag} from '../../src/common/cards/Tag';
 import {deserializeProjectCard, serializeProjectCard} from '../../src/server/cards/cardSerialization';
-import {cast, fakeCard} from '../TestingUtils';
+import {fakeCard} from '../TestingUtils';
 import {Asimov} from '../../src/server/cards/ceos/Asimov';
 import {SerializedCard} from '../../src/server/SerializedCard';
 import {CardName} from '../../src/common/cards/CardName';
+import {cast} from '../../src/common/utils/utils';
 
 describe('CardSerialization', () => {
   it('undefiend clone tags serialize and deserialize', () => {

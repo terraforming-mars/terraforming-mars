@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {ProjectEden} from '../../../src/server/cards/prelude2/ProjectEden';
 import {IGame} from '../../../src/server/IGame';
-import {cast, fakeCard, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {fakeCard, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertPlaceCity, assertPlaceGreenery, assertPlaceOcean} from '../../assertions';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
@@ -17,6 +17,7 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {FieldCappedCity} from '../../../src/server/cards/promo/FieldCappedCity';
 import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ProjectEden', () => {
   let projectEden: ProjectEden;

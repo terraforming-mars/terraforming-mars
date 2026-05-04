@@ -2,11 +2,12 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {addGreenery, addCity, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, addCity, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Founder', () => {
   let founder: Founder;

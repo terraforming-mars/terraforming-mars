@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
@@ -10,6 +10,7 @@ import {Resource} from '../../../src/common/Resource';
 import {StealResources} from '../../../src/server/deferredActions/StealResources';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RemoveAnyPlants} from '../../../src/server/deferredActions/RemoveAnyPlants';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BotanicalExperience', () => {
   let card: BotanicalExperience;

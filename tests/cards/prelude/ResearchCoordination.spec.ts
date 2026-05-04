@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('ResearchCoordination', () => {
   it('Should play', () => {

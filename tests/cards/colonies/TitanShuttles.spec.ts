@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {ICard} from '../../../src/server/cards/ICard';

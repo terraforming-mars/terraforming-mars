@@ -13,7 +13,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('CassiniStation', () => {
   let card: CassiniStation;

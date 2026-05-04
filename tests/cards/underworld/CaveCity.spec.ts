@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {CaveCity} from '../../../src/server/cards/underworld/CaveCity';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CaveCity', () => {
   it('canPlay', () => {

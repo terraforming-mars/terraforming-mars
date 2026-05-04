@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {SubterraneanSea} from '../../../src/server/cards/underworld/SubterraneanSea';
 import {testGame} from '../../TestGame';
-import {cast, maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '@/common/utils/utils';
 
 describe('SubterraneanSea', () => {
   it('canPlay', () => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
@@ -7,6 +7,7 @@ import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '@/common/utils/utils';
 
 describe('Extremophiles', () => {
   let card: Extremophiles;

@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('DeuteriumExport', () => {
   let card: DeuteriumExport;

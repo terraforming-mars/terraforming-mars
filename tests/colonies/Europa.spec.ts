@@ -3,10 +3,11 @@ import {Europa} from '../../src/server/colonies/Europa';
 import {PlaceOceanTile} from '../../src/server/deferredActions/PlaceOceanTile';
 import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
-import {cast, runAllActions, setRulingParty} from '../TestingUtils';
+import {runAllActions, setRulingParty} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {cast} from '@/common/utils/utils';
 
 describe('Europa', () => {
   let europa: Europa;

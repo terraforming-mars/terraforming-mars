@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {CollusionStandardProject} from '../../../src/server/cards/underworld/CollusionStandardProject';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -12,6 +12,7 @@ import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {MultiSet} from 'mnemonist';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CollusionStandardProject', () => {
   let game: IGame;

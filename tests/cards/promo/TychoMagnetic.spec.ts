@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TychoMagnetics} from '../../../src/server/cards/promo/TychoMagnetics';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('TychoMagnetics', () => {

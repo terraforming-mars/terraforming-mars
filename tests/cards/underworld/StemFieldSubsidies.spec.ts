@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {StemFieldSubsidies} from '../../../src/server/cards/underworld/StemFieldSubsidies';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('StemFieldSubsidies', () => {
   let card: StemFieldSubsidies;

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SoilEnrichment} from '../../../src/server/cards/promo/SoilEnrichment';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';

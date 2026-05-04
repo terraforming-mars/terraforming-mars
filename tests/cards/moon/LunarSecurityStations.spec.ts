@@ -3,7 +3,7 @@ import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';

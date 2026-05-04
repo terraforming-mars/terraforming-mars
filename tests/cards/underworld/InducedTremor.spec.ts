@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {InducedTremor} from '../../../src/server/cards/underworld/InducedTremor';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('InducedTremor', () => {
   it('cannot play', () => {

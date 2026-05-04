@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Mohole} from '../../../src/server/cards/prelude/Mohole';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Mohole', () => {
   it('Should play', () => {

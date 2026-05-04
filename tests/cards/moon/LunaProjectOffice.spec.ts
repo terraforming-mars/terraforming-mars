@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, finishGeneration} from '../../TestingUtils';
+import {finishGeneration} from '../../TestingUtils';
 import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffice';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {

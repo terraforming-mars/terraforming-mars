@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {PrivateMilitaryContractor} from '../../../src/server/cards/underworld/PrivateMilitaryContractor';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PrivateMilitaryContractor', () => {
   // Effect tests are in UnderworldExpansion.spec.ts

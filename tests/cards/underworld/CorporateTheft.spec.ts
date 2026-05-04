@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {CorporateTheft} from '../../../src/server/cards/underworld/CorporateTheft';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {cast} from '../../../src/common/utils/utils';
 
 // function toCard(e: readonly [CardName, number] | CardName) {
 //   const [cardName, count] = typeof(e) === 'string' ? [e, 0] : e;

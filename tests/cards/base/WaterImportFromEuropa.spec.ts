@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportFromEuropa';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('WaterImportFromEuropa', () => {
   let card: WaterImportFromEuropa;

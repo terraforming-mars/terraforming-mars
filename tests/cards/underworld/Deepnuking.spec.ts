@@ -3,10 +3,11 @@ import {expect} from 'chai';
 import {Deepnuking} from '../../../src/server/cards/underworld/Deepnuking';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Deepnuking', () => {
   let game: IGame;

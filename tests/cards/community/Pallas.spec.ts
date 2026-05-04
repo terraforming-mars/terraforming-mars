@@ -3,12 +3,13 @@ import {Pallas} from '../../../src/server/cards/community/Pallas';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {MultiSet} from 'mnemonist';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Pallas', () => {
   let pallas: Pallas;

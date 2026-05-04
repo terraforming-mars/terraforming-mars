@@ -5,9 +5,10 @@ import {Titan} from '../../src/server/colonies/Titan';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
 import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {SelfReplicatingRobots} from '../../src/server/cards/promo/SelfReplicatingRobots';
+import {cast} from '@/common/utils/utils';
 
 describe('Titan', () => {
   let titan: Titan;

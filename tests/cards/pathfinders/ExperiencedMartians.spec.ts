@@ -9,8 +9,9 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
-import {cast, fakeCard} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ExperiencedMartians', () => {
   let card: ExperiencedMartians;

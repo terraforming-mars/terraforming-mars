@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('ExtractorBalloons', () => {
   let card: ExtractorBalloons;

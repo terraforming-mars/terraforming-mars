@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Prospecting} from '../../../src/server/cards/underworld/Prospecting';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Prospecting', () => {
   let card: Prospecting;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Sponsors', () => {
   it('Should play', () => {

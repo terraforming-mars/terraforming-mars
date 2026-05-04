@@ -4,9 +4,10 @@ import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean, cast} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DesperateMeasures', () => {
   let card: DesperateMeasures;

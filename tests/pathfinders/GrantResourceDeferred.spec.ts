@@ -8,7 +8,7 @@ import {testGame} from '../TestGame';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('GrantResourceDeferred', () => {
   let player: TestPlayer;

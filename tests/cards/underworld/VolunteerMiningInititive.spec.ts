@@ -1,7 +1,8 @@
 import {VolunteerMiningInitiative} from '../../../src/server/cards/underworld/VolunteerMiningInitiative';
 import {testGame} from '../../TestGame';
-import {addCity, cast, runAllActions} from '../../TestingUtils';
+import {addCity, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('VolunteerMiningInitiative', () => {
   const runs = [

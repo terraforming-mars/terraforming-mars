@@ -6,11 +6,12 @@ import {StratosphericBirds} from '../../../src/server/cards/venusNext/Stratosphe
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
-import {cast, churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
 import {AppliedScience} from '../../../src/server/cards/prelude2/AppliedScience';
+import {cast} from '@/common/utils/utils';
 
 describe('MaxwellBase', () => {
   let card: MaxwellBase;

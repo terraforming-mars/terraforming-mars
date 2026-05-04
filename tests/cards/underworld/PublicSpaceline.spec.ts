@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PublicSpaceline} from '../../../src/server/cards/underworld/PublicSpaceline';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('PublicSpaceline', () => {

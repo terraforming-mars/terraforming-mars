@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -8,6 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '@/common/utils/utils';
 
 describe('AerialMappers', () => {
   let card: AerialMappers;

@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {VanAllen} from '../../../src/server/cards/ceos/VanAllen';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Van Allen', () => {
   let card: VanAllen;

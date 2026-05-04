@@ -3,9 +3,10 @@ import {Mangrove} from '../../../src/server/cards/base/Mangrove';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceTile} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Mangrove', () => {
   let card: Mangrove;

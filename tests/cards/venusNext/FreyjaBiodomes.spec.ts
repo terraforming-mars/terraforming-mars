@@ -7,8 +7,9 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, setVenusScaleLevel} from '../../TestingUtils';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('FreyjaBiodomes', () => {
   let card: FreyjaBiodomes;

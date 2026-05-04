@@ -3,7 +3,7 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
+import {doWait, runAllActions, setRulingParty} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
@@ -15,6 +15,7 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TheNewSpaceRace', () => {
   let card: TheNewSpaceRace;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Cyanobacteria} from '../../../src/server/cards/pathfinders/Cyanobacteria';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testGame} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testGame} from '../../TestingUtils';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -10,6 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {IGame} from '../../../src/server/IGame';
 import {OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS, TEMPERATURE_FOR_OCEAN_BONUS} from '../../../src/common/constants';
 import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Cyanobacteria', () => {
   let game: IGame;

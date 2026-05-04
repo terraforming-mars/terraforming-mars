@@ -7,12 +7,13 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {Units} from '../../../src/common/Units';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {assertPlaceCity} from '../../assertions';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '@/common/utils/utils';
 
 describe('Gyropolis', () => {
   let card: Gyropolis;

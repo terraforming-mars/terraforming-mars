@@ -12,7 +12,7 @@ import {Callisto} from '../../../src/server/colonies/Callisto';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('MarketManipulation', () => {
   let card: MarketManipulation;

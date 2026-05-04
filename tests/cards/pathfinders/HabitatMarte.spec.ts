@@ -3,7 +3,7 @@ import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
@@ -13,6 +13,7 @@ import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
 import {BreedingFarms} from '../../../src/server/cards/pathfinders/BreedingFarms';
 import {PrideoftheEarthArkship} from '../../../src/server/cards/moon/PrideoftheEarthArkship';
 import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HabitatMarte', () => {
   let habitatMarte: HabitatMarte;

@@ -3,7 +3,8 @@ import {HiTechLab} from '../../../src/server/cards/promo/HiTechLab';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HiTechLab', () => {
   let card: HiTechLab;

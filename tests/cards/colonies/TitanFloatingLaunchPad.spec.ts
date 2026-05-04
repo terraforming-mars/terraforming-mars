@@ -11,8 +11,9 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Message} from '../../../src/common/logs/Message';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TitanFloatingLaunchPad', () => {
   let card: TitanFloatingLaunchPad;

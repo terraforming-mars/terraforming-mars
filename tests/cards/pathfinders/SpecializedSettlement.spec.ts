@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -13,6 +13,7 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {OneOrArray} from '../../../src/common/utils/types';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SpecializedSettlement', () => {
   let card: SpecializedSettlement;

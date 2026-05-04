@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AirScrappingExpedition} from '../../../src/server/cards/venusNext/AirScrappingExpedition';
 import {JetStreamMicroscrappers} from '../../../src/server/cards/venusNext/JetStreamMicroscrappers';

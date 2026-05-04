@@ -1,8 +1,9 @@
 import {expect} from 'chai';
 import {CityParks} from '../../../src/server/cards/promo/CityParks';
-import {addCity, cast} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CityParks', () => {
   let card: CityParks;

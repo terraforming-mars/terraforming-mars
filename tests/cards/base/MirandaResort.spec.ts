@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('MirandaResort', () => {
   it('Should play', () => {

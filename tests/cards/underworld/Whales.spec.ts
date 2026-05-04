@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
 import {testGame} from '../../TestGame';
-import {addOcean, cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {addOcean, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AquiferStandardProject} from '../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {IGame} from '../../../src/server/IGame';
@@ -9,6 +9,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {Flooding} from '../../../src/server/cards/base/Flooding';
 import {IcyImpactors} from '../../../src/server/cards/promo/IcyImpactors';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '@/common/utils/utils';
 
 describe('Whales', () => {
   let card: Whales;

@@ -3,10 +3,11 @@ import {expect} from 'chai';
 import {BehemothExcavator} from '../../../src/server/cards/underworld/BehemothExcavator';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BehemothExcavator', () => {
   let game: IGame;

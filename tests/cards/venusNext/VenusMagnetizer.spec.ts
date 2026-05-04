@@ -3,8 +3,9 @@ import {VenusMagnetizer} from '../../../src/server/cards/venusNext/VenusMagnetiz
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, setVenusScaleLevel} from '../../TestingUtils';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('VenusMagnetizer', () => {
   let card: VenusMagnetizer;

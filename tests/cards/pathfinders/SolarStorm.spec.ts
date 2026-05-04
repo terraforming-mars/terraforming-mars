@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
@@ -11,6 +11,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SolarStorm', () => {
   let card: SolarStorm;

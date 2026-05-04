@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {BoardOfDirectors} from '../../../src/server/cards/prelude2/BoardOfDirectors';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BoardOfDirectors', () => {
   it('play', () => {

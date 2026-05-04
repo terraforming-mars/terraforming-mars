@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
-import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
+import {finishGeneration, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {Insulation} from '../../../src/server/cards/base/Insulation';
 import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustries';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MarsMaths', () => {
   let card: MarsMaths;

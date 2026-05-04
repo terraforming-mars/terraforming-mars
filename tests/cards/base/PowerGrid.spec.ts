@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerGrid} from '../../../src/server/cards/base/PowerGrid';
 import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('PowerGrid', () => {
   it('Should play', () => {

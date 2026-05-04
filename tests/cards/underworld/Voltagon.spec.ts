@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {Voltagon} from '../../../src/server/cards/underworld/Voltagon';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {Units} from '../../../src/common/Units';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '@/common/utils/utils';
 
 describe('Voltagon', () => {
   let card: Voltagon;

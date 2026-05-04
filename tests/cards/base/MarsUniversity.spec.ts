@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Research} from '../../../src/server/cards/base/Research';
@@ -13,6 +13,7 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MarsUniversity', () => {
   let card: MarsUniversity;

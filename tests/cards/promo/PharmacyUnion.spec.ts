@@ -15,7 +15,7 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {cast, runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
+import {runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Splice} from '../../../src/server/cards/promo/Splice';
@@ -33,6 +33,7 @@ import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/Bui
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {deserializeCorporationCard, serializeCorporationCard} from '../../../src/server/cards/cardSerialization';
 import {AntiGravityTechnology} from '../../../src/server/cards/base/AntiGravityTechnology';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PharmacyUnion', () => {
   let pharmacyUnion: PharmacyUnion;

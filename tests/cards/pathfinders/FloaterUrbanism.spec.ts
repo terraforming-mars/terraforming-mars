@@ -6,7 +6,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('FloaterUrbanism', () => {

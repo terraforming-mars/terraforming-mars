@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {SpaceStation} from '../../../src/server/cards/base/SpaceStation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('SpaceStation', () => {
   it('Should play', () => {

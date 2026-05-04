@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TradeEnvoys} from '../../../src/server/cards/colonies/TradeEnvoys';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('TradeEnvoys', () => {
   it('Should play', () => {

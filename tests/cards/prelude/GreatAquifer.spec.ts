@@ -1,7 +1,8 @@
 import {GreatAquifer} from '../../../src/server/cards/prelude/GreatAquifer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GreatAquifer', () => {
   it('Should play', () => {

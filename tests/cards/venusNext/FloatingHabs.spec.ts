@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churn, cast, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -7,6 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('FloatingHabs', () => {
   let card: FloatingHabs;

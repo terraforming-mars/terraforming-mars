@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {TitanManufacturingColony} from '../../../src/server/cards/underworld/TitanManufacturingColony';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '@/common/utils/utils';
 
 describe('TitanManufacturingColony', () => {
   it('onCardPlayed', () => {

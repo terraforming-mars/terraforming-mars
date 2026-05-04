@@ -3,12 +3,13 @@ import {expect} from 'chai';
 import {ExcavatorLeasing} from '../../../src/server/cards/underworld/ExcavatorLeasing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ExcavatorLeasing', () => {
   let game: IGame;

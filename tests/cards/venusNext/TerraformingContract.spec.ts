@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingContract} from '../../../src/server/cards/venusNext/TerraformingContract';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('TerraformingContract', () => {
   it('Should play', () => {

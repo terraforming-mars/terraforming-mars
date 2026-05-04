@@ -3,13 +3,14 @@ import {Factorum} from '../../../src/server/cards/promo/Factorum';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Factorum', () => {
   let card: Factorum;

@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast, churn, runAllActions, setRulingParty} from '../../TestingUtils';
+import {churn, runAllActions, setRulingParty} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('RegolithEaters', () => {
   it('Should act', () => {

@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {addCity, cast} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {AerosportTournament} from '../../../src/server/cards/venusNext/AerosportTournament';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AerosportTournament', () => {
   let player: TestPlayer;

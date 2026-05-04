@@ -4,9 +4,10 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {assertNoTradeAction, assertTradeAction} from '../../colonies/coloniesAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HecateSpeditions', () => {
   let card: HecateSpeditions;

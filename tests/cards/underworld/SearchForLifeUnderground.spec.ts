@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {SearchforLifeUnderground} from '../../../src/server/cards/underworld/SearchforLifeUnderground';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SearchForLifeUnderground', () => {
   let card: SearchforLifeUnderground;

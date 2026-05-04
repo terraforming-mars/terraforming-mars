@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('ImportOfAdvancedGHG', () => {
   it('Should play', () => {

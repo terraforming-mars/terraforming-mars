@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {CentralReservoir} from '../../../src/server/cards/underworld/CentralReservoir';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {assertIsClaimAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CentralReservoir', () => {
   it('play', () => {

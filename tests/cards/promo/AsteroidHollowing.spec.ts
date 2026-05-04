@@ -1,8 +1,9 @@
 import {expect} from 'chai';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AsteroidHollowing', () => {
   let card: AsteroidHollowing;

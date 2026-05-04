@@ -4,12 +4,13 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectClaimedUndergroundToken} from '../../../src/server/inputs/SelectClaimedUndergroundToken';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AeronGenomics', () => {
   let card: AeronGenomics;

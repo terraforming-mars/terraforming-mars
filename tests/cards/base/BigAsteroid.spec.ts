@@ -3,8 +3,9 @@ import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BigAsteroid', () => {
   let card: BigAsteroid;

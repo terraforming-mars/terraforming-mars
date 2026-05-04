@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {SpaceWargames} from '../../../src/server/cards/underworld/SpaceWargames';
 import {testGame} from '../../TestGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SpaceWargames', () => {
   it('play', () => {

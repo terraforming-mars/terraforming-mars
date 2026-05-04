@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, churn, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
@@ -19,6 +19,7 @@ import {Steelaris} from '../../../src/server/cards/pathfinders/Steelaris';
 import {CuriosityII} from '../../../src/server/cards/community/CuriosityII';
 import {ExpeditionVehicles} from '../../../src/server/cards/underworld/ExpeditionVehicles';
 import {intersection} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;

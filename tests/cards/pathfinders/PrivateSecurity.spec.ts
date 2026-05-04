@@ -4,7 +4,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PrivateSecurity', () => {
   let card: PrivateSecurity;

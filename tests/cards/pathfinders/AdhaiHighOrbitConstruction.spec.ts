@@ -8,9 +8,10 @@ import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
-import {cast, formatMessage} from '../../TestingUtils';
+import {formatMessage} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AdhaiHighOrbitConstructions', () => {
   let player: TestPlayer;

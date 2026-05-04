@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {SpacePort} from '../../../src/server/cards/colonies/SpacePort';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SpacePort', () => {
   let card: SpacePort;

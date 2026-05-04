@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PatentManipulation} from '../../../src/server/cards/underworld/PatentManipulation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {cardsFromJSON, newProjectCard} from '../../../src/server/createCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';

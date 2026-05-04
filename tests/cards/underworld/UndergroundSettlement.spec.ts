@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {UndergroundSettlement} from '../../../src/server/cards/underworld/UndergroundSettlement';
 import {testGame} from '../../TestGame';
-import {addCity, cast, churn, runAllActions} from '../../TestingUtils';
+import {addCity, churn, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {assertIsClaimAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('UndergroundSettlement', () => {
   it('play', () => {

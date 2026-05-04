@@ -3,8 +3,9 @@ import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {cast, churn, maxOutOceans} from '../../TestingUtils';
+import {churn, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '@/common/utils/utils';
 
 describe('GreatDamPromo', () => {
   let card: GreatDamPromo;

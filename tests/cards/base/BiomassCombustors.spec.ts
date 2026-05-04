@@ -3,8 +3,9 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BiomassCombustors', () => {
   let card: BiomassCombustors;

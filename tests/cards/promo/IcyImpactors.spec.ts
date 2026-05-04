@@ -4,10 +4,11 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('IcyImpactors', () => {
   let card: IcyImpactors;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('IshtarMining', () => {
   it('Should play', () => {

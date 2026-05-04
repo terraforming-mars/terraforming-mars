@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {ICard} from '../../../src/server/cards/ICard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
@@ -11,6 +11,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('HydrogenToVenus', () => {
   let card: HydrogenToVenus;

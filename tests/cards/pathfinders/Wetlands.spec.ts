@@ -3,7 +3,7 @@ import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean, fakeCard, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -11,6 +11,7 @@ import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardName} from '../../../src/common/cards/CardName';
 import {testGame} from '../../TestGame';
 import {toID} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Wetlands', () => {
   let card: Wetlands;

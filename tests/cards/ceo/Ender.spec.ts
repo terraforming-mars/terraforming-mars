@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Ender} from '../../../src/server/cards/ceos/Ender';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Research} from '../../../src/server/cards/base/Research';
 import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Ender', () => {
   let card: Ender;

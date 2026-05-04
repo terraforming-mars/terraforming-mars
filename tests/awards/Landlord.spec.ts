@@ -7,8 +7,9 @@ import {EmptyBoard} from '../testing/EmptyBoard';
 import {AresHazards} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
-import {addCity, addGreenery, cast, testGame} from '../TestingUtils';
+import {addCity, addGreenery, testGame} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {cast} from '../../src/common/utils/utils';
 
 describe('Landlord', () => {
   const award = new Landlord();

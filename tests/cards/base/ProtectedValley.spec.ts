@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {assertPlaceTile} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ProtectedValley', () => {
   it('Should play', () => {

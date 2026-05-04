@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {HousePrinting} from '../../../src/server/cards/prelude/HousePrinting';
@@ -10,6 +10,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {SerializedCard} from '../../../src/server/SerializedCard';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SelfReplicatingRobots', () => {
   let card: SelfReplicatingRobots;

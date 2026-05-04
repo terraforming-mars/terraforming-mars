@@ -3,11 +3,12 @@ import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest'
 import {ICeoCard} from '../../../src/server/cards/ceos/ICeoCard';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, fakeCard, cast, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Lowell} from '../../../src/server/cards/ceos/Lowell';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Lowell', () => {
   let card: Lowell;

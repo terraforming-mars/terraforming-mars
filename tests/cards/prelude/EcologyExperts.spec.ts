@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Livestock} from '../../../src/server/cards/base/Livestock';
@@ -9,6 +9,7 @@ import {GuerillaEcologists} from '../../../src/server/cards/underworld/GuerillaE
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('EcologyExperts', () => {
   let card: EcologyExperts;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ExperimentalForest} from '../../../src/server/cards/prelude/ExperimentalForest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('ExperimentalForest', () => {

@@ -7,9 +7,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;

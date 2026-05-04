@@ -3,13 +3,14 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Resource} from '../../../src/common/Resource';
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {AresTestHelper} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Caesar} from '../../../src/server/cards/ceos/Caesar';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Caesar', () => {
   let card: Caesar;

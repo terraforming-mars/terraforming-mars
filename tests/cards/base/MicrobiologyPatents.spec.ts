@@ -4,7 +4,7 @@ import {Virus} from '../../../src/server/cards/base/Virus';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('MicrobiologyPatents', () => {
   it('Should play', () => {

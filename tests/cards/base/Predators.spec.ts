@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, setOxygenLevel} from '../../TestingUtils';
+import {setOxygenLevel} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -11,6 +11,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Predators', () => {
   let card: Predators;

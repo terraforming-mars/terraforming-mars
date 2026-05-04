@@ -3,7 +3,7 @@ import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('SmallAsteroid', () => {

@@ -5,19 +5,22 @@ import {CardResource} from '../CardResource';
 import {Expansion, GameModule} from '../cards/GameModule';
 import {OneOrArray} from '../utils/types';
 
-type Benefit<S, T> = {
+// Describes a colony benefit: the effect granted when building, trading, or receiving a colony bonus.
+// quantity is OneOrArray<number>: a scalar for colony bonuses, an array indexed by track position for build/trade.
+// resource is OneOrArray<Resource>: a scalar for most benefits, an array indexed by track position for trade benefits.
+export type Benefit = {
   description: string,
   type: ColonyBenefit;
-  quantity: S
-  resource?: T;
+  quantity: OneOrArray<number>;
+  resource?: OneOrArray<Resource>;
 }
 
 export type ColonyMetadata = Readonly<{
   module?: GameModule; // TODO(kberg): attach gameModule to the server colonies themselves.
   name: ColonyName;
-  build: Benefit<Array<number>, Resource>, // Default is [1,1,1]
-  trade: Benefit<Array<number>, OneOrArray<Resource>>, // Default is [1,1,1,1,1,1,1]
-  colony: Benefit<number, Resource>, // Default is 1
+  build: Benefit, // Default quantity is [1,1,1]
+  trade: Benefit, // Default quantity is [1,1,1,1,1,1,1]
+  colony: Benefit, // Default quantity is 1
   cardResource?: CardResource,
   expansion: Expansion | undefined,
 
@@ -35,21 +38,19 @@ export type ColonyMetadata = Readonly<{
   shouldIncreaseTrack: 'yes' | 'no' | 'ask'
 }>;
 
-type InputBenefit<T extends Benefit<any, any>> = {
+type InputBenefit = {
   description: string,
   type: ColonyBenefit,
-  quantity?: T['quantity'],
-  resource?: T['resource'],
+  quantity?: OneOrArray<number>,
+  resource?: OneOrArray<Resource>,
 }
-// {[P in Exclude<keyof T, 'quantity'>]: T[P]} &
-// {quantity?: T['quantity']};
 
 export type InputColonyMetadata = {
   module?: ColonyMetadata['module'],
   name: ColonyMetadata['name'];
-  build: InputBenefit<ColonyMetadata['build']>,
-  trade: InputBenefit<ColonyMetadata['trade']>,
-  colony: InputBenefit<ColonyMetadata['colony']>,
+  build: InputBenefit,
+  trade: InputBenefit,
+  colony: InputBenefit,
   cardResource?: CardResource,
   expansion?: Expansion,
 } & Partial<{
@@ -59,7 +60,7 @@ export type InputColonyMetadata = {
 const DEFAULT_BUILD_QUANTITY = [1, 1, 1];
 const DEFAULT_TRADE_QUANTITY = [1, 1, 1, 1, 1, 1, 1];
 
-export function benefitMetadata<S, T>(partial: InputBenefit<Benefit<S, T>>, defaultQuantity: S): Benefit<S, T> {
+export function benefitMetadata(partial: InputBenefit, defaultQuantity: OneOrArray<number>): Benefit {
   return {
     ...partial,
     quantity: partial.quantity ?? defaultQuantity,

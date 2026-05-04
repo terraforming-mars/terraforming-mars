@@ -13,8 +13,12 @@ import {SpendableResource, SPENDABLE_RESOURCES} from './Spendable';
 export type Payment = {[k in SpendableResource]: number};
 
 export function isPayment(obj: unknown): obj is Payment {
-  if (typeof obj !== 'object') return false;
-  if (!obj) return false;
+  if (typeof obj !== 'object') {
+    return false;
+  }
+  if (!obj) {
+    return false;
+  }
   const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
   return SPENDABLE_RESOURCES.every((key) =>
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));

@@ -48,7 +48,9 @@ export class BotanicalExperience extends Card implements IProjectCard {
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
-    if (playedCard.name !== this.name) return;
+    if (playedCard.name !== this.name) {
+      return;
+    }
     if (this.resourceCount >= 3) {
       const delta = Math.floor(this.resourceCount / 3);
       const deducted = delta * 3;

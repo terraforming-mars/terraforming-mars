@@ -43,8 +43,12 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     const cardHasResources = this.resourceCount > 0;
     const canPayForAsteroid = player.canAfford({cost: 6, titanium: true});
 
-    if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
-    if (canPayForAsteroid) return true;
+    if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) {
+      return true;
+    }
+    if (canPayForAsteroid) {
+      return true;
+    }
 
     return player.canAfford({cost: 0, tr: {temperature: 1}}) && cardHasResources;
   }

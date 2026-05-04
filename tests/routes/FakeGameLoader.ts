@@ -17,11 +17,15 @@ export class FakeGameLoader implements IGameLoader {
       });
   }
   public getGame(id: GameId | PlayerId | SpectatorId): Promise<IGame | undefined> {
-    if (isGameId(id)) return Promise.resolve(this.games.get(id));
+    if (isGameId(id)) {
+      return Promise.resolve(this.games.get(id));
+    }
 
     for (const game of Array.from(this.games.values())) {
       const matches = game.playersInGenerationOrder.some((player) => player.id === id) || game.spectatorId === id;
-      if (matches) return Promise.resolve(game);
+      if (matches) {
+        return Promise.resolve(game);
+      }
     }
     return Promise.resolve(undefined);
   }

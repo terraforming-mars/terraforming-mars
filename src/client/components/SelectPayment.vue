@@ -109,7 +109,9 @@ export default defineComponent({
     },
     showReserveWarning(unit: SpendableResource): boolean {
       const reserveUnits = this.playerinput.reserveUnits;
-      if (reserveUnits === undefined) return false;
+      if (reserveUnits === undefined) {
+        return false;
+      }
       switch (unit) {
       case 'megacredits':
       case 'steel':

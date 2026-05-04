@@ -82,9 +82,13 @@ export const PaymentWidgetMixin = {
       }
 
       const adjustedDelta = Math.min(1, currentValue);
-      if (adjustedDelta === 0) return;
+      if (adjustedDelta === 0) {
+        return;
+      }
       this.asModel().payment[unit] -= adjustedDelta;
-      if (unit !== 'megacredits') this.setRemainingMCValue();
+      if (unit !== 'megacredits') {
+        this.setRemainingMCValue();
+      }
     },
     /**
      * Increase `unit` by one.

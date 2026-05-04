@@ -321,23 +321,33 @@ export default defineComponent({
       return this.getAllStandardProjectCards().filter((c) => this.showCard(c));
     },
     visibleGlobalEvents(): Array<GlobalEventName> {
-      if (!this.types.globalEvents) return [];
+      if (!this.types.globalEvents) {
+        return [];
+      }
       return this.getAllGlobalEvents().filter((e) => this.showGlobalEvent(e));
     },
     visibleColonyNames(): Array<ColonyName> {
-      if (!this.types.colonyTiles) return [];
+      if (!this.types.colonyTiles) {
+        return [];
+      }
       return this.getAllColonyNames().filter((c) => this.showColony(c));
     },
     visibleMilestoneNames(): Array<MilestoneName> {
-      if (!this.types.milestones) return [];
+      if (!this.types.milestones) {
+        return [];
+      }
       return this.allMilestoneNames.filter((m) => this.showMilestone(m));
     },
     visibleAwardNames(): Array<AwardName> {
-      if (!this.types.awards) return [];
+      if (!this.types.awards) {
+        return [];
+      }
       return this.allAwardNames.filter((a) => this.showAward(a));
     },
     visibleAgendaIds(): Array<PolicyId | BonusId> {
-      if (!this.types.agendas) return [];
+      if (!this.types.agendas) {
+        return [];
+      }
       return this.allAgendaIds.filter((id) => this.include(id, 'agenda'));
     },
     agendaIdDescription(): typeof agendaIdDescription {
@@ -440,26 +450,36 @@ export default defineComponent({
 
       let matches = false;
       for (const tag of card.tags) {
-        if (this.tags[tag]) matches = true;
+        if (this.tags[tag]) {
+          matches = true;
+        }
       }
       return matches;
     },
     showCard(cardName: CardName): boolean {
-      if (!this.include(cardName, 'card')) return false;
+      if (!this.include(cardName, 'card')) {
+        return false;
+      }
 
       const card = getCard(cardName);
       if (card === undefined) {
         return false;
       }
 
-      if (!this.filterByTags(card)) return false;
-      if (!this.types[card.type]) return false;
+      if (!this.filterByTags(card)) {
+        return false;
+      }
+      if (!this.types[card.type]) {
+        return false;
+      }
       if (card.resourceType === undefined) {
         if (this.resources.none === false) {
           return false;
         }
       } else {
-        if (!this.resources[card.resourceType]) return false;
+        if (!this.resources[card.resourceType]) {
+          return false;
+        }
       }
       switch (this.vps) {
       case 1:
@@ -476,12 +496,16 @@ export default defineComponent({
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
-      if (!this.include(name, 'globalEvent')) return false;
+      if (!this.include(name, 'globalEvent')) {
+        return false;
+      }
       const globalEvent = getGlobalEvent(name);
       return globalEvent !== undefined && this.expansions[globalEvent.module] === true;
     },
     showColony(name: ColonyName): boolean {
-      if (!this.include(name, 'colony')) return false;
+      if (!this.include(name, 'colony')) {
+        return false;
+      }
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },

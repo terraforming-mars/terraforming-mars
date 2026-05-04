@@ -30,7 +30,9 @@ export class ArtificialLake extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions) {
     // This is not covered in executor.
-    if (!player.game.canAddOcean()) return true; // Card is playable, it just has no effect.
+    if (!player.game.canAddOcean()) {
+      return true;
+    } // Card is playable, it just has no effect.
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
   }
 }

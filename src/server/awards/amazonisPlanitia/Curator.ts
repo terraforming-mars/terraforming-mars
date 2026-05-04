@@ -11,9 +11,13 @@ export class Curator implements IAward {
     for (const tagString in Tag) {
       if (Object.prototype.hasOwnProperty.call(Tag, tagString)) {
         const tag: Tag = (<any>Tag)[tagString];
-        if (tag === Tag.EVENT) continue;
+        if (tag === Tag.EVENT) {
+          continue;
+        }
         const count = player.tags.count(tag, 'award');
-        if (count > max) max = count;
+        if (count > max) {
+          max = count;
+        }
       }
     }
 

@@ -86,9 +86,13 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
         player.game.addCity(player, space);
 
-        if (coveringExistingTile) return;
+        if (coveringExistingTile) {
+          return;
+        }
         const bonusResources = this.bonusResources(space);
-        if (bonusResources.length === 0) return;
+        if (bonusResources.length === 0) {
+          return;
+        }
 
         player.game.defer(new SelectResourceTypeDeferred(
           player, bonusResources,
@@ -115,7 +119,9 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   public produceForTile(player: IPlayer, bonusResources: Array<Resource>) {
-    if (bonusResources.length === 0) return;
+    if (bonusResources.length === 0) {
+      return;
+    }
 
     player.game.defer(new SelectResourceTypeDeferred(
       player, bonusResources,

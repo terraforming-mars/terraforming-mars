@@ -67,7 +67,9 @@ function allItems(): Array<T> {
 }
 
 function getItemsByGroup(key: string): Array<T> {
-  if (key === 'All') return allItems();
+  if (key === 'All') {
+    return allItems();
+  }
   return (props.itemsByGroup[key] ?? []).slice();
 }
 
@@ -113,10 +115,16 @@ function include(name: string): boolean {
 }
 
 function icon(module: string | undefined): string | undefined {
-  if (module === undefined) return undefined;
+  if (module === undefined) {
+    return undefined;
+  }
   let suffix = module;
-  if (module === 'colonies') suffix = 'colony';
-  if (module === 'moon') suffix = 'themoon';
+  if (module === 'colonies') {
+    suffix = 'colony';
+  }
+  if (module === 'moon') {
+    suffix = 'themoon';
+  }
   return `create-game-expansion-icon expansion-icon-${suffix}`;
 }
 

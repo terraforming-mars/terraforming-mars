@@ -9,7 +9,9 @@ function unitContribution(
   unit: SpendableResource,
 ): {units: number, mcValue: number} {
   const entry = ledger[unit];
-  if (!entry || entry.available <= 0) return {units: 0, mcValue: 0};
+  if (!entry || entry.available <= 0) {
+    return {units: 0, mcValue: 0};
+  }
 
   const {available, value: rate} = entry;
   const mcAvailable = ledger['megacredits'].available;
@@ -43,8 +45,8 @@ export function computeDefaultPayment(
   order: ReadonlyArray<SpendableResource>,
   ledger: Ledger,
   reserveMegacredits: boolean = false,
-): Partial<Payment> {
-  const result: Partial<Payment> = {};
+): Payment {
+  const result: Payment = {...Payment.EMPTY};
   const mcAvailable = ledger['megacredits'].available;
 
   let amountCovered = reserveMegacredits ? mcAvailable : 0;
@@ -53,7 +55,9 @@ export function computeDefaultPayment(
   // reserved MC ceiling, which would cause under-allocation when reserveMegacredits=true.
   let resourcesAlreadyCovered = 0;
   for (const unit of order) {
-    if (unit === 'megacredits') continue;
+    if (unit === 'megacredits') {
+      continue;
+    }
     const {units, mcValue} = unitContribution(cost, ledger, resourcesAlreadyCovered, unit);
     result[unit] = units;
     amountCovered += mcValue;
@@ -64,7 +68,9 @@ export function computeDefaultPayment(
   // combine), reduce units in reverse order until overspend is gone.
   if (amountCovered > cost) {
     for (const unit of [...order].reverse()) {
-      if (unit === 'megacredits') continue;
+      if (unit === 'megacredits') {
+        continue;
+      }
       const rate = ledger[unit].value;
       while ((result[unit] ?? 0) > 0 && amountCovered - rate >= cost) {
         result[unit] = (result[unit] as number) - 1;

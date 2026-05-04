@@ -112,7 +112,9 @@ export default defineComponent({
     // Vue runs watchers before re-rendering the component that owns them, so
     // available units are updated before PaymentForm remounts via :key and reads them.
     cardName(newVal: string | undefined) {
-      if (newVal === undefined) return;
+      if (newVal === undefined) {
+        return;
+      }
       // TODO(kberg): this stuff is set in data(). Perhaps share the code?
       this.card = this.getCard();
       this.cost = this.card.calculatedCost ?? 0;
@@ -264,7 +266,9 @@ export default defineComponent({
       return titaniumValue - 1;
     },
     saveData(payment?: Payment) {
-      if (this.card === undefined) return;
+      if (this.card === undefined) {
+        return;
+      }
       const form = this.$refs.paymentForm as {getPayment: () => Payment} | undefined;
       const resolved = payment ?? form?.getPayment() ?? {...Payment.EMPTY};
       this.onsave({type: 'projectCard', card: this.card.name, payment: resolved});

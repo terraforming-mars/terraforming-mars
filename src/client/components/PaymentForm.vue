@@ -53,6 +53,11 @@ const DESCRIPTIONS: Record<SpendableResource, string> = {
   plants: 'Plants',
 };
 
+type DataModel = {
+  localPayment: Payment;
+  warning: string | undefined;
+};
+
 export default defineComponent({
   name: 'PaymentForm',
   components: {
@@ -60,10 +65,6 @@ export default defineComponent({
     PaymentUnitComponent,
   },
   props: {
-    initialPayment: {
-      type: Object as () => Payment,
-      default: undefined,
-    },
     cost: {
       type: Number,
       required: true,
@@ -86,16 +87,11 @@ export default defineComponent({
     },
   },
   emits: ['save'],
-  data() {
+  data(): DataModel {
     return {
-      localPayment: {...(this.initialPayment ?? Payment.EMPTY)} as Payment,
-      warning: undefined as string | undefined,
+      localPayment: computeDefaultPayment(this.cost, this.order, this.ledger),
+      warning: undefined,
     };
-  },
-  created() {
-    if (this.initialPayment === undefined) {
-      Object.assign(this.localPayment, computeDefaultPayment(this.cost, this.order, this.ledger));
-    }
   },
   computed: {
     descriptions(): Record<SpendableResource, string> {
@@ -114,16 +110,24 @@ export default defineComponent({
       const currentValue = payment[unit] ?? 0;
       const maxValue = unit === 'megacredits' ? this.getMegaCreditsMax() : this.ledger[unit].available;
       const delta = Math.min(1, maxValue - currentValue);
-      if (delta <= 0) return;
+      if (delta <= 0) {
+        return;
+      }
       payment[unit] += delta;
-      if (unit !== 'megacredits') this.setRemainingMCValue();
+      if (unit !== 'megacredits') {
+        this.setRemainingMCValue();
+      }
     },
     reduceValue(unit: SpendableResource): void {
       const payment = this.localPayment;
       const adjustedDelta = Math.min(1, payment[unit] ?? 0);
-      if (adjustedDelta === 0) return;
+      if (adjustedDelta === 0) {
+        return;
+      }
       payment[unit] -= adjustedDelta;
-      if (unit !== 'megacredits') this.setRemainingMCValue();
+      if (unit !== 'megacredits') {
+        this.setRemainingMCValue();
+      }
     },
     setRemainingMCValue(): void {
       let remainingMC = this.cost;
@@ -139,17 +143,18 @@ export default defineComponent({
       const target = Math.min(this.ledger[unit].available, Math.floor(this.cost / this.ledger[unit].value));
       if ((this.localPayment[unit] ?? 0) < target) {
         this.localPayment[unit] = target;
-        if (unit !== 'megacredits') this.setRemainingMCValue();
+        if (unit !== 'megacredits') {
+          this.setRemainingMCValue();
+        }
       }
     },
     onMax(unit: SpendableResource): void {
       this.setMaxValue(unit);
       if (unit === 'megacredits') {
-        const overrides = {
+        this.localPayment = {
           ...computeDefaultPayment(this.cost, this.order, this.ledger, true),
           megacredits: this.localPayment.megacredits,
         };
-        Object.assign(this.localPayment, overrides);
       }
     },
     computeTotalSpent(): number {

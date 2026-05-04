@@ -710,7 +710,9 @@ describe('SelectProjectCardToPlay', () => {
       props: {
         playerView: playerView as PlayerViewModel,
         playerinput: playerInput,
-        onsave: (response: SelectProjectCardToPlayResponse) => { saveResponse = response; },
+        onsave: (response: SelectProjectCardToPlayResponse) => {
+          saveResponse = response;
+        },
         showsave: true,
         showtitle: true,
       },

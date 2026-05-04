@@ -129,8 +129,12 @@ export default defineComponent({
     componentName(): string {
       const type = this.playerinput.type;
       if (getPreferences().experimental_ui) {
-        if (type === 'payment') return 'SelectPaymentRevised';
-        if (type === 'projectCard') return 'SelectProjectCardToPlayRevised';
+        if (type === 'payment') {
+          return 'SelectPaymentRevised';
+        }
+        if (type === 'projectCard') {
+          return 'SelectProjectCardToPlayRevised';
+        }
       }
       return typeToComponentName[type];
     },

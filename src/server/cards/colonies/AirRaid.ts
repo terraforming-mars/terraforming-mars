@@ -20,6 +20,7 @@ export class AirRaid extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'C02',
+        hasExternalHelp: true,
         description: 'Requires that you lose 1 floater. Steal 5 M€ from any player.',
         renderData: CardRenderer.builder((b) => {
           b.minus().resource(CardResource.FLOATER);

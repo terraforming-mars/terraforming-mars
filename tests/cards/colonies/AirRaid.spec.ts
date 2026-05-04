@@ -23,6 +23,10 @@ describe('AirRaid', () => {
     player.playedCards.push(stormcraftIncorporated);
   });
 
+  it('has external help', () => {
+    expect(card.metadata.hasExternalHelp).is.true;
+  });
+
   it('Can not play: no floater', () => {
     player2.megaCredits = 5;
     expect(card.canPlay(player)).is.not.true;

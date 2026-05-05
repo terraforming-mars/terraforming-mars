@@ -3,18 +3,17 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {Card} from '../Card';
+import {Card, productionBoxWithBonusResource} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {Resource} from '../../../common/Resource';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
 
 export class Deepmining extends Card implements IProjectCard {
   public readonly title = 'Select an identified space with a steel or titanium bonus';
-  public bonusResource?: Array<Resource>;
+  public bonusResource: Array<Resource> | undefined;
 
   constructor() {
     super({
@@ -78,12 +77,7 @@ export class Deepmining extends Card implements IProjectCard {
   }
 
   public productionBox() {
-    // TODO(kberg): Matches Specialzied Settlement and MiningCard
-    const units = {...Units.EMPTY};
-    if (this.bonusResource && this.bonusResource.length === 1) {
-      units[this.bonusResource[0]] += 1;
-    }
-    return units;
+    return productionBoxWithBonusResource(this);
   }
 
   protected spaceSelected(player: IPlayer, space: Space) {

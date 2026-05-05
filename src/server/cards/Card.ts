@@ -27,6 +27,7 @@ import {asArray} from '../../common/utils/utils';
 import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {Resource} from '@/common/Resource';
 
 /**
  * Cards that do not need a cost attribute.
@@ -501,4 +502,16 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
+}
+
+type CardWithBonusResource = Card & {defaultProductionBox?: Units, bonusResource: Array<Resource> | undefined}
+/* Not sure this belongs here. */
+export function productionBoxWithBonusResource(card: CardWithBonusResource) {
+  const units: Units = card.defaultProductionBox ?
+    {...card.defaultProductionBox} :
+    {...Units.EMPTY};
+  if (card.bonusResource && card.bonusResource.length === 1) {
+    units[card.bonusResource[0]] += 1;
+  }
+  return units;
 }

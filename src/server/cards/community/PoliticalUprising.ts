@@ -50,7 +50,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     }
 
     if (drawnCard === undefined) {
-      player.game.log('${0} played ${1} to find a Turmoil card but none were in the draw deck.', (b) => b.player(player).card(this));
+      player.game.log('${0} played ${1} to find a Turmoil card but none were found.', (b) => b.player(player).card(this));
     } else {
       const cardIndex = projectDeck.drawPile.findIndex((c) => c.name === drawnCard.name);
       projectDeck.drawPile.splice(cardIndex, 1);

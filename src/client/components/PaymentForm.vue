@@ -3,7 +3,7 @@
   <template v-for="unit of order" :key="unit">
     <div v-if="ledger[unit]?.available > 0">
       <payment-unit-component
-        v-model.number="localPayment[unit]"
+        v-model.number="payment[unit]"
         :unit="unit"
         :description="descriptions[unit]"
         :value="ledger[unit].value"
@@ -54,7 +54,7 @@ const DESCRIPTIONS: Record<SpendableResource, string> = {
 };
 
 type DataModel = {
-  localPayment: Payment;
+  payment: Payment;
   warning: string | undefined;
 };
 
@@ -89,7 +89,7 @@ export default defineComponent({
   emits: ['save'],
   data(): DataModel {
     return {
-      localPayment: computeDefaultPayment(this.cost, this.order, this.ledger),
+      payment: computeDefaultPayment(this.cost, this.order, this.ledger, /* reserveMegacredits=*/ false),
       warning: undefined,
     };
   },
@@ -99,34 +99,30 @@ export default defineComponent({
     },
   },
   methods: {
-    getPayment(): Payment {
-      return {...this.localPayment};
+    getPayment() {
+      return this.payment;
     },
     getMegaCreditsMax(): number {
       return Math.min(this.ledger['megacredits'].available, this.cost);
     },
     addValue(unit: SpendableResource): void {
-      const payment = this.localPayment;
-      const currentValue = payment[unit] ?? 0;
+      const payment = this.payment;
+      const currentValue = payment[unit];
       const maxValue = unit === 'megacredits' ? this.getMegaCreditsMax() : this.ledger[unit].available;
-      const delta = Math.min(1, maxValue - currentValue);
-      if (delta <= 0) {
-        return;
-      }
-      payment[unit] += delta;
-      if (unit !== 'megacredits') {
-        this.setRemainingMCValue();
+      if (currentValue < maxValue) {
+        payment[unit] += 1;
+        if (unit !== 'megacredits') {
+          this.setRemainingMCValue();
+        }
       }
     },
     reduceValue(unit: SpendableResource): void {
-      const payment = this.localPayment;
-      const adjustedDelta = Math.min(1, payment[unit] ?? 0);
-      if (adjustedDelta === 0) {
-        return;
-      }
-      payment[unit] -= adjustedDelta;
-      if (unit !== 'megacredits') {
-        this.setRemainingMCValue();
+      const payment = this.payment;
+      if (payment[unit] > 0) {
+        payment[unit] -= 1;
+        if (unit !== 'megacredits') {
+          this.setRemainingMCValue();
+        }
       }
     },
     setRemainingMCValue(): void {
@@ -135,14 +131,14 @@ export default defineComponent({
         if (unit === 'megacredits') {
           continue;
         }
-        remainingMC -= (this.localPayment[unit] ?? 0) * this.ledger[unit].value;
+        remainingMC -= this.payment[unit] * this.ledger[unit].value;
       }
-      this.localPayment.megacredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      this.payment.megacredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
     setMaxValue(unit: SpendableResource): void {
       const target = Math.min(this.ledger[unit].available, Math.floor(this.cost / this.ledger[unit].value));
-      if ((this.localPayment[unit] ?? 0) < target) {
-        this.localPayment[unit] = target;
+      if (this.payment[unit] < target) {
+        this.payment[unit] = target;
         if (unit !== 'megacredits') {
           this.setRemainingMCValue();
         }
@@ -150,29 +146,29 @@ export default defineComponent({
     },
     onMax(unit: SpendableResource): void {
       this.setMaxValue(unit);
+      const saved = this.payment.megacredits;
       if (unit === 'megacredits') {
-        this.localPayment = {
-          ...computeDefaultPayment(this.cost, this.order, this.ledger, true),
-          megacredits: this.localPayment.megacredits,
-        };
+        this.payment = computeDefaultPayment(this.cost, this.order, this.ledger, /* reserveMegacredits=*/ true);
+        this.payment.megacredits = saved;
       }
     },
     computeTotalSpent(): number {
       let total = 0;
       for (const unit of this.order) {
-        total += (this.localPayment[unit] ?? 0) * this.ledger[unit].value;
+        total += this.payment[unit] * this.ledger[unit].value;
       }
       return total;
     },
     handleSave(): void {
       this.warning = undefined;
       if (this.cost === 0) {
-        this.$emit('save', {...this.localPayment});
+        this.$emit('save', this.payment);
         return;
       }
       const totalSpent = this.computeTotalSpent();
       for (const unit of this.order) {
-        if ((this.localPayment[unit] ?? 0) > this.ledger[unit].available) {
+        if (this.payment[unit] > this.ledger[unit].available) {
+          // TODO(kberg): Make this a Message
           this.warning = `You do not have enough ${unit}`;
           return;
         }
@@ -184,7 +180,8 @@ export default defineComponent({
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
         for (const unit of this.order) {
-          if (this.localPayment[unit] && diff >= this.ledger[unit].value) {
+          if (this.payment[unit] && diff >= this.ledger[unit].value) {
+            // TODO(kberg): Make this a Message
             this.warning = `You cannot overspend ${unit}`;
             return;
           }
@@ -196,7 +193,7 @@ export default defineComponent({
           return;
         }
       }
-      this.$emit('save', {...this.localPayment});
+      this.$emit('save', this.payment);
     },
   },
 });

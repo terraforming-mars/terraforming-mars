@@ -4,35 +4,35 @@ import {Ledger} from '@/client/components/PaymentLedger';
 
 function unitContribution(
   cost: number,
+  unit: SpendableResource,
   ledger: Ledger,
   mcAlreadyCovered: number,
-  unit: SpendableResource,
-): {units: number, mcValue: number} {
+): number {
   const entry = ledger[unit];
-  if (!entry || entry.available <= 0) {
-    return {units: 0, mcValue: 0};
+  if (entry.available <= 0) {
+    return 0;
   }
 
   const {available, value: rate} = entry;
   const mcAvailable = ledger['megacredits'].available;
 
-  let units = Math.min(
+  let count = Math.min(
     Math.ceil(Math.max(cost - mcAvailable - mcAlreadyCovered, 0) / rate),
     available,
   );
-  let mcValue = units * rate;
 
   // Greedy: add more units as long as we don't push the total past the cost.
   // Heat is non-greedy: only use the minimum needed.
   // The condition includes mcAlreadyCovered so two resources together cannot overspend.
   if (unit !== 'heat') {
-    while (units < available && mcAlreadyCovered + mcValue + rate <= cost) {
-      units++;
+    let mcValue = count * rate;
+    while (count < available && mcAlreadyCovered + mcValue + rate <= cost) {
+      count++;
       mcValue += rate;
     }
   }
 
-  return {units, mcValue};
+  return count;
 }
 
 // Compute the optimal default payment given a cost, the ordered list of
@@ -44,9 +44,9 @@ export function computeDefaultPayment(
   cost: number,
   order: ReadonlyArray<SpendableResource>,
   ledger: Ledger,
-  reserveMegacredits: boolean = false,
+  reserveMegacredits: boolean,
 ): Payment {
-  const result: Payment = {...Payment.EMPTY};
+  const payment: Payment = {...Payment.EMPTY};
   const mcAvailable = ledger['megacredits'].available;
 
   let amountCovered = reserveMegacredits ? mcAvailable : 0;
@@ -58,8 +58,10 @@ export function computeDefaultPayment(
     if (unit === 'megacredits') {
       continue;
     }
-    const {units, mcValue} = unitContribution(cost, ledger, resourcesAlreadyCovered, unit);
-    result[unit] = units;
+    const count = unitContribution(cost, unit, ledger, resourcesAlreadyCovered);
+    const mcValue = ledger[unit].value * count;
+
+    payment[unit] = count;
     amountCovered += mcValue;
     resourcesAlreadyCovered += mcValue;
   }
@@ -72,16 +74,16 @@ export function computeDefaultPayment(
         continue;
       }
       const rate = ledger[unit].value;
-      while ((result[unit] ?? 0) > 0 && amountCovered - rate >= cost) {
-        result[unit] = (result[unit] as number) - 1;
+      while (payment[unit] > 0 && amountCovered - rate >= cost) {
+        payment[unit] --;
         amountCovered -= rate;
       }
     }
   }
 
   if (!reserveMegacredits) {
-    result.megacredits = Math.min(mcAvailable, Math.max(cost - amountCovered, 0));
+    payment.megacredits = Math.min(mcAvailable, Math.max(cost - amountCovered, 0));
   }
 
-  return result;
+  return payment;
 }

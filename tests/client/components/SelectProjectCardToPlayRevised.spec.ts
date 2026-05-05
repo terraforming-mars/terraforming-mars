@@ -53,10 +53,10 @@ describe('SelectProjectCardToPlay', () => {
           title: 'foo',
           cards: [{
             name: CardName.ANTS,
-            reserveUnits: {},
+            reserveUnits: Units.EMPTY,
           }, {
             name: CardName.BIRDS,
-            reserveUnits: {},
+            reserveUnits: Units.EMPTY,
           }],
           paymentOptions: {},
         },

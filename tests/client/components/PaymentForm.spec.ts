@@ -99,7 +99,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=heat] .btn-plus').trigger('click');
     await wrapper.vm.$nextTick();
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.heat).eq(3);
     expect(lp.megacredits).eq(7);
   });
@@ -119,7 +119,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=heat] .btn-minus').trigger('click');
     await wrapper.vm.$nextTick();
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.heat).eq(1);
     expect(lp.megacredits).eq(9);
   });
@@ -138,7 +138,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=steel] .btn-max').trigger('click');
     await wrapper.vm.$nextTick();
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.steel).eq(5);
     expect(lp.megacredits).eq(0);
   });
@@ -157,7 +157,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=titanium] .btn-max').trigger('click');
     await wrapper.vm.$nextTick();
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.titanium).eq(3);
     expect(lp.megacredits).eq(2);
   });
@@ -176,7 +176,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=heat] .btn-max').trigger('click');
     await wrapper.vm.$nextTick();
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.heat).eq(8);
     expect(lp.megacredits).eq(0);
   });
@@ -193,7 +193,7 @@ describe('PaymentForm', () => {
       },
     });
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.steel).eq(3);
     expect(lp.megacredits).eq(4);
   });
@@ -210,7 +210,7 @@ describe('PaymentForm', () => {
     await wrapper.find('[data-test=megacredits] .btn-max').trigger('click');
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.localPayment.megacredits).eq(10);
+    expect(wrapper.vm.payment.megacredits).eq(10);
   });
 
   it('megacredits max recalculates other resources to avoid overspend', async () => {
@@ -226,15 +226,15 @@ describe('PaymentForm', () => {
       },
     });
 
-    const lp = wrapper.vm.localPayment;
+    const lp = wrapper.vm.payment;
     expect(lp.steel).eq(5);
     expect(lp.megacredits).eq(0);
 
     await wrapper.find('[data-test=megacredits] .btn-max').trigger('click');
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.localPayment.megacredits).eq(8);
-    expect(wrapper.vm.localPayment.steel).eq(1);
+    expect(wrapper.vm.payment.megacredits).eq(8);
+    expect(wrapper.vm.payment.steel).eq(1);
   });
 
   it('handleSave emits save immediately when cost is zero', async () => {

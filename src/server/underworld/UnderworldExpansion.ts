@@ -580,7 +580,6 @@ export class UnderworldExpansion {
         }
         break;
       case 'microbe2pertemp':
-        // TODO(kberg): Replace with RunNTimes.
         for (let i = 0; i < steps; i++) {
           player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         }

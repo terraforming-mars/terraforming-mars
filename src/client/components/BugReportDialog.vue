@@ -89,7 +89,7 @@ export default defineComponent({
     },
     setMessage() {
       const playerView = vueRoot(this).playerView;
-      const content = {
+      const content: Record<string, any> = {
         url: this.url(playerView),
       };
       if (playerView !== undefined) {
@@ -103,6 +103,9 @@ export default defineComponent({
               .join(', '),
             step: playerView.game.step,
           });
+      }
+      if (playerView?.game?.turmoil) {
+        content['party'] = playerView.game.turmoil.ruling ?? 'None';
       }
       Object.assign(content,
         {

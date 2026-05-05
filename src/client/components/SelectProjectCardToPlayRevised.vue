@@ -26,13 +26,13 @@
 
   <PaymentForm
     v-if="showPaymentSection"
-    ref="paymentForm"
     :key="cardName"
     :cost="cost"
     :order="order"
     :ledger="ledger"
     :showsave="showsave"
     :buttonLabel="playerinput.buttonLabel"
+    @change="(p) => payment = p"
     @save="saveData">
   </PaymentForm>
 </div>
@@ -40,7 +40,6 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource} from '@/common/inputs/Spendable';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -265,12 +264,12 @@ export default defineComponent({
       }
       return titaniumValue - 1;
     },
-    saveData(payment?: Payment) {
+    saveData() {
+      const resolved = {...this.payment};
+
       if (this.card === undefined) {
         return;
       }
-      const form = this.$refs.paymentForm as {getPayment: () => Payment} | undefined;
-      const resolved = payment ?? form?.getPayment() ?? {...Payment.EMPTY};
       this.onsave({type: 'projectCard', card: this.card.name, payment: resolved});
     },
   },

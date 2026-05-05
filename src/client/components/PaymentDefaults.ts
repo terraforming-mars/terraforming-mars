@@ -35,18 +35,26 @@ function unitContribution(
   return count;
 }
 
-// Compute the optimal default payment given a cost, the ordered list of
-// spendable resources, and the ledger of available amounts and rates.
-//
-// When reserveMegacredits is true, MC are treated as already committed (i.e.
-// the caller has already maxed MC) and other resources fill only the remainder.
+/**
+ * Compute the optimal default payment given a cost, the ordered list of
+ * spendable resources, and the ledger of available amounts and rates.
+ *
+ * When reserveMegacredits is true, MC are treated as already committed (i.e.
+ * the caller has already maxed MC) and other resources fill only the remainder.
+ *
+ * @param cost - Total MC cost to cover.
+ * @param order - Spendable resources in priority order.
+ * @param ledger - Available amounts and exchange rates for each resource.
+ * @param reserveMegacredits - If true, MC are pre-committed and non-MC resources fill the gap.
+ * @returns A Payment allocating resources to cover the cost.
+ */
 export function computeDefaultPayment(
   cost: number,
   order: ReadonlyArray<SpendableResource>,
   ledger: Ledger,
   reserveMegacredits: boolean,
 ): Payment {
-  const payment: Payment = {...Payment.EMPTY};
+  const payment = {...Payment.EMPTY};
   const mcAvailable = ledger['megacredits'].available;
 
   let amountCovered = reserveMegacredits ? mcAvailable : 0;

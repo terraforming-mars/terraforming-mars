@@ -1,5 +1,6 @@
 <template>
 <section v-trim-whitespace>
+  cost: {{ cost }} total {{ totalSpent() }}
   <template v-for="unit of order" :key="unit">
     <div v-if="ledger[unit]?.available > 0">
       <payment-unit-component
@@ -36,6 +37,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {Ledger} from '@/client/components/PaymentLedger';
 import {computeDefaultPayment} from '@/client/components/PaymentDefaults';
+import {sum} from '@/common/utils/utils';
 
 const DESCRIPTIONS: Record<SpendableResource, string> = {
   steel: 'Steel',
@@ -86,7 +88,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['save'],
+  emits: ['save', 'change'],
   data(): DataModel {
     return {
       payment: computeDefaultPayment(this.cost, this.order, this.ledger, /* reserveMegacredits=*/ false),
@@ -98,28 +100,32 @@ export default defineComponent({
       return DESCRIPTIONS;
     },
   },
-  methods: {
-    getPayment() {
-      return this.payment;
+  watch: {
+    payment: {
+      deep: true,
+      immediate: true,
+      handler(val: Payment) {
+        this.$emit('change', val);
+      },
     },
+  },
+  methods: {
     getMegaCreditsMax(): number {
       return Math.min(this.ledger['megacredits'].available, this.cost);
     },
     addValue(unit: SpendableResource): void {
-      const payment = this.payment;
-      const currentValue = payment[unit];
+      const currentValue = this.payment[unit];
       const maxValue = unit === 'megacredits' ? this.getMegaCreditsMax() : this.ledger[unit].available;
       if (currentValue < maxValue) {
-        payment[unit] += 1;
+        this.payment[unit] += 1;
         if (unit !== 'megacredits') {
           this.setRemainingMCValue();
         }
       }
     },
     reduceValue(unit: SpendableResource): void {
-      const payment = this.payment;
-      if (payment[unit] > 0) {
-        payment[unit] -= 1;
+      if (this.payment[unit] > 0) {
+        this.payment[unit] -= 1;
         if (unit !== 'megacredits') {
           this.setRemainingMCValue();
         }
@@ -152,12 +158,10 @@ export default defineComponent({
         this.payment.megacredits = saved;
       }
     },
-    computeTotalSpent(): number {
-      let total = 0;
-      for (const unit of this.order) {
-        total += this.payment[unit] * this.ledger[unit].value;
-      }
-      return total;
+    totalSpent(): number {
+      return sum(this.order.map((unit) => {
+        return this.payment[unit] * this.ledger[unit].value;
+      }));
     },
     handleSave(): void {
       this.warning = undefined;
@@ -165,7 +169,7 @@ export default defineComponent({
         this.$emit('save', this.payment);
         return;
       }
-      const totalSpent = this.computeTotalSpent();
+      const totalSpent = this.totalSpent();
       for (const unit of this.order) {
         if (this.payment[unit] > this.ledger[unit].available) {
           // TODO(kberg): Make this a Message

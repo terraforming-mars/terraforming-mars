@@ -13,7 +13,7 @@ import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 
-describe('SelectProjectCardToPlay', () => {
+describe('SelectProjectCardToPlayRevised', () => {
   let localStorage: FakeLocalStorage;
   let saveResponse: SelectProjectCardToPlayResponse;
 
@@ -27,7 +27,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using sort order for cards', async () => {
-    localStorage.setItem('cardOrderfoo', JSON.stringify({
+    localStorage.setItem('cardOrderp-foo', JSON.stringify({
       [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
     }));
@@ -42,7 +42,7 @@ describe('SelectProjectCardToPlay', () => {
             calculatedCost: 3,
             name: CardName.BIRDS,
           }],
-          id: 'foo',
+          id: 'p-foo',
           selfReplicatingRobotCards: [],
           thisPlayer: {
             steel: 0,
@@ -50,6 +50,7 @@ describe('SelectProjectCardToPlay', () => {
           },
         },
         playerinput: {
+          type: 'projectCard',
           title: 'foo',
           cards: [{
             name: CardName.ANTS,
@@ -59,6 +60,7 @@ describe('SelectProjectCardToPlay', () => {
             reserveUnits: Units.EMPTY,
           }],
           paymentOptions: {},
+          buttonLabel: 'Save',
         },
         onsave: () => {},
         showsave: true,
@@ -627,22 +629,6 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 5, megacredits: 7}));
   });
 
-  it('saveData() via PlayerInputFactory includes payment in response', async () => {
-    // Reproduces: when OrOptions -> PlayerInputFactory calls saveData() with no arguments,
-    // payment must still be included. Before the fix, payment was undefined in the response.
-    const wrapper = setupCardForPurchase(
-      CardName.BIRDS, 10,
-      {heat: 4, megacredits: 7},
-      {paymentOptions: {heat: true}});
-
-    const tester = new PaymentTester(wrapper);
-    await tester.nextTick();
-
-    (wrapper.vm as any).saveData();
-
-    expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megacredits: 7}));
-  });
-
   it('Luna Trade Federation: standard project with canPayWith.titanium uses full titanium rate', async () => {
     // Moon Habitat Variant 1 costs 23 MC, canPayWith.titanium = true.
     // With Luna Trade Federation, titanium should still be valued at the full 3 MC each,
@@ -663,6 +649,22 @@ describe('SelectProjectCardToPlay', () => {
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megacredits: 2}));
+  });
+
+  it('saveData() via PlayerInputFactory includes payment in response', async () => {
+    // Reproduces: when OrOptions -> PlayerInputFactory calls saveData() with no arguments,
+    // payment must still be included. Before the fix, payment was undefined in the response.
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {heat: 4, megacredits: 7},
+      {paymentOptions: {heat: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    (wrapper.vm as any).saveData();
+
+    expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megacredits: 7}));
   });
 
   it('standard project with zero cost still shows save button (b8079)', async () => {

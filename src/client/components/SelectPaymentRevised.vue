@@ -3,12 +3,12 @@
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
     <PaymentForm
-      ref="paymentForm"
       :cost="cost"
       :order="order"
       :ledger="ledger"
       :showsave="showsave"
       :buttonLabel="playerinput.buttonLabel"
+      @change="(p) => payment = p"
       @save="saveData">
     </PaymentForm>
   </section>
@@ -71,12 +71,9 @@ export default defineComponent({
     PaymentForm,
   },
   created() {
-    this.setInitialCost();
+    this.cost = this.playerinput.amount ?? 0;
   },
   methods: {
-    setInitialCost() {
-      this.cost = this.playerinput.amount ?? 0;
-    },
     canUse(unit: SpendableResource): boolean {
       if (unit === 'megacredits') {
         return true;
@@ -86,10 +83,9 @@ export default defineComponent({
       }
       return this.playerinput.paymentOptions[unit] === true;
     },
-    saveData(payment?: Payment) {
+    saveData() {
+      const resolved = {...this.payment};
       // See PR #2353: avoid taking heat/MC when nothing is required.
-      const form = this.$refs.paymentForm as {getPayment: () => Payment} | undefined;
-      const resolved = {...(payment ?? form?.getPayment() ?? Payment.EMPTY)};
       if ((this.playerinput.amount ?? 0) === 0) {
         resolved.heat = 0;
         resolved.megacredits = 0;

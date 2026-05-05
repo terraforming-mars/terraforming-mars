@@ -9,7 +9,7 @@
     />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
-    <span v-if="value !== undefined">{{ value * modelValue }}</span><i v-if="value !== undefined" class="resource_icon payments_type_icon resource_icon--megacredits"></i>
+    <span v-if="value !== undefined && modelValue !== 0">&nbsp{{ value * modelValue }}</span>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ import {SpendableResource} from '@/common/inputs/Spendable';
 export default defineComponent({
   name: 'PaymentUnitComponent',
   props: {
+    // TODO(kberg): Rename to count.
     modelValue: {
       type: Number,
       required: true,

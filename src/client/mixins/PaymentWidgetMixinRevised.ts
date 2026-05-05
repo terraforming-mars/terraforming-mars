@@ -12,6 +12,13 @@ import {SpendableResource} from '@/common/inputs/Spendable';
 import {Ledger, newDefaultLedger} from '../components/PaymentLedger';
 import {ALL_RESOURCES} from '@/common/Resource';
 
+export type DataModel = {
+  cost: number,
+  payment: Payment,
+  card: CardModel | undefined,
+  available: Units | undefined,
+};
+
 export const PaymentWidgetMixin = defineComponent({
   // Props are intentionally re-declared by consumers (SelectPayment, SelectProjectCardToPlay)
   // to narrow playerinput's type. Component declarations override mixin declarations in Vue's
@@ -26,7 +33,7 @@ export const PaymentWidgetMixin = defineComponent({
       required: true,
     },
   },
-  data() {
+  data(): DataModel {
     return {
       // payment and cost are shared by both consumers.
       cost: 0,
@@ -34,8 +41,8 @@ export const PaymentWidgetMixin = defineComponent({
       // card and available are undefined here; SelectProjectCardToPlay overrides both in its
       // own data(). SelectPayment never sets them — getAvailableUnits takes the fallback
       // path when available is undefined, and card is only accessed with optional chaining.
-      card: undefined as CardModel | undefined,
-      available: undefined as Units | undefined,
+      card: undefined,
+      available: undefined,
     };
   },
   methods: {

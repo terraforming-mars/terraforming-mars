@@ -2,6 +2,7 @@ import {mount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import PaymentForm from '@/client/components/PaymentForm.vue';
+import {Payment} from '@/common/inputs/Payment';
 import {Ledger, newDefaultLedger} from '@/client/components/PaymentLedger';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
@@ -235,6 +236,54 @@ describe('PaymentForm', () => {
 
     expect(wrapper.vm.payment.megacredits).eq(8);
     expect(wrapper.vm.payment.steel).eq(1);
+  });
+
+  it('emits change with initial payment on mount', async () => {
+    const wrapper = mountPaymentForm({
+      cost: 7,
+      order: ['megacredits'],
+      ledger: {
+        'megacredits': {available: 10, value: 1},
+      },
+    });
+
+    const emitted = wrapper.emitted('change') as Payment[][];
+    expect(emitted).to.exist;
+    expect(emitted[0][0].megacredits).eq(7);
+  });
+
+  it('emits change when a unit value is adjusted', async () => {
+    const wrapper = mountPaymentForm({
+      cost: 7,
+      order: ['megacredits'],
+      ledger: {
+        'megacredits': {available: 10, value: 1},
+      },
+    });
+
+    await wrapper.find('[data-test=megacredits] .btn-minus').trigger('click');
+    await wrapper.vm.$nextTick();
+
+    const emitted = wrapper.emitted('change') as Payment[][];
+    const last = emitted[emitted.length - 1][0];
+    expect(last.megacredits).eq(6);
+  });
+
+  it('save emits the payment value', async () => {
+    const wrapper = mountPaymentForm({
+      cost: 7,
+      order: ['megacredits'],
+      ledger: {
+        'megacredits': {available: 10, value: 1},
+      },
+    });
+
+    await wrapper.find('[data-test=save]').trigger('click');
+    await wrapper.vm.$nextTick();
+
+    const emitted = wrapper.emitted('save') as Payment[][];
+    expect(emitted).to.exist;
+    expect(emitted[0][0]).deep.eq(Payment.of({megacredits: 7}));
   });
 
   it('handleSave emits save immediately when cost is zero', async () => {

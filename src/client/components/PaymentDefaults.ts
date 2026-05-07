@@ -2,39 +2,6 @@ import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource} from '@/common/inputs/Spendable';
 import {Ledger} from '@/client/components/PaymentLedger';
 
-function unitContribution(
-  cost: number,
-  unit: SpendableResource,
-  ledger: Ledger,
-  mcAlreadyCovered: number,
-): number {
-  const entry = ledger[unit];
-  if (entry.available <= 0) {
-    return 0;
-  }
-
-  const {available, value: rate} = entry;
-  const mcAvailable = ledger['megacredits'].available;
-
-  let count = Math.min(
-    Math.ceil(Math.max(cost - mcAvailable - mcAlreadyCovered, 0) / rate),
-    available,
-  );
-
-  // Greedy: add more units as long as we don't push the total past the cost.
-  // Heat is non-greedy: only use the minimum needed.
-  // The condition includes mcAlreadyCovered so two resources together cannot overspend.
-  if (unit !== 'heat') {
-    let mcValue = count * rate;
-    while (count < available && mcAlreadyCovered + mcValue + rate <= cost) {
-      count++;
-      mcValue += rate;
-    }
-  }
-
-  return count;
-}
-
 /**
  * Compute the optimal default payment given a cost, the ordered list of
  * spendable resources, and the ledger of available amounts and rates.
@@ -67,7 +34,7 @@ export function computeDefaultPayment(
       continue;
     }
     const count = unitContribution(cost, unit, ledger, resourcesAlreadyCovered);
-    const mcValue = ledger[unit].value * count;
+    const mcValue = ledger[unit].rate * count;
 
     payment[unit] = count;
     amountCovered += mcValue;
@@ -81,7 +48,7 @@ export function computeDefaultPayment(
       if (unit === 'megacredits') {
         continue;
       }
-      const rate = ledger[unit].value;
+      const rate = ledger[unit].rate;
       while (payment[unit] > 0 && amountCovered - rate >= cost) {
         payment[unit] --;
         amountCovered -= rate;
@@ -94,4 +61,50 @@ export function computeDefaultPayment(
   }
 
   return payment;
+}
+
+/**
+ * Returns the number of units of a resource to contribute toward a cost.
+ *
+ * Logic involves a minimum requirement to cover the gap (cost minus MC and
+ * other resources), followed by a greedy allocation for non-heat resources
+ * to maximize resource usage without exceeding the total cost.
+ *
+ * @param cost - Total MC cost to cover.
+ * @param unit - The specific spendable resource being evaluated.
+ * @param ledger - Available amounts and exchange rates for each resource.
+ * @param mcAlreadyCovered - The MC value already committed by previously processed non-MC resources.
+ * @returns The number of units of the resource to allocate.
+ */
+function unitContribution(
+  cost: number,
+  unit: SpendableResource,
+  ledger: Ledger,
+  mcAlreadyCovered: number,
+): number {
+  const entry = ledger[unit];
+  if (entry.available <= 0) {
+    return 0;
+  }
+
+  const {available, rate} = entry;
+  const mcAvailable = ledger['megacredits'].available;
+
+  let count = Math.min(
+    Math.ceil(Math.max(cost - mcAvailable - mcAlreadyCovered, 0) / rate),
+    available,
+  );
+
+  // Greedy: add more units as long as we don't push the total past the cost.
+  // Heat is non-greedy: only use the minimum needed.
+  // The condition includes mcAlreadyCovered so two resources together cannot overspend.
+  if (unit !== 'heat') {
+    let mcValue = count * rate;
+    while (count < available && mcAlreadyCovered + mcValue + rate <= cost) {
+      count++;
+      mcValue += rate;
+    }
+  }
+
+  return count;
 }

@@ -57,22 +57,34 @@ export class PaymentTesterRevised {
     expect(this.getPayment()).deep.eq(expected);
   }
 
-  public expectValue(unit: SpendableResource, amount: number) {
-    expect(this.getValue(unit), `text box value for ${unit}`).eq(amount);
+  public expectValue(resource: SpendableResource, amount: number) {
+    expect(this.getValue(resource), `text box value for ${resource}`).eq(amount);
   }
 
-  private isAvailable(unit: SpendableResource): boolean {
-    return this.wrapper.find(PaymentTesterRevised.selector(unit) + ' input').exists();
+  /**
+   * Returns true when the text box for `resource` is visible.
+   */
+  private isAvailable(resource: SpendableResource): boolean {
+    return this.wrapper.find(PaymentTesterRevised.selector(resource) + ' input').exists();
   }
 
-  public expectIsAvailable(unit: SpendableResource) {
-    expect(this.isAvailable(unit), `Expect input for ${unit} to be visible`).is.true;
+  /**
+   * Passes when the text box for `resource` is visible.
+   */
+  public expectIsAvailable(resource: SpendableResource) {
+    expect(this.isAvailable(resource), `Expect input for ${resource} to be visible`).is.true;
   }
 
-  public expectIsNotAvailable(unit: SpendableResource) {
-    expect(this.isAvailable(unit), `Expect input for ${unit} to be invisible`).is.false;
+  /**
+   * Passes when the text box for `resource` is not visible.
+   */
+  public expectIsNotAvailable(resource: SpendableResource) {
+    expect(this.isAvailable(resource), `Expect input for ${resource} to be invisible`).is.false;
   }
 
+  /**
+   * Return the set of payment components visible in the UI.
+   */
   public getAvailablePaymentComponents(): ReadonlyArray<SpendableResource> {
     const available: Array<SpendableResource> = [];
     for (const unit of SPENDABLE_RESOURCES) {
@@ -83,9 +95,12 @@ export class PaymentTesterRevised {
     return available;
   }
 
-  public expectAvailablePaymentComponents(...units: Array<SpendableResource>) {
+  /**
+   * Passes when the visible set of UI components is this list and only this list.
+   */
+  public expectAvailablePaymentComponents(...resources: Array<SpendableResource>) {
     const available = this.getAvailablePaymentComponents();
-    expect(available).has.members(units);
+    expect(available).has.members(resources);
   }
 
   public async nextTick() {

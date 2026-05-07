@@ -29,13 +29,13 @@ function mountPaymentForm(overrides: {
 }
 
 describe('PaymentForm', () => {
-  it('renders only units in spendableResources', async () => {
+  it('renders only resources in spendableResources', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['heat', 'megacredits'],
       ledger: {
-        'heat': {available: 1, value: 1},
-        'megacredits': {available: 1, value: 1},
+        'heat': {available: 1, rate: 1},
+        'megacredits': {available: 1, rate: 1},
       },
     });
 
@@ -44,20 +44,21 @@ describe('PaymentForm', () => {
     expect(wrapper.find('[data-test=steel] input').exists()).is.false;
   });
 
-  it('renders no units when spendableResources is empty', async () => {
+  it('renders no components when spendableResources is empty', async () => {
     const wrapper = mountPaymentForm({cost: 0, order: []});
 
     expect(wrapper.find('[data-test=heat] input').exists()).is.false;
     expect(wrapper.find('[data-test=megacredits] input').exists()).is.false;
   });
 
-  it('shows reserve warning when showReserveWarning returns true', async () => {
+  it('shows reserve warning', async () => {
     const wrapper = mountPaymentForm({
       cost: 1,
-      order: ['heat', 'megacredits'],
+      order: ['heat', 'steel', 'megacredits'],
       ledger: {
-        'heat': {available: 1, value: 1, reserved: true},
-        'megacredits': {available: 1, value: 1},
+        'heat': {available: 1, rate: 1, reserved: true},
+        'steel': {available: 1, rate: 2, reserved: false},
+        'megacredits': {available: 1, rate: 1},
       },
     });
 
@@ -85,13 +86,13 @@ describe('PaymentForm', () => {
     expect(wrapper.emitted('save')).to.exist;
   });
 
-  it('plus increases the clicked unit and decreases megacredits', async () => {
+  it('plus increases the clicked resource and decreases megacredits', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['heat', 'megacredits'],
       ledger: {
-        'heat': {available: 5, value: 1},
-        'megacredits': {available: 10, value: 1},
+        'heat': {available: 5, rate: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -105,13 +106,13 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(7);
   });
 
-  it('minus decreases the clicked unit and increases megacredits', async () => {
+  it('minus decreases the clicked resource and increases megacredits', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['heat', 'megacredits'],
       ledger: {
-        'heat': {available: 5, value: 1},
-        'megacredits': {available: 10, value: 1},
+        'heat': {available: 5, rate: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -125,14 +126,14 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(9);
   });
 
-  it('max caps at floor(cost / rate) not at available units', async () => {
+  it('max caps even if there is an excess of resources', async () => {
     // Steel worth 2 MC each; cost is 10; floor(10/2) = 5 max steel regardless of 20 available
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['steel', 'megacredits'],
       ledger: {
-        'steel': {available: 20, value: 2},
-        'megacredits': {available: 10, value: 1},
+        'steel': {available: 20, rate: 2},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -144,14 +145,14 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(0);
   });
 
-  it('max respects getResourceRate when computing how many units to use', async () => {
+  it('max respects the resource rate when computing how many resources to use', async () => {
     // Titanium worth 3 MC each; cost is 11; floor(11/3) = 3 titanium, leaving 2 MC
     const wrapper = mountPaymentForm({
       cost: 11,
       order: ['titanium', 'megacredits'],
       ledger: {
-        'titanium': {available: 10, value: 3},
-        'megacredits': {available: 10, value: 1},
+        'titanium': {available: 10, rate: 3},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -169,8 +170,8 @@ describe('PaymentForm', () => {
       cost: 8,
       order: ['heat', 'megacredits'],
       ledger: {
-        'heat': {available: 20, value: 1},
-        'megacredits': {available: 5, value: 1},
+        'heat': {available: 20, rate: 1},
+        'megacredits': {available: 5, rate: 1},
       },
     });
 
@@ -182,15 +183,15 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(0);
   });
 
-  it('computes greedy defaults when initialPayment is omitted', async () => {
+  it('computes greedy defaults', async () => {
     // cost=10, steel rate=2 available=3, megacredits available=5
     // greedy: ceil(max(10-5,0)/2)=3 steel (6 MC), then MC=min(5,max(10-6,0))=4
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['steel', 'megacredits'],
       ledger: {
-        'steel': {available: 3, value: 2},
-        'megacredits': {available: 5, value: 1},
+        'steel': {available: 3, rate: 2},
+        'megacredits': {available: 5, rate: 1},
       },
     });
 
@@ -199,12 +200,12 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(4);
   });
 
-  it('megacredits max sets megacredits to min(available, cost)', async () => {
+  it('megacredits max caps at cost', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 12, rate: 1},
       },
     });
 
@@ -222,8 +223,8 @@ describe('PaymentForm', () => {
       cost: 10,
       order: ['steel', 'megacredits'],
       ledger: {
-        'steel': {available: 5, value: 2},
-        'megacredits': {available: 8, value: 1},
+        'steel': {available: 5, rate: 2},
+        'megacredits': {available: 8, rate: 1},
       },
     });
 
@@ -243,7 +244,7 @@ describe('PaymentForm', () => {
       cost: 7,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -252,12 +253,12 @@ describe('PaymentForm', () => {
     expect(emitted[0][0].megacredits).eq(7);
   });
 
-  it('emits change when a unit value is adjusted', async () => {
+  it('emits change when a resource amount is adjusted', async () => {
     const wrapper = mountPaymentForm({
       cost: 7,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -274,7 +275,7 @@ describe('PaymentForm', () => {
       cost: 7,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -286,7 +287,7 @@ describe('PaymentForm', () => {
     expect(emitted[0][0]).deep.eq(Payment.of({megacredits: 7}));
   });
 
-  it('handleSave emits save immediately when cost is zero', async () => {
+  it('clicking save emits save immediately when cost is zero', async () => {
     const wrapper = mountPaymentForm({cost: 0});
 
     await wrapper.find('[data-test=save]').trigger('click');
@@ -296,12 +297,12 @@ describe('PaymentForm', () => {
     expect(wrapper.find('.tm-warning').exists()).is.false;
   });
 
-  it('handleSave shows warning when underpaying', async () => {
+  it('clicking save shows warning when underpaying', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
     await wrapper.find('[data-test=megacredits] input').setValue(5);
@@ -312,13 +313,13 @@ describe('PaymentForm', () => {
     expect(wrapper.find('.tm-warning').exists()).is.true;
   });
 
-  it('handleSave shows warning when spending more than available units', async () => {
+  it('clicking save shows warning when spending more than available units', async () => {
     // payment claims 8 heat but only 5 are available
     const wrapper = mountPaymentForm({
       cost: 8,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 
@@ -330,12 +331,12 @@ describe('PaymentForm', () => {
     expect(wrapper.find('.tm-warning').exists()).is.true;
   });
 
-  it('handleSave emits save and clears warning when payment is valid', async () => {
+  it('clicking save emits save and clears warning when payment is valid', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,
       order: ['megacredits'],
       ledger: {
-        'megacredits': {available: 10, value: 1},
+        'megacredits': {available: 10, rate: 1},
       },
     });
 

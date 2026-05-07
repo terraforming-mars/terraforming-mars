@@ -60,7 +60,7 @@ export const PaymentWidgetMixin = defineComponent({
       for (const unit of order) {
         ledger[unit] = {
           available: available[unit],
-          value: this.getResourceRate(unit),
+          rate: this.getResourceRate(unit),
           reserved: isStandardResource(unit) ? reserveUnits[unit] > 0 : false,
         };
       }

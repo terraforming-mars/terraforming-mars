@@ -7,7 +7,7 @@
         v-model.number="payment[unit]"
         :unit="unit"
         :description="descriptions[unit]"
-        :value="ledger[unit].value"
+        :value="ledger[unit].rate"
         @plus="addValue(unit)"
         @minus="reduceValue(unit)"
         @max="maxValue(unit)">
@@ -71,6 +71,8 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    // Rename to something related to how it is both display order and documents the
+    // resources in use.
     order: {
       type: Array as () => ReadonlyArray<SpendableResource>,
       required: true,
@@ -149,7 +151,7 @@ export default defineComponent({
       this.payment.megacredits = megacredits;
     },
     maxValue(unit: SpendableResource): void {
-      const target = Math.min(this.ledger[unit].available, Math.floor(this.cost / this.ledger[unit].value));
+      const target = Math.min(this.ledger[unit].available, Math.floor(this.cost / this.ledger[unit].rate));
 
       if (this.payment[unit] < target) {
         this.payment[unit] = target;
@@ -164,7 +166,7 @@ export default defineComponent({
       }
     },
     totalSpent(): number {
-      return sum(this.order.map((unit) => this.payment[unit] * this.ledger[unit].value));
+      return sum(this.order.map((unit) => this.payment[unit] * this.ledger[unit].rate));
     },
     handleSave(): void {
       this.warning = undefined;
@@ -186,7 +188,7 @@ export default defineComponent({
       }
       if (delta > 0) {
         for (const unit of this.order) {
-          if (this.payment[unit] > 0 && delta >= this.ledger[unit].value) {
+          if (this.payment[unit] > 0 && delta >= this.ledger[unit].rate) {
             // TODO(kberg): Make this a Message
             this.warning = `You cannot overspend ${unit}`;
             return;

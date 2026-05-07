@@ -45,6 +45,7 @@ export const POLITICAL_AGENDAS_MAX_ACTION_USES = 3;
 
 // Prelude
 export const PRELUDE_CARDS_DEALT_PER_PLAYER = 4;
+export const PRELUDE_CARDS_PLAYED_PER_PLAYER = 2;
 
 // CEO
 export const CEO_CARDS_DEALT_PER_PLAYER = 3;

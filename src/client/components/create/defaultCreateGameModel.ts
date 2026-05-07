@@ -69,6 +69,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     twoCorpsVariant: false,
     startingCeos: 3,
     startingPreludes: 4,
+    playablePreludes: constants.PRELUDE_CARDS_PLAYED_PER_PLAYER,
     preludeDraftVariant: undefined,
     ceosDraftVariant: undefined,
   };

@@ -26,10 +26,10 @@
               <input type="checkbox" id="initial-research">
               <label for="initial-research" v-i18n><span v-i18n>Initial Research Phase (Generation 1 only)</span></label>
               <ul>
-                <li v-i18n>Select which corporation, 2 preludes and project cards to keep.</li>
+                <li v-i18n>Select which corporation, preludes and project cards to keep.</li>
                 <li v-i18n>In turn order, play the corporation and pay 3 M€ for each of the project cards bought.</li>
                 <li>
-                  <span v-i18n>In turn order, play both preludes.</span>
+                  <span v-i18n>In turn order, play preludes.</span>
                   <div class="expansion-icon expansion-icon-prelude"></div>
                 </li>
               </ul>

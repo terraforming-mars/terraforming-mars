@@ -196,10 +196,15 @@
                             </label>
 
                             <template v-if="expansions.prelude">
-                              <label for="startingPreludeENum-checkbox">
+                              <label for="startingPreludeNum-checkbox">
                               <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-                              <input type="number" class="create-game-corporations-count" value="4" min="4" :max="8" v-model="startingPreludes" id="startingPreludeNum-checkbox">
+                              <input type="number" class="create-game-corporations-count" min="4" :max="8" v-model="startingPreludes" id="startingPreludeNum-checkbox">
                                   <span v-i18n>Starting Preludes</span>
+                              </label>
+                              <label for="playablePreludeNum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                              <input type="number" class="create-game-corporations-count" min="1" :max="startingPreludes" v-model="playablePreludes" id="playablePreludeNum-checkbox">
+                                  <span v-i18n>Playable Preludes</span>
                               </label>
                             </template>
 
@@ -1239,6 +1244,7 @@ export default defineComponent({
         twoCorpsVariant,
         startingCeos,
         startingPreludes,
+        playablePreludes: this.playablePreludes,
         extraCorporationsInPool,
       };
       return JSON.stringify(dataToSend, undefined, 4);

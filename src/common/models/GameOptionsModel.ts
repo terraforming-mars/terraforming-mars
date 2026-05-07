@@ -31,5 +31,6 @@ export type GameOptionsModel = {
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
   twoCorpsVariant: boolean,
+  playablePreludes: number,
   undoOption: boolean,
 }

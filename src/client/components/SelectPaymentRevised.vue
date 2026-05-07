@@ -3,13 +3,14 @@
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
     <PaymentForm
+      ref="paymentForm"
       :cost="cost"
       :order="order"
       :ledger="ledger"
       :showsave="showsave"
       :buttonLabel="playerinput.buttonLabel"
       @change="(p) => payment = p"
-      @save="saveData">
+      @save="doSave">
     </PaymentForm>
   </section>
 </div>
@@ -84,6 +85,14 @@ export default defineComponent({
       return this.playerinput.paymentOptions[unit] === true;
     },
     saveData() {
+      const paymentForm = this.$refs.paymentForm as {handleSave: () => void} | undefined;
+      if (paymentForm !== undefined) {
+        paymentForm.handleSave();
+      } else {
+        this.doSave();
+      }
+    },
+    doSave() {
       this.onsave({type: 'payment', payment: this.payment});
     },
   },

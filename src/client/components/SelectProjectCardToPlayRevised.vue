@@ -23,6 +23,7 @@
 
   <PaymentForm
     v-if="showPaymentSection"
+    ref="paymentForm"
     :key="cardName"
     :cost="cost"
     :order="order"
@@ -30,7 +31,7 @@
     :showsave="showsave"
     :buttonLabel="playerinput.buttonLabel"
     @change="(p) => payment = p"
-    @save="saveData">
+    @save="doSave">
   </PaymentForm>
 </div>
 </template>
@@ -255,6 +256,17 @@ export default defineComponent({
       return titaniumValue - 1;
     },
     saveData() {
+      if (this.card === undefined) {
+        return;
+      }
+      const paymentForm = this.$refs.paymentForm as {handleSave: () => void} | undefined;
+      if (paymentForm !== undefined) {
+        paymentForm.handleSave();
+      } else {
+        this.doSave();
+      }
+    },
+    doSave() {
       if (this.card === undefined) {
         return;
       }

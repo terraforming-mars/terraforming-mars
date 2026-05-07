@@ -667,6 +667,28 @@ describe('SelectProjectCardToPlayRevised', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megacredits: 7}));
   });
 
+  it('saveData() via PlayerInputFactory blocks save when payment cannot overspend', async () => {
+    // Steel at rate 2, 6 available: greedy picks 5 steel (=10 MC, exact).
+    // Clicking + once gives 6 steel (=12 MC). delta=2 >= rate=2, so handleSave()
+    // must set a warning and NOT call onsave.
+    const wrapper = setupCardForPurchase(
+      CardName.REGO_PLASTICS, 10,
+      {steel: 6, megacredits: 0, steelValue: 2},
+      {paymentOptions: {steel: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({steel: 5});
+
+    await tester.clickPlus('steel');
+    tester.expectPayment({steel: 6});
+
+    saveResponse = undefined as any;
+    (wrapper.vm as any).saveData();
+
+    expect(saveResponse).to.be.undefined;
+  });
+
   it('standard project with zero cost still shows save button (b8079)', async () => {
     // Underworld Standard Technology discounts Excavate (cost 7) by 8, flooring at 0.
     // The save button must still render and accept a zero payment.

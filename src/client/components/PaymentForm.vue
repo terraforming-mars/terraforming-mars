@@ -10,7 +10,7 @@
         :value="ledger[unit].value"
         @plus="addValue(unit)"
         @minus="reduceValue(unit)"
-        @max="onMax(unit)">
+        @max="maxValue(unit)">
       </payment-unit-component>
       <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
         Some ${0} are reserved and unavailable here.
@@ -110,15 +110,21 @@ export default defineComponent({
     },
   },
   methods: {
+    /**
+     * Returns the most MC necessary, capped by the cost of the payment.
+     */
     getMegaCreditsMax(): number {
       return Math.min(this.ledger['megacredits'].available, this.cost);
     },
     addValue(unit: SpendableResource): void {
-      const currentValue = this.payment[unit];
-      const maxValue = unit === 'megacredits' ? this.getMegaCreditsMax() : this.ledger[unit].available;
-      if (currentValue < maxValue) {
-        this.payment[unit] += 1;
-        if (unit !== 'megacredits') {
+      // MC is special-cased because it's the currency being spent.
+      if (unit === 'megacredits') {
+        if (this.payment[unit] < this.getMegaCreditsMax()) {
+          this.payment[unit] += 1;
+        }
+      } else {
+        if (this.payment[unit] < this.ledger[unit].available) {
+          this.payment[unit] += 1;
           this.setRemainingMCValue();
         }
       }
@@ -132,36 +138,33 @@ export default defineComponent({
       }
     },
     setRemainingMCValue(): void {
-      let remainingMC = this.cost;
-      for (const unit of this.order) {
-        if (unit === 'megacredits') {
-          continue;
-        }
-        remainingMC -= this.payment[unit] * this.ledger[unit].value;
-      }
-      this.payment.megacredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      // Amount of money non-megacredit resources account for.
+      const nonMCspend = this.totalSpent() - this.payment.megacredits;
+
+      // Amount MC has to make up for
+      const remainingMC = Math.max(0, this.cost - nonMCspend);
+
+      // If MC has to make up for more than it has, this caps it.
+      const megacredits = Math.min(this.ledger.megacredits.available, remainingMC);
+      this.payment.megacredits = megacredits;
     },
-    setMaxValue(unit: SpendableResource): void {
+    maxValue(unit: SpendableResource): void {
       const target = Math.min(this.ledger[unit].available, Math.floor(this.cost / this.ledger[unit].value));
+
       if (this.payment[unit] < target) {
         this.payment[unit] = target;
+
         if (unit !== 'megacredits') {
           this.setRemainingMCValue();
+        } else {
+          const saved = this.payment.megacredits;
+          this.payment = computeDefaultPayment(this.cost, this.order, this.ledger, /* reserveMegacredits=*/ true);
+          this.payment.megacredits = saved;
         }
-      }
-    },
-    onMax(unit: SpendableResource): void {
-      this.setMaxValue(unit);
-      const saved = this.payment.megacredits;
-      if (unit === 'megacredits') {
-        this.payment = computeDefaultPayment(this.cost, this.order, this.ledger, /* reserveMegacredits=*/ true);
-        this.payment.megacredits = saved;
       }
     },
     totalSpent(): number {
-      return sum(this.order.map((unit) => {
-        return this.payment[unit] * this.ledger[unit].value;
-      }));
+      return sum(this.order.map((unit) => this.payment[unit] * this.ledger[unit].value));
     },
     handleSave(): void {
       this.warning = undefined;
@@ -169,7 +172,6 @@ export default defineComponent({
         this.$emit('save', this.payment);
         return;
       }
-      const totalSpent = this.totalSpent();
       for (const unit of this.order) {
         if (this.payment[unit] > this.ledger[unit].available) {
           // TODO(kberg): Make this a Message
@@ -177,24 +179,24 @@ export default defineComponent({
           return;
         }
       }
-      if (totalSpent < this.cost) {
+      const delta = this.totalSpent() - this.cost;
+      if (delta < 0) {
         this.warning = 'Haven\'t spent enough';
         return;
       }
-      if (totalSpent > this.cost) {
-        const diff = totalSpent - this.cost;
+      if (delta > 0) {
         for (const unit of this.order) {
-          if (this.payment[unit] && diff >= this.ledger[unit].value) {
+          if (this.payment[unit] > 0 && delta >= this.ledger[unit].value) {
             // TODO(kberg): Make this a Message
             this.warning = `You cannot overspend ${unit}`;
             return;
           }
         }
-      }
-      if (totalSpent > this.cost && getPreferences().show_alerts) {
-        if (!confirm('Warning: You are overpaying by ' + (totalSpent - this.cost) + ' M€')) {
-          this.warning = 'Please adjust payment amount';
-          return;
+        if (getPreferences().show_alerts) {
+          if (!confirm('Warning: You are overpaying by ' + delta + ' M€')) {
+            this.warning = 'Please adjust payment amount';
+            return;
+          }
         }
       }
       this.$emit('save', this.payment);

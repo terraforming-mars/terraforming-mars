@@ -1,13 +1,10 @@
 <template>
 <div class="payments_cont">
-
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-
   <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
     <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>
-
   <template v-if="card !== undefined && card.additionalProjectCosts">
     <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
       v-i18n="[$t(card.name), card.additionalProjectCosts.aeronGenomicsResources, 'animals', $t(CardName.AERON_GENOMICS)]"
@@ -180,7 +177,7 @@ export default defineComponent({
       return this.tags.includes(Tag.SPACE) ||
           this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
     },
-    cardCanUse(unit: SpendableResource): boolean {
+    canUse(unit: SpendableResource): boolean {
       if (this.card === undefined) {
         return false;
       }
@@ -214,49 +211,42 @@ export default defineComponent({
           return false;
         default: throw new Error('Unknown unit ' + unit);
         }
-      }
-      // Regular project card: tag-based payment rules
-      switch (unit) {
-      case 'megacredits':
-        return true;
-      case 'heat':
-        return this.playerinput.paymentOptions.heat === true;
-      case 'steel':
-        return this.tags.includes(Tag.BUILDING) ||
+      } else {
+        // Regular project card: tag-based payment rules
+        switch (unit) {
+        case 'megacredits':
+          return true;
+        case 'heat':
+          return this.playerinput.paymentOptions.heat === true;
+        case 'steel':
+          return this.tags.includes(Tag.BUILDING) ||
           this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
-      case 'titanium':
-        return this.canUseTitaniumRegularly() ||
+        case 'titanium':
+          return this.canUseTitaniumRegularly() ||
           this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
-      case 'plants':
-        return this.tags.includes(Tag.BUILDING) && this.playerinput.paymentOptions.plants === true;
-      case 'microbes':
-        return this.tags.includes(Tag.PLANT);
-      case 'floaters':
-        return this.tags.includes(Tag.VENUS);
-      case 'lunaArchivesScience':
-        return this.tags.includes(Tag.MOON);
-      case 'seeds':
-        return this.tags.includes(Tag.PLANT);
-      case 'graphene':
-        return this.tags.includes(Tag.SPACE) ||
+        case 'plants':
+          return this.tags.includes(Tag.BUILDING) && this.playerinput.paymentOptions.plants === true;
+        case 'microbes':
+          return this.tags.includes(Tag.PLANT);
+        case 'floaters':
+          return this.tags.includes(Tag.VENUS);
+        case 'lunaArchivesScience':
+          return this.tags.includes(Tag.MOON);
+        case 'seeds':
+          return this.tags.includes(Tag.PLANT);
+        case 'graphene':
+          return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
-      case 'kuiperAsteroids':
-      case 'auroraiData':
-      case 'spireScience':
-        return false;
-      default:
-        throw new Error('Unknown unit ' + unit);
+        case 'kuiperAsteroids':
+        case 'auroraiData':
+        case 'spireScience':
+          return false;
+        default:
+          throw new Error('Unknown unit ' + unit);
+        }
       }
     },
-    canUse(unit: SpendableResource) {
-      if (this.card === undefined) {
-        return false;
-      }
-      return this.cardCanUse(unit);
-    },
-    canUseLunaTradeFederationTitanium(): boolean {
-      return this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
-    },
+    /** @override */
     getTitaniumResourceRate(): number {
       const titaniumValue = this.playerView.thisPlayer.titaniumValue;
       if (this.canUseTitaniumRegularly() || this.card?.standardProjectCanPayWith?.titanium === true) {
@@ -265,12 +255,10 @@ export default defineComponent({
       return titaniumValue - 1;
     },
     saveData() {
-      const resolved = {...this.payment};
-
       if (this.card === undefined) {
         return;
       }
-      this.onsave({type: 'projectCard', card: this.card.name, payment: resolved});
+      this.onsave({type: 'projectCard', card: this.card.name, payment: this.payment});
     },
   },
 });

@@ -71,7 +71,7 @@ export default defineComponent({
     PaymentForm,
   },
   created() {
-    this.cost = this.playerinput.amount ?? 0;
+    this.cost = this.playerinput.amount;
   },
   methods: {
     canUse(unit: SpendableResource): boolean {
@@ -84,13 +84,7 @@ export default defineComponent({
       return this.playerinput.paymentOptions[unit] === true;
     },
     saveData() {
-      const resolved = {...this.payment};
-      // See PR #2353: avoid taking heat/MC when nothing is required.
-      if ((this.playerinput.amount ?? 0) === 0) {
-        resolved.heat = 0;
-        resolved.megacredits = 0;
-      }
-      this.onsave({type: 'payment', payment: resolved});
+      this.onsave({type: 'payment', payment: this.payment});
     },
   },
 });

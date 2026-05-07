@@ -94,3 +94,7 @@ Pluggable backends in `src/server/database/`: `SQLite`, `PostgreSQL`, `LocalFile
 ### Internationalization
 
 Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Translation files in `src/locales/`. Strings are matched by exact text content.
+
+## Style Guide
+
+- Follow the style of the code around the file. If this is a new file, follow the style of the code in the directory.

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {HiredRaiders} from '../../../src/server/cards/underworld/HiredRaiders';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';

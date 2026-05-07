@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Hackers} from '../../../src/server/cards/underworld/Hackers';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Hackers', () => {
   let card: Hackers;

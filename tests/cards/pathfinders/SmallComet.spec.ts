@@ -5,8 +5,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SmallComet', () => {
   let card: SmallComet;

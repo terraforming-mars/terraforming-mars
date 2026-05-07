@@ -4,13 +4,14 @@ import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {maxOutOceans, runAllActions, cast} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BoardType} from '../../../src/server/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;

@@ -1,12 +1,13 @@
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {churn, cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {churn, runAllActions, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SymbioticFungus', () => {
   let card: SymbioticFungus;

@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {CryoSleep} from '../../../src/server/cards/colonies/CryoSleep';
 import {Ceres} from '../../../src/server/colonies/Ceres';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CryoSleep', () => {
   it('Should play', () => {

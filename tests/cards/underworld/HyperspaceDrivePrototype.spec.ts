@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {HyperspaceDrivePrototype} from '../../../src/server/cards/underworld/HyperspaceDrivePrototype';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SpacePrivateers} from '../../../src/server/cards/underworld/SpacePrivateers';
 import {TestPlayer} from '../../TestPlayer';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HyperspaceDrivePrototype', () => {
   let game: IGame;

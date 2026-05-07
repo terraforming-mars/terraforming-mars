@@ -157,10 +157,14 @@ export default defineComponent({
     },
     syncPreferences(): void {
       const target = document.getElementById('ts-preferences-target');
-      if (!target) return;
+      if (!target) {
+        return;
+      }
 
       for (const k of Object.keys(this.prefs) as Array<Preference>) {
-        if (k === 'lang') continue;
+        if (k === 'lang') {
+          continue;
+        }
         this.setBoolPreferencesCSS(target, this.prefs[k], k);
       }
 

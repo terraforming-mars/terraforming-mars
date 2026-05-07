@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {TunnelingLoophole} from '../../../src/server/cards/underworld/TunnelingLoophole';
 import {testGame} from '../../TestGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '@/common/utils/utils';
 
 describe('TunnelingLoophole', () => {
   it('Should play', () => {

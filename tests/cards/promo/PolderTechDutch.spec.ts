@@ -1,12 +1,13 @@
 import {PolderTechDutch} from '../../../src/server/cards/promo/PolderTechDutch';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {expect} from 'chai';
-import {addCity, addGreenery, addOcean, cast, runAllActions} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {assertPlaceGreenery, assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PolderTechDutch', () => {
   it('Initial action', () => {

@@ -6,11 +6,12 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, cast, runAllActions, testGame} from '../../TestingUtils';
+import {addOcean, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
 import {toID} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', () => {

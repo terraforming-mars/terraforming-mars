@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {Urbanist} from '../../../src/server/awards/terraCimmeria/Urbanist';
 import {testGame} from '../../TestGame';
-import {addCity, addGreenery, cast, churn, maxOutOceans} from '../../TestingUtils';
+import {addCity, addGreenery, churn, maxOutOceans} from '../../TestingUtils';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {RedCity} from '../../../src/server/cards/pathfinders/RedCity';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Urbanist', () => {
   const award = new Urbanist();

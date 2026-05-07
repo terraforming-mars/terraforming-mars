@@ -653,6 +653,24 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megacredits: 2}));
   });
 
+  it('standard project with zero cost still shows save button (b8079)', async () => {
+    // Underworld Standard Technology discounts Excavate (cost 7) by 8, flooring at 0.
+    // The save button must still render and accept a zero payment.
+    const wrapper = setupCardForPurchase(
+      CardName.EXCAVATE_STANDARD_PROJECT, 0,
+      {megacredits: 0},
+      {},
+      {canPayWith: {steel: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    expect(wrapper.find('[data-test=save]').exists()).is.true;
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({megacredits: 0}));
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,

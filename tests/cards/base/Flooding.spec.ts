@@ -7,8 +7,9 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {addGreenery, cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {addGreenery, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Flooding', () => {
   let card: Flooding;

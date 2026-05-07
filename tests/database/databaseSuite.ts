@@ -9,7 +9,7 @@ import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
 import {testGame} from '../TestGame';
 import {GameId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {DiscordUser} from '../../src/server/server/auth/discord';
 

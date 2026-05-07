@@ -3,9 +3,10 @@ import {ForestMoon} from '../../../src/server/cards/starwars/ForestMoon';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ForestMoon', () => {
   let card: ForestMoon;

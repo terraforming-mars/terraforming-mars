@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {cast, formatMessage} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
-import {oneWayDifference} from '../../src/common/utils/utils';
+import {cast, oneWayDifference} from '../../src/common/utils/utils';
 import {Space} from '../../src/server/boards/Space';
 
 export function assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false, _space: Space | undefined = undefined) {

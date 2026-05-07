@@ -1,8 +1,9 @@
 import {expect} from 'chai';
 import {GeoscanSatellite} from '../../../src/server/cards/underworld/GeoscanSatellite';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GeoscanSatellite', () => {
   it('play', () => {

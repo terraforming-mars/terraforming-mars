@@ -399,10 +399,14 @@ export class Player implements IPlayer {
 
   public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
     const reducable = this.production[resource] + (resource === Resource.MEGACREDITS ? 5 : 0);
-    if (reducable < minQuantity) return false;
+    if (reducable < minQuantity) {
+      return false;
+    }
 
     if (resource === Resource.STEEL || resource === Resource.TITANIUM) {
-      if (this.alloysAreProtected()) return false;
+      if (this.alloysAreProtected()) {
+        return false;
+      }
     }
 
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
@@ -450,7 +454,9 @@ export class Player implements IPlayer {
   }
 
   public getColoniesCount() {
-    if (!this.game.gameOptions.coloniesExtension) return 0;
+    if (!this.game.gameOptions.coloniesExtension) {
+      return 0;
+    }
 
     let coloniesCount = 0;
 
@@ -501,10 +507,14 @@ export class Player implements IPlayer {
     const removingPlayer = options?.removingPlayer;
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
-      if (amountRemoved === 0) return;
+      if (amountRemoved === 0) {
+        return;
+      }
       card.resourceCount -= amountRemoved;
 
-      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveInsurance();
+      if (removingPlayer !== undefined && removingPlayer !== this) {
+        this.resolveInsurance();
+      }
 
       if (options?.log ?? true) {
         this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
@@ -629,8 +639,12 @@ export class Player implements IPlayer {
    */
   public spendableMegacredits(): number {
     let total = this.megaCredits;
-    if (this.canUseHeatAsMegaCredits) total += this.availableHeat();
-    if (this.canUseTitaniumAsMegacredits) total += this.titanium * (this.titaniumValue - 1);
+    if (this.canUseHeatAsMegaCredits) {
+      total += this.availableHeat();
+    }
+    if (this.canUseTitaniumAsMegacredits) {
+      total += this.titanium * (this.titaniumValue - 1);
+    }
     return total;
   }
 
@@ -1326,7 +1340,9 @@ export class Player implements IPlayer {
 
     let totalToPay = 0;
     for (const key of SPENDABLE_RESOURCES) {
-      if (usable[key]) totalToPay += payment[key] * multiplier[key];
+      if (usable[key]) {
+        totalToPay += payment[key] * multiplier[key];
+      }
     }
 
     return totalToPay;
@@ -1674,7 +1690,9 @@ export class Player implements IPlayer {
 
   private allOtherPlayersHavePassed(): boolean {
     const game = this.game;
-    if (game.isSoloMode()) return true;
+    if (game.isSoloMode()) {
+      return true;
+    }
     const players = game.players;
     const passedPlayers = game.getPassedPlayers();
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;

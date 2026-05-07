@@ -47,7 +47,9 @@ export class MarsBotTrack {
 
   /** Get the action at the next position without advancing. Returns undefined if at max or no action. */
   public peek(): TrackAction | undefined {
-    if (!this.canAdvance()) return undefined;
+    if (!this.canAdvance()) {
+      return undefined;
+    }
     return this.definition.layout[this.position + 1];
   }
 }

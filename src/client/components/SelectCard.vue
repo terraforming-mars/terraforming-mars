@@ -124,7 +124,9 @@ export default defineComponent({
         this.owners.clear();
         this.playerinput.cards.forEach((card) => {
           const owner = this.findOwner(card);
-          if (owner !== undefined) this.owners.set(card.name, owner);
+          if (owner !== undefined) {
+            this.owners.set(card.name, owner);
+          }
         });
       }
       return cards;

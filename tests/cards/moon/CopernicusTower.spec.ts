@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/server/cards/moon/CopernicusTower';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CopernicusTower', () => {
   let player: TestPlayer;

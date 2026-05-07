@@ -138,13 +138,17 @@ export class Colonies {
   }
 
   public increaseFleetSize(): void {
-    if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+    if (this.fleetSize < MAX_FLEET_SIZE) {
+      this.fleetSize++;
+    }
   }
 
   public decreaseFleetSize(): void {
     // This fleet size management is a little tricky, because with The Moon, it's possible to
     // have more fleets than MAX_FLEET_SIZE which are then discarded.
-    if (this.fleetSize > 0) this.fleetSize--;
+    if (this.fleetSize > 0) {
+      this.fleetSize--;
+    }
   }
 
   public setFleetSize(fleetSize: number) {

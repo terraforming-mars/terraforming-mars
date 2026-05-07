@@ -73,7 +73,9 @@ export class Cache extends EventEmitter {
 
   private evict(gameId: GameId) {
     const game = this.games.get(gameId);
-    if (game === undefined) return;
+    if (game === undefined) {
+      return;
+    }
     game.players.forEach((p) => p.tearDown());
     this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
   }

@@ -46,7 +46,7 @@ import {SelectInitialCardsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyModel} from '@/common/models/ColonyModel';
+import {ColonyModel, simpleColonyModel} from '@/common/models/ColonyModel';
 import * as titles from '@/common/inputs/SelectInitialCards';
 import {sum} from '@/common/utils/utils';
 
@@ -217,7 +217,9 @@ export default defineComponent({
     saveIfConfirmed() {
       const projectCards = this.selectedCards.filter((name) => getCard(name)?.type !== CardType.PRELUDE);
       let showAlert = false;
-      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
+      if (this.preferences.show_alerts && projectCards.length === 0) {
+        showAlert = true;
+      }
       if (showAlert) {
         this.typedRefs.confirmation.show();
       } else {
@@ -315,15 +317,8 @@ export default defineComponent({
     confirmSelection() {
       this.saveData();
     },
-    // TODO(kberg): Duplicate of LogPanel.getColony
     getColony(colonyName: ColonyName): ColonyModel {
-      return {
-        colonies: [],
-        isActive: false,
-        name: colonyName,
-        trackPosition: 0,
-        visitor: undefined,
-      };
+      return simpleColonyModel(colonyName);
     },
   },
   computed: {

@@ -1,6 +1,6 @@
 import {SubterraneanReservoir} from '../../../src/server/cards/base/SubterraneanReservoir';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('SubterraneanReservoir', () => {
   it('Should play', () => {

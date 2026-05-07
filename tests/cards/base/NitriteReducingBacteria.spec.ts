@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('NitriteReducingBacteria', () => {
   let card: NitriteReducingBacteria;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {CallistoPenalMines} from '../../../src/server/cards/base/CallistoPenalMines';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('CallistoPenalMines', () => {
   it('Should play', () => {

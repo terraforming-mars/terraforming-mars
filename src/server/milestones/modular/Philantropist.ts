@@ -14,8 +14,12 @@ export class Philantropist extends BaseMilestone {
     const cardsWithVP = player.tableau.filter((card) => {
       const victoryPoints = card.metadata.victoryPoints;
 
-      if (card.type === CardType.EVENT) return false;
-      if (victoryPoints === undefined) return false;
+      if (card.type === CardType.EVENT) {
+        return false;
+      }
+      if (victoryPoints === undefined) {
+        return false;
+      }
 
       if (typeof victoryPoints === 'number') {
         return victoryPoints > 0;

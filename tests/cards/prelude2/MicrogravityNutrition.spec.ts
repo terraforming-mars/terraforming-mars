@@ -3,7 +3,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {expect} from 'chai';
 
 describe('MicrogravityNutrition', () => {

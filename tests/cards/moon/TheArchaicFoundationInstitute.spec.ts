@@ -10,8 +10,9 @@ import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {runAllActions, setRulingParty} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TheArchaicFoundationInstitute', () => {
   let player: TestPlayer;

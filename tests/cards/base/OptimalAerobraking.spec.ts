@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {OptimalAerobraking} from '../../../src/server/cards/base/OptimalAerobraking';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('OptimalAerobraking', () => {
   it('Should play', () => {

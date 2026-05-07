@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ImportedGHG} from '../../../src/server/cards/base/ImportedGHG';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('ImportedGHG', () => {
   it('Should play', () => {

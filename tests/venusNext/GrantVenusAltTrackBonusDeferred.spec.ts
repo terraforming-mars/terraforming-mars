@@ -2,12 +2,13 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/server/venusNext/GrantVenusAltTrackBonusDeferred';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
-import {cast, formatMessage} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Birds} from '../../src/server/cards/base/Birds';
 import {testGame} from '../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('GrantVenusAltTrackBonusDeferred', () => {
   let player: TestPlayer;

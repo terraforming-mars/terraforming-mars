@@ -4,9 +4,10 @@ import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/server/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('IndustrialCenterAres', () => {
   let card: IndustrialCenterAres;

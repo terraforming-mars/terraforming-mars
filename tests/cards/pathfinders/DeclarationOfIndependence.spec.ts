@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DeclarationOfIndependence', () => {
   let card: DeclarationOfIndependence;

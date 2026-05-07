@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, setVenusScaleLevel} from '../../TestingUtils';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('SulphurEatingBacteria', () => {
   let card: SulphurEatingBacteria;

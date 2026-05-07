@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {ArboristCollective} from '../../../src/server/cards/underworld/ArboristCollective';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ArboristCollective', () => {
   let card: ArboristCollective;

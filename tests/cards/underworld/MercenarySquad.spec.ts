@@ -6,9 +6,10 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, cast, churn} from '../../TestingUtils';
+import {runAllActions, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {range} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MercenarySquad', () => {
   let card: MercenarySquad;

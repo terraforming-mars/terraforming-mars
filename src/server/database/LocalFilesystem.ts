@@ -104,7 +104,9 @@ export class LocalFilesystem implements IDatabase {
 
   getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     try {
-      if (!LocalFilesystem.quiet) console.log(`Loading ${gameId} at ${saveId}`);
+      if (!LocalFilesystem.quiet) {
+        console.log(`Loading ${gameId} at ${saveId}`);
+      }
       const text = readFileSync(this.historyFilename(gameId, saveId));
       const serializedGame = JSON.parse(text.toString());
       return Promise.resolve(serializedGame);
@@ -188,10 +190,14 @@ export class LocalFilesystem implements IDatabase {
   }
 
   private asGameId(dirent: Dirent): GameId | undefined {
-    if (!dirent.isFile()) return undefined;
+    if (!dirent.isFile()) {
+      return undefined;
+    }
     const re = /(.*).json/;
     const result = dirent.name.match(re);
-    if (result === null) return undefined;
+    if (result === null) {
+      return undefined;
+    }
     return isGameId(result[1]) ? result[1] : undefined;
   }
 
@@ -205,7 +211,9 @@ export class LocalFilesystem implements IDatabase {
           const text = readFileSync(this.filename(gameId));
           const game: SerializedGame = JSON.parse(text.toString());
           const participantIds: Array<ParticipantId> = game.players.map(toID);
-          if (game.spectatorId) participantIds.push(game.spectatorId);
+          if (game.spectatorId) {
+            participantIds.push(game.spectatorId);
+          }
           gameIds.push({gameId, participantIds});
         } catch (e) {
           console.error(`While reading ${gameId} `, e);

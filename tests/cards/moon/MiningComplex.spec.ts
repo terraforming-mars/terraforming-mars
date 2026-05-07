@@ -3,12 +3,13 @@ import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MiningComplex', () => {
   let game: IGame;

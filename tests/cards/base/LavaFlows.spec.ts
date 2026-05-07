@@ -2,12 +2,13 @@ import {expect} from 'chai';
 import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {toID} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LavaFlows', () => {
   let card: LavaFlows;

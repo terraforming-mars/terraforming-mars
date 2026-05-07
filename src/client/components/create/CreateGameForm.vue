@@ -774,9 +774,15 @@ export default defineComponent({
 
             nextTick(() => {
               try {
-                if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
-                if (!component.seededGame) component.seed = Math.random();
+                if (component.showBannedCards) {
+                  refs.cardsFilter.selected = processor.bannedCards;
+                }
+                if (component.showIncludedCards) {
+                  refs.cardsFilter2.selected = processor.includedCards;
+                }
+                if (!component.seededGame) {
+                  component.seed = Math.random();
+                }
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(processor.solarPhaseOption);
                 this.uploading = false;
@@ -1038,14 +1044,18 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the colonies you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       }
 
       if (players.length === 1 && this.expansions.corpera === false) {
         const confirm = window.confirm(translateText(
           'We do not recommend playing a solo game without the Corporate Era. Press OK if you want to play without it.'));
-        if (confirm === false) return;
+        if (confirm === false) {
+          return;
+        }
       }
 
       // Check Prelude 2 + Pathfinders infinite energy production
@@ -1076,7 +1086,9 @@ export default defineComponent({
       if (energyProductionBug === true) {
         const confirm = window.confirm(translateText(
           'It is possible with ThorGate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
-        if (confirm === false) return;
+        if (confirm === false) {
+          return;
+        }
       }
 
       // Check custom corp count
@@ -1092,7 +1104,9 @@ export default defineComponent({
           } else {
             neededCorpsCount = players.length * startingCorporations;
             // Merger Prelude alone needs 4 additional preludes
-            if (this.expansions.prelude && this.expansions.promo) neededCorpsCount += 4;
+            if (this.expansions.prelude && this.expansions.promo) {
+              neededCorpsCount += 4;
+            }
           }
         }
         if (customCorporations.length < neededCorpsCount) {
@@ -1111,7 +1125,9 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the corps you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       } else {
         customCorporations.length = 0;
@@ -1137,7 +1153,9 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the Preludes you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       } else {
         customPreludes.length = 0;
@@ -1228,8 +1246,9 @@ export default defineComponent({
     async createGame() {
       const dataToSend = await this.serializeSettings();
 
-      if (dataToSend === undefined) return;
-
+      if (dataToSend === undefined) {
+        return;
+      }
       localStorage.setItem('lastGameSettings', dataToSend);
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {

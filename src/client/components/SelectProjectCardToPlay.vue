@@ -124,20 +124,7 @@ export default defineComponent({
       return CardName;
     },
     showPaymentSection(): boolean {
-      // No card selected
-      if (this.card === undefined) {
-        return false;
-      }
-      // Card cannot be played.
-      if (this.card.isDisabled) {
-        return false;
-      }
-      // If this is a standard project, don't show this if the cost is zero.
-      if (this.card.standardProjectCanPayWith !== undefined) {
-        return this.cost > 0;
-      }
-      // Regular project card: always show payment UI.
-      return true;
+      return this.card !== undefined && this.card.isDisabled !== true;
     },
   },
   data(): SelectProjectCardToPlayDataModel {

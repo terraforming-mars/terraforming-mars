@@ -3,10 +3,11 @@ import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {cast, churn, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('UnitedNationsMarsInitiative', () => {
   let card: UnitedNationsMarsInitiative;

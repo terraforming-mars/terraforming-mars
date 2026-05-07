@@ -45,7 +45,9 @@ export class SurveyMission extends PreludeCard {
       // Ignore spaces before or above, those were covered earlier.
       // This is not just an optimization but also prevents storing
       // multiple triplets with the same spaces, but in a different order.
-      if (s2.id < s1.id) return false;
+      if (s2.id < s1.id) {
+        return false;
+      }
       return spaces.includes(s2);
     }
 
@@ -53,10 +55,14 @@ export class SurveyMission extends PreludeCard {
       const adjacentSpaces = board.getAdjacentSpaces(space).filter((adjacent) => validAdjacentSpace(space, adjacent));
       for (let idx1 = 0; idx1 <= adjacentSpaces.length - 2; idx1++) {
         const n1 = adjacentSpaces[idx1];
-        if (n1 === undefined) throw new Error('');
+        if (n1 === undefined) {
+          throw new Error('');
+        }
         for (let idx2 = idx1 + 1; idx2 <= adjacentSpaces.length - 1; idx2++) {
           const n2 = adjacentSpaces[idx2];
-          if (n2 === undefined) throw new Error('');
+          if (n2 === undefined) {
+            throw new Error('');
+          }
           if (board.getAdjacentSpaces(n1).includes(n2)) {
             result.push([space, n1, n2]);
           }
@@ -89,14 +95,18 @@ export class SurveyMission extends PreludeCard {
         }
         player.tableau.get(CardName.MINING_GUILD)?.onTilePlaced?.(player, player, space, BoardType.MARS);
 
-        if (iteration === 2) return undefined;
+        if (iteration === 2) {
+          return undefined;
+        }
 
         const revisedTriplets = triplets.filter((triplet) => {
           return triplet[0].id === space.id ||
           triplet[1].id === space.id ||
           triplet[2].id === space.id;
         });
-        if (revisedTriplets.length === 0) return undefined;
+        if (revisedTriplets.length === 0) {
+          return undefined;
+        }
 
         return this.selectSpace(player, iteration + 1, revisedTriplets);
       });

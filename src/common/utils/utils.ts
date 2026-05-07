@@ -236,6 +236,8 @@ export function getEnumStringEntries<T extends Record<string, string>>(enumObjec
   return Object.entries(enumObject) as Array<[string, T[keyof T]]>;
 }
 
+type ConstructorOf<T> = new (...args: any[]) => T;
+
 /**
  * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
  *
@@ -243,7 +245,7 @@ export function getEnumStringEntries<T extends Record<string, string>>(enumObjec
  */
 export function cast<T>(obj: any, klass: new (...args: any[]) => T): T;
 export function cast<T>(obj: any, klass: undefined): undefined;
-export function cast<T>(obj: any, klass: (new (...args: any[]) => T) | undefined): T | undefined {
+export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | undefined {
   if (klass === undefined) {
     if (obj !== undefined) {
       throw new Error(`Expected undefined, got type ${obj.constructor.name}`);

@@ -47,7 +47,9 @@ export class Ryu extends CeoCard {
       const selectOption = new SelectOption(message('Decrease ${0} production', (b) => b.string(resourceToDecrease))).andThen(() => {
         // M€ production can go down to -5
         let decreasable = player.production.get(resourceToDecrease);
-        if (resourceToDecrease === Resource.MEGACREDITS) decreasable += 5;
+        if (resourceToDecrease === Resource.MEGACREDITS) {
+          decreasable += 5;
+        }
         const maxDecreasableAmt = Math.min(player.game.generation + 2, decreasable);
 
         return new SelectAmount(
@@ -78,7 +80,9 @@ export class Ryu extends CeoCard {
 
   private productionIsDecreasable(player: IPlayer, resource: Resource): boolean {
     let minProduction = 0;
-    if (resource === Resource.MEGACREDITS) minProduction -= 5;
+    if (resource === Resource.MEGACREDITS) {
+      minProduction -= 5;
+    }
     return player.production.get(resource) > minProduction;
   }
 }

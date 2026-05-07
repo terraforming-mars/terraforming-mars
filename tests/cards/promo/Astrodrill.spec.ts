@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
@@ -7,6 +7,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Astrodrill', () => {
   let card: Astrodrill;

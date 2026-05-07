@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {EarthquakeMachine} from '../../../src/server/cards/underworld/EarthquakeMachine';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('EarthquakeMachine', () => {
   let game: IGame;

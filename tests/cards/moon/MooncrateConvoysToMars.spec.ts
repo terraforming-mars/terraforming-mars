@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';

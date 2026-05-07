@@ -35,9 +35,13 @@ export class LogHelper {
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
-    if (space.x === -1 && space.y === -1) return;
+    if (space.x === -1 && space.y === -1) {
+      return;
+    }
     // Skip solo play random tiles
-    if (player.name === 'neutral') return;
+    if (player.name === 'neutral') {
+      return;
+    }
 
     player.game.log('${0} ${1} ${2} at ${3}', (b) =>
       b.player(player).string(action).string(description).space(space));
@@ -72,6 +76,16 @@ export class LogHelper {
         b.cards(cards);
       }
     }, options);
+  }
+
+  static logRevealedCards(player: IPlayer, cards: ReadonlyArray<ICard>) {
+    const message = cards.length === 0 ? '${0} revealed no cards' : '${0} revealed ${1}';
+    player.game.log(message, (b) => {
+      b.player(player);
+      if (cards.length > 0) {
+        b.cards(cards);
+      }
+    });
   }
 
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {

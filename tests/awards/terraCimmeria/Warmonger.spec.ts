@@ -11,7 +11,7 @@ import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 import {AstraMechanica} from '../../../src/server/cards/promo/AstraMechanica';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';

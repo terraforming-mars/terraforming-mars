@@ -4,12 +4,13 @@ import {testGame} from '../../TestGame';
 import {Phase} from '../../../src/common/Phase';
 import {WorldGovernmentAdvisor} from '../../../src/server/cards/prelude2/WorldGovernmentAdvisor';
 import {IGame} from '../../../src/server/IGame';
-import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertPlaceOcean} from '../../assertions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('WorldGovernmentAdvisor', () => {
   let card: WorldGovernmentAdvisor;

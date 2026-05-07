@@ -11,7 +11,7 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {isIStandardProjectCard} from '../../src/server/cards/IStandardProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
+import {formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -24,6 +24,7 @@ import {Venus} from '../../src/server/cards/community/Venus';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {L1TradeTerminal} from '../../src/server/cards/prelude2/L1TradeTerminal';
 import {Mercury} from '../../src/server/cards/community/Mercury';
+import {cast} from '@/common/utils/utils';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = player.getStandardProjectOption();

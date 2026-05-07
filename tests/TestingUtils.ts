@@ -22,6 +22,7 @@ import {CardRequirements} from '../src/server/cards/requirements/CardRequirement
 import {Warning} from '../src/common/cards/Warning';
 import {testGame as testGameProxy} from './TestGame';
 import {LogMessage} from '../src/common/logs/LogMessage';
+import {cast} from '@/common/utils/utils';
 
 /**
  * Creates a new game for testing. Has some hidden behavior for testing:
@@ -201,30 +202,6 @@ export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
     card.name = 'Fake Card ' + FakeCard.idx++ as CardName;
   }
   return card;
-}
-
-type ConstructorOf<T> = new (...args: any[]) => T;
-
-/**
- * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
- *
- * Accepts `undefined` as class and fails when obj is not undefined.
- *
- * @deprecated use common/utils/utils:cast
- */
-export function cast<T>(obj: any, klass: ConstructorOf<T>): T;
-export function cast<T>(obj: any, klass: undefined): undefined;
-export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | undefined {
-  if (klass === undefined) {
-    if (obj !== undefined) {
-      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
-    }
-    return undefined;
-  }
-  if (!(obj instanceof klass)) {
-    throw new Error(`Not an instance of ${klass.name}: ${obj?.constructor?.name}`);
-  }
-  return obj;
 }
 
 export async function sleep(ms: number): Promise<void> {

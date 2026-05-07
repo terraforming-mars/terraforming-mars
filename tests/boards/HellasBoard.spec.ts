@@ -5,14 +5,14 @@ import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/common/boards/SpaceName';
 import {HellasBoard} from '../../src/server/boards/HellasBoard';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {Manutech} from '../../src/server/cards/venusNext/Manutech';
 import {DomedCrater} from '../../src/server/cards/base/DomedCrater';
 import {Resource} from '../../src/common/Resource';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
-import {toID} from '../../src/common/utils/utils';
+import {cast, toID} from '../../src/common/utils/utils';
 
 describe('HellasBoard', () => {
   let board: HellasBoard;

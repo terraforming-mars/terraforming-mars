@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RoadPiracy} from '../../../src/server/cards/moon/RoadPiracy';
 import {testGame} from '../../TestGame';
@@ -7,6 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('RoadPiracy', () => {
   let game: IGame;

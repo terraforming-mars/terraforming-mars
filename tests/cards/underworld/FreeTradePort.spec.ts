@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {FreeTradePort} from '../../../src/server/cards/underworld/FreeTradePort';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('FreeTradePort', () => {
   it('play', () => {

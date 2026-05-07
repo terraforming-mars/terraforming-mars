@@ -1,8 +1,9 @@
 import {expect} from 'chai';
 import {CloudVortexOutpost} from '../../../src/server/cards/underworld/CloudVortexOutpost';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CloudVortexOutpost', () => {
   it('play', () => {

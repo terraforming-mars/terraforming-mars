@@ -6,9 +6,10 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ArtificialLake', () => {
   let card: ArtificialLake;
@@ -63,7 +64,9 @@ describe('ArtificialLake', () => {
     // Take all but one space.
     const spaces = game.board.getAvailableSpacesOnLand(player);
     spaces.forEach((space, idx) => {
-      if (idx !== 0) game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+      if (idx !== 0) {
+        game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+      }
     });
 
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);

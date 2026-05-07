@@ -39,11 +39,15 @@ function browser(): string {
   }
   if (match[1]=== 'Chrome') {
     const temp = ua.match(/\b(OPR|Edge)\/(\d+)/);
-    if (temp !== null) return temp.slice(1).join(' ').replace('OPR', 'Opera');
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera');
+    }
   }
   match = match[2] ? [match[1], match[2]] : [navigator.appName, navigator.appVersion, '-?'];
   const temp = ua.match(/version\/(\d+)/i);
-  if (temp !== null) match.splice(1, 1, temp[1]);
+  if (temp !== null) {
+    match.splice(1, 1, temp[1]);
+  }
   return match.join(' ');
 }
 
@@ -112,7 +116,9 @@ export default defineComponent({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    if (!windowHasHTMLDialogElement()) {
+      dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    }
     this.setMessage();
   },
 });

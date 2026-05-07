@@ -16,11 +16,17 @@ describe('floaterCards', () => {
 
         // Only looking for cards that mention floaters in the metadata
         // or requirements. Cards with floater resources don't need to be hand-verified.
-        if (card.resourceType === CardResource.FLOATER) return;
-        if (card.type === CardType.PROXY) return;
+        if (card.resourceType === CardResource.FLOATER) {
+          return;
+        }
+        if (card.type === CardType.PROXY) {
+          return;
+        }
 
         const renderData = card.metadata.renderData;
-        if (renderData === undefined) return;
+        if (renderData === undefined) {
+          return;
+        }
 
         const string = JSON.stringify(renderData);
         if (string.toLowerCase().includes('floater')) {

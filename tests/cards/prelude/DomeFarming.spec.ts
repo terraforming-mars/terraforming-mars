@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DomeFarming} from '../../../src/server/cards/prelude/DomeFarming';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('DomeFarming', () => {
   it('Should play', () => {

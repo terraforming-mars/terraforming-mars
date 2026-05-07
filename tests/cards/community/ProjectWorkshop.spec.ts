@@ -11,7 +11,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {cast, churn, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -23,6 +23,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportFromEuropa';
 import {JovianEmbassy} from '../../../src/server/cards/promo/JovianEmbassy';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ProjectWorkshop', () => {
   let card: ProjectWorkshop;

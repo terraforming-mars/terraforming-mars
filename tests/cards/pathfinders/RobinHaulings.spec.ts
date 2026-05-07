@@ -3,9 +3,10 @@ import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('RobinHaulings', () => {
   let card: RobinHaulings;

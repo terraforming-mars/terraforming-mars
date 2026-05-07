@@ -5,7 +5,7 @@ import {Units} from '../../src/common/Units';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {InputResponse} from '../../src/common/inputs/InputResponse';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('SelectProductionToLoseDeferred', () => {
   let player: TestPlayer;

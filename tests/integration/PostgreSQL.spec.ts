@@ -8,13 +8,13 @@ import {PostgreSQL, POSTGRESQL_TABLES} from '../../src/server/database/PostgreSQ
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
-import {range} from '../../src/common/utils/utils';
+import {cast, range} from '../../src/common/utils/utils';
 
 dotenv.config({path: 'tests/integration/.env', debug: true});
 

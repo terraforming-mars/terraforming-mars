@@ -33,7 +33,9 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     const cards = [];
     for (let idx = 0; idx < 4; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
-      if (card === undefined) break;
+      if (card === undefined) {
+        break;
+      }
       cards.push(card);
     }
 

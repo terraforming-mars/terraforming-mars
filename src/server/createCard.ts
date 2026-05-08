@@ -23,6 +23,10 @@ const CARD_RENAMES = new Map<string, CardName>([
   ['Colony', CardName.BUILD_COLONY_STANDARD_PROJECT],
 ]);
 
+export function resolveCardName(cardName: CardName): CardName {
+  return CARD_RENAMES.get(cardName) ?? cardName;
+}
+
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
   const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
 

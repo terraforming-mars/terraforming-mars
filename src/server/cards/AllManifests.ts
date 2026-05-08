@@ -2,6 +2,7 @@ import {ARES_CARD_MANIFEST} from './ares/AresCardManifest';
 import {ModuleManifest} from './ModuleManifest';
 import {COLONIES_CARD_MANIFEST} from './colonies/ColoniesCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './community/CommunityCardManifest';
+import {CORPORATE_BETTERMENTS_CARD_MANIFEST} from './corporateBetterments/CorporateBettermentsCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './promo/PromoCardManifest';
 import {CEO_CARD_MANIFEST} from './ceos/CeoCardManifest';
@@ -27,6 +28,7 @@ export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   PRELUDE2_CARD_MANIFEST,
   TURMOIL_CARD_MANIFEST,
   COMMUNITY_CARD_MANIFEST,
+  CORPORATE_BETTERMENTS_CARD_MANIFEST,
   ARES_CARD_MANIFEST,
   MOON_CARD_MANIFEST,
   PATHFINDERS_CARD_MANIFEST,

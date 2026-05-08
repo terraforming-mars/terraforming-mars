@@ -57,7 +57,7 @@
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
     "vue-loader": "^17.0.0",
-    "vue-tsc": "^3.2.7",
+    "vue-tsc": "^3.2.8",
     "zlib": "^1.0.5"
   },
   "optionalDependencies": {

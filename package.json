@@ -55,7 +55,7 @@
     "tsc-alias": "^1.8.16",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.5.0",
+    "typescript": "^6.0.3",
     "vue-loader": "^17.0.0",
     "vue-tsc": "^3.2.7",
     "zlib": "^1.0.5"

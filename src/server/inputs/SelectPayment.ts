@@ -35,6 +35,10 @@ export class SelectPayment extends BasePlayerInput<Payment> {
       kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
       spireScience: player.getSpendable('spireScience'),
       reserveUnits: this.reserveUnits,
+
+      floaters: 0,
+      microbes: 0,
+      graphene: 0,
     };
   }
 

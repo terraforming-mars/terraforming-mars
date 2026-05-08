@@ -1,20 +1,21 @@
 import {mount} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
-import SelectPayment from '@/client/components/SelectPayment.vue';
+import {expect} from 'chai';
+import SelectPaymentRevised from '@/client/components/SelectPaymentRevised.vue';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PaymentTester} from './PaymentTester';
+import {PaymentTesterRevised} from './PaymentTesterRevised';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 
-describe('SelectPayment', () => {
+describe('SelectPaymentRevised', () => {
   it('Uses heat', async () => {
     const wrapper = setupBill(
       10,
       {heat: 5, megacredits: 7},
       {paymentOptions: {heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({heat: 3, megacredits: 7});
 
@@ -37,7 +38,7 @@ describe('SelectPayment', () => {
       {steel: 4, megacredits: 7, steelValue: 2},
       {paymentOptions: {steel: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({steel: 4, megacredits: 2});
   });
@@ -48,7 +49,7 @@ describe('SelectPayment', () => {
       {steel: 1, titanium: 2, megacredits: 7, steelValue: 2, titaniumValue: 3},
       {paymentOptions: {steel: true, titanium: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({steel: 1, titanium: 2, megacredits: 2});
   });
@@ -59,7 +60,7 @@ describe('SelectPayment', () => {
       {megacredits: 2, titanium: 4, titaniumValue: 7},
       {paymentOptions: {titanium: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({titanium: 2, megacredits: 0});
   });
@@ -70,7 +71,7 @@ describe('SelectPayment', () => {
       {megacredits: 6},
       {paymentOptions: {seeds: true}, seeds: 4});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({seeds: 2, megacredits: 4});
   });
@@ -81,7 +82,7 @@ describe('SelectPayment', () => {
       {megacredits: 2},
       {paymentOptions: {seeds: true}, seeds: 4});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({seeds: 3, megacredits: 0});
   });
@@ -92,7 +93,7 @@ describe('SelectPayment', () => {
       {megacredits: 6},
       {paymentOptions: {auroraiData: true}, auroraiData: 4});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({auroraiData: 4, megacredits: 2});
   });
@@ -103,7 +104,7 @@ describe('SelectPayment', () => {
       {megacredits: 2, titanium: 4, titaniumValue: 4, heat: 3},
       {paymentOptions: {titanium: true, heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
 
     // Using this as a chance to test that other components aren't visible.
@@ -117,7 +118,7 @@ describe('SelectPayment', () => {
       {megacredits: 12, titanium: 0, titaniumValue: 3, steelValue: 2, heat: 0},
       {paymentOptions: {titanium: true, heat: true, steel: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
 
     tester.expectAvailablePaymentComponents('megacredits');
@@ -130,7 +131,7 @@ describe('SelectPayment', () => {
       {megacredits: 16, heat: 3},
       {paymentOptions: {heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({heat: 0, megacredits: 9});
 
@@ -149,7 +150,7 @@ describe('SelectPayment', () => {
       {megacredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
       {paymentOptions: {titanium: true, heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({titanium: 2, heat: 0, megacredits: 2});
 
@@ -178,7 +179,7 @@ describe('SelectPayment', () => {
         ]},
       {paymentOptions: {heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
 
     tester.expectIsAvailable('heat');
@@ -206,7 +207,7 @@ describe('SelectPayment', () => {
       },
       {paymentOptions: {heat: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({heat: 0, megacredits: 10});
 
@@ -221,7 +222,7 @@ describe('SelectPayment', () => {
       {megacredits: 10, titanium: 2, titaniumValue: 4},
       {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({titanium: 2, megacredits: 4});
 
@@ -237,7 +238,7 @@ describe('SelectPayment', () => {
       },
       {paymentOptions: {titanium: true, lunaTradeFederationTitanium: false}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({titanium: 2, megacredits: 2});
   });
@@ -250,7 +251,7 @@ describe('SelectPayment', () => {
       },
       {paymentOptions: {lunaTradeFederationTitanium: true, titanium: true}});
 
-    const tester = new PaymentTester(wrapper);
+    const tester = new PaymentTesterRevised(wrapper);
     await tester.nextTick();
     tester.expectPayment({titanium: 2, megacredits: 2});
 
@@ -259,6 +260,51 @@ describe('SelectPayment', () => {
 
     await tester.clickMax('titanium');
     tester.expectPayment({titanium: 2, megacredits: 2});
+  });
+
+  it('saveData() via PlayerInputFactory blocks save when payment cannot overspend', async () => {
+    // Steel at rate 2, 6 available: greedy picks 5 steel (=10 MC, exact).
+    // Clicking + once gives 6 steel (=12 MC). delta=2 >= rate=2, so handleSave()
+    // must set a warning and NOT call onsave.
+    let onsaveCalled = false;
+    const wrapper = mount(SelectPaymentRevised, {
+      ...globalConfig,
+      props: {
+        playerView: {
+          id: 'playerid-foo',
+          thisPlayer: {
+            steel: 6, megacredits: 0, steelValue: 2,
+            titanium: 0, titaniumValue: 3, heat: 0, tableau: [],
+          } as unknown as PublicPlayerModel,
+        } as unknown as PlayerViewModel,
+        playerinput: {
+          type: 'payment',
+          buttonLabel: '',
+          title: 'foo',
+          amount: 10,
+          paymentOptions: {steel: true},
+          auroraiData: 0, kuiperAsteroids: 0, seeds: 0, spireScience: 0,
+          floaters: 0, microbes: 0, graphene: 0,
+          reserveUnits: undefined,
+        },
+        onsave: () => {
+          onsaveCalled = true;
+        },
+        showsave: true,
+        showtitle: true,
+      },
+    });
+
+    const tester = new PaymentTesterRevised(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({steel: 5});
+
+    await tester.clickPlus('steel');
+    tester.expectPayment({steel: 6});
+
+    (wrapper.vm as any).saveData();
+
+    expect(onsaveCalled).is.false;
   });
 
   function setupBill(
@@ -296,7 +342,7 @@ describe('SelectPayment', () => {
       ...playerInputFields,
     };
 
-    return mount(SelectPayment, {
+    return mount(SelectPaymentRevised, {
       ...globalConfig,
       props: {
         playerView: playerView,

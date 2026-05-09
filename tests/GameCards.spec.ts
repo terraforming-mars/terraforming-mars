@@ -155,5 +155,19 @@ describe('GameCards', () => {
     };
     expect(() => new GameCards(gameOptions).getProjectCards()).to.throw('Card [Greenery] not found');
   });
+
+  it('does not duplicate corporations when customCorporationsList mixes old and new card names', () => {
+    // 'Thorgate' is the old name; CardName.THORGATE ('ThorGate') is canonical. Both are in base manifest.
+    // 'EcoLine' is the old name; CardName.ECOLINE ('Ecoline') is canonical.
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      customCorporationsList: ['Thorgate' as CardName, CardName.THORGATE, 'EcoLine' as CardName, CardName.ECOLINE],
+    };
+    const corps = new GameCards(gameOptions).getCorporationCards();
+    const thorgates = corps.filter((c) => c.name === CardName.THORGATE);
+    const ecolines = corps.filter((c) => c.name === CardName.ECOLINE);
+    expect(thorgates).to.have.length(1);
+    expect(ecolines).to.have.length(1);
+  });
 });
 

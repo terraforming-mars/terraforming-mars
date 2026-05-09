@@ -176,6 +176,25 @@ const cases: Array<Case> = [
     },
   },
   {
+    description: 'warns on unrecognized card names in custom lists',
+    input: {
+      ...TEMPLATE_INPUT,
+      // 'Thorgate' and 'EcoLine' are old names; CardName.ECOLINE is canonical and should not warn
+      customCorporationsList: ['Thorgate', 'EcoLine', CardName.ECOLINE],
+      customPreludes: ['Bad Prelude Name'],
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      customCorporations: ['Thorgate', 'EcoLine', CardName.ECOLINE] as Array<CardName>,
+      customPreludes: ['Bad Prelude Name'] as unknown as Array<CardName>,
+    },
+    expectedWarnings: [
+      "Old card name 'Thorgate' in customCorporations; use 'ThorGate'",
+      "Old card name 'EcoLine' in customCorporations; use 'Ecoline'",
+      "Unknown card name 'Bad Prelude Name' in customPreludes",
+    ],
+  },
+  {
     description: 'new escape velocity values',
     input: {
       ...TEMPLATE_INPUT,

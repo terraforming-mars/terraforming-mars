@@ -1,6 +1,6 @@
 import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
-import {newCeo, newCorporationCard, newProjectCard} from '../src/server/createCard';
+import {newCeo, newProjectCard} from '../src/server/createCard';
 
 describe('createCard', () => {
   it('newProjectCard: success', () => {

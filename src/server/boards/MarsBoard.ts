@@ -9,6 +9,7 @@ import {CardName} from '../../common/cards/CardName';
 import {SpaceId} from '../../common/Types';
 import {oneWayDifference} from '../../common/utils/utils';
 import {Tile} from '../Tile';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
@@ -109,6 +110,31 @@ export class MarsBoard extends Board {
     return spacesOnLand.filter(
       (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );
+  }
+
+  public hasAvailableCitySpaceWithBonus(player: IPlayer, bonus: SpaceBonus): boolean {
+    return this.getAvailableSpacesForCity(player).some((s) => s.bonus.includes(bonus));
+  }
+
+  /**
+   * Returns true when the player can cover -1 energy production cost via
+   * an available city space that carries an ENERGY_PRODUCTION bonus.
+   */
+  public static hasEnergyCoverage(player: IPlayer, spaces: ReadonlyArray<Space>): boolean {
+    return player.production.energy >= 1 ||
+      spaces.some((s) => s.bonus.includes(SpaceBonus.ENERGY_PRODUCTION));
+  }
+
+  /**
+   * When a player has 0 energy production (relying on a placement bonus to cover
+   * the -1 cost), constrain city placement to only energy-production spaces.
+   * Otherwise returns the full set unchanged.
+   */
+  public static filterForEnergy(player: IPlayer, spaces: ReadonlyArray<Space>): ReadonlyArray<Space> {
+    if (player.production.energy > 0) {
+      return spaces;
+    }
+    return spaces.filter((s) => s.bonus.includes(SpaceBonus.ENERGY_PRODUCTION));
   }
 
   public getSpacesAwayFromCities(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {

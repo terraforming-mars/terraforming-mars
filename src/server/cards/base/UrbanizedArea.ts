@@ -8,6 +8,9 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
+import {LoseProduction} from '../../deferredActions/LoseProduction';
+import {Resource} from '../../../common/Resource';
+import {MarsBoard} from '../../boards/MarsBoard';
 
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +21,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
       cost: 10,
 
       behavior: {
-        production: {energy: -1, megacredits: 2},
+        production: {megacredits: 2},
       },
 
       metadata: {
@@ -33,18 +36,27 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
+
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
-    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
+    const available = this.getAvailableSpaces(player, canAffordOptions);
+    if (available.length === 0) {
+      return false;
+    }
+    return MarsBoard.hasEnergyCoverage(player, available);
   }
+
   public override bespokePlay(player: IPlayer) {
+    const spaces = MarsBoard.filterForEnergy(player, this.getAvailableSpaces(player));
     player.game.defer(new PlaceCityTile(player, {
       title: 'Select space next to at least 2 other city tiles',
-      spaces: this.getAvailableSpaces(player),
-    }));
+      spaces,
+    })).andThen(() => {
+      player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
+    });
     return undefined;
   }
 }

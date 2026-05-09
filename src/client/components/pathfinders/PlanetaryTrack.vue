@@ -1,6 +1,6 @@
 <template>
     <tr>
-      <td><div class="track-icon">{{icon}}</div></td>
+      <td><div :class="iconClass"></div></td>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
         <planetary-track-rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
@@ -48,11 +48,10 @@ export default defineComponent({
     },
   },
   computed: {
-    icon(): string {
+    iconClass(): string {
       switch (this.type) {
-      case 'risingPlayer': return '^';
-      case 'everyone': return '*';
-      case 'mostTags': return '!';
+      case 'risingPlayer': return 'track-icon track-icon--rising-player';
+      case 'everyone': return 'track-icon track-icon--everyone';
       default: return '';
       }
     },

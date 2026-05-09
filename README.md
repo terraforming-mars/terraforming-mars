@@ -144,3 +144,4 @@ GPLv3
 
 Russian Prototype font: https://fonts-online.ru/fonts/prototype-rus-daymarius (copyright 2001, free for personal use)
 Polish Prototype font: https://www.gry-planszowe.pl/viewtopic.php?p=1489006#p1489006 (copyright 2001, free for personal use)
+Baord Game Icons: http://www.kenney.nl/  (Creative Commons Zero, CC0)

@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast, formatMessage} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {Luna} from '../../src/server/colonies/Luna';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
+import {cast} from '@/common/utils/utils';
 
 export function assertBuildColony(player: TestPlayer, input: PlayerInput | undefined, idx: number = 0) {
   const selectColony = cast(input, SelectColony);

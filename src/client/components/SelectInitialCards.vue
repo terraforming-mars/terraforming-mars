@@ -217,7 +217,9 @@ export default defineComponent({
     saveIfConfirmed() {
       const projectCards = this.selectedCards.filter((name) => getCard(name)?.type !== CardType.PRELUDE);
       let showAlert = false;
-      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
+      if (this.preferences.show_alerts && projectCards.length === 0) {
+        showAlert = true;
+      }
       if (showAlert) {
         this.typedRefs.confirmation.show();
       } else {

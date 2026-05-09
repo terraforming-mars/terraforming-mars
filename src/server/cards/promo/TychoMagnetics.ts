@@ -2,10 +2,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {canSpendEnergyForCards, spendEnergyForCards} from './energyForCards';
 
 export class TychoMagnetics extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -33,23 +32,11 @@ export class TychoMagnetics extends CorporationCard implements ICorporationCard 
     });
   }
 
-  // TODO(kberg): this is a direct copy from hi-tech lab.
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0 && player.game.projectDeck.canDraw(1);
+    return canSpendEnergyForCards(player);
   }
 
   public action(player: IPlayer) {
-    const max = Math.min(player.energy, player.game.projectDeck.size());
-    return new SelectAmount('Select amount of energy to spend', 'OK', 1, max)
-      .andThen((amount) => {
-        player.stock.deduct(Resource.ENERGY, amount);
-        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-        if (amount === 1) {
-          player.drawCard();
-          return undefined;
-        }
-        player.drawCardKeepSome(amount, {keepMax: 1});
-        return undefined;
-      });
+    return spendEnergyForCards(player);
   }
 }

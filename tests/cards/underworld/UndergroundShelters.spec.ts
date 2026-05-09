@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {UndergroundShelters} from '../../../src/server/cards/underworld/UndergroundShelters';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {ClaimedToken} from '../../../src/common/underworld/UnderworldPlayerData';
 import {SelectClaimedUndergroundToken} from '../../../src/server/inputs/SelectClaimedUndergroundToken';
+import {cast} from '@/common/utils/utils';
 
 describe('UndergroundShelters', () => {
   it('Should play', () => {

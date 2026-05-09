@@ -12,7 +12,7 @@ import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
-import {cast, doWait, getSendADelegateOption, runAllActions} from './TestingUtils';
+import {doWait, getSendADelegateOption, runAllActions} from './TestingUtils';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -36,6 +36,7 @@ import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
+import {cast} from '@/common/utils/utils';
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {

@@ -238,7 +238,9 @@ export function verifySynergyRules(
       const synergy = synergies.get(mas[i], mas[j]);
       max = Math.max(synergy, max);
       totalSynergy += synergy;
-      if (synergy >= constraints.highThreshold) numberOfHigh++;
+      if (synergy >= constraints.highThreshold) {
+        numberOfHigh++;
+      }
     }
   }
   return max <= constraints.maxSynergyAllowed &&

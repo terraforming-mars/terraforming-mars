@@ -81,7 +81,9 @@ export default defineComponent({
       return 'resource_icon--' + this.type;
     },
     productionSign(): string {
-      if (this.production > 0) return '+';
+      if (this.production > 0) {
+        return '+';
+      }
       return '';
     },
     protectionIcon(): string {

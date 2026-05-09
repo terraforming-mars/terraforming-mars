@@ -6,7 +6,7 @@ import {Resource} from '../../../src/common/Resource';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Ryu} from '../../../src/server/cards/ceos/Ryu';
 
 

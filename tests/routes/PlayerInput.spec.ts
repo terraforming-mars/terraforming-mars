@@ -6,7 +6,7 @@ import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UndoActionOption} from '../../src/server/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';

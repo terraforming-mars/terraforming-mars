@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, formatMessage} from '../../TestingUtils';
+import {formatMessage} from '../../TestingUtils';
 import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
 import {Delegate, Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -9,6 +9,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IPlayer} from '../../../src/server/IPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('AnOfferYouCantRefuse', () => {
   let player: TestPlayer;

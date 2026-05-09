@@ -41,7 +41,9 @@ export default defineComponent({
         return resp.json();
       })
       .then((data) => {
-        if (!data) return;
+        if (!data) {
+          return;
+        }
         try {
           this.user = data._user.userid;
         } catch (e) {
@@ -60,7 +62,9 @@ export default defineComponent({
       const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
       const encoded = encodeURI(url);
       const clientId = this.discordClientId;
-      if (!clientId) return '';
+      if (!clientId) {
+        return '';
+      }
       return 'https://discord.com/oauth2/authorize?client_id=' + clientId + '&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {

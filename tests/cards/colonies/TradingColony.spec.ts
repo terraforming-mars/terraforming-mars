@@ -5,7 +5,7 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Miranda} from '../../../src/server/colonies/Miranda';
 import {IGame} from '../../../src/server/IGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 

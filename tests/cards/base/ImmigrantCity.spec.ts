@@ -3,12 +3,13 @@ import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
 import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {cast, churn, runAllActions, runNextAction} from '../../TestingUtils';
+import {churn, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ImmigrantCity', () => {
   let card: ImmigrantCity;

@@ -43,7 +43,9 @@ export class UrbanizedArea extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     const available = this.getAvailableSpaces(player, canAffordOptions);
-    if (available.length === 0) return false;
+    if (available.length === 0) {
+      return false;
+    }
     return MarsBoard.hasEnergyCoverage(player, available);
   }
 

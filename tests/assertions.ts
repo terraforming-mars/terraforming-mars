@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {cast} from './TestingUtils';
 import {IPlayer} from '../src/server/IPlayer';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
@@ -12,6 +11,7 @@ import {TileType} from '../src/common/TileType';
 import {Space} from '../src/server/boards/Space';
 import {CardName} from '../src/common/cards/CardName';
 import {toName} from '../src/common/utils/utils';
+import {cast} from '../src/common/utils/utils';
 
 export function assertIsAddResourceToCard(input: PlayerInput | undefined, count: number, expectedCards: Array<ICard>, card: ICard) {
   const selectCard = cast(input, SelectCard);

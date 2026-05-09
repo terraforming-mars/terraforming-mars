@@ -3,7 +3,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -12,6 +12,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Tate} from '../../../src/server/cards/ceos/Tate';
 import {LogMessageDataType} from '../../../src/common/logs/LogMessageDataType';
 import {toName} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Tate', () => {
   let card: Tate;

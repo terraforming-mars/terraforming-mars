@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GagarinMobileBase} from '../../../src/server/cards/pathfinders/GagarinMobileBase';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -10,6 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
 import {UnseededRandom} from '../../../src/common/utils/Random';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GagarinMobileBase', () => {
   let game: IGame;

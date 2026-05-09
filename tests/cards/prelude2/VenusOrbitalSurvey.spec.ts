@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {churn, cast, fakeCard} from '../../TestingUtils';
+import {churn, fakeCard} from '../../TestingUtils';
 import {VenusOrbitalSurvey} from '../../../src/server/cards/prelude2/VenusOrbitalSurvey';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('VenusOrbitalSurvey', () => {
   let card: VenusOrbitalSurvey;

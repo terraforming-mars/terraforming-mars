@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {Hadesphere} from '../../../src/server/cards/underworld/Hadesphere';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Hadesphere', () => {
   let card: Hadesphere;

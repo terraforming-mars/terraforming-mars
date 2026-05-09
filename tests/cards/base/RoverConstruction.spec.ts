@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RoverConstruction} from '../../../src/server/cards/base/RoverConstruction';
 import {addCity, runAllActions} from '../../TestingUtils';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('RoverConstruction', () => {

@@ -6,10 +6,11 @@ import {Game} from '../../../src/server/Game';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast, formatMessage, runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Leavitt', () => {
   let leavitt: Leavitt;

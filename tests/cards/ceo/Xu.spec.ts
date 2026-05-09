@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, forceGenerationEnd, cast} from '../../TestingUtils';
+import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Xu} from '../../../src/server/cards/ceos/Xu';
+import {cast} from '../../../src/common/utils/utils';
 
 
 describe('Xu', () => {

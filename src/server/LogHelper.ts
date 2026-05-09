@@ -35,9 +35,13 @@ export class LogHelper {
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
-    if (space.x === -1 && space.y === -1) return;
+    if (space.x === -1 && space.y === -1) {
+      return;
+    }
     // Skip solo play random tiles
-    if (player.name === 'neutral') return;
+    if (player.name === 'neutral') {
+      return;
+    }
 
     player.game.log('${0} ${1} ${2} at ${3}', (b) =>
       b.player(player).string(action).string(description).space(space));

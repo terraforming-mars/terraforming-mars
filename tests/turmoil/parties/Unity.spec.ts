@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, setRulingParty} from '../../TestingUtils';
+import {setRulingParty} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
@@ -10,6 +10,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '@/common/utils/utils';
 
 describe('Unity', () => {
   let player: TestPlayer;

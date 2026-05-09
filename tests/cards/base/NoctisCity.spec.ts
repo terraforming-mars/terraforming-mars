@@ -6,10 +6,11 @@ import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, churn, runAllActions} from '../../TestingUtils';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {churn, runAllActions} from '../../TestingUtils';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('NoctisCity', () => {
   let card: NoctisCity;

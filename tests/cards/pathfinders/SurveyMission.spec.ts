@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {SurveyMission} from '../../../src/server/cards/pathfinders/SurveyMission';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -12,6 +12,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);

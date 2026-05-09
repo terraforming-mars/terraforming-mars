@@ -118,9 +118,13 @@ export default defineComponent({
       return this.showReorder ? 'do-not-drag-and-drop' : '';
     },
     clickMethod(e: MouseEvent) {
-      if (!this.showReorder) return;
+      if (!this.showReorder) {
+        return;
+      }
       const target = e.currentTarget as HTMLElement;
-      if (!target) return;
+      if (!target) {
+        return;
+      }
       if (target.matches('.sortable-cards *')) {
         const rect = target.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;

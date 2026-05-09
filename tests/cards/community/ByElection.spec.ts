@@ -3,9 +3,10 @@ import {ByElection} from '../../../src/server/cards/community/ByElection';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ByElection', () => {
   let card: ByElection;

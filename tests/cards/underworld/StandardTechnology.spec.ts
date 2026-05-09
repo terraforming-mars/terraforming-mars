@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {StandardTechnology} from '../../../src/server/cards/underworld/StandardTechnology';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -10,6 +10,7 @@ import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStan
 import {Payment} from '../../../src/common/inputs/Payment';
 import {toName} from '../../../src/common/utils/utils';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Underworld / StandardTechnology', () => {
   let card: StandardTechnology;

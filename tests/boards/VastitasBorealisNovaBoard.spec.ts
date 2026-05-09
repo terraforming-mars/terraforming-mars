@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {VastitasBorealisNovaBoard} from '../../src/server/boards/VastitasBorealisNovaBoard';
-import {addGreenery, cast, runAllActions} from '../TestingUtils';
+import {addGreenery, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {testGame} from '../TestGame';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
@@ -9,6 +9,7 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {TileType} from '../../src/common/TileType';
 import {toID} from '../../src/common/utils/utils';
+import {cast} from '../../src/common/utils/utils';
 
 describe('VastitasBorealisNovaBoard', () => {
   it('sanity test', () => {

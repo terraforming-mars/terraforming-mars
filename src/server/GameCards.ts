@@ -149,7 +149,9 @@ export class GameCards {
   private filterReplacedCards<T extends ICard>(cards: Array<T>): Array<T> {
     return cards.filter((card) => {
       for (const manifest of this.moduleManifests) {
-        if (manifest.cardsToRemove.has(card.name)) return false;
+        if (manifest.cardsToRemove.has(card.name)) {
+          return false;
+        }
       }
       return true;
     });

@@ -6,8 +6,9 @@ import {Resource} from '../../../src/common/Resource';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, churn, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('UrbanizedArea', () => {
   let card: UrbanizedArea;

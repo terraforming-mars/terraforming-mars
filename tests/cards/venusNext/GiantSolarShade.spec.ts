@@ -6,7 +6,8 @@ import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('GiantSolarShade', () => {
   let card: GiantSolarShade;

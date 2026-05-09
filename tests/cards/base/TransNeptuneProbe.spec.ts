@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {TransNeptuneProbe} from '../../../src/server/cards/base/TransNeptuneProbe';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('TransNeptuneProbe', () => {
   it('Should play', () => {

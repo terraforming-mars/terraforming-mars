@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -12,6 +12,7 @@ import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CommunicationCenter', () => {
   let card: CommunicationCenter;

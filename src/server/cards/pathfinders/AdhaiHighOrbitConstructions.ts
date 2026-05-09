@@ -41,8 +41,12 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
   private matchingTags(tags: ReadonlyArray<Tag>): boolean {
     let spaceTag = false;
     for (const tag of tags) {
-      if (tag === Tag.SPACE) spaceTag = true;
-      if (isPlanetaryTag(tag)) return false;
+      if (tag === Tag.SPACE) {
+        spaceTag = true;
+      }
+      if (isPlanetaryTag(tag)) {
+        return false;
+      }
     }
     return spaceTag;
   }

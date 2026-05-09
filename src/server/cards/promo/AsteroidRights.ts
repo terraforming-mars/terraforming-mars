@@ -85,11 +85,15 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
       });
 
     // Spend asteroid
-    if (!canAddAsteroid) return new OrOptions(gainTitaniumOption, increaseMcProdOption);
+    if (!canAddAsteroid) {
+      return new OrOptions(gainTitaniumOption, increaseMcProdOption);
+    }
 
     // Add asteroid to any card
     if (!hasAsteroids) {
-      if (asteroidCards.length === 1) return addAsteroidToSelf.cb(undefined);
+      if (asteroidCards.length === 1) {
+        return addAsteroidToSelf.cb(undefined);
+      }
       return addAsteroidOption;
     }
 

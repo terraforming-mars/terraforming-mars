@@ -54,6 +54,8 @@ const projectRules = {
   'prefer-const': 'error',
   'indent': ['error', 2],
   'no-extra-semi': 'error',
+  'curly': 'error',
+  'brace-style': 'error',
 
   // Disabled entries from eslint:recommended
   'no-case-declarations': 'off',
@@ -147,6 +149,17 @@ export default [
     },
     rules: {
       'require-await': 'error',
+    },
+  },
+
+  // Card implementation rules
+  {
+    files: ['src/server/cards/**/*.ts'],
+    rules: {
+      'no-restricted-syntax': ['error', {
+        selector: 'MethodDefinition[key.name="bespokePlay"] CallExpression[callee.property.name="getCardCost"]',
+        message: 'Do not call getCardCost() inside bespokePlay() — card payment is already deducted before bespokePlay runs. Pass cost: 0 to space-availability helpers instead.',
+      }],
     },
   },
 

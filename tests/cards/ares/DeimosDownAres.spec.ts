@@ -4,13 +4,14 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
 import {CardResource} from '../../../src/common/CardResource';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DeimosDownAres', () => {
   let card: DeimosDownAres;

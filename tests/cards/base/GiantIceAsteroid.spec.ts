@@ -4,8 +4,9 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GiantIceAsteroid', () => {
   let card: GiantIceAsteroid;

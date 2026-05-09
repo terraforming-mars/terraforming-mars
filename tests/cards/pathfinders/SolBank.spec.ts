@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SolBank} from '../../../src/server/cards/pathfinders/SolBank';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
@@ -19,6 +19,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SolBank', () => {
   let solBank: SolBank;

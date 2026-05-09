@@ -2,11 +2,12 @@ import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TitaniumMarketMonopolists} from '../../../src/server/cards/moon/TitaniumMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TitaniumMarketMonopolists', () => {
   let game: IGame;

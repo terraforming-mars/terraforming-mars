@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/server/cards/base/Comet';
 import {IGame} from '../../../src/server/IGame';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Comet', () => {
   let card: Comet;

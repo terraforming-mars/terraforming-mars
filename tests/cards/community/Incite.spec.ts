@@ -4,9 +4,10 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {IGame} from '../../../src/server/IGame';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, getSendADelegateOption, runAllActions, testGame} from '../../TestingUtils';
+import {getSendADelegateOption, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Incite', () => {
   let card: Incite;

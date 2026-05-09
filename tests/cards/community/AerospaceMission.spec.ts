@@ -7,9 +7,10 @@ import {Io} from '../../../src/server/colonies/Io';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {IGame} from '../../../src/server/IGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 
 describe('AerospaceMission', () => {

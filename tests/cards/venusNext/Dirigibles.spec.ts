@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('Dirigibles', () => {
   let card: Dirigibles;

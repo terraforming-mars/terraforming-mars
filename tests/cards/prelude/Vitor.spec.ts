@@ -7,7 +7,7 @@ import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards'
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('Vitor', () => {

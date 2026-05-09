@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card, productionBoxWithBonusResource} from '../Card';
 import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -12,10 +12,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
-import {Units} from '../../../common/Units';
 
 export abstract class MiningCard extends Card implements IProjectCard {
-  public bonusResource?: Array<Resource>;
+  public bonusResource: Array<Resource> | undefined;
   protected abstract readonly title: string;
   protected readonly isAres: boolean = false;
   protected readonly placeTile: boolean = true;
@@ -60,12 +59,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   public productionBox() {
-    // TODO(kberg): Matches Specialzied Settlement
-    const units = {...Units.EMPTY};
-    if (this.bonusResource && this.bonusResource.length === 1) {
-      units[this.bonusResource[0]] += 1;
-    }
-    return units;
+    return productionBoxWithBonusResource(this);
   }
 
   public override bespokePlay(player: IPlayer): SelectSpace {

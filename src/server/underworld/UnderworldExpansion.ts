@@ -112,8 +112,8 @@ export class UnderworldExpansion {
       return false;
     }
     if (space.tile !== undefined) {
-      // Players may still identify on Martian Nature Wonders and Rey Skywalker
-      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
+      // Players may still identify on Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
+      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
         return false;
       }
     }
@@ -201,8 +201,8 @@ export class UnderworldExpansion {
       }
 
       if (space.tile !== undefined) {
-        // Players may still excavate from Martian Nature Wonders and Rey Skywalker
-        if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
+        // Players may still excavate from Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
+        if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
           return false;
         }
       }
@@ -254,8 +254,8 @@ export class UnderworldExpansion {
     const game = player.game;
     validateUnderworldExpansion(game);
     if (space.tile !== undefined) {
-      // Players may still excavate from Martian Nature Wonders and Rey Skywalker
-      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
+      // Players may still excavate from Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
+      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
         throw new Error(`cannot excavate space ${space.id} which has a tile.`);
       }
     }
@@ -580,7 +580,6 @@ export class UnderworldExpansion {
         }
         break;
       case 'microbe2pertemp':
-        // TODO(kberg): Replace with RunNTimes.
         for (let i = 0; i < steps; i++) {
           player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         }

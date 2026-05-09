@@ -10,8 +10,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;

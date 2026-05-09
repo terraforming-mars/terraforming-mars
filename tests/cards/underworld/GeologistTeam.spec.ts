@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {GeologistTeam} from '../../../src/server/cards/underworld/GeologistTeam';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GeologistTeam', () => {
   it('action', () => {

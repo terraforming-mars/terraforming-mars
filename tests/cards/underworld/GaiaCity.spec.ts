@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {GaiaCity} from '../../../src/server/cards/underworld/GaiaCity';
 import {testGame} from '../../TestGame';
-import {addCity, cast, churn} from '../../TestingUtils';
+import {addCity, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Space} from '../../../src/server/boards/Space';
 import {intersection} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GaiaCity', () => {
   const canPlayRuns = [

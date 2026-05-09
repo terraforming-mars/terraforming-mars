@@ -4,8 +4,9 @@ import {TileType} from '../../../src/common/TileType';
 import {GreatDamAres} from '../../../src/server/cards/ares/GreatDamAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, churn} from '../../TestingUtils';
+import {maxOutOceans, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GreatDamAres', () => {
   let card: GreatDamAres;

@@ -15,10 +15,11 @@ import {TestPlayer} from '../TestPlayer';
 import {AresHazards} from '../../src/server/ares/AresHazards';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
-import {addOcean, cast, runAllActions, setRulingParty} from '../TestingUtils';
+import {addOcean, runAllActions, setRulingParty} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
 import {PartyName} from '../../src/common/turmoil/PartyName';
+import {cast} from '../../src/common/utils/utils';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.

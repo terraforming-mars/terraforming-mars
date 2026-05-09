@@ -237,8 +237,12 @@ import {MADetail} from '@/common/game/VictoryPointsBreakdown';
 import {AwardName} from '@/common/ma/AwardName';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
-  if (playerView !== undefined) return playerView;
-  if (spectator !== undefined) return spectator;
+  if (playerView !== undefined) {
+    return playerView;
+  }
+  if (spectator !== undefined) {
+    return spectator;
+  }
   throw new Error('Neither playerView nor spectator are defined');
 }
 
@@ -265,8 +269,12 @@ export default defineComponent({
       return getViewModel(this.playerView, this.spectator).players;
     },
     color(): Color {
-      if (this.playerView !== undefined) return this.playerView.thisPlayer.color;
-      if (this.spectator !== undefined) return this.spectator.color;
+      if (this.playerView !== undefined) {
+        return this.playerView.thisPlayer.color;
+      }
+      if (this.spectator !== undefined) {
+        return this.spectator.color;
+      }
       throw new Error('Neither playerView nor spectator are defined');
     },
     downloadLogUrl() {
@@ -279,10 +287,18 @@ export default defineComponent({
     playersInPlace(): Array<PublicPlayerModel> {
       const copy = [...this.viewModel.players];
       copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
-        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
-        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-        if (a.megacredits < b.megacredits) return -1;
-        if (a.megacredits > b.megacredits) return 1;
+        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) {
+          return -1;
+        }
+        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) {
+          return 1;
+        }
+        if (a.megacredits < b.megacredits) {
+          return -1;
+        }
+        if (a.megacredits > b.megacredits) {
+          return 1;
+        }
         return 0;
       });
       return copy.reverse();

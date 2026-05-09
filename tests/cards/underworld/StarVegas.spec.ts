@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {addCity, cast, runAllActions} from '../../TestingUtils';
+import {addCity, runAllActions} from '../../TestingUtils';
 import {StarVegas} from '../../../src/server/cards/underworld/StarVegas';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -7,7 +7,7 @@ import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
-import {toID} from '../../../src/common/utils/utils';
+import {cast, toID} from '../../../src/common/utils/utils';
 
 describe('StarVegas', () => {
   it('canPlay', () => {

@@ -109,7 +109,9 @@ export default defineComponent({
       return `player?id=${playerId}`;
     },
     copyUrl(playerId: ParticipantId | undefined): void {
-      if (playerId === undefined) return;
+      if (playerId === undefined) {
+        return;
+      }
       // Get current location path without game?id=xxxxxxx
       const path = window.location.href.replace(/game\?id=.*/, '');
       copyToClipboard(path + this.getHref(playerId));

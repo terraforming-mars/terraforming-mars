@@ -125,10 +125,14 @@ export class GameLoader implements IGameLoader {
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<IGame | undefined> {
     const d = await this.cache.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
-    if (gameId === undefined) return undefined;
+    if (gameId === undefined) {
+      return undefined;
+    }
 
     // 1. Check the cache as long as forceLoad isn't true.
-    if (forceLoad === false && d.games.get(gameId) !== undefined) return d.games.get(gameId);
+    if (forceLoad === false && d.games.get(gameId) !== undefined) {
+      return d.games.get(gameId);
+    }
 
     // 2. The game isn't cached. If it's in the database, there will still be an entry
     // for it in the cache.
@@ -221,8 +225,12 @@ function parseConfigString(stringValue: string): CacheConfig {
     throw new Error('invalid sweep option from GAME_CACHE: ' + parsed.sweep);
   }
   const evictMillis = durationToMilliseconds(parsed.eviction_age);
-  if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
+  if (!isNaN(evictMillis)) {
+    options.evictMillis = evictMillis;
+  }
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
-  if (!isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  if (!isNaN(sleepMillis)) {
+    options.sleepMillis = sleepMillis;
+  }
   return options;
 }

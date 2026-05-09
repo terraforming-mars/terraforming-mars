@@ -43,7 +43,9 @@ export class NoctisCity extends Card implements IProjectCard {
       return player.production.energy >= 1;
     }
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
-    if (availableSpaces.length === 0) return false;
+    if (availableSpaces.length === 0) {
+      return false;
+    }
     return MarsBoard.hasEnergyCoverage(player, availableSpaces);
   }
 

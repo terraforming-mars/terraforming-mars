@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {SubnauticPirates} from '../../../src/server/cards/underworld/SubnauticPirates';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
+import {cast} from '@/common/utils/utils';
 
 describe('SubnauticPirates', () => {
   let card: SubnauticPirates;

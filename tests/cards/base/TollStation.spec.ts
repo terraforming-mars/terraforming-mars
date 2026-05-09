@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TollStation', () => {
   it('Should play', () => {

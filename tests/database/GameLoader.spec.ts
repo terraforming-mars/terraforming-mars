@@ -22,11 +22,15 @@ class TestDatabase extends InMemoryDatabase {
   }
 
   override getGameIds(): Promise<GameId[]> {
-    if (this.failure === 'getGameIds') return Promise.reject(new Error('error'));
+    if (this.failure === 'getGameIds') {
+      return Promise.reject(new Error('error'));
+    }
     return super.getGameIds();
   }
   override getParticipants(): Promise<Array<GameIdLedger>> {
-    if (this.failure === 'getParticipants') return Promise.reject(new Error('error'));
+    if (this.failure === 'getParticipants') {
+      return Promise.reject(new Error('error'));
+    }
     return super.getParticipants();
   }
 }

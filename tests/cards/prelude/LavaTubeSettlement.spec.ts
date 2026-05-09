@@ -2,11 +2,12 @@ import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/server/cards/prelude/LavaTubeSettlement';
 import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {toID} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LavaTubeSettlement', () => {
   let card: LavaTubeSettlement;

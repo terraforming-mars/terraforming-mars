@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {IGame} from '../../src/server/IGame';

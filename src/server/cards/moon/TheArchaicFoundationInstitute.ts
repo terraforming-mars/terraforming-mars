@@ -66,7 +66,9 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard): void {
-    if (playedCard.name !== this.name) return;
+    if (playedCard.name !== this.name) {
+      return;
+    }
     if (this.canAct(player)) {
       this.action(player);
     }

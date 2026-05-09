@@ -9,7 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../testing/EmptyBoard';
-import {addGreenery, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addGreenery, setRulingParty, runAllActions, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -17,6 +17,7 @@ import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MAX_TEMPERATURE, MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;

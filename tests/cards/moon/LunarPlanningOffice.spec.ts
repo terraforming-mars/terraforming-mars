@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
@@ -10,6 +10,7 @@ import {MareImbriumMine} from '../../../src/server/cards/moon/MareImbriumMine';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LunarPlanningOffice', () => {
   let game: IGame;

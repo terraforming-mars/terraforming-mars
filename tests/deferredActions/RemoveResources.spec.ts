@@ -6,10 +6,11 @@ import {Resource} from '../../src/common/Resource';
 import {ProtectedHabitats} from '../../src/server/cards/base/ProtectedHabitats';
 import {BotanicalExperience} from '../../src/server/cards/pathfinders/BotanicalExperience';
 import {LunarSecurityStations} from '../../src/server/cards/moon/LunarSecurityStations';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {IGame} from '../../src/server/IGame';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {assertIsMaybeBlock} from '../underworld/underworldAssertions';
+import {cast} from '@/common/utils/utils';
 
 describe('RemoveResources', () => {
   let player: TestPlayer;

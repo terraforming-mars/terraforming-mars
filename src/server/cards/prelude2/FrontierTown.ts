@@ -40,7 +40,9 @@ export class FrontierTown extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     const available = this.availableSpaces(player, player.getCardCost(this));
-    if (available.length === 0) return false;
+    if (available.length === 0) {
+      return false;
+    }
     return MarsBoard.hasEnergyCoverage(player, available);
   }
 

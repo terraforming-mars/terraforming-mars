@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {CloneTroopers} from '../../../src/server/cards/starwars/CloneTroopers';
 import {testGame} from '../../TestGame';
-import {addOcean, cast, formatMessage} from '../../TestingUtils';
+import {addOcean, formatMessage} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Units} from '../../../src/common/Units';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CloneTroopers', () => {
   it('Can play', () => {

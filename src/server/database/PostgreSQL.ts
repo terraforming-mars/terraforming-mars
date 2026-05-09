@@ -342,7 +342,9 @@ export class PostgreSQL implements IDatabase {
       // try to stop them. But that's for another day.)
       if (inserted === true && thisSaveId === 0) {
         const participantIds: Array<ParticipantId> = game.players.map(toID);
-        if (game.spectatorId) participantIds.push(game.spectatorId);
+        if (game.spectatorId) {
+          participantIds.push(game.spectatorId);
+        }
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       }
 

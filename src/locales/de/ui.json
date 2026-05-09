@@ -1273,9 +1273,7 @@
 
   "How to pay?": "Bezahlung",
   "Please adjust payment amount": "Bitte passe den Zahlungsbetrag an",
-  "Some ${0} are unavailable here in reserve for the project card.": "Etwas ${0} ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
-  "Some titanium are unavailable here in reserve for the project card.": "Etwas Titan ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
-  "Some steel are unavailable here in reserve for the project card.": "Etwas Stahl ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
+  "Some ${0} are reserved and unavailable here.": "Einige ${0} sind reserviert und hier nicht verfügbar.",
   "Must select a space": "Suche ein Feld aus",
   "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]",
   "[ toggle tags view ]": "[ Symbolsichtfilter aktivieren/deaktivieren ]",

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
-import {cast, setRulingParty} from '../../TestingUtils';
+import {setRulingParty} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resource} from '../../../src/common/Resource';
@@ -11,6 +11,7 @@ import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '@/common/utils/utils';
 
 describe('Kelvinists', () => {
   let player: TestPlayer;

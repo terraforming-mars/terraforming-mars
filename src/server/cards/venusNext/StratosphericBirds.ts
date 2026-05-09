@@ -41,13 +41,17 @@ export class StratosphericBirds extends ActionCard implements IActionCard {
   }
   public override bespokeCanPlay(player: IPlayer): boolean {
     const cardsWithFloater = player.getCardsWithResources(CardResource.FLOATER);
-    if (cardsWithFloater.length === 0) return false;
+    if (cardsWithFloater.length === 0) {
+      return false;
+    }
 
     if (cardsWithFloater.length > 1) {
       return true;
     } else {
       const floaterCard = cardsWithFloater[0];
-      if (floaterCard.name !== CardName.DIRIGIBLES) return true;
+      if (floaterCard.name !== CardName.DIRIGIBLES) {
+        return true;
+      }
 
       const canPayForFloater = ((floaterCard.resourceCount - 1) * 3 + player.megaCredits) >= player.getCardCost(this);
       return canPayForFloater;

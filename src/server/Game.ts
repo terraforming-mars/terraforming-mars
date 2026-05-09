@@ -633,14 +633,18 @@ export class Game implements IGame, Logger {
 
   public allAwardsFunded(): boolean {
     // Awards are disabled for 1 player games
-    if (this.players.length === 1) return true;
+    if (this.players.length === 1) {
+      return true;
+    }
 
     return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
     // Milestones are disabled for 1 player games
-    if (this.players.length === 1) return true;
+    if (this.players.length === 1) {
+      return true;
+    }
 
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
@@ -1502,7 +1506,9 @@ export class Game implements IGame, Logger {
     // Turmoil Greens ruling policy
     PartyHooks.applyGreensRulingPolicy(player, space);
 
-    if (shouldRaiseOxygen) this.increaseOxygenLevel(player, 1);
+    if (shouldRaiseOxygen) {
+      this.increaseOxygenLevel(player, 1);
+    }
     return undefined;
   }
 
@@ -1525,7 +1531,9 @@ export class Game implements IGame, Logger {
   }
 
   public addOcean(player: IPlayer, space: Space): void {
-    if (this.canAddOcean() === false) return;
+    if (this.canAddOcean() === false) {
+      return;
+    }
 
     this.addTile(player, space, {
       tileType: TileType.OCEAN,
@@ -1785,7 +1793,9 @@ export class Game implements IGame, Logger {
       game.activePlayer.takeAction(/* saveBeforeTakingAction */ false);
     }
 
-    if (game.phase === Phase.END) GameLoader.getInstance().mark(game.id);
+    if (game.phase === Phase.END) {
+      GameLoader.getInstance().mark(game.id);
+    }
     return game;
   }
 

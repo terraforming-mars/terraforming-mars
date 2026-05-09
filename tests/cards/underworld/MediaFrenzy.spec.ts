@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {MediaFrenzy} from '../../../src/server/cards/underworld/MediaFrenzy';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {PrivateMilitaryContractor} from '../../../src/server/cards/underworld/PrivateMilitaryContractor';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MediaFrenzy', () => {
   it('canPlay', () => {

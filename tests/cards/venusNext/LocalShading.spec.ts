@@ -3,7 +3,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('LocalShading', () => {
   let card: LocalShading;

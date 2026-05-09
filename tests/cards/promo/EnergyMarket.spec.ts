@@ -4,8 +4,9 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('EnergyMarket', () => {
   let card: EnergyMarket;

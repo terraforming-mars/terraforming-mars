@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Solarnet} from '../../../src/server/cards/venusNext/Solarnet';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Solarnet', () => {
   it('Should play', () => {

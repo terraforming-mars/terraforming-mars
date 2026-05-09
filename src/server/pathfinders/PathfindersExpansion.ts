@@ -100,7 +100,9 @@ export class PathfindersExpansion {
 
     const lastSpace = Math.min(track.spaces.length - 1, space + steps);
     const distance = lastSpace - space;
-    if (distance === 0) return;
+    if (distance === 0) {
+      return;
+    }
 
     if (typeof(from) === 'object') {
       game.log('${0} raised the ${1} planetary track ${2} step(s)', (b) => {

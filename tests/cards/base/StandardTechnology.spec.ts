@@ -4,10 +4,11 @@ import {SellPatentsStandardProject} from '../../../src/server/cards/base/standar
 import {StandardTechnology} from '../../../src/server/cards/base/StandardTechnology';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('StandardTechnology', () => {
   let card: StandardTechnology;

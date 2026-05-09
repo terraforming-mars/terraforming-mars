@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {QuantumCommunications} from '../../../src/server/cards/colonies/QuantumCommunications';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('QuantumCommunications', () => {
   it('Should play', () => {

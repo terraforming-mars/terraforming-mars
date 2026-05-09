@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GHGImportFromVenus} from '../../../src/server/cards/venusNext/GHGImportFromVenus';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('GHGImportFromVenus', () => {
   it('Should play', () => {

@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SpecialPermit} from '../../../src/server/cards/prelude2/SpecialPermit';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Message} from '../../../src/common/logs/Message';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SpecialPermit', () => {
   let card: SpecialPermit;

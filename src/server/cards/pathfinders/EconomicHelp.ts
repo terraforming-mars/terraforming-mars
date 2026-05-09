@@ -57,11 +57,21 @@ export class EconomicHelp extends Card implements IProjectCard {
     const lowest = Math.min(...(values.filter((v) => v >= 0)));
     const count = values.filter((v) => v === lowest).length;
     const increment = (count === 1) ? 3 : 2;
-    if (data.earth === lowest) PathfindersExpansion.raiseTrack(Tag.EARTH, player, increment);
-    if (data.jovian === lowest) PathfindersExpansion.raiseTrack(Tag.JOVIAN, player, increment);
-    if (data.mars === lowest) PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
-    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
-    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
+    if (data.earth === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.EARTH, player, increment);
+    }
+    if (data.jovian === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.JOVIAN, player, increment);
+    }
+    if (data.mars === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
+    }
+    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) {
+      PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
+    }
+    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) {
+      PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
+    }
     return undefined;
   }
 }

@@ -5,7 +5,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {runAllActions, cast} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
@@ -16,6 +16,7 @@ import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {toID} from '../../src/common/utils/utils';
+import {cast} from '../../src/common/utils/utils';
 
 describe('ArabiaTerraBoard', () => {
   let board: ArabiaTerraBoard;

@@ -38,4 +38,12 @@ describe('PointsPerTag', () => {
   it('half point special case 2', () => {
     doTest({points: 0, halfPoints: 2}, '2⁄2');
   });
+
+  it('asterisk', () => {
+    doTest({points: 1, halfPoints: 0, asterisk: true}, '1*');
+  });
+
+  it('asterisk - half point special case 2', () => {
+    doTest({points: 0, halfPoints: 2, asterisk: true}, '2⁄2*');
+  });
 });

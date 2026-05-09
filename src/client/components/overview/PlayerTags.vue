@@ -20,6 +20,7 @@
               </div>
             </template>
             <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+            <template v-else-if="tagDetail.name === 'all'"></template>
             <div v-else class="tag-and-discount">
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
@@ -45,13 +46,19 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CardName} from '@/common/cards/CardName';
 
-type InterfaceTagsType = Tag | SpecialTags | 'separator';
+type InterfaceTagsType = Tag | SpecialTags | 'separator' | 'all';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
   points: number;
   halfPoints: number;
   count: number;
+  asterisk: boolean;
+};
+
+type DataModel = {
+  all: TagDetail;
+  tagsInOrder: Array<TagDetail>;
 };
 
 const ORDER: Array<InterfaceTagsType> = [
@@ -121,6 +128,7 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   case SpecialTags.NEGATIVE_VP:
     return player.victoryPointsBreakdown.negativeVP;
   case 'separator':
+  case 'all':
     return -1;
   default:
     return player.tags[tagName];
@@ -151,16 +159,25 @@ export default defineComponent({
       default: true,
     },
   },
-  data() {
+  data(): DataModel {
     type TagDetails = Record<InterfaceTagsType | 'all', TagDetail>;
 
     // Start by giving every entry a default value
-    // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
-    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0}]);
-    const details: TagDetails = Object.fromEntries(x);
+    const interim = ORDER.map((key) => [
+      key,
+      {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0, asterisk: false},
+    ]);
+    const details: TagDetails = Object.fromEntries(interim);
 
     // Initialize all's card discount.
-    details['all'] = {name: 'all' as InterfaceTagsType, discount: this.player?.cardDiscount ?? 0, points: 0, count: 0, halfPoints: 0};
+    details['all'] = {
+      name: 'all',
+      discount: this.player?.cardDiscount ?? 0,
+      points: 0,
+      count: 0,
+      halfPoints: 0,
+      asterisk: false,
+    };
 
     // For each card
     for (const card of this.player.tableau) {
@@ -170,22 +187,30 @@ export default defineComponent({
         details[tag].discount += discount.amount;
       }
 
-      // Special case Cultivation of Venus & Venera Base.
       // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
       if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
         details[Tag.VENUS].halfPoints++;
       } else {
         const vps = getCard(card.name)?.victoryPoints;
         if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special') {
+          // Special case Commercial District etc.
+          const asterisk = vps.nextToThis !== undefined;
           if (vps.tag !== undefined) {
-            details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+            if (!asterisk) {
+              details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+            } else {
+              details[vps.tag].asterisk = true;
+            }
           }
           if (vps.cities !== undefined) {
-            details['city-count'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+            if (!asterisk) {
+              details['city-count'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+            } else {
+              details['city-count'].asterisk = true;
+            }
           }
         }
       }
-      // Special case Off-world City Living and Immigration Shuttles
     }
 
     // Other modifiers

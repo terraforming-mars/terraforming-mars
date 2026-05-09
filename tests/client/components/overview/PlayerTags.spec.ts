@@ -6,6 +6,7 @@ import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
+import {SpecialTags} from '@/client/cards/SpecialTags';
 
 describe('PlayerTags', () => {
   let wrapper: VueWrapper<any>;
@@ -36,6 +37,10 @@ describe('PlayerTags', () => {
         {
           // 1 VP per Moon tag
           name: CardName.LUNA_SENATE,
+        },
+        {
+          // 1 VP per adjacent city tile (uses nextToThis)
+          name: CardName.COMMERCIAL_DISTRICT,
         },
       ],
       tags: {
@@ -141,5 +146,11 @@ describe('PlayerTags', () => {
 
   it('tag discounts - earth', () => {
     expect(elem(Tag.EARTH).exists()).to.eq(false);
+  });
+
+  it('nextToThis card sets asterisk on city-count tag', () => {
+    const cityCount = wrapper.vm.tagsInOrder.find((t: any) => t.name === SpecialTags.CITY_COUNT);
+    expect(cityCount.points).to.eq(0);
+    expect(cityCount.asterisk).to.eq(true);
   });
 });

@@ -18,5 +18,4 @@ describe('createCard', () => {
   it('newCeo: success', () => {
     expect(newCeo(CardName.HAL9000)?.name).eq(CardName.HAL9000);
   });
-
 });

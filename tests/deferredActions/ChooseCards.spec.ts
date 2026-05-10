@@ -20,20 +20,28 @@ describe('ChooseCards', () => {
     player.megaCredits = 100;
   });
 
-  it('shows calculated project costs when buying cards', () => {
-    player.cardCost = 7;
+  it('shows calculated project costs when paying for cards', () => {
+    player.megaCredits = player.cardCost;
     player.playedCards.push(newProjectCard(CardName.EARTH_CATAPULT)!);
 
     const selectCard = cast(
       new ChooseCards(player, [aquiferPumping, ioMiningIndustries], {paying: true}).execute(),
-      SelectCard,
+      SelectCard<IProjectCard>,
     );
+
+    expect(selectCard.config.min).to.eq(0);
+    expect(selectCard.config.max).to.eq(1);
+    expect(selectCard.config.played).is.false;
+    expect(selectCard.cards.map((card) => card.name)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.IO_MINING_INDUSTRIES,
+    ]);
 
     const model = selectCard.toModel(player);
 
-    expect(model.cards).has.length(2);
-    expect(model.cards[0].calculatedCost).to.eq(player.getCardCost(aquiferPumping));
-    expect(model.cards[1].calculatedCost).to.eq(player.getCardCost(ioMiningIndustries));
-    expect(model.cards[0].calculatedCost).not.to.eq(player.cardCost);
+    expect(model.cards.map((card) => ({name: card.name, calculatedCost: card.calculatedCost}))).deep.eq([
+      {name: CardName.AQUIFER_PUMPING, calculatedCost: 16},
+      {name: CardName.IO_MINING_INDUSTRIES, calculatedCost: 39},
+    ]);
   });
 });

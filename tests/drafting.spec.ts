@@ -748,6 +748,17 @@ describe('drafting', () => {
       CardName.METAL_RICH_ASTEROID,
       CardName.MOHOLE]);
 
+    const dealtToPlayer = [
+      CardName.EXPERIMENTAL_FOREST,
+      CardName.ECOLOGY_EXPERTS,
+      CardName.ECCENTRIC_SPONSOR,
+      CardName.RESEARCH_NETWORK];
+    const dealtToOtherPlayer = [
+      CardName.ACQUIRED_SPACE_AGENCY,
+      CardName.ORBITAL_CONSTRUCTION_YARD,
+      CardName.METAL_RICH_ASTEROID,
+      CardName.MOHOLE];
+
     selectCard(player, CardName.EXPERIMENTAL_FOREST);
     selectCard(otherPlayer, CardName.ACQUIRED_SPACE_AGENCY);
 
@@ -757,6 +768,11 @@ describe('drafting', () => {
     expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ACQUIRED_SPACE_AGENCY,
     ]);
+
+    // dealtPreludeCards must not be mutated by drafting; it would leak the
+    // other player's pick to this player's client.
+    expect(player.dealtPreludeCards.map(toName)).deep.eq(dealtToPlayer);
+    expect(otherPlayer.dealtPreludeCards.map(toName)).deep.eq(dealtToOtherPlayer);
 
     // Second prelude card
 
@@ -770,6 +786,9 @@ describe('drafting', () => {
       CardName.ECCENTRIC_SPONSOR,
       CardName.RESEARCH_NETWORK]);
 
+    expect(player.dealtPreludeCards.map(toName)).deep.eq(dealtToPlayer);
+    expect(otherPlayer.dealtPreludeCards.map(toName)).deep.eq(dealtToOtherPlayer);
+
     selectCard(player, CardName.ORBITAL_CONSTRUCTION_YARD);
     selectCard(otherPlayer, CardName.ECOLOGY_EXPERTS);
 
@@ -781,6 +800,9 @@ describe('drafting', () => {
       CardName.ACQUIRED_SPACE_AGENCY,
       CardName.ECOLOGY_EXPERTS,
     ]);
+
+    expect(player.dealtPreludeCards.map(toName)).deep.eq(dealtToPlayer);
+    expect(otherPlayer.dealtPreludeCards.map(toName)).deep.eq(dealtToOtherPlayer);
 
     // Third prelude card
 
@@ -879,6 +901,9 @@ describe('drafting', () => {
       CardName.RYU,
       CardName.MUSK]);
 
+    const dealtToPlayer = [CardName.VANALLEN, CardName.ULRICH, CardName.TATE];
+    const dealtToOtherPlayer = [CardName.STEFAN, CardName.RYU, CardName.MUSK];
+
     selectCard(player, CardName.VANALLEN);
     selectCard(otherPlayer, CardName.STEFAN);
 
@@ -889,6 +914,11 @@ describe('drafting', () => {
       CardName.STEFAN,
     ]);
 
+    // dealtCeoCards must not be mutated by drafting; it would leak the
+    // other player's pick to this player's client.
+    expect(player.dealtCeoCards.map(toName)).deep.eq(dealtToPlayer);
+    expect(otherPlayer.dealtCeoCards.map(toName)).deep.eq(dealtToOtherPlayer);
+
     // Second CEO card
 
     expect(draftSelection(player)).deep.eq([
@@ -898,6 +928,9 @@ describe('drafting', () => {
     expect(draftSelection(otherPlayer)).deep.eq([
       CardName.ULRICH,
       CardName.TATE]);
+
+    expect(player.dealtCeoCards.map(toName)).deep.eq(dealtToPlayer);
+    expect(otherPlayer.dealtCeoCards.map(toName)).deep.eq(dealtToOtherPlayer);
 
     selectCard(player, CardName.RYU);
     selectCard(otherPlayer, CardName.TATE);

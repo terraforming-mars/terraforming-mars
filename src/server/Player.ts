@@ -41,6 +41,7 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
+import {KELVINISTS_POLICY_3} from './turmoil/parties/Kelvinists';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
@@ -1573,19 +1574,25 @@ export class Player implements IPlayer {
       action.options.push(convertPlants.action(this));
     }
 
-    // Convert Heat
-    const convertHeat = new ConvertHeat();
-    if (convertHeat.canAct(this)) {
-      const option = new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
-        return convertHeat.action(this);
-      });
-      if (convertHeat.warnings.size > 0) {
-        option.warnings = Array.from(convertHeat.warnings);
-        if (convertHeat.warnings.has('maxtemp')) {
-          option.eligibleForDefault = false;
-        }
+    // Convert Heat. Kelvinists kp03 swaps in a 6-heat variant in this slot.
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp03')) {
+      if (KELVINISTS_POLICY_3.canAct(this)) {
+        action.options.push(KELVINISTS_POLICY_3.action(this));
       }
-      action.options.push(option);
+    } else {
+      const convertHeat = new ConvertHeat();
+      if (convertHeat.canAct(this)) {
+        const option = new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
+          return convertHeat.action(this);
+        });
+        if (convertHeat.warnings.size > 0) {
+          option.warnings = Array.from(convertHeat.warnings);
+          if (convertHeat.warnings.has('maxtemp')) {
+            option.eligibleForDefault = false;
+          }
+        }
+        action.options.push(option);
+      }
     }
 
     // Turmoil

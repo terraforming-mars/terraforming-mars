@@ -9,6 +9,8 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
 import {TITLES} from '../../inputs/titles';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Units} from '../../../common/Units';
 
 export class Kelvinists extends Party implements IParty {
   readonly name = PartyName.KELVINISTS;
@@ -75,23 +77,33 @@ class KelvinistsPolicy02 implements IPolicy {
   readonly description = 'When you raise temperature, gain 3 M€ per step raised';
 }
 
+// Hack: action() returns the SelectOption that Player.getActions() drops into
+// the Convert Heat slot, instead of performing the conversion itself. To avoid
+// rendering it twice, TurmoilHandler.partyAction() skips kp03.
 class KelvinistsPolicy03 implements IPolicy {
   readonly id = 'kp03' as const;
   readonly description = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
 
-  canAct(player: IPlayer) {
-    return player.availableHeat() >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
+  canAct(player: IPlayer): boolean {
+    return player.availableHeat() >= 6 && player.canAfford({
+      cost: 0,
+      tr: {temperature: 1},
+      reserveUnits: Units.of({heat: 6}),
+    });
   }
 
-  action(player: IPlayer) {
-    const game = player.game;
-    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.KELVINISTS));
-    game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
-
-    return player.spendHeat(6, () => {
-      game.increaseTemperature(player, 1);
-      return undefined;
+  action(player: IPlayer): SelectOption {
+    const option = new SelectOption('Convert 6 heat into temperature (Turmoil Kelvinists)', 'Convert heat').andThen(() => {
+      return player.spendHeat(6, () => {
+        player.game.increaseTemperature(player, 1);
+        return undefined;
+      });
     });
+    if (player.game.getTemperature() === MAX_TEMPERATURE) {
+      option.warnings = ['maxtemp'];
+      option.eligibleForDefault = false;
+    }
+    return option;
   }
 }
 

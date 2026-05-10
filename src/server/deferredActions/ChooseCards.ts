@@ -54,7 +54,7 @@ export class ChooseCards extends DeferredAction {
     const min = options.paying ? 0 : options.keepMax;
 
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
-    return new SelectCard(msg, button, cards, {max, min})
+    return new SelectCard(msg, button, cards, {max, min, played: !options.paying})
       .andThen((selected) => {
         if (selected.length > max) {
           throw new Error('Selected too many cards');

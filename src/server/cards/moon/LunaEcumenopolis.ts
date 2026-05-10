@@ -22,7 +22,6 @@ export class LunaEcumenopolis extends Card {
 
       metadata: {
         cardNumber: 'M84',
-        hasExternalHelp: true,
         description: 'Spend 2 titanium. ' +
         'Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. ' +
         'Increase your TR 1 step for each 2 steps of the habitat rate.',

@@ -22,7 +22,6 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
 
       metadata: {
         cardNumber: 'PC03', // Renumber
-        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): provide reasonable secondary tag. It's not rendered on CardRenderItemComponent.
           b.megacredits(31).production((pb) => pb.energy(1).megacredits(2)).cards(1, {secondaryTag: AltSecondaryTag.NO_TAGS}).br;

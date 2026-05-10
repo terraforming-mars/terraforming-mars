@@ -9,8 +9,6 @@ export type CardMetadata = {
    * It could be rendered on the card again, or used as part of card search.
    */
   cardNumber?: string;
-  /* When true, there's external text on the wiki. Render the card so it leads there. */
-  hasExternalHelp?: true;
   description?: string | ICardRenderDescription;
   renderData?: CardComponent;
   victoryPoints?: number | CardRenderDynamicVictoryPoints;

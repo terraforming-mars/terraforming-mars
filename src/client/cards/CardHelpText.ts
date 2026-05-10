@@ -1,8 +1,6 @@
 import {CardName} from '@/common/cards/CardName';
 
-// Help text shown for cards whose rules need extra explanation.
-// Sourced from https://github.com/terraforming-mars/terraforming-mars/wiki/Card-Details
-// Strings preserve the original wiki markdown.
+/** Help text shown for cards whose rules need extra explanation. */
 export const CARD_HELP_TEXT: Partial<Record<CardName, string>> = {
   [CardName.AIR_RAID]: `Air Raid requires removing 1 floater and stealing exactly 5 M€ from one opponent. These are treated as a package deal, so Air Raid cannot be played unless an opponent has at least 5 M€. If no opponent has 5 M€, the card is unavailable even if you have a floater.`,
 
@@ -60,4 +58,4 @@ That makes this card's interaction with Odyssey and Playwrights different from c
   [CardName.MARS_FRONTIER_ALLIANCE]: `This card allows the player to use a party's passive effects. Kelvinists and Scientists have _active_ effects. That is why they are not available as options.`,
 
   [CardName.RED_TOURISM_WAVE]: `Fan expansion note: This does not apply to The Moon.`,
-};
+} as const;

@@ -4,7 +4,7 @@
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
               <div v-if="showPlayerCube" :class="playerCubeClass"></div>
-              <card-help v-show="hasHelp" :name="card.name" />
+              <card-help v-if="hasHelpText" :name="card.name" :hovering="hovering" />
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
@@ -27,6 +27,7 @@
 import {defineComponent} from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
+import {CARD_HELP_TEXT} from '@/client/cards/CardHelpText';
 import CardTitle from './CardTitle.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
@@ -196,8 +197,8 @@ export default defineComponent({
       }
       return '';
     },
-    hasHelp(): boolean {
-      return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
+    hasHelpText(): boolean {
+      return CARD_HELP_TEXT[this.card.name] !== undefined;
     },
     showPlayerCube(): boolean {
       return getPreferences().experimental_ui && this.actionUsed;

@@ -19,7 +19,6 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
       resourceType: CardResource.RESOURCE_CUBE,
 
       metadata: {
-        hasExternalHelp: true,
         cardNumber: 'MC10',
         description: 'You start with 55 M€.',
         renderData: CardRenderer.builder((b) => {

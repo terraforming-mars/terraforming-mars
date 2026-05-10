@@ -95,6 +95,8 @@ class KelvinistsPolicy03 implements IPolicy {
   action(player: IPlayer): SelectOption {
     const option = new SelectOption('Convert 6 heat into temperature (Turmoil Kelvinists)', 'Convert heat').andThen(() => {
       return player.spendHeat(6, () => {
+        game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.KELVINISTS));
+        game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
         player.game.increaseTemperature(player, 1);
         return undefined;
       });

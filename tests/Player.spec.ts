@@ -12,7 +12,7 @@ import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
-import {doWait, getSendADelegateOption, runAllActions} from './TestingUtils';
+import {doWait, getSendADelegateOption, runAllActions, setRulingParty} from './TestingUtils';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -607,6 +607,32 @@ describe('Player', () => {
 
     game.increaseVenusScaleLevel(player2, 2);
     expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(2);
+  });
+
+  describe('Convert Heat / Kelvinists kp03 swap', () => {
+    function findOption(player: TestPlayer, title: string): SelectOption | undefined {
+      const actions = cast(player.getActions(), OrOptions);
+      const option = actions.options.find((o) => o.title === title);
+      return option === undefined ? undefined : cast(option, SelectOption);
+    }
+
+    it('kp03 ruling: 6-heat option replaces 8-heat option', () => {
+      const [game, player] = testGame(1, {turmoilExtension: true});
+      setRulingParty(game, PartyName.KELVINISTS, 'kp03');
+      player.stock.add(Resource.HEAT, 10);
+
+      expect(findOption(player, 'Convert 8 heat into temperature')).is.undefined;
+      expect(findOption(player, 'Convert 6 heat into temperature (Turmoil Kelvinists)')).is.not.undefined;
+    });
+
+    it('kp01 ruling: 8-heat option remains, 6-heat is not offered', () => {
+      const [game, player] = testGame(1, {turmoilExtension: true});
+      setRulingParty(game, PartyName.KELVINISTS, 'kp01');
+      player.stock.add(Resource.HEAT, 10);
+
+      expect(findOption(player, 'Convert 8 heat into temperature')).is.not.undefined;
+      expect(findOption(player, 'Convert 6 heat into temperature (Turmoil Kelvinists)')).is.undefined;
+    });
   });
 
   it('run research phase', () => {

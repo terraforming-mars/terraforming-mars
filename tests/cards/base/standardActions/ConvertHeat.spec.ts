@@ -61,4 +61,13 @@ describe('ConvertHeat', () => {
     expect(player.heat).eq(0);
     expect(player.terraformRating).eq(20);
   });
+
+  it('canAct adds maxtemp warning at MAX_TEMPERATURE', () => {
+    player.heat = 8;
+    setTemperature(game, MAX_TEMPERATURE);
+
+    expect(card.warnings.has('maxtemp')).is.false;
+    expect(card.canAct(player)).eq(true);
+    expect(card.warnings.has('maxtemp')).is.true;
+  });
 });

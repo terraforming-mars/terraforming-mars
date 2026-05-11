@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
+  <div :class="classes"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
 </template>
 
 <script lang="ts">
@@ -27,8 +27,8 @@ export default defineComponent({
       default: '',
     },
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    classes(): string {
       return [
         playerColorClass(this.color, 'shadow'),
         'dynamic-title',

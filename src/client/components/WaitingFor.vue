@@ -68,10 +68,6 @@ export default defineComponent({
       type: Array as () => Array<PublicPlayerModel>,
       required: true,
     },
-    settings: {
-      type: Object as () => typeof raw_settings,
-      required: true,
-    },
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
       default: undefined,

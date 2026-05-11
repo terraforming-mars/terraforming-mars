@@ -8,7 +8,7 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {PlanetaryTracks} from '../../common/pathfinders/PlanetaryTracks';
+import {PLANETARY_TRACKS} from '../../common/pathfinders/PlanetaryTracks';
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
@@ -21,8 +21,6 @@ import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuild
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {Priority} from '../deferredActions/Priority';
 import {message} from '../logs/MessageBuilder';
-
-export const TRACKS = PlanetaryTracks.initialize();
 
 export class PathfindersExpansion {
   private constructor() {
@@ -57,7 +55,7 @@ export class PathfindersExpansion {
       return false;
     }
     const idx = data[Tag.MARS] + count;
-    const rewards = TRACKS[Tag.MARS].spaces[idx]?.risingPlayer;
+    const rewards = PLANETARY_TRACKS[Tag.MARS].spaces[idx]?.risingPlayer;
 
     if (rewards === undefined) {
       return false;
@@ -86,7 +84,7 @@ export class PathfindersExpansion {
       // throw new Error('Pathfinders not defined');
     }
 
-    const track = TRACKS[tag];
+    const track = PLANETARY_TRACKS[tag];
     if (track === undefined) {
       return;
     }

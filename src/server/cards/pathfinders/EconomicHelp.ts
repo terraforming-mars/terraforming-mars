@@ -5,10 +5,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {isPlanetaryTag, PlanetaryTag} from '../../pathfinders/PathfindersData';
-import {PathfindersExpansion, TRACKS} from '../../pathfinders/PathfindersExpansion';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {PathfindersData} from '../../pathfinders/PathfindersData';
+import {PLANETARY_TRACKS} from '@/common/pathfinders/PlanetaryTracks';
 
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
@@ -40,7 +41,7 @@ export class EconomicHelp extends Card implements IProjectCard {
 
   private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
-    const maxValue = TRACKS[tag].spaces.length - 1;
+    const maxValue = PLANETARY_TRACKS[tag].spaces.length - 1;
     return maxValue === value ? -1 : value;
   }
 

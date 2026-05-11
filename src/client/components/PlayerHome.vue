@@ -49,7 +49,7 @@
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
         <dynamic-title title="Actions" :color="thisPlayer.color"/>
-        <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+        <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
       </div>
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
@@ -128,7 +128,6 @@
     <PlayerSetupView
       v-if="thisPlayer.tableau.length === 0"
       :playerView="playerView"
-      :settings="settings"
       :tileView="tileView"
     />
 
@@ -156,7 +155,6 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import raw_settings from '@/genfiles/settings.json';
 
 import Card from '@/client/components/card/Card.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
@@ -185,7 +183,7 @@ import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
 import {APP_NAME} from '@/common/constants';
 
-export interface PlayerHomeModel {
+export type PlayerHomeModel = {
   showHand: boolean;
   showActiveCards: boolean;
   showAutomatedCards: boolean;
@@ -230,10 +228,6 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    settings: {
-      type: Object as () => typeof raw_settings,
       required: true,
     },
   },

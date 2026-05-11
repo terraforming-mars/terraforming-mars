@@ -1,6 +1,5 @@
 import {defineAsyncComponent, defineComponent} from 'vue';
 import * as constants from '@/common/constants';
-import raw_settings from '@/genfiles/settings.json';
 
 const AdminHome = defineAsyncComponent(() => import(/* webpackChunkName: "admin" */ '@/client/components/admin/AdminHome.vue'));
 const CardList = defineAsyncComponent(() => import(/* webpackChunkName: "card-list" */ '@/client/components/cardlist/CardList.vue'));
@@ -37,7 +36,7 @@ type Screen = 'admin' |
             'spectator-home' |
             'start-screen' |
             'the-end';
-export interface MainAppData {
+export type MainAppData = {
     screen: Screen;
     /**
      * player or spectator are set once the app component has loaded.
@@ -51,7 +50,6 @@ export interface MainAppData {
     // to force a rerender / refresh.
     // See https://michaelnthiessen.com/force-re-render/
     playerkey: number;
-    settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: SimpleGameModel | undefined;
@@ -71,7 +69,6 @@ export default defineComponent({
     return {
       screen: 'empty',
       playerkey: 0,
-      settings: raw_settings,
       isServerSideRequestInProgress: false,
       componentsVisibility: {
         'milestones': true,

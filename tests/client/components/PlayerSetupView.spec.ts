@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import PlayerSetupView from '@/client/components/PlayerSetupView.vue';
 import {fakePlayerViewModel} from './testHelpers';
-import raw_settings from '@/genfiles/settings.json';
 
 describe('PlayerSetupView', () => {
   it('mounts without errors', () => {
@@ -11,7 +10,6 @@ describe('PlayerSetupView', () => {
       ...globalConfig,
       props: {
         playerView: fakePlayerViewModel(),
-        settings: raw_settings,
         tileView: 'show',
       },
     });

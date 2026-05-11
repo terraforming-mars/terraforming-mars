@@ -33,7 +33,7 @@ import raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {playerColorClass} from '@/common/utils/utils';
-import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
@@ -49,7 +49,6 @@ let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
 
 type DataModel = {
-  waitingForTimeout: typeof raw_settings.waitingForTimeout,
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
@@ -61,7 +60,7 @@ export default defineComponent({
   name: 'waiting-for',
   props: {
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => ViewModel,
       required: true,
     },
     players: {
@@ -75,7 +74,6 @@ export default defineComponent({
   },
   data(): DataModel {
     return {
-      waitingForTimeout: this.settings.waitingForTimeout,
       playersWaitingFor: [],
       suspend: false,
       savedPlayerView: undefined,
@@ -201,7 +199,7 @@ export default defineComponent({
         xhr.responseType = 'json';
         xhr.send();
       };
-      ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
+      ui_update_timeout_id = window.setTimeout(askForUpdate, raw_settings.waitingForTimeout);
     },
     notify() {
       if (getPreferences().enable_sounds) {

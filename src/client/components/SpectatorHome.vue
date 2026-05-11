@@ -50,7 +50,7 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="(spectator as any)" :settings="settings" :waitingfor="undefined"></waiting-for>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :waitingfor="undefined"></waiting-for>
   </div>
 </template>
 
@@ -60,7 +60,6 @@ import {defineComponent} from 'vue';
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 
-import raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Colony from '@/client/components/colonies/Colony.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
@@ -73,9 +72,8 @@ import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {range} from '@/common/utils/utils';
 import {nextTileView, TileView} from './board/TileView';
 
-export interface SpectatorHomeModel {
+export type SpectatorHomeModel = {
   tileView: TileView;
-  waitingForTimeout: number;
 }
 
 export default defineComponent({
@@ -83,16 +81,11 @@ export default defineComponent({
   data(): SpectatorHomeModel {
     return {
       tileView: 'show',
-      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
   props: {
     spectator: {
       type: Object as () => SpectatorModel,
-      required: true,
-    },
-    settings: {
-      type: Object as () => typeof raw_settings,
       required: true,
     },
   },

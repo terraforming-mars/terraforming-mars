@@ -25,7 +25,7 @@
                 </dialog>
             </section>
             <div class="main-container">
-                <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>
+                <start-screen v-if="screen === 'start-screen'"></start-screen>
                 <create-game-form
                     v-else-if="screen === 'create-game-form'"
                 ></create-game-form>
@@ -38,13 +38,11 @@
                     v-else-if="screen === 'player-home' && playerView !== undefined"
                     :player-view="playerView"
                     :key="playerkey"
-                    :settings="settings"
                 ></player-home>
                 <spectator-home
                     v-else-if="screen === 'spectator-home' && spectator !== undefined"
                     :spectator="spectator"
                     :key="'spectator-' + playerkey"
-                    :settings="settings"
                 ></spectator-home>
                 <game-end
                     v-else-if="screen === 'the-end'"

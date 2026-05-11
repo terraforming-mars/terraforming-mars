@@ -5,7 +5,6 @@ import WaitingFor from '@/client/components/WaitingFor.vue';
 import {RecursivePartial} from '@/common/utils/utils';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Phase} from '@/common/Phase';
-import raw_settings from '@/genfiles/settings.json';
 
 describe('WaitingFor', () => {
   const thisPlayer: Partial<PublicPlayerModel> = {
@@ -35,7 +34,6 @@ describe('WaitingFor', () => {
       props: {
         playerView: playerView as PlayerViewModel,
         players: [thisPlayer as PublicPlayerModel],
-        settings: raw_settings,
         waitingfor: {
           type: 'option',
           title: 'test',
@@ -59,7 +57,6 @@ describe('WaitingFor', () => {
       props: {
         playerView: playerView as PlayerViewModel,
         players: [thisPlayer as PublicPlayerModel],
-        settings: raw_settings,
         waitingfor: undefined,
       },
     });

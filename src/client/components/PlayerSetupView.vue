@@ -49,7 +49,7 @@
     </template>
 
     <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
 
     <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
@@ -96,7 +96,6 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
@@ -116,10 +115,6 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    settings: {
-      type: Object as () => typeof raw_settings,
       required: true,
     },
     tileView: {

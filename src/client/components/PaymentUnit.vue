@@ -9,7 +9,6 @@
     />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
-    <span v-if="value !== undefined && modelValue !== 0">&nbsp{{ value * modelValue }}</span>
   </div>
 </template>
 
@@ -33,10 +32,6 @@ export default defineComponent({
     description: {
       type: String,
       required: true,
-    },
-    value: {
-      type: Number as () => number | undefined,
-      default: undefined,
     },
     showMax: {
       type: Boolean,

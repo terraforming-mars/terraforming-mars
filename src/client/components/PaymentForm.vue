@@ -1,22 +1,36 @@
 <template>
 <section v-trim-whitespace>
-  cost: {{ cost }} total {{ totalSpent() }}
-  <template v-for="unit of order" :key="unit">
-    <div v-if="ledger[unit]?.available > 0">
-      <payment-unit-component
-        v-model.number="payment[unit]"
-        :unit="unit"
-        :description="descriptions[unit]"
-        :value="ledger[unit].rate"
-        @plus="addValue(unit)"
-        @minus="reduceValue(unit)"
-        @max="maxValue(unit)">
-      </payment-unit-component>
-      <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
-        Some ${0} are reserved and unavailable here.
-      </div>
-    </div>
-  </template>
+  <table class="payments_table">
+    <tbody>
+      <template v-for="unit of order" :key="unit">
+        <template v-if="ledger[unit]?.available > 0">
+          <tr>
+            <td>
+              <payment-unit-component
+                v-model.number="payment[unit]"
+                :unit="unit"
+                :description="descriptions[unit]"
+                :rate="ledger[unit].rate"
+                @plus="addValue(unit)"
+                @minus="reduceValue(unit)"
+                @max="maxValue(unit)">
+              </payment-unit-component>
+              <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
+              Some ${0} are reserved and unavailable here.</div>
+            </td>
+            <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
+              {{ ledger[unit].rate * payment[unit] }}
+              <i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i>
+            </td>
+          </tr>
+        </template>
+      </template>
+    <tr>
+      <td class="payments_total_heading">=</td>
+      <td :class="totalSpentClass()">{{ totalSpent() }} <i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
+    </tr>
+    </tbody>
+  </table>
 
   <div v-if="warning !== undefined" class="tm-warning">
     <label class="label label-error">{{ $t(warning) }}</label>
@@ -202,6 +216,16 @@ export default defineComponent({
         }
       }
       this.$emit('save', this.payment);
+    },
+    totalSpentClass(): string {
+      const total = this.totalSpent();
+      if (total < this.cost) {
+        return 'payments_total_under';
+      } else if (total > this.cost) {
+        return 'payments_total_over';
+      } else {
+        return 'payments_total_exact';
+      }
     },
   },
 });

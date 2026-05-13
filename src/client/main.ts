@@ -1,7 +1,7 @@
 import {createApp, defineAsyncComponent} from 'vue';
 
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
-import App from '@/client/components/App';
+import App from '@/client/components/App.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 import i18nPlugin from '@/client/plugins/i18n.plugin';

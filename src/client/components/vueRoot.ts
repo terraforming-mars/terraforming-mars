@@ -1,5 +1,5 @@
 import {ComponentPublicInstance} from 'vue';
-import App from '@/client/components/App';
+import App from '@/client/components/App.vue';
 
 // Gives caller access to global client methods and data.
 //

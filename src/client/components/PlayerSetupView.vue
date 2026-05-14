@@ -55,7 +55,7 @@
 
     <div class="player_home_block" v-if="playerView.players.length > 1">
       <Milestones :showScores="false" :milestones="game.milestones" />
-      <Awards :awards="game.awards" />
+      <Awards :show-scores="false" :awards="game.awards" />
     </div>
 
     <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">

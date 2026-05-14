@@ -228,7 +228,7 @@ import Award from '@/client/components/Award.vue';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
-import {APP_NAME} from '@/common/constants';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 
 type Refs = {
@@ -250,7 +250,7 @@ export default defineComponent({
     return hashToModel(window.location.hash);
   },
   mounted() {
-    document.title = `Cards List | ${APP_NAME}`;
+    setDocumentTitle('Cards List');
     this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
   },

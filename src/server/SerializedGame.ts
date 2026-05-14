@@ -49,6 +49,8 @@ export type SerializedGame = {
     lastSaveId: number;
     milestones: Array<MilestoneName>;
     moonData: SerializedMoonData | undefined;
+    // TODO(kberg): make required by 2026-07-01
+    name?: string;
     nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;

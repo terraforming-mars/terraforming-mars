@@ -70,6 +70,7 @@ import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {range} from '@/common/utils/utils';
 import {nextTileView, TileView} from './board/TileView';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 export type SpectatorHomeModel = {
   tileView: TileView;
@@ -114,6 +115,9 @@ export default defineComponent({
     cycleTileView(): void {
       this.tileView = nextTileView(this.tileView);
     },
+  },
+  mounted() {
+    setDocumentTitle(this.game.name);
   },
 });
 </script>

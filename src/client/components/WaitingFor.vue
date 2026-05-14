@@ -44,6 +44,7 @@ import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
+import {gameDocumentTitle} from '../utils/documentTitle';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -92,9 +93,7 @@ export default defineComponent({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      const playerCount = this.playerView.players.length;
-      const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
-      document.title = next + ' ' + `${gameType} | ${this.$t(constants.APP_NAME)}`;
+      document.title = next + ' ' + gameDocumentTitle(this.playerView.game);
     },
     onsave(out: InputResponse) {
       this.fetchPlayerInput(
@@ -241,9 +240,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    const playerCount = this.playerView.players.length;
-    const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
-    document.title = `${gameType} | ${this.$t(constants.APP_NAME)}`;
+    document.title = gameDocumentTitle(this.playerView.game);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

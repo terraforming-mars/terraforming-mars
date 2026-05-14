@@ -590,6 +590,7 @@ import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -668,7 +669,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    document.title = `Create New Game | ${constants.APP_NAME}`;
+    setDocumentTitle('Create New Game');
   },
   computed: {
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {

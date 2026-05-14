@@ -15,7 +15,7 @@ describe('CrewTraining', () => {
 
   beforeEach(() => {
     card = new CrewTraining();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('Should play', () => {

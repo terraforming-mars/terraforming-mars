@@ -15,7 +15,7 @@ describe('Kickstarter', () => {
 
   beforeEach(() => {
     card = new Kickstarter();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('play', () => {

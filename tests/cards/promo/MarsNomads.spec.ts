@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {churn, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions, setTemperature} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
@@ -140,6 +140,30 @@ describe('MarsNomads', () => {
     selectSpace.cb(destinationSpace);
     expect(player.megaCredits).to.eq(2);
   });
+
+  for (const run of [
+    {bonus: SpaceBonus.OCEAN, megaCredits: 5, expected: false},
+    {bonus: SpaceBonus.OCEAN, megaCredits: 6, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 2, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 3, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 3, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 4, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 0, temperature: 8, expected: true},
+  ] as const) {
+    it('Destination filtered by placement-bonus affordability (Bug #7326) ' + JSON.stringify(run), () => {
+      const nomadSpace = board.getAvailableSpacesOnLand(player)[12];
+      game.nomadSpace = nomadSpace.id;
+      const destinationSpace = game.board.getAdjacentSpaces(nomadSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+      destinationSpace.bonus = [run.bonus];
+      if (run.temperature) {
+        setTemperature(game, run.temperature);
+      }
+      player.megaCredits = run.megaCredits;
+
+      const spaces = cast(card.action(player), SelectSpace).spaces;
+      expect(spaces.includes(destinationSpace)).to.eq(run.expected);
+    });
+  }
 
   it('Can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
     player.megaCredits = 0;

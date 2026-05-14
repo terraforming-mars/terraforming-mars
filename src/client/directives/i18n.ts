@@ -17,10 +17,10 @@ const context: Context = {
   players: new Map(),
 };
 
-export function setTranslationContext(game: PlayerViewModel) {
-  context.playerView = game;
+export function setTranslationContext(playerView: PlayerViewModel) {
+  context.playerView = playerView;
   context.players.clear();
-  for (const player of game.players) {
+  for (const player of playerView.players) {
     context.players.set(player.color, player.name);
   }
 }

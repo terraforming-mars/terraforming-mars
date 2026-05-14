@@ -28,7 +28,6 @@
       :game="game"
       :tileView="tileView"
       :playerCount="spectator.players.length"
-      show-award-scores
       @toggleTileView="cycleTileView()"
     />
 

@@ -34,7 +34,7 @@
   <div v-if="playerCount > 1" class="player_home_block--milestones-and-awards">
     <a class="hotkey-target"></a>
     <Milestones :milestones="game.milestones" />
-    <Awards :awards="game.awards" :show-scores="showAwardScores" />
+    <Awards :awards="game.awards" />
   </div>
 </template>
 
@@ -64,10 +64,6 @@ export default defineComponent({
     playerCount: {
       type: Number,
       required: true,
-    },
-    showAwardScores: {
-      type: Boolean,
-      default: false,
     },
   },
   emits: ['toggleTileView'],

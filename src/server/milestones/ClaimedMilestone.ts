@@ -25,7 +25,7 @@ export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMiles
 
 export function deserializeClaimedMilestones(
   claimedMilestones: Array<SerializedClaimedMilestone>,
-  players: Array<IPlayer>,
+  players: ReadonlyArray<IPlayer>,
   milestones: Array<IMilestone>): Array<ClaimedMilestone> {
   // Remove duplicates
   const ms = new Set<MilestoneName>();

@@ -3,6 +3,7 @@ import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
+import {CubeType} from '../common/automa/AutomaTypes';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
@@ -71,4 +72,31 @@ export type SerializedGame = {
     underworldData: UnderworldData;
     venusScaleLevel: number;
     verminInEffect: boolean;
+
+    // Automa
+    automaState?: SerializedAutomaState;
+}
+
+export type SerializedAutomaState = {
+    trackPositions: Array<number>;
+    trackRegressedPositions: Array<Array<number>>;
+    mcSupply: number;
+    goesFirst: boolean;
+    difficulty: 'easy' | 'normal' | 'hard' | 'brutal';
+    actionDeckCardNames: Array<string>;
+    bonusDeckDrawPile: Array<string>;
+    bonusDeckDiscardPile: Array<string>;
+    destroyedBonusCards: Array<string>;
+    neuralInstanceSpaceId: string | undefined;
+    playedProjectCardNames: Array<string>;
+    marsBotPlayerId: string;
+    // Corporation framework
+    corpId?: string;
+    trackCubePositions?: Array<{trackIndex: number, position: number, cubeType: CubeType}>;
+    triggeredCubePositions?: Array<string>;
+    corpSpecificState?: Record<string, unknown>;
+    floaterCount?: number;
+    vpByGeneration?: Array<number>;
+    temperatureRaises?: number;
+    colonyCubePositions?: Array<string>;
 }

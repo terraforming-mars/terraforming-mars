@@ -19,7 +19,7 @@ describe('DeclareCloneTag', () => {
   let tag: Tag;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
     card = new LobbyHalls();
   });
 

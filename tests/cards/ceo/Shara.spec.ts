@@ -16,7 +16,7 @@ describe('Shara', () => {
 
   beforeEach(() => {
     card = new Shara();
-    [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('Can act', () => {

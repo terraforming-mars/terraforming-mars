@@ -228,7 +228,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
     [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
     [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
-    [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
+    [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline, compatibility: ['venus', 'pathfinders']},
     [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},

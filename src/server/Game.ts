@@ -48,7 +48,7 @@ import {AresSetup} from './ares/AresSetup';
 import {MoonData} from './moon/MoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {SeededRandom} from '../common/utils/Random';
+import {SeededRandom, UnseededRandom} from '../common/utils/Random';
 import {chooseMilestonesAndAwards} from './ma/MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {MultiSet} from 'mnemonist';
@@ -82,6 +82,7 @@ import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
 import {ICard} from './cards/ICard';
+import {generateGameName} from './GameName';
 
 // Can be overridden by tests
 
@@ -93,6 +94,7 @@ export function setGameLog(f: () => Array<LogMessage>) {
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
+  public readonly name: string;
   public readonly gameOptions: Readonly<GameOptions>;
   public readonly players: ReadonlyArray<IPlayer>;
   // The API makes this readonly.
@@ -186,6 +188,7 @@ export class Game implements IGame, Logger {
 
   private constructor(
     id: GameId,
+    name: string,
     players: Array<IPlayer>,
     first: IPlayer,
     activePlayer: PlayerId,
@@ -198,6 +201,7 @@ export class Game implements IGame, Logger {
     ceoDeck: CeoDeck,
     tags: ReadonlyArray<Tag>) {
     this.id = id;
+    this.name = name;
     this.gameOptions = {...gameOptions};
     this.players = players;
     const playerIds = players.map(toID);
@@ -310,7 +314,8 @@ export class Game implements IGame, Logger {
       players[0].setTerraformRating(14);
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, Array.from(tags));
+    const name = generateGameName(UnseededRandom.INSTANCE);
+    const game = new Game(id, name, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, Array.from(tags));
     game.spectatorId = spectatorId;
     // This evaluation of created time doesn't match what's stored in the database, but that's fine.
     game.createdTime = new Date();
@@ -474,6 +479,7 @@ export class Game implements IGame, Logger {
       lastSaveId: this.lastSaveId,
       milestones: this.milestones.map(toName),
       moonData: MoonData.serialize(this.moonData),
+      name: this.name,
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
       pathfindersData: PathfindersData.serialize(this.pathfindersData),
@@ -1676,7 +1682,9 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
+    // TODO(kberg): remove ?? generateGameName(...) by 2026-07-01
+    const name = d.name ?? generateGameName(UnseededRandom.INSTANCE);
+    const game = new Game(d.id, name, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);

@@ -39,12 +39,14 @@ describe('ApiGame', () => {
     // This test is probably brittle.
     const json = JSON.parse(res.content);
     json.expectedPurgeTimeMs = -1;
+    json.name = 'game-name';
     expect(json).deep.eq(
       {
         'activePlayer': 'black',
         'expectedPurgeTimeMs': -1,
         'id': 'game-valid-id',
         'lastSoloGeneration': 14,
+        'name': 'game-name',
         'phase': 'research',
         'players': [
           {

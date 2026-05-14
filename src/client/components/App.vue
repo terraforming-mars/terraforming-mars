@@ -75,6 +75,7 @@ import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
 import dialogPolyfill from 'dialog-polyfill';
+import {setDocumentTitle} from '../utils/documentTitle';
 
 type Screen = 'admin' |
             'create-game-form' |
@@ -244,7 +245,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    document.title = constants.APP_NAME;
+    setDocumentTitle();
     if (!windowHasHTMLDialogElement()) {
       dialogPolyfill.registerDialog(document.getElementById('alert-dialog') as HTMLDialogElement);
     }

@@ -214,6 +214,7 @@
 
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
@@ -391,7 +392,7 @@ export default defineComponent({
     VictoryPointChart,
   },
   mounted() {
-    document.title = `End of Game | ${constants.APP_NAME}`;
+    setDocumentTitle('🏁 | ' + this.game.name);
   },
   methods: {
     getEndGamePlayerRowColorClass(color: Color): string {

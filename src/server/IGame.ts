@@ -41,6 +41,7 @@ export interface Score {
 
 export interface IGame extends Logger {
   readonly id: GameId;
+  readonly name: string;
   readonly gameOptions: Readonly<GameOptions>;
   // Game-level data
   lastSaveId: number;

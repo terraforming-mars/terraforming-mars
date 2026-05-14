@@ -25,13 +25,13 @@ export class EconomicHelp extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf42',
         renderData: CardRenderer.builder((b) => {
-          b.planetaryTrack().text('3').or().text('2')
-            .tag(Tag.VENUS).or(Size.SMALL)
-            .tag(Tag.EARTH).or(Size.SMALL).br;
-          b.tag(Tag.MARS).or(Size.SMALL)
-            .tag(Tag.JOVIAN).or(Size.SMALL)
-            .tag(Tag.MOON).br;
-          b.production((pb) => pb.megacredits(1));
+          b.production((pb) => pb.megacredits(1)).nbsp.nbsp;
+          b.planetaryTrack().text('3').asterix().br;
+          b.tag(Tag.VENUS, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.EARTH, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.MARS, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.JOVIAN, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.MOON, {size: Size.SMALL});
         }),
         description: 'Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. ' +
          'Increase your M€ production 1 step',

@@ -45,6 +45,12 @@ export default defineComponent({
       }
       return 'card-tag-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
     },
+    tagSizeClass(): string {
+      if (this.item.size !== undefined) {
+        return 'card-tag-size--' + this.item.size;
+      }
+      return '';
+    },
     componentClasses(): ReadonlyArray<string> {
       const classes: Array<string> = [];
       if (this.item.isSuperscript) {
@@ -281,7 +287,7 @@ export default defineComponent({
       case CardRenderItemType.RESOURCE:
         return [cardResource, this.resourceClass, this.resourceSizeClass];
       case CardRenderItemType.TAG:
-        return ['card-resource-tag', this.tagClass];
+        return ['card-resource-tag', this.tagClass, this.tagSizeClass];
       case CardRenderItemType.NEUTRAL_DELEGATE:
         return ['card-neutral-delegate'];
       case CardRenderItemType.UNDERGROUND_RESOURCES:

@@ -13,6 +13,10 @@ export type TradeOptions = {
   selfishTrade?: boolean;
 };
 
+export interface IColonyInternal {
+  handleTrade(player: IPlayer, options: TradeOptions): void;
+}
+
 export interface IColony {
   readonly name: ColonyName;
   readonly metadata: ColonyMetadata;

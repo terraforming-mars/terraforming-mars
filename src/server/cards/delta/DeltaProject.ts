@@ -1,13 +1,13 @@
-import {CardName} from '../../common/cards/CardName';
-import {CardRenderer} from '../cards/render/CardRenderer';
-import {IActionCard} from '../cards/ICard';
-import {PreludeCard} from '../cards/prelude/PreludeCard';
-import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
-import {DeltaProjectExpansion} from './DeltaProjectExpansion';
-import {DeltaProjectInput} from './DeltaProjectInput';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard} from '../ICard';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {DeltaProjectExpansion} from '../../delta/DeltaProjectExpansion';
+import {DeltaProjectInput} from '../../delta/DeltaProjectInput';
 
-export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
+export class DeltaProject extends PreludeCard implements IActionCard {
   constructor() {
     super({
       name: CardName.DELTA_PROJECT,
@@ -31,8 +31,6 @@ export class DeltaProjectPrelude extends PreludeCard implements IActionCard {
     const validSteps = DeltaProjectExpansion.getValidAdvanceSteps(player);
 
     return new DeltaProjectInput(
-      'Delta Project: Pay energy to advance on the track',
-      'Advance',
       validSteps,
     ).andThen((amount) => {
       DeltaProjectExpansion.advance(player, amount);

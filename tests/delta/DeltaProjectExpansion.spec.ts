@@ -3,7 +3,7 @@ import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {DeltaProjectExpansion} from '../../src/server/delta/DeltaProjectExpansion';
-import {DeltaProjectPrelude} from '../../src/server/delta/DeltaProjectPrelude';
+import {DeltaProject} from '../../src/server/cards/delta/DeltaProject';
 import {Tag} from '../../src/common/cards/Tag';
 import {fakeCard, runAllActions} from '../TestingUtils';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -19,7 +19,6 @@ import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPoints
 import {DeltaProjectData} from '../../src/server/delta/DeltaProjectData';
 import {Color} from '../../src/common/Color';
 import {Game} from '../../src/server/Game';
-import {sanitizeCustomPreludes} from '../../src/server/game/GameOptions';
 import {cast} from '@/common/utils/utils';
 
 function progress(data: DeltaProjectData, color: Color) {
@@ -525,7 +524,7 @@ describe('DeltaProjectExpansion', () => {
     });
 
     it('sanitizeCustomPreludes removes Delta Project', () => {
-      expect(sanitizeCustomPreludes([CardName.DELTA_PROJECT, CardName.ALLIED_BANK])).deep.eq([CardName.ALLIED_BANK]);
+      expect(DeltaProjectExpansion.sanitizeCustomPreludes([CardName.DELTA_PROJECT, CardName.ALLIED_BANK])).deep.eq([CardName.ALLIED_BANK]);
     });
 
     it('Game.newInstance strips Delta Project from customPreludes', () => {
@@ -539,27 +538,27 @@ describe('DeltaProjectExpansion', () => {
     });
 
     it('canAct returns false with no energy', () => {
-      const card = new DeltaProjectPrelude();
+      const card = new DeltaProject();
       player.energy = 0;
       player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
       expect(card.canAct(player)).is.false;
     });
 
     it('canAct returns false when no tags to advance', () => {
-      const card = new DeltaProjectPrelude();
+      const card = new DeltaProject();
       player.energy = 5;
       expect(card.canAct(player)).is.false;
     });
 
     it('canAct returns true when can advance', () => {
-      const card = new DeltaProjectPrelude();
+      const card = new DeltaProject();
       player.energy = 5;
       player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
       expect(card.canAct(player)).is.true;
     });
 
     it('action returns DeltaProjectInput with valid step list', () => {
-      const card = new DeltaProjectPrelude();
+      const card = new DeltaProject();
       setupPlayerForThreeStepsFromStart(player);
 
       const input = cast(card.action(player), DeltaProjectInput);
@@ -567,7 +566,7 @@ describe('DeltaProjectExpansion', () => {
     });
 
     it('action advances the player on the track', () => {
-      const card = new DeltaProjectPrelude();
+      const card = new DeltaProject();
       setupPlayerForThreeStepsFromStart(player);
 
       const input = cast(card.action(player), DeltaProjectInput);

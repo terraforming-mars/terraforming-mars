@@ -57,11 +57,11 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {DeltaProjectData} from './delta/DeltaProjectData';
 import {DeltaProjectExpansion} from './delta/DeltaProjectExpansion';
-import {DeltaProjectPrelude} from './delta/DeltaProjectPrelude';
+import {DeltaProject} from './cards/delta/DeltaProject';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
-import {DEFAULT_GAME_OPTIONS, GameOptions, sanitizeCustomPreludes} from './game/GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
@@ -278,14 +278,18 @@ export class Game implements IGame, Logger {
         deltaProject: options.deltaProjectExpansion ?? false,
       };
     }
-    const mergedOptions = {...DEFAULT_GAME_OPTIONS, ...options};
-    const gameOptions: GameOptions = {
-      ...mergedOptions,
-      customPreludes: sanitizeCustomPreludes(mergedOptions.customPreludes),
-    };
+    const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
+
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
+    if (gameOptions.customPreludes !== undefined && gameOptions.customPreludes.includes(CardName.DELTA_PROJECT)) {
+      throw new Error('Delta Project cannot be included in custom preludes. It is given to all players as part of the Delta Project.');
+    }
+    if (gameOptions.bannedCards !== undefined && gameOptions.bannedCards.includes(CardName.DELTA_PROJECT)) {
+      throw new Error('Delta Project cannot be banned. It is given to all players as part of the Delta Project.');
+    }
+
     const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const gameCards = new GameCards(gameOptions);
@@ -377,7 +381,7 @@ export class Game implements IGame, Logger {
     if (game.gameOptions.deltaProjectExpansion) {
       game.deltaProjectData = DeltaProjectExpansion.initialize(game);
       for (const player of game.playersInGenerationOrder) {
-        player.preludeCardsInHand.push(new DeltaProjectPrelude());
+        player.preludeCardsInHand.push(new DeltaProject());
       }
     }
 

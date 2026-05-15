@@ -1,21 +1,17 @@
-import {Message} from '../../common/logs/Message';
 import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isDeltaProjectInputResponse} from '../../common/inputs/InputResponse';
 import {DeltaProjectInputModel} from '../../common/models/PlayerInputModel';
-import {IPlayer} from '../IPlayer';
 import {InputError} from '../inputs/InputError';
 
 export class DeltaProjectInput extends BasePlayerInput<number> {
   constructor(
-    title: string | Message,
-    buttonLabel: string,
     public validSteps: ReadonlyArray<number>,
   ) {
-    super('deltaProject', title);
-    this.buttonLabel = buttonLabel;
+    super('deltaProject', 'Select the amount of energy to spend to advance on the track');
+    this.buttonLabel = 'Advance';
   }
 
-  public toModel(_player?: IPlayer): DeltaProjectInputModel {
+  public toModel(): DeltaProjectInputModel {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,

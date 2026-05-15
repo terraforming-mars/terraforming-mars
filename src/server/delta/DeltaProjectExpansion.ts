@@ -31,7 +31,10 @@ export const DELTA_TRACK_TAGS: ReadonlyArray<Tag | undefined> = [
   Tag.ANIMAL,    // 9
   undefined,     // 10: 2VP
   undefined,     // 11: 5VP
-];
+] as const;
+
+export const VP2_POSITION = 10;
+export const VP5_POSITION = 11;
 
 export const MAX_TRACK_POSITION = DELTA_TRACK_TAGS.length - 1; // 11 (positions 0–11)
 
@@ -98,10 +101,10 @@ export class DeltaProjectExpansion {
         continue;
       }
 
-      if (newPos === 10 && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, 10, player)) {
+      if (newPos === VP2_POSITION && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, VP2_POSITION, player)) {
         continue;
       }
-      if (newPos === 11 && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, 11, player)) {
+      if (newPos === VP5_POSITION && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, VP5_POSITION, player)) {
         continue;
       }
       result.push(steps);
@@ -118,7 +121,7 @@ export class DeltaProjectExpansion {
    * - Must have the required tag (raw, without wilds) for each step, OR use a wild tag.
    * - Each wild tag covers exactly one missing tag.
    * - Must have enough energy (1 per step).
-   * - Cannot land on position 10 or 11 if another player already occupies that position.
+   * - Cannot land on position VP spots if another player already occupies that position.
    * - Cannot move beyond position 11 (5VP).
    */
   public static maxSteps(player: IPlayer): number {
@@ -132,7 +135,6 @@ export class DeltaProjectExpansion {
       throw new Error(`Invalid Delta Project advance: ${String(steps)} step(s) (valid: ${valid.join(', ')})`);
     }
 
-    const game = player.game;
     const progress = DeltaProjectExpansion.getProgress(player);
     const currentPos = progress.position;
     const newPos = currentPos + steps;
@@ -142,15 +144,13 @@ export class DeltaProjectExpansion {
 
     DeltaProjectExpansion.resolveReward(player, newPos);
 
-    game.log('${0} spend ${1} energy to advance on the Delta Project track', (b) => b.player(player).number(steps));
+    player.game.log('${0} spend ${1} energy to advance on the Delta Project track', (b) => b.player(player).number(steps));
   }
 
   private static resolveReward(player: IPlayer, position: number): void {
-    const game = player.game;
-
-    // TODO(kberg): Assigning rewards by magic number isn't the best, but it's OK.
-    switch (position) {
-    case 1: // Building: Choose 2 steel or 2 plants
+    // Positions 10/11 (VP spots) have no additional reward beyond VP claiming.
+    switch (DELTA_TRACK_TAGS[position]) {
+    case Tag.BUILDING: // Choose 2 steel or 2 plants
       player.defer(() => new OrOptions(
         new SelectOption('Gain 2 steel', 'Gain steel').andThen(() => {
           player.stock.add(Resource.STEEL, 2, {log: true});
@@ -163,7 +163,7 @@ export class DeltaProjectExpansion {
       ));
       break;
 
-    case 2: // Power: Choose +1 energy production or +1 heat production
+    case Tag.POWER: // Choose +1 energy production or +1 heat production
       player.defer(() => new OrOptions(
         new SelectOption('Increase energy production 1 step', 'Increase').andThen(() => {
           player.production.add(Resource.ENERGY, 1, {log: true});
@@ -176,25 +176,25 @@ export class DeltaProjectExpansion {
       ));
       break;
 
-    case 3: // Earth: +2 MC production
+    case Tag.EARTH: // +2 MC production
       player.production.add(Resource.MEGACREDITS, 2, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
 
-    case 4: // Space: +1 titanium production
+    case Tag.SPACE: // +1 titanium production
       player.production.add(Resource.TITANIUM, 1, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
 
-    case 5: // Science: Look at top 4 cards, take 2, discard rest
-      game.defer(DrawCards.keepSome(player, 4, {keepMax: 2}));
+    case Tag.SCIENCE: // Look at top 4 cards, take 2, discard rest
+      player.game.defer(DrawCards.keepSome(player, 4, {keepMax: 2}));
       break;
 
-    case 6: { // Plant: Gain 1 plant per plant tag
+    case Tag.PLANT: { // Gain 1 plant per plant tag
       const plantCount = player.tags.count(Tag.PLANT);
       player.stock.add(Resource.PLANTS, plantCount, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
     }
 
-    case 7: { // Microbe: Reuse a used blue card action
+    case Tag.MICROBE: { // Reuse a used blue card action
       const actionCards = DeltaProjectExpansion.getUsedActionCards(player);
       if (actionCards.length > 0) {
         player.defer(() => new SelectCard<IActionCard & ICard>(
@@ -202,14 +202,14 @@ export class DeltaProjectExpansion {
           'Take action',
           actionCards,
         ).andThen(([card]) => {
-          game.log('${0} reused ${1} action via ${2}', (b) => b.player(player).card(card).cardName(CardName.DELTA_PROJECT));
+          player.game.log('${0} reused ${1} action via ${2}', (b) => b.player(player).card(card).cardName(CardName.DELTA_PROJECT));
           return card.action(player);
         }));
       }
       break;
     }
 
-    case 8: { // Jovian: Gain one Jovian tag
+    case Tag.JOVIAN: { // Gain one Jovian tag
       const progress = DeltaProjectExpansion.getProgress(player);
       if (!progress.jovianBonus) {
         progress.jovianBonus = true;
@@ -217,21 +217,19 @@ export class DeltaProjectExpansion {
         for (const card of player.tableau) {
           card.onNonCardTagAdded?.(player, Tag.JOVIAN);
         }
-        for (const p of game.playersInGenerationOrder) {
+        for (const p of player.game.playersInGenerationOrder) {
           for (const card of p.tableau) {
             card.onNonCardTagAddedByAnyPlayer?.(p, Tag.JOVIAN);
           }
         }
-        game.log('${0} gained a Jovian tag from the Delta Project', (b) => b.player(player));
+        player.game.log('${0} gained a Jovian tag from the Delta Project', (b) => b.player(player));
       }
       break;
     }
 
-    case 9: // Animal: Add 2 animals to any card
-      game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
+    case Tag.ANIMAL: // Add 2 animals to any card
+      player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
       break;
-
-      // Positions 10/11 (VP spots) have no additional reward beyond VP claiming
     }
   }
 
@@ -257,9 +255,10 @@ export class DeltaProjectExpansion {
       return;
     }
 
-    if (progress.position === 11) {
+    if (progress.position === VP5_POSITION) {
       builder.setVictoryPoints('victoryPoints', 5, 'Delta Project (5VP)');
-    } else if (progress.position === 10) {
+    }
+    if (progress.position === VP2_POSITION) {
       builder.setVictoryPoints('victoryPoints', 2, 'Delta Project (2VP)');
     }
   }

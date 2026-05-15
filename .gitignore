@@ -25,6 +25,3 @@ node_modules/
 # misc
 .gitconfig
 ./logs/
-
-# Local notes
-notes/*

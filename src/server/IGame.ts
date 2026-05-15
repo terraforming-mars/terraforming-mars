@@ -24,7 +24,6 @@ import {AresData} from '../common/ares/AresData';
 import {MoonData} from './moon/MoonData';
 import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
-import {DeltaProjectData} from './delta/DeltaProjectData';
 import {GameOptions} from './game/GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Tag} from '../common/cards/Tag';
@@ -85,7 +84,6 @@ export interface IGame extends Logger {
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
-  deltaProjectData: DeltaProjectData | undefined;
   underworldData: UnderworldData;
 
   // Card-specific data

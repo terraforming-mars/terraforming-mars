@@ -2,9 +2,8 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <DeltaProjectBoard
-      v-if="playerView.game.deltaProject !== undefined"
-      :model="playerView.game.deltaProject"
-      :playersCount="playerView.players.length"
+      v-if="playerView.game.gameOptions.expansions.deltaProject"
+      :players="playerView.players"
     />
     <div class="flex">
       <select class="nes-input" v-model.number="amount">

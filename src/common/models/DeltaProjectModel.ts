@@ -1,10 +1,5 @@
-import {Color} from '../Color';
-
+// TODO(kberg): Rename to Delta(Project?)PlayerModel
 export type DeltaProjectPlayerModel = {
   position: number;
   jovianBonus: boolean;
-}
-
-export type DeltaProjectModel = {
-  players: Partial<Record<Color, DeltaProjectPlayerModel>>;
 }

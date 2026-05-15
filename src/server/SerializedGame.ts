@@ -12,7 +12,6 @@ import {LogMessage} from '../common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
-import {DeltaProjectModel} from '../common/models/DeltaProjectModel';
 import {SerializedDeck} from './cards/SerializedDeck';
 import {UnderworldData} from './underworld/UnderworldData';
 import {AwardName} from '../common/ma/AwardName';
@@ -54,7 +53,6 @@ export type SerializedGame = {
     name?: string;
     nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
-    deltaProjectData: DeltaProjectModel | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
     phase: Phase;

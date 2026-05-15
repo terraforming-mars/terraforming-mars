@@ -89,7 +89,7 @@
 
         <a name="moonBoard" class="player_home_anchor"></a>
         <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
-        <DeltaProjectBoard v-if="game.deltaProject !== undefined" :model="game.deltaProject" :playersCount="playerView.players.length"></DeltaProjectBoard>
+        <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="playerView.players"></DeltaProjectBoard>
       </div>
     </details>
   </div>

@@ -67,10 +67,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, PropType} from 'vue';
 import {Color} from '@/common/Color';
 import {Tag} from '@/common/cards/Tag';
-import {DeltaProjectModel} from '@/common/models/DeltaProjectModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type RewardIcon = {
@@ -176,12 +176,8 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
 export default defineComponent({
   name: 'DeltaProjectBoard',
   props: {
-    model: {
-      type: Object as () => DeltaProjectModel,
-      required: true,
-    },
-    playersCount: {
-      type: Number,
+    players: {
+      type: Array as PropType<ReadonlyArray<PublicPlayerModel>>,
       required: true,
     },
   },
@@ -197,21 +193,21 @@ export default defineComponent({
     },
     playersAtPosition(position: number): Array<Color> {
       const result: Array<Color> = [];
-      for (const [color, progress] of Object.entries(this.model.players)) {
-        if (progress && progress.position === position) {
-          result.push(color as Color);
+      for (const player of this.players) {
+        if (player.deltaProject?.position === position) {
+          result.push(player.color);
         }
       }
       return result;
     },
     emptySlots(position: number, step: DeltaBoardStep): number {
       const occupied = this.playersAtPosition(position).length;
-      const minSlots = step.dynamicSlots ? this.playersCount : 1;
+      const minSlots = step.dynamicSlots ? this.players.length : 1;
       return Math.max(0, minSlots - occupied);
     },
     emptySlotsStart(): number {
       const occupied = this.playersAtPosition(0).length;
-      return Math.max(0, this.playersCount - occupied);
+      return Math.max(0, this.players.length - occupied);
     },
   },
 });

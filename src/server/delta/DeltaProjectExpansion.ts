@@ -1,8 +1,7 @@
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
-import {DeltaProjectData} from './DeltaProjectData';
 import {DeltaProjectPlayerModel} from '../../common/models/DeltaProjectModel';
-import {Color} from '../../common/Color';
+import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
 import {SelectOption} from '../inputs/SelectOption';
@@ -39,44 +38,24 @@ export const MAX_TRACK_POSITION = DELTA_TRACK_TAGS.length - 1; // 11 (positions 
 export class DeltaProjectExpansion {
   private constructor() {}
 
-  public static initialize(game: IGame): DeltaProjectData {
-    const players = new Map<Color, DeltaProjectPlayerModel>();
-    for (const player of game.playersInGenerationOrder) {
-      players.set(player.color, {position: 0, jovianBonus: false});
+  private static getProgress(player: IPlayer): DeltaProjectPlayerModel {
+    if (player.deltaProjectData === undefined) {
+      throw new Error('No Delta Project progress for player ' + player.color);
     }
-    return {players};
+    return player.deltaProjectData;
   }
 
-  public static getData(game: IGame): DeltaProjectData {
-    if (game.deltaProjectData === undefined) {
-      throw new Error('Delta Project data not initialized');
-    }
-    return game.deltaProjectData;
-  }
-
-  private static getProgress(data: DeltaProjectData, color: Color): DeltaProjectPlayerModel {
-    const progress = data.players.get(color);
-    if (progress === undefined) {
-      throw new Error('No Delta Project progress for player ' + color);
-    }
-    return progress;
-  }
-
-  // True if another player (not `excludeColor`) occupies this track position.
-  private static hasOtherPlayerAtPosition(data: DeltaProjectData, position: number, excludeColor: Color): boolean {
-    for (const [color, progress] of data.players) {
-      if (color === excludeColor) {
+  // True if another player (not `excludePlayer`) occupies this track position.
+  private static hasOtherPlayerAtPosition(game: IGame, position: number, excludePlayer: IPlayer): boolean {
+    for (const p of game.players) {
+      if (p === excludePlayer) {
         continue;
       }
-      if (progress.position === position) {
+      if (p.deltaProjectData?.position === position) {
         return true;
       }
     }
     return false;
-  }
-
-  public static getPosition(game: IGame, player: IPlayer): number {
-    return DeltaProjectExpansion.getProgress(DeltaProjectExpansion.getData(game), player.color).position;
   }
 
   // Whether the player has enough tags (using wilds to fill gaps) to reach targetPos.
@@ -99,8 +78,7 @@ export class DeltaProjectExpansion {
    */
   public static getValidAdvanceSteps(player: IPlayer): ReadonlyArray<number> {
     const game = player.game;
-    const data = DeltaProjectExpansion.getData(game);
-    const progress = DeltaProjectExpansion.getProgress(data, player.color);
+    const progress = DeltaProjectExpansion.getProgress(player);
     const currentPos = progress.position;
 
     if (currentPos >= MAX_TRACK_POSITION) {
@@ -120,10 +98,10 @@ export class DeltaProjectExpansion {
         continue;
       }
 
-      if (newPos === 10 && DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 10, player.color)) {
+      if (newPos === 10 && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, 10, player)) {
         continue;
       }
-      if (newPos === 11 && DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 11, player.color)) {
+      if (newPos === 11 && DeltaProjectExpansion.hasOtherPlayerAtPosition(game, 11, player)) {
         continue;
       }
       result.push(steps);
@@ -155,8 +133,7 @@ export class DeltaProjectExpansion {
     }
 
     const game = player.game;
-    const data = DeltaProjectExpansion.getData(game);
-    const progress = DeltaProjectExpansion.getProgress(data, player.color);
+    const progress = DeltaProjectExpansion.getProgress(player);
     const currentPos = progress.position;
     const newPos = currentPos + steps;
 
@@ -165,13 +142,13 @@ export class DeltaProjectExpansion {
 
     DeltaProjectExpansion.resolveReward(player, newPos);
 
-    game.log('${0} advanced ${1} step(s) on the Delta Project track', (b) => b.player(player).number(steps));
+    game.log('${0} spend ${1} energy to advance on the Delta Project track', (b) => b.player(player).number(steps));
   }
 
   private static resolveReward(player: IPlayer, position: number): void {
     const game = player.game;
-    const data = DeltaProjectExpansion.getData(game);
 
+    // TODO(kberg): Assigning rewards by magic number isn't the best, but it's OK.
     switch (position) {
     case 1: // Building: Choose 2 steel or 2 plants
       player.defer(() => new OrOptions(
@@ -200,11 +177,11 @@ export class DeltaProjectExpansion {
       break;
 
     case 3: // Earth: +2 MC production
-      player.production.add(Resource.MEGACREDITS, 2, {log: true});
+      player.production.add(Resource.MEGACREDITS, 2, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
 
     case 4: // Space: +1 titanium production
-      player.production.add(Resource.TITANIUM, 1, {log: true});
+      player.production.add(Resource.TITANIUM, 1, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
 
     case 5: // Science: Look at top 4 cards, take 2, discard rest
@@ -213,9 +190,7 @@ export class DeltaProjectExpansion {
 
     case 6: { // Plant: Gain 1 plant per plant tag
       const plantCount = player.tags.count(Tag.PLANT);
-      if (plantCount > 0) {
-        player.stock.add(Resource.PLANTS, plantCount, {log: true});
-      }
+      player.stock.add(Resource.PLANTS, plantCount, {log: true, from: {card: CardName.DELTA_PROJECT}});
       break;
     }
 
@@ -227,7 +202,7 @@ export class DeltaProjectExpansion {
           'Take action',
           actionCards,
         ).andThen(([card]) => {
-          game.log('${0} reused ${1} action via Delta Project', (b) => b.player(player).card(card));
+          game.log('${0} reused ${1} action via ${2}', (b) => b.player(player).card(card).cardName(CardName.DELTA_PROJECT));
           return card.action(player);
         }));
       }
@@ -235,7 +210,7 @@ export class DeltaProjectExpansion {
     }
 
     case 8: { // Jovian: Gain one Jovian tag
-      const progress = DeltaProjectExpansion.getProgress(data, player.color);
+      const progress = DeltaProjectExpansion.getProgress(player);
       if (!progress.jovianBonus) {
         progress.jovianBonus = true;
         player.tags.extraJovianTags++;
@@ -277,12 +252,7 @@ export class DeltaProjectExpansion {
   }
 
   public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder): void {
-    const data = player.game.deltaProjectData;
-    if (data === undefined) {
-      return;
-    }
-
-    const progress = data.players.get(player.color);
+    const progress = player.deltaProjectData;
     if (progress === undefined) {
       return;
     }

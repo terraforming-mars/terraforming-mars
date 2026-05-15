@@ -27,7 +27,7 @@
     <GameBoardView
       :game="game"
       :tileView="tileView"
-      :playerCount="spectator.players.length"
+      :players="spectator.players"
       @toggleTileView="cycleTileView()"
     />
 

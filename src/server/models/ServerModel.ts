@@ -21,7 +21,6 @@ import {SpectatorModel} from '../../common/models/SpectatorModel';
 import {GameModel} from '../../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
 import {createPathfindersModel} from './PathfindersModel';
-import {createDeltaProjectModel} from './DeltaProjectModel';
 import {MoonModel} from '../../common/models/MoonModel';
 import {CardName} from '../../common/cards/CardName';
 import {AwardScorer} from '../awards/AwardScorer';
@@ -58,7 +57,6 @@ export class Server {
       awards: this.getAwards(game),
       colonies: coloniesToModel(game, game.colonies, false, true),
       deckSize: game.projectDeck.drawPile.length,
-      deltaProject: createDeltaProjectModel(game),
       discardPileSize: game.projectDeck.discardPile.length,
       discardedColonies: game.discardedColonies.map(toName),
       expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
@@ -287,6 +285,8 @@ export class Server {
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
       model.globalParameterSteps = player.globalParameterSteps;
     }
+
+    model.deltaProject = player.deltaProjectData;
 
     return model;
   }

@@ -36,6 +36,7 @@ export class Server {
     return {
       activePlayer: game.activePlayer.color,
       id: game.id,
+      name: game.name,
       phase: game.phase,
       players: game.playersInGenerationOrder.map((player) => ({
         color: player.color,
@@ -70,6 +71,7 @@ export class Server {
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: this.getMoonModel(game),
+      name: game.name,
       oceans: game.board.getOceanSpaces().length,
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
@@ -233,8 +235,8 @@ export class Server {
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getInfluence(player), () => 0),
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
-      megaCredits: player.megaCredits,
-      megaCreditProduction: player.production.megacredits,
+      megacredits: player.megaCredits,
+      megacreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
@@ -352,12 +354,11 @@ export class Server {
     gagarin: ReadonlyArray<SpaceId> = [],
     cathedrals: ReadonlyArray<SpaceId> = [],
     nomads: SpaceId | undefined = undefined): Array<SpaceModel> {
-    const volcanicSpaceIds = board.volcanicSpaceIds;
     const noctisCitySpaceId = board.noctisCitySpaceId;
 
     return board.spaces.map((space) => {
       let highlight: SpaceHighlight = undefined;
-      if (volcanicSpaceIds.includes(space.id)) {
+      if (space.volcanic) {
         highlight = 'volcanic';
       } else if (noctisCitySpaceId === space.id) {
         highlight = 'noctis';

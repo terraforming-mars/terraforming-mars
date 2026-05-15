@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('ConstantStruggle', () => {
   it('resolve play', () => {
     const card = new ConstantStruggle();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true, pathfindersExpansion: true});
+    const [game, player, player2] = testGame(2, {turmoilExtension: true, pathfindersExpansion: true, venusNextExtension: true});
     const turmoil = game.turmoil!;
 
     player.megaCredits = 8;
@@ -51,7 +51,7 @@ describe('ConstantStruggle', () => {
 
   it('grants everyone bonus, not bonus for raising player', () => {
     const card = new ConstantStruggle();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true, pathfindersExpansion: true});
+    const [game, player, player2] = testGame(2, {turmoilExtension: true, pathfindersExpansion: true, venusNextExtension: true});
     const turmoil = game.turmoil!;
 
     player.megaCredits = 8;

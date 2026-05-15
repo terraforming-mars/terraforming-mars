@@ -64,6 +64,10 @@ export class Keplertec extends ActiveCorporationCard {
       tokens.push(token);
     }
 
+    for (const token of tokens) {
+      game.triggerForAllCards((p, c) => c.onIdentificationByAnyPlayer?.(p, player, token));
+    }
+
     const orOptions = new OrOptions();
     for (const token of tokens) {
       orOptions.options.push(new SelectOption(undergroundResourceTokenDescription[token]).andThen(() => {

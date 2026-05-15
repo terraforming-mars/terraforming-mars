@@ -26,6 +26,16 @@ export type GlobalParameterRequirementBonus = {
 };
 
 /**
+ * Describes which non-megacredit resources a standard project accepts as payment.
+ */
+export type StandardProjectCanPayWith = {
+  steel?: boolean,
+  titanium?: boolean,
+  seeds?: boolean,
+  kuiperAsteroids?: boolean,
+}
+
+/**
  * When defined, this indicates additional costs required to play a card.
  */
 export type AdditionalProjectCosts = {

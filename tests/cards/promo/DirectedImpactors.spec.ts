@@ -7,9 +7,10 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, setTemperature} from '../../TestingUtils';
+import {setTemperature} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DirectedImpactors', () => {
   let card: DirectedImpactors;
@@ -37,7 +38,7 @@ describe('DirectedImpactors', () => {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const selectPayment = cast(game.deferredActions.peek()!.execute(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
+    selectPayment.cb({...Payment.EMPTY, titanium: 1, megacredits: 3});
 
     expect(player.megaCredits).to.eq(0);
     expect(player.titanium).to.eq(0);
@@ -70,7 +71,7 @@ describe('DirectedImpactors', () => {
     const selectCard = cast(action.options[1].cb(), SelectCard);
     expect(game.deferredActions).has.lengthOf(1);
     const selectPayment = cast(game.deferredActions.peek()!.execute(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
+    selectPayment.cb({...Payment.EMPTY, titanium: 1, megacredits: 3});
 
     selectCard!.cb([card2]);
     expect(card2.resourceCount).to.eq(1);

@@ -6,11 +6,12 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, cast, runAllActions, testGame} from '../../TestingUtils';
+import {addOcean, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
 import {toID} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', () => {
@@ -206,5 +207,19 @@ describe('NewVenice', () => {
     player.plants = 2;
     player.steel = 0;
     expect(player.getPlayableCards()).does.not.include(card);
+  });
+
+  it('Can play New Venice without pathfindersExpansion #8003', () => {
+    const [game, player] = testGame(2, {pathfindersExpansion: false});
+
+    const oceanSpace = addOcean(player);
+    player.plants = 2;
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    action.cb(oceanSpace);
+
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 });

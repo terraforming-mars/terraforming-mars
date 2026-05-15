@@ -7,11 +7,12 @@ import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {DiscardCards} from '../../../src/server/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '@/common/utils/utils';
 
 describe('SponsoredAcademies', () => {
   let card: SponsoredAcademies;

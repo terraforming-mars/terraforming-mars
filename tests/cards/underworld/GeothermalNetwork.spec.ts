@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GeothermalNetwork} from '../../../src/server/cards/underworld/GeothermalNetwork';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('GeothermalNetwork', () => {
   it('canPlay', () => {

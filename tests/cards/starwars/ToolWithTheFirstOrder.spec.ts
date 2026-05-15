@@ -3,7 +3,7 @@ import {ToolWithTheFirstOrder} from '../../../src/server/cards/starwars/ToolWith
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Phase} from '`.`./../../src/common/Phase';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
@@ -12,6 +12,7 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 import {PlayerInput} from '../../../src/server/PlayerInput';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ToolWithTheFirstOrder', () => {
   let card: ToolWithTheFirstOrder;
@@ -42,7 +43,7 @@ describe('ToolWithTheFirstOrder', () => {
     player.takeAction();
     const [waitingFor, cb] = player.popWaitingFor2();
     const playProjectCard = findOption(waitingFor!, 'Play project card');
-    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megaCredits: 5}));
+    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megacredits: 5}));
     cb!();
     runAllActions(game);
 

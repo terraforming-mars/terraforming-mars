@@ -49,9 +49,15 @@ export abstract class Draft {
     } else {
       arrays.push(...this.game.players.map((player) => player.draftHand));
       if (this.passDirection() === 'after') {
-        arrays.unshift(arrays.pop()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        const array = arrays.pop();
+        if (array) {
+          arrays.unshift(array);
+        }
       } else {
-        arrays.push(arrays.shift()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        const array = arrays.shift();
+        if (array) {
+          arrays.push(array);
+        }
       }
     }
 
@@ -249,7 +255,9 @@ class PreludeDraft extends Draft {
   }
 
   override draw(player: IPlayer) {
-    return player.dealtPreludeCards;
+    // Return a copy. Otherwise inplaceRemove on draftHand later mutates
+    // dealtPreludeCards, leaking other players' picks.
+    return [...player.dealtPreludeCards];
   }
 
   override cardsToKeep(_player: IPlayer): number {
@@ -282,7 +290,9 @@ class CEOsDraft extends Draft {
   }
 
   override draw(player: IPlayer) {
-    return player.dealtCeoCards;
+    // Return a copy. Otherwise inplaceRemove on draftHand later mutates
+    // dealtCeoCards, leaking other players' picks.
+    return [...player.dealtCeoCards];
   }
 
   override cardsToKeep(_player: IPlayer): number {

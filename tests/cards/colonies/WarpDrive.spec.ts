@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {WarpDrive} from '../../../src/server/cards/colonies/WarpDrive';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('WarpDrive', () => {
   it('Should play', () => {

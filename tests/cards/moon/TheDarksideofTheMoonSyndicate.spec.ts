@@ -1,5 +1,5 @@
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
@@ -9,6 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TheDarksideofTheMoonSyndicate', () => {
   let game: IGame;
@@ -31,7 +32,12 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     player.titanium = 0;
     card.resourceCount = 1;
+    player2.megaCredits = 2;
+    player3.megaCredits = 2;
     expect(card.canAct(player)).is.true;
+
+    player2.megaCredits = 1; // one opponent can't cover the steal
+    expect(card.canAct(player)).is.false;
 
     player.titanium = 0;
     card.resourceCount = 0;

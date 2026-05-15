@@ -25,7 +25,6 @@ export class BotanicalExperience extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'Pf50',
-        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA, {size: Size.SMALL});
           b.nbsp;
@@ -48,7 +47,9 @@ export class BotanicalExperience extends Card implements IProjectCard {
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
-    if (playedCard.name !== this.name) return;
+    if (playedCard.name !== this.name) {
+      return;
+    }
     if (this.resourceCount >= 3) {
       const delta = Math.floor(this.resourceCount / 3);
       const deducted = delta * 3;

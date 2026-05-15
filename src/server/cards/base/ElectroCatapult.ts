@@ -54,7 +54,7 @@ export class ElectroCatapult extends ActionCard implements IProjectCard {
   }
 
   // KEEP THIS
-  // private log(player: Player, resource: Resources) {
+  // private log(player: IPlayer, resource: Resources) {
   //   player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) => b.player(player).string(resource));
   // }
 }

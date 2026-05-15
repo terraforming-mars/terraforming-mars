@@ -4,9 +4,10 @@ import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlo
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, churn} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {HAZARD_CONSTRAINTS} from '../../../src/common/ares/AresData';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ButterflyEffect', () => {
   let card: ButterflyEffect;

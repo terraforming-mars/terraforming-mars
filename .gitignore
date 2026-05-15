@@ -16,8 +16,7 @@ dist/
 pid
 *.log
 .eslintcache
-tsconfig.tsbuildinfo
-tsconfig.vue-tsc.tsbuildinfo
+tsconfig*.tsbuildinfo
 assets/locales
 
 # Local Packages

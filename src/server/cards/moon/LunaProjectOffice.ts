@@ -33,19 +33,15 @@ export class LunaProjectOffice extends Card implements IProjectCard {
     return undefined;
   }
 
-  private lastGeneration(player: IPlayer): number {
-    return this.data?.lastEffectiveGeneration ??
-      player.game.moonData?.lunaProjectOfficeLastGeneration ??
-      -1;
-  }
-
   // Returns true when the current player has played Luna Project Office and the card is still valid
   public static isActive(player: IPlayer): boolean {
-    const lunaProjectOffice = player.tableau.get(CardName.LUNA_PROJECT_OFFICE);
-    if (!lunaProjectOffice) {
+    const card = player.tableau.get(CardName.LUNA_PROJECT_OFFICE);
+    if (card === undefined) {
       return false;
     }
-    const lastGeneration = (lunaProjectOffice as LunaProjectOffice).lastGeneration(player);
+
+    const lunaProjectOffice = card as LunaProjectOffice;
+    const lastGeneration = lunaProjectOffice.data?.lastEffectiveGeneration ?? -1;
     if (lastGeneration === -1) {
       return false;
     }

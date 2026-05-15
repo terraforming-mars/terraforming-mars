@@ -6,10 +6,11 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {IGame} from '../../src/server/IGame';
 import {CrewTraining} from '../../src/server/cards/pathfinders/CrewTraining';
 import {MartianZoo} from '../../src/server/cards/colonies/MartianZoo';
+import {cast} from '@/common/utils/utils';
 
 describe('DeclareCloneTag', () => {
   let player: TestPlayer;
@@ -18,7 +19,7 @@ describe('DeclareCloneTag', () => {
   let tag: Tag;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
     card = new LobbyHalls();
   });
 

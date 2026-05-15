@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {cast, churn, setTemperature} from '../../../TestingUtils';
+import {churn, setTemperature} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 import {IGame} from '../../../../src/server/IGame';
+import {cast} from '../../../../src/common/utils/utils';
 
 describe('ConvertHeat', () => {
   let card: ConvertHeat;
@@ -59,5 +60,14 @@ describe('ConvertHeat', () => {
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.heat).eq(0);
     expect(player.terraformRating).eq(20);
+  });
+
+  it('canAct adds maxtemp warning at MAX_TEMPERATURE', () => {
+    player.heat = 8;
+    setTemperature(game, MAX_TEMPERATURE);
+
+    expect(card.warnings.has('maxtemp')).is.false;
+    expect(card.canAct(player)).eq(true);
+    expect(card.warnings.has('maxtemp')).is.true;
   });
 });

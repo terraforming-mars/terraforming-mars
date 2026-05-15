@@ -1,7 +1,6 @@
 import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
-import {SpaceName} from '../src/common/boards/SpaceName';
 import {Mayor} from '../src/server/milestones/Mayor';
 import {Banker} from '../src/server/awards/Banker';
 import {Thermalist} from '../src/server/awards/Thermalist';
@@ -63,8 +62,8 @@ describe('Game', () => {
     const player3 = TestPlayer.YELLOW.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
-    addCity(player, SpaceName.ARSIA_MONS);
-    addGreenery(player, SpaceName.PAVONIS_MONS);
+    addCity(player, '29');
+    addGreenery(player, '21');
 
     // Claim milestone
     const milestone = new Mayor();
@@ -383,7 +382,7 @@ describe('Game', () => {
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = cast(player.getWaitingFor(), OrOptions);
-    const arsiaMons = game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS);
+    const arsiaMons = game.board.getSpaceOrThrow('29');
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
@@ -734,6 +733,19 @@ describe('Game', () => {
     expect(player.titanium).eq(1);
   });
 
+  it('Ocean upgrade tiles can be placed on ocean spaces without Ares or Pathfinders', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-ocean-upgrade', [player], player);
+    const oceanSpace = addOcean(player);
+
+    // Placing an ocean city tile on top of an existing ocean should not throw,
+    // even without Ares or Pathfinders expansion enabled.
+    expect(() => {
+      game.addTile(player, oceanSpace, {tileType: TileType.NEW_HOLLAND});
+    }).to.not.throw();
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.NEW_HOLLAND);
+  });
+
   /**
    * ensure as we modify properties we consider
    * serialization. if this fails update SerializedGame
@@ -762,6 +774,7 @@ describe('Game', () => {
       'resettable',
       'rng',
       'underworldDraftEnabled',
+      'doubleDownPrelude',
     ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',
@@ -1101,13 +1114,13 @@ describe('Game', () => {
   it('game.tags excludes values accordingly', () => {
     const player = TestPlayer.BLUE.newPlayer();
     let game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
-    expect(game.tags).to.include(Tag.VENUS);
-
-    game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true, bannedCards: [
-      CardName.DYSON_SCREENS,
-      CardName.THINK_TANK,
-    ]});
     expect(game.tags).does.not.include(Tag.VENUS);
+
+    // Dyson Screens has a Venus tag.
+    game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true, includedCards: [
+      CardName.DYSON_SCREENS,
+    ]});
+    expect(game.tags).to.include(Tag.VENUS);
   });
 
   it('creating game sets expansions', () => {

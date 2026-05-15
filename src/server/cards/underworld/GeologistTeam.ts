@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
 import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
+import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
 
 export class GeologistTeam extends ActionCard implements IProjectCard {
   constructor() {
@@ -33,8 +33,8 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
     });
   }
 
-  public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, space: Space) {
-    if (space.undergroundResources === 'ocean') {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, token: UndergroundResourceToken) {
+    if (token === 'ocean') {
       if (cardOwner.canAfford({cost: 0, tr: {tr: 1}})) {
         cardOwner.increaseTerraformRating(1, {log: true});
       }

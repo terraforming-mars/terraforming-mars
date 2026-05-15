@@ -131,7 +131,9 @@ class GreensPolicy04 implements IPolicy {
           return undefined;
         }));
 
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) {
+          return orOptions.options[0].cb();
+        }
 
         player.defer(orOptions);
         return undefined;

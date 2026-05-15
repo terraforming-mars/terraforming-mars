@@ -30,7 +30,6 @@
 
   "Red Ships": "赤き船",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市と特殊タイルの合計数分、1MC獲得.",
-  "Requires 4% oxygen.": "条件：酸素4%以上.",
 
   "Neptunian Power Consultants": "海王星電力コンサルタント",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "効果：海洋1枚配置された時、5MC支払っても良い. ※建材での支払い可能. 支払った場合、電力産出+1し、このカード上に1ハイドロリソース追加.",
@@ -45,7 +44,6 @@
 
   "Homeostasis Bureau": "恒常性事務局",
   "Effect: When you raise the temperature, gain 3 M€.": "効果：温度+1段階する毎に3MC獲得.",
-  "Increase your heat production 2 steps.": "温熱産出+2.",
 
   "Hermetic Order of Mars": "火星密教団",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "条件：酸素4%以下. MC産出+2. 所有するタイルに隣接する空きマス毎に1MC獲得.",
@@ -98,10 +96,8 @@
   "Field-Capped City": "磁界都市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "MC産出+2. 電力産出+1. 3植物獲得. 都市タイルを配置.",
 
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "条件：海洋4枚以上. 電力産出+2.",
 
   "Magnetic Shield": "磁界シールド",
-  "3 Power": "電力タグ3つ以上",
   "Requires 3 power tags. Raise your TR 4 steps.": "条件：電力タグ3つ以上. TR+4段階",
 
   "Meltworks": "溶融産業",
@@ -112,12 +108,10 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "3植物獲得. 温度+1段階. 海洋1枚配置.",
 
   "Diversity Support": "多様性支援",
-  "9 Resource types": "リソース9種類",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "条件：リソース9種類以上を所持. TR+1段階.",
 
   "Topsoil Contract": "表土契約",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "効果：カード上に1微生物配置する毎に1MC獲得.",
-  "Gain 3 plants.": "3植物獲得.",
 
   "Imported Nutrients": "栄養素の輸入",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "4植物獲得. 4微生物獲得.",
@@ -164,11 +158,9 @@
   "Rego Plastics": "レゴ・プラスチック",
   "Effect: Your steel resources are worth 1 M€ extra.": "効果：建材の価値+1MC.",
 
-  "Interplanetary Trade": "惑星間交易",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "プレイ済みのタグ種類毎にMC産出+1.",
 
   "Penguins": "ペンギン",
-  "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
   "Requires 8 oceans.": "条件：海洋8枚以上.",
 
   "Snow Algae": "氷雪藻",

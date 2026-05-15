@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -11,6 +11,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BactoviralResearch', () => {
   let card: BactoviralResearch;

@@ -5,10 +5,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {isPlanetaryTag, PlanetaryTag} from '../../pathfinders/PathfindersData';
-import {PathfindersExpansion, TRACKS} from '../../pathfinders/PathfindersExpansion';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {PathfindersData} from '../../pathfinders/PathfindersData';
+import {PLANETARY_TRACKS} from '@/common/pathfinders/PlanetaryTracks';
 
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
@@ -24,13 +25,13 @@ export class EconomicHelp extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf42',
         renderData: CardRenderer.builder((b) => {
-          b.planetaryTrack().text('3').or().text('2')
-            .tag(Tag.VENUS).or(Size.SMALL)
-            .tag(Tag.EARTH).or(Size.SMALL).br;
-          b.tag(Tag.MARS).or(Size.SMALL)
-            .tag(Tag.JOVIAN).or(Size.SMALL)
-            .tag(Tag.MOON).br;
-          b.production((pb) => pb.megacredits(1));
+          b.production((pb) => pb.megacredits(1)).nbsp.nbsp;
+          b.planetaryTrack().text('3').asterix().br;
+          b.tag(Tag.VENUS, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.EARTH, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.MARS, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.JOVIAN, {size: Size.SMALL}).or(Size.TINY)
+            .tag(Tag.MOON, {size: Size.SMALL});
         }),
         description: 'Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. ' +
          'Increase your M€ production 1 step',
@@ -40,7 +41,7 @@ export class EconomicHelp extends Card implements IProjectCard {
 
   private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
-    const maxValue = TRACKS[tag].spaces.length - 1;
+    const maxValue = PLANETARY_TRACKS[tag].spaces.length - 1;
     return maxValue === value ? -1 : value;
   }
 
@@ -57,11 +58,21 @@ export class EconomicHelp extends Card implements IProjectCard {
     const lowest = Math.min(...(values.filter((v) => v >= 0)));
     const count = values.filter((v) => v === lowest).length;
     const increment = (count === 1) ? 3 : 2;
-    if (data.earth === lowest) PathfindersExpansion.raiseTrack(Tag.EARTH, player, increment);
-    if (data.jovian === lowest) PathfindersExpansion.raiseTrack(Tag.JOVIAN, player, increment);
-    if (data.mars === lowest) PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
-    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
-    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
+    if (data.earth === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.EARTH, player, increment);
+    }
+    if (data.jovian === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.JOVIAN, player, increment);
+    }
+    if (data.mars === lowest) {
+      PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
+    }
+    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) {
+      PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
+    }
+    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) {
+      PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
+    }
     return undefined;
   }
 }

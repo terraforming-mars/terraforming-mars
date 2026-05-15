@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import {fakeGameModel, fakePublicPlayerModel} from './testHelpers';
-import raw_settings from '@/genfiles/settings.json';
 
 describe('SpectatorHome', () => {
   it('mounts without errors', () => {
@@ -24,9 +23,8 @@ describe('SpectatorHome', () => {
           id: 's-spectator-id',
           thisPlayer: player,
           runId: 'run-id',
-          color: 'blue',
+          color: 'neutral',
         },
-        settings: raw_settings,
       },
     });
     expect(wrapper.exists()).to.be.true;

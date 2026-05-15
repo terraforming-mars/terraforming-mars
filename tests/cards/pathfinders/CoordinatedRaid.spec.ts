@@ -8,8 +8,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/server/colonies/Colony';
 import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
 import {Resource} from '../../../src/common/Resource';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 export class TestColony extends Colony {
   constructor() {

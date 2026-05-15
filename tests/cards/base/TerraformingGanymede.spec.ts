@@ -5,7 +5,8 @@ import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TerraformingGanymede', () => {
   let card: TerraformingGanymede;

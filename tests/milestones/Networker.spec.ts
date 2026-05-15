@@ -2,11 +2,12 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {IGame} from '../../src/server/IGame';
 import {testGame} from '../TestGame';
-import {addGreenery, addCity, cast, runAllActions} from '../TestingUtils';
+import {addGreenery, addCity, runAllActions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../src/server/cards/ares/NaturalPreserveAres';
 import {EmptyBoard} from '../testing/EmptyBoard';
 import {Networker} from '../../src/server/milestones/Networker';
+import {cast} from '@/common/utils/utils';
 
 describe('Networker', () => {
   let networker: Networker;

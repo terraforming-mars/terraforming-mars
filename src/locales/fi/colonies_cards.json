@@ -17,7 +17,6 @@
   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Vaatii 2 Maa-ympyrää. Seuraava kortti, jonka pelaat tässä sukupolvessa, maksaa 16 M€ vähemmän.",
 
   "Corona Extractor": "Koronanpoistin",
-  "Requires 4 science tags. Increase your energy production 4 steps.": "Vaatii 4 tiedeympyrää. Lisää energiatuotantoasi 4 askelta.",
 
   "Cryo-Sleep": "Kryouniteho",
   "Effect: When you trade, you pay 1 less resource for it.": "VAIKUTUS: Kun käyt kauppaa, maksat 1 resurssin vähemmän siitä.",
@@ -113,7 +112,6 @@
   "Rim Freighters": "Reunanrahtilaivat",
 
   "Sky Docks": "Taivastelakoat",
-  "Effect: When you play a card, you pay 1 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 1 M€ vähemmän.",
   "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Vaatii 2 Maa-ympyrää. Saat 1 kauppalaivaston.",
 
   "Solar Probe": "Aurinkotutkain",
@@ -131,11 +129,8 @@
 
   "Spin-off Department": "Sivuosasto",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "VAIKUTUS: KUN PELAAT KORTIN, JONKA PERUSHINTA ON 20 M€ TAI ENEMMÄN, nosta kortti.",
-  "Increase your M€ production 2 steps.": "Lisää M€-tuotantoasi 2 askelta.",
 
   "Sub-zero Salt Fish": "Jääpakkasen suolakala",
-  "Action: Add 1 animal to this card.": "TOIMINTO: Lisää 1 eläin tälle kortille.",
-  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
   "Requires -6 C. Decrease any plant production 1 step.": "Vaatii -6°C. Vähennä kenenkään kasvituotantoa 1 askel.",
 
   "Titan Air-scrapping": "Titanin ilmankierrätys",

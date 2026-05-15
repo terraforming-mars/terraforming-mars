@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MineralDeposit} from '../../../src/server/cards/base/MineralDeposit';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('MineralDeposit', () => {
   it('Should play', () => {

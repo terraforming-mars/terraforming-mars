@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICardRenderItem} from '../../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
+import {liteBoolean} from '../../../common/LiteBoolean';
 
 export type ItemOptions = Partial<{
   size: Size;
@@ -18,7 +19,7 @@ export type ItemOptions = Partial<{
   secondaryTag: Tag | AltSecondaryTag;
   /** Replace the amount with the clone tag */
   clone: boolean;
-  cancelled: boolean;
+  cancelled: true;
   /** Used for global events. */
   over: number;
   questionMark: boolean;
@@ -31,18 +32,18 @@ export type ItemOptions = Partial<{
 export class CardRenderItem implements ICardRenderItem {
   public readonly is = 'item';
   public anyPlayer?: boolean;
-  public showDigit?: boolean;
-  public amountInside?: boolean;
+  public showDigit?: true;
+  public amountInside?: true;
   public text?: string;
-  public isUppercase?: boolean;
-  public isBold?: boolean;
+  public isUppercase?: true;
+  public isBold?: true;
   public isPlate?: boolean;
   public size?: Size;
   public secondaryTag?: Tag | AltSecondaryTag;
   public clone?: boolean;
-  public cancelled?: boolean;
+  public cancelled?: true;
   public innerText?: string;
-  public isSuperscript?: boolean;
+  public isSuperscript?: true;
   public over?: number;
   public resource?: CardResource | undefined;
   public tag?: Tag | undefined;
@@ -55,7 +56,7 @@ export class CardRenderItem implements ICardRenderItem {
     case false:
       break; // it's undefined
     default:
-      this.showDigit = Math.abs(this.amount) > 5 ? true : undefined;
+      this.showDigit = liteBoolean(Math.abs(this.amount) > 5);
     }
 
     if (options === undefined) {
@@ -69,11 +70,11 @@ export class CardRenderItem implements ICardRenderItem {
     this.secondaryTag = options.secondaryTag;
 
     if (options.clone === true) {
-      this.amountInside = false;
+      this.amountInside = undefined;
       this.clone = true;
     }
 
-    this.cancelled = options.cancelled ?? false;
+    this.cancelled = options.cancelled ? true : undefined;
     this.over = options.over;
     if (options.text !== undefined) {
       this.innerText = options.text;

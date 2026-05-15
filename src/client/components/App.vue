@@ -1,18 +1,71 @@
-import {defineComponent} from 'vue';
+<template>
+  <div :class="'topmost-'+screen">
+    <section>
+      <dialog id="alert-dialog" class="alert-dialog">
+        <form method="dialog">
+          <p id="alert-title" class="title" v-i18n>Error with input</p>
+          <p id="alert-dialog-message"></p>
+          <menu class="dialog-menu centered-content">
+            <button id="alert-dialog-button" class="btn btn-lg btn-primary">OK</button>
+          </menu>
+        </form>
+      </dialog>
+    </section>
+    <div class="main-container">
+      <start-screen v-if="screen === 'start-screen'"></start-screen>
+      <create-game-form
+        v-else-if="screen === 'create-game-form'"
+      ></create-game-form>
+      <load-game-form v-else-if="screen === 'load'"></load-game-form>
+      <game-home
+        v-else-if="screen === 'game-home' && game !== undefined"
+        :game="game"
+      ></game-home>
+      <player-home
+        v-else-if="screen === 'player-home' && playerView !== undefined"
+        :player-view="playerView"
+        :key="playerkey"
+      ></player-home>
+      <spectator-home
+        v-else-if="screen === 'spectator-home' && spectator !== undefined"
+        :spectator="spectator"
+        :key="'spectator-' + playerkey"
+      ></spectator-home>
+      <game-end
+        v-else-if="screen === 'the-end'"
+        :player-view="playerView"
+        :spectator="spectator"
+      ></game-end>
+      <games-overview
+        v-else-if="screen === 'games-overview'"
+      ></games-overview>
+      <card-list v-else-if="screen === 'cards'"></card-list>
+      <admin-home v-else-if="screen === 'admin'"></admin-home>
+      <login-home v-else-if="screen === 'login-home'"></login-home>
+      <Help v-else-if="screen === 'help'"></Help>
+    </div>
+    <div class="notice" v-i18n>
+      Not affiliated with FryxGames, Asmodee Digital or Steam in any way.
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import {defineAsyncComponent, defineComponent} from 'vue';
 import * as constants from '@/common/constants';
-import raw_settings from '@/genfiles/settings.json';
-import AdminHome from '@/client/components/admin/AdminHome.vue';
-import CardList from '@/client/components/cardlist/CardList.vue';
-import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
-import GameEnd from '@/client/components/GameEnd.vue';
-import GameHome from '@/client/components/GameHome.vue';
-import GamesOverview from '@/client/components/GamesOverview.vue';
-import Help from '@/client/components/help/Help.vue';
-import LoginHome from '@/client/components/auth/LoginHome.vue';
-import LoadGameForm from '@/client/components/LoadGameForm.vue';
-import PlayerHome from '@/client/components/PlayerHome.vue';
-import SpectatorHome from '@/client/components/SpectatorHome.vue';
-import StartScreen from '@/client/components/StartScreen.vue';
+
+const AdminHome = defineAsyncComponent(() => import(/* webpackChunkName: "admin" */ '@/client/components/admin/AdminHome.vue'));
+const CardList = defineAsyncComponent(() => import(/* webpackChunkName: "card-list" */ '@/client/components/cardlist/CardList.vue'));
+const CreateGameForm = defineAsyncComponent(() => import(/* webpackChunkName: "create-game" */ '@/client/components/create/CreateGameForm.vue'));
+const GameEnd = defineAsyncComponent(() => import(/* webpackChunkName: "game-end" */ '@/client/components/GameEnd.vue'));
+const GameHome = defineAsyncComponent(() => import(/* webpackChunkName: "game-home" */ '@/client/components/GameHome.vue'));
+const GamesOverview = defineAsyncComponent(() => import(/* webpackChunkName: "games-overview" */ '@/client/components/GamesOverview.vue'));
+const Help = defineAsyncComponent(() => import(/* webpackChunkName: "help" */ '@/client/components/help/Help.vue'));
+const LoginHome = defineAsyncComponent(() => import(/* webpackChunkName: "login" */ '@/client/components/auth/LoginHome.vue'));
+const LoadGameForm = defineAsyncComponent(() => import(/* webpackChunkName: "load-game" */ '@/client/components/LoadGameForm.vue'));
+const PlayerHome = defineAsyncComponent(() => import(/* webpackChunkName: "player-home" */ '@/client/components/PlayerHome.vue'));
+const SpectatorHome = defineAsyncComponent(() => import(/* webpackChunkName: "spectator-home" */ '@/client/components/SpectatorHome.vue'));
+const StartScreen = defineAsyncComponent(() => import(/* webpackChunkName: "start-screen" */ '@/client/components/StartScreen.vue'));
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 import {paths} from '@/common/app/paths';
 import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
@@ -22,6 +75,7 @@ import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
 import dialogPolyfill from 'dialog-polyfill';
+import {setDocumentTitle} from '../utils/documentTitle';
 
 type Screen = 'admin' |
             'create-game-form' |
@@ -36,7 +90,7 @@ type Screen = 'admin' |
             'spectator-home' |
             'start-screen' |
             'the-end';
-export interface MainAppData {
+export type MainAppData = {
     screen: Screen;
     /**
      * player or spectator are set once the app component has loaded.
@@ -50,7 +104,6 @@ export interface MainAppData {
     // to force a rerender / refresh.
     // See https://michaelnthiessen.com/force-re-render/
     playerkey: number;
-    settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: SimpleGameModel | undefined;
@@ -70,7 +123,6 @@ export default defineComponent({
     return {
       screen: 'empty',
       playerkey: 0,
-      settings: raw_settings,
       isServerSideRequestInProgress: false,
       componentsVisibility: {
         'milestones': true,
@@ -90,7 +142,6 @@ export default defineComponent({
     };
   },
   components: {
-    // These component keys match the screen values, and their entries in index.html.
     'start-screen': StartScreen,
     'create-game-form': CreateGameForm,
     'load-game-form': LoadGameForm,
@@ -125,7 +176,9 @@ export default defineComponent({
       }
     },
     setVisibilityState(targetVar: string, isVisible: boolean) {
-      if (isVisible === this.getVisibilityState(targetVar)) return;
+      if (isVisible === this.getVisibilityState(targetVar)) {
+        return;
+      }
       (this as unknown as MainAppData).componentsVisibility[targetVar] = isVisible;
     },
     getVisibilityState(targetVar: string): boolean {
@@ -192,7 +245,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    document.title = constants.APP_NAME;
+    setDocumentTitle();
     if (!windowHasHTMLDialogElement()) {
       dialogPolyfill.registerDialog(document.getElementById('alert-dialog') as HTMLDialogElement);
     }
@@ -253,3 +306,4 @@ export default defineComponent({
     }
   },
 });
+</script>

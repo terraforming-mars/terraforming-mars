@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
 
 describe('UtopiaInvest', () => {

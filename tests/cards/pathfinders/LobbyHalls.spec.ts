@@ -8,7 +8,7 @@ import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
 describe('LobbyHalls', () => {
@@ -19,7 +19,7 @@ describe('LobbyHalls', () => {
 
   beforeEach(() => {
     card = new LobbyHalls();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true, venusNextExtension: true});
     turmoil = game.turmoil!;
   });
 

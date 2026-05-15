@@ -5,10 +5,11 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {Quill} from '../../../src/server/cards/ceos/Quill';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Quill', () => {
   let card: Quill;

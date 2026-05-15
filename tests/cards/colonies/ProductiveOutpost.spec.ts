@@ -2,12 +2,13 @@ import {expect} from 'chai';
 import {ProductiveOutpost} from '../../../src/server/cards/colonies/ProductiveOutpost';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {Titania} from '../../../src/server/cards/community/Titania';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {inplaceShuffle} from '../../../src/server/utils/shuffle';
 import {UnseededRandom} from '../../../src/common/utils/Random';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ProductiveOutpost', () => {
   it('Should play', () => {

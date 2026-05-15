@@ -6,6 +6,7 @@ import {toName} from '../../../src/common/utils/utils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('AirScrappingStandardProjectVariant', () => {
   let card: AirScrappingStandardProjectVariant;
@@ -77,7 +78,7 @@ describe('AirScrappingStandardProjectVariant', () => {
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.getAdjustedCost(player)}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(3);
@@ -91,7 +92,7 @@ describe('AirScrappingStandardProjectVariant', () => {
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.getAdjustedCost(player)}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(5);

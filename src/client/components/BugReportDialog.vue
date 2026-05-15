@@ -20,7 +20,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
@@ -39,11 +39,15 @@ function browser(): string {
   }
   if (match[1]=== 'Chrome') {
     const temp = ua.match(/\b(OPR|Edge)\/(\d+)/);
-    if (temp !== null) return temp.slice(1).join(' ').replace('OPR', 'Opera');
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera');
+    }
   }
   match = match[2] ? [match[1], match[2]] : [navigator.appName, navigator.appVersion, '-?'];
   const temp = ua.match(/version\/(\d+)/i);
-  if (temp !== null) match.splice(1, 1, temp[1]);
+  if (temp !== null) {
+    match.splice(1, 1, temp[1]);
+  }
   return match.join(' ');
 }
 
@@ -85,7 +89,7 @@ export default defineComponent({
     },
     setMessage() {
       const playerView = vueRoot(this).playerView;
-      const content = {
+      const content: Record<string, any> = {
         url: this.url(playerView),
       };
       if (playerView !== undefined) {
@@ -100,6 +104,9 @@ export default defineComponent({
             step: playerView.game.step,
           });
       }
+      if (playerView?.game?.turmoil) {
+        content['party'] = playerView.game.turmoil.ruling ?? 'None';
+      }
       Object.assign(content,
         {
           version: raw_settings.head,
@@ -112,7 +119,9 @@ export default defineComponent({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    if (!windowHasHTMLDialogElement()) {
+      dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    }
     this.setMessage();
   },
 });

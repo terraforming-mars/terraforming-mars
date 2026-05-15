@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {VenusSoils} from '../../../src/server/cards/venusNext/VenusSoils';
@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('VenusSoils', () => {
   let card: VenusSoils;

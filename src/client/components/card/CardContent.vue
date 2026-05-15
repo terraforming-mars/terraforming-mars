@@ -1,6 +1,6 @@
 <template>
   <div class="card-content" :class="corporationClass">
-    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
+    <CardRequirementsComponent v-if="requirements !== undefined && requirements.length > 0" :requirements="requirements"/>
     <CardRenderData v-if="firstRow !== undefined" :renderData="firstRow" />
     <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
     <CardRenderData v-if="remainingRows !== undefined" :renderData="remainingRows" />
@@ -28,7 +28,7 @@ export default defineComponent({
     },
     requirements: {
       type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
-      required: true,
+      required: false,
     },
     isCorporation: {
       type: Boolean,

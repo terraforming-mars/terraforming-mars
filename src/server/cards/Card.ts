@@ -27,6 +27,7 @@ import {asArray} from '../../common/utils/utils';
 import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {Resource} from '@/common/Resource';
 
 /**
  * Cards that do not need a cost attribute.
@@ -40,7 +41,7 @@ const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
 
 /* Properties that are the same internally and externally */
 type SharedProperties = {
-  /** @deprecated use behavior */
+  /** Prefer setting adjacencyBonus inside behavior.tile instead. */
   adjacencyBonus?: AdjacencyBonus;
   action?: Behavior | undefined;
   behavior?: Behavior | undefined;
@@ -310,7 +311,9 @@ export abstract class Card implements ICard {
       return 0;
     }
 
-    if (typeof(vps) === 'number') return vps;
+    if (typeof(vps) === 'number') {
+      return vps;
+    }
 
     if (vps.targetOneOrMore === true || vps.anyPlayer === true) {
       throw new Error('Not yet handled');
@@ -345,6 +348,13 @@ export abstract class Card implements ICard {
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
         throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
+      }
+      return;
+    } else if (typeof(vps) === 'object' && vps.nextToThis !== undefined) {
+      // nextToThis VP needs explicit metadata.victoryPoints for rendering since auto-generation
+      // cannot express adjacency-scoped VP icons.
+      if (properties.metadata.victoryPoints === undefined) {
+        throw new Error('When card.victoryPoints uses nextToThis, metadata.victoryPoints must also be supplied for rendering');
       }
       return;
     } else {
@@ -492,4 +502,16 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
+}
+
+type CardWithBonusResource = Card & {defaultProductionBox?: Units, bonusResource: Array<Resource> | undefined}
+/* Not sure this belongs here. */
+export function productionBoxWithBonusResource(card: CardWithBonusResource) {
+  const units: Units = card.defaultProductionBox ?
+    {...card.defaultProductionBox} :
+    {...Units.EMPTY};
+  if (card.bonusResource && card.bonusResource.length === 1) {
+    units[card.bonusResource[0]] += 1;
+  }
+  return units;
 }

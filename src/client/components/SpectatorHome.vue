@@ -24,36 +24,13 @@
 
     <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
-    <a name="board" class="player_home_anchor"></a>
-    <board
-      :spaces="game.spaces"
-      :expansions="game.gameOptions.expansions"
-      :venusScaleLevel="game.venusScaleLevel"
-      :boardName ="game.gameOptions.boardName"
-      :oceans_count="game.oceans"
-      :oxygen_level="game.oxygenLevel"
-      :temperature="game.temperature"
-      :altVenusBoard="game.gameOptions.altVenusBoard"
-      :aresData="game.aresData"
+    <GameBoardView
+      :game="game"
       :tileView="tileView"
+      :playerCount="spectator.players.length"
       @toggleTileView="cycleTileView()"
-      id="shortkey-board"
     />
 
-    <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
-
-    <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
-
-    <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
-
-    <DeltaProjectBoard v-if="game.deltaProject !== undefined" :model="game.deltaProject" :playersCount="spectator.players.length"/>
-
-    <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
-        <Milestone :milestones="game.milestones" />
-        <Awards :awards="game.awards" show-scores />
-    </div>
-
-    <!-- TODO(kberg): add the spectator tab. -->
     <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
       <dynamic-title title="Colonies" :color="spectator.color"/>
@@ -71,7 +48,7 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="(spectator as any)" :settings="settings" :waitingfor="undefined"></waiting-for>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :waitingfor="undefined"></waiting-for>
   </div>
 </template>
 
@@ -81,27 +58,21 @@ import {defineComponent} from 'vue';
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 
-import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
-import Awards from '@/client/components/Awards.vue';
-import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
-import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
+import GameBoardView from '@/client/components/GameBoardView.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
-import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
-import Milestone from '@/client/components/Milestones.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
-import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import {range} from '@/common/utils/utils';
 import {nextTileView, TileView} from './board/TileView';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
-export interface SpectatorHomeModel {
+export type SpectatorHomeModel = {
   tileView: TileView;
-  waitingForTimeout: number;
 }
 
 export default defineComponent({
@@ -109,16 +80,11 @@ export default defineComponent({
   data(): SpectatorHomeModel {
     return {
       tileView: 'show',
-      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
   props: {
     spectator: {
       type: Object as () => SpectatorModel,
-      required: true,
-    },
-    settings: {
-      type: Object as () => typeof raw_settings,
       required: true,
     },
   },
@@ -128,18 +94,13 @@ export default defineComponent({
     },
   },
   components: {
-    Awards,
-    Board,
     Colony,
     DynamicTitle,
+    GameBoardView,
     LogPanel,
-    Milestone,
-    MoonBoard,
-    DeltaProjectBoard,
     PlanetaryTracks,
     PlayersOverview,
     Sidebar,
-    Turmoil,
     WaitingFor,
   },
   methods: {
@@ -153,6 +114,9 @@ export default defineComponent({
     cycleTileView(): void {
       this.tileView = nextTileView(this.tileView);
     },
+  },
+  mounted() {
+    setDocumentTitle(this.game.name);
   },
 });
 </script>

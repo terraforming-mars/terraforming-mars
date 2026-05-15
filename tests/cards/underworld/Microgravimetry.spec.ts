@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {Microgravimetry} from '../../../src/server/cards/underworld/Microgravimetry';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Microgravimetry', () => {
   let card: Microgravimetry;

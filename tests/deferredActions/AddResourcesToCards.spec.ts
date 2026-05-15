@@ -6,7 +6,8 @@ import {AddResourcesToCards} from '../../src/server/deferredActions/AddResources
 import {TestPlayer} from '../TestPlayer';
 import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
-import {cast, testGame} from '../TestingUtils';
+import {testGame} from '../TestingUtils';
+import {cast} from '../../src/common/utils/utils';
 
 describe('AddResourcesToCards', () => {
   let player: TestPlayer;

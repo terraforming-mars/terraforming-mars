@@ -70,15 +70,19 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        options: {appendTsSuffixTo: [/\.vue$/], transpileOnly: true},
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+          compilerOptions: {module: 'esnext', removeComments: false}
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?url=false'],
+        use: ['style-loader', {loader: 'css-loader', options: {url: false}}],
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader?url=false', 'less-loader'],
+        use: ['style-loader', {loader: 'css-loader', options: {url: false}}, 'less-loader'],
       },
     ],
   },
@@ -86,5 +90,19 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     hashFunction: 'xxhash64',
+    publicPath: '/',
+    chunkFilename: 'chunks/[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
 };

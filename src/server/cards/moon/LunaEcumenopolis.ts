@@ -22,7 +22,6 @@ export class LunaEcumenopolis extends Card {
 
       metadata: {
         cardNumber: 'M84',
-        hasExternalHelp: true,
         description: 'Spend 2 titanium. ' +
         'Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. ' +
         'Increase your TR 1 step for each 2 steps of the habitat rate.',
@@ -87,7 +86,9 @@ export class LunaEcumenopolis extends Card {
         // Now go through all the land spaces again
         for (let y = 0; y < len; y++) {
           const second = spaces[y];
-          if (second.id === firstSpaceId) continue;
+          if (second.id === firstSpaceId) {
+            continue;
+          }
           // Now if it's next to two colonies, it includes the first colony you placed. That's what firstSpaceId is for.
           if (nextToTwoColonies(second) === true) {
             return true;

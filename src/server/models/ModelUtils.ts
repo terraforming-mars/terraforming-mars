@@ -6,11 +6,12 @@ import {ICard} from '../cards/ICard';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {IPlayer} from '../IPlayer';
-import {PlayCardMetadata} from '../inputs/SelectProjectCardToPlay';
+import {PlayCardMetadata} from '../inputs/SelectCardToPlay';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {asArray} from '../../common/utils/utils';
+import {isIStandardProjectCard} from '../cards/IStandardProjectCard';
 
 export function cardsToModel(
   player: IPlayer,
@@ -33,14 +34,26 @@ export function cardsToModel(
       discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
     }
 
+    let calculatedCost = card.cost;
+    if (options.showCalculatedCost) {
+      if (isIStandardProjectCard(card)) {
+        calculatedCost = options.extras?.get(card.name)?.overriddenCost ?? card.getAdjustedCost(player);
+      } else if (isIProjectCard(card) && card.cost !== undefined) {
+        calculatedCost = player.getCardCost(card);
+      }
+    }
+
     const model: CardModel = {
       resources: options.showResources ? card.resourceCount : undefined,
       name: card.name,
-      calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
+      calculatedCost,
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     };
+    if (isIStandardProjectCard(card)) {
+      model.standardProjectCanPayWith = card.canPayWith(player);
+    }
     if (card.isDisabled) {
       model.isDisabled = true;
     } else if (options.enabled?.[index] === false) {

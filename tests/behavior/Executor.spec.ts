@@ -10,7 +10,7 @@ import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
-import {cast, fakeCard, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
+import {fakeCard, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
@@ -36,6 +36,7 @@ import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Helion} from '../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {CardName} from '../../src/common/cards/CardName';
+import {cast} from '@/common/utils/utils';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -278,7 +279,22 @@ describe('Executor', () => {
     expect(saturnSurfing.resourceCount).eq(3);
   });
 
-  // TODO(kberg): Add test where type includes multiple resource types
+  it('add resources to any card - type undefined (any resource card)', () => {
+    const tardigrades = new Tardigrades(); // microbes
+    const livestock = new Livestock(); // animals
+    player.playedCards.set(tardigrades, livestock);
+
+    executor.execute({addResourcesToAnyCard: {count: 1, type: undefined}}, player, fake);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.members([tardigrades, livestock]);
+    selectCard.cb([tardigrades]);
+
+    expect(tardigrades.resourceCount).eq(1);
+    expect(livestock.resourceCount).eq(0);
+  });
+
   it('add resources to any card', () => {
     const tardigrades = new Tardigrades(); // Holds microbes
     const ants = new Ants(); // Holds microbes

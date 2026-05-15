@@ -38,7 +38,7 @@ import {defineComponent} from 'vue';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
-import * as raw_settings from '@/genfiles/settings.json';
+import raw_settings from '@/genfiles/settings.json';
 import * as constants from '@/common/constants';
 
 export default defineComponent({

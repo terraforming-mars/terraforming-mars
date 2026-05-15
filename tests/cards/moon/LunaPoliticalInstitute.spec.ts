@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tag} from '../../../src/common/cards/Tag';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LunaPoliticalInstitute', () => {
   let player: TestPlayer;

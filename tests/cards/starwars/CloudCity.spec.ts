@@ -3,8 +3,9 @@ import {CloudCity} from '../../../src/server/cards/starwars/CloudCity';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CloudCity', () => {
   let card: CloudCity;

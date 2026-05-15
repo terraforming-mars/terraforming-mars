@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {KaguyaTech} from '../../../src/server/cards/promo/KaguyaTech';
 import {testGame} from '../../TestGame';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('KaguyaTech', () => {
   it('canPlay', () => {

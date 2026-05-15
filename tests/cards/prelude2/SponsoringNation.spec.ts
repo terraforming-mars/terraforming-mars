@@ -1,8 +1,9 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SponsoringNation} from '../../../src/server/cards/prelude2/SponsoringNation';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SponsoringNation', () => {
   it('canPlay', () => {

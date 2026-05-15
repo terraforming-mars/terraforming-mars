@@ -74,6 +74,5 @@
     "// Effect: After you excavate an underground resource, gain 2 energy.": "効果：地下資源が採掘した時、2電力獲得.",
     "Effect: After you claim an underground resource, gain 2 energy.": "効果：地下資源を獲得した時、2電力獲得.",
 
-    "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "アクション：8電力支払い、酸素濃度+1段階 または 金星+1段階.",
-    "You start with 38 M€ and 1 energy production.": "初期資源：38MC. 初期産出：電力産出+1."
+    "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "アクション：8電力支払い、酸素濃度+1段階 または 金星+1段階."
 }

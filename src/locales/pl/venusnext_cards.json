@@ -2,7 +2,6 @@
     "% Venus": "% terraformacji Wenus",
 
     "Stratospheric Birds": "Ptaki Stratosferyczne",
-    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "Requires Venus 12% and that you spend 1 floater from any card.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 12%. Wydaj 1 jednostkę dryfowców z dowolnej karty.",
 
     "Venusian Plants": "Wenusjańskie Rośliny",
@@ -11,7 +10,6 @@
     "Extremophiles": "Ekstremofile",
     "Action: Add 1 microbe to ANY card.": "Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie.",
     "1 VP for every 3rd Microbe on this card.": "Otrzymujesz 1 PZ za każde 3 jednostki mikrobów znajdujące się na tej karcie.",
-    "Requires 2 science tags.": "Musisz posiadać co najmniej 2 symbole Nauki.",
 
     "Mining Quota": "Kontyngent Górniczy",
     "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza. Podnieś swoją produkcję stali o 2 poziomy.",
@@ -51,7 +49,6 @@
     "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza. Dobierz 2 karty.",
 
     "Atalanta Planitia Lab": "Laboratorium Atlanta Planitia",
-    "Requires 3 science tags. Draw 2 cards.": "Musisz posiadać co najmniej 3 symbole Nauki. Dobierz 2 karty.",
 
     "Rotator Impacts": "Rotacja Uderzeniowa",
     "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 M€ (możesz użyć tytanu), aby umieścić na tej karcie 1 jednostkę asteroid.",
@@ -167,7 +164,7 @@
     "Requires Venus 10%.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 10%.",
 
     "Luxury Foods": "Wykwintne Jedzenie",
-    "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza.",
+    "Requires that you have a Venus tag, an Earth tag and a Jovian tag.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza.",
 
     "Neutralizer Factory": "Fabryka Neutralizatorów",
     "Requires Venus 10%. Increase the Venus track 1 step.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 10%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom.",

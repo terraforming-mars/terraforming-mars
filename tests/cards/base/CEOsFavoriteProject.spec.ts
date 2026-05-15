@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
@@ -13,6 +13,7 @@ import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CEOsFavoriteProject', () => {
   let card: CEOsFavoriteProject;

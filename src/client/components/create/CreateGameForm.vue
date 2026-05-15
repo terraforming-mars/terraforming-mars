@@ -313,6 +313,14 @@
                               </label>
                             </template>
 
+                            <template v-if="expansions.ceo">
+                            <input type="checkbox" v-model="showCeosList" id="customCeos-checkbox">
+                              <label for="customCeos-checkbox">
+                                  <span v-i18n>Custom CEOs list</span>
+                                  <span v-if="customCeos.length">&nbsp;({{ customCeos.length }})</span>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
@@ -527,6 +535,16 @@
                 @close="showColoniesList = false"
             ></ColoniesFilter>
 
+            <CeosFilter
+                ref="ceosFilter"
+                v-show="showCeosList"
+                v-if="showCeosList"
+                v-on:ceo-list-changed="updateCustomCeos"
+                v-bind:expansions="expansions"
+                v-bind:selected="customCeos"
+                @close="showCeosList = false"
+            ></CeosFilter>
+
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
@@ -556,6 +574,7 @@ import {Color, PLAYER_COLORS} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
+import CeosFilter from '@/client/components/create/CeosFilter.vue';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
@@ -577,6 +596,7 @@ import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -604,6 +624,7 @@ export default defineComponent({
   components: {
     AppButton,
     CardsFilter,
+    CeosFilter,
     ColoniesFilter,
     CorporationsFilter,
     PreludesFilter,
@@ -654,7 +675,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    document.title = `Create New Game | ${constants.APP_NAME}`;
+    setDocumentTitle('Create New Game');
   },
   computed: {
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {
@@ -724,9 +745,15 @@ export default defineComponent({
 
             nextTick(() => {
               try {
-                if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
-                if (!component.seededGame) component.seed = Math.random();
+                if (component.showBannedCards) {
+                  refs.cardsFilter.selected = processor.bannedCards;
+                }
+                if (component.showIncludedCards) {
+                  refs.cardsFilter2.selected = processor.includedCards;
+                }
+                if (!component.seededGame) {
+                  component.seed = Math.random();
+                }
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(processor.solarPhaseOption);
                 this.uploading = false;
@@ -767,6 +794,9 @@ export default defineComponent({
     },
     updateCustomColonies(customColonies: Array<ColonyName>) {
       this.customColonies = customColonies;
+    },
+    updateCustomCeos(customCeos: Array<CardName>) {
+      this.customCeos = customCeos;
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
@@ -984,14 +1014,18 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the colonies you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       }
 
       if (players.length === 1 && this.expansions.corpera === false) {
         const confirm = window.confirm(translateText(
           'We do not recommend playing a solo game without the Corporate Era. Press OK if you want to play without it.'));
-        if (confirm === false) return;
+        if (confirm === false) {
+          return;
+        }
       }
 
       // Check Prelude 2 + Pathfinders infinite energy production
@@ -1021,8 +1055,10 @@ export default defineComponent({
 
       if (energyProductionBug === true) {
         const confirm = window.confirm(translateText(
-          'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
-        if (confirm === false) return;
+          'It is possible with ThorGate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
+        if (confirm === false) {
+          return;
+        }
       }
 
       // Check custom corp count
@@ -1038,7 +1074,9 @@ export default defineComponent({
           } else {
             neededCorpsCount = players.length * startingCorporations;
             // Merger Prelude alone needs 4 additional preludes
-            if (this.expansions.prelude && this.expansions.promo) neededCorpsCount += 4;
+            if (this.expansions.prelude && this.expansions.promo) {
+              neededCorpsCount += 4;
+            }
           }
         }
         if (customCorporations.length < neededCorpsCount) {
@@ -1057,7 +1095,9 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the corps you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       } else {
         customCorporations.length = 0;
@@ -1083,7 +1123,9 @@ export default defineComponent({
         if (valid === false) {
           const confirm = window.confirm(translateText(
             'Some of the Preludes you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
-          if (confirm === false) return;
+          if (confirm === false) {
+            return;
+          }
         }
       } else {
         customPreludes.length = 0;
@@ -1126,6 +1168,7 @@ export default defineComponent({
         showOtherPlayersVP,
         customCorporationsList: customCorporations,
         customColoniesList: customColonies,
+        customCeos: customCeos,
         customPreludes,
         bannedCards,
         includedCards,
@@ -1163,7 +1206,6 @@ export default defineComponent({
             penaltyVPPerPeriod: this.escapeVelocityPenalty,
           } : undefined,
         twoCorpsVariant,
-        customCeos,
         startingCeos,
         startingPreludes,
       };
@@ -1172,7 +1214,9 @@ export default defineComponent({
     async createGame() {
       const dataToSend = await this.serializeSettings();
 
-      if (dataToSend === undefined) return;
+      if (dataToSend === undefined) {
+        return;
+      }
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;

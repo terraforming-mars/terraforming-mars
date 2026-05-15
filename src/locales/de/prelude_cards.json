@@ -10,7 +10,6 @@
   "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Setze je eigene Kolonie 1 Delegierten. Du darfst sie in verschiedene Parteien setzen.",
 
   "Colonial Representation": "Kolonievertretung",
-  "Effect: You have +1 influence.": "EFFEKT: Du hast +1 Einfluss.",
   "Gain 3 M€ per colony you have.": "Erhalte 3 M€ je eigene Kolonie.",
 
   "Envoys From Venus": "Gesandte der Venus",
@@ -49,7 +48,6 @@
   "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Temperatur muss -4 °C oder kälter sein. Erhalte 1 Pflanze je Venus- und Pflanzensymbol (einschließlich dieser) und eigener Kolonie.",
 
   "Special Permit": "Sondergenehmigung",
-  "steal": "klaue",
   "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Stehle einem Spieler 4 Pflanzen.",
 
   "Sponsoring Nation": "Fördernde Nation",
@@ -83,25 +81,16 @@
   "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Benötigt eigenen Vorsitzenden. Ziehe 3 PRÄLUDIUM-KARTEN und spiele 1 von ihnen aus. Wirf die anderen beiden ab.",
 
   "Psychrophiles": "Psychrophilen",
-  "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
-  "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
 
   "Research Coordination": "Koordinierte Forschung",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
 
   "SF Memorial": "Sci-Fi-Gedenkstätte",
-  "Draw 1 card.": "Ziehe 1 Karte.",
 
   "Martian Survey": "Marsvermessung",
-  "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
 
   "House Printing": "Häuserdruck",
-  "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
 
   "Space Hotels": "Weltraumhotels",
-  "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
 
-  "Lava Tube Settlement": "Lavaröhren-Siedlung",
-  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
+  "Lava Tube Settlement": "Lavaröhren-Siedlung"
 }

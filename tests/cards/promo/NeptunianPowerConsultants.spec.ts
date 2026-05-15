@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {addOcean, cast, runAllActions} from '../../TestingUtils';
+import {addOcean, runAllActions} from '../../TestingUtils';
 import {NeptunianPowerConsultants} from '../../../src/server/cards/promo/NeptunianPowerConsultants';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -8,6 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {IceAsteroid} from '../../../src/server/cards/base/IceAsteroid';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('NeptunianPowerConsultants', () => {
   let card: NeptunianPowerConsultants;
@@ -45,7 +46,7 @@ describe('NeptunianPowerConsultants', () => {
     addOcean(player2);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 5}));
+    orOptions.options[0].cb(Payment.of({megacredits: 5}));
 
     expect(card.resourceCount).eq(1);
     expect(player.production.energy).eq(1);
@@ -58,7 +59,7 @@ describe('NeptunianPowerConsultants', () => {
     addOcean(player2);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 3, steel: 1}));
+    orOptions.options[0].cb(Payment.of({megacredits: 3, steel: 1}));
 
     expect(card.resourceCount).eq(1);
     expect(player.production.energy).eq(1);
@@ -77,7 +78,7 @@ describe('NeptunianPowerConsultants', () => {
     runAllActions(game);
     cast(player2.popWaitingFor(), undefined);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[0].cb(Payment.of({megaCredits: 5, steel: 0}));
+    orOptions.options[0].cb(Payment.of({megacredits: 5, steel: 0}));
 
     runAllActions(game);
 

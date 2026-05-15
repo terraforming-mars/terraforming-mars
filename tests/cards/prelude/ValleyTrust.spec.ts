@@ -1,6 +1,6 @@
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
 import {Research} from '../../../src/server/cards/base/Research';

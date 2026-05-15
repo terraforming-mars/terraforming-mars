@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Scapegoat} from '../../../src/server/cards/underworld/Scapegoat';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Scapegoat', () => {
   it('Should play', () => {

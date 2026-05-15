@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {ChemicalFactory} from '../../../src/server/cards/underworld/ChemicalFactory';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ChemicalFactory', () => {
   let card: ChemicalFactory;

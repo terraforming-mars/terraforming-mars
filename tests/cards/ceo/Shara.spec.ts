@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -16,7 +16,7 @@ describe('Shara', () => {
 
   beforeEach(() => {
     card = new Shara();
-    [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('Can act', () => {

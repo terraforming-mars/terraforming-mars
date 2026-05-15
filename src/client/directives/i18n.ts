@@ -17,10 +17,10 @@ const context: Context = {
   players: new Map(),
 };
 
-export function setTranslationContext(game: PlayerViewModel) {
-  context.playerView = game;
+export function setTranslationContext(playerView: PlayerViewModel) {
+  context.playerView = playerView;
   context.players.clear();
-  for (const player of game.players) {
+  for (const player of playerView.players) {
     context.players.set(player.color, player.name);
   }
 }
@@ -80,7 +80,9 @@ export function translateText(englishText: string): string {
     if (translated === undefined) {
       translated = new Set();
       for (const k in translations) {
-        if (translations.hasOwnProperty(k)) translated.add(translations[k]);
+        if (translations.hasOwnProperty(k)) {
+          translated.add(translations[k]);
+        }
       }
     }
     if (!translated.has(englishText)) {
@@ -121,7 +123,9 @@ function translateChildren(node: Node, params: string[] | undefined) {
         text.data = translatedText;
       }
     } else {
-      if (child.nodeType === Node.ELEMENT_NODE && (child as HTMLElement).getAttribute('tm-has-i18n') === 'true') continue;
+      if (child.nodeType === Node.ELEMENT_NODE && (child as HTMLElement).getAttribute('tm-has-i18n') === 'true') {
+        continue;
+      }
       translateChildren(child, params);
     }
   }
@@ -136,8 +140,14 @@ export function translateTextNode(el: HTMLElement, binding: any) {
 }
 
 export const $t = function(msg: string | Message | number | undefined) {
-  if (!msg) return '';
-  if (typeof msg === 'number') return msg.toString();
-  if (typeof msg === 'string') return translateText(msg);
+  if (!msg) {
+    return '';
+  }
+  if (typeof msg === 'number') {
+    return msg.toString();
+  }
+  if (typeof msg === 'string') {
+    return translateText(msg);
+  }
   return translateMessage(msg);
 };

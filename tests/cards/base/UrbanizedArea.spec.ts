@@ -3,12 +3,12 @@ import {UrbanizedArea} from '../../../src/server/cards/base/UrbanizedArea';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, churn} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('UrbanizedArea', () => {
   let card: UrbanizedArea;
@@ -20,7 +20,7 @@ describe('UrbanizedArea', () => {
     card = new UrbanizedArea();
     [game, player] = testGame(2);
 
-    const tharsisTholus = game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS);
+    const tharsisTholus = game.board.getSpaceOrThrow('09');
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);
   });
 
@@ -45,6 +45,7 @@ describe('UrbanizedArea', () => {
     expect(selectSpace.spaces).has.lengthOf(1);
 
     selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
     expect(game.board.getCities()).has.length(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);

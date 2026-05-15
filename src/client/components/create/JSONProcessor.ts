@@ -6,6 +6,7 @@ import {PLAYER_COLORS} from '@/common/Color';
 import {NewPlayerModel} from '@/common/game/NewGameConfig';
 import {CardName} from '@/common/cards/CardName';
 import {cast} from '@/common/utils/utils';
+import {CARD_RENAMES} from '@/common/cards/CardRenames';
 
 function safeBoolean(val: JSONValue): boolean {
   if (typeof val === 'boolean') {
@@ -129,6 +130,26 @@ export class JSONProcessor {
 
     for (let i = 0; i < players.length; i++) {
       this.model.players[i] = players[i];
+    }
+
+    this.validateCardNames('customCorporations', this.model.customCorporations);
+    this.validateCardNames('customPreludes', this.model.customPreludes);
+    this.validateCardNames('customCeos', this.model.customCeos);
+    this.validateCardNames('bannedCards', this.bannedCards);
+    this.validateCardNames('includedCards', this.includedCards);
+  }
+
+  private validateCardNames(fieldLabel: string, names: ReadonlyArray<CardName>): void {
+    const validNames = new Set<string>(Object.values(CardName));
+    for (const name of names) {
+      if (!validNames.has(name)) {
+        const canonical = CARD_RENAMES.get(name);
+        if (canonical !== undefined) {
+          this.warnings.push(`Old card name '${name}' in ${fieldLabel}; use '${canonical}'`);
+        } else {
+          this.warnings.push(`Unknown card name '${name}' in ${fieldLabel}`);
+        }
+      }
     }
   }
 

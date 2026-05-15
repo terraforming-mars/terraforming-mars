@@ -65,8 +65,12 @@ export class DeltaProjectExpansion {
   // True if another player (not `excludeColor`) occupies this track position.
   private static hasOtherPlayerAtPosition(data: DeltaProjectData, position: number, excludeColor: Color): boolean {
     for (const [color, progress] of data.players) {
-      if (color === excludeColor) continue;
-      if (progress.position === position) return true;
+      if (color === excludeColor) {
+        continue;
+      }
+      if (progress.position === position) {
+        return true;
+      }
     }
     return false;
   }
@@ -99,16 +103,22 @@ export class DeltaProjectExpansion {
     const progress = DeltaProjectExpansion.getProgress(data, player.color);
     const currentPos = progress.position;
 
-    if (currentPos >= MAX_TRACK_POSITION) return [];
+    if (currentPos >= MAX_TRACK_POSITION) {
+      return [];
+    }
 
     const result: number[] = [];
     const maxByEnergy = Math.min(player.energy, MAX_TRACK_POSITION - currentPos);
 
     for (let steps = 1; steps <= maxByEnergy; steps++) {
       const newPos = currentPos + steps;
-      if (newPos > MAX_TRACK_POSITION) break;
+      if (newPos > MAX_TRACK_POSITION) {
+        break;
+      }
 
-      if (!DeltaProjectExpansion.canReachPosition(player, newPos)) continue;
+      if (!DeltaProjectExpansion.canReachPosition(player, newPos)) {
+        continue;
+      }
 
       if (newPos === 10 && DeltaProjectExpansion.hasOtherPlayerAtPosition(data, 10, player.color)) {
         continue;
@@ -253,8 +263,12 @@ export class DeltaProjectExpansion {
   private static getUsedActionCards(player: IPlayer): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
     for (const playedCard of player.tableau) {
-      if (!isIActionCard(playedCard)) continue;
-      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) continue;
+      if (!isIActionCard(playedCard)) {
+        continue;
+      }
+      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
+        continue;
+      }
       if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
@@ -264,10 +278,14 @@ export class DeltaProjectExpansion {
 
   public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder): void {
     const data = player.game.deltaProjectData;
-    if (data === undefined) return;
+    if (data === undefined) {
+      return;
+    }
 
     const progress = data.players.get(player.color);
-    if (progress === undefined) return;
+    if (progress === undefined) {
+      return;
+    }
 
     if (progress.position === 11) {
       builder.setVictoryPoints('victoryPoints', 5, 'Delta Project (5VP)');

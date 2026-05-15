@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
 import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('EcoLine', () => {
   it('Should play', () => {

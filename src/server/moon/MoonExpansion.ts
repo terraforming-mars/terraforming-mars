@@ -7,6 +7,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonData} from './MoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
+import {IStandardProjectCard} from '../cards/IStandardProjectCard';
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 import {Space} from '../boards/Space';
@@ -64,7 +65,6 @@ export class MoonExpansion {
       miningRate: 0,
       logisticRate: 0,
       lunaFirstPlayer: undefined,
-      lunaProjectOfficeLastGeneration: undefined,
     };
   }
 
@@ -117,14 +117,7 @@ export class MoonExpansion {
 
       MoonExpansion.logTilePlacement(player, space, tile.tileType);
 
-      // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
-      // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
-      // it's not a problem until it is.
-      for (const p of game.players) {
-        for (const playedCard of p.tableau) {
-          playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        }
-      }
+      game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MOON));
     });
   }
 
@@ -276,7 +269,7 @@ export class MoonExpansion {
   /*
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
-  public static adjustedReserveCosts(player: IPlayer, card: IProjectCard) : Units {
+  public static adjustedReserveCosts(player: IPlayer, card: IProjectCard | IStandardProjectCard) : Units {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 

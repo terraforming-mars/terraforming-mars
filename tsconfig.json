@@ -24,10 +24,11 @@
         "target": "es2021",
         "types": ["node"],
         "moduleResolution": "node",
+        "ignoreDeprecations": "6.0",
+        "rootDir": ".",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "allowUnreachableCode": false,
-        "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
         },

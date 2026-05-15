@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {LocalHeatTrapping} from '../../../src/server/cards/base/LocalHeatTrapping';
 import {Pets} from '../../../src/server/cards/base/Pets';

@@ -27,10 +27,6 @@ export class Gordon extends CeoCard {
     });
   }
 
-  public override canAct(): boolean {
-    return false;
-  }
-
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (cardOwner.id !== activePlayer.id) {
       return;

@@ -181,6 +181,7 @@
             <div class="turmoil_agenda_cont">
               <div style="padding: 12px; background-image: linear-gradient(rgb(156, 96, 45), black); border-radius: 8px; height: 120px;">
                 <turmoil-agenda :id="id"></turmoil-agenda><div style="text-align:center">{{ id }}</div>
+                {{ agendaIdDescription(id) }}
               </div>
             </div>
           </div>
@@ -217,7 +218,7 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {TypeOption, CardListModel, hashToModel, modelToHash, ResourceOption, TagOption} from '@/client/components/cardlist/CardListModel';
 import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
-import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
+import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS, agendaIdDescription} from '@/common/turmoil/Types';
 import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -227,7 +228,7 @@ import Award from '@/client/components/Award.vue';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
-import {APP_NAME} from '@/common/constants';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 
 type Refs = {
@@ -249,7 +250,7 @@ export default defineComponent({
     return hashToModel(window.location.hash);
   },
   mounted() {
-    document.title = `Cards List | ${APP_NAME}`;
+    setDocumentTitle('Cards List');
     this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
   },
@@ -320,24 +321,37 @@ export default defineComponent({
       return this.getAllStandardProjectCards().filter((c) => this.showCard(c));
     },
     visibleGlobalEvents(): Array<GlobalEventName> {
-      if (!this.types.globalEvents) return [];
+      if (!this.types.globalEvents) {
+        return [];
+      }
       return this.getAllGlobalEvents().filter((e) => this.showGlobalEvent(e));
     },
     visibleColonyNames(): Array<ColonyName> {
-      if (!this.types.colonyTiles) return [];
+      if (!this.types.colonyTiles) {
+        return [];
+      }
       return this.getAllColonyNames().filter((c) => this.showColony(c));
     },
     visibleMilestoneNames(): Array<MilestoneName> {
-      if (!this.types.milestones) return [];
+      if (!this.types.milestones) {
+        return [];
+      }
       return this.allMilestoneNames.filter((m) => this.showMilestone(m));
     },
     visibleAwardNames(): Array<AwardName> {
-      if (!this.types.awards) return [];
+      if (!this.types.awards) {
+        return [];
+      }
       return this.allAwardNames.filter((a) => this.showAward(a));
     },
     visibleAgendaIds(): Array<PolicyId | BonusId> {
-      if (!this.types.agendas) return [];
-      return [...this.allAgendaIds];
+      if (!this.types.agendas) {
+        return [];
+      }
+      return this.allAgendaIds.filter((id) => this.include(id, 'agenda'));
+    },
+    agendaIdDescription(): typeof agendaIdDescription {
+      return agendaIdDescription;
     },
   },
   methods: {
@@ -409,7 +423,7 @@ export default defineComponent({
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
-    include(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
+    include(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma' | 'agenda') {
       const normalized = this.filterText.toLocaleUpperCase();
       if (normalized.length === 0) {
         return true;
@@ -436,26 +450,36 @@ export default defineComponent({
 
       let matches = false;
       for (const tag of card.tags) {
-        if (this.tags[tag]) matches = true;
+        if (this.tags[tag]) {
+          matches = true;
+        }
       }
       return matches;
     },
     showCard(cardName: CardName): boolean {
-      if (!this.include(cardName, 'card')) return false;
+      if (!this.include(cardName, 'card')) {
+        return false;
+      }
 
       const card = getCard(cardName);
       if (card === undefined) {
         return false;
       }
 
-      if (!this.filterByTags(card)) return false;
-      if (!this.types[card.type]) return false;
+      if (!this.filterByTags(card)) {
+        return false;
+      }
+      if (!this.types[card.type]) {
+        return false;
+      }
       if (card.resourceType === undefined) {
         if (this.resources.none === false) {
           return false;
         }
       } else {
-        if (!this.resources[card.resourceType]) return false;
+        if (!this.resources[card.resourceType]) {
+          return false;
+        }
       }
       switch (this.vps) {
       case 1:
@@ -472,12 +496,16 @@ export default defineComponent({
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
-      if (!this.include(name, 'globalEvent')) return false;
+      if (!this.include(name, 'globalEvent')) {
+        return false;
+      }
       const globalEvent = getGlobalEvent(name);
       return globalEvent !== undefined && this.expansions[globalEvent.module] === true;
     },
     showColony(name: ColonyName): boolean {
-      if (!this.include(name, 'colony')) return false;
+      if (!this.include(name, 'colony')) {
+        return false;
+      }
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },

@@ -49,11 +49,19 @@ export class GeologicalExpedition extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
-    if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
-    if (cardOwner !== activePlayer) return;
-    if (cardOwner.game.phase === Phase.SOLAR) return;
+    if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) {
+      return;
+    }
+    if (cardOwner !== activePlayer) {
+      return;
+    }
+    if (cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
     // Don't grant bonuses when overplacing.
-    if (space.tile?.covers !== undefined) return;
+    if (space.tile?.covers !== undefined) {
+      return;
+    }
 
     const bonuses = space.bonus;
     if (bonuses.length === 0) {

@@ -73,7 +73,9 @@ export default defineComponent({
       }
 
       const adjustedDelta = Math.min(1, currentValue);
-      if (adjustedDelta === 0) return;
+      if (adjustedDelta === 0) {
+        return;
+      }
       this.units[unit] -= adjustedDelta;
     },
     /**

@@ -95,7 +95,7 @@
                           <td v-if="game.gameOptions.escapeVelocity">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                           <td class="game-end-mc">
-                            <div>{{ p.megaCredits }}</div>
+                            <div>{{ p.megacredits }}</div>
                           </td>
                           <td v-if="game.gameOptions.showTimers"><div class="game-end-timer">{{ getTimer(p) }}</div></td>
                           <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
@@ -215,6 +215,7 @@
 
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
@@ -239,8 +240,12 @@ import {MADetail} from '@/common/game/VictoryPointsBreakdown';
 import {AwardName} from '@/common/ma/AwardName';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
-  if (playerView !== undefined) return playerView;
-  if (spectator !== undefined) return spectator;
+  if (playerView !== undefined) {
+    return playerView;
+  }
+  if (spectator !== undefined) {
+    return spectator;
+  }
   throw new Error('Neither playerView nor spectator are defined');
 }
 
@@ -267,8 +272,12 @@ export default defineComponent({
       return getViewModel(this.playerView, this.spectator).players;
     },
     color(): Color {
-      if (this.playerView !== undefined) return this.playerView.thisPlayer.color;
-      if (this.spectator !== undefined) return this.spectator.color;
+      if (this.playerView !== undefined) {
+        return this.playerView.thisPlayer.color;
+      }
+      if (this.spectator !== undefined) {
+        return this.spectator.color;
+      }
       throw new Error('Neither playerView nor spectator are defined');
     },
     downloadLogUrl() {
@@ -281,10 +290,18 @@ export default defineComponent({
     playersInPlace(): Array<PublicPlayerModel> {
       const copy = [...this.viewModel.players];
       copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
-        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
-        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-        if (a.megaCredits < b.megaCredits) return -1;
-        if (a.megaCredits > b.megaCredits) return 1;
+        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) {
+          return -1;
+        }
+        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) {
+          return 1;
+        }
+        if (a.megacredits < b.megacredits) {
+          return -1;
+        }
+        if (a.megacredits > b.megacredits) {
+          return 1;
+        }
         return 0;
       });
       return copy.reverse();
@@ -295,7 +312,7 @@ export default defineComponent({
       const winners: PublicPlayerModel[] = [firstWinner];
       for (let i = 1; i < sortedPlayers.length; i++) {
         if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
-                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
+                    sortedPlayers[i].megacredits === firstWinner.megacredits) {
           winners.push(sortedPlayers[i]);
         }
       }
@@ -378,7 +395,7 @@ export default defineComponent({
     VictoryPointChart,
   },
   mounted() {
-    document.title = `End of Game | ${constants.APP_NAME}`;
+    setDocumentTitle('🏁 | ' + this.game.name);
   },
   methods: {
     getEndGamePlayerRowColorClass(color: Color): string {

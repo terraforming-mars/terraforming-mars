@@ -6,18 +6,10 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
-
-const CARD_RENAMES = new Map<string, CardName>([
-  // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)
-  // And remember to add a test in createCard.spec.ts.
-
-  // eg
-  // TODO(yournamehere): remove after 2021-04-05
-  // ['Space Corridors', CardName.SPACE_LANES],
-]);
+import {resolveCardName} from '../common/cards/CardRenames';
 
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
-  const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
+  const standardizedCardName = resolveCardName(cardName);
 
   for (const moduleManifest of ALL_MODULE_MANIFESTS) {
     for (const manifestName of cardManifestNames) {

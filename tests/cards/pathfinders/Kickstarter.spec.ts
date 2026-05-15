@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('Kickstarter', () => {
   let card: Kickstarter;
@@ -15,7 +15,7 @@ describe('Kickstarter', () => {
 
   beforeEach(() => {
     card = new Kickstarter();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('play', () => {

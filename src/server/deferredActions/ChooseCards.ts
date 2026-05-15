@@ -9,11 +9,12 @@ import {oneWayDifference} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
 
-export enum LogType {
-  DREW = 'drew',
-  BOUGHT = 'bought',
-  DREW_VERBOSE = 'drew_verbose',
-}
+export const LogType = {
+  DREW: 'drew',
+  BOUGHT: 'bought',
+  DREW_VERBOSE: 'drew_verbose',
+} as const;
+export type LogType = typeof LogType[keyof typeof LogType];
 
 export type ChooseOptions = {
   keepMax?: number,
@@ -53,12 +54,15 @@ export class ChooseCards extends DeferredAction {
     const min = options.paying ? 0 : options.keepMax;
 
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
-    return new SelectCard(msg, button, cards, {max, min})
+    return new SelectCard(msg, button, cards, {max, min, played: !options.paying})
       .andThen((selected) => {
         if (selected.length > max) {
           throw new Error('Selected too many cards');
         }
         const unselected = oneWayDifference(cards, selected);
+        if (options.logDrawnCard === true) {
+          LogHelper.logRevealedCards(player, cards);
+        }
         if (options.paying && selected.length > 0) {
           const cost = selected.length * player.cardCost;
           player.game.defer(
@@ -67,11 +71,6 @@ export class ChooseCards extends DeferredAction {
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
               .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
-          if (options.logDrawnCard === true) {
-            LogHelper.logDrawnCards(player, cards);
-          }
-        } else if (options.logDrawnCard === true) {
-          keep(player, selected, unselected, LogType.DREW_VERBOSE);
         } else {
           keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
         }

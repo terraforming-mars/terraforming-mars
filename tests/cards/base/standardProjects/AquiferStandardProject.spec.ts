@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast, churn, runAllActions, testRedsCosts} from '../../../TestingUtils';
+import {runAllActions, testRedsCosts} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
 import {testGame} from '../../../TestGame';
 import {assertPlaceOcean} from '../../../assertions';
+import {Payment} from '../../../../src/common/inputs/Payment';
 
 describe('AquiferStandardProject', () => {
   let card: AquiferStandardProject;
@@ -29,7 +30,9 @@ describe('AquiferStandardProject', () => {
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
-    assertPlaceOcean(player, churn(card.action(player), player));
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    runAllActions(game);
+    assertPlaceOcean(player, player.popWaitingFor());
 
     expect(player.terraformRating).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);
@@ -45,7 +48,7 @@ describe('AquiferStandardProject', () => {
     expect(player.terraformRating).eq(23);
     expect(card.canAct(player)).eq(true);
 
-    cast(card.action(player), undefined);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(game.board.getOceanSpaces()).has.length(9);

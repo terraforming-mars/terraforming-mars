@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {DeepFoundations} from '../../../src/server/cards/underworld/DeepFoundations';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
@@ -7,6 +7,7 @@ import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DeepFoundations', () => {
   it('can play', () => {
@@ -63,7 +64,7 @@ describe('DeepFoundations', () => {
       space.undergroundResources = 'card1';
     }
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    selectPayment.cb(Payment.of({megaCredits: 16, steel: 2}));
+    selectPayment.cb(Payment.of({megacredits: 16, steel: 2}));
     runAllActions(game);
 
     assertPlaceCity(player, player.popWaitingFor());

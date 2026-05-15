@@ -4,10 +4,11 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {ASIMOV_AWARD_BONUS} from '../../../src/common/constants';
-import {cast, forceGenerationEnd} from '../../TestingUtils';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {Asimov} from '../../../src/server/cards/ceos/Asimov';
 import {FundedAwardModel} from '../../../src/common/models/FundedAwardModel';
 import {Server} from '../../../src/server/models/ServerModel';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Asimov', () => {
   let card: Asimov;

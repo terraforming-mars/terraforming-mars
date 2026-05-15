@@ -55,6 +55,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
   [TileType.NEW_HOLLAND]: 'new-holland',
+  [TileType.NEURAL_INSTANCE]: 'neural-instance',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -97,6 +98,7 @@ const descriptions: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
 
   [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
+  [TileType.NEURAL_INSTANCE]: 'Neural Instance: MarsBot gains VP for adjacent non-human spaces',
 };
 
 export default defineComponent({
@@ -128,8 +130,12 @@ export default defineComponent({
       return this.space.highlight;
     },
     description(): string {
-      if (this.tileType === undefined) return '';
-      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
+      if (this.tileType === undefined) {
+        return '';
+      }
+      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) {
+        return 'City in space.';
+      }
       return descriptions[this.tileType];
     },
     klass(): string {

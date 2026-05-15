@@ -195,7 +195,9 @@ export class LocalStorage implements IDatabase {
         }
         const game: SerializedGame = JSON.parse(text.toString());
         const participantIds: Array<ParticipantId> = game.players.map(toID);
-        if (game.spectatorId) participantIds.push(game.spectatorId);
+        if (game.spectatorId) {
+          participantIds.push(game.spectatorId);
+        }
         gameIds.push({gameId: game.id, participantIds});
       }
     }

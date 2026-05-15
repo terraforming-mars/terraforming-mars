@@ -14,11 +14,11 @@
                               :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved(idx)"
-                              :showsave="false"
+                              :showsave="showsave && showChildSaveButton(option)"
                               :showtitle="false" />
       </div>
     </div>
-    <div v-if="showsave && selectedOption">
+    <div v-if="showsave && selectedOption && !showChildSaveButton(selectedOption)">
       <div style="margin: 5px 30px 10px" class="wf-action">
         <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
@@ -78,10 +78,10 @@ export default defineComponent({
       originalIndices.push(i);
     });
     const initialIdx = this.playerinput.initialIdx ?? 0;
-    // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
+    // Special case: If the first recommended displayed option is SelectProjectCardToPlay, and none of them are enabled, skip it.
     let selectedIdx = initialIdx;
     if (displayedOptions.length > 1 &&
-      displayedOptions[initialIdx].type === 'card' &&
+      displayedOptions[initialIdx].type === 'projectCard' &&
       !displayedOptions[initialIdx].cards.some((card) => card.isDisabled !== true)) {
       selectedIdx = initialIdx + 1;
     }
@@ -135,6 +135,11 @@ export default defineComponent({
           response: out,
         });
       };
+    },
+    // When the child component is a multi-select card, let it render its own save button.
+    // This allows the child to control the button label (e.g. "Sell 3 patents").
+    showChildSaveButton(option: PlayerInputModel): boolean {
+      return option.type === 'card' && !(option.max === 1 && option.min === 1);
     },
     saveData() {
       let ref = this.$refs['inputfactory'] as {saveData: () => void} | Array<{saveData: () => void}>;

@@ -7,9 +7,10 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {runAllActions, setRulingParty} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Eris', () => {
   let card: Eris;

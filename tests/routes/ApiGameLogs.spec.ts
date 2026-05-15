@@ -62,6 +62,26 @@ describe('ApiGameLogs', () => {
     expect(messages[messages.length - 1].data[0].value).eq('50');
   });
 
+  it('pulls full current generation when explicitly requested', async () => {
+    const player = TestPlayer.BLACK.newPlayer();
+    const game = Game.newInstance('game-id', [player], player);
+    await scaffolding.ctx.gameLoader.add(game);
+
+    game.gameLog.length = 0;
+    game.log('Generation ${0}', (b) => b.forNewGeneration().number(1));
+    for (let i = 0; i < 60; i++) {
+      game.log(`Log ${i}`);
+    }
+
+    scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=1';
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    const messages = JSON.parse(res.content);
+
+    expect(messages).has.length(61);
+    expect(messages[0].message).eq('Generation ${0}');
+    expect(messages[messages.length - 1].message).eq('Log 59');
+  });
+
   it('pulls logs for first generation', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;

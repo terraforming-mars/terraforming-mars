@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('VenusTradeHub', () => {
   let card: VenusTradeHub;

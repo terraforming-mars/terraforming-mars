@@ -187,6 +187,24 @@ describe('Faraday', () => {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
+  it('Play a card that puts two tags at 5 count, buy second after skipping first', () => {
+    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
+
+    player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
+    expectDoNotPayForCard(player, Tag.EARTH);
+    expectPayForCard(player, Tag.SCIENCE);
+  });
+
+  it('Play a card that puts two tags at 5 count, buy both', () => {
+    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
+
+    player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
+    expectPayForCard(player, Tag.EARTH);
+    expectPayForCard(player, Tag.SCIENCE);
+  });
+
   it('Wild tags dont count', () => {
     player.playedCards.push(fakeCard({tags: [Tag.WILD, Tag.WILD]}));
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));

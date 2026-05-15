@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('JovianLanterns', () => {
   let card: JovianLanterns;

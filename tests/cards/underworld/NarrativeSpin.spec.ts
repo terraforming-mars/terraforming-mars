@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {NarrativeSpin} from '../../../src/server/cards/underworld/NarrativeSpin';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('NarrativeSpin', () => {
   it('Should play', () => {

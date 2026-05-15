@@ -34,6 +34,7 @@ export type GameModel = {
   lastSoloGeneration: number,
   milestones: ReadonlyArray<ClaimedMilestoneModel>;
   moon: MoonModel | undefined;
+  name: string;
   oceans: number;
   oxygenLevel: number;
   passedPlayers: ReadonlyArray<Color>;

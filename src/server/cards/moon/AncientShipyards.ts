@@ -33,8 +33,11 @@ export class AncientShipyards extends Card {
     });
   }
 
-  public canAct(): boolean {
-    return true;
+  public canAct(player: IPlayer): boolean {
+    if (player.game.isSoloMode()) {
+      return true;
+    }
+    return player.opponents.every((p) => p.megaCredits >= 2);
   }
 
   public action(player: IPlayer) {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -7,6 +7,7 @@ import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {SelectGlobalEvent} from '../../../src/server/inputs/SelectGlobalEvent';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ExecutiveOrder', () => {
   let card: ExecutiveOrder;

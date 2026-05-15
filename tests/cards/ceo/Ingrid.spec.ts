@@ -2,13 +2,14 @@ import {expect} from 'chai';
 import {Ingrid} from '../../../src/server/cards/ceos/Ingrid';
 import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
-import {addGreenery, addOcean, addCity, forceGenerationEnd, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, addOcean, addCity, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Ingrid', () => {
   let card: Ingrid;

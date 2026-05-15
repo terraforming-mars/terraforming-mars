@@ -3,14 +3,16 @@ import {expect} from 'chai';
 import {CollusionStandardProject} from '../../../src/server/cards/underworld/CollusionStandardProject';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {MultiSet} from 'mnemonist';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CollusionStandardProject', () => {
   let game: IGame;
@@ -64,7 +66,7 @@ describe('CollusionStandardProject', () => {
 
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.UNITY, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);
@@ -85,7 +87,7 @@ describe('CollusionStandardProject', () => {
     player.underworldData.corruption = 1;
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.UNITY, game);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
     runAllActions(game);
 
     const andOptions = cast(player.popWaitingFor(), AndOptions);
@@ -104,8 +106,41 @@ describe('CollusionStandardProject', () => {
     expect(player.popWaitingFor()).is.undefined;
   });
 
-  // The collusion standard project has bit of an issue. You can not send delegate to party with only 1 neutral on it .  Error message pops up and then the neutral delegate gets removed ... but they still have neutral party leader with none in party.
+  it('action - error: only 1 neutral in party but 2 requested', () => {
+    player.underworldData.corruption = 1;
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
 
-  // TODO(kberg): Add more tests.
-  // e.g., tests for entering the wrong number of delegates (only 1 neutral available, or only 1 in your supply.)
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
+    runAllActions(game);
+
+    const andOptions = cast(player.popWaitingFor(), AndOptions);
+    const selectAmount = cast(andOptions.options[0], SelectAmount);
+    const selectParty = cast(andOptions.options[1], SelectParty);
+
+    selectAmount.cb(2);
+    selectParty.cb(PartyName.GREENS);
+    expect(() => andOptions.cb(undefined)).to.throw(/Greens does not have 2 neutral delegates/);
+  });
+
+  it('action - error: player has 1 delegate in reserve but 2 requested', () => {
+    player.underworldData.corruption = 1;
+    // Send enough delegates to leave only 1 in reserve.
+    while (turmoil.getAvailableDelegateCount(player) > 1) {
+      turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    }
+    // Add 2 neutrals so both parties and count are satisfied.
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+
+    card.payAndExecute(player, Payment.of({megacredits: 0}));
+    runAllActions(game);
+
+    const andOptions = cast(player.popWaitingFor(), AndOptions);
+    const selectAmount = cast(andOptions.options[0], SelectAmount);
+    const selectParty = cast(andOptions.options[1], SelectParty);
+
+    selectAmount.cb(2);
+    selectParty.cb(PartyName.GREENS);
+    expect(() => andOptions.cb(undefined)).to.throw(/Player does not have 2 delegates in reserve/);
+  });
 });

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {VoltaicMetallurgy} from '../../../src/server/cards/underworld/VoltaicMetallurgy';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
 describe('VoltaicMetallurgy', () => {

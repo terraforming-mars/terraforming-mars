@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {TropicalResort} from '../../../src/server/cards/base/TropicalResort';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('TropicalResort', () => {
   it('Should play', () => {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {FrontierTown} from '../../../src/server/cards/prelude2/FrontierTown';
 import {testGame} from '../../TestGame';
-import {addOcean, cast, churn, runAllActions, setRulingParty} from '../../TestingUtils';
+import {addOcean, churn, runAllActions, setRulingParty} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -10,6 +10,7 @@ import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('FrontierTown', () => {
   const canPlayRuns = [
@@ -31,18 +32,18 @@ describe('FrontierTown', () => {
 
   it('play', () => {
     const card = new FrontierTown();
-    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {turmoilExtension: true});
 
     player.production.override({energy: 1});
 
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
-    expect(player.production.energy).eq(0);
-
     const space = selectSpace.spaces[0];
     space.bonus = [SpaceBonus.PLANT];
     selectSpace.cb(space);
+    runAllActions(game);
 
+    expect(player.production.energy).eq(0);
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(player.plants).eq(3);
   });
@@ -55,14 +56,14 @@ describe('FrontierTown', () => {
 
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
-    expect(player.production.energy).eq(0);
-
     const space = selectSpace.spaces[0];
     const oceanSpace = game.board.getAdjacentSpaces(space)[0];
     game.simpleAddTile(player, oceanSpace, {tileType: TileType.OCEAN});
     space.bonus = [SpaceBonus.PLANT];
     selectSpace.cb(space);
+    runAllActions(game);
 
+    expect(player.production.energy).eq(0);
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(player.plants).eq(3);
     expect(player.megaCredits).eq(2); // 2, not 6.

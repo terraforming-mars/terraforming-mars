@@ -14,6 +14,7 @@ import {defineComponent} from 'vue';
 export type Points = {
   points: number;
   halfPoints: number;
+  asterisk?: boolean;
 }
 
 export default defineComponent({
@@ -26,9 +27,10 @@ export default defineComponent({
   },
   computed: {
     amount(): string {
+      const asterisk = this.points.asterisk ? '*' : '';
       if (this.points.halfPoints === 2) {
         // This string is particularly good for rendering fractions because it's using a specific fraction slash.
-        return '2⁄2';
+        return `2⁄2${asterisk}`;
       }
 
       const points = this.points.points + (this.points.halfPoints / 2);
@@ -42,7 +44,7 @@ export default defineComponent({
       } else if (Math.abs(fraction - TWO_THIRDS) < Number.EPSILON) {
         vulgarFraction = '⅔';
       }
-      return `${integer || ''}${vulgarFraction}`;
+      return `${integer || ''}${vulgarFraction}${asterisk}`;
     },
     cssClasses(): string {
       if (this.points.halfPoints === 2) {
@@ -53,7 +55,7 @@ export default defineComponent({
         'points-per-tag points-per-tag--S';
     },
     show(): boolean {
-      return this.points.points !== 0 || this.points.halfPoints !== 0;
+      return this.points.points !== 0 || this.points.halfPoints !== 0 || this.points.asterisk === true;
     },
   },
 });

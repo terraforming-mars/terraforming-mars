@@ -5,9 +5,10 @@ import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Cultural Metropolis', () => {
   let card: CulturalMetropolis;

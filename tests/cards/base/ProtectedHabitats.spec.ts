@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {RemoveResourcesFromCard} from '../../../src/server/deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../src/common/CardResource';

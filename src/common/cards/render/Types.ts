@@ -19,8 +19,8 @@ export function isICardRenderRoot(item: ItemType): item is ICardRenderRoot {
 export interface ICardRenderSymbol extends CardComponent {
   type: CardRenderSymbolType;
   size: Size;
-  isIcon: boolean;
-  isSuperscript: boolean;
+  isIcon?: true;
+  isSuperscript?: true;
   readonly is: 'symbol';
 }
 
@@ -30,8 +30,8 @@ export function isICardRenderSymbol(item: ItemType): item is ICardRenderSymbol {
 
 export interface ICardRenderTile extends CardComponent {
   tile: TileType;
-  hasSymbol: boolean;
-  isAres: boolean;
+  hasSymbol?: true;
+  isAres?: true;
   readonly is: 'tile';
 }
 
@@ -93,17 +93,17 @@ export interface ICardRenderItem extends CardComponent {
   /** activated for any player */
   anyPlayer?: boolean;
   /** render a digit instead of chain of items */
-  showDigit?: boolean;
+  showDigit?: true;
   /** show the amount for the item in its container */
-  amountInside?: boolean;
+  amountInside?: true;
   /** used text instead of integers in some cases */
   text?: string;
   /** used inside MC typically */
   innerText?: string;
   /** for uppercase text */
-  isUppercase?: boolean;
+  isUppercase?: true;
   /** for bold text */
-  isBold?: boolean;
+  isBold?: true;
   /** used to mark plate a.k.a. text with golden background */
   isPlate?: boolean;
   /** Size of the item. Very much depends on the CSS rendered for this item. */
@@ -113,13 +113,13 @@ export interface ICardRenderItem extends CardComponent {
   /** places the pathfinder Clone symbol in the object */
   clone?: boolean;
   /** add a symbol on top of the item to show it's cancelled or negated in some way (usually X) */
-  cancelled?: boolean;
+  cancelled?: true;
   /** over is used for rendering under TR for global events. */
-  over?: number
+  over?: number;
   /** Used for unknown values (currently just megacredits, fwiw) */
   questionMark?: boolean;
   /** When true show the item in superscript */
-  isSuperscript?: boolean;
+  isSuperscript?: true;
   /** Has a value when type is CardRenderItemType.RESOURCE. Renders a card resource */
   resource?: CardResource;
   /** Has a value when type is CardRenderItemType.TAG. Renders a tag */

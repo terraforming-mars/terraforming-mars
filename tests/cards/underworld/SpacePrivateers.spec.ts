@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {SpacePrivateers} from '../../../src/server/cards/underworld/SpacePrivateers';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 import {Tag} from '../../../src/common/cards/Tag';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SpacePrivateers', () => {
   it('canPlay', () => {

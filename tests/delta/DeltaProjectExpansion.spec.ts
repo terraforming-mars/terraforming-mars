@@ -5,7 +5,7 @@ import {testGame} from '../TestGame';
 import {DeltaProjectExpansion} from '../../src/server/delta/DeltaProjectExpansion';
 import {DeltaProjectPrelude} from '../../src/server/delta/DeltaProjectPrelude';
 import {Tag} from '../../src/common/cards/Tag';
-import {cast, fakeCard, runAllActions} from '../TestingUtils';
+import {fakeCard, runAllActions} from '../TestingUtils';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {DeltaProjectInput} from '../../src/server/delta/DeltaProjectInput';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
@@ -20,6 +20,7 @@ import {DeltaProjectData} from '../../src/server/delta/DeltaProjectData';
 import {Color} from '../../src/common/Color';
 import {Game} from '../../src/server/Game';
 import {sanitizeCustomPreludes} from '../../src/server/game/GameOptions';
+import {cast} from '@/common/utils/utils';
 
 function progress(data: DeltaProjectData, color: Color) {
   return data.players.get(color)!;

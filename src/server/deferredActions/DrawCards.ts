@@ -51,7 +51,7 @@ export class DrawCards extends DeferredAction<ReadonlyArray<IProjectCard>> {
 
   public static keepAll(player: IPlayer, count: number = 1, options?: DrawOptions): DrawCards {
     return new DrawCards(player, count, options).andThen((cards) => {
-      let verbosity = LogType.DREW;
+      let verbosity: LogType = LogType.DREW;
       if (options !== undefined) {
         if (options.tag !== undefined ||
           options.resource !== undefined ||

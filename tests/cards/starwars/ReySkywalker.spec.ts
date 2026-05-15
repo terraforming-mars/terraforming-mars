@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {ReySkywalker} from '../../../src/server/cards/starwars/ReySkywalker';
 import {testGame} from '../../TestGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {intersection} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ReySkywalker', () => {
   it('Play', () => {

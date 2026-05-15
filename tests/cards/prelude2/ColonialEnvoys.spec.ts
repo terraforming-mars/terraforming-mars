@@ -3,11 +3,12 @@ import {ColonialEnvoys} from '../../../src/server/cards/prelude2/ColonialEnvoys'
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {cast, runAllActions, testGame, setRulingParty} from '../../TestingUtils';
+import {runAllActions, testGame, setRulingParty} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Ganymede} from '../../../src/server/colonies/Ganymede';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ColonialEnvoys', () => {
   let card: ColonialEnvoys;

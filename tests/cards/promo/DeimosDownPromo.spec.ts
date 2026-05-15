@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {addCity, cast, runAllActions} from '../../TestingUtils';
+import {addCity, runAllActions} from '../../TestingUtils';
 import {DeimosDownPromo} from '../../../src/server/cards/promo/DeimosDownPromo';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -7,6 +7,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {KingdomofTauraro} from '../../../src/server/cards/underworld/KingdomofTauraro';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('DeimosDownPromo', () => {
   let card: DeimosDownPromo;

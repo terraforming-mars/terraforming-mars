@@ -7,5 +7,4 @@ export interface SerializedMoonData {
   miningRate: number;
   logisticRate: number;
   lunaFirstPlayerId: PlayerId | undefined;
-  lunaProjectOfficeLastGeneration: number | undefined;
 }

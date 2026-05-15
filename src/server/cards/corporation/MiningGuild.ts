@@ -27,7 +27,6 @@ export class MiningGuild extends CorporationCard implements ICorporationCard {
 
       metadata: {
         cardNumber: 'R24',
-        hasExternalHelp: true,
         description: 'You start with 30 M€, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
@@ -49,6 +48,10 @@ export class MiningGuild extends CorporationCard implements ICorporationCard {
       return;
     }
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
+    // Don't grant a bonus for Mars Nomads (no tile actually placed)
+    if (cardOwner.game.nomadSpace === space.id && space.tile === undefined) {
       return;
     }
     // Don't grant a bonus if the card is overplaced (like Ares Ocean City)

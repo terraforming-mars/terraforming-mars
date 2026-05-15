@@ -3,7 +3,7 @@ import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('MediaGroup', () => {
   it('Should play', () => {

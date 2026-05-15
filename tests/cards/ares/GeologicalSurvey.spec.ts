@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey';
+import {GreatAquifer} from '../../../src/server/cards/prelude/GreatAquifer';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
@@ -8,7 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../testing/EmptyBoard';
-import {addGreenery, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addGreenery, setRulingParty, runAllActions, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -16,6 +17,7 @@ import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MAX_TEMPERATURE, MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
@@ -166,6 +168,32 @@ describe('GeologicalSurvey', () => {
     expect(player.heat).eq(0);
   });
 
+  it('Compatible with GreatAquifer', () => {
+    // When placing two oceans, GeologicalSurvey's behavior was rewarded
+    // after placing the second ocean. This test shows that the GS reward
+    // is given before the second ocean.
+    player.playedCards.push(card);
+    player.titanium = 0;
+
+    // Set up a couple of oceans (board at definition is an empty board.)
+    for (const space of game.board.getSpaces(SpaceType.LAND).slice(0, 2)) {
+      space.spaceType = SpaceType.OCEAN;
+      space.bonus = [SpaceBonus.TITANIUM];
+    }
+
+    // GreatAquifer has behavior: {ocean: {count: 2}}.
+    const greatAquifer = new GreatAquifer();
+    greatAquifer.play(player);
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+
+    runAllActions(game);
+
+    expect(player.titanium).eq(2); // 1 from space bonus + 1 from GeologicalSurvey
+    cast(player.popWaitingFor(), SelectSpace);
+  });
 
   it('Works during final greenery placement', () => {
     const [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: false});

@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {HenkeiGenetics} from '../../../src/server/cards/underworld/HenkeiGenetics';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Tag} from '../../../src/common/cards/Tag';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HenkeiGenetics', () => {
   let card: HenkeiGenetics;

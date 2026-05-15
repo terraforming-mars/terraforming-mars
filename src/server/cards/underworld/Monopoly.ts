@@ -32,7 +32,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
           b.text('STEAL').wild(2, {all}).asterix().br;
         }),
         description: 'Requires 2 corruption. Choose a standard resource type. ' +
-          'Steal 2 units of that resource from EACH OTHER player.',
+          'Steal up to 2 units of that resource from EACH OTHER player.',
       },
     });
   }
@@ -55,8 +55,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
     return new SelectResource(
       'Select which resource type to steal 2 units from all other players.',
       this.stealableResources(player))
-      .andThen((unitKey) => {
-        const resource = Units.ResourceMap[unitKey];
+      .andThen((resource) => {
         if (player.game.isSoloMode()) {
           player.stock.add(resource, 2, {log: true});
           player.resolveInsuranceInSoloGame();

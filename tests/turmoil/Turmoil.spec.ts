@@ -7,7 +7,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Delegate, Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
+import {maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/server/turmoil/parties/Reds';
 import {Greens} from '../../src/server/turmoil/parties/Greens';
@@ -37,6 +37,8 @@ import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
 import {testGame} from '../TestGame';
 import {MultiSet} from 'mnemonist';
+import {TowingAComet} from '../../src/server/cards/base/TowingAComet';
+import {cast} from '@/common/utils/utils';
 
 describe('Turmoil', () => {
   let player: TestPlayer;
@@ -201,8 +203,8 @@ describe('Turmoil', () => {
     const standardProjects = player.getStandardProjectOption();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(standardProjects.config.enabled![0]).to.eq(true);
-    expect(standardProjects.config.enabled!.slice(1)).to.not.contain(true);
+    expect(standardProjects.enabled![0]).to.eq(true);
+    expect(standardProjects.enabled!.slice(1)).to.not.contain(true);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', () => {
@@ -430,7 +432,30 @@ describe('Turmoil', () => {
     expect(player.canPlay(card)).is.true;
   });
 
-  // TODO(kberg): Use Towing a Comet as an example of a multi-TR thing.
+  it('canPlay: reds tax applies for multi-TR card', () => {
+    // TowingAComet raises oxygen 1 step AND places 1 ocean, each costing 3 M€ reds tax.
+    const card = new TowingAComet();
+    const [game, player] = testGame(1, {turmoilExtension: true});
+    const turmoil = Turmoil.getTurmoil(game);
+    game.phase = Phase.ACTION;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+
+    player.megaCredits = card.cost + 5;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 6;
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
+
+    // When oxygen is already maxed, only the ocean costs reds.
+    setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
+    player.megaCredits = card.cost + 2;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
+  });
 
   it('canPlay: reds tax applies by default when raising the venus scale.', () => {
     // GiantSolarShade raises venus three steps.

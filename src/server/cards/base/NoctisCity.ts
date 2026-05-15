@@ -7,6 +7,9 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
+import {LoseProduction} from '../../deferredActions/LoseProduction';
+import {Resource} from '../../../common/Resource';
+import {MarsBoard} from '../../boards/MarsBoard';
 
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +20,7 @@ export class NoctisCity extends Card implements IProjectCard {
       cost: 18,
 
       behavior: {
-        production: {energy: -1, megacredits: 3},
+        production: {megacredits: 3},
       },
 
       metadata: {
@@ -34,23 +37,34 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.game.board.noctisCitySpaceId !== undefined) {
-      return true;
-    } else {
-      return player.game.board.getAvailableSpacesForCity(player).length > 0;
+    const noctisCitySpaceId = player.game.board.noctisCitySpaceId;
+    if (noctisCitySpaceId !== undefined) {
+      // Noctis reserved space has no energy production bonus; player must already have >= 1.
+      return player.production.energy >= 1;
     }
+    const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
+    if (availableSpaces.length === 0) {
+      return false;
+    }
+    return MarsBoard.hasEnergyCoverage(player, availableSpaces);
   }
+
   public override bespokePlay(player: IPlayer) {
     const noctisCitySpaceId = player.game.board.noctisCitySpaceId;
     if (noctisCitySpaceId !== undefined) {
       const space = player.game.board.getSpaceOrThrow(noctisCitySpaceId);
       player.game.addCity(player, space);
+      player.production.add(Resource.ENERGY, -1, {log: true});
     } else {
+      const spaces = MarsBoard.filterForEnergy(player, player.game.board.getAvailableSpacesForCity(player));
       player.game.defer(
         new PlaceCityTile(player, {
           title: message('Select space for ${0}', (b) => b.card(this)),
+          spaces,
         }),
-      );
+      ).andThen(() => {
+        player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
+      });
     }
     return undefined;
   }

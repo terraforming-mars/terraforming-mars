@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {addGreenery, addCity, cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {addGreenery, addCity, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
@@ -10,6 +10,7 @@ import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Networker} from '../../../src/server/milestones/Networker';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Gaia', () => {
   let card: Gaia;

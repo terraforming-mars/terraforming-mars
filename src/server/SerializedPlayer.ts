@@ -24,6 +24,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   cardCost: number;
   cardDiscount: number;
   cardsInHand: Array<CardName>;
+  ceoCardsInHand: Array<CardName>;
   colonyTradeDiscount: number;
   colonyTradeOffset: number;
   colonyVictoryPoints: number;
@@ -46,7 +47,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   id: PlayerId;
   jovianTagCount: number;
   lastCardPlayed?: CardName;
-  ceoCardsInHand: Array<CardName>;
   megaCreditProduction: number;
   megaCredits: number;
   name: string;
@@ -80,5 +80,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   user?: DiscordId;
+  warmongerCards: number;
   withinDeflectionZone: boolean;
 }

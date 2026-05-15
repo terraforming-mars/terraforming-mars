@@ -16,7 +16,6 @@ export class RoboticWorkforce extends RoboticWorkforceBase {
       cost: 9,
       metadata: {
         cardNumber: '086',
-        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.text('Copy A', Size.SMALL, true).nbsp;
           b.production((pb) => pb.tag(Tag.BUILDING));

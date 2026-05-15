@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
-import {cast, setRulingParty} from '../../TestingUtils';
+import {setRulingParty, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resource} from '../../../src/common/Resource';
@@ -11,6 +11,8 @@ import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {MAX_TEMPERATURE} from '../../../src/common/constants';
+import {cast} from '@/common/utils/utils';
 
 describe('Kelvinists', () => {
   let player: TestPlayer;
@@ -58,14 +60,13 @@ describe('Kelvinists', () => {
   it('Ruling policy 3: Convert 6 heat into temperature', () => {
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_3.id);
 
-    const kelvinistsPolicy = KELVINISTS_POLICY_3;
-    expect(kelvinistsPolicy.canAct(player)).to.be.false;
+    expect(KELVINISTS_POLICY_3.canAct(player)).is.false;
 
     player.stock.add(Resource.HEAT, 6);
-    expect(kelvinistsPolicy.canAct(player)).to.be.true;
+    expect(KELVINISTS_POLICY_3.canAct(player)).is.true;
 
     const initialTR = player.terraformRating;
-    kelvinistsPolicy.action(player);
+    KELVINISTS_POLICY_3.action(player).cb(undefined);
     expect(player.heat).to.eq(0);
     expect(player.terraformRating).to.eq(initialTR + 1);
     expect(game.getTemperature()).to.eq(-28);
@@ -79,10 +80,9 @@ describe('Kelvinists', () => {
     stormcraft.resourceCount = 2;
     player.stock.add(Resource.HEAT, 8);
 
-    const kelvinistsPolicy = KELVINISTS_POLICY_3;
-    expect(kelvinistsPolicy.canAct(player)).to.be.true;
+    expect(KELVINISTS_POLICY_3.canAct(player)).is.true;
 
-    const action = kelvinistsPolicy.action(player) as AndOptions;
+    const action = cast(KELVINISTS_POLICY_3.action(player).cb(undefined), AndOptions);
     const heatOption = cast(action.options[0], SelectAmount);
     const floaterOption = cast(action.options[1], SelectAmount);
 
@@ -92,7 +92,17 @@ describe('Kelvinists', () => {
 
     expect(player.heat).to.eq(4);
     expect(stormcraft.resourceCount).to.eq(1);
-    expect(kelvinistsPolicy.canAct(player)).to.be.true;
+    expect(KELVINISTS_POLICY_3.canAct(player)).is.true;
+  });
+
+  it('Ruling policy 3: option carries maxtemp warning at MAX_TEMPERATURE', () => {
+    setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_3.id);
+    player.stock.add(Resource.HEAT, 10);
+    setTemperature(game, MAX_TEMPERATURE);
+
+    const option = KELVINISTS_POLICY_3.action(player);
+    expect(option.warnings).to.deep.eq(['maxtemp']);
+    expect(option.eligibleForDefault).is.false;
   });
 
   it('Ruling policy 4: When you place a tile, gain 2 heat', () => {

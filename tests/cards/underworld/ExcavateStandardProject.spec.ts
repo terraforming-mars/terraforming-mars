@@ -2,11 +2,13 @@ import {expect} from 'chai';
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ExcavateStandardProject', () => {
   let game: IGame;
@@ -50,7 +52,7 @@ describe('ExcavateStandardProject', () => {
   it('action', () => {
     player.megaCredits = 7;
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {L1TradeTerminal} from '../../../src/server/cards/prelude2/L1TradeTerminal';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -9,6 +9,7 @@ import {cardsFromJSON} from '../../../src/server/createCard';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
 import {toName, zip} from '../../../src/common/utils/utils';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('L1TradeTerminal', () => {
   let card: L1TradeTerminal;

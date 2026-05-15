@@ -32,7 +32,7 @@ export class VastitasBorealisNovaBoard extends MarsBoard {
     // y=3
     builder.volcanic(STEEL, STEEL).land(TITANIUM).ocean(PLANT, PLANT).land(PLANT).land().land(DRAW_CARD).land(PLANT).land(DELEGATE);
     // y=4
-    builder.land().land().ocean(PLANT).land(PLANT, PLANT).land(TEMPERATURE).ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(DRAW_CARD, DRAW_CARD);
+    builder.land().land().ocean(PLANT).land(PLANT, PLANT).land(TEMPERATURE).doNotShuffleLastSpace().ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(DRAW_CARD, DRAW_CARD);
     // y=5
     builder.land(DRAW_CARD, DRAW_CARD).land().land(PLANT).ocean(HEAT, HEAT).ocean(HEAT, HEAT, PLANT).ocean(DRAW_CARD).land(PLANT).land(TITANIUM, TITANIUM);
     // y=6

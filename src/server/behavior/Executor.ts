@@ -410,7 +410,7 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))
             .andThen((unit) => {
-              player.stock.add(Units.ResourceMap[unit], count, {log: true});
+              player.stock.add(unit, count, {log: true});
               return undefined;
             }));
       }
@@ -447,9 +447,15 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.global !== undefined) {
       const g = behavior.global;
-      if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
-      if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
-      if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
+      if (g.temperature !== undefined) {
+        player.game.increaseTemperature(player, g.temperature);
+      }
+      if (g.oxygen !== undefined) {
+        player.game.increaseOxygenLevel(player, g.oxygen);
+      }
+      if (g.venus !== undefined) {
+        player.game.increaseVenusScaleLevel(player, g.venus);
+      }
     }
 
     if (behavior.tr !== undefined) {
@@ -463,7 +469,7 @@ export class Executor implements BehaviorExecutor {
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
-      if (player.game.inDoubleDown) {
+      if (player.game.inDoubleDown && player.game.doubleDownPrelude === card.name) {
         player.game.log('Resources from ${0} cannot be added to ${1}', (b) => b.card(card).cardName(CardName.DOUBLE_DOWN));
       } else {
         const count = ctx.count(addResources);
@@ -608,9 +614,15 @@ export class Executor implements BehaviorExecutor {
           player.game.defer(new PlaceSpecialMoonTile(player, {tileType: moon.tile.type, card: card?.name}));
         }
       }
-      if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
-      if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
-      if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+      if (moon.habitatRate !== undefined) {
+        MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
+      }
+      if (moon.miningRate !== undefined) {
+        MoonExpansion.raiseMiningRate(player, moon.miningRate);
+      }
+      if (moon.logisticsRate !== undefined) {
+        MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+      }
     }
 
     if (behavior.underworld !== undefined) {

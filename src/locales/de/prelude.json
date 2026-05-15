@@ -118,6 +118,10 @@
   "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "Erhalte 2 M€ für jede Projektkarte auf deiner Hand.",
   "IMMEDIATELY TAKE 2 ACTIONS.": "Führe sofort 2 Aktionen aus.",
 
+  "Established Methods": "Bewährte Methoden",
+  "Gain 30 M€. Then pay for and perform 2 standard projects.": "Erhalte 30 M€. Finanziere und realisiere anschließend zwei Standardprojekte.",
+  "NOTE: If you cannot afford a second standard project, spend 10 M€ instead, or as much as possible.": "HINWEIS: Wenn du dir kein zweites Standardprojekt leisten kannst, gebe stattdessen 10 M€ aus – oder so viel wie möglich.",
+
   "Merger": "Zusammenschluss",
   "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Ziehe 4 Konzernkarten. Spiele 1 davon und wirf die anderen 3 ab. Zahle dann 42 M€.",
 
@@ -230,7 +234,5 @@
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
 
   "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
-  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen",
-  "Add resource": "Ressource hinzufügen",
-  "Gain plant": "Pflanze erhalten"
+  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen"
 }

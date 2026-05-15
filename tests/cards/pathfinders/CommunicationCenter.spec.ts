@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -12,6 +12,7 @@ import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CommunicationCenter', () => {
   let card: CommunicationCenter;
@@ -152,6 +153,29 @@ describe('CommunicationCenter', () => {
 
     expect(player.cardsInHand).has.length(0);
     expect(card.resourceCount).eq(1);
+  });
+
+  describe('Pathfinders Mars track offset', () => {
+    it('canPlay false when Mars track advance would not grant energy production', () => {
+      game.pathfindersData!.mars = 0;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.false;
+    });
+
+    it('canPlay true when Mars track advance lands on energy_production reward', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.true;
+    });
+
+    it('playing the card nets zero change to energy production', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      player.playCard(card);
+      runAllActions(game);
+      expect(player.production.energy).eq(0);
+      expect(card.resourceCount).eq(2);
+    });
   });
 
   it('Can be targeted by Solar Storm after adding a resource for playing the event', () => {

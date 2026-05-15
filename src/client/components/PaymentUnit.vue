@@ -14,13 +14,13 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
 export default defineComponent({
   name: 'PaymentUnitComponent',
   props: {
+    // TODO(kberg): Rename to count.
     modelValue: {
       type: Number,
       required: true,
@@ -42,9 +42,6 @@ export default defineComponent({
   components: {
     AppButton,
   },
-  methods: {
-    ...PaymentWidgetMixin.methods,
-  },
   computed: {
     iconClass(): string {
       switch (this.unit) {
@@ -53,7 +50,6 @@ export default defineComponent({
       case 'spireScience': return 'resource_icon--science';
       case 'auroraiData': return 'resource_icon--auroraidata';
       case 'seeds': return 'resource_icon--seed';
-      case 'megaCredits': return 'resource_icon--megacredits';
       default: return 'resource_icon--' + this.unit;
       }
     },

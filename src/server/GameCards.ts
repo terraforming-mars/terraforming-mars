@@ -18,6 +18,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {isIProjectCard, IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {newCard} from './createCard';
+import {resolveCardName} from '../common/cards/CardRenames';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
@@ -117,7 +118,8 @@ export class GameCards {
    */
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: ReadonlyArray<CardName> = []): void {
     for (const cardName of customList) {
-      if (cards.findIndex((c) => c.name === cardName) > -1) {
+      const canonicalName = resolveCardName(cardName);
+      if (cards.findIndex((c) => c.name === canonicalName) > -1) {
         continue;
       }
       const card = newCard(cardName);
@@ -149,7 +151,9 @@ export class GameCards {
   private filterReplacedCards<T extends ICard>(cards: Array<T>): Array<T> {
     return cards.filter((card) => {
       for (const manifest of this.moduleManifests) {
-        if (manifest.cardsToRemove.has(card.name)) return false;
+        if (manifest.cardsToRemove.has(card.name)) {
+          return false;
+        }
       }
       return true;
     });

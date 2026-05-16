@@ -3,10 +3,9 @@
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <template v-for="unit of SPENDABLE_RESOURCES">
+    <template v-for="unit of SPENDABLE_RESOURCES" :key="unit">
       <payment-unit-component
         v-model.number="payment[unit]"
-        v-bind:key="unit"
         v-if="canUse(unit) === true"
         :unit="unit"
         :description="descriptions[unit]"
@@ -14,7 +13,7 @@
         @minus="reduceValue(unit)"
         @max="onMaxClicked(unit)">
       </payment-unit-component>
-      <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)" v-bind:key="unit + '-reserve'">
+      <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
         (Some ${0} are reserved for the action and unavailable here.)
       </div>
 

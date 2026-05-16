@@ -10,8 +10,8 @@
     </div>
 
     <sidebar v-trim-whitespace
-      :acting_player="isPlayerActing(playerView)"
-      :player_color="thisPlayer.color"
+      :actingPlayer="isPlayerActing(playerView)"
+      :playerColor="thisPlayer.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
       :temperature = "game.temperature"

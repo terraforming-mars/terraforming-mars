@@ -1,8 +1,8 @@
 <template>
   <div id="spectator-home">
     <sidebar v-trim-whitespace
-      :acting_player="false"
-      :player_color="spectator.color"
+      :actingPlayer="false"
+      :playerColor="spectator.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
       :temperature = "game.temperature"

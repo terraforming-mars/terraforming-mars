@@ -43,6 +43,7 @@ export default defineComponent({
     },
     showWhenZero: {
       // When true, show even if the value is zero.
+      type: Boolean,
       required: false,
       default: false,
     },

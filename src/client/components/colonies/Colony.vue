@@ -17,14 +17,14 @@
     <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colony.type === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colony.resource !== Resource.MEGACREDITS">
-          <div v-for="n in metadata.colony.quantity" :key=n class="resource" :class="metadata.colony.resource"></div>
+          <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="metadata.colony.resource"></div>
         </template>
         <template v-else>
           <div class="resource" :class="metadata.colony.resource">{{metadata.colony.quantity}}</div>
         </template>
       </template>
        <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
-        <div v-for="n in metadata.colony.quantity" :key=n class="resource" :class="colonyResourceClass"></div>
+        <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="colonyResourceClass"></div>
       </template>
       <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)" ></div>
 

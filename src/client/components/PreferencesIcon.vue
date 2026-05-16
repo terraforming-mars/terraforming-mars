@@ -14,7 +14,7 @@ import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
 export default defineComponent({
   name: 'PreferencesIcon',
   components: {
-    'preferences-dialog': PreferencesDialog,
+    PreferencesDialog,
   },
   data() {
     return {

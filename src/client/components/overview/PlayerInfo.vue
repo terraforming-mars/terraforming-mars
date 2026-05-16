@@ -94,7 +94,7 @@ export default defineComponent({
     PlayerResources,
     PlayerTags,
     PlayerAlliedParty,
-    'player-status': PlayerStatus,
+    PlayerStatus,
   },
   computed: {
     tooltipCss(): string {

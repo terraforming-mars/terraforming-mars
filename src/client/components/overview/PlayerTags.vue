@@ -233,7 +233,7 @@ export default defineComponent({
   },
 
   components: {
-    'tag-count': TagCount,
+    TagCount,
     PlayerTagDiscount,
     PointsPerTag,
   },

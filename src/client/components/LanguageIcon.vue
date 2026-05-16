@@ -21,7 +21,7 @@ import {LANGUAGES} from '@/common/constants';
 export default defineComponent({
   name: 'LanguageIcon',
   components: {
-    'language-selection-dialog': LanguageSelectionDialog,
+    LanguageSelectionDialog,
   },
   data() {
     return {

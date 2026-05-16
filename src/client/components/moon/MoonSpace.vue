@@ -43,7 +43,7 @@ export default defineComponent({
   },
   components: {
     Bonus,
-    'board-space-tile': BoardSpaceTile,
+    BoardSpaceTile,
   },
   computed: {
     mainClass(): string {

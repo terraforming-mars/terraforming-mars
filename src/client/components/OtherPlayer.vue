@@ -60,7 +60,7 @@ export default defineComponent({
   },
   components: {
     AppButton,
-    'stacked-cards': StackedCards,
+    StackedCards,
     Card,
   },
   methods: {

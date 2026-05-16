@@ -5,7 +5,7 @@
       :class="`language-icon language-icon--${lang} language-icon-for-switcher`"
       :title="title(lang)"
       @click="switchLanguageTo(lang)"
-    />
+    ></div>
     &nbsp;
     </template>
   </div>

@@ -12,37 +12,37 @@
       </dialog>
     </section>
     <div class="main-container">
-      <start-screen v-if="screen === 'start-screen'"></start-screen>
+      <start-screen v-if="screen === 'start-screen'"/>
       <create-game-form
         v-else-if="screen === 'create-game-form'"
-      ></create-game-form>
-      <load-game-form v-else-if="screen === 'load'"></load-game-form>
+      />
+      <load-game-form v-else-if="screen === 'load'"/>
       <game-home
         v-else-if="screen === 'game-home' && game !== undefined"
         :game="game"
-      ></game-home>
+      />
       <player-home
         v-else-if="screen === 'player-home' && playerView !== undefined"
         :player-view="playerView"
         :key="playerkey"
-      ></player-home>
+      />
       <spectator-home
         v-else-if="screen === 'spectator-home' && spectator !== undefined"
         :spectator="spectator"
         :key="'spectator-' + playerkey"
-      ></spectator-home>
+      />
       <game-end
         v-else-if="screen === 'the-end'"
         :player-view="playerView"
         :spectator="spectator"
-      ></game-end>
+      />
       <games-overview
         v-else-if="screen === 'games-overview'"
-      ></games-overview>
-      <card-list v-else-if="screen === 'cards'"></card-list>
-      <admin-home v-else-if="screen === 'admin'"></admin-home>
-      <login-home v-else-if="screen === 'login-home'"></login-home>
-      <Help v-else-if="screen === 'help'"></Help>
+      />
+      <card-list v-else-if="screen === 'cards'"/>
+      <admin-home v-else-if="screen === 'admin'"/>
+      <login-home v-else-if="screen === 'login-home'"/>
+      <Help v-else-if="screen === 'help'"/>
     </div>
     <div class="notice" v-i18n>
       Not affiliated with FryxGames, Asmodee Digital or Steam in any way.

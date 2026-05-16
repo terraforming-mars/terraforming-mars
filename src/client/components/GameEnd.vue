@@ -7,7 +7,7 @@
                   <div class="game_end_success">
                       <h2 v-i18n>You win!</h2>
                       <div class="game_end_solo_img">
-                          <img src="assets/solo_win.png" />
+                          <img src="assets/solo_win.png" >
                       </div>
                       <div class="game_end_notice">
                         <span v-i18n>But it isn't the reason to stop making Mars better.</span>
@@ -102,14 +102,14 @@
                       </tr>
                   </tbody>
               </table>
-              <br/>
+              <br>
               <h2 v-i18n>Victory points details</h2>
               <victory-point-chart
                 :datasets="vpDataset"
                 :generation="game.generation"
                 :animation="true"
                 :id="'victory-point-chart'"
-                ></victory-point-chart>
+                />
               <div class="game-end-flexrow">
                   <div v-for="p in playersInPlace" :key="p.color" class="game-end-column">
                       <div class="game-end-winer-scorebreak-player-title">
@@ -185,7 +185,7 @@
                 :animation="true"
                 :id="'global-parameter-chart'"
                 :yAxisLabel="'% completed'"
-              ></victory-point-chart>
+              />
               <h2 v-i18n>Final situation on the board</h2>
               <board
                   :spaces="game.spaces"
@@ -195,15 +195,15 @@
                   :boardName ="game.gameOptions.boardName"
                   :oceans_count="game.oceans"
                   :oxygen_level="game.oxygenLevel"
-                  :temperature="game.temperature"></board>
-            <MoonBoard v-if="game.moon !== undefined" :model="game.moon"></MoonBoard>
+                  :temperature="game.temperature"/>
+            <MoonBoard v-if="game.moon !== undefined" :model="game.moon"/>
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
-            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"></DeltaProjectBoard>
+            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
           </div>
           <div class="game_end_block--log game-end-column">
-            <log-panel :color="color" :viewModel="viewModel"></log-panel>
+            <log-panel :color="color" :viewModel="viewModel"/>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>

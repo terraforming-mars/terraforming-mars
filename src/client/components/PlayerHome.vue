@@ -24,8 +24,7 @@
       :playerNumber = "playerView.players.length"
       :lastSoloGeneration = "game.lastSoloGeneration"
       :deckSize = "game.deckSize"
-      :discardPileSize = "game.discardPileSize">
-    </sidebar>
+      :discardPileSize = "game.discardPileSize"/>
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
@@ -42,14 +41,14 @@
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
-        <log-panel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"></log-panel>
+        <log-panel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"/>
       </div>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
         <dynamic-title title="Actions" :color="thisPlayer.color"/>
-        <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
+        <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"/>
       </div>
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
@@ -104,9 +103,9 @@
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
-        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).filter(isNotActive)" ></stacked-cards>
+        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).filter(isNotActive)" />
 
-        <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" ></stacked-cards>
+        <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" />
 
       </div>
 
@@ -122,7 +121,7 @@
 
     <div v-if="thisPlayer.underworldData.tokens.length > 0">
       <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
-      <underground-tokens :underworldData="thisPlayer.underworldData"></underground-tokens>
+      <underground-tokens :underworldData="thisPlayer.underworldData"/>
     </div>
 
     <PlayerSetupView
@@ -141,15 +140,15 @@
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
-          <colony :colony="colony" :active="colony.isActive"></colony>
+          <colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
     </div>
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
-    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"></KeyboardShortcuts>
+    <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"/>
+    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="wf-component wf-component--select-option">
     <div v-if="showtitle === true" class="wf-component-title">{{ $t(playerinput.title) }}</div>
-    <warnings-component :warnings="playerinput.warnings"></warnings-component>
+    <warnings-component :warnings="playerinput.warnings"/>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
 </template>

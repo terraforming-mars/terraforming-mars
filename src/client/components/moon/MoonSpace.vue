@@ -4,7 +4,7 @@
       :space="space"
       :aresExtension="false"
       :tileView="tileView"
-    ></board-space-tile>
+    />
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
     <template v-if="tileView === 'coords'">

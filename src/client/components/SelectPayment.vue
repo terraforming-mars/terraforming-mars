@@ -11,8 +11,7 @@
         :description="descriptions[unit]"
         @plus="addValue(unit)"
         @minus="reduceValue(unit)"
-        @max="onMaxClicked(unit)">
-      </payment-unit-component>
+        @max="onMaxClicked(unit)"/>
       <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
         (Some ${0} are reserved for the action and unavailable here.)
       </div>

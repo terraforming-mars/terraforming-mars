@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="free-floating-preferences-icon">
-    <preferences-icon></preferences-icon>
+    <preferences-icon/>
   </div>
 </div>
 </template>

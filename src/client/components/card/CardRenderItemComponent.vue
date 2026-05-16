@@ -1,7 +1,7 @@
 <template>
   <div class="card-item-container">
     <div class="card-res-amount" v-if="item.showDigit">{{ amountAbs }}</div>
-    <div :class="componentClasses" v-for="index in itemsToShow" v-html="itemHtmlContent" :key="index"/>
+    <div :class="componentClasses" v-for="index in itemsToShow" v-html="itemHtmlContent" :key="index"></div>
     <div class="card-over" v-if="item.over !== undefined">over {{item.over}}</div>
   </div>
 </template>

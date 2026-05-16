@@ -15,7 +15,7 @@
         </div>
         <div class="cards-filter-input">
             <div>
-                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" />
+                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" >
             </div>
             <div class="cards-filter-suggest" v-if="searchMatches.length">
                 <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" :key="cardName">

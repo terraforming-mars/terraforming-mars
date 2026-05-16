@@ -105,6 +105,12 @@ const pluginRules = {
   'vue/v-on-style': ['error', 'shorthand'],
   'vue/v-bind-style': ['error', 'shorthand'],
   'vue/v-slot-style': ['error', 'shorthand'],
+  // B6 — components with no content should self-close. HTML elements left alone.
+  'vue/html-self-closing': ['error', {
+    html: {void: 'never', normal: 'never', component: 'always'},
+    svg: 'always',
+    math: 'always',
+  }],
 };
 
 const sharedLanguageOptions = {

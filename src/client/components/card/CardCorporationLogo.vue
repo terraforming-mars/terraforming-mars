@@ -440,11 +440,11 @@
               </g>
             </svg>
           </div>
-          <div class="kingdom-of-tauraro-title">Kingdom of<br/>Tauraro</div>
+          <div class="kingdom-of-tauraro-title">Kingdom of<br>Tauraro</div>
         </div>
       </template>
       <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
-        <div class="card-kuiper-logo">Kuiper<br />Cooperative</div>
+        <div class="card-kuiper-logo">Kuiper<br >Cooperative</div>
       </template>
       <template v-else-if="title === CardName.LAKEFRONT_RESORTS">
         <div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>
@@ -479,7 +479,7 @@
         <div class="card-palladin-shipping-logo"></div>
       </template>
       <template v-else-if="title === CardName.PHARMACY_UNION">
-        <div class="card-pharmacy-union-logo">Pharmacy<br />Union</div>
+        <div class="card-pharmacy-union-logo">Pharmacy<br >Union</div>
       </template>
       <template v-else-if="title === CardName.PHILARES">
         <div class="card-philares-logo">PHIL<span style="color:#ff5858">A</span>RES</div>
@@ -492,7 +492,7 @@
         <div class="card-poldertech-2-logo">Dutch</div>
       </template>
       <template v-else-if="title === CardName.PROJECT_WORKSHOP">
-        <div class="card-project-workshop-logo">PROJECT<br />WORKSHOP</div>
+        <div class="card-project-workshop-logo">PROJECT<br >WORKSHOP</div>
       </template>
       <template v-else-if="title === CardName.RECYCLON">
         <div class="card-recyclon-logo">Recyclon</div>
@@ -557,10 +557,10 @@
         </div>
       </template>
       <template v-else-if="title === CardName.UNITED_NATIONS_MARS_INITIATIVE">
-        <span class="card-unmi-logo">UNITED NATIONS<br />MARS INITIATIVE</span>
+        <span class="card-unmi-logo">UNITED NATIONS<br >MARS INITIATIVE</span>
       </template>
       <template v-else-if="title === CardName.UNITED_NATIONS_MISSION_ONE">
-        <span class="card-unmo-logo">UNITED NATIONS<br />MISSION ONE</span>
+        <span class="card-unmo-logo">UNITED NATIONS<br >MISSION ONE</span>
       </template>
       <template v-else-if="title === CardName.UTOPIA_INVEST">
         <div class="card-utopia-logo">
@@ -572,7 +572,7 @@
         <div class="card-valley-trust-logo">
           <div
             style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">
-            VALLEY<br /> TRUST</div>
+            VALLEY<br > TRUST</div>
         </div>
       </template>
       <template v-else-if="title === CardName.VITOR">

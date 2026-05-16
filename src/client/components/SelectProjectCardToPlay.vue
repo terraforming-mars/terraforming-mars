@@ -4,7 +4,7 @@
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-    <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" @change="cardChanged()" :value="availableCard.name" />
+    <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" @change="cardChanged()" :value="availableCard.name" >
     <Card class="cardbox" :card="availableCard" />
   </label>
 
@@ -22,7 +22,7 @@
       Playing ${0} will cost ${1} M€ more because ${2} are in power
     </div>
   </template>
-  <warnings-component v-if="card !== undefined" :warnings="card.warnings"></warnings-component>
+  <warnings-component v-if="card !== undefined" :warnings="card.warnings"/>
 
   <section v-if="showPaymentSection" v-trim-whitespace>
     <h3 class="payments_title" v-i18n>How to pay?</h3>
@@ -36,8 +36,7 @@
           :description="descriptions[unit]"
           @plus="addValue(unit)"
           @minus="reduceValue(unit)"
-          @max="setMaxValue(unit)">
-        </payment-unit-component>
+          @max="setMaxValue(unit)"/>
         <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
         (Some ${0} are unavailable here in reserve for the project card.)
         </div>

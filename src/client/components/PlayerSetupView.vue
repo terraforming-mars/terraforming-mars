@@ -49,7 +49,7 @@
     </template>
 
     <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
+    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :waitingfor="playerView.waitingFor"/>
 
     <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
@@ -82,14 +82,13 @@
           :venusScaleLevel="game.venusScaleLevel"
           :boardName ="game.gameOptions.boardName"
           :aresData="game.aresData"
-          :altVenusBoard="game.gameOptions.altVenusBoard">
-        </board>
+          :altVenusBoard="game.gameOptions.altVenusBoard"/>
 
-        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
+        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
         <a name="moonBoard" class="player_home_anchor"></a>
-        <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
-        <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="playerView.players"></DeltaProjectBoard>
+        <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
+        <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="playerView.players"/>
       </div>
     </details>
   </div>

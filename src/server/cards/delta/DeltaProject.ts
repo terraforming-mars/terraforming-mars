@@ -24,7 +24,7 @@ export class DeltaProject extends PreludeCard implements IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0 && DeltaProjectExpansion.maxSteps(player) > 0;
+    return DeltaProjectExpansion.maxSteps(player) > 0;
   }
 
   public action(player: IPlayer): PlayerInput {

@@ -53,7 +53,7 @@ export default defineComponent({
   },
   data() {
     return {
-      amount: this.playerinput.validSteps[0] ?? 1,
+      amount: this.playerinput.validSteps[0],
     };
   },
   methods: {

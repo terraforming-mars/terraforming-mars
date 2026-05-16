@@ -7,7 +7,7 @@ import {AlliedParty} from '../common/turmoil/Types';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {DiscordId} from './server/auth/discord';
 import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
-import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectModel';
+import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectPlayerModel';
 
 interface DeprecatedFields {
 }

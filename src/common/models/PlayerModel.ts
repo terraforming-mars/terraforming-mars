@@ -12,7 +12,7 @@ import {Agenda} from '../turmoil/Types';
 import {Tag} from '../cards/Tag';
 import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
 import {GlobalParameter} from '../GlobalParameter';
-import {DeltaProjectPlayerModel} from './DeltaProjectModel';
+import {DeltaProjectPlayerModel} from './DeltaProjectPlayerModel';
 
 export interface ViewModel {
   game: GameModel;

@@ -1,67 +1,69 @@
 <template>
   <div class="delta-project-board">
     <table class="delta-project-board__track">
-      <tr>
-        <td class="delta-project-board__step delta-project-board__step--start">
-          <div class="delta-project-board__tag-cell"></div>
-        </td>
-        <td v-for="step in steps" :key="step.tag ?? 'vp-' + step.vpValue" class="delta-project-board__step">
-          <div class="delta-project-board__tag-cell">
-            <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
-            <div v-else class="resource-tag" :class="'tag-' + step.tag"></div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="delta-project-board__slots-cell delta-project-board__slots-cell--start">
-          <div class="delta-project-board__slots">
-            <i
-              v-for="color in playersAtPosition(0)"
-              :key="color"
-              :class="cubeCss(color)"
-              class="delta-project-board__cube"
-            ></i>
-            <div
-              v-for="n in emptySlotsStart()"
-              :key="'empty-start-' + n"
-              class="delta-project-board__slot"
-            ></div>
-          </div>
-        </td>
-        <td v-for="(step, idx) in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-slots'" class="delta-project-board__slots-cell">
-          <div class="delta-project-board__slots">
-            <i
-              v-for="color in playersAtPosition(idx + 1)"
-              :key="color"
-              :class="cubeCss(color)"
-              class="delta-project-board__cube"
-            ></i>
-            <div
-              v-for="n in emptySlots(idx + 1, step)"
-              :key="'empty-' + n"
-              class="delta-project-board__slot"
-            ></div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="delta-project-board__reward-cell delta-project-board__reward-cell--start">
-          <div class="delta-project-board__reward delta-project-board__reward--start"></div>
-        </td>
-        <td v-for="step in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-reward'" class="delta-project-board__reward-cell">
-          <div class="delta-project-board__reward">
-            <template v-for="(icon, idx) in step.rewardIcons" :key="idx">
-              <span v-if="icon.or" class="delta-project-board__or">or</span>
-              <span v-else-if="icon.separator" class="delta-project-board__separator">/</span>
-              <div v-else-if="icon.production" class="delta-project-board__prod-box">
-                <div v-for="n in (icon.count || 1)" :key="n" :class="icon.cssClass">{{ icon.text || '' }}</div>
-              </div>
-              <span v-else-if="icon.asterisk" class="delta-project-board__asterisk">*</span>
-              <div v-else :class="icon.cssClass"></div>
-            </template>
-          </div>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td class="delta-project-board__step delta-project-board__step--start">
+            <div class="delta-project-board__tag-cell"></div>
+          </td>
+          <td v-for="step in steps" :key="step.tag ?? 'vp-' + step.vpValue" class="delta-project-board__step">
+            <div class="delta-project-board__tag-cell">
+              <div v-if="step.vpValue" class="card-points delta-project-board__vp">{{ step.vpValue }}</div>
+              <div v-else class="resource-tag" :class="'tag-' + step.tag"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="delta-project-board__slots-cell delta-project-board__slots-cell--start">
+            <div class="delta-project-board__slots">
+              <i
+                v-for="color in playersAtPosition(0)"
+                :key="color"
+                :class="cubeCss(color)"
+                class="delta-project-board__cube"
+              ></i>
+              <div
+                v-for="n in emptySlotsStart()"
+                :key="'empty-start-' + n"
+                class="delta-project-board__slot"
+              ></div>
+            </div>
+          </td>
+          <td v-for="(step, idx) in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-slots'" class="delta-project-board__slots-cell">
+            <div class="delta-project-board__slots">
+              <i
+                v-for="color in playersAtPosition(idx + 1)"
+                :key="color"
+                :class="cubeCss(color)"
+                class="delta-project-board__cube"
+              ></i>
+              <div
+                v-for="n in emptySlots(idx + 1, step)"
+                :key="'empty-' + idx + '-' + n"
+                class="delta-project-board__slot"
+              ></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="delta-project-board__reward-cell delta-project-board__reward-cell--start">
+            <div class="delta-project-board__reward delta-project-board__reward--start"></div>
+          </td>
+          <td v-for="step in steps" :key="(step.tag ?? 'vp-' + step.vpValue) + '-reward'" class="delta-project-board__reward-cell">
+            <div class="delta-project-board__reward">
+              <template v-for="(icon, idx) in step.rewardIcons" :key="idx">
+                <span v-if="icon.or" class="delta-project-board__or">or</span>
+                <span v-else-if="icon.separator" class="delta-project-board__separator">/</span>
+                <div v-else-if="icon.production" class="delta-project-board__prod-box">
+                  <div v-for="n in (icon.count || 1)" :key="n" :class="icon.cssClass">{{ icon.text || '' }}</div>
+                </div>
+                <span v-else-if="icon.asterisk" class="delta-project-board__asterisk">*</span>
+                <div v-else :class="icon.cssClass"></div>
+              </template>
+            </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
@@ -83,7 +85,8 @@ type RewardIcon = {
   text?: string;
 };
 
-type DeltaBoardStep = {
+// Public for testing
+export type DeltaBoardStep = {
   tag?: Tag;
   vpValue?: number;
   dynamicSlots: boolean;

@@ -1,6 +1,6 @@
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
-import {DeltaProjectPlayerModel} from '../../common/models/DeltaProjectModel';
+import {DeltaProjectPlayerModel} from '../../common/models/DeltaProjectPlayerModel';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {Resource} from '../../common/Resource';
@@ -153,11 +153,11 @@ export class DeltaProjectExpansion {
     case Tag.BUILDING: // Choose 2 steel or 2 plants
       player.defer(() => new OrOptions(
         new SelectOption('Gain 2 steel', 'Gain steel').andThen(() => {
-          player.stock.add(Resource.STEEL, 2, {log: true});
+          player.stock.add(Resource.STEEL, 2, {log: true, from: {card: CardName.DELTA_PROJECT}});
           return undefined;
         }),
         new SelectOption('Gain 2 plants', 'Gain plants').andThen(() => {
-          player.stock.add(Resource.PLANTS, 2, {log: true});
+          player.stock.add(Resource.PLANTS, 2, {log: true, from: {card: CardName.DELTA_PROJECT}});
           return undefined;
         }),
       ));
@@ -166,11 +166,11 @@ export class DeltaProjectExpansion {
     case Tag.POWER: // Choose +1 energy production or +1 heat production
       player.defer(() => new OrOptions(
         new SelectOption('Increase energy production 1 step', 'Increase').andThen(() => {
-          player.production.add(Resource.ENERGY, 1, {log: true});
+          player.production.add(Resource.ENERGY, 1, {log: true, from: {card: CardName.DELTA_PROJECT}});
           return undefined;
         }),
         new SelectOption('Increase heat production 1 step', 'Increase').andThen(() => {
-          player.production.add(Resource.HEAT, 1, {log: true});
+          player.production.add(Resource.HEAT, 1, {log: true, from: {card: CardName.DELTA_PROJECT}});
           return undefined;
         }),
       ));
@@ -214,9 +214,7 @@ export class DeltaProjectExpansion {
       if (!progress.jovianBonus) {
         progress.jovianBonus = true;
         player.tags.extraJovianTags++;
-        for (const card of player.tableau) {
-          card.onNonCardTagAdded?.(player, Tag.JOVIAN);
-        }
+        player.triggerOnNonCardTagAdded(Tag.JOVIAN);
         for (const p of player.game.playersInGenerationOrder) {
           for (const card of p.tableau) {
             card.onNonCardTagAddedByAnyPlayer?.(p, Tag.JOVIAN);
@@ -257,8 +255,7 @@ export class DeltaProjectExpansion {
 
     if (progress.position === VP5_POSITION) {
       builder.setVictoryPoints('victoryPoints', 5, 'Delta Project (5VP)');
-    }
-    if (progress.position === VP2_POSITION) {
+    } else if (progress.position === VP2_POSITION) {
       builder.setVictoryPoints('victoryPoints', 2, 'Delta Project (2VP)');
     }
   }

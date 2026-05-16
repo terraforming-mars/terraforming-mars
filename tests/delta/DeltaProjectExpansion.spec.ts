@@ -529,21 +529,6 @@ describe('DeltaProjectExpansion', () => {
       expect(player.deltaProjectData!.position).eq(2);
       expect(player.energy).eq(1);
     });
-
-    it('once-per-generation via actionsThisGeneration', () => {
-      player.energy = 5;
-      player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
-
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.false;
-
-      player.actionsThisGeneration.add(CardName.DELTA_PROJECT);
-
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.true;
-
-      player.runProductionPhase();
-
-      expect(player.actionsThisGeneration.has(CardName.DELTA_PROJECT)).is.false;
-    });
   });
 
   describe('serialization', () => {

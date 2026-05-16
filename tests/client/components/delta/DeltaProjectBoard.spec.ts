@@ -1,7 +1,8 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
-import DeltaProjectBoard, {DeltaBoardStep} from '@/client/components/delta/DeltaProjectBoard.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
+import {DeltaBoardStep} from '@/client/components/delta/DeltaBoardStep';
 import {fakePublicPlayerModel} from '../testHelpers';
 import {FakeLocalStorage} from '../FakeLocalStorage';
 

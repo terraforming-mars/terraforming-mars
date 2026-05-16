@@ -74,24 +74,7 @@ import {Color} from '@/common/Color';
 import {Tag} from '@/common/cards/Tag';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-
-type RewardIcon = {
-  cssClass: string;
-  production?: boolean;
-  separator?: boolean;
-  or?: boolean;
-  asterisk?: boolean;
-  count?: number;
-  text?: string;
-};
-
-// Public for testing
-export type DeltaBoardStep = {
-  tag?: Tag;
-  vpValue?: number;
-  dynamicSlots: boolean;
-  rewardIcons: Array<RewardIcon>;
-};
+import {DeltaBoardStep} from '@/client/components/delta/DeltaBoardStep';
 
 const STEPS: ReadonlyArray<DeltaBoardStep> = [
   {

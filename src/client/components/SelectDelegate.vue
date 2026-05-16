@@ -53,7 +53,7 @@ export default defineComponent({
   },
   components: {
     AppButton,
-    'select-player-row': SelectPlayerRow,
+    SelectPlayerRow,
   },
   methods: {
     saveData() {

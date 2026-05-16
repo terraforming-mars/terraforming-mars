@@ -72,11 +72,11 @@ export default defineComponent({
   },
   emits: ['toggleTileView'],
   components: {
-    'board': Board,
+    Board,
     DeltaProjectBoard,
     Milestones,
     Awards,
-    'turmoil': Turmoil,
+    Turmoil,
     MoonBoard,
     PlanetaryTracks,
   },

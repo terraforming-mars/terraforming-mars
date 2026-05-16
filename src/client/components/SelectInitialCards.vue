@@ -97,7 +97,7 @@ export default defineComponent({
   components: {
     AppButton,
     SelectCard,
-    'confirm-dialog': ConfirmDialog,
+    ConfirmDialog,
     Colony,
   },
   data(): DataModel {

@@ -66,9 +66,9 @@ export default defineComponent({
     },
   },
   components: {
-    'player-info': PlayerInfo,
-    'overview-settings': OverviewSettings,
-    'other-player': OtherPlayer,
+    PlayerInfo,
+    OverviewSettings,
+    OtherPlayer,
   },
   data() {
     return {};

@@ -126,7 +126,7 @@ export default defineComponent({
     },
   },
   components: {
-    'bug-report-dialog': BugReportDialog,
+    BugReportDialog,
   },
   data() {
     return {

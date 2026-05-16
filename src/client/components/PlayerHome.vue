@@ -68,10 +68,7 @@
           </div>
           <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
         </div>
-        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id"
-                        :cards="playerView.preludeCardsInHand
-                                .concat(playerView.ceoCardsInHand)
-                                .concat(playerView.cardsInHand)"/>
+        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id" :cards="allCardsInHand"/>
       </div>
 
       <div class="player_home_block player_home_block--cards">
@@ -79,15 +76,15 @@
           <dynamic-title title="Played Cards" :color="thisPlayer.color" />
           <div class="played-cards-filters">
             <div :class="getHideButtonClass('ACTIVE')" @click.prevent="toggle('ACTIVE')">
-              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]).length.toString()}}</div>
+              <div class="played-cards-count">{{ activeTableauCount }}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
             </div>
             <div :class="getHideButtonClass('AUTOMATED')" @click.prevent="toggle('AUTOMATED')">
-              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).length.toString()}}</div>
+              <div class="played-cards-count">{{ automatedTableauCount }}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
             </div>
             <div :class="getHideButtonClass('EVENT')" @click.prevent="toggle('EVENT')">
-              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.EVENT]).length.toString()}}</div>
+              <div class="played-cards-count">{{ eventTableauCount }}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
             </div>
           </div>
@@ -99,13 +96,13 @@
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
-        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE, CardType.PRELUDE]).filter(isActive))" :key="card.name" class="cardbox">
+        <div v-show="isVisible('ACTIVE')" v-for="card in activeTableauCards" :key="card.name" class="cardbox">
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
-        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).filter(isNotActive)" />
+        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="automatedTableauCards" />
 
-        <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" />
+        <stacked-cards v-show="isVisible('EVENT')" :cards="eventTableauCards" />
 
       </div>
 
@@ -243,6 +240,32 @@ export default defineComponent({
     cardsInHandCount(): number {
       const playerView = this.playerView;
       return playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length;
+    },
+    allCardsInHand(): Array<CardModel> {
+      const playerView = this.playerView;
+      return playerView.preludeCardsInHand
+        .concat(playerView.ceoCardsInHand)
+        .concat(playerView.cardsInHand);
+    },
+    activeTableauCount(): number {
+      return getCardsByType(this.thisPlayer.tableau, [CardType.ACTIVE]).length;
+    },
+    automatedTableauCount(): number {
+      return getCardsByType(this.thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).length;
+    },
+    eventTableauCount(): number {
+      return getCardsByType(this.thisPlayer.tableau, [CardType.EVENT]).length;
+    },
+    activeTableauCards(): Array<CardModel> {
+      const cards = getCardsByType(this.thisPlayer.tableau, [CardType.ACTIVE, CardType.PRELUDE]);
+      return [...sortActiveCards(cards.filter((c) => this.isActive(c)))];
+    },
+    automatedTableauCards(): Array<CardModel> {
+      const cards = getCardsByType(this.thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]);
+      return cards.filter((c) => this.isNotActive(c));
+    },
+    eventTableauCards(): Array<CardModel> {
+      return [...getCardsByType(this.thisPlayer.tableau, [CardType.EVENT])];
     },
     getCardsByType(): typeof getCardsByType {
       return getCardsByType;

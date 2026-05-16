@@ -38,6 +38,7 @@ import SelectGlobalEvent from '@/client/components/SelectGlobalEvent.vue';
 import SelectResource from '@/client/components/SelectResource.vue';
 import SelectResources from '@/client/components/SelectResources.vue';
 import SelectClaimedUndergroundToken from '@/client/components/SelectClaimedUndergroundToken.vue';
+import DeltaProjectInput from '@/client/components/delta/DeltaProjectInput.vue';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
   'and': 'and-options',
@@ -60,6 +61,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'resource': 'select-resource',
   'resources': 'select-resources',
   'claimedUndergroundToken': 'select-claimed-underground-token',
+  'deltaProject': 'delta-project-input',
 };
 
 export default defineComponent({
@@ -112,6 +114,7 @@ export default defineComponent({
     'select-resource': SelectResource,
     'select-resources': SelectResources,
     'select-claimed-underground-token': SelectClaimedUndergroundToken,
+    'delta-project-input': DeltaProjectInput,
   },
   methods: {
     saveData() {

@@ -200,11 +200,21 @@ export function isSelectClaimedUndergroundTokenResponse(response: InputResponse)
   return response.type === 'claimedUndergroundToken' && matches(response, ['type', 'selected']);
 }
 
+export interface DeltaProjectInputResponse {
+  type: 'deltaProject',
+  amount: number;
+}
+
+export function isDeltaProjectInputResponse(response: InputResponse): response is DeltaProjectInputResponse {
+  return response.type === 'deltaProject' && matches(response, ['type', 'amount']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
   SelectInitialCardsResponse |
   SelectAmountResponse |
+  DeltaProjectInputResponse |
   SelectCardResponse |
   SelectColonyResponse |
   SelectDelegateResponse |

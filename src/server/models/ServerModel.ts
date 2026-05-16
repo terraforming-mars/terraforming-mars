@@ -286,6 +286,8 @@ export class Server {
       model.globalParameterSteps = player.globalParameterSteps;
     }
 
+    model.deltaProject = player.deltaProjectData;
+
     return model;
   }
 
@@ -430,6 +432,7 @@ export class Server {
         ceo: options.ceoExtension,
         starwars: options.starWarsExpansion,
         underworld: options.underworldExpansion,
+        deltaProject: options.deltaProjectExpansion,
       },
       fastModeOption: options.fastModeOption,
       includedCards: options.includedCards,

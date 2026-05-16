@@ -39,4 +39,10 @@ export class SaturnSystems extends CorporationCard implements ICorporationCard {
     const count = thisCardOwner.tags.cardTagCount(card, Tag.JOVIAN);
     thisCardOwner.production.add(Resource.MEGACREDITS, count, {log: true, from: {card: this}});
   }
+
+  public onNonCardTagAddedByAnyPlayer(cardOwner: IPlayer, tag: Tag) {
+    if (tag === Tag.JOVIAN) {
+      cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true, from: {card: this}});
+    }
+  }
 }

@@ -1053,6 +1053,9 @@ export enum CardName {
   ELECTION_SPONSORSHIP = 'Election Sponsorship',
   CLOUD_VORTEX_OUTPOST = 'Cloud Vortex Outpost',
 
+  // Delta Project
+  DELTA_PROJECT = 'Delta Project',
+
   // Underworld Standard Projects
   EXCAVATE_STANDARD_PROJECT = 'Excavate:SP',
   COLLUSION_STANDARD_PROJECT = 'Collusion:SP',

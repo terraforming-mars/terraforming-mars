@@ -27,11 +27,10 @@
     <GameBoardView
       :game="game"
       :tileView="tileView"
-      :playerCount="spectator.players.length"
+      :players="spectator.players"
       @toggleTileView="cycleTileView()"
     />
 
-    <!-- TODO(kberg): add the spectator tab. -->
     <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
       <dynamic-title title="Colonies" :color="spectator.color"/>
@@ -61,13 +60,13 @@ import {vueRoot} from '@/client/components/vueRoot';
 
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Colony from '@/client/components/colonies/Colony.vue';
-import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import GameBoardView from '@/client/components/GameBoardView.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import {range} from '@/common/utils/utils';
 import {nextTileView, TileView} from './board/TileView';
 import {setDocumentTitle} from '@/client/utils/documentTitle';

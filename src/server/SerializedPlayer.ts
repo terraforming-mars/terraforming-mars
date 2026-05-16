@@ -7,6 +7,7 @@ import {AlliedParty} from '../common/turmoil/Types';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {DiscordId} from './server/auth/discord';
 import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
+import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectPlayerModel';
 
 interface DeprecatedFields {
 }
@@ -33,6 +34,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   dealtCeoCards: Array<CardName>;
   dealtPreludeCards: Array<CardName>;
   dealtProjectCards: Array<CardName>;
+  deltaProject?: DeltaProjectPlayerModel;
   draftedCards: Array<CardName>;
   draftHand: Array<CardName>,
   energy: number;
@@ -45,6 +47,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   heat: number;
   heatProduction: number;
   id: PlayerId;
+  jovianTagCount: number;
   lastCardPlayed?: CardName;
   megaCreditProduction: number;
   megaCredits: number;

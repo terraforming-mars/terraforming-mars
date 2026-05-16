@@ -73,6 +73,7 @@ describe('ApiCreateGame', () => {
           ceo: false,
           starwars: false,
           underworld: false,
+          deltaProject: false,
         },
         board: RandomBoardOption.OFFICIAL,
         seed: 0,

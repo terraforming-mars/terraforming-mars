@@ -694,6 +694,23 @@ describe('Game', () => {
     expect(assignedPreludes).has.members(customPreludes);
   });
 
+  it('throws if Delta Project is in customPreludes', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    expect(() => Game.newInstance('gameid', [player], player, {
+      deltaProjectExpansion: true,
+      preludeExtension: true,
+      customPreludes: [CardName.DELTA_PROJECT, CardName.ALLIED_BANK],
+    })).to.throw();
+  });
+
+  it('throws if Delta Project is banned', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    expect(() => Game.newInstance('gameid', [player], player, {
+      deltaProjectExpansion: true,
+      bannedCards: [CardName.DELTA_PROJECT],
+    })).to.throw();
+  });
+
   it('fails when the same id appears in two players', () => {
     const player1 = new Player('name', 'blue', false, 0, 'p-id3');
     const player2 = new Player('name', 'red', false, 0, 'p-id3');

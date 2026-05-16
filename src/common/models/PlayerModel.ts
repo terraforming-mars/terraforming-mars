@@ -12,6 +12,7 @@ import {Agenda} from '../turmoil/Types';
 import {Tag} from '../cards/Tag';
 import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
 import {GlobalParameter} from '../GlobalParameter';
+import {DeltaProjectPlayerModel} from './DeltaProjectPlayerModel';
 
 export interface ViewModel {
   game: GameModel;
@@ -44,6 +45,7 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
+  deltaProject?: DeltaProjectPlayerModel;
   energy: number;
   energyProduction: number;
   fleetSize: number;

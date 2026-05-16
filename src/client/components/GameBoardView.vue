@@ -31,7 +31,9 @@
     <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
   </template>
 
-  <div v-if="playerCount > 1" class="player_home_block--milestones-and-awards">
+  <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
+
+  <div v-if="players.length > 1" class="player_home_block--milestones-and-awards">
     <a class="hotkey-target"></a>
     <Milestones :milestones="game.milestones" />
     <Awards :awards="game.awards" />
@@ -39,10 +41,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, PropType} from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
@@ -61,14 +65,15 @@ export default defineComponent({
       type: String as () => TileView,
       required: true,
     },
-    playerCount: {
-      type: Number,
+    players: {
+      type: Array as PropType<ReadonlyArray<PublicPlayerModel>>,
       required: true,
     },
   },
   emits: ['toggleTileView'],
   components: {
     'board': Board,
+    DeltaProjectBoard,
     Milestones,
     Awards,
     'turmoil': Turmoil,

@@ -32,7 +32,7 @@
         <GameBoardView
           :game="game"
           :tileView="tileView"
-          :playerCount="playerView.players.length"
+          :players="playerView.players"
           @toggleTileView="cycleTileView()"
         />
       </div>

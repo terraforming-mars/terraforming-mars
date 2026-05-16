@@ -15,7 +15,7 @@
     <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"></MoonGlobalParameterValue>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
-    <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
+    <div :class="getPlayerColorCubeClass()+' player_bg_color_' + playerColor"></div>
   </div>
 
   <a href="#board" :title="$t('Jump to board')">
@@ -100,10 +100,10 @@ export default defineComponent({
       type: Object as () => GameOptionsModel,
       required: true,
     },
-    acting_player: {
+    actingPlayer: {
       type: Boolean,
     },
-    player_color: {
+    playerColor: {
       type: String as () => Color,
       required: true,
     },
@@ -167,10 +167,10 @@ export default defineComponent({
   },
   methods: {
     getPlayerColorCubeClass(): string {
-      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+      return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
     getSideBarClass(): string {
-      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker(): string {
       return `${this.generation}`;

@@ -1,7 +1,7 @@
 <template>
   <div :class="getClasses">
     <div v-for="(req, idx) in requirements" :key="idx">
-      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
+      <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>

@@ -9,8 +9,8 @@
     </div>
 
     <sidebar v-trim-whitespace
-      :acting_player="false"
-      :player_color="spectator.color"
+      :actingPlayer="false"
+      :playerColor="spectator.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
       :temperature = "game.temperature"
@@ -76,7 +76,6 @@ import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {range} from '@/common/utils/utils';
@@ -102,7 +101,6 @@ export default defineComponent({
     GameBoardView,
     KeyboardShortcuts,
     LogPanel,
-    PlanetaryTracks,
     PlayersOverview,
     PurgeWarning,
     Sidebar,

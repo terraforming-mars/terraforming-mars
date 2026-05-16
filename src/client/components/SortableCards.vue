@@ -2,7 +2,7 @@
 <div>
   <div v-if="experimentalUI()" v-i18n>
     <label>
-      <input type="checkbox" v-model="showReorder" /> Reorder Cards
+      <input type="checkbox" v-model="showReorder" > Reorder Cards
     </label>
   </div>
   <div class="sortable-cards">

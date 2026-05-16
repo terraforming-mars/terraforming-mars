@@ -241,7 +241,7 @@
                             <div v-if="undoOption">
                               <span v-i18n>Undo is now in best effort support.</span>
                               <a href="https://github.com/terraforming-mars/terraforming-mars/discussions/7647" target="_blank">&#9432;</a>
-                              <br/>
+                              <br>
                               <span v-i18n>No effort will be spent to fix it.</span>
                             </div>
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
@@ -294,7 +294,7 @@
                             </label>
 
                             <div v-if="seededGame">
-                                <input type="text" name="clonedGamedId" v-model="clonedGameId" />
+                                <input type="text" name="clonedGamedId" v-model="clonedGameId" >
                             </div>
 
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
@@ -415,8 +415,8 @@
                             </div>
 
                             <div v-if="modularMA">
-                              The new Milestones and Awards are still in active development.<br/>
-                              Please don't report anything unless it breaks the game.<br/>
+                              The new Milestones and Awards are still in active development.<br>
+                              Please don't report anything unless it breaks the game.<br>
                               These are <b>always fully random</b>.
                             </div>
                             <template v-if="expansions.venus">
@@ -451,7 +451,7 @@
                                     <div>
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
-                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
+                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" >
                                           </div>
                                           <div class="create-game-page-color-row">
                                               <template v-for="color in PLAYER_COLORS" :key="color">
@@ -471,7 +471,7 @@
                                                   </label>
 
                                                   <label class="form-label">
-                                                      <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
+                                                      <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" >
                                                       <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a :href="wikiUrls.trBoost" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                                   </label>
                                               <!-- </template> -->
@@ -493,7 +493,7 @@
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()"/>
+                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()">
                             </label>
 
                             <label>
@@ -513,7 +513,7 @@
                 :expansions="expansions"
                 :selected="customCorporations"
                 @close="showCorporationList = false"
-            ></CorporationsFilter>
+            />
 
             <PreludesFilter
                 ref="preludesFilter"
@@ -523,7 +523,7 @@
                 :expansions="expansions"
                 :selected="customPreludes"
                 @close="showPreludesList = false"
-            ></PreludesFilter>
+            />
 
             <ColoniesFilter
                 ref="coloniesFilter"
@@ -533,7 +533,7 @@
                 :expansions="expansions"
                 :selected="customColonies"
                 @close="showColoniesList = false"
-            ></ColoniesFilter>
+            />
 
             <CeosFilter
                 ref="ceosFilter"
@@ -543,7 +543,7 @@
                 :expansions="expansions"
                 :selected="customCeos"
                 @close="showCeosList = false"
-            ></CeosFilter>
+            />
 
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
@@ -551,7 +551,7 @@
                   @cards-list-changed="updateBannedCards"
                   :title="'Cards to exclude from the game'"
                   :hint="'Start typing the card name to exclude'"
-              ></CardsFilter>
+              />
             </div>
 
             <div class="create-game--block" v-if="showIncludedCards">
@@ -560,9 +560,9 @@
                   @cards-list-changed="updateIncludedCards"
                   :title="'Cards to include in the game'"
                   :hint="'Start typing the card name to include'"
-              ></CardsFilter>
+              />
             </div>
-          <preferences-icon></preferences-icon>
+          <preferences-icon/>
         </div>
 </template>
 

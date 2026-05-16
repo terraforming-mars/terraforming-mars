@@ -28,11 +28,11 @@
             </label>
         </div>
 
-        <HelpIconology v-if="isOpen('iconology')"></HelpIconology>
-        <HelpStandardProjects v-if="isOpen('standard-projects')"></HelpStandardProjects>
-        <HelpPhases v-if="isOpen('phases')"></HelpPhases>
-        <HelpRulebooks v-if="isOpen('rulebooks')"></HelpRulebooks>
-        <HelpHotkeys v-if="isOpen('hotkeys')"></HelpHotkeys>
+        <HelpIconology v-if="isOpen('iconology')"/>
+        <HelpStandardProjects v-if="isOpen('standard-projects')"/>
+        <HelpPhases v-if="isOpen('phases')"/>
+        <HelpRulebooks v-if="isOpen('rulebooks')"/>
+        <HelpHotkeys v-if="isOpen('hotkeys')"/>
     </div>
 </template>
 <script lang="ts">

@@ -5,8 +5,7 @@
       :idx="idx"
       :metadata="metadata"
       :player="colony.colonies[idx]"
-      :marker="colony.isActive && colony.trackPosition === idx">
-    </colony-space>
+      :marker="colony.isActive && colony.trackPosition === idx"/>
   </div>
 </template>
 <script lang="ts">

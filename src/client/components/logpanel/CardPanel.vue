@@ -5,10 +5,10 @@
       <Card :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in globalEvents" :key="name">
-      <global-event :globalEventName="name" type="prior" :showIcons="false"></global-event>
+      <global-event :globalEventName="name" type="prior" :showIcons="false"/>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in colonies" :key="name">
-      <colony :colony="getColony(name)"></colony>
+      <colony :colony="getColony(name)"/>
     </div>
   </div>
 </template>

@@ -29,7 +29,7 @@
             </div>
             <div v-for="item in itemsByGroup[group.key]" :key="item" v-show="include(item)">
               <label class="form-checkbox">
-                <input type="checkbox" v-model="localSelected" :value="item"/>
+                <input type="checkbox" v-model="localSelected" :value="item">
                 <i class="form-icon"></i>
                 <slot name="item" :itemName="item" :icon="icon"></slot>
               </label>

@@ -6,7 +6,7 @@
       :token="token"
       :key="idx"
       location="player-home"
-      ></underground-token>
+      />
     </div>
   </div>
 </template>

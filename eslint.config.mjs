@@ -65,11 +65,21 @@ const projectRules = {
   'preserve-caught-error': 'off',
 };
 
+// eslint-plugin-vue's flat/essential preset, flattened into a single rules object.
+const vueEssentialRules = vuePlugin.configs['flat/essential'].reduce(
+  (acc, entry) => ({...acc, ...(entry.rules ?? {})}),
+  {},
+);
+
 // TypeScript and Vue rules
 const pluginRules = {
   'no-throw-literal': 'error',
   '@typescript-eslint/prefer-for-of': 'error',
   '@typescript-eslint/no-non-null-assertion': 'error',
+  ...vueEssentialRules,
+  // Buggy under eslint-plugin-vue 10.8 + ESLint 10 — emits spurious "clear" errors.
+  // Project doesn't use template-scoped eslint-disable comments.
+  'vue/comment-directive': 'off',
   'vue/multi-word-component-names': ['error', {
     ignores: [
       'Award',

@@ -2,7 +2,7 @@
   <div class="wf-component wf-options">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
     <template v-for="unit in keys" :key="unit">
-        <payment-unit-component
+        <PaymentUnitComponent
           v-model.number="units[unit]"
           :unit="(unit as SpendableResource)"
           :showMax="false"

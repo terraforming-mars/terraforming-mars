@@ -5,7 +5,7 @@
       <input type="radio" v-model="selectedPlayer" :value="player" >
       <i class="form-icon"></i>
       <span v-if="player === 'NEUTRAL'" >Neutral</span>
-      <select-player-row v-else :player="playerView.players.find((otherPlayer) => otherPlayer.color === player)"/>
+      <SelectPlayerRow v-else :player="playerView.players.find((otherPlayer) => otherPlayer.color === player)"/>
     </label>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>

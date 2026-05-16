@@ -562,7 +562,7 @@
                   :hint="'Start typing the card name to include'"
               />
             </div>
-          <preferences-icon/>
+          <PreferencesIcon/>
         </div>
 </template>
 

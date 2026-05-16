@@ -9,7 +9,7 @@
         <span>{{ $t(option.title) }}</span>
       </label>
       <div v-if="selectedIdx === idx" style="margin-left: 30px">
-        <player-input-factory ref="inputfactory"
+        <PlayerInputFactory ref="inputfactory"
                               :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved(idx)"
@@ -38,7 +38,7 @@ import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 let unique = 0;
 
 export default defineComponent({
-  name: 'or-options',
+  name: 'OrOptions',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,

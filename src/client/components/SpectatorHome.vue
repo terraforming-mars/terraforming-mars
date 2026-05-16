@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <sidebar v-trim-whitespace
+    <Sidebar v-trim-whitespace
       :actingPlayer="false"
       :playerColor="spectator.color"
       :generation="game.generation"
@@ -27,10 +27,10 @@
       :discardPileSize = "game.discardPileSize"/>
 
     <div class="player_home_block nofloat">
-        <log-panel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"/>
+        <LogPanel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"/>
     </div>
 
-    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
     <GameBoardView
       :game="game"
@@ -41,7 +41,7 @@
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
-      <dynamic-title title="Colonies" :color="spectator.color"/>
+      <DynamicTitle title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="player in spectator.players" :key="player.color">
             <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
@@ -49,15 +49,15 @@
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-            <colony :colony="colony" :active="colony.isActive"/>
+            <Colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
+    <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
     <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
   </div>
 </template>

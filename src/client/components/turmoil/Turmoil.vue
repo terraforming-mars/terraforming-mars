@@ -1,9 +1,9 @@
 <template>
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
-        <global-event v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"/>
-        <global-event v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"/>
-        <global-event v-if="turmoil.current" :globalEventName="turmoil.current" type="current" :showDistance="true"/>
+        <GlobalEvent v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"/>
+        <GlobalEvent v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"/>
+        <GlobalEvent v-if="turmoil.current" :globalEventName="turmoil.current" type="current" :showDistance="true"/>
       </div>
 
       <div class="turmoil-board">
@@ -17,7 +17,7 @@
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
           <div class="dominant-party-bonus">
-            <turmoil-agenda :id="getPolicy(turmoil.ruling)"/>
+            <TurmoilAgenda :id="getPolicy(turmoil.ruling)"/>
           </div>
           <div class="policy-user-cubes">
             <template v-for="n in turmoil.policyActionUsers" :key="n.color">
@@ -40,7 +40,7 @@
                 <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
 
                 <div class="party-bonus">
-                  <turmoil-agenda :id="getPolicy(party.name)"/>
+                  <TurmoilAgenda :id="getPolicy(party.name)"/>
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
             <div class="party-bonus">
-              <turmoil-agenda type="party-bonus" :id="getBonus(party.name)"/>
+              <TurmoilAgenda type="party-bonus" :id="getBonus(party.name)"/>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 
 export default defineComponent({
-  name: 'turmoil',
+  name: 'Turmoil',
   props: {
     turmoil: {
       type: Object as () => TurmoilModel,

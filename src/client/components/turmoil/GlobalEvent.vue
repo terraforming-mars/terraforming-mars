@@ -38,7 +38,7 @@ type DataModel = {
 };
 
 export default defineComponent({
-  name: 'global-event',
+  name: 'GlobalEvent',
   components: {
     CardRenderData,
     CardParty,

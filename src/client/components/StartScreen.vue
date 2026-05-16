@@ -13,7 +13,7 @@
     <a class="start-screen-link start-screen-link--changelog" href="https://github.com/terraforming-mars/terraforming-mars/wiki/Changelog" target="_blank" v-i18n>Whats new?</a>
     <a class="start-screen-link start-screen-link--chat" :href="DISCORD_INVITE" target="_blank" v-i18n>Join us on Discord</a>
     <div class="start-screen-header start-screen-link--languages">
-      <language-switcher />
+      <LanguageSwitcher />
       <div class="start-screen-version-cont">
         <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{raw_settings.builtAt}}</div>
         <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{raw_settings.head}}</div>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="free-floating-preferences-icon">
-    <preferences-icon/>
+    <PreferencesIcon/>
   </div>
 </div>
 </template>
@@ -42,7 +42,7 @@ import raw_settings from '@/genfiles/settings.json';
 import * as constants from '@/common/constants';
 
 export default defineComponent({
-  name: 'start-screen',
+  name: 'StartScreen',
   components: {
     LanguageSwitcher,
     PreferencesIcon,

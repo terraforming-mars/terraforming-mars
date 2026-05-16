@@ -13,7 +13,7 @@ import {defineComponent} from 'vue';
 import {paths} from '@/common/app/paths';
 
 export default defineComponent({
-  name: 'admin-home',
+  name: 'AdminHome',
   data() {
     return {
       paths: [

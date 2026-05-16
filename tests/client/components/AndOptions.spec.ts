@@ -15,7 +15,7 @@ describe('AndOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -58,7 +58,7 @@ describe('AndOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {

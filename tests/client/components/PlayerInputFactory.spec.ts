@@ -226,7 +226,7 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     global: {
       ...globalConfig.global,
       components: {
-        'player-input-factory': PlayerInputFactory,
+        'PlayerInputFactory': PlayerInputFactory,
       },
     },
     props: {

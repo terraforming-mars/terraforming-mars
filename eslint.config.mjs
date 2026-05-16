@@ -84,20 +84,17 @@ const pluginRules = {
     ignores: [
       'Award',
       'Awards',
-      'agenda',
-      'board',
-      'bonus',
-      'colony',
+      'Board',
+      'Bonus',
+      'Card',
+      'Colony',
+      'Help',
       'Milestone',
       'Milestones',
-      'party',
       'Party',
-      'sidebar',
+      'Sidebar',
       'Tag',
-      'turmoil',
-      'Card',
-      'Button',
-      'Help',
+      'Turmoil',
     ],
   }],
   'vue/no-reserved-component-names': 'warn',
@@ -110,6 +107,12 @@ const pluginRules = {
     html: {void: 'never', normal: 'never', component: 'always'},
     svg: 'always',
     math: 'always',
+  }],
+  // B8 — PascalCase for `name:` in component definitions.
+  'vue/component-definition-name-casing': ['error', 'PascalCase'],
+  // B7 — PascalCase for component tags in SFC templates.
+  'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+    registeredComponentsOnly: false,
   }],
 };
 

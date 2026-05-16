@@ -1,6 +1,6 @@
 <template>
   <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
-    <top-bar :playerView="playerView" />
+    <TopBar :playerView="playerView" />
 
     <div v-if="game.phase === 'end'">
       <div class="player_home_block">
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <sidebar v-trim-whitespace
+    <Sidebar v-trim-whitespace
       :actingPlayer="isPlayerActing(playerView)"
       :playerColor="thisPlayer.color"
       :generation="game.generation"
@@ -38,22 +38,22 @@
       </div>
 
     <a class="hotkey-target"></a>
-    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
-        <log-panel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"/>
+        <LogPanel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"/>
       </div>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
-        <dynamic-title title="Actions" :color="thisPlayer.color"/>
-        <waiting-for v-if="game.phase !== 'end'" :playerView="playerView" :waitingfor="playerView.waitingFor"/>
+        <DynamicTitle title="Actions" :color="thisPlayer.color"/>
+        <WaitingFor v-if="game.phase !== 'end'" :playerView="playerView" :waitingfor="playerView.waitingFor"/>
       </div>
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
-        <dynamic-title title="Drafted cards" :color="thisPlayer.color" />
+        <DynamicTitle title="Drafted cards" :color="thisPlayer.color" />
         <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
           <Card :card="card"/>
         </div>
@@ -62,19 +62,19 @@
       <a name="cards" class="player_home_anchor"></a>
       <div class="player_home_block player_home_block--hand" v-if="cardsInHandCount > 0" id="shortkey-hand">
         <div class="hiding-card-button-row">
-          <dynamic-title title="Cards In Hand" :color="thisPlayer.color"/>
+          <DynamicTitle title="Cards In Hand" :color="thisPlayer.color"/>
           <div :class="getHideButtonClass('HAND')" @click.prevent="toggle('HAND')">
             <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
             <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
           </div>
           <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
         </div>
-        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id" :cards="allCardsInHand"/>
+        <SortableCards v-show="isVisible('HAND')" :playerId="playerView.id" :cards="allCardsInHand"/>
       </div>
 
       <div class="player_home_block player_home_block--cards">
         <div class="hiding-card-button-row">
-          <dynamic-title title="Played Cards" :color="thisPlayer.color" />
+          <DynamicTitle title="Played Cards" :color="thisPlayer.color" />
           <div class="played-cards-filters">
             <div :class="getHideButtonClass('ACTIVE')" @click.prevent="toggle('ACTIVE')">
               <div class="played-cards-count">{{ activeTableauCount }}</div>
@@ -101,14 +101,14 @@
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
-        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="automatedTableauCards" />
+        <StackedCards v-show="isVisible('AUTOMATED')" :cards="automatedTableauCards" />
 
-        <stacked-cards v-show="isVisible('EVENT')" :cards="eventTableauCards" />
+        <StackedCards v-show="isVisible('EVENT')" :cards="eventTableauCards" />
 
       </div>
 
       <div v-if="thisPlayer.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-        <dynamic-title title="Self-replicating Robots cards" :color="thisPlayer.color"/>
+        <DynamicTitle title="Self-replicating Robots cards" :color="thisPlayer.color"/>
         <div>
           <div v-for="card in thisPlayer.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
             <Card :card="card"/>
@@ -118,8 +118,8 @@
     </div>
 
     <div v-if="thisPlayer.underworldData.tokens.length > 0">
-      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
-      <underground-tokens :underworldData="thisPlayer.underworldData"/>
+      <DynamicTitle title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
+      <UndergroundTokens :underworldData="thisPlayer.underworldData"/>
     </div>
 
     <template v-if="thisPlayer.tableau.length === 0">
@@ -128,7 +128,7 @@
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor hotkey-target"></a>
-      <dynamic-title title="Colonies" :color="thisPlayer.color"/>
+      <DynamicTitle title="Colonies" :color="thisPlayer.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
           <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
@@ -136,7 +136,7 @@
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
-          <colony :colony="colony" :active="colony.isActive"/>
+          <Colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
     <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
   </div>
 </template>
@@ -194,7 +194,7 @@ const typeToDataModel: Record<ToggleableCardType, {key: keyof PlayerHomeModel, p
 } as const;
 
 export default defineComponent({
-  name: 'player-home',
+  name: 'PlayerHome',
   mixins: [HomeMixin],
   data(): PlayerHomeModel {
     const preferences = getPreferences();

@@ -76,7 +76,7 @@ const inputComponents = {
 } satisfies InputComponentRegistry;
 
 export default defineComponent({
-  name: 'player-input-factory',
+  name: 'PlayerInputFactory',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,

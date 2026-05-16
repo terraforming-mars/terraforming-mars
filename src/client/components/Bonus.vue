@@ -32,7 +32,7 @@ const css: Record<SpaceBonus, string> = {
 };
 
 export default defineComponent({
-  name: 'bonus',
+  name: 'Bonus',
   props: {
     bonus: {
       type: Array as () => Array<SpaceBonus>,

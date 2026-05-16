@@ -107,9 +107,9 @@
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
     <!-- Show the spaces for the player cubes and the white cube -->
-    <colony-row :metadata="metadata" :colony="colony"/>
+    <ColonyRow :metadata="metadata" :colony="colony"/>
     <!-- show the numbers underneath the colony row -->
-    <colony-trade-row :metadata="metadata"/>
+    <ColonyTradeRow :metadata="metadata"/>
   </div>
 <!-- </div> -->
 </div>
@@ -131,7 +131,7 @@ import {Resource} from '@/common/Resource';
 import {translateText} from '@/client/directives/i18n';
 
 export default defineComponent({
-  name: 'colony',
+  name: 'Colony',
   props: {
     colony: {
       type: Object as () => ColonyModel,

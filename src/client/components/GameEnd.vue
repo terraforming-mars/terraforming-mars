@@ -104,7 +104,7 @@
               </table>
               <br>
               <h2 v-i18n>Victory points details</h2>
-              <victory-point-chart
+              <VictoryPointChart
                 :datasets="vpDataset"
                 :generation="game.generation"
                 :animation="true"
@@ -179,7 +179,7 @@
           </div>
           <div class="game-end-flexrow">
           <div class="game_end_block--board game-end-column">
-              <victory-point-chart
+              <VictoryPointChart
                 :datasets="globalsDataset"
                 :generation="game.generation"
                 :animation="true"
@@ -187,7 +187,7 @@
                 :yAxisLabel="'% completed'"
               />
               <h2 v-i18n>Final situation on the board</h2>
-              <board
+              <Board
                   :spaces="game.spaces"
                   :expansions="game.gameOptions.expansions"
                   :venusScaleLevel="game.venusScaleLevel"
@@ -203,7 +203,7 @@
             <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
           </div>
           <div class="game_end_block--log game-end-column">
-            <log-panel :color="color" :viewModel="viewModel"/>
+            <LogPanel :color="color" :viewModel="viewModel"/>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -250,7 +250,7 @@ function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | 
 }
 
 export default defineComponent({
-  name: 'game-end',
+  name: 'GameEnd',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel | undefined,

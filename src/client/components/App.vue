@@ -12,36 +12,36 @@
       </dialog>
     </section>
     <div class="main-container">
-      <start-screen v-if="screen === 'start-screen'"/>
-      <create-game-form
+      <StartScreen v-if="screen === 'start-screen'"/>
+      <CreateGameForm
         v-else-if="screen === 'create-game-form'"
       />
-      <load-game-form v-else-if="screen === 'load'"/>
-      <game-home
+      <LoadGameForm v-else-if="screen === 'load'"/>
+      <GameHome
         v-else-if="screen === 'game-home' && game !== undefined"
         :game="game"
       />
-      <player-home
+      <PlayerHome
         v-else-if="screen === 'player-home' && playerView !== undefined"
         :player-view="playerView"
         :key="playerkey"
       />
-      <spectator-home
+      <SpectatorHome
         v-else-if="screen === 'spectator-home' && spectator !== undefined"
         :spectator="spectator"
         :key="'spectator-' + playerkey"
       />
-      <game-end
+      <GameEnd
         v-else-if="screen === 'the-end'"
         :player-view="playerView"
         :spectator="spectator"
       />
-      <games-overview
+      <GamesOverview
         v-else-if="screen === 'games-overview'"
       />
-      <card-list v-else-if="screen === 'cards'"/>
-      <admin-home v-else-if="screen === 'admin'"/>
-      <login-home v-else-if="screen === 'login-home'"/>
+      <CardList v-else-if="screen === 'cards'"/>
+      <AdminHome v-else-if="screen === 'admin'"/>
+      <LoginHome v-else-if="screen === 'login-home'"/>
       <Help v-else-if="screen === 'help'"/>
     </div>
     <div class="notice" v-i18n>

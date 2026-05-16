@@ -8,10 +8,10 @@
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params">
-    <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"/>
-    <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"/>
-    <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"/>
-    <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"/>
+    <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature"/>
+    <GlobalParameterValue :param="globalParameter.OXYGEN" :value="oxygen"/>
+    <GlobalParameterValue :param="globalParameter.OCEANS" :value="oceans"/>
+    <GlobalParameterValue v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"/>
     <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"/>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
@@ -41,7 +41,7 @@
       </div>
   </a>
 
-  <language-icon/>
+  <LanguageIcon/>
 
   <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
     <i class="sidebar_icon sidebar_icon--info"
@@ -51,7 +51,7 @@
     <div class="info_panel" v-if="ui.gamesetup_detail_open">
       <div class="info_panel-spacing"></div>
       <div class="info-panel-title" v-i18n>Game Setup Details</div>
-      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"/>
+      <GameSetupDetail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"/>
 
       <div class="info_panel_actions">
         <button class="btn btn-lg btn-primary" @click="ui.gamesetup_detail_open=false" v-i18n>Ok</button>
@@ -65,7 +65,7 @@
     </div>
   </a>
 
-  <preferences-icon/>
+  <PreferencesIcon/>
 </div>
 </template>
 
@@ -86,7 +86,7 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import LanguageIcon from '@/client/components/LanguageIcon.vue';
 
 export default defineComponent({
-  name: 'sidebar',
+  name: 'Sidebar',
   props: {
     playerNumber: {
       type: Number,

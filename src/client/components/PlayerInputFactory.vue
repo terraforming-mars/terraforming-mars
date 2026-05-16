@@ -65,7 +65,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
 };
 
 export default defineComponent({
-  name: 'player-input-factory',
+  name: 'PlayerInputFactory',
   props: {
     players: {
       type: Array as () => Array<PublicPlayerModel>,

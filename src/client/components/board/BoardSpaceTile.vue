@@ -102,7 +102,7 @@ const descriptions: Record<TileType, string> = {
 };
 
 export default defineComponent({
-  name: 'board-space-tile',
+  name: 'BoardSpaceTile',
   props: {
     space: {
       type: Object as () => SpaceModel,

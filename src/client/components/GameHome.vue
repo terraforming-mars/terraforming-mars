@@ -21,12 +21,12 @@
 
     <div class="spacing-setup"></div>
 
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
 
     <div class="spacing-setup"></div>
     <div v-if="game !== undefined">
       <h1 v-i18n>Game settings</h1>
-      <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
+      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@ function copyToClipboard(text: string): void {
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
 export default defineComponent({
-  name: 'game-home',
+  name: 'GameHome',
   props: {
     game: {
       type: Object as () => SimpleGameModel,

@@ -33,7 +33,7 @@ const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconC
 };
 
 export default defineComponent({
-  name: 'global-parameter-value',
+  name: 'GlobalParameterValue',
   props: {
     param: {
       type: String as () => BaseGlobalParameter,

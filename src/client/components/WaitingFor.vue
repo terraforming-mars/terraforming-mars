@@ -14,7 +14,7 @@
       </label>
       <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
     </template>
-    <player-input-factory :players="players"
+    <PlayerInputFactory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
                           :onsave="onsave"
@@ -58,7 +58,7 @@ type DataModel = {
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
 
 export default defineComponent({
-  name: 'waiting-for',
+  name: 'WaitingFor',
   props: {
     playerView: {
       type: Object as () => ViewModel,

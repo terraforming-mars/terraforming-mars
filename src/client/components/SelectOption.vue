@@ -1,7 +1,7 @@
 <template>
   <div class="wf-component wf-component--select-option">
     <div v-if="showtitle === true" class="wf-component-title">{{ $t(playerinput.title) }}</div>
-    <warnings-component :warnings="playerinput.warnings"/>
+    <WarningsComponent :warnings="playerinput.warnings"/>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
 </template>
@@ -15,7 +15,7 @@ import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from './WarningsComponent.vue';
 
 export default defineComponent({
-  name: 'select-option',
+  name: 'SelectOption',
   props: {
     playerinput: {
       type: Object as () => SelectOptionModel,

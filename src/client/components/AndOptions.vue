@@ -1,7 +1,7 @@
 <template>
   <div class='wf-options'>
     <div v-if="showtitle" class="wf-title">{{ $t(playerinput.title) }}</div>
-    <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
+    <PlayerInputFactory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
       ref="childInputs"
       :players="players"
@@ -29,7 +29,7 @@ interface DataModel {
 }
 
 export default defineComponent({
-  name: 'and-options',
+  name: 'AndOptions',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,

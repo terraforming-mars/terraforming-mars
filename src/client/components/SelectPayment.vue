@@ -4,7 +4,7 @@
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
     <template v-for="unit of SPENDABLE_RESOURCES" :key="unit">
-      <payment-unit-component
+      <PaymentUnitComponent
         v-model.number="payment[unit]"
         v-if="canUse(unit) === true"
         :unit="unit"

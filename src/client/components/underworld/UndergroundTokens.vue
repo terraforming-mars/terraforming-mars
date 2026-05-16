@@ -1,7 +1,7 @@
 <template>
   <div class="player_home_block--underground-tokens">
     <div class="underground-tokens">
-      <underground-token
+      <UndergroundToken
       v-for="(token, idx) in underworldData.tokens"
       :token="token"
       :key="idx"

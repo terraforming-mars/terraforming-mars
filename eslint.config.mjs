@@ -101,6 +101,10 @@ const pluginRules = {
     ],
   }],
   'vue/no-reserved-component-names': 'warn',
+  // B15 — directive shorthand consistency.
+  'vue/v-on-style': ['error', 'shorthand'],
+  'vue/v-bind-style': ['error', 'shorthand'],
+  'vue/v-slot-style': ['error', 'shorthand'],
 };
 
 const sharedLanguageOptions = {

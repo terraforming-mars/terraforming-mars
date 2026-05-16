@@ -8,7 +8,7 @@
   </template>
   <div v-else class="wf-root">
     <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
-      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" v-on:change="updateSuspend">
+      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" @change="updateSuspend">
       <label for="suspend-checkbox">
         <span v-i18n>Suspend</span>
       </label>

@@ -2,7 +2,7 @@
   <div class="card-help" v-show="hovering" @click.stop="open"><a>?</a></div>
   <Teleport to="body">
     <PopupPanel v-if="showPopup" @close="close">
-      <template v-slot:header>
+      <template #header>
         <h2>{{ name }}</h2>
       </template>
       <div class="card-help-text" v-html="renderedHelpText"></div>

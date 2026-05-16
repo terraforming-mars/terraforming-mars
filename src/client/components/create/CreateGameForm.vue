@@ -12,7 +12,7 @@
                     <div class="create-game-page-container">
                         <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
-                            <div v-for="pCount in [1,2,3,4,5,6]" v-bind:key="pCount">
+                            <div v-for="pCount in [1,2,3,4,5,6]" :key="pCount">
                               <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                               <label :for="pCount+'-radio'">
                                   {{ getPlayersCountText(pCount) }}
@@ -116,7 +116,7 @@
                             </template>
 
                             <template v-if="expansions.turmoil">
-                                <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
+                                <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" @change="politicalAgendasExtensionToggle()">
                                 <label for="politicalAgendas-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-agendas"></div>
                                     <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
@@ -180,7 +180,7 @@
                         <div class="create-game-page-column">
                             <h4 v-i18n>Board</h4>
 
-                            <div v-for="boardName in boards" v-bind:key="boardName">
+                            <div v-for="boardName in boards" :key="boardName">
                               <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                               <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                               <label :for="boardName+'-checkbox'" class="expansion-button">
@@ -387,7 +387,7 @@
                                 <span v-i18n>Random first player</span>
                             </label>
 
-                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
+                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" @change="randomMAToggle()">
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
@@ -447,14 +447,14 @@
                         <div class="create-game-players-cont">
                             <div class="container">
                                 <div class="columns">
-                                  <template v-for="(newPlayer, index) in getPlayers()" v-bind:key="index">
+                                  <template v-for="(newPlayer, index) in getPlayers()" :key="index">
                                     <div>
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
                                               <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
                                           </div>
                                           <div class="create-game-page-color-row">
-                                              <template v-for="color in PLAYER_COLORS" v-bind:key="color">
+                                              <template v-for="color in PLAYER_COLORS" :key="color">
                                                 <div>
                                                   <input type="radio" :value="color" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
                                                   <label :for="'radioBox' + color + (index + 1)">
@@ -493,11 +493,11 @@
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" v-on:change="uploadSettings()"/>
+                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()"/>
                             </label>
 
                             <label>
-                                <div v-on:click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                                <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
                             </label>
                         </div>
                     </div>
@@ -509,9 +509,9 @@
                 ref="corporationsFilter"
                 v-show="showCorporationList"
                 v-if="showCorporationList"
-                v-on:corporation-list-changed="updateCustomCorporations"
-                v-bind:expansions="expansions"
-                v-bind:selected="customCorporations"
+                @corporation-list-changed="updateCustomCorporations"
+                :expansions="expansions"
+                :selected="customCorporations"
                 @close="showCorporationList = false"
             ></CorporationsFilter>
 
@@ -519,9 +519,9 @@
                 ref="preludesFilter"
                 v-show="showPreludesList"
                 v-if="showPreludesList"
-                v-on:prelude-list-changed="updateCustomPreludes"
-                v-bind:expansions="expansions"
-                v-bind:selected="customPreludes"
+                @prelude-list-changed="updateCustomPreludes"
+                :expansions="expansions"
+                :selected="customPreludes"
                 @close="showPreludesList = false"
             ></PreludesFilter>
 
@@ -529,9 +529,9 @@
                 ref="coloniesFilter"
                 v-show="showColoniesList"
                 v-if="showColoniesList"
-                v-on:colonies-list-changed="updateCustomColonies"
-                v-bind:expansions="expansions"
-                v-bind:selected="customColonies"
+                @colonies-list-changed="updateCustomColonies"
+                :expansions="expansions"
+                :selected="customColonies"
                 @close="showColoniesList = false"
             ></ColoniesFilter>
 
@@ -539,16 +539,16 @@
                 ref="ceosFilter"
                 v-show="showCeosList"
                 v-if="showCeosList"
-                v-on:ceo-list-changed="updateCustomCeos"
-                v-bind:expansions="expansions"
-                v-bind:selected="customCeos"
+                @ceo-list-changed="updateCustomCeos"
+                :expansions="expansions"
+                :selected="customCeos"
                 @close="showCeosList = false"
             ></CeosFilter>
 
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
-                  v-on:cards-list-changed="updateBannedCards"
+                  @cards-list-changed="updateBannedCards"
                   :title="'Cards to exclude from the game'"
                   :hint="'Start typing the card name to exclude'"
               ></CardsFilter>
@@ -557,7 +557,7 @@
             <div class="create-game--block" v-if="showIncludedCards">
               <CardsFilter
                   ref="cardsFilter2"
-                  v-on:cards-list-changed="updateIncludedCards"
+                  @cards-list-changed="updateIncludedCards"
                   :title="'Cards to include in the game'"
                   :hint="'Start typing the card name to include'"
               ></CardsFilter>

@@ -6,34 +6,34 @@
 
       <div class="search-container">
         <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-        <button id="namesOnlyToggle" name="namesOnly" v-on:click="toggleNamesOnly()">
+        <button id="namesOnlyToggle" name="namesOnly" @click="toggleNamesOnly()">
             <span v-if="namesOnly === true" v-i18n>Names only</span>
             <span v-else v-i18n>Full text</span>
         </button>
 
-        <button id="sort-order" v-on:click="toggleSortOrder()" style="width: 85px;">
+        <button id="sort-order" @click="toggleSortOrder()" style="width: 85px;">
             <span v-if="sortOrder === 'a'" v-i18n>A-Z</span>
             <span v-else v-i18n>0-9</span>
             &#x2195;
         </button>
 
-        <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
+        <button id="show-vps-only" @click="toggleVps()" style="width: 63px;">
             <span v-if="vps === 0" v-i18n>all</span>
             <span v-if="vps === 1" v-i18n>+VPs</span>
             <span v-if="vps === 2" v-i18n>-VPs</span>
         </button>
 
-        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
+        <button id="show-metadata" @click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
             <span v-if="showMetadata === true">🛰️■</span>
             <span v-else>🛰️□</span>
         </button>
 
-        <button id="tall-cards" v-on:click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
+        <button id="tall-cards" @click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
             <span v-if="tallCards === true">🂠→<span class="small-card">🂠</span></span>
               <span v-else><span class="small-card">🂠</span>→🂠</span>
         </button>
 
-        <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
+        <button id="advanced-search-collapser" @click="toggleAdvancedSearch()">
             <span v-if="showAdvanced === true" v-i18n>Advanced «</span>
             <span v-else v-i18n>Advanced »</span>
         </button>
@@ -42,7 +42,7 @@
       <div id="selections" v-show="showAdvanced">
         <!-- expansions -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertExpansions()">-</button>
+          <button id="toggle-checkbox" @click="invertExpansions()">-</button>
 
           <span v-for="expansion in allModules" :key="expansion">
             <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
@@ -54,7 +54,7 @@
 
         <!-- types -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertTypes()">
+          <button id="toggle-checkbox" @click="invertTypes()">
               <span v-i18n>-</span>
           </button>
 
@@ -70,7 +70,7 @@
 
         <!-- tags -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertTags()">
+          <button id="toggle-checkbox" @click="invertTags()">
               <span v-i18n>-</span>
           </button>
           <span v-for="tag in allTags" :key="tag">
@@ -85,7 +85,7 @@
 
         <!-- card resources -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertResources()">
+          <button id="toggle-checkbox" @click="invertResources()">
               <span v-i18n>-</span>
           </button>
           <span v-for="resource in allResources" :key="resource">

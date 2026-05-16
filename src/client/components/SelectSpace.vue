@@ -4,9 +4,9 @@
         message="Place your tile here?"
         :enableDontShowAgainCheckbox="true"
         ref="confirmation"
-        v-on:accept="confirmPlacement"
-        v-on:dismiss="cancelPlacement"
-        v-on:hide="hideDialog" />
+        @accept="confirmPlacement"
+        @dismiss="cancelPlacement"
+        @hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">
       {{ $t(playerinput.title) }}
       <go-to-map :playerinput="playerinput"></go-to-map>

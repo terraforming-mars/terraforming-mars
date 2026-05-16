@@ -63,7 +63,7 @@
       <div class="player_home_block player_home_block--hand" v-if="cardsInHandCount > 0" id="shortkey-hand">
         <div class="hiding-card-button-row">
           <dynamic-title title="Cards In Hand" :color="thisPlayer.color"/>
-          <div :class="getHideButtonClass('HAND')" v-on:click.prevent="toggle('HAND')">
+          <div :class="getHideButtonClass('HAND')" @click.prevent="toggle('HAND')">
             <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
             <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
           </div>
@@ -79,15 +79,15 @@
         <div class="hiding-card-button-row">
           <dynamic-title title="Played Cards" :color="thisPlayer.color" />
           <div class="played-cards-filters">
-            <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggle('ACTIVE')">
+            <div :class="getHideButtonClass('ACTIVE')" @click.prevent="toggle('ACTIVE')">
               <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]).length.toString()}}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
             </div>
-            <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggle('AUTOMATED')">
+            <div :class="getHideButtonClass('AUTOMATED')" @click.prevent="toggle('AUTOMATED')">
               <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).length.toString()}}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
             </div>
-            <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggle('EVENT')">
+            <div :class="getHideButtonClass('EVENT')" @click.prevent="toggle('EVENT')">
               <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.EVENT]).length.toString()}}</div>
               <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
             </div>

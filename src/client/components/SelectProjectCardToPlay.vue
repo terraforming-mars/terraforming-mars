@@ -4,7 +4,7 @@
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-    <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
+    <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" @change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>
 

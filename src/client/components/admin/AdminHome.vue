@@ -1,7 +1,7 @@
 <template>
   <div class="admin-home">
     <ul>
-      <li v-for="path of paths" v-bind:key="path">
+      <li v-for="path of paths" :key="path">
         <a :href="path + '?serverId=' + serverId">{{path}}</a>
       </li>
     </ul>

@@ -28,7 +28,7 @@ describe('WaitingFor', () => {
       global: {
         ...globalConfig.global,
         stubs: {
-          'player-input-factory': {template: '<div class="stub-pif"></div>'},
+          'PlayerInputFactory': {template: '<div class="stub-pif"></div>'},
         },
       },
       props: {
@@ -51,7 +51,7 @@ describe('WaitingFor', () => {
       global: {
         ...globalConfig.global,
         stubs: {
-          'player-input-factory': true,
+          'PlayerInputFactory': true,
         },
       },
       props: {

@@ -10,7 +10,7 @@
         <template v-if="ledger[unit]?.available > 0">
           <tr>
             <td>
-              <payment-unit-component
+              <PaymentUnitComponent
                 v-model.number="payment[unit]"
                 :unit="unit"
                 :description="descriptions[unit]"

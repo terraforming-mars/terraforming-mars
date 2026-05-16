@@ -1,12 +1,12 @@
 <template>
         <div class="players-overview" v-if="hasPlayers()">
-            <overview-settings />
+            <OverviewSettings />
             <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.color">
-                    <other-player v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
+                    <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
-            <player-info v-for="(p, index) in getPlayersInOrder()"
+            <PlayerInfo v-for="(p, index) in getPlayersInOrder()"
               :player="p"
               :key="p.color"
               :playerView="playerView"
@@ -14,7 +14,7 @@
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>
             <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" ></div>
-            <player-info
+            <PlayerInfo
               v-if="thisPlayer !== undefined"
               :player="thisPlayer"
               :key="thisPlayer.color"

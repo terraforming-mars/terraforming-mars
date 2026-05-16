@@ -17,7 +17,7 @@ import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default defineComponent({
-  name: 'language-switcher',
+  name: 'LanguageSwitcher',
   methods: {
     reloadWindow() {
       window.location.reload();

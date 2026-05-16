@@ -102,7 +102,7 @@
         <button class="btn btn-lg btn-primary" @click="okClicked" v-i18n>Ok</button>
         <button class="btn btn-lg btn-primary" @click="showBugDialog" v-i18n>Report a bug</button>
       </div>
-      <bug-report-dialog ref="bugDialog"/>
+      <BugReportDialog ref="bugDialog"/>
     </div>
 </template>
 

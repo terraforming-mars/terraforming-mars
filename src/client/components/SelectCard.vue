@@ -15,7 +15,7 @@
             </Card>
         </label>
         <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
-        <warnings-component :warnings="warnings"/>
+        <WarningsComponent :warnings="warnings"/>
         <div v-if="showsave === true" class="nofloat">
             <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />

@@ -135,12 +135,12 @@ export default defineComponent({
     },
   },
   components: {
-    'board': Board,
+    Board,
     Card,
-    'waiting-for': WaitingFor,
+    WaitingFor,
     Milestones,
     Awards,
-    'turmoil': Turmoil,
+    Turmoil,
     MoonBoard,
   },
   methods: {

@@ -46,7 +46,7 @@ export default defineComponent({
     };
   },
   components: {
-    'colony': Colony,
+    Colony,
     AppButton,
   },
   methods: {

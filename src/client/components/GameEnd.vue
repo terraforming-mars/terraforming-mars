@@ -386,8 +386,8 @@ export default defineComponent({
     };
   },
   components: {
-    'board': Board,
-    'log-panel': LogPanel,
+    Board,
+    LogPanel,
     AppButton,
     MoonBoard,
     PlanetaryTracks,

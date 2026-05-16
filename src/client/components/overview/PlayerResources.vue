@@ -68,7 +68,7 @@ export default defineComponent({
     },
   },
   components: {
-    'player-resource': PlayerResource,
+    PlayerResource,
   },
 });
 </script>

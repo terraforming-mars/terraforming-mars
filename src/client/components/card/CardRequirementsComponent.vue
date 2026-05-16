@@ -21,7 +21,7 @@ export default defineComponent({
     },
   },
   components: {
-    'card-requirement': CardRequirementComponent,
+    CardRequirementComponent,
   },
   computed: {
     getClasses(): string {

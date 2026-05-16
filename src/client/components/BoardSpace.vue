@@ -65,9 +65,9 @@ export default defineComponent({
     return {};
   },
   components: {
-    'bonus': Bonus,
-    'board-space-tile': BoardSpaceTile,
-    'underground-token': UndergroundToken,
+    Bonus,
+    BoardSpaceTile,
+    UndergroundToken,
   },
   computed: {
     mainClass(): string {

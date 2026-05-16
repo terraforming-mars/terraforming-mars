@@ -68,7 +68,7 @@ export default defineComponent({
     };
   },
   components: {
-    'confirm-dialog': ConfirmDialog,
+    ConfirmDialog,
     GoToMap,
   },
   computed: {

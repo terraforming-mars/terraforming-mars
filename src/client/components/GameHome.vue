@@ -71,7 +71,7 @@ export default defineComponent({
   },
   components: {
     AppButton,
-    'game-setup-detail': GameSetupDetail,
+    GameSetupDetail,
     PurgeWarning,
   },
   data() {

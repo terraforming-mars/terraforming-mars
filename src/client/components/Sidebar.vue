@@ -147,8 +147,8 @@ export default defineComponent({
     },
   },
   components: {
-    'game-setup-detail': GameSetupDetail,
-    'global-parameter-value': GlobalParameterValue,
+    GameSetupDetail,
+    GlobalParameterValue,
     MoonGlobalParameterValue,
     PreferencesIcon,
     LanguageIcon,

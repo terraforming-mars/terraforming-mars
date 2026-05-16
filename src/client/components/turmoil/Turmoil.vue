@@ -33,7 +33,7 @@
           </div>
           <div class="policies">
             <div class="policies-title">
-                <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
+                <a class="policies-clickable" href="#" @click.prevent="toggleMe()" v-i18n>Policies</a>
             </div>
             <div v-show="isVisible()" class='policies-global'>
               <div v-for="party in turmoil.parties" :key="party.name" class='policy-block'>

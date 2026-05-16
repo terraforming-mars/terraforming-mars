@@ -1,6 +1,6 @@
 <template>
   <PopupPanel @close="$emit('close')">
-    <template v-slot:header>
+    <template #header>
       <h2>Keyboard Shortcuts</h2>
     </template>
     A - Main Board<br/>

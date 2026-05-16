@@ -5,7 +5,7 @@
     <input
       class="form-input form-inline payments_input"
       :value="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @input="onInput"
     >
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
@@ -52,6 +52,11 @@ export default defineComponent({
       case 'seeds': return 'resource_icon--seed';
       default: return 'resource_icon--' + this.unit;
       }
+    },
+  },
+  methods: {
+    onInput(event: Event) {
+      this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
     },
   },
 });

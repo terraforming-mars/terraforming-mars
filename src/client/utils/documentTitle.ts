@@ -5,7 +5,7 @@ export function setDocumentTitle(title?: string): void {
   if (title === undefined) {
     document.title = $t(APP_NAME);
   } else {
-    document.title = `${title} | $t(${APP_NAME})`;
+    document.title = `${title} | ${$t(APP_NAME)}`;
   }
 }
 

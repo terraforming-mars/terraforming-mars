@@ -1,5 +1,5 @@
 <template>
-  <div :class="klass" :title="$t(description)" data-test="tile"/>
+  <div :class="klass" :title="$t(description)" data-test="tile"></div>
 </template>
 
 <script lang="ts">

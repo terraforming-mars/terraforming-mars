@@ -80,7 +80,7 @@
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === ColonyName.PLUTO" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
-      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" />
+      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" ></div>
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === ColonyName.TITANIA" class="white-x" style="margin-left:42px;"></div>
@@ -112,9 +112,9 @@
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
     <!-- Show the spaces for the player cubes and the white cube -->
-    <colony-row :metadata="metadata" :colony="colony"></colony-row>
+    <colony-row :metadata="metadata" :colony="colony"/>
     <!-- show the numbers underneath the colony row -->
-    <colony-trade-row :metadata="metadata"></colony-trade-row>
+    <colony-trade-row :metadata="metadata"/>
   </div>
 <!-- </div> -->
 </div>

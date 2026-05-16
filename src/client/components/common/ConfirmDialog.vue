@@ -7,7 +7,7 @@
         <button class="btn btn-lg" @click="dismiss()" v-i18n>No</button>
       </menu>
       <template v-if="enableDontShowAgainCheckbox">
-        <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
+        <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" >
         <label for="dialog-confirm-dismiss" v-i18n>Don't show this again</label>
       </template>
     </form>

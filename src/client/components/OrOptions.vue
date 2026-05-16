@@ -4,8 +4,8 @@
     <label v-if="playerinput.warning !== undefined" class="card-warning"><div>({{ $t(playerinput.warning) }})</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
       <label class="form-radio" ref="optionLabels">
-        <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" />
-        <i class="form-icon" />
+        <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" >
+        <i class="form-icon" ></i>
         <span>{{ $t(option.title) }}</span>
       </label>
       <div v-if="selectedIdx === idx" style="margin-left: 30px">

@@ -139,7 +139,7 @@
       <section v-show="visibleGlobalEvents.length > 0" class="card-list-cards-list">
         <h2 v-i18n>Global Events</h2>
         <div class="cardbox" v-for="globalEventName in visibleGlobalEvents" :key="globalEventName" v-memo="[globalEventName]">
-          <global-event :globalEventName="globalEventName" type="distant"></global-event>
+          <global-event :globalEventName="globalEventName" type="distant"/>
         </div>
       </section>
 
@@ -147,7 +147,7 @@
         <h2 v-i18n>Colonies</h2>
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
-            <colony :colony="colonyModel(colonyName)"></colony>
+            <colony :colony="colonyModel(colonyName)"/>
           </div>
         </div>
       </section>
@@ -157,7 +157,7 @@
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
             <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-              <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+              <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"/>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
             <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-              <award :award="awardModel(awardName)" :showDescription="true"></award>
+              <award :award="awardModel(awardName)" :showDescription="true"/>
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@
       </section>
 
       <div class="free-floating-preferences-icon">
-        <preferences-icon></preferences-icon>
+        <preferences-icon/>
       </div>
   </div>
 </template>

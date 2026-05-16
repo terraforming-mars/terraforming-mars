@@ -1,7 +1,7 @@
 <template>
 <div class="reward">
   <div :class="outerClass">
-    <div :class="getClass" />
+    <div :class="getClass" ></div>
   </div>
 </div>
 </template>

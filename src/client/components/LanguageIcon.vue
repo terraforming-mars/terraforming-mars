@@ -5,7 +5,7 @@
       :class="{'sidebar_item--is-active': languagePanelOpen}">
       <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
       :title="title"
-      @click="languagePanelOpen = !languagePanelOpen"/>
+      @click="languagePanelOpen = !languagePanelOpen"></div>
       </div>
     <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
   </div>

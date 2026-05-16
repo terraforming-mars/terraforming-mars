@@ -8,11 +8,11 @@
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params" :class="{terraformed: isTerraformed}">
-    <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"></global-parameter-value>
-    <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"></global-parameter-value>
-    <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"></global-parameter-value>
-    <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"></global-parameter-value>
-    <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"></MoonGlobalParameterValue>
+    <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"/>
+    <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"/>
+    <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"/>
+    <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"/>
+    <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"/>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + playerColor"></div>
@@ -41,7 +41,7 @@
       </div>
   </a>
 
-  <language-icon></language-icon>
+  <language-icon/>
 
   <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
     <i class="sidebar_icon sidebar_icon--info"
@@ -51,7 +51,7 @@
     <div class="info_panel" v-if="ui.gamesetup_detail_open">
       <div class="info_panel-spacing"></div>
       <div class="info-panel-title" v-i18n>Game Setup Details</div>
-      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"></game-setup-detail>
+      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"/>
 
       <div class="info_panel_actions">
         <button class="btn btn-lg btn-primary" @click="ui.gamesetup_detail_open=false" v-i18n>Ok</button>
@@ -65,7 +65,7 @@
     </div>
   </a>
 
-  <preferences-icon></preferences-icon>
+  <preferences-icon/>
 </div>
 </template>
 

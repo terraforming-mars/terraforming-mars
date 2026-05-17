@@ -125,11 +125,9 @@
       <underground-tokens :underworldData="thisPlayer.underworldData"></underground-tokens>
     </div>
 
-    <PlayerSetupView
-      v-if="thisPlayer.tableau.length === 0"
-      :playerView="playerView"
-      :tileView="tileView"
-    />
+    <template v-if="thisPlayer.tableau.length === 0">
+      <PlayerSetupView :playerView="playerView" :tileView="tileView"/>
+    </template>
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor hotkey-target"></a>
@@ -149,7 +147,7 @@
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
+    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
     <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"></KeyboardShortcuts>
   </div>
 </template>

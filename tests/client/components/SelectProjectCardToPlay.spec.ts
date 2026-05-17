@@ -2,18 +2,18 @@ import {mount} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlayRevised.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
 import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
-import {PaymentTesterRevised as PaymentTester} from './PaymentTesterRevised';
+import {PaymentTester} from './PaymentTester';
 import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 
-describe('SelectProjectCardToPlayRevised', () => {
+describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
   let saveResponse: SelectProjectCardToPlayResponse;
 

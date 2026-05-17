@@ -20,7 +20,7 @@
 import {defineComponent} from 'vue';
 import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource} from '@/common/inputs/Spendable';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixinRevised';
+import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
@@ -29,7 +29,7 @@ import {Ledger} from '@/client/components/PaymentLedger';
 import {Units} from '@/common/Units';
 
 export default defineComponent({
-  name: 'SelectPaymentRevised',
+  name: 'SelectPayment',
   mixins: [PaymentWidgetMixin],
   props: {
     playerView: {

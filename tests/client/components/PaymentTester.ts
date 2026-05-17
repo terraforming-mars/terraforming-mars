@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {Payment} from '@/common/inputs/Payment';
 import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
-export class PaymentTesterRevised {
+export class PaymentTester {
   constructor(private wrapper: VueWrapper<any>) {}
 
   private static selector(unit: SpendableResource) {
@@ -11,19 +11,19 @@ export class PaymentTesterRevised {
   }
 
   public async clickMax(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-max');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-max');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickMinus(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-minus');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-minus');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickPlus(type: SpendableResource) {
-    const button = this.wrapper.find(PaymentTesterRevised.selector(type) + ' .btn-plus');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-plus');
     await button.trigger('click');
     await this.nextTick();
   }
@@ -35,7 +35,7 @@ export class PaymentTesterRevised {
   }
 
   public getValue(unit: SpendableResource): number {
-    const found = this.wrapper.find(PaymentTesterRevised.selector(unit) + ' input');
+    const found = this.wrapper.find(PaymentTester.selector(unit) + ' input');
     if (!found.exists()) {
       throw new Error('Cannot find text box for ' + unit);
     }
@@ -65,7 +65,7 @@ export class PaymentTesterRevised {
    * Returns true when the text box for `resource` is visible.
    */
   private isAvailable(resource: SpendableResource): boolean {
-    return this.wrapper.find(PaymentTesterRevised.selector(resource) + ' input').exists();
+    return this.wrapper.find(PaymentTester.selector(resource) + ' input').exists();
   }
 
   /**

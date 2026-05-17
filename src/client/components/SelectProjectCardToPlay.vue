@@ -43,7 +43,7 @@ import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixinRevised';
+import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
@@ -55,7 +55,7 @@ import PaymentForm from '@/client/components/PaymentForm.vue';
 import {Ledger} from '@/client/components/PaymentLedger';
 
 export default defineComponent({
-  name: 'SelectProjectCardToPlayRevised',
+  name: 'SelectProjectCardToPlay',
   mixins: [PaymentWidgetMixin],
   props: {
     playerView: {

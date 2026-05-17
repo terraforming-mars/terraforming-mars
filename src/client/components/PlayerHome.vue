@@ -171,29 +171,25 @@ import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
-import {nextTileView, TileView} from './board/TileView';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
-import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {HomeMixin} from '@/client/mixins/HomeMixin';
 
 export type PlayerHomeModel = {
   showHand: boolean;
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
-  tileView: TileView;
-  keyboardShortcutOpened: boolean;
-  hotkeyTargets: Array<Element>;
 }
 
 export default defineComponent({
   name: 'player-home',
+  mixins: [HomeMixin],
   data(): PlayerHomeModel {
     const preferences = getPreferences();
     return {
@@ -201,9 +197,6 @@ export default defineComponent({
       showActiveCards: !preferences.hide_active_cards,
       showAutomatedCards: !preferences.hide_automated_cards,
       showEventCards: !preferences.hide_event_cards,
-      tileView: 'show',
-      keyboardShortcutOpened: false,
-      hotkeyTargets: [],
     };
   },
   watch: {
@@ -269,44 +262,6 @@ export default defineComponent({
     KeyboardShortcuts,
   },
   methods: {
-    navigatePage(event: KeyboardEvent) {
-      // Most '?' are shifted, so process this before the action that exits early with modifiers
-      if (event.key === '?') {
-        this.keyboardShortcutOpened = !this.keyboardShortcutOpened;
-        return;
-      }
-      if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
-        return;
-      }
-      const ids: Partial<Record<string, string>> = {
-        [KeyboardNavigation.GAMEBOARD]: 'shortkey-board',
-        [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
-        [KeyboardNavigation.HAND]: 'shortkey-hand',
-        [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
-      };
-      const inputSource = event.target as Node;
-      if (inputSource.nodeName.toLowerCase() !== 'input') {
-        const id = ids[event.code];
-        if (id) {
-          const el = document.getElementById(id);
-          if (el) {
-            event.preventDefault();
-            el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
-          }
-        } else if (event.code.startsWith('Digit')) {
-          const ASCII_ONE = '1'.charCodeAt(0);
-          const index = event.code.charCodeAt(5) - ASCII_ONE;
-          if (index >= 0 && index < this.hotkeyTargets.length) {
-            const el = this.hotkeyTargets[index];
-            console.log(el);
-            if (el) {
-              // event.preventDefault();
-              el.scrollIntoView({block: 'start', inline: 'center', behavior: 'smooth'});
-            }
-          }
-        }
-      }
-    },
     isPlayerActing(playerView: PlayerViewModel) : boolean {
       return playerView.players.length > 1 && playerView.waitingFor !== undefined;
     },
@@ -332,9 +287,6 @@ export default defineComponent({
         this.showEventCards = !this.showEventCards;
         break;
       }
-    },
-    cycleTileView(): void {
-      this.tileView = nextTileView(this.tileView);
     },
     isVisible(type: string): boolean {
       switch (type) {
@@ -383,20 +335,6 @@ export default defineComponent({
     isNotActive(cardModel: CardModel): boolean {
       return !getCardOrThrow(cardModel.name).hasAction;
     },
-  },
-  unmounted() {
-    window.removeEventListener('keydown', this.navigatePage);
-  },
-  mounted() {
-    setDocumentTitle(this.game.name);
-    window.addEventListener('keydown', this.navigatePage);
-    const targets = this.$el.getElementsByClassName('hotkey-target');
-    for (let i = 0; i < targets.length; i++) {
-      const element = targets.item(i);
-      if (element) {
-        this.hotkeyTargets.push(element);
-      }
-    }
   },
 });
 

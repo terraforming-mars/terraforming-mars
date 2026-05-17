@@ -76,27 +76,14 @@ import Sidebar from '@/client/components/Sidebar.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {range} from '@/common/utils/utils';
-import {nextTileView, TileView} from './board/TileView';
-import {setDocumentTitle} from '@/client/utils/documentTitle';
-import {KeyboardNavigation} from './KeyboardNavigation';
-
-export type SpectatorHomeModel = {
-  tileView: TileView;
-  keyboardShortcutOpened: boolean;
-  hotkeyTargets: Array<Element>;
-}
+import {HomeMixin} from '@/client/mixins/HomeMixin';
 
 export default defineComponent({
   name: 'SpectatorHome',
-  data(): SpectatorHomeModel {
-    return {
-      tileView: 'show',
-      keyboardShortcutOpened: false,
-      hotkeyTargets: [],
-    };
-  },
+  mixins: [HomeMixin],
   props: {
     spectator: {
       type: Object as () => SpectatorModel,
@@ -112,51 +99,15 @@ export default defineComponent({
     Colony,
     DynamicTitle,
     GameBoardView,
+    KeyboardShortcuts,
     LogPanel,
     PlanetaryTracks,
     PlayersOverview,
+    PurgeWarning,
     Sidebar,
     WaitingFor,
   },
   methods: {
-    navigatePage(event: KeyboardEvent) {
-      // Most '?' are shifted, so process this before the action that exits early with modifiers
-      if (event.key === '?') {
-        this.keyboardShortcutOpened = !this.keyboardShortcutOpened;
-        return;
-      }
-      if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
-        return;
-      }
-      const ids: Partial<Record<string, string>> = {
-        [KeyboardNavigation.GAMEBOARD]: 'shortkey-board',
-        [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
-        [KeyboardNavigation.HAND]: 'shortkey-hand',
-        [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
-      };
-      const inputSource = event.target as Node;
-      if (inputSource.nodeName.toLowerCase() !== 'input') {
-        const id = ids[event.code];
-        if (id) {
-          const el = document.getElementById(id);
-          if (el) {
-            event.preventDefault();
-            el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
-          }
-        } else if (event.code.startsWith('Digit')) {
-          const ASCII_ONE = '1'.charCodeAt(0);
-          const index = event.code.charCodeAt(5) - ASCII_ONE;
-          if (index >= 0 && index < this.hotkeyTargets.length) {
-            const el = this.hotkeyTargets[index];
-            console.log(el);
-            if (el) {
-              // event.preventDefault();
-              el.scrollIntoView({block: 'start', inline: 'center', behavior: 'smooth'});
-            }
-          }
-        }
-      }
-    },
     forceRerender() {
       // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
       vueRoot(this).updateSpectator();
@@ -164,20 +115,6 @@ export default defineComponent({
     range(n: number): Array<number> {
       return range(n);
     },
-    cycleTileView(): void {
-      this.tileView = nextTileView(this.tileView);
-    },
-  },
-  mounted() {
-    setDocumentTitle(this.game.name);
-    window.addEventListener('keydown', this.navigatePage);
-    const targets = this.$el.getElementsByClassName('hotkey-target');
-    for (let i = 0; i < targets.length; i++) {
-      const element = targets.item(i);
-      if (element) {
-        this.hotkeyTargets.push(element);
-      }
-    }
   },
 });
 </script>

@@ -25,7 +25,7 @@ describe('ApiWaitingFor', () => {
 
   it('fails when player not found', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('g' + player.id as GameId, [player], player);
+    const game = Game.newInstance('g' + player.id as GameId, [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     (game as any).getPlayerById = () => {
       throw new Error('player does not exist');
@@ -39,7 +39,7 @@ describe('ApiWaitingFor', () => {
 
   it('sends model for player', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player);
+    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     scaffolding.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
@@ -51,7 +51,7 @@ describe('ApiWaitingFor', () => {
   it('fails when spectator not found', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player);
+    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     (game as any).getBySpectatorId = () => {
       throw new Error('spectator does not exist');
@@ -66,7 +66,7 @@ describe('ApiWaitingFor', () => {
   it('sends model for spectator', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player, undefined, undefined, 's-spectatorid');
+    const game = Game.newInstance('game-id', [player, player2], player, 's-spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     scaffolding.url = '/api/waitingfor?id=' + game.spectatorId + '&gameAge=50&undoCount=0';

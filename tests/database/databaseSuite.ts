@@ -65,7 +65,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('game is saved', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      Game.newInstance('game-id-1212', [player], player);
+      Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       const allGames = await db.getGameIds();
       expect(allGames).deep.eq(['game-id-1212']);
@@ -73,7 +73,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('getGameIds - removes duplicates', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       cast(player.popWaitingFor(), SelectInitialCards);
       await db.lastSaveGamePromise;
       await db.saveGame(game);
@@ -84,10 +84,10 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('getGameIds - includes finished games', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       cast(player.popWaitingFor(), SelectInitialCards);
       await db.lastSaveGamePromise;
-      Game.newInstance('game-id-2323', [player], player);
+      Game.newInstance('game-id-2323', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
 
       await db.markFinished(game.id);
@@ -98,7 +98,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('saveIds', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -113,7 +113,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
     if (dtor.omit?.markFinished !== true) {
       it('markFinished', async () => {
         const player = TestPlayer.BLACK.newPlayer();
-        const game = Game.newInstance('game-id-1212', [player], player);
+        const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
         await db.lastSaveGamePromise;
         await db.saveGame(game);
         await db.saveGame(game);
@@ -134,7 +134,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
         it('moreCleaning', async () => {
           async function createGame(id: GameId) {
             const player = TestPlayer.BLACK.newPlayer();
-            const game = Game.newInstance(id, [player], player);
+            const game = Game.newInstance(id, [player], player, 'spectatorid');
             await db.lastSaveGamePromise;
             await db.saveGame(game);
             await db.saveGame(game);
@@ -179,7 +179,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('gets player count', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -188,7 +188,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('does not find player count by id', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -198,7 +198,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
     if (dtor.omit?.purgeUnfinishedGames !== true) {
       it('purgeUnfinishedGames', async () => {
         const player = TestPlayer.BLACK.newPlayer();
-        const game = Game.newInstance('game-id-1212', [player], player);
+        const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
         await db.lastSaveGamePromise;
         expect(game.lastSaveId).eq(1);
 
@@ -211,7 +211,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
         await db.purgeUnfinishedGames('1');
         expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
         const entry = (await db.getParticipants()).find((entry) => entry.gameId === game.id);
-        expect(entry?.participantIds).deep.eq([player.id]);
+        expect(entry?.participantIds).deep.eq([player.id, 'spectatorid']);
         // Doesn't purge until the time has passed.
         await db.purgeUnfinishedGames('-1');
         // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
@@ -223,7 +223,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('getGame', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, {underworldExpansion: true});
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid', {underworldExpansion: true});
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -241,7 +241,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('getGameVersion', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -325,7 +325,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('deleteGameNbrSaves', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 

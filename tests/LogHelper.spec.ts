@@ -15,7 +15,7 @@ describe('LogHelper', () => {
   const algae = new Algae();
   const ants = new Ants();
   const birds = new Birds();
-  const game = Game.newInstance('gameid', [player1, player2], player1);
+  const game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid');
 
   it('logs no drawn cards ', () => {
     LogHelper.logDrawnCards(player1, []);
@@ -56,7 +56,7 @@ describe('LogHelper', () => {
     const player1 = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
-    const game = Game.newInstance('gameid', [player1, player2], player1);
+    const game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid');
     LogHelper.logDrawnCards(player1, [card1], true);
     const msg = game.gameLog.pop()!;
 

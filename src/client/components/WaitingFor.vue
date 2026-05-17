@@ -3,7 +3,7 @@
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="player in playersWaitingFor" class="log-player" :class="'player_bg_color_' + player.color" :key="player.color"> {{ player.name }} </span>)
+      (⌛ <span v-for="player in playersWaitingFor" class="log-player" :class="playerColorClass(player.color, 'bg')" :key="player.color"> {{ player.name }} </span>)
     </template>
   </template>
   <div v-else class="wf-root">

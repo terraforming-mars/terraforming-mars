@@ -28,7 +28,7 @@ describe('PoliticalAgendas', () => {
   deserialized.forEach((deserialize) => {
     const suffix = deserialize ? ', but deserialized' : '';
     it('Standard' + suffix, () => {
-      let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -51,7 +51,7 @@ describe('PoliticalAgendas', () => {
       // For the neutral chairman to always pick the second item in the list.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
       let newPlayer2: IPlayer = player2;
       if (deserialize) {
         game = Game.deserialize(game.serialize());
@@ -89,7 +89,7 @@ describe('PoliticalAgendas', () => {
       // For the neutral chairperson to always pick the second item.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -110,7 +110,7 @@ describe('PoliticalAgendas', () => {
   });
 
   it('Mars First serialization test', () => {
-    let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
+    let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
     let turmoil = game.turmoil!;
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     turmoil.rulingParty = marsFirst;

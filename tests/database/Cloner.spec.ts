@@ -7,7 +7,7 @@ describe('Cloner', () => {
   it('solo game preserved', () => {
     const player = new Player('old-player1', 'yellow', true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, {
+      'g-old-game-id', [player], player, 'spectatorid', {
         turmoilExtension: true,
       }, -5179823149812374);
 

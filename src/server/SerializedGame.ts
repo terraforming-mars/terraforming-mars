@@ -62,7 +62,7 @@ export type SerializedGame = {
     researchedPlayers: Array<PlayerId>;
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;
-    spectatorId: SpectatorId | undefined;
+    spectatorId: SpectatorId;
     stJosephCathedrals: Array<SpaceId>;
     syndicatePirateRaider: PlayerId | undefined;
     tags: ReadonlyArray<Tag>

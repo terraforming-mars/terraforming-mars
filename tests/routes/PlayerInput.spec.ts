@@ -31,10 +31,10 @@ describe('PlayerInput', () => {
   it('performs undo action', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player);
+    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
 
     await scaffolding.ctx.gameLoader.add(game);
 
@@ -59,10 +59,10 @@ describe('PlayerInput', () => {
   it('reverts to current game instance if undo fails', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player);
+    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
 
     await scaffolding.ctx.gameLoader.add(game);
 
@@ -87,7 +87,7 @@ describe('PlayerInput', () => {
   it('sends 400 on server error', async () => {
     const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player);
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);

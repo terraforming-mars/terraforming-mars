@@ -132,7 +132,7 @@ describeDatabaseSuite({
     it('saveGame with the same saveID', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       cast(player.popWaitingFor(), SelectInitialCards);
       await db.lastSaveGamePromise;
 
@@ -165,13 +165,13 @@ describeDatabaseSuite({
     it('getGames - returns in order of last saved', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game1 = Game.newInstance('game-id-1111', [player], player);
+      const game1 = Game.newInstance('game-id-1111', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       const player2 = TestPlayer.RED.newPlayer();
-      const game2 = Game.newInstance('game-id-2222', [player2], player2);
+      const game2 = Game.newInstance('game-id-2222', [player2], player2, 'spectatorid');
       await db.lastSaveGamePromise;
       const player3 = TestPlayer.BLUE.newPlayer();
-      const game3 = Game.newInstance('game-id-3333', [player3], player3);
+      const game3 = Game.newInstance('game-id-3333', [player3], player3, 'spectatorid');
       await db.lastSaveGamePromise;
 
       expect(await db.getGameIds()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
@@ -196,7 +196,7 @@ describeDatabaseSuite({
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const player2 = TestPlayer.RED.newPlayer();
-      const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
+      const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {draftVariant: false, undoOption: true});
 
       await db.awaitAllSaves();
 
@@ -270,7 +270,7 @@ describeDatabaseSuite({
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const player2 = TestPlayer.RED.newPlayer();
-      const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
+      const game = Game.newInstance('gameid', [player, player2], player2, 'spectatorid', {draftVariant: false, undoOption: true});
       // Adding to the GameLoader because this is manually managed by the Game route, which is the real place responsible for
       // creating new games.
       GameLoader.getInstance().add(game);
@@ -366,7 +366,7 @@ describeDatabaseSuite({
     it('undo works in solo', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('gameid', [player], player, {undoOption: true});
+      const game = Game.newInstance('gameid', [player], player, 'spectatorid', {undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase. This triggers a save.
@@ -450,7 +450,7 @@ describeDatabaseSuite({
       const db = dbFactory();
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -514,7 +514,7 @@ describeDatabaseSuite({
       db.setTrimCount(5);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -546,7 +546,7 @@ describeDatabaseSuite({
       db.setTrimCount(2);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -576,7 +576,7 @@ describeDatabaseSuite({
       db.setTrimCount(0);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -645,7 +645,7 @@ describeDatabaseSuite({
       db.setTrimCount(-1);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 

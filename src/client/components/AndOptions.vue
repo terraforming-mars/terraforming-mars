@@ -4,7 +4,6 @@
     <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
       ref="childInputs"
-      :players="players"
       :playerView="playerView"
       :playerinput="option"
       :onsave="playerFactorySaved(idx)"
@@ -19,7 +18,7 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {AndOptionsModel} from '@/common/models/PlayerInputModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
@@ -33,10 +32,6 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
       required: true,
     },
     playerinput: {

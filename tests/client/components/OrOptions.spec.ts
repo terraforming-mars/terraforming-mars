@@ -245,7 +245,6 @@ describe('OrOptions', () => {
       ...globalConfig,
       global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
       props: {
-        players: [],
         playerView: {},
         playerinput: {type: 'or', title: '', options: [{type: 'option', title: 'a'}]},
         onsave: () => {},
@@ -261,7 +260,6 @@ describe('OrOptions', () => {
       ...globalConfig,
       global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
       props: {
-        players: [],
         playerView: {},
         playerinput: {
           type: 'or',

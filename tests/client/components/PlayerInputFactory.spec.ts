@@ -130,7 +130,6 @@ describe('PlayerInputFactory', () => {
     const wrapper = mount(PlayerInputFactory, {
       ...globalConfig,
       props: {
-        players: [],
         playerView: playerView,
         playerinput: {
           type: 'option',
@@ -167,7 +166,6 @@ describe('PlayerInputFactory', () => {
     const wrapper = mount(PlayerInputFactory, {
       ...globalConfig,
       props: {
-        players: [],
         playerView: playerView,
         playerinput: {
           type: 'option',

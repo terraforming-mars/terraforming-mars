@@ -1,7 +1,6 @@
 <template>
   <component :is="componentName"
     ref="childInput"
-    :players="players"
     :playerView="playerView"
     :playerinput="playerinput"
     :onsave="onsave"
@@ -13,7 +12,7 @@
 
 import {defineComponent} from 'vue';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
-import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import AndOptions from '@/client/components/AndOptions.vue';
@@ -67,10 +66,6 @@ const typeToComponentName: Record<PlayerInputType, string> = {
 export default defineComponent({
   name: 'player-input-factory',
   props: {
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
-      required: true,
-    },
     playerView: {
       type: Object as () => PlayerViewModel,
       required: true,

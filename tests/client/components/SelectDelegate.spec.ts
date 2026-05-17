@@ -8,7 +8,6 @@ describe('SelectDelegate', () => {
     const wrapper = shallowMount(SelectDelegate, {
       ...globalConfig,
       props: {
-        players: [],
         playerinput: {
           title: 'Select a delegate',
           buttonLabel: 'Save',

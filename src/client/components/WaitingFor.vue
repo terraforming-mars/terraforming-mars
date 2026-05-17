@@ -3,7 +3,7 @@
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="player in playersWaitingFor" class="log-player" :class="playerColorClass(player.color, 'bg')" :key="player.color"> {{ player.name }} </span>)
+      (⌛ <span v-for="color in playersWaitingFor" class="log-player" :class="playerColorClass(color, 'bg')" :key="color">{{ getPlayerName(color) }}</span>)
     </template>
   </template>
   <div v-else class="wf-root">
@@ -50,7 +50,7 @@ let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
 
 type DataModel = {
-  playersWaitingFor: Array<{name: string, color: Color}>
+  playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
 }
@@ -81,6 +81,10 @@ export default defineComponent({
     };
   },
   methods: {
+    getPlayerName(color: Color): string {
+      const player = this.players.find((p) => p.color === color);
+      return player ? player.name : color;
+    },
     animateTitle() {
       if (!getPreferences().animated_title) {
         return;

@@ -10,5 +10,5 @@ export type WaitingForModel = {
     'WAIT',
 
   /** List of players waiting for. */
-  waitingFor: Array<{name: string, color: Color}>,
+  waitingFor: Array<Color>,
 }

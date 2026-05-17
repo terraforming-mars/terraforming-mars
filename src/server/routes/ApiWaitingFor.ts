@@ -8,7 +8,6 @@ import {IGame} from '../IGame';
 import {isPlayerId, isSpectatorId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
-import {Color} from '../../common/Color';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
@@ -20,9 +19,8 @@ export class ApiWaitingFor extends Handler {
     return player.getWaitingFor() !== undefined || player.game.phase === Phase.END;
   }
 
-  private playersWithInputs(game: IGame): Array<{ name: string, color: Color }> {
-    return game.playersInGenerationOrder.filter((player) => player.getWaitingFor() !== undefined)
-      .map((player) => ({ name: player.name, color: player.color }));
+  private playersWithInputs(game: IGame) {
+    return game.playersInGenerationOrder.filter((player) => player.getWaitingFor() !== undefined).map((player) => player.color);
   }
 
   private getPlayerWaitingForModel(player: IPlayer, game: IGame, gameAge: number, undoCount: number): WaitingForModel {

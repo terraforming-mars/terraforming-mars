@@ -7,7 +7,7 @@ import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import {nextTileView, TileView} from '@/client/components/board/TileView';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 
-export type HomeMixinModel = {
+type DataModel = {
   tileView: TileView;
   keyboardShortcutOpened: boolean;
   hotkeyTargets: Array<Element>;
@@ -15,7 +15,7 @@ export type HomeMixinModel = {
 
 export const HomeMixin = defineComponent({
   name: 'HomeMixin',
-  data(): HomeMixinModel {
+  data(): DataModel {
     return {
       tileView: 'show',
       keyboardShortcutOpened: false,
@@ -58,9 +58,7 @@ export const HomeMixin = defineComponent({
           const index = event.code.charCodeAt(5) - ASCII_ONE;
           if (index >= 0 && index < this.hotkeyTargets.length) {
             const el = this.hotkeyTargets[index];
-            console.log(el);
             if (el) {
-              // event.preventDefault();
               el.scrollIntoView({block: 'start', inline: 'center', behavior: 'smooth'});
             }
           }

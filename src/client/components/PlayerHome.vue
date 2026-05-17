@@ -170,7 +170,7 @@ import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
@@ -180,12 +180,21 @@ import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
 import {HomeMixin} from '@/client/mixins/HomeMixin';
 
-export type PlayerHomeModel = {
+type PlayerHomeModel = {
   showHand: boolean;
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
 }
+
+type ToggleableCardType = 'HAND' | 'ACTIVE' | 'AUTOMATED' | 'EVENT';
+
+const typeToDataModel: Record<ToggleableCardType, {key: keyof PlayerHomeModel, preference: keyof Preferences}> = {
+  HAND: {key: 'showHand', preference: 'hide_hand'},
+  ACTIVE: {key: 'showActiveCards', preference: 'hide_active_cards'},
+  AUTOMATED: {key: 'showAutomatedCards', preference: 'hide_automated_cards'},
+  EVENT: {key: 'showEventCards', preference: 'hide_event_cards'},
+} as const;
 
 export default defineComponent({
   name: 'player-home',
@@ -272,60 +281,27 @@ export default defineComponent({
       }
       return fleetsRange;
     },
-    toggle(type: string): void {
-      switch (type) {
-      case 'HAND':
-        this.showHand = !this.showHand;
-        break;
-      case 'ACTIVE':
-        this.showActiveCards = !this.showActiveCards;
-        break;
-      case 'AUTOMATED':
-        this.showAutomatedCards = !this.showAutomatedCards;
-        break;
-      case 'EVENT':
-        this.showEventCards = !this.showEventCards;
-        break;
-      }
+    toggle(type: ToggleableCardType): void {
+      this[typeToDataModel[type].key] = !this[typeToDataModel[type].key];
     },
-    isVisible(type: string): boolean {
-      switch (type) {
-      case 'HAND':
-        return this.showHand;
-      case 'ACTIVE':
-        return this.showActiveCards;
-      case 'AUTOMATED':
-        return this.showAutomatedCards;
-      case 'EVENT':
-        return this.showEventCards;
-      }
-      return false;
+    isVisible(type: ToggleableCardType): boolean {
+      return this[typeToDataModel[type].key];
     },
-    getToggleLabel(hideType: string): string {
-      if (hideType === 'HAND') {
-        return (this.showHand ? '✔' : '');
-      } else if (hideType === 'ACTIVE') {
-        return (this.showActiveCards? '✔' : '');
-      } else if (hideType === 'AUTOMATED') {
-        return (this.showAutomatedCards ? '✔' : '');
-      } else if (hideType === 'EVENT') {
-        return (this.showEventCards ? '✔' : '');
-      } else {
-        return '';
-      }
+    getToggleLabel(hideType: ToggleableCardType): string {
+      const val = this[typeToDataModel[hideType].key];
+      return val ? '✔' : '';
     },
-    getHideButtonClass(hideType: string): string {
+    getHideButtonClass(hideType: ToggleableCardType): string {
       const prefix = 'hiding-card-button ';
-      if (hideType === 'HAND') {
+      switch (hideType) {
+      case 'HAND':
         return prefix + (this.showHand ? 'hand-toggle' : 'hand-toggle-transparent');
-      } else if (hideType === 'ACTIVE') {
+      case 'ACTIVE':
         return prefix + (this.showActiveCards ? 'active' : 'active-transparent');
-      } else if (hideType === 'AUTOMATED') {
+      case 'AUTOMATED':
         return prefix + (this.showAutomatedCards ? 'automated' : 'automated-transparent');
-      } else if (hideType === 'EVENT') {
+      case 'EVENT':
         return prefix + (this.showEventCards ? 'event' : 'event-transparent');
-      } else {
-        return '';
       }
     },
     isActive(cardModel: CardModel): boolean {

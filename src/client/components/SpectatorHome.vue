@@ -31,7 +31,7 @@
       @toggleTileView="cycleTileView()"
     />
 
-    <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
+    <div v-if="game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
       <dynamic-title title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
@@ -44,9 +44,6 @@
             <colony :colony="colony" :active="colony.isActive"></colony>
         </div>
       </div>
-        <div v-if="game.gameOptions.expansions.pathfinders">
-          <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
-        </div>
     </div>
     <waiting-for v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"></waiting-for>
   </div>

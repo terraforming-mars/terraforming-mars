@@ -145,6 +145,7 @@
         </div>
       </div>
     </div>
+
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
@@ -286,7 +287,6 @@ export default defineComponent({
         [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
       };
       const inputSource = event.target as Node;
-      console.log(inputSource.nodeName);
       if (inputSource.nodeName.toLowerCase() !== 'input') {
         const id = ids[event.code];
         if (id) {

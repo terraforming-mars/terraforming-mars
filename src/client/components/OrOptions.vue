@@ -10,7 +10,6 @@
       </label>
       <div v-if="selectedIdx === idx" style="margin-left: 30px">
         <player-input-factory ref="inputfactory"
-                              :players="players"
                               :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved(idx)"
@@ -31,7 +30,7 @@
 import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {isHTMLElement} from '@/client/utils/vueUtils';
-import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {OrOptionsModel, PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
@@ -43,10 +42,6 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
       required: true,
     },
     playerinput: {

@@ -5,7 +5,7 @@
       <input type="radio" v-model="selectedPlayer" :value="player" />
       <i class="form-icon"></i>
       <span v-if="player === 'NEUTRAL'" >Neutral</span>
-      <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
+      <select-player-row v-else :player="playerView.players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
     </label>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
@@ -16,7 +16,7 @@ import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {ColorWithNeutral} from '@/common/Color';
 import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectDelegateResponse} from '@/common/inputs/InputResponse';
 
@@ -27,8 +27,8 @@ interface DataModel {
 export default defineComponent({
   name: 'SelectDelegate',
   props: {
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+    playerView: {
+      type: Object as () => PlayerViewModel,
       required: true,
     },
     playerinput: {

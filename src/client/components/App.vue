@@ -42,7 +42,7 @@
       <card-list v-else-if="screen === 'cards'"></card-list>
       <admin-home v-else-if="screen === 'admin'"></admin-home>
       <login-home v-else-if="screen === 'login-home'"></login-home>
-      <Help v-else-if="screen === 'help'"></Help>
+      <help v-else-if="screen === 'help'"></help>
     </div>
     <div class="notice" v-i18n>
       Not affiliated with FryxGames, Asmodee Digital or Steam in any way.

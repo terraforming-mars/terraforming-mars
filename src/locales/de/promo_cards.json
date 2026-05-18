@@ -162,8 +162,6 @@
   "Meat Industry": "Fleischindustrie",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "EFFEKT: Wenn IRGENDEINE deiner Karten ein Tier erhält, erhalte zusätzlich 2 M€.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TW um 3 und plaziere dieses Plättchen.",
-
   "Orbital Cleanup": "Orbitalsäuberung",
   "Action: Gain 1 M€ per science tag you have.": "AKTION: Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt.",
   "Decrease your M€ production 2 steps.": "Senke deine M€-Produktion um 2 M€.",
@@ -206,8 +204,10 @@
   "Hi-Tech Lab": "High-Tech-Labor",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "AKTION: Zahle einen beliebigen Betrag an Energie, um dieselbe Anzahl an Karten zu ziehen. NEHME 1 KARTE IN DEINE HAND AUF UND WIRF DIE RESTLICHEN KARTEN AB.",
 
+  "Magnetic Field Generators:promo": "Magnetfeld-Generatoren",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Senke deine Energie-Produktion um 4. Erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen Terraformwert um 3. Platziere dieses Plättchen.",
-
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TW um 3 und plaziere dieses Plättchen.",
+  
   "Mercurian Alloys": "Merkur-Legierungen",
   "Effect: Your titanium resources are worth 1 M€ extra.": "EFFEKT: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
 
@@ -223,11 +223,11 @@
   "Stanford Torus": "Stanford-Torus",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Platziere ein Stadtplättchen IM WELTRAUM, außerhalb und separat des Planeten.",
 
+  "Deimos Down:promo": "Deimos Down",
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Platziere dieses Plättchen NICHT ANGRENZEND an ein Stadtplättchen. Entferne 6 Pflanzen eines beliebigen Spielers.",
 
+  "Great Dam:promo": "Staudamm",
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Erfordert 4 Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen.",
-
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deine TW um 3.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Erfordert 8 Ozeane. 1 SP für jedes Tier auf dieser Karte.",
   "Requires 2 science tags.": "Erfordert 2 Wissenschaftssymbole.",

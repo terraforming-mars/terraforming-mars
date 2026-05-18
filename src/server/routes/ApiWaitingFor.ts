@@ -16,11 +16,23 @@ export class ApiWaitingFor extends Handler {
   }
 
   private timeToGo(player: IPlayer): boolean {
-    return player.getWaitingFor() !== undefined || player.game.phase === Phase.END;
+    const input = player.getWaitingFor();
+    if (input !== undefined) {
+      if (input.polling) {
+        return false;
+      }
+      return true;
+    }
+    return player.game.phase === Phase.END;
   }
 
   private playersWithInputs(game: IGame) {
-    return game.playersInGenerationOrder.filter((player) => player.getWaitingFor() !== undefined).map((player) => player.color);
+    return game.playersInGenerationOrder
+      .filter((player) => {
+        const waitingFor = player.getWaitingFor();
+        return waitingFor !== undefined && !waitingFor.polling;
+      })
+      .map((player) => player.color);
   }
 
   private getPlayerWaitingForModel(player: IPlayer, game: IGame, gameAge: number, undoCount: number): WaitingForModel {

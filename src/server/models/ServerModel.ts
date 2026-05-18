@@ -102,6 +102,7 @@ export class Server {
       dealtCeoCards: cardsToModel(player, player.dealtCeoCards),
       dealtProjectCards: cardsToModel(player, player.dealtProjectCards),
       draftedCards: cardsToModel(player, player.draftedCards, {showCalculatedCost: true}),
+      unchosenDraftCards: cardsToModel(player, player.unchosenDraftCards, {showCalculatedCost: true}),
       game: this.getGameModel(player.game),
       id: player.id,
       runId: runId,

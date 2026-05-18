@@ -22,6 +22,9 @@
       <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
           <Card :card="card"/>
       </div>
+      <div v-for="card in playerView.unchosenDraftCards" :key="card.name" class="cardbox">
+          <Card :card="card" :actionUsed="true"/>
+      </div>
     </div>
 
     <template v-if="playerView.pickedCorporationCard.length === 1">

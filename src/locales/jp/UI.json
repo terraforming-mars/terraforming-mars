@@ -780,8 +780,8 @@
     "Spend 1 corruption to gain 3 plants.": "1汚職支払い、3植物獲得.",
     "Spend 1 corruption to gain 6 heat.": "1汚職支払い、6温熱獲得.",
     "Spend 1 corruption to gain 3 of the same standard resource.": "1汚職支払い、3標準リソース獲得.",
-    "Spend 8 energy to increase oxygen 1 step.": "8電力支払い、酸素+1段階.",
-    "Spend 8 energy to increase Venus 1 step.": "8電力支払い、金星+1段階.",
+    "Spend 8 energy to raise oxygen 1 step.": "8電力支払い、酸素+1段階.",
+    "Spend 8 energy to raise Venus 1 step.": "8電力支払い、金星+1段階.",
 
     "Select Earth card(s) to discard": "捨てる地球タグカード1枚を選択",
     "Select a card to keep and pass the rest to ${0}": "キープするカードを1枚選択し、残りを${0}へ渡す",

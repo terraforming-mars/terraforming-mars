@@ -1,5 +1,6 @@
 {
-  "Terraforming Mars": "",
+  "Terraforming Mars": "Terraforming des Mars",
+  "Mars is Terraformed!": "Der Mars ist terraformt!",
   "Create New Game": "Neues Spiel erstellen",
   "№ of Players": "Anzahl der Spieler",
   "Solo": "Einzelspiel",
@@ -726,6 +727,7 @@
   "Add 3 microbe to ${0}": "Füge ${0} 3 Mikrobe hinzu",
   "Add ${0} microbes to ${1}": "Füge ${1} ${0} Mikroben hinzu",
   "Add 2 microbes to a card": "Füge 2 Mikroben einer Karte hinzu",
+  "Add 2 microbes to ANY card.": "Füge 2 Mikroben einer beliebigen Karte hinzu.",
   "Add 3 microbes to a card": "Füge 3 Mikroben einer Karte hinzu",
   "Add 3 microbes to ${0}": "Füge ${0} 3 Mikroben hinzu",
   "Gain": "Erhalte",
@@ -889,6 +891,7 @@
   "Decrease energy": "Reduziere Energie-Produktion",
   "Select amount of energy to gain": "Wähle Menge an Energie, die du erhalten möchtest",
   "Select amount of energy to convert to heat": "Wähle Menge an Energie, die in Wärme umgewandelt werden soll",
+  "Select the amount of energy to spend to advance on the track": "Wähle Menge an Energie, die du zahlen möchtest, um auf der Delta-Leiste weiterzukommen.",
   "Select up to ${0} steel to convert to titanium": "Wähle bis zu ${0} Stahl, der in Titan umgewandelt werden soll",
   "Convert Steel": "Konvertiere Stahl",
   "Spend 1 plant to gain 7 M€.": "Bezahle 1 Pflanze, um 7 M€ zu erhalten",
@@ -1273,7 +1276,7 @@
 
   "How to pay?": "Bezahlung",
   "Please adjust payment amount": "Bitte passe den Zahlungsbetrag an",
-  "Some ${0} are reserved and unavailable here.": "Einige ${0} sind reserviert und hier nicht verfügbar.",
+  "Some ${0} are reserved and unavailable here.": "Etwas ${0} ist reserviert und hier nicht verfügbar.",
   "Must select a space": "Suche ein Feld aus",
   "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]",
   "[ toggle tags view ]": "[ Symbolsichtfilter aktivieren/deaktivieren ]",
@@ -1309,6 +1312,7 @@
 
   "Cards List": "Kartenliste",
   "legacy card UI": "Alte Kartenliste",
+  "Advance": "Weiterkommen",
   "Advanced »": "Erweitert »",
   "Advanced «": "Erweitert «",
   "Names only": "Nur Namen",

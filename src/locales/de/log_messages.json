@@ -1,5 +1,6 @@
 {
   "${0} revealed and discarded ${1}": "${0} deckte ${1} auf und warf es ab",
+  "${0} revealed no cards": "${0} deckte keine Karte auf",
   "${0} revealed ${1}": "${0} deckte ${1} auf",
   "${0} revealed": "${0} deckte auf",
   "${0} has no cards to show": "${0} hat keine Karten vorzuweisen.",
@@ -11,6 +12,7 @@
   "Convert": "Umwandeln",
   "heat into temperature": "Wärme in Temperatur",
   "Spend energy": "Bezahle Energie",
+  "${0} spend ${1} energy to advance on the Delta Project track": "${0} zahlte ${1} Energie, um auf der Delta-Projekt-Leiste vorzurücken",
   "Spend 8 heat to raise temperature 1 step.": "Bezahle 8 Wärme, um die Temperatur um einen Schritt zu erhöhen.",
   "Spend 8 plants to place a greenery tile and raise oxygen 1 step.": "Bezahle 8 Pflanzen, um ein Grünflächenplättchen zu platzieren und den Sauerstoffgehalt um einen Schritt zu erhöhen.",
   "This game was a clone from game ": "Dieses Spiel war ein Klon des Spieles ",
@@ -52,6 +54,7 @@
   "${0} moved 1 ${1} from ${2} to ${3}.": "${0} bewegt 1 ${1} von ${2} nach ${3}.",
 
   "Card not found": "Karte nicht gefunden",
+  "${0} played ${1} to find a Turmoil card but none were found.": "${0} spielte ${1} um eine Aufruhr-Karte zu finden, aber es wurde keine gefunden.",
   "The project discard pile has been shuffled to form a new deck.": "Der Projektkarten-Ablagestapel wurde neu gemischt, um einen neuen Nachziehstapel zu bilden.",
   "${0} fizzled. ${1} gains 15 M€.": "${0} hat gepatzt. ${1} erhält 15 M€.",
   "Incorrect options provided": "Ungültige Optionen angegeben",
@@ -223,6 +226,7 @@
   "A neutral delegate was added to the ${0} party": "Ein neutraler Deligierter wurde der Partei ${0} hinzugefügt.",
   "The ruling bonus is: ${0}": "Der herrschende Bonus ist: ${0}",
   "The ruling policy is: ${0}": "Das herrschende Gesetz ist: ${0}",
+  "${0} gained ${1} M€ from Turmoil ${2} policy": "${0} hat durch die Politik von ${2} ${1} M€ erhalten",
   "${0} used Turmoil ${1} action": "${0} führte die ${1}-Aktion aus",
   "${0} used Turmoil Mars First action": "${0} führte die Mars Zuerst Aktion aus",
   "${0} used Turmoil Scientists action": "${0} führte die Forschung Aktion aus",
@@ -402,6 +406,7 @@
   "${0} had no events": "${0} hatte keine Ereignisse",
   "${0} gained 0 M€ from ${1} action.": "${0} erhielt 0 M€ aus der Aktion ${1}.",
   "${0} gained ${1} M€ from ${2} action.": "${0} erhielt ${1} M€ aus der Aktion ${2}.",
+  "${0} gained ${1} M€ from ${2} ocean(s)": "${0} erhielt ${1} M€ von ${2} Ozean(e)",
   "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
   "${0} cannot afford to take advantage of the ${1} effect to draw a ${2} card": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen, um eine ${2}-Karte zu ziehen",
   "${0} declined to use the ${1} effect": "${0} entschied, den ${1}-Effekt nicht zu nutzen",

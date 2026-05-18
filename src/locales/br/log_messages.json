@@ -27,7 +27,6 @@
   "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} removeu ${1} recurso(s) de ${3} de ${2}",
   "Card not found": "Carta não encontrada",
   "Incorrect options provided": "Opções incorretas inseridas",
-  "Input contains unauthorized keys": "Entrada contém chaves não autorizadas",
   "Amount provided too high (max ": "A quantidade introduzida é muito alta (máximo ",
   "Amount provided too low (min ": "A quantidade introduzida é muito baixa (mínmo ",
   "No colony selected": "Nenhuma colônia selecionada",
@@ -50,8 +49,6 @@
   "Do not have enough M€": "Megacréditos insuficientes",
   "Did not spend enough to pay for card": "Não pagou suficiente para jogar a carta",
   "All awards already funded": "Todos os prêmios já foram financiados",
-  "Didn't even find player": "Jogador não encontrado",
-  "No player has played requested card": "Nenhum jogador jogou a carta solicitada",
   "Drew and discarded ${0} to place a ${1}": "Comprou e descartou ${0} para colocar ${1}",
   "Good luck ${0}!": "Boa sorte, ${0}!",
 

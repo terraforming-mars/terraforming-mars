@@ -8,6 +8,7 @@ import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
+import {SelectOption} from '../src/server/inputs/SelectOption';
 import {TestPlayer} from './TestPlayer';
 
 // Tests for drafting
@@ -48,7 +49,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.BIOFERTILIZER_FACILITY);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.GENE_REPAIR);
 
     expect(player.draftedCards.map(toName)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
@@ -68,7 +69,7 @@ describe('drafting', () => {
 
 
     selectCard(player, CardName.FISH);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.ACQUIRED_COMPANY);
 
     expect(player.draftedCards.map(toName)).deep.eq([
@@ -91,7 +92,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.DECOMPOSERS);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.EARTH_OFFICE);
 
     // No longer drafted cards, they're just cards to buy.
@@ -393,7 +394,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.ALGAE);
 
     expect(player.draftedCards.map(toName)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
@@ -414,7 +415,7 @@ describe('drafting', () => {
       CardName.ANTS]);
 
     selectCard(player, CardName.ARCTIC_ALGAE);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.ANTS);
 
     expect(player.draftedCards.map(toName)).deep.eq([
@@ -438,7 +439,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    cast(player.getWaitingFor(), undefined);
+    expect(cast(player.getWaitingFor(), SelectOption).buttonLabel).to.equal('Repick');
     selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
 
     expect(player.draftedCards.map(toName)).deep.eq([

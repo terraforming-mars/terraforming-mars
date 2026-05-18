@@ -5,28 +5,31 @@ import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {CardResource} from '../common/CardResource';
+import {From} from './logs/From';
+
+function resourceString(resource: CardResource | undefined, qty: number): string {
+  const result = resource ?? 'resource';
+  if (qty === 1) {
+    return result;
+  } else {
+    return result + '(s)';
+  }
+}
 
 export class LogHelper {
-  static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
-    let resourceType = 'resource(s)';
-
-    if (card.resourceType) {
-      resourceType = card.resourceType.toLowerCase() + '(s)';
+  static logAddResource(player: IPlayer, card: ICard, qty: number = 1, from?: From): void {
+    if (from === undefined) {
+      player.game.log('${0} added ${1} ${2} to ${3}', (b) =>
+        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card));
+    } else {
+      player.game.log('${0} added ${1} ${2} to ${3} from ${4}', (b) =>
+        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).from(from));
     }
-
-    player.game.log('${0} added ${1} ${2} to ${3}', (b) =>
-      b.player(player).number(qty).string(resourceType).card(card));
   }
 
   static logRemoveResource(player: IPlayer, card: ICard, qty: number = 1, effect: string): void {
-    let resourceType = 'resource(s)';
-
-    if (card.resourceType) {
-      resourceType = card.resourceType.toLowerCase() + '(s)';
-    }
-
     player.game.log('${0} removed ${1} ${2} from ${3} to ${4}', (b) =>
-      b.player(player).number(qty).string(resourceType).card(card).string(effect));
+      b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).string(effect));
   }
 
   static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {

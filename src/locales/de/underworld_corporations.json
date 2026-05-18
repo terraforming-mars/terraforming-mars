@@ -17,9 +17,9 @@
 "ARBORIST COLLECTIVE": "Arboristen Kollektiv",
 "Arborist Collective": "Arboristen Kollektiv",
 "ARBORIST": "ABORISTEN",
-"COLLECTIVE": "KOLLEKTIV",  
+"COLLECTIVE": "KOLLEKTIV",
 "Arborist": "Arboristen",
-"Collective": "Kollektiv",  
+"Collective": "Kollektiv",
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
 "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "AKTION: Bezahle 2 Aktivisten, um deine Pflanzenproduktion um 1 zu erhöhen und 2 Pflanzen zu erhalten.",
 "You start with 40 M€, 2 plants and 2 plant production.": "Du beginnst mit 40 M€, 2 Pflanzen und 2 Pflanzenproduktion.",
@@ -73,6 +73,6 @@
 "VOLTAGON": "VOLTAGONISTEN",
 "Voltagon": "Voltagonisten",
 "Effect: After you claim an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource beansprucht hast, erhältst du 2 Energie.",
-"Action: Spend 8 energy to increase oxygen or Venus 1 step.": "AKTION: Bezahle 8 Energie, um den Sauerstoffgehalt oder die Venuswertung um 1 zu erhöhen."
+"Action: Spend 8 energy to raise oxygen or Venus 1 step.": "AKTION: Bezahle 8 Energie, um den Sauerstoffgehalt oder die Venuswertung um 1 zu erhöhen."
 
 }

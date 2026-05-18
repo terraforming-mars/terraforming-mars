@@ -128,6 +128,10 @@
   "New Partner": "Neuer Partner",
   "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludiumskarten. Spiele eine davon und wirf die andere ab.",
 
+  "Delta Project": "Delta Werke Projekt",
+  "Delta track": "Delta Leiste",
+  "Action: Spend any amount of energy to move that number of steps on the Delta Project track. Each step requires having all the matching tags in play up to that level; wild tags can replace missing ones. Gain resources next to your position.": "AKTION: Zahle beliebig viel Energie, um diese Anzahl an Schritten auf der Delta-Projekt-Leiste vorzurücken. Für jeden Schritt müssen alle passenden Symbole bis zu dieser Stufe im Spiel sein; Joker-Symbole können fehlende Symbole ersetzen. Erhalte Boni/Ressourcen neben deiner aktuellen neuen Position.",
+
   "Allied Bank": "Vereinigte Banken",
   "Increase your M€ production 4 steps. Gain 3 M€.": "Erhöhe deine M€-Produktion um 4. Erhalte 3 M€.",
 
@@ -191,7 +195,7 @@
   "Mining Operations": "Bergbau-Betrieb",
   "Increase your steel production 2 steps. Gain 4 steel.": "Erhöhe deine Stahlproduktion um 2. Erhalte 4 Stahl.",
 
-  "Mohole": "",
+  "Mohole": "Mole",
   "Increase your heat production 3 steps. Gain 3 heat.": "Erhöhe deine Wärme-Produktion um 3. Erhalte 3 Wärme.",
 
   "Mohole Excavation": "Mohole-Ausgrabungsstätte",

@@ -18,10 +18,7 @@ export class ApiWaitingFor extends Handler {
   private timeToGo(player: IPlayer): boolean {
     const input = player.getWaitingFor();
     if (input !== undefined) {
-      if (input.polling) {
-        return false;
-      }
-      return true;
+      return !input.polling;
     }
     return player.game.phase === Phase.END;
   }

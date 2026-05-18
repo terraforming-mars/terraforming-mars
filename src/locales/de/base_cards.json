@@ -152,6 +152,7 @@
   "Rover Construction": "Mars-Rover-Entwicklung",
   "Effect: When any city tile is placed, gain 2 M€.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird, erhältst du 2 M€.",
 
+  "Deimos Down": "Absturz des Daimos",
   "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Entferne bis zu 8 Pflanzen eines Spielers.",
 
   "Asteroid Mining": "Asteroidenbergbau",
@@ -446,6 +447,7 @@
   "Advanced Ecosystems": "Fortgeschrittenes Ökosystem",
   "Requires a plant tag, a microbe tag, and an animal tag.": "Benötigt ein Pflanzen-, ein Mikroben- und ein Tiersymbol.",
 
+  "Great Dam": "Staudamm",
   "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Benötigt 4 oder mehr Ozeanplättchen im Spiel. Erhöhe deine Energie-Produktion um 2.",
 
   "Cartel": "Kartell",
@@ -534,7 +536,6 @@
 
   "Micro-Mills": "Mikrowindräder",
   "Increase your heat production 1 step.": "Erhöhe deine Wärme-Produktion um 1.",
-
 
   "Shuttles": "Shuttle-Gleiter",
   "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Benötigt einen Sauerstoffgehalt von 5% oder mehr. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktino um 2.",
@@ -673,11 +674,9 @@
   "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Erhöhe deine M€-Produktion um 1 je 2 eigene Gebäudesymbole (einschließlich dieses).",
 
   "AI Central": "KI-Zentrale",
-
+  "Requires 3 science tags to play. Decrease your energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1.",
   "Action: Draw 2 cards.": "AKTION: Ziehe 2 Karten.",
   "Effect: Draw 2 cards.": "EFFEKT: Ziehe 2 Karten.",
-
-  "Requires 3 science tags to play. Decrease your energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1.",
 
   "HYDROGEN TO VENUS": "Wasserstoff zur Venus",
 

@@ -33,7 +33,6 @@
 
     "Card not found": "Kaart niet gevonden",
     "Incorrect options provided": "Ongeldige opties opgegeven",
-    "Input contains unauthorized keys": "Invoer bevat ongeldige tekens",
     "Amount provided too high (max ": "Ingevoerd bedrag te hoog (max. ",
     "Amount provided too low (min ": "Ingevoerd bedrag te laag (min. ",
     "No colony selected": "Geen kolonie geselecteerd",
@@ -56,8 +55,6 @@
     "Do not have enough M€": "Niet genoeg M€",
     "Did not spend enough to pay for card": "Niet genoeg betaald om een kaart te kopen",
     "All awards already funded": "Alle onderscheidingen zijn al toegekend",
-    "Didn\u2019t even find player": "Kan geen spelers vinden",
-    "No player has played requested card": "Geen van beide spelers heeft de vereiste kaart gespeeld",
     "Drew and discarded ${0} to place a ${1}": "${0} getrokken en afgelegd om een ${1} te plaatsen",
     "The id of this game is ${0}": "De ID van dit spel is ${0}",
     "Good luck ${0}!": "Veel succes, ${0}!",

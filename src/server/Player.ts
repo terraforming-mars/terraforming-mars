@@ -537,7 +537,7 @@ export class Player implements IPlayer {
     }
   }
 
-  public addResourceTo(card: ICard, options: number | {qty?: number, log: boolean, logZero?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log: boolean, logZero?: boolean, from?: From} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {
@@ -546,7 +546,7 @@ export class Player implements IPlayer {
 
     if (typeof(options) !== 'number' && options.log === true) {
       if (options.logZero === true || count !== 0) {
-        LogHelper.logAddResource(this, card, count);
+        LogHelper.logAddResource(this, card, count, options.from);
       }
     }
 

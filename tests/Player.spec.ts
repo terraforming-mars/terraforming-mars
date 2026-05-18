@@ -206,6 +206,7 @@ describe('Player', () => {
       ceoCardsInHand: [],
       playedCards: [], // TODO(kberg): these are SerializedCard.
       draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
+      unchosenDraftCards: [],
       needsToDraft: false,
       cardCost: 3,
       cardDiscount: 7,

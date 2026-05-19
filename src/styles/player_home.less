@@ -46,30 +46,12 @@
 }
 
 // text shadows
-.player_shadow_color_red {
-    text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
-}
-.player_shadow_color_yellow {
-    text-shadow: -1px -1px 6px @player_yellow, 1px 1px 1px #333a;
-}
-.player_shadow_color_green {
-    text-shadow: -1px -1px 6px @player_green, 1px 1px 1px #333a;
-}
-.player_shadow_color_black {
-    text-shadow: -1px -1px 6px @player_black, 1px 1px 1px #333a;
-}
-.player_shadow_color_blue {
-    text-shadow: -1px -1px 6px @player_blue, 1px 1px 1px #333a;
-}
-.player_shadow_color_purple {
-    text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
-}
-.player_shadow_color_orange {
-    text-shadow: -1px -1px 6px @player_orange, 1px 1px 1px #333a;
-}
-.player_shadow_color_pink {
-    text-shadow: -1px -1px 6px @player_pink, 1px 1px 1px #333a;
-}
+each(@players, {
+    @c: ~"player_@{value}";
+    .player_shadow_color_@{value} {
+        text-shadow: -1px -1px 6px @@c, 1px 1px 1px #333a;
+    }
+})
 
 .game-title {
     text-transform: uppercase;
@@ -118,37 +100,12 @@
         text-align: center;
     }
 
-    .grid-item.player_tag_bg_color_black {
-        background-color: @player_black_tag_bg;
-    }
-
-    .grid-item.player_tag_bg_color_blue {
-        background-color: fade(@player_blue, 20%);
-    }
-
-    .grid-item.player_tag_bg_color_green {
-        background-color: fade(@player_green, 20%);
-    }
-
-    .grid-item.player_tag_bg_color_purple {
-        background-color: fade(@player_purple, 20%);
-    }
-
-    .grid-item.player_tag_bg_color_red {
-        background-color: fade(@player_red, 20%);
-    }
-
-    .grid-item.player_tag_bg_color_yellow {
-        background-color: fade(@player_yellow, 20%);
-    }
-
-    .grid-item.player_tag_bg_color_orange {
-        background-color: @player_orange_tag_bg;
-    }
-
-    .grid-item.player_tag_bg_color_pink {
-        background-color: fade(@player_pink, 20%);
-    }
+    each(@players, {
+        @v: ~"player_@{value}_tag_bg";
+        .grid-item.player_tag_bg_color_@{value} {
+            background-color: @@v;
+        }
+    })
     .city-count {
         background: url(./assets/icon_city.png) center no-repeat;
         filter: invert(100%) contrast(200%);

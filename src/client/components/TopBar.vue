@@ -1,23 +1,20 @@
 <template>
-  <div class="top-bar-container">
-    <div :class="formatCssClass()" :key="componentKey">
-      <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''"
-        :playerIndex="0" :hideZeroTags="true" :isTopBar="true" />
-      <div class="top-bar-collapser" v-on:click="toggleBar()">
-        <img src="assets/arrows_left.png" />
+    <div class="top-bar-container">
+      <div :class="formatCssClass()" :key="componentKey">
+        <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
+        <div class="top-bar-collapser" v-on:click="toggleBar()">
+          <img src="assets/arrows_left.png">
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { PlayerViewModel } from '@/common/models/PlayerModel';
+
+import {defineComponent} from 'vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
-import {
-  getPreferences,
-  PreferencesManager,
-} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default defineComponent({
   name: 'top-bar',
@@ -48,7 +45,7 @@ export default defineComponent({
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];
-      if (!this.isExpanded()) {
+      if ( ! this.isExpanded()) {
         cssClasses.push('top-bar-collapsed');
       }
       return cssClasses.join(' ');
@@ -56,3 +53,4 @@ export default defineComponent({
   },
 });
 </script>
+

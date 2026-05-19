@@ -1,31 +1,45 @@
 <template>
-  <div id="player-home" :class="game.turmoil ? 'with-turmoil' : ''">
+  <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
     <top-bar :playerView="playerView" />
 
     <div v-if="game.phase === 'end'">
       <div class="player_home_block">
-        <DynamicTitle title="This game is over!" :color="thisPlayer.color" />
-        <a :href="'the-end?id=' + playerView.id" v-i18n>Go to game results</a>
+        <DynamicTitle title="This game is over!" :color="thisPlayer.color"/>
+        <a :href="'the-end?id='+ playerView.id" v-i18n>Go to game results</a>
       </div>
     </div>
 
-    <sidebar v-trim-whitespace :acting_player="isPlayerActing(playerView)" :player_color="thisPlayer.color"
-      :generation="game.generation" :coloniesCount="game.colonies.length" :temperature="game.temperature"
-      :oxygen="game.oxygenLevel" :oceans="game.oceans" :venus="game.venusScaleLevel" :turmoil="game.turmoil"
-      :moonData="game.moon" :gameOptions="game.gameOptions" :playerNumber="playerView.players.length"
-      :isTerraformed="playerView.game.isTerraformed" :lastSoloGeneration="game.lastSoloGeneration"
-      :deckSize="game.deckSize" :discardPileSize="game.discardPileSize">
+    <sidebar v-trim-whitespace
+      :acting_player="isPlayerActing(playerView)"
+      :player_color="thisPlayer.color"
+      :generation="game.generation"
+      :coloniesCount="game.colonies.length"
+      :temperature = "game.temperature"
+      :oxygen = "game.oxygenLevel"
+      :oceans = "game.oceans"
+      :venus = "game.venusScaleLevel"
+      :turmoil = "game.turmoil"
+      :moonData="game.moon"
+      :gameOptions = "game.gameOptions"
+      :playerNumber = "playerView.players.length"
+      :isTerraformed="playerView.game.isTerraformed"
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize">
     </sidebar>
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
-        <GameBoardView :game="game" :tileView="tileView" :players="playerView.players"
-          @toggleTileView="cycleTileView()" />
+        <GameBoardView
+          :game="game"
+          :tileView="tileView"
+          :players="playerView.players"
+          @toggleTileView="cycleTileView()"
+        />
       </div>
 
-      <a class="hotkey-target"></a>
-      <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView"
-        v-trim-whitespace id="shortkey-playersoverview" />
+    <a class="hotkey-target"></a>
+    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
@@ -35,36 +49,31 @@
       <a class="hotkey-target"></a>
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
-        <dynamic-title title="Actions" :color="thisPlayer.color" />
-        <waiting-for v-if="game.phase !== 'end'" :playerView="playerView"
-          :waitingfor="playerView.waitingFor"></waiting-for>
+        <dynamic-title title="Actions" :color="thisPlayer.color"/>
+        <waiting-for v-if="game.phase !== 'end'" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
       </div>
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
         <dynamic-title title="Drafted cards" :color="thisPlayer.color" />
         <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
-          <Card :card="card" />
+          <Card :card="card"/>
         </div>
       </div>
 
       <a name="cards" class="player_home_anchor"></a>
       <div class="player_home_block player_home_block--hand" v-if="cardsInHandCount > 0" id="shortkey-hand">
         <div class="hiding-card-button-row">
-          <dynamic-title title="Cards In Hand" :color="thisPlayer.color" />
+          <dynamic-title title="Cards In Hand" :color="thisPlayer.color"/>
           <div :class="getHideButtonClass('HAND')" v-on:click.prevent="toggle('HAND')">
-            <div class="played-cards-count">
-              {{ cardsInHandCount.toString() }}
-            </div>
-            <div class="played-cards-selection" v-i18n>
-              {{ getToggleLabel("HAND") }}
-            </div>
+            <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
+            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
           </div>
           <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
         </div>
-        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id" :cards="playerView.preludeCardsInHand
-          .concat(playerView.ceoCardsInHand)
-          .concat(playerView.cardsInHand)
-          " />
+        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id"
+                        :cards="playerView.preludeCardsInHand
+                                .concat(playerView.ceoCardsInHand)
+                                .concat(playerView.cardsInHand)"/>
       </div>
 
       <div class="player_home_block player_home_block--cards">
@@ -72,98 +81,61 @@
           <dynamic-title title="Played Cards" :color="thisPlayer.color" />
           <div class="played-cards-filters">
             <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggle('ACTIVE')">
-              <div class="played-cards-count">
-                {{
-                  getCardsByType(thisPlayer.tableau, [
-                    CardType.ACTIVE,
-                  ]).length.toString()
-                }}
-              </div>
-              <div class="played-cards-selection" v-i18n>
-                {{ getToggleLabel("ACTIVE") }}
-              </div>
+              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]).length.toString()}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
             </div>
             <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggle('AUTOMATED')">
-              <div class="played-cards-count">
-                {{
-                  getCardsByType(thisPlayer.tableau, [
-                    CardType.AUTOMATED,
-                    CardType.PRELUDE,
-                  ]).length.toString()
-                }}
-              </div>
-              <div class="played-cards-selection" v-i18n>
-                {{ getToggleLabel("AUTOMATED") }}
-              </div>
+              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).length.toString()}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
             </div>
             <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggle('EVENT')">
-              <div class="played-cards-count">
-                {{
-                  getCardsByType(thisPlayer.tableau, [
-                    CardType.EVENT,
-                  ]).length.toString()
-                }}
-              </div>
-              <div class="played-cards-selection" v-i18n>
-                {{ getToggleLabel("EVENT") }}
-              </div>
+              <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.EVENT]).length.toString()}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
             </div>
           </div>
           <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
         </div>
-        <div v-for="card in getCardsByType(thisPlayer.tableau, [
-          CardType.CORPORATION,
-        ])" :key="card.name" class="cardbox">
-          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color" />
+        <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
-          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color" />
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
-        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(
-          getCardsByType(thisPlayer.tableau, [
-            CardType.ACTIVE,
-            CardType.PRELUDE,
-          ]).filter(isActive),
-        )" :key="card.name" class="cardbox">
-          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color" />
+        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE, CardType.PRELUDE]).filter(isActive))" :key="card.name" class="cardbox">
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
-        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [
-          CardType.AUTOMATED,
-          CardType.PRELUDE,
-        ]).filter(isNotActive)
-          "></stacked-cards>
+        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).filter(isNotActive)" ></stacked-cards>
 
-        <stacked-cards v-show="isVisible('EVENT')"
-          :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])"></stacked-cards>
+        <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" ></stacked-cards>
+
       </div>
 
       <div v-if="thisPlayer.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-        <dynamic-title title="Self-replicating Robots cards" :color="thisPlayer.color" />
+        <dynamic-title title="Self-replicating Robots cards" :color="thisPlayer.color"/>
         <div>
           <div v-for="card in thisPlayer.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
-            <Card :card="card" />
+            <Card :card="card"/>
           </div>
         </div>
       </div>
     </div>
 
     <div v-if="thisPlayer.underworldData.tokens.length > 0">
-      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color" />
+      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
       <underground-tokens :underworldData="thisPlayer.underworldData"></underground-tokens>
     </div>
 
     <template v-if="thisPlayer.tableau.length === 0">
-      <PlayerSetupView :playerView="playerView" :tileView="tileView" />
+      <PlayerSetupView :playerView="playerView" :tileView="tileView"/>
     </template>
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor hotkey-target"></a>
-      <dynamic-title title="Colonies" :color="thisPlayer.color" />
+      <dynamic-title title="Colonies" :color="thisPlayer.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
-          <div :class="'colonies-fleet colonies-fleet-' + colonyPlayer.color"
-            v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
+          <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
         </div>
       </div>
       <div class="player_home_colony_cont">
@@ -174,7 +146,7 @@
     </div>
 
     <div v-if="game.spectatorId">
-      <a :href="'/spectator?id=' + game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
+      <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
     <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
     <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"></KeyboardShortcuts>
@@ -182,61 +154,51 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 
 import Card from '@/client/components/card/Card.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import WaitingFor from "@/client/components/WaitingFor.vue";
-import Sidebar from "@/client/components/Sidebar.vue";
-import Colony from "@/client/components/colonies/Colony.vue";
-import LogPanel from "@/client/components/logpanel/LogPanel.vue";
-import GameBoardView from "@/client/components/GameBoardView.vue";
-import PlayerSetupView from "@/client/components/PlayerSetupView.vue";
-import DynamicTitle from "@/client/components/common/DynamicTitle.vue";
-import SortableCards from "@/client/components/SortableCards.vue";
-import TopBar from "@/client/components/TopBar.vue";
-import StackedCards from "@/client/components/StackedCards.vue";
-import PurgeWarning from "@/client/components/common/PurgeWarning.vue";
-import UndergroundTokens from "@/client/components/underworld/UndergroundTokens.vue";
-import KeyboardShortcuts from "@/client/components/KeyboardShortcuts.vue";
-import {
-  getPreferences,
-  Preferences,
-  PreferencesManager,
-} from "@/client/utils/PreferencesManager";
-import { GameModel } from "@/common/models/GameModel";
-import {
-  PlayerViewModel,
-  PublicPlayerModel,
-} from "@/common/models/PlayerModel";
-import { CardType } from "@/common/cards/CardType";
-import { getCardsByType, isCardActivated } from "@/client/utils/CardUtils";
-import { sortActiveCards } from "@/client/utils/ActiveCardsSortingOrder";
-import { CardModel } from "@/common/models/CardModel";
-import { getCardOrThrow } from "../cards/ClientCardManifest";
-import { HomeMixin } from "@/client/mixins/HomeMixin";
+import WaitingFor from '@/client/components/WaitingFor.vue';
+import Sidebar from '@/client/components/Sidebar.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
+import LogPanel from '@/client/components/logpanel/LogPanel.vue';
+import GameBoardView from '@/client/components/GameBoardView.vue';
+import PlayerSetupView from '@/client/components/PlayerSetupView.vue';
+import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
+import SortableCards from '@/client/components/SortableCards.vue';
+import TopBar from '@/client/components/TopBar.vue';
+import StackedCards from '@/client/components/StackedCards.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
+import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
+import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
+import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {GameModel} from '@/common/models/GameModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {CardType} from '@/common/cards/CardType';
+import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
+import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
+import {CardModel} from '@/common/models/CardModel';
+import {getCardOrThrow} from '../cards/ClientCardManifest';
+import {HomeMixin} from '@/client/mixins/HomeMixin';
 
 type PlayerHomeModel = {
   showHand: boolean;
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
-};
+}
 
-type ToggleableCardType = "HAND" | "ACTIVE" | "AUTOMATED" | "EVENT";
+type ToggleableCardType = 'HAND' | 'ACTIVE' | 'AUTOMATED' | 'EVENT';
 
-const typeToDataModel: Record<
-  ToggleableCardType,
-  { key: keyof PlayerHomeModel; preference: keyof Preferences }
-> = {
-  HAND: { key: "showHand", preference: "hide_hand" },
-  ACTIVE: { key: "showActiveCards", preference: "hide_active_cards" },
-  AUTOMATED: { key: "showAutomatedCards", preference: "hide_automated_cards" },
-  EVENT: { key: "showEventCards", preference: "hide_event_cards" },
+const typeToDataModel: Record<ToggleableCardType, {key: keyof PlayerHomeModel, preference: keyof Preferences}> = {
+  HAND: {key: 'showHand', preference: 'hide_hand'},
+  ACTIVE: {key: 'showActiveCards', preference: 'hide_active_cards'},
+  AUTOMATED: {key: 'showAutomatedCards', preference: 'hide_automated_cards'},
+  EVENT: {key: 'showEventCards', preference: 'hide_event_cards'},
 } as const;
 
 export default defineComponent({
-  name: "player-home",
+  name: 'player-home',
   mixins: [HomeMixin],
   data(): PlayerHomeModel {
     const preferences = getPreferences();
@@ -249,22 +211,16 @@ export default defineComponent({
   },
   watch: {
     showHand: function hide_hand() {
-      PreferencesManager.INSTANCE.set("hide_hand", !this.showHand);
+      PreferencesManager.INSTANCE.set('hide_hand', !this.showHand);
     },
     showActiveCards: function toggle_active_cards() {
-      PreferencesManager.INSTANCE.set(
-        "hide_active_cards",
-        !this.showActiveCards,
-      );
+      PreferencesManager.INSTANCE.set('hide_active_cards', !this.showActiveCards);
     },
     showAutomatedCards: function toggle_automated_cards() {
-      PreferencesManager.INSTANCE.set(
-        "hide_automated_cards",
-        !this.showAutomatedCards,
-      );
+      PreferencesManager.INSTANCE.set('hide_automated_cards', !this.showAutomatedCards);
     },
     showEventCards: function toggle_event_cards() {
-      PreferencesManager.INSTANCE.set("hide_event_cards", !this.showEventCards);
+      PreferencesManager.INSTANCE.set('hide_event_cards', !this.showEventCards);
     },
   },
   props: {
@@ -285,11 +241,7 @@ export default defineComponent({
     },
     cardsInHandCount(): number {
       const playerView = this.playerView;
-      return (
-        playerView.cardsInHand.length +
-        playerView.preludeCardsInHand.length +
-        playerView.ceoCardsInHand.length
-      );
+      return playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length;
     },
     getCardsByType(): typeof getCardsByType {
       return getCardsByType;
@@ -305,25 +257,23 @@ export default defineComponent({
   components: {
     DynamicTitle,
     Card,
-    "players-overview": PlayersOverview,
-    "waiting-for": WaitingFor,
-    sidebar: Sidebar,
-    colony: Colony,
-    "log-panel": LogPanel,
-    "sortable-cards": SortableCards,
-    "top-bar": TopBar,
+    'players-overview': PlayersOverview,
+    'waiting-for': WaitingFor,
+    'sidebar': Sidebar,
+    'colony': Colony,
+    'log-panel': LogPanel,
+    'sortable-cards': SortableCards,
+    'top-bar': TopBar,
     GameBoardView,
     PlayerSetupView,
-    "stacked-cards": StackedCards,
+    'stacked-cards': StackedCards,
     PurgeWarning,
     UndergroundTokens,
     KeyboardShortcuts,
   },
   methods: {
-    isPlayerActing(playerView: PlayerViewModel): boolean {
-      return (
-        playerView.players.length > 1 && playerView.waitingFor !== undefined
-      );
+    isPlayerActing(playerView: PlayerViewModel) : boolean {
+      return playerView.players.length > 1 && playerView.waitingFor !== undefined;
     },
     getFleetsCountRange(player: PublicPlayerModel): Array<number> {
       const fleetsRange = [];
@@ -340,26 +290,19 @@ export default defineComponent({
     },
     getToggleLabel(hideType: ToggleableCardType): string {
       const val = this[typeToDataModel[hideType].key];
-      return val ? "✔" : "";
+      return val ? '✔' : '';
     },
     getHideButtonClass(hideType: ToggleableCardType): string {
-      const prefix = "hiding-card-button ";
+      const prefix = 'hiding-card-button ';
       switch (hideType) {
-        case "HAND":
-          return (
-            prefix + (this.showHand ? "hand-toggle" : "hand-toggle-transparent")
-          );
-        case "ACTIVE":
-          return (
-            prefix + (this.showActiveCards ? "active" : "active-transparent")
-          );
-        case "AUTOMATED":
-          return (
-            prefix +
-            (this.showAutomatedCards ? "automated" : "automated-transparent")
-          );
-        case "EVENT":
-          return prefix + (this.showEventCards ? "event" : "event-transparent");
+      case 'HAND':
+        return prefix + (this.showHand ? 'hand-toggle' : 'hand-toggle-transparent');
+      case 'ACTIVE':
+        return prefix + (this.showActiveCards ? 'active' : 'active-transparent');
+      case 'AUTOMATED':
+        return prefix + (this.showAutomatedCards ? 'automated' : 'automated-transparent');
+      case 'EVENT':
+        return prefix + (this.showEventCards ? 'event' : 'event-transparent');
       }
     },
     isActive(cardModel: CardModel): boolean {
@@ -371,4 +314,5 @@ export default defineComponent({
     },
   },
 });
+
 </script>

@@ -123,7 +123,7 @@
             background: #32004d;
             padding-left: 24px;
             padding-right: 20px;
-            border-radius: 50%;
+            border-radius: @radius_circle;
             font-weight: normal;
             border: 2px solid white;
             box-shadow: 6px 6px 5px grey;
@@ -192,7 +192,7 @@
             top: 8px;
             padding: 4px 8px;
             text-align: center;
-            color: #020202;
+            color: @text_dark;
             margin-top: 5px;
             border: 2px solid black;
             margin-left: 8px;
@@ -203,7 +203,7 @@
         .card-inventrix-logo {
             top: 16px;
             left: 8px;
-            color: #020202;
+            color: @text_dark;
             font-size: 24px;
             text-shadow: 6px 6px 5px grey;
             position: absolute;
@@ -263,7 +263,7 @@
             position: absolute;
             top: 17px;
             left: 8px;
-            color: #020202;
+            color: @text_dark;
             font-size:32px;
             font-family: 'Arial Narrow','Verdana';
             font-weight:normal;
@@ -503,7 +503,7 @@
             text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;
         }
         .card-tharsis-logo {
-            color: #020202;
+            color: @text_dark;
             font-size: 24px;
             text-shadow: 6px 6px 6px grey;
             margin: 15px 0 0 -26px;
@@ -529,7 +529,7 @@
 
                 &::after {
                     content: "▲";
-                    color: #020202;
+                    color: @text_dark;
                     font-size: 14px;
                     position: absolute;
                     margin: 3px 0 0 3px;
@@ -1105,7 +1105,7 @@
             width: 50px;
             height: 40px;
             background: red;
-            border-radius: 50% / 10%;
+            border-radius: @radius_circle / 10%;
             color: white;
             text-align: center;
             text-indent: .1em;
@@ -1917,7 +1917,7 @@
         position: relative;
         display: inline-block;
         text-align: center;
-        border-radius: 50%;
+        border-radius: @radius_circle;
         margin-left: 3px;
         margin-right: 3px;
         width: 30px;
@@ -2001,7 +2001,7 @@
         width: 16px;
         top: -7px;
         height: 16px;
-        border-radius: 50%;
+        border-radius: @radius_circle;
     }
     .card-tag-no_planetary_tag {
         .tag-clone();
@@ -2024,7 +2024,7 @@
     }
     .card-tag-turmoil:after {
         position: absolute;
-        color: #222;
+        color: @grey_900;
         border: 1px solid black;
         left: -1px;
         background: darkorange;
@@ -2034,7 +2034,7 @@
         width: 20px;
         height: 20px;
         text-align: center;
-        border-radius: 50%;
+        border-radius: @radius_circle;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
         content: "\25b2";
         transform: rotate(180deg);
@@ -2221,7 +2221,7 @@
     }
     .card-description {
         margin-top: 8px;
-        color: #020202;
+        color: @text_dark;
         font-size: 11px;
         line-height: 12px;
         font-weight: normal;
@@ -2567,7 +2567,7 @@
         background-size: 24px 30px;
         vertical-align: middle;
         filter: drop-shadow(0px 0px 1px black);
-        background-color: #222;
+        background-color: @grey_900;
         padding: 3px;
         background-repeat: no-repeat;
         background-position: 3px;
@@ -2581,7 +2581,7 @@
         background-size: 24px 30px;
         vertical-align: middle;
         filter: drop-shadow(0px 0px 1px black);
-        background-color: #222;
+        background-color: @grey_900;
         padding: 3px;
         background-repeat: no-repeat;
         background-position: 3px;
@@ -2595,7 +2595,7 @@
         background-size: 24px 30px;
         vertical-align: middle;
         filter: drop-shadow(0px 0px 1px black);
-        background-color: #222;
+        background-color: @grey_900;
         padding: 3px;
         background-repeat: no-repeat;
         background-position: 3px;
@@ -2609,7 +2609,7 @@
         background-size: 24px 30px;
         vertical-align: middle;
         filter: drop-shadow(0px 0px 1px black);
-        background-color: #222;
+        background-color: @grey_900;
         padding: 3px;
         background-repeat: no-repeat;
         background-position: 3px;
@@ -2682,7 +2682,7 @@
                 background-size: 50px;
                 background-position: -5px;
                 text-align: center;
-                border-radius: 50%;
+                border-radius: @radius_circle;
                 .raised-bevel();
                 background-color: white;
                 /* margin-top: -6px; */
@@ -2692,7 +2692,7 @@
     }
     .card-title {
         font-family: "Ubuntu";
-        color: #020202;
+        color: @text_dark;
         text-transform: uppercase;
         width: 100%;
         border-radius: 0 0 30% 30%;
@@ -2714,7 +2714,7 @@
             float: left;
             top: 8px;
             position: absolute;
-            color: #020202;
+            color: @text_dark;
             width: 115px;
             height: 14px;
             line-height: 15px;
@@ -2777,13 +2777,13 @@
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
     }
     .contentCorporation {
-        color: #020202;
+        color: @text_dark;
         position: relative;
         display: inline-block;
         font-weight: bold;
         padding: 8px;
         top: -40px;
-        color: #020202;
+        color: @text_dark;
     }
 }
 /* fixes */

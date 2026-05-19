@@ -102,7 +102,7 @@ input[type="radio"] + .filterDiv.card-container {
 
 input[type="checkbox"]:checked + .filterDiv,
 input[type="radio"]:checked + .filterDiv {
-    box-shadow: 0 0 0 1px #303030, 0 0 7px 10px #c97e23;
+    box-shadow: 0 0 0 1px @grey_850, 0 0 7px 10px #c97e23;
 }
 
 input[type="checkbox"]:checked + .filterDiv::after,
@@ -228,7 +228,7 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 16px;
     text-align: center;
     color: white;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
@@ -248,7 +248,7 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 16px;
     text-align: center;
     color: white;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
@@ -270,7 +270,7 @@ input[type="radio"]:checked + .filterDiv::after {
   height: 16px;
   text-align: center;
   color: white;
-  border-radius: 50%;
+  border-radius: @radius_circle;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   content: "2";
 }
@@ -286,7 +286,7 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 16px;
     text-align: center;
     color: white;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
@@ -298,7 +298,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .turmoil-icon:after {
     position: absolute;
-    color: #222;
+    color: @grey_900;
     border: 1px solid black;
     background: darkorange;
     font-weight: bold;
@@ -307,7 +307,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height: 16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     transform: rotate(180deg);
@@ -325,14 +325,14 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 8px;
     text-align: center;
     color: white;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\0020";
 }
 
 .colonies-icon:after {
     position: absolute;
-    color: #222;
+    color: @grey_900;
     border: 1px solid black;
     font-weight: bold;
     font-size: 16px;
@@ -340,7 +340,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height: 16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     background: #d4d4d4;
@@ -348,7 +348,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .community-icon:after {
   position: absolute;
-  color:#222;
+  color:@grey_900;
   border: 1px solid black;
   background: moccasin;
   font-weight: bold;
@@ -357,7 +357,7 @@ input[type="radio"]:checked + .filterDiv::after {
   width: 16px;
   height:16px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: @radius_circle;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "\2666";
 }
@@ -374,7 +374,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height:16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "A";
 }
@@ -383,7 +383,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .moon-icon:after {
   position: absolute;
   color:#DDD;
-  border: 1px solid #222;
+  border: 1px solid @grey_900;
   background: #999;
   font-family: Prototype;
   font-weight: bold;
@@ -392,7 +392,7 @@ input[type="radio"]:checked + .filterDiv::after {
   width: 16px;
   height:16px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: @radius_circle;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "M";
 }
@@ -401,7 +401,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .pathfinders-icon:after {
     position: absolute;
     color:#DDD;
-    border: 1px solid #222;
+    border: 1px solid @grey_900;
     background: #b84;
     font-family: Prototype;
     font-weight: bold;
@@ -410,7 +410,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height:16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "🪐";
 }
@@ -418,7 +418,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .ceo-icon:after {
     position: absolute;
     color:#000;
-    border: 1px solid #222;
+    border: 1px solid @grey_900;
     background: #edbd18;
     font-family: Prototype;
     // font-weight: bold;
@@ -427,7 +427,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height:16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "💼";
 }
@@ -435,7 +435,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .starwars-icon:after {
     position: absolute;
     color:#DDD;
-    border: 1px solid #222;
+    border: 1px solid @grey_900;
     background: #999;
     font-family: Prototype;
     font-weight: bold;
@@ -444,7 +444,7 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 16px;
     height:16px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "W";
 }
@@ -471,7 +471,7 @@ input[type="radio"]:checked + .filterDiv::after {
     background-size: 50px;
     background-position: -5px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     .raised-bevel();
     background-color: white;
     margin-top: -6px;
@@ -492,7 +492,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .title {
     font-family: "Ubuntu";
-    color: #020202;
+    color: @text_dark;
     text-transform: uppercase;
     float: left;
     margin-top: 36px;
@@ -667,12 +667,12 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .contentCorporation {
-    color: #020202;
+    color: @text_dark;
     position: relative;
     display: inline-block;
     font-weight: bold;
     padding: 8px;
-    color: #020202;
+    color: @text_dark;
 }
 
 .requirements {
@@ -741,7 +741,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .description {
-    color: #020202;
+    color: @text_dark;
     font-size: 11px;
     line-height: 13px;
     font-weight: normal;
@@ -1027,7 +1027,7 @@ input[type="radio"]:checked + .filterDiv::after {
     position: relative;
     display: inline-block;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     width: 30px;
     height: 30px;
     background-size: 34px 34px;
@@ -1163,7 +1163,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-icon-venus {
     background: rgb(84, 150, 201);
-    border-radius: 50%;
+    border-radius: @radius_circle;
     text-shadow: 0 0 1px black;
     font-size: 14px;
     line-height: 22px;
@@ -1173,7 +1173,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-icon-microbe {
     background: linear-gradient(#bce444, #8cb319);
     color: rgb(63, 112, 58);
-    border-radius: 50%;
+    border-radius: @radius_circle;
     font-size: 14px;
     line-height: 20px;
     font-weight: normal;
@@ -1191,19 +1191,19 @@ input[type="radio"]:checked + .filterDiv::after {
     background: black;
     color: yellow;
     font-size: 14px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-science {
     background-image: url("./assets/tags/science.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-plant {
     background: linear-gradient(#0bda0b, #09aa09);
     color: rgb(63, 112, 58);
     font-size: 14px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-building {
@@ -1211,13 +1211,13 @@ input[type="radio"]:checked + .filterDiv::after {
     background-size: 20px 20px;
     color: rgb(73, 54, 40);
     font-size: 12px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     text-shadow: 0 0 1px black;
 }
 
 .card-icon-jovian {
     background: url("./assets/resources/tag-jovian.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
     margin-top: -10px;
     box-shadow: 0 0 1px black;
     border: 1px solid #444;
@@ -1225,13 +1225,13 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-icon-event {
     background-image: url("./assets/tag-event.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-blue {
     margin-left: 17px;
     background: rgb(23, 111, 228);
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-footer {
@@ -1267,8 +1267,8 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(255, 204, 100);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1279,8 +1279,8 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(235, 118, 171);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1291,20 +1291,20 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(158, 145, 128);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
 
 .card-footer-globals:after {
     content: "G";
-    color: #222;
+    color: @grey_900;
     background: #eee;
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1427,7 +1427,7 @@ input[type="radio"]:checked + .filterDiv::after {
     text-transform: uppercase;
     float: left;
     position: absolute;
-    color: #020202;
+    color: @text_dark;
     width: 115px;
     height: 14px;
     line-height: 15px;
@@ -1485,7 +1485,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-resources-counter {
   position: absolute;
-  color: #020202;
+  color: @text_dark;
   font-family: Prototype;
   width: 80px;
   height: 30px;
@@ -2140,7 +2140,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-size: 34px;
     width: 140px;
     text-align: center;
-    color: #020202;
+    color: @text_dark;
     margin-top: 5px;
     border: 2px solid black;
     margin-left: 8px;
@@ -2176,7 +2176,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-beginner-corporation {
     .corporation-frame {
-        color: #020202;
+        color: @text_dark;
         background: #eeeeee;
         font-size: 20px;
         text-align: center;
@@ -2753,7 +2753,7 @@ input[type="radio"]:checked + .filterDiv::after {
                     background-size: 50px;
                     background-position: -5px;
                     text-align: center;
-                    border-radius: 50%;
+                    border-radius: @radius_circle;
                     .raised-bevel();
                     background-color: white;
                     /* margin-top: -6px; */
@@ -2764,7 +2764,7 @@ input[type="radio"]:checked + .filterDiv::after {
         }
         .card-title {
             font-family: "Ubuntu";
-            color: #020202;
+            color: @text_dark;
             text-transform: uppercase;
             width: 100%;
             border-radius: 0 0 30% 30%;
@@ -2781,7 +2781,7 @@ input[type="radio"]:checked + .filterDiv::after {
                 float: left;
                 top: 8px;
                 position: absolute;
-                color: #020202;
+                color: @text_dark;
                 width: 115px;
                 height: 14px;
                 line-height: 15px;
@@ -2829,13 +2829,13 @@ input[type="radio"]:checked + .filterDiv::after {
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
         }
         .contentCorporation {
-            color: #020202;
+            color: @text_dark;
             position: relative;
             display: inline-block;
             font-weight: bold;
             padding: 8px;
             top: -40px;
-            color: #020202;
+            color: @text_dark;
         }
     }
 }

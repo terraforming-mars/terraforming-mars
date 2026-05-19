@@ -3,6 +3,7 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import SelectSpace from '@/client/components/SelectSpace.vue';
 import {FakeLocalStorage} from './FakeLocalStorage';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 
 describe('SelectSpace', () => {
   let localStorage: FakeLocalStorage;
@@ -20,6 +21,7 @@ describe('SelectSpace', () => {
     const wrapper = shallowMount(SelectSpace, {
       ...globalConfig,
       props: {
+        playerView: {} as PlayerViewModel,
         playerinput: {
           title: 'Select a space',
           buttonLabel: 'Save',

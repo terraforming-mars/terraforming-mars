@@ -219,17 +219,11 @@ input[type="radio"]:checked + .filterDiv::after {
 } */
 
 .corpera-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background-color: #cc3333;
     font-size: 11px;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -238,18 +232,12 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .prelude-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background-color: rgb(235, 118, 171);
     font-size: 11px;
     font-weight: bold;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -259,35 +247,23 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .prelude2-icon:after {
-  position: absolute;
-  border: 1px solid black;
+  .expansion-icon-base();
   font-family: Prototype;
   background-color: rgb(235, 118, 171);
   font-size: 13px;
   font-weight: bold;
   line-height: 16px;
-  width: 16px;
-  height: 16px;
-  text-align: center;
   color: white;
-  border-radius: @radius_circle;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   content: "2";
 }
 
 .venus-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background: rgb(84, 150, 201);
     font-weight: bold;
     font-size: 11px;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -297,25 +273,18 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .turmoil-icon:after {
-    position: absolute;
+    .expansion-icon-base();
     color: @grey_900;
-    border: 1px solid black;
     background: darkorange;
     font-weight: bold;
     font-size: 16px;
     line-height: 14px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     transform: rotate(180deg);
 }
 
 .promo-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background: white;
     border: 5px solid #444444;
     font-weight: bold;
@@ -323,129 +292,88 @@ input[type="radio"]:checked + .filterDiv::after {
     line-height: 18px;
     width: 8px;
     height: 8px;
-    text-align: center;
     color: white;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\0020";
 }
 
 .colonies-icon:after {
-    position: absolute;
+    .expansion-icon-base();
     color: @grey_900;
-    border: 1px solid black;
     font-weight: bold;
     font-size: 16px;
     line-height: 14px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     background: #d4d4d4;
 }
 
 .community-icon:after {
-  position: absolute;
-  color:@grey_900;
-  border: 1px solid black;
+  .expansion-icon-base();
+  color: @grey_900;
   background: moccasin;
   font-weight: bold;
   font-size: 16px;
   line-height: 14px;
-  width: 16px;
-  height:16px;
-  text-align: center;
-  border-radius: @radius_circle;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "\2666";
 }
 
 .ares-icon:after {
-    position: absolute;
-    color:#EFEF64;
-    border: 1px solid black;
+    .expansion-icon-base();
+    color: #EFEF64;
     background: #953316;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "A";
 }
 
 
 .moon-icon:after {
-  position: absolute;
-  color:#DDD;
+  .expansion-icon-base();
   border: 1px solid @grey_900;
+  color: #DDD;
   background: #999;
   font-family: Prototype;
   font-weight: bold;
   font-size: 14px;
   line-height: 17px;
-  width: 16px;
-  height:16px;
-  text-align: center;
-  border-radius: @radius_circle;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "M";
 }
 
 
 .pathfinders-icon:after {
-    position: absolute;
-    color:#DDD;
+    .expansion-icon-base();
     border: 1px solid @grey_900;
+    color: #DDD;
     background: #b84;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "🪐";
 }
 
 .ceo-icon:after {
-    position: absolute;
-    color:#000;
+    .expansion-icon-base();
     border: 1px solid @grey_900;
+    color: #000;
     background: #edbd18;
     font-family: Prototype;
     // font-weight: bold;
     font-size: 9px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "💼";
 }
 
 .starwars-icon:after {
-    position: absolute;
-    color:#DDD;
+    .expansion-icon-base();
     border: 1px solid @grey_900;
+    color: #DDD;
     background: #999;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "W";
 }
 

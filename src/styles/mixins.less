@@ -31,3 +31,11 @@
 .player_pink_bg_translucent() {
     background: rgba(@player_pink, 0.7);
 }
+
+// A light-on-dark beveled border (top/left highlight, bottom/right shadow).
+.raised-bevel(@width: 2px) {
+    border-top: @width solid rgb(221, 221, 221);
+    border-left: @width solid rgb(221, 221, 221);
+    border-bottom: @width solid rgb(137, 137, 137);
+    border-right: @width solid rgb(137, 137, 137);
+}

@@ -55,6 +55,7 @@
 import {defineComponent} from 'vue';
 
 import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
@@ -68,6 +69,10 @@ type DataModel = {
 export default defineComponent({
   name: 'SelectProductionToLose',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectProductionToLoseModel,
       required: true,

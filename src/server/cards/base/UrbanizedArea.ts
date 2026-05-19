@@ -11,6 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Resource} from '../../../common/Resource';
 import {MarsBoard} from '../../boards/MarsBoard';
+import {Units} from '../../../common/Units';
 
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
@@ -36,6 +37,10 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
+  public productionBox() {
+    return Units.of({energy: -1, megacredits: 2});
+  }
+
   private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);

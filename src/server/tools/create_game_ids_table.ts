@@ -1,4 +1,4 @@
-require('dotenv').config();
+import '@/server/init';
 
 import {GameLoader} from '../database/GameLoader';
 import {Database} from '../database/Database';

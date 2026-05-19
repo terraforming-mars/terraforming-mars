@@ -1,5 +1,5 @@
 // Generates the files settings.json and translations.json, stored in src/genfiles
-require('dotenv').config();
+import '@/server/init';
 
 import fs from 'fs';
 import child_process from 'child_process';

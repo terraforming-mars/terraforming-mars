@@ -19,10 +19,7 @@ import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
 import SelectCard from '@/client/components/SelectCard.vue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
-import SelectPaymentRevised from '@/client/components/SelectPaymentRevised.vue';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
-import SelectProjectCardToPlayRevised from '@/client/components/SelectProjectCardToPlayRevised.vue';
-import {getPreferences} from '@/client/utils/PreferencesManager';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
@@ -117,14 +114,6 @@ export default defineComponent({
     },
     resolvedComponent(): Component {
       const input = this.playerinput;
-      if (getPreferences().experimental_ui === true) {
-        if (input.type === 'payment') {
-          return SelectPaymentRevised;
-        }
-        if (input.type === 'projectCard') {
-          return SelectProjectCardToPlayRevised;
-        }
-      }
       return inputComponents[input.type];
     },
   },

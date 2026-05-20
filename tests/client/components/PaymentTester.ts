@@ -1,14 +1,10 @@
 import {VueWrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {Payment} from '@/common/inputs/Payment';
 import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
 export class PaymentTester {
-  private model: SelectPaymentDataModel;
-  constructor(private wrapper: VueWrapper<any>) {
-    this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
-  }
+  constructor(private wrapper: VueWrapper<any>) {}
 
   private static selector(unit: SpendableResource) {
     return `[data-test=${unit}]`;
@@ -61,34 +57,29 @@ export class PaymentTester {
     expect(this.getPayment()).deep.eq(expected);
   }
 
-  // This that the given unit has the given value. It does this two ways:
-  // It verifies that the model has this value, and also that the text box
-  // has the same value.
-  public expectValue(unit: SpendableResource, amount: number) {
-    const vmVal = this.model.payment[unit];
-    expect(this.getValue(unit), `text box value for ${unit}`).eq(amount);
-    expect(vmVal, 'VM box value for ' + unit).eq(amount);
+  public expectValue(resource: SpendableResource, amount: number) {
+    expect(this.getValue(resource), `text box value for ${resource}`).eq(amount);
   }
 
   /**
-   * Returns true when the text box for `unit` is visible.
+   * Returns true when the text box for `resource` is visible.
    */
-  private isAvailable(unit: SpendableResource): boolean {
-    return this.wrapper.find(PaymentTester.selector(unit) + ' input').exists();
+  private isAvailable(resource: SpendableResource): boolean {
+    return this.wrapper.find(PaymentTester.selector(resource) + ' input').exists();
   }
 
   /**
-   * Passes when the text box for `unit` is visible.
+   * Passes when the text box for `resource` is visible.
    */
-  public expectIsAvailable(unit: SpendableResource) {
-    expect(this.isAvailable(unit), `Expect input for ${unit} to be visible`).is.true;
+  public expectIsAvailable(resource: SpendableResource) {
+    expect(this.isAvailable(resource), `Expect input for ${resource} to be visible`).is.true;
   }
 
   /**
-   * Passes when the text box for `unit` is not visible.
+   * Passes when the text box for `resource` is not visible.
    */
-  public expectIsNotAvailable(unit: SpendableResource) {
-    expect(this.isAvailable(unit), `Expect input for ${unit} to be invisible`).is.false;
+  public expectIsNotAvailable(resource: SpendableResource) {
+    expect(this.isAvailable(resource), `Expect input for ${resource} to be invisible`).is.false;
   }
 
   /**
@@ -107,9 +98,9 @@ export class PaymentTester {
   /**
    * Passes when the visible set of UI components is this list and only this list.
    */
-  public expectAvailablePaymentComponents(...units: Array<SpendableResource>) {
+  public expectAvailablePaymentComponents(...resources: Array<SpendableResource>) {
     const available = this.getAvailablePaymentComponents();
-    expect(available).has.members(units);
+    expect(available).has.members(resources);
   }
 
   public async nextTick() {

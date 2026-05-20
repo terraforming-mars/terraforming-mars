@@ -85,12 +85,18 @@ function unescape(s: string): string {
 }
 
 function isValidCardSuffix(suffix: string): boolean {
-  if (validCardSlugs.has(suffix)) return true;
-  if (INTERNAL_CARD_SUFFIXES.has(suffix)) return true;
+  if (validCardSlugs.has(suffix)) {
+    return true;
+  }
+  if (INTERNAL_CARD_SUFFIXES.has(suffix)) {
+    return true;
+  }
   // Corporate logo: `<corp-slug>-logo`.
   if (suffix.endsWith('-logo')) {
     const corp = suffix.slice(0, -'-logo'.length);
-    if (validLogoSlugs.has(corp)) return true;
+    if (validLogoSlugs.has(corp)) {
+      return true;
+    }
   }
   return false;
 }

@@ -99,7 +99,7 @@
   "Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Один раз за гру обмінюйте до X+2 одиниць виробництва між двома ресурсами, де X - це поточний номер покоління.",
 
   "Shara": "Шара",
-  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Один раз за гру оберіть тег планети. Ця карта вважається, що ви відразу зіграли 2 таких теги. Потім отримайте M€, рівне впливу планети цього тегу.",
+  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag's planetary influence track.": "Один раз за гру оберіть тег планети. Ця карта вважається, що ви відразу зіграли 2 таких теги. Потім отримайте M€, рівне впливу планети цього тегу.",
 
   "Stefan": "Штефан",
   "Once per game, sell any number of cards from your hand for 3 M€ each.": "Один раз за гру продайте будь-яку кількість карток з руки за 3 M€ кожну.",
@@ -108,7 +108,7 @@
   "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Один раз за гру назвіть тег. Розкрийте карти з колоди, поки не знайдете 5 карток з цим тегом. КУПІТЬ до 2 карток і відкиньте решту.",
 
   "Ulrich": "Ульріх",
-  "Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "Один раз за гру отримайте 4 M€ за кожен розміщений океан. Якщо всі океани вже розміщені, отримайте лише 15 M€.",
+  "Once per game, gain 4 M€ for each ocean placed. If all oceans are already placed, gain only 15 M€.": "Один раз за гру отримайте 4 M€ за кожен розміщений океан. Якщо всі океани вже розміщені, отримайте лише 15 M€.",
 
   "Van Allen": "Ван Аллен",
   "Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "Ефект: ДОСЯГНЕННЯ ЗАВЖДИ КОШТУЮТЬ ДЛЯ ВАС 0 МЄ.",

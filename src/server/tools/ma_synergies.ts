@@ -1,4 +1,4 @@
-require('dotenv').config();
+import '@/server/init';
 
 import {synergies} from '../ma/MilestoneAwardSynergies';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';

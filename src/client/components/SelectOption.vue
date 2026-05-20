@@ -11,12 +11,17 @@
 import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectOptionModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from './WarningsComponent.vue';
 
 export default defineComponent({
   name: 'select-option',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectOptionModel,
       required: true,

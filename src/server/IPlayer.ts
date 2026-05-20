@@ -279,7 +279,7 @@ export interface IPlayer {
   /**
    * Add resources to this player's played card
    */
-  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
+  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean, from?: From}): void;
 
   /**
    * Returns the set of cards in play that have actual resources on them.

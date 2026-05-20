@@ -19,7 +19,7 @@ export class ColonialEnvoys extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'P70',
-        description: 'Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.',
+        description: 'Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPARATE PARTIES.',
         renderData: CardRenderer.builder((b) => {
           b.delegates(1).asterix().slash().colonies(1).br;
         }),

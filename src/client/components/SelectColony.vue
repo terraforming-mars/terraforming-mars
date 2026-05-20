@@ -15,6 +15,7 @@ import {defineComponent} from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectColonyModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
 
@@ -25,6 +26,10 @@ type DataModel = {
 export default defineComponent({
   name: 'SelectColony',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectColonyModel,
       required: true,

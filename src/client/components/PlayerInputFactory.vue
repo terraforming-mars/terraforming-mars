@@ -1,17 +1,16 @@
 <template>
-  <component :is="componentName"
+  <component :is="resolvedComponent"
     ref="childInput"
     :playerView="playerView"
     :playerinput="playerinput"
     :onsave="onsave"
     :showsave="showsave"
-    :showtitle="showtitle"/>
+    :showtitle="showtitle" />
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
+import {Component, defineComponent} from 'vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
@@ -36,29 +35,45 @@ import SelectResources from '@/client/components/SelectResources.vue';
 import SelectClaimedUndergroundToken from '@/client/components/SelectClaimedUndergroundToken.vue';
 import DeltaProjectInput from '@/client/components/delta/DeltaProjectInput.vue';
 
-const typeToComponentName: Record<PlayerInputType, string> = {
-  'and': 'and-options',
-  'card': 'SelectCard',
-  'projectCard': 'SelectProjectCardToPlay',
-  'initialCards': 'SelectInitialCards',
-  'or': 'or-options',
-  'option': 'select-option',
-  'payment': 'SelectPayment',
-  'space': 'select-space',
-  'player': 'select-player',
-  'amount': 'select-amount',
-  'delegate': 'select-delegate',
-  'party': 'select-party',
-  'colony': 'select-colony',
-  'productionToLose': 'select-production-to-lose',
-  'aresGlobalParameters': 'shift-ares-global-parameters',
-  'globalEvent': 'select-global-event',
-  'policy': 'select-policy',
-  'resource': 'select-resource',
-  'resources': 'select-resources',
-  'claimedUndergroundToken': 'select-claimed-underground-token',
-  'deltaProject': 'delta-project-input',
+// Shared contract every input component must satisfy. `playerinput` and
+// `onsave` are narrowed to the discriminated variant whose `type` matches K.
+type InputComponentProps<K extends PlayerInputModel['type']> = {
+  playerView: PlayerViewModel;
+  playerinput: Extract<PlayerInputModel, {type: K}>;
+  onsave: (out: Extract<InputResponse, {type: K}>) => void;
+  showsave: boolean;
+  showtitle?: boolean;
 };
+
+type InputComponentRegistry = {
+  [K in PlayerInputModel['type']]: Component<InputComponentProps<K>>;
+};
+
+// `satisfies` makes the type checker verify that every registered component
+// accepts the common props (including `playerView`). If a component drops or
+// renames a shared prop, this fails at compile time.
+const inputComponents = {
+  'and': AndOptions,
+  'or': OrOptions,
+  'amount': SelectAmount,
+  'card': SelectCard,
+  'colony': SelectColony,
+  'delegate': SelectDelegate,
+  'globalEvent': SelectGlobalEvent,
+  'initialCards': SelectInitialCards,
+  'option': SelectOption,
+  'party': SelectParty,
+  'payment': SelectPayment,
+  'player': SelectPlayer,
+  'projectCard': SelectProjectCardToPlay,
+  'space': SelectSpace,
+  'productionToLose': SelectProductionToLose,
+  'aresGlobalParameters': ShiftAresGlobalParameters,
+  'resource': SelectResource,
+  'resources': SelectResources,
+  'claimedUndergroundToken': SelectClaimedUndergroundToken,
+  'deltaProject': DeltaProjectInput,
+} satisfies InputComponentRegistry;
 
 export default defineComponent({
   name: 'player-input-factory',
@@ -84,28 +99,6 @@ export default defineComponent({
       default: true,
     },
   },
-  components: {
-    'and-options': AndOptions,
-    'or-options': OrOptions,
-    'select-amount': SelectAmount,
-    SelectCard,
-    'select-option': SelectOption,
-    SelectPayment,
-    SelectProjectCardToPlay,
-    SelectInitialCards,
-    'select-player': SelectPlayer,
-    'select-space': SelectSpace,
-    'select-delegate': SelectDelegate,
-    'select-party': SelectParty,
-    'select-colony': SelectColony,
-    SelectProductionToLose,
-    ShiftAresGlobalParameters,
-    SelectGlobalEvent,
-    'select-resource': SelectResource,
-    'select-resources': SelectResources,
-    'select-claimed-underground-token': SelectClaimedUndergroundToken,
-    'delta-project-input': DeltaProjectInput,
-  },
   methods: {
     saveData() {
       this.typedRefs.childInput.saveData();
@@ -119,8 +112,9 @@ export default defineComponent({
     typedRefs(): {childInput: {saveData: () => void, canSave?: () => boolean}} {
       return this.$refs as unknown as {childInput: {saveData: () => void, canSave?: () => boolean}};
     },
-    componentName(): string {
-      return typeToComponentName[this.playerinput.type];
+    resolvedComponent(): Component {
+      const input = this.playerinput;
+      return inputComponents[input.type];
     },
   },
 });

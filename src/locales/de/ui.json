@@ -1090,8 +1090,8 @@
   "Spend 1 corruption to gain 4 plants.": "Bezahle 1 Korruption, um 4 Pflanzen zu erhalten",
   "Spend 1 corruption to gain 8 heat.": "Bezahle 1 Korruption, um 8 Wärme zu erhalten",
   "Spend 1 corruption to gain 3 of the same standard resource.": "Bezahle 1 Korruption, um 3 von derselben Standard-Ressource zu erhalten",
-  "Spend 8 energy to increase oxygen 1 step.": "Bezahle 8 Energie, um den Sauerstoffsgehalt um 1% zu erhöhen.",
-  "Spend 8 energy to increase Venus 1 step.": "Bezahle 8 Energie, um die Venuswertung um 2% zu erhöhen.",
+  "Spend 8 energy to raise oxygen 1 step.": "Bezahle 8 Energie, um den Sauerstoffsgehalt um 1% zu erhöhen.",
+  "Spend 8 energy to raise Venus 1 step.": "Bezahle 8 Energie, um die Venuswertung um 2% zu erhöhen.",
 
   "Select Earth card(s) to discard": "Wähle Karte(n) mit Erd-Symbol, die du abwerfen möchtest",
   "Select a card to keep and pass the rest to ${0}": "Wähle eine Karte, die du behalten möchtest und gebe den Rest an ${0}",

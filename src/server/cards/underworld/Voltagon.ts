@@ -23,14 +23,14 @@ export class Voltagon extends ActiveCorporationCard {
             {
               spend: {energy: 8},
               global: {oxygen: 1},
-              title: 'Spend 8 energy to increase oxygen 1 step.',
-              log: '${player} spent 8 energy to increase oxygen 1 step.',
+              title: 'Spend 8 energy to raise oxygen 1 step.',
+              log: '${player} spent 8 energy to raise oxygen 1 step.',
             },
             {
               spend: {energy: 8},
               global: {venus: 1},
-              title: 'Spend 8 energy to increase Venus 1 step.',
-              log: '${player} spent 8 energy to increase Venus 1 step.',
+              title: 'Spend 8 energy to raise Venus 1 step.',
+              log: '${player} spent 8 energy to raise Venus 1 step.',
             },
           ],
         },
@@ -44,7 +44,7 @@ export class Voltagon extends ActiveCorporationCard {
           b.effect('After you claim an underground resource, gain 2 energy.', (eb) => {
             eb.undergroundResources().startEffect.energy(2);
           }).br;
-          b.action('Spend 8 energy to increase oxygen or Venus 1 step.', (ab) => {
+          b.action('Spend 8 energy to raise oxygen or Venus 1 step.', (ab) => {
             ab.energy(8).startAction.oxygen(1, {size: Size.SMALL}).or().venus(1, {size: Size.SMALL});
           });
         }),

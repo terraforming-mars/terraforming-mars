@@ -2,34 +2,34 @@
 
 // A light-on-dark beveled border (top/left highlight, bottom/right shadow).
 .raised-bevel(@width: 2px) {
-    border-top: @width solid rgb(221, 221, 221);
-    border-left: @width solid rgb(221, 221, 221);
-    border-bottom: @width solid rgb(137, 137, 137);
-    border-right: @width solid rgb(137, 137, 137);
+  border-top: @width solid rgb(221, 221, 221);
+  border-left: @width solid rgb(221, 221, 221);
+  border-bottom: @width solid rgb(137, 137, 137);
+  border-right: @width solid rgb(137, 137, 137);
 }
 
 // 16x16 circular badge used for per-expansion icons on card titles.
 // Callers override border / size / fill / glyph as needed.
 .expansion-icon-base() {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border: 1px solid black;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: @radius_circle;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
 // 34x34 chromeless badge used for "X count" tag-overview cells. Only the
 // background-image varies between callers.
 .tag-count-icon() {
-    border: none !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    background-size: 34px !important;
-    width: 34px !important;
-    height: 34px !important;
-    filter: brightness(0.8);
-    border-radius: 0px !important;
-    background-position: 0px !important;
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
 }

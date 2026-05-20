@@ -1,86 +1,86 @@
 .log-generations {
-    .log-title {
-        display: inline-block;
-        margin: 0px;
-        padding-bottom: 6px;
-        margin-right: 16px;
-    }
+  .log-title {
+    display: inline-block;
+    margin: 0px;
+    padding-bottom: 6px;
+    margin-right: 16px;
+  }
+  display: flex;
+  margin-bottom: 16px;
+  align-items: center;
+  .log-gen-title {
+    margin-left: 16px;
+    text-transform: uppercase;
+    font-family: Prototype;
+  }
+  .log-gen-numbers {
     display: flex;
-    margin-bottom: 16px;
-    align-items: center;
-    .log-gen-title {
-        margin-left: 16px;
-        text-transform: uppercase;
-        font-family: Prototype;
+    .log-gen-indicator {
+      padding: 2px 12px;
+      margin-left: 8px;
+      cursor: pointer;
+      border: 2px solid rgba(170, 170, 170, 0.6);
+      border-radius: 8px;
+      &:hover{
+        background: #ccc;
+        color: black;
+      }
     }
-    .log-gen-numbers {
-        display: flex;
-        .log-gen-indicator {
-            padding: 2px 12px;
-            margin-left: 8px;
-            cursor: pointer;
-            border: 2px solid rgba(170, 170, 170, 0.6);
-            border-radius: 8px;
-            &:hover{
-                background: #ccc;
-                color: black;
-            }
-        }
-        .log-gen-indicator--selected {
-            background: #ccc;
-            color: black;
-        }
+    .log-gen-indicator--selected {
+      background: #ccc;
+      color: black;
     }
+  }
 }
 
 .log-panel {
-    height: 240px;
-    max-height: 240px;
-    border-style: none;
-    font-size: 18px;
-    padding: 5px;
-    max-width: 860px;
-    background: @grey_900;
-    position: relative;
-    .log-panel-actions {
-        position: absolute;
-        top: 20px;
-        right: 60px;
-    }
+  height: 240px;
+  max-height: 240px;
+  border-style: none;
+  font-size: 18px;
+  padding: 5px;
+  max-width: 860px;
+  background: @grey_900;
+  position: relative;
+  .log-panel-actions {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+  }
 
-    li {
-        margin-top: 0;
-        list-style-type: none;
-    }
+  li {
+    margin-top: 0;
+    list-style-type: none;
+  }
 
-    ul {
-        margin: 0 !important;
-    }
+  ul {
+    margin: 0 !important;
+  }
 }
 .card-panel{
-    display: inline-block;
-    .btn {
-        margin-top: 10px;
-    }
+  display: inline-block;
+  .btn {
+    margin-top: 10px;
+  }
 }
 
 .log-player {
-    text-shadow:1px 1px 1px @grey_900, -1px -1px 1px #666;
-    padding: 2px 10px;
-    border-radius: 2px;
-    font-weight: bold;
-    margin-right: 5px;
+  text-shadow:1px 1px 1px @grey_900, -1px -1px 1px #666;
+  padding: 2px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .log-card {
-    color: #000;
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-family: Ubuntu;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .log-tag {
@@ -93,27 +93,27 @@
 }
 
 .log-excavation-token {
-    color: #fff;
-    background: linear-gradient(-60deg, #805700 10%, #816a4c, #805700 90%);    // TODO(kberg): Add a pointer when this is clickable?
-    // cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-family: Ubuntu;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(-60deg, #805700 10%, #816a4c, #805700 90%);    // TODO(kberg): Add a pointer when this is clickable?
+  // cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .log-space-id {
-    color: black;
-    background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-family: Ubuntu;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
+  color: black;
+  background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .log-resource-megacredits {
@@ -127,13 +127,13 @@
 }
 
 .log-container {
-    .debugid {
-        font-size: 9px;
-        color: #888;
-        position: absolute;
-        bottom: 0px;
-        right: 50px;
-    }
+  .debugid {
+    font-size: 9px;
+    color: #888;
+    position: absolute;
+    bottom: 0px;
+    right: 50px;
+  }
 }
 
 .log-announcement {

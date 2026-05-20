@@ -46,30 +46,12 @@
 }
 
 // text shadows
-.player_shadow_color_red {
-    text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
-}
-.player_shadow_color_yellow {
-    text-shadow: -1px -1px 6px @player_yellow, 1px 1px 1px #333a;
-}
-.player_shadow_color_green {
-    text-shadow: -1px -1px 6px @player_green, 1px 1px 1px #333a;
-}
-.player_shadow_color_black {
-    text-shadow: -1px -1px 6px @player_black, 1px 1px 1px #333a;
-}
-.player_shadow_color_blue {
-    text-shadow: -1px -1px 6px @player_blue, 1px 1px 1px #333a;
-}
-.player_shadow_color_purple {
-    text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
-}
-.player_shadow_color_orange {
-    text-shadow: -1px -1px 6px @player_orange, 1px 1px 1px #333a;
-}
-.player_shadow_color_pink {
-    text-shadow: -1px -1px 6px @player_pink, 1px 1px 1px #333a;
-}
+each(@players, {
+    @c: ~"player_@{value}";
+    .player_shadow_color_@{value} {
+        text-shadow: -1px -1px 6px @@c, 1px 1px 1px #333a;
+    }
+})
 
 .game-title {
     text-transform: uppercase;
@@ -118,37 +100,12 @@
         text-align: center;
     }
 
-    .grid-item.player_tag_bg_color_black {
-        background-color: rgba(17, 17, 17, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_blue {
-        background-color: rgba(0, 102, 255, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_green {
-        background-color: rgba(0, 153, 0, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_purple {
-        background-color: rgba(140, 0, 255, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_red {
-        background-color: rgba(153, 17, 0, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_yellow {
-        background-color: rgba(170, 170, 0, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_orange {
-        background-color: rgba(189, 123, 0, 0.2);
-    }
-
-    .grid-item.player_tag_bg_color_pink {
-        background-color: rgba(245, 116, 187, 0.2);
-    }
+    each(@players, {
+        @v: ~"player_@{value}_tag_bg";
+        .grid-item.player_tag_bg_color_@{value} {
+            background-color: @@v;
+        }
+    })
     .city-count {
         background: url(./assets/icon_city.png) center no-repeat;
         filter: invert(100%) contrast(200%);
@@ -190,14 +147,14 @@
 }
 
 .tag-count {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     position: relative;
     width: 40px;
     height: 40px;
     background-size: 42px 42px;
     background-position: -1px -1px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     background-color: white;
     margin-top: -6px;
     margin-left: 3px;
@@ -334,67 +291,27 @@
 
 .tag-influence-count {
     background-image: url(./assets/misc/influence.png);
-    border: none !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    background-size: 34px !important;
-    width: 34px !important;
-    height: 34px !important;
-    filter: brightness(0.8);
-    border-radius: 0px !important;
-    background-position: 0px !important;
+    .tag-count-icon();
 }
 
 .tag-excavation-count {
-  background-image: url(./assets/underworld/excavate.png);
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  background-size: 34px !important;
-  width: 34px !important;
-  height: 34px !important;
-  filter: brightness(0.8);
-  border-radius: 0px !important;
-  background-position: 0px !important;
+    background-image: url(./assets/underworld/excavate.png);
+    .tag-count-icon();
 }
 
 .tag-underground-token-count {
-  background-image: url(./assets/underworld/underground-token-background.png);
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  background-size: 34px !important;
-  width: 34px !important;
-  height: 34px !important;
-  filter: brightness(0.8);
-  border-radius: 0px !important;
-  background-position: 0px !important;
+    background-image: url(./assets/underworld/underground-token-background.png);
+    .tag-count-icon();
 }
 
 .tag-corruption-count {
-  background-image: url(./assets/underworld/corruption.png);
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  background-size: 34px !important;
-  width: 34px !important;
-  height: 34px !important;
-  filter: brightness(0.8);
-  border-radius: 0px !important;
-  background-position: 0px !important;
+    background-image: url(./assets/underworld/corruption.png);
+    .tag-count-icon();
 }
 
 .tag-negative-vp {
-  background-image: url(./assets/underworld/negative-vp.png);
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  background-size: 34px !important;
-  width: 34px !important;
-  height: 34px !important;
-  filter: brightness(0.8);
-  border-radius: 0px !important;
-  background-position: 0px !important;
+    background-image: url(./assets/underworld/negative-vp.png);
+    .tag-count-icon();
 }
 
 .player-board-blue-action-counter{
@@ -465,7 +382,7 @@
 }
 
 .highlighter_box {
-    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+    text-shadow: 1px 1px 1px @grey_900, -1px -1px 1px #666;
     padding: 1px 10px;
     border-radius: 4px;
 }
@@ -492,7 +409,7 @@
     }
 
     .player_name {
-        text-shadow: 1px 1px 1px #222, -1px -1px 2px #666;
+        text-shadow: 1px 1px 1px @grey_900, -1px -1px 2px #666;
         padding: 2px 5px;
         border-radius: 4px;
     }
@@ -517,7 +434,7 @@
 
         .player_number {
             margin-right: 5px;
-            text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+            text-shadow: 1px 1px 1px @grey_900, -1px -1px 1px #666;
         }
 
         .corporation-name-cont {
@@ -575,7 +492,7 @@
         font-weight: bold;
         color: #ffcc64;
         text-transform: uppercase;
-        background: #303030;
+        background: @grey_850;
         padding: 1px 5px 1px 10px;
         border-radius: 2px;
         text-decoration: none;
@@ -744,7 +661,7 @@
         background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
     }
     &.unpaid {
-        background: #303030;
+        background: @grey_850;
     }
 }
 .milestone-award-price {
@@ -886,7 +803,7 @@
 
 .label-additional {
     font-family: "Ubuntu";
-    background: #222;
+    background: @grey_900;
     padding: 2px 8px;
     border-radius: 8px;
     text-transform: uppercase;
@@ -922,7 +839,7 @@
     display: inline-flex;
 
     .top-bar-collapser {
-        background: #303030;
+        background: @grey_850;
         display: inline-block;
         vertical-align: middle;
         padding: 8px 14px 8px 11px;
@@ -940,11 +857,11 @@
         display: none !important;
     }
     .player-info-bottom {
-        background: #303030 !important;
+        background: @grey_850 !important;
     }
 
     .player-info {
-        background: #303030 !important;
+        background: @grey_850 !important;
         border-radius: 0 0 10px 10px;
         padding: 8px 0;
         .player-status-and-res {
@@ -980,7 +897,7 @@
     .text-overview {
         text-transform: uppercase;
         margin-left: 5px;
-        color: #303030;
+        color: @grey_850;
         font-weight: bold;
         margin-top: 12px;
         font-size: 16px;

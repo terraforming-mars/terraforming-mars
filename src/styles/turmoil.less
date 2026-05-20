@@ -1,13 +1,25 @@
 
-.delegate {
+.delegate-token-base() {
     display: inline-block;
-    background-image: url(./assets/misc/delegate.png);
     width: 24px;
     height: 30px;
     background-size: 24px 30px;
     vertical-align: middle;
     filter: drop-shadow(0px 0px 1px black);
     margin-bottom: 6px;
+}
+
+.delegate-token-housed() {
+    background-color: @grey_900;
+    padding: 3px;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    border-radius: 15px 15px 2px 2px;
+}
+
+.delegate {
+    .delegate-token-base();
+    background-image: url(./assets/misc/delegate.png);
 }
 
 .delegate-red {
@@ -33,35 +45,15 @@
 }
 
 .chairman {
-    display: inline-block;
+    .delegate-token-base();
+    .delegate-token-housed();
     background-image: url(./assets/misc/chairman.png);
-    width: 24px;
-    height: 30px;
-    background-size: 24px 30px;
-    vertical-align: middle;
-    filter: drop-shadow(0px 0px 1px black);
-    background-color: #222;
-    padding: 3px;
-    background-repeat: no-repeat;
-    background-position: 3px;
-    border-radius: 15px 15px 2px 2px;
-    margin-bottom: 6px;
 }
 
 .leader {
-    display: inline-block;
+    .delegate-token-base();
+    .delegate-token-housed();
     background-image: url(./assets/misc/delegate.png);
-    width: 24px;
-    height: 30px;
-    background-size: 24px 30px;
-    vertical-align: middle;
-    filter: drop-shadow(0px 0px 1px black);
-    background-color: #222;
-    padding: 3px;
-    background-repeat: no-repeat;
-    background-position: 3px;
-    border-radius: 15px 15px 2px 2px;
-    margin-bottom: 6px;
 }
 
 .turmoil {
@@ -186,7 +178,7 @@
 
     &.event-party--scientists {
         background: #fff;
-        color: #222;
+        color: @grey_900;
     }
 
     &.event-party--mars_first {
@@ -313,7 +305,7 @@
 
     &.party-badge--scientists {
         background: #fff;
-        color: #222;
+        color: @grey_900;
     }
 
     &.party-badge--mars_first {
@@ -358,7 +350,7 @@
 
     &.party-name--scientists {
         background: #fff;
-        color: #222;
+        color: @grey_900;
     }
 
     &.party-name--mars_first {
@@ -627,7 +619,7 @@
     font-family: Ubuntu, Sans;
     letter-spacing: 1px;
     font-size: 16px;
-    color: #303030;
+    color: @grey_850;
     text-transform: uppercase;
     padding: 3px 26px 3px 26px;
     border-radius: 0 0 20px 20px;
@@ -641,11 +633,11 @@
 }
 
 .policies-clickable:link {
-    color: #303030;
+    color: @grey_850;
 }
 
 .policies-clickable:visited {
-    color: #303030;
+    color: @grey_850;
 }
 
 .policy-block {
@@ -666,7 +658,7 @@
     margin-top: 175px;
     position: absolute;
     z-index: 3;
-    background-color: #303030;
+    background-color: @grey_850;
     border-radius: 10px;
 }
 

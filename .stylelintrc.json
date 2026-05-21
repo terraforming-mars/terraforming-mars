@@ -1,7 +1,8 @@
 {
-  "customSyntax": "postcss-less",
+  "extends": ["stylelint-config-recommended-less"],
   "plugins": ["@stylistic/stylelint-plugin"],
   "rules": {
-    "@stylistic/indentation": 2
+    "@stylistic/indentation": 2,
+    "no-descending-specificity": null
   }
 }

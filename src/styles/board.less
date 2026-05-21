@@ -587,21 +587,20 @@
   border: 1px solid black;
 }
 
-@token_types:
-  // nothing,
-	card1, card2,
-	corruption1, corruption2,
-	steel1production,
-	titanium2, titanium1production,
-	plant2, plant3, plant1production,
-	titaniumandplant,
-	energy1production, heat2production,
-	microbe1, microbe2, tr, ocean,
-	data1pertemp, microbe1pertemp, plant2pertemp, steel2pertemp, titanium1pertemp,
+@token_types: card1, card2,
+  corruption1, corruption2,
+  steel1production,
+  titanium2, titanium1production,
+  plant2, plant3, plant1production,
+  titaniumandplant,
+  energy1production, heat2production,
+  microbe1, microbe2, tr, ocean,
+  data1pertemp, microbe1pertemp, plant2pertemp, steel2pertemp, titanium1pertemp,
   mcprod1pertemp, microbe2pertemp,oceanrequirementmod,
   oxygenrequirementmod, temprequirementmod,
   steel2plant, energy2, sciencetag, planttag, volcanicoceanspace, place6mc,
   anyresource1;
+
 each(@token_types, {
 .underground-token--@{value} {
   background-image: url("assets/underworld/underground-resource--@{value}.png");

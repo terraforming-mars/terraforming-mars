@@ -1,7 +1,7 @@
 /* UI to display global parameters (oxygen, temperature, oceans count) */
 
 .global-numbers {
-  font-family: Prototype;
+  font-family: Prototype, sans-serif;
   font-size: 14px;
   margin: 11px 0 0 16px;
 
@@ -22,7 +22,7 @@
     position: absolute;
     text-align: left;
     color: #3682b4;
-    font-family: Prototype;
+    font-family: Prototype, sans-serif;
     font-size: 30px;
     margin: 524px 0 0 286px;
   }
@@ -43,7 +43,7 @@
 
     text-align: left;
     color: #3682b4;
-    font-family: Prototype;
+    font-family: Prototype, sans-serif;
   }
 
   .global-ares-remove-dust-storms-icon {
@@ -62,7 +62,7 @@
 
     text-align: left;
     color: #3682b4;
-    font-family: Prototype;
+    font-family: Prototype, sans-serif;
   }
 
   .global-ares-severe-erosions {
@@ -111,6 +111,7 @@
     6 346px -18px -15deg,
     7 314px -24px  -8deg;
 
+  // stylelint-disable-next-line less/no-duplicate-variables
   each(@severe-dust-storm-vals, .(@v) {
     @val: extract(@v, 1);
     @top: extract(@v, 2);

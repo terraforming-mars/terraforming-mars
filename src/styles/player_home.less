@@ -52,7 +52,7 @@ each(@players, {
   display: grid;
   grid-template-columns: max-content repeat(20, 50px);
 
-  grid-row-gap: 10px;
+  row-gap: 10px;
   margin-top: 10px;
 
   &.hide-colony-count {
@@ -192,7 +192,7 @@ each(@players, {
 .tag-vp::before {
   position: absolute;
   content: "VP";
-  font-family: Prototype;
+  font-family: Prototype, sans-serif;
   color: black;
   font-size: 20px;
   text-shadow: 0 0 5px darkorange;
@@ -254,7 +254,6 @@ each(@players, {
   border-radius: 18px;
 }
 .tag-city-count {
-  background-image: url(./assets/tiles/city.png);
   background-image: url(./assets/tiles/city.png);
   border-radius: 0px !important;
   background-color: transparent !important;
@@ -327,7 +326,7 @@ each(@players, {
   color: #e8e8e8;
   text-align: center;
   font-size: 26px;
-  font-family: Prototype;
+  font-family: Prototype, sans-serif;
   line-height: 1;
   text-shadow: 0 1px 1px black;
   margin-top: 11px;
@@ -376,7 +375,7 @@ each(@players, {
   color: #aaa;
   font-size: smaller;
   text-shadow: none;
-  font-family: Ubuntu, Sans;
+  font-family: Ubuntu, sans-serif;
 }
 
 .player_home_block {
@@ -471,7 +470,7 @@ each(@players, {
 .awards,
 .tag-overview {
   .ma-clickable {
-    font-family: Ubuntu, Sans;
+    font-family: Ubuntu, sans-serif;
     letter-spacing: 1px;
     font-size: 16px;
     font-weight: bold;
@@ -512,7 +511,7 @@ each(@players, {
       margin: 5px 2px 0px 2px;
       display: inline-block;
       font-size: 15px;
-      font-family: Prototype;
+      font-family: Prototype, sans-serif;
       color: black;
       font-weight: normal;
       box-shadow: 0 0 1px 1px black;
@@ -659,7 +658,7 @@ each(@players, {
   margin-left: 70px;
   transform: scale(0.8);
 
-  font-family: Prototype;
+  font-family: Prototype, sans-serif;
   color: black;
   font-weight: normal;
   font-size: 18px;
@@ -780,14 +779,14 @@ each(@players, {
   position: absolute;
   width: 33px;
   margin: 30px 0 0 0;
-  font-family: Prototype;
+  font-family: Prototype, sans-serif;
   font-size: 11px;
   text-align: center;
   color: #fff;
 }
 
 .label-additional {
-  font-family: "Ubuntu";
+  font-family: "Ubuntu", sans-serif;
   background: @grey_900;
   padding: 2px 8px;
   border-radius: 8px;
@@ -931,7 +930,7 @@ each(@players, {
   }
 
   .played-cards-count {
-    font-family: "Prototype";
+    font-family: "Prototype", sans-serif;
     width: 80px;
     padding-left: 18px;
   }
@@ -952,7 +951,7 @@ each(@players, {
     background-image: url(./assets/resources/megacredit.png);
     background-size: 50px;
     filter: drop-shadow(0px 0px 1px black);
-    font-family: Prototype;
+    font-family: Prototype, sans-serif;
     color: #000;
   }
 }

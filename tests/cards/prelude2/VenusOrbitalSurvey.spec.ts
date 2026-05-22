@@ -1,12 +1,13 @@
 import {expect} from 'chai';
-import {churn, fakeCard} from '../../TestingUtils';
+import {churn, fakeCard, runAllActions} from '../../TestingUtils';
 import {VenusOrbitalSurvey} from '../../../src/server/cards/prelude2/VenusOrbitalSurvey';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, toName} from '../../../src/common/utils/utils';
+import {LogMessageDataType} from '../../../src/common/logs/LogMessageDataType';
 
 describe('VenusOrbitalSurvey', () => {
   let card: VenusOrbitalSurvey;
@@ -138,5 +139,27 @@ describe('VenusOrbitalSurvey', () => {
     expect(player.cardsInHand).has.lengthOf(1);
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(2);
+  });
+
+  it('Logs venus cards taken and bought cards publicly by name', () => {
+    player.megaCredits = 6;
+    const venus = venusCard();
+    const earth = earthCard();
+    game.projectDeck.drawPile.push(earth, venus);
+    game.gameLog = [];
+
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
+    selectCard.cb([selectCard.cards[0]]);
+    runAllActions(game);
+
+    const publicMessages = game.gameLog.filter((entry) => entry.playerId === undefined);
+
+    const drew = publicMessages.find((msg) => msg.message === '${0} drew ${1}')!;
+    expect(drew.data[1].type).eq(LogMessageDataType.CARDS);
+    expect(drew.data[1].value).to.have.members([venus].map(toName));
+
+    const bought = publicMessages.find((msg) => msg.message === '${0} bought ${1}')!;
+    expect(bought.data[1].type).eq(LogMessageDataType.CARDS);
+    expect(bought.data[1].value).to.have.members([earth].map(toName));
   });
 });

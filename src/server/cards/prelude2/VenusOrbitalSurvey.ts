@@ -49,11 +49,11 @@ export class VenusOrbitalSurvey extends Card implements IActionCard {
         keep(player, venus, [], LogType.DREW_VERBOSE);
       }
 
-      // The cards bought are private here
       const rest = oneWayDifference(cards, venus);
       if (rest.length > 0) {
         player.game.defer(new ChooseCards(player, rest, {
           paying: true,
+          logBoughtCards: true,
         }));
       }
     }));

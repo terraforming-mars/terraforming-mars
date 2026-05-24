@@ -4,6 +4,9 @@
     <template v-if="metadata.build.quantity[idx] === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
     </template>
+    <template v-if="metadata.build.quantity[idx] === 2">
+      <div class="colony-placement-bonus triple-res resource white-x white-x--2" :class="resource"></div>
+    </template>
     <template v-else>
       <!-- why margin-top? -->
       <div class="resource" style="margin-top:11px;" :class="resource"></div>

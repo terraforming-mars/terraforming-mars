@@ -23,4 +23,5 @@ export const COLONY_DESCRIPTIONS = {
   [ColonyName.IAPETUS_II]: 'Data',
   [ColonyName.DEIMOS]: 'Hazards',
   [ColonyName.TERRA]: 'World Government',
+  [ColonyName.KUIPER]: 'Asteroids',
 } satisfies Record<ColonyName, string>;

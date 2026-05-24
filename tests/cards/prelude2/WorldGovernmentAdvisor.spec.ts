@@ -30,7 +30,9 @@ describe('WorldGovernmentAdvisor', () => {
 
   it('action', () => {
     game.phase = Phase.ACTION;
-    const orOptions = cast(card.action(player), OrOptions);
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
 
     expect(game.phase).eq(Phase.SOLAR);
     expect(orOptions.options[0].title).eq('Increase temperature');
@@ -54,7 +56,10 @@ describe('WorldGovernmentAdvisor', () => {
 
   it('action - placing an ocean', () => {
     game.phase = Phase.ACTION;
-    const orOptions = cast(card.action(player), OrOptions);
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
 
     expect(game.phase).eq(Phase.SOLAR);
     expect(orOptions.options[2].title).eq('Add an ocean');
@@ -70,7 +75,9 @@ describe('WorldGovernmentAdvisor', () => {
   });
 
   it('action - placing an ocean', () => {
-    const orOptions = cast(card.action(player), OrOptions);
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
     const adjacentSpace = game.board.getAdjacentSpaces(oceanSpace)[0];
@@ -88,7 +95,9 @@ describe('WorldGovernmentAdvisor', () => {
   });
 
   it('action - raise temperature to 0', () => {
-    const orOptions = cast(card.action(player), OrOptions);
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
 
     setTemperature(game, -2);
     orOptions.options[0].cb();
@@ -118,5 +127,7 @@ describe('WorldGovernmentAdvisor', () => {
     maxOutOceans(player);
 
     cast(card.action(player), undefined);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 });

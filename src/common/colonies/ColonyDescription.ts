@@ -22,4 +22,5 @@ export const COLONY_DESCRIPTIONS = {
   [ColonyName.LEAVITT_II]: 'Science & Clone Tags',
   [ColonyName.IAPETUS_II]: 'Data',
   [ColonyName.DEIMOS]: 'Hazards',
+  [ColonyName.TERRA]: 'World Government',
 } satisfies Record<ColonyName, string>;

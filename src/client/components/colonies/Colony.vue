@@ -58,6 +58,9 @@
         <div class="resource money">1</div> / <div class="tile hazard-tile"></div>
       </div>
 
+      <div v-if="colony.name === ColonyName.TERRA" class="terra-colony-bonus">
+        <div class="resource money">1</div> / 3&nbsp;<span class="tag tag-earth red-outline" style="transform:scale(0.8);margin-top:-4px;"></span>
+      </div>
       <span class="colony-background-color">
         <template v-if="colony.name !== ColonyName.TITANIA"><span v-i18n>Bonus</span></template>
         <template v-else><span v-i18n>Colony Fee</span></template>
@@ -104,6 +107,8 @@
         v-i18n>Trade Income: Draw X cards and keep 1</span>
       <span v-else-if="colony.name === ColonyName.DEIMOS" class="colony-background-color" style="margin-left: 3px;"
         v-i18n>Trade Income: Erode X adjacent spaces</span>
+      <span v-else-if="colony.name === ColonyName.TERRA" class="colony-background-color" style="margin-left: 3px; -webkit-text-stroke: .3px gray"
+        v-i18n>Trade Income: WGT raises global parameter</span>
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
     <!-- Show the spaces for the player cubes and the white cube -->

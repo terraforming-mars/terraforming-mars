@@ -22,6 +22,7 @@ export enum ColonyName {
     LEAVITT = 'Leavitt',
     PALLAS = 'Pallas',
     DEIMOS = 'Deimos',
+    TERRA = 'Terra',
 
     // Pathfinders
     LEAVITT_II = 'Leavitt II',

@@ -47,6 +47,9 @@
   <div v-else-if="metadata.build.type === ColonyBenefit.PLACE_HAZARD_TILE">
     <div class="tile hazard-tile"></div>
   </div>
+  <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_EARTH_CARD">
+    <div class="resource card card-with-border" style="margin-top:5px;transform:scale(0.8);"><div class="card-icon tag-earth"></div></div>
+  </div>
 </div>
 </template>
 <script lang="ts">

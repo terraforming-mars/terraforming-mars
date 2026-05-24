@@ -31,6 +31,7 @@ import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
 import {TileType} from '../../../src/common/TileType';
 import {ErodeSpacesDeferred} from '../underworld/ErodeSpacesDeferred';
 import {CardName} from '../../common/cards/CardName';
+import {GlobalParameter} from '@/common/GlobalParameter';
 
 export abstract class Colony implements IColony {
   // Players can't build colonies on Miranda until someone has played an Animal card.
@@ -360,6 +361,30 @@ export abstract class Colony implements IColony {
         throw new Error('Resource cannot be undefined');
       }
       action = new StealResources(player, resource, quantity);
+      break;
+
+    case ColonyBenefit.DRAW_EARTH_CARD:
+      player.drawCard(quantity, {tag: Tag.EARTH});
+      break;
+
+    case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:
+      const globalParameters = [GlobalParameter.TEMPERATURE, GlobalParameter.OXYGEN, GlobalParameter.OCEANS];
+      const annotation = globalParameters[quantity];
+      const wgt = game.worldGovernmentTerraformingInput(player);
+      const option = wgt.options.find((option) => option.annotation === annotation);
+      if (option !== undefined) {
+        game.defer(new SimpleDeferredAction(player, () => {
+          game.temporarySolarPhase(player, () => option.cb());
+        }));
+      }
+      break;
+
+    case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
+      const tagCount = sum(game.players.map((p) => p.tags.count(Tag.EARTH, p.id === player.id ? 'default' : 'raw')));
+      const mc = Math.floor(tagCount / 3);
+      if (mc > 0) {
+        player.stock.add(Resource.MEGACREDITS, mc, {log: true});
+      }
       break;
 
     default:

@@ -12,7 +12,7 @@ export const RULEBOOK_URLS: Record<GameModule, string> = {
   promo: `${WIKI}/Variants#promo-cards`,
   prelude2: `${WIKI}/Rulebooks`,
   ares: `${WIKI}/Ares`,
-  community: `${WIKI}/Variants#community`,
+  community: `${WIKI}/Community`,
   moon: `${WIKI}/The-Moon`,
   pathfinders: `${WIKI}/Pathfinders`,
   ceo: `${WIKI}/CEOs`,

@@ -68,10 +68,7 @@
     width: 52px;
     height: 47px;
     vertical-align: middle;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
 }
 .colony-grid-container > div > .production-box {
     width: 48px;
@@ -148,6 +145,11 @@
     margin-left: 25px;
     margin-top: 8px;
 }
+
+.white-x--2::after {
+    content: "2" !important;
+}
+
 .white-x--3::after {
     content: "3" !important;
 }
@@ -422,6 +424,41 @@
     position: relative;
     top: -3px;
     left: -3px;
+}
+
+.Terra-title {
+    text-transform: uppercase;
+    background: linear-gradient(to right, #3343d3, transparent);
+}
+
+.Terra-background {
+    background-image: url("./assets/colonies-planets/terra.jpg");
+    background-size: 200px 200px;
+    background-position: bottom 50px right -10px;
+    box-shadow: inset 0 0 4px 4px rgb(100, 150, 200), 0 0 2px 1px black;
+}
+
+.terra-colony-bonus {
+    display: inline-block;
+    padding-right: 50px;
+}
+
+.terra-colony-bonus-text {
+  position: relative;
+  top: -3px;
+  left: 43px;
+}
+
+.Kuiper-title {
+  text-transform: uppercase;
+  background: #494a4b;
+}
+
+.Kuiper-background {
+  background-image: url("./assets/colonies-planets/kuiper.jpg");
+  background-size: 200px 150px;
+  background-position: bottom 120px right 10px;
+  box-shadow: inset 0 0 4px 4px #757779, 0 0 2px 1px black;
 }
 
 .hazard-tile {

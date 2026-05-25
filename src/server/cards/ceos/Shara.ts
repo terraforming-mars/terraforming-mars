@@ -23,8 +23,8 @@ export class Shara extends CeoCard {
           // For now, do not subtract the MC, but if users complain that Shara is OP we should revisit this balance.
           // b.planetaryTrack().text('2').nbsp.megacredits(0, {clone}).asterix().minus().megacredits(0, {multiplier}).asterix();
         }),
-        // description: 'Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track minus the current generation.',
-        description: 'Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.',
+        // description: 'Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag\'s planetary influence track minus the current generation.',
+        description: 'Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag\'s planetary influence track.',
       },
     });
   }

@@ -897,8 +897,8 @@
     "Spend 1 corruption to gain 3 plants.": "corruption 자원 1개를 소비해서 식물 자원 3개 획득",
     "Spend 1 corruption to gain 6 heat.": "corruption 자원 1개를 소비해서 열 자원 6개 획득",
     "Spend 1 corruption to gain 3 of the same standard resource.": "corruption 자원 1개를 소비해서 같은 종류의 기본 자원 3개 획득",
-    "Spend 8 energy to increase oxygen 1 step.": "에너지 자원 8개를 소비해서 산소 농도 1단계 상승.",
-    "Spend 8 energy to increase Venus 1 step.": "에너지 자원 8개를 소비해서 금성개척률 1단계 상승.",
+    "Spend 8 energy to raise oxygen 1 step.": "에너지 자원 8개를 소비해서 산소 농도 1단계 상승.",
+    "Spend 8 energy to raise Venus 1 step.": "에너지 자원 8개를 소비해서 금성개척률 1단계 상승.",
 
     "Select Earth card(s) to discard": "버릴 지구 카드 선택",
     "Select a card to keep and pass the rest to ${0}": "카드 1장을 보관하고 나머지 ${0}장을 넘깁니다.",

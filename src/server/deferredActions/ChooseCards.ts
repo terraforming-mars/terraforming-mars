@@ -13,6 +13,7 @@ export const LogType = {
   DREW: 'drew',
   BOUGHT: 'bought',
   DREW_VERBOSE: 'drew_verbose',
+  BOUGHT_VERBOSE: 'bought_verbose',
 } as const;
 export type LogType = typeof LogType[keyof typeof LogType];
 
@@ -20,6 +21,8 @@ export type ChooseOptions = {
   keepMax?: number,
   logDrawnCard?: boolean,
   paying?: boolean,
+  /** When true (and paying), log the bought cards publicly by name instead of just the count. */
+  logBoughtCards?: boolean,
 }
 
 export class ChooseCards extends DeferredAction {
@@ -63,6 +66,7 @@ export class ChooseCards extends DeferredAction {
         if (options.logDrawnCard === true) {
           LogHelper.logRevealedCards(player, cards);
         }
+        const boughtLogType = options.logBoughtCards === true ? LogType.BOUGHT_VERBOSE : LogType.BOUGHT;
         if (options.paying && selected.length > 0) {
           const cost = selected.length * player.cardCost;
           player.game.defer(
@@ -70,9 +74,9 @@ export class ChooseCards extends DeferredAction {
               player,
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
-              .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
+              .andThen(() => keep(player, selected, unselected, boughtLogType)));
         } else {
-          keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
+          keep(player, selected, unselected, options.paying ? boughtLogType : LogType.DREW);
         }
         return undefined;
       });
@@ -83,10 +87,21 @@ export function keep(player: IPlayer, cards: ReadonlyArray<IProjectCard>, discar
   player.cardsInHand.push(...cards);
   player.game.projectDeck.discard(...discards);
 
-  if (logType === LogType.DREW_VERBOSE) {
+  switch (logType) {
+  case LogType.DREW_VERBOSE:
     LogHelper.logDrawnCards(player, cards);
-  } else {
+    break;
+  case LogType.BOUGHT_VERBOSE:
+    if (cards.length === 0) {
+      player.game.log('${0} bought no cards', (b) => b.player(player));
+    } else {
+      player.game.log('${0} bought ${1}', (b) => b.player(player).cards(cards));
+    }
+    break;
+  case LogType.DREW:
+  case LogType.BOUGHT:
     player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
     LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+    break;
   }
 }

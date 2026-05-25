@@ -47,6 +47,7 @@ describe('PlayerInputFactory', () => {
   it('SelectPayment', async () => {
     runTest({
       type: 'payment',
+      amount: 0,
       paymentOptions: {},
     });
   });

@@ -1,6 +1,6 @@
 // Searches through a game's log for an event.
 // e.g. node build/src/server/tools/read_turmoil.js ge120f6729fca
-require('dotenv').config();
+import '@/server/init';
 
 import {MultiSet} from 'mnemonist';
 import {isGameId} from '../../common/Types';

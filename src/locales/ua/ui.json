@@ -861,8 +861,8 @@
   "Spend 1 corruption to gain 3 plants.": "Витратити 1 корупцію, щоб отримати 3 рослини.",
   "Spend 1 corruption to gain 6 heat.": "Витратити 1 корупцію, щоб отримати 6 тепла.",
   "Spend 1 corruption to gain 3 of the same standard resource.": "Витратити 1 корупцію, щоб отримати 3 однакових стандартних ресурси.",
-  "Spend 8 energy to increase oxygen 1 step.": "Витратити 8 енергії, щоб збільшити кисень на 1 крок.",
-  "Spend 8 energy to increase Venus 1 step.": "Витратити 8 енергії, щоб збільшити Венеру на 1 крок.",
+  "Spend 8 energy to raise oxygen 1 step.": "Витратити 8 енергії, щоб збільшити кисень на 1 крок.",
+  "Spend 8 energy to raise Venus 1 step.": "Витратити 8 енергії, щоб збільшити Венеру на 1 крок.",
 
   "Select Earth card(s) to discard": "Виберіть карти Землі для викидання",
   "Select a card to keep and pass the rest to ${0}": "Виберіть карту, яку тримати, і передайте решту ${0}",

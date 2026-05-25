@@ -4,6 +4,9 @@
     <template v-if="metadata.build.quantity[idx] === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
     </template>
+    <template v-else-if="metadata.build.quantity[idx] === 2">
+      <div class="colony-placement-bonus triple-res resource white-x white-x--2" :class="resource"></div>
+    </template>
     <template v-else>
       <!-- why margin-top? -->
       <div class="resource" style="margin-top:11px;" :class="resource"></div>
@@ -46,6 +49,9 @@
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.PLACE_HAZARD_TILE">
     <div class="tile hazard-tile"></div>
+  </div>
+  <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_EARTH_CARD">
+    <div class="resource card card-with-border" style="margin-top:5px;transform:scale(0.8);"><div class="card-icon tag-earth"></div></div>
   </div>
 </div>
 </template>

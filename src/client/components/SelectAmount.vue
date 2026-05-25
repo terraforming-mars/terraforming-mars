@@ -15,6 +15,7 @@
 import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectAmountModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
 interface DataModel {
@@ -28,6 +29,10 @@ export default defineComponent({
     AppButton,
   },
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectAmountModel,
       required: true,

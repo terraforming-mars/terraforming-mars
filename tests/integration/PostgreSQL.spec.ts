@@ -16,7 +16,7 @@ import {QueryResult} from 'pg';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {cast, range} from '../../src/common/utils/utils';
 
-dotenv.config({path: 'tests/integration/.env', debug: true});
+dotenv.config({path: 'tests/integration/.env', debug: true, quiet: true});
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up

@@ -21,6 +21,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
@@ -42,6 +43,10 @@ type DataModel = {
 export default defineComponent({
   name: 'SelectSpace',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectSpaceModel,
       required: true,

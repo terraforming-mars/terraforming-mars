@@ -23,6 +23,8 @@ export const COMMUNITY_COLONY_NAMES = [
   ColonyName.VENUS,
   ColonyName.PALLAS,
   ColonyName.DEIMOS,
+  ColonyName.TERRA,
+  ColonyName.KUIPER,
 ];
 
 export const PATHFINDERS_COLONY_NAMES = [

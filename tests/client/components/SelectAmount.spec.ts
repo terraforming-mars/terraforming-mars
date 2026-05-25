@@ -2,12 +2,14 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 
 describe('SelectAmount', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(SelectAmount, {
       ...globalConfig,
       props: {
+        playerView: {} as PlayerViewModel,
         playerinput: {
           title: 'Select amount',
           buttonLabel: 'Save',

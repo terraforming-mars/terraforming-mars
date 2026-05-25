@@ -1,8 +1,10 @@
+import {PartyName} from '@/common/turmoil/PartyName';
 import {CardName} from '../../common/cards/CardName';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {ICard} from '../cards/ICard';
 import {IPlayer} from '../IPlayer';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {IParty} from '../turmoil/parties/IParty';
 
 /**
  * The source of something gained or taken. Used when logging.
@@ -12,9 +14,10 @@ export type From =
   | {card: ICard}
   | {card: CardName}
   | {globalEvent: IGlobalEvent}
-  | {globalEvent: GlobalEventName};
+  | {globalEvent: GlobalEventName}
+  | {party: IParty}
+  | {partyName: PartyName};
 
 export function isFromPlayer(from: From | undefined): from is {player: IPlayer} {
   return from !== undefined && 'player' in from;
 }
-

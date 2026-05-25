@@ -1,4 +1,4 @@
-require('dotenv').config();
+import '@/server/init';
 import fs from 'fs';
 import path from 'path';
 

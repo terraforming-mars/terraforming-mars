@@ -1,6 +1,6 @@
 @import (inline) "../../node_modules/spectre.css/dist/spectre.min.css";
 @import (inline) "../../node_modules/spectre.css/dist/spectre-exp.min.css";
-@import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
+@import (inline) "../../node_modules/spectre.css/dist/spectre-icons.min.css";
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
 @import "./variables.less";
 @import "./mixins.less";
@@ -150,70 +150,20 @@ h2 {
 }
 
 // normal backgrounds
-.player_bg_color_red {
-    background-color: @player_red;
-}
+each(@players, {
+    @c: ~"player_@{value}";
+    .player_bg_color_@{value} {
+        background-color: @@c;
+    }
+})
 
-.player_bg_color_yellow {
-    background-color: @player_yellow;
-}
-
-.player_bg_color_green {
-    background-color: @player_green;
-}
-
-.player_bg_color_black {
-    background-color: @player_black;
-}
-
-.player_bg_color_blue {
-    background-color: @player_blue;
-}
-
-.player_bg_color_purple {
-    background-color: @player_purple;
-}
-
-.player_bg_color_orange {
-    background-color: @player_orange;
-}
-
-.player_bg_color_pink {
-    background-color: @player_pink;
-}
-
-// backgroungs with opacity
-.player_translucent_bg_color_red {
-    .player_red_bg_translucent();
-}
-
-.player_translucent_bg_color_yellow {
-    .player_yellow_bg_translucent();
-}
-
-.player_translucent_bg_color_green {
-    .player_green_bg_translucent();
-}
-
-.player_translucent_bg_color_black {
-    .player_black_bg_translucent();
-}
-
-.player_translucent_bg_color_blue {
-    .player_blue_bg_translucent();
-}
-
-.player_translucent_bg_color_purple {
-    .player_purple_bg_translucent();
-}
-
-.player_translucent_bg_color_orange {
-    .player_orange_bg_translucent();
-}
-
-.player_translucent_bg_color_pink {
-    .player_pink_bg_translucent();
-}
+// backgrounds with opacity
+each(@players, {
+    @c: ~"player_@{value}";
+    .player_translucent_bg_color_@{value} {
+        background: rgba(@@c, 0.7);
+    }
+})
 
 .alert-dialog {
     position: fixed;
@@ -257,4 +207,3 @@ h2 {
 @import "./pathfinders.less";
 @import "./language_icon.less";
 @import "./underworld.less";
-@import "./keyboard_shortcuts.less";

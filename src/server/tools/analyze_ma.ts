@@ -1,8 +1,8 @@
-require('dotenv').config();
+import '@/server/init';
 
 import http from 'http';
 import fs from 'fs';
-import * as responses from '../server/responses';
+import * as responses from '@/server/server/responses';
 
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';

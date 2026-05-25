@@ -101,7 +101,7 @@
 	"Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "CEOアクション：世代数+2まで任意の生産を減らす. 減らした数分、任意の産出+1.",
 
 	"Shara": "シャラ",
-	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "CEOアクション：惑星タグを1つ選択. このカードはその選択したタグとして扱う. 選択した惑星の影響度+2段階. その惑星の影響度の数分、1MC獲得.",
+	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag's planetary influence track.": "CEOアクション：惑星タグを1つ選択. このカードはその選択したタグとして扱う. 選択した惑星の影響度+2段階. その惑星の影響度の数分、1MC獲得.",
 
 	"Stefan": "ステファン",
 	"Once per game, sell any number of cards from your hand for 3 M€ each.": "CEOアクション：手札から好きな枚数のカードを3MCで売却.",
@@ -110,7 +110,7 @@
 	"Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "CEOアクション：選択したタグを5枚見る. その内、2枚まで購入し残りを捨て札にする.",
 
 	"Ulrich": "ウルリッヒ",
-	"Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "CEOアクション：海洋の数分、4MC獲得. ただし、海洋が全て配置されている場合は15MC獲得.",
+	"Once per game, gain 4 M€ for each ocean placed. If all oceans are already placed, gain only 15 M€.": "CEOアクション：海洋の数分、4MC獲得. ただし、海洋が全て配置されている場合は15MC獲得.",
 
 	"Van Allen": "ヴァン・アレン",
 	"Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "",

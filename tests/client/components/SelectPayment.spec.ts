@@ -1,5 +1,6 @@
 import {mount} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
+import {expect} from 'chai';
 import SelectPayment from '@/client/components/SelectPayment.vue';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -259,6 +260,51 @@ describe('SelectPayment', () => {
 
     await tester.clickMax('titanium');
     tester.expectPayment({titanium: 2, megacredits: 2});
+  });
+
+  it('saveData() via PlayerInputFactory blocks save when payment cannot overspend', async () => {
+    // Steel at rate 2, 6 available: greedy picks 5 steel (=10 MC, exact).
+    // Clicking + once gives 6 steel (=12 MC). delta=2 >= rate=2, so handleSave()
+    // must set a warning and NOT call onsave.
+    let onsaveCalled = false;
+    const wrapper = mount(SelectPayment, {
+      ...globalConfig,
+      props: {
+        playerView: {
+          id: 'playerid-foo',
+          thisPlayer: {
+            steel: 6, megacredits: 0, steelValue: 2,
+            titanium: 0, titaniumValue: 3, heat: 0, tableau: [],
+          } as unknown as PublicPlayerModel,
+        } as unknown as PlayerViewModel,
+        playerinput: {
+          type: 'payment',
+          buttonLabel: '',
+          title: 'foo',
+          amount: 10,
+          paymentOptions: {steel: true},
+          auroraiData: 0, kuiperAsteroids: 0, seeds: 0, spireScience: 0,
+          floaters: 0, microbes: 0, graphene: 0,
+          reserveUnits: undefined,
+        },
+        onsave: () => {
+          onsaveCalled = true;
+        },
+        showsave: true,
+        showtitle: true,
+      },
+    });
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({steel: 5});
+
+    await tester.clickPlus('steel');
+    tester.expectPayment({steel: 6});
+
+    (wrapper.vm as any).saveData();
+
+    expect(onsaveCalled).is.false;
   });
 
   function setupBill(

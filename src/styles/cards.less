@@ -90,10 +90,7 @@
     width: 240px;
     font-family: Arial, Helvetica, sans-serif;
     margin: 15px 30px 10px 0px;
-    border-top: 4px solid rgb(221, 221, 221);
-    border-left: 4px solid rgb(221, 221, 221);
-    border-bottom: 4px solid rgb(137, 137, 137);
-    border-right: 4px solid rgb(137, 137, 137);
+    .raised-bevel(4px);
     border-radius: 20px;
     box-shadow: 0 0 2px 1px black;
 }
@@ -105,7 +102,7 @@ input[type="radio"] + .filterDiv.card-container {
 
 input[type="checkbox"]:checked + .filterDiv,
 input[type="radio"]:checked + .filterDiv {
-    box-shadow: 0 0 0 1px #303030, 0 0 7px 10px #c97e23;
+    box-shadow: 0 0 0 1px @grey_850, 0 0 7px 10px #c97e23;
 }
 
 input[type="checkbox"]:checked + .filterDiv::after,
@@ -139,10 +136,6 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .filterDiv-stacked:hover {
-    -webkit-transform: translateY(-20px);
-    -moz-transform: translateY(-20px);
-    -ms-transform: translateY(-20px);
-    -o-transform: translateY(-20px);
     transform: translateY(-20px);
     transition: transform 200ms ease-in-out;
     z-index: 99;
@@ -190,13 +183,10 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-top: -64px;
     margin-left: 50px;
     font-size: 12px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     background: #cccccc;
     border-radius: 2px;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
 }
 
 .prelude-label {
@@ -209,13 +199,10 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-top: -64px;
     margin-left: 4px;
     font-size: 12px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     background-color: rgb(235, 118, 171);
     border-radius: 14px 2px 2px 2px;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
 }
 
 /* .standard-icon:after {
@@ -232,17 +219,11 @@ input[type="radio"]:checked + .filterDiv::after {
 } */
 
 .corpera-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background-color: #cc3333;
     font-size: 11px;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -251,18 +232,12 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .prelude-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background-color: rgb(235, 118, 171);
     font-size: 11px;
     font-weight: bold;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -272,35 +247,23 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .prelude2-icon:after {
-  position: absolute;
-  border: 1px solid black;
+  .expansion-icon-base();
   font-family: Prototype;
   background-color: rgb(235, 118, 171);
   font-size: 13px;
   font-weight: bold;
   line-height: 16px;
-  width: 16px;
-  height: 16px;
-  text-align: center;
   color: white;
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   content: "2";
 }
 
 .venus-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background: rgb(84, 150, 201);
     font-weight: bold;
     font-size: 11px;
     line-height: 15px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
     color: white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "";
     background-image: url("./assets/triangle16.png");
     background-size: 10px 10px;
@@ -310,25 +273,18 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .turmoil-icon:after {
-    position: absolute;
-    color: #222;
-    border: 1px solid black;
+    .expansion-icon-base();
+    color: @grey_900;
     background: darkorange;
     font-weight: bold;
     font-size: 16px;
     line-height: 14px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     transform: rotate(180deg);
 }
 
 .promo-icon:after {
-    position: absolute;
-    border: 1px solid black;
+    .expansion-icon-base();
     background: white;
     border: 5px solid #444444;
     font-weight: bold;
@@ -336,129 +292,88 @@ input[type="radio"]:checked + .filterDiv::after {
     line-height: 18px;
     width: 8px;
     height: 8px;
-    text-align: center;
     color: white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\0020";
 }
 
 .colonies-icon:after {
-    position: absolute;
-    color: #222;
-    border: 1px solid black;
+    .expansion-icon-base();
+    color: @grey_900;
     font-weight: bold;
     font-size: 16px;
     line-height: 14px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
     background: #d4d4d4;
 }
 
 .community-icon:after {
-  position: absolute;
-  color:#222;
-  border: 1px solid black;
+  .expansion-icon-base();
+  color: @grey_900;
   background: moccasin;
   font-weight: bold;
   font-size: 16px;
   line-height: 14px;
-  width: 16px;
-  height:16px;
-  text-align: center;
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "\2666";
 }
 
 .ares-icon:after {
-    position: absolute;
-    color:#EFEF64;
-    border: 1px solid black;
+    .expansion-icon-base();
+    color: #EFEF64;
     background: #953316;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "A";
 }
 
 
 .moon-icon:after {
-  position: absolute;
-  color:#DDD;
-  border: 1px solid #222;
+  .expansion-icon-base();
+  border: 1px solid @grey_900;
+  color: #DDD;
   background: #999;
   font-family: Prototype;
   font-weight: bold;
   font-size: 14px;
   line-height: 17px;
-  width: 16px;
-  height:16px;
-  text-align: center;
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   content: "M";
 }
 
 
 .pathfinders-icon:after {
-    position: absolute;
-    color:#DDD;
-    border: 1px solid #222;
+    .expansion-icon-base();
+    border: 1px solid @grey_900;
+    color: #DDD;
     background: #b84;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "🪐";
 }
 
 .ceo-icon:after {
-    position: absolute;
-    color:#000;
-    border: 1px solid #222;
+    .expansion-icon-base();
+    border: 1px solid @grey_900;
+    color: #000;
     background: #edbd18;
     font-family: Prototype;
     // font-weight: bold;
     font-size: 9px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "💼";
 }
 
 .starwars-icon:after {
-    position: absolute;
-    color:#DDD;
-    border: 1px solid #222;
+    .expansion-icon-base();
+    border: 1px solid @grey_900;
+    color: #DDD;
     background: #999;
     font-family: Prototype;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    width: 16px;
-    height:16px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "W";
 }
 
@@ -477,18 +392,15 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .tag {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     position: absolute;
     width: 40px;
     height: 40px;
     background-size: 50px;
     background-position: -5px;
     text-align: center;
-    border-radius: 50%;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    border-radius: @radius_circle;
+    .raised-bevel();
     background-color: white;
     margin-top: -6px;
     filter: brightness(0.9);
@@ -508,7 +420,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .title {
     font-family: "Ubuntu";
-    color: #020202;
+    color: @text_dark;
     text-transform: uppercase;
     float: left;
     margin-top: 36px;
@@ -683,12 +595,12 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .contentCorporation {
-    color: #020202;
+    color: @text_dark;
     position: relative;
     display: inline-block;
     font-weight: bold;
     padding: 8px;
-    color: #020202;
+    color: @text_dark;
 }
 
 .requirements {
@@ -700,7 +612,7 @@ input[type="radio"]:checked + .filterDiv::after {
     text-align: center;
     font-weight: normal;
     font-size: 15px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
     font-family: Ubuntu;
     font-weight: bold;
@@ -725,13 +637,10 @@ input[type="radio"]:checked + .filterDiv::after {
     font-size: 28px;
     text-align: center;
     border-radius: 12px;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
     background-color: rgb(205, 162, 130);
     background: linear-gradient(#cc8b00, rgb(128, 87, 0), rgb(128, 87, 0));
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
 }
 
 .pointsCorporation {
@@ -747,13 +656,10 @@ input[type="radio"]:checked + .filterDiv::after {
     font-size: 28px;
     text-align: center;
     border-radius: 12px;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
     background-color: rgb(205, 162, 130);
     background: linear-gradient(#cc8b00, rgb(128, 87, 0), rgb(128, 87, 0));
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
 }
 
 .points-big {
@@ -763,7 +669,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .description {
-    color: #020202;
+    color: @text_dark;
     font-size: 11px;
     line-height: 13px;
     font-weight: normal;
@@ -777,11 +683,8 @@ input[type="radio"]:checked + .filterDiv::after {
     display: inline-block;
     vertical-align: middle;
     text-shadow: none;
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
-    border-right: 2px solid rgb(137, 137, 137);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    .raised-bevel();
+    box-shadow: @outline-shadow;
     padding-top: 4px;
     text-align: center;
     margin-bottom: 10px;
@@ -1052,13 +955,13 @@ input[type="radio"]:checked + .filterDiv::after {
     position: relative;
     display: inline-block;
     text-align: center;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     width: 30px;
     height: 30px;
     background-size: 34px 34px;
     background-position: -2px -2px;
     line-height: 28px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     vertical-align: middle;
     margin-bottom: 5px;
     filter: brightness(0.9);
@@ -1188,7 +1091,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-icon-venus {
     background: rgb(84, 150, 201);
-    border-radius: 50%;
+    border-radius: @radius_circle;
     text-shadow: 0 0 1px black;
     font-size: 14px;
     line-height: 22px;
@@ -1198,7 +1101,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-icon-microbe {
     background: linear-gradient(#bce444, #8cb319);
     color: rgb(63, 112, 58);
-    border-radius: 50%;
+    border-radius: @radius_circle;
     font-size: 14px;
     line-height: 20px;
     font-weight: normal;
@@ -1216,19 +1119,19 @@ input[type="radio"]:checked + .filterDiv::after {
     background: black;
     color: yellow;
     font-size: 14px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-science {
     background-image: url("./assets/tags/science.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-plant {
     background: linear-gradient(#0bda0b, #09aa09);
     color: rgb(63, 112, 58);
     font-size: 14px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-building {
@@ -1236,13 +1139,13 @@ input[type="radio"]:checked + .filterDiv::after {
     background-size: 20px 20px;
     color: rgb(73, 54, 40);
     font-size: 12px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     text-shadow: 0 0 1px black;
 }
 
 .card-icon-jovian {
     background: url("./assets/resources/tag-jovian.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
     margin-top: -10px;
     box-shadow: 0 0 1px black;
     border: 1px solid #444;
@@ -1250,22 +1153,21 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-icon-event {
     background-image: url("./assets/tag-event.png");
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-icon-blue {
     margin-left: 17px;
     background: rgb(23, 111, 228);
-    border-radius: 50%;
+    border-radius: @radius_circle;
 }
 
 .card-footer {
     display: inline-block;
     vertical-align: middle;
     background-color: rgb(44, 44, 44);
-    border-top: 2px solid rgb(221, 221, 221);
-    border-left: 2px solid rgb(221, 221, 221);
-    border-bottom: 2px solid rgb(137, 137, 137);
+    .raised-bevel();
+    border-right: none;
     border-radius: 5px 0 0 5px;
     background: linear-gradient(
         to bottom,
@@ -1292,8 +1194,8 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(255, 204, 100);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1304,8 +1206,8 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(235, 118, 171);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1316,20 +1218,20 @@ input[type="radio"]:checked + .filterDiv::after {
     background: rgb(158, 145, 128);
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
 
 .card-footer-globals:after {
     content: "G";
-    color: #222;
+    color: @grey_900;
     background: #eee;
     margin-left: 4px;
     padding: 1px 5px 1px 5px;
-    border-radius: 50%;
-    border: 2px solid #222;
+    border-radius: @radius_circle;
+    border: 2px solid @grey_900;
     font-size: 14px;
     font-weight: normal;
 }
@@ -1406,10 +1308,6 @@ input[type="radio"]:checked + .filterDiv::after {
     line-height: 30px;
 }
 
-.tringle {
-    display: inline-block;
-}
-
 .triangle-white::after {
     font-size: 30px;
     vertical-align: middle;
@@ -1445,18 +1343,14 @@ input[type="radio"]:checked + .filterDiv::after {
     vertical-align: top;
     font-size: 20px;
     display: inline-block;
-    -webkit-transform: scale(1.5, 1); /* Safari and Chrome */
-    -moz-transform: scale(1.5, 1); /* Firefox */
-    -ms-transform: scale(1.5, 1); /* IE 9 */
-    -o-transform: scale(1.5, 1); /* Opera */
-    transform: scale(1.5, 1); /* W3C */
+    transform: scale(1.5, 1);
 }
 
 .corporation-label {
     text-transform: uppercase;
     float: left;
     position: absolute;
-    color: #020202;
+    color: @text_dark;
     width: 115px;
     height: 14px;
     line-height: 15px;
@@ -1464,7 +1358,7 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-top: -10px;
     margin-left: 24px;
     font-size: 13px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @outline-shadow;
     background: #cccccc;
     background-color: rgb(255, 204, 100);
     background: linear-gradient(
@@ -1514,7 +1408,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-resources-counter {
   position: absolute;
-  color: #020202;
+  color: @text_dark;
   font-family: Prototype;
   width: 80px;
   height: 30px;
@@ -2169,7 +2063,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-size: 34px;
     width: 140px;
     text-align: center;
-    color: #020202;
+    color: @text_dark;
     margin-top: 5px;
     border: 2px solid black;
     margin-left: 8px;
@@ -2205,7 +2099,7 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-beginner-corporation {
     .corporation-frame {
-        color: #020202;
+        color: @text_dark;
         background: #eeeeee;
         font-size: 20px;
         text-align: center;
@@ -2213,10 +2107,7 @@ input[type="radio"]:checked + .filterDiv::after {
         width: 170px;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 3px 3px 3px grey;
         border-radius: 5px;
-        border-top: 2px solid rgb(221, 221, 221);
-        border-left: 2px solid rgb(221, 221, 221);
-        border-bottom: 2px solid rgb(137, 137, 137);
-        border-right: 2px solid rgb(137, 137, 137);
+        .raised-bevel();
     }
 
     .resource.money {
@@ -2284,10 +2175,7 @@ input[type="radio"]:checked + .filterDiv::after {
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 3px 3px 3px grey;
         margin: 5px 10px;
         border-radius: 5px;
-        border-top: 2px solid rgb(221, 221, 221);
-        border-left: 2px solid rgb(221, 221, 221);
-        border-bottom: 2px solid rgb(137, 137, 137);
-        border-right: 2px solid rgb(137, 137, 137);
+        .raised-bevel();
         font-family: Arial;
         text-align: center;
         line-height: 25px;
@@ -2788,11 +2676,8 @@ input[type="radio"]:checked + .filterDiv::after {
                     background-size: 50px;
                     background-position: -5px;
                     text-align: center;
-                    border-radius: 50%;
-                    border-top: 2px solid rgb(221, 221, 221);
-                    border-left: 2px solid rgb(221, 221, 221);
-                    border-bottom: 2px solid rgb(137, 137, 137);
-                    border-right: 2px solid rgb(137, 137, 137);
+                    border-radius: @radius_circle;
+                    .raised-bevel();
                     background-color: white;
                     /* margin-top: -6px; */
                     filter: brightness(0.9);
@@ -2802,7 +2687,7 @@ input[type="radio"]:checked + .filterDiv::after {
         }
         .card-title {
             font-family: "Ubuntu";
-            color: #020202;
+            color: @text_dark;
             text-transform: uppercase;
             width: 100%;
             border-radius: 0 0 30% 30%;
@@ -2819,7 +2704,7 @@ input[type="radio"]:checked + .filterDiv::after {
                 float: left;
                 top: 8px;
                 position: absolute;
-                color: #020202;
+                color: @text_dark;
                 width: 115px;
                 height: 14px;
                 line-height: 15px;
@@ -2853,10 +2738,7 @@ input[type="radio"]:checked + .filterDiv::after {
                     0 0 0 2px rgba(0, 0, 0, 0.3);
                 background-color: rgb(235, 118, 171);
                 border-radius: 14px 2px 2px 2px;
-                border-top: 2px solid rgb(221, 221, 221);
-                border-left: 2px solid rgb(221, 221, 221);
-                border-bottom: 2px solid rgb(137, 137, 137);
-                border-right: 2px solid rgb(137, 137, 137);
+                .raised-bevel();
             }
         }
         .card-expansion {
@@ -2870,13 +2752,13 @@ input[type="radio"]:checked + .filterDiv::after {
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
         }
         .contentCorporation {
-            color: #020202;
+            color: @text_dark;
             position: relative;
             display: inline-block;
             font-weight: bold;
             padding: 8px;
             top: -40px;
-            color: #020202;
+            color: @text_dark;
         }
     }
 }
@@ -2917,11 +2799,7 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-bottom: 30px;
     text-decoration: underline;
     margin-left: 40px;
-    -webkit-transform: scale(1.5, 1); /* Safari and Chrome */
-    -moz-transform: scale(1.5, 1); /* Firefox */
-    -ms-transform: scale(1.5, 1); /* IE 9 */
-    -o-transform: scale(1.5, 1); /* Opera */
-    transform: scale(1.5, 1); /* W3C */
+    transform: scale(1.5, 1);
 }
 
 .recyclon-fix {
@@ -2933,7 +2811,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-weight: bold;
     background: red;
     color: white;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3),
+    box-shadow: @outline-shadow,
         3px 3px 3px #444;
     font-family: Prototype;
     font-weight: normal;

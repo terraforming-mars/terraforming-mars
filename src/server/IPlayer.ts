@@ -1,41 +1,41 @@
-import { PlayerId, isPlayerId } from '../common/Types';
-import { CardName } from '../common/cards/CardName';
-import { ICorporationCard } from './cards/corporation/ICorporationCard';
-import { IGame, isIGame } from './IGame';
-import { Payment, PaymentOptions } from '../common/inputs/Payment';
-import { SpendableCardResource } from '../common/inputs/Spendable';
-import { ICard, IActionCard } from './cards/ICard';
-import { TRSource } from '../common/cards/TRSource';
-import { IProjectCard } from './cards/IProjectCard';
-import { IPreludeCard } from './cards/prelude/IPreludeCard';
-import { PlayerInput } from './PlayerInput';
-import { Resource } from '../common/Resource';
-import { CardResource } from '../common/CardResource';
-import { Priority } from './deferredActions/Priority';
-import { SerializedPlayer } from './SerializedPlayer';
-import { Timer } from '../common/Timer';
-import { AllOptions, DrawOptions } from './deferredActions/DrawCards';
-import { Units } from '../common/Units';
-import { GlobalParameter } from '../common/GlobalParameter';
-import { InputResponse } from '../common/inputs/InputResponse';
-import { Tags } from './player/Tags';
-import { Colonies } from './player/Colonies';
-import { Production } from './player/Production';
-import { ICeoCard } from './cards/ceos/ICeoCard';
-import { VictoryPointsBreakdown } from '../common/game/VictoryPointsBreakdown';
-import { Color } from '../common/Color';
-import { OrOptions } from './inputs/OrOptions';
-import { Stock } from './player/Stock';
-import { UnderworldPlayerData } from '../common/underworld/UnderworldPlayerData';
-import { DeltaProjectPlayerModel } from '../common/models/DeltaProjectPlayerModel';
-import { AlliedParty } from '../common/turmoil/Types';
-import { IParty } from './turmoil/parties/IParty';
-import { Message } from '../common/logs/Message';
-import { DiscordId } from './server/auth/discord';
-import { PlayedCards } from './cards/PlayedCards';
-import { From } from './logs/From';
-import { Tag } from '../common/cards/Tag';
-import { SelectStandardProjectToPlay } from './inputs/SelectStandardProjectToPlay';
+import {PlayerId, isPlayerId} from '../common/Types';
+import {CardName} from '../common/cards/CardName';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {IGame, isIGame} from './IGame';
+import {Payment, PaymentOptions} from '../common/inputs/Payment';
+import {SpendableCardResource} from '../common/inputs/Spendable';
+import {ICard, IActionCard} from './cards/ICard';
+import {TRSource} from '../common/cards/TRSource';
+import {IProjectCard} from './cards/IProjectCard';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {PlayerInput} from './PlayerInput';
+import {Resource} from '../common/Resource';
+import {CardResource} from '../common/CardResource';
+import {Priority} from './deferredActions/Priority';
+import {SerializedPlayer} from './SerializedPlayer';
+import {Timer} from '../common/Timer';
+import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
+import {Units} from '../common/Units';
+import {GlobalParameter} from '../common/GlobalParameter';
+import {InputResponse} from '../common/inputs/InputResponse';
+import {Tags} from './player/Tags';
+import {Colonies} from './player/Colonies';
+import {Production} from './player/Production';
+import {ICeoCard} from './cards/ceos/ICeoCard';
+import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
+import {Color} from '../common/Color';
+import {OrOptions} from './inputs/OrOptions';
+import {Stock} from './player/Stock';
+import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
+import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectPlayerModel';
+import {AlliedParty} from '../common/turmoil/Types';
+import {IParty} from './turmoil/parties/IParty';
+import {Message} from '../common/logs/Message';
+import {DiscordId} from './server/auth/discord';
+import {PlayedCards} from './cards/PlayedCards';
+import {From} from './logs/From';
+import {Tag} from '../common/cards/Tag';
+import {SelectStandardProjectToPlay} from './inputs/SelectStandardProjectToPlay';
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -196,8 +196,8 @@ export interface IPlayer {
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
-  increaseTerraformRating(steps?: number, opts?: { log?: boolean, from?: From }): void;
-  decreaseTerraformRating(steps?: number, opts?: { log?: boolean }): void;
+  increaseTerraformRating(steps?: number, opts?: {log?: boolean, from?: From}): void;
+  decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
 
   // The action cards used this generation.
@@ -227,7 +227,7 @@ export interface IPlayer {
    *
    * Nothing happens if count is 0.
    */
-  attack(perpetrator: IPlayer, type: Resource, count: number, options?: { log?: boolean, stealing?: boolean }): void;
+  attack(perpetrator: IPlayer, type: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void;
 
   /**
    * In the multiplayer game, after an attack, the attacked player makes a claim
@@ -275,11 +275,11 @@ export interface IPlayer {
   /**
    * Remove resources from this player's played card
    */
-  removeResourceFrom(card: ICard, count?: number, options?: { removingPlayer?: IPlayer, log?: boolean }): void;
+  removeResourceFrom(card: ICard, count?: number, options?: {removingPlayer? : IPlayer, log?: boolean}): void;
   /**
    * Add resources to this player's played card
    */
-  addResourceTo(card: ICard, options?: number | { qty?: number, log: boolean, logZero?: boolean, from?: From }): void;
+  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean, from?: From}): void;
 
   /**
    * Returns the set of cards in play that have actual resources on them.
@@ -318,7 +318,7 @@ export interface IPlayer {
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
   availableHeat(): number;
-  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)): PlayerInput | undefined;
+  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: ICard): void;
@@ -327,7 +327,7 @@ export interface IPlayer {
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;
   discardPlayedCard(card: IProjectCard): void;
-  discardCardFromHand(card: IProjectCard, options?: { log?: boolean }): void;
+  discardCardFromHand(card: IProjectCard, options?: {log?: boolean}): void;
 
   /** Player has prestated they want to pass on their next turn */
   autopass: boolean;

@@ -122,7 +122,12 @@ export abstract class Draft {
     let enabled: Array<boolean> | undefined;
     if (repick) {
       cardsToConsider = [...player.draftHand, ...player.draftedCards.slice(-cardsToKeep)]
-      enabled = cardsToConsider.map((_, idx) => idx < player.draftHand.length);
+      // Disable the picked card only if we're keeping one card. If we keep more than
+      // one card, we need to keep them all enabled since we might repick
+      // one of the cards we previously picked plus a new card.
+      if (cardsToKeep === 1) {
+        enabled = cardsToConsider.map((_, idx) => idx < player.draftHand.length);
+      }
     } else {
       cardsToConsider = player.draftHand;
     }

@@ -20,6 +20,11 @@ export interface PlayerInput {
      * Used only when this option is a child option of an OrOptions.
      */
     eligibleForDefault?: boolean;
+    /**
+     * When true, this indicates that the user should continue to poll for updates
+     * even if waiting for an input from that user.
+     */
+    polling?: boolean;
 
     cb(...item: any): PlayerInput | undefined;
 
@@ -46,6 +51,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
   public annotation: string | undefined;
+  public polling?: boolean;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;

@@ -8,7 +8,6 @@ import { SelectCard } from './inputs/SelectCard';
 import { message } from './logs/MessageBuilder';
 import { IPreludeCard } from './cards/prelude/IPreludeCard';
 import { ICeoCard } from './cards/ceos/ICeoCard';
-import { SelectOption } from './inputs/SelectOption';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
 
@@ -64,9 +63,8 @@ export abstract class Draft {
 
     for (const [player, draftHand] of zip(this.game.players, arrays)) {
       player.draftHand = draftHand;
-      player.unchosenDraftCards = [];
       player.needsToDraft = true;
-      this.askPlayerToDraft(player);
+      this.askPlayerToDraft(player, false);
     }
     if (save) {
       this.game.save();
@@ -92,9 +90,9 @@ export abstract class Draft {
 
     for (const player of players) {
       if (player.needsToDraft) {
-        this.askPlayerToDraft(player);
+        this.askPlayerToDraft(player, false);
       } else if (anybodyStillNeedsToDraft) {
-        this.askPlayerToRepick(player);
+        this.askPlayerToDraft(player, true);
       }
     }
 
@@ -114,54 +112,50 @@ export abstract class Draft {
   }
 
   /**
-   * Ask the player if they want to repick their card.
-   */
-  private askPlayerToRepick(player: IPlayer): void {
-    const giveTo = this.givingTo(player);
-    const option = new SelectOption(
-      message('Passing cards to ${0}. Repick draft card?', (b) => b.player(giveTo)),
-      'Repick',
-      undefined, // warnings
-    );
-    option.polling = true;
-    player.setWaitingFor(
-      option.andThen(() => {
-        const cardsToKeep = this.cardsToKeep(player);
-        player.draftHand.push(...player.draftedCards.splice(-cardsToKeep));
-        player.unchosenDraftCards = [];
-        player.needsToDraft = true;
-        this.askPlayerToDraft(player);
-        this.game.save();
-        return undefined;
-      }),
-    );
-  }
-
-  /**
    * Ask the player to choose from a set of cards.
    */
-  private askPlayerToDraft(player: IPlayer): void {
+  private askPlayerToDraft(player: IPlayer, repick: boolean): void {
     const giveTo = this.givingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
 
-    const messageTitle = cardsToKeep === 1 ?
-      'Select a card to keep and pass the rest to ${0}' :
-      'Select two cards to keep and pass the rest to ${0}';
-    player.setWaitingFor(
-      new SelectCard(
-        message(messageTitle, (b) => b.player(giveTo)),
-        'Keep',
-        player.draftHand,
-        { min: cardsToKeep, max: cardsToKeep, played: false })
-        .andThen((selected) => {
-          for (const card of selected) {
-            player.draftedCards.push(card);
-            inplaceRemove(player.draftHand, card);
-            player.unchosenDraftCards = [...player.draftHand];
-          }
-          this.onCardDrafted(player);
-          return undefined;
-        }),
+    let cardsToConsider: Array<IProjectCard>;
+    let enabled: Array<boolean> | undefined;
+    if (repick) {
+      cardsToConsider = [...player.draftHand, ...player.draftedCards.slice(-cardsToKeep)]
+      enabled = cardsToConsider.map((_, idx) => idx < player.draftHand.length);
+    } else {
+      cardsToConsider = player.draftHand;
+    }
+
+    const messageTitle = repick ?
+      'You can change your pick until all players have chosen a card. Passing to ${0}' :
+      (cardsToKeep === 1 ?
+        'Select a card to keep and pass the rest to ${0}' :
+        'Select two cards to keep and pass the rest to ${0}');
+    const selectCard = new SelectCard(
+      message(messageTitle, (b) => b.player(giveTo)),
+      repick ? 'Repick' : 'Keep',
+      cardsToConsider,
+      {
+        min: cardsToKeep, max: cardsToKeep, played: false,
+        enabled: enabled,
+      });
+    selectCard.polling = repick;
+    player.setWaitingFor(selectCard
+      .andThen((selected) => {
+        if (repick) {
+          const startIndex = player.draftedCards.length - cardsToKeep;
+
+          const movedCards = player.draftedCards.splice(startIndex, cardsToKeep);
+          player.draftHand.push(...movedCards);
+        }
+        for (const card of selected) {
+          player.draftedCards.push(card);
+          inplaceRemove(player.draftHand, card);
+        }
+        this.onCardDrafted(player);
+        return undefined;
+      }),
     );
   }
 
@@ -171,14 +165,14 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.players.some((p) => p.needsToDraft)) {
-      this.askPlayerToRepick(player);
+      this.askPlayerToDraft(player, true);
       this.game.save();
       return;
     }
 
     // Clear any pending Undo options for all players
     for (const p of this.game.players) {
-      if (p.getWaitingFor()?.type === 'option') {
+      if (p.getWaitingFor() !== undefined) {
         p.clearWaitingFor();
       }
     }
@@ -262,9 +256,6 @@ class InitialDraft extends Draft {
   }
 
   override endRound() {
-    for (const player of this.game.players) {
-      player.unchosenDraftCards = [];
-    }
     this.game.initialDraftIteration++;
     // TODO(kberg): Move this to runDraftRound.
     this.game.draftRound = 1;
@@ -277,7 +268,6 @@ class InitialDraft extends Draft {
         for (const player of this.game.players) {
           player.dealtProjectCards = player.draftedCards;
           player.draftedCards = [];
-          player.unchosenDraftCards = [];
         }
         if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
           newPreludeDraft(this.game).startDraft();
@@ -317,7 +307,6 @@ class PreludeDraft extends Draft {
       // TODO(kberg): player.draftedCards is not ideal here.
       player.dealtPreludeCards = player.draftedCards as Array<IPreludeCard>;
       player.draftedCards = [];
-      player.unchosenDraftCards = [];
     }
     if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
       this.game.draftRound = 1;
@@ -352,7 +341,6 @@ class CEOsDraft extends Draft {
       // TODO(kberg): player.draftedCards is not ideal here.
       player.dealtCeoCards = player.draftedCards as Array<ICeoCard>;
       player.draftedCards = [];
-      player.unchosenDraftCards = [];
     }
 
     this.game.gotoInitialResearchPhase();

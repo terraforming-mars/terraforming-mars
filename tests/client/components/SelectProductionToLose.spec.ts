@@ -2,12 +2,14 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 
 describe('SelectProductionToLose', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(SelectProductionToLose, {
       ...globalConfig,
       props: {
+        playerView: {} as PlayerViewModel,
         playerinput: {
           title: 'Select production to lose',
           buttonLabel: 'Save',

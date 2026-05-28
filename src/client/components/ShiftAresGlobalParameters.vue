@@ -45,6 +45,7 @@
 import {defineComponent} from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
 import {HazardData} from '@/common/ares/AresData';
 
@@ -55,6 +56,10 @@ type DataModel = AresGlobalParametersResponse & {
 export default defineComponent({
   name: 'ShiftAresGlobalParameters',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => ShiftAresGlobalParametersModel,
       required: true,

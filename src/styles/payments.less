@@ -59,14 +59,70 @@
   text-align: right;
 }
 
-.payments_total_under {
-  color: #ff0000;
+// Top sum line starts after the 8px left padding so it lines up with the column content.
+.payments_total_value {
+  background-image: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 8px,
+    currentColor 8px,
+    currentColor 100%);
+  background-position: 0 0;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  padding-top: 2px;
 }
 
-.payments_total_over {
-  color: #00ff00;
+.payments_table tbody > tr > td:nth-child(2) {
+  padding-left: 8px;
+  text-align: center;
 }
 
-.payments_total_exact {
-  color: white;
+.payments_total_under .payments_total_heading::after,
+.payments_total_over .payments_total_heading::after {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+// 12px (60%) red solid fill from bottom, white dots in top 8px (40%) on a 4px grid; white border.
+.payments_total_under .payments_total_heading::after {
+  width: 18px;
+  height: 20px;
+  border: 1px solid #ffffff;
+  background-image:
+    linear-gradient(
+      to top,
+      #ff0000 0,
+      #ff0000 12px,
+      transparent 12px,
+      transparent 20px),
+    radial-gradient(circle, #ffffff 0.8px, transparent 1.2px);
+  background-size: 100% 100%, 4px 4px;
+  background-position: 0 0, 0 0;
+  background-repeat: no-repeat, repeat;
+}
+
+// 20px white main bar (18px wide, centered) + 3px gap + 5px yellow cap (full 24px wide).
+.payments_total_over .payments_total_heading::after {
+  width: 24px;
+  height: 28px;
+  background-image:
+    linear-gradient(
+      to top,
+      #ffffff 0,
+      #ffffff 20px,
+      transparent 20px,
+      transparent 28px),
+    linear-gradient(
+      to top,
+      transparent 0,
+      transparent 23px,
+      #ffff00 23px,
+      #ffff00 28px);
+  background-size: 18px 100%, 100% 100%;
+  background-position: center bottom, 0 0;
+  background-repeat: no-repeat;
 }

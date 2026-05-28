@@ -7,7 +7,7 @@
   <div v-if="gameOptions.expansions.turmoil" :title="$t('Ruling Party')">
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
-  <div class="global_params">
+  <div class="global_params" :class="{terraformed: isTerraformed}">
     <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"></global-parameter-value>
     <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"></global-parameter-value>
     <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"></global-parameter-value>
@@ -90,6 +90,10 @@ export default defineComponent({
   props: {
     playerNumber: {
       type: Number,
+      required: true,
+    },
+    isTerraformed: {
+      type: Boolean,
       required: true,
     },
     gameOptions: {

@@ -22,6 +22,7 @@ describe('Sidebar', () => {
       ...globalConfig,
       props: {
         playerNumber: 2,
+        isTerraformed: false,
         gameOptions: fakeGameOptionsModel(),
         acting_player: true,
         player_color: 'blue',

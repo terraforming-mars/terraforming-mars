@@ -4,9 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {Phase} from '../../../common/Phase';
-import {Priority} from '../../deferredActions/Priority';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class WorldGovernmentAdvisor extends PreludeCard implements IActionCard {
   constructor() {
@@ -43,16 +40,12 @@ export class WorldGovernmentAdvisor extends PreludeCard implements IActionCard {
   public action(player: IPlayer) {
     const game = player.game;
 
-    // This temporarily changes the game phase to Solar so the current player does not
-    // benefit from the global parameter change.
-    const phase = game.phase;
-    game.phase = Phase.SOLAR;
-    game.defer(new SimpleDeferredAction(player, () => {
-      game.phase = phase;
-      return undefined;
-    }), Priority.BACK_OF_THE_LINE);
-
-    const orOptions = game.worldGovernmentTerraformingInput(player);
-    return (orOptions.options.length === 0) ? undefined : orOptions;
+    game.temporarySolarPhase(player, () => {
+      const orOptions = game.worldGovernmentTerraformingInput(player);
+      if (orOptions.options.length !== 0) {
+        player.defer(orOptions);
+      }
+    });
+    return undefined;
   }
 }

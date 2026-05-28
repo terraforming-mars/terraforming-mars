@@ -3,6 +3,7 @@ import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
 import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 
 describe('ShiftAresGlobalParameters', () => {
   const mockPlayerModel: ShiftAresGlobalParametersModel = {
@@ -38,6 +39,7 @@ describe('ShiftAresGlobalParameters', () => {
     const ares = mount(ShiftAresGlobalParameters, {
       ...globalConfig,
       props: {
+        playerView: {} as PlayerViewModel,
         playerinput,
         onsave: () => {},
       },

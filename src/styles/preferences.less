@@ -17,7 +17,7 @@
     width: 50px;
     height: 50px;
     margin-top: 3px;
-    border-radius: 50%;
+    border-radius: @radius_circle;
     box-shadow: 0 1px 1px 1px black;
     font-family: Prototype;
     text-align: center;
@@ -122,10 +122,10 @@
 }
 
 .preferences_acting_player {
-    background: linear-gradient(180deg, #303030 0%, #303030 25%, #745B54 80%, #745B54 100%);
+    background: linear-gradient(180deg, @grey_850 0%, @grey_850 25%, #745B54 80%, #745B54 100%);
 }
 .preferences_nonacting_player {
-    background: #303030;
+    background: @grey_850;
 }
 .preferences-divider {
     background: rgba(170, 170, 170, 0.3);
@@ -193,15 +193,6 @@
         -webkit-animation: rotation 8s infinite linear;
         animation: rotation 8s infinite linear;
         box-shadow: 0 0 5px 2px #fff;
-    }
-}
-
-@-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(359deg);
     }
 }
 
@@ -343,11 +334,11 @@
 
 /* Remove background */
 .preferences_remove_background #player-home {
-    background: #222;
+    background: @grey_900;
 }
 
 .preferences_remove_background #spectator-home {
-    background: #222;
+    background: @grey_900;
 }
 
 /* Card Magnification */
@@ -426,6 +417,6 @@
     visibility: hidden;
   }
   a {
-    color: blue,
+    color: blue;
   }
 }

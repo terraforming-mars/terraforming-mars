@@ -3,7 +3,7 @@ import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectPlayer', () => {
@@ -30,7 +30,7 @@ describe('SelectPlayer', () => {
     wrapper = mount(SelectPlayer, {
       ...globalConfig,
       props: {
-        players: players,
+        playerView: {players: players} as PlayerViewModel,
         playerinput: playerInput,
         onsave: (r: InputResponse) => {
           response = r;

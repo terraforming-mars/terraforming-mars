@@ -105,6 +105,8 @@ import {defineComponent} from 'vue';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
+import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
+import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
@@ -143,6 +145,8 @@ export default defineComponent({
   components: {
     'board': Board,
     Card,
+    DeltaProjectBoard,
+    DynamicTitle,
     'waiting-for': WaitingFor,
     Milestones,
     Awards,

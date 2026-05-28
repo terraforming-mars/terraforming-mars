@@ -1,14 +1,14 @@
-import {inplaceRemove, copyAndClear as copyAndEmpty, zip} from '../common/utils/utils';
-import {CardName} from '../common/cards/CardName';
-import {IGame} from './IGame';
-import {IPlayer} from './IPlayer';
-import {IProjectCard} from './cards/IProjectCard';
-import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {SelectCard} from './inputs/SelectCard';
-import {message} from './logs/MessageBuilder';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {ICeoCard} from './cards/ceos/ICeoCard';
-import {SelectOption} from './inputs/SelectOption';
+import { inplaceRemove, copyAndClear as copyAndEmpty, zip } from '../common/utils/utils';
+import { CardName } from '../common/cards/CardName';
+import { IGame } from './IGame';
+import { IPlayer } from './IPlayer';
+import { IProjectCard } from './cards/IProjectCard';
+import { LunaProjectOffice } from './cards/moon/LunaProjectOffice';
+import { SelectCard } from './inputs/SelectCard';
+import { message } from './logs/MessageBuilder';
+import { IPreludeCard } from './cards/prelude/IPreludeCard';
+import { ICeoCard } from './cards/ceos/ICeoCard';
+import { SelectOption } from './inputs/SelectOption';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
 
@@ -24,7 +24,7 @@ export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
  * Implements a specific draft.
  */
 export abstract class Draft {
-  constructor(public readonly type: DraftType, protected readonly game: IGame) {}
+  constructor(public readonly type: DraftType, protected readonly game: IGame) { }
 
   /** draw cards into hand at the start of the iteration. */
   protected abstract draw(player: IPlayer): Array<IProjectCard>;
@@ -152,7 +152,7 @@ export abstract class Draft {
         message(messageTitle, (b) => b.player(giveTo)),
         'Keep',
         player.draftHand,
-        {min: cardsToKeep, max: cardsToKeep, played: false})
+        { min: cardsToKeep, max: cardsToKeep, played: false })
         .andThen((selected) => {
           for (const card of selected) {
             player.draftedCards.push(card);
@@ -177,17 +177,10 @@ export abstract class Draft {
     }
 
     // Clear any pending Undo options for all players
-    let waitingForCleared = false;
     for (const p of this.game.players) {
       if (p.getWaitingFor()?.type === 'option') {
-        (p as any).waitingFor = undefined;
-        (p as any).waitingForCb = undefined;
-        waitingForCleared = true;
+        p.clearWaitingFor();
       }
-    }
-    // Advance game age to ensure that any players still waiting will clear out the repick input.
-    if (waitingForCleared) {
-      this.game.gameAge++;
     }
 
     // If more than 1 card is to be passed to the next player, that means we're still drafting
@@ -277,24 +270,24 @@ class InitialDraft extends Draft {
     this.game.draftRound = 1;
 
     switch (this.game.initialDraftIteration) {
-    case 2:
-      this.startDraft();
-      break;
-    case 3:
-      for (const player of this.game.players) {
-        player.dealtProjectCards = player.draftedCards;
-        player.draftedCards = [];
-        player.unchosenDraftCards = [];
-      }
-      if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
-        newPreludeDraft(this.game).startDraft();
-      } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
-        this.game.initialDraftIteration++;
-        newCEOsDraft(this.game).startDraft();
-      } else {
-        this.game.gotoInitialResearchPhase();
-      }
-      break;
+      case 2:
+        this.startDraft();
+        break;
+      case 3:
+        for (const player of this.game.players) {
+          player.dealtProjectCards = player.draftedCards;
+          player.draftedCards = [];
+          player.unchosenDraftCards = [];
+        }
+        if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
+          newPreludeDraft(this.game).startDraft();
+        } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+          this.game.initialDraftIteration++;
+          newCEOsDraft(this.game).startDraft();
+        } else {
+          this.game.gotoInitialResearchPhase();
+        }
+        break;
     }
   }
 }

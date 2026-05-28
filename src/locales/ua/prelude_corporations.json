@@ -3,14 +3,14 @@
   "Spire": "Спайр",
   "Standard Project": "Стандартний проект",
   "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Ви починаєте з 44 M€. Як вашу першу дію, витягніть 4 картки, потім відкиньте 3 картки з вашої руки.",
-  "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "Ефект: Коли ви граєте карту з принаймні 2 символами, включаючи цю, додайте тут науковий ресурс.",
+  "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "Ефект: Коли ви граєте карту з принаймні 2 тегами, включаючи цю, додайте тут науковий ресурс.",
   "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.": "Ефект: Коли ви використовуєте стандартний проект, наукові ресурси тут можуть бути витрачені по 2 M€ кожен.",
 
   "SAGITTA FRONTIER SERVICES": "САГІТТА ПРИКОРДОННІ ПОСЛУГИ",
   "Sagitta Frontier Services": "Сагітта Прикордонні послуги",
-  "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Ви починаєте з 31 M€. Збільште виробництво енергії на 1 крок і виробництво M€ на 2 кроки. Витягніть картку без символів.",
-  "Effect: When you play a card with no tags, including this, gain 4 M€.": "Ефект: Коли ви граєте карту без символів, включаючи цю, отримайте 4 M€.",
-  "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Ефект: Коли ви граєте карту з ТОЧНО 1 символом, отримайте 1 M€.",
+  "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Ви починаєте з 31 M€. Збільште виробництво енергії на 1 крок і виробництво M€ на 2 кроки. Витягніть картку без тегів.",
+  "Effect: When you play a card with no tags, including this, gain 4 M€.": "Ефект: Коли ви граєте карту без тегів, включаючи цю, отримайте 4 M€.",
+  "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Ефект: Коли ви граєте карту з ТОЧНО 1 тегом, отримайте 1 M€.",
 
   "ECOTEC": "ЕКОТЕК",
   "Ecotec": "Екотек",
@@ -34,12 +34,12 @@
   "Cheung Shing Mars": "Чун-Шін Марс",
   "Cheung Shing MARS": "Чун-Шін МАРС",
   "You start with 3 M€ production and 44 M€.": "Ви починаєте з виробництва 3 M€ та 44 M€.",
-  "Effect: When you play a building tag, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту з символом будівлі, ви платите на 2 M€ менше за неї.",
+  "Effect: When you play a building tag, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту з тегом будівлі, ви платите на 2 M€ менше за неї.",
 
   "POINT LUNA": "ПОЙНТ-ЛУНА",
   "Point Luna": "Пойнт-Луна",
   "You start with 1 titanium production and 38 M€.": "Ви починаєте з виробництва 1 титану та 38 M€.",
-  "Effect: When you play an Earth tag, including this, draw a card.": "Ефект: Коли ви граєте карту з символом Землі, включаючи цю, витягніть карту.",
+  "Effect: When you play an Earth tag, including this, draw a card.": "Ефект: Коли ви граєте карту з тегом Землі, включаючи цю, витягніть карту.",
 
   "ROBINSON": "РОБІНЗОН",
   "INDUSTRIES": "ІНДАСТРІЗ",
@@ -51,7 +51,7 @@
   "TRUST": "ТРАСТ",
   "Valley Trust": "Веллі Траст",
   "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Ви починаєте з 37 M€. Як вашу першу дію, витягніть 3 картки Прелюдії та зіграйте одну з них. Відкиньте інші дві.",
-  "Effect: When you play a science tag, you pay 2M€ less for it.": "Ефект: Коли ви граєте карту з символом науки, ви платите на 2M€ менше за неї.",
+  "Effect: When you play a science tag, you pay 2M€ less for it.": "Ефект: Коли ви граєте карту з тегом науки, ви платите на 2M€ менше за неї.",
 
   "VIT": "ВІТ",
   "O": "О",

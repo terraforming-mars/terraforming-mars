@@ -170,7 +170,7 @@ export abstract class Draft {
       return;
     }
 
-    // Clear any pending Undo options for all players
+    // Clear all pending Repick waitingFor.
     for (const p of this.game.players) {
       if (p.getWaitingFor() !== undefined) {
         p.clearWaitingFor();

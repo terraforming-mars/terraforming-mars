@@ -48,7 +48,7 @@
   "Inventors' Guild": "Гільдія винахідників",
   "Action: Look at the top card and either buy it or discard it": "Дія: Подивитися на верхню карту і або купити її, або відкинути її",
 
-  "Martian Rails": "Марська залізниця",
+  "Martian Rails": "Марсіанська залізниця",
   "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Дія: Витратити 1 одиницю енергії, щоб отримати 1 M€ за кожне міське тайл НА МАРСІ.",
 
   "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Вимагає 4 або більше тайлів океану. Розмістити цей тайл. Зменшити виробництво енергії на 2 кроки і збільшити виробництво M€ на 5 кроків.",
@@ -455,8 +455,7 @@
 
   "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Підняти температуру на 2 кроки і розмістити цей тайл НА THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS АБО ARSIA MONS.",
 
-
-  "Mohole Area": "Могольська область",
+  "Mohole Area": "Проект Мохол",
   "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Збільшити виробництво тепла на 4 кроки. Розмістити цей тайл НА ОБЛАСТІ, ЗАРЕЗЕРВОВАНІЙ ДЛЯ ОКЕАНУ.",
 
   "Large Convoy": "Великий конвой",
@@ -603,7 +602,7 @@
   "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Дія: Витратити 8 M€, щоб розмістити 1 тайл океану. СТАЛЬ МОЖЕ БУТИ ВИКОРИСТАНА, якщо ви граєте карту будівлі.",
 
   "Flooding": "Затоплення",
-  "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Розмістити тайл океану. ЯКЩО Є ПЛИТКИ, ЩО ПРИЛЕГАЮТЬ ДО ЦІЄЇ ОКЕАНСЬКОЇ ПЛИТКИ, ВИ МОЖЕТЕ ВИДАЛИТИ 4 M€ ВІД ВЛАСНИКА ОДНОЇ З ЦИХ ПЛИТОК.",
+  "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Розмістити тайл океану. ЯКЩО Є ТАЙЛИ, ЩО ПРИЛЕГАЮТЬ ДО ЦЬОГО ТАЙЛУ ОКЕАНУ, ВИ МОЖЕТЕ ВИДАЛИТИ 4 M€ ВІД ВЛАСНИКА ОДНОГО З ЦИХ ТАЙЛІВ.",
 
   "Energy Saving": "Енергозбереження",
   "Increase your energy production 1 step for each city tile in play.": "Збільшити виробництво енергії на 1 одиницю за кожну тайл міста в грі.",

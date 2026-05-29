@@ -28,5 +28,8 @@
   "Tunneling Operation": "Тунельні роботи",
   "Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.": "Визначте 1 підземний ресурс. Потім розкопайте 2 підземні ресурси. Збільште виробництво сталі на 2 кроки.",
   "Underground Settlement": "Підземне поселення",
-  "Place a city tile. Then excavate the underground resource in its space.": "Розмістіть тайл міста. Потім розкопайте підземний ресурс у цьому просторі."
+  "Place a city tile. Then excavate the underground resource in its space.": "Розмістіть тайл міста. Потім розкопайте підземний ресурс у цьому просторі.",
+
+  "Delta Project": "Дельта-Проект",
+  "Action: Spend any amount of energy to move that number of steps on the Delta Project track. Each step requires having all the matching tags in play up to that level; wild tags can replace missing ones. Gain resources next to your position.": "Дія: Витратіть будь-яку кількість енергії, щоб пересунутися на відповідну кількість кроків на треку Дельта-Проекту. Кожен крок вимагає наявності всіх відповідних тегів у грі до цього рівня; дикі теги можуть замінювати відсутні. Отримайте ресурси поруч зі своєю позицією."
 }

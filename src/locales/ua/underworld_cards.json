@@ -313,5 +313,9 @@
   "Place this card face-down in that player's project card file.": "Покладіть цю карту лицем вниз у файл проектних карт того гравця.",
   "Requires you have 4 underground tokens. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw a card with that tag.": "Вимагає 4 здобутих жетони підземних ресурсів. Розкопайте підземний ресурс. Оберіть тег, який не є диким або тегом клону. Витягніть карту з цим тегом.",
   "Action: Place your player cube on one of your claimed underground resource tokens without a cube on it.": "Дія: Розмістіть свій кубик гравця на одному зі своїх здобутих жетонів підземного ресурсу, на якому немає кубика.",
-  "1 VP per underground resource token with a cube on it.": "1 ПО за кожен жетон підземного ресурсу з кубиком на ньому."
+  "1 VP per underground resource token with a cube on it.": "1 ПО за кожен жетон підземного ресурсу з кубиком на ньому.",
+
+  "Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Then identify the underground resources in all adjacent spaces. Claim 2 of them.": "Розмістіть океан НА ДІЛЯНЦІ, НЕ ПРИЗНАЧЕНІЙ ДЛЯ ОКЕАНУ. Потім визначте підземні ресурси на всіх прилеглих ділянках. Отримайте 2 з них.",
+
+  "Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.": "Розмістіть місто. Потім визначте підземні ресурси на всіх прилеглих ділянках. Отримайте 1 з них."
 }

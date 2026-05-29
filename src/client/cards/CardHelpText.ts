@@ -59,5 +59,5 @@ That makes this card's interaction with Odyssey and Playwrights different from c
 
   [CardName.RED_TOURISM_WAVE]: `Fan expansion note: This does not apply to The Moon.`,
 
-  [CardName.HYDROGEN_PROCESSING_PLANT]: `Oxygen cannot be reduced once it's been maxed out.`,
+  [CardName.HYDROGEN_PROCESSING_PLANT]: `Oxygen cannot be reduced once it's already at its goal.`,
 } as const;

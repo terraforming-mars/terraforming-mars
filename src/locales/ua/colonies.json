@@ -18,7 +18,7 @@
   "Add 1 microbe to ANY card": "Додати 1 мікроба на будь-яку карту",
 
   "Europa": "Європа",
-  "Place an ocean tile": "Розмістити океанську плитку",
+  "Place an ocean tile": "Розмістити тайл океану",
   "Gain 1 unit of production of the type under the track marker": "Отримати 1 одиницю продукції відповідного типу під маркером треку",
 
   "Ganymede": "Ганімед",
@@ -44,8 +44,8 @@
   "Draw 1 card and then discard 1 card": "Взяти 1 карту, а потім відкинути 1 карту",
 
   "Titan": "Титан",
-  "Add 3 floaters to ANY card": "Додати 3 плаваючих на будь-яку карту",
-  "Add n floaters to ANY card": "Додати n плаваючих на будь-яку карту",
+  "Add 3 floaters to ANY card": "Додати 3 аеростати на будь-яку карту",
+  "Add n floaters to ANY card": "Додати n аеростатів на будь-яку карту",
 
   "Triton": "Тритон",
   "Gain n titanium": "Отримати n одиниць титану",
@@ -55,7 +55,7 @@
   "Pay 1 M€ less for cards this generation": "Сплатити на 1 M€ менше за карти в цьому поколінні",
 
   "Mercury": "Меркурій",
-  "Gain the trade bonus of any colony tile. (This does not move the markers.)": "Отримати бонус торгівлі будь-якої колоніальної плитки. (Це не переміщує маркери.)",
+  "Gain the trade bonus of any colony tile. (This does not move the markers.)": "Отримати бонус торгівлі будь-якої колоніальної тайли. (Це не переміщує маркери.)",
   "Gain 1 unit of production of the type below the track marker": "Отримати 1 одиницю продукції відповідного типу нижче маркера треку",
 
   "Hygiea": "Гігея",
@@ -69,7 +69,7 @@
   "Lose 3 M€": "Втратити 3 M€",
 
   "Leavitt": "Левітт",
-  "Gain 1 science tag": "Отримати 1 науковий символ",
+  "Gain 1 science tag": "Отримати 1 науковий тег",
   "Draw n cards, keep 1": "Взяти n карт, залишити 1",
   "Reveal 1 card which you may pay to keep": "Взяти 1 карту, яку можна оплатити, щоб залишити",
 

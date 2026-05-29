@@ -14,14 +14,14 @@
   "ARBORIST COLLECTIVE": "Арбористичний Колектив",
   "Arborist Collective": "Арбористичний Колектив",
   "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "Ефект: Після того, як ви зіграєте карту події з базовою вартістю 14 або менше, покладіть активіста на цю карту.",
-  "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "Дія: Витратити 2 активістів тут, щоб збільшити вашу виробництво рослин на 1 крок і отримати 2 рослини.",
+  "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "Дія: Витратити 2 активістів тут, щоб збільшити ваше виробництво рослин на 1 крок і отримати 2 рослини.",
   "You start with 36 M€, 3 plants and 1 plant production.": "Ви починаєте з 36 M€, 3 рослин і виробництвом рослин на 1 крок.",
 
   "DEMETRON LABS": "Demetron Лабораторії",
   "Demetron Labs": "Demetron Лабораторії",
   "// Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "Ефект: Після того, як ви визначите 1 або більше підземних ресурсів за одну дію, КРІМ ВИКОПУВАННЯ, покладіть 1 дані на БУДЬ-ЯКУ карту.",
   "After you play a science tag, including this, put 2 data on this card.": "Після того, як ви зіграєте наукову позначку, включаючи цю, покладіть 2 дані на цю карту.",
-  "// Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без плитки. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
+  "// Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без тайли. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
   "Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "Дія: Витратити 3 дані тут, щоб визначити 3 підземні ресурси. Отримайте 1 з них.",
   "You start with 45 M€ and 2 data on this card.": "Ви починаєте з 45 M€ і 2 дані на цій карті.",
 
@@ -32,7 +32,7 @@
 
   "HECATE SPEDITIONS": "Hecate Експедиції",
   "Hecate Speditions": "Hecate Експедиції",
-  "planetary tag": "планетний символ",
+  "planetary tag": "планетний тег",
   "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "Ефект: Коли ви граєте карту з позначкою Земля, Марс, Венера, Місяць або Юпітер, включаючи цю, покладіть 1 ресурс ланцюга постачання на цю карту.",
   "(Effect: Spend 2 supply chain resources (min. 1) to trade.) (Action: Spend 5 supply chain resources to gain a trade fleet.)": "(Ефект: Витратити 2 ресурси ланцюга постачання (мін. 1) для торгівлі.) (Дія: Витратити 5 ресурсів ланцюга постачання, щоб отримати торговий флот.)",
   "You start with 38 M€. As your first action, place a colony.": "Ви починаєте з 38 M€. Як вашу першу дію, розмістіть колонію.",
@@ -55,7 +55,7 @@
 
   "KINGDOM OF TAURARO": "Королівство Тауаро",
   "Kingdom of Tauraro": "Королівство Тауаро",
-  "// Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з плитками, які ви вже володієте, якщо це можливо.",
+  "// Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з тайлами, які ви вже маєте, якщо це можливо.",
   "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Ви починаєте з 50 M€ і 6 M€ виробництва. Всі супротивники отримують 2 M€ виробництва. Як вашу першу дію, розмістіть місто.",
 
   "VOLTAGON": "ВОЛЬТАГОН",

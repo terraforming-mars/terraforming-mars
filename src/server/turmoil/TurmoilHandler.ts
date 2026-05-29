@@ -145,9 +145,9 @@ export class TurmoilHandler {
         total = total + Math.min(availableSteps, tr.moonMining);
       }
 
-      if (tr.moonLogistics !== undefined) {
-        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
-        total = total + Math.min(availableSteps, tr.moonLogistics);
+      if (tr.moonLogistic !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTIC_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistic);
       }
     });
 

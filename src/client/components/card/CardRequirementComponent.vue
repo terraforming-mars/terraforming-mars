@@ -132,7 +132,7 @@ export default defineComponent({
       case RequirementType.MINING_RATE:
         return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
-        return ['card-logistics-rate', 'card-logistics-rate--req'];
+        return ['card-logistic-rate', 'card-logistic-rate--req'];
       case RequirementType.HABITAT_TILES:
         return ['card-tile-lunar-habitat--S', 'tile--req'];
       case RequirementType.MINING_TILES:

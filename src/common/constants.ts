@@ -62,7 +62,7 @@ export const TERRA_CIMMERIA_COLONY_COST = 5;
 export const MAXIMUM_MOON_RATE = 8;
 export const MAXIMUM_HABITAT_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
-export const MAXIMUM_LOGISTICS_RATE = 8;
+export const MAXIMUM_LOGISTIC_RATE = 8;
 
 // Pathfinders
 export const SEED_VALUE = 5;

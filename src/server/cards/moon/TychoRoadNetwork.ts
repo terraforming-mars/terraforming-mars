@@ -23,12 +23,12 @@ export class TychoRoadNetwork extends Card {
 
       metadata: {
         description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
-        'Place a road tile on The Moon and raise the Logistics Rate 1 step.',
+        'Place a road tile on The Moon and raise the logistic rate 1 step.',
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },
     });

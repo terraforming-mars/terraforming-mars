@@ -367,8 +367,8 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_ROAD, 1, options));
   }
 
-  public moonLogisticsRate(options?: ItemOptions): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE, 1, options));
+  public moonLogisticRate(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_LOGISTIC_RATE, 1, options));
   }
 
   public moonMine(options?: ItemOptions): this {

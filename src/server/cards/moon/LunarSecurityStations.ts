@@ -17,7 +17,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       requirements: {roadTiles: 3, all},
 
       behavior: {
-        moon: {logisticsRate: 1},
+        moon: {logisticRate: 1},
       },
 
       metadata: {
@@ -26,7 +26,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text('Opponents may not remove your', Size.SMALL, true).br;
           b.steel(1).titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
-          b.moonLogisticsRate();
+          b.moonLogisticRate();
         }),
       },
     });

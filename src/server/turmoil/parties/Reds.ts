@@ -7,7 +7,7 @@ import {IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -138,10 +138,10 @@ class RedsPolicy03 implements IPolicy {
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       }
       return false;
-    case GlobalParameter.MOON_LOGISTICS_RATE:
+    case GlobalParameter.MOON_LOGISTIC_RATE:
       if (game.moonData) {
         const rate = game.moonData.logisticRate;
-        return rate > 0 && rate !== MAXIMUM_LOGISTICS_RATE;
+        return rate > 0 && rate !== MAXIMUM_LOGISTIC_RATE;
       }
       return false;
     case GlobalParameter.MOON_MINING_RATE:
@@ -238,8 +238,8 @@ class RedsPolicy03 implements IPolicy {
           }));
         }
 
-        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate').andThen(() => {
+        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTIC_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon logistic rate').andThen(() => {
             MoonExpansion.lowerLogisticRate(player, 1);
             return undefined;
           }));

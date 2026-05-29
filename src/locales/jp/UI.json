@@ -318,7 +318,7 @@
 
     "Increase the Moon habitat rate": "居住地レートを上昇",
     "Increase the Moon mining rate": "採掘レートを上昇",
-    "Increase the Moon logistics rate": "物流レートを上昇",
+    "Increase the Moon logistic rate": "物流レートを上昇",
     "Login": "",
     "My Games": "",
     "LoginOut": "",
@@ -966,7 +966,7 @@
     "Note: Venus scale is already at its goal.": "注意：金星パラメータはすでに目標に達しています.",
     "Note: Moon habitat rate is already at its goal.": "注意：居住地レートはすでに目標に達しています.",
     "Note: Moon mining rate is already at its goal.": "注意：採掘レートはすでに目標に達しています.",
-    "Note: Moon logistics rate is already at its goal.": "注意：物流レートはすでに目標に達しています.",
+    "Note: Moon logistic rate is already at its goal.": "注意：物流レートはすでに目標に達しています.",
     "Warning: you are the only player that can lose production.": "注意：産出を減らせるプレイヤーはあなたしかいません.",
     "You will only be able to build the colony on Luna.": "",
 

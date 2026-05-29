@@ -24,14 +24,14 @@ export class SinusIrdiumRoadNetwork extends Card {
       metadata: {
         description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +
           'Spend 1 steel. ' +
-          'Place a road tile on The Moon and raise the Logistics Rate 1 step.',
+          'Place a road tile on The Moon and raise the logistic rate 1 step.',
         cardNumber: 'M11',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).nbsp.plus().megacredits(3);
           }).br;
           b.minus().steel(1).br;
-          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },
     });

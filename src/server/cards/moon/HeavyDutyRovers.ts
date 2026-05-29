@@ -18,7 +18,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
       cost: 12,
 
       behavior: {
-        moon: {logisticsRate: 1},
+        moon: {logisticRate: 1},
       },
 
       metadata: {
@@ -28,7 +28,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
           b.megacredits(4).slash().moonRoad({size: Size.SMALL, all})
             .moonMine({size: Size.SMALL, all});
           b.br;
-          b.moonLogisticsRate({size: Size.SMALL});
+          b.moonLogisticRate({size: Size.SMALL});
         }),
       },
     });

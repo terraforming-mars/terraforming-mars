@@ -1,6 +1,6 @@
 {
     "Basic Infrastructure": "Basisinfrastructuur",
-    "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1. Ontvang 1 handelsvloot.",
+    "Place a road tile on The Moon and raise the logistic rate 1 step. Gain 1 trade fleet.": "Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1. Ontvang 1 handelsvloot.",
 
     "Core Mine": "Hoofdmijn",
     "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Plaats een mijntegel op de maan en verhoog de mijnwaarde met 1. Verhoog je titaniumproductie met 1.",
@@ -12,7 +12,7 @@
     "Draw 2 cards with a Moon tag. Gain 6 steel.": "Trek 2 kaarten met een maansymbool. Ontvang 6 staal.",
 
     "Mining Complex": "Mijnbouwcomplex",
-    "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Plaats een mijntegel op de maan en verhoog de mijnbouwwaarde met 1. Plaats een wegtegel naast de geplaatste mijnbouwtegel en verhoog de logistiekwaarde met 1. Betaal 7 M€.",
+    "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "Plaats een mijntegel op de maan en verhoog de mijnbouwwaarde met 1. Plaats een wegtegel naast de geplaatste mijnbouwtegel en verhoog de logistiekwaarde met 1. Betaal 7 M€.",
 
     "AI Controlled Mine Network": "AI-gecontroleerd mijnbouwnetwerk",
     "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Vereist een logistiekwaarde van 2 of hoger. Verhoog de logistiekwaarde met 1.",
@@ -33,7 +33,7 @@
     "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Verlaag de energieproductie en de M€-productie met 1. Verhoog je plantproductie met 2.",
 
     "Aristarchus Road Network": "Aristarchus wegennet",
-    "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Betaal 2 staal. Verhoog je M€-productie met 2. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+    "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the logistic rate 1 step.": "Betaal 2 staal. Verhoog je M€-productie met 2. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
 
     "Colonist Shuttles": "Kolonisten-shuttles",
     "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Betaal 1 titanium. Verhoog de habitatwaarde met 1. Ontvang 2 M€ voor elke habitattegel op de maan.",
@@ -235,7 +235,7 @@
     "Action: Spend 1 steel to add 2 microbes here.": "Actie: Betaal 1 staal om 2 microben aan deze kaart toe te voegen.",
 
     "Sinus Irdium Road Network": "Sinus Iridium wegennet",
-    "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Verminder je energieproductie met 1 en verhoog je M€-productie met 3. Betaal 1 staal. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the logistic rate 1 step.": "Verminder je energieproductie met 1 en verhoog je M€-productie met 3. Betaal 1 staal. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
 
     "Small Duty Rovers": "Lichte vracht Rovers",
     "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Betaal 1 titanium. Verhoog de logistiekwaarde met 1. Ontvang 1 M€ per habitattegel, mijntegel en wegtegel op de maan.",
@@ -275,7 +275,7 @@
     "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "ACTIE: Betaal X titanium om 4X M€ te krijgen [max. 4 titanium].",
 
     "Tycho Road Network": "Tycho wegennet",
-    "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Betaal 1 staal. Verhoog je M€-productie met 1. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+    "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Betaal 1 staal. Verhoog je M€-productie met 1. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
 
     "Underground Detonators": "Ondergrondse explosieven",
     "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Ontvang 1 staal en 1 titanium. Verhoog de mijnwaarde met 1.",

@@ -1,6 +1,6 @@
+import {MarsBoard} from '@/server/boards/MarsBoard';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-// import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -18,12 +18,27 @@ export class Jansson extends CeoCard {
     });
   }
 
+  private spaces(player: IPlayer) {
+    return player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
+  }
+
+  public override canAct(player: IPlayer): boolean {
+    if (this.isDisabled) {
+      return false;
+    }
+    for (const space of this.spaces(player)) {
+      if (!MarsBoard.canAffordPlacementBonuses(player, space)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public action(player: IPlayer): undefined {
     this.isDisabled = true;
-    const spaces = player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
-    spaces.forEach((space) => {
+    for (const space of this.spaces(player)) {
       player.game.grantSpaceBonuses(player, space);
-    });
+    }
     return undefined;
   }
 }

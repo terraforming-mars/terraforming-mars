@@ -34,9 +34,18 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  private validTriplets(board: MarsBoard): Array<Triplet> {
+  private validTriplets(board: MarsBoard, player: IPlayer): Array<Triplet> {
     const spaces = board.getNonReservedLandSpaces().filter((space) => {
-      return space.player === undefined && (space.tile === undefined || space.tile.protectedHazard === true);
+      if (space.player !== undefined) {
+        return false;
+      }
+      if (space.tile !== undefined && space.tile.protectedHazard !== true) {
+        return false;
+      }
+      // Filter out spaces whose placement bonuses the player can't afford (e.g. Hellas ocean
+      // when low on M€). Without this, claiming such a space would queue PlaceOceanTile +
+      // SelectPaymentDeferred and leave the player stuck. See #7218.
+      return MarsBoard.canAffordPlacementBonuses(player, space);
     });
 
     const result: Array<Triplet> = [];
@@ -74,7 +83,7 @@ export class SurveyMission extends PreludeCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return this.validTriplets(player.game.board).length > 0;
+    return this.validTriplets(player.game.board, player).length > 0;
   }
 
   private selectSpace(player: IPlayer, iteration: number, triplets: Array<Triplet>): SelectSpace {
@@ -113,7 +122,7 @@ export class SurveyMission extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const triplets = this.validTriplets(player.game.board);
+    const triplets = this.validTriplets(player.game.board, player);
     return this.selectSpace(player, 0, triplets);
   }
 }

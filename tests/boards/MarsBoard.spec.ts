@@ -10,6 +10,12 @@ import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunit
 import {testGame} from '../TestGame';
 import {AresHandler} from '../../src/server/ares/AresHandler';
 import {toID} from '../../src/common/utils/utils';
+import {IGame} from '../../src/server/IGame';
+import {Space} from '../../src/server/boards/Space';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
+import {maxOutOceans, setRulingParty, setTemperature} from '../TestingUtils';
+import {PartyName} from '../../src/common/turmoil/PartyName';
+import * as constants from '../../src/common/constants';
 
 describe('MarsBoard', () => {
   let board: MarsBoard;
@@ -112,5 +118,106 @@ describe('MarsBoard', () => {
     const space = board.spaces.find(AresHandler.hasHazardTile);
     space!.player = player;
     expect(board.getAvailableSpacesForGreenery(player)).has.length(45);
+  });
+
+  describe('canAffordPlacementBonuses', () => {
+    let game: IGame;
+    let space: Space;
+
+    beforeEach(() => {
+      [game, player] = testGame(1);
+      space = game.board.getSpaceOrThrow('15');
+      space.bonus = [];
+    });
+
+    it('No bonuses is always affordable', () => {
+      player.megaCredits = 0;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('Ignores bonuses not subject to a cost', () => {
+      space.bonus = [SpaceBonus.PLANT, SpaceBonus.STEEL, SpaceBonus.DRAW_CARD, SpaceBonus.HEAT];
+      player.megaCredits = 0;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('OCEAN bonus requires Hellas ocean cost', () => {
+      space.bonus = [SpaceBonus.OCEAN];
+      player.megaCredits = constants.HELLAS_BONUS_OCEAN_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = constants.HELLAS_BONUS_OCEAN_COST;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('OCEAN bonus is free when oceans are maxed out', () => {
+      space.bonus = [SpaceBonus.OCEAN];
+      maxOutOceans(player);
+      player.megaCredits = 0;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('TEMPERATURE bonus requires Vastitas Borealis temperature cost', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
+      player.megaCredits = constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('TEMPERATURE bonus is free when temperature is maxed out', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
+      setTemperature(game, constants.MAX_TEMPERATURE);
+      player.megaCredits = 0;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('TEMPERATURE_4MC bonus requires Vastitas Borealis Nova temperature cost', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+      player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('COLONY bonus requires Terra Cimmeria colony cost', () => {
+      space.bonus = [SpaceBonus.COLONY];
+      player.megaCredits = constants.TERRA_CIMMERIA_COLONY_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = constants.TERRA_CIMMERIA_COLONY_COST;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('Sums multiple unaffordable bonuses', () => {
+      space.bonus = [SpaceBonus.OCEAN, SpaceBonus.TEMPERATURE];
+      // Each bonus is checked independently, so M€ shortage on either fails.
+      player.megaCredits = constants.HELLAS_BONUS_OCEAN_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+    });
+
+    it('Reds tax adds to OCEAN cost', () => {
+      [game, player] = testGame(1, {turmoilExtension: true});
+      setRulingParty(game, PartyName.REDS);
+      space = game.board.getSpaceOrThrow('15');
+      space.bonus = [SpaceBonus.OCEAN];
+
+      const redsCost = constants.HELLAS_BONUS_OCEAN_COST + constants.REDS_RULING_POLICY_COST;
+      player.megaCredits = redsCost - 1;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
+      player.megaCredits = redsCost;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
+
+    it('Reds tax not applied when global parameter is maxed', () => {
+      [game, player] = testGame(1, {turmoilExtension: true});
+      setRulingParty(game, PartyName.REDS);
+      space = game.board.getSpaceOrThrow('15');
+      space.bonus = [SpaceBonus.TEMPERATURE];
+      setTemperature(game, constants.MAX_TEMPERATURE);
+
+      player.megaCredits = 0;
+      expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
+    });
   });
 });

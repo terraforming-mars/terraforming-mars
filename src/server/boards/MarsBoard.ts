@@ -10,6 +10,7 @@ import {SpaceId} from '../../common/Types';
 import {oneWayDifference} from '../../common/utils/utils';
 import {Tile} from '../Tile';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import * as constants from '../../common/constants';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
@@ -182,6 +183,42 @@ export class MarsBoard extends Board {
   public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<Space> {
     return this.getSpaces(SpaceType.OCEAN)
       .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+  }
+
+  /**
+   * Returns true when the player can afford the M€ (and Reds TR tax) that each of the
+   * space's placement bonuses will charge.
+   *
+   * Used by cards that hand the player a non-tile-placement choice of space and then call
+   * `grantSpaceBonuses` (Mars Nomads, Gagarin Mobile Base, Survey Mission). Without this
+   * filter, picking e.g. the Hellas ocean space without 6 M€ leaves the player stuck on
+   * the ocean-bonus prompt because `SelectPaymentDeferred` throws. See #7218.
+   *
+   * Tile placement itself goes through `Board.canAfford`/`spaceCosts` and is unaffected.
+   */
+  public static canAffordPlacementBonuses(player: IPlayer, space: Space): boolean {
+    const game = player.game;
+    if (space.bonus.includes(SpaceBonus.OCEAN) && game.canAddOcean()) {
+      if (!player.canAfford({cost: constants.HELLAS_BONUS_OCEAN_COST, tr: {oceans: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, tr: {temperature: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST, tr: {temperature: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.COLONY)) {
+      if (!player.canAfford({cost: constants.TERRA_CIMMERIA_COLONY_COST})) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private computeEdges(): ReadonlyArray<Space> {

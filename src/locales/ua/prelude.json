@@ -159,5 +159,81 @@
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Отримайте 6 титану. Розкрийте карти, поки не розкриєте дві карти з позначками космосу. Візьміть їх у руку та відкиньте решту.",
 
   "Add resource to card GHG Producing Bacteria": "Додайте ресурс на картку GHG Producing Bacteria",
-  "Add resource to card Fish": "Додайте ресурс на картку Fish"
+  "Add resource to card Fish": "Додайте ресурс на картку Fish",
+
+  "Albedo Plants": "Альбедо-рослини",
+  "Effect: When you play a plant tag, including this, gain 3 heat.": "Ефект: Коли ви граєте тег рослини, включаючи цю, отримайте 3 тепла.",
+  "Increase plant production 1 step. Gain 1 plant.": "Збільшіть виробництво рослин на 1 крок. Отримайте 1 рослину.",
+
+  "Board of Directors": "Рада директорів",
+  "ACTION:": "ДІЯ:",
+  "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "ВИТЯГНІТЬ 1 КАРТКУ ПРЕЛЮДІЇ: АБО СКИНЬТЕ ЇЇ, АБО ЗАПЛАТІТЬ 12 M€ І ВИДАЛІТЬ 1 ДИРЕКТОРА ЗВІДСИ, ЩОБ ЗІГРАТИ ЇЇ.",
+  "Add 4 director resources here.": "Додайте 4 ресурси директора сюди.",
+
+  "Early Colonization": "Рання колонізація",
+  "INCREASE ALL COLONY TRACKS 2 STEPS": "ПІДВИЩТЕ ВСІ ТРЕКИ КОЛОНІЙ НА 2 КРОКИ",
+  "Place a colony. Gain 3 energy.": "Розмістіть колонію. Отримайте 3 енергії.",
+
+  "Floating Trade Hub": "Аеростатний торгівельний хаб",
+  "Action: Add 2 floaters to ANY card.": "Дія: Додайте 2 аеростати до БУДЬ-ЯКОЇ карти.",
+  "Action: Remove any number of floaters here to gain that many of one standard resource.": "Дія: Видаліть будь-яку кількість аеростатів звідси, щоб отримати стільки ж одного стандартного ресурсу.",
+  "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "Дія: Скиньте 1 карту і витратьте 1 стандартний ресурс, щоб витягнути 1 карту і отримати 1 стандартний ресурс.",
+
+  "High Circles": "Вищі кола",
+  "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Підвищте РТ на 1 крок і витягніть 1 карту з ВИМОГОЮ ПАРТІЇ. Розмістіть 2 делегатів в одній партії.",
+
+  "Industrial Complex": "Промисловий комплекс",
+  "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Втратьте 18 M€. ПІДВИЩТЕ ВСЕ ВАШЕ ВИРОБНИЦТВО, ЩО НИЖЧЕ 1, ДО 1.",
+
+  "Main Belt Asteroids": "Астероїди головного поясу",
+  "Action: Gain 1 asteroid to ANY CARD.": "Дія: Додайте 1 астероїд до БУДЬ-ЯКОЇ КАРТИ.",
+  "Effect: When gaining an asteroid HERE, gain 1 titanium.": "Ефект: Коли ви отримуєте астероїд ТУТ, отримайте 1 титан.",
+  "Lose 5 M€. 1 VP per 2 asteroids here.": "Втратьте 5 M€. 1 ПО за кожні 2 астероїди тут.",
+  "Gain 5 M€. Draw 2 cards with requirements.": "Отримайте 5 M€. Витягніть 2 карти з вимогами.",
+
+  "Planetary Alliance": "Планетарний альянс",
+  "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Підвищте РТ на 2 кроки. Витягніть 1 картку Юпітера і 1 картку Венери.",
+
+  "Preservation Program": "Програма збереження",
+  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Ефект: ПРОПУСТІТЬ ПЕРШЕ ПІДВИЩЕННЯ РТ, ЯКЕ ВИ ОТРИМУЄТЕ В ФАЗІ ДІЙ КОЖНОГО ПОКОЛІННЯ.",
+  "Raise your TR 5 steps.": "Підвищте РТ на 5 кроків.",
+
+  "Project Eden": "Проект Едем",
+  "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Розмістіть 1 тайл океану, 1 тайл міста і 1 тайл лісу. Скиньте 3 карти.",
+
+  "Recession": "Рецесія",
+  "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "КОЖЕН СУПЕРНИК втрачає 5 M€ і зменшує виробництво M€ на 1 крок. Ви отримуєте 10 M€.",
+
+  "Rise To Power": "Сходження до влади",
+  "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Збільшіть виробництво M€ на 3 кроки і розмістіть 3 делегатів. ВИ МОЖЕТЕ РОЗМІЩУВАТИ ЇХ У РІЗНИХ ПАРТІЯХ.",
+
+  "Soil Bacteria": "Ґрунтові бактерії",
+  "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "Ефект: Коли ви граєте тег рослини або тег мікробів, включаючи цю, отримайте 1 рослину.",
+  "Draw 2 microbe cards and gain 3 plants.": "Витягніть 2 карти мікробів і отримайте 3 рослини.",
+
+  "Space Lanes": "Космічні маршрути",
+  "Gain 3 titanium.": "Отримайте 3 титану.",
+
+  "Suitable Infrastructure": "Відповідна інфраструктура",
+  "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "Ефект: Один раз за дію, яку ви виконуєте, отримайте 2 M€, якщо ви збільшуєте будь-яке виробництво.",
+
+  "Terraforming Deal": "Угода про тераформування",
+  "Effect: Each step your TR is raised, you gain 2 M€.": "Ефект: За кожен крок підвищення РТ ви отримуєте 2 M€.",
+
+  "Venus Contract": "Контракт на Венеру",
+  "Effect: Each step you raise Venus, gain 3 M€.": "Ефект: За кожен крок підвищення Венери отримайте 3 M€.",
+  "Draw 1 Venus card. Raise your TR 1 step.": "Витягніть 1 картку Венери. Підвищте РТ на 1 крок.",
+
+  "Venus L1 Shade": "Венерна тінь L1",
+
+  "World Government Advisor": "Радник Світового уряду",
+  "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "Дія: ПІДВИЩТЕ 1 ГЛОБАЛЬНИЙ ПАРАМЕТР БЕЗ ОТРИМАННЯ РТ АБО ІНШИХ БОНУСІВ.",
+  "Raise your TR 2 steps. Draw 1 card.": "Підвищте РТ на 2 кроки. Витягніть 1 карту.",
+
+  "Pay 3M€. Place a city. Place a colony.": "Заплатіть 3 M€. Розмістіть місто. Розмістіть колонію.",
+  "Gain 13 M€.": "Отримайте 13 M€.",
+
+  "Established Methods": "Перевірені методи",
+  "Gain 30 M€. Then pay for and perform 2 standard projects.": "Отримайте 30 M€. Потім оплатіть і виконайте 2 стандартні проекти.",
+  "NOTE: If you cannot afford a second standard project, spend 10 M€ instead, or as much as possible.": "ПРИМІТКА: Якщо ви не можете дозволити собі другий стандартний проект, витратьте замість цього 10 M€ або скільки можливо."
 }

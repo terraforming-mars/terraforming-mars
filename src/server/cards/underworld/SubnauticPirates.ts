@@ -33,7 +33,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
 
   private availableTargets(player: IPlayer) {
     const targets = new Set<IPlayer>();
-    const spaces = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true, newHolland: true});
+    const spaces = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true});
     for (const space of spaces) {
       for (const adjacent of player.game.board.getAdjacentSpaces(space)) {
         if (adjacent.player !== undefined && adjacent.player !== player && Board.hasRealTile(adjacent)) {

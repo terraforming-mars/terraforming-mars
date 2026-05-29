@@ -3,6 +3,7 @@ export type Warning =
  'undoBestEffort' |
  'maxtemp' |
  'maxoxygen' |
+ 'maxoxygen-reduce' |
  'maxoceans' |
  'maxvenus' |
  'maxHabitatRate' |

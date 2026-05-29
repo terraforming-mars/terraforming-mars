@@ -15,6 +15,7 @@ const descriptions: Record<Warning, string> = {
   'undoBestEffort': 'Undo is best effort only. Please do not report any bugs if it is broken.',
   'maxtemp': 'Note: the temperature is already at its goal.',
   'maxoxygen': 'Note: the oxygen level is already at its goal.',
+  'maxoxygen-reduce': 'Note: the oxygen level cannot be reduced once it\'s already at its goal.',
   'maxoceans': 'Note: all oceans are already on the board.',
   'maxvenus': 'Note: Venus scale is already at its goal.',
   'maxHabitatRate': 'Note: Moon habitat rate is already at its goal.',

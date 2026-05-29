@@ -35,7 +35,7 @@ import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 import {asArray, inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
@@ -277,8 +277,8 @@ export class Executor implements BehaviorExecutor {
       if ((moon.miningRate ?? 0) >= MAXIMUM_MINING_RATE) {
         card.warnings.add('maxMiningRate');
       }
-      if ((moon.logisticsRate ?? 0) >= MAXIMUM_LOGISTICS_RATE) {
-        card.warnings.add('maxLogisticsRate');
+      if ((moon.logisticRate ?? 0) >= MAXIMUM_LOGISTIC_RATE) {
+        card.warnings.add('maxLogisticRate');
       }
     }
 
@@ -624,8 +624,8 @@ export class Executor implements BehaviorExecutor {
       if (moon.miningRate !== undefined) {
         MoonExpansion.raiseMiningRate(player, moon.miningRate);
       }
-      if (moon.logisticsRate !== undefined) {
-        MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+      if (moon.logisticRate !== undefined) {
+        MoonExpansion.raiseLogisticRate(player, moon.logisticRate);
       }
     }
 
@@ -724,7 +724,7 @@ export class Executor implements BehaviorExecutor {
 
       moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
       moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
-      moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
+      moonLogistic: (behavior.moon?.logisticRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
     };
     return trSource;
   }

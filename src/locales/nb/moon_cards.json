@@ -1,6 +1,6 @@
 {
   "Basic Infrastructure": "Grunnleggende Infrastruktur",
-  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Plasser en veibrikke på Månen og øk logistikknivåen med 1. Få 1 handelsflåte.",
+  "Place a road tile on The Moon and raise the logistic rate 1 step. Gain 1 trade fleet.": "Plasser en veibrikke på Månen og øk logistikknivåen med 1. Få 1 handelsflåte.",
 
   "Core Mine": "Kjernegruve",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Øk titanproduksjonen din med 1.",
@@ -12,7 +12,7 @@
   "Draw 2 cards with a Moon tag. Gain 6 steel.": "Trekk 2 kort med et månesymbol. Få 6 stål.",
 
   "Mining Complex": "Gruvekompleks",
-  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Plasser en veibrikke ved siden av den plasserte gruvebrikken og øk logistikknivåen med 1. Betal 7 M€.",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Plasser en veibrikke ved siden av den plasserte gruvebrikken og øk logistikknivåen med 1. Betal 7 M€.",
 
   "AI Controlled Mine Network": "KI-styrt gruvenettverk",
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Krever at logistikknivåen er 2 eller høyere. Øk logistikknivåen med 1.",
@@ -32,7 +32,7 @@
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Reduser energiproduksjonen din med 1 og M€-produksjonen din med 1. Øk planteproduksjonen din med 2.",
 
   "Aristarchus Road Network": "Aristarchus veisystem",
-  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bruk 2 stål. Øk M€-produksjonen din med 2. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the logistic rate 1 step.": "Bruk 2 stål. Øk M€-produksjonen din med 2. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
 
   "Colonist Shuttles": "Koloniskyttel",
   "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Bruk 1 titan. Øk habitatnivået med 1. Få 2 M€ for hvert habitatbrikke på Månen.",
@@ -64,7 +64,7 @@
 
   "Darkside Smugglers' Union": "Darkside Smuglerforening",
   "Perform a trade action.": "Utfør en handlingsaksjon.",
-  "Raise the logistics rate 1 step.": "Øk logistikknivåen med 1.",
+  "raise the logistic rate 1 step.": "Øk logistikknivåen med 1.",
 
   "Deep Lunar Mining": "Luna dypgruvedrift",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Bruk 1 titan. Øk titanproduksjonen din med 2. Øk gruvenivået med 1.",
@@ -237,7 +237,7 @@
   "Spend 1 steel to add 2 microbes here.": "Bruk 1 stål for å legge til 2 mikrober på dette kortet.",
 
   "Sinus Irdium Road Network": "Sinus Iridium veinettverk",
-  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduser energiproduksjonen din med 1 og øk M€-produksjonen din med 3. Bruk 1 stål. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the logistic rate 1 step.": "Reduser energiproduksjonen din med 1 og øk M€-produksjonen din med 3. Bruk 1 stål. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
 
   "Small Duty Rovers": "Små lasterovere",
   "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Bruk 1 titan. Øk logistikknivåen med 1. Få 1 M€ per habitatbrikke, gruvebrikke og veibrikke på Månen.",
@@ -277,7 +277,7 @@
   "Spend X titanium to gain 4X M€ [max 4 titanium].": "Bruk X titan for å få 4X M€ [maks 4 titan].",
 
   "Tycho Road Network": "Tycho veinettverk",
-  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bruk 1 stål. Øk M€-produksjonen din med 1. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Bruk 1 stål. Øk M€-produksjonen din med 1. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
 
   "Underground Detonators": "Underjordiske detonatorer",
   "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Få 1 stål og 1 titan. Øk gruvenivået med 1.",

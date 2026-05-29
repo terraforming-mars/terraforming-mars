@@ -8,7 +8,7 @@ export type Warning =
  'maxvenus' |
  'maxHabitatRate' |
  'maxMiningRate' |
- 'maxLogisticsRate' |
+ 'maxLogisticRate' |
  'decreaseOwnProduction' |
  'removeOwnPlants' |
  'buildOnLuna' |

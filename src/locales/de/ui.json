@@ -461,7 +461,7 @@
   "Increase Venus scale": "Erhöhe Venuswertung",
   "Increase the Moon habitat rate": "Erhöhe Habitatwertung",
   "Increase the Moon mining rate": "Erhöhe Minienwertung",
-  "Increase the Moon logistics rate": "Erhöhe Logistikwertung",
+  "Increase the Moon logistic rate": "Erhöhe Logistikwertung",
 
   "Login": "Einloggen",
   "My Games": "Meine Spiele",
@@ -1284,7 +1284,7 @@
   "Note: Venus scale is already at its goal.": "Hinweis: Die Venus-Skala hat ihr Maximum bereits erreicht.",
   "Note: Moon habitat rate is already at its goal.": "Hinweis: Die Habitatswertung hat ihr Maximum bereits erreicht.",
   "Note: Moon mining rate is already at its goal.": "Hinweis: Die Minenwertung hat ihr Maximum bereits erreicht.",
-  "Note: Moon logistics rate is already at its goal.": "Hinweis: Die Logistikwertung hat ihr Maximum bereits erreicht.",
+  "Note: Moon logistic rate is already at its goal.": "Hinweis: Die Logistikwertung hat ihr Maximum bereits erreicht.",
   "Note: all global parameters are at their goals.": "Hinweis: Alle globalen Parameter haben ihr Maximum erreicht.",
   "Note: This action will target you.": "Hinweis: Diese Aktion zielt auf dich.",
   "Note: playing a card with a microbe tag will cause you to lose 4 M€ (or as much as possible).": "Hinweis: Wenn du eine Karte mit einem Mikroben-Symbol spielst, verlierst du 4 M€ (oder so viel wie möglich).",

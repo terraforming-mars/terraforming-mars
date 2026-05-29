@@ -248,7 +248,7 @@ describe('Player', () => {
         [GlobalParameter.VENUS]: 0,
         [GlobalParameter.MOON_HABITAT_RATE]: 0,
         [GlobalParameter.MOON_MINING_RATE]: 0,
-        [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
+        [GlobalParameter.MOON_LOGISTIC_RATE]: 0,
       },
       standardProjectsThisGeneration: [],
       jovianTagCount: 0,

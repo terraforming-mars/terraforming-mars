@@ -94,19 +94,19 @@ describe('MoonExpansion', () => {
     expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(4);
   });
 
-  it('raiseLogisticsRate', () => {
+  it('raiseLogisticRate', () => {
     expect(moonData.logisticRate).to.eq(0);
     expect(player.terraformRating).eq(20);
-    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(0);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTIC_RATE]).to.eq(0);
 
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
     expect(player.terraformRating).eq(21);
-    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(1);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTIC_RATE]).to.eq(1);
 
     MoonExpansion.raiseLogisticRate(player, 2);
     expect(moonData.logisticRate).to.eq(3);
-    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(3);
+    expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTIC_RATE]).to.eq(3);
   });
 
   it('multiple players track separate globalParameterSteps', () => {
@@ -244,7 +244,7 @@ describe('MoonExpansion', () => {
     expect(player.terraformRating).eq(20);
   });
 
-  it('raiseLogisticsRate during WGT', () => {
+  it('raiseLogisticRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.logisticRate).to.eq(0);
     expect(player.terraformRating).eq(20);

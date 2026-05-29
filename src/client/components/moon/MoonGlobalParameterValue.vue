@@ -1,5 +1,5 @@
 <template>
-  <div v-i18n title="Moon habitat, logistics, and mining rates">
+  <div v-i18n title="Moon habitat, logistic, and mining rates">
     <div class="moon-tile"/>
     <div>
       <div v-if="isMax" class="global_params_value">
@@ -13,7 +13,7 @@
       </div>
       <div v-else class="moon_params_value">
         <span class="habitat">{{ moonData.habitatRate }}</span>
-        <span class="logistics">{{ moonData.logisticsRate }}</span>
+        <span class="logistic">{{ moonData.logisticRate }}</span>
         <span class="mining">{{ moonData.miningRate }}</span>
       </div>
     </div>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 import {MoonModel} from '@/common/models/MoonModel';
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
       return (
         this.moonData.habitatRate >= MAXIMUM_HABITAT_RATE &&
         this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
-        this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE
+        this.moonData.logisticRate >= MAXIMUM_LOGISTIC_RATE
       );
     },
   },

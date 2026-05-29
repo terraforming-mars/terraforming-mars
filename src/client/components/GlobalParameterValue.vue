@@ -23,7 +23,7 @@ type BaseGlobalParameter = Exclude<
   GlobalParameter,
   GlobalParameter.MOON_HABITAT_RATE |
   GlobalParameter.MOON_MINING_RATE |
-  GlobalParameter.MOON_LOGISTICS_RATE>;
+  GlobalParameter.MOON_LOGISTIC_RATE>;
 
 const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconClass: string}> = {
   [GlobalParameter.TEMPERATURE]: {max: MAX_TEMPERATURE, title: 'Temperature', iconClass: 'temperature-tile'},

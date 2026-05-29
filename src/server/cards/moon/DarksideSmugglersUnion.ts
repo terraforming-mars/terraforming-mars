@@ -21,16 +21,16 @@ export class DarksideSmugglersUnion extends Card implements IProjectCard, IActio
       cost: 17,
 
       behavior: {
-        moon: {logisticsRate: 1},
+        moon: {logisticRate: 1},
       },
 
       metadata: {
-        description: 'Raise the logistics rate 1 step.',
+        description: 'raise the logistic rate 1 step.',
         cardNumber: 'M80',
         renderData: CardRenderer.builder((b) => {
           b.action('Perform a trade action.', (ab) => ab.empty().startAction.trade());
           b.br;
-          b.moonLogisticsRate();
+          b.moonLogisticRate();
         }),
       },
     });

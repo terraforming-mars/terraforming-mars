@@ -28,5 +28,13 @@
 
   "UNITED NATIONS MISSION ONE": "МІСІЯ ОБ'ЄДНАНИХ НАЦІЙ ОДИН",
   "You start with 39 M€. Increase your TR 1 step.": "Ви починаєте з 39 M€. Збільште свій РТ на 1 крок.",
-  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "Ефект: Коли будь-який гравець виконує дію або грає карту, яка збільшує РТ, включаючи цю, отримуйте 1 M€ за кожен крок."
+  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "Ефект: Коли будь-який гравець виконує дію або грає карту, яка збільшує РТ, включаючи цю, отримуйте 1 M€ за кожен крок.",
+
+  "Athena": "Афіна",
+  "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Ви починаєте з 62 M€. Як вашу першу дію, розмістіть 2 небезпечні тайли, що не прилягають до жодних інших тайлів.",
+  "Effect: You do not lose production when placing adjacent to hazard tiles.": "Ефект: Ви не втрачаєте виробництво при розміщенні поруч з небезпечними тайлами.",
+
+  "Eris": "Еріс",
+  "You start with 46 M€. As your first action, draw an Ares card.": "Ви починаєте з 46 M€. Як вашу першу дію, витягніть карту Ареса.",
+  "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "Дія: Розмістіть новий небезпечний тайл, що НЕ ПРИЛЯГАЄ ДО ЖОДНОГО ІНШОГО ТАЙЛУ, АБО видаліть небезпечний тайл, щоб отримати 1 РТ."
 }

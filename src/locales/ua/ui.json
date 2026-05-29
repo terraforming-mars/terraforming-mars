@@ -1172,5 +1172,12 @@
   "Increase plants production 1 step": "Збільшити виробництво рослин на 1 крок",
   "Increase energy production 1 step": "Збільшити виробництво енергії на 1 крок",
   "Increase heat production 1 step": "Збільшити виробництво тепла на 1 крок",
-  "Reorder Cards": "Пересортувати карти"
+  "Reorder Cards": "Пересортувати карти",
+
+  "Have removed at least 3 hazard tiles (excluding WGT)": "Видалили принаймні 3 небезпечні тайли (крім СУТ)",
+  "Have the most tiles adjacent to hazards": "Мають найбільше тайлів, що прилягають до небезпечних тайлів",
+  "Place a hazard tile adjacent to no other tile": "Розмістити небезпечний тайл, що не прилягає до жодного іншого тайлу",
+  "Remove a hazard tile to gain 1 TR": "Видалити небезпечний тайл, щоб отримати 1 РТ",
+  "Select hazard tile to remove": "Виберіть небезпечний тайл для видалення",
+  "Select space next to no other tile for hazard": "Виберіть простір поруч з жодним іншим тайлом для небезпечного тайлу"
 }

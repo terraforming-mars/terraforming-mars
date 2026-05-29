@@ -248,5 +248,43 @@
 
   "Wetlands": "Флігель",
   "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Вимагає 2 тайли океану. Втратити 4 рослини. Розмістіть цей тайл на НЕЗАРЕЗЕРВОВАНОМУ МІСЦІ ПОБЛИЗУ ПРИНАЙМНІ 2 ОКЕАНІВ. Підвищити рівень кисню на 1 крок. Отримати 1 РТ.)",
-  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(Ефект: Флігель вважається тайлом зелені та тайлом океану, за винятком того, що його не можна закрити і він не є одним з 9 океанів, необхідних для завершення гри.)"
+  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(Ефект: Флігель вважається тайлом зелені та тайлом океану, за винятком того, що його не можна закрити і він не є одним з 9 океанів, необхідних для завершення гри.)",
+
+  "Action: Spend 1 steel and 1 energy to gain 3 plants.": "Дія: Витратьте 1 сталь і 1 енергію, щоб отримати 3 рослини.",
+  "Action: Spend 1 plant to add an animal to this card.": "Дія: Витратьте 1 рослину, щоб додати тварину на цю карту.",
+  "Action: Spend 1 plant to add 1 animal to ANY card.": "Дія: Витратьте 1 рослину, щоб додати 1 тварину на БУДЬ-ЯКУ карту.",
+  "Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.": "Ефект: Кожного разу, коли БУДЬ-ЯКИЙ ГРАВЕЦЬ грає подію, додайте 1 дані на цю карту.",
+  "Effect: Remove 3 data to draw a card automatically.": "Ефект: Видаліть 3 дані, щоб автоматично витягнути карту.",
+
+  "Action: Spend 1 energy to add 1 data to this card.": "Дія: Витратьте 1 енергію, щоб додати 1 дані на цю карту.",
+  "Action: Remove all data from this card to gain 3M€ per data removed.": "Дія: Видаліть усі дані з цієї карти, щоб отримати 3 M€ за кожні видалені дані.",
+  "Action: Spend 3 plants to raise Venus 1 step.": "Дія: Витратьте 3 рослини, щоб підвищити рівень Венери на 1 крок.",
+  "Action: Pay 2 titanium to raise your heat and energy production 1 step each.": "Дія: Заплатіть 2 титани, щоб збільшити виробництво тепла та енергії на 1 крок кожне.",
+  "Action: Spend 2 M€ to Add 1 data to ANY card.": "Дія: Заплатіть 2 M€, щоб додати 1 дані на БУДЬ-ЯКУ карту.",
+  "Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.": "Дія: Витратьте 1 аеростат з будь-якої карти, щоб додати 1 венеріанський хабітат на цю карту.",
+  "Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.": "Ефект: Коли ви розміщуєте тайл НА МАРСІ, отримайте 1 додатковий ресурс простору. Якщо простір не має бонусу, отримайте 1 сталь.",
+  "Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.": "Ефект: При грі з тегом енергії, СТАНДАРТНИМ ПРОЕКТОМ ЕЛЕКТРОСТАНЦІЇ АБО ДІЄЮ ПРАВЛЯЧОЇ ПОЛІТИКИ КЕЛЬВІНІСТІВ, платіть на 3 M€ менше.",
+  "Action: Add 1 data to ANY card.": "Дія: Додайте 1 дані на БУДЬ-ЯКУ карту.",
+  "Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.": "Вимагає БУДЬ-ЯКІ 2 теги Марса в грі. 1 ПО за кожні 2 дані тут.",
+
+  "Effect: For every science or Mars tag you play (including these) add 1 data to this card.": "Ефект: За кожен тег науки або Марса, який ви граєте (включаючи ці), додайте 1 дані на цю карту.",
+  "Effect: After you play a card with a microbe tag, increase your M€ production 1 step.": "Ефект: Після того, як ви зіграєте карту з тегом мікробів, збільшіть виробництво M€ на 1 крок.",
+  "Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.": "Дія: Додайте 2 мікроби АБО 2 дані АБО 2 аеростати на БУДЬ-ЯКУ карту.",
+  "Action: Spend 3 energy to gain 1 TR.": "Дія: Витратьте 3 енергії, щоб отримати 1 РТ.",
+  "Action: Add 1 animal on this card": "Дія: Додайте 1 тварину на цю карту.",
+
+  "Power Plant:Pathfinders": "Електростанція",
+  "Effect: Cards with a city tag cost 2M€ less.": "Ефект: Карти з тегом міста коштують на 2 M€ менше.",
+  "Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.": "Ефект: СТАНДАРТНИЙ ПРОЕКТ МІСТА коштує на 2 M€ менше. МОЖНА ВИКОРИСТОВУВАТИ СТАЛЬ, ніби ви граєте карту будівництва.",
+  "Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.": "Ефект: Використання СТАНДАРТНОЇ ДІЇ ЛІСУ коштує на 1 рослину менше.",
+  "Effect: Whenever you play a card with a Jovian tag, including this, draw a card.": "Ефект: Кожного разу, коли ви граєте карту з тегом Юпітера, включаючи цю, витягніть карту.",
+  "Erhöhe deine M€-Produktion um 1 Schritt.": "Збільшіть виробництво M€ на 1 крок.",
+  "Effect: When you play a Venus or Mars tag, pay 2 M€ less.": "Ефект: Коли ви граєте тег Венери або Марса, платіть на 2 M€ менше.",
+  "(Raise your TR 2 steps.)": "(Підвищте РТ на 2 кроки.)",
+  "Effect: When you play a Mars tag, add 1 specialized robot on this card.": "Ефект: Коли ви граєте тег Марса, додайте 1 спеціалізованого робота на цю карту.",
+  "Action: Spend 2 M€ to place 1 data on any card.": "Дія: Заплатіть 2 M€, щоб розмістити 1 дані на будь-якій карті.",
+  "Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.": "Ефект: При грі карти ви можете видаляти дані з цієї карти, щоб змінювати глобальну вимогу карти на 1 крок за кожні видалені дані.",
+  "Action: Add 1 floater to ANY Venus card": "Дія: Додайте 1 аеростат до БУДЬ-ЯКОЇ карти Венери.",
+  "Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.": "Вимагає 2 тайли океану. Втратьте 4 рослини. Розмістіть цей тайл на НЕЗАРЕЗЕРВОВАНОМУ ПРОСТОРІ, ЩО ПРИЛЯГАЄ ПРИНАЙМНІ ДО 2 ОКЕАНІВ. Підвищте рівень кисню на 1 крок. Отримайте 1 РТ.",
+  "Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.": "Ефект: Водно-болотні угіддя вважаються тайлом лісу і тайлом океану, але їх не можна перекрити, і вони не є одним з 9 океанів, необхідних для завершення гри."
 }

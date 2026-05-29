@@ -40,5 +40,58 @@
 
   "Space Hotels": "Космічні Готелі",
 
-  "Lava Tube Settlement": "Поселення у Лавовій Трубі"
+  "Lava Tube Settlement": "Поселення у Лавовій Трубі",
+
+  "Colonial Envoys": "Колоніальні посланці",
+  "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Вимагає, щоб Єдність правила або щоб у вас було 2 делегати там. Розмістіть 1 делегата за кожну колонію. ВИ МОЖЕТЕ РОЗМІЩУВАТИ ЇХ У РІЗНИХ ПАРТІЯХ.",
+
+  "Colonial Representation": "Колоніальне представництво",
+  "Gain 3 M€ per colony you have.": "Отримайте 3 M€ за кожну колонію.",
+
+  "Envoys From Venus": "Посланці з Венери",
+  "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Вимагає 3 теги Венери. Розмістіть 2 делегатів в 1 партії.",
+
+  "Floating Refinery": "Аеростатний нафтопереробний завод",
+  "Action: Add 1 floater here.": "Дія: Додайте 1 аеростат сюди.",
+  "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Дія: Видаліть 2 аеростати з БУДЬ-ЯКОЇ КАРТИ, щоб отримати 1 титан і 2 M€.",
+  "Add 1 floater here for each Venus tag you have.": "Додайте 1 аеростат сюди за кожен тег Венери, який у вас є.",
+
+  "Frontier Town": "Прикордонне місто",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Вимагає, щоб Марс Першим правив або щоб у вас було 2 делегати там. Зменшіть виробництво енергії на 1 крок. Розмістіть тайл міста. ОТРИМАЙТЕ НАДРУКОВАНИЙ БОНУС РОЗМІЩЕННЯ ЩЕ 2 РАЗИ.",
+
+  "Jovian Envoys": "Юпітерські посланці",
+  "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Вимагає 2 теги Юпітера. Розмістіть 2 делегатів в 1 партії.",
+  "Add a resource to 3 different cards that already have resources.": "Додайте ресурс до 3 різних карт, на яких вже є ресурси.",
+
+  "Microgravity Nutrition": "Харчування в мікрогравітації",
+  "Increase your M€ production 1 step for each colony you have.": "Збільшіть виробництво M€ на 1 крок за кожну колонію.",
+
+  "Soil Studies": "Дослідження ґрунту",
+  "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Вимагає температури -4°C або нижче. Отримайте 1 рослину за кожен тег Венери, тег рослини і колонію.",
+
+  "Special Permit": "Спеціальний дозвіл",
+  "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Вимагає, щоб Зелені правили або щоб у вас було 2 делегати там. Вкрадіть 4 рослини у будь-якого гравця.",
+
+  "Stratospheric Expedition": "Стратосферна експедиція",
+  "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Додайте 2 аеростати до БУДЬ-ЯКОЇ КАРТИ. Витягніть 2 карти Венери.",
+
+  "Unexpected Application": "Несподіване застосування",
+  "Discard 1 card to terraform Venus 1 step.": "Скиньте 1 карту, щоб підвищити рівень Венери на 1 крок.",
+
+  "Venus Allies": "Союзники Венери",
+  "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Підвищте рівень Венери на 2 кроки. Отримайте 4 M€ за кожну колонію.",
+
+  "Venus Orbital Survey": "Орбітальне дослідження Венери",
+  "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "Дія: Розкрийте 2 верхні карти, візьміть карти Венери безкоштовно. Будь-яку іншу карту або купіть, або скиньте.",
+
+  "Venus Shuttles": "Шатли Венери",
+  "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "Дія: Заплатіть 12 M€, щоб підвищити рівень Венери на 1 крок. Вартість ЗМЕНШУЄТЬСЯ НА 1 ЗА КОЖЕН ТЕГ ВЕНЕРИ, який у вас є.",
+  "Add 2 floaters to ANY VENUS CARD.": "Додайте 2 аеростати до БУДЬ-ЯКОЇ КАРТИ ВЕНЕРИ.",
+
+  "Venus Trade Hub": "Торговий хаб Венери",
+  "Effect: When you trade, gain 3 M€.": "Ефект: Коли ви торгуєте, отримайте 3 M€.",
+  "Requires 2 Venus tags.": "Вимагає 2 теги Венери.",
+
+  "WG Project": "Проект СУ",
+  "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Вимагає, щоб ви були Головою. ВИТЯГНІТЬ 3 КАРТИ ПРЕЛЮДІЇ І ЗІГРАЙТЕ 1 З НИХ, скиньте інші 2."
 }

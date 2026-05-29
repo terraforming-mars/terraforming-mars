@@ -312,5 +312,8 @@
   "Mine tile": "Тайл шахти",
   "Mine tiles": "Тайли шахти",
   "Road tile": "Тайл дороги",
-  "Road tiles": "Тайли дороги"
+  "Road tiles": "Тайли дороги",
+
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.": "Вимагає 3 теги Місяця. Збільшіть виробництво M€ на 1 крок за кожен тег Місяця ваших СУПЕРНИКІВ.",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "Вимагає, щоб у вас було 1 тайл шахти. Збільште виробництво M€ на 1 крок. Підвищте рейтинг місця для житла на 1 крок. Видаліть 1 з ваших тайлів шахти (це не впливає на рейтинг видобутку). Розмістіть цей спеціальний тайл там, незалежно від правил розміщення. Отримуйте бонуси за розміщення, як зазвичай. Цей тайл вважається як тайл для житла і шахти."
 }

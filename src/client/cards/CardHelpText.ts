@@ -58,4 +58,6 @@ That makes this card's interaction with Odyssey and Playwrights different from c
   [CardName.MARS_FRONTIER_ALLIANCE]: `This card allows the player to use a party's passive effects. Kelvinists and Scientists have _active_ effects. That is why they are not available as options.`,
 
   [CardName.RED_TOURISM_WAVE]: `Fan expansion note: This does not apply to The Moon.`,
+
+  [CardName.HYDROGEN_PROCESSING_PLANT]: `Oxygen cannot be reduced once it's been maxed out.`,
 } as const;

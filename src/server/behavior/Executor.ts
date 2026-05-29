@@ -70,7 +70,11 @@ export class Executor implements BehaviorExecutor {
         card.warnings.add('maxtemp');
       }
       if (g.oxygen !== undefined && game.getOxygenLevel() >= MAX_OXYGEN_LEVEL) {
-        card.warnings.add('maxoxygen');
+        if (g.oxygen < 0) {
+          card.warnings.add('maxoxygen-reduce');
+        } else {
+          card.warnings.add('maxoxygen');
+        }
       }
       if (g.venus !== undefined && game.getVenusScaleLevel() >= MAX_VENUS_SCALE) {
         card.warnings.add('maxvenus');

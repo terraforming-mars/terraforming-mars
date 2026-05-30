@@ -2,10 +2,13 @@ import {expect} from 'chai';
 import {Terra} from '../../../src/server/cards/community/Terra';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setTemperature} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Phase} from '../../../src/common/Phase';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {assertPlaceOcean} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Terra', () => {
   let terra: Terra;
@@ -34,6 +37,8 @@ describe('Terra', () => {
     terra.trade(player);
     runAllActions(game);
 
+    // Temperature applies directly, with no player input required.
+    expect(player.popWaitingFor()).is.undefined;
     expect(game.getTemperature()).eq(startTemp + 2);
     // Player does not get TR for the WGT-style increase.
     expect(player.terraformRating).eq(startTr);
@@ -49,9 +54,44 @@ describe('Terra', () => {
     terra.trade(player);
     runAllActions(game);
 
+    expect(player.popWaitingFor()).is.undefined;
     expect(game.getOxygenLevel()).eq(startOxygen + 1);
     expect(player.terraformRating).eq(startTr);
     expect(game.phase).eq(Phase.RESEARCH);
+  });
+
+  it('Trade at high track position places an ocean', () => {
+    terra.trackPosition = 5; // quantity 2 -> oceans
+    const startTr = player.terraformRating;
+    const startOceans = game.board.getOceanSpaces().length;
+
+    terra.trade(player);
+    runAllActions(game);
+
+    // The WGT ocean is a SelectSpace the player must resolve, not an automatic placement.
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    // Phase is Solar while the ocean is being placed so the player gets no TR for it.
+    expect(game.phase).eq(Phase.SOLAR);
+
+    assertPlaceOcean(player, selectSpace);
+    runAllActions(game);
+
+    expect(game.board.getOceanSpaces()).has.length(startOceans + 1);
+    expect(player.terraformRating).eq(startTr);
+    // Phase is restored after the WGT bonus resolves.
+    expect(game.phase).eq(Phase.RESEARCH);
+  });
+
+  it('Trade at high track position does nothing when oceans are maxed out', () => {
+    maxOutOceans(player);
+    terra.trackPosition = 6; // quantity 2 -> oceans
+    const startTr = player.terraformRating;
+
+    terra.trade(player);
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(player.terraformRating).eq(startTr);
   });
 
   it('Trade does nothing when the indicated parameter is at its maximum', () => {

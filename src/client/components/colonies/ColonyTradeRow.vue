@@ -44,22 +44,22 @@
         </div>
     </div>
     <div>
-        <div class="tile ocean-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
-        </div>
-    </div>
-    <div>
-        <div class="tile ocean-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
-        </div>
-    </div>
-    <div>
         <div class="tile oxygen-tile" style="transform: scale(0.8);">
             <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
     </div>
     <div>
         <div class="tile oxygen-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile ocean-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile ocean-tile" style="transform: scale(0.8);">
             <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
     </div>

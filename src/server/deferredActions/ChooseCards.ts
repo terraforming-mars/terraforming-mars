@@ -101,7 +101,13 @@ export function keep(player: IPlayer, cards: ReadonlyArray<IProjectCard>, discar
   case LogType.DREW:
   case LogType.BOUGHT:
     player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
-    LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+    if (logType === LogType.BOUGHT) {
+      if (cards.length > 0) {
+        player.game.log('You bought ${0}', (b) => b.cards(cards), {reservedFor: player});
+      }
+    } else {
+      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+    }
     break;
   }
 }

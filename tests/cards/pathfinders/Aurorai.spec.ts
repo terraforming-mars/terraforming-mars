@@ -9,6 +9,8 @@ import {AsteroidStandardProject} from '../../../src/server/cards/base/standardPr
 import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {CardName} from '../../../src/common/cards/CardName';
+import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
+import {Europa} from '../../../src/server/colonies/Europa';
 
 describe('Aurorai', () => {
   let card: Aurorai;
@@ -68,5 +70,16 @@ describe('Aurorai', () => {
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendable('auroraiData')).eq(1);
+  });
+
+  it('can use data for build colony standard project on Europa', () => {
+    [game, player] = testGame(1, {coloniesExtension: true});
+    player.playedCards.push(card);
+    game.colonies.push(new Europa());
+
+    player.megaCredits = 14;
+    card.resourceCount = 1;
+
+    expect(new BuildColonyStandardProject().canAct(player)).is.true;
   });
 });

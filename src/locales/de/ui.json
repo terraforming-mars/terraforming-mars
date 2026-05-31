@@ -453,7 +453,6 @@
   "supply chain": "Lieferketten-Ressource",
   "Trade for free (use ${0} action)": "Handle frei (nutze die ${0} Aktion)",
   "Trade with a colony tile": "Mit einer Koloniekarte handeln",
-  "(Enceladus - (Microbes)": "(Enceladus - (Mikroben)",
 
   "Increase temperature": "Erhöhe Temperatur",
   "Increase oxygen": "Erhöhe Sauerstoffgehalt",
@@ -512,6 +511,7 @@
   "Select where to build the first colony": "Bestimme den Ort der ersten Kolonie",
   "Select where to build the second colony": "Bestimme den Ort der zweiten Kolonie",
   "Pluto colony bonus. Select a card to discard": "Pluto Koloniebonus. Wähle eine Karte, die du abwerfen möchtest",
+  "Hygiea colony effect. Select a card to discard": "Hygiea Kolonie-Effekt. Wähle eine Karte aus, die du ablegen musst",
   "The id of this game is S{0}": "Die ID dieses Spiels ist S{0}",
   "Select ${0}": "Wähle ${0}",
   "Select 0": "Wähle 0",
@@ -1280,6 +1280,7 @@
   "[ toggle cards in hand ]": "[ Handkarten aktivieren/deaktivieren ]",
   "Note: the temperature is already at its goal.": "Hinweis: Die Temperatur hat ihr Maximum bereits erreicht.",
   "Note: the oxygen level is already at its goal.": "Hinweis: Der Sauerstoffgehalt hat sein Maximum bereits erreicht.",
+  "Note: the oxygen level cannot be reduced once it's already at its goal.": "Hinweis: Der Sauerstoffgehalt kann nicht mehr gesenkt werden, sobald er sein Maximum erreicht hat.",
   "Note: all oceans are already on the board.": "Hinweis: Alle Ozeane befinden sich bereits auf dem Spielbrett.",
   "Note: Venus scale is already at its goal.": "Hinweis: Die Venus-Skala hat ihr Maximum bereits erreicht.",
   "Note: Moon habitat rate is already at its goal.": "Hinweis: Die Habitatswertung hat ihr Maximum bereits erreicht.",

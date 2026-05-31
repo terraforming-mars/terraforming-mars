@@ -15,6 +15,7 @@ import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
+import {hasRevealedHiddenInformation} from '../game/hasRevealedHiddenInformation';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -69,6 +70,11 @@ export class PlayerInput extends Handler {
      */
     const lastSaveId = player.game.lastSaveId - 2;
     try {
+      const restoredGame = await ctx.gameLoader.getGameAt(player.game.id, lastSaveId);
+      if (hasRevealedHiddenInformation(player.game, restoredGame, player)) {
+        throw new InputError('Cannot undo after hidden information was revealed');
+      }
+
       const game = await ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
       if (game === undefined) {
         player.game.log('Unable to perform undo operation. Error retrieving game from database. Please try again.', () => {}, {reservedFor: player});
@@ -77,6 +83,9 @@ export class PlayerInput extends Handler {
         player = game.getPlayerById(player.id);
       }
     } catch (err) {
+      if (err instanceof InputError) {
+        throw err;
+      }
       console.error(err);
     }
     responses.writeJson(res, ctx, Server.getPlayerModel(player));

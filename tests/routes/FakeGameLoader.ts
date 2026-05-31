@@ -29,6 +29,13 @@ export class FakeGameLoader implements IGameLoader {
     }
     return Promise.resolve(undefined);
   }
+  async getGameAt(gameId: GameId, _saveId: number): Promise<IGame> {
+    const game = await this.getGame(gameId);
+    if (game === undefined) {
+      throw new Error('Game not found ' + gameId);
+    }
+    return game;
+  }
   restoreGameAt(_gameId: string, _saveId: number): Promise<Game> {
     throw new Error('Method not implemented.');
   }

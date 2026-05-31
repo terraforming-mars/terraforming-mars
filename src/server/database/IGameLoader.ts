@@ -21,6 +21,14 @@ export interface IGameLoader {
    */
   getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<IGame | undefined>;
   /**
+   * Loads a game at a specific saved version without changing cache or deleting
+   * later saves. Use this to validate whether a restore is allowed.
+   *
+   * @param {GameId} gameId the id of the game to retrieve
+   * @param {number} saveId the save id to load
+   */
+  getGameAt(gameId: GameId, saveId: number): Promise<IGame>;
+  /**
    * Reload a game at a specific version, deleting all versions ahead of it.
    *
    * @param {GameId} gameId the id of the game to retrieve

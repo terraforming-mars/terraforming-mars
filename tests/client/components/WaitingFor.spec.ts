@@ -62,4 +62,99 @@ describe('WaitingFor', () => {
     });
     expect(wrapper.text()).to.include('Not your turn');
   });
+
+  it('shows cancel action for nested active action prompts when undo is enabled', () => {
+    const wrapper = shallowMount(WaitingFor, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        stubs: {
+          'player-input-factory': {template: '<div class="stub-pif"></div>'},
+          'AppButton': {props: ['title'], template: '<button>{{ title }}</button>'},
+        },
+      },
+      props: {
+        playerView: {
+          ...playerView,
+          thisPlayer: {...thisPlayer, isActive: true},
+          game: {
+            ...playerView.game,
+            gameOptions: {undoOption: true},
+          },
+        } as PlayerViewModel,
+        waitingfor: {
+          type: 'card',
+          title: 'Choose a card',
+          buttonLabel: 'Choose',
+          cards: [],
+          min: 1,
+          max: 1,
+        },
+      },
+    });
+
+    expect(wrapper.text()).to.include('Cancel action');
+  });
+
+  it('does not show cancel action on the main action prompt', () => {
+    const wrapper = shallowMount(WaitingFor, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        stubs: {
+          'player-input-factory': {template: '<div class="stub-pif"></div>'},
+          'AppButton': {props: ['title'], template: '<button>{{ title }}</button>'},
+        },
+      },
+      props: {
+        playerView: {
+          ...playerView,
+          thisPlayer: {...thisPlayer, isActive: true},
+          game: {
+            ...playerView.game,
+            gameOptions: {undoOption: true},
+          },
+        } as PlayerViewModel,
+        waitingfor: {
+          type: 'or',
+          title: 'Take your next action',
+          buttonLabel: 'Take action',
+          options: [],
+        },
+      },
+    });
+
+    expect(wrapper.text()).to.not.include('Cancel action');
+  });
+
+  it('shows cancel action for nested active action option prompts when undo is enabled', () => {
+    const wrapper = shallowMount(WaitingFor, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        stubs: {
+          'player-input-factory': {template: '<div class="stub-pif"></div>'},
+          'AppButton': {props: ['title'], template: '<button>{{ title }}</button>'},
+        },
+      },
+      props: {
+        playerView: {
+          ...playerView,
+          thisPlayer: {...thisPlayer, isActive: true},
+          game: {
+            ...playerView.game,
+            gameOptions: {undoOption: true},
+          },
+        } as PlayerViewModel,
+        waitingfor: {
+          type: 'or',
+          title: 'Select one option',
+          buttonLabel: 'Confirm',
+          options: [],
+        },
+      },
+    });
+
+    expect(wrapper.text()).to.include('Cancel action');
+  });
 });

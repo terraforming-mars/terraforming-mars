@@ -228,6 +228,46 @@ describe('GameLoader', () => {
     expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
   });
 
+  it('getGameAt loads a saved version without restoring it', async () => {
+    game.generation = 12;
+    game.save();
+
+    game.generation = 13;
+    game.save();
+    await instance.add(game);
+
+    const savedGame = await instance.getGameAt(game.id, 1);
+    const currentGame = await instance.getGame(game.id);
+
+    expect(savedGame.generation).eq(12);
+    expect(currentGame!.generation).eq(13);
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+  });
+
+  it('restoreGameAt appends canceled log messages from the restored action', async () => {
+    game.gameLog.length = 0;
+    game.gameAge = 0;
+    game.log('Generation ${0}', (b) => b.forNewGeneration().number(1));
+    game.log('Kept action');
+    game.save();
+    const saves = database.games.get(game.id)!;
+    saves[1] = JSON.parse(JSON.stringify(saves[1]));
+
+    game.log('Canceled action');
+    game.save();
+    await instance.add(game);
+
+    const newGame = await instance.restoreGameAt(game.id, 1);
+
+    expect(newGame.gameLog.map((message) => message.message)).deep.eq([
+      'Generation ${0}',
+      'Kept action',
+      'Canceled action',
+    ]);
+    expect(newGame.gameLog[2].canceled).eq(true);
+    expect(newGame.gameAge).eq(3);
+  });
+
   it('saveGame', async () => {
     game.generation = 12;
     instance.saveGame(game);

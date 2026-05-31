@@ -6,6 +6,8 @@ import {IPlayer} from '../IPlayer';
 import {isPlayerId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {appendCanceledLogMessages} from '../logs/appendCanceledLogMessages';
+import {hasRevealedHiddenInformation} from '../game/hasRevealedHiddenInformation';
 
 /**
  * Reloads the game from the last action.
@@ -15,7 +17,7 @@ import {Response} from '../Response';
  * I think it's saved after every action when undo is on. So, there's that.
  * But I forget when the game is saved in solo. Probably all will be well.
  *
- * Eventually, this will not be callable once cards are drawn.
+ * It refuses to reload once the current action has revealed hidden information.
  */
 export class Reset extends Handler {
   public static readonly INSTANCE = new Reset();
@@ -42,9 +44,9 @@ export class Reset extends Handler {
       return;
     }
 
-    // While prototyping, this is only available for solo games
-    if (game.players.length > 1) {
-      throw new Error('Reset is only available for solo games at the moment.');
+    if (game.players.length > 1 && game.gameOptions.undoOption !== true) {
+      responses.badRequest(req, res, 'Cancel action requires undo to be enabled');
+      return;
     }
 
     let player: IPlayer | undefined;
@@ -63,10 +65,19 @@ export class Reset extends Handler {
     }
 
     try {
-      const game = await ctx.gameLoader.getGame(player.game.id, /** force reload */ true);
-      if (game !== undefined) {
-        const reloadedPlayer = game.getPlayerById(player.id);
-        game.inputsThisRound = 0;
+      const currentGame = player.game;
+      const reloadedGame = await ctx.gameLoader.getGame(currentGame.id, /** force reload */ true);
+      if (reloadedGame !== undefined) {
+        if (hasRevealedHiddenInformation(currentGame, reloadedGame, player)) {
+          await ctx.gameLoader.add(currentGame);
+          responses.badRequest(req, res, 'Cannot cancel action after hidden information was revealed');
+          return;
+        }
+
+        appendCanceledLogMessages(currentGame, reloadedGame);
+        const reloadedPlayer = reloadedGame.getPlayerById(player.id);
+        reloadedGame.inputsThisRound = 0;
+        reloadedGame.undoCount = Math.max(reloadedGame.undoCount, currentGame.undoCount) + 1;
         responses.writeJson(res, ctx, Server.getPlayerModel(reloadedPlayer));
         return;
       }

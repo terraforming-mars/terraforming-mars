@@ -14,6 +14,9 @@
       </label>
       <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
     </template>
+    <div v-if="showCancelAction()" class="wf-action-controls">
+      <AppButton @click="reset" size="small" title="Cancel action" />
+    </div>
     <player-input-factory :players="playerView.players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -45,6 +48,7 @@ import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 import {gameDocumentTitle} from '../utils/documentTitle';
+import AppButton from '@/client/components/common/AppButton.vue';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -75,6 +79,9 @@ export default defineComponent({
       suspend: false,
       savedPlayerView: undefined,
     };
+  },
+  components: {
+    AppButton,
   },
   methods: {
     getPlayerName(color: Color): string {
@@ -126,7 +133,7 @@ export default defineComponent({
 
           const showAlert = vueRoot(this).showAlert;
           if (response.status === statusCode.badRequest) {
-            const resp = await response.json() as AppErrorResponse;
+            const resp = await this.readAppError(response);
             let cb = () => {};
             if (resp.id === INVALID_RUN_ID) {
               cb = () => setTimeout(() => window.location.reload(), 100);
@@ -144,6 +151,16 @@ export default defineComponent({
         .finally(() => {
           root.isServerSideRequestInProgress = false;
         });
+    },
+    async readAppError(response: Response): Promise<AppErrorResponse> {
+      try {
+        return await response.clone().json() as AppErrorResponse;
+      } catch (_err) {
+        return {
+          id: undefined,
+          message: await response.text(),
+        };
+      }
     },
     updatePlayerView(playerView: PlayerViewModel | undefined) {
       if (this.suspend === false) {
@@ -237,6 +254,16 @@ export default defineComponent({
     },
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
+    },
+    showCancelAction(): boolean {
+      return this.playerView.game.phase === Phase.ACTION &&
+        this.playerView.game.gameOptions?.undoOption === true &&
+        this.waitingfor !== undefined &&
+        !this.isMainActionPrompt() &&
+        this.playerView.thisPlayer?.isActive === true;
+    },
+    isMainActionPrompt(): boolean {
+      return this.waitingfor?.type === 'or' && this.waitingfor.buttonLabel === 'Take action';
     },
     playerName(color: Color) {
       const player = this.playerView.players.find((p) => p.color === color);

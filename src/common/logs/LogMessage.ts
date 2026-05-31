@@ -5,6 +5,7 @@ import {PlayerId} from '../Types';
 
 export class LogMessage implements Message {
   public playerId?: PlayerId;
+  public canceled?: boolean;
   public timestamp = Date.now();
   public type?: LogMessageType;
   constructor(
@@ -27,4 +28,3 @@ export class LogMessage implements Message {
     }
   }
 }
-

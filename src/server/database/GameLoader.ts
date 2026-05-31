@@ -11,6 +11,7 @@ import {timeAsync} from '../utils/timer';
 import {durationToMilliseconds} from '../utils/durations';
 import {CacheConfig} from './CacheConfig';
 import {Clock} from '../../common/Timer';
+import {appendCanceledLogMessages} from '../logs/appendCanceledLogMessages';
 
 const metrics = {
   initialize: new prometheus.Gauge({
@@ -157,6 +158,11 @@ export class GameLoader implements IGameLoader {
     return undefined;
   }
 
+  public async getGameAt(gameId: GameId, saveId: number): Promise<IGame> {
+    const serializedGame = await Database.getInstance().getGameVersion(gameId, saveId);
+    return Game.deserialize(serializedGame);
+  }
+
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
@@ -170,6 +176,7 @@ export class GameLoader implements IGameLoader {
     }
     const serializedGame = await Database.getInstance().getGame(gameId);
     const game = Game.deserialize(serializedGame);
+    appendCanceledLogMessages(current, game);
     await this.add(game);
     game.undoCount++;
     return game;

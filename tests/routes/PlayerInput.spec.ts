@@ -56,6 +56,39 @@ describe('PlayerInput', () => {
     expect(model.game.gameAge).eq(undo.gameAge);
   });
 
+  it('blocks undo when the action revealed hidden information', async () => {
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
+    scaffolding.url = '/player/input?id=' + player.id;
+    const game = Game.newInstance('gameid-hidden-undo', [player], player, 'spectatorid');
+    game.lastSaveId = 4;
+    game.projectDeck.draw(game);
+    player.setWaitingFor(new OrOptions(new UndoActionOption()));
+
+    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
+    const undo = Game.newInstance('gameid-hidden-undo', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
+    let restoreCalled = false;
+
+    await scaffolding.ctx.gameLoader.add(game);
+    (scaffolding.ctx.gameLoader as any).getGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
+    scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => {
+      restoreCalled = true;
+      return Promise.resolve(undo);
+    };
+
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: 0, response: {type: 'option'}};
+      req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      req.emitter.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
+    const response = JSON.parse(res.content);
+    expect(res.statusCode).eq(400);
+    expect(response.message).eq('Cannot undo after hidden information was revealed');
+    expect(restoreCalled).eq(false);
+  });
+
   it('reverts to current game instance if undo fails', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;

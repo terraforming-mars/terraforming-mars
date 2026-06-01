@@ -5,10 +5,10 @@
 
   "Intragen Sanctuary Headquarters": "Штаб-квартира Святилища Інтраген",
   "Effect: When any player plays an animal tag (including this), add 1 animal on this card.": "Ефект: Коли будь-який гравець грає карту з позначкою Тварини (включаючи цю), додайте 1 тварину на цю карту.",
-  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Ви починаєте з 38 M€. Як вашу першу дію, розмістіть тайл місця проживання на Місяці і підвищте рейтинг місця проживання на 1 крок. 1 ПО за кожні 2 тварини на цій карті.",
+  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Ви починаєте з 38 M€. Як вашу першу дію, розмістіть тайл місця проживання на Місяці і підвищте рейтинг місця проживання на 1. 1 ПО за кожні 2 тварини на цій карті.",
 
   "Luna First Incorporated": "Луна Перша Інкорпорейтед",
-  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "Ефект: Коли ви підвищуєте будь-який рейтинг Місяця, збільшуйте ваше виробництво M€ на 1 крок за кожен крок.",
+  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "Ефект: Коли ви підвищуєте будь-який рейтинг Місяця, збільшуйте ваше виробництво M€ на 1 за кожен крок.",
   "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "Ефект: Коли будь-який гравець підвищує будь-який рейтинг Місяця, отримуйте 1 M€ за кожен крок.",
   "You start with 40 M€, 1 steel, and 1 titanium.": "Ви починаєте з 40 M€, 1 сталлю і 1 титаном.",
 
@@ -22,7 +22,7 @@
   "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "Ви починаєте з 42 M€. Як вашу першу дію, візьміть 3 карти. Візьміть 2 з них в руку, а решту відкиньте. 1 ПО за кожні 2 наукових ресурси тут.",
 
   "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "Дія: Розмістіть 1 делегата в будь-якій партії за кожні 5 карти з позначкою Місяця, які у вас є [максимум 3].",
-  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "Ефект: Коли ваш делегат стає головою, збільште ваш РТ на 1 крок.",
+  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "Ефект: Коли ваш делегат стає головою, збільште ваш РТ на 1.",
   "You start with 37 M€. As your first action, place 2 delegates in one party.": "Ви починаєте з 37 M€. Як вашу першу дію, розмістіть 2 делегати в одній партії.",
 
   "The Archaic Foundation Institute": "Інститут Архаїчних Фундацій",
@@ -31,7 +31,7 @@
   "You start with 55 M€.": "Ви починаєте з 55 M€.",
 
   "Luna Trade Federation": "Луна Торгова Федерація",
-  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "Ефект: Коли ви розміщуєте шахтну тайл на Місяці, підвищуйте ваше виробництво титану на 1 крок.",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "Ефект: Коли ви розміщуєте шахтну тайл на Місяці, підвищуйте ваше виробництво титану на 1.",
   "Effect: You may use titanium resources as 2M€ each.": "Ефект: Ви можете використовувати ресурси титану як 2 M€ кожен.",
   "You start with 15 M€ and 10 titanium.": "Ви починаєте з 15 M€ і 10 титану.",
 
@@ -43,5 +43,5 @@
   "The Grand Luna Capital Group": "Гранд Луна Капітал Груп",
   "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "Ефект: Коли ви розміщуєте тайл місця проживання, отримайте 2 M€ за кожен сусідній тайл місця проживання.",
   "1 VP for each habitat tile adjacent to your habitat tiles.": "1 ПО за кожен тайл місця проживання, що прилягає до ваших тайлів місця проживання.",
-  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Ви починаєте з 32 M€ і 1 титану. Як вашу першу дію, розмістіть тайл місця проживання на Місяці і підвищте рейтинг місця проживання на 1 крок."
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Ви починаєте з 32 M€ і 1 титану. Як вашу першу дію, розмістіть тайл місця проживання на Місяці і підвищте рейтинг місця проживання на 1."
 }

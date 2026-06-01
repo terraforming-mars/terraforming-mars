@@ -7,11 +7,11 @@
   "You start with 43 M€.": "Ви починаєте з 43 M€.",
 
   "Ambient": "Амбієнт",
-  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(Ефект: Коли ви граєте карту з міткою Венера (включаючи цю карту), збільшуйте ваше виробництво тепла на 1 крок.)",
-  "Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.": "Ефект: Коли ви граєте карту з міткою Венери (включаючи цю), збільшіть виробництво тепла на 1 крок.",
+  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(Ефект: Коли ви граєте карту з міткою Венера (включаючи цю карту), збільшуйте ваше виробництво тепла на 1.)",
+  "Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.": "Ефект: Коли ви граєте карту з міткою Венери (включаючи цю), збільшіть виробництво тепла на 1.",
   "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(Дія: Коли температура досягає максимуму, витратьте 8 тепла, отримайте 1 РТ. Ви можете повторити цю дію, як стандартний проект.)",
   "Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.": "Дія: Коли температура максимальна, витратьте 8 тепла, щоб отримати 1 РТ. Ви можете повторювати цю дію як стандартний проект.",
-  "You start with 38 M€. As your first action, raise the Venus scale 2 steps.": "Ви починаєте з 38 M€. Як ваша перша дія, підніміть шкалу Венера на 2 кроки.",
+  "You start with 38 M€. As your first action, raise the Venus scale 2 steps.": "Ви починаєте з 38 M€. Як ваша перша дія, підніміть шкалу Венера на 2.",
 
   "Aurorai": "Аврорай",
   "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(Ефект: Кожного разу, коли ви збільшуєте ваш рейтинг терраформування, додайте 1 дані за кожен крок до БУДЬ-ЯКОЇ карти.)",
@@ -59,8 +59,8 @@
   "You start with 40 M€. As your first action, draw 2 cards": "Ви починаєте з 40 M€. Як ваша перша дія, витягніть 2 карти.",
 
   "Martian Insurance Group": "Марсіанська Страхова Група",
-  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(Ефект: Кожного разу, коли ви граєте карту події, підвищуйте ваше виробництво M€ на 1 крок.)",
-  "Effect: Whenever you play an event card, raise your M€ production 1 step.": "Ефект: Кожного разу, коли ви граєте карту події, збільшіть виробництво M€ на 1 крок.",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(Ефект: Кожного разу, коли ви граєте карту події, підвищуйте ваше виробництво M€ на 1.)",
+  "Effect: Whenever you play an event card, raise your M€ production 1 step.": "Ефект: Кожного разу, коли ви граєте карту події, збільшіть виробництво M€ на 1.",
   "You start with 42 M€ and 1 M€ production.": "Ви починаєте з 42 M€ і виробництвом 1 M€.",
 
   "Mind Set Mars": "Марс майндсет",
@@ -78,8 +78,8 @@
   "You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.": "Ви починаєте з 42 M€. Як ваша перша дія, розмістіть Мобільну Базу Гагаріна в БУДЬ-ЯКІЙ області на Марсі. Збережіть бонус.",
 
   "Polaris": "Полярис",
-  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(Ефект: Коли будь-яка тайл океану розміщується НА МАРСІ, збільшуйте ваше виробництво M€ на 1 крок. Коли ви розміщуєте тайл океану, отримайте 4M€.)",
-  "Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.": "Ефект: Коли будь-який тайл океану розміщується НА МАРСІ, збільшіть виробництво M€ на 1 крок. Коли ви розміщуєте тайл океану, отримайте 4 M€.",
+  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(Ефект: Коли будь-яка тайл океану розміщується НА МАРСІ, збільшуйте ваше виробництво M€ на 1. Коли ви розміщуєте тайл океану, отримайте 4M€.)",
+  "Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.": "Ефект: Коли будь-який тайл океану розміщується НА МАРСІ, збільшіть виробництво M€ на 1. Коли ви розміщуєте тайл океану, отримайте 4 M€.",
   "You start with 32 M€. As your first action, place an ocean tile.": "Ви починаєте з 40 M€. Як ваша перша дія в грі, розмістіть тайл океану.",
 
   "Ringcom": "РінгКом",
@@ -90,8 +90,8 @@
   "Robin Haulings": "Робін Холінгс",
   "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(Ефект: Кожного разу, коли ви граєте карту з міткою Венера, додайте 1 аеростат до БУДЬ-ЯКОЇ карти.)",
   "Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.": "Ефект: Кожного разу, коли ви граєте карту з міткою Венери, додайте 1 аеростат до БУДЬ-ЯКОЇ карти.",
-  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(Дія: Видаліть 3 аеростати з цієї карти, щоб підняти Венера на 1 крок або підняти кисень на 1 крок.)",
-  "Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step": "Дія: Видаліть 3 аеростати з цієї карти, щоб підвищити рівень Венери на 1 крок або рівень кисню на 1 крок.",
+  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(Дія: Видаліть 3 аеростати з цієї карти, щоб підняти Венера на 1 або підняти кисень на 1.)",
+  "Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step": "Дія: Видаліть 3 аеростати з цієї карти, щоб підвищити рівень Венери на 1 або рівень кисню на 1.",
   "You start with 39 M€.": "Ви починаєте з 39 M€.",
 
   "SolBank": "Сонячний Банк",

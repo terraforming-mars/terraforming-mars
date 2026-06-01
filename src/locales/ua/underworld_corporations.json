@@ -2,7 +2,7 @@
   "AERON GENOMICS": "Aeron Генетика",
   "Aeron Genomics": "Aeron Генетика",
   "Effect: After you excavate an underground resource, put an animal on this card.": "Ефект: Після того, як ви розкопаєте підземний ресурс, покладіть тварину на цю карту.",
-  "Effect: When playing an animal card, you can remove animals from here to change the card's global requirement by 1 step for every 1 animal removed.": "Ефект: Граючи карту тварини, ви можете видалити тварин звідси, щоб змінити глобальну вимогу карти на 1 крок за кожну видалену тварину.",
+  "Effect: When playing an animal card, you can remove animals from here to change the card's global requirement by 1 step for every 1 animal removed.": "Ефект: Граючи карту тварини, ви можете видалити тварин звідси, щоб змінити глобальну вимогу карти на 1 за кожну видалену тварину.",
   "Action: Discard up to 2 of your claimed underground resource tokens to place the same number of animals on ANY card.": "Дія: Скиньте до 2 ваших отриманих токенів підземних ресурсів, щоб розмістити таку ж кількість тварин на БУДЬ-ЯКУ карту.",
   "Action: Spend 1 M€ to move an animal from here to another card.": "Дія: Витратити 1 M€, щоб перемістити тварину звідси на іншу карту.",
   "You start with 35 M€, 5 steel, and 2 animals on this card. 1 VP per 3 animals on this card.": "Ви починаєте з 35 M€, 5 сталі та 2 тварин на цій карті. 1 ПО за кожні 3 тварини на цій карті.",
@@ -16,8 +16,8 @@
   "ARBORIST COLLECTIVE": "Арбористичний Колектив",
   "Arborist Collective": "Арбористичний Колектив",
   "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "Ефект: Після того, як ви зіграєте карту події з базовою вартістю 14 або менше, покладіть активіста на цю карту.",
-  "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "Дія: Витратити 2 активістів тут, щоб збільшити ваше виробництво рослин на 1 крок і отримати 2 рослини.",
-  "You start with 40 M€, 2 plants and 2 plant production.": "Ви починаєте з 40 M€, 2 рослин і виробництвом рослин на 2 кроки.",
+  "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "Дія: Витратити 2 активістів тут, щоб збільшити ваше виробництво рослин на 1 і отримати 2 рослини.",
+  "You start with 40 M€, 2 plants and 2 plant production.": "Ви починаєте з 40 M€, 2 рослин і виробництвом рослин на 2.",
 
   "DEMETRON LABS": "Demetron Лабораторії",
   "Demetron Labs": "Demetron Лабораторії",
@@ -54,7 +54,7 @@
   "Keplertec": "Кеплертек",
   "Action: Spend 1 titanium to put a fighter resource on ANY card.": "Дія: Витратити 1 титан, щоб покласти ресурс бійця на БУДЬ-ЯКУ карту.",
   "Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "Ефект: Коли ви розміщуєте ресурс бійця на цій карті, витягніть 4 випадкові токени підземних ресурсів. Виберіть один з них і отримайте на ньому винагороду. Потім перемішайте токени назад у стопку.",
-  "You start with 33 M€, 3 titanium, and 1 titanium production.": "Ви починаєте з 33 M€, 3 титану і виробництвом титану на 1 крок.",
+  "You start with 33 M€, 3 titanium, and 1 titanium production.": "Ви починаєте з 33 M€, 3 титану і виробництвом титану на 1.",
 
   "KINGDOM OF TAURARO": "Королівство Тауаро",
   "Kingdom of Tauraro": "Королівство Тауаро",
@@ -66,5 +66,5 @@
   "// Effect: After you excavate an underground resource, gain 2 energy.": "Ефект: Після того, як ви розкопаєте підземний ресурс, отримайте 2 одиниці енергії.",
   "Effect: After you claim an underground resource, gain 2 energy.": "Ефект: Після того, як ви отримаєте підземний ресурс, отримайте 2 одиниці енергії.",
 
-  "Action: Spend 8 energy to raise oxygen or Venus 1 step.": "Дія: Витратити 8 одиниць енергії, щоб збільшити кисень або Венеру на 1 крок."
+  "Action: Spend 8 energy to raise oxygen or Venus 1 step.": "Дія: Витратити 8 одиниць енергії, щоб збільшити кисень або Венеру на 1."
 }

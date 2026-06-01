@@ -4,21 +4,21 @@
   "Gain 2 M€ per colony you own.": "Отримайте 2 M€ за кожну колонію, яку ви володієте.",
 
   "Cloud Tourism": "Хмарний туризм",
-  "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Збільште ваше виробництво M€ на 1 крок за кожну пару земних і венеріанських міток, які ви володієте. 1 VP за кожні 3-ій аеростат на цій карті.",
+  "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Збільште ваше виробництво M€ на 1 за кожну пару земних і венеріанських міток, які ви володієте. 1 VP за кожні 3-ій аеростат на цій карті.",
 
   "GHG Shipment": "Транспортування парникових газів",
-  "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Вимагає, щоб Кельвіністи були при владі або щоб у вас було 2 делегати там. Збільште ваше виробництво тепла на 1 крок. Отримайте 1 одиницю тепла за кожну аеростат, який у вас є.",
+  "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Вимагає, щоб Кельвіністи були при владі або щоб у вас було 2 делегати там. Збільште ваше виробництво тепла на 1. Отримайте 1 одиницю тепла за кожну аеростат, який у вас є.",
 
   "Ishtar Expedition": "Експедиція Іштар",
   "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Вимагає 10% Венери. Отримайте 3 титану і витягніть 2 картки Венери.",
 
   "L1 Trade Terminal": "Торговий термінал L1",
-  "Effect: When you trade, you may first increase that colony tile track 2 steps.": "Ефект: Коли ви торгуєте, ви можете спочатку збільште шлях колоніальної тайли на 2 кроки.",
+  "Effect: When you trade, you may first increase that colony tile track 2 steps.": "Ефект: Коли ви торгуєте, ви можете спочатку збільште шлях колоніальної тайли на 2.",
   "Add a resource to 3 different cards.": "Додайте ресурс до 3 різних карток.",
 
   "Red Appeasement": "Червона політика умовності",
   "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Вимагає, щоб Червоні були при владі або щоб у вас було 2 делегати там, І ЩО ЖОДЕН ІНШИЙ ГРАВЕЦЬ НЕ ПРОПУСТИВ.",
-  "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Збільште виробництво M€ на 2 кроки. Це вважається пропуском. Ви не отримуєте інших ходів у цьому поколінні.",
+  "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Збільште виробництво M€ на 2. Це вважається пропуском. Ви не отримуєте інших ходів у цьому поколінні.",
   "PASS": "ПРОПУСТИТИ",
 
   "Sponsoring Nation": "Фінансуюча Нація",
@@ -57,14 +57,14 @@
   "Add 1 floater here for each Venus tag you have.": "Додайте 1 аеростат сюди за кожну мітку Венери, який у вас є.",
 
   "Frontier Town": "Прикордонне місто",
-  "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Вимагає, щоб Марс Першим правив або щоб у вас було 2 делегати там. Зменшіть виробництво енергії на 1 крок. Розмістіть тайл міста. ОТРИМАЙТЕ НАДРУКОВАНИЙ БОНУС РОЗМІЩЕННЯ ЩЕ 2 РАЗИ.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Вимагає, щоб Марс Першим правив або щоб у вас було 2 делегати там. Зменшіть виробництво енергії на 1. Розмістіть тайл міста. ОТРИМАЙТЕ НАДРУКОВАНИЙ БОНУС РОЗМІЩЕННЯ ЩЕ 2 РАЗИ.",
 
   "Jovian Envoys": "Юпітерські посланці",
   "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Вимагає 2 мітки Юпітера. Розмістіть 2 делегатів в 1 партії.",
   "Add a resource to 3 different cards that already have resources.": "Додайте ресурс до 3 різних карт, на яких вже є ресурси.",
 
   "Microgravity Nutrition": "Харчування в мікрогравітації",
-  "Increase your M€ production 1 step for each colony you have.": "Збільшіть виробництво M€ на 1 крок за кожну колонію.",
+  "Increase your M€ production 1 step for each colony you have.": "Збільшіть виробництво M€ на 1 за кожну колонію.",
 
   "Soil Studies": "Дослідження ґрунту",
   "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Вимагає температури -4°C або нижче. Отримайте 1 рослину за кожну мітку Венери, мітку рослини і колонію.",
@@ -76,16 +76,16 @@
   "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Додайте 2 аеростати до БУДЬ-ЯКОЇ КАРТИ. Витягніть 2 карти Венери.",
 
   "Unexpected Application": "Несподіване застосування",
-  "Discard 1 card to terraform Venus 1 step.": "Скиньте 1 карту, щоб підвищити рівень Венери на 1 крок.",
+  "Discard 1 card to terraform Venus 1 step.": "Скиньте 1 карту, щоб підвищити рівень Венери на 1.",
 
   "Venus Allies": "Союзники Венери",
-  "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Підвищте рівень Венери на 2 кроки. Отримайте 4 M€ за кожну колонію.",
+  "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Підвищте рівень Венери на 2. Отримайте 4 M€ за кожну колонію.",
 
   "Venus Orbital Survey": "Орбітальне дослідження Венери",
   "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "Дія: Розкрийте 2 верхні карти, візьміть карти Венери безкоштовно. Будь-яку іншу карту або купіть, або скиньте.",
 
   "Venus Shuttles": "Шатли Венери",
-  "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "Дія: Заплатіть 12 M€, щоб підвищити рівень Венери на 1 крок. Вартість ЗМЕНШУЄТЬСЯ НА 1 ЗА КОЖЕН ТЕГ ВЕНЕРИ, який у вас є.",
+  "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "Дія: Заплатіть 12 M€, щоб підвищити рівень Венери на 1. Вартість ЗМЕНШУЄТЬСЯ НА 1 ЗА КОЖЕН ТЕГ ВЕНЕРИ, який у вас є.",
   "Add 2 floaters to ANY VENUS CARD.": "Додайте 2 аеростати до БУДЬ-ЯКОЇ КАРТИ ВЕНЕРИ.",
 
   "Venus Trade Hub": "Торговий хаб Венери",

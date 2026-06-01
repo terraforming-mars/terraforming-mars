@@ -30,7 +30,7 @@
   "Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Один раз за гру розмістіть X тайлів небезпеки, де X - це поточний номер покоління. Кожен супротивник втрачає 1 одиницю виробництва за своїм вибором, або 2 одиниці, якщо є 6 або більше тайлів небезпеки.",
 
   "Clarke": "Кларк",
-  "Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Один раз за гру збільште ваше виробництво рослин і тепла на 1 крок кожне. Отримайте рослини і тепло, рівні вашому виробництву +4.",
+  "Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Один раз за гру збільште ваше виробництво рослин і тепла на 1 кожне. Отримайте рослини і тепло, рівні вашому виробництву +4.",
 
   "Duncan": "Дункан",
   "Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Один раз за гру отримайте 7-X VP і 4X M€, де X - це поточний номер покоління.",
@@ -55,7 +55,7 @@
   "When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Коли ви виконуєте дію або граєте картку, яка збільшує ваш РТ У ЦЬОМУ ПОКОЛІННІ (максимум 10 разів), отримайте 4 M€.",
 
   "HAL 9000": "",
-  "Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Один раз за гру зменште кожне зі своїх виробництв на 1 крок, щоб отримати 4 одиниці цього ресурсу.",
+  "Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Один раз за гру зменште кожне зі своїх виробництв на 1, щоб отримати 4 одиниці цього ресурсу.",
 
   "Ingrid": "Інгрід",
   "When you take an action that places a tile on Mars THIS GENERATION, draw a card.": "Коли ви виконуєте дію, яка розміщує тайл на Марсі У ЦЬОМУ ПОКОЛІННІ, витягніть картку.",

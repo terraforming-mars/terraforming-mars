@@ -79,7 +79,7 @@
   "Domed Crater": "Купольний кратер",
   "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Рівень кисню повинен бути 7% або менше. Отримати 3 рослини. Розмістити тайл міста. Зменшити виробництво енергії на 1 і збільшити виробництво M€ на 3.",
 
-  "Noctis City": "Місто Ноктіс",
+  "Noctis City": "Ноктіс-Сіті",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Зменшити виробництво енергії на 1 і збільшити виробництво M€ на 3. Розмістити тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ, нехтуючи звичайними обмеженнями розміщення.",
 
   "Methane From Titan": "Метан з Титану",
@@ -88,7 +88,7 @@
   "Imported Hydrogen": "Імпортований водень",
   "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Отримати 3 рослини або додати 3 мікроби або 2 тварини на ІНШУ карту. Розмістити тайл океану.",
 
-  "Research Outpost": "Дослідницький передовий пункт",
+  "Research Outpost": "Дослідницький форпост",
   "Effect: When you play a card, you pay 1 M€ less for it.": "Ефект: Коли ви граєте карту, ви платите на 1 M€ менше.",
   "Place a city tile NEXT TO NO OTHER TILE.": "Розмістити тайл міста ПОБЛИЗУ ЖОДНОЇ ІНШОГО ТАЙЛУ.",
 
@@ -160,7 +160,7 @@
   "Food Factory": "Харчовий завод",
   "Decrease your plant production 1 step and increase your M€ production 4 steps.": "Зменшити виробництво рослин на 1 і збільшити виробництво M€ на 4.",
 
-  "Archaebacteria": "Архейні бактерії",
+  "ArchaeBacteria": "Архейні бактерії",
   "It must be -18 C or colder. Increase your plant production 1 step.": "Температура повинна бути -18 °C або нижче. Збільшити виробництво рослин на 1.",
 
   "Carbonate Processing": "Переробка карбонатів",

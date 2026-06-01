@@ -494,7 +494,7 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
       validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
       validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.logisticRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticRate');
       validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
     }
     // Don't spend heat with other types yet. It's probably not compatible. Check carefully.

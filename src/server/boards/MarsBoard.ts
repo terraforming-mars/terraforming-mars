@@ -71,7 +71,7 @@ export class MarsBoard extends Board {
    * The default condition is to return those oceans used to count toward the global parameter, so
    * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
    */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean, newHolland?: boolean}): ReadonlyArray<Space> {
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       if (!Board.isOceanSpace(space)) {
         return false;

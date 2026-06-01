@@ -22,7 +22,7 @@ import {GameOptions} from '../game/GameOptions';
 import {Board} from '../boards/Board';
 import {GlobalParameter} from '../../common/GlobalParameter';
 
-type MoonGlobalParameter = GlobalParameter.MOON_MINING_RATE | GlobalParameter.MOON_HABITAT_RATE | GlobalParameter.MOON_LOGISTICS_RATE;
+type MoonGlobalParameter = GlobalParameter.MOON_MINING_RATE | GlobalParameter.MOON_HABITAT_RATE | GlobalParameter.MOON_LOGISTIC_RATE;
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -137,7 +137,7 @@ export class MoonExpansion {
   private static RateData = {
     [GlobalParameter.MOON_MINING_RATE]: {field: 'miningRate', bonusAt6: Resource.TITANIUM},
     [GlobalParameter.MOON_HABITAT_RATE]: {field: 'habitatRate', bonusAt6: Resource.ENERGY},
-    [GlobalParameter.MOON_LOGISTICS_RATE]: {field: 'logisticRate', bonusAt6: Resource.STEEL},
+    [GlobalParameter.MOON_LOGISTIC_RATE]: {field: 'logisticRate', bonusAt6: Resource.STEEL},
   } as const;
 
   private static raiseRate(player: IPlayer, count: number, parameter: MoonGlobalParameter) {
@@ -177,7 +177,7 @@ export class MoonExpansion {
   }
 
   public static raiseLogisticRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, GlobalParameter.MOON_LOGISTICS_RATE);
+    this.raiseRate(player, count, GlobalParameter.MOON_LOGISTIC_RATE);
   }
 
   private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {

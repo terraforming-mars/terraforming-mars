@@ -50,8 +50,8 @@
         <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('habitat')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
-      <div class="global-numbers-logistics">
-        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('logistics')" :key="i">{{ lvl.strValue }}</div>
+      <div class="global-numbers-logistic">
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('logistic')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
       <div class="global-numbers-mining">
@@ -123,12 +123,12 @@ export default defineComponent({
       }
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
-    getValuesForParameter(targetParameter: 'logistics' | 'mining' | 'habitat'): Array<MoonParamLevel> {
+    getValuesForParameter(targetParameter: 'logistic' | 'mining' | 'habitat'): Array<MoonParamLevel> {
       let curValue: number;
 
       switch (targetParameter) {
-      case 'logistics':
-        curValue = this.model.logisticsRate;
+      case 'logistic':
+        curValue = this.model.logisticRate;
         break;
       case 'mining':
         curValue = this.model.miningRate;

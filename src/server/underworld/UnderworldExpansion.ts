@@ -626,7 +626,7 @@ export class UnderworldExpansion {
     [GlobalParameter.VENUS]: undefined,
     [GlobalParameter.MOON_HABITAT_RATE]: undefined,
     [GlobalParameter.MOON_MINING_RATE]: undefined,
-    [GlobalParameter.MOON_LOGISTICS_RATE]: undefined,
+    [GlobalParameter.MOON_LOGISTIC_RATE]: undefined,
   } as const;
 
   public static getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter) {

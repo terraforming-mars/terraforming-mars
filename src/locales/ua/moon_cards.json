@@ -1,6 +1,6 @@
 {
   "Basic Infrastructure": "Базова інфраструктура",
-  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Покладіть дорожню тайл на Місяць і підвищте рівень логістики на 1 крок. Отримайте 1 торговий флот.",
+  "Place a road tile on The Moon and raise the logistic rate 1 step. Gain 1 trade fleet.": "Покладіть дорожню тайл на Місяць і підвищте рівень логістики на 1 крок. Отримайте 1 торговий флот.",
 
   "Core Mine": "Основна шахта",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Покладіть шахтну тайл на Місяць і підвищте рівень видобутку руди на 1 крок. Збільште виробництво титану на 1 крок.",
@@ -12,7 +12,7 @@
   "Draw 2 cards with a Moon tag. Gain 6 steel.": "Витягніть 2 карти з позначкою Місяця. Отримайте 6 сталі.",
 
   "Mining Complex": "Гірничий комплекс",
-  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Покладіть шахтну тайл на Місяць і підвищте рівень видобутку руди на 1 крок. Покладіть дорожню тайл поруч з розміщеною шахтною тайлом і підвищте рівень логістики на 1 крок. Заплатіть 7 M€.",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "Покладіть шахтну тайл на Місяць і підвищте рівень видобутку руди на 1 крок. Покладіть дорожню тайл поруч з розміщеною шахтною тайлом і підвищте рівень логістики на 1 крок. Заплатіть 7 M€.",
 
   "AI Controlled Mine Network": "Мережа шахт, керована ШІ",
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Вимагає логістичний рейтинг 2 або вище. Підвищте логістичний рейтинг на 1 крок.",
@@ -32,7 +32,7 @@
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Зменште виробництво енергії на 1 крок і виробництво M€ на 1 крок. Збільште виробництво рослин на 2 кроки.",
 
   "Aristarchus Road Network": "Дорожня мережа Аристарха",
-  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Витратити 2 сталі. Збільште виробництво M€ на 2 кроки. Покладіть дорожню тайл на Місяць і підвищте рівень логістики на 1 крок.",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the logistic rate 1 step.": "Витратити 2 сталі. Збільште виробництво M€ на 2 кроки. Покладіть дорожню тайл на Місяць і підвищте рівень логістики на 1 крок.",
 
   "Colonist Shuttles": "Колоністські шатли",
   "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Витратити 1 титан. Підвищте рівень житла на 1 крок. Отримайте 2M€ за кожен тайл житла на Місяці.",
@@ -65,7 +65,7 @@
 
   "Darkside Smugglers' Union": "Союз контрабандистів на темній стороні",
   "Action: Perform a trade action.": "Дія: Виконайте торгову дію.",
-  "Raise the logistics rate 1 step.": "Підвищте рівень логістики на 1 крок.",
+  "raise the logistic rate 1 step.": "Підвищте рівень логістики на 1 крок.",
 
   "Deep Lunar Mining": "Глибокий місячний розробка",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Витратити 1 титан. Збільште виробництво титану на 2 кроки. Підвищте рівень видобутку руди на 1 крок.",
@@ -240,7 +240,7 @@
   "Action: Spend 1 steel to add 2 microbes here.": "Дія: Витратити 1 сталь, щоб додати 2 мікроби сюди.",
 
   "Sinus Irdium Road Network": "Дорожня мережа Sinus Irdium",
-  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Зменште виробництво енергії на 1 крок і збільште виробництво M€ на 3 кроки. Витратити 1 сталь. Розмістіть дорожню тайл на Місяці і підвищте рейтинг логістики на 1 крок.",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the logistic rate 1 step.": "Зменште виробництво енергії на 1 крок і збільште виробництво M€ на 3 кроки. Витратити 1 сталь. Розмістіть дорожню тайл на Місяці і підвищте рейтинг логістики на 1 крок.",
 
   "Small Duty Rovers": "Малі рейсові ровери",
   "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Витратити 1 титану. Підвищте рейтинг логістики на 1 крок. Отримайте 1 M€ за кожну житлову тайл, шахтну тайл і дорожню тайл на Місяці.",
@@ -279,7 +279,7 @@
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "Дія: Витратити X титану, щоб отримати 4X M€ [максимум 4 титану].",
 
   "Tycho Road Network": "Тихо-дорожня мережа",
-  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Витратити 1 сталь. Збільшити виробництво M€ на 1 крок. Розмістити дорожню тайл на Місяці і підвищити рейтинг логістики на 1 крок.",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Витратити 1 сталь. Збільшити виробництво M€ на 1 крок. Розмістити дорожню тайл на Місяці і підвищити рейтинг логістики на 1 крок.",
 
   "Underground Detonators": "Підземні детонатори",
   "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Отримайте 1 сталь і 1 титан. Підвищте рейтинг видобутку на 1 крок.",

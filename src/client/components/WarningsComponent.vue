@@ -20,7 +20,7 @@ const descriptions: Record<Warning, string> = {
   'maxvenus': 'Note: Venus scale is already at its goal.',
   'maxHabitatRate': 'Note: Moon habitat rate is already at its goal.',
   'maxMiningRate': 'Note: Moon mining rate is already at its goal.',
-  'maxLogisticsRate': 'Note: Moon logistics rate is already at its goal.',
+  'maxLogisticRate': 'Note: Moon logistic rate is already at its goal.',
   'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
   'removeOwnPlants': 'Warning: this will remove your own plants',
   'buildOnLuna': 'You will only be able to build the colony on Luna.',

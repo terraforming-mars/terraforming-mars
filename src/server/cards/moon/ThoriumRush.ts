@@ -30,7 +30,7 @@ export class ThoriumRush extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE})
             .moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE})
-            .moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
+            .moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },
     });

@@ -1,6 +1,6 @@
 {
   "Basic Infrastructure": "ベーシックインフラ",
-  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "月に道路タイルを配置し、物流レート+1段階. 交易艦隊1つ獲得.",
+  "Place a road tile on The Moon and raise the logistic rate 1 step. Gain 1 trade fleet.": "月に道路タイルを配置し、物流レート+1段階. 交易艦隊1つ獲得.",
 
   "Core Mine": "中核鉱山",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "月に鉱山タイルを配置し、採掘レート+1段階. チタン産出+1.",
@@ -12,7 +12,7 @@
   "Draw 2 cards with a Moon tag. Gain 6 steel.": "月タグカードを2枚入手. 6建材獲得.",
 
   "Mining Complex": "採掘コンプレックス",
-  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "月に鉱山タイルを配置し、道路タイルをそれに隣接して配置. 採掘レート+1段階. 物流レート+1段階. 7MC支払う.",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "月に鉱山タイルを配置し、道路タイルをそれに隣接して配置. 採掘レート+1段階. 物流レート+1段階. 7MC支払う.",
 
   "AI Controlled Mine Network": "AI制御鉱山ネットワーク",
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "条件：物流レート2以上. 物流レート+1段階.",
@@ -32,7 +32,7 @@
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "電力産出-1. MC産出-1. 植物産出+2.",
 
   "Aristarchus Road Network": "アリスタルコス・ロード",
-  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "2建材支払う. MC産出+2. 月に道路タイルを配置し、物流レート+1段階.",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the logistic rate 1 step.": "2建材支払う. MC産出+2. 月に道路タイルを配置し、物流レート+1段階.",
 
   "Colonist Shuttles": "ルナ・入植シャトル",
   "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "1チタン支払う. 居住地レート+1段階. 月の生息地タイル1枚毎に、2MC獲得.",
@@ -65,7 +65,7 @@
 
   "Darkside Smugglers' Union": "暗闇側の密輸組織",
   "Action: Perform a trade action.": "アクション：交易を1回行う.",
-  "Raise the logistics rate 1 step.": "物流レート+1段階.",
+  "raise the logistic rate 1 step.": "物流レート+1段階.",
 
   "Deep Lunar Mining": "ルナ・深層鉱脈",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "1チタン支払う. チタン産出+2, 採掘レート+1段階.",
@@ -240,7 +240,7 @@
   "Action: Spend 1 steel to add 2 microbes here.": "アクション：1建材支払い、このカード上に2微生物追加.",
 
   "Sinus Irdium Road Network": "虹の入江・ロード",
-  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "電力産出-1. MC産出+3. 月に道路タイルを配置し、物流レート+1段階.",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the logistic rate 1 step.": "電力産出-1. MC産出+3. 月に道路タイルを配置し、物流レート+1段階.",
 
   "Small Duty Rovers": "小型ローバー",
   "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "1チタン支払う. 物流レート+1段階. 生息地タイルと鉱山タイルと道路タイルの合計数分、1MC獲得.",
@@ -280,7 +280,7 @@
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "アクション：xチタン支払い、4xMC獲得(最大4チタン).",
 
   "Tycho Road Network": "ティコ・ロード",
-  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "1建材支払う. MC産出+1. 月に道路タイルを配置し、物流レート+1段階.",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "1建材支払う. MC産出+1. 月に道路タイルを配置し、物流レート+1段階.",
 
   "Underground Detonators": "地下起爆装置",
   "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "1建材、1チタン獲得. 採掘レート+1段階.",

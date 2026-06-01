@@ -261,16 +261,16 @@ export default defineComponent({
           return ['card-mining-rate'];
         }
       case CardRenderItemType.MOON_ROAD:
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTICS_RATE) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTIC_RATE) {
           return [this.sized('card-tile-lunar-road-rate', this.item.size)];
         } else {
           return [this.sized('card-tile-lunar-road', this.item.size)];
         }
-      case CardRenderItemType.MOON_LOGISTICS_RATE:
+      case CardRenderItemType.MOON_LOGISTIC_RATE:
         if (this.item.size !== undefined) {
-          return ['card-logistics-rate', `card-logistics-rate--${this.item.size}`];
+          return ['card-logistic-rate', `card-logistic-rate--${this.item.size}`];
         } else {
-          return ['card-logistics-rate'];
+          return ['card-logistic-rate'];
         }
       case CardRenderItemType.PLANETARY_TRACK:
         return ['card-planetary-track'];
@@ -330,7 +330,7 @@ export default defineComponent({
         AltSecondaryTag.OXYGEN,
         AltSecondaryTag.MOON_HABITAT_RATE,
         AltSecondaryTag.MOON_MINING_RATE,
-        AltSecondaryTag.MOON_LOGISTICS_RATE,
+        AltSecondaryTag.MOON_LOGISTIC_RATE,
       ];
       // Oxygen is handled specially separately.
       const secondaryTag = this.item.secondaryTag;

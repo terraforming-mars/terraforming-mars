@@ -568,7 +568,7 @@ export class Game implements IGame, Logger {
         const moonMaxed =
           moonData.habitatRate === constants.MAXIMUM_HABITAT_RATE &&
           moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
-          moonData.logisticRate === constants.MAXIMUM_LOGISTICS_RATE;
+          moonData.logisticRate === constants.MAXIMUM_LOGISTIC_RATE;
         globalParametersMaxed = globalParametersMaxed && moonMaxed;
       }
     });
@@ -880,7 +880,7 @@ export class Game implements IGame, Logger {
     MoonExpansion.ifMoon(this, (moonData) => {
       entry[GlobalParameter.MOON_HABITAT_RATE] = moonData.habitatRate;
       entry[GlobalParameter.MOON_MINING_RATE] = moonData.miningRate;
-      entry[GlobalParameter.MOON_LOGISTICS_RATE] = moonData.logisticRate;
+      entry[GlobalParameter.MOON_LOGISTIC_RATE] = moonData.logisticRate;
     });
   }
 
@@ -993,9 +993,9 @@ export class Game implements IGame, Logger {
         );
       }
 
-      if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
+      if (moonData.logisticRate < constants.MAXIMUM_LOGISTIC_RATE) {
         orOptions.options.push(
-          new SelectOption('Increase the Moon logistics rate', 'Increase').andThen(() => {
+          new SelectOption('Increase the Moon logistic rate', 'Increase').andThen(() => {
             MoonExpansion.raiseLogisticRate(player, 1);
             return undefined;
           }),
@@ -1801,6 +1801,15 @@ export class Game implements IGame, Logger {
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
     game.globalsPerGeneration = d.globalsPerGeneration;
+
+    // TODO(kberg): Remove this migration code by 2026-08-01
+    for (const generation of game.globalsPerGeneration) {
+      const asany = generation as any;
+      if (asany['moon-logistics']) {
+        generation['moon-logistic'] = asany['moon-logistics'];
+        delete asany['moon-logistics'];
+      }
+    }
     game.verminInEffect = d.verminInEffect;
     game.exploitationOfVenusInEffect = d.exploitationOfVenusInEffect;
     // Still in Draft or Research of generation 1

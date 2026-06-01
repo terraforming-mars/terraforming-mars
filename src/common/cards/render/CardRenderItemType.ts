@@ -48,7 +48,7 @@ export enum CardRenderItemType {
   MOON_HABITAT = 'moon-colony',
   MOON_HABITAT_RATE = 'moon-colony-rate',
   MOON_ROAD = 'moon-road',
-  MOON_LOGISTICS_RATE = 'moon-logistics-rate',
+  MOON_LOGISTIC_RATE = 'moon-logistic-rate',
   MOON_MINE = 'moon-mine',
   MOON_MINING_RATE = 'moon-mine-rate',
   PLANETARY_TRACK = 'plantary-track',

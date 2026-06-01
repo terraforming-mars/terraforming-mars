@@ -1,6 +1,6 @@
 {
   "Advanced Power Grid": "Покращена електрична мережа",
-  "Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.": "Збільште виробництво енергії на 2 кроки. Збільште виробництво M€ на 1 крок за кожним енергетичним тегом, які у вас є, включаючи цей.",
+  "Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.": "Збільште виробництво енергії на 2 кроки. Збільште виробництво M€ на 1 крок за кожною міткою енергії, які у вас є, включаючи цей.",
 
   "Agro-Drones": "Агро-дрони",
   "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(Дія: Витратити 1 сталь і 1 енергію, щоб отримати 3 рослини.)",
@@ -19,13 +19,13 @@
 
   "Breeding Farms": "Ферми розведення",
   "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(Дія: Витратити 1 рослину, щоб додати 1 тварину на БУДЬ-ЯКУ карту.)",
-  "Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.": "Потребує 1 наукового тега та 1 тега тварини. Підвищте температуру на 1 крок.",
+  "Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.": "Потребує 1 мітки науки та 1 мітки тварини. Підвищте температуру на 1 крок.",
 
   "Cassini Station": "Космічна станція Кассіні",
   "Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.": "Збільште виробництво енергії на 1 крок за кожною колонією в грі. Додайте 2 аеростати на БУДЬ-ЯКУ карту АБО додайте 3 дані на БУДЬ-ЯКУ карту.",
 
   "Ceres Spaceport": "Космічний порт Серес",
-  "Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.": "Збільште виробництво M€ на 2 кроки та виробництво титану на 1 крок за кожними 2 Юпітерськими тегами (включаючи ці). Намалюйте карту. Розмістіть тайл океану. Розмістіть тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
+  "Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.": "Збільште виробництво M€ на 2 кроки та виробництво титану на 1 крок за кожними 2 Юпітерськими мітками (включаючи ці). Намалюйте карту. Розмістіть тайл океану. Розмістіть тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
 
   "Charity Donation": "Благодійний внесок",
   "Reveal cards from the deck equal to the player count plus 1.": "Показати карти з колоди, рівні кількості гравців плюс 1.",
@@ -53,7 +53,7 @@
 
   "Cultivation of Venus": "Культивація Венери",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "(Дія: Витратити 3 рослини, щоб підвищити Венеру на 2%.))",
-  "1 VP for every 2 Venus tags you own.": "1 ПО за кожні 2 власні Венерські теги.",
+  "1 VP for every 2 Venus tags you own.": "1 ПО за кожні 2 власні Венерські мітки.",
 
   "Cyanobacteria": "Ціанобактерії",
   "Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.": "Підвищте рівень кисню на 1%. Додайте мікроба на БУДЬ-ЯКУ карту за кожен тайл океану.",
@@ -62,10 +62,10 @@
   "Add 5 data to ANY card.": "Додайте 5 дані на БУДЬ-ЯКУ карту.",
 
   "Declaration of Independence": "Декларація незалежності",
-  "Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.": "Вимагає, щоб у вас було принаймні 6 Марсівських тегів в грі. Розмістіть 2 делегати в будь-якій партії.",
+  "Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.": "Вимагає, щоб у вас було принаймні 6 Марсівських міток в грі. Розмістіть 2 делегати в будь-якій партії.",
 
   "Designed Organisms": "Розроблені організми",
-  "Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.": "Вимагає 5 наукових тегів. Збільште виробництво рослин на 2 кроки. Отримайте 3 рослини. Додайте 3 мікробів на БУДЬ-ЯКУ карту. Додайте 1 тварину на БУДЬ-ЯКУ карту.",
+  "Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.": "Вимагає 5 міток науки. Збільште виробництво рослин на 2 кроки. Отримайте 3 рослини. Додайте 3 мікробів на БУДЬ-ЯКУ карту. Додайте 1 тварину на БУДЬ-ЯКУ карту.",
 
   "Dust Storm": "Пилова буря",
   "Every player loses all energy. Raise the temperature 2 steps.": "Кожен гравець втрачає всю енергію. Підвищте температуру на 4°C.",
@@ -85,16 +85,16 @@
   "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Підвищте найнижчий незавершений трек впливу на планету на 3 кроки. При рівній кількості, підвищте всі найнижчі треки на 2 кроки. Збільште виробництво M€ на 1 крок",
 
   "Expedition to the Surface - Venus": "Експедиція на поверхню - Венера",
-  "Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.": "Намалюйте 2 карти. Підвищте Венеру на 2%. Отримайте 1 M€ за кожен ваш Венерський тег, включаючи цей.",
+  "Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.": "Намалюйте 2 карти. Підвищте Венеру на 2%. Отримайте 1 M€ за кожну ваш Венерську мітку, включаючи цей.",
 
   "Flat Mars Theory": "Теорія плоского Марсу",
   "GENERATION": "ПОКОЛІННЯ",
-  "Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.": "Потребує максимум 1 наукового тега. Збільште виробництво M€ на 1 крок за кожне зігране покоління до цього моменту.",
+  "Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.": "Потребує максимум 1 мітки науки. Збільште виробництво M€ на 1 крок за кожне зігране покоління до цього моменту.",
 
   "Floater-Urbanism": "Плаваючий урбанізм",
   "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(Дія: Витратити 1 аеростат з будь-якої карти, щоб додати 1 венерійське селище на цю карту.)",
   "1 VP for every Venusian habitat on this card.": "(1 ПО за кожне венерійське селище на цій карті.)",
-  "Requires 4 Venus tags.": "Потребує 4 венерійських тегів.",
+  "Requires 4 Venus tags.": "Потребує 4 венерійських міток.",
   "Geological Expedition": "Геологічна експедиція",
   "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(Ефект: Коли ви розміщуєте тайл НА МАРСІ, отримайте 1 додатковий ресурс на місці. Якщо на місці немає бонусу, отримайте 1 сталь.)",
 
@@ -112,38 +112,38 @@
   "Increase your M€ production 1 step for every offworld city tile.": "Збільште виробництво M€ на 1 крок за кожен тайл міста поза Землею.",
 
   "Kickstarter": "Кікстартер",
-  "Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.": "Виберіть планетний тег. Ця карта вважається маючи 1 такий тег. Підвищте відповідну планетну доріжку на 3 кроки в загальному.",
+  "Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.": "Виберіть планетну мітку. Ця карта вважається маючи 1 таку мітку. Підвищте відповідну планетну доріжку на 3 кроки в загальному.",
 
   "Last Resort Ingenuity": "Останній варіант винахідливості",
-  "The next card you play this generation can be paid for with steel or titanium despite its tags.": "(Наступну карту, яку ви граєте цього покоління, можна оплатити сталлю або титаном, незважаючи на її теги.)",
+  "The next card you play this generation can be paid for with steel or titanium despite its tags.": "(Наступну карту, яку ви граєте цього покоління, можна оплатити сталлю або титаном, незважаючи на її мітки.)",
 
   "Lobby Halls": "Приймальні зали",
-  "Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.": "Збільште виробництво M€ на 2 кроки. Розмістіть 1 делегата в будь-якій партії. Виберіть планетний тег. Ця карта вважається маючи 1 такий тег. Підвищте відповідну планетну доріжку на 1 крок.",
+  "Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.": "Збільште виробництво M€ на 2 кроки. Розмістіть 1 делегата в будь-якій партії. Виберіть планетну мітку. Ця карта вважається маючи 1 таку мітку. Підвищте відповідну планетну доріжку на 1 крок.",
 
   "Lunar Embassy": "Лунна посольство",
-  "Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.": "Збільште виробництво M€ на 3 кроки, а виробництво рослин на 1 крок за кожні 2 теги Землі (включаючи цей). Витягніть карту. Розмістіть тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
+  "Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.": "Збільште виробництво M€ на 3 кроки, а виробництво рослин на 1 крок за кожні 2 мітки Землі (включаючи цей). Витягніть карту. Розмістіть тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
 
   "Luxury Estate": "Розкішні помешкання",
   "Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.": "Рівень кисню повинен бути 7% або більше. Отримайте 1 титан за кожен тайл міста та тайл зелені насадження, які ви володієте.",
 
   "Martian Culture": "Марсіанська культура",
   "(Action: Add 1 data to ANY card.)": "(Дія: Додайте 1 дані на БУДЬ-ЯКУ карту.)",
-  "(Requires ANY 2 Mars tags in play.  1 VP for every 2 data here.)": "(Вимагає будь-які 2 теги Марсу в грі. 1 ПО за кожні 2 дані тут.)",
+  "(Requires ANY 2 Mars tags in play.  1 VP for every 2 data here.)": "(Вимагає будь-які 2 мітки Марсу в грі. 1 ПО за кожні 2 дані тут.)",
 
   "Martian Dust Processing Plant": "Завод з переробки марсіанського пилу",
   "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.": "Знизьте виробництво енергії на 1 крок і підвищте виробництво сталі на 2 кроки. Отримайте 1 РТ.",
 
   "Martian Monuments": "Марсіанські пам'ятники",
-  "Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)": "Вимагає, щоб ви володіли містом НА МАРСІ. Збільште виробництво M€ на 1 крок за кожен тег Марсу, який ви володієте (включаючи цей).",
+  "Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)": "Вимагає, щоб ви володіли містом НА МАРСІ. Збільште виробництво M€ на 1 крок за кожну мітку Марсу, який ви володієте (включаючи цей).",
 
   "Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.": "Розмістіть нейтральний куб гравця на незарезервованому місці. На цьому місці не можна розміщувати тайли в цій грі. Зберіть будь-який бонус на цьому місці, але не бонуси з сусідніх місць. Додайте 2 дані на БУДЬ-ЯКУ карту.",
 
   "Martian Repository": "Марсіанський репозиторій",
-  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(Ефект: За кожен науковий або марсіанський тег, який ви граєте (включаючи ці), додайте 1 дані на цю карту.)",
+  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(Ефект: За кожну науковий або марсіанську мітку, який ви граєте (включаючи ці), додайте 1 дані на цю карту.)",
   "Decrease your energy production 1 step. 1 VP for every 3 data here.": "Знизьте виробництво енергії на 1 крок. 1 ПО за кожні 3 дані тут.",
 
   "Microbiology Patents": "Патенти з мікробіології",
-  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(Ефект: Після того, як ви граєте карту з тегом мікроба, збільште виробництво M€ на 1 крок.)",
+  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(Ефект: Після того, як ви граєте карту з міткою мікроба, збільште виробництво M€ на 1 крок.)",
 
   "Museum of Early Colonisation": "Музей ранньої колонізації",
   "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Вимагає 1 океану, 1 міста та одного зеленого насадження на Марсі. Знизьте виробництво енергії на 1 крок. Підвищте виробництво сталі, титану та рослин на 1 крок. Отримайте 1 РТ.",
@@ -157,8 +157,8 @@
   "Increase your plant production 2 steps. Gain 1 plant.": "Збільшити виробництво рослин на 2 кроки. Отримати 1 рослину.",
 
   "Oumuamua Type Object Survey": "Дослідження об'єкта типу Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробний тег, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має тег космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
-  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Вимагає 1 тег космосу та 1 тег науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробну мітку, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має мітку космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
+  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Вимагає 1 мітку космосу та 1 мітку науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.",
 
   "Ozone Generators": "Озонові генератори",
   "(Action: Spend 3 energy to gain 1 TR.)": "(Дія: Витратити 3 одиниці енергії, щоб отримати 1 РТ.)",
@@ -166,12 +166,12 @@
 
   "Pollinators": "Запилювачі",
   "(Action: Add 1 animal on this card)": "(Дія: Додати 1 тварину на цю карту)",
-  "Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.": "Вимагає 3 теги рослин. Збільшити виробництво рослин на 1 крок і виробництво M€ на 2 кроки.",
+  "Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.": "Вимагає 3 мітки рослин. Збільшити виробництво рослин на 1 крок і виробництво M€ на 2 кроки.",
 
   "Increase your heat production 2 steps and your energy production 1 step.": "Збільшити виробництво тепла на 2 кроки і виробництво енергії на 1 крок.",
 
   "Prefabrication of Human Habitats": "Виготовлення житла для людей",
-  "(Effect: Cards with a city tag cost 2M€ less.)": "(Ефект: Карти з тегом міста коштують на 2M€ менше.)",
+  "(Effect: Cards with a city tag cost 2M€ less.)": "(Ефект: Карти з міткою міста коштують на 2M€ менше.)",
   "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(Ефект: CITY STANDARD PROJECT коштує на 2M€ менше. СТАЛЬ МОЖЕ БУТИ ВИКОРИСТАНА, якщо ви граєте карту будівлі.)",
   "Requires that you have steel production.": "Вимагає наявності виробництва сталі.",
 
@@ -180,10 +180,10 @@
   "NO": "НІ",
 
   "Public Sponsored Grant": "Грант від держави",
-  "Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.": "Вимагає, щоб вчені були у владі або у вас було 2 делегати там. Всі гравці втрачають 2M€. Виберіть тег (КРІМ МІСТА, ? АБО ПЛАНЕТАРНОГО ШЛЯХУ) і витягніть 2 карти з цим тегом.",
+  "Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.": "Вимагає, щоб вчені були у владі або у вас було 2 делегати там. Всі гравці втрачають 2M€. Виберіть мітку (КРІМ МІСТА, ? АБО ПЛАНЕТАРНОГО ШЛЯХУ) і витягніть 2 карти з цією міткою.",
 
   "Rare-Earth Elements": "Рідкісноземельні елементи",
-  "Increase your M€ production by 1 for every special tile you own on Mars.": "Збільшити виробництво M€ на 1 за кожну спеціальний тайл, яку ви володієте на Марсі.",
+  "Increase your M€ production by 1 for every special tile you own on Mars.": "Збільшити виробництво M€ на 1 за кожен спеціальний тайл, яку ви володієте на Марсі.",
 
   "Red City": "Червоне місто",
   "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОЇ ЗЕЛЕНІ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОЇ ЗЕЛЕНІ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цією тайлом.",
@@ -192,10 +192,10 @@
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Витягнути верхні 4 карти з відкинутого стеку. Виберіть 2 для збереження і відкиньте решту.)",
 
   "Rich Deposits": "Багаті залежності",
-  "Requires 2 science tags. Increase your steel production 3 steps.": "Вимагає 2 теги науки. Збільшити виробництво сталі на 3 кроки.",
+  "Requires 2 science tags. Increase your steel production 3 steps.": "Вимагає 2 мітки науки. Збільшити виробництво сталі на 3 кроки.",
 
   "Secret Labs": "Секретні лабораторії",
-  "Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.": "Вимагає 1 тег науки та 1 тег Юпітера. Розмістіть тайл океану. Додайте 2 мікроби до БУДЬ-ЯКОЇ карти. АБО Підвищити температуру на 1 крок. Отримати 3 рослини. АБО Підвищити рівень кисню на 1 крок. Додайте 2 аеростати до БУДЬ-ЯКОЇ карти.",
+  "Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.": "Вимагає 1 мітку науки та 1 мітку Юпітера. Розмістіть тайл океану. Додайте 2 мікроби до БУДЬ-ЯКОЇ карти. АБО Підвищити температуру на 1 крок. Отримати 3 рослини. АБО Підвищити рівень кисню на 1 крок. Додайте 2 аеростати до БУДЬ-ЯКОЇ карти.",
 
   "Small Comet": "Малий комета",
   "Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.": "Кожен гравець втрачає 2 рослини. Підвищити температуру на 1 крок. Підвищити кисень на 1 крок. Розмістіть океан на ПЛОЩІ, НЕ ЗАРЕЗЕРВОВАНІЙ ДЛЯ ОКЕАНУ. Отримати 1 титан.",
@@ -204,7 +204,7 @@
   "Increase your steel production 2 steps OR increase your titanium production 1 step.": "Збільшити виробництво сталі на 2 кроки АБО збільшити виробництво титану на 1 крок.",
 
   "Social Events": "Соціальні заходи",
-  "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Отримайте 1 РТ за кожні 2 теги Марсу, які у вас є (включаючи цей).",
+  "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Отримайте 1 РТ за кожні 2 мітки Марсу, які у вас є (включаючи цей).",
 
   "Soil Detoxification": "Детоксикація ґрунту",
   "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(Ефект: Використання СТАНДАРТНОЇ ДІЇ ЗЕЛЕНІ коштує на 1 рослину менше.)",
@@ -215,26 +215,26 @@
 
   "Solarpedia": "Сонячна енциклопедія",
   "(Action: Add 2 data to ANY card.)": "(Дія: Додати 2 дані до БУДЬ-ЯКОЇ карти.)",
-  "Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.": "Вимагає 1 тег Венери, Землі, Марса та Юпітера. Додайте 2 дані до БУДЬ-ЯКОЇ карти. 1 ПО за кожні 6 дані тут.",
+  "Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.": "Вимагає 1 мітку Венери, Землі, Марса та Юпітера. Додайте 2 дані до БУДЬ-ЯКОЇ карти. 1 ПО за кожні 6 дані тут.",
 
   "Space Debris Cleaning Operation": "Операція з очищення космічних сміттєвих об'єктів",
-  "Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.": "Вимагає будь-які 4 теги космосу в грі. Отримати 3 титану. Додайте 1 ресурс до БУДЬ-ЯКОЇ карти (крім карт, які використовують ресурси ТВАРИНИ або НАУКИ). Додайте 1 дані до БУДЬ-ЯКОЇ карти. Витягніть 1 карту.",
+  "Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.": "Вимагає будь-які 4 мітки космосу в грі. Отримати 3 титану. Додайте 1 ресурс до БУДЬ-ЯКОЇ карти (крім карт, які використовують ресурси ТВАРИНИ або НАУКИ). Додайте 1 дані до БУДЬ-ЯКОЇ карти. Витягніть 1 карту.",
 
   "Space Relay": "Космічний реле",
-  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(Ефект: Кожного разу, коли ви граєте карту з тегом Юпітера, включаючи цю, витягніть карту.)",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(Ефект: Кожного разу, коли ви граєте карту з міткою Юпітера, включаючи цю, витягніть карту.)",
   "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Збільшити виробництво M€ на 1 крок.)",
 
   "Specialized Settlement": "Спеціалізоване поселення",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.": "Зменшити виробництво енергії на 1 крок і збільшити виробництво M€ на 3 кроки. Розмістіть тайл міста на Марсі. Збільшити виробництво одного ресурсу на карті, отримане бонусом за розміщення.",
 
   "Terraforming Control Station": "Станція керування терраформуванням",
-  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(Ефект: Коли ви граєте карту з тегом Венери або Марса, платіть на 2 M€ менше.)",
+  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(Ефект: Коли ви граєте карту з міткою Венери або Марса, платіть на 2 M€ менше.)",
   "(Erhöhe deinen РТ um 2.)": "(Збільшити ваш РТ на 2.)",
 
   "Terraforming Robots": "Терраформуючі роботи",
-  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(Ефект: Коли ви граєте карту з тегом Марсу, додайте 1 спеціалізованого робота на цю карту.)",
+  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(Ефект: Коли ви граєте карту з міткою Марсу, додайте 1 спеціалізованого робота на цю карту.)",
   "1 VP for every specialized robot on this card.": "1 ПО за кожного спеціалізованого робота на цій карті.",
-  "Requires 4 science tags.": "Вимагає 4 теги науки.",
+  "Requires 4 science tags.": "Вимагає 4 мітки науки.",
 
   "Think Tank": "Думковий центр",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(Дія: Витратити 2 M€, щоб додати 1 дані на будь-яку карту.)",
@@ -243,7 +243,7 @@
 
   "Venera Base": "Венера База",
   "(Action: Add 1 floater to ANY Venus card)": "(Дія: Додати 1 аеростат на БУДЬ-ЯКУ карту Венери)",
-  "1 VP per 2 Venus tags you have.": "1 ПО за кожні 2 теги Венери, які у вас є.",
+  "1 VP per 2 Venus tags you have.": "1 ПО за кожні 2 мітки Венери, які у вас є.",
   "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Вимагає, щоб Унітарні були у владі або у вас було 2 делегати там. Збільшити виробництво M€ на 3 кроки і розмістити тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
 
   "Wetlands": "Флігель",
@@ -263,25 +263,25 @@
   "Action: Spend 2 M€ to Add 1 data to ANY card.": "Дія: Заплатіть 2 M€, щоб додати 1 дані на БУДЬ-ЯКУ карту.",
   "Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.": "Дія: Витратьте 1 аеростат з будь-якої карти, щоб додати 1 венеріанський хабітат на цю карту.",
   "Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.": "Ефект: Коли ви розміщуєте тайл НА МАРСІ, отримайте 1 додатковий ресурс простору. Якщо простір не має бонусу, отримайте 1 сталь.",
-  "Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.": "Ефект: При грі з тегом енергії, СТАНДАРТНИМ ПРОЕКТОМ ЕЛЕКТРОСТАНЦІЇ АБО ДІЄЮ ПРАВЛЯЧОЇ ПОЛІТИКИ КЕЛЬВІНІСТІВ, платіть на 3 M€ менше.",
+  "Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.": "Ефект: При грі з міткою енергії, СТАНДАРТНИМ ПРОЕКТОМ ЕЛЕКТРОСТАНЦІЇ АБО ДІЄЮ ПРАВЛЯЧОЇ ПОЛІТИКИ КЕЛЬВІНІСТІВ, платіть на 3 M€ менше.",
   "Action: Add 1 data to ANY card.": "Дія: Додайте 1 дані на БУДЬ-ЯКУ карту.",
-  "Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.": "Вимагає БУДЬ-ЯКІ 2 теги Марса в грі. 1 ПО за кожні 2 дані тут.",
+  "Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.": "Вимагає БУДЬ-ЯКІ 2 мітки Марса в грі. 1 ПО за кожні 2 дані тут.",
 
-  "Effect: For every science or Mars tag you play (including these) add 1 data to this card.": "Ефект: За кожен тег науки або Марса, який ви граєте (включаючи ці), додайте 1 дані на цю карту.",
-  "Effect: After you play a card with a microbe tag, increase your M€ production 1 step.": "Ефект: Після того, як ви зіграєте карту з тегом мікробів, збільшіть виробництво M€ на 1 крок.",
+  "Effect: For every science or Mars tag you play (including these) add 1 data to this card.": "Ефект: За кожну мітку науки або Марса, який ви граєте (включаючи ці), додайте 1 дані на цю карту.",
+  "Effect: After you play a card with a microbe tag, increase your M€ production 1 step.": "Ефект: Після того, як ви зіграєте карту з міткою мікробів, збільшіть виробництво M€ на 1 крок.",
   "Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.": "Дія: Додайте 2 мікроби АБО 2 дані АБО 2 аеростати на БУДЬ-ЯКУ карту.",
   "Action: Spend 3 energy to gain 1 TR.": "Дія: Витратьте 3 енергії, щоб отримати 1 РТ.",
   "Action: Add 1 animal on this card": "Дія: Додайте 1 тварину на цю карту.",
 
   "Power Plant:Pathfinders": "Електростанція",
-  "Effect: Cards with a city tag cost 2M€ less.": "Ефект: Карти з тегом міста коштують на 2 M€ менше.",
+  "Effect: Cards with a city tag cost 2M€ less.": "Ефект: Карти з міткою міста коштують на 2 M€ менше.",
   "Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.": "Ефект: СТАНДАРТНИЙ ПРОЕКТ МІСТА коштує на 2 M€ менше. МОЖНА ВИКОРИСТОВУВАТИ СТАЛЬ, ніби ви граєте карту будівництва.",
   "Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.": "Ефект: Використання СТАНДАРТНОЇ ДІЇ ЛІСУ коштує на 1 рослину менше.",
-  "Effect: Whenever you play a card with a Jovian tag, including this, draw a card.": "Ефект: Кожного разу, коли ви граєте карту з тегом Юпітера, включаючи цю, витягніть карту.",
+  "Effect: Whenever you play a card with a Jovian tag, including this, draw a card.": "Ефект: Кожного разу, коли ви граєте карту з міткою Юпітера, включаючи цю, витягніть карту.",
   "Erhöhe deine M€-Produktion um 1 Schritt.": "Збільшіть виробництво M€ на 1 крок.",
-  "Effect: When you play a Venus or Mars tag, pay 2 M€ less.": "Ефект: Коли ви граєте тег Венери або Марса, платіть на 2 M€ менше.",
+  "Effect: When you play a Venus or Mars tag, pay 2 M€ less.": "Ефект: Коли ви граєте мітку Венери або Марса, платіть на 2 M€ менше.",
   "(Raise your TR 2 steps.)": "(Підвищте РТ на 2 кроки.)",
-  "Effect: When you play a Mars tag, add 1 specialized robot on this card.": "Ефект: Коли ви граєте тег Марса, додайте 1 спеціалізованого робота на цю карту.",
+  "Effect: When you play a Mars tag, add 1 specialized robot on this card.": "Ефект: Коли ви граєте мітку Марса, додайте 1 спеціалізованого робота на цю карту.",
   "Action: Spend 2 M€ to place 1 data on any card.": "Дія: Заплатіть 2 M€, щоб розмістити 1 дані на будь-якій карті.",
   "Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.": "Ефект: При грі карти ви можете видаляти дані з цієї карти, щоб змінювати глобальну вимогу карти на 1 крок за кожні видалені дані.",
   "Action: Add 1 floater to ANY Venus card": "Дія: Додайте 1 аеростат до БУДЬ-ЯКОЇ карти Венери.",

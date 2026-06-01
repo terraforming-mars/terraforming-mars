@@ -22,7 +22,7 @@
   "DEMETRON LABS": "Demetron Лабораторії",
   "Demetron Labs": "Demetron Лабораторії",
   "// Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "Ефект: Після того, як ви визначите 1 або більше підземних ресурсів за одну дію, КРІМ ВИКОПУВАННЯ, покладіть 1 дані на БУДЬ-ЯКУ карту.",
-  "Effect: After you play a science tag, including this, put 2 data on this card.": "Ефект: Після того, як ви зіграєте тег науки, включаючи цю карту, покладіть 2 дані на цю карту.",
+  "Effect: After you play a science tag, including this, put 2 data on this card.": "Ефект: Після того, як ви зіграєте мітку науки, включаючи цю карту, покладіть 2 дані на цю карту.",
   "// Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без тайли. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
   "Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "Дія: Витратити 3 дані тут, щоб визначити 3 підземні ресурси. Отримайте 1 з них.",
   "You start with 45 M€ and 2 data on this card.": "Ви починаєте з 45 M€ і 2 дані на цій карті.",
@@ -34,7 +34,7 @@
 
   "HECATE SPEDITIONS": "Hecate Експедиції",
   "Hecate Speditions": "Hecate Експедиції",
-  "planetary tag": "планетний тег",
+  "planetary tag": "планетну мітку",
   "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "Ефект: Коли ви граєте карту з позначкою Земля, Марс, Венера, Місяць або Юпітер, включаючи цю, покладіть 1 ресурс ланцюга постачання на цю карту.",
   "(Effect: Spend 2 supply chain resources (min. 1) to trade.) (Action: Spend 5 supply chain resources to gain a trade fleet.)": "(Ефект: Витратити 2 ресурси ланцюга постачання (мін. 1) для торгівлі.) (Дія: Витратити 5 ресурсів ланцюга постачання, щоб отримати торговий флот.)",
   "Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.": "Ефект: Витратьте 2 ресурси ланцюга постачання для торгівлі. ЦЯ ВАРТІСТЬ НЕ МОЖЕ БУТИ ЗМЕНШЕНА ІНШИМИ ЕФЕКТАМИ.",
@@ -43,7 +43,7 @@
   "HENKEI GENETICS": "Henkei Генетика",
   "Henkei Genetics": "Henkei Генетика",
   "Action: Pay 1 corruption to place 3 microbes on each card, up 2 to cards.": "Дія: Заплатіть 1 корупцію, щоб розмістити 3 мікроби на кожній карті, до 2 карт.",
-  "You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards. 1 VP per 3 microbes on this card.": "Ви починаєте з 47 M€ і 1 корупцією. Як вашу першу дію, витягніть 2 карти з тегом мікробів. 1 ПО за кожні 3 мікроби на цій карті.",
+  "You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards. 1 VP per 3 microbes on this card.": "Ви починаєте з 47 M€ і 1 корупцією. Як вашу першу дію, витягніть 2 карти з міткою мікробів. 1 ПО за кожні 3 мікроби на цій карті.",
 
   "JENSON-BOYLE & CO": "ДЖЕНСОН-БОЙЛ І КО",
   "Jenson-Boyle & Co": "Дженсон-Бойл і Ко",

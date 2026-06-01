@@ -15,7 +15,7 @@
   "Ganymede Trading Company": "Торгова компанія Ганімеда",
   "Gain 1 corruption, 3 titanium, and a trade fleet.": "Отримайте 1 корупцію, 3 титану та торговий флот.",
   "Geological Expertise": "Геологічна експертиза",
-  "// Identify 4 underground resources. Draw 2 cards with science tags.": "Визначте 4 підземні ресурси. Витягніть 2 карти з науковими мітками.",
+  "// Identify 4 underground resources. Draw 2 cards with science tags.": "Визначте 4 підземні ресурси. Витягніть 2 карти з мітками науки.",
   "Identify 4 underground resources. Claim one of them. Draw 2 cards with science tags.": "Розвідайте 4 підземні ресурси. Візьміть один із них. Візьміть 2 карти з мітками науки.",
   "Inherited Fortune": "Успадковане багатство",
   "Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "Отримайте 1 корупцію та 10 M€. Збільште виробництво M€ на 1 крок.",
@@ -31,5 +31,5 @@
   "Place a city tile. Then excavate the underground resource in its space.": "Розмістіть тайл міста. Потім розкопайте підземний ресурс у цьому просторі.",
 
   "Delta Project": "Дельта-Проект",
-  "Action: Spend any amount of energy to move that number of steps on the Delta Project track. Each step requires having all the matching tags in play up to that level; wild tags can replace missing ones. Gain resources next to your position.": "Дія: Витратіть будь-яку кількість енергії, щоб пересунутися на відповідну кількість кроків на треку Дельта-Проекту. Кожен крок вимагає наявності всіх відповідних тегів у грі до цього рівня; дикі теги можуть замінювати відсутні. Отримайте ресурси поруч зі своєю позицією."
+  "Action: Spend any amount of energy to move that number of steps on the Delta Project track. Each step requires having all the matching tags in play up to that level; wild tags can replace missing ones. Gain resources next to your position.": "Дія: Витратіть будь-яку кількість енергії, щоб пересунутися на відповідну кількість кроків на треку Дельта-Проекту. Кожен крок вимагає наявності всіх відповідних міток у грі до цього рівня; спецмітки можуть замінювати відсутні. Отримайте ресурси поруч зі своєю позицією."
 }

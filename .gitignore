@@ -13,6 +13,7 @@ dist/
 .nyc_output/
 .vscode/
 .idea/
+.zed/
 pid
 *.log
 .eslintcache

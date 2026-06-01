@@ -195,7 +195,7 @@
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Витратити 1 титану. Збільште виробництво тепла на 2 кроки і виробництво M€ на 3 кроки. Розмістіть житлову тайл НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і підвищте рейтинг місця для житла на 1 крок.",
 
   "Moon Tether": "Місячна зв'язка",
-  "Requires 6 space tags.": "Вимагає 6 космічних тегів.",
+  "Requires 6 space tags.": "Вимагає 6 космічних міток.",
 
   "Mooncrate Block Factory": "Фабрика блоків Mooncrate",
   "Lunar standard projects": "Стандартні проекти на Місяці",
@@ -209,25 +209,25 @@
   "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "Вимагає, щоб рейтинг місця для житла був 2 або вище. Підвищте рейтинг місця для житла на 1 крок.",
 
   "Off-World City Living": "Місце проживання в місті поза Землею",
-  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Збільште виробництво M€ на 1 крок за кожну тайл міста НЕ НА МАРСІ. Підвищте рейтинг місця для житла на 1 крок.",
+  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Збільште виробництво M€ на 1 крок за кожен тайл міста НЕ НА МАРСІ. Підвищте рейтинг місця для житла на 1 крок.",
 
   "Orbital Power Grid": "Орбітальна енергетична мережа",
-  "Increase your energy production 1 step per city tile NOT ON MARS.": "Збільште виробництво енергії на 1 крок за кожну тайл міста НЕ НА МАРСІ.",
+  "Increase your energy production 1 step per city tile NOT ON MARS.": "Збільште виробництво енергії на 1 крок за кожен тайл міста НЕ НА МАРСІ.",
 
   "Preliminary Darkside": "Попередній Darkside",
   "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Отримайте 3 титану або 4 сталі. Підвищте рейтинг видобутку на 1 крок.",
 
   "Pride of the Earth Arkship": "Гордість Землі Аркшіп",
   "Science 2 Space": "Наука 2 космос",
-  "Action: Add 1 science resource here per every 5 science tags you have.": "Дія: Додайте 1 науковий ресурс сюди за кожні 5 наукових тегів, які у вас є.",
-  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Вимагає 1 наукового і 2 космічних тегів. Витратити 2 титану. 1 ПО за кожен науковий ресурс тут.",
+  "Action: Add 1 science resource here per every 5 science tags you have.": "Дія: Додайте 1 науковий ресурс сюди за кожні 5 міток науки, які у вас є.",
+  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Вимагає 1 наукового і 2 космічних міток. Витратити 2 титану. 1 ПО за кожен науковий ресурс тут.",
 
   "Processor Factory": "Фабрика процесорів",
   "1 VP for every 3 data resources here.": "1 ПО за кожні 3 ресурси даних тут.",
   "Action: Spend 1 steel to add 2 data resources to ANY card.": "Дія: Витратити 1 сталь, щоб додати 2 ресурси даних до БУДЬ-ЯКОЇ карти.",
 
   "Revolting Colonists": "Бунтівні колоністи",
-  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Вимагає рейтинг місця для житла 4 або вище. Всі гравці платять 3 M€ за кожну тайл міста, яку вони володіють.",
+  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Вимагає рейтинг місця для житла 4 або вище. Всі гравці платять 3 M€ за кожен тайл міста, яку вони володіють.",
 
   "Road Piracy": "Дорожнє піратство",
   "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "Вимагає рейтинг логістики 3. Вкрадіть до 6 сталі або 4 титану у інших гравців. (Ресурси можуть бути вкрадені від більш як 1 суперника.)",
@@ -291,14 +291,14 @@
   "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Вимагає 1 житлову тайл на Місяці. Витратити 1 титану. Підвищити рейтинг місця для житла на 2 кроки.",
 
   "We Grow As One": "Ми ростемо як одне ціле",
-  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Вимагає, щоб Unity були у владі або щоб у вас було 2 делегати там. Підвищте всі колоніальні шляхи на 1 крок. Підвищте кожен колоніальний шлях на 1 крок, якщо у вас є колонія на цій колоніальній тайлі.",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Вимагає, щоб Unity були у владі або щоб у вас було 2 делегати там. Підвищте всі колоніальні шляхи на 1 крок. Підвищте кожну колоніальний шлях на 1 крок, якщо у вас є колонія на цій колоніальній тайлі.",
 
   "Martian Embassy": "Посольство Марсу",
-  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Підвищте Марсіанську планетарну доріжку на 1 крок за кожні 3 місячні теги, які у вас є, включаючи цей.",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Підвищте Марсіанську планетарну доріжку на 1 крок за кожні 3 мітки Місяця, які у вас є, включаючи цей.",
 
   "Luna Archives": "Архіви Місяця",
-  "Action: Add 1 science resource here for each Moon tag you have.": "Дія: Додайте 1 науковий ресурс сюди за кожен місячний тег, який у вас є.",
-  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "Ефект: При грі з місячним тегом, наукові ресурси тут можуть бути використані як платіж і коштують 1 M€ кожен.",
+  "Action: Add 1 science resource here for each Moon tag you have.": "Дія: Додайте 1 науковий ресурс сюди за кожну мітку Місяця, який у вас є.",
+  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "Ефект: При грі з міткою Місяця, наукові ресурси тут можуть бути використані як платіж і коштують 1 M€ кожен.",
 
   "Luna Ecumenopolis": "Екуменополіс Місяця",
   "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Витратити 2 титану. Розмістити 2 житлові тайли поруч з щонайменше 2 іншими житловими тайлами і підвищити рейтинг місця для житла на 2 кроки. Підвищте ваш РТ на 1 крок за кожні 2 кроки рейтингу місця для житла.",
@@ -314,6 +314,6 @@
   "Road tile": "Тайл дороги",
   "Road tiles": "Тайли дороги",
 
-  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.": "Вимагає 3 теги Місяця. Збільшіть виробництво M€ на 1 крок за кожен тег Місяця ваших СУПЕРНИКІВ.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.": "Вимагає 3 мітки Місяця. Збільшіть виробництво M€ на 1 крок за кожну мітку Місяця ваших СУПЕРНИКІВ.",
   "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "Вимагає, щоб у вас було 1 тайл шахти. Збільште виробництво M€ на 1 крок. Підвищте рейтинг місця для житла на 1 крок. Видаліть 1 з ваших тайлів шахти (це не впливає на рейтинг видобутку). Розмістіть цей спеціальний тайл там, незалежно від правил розміщення. Отримуйте бонуси за розміщення, як зазвичай. Цей тайл вважається як тайл для житла і шахти."
 }

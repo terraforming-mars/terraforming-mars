@@ -39,7 +39,7 @@
   "Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Один раз за гру відкиньте будь-яку кількість карток до двічі поточного номера покоління, щоб витягнути стільки ж карток.",
 
   "Faraday": "Фарадей",
-  "When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Коли ви отримуєте кратне 5 для будь-якого типу тегів В ГРІ, ви можете заплатити 3 M€, щоб витягнути картку з цим тегом. Дикі теги не враховуються для цього ефекту.",
+  "When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Коли ви отримуєте кратне 5 для будь-якого типу міток В ГРІ, ви можете заплатити 3 M€, щоб витягнути картку з цією міткою. Спецмітки не враховуються для цього ефекту.",
 
   "Floyd": "Флойд",
   "Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Один раз за гру зіграйте картку з руки на 13 + 2X M€ менше, де X - це поточний номер покоління.",
@@ -81,7 +81,7 @@
 
   "Neil": "Ніл",
   "Effect: Gain 1 M€ when any player plays a Moon tag.": "Ефект: Отримуйте 1 M€, коли будь-який гравець розігрує мітку Місяця.",
-  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Отримайте 1 M€, коли будь-який гравець грає картку з тегом Місяця. Один раз за гру збільште ваше виробництво M€ на величину НАЙНИЖЧОЇ ставки Місяця.",
+  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Отримайте 1 M€, коли будь-який гравець грає картку з міткою Місяця. Один раз за гру збільште ваше виробництво M€ на величину НАЙНИЖЧОЇ ставки Місяця.",
 
   "Oscar": "Оскар",
   "Once per game, replace the Chairman with one of your delegates.": "У вас +1 вплив. Один раз за гру замініть Голову одним зі своїх делегатів.",
@@ -93,22 +93,22 @@
   "Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Один раз за гру додайте 2 аеростати до кожної з ваших карток, які збирають аеростати, а потім додайте 2 аеростати до БУДЬ-ЯКОЇ картки. Отримайте 1 M€ за кожні 2 аеростати, доданих таким чином.",
 
   "Rogers": "Роджерс",
-  "Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Ігноруйте глобальні вимоги для ваших карток Венери В ЦЬОМУ ПОКОЛІННІ. Коли ви граєте картку з тегом Венери В ЦЬОМУ ПОКОЛІННІ, ви платите на 3 M€ менше за неї.",
+  "Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Ігноруйте глобальні вимоги для ваших карток Венери В ЦЬОМУ ПОКОЛІННІ. Коли ви граєте картку з міткою Венери В ЦЬОМУ ПОКОЛІННІ, ви платите на 3 M€ менше за неї.",
 
   "Ryu": "Рю",
   "Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Один раз за гру обмінюйте до X+2 одиниць виробництва між двома ресурсами, де X - це поточний номер покоління.",
 
   "Shara": "Шара",
-  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag's planetary influence track.": "Один раз за гру оберіть тег планети. Ця карта вважається, що ви відразу зіграли 2 таких теги. Потім отримайте M€, рівне впливу планети цього тегу.",
+  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tag's planetary influence track.": "Один раз за гру оберіть мітку планети. Ця карта вважається, що ви відразу зіграли 2 таких мітки. Потім отримайте M€, рівне впливу планети цьої мітки.",
 
   "Stefan": "Штефан",
   "Once per game, sell any number of cards from your hand for 3 M€ each.": "Один раз за гру продайте будь-яку кількість карток з руки за 3 M€ кожну.",
 
   "Tate": "Тейт",
-  "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Один раз за гру назвіть тег. Розкрийте карти з колоди, поки не знайдете 5 карток з цим тегом. КУПІТЬ до 2 карток і відкиньте решту.",
+  "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Один раз за гру назвіть мітку. Розкрийте карти з колоди, поки не знайдете 5 карток з цією міткою. КУПІТЬ до 2 карток і відкиньте решту.",
 
   "Ulrich": "Ульріх",
-  "Once per game, gain 4 M€ for each ocean placed. If all oceans are already placed, gain only 15 M€.": "Один раз за гру отримайте 4 M€ за кожен розміщений океан. Якщо всі океани вже розміщені, отримайте лише 15 M€.",
+  "Once per game, gain 4 M€ for each ocean placed. If all oceans are already placed, gain only 15 M€.": "Один раз за гру отримайте 4 M€ за кожну розміщений океан. Якщо всі океани вже розміщені, отримайте лише 15 M€.",
 
   "Van Allen": "Ван Аллен",
   "Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "Ефект: ДОСЯГНЕННЯ ЗАВЖДИ КОШТУЮТЬ ДЛЯ ВАС 0 M€.",
@@ -118,11 +118,11 @@
   "Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Один раз за гру додайте наступні ресурси до ваших карток: 2 тварини, 2 мікроби, 2 аеростати, 2 дикі.",
 
   "Xavier": "Ксав'єр",
-  "Once per game, gain 2 wild tags for THIS GENERATION.": "Один раз за гру отримайте 2 дикі теги для ЦЬОГО ПОКОЛІННЯ.",
+  "Once per game, gain 2 wild tags for THIS GENERATION.": "Один раз за гру отримайте 2 спецмітки для ЦЬОГО ПОКОЛІННЯ.",
   "Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "Ефект: ПІСЛЯ того, як ця дія була використана, коли граєте картку з вимогою, ви платите на 1 M€ менше за неї.",
 
   "Xu": "Сю",
-  "Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "Один раз за гру отримайте 2 M€ за кожен тег Венери в грі. Отримайте додатково 8 M€, якщо у вас є найбільше тегів Венери в грі.",
+  "Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "Один раз за гру отримайте 2 M€ за кожну мітку Венери в грі. Отримайте додатково 8 M€, якщо у вас є найбільше міток Венери в грі.",
 
   "Yvonne": "Івонна",
   "Once per game, gain all your colony bonuses twice.": "Один раз за гру отримайте всі бонуси вашої колонії вдвічі.",

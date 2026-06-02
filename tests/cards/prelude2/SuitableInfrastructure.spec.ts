@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {SuitableInfrastructure} from '../../../src/server/cards/prelude2/SuitableInfrastructure';
 import {testGame} from '../../TestGame';
-import {IPlayer} from '../../../src/server/IPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, simulateFinishingAction} from '../../TestingUtils';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -17,11 +16,6 @@ import {PlayerInput} from '../../../src/server/PlayerInput';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {cast} from '../../../src/common/utils/utils';
-
-function simulateFinishingAction(player: IPlayer) {
-  player.actionsTakenThisGame++;
-  player.actionsTakenThisRound++;
-}
 
 function assertIsTakeAction(input: PlayerInput | undefined) {
   const orOptions = cast(input, OrOptions);

@@ -7,6 +7,7 @@ import {ActionCard} from '../ActionCard';
 import {all, digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
+import {OncePerAction} from '@/server/utils/OncePerAction';
 
 export class MiningMarketInsider extends ActionCard implements IProjectCard {
   constructor() {
@@ -34,16 +35,12 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
     });
   }
 
-  // Behavior is similar to Suitable Infrastructure
-  // This doesn't need to be serialized. It ensures this is only evaluated once per action.
-  // When the server restarts, the player has to take an action anyway.
-  private lastAction = -1;
+  private readonly oncePerAction = new OncePerAction();
+
   public onIdentificationByAnyPlayer(cardOwner: IPlayer) {
-    const actionCount = cardOwner.game.getActionCount();
-    if (this.lastAction !== actionCount) {
+    this.oncePerAction.oncePerAction(cardOwner.game, () => {
       cardOwner.addResourceTo(this);
-      this.lastAction = actionCount;
-    }
+    });
   }
 }
 

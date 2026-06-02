@@ -6,6 +6,7 @@ import {CeoCard} from './CeoCard';
 import {Resource} from '../../../common/Resource';
 import {Phase} from '../../../common/Phase';
 import {ICeoCard} from './ICeoCard';
+import {OncePerAction} from '@/server/utils/OncePerAction';
 
 export class Greta extends CeoCard implements ICeoCard {
   constructor() {
@@ -33,25 +34,18 @@ export class Greta extends CeoCard implements ICeoCard {
     this.isDisabled = true;
     return undefined;
   }
-  // Behavior is similar to Suitable Infrastructure
-  // This doesn't need to be serialized. It ensures this is only evaluated once per action.
-  // When the server restarts, the player has to take an action anyway.
-  private lastAction = -1;
+
+  private readonly oncePerAction = new OncePerAction();
 
   public onIncreaseTerraformRatingByAnyPlayer(cardOwner: IPlayer, player: IPlayer) {
-    const actionCount = cardOwner.game.getActionCount();
-    if (this.lastAction === actionCount) {
-      return;
-    }
-    this.lastAction = actionCount;
-
-    const game = player.game;
-    if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
-      if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.stock.add(Resource.MEGACREDITS, 4, {log: true, from: {card: this}});
-        this.data.effectTriggerCount++;
+    this.oncePerAction.oncePerAction(player.game, () => {
+      if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
+        if (player === cardOwner && player.game.phase === Phase.ACTION) {
+          player.stock.add(Resource.MEGACREDITS, 4, {log: true, from: {card: this}});
+          this.data.effectTriggerCount++;
+        }
       }
-    }
-    return undefined;
+      return undefined;
+    });
   }
 }

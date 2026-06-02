@@ -251,3 +251,8 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
   f(cast(waitingFor, klass));
   cb?.();
 }
+
+export function simulateFinishingAction(player: IPlayer) {
+  player.actionsTakenThisGame++;
+  player.actionsTakenThisRound++;
+}

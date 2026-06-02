@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions, simulateFinishingAction} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -8,12 +8,6 @@ import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {Game} from '../../../src/server/Game';
 import {cast} from '../../../src/common/utils/utils';
-import {IPlayer} from '../../../src/server/IPlayer';
-
-function simulateFinishingAction(player: IPlayer) {
-  player.actionsTakenThisGame++;
-  player.actionsTakenThisRound++;
-}
 
 describe('Greta', () => {
   let card: Greta;

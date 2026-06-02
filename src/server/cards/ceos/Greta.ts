@@ -33,8 +33,18 @@ export class Greta extends CeoCard implements ICeoCard {
     this.isDisabled = true;
     return undefined;
   }
+  // Behavior is similar to Suitable Infrastructure
+  // This doesn't need to be serialized. It ensures this is only evaluated once per action.
+  // When the server restarts, the player has to take an action anyway.
+  private lastAction = -1;
 
   public onIncreaseTerraformRatingByAnyPlayer(cardOwner: IPlayer, player: IPlayer) {
+    const actionCount = cardOwner.game.getActionCount();
+    if (this.lastAction === actionCount) {
+      return;
+    }
+    this.lastAction = actionCount;
+
     const game = player.game;
     if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {

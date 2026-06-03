@@ -9,7 +9,7 @@
   "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Покладіть тайл житла на Місяць і підвищте рівень житла на 1. Збільште виробництво M€ на 1.",
 
   "Lunar Planning Office": "Офіс планування на Місяці",
-  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Витягніть 2 карти з позначкою Місяця. Отримайте 6 сталі.",
+  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Витягніть 2 карти з міткою Місяця. Отримайте 6 сталі.",
 
   "Mining Complex": "Гірничий комплекс",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "Покладіть шахтну тайл на Місяць і підвищте рівень видобутку руди на 1. Покладіть дорожню тайл поруч з розміщеною шахтною тайлом і підвищте рівень логістики на 1. Заплатіть 7 M€.",
@@ -43,7 +43,7 @@
   "Copernicus Tower": "Вежа Коперніка",
   "Requires you have 2 titanium production.": "Вимагає наявності 2 одиниць виробництва титану.",
   "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "Дія: Додайте 1 науковий ресурс сюди або витратіть 1 науковий ресурс сюди, щоб підвищити ваш TR на 1.",
-  "1 VP PER MOON TAG YOU HAVE.": "1 ПО ЗА КОЖНУ ПОЗНАЧКУ МІСЯЦЯ, ЯКУ ВИ МАЄТЕ.",
+  "1 VP PER MOON TAG YOU HAVE.": "1 ПО ЗА КОЖНУ МІТКУ МІСЯЦЯ, ЯКУ ВИ МАЄТЕ.",
 
   "Cosmic Radiation": "Космічне випромінювання",
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Вимагає рівня видобутку руди 4. Усі гравці платять 4M€ за кожну шахтну тайл, яку вони володіють.",
@@ -71,19 +71,19 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Витратити 1 титан. Збільште виробництво титану на 2. Підвищте рівень видобутку руди на 1.",
 
   "Earth Embassy": "Посольство Землі",
-  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "Ефект: Після того, як вона була зіграна, коли ви виконуєте дію, ваші позначки Місяця враховуються як позначки Землі, але навпаки - ні.",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "Ефект: Після того, як вона була зіграна, коли ви виконуєте дію, ваші мітки Місяця враховуються як мітки Землі, але навпаки - ні.",
 
   "Geodesic Tents": "Геодезичні намети",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Зменште виробництво енергії на 1 і збільште виробництво рослин на 1. Витратити 1 титан. Покладіть тайл житла на Місяць і підвищте рівень житла на 1.",
 
   "Grand Luna Academy": "Велика академія Луни",
-  "Draw 1 card per 2 Moon tags you have, including this.": "Витягніть 1 карту за кожні 2 позначки Місяця, які у вас є, включаючи цю.",
+  "Draw 1 card per 2 Moon tags you have, including this.": "Витягніть 1 карту за кожні 2 мітки Місяця, які у вас є, включаючи цю.",
 
   "HE3 Fusion Plant": "Фузійна електростанція HE3",
   "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Вимагає рівня видобутку руди 2 або вище. Збільште виробництво енергії на 1 за кожну шахтну тайл на Місяці.",
 
   "HE3 Lobbyists": "Лобісти HE3",
-  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Збільште виробництво M€ на 1 за кожну позначку Місяця, яку у вас є (включаючи цю).",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Збільште виробництво M€ на 1 за кожну мітку Місяця, яку у вас є (включаючи цю).",
 
   "HE3 Production Quotas": "Квоти на виробництво HE3",
   "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Вимагає, щоб Кельвіністи були у владі або щоб у вас було 2 делегати там, і 1 шахтна тайл на Місяці. Заплатіть 1 сталь за кожну шахтну тайл на Місяці, щоб отримати 4 одиниці тепла за кожну шахтну тайл на Місяці. Підвищте рівень видобутку руди на 1.",
@@ -117,7 +117,7 @@
   "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Підвищте рейтинг місця для житла на 1. Розмістіть колонію. Отримайте 1 торговий флот.",
 
   "L.T.F. Privileges": "Привілеї L.T.F.",
-  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "Ефект: Коли ви граєте карту з позначкою Місяця, ви не платите додатково сталі або титану за її гру.",
+  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "Ефект: Коли ви граєте карту з міткою Місяця, ви не платите додатково сталі або титану за її гру.",
 
   "Luna Conference": "Конференція на Місяці",
   "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Вимагає, щоб учені правили або щоб у вас було 2 делегати там. Отримайте 2 M€ за кожну дорожню тайл на Місяці. Отримайте 2 M€ за кожен тайл для житла на Місяці.",
@@ -129,7 +129,7 @@
 
   "Luna Political Institute": "Політичний інститут на Місяці",
   "Action: Place one of your delegates in any party.": "Дія: Розмістіть одного з ваших делегатів в будь-якій партії.",
-  "Requires that you have 2 Moon tags.": "Вимагає, щоб у вас було 2 позначки Місяця.",
+  "Requires that you have 2 Moon tags.": "Вимагає, щоб у вас було 2 мітки Місяця.",
 
   "Luna Project Office": "Офіс проекту на Місяці",
   "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "НАМАЛЮЙТЕ 5 КАРТ ПІД ЧАС ФАЗИ ДОСЛІДЖЕНЬ НА НАСТУПНІ 2 ПОКОЛІННЯ.",
@@ -138,8 +138,8 @@
   "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Вимагає 2 місця для житла на Місяці. Витратити 2 титану. Зменште виробництво енергії на 1 і збільште виробництво M€ на 3. Підвищте рейтинг місця для житла на 1.",
 
   "Luna Senate": "Сенат на Місяці",
-  "1 VP per Moon tag you have.": "1 ПО за кожну позначку Місяця, яку у вас є.",
-  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Вимагає, щоб у вас було 3 позначки Місяця. Збільште виробництво M€ на 1 за кожну позначку Місяця в грі (включаючи ці).",
+  "1 VP per Moon tag you have.": "1 ПО за кожну мітку Місяця, яку у вас є.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Вимагає, щоб у вас було 3 мітки Місяця. Збільште виробництво M€ на 1 за кожну мітку Місяця в грі (включаючи ці).",
 
   "Luna Staging Station": "Стадіон на Місяці",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Вимагає, щоб рейтинг логістики був 2 або вище. Витратити 1 титан. Підвищте рейтинг логістики на 2.",

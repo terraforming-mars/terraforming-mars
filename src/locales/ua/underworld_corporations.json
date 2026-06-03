@@ -30,12 +30,12 @@
   "HADESPHERE": "Сфера Гадеса",
   "Hadesphere": "Сфера Гадеса",
   "Action: Excavate an underground resource.": "Дія: Розкопати підземний ресурс.",
-  "You start with 36 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Ви починаєте з 36 M€ і 5 сталі. Як вашу першу дію, визначте будь-які 3 підземні ресурси на Марсі.",
+  "You start with 40 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Ви починаєте з 40 M€ і 5 сталі. Як вашу першу дію, визначте будь-які 3 підземні ресурси на Марсі.",
 
   "HECATE SPEDITIONS": "Hecate Експедиції",
   "Hecate Speditions": "Hecate Експедиції",
   "planetary tag": "планетну мітку",
-  "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "Ефект: Коли ви граєте карту з позначкою Земля, Марс, Венера, Місяць або Юпітер, включаючи цю, покладіть 1 ресурс ланцюга постачання на цю карту.",
+  "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "Ефект: Коли ви граєте карту з міткою Земля, Марс, Венера, Місяць або Юпітер, включаючи цю, покладіть 1 ресурс ланцюга постачання на цю карту.",
   "(Effect: Spend 2 supply chain resources (min. 1) to trade.) (Action: Spend 5 supply chain resources to gain a trade fleet.)": "(Ефект: Витратити 2 ресурси ланцюга постачання (мін. 1) для торгівлі.) (Дія: Витратити 5 ресурсів ланцюга постачання, щоб отримати торговий флот.)",
   "Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.": "Ефект: Витратьте 2 ресурси ланцюга постачання для торгівлі. ЦЯ ВАРТІСТЬ НЕ МОЖЕ БУТИ ЗМЕНШЕНА ІНШИМИ ЕФЕКТАМИ.",
   "You start with 38 M€, 2 supply chain resources here, and an extra trade fleet.": "Ви починаєте з 38 M€, 2 ресурсами ланцюга постачання тут і додатковим торговим флотом.",
@@ -47,7 +47,7 @@
 
   "JENSON-BOYLE & CO": "ДЖЕНСОН-БОЙЛ І КО",
   "Jenson-Boyle & Co": "Дженсон-Бойл і Ко",
-  "Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "Дія: Заплатити 1 корупцію, щоб отримати або 4 сталі, 3 титану, 3 рослини або 6 тепла.",
+  "Action: Pay 1 corruption to gain either 5 steel, 3 titanium, 4 plants or 8 heat.": "Дія: Заплатити 1 корупцію, щоб отримати або 5 сталі, 3 титану, 4 рослини або 8 тепла.",
   "You start with 46 M€ and 2 corruption.": "Ви починаєте з 46 M€ і 2 корупцією.",
 
   "KEPLERTEC": "КЕПЛЕРТЕК",
@@ -59,6 +59,7 @@
   "KINGDOM OF TAURARO": "Королівство Тауаро",
   "Kingdom of Tauraro": "Королівство Тауаро",
   "// Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з тайлами, які ви вже маєте, якщо це можливо.",
+  "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з вашими тайлами або маркерами розкопок, якщо це можливо.",
   "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Ви починаєте з 50 M€ і 6 M€ виробництва. Всі супротивники отримують 2 M€ виробництва. Як вашу першу дію, розмістіть місто.",
 
   "VOLTAGON": "ВОЛЬТАГОН",

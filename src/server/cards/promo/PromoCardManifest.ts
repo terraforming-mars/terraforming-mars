@@ -82,6 +82,7 @@ import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
 import {StaticHarvesting} from './StaticHarvesting';
+import {SterlingVents} from './SterlingVents';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
@@ -172,6 +173,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
     [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
     [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
+    [CardName.STERLING_VENTS]: {Factory: SterlingVents},
   },
 
   preludeCards: {

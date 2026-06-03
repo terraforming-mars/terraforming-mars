@@ -14,7 +14,7 @@
 
   "Martian Lumber Corp": "Марсіанська Деревообробна Корпорація",
   "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Ефект: При грі з міткою будівництва, рослини можна використовувати по 3 M€ кожна.",
-  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Вимагає наявності 2 зелених тайлів. Збільшити виробництво рослин на 1.",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Вимагає наявності 2 тайлів лісу. Збільшити виробництво рослин на 1.",
 
   "Solar Logistics": "Сонячна логістика",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "Ефект: Коли ви граєте карту з міткою Землі, ви платите на 2 M€ менше.",
@@ -36,7 +36,7 @@
   "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "РОЗМІСТИТИ КОЧІВНИКІВ на не зарезервовану, порожню область на ігровій дошці.",
 
   "Kaguya Tech": "Кагуя Технології",
-  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Збільшити виробництво M€ на 2. Витягнути 1 карту. Видалити 1 з ваших зелених тайлів (не впливає на кисень). Розмістити там тайл міста, незалежно від правил розміщення. Отримати бонуси за розміщення, як зазвичай.",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Збільшити виробництво M€ на 2. Витягнути 1 карту. Видалити 1 з ваших тайлів лісу (не впливає на кисень). Розмістити там тайл міста, незалежно від правил розміщення. Отримати бонуси за розміщення, як зазвичай.",
 
   "Homeostasis Bureau": "Бюро гомеостазу",
   "Effect: When you raise the temperature, gain 3 M€.": "Ефект: При підвищенні температури отримайте 3 M€.",
@@ -202,7 +202,7 @@
   "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Дія: Витратити 2 енергії, щоб отримати 2 рослини АБО додати 1 тварину на ІНШУ карту.",
 
   "Harvest": "Збір врожаю",
-  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Вимагає, щоб у вас було 3 тайли зелені ґрунту в грі. Отримати 12 M€.",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Вимагає, щоб у вас було 3 тайли лісу в грі. Отримати 12 M€.",
 
   "Outdoor Sports": "Спорт на відкритому повітрі",
   "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Вимагає будь-яке місто, що прилягає до океану. Збільшити виробництво M€ на 2.",

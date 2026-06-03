@@ -14,8 +14,8 @@
   "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "Витратити 3 енергії. Або збільшити виробництво сталі та титану на один крок, АБО розмістити океан і отримати 2 сталі та один титан.",
 
   "Botanical Experience": "Ботанічний досвід",
-  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(ЕФЕКТ: Кожного разу, коли розміщується тайл зелені, додайте 1 дані на цю карту.) (ЕФЕКТ: Коли на цій карті є щонайменше 3 дані, автоматично видаліть 3 дані, щоб підвищити виробництво рослин на 1.) (ЕФЕКТ: Гравці можуть видаляти ваші рослини, але ви втрачаєте лише половину, округлену вгору.)",
-  "Requires one greenery tile on Mars.": "Потребує одну тайл зелені на Марсі.",
+  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(ЕФЕКТ: Кожного разу, коли розміщується тайл лісу, додайте 1 дані на цю карту.) (ЕФЕКТ: Коли на цій карті є щонайменше 3 дані, автоматично видаліть 3 дані, щоб підвищити виробництво рослин на 1.) (ЕФЕКТ: Гравці можуть видаляти ваші рослини, але ви втрачаєте лише половину, округлену вгору.)",
+  "Requires one greenery tile on Mars.": "Потребує один тайл лісу на Марсі.",
 
   "Breeding Farms": "Ферми розведення",
   "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(Дія: Витратити 1 рослину, щоб додати 1 тварину на БУДЬ-ЯКУ карту.)",
@@ -124,7 +124,7 @@
   "Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.": "Збільште виробництво M€ на 3, а виробництво рослин на 1 за кожні 2 мітки Землі (включаючи цей). Витягніть карту. Розмістіть тайл міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
 
   "Luxury Estate": "Розкішні помешкання",
-  "Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.": "Рівень кисню повинен бути 7% або більше. Отримайте 1 титан за кожен тайл міста та тайл зелені насадження, які ви володієте.",
+  "Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.": "Рівень кисню повинен бути 7% або більше. Отримайте 1 титан за кожен тайл міста та тайл лісу, які ви володієте.",
 
   "Martian Culture": "Марсіанська культура",
   "(Action: Add 1 data to ANY card.)": "(Дія: Додайте 1 дані на БУДЬ-ЯКУ карту.)",
@@ -146,7 +146,7 @@
   "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(Ефект: Після того, як ви граєте карту з міткою мікроба, збільште виробництво M€ на 1.)",
 
   "Museum of Early Colonisation": "Музей ранньої колонізації",
-  "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Вимагає 1 океану, 1 міста та одного зеленого насадження на Марсі. Знизьте виробництво енергії на 1. Підвищте виробництво сталі, титану та рослин на 1. Отримайте 1 РТ.",
+  "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Вимагає 1 океану, 1 міста та одного лісу на Марсі. Знизьте виробництво енергії на 1. Підвищте виробництво сталі, титану та рослин на 1. Отримайте 1 РТ.",
 
   "New Venice": "Нова Венеція",
   "Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Вимагає 3 тайлів океану. Втратити 2 рослини. Збільште виробництво енергії на 1 і виробництво M€ на 2. Розмістіть цей тайл на існуючому тайлі океану, ІГНОРУЮЧИ ЗВИЧАЙНІ ОБМЕЖЕННЯ РОЗМІЩЕННЯ ДЛЯ МІСТ. Тайл вважається містом, а також океаном.",
@@ -186,7 +186,7 @@
   "Increase your M€ production by 1 for every special tile you own on Mars.": "Збільшити виробництво M€ на 1 за кожен спеціальний тайл, яку ви володієте на Марсі.",
 
   "Red City": "Червоне місто",
-  "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОЇ ЗЕЛЕНІ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОЇ ЗЕЛЕНІ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цим тайлом.",
+  "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОГО ЛІСУ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОГО ЛІСУ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цим тайлом.",
 
   "Return to Abandoned Technology": "Повернення до відкинутої технології",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Витягнути верхні 4 карти з відкинутого стеку. Виберіть 2 для збереження і відкиньте решту.)",
@@ -207,7 +207,7 @@
   "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Отримайте 1 РТ за кожні 2 мітки Марсу, які у вас є (включаючи цей).",
 
   "Soil Detoxification": "Детоксикація ґрунту",
-  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(Ефект: Використання СТАНДАРТНОЇ ДІЇ ЗЕЛЕНІ коштує на 1 рослину менше.)",
+  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(Ефект: Використання СТАНДАРТНОЇ ДІЇ ЛІСУ коштує на 1 рослину менше.)",
   "Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step": "Вимагає, щоб Зелені були у владі або у вас було 2 делегати там. Збільшити виробництво рослин на 1.",
 
   "Solar Storm": "Сонячний шторм",
@@ -248,7 +248,7 @@
 
   "Wetlands": "Флігель",
   "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Вимагає 2 тайли океану. Втратити 4 рослини. Розмістіть цей тайл на НЕЗАРЕЗЕРВОВАНОМУ МІСЦІ ПОБЛИЗУ ПРИНАЙМНІ 2 ОКЕАНІВ. Підвищити рівень кисню на 1. Отримати 1 РТ.)",
-  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(Ефект: Флігель вважається тайлом зелені та тайлом океану, за винятком того, що його не можна закрити і він не є одним з 9 океанів, необхідних для завершення гри.)",
+  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(Ефект: Флігель вважається тайлом лісу та тайлом океану, за винятком того, що його не можна закрити і він не є одним з 9 океанів, необхідних для завершення гри.)",
 
   "Action: Spend 1 steel and 1 energy to gain 3 plants.": "Дія: Витратьте 1 сталь і 1 енергію, щоб отримати 3 рослини.",
   "Action: Spend 1 plant to add an animal to this card.": "Дія: Витратьте 1 рослину, щоб додати тварину на цю карту.",

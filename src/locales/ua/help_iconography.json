@@ -69,7 +69,7 @@
   "play card": "зіграти картку",
   "use active card action": "використати активну дію картки",
   "standard project": "стандартний проект",
-  "convert plants to greenery": "перетворити рослини на зелені зони",
+  "convert plants to greenery": "перетворити рослини на ліс",
   "convert heat to temperature": "перетворити тепло на температуру",
   "claim milestone": "претендувати на досягнення",
   "fund award": "фінансувати нагороду",
@@ -109,7 +109,7 @@
   "Reveal a new Global Event in the distant (left) position. Add its top neutral delegate": "Розкрити нову глобальну подію на віддаленій (лівій) позиції. Додати верхнього нейтрального делегата",
 
   "End Game": "Кінець гри",
-  "In turn order, convert plants to greeneries.": "За порядком ходу, перетворити рослини на зелені зони.",
+  "In turn order, convert plants to greeneries.": "За порядком ходу, перетворити рослини на ліс.",
   "Assign awards": "Призначити нагороди",
   "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Очки: РТ + тайли + карти + досягнення + нагороди + (1 ПО за голову і лідера партії)",
 

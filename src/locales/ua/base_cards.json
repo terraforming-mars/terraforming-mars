@@ -211,7 +211,7 @@
   "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Вимагає мітки Юпітера. Збільшити виробництво тепла і виробництво енергії на 3 кожне.",
 
   "Mangrove": "Мангровий ліс",
-  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Вимагає +4 C або тепліше. Розмістити тайл зелені на океанічній площі і підняти рівень кисню на 1. Ігнорувати звичайні обмеження розміщення для цього.",
+  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Вимагає +4 C або тепліше. Розмістити тайл лісу на океанічній площі і підняти рівень кисню на 1. Ігнорувати звичайні обмеження розміщення для цього.",
 
   "Trees": "Дерева",
   "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": "Вимагає -4 C або тепліше. Збільшити виробництво рослин на 3. Отримати 1 рослину.",
@@ -414,7 +414,7 @@
   "Place 1 ocean tile.": "Розмістити 1 тайл океану.",
 
   "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "Ефект: Після того, як ви зіграєте карту з міткою тварини або рослини, ВКЛЮЧАЮЧИ ЦІ, додайте тварину на цю карту.",
-  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Вимагає, що У ВАС є тайл зелені. Розмістити цей тайл поруч з БУДЬ-ЯКИМ зеленим простором.",
+  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Вимагає, що У ВАС є тайл лісу. Розмістити цей тайл поруч з БУДЬ-ЯКИМ лісом.",
 
   "Zeppelins": "Дирижаблі",
   "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Вимагає 5% рівень кисню. Збільшити виробництво M€ на 1 за кожен тайл міста НА МАРСІ.",
@@ -469,7 +469,7 @@
   "Nitrophilic Moss": "Нітрофільний мох",
   "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Вимагає 3 або більше тайлів океану і втрати 2 рослин. Збільшити виробництво рослин на 2.",
   "Herbivores": "Травоїдні",
-  "Effect: When you place a greenery tile, add an animal to this card.": "Ефект: Коли ви розміщуєте тайл зелені, додайте тварину на цю карту.",
+  "Effect: When you place a greenery tile, add an animal to this card.": "Ефект: Коли ви розміщуєте тайл лісу, додайте тварину на цю карту.",
   "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Вимагає 8% кисню. +1 тварину на цю карту. -1 виробництво будь-яких рослин",
 
   "Insects": "Комахи",
@@ -558,7 +558,7 @@
   "Opponents may not remove your": "Супротивники не можуть видаляти ваші",
 
   "Protected Valley": "Захищена долина",
-  "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Збільште виробництво M€ на 2. Розмістіть тайл зелені НА ОБЛАСТІ, ЗАРЕЗЕРВОВАНІЙ ДЛЯ ОКЕАНУ, нехтуючи звичайними обмеженнями розміщення, і збільште кисень на 1.",
+  "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Збільште виробництво M€ на 2. Розмістіть тайл лісу НА ОБЛАСТІ, ЗАРЕЗЕРВОВАНІЙ ДЛЯ ОКЕАНУ, нехтуючи звичайними обмеженнями розміщення, і збільште кисень на 1.",
 
   "Satellites": "Супутники",
   "Increase your M€ production 1 step for each space tag you have, including this one.": "Збільште виробництво M€ на 1 за кожну мітку космосу, який у вас є, включаючи цей.",
@@ -617,7 +617,7 @@
   "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "Перегляньте верхні 3 карти з колоди. Візьміть одну з них в руку і відкиньте інші дві.",
 
   "Plantation": "Плантація",
-  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Вимагає 2 міток науки. Розмістити тайл зелені і підвищити рівень кисню на 1 одиницю.",
+  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Вимагає 2 міток науки. Розмістити тайл лісу і підвищити рівень кисню на 1 одиницю.",
 
   "Power Infrastructure": "Енергетична інфраструктура",
   "Action: Spend any amount of energy and gain that amount of M€.": "Дія: Витратити будь-яку кількість енергії і отримати таку ж кількість M€.",

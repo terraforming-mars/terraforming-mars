@@ -40,9 +40,9 @@
   "Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.": "Потребує 3 океанів. Додайте 3 мікроби на БУДЬ-ЯКУ карту. Отримайте 3 рослини.",
 
   "Coordinated Raid": "Координований рейд",
-  "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Потребує принаймні 1 колонії в грі. Відправте один зі своїх невикористаних торгових флотів на будь-яку тайл колонії. Отримайте торговий бонус та бонус колонії за кожну колонію на цьому тайлі. Інші гравці не отримують свої бонуси за колонію з цієї дії.",
+  "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Потребує принаймні 1 колонії в грі. Відправте один зі своїх невикористаних торгових флотів на будь-який тайл колонії. Отримайте торговий бонус та бонус колонії за кожну колонію на цьому тайлі. Інші гравці не отримують свої бонуси за колонію з цієї дії.",
 
-  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Розмістіть ЦЮ ПЛИТКУ І ОРІЄНТУЙТЕ її на незарезервованому просторі, прилеглому не більше ніж до 1 міста.",
+  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Розмістіть ЦЕЙ ТАЙЛ І ОРІЄНТУЙТЕ його на незарезервованому просторі, прилеглому не більше ніж до 1 міста.",
   "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Місце катастрофи надає БОНУС ЗА СУМІЖНІСТЬ 1 дані та або 1 сталь або 1 титан.",
   "When placing Crashsite, for each tile you own next it, gain those bonuses.": "При розміщенні Місця катастрофи, отримайте ці бонуси за кожен тайл, яку ви володієте поруч з нею.",
   "Add 1 data to any card. Add 1 resource to any card.)": "Додайте 1 дані на будь-яку карту. Додайте 1 ресурс на будь-яку карту.)",
@@ -149,7 +149,7 @@
   "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Вимагає 1 океану, 1 міста та одного зеленого насадження на Марсі. Знизьте виробництво енергії на 1. Підвищте виробництво сталі, титану та рослин на 1. Отримайте 1 РТ.",
 
   "New Venice": "Нова Венеція",
-  "Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Вимагає 3 тайлів океану. Втратити 2 рослини. Збільште виробництво енергії на 1 і виробництво M€ на 2. Розмістіть цей тайл на існуючій тайлі океану, ІГНОРУЮЧИ ЗВИЧАЙНІ ОБМЕЖЕННЯ РОЗМІЩЕННЯ ДЛЯ МІСТ. Плитка вважається містом, а також океаном.",
+  "Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Вимагає 3 тайлів океану. Втратити 2 рослини. Збільште виробництво енергії на 1 і виробництво M€ на 2. Розмістіть цей тайл на існуючому тайлі океану, ІГНОРУЮЧИ ЗВИЧАЙНІ ОБМЕЖЕННЯ РОЗМІЩЕННЯ ДЛЯ МІСТ. Тайл вважається містом, а також океаном.",
 
   "Nobel Labs": "Нобелівські лабораторії",
   "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(Дія: Додайте 2 мікроби, 2 дані або 2 аеростати на БУДЬ-ЯКУ карту.)",
@@ -186,7 +186,7 @@
   "Increase your M€ production by 1 for every special tile you own on Mars.": "Збільшити виробництво M€ на 1 за кожен спеціальний тайл, яку ви володієте на Марсі.",
 
   "Red City": "Червоне місто",
-  "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОЇ ЗЕЛЕНІ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОЇ ЗЕЛЕНІ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цією тайлом.",
+  "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОЇ ЗЕЛЕНІ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОЇ ЗЕЛЕНІ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цим тайлом.",
 
   "Return to Abandoned Technology": "Повернення до відкинутої технології",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Витягнути верхні 4 карти з відкинутого стеку. Виберіть 2 для збереження і відкиньте решту.)",

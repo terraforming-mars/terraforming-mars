@@ -49,10 +49,10 @@
   "Action: Look at the top card and either buy it or discard it": "Дія: Подивитися на верхню карту і або купити її, або відкинути її",
 
   "Martian Rails": "Марсіанська залізниця",
-  "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Дія: Витратити 1 одиницю енергії, щоб отримати 1 M€ за кожне міське тайл НА МАРСІ.",
+  "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Дія: Витратити 1 одиницю енергії, щоб отримати 1 M€ за кожен міський тайл НА МАРСІ.",
 
   "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Вимагає 4 або більше тайлів океану. Розмістити цей тайл. Зменшити виробництво енергії на 2 і збільшити виробництво M€ на 5.",
-  "1 additional VP for each ocean tile adjacent to this city tile.": "1 додатковий ПО за кожен тайл океану, що межує з цією міською тайлом.",
+  "1 additional VP for each ocean tile adjacent to this city tile.": "1 додатковий ПО за кожен тайл океану, що межує з цим міським тайлом.",
 
   "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Підняти температуру на 1 і отримати 2 одиниці титану. Видалити до 3 рослин з будь-якого гравця.",
 
@@ -150,7 +150,7 @@
   "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Підняти ваш рейтинг терраформування на 2 і температуру на 1. Збільшити виробництво рослин на 1 або на 4, якщо у вас є 3 мітки рослин.",
 
   "Rover Construction": "Будівництво ровера",
-  "Effect: When any city tile is placed, gain 2 M€.": "Ефект: Коли будь-яка тайл міста розміщується, отримати 2 M€.",
+  "Effect: When any city tile is placed, gain 2 M€.": "Ефект: Коли будь-який тайл міста розміщується, отримати 2 M€.",
 
   "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Підняти температуру на 3 і отримати 4 сталі. Видалити до 8 рослин у будь-якого гравця.",
 
@@ -289,7 +289,7 @@
 
   "Commercial District": "Комерційний район",
   "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Розмістити цей тайл. Зменшити виробництво енергії на 1 і збільшити виробництво M€ на 4.",
-  "1 VP per adjacent city tile.": "1 ПО за кожну сусідню тайл міста.",
+  "1 VP per adjacent city tile.": "1 ПО за кожен сусідній тайл міста.",
 
   "Robotic Workforce": "Роботизована робоча сила",
   "Duplicate only the production box of one of your building cards.": "Подвоїти лише поле виробництва однієї з ваших будівельних карток.",
@@ -400,7 +400,7 @@
   "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Вимагає 3 або більше тайлів океану і втрати 1 рослини. Збільшити виробництво рослин на 1.",
 
   "Action: Spend 7 M€ to increase your steel production 1 step.": "Дія: Витратити 7 M€, щоб збільшити виробництво сталі на 1.",
-  "Place this tile adjacent to a city tile.": "Розмістити цей тайл поруч з міською тайлом.",
+  "Place this tile adjacent to a city tile.": "Розмістити цей тайл поруч з міським тайлом.",
 
   "Steal up to 2 steel, or 3 M€ from any player.": "Викрасти до 2 одиниць сталі або 3 M€ у будь-якого гравця.",
 
@@ -550,7 +550,7 @@
 
   "Pets": "Домашні тварини",
   "Animals may not be removed from this card": "Тварини не можуть бути видалені з цієї карти.",
-  "Effect: When any city tile is placed, add an animal to this card.": "Ефект: Коли будь-яка тайл міста розміщується, додайте тварину на цю карту.",
+  "Effect: When any city tile is placed, add an animal to this card.": "Ефект: Коли будь-який тайл міста розміщується, додайте тварину на цю карту.",
   "Add 1 animal to this card.": "Додайте 1 тварину на цю карту.",
   "1 VP per 2 animals here.": "1 ПО за 2 тварини тут.",
 

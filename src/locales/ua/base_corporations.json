@@ -12,7 +12,7 @@
   "ECOLINE": "ЕКОЛАЙН",
   "Ecoline": "ЕкоЛайн",
   "You start with 2 plant production, 3 plants, and 36 M€.": "Ви починаєте з виробництва 2 рослин, 3 рослин і 36 M€.",
-  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Ефект: Ви завжди можете платити 7 рослин, замість 8, для розміщення зелених зон.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Ефект: Ви завжди можете платити 7 рослин, замість 8, для розміщення лісу.",
 
   "HELION": "ГЕЛІОН",
   "Helion": "Геліон",
@@ -28,19 +28,19 @@
   "INVENTRIX": "ІНВЕНТРИКС",
   "Inventrix": "Інвентрікс",
   "As your first action in the game, draw 3 cards. Start with 45 M€.": "Як вашу першу дію в грі, витягніть 3 карти. Почніть з 45 M€.",
-  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Ефект: Ваші вимоги до температури, кисню, океану та Венери збільшуються або зменшуються на 2 кроки, на ваш вибір у кожному випадку.",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Ефект: Ваші вимоги до температури, кисню, океану та Венери збільшуються або зменшуються на 2, на ваш вибір у кожному випадку.",
 
   "PHOBOLOG": "ФОБОЛОГ",
   "Phobolog": "ФобоЛог",
   "PhoboLog": "ФобоЛог",
   "You start with 10 titanium and 23 M€.": "Ви починаєте з 10 титану і 23 M€.",
-  "Effect: Your titanium resources are each worth 1 M€ extra.": "Ефект: Ваші ресурси титану кожен вартістю на 1 M€ більше.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "Ефект: Ваші ресурси титану кожну вартістю на 1 M€ більше.",
 
   "THARSIS": "ТАРСІС",
   "REPUBLIC": "РЕСПУБЛІКА",
   "Tharsis Republic": "Тарсіська Республіка",
   "You start with 40 M€. As your first action in the game, place a city tile.": "Ви починаєте з 40 M€. Як вашу першу дію в грі, розмістіть тайл міста.",
-  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Ефект: Коли будь-яка тайл міста розміщується НА МАРСІ, збільште ваше виробництво M€ на 1 крок. Коли ви розміщуєте тайл міста, отримайте 3 M€.",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Ефект: Коли будь-який тайл міста розміщується НА МАРСІ, збільште ваше виробництво M€ на 1. Коли ви розміщуєте тайл міста, отримайте 3 M€.",
 
   "THORGATE": "ТОРГЕЙТ",
   "ThorGate": "Торгейт",
@@ -50,22 +50,22 @@
   "UNITED NATIONS MARS INITIATIVE": "ІНІЦІАТИВА ООН ЗА КОЛОНІЗАЦІЮ МАРСУ",
   "United Nations Mars Initiative": "Ініціатива ООН з колонізації Марсу",
   "UNMI": "ІООНКМ",
-  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Дія: Якщо ваш рейтинг терраформування був підвищений у цьому поколінні, ви можете заплатити 3 M€, щоб підвищити його ще на 1 крок.",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Дія: Якщо ваш рейтинг терраформування був підвищений у цьому поколінні, ви можете заплатити 3 M€, щоб підвищити його ще на 1.",
 
   "MINING": "ГІРНИЦТВО",
   "GUILD": "ГІЛЬДІЯ",
   "Mining Guild": "Гірнича Гільдія",
   "You start with 30 M€, 5 steel and 1 steel production.": "Ви починаєте з 30 M€, 5 сталі і 1 виробництва сталі.",
-  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Ефект: Кожного разу, коли ви розміщуєте тайл на ділянці з бонусом за розміщення сталі або титану, збільшуйте ваше виробництво сталі на 1 крок",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Ефект: Кожного разу, коли ви розміщуєте тайл на ділянці з бонусом за розміщення сталі або титану, збільшуйте ваше виробництво сталі на 1",
 
   "TERACTOR": "ТЕРАКТОР",
   "Teractor": "Терактор",
   "You start with 60 M€.": "Ви починаєте з 60 M€.",
-  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Ефект: Коли ви граєте картку зі тегом Землі, ви платите на 3 M€ менше за неї.",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Ефект: Коли ви граєте картку зі міткою Землі, ви платите на 3 M€ менше за неї.",
 
   "SATURN": "САТУРН",
   "SYSTEMS": "СИСТЕМИ",
   "Saturn Systems": "Сатурнські Системи",
   "You start with 1 titanium production and 42 M€.": "Ви починаєте з виробництва 1 титану і 42 M€.",
-  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Ефект: Кожного разу, коли будь-який Юпітерський тег входить в гру, включаючи цей, збільшуйте ваше виробництво M€ на 1 крок."
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Ефект: Кожного разу, коли будь-яка мітка Юпітера входить в гру, включаючи цю, збільшуйте ваше виробництво M€ на 1."
 }

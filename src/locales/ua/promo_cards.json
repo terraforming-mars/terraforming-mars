@@ -12,7 +12,7 @@
   "Floyd Continuum": "Флойд Континуум",
   "Action: Gain 3 M€ per completed terraforming parameter.": "Дія: Отримайте 3 M€ за кожну завершений параметр терраформування.",
 
-  "Martian Lumber Corp": "Марсіанська Деревообробна Корпорація",
+  "Martian Lumber Corp": "Деревообробка Марса",
   "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Ефект: При грі з міткою будівництва, рослини можна використовувати по 3 M€ кожна.",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Вимагає наявності 2 тайлів лісу. Збільшити виробництво рослин на 1.",
 
@@ -27,7 +27,7 @@
   "Red Ships": "Червоні кораблі",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Дія: Отримайте 1 M€ за кожне МІСТО І СПЕЦІАЛЬНИЙ ТАЙЛ, прилеглі до океану.",
 
-  "Neptunian Power Consultants": "Нептунійські енергетичні консультанти",
+  "Neptunian Power Consultants": "Енергоконсультанти Нептуна",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Ефект: Коли будь-який океан розміщується, ВИ МОЖЕТЕ заплатити 5 M€ (можна використовувати сталь), щоб підвищити виробництво енергії на 1 і додати 1 гідроелектричний ресурс на цю карту.",
   "1 VP per hydroelectric resource on this card": "1 ПО за кожен гідроелектричний ресурс на цій карті",
 
@@ -44,7 +44,7 @@
   "Hermetic Order of Mars": "Герметичний Орден Марсу",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Кисень повинен бути 4% або менше. Збільшити виробництво M€ на 2. Отримайте 1 M€ за кожну порожню область, прилеглу до ваших тайлів.",
 
-  "St. Joseph of Cupertino Mission": "Місія святого Йосифа Купертіно",
+  "St. Joseph of Cupertino Mission": "Місія св. Йосифа Купертіно",
   "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "Дія: Заплатіть 5 M€ (МОЖНА ВИКОРИСТОВУВАТИ СТАЛЬ), щоб побудувати 1 кафедральний собор у місті. Максимум 1 на місто. Власник міста може заплатити 2 M€, щоб витягнути 1 карту.",
   "1 VP per City with a Cathedral in it.": "1 ПО за кожне місто з кафедральним собором в ньому.",
 
@@ -61,7 +61,7 @@
   "Aqueduct Systems": "Акведукт Системи",
   "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Вимагає наявності міста поруч з океаном. Витягніть 3 карти з міткою будівництва.",
 
-  "Directed Heat Usage": "Направлене використання тепла",
+  "Directed Heat Usage": "Спрямоване тепло",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Дія: Витратити 3 тепла, щоб отримати або 4 M€ або 2 рослини.",
   "Supercapacitors": "Суперконденсатори",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "ЕФЕКТ: ПЕРЕТВОРЕННЯ ЕНЕРГІЇ В ТЕПЛО ПІД ЧАС ВИРОБНИЦТВА Є ОПЦІОНАЛЬНИМ ДЛЯ КОЖНОЇ ЕНЕРГЕТИЧНОЇ РЕСУРСУ.",
@@ -80,7 +80,7 @@
   "Cutting Edge Technology": "Сучасні технології",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Ефект: Коли граєте карту з вимогами, ви платите на 2 M€ менше за неї.",
 
-  "Crash Site Cleanup": "Прибирання місця катастрофи",
+  "Crash Site Cleanup": "Очищення місця аварії",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Вимагає, щоб гравець видалив рослини ІНШОГО ГРАВЦЯ цього покоління. Отримайте 1 титан або 2 сталі.",
 
   "Directed Impactors": "Направлені імпактори",
@@ -103,13 +103,13 @@
   "Diversity Support": "Підтримка різноманітності",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "Вимагає, щоб у вас було 9 різних типів ресурсів. Отримайте 1 РТ.",
 
-  "Topsoil Contract": "Контракт на верхній шар ґрунту",
+  "Topsoil Contract": "Контракт на родючий ґрунт",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Ефект: Коли ви отримуєте мікроба на БУДЬ-ЯКУ КАРТУ, також отримайте 1 M€.",
 
-  "Imported Nutrients": "Імпортовані поживні речовини",
+  "Imported Nutrients": "Імпорт поживних речовин",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Отримати 4 рослини і додати 4 мікробів на ІНШУ КАРТУ.",
 
-  "Asteroid Deflection System": "Система відхилення астероїдів",
+  "Asteroid Deflection System": "Протиастероїдна система",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Дія: РОЗКРИТИ І ВИКЛАСТИ верхню карту з колоди. Якщо вона має значок космосу, додати астероїд сюди.",
   "opponents may not remove your plants": "супротивники не можуть видаляти ваші рослини",
   "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Зменшити виробництво енергії на 1. 1 ПО за кожну астероїд на цій карті.",
@@ -117,7 +117,7 @@
   "Jovian Embassy": "Юпітерське посольство",
   "Raise your TR 1 step.": "Підвищити ваш РТ на 1.",
 
-  "Sub-Crust Measurements": "Вимірювання підшорсткового шару",
+  "Sub-Crust Measurements": "Підкорові вимірювання",
   "Action: Draw a card.": "Дія: Витягнути карту.",
 
   "Potatoes": "Картопля",
@@ -163,10 +163,10 @@
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Дія: Розкрийте і розмістіть карту КОСМОСУ АБО БУДІВЛІ з руки тут, і розмістіть на ній 2 ресурси, АБО подвійте ресурси на карті тут.",
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Ефект: Карта тут може бути зіграна, наче з руки, зі зниженою вартістю на кількість ресурсів на ній.",
 
-  "Dusk Laser Mining": "Видобування променем вечірнього сяйва",
+  "Dusk Laser Mining": "Видобування лазером",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Вимагає 2 мітки науки. Зменшити виробництво енергії на 1 і збільшити виробництво титану на 1. Отримати 4 титану.",
 
-  "Hi-Tech Lab": "Високотехнологічна лабораторія",
+  "Hi-Tech Lab": "Хай-тек лабораторія",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Дія: Витратити будь-яку кількість енергії, щоб витягнути таку ж кількість карт. ВЗЯТИ 1 В РУКУ І ВІДКЛАСТИ РЕШТУ.",
 
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Зменшити виробництво енергії на 4 і збільшити виробництво рослин на 2. Підвищити ваш РТ на 3. Розмістити цей тайл.",
@@ -204,7 +204,7 @@
   "Harvest": "Збір врожаю",
   "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Вимагає, щоб у вас було 3 тайли лісу в грі. Отримати 12 M€.",
 
-  "Outdoor Sports": "Спорт на відкритому повітрі",
+  "Outdoor Sports": "Спорт на природі",
   "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Вимагає будь-яке місто, що прилягає до океану. Збільшити виробництво M€ на 2.",
 
   "Weather Balloons": "Метеозонди",

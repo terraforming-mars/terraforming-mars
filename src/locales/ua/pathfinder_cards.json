@@ -1,5 +1,5 @@
 {
-  "Advanced Power Grid": "Покращена електрична мережа",
+  "Advanced Power Grid": "Покращена електромережа",
   "Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.": "Збільште виробництво енергії на 2. Збільште виробництво M€ на 1 за кожною міткою енергії, які у вас є, включаючи цей.",
 
   "Agro-Drones": "Агро-дрони",
@@ -84,7 +84,7 @@
   "Economic Help": "Економічна допомога",
   "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Підвищте найнижчий незавершений трек впливу на планету на 3. При рівній кількості, підвищте всі найнижчі треки на 2. Збільште виробництво M€ на 1",
 
-  "Expedition to the Surface - Venus": "Експедиція на поверхню - Венера",
+  "Expedition to the Surface - Venus": "Експедиція на Венеру",
   "Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.": "Намалюйте 2 карти. Підвищте Венеру на 2%. Отримайте 1 M€ за кожну ваш Венерську мітку, включаючи цей.",
 
   "Flat Mars Theory": "Теорія плоского Марсу",
@@ -98,7 +98,7 @@
   "Geological Expedition": "Геологічна експедиція",
   "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(Ефект: Коли ви розміщуєте тайл НА МАРСІ, отримайте 1 додатковий ресурс на місці. Якщо на місці немає бонусу, отримайте 1 сталь.)",
 
-  "High Temp. Superconductors": "Високотемпературні суперпровідники",
+  "High Temp. Superconductors": "Високотемп. надпровідники",
   "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "(Ефект: При грі картою енергії, СТАНДАРТНИМ ПРОЕКТОМ ЕЛЕКТРОСТАНЦІЇ АБО ДІЄЮ ПОЛІТИКИ ПРАВЛІННЯ КЕЛЬВІНІСТІВ, платіть на 3M€ менше.)",
   "Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.": "Вимагає, щоб Кельвіністи правили або у вас було 2 делегати там. Збільште виробництво енергії на 2.",
 
@@ -114,7 +114,7 @@
   "Kickstarter": "Кікстартер",
   "Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.": "Виберіть планетну мітку. Ця карта вважається маючи 1 таку мітку. Підвищте відповідну планетну доріжку на 3 в загальному.",
 
-  "Last Resort Ingenuity": "Останній варіант винахідливості",
+  "Last Resort Ingenuity": "Винахідливість відчаю",
   "The next card you play this generation can be paid for with steel or titanium despite its tags.": "(Наступну карту, яку ви граєте цього покоління, можна оплатити сталлю або титаном, незважаючи на її мітки.)",
 
   "Lobby Halls": "Приймальні зали",
@@ -130,7 +130,7 @@
   "(Action: Add 1 data to ANY card.)": "(Дія: Додайте 1 дані на БУДЬ-ЯКУ карту.)",
   "(Requires ANY 2 Mars tags in play.  1 VP for every 2 data here.)": "(Вимагає будь-які 2 мітки Марсу в грі. 1 ПО за кожні 2 дані тут.)",
 
-  "Martian Dust Processing Plant": "Завод з переробки марсіанського пилу",
+  "Martian Dust Processing Plant": "Завод марсіанського пилу",
   "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.": "Знизьте виробництво енергії на 1 і підвищте виробництво сталі на 2. Отримайте 1 РТ.",
 
   "Martian Monuments": "Марсіанські пам'ятники",
@@ -156,7 +156,7 @@
   "Orbital Laboratories": "Орбітальні лабораторії",
   "Increase your plant production 2 steps. Gain 1 plant.": "Збільшити виробництво рослин на 2. Отримати 1 рослину.",
 
-  "Oumuamua Type Object Survey": "Дослідження об'єкта типу Oumuamua",
+  "Oumuamua Type Object Survey": "Дослідження Oumuamua",
   "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробну мітку, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має мітку космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
   "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Вимагає 1 мітку космосу та 1 мітку науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.",
 
@@ -170,7 +170,7 @@
 
   "Increase your heat production 2 steps and your energy production 1 step.": "Збільшити виробництво тепла на 2 і виробництво енергії на 1.",
 
-  "Prefabrication of Human Habitats": "Виготовлення житла для людей",
+  "Prefabrication of Human Habitats": "Збірне житло для людей",
   "(Effect: Cards with a city tag cost 2M€ less.)": "(Ефект: Карти з міткою міста коштують на 2M€ менше.)",
   "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(Ефект: CITY STANDARD PROJECT коштує на 2M€ менше. СТАЛЬ МОЖЕ БУТИ ВИКОРИСТАНА, якщо ви граєте карту будівлі.)",
   "Requires that you have steel production.": "Вимагає наявності виробництва сталі.",
@@ -188,7 +188,7 @@
   "Red City": "Червоне місто",
   "Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.": "Вимагає, щоб Червоні були у владі або у вас було 2 делегати там. -1 одиниця енергії, +2 одиниці M€. Розмістіть спеціальний тайл на Марсі ПОБЛИЗУ ЖОДНОГО ЛІСУ. ПОБЛИЗУ ЦЬОГО ТАЙЛУ НЕ МОЖЕ БУТИ РОЗМІЩЕНО ЖОДНОГО ЛІСУ. 1 ПО за кожне порожнє місце (або небезпека) поруч з цим тайлом.",
 
-  "Return to Abandoned Technology": "Повернення до відкинутої технології",
+  "Return to Abandoned Technology": "Забуті технології",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Витягнути верхні 4 карти з відкинутого стеку. Виберіть 2 для збереження і відкиньте решту.)",
 
   "Rich Deposits": "Багаті залежності",
@@ -217,7 +217,7 @@
   "(Action: Add 2 data to ANY card.)": "(Дія: Додати 2 дані до БУДЬ-ЯКОЇ карти.)",
   "Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.": "Вимагає 1 мітку Венери, Землі, Марса та Юпітера. Додайте 2 дані до БУДЬ-ЯКОЇ карти. 1 ПО за кожні 6 дані тут.",
 
-  "Space Debris Cleaning Operation": "Операція з очищення космічних сміттєвих об'єктів",
+  "Space Debris Cleaning Operation": "Прибирання у космосі",
   "Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.": "Вимагає будь-які 4 мітки космосу в грі. Отримати 3 титану. Додайте 1 ресурс до БУДЬ-ЯКОЇ карти (крім карт, які використовують ресурси ТВАРИНИ або НАУКИ). Додайте 1 дані до БУДЬ-ЯКОЇ карти. Витягніть 1 карту.",
 
   "Space Relay": "Космічний реле",
@@ -227,7 +227,7 @@
   "Specialized Settlement": "Спеціалізоване поселення",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.": "Зменшити виробництво енергії на 1 і збільшити виробництво M€ на 3. Розмістіть тайл міста на Марсі. Збільшити виробництво одного ресурсу на карті, отримане бонусом за розміщення.",
 
-  "Terraforming Control Station": "Станція керування терраформуванням",
+  "Terraforming Control Station": "Станція терраформування",
   "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(Ефект: Коли ви граєте карту з міткою Венери або Марса, платіть на 2 M€ менше.)",
   "(Erhöhe deinen РТ um 2.)": "(Збільшити ваш РТ на 2.)",
 

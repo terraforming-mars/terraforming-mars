@@ -48,7 +48,7 @@ describe('Player', () => {
   it('Should throw error if nothing to process', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player, 'spectatorid');
-    (player as any).setWaitingFor(undefined, undefined);
+    player.clearWaitingFor();
 
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
   });
@@ -74,7 +74,7 @@ describe('Player', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
     Game.newInstance('gameid', [player, player2], player, 'spectatorid');
-    (player as any).setWaitingFor(undefined, undefined);
+    player.clearWaitingFor();
 
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new EnergyTapping());

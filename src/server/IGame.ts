@@ -137,7 +137,10 @@ export interface IGame extends Logger {
   getPlayerById(id: PlayerId): IPlayer;
   defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
+  /** Returns true if Mars is fully terraformed, meaning the game should end with this generation. */
   marsIsTerraformed(): boolean;
+  /** Logs a message if Mars is fully terraformed. */
+  maybeLogMarsIsTerraformed(): void;
   lastSoloGeneration(): number;
   isSoloModeWin(): boolean;
   getAwardFundingCost(): number;

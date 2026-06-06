@@ -29,6 +29,20 @@ const plugins = [
     __VUE_PROD_DEVTOOLS__: false,
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
   }),
+  {
+    apply: (compiler) => {
+      compiler.hooks.compile.tap('BuildStartPlugin', () => {
+        console.log('🚀 Webpack Build Started...');
+      });
+
+      compiler.hooks.done.tap('BuildEndPlugin', () => {
+        // Pushes the log to the very end of the execution queue
+        process.nextTick(() => {
+          console.log('✅ Webpack Build Finished!');
+        });
+      });
+    },
+  },
 ];
 
 if (process.env.NODE_ENV === 'production') {

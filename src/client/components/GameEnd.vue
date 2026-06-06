@@ -216,6 +216,8 @@
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {setFaviconStatus} from '@/client/utils/favicon';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
@@ -396,6 +398,9 @@ export default defineComponent({
   },
   mounted() {
     setDocumentTitle('🏁 | ' + this.game.name);
+    if (getPreferences().experimental_ui) {
+      setFaviconStatus('ended');
+    }
   },
   methods: {
     getEndGamePlayerRowColorClass(color: Color): string {

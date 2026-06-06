@@ -43,10 +43,21 @@ const names: Record<Party, PartyName> = {
   g: PartyName.GREENS,
 } as const;
 
-export function agendaIdDescription(id: BonusId | PolicyId): string {
+export type AgendaInfo = {
+  name: string;
+  type: string;
+  num: string;
+};
+
+export function agendaInfoById(id: BonusId | PolicyId): AgendaInfo {
   const p = id[0] as Party;
   const type = id[1] === 'b' ? 'Bonus' : 'Policy';
   const num = id.substring(2);
   const name = names[p];
-  return name + ' ' + type + ' ' + num;
+  return {name, type, num};
+}
+
+export function agendaIdDescription(id: BonusId | PolicyId): string {
+  const info = agendaInfoById(id);
+  return `${info.name} ${info.type} ${info.num}`;
 }

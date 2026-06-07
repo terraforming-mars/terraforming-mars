@@ -178,7 +178,7 @@
         <h2 v-i18n>Agendas</h2>
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="id in visibleAgendaIds" :key="id" v-memo="[id]">
-            <TurmoilAgendaContiner :agendaId="id" />
+            <TurmoilAgendaContainer :agendaId="id" />
           </div>
         </div>
       </section>
@@ -220,7 +220,7 @@ import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
-import TurmoilAgendaContiner from '@/client/components/cardlist/TurmoilAgendaContainer.vue';
+import TurmoilAgendaContainer from '@/client/components/cardlist/TurmoilAgendaContainer.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
@@ -238,7 +238,7 @@ export default defineComponent({
     Colony,
     Milestone,
     Award,
-    TurmoilAgendaContiner,
+    TurmoilAgendaContainer,
     PreferencesIcon,
   },
   data(): CardListModel {

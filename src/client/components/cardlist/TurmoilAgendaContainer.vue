@@ -1,8 +1,8 @@
 <template>
-  <div class="turmoil_agenda_item">
+  <div class="container">
   <TurmoilAgenda :id="agendaId" />
-  <div class="turmoil_agenda_line1">{{ agendaId }}</div>
-  <div class="turmoil_agenda_line2">
+  <div class="line1">{{ agendaId }}</div>
+  <div class="line2">
     {{ $t(agenda.name) }} {{ $t(agenda.type) }} {{ agenda.num }}
   </div>
   </div>
@@ -25,7 +25,7 @@ const agenda = computed<AgendaInfo>(() => agendaInfoById(props.agendaId));
 </script>
 
 <style scoped lang="less">
-.turmoil_agenda_item {
+.container {
   padding: 12px;
   background-image: linear-gradient(#9c602d, #25170a);
   border-radius: 8px;
@@ -47,7 +47,7 @@ const agenda = computed<AgendaInfo>(() => agendaInfoById(props.agendaId));
     height: 50px;
   }
 
-  .turmoil_agenda_line1, .turmoil_agenda_line2 {
+  .line1, .line2 {
     text-align: center;
     font-size: 18px;
   }

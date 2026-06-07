@@ -43,6 +43,7 @@ export interface ParsedSubmission {
   startingPreludes: number;
   startingCeos: number;
   escapeVelocityOn: boolean;
+  escapeVelocityThresholdMinutes: number;
 }
 
 export interface ValidationErrors {
@@ -140,6 +141,13 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
   // -- Escape Velocity --
   const evValue = readSelectedValue(state, BlockIds.escapeVelocity, ActionIds.escapeVelocity);
   const escapeVelocityOn = evValue === 'on';
+  const escapeVelocityThresholdMinutes = parseMinutes(
+    readTextInput(state, BlockIds.escapeVelocityMinutes, ActionIds.escapeVelocityMinutes),
+    DEFAULT_ESCAPE_VELOCITY.thresholdMinutes,
+  );
+  if (escapeVelocityOn && escapeVelocityThresholdMinutes === undefined) {
+    errors[BlockIds.escapeVelocityMinutes] = 'Must be a whole number of minutes 1-180.';
+  }
 
   if (Object.keys(errors).length > 0) {
     return {errors};
@@ -155,6 +163,7 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
     startingPreludes: startingPreludes!,
     startingCeos: startingCeos!,
     escapeVelocityOn,
+    escapeVelocityThresholdMinutes: escapeVelocityThresholdMinutes ?? DEFAULT_ESCAPE_VELOCITY.thresholdMinutes,
   };
 }
 
@@ -191,13 +200,22 @@ export function toNewGameConfig(
   parsed: ParsedSubmission,
   lookup: DisplayNameLookup,
 ): {config: NewGameConfig; slackUserIds: Array<string>} {
-  const deduped = dedupeColors(parsed.slots);
-  const firstIndex0 =
-    !parsed.randomFirstPlayer && parsed.firstPlayerSlot !== undefined
-      ? deduped.findIndex((s) => s.index === parsed.firstPlayerSlot)
-      : -1;
+  // The TM server ignores the `randomFirstPlayer` flag - it seats players in
+  // the array order it receives and reads the per-player `first` flag. So we
+  // do the randomization here, mirroring CreateGameForm.vue's serializeSettings:
+  // shuffle the seating order and pick a random player to go first.
+  let ordered = dedupeColors(parsed.slots);
+  let firstIndex0: number;
+  if (parsed.randomFirstPlayer) {
+    ordered = shuffle(ordered);
+    firstIndex0 = Math.floor(Math.random() * ordered.length);
+  } else if (parsed.firstPlayerSlot !== undefined) {
+    firstIndex0 = ordered.findIndex((s) => s.index === parsed.firstPlayerSlot);
+  } else {
+    firstIndex0 = -1;
+  }
 
-  const players: Array<NewPlayerModel> = deduped.map((slot, idx) => ({
+  const players: Array<NewPlayerModel> = ordered.map((slot, idx) => ({
     name: lookup(slot.slackUserId) ?? fallbackName(slot.color, idx),
     color: slot.color,
     beginner: false,
@@ -223,17 +241,29 @@ export function toNewGameConfig(
     shuffleMapOption: parsed.toggles.shuffleMapOption,
     startingPreludes: parsed.startingPreludes,
     startingCeos: parsed.startingCeos,
-    escapeVelocity: parsed.escapeVelocityOn ? {...DEFAULT_ESCAPE_VELOCITY} : undefined,
+    escapeVelocity: parsed.escapeVelocityOn
+      ? {...DEFAULT_ESCAPE_VELOCITY, thresholdMinutes: parsed.escapeVelocityThresholdMinutes}
+      : undefined,
   };
 
   return {
     config: buildNewGameConfig(overrides),
-    slackUserIds: deduped.map((s) => s.slackUserId),
+    slackUserIds: ordered.map((s) => s.slackUserId),
   };
 }
 
 function fallbackName(color: PlayerColor, idx: number): string {
   return `${color.charAt(0).toUpperCase()}${color.slice(1)} (slot ${idx + 1})`;
+}
+
+/** Returns a new array with the elements in a random order (Fisher-Yates). */
+function shuffle<T>(items: ReadonlyArray<T>): Array<T> {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j]!, result[i]!];
+  }
+  return result;
 }
 
 // --- view.state.values readers ---
@@ -280,6 +310,14 @@ function parseNonNegInt(raw: string | undefined, fallback: number): number | und
   if (raw === undefined || raw.trim() === '') return fallback;
   const n = Number.parseInt(raw, 10);
   if (!Number.isFinite(n) || n < 0 || n > 20 || String(n) !== raw.trim()) return undefined;
+  return n;
+}
+
+/** Escape Velocity threshold, in minutes. Mirrors the web form's 1-180 range. */
+function parseMinutes(raw: string | undefined, fallback: number): number | undefined {
+  if (raw === undefined || raw.trim() === '') return fallback;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1 || n > 180 || String(n) !== raw.trim()) return undefined;
   return n;
 }
 

@@ -11,6 +11,7 @@
 import type {KnownBlock, ModalView, PlainTextOption} from '@slack/types';
 import {
   BOARDS,
+  DEFAULT_ESCAPE_VELOCITY,
   EXPANSIONS,
   EXPANSION_LABELS,
   PLAYER_COLORS,
@@ -29,6 +30,7 @@ export const BlockIds = {
   startingPreludes: 'starting_preludes',
   startingCeos: 'starting_ceos',
   escapeVelocity: 'escape_velocity',
+  escapeVelocityMinutes: 'escape_velocity_minutes',
   randomFirstPlayer: 'random_first_player',
   firstPlayerSlot: 'first_player_slot',
 } as const;
@@ -43,6 +45,7 @@ export const ActionIds = {
   startingPreludes: 'starting_preludes_action',
   startingCeos: 'starting_ceos_action',
   escapeVelocity: 'escape_velocity_action',
+  escapeVelocityMinutes: 'escape_velocity_minutes_action',
   randomFirstPlayer: 'random_first_player_action',
   firstPlayerSlot: 'first_player_slot_action',
 } as const;
@@ -106,6 +109,7 @@ export function buildNewGameView(privateMetadata: PrivateMetadata): ModalView {
   blocks.push(startingPreludesBlock());
   blocks.push(startingCeosBlock());
   blocks.push(escapeVelocityBlock());
+  blocks.push(escapeVelocityMinutesBlock());
 
   return {
     type: 'modal',
@@ -290,7 +294,10 @@ function startingCeosBlock(): KnownBlock {
 
 function escapeVelocityBlock(): KnownBlock {
   const off = {text: {type: 'plain_text' as const, text: 'Off'}, value: 'off'};
-  const on = {text: {type: 'plain_text' as const, text: 'On (25 min threshold, +2s/action)'}, value: 'on'};
+  const on = {
+    text: {type: 'plain_text' as const, text: `On (+${DEFAULT_ESCAPE_VELOCITY.bonusSectionsPerAction}s/action)`},
+    value: 'on',
+  };
   return {
     type: 'input',
     block_id: BlockIds.escapeVelocity,
@@ -301,6 +308,21 @@ function escapeVelocityBlock(): KnownBlock {
       action_id: ActionIds.escapeVelocity,
       initial_option: on,
       options: [off, on],
+    },
+  };
+}
+
+function escapeVelocityMinutesBlock(): KnownBlock {
+  return {
+    type: 'input',
+    block_id: BlockIds.escapeVelocityMinutes,
+    optional: true,
+    label: {type: 'plain_text', text: 'Escape Velocity time (minutes, ignored when Off)'},
+    element: {
+      type: 'plain_text_input',
+      action_id: ActionIds.escapeVelocityMinutes,
+      initial_value: String(DEFAULT_ESCAPE_VELOCITY.thresholdMinutes),
+      max_length: 3,
     },
   };
 }

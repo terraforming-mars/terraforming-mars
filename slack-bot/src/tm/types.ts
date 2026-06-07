@@ -113,7 +113,7 @@ export interface EscapeVelocityOptions {
 }
 
 export const DEFAULT_ESCAPE_VELOCITY: EscapeVelocityOptions = {
-  thresholdMinutes: 25,
+  thresholdMinutes: 20,
   bonusSectionsPerAction: 2,
   penaltyPeriodMinutes: 2,
   penaltyVPPerPeriod: 1,

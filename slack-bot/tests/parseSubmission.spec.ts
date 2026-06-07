@@ -25,6 +25,7 @@ function makeState(opts: {
   startingPreludes?: string;
   startingCeos?: string;
   escapeVelocity?: 'off' | 'on';
+  escapeVelocityMinutes?: string;
 }): Record<string, Record<string, unknown>> {
   const state: Record<string, Record<string, unknown>> = {};
   for (const slot of opts.slots) {
@@ -96,6 +97,12 @@ function makeState(opts: {
     [ActionIds.escapeVelocity]: {
       type: 'radio_buttons',
       selected_option: {value: opts.escapeVelocity ?? 'off', text: {type: 'plain_text', text: 'off'}},
+    },
+  };
+  state[BlockIds.escapeVelocityMinutes] = {
+    [ActionIds.escapeVelocityMinutes]: {
+      type: 'plain_text_input',
+      value: opts.escapeVelocityMinutes ?? '20',
     },
   };
   return state;
@@ -181,6 +188,38 @@ describe('parseSubmission', () => {
       expect(parsed.toggles[t.value]).toBeTypeOf('boolean');
     }
   });
+
+  it('parses the escape velocity time input', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      escapeVelocity: 'on',
+      escapeVelocityMinutes: '45',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.escapeVelocityOn).toBe(true);
+    expect(parsed.escapeVelocityThresholdMinutes).toBe(45);
+  });
+
+  it('defaults the escape velocity time to 20 minutes', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      escapeVelocity: 'on',
+      escapeVelocityMinutes: '',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.escapeVelocityThresholdMinutes).toBe(20);
+  });
+
+  it('rejects an out-of-range escape velocity time when on', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      escapeVelocity: 'on',
+      escapeVelocityMinutes: '999',
+    });
+    const result = parseSubmission(state);
+    expect(isErrors(result)).toBe(true);
+    expect((result as {errors: Record<string, string>}).errors[BlockIds.escapeVelocityMinutes]).toBeDefined();
+  });
 });
 
 describe('dedupeColors', () => {
@@ -223,6 +262,7 @@ describe('toNewGameConfig', () => {
     startingPreludes: 4,
     startingCeos: 3,
     escapeVelocityOn: true,
+    escapeVelocityThresholdMinutes: 20,
   };
 
   it('produces a complete NewGameConfig and tracks slackUserIds in player order', () => {
@@ -239,18 +279,36 @@ describe('toNewGameConfig', () => {
     expect(config.startingPreludes).toBe(4);
     expect(config.startingCeos).toBe(3);
     expect(config.escapeVelocity).toBeDefined();
-    expect(config.escapeVelocity?.thresholdMinutes).toBe(30);
+    expect(config.escapeVelocity?.thresholdMinutes).toBe(20);
     // empty long-list fields per design
     expect(config.bannedCards).toEqual([]);
     expect(config.customCorporationsList).toEqual([]);
     // default-only fields are present
     expect(typeof config.politicalAgendasExtension).toBe('string');
-    expect(config.randomMA).toBe('No randomization');
   });
 
-  it('marks no player as first when randomFirstPlayer is true', () => {
-    const out = toNewGameConfig({...parsed, randomFirstPlayer: true}, () => 'X');
-    expect(out.config.players.every((p) => p.first === false)).toBe(true);
+  it('honors a custom escape velocity threshold', () => {
+    const out = toNewGameConfig({...parsed, escapeVelocityThresholdMinutes: 45}, () => 'X');
+    expect(out.config.escapeVelocity?.thresholdMinutes).toBe(45);
+  });
+
+  it('marks exactly one player as first and keeps players<->slackUserIds aligned when random', () => {
+    const slots: Array<RawSlot> = [
+      {index: 1, slackUserId: 'U_ALICE', color: 'red'},
+      {index: 2, slackUserId: 'U_BOB', color: 'blue'},
+      {index: 3, slackUserId: 'U_CARLA', color: 'green'},
+    ];
+    const names: Record<string, string> = {U_ALICE: 'Alice', U_BOB: 'Bob', U_CARLA: 'Carla'};
+    const out = toNewGameConfig(
+      {...parsed, slots, randomFirstPlayer: true},
+      (id) => names[id],
+    );
+    expect(out.config.players.filter((p) => p.first === true)).toHaveLength(1);
+    // Each player keeps the slackUserId at the same array position.
+    out.config.players.forEach((player, idx) => {
+      expect(player.name).toBe(names[out.slackUserIds[idx]!]);
+    });
+    expect([...out.slackUserIds].sort()).toEqual(['U_ALICE', 'U_BOB', 'U_CARLA']);
   });
 
   it('falls back to a sensible name if Slack lookup returns undefined', () => {

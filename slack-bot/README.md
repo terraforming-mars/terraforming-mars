@@ -97,7 +97,8 @@ slack-bot/
 - Common toggles (undo, timers, fast mode, draft, initial draft, show others'
   VP, solar phase, two corporations, no negative global events, shuffle map).
 - Starting preludes / starting CEOs per player.
-- Escape Velocity (off / on with 30-min threshold).
+- Escape Velocity (off / on, with a configurable threshold time in minutes,
+  defaulting to 20).
 
 **Not exposed** to keep the modal under Slack's element-size limits: custom
 corporations / banned cards / included cards / custom CEOs / custom preludes /

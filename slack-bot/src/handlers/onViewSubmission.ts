@@ -73,14 +73,14 @@ export async function onViewSubmission(
         );
         const nameMap = new Map<string, string | undefined>(lookups);
 
-        const {config, slackUserIds} = toNewGameConfig(parsed, (id) => nameMap.get(id));
+        const {config, slackUserIdByColor} = toNewGameConfig(parsed, (id) => nameMap.get(id));
 
         const game = await createGame(config);
         const base = tmBaseUrl();
 
         const dmResults: Array<PlayerDmResult> = await Promise.all(
-          game.players.map((player, idx) => {
-            const slackUserId = slackUserIds[idx] ?? '';
+          game.players.map((player) => {
+            const slackUserId = slackUserIdByColor[player.color] ?? '';
             return dmPlayerLink(
               client,
               slackUserId,
@@ -93,7 +93,7 @@ export async function onViewSubmission(
 
         const summary = buildHostSummaryFromGameModel(
           game.players,
-          slackUserIds,
+          slackUserIdByColor,
           dmResults,
           base,
           game.name,

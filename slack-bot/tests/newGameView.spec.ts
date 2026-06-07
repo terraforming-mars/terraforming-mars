@@ -68,14 +68,16 @@ describe('buildNewGameView', () => {
     expect(options.map((o) => o.value)).toEqual(BOARDS.map((b) => b.value));
   });
 
-  it('lists every EXPANSION in the expansions multi-select with corpera+prelude defaulted', () => {
+  it('lists every EXPANSION in the expansions multi-select with the base set defaulted', () => {
     const view = buildNewGameView(meta);
     const block = findBlock(view, BlockIds.expansions);
     const el = (block as {
       element: {options: Array<{value: string}>; initial_options?: Array<{value: string}>};
     }).element;
     expect(el.options.map((o) => o.value)).toEqual([...EXPANSIONS]);
-    expect(el.initial_options?.map((o) => o.value).sort()).toEqual(['corpera', 'prelude']);
+    expect(el.initial_options?.map((o) => o.value).sort()).toEqual(
+      ['colonies', 'corpera', 'prelude', 'prelude2', 'promo', 'venus'],
+    );
   });
 
   it('lists every TOGGLE in the options checkboxes block', () => {

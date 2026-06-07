@@ -208,7 +208,7 @@ function escapeMrkdwn(s: string): string {
 /** Convenience export used by the test suite. */
 export function buildHostSummaryFromGameModel(
   players: ReadonlyArray<SimplePlayerModel>,
-  slackUserIds: ReadonlyArray<string>,
+  slackUserIdByColor: Record<string, string>,
   dmResults: ReadonlyArray<PlayerDmResult>,
   baseUrl: string,
   gameName: string,
@@ -220,12 +220,17 @@ export function buildHostSummaryFromGameModel(
     gameName,
     hostDashboardUrl,
     spectatorUrl: spectator,
-    players: players.map((p, i) => ({
-      slackUserId: slackUserIds[i] ?? '?',
-      name: p.name,
-      color: p.color,
-      url: `${baseUrl}/player?id=${encodeURIComponent(p.id)}`,
-      dmFailed: failedSet.has(slackUserIds[i] ?? ''),
-    })),
+    // Match each returned player back to its Slack user by color, since the
+    // server returns players in generation order rather than submission order.
+    players: players.map((p) => {
+      const slackUserId = slackUserIdByColor[p.color] ?? '?';
+      return {
+        slackUserId,
+        name: p.name,
+        color: p.color,
+        url: `${baseUrl}/player?id=${encodeURIComponent(p.id)}`,
+        dmFailed: failedSet.has(slackUserId),
+      };
+    }),
   };
 }

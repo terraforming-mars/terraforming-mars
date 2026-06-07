@@ -199,7 +199,7 @@ export type DisplayNameLookup = (slackUserId: string) => string | undefined;
 export function toNewGameConfig(
   parsed: ParsedSubmission,
   lookup: DisplayNameLookup,
-): {config: NewGameConfig; slackUserIds: Array<string>} {
+): {config: NewGameConfig; slackUserIds: Array<string>; slackUserIdByColor: Record<string, string>} {
   // The TM server ignores the `randomFirstPlayer` flag - it seats players in
   // the array order it receives and reads the per-player `first` flag. So we
   // do the randomization here, mirroring CreateGameForm.vue's serializeSettings:
@@ -246,9 +246,18 @@ export function toNewGameConfig(
       : undefined,
   };
 
+  // Map by color (unique per player and preserved by the server) so DMs stay
+  // correct even though the server returns players in generation order, which
+  // starts at the first player rather than our submission order.
+  const slackUserIdByColor: Record<string, string> = {};
+  for (const slot of ordered) {
+    slackUserIdByColor[slot.color] = slot.slackUserId;
+  }
+
   return {
     config: buildNewGameConfig(overrides),
     slackUserIds: ordered.map((s) => s.slackUserId),
+    slackUserIdByColor,
   };
 }
 

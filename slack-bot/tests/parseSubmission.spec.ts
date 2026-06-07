@@ -309,6 +309,26 @@ describe('toNewGameConfig', () => {
       expect(player.name).toBe(names[out.slackUserIds[idx]!]);
     });
     expect([...out.slackUserIds].sort()).toEqual(['U_ALICE', 'U_BOB', 'U_CARLA']);
+    // The color map is the source of truth for DMs - it must point each
+    // player's color at the correct Slack user regardless of seating order.
+    expect(out.slackUserIdByColor).toEqual({
+      red: 'U_ALICE',
+      blue: 'U_BOB',
+      green: 'U_CARLA',
+    });
+  });
+
+  it('keeps the slackUserId->color map correct after color dedupe', () => {
+    const slots: Array<RawSlot> = [
+      {index: 1, slackUserId: 'U_ALICE', color: 'red'},
+      {index: 2, slackUserId: 'U_BOB', color: 'red'},
+    ];
+    const out = toNewGameConfig({...parsed, slots, randomFirstPlayer: false, firstPlayerSlot: undefined}, (id) => id);
+    // Bob's duplicate red was reassigned; the map must reflect the final colors.
+    out.config.players.forEach((player) => {
+      expect(out.slackUserIdByColor[player.color]).toBe(player.name);
+    });
+    expect(Object.values(out.slackUserIdByColor).sort()).toEqual(['U_ALICE', 'U_BOB']);
   });
 
   it('falls back to a sensible name if Slack lookup returns undefined', () => {

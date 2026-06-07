@@ -1,5 +1,8 @@
 <template>
-   <li v-if="message !== undefined && message.data !== undefined && message.message !== undefined" v-on:click.prevent="$emit('click')">
+   <li
+    v-if="message !== undefined && message.data !== undefined && message.message !== undefined"
+    v-on:click.prevent="$emit('click')"
+    :class="maybeAnnouncement">
     <span v-if="message.type !== LogMessageType.NEW_GENERATION" :title="when" v-html="icon"></span>
     <template v-for="(data, idx) of entries" :key="idx">
       <span class="log-plain-text" v-if="typeof(data) === 'string'">{{ data }}</span>
@@ -166,6 +169,9 @@ export default defineComponent({
     },
     formatter(): Intl.ListFormat {
       return new Intl.ListFormat(gameLocaleToIntlLocale(getPreferences().lang), {type: 'conjunction', style: 'long'});
+    },
+    maybeAnnouncement(): string {
+      return this.message.type === LogMessageType.ANNOUNCEMENT ? 'log-announcement' : '';
     },
   },
 });

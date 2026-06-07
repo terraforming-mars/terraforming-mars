@@ -166,6 +166,7 @@ function boardBlock(): KnownBlock {
     text: {type: 'plain_text' as const, text: b.label},
     value: b.value,
   }));
+  const defaultOption = options.find((o) => o.value === 'random all') ?? options[0]!;
   return {
     type: 'input',
     block_id: BlockIds.board,
@@ -173,7 +174,7 @@ function boardBlock(): KnownBlock {
     element: {
       type: 'static_select',
       action_id: ActionIds.board,
-      initial_option: options[11]!,
+      initial_option: defaultOption,
       options,
     },
   };

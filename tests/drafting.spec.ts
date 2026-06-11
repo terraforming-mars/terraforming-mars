@@ -115,6 +115,103 @@ describe('drafting', () => {
     // and that the rest of them are discarded.
   });
 
+  it('2 player - project draft - repick card', () => {
+    const [game, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+    });
+    const drawPile = game.projectDeck.drawPile;
+
+    unshiftCards(drawPile, [
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    game.generation = 1;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    // First round
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    selectCard(player, CardName.BIOFERTILIZER_FACILITY);
+
+    // The first player has drafted a card. The other player has not drafted yet.
+    // Verify that the other player's draft selection is unchanged when the first player repicks.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    // First player should now have a repick choice.
+    // The previously drafted card should be present but disabled.
+    const selectCardInput = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput.cards.map(toName)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY,
+    ]);
+    expect(selectCardInput.config.enabled).deep.eq([true, true, true, false]);
+
+    // Repick: player chooses CAPITAL instead
+    selectCard(player, CardName.CAPITAL);
+
+    // Verify other player's draft selection is STILL unchanged after player repicks.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    // First player should now be able to repick again, with CAPITAL disabled
+    // and BIOFERTILIZER_FACILITY re-enabled.
+    const selectCardInput2 = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput2.cards.map(toName)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+    ]);
+    expect(selectCardInput2.config.enabled).deep.eq([true, true, true, false]);
+
+    // Other player makes their choice
+    selectCard(otherPlayer, CardName.GENE_REPAIR);
+
+    // Both players have now made their selections.
+    // Verify that player drafted CAPITAL and otherPlayer drafted GENE_REPAIR.
+    expect(player.draftedCards.map(toName)).deep.eq([CardName.CAPITAL]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.GENE_REPAIR]);
+
+    // Second card round should start, passing hands
+    expect(draftSelection(player)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.HACKERS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY]);
+  });
+
   it('3 player - project draft - even generation', () => {
     const [game, player1, player2, player3] = testGame(3, {draftVariant: true});
     const drawPile = game.projectDeck.drawPile;
@@ -648,6 +745,96 @@ describe('drafting', () => {
       preludeCards: [],
       ceoCards: [],
     });
+  });
+
+  it('2 player - initial draft - repick card', () => {
+    const [, /* game */ player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+    });
+
+    // First round
+    expect(draftSelection(player)).deep.eq([
+      CardName.ADAPTATION_TECHNOLOGY,
+      CardName.ADAPTED_LICHEN,
+      CardName.ADVANCED_ECOSYSTEMS,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    // Player 1 drafts ADAPTATION_TECHNOLOGY
+    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
+
+    // Verify that the other player's draft selection is unchanged when the first player repicks.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    // Player 1 should now have a repick choice.
+    // The previously drafted card should be present but disabled.
+    const selectCardInput = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput.cards.map(toName)).deep.eq([
+      CardName.ADAPTED_LICHEN,
+      CardName.ADVANCED_ECOSYSTEMS,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS,
+      CardName.ADAPTATION_TECHNOLOGY,
+    ]);
+    expect(selectCardInput.config.enabled).deep.eq([true, true, true, true, false]);
+
+    // Repick: player chooses ADVANCED_ECOSYSTEMS instead
+    selectCard(player, CardName.ADVANCED_ECOSYSTEMS);
+
+    // Verify other player's draft selection is STILL unchanged after player repicks.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    // Player 1 should now be able to repick again, with ADVANCED_ECOSYSTEMS disabled
+    // and ADAPTATION_TECHNOLOGY re-enabled.
+    const selectCardInput2 = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput2.cards.map(toName)).deep.eq([
+      CardName.ADAPTED_LICHEN,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS,
+      CardName.ADAPTATION_TECHNOLOGY,
+      CardName.ADVANCED_ECOSYSTEMS,
+    ]);
+    expect(selectCardInput2.config.enabled).deep.eq([true, true, true, true, false]);
+
+    // Other player makes their choice
+    selectCard(otherPlayer, CardName.ALGAE);
+
+    // Both players have now made their selections.
+    // Verify that player drafted ADVANCED_ECOSYSTEMS and otherPlayer drafted ALGAE.
+    expect(player.draftedCards.map(toName)).deep.eq([CardName.ADVANCED_ECOSYSTEMS]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.ALGAE]);
+
+    // Second round draft selection for player should be the remaining cards passed from other player
+    expect(draftSelection(player)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ADAPTED_LICHEN,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS,
+      CardName.ADAPTATION_TECHNOLOGY]);
   });
 
   it('2 player - initial draft, with prelude, without prelude draft', () => {

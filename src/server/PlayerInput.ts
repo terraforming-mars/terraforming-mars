@@ -21,10 +21,10 @@ export interface PlayerInput {
      */
     eligibleForDefault?: boolean;
     /**
-     * When true, this indicates that the user should continue to poll for updates
-     * even if waiting for an input from that user.
+     * When true, this indicates that the input is polling and the user should
+     * continue to poll for updates.
      */
-    polling?: boolean;
+  polling?: boolean;
 
     cb(...item: any): PlayerInput | undefined;
 

@@ -23,7 +23,7 @@ export class GasTrust extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U092',
+        cardNumber: 'U093',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).nbsp.nbsp.heat(3, {digit}).slash().tag(Tag.CRIME).asterix();
         }),

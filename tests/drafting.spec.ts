@@ -1163,7 +1163,7 @@ function expectReselect(player: IPlayer) {
   }
 
   expect(waitingFor.optional).is.true;
-  expect(waitingFor.title).to.include('You can change your selection');
+  expect((waitingFor.title as string)).to.include('You can change your selection');
 }
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {

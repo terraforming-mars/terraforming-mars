@@ -90,10 +90,13 @@ export class LocalStorage implements IDatabase {
     const results: Array<number> = [];
     for (let i = 0; i < storage.length; i++) {
       const key = storage.key(i);
-      if (key === null || key === 'game:' + gameId) {
+      if (key === null) {
         continue;
       }
-      if (key.startsWith('game:' + gameId)) {
+      // The trailing ':' is required so this doesn't also match the save ids of
+      // another game whose id has this gameId as a prefix (game ids are
+      // variable-length, so 'g1' is a prefix of 'g1a').
+      if (key.startsWith('game:' + gameId + ':')) {
         const parts = key.split(':');
         results.push(Number(parts[2]));
       }

@@ -72,7 +72,7 @@ export default defineComponent({
       return true;
     },
     saveData() {
-      this.onsave({type: 'claimedUndergroundToken', selected: this.selected.sort()});
+      this.onsave({type: 'claimedUndergroundToken', selected: this.selected});
     },
   },
 });

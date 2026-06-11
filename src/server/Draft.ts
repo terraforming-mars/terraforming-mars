@@ -133,7 +133,7 @@ export abstract class Draft {
     }
 
     const messageTitle = repick ?
-      'You can change your selection until all players have chosen a card. Passing to ${0}' :
+      'You can change your selection until all players have selected a card. Passing to ${0}' :
       (cardsToKeep === 1 ?
         'Select a card to keep and pass the rest to ${0}' :
         'Select two cards to keep and pass the rest to ${0}');

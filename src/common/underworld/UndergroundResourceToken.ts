@@ -21,13 +21,12 @@ export type UndergroundResourceToken = TemporaryBonusToken |
   'nothing' |
   'card1' | 'card2' |
   'corruption1' | 'corruption2' |
-  'data1' | 'data2' | 'data3' |
-  'steel2plant' | 'steel2' | 'steel1production' |
+  'steel2plant' | 'steel1production' |
   'titanium2' | 'titanium1production' |
   'plant2' | 'plant3' | 'plant1production' |
   'titaniumandplant' |
   'energy2' | 'energy1production' | 'heat2production' |
-  'microbe1' | 'microbe2' | 'tr' | 'ocean' |
+  'microbe2' | 'tr' | 'ocean' |
   'sciencetag' | 'planttag' | 'place6mc' |
   'anyresource1';
 
@@ -40,10 +39,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   card2: 'draw 2 cards',
   corruption1: '1 corruption',
   corruption2: '2 corruption',
-  data1: '1 data',
-  data2: '2 data',
-  data3: '3 data',
-  steel2: '2 steel',
   steel1production: '1 steel production',
   titanium2: '2 titanium',
   titanium1production: '1 titanium production',
@@ -53,7 +48,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   titaniumandplant: '1 titanium and 1 plant',
   energy1production: '1 energy production',
   heat2production: '2 heat production',
-  microbe1: '1 microbe',
   microbe2: '2 microbes',
   tr: '1 TR',
   ocean: 'place an ocean',

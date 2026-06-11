@@ -36,7 +36,7 @@ export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
       map.set(tags + influence, player);
     }
     const totals = Array.from(map.keys());
-    totals.sort(); // Largest value at the back.
+    totals.sort((a, b) => a - b); // Largest value at the back.
 
     function reward(value: number | undefined, place: 1 | 2) {
       if (value === undefined || value === 0) {

@@ -53,6 +53,16 @@ describe('LaggingRegulation', () => {
       ],
     },
     {
+      // A stringwise sort would order the sums [10, 9, 2] as [10, 2, 9], handing
+      // first place to the player with 9 and second to the player with 2.
+      it: 'sums of ten or more are ranked numerically',
+      values: [
+        {crimeTags: 10, influence: 0, expected: {corruption: 1, mc: 9}},
+        {crimeTags: 9, influence: 0, expected: {corruption: 1, mc: 3}},
+        {crimeTags: 2, influence: 0, expected: {corruption: 0, mc: 0}},
+      ],
+    },
+    {
       it: 'only first',
       values: [
         {crimeTags: 2, influence: 0, expected: {corruption: 1, mc: 9}},

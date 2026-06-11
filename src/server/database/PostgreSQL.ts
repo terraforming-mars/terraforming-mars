@@ -246,7 +246,7 @@ export class PostgreSQL implements IDatabase {
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<Array<GameId>> {
     const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
-    const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
+    const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1) AND status = \'running\'', [dateToSeconds]);
     let gameIds = selectResult.rows.map((row) => row.game_id);
     if (gameIds.length > 1000) {
       console.log('Truncated purge to 1000 games.');

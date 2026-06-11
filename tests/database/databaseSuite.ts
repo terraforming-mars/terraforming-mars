@@ -208,6 +208,13 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
         expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
+        // A finished game of the same age must NOT be purged: purgeUnfinishedGames
+        // only removes games still in progress.
+        const finishedPlayer = TestPlayer.BLUE.newPlayer();
+        const finishedGame = Game.newInstance('g-finished-game-id', [finishedPlayer], finishedPlayer, 'spectatorid2');
+        await db.lastSaveGamePromise;
+        await db.markFinished(finishedGame.id);
+
         await db.purgeUnfinishedGames('1');
         expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
         const entry = (await db.getParticipants()).find((entry) => entry.gameId === game.id);
@@ -218,6 +225,9 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
         expect(await db.getSaveIds(game.id)).is.empty;
         const postPurgeEntry = (await db.getParticipants()).find((entry) => entry.gameId === game.id);
         expect(postPurgeEntry).is.undefined;
+
+        // The finished game survived the purge even though it is just as old.
+        expect(await db.getSaveIds(finishedGame.id)).is.not.empty;
       });
     }
 

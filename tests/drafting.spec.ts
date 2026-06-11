@@ -1154,14 +1154,16 @@ describe('drafting', () => {
   }
 });
 
+// Asserts that the player is offered to reselect their draft card
+// while waiting for others to draft.
 function expectReselect(player: IPlayer) {
   const waitingFor = player.getWaitingFor();
   if (waitingFor === undefined) {
     throw new Error('Player is not waiting for anything');
   }
-  const title = waitingFor.title;
-  const messageText = typeof title === 'string' ? title : title.message;
-  expect(messageText).to.include('You can change your selection');
+
+  expect(waitingFor.optional).is.true;
+  expect(waitingFor.title).to.include('You can change your selection');
 }
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {

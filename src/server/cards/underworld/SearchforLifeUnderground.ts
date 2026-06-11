@@ -66,7 +66,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
             }
 
             player.game.log('${0} revealed ${1}', (b) => b.player(player).undergroundToken(undergroundResources));
-            if (['microbe1', 'microbe2', 'microbe1pertemp'].includes(undergroundResources)) {
+            if (['microbe1', 'microbe2', 'microbe1pertemp', 'microbe2pertemp'].includes(undergroundResources)) {
               player.addResourceTo(this, 1);
               player.game.log('${0} found life!', (b) => b.player(player));
             }

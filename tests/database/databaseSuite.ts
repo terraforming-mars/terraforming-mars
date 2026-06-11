@@ -110,6 +110,25 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
+    it('getSaveIds returns only the requested game, not games sharing its id prefix', async () => {
+      // One game's id can be a prefix of another's, since ids are variable-length
+      // ('game-id-1' is a prefix of 'game-id-12'). getSaveIds must return only the
+      // requested game's saves, not those of the longer-named game.
+      const player1 = TestPlayer.BLACK.newPlayer();
+      const game1 = Game.newInstance('game-id-1', [player1], player1, 'spectatorid1');
+      await db.lastSaveGamePromise;
+      await db.saveGame(game1);
+
+      const player2 = TestPlayer.BLUE.newPlayer();
+      const game2 = Game.newInstance('game-id-12', [player2], player2, 'spectatorid2');
+      await db.lastSaveGamePromise;
+      await db.saveGame(game2);
+      await db.saveGame(game2);
+
+      expect(await db.getSaveIds('game-id-1')).has.members([0, 1]);
+      expect(await db.getSaveIds('game-id-12')).has.members([0, 1, 2]);
+    });
+
     if (dtor.omit?.markFinished !== true) {
       it('markFinished', async () => {
         const player = TestPlayer.BLACK.newPlayer();

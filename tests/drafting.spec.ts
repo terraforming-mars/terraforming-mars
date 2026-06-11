@@ -9,6 +9,7 @@ import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
+import {Message} from '@/common/logs/Message';
 
 // Tests for drafting
 describe('drafting', () => {
@@ -1163,7 +1164,7 @@ function expectReselect(player: IPlayer) {
   }
 
   expect(waitingFor.optional).is.true;
-  expect((waitingFor.title as string)).to.include('You can change your selection');
+  expect((waitingFor.title as Message).message).to.include('You can change your selection');
 }
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {

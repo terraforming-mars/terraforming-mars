@@ -174,48 +174,6 @@ describe('UnderworldExpansion', () => {
     expect(player1.underworldData.corruption).eq(2);
   });
 
-  it('grant bonus - data1', () => {
-    expect(player1.getCardsWithResources()).is.empty;
-
-    UnderworldExpansion.grant(player1, 'data1');
-    runAllActions(game);
-    const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([dataCard2]);
-
-    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
-    expect(dataCard2.resourceCount).eq(1);
-  });
-
-  it('grant bonus - data2', () => {
-    expect(player1.getCardsWithResources()).is.empty;
-
-    UnderworldExpansion.grant(player1, 'data2');
-    runAllActions(game);
-    const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([dataCard2]);
-
-    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
-    expect(dataCard2.resourceCount).eq(2);
-  });
-
-  it('grant bonus - data3', () => {
-    expect(player1.getCardsWithResources()).is.empty;
-
-    UnderworldExpansion.grant(player1, 'data3');
-    runAllActions(game);
-    const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([dataCard2]);
-
-    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
-    expect(dataCard2.resourceCount).eq(3);
-  });
-
-  it('grant bonus - steel2', () => {
-    expect(player1.stock.asUnits()).deep.eq(Units.of({}));
-    UnderworldExpansion.grant(player1, 'steel2');
-    expect(player1.stock.asUnits()).deep.eq(Units.of({steel: 2}));
-  });
-
   it('grant bonus - steel1production', () => {
     expect(player1.stock.asUnits()).deep.eq(Units.of({}));
     UnderworldExpansion.grant(player1, 'steel1production');
@@ -268,18 +226,6 @@ describe('UnderworldExpansion', () => {
     expect(player1.production.asUnits()).deep.eq(Units.of({}));
     UnderworldExpansion.grant(player1, 'heat2production');
     expect(player1.production.asUnits()).deep.eq(Units.of({heat: 2}));
-  });
-
-  it('grant bonus - microbe1', () => {
-    expect(player1.getCardsWithResources()).is.empty;
-
-    UnderworldExpansion.grant(player1, 'microbe1');
-    runAllActions(game);
-    const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([microbeCard1]);
-
-    expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
-    expect(microbeCard1.resourceCount).eq(1);
   });
 
   it('grant bonus - microbe2', () => {

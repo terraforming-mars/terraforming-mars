@@ -342,18 +342,6 @@ export class UnderworldExpansion {
     case 'corruption2':
       UnderworldExpansion.gainCorruption(player, 2, {log: true});
       break;
-    case 'data1':
-      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
-      break;
-    case 'data2':
-      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-      break;
-    case 'data3':
-      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 3}));
-      break;
-    case 'steel2':
-      player.stock.add(Resource.STEEL, 2, {log: true});
-      break;
     case 'steel2plant':
       player.stock.add(Resource.STEEL, 2, {log: true});
       player.stock.add(Resource.PLANTS, 1, {log: true});
@@ -387,9 +375,6 @@ export class UnderworldExpansion {
       break;
     case 'heat2production':
       player.production.add(Resource.HEAT, 2, {log: true});
-      break;
-    case 'microbe1':
-      player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 1}));
       break;
     case 'microbe2':
       player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));

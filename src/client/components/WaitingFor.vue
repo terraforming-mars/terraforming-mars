@@ -1,6 +1,6 @@
 <template>
   <div>
-  <template v-if="waitingfor === undefined || waitingfor.polling">
+  <template v-if="waitingfor === undefined || waitingfor.optional">
     <template v-if="waitingfor === undefined">
       {{ $t('Not your turn to take any actions') }}
     </template>
@@ -251,10 +251,10 @@ export default defineComponent({
   mounted() {
     document.title = gameDocumentTitle(this.playerView.game);
     window.clearInterval(documentTitleTimer);
-    if (this.waitingfor === undefined || this.waitingfor.polling) {
+    if (this.waitingfor === undefined || this.waitingfor.optional) {
       this.waitForUpdate();
     }
-    if (this.playerView.players.length > 1 && this.waitingfor !== undefined && !this.waitingfor.polling) {
+    if (this.playerView.players.length > 1 && this.waitingfor !== undefined && !this.waitingfor.optional) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

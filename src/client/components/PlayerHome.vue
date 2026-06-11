@@ -273,7 +273,7 @@ export default defineComponent({
   },
   methods: {
     isPlayerActing(playerView: PlayerViewModel) : boolean {
-      return playerView.players.length > 1 && playerView.waitingFor !== undefined && !playerView.waitingFor.polling;
+      return playerView.players.length > 1 && playerView.waitingFor !== undefined && !playerView.waitingFor.optional;
     },
     getFleetsCountRange(player: PublicPlayerModel): Array<number> {
       const fleetsRange = [];

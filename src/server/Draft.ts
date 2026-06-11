@@ -139,13 +139,13 @@ export abstract class Draft {
         'Select two cards to keep and pass the rest to ${0}');
     const selectCard = new SelectCard(
       message(messageTitle, (b) => b.player(giveTo)),
-      repick ? 'Repick' : 'Keep',
+      'Select',
       cardsToConsider,
       {
         min: cardsToKeep, max: cardsToKeep, played: false,
         enabled: enabled,
       });
-    selectCard.polling = repick;
+    selectCard.optional = repick;
     player.setWaitingFor(selectCard
       .andThen((selected) => {
         if (repick) {

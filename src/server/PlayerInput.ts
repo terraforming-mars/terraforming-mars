@@ -21,10 +21,10 @@ export interface PlayerInput {
      */
     eligibleForDefault?: boolean;
     /**
-     * When true, this indicates that the input is polling and the user should
+     * When true, this indicates that the input is optional and the user should
      * continue to poll for updates.
      */
-  polling?: boolean;
+  optional?: boolean;
 
     cb(...item: any): PlayerInput | undefined;
 
@@ -51,7 +51,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
   public annotation: string | undefined;
-  public polling?: boolean;
+  public optional?: boolean;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;

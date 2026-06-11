@@ -1714,7 +1714,7 @@ export class Player implements IPlayer {
         console.warn(message);
       }
     }
-    if (!input.polling) {
+    if (!input.optional) {
       this.timer.start();
     }
     this.waitingFor = input;

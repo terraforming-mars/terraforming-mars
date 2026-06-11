@@ -18,7 +18,7 @@ export class ApiWaitingFor extends Handler {
   private playerHasRequiredInput(player: IPlayer): boolean {
     const input = player.getWaitingFor();
     if (input !== undefined) {
-      return !input.polling;
+      return !input.optional;
     }
     return player.game.phase === Phase.END;
   }
@@ -27,7 +27,7 @@ export class ApiWaitingFor extends Handler {
     return game.playersInGenerationOrder
       .filter((player) => {
         const waitingFor = player.getWaitingFor();
-        return waitingFor !== undefined && !waitingFor.polling;
+        return waitingFor !== undefined && !waitingFor.optional;
       })
       .map((player) => player.color);
   }

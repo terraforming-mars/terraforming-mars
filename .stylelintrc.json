@@ -3,7 +3,8 @@
   "plugins": ["@stylistic/stylelint-plugin"],
   "rules": {
     "@stylistic/indentation": 2,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "declaration-block-no-redundant-longhand-properties": true
   },
   "overrides": [
     {

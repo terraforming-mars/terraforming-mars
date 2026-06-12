@@ -199,7 +199,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .delta-project-board {
   margin: 20px;
   display: block;
@@ -268,10 +268,7 @@ export default defineComponent({
   line-height: 34px;
   text-align: center;
   border-radius: 6px;
-  border-top: 2px solid #dddddd;
-  border-left: 2px solid #dddddd;
-  border-bottom: 2px solid #898989;
-  border-right: 2px solid #898989;
+  .raised-bevel();
   background: linear-gradient(#cc8b00, #805700, #805700);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
 }
@@ -368,10 +365,7 @@ export default defineComponent({
   align-items: center;
   padding: 4px;
   margin: 0 2px;
-  border-top: 2px solid #dddddd;
-  border-left: 2px solid #dddddd;
-  border-bottom: 2px solid #898989;
-  border-right: 2px solid #898989;
+  .raised-bevel();
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
   background-image: url(/assets/misc/production.png);
   background-size: cover;

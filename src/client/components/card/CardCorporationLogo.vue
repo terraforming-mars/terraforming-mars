@@ -538,10 +538,10 @@
       </template>
       <template v-else-if="title === CardName.TERRALABS_RESEARCH">
         <div
-          style="font-size: 13px;left:32px;top:10px;font-family:Prototype;color:#222;transform:scale(2,1);position:absolute;">
+          style="font-size: 13px;left:32px;top:10px;font-family:Prototype, sans-serif;color:#222;transform:scale(2,1);position:absolute;">
           TERRALABS</div>
         <div
-          style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype;transform:scale(2,1)">
+          style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype, sans-serif;transform:scale(2,1)">
           RESEARCH</div>
       </template>
       <template v-else-if="title === CardName.THARSIS_REPUBLIC">

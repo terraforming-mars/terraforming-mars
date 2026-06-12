@@ -4,5 +4,19 @@
   "rules": {
     "@stylistic/indentation": 2,
     "no-descending-specificity": null
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.vue"],
+      "customSyntax": "postcss-html",
+      "rules": {
+        "selector-pseudo-class-no-unknown": [
+          true,
+          {
+            "ignorePseudoClasses": ["deep", "global", "slotted"]
+          }
+        ]
+      }
+    }
+  ]
 }

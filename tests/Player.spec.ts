@@ -37,6 +37,30 @@ import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 import {cast} from '@/common/utils/utils';
+import {Timer} from '../src/common/Timer';
+import {FakeClock} from './common/FakeClock';
+
+function playerWithRunningTimer(): [Player, FakeClock] {
+  const player = new Player('blue', 'blue', false, 0, 'p-blue');
+  Game.newInstance('gameid', [player], player, 'spectatorid');
+  player.clearWaitingFor();
+  const clock = new FakeClock();
+  (Timer as any).lastStoppedAt = 0;
+  player.timer = Timer.newInstance(clock);
+
+  const firstInput = new SelectOption('First input');
+  player.setWaitingFor(firstInput);
+  clock.millis = 1_000;
+  player.process({type: 'option'});
+
+  const secondInput = new SelectOption('Second input');
+  player.setWaitingFor(secondInput);
+  clock.millis = 2_000;
+  player.process({type: 'option'});
+
+  expect(player.timer.getElapsed()).eq(1_000);
+  return [player, clock];
+}
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {
@@ -51,6 +75,32 @@ describe('Player', () => {
     player.clearWaitingFor();
 
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
+  });
+
+  it('does not stop the timer when processing optional input', () => {
+    const [player, clock] = playerWithRunningTimer();
+    const elapsed = player.timer.getElapsed();
+
+    const optionalInput = new SelectOption('Optional input');
+    optionalInput.optional = true;
+    player.setWaitingFor(optionalInput);
+    clock.millis += 10_000;
+    player.process({type: 'option'});
+
+    expect(player.timer.getElapsed()).eq(elapsed);
+  });
+
+  it('does not stop the timer when clearing optional input', () => {
+    const [player, clock] = playerWithRunningTimer();
+    const elapsed = player.timer.getElapsed();
+
+    const optionalInput = new SelectOption('Optional input');
+    optionalInput.optional = true;
+    player.setWaitingFor(optionalInput);
+    clock.millis += 10_000;
+    player.clearWaitingFor();
+
+    expect(player.timer.getElapsed()).eq(elapsed);
   });
 
   it('Should run select player for PowerSupplyConsortium', () => {
@@ -652,4 +702,3 @@ describe('Player', () => {
     expect(player.megaCredits).eq(14);
   });
 });
-

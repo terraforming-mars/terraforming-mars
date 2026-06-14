@@ -2,7 +2,7 @@
   "Colonizer Training Camp": "Табір навчання поселенців",
   "Oxygen must be 5% or less.": "Рівень кисню повинен бути 5% або менше.",
 
-  "Asteroid Mining Consortium": "Консорціум астероїдного розроблення",
+  "Asteroid Mining Consortium": "Астероїдний консорціум",
   "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Вимагає наявності виробництва титану. Зменшити виробництво будь-якого титану на 1 і збільшити власне на 1.",
 
   "Deep Well Heating": "Глибоке теплове нагрівання",
@@ -109,10 +109,10 @@
   "Space Station": "Космічна станція",
   "Effect: When you play a space card, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту космосу, ви платите на 2 M€ менше.",
 
-  "Eos Chasma National Park": "Національний парк Еос Хасма",
+  "Eos Chasma National Park": "Нацпарк Еос Хасма",
   "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Вимагає -12 °C або тепліше. Додати 1 тварину НА БУДЬ-ЯКУ КАРТУ ТВАРИН. Отримати 3 рослини. Збільшити виробництво M€ на 2.",
 
-  "Interstellar Colony Ship": "Міжзоряний колонізаційний корабель",
+  "Interstellar Colony Ship": "Міжзоряний корабель",
   "Requires that you have 5 science tags.": "Вимагає наявності 5 міток науки.",
 
   "Security Fleet": "Флот безпеки",
@@ -124,7 +124,7 @@
   "Lunar Beam": "Лунний промінь",
   "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Зменшити виробництво M€ на 2 і збільшити виробництво тепла і виробництво енергії на 2 кожне.",
 
-  "Optimal Aerobraking": "Оптимальне аеродинамічне гальмування",
+  "Optimal Aerobraking": "Оптимальне аерогальмування",
   "Effect: When you play a space event, you gain 3 M€ and 3 heat.": "Ефект: Коли ви граєте космічну подію, ви отримуєте 3 M€ і 3 тепла.",
 
   "Underground City": "Підземне місто",
@@ -134,7 +134,7 @@
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Дія: Додати 1 мікроб до цієї карти або видалити 2 мікроби з цієї карти, щоб підняти рівень кисню на 1.",
   "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "Дія: Видалити 2 мікроби з цієї карти, щоб підняти рівень кисню на 1.",
 
-  "GHG Producing Bacteria": "Бактерії, що виробляють парникові гази",
+  "GHG Producing Bacteria": "Газоутворюючі бактерії",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Дія: Додати 1 мікроб до цієї карти або видалити 2 мікроби, щоб підняти температуру на 1.",
   "Action: Remove 2 microbes to raise temperature 1 step.": "Дія: Видалити 2 мікроби, щоб підняти температуру на 1.",
   "Requires 4% oxygen.": "Вимагає 4% або більше рівня кисню.",
@@ -207,7 +207,7 @@
 
   "Vesta Shipyard": "Верф Веста",
 
-  "Beam From A Thorium Asteroid": "Промінь з торієвого астероїда",
+  "Beam From A Thorium Asteroid": "Промінь торій-астероїда",
   "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Вимагає мітки Юпітера. Збільшити виробництво тепла і виробництво енергії на 3 кожне.",
 
   "Mangrove": "Мангровий ліс",
@@ -434,7 +434,7 @@
   "Action: Add a microbe to ANOTHER card.": "Дія: Додати мікроба на ІНШУ карту.",
   "Requires -14 C° or warmer.": "Вимагає температуру -14 °C або тепліше.",
 
-  "Extreme-Cold Fungus": "Гриби екстремальних холодів",
+  "Extreme-Cold Fungus": "Морозостійкі гриби",
   "Action: Gain 1 plant.": "Дія: Отримати 1 рослину.",
   "Action: Add 2 microbes to ANOTHER card.": "Дія: Додати 2 мікробів на ІНШУ карту.",
   "It must be -10 C or colder.": "Температура повинна бути -10 °C або холодніше.",
@@ -475,7 +475,7 @@
   "Insects": "Комахи",
   "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Вимагає 6% кисню. Збільште виробництво рослин на 1 за кожну мітку рослин, який у вас є.",
 
-  "CEO's Favorite Project": "Улюблений проект генерального директора",
+  "CEO's Favorite Project": "Улюблений проект СЕО",
   "Add 1 resource to a card with at least 1 resource on it": "Додайте 1 ресурс на карту, на якій є принаймні 1 ресурс.",
 
   "Anti-Gravity Technology": "Технологія антигравітації",
@@ -500,7 +500,7 @@
   "Standard Technology": "Стандартна технологія",
   "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Ефект: Після того, як ви заплатите за стандартний проект, за винятком продажу патентів, ви отримуєте 3 M€.",
 
-  "Nitrite Reducing Bacteria": "Бактерії, що знижують нітрити",
+  "Nitrite Reducing Bacteria": "Денітрифікуючі бактерії",
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Дія: Додайте 1 мікроба на цю карту або видаліть 3 мікробів, щоб збільшити вашу оцінку терраформування на 1.",
   "Action: Remove 3 microbes to increase your TR 1 step.": "Дія: Видаліть 3 мікробів, щоб збільшити вашу оцінку терраформування на 1.",
   "Add 3 microbes to this card.": "Додайте 3 мікроби на цю карту.",
@@ -512,7 +512,7 @@
   "Lichen": "Лишайники",
   "Requires -24 C or warmer. Increase your plant production 1 step.": "Вимагає -24 °C або тепліше. Збільште виробництво рослин на 1.",
 
-  "Power Supply Consortium": "Консорціум енергопостачання",
+  "Power Supply Consortium": "Енергоконсорціум",
   "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.": "Вимагає 2 мітки енергії. Зменште виробництво будь-якої енергії на 1 і збільште ваше виробництво на 1.",
 
   "Convoy From Europa": "Конвой з Європи",
@@ -533,16 +533,16 @@
   "Shuttles": "Шатли",
   "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Вимагає 5% кисню. Зменште виробництво енергії на 1 і збільште виробництво M€ на 2.",
 
-  "Import of Advanced GHG": "Імпорт високотехнологічних парникових газів",
+  "Import of Advanced GHG": "Імпорт парникових газів",
   "Increase your heat production 2 steps.": "Збільште виробництво тепла на 2.",
 
   "Windmills": "Вітряки",
   "Requires 7% oxygen. Increase your energy production 1 step.": "Вимагає 7% кисню. Збільште виробництво енергії на 1.",
 
-  "Tundra Farming": "Тундрове сільське господарство",
+  "Tundra Farming": "Тундрова ферма",
   "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.": "Вимагає -6 °C або тепліше. Збільште виробництво рослин на 1 і виробництво M€ на 2. Отримайте 1 рослину.",
 
-  "Aerobraked Ammonia Asteroid": "Аміачний астероїд, зупинений аеродинамічним гальмуванням",
+  "Aerobraked Ammonia Asteroid": "Аміачний астероїд",
   "Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.": "Додайте 2 мікробів на ІНШУ карту. Збільште виробництво тепла на 3 і виробництво рослин на 1.",
 
   "Magnetic Field Dome": "Магнітне поле купола",
@@ -563,7 +563,7 @@
   "Satellites": "Супутники",
   "Increase your M€ production 1 step for each space tag you have, including this one.": "Збільште виробництво M€ на 1 за кожну мітку космосу, який у вас є, включаючи цей.",
 
-  "Noctis Farming": "Ноктіське сільське господарство",
+  "Noctis Farming": "Ферма Ноктіс",
   "Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 plants.": "Вимагає -20 °C або тепліше. Збільште виробництво M€ на 1 і отримайте 2 рослини.",
   "Water Splitting Plant": "Водорозщеплювальний завод",
   "Action: Spend 3 energy to raise oxygen 1 step.": "Дія: Витратити 3 одиниці енергії, щоб підвищити рівень кисню на 1 одиницю.",
@@ -589,7 +589,7 @@
   "Biomass Combustors": "Біомасові спалювальники",
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Вимагає 6% кисню. Зменшити будь-яке виробництво рослин на 1 одиницю і збільшити виробництво енергії на 2 одиниці.",
 
-  "Livestock": "Сільськогосподарські тварини",
+  "Livestock": "Худоба",
   "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Вимагає 9% кисню. Зменшити виробництво рослин на 1 одиницю і збільшити виробництво M€ на 2 одиниці.",
 
   "Olympus Conference": "Олімпійська конференція",

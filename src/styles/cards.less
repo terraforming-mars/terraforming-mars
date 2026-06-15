@@ -257,6 +257,169 @@ input[type="radio"]:checked+.filterDiv::after {
   background: #EEE;
 }
 
+/*********** Expansion badge icons (used by CardExpansion.vue via module + '-icon') ************/
+
+.corpera-icon:after {
+  .expansion-icon-base();
+  background-color: #cc3333;
+  font-size: 11px;
+  line-height: 15px;
+  color: white;
+  content: "";
+  background-image: url("./assets/triangle16.png");
+  background-size: 10px 10px;
+  background-position: bottom 4px right 3px;
+  background-repeat: no-repeat;
+}
+
+.prelude-icon:after {
+  .expansion-icon-base();
+  background-color: rgb(235, 118, 171);
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 15px;
+  color: white;
+  content: "";
+  background-image: url("./assets/triangle16.png");
+  background-size: 10px 10px;
+  background-position: bottom 4px right 3px;
+  background-repeat: no-repeat;
+  transform: rotate(-90deg);
+}
+
+.prelude2-icon:after {
+  .expansion-icon-base();
+  font-family: Prototype, sans-serif;
+  background-color: rgb(235, 118, 171);
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  color: white;
+  content: "2";
+}
+
+.venus-icon:after {
+  .expansion-icon-base();
+  background: rgb(84, 150, 201);
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 15px;
+  color: white;
+  content: "";
+  background-image: url("./assets/triangle16.png");
+  background-size: 10px 10px;
+  background-position: bottom 4px right 3px;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+}
+
+.turmoil-icon:after {
+  .expansion-icon-base();
+  color: @grey_900;
+  background: darkorange;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  content: "\25b2";
+  transform: rotate(180deg);
+}
+
+.promo-icon:after {
+  .expansion-icon-base();
+  background-color: #cc3333;
+  font-size: 11px;
+  line-height: 15px;
+  color: white;
+  content: "P";
+}
+
+.colonies-icon:after {
+  .expansion-icon-base();
+  color: @grey_900;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  content: "\25b2";
+  background: #d4d4d4;
+}
+
+.community-icon:after {
+  .expansion-icon-base();
+  color: @grey_900;
+  background: moccasin;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  content: "\2666";
+}
+
+.ares-icon:after {
+  .expansion-icon-base();
+  color: #EFEF64;
+  background: #953316;
+  font-family: Prototype, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  content: "A";
+}
+
+.moon-icon:after {
+  .expansion-icon-base();
+  border: 1px solid @grey_900;
+  color: #DDD;
+  background: #999;
+  font-family: Prototype, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  content: "M";
+}
+
+.pathfinders-icon:after {
+  .expansion-icon-base();
+  border: 1px solid @grey_900;
+  color: #DDD;
+  background: #b84;
+  font-family: Prototype, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  content: "🪐";
+}
+
+.ceo-icon:after {
+  .expansion-icon-base();
+  border: 1px solid @grey_900;
+  color: #000;
+  background: #edbd18;
+  font-family: Prototype, sans-serif;
+  font-size: 9px;
+  line-height: 17px;
+  content: "💼";
+}
+
+.starwars-icon:after {
+  .expansion-icon-base();
+  border: 1px solid @grey_900;
+  color: #DDD;
+  background: #999;
+  font-family: Prototype, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  content: "W";
+}
+
+.underworld-icon:after {
+  position: absolute;
+  background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
+  width: 26px;
+  height: 26px;
+  background-size: 26px;
+  content: "";
+}
+
 /*********** Style the tags ************/
 
 .tag-wild {

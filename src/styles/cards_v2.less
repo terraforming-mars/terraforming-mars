@@ -2657,6 +2657,24 @@
       top: 45px;
       position: absolute;
     }
+    .card-help {
+      float: left;
+      font-family: Prototype, sans-serif;
+      font-size: 20px;
+      width: 24px;
+      height: 24px;
+      margin-left: -20px;
+      line-height: 24px;
+      border-radius: 24px;
+      background-color: #444;
+      text-align: center;
+      a {
+        color: #C33;
+        text-decoration: none;
+      }
+      position: static;
+      z-index: 1;
+    }
     .card-tags {
       display: flex;
       flex-flow: row;
@@ -2675,6 +2693,7 @@
         background-color: white;
         /* margin-top: -6px; */
         filter: brightness(0.9);
+        z-index: 2;
       }
     }
   }
@@ -2707,6 +2726,8 @@
       height: 14px;
       line-height: 15px;
       text-align: center;
+      margin-left: 24px;
+      margin-top: -10px;
       font-size: 13px;
       box-shadow: @outline-shadow;
       background: linear-gradient(
@@ -2760,14 +2781,6 @@
     background-size: 24px 24px;
     background-position: center;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
-  }
-  .contentCorporation {
-    color: @text_dark;
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    padding: 8px;
-    top: -40px;
   }
 }
 /* fixes */

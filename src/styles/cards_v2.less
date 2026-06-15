@@ -2657,6 +2657,24 @@
       top: 45px;
       position: absolute;
     }
+    .card-help {
+      float: left;
+      font-family: Prototype, sans-serif;
+      font-size: 20px;
+      width: 24px;
+      height: 24px;
+      margin-left: -20px;
+      line-height: 24px;
+      border-radius: 24px;
+      background-color: #444;
+      text-align: center;
+      a {
+        color: #C33;
+        text-decoration: none;
+      }
+      position: static;
+      z-index: 1;
+    }
     .card-tags {
       display: flex;
       flex-flow: row;
@@ -2675,6 +2693,7 @@
         background-color: white;
         /* margin-top: -6px; */
         filter: brightness(0.9);
+        z-index: 2;
       }
     }
   }

@@ -108,7 +108,7 @@ class GreensPolicy04 implements IPolicy {
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
             new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
-              player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
+              player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true, from: {partyName: PartyName.GREENS}});
 
               return undefined;
             }),

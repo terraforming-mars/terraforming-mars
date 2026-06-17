@@ -224,6 +224,7 @@ import TurmoilAgendaContainer from '@/client/components/cardlist/TurmoilAgendaCo
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {titleFitMetrics} from '@/client/components/card/titleFit';
 
 
 type Refs = {
@@ -248,6 +249,7 @@ export default defineComponent({
     setDocumentTitle('Cards List');
     this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
+    this.measureTitleFit();
   },
   computed: {
     typedRefs(): Refs {
@@ -538,6 +540,21 @@ export default defineComponent({
     // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
+    },
+    // Reports how long it took to resize every card title once they've all been
+    // fitted. Each CardTitle defers its fit until document.fonts.ready, so we
+    // wait on the same signal: our child components register their fit callbacks
+    // before this parent mounted hook runs, so by the time this resolves they
+    // have all recorded their timings.
+    measureTitleFit(): void {
+      titleFitMetrics.reset();
+      const report = () => console.log(`Resized ${titleFitMetrics.cards} card titles in ${titleFitMetrics.total.toFixed(1)}ms`);
+      // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
+      if (document.fonts === undefined) {
+        report();
+      } else {
+        document.fonts.ready.then(report);
+      }
     },
     toggleNamesOnly(): void {
       this.namesOnly = !this.namesOnly;

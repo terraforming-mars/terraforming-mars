@@ -19,7 +19,10 @@
 }
 
 .language-es {
-  .filterDiv {
+  // Title overrides apply only when the experimental UI (measurement-based
+  // title fitting) is off. preferences_experimental_ui lives on <body>, the
+  // same element as language-es, so it's compounded on rather than an ancestor.
+  &:not(.preferences_experimental_ui) .filterDiv {
     .card-title {
       font-size: 15px !important;
       &.title-small {
@@ -33,15 +36,17 @@
 }
 
 .language-ru {
+  // Title overrides apply only when the experimental UI (measurement-based
+  // title fitting) is off; see the note on .language-es above.
+  &:not(.preferences_experimental_ui) .filterDiv .card-title {
+    font-size: 11px !important;
+    &.title-smaller {
+      font-size: 10px !important;
+    }
+  }
   .filterDiv {
     .card-requirements {
       font-size: 13px;
-    }
-    .card-title {
-      font-size: 11px !important;
-      &.title-smaller {
-        font-size: 10px !important;
-      }
     }
 
     &.card-mining-quota, &.card-luxury-foods, &.card-omnicourt, &.card-solarnet {
@@ -398,15 +403,12 @@
 }
 
 .language-hu {
-  .filterDiv {
-
-    /* Project cards */
-    &.card-terraforming-ganymede {
-      .card-title .title-small {
-        font-size: 14px !important;
-      }
+  // Title overrides apply only when the experimental UI (measurement-based
+  // title fitting) is off; see the note on .language-es above.
+  &:not(.preferences_experimental_ui) .filterDiv {
+    &.card-terraforming-ganymede .card-title .title-small {
+      font-size: 14px !important;
     }
-
     &.card-museum-of-early-colonisation,
     &.card-venus-orbital-survey,
     &.card-asteroid-mining-consortium,
@@ -416,17 +418,23 @@
         font-size: 13px !important;
       }
     }
-
     &.card-archimedes-hydroponics-station,
     &.card-power-infrastructure {
       .card-title .title-smaller {
         font-size: 12px !important;
       }
     }
-
     &.card-mining-robots-manuf\.-center .card-title .title-smaller {
       font-size: 11px !important;
     }
+    &.card-supported-research .card-title {
+      font-size: 13px !important;
+    }
+  }
+
+  .filterDiv {
+
+    /* Project cards */
 
     &.card-pride-of-the-earth-arkship,
     &.card-steel-market-monopolists,
@@ -915,10 +923,6 @@
       .resource-card-icon-expansion-container {
         bottom: 42px;
       }
-    }
-
-    &.card-supported-research .card-title {
-      font-size: 13px !important;
     }
 
     &.card-domed-crater .card-content {
@@ -2454,12 +2458,12 @@
 }
 
 .language-ua {
-  .filterDiv {
-    .card-title {
-      font-size: 12px !important;
-      &.title-smaller {
-        font-size: 11px !important;
-      }
+  // Title overrides apply only when the experimental UI (measurement-based
+  // title fitting) is off; see the note on .language-es above.
+  &:not(.preferences_experimental_ui) .filterDiv .card-title {
+    font-size: 12px !important;
+    &.title-smaller {
+      font-size: 11px !important;
     }
   }
 }

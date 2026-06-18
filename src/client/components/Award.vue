@@ -5,7 +5,7 @@
     </div>
 
     <div class="ma-name ma-name--awards award-block" :class="nameCss">
-      <span v-i18n>{{ award.name }}</span>
+      <span ref="name" v-i18n>{{ award.name }}</span>
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <template v-for="score in sortedScores" :key="score.color">
           <p
@@ -37,6 +37,12 @@ import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
 import {getAward} from '@/client/MilestoneAwardManifest';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 import {Color} from '@/common/Color';
+import {fitText} from '@/client/utils/textFit';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+
+type Refs = {
+  name: HTMLElement | undefined;
+};
 
 export default defineComponent({
   name: 'Award',
@@ -53,12 +59,42 @@ export default defineComponent({
       type: Boolean,
     },
   },
+  mounted() {
+    this.fitName();
+  },
+  watch: {
+    'award.name'() {
+      this.fitName();
+    },
+  },
   methods: {
     playerSymbol(color: Color) {
       return playerSymbol(color);
     },
+    // Size the name to fit its medal box by measuring the rendered text rather
+    // than guessing from its length. Waits for the font to load so the
+    // measurement uses real glyph widths. Only when the experimental UI is on;
+    // otherwise the language_hacks ma-name overrides handle sizing.
+    fitName(): void {
+      if (!getPreferences().experimental_ui) {
+        return;
+      }
+      const el = this.typedRefs.name;
+      if (el === undefined) {
+        return;
+      }
+      // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
+      if (document.fonts === undefined) {
+        fitText(el, 'award-name');
+        return;
+      }
+      document.fonts.ready.then(() => fitText(el, 'award-name'));
+    },
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     nameCss(): string {
       return 'ma-name--' + this.award.name.replaceAll(' ', '-').replaceAll('.', '').toLowerCase();
     },

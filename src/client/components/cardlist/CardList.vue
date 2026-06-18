@@ -224,7 +224,7 @@ import TurmoilAgendaContainer from '@/client/components/cardlist/TurmoilAgendaCo
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
-import {titleFitMetrics} from '@/client/components/card/titleFit';
+import {textFitMetrics} from '@/client/utils/textFit';
 
 
 type Refs = {
@@ -547,8 +547,8 @@ export default defineComponent({
     // before this parent mounted hook runs, so by the time this resolves they
     // have all recorded their timings.
     measureTitleFit(): void {
-      titleFitMetrics.reset();
-      const report = () => console.log(`Resized ${titleFitMetrics.cards} card titles in ${titleFitMetrics.total.toFixed(1)}ms`);
+      textFitMetrics.reset();
+      const report = () => console.log(`Resized ${textFitMetrics.count} card titles in ${textFitMetrics.total.toFixed(1)}ms`);
       // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
       if (document.fonts === undefined) {
         report();

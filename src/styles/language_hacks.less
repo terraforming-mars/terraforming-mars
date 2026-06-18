@@ -143,28 +143,16 @@
     }
   }
 
-  .ma-name--terra-pioneer {
-    span {
-      font-size: 10px !important;
-    }
-  }
-  .ma-name--spacefarer {
-    span {
-      font-size: 10px !important;
-    }
-  }
-  .ma-name--land-specialist {
-    span {
-      font-size: 10px !important;
-    }
-  }
-  .ma-name--forecaster {
-    span {
-      font-size: 10px !important;
-    }
-  }
-  .ma-name--one-giant-step {
-    span {
+  // ma-name overrides apply only when the experimental UI (measurement-based
+  // name fitting) is off, so they don't fight the measured size.
+  // preferences_experimental_ui lives on <body>, the same element as
+  // language-ru, so it's compounded on rather than an ancestor.
+  &:not(.preferences_experimental_ui) {
+    .ma-name--terra-pioneer span,
+    .ma-name--spacefarer span,
+    .ma-name--land-specialist span,
+    .ma-name--forecaster span,
+    .ma-name--one-giant-step span {
       font-size: 10px !important;
     }
   }
@@ -394,11 +382,15 @@
 
 
 .language-br {
-  .milestones .ma-block .ma-name--polar-explorer {
-    font-size: 14px !important;
-  }
-  .awards .ma-block .ma-name--estate-dealer {
-    font-size: 12px !important;
+  // ma-name overrides apply only when the experimental UI (measurement-based
+  // name fitting) is off; see the note on .language-ru above.
+  &:not(.preferences_experimental_ui) {
+    .milestones .ma-block .ma-name--polar-explorer {
+      font-size: 14px !important;
+    }
+    .awards .ma-block .ma-name--estate-dealer {
+      font-size: 12px !important;
+    }
   }
 }
 
@@ -2396,26 +2388,30 @@
   }
 
   /* Milestones & awards */
-  .ma-name--one-giant-step,
-  .ma-name--gambler,
-  .ma-name--risktaker,
-  .ma-name--a-zoologist,
-  .ma-name--naturalist {
-    > span {
-      font-size: 13px;
+  // ma-name overrides apply only when the experimental UI (measurement-based
+  // name fitting) is off; see the note on .language-ru above.
+  &:not(.preferences_experimental_ui) {
+    .ma-name--one-giant-step,
+    .ma-name--gambler,
+    .ma-name--risktaker,
+    .ma-name--a-zoologist,
+    .ma-name--naturalist {
+      > span {
+        font-size: 13px;
+      }
     }
-  }
 
-  .ma-name--collector,
-  .ma-name--constructor,
-  .ma-name--highlander,
-  .ma-name--landscaper,
-  .ma-name--mogul,
-  .ma-name--traveller {
-    > span {
-      position: relative;
-      top: 5px;
-      font-size: 13px;
+    .ma-name--collector,
+    .ma-name--constructor,
+    .ma-name--highlander,
+    .ma-name--landscaper,
+    .ma-name--mogul,
+    .ma-name--traveller {
+      > span {
+        position: relative;
+        top: 5px;
+        font-size: 13px;
+      }
     }
   }
 

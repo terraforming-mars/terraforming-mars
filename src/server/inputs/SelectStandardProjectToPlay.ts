@@ -24,6 +24,13 @@ export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProje
   }
 
   public validate(card: IStandardProjectCard, input: SelectProjectCardToPlayResponse, details: PlayCardMetadata) {
+    // The client greys out projects whose canAct is false (via the `enabled` array), but the
+    // server must enforce it too: process() never consults `enabled`, and projects whose
+    // requirement isn't just the M€ cost (e.g. Collusion spending corruption) would otherwise
+    // execute regardless. See https://github.com/terraforming-mars/terraforming-mars/issues/8238.
+    if (!card.canAct(this.player)) {
+      throw new InputError('You cannot play this standard project');
+    }
     const canPayWith = card.canPayWith(this.player);
     const paymentOptions: Partial<PaymentOptions> = {
       heat: this.player.canUseHeatAsMegaCredits,

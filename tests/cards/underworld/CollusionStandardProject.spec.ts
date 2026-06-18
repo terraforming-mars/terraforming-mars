@@ -11,6 +11,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
+import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
 import {MultiSet} from 'mnemonist';
 import {cast} from '../../../src/common/utils/utils';
 
@@ -50,6 +51,18 @@ describe('CollusionStandardProject', () => {
     player.underworldData.corruption = 0;
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
     expect(card.canAct(player)).is.false;
+  });
+
+  // Regression for #8238: the server must reject a Collusion submission when canAct is false,
+  // even though the project costs 0 M€ and the client would have greyed out the button.
+  it('cannot be played when canAct is false', () => {
+    player.underworldData.corruption = 0;
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+
+    const select = new SelectStandardProjectToPlay(player, [card], {enabled: [card.canAct(player)]});
+    expect(() => select.process({type: 'projectCard', card: card.name, payment: Payment.of({megacredits: 0})}))
+      .to.throw(/cannot play this standard project/);
+    expect(player.underworldData.corruption).eq(0);
   });
 
   it('can act', () => {

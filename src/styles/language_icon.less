@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
   padding: 4px 0;
   text-align: center;
   position: relative;
   z-index: 1;
   margin: 0 auto;
+  // Exactly six flags per row: 6 * 44px + 5 * 12px gap = 324px.
+  width: 324px;
 }
 
 .language-icon {
@@ -23,7 +25,6 @@
     transition: transform 0.15s;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 10px 0 0;
     position: relative;
 
     // Custom tooltip: the native `title` attribute has a long, browser-controlled

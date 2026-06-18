@@ -6,7 +6,6 @@
       :data-title="title(lang)"
       @click="switchLanguageTo(lang)"
     ></div>
-    &nbsp;
     </template>
   </div>
 </template>

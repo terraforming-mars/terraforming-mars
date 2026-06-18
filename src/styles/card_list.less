@@ -140,28 +140,3 @@
   font-size: 30px;
   line-height: 1;
 }
-
-// LanguageIcon is built for the in-game sidebar: its root is absolutely
-// positioned (bottom: 162px) and its popup opens at bottom: -140px. On the
-// cards page we want it in the bottom-left corner, just above the preferences
-// gear. That gear (.sidebar_item--settings) is position: fixed; bottom: 4px and
-// ~46px tall, so it ignores normal flow and pins itself to the viewport bottom.
-// To sit above it we likewise pin the flag, clearing the gear, and align it flush
-// with the gear's left edge (the free-floating container sits flush in the corner).
-.card-list-language-icon.sidebar_item--language {
-  position: fixed;
-  bottom: 58px;
-  left: 0;
-
-  // The little black connector tab that points back at the sidebar makes no
-  // sense in the corner.
-  .sidebar_icon--language.sidebar_item--is-active::after {
-    display: none;
-  }
-
-  // Open the language popup up-and-to-the-right of the flag so it stays on screen.
-  .preferences_panel.preferences_panel--language-switcher {
-    bottom: 0;
-    left: 100%;
-  }
-}

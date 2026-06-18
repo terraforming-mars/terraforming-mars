@@ -29,7 +29,7 @@ export class CollusionStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    if (player.underworldData.corruption === 0) {
+    if (player.underworldData.corruption <= 0) {
       return false;
     }
     const game = player.game;

@@ -184,6 +184,7 @@
       </section>
 
       <div class="free-floating-preferences-icon">
+        <LanguageIcon class="card-list-language-icon"/>
         <PreferencesIcon/>
       </div>
   </div>
@@ -218,6 +219,7 @@ import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import LanguageIcon from '@/client/components/LanguageIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import TurmoilAgendaContainer from '@/client/components/cardlist/TurmoilAgendaContainer.vue';
@@ -241,6 +243,7 @@ export default defineComponent({
     Award,
     TurmoilAgendaContainer,
     PreferencesIcon,
+    LanguageIcon,
   },
   data(): CardListModel {
     return hashToModel(window.location.hash);

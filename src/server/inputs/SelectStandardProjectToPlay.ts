@@ -28,7 +28,13 @@ export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProje
     // server must enforce it too: process() never consults `enabled`, and projects whose
     // requirement isn't just the M€ cost (e.g. Collusion spending corruption) would otherwise
     // execute regardless. See https://github.com/terraforming-mars/terraforming-mars/issues/8238.
-    if (!card.canAct(this.player)) {
+    //
+    // This only matters for menus that offer non-actable projects (the standard projects menu and
+    // Established Methods). A discounted play (overriddenCost set, e.g. Standard Technology) is
+    // already handed a canAct-filtered list, so re-checking here is redundant and, worse, would
+    // re-evaluate affordability at the full undiscounted cost and reject a play the player can
+    // afford at the discount. See https://github.com/terraforming-mars/terraforming-mars/issues/8247.
+    if (details.overriddenCost === undefined && !card.canAct(this.player)) {
       throw new InputError('You cannot play this standard project');
     }
     const canPayWith = card.canPayWith(this.player);

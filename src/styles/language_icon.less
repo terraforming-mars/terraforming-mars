@@ -24,12 +24,56 @@
     display: inline-block;
     vertical-align: middle;
     margin: 0 10px 0 0;
+    position: relative;
+
+    // Custom tooltip: the native `title` attribute has a long, browser-controlled
+    // delay, so render our own from `data-title` that appears immediately on hover.
+    &[data-title]::before {
+      content: attr(data-title);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: black;
+      color: white;
+      font-size: 16px;
+      line-height: 1.4;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s;
+      z-index: 2;
+    }
+
+    &[data-title]:hover::before {
+      opacity: 1;
+    }
   }
 
   &-for-sidebar {
     transform: scale(.65);
     margin-left: -4px;
     margin-top: 3px;
+  }
+
+  &--selected {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 54px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      border: 3px solid white;
+      border-radius: 50%;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
   }
 
   &:hover {

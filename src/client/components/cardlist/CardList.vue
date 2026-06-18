@@ -184,6 +184,9 @@
       </section>
 
       <div class="free-floating-preferences-icon">
+        <div v-show="scrolled" class="sidebar_item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
+          <div class="card-list-scroll-top-arrow">↑</div>
+        </div>
         <LanguageIcon class="card-list-language-icon"/>
         <PreferencesIcon/>
       </div>
@@ -245,14 +248,22 @@ export default defineComponent({
     PreferencesIcon,
     LanguageIcon,
   },
-  data(): CardListModel {
-    return hashToModel(window.location.hash);
+  data() {
+    return {
+      ...hashToModel(window.location.hash),
+      // Whether the page has been scrolled down at all; gates the "scroll to top" widget.
+      scrolled: false,
+    };
   },
   mounted() {
     setDocumentTitle('Cards List');
     this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
     this.measureTitleFit();
+    window.addEventListener('scroll', this.handleScroll, {passive: true});
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {
     typedRefs(): Refs {
@@ -558,6 +569,12 @@ export default defineComponent({
       } else {
         document.fonts.ready.then(report);
       }
+    },
+    scrollToTop(): void {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    },
+    handleScroll(): void {
+      this.scrolled = window.scrollY > 0;
     },
     toggleNamesOnly(): void {
       this.namesOnly = !this.namesOnly;

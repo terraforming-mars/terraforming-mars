@@ -78,6 +78,22 @@ export function fitText(el: HTMLElement, namespace: string): void {
   textFitMetrics.record(performance.now() - start);
 }
 
+// Fits `el` to `namespace` once the card font is loaded, the way a component's
+// mounted/watch hook wants it: tolerant of a missing element, and deferred until
+// `document.fonts.ready` so the measurement uses real glyph widths. Outside a
+// real browser (e.g. JSDOM tests) `document.fonts` is unavailable, so fit
+// synchronously. Callers gate this on the experimental UI preference.
+export function fitTextWhenReady(el: HTMLElement | undefined, namespace: string): void {
+  if (el === undefined) {
+    return;
+  }
+  if (document.fonts === undefined) {
+    fitText(el, namespace);
+    return;
+  }
+  document.fonts.ready.then(() => fitText(el, namespace));
+}
+
 // True when the text spills past its box in either direction. Card titles are a
 // single clipped line (horizontal overflow only); milestone/award names wrap, so
 // a too-long unbreakable word likewise shows up as horizontal overflow.

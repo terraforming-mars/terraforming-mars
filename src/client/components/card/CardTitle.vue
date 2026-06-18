@@ -15,7 +15,7 @@ import {CardType} from '@/common/cards/CardType';
 import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
 import {CardName} from '@/common/cards/CardName';
-import {fitText} from '@/client/utils/textFit';
+import {fitTextWhenReady} from '@/client/utils/textFit';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type Refs = {
@@ -50,23 +50,14 @@ export default defineComponent({
   },
   methods: {
     // Size the title to fit by measuring the rendered text rather than guessing
-    // from its length. Waits for the card font to load so the measurement uses
-    // real glyph widths. Only when the experimental UI is on; otherwise the
+    // from its length. Only when the experimental UI is on; otherwise the
     // length-based classes and language_hacks title overrides handle sizing.
+    // Corporations show a logo instead of a title element, so nothing to fit.
     fitTitle(): void {
       if (!getPreferences().experimental_ui || this.isCorporation()) {
         return;
       }
-      const el = this.typedRefs.title;
-      if (el === undefined) {
-        return;
-      }
-      // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
-      if (document.fonts === undefined) {
-        fitText(el, 'card-title');
-        return;
-      }
-      document.fonts.ready.then(() => fitText(el, 'card-title'));
+      fitTextWhenReady(this.typedRefs.title, 'card-title');
     },
     isCeo(): boolean {
       return this.type === CardType.CEO;

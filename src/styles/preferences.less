@@ -404,7 +404,10 @@
   position: fixed;
   bottom: 0px;
   left: 0px;
-  padding: 16px;
+  /* This is only used on non-game pages (the start screen and the cards list);
+     the in-game sidebar is a separate component. Sit flush in the corner rather
+     than inset like the game UI. */
+  padding: 0;
   /* This matches z-index with some card elements and ensures the popup is above it. */
   z-index: 10;
 }

@@ -187,7 +187,7 @@
         <div v-show="scrolled" class="sidebar_item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
           <div class="card-list-scroll-top-arrow">↑</div>
         </div>
-        <LanguageIcon class="card-list-language-icon"/>
+        <LanguageIcon class="corner-language-icon"/>
         <PreferencesIcon/>
       </div>
   </div>

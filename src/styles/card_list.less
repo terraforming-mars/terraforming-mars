@@ -121,6 +121,26 @@
   }
 }
 
+// "Scroll to top" widget, pinned in the bottom-left corner stack above the
+// language flag. Styled like the sibling .sidebar_item boxes so it matches the
+// gear and flag; position: fixed so it stacks above them (which are also fixed).
+.card-list-scroll-top.sidebar_item {
+  position: fixed;
+  bottom: 112px;
+  left: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card-list-scroll-top-arrow {
+  color: #c6c6c6;
+  font-size: 30px;
+  line-height: 1;
+}
+
 // LanguageIcon is built for the in-game sidebar: its root is absolutely
 // positioned (bottom: 162px) and its popup opens at bottom: -140px. On the
 // cards page we want it in the bottom-left corner, just above the preferences

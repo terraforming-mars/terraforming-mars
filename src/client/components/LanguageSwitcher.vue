@@ -2,11 +2,10 @@
   <div class="language-switcher">
     <template v-for="lang in ALL_LANGUAGES" :key="lang">
     <div
-      :class="`language-icon language-icon--${lang} language-icon-for-switcher`"
-      :title="title(lang)"
+      :class="[`language-icon language-icon--${lang} language-icon-for-switcher`, {'language-icon--selected': lang === currentLang}]"
+      :data-title="title(lang)"
       @click="switchLanguageTo(lang)"
     ></div>
-    &nbsp;
     </template>
   </div>
 </template>
@@ -32,6 +31,9 @@ export default defineComponent({
     },
   },
   computed: {
+    currentLang(): string {
+      return PreferencesManager.INSTANCE.values().lang;
+    },
     ALL_LANGUAGES(): typeof ALL_LANGUAGES {
       return ALL_LANGUAGES;
     },

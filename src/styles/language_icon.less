@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
   padding: 4px 0;
   text-align: center;
   position: relative;
   z-index: 1;
   margin: 0 auto;
+  // Exactly six flags per row: 6 * 44px + 5 * 12px gap = 324px.
+  width: 324px;
 }
 
 .language-icon {
@@ -23,13 +25,56 @@
     transition: transform 0.15s;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 10px 0 0;
+    position: relative;
+
+    // Custom tooltip: the native `title` attribute has a long, browser-controlled
+    // delay, so render our own from `data-title` that appears immediately on hover.
+    &[data-title]::before {
+      content: attr(data-title);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: black;
+      color: white;
+      font-size: 16px;
+      line-height: 1.4;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s;
+      z-index: 2;
+    }
+
+    &[data-title]:hover::before {
+      opacity: 1;
+    }
   }
 
   &-for-sidebar {
     transform: scale(.65);
     margin-left: -4px;
     margin-top: 3px;
+  }
+
+  &--selected {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 54px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      border: 3px solid white;
+      border-radius: 50%;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
   }
 
   &:hover {

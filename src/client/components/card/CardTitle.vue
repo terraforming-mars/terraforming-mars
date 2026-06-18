@@ -15,7 +15,7 @@ import {CardType} from '@/common/cards/CardType';
 import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
 import {CardName} from '@/common/cards/CardName';
-import {fitTitle} from '@/client/components/card/titleFit';
+import {fitText} from '@/client/utils/textFit';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type Refs = {
@@ -63,10 +63,10 @@ export default defineComponent({
       }
       // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
       if (document.fonts === undefined) {
-        fitTitle(el);
+        fitText(el, 'card-title');
         return;
       }
-      document.fonts.ready.then(() => fitTitle(el));
+      document.fonts.ready.then(() => fitText(el, 'card-title'));
     },
     isCeo(): boolean {
       return this.type === CardType.CEO;

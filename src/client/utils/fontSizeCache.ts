@@ -1,11 +1,11 @@
-// Persistent cache of fitted card-title font sizes, keyed on the rendered
-// (translated) title text, which keeps it locale-correct automatically.
+// Persistent cache of fitted font sizes (see textFit), keyed on the rendered
+// (translated) text, which keeps it locale-correct automatically.
 //
 // Stored in localStorage rather than a cookie so it isn't sent to the server on
-// every request. Each title is its own entry, namespaced by a prefix. Entries
-// expire two days after they were written; the expiry is set when an entry is
-// written and is not extended on read.
-const CACHE_PREFIX = 'cardTitleFontSize:';
+// every request. Each entry is namespaced by a prefix. Entries expire two days
+// after they were written; the expiry is set when an entry is written and is not
+// extended on read.
+const CACHE_PREFIX = 'fontSize:';
 const CACHE_TTL_MS = 2 * 24 * 60 * 60 * 1000; // 2 days
 
 type CacheEntry = {size: number, expireMs: number};
@@ -15,8 +15,8 @@ function localStorageSupported(): boolean {
 }
 
 // In-memory mirror of the localStorage entries, loaded once (dropping expired
-// ones). Fitting a full page of cards would otherwise make a synchronous
-// localStorage read per card, which is slow at ~1000 cards.
+// ones). Fitting a full page of text would otherwise make a synchronous
+// localStorage read per element, which is slow at ~1000 elements.
 const entries = new Map<string, number>();
 if (localStorageSupported()) {
   const now = Date.now();

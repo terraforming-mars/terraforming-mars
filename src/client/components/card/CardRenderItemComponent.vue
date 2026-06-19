@@ -43,11 +43,11 @@ export default defineComponent({
       if (this.item.tag === undefined) {
         return '';
       }
-      return 'card-tag-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
+      return 'tag-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
     },
     tagSizeClass(): string {
       if (this.item.size !== undefined) {
-        return 'card-tag-size--' + this.item.size;
+        return 'tag-size--' + this.item.size;
       }
       return '';
     },
@@ -189,7 +189,7 @@ export default defineComponent({
       case CardRenderItemType.NO_TAGS:
         return ['card-resource-tag', 'card-no-tags'];
       case CardRenderItemType.EMPTY_TAG:
-        return ['card-resource-tag', 'card-tag-empty'];
+        return ['card-resource-tag', 'tag-empty'];
       case CardRenderItemType.CITY:
         return ['card-tile', `city-tile--${this.item.size}`];
       case CardRenderItemType.GREENERY:
@@ -335,7 +335,7 @@ export default defineComponent({
       // Oxygen is handled specially separately.
       const secondaryTag = this.item.secondaryTag;
       if (secondaryTag !== undefined && !previouslyRendered.includes(secondaryTag)) {
-        result += '<div class="card-icon card-tag-' + secondaryTag + '"></div>';
+        result += '<div class="card-icon tag-' + secondaryTag + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';

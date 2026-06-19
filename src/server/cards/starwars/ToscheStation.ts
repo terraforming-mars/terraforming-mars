@@ -20,8 +20,8 @@ export class ToscheStation extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: 'SW04',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend X energy and gain X-1 plants (max 4.)', (ab) => {
-            ab.text('x').energy(1).startAction.text('x-1').plants(1).text('max 4');
+          b.action('Spend X energy (max 4) and gain X-1 plants.', (ab) => {
+            ab.text('x').energy(1).text('max 4').startAction.text('x-1').plants(1);
           });
         }),
       },

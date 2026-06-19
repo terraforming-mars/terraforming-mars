@@ -1081,7 +1081,7 @@ export class Player implements IPlayer {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: CardName.VANALLEN}});
       }
     };
 

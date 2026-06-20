@@ -48,89 +48,6 @@ each(@players, {
   }
 }
 
-.tags-grid {
-  display: grid;
-  grid-template-columns: max-content repeat(20, 50px);
-
-  row-gap: 10px;
-  margin-top: 10px;
-
-  &.hide-colony-count {
-    grid-template-columns: max-content repeat(19, 50px);
-  }
-
-  &.hide-influence-count {
-    grid-template-columns: max-content repeat(19, 50px);
-  }
-
-  &.hide-colony-influence-counts {
-    grid-template-columns: max-content repeat(18, 50px);
-  }
-
-  .hide_tag {
-    visibility: hidden;
-  }
-
-  .grid_end {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
-
-  .highlighter_box {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .grid-item {
-    text-align: center;
-  }
-
-  each(@players, {
-  @v: ~"player_@{value}_tag_bg";
-  .grid-item.player_tag_bg_color_@{value} {
-    background-color: @@v;
-  }
-})
-  .city-count {
-    background: url(./assets/icon_city.png) center no-repeat;
-    filter: invert(100%) contrast(200%);
-  }
-
-  .colony-count {
-    background: url(./assets/icon_colony.png) center no-repeat;
-    background-size: 24px;
-  }
-
-  .influence-count {
-    background: url(./assets/icon_influence.png) center no-repeat;
-    filter: invert(100%) contrast(200%);
-    background-size: 28px;
-  }
-
-  .card-count {
-    background: url(./assets/preferences_cards.png) center no-repeat;
-  }
-
-  .vp-count {
-    background-image: url(./assets/board/mars.png);
-    background-size: 65px;
-    background-position: center;
-
-    line-height: 1.7;
-    text-align: center;
-
-    color: black;
-    font-weight: bold;
-    text-shadow: 0 0 5px darkorange;
-  }
-
-  .player_name_cont {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-}
-
 .tag-count {
   box-shadow: @outline-shadow;
   position: relative;
@@ -671,15 +588,6 @@ each(@players, {
   font-weight: normal;
   font-size: 18px;
   text-align: center;
-}
-
-.active-award-or-milestone {
-  color: #000;
-  text-transform: uppercase;
-  background: #c2c2c2;
-  padding: 3px 30px 2px 7px;
-  font-size: 15px;
-  font-weight: bold;
 }
 
 .player_home_block--setup {

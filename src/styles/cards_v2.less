@@ -1929,31 +1929,10 @@
       margin-left: 2px;
     }
   }
-  // TODO(kberg): floater is a resource, not a tag — this is misnamed as tag-*.
-  // (Same for tag-wild-resource below.) Rename to a resource-based class.
-  .tag-floater {
-    background-image: url("./assets/resources/floater.png");
-    border-radius: 0px;
-  }
-  .tag-wild-resource {
-    background-image: url("./assets/resources/wild.png");
-    border-radius: 0px;
-  }
-  .tag-diverse {
-    background: linear-gradient(to bottom right, green, yellow, red);
-  }
   .card-no-tags {
     font-size: 42px;
     vertical-align: middle;
     background:white;
-  }
-
-  .tag-size--S {
-    height: 22px;
-    width: 22px;
-    background-size: 26px;
-    margin-left: 0px;
-    margin-right: 0px;
   }
 
   .card-no-tags:after {
@@ -1971,73 +1950,6 @@
       left: -13px;
       font-weight: bold;
     }
-  }
-  /* secondary tags */
-  .tag-req {
-    border-radius: 0px;
-    height: 12px;
-    box-shadow: @outline-shadow;
-    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
-  }
-  .tag-blue {
-    opacity: 0.8;
-    margin-left: 17px;
-    background: #176fe4;
-    width: 16px;
-    top: -7px;
-    height: 16px;
-    border-radius: @radius_circle;
-  }
-  .tag-no_planetary_tag {
-    .tag-clone();
-  }
-  .tag-no_planetary_tag:after {
-    content: '';
-    height: 20px;
-    border-left: 2px dashed #f00;
-    position: absolute;
-    transform: rotate(45deg);
-    margin-left: -1px;
-  }
-  .tag-no_planetary_tag:before {
-    content: '';
-    height: 20px;
-    border-left: 2px dashed #f00;
-    position: absolute;
-    transform: rotate(-45deg);
-    margin-left: -1px;
-  }
-  .tag-turmoil:after {
-    position: absolute;
-    color: @grey_900;
-    border: 1px solid black;
-    left: -1px;
-    background: darkorange;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: @radius_circle;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
-    content: "\25b2";
-    transform: rotate(180deg);
-  }
-  .tag-no_tags {
-    background:white;
-    font-size: 30px;
-    vertical-align: middle;
-    font-weight: normal
-  }
-  .tag-no_tags:after {
-    content: "X";
-    position: relative;
-    top: 1px;
-    left: 1px;
-  }
-  .tag-ares {
-    background-image: url("./assets/expansion_icons/expansion_icon_ares.png");
   }
   /* special case Project requirements */
   .card-project-requirements {
@@ -2797,7 +2709,7 @@
 }
 
 @parties: greens, kelvinists, mars-first, reds, scientists, unity;
-// stylelint-disable-next-line @stylistic/indentation
+/* stylelint-disable @stylistic/indentation */
 each(@parties, {
   .card-party--@{value} {
     background-image: url("./assets/parties/@{value}.png");
@@ -2806,7 +2718,6 @@ each(@parties, {
     height: 30px;
   }
 })
-// stylelint-disable-next-line @stylistic/indentation
 each(@parties, {
   .card-party--@{value}-req {
     background-image: url("./assets/parties/@{value}.png");
@@ -2815,6 +2726,7 @@ each(@parties, {
     height: 34px;
   }
 })
+/* stylelint-enable @stylistic/indentation */
 
 .card-over {
   margin: 0px 0 -59px -59px;
@@ -2837,12 +2749,13 @@ each(@parties, {
   asteroid, disease, preservation, data, syndicate-fleet, cube,
   venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
   clone-trooper, director, tool, ware, activist, journalism, supply-chain;
-// stylelint-disable-next-line @stylistic/indentation
+/* stylelint-disable @stylistic/indentation */
 each(@card_resource_types, {
   .card-resource-@{value} {
     background-image: url("./assets/resources/@{value}.png");
   }
 })
+/* stylelint-enable @stylistic/indentation */
 
 .card-resource-cube {
   background-image: url("./assets/cube.png");

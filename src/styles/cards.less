@@ -244,7 +244,10 @@ input[type="radio"]:checked+.filterDiv::after {
   background: #EEE;
 }
 
-/*********** Expansion badge icons (used by CardExpansion.vue via module + '-icon') ************/
+/*********** Expansion badge icons ************/
+/* Applied dynamically by CardExpansion.vue as `module + '-icon'`; the class
+   names never appear as literals, so static "unused CSS" passes WILL flag
+   these as dead. They are not. Do not auto-remove. */
 
 .corpera-icon:after {
   .expansion-icon-base();
@@ -313,11 +316,15 @@ input[type="radio"]:checked+.filterDiv::after {
 
 .promo-icon:after {
   .expansion-icon-base();
-  background-color: #cc3333;
-  font-size: 11px;
-  line-height: 15px;
+  background: white;
+  border: 5px solid #444444;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
+  width: 8px;
+  height: 8px;
   color: white;
-  content: "P";
+  content: "\0020";
 }
 
 .colonies-icon:after {

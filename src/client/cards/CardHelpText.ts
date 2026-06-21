@@ -4,6 +4,8 @@ import {CardName} from '@/common/cards/CardName';
 export const CARD_HELP_TEXT: Partial<Record<CardName, string>> = {
   [CardName.AIR_RAID]: `Air Raid requires removing 1 floater and stealing exactly 5 M€ from one opponent. These are treated as a package deal, so Air Raid cannot be played unless an opponent has at least 5 M€. If no opponent has 5 M€, the card is unavailable even if you have a floater.`,
 
+  [CardName.LAW_SUIT]: `Law Suit may target any player who removed your resources or decreased your production this generation.`,
+
   [CardName.ROBOTIC_WORKFORCE]:
 `From the unofficial FAQ 1.7:
 

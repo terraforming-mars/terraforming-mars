@@ -143,7 +143,7 @@ export default defineComponent({
         const tags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
         return (-4 * tags);
 
-      // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
+      // When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
       case CardName.SPLICE:
         const microbeTags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
         return (2 * microbeTags);

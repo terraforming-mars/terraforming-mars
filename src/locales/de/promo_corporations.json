@@ -47,7 +47,7 @@
   "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.": "Du beginnst mit 35 M€. Als deine erste Aktion platziere 1 Ozean- und 1 Grünflächenplättchen nebeneinander, ignoriere dabei Grunflächenplättchen-Beschränkungen. Erhöhe den Sauerstoffgehalt um 1%.",
   "Effect: When you place an ocean tile, gain 1 energy.": "EFFEKT: Wenn du ein Ozeanplättchen legst, erhalte 1 Energie.",
   "Effect: When you place a greenery, gain 1 plant.": "EFFEKT: Wenn du eine Grünflächenplättchen platzierst, erhalte 1 Pflanze.",
-  
+
   "Recyclon": "",
   "You start with 38 M€ and 1 steel production.": "Du beginnst mit 38 M€ und einer Stahl-Produktion von 1.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "EFFEKT: Wenn du ein Gebäudesymbol spielst (inklusive diesem), füge dieser Karte 1 Mikrobe hinzu oder entferne 2 Mikroben von dieser Karte, um deine Pflanzen-Produktiom um 1 zu erhöhen.",
@@ -64,5 +64,5 @@
   "TACTICAL GENOMICS": "TAKTISCHE GENTECHNIK",
   "Splice": "",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Du beginnst mit 44 M€. Als deine erste Aktion, decke solange Karten auf, bis du ein Mikrobensymbol gefunden hast. Nehme diese Karte und wirf die anderen Karten ab.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "EFFEKT: Wenn ein Mikrobensymbol von einem beliebigen Spieler gespielt wird (inklusive disem), erhält JENER Spieler 2 M€ oder fügt JENER Karte 1 Mikrobe hinzu, UND du erhältst 2 M€."
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "EFFEKT: Wenn ein Mikrobensymbol von einem beliebigen Spieler gespielt wird (inklusive disem), erhält JENER Spieler 2 M€ oder fügt JENER Karte 1 Mikrobe hinzu, UND du erhältst 2 M€."
 }

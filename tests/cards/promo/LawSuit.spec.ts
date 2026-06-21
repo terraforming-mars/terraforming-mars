@@ -51,6 +51,14 @@ describe('LawSuit', () => {
     expect(play).instanceOf(SelectPlayer);
   });
 
+  it('Names eligible targets in player selection', () => {
+    player.removingPlayers.push(player2.id);
+
+    const play = cast(card.play(player), SelectPlayer);
+
+    expect(play.title).eq('Select player to sue. Eligible targets: player2');
+  });
+
   it('Steals resources correctly', () => {
     // This part sets up player2 as a thief whom you will sue.
     player.removingPlayers.push(player2.id);

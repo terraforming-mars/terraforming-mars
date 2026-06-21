@@ -61,7 +61,7 @@ export class Splice extends CorporationCard implements ICorporationCard {
     game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
 
     const gainResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
-      cardPlayer.addResourceTo(card);
+      cardPlayer.addResourceTo(card, {log: true});
       return undefined;
     });
 

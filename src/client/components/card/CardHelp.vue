@@ -1,5 +1,5 @@
 <template>
-  <div class="card-help" v-show="hovering" @click.stop="open"><a>?</a></div>
+  <div class="card-help-icon" v-show="hovering" @click.stop="open"><a>?</a></div>
   <Teleport to="body">
     <PopupPanel v-if="showPopup" @close="close">
       <template #header>

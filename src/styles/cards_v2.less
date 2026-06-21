@@ -2611,6 +2611,7 @@
     margin-left: -10px;
     margin-top: -10px;
     justify-content: space-between;
+    position: relative;
     // Find a way to move this out.
     .board-cube {
       transform: scale(1.5);
@@ -2645,23 +2646,25 @@
       top: 45px;
       position: absolute;
     }
-    .card-help {
-      float: left;
+    .card-help-icon {
       font-family: Prototype, sans-serif;
       font-size: 20px;
       width: 24px;
       height: 24px;
-      margin-left: -20px;
       line-height: 24px;
       border-radius: 24px;
-      background-color: #444;
+      border: 2px solid #fff;
+      background-color: mediumblue;
       text-align: center;
       a {
-        color: #C33;
+        color: #fff;
         text-decoration: none;
       }
-      position: static;
-      z-index: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
     }
     .card-tags {
       display: flex;

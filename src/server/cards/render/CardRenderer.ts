@@ -541,17 +541,18 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): this {
+  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true, inParens: boolean = false): this {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
     item.size = size;
     item.isUppercase = liteBoolean(uppercase);
     item.isBold = liteBoolean(isBold);
+    item.inParens = liteBoolean(inParens);
     return this._appendToRow(item);
   }
 
-  public plainText(text: string) {
-    return this.text(text, Size.SMALL, false, false);
+  public plainText(text: string, parens: boolean = false) {
+    return this.text(text, Size.SMALL, false, false, parens);
   }
 
   public vpText(text: string): this {

@@ -11,6 +11,7 @@ import {PaymentTester} from './PaymentTester';
 import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectProjectCardToPlay', () => {
@@ -27,10 +28,10 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using sort order for cards', async () => {
-    localStorage.setItem('cardOrderp-foo', JSON.stringify({
+    CardOrderStorage.updateCardOrder('p-foo', {
       [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
-    }));
+    });
     const sortable = mount(SelectProjectCardToPlay, {
       ...globalConfig,
       props: {

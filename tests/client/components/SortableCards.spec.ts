@@ -3,6 +3,7 @@ import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SortableCards from '@/client/components/SortableCards.vue';
+import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {FakeLocalStorage} from './FakeLocalStorage';
 
 describe('SortableCards', () => {
@@ -45,19 +46,17 @@ describe('SortableCards', () => {
     });
     expect(cards[0].props().card.name).to.eq(CardName.CARTEL);
     expect(cards[1].props().card.name).to.eq(CardName.ANTS);
-    const order = localStorage.getItem('cardOrderfoo');
-    expect(order).not.to.be.undefined;
-    expect(JSON.parse(order!)).to.deep.eq({
+    expect(CardOrderStorage.getCardOrder('foo')).to.deep.eq({
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
     });
   });
   it('puts new cards at end of order and removes old', async () => {
-    localStorage.setItem('cardOrderfoo', JSON.stringify({
+    CardOrderStorage.updateCardOrder('foo', {
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
       [CardName.DECOMPOSERS]: 3,
-    }));
+    });
     const sortable = mount(SortableCards, {
       ...globalConfig,
       props: {
@@ -90,9 +89,7 @@ describe('SortableCards', () => {
     expect(cards[0].props().card.name).to.eq(CardName.ANTS);
     expect(cards[1].props().card.name).to.eq(CardName.CARTEL);
     expect(cards[2].props().card.name).to.eq(CardName.BIRDS);
-    const order = localStorage.getItem('cardOrderfoo');
-    expect(order).not.to.be.undefined;
-    expect(JSON.parse(order!)).to.deep.eq({
+    expect(CardOrderStorage.getCardOrder('foo')).to.deep.eq({
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 3,
       [CardName.BIRDS]: 4,

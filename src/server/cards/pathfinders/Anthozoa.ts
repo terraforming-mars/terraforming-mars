@@ -26,8 +26,9 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
           b.action('Spend 1 plant to add an animal to this card.', (eb) => {
             eb.plants(1).startAction.resource(CardResource.ANIMAL);
           });
+          b.br.vpText('1 VP per 2 animals on this card.');
         }),
-        description: 'Requires 3 oceans on Mars. 1 VP per 2 animals on this card.',
+        description: 'Requires 3 oceans on Mars.',
       },
     });
   }

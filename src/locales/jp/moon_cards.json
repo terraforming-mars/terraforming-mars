@@ -26,7 +26,8 @@
   "Ancient Shipyards": "古代の造船所",
   "Ancient Shipyards (Nerfed)": "古代の造船所",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "アクション：他の全プレイヤーから2MC盗む. このカード上に1リソースキューブ追加.",
-  "Spend 3 titanium. -1 VP for every resource here.": "3チタン支払う. このカード上の1リソースキューブ毎に-1VP.",
+  "Spend 3 titanium.": "3チタン支払う.",
+  "-1 VP for every resource here.": "このカード上の1リソースキューブ毎に-1VP.",
 
   "Archimedes Hydroponics Station": "アルキメデス水耕栽培基地",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "電力産出-1. MC産出-1. 植物産出+2.",

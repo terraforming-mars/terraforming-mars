@@ -184,8 +184,7 @@
   "Action: Decrease energy production 1 step to gain 8 M€.": "アクション：電力産出-1し、8MC獲得.",
 
   "Asteroid Rights": "小惑星の所有権",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "アクション：1MC支払い、1小惑星獲得.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：1MC支払い、1小惑星獲得 または このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
   "Add 2 asteroids to this card.": "このカード上に2小惑星追加.",
 
   "Stanford Torus": "スタンフォード・トーラス",

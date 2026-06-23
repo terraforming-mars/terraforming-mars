@@ -268,28 +268,6 @@ each(@players, {
   margin-top: 11px;
 }
 
-.icon-vp {
-  text-shadow: 0 0 5px darkorange;
-  color: #000;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
-  font-size: 28px;
-  background-image: url(./assets/board/mars.png);
-  background-size: 120px 120px;
-  background-position: 88px 92px;
-  border-top: 5px solid #bb8760;
-  border-left: 5px solid #bb8760;
-  border-bottom: 5px solid #744631;
-  border-right: 5px solid #744631;
-}
-
-.player_home_block--resources {
-  position: sticky;
-  top: -13px;
-  z-index: 20;
-}
-
 .player_home_anchor {
   position: relative;
   top: -100px;
@@ -305,13 +283,6 @@ each(@players, {
   text-shadow: 1px 1px 1px @grey_900, -1px -1px 1px #666;
   padding: 1px 10px;
   border-radius: 4px;
-}
-
-.help_tip {
-  color: #aaa;
-  font-size: smaller;
-  text-shadow: none;
-  font-family: Ubuntu, sans-serif;
 }
 
 .player_home_block {
@@ -334,15 +305,6 @@ each(@players, {
     border-radius: 4px;
   }
 
-  .tags_cont {
-    display: inline-block;
-    vertical-align: top;
-
-    .player_name_cont {
-      text-align: left;
-    }
-  }
-
   .player_name_cont {
     text-align: center;
     width: 150px;
@@ -356,27 +318,6 @@ each(@players, {
       margin-right: 5px;
       text-shadow: 1px 1px 1px @grey_900, -1px -1px 1px #666;
     }
-
-    .corporation-name-cont {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-
-      .corporation-name {
-        font-size: 16px;
-      }
-    }
-  }
-  .pin_icon {
-    width: 40px;
-    height: 40px;
-  }
-  .player_pin {
-    cursor: pointer;
-    vertical-align: middle;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
   }
   .other_player {
     display: flex;
@@ -772,11 +713,8 @@ each(@players, {
     }
   }
 
-  .player-status, .player-info-top {
+  .player-status {
     display: none !important;
-  }
-  .player-info-bottom {
-    background: @grey_850 !important;
   }
 
   .player-info {

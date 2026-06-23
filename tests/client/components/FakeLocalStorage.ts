@@ -31,11 +31,11 @@ export class FakeLocalStorage implements Storage {
   }
 
   public get length(): number {
-    throw new Error('Not yet implemented');
+    return Object.keys(this.data).length;
   }
 
-  key(_index: number): string | null {
-    throw new Error('Not yet implemented');
+  key(index: number): string | null {
+    return Object.keys(this.data)[index] ?? null;
   }
 
   public removeItem(key: string): void {

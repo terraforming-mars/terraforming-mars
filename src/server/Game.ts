@@ -181,10 +181,6 @@ export class Game implements IGame, Logger {
   public verminInEffect: boolean = false;
   public exploitationOfVenusInEffect: boolean = false;
 
-  // Whether the one-time "Mars is terraformed" announcement has been logged. Not serialized:
-  // once Mars is terraformed the global parameters stay maxed, so this is never re-triggered.
-  private marsIsTerraformedAnnounced: boolean = false;
-
   /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
 
@@ -586,16 +582,6 @@ export class Game implements IGame, Logger {
       return globalParametersMaxed && venusMaxed;
     }
     return globalParametersMaxed;
-  }
-
-  // Announce, exactly once, when Mars (and any required additional tracks) becomes fully
-  // terraformed. Called after every global parameter increase. The announcement fires the moment
-  // the final parameter is maxed, even mid-action, rather than only at game end.
-  public maybeLogMarsIsTerraformed(): void {
-    if (this.marsIsTerraformedAnnounced === false && this.marsIsTerraformed()) {
-      this.marsIsTerraformedAnnounced = true;
-      this.log('Mars is terraformed!', (b) => b.announcement());
-    }
   }
 
   public lastSoloGeneration(): number {
@@ -1222,7 +1208,6 @@ export class Game implements IGame, Logger {
     }
 
     this.oxygenLevel += steps;
-    this.maybeLogMarsIsTerraformed();
 
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOxygenChange(this, aresData);
@@ -1286,7 +1271,6 @@ export class Game implements IGame, Logger {
     }
 
     this.venusScaleLevel += steps * 2;
-    this.maybeLogMarsIsTerraformed();
 
     return steps;
   }
@@ -1333,7 +1317,6 @@ export class Game implements IGame, Logger {
     }
 
     this.temperature += steps * 2;
-    this.maybeLogMarsIsTerraformed();
 
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onTemperatureChange(this, aresData);
@@ -1595,7 +1578,6 @@ export class Game implements IGame, Logger {
     }
 
     this.addTile(player, space, {tileType: TileType.OCEAN});
-    this.maybeLogMarsIsTerraformed();
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);

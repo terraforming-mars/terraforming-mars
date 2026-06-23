@@ -6,9 +6,7 @@
           <img src="assets/arrows_left.png">
         </div>
       </div>
-      <div v-if="playerView.game.isTerraformed" class="terraformed-banner">
-        <span v-i18n>Mars is Terraformed!</span>
-      </div>
+      <TerraformedBanner v-if="playerView.game.isTerraformed" :playerId="playerView.id"/>
     </div>
 </template>
 
@@ -17,6 +15,7 @@
 import {defineComponent} from 'vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
+import TerraformedBanner from '@/client/components/TerraformedBanner.vue';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default defineComponent({
@@ -29,6 +28,7 @@ export default defineComponent({
   },
   components: {
     PlayerInfo,
+    TerraformedBanner,
   },
   data() {
     return {

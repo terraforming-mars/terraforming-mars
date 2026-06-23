@@ -19,11 +19,6 @@ export class LogMessageBuilder extends MessageBuilder {
     return this;
   }
 
-  public announcement(): this {
-    this.type = LogMessageType.ANNOUNCEMENT;
-    return this;
-  }
-
   public from(from: From): this {
     if (isFromPlayer(from)) {
       return this.player(from.player);

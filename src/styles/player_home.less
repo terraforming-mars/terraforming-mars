@@ -21,8 +21,24 @@
   }
 }
 
-.terraformed {
-  background: linear-gradient(transparent, #e28c22, transparent);
+.terraformed-banner {
+  background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
+  color: #000;
+  text-align: center;
+  padding: 12px;
+  font-size: 24px;
+  font-family: Prototype, Ubuntu, Sans-Serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  position: relative;
+  border-bottom: 2px solid #805700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  animation: slide-down 0.6s ease-out;
 }
 
 @keyframes slide-down {

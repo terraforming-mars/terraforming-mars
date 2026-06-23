@@ -6,6 +6,9 @@
           <img src="assets/arrows_left.png">
         </div>
       </div>
+      <div v-if="playerView.game.isTerraformed" class="terraformed-banner">
+        <span v-i18n>Mars is Terraformed!</span>
+      </div>
     </div>
 </template>
 

@@ -3,8 +3,8 @@ import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SortableCards from '@/client/components/SortableCards.vue';
+import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {FakeLocalStorage} from './FakeLocalStorage';
-import {PlayerId} from '@/common/Types';
 
 type DropSide = 'left' | 'right';
 
@@ -37,20 +37,6 @@ function cardsInOrder(sortable: VueWrapper<InstanceType<typeof SortableCards>>):
   }).map((card) => card.props().card.name);
 }
 
-/**
- * Returns the entries in local storage for the given player.
- */
-function getStorageEntries(playerId: PlayerId): {[key in CardName]?: number} {
-  const entries: {[key in CardName]?: number} = {};
-  const item = localStorage.getItem(`cardOrder${playerId}`);
-  if (item) {
-    const parsed = JSON.parse(item);
-    for (const [cardName, order] of Object.entries(parsed)) {
-      entries[cardName as CardName] = order as number;
-    }
-  }
-  return entries;
-}
 
 describe('SortableCards', () => {
   let localStorage: FakeLocalStorage;
@@ -76,18 +62,18 @@ describe('SortableCards', () => {
     await dragCard(sortable, 0, 1, 'right');
 
     expect(cardsInOrder(sortable)).to.deep.eq([CardName.CARTEL, CardName.ANTS]);
-    expect(getStorageEntries('player1')).to.deep.eq({
+    expect(CardOrderStorage.getCardOrder('player1')).to.deep.eq({
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
     });
   });
 
   it('puts new cards at end of order and removes old', async () => {
-    localStorage.setItem('cardOrderplayer1', JSON.stringify({
+    CardOrderStorage.updateCardOrder('player1', {
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
       [CardName.DECOMPOSERS]: 3,
-    }));
+    });
     const sortable = mount(SortableCards, {
       ...globalConfig,
       props: {
@@ -101,7 +87,7 @@ describe('SortableCards', () => {
     await dragCard(sortable, 0, 2, 'left');
 
     expect(cardsInOrder(sortable)).to.deep.eq([CardName.ANTS, CardName.CARTEL, CardName.BIRDS]);
-    expect(getStorageEntries('player1')).to.deep.eq({
+    expect(CardOrderStorage.getCardOrder('player1')).to.deep.eq({
       [CardName.ANTS]: 1,
       [CardName.CARTEL]: 2,
       [CardName.BIRDS]: 3,

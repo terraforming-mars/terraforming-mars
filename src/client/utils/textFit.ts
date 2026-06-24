@@ -8,7 +8,7 @@
 // (layout-forcing) measurement entirely.
 import {getCachedFontSize, setCachedFontSize} from '@/client/utils/fontSizeCache';
 
-// Don't shrink past the smallest legible size (matches `.title-smallest`).
+// Don't shrink past the smallest legible size.
 const MIN_FONT_SIZE = 10;
 
 // Tracks the cost of fitting text so a caller can report how long it took to
@@ -82,7 +82,8 @@ export function fitText(el: HTMLElement, namespace: string): void {
 // mounted/watch hook wants it: tolerant of a missing element, and deferred until
 // `document.fonts.ready` so the measurement uses real glyph widths. Outside a
 // real browser (e.g. JSDOM tests) `document.fonts` is unavailable, so fit
-// synchronously. Callers gate this on the experimental UI preference.
+// synchronously. Some callers (milestone/award names) gate this on the
+// experimental UI preference; card titles always fit.
 export function fitTextWhenReady(el: HTMLElement | undefined, namespace: string): void {
   if (el === undefined) {
     return;

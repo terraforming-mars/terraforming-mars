@@ -12,11 +12,9 @@
 
 import {defineComponent} from 'vue';
 import {CardType} from '@/common/cards/CardType';
-import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
 import {CardName} from '@/common/cards/CardName';
 import {fitTextWhenReady} from '@/client/utils/textFit';
-import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type Refs = {
   // Only rendered for non-corporation cards (corporations show a logo instead).
@@ -50,11 +48,10 @@ export default defineComponent({
   },
   methods: {
     // Size the title to fit by measuring the rendered text rather than guessing
-    // from its length. Only when the experimental UI is on; otherwise the
-    // length-based classes and language_hacks title overrides handle sizing.
-    // Corporations show a logo instead of a title element, so nothing to fit.
+    // from its length. Corporations show a logo instead of a title element, so
+    // nothing to fit.
     fitTitle(): void {
-      if (!getPreferences().experimental_ui || this.isCorporation()) {
+      if (this.isCorporation()) {
         return;
       }
       fitTextWhenReady(this.typedRefs.title, 'card-title');
@@ -85,21 +82,7 @@ export default defineComponent({
         classes.push('background-color-standard-project');
       }
 
-      // With the experimental UI on, the title is sized by measuring the
-      // rendered text (see fitTitle). Otherwise fall back to a length-based size
-      // class (these carry !important, so they'd override the measured size).
-      if (!getPreferences().experimental_ui) {
-        const localeSpecificTitle = translateText(this.titleWithoutSuffix);
-
-        if (localeSpecificTitle.length > 29) {
-          classes.push('title-smallest');
-        } else if (localeSpecificTitle.length > 26) {
-          classes.push('title-smaller');
-        } else if (localeSpecificTitle.length > 23) {
-          classes.push('title-small');
-        }
-      }
-
+      // The title is sized by measuring the rendered text (see fitTitle).
       return classes.join(' ');
     },
     getMainClasses() {

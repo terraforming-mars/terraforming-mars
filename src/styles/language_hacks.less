@@ -18,32 +18,7 @@
   }
 }
 
-.language-es {
-  // Title overrides apply only when the experimental UI (measurement-based
-  // title fitting) is off. preferences_experimental_ui lives on <body>, the
-  // same element as language-es, so it's compounded on rather than an ancestor.
-  &:not(.preferences_experimental_ui) .filterDiv {
-    .card-title {
-      font-size: 15px !important;
-      &.title-small {
-        font-size: 14px !important;
-      }
-      &.title-smaller {
-        font-size: 13px !important;
-      }
-    }
-  }
-}
-
 .language-ru {
-  // Title overrides apply only when the experimental UI (measurement-based
-  // title fitting) is off; see the note on .language-es above.
-  &:not(.preferences_experimental_ui) .filterDiv .card-title {
-    font-size: 11px !important;
-    &.title-smaller {
-      font-size: 10px !important;
-    }
-  }
   .filterDiv {
     &.card-agricola-inc {
       .description {
@@ -323,35 +298,6 @@
 }
 
 .language-hu {
-  // Title overrides apply only when the experimental UI (measurement-based
-  // title fitting) is off; see the note on .language-es above.
-  &:not(.preferences_experimental_ui) .filterDiv {
-    &.card-terraforming-ganymede .card-title .title-small {
-      font-size: 14px !important;
-    }
-    &.card-museum-of-early-colonisation,
-    &.card-venus-orbital-survey,
-    &.card-asteroid-mining-consortium,
-    &.card-st\.-joseph-of-cupertino-mission,
-    &.card-cut-throat-budgeting {
-      .card-title .title-smaller {
-        font-size: 13px !important;
-      }
-    }
-    &.card-archimedes-hydroponics-station,
-    &.card-power-infrastructure {
-      .card-title .title-smaller {
-        font-size: 12px !important;
-      }
-    }
-    &.card-mining-robots-manuf\.-center .card-title .title-smaller {
-      font-size: 11px !important;
-    }
-    &.card-supported-research .card-title {
-      font-size: 13px !important;
-    }
-  }
-
   .filterDiv {
 
     /* Project cards */
@@ -597,10 +543,6 @@
       }
     }
 
-    &.card-hyperspace-drive-prototype .title-smaller {
-      font-size: 13px !important;
-    }
-
     &.card-luna-mining-hub {
       .card-requirements,
       .card-description-aligned {
@@ -619,10 +561,6 @@
       font-size: 13px;
     }
 
-    &.card-mooncrate-convoys-to-mars .title-smaller {
-      font-size: 12px !important;
-    }
-
     &.card-lunar-security-stations {
       .card-logistic-rate,
       .card-description {
@@ -632,10 +570,6 @@
 
     &.card-lunar-embassy .card-description {
       margin-top: -10px;
-    }
-
-    &.card-undermoon-drug-lords-network .title-smaller {
-      font-size: 13px !important;
     }
 
     &.card-imported-hydrogen {
@@ -648,14 +582,6 @@
         margin-left: -33px;
         font-size: 33px;
       }
-    }
-
-    &.card-import-of-advanced-ghg .title-smaller {
-      font-size: 10px !important;
-    }
-
-    &.card-imported-ghg .title-smaller {
-      font-size: 13px !important;
     }
 
     &.card-directed-impactors {
@@ -859,16 +785,8 @@
       }
     }
 
-    &.card-aerobraked-ammonia-asteroid .title-smaller {
-      font-size: 12px !important;
-    }
-
     &.card-atmo-collectors .card-content {
       overflow-x: unset;
-    }
-
-    &.card-ai-controlled-mine-network .title-smaller {
-      font-size: 11px !important;
     }
 
     &.card-birds {
@@ -900,9 +818,6 @@
     }
 
     &.card-high-temp\.-superconductors {
-      .title-smaller {
-        font-size: 12px !important;
-      }
       .card-content {
         overflow-x: unset;
         margin-top: -7px;
@@ -1051,10 +966,6 @@
       }
     }
 
-    &.card-nitrogen-rich-asteroid .title-smaller {
-      font-size: 13px !important;
-    }
-
     &.card-herbivores {
       .card-content {
         overflow-x: unset;
@@ -1095,9 +1006,6 @@
     }
 
     &.card-oumuamua-type-object-survey {
-      .title-smaller {
-        font-size: 11px !important;
-      }
       .card-content {
         overflow-x: unset;
         margin-top: -7px;
@@ -1138,31 +1046,17 @@
       }
     }
 
-    &.card-volunteer-mining-initiative .title-smaller {
-      font-size: 11px !important;
-    }
-
     &.card-solarpedia .card-description {
       margin-top: 3px;
     }
 
     &.card-darkside-mining-syndicate {
-      .title-smaller {
-        font-size: 12px !important;
-      }
       .card-description {
         margin-top: -9px;
       }
     }
 
-    &.card-darkside-smugglers\'-union .title-smaller {
-      font-size: 10px !important;
-    }
-
     &.card-darkside-incubation-plant {
-      .title-smaller {
-        font-size: 12px !important;
-      }
       .card-rows {
         margin-top: -13px;
       }
@@ -1178,10 +1072,6 @@
       }
     }
 
-    &.card-darkside-meteor-bombardment .title-smaller {
-      font-size: 13px !important;
-    }
-
     &.card-star-vegas {
       .card-content {
         margin-top: -5px;
@@ -1189,10 +1079,6 @@
       .card-description {
         margin-top: 0px;
       }
-    }
-
-    &.card-beam-from-a-thorium-asteroid .title-smaller {
-      font-size: 12px !important;
     }
 
     &.card-jet-stream-microscrappers .card-description {
@@ -1416,10 +1302,6 @@
       margin-top: -2px;
     }
 
-    &.card-ghg-shipment .title-smaller {
-      font-size: 13px !important;
-    }
-
     &.card-corporate-blackmail .card-description {
       margin-top: -10px;
     }
@@ -1474,10 +1356,6 @@
 
     &.card-dawn-city .card-description {
       margin-top: -1px;
-    }
-
-    &.card-return-to-abandoned-technology .title-smaller {
-      font-size: 11px !important;
     }
 
     &.card-wetlands {
@@ -2104,14 +1982,6 @@
       margin-top: 4px;
     }
 
-    &.card-anti-desertification-techniques .title-smaller {
-      font-size: 13px !important;
-    }
-
-    &.card-ganymede-trading-company .title-smaller {
-      font-size: 12px !important;
-    }
-
     &.card-board-of-directors {
       .card-rows .card-row:nth-child(4) {
         display: none;
@@ -2375,13 +2245,3 @@
 
 }
 
-.language-ua {
-  // Title overrides apply only when the experimental UI (measurement-based
-  // title fitting) is off; see the note on .language-es above.
-  &:not(.preferences_experimental_ui) .filterDiv .card-title {
-    font-size: 12px !important;
-    &.title-smaller {
-      font-size: 11px !important;
-    }
-  }
-}

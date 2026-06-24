@@ -1,16 +1,19 @@
 import {expect} from 'chai';
 import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/GeologicalExpedition';
+import {NewHolland} from '../../../src/server/cards/promo/NewHolland';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {addCity, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../../src/common/utils/utils';
@@ -102,6 +105,32 @@ describe('GeologicalExpedition', () => {
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(2);
+  });
+
+  it('does not grant covered ocean bonuses for New Holland', () => {
+    const newHolland = new NewHolland();
+    [game, player] = testGame(1);
+    player.popWaitingFor();
+
+    const oceanSpace = game.board.spaces.filter((space) => {
+      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
+    })[0];
+
+    game.addOcean(player, oceanSpace);
+    expect(player.plants).eq(1);
+    player.plants = 0;
+    player.playedCards.push(card);
+
+    cast(newHolland.play(player), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    action.cb(oceanSpace);
+    runAllActions(game);
+
+    expect(oceanSpace.tile?.tileType).eq(TileType.NEW_HOLLAND);
+    expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);
+    expect(player.plants).eq(0);
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('variety', () => {

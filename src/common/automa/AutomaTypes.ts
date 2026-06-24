@@ -12,7 +12,9 @@ export type TrackAction =
   | 'ocean'
   | 'city'
   | 'venus' | 'venus2'
-  | `tag_${number}`;
+  | 'floater' | 'floater2'
+  | `tag_${number}`   // Advance track by index
+  | `tag_${string}`;  // Advance track by tag name (e.g. 'tag_microbe')
 
 /** A single track on the MarsBot board (19 positions: 0–18). */
 export type TrackLayout = ReadonlyArray<TrackAction | undefined>;

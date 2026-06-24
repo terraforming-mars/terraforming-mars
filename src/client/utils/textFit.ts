@@ -82,8 +82,7 @@ export function fitText(el: HTMLElement, namespace: string): void {
 // mounted/watch hook wants it: tolerant of a missing element, and deferred until
 // `document.fonts.ready` so the measurement uses real glyph widths. Outside a
 // real browser (e.g. JSDOM tests) `document.fonts` is unavailable, so fit
-// synchronously. Some callers (milestone/award names) gate this on the
-// experimental UI preference; card titles always fit.
+// synchronously.
 export function fitTextWhenReady(el: HTMLElement | undefined, namespace: string): void {
   if (el === undefined) {
     return;

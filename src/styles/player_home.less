@@ -417,11 +417,11 @@ each(@players, {
       font-weight: bold;
       border-radius: 10px 10px 0 0;
 
-      // With the experimental UI on, the name is sized by measuring the rendered
-      // text (see fitText). The measurement needs the name in a block that spans
-      // the medal's width, so overflow from a too-long word is detectable;
-      // otherwise an inline span just grows to fit and never reports overflow.
-      .preferences_experimental_ui & > span {
+      // The name is sized by measuring the rendered text (see fitText). The
+      // measurement needs the name in a block that spans the medal's width, so
+      // overflow from a too-long word is detectable; otherwise an inline span
+      // just grows to fit and never reports overflow.
+      & > span {
         display: block;
       }
     }

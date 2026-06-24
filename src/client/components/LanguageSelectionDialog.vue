@@ -9,7 +9,9 @@
             :title="LANGUAGES[lang][1]"
             @click="switchLanguageTo(lang)"
           ></div>
-          <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang][0] }}</span>
+          <span class="language-text" @click="switchLanguageTo(lang)">
+            &nbsp;({{ lang }}) {{ LANGUAGES[lang][0] }}
+          </span>
         </label>
       </div>
     </div>

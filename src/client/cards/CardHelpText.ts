@@ -45,7 +45,7 @@ The decision is to go with 2 - the effect is reduced by half.`,
   [CardName.PRICE_WARS]:
 `Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the effect ongoing effect is also removed from play. It is strange for an event to have a generational effect.
 
-That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Servants and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.`,
+That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Workers and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.`,
 
   [CardName.PHILARES]: `Philares's effect does not trigger when tiles are placed on The Moon. This is an intentional decision to prevent it from being overpowered.`,
 

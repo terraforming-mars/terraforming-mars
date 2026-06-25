@@ -12,11 +12,9 @@ import {addCity, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../../src/common/utils/utils';
-import {OceanFarm} from '@/server/cards/ares/OceanFarm';
 
 describe('GeologicalExpedition', () => {
   let card: GeologicalExpedition;
@@ -113,13 +111,7 @@ describe('GeologicalExpedition', () => {
 
     game.simpleAddTile(player, space, {tileType: TileType.OCEAN});
 
-    const oceanFarm = new OceanFarm();
-    cast(oceanFarm.play(player), undefined);
-    runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(oceanSpace);
-    runAllActions(game);
-    cast(player.getWaitingFor(), undefined);
+    game.addTile(player, oceanSpace, {tileType: TileType.OCEAN_FARM, covers: oceanSpace.tile});
 
     expect(oceanSpace.tile?.tileType).eq(TileType.OCEAN_FARM);
     expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);

@@ -129,7 +129,11 @@ describe('GeologicalExpedition', () => {
 
     expect(oceanSpace.tile?.tileType).eq(TileType.NEW_HOLLAND);
     expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);
+
+    // Covering an existing tile doesn't grant the space bonus, nor does it give the consolation steel.
     expect(player.plants).eq(0);
+    expect(player.steel).eq(0);
+
     cast(player.getWaitingFor(), undefined);
   });
 

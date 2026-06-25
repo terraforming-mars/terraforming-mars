@@ -7,6 +7,7 @@ import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {Insulation} from '../../../src/server/cards/base/Insulation';
 import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustries';
 import {cast} from '../../../src/common/utils/utils';
+import {Player} from '../../../src/server/Player';
 
 describe('MarsMaths', () => {
   let card: MarsMaths;
@@ -20,6 +21,17 @@ describe('MarsMaths', () => {
     const previousActions = player.availableActionsThisRound;
     card.action(player);
     expect(player.availableActionsThisRound).eq(previousActions + 2);
+  });
+
+  it('preserves additional actions through serialization', () => {
+    const [/* game */, player] = testGame(1);
+    card.action(player);
+    player.actionsTakenThisRound = 2;
+
+    const restoredPlayer = Player.deserialize(player.serialize());
+
+    expect(restoredPlayer.actionsTakenThisRound).eq(2);
+    expect(restoredPlayer.availableActionsThisRound).eq(4);
   });
 
   it('play - solo', () => {

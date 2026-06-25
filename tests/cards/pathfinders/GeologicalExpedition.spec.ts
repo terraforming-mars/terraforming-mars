@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/GeologicalExpedition';
-import {NewHolland} from '../../../src/server/cards/promo/NewHolland';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -17,6 +16,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../../src/common/utils/utils';
+import {OceanFarm} from '@/server/cards/ares/OceanFarm';
 
 describe('GeologicalExpedition', () => {
   let card: GeologicalExpedition;
@@ -34,7 +34,6 @@ describe('GeologicalExpedition', () => {
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});
     scienceCard = fakeCard({resourceType: CardResource.SCIENCE});
     player.playedCards.push(card, microbeCard, scienceCard);
-    player.popWaitingFor();
   });
 
   it('no bonuses, gain 1 steel', () => {
@@ -107,34 +106,27 @@ describe('GeologicalExpedition', () => {
     expect(scienceCard.resourceCount).eq(2);
   });
 
-  it('does not grant covered ocean bonuses for New Holland', () => {
-    const newHolland = new NewHolland();
-    [game, player] = testGame(1);
-    player.popWaitingFor();
+  it('does not grant covered ocean bonuses', () => {
+    const oceanSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    oceanSpace.spaceType = SpaceType.OCEAN;
+    oceanSpace.bonus = [SpaceBonus.PLANT];
 
-    const oceanSpace = game.board.spaces.filter((space) => {
-      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
-    })[0];
+    game.simpleAddTile(player, space, {tileType: TileType.OCEAN});
 
-    game.addOcean(player, oceanSpace);
-    expect(player.plants).eq(1);
-    player.plants = 0;
-    player.playedCards.push(card);
-
-    cast(newHolland.play(player), undefined);
+    const oceanFarm = new OceanFarm();
+    cast(oceanFarm.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
     runAllActions(game);
+    cast(player.getWaitingFor(), undefined);
 
-    expect(oceanSpace.tile?.tileType).eq(TileType.NEW_HOLLAND);
+    expect(oceanSpace.tile?.tileType).eq(TileType.OCEAN_FARM);
     expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);
 
     // Covering an existing tile doesn't grant the space bonus, nor does it give the consolation steel.
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
-
-    cast(player.getWaitingFor(), undefined);
   });
 
   it('variety', () => {

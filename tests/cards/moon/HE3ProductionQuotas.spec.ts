@@ -6,8 +6,7 @@ import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQ
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
-import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
-import {Greens} from '../../../src/server/turmoil/parties/Greens';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('HE3ProductionQuotas', () => {
   let player: TestPlayer;
@@ -21,31 +20,35 @@ describe('HE3ProductionQuotas', () => {
     moonData = MoonExpansion.moonData(game);
   });
 
-  it('can play', () => {
-    player.cardsInHand = [card];
-    player.megaCredits = card.cost;
-    game.turmoil!.rulingParty = new Kelvinists();
+  for (const run of [
+    {party: PartyName.KELVINISTS, steel: 3, mines: 3, own: true, expected: true},
+    {party: PartyName.KELVINISTS, steel: 2, mines: 3, own: true, expected: false},
+    {party: PartyName.KELVINISTS, steel: 3, mines: 4, own: true, expected: false},
+    {party: PartyName.KELVINISTS, steel: 3, mines: 3, own: false, expected: false},
+    {party: PartyName.GREENS, steel: 3, mines: 3, own: true, expected: false},
+  ] as const) {
+    it('can play ' + JSON.stringify(run), () => {
+      player.cardsInHand = [card];
+      player.megaCredits = card.cost;
+      game.turmoil!.rulingParty = game.turmoil!.getPartyByName(run.party)!;
 
-    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
-    spaces[0].tile = {tileType: TileType.MOON_MINE};
-    spaces[1].tile = {tileType: TileType.MOON_MINE};
-    spaces[2].tile = {tileType: TileType.MOON_MINE};
+      const spaces = moonData.moon.getAvailableSpacesOnLand(player);
+      for (let i = 0; i < run.mines; i++) {
+        spaces[i].tile = {tileType: TileType.MOON_MINE};
+      }
+      if (run.own) {
+        spaces[0].player = player;
+      }
 
-    player.steel = 3;
-    expect(player.getPlayableCards()).does.include(card);
+      player.steel = run.steel;
 
-    game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCards()).does.not.include(card);
-
-
-    game.turmoil!.rulingParty = new Kelvinists();
-    player.steel = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
-
-    player.steel = 3;
-    spaces[3].tile = {tileType: TileType.MOON_MINE};
-    expect(player.getPlayableCards()).does.not.include(card);
-  });
+      if (run.expected) {
+        expect(player.getPlayableCards()).does.include(card);
+      } else {
+        expect(player.getPlayableCards()).does.not.include(card);
+      }
+    });
+  }
 
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);

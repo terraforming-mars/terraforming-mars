@@ -15,6 +15,7 @@ import {message} from '../../logs/MessageBuilder';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IActionCard} from '../ICard';
 import {all} from '../Options';
+import {Size} from '@/common/cards/render/Size';
 
 export class CorporateTheft extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -33,7 +34,7 @@ export class CorporateTheft extends Card implements IProjectCard, IActionCard {
           b.action('Pay 5 M€ to steal ANY 1 resource from another player. ' +
           'If it is a card resource, you may put it on a suitable card.',
           (ab) => ab.megacredits(5).startAction.text('STEAL').wild(1, {all}).asterix());
-          b.br.text('DOES NOT WORK IN SOLO GAMES');
+          b.br.text('DOES NOT WORK IN SOLO GAMES', Size.TINY);
         }),
         description: 'Requires 2 corruption.',
       },

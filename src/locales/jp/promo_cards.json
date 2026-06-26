@@ -80,8 +80,7 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "チタン産出+2. 3チタン獲得.",
 
   "Comet Aiming": "彗星誘導",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "アクション：1チタンを支払い、1小惑星獲得.",
-  "Action: Remove 1 asteroid here to place an ocean.": "アクション：このカード上から1小惑星を除去し、海洋配置.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "アクション：1チタンを支払い、1小惑星獲得 または このカード上から1小惑星を除去し、海洋配置.",
 
   "Cutting Edge Technology": "最先端テクノロジー",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "効果：条件付きカードのプレイコスト-2MC.",

@@ -26,7 +26,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf50',
         renderData: CardRenderer.builder((b) => {
-          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA, {size: Size.SMALL});
+          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA);
           b.nbsp;
           b.resource(CardResource.DATA, {amount: 3, digit}).asterix().colon().production((pb) => pb.plants(1));
           b.br;

@@ -9,13 +9,14 @@ import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {JSONObject} from '@/common/Types';
 import {defineComponent} from 'vue';
 
-function settings(overrides: JSONObject = {}): JSONObject {
+// Minimal serialized Create Game payload used by settings restore tests.
+function createGameSettings(overrides: JSONObject = {}): JSONObject {
   return {
     players: [
       {name: 'Alice', color: 'red', beginner: false, handicap: 0},
       {name: 'Bob', color: 'blue', beginner: false, handicap: 0},
     ],
-    expansions: {...DEFAULT_EXPANSIONS},
+    expansions: DEFAULT_EXPANSIONS,
     board: BoardName.HELLAS,
     draftVariant: false,
     solarPhaseOption: true,
@@ -43,14 +44,13 @@ describe('CreateGameForm', () => {
   });
 
   it('restores the last saved game settings on load', async () => {
-    CreateGameSettingsStorage.saveLastSettings(settings({
+    new CreateGameSettingsStorage(localStorage).saveSettings(createGameSettings({
       expansions: {...DEFAULT_EXPANSIONS, venus: true},
     }));
 
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,
     });
-    await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
     expect((wrapper.vm as any).playersCount).eq(2);
@@ -78,7 +78,7 @@ describe('CreateGameForm', () => {
       alerts.push({title, message});
     };
 
-    CreateGameSettingsStorage.saveLastSettings(settings({
+    new CreateGameSettingsStorage(localStorage).saveSettings(createGameSettings({
       customPreludes: ['Bad Prelude Name'],
     }));
 
@@ -92,12 +92,12 @@ describe('CreateGameForm', () => {
   });
 
   it('resets the form and clears saved settings', async () => {
-    CreateGameSettingsStorage.saveLastSettings(settings());
+    const settingsStorage = new CreateGameSettingsStorage(localStorage);
+    settingsStorage.saveSettings(createGameSettings());
 
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,
     });
-    await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
     expect((wrapper.vm as any).board).eq(BoardName.HELLAS);
@@ -107,7 +107,7 @@ describe('CreateGameForm', () => {
 
     expect((wrapper.vm as any).board).eq(BoardName.THARSIS);
     expect((wrapper.vm as any).draftVariant).eq(true);
-    expect(CreateGameSettingsStorage.getLastSettings()).eq(undefined);
+    expect(settingsStorage.loadSettings()).eq(undefined);
     expect(wrapper.findAllComponents({name: 'AppButton'}).map((button) => button.props('title'))).includes('Reset');
   });
 
@@ -116,7 +116,7 @@ describe('CreateGameForm', () => {
       ...globalConfig,
     });
 
-    expect(() => (wrapper.vm as any).applySettings(settings({
+    expect(() => (wrapper.vm as any).applySettings(createGameSettings({
       players: [
         {name: 'Alice', color: 'red', beginner: false, handicap: 0},
         {name: 'Bob', color: 'red', beginner: false, handicap: 0},
@@ -128,11 +128,6 @@ describe('CreateGameForm', () => {
   it('saves current settings before creating a game', async () => {
     const originalFetch = global.fetch;
     const originalAlert = global.alert;
-    const savedSettings: Array<unknown> = [];
-    const originalSaveLastSettings = CreateGameSettingsStorage.saveLastSettings;
-    CreateGameSettingsStorage.saveLastSettings = (settings) => {
-      savedSettings.push(settings);
-    };
     global.fetch = (() => Promise.reject(new Error('stop after saving'))) as typeof fetch;
     global.alert = (() => {}) as typeof alert;
 
@@ -148,11 +143,10 @@ describe('CreateGameForm', () => {
 
       await (wrapper.vm as any).createGame();
 
-      expect(savedSettings).has.length(1);
-      expect((savedSettings[0] as any).board).eq(BoardName.ELYSIUM);
-      expect((savedSettings[0] as any).players.map((player: any) => player.name)).deep.eq(['Alice', 'Bob']);
+      const savedSettings = new CreateGameSettingsStorage(localStorage).loadSettings();
+      expect(savedSettings?.board).eq(BoardName.ELYSIUM);
+      expect((savedSettings?.players as Array<{name: string}>).map((player) => player.name)).deep.eq(['Alice', 'Bob']);
     } finally {
-      CreateGameSettingsStorage.saveLastSettings = originalSaveLastSettings;
       global.fetch = originalFetch;
       global.alert = originalAlert;
     }

@@ -719,17 +719,18 @@ export default defineComponent({
   },
   methods: {
     restoreLastSettings() {
-      const lastSettings = CreateGameSettingsStorage.getLastSettings();
-      if (lastSettings === undefined) {
+      const settings = new CreateGameSettingsStorage().loadSettings();
+      if (settings === undefined) {
         return;
       }
       try {
-        const processor = this.applySettings(lastSettings);
+        const processor = this.applySettings(settings);
         if (processor.warnings.length > 0) {
           this.showSettingsLoadResult('Restore settings', processor);
         }
       } catch (e) {
-        console.warn('Could not restore last game settings:', e);
+        // TODO(rusliksu): show the restore error in the UI instead of logging only to the console.
+        console.warn('Could not restore create game settings:', e);
       }
     },
     applySettings(json: JSONObject): JSONProcessor {
@@ -770,7 +771,7 @@ export default defineComponent({
       }
     },
     resetSettings() {
-      CreateGameSettingsStorage.clearLastSettings();
+      new CreateGameSettingsStorage().clearSettings();
       Object.assign(this, defaultCreateGameModel(), {
         preludeToggled: false,
         uploading: false,
@@ -1259,7 +1260,7 @@ export default defineComponent({
       if (dataToSend === undefined) {
         return;
       }
-      CreateGameSettingsStorage.saveLastSettings(JSON.parse(dataToSend) as JSONObject);
+      new CreateGameSettingsStorage().saveSettings(JSON.parse(dataToSend) as JSONObject);
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;

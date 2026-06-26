@@ -1,57 +1,67 @@
 import {JSONObject} from '@/common/Types';
 
-const LAST_SETTINGS_KEY = 'tm_last_game_settings';
+const SETTINGS_KEY = 'tm_last_game_settings';
 
-function localStorageAvailable(): boolean {
+function getLocalStorage(): Storage | undefined {
   try {
-    return typeof localStorage !== 'undefined';
+    return typeof localStorage === 'undefined' ? undefined : localStorage;
   } catch {
-    return false;
+    return undefined;
   }
 }
 
-function sanitizeSettings(settings: JSONObject): JSONObject {
-  const sanitized = JSON.parse(JSON.stringify(settings)) as JSONObject;
+function settingsWithoutClonedGameId(settings: JSONObject): JSONObject {
+  const sanitized = {...settings};
   delete sanitized.clonedGamedId;
   return sanitized;
 }
 
 export class CreateGameSettingsStorage {
-  static saveLastSettings(settings: JSONObject): void {
-    if (!localStorageAvailable()) {
+  constructor(private readonly storage?: Storage) {
+  }
+
+  private getStorage(): Storage | undefined {
+    return this.storage ?? getLocalStorage();
+  }
+
+  public saveSettings(settings: JSONObject): void {
+    const storage = this.getStorage();
+    if (storage === undefined) {
       return;
     }
     try {
-      localStorage.setItem(LAST_SETTINGS_KEY, JSON.stringify(sanitizeSettings(settings)));
-    } catch {
-      // Ignore storage quota and privacy-mode failures.
+      storage.setItem(SETTINGS_KEY, JSON.stringify(settingsWithoutClonedGameId(settings)));
+    } catch (err) {
+      console.warn('Unable to save create game settings:', err);
     }
   }
 
-  static getLastSettings(): JSONObject | undefined {
-    if (!localStorageAvailable()) {
+  public loadSettings(): JSONObject | undefined {
+    const storage = this.getStorage();
+    if (storage === undefined) {
       return undefined;
     }
     try {
-      const data = localStorage.getItem(LAST_SETTINGS_KEY);
+      const data = storage.getItem(SETTINGS_KEY);
       if (data === null) {
         return undefined;
       }
-      const settings = JSON.parse(data) as JSONObject;
-      return sanitizeSettings(settings);
-    } catch {
+      return JSON.parse(data) as JSONObject;
+    } catch (err) {
+      console.warn('Unable to load create game settings:', err);
       return undefined;
     }
   }
 
-  static clearLastSettings(): void {
-    if (!localStorageAvailable()) {
+  public clearSettings(): void {
+    const storage = this.getStorage();
+    if (storage === undefined) {
       return;
     }
     try {
-      localStorage.removeItem(LAST_SETTINGS_KEY);
-    } catch {
-      // Ignore privacy-mode failures.
+      storage.removeItem(SETTINGS_KEY);
+    } catch (err) {
+      console.warn('Unable to clear create game settings:', err);
     }
   }
 }

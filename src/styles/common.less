@@ -16,6 +16,11 @@ body,
   background: @bg_action !important;
   border-color: @border_action !important;
 }
+// Give visual feedback while a button is pressed.
+.btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.85);
+}
 .btn-tiny {
   background: #5755d9;
   border-color: #4b48d6;

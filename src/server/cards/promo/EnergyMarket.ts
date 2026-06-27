@@ -22,13 +22,10 @@ export class EnergyMarket extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X03',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2X M€ to gain X energy.', (eb) => {
-            eb.megacredits(1, {text: '2x'}).startAction.text('x').energy(1);
-          }).br;
-          b.or().br;
-          b.action('Decrease energy production 1 step to gain 8 M€.', (eb) => {
-            eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
-          });
+          b.megacredits(1, {text: '2x'}).arrow().text('x').energy(1).nbsp.or().br;
+          b.production((pb) => pb.energy(1)).arrow().megacredits(8).br;
+
+          b.plainText('Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.', /* parens */ true);
         }),
       },
     });

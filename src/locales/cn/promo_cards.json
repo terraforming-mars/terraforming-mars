@@ -68,8 +68,7 @@
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "需要2个科学标志。降低1点电力产能，提升1点钛产能。获得4个钛。",
 
   "Energy Market": "能源市场",
-  "Action: Spend 2X M€ to gain X energy.": "行动：支付2X M€，获得X点电力资源。",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "行动：降低1点电力产能，获得8M€。",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "行动：支付2X M€，获得X点电力资源，或降低1点电力产能，获得8M€。",
 
   "Field-Capped City": "磁场穹顶城市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "提升2点M€产能和1点电力产能。获得3个植物。放置1个城市板块。",

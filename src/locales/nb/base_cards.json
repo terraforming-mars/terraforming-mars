@@ -505,8 +505,7 @@
 	"Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Effekt: Etter at du har betalt for et standardprosjekt, unntatt salg av patenter, får du 3 M€.",
 
 	"Nitrite Reducing Bacteria": "Nitritt-reduserende bakterier",
-	"Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
-	"Remove 3 microbes to increase your TR 1 step.": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
+	"Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
 	"Add 3 microbes to this card.": "Legg til 3 mikrober på dette kortet.",
 	"Remove 3 microbes to increase your terraform rating 1 step": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn",
 

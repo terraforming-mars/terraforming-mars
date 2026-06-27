@@ -133,8 +133,7 @@
     "Requires -6 C. Decrease any plant production 1 step.": "条件：温度-6℃以上. プレイヤー1人の植物産出-1.",
 
     "Titan Air-scrapping": "タイタン大気減圧",
-    "Action: Spend 1 titanium to add 2 floaters here.": "アクション：1チタンを支払い、このカード上に2浮遊体追加.",
-    "Action: Spend 2 floaters here to increase your TR 1 step.": "アクション：このカード上から2浮遊体除去し、TR+1段階.",
+    "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "アクション：1チタンを支払い、このカード上に2浮遊体追加 または このカード上から2浮遊体除去し、TR+1段階.",
 
     "Titan Floating Launch-pad": "タイタン浮遊発着便",
     "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "アクション：木星タグカード上に1浮遊体追加 または このカード上から1浮遊体除去し、交易コスト無料で交易.",

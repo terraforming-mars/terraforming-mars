@@ -39,13 +39,11 @@ export class NitriteReducingBacteria extends ActionCard {
       metadata: {
         cardNumber: '157',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.resource(CardResource.MICROBE);
-          }).br;
-          b.or().br;
-          b.action('Remove 3 microbes to increase your TR 1 step.', (eb) => {
-            eb.resource(CardResource.MICROBE, 3).startAction.tr(1);
-          }).br;
+          b.arrow().resource(CardResource.MICROBE).nbsp.or().br;
+          b.resource(CardResource.MICROBE, 3).arrow().tr(1).br;
+
+          b.plainText('Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.', /* parens */ true);
+          b.br;
           b.resource(CardResource.MICROBE, 3);
         }),
         description: 'Add 3 microbes to this card.',

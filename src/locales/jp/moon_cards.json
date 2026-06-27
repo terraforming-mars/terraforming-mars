@@ -256,8 +256,7 @@
 
   "Steel Market Monopolists": "建材市場の独占",
   "Requires the mining rate to be 3 or higher.": "条件：採掘レート3以上.",
-  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "アクション：3xMC支払い、2x建材獲得(最大9MC).",
-  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "アクション：x建材支払い、3xMC獲得(最大3建材).",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).": "アクション：3xMC支払い、2x建材獲得(最大9MC) または x建材支払い、3xMC獲得(最大3建材).",
 
   "Subterranean Habitats": "地下居住地",
   "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "効果：月に生息地タイルを配置する場合、コスト-1チタン",

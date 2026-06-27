@@ -59,8 +59,7 @@
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "条件：金星タグ、地球タグ、木星タグがそれぞれ1つ以上. TR+2段階.",
 
   "Jet Stream Microscrappers": "小型ジェット気流減圧体",
-  "Action: Spend 1 titanium to add 2 floaters here": "アクション：1チタンを支払い、このカード上に2浮遊体追加.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "アクション：このカード上から2浮遊体除去し、金星+1段階.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "アクション：1チタンを支払い、このカード上に2浮遊体追加 または このカード上から2浮遊体除去し、金星+1段階.",
 
   "Spin-Inducing Asteroid": "小惑星による自転強化",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "条件：金星10％以下. 金星+2段階.",

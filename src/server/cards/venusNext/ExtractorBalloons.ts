@@ -46,12 +46,12 @@ export class ExtractorBalloons extends Card implements IActionCard {
         cardNumber: '223',
         description: 'Add 3 floaters to this card',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 floater to this card.', (eb) => {
-            eb.empty().startAction.resource(CardResource.FLOATER);
-          }).br;
-          b.action('Remove 2 floaters here to raise Venus 1 step.', (eb) => {
-            eb.or(Size.SMALL).resource(CardResource.FLOATER, 2).startAction.venus(1);
-          }).br.resource(CardResource.FLOATER, 3);
+          b.arrow().resource(CardResource.FLOATER).br;
+          b.or(Size.SMALL).resource(CardResource.FLOATER, 2).arrow().venus(1).br;
+
+          b.plainText('Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.', /* parens */ true);
+          b.br;
+          b.resource(CardResource.FLOATER, 3);
         }),
       },
     });

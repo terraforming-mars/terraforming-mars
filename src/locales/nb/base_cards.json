@@ -132,8 +132,7 @@
 	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-brikke. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
 
 	"Regolith Eaters": "Regolitt-spisere",
-	"Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
-	"Remove 2 microbes from this card to raise oxygen level 1 step.": "Fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
+	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
 
 	"GHG Producing Bacteria": "CO₂ produserende bakterier",
 	"Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 2 mikrober for å øke temperaturen 1 steg.",

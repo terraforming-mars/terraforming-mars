@@ -85,8 +85,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "금성 개척률 1단계 상승. 열 생산력 3 증가.",
 
   "Aerial Mappers": "항공지도 작성",
-  "Action: Add floater to ANY card.": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "Action: Spend one floater here to draw 1 card.": "행동: 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가 혹은 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
 
   "Aerosport Tournament": "공중스포츠 토너먼트",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "조건: 보유한 부양체 자원 5개 이상.) (배치된 아무 도시 타일 1장당 1M€ 획득.",

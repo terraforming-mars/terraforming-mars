@@ -95,8 +95,7 @@
     "// Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
 
     "Grey Market Exploitation": "グレーマーケットでの搾取",
-    "Action: Spend 1 M€ to gain 1 standard resource.": "アクション：1MC支払い、1標準リソース獲得.",
-    "Action: Spend 1 corruption to gain 3 of the same standard resource.": "アクション：1汚職支払い、同一の3標準リソース獲得",
+    "Action: Spend 1 M€ to gain 1 standard resource, or spend 1 corruption to gain 3 of the same standard resource.": "アクション：1MC支払い、1標準リソース獲得 または 1汚職支払い、同一の3標準リソース獲得",
     "Requires 2 corruption.": "条件：汚職2つ以上.",
 
     "Guerilla Ecologists": "ゲリラ生態学者",

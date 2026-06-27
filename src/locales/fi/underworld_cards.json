@@ -118,8 +118,7 @@
 "Every player with the lowest number of crime tags INCLUDING EVENTS gains 1 TR, if possible. Players with 0 crime tags gain 1 additional TR.": "Jokainen pelaaja jolla on vähiten rikosympyröitä TAPAHTUMAT MUKAAN LUKIEN nostaa MKL:äänsä 1 askeleen, jos mahdollista. Pelaajat joilla on 0 rikosympyrää nostavat MKL:äänsä 1 ylimääräisen askeleen.",
 
 "Grey Market Exploitation": "Harmaan markkinan hyväksikäyttö",
-"Action: Spend 1 M€ to gain 1 standard resource.": "TOIMINTO: Käytä 1 M€ saadaksesi 1 standardiresurssin.",
-"Action: Spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Käytä 1 korruptio saadaksesi 3 samaa standardiresurssia.",
+"Action: Spend 1 M€ to gain 1 standard resource, or spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Käytä 1 M€ saadaksesi 1 standardiresurssin TAI käytä 1 korruptio saadaksesi 3 samaa standardiresurssia.",
 "Requires 2 corruption.": "Vaatii 2 korruptiota.",
 
 "Guerilla Ecologists": "Sissiekologit",

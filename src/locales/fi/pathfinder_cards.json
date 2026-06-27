@@ -48,8 +48,7 @@
   "Add 1 data to any card. Add 1 resource to any card.": "Lisää 1 data mille kortille tahansa. Lisää 1 resurssi mille kortille tahansa.",
 
   "Cryptocurrency": "Kryptovaluutta",
-  "Action: Spend 1 energy to add 1 data to this card.": "TOIMINTO: Käytä 1 energiaa lisätäksesi 1 datan tälle kortille.",
-  "Action: Remove all data from this card to gain 3M€ per data removed.": "TOIMINTO: Poista kaikki data tältä kortilta saadaksesi 3M€ jokaista poistettua dataa kohti.",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "TOIMINTO: Käytä 1 energiaa lisätäksesi 1 datan tälle kortille TAI poista kaikki data tältä kortilta saadaksesi 3M€ jokaista poistettua dataa kohti.",
 
   "Cultivation of Venus": "Venuksen viljely",
   "Action: Spend 3 plants to raise Venus 1 step.": "TOIMINTO: Käytä 3 kasvia nostaaksesi Venusta 1 askel.",

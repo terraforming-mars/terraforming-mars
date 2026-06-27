@@ -49,8 +49,7 @@
   "Add 1 data to any card. Add 1 resource to any card.)": "아무 카드에 데이터 자원 1개 추가. 아무 카드에 아무 자원 1개 추가.)",
 
   "Cryptocurrency": "가상 화폐",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "(행동: 에너지 자원 1개를 소비해서 이 카드에 데이터 자원 1개를 추가.)",
-  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(행동: 이 카드 위의 모든 데이터 자원을 제거해서 제거한 데이터 자원당 3 M€ 획득.)",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "행동: 에너지 자원 1개를 소비해서 이 카드에 데이터 자원 1개를 추가 혹은 이 카드 위의 모든 데이터 자원을 제거해서 제거한 데이터 자원당 3 M€ 획득.",
 
   "Cultivation of Venus": "금성 재배",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "(행동: 식물 자원 3개를 제거해서 금성 지표 1단계 상승.)",

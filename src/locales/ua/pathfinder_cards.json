@@ -48,8 +48,7 @@
   "Add 1 data to any card. Add 1 resource to any card.)": "Додайте 1 дані на будь-яку карту. Додайте 1 ресурс на будь-яку карту.)",
 
   "Cryptocurrency": "Криптовалюта",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "(Дія: Витратити 1 енергію, щоб додати 1 дані на цю карту.)",
-  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(Дія: Видаліть всі дані з цієї карти, щоб отримати 3M€ за кожні видалені дані.)",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "Дія: Витратити 1 енергію, щоб додати 1 дані на цю карту АБО видаліть всі дані з цієї карти, щоб отримати 3M€ за кожні видалені дані.",
 
   "Cultivation of Venus": "Культивація Венери",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "(Дія: Витратити 3 рослини, щоб підвищити Венеру на 2%.))",

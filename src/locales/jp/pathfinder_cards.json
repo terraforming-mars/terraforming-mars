@@ -48,8 +48,7 @@
   "Add 1 data to any card. Add 1 resource to any card.)": "1データ獲得. 好きな1資源を好きなカードに追加.",
 
   "Cryptocurrency": "仮想通貨",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "(アクション：1電力を支払い、このカード上に1データ追加.)",
-  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(アクション：このカード上から全てのデータを除去し、その数分3MC獲得.)",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "アクション：1電力を支払い、このカード上に1データ追加 または このカード上から全てのデータを除去し、その数分3MC獲得.",
 
   "Cultivation of Venus": "金星の開墾",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "(アクション：3植物支払い、金星+1段階",

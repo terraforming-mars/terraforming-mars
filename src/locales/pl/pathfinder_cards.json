@@ -45,8 +45,7 @@
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "W grze musi znajdować się co najmniej 1 kolonia. Wykonaj akcję handlu z dowolnym obiektem za darmo. Zbierz premię kolonialną za wszystkie kolonie na tym obiekcie. Inni gracze nie otrzymują premii kolonialnej z tej akcji.",
 
   "Cryptocurrency": "Kryptowaluty",
-  "Action: Spend 1 energy to add 1 data to this card.": "Akcja: Wydaj 1 jednostkę energii, aby umieścić 1 jednostkę danych na tej karcie.",
-  "Action: Remove all data from this card to gain 3M€ per data removed.": "Akcja: Wydaj wszystkie jednostki danych z tej karty, aby otrzymać po 3 M€ za każdą z nich.",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "Akcja: Wydaj 1 jednostkę energii, aby umieścić 1 jednostkę danych na tej karcie lub wydaj wszystkie jednostki danych z tej karty, aby otrzymać po 3 M€ za każdą z nich.",
 
   "Cultivation of Venus": "Kultywacja Wenus",
   "Action: Spend 3 plants to raise Venus 1 step.": "Akcja: Wydaj 3 jednostki roślinności, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",

@@ -43,8 +43,7 @@
     "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Vereist 1 kolonie in het spel. Verplaats een van je ongebruikte handelsvloten naar een willekeurige kolonietegel (inclusief een die al bezet is). Ontvang de handels- en koloniebonus voor elke kolonie daar. Andere spelers ontvangen geen bonus.",
 
     "Cryptocurrency": "Cryptovaluta",
-    "(Action: Spend 1 energy to add 1 data to this card.)": "(ACTIE: Besteed 1 energie om 1 data aan deze kaart toe te voegen.)",
-    "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(ACTIE: Verwijder alle data van deze kaart en ontvang 3 M€ per verwijderde data.)",
+    "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "ACTIE: Besteed 1 energie om 1 data aan deze kaart toe te voegen of verwijder alle data van deze kaart en ontvang 3 M€ per verwijderde data.",
 
     "Cultivation of Venus": "Cultivering van Venus",
     "(Action: Spend 3 plants to raise Venus 1 step.)": "(ACTIE: Verbruik 3 planten om Venus met 2% te verhogen.)",

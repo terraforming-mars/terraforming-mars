@@ -447,8 +447,7 @@
   "Requires -14 C° or warmer.": "Vaatii -14°C tai lämpimämmän.",
 
   "Extreme-Cold Fungus": "Äärimmäisen kylmä sieni",
-  "Action: Gain 1 plant.": "TOIMINTO: Saa 1 kasvi.",
-  "Action: Add 2 microbes to ANOTHER card.": "TOIMINTO: Lisää 2 mikrobia TOISELLE kortille.",
+  "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "TOIMINTO: Saa 1 kasvi TAI lisää 2 mikrobia TOISELLE kortille.",
   "It must be -10 C or colder.": "Lämpötilan tulee olla -10°C tai kylmempi.",
 
   "Advanced Ecosystems": "Kehittyneet ekosysteemit",

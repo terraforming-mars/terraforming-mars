@@ -425,8 +425,7 @@
     "Requires -14 C° or warmer.": "需要火星温度至少-14度以上",
 
     "Extreme-Cold Fungus": "极寒真菌",
-    "(Action: Gain 1 plant.)": "行动： 获得1个植物资源",
-    "(Action: Add 2 microbes to ANOTHER card.)": "行动：放置2个微生物资源到其它的牌",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "行动： 获得1个植物资源，或放置2个微生物资源到其它的牌",
     "It must be -10 C or colder.": "火星温度必须不高于-10度。",
 
     "Advanced Ecosystems": "先进的生态系统",

@@ -443,8 +443,7 @@
     "Requires -14 C° or warmer.": "조건: 기온 -14℃ 이상.",
 
     "Extreme-Cold Fungus": "극호냉성 진균류",
-    "Action: Gain 1 plant.": "행동: 식물 자원 1개 획득.",
-    "Action: Add 2 microbes to ANOTHER card.": "행동: 자신의 다른 카드 1장에 미생물 자원 2개 추가.",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "행동: 식물 자원 1개 획득 혹은 자신의 다른 카드 1장에 미생물 자원 2개 추가.",
     "It must be -10 C or colder.": "조건: 기온 -10℃ 이하.",
 
     "Advanced Ecosystems": "발달된 생태계",

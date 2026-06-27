@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 
 export class AerialMappers extends ActionCard {
@@ -39,13 +38,10 @@ export class AerialMappers extends ActionCard {
       metadata: {
         cardNumber: '213',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add floater to ANY card.', (be) => {
-            be.empty().startAction.resource(CardResource.FLOATER).asterix();
-          }).br;
-          b.or(Size.SMALL).br;
-          b.action('Spend one floater here to draw 1 card.', (be) => {
-            be.resource(CardResource.FLOATER).startAction.cards(1);
-          });
+          b.arrow().resource(CardResource.FLOATER).asterix().nbsp.or().br;
+          b.resource(CardResource.FLOATER).arrow().cards(1).br;
+
+          b.plainText('Action: Add floater to ANY card, or spend one floater here to draw 1 card.', /* parens */ true);
         }),
       },
     });

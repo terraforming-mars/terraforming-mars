@@ -136,8 +136,7 @@
 	"Remove 2 microbes from this card to raise oxygen level 1 step.": "Fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
 
 	"GHG Producing Bacteria": "CO₂ produserende bakterier",
-	"Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober for å øke temperaturen 1 steg.",
-	"Remove 2 microbes to raise temperature 1 step.": "Fjern 2 mikrober for å øke temperaturen 1 steg.",
+	"Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 2 mikrober for å øke temperaturen 1 steg.",
 	"Requires 4% oxygen.": "Krever 4% oksygen.",
 
 	"Ants": "Maur",

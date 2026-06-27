@@ -38,13 +38,10 @@ export class GHGProducingBacteria extends ActionCard {
         description: 'Requires 4% oxygen.',
         cardNumber: '034',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.resource(CardResource.MICROBE);
-          }).br;
-          b.or().br;
-          b.action('Remove 2 microbes to raise temperature 1 step.', (eb) => {
-            eb.resource(CardResource.MICROBE, 2).startAction.temperature(1);
-          });
+          b.arrow().resource(CardResource.MICROBE).nbsp.or().br;
+          b.resource(CardResource.MICROBE, 2).arrow().temperature(1).br;
+
+          b.plainText('Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.', /* parens */ true);
         }),
       },
     });

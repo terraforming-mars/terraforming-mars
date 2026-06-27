@@ -29,13 +29,12 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
       metadata: {
         cardNumber: 'P73',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 floater here.', (ab) => {
-            ab.empty().startAction.resource(CardResource.FLOATER);
-          }).br;
-          b.or().br;
-          b.action('Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.', (eb) => {
-            eb.resource(CardResource.FLOATER, 2).asterix().startAction.titanium(1).megacredits(2);
-          }).br.resource(CardResource.FLOATER, 1).slash().tag(Tag.VENUS);
+          b.arrow().resource(CardResource.FLOATER).nbsp.or().br;
+          b.resource(CardResource.FLOATER, 2).asterix().arrow().titanium(1).megacredits(2).br;
+
+          b.plainText('Action: Add 1 floater here, or remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.', /* parens */ true);
+          b.br;
+          b.resource(CardResource.FLOATER, 1).slash().tag(Tag.VENUS);
         }),
         description: 'Add 1 floater here for each Venus tag you have.',
       },

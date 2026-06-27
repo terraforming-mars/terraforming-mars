@@ -680,8 +680,7 @@
     "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}",
 
     "Floating Refinery": "Облачная переработка",
-    "Action: Add 1 floater here.": "Действие: Добавьте 1 аэростат на эту карту.",
-    "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Действие: Удалите 2 аэростата с любой карты, чтобы получить 1 титан и 2 М€.",
+    "Action: Add 1 floater here, or remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Действие: Добавьте 1 аэростат на эту карту или удалите 2 аэростата с любой карты, чтобы получить 1 титан и 2 М€.",
     "Add 1 floater here for each Venus tag you have.": "Добавьте 1 аэростат на эту карту за каждую вашу метку Венеры.",
 
     "Floyd Continuum": "Континуум Флойда",

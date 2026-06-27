@@ -89,8 +89,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "条件：この世代中に植物が除去されていること. 1チタン または 2建材獲得.",
 
   "Directed Impactors": "誘導落下",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能.",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "アクション：このカード上から1小惑星を除去し、温度+1段階.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能 または このカード上から1小惑星を除去し、温度+1段階.",
 
   "Field-Capped City": "磁界都市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "MC産出+2. 電力産出+1. 3植物獲得. 都市タイルを配置.",

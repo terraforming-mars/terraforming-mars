@@ -90,8 +90,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "조건: 이번 세대에 한 플레이어가 다른 플레이어의 식물 자원 1개 이상 제거.) (티타늄 자원 1개 또는 강철 자원 2개 획득.",
 
   "Directed Impactors": "소행성 유도 추력기",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "행동: 6MC 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가. (티타늄 자원 소비 가능)",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "행동: 이 카드에서 소행성 자원 1개 소비해서 기온 1단계 상승.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "행동: 6MC 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가. (티타늄 자원 소비 가능) 혹은 이 카드에서 소행성 자원 1개 소비해서 기온 1단계 상승.",
 
   "Field-Capped City": "자기장 방호탑 도시",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "에너지 생산력 1증가. 메가크레딧 생산력 2증가. 식물 자원 3개 획득. 도시 타일 1장 배치.",

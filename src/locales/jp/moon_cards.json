@@ -50,8 +50,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "条件：採掘レート4以上. 全プレイヤーは所有する鉱山タイル1枚毎に、4MC除去.",
 
   "Darkside Incubation Plant": "暗闇側の培養プラント",
-  "Action: Add 1 microbe here.": "アクション：このカード上に1微生物追加.",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "アクション：2微生物除去し、居住地レート+1段階.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.": "アクション：このカード上に1微生物追加 または 2微生物除去し、居住地レート+1段階.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "1チタン支払う. このカード上の2微生物毎に1VP.",
 
   "Darkside Meteor Bombardment": "暗闇側への流星弾",

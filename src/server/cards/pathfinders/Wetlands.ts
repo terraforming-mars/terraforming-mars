@@ -11,6 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Board} from '../../boards/Board';
 import {Size} from '../../../common/cards/render/Size';
 import {message} from '../../logs/MessageBuilder';
+import {digit} from '../Options';
 
 export class Wetlands extends Card implements IProjectCard {
   constructor() {
@@ -27,9 +28,8 @@ export class Wetlands extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf03',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(4).br;
-          b.tile(TileType.WETLANDS, false, false).asterix();
-          b.oxygen(1).tr(1);
+          b.minus().plants(4, {digit}).tile(TileType.WETLANDS, false, false).asterix();
+          b.oxygen(1, {size: Size.SMALL}).tr(1, {size: Size.SMALL});
           b.br;
           b.text('(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ' +
             'ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)', {size: Size.TINY, isBold: false});

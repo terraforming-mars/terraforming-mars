@@ -250,7 +250,7 @@
 
   "Birds": "Vögel",
   "Action: Add an animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Benötigt Sauerstoffgehalt von 13% oder mehr. Senke eine Pflanzen-Produktion um 2. 1 SP je Tier auf dieser Karte.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Benötigt Sauerstoffgehalt von 13% oder mehr. Senke eine Pflanzen-Produktion um 2.",
 
   "Mars University": "Mars-Universität",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "EFFEKT: Wenn du ein Wissenschaftssymbol ausspielst (einschließlich diesem), darfst du 1 Karte aus der Hand abwerfen, um 1 neue zu ziehen.",
@@ -593,7 +593,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Benötigt Sauerstoffgehalt von 6% oder mehr. Senke eine beliebige Pflanzen-Produktion um 1. Erhöhe deine Energie-Produktion um 2.",
 
   "Livestock": "Vieh",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.",
 
   "Olympus Conference": "Olympus-Konferenz",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "EFFEKT: Wenn du ein Wissenschaftssymbol ausspielst (einschließlich dieses), füge dieser Karte 1 Wissenschaft hinzu ODER entferne 1 Wissenschaft von dieser Karte, um 1 Karte zu ziehen.",

@@ -68,7 +68,7 @@
 
 "Earthquake Machine": "Maanjäristyskone",
 "Action: Spend 1 energy to excavate an underground resource.": "TOIMINTO: Käytä 1 energia kaivaaksesi maanalaisen resurssin.",
-"Requires 2 science tags. Decrease any plant production 1 step": "Vaatii 2 tiedeympyrää. Vähennä jonkun kasvihuonetuotantoa 1 askel",
+"Requires 2 science tags. Decrease any plant production 1 step.": "Vaatii 2 tiedeympyrää. Vähennä jonkun kasvihuonetuotantoa 1 askel",
 
 "Excavator Leasing": "Kaivukoneiden vuokraus",
 "Effect: The excavate standard project costs 1 M€ less for all players.": "VAIKUTUS: Kaivamisen standardiprojekti maksaa 1 M€ vähemmän kaikille pelaajille.",
@@ -237,7 +237,6 @@
 "Requires 3 oceans. Reduce your heat production 1 step. Increase your M€ production 3 steps. Gain 1 corruption.": "Vaatii 3 valtamerta. Vähennä lämpötuotantoasi 1 askel. Lisää M€-tuotantoasi 3 askelta. Saat 1 korruption.",
 
 "Public Spaceline": "Julkinen avaruuslinja",
-"Increase your M€ production 2 steps": "Lisää M€-tuotantoasi 2 askelta.",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Vaatii 5 avaruusympyrää. Tässä kortissa on 2 Maa-, 2 Jupiter-, 2 Venus- ja 2 Mars-ympyrää.",
 
 "Racketeering": "Kiristysbisnekset",

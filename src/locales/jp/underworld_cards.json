@@ -49,7 +49,7 @@
 
     "Earthquake Machine": "地震発生装置",
     "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
-    "Requires 2 science tags. Decrease any plant production 1 step": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
+    "Requires 2 science tags. Decrease any plant production 1 step.": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
 
     "Excavator Leasing": "貸し掘削機",
     "Effect: The excavate standard project costs 1 M€ less for all players.": "効果：全プレイヤーは標準プロジェクト「地下採掘」のプレイコスト-1MC.",

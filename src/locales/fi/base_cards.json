@@ -258,7 +258,7 @@
 
   "Birds": "Linnut",
   "Action: Add an animal to this card.": "TOIMINTO: Lisää eläin tälle kortille.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Vaatii 13 % happea. Vähennä mitä tahansa kasvituotantoa 2 askelta. 1 VP per eläin tällä kortilla.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Vaatii 13 % happea. Vähennä mitä tahansa kasvituotantoa 2 askelta.",
 
   "Mars University": "Mars-yliopisto",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, saat hylätä kortin kädestäsi nostaaksesi kortin.",
@@ -601,7 +601,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Vaatii 6 % happea. Vähennä mitä tahansa kasvituotantoa 1 askel ja lisää energiatuotantoasi 2 askelta.",
 
   "Livestock": "Karja",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Vaatii 9 % happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Vaatii 9 % happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
 
   "Olympus Conference": "Olympus-konferenssi",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, joko lisää tiederesurssi tälle kortille tai poista tiederesurssi tältä kortilta nostaaksesi kortin.",

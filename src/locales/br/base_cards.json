@@ -258,7 +258,7 @@
 
   "Birds": "Pássaros",
   "Action: Add an animal to this card.": "Ação: adicione 1 animal a esta carta.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Requer 13% de oxigênio. Diminua qualquer produção de plantas 2 níveis. 1 PV por cada animal nesta carta.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Requer 13% de oxigênio. Diminua qualquer produção de plantas 2 níveis.",
 
   "Mars University": "Universidade de Marte",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Efeito: quando você joga um ícone de ciência, incluindo este, você pode descartar 1 carta de sua mão para pegar outra.",
@@ -604,7 +604,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Requer 6% de oxigênio. Diminua qualquer produção de plantas 1 nível e aumente sua produção de energia em 2.",
 
   "Livestock": "Pecuária",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M€ em 2.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M€ em 2.",
 
   "Olympus Conference": "Conferência de Olimpo",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Quando você joga um ícone de ciência, incluindo este, você pode ou adicionar um recurso de ciência a esta carta, ou retirar dela um recurso de ciência para comprar uma carta.",

@@ -11,6 +11,7 @@ import {LogType, keep} from '../../deferredActions/ChooseCards';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {Size} from '../../../common/cards/render/Size';
 import {oneWayDifference} from '../../../common/utils/utils';
+import {uppercase} from '../Options';
 
 export class VenusOrbitalSurvey extends Card implements IActionCard {
   constructor() {
@@ -24,7 +25,7 @@ export class VenusOrbitalSurvey extends Card implements IActionCard {
         cardNumber: 'P88',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (ab) =>
-            ab.empty().startAction.empty()).br.text('Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard', Size.SMALL, true);
+            ab.empty().startAction.empty()).br.text('Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard', {size: Size.SMALL, uppercase});
         }),
       },
     });

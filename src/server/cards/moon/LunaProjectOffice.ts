@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
+import {uppercase} from '../Options';
 
 export class LunaProjectOffice extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +20,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
         description: 'Requires 2 science tags.',
         cardNumber: 'M20',
         renderData: CardRenderer.builder((b) => {
-          b.text('DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.', Size.MEDIUM, true);
+          b.text('DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.', {uppercase});
         }),
       },
     });

@@ -12,7 +12,7 @@ import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
-  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY}).nbsp.text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
+  b.text('1st:', {size: Size.SMALL}).tr(2, {size: Size.TINY}).nbsp.text('2nd:', {size: Size.SMALL}).tr(1, {size: Size.TINY});
 });
 
 export class Election extends GlobalEvent implements IGlobalEvent {

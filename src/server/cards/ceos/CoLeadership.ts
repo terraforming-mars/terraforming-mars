@@ -5,6 +5,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
 import {DrawCeoCardFromDeck} from '../../deferredActions/DrawCeoCardFromDeck';
 import {Phase} from '../../../common/Phase';
+import {uppercase} from '../Options';
 
 export class CoLeadership extends PreludeCard {
   constructor() {
@@ -13,7 +14,7 @@ export class CoLeadership extends PreludeCard {
       metadata: {
         cardNumber: 'xxx',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.', Size.SMALL, true);
+          b.text('Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.', {size: Size.SMALL, uppercase});
         }),
       },
     });

@@ -5,6 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {uppercase} from '../Options';
 
 export class InventorsGuild extends ActionCard implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class InventorsGuild extends ActionCard implements IProjectCard {
       metadata: {
         cardNumber: '006',
         renderData: CardRenderer.builder((b) => {
-          b.action(undefined, (eb) => eb.empty().startAction.empty()).text('Action: Look at the top card and either buy it or discard it', Size.SMALL, true);
+          b.action(undefined, (eb) => eb.empty().startAction.empty()).text('Action: Look at the top card and either buy it or discard it', {size: Size.SMALL, uppercase});
         }),
       },
     });

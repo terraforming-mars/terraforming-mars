@@ -32,7 +32,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
           b.br;
           b.text('(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) ' +
             '(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) ' +
-            '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', Size.SMALL, false, false);
+            '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', {size: Size.SMALL, isBold: false});
         }),
         description: 'Requires one greenery tile on Mars.',
       },

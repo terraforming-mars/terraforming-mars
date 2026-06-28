@@ -19,7 +19,7 @@ export class Petra extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.text('REPLACE ALL NEUTRAL', Size.TINY).delegates(1).colon().megacredits(3).asterix();
+          b.text('REPLACE ALL NEUTRAL', {size: Size.TINY}).delegates(1).colon().megacredits(3).asterix();
           b.br.br;
           b.plus().delegates(3).asterix;
         }),

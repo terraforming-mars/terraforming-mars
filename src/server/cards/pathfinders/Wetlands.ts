@@ -32,9 +32,9 @@ export class Wetlands extends Card implements IProjectCard {
           b.oxygen(1).tr(1);
           b.br;
           b.text('(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ' +
-            'ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)', Size.TINY, false, false);
+            'ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)', {size: Size.TINY, isBold: false});
           b.br;
-          b.text('(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can\'t be covered and is not one of the 9 oceans required to end the game.)', Size.TINY, false, false);
+          b.text('(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can\'t be covered and is not one of the 9 oceans required to end the game.)', {size: Size.TINY, isBold: false});
         }),
       },
     });

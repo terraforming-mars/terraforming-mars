@@ -5,6 +5,7 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardType} from '../../../common/cards/CardType';
+import {uppercase} from '../Options';
 
 export class HeadStart extends PreludeCard {
   constructor() {
@@ -21,11 +22,11 @@ export class HeadStart extends PreludeCard {
         cardNumber: 'X43',
         renderData: CardRenderer.builder((b) => {
           b.steel(2).br;
-          b.text('GAIN 2 STEEL.', Size.TINY).br;
+          b.text('GAIN 2 STEEL.', {size: Size.TINY}).br;
           b.megacredits(1, {text: '?'}).br;
-          b.text('GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
+          b.text('GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.', {size: Size.TINY, uppercase, isBold: false}).br;
           b.arrow().arrow().br;
-          b.text('IMMEDIATELY TAKE 2 ACTIONS.', Size.TINY, true, false).br;
+          b.text('IMMEDIATELY TAKE 2 ACTIONS.', {size: Size.TINY, uppercase, isBold: false}).br;
         }),
       },
     });

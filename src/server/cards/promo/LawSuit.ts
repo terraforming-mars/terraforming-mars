@@ -9,7 +9,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {any} from '../render/DynamicVictoryPoints';
-import {all} from '../Options';
+import {all, uppercase} from '../Options';
 
 export class LawSuit extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +23,7 @@ export class LawSuit extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X06',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', Size.SMALL, true).megacredits(3, {all}).asterix();
+          b.text('steal', {size: Size.SMALL, uppercase}).megacredits(3, {all}).asterix();
         }),
         description: 'Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
         victoryPoints: any(-1),

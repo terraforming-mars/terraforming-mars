@@ -36,7 +36,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
           b.effect(
             'When playing an animal card, you can remove animals from here to ' +
             'change the card\'s global requirement by 1 step for every 1 animal removed.',
-            (eb) => eb.resource(CardResource.ANIMAL).startEffect.text('+/-1 global parameter', Size.SMALL)).br;
+            (eb) => eb.resource(CardResource.ANIMAL).startEffect.text('+/-1 global parameter', {size: Size.SMALL})).br;
           b.action('Discard up to 2 of your claimed underground resource tokens to place the same number of animals on ANY card.', (ab) => {
             ab.undergroundResources(2).asterix().startAction.resource(CardResource.ANIMAL, 2).asterix();
           });

@@ -2,7 +2,7 @@
 <template>
   <div>
     <template v-if="id === 'mp01'">
-      <div class="policy-top-margin"><div :class="'party-badge party-badge--mars_first'" v-i18n></div><div class="tile empty-tile-small"></div> : <span class="steel resource"></span></div>
+      <div class="policy-top-margin"><div :class="'party-badge party-badge--mars_first'" v-i18n></div><div class="tile empty-tile--S"></div> : <span class="steel resource"></span></div>
     </template>
     <template v-else-if="id === 'sp01'">
       <span :class="'party-badge party-badge--scientists'" v-i18n></span>

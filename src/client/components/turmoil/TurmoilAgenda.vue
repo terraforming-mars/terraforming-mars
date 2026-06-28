@@ -6,7 +6,7 @@
     </template>
     <template v-else-if="id === 'mb02'">
       <div class="resource money party-resource">1</div> /
-      <div class="tile empty-tile-small"></div>ON MARS
+      <div class="tile empty-tile--S"></div>ON MARS
     </template>
     <template v-else-if="id === 'sb01'">
       <div class="resource money party-resource">1</div> /
@@ -57,7 +57,7 @@
       <div class="tile greenery-tile greenery-tile-small"></div>
     </template>
     <template v-else-if="id === 'mp01'">
-      <div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="steel resource"></span></div>
+      <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="steel resource"></span></div>
     </template>
     <template v-else-if="id === 'mp02'">
       <div class="policy-top-margin"><div class="resource-tag tag-building"></div> : <div class="money resource">2</div></div>
@@ -130,7 +130,7 @@
       <div class="tile temperature-tile"></div>
     </template>
     <template v-else-if="id === 'kp04'">
-      <div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
+      <div class="policy-top-margin"><div class="tile empty-tile--S"></div> :
       <span class="heat resource"></span><span class="heat resource"></span></div>
     </template>
     <template v-else-if="id === 'rp01'">
@@ -140,7 +140,7 @@
       </div>
     </template>
     <template v-else-if="id === 'rp02'">
-      <div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="money resource">-3</span></div>
+      <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="money resource">-3</span></div>
     </template>
     <template v-else-if="id === 'rp03'">
       <span class="money resource">4</span>
@@ -161,7 +161,7 @@
       <div class="tile greenery-tile"></div> : <div class="resource money">4</div>
     </template>
     <template v-else-if="id === 'gp02'">
-      <div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="plant resource"></span></div>
+      <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="plant resource"></span></div>
     </template>
     <template v-else-if="id === 'gp03'">
       <div class="policy-top-margin">

@@ -6,6 +6,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
+import {inParens} from '../Options';
 
 export class CopernicusTower extends ActionCard {
   constructor() {
@@ -39,7 +40,7 @@ export class CopernicusTower extends ActionCard {
       metadata: {
         cardNumber: 'M72',
         renderData: CardRenderer.builder((b) => {
-          b.text('Requires you have 2 titanium production.', {size: Size.TINY, isBold: false}).br;
+          b.text('Requires you have 2 titanium production.', {size: Size.TINY, isBold: false, inParens}).br;
           b.action('Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.', (eb) => {
             eb.empty().startAction.resource(CardResource.SCIENCE).nbsp.slash().nbsp.resource(CardResource.SCIENCE).arrow().tr(1);
           });

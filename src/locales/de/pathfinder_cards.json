@@ -107,7 +107,7 @@
   "Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.": "Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1.",
 
   "Hydrogen Processing Plant": "Wasserstoff-Verarbeitung",
-  "Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.": "Benötigt Sauerstoffgehalt von 3% oder mehr. Erhöhe deine Energie-Produktion um 1 je 2 Ozeanplättchen im Spiel. Senke den Sauerstoffgehalt um 1%",
+  "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "Benötigt Sauerstoffgehalt von 3% oder mehr. Erhöhe deine Energie-Produktion um 1 je 2 Ozeanplättchen im Spiel. Senke den Sauerstoffgehalt um 1%",
 
   "Interplanetary Transport": "Interplanetarer Transport",
   "Increase your M€ production 1 step for every offworld city tile.": "Erhöhe deine M€-Produktion um 1 je Stadtplättchen im Weltraum.",

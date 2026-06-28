@@ -106,7 +106,7 @@
   "Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.": "Aseta siirtokunta. VOI ASETTAA SIIRTOKUNTALAATALLE JOSSA ON JO SIIRTOKUNTASI. Käy kauppaa ilmaiseksi. Voit käyttää kauppalaivastoa joka on jo siirtokuntalaatalla, mutta et voi käydä kauppaa sen laatan kanssa josta laivasto tuli. Nosta MKL:ääsi 1 askel.",
 
   "Hydrogen Processing Plant": "Vetykäsittelylaitos",
-  "Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.": "Happitason täytyy olla 3 % tai korkeampi. Vähennä happitasoa 1%. Lisää energiatuotantoasi 1 askel jokaista 2 valtamerilaattaa kohti Marsissa.",
+  "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "Happitason täytyy olla 3 % tai korkeampi. Vähennä happitasoa 1%. Lisää energiatuotantoasi 1 askel jokaista 2 valtamerilaattaa kohti Marsissa.",
 
   "Interplanetary Transport": "Planeettojen välinen kuljetus",
   "Increase your M€ production 1 step for every offworld city tile.": "Lisää M€-tuotantoasi 1 askel jokaisesta avaruuden kaupungista.",

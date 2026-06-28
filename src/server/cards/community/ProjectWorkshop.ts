@@ -11,7 +11,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -42,8 +42,8 @@ export class ProjectWorkshop extends CorporationCard implements ICorporationCard
           b.corpBox('action', (cb) => {
             cb.vSpace(Size.LARGE);
             cb.action(undefined, (eb) => {
-              eb.text('flip', Size.SMALL, true).cards(1, {secondaryTag: AltSecondaryTag.BLUE});
-              eb.startAction.text('?', Size.MEDIUM, true).tr(1, {size: Size.SMALL});
+              eb.text('flip', {size: Size.SMALL, uppercase}).cards(1, {secondaryTag: AltSecondaryTag.BLUE});
+              eb.startAction.text('?', {uppercase}).tr(1, {size: Size.SMALL});
               eb.cards(2, {digit});
             });
             cb.vSpace(Size.SMALL);

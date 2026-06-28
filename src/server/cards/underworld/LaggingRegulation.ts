@@ -14,7 +14,7 @@ import {Tag} from '../../../common/cards/Tag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.tag(Tag.CRIME).plus().influence().colon();
-  b.text('1st/2nd', Size.SMALL).corruption().megacredits(9).slash().megacredits(3);
+  b.text('1st/2nd', {size: Size.SMALL}).corruption().megacredits(9).slash().megacredits(3);
 });
 
 export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {

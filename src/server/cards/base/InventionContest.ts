@@ -5,6 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {uppercase} from '../Options';
 
 export class InventionContest extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class InventionContest extends Card implements IProjectCard {
       metadata: {
         cardNumber: '192',
         renderData: CardRenderer.builder((b) => {
-          b.text('Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two', Size.SMALL, true);
+          b.text('Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two', {size: Size.SMALL, uppercase});
         }),
       },
     });

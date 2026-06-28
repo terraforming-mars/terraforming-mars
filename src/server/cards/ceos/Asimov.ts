@@ -24,7 +24,7 @@ export class Asimov extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.effect('You have +2 score for all awards.', (eb) => {
-            eb.award().startEffect.text('+2', Size.LARGE);
+            eb.award().startEffect.text('+2', {size: Size.LARGE});
           });
           b.br.br.br;
           b.opgArrow().text('10-X').award().asterix();

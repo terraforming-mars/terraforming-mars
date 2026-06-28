@@ -23,7 +23,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
         cardNumber: 'U082',
         renderData: CardRenderer.builder((b) => {
           b.text('-X').corruption(1).asterix().text('-X').megacredits(3).asterix().br;
-          b.text('THIS CAN\'T BE BLOCKED BY CORRUPTION', Size.SMALL);
+          b.text('THIS CAN\'T BE BLOCKED BY CORRUPTION', {size: Size.SMALL});
         }),
         description: 'The player with more corruption than anybody else ' +
         'discards corruption until they have the same amount as the 2nd highest player, ' +

@@ -25,7 +25,7 @@ export class TradingColony extends Card implements IProjectCard {
         cardNumber: 'C47',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
-            eb.trade().startEffect.text('+1', Size.LARGE);
+            eb.trade().startEffect.text('+1', {size: Size.LARGE});
           }).br;
           b.colonies(1);
         }),

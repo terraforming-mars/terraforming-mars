@@ -4,6 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {uppercase} from '../Options';
 
 export class DoubleDown extends PreludeCard {
   constructor() {
@@ -14,7 +15,7 @@ export class DoubleDown extends PreludeCard {
         cardNumber: 'X40',
         description: '',
         renderData: CardRenderer.builder((b) => {
-          b.text('Copy your other prelude\'s direct effect.', Size.SMALL, true);
+          b.text('Copy your other prelude\'s direct effect.', {size: Size.SMALL, uppercase});
         }),
       },
     });

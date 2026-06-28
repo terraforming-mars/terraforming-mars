@@ -9,6 +9,13 @@ import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {liteBoolean, LiteBoolean} from '../../../common/LiteBoolean';
 
+export type TextOptions = {
+  size?: Size;
+  uppercase?: boolean;
+  isBold?: boolean;
+  inParens?: boolean;
+}
+
 export class CardRenderer {
   public static builder(f: (builder: Builder<CardRenderRoot>) => void): ICardRenderRoot {
     const builder = new RootBuilder();
@@ -541,22 +548,31 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true, inParens: boolean = false): this {
+  public text(text: string, options: TextOptions = {}): this {
+    const completeOptions = {
+      size: Size.MEDIUM,
+      uppercase: false,
+      isBold: true,
+      inParens: false,
+      ...options,
+    };
+
+
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
-    item.size = size;
-    item.isUppercase = liteBoolean(uppercase);
-    item.isBold = liteBoolean(isBold);
-    item.inParens = liteBoolean(inParens);
+    item.size = completeOptions.size;
+    item.isUppercase = liteBoolean(completeOptions.uppercase);
+    item.isBold = liteBoolean(completeOptions.isBold);
+    item.inParens = liteBoolean(completeOptions.inParens);
     return this._appendToRow(item);
   }
 
   public plainText(text: string, parens: boolean = false) {
-    return this.text(text, Size.SMALL, false, false, parens);
+    return this.text(text, {size: Size.SMALL, isBold: false, inParens: parens});
   }
 
   public vpText(text: string): this {
-    return this.text(text, Size.TINY, true);
+    return this.text(text, {size: Size.TINY, uppercase: true});
   }
 
   public get br(): this {

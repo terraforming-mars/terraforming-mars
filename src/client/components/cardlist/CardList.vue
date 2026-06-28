@@ -440,6 +440,9 @@ export default defineComponent({
         return true;
       }
       if (this.namesOnly) {
+        if (normalized.startsWith('^')) {
+          return name.toLocaleUpperCase().startsWith(normalized.substring(1));
+        }
         return name.toLocaleUpperCase().includes(normalized);
       } else {
         return this.searchIndex.matches(this.filterText, type, name);

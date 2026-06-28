@@ -217,7 +217,7 @@
 
     "Birds": "Uccelli",
     "Action: Add an animal to this card.": "Azione: aggiungi 1 Animale a questa carta.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Richiede almeno il 13% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 2 livelli. 1 PV per ogni Animale su questa carta.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Richiede almeno il 13% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 2 livelli.",
 
     "Mars University": "Università di Marte",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Effetto: quando giochi una carta con un simbolo Scienza, inclusa questa, puoi scartare 1 carta dalla tua mano per pescarne 1 dal mazzo.",
@@ -550,7 +550,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
 
   "Livestock": "Bestiame",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
   "1 VP for each animal on this card.": "1 PV per ogni Animale su questa carta.",
   "(Action: Add 1 animal to this card.)": "(Azione: aggiungi un Animale a questa carta.)",
 

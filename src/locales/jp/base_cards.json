@@ -228,7 +228,7 @@
 
     "Birds": "鳥類",
     "Action: Add an animal to this card.": "アクション：このカード上に1動物追加.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "条件：酸素13%以上. プレイヤー1人の植物産出-2. このカード上の1動物毎に1VP.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "条件：酸素13%以上. プレイヤー1人の植物産出-2.",
 
     "Mars University": "火星大学",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "効果：科学タグをプレイ時、望むなら手札を1枚捨て1ドロー.",
@@ -572,7 +572,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "条件：酸素6%以上. プレイヤー1人の植物産出-1. 電力産出+2.",
 
     "Livestock": "家畜",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "条件：酸素9%以上. 植物産出-1し、MC産出+2.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "条件：酸素9%以上. 植物産出-1し、MC産出+2.",
 
     "Olympus Conference": "オリンポス会議",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "効果：科学タグをプレイ時、このカード上に1科学リソース追加 または このカード上から1科学リソース除去し、1ドロー.",

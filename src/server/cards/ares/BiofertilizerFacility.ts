@@ -34,9 +34,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
         cardNumber: 'A02',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1));
-          b.resource(CardResource.MICROBE, 2);
-          b.br;
-          b.tile(TileType.BIOFERTILIZER_FACILITY, false, true);
+          b.resource(CardResource.MICROBE, 2).nbsp.tile(TileType.BIOFERTILIZER_FACILITY, false, true);
         }),
       },
     });

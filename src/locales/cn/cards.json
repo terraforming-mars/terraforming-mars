@@ -243,7 +243,7 @@
 
     "Birds": "鸟",
     "Action: Add an animal to this card.": "行动： 增加一个动物资源到本卡。",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "需要至少13%氧气。降低任一玩家的植物产量2级。本卡上每有1个动物资源，获得1分。",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "需要至少13%氧气。降低任一玩家的植物产量2级。",
 
     "Mars University": "火星大学",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "效果： 当你打出一个科学标志,包括本牌,你可以从手牌中弃掉1张牌，然后抽1张牌。",
@@ -570,7 +570,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "（需求：氧气≥6％） 任一玩家植物产量-1 你的电力产量+2。",
 
     "Livestock": "畜牧",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "（需求：氧气≥9％ 植物产量+1 M€产量+2）",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "（需求：氧气≥9％ 植物产量+1 M€产量+2）",
     "1 VP for each animal on this card.": "此牌上一枚动物资源=1分。",
 
     "Olympus Conference": "奥林巴斯峰会",

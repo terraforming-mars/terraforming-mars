@@ -254,7 +254,7 @@
 
     "Birds": "새",
     "Action: Add an animal to this card.": "행동: 이 카드에 동물 자원 1개 추가.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "조건: 산소 농도 13% 이상.) (아무 1명의 식물 생산력 2 감소. 이 카드의 동물 자원 1개당 승점 1점.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "조건: 산소 농도 13% 이상. 아무 1명의 식물 생산력 2 감소.",
 
     "Mars University": "화성 대학교",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다 손에 든 카드 1장 버리고, 새로운 카드 1장 획득.",
@@ -596,7 +596,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "조건: 산소 농도 6% 이상.) (아무 1명의 식물 생산력 1 감소. 에너지 생산력 2 증가.",
 
     "Livestock": "가축",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
 
     "Olympus Conference": "올림푸스 컨퍼런스",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다, 이 카드에 과학 자원 1개 추가하거나, 또는 이 카드에서 과학 자원 1개 제거해서 카드 1장 획득.",

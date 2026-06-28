@@ -250,7 +250,7 @@
 
   "Birds": "Птахи",
   "Action: Add an animal to this card.": "Дія: Додати 1 тварину до цієї карти.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Вимагає 13% кисню. Зменшити виробництво будь-яких рослин на 2. 1 ПО за кожну тварину на цій карті.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Вимагає 13% кисню. Зменшити виробництво будь-яких рослин на 2.",
 
   "Mars University": "Університет Марса",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Ефект: Коли ви граєте карту з міткою науки, включаючи цю, ви можете відкинути карту з руки, щоб взяти нову карту.",
@@ -586,7 +586,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Вимагає 6% кисню. Зменшити будь-яке виробництво рослин на 1 одиницю і збільшити виробництво енергії на 2 одиниці.",
 
   "Livestock": "Сільськогосподарські тварини",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Вимагає 9% кисню. Зменшити виробництво рослин на 1 одиницю і збільшити виробництво M€ на 2 одиниці.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Вимагає 9% кисню. Зменшити виробництво рослин на 1 одиницю і збільшити виробництво M€ на 2 одиниці.",
 
   "Olympus Conference": "Олімпійська конференція",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Коли ви граєте карточку з міткою науки, включаючи цю, додайте науковий ресурс на цю карту або видаліть науковий ресурс з цієї карти, щоб взяти карту.",

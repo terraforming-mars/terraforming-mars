@@ -26,8 +26,8 @@ export class CultivationOfVenus extends ActionCard implements IProjectCard {
           b.action('Spend 3 plants to raise Venus 1 step.', (eb) => {
             eb.plants(3).startAction.venus(1);
           }).br;
+          b.vpText('1 VP for every 2 Venus tags you own.');
         }),
-        description: '1 VP for every 2 Venus tags you own.',
       },
     });
   }

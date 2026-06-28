@@ -30,16 +30,13 @@ export class LunaMiningHub extends Card {
 
       metadata: {
         cardNumber: 'M14',
-        description: {
-          text: '2 VP PER MINING TILE ADJACENT TO THIS TILE.',
-          align: 'left',
-        },
         renderData: CardRenderer.builder((b) => {
           b.text('Requires a mining rate of 5 or higher.', {size: Size.TINY, isBold: false}).br;
           b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
           b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', {size: Size.TINY, isBold: false}).br;
           b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
-          b.text('Place this tile on The Moon and raise the mining rate 1 step.', {size: Size.TINY, isBold: false});
+          b.text('Place this tile on The Moon and raise the mining rate 1 step.', {size: Size.TINY, isBold: false}).br;
+          b.vpText('2 VP PER MINING TILE ADJACENT TO THIS TILE.');
         }),
         victoryPoints: moonMiningTile(2, true),
       },

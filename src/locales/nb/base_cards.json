@@ -252,7 +252,7 @@
 
 	"Birds": "Fugler",
 	"Add an animal to this card.": "Legg til et dyr på dette kortet.",
-	"Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Krever 13% oksygen. Senk en valgfri spillers planteproduksjon med 2 trinn. 1 SP per dyr på dette kortet.",
+	"Requires 13% oxygen. Decrease any plant production 2 steps.": "Krever 13% oksygen. Senk en valgfri spillers planteproduksjon med 2 trinn.",
 
 	"Mars University": "Mars-universitet",
 	"Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Effekt: Når du spiller et vitenskapssymbol, inkludert dette, kan du kaste et kort fra hånden for å trekke et kort.",
@@ -594,7 +594,7 @@
 	"Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Krever 6% oksygen. Senk en valgfri spillers planteproduksjon med 1 trinn og øk din energiproduksjon med 2 trinn.",
 
 	"Livestock": "Husdyr",
-	"Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Krever 9% oksygen. Senk din planteproduksjon med 1 trinn og øk din M€-produksjon med 2 trinn.",
+	"Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Krever 9% oksygen. Senk din planteproduksjon med 1 trinn og øk din M€-produksjon med 2 trinn.",
 
 	"Olympus Conference": "Olympus-konferanse",
 	"When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Når du spiller et vitenskapssymbol, inkludert dette, legg til en vitenskapsressurs på dette kortet, eller fjern en vitenskapsressurs fra dette kortet for å trekke et kort.",

@@ -1,5 +1,7 @@
 <template>
-  <div :class="klass" :title="$t(description)" data-test="tile"></div>
+  <div :class="klass" :title="$t(description)" data-test="tile">
+    <AdjacencyBonus v-if="hasAdjacencyBonus" :bonus="adjacencyBonus"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,6 +11,30 @@ import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
+import AdjacencyBonus, {AdjacencyBonusTypes} from '@/client/components/AdjacencyBonus.vue';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+
+const aresTileToAdjacencyBonus: Partial<Record<TileType, Array<AdjacencyBonusTypes>>> = {
+  [TileType.BIOFERTILIZER_FACILITY]: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
+  [TileType.CAPITAL]: ['2mc'],
+  [TileType.COMMERCIAL_DISTRICT]: ['2mc'],
+  [TileType.DEIMOS_DOWN]: [SpaceBonus.ASTEROID, SpaceBonus.STEEL],
+  [TileType.ECOLOGICAL_ZONE]: [SpaceBonus.ANIMAL],
+  [TileType.GREAT_DAM]: [SpaceBonus.ENERGY, SpaceBonus.ENERGY],
+  [TileType.INDUSTRIAL_CENTER]: [SpaceBonus.STEEL],
+  [TileType.LAVA_FLOWS]: [SpaceBonus.HEAT, SpaceBonus.HEAT],
+  [TileType.MAGNETIC_FIELD_GENERATORS]: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
+  [TileType.METALLIC_ASTEROID]: [SpaceBonus.TITANIUM],
+  [TileType.MINING_STEEL_BONUS]: [SpaceBonus.STEEL],
+  [TileType.MINING_TITANIUM_BONUS]: [SpaceBonus.TITANIUM],
+  [TileType.MOHOLE_AREA]: [SpaceBonus.HEAT, SpaceBonus.HEAT],
+  [TileType.NATURAL_PRESERVE]: [SpaceBonus.MEGACREDITS],
+  [TileType.NUCLEAR_ZONE]: ['lose2mc'],
+  [TileType.OCEAN_FARM]: [SpaceBonus.PLANT],
+  [TileType.OCEAN_SANCTUARY]: [SpaceBonus.ANIMAL],
+  [TileType.RESTRICTED_AREA]: [SpaceBonus.DRAW_CARD],
+  [TileType.SOLAR_FARM]: [SpaceBonus.ENERGY, SpaceBonus.ENERGY],
+};
 
 const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.OCEAN]: 'ocean',
@@ -119,6 +145,9 @@ export default defineComponent({
   data() {
     return {};
   },
+  components: {
+    AdjacencyBonus,
+  },
   computed: {
     tileType(): TileType | undefined {
       return this.space.tileType;
@@ -137,6 +166,15 @@ export default defineComponent({
         return 'City in space.';
       }
       return descriptions[this.tileType];
+    },
+    hasAdjacencyBonus(): boolean {
+      return this.aresExtension && this.tileType !== undefined && aresTileToAdjacencyBonus[this.tileType] !== undefined;
+    },
+    adjacencyBonus(): Array<AdjacencyBonusTypes> {
+      if (this.tileType === undefined) {
+        return [];
+      }
+      return aresTileToAdjacencyBonus[this.tileType] ?? [];
     },
     klass(): string {
       let css = 'board-space';

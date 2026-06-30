@@ -178,6 +178,26 @@
   background-size: 16px;
 }
 
+.board-space-bonus--asteroid {
+  background: url(./assets/resources/asteroid.png) no-repeat;
+  background-size: 16px;
+}
+
+.board-space-bonus--megacredit {
+  background: url(./assets/misc/1mc.png) no-repeat;
+  background-size: 16px;
+}
+
+.board-space-bonus--2mc {
+  background: url(./assets/misc/2mc.png) no-repeat;
+  background-size: 16px;
+}
+
+.board-space-bonus--lose2mc {
+  background: url(./assets/misc/lose2mc.png) no-repeat;
+  background-size: 16px;
+}
+
 .board-space-tile--ocean {
   background: url(./assets/board_icons.png) -79px -29px no-repeat;
   width: 46px;
@@ -457,6 +477,8 @@
     clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
     width: 46px;
     height: 51px;
+    // Visual-only; don't swallow tile hovers.
+    pointer-events: none;
 
     &.highlight {
       animation: board-tile-highlight-animation 1s infinite;

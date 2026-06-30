@@ -29,6 +29,7 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.COLONY]: 'colony',
   [SpaceBonus._RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
   [SpaceBonus.TEMPERATURE_4MC]: 'bonustemperature4mc',
+  [SpaceBonus.LOSE_2_MC]: '', // Only used for Ares
 };
 
 export default defineComponent({

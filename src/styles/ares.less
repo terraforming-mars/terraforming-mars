@@ -10,42 +10,42 @@
 }
 
 .card-tile-capital-ares {
-  .board-space-tile--capital-ares();
+  background: url(./assets/board_icons_ares.png) -198px -83px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-commercial-district-ares {
-  .board-space-tile--commercial-district-ares();
+  background: url(./assets/board_icons_ares.png) -486px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-great-dam-ares {
-  .board-space-tile--great-dam-ares();
+  background: url(./assets/board_icons_ares.png) -581px -139px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-deimos-down-ares {
-  .board-space-tile--deimos-down-ares();
+  background: url(./assets/board_icons_ares.png) -581px -189px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-industrial-center-ares {
-  .board-space-tile--industrial-center-ares();
+  background: url(./assets/board_icons_ares.png) -534px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-lava-flows-ares {
-  .board-space-tile--lava-flows-ares();
+  background: url(./assets/board_icons_ares.png) -246px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-mohole-area-ares {
-  .board-space-tile--mohole-area-ares();
+  background: url(./assets/board_icons_ares.png) -438px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-magnetic-field-generators-ares {
-  .board-space-tile--magnetic-field-generators-ares();
+  background: url(./assets/board_icons_ares.png) -534px -139px no-repeat;
   .card-tile-ares();
 }
 
@@ -65,17 +65,17 @@
 }
 
 .card-tile-natural-preserve-ares {
-  .board-space-tile--natural-preserve-ares();
+  background: url(./assets/board_icons_ares.png) -390px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-nuclear-zone-ares {
-  .board-space-tile--nuclear-zone-ares();
+  background: url(./assets/board_icons_ares.png) -198px -27px no-repeat;
   .card-tile-ares();
 }
 
 .card-tile-restricted-area-ares {
-  .board-space-tile--restricted-area-ares();
+  background: url(./assets/board_icons_ares.png) -342px -27px no-repeat;
   .card-tile-ares();
 }
 
@@ -112,51 +112,94 @@
 }
 
 .board-space-tile--nuclear-zone-ares {
-  background: url(./assets/board_icons_ares.png) -198px -27px no-repeat;
+  .board-space-tile--nuclear_zone();
+  .ares-hexagon(@adjacency-cost);
 }
 
 .board-space-tile--lava-flows-ares {
-  background: url(./assets/board_icons_ares.png) -246px -27px no-repeat;
+  .board-space-tile--lava_flows();
+  .ares-hexagon();
 }
 
 .board-space-tile--mining-steel {
   background: url(./assets/board_icons_ares.png) -294px -27px no-repeat;
 }
 
+// The hexagon every Ares tile uses.
+// ~2px hexagonal outline (the base hex shows through the middle).
+.ares-hexagon(@color: @adjacency-bonus) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: @color;
+    // Outer hexagon (clockwise) minus an inner hexagon inset ~2px
+    // (counter-clockwise) to punch the hole, leaving a thin ring.
+    clip-path: polygon(
+      50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 50% 0%,
+      50% 4.35%, 4.35% 27.18%, 4.35% 72.82%, 50% 95.65%, 95.65% 72.82%, 95.65% 27.18%, 50% 4.35%);
+  }
+}
+
+.ares-hex-symbol(@symbol) {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    // width: 100%;
+    // height: 100%;
+    background: @symbol no-repeat center;
+    background-size: 26px;
+  }
+}
+
 .board-space-tile--restricted-area-ares {
-  background: url(./assets/board_icons_ares.png) -342px -27px no-repeat;
+  .board-space-tile--restricted_area();
+  .ares-hexagon();
 }
 
 .board-space-tile--natural-preserve-ares {
-  background: url(./assets/board_icons_ares.png) -390px -27px no-repeat;
+  .board-space-tile--natural_preserve();
+  .ares-hexagon();
 }
 
 .board-space-tile--mohole-area-ares {
-  background: url(./assets/board_icons_ares.png) -438px -27px no-repeat;
+  .board-space-tile--mohole_area();
+  .ares-hexagon();
 }
 
 .board-space-tile--commercial-district-ares {
-  background: url(./assets/board_icons_ares.png) -486px -27px no-repeat;
+  .board-space-tile--commercial_district();
+  .ares-hexagon();
 }
 
 .board-space-tile--great-dam-ares {
-  background: url(./assets/board_icons_ares.png) -581px -139px no-repeat;
+  .board-space-tile--great_dam();
+  .ares-hexagon();
 }
 
 .board-space-tile--deimos-down-ares {
-  background: url(./assets/board_icons_ares.png) -581px -189px no-repeat;
+  .board-space-tile--deimos_down();
+  .ares-hexagon();
 }
 
 .board-space-tile--industrial-center-ares {
-  background: url(./assets/board_icons_ares.png) -534px -27px no-repeat;
+  .board-space-tile--industrial_center();
+  .ares-hexagon();
 }
 
 .board-space-tile--ecological-zone-ares {
-  background: url(./assets/board_icons_ares.png) -581px -27px no-repeat;
+  .board-space-tile--ecological_zone();
+  .ares-hexagon();
 }
 
 .board-space-tile--capital-ares {
-  background: url(./assets/board_icons_ares.png) -198px -83px no-repeat;
+  .board-space-tile--capital();
+  .ares-hexagon();
 }
 
 .board-space-tile--solar-farm {
@@ -164,7 +207,8 @@
 }
 
 .board-space-tile--magnetic-field-generators-ares {
-  background: url(./assets/board_icons_ares.png) -534px -139px no-repeat;
+  .board-space-tile--magnetic_field_generators();
+  .ares-hexagon();
 }
 
 .board-space-tile--metallic-asteroid {

@@ -61,7 +61,7 @@ export class StarVegas extends Card {
         cardNumber: 'U053',
         renderData: CardRenderer.builder((b) => {
           b.city().asterix().corruption(2).br;
-          b.production((pb) => pb.megacredits(1).slash().city({all, size: Size.SMALL}));
+          b.production((pb) => pb.megacredits(1).slash().city({size: Size.SMALL, all}));
         }),
         description: 'Requires any 3 cities in play. Place a city on a space reserved for a different space city. ' +
         'Gain 2 corruption. Increase your M€ production one step for each city in play.',

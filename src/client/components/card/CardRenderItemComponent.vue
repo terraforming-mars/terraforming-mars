@@ -199,11 +199,7 @@ export default defineComponent({
           return ['card-tile', `greenery-tile--${this.item.size}`];
         }
       case CardRenderItemType.EMPTY_TILE:
-        if (this.item.size !== undefined) {
-          return ['card-tile-ares', `board-space-tile--empty-tile--${this.item.size}`];
-        } else {
-          return ['card-tile-ares'];
-        }
+        return ['card-tile', `empty-tile--${this.item.size ?? Size.MEDIUM}`];
       case CardRenderItemType.EMPTY_TILE_GOLDEN:
         return ['card-tile-ares', 'board-space-tile--adjacency-tile'];
       case CardRenderItemType.EMPTY_TILE_SPECIAL:

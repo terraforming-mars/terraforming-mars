@@ -311,6 +311,18 @@ describe('Player', () => {
     expect(newPlayer.colonies.usedTradeFleets).eq(100);
   });
 
+  it('preserves the expanded action budget through serialization', () => {
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
+    Game.newInstance('gameid', [player], player, 'spectatorid');
+    player.actionsTakenThisRound = 2;
+    player.availableActionsThisRound = 4;
+
+    const newPlayer = Player.deserialize(player.serialize());
+
+    expect(newPlayer.actionsTakenThisRound).eq(2);
+    expect(newPlayer.availableActionsThisRound).eq(4);
+  });
+
   it('pulls self replicating robots target cards', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;

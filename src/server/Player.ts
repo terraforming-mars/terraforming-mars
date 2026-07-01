@@ -171,8 +171,6 @@ export class Player implements IPlayer {
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
-  //
-  // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
   public withinDeflectionZone = false;
@@ -1791,6 +1789,7 @@ export class Player implements IPlayer {
       preservationProgram: this.preservationProgram,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
+      availableActionsThisRound: this.availableActionsThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       pendingInitialActions: this.pendingInitialActions.map(toName),
       // Cards
@@ -1862,6 +1861,7 @@ export class Player implements IPlayer {
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsThisGeneration = new Set(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.availableActionsThisRound = d.availableActionsThisRound ?? 2;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
     player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;

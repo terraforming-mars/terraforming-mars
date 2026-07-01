@@ -178,6 +178,9 @@
   background-size: 16px;
 }
 
+// TODO(kberg): start these aren't really board space bonuses. They're just 16px images
+// And honestly, 16px is so standard, we don't really even need these, do we,
+// most of the time?
 .board-space-bonus--asteroid {
   background: url(./assets/resources/asteroid.png) no-repeat;
   background-size: 16px;
@@ -197,6 +200,7 @@
   background: url(./assets/misc/lose2mc.png) no-repeat;
   background-size: 16px;
 }
+// TODO(kberg): end these aren't really board space bonuses.
 
 .board-space-tile--ocean {
   background: url(./assets/board_icons.png) -79px -29px no-repeat;
@@ -211,56 +215,66 @@
   background: url(./assets/board_icons.png) -129px -29px no-repeat;
 }
 
+// Renders a special tile the "card-tile-symbol" way: the normalized 152x152
+// overlay icon centered over a backing hex
+// defaults to the tan special.png hex; others, for instance, ocean tiles,
+// pass the ocean hex instead.
+.special-tile-board(@icon, @backing: './assets/tiles/special.png') {
+  background:
+    url(@icon) no-repeat center / 50px,
+    url(@backing) no-repeat center / 46px;
+}
+
 .board-space-tile--capital {
-  background: url(./assets/board_icons.png) -198px -83px no-repeat;
+  .board-space-tile--city();
 }
 
 .board-space-tile--mohole_area {
-  background: url(./assets/board_icons.png) -438px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/mohole_area.png');
 }
 
 .board-space-tile--commercial_district {
-  background: url(./assets/board_icons.png) -486px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/commerical_district.png');
 }
 
 .board-space-tile--ecological_zone {
-  background: url(./assets/board_icons.png) -581px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/ecological_zone.png');
 }
 
 .board-space-tile--industrial_center {
-  background: url(./assets/board_icons.png) -534px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/industrial_center.png');
 }
 
 .board-space-tile--lava_flows {
-  background: url(./assets/board_icons.png) -246px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/lava_flows.png');
 }
 
 .board-space-tile--mining_area, .board-space-tile--mining_rights {
-  background: url(./assets/board_icons.png) -294px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/mining_area.png');
 }
 
 .board-space-tile--natural_preserve {
-  background: url(./assets/board_icons.png) -390px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/natural_preserve.png');
 }
 
 .board-space-tile--nuclear_zone {
-  background: url(./assets/board_icons.png) -198px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/nuclear_zone.png');
 }
 
 .board-space-tile--restricted_area {
-  background: url(./assets/board_icons.png) -342px -27px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/restricted_area.png');
 }
 
 .board-space-tile--great_dam {
-  background: url(./assets/board_icons.png) -581px -83px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/great_dam.png');
 }
 
 .board-space-tile--deimos_down {
-  background: url(./assets/board_icons.png) -487px -83px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/deimos.png');
 }
 
 .board-space-tile--magnetic_field_generators {
-  background: url(./assets/board_icons.png) -535px -83px no-repeat;
+  .special-tile-board('./assets/tiles/special_tile_icons/magnetic_field_gen.png');
 }
 
 .board-space-tile--new-holland {

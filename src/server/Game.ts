@@ -1343,10 +1343,7 @@ export class Game implements IGame, Logger {
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
-  public addTile(
-    player: IPlayer,
-    space: Space,
-    tile: Tile): void {
+  public addTile(player: IPlayer, space: Space, tile: Tile): void {
     // Part 1, basic validation checks.
 
     // Land claim a player can claim land for themselves
@@ -1488,8 +1485,11 @@ export class Game implements IGame, Logger {
     case SpaceBonus.OCEAN:
       // Hellas special requirements ocean tile
       if (this.canAddOcean()) {
-        this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
-        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}))
+          .andThen(() => {
+            this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
+            return undefined;
+          });
       }
       break;
     case SpaceBonus.MICROBE:

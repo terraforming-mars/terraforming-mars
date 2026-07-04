@@ -1,7 +1,7 @@
 <template>
     <div class="player-allied-party">
         <div v-if="player.alliedParty" class='allied-policy-block'>
-            <AlliedPartyAgenda :id="player.alliedParty.agenda.policyId"/>
+            <TurmoilAgenda :id="player.alliedParty.agenda.policyId" :show-party-badge="true"/>
         </div>
     </div>
 </template>
@@ -10,7 +10,7 @@
 
 import {defineComponent} from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import AlliedPartyAgenda from '@/client/components/turmoil/AlliedPartyAgenda.vue';
+import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 
 export default defineComponent({
   name: 'PlayerAlliedParty',
@@ -21,7 +21,7 @@ export default defineComponent({
     },
   },
   components: {
-    AlliedPartyAgenda,
+    TurmoilAgenda,
   },
 });
 

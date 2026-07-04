@@ -57,7 +57,7 @@
       <div class="tile greenery-tile-turmoil greenery-tile-small"></div>
     </template>
     <template v-else-if="id === 'mp01'">
-      <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="steel resource"></span></div>
+      <div class="policy-top-margin"><div v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></div><div class="tile empty-tile--S"></div> : <span class="steel resource"></span></div>
     </template>
     <template v-else-if="id === 'mp02'">
       <div class="policy-top-margin"><div class="resource-tag tag-building"></div> : <div class="money resource">2</div></div>
@@ -71,6 +71,7 @@
       <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div>
     </template>
     <template v-else-if="id === 'sp01'">
+      <span v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></span>
       <span class="money resource">10</span>
       <span class="red-arrow"></span>
       <span class="card card-with-border resource party-resource"></span>
@@ -97,7 +98,7 @@
       <div class="scientists-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>
     </template>
     <template v-else-if="id === 'up01'">
-      <div class="policy-top-margin"><div class="resource titanium"></div> : + <div class="resource money">1</div></div>
+      <div class="policy-top-margin"><div v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></div><div class="resource titanium"></div> : + <div class="resource money">1</div></div>
     </template>
     <template v-else-if="id === 'up02'">
       <div class="policy-top-margin">
@@ -114,6 +115,7 @@
       <div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>
     </template>
     <template v-else-if="id === 'kp01'">
+      <span v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></span>
       <span class="money resource">10</span>
       <span class="red-arrow-infinity"></span>
       <div class="production-box production-box-size2">
@@ -135,6 +137,7 @@
     </template>
     <template v-else-if="id === 'rp01'">
       <div class="policy-top-margin">
+      <div v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></div>
       <div class="rating tile"></div> :
       <div class="resource money">-3</div>
       </div>
@@ -158,6 +161,7 @@
       </div>
     </template>
     <template v-else-if="id === 'gp01'">
+      <div v-if="showPartyBadge" :class="partyBadgeClass" v-i18n></div>
       <div class="tile greenery-tile-turmoil"></div> : <div class="resource money">4</div>
     </template>
     <template v-else-if="id === 'gp02'">
@@ -193,6 +197,23 @@ export default defineComponent({
     id: {
       type: String as () => BonusId | PolicyId,
       required: true,
+    },
+    showPartyBadge: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    partyBadgeClass(): string {
+      const partyBadgeSlugs: Record<string, string> = {
+        m: 'mars_first',
+        s: 'scientists',
+        u: 'unity',
+        k: 'kelvinists',
+        r: 'reds',
+        g: 'greens',
+      };
+      return 'party-badge party-badge--' + partyBadgeSlugs[this.id[0]];
     },
   },
 });

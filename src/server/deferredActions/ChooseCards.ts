@@ -8,6 +8,7 @@ import {LogHelper} from '../LogHelper';
 import {oneWayDifference} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
+import {Aerotech} from '../cards/community/Aerotech';
 
 export const LogType = {
   DREW: 'drew',
@@ -83,6 +84,9 @@ export class ChooseCards extends DeferredAction {
   }
 }
 
+/**
+ * Adds `cards` to the player's hand, discards `discards` to the project deck, and logs the outcome per `logType`.
+ */
 export function keep(player: IPlayer, cards: ReadonlyArray<IProjectCard>, discards: ReadonlyArray<IProjectCard>, logType: LogType = LogType.DREW): void {
   player.cardsInHand.push(...cards);
   player.game.projectDeck.discard(...discards);
@@ -110,4 +114,5 @@ export function keep(player: IPlayer, cards: ReadonlyArray<IProjectCard>, discar
     }
     break;
   }
+  Aerotech.onDrawCards(player, cards, discards);
 }

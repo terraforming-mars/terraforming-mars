@@ -652,6 +652,7 @@ import {CardName} from '@/common/cards/CardName';
 
 const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
+  [CardName.AEROTECH]: 'image',
   [CardName.AERON_GENOMICS]: 'bespoke',
   [CardName.AGRICOLA_INC]: 'bespoke',
   [CardName.AMBIENT]: 'image',

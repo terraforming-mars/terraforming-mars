@@ -54,7 +54,7 @@
     </template>
     <template v-else-if="id === 'gb02'">
       <div class="resource money party-resource">2</div> /
-      <div class="tile greenery-tile greenery-tile-small"></div>
+      <div class="tile greenery-tile-turmoil greenery-tile-small"></div>
     </template>
     <template v-else-if="id === 'mp01'">
       <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="steel resource"></span></div>
@@ -158,7 +158,7 @@
       </div>
     </template>
     <template v-else-if="id === 'gp01'">
-      <div class="tile greenery-tile"></div> : <div class="resource money">4</div>
+      <div class="tile greenery-tile-turmoil"></div> : <div class="resource money">4</div>
     </template>
     <template v-else-if="id === 'gp02'">
       <div class="policy-top-margin"><div class="tile empty-tile--S"></div> : <span class="plant resource"></span></div>

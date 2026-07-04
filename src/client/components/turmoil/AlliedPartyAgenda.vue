@@ -33,7 +33,7 @@
     </template>
     <template v-else-if="id === 'gp01'">
       <div :class="'party-badge party-badge--greens'" v-i18n></div>
-      <div class="tile greenery-tile"></div> : <div class="resource money">4</div>
+      <div class="tile greenery-tile-turmoil"></div> : <div class="resource money">4</div>
     </template>
     <template v-else>
       <div>Unknown agenda ID {{id}}</div>

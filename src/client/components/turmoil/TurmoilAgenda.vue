@@ -191,7 +191,7 @@ export default defineComponent({
   name: 'TurmoilAgenda',
   props: {
     id: {
-      type: String as () => BonusId | PolicyId | undefined,
+      type: String as () => BonusId | PolicyId,
       required: true,
     },
   },

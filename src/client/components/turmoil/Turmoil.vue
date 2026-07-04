@@ -17,7 +17,7 @@
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
           <div class="dominant-party-bonus">
-            <TurmoilAgenda :id="getPolicy(turmoil.ruling)"/>
+            <TurmoilAgenda v-if="turmoil.ruling" :id="getPolicy(turmoil.ruling)"/>
           </div>
           <div class="policy-user-cubes">
             <template v-for="n in turmoil.policyActionUsers" :key="n.color">
@@ -88,6 +88,7 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
+import {BonusId, PolicyId} from '@/common/turmoil/Types';
 
 export default defineComponent({
   name: 'Turmoil',
@@ -105,45 +106,47 @@ export default defineComponent({
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getBonus(party: PartyName | undefined) {
+    getBonus(party: PartyName): BonusId {
       const politicalAgendas = this.turmoil.politicalAgendas;
-      if (politicalAgendas !== undefined) {
-        switch (party) {
-        case PartyName.MARS:
-          return politicalAgendas.marsFirst.bonusId;
-        case PartyName.SCIENTISTS:
-          return politicalAgendas.scientists.bonusId;
-        case PartyName.UNITY:
-          return politicalAgendas.unity.bonusId;
-        case PartyName.KELVINISTS:
-          return politicalAgendas.kelvinists.bonusId;
-        case PartyName.REDS:
-          return politicalAgendas.reds.bonusId;
-        case PartyName.GREENS:
-          return politicalAgendas.greens.bonusId;
-        }
+      if (politicalAgendas === undefined) {
+        throw new Error('Political agendas not defined');
       }
-      return undefined;
+      switch (party) {
+      case PartyName.MARS:
+        return politicalAgendas.marsFirst.bonusId;
+      case PartyName.SCIENTISTS:
+        return politicalAgendas.scientists.bonusId;
+      case PartyName.UNITY:
+        return politicalAgendas.unity.bonusId;
+      case PartyName.KELVINISTS:
+        return politicalAgendas.kelvinists.bonusId;
+      case PartyName.REDS:
+        return politicalAgendas.reds.bonusId;
+      case PartyName.GREENS:
+        return politicalAgendas.greens.bonusId;
+      }
     },
-    getPolicy(partyName: PartyName | undefined) {
+    getPolicy(partyName: PartyName): PolicyId {
       const politicalAgendas = this.turmoil.politicalAgendas;
-      if (politicalAgendas !== undefined) {
-        switch (partyName) {
-        case PartyName.MARS:
-          return politicalAgendas.marsFirst.policyId;
-        case PartyName.SCIENTISTS:
-          return politicalAgendas.scientists.policyId;
-        case PartyName.UNITY:
-          return politicalAgendas.unity.policyId;
-        case PartyName.KELVINISTS:
-          return politicalAgendas.kelvinists.policyId;
-        case PartyName.REDS:
-          return politicalAgendas.reds.policyId;
-        case PartyName.GREENS:
-          return politicalAgendas.greens.policyId;
-        }
+      if (politicalAgendas === undefined) {
+        throw new Error('Political agendas not defined');
       }
-      return undefined;
+      switch (partyName) {
+      case PartyName.MARS:
+        return politicalAgendas.marsFirst.policyId;
+      case PartyName.SCIENTISTS:
+        return politicalAgendas.scientists.policyId;
+      case PartyName.UNITY:
+        return politicalAgendas.unity.policyId;
+      case PartyName.KELVINISTS:
+        return politicalAgendas.kelvinists.policyId;
+      case PartyName.REDS:
+        return politicalAgendas.reds.policyId;
+      case PartyName.GREENS:
+        return politicalAgendas.greens.policyId;
+      default:
+        throw new Error(`Unknown party name ${partyName}`);
+      }
     },
     toggleMe() {
       const currentState: boolean = this.isVisible();

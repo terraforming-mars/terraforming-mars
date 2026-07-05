@@ -27,8 +27,7 @@ export class TychoRoadNetwork extends Card {
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
-          b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
+          b.production((eb) => eb.megacredits(1)).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },
     });

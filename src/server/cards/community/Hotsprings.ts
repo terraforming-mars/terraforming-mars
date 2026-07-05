@@ -43,7 +43,7 @@ export class Hotsprings extends CorporationCard implements ICorporationCard {
     }
   }
 
-  public canAct(_player: IPlayer): boolean {
+  public canAct(): boolean {
     return this.data.heatProductionStepsIncreasedThisGeneration > 0;
   }
 
@@ -57,7 +57,7 @@ export class Hotsprings extends CorporationCard implements ICorporationCard {
     return undefined;
   }
 
-  public onProductionPhase(_player: IPlayer): void {
+  public onProductionPhase(): void {
     this.data.heatProductionStepsIncreasedThisGeneration = 0;
   }
 }

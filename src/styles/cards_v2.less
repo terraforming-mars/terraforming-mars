@@ -1673,15 +1673,6 @@
   }
   .card-hazard-tile {
     background-image: url(./assets/tiles/hazard.png);
-    width: 40px;
-    height: 47px;
-    background-size: 40px 47px;
-  }
-  .card-hazard-tile--L {
-    background-image: url(./assets/tiles/hazard.png);
-    width: 48px;
-    height: 56px;
-    background-size: 48px 56px;
   }
   .card-adjacency-bonus {
     background-image: url(./assets/tiles/adjacency_bonus.png);
@@ -2328,7 +2319,9 @@
     background-size: 65px 52px;
     background-repeat: no-repeat;
   }
+
   /* tiles */
+  // Spacing only. Pair with a tile class (e.g. city-tile) for the image and a tile-size--* class for dimensions.
   .card-tile {
     margin-left: 4px;
     margin-right: 4px;
@@ -2412,48 +2405,53 @@
     height: 59px;
     background-size: 47px 59px;
   }
-  .city-tile--M {
-    background-image: url(./assets/tiles/city.png);
-    filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-    background-size: 40px;
-    width: 40px;
-    height: 47px;
+  .greenery-tile {
+    background-image: url(./assets/tiles/greenery_no_O2.png);
   }
-  .city-tile--S {
-    background-image: url(./assets/tiles/city.png);
-    filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+  .greenery-tile-oxygen {
+    background-image: url(./assets/tiles/greenery.png);
+  }
+  .tile-size--S {
     width: 30px;
     height: 32px;
     background-size: 30px 32px;
   }
-  .greenery-tile--M {
-    background-image: url(./assets/tiles/greenery_no_O2.png);
-    background-size: 40px;
-    width: 40px;
-    height: 47px;
-  }
-  .greenery-tile--S {
-    background-image: url(./assets/tiles/greenery_no_O2.png);
-    background-size: 30px 32px;
-    width: 30px;
-    height: 32px;
-  }
-  .greenery-tile-oxygen--M {
-    background-image: url(./assets/tiles/greenery.png);
-    background-size: 47px;
-    width: 47px;
-    height: 46px;
-  }
-  .greenery-tile-oxygen--S {
-    background-image: url(./assets/tiles/greenery.png);
-    background-size: 32px;
+  .tile-size--S-square {
     width: 32px;
     height: 32px;
+    background-size: 32px 32px;
   }
-  .tile--req {
+  .tile-size--M {
+    width: 40px;
+    height: 47px;
+    background-size: 40px 47px;
+  }
+  .tile-size--M-square {
+    width: 46px;
+    height: 47px;
+    background-size: 46px 47px;
+  }
+  .tile-size--L {
+    width: 48px;
+    height: 56px;
+    background-size: 48px 56px;
+  }
+  .tile-size--L-square {
+    width: 54px;
+    height: 56px;
+    background-size: 54px 56px;
+  }
+  .tile-size--req {
     width: 30px;
     height: 34px;
     background-size: 30px 34px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .tile-size--req-square {
+    width: 34px;
+    height: 34px;
+    background-size: 34px 34px;
     margin-left: 4px;
     margin-right: 4px;
   }

@@ -24,11 +24,6 @@ export default defineComponent({
       required: true,
     },
   },
-  methods: {
-    sized(clazz: string, size: string | undefined) {
-      return size !== undefined ? `${clazz}--${size}` : clazz;
-    },
-  },
   computed: {
     resourceClass(): string {
       return (this.item.resource === undefined) ? '' : cardResourceCSS[this.item.resource];
@@ -96,6 +91,12 @@ export default defineComponent({
         }
       }
       return classes;
+    },
+    tileSizeClass(): string {
+      const size = this.item.size ?? Size.MEDIUM;
+      const tileSizeClass = `tile-size--${size}`;
+      const secondaryTag = this.item.secondaryTag || (this.item.type === CardRenderItemType.MOON_MINING_RATE || this.item.type === CardRenderItemType.MOON_LOGISTIC_RATE || this.item.type === CardRenderItemType.MOON_HABITAT_RATE);
+      return secondaryTag ? `tile-size--${size}-square` : tileSizeClass;
     },
     componentClassArray(): Array<string> {
       let cardResource = 'card-resource';
@@ -191,33 +192,27 @@ export default defineComponent({
       case CardRenderItemType.EMPTY_TAG:
         return ['card-resource-tag', 'tag-empty'];
       case CardRenderItemType.CITY:
-        return ['card-tile', `city-tile--${this.item.size}`];
+        return ['card-tile', 'city-tile', this.tileSizeClass];
       case CardRenderItemType.GREENERY:
-        if (this.item.secondaryTag === AltSecondaryTag.OXYGEN) {
-          return ['card-tile', `greenery-tile-oxygen--${this.item.size}`];
-        } else {
-          return ['card-tile', `greenery-tile--${this.item.size}`];
-        }
+        return [
+          'card-tile',
+          this.item.secondaryTag === AltSecondaryTag.OXYGEN ? 'greenery-tile-oxygen' : 'greenery-tile',
+          this.tileSizeClass];
       case CardRenderItemType.EMPTY_TILE:
-        return ['card-tile', `empty-tile--${this.item.size ?? Size.MEDIUM}`];
+        return ['card-tile', 'empty-tile', this.tileSizeClass];
       case CardRenderItemType.EMPTY_TILE_GOLDEN:
         return ['card-tile-ares', 'board-space-tile--adjacency-tile'];
       case CardRenderItemType.EMPTY_TILE_SPECIAL:
-        if (this.item.size !== undefined) {
-          return ['card-tile', `special-tile--${this.item.size}`];
-        } else {
-          return ['card-tile', 'special-tile'];
-        }
+        return ['card-tile', 'special-tile', this.tileSizeClass];
       case CardRenderItemType.CITY_OR_SPECIAL_TILE:
-        return ['card-tile', 'city-or-special-tile'];
+        return ['card-tile', 'city-or-special-tile', this.tileSizeClass];
       case CardRenderItemType.COMMUNITY:
         return [cardResource, 'card-resource-community'];
       case CardRenderItemType.MOON_HABITAT:
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
-          return [this.sized('card-tile-lunar-habitat-rate', this.item.size)];
-        } else {
-          return [this.sized('card-tile-lunar-habitat', this.item.size)];
-        }
+        return [
+          'card-tile',
+          this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE ? 'card-tile-lunar-habitat-rate' : 'card-tile-lunar-habitat',
+          this.tileSizeClass];
       case CardRenderItemType.GLOBAL_EVENT:
         return ['turmoil-global-event'];
       case CardRenderItemType.POLICY:
@@ -233,41 +228,23 @@ export default defineComponent({
       case CardRenderItemType.ADJACENCY_BONUS:
         return ['card-adjacency-bonus'];
       case CardRenderItemType.HAZARD_TILE:
-        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
-          return [`card-hazard-tile--${this.item.size}`];
-        } else {
-          return ['card-hazard-tile'];
-        }
+        return ['card-hazard-tile', this.tileSizeClass];
       case CardRenderItemType.MOON_HABITAT_RATE:
-        if (this.item.size !== undefined) {
-          return ['card-habitat-rate', `card-habitat-rate--${this.item.size}`];
-        } else {
-          return ['card-habitat-rate'];
-        }
+        return ['card-habitat-rate', this.tileSizeClass];
       case CardRenderItemType.MOON_MINE:
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {
-          return [this.sized('card-tile-lunar-mine-rate', this.item.size)];
-        } else {
-          return [this.sized('card-tile-lunar-mine', this.item.size)];
-        }
+        return [
+          'card-tile',
+          this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE ? 'card-tile-lunar-mine-rate' : 'card-tile-lunar-mine',
+          this.tileSizeClass];
       case CardRenderItemType.MOON_MINING_RATE:
-        if (this.item.size !== undefined) {
-          return ['card-mining-rate', `card-mining-rate--${this.item.size}`];
-        } else {
-          return ['card-mining-rate'];
-        }
+        return ['card-mining-rate', this.tileSizeClass];
       case CardRenderItemType.MOON_ROAD:
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTIC_RATE) {
-          return [this.sized('card-tile-lunar-road-rate', this.item.size)];
-        } else {
-          return [this.sized('card-tile-lunar-road', this.item.size)];
-        }
+        return [
+          'card-tile',
+          this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTIC_RATE ? 'card-tile-lunar-road-rate' : 'card-tile-lunar-road',
+          this.tileSizeClass];
       case CardRenderItemType.MOON_LOGISTIC_RATE:
-        if (this.item.size !== undefined) {
-          return ['card-logistic-rate', `card-logistic-rate--${this.item.size}`];
-        } else {
-          return ['card-logistic-rate'];
-        }
+        return ['card-logistic-rate', this.tileSizeClass];
       case CardRenderItemType.PLANETARY_TRACK:
         return ['card-planetary-track'];
       case CardRenderItemType.CATHEDRAL:

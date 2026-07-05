@@ -635,6 +635,7 @@ input[type="radio"]:checked+.filterDiv::after {
   text-align: center;
   margin: 5px 5px 10px 5px;
   filter: drop-shadow(0px 0px 1px black);
+  // Every background image tile overrides this.
   background-image: url(./assets/tiles/empty.png);
 }
 
@@ -657,32 +658,12 @@ input[type="radio"]:checked+.filterDiv::after {
   filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
 }
 
-.empty-tile--S {
+.empty-tile {
   background-image: url(./assets/tiles/empty.png);
-  width: 30px;
-  height: 32px;
-  background-size: 30px 32px;
-}
-
-.empty-tile--M {
-  background-image: url(./assets/tiles/empty.png);
-  width: 40px;
-  height: 47px;
-  background-size: 40px 47px;
 }
 
 .special-tile {
   background-image: url(./assets/tiles/special.png);
-  width: 40px;
-  height: 47px;
-  background-size: 40px;
-}
-
-.special-tile--S {
-  background-image: url(./assets/tiles/special.png);
-  width: 30px;
-  height: 32px;
-  background-size: 30px 32px;
 }
 
 .oxygen-tile {
@@ -701,9 +682,6 @@ input[type="radio"]:checked+.filterDiv::after {
 
 .city-or-special-tile {
   background-image: url(./assets/promo/city-or-special-tile.png);
-  width: 40px;
-  height: 47px;
-  background-size: 40px;
 }
 
 .rating {

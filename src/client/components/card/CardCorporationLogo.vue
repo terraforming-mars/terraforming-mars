@@ -146,6 +146,9 @@
       <template v-else-if="title === CardName.ATHENA">
         <div class="card-athena-logo">Athena</div>
       </template>
+      <template v-else-if="title === CardName.HOTSPRINGS">
+        <div class="card-hotsprings-logo">Hotsprings</div>
+      </template>
       <template v-else-if="title === CardName.CELESTIC">
         <div class="card-celestic-logo">
           <span
@@ -684,6 +687,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.HECATE_SPEDITIONS]: 'bespoke',
   [CardName.HELION]: 'css',
   [CardName.HENKEI_GENETICS]: 'bespoke',
+  [CardName.HOTSPRINGS]: 'bespoke',
   [CardName.INCITE]: 'bespoke',
   [CardName.INTERPLANETARY_CINEMATICS]: 'bespoke',
   [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',

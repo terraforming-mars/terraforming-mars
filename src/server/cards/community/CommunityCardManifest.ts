@@ -8,6 +8,7 @@ import {CuriosityII} from './CuriosityII';
 import {Eris} from './Eris';
 import {ExecutiveOrder} from './ExecutiveOrder';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {Hotsprings} from './Hotsprings';
 import {Incite} from './Incite';
 import {JunkVentures} from './JunkVentures';
 import {LeadershipSummit} from './LeadershipSummit';
@@ -27,9 +28,10 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   corporationCards: {
     [CardName.AEROTECH]: {Factory: Aerotech},
     [CardName.AGRICOLA_INC]: {Factory: AgricolaInc},
-    [CardName.PROJECT_WORKSHOP]: {Factory: ProjectWorkshop},
+    [CardName.HOTSPRINGS]: {Factory: Hotsprings},
     [CardName.INCITE]: {Factory: Incite, compatibility: 'turmoil'},
     [CardName.PLAYWRIGHTS]: {Factory: Playwrights},
+    [CardName.PROJECT_WORKSHOP]: {Factory: ProjectWorkshop},
     [CardName.CURIOSITY_II]: {Factory: CuriosityII},
     [CardName.MIDAS]: {Factory: Midas},
     [CardName.UNITED_NATIONS_MISSION_ONE]: {Factory: UnitedNationsMissionOne},

@@ -586,6 +586,7 @@ export enum CardName {
   AEROTECH = 'Aerotech',
   AGRICOLA_INC = 'Agricola Inc',
   CURIOSITY_II = 'Curiosity II',
+  HOTSPRINGS = 'Hotsprings',
   INCITE = 'Incite',
   MIDAS = 'Midas',
   PLAYWRIGHTS = 'Playwrights',

@@ -28,7 +28,7 @@ placement bonus, granting the corresponding production) Robotic Workforce will c
 * When copying "Medical Lab" [79], you recount your current number of building tags when you play "Robotic Workforce" and increase your MC production accordingly (in which case you may gain more production than when you originally played "Medical Lab" [79]).`,
 
   [CardName.BOTANICAL_EXPERIENCE]:
-`Botanical Experience has the following text: "Players may remove your plants, but you only lose half, rounded up." It is not clear whether  this means:
+`Botanical Experience has the following text: "Players may remove your plants, but you only lose half, rounded up." It is not clear whether this means:
 1. Half your plants are protected or
 2. The event does half of its damage.
 
@@ -36,14 +36,14 @@ The decision is to go with 2 - the effect is reduced by half.`,
 
   [CardName.LUNA_ECUMENOPOLIS]: `This is a tricky card to understand, but it goes like this: you'll wind up placing two colony tiles. The first one has to be next to two colony tiles _already on The Moon._ The second one has to be next to two colony tiles, one of which could be the one you already placed.`,
 
-  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: `This card has an extra action for turning 3 resource cubes into a TR. The reason for this seemingly obvious action is to account for the outside case that a player can't accord to raise their TR when playing Turmoil because the Reds are in power.`,
+  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: `This card has an extra action for turning 3 resource cubes into a TR. The reason for this seemingly obvious action is to account for the outside case that a player can't afford to raise their TR when playing Turmoil because the Reds are in power.`,
 
   [CardName.SAGITTA_FRONTIER_SERVICES]:
 `*  Event tags count as tags for Sagitta Frontier Services [ref](https://boardgamegeek.com/thread/3154781/article/42964845#42964845)
 *  Wild tags do not count for Sagitta Frontier Services. [ref](https://boardgamegeek.com/thread/2031069/article/43202892#43202892)`,
 
   [CardName.PRICE_WARS]:
-`Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the effect ongoing effect is also removed from play. It is strange for an event to have a generational effect.
+`Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the ongoing effect is also removed from play. It is strange for an event to have a generational effect.
 
 That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Workers and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.`,
 

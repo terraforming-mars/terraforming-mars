@@ -16,7 +16,6 @@ export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants
 const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
 
 export class PostgreSQL implements IDatabase {
-  private databaseName: string | undefined = undefined; // Use this only for stats.
   protected trimCount = POSTGRES_TRIM_COUNT;
 
   protected statistics = {
@@ -43,17 +42,6 @@ export class PostgreSQL implements IDatabase {
         // heroku uses self-signed certificates
         rejectUnauthorized: false,
       };
-    }
-
-    if (config.database) {
-      this.databaseName = config.database;
-    } else if (config.connectionString) {
-      try {
-        // Remove leading / from pathname.
-        this.databaseName = new URL(config.connectionString).pathname.replace(/^\//, '');
-      } catch (e) {
-        console.log(e);
-      }
     }
   }
 
@@ -261,6 +249,8 @@ export class PostgreSQL implements IDatabase {
       console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
       const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
       console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+      const deleteGameResult = await this.client.query('DELETE FROM game WHERE game_id = ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteGameResult.rowCount} rows from game`);
     }
     return gameIds;
   }
@@ -402,7 +392,8 @@ export class PostgreSQL implements IDatabase {
     };
 
     const columns = POSTGRESQL_TABLES.map((table_name) => `pg_size_pretty(pg_total_relation_size('${table_name}')) as ${table_name}_size`);
-    const dbsizes = await this.client.query(`SELECT ${columns.join(', ')}, pg_size_pretty(pg_database_size('${this.databaseName}')) as db_size`);
+    const sql = `SELECT ${columns.join(', ')}, pg_size_pretty(pg_database_size(current_database())) as db_size`;
+    const dbsizes = await this.client.query(sql);
 
     function varz(x: string) {
       return x.replaceAll('_', '-');
@@ -424,6 +415,14 @@ export class PostgreSQL implements IDatabase {
     for (const table of POSTGRESQL_TABLES) {
       const result = await this.client.query('select count(*) as rowcount from ' + table);
       map['rows-' + varz(table)] = result.rows[0].rowcount;
+    }
+
+    // Rows with no matching game_id in `games` — these are unreachable via getGame()/getGameVersion()
+    // and are safe to delete.
+    for (const table of ['participants', 'game']) {
+      const result = await this.client.query(
+        `select count(*) as rowcount from ${table} t where not exists (select 1 from games where games.game_id = t.game_id)`);
+      map['orphaned-rows-' + varz(table)] = result.rows[0].rowcount;
     }
     return map;
   }

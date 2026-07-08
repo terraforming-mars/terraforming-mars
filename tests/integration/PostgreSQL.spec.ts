@@ -101,6 +101,12 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<QueryResult<any>> {
     return this.client.query('UPDATE completed_game SET completed_time = to_timestamp($1) WHERE game_id = $2', [timestampSeconds, gameId]);
   }
+
+  // Simulates an orphaned row: deletes every `games` row for a game while leaving its
+  // `game` and `participants` rows behind.
+  public async deleteGamesRows(gameId: GameId): Promise<void> {
+    await this.client.query('DELETE FROM games WHERE game_id = $1', [gameId]);
+  }
 }
 
 describeDatabaseSuite({
@@ -118,6 +124,8 @@ describeDatabaseSuite({
     'rows-game-results': '0',
     'rows-games': '0',
     'rows-participants': '0',
+    'orphaned-rows-game': '0',
+    'orphaned-rows-participants': '0',
     'size-bytes-games': 'any',
     'size-bytes-game-results': 'any',
     'size-bytes-database': 'any',
@@ -638,6 +646,22 @@ describeDatabaseSuite({
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members(range(20));
+    });
+
+    it('stats - orphaned rows', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-orphan', [player], player, 'spectatorid');
+      await db.lastSaveGamePromise;
+
+      expect(await db.getStat('orphaned-rows-game')).eq('0');
+      expect(await db.getStat('orphaned-rows-participants')).eq('0');
+
+      // Delete the `games` rows directly, leaving `game` and `participants` behind orphaned.
+      await db.deleteGamesRows(game.id);
+
+      expect(await db.getStat('orphaned-rows-game')).eq('1');
+      expect(await db.getStat('orphaned-rows-participants')).eq('1');
     });
 
     it('trim at -1', async () => {

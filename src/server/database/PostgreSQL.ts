@@ -1,3 +1,4 @@
+import prometheus from 'prom-client';
 import pg from 'pg';
 import {IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
@@ -9,12 +10,49 @@ import {GameIdLedger} from './IDatabase';
 import {Session, SessionId} from '../auth/Session';
 import {toID} from '../../common/utils/utils';
 import {databaseMetrics, withDatabaseMetrics} from './MetricsDelegate';
+import {ThrottledCache} from './ThrottledCache';
+import {Clock} from '@/common/Timer';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
 export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game', 'session'] as const;
 
 const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
+
+// How often the (expensive) table/database size stats are actually recomputed. Scrapes that land
+// between refreshes just get the cached values.
+const SIZE_STATS_COLLECTION_INTERVAL_MS = 5 * 60_000;
+
+let activeDatabase: PostgreSQL | undefined;
+
+const metrics = {
+  tableSizeBytes: new prometheus.Gauge({
+    name: 'postgresql_table_size_bytes',
+    help: 'Total size (table + indexes) of a PostgreSQL table, in bytes',
+    labelNames: ['table'],
+    registers: [prometheus.register],
+    collect() {
+      activeDatabase?.metricsScrapeCache.get();
+    },
+  }),
+  databaseSizeBytes: new prometheus.Gauge({
+    name: 'postgresql_database_size_bytes',
+    help: 'Size of the PostgreSQL database, in bytes',
+    registers: [prometheus.register],
+    collect() {
+      activeDatabase?.metricsScrapeCache.get();
+    },
+  }),
+  tableRows: new prometheus.Gauge({
+    name: 'postgresql_table_rows',
+    help: 'Row count of a PostgreSQL table (select count(*))',
+    labelNames: ['table'],
+    registers: [prometheus.register],
+    collect() {
+      activeDatabase?.metricsScrapeCache.get();
+    },
+  }),
+};
 
 export class PostgreSQL implements IDatabase {
   protected trimCount = POSTGRES_TRIM_COUNT;
@@ -25,6 +63,8 @@ export class PostgreSQL implements IDatabase {
     saveConflictUndoCount: 0,
     saveConflictNormalCount: 0,
   };
+  public metricsScrapeCache: ThrottledCache<void>;
+
   private _client: pg.Pool | undefined;
 
   protected get client(): pg.Pool {
@@ -44,6 +84,12 @@ export class PostgreSQL implements IDatabase {
         rejectUnauthorized: false,
       };
     }
+    this.metricsScrapeCache = new ThrottledCache(
+      new Clock(),
+      SIZE_STATS_COLLECTION_INTERVAL_MS,
+      () => this.collectSizeStats());
+
+    activeDatabase = this;
   }
 
   public async initialize(): Promise<void> {
@@ -413,30 +459,8 @@ export class PostgreSQL implements IDatabase {
       'save-conflict-undo-count': this.statistics.saveConflictUndoCount,
     };
 
-    const columns = POSTGRESQL_TABLES.map((table_name) => `pg_size_pretty(pg_total_relation_size('${table_name}')) as ${table_name}_size`);
-    const sql = `SELECT ${columns.join(', ')}, pg_size_pretty(pg_database_size(current_database())) as db_size`;
-    const dbsizes = await this.client.query(sql);
-
     function varz(x: string) {
       return x.replaceAll('_', '-');
-    }
-
-    POSTGRESQL_TABLES.forEach((table) => map['size-bytes-' + varz(table)] = dbsizes.rows[0][table + '_size']);
-    map['size-bytes-database'] = dbsizes.rows[0].db_size;
-
-    // Using count(*) is inefficient, but the estimates from here
-    // https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
-    // seem wildly inaccurate.
-    //
-    // heroku pg:bloat --app terraforming-mars
-    // shows some bloat
-    // and the postgres command
-    // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
-    // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
-    // in testing. :fingers-crossed:
-    for (const table of POSTGRESQL_TABLES) {
-      const result = await this.client.query('select count(*) as rowcount from ' + table);
-      map['rows-' + varz(table)] = result.rows[0].rowcount;
     }
 
     // Rows with no matching game_id in `games` — these are unreachable via getGame()/getGameVersion()
@@ -447,6 +471,40 @@ export class PostgreSQL implements IDatabase {
       map['orphaned-rows-' + varz(table)] = result.rows[0].rowcount;
     }
     return map;
+  }
+
+  // The actual (expensive) size-stat queries: table/index sizes, database size, and row counts.
+  // Throttled by collectSizeStatsIfStale() above; not intended to be called directly elsewhere.
+  private collectSizeStats(): Promise<void> {
+    if (this._client === undefined) {
+      return Promise.resolve();
+    }
+
+    return withDatabaseMetrics('collectSizeStats', async () => {
+      const columns = POSTGRESQL_TABLES.map((table) => `pg_total_relation_size('${table}') as ${table}_size`);
+      const sql = `SELECT ${columns.join(', ')}, pg_database_size(current_database()) as db_size`;
+      const result = await this.client.query(sql);
+      const row = result.rows[0];
+      POSTGRESQL_TABLES.forEach((table) => {
+        metrics.tableSizeBytes.set({table}, Number(row[`${table}_size`]));
+      });
+      metrics.databaseSizeBytes.set(Number(row.db_size));
+
+      // Using count(*) is inefficient, but the estimates from here
+      // https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
+      // seem wildly inaccurate.
+      //
+      // heroku pg:bloat --app terraforming-mars
+      // shows some bloat
+      // and the postgres command
+      // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
+      // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
+      // in testing. :fingers-crossed:
+      for (const table of POSTGRESQL_TABLES) {
+        const result = await this.client.query(`select count(*) as rowcount from ${table}`);
+        metrics.tableRows.set({table}, Number(result.rows[0].rowcount));
+      }
+    });
   }
 
   public async createSession(session: Session): Promise<void> {

@@ -44,16 +44,6 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
 
   public override async stats(): Promise<{[key: string]: string | number}> {
     const response = await super.stats();
-    response['size-bytes-games'] = 'any';
-    response['size-bytes-game-results'] = 'any';
-    response['size-bytes-database'] = 'any';
-    response['size-bytes-participants'] = 'any';
-
-    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game', 'rows-session', 'size-bytes-session'];
-    for (const field of extraFields) {
-      expect(response[field], 'For ' + field).is.not.undefined;
-      delete response[field];
-    }
     return response;
   }
 
@@ -121,19 +111,12 @@ describeDatabaseSuite({
     'pool-total-count': 1,
     'pool-idle-count': 1,
     'pool-waiting-count': 0,
-    'rows-game-results': '0',
-    'rows-games': '0',
-    'rows-participants': '0',
     'orphaned-rows-game': '0',
     'orphaned-rows-participants': '0',
-    'size-bytes-games': 'any',
-    'size-bytes-game-results': 'any',
-    'size-bytes-database': 'any',
     'save-conflict-normal-count': 0,
     'save-conflict-undo-count': 0,
     'save-count': 0,
     'save-error-count': 0,
-    'size-bytes-participants': 'any',
   },
 
   otherTests: (dbFactory: () => TestPostgreSQL) => {

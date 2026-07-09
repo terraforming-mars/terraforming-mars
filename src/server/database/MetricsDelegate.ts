@@ -14,6 +14,7 @@ const MAINTENANCE_OPERATIONS: ReadonlySet<string> = new Set([
   'compressCompletedGames',
   'compressCompletedGame',
   'trim',
+  'collectSizeStats',
 ]);
 
 // Shared across every IDatabase backend: applied generically below for whatever crosses the

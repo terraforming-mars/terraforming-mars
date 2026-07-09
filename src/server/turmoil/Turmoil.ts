@@ -99,7 +99,7 @@ export class Turmoil {
 
   public static getTurmoil(game: IGame): Turmoil {
     if (game.turmoil === undefined) {
-      throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
+      throw new Error(`Assertion failure: game.turmoil not defined for ${game.id}`);
     }
     return game.turmoil;
   }
@@ -107,7 +107,7 @@ export class Turmoil {
   public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -117,7 +117,7 @@ export class Turmoil {
   public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }

@@ -8,6 +8,7 @@ import {daysAgoToSeconds, stringToNumber} from './utils';
 import {GameIdLedger} from './IDatabase';
 import {Session, SessionId} from '../auth/Session';
 import {toID} from '../../common/utils/utils';
+import {databaseMetrics, withDatabaseMetrics} from './MetricsDelegate';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
@@ -204,18 +205,29 @@ export class PostgreSQL implements IDatabase {
     return this.compose(row.game, row.log, row.options);
   }
 
+  // Not part of IDatabase: void/callback-based, so MetricsDelegate can't observe its completion or
+  // errors the way it can for Promise-returning methods. Instrumented directly here instead.
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+    const operation = 'saveGameResults';
+    const startMs = Date.now();
+    databaseMetrics.operationCount.inc({operation});
     this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [gameId, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
+      databaseMetrics.operationLatency.observe({operation}, Date.now() - startMs);
       if (err) {
+        databaseMetrics.operationErrors.inc({operation});
         console.error('PostgreSQL:saveGameResults', err);
         throw err;
       }
     });
   }
 
-  async getMaxSaveId(gameId: GameId): Promise<number> {
-    const res = await this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [gameId]);
-    return res.rows[0].save_id;
+  // Not part of IDatabase: a PostgreSQL-only helper, invisible to MetricsDelegate. Instrumented
+  // directly here instead.
+  getMaxSaveId(gameId: GameId): Promise<number> {
+    return withDatabaseMetrics('getMaxSaveId', async () => {
+      const res = await this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [gameId]);
+      return res.rows[0].save_id;
+    });
   }
 
   throwIf(err: any, condition: string) {
@@ -274,10 +286,14 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async compressCompletedGame(gameId: GameId): Promise<void> {
-    const maxSaveId = await this.getMaxSaveId(gameId);
-    await this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId]);
-    await this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
+  // Not part of IDatabase (only the batch compressCompletedGames is), invisible to MetricsDelegate.
+  // Instrumented directly here instead, so per-game maintenance latency isn't lost inside the batch.
+  compressCompletedGame(gameId: GameId): Promise<void> {
+    return withDatabaseMetrics('compressCompletedGame', async () => {
+      const maxSaveId = await this.getMaxSaveId(gameId);
+      await this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId]);
+      await this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
+    });
   }
 
   async saveGame(game: IGame): Promise<void> {
@@ -342,21 +358,27 @@ export class PostgreSQL implements IDatabase {
     } catch (err) {
       await this.client.query('ROLLBACK');
       this.statistics.saveErrorCount++;
+      // saveGame deliberately never rejects (see below), so MetricsDelegate's generic wrapper never
+      // sees this error. It's the only way this operation's error count gets recorded.
+      databaseMetrics.operationErrors.inc({operation: 'saveGame'});
       console.error('PostgreSQL:saveGame', err);
     }
     this.trim(game);
   }
 
-  private async trim(game: IGame) {
-    if (this.trimCount <= 0) {
-      return;
-    }
-    if (game.lastSaveId % this.trimCount === 0) {
-      const maxSaveId = game.lastSaveId - this.trimCount;
-      await this.client.query(
-        'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
-    }
-    return Promise.resolve();
+  // Not part of IDatabase, invisible to MetricsDelegate, and invoked fire-and-forget (not awaited) by
+  // saveGame above. Instrumented directly here instead.
+  private trim(game: IGame) {
+    return withDatabaseMetrics('trim', async () => {
+      if (this.trimCount <= 0) {
+        return;
+      }
+      if (game.lastSaveId % this.trimCount === 0) {
+        const maxSaveId = game.lastSaveId - this.trimCount;
+        await this.client.query(
+          'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
+      }
+    });
   }
 
   async deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {

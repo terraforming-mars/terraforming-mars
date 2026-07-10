@@ -39,6 +39,7 @@ describeDatabaseSuite({
   omit: {
     purgeUnfinishedGames: true,
     moreCleaning: true,
+    storeParticipants: true,
   },
   stats: {
     type: 'InMemoryDatabase',

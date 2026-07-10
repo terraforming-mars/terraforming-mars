@@ -7,7 +7,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
 import {testGame} from '../TestGame';
-import {GameId} from '../../src/common/Types';
+import {GameId, ParticipantId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';
 import {cast} from '@/common/utils/utils';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
@@ -45,6 +45,7 @@ export type DatabaseTestDescriptor<T extends ITestDatabase> = {
     markFinished: boolean,
     moreCleaning: boolean,
     sessions: boolean,
+    storeParticipants: boolean,
   }>,
   otherTests?(dbFactory: () => T): void,
 };
@@ -337,6 +338,27 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
         },
       ]);
     });
+
+    if (dtor.omit?.storeParticipants !== true) {
+      it('storeParticipants', async () => {
+        const gameId: GameId = 'g-dup';
+        const participantIds: Array<ParticipantId> = ['p-player1', 'p-player2'];
+
+        await db.storeParticipants({gameId, participantIds});
+
+        expect(await db.getParticipants()).deep.eq([{gameId, participantIds}]);
+      });
+
+      it('storeParticipants is reentrant', async () => {
+        const gameId: GameId = 'g-dup';
+        const participantIds: Array<ParticipantId> = ['p-player1', 'p-player2'];
+
+        await db.storeParticipants({gameId, participantIds});
+        await db.storeParticipants({gameId, participantIds});
+
+        expect(await db.getParticipants()).deep.eq([{gameId, participantIds}]);
+      });
+    }
 
     it('getGameId by PlayerID and Spectator ID', async () => {
       testGame(2, {}, '1');

@@ -14,6 +14,8 @@ export class Cache extends EventEmitter {
 
   /** Map of game IDs and the time they were scheduled for eviction */
   private readonly evictionSchedule: Map<GameId, number> = new Map();
+  /** Map of resident game IDs and the last time each was accessed. */
+  private readonly lastAccess: Map<GameId, number> = new Map();
   private readonly config: CacheConfig;
   private readonly clock: Clock;
 
@@ -57,6 +59,20 @@ export class Cache extends EventEmitter {
     this.evictionSchedule.set(gameId, this.clock.now() + this.config.evictMillis);
   }
 
+  /** Records that `gameId` was just accessed, resetting its idle time. */
+  public touch(gameId: GameId) {
+    this.lastAccess.set(gameId, this.clock.now());
+  }
+
+  /**
+   * Returns the time in milliseconds since `gameId` was last accessed, or
+   * undefined if the game is not resident in memory.
+   */
+  public idleTimeMillis(gameId: GameId): number | undefined {
+    const last = this.lastAccess.get(gameId);
+    return last === undefined ? undefined : this.clock.now() - last;
+  }
+
   public sweep() {
     console.log('Starting sweep');
     const now = this.clock.now();
@@ -78,6 +94,7 @@ export class Cache extends EventEmitter {
     }
     game.players.forEach((p) => p.tearDown());
     this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
+    this.lastAccess.delete(gameId);
   }
 
   public countLoadedGames(): number {

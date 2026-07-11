@@ -94,10 +94,19 @@ export class GameLoader implements IGameLoader {
     this.cache.load();
   }
 
+  /**
+   * Returns the time in milliseconds since `gameId` was last accessed, or
+   * undefined if the game is not resident in memory.
+   */
+  public idleTimeMillis(gameId: GameId): number | undefined {
+    return this.cache.idleTimeMillis(gameId);
+  }
+
   public async add(game: IGame): Promise<void> {
     const d = await this.cache.getGames();
     const isNew = !d.games.has(game.id);
     d.games.set(game.id, game);
+    this.cache.touch(game.id);
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
     }
@@ -131,6 +140,7 @@ export class GameLoader implements IGameLoader {
 
     // 1. Check the cache as long as forceLoad isn't true.
     if (forceLoad === false && d.games.get(gameId) !== undefined) {
+      this.cache.touch(gameId);
       return d.games.get(gameId);
     }
 

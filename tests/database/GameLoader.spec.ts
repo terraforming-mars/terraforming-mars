@@ -169,6 +169,33 @@ describe('GameLoader', () => {
     ]);
   });
 
+  it('tracks last access time', async () => {
+    // A game that isn't resident has no last-access time.
+    expect(await instance.isCached('gameid')).is.false;
+    expect(instance.idleTimeMillis('gameid')).is.undefined;
+
+    // Loading the game records the access time.
+    clock.millis = 1000;
+    await instance.getGame('gameid');
+    expect(await instance.isCached('gameid')).is.true;
+    expect(instance.idleTimeMillis('gameid')).eq(0);
+
+    // As time passes, the idle time grows.
+    clock.millis = 1250;
+    expect(instance.idleTimeMillis('gameid')).eq(250);
+
+    // Accessing the resident game again resets the idle time.
+    await instance.getGame('gameid');
+    expect(instance.idleTimeMillis('gameid')).eq(0);
+
+    // Evicting the game drops its last-access time.
+    instance.mark('gameid');
+    clock.millis = 4000; // advance well past evictMillis (100)
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.false;
+    expect(instance.idleTimeMillis('gameid')).is.undefined;
+  });
+
   it('evicts finished game', async () => {
     const ids = await instance.getIds();
     expect(ids).deep.eq(

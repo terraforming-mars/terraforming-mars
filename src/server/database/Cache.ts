@@ -19,6 +19,10 @@ export class Cache extends EventEmitter {
   private readonly config: CacheConfig;
   private readonly clock: Clock;
 
+  // Idle eviction only unloads barely-played games; one with more than this many
+  // saves is considered established and is kept resident even when idle.
+  private static readonly MAX_SAVES_FOR_IDLE_EVICTION = 3;
+
   constructor(config: CacheConfig, clock: Clock) {
     super();
     this.config = config;
@@ -73,17 +77,15 @@ export class Cache extends EventEmitter {
     return last === undefined ? undefined : this.clock.now() - last;
   }
 
+  /**
+   * Evicts games that are due for eviction: those scheduled by mark() and those
+   * idle past the threshold.
+   */
   public sweep(): void {
     console.log('Starting sweep');
-    const now = this.clock.now();
-    const toEvict = new Set<GameId>();
-    for (const [gameId, evictionTimeMillis] of this.evictionSchedule.entries()) {
-      if (evictionTimeMillis <= now) {
-        toEvict.add(gameId);
-      }
-    }
+    const toEvict = this.gamesToEvict();
     for (const gameId of toEvict) {
-      console.log(`evicting ${gameId}`);
+      console.log('evicting', gameId);
       this.evict(gameId);
       this.evictionSchedule.delete(gameId);
     }
@@ -91,6 +93,34 @@ export class Cache extends EventEmitter {
       this.emit('evicted', toEvict.size);
     }
     console.log('Finished sweep');
+  }
+
+  /** The ids of games due for eviction: those scheduled by mark() and those idle past the threshold. */
+  private gamesToEvict(): Set<GameId> {
+    const now = this.clock.now();
+    const toEvict = new Set<GameId>();
+    for (const [gameId, evictionTimeMillis] of this.evictionSchedule.entries()) {
+      if (evictionTimeMillis <= now) {
+        toEvict.add(gameId);
+      }
+    }
+    // Abandoned games: resident but idle past the threshold.
+    if (this.config.idleMillis > 0) {
+      for (const [gameId, game] of this.games) {
+        if (game === undefined) {
+          continue;
+        }
+        // Only solo games are idle-evicted with few saves are evicted.
+        if (game.players.length > 1 || game.lastSaveId > Cache.MAX_SAVES_FOR_IDLE_EVICTION) {
+          continue;
+        }
+        const last = this.lastAccess.get(gameId);
+        if (last !== undefined && now - last > this.config.idleMillis) {
+          toEvict.add(gameId);
+        }
+      }
+    }
+    return toEvict;
   }
 
   private evict(gameId: GameId) {

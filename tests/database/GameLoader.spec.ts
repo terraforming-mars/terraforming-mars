@@ -5,7 +5,7 @@ import {Player} from '../../src/server/Player';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {TestPlayer} from '../TestPlayer';
 import {GameIdLedger} from '../../src/server/database/IDatabase';
-import {GameId, PlayerId} from '../../src/common/Types';
+import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
 import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../testing/setup';
 import {sleep} from '../TestingUtils';
 import {InMemoryDatabase} from '../testing/InMemoryDatabase';
@@ -43,7 +43,7 @@ describe('GameLoader', () => {
 
   beforeEach(() => {
     clock = new FakeClock();
-    instance = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, sweep: 'manual'}, clock);
+    instance = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, idleMillis: 1000, sweep: 'manual'}, clock);
     setTestGameLoader(instance);
     database = new TestDatabase();
     setTestDatabase(database);
@@ -263,6 +263,94 @@ describe('GameLoader', () => {
 
     // The game is unloaded from memory; it will lazily reload from the DB.
     expect(await instance.isCached('gameid')).is.false;
+  });
+
+  // Idle eviction only targets solo games; the shared `gameid` is multiplayer.
+  function addSoloGame(id: GameId): void {
+    const soloPlayer = new Player('solo', 'blue', false, 0, ('p-' + id) as PlayerId);
+    Game.newInstance(id, [soloPlayer], soloPlayer, ('s' + id) as SpectatorId);
+  }
+
+  it('evicts a solo game idle past the threshold', async () => {
+    addSoloGame('gsolo');
+    instance.resetForTesting();
+
+    clock.millis = 1000;
+    await instance.getGame('gsolo');
+    expect(await instance.isCached('gsolo')).is.true;
+
+    // Idle for exactly idleMillis (1000) is not past the threshold.
+    clock.millis = 2000;
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.true;
+
+    // One millisecond more and it's evicted.
+    clock.millis = 2001;
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.false;
+  });
+
+  it('keeps a solo game accessed within the threshold', async () => {
+    addSoloGame('gsolo');
+    instance.resetForTesting();
+
+    clock.millis = 1000;
+    await instance.getGame('gsolo');
+
+    clock.millis = 1500; // idle 500ms, under idleMillis (1000)
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.true;
+  });
+
+  it('accessing a solo game resets its idle time', async () => {
+    addSoloGame('gsolo');
+    instance.resetForTesting();
+
+    clock.millis = 1000;
+    await instance.getGame('gsolo');
+
+    // Nearly idle, then accessed again, which resets the idle clock.
+    clock.millis = 1900;
+    await instance.getGame('gsolo');
+
+    clock.millis = 2800; // 900ms since the last access, still under the threshold
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.true;
+  });
+
+  it('does not evict idle games when idle eviction is disabled', async () => {
+    addSoloGame('gsolo');
+    const noIdle = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, idleMillis: 0, sweep: 'manual'}, clock);
+    noIdle.resetForTesting();
+
+    clock.millis = 1000;
+    await noIdle.getGame('gsolo');
+
+    clock.millis = 100000; // far past any threshold
+    noIdle.sweep();
+    expect(await noIdle.isCached('gsolo')).is.true;
+  });
+
+  it('does not idle-evict a solo game that is not abandoned', async () => {
+    addSoloGame('gsolo');
+    instance.resetForTesting();
+
+    clock.millis = 1000;
+    const loaded = await instance.getGame('gsolo');
+    loaded!.lastSaveId = 4; // more than MAX_SAVES_FOR_IDLE_EVICTION (3)
+
+    clock.millis = 100000; // far past the idle threshold
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.true;
+  });
+
+  it('does not idle-evict a multiplayer game', async () => {
+    clock.millis = 1000;
+    await instance.getGame('gameid'); // gameid is a 2-player game
+
+    clock.millis = 100000; // far past the idle threshold
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
   });
 
   it('restoreGameAt', async () => {

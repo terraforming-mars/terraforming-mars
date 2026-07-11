@@ -253,6 +253,7 @@ function parseConfigString(stringValue: string): CacheConfig {
     sweep: 'manual', // default is manual
     evictMillis: durationToMilliseconds('15m'),
     sleepMillis: durationToMilliseconds('5m'),
+    idleMillis: durationToMilliseconds('1h'),
   };
   const parsed = Object.fromEntries((stringValue ?? '').split(';').map((s) => s.split('=', 2)));
   if (parsed.sweep === 'auto' || parsed.sweep === 'manual') {
@@ -267,6 +268,11 @@ function parseConfigString(stringValue: string): CacheConfig {
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
   if (!isNaN(sleepMillis)) {
     options.sleepMillis = sleepMillis;
+  }
+  // Set idle_age=0s to disable idle eviction; a bare 0 parses to NaN and is ignored.
+  const idleMillis = durationToMilliseconds(parsed.idle_age);
+  if (!isNaN(idleMillis)) {
+    options.idleMillis = idleMillis;
   }
   return options;
 }

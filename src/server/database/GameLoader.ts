@@ -48,6 +48,15 @@ const metrics = {
       this.set(GameLoader.getLoadedGameCount());
     },
   }),
+  idleTime: new prometheus.Gauge({
+    name: 'games_idle_time_seconds',
+    help: 'Point-in-time distribution of idle time (seconds since last access) across games resident in memory, as cumulative histogram-style buckets. This is a snapshot gauge, not a cumulative histogram.',
+    labelNames: ['le'],
+    registers: [prometheus.register],
+    collect() {
+      GameLoader.collectIdleTimes(this);
+    },
+  }),
 };
 
 /**
@@ -66,6 +75,7 @@ export class GameLoader implements IGameLoader {
     this.config = config;
     this.clock = clock;
     this.cache = new Cache(config, clock);
+    this.cache.on('evicted', (count: number) => metrics.evictions.inc(count));
     this.purgedGames = [];
     timeAsync(this.cache.load())
       .then((v) => {
@@ -87,6 +97,22 @@ export class GameLoader implements IGameLoader {
 
   public static getLoadedGameCount(): number {
     return GameLoader.instance?.cache.countLoadedGames() ?? 0;
+  }
+
+  public static getIdleTimes(): Array<number> {
+    const loader = GameLoader.getInstance();
+    return loader instanceof GameLoader ? loader.cache.idleTimes() : [];
+  }
+
+  // Populates `gauge` with the cumulative histogram-style distribution of
+  // resident-game idle time (seconds since last access) across fixed buckets.
+  public static collectIdleTimes(gauge: prometheus.Gauge<'le'>): void {
+    const bucketBoundsSeconds = [60, 300, 900, 1800, 3600, 10800, 21600, 86400, Infinity];
+    const idleSeconds = GameLoader.getIdleTimes().map((millis) => millis / 1000);
+    for (const le of bucketBoundsSeconds) {
+      const count = idleSeconds.filter((seconds) => seconds <= le).length;
+      gauge.set({le: le === Infinity ? '+Inf' : String(le)}, count);
+    }
   }
 
   public resetForTesting(): void {
@@ -189,7 +215,7 @@ export class GameLoader implements IGameLoader {
     this.cache.mark(gameId);
   }
 
-  public sweep() {
+  public sweep(): void {
     this.cache.sweep();
   }
 

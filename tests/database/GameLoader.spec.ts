@@ -196,6 +196,26 @@ describe('GameLoader', () => {
     expect(instance.idleTimeMillis('gameid')).is.undefined;
   });
 
+  it('reports idle times for resident games', async () => {
+    // No resident games, no idle times.
+    expect(GameLoader.getIdleTimes()).is.empty;
+
+    // A resident game reports zero idle time when just accessed.
+    clock.millis = 1000;
+    await instance.getGame('gameid');
+    expect(GameLoader.getIdleTimes()).deep.eq([0]);
+
+    // The idle time grows with the clock.
+    clock.millis = 1600;
+    expect(GameLoader.getIdleTimes()).deep.eq([600]);
+
+    // Evicted games drop out of the reported idle times.
+    instance.mark('gameid');
+    clock.millis = 4000;
+    instance.sweep();
+    expect(GameLoader.getIdleTimes()).is.empty;
+  });
+
   it('evicts finished game', async () => {
     const ids = await instance.getIds();
     expect(ids).deep.eq(
@@ -226,6 +246,22 @@ describe('GameLoader', () => {
 
     clock.millis = 105;
     instance.sweep();
+    expect(await instance.isCached('gameid')).is.false;
+  });
+
+  it('sweep unloads games that are due for eviction', async () => {
+    await instance.getGame('gameid');
+    expect(await instance.isCached('gameid')).is.true;
+
+    // Nothing is scheduled, so a sweep leaves the game resident.
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+
+    instance.mark('gameid');
+    clock.millis = 200; // advance past evictMillis (100)
+    instance.sweep();
+
+    // The game is unloaded from memory; it will lazily reload from the DB.
     expect(await instance.isCached('gameid')).is.false;
   });
 

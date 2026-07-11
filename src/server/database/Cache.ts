@@ -73,16 +73,22 @@ export class Cache extends EventEmitter {
     return last === undefined ? undefined : this.clock.now() - last;
   }
 
-  public sweep() {
+  public sweep(): void {
     console.log('Starting sweep');
     const now = this.clock.now();
-    for (const entry of this.evictionSchedule.entries()) {
-      if (entry[1] <= now) {
-        const gameId = entry[0];
-        console.log(`evicting ${gameId}`);
-        this.evict(gameId);
-        this.evictionSchedule.delete(gameId);
+    const toEvict = new Set<GameId>();
+    for (const [gameId, evictionTimeMillis] of this.evictionSchedule.entries()) {
+      if (evictionTimeMillis <= now) {
+        toEvict.add(gameId);
       }
+    }
+    for (const gameId of toEvict) {
+      console.log(`evicting ${gameId}`);
+      this.evict(gameId);
+      this.evictionSchedule.delete(gameId);
+    }
+    if (toEvict.size > 0) {
+      this.emit('evicted', toEvict.size);
     }
     console.log('Finished sweep');
   }
@@ -99,6 +105,22 @@ export class Cache extends EventEmitter {
 
   public countLoadedGames(): number {
     return [...this.games.values()].filter((game) => game !== undefined).length;
+  }
+
+  /** Idle time, in milliseconds, of every game currently resident in memory. */
+  public idleTimes(): Array<number> {
+    const now = this.clock.now();
+    const times: Array<number> = [];
+    for (const [gameId, game] of this.games) {
+      if (game === undefined) {
+        continue;
+      }
+      const last = this.lastAccess.get(gameId);
+      if (last !== undefined) {
+        times.push(now - last);
+      }
+    }
+    return times;
   }
 }
 

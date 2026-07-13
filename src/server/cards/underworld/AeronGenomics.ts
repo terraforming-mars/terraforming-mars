@@ -47,7 +47,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.underworldData.tokens.every((t) => t.shelter || t.active)) {
-      this.warnings.add('underworldtokendiscard');
+      this.addWarning('underworldtokendiscard');
     }
     return player.underworldData.tokens.length > 0;
   }

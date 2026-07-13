@@ -34,7 +34,7 @@ export class ArtesianAquifer extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (!player.game.canAddOcean()) {
-      this.warnings.add('maxoceans');
+      this.addWarning('maxoceans');
     }
     return this.availableSpaces(player).length > 0;
   }

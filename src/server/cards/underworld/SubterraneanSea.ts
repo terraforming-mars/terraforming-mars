@@ -38,7 +38,7 @@ export class SubterraneanSea extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (!player.game.canAddOcean()) {
-      this.warnings.add('maxoceans');
+      this.addWarning('maxoceans');
     }
     return this.availableSpaces(player, player.getCardCost(this)).length > 0;
   }

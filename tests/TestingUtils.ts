@@ -193,6 +193,12 @@ class FakeCard implements IProjectCard {
   public metadata = {};
   public resourceCount = 0;
   public tilesBuilt = [];
+  public addWarning(warning: Warning): void {
+    this.warnings.add(warning);
+  }
+  public clearWarnings(): void {
+    this.warnings.clear();
+  }
 }
 
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {

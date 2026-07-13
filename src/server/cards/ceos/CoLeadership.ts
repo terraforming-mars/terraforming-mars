@@ -22,7 +22,7 @@ export class CoLeadership extends PreludeCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (!player.game.ceoDeck.canDraw(3)) {
-      this.warnings.add('deckTooSmall');
+      this.addWarning('deckTooSmall');
     }
     return true;
   }

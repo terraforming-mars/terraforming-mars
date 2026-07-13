@@ -44,7 +44,7 @@ export class KaguyaTech extends Card implements IProjectCard {
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     const availableSpaces = this.availableSpaces(player, canAffordOptions);
     if (availableSpaces.every((space) => space.tile?.tileType !== TileType.GREENERY)) {
-      this.warnings.add('kaguyaTech');
+      this.addWarning('kaguyaTech');
     }
     return availableSpaces.length > 0;
   }

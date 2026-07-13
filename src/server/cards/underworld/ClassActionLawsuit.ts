@@ -41,7 +41,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.isSoloMode()) {
-      this.warnings.add('noEffect');
+      this.addWarning('noEffect');
     } else {
       const analysis = this.analyzeCorruption(player);
       if (analysis.playersWithMaxCorruption.length > 1) {
@@ -49,7 +49,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       }
       if (player.game.players.length > 1) {
         if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
-          this.warnings.add('selfTarget');
+          this.addWarning('selfTarget');
         }
       }
     }

@@ -56,7 +56,7 @@ export class HenkeiGenetics extends CorporationCard implements ICorporationCard,
 
   public canAct(player: IPlayer) {
     if (this.availableCards(player).length === 0) {
-      this.warnings.add('noMatchingCards');
+      this.addWarning('noMatchingCards');
     }
     return player.underworldData.corruption > 0;
   }

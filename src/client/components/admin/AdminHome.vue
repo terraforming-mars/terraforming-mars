@@ -23,6 +23,7 @@ export default defineComponent({
         paths.API_METRICS,
         paths.LOAD,
         paths.API_IPS,
+        paths.API_HEAP_SNAPSHOT,
       ],
     };
   },

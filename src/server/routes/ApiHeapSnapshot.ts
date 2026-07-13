@@ -48,6 +48,8 @@ export class ApiHeapSnapshot extends Handler {
       console.error('ApiHeapSnapshot', err);
       // If piping already started, headers/data may be sent; this is best-effort.
       responses.badRequest(req, res, 'could not create heap snapshot');
+    } finally {
+      console.log('Heap snapshot done');
     }
   }
 }

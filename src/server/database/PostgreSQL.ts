@@ -285,8 +285,9 @@ export class PostgreSQL implements IDatabase {
 
   async markFinished(gameId: GameId): Promise<void> {
     const promise1 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
-    const promise2 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
-    await Promise.all([promise1, promise2]);
+    const promise2 = this.client.query('UPDATE game SET status = \'finished\' WHERE game_id = $1', [gameId]);
+    const promise3 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
+    await Promise.all([promise1, promise2, promise3]);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.

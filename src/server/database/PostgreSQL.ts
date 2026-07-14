@@ -12,6 +12,8 @@ import {toID} from '../../common/utils/utils';
 import {databaseMetrics, withDatabaseMetrics} from './MetricsDelegate';
 import {ThrottledCache} from './ThrottledCache';
 import {Clock} from '@/common/Timer';
+import {parseInterned} from './parseInterned';
+import {LogMessage} from '@/common/logs/LogMessage';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
@@ -174,11 +176,14 @@ export class PostgreSQL implements IDatabase {
   }
 
   private compose(game: string, log: string, options: string): SerializedGame {
-    const stored: StoredSerializedGame = JSON.parse(game);
+    const stored: StoredSerializedGame = parseInterned(game);
     const {logLength, ...remainder} = stored;
-    const gameLog = JSON.parse(log);
+
+    const gameLog: Array<LogMessage> = parseInterned(log);
+    // If this is part of an undo operation, delete the end
+    // of the array so the log matches the length.
     gameLog.length = logLength;
-    const gameOptions = JSON.parse(options);
+    const gameOptions: GameOptions = parseInterned(options);
     return {...remainder, gameOptions, gameLog};
   }
 

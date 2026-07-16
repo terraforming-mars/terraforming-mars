@@ -353,6 +353,81 @@ describe('GameLoader', () => {
     expect(await instance.isCached('gameid')).is.true;
   });
 
+  it('trims the log of a multiplayer game idle past the threshold', async () => {
+    clock.millis = 1000;
+    const loaded = await instance.getGame('gameid'); // gameid is a 2-player game
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+
+    // Idle for exactly idleMillis (1000) is not past the threshold.
+    clock.millis = 2000;
+    instance.sweep();
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+
+    // One millisecond more and the log is trimmed, but the game stays resident.
+    clock.millis = 2001;
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+    expect(loaded!.gameLog.length).eq(0);
+  });
+
+  it('restores a trimmed log from the database on next access', async () => {
+    clock.millis = 1000;
+    const loaded = await instance.getGame('gameid');
+    const originalLog = [...loaded!.gameLog];
+    expect(originalLog.length).is.greaterThan(0);
+
+    clock.millis = 2001;
+    instance.sweep();
+    expect(loaded!.gameLog.length).eq(0);
+
+    // Accessing the resident game reloads its log from the database.
+    const reloaded = await instance.getGame('gameid');
+    expect(reloaded).to.eq(loaded); // same resident object
+    expect(reloaded!.gameLog).deep.eq(originalLog);
+  });
+
+  it('does not trim logs when idle eviction is disabled', async () => {
+    const noIdle = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, idleMillis: 0, sweep: 'manual'}, clock);
+    noIdle.resetForTesting();
+
+    clock.millis = 1000;
+    const loaded = await noIdle.getGame('gameid');
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+
+    clock.millis = 100000; // far past any threshold
+    noIdle.sweep();
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+  });
+
+  it('does not trim the log of a game evicted in the same sweep', async () => {
+    addSoloGame('gsolo');
+    instance.resetForTesting();
+
+    clock.millis = 1000;
+    const loaded = await instance.getGame('gsolo');
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+
+    // Past the idle threshold: a solo game is fully evicted, not log-trimmed.
+    clock.millis = 2001;
+    instance.sweep();
+    expect(await instance.isCached('gsolo')).is.false;
+    // The evicted object keeps its own log; it will reload wholesale from the DB.
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+  });
+
+  it('accessing a game resets its idle time so the log is not trimmed', async () => {
+    clock.millis = 1000;
+    const loaded = await instance.getGame('gameid');
+
+    // Nearly idle, then accessed again, which resets the idle clock.
+    clock.millis = 1900;
+    await instance.getGame('gameid');
+
+    clock.millis = 2800; // 900ms since the last access, still under the threshold
+    instance.sweep();
+    expect(loaded!.gameLog.length).is.greaterThan(0);
+  });
+
   it('restoreGameAt', async () => {
     game.generation = 12;
     game.save();

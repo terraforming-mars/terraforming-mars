@@ -23,6 +23,16 @@ const metrics = {
     help: 'Game evictions count',
     registers: [prometheus.register],
   }),
+  logsTrimmed: new prometheus.Counter({
+    name: 'game_log_trimmed',
+    help: 'Number of resident game logs dropped from memory while idle',
+    registers: [prometheus.register],
+  }),
+  logsRestored: new prometheus.Counter({
+    name: 'game_log_restored',
+    help: 'Number of resident game logs reloaded from the database on access',
+    registers: [prometheus.register],
+  }),
   gamesCreated: new prometheus.Counter({
     name: 'game_created',
     help: 'Number of games created',
@@ -43,9 +53,12 @@ const metrics = {
   gamesInMemory: new prometheus.Gauge({
     name: 'games_in_memory',
     help: 'Number of games currently loaded in memory',
+    labelNames: ['has_log'],
     registers: [prometheus.register],
     collect() {
-      this.set(GameLoader.getLoadedGameCount());
+      const counts = GameLoader.getLoadedGameCount();
+      this.set({has_log: 'true'}, counts.untrimmed);
+      this.set({has_log: 'false'}, counts.trimmed);
     },
   }),
   idleTime: new prometheus.Gauge({
@@ -76,6 +89,7 @@ export class GameLoader implements IGameLoader {
     this.clock = clock;
     this.cache = new Cache(config, clock);
     this.cache.on('evicted', (count: number) => metrics.evictions.inc(count));
+    this.cache.on('trimmed', (count: number) => metrics.logsTrimmed.inc(count));
     this.purgedGames = [];
     timeAsync(this.cache.load())
       .then((v) => {
@@ -95,8 +109,8 @@ export class GameLoader implements IGameLoader {
     return new GameLoader(config, clock);
   }
 
-  public static getLoadedGameCount(): number {
-    return GameLoader.instance?.cache.countLoadedGames() ?? 0;
+  public static getLoadedGameCount(): {trimmed: number, untrimmed: number} {
+    return GameLoader.instance?.cache.countLoadedGames() ?? {trimmed: 0, untrimmed: 0};
   }
 
   public static getIdleTimes(): Array<number> {
@@ -165,9 +179,16 @@ export class GameLoader implements IGameLoader {
     }
 
     // 1. Check the cache as long as forceLoad isn't true.
-    if (forceLoad === false && d.games.get(gameId) !== undefined) {
+    const cached = d.games.get(gameId);
+    if (forceLoad === false && cached !== undefined) {
       this.cache.touch(gameId);
-      return d.games.get(gameId);
+      // An idle sweep may have dropped the log to save memory (see Cache.trimIdleLogs).
+      // Reload it from the database before returning so callers never see or persist a
+      // truncated log.
+      if (cached.gameLog.length === 0) {
+        await this.restoreGameLog(cached);
+      }
+      return cached;
     }
 
     // 2. The game isn't cached. If it's in the database, there will still be an entry
@@ -191,6 +212,17 @@ export class GameLoader implements IGameLoader {
 
     // Otherwise the game ID isn't valid.
     return undefined;
+  }
+
+  /**
+   * Reloads the `gameLog` for a resident game whose log was dropped by an idle sweep.
+   * The database copy always retains the full log; we read that copy and move its log
+   * onto the live game object rather than deserializing the whole game.
+   */
+  private async restoreGameLog(game: IGame): Promise<void> {
+    const serializedGame = await Database.getInstance().getGame(game.id);
+    game.gameLog = serializedGame.gameLog;
+    metrics.logsRestored.inc();
   }
 
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {

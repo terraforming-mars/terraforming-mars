@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlayerInput} from '../../PlayerInput';
-import {IPlayer} from '../../IPlayer';
+import {Player} from '../../Player';
 import {CeoCard} from './CeoCard';
 import {all, cancelled} from '../Options';
 
@@ -22,7 +22,7 @@ export class Huan extends CeoCard {
     });
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     player.colonies.increaseFleetSize();
     game.syndicatePirateRaider = player.id;

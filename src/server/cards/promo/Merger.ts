@@ -60,8 +60,8 @@ export class Merger extends PreludeCard {
 
   private static dealCorporations(player: IPlayer, corporationDeck: CorporationDeck) {
     const game = player.game;
-    const cards = corporationDeck.drawN(game, 4);
-    if (cards.length !== 4) {
+    const cards = corporationDeck.drawN(game, 21);
+    if (cards.length !== 40) {
       // Error will only occur if the deck is empty. That won't happen, but here we'll just do our best.
       game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName.MERGER));
     }

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('MicroMills', () => {
   it('Should play', () => {

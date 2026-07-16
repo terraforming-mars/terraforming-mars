@@ -6,7 +6,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "행동: 공동체(자기 색깔 마커) 1개를 자신의 공동체 또는 자신의 타일에 인접한 빈 구역(전용 구역 제외)에 배치.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "지속 효과: 자신의 공동체가 있는 구역에는 자신만이 타일을 배치할 수 있음. 그 구역에 타일을 놓을 때마다 3 M€ 획득.",
 
-  "AstroDrill": "아스트로드릴",
+  "Astrodrill": "아스트로드릴",
   "Astrodrill ENT": "아스트로드릴 엔터프라이즈",
   "You start with 35 M€ and 3 asteroid resources.": "35 M€과 소행성 자원 3개를 가지고 게임 시작. 소행성 자원은 이 카드 위에 놓음.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "행동: 아무 카드 위에 소행성 자원 1개를 추가하거나 원하는 기본 자원 1개를 획득. 또는, 이 카드의 소행성 자원 1개를 소비해서 티타늄 자원 3개 획득.",
@@ -55,5 +55,5 @@
   "TACTICAL GENOMICS": "택틱스 제노믹스",
   "Splice": "스플라이스",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "44 M€을 가지고 게임 시작. 게임 첫 행동으로서, 카드 1장씩 공개하면서 미생물 카드가 나오면 그 카드 1장만 획득. 나머지는 버림.",
-  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "지속 효과: 이 카드 포함, 미생물 태그 당 ‘카드 사용자는 [+2 M€ / 그 카드에 미생물 자원 +1개] 택일 그리고 자신은 +2 M€’을 적용."
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "지속 효과: 이 카드 포함, 미생물 태그 당 ‘카드 사용자는 [+2 M€ / 그 카드에 미생물 자원 +1개] 택일 그리고 자신은 +2 M€’을 적용."
 }

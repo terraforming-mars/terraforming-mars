@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
 import {IGame} from '../../../src/server/IGame';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('BlackPolarDust', () => {
   let card: BlackPolarDust;

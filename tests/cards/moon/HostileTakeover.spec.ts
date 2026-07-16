@@ -7,10 +7,9 @@ import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {IPlayer} from '../../../src/server/IPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('HostileTakeover', () => {
   let player: TestPlayer;

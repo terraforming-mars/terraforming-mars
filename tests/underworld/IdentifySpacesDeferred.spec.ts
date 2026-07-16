@@ -2,11 +2,10 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {Phase} from '../../src/common/Phase';
 import {IdentifySpacesDeferred} from '../../src/server/underworld/IdentifySpacesDeferred';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
-import {cast} from '@/common/utils/utils';
 
 describe('IdentifySpacesDeferred', () => {
   let player: TestPlayer;

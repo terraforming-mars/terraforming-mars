@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SupplyDrop} from '../../../src/server/cards/prelude/SupplyDrop';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SupplyDrop', () => {
   it('Should play', () => {

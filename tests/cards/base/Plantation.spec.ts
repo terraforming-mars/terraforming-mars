@@ -1,11 +1,10 @@
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {expect} from 'chai';
-import {runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Plantation', () => {
   let card: Plantation;

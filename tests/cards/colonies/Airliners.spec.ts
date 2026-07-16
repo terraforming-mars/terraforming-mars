@@ -5,8 +5,7 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Airliners', () => {
   let card: Airliners;

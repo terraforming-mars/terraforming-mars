@@ -20,7 +20,7 @@
   "Place a colony. Gain 3 energy.": "Hozz létre egy gyarmatot! Kapsz 3 energiát.",
   "Floating Trade Hub": "Lebegő kereskedelmi állomás",
   "Action: Add 2 floaters to ANY card.": "Akció: Rakj 2 lebegőt egy TETSZŐLEGES kártyára!",
-  "Action: Add 2 floaters to ANY card, or remove any number of floaters here to gain that many of one standard resource.": "Akció: Rakj 2 lebegőt egy TETSZŐLEGES kártyára, VAGY távolíts el bármennyi lebegőt erről a kártyáról, hogy ugyanannyi erőforrást kapj egy standard erőforrástípusból!",
+  "Action: Remove any number of floaters here to gain that many of one standard resource.": "Akció: Távolíts el bármennyi lebegőt erről a kártyáról, hogy ugyanannyi erőforrást kapj egy standard erőforrástípusból!",
   "Focused Organization": "Célirányos szervezet",
   "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "Akció: Dobj el 1 kártyát a kezedből és költs el 1 standard erőforrást, hogy húzz 1 kártyát és kapj 1 standard erőforrást!",
   "Draw 1 card and gain 1 standard resource.": "Húzz 1 kártyát és kapsz 1 standard erőforrást!",
@@ -159,5 +159,7 @@
   "Acquired Space Agency": "Űrügynökség felvásárlása",
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Kapsz 6 titánt. Fedj fel kártyákat a pakli tetejéről addig, ameddig 2 űr ikonos kártyát fel nem fedsz! Vedd a kezedbe ezeket, a többi felfedett kártyát pedig dobd el!",
   "Add resource to card GHG Producing Bacteria": "Rakj 1 erőforrást a Metanogén baktériumokra!",
-  "Add resource to card Fish": "Rakj 1 erőforrást a Halakra!"
+  "Add resource to card Fish": "Rakj 1 erőforrást a Halakra!",
+  "Add resource": "Rakj 1 erőforrást",
+  "Gain plant": "Szerezz palántát"
 }

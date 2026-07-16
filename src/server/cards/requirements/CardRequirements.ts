@@ -9,7 +9,7 @@ import {FloatersRequirement} from './FloatersRequirement';
 import {GreeneriesRequirement} from './GreeneriesRequirement';
 import {HabitatRateRequirement} from './HabitatRateRequirement';
 import {HabitatTilesRequirement} from './HabitatTilesRequirement';
-import {LogisticRateRequirement} from './LogisticRateRequirement';
+import {LogisticsRateRequirement} from './LogisticsRateRequirement';
 import {MiningRateRequirement} from './MiningRateRequirement';
 import {MiningTilesRequirement} from './MiningTilesRequirement';
 import {OceanRequirement} from './OceanRequirement';
@@ -102,7 +102,7 @@ export class CardRequirements {
     } else if (descriptor.miningRate !== undefined) {
       return new MiningRateRequirement({...descriptor, count: descriptor.miningRate});
     } else if (descriptor.logisticRate !== undefined) {
-      return new LogisticRateRequirement({...descriptor, count: descriptor.logisticRate});
+      return new LogisticsRateRequirement({...descriptor, count: descriptor.logisticRate});
     } else if (descriptor.habitatTiles !== undefined) {
       return new HabitatTilesRequirement({...descriptor, count: descriptor.habitatTiles});
     } else if (descriptor.miningTiles !== undefined) {

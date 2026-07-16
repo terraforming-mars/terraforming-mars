@@ -10,7 +10,9 @@ export class PreservationProgram extends PreludeCard {
     super({
       name: CardName.PRESERVATION_PROGRAM,
 
-      tr: {tr: 5},
+      behavior: {
+        tr: 5,
+      },
 
       metadata: {
         cardNumber: 'P57',
@@ -27,9 +29,6 @@ export class PreservationProgram extends PreludeCard {
 
   public override bespokePlay(player: IPlayer) {
     player.preservationProgram = true;
-    // This is executed now because if it were in `behavior` it would be
-    // rewarded before the effect was put in place.
-    player.increaseTerraformRating(5);
     return undefined;
   }
 }

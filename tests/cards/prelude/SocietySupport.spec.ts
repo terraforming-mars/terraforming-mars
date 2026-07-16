@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/server/cards/prelude/SocietySupport';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SocietySupport', () => {
   it('Should play', () => {

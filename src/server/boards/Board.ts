@@ -9,7 +9,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {hazardSeverity} from '../../common/AresTileType';
 import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
-import {sum} from '../../common/utils/utils';
+import {sum, twoWayDifference} from '../../common/utils/utils';
 
 /**
  * The bonus costs to place a tile on a space. For instance, spending 6MC to place an ocean,
@@ -37,17 +37,38 @@ export abstract class Board {
 
   public constructor(
     public readonly spaces: ReadonlyArray<Space>,
-    public readonly noctisCitySpaceId?: SpaceId | undefined) {
+    public readonly noctisCitySpaceId?: SpaceId | undefined,
+    volcanicSpaceIds?: ReadonlyArray<SpaceId>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
       const adjacentSpaces = this.computeAdjacentSpaces(space);
       const filtered = adjacentSpaces.filter((space) => space !== undefined);
-      this.adjacentSpaces.set(space.id, filtered);
+      // "as ReadonlyArray<Space> is OK because the line above filters out the undefined values."
+      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<Space>);
       this.map.set(space.id, space);
     });
 
-    this.volcanicSpaceIds = this.spaces.filter((space) => space.volcanic).map((space) => space.id);
+    const computeVolcanicSpaceIds = () => this.spaces.filter((space) => space.volcanic).map((space) => space.id);
+
+    if (volcanicSpaceIds !== undefined) {
+      if (computeVolcanicSpaceIds().length === 0) {
+        for (const id of volcanicSpaceIds) {
+          const space = this.map.get(id);
+          if (space === undefined) {
+            throw new Error('space ' + id + ' not found');
+          }
+          space.volcanic = true;
+        }
+      }
+      const computedVolcanicSpaceIds: ReadonlyArray<SpaceId> = computeVolcanicSpaceIds();
+      if (computedVolcanicSpaceIds.length > 0) {
+        if (twoWayDifference(computedVolcanicSpaceIds, volcanicSpaceIds).length > 0) {
+          throw new Error('volcanicSpaceIds do not match what is stored: ' + JSON.stringify(computedVolcanicSpaceIds) + ' ' + JSON.stringify(volcanicSpaceIds));
+        }
+      }
+    }
+    this.volcanicSpaceIds = volcanicSpaceIds ?? computeVolcanicSpaceIds();
   }
 
   /* Returns the space given a Space ID. */
@@ -163,11 +184,9 @@ export abstract class Board {
     switch (hazardSeverity(space.tile?.tileType)) {
     case 'mild':
       costs.megacredits += 8;
-      costs.tr.tr = (costs.tr.tr ?? 0) + 1;
       break;
     case 'severe':
       costs.megacredits += 16;
-      costs.tr.tr = (costs.tr.tr ?? 0) + 2;
       break;
     }
 

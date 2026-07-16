@@ -1,14 +1,15 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses" ref="container">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
               <div v-if="showPlayerCube" :class="playerCubeClass"></div>
-              <CardHelp v-if="hasHelpText" :name="card.name" :hovering="hovering" />
+              <card-help v-show="hasHelp" :name="card.name" />
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
           <CardContent
+              ref="content"
               :metadata="cardMetadata"
               :requirements="cardRequirements"
               :isCorporation="isCorporationCard"
@@ -18,16 +19,16 @@
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
       <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
       <CardExtraContent :card="card" />
-      <slot></slot>
+      <slot/>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
-import {CARD_HELP_TEXT} from '@/client/cards/CardHelpText';
+import {WithRefs} from 'vue-typed-refs';
 import CardTitle from './CardTitle.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
@@ -47,8 +48,12 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
+type Refs = {
+  container: HTMLElement,
+  content: Vue,
+}
 
-export default defineComponent({
+export default (Vue as WithRefs<Refs>).extend({
   name: 'Card',
   components: {
     CardTitle,
@@ -81,12 +86,6 @@ export default defineComponent({
       required: false,
       default: 'neutral',
     },
-    // When true, the card is automatically sized regardless of hover.
-    autoTall: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
   },
   data() {
     const cardName = this.card.name;
@@ -95,6 +94,7 @@ export default defineComponent({
     return {
       cardInstance: card,
       hovering: false,
+      customHeight: 0,
     };
   },
   computed: {
@@ -137,7 +137,7 @@ export default defineComponent({
     },
     cardClasses(): string {
       const classes = [];
-      classes.push('card-' + this.card.name.toLowerCase().replaceAll(' ', '-'));
+      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
 
       if (this.card.isDisabled) {
         classes.push('card-unavailable');
@@ -148,11 +148,6 @@ export default defineComponent({
       if (this.isStandardProject) {
         classes.push('card-standard-project');
       }
-      if (this.autoTall) {
-        classes.push('card-auto-tall');
-      } else if (getPreferences().experimental_ui) {
-        classes.push('card-hover-tall');
-      }
       const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject && this.card.isDisabled) {
         classes.push('card-hide');
@@ -162,7 +157,7 @@ export default defineComponent({
     cardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
-    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> | undefined {
+    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
     },
     resourceAmount(): number {
@@ -182,9 +177,7 @@ export default defineComponent({
       return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined || this.robotCard !== undefined;
     },
     resourceType(): CardResource {
-      if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) {
-        return CardResource.RESOURCE_CUBE;
-      }
+      if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
       // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
@@ -197,14 +190,38 @@ export default defineComponent({
       }
       return '';
     },
-    hasHelpText(): boolean {
-      return CARD_HELP_TEXT[this.card.name] !== undefined;
+    hasHelp(): boolean {
+      return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },
     showPlayerCube(): boolean {
       return getPreferences().experimental_ui && this.actionUsed;
     },
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
+    },
+  },
+  mounted() {
+    this.customHeight = this.$refs.content.$el.scrollHeight;
+  },
+  watch: {
+    hovering(val: boolean) {
+      if (!getPreferences().experimental_ui) {
+        return;
+      }
+      if (!this.isProjectCard) {
+        return;
+      }
+      const content = this.$refs.content.$el as HTMLElement;
+      if (content.scrollHeight <= 236) {
+        return;
+      }
+      if (val) {
+        this.$refs.container.style.height = (this.customHeight + 90) + 'px';
+        content.style.height = this.customHeight + 'px';
+      } else {
+        this.$refs.container.style.removeProperty('height');
+        content.style.removeProperty('height');
+      }
     },
   },
 });

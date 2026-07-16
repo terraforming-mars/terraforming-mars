@@ -30,9 +30,7 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): Iconograpy to match the official card?
           b.megacredits(50).production((pb) => pb.megacredits(6)).production((pb) => pb.megacredits(2, {all})).city().br;
-          b.corpBox('effect', (cb) => {
-            cb.plainText('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.)');
-          });
+          b.plainText('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.)');
         }),
       },
     });

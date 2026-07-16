@@ -1,6 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
+import * as ansi from 'ansi-escape-sequences';
 import {mkdirSync, writeFileSync} from 'fs';
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {Database} from '../database/Database';
@@ -57,7 +58,8 @@ function showProgressBar(current: number, total: number, width: number = process
 
   const percentage = Math.round((current / total) * 100);
 
-  process.stdout.write(`\r${progressString} ${percentage}% ${current}`);
+  const ansiEscapeCode = `${ansi.cursor.horizontalAbsolute(0)}${progressString} ${percentage}% ${current}`;
+  process.stdout.write(ansiEscapeCode);
 }
 
 async function load(gameId: GameId) {

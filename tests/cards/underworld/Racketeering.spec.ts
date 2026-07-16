@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Racketeering} from '../../../src/server/cards/underworld/Racketeering';
 import {testGame} from '../../TestGame';
-import {fakeCard} from '../../TestingUtils';
+import {cast, fakeCard} from '../../TestingUtils';
 import {InheritedFortune} from '../../../src/server/cards/underworld/InheritedFortune';
 import {JensonBoyleCo} from '../../../src/server/cards/underworld/JensonBoyleCo';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {HiredRaiders} from '../../../src/server/cards/underworld/HiredRaiders';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Racketeering', () => {
   it('play', () => {

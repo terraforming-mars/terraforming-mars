@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {PrivateResorts} from '../../../src/server/cards/underworld/PrivateResorts';
 import {testGame} from '../../TestGame';
-import {maxOutOceans} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('PrivateResorts', () => {
   it('canPlay', () => {

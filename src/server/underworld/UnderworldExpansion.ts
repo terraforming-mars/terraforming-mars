@@ -112,8 +112,8 @@ export class UnderworldExpansion {
       return false;
     }
     if (space.tile !== undefined) {
-      // Players may still identify on Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
-      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
+      // Players may still identify on Martian Nature Wonders and Rey Skywalker
+      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
         return false;
       }
     }
@@ -158,7 +158,12 @@ export class UnderworldExpansion {
 
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
-    game.triggerForAllCards((p, c) => c.onIdentificationByAnyPlayer?.(p, player, undergroundResource));
+
+    for (const p of game.playersInGenerationOrder) {
+      for (const card of p.tableau) {
+        card.onIdentificationByAnyPlayer?.(p, player, space);
+      }
+    }
     return true;
   }
 
@@ -201,8 +206,8 @@ export class UnderworldExpansion {
       }
 
       if (space.tile !== undefined) {
-        // Players may still excavate from Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
-        if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
+        // Players may still excavate from Martian Nature Wonders and Rey Skywalker
+        if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
           return false;
         }
       }
@@ -254,8 +259,8 @@ export class UnderworldExpansion {
     const game = player.game;
     validateUnderworldExpansion(game);
     if (space.tile !== undefined) {
-      // Players may still excavate from Martian Nature Wonders (but not Rey Skywalker, which blocks tokens)
-      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS) {
+      // Players may still excavate from Martian Nature Wonders and Rey Skywalker
+      if (space.tile.tileType !== TileType.MARTIAN_NATURE_WONDERS && space.tile.tileType !== TileType.REY_SKYWALKER) {
         throw new Error(`cannot excavate space ${space.id} which has a tile.`);
       }
     }
@@ -342,6 +347,18 @@ export class UnderworldExpansion {
     case 'corruption2':
       UnderworldExpansion.gainCorruption(player, 2, {log: true});
       break;
+    case 'data1':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
+      break;
+    case 'data2':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
+      break;
+    case 'data3':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 3}));
+      break;
+    case 'steel2':
+      player.stock.add(Resource.STEEL, 2, {log: true});
+      break;
     case 'steel2plant':
       player.stock.add(Resource.STEEL, 2, {log: true});
       player.stock.add(Resource.PLANTS, 1, {log: true});
@@ -375,6 +392,9 @@ export class UnderworldExpansion {
       break;
     case 'heat2production':
       player.production.add(Resource.HEAT, 2, {log: true});
+      break;
+    case 'microbe1':
+      player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 1}));
       break;
     case 'microbe2':
       player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
@@ -414,11 +434,15 @@ export class UnderworldExpansion {
       break;
     case 'sciencetag':
       player.tags.extraScienceTags++;
-      player.triggerOnNonCardTagAdded(Tag.SCIENCE);
+      for (const card of player.tableau) {
+        card.onNonCardTagAdded?.(player, Tag.SCIENCE);
+      }
       break;
     case 'planttag':
       player.tags.extraPlantTags++;
-      player.triggerOnNonCardTagAdded(Tag.PLANT);
+      for (const card of player.tableau) {
+        card.onNonCardTagAdded?.(player, Tag.PLANT);
+      }
       break;
 
     // This doesn't reward anything.
@@ -565,6 +589,7 @@ export class UnderworldExpansion {
         }
         break;
       case 'microbe2pertemp':
+        // TODO(kberg): Replace with RunNTimes.
         for (let i = 0; i < steps; i++) {
           player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         }
@@ -611,7 +636,7 @@ export class UnderworldExpansion {
     [GlobalParameter.VENUS]: undefined,
     [GlobalParameter.MOON_HABITAT_RATE]: undefined,
     [GlobalParameter.MOON_MINING_RATE]: undefined,
-    [GlobalParameter.MOON_LOGISTIC_RATE]: undefined,
+    [GlobalParameter.MOON_LOGISTICS_RATE]: undefined,
   } as const;
 
   public static getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter) {
@@ -628,11 +653,6 @@ export class UnderworldExpansion {
     if (token.active) {
       // TODO(kberg): Log the discard.
       player.underworldData.activeBonus = undefined;
-    }
-    if (token.token === 'sciencetag') {
-      player.tags.extraScienceTags = Math.max(player.tags.extraScienceTags - 1, 0);
-    } else if (token.token === 'planttag') {
-      player.tags.extraPlantTags = Math.max(player.tags.extraPlantTags - 1, 0);
     }
   }
 }

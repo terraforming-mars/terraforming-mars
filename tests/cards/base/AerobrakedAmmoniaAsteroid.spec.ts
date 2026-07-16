@@ -1,13 +1,12 @@
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('AerobrakedAmmoniaAsteroid', () => {
   let card: AerobrakedAmmoniaAsteroid;

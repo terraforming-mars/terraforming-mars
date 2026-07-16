@@ -1,6 +1,6 @@
 // Prints out the entire game log for review.
 // e.g. node build/src/server/tools/dump_log.js g4940001dbc
-import '@/server/init';
+require('dotenv').config();
 
 import {isGameId} from '../../common/Types';
 import {Database} from '../database/Database';

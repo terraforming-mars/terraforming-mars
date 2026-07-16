@@ -58,7 +58,6 @@ describeDatabaseSuite({
   omit: {
     markFinished: true,
     purgeUnfinishedGames: true,
-    storeParticipants: true,
   },
   stats: {
     'history_path': 'def',

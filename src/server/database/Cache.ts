@@ -14,14 +14,8 @@ export class Cache extends EventEmitter {
 
   /** Map of game IDs and the time they were scheduled for eviction */
   private readonly evictionSchedule: Map<GameId, number> = new Map();
-  /** Map of resident game IDs and the last time each was accessed. */
-  private readonly lastAccess: Map<GameId, number> = new Map();
   private readonly config: CacheConfig;
   private readonly clock: Clock;
-
-  // Idle eviction only unloads barely-played games; one with more than this many
-  // saves is considered established and is kept resident even when idle.
-  private static readonly MAX_SAVES_FOR_IDLE_EVICTION = 3;
 
   constructor(config: CacheConfig, clock: Clock) {
     super();
@@ -63,94 +57,25 @@ export class Cache extends EventEmitter {
     this.evictionSchedule.set(gameId, this.clock.now() + this.config.evictMillis);
   }
 
-  /** Records that `gameId` was just accessed, resetting its idle time. */
-  public touch(gameId: GameId) {
-    this.lastAccess.set(gameId, this.clock.now());
-  }
-
-  /**
-   * Returns the time in milliseconds since `gameId` was last accessed, or
-   * undefined if the game is not resident in memory.
-   */
-  public idleTimeMillis(gameId: GameId): number | undefined {
-    const last = this.lastAccess.get(gameId);
-    return last === undefined ? undefined : this.clock.now() - last;
-  }
-
-  /**
-   * Evicts games that are due for eviction: those scheduled by mark() and those
-   * idle past the threshold.
-   */
-  public sweep(): void {
+  public sweep() {
     console.log('Starting sweep');
-    const toEvict = this.gamesToEvict();
-    for (const gameId of toEvict) {
-      console.log('evicting', gameId);
-      this.evict(gameId);
-      this.evictionSchedule.delete(gameId);
-    }
-    if (toEvict.size > 0) {
-      this.emit('evicted', toEvict.size);
+    const now = this.clock.now();
+    for (const entry of this.evictionSchedule.entries()) {
+      if (entry[1] <= now) {
+        const gameId = entry[0];
+        console.log(`evicting ${gameId}`);
+        this.evict(gameId);
+        this.evictionSchedule.delete(gameId);
+      }
     }
     console.log('Finished sweep');
   }
 
-  /** The ids of games due for eviction: those scheduled by mark() and those idle past the threshold. */
-  private gamesToEvict(): Set<GameId> {
-    const now = this.clock.now();
-    const toEvict = new Set<GameId>();
-    for (const [gameId, evictionTimeMillis] of this.evictionSchedule.entries()) {
-      if (evictionTimeMillis <= now) {
-        toEvict.add(gameId);
-      }
-    }
-    // Abandoned games: resident but idle past the threshold.
-    if (this.config.idleMillis > 0) {
-      for (const [gameId, game] of this.games) {
-        if (game === undefined) {
-          continue;
-        }
-        // Only solo games are idle-evicted with few saves are evicted.
-        if (game.players.length > 1 || game.lastSaveId > Cache.MAX_SAVES_FOR_IDLE_EVICTION) {
-          continue;
-        }
-        const last = this.lastAccess.get(gameId);
-        if (last !== undefined && now - last > this.config.idleMillis) {
-          toEvict.add(gameId);
-        }
-      }
-    }
-    return toEvict;
-  }
-
   private evict(gameId: GameId) {
     const game = this.games.get(gameId);
-    if (game === undefined) {
-      return;
-    }
+    if (game === undefined) return;
     game.players.forEach((p) => p.tearDown());
     this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
-    this.lastAccess.delete(gameId);
-  }
-
-  public countLoadedGames(): number {
-    return [...this.games.values()].filter((game) => game !== undefined).length;
-  }
-
-  /** Idle time, in milliseconds, of every game currently resident in memory. */
-  public idleTimes(): Array<number> {
-    const now = this.clock.now();
-    const times: Array<number> = [];
-    for (const [gameId, game] of this.games) {
-      if (game === undefined) {
-        continue;
-      }
-      const last = this.lastAccess.get(gameId);
-      if (last !== undefined) {
-        times.push(now - last);
-      }
-    }
-    return times;
   }
 }
 

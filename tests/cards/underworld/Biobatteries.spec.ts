@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {Biobatteries} from '../../../src/server/cards/underworld/Biobatteries';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Biobatteries', () => {
   it('play', () => {

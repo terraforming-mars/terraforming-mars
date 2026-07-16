@@ -25,10 +25,6 @@ export class PartyHooks {
     }
   }
 
-  static reds01PolicyInEffect(player: IPlayer) {
-    return this.shouldApplyPolicy(player, PartyName.REDS, 'rp01');
-  }
-
   /**
    * Return true when `policy` is active.
    */

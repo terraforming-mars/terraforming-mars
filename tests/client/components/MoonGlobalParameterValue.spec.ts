@@ -1,13 +1,13 @@
 import {mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/common/models/MoonModel';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 
 const moonData: MoonModel = {
   habitatRate: 1,
-  logisticRate: 2,
+  logisticsRate: 2,
   miningRate: 3,
   spaces: [],
 };
@@ -15,26 +15,26 @@ const moonData: MoonModel = {
 describe('MoonGlobalParameterValue', () => {
   it('shows colony rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      ...globalConfig,
-      props: {moonData},
+      localVue: getLocalVue(),
+      propsData: {moonData},
     });
 
     expect(wrapper.text()).to.include(moonData.habitatRate);
   });
 
-  it('shows logistic rate', () => {
+  it('shows logistics rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      ...globalConfig,
-      props: {moonData},
+      localVue: getLocalVue(),
+      propsData: {moonData},
     });
 
-    expect(wrapper.text()).to.include(moonData.logisticRate);
+    expect(wrapper.text()).to.include(moonData.logisticsRate);
   });
 
   it('shows mining rate', () => {
     const wrapper = mount(MoonGlobalParameterValue, {
-      ...globalConfig,
-      props: {moonData},
+      localVue: getLocalVue(),
+      propsData: {moonData},
     });
 
     expect(wrapper.text()).to.include(moonData.miningRate);
@@ -43,19 +43,19 @@ describe('MoonGlobalParameterValue', () => {
   it('Does not show any rating if every rating is on its max (or above)', () => {
     const moonData: MoonModel = {
       habitatRate: MAXIMUM_HABITAT_RATE,
-      logisticRate: MAXIMUM_LOGISTIC_RATE + 1,
+      logisticsRate: MAXIMUM_LOGISTICS_RATE + 1,
       miningRate: MAXIMUM_MINING_RATE + 2,
       spaces: [],
     };
 
     const wrapper = mount(MoonGlobalParameterValue, {
-      ...globalConfig,
-      props: {moonData},
+      localVue: getLocalVue(),
+      propsData: {moonData},
     });
 
     expect(wrapper.text()).to.not.include.oneOf([
       MAXIMUM_HABITAT_RATE,
-      MAXIMUM_LOGISTIC_RATE + 1,
+      MAXIMUM_LOGISTICS_RATE + 1,
       MAXIMUM_MINING_RATE + 2,
     ]);
   });
@@ -63,14 +63,14 @@ describe('MoonGlobalParameterValue', () => {
   it('shows completed-checkmark if every of rate is its on max (or above)', () => {
     const moonData: MoonModel = {
       habitatRate: MAXIMUM_HABITAT_RATE + 2,
-      logisticRate: MAXIMUM_LOGISTIC_RATE + 1,
+      logisticsRate: MAXIMUM_LOGISTICS_RATE + 1,
       miningRate: MAXIMUM_MINING_RATE,
       spaces: [],
     };
 
     const wrapper = mount(MoonGlobalParameterValue, {
-      ...globalConfig,
-      props: {moonData},
+      localVue: getLocalVue(),
+      propsData: {moonData},
     });
 
     expect(wrapper.find('[data-test="completed-checkmark"]').exists()).to.be.true;
@@ -80,19 +80,19 @@ describe('MoonGlobalParameterValue', () => {
     const cases: Array<MoonModel> = [
       {
         habitatRate: MAXIMUM_HABITAT_RATE - 1,
-        logisticRate: MAXIMUM_LOGISTIC_RATE,
+        logisticsRate: MAXIMUM_LOGISTICS_RATE,
         miningRate: MAXIMUM_MINING_RATE,
         spaces: [],
       },
       {
         habitatRate: MAXIMUM_HABITAT_RATE,
-        logisticRate: MAXIMUM_LOGISTIC_RATE - 1,
+        logisticsRate: MAXIMUM_LOGISTICS_RATE - 1,
         miningRate: MAXIMUM_MINING_RATE,
         spaces: [],
       },
       {
         habitatRate: MAXIMUM_HABITAT_RATE,
-        logisticRate: MAXIMUM_LOGISTIC_RATE,
+        logisticsRate: MAXIMUM_LOGISTICS_RATE,
         miningRate: MAXIMUM_MINING_RATE - 1,
         spaces: [],
       },
@@ -100,8 +100,8 @@ describe('MoonGlobalParameterValue', () => {
 
     cases.forEach((moonData) => {
       const wrapper = mount(MoonGlobalParameterValue, {
-        ...globalConfig,
-        props: {moonData},
+        localVue: getLocalVue(),
+        propsData: {moonData},
       });
 
       expect(wrapper.find('[data-test="completed-checkmark"]').exists()).to.be.false;

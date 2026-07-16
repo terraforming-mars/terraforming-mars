@@ -1,9 +1,9 @@
 <template>
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
-        <GlobalEvent v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"/>
-        <GlobalEvent v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"/>
-        <GlobalEvent v-if="turmoil.current" :globalEventName="turmoil.current" type="current" :showDistance="true"/>
+        <global-event v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"></global-event>
+        <global-event v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"></global-event>
+        <global-event v-if="turmoil.current" :globalEventName="turmoil.current" type="current" :showDistance="true"></global-event>
       </div>
 
       <div class="turmoil-board">
@@ -17,12 +17,12 @@
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
           <div class="dominant-party-bonus">
-            <TurmoilAgenda v-if="turmoil.ruling" :id="getPolicy(turmoil.ruling)"/>
+            <turmoil-agenda :id="getPolicy(turmoil.ruling)"></turmoil-agenda>
           </div>
           <div class="policy-user-cubes">
-            <template v-for="n in turmoil.policyActionUsers" :key="n.color">
-              <div v-if="n.turmoilPolicyActionUsed" :class="'policy-use-marker board-cube--'+n.color"></div>
-              <div v-if="n.politicalAgendasActionUsedCount > 0" :class="'policy-use-marker board-cube--'+n.color">{{n.politicalAgendasActionUsedCount}}</div>
+            <template v-for="n in turmoil.policyActionUsers">
+              <div v-if="n.turmoilPolicyActionUsed" :key="n.color" :class="'policy-use-marker board-cube--'+n.color"></div>
+              <div v-if="n.politicalAgendasActionUsedCount > 0" :key="n.color" :class="'policy-use-marker board-cube--'+n.color">{{n.politicalAgendasActionUsedCount}}</div>
             </template>
           </div>
           <div class="chairman-spot"><div v-if="turmoil.chairman" :class="'player-token '+turmoil.chairman"></div></div>
@@ -33,14 +33,14 @@
           </div>
           <div class="policies">
             <div class="policies-title">
-                <a class="policies-clickable" href="#" @click.prevent="toggleMe()" v-i18n>Policies</a>
+                <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
             </div>
             <div v-show="isVisible()" class='policies-global'>
               <div v-for="party in turmoil.parties" :key="party.name" class='policy-block'>
                 <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
 
                 <div class="party-bonus">
-                  <TurmoilAgenda :id="getPolicy(party.name)"/>
+                  <turmoil-agenda :id="getPolicy(party.name)"></turmoil-agenda>
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
             <div class="party-bonus">
-              <TurmoilAgenda type="party-bonus" :id="getBonus(party.name)"/>
+              <turmoil-agenda type="party-bonus" :id="getBonus(party.name)"></turmoil-agenda>
             </div>
           </div>
         </div>
@@ -82,20 +82,18 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import {BonusId, PolicyId} from '@/common/turmoil/Types';
 
-export default defineComponent({
-  name: 'Turmoil',
+export default Vue.extend({
+  name: 'turmoil',
   props: {
     turmoil: {
       type: Object as () => TurmoilModel,
-      required: true,
     },
   },
   methods: {
@@ -106,47 +104,45 @@ export default defineComponent({
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getBonus(party: PartyName): BonusId {
+    getBonus(party: PartyName | undefined) {
       const politicalAgendas = this.turmoil.politicalAgendas;
-      if (politicalAgendas === undefined) {
-        throw new Error('Political agendas not defined');
+      if (politicalAgendas !== undefined) {
+        switch (party) {
+        case PartyName.MARS:
+          return politicalAgendas.marsFirst.bonusId;
+        case PartyName.SCIENTISTS:
+          return politicalAgendas.scientists.bonusId;
+        case PartyName.UNITY:
+          return politicalAgendas.unity.bonusId;
+        case PartyName.KELVINISTS:
+          return politicalAgendas.kelvinists.bonusId;
+        case PartyName.REDS:
+          return politicalAgendas.reds.bonusId;
+        case PartyName.GREENS:
+          return politicalAgendas.greens.bonusId;
+        }
       }
-      switch (party) {
-      case PartyName.MARS:
-        return politicalAgendas.marsFirst.bonusId;
-      case PartyName.SCIENTISTS:
-        return politicalAgendas.scientists.bonusId;
-      case PartyName.UNITY:
-        return politicalAgendas.unity.bonusId;
-      case PartyName.KELVINISTS:
-        return politicalAgendas.kelvinists.bonusId;
-      case PartyName.REDS:
-        return politicalAgendas.reds.bonusId;
-      case PartyName.GREENS:
-        return politicalAgendas.greens.bonusId;
-      }
+      return undefined;
     },
-    getPolicy(partyName: PartyName): PolicyId {
+    getPolicy(partyName: PartyName | undefined) {
       const politicalAgendas = this.turmoil.politicalAgendas;
-      if (politicalAgendas === undefined) {
-        throw new Error('Political agendas not defined');
+      if (politicalAgendas !== undefined) {
+        switch (partyName) {
+        case PartyName.MARS:
+          return politicalAgendas.marsFirst.policyId;
+        case PartyName.SCIENTISTS:
+          return politicalAgendas.scientists.policyId;
+        case PartyName.UNITY:
+          return politicalAgendas.unity.policyId;
+        case PartyName.KELVINISTS:
+          return politicalAgendas.kelvinists.policyId;
+        case PartyName.REDS:
+          return politicalAgendas.reds.policyId;
+        case PartyName.GREENS:
+          return politicalAgendas.greens.policyId;
+        }
       }
-      switch (partyName) {
-      case PartyName.MARS:
-        return politicalAgendas.marsFirst.policyId;
-      case PartyName.SCIENTISTS:
-        return politicalAgendas.scientists.policyId;
-      case PartyName.UNITY:
-        return politicalAgendas.unity.policyId;
-      case PartyName.KELVINISTS:
-        return politicalAgendas.kelvinists.policyId;
-      case PartyName.REDS:
-        return politicalAgendas.reds.policyId;
-      case PartyName.GREENS:
-        return politicalAgendas.greens.policyId;
-      default:
-        throw new Error(`Unknown party name ${partyName}`);
-      }
+      return undefined;
     },
     toggleMe() {
       const currentState: boolean = this.isVisible();

@@ -27,7 +27,7 @@ export class Faraday extends CeoCard {
         cardNumber: 'L27',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.text('5', {size: Size.LARGE}).diverseTag(1).colon().megacredits(-3).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
+          b.text('5', Size.LARGE).diverseTag(1).colon().megacredits(-3).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
           b.br.br;
         }),
         description: 'When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.',
@@ -38,6 +38,10 @@ export class Faraday extends CeoCard {
   public data: {counts: Partial<Record<Tag, number>>} = {
     counts: {},
   };
+
+  public override canAct(): boolean {
+    return false;
+  }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.length === 0 || card.type === CardType.EVENT) {
@@ -56,17 +60,13 @@ export class Faraday extends CeoCard {
 
     for (const tag of tags) {
       if (INVALID_TAGS.includes(tag)) {
-        continue;
+        return;
       }
 
       const count = player.tags.count(tag, 'raw');
-      const tagsFromCurrentCard = tags.filter((t) => t === tag).length;
-      const priorCount = count - tagsFromCurrentCard;
-      const lastReward = this.data.counts[tag] ?? Math.floor(priorCount / 5) * 5;
-      this.data.counts[tag] = lastReward;  // ensure initialized for future plays
-      const newRewardThreshold = lastReward + 5;
-      if (count >= newRewardThreshold) {
-        this.data.counts[tag] = newRewardThreshold;
+      const lastReward = this.data.counts[tag] ?? 0;
+      if (count >= lastReward + 5) {
+        this.data.counts[tag] = count;
         rewards.push(tag);
       }
     }
@@ -97,10 +97,7 @@ export class Faraday extends CeoCard {
           });
         return undefined;
       }),
-      new SelectOption('Do nothing').andThen(() => {
-        player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
-        return undefined;
-      }),
+      new SelectOption('Do nothing'),
     );
   }
 }

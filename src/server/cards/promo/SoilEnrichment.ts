@@ -37,19 +37,12 @@ export class SoilEnrichment extends Card implements IProjectCard {
   }
 
   public override play(player: IPlayer) {
-    const cards = this.eligibleCards(player);
-    const input = new SelectCard('Select card to remove 1 microbe from', 'Select', cards)
+    return new SelectCard('Select card to remove 1 microbe from', 'Select', this.eligibleCards(player))
       .andThen(([card]) => {
         player.removeResourceFrom(card);
         player.stock.add(Resource.PLANTS, 5);
         player.game.log('${0} removed 1 microbe from ${1} to gain 5 plants', (b) => b.player(player).card(card));
         return undefined;
       });
-
-    if (cards.length === 1) {
-      return input.cb(cards);
-    }
-
-    return input;
   }
 }

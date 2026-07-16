@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {OrbitalReflectors} from '../../../src/server/cards/venusNext/OrbitalReflectors';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('OrbitalReflectors', () => {
   it('Should play', () => {

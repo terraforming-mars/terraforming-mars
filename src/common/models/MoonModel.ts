@@ -4,5 +4,5 @@ export type MoonModel = {
   spaces: Array<SpaceModel>;
   habitatRate: number;
   miningRate: number;
-  logisticRate: number;
+  logisticsRate: number;
 }

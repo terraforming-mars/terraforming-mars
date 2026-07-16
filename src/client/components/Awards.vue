@@ -16,7 +16,7 @@
               class="board-cube"
               :class="`board-cube--${award.color}`"
               :data-test-player-cube="award.color"
-            ></i>
+            />
           </span>
         </span>
 
@@ -26,7 +26,7 @@
             :key="spotPrice"
             class="milestone-award-inline unpaid"
           >
-            <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" ></div>
+            <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" />
           </span>
         </span>
       </div>
@@ -47,18 +47,18 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'Awards',
   components: {Award},
   props: {
     awards: {
-      type: Array as () => ReadonlyArray<FundedAwardModel>,
+      type: Array as () => Array<FundedAwardModel>,
       required: true,
     },
     showScores: {
@@ -91,7 +91,7 @@ export default defineComponent({
       const isFunded = (award: FundedAwardModel) => !!award.playerName;
       return this.awards.filter(isFunded);
     },
-    availableAwardSpots(): number[] {
+    availableAwardSpots(): Number[] {
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {

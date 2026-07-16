@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {PersonalSpacecruiser} from '../../../src/server/cards/underworld/PersonalSpacecruiser';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('PersonalSpacecruiser', () => {
   it('play', () => {

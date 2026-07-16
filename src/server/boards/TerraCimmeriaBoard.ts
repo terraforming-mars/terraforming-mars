@@ -1,6 +1,8 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Random} from '../../common/utils/Random';
+import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
 
@@ -37,5 +39,14 @@ export class TerraCimmeriaBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new TerraCimmeriaBoard(spaces);
+  }
+
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces, undefined, [
+      SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
+      SpaceName.APOLLINARIS_MONS,
+      SpaceName.HADRIACUS_MONS,
+      SpaceName.TYRRHENUS_MONS,
+    ]);
   }
 }

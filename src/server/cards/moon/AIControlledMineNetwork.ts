@@ -14,7 +14,7 @@ export class AIControlledMineNetwork extends Card implements IProjectCard {
       cost: 6,
 
       behavior: {
-        moon: {logisticRate: 1},
+        moon: {logisticsRate: 1},
       },
 
       requirements: {logisticRate: 2},
@@ -22,7 +22,7 @@ export class AIControlledMineNetwork extends Card implements IProjectCard {
         description: 'Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step',
         cardNumber: 'M32',
         renderData: CardRenderer.builder((b) => {
-          b.moonLogisticRate();
+          b.moonLogisticsRate();
         }),
       },
     });

@@ -2,9 +2,9 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
-      <input type="radio" v-model="selectedPlayer" :value="player" >
+      <input type="radio" v-model="selectedPlayer" :value="player" />
       <i class="form-icon"></i>
-      <SelectPlayerRow :player="playerView.players.find((otherPlayer) => otherPlayer.color === player)"/>
+      <SelectPlayerRow :player="players.find((otherPlayer) => otherPlayer.color === player)"></SelectPlayerRow>
     </label>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
@@ -12,10 +12,10 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
@@ -24,20 +24,17 @@ type DataModel = {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SelectPlayer',
   props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
+    players: {
+      type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
       type: Object as () => SelectPlayerModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPlayerResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,

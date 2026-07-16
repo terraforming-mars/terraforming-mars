@@ -8,13 +8,3 @@ export type ColonyModel = {
   trackPosition: number;
   visitor: Color | undefined;
 }
-
-export function simpleColonyModel(name: ColonyName): ColonyModel {
-  return {
-    colonies: [],
-    isActive: false,
-    name: name,
-    trackPosition: 0,
-    visitor: undefined,
-  };
-}

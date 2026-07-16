@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IndustrialMicrobes} from '../../../src/server/cards/base/IndustrialMicrobes';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('IndustrialMicrobes', () => {
   it('Should play', () => {

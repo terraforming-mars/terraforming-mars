@@ -11,16 +11,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {Timer} from '@/common/Timer';
 import {TimerModel} from '@/common/models/TimerModel';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PlayerTimer',
   props: {
     timer: {
       type: Object as () => TimerModel,
-      required: true,
     },
     live: {
       type: Boolean,

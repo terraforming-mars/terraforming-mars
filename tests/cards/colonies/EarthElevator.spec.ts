@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {EarthElevator} from '../../../src/server/cards/colonies/EarthElevator';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('EarthElevator', () => {
   it('Should play', () => {

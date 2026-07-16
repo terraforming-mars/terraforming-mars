@@ -1,23 +1,32 @@
-import {Payment} from '../../common/inputs/Payment';
+import {BasePlayerInput} from '../PlayerInput';
+import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, IPlayer} from '../IPlayer';
+import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
-import {Message} from '../../common/logs/Message';
-import {SelectCardToPlay} from './SelectCardToPlay';
+import {cardsToModel} from '../models/ModelUtils';
+import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
-export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
+export type PlayCardMetadata = {
+  reserveUnits: Readonly<Units>;
+};
+
+export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
+  public cards: Array<IProjectCard> = [];
+  public extras: Map<CardName, PlayCardMetadata>;
+
   constructor(
-    player: IPlayer,
+    private player: IPlayer,
     cards: Array<IProjectCard> = player.getPlayableCards(),
-    config?: {
+    public config?: {
       action?: CardAction,
-      enabled?: ReadonlyArray<boolean>,
-      title?: string | Message,
-      buttonLabel?: string,
     }) {
-    super(player, cards, config);
+    super('projectCard', 'Play project card');
+    this.buttonLabel = 'Play card';
+    this.cards = cards.map((card) => card);
     this.extras = new Map(
       cards.map((card) => {
         return [
@@ -29,6 +38,58 @@ export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
           },
         ];
       }));
+  }
+
+  public toModel(player: IPlayer): SelectProjectCardToPlayModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'projectCard',
+      cards: cardsToModel(player, this.cards, {showCalculatedCost: true, extras: this.extras}),
+      microbes: player.getSpendable('microbes'),
+      floaters: player.getSpendable('floaters'),
+      paymentOptions: {
+        heat: player.canUseHeatAsMegaCredits,
+        lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+        plants: player.canUsePlantsAsMegacredits,
+      },
+      lunaArchivesScience: player.getSpendable('lunaArchivesScience'),
+      seeds: player.getSpendable('seeds'),
+      graphene: player.getSpendable('graphene'),
+      kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
+    };
+  }
+
+  public process(input: InputResponse) {
+    if (!isSelectProjectCardToPlayResponse(input)) {
+      throw new InputError('Not a valid SelectProjectCardToPlayResponse');
+    }
+    if (!isPayment(input.payment)) {
+      throw new InputError('payment is not a valid type');
+    }
+
+    const card = this.cards.find((card) => card.name === input.card);
+    if (card === undefined) {
+      throw new InputError('Unknown card name ' + input.card);
+    }
+    const details = this.extras.get(input.card);
+    if (details === undefined) {
+      throw new InputError('Unknown card name ' + input.card);
+    }
+    // These are not used for safety but do help give a better error message
+    // to the user
+    const reserveUnits = details.reserveUnits;
+    if (reserveUnits.steel + input.payment.steel > this.player.steel) {
+      throw new InputError(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
+    }
+    if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
+      throw new InputError(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
+    }
+    if (reserveUnits.plants + input.payment.plants > this.player.plants) {
+      throw new InputError(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
+    }
+    this.payAndPlay(card, input.payment);
+    return undefined;
   }
 
   // Public for tests
@@ -51,9 +112,5 @@ export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
       }
     }
     this.cb(card);
-  }
-
-  protected override validate(): void {
-    // No additional validation
   }
 }

@@ -3,9 +3,8 @@ import {Asteroid} from '../../../src/server/cards/base/Asteroid';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Asteroid', () => {
   let card: Asteroid;

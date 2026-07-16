@@ -16,10 +16,10 @@ describe('PointLuna', () => {
 
   it('Gets card when earth tag played', () => {
     player.playedCards.push(card);
-    card.onCardPlayed(player, new Ants());
+    card.onCardPlayedForCorps(player, new Ants());
     expect(player.cardsInHand).has.lengthOf(0);
 
-    card.onCardPlayed(player, new EarthCatapult());
+    card.onCardPlayedForCorps(player, new EarthCatapult());
     expect(player.cardsInHand).has.lengthOf(1);
   });
 

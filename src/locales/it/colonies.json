@@ -37,6 +37,7 @@
   "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA CHE GIÀ CONTENGA UN'ALTRA TUA COLONIA. Pesca 2 carte.",
 
   "Urban Decomposers": "Decompositori Urbani",
+  "City": "Città",
   "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Richiede che tu abbia in gioco almeno 1 tessera Città e 1 Colonia. Incrementa la tua Produzione di Piante di 1 livello e aggiungi 2 Microbi ad una carta QUALUNQUE.",
 
   "Trading Colony": "Colonia Commerciale",
@@ -70,6 +71,7 @@
   "Gain all your colony bonuses.":"Ottieni tutti i bonus relativi alle tue Colonie.",
 
   "Space Port Colony":"Colonia dello Spazioporto",
+  "Colony":"Colonia",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale.",
   "1 VP per 2 colonies in play.":"1 PV per ogni coppia di Colonie in gioco.",
 
@@ -99,9 +101,12 @@
 
   "Titan Air-scrapping": "Frammentazione dell'Aria",
   "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Azione: spendi 1 risorsa Titanio per aggiungere 2 Galleggianti a questa carta, oppure spendi 2 Galleggianti su questa carta per incrementare il tuo TT di 1 livello.",
+  "Action: Spend 2 floaters here to increase your TR 1 step.":"Azione: spendi 2 Galleggianti da qui per incrementare il tuo TT di 1 livello.",
+  "Action: Spend 1 titanium to add 2 floaters here.":"Azione: spendi 1 risorsa Titanio per aggiungere qui 2 Galleggianti.",
 
   "Titan Shuttles": "Shuttle da Titano",
-  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.":"Azione: aggiungi 2 Galleggianti AD UNA QUALUNQUE CARTA GIOVIANA OPPURE spendi un qualunque numero di Galleggianti su questa carta per ottenere un numero equivalente di risorse Titanio.",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.":"Azione: aggiungi 2 Galleggianti AD UNA QUALUNQUE CARTA GIOVIANA.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "Spendi un qualunque numero di Galleggianti su questa carta per ottenere un numero equivalente di risorse Titanio.",
 
   "Floater Prototypes":"Prototipi di Galleggianti",
   "Add two floaters to ANOTHER card.":"Aggiungi 2 Galleggianti AD UN'ALTRA CARTA.",
@@ -115,7 +120,8 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.":"Richiede che tu scarti 1 dei tuoi Galleggianti. Ruba 5 M€ ad un giocatore qualunque.",
 
   "Atmo Collectors":"Collettori Atmosferici",
-  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.":"Azione: aggiungi 1 Galleggiante a questa carta OPPURE spendi 1 Galleggiante da questa carta per ottenere 2 risorse Titanio, o 3 risorse Energia, o 4 risorse Calore.",
+  "Action: Add one floater here.":"Azione: aggiungi 1 Galleggiante a questa carta.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.":"Azione: spendi 1 Galleggiante da questa carta per ottenere 2 risorse Titanio, o 3 risorse Energia, o 4 risorse Calore.",
   "Add 2 floaters to ANY card.":"Aggiungi 2 Galleggianti ad una QUALUNQUE carta.",
 
   "Community Services":"Servizi Comunitari",
@@ -125,6 +131,7 @@
   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":"Richiede 2 simboli Terra. La prossima carta che giochi durante la Generazione attuale costa 16 M€ in meno.",
 
   "Corona Extractor":"Estrattore della Corona",
+  "4 Science":"4 Scienza",
 
   "Cryo-Sleep":"Crio-Sonno",
   "Effect: When you trade, you pay 1 less resource for it.":"Effetto: quando commerci, paghi 1 risorsa in meno.",
@@ -147,7 +154,8 @@
 
 
   "Jupiter Floating Station":"Stazione Galleggiante di Giove",
-  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].":"Azione: aggiungi 1 Galleggiante ad una CARTA GIOVIANA OPPURE ottieni 1 M€ per ogni Galleggiante su questa carta [AL MASSIMO 4].",
+  "Action: Add 1 floater to a JOVIAN CARD.":"Azione: aggiungi 1 Galleggiante ad una CARTA GIOVIANA.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].":"Azione: ottieni 1 M€ per ogni Galleggiante su questa carta [AL MASSIMO 4].",
   "Requires 3 science tags.":"Richiede 3 simboli Scienza.",
 
   "Lunar Exports":"Esportazioni Lunari",

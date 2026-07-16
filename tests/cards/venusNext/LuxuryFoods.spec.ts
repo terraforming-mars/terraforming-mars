@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LuxuryFoods} from '../../../src/server/cards/venusNext/LuxuryFoods';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('LuxuryFoods', () => {
   it('Should play', () => {

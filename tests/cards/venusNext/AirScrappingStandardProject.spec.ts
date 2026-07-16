@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {testGame} from '../../TestGame';
-import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('AirScrappingStandardProject', () => {
   let card: AirScrappingStandardProject;
@@ -29,7 +28,7 @@ describe('AirScrappingStandardProject', () => {
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
 
-    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    card.action(player);
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
@@ -46,7 +45,7 @@ describe('AirScrappingStandardProject', () => {
     expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
-    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(MAX_VENUS_SCALE);

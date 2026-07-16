@@ -6,7 +6,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "HANDLING: PLASSER ET SAMFUNN (SPILLERMARKØR) PÅ ET IKKE-RESERVERT OMRÅDE SOM ER INNTIL EN AV DINE PLASSERTE BRIKKER ELLER MARKERTE OMRÅDER.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFFEKT: MARKERTE OMRÅDER ER RESERVERT FOR DEG. NÅR DU PLASSERER ET PLASSERINGSBRIKKE DER, FÅR DU 3 M€.",
 
-  "AstroDrill": "",
+  "Astrodrill": "",
   "Astrodrill ENT": "Astrodrill",
   "You start with 35 M€ and 3 asteroid resources.": "Du starter med 35 M€ og 3 asteroideressurser.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "HANDLING: LEGG TIL EN ASTEROIDERESSURS TIL EN VALGFRI KORT ELLER FÅ EN STANDARDRESSURS, ELLER FJERN EN ASTEROIDERESSURS FRA DENNE KORTET FOR Å FÅ 3 TITAN.",
@@ -55,5 +55,5 @@
   "TACTICAL GENOMICS": "TAKTISK GENOMIKK",
   "Splice": "",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Du starter med 44 M€. Som din første handling, vis kort fra kortstokken til du har funnet et mikrobesymbol. Ta det og kast resten.",
-  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Effekt: Når et mikrobesymbol spilles, inkl. dette, FÅR DEN SPILLEREN 2 M€, eller legger til en mikrobe på DETTE kortet, og du får 2 M€."
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Effekt: Når et mikrobesymbol spilles, inkl. dette, FÅR DEN SPILLEREN 2 M€, eller legger til en mikrobe på DETTE kortet, og du får 2 M€."
 }

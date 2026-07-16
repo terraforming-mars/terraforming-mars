@@ -21,8 +21,6 @@ import {Pallas} from '../cards/community/Pallas';
 import {GameModule} from '../../common/cards/GameModule';
 import {IapetusII} from '../cards/pathfinders/IapetusII';
 import {Deimos} from './Deimos';
-import {Terra} from '../cards/community/Terra';
-import {Kuiper} from '../cards/community/Kuiper';
 // import {LeavittII} from '../cards/pathfinders/LeavittII';
 
 export interface IColonyFactory<T> {
@@ -53,8 +51,6 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.LEAVITT, Factory: Leavitt},
   {colonyName: ColonyName.PALLAS, Factory: Pallas},
   {colonyName: ColonyName.DEIMOS, Factory: Deimos},
-  {colonyName: ColonyName.TERRA, Factory: Terra},
-  {colonyName: ColonyName.KUIPER, Factory: Kuiper},
 ];
 
 export const PATHFINDERS_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
@@ -65,11 +61,7 @@ export const PATHFINDERS_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 export const ALL_COLONIES_TILES = [...BASE_COLONIES_TILES, ...COMMUNITY_COLONIES_TILES, ...PATHFINDERS_COLONIES_TILES];
 
 export function getColonyModule(name: ColonyName): GameModule {
-  if (COMMUNITY_COLONIES_TILES.some((f) => f.colonyName === name)) {
-    return 'community';
-  }
-  if (PATHFINDERS_COLONIES_TILES.some((f) => f.colonyName === name)) {
-    return 'pathfinders';
-  }
+  if (COMMUNITY_COLONIES_TILES.some((f) => f.colonyName === name)) return 'community';
+  if (PATHFINDERS_COLONIES_TILES.some((f) => f.colonyName === name)) return 'pathfinders';
   return 'colonies';
 }

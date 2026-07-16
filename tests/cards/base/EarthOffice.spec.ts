@@ -4,7 +4,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('EarthOffice', () => {
   let card: EarthOffice;

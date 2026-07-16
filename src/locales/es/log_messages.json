@@ -25,6 +25,7 @@
     "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} le ha quitado ${1} recruso/s a ${2} de ${3}",
     "Card not found" : "No se ha encontrado la carta",
     "Incorrect options provided" : "Se han facilitado opciones incorrectas",
+    "Input contains unauthorized keys": "La entrada contiene teclas no autorizadas",
     "Amount provided too high (max ": "La cantidad introducida es muy alta (máximo ",
     "Amount provided too low (min ": "La cantidad introducida es muy baja (mínmo ",
     "No colony selected": "No se ha seleccionado una colonia",
@@ -42,11 +43,13 @@
     "Increase Venus scale": "Aumenta el nivel de Venus",
     "Increase": "Aumentar",
     "Add an ocean": "Coloca una loseta de océano",
-    "You do not have enough steel": "No dispone de suficiente acero ",
-    "You do not have enough titanium": "No dispone de suficiente titanio",
-    "You do not have enough M€": "No dispone de suficientes megacréditos",
+    "Do not have enough steel": "No dispone de suficiente acero ",
+    "Do not have enough titanium": "No dispone de suficiente titanio",
+    "Do not have enough M€": "No dispone de suficientes megacréditos",
     "Did not spend enough to pay for card": "Na ha pagado lo suficiente para jugar la carta",
     "All awards already funded": "Ya han sido finanziados todas las recompensas",
+    "Didn\u2019t even find player": "No se ha encontrado un jugador",
+    "No player has played requested card": "Ningún jugador ha jugado la carta solicitada",
     "Drew and discarded ${0} to place a ${1}": "Ha robado y descartado ${0} para colocar ${1}",
 
     "${0} played ${1}": "${0} ha jugado ${1}",
@@ -73,6 +76,8 @@
 
 
     "${0} drew ${1}":"${0} ha robado ${1}",
+    "${0} drew ${1} and ${2}":"${0} ha robado ${1} y ${2}",
+    "${0} drew ${1}, ${2} and ${3}": "${0} ha robado ${1}, ${2} y ${3}",
     "${0} sold ${1} patents": "${0} vendió ${1} patente(s)",
     "${0}'s ${1} production increased by ${2}":"La producción de ${1} de ${0} ha sido incrementada en ${2}",
     "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} en ${3}",
@@ -85,5 +90,5 @@
     "drew":"ha robado",
     "bought":"ha comprado",
     "sold":"ha vendido",
-    "Discarded ${0} cards ${1}": "${0} carta/s han sido descartadas ${1}"
+    "${0} card(s) were discarded": "${0} carta/s han sido descartadas"
 }

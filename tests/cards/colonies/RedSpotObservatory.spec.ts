@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {RedSpotObservatory} from '../../../src/server/cards/colonies/RedSpotObservatory';
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

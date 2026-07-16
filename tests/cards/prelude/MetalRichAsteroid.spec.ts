@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MetalRichAsteroid} from '../../../src/server/cards/prelude/MetalRichAsteroid';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('Metal-RichAsteroid', () => {
   it('Should play', () => {

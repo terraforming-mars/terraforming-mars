@@ -3,7 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {inplaceShuffle} from '../../utils/shuffle';
 
 export class Maria extends CeoCard {
   constructor() {
@@ -21,21 +20,18 @@ export class Maria extends CeoCard {
 
   public override canAct(player: IPlayer): boolean {
     const game = player.game;
-    if (game.discardedColonies === undefined || !game.gameOptions.coloniesExtension) {
-      return false;
-    }
+    if (game.discardedColonies === undefined || !game.gameOptions.coloniesExtension) return false;
     return game.discardedColonies.length > 0 && this.isDisabled === false;
   }
 
   public action(player: IPlayer): undefined {
     const game = player.game;
     const count = Math.min(game.discardedColonies.length, player.game.generation);
-    const availableColonies = game.discardedColonies.slice();
-    inplaceShuffle(availableColonies, game.rng);
+    const availableColonies = game.discardedColonies.slice(0, count);
 
     this.isDisabled = true;
     ColoniesHandler.addColonyTile(player, {
-      colonies: availableColonies.slice(0, count), cb: (colony) => {
+      colonies: availableColonies, cb: (colony) => {
         if (colony.isActive) {
           colony.addColony(player);
         }

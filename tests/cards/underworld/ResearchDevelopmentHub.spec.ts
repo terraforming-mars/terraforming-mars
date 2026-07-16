@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {ResearchDevelopmentHub} from '../../../src/server/cards/underworld/ResearchDevelopmentHub';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('ResearchDevelopmentHub', () => {
   it('play', () => {

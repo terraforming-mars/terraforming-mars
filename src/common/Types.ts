@@ -44,4 +44,3 @@ export type JSONValue =
     | Array<JSONValue>;
 
 export type JSONObject = { [x: string]: JSONValue };
-

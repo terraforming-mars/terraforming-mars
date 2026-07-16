@@ -3,10 +3,9 @@ import {expect} from 'chai';
 import {ImportedHeavyMachinery} from '../../../src/server/cards/underworld/ImportedHeavyMachinery';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ImportedHeavyMachinery', () => {
   let game: IGame;

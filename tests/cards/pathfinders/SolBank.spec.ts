@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SolBank} from '../../../src/server/cards/pathfinders/SolBank';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
@@ -19,7 +19,6 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('SolBank', () => {
   let solBank: SolBank;
@@ -44,7 +43,7 @@ describe('SolBank', () => {
     spctp.process({
       type: 'projectCard',
       card: CardName.MICRO_MILLS,
-      payment: Payment.of({megacredits: 3}),
+      payment: Payment.of({megaCredits: 3}),
     });
     runAllActions(game);
 
@@ -111,7 +110,7 @@ describe('SolBank', () => {
     expect(game.getTemperature()).eq(-30);
 
     const asteroidStandardProject = new AsteroidStandardProject();
-    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: asteroidStandardProject.cost}));
+    asteroidStandardProject.action(player);
     runAllActions(game);
 
     expect(game.getTemperature()).eq(-28);

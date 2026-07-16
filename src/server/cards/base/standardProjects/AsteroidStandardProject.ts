@@ -31,7 +31,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
 
   public override canAct(player: IPlayer): boolean {
     if (player.game.getTemperature() >= constants.MAX_TEMPERATURE) {
-      this.addWarning('maxtemp');
+      this.warnings.add('maxtemp');
     }
     return super.canAct(player);
   }

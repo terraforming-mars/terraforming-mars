@@ -5,23 +5,23 @@
       :class="{'sidebar_item--is-active': languagePanelOpen}">
       <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
       :title="title"
-      @click="languagePanelOpen = !languagePanelOpen"></div>
+      v-on:click="languagePanelOpen = !languagePanelOpen"/>
       </div>
-    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
+    <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {LANGUAGES} from '@/common/constants';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'LanguageIcon',
   components: {
-    LanguageSelectionDialog,
+    'language-selection-dialog': LanguageSelectionDialog,
   },
   data() {
     return {

@@ -1,22 +1,22 @@
-import {App} from 'vue';
+import _Vue from 'vue';
 import {translateTextNode, $t} from '@/client/directives/i18n';
 
-declare module 'vue' {
-  interface ComponentCustomProperties {
+declare module 'vue/types/vue' {
+  interface Vue {
     $t: typeof $t;
   }
 }
 
 export default {
-  install: (app: App) => {
-    app.config.globalProperties.$t = $t;
+  install: (Vue: typeof _Vue) => {
+    Vue.prototype.$t = $t;
 
-    app.directive('i18n', {
-      mounted: (el: HTMLElement, binding: any) => {
+    Vue.directive('i18n', {
+      inserted: (el, binding) => {
         el.setAttribute('tm-has-i18n', 'true');
         translateTextNode(el, binding);
       },
-      updated: translateTextNode,
+      componentUpdated: translateTextNode,
     });
   },
 };

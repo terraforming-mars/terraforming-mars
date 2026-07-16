@@ -4,34 +4,31 @@
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"
-      :value="modelValue"
-      @input="onInput"
-    >
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+    />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
+import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PaymentUnitComponent',
   props: {
-    // TODO(kberg): Rename to count.
-    modelValue: {
+    value: {
       type: Number,
-      required: true,
     },
     unit: {
       type: String as () => SpendableResource,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     showMax: {
       type: Boolean,
@@ -42,6 +39,9 @@ export default defineComponent({
   components: {
     AppButton,
   },
+  methods: {
+    ...PaymentWidgetMixin.methods,
+  },
   computed: {
     iconClass(): string {
       switch (this.unit) {
@@ -50,13 +50,9 @@ export default defineComponent({
       case 'spireScience': return 'resource_icon--science';
       case 'auroraiData': return 'resource_icon--auroraidata';
       case 'seeds': return 'resource_icon--seed';
+      case 'megaCredits': return 'resource_icon--megacredits';
       default: return 'resource_icon--' + this.unit;
       }
-    },
-  },
-  methods: {
-    onInput(event: Event) {
-      this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
     },
   },
 });

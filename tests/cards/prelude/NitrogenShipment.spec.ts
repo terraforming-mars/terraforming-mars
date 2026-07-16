@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {NitrogenShipment} from '../../../src/server/cards/prelude/NitrogenShipment';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('NitrogenShipment', () => {
   it('Should play', () => {

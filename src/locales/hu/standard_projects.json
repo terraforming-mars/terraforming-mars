@@ -1,4 +1,5 @@
 {
+  "Buffer Gas": "Puffergáz",
   "Spend 16 M€ to increase your TR 1 step. Solo games only.": "Költs el 16 M€-et és növeld a TR-ed 1 értékkel! 1 játékos módban csak.",
   "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "Költs el 25 M€-et és rakj le 1 Városlapkát! Növeld a M€-termelésed 1 értékkel!",
   "Spend 17 M€ to place a colony.": "Költs el 17 M€-et egy gyarmat létrehozásához!",
@@ -7,6 +8,8 @@
   "Sell Patents": "Szabadalom értékesítése",
   "Sell patents": "Szabadalmak értékesítése",
   "Discard any number of cards to gain that amount of M€.": "Dobj el a kezedből bármennyi kártyát és ugyanennyi M€-et kapsz!",
+  "Asteroid": "Aszteroida",
+  "asteroid": "aszteroida",
   "Spend 14 M€ to raise the temperature 1 step.": "Költs el 14 M€-et és növeld a hőmérsékletet 1 értékkel!",
   "Air Scrapping": "Légtördelés",
   "Air Scrapping (Var)": "Légtördelés (Mód)",
@@ -36,7 +39,7 @@
   "Road Infrastructure": "Közúti infrastruktúra",
   "Road Infrastructure (var. 1)": "Közúti infrastruktúra (mód 1)",
   "Road Infrastructure (var. 2)": "Közúti infrastruktúra (mód 2)",
-  "Spend 18 M€ and 1 steel to place a road on The Moon and raise the logistic rate 1 step.": "Költs el 18 M€-et és 1 acélt, és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!",
-  "Spend 19 M€ (steel may be used) AND 1 steel to place a road on The Moon and raise the logistic rate 1 step.": "Költs el 19 M€-et (acélt is használhatsz) és 1 acélt, és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!",
-  "Spend 21 M€ to place a road on The Moon and raise the logistic rate 1 step.": "Költs el 21 M€-et és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!"
+  "Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.": "Költs el 18 M€-et és 1 acélt, és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!",
+  "Spend 19 M€ (steel may be used) AND 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.": "Költs el 19 M€-et (acélt is használhatsz) és 1 acélt, és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!",
+  "Spend 21 M€ to place a road on The Moon and raise the Logistics Rate 1 step.": "Költs el 21 M€-et és rakj 1 Útlapkát a Holdra, majd növeld a logisztika rátát 1 értékkel!"
 }

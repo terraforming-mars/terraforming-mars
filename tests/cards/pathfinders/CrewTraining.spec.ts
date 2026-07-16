@@ -6,7 +6,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('CrewTraining', () => {
   let card: CrewTraining;
@@ -15,7 +15,7 @@ describe('CrewTraining', () => {
 
   beforeEach(() => {
     card = new CrewTraining();
-    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
+    [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('Should play', () => {

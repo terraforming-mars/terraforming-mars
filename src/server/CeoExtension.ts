@@ -1,15 +1,9 @@
 import {IPlayer} from './IPlayer';
-import {IActionCard, isIActionCard} from './cards/ICard';
-import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
+import {isCeoCard} from './cards/ceos/ICeoCard';
 
 export class CeoExtension {
-  public static  getUsableOPGCeoCards(player: IPlayer): Array<ICeoCard & IActionCard> {
-    const result: Array<ICeoCard & IActionCard> = [];
-    for (const card of player.tableau) {
-      if (isCeoCard(card) && isIActionCard(card) && card.canAct(player) ) {
-        result.push(card);
-      }
-    }
-    return result;
+  public static ceoActionIsUsable(player: IPlayer): boolean {
+    // If _at least_ one CEO has usable actions, return true
+    return player.playedCards.some((card) => isCeoCard(card) && card.canAct(player));
   }
 }

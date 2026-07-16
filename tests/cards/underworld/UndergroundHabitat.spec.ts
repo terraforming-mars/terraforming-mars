@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {UndergroundHabitat} from '../../../src/server/cards/underworld/UndergroundHabitat';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '@/common/utils/utils';
 
 describe('UndergroundHabitat', () => {
   it('Should play', () => {

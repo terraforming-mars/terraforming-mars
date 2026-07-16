@@ -3,14 +3,13 @@ import {IGame} from '../../src/server/IGame';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/common/boards/SpaceName';
 import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {toID} from '../../src/common/utils/utils';
-import {cast} from '../../src/common/utils/utils';
 
 describe('VastitasBorealisBoard', () => {
   let board: VastitasBorealisBoard;

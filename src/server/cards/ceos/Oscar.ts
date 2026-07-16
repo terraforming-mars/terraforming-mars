@@ -24,9 +24,7 @@ export class Oscar extends CeoCard {
 
   public override play(player: IPlayer) {
     const turmoil = player.game.turmoil;
-    if (turmoil) {
-      turmoil.addInfluenceBonus(player);
-    }
+    if (turmoil) turmoil.addInfluenceBonus(player);
     return undefined;
   }
 

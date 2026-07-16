@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {ForcedPrecipitation} from '../../../src/server/cards/venusNext/ForcedPrecipitation';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {Space} from '../../boards/Space';
-import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
+import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
@@ -48,7 +48,7 @@ export class Polaris extends CorporationCard implements ICorporationCard {
       cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true, from: {card: this}});
       if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase.SOLAR) {
         cardOwner.game.defer(
-          new GainResourcesDeferred(cardOwner, Resource.MEGACREDITS, {
+          new GainResources(cardOwner, Resource.MEGACREDITS, {
             count: 4, log: true, from: {card: this},
           }),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,

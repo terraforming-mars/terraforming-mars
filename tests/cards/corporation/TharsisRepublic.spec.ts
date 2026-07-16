@@ -3,11 +3,10 @@ import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepu
 import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {addCity, runAllActions} from '../../TestingUtils';
+import {addCity, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('TharsisRepublic', () => {
   let card: TharsisRepublic;

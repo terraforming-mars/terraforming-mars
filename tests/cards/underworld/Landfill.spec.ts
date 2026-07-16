@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Landfill} from '../../../src/server/cards/underworld/Landfill';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
 describe('Landfill', () => {

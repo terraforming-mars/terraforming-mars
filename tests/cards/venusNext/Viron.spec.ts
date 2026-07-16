@@ -4,7 +4,7 @@ import {Viron} from '../../../src/server/cards/venusNext/Viron';
 import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {FocusedOrganization} from '../../../src/server/cards/prelude2/FocusedOrganization';
 
 describe('Viron', () => {

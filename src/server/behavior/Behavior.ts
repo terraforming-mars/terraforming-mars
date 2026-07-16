@@ -152,13 +152,13 @@ export type Behavior = {
     habitatTile?: PlaceMoonTile,
     /** Places a mine tile and also raises the mining rate */
     mineTile?: PlaceMoonTile,
-    /** Places a road tile and also raises the logistic rate */
+    /** Places a road tile and also raises the logistics rate */
     roadTile?: PlaceMoonTile,
     /** Places a special tile on the Moon. */
     tile?: PlaceMoonTile & {type: TileType},
     habitatRate?: number,
     miningRate?: number,
-    logisticRate?: number,
+    logisticsRate?: number,
   },
 
   underworld?: {

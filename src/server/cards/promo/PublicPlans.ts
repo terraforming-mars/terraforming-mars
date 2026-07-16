@@ -31,14 +31,13 @@ export class PublicPlans extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select cards to reveal', 'Reveal', player.cardsInHand, {
+    return new SelectCard('Select cards to reveal', undefined, player.cardsInHand, {
       min: 0,
       max: player.cardsInHand.length,
-      showSelectAll: true,
     }).andThen((cards) => {
       player.stock.add(Resource.MEGACREDITS, cards.length, {log: true, from: {card: this}});
-      if (cards.length > 0) {
-        player.game.log('${0} revealed ${1}', (b) => b.player(player).cards(cards));
+      for (const card of cards) {
+        player.game.log('${0} revealed ${1}', (b) => b.player(player).card(card));
       }
       return undefined;
     });

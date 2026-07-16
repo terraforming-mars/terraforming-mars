@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {fakeCard, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {LaborTrafficking} from '../../../src/server/cards/underworld/LaborTrafficking';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -11,8 +11,6 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {SellPatentsStandardProject} from '../../../src/server/cards/base/standardProjects/SellPatentsStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
-import {Payment} from '../../../src/common/inputs/Payment';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('LaborTrafficking', () => {
   let card: LaborTrafficking;
@@ -43,7 +41,7 @@ describe('LaborTrafficking', () => {
     expect(player.actionsThisGeneration).does.not.include(CardName.LABOR_TRAFFICKING);
 
     // Take an action.
-    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: asteroidStandardProject.getAdjustedCost(player)}));
+    asteroidStandardProject.action(player);
     runAllActions(game);
 
     expect(player.actionsThisGeneration).includes(CardName.LABOR_TRAFFICKING);
@@ -54,7 +52,7 @@ describe('LaborTrafficking', () => {
     player.megaCredits = 14;
     expect(asteroidStandardProject.canAct(player)).is.true;
 
-    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: asteroidStandardProject.getAdjustedCost(player)}));
+    asteroidStandardProject.action(player);
     runAllActions(game);
 
     player.megaCredits = 22;
@@ -85,7 +83,7 @@ describe('LaborTrafficking', () => {
     player.underworldData.corruption = 1;
     expect(collusionStandardProject.canAct(player)).is.true;
 
-    collusionStandardProject.payAndExecute(player, Payment.of({megacredits: 0}));
+    collusionStandardProject.action(player);
     runAllActions(game);
     expect(player.megaCredits).eq(0);
   });

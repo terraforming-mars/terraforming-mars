@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churn, setTemperature} from '../../TestingUtils';
+import {cast, churn, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -7,7 +7,6 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ExtremeColdFungus', () => {
   let card: ExtremeColdFungus;

@@ -1,22 +1,22 @@
 <template>
   <div class="select-initial-cards">
-    <ConfirmDialog
+    <confirm-dialog
       message="Continue without buying any project cards?"
       ref="confirmation"
-      @accept="confirmSelection" />
-    <SelectCard :playerView="playerView" :playerinput="corpCardOption" :showtitle="true" :onsave="noop" @cardschanged="corporationChanged" />
+      v-on:accept="confirmSelection" />
+    <SelectCard :playerView="playerView" :playerinput="corpCardOption" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
     <div v-if="playerCanChooseAridor" class="player_home_colony_cont">
       <div v-i18n>These are the colony tiles Aridor may choose from:</div>
       <div class="discarded-colonies-for-aridor">
         <div class="player_home_colony small_colony" v-for="colonyName in playerView.game.discardedColonies" :key="colonyName">
-          <Colony :colony="getColony(colonyName)" :active="getColony(colonyName).isActive"/>
+          <colony :colony="getColony(colonyName)" :active="getColony(colonyName).isActive"></colony>
         </div>
       </div>
     </div>
-    <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" @cardschanged="preludesChanged" />
-    <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" @cardschanged="ceosChanged" />
-    <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" @cardschanged="cardsChanged" />
-    <template v-if="selectedCorporations.length === 1">
+    <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="ceosChanged" />
+    <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <template v-if="this.selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
       <div v-if="hasPrelude"><span v-i18n>After Preludes:</span> <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     </template>
@@ -30,7 +30,8 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 
 import AppButton from '@/client/components/common/AppButton.vue';
 import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -46,10 +47,13 @@ import {SelectInitialCardsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyModel, simpleColonyModel} from '@/common/models/ColonyModel';
+import {ColonyModel} from '@/common/models/ColonyModel';
 import * as titles from '@/common/inputs/SelectInitialCards';
 import {sum} from '@/common/utils/utils';
 
+type Refs = {
+  confirmation: InstanceType<typeof ConfirmDialog>,
+}
 
 type DataModel = {
   selectedCards: Array<CardName>,
@@ -62,32 +66,23 @@ type DataModel = {
   warning: string | undefined,
 }
 
-type Refs = {
-  confirmation: InstanceType<typeof ConfirmDialog>;
-};
-
-export default defineComponent({
+export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectInitialCards',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
     },
     playerinput: {
       type: Object as () => SelectInitialCardsModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectInitialCardsResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      default: true,
     },
     preferences: {
       type: Object as () => Readonly<Preferences>,
@@ -97,7 +92,7 @@ export default defineComponent({
   components: {
     AppButton,
     SelectCard,
-    ConfirmDialog,
+    'confirm-dialog': ConfirmDialog,
     Colony,
   },
   data(): DataModel {
@@ -143,7 +138,7 @@ export default defineComponent({
         const tags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
         return (-4 * tags);
 
-      // When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
+      // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
       case CardName.SPLICE:
         const microbeTags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
         return (2 * microbeTags);
@@ -217,11 +212,9 @@ export default defineComponent({
     saveIfConfirmed() {
       const projectCards = this.selectedCards.filter((name) => getCard(name)?.type !== CardType.PRELUDE);
       let showAlert = false;
-      if (this.preferences.show_alerts && projectCards.length === 0) {
-        showAlert = true;
-      }
+      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
       if (showAlert) {
-        this.typedRefs.confirmation.show();
+        this.$refs.confirmation.show();
       } else {
         this.saveData();
       }
@@ -317,14 +310,18 @@ export default defineComponent({
     confirmSelection() {
       this.saveData();
     },
+    // TODO(kberg): Duplicate of LogPanel.getColony
     getColony(colonyName: ColonyName): ColonyModel {
-      return simpleColonyModel(colonyName);
+      return {
+        colonies: [],
+        isActive: false,
+        name: colonyName,
+        trackPosition: 0,
+        visitor: undefined,
+      };
     },
   },
   computed: {
-    typedRefs(): Refs {
-      return this.$refs as Refs;
-    },
     playerCanChooseAridor() {
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },

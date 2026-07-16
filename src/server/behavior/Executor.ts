@@ -35,7 +35,7 @@ import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 import {asArray, inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
@@ -67,22 +67,18 @@ export class Executor implements BehaviorExecutor {
     if (behavior.global !== undefined) {
       const g = behavior.global;
       if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {
-        card.addWarning('maxtemp');
+        card.warnings.add('maxtemp');
       }
       if (g.oxygen !== undefined && game.getOxygenLevel() >= MAX_OXYGEN_LEVEL) {
-        if (g.oxygen < 0) {
-          card.addWarning('maxoxygen-reduce');
-        } else {
-          card.addWarning('maxoxygen');
-        }
+        card.warnings.add('maxoxygen');
       }
       if (g.venus !== undefined && game.getVenusScaleLevel() >= MAX_VENUS_SCALE) {
-        card.addWarning('maxvenus');
+        card.warnings.add('maxvenus');
       }
     }
 
     if (behavior.ocean !== undefined && game.board.getOceanSpaces().length >= MAX_OCEAN_TILES) {
-      card.addWarning('maxoceans');
+      card.warnings.add('maxoceans');
     }
 
     if (behavior.stock !== undefined) {
@@ -170,7 +166,7 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
         if (targets.length === 1 && targets[0] === player) {
-          card.addWarning('decreaseOwnProduction');
+          card.warnings.add('decreaseOwnProduction');
         }
       }
     }
@@ -272,13 +268,13 @@ export class Executor implements BehaviorExecutor {
         }
       }
       if ((moon.habitatRate ?? 0) >= MAXIMUM_HABITAT_RATE) {
-        card.addWarning('maxHabitatRate');
+        card.warnings.add('maxHabitatRate');
       }
       if ((moon.miningRate ?? 0) >= MAXIMUM_MINING_RATE) {
-        card.addWarning('maxMiningRate');
+        card.warnings.add('maxMiningRate');
       }
-      if ((moon.logisticRate ?? 0) >= MAXIMUM_LOGISTIC_RATE) {
-        card.addWarning('maxLogisticRate');
+      if ((moon.logisticsRate ?? 0) >= MAXIMUM_LOGISTICS_RATE) {
+        card.warnings.add('maxLogisticsRate');
       }
     }
 
@@ -414,7 +410,7 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))
             .andThen((unit) => {
-              player.stock.add(unit, count, {log: true});
+              player.stock.add(Units.ResourceMap[unit], count, {log: true});
               return undefined;
             }));
       }
@@ -451,15 +447,9 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.global !== undefined) {
       const g = behavior.global;
-      if (g.temperature !== undefined) {
-        player.game.increaseTemperature(player, g.temperature);
-      }
-      if (g.oxygen !== undefined) {
-        player.game.increaseOxygenLevel(player, g.oxygen);
-      }
-      if (g.venus !== undefined) {
-        player.game.increaseVenusScaleLevel(player, g.venus);
-      }
+      if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
+      if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
+      if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
     }
 
     if (behavior.tr !== undefined) {
@@ -473,7 +463,7 @@ export class Executor implements BehaviorExecutor {
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
-      if (player.game.inDoubleDown && player.game.doubleDownPrelude === card.name) {
+      if (player.game.inDoubleDown) {
         player.game.log('Resources from ${0} cannot be added to ${1}', (b) => b.card(card).cardName(CardName.DOUBLE_DOWN));
       } else {
         const count = ctx.count(addResources);
@@ -618,15 +608,9 @@ export class Executor implements BehaviorExecutor {
           player.game.defer(new PlaceSpecialMoonTile(player, {tileType: moon.tile.type, card: card?.name}));
         }
       }
-      if (moon.habitatRate !== undefined) {
-        MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
-      }
-      if (moon.miningRate !== undefined) {
-        MoonExpansion.raiseMiningRate(player, moon.miningRate);
-      }
-      if (moon.logisticRate !== undefined) {
-        MoonExpansion.raiseLogisticRate(player, moon.logisticRate);
-      }
+      if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
+      if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
+      if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
     }
 
     if (behavior.underworld !== undefined) {
@@ -724,7 +708,7 @@ export class Executor implements BehaviorExecutor {
 
       moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
       moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
-      moonLogistic: (behavior.moon?.logisticRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
+      moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
     };
     return trSource;
   }

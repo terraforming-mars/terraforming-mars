@@ -3,11 +3,10 @@ import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {churn, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('UnitedNationsMarsInitiative', () => {
   let card: UnitedNationsMarsInitiative;
@@ -58,7 +57,7 @@ describe('UnitedNationsMarsInitiative', () => {
     player.heat = 5;
 
     const selectPayment = cast(churn(card.action(player), player), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.terraformRating).to.eq(22);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);

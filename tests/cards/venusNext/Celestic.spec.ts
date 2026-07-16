@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
-import {churn} from '../../TestingUtils';
-import {cast} from '@/common/utils/utils';
+import {cast, churn} from '../../TestingUtils';
 
 describe('Celestic', () => {
   it('Should play', () => {

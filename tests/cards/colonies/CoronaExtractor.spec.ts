@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('CoronaExtractor', () => {
   it('Should play', () => {

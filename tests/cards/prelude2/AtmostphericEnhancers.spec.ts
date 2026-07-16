@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {AtmosphericEnhancers} from '../../../src/server/cards/prelude2/AtmosphericEnhancers';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setOxygenLevel, setRulingParty, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, setRulingParty, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IGame} from '../../../src/server/IGame';
 import {floaterCards} from '../../../src/server/cards/venusNext/floaterCards';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('AtmosphericEnhancers', () => {
   let card: AtmosphericEnhancers;

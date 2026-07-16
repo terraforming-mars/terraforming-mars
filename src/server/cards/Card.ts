@@ -27,9 +27,6 @@ import {asArray} from '../../common/utils/utils';
 import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
-import {Resource} from '@/common/Resource';
-
-const NO_WARNINGS: ReadonlySet<Warning> = new Set();
 
 /**
  * Cards that do not need a cost attribute.
@@ -43,7 +40,7 @@ const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
 
 /* Properties that are the same internally and externally */
 type SharedProperties = {
-  /** Prefer setting adjacencyBonus inside behavior.tile instead. */
+  /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   action?: Behavior | undefined;
   behavior?: Behavior | undefined;
@@ -111,8 +108,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
 export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
-  // Warnings are a read-only set because the X00_000 sets that are just empty consume many MB for no value.
-  public warnings: ReadonlySet<Warning> = NO_WARNINGS;
+  public warnings = new Set<Warning>();
   public additionalProjectCosts?: AdditionalProjectCosts = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
@@ -314,9 +310,7 @@ export abstract class Card implements ICard {
       return 0;
     }
 
-    if (typeof(vps) === 'number') {
-      return vps;
-    }
+    if (typeof(vps) === 'number') return vps;
 
     if (vps.targetOneOrMore === true || vps.anyPlayer === true) {
       throw new Error('Not yet handled');
@@ -351,13 +345,6 @@ export abstract class Card implements ICard {
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
         throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
-      }
-      return;
-    } else if (typeof(vps) === 'object' && vps.nextToThis !== undefined) {
-      // nextToThis VP needs explicit metadata.victoryPoints for rendering since auto-generation
-      // cannot express adjacency-scoped VP icons.
-      if (properties.metadata.victoryPoints === undefined) {
-        throw new Error('When card.victoryPoints uses nextToThis, metadata.victoryPoints must also be supplied for rendering');
       }
       return;
     } else {
@@ -454,17 +441,6 @@ export abstract class Card implements ICard {
     }
     return 0;
   }
-
-  public addWarning(warning: Warning): void {
-    if (this.warnings === NO_WARNINGS) {
-      this.warnings = new Set();     // allocate only on first real warning
-    }
-    (this.warnings as Set<Warning>).add(warning);
-  }
-
-  public clearWarnings(): void {
-    this.warnings = NO_WARNINGS;      // drop the per-card Set, back to shared empty
-  }
 }
 
 function populateCount(requirement: CardRequirementDescriptor): CardRequirementDescriptor {
@@ -508,7 +484,7 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
       validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
       validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
       validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
     }
     // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
@@ -516,16 +492,4 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
-}
-
-type CardWithBonusResource = Card & {defaultProductionBox?: Units, bonusResource: Array<Resource> | undefined}
-/* Not sure this belongs here. */
-export function productionBoxWithBonusResource(card: CardWithBonusResource) {
-  const units: Units = card.defaultProductionBox ?
-    {...card.defaultProductionBox} :
-    {...Units.EMPTY};
-  if (card.bonusResource && card.bonusResource.length === 1) {
-    units[card.bonusResource[0]] += 1;
-  }
-  return units;
 }

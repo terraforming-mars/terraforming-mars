@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {ArboristCollective} from '../../../src/server/cards/underworld/ArboristCollective';
 import {testGame} from '../../TestGame';
-import {fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ArboristCollective', () => {
   let card: ArboristCollective;
@@ -50,14 +49,14 @@ describe('ArboristCollective', () => {
     expect(card.resourceCount).eq(0);
 
     // Card is too expensive
-    card.onCardPlayed(player, fakeCard({type: CardType.EVENT, cost: 15}));
+    card.onCardPlayedForCorps(player, fakeCard({type: CardType.EVENT, cost: 15}));
     expect(card.resourceCount).eq(0);
 
     // Card is not an event
-    card.onCardPlayed(player, fakeCard({type: CardType.ACTIVE, cost: 14}));
+    card.onCardPlayedForCorps(player, fakeCard({type: CardType.ACTIVE, cost: 14}));
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, fakeCard({type: CardType.EVENT, cost: 14}));
+    card.onCardPlayedForCorps(player, fakeCard({type: CardType.EVENT, cost: 14}));
     expect(card.resourceCount).eq(1);
   });
 });

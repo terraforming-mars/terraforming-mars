@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SelfSufficientSettlement} from '../../../src/server/cards/prelude/SelfSufficientSettlement';
 import {Units} from '../../../src/common/Units';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('SelfSufficientSettlement', () => {
   it('Should play', () => {

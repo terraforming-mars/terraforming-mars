@@ -25,9 +25,7 @@ export class RouteTestScaffolding {
       },
       clock: new FakeClock(),
     };
-    if (!this.req.headers) {
-      this.req.headers = {};
-    }
+    if (!this.req.headers) this.req.headers = {};
   }
 
   // Strictly speaking |url| can also accept a fragment.

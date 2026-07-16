@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {MicroGeodesics} from '../../../src/server/cards/underworld/MicroGeodesics';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectClaimedUndergroundToken} from '../../../src/server/inputs/SelectClaimedUndergroundToken';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('MicroGeodesics', () => {
   let card: MicroGeodesics;

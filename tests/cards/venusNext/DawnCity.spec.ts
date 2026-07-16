@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DawnCity} from '../../../src/server/cards/venusNext/DawnCity';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('DawnCity', () => {
   it('Should play', () => {

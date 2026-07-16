@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {all, uppercase} from '../Options';
+import {all} from '../Options';
 
 export class LunarSecurityStations extends Card implements IProjectCard {
   constructor() {
@@ -17,16 +17,16 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       requirements: {roadTiles: 3, all},
 
       behavior: {
-        moon: {logisticRate: 1},
+        moon: {logisticsRate: 1},
       },
 
       metadata: {
         description: 'Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.',
         cardNumber: 'M42',
         renderData: CardRenderer.builder((b) => {
-          b.text('Opponents may not remove your', {size: Size.SMALL, uppercase}).br;
+          b.text('Opponents may not remove your', Size.SMALL, true).br;
           b.steel(1).titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
-          b.moonLogisticRate();
+          b.moonLogisticsRate();
         }),
       },
     });

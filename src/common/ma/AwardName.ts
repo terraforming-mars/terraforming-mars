@@ -58,7 +58,7 @@ export const awardNames = [
   'Naturalist',
   'Voyager',
 
-  // Vastitas Borealis Nova
+  // Vastitas Borealis Novus
   'Traveller', // And modular
   'Landscaper',
   'Highlander',
@@ -93,8 +93,9 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // When renaming an award add the old name here (like the example below), and add a TODO (like the example below)
   // And remember to add a test in spec.ts.
 
-  // TODO(yournamehere): remove after 2026-04-05
-  // ['EdgeLord', 'Excavator'],
+  // TODO(yournamehere): remove after 2021-04-05
+  // TODO(kberg): Remove after 2021-08-15
+  ['EdgeLord', 'Excavator'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

@@ -23,7 +23,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
         cardNumber: 'U082',
         renderData: CardRenderer.builder((b) => {
           b.text('-X').corruption(1).asterix().text('-X').megacredits(3).asterix().br;
-          b.text('THIS CAN\'T BE BLOCKED BY CORRUPTION', {size: Size.SMALL});
+          b.text('THIS CAN\'T BE BLOCKED BY CORRUPTION', Size.SMALL);
         }),
         description: 'The player with more corruption than anybody else ' +
         'discards corruption until they have the same amount as the 2nd highest player, ' +
@@ -41,7 +41,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.isSoloMode()) {
-      this.addWarning('noEffect');
+      this.warnings.add('noEffect');
     } else {
       const analysis = this.analyzeCorruption(player);
       if (analysis.playersWithMaxCorruption.length > 1) {
@@ -49,7 +49,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       }
       if (player.game.players.length > 1) {
         if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
-          this.addWarning('selfTarget');
+          this.warnings.add('selfTarget');
         }
       }
     }

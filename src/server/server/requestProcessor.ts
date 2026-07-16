@@ -1,4 +1,4 @@
-import prometheus from 'prom-client';
+import * as prometheus from 'prom-client';
 import {Clock} from '../../common/Timer';
 import {paths} from '../../common/app/paths';
 import {Request} from '../Request';
@@ -11,7 +11,6 @@ import {ApiGame} from '../routes/ApiGame';
 import {ApiGameHistory} from '../routes/ApiGameHistory';
 import {ApiGameLogs} from '../routes/ApiGameLogs';
 import {ApiGames} from '../routes/ApiGames';
-import {ApiHeapSnapshot} from '../routes/ApiHeapSnapshot';
 import {ApiIPs} from '../routes/ApiIPs';
 import {ApiLogout} from '../routes/ApiLogout';
 import {ApiMetrics} from '../routes/ApiMetrics';
@@ -73,7 +72,6 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_GAME_HISTORY, ApiGameHistory.INSTANCE],
     [paths.API_GAME_LOGS, ApiGameLogs.INSTANCE],
     [paths.API_GAMES, ApiGames.INSTANCE],
-    [paths.API_HEAP_SNAPSHOT, ApiHeapSnapshot.INSTANCE],
     [paths.API_IPS, ApiIPs.INSTANCE],
     [paths.API_METRICS, ApiMetrics.INSTANCE],
     [paths.API_PLAYER, ApiPlayer.INSTANCE],
@@ -92,8 +90,6 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
-    ['vendors.js', ServeAsset.INSTANCE],
-    ['vendors.js.map', ServeAsset.INSTANCE],
     [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
@@ -112,13 +108,10 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
+  if (typeof socketIpAddress === 'object') {
     return '!' + socketIpAddress.address + '!';
   }
-  if (typeof socketIpAddress === 'string') {
-    return socketIpAddress;
-  }
-  return '';
+  return socketIpAddress;
 }
 
 function getHandler(pathname: string): IHandler | undefined {
@@ -126,10 +119,7 @@ function getHandler(pathname: string): IHandler | undefined {
   if (handler !== undefined) {
     return handler;
   }
-  if (pathname.startsWith('assets/')) {
-    return ServeAsset.INSTANCE;
-  }
-  if (pathname.startsWith('chunks/')) {
+  if (pathname.startsWith('assets/') || pathname === 'sw.js') {
     return ServeAsset.INSTANCE;
   }
   return undefined;
@@ -143,7 +133,6 @@ export function processRequest(req: Request, res: Response): void {
     ipTracker.add(ipAddress);
     if (ipBlocklist.isBlocked(ipAddress)) {
       responses.notFound(req, res);
-      return;
     }
 
     if (req.method === 'HEAD') {

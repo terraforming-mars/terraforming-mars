@@ -26,10 +26,13 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: 'X16',
         renderData: CardRenderer.builder((b) => {
-          b.titanium(1).arrow().resource(CardResource.ASTEROID).asterix().nbsp.or().br;
-          b.resource(CardResource.ASTEROID).arrow().oceans(1).br;
-
-          b.plainText('Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.', /* parens */ true);
+          b.action('Spend 1 titanium to add 1 asteroid resource to ANY CARD.', (eb) => {
+            eb.titanium(1).startAction.resource(CardResource.ASTEROID).asterix();
+          }).br;
+          b.or().br;
+          b.action('Remove 1 asteroid here to place an ocean.', (eb) => {
+            eb.resource(CardResource.ASTEROID).startAction.oceans(1);
+          });
         }),
       },
     });
@@ -102,9 +105,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     if (availableActions.length === 1) {
       const action = availableActions[0];
 
-      if (action instanceof SelectOption) {
-        return action.cb(undefined);
-      }
+      if (action instanceof SelectOption) return action.cb(undefined);
       return availableActions[0]; // SelectCard
     }
 

@@ -21,4 +21,8 @@ export class VanAllen extends CeoCard {
   }
 
   // All of the Van Allen hook is done in src/server/Player.ts : claimMilestone()
+
+  public override canAct(): boolean {
+    return false;
+  }
 }

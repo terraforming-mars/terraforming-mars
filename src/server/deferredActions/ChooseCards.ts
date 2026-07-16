@@ -8,22 +8,17 @@ import {LogHelper} from '../LogHelper';
 import {oneWayDifference} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
-import {Aerotech} from '../cards/community/Aerotech';
 
-export const LogType = {
-  DREW: 'drew',
-  BOUGHT: 'bought',
-  DREW_VERBOSE: 'drew_verbose',
-  BOUGHT_VERBOSE: 'bought_verbose',
-} as const;
-export type LogType = typeof LogType[keyof typeof LogType];
+export enum LogType {
+  DREW = 'drew',
+  BOUGHT = 'bought',
+  DREW_VERBOSE = 'drew_verbose',
+}
 
 export type ChooseOptions = {
   keepMax?: number,
   logDrawnCard?: boolean,
   paying?: boolean,
-  /** When true (and paying), log the bought cards publicly by name instead of just the count. */
-  logBoughtCards?: boolean,
 }
 
 export class ChooseCards extends DeferredAction {
@@ -58,16 +53,12 @@ export class ChooseCards extends DeferredAction {
     const min = options.paying ? 0 : options.keepMax;
 
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
-    return new SelectCard(msg, button, cards, {max, min, played: !options.paying})
+    return new SelectCard(msg, button, cards, {max, min})
       .andThen((selected) => {
         if (selected.length > max) {
           throw new Error('Selected too many cards');
         }
         const unselected = oneWayDifference(cards, selected);
-        if (options.logDrawnCard === true) {
-          LogHelper.logRevealedCards(player, cards);
-        }
-        const boughtLogType = options.logBoughtCards === true ? LogType.BOUGHT_VERBOSE : LogType.BOUGHT;
         if (options.paying && selected.length > 0) {
           const cost = selected.length * player.cardCost;
           player.game.defer(
@@ -75,44 +66,28 @@ export class ChooseCards extends DeferredAction {
               player,
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
-              .andThen(() => keep(player, selected, unselected, boughtLogType)));
+              .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
+          if (options.logDrawnCard === true) {
+            LogHelper.logDrawnCards(player, cards);
+          }
+        } else if (options.logDrawnCard === true) {
+          keep(player, selected, unselected, LogType.DREW_VERBOSE);
         } else {
-          keep(player, selected, unselected, options.paying ? boughtLogType : LogType.DREW);
+          keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
         }
         return undefined;
       });
   }
 }
 
-/**
- * Adds `cards` to the player's hand, discards `discards` to the project deck, and logs the outcome per `logType`.
- */
 export function keep(player: IPlayer, cards: ReadonlyArray<IProjectCard>, discards: ReadonlyArray<IProjectCard>, logType: LogType = LogType.DREW): void {
   player.cardsInHand.push(...cards);
   player.game.projectDeck.discard(...discards);
 
-  switch (logType) {
-  case LogType.DREW_VERBOSE:
+  if (logType === LogType.DREW_VERBOSE) {
     LogHelper.logDrawnCards(player, cards);
-    break;
-  case LogType.BOUGHT_VERBOSE:
-    if (cards.length === 0) {
-      player.game.log('${0} bought no cards', (b) => b.player(player));
-    } else {
-      player.game.log('${0} bought ${1}', (b) => b.player(player).cards(cards));
-    }
-    break;
-  case LogType.DREW:
-  case LogType.BOUGHT:
+  } else {
     player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
-    if (logType === LogType.BOUGHT) {
-      if (cards.length > 0) {
-        player.game.log('You bought ${0}', (b) => b.cards(cards), {reservedFor: player});
-      }
-    } else {
-      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
-    }
-    break;
+    LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
   }
-  Aerotech.onDrawCards(player, cards, discards);
 }

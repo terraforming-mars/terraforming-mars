@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MartianIndustries} from '../../../src/server/cards/prelude/MartianIndustries';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('MartianIndustries', () => {
   it('Should play', () => {

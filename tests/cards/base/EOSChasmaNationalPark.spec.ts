@@ -5,9 +5,8 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('EosChasmaNationalPark', () => {
   let card: EosChasmaNationalPark;

@@ -1,19 +1,19 @@
 <template>
     <div class="card-extra-content-container">
-      <div v-if="lifeFound()" class="little-green-men" ></div>
-      <div v-if="isMiningTileOnSteel()" class="mined-metal mined-steel" ></div>
-      <div v-if="isMiningTileOnTitanium()" class="mined-metal mined-titanium" ></div>
+      <div v-if="lifeFound()" class="little-green-men" />
+      <div v-if="isMiningTileOnSteel()" class="mined-metal mined-steel" />
+      <div v-if="isMiningTileOnTitanium()" class="mined-metal mined-titanium" />
     </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {Resource} from '@/common/Resource';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardExtraContent',
   props: {
     card: {

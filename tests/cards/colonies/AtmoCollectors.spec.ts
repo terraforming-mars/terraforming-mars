@@ -1,12 +1,11 @@
 import {expect} from 'chai';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {AtmoCollectors} from '../../../src/server/cards/colonies/AtmoCollectors';
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Units} from '../../../src/common/Units';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('AtmoCollectors', () => {
   let card: AtmoCollectors;

@@ -4,9 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {churn, setOxygenLevel} from '../../TestingUtils';
+import {churn, cast, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ElectroCatapult', () => {
   let card: ElectroCatapult;

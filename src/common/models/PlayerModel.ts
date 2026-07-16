@@ -11,8 +11,6 @@ import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
 import {Tag} from '../cards/Tag';
 import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
-import {GlobalParameter} from '../GlobalParameter';
-import {DeltaProjectPlayerModel} from './DeltaProjectPlayerModel';
 
 export interface ViewModel {
   game: GameModel;
@@ -45,7 +43,6 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  deltaProject?: DeltaProjectPlayerModel;
   energy: number;
   energyProduction: number;
   fleetSize: number;
@@ -56,8 +53,8 @@ export type PublicPlayerModel = {
   influence: number;
   isActive: boolean;
   lastCardPlayed?: CardName;
-  megacredits: number;
-  megacreditProduction: number;
+  megaCredits: number;
+  megaCreditProduction: number;
   name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
@@ -81,7 +78,6 @@ export type PublicPlayerModel = {
   underworldData: UnderworldPlayerData,
   victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
-  globalParameterSteps: Partial<Record<GlobalParameter, number>>;
 }
 
 /** A player's view of the game, including their secret information. */

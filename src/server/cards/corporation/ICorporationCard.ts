@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
 import {Behavior} from '../../behavior/Behavior';
+import {SerializedCard} from '../../SerializedCard';
 
 export interface ICorporationCard extends ICard {
   type: CardType.CORPORATION;
@@ -11,8 +12,11 @@ export interface ICorporationCard extends ICard {
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  // TODO(kberg): Remove after 2027-04-01
-  onCardPlayedForCorps?: never;
+  onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
+  onCardPlayed?: never;
+
+  serialize?(serialized: SerializedCard): void;
+  deserialize?(serialized: SerializedCard): void;
 }
 
 export function isICorporationCard(card: ICard): card is ICorporationCard {

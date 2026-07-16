@@ -28,6 +28,7 @@
 
 "HADESPHERE": "",
 "Hadesphere": "",
+"INDUSTRIES": "",
 "Action: Excavate an underground resource.": "TOIMINTO: Kaiva maanalainen resurssi.",
 "You start with 40 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Aloitat 40 M€:lla ja 5 teräksellä. Ensimmäisenä toimintanasi tunnista mitkä tahansa 3 maanalaista resurssia Marsissa.",
 
@@ -40,7 +41,7 @@
 "HENKEI GENETICS": "HENKEIN GENETIIKKA",
 "Henkei Genetics": "Henkein Genetiikka",
 "Action: Pay 1 corruption to place 3 microbes on each card, up 2 to cards.": "TOIMINTO: Maksa 1 korruptio asettaaksesi 3 mikrobia 1 tai 2 kortille.",
-"You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards.": "Aloitat 47 M€:lla ja 1 korruptiolla. Ensimmäisenä toimintanasi nosta 2 mikrobikorttia.",
+"You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards. 1 VP per 3 microbes on this card.": "Aloitat 47 M€:lla ja 1 korruptiolla. Ensimmäisenä toimintanasi nosta 2 mikrobikorttia. 1 VP per 3 mikrobia tällä kortilla.",
 
 "JENSON-BOYLE & CO": "",
 "Jenson-Boyle & Co": "",
@@ -62,6 +63,7 @@
 "VOLTAGON": "",
 "Voltagon": "",
 "Effect: After you claim an underground resource, gain 2 energy.": "VAIKUTUS: Kun olet vaatinut maanalaisen resurssin, saat 2 energiaa.",
-"Action: Spend 8 energy to raise oxygen or Venus 1 step.": "TOIMINTO: Käytä 8 energiaa nostaaksesi happea tai Venusta 1 askeleella."
+"Action: Spend 8 energy to increase oxygen or Venus 1 step.": "TOIMINTO: Käytä 8 energiaa nostaaksesi happea tai Venusta 1 askeleella.",
+"You start with 38 M€ and 1 energy production.": "Aloitat 38 M€:lla ja 1 energiatuotannolla."
 
 }

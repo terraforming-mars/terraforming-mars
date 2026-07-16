@@ -4,9 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('UndergroundCity', () => {
   let card: UndergroundCity;

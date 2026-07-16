@@ -26,7 +26,8 @@ export class Habitat14 extends Card {
           b.production((pb) => {
             pb.minus().energy(1).minus().megacredits(1);
           }).br;
-          b.minus().titanium(1).nbsp.moonHabitat();
+          b.minus().titanium(1).br;
+          b.moonHabitat();
         }),
       },
     });

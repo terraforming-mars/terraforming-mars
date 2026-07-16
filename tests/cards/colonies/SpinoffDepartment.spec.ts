@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {SpinoffDepartment} from '../../../src/server/cards/colonies/SpinoffDepartment';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('SpinoffDepartment', () => {
   it('Should play', () => {

@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {ICeoCard} from '../../src/server/cards/ceos/ICeoCard';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {formatMessage, runAllActions} from '../TestingUtils';
+import {formatMessage, cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {CeoCard} from '../../src/server/cards/ceos/CeoCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {DrawCeoCardFromDeck} from '../../src/server/deferredActions/DrawCeoCardFromDeck';
-import {cast} from '../../src/common/utils/utils';
 class UnPlayableCeo extends CeoCard {
   constructor() {
     super({
@@ -17,10 +16,6 @@ class UnPlayableCeo extends CeoCard {
 
   override canPlay(): boolean {
     return false;
-  }
-
-  public action() {
-    return undefined;
   }
 }
 

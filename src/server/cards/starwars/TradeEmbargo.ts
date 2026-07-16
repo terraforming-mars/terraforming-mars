@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
+import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -18,13 +18,13 @@ export class TradeEmbargo extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'SW01',
         renderData: CardRenderer.builder((b) => {
-          b.text('Nobody may trade for the rest of this generation.', {size: Size.LARGE});
+          b.text('Nobody may trade for the rest of this generation.', Size.LARGE);
         }),
       },
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
+  public override bespokePlay(player: Player) {
     player.game.tradeEmbargo = true;
     return undefined;
   }

@@ -3,7 +3,7 @@
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()"><span v-i18n>{{ actionLabel }}</span></div>
-            <div class="player-status-timer" v-if="showTimer"><PlayerTimer :timer="timer" :live="liveTimer"/></div>
+            <div class="player-status-timer" v-if="showTimer"><player-timer :timer="timer" :live="liveTimer"/></div>
           </div>
         </div>
       </div>
@@ -11,21 +11,19 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import PlayerTimer from '@/client/components/overview/PlayerTimer.vue';
 import {TimerModel} from '@/common/models/TimerModel';
 
-export default defineComponent({
-  name: 'PlayerStatus',
+export default Vue.extend({
+  name: 'player-status',
   props: {
     timer: {
       type: Object as () => TimerModel,
-      required: true,
     },
     actionLabel: {
       type: String as () => ActionLabel,
-      required: true,
     },
     showTimer: {
       type: Boolean,

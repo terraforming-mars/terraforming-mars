@@ -6,9 +6,8 @@ import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('RareEarthElements', () => {
   let card: RareEarthElements;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SecretResearch} from '../../../src/server/cards/underworld/SecretResearch';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SecretResearch', () => {
   it('play', () => {

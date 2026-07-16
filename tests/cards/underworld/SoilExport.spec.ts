@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {SoilExport} from '../../../src/server/cards/underworld/SoilExport';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {JupiterFloatingStation} from '../../../src/server/cards/colonies/JupiterFloatingStation';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('SoilExport', () => {
   it('Should play', () => {

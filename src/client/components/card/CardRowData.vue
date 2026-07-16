@@ -6,15 +6,14 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import CardRowComponent from '@/client/components/card/CardRowComponent.vue';
-import {ItemType} from '@/common/cards/render/Types';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardRowData',
   props: {
     rowData: {
-      type: Array as () => Array<ItemType>,
+      type: Array,
       required: true,
     },
   },

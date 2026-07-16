@@ -4,15 +4,14 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SelectPlayerRow',
   props: {
     player: {
       type: Object as () => PublicPlayerModel | undefined,
-      required: true,
     },
   },
 });

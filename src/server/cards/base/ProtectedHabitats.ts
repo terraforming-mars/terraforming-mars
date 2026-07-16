@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardResource} from '../../../common/CardResource';
-import {uppercase} from '../Options';
 
 export class ProtectedHabitats extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +16,7 @@ export class ProtectedHabitats extends Card implements IProjectCard {
       metadata: {
         cardNumber: '173',
         renderData: CardRenderer.builder((b) => {
-          b.text('Opponents may not remove your', {size: Size.SMALL, uppercase}).br;
+          b.text('Opponents may not remove your', Size.SMALL, true).br;
           b.plants(1).resource(CardResource.ANIMAL).resource(CardResource.MICROBE);
         }),
       },

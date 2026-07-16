@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {RecklessDetonation} from '../../../src/server/cards/underworld/RecklessDetonation';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('RecklessDetonation', () => {
   it('can play', () => {

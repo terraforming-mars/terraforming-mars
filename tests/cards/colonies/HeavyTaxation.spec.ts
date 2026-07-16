@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {HeavyTaxation} from '../../../src/server/cards/colonies/HeavyTaxation';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('HeavyTaxation', () => {
   it('Should play', () => {

@@ -22,7 +22,10 @@
     "Energy": "Energia",
     "Heat": "Calore",
     "Floater": "Galleggiante",
+    "Asteroid": "Asteroide",
 
+    "Greenery": "Vegetazione",
+    "City": "Città",
     "Ocean": "Oceano",
     "Special": "Speciale",
 
@@ -35,6 +38,7 @@
     "Terraform Rating (TR)": "Tasso di Terraformazione (TT)",
     "Project Card": "Carta Progetto",
     "Colony": "Colonia",
+    "Trade": "Commercio",
     "Trade Fleet": "Flotta Commerciale",
     "Delegate": "Delegato",
     "Influence": "Influenza",

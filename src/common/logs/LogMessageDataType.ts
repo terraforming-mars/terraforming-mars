@@ -15,5 +15,4 @@ export enum LogMessageDataType {
   GLOBAL_EVENT, // 11
   UNDERGROUND_TOKEN, // 12
   SPACE, // 13
-  CARDS, // 14
 }

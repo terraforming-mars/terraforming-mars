@@ -38,7 +38,6 @@ import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SoilBacteria} from './SoilBacteria';
 import {SoilStudies} from './SoilStudies';
 import {SpaceLanes} from './SpaceLanes';
-import {SuitableInfrastructure} from './SuitableInfrastructure';
 import {SpecialPermit} from './SpecialPermit';
 import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
@@ -91,7 +90,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
     [CardName.EARLY_COLONIZATION]: {Factory: EarlyColonization, compatibility: 'colonies'},
-    [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub},
+    [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
     [CardName.INDUSTRIAL_COMPLEX]: {Factory: IndustrialComplex},
@@ -105,7 +104,8 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
     [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
-    [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
+    // Broken, #7610
+    // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
     [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
     [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
     [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},

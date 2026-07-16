@@ -1,6 +1,6 @@
-import path from 'path';
-import fs from 'fs';
-import raw_translations from '../../genfiles/translations.json';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as raw_translations from '../../genfiles/translations.json';
 
 const LOCALES_DIR = path.resolve('./src/locales/');
 const locales: Array<string> = [];
@@ -29,9 +29,7 @@ let sourceString: keyof typeof raw_translations;
 let missingLocales: Array<string>;
 
 for (sourceString in raw_translations) {
-  if ( ! raw_translations.hasOwnProperty(sourceString)) {
-    continue;
-  }
+  if ( ! raw_translations.hasOwnProperty(sourceString)) continue;
   const translations = raw_translations[sourceString];
   missingLocales = [];
   for (const localeName of localesToWarn) {

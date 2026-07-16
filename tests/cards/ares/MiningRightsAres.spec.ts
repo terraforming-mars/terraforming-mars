@@ -5,9 +5,8 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {MiningRightsAres} from '../../../src/server/cards/ares/MiningRightsAres';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('MiningRightsAres', () => {
   let card: MiningRightsAres;

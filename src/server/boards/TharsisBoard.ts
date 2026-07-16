@@ -40,6 +40,11 @@ export class TharsisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, SpaceName.NOCTIS_CITY);
+    super(spaces, SpaceName.NOCTIS_CITY, [
+      SpaceName.THARSIS_THOLUS,
+      SpaceName.ASCRAEUS_MONS,
+      SpaceName.PAVONIS_MONS,
+      SpaceName.ARSIA_MONS,
+    ]);
   }
 }

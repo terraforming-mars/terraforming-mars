@@ -7,7 +7,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {Units} from '../../../src/common/Units';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('LunarIndustryComplex', () => {
   let player: TestPlayer;

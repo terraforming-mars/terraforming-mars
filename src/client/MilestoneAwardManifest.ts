@@ -2,9 +2,9 @@ import {AwardName} from '@/common/ma/AwardName';
 import {ClientAward, ClientMilestone} from '@/common/ma/ClientMilestoneAward';
 import {MilestoneName} from '@/common/ma/MilestoneName';
 // @ts-ignore
-import milestonejson from '@/genfiles/milestones.json';
+import * as milestonejson from '@/genfiles/milestones.json';
 // @ts-ignore
-import awardjson from '@/genfiles/awards.json';
+import * as awardjson from '@/genfiles/awards.json';
 
 const milestones = {} as Record<MilestoneName, ClientMilestone>;
 const awards = {} as Record<AwardName, ClientAward>;

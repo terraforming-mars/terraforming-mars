@@ -5,10 +5,9 @@ import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
 import {TestPlayer} from '../TestPlayer';
 import {CardResource} from '../../src/common/CardResource';
-import {testGame} from '../TestingUtils';
+import {cast, testGame} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelfReplicatingRobots} from '../../src/server/cards/promo/SelfReplicatingRobots';
-import {cast} from '@/common/utils/utils';
 
 describe('AddResourcesToCard', () => {
   let player: TestPlayer;
@@ -56,12 +55,15 @@ describe('AddResourcesToCard', () => {
     expect(ants.resourceCount).eq(0);
   });
 
-  it('many microbe cards, 0 qty', () => {
+  it('many microbe cards', () => {
     player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
-    cast(new AddResourcesToCard(player, CardResource.MICROBE, {count: 0}).execute(), undefined);
+    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE).execute(), SelectCard);
 
-    expect(ghgProducingBacteria.resourceCount).eq(0);
+    expect(selectCard.cards).has.length(3);
+    selectCard.cb([ghgProducingBacteria]);
+
+    expect(ghgProducingBacteria.resourceCount).eq(1);
     expect(tardigrades.resourceCount).eq(0);
     expect(ants.resourceCount).eq(0);
   });
@@ -70,7 +72,7 @@ describe('AddResourcesToCard', () => {
     player.playedCards.push(ghgProducingBacteria, selfReplicatingRobots);
     selfReplicatingRobots.targetCards = [tardigrades];
 
-    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE, {robotCards: true}).execute(), SelectCard);
+    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE).execute(), SelectCard);
 
     expect(selectCard.cards).has.length(2);
     expect(selectCard.cards[0]).eq(ghgProducingBacteria);
@@ -85,12 +87,7 @@ describe('AddResourcesToCard', () => {
     player.playedCards.push(ghgProducingBacteria, ants, selfReplicatingRobots);
     selfReplicatingRobots.targetCards = [tardigrades];
 
-    const addResourcesToCard = new AddResourcesToCard(
-      player, CardResource.MICROBE, {
-        robotCards: true,
-        filter: (c) => c.name.endsWith('s'),
-      });
-    const selectCard = cast(addResourcesToCard.execute(), SelectCard);
+    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name.endsWith('s')}).execute(), SelectCard);
     expect(selectCard.cards).has.length(2);
     expect(selectCard.cards[0]).eq(ants);
     expect(selectCard.cards[1]).eq(tardigrades);

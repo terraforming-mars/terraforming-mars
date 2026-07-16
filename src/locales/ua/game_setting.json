@@ -1,5 +1,6 @@
 {
   "game id: ": "Ідентифікатор гри: ",
+  "Terraforming Mars": "Терраформування Марса",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Інструкції: Щоб почати гру, окремо скопіюйте та поділіться посиланнями з усіма гравцями, а потім клацніть на своє ім'я.",
   "Save this page in case you or one of your opponents loses a link.": "Збережіть цю сторінку на випадок, якщо ви або один з ваших суперників втратить посилання.",
   "Read our changelog to get the latest updates.": "Прочитайте наш журнал змін, щоб отримати останні оновлення.",
@@ -14,7 +15,7 @@
   "Copied!": "Скопійовано!",
   "copy": "копіювати",
   "Close": "Закрити",
-  " show tiles ": "показати тайли",
+  " show tiles ": "показати плитки",
   "1st": "1-й",
   "2nd": "2-й",
   "3rd": "3-й",
@@ -26,7 +27,7 @@
   "Expansion:": "Розширення:",
   "Fanmade expansion:": "Розширення від фанатів:",
   "Board:": "Дошка:",
-  "(randomized tiles)": "(випадкові тайли)",
+  "(randomized tiles)": "(випадкові плитки)",
   "WGT:": "Терраформування Всесвіту:",
   "On": "Увімк.",
   "Off": "Вимк.",
@@ -44,5 +45,6 @@
   "real-time vp": "реальний час ПО",
   "fast mode": "швидкий режим",
   "Banned cards:": "Заборонені картки:",
+  "Game Setup Details": "Деталі налаштування гри",
   "Board-defined": "Визначено дошкою"
 }

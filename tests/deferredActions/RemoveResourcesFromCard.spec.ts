@@ -3,7 +3,7 @@ import {testGame} from '../TestGame';
 import {RemoveResourcesFromCard, Response} from '../../src/server/deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../src/common/CardResource';
 import {AtmoCollectors} from '../../src/server/cards/colonies/AtmoCollectors';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../TestingUtils';
 
 // This requires a lot more tests
 describe('RemoveResourcesFromCard', () => {

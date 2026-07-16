@@ -6,6 +6,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../../common/Phase';
 import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
@@ -75,8 +76,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       }
     }
     if (grant) {
-      cardOwner.stock.add(resource, 1);
-      this.log(cardOwner, resource);
+      cardOwner.game.defer(new GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
     }
   }
 

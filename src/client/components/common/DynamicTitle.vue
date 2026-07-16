@@ -1,13 +1,13 @@
 <template>
-  <div :class="classes"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
+  <div :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'DynamicTitle',
   props: {
     title: {
@@ -27,8 +27,8 @@ export default defineComponent({
       default: '',
     },
   },
-  computed: {
-    classes(): string {
+  methods: {
+    getClasses(): string {
       return [
         playerColorClass(this.color, 'shadow'),
         'dynamic-title',

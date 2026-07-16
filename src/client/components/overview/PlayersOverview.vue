@@ -1,20 +1,20 @@
 <template>
         <div class="players-overview" v-if="hasPlayers()">
-            <OverviewSettings />
+            <overview-settings />
             <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.color">
-                    <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
-            <PlayerInfo v-for="(p, index) in getPlayersInOrder()"
+            <player-info v-for="(p, index) in getPlayersInOrder()"
               :player="p"
               :key="p.color"
               :playerView="playerView"
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>
-            <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" ></div>
-            <PlayerInfo
+            <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" />
+            <player-info
               v-if="thisPlayer !== undefined"
               :player="thisPlayer"
               :key="thisPlayer.color"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import OverviewSettings from '@/client/components/overview/OverviewSettings.vue';
 import OtherPlayer from '@/client/components/OtherPlayer.vue';
@@ -49,12 +49,11 @@ export const playerIndex = (
   return -1;
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PlayersOverview',
   props: {
     playerView: {
       type: Object as () => ViewModel,
-      required: true,
     },
   },
   computed: {
@@ -66,9 +65,9 @@ export default defineComponent({
     },
   },
   components: {
-    PlayerInfo,
-    OverviewSettings,
-    OtherPlayer,
+    'player-info': PlayerInfo,
+    'overview-settings': OverviewSettings,
+    'other-player': OtherPlayer,
   },
   data() {
     return {};
@@ -118,9 +117,7 @@ export default defineComponent({
       if (this.playerView.game.passedPlayers.includes(player.color)) {
         return 'passed';
       }
-      if (player.isActive) {
-        return 'active';
-      }
+      if (player.isActive) return 'active';
       const notPassedPlayers = this.players.filter(
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );

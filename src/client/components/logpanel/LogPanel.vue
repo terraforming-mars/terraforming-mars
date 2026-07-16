@@ -6,7 +6,7 @@
       </h2>
       <div class="log-gen-title"  v-i18n>Gen: </div>
       <div class="log-gen-numbers">
-        <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" @click.prevent="selectGeneration(n)">
+        <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
           {{ n }}
         </div>
       </div>
@@ -15,18 +15,18 @@
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
         <ul v-if="messages">
-          <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
+          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)" @spaceClicked="spaceClicked"></log-message-component>
         </ul>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" @hide="selectedMessage = undefined"/>
+    <card-panel :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
@@ -47,16 +47,14 @@ type LogPanelModel = {
   selectedMessage: LogMessage | undefined,
 };
 
-export default defineComponent({
-  name: 'LogPanel',
+export default Vue.extend({
+  name: 'log-panel',
   props: {
     viewModel: {
       type: Object as () => ViewModel,
-      required: true,
     },
     color: {
       type: String as () => Color,
-      required: true,
     },
     step: {
       type: Number,
@@ -129,9 +127,7 @@ export default defineComponent({
           return resp.json();
         })
         .then((data) => {
-          if (!data) {
-            return;
-          }
+          if (!data) return;
           messages.splice(0, messages.length);
           messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
@@ -142,10 +138,7 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-          if (err.name === 'AbortError') {
-            // ignore aborted requests
-            return;
-          }
+          if (err.name === 'AbortError') return; // ignore aborted requests
           console.error('error updating messages, unable to reach server');
         });
     },

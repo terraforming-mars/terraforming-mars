@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SortableCards from '@/client/components/SortableCards.vue';
@@ -18,8 +18,8 @@ describe('SortableCards', () => {
 
   it('allows sorting after initial loading with no local storage', async () => {
     const sortable = mount(SortableCards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         cards: [{
           name: CardName.ANTS,
         }, {
@@ -32,19 +32,22 @@ describe('SortableCards', () => {
       name: 'Card',
     });
     expect(cards).has.length(2);
-    expect(cards[0].props().card.name).to.eq(CardName.ANTS);
-    expect(cards[1].props().card.name).to.eq(CardName.CARTEL);
-    const draggers = sortable.findAll('[draggable=true]');
-    await draggers[1].trigger('dragstart');
-    await sortable.vm.$nextTick();
-    const droppers = sortable.findAll('.drop-target');
-    await droppers[0].trigger('dragover');
-    await draggers[1].trigger('dragend');
+    expect(cards.at(0).props().card.name).to.eq(CardName.ANTS);
+    expect(cards.at(1).props().card.name).to.eq(CardName.CARTEL);
+    const draggers = sortable.findAllComponents({
+      ref: 'draggers',
+    });
+    await draggers.at(1).trigger('dragstart');
+    const droppers = sortable.findAllComponents({
+      ref: 'droppers',
+    });
+    await droppers.at(0).trigger('dragover');
+    await draggers.at(1).trigger('dragend');
     cards = sortable.findAllComponents({
       name: 'Card',
     });
-    expect(cards[0].props().card.name).to.eq(CardName.CARTEL);
-    expect(cards[1].props().card.name).to.eq(CardName.ANTS);
+    expect(cards.at(0).props().card.name).to.eq(CardName.CARTEL);
+    expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
     const order = localStorage.getItem('cardOrderfoo');
     expect(order).not.to.be.undefined;
     expect(JSON.parse(order!)).to.deep.eq({
@@ -59,8 +62,8 @@ describe('SortableCards', () => {
       [CardName.DECOMPOSERS]: 3,
     }));
     const sortable = mount(SortableCards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         cards: [{
           name: CardName.ANTS,
         }, {
@@ -75,21 +78,24 @@ describe('SortableCards', () => {
       name: 'Card',
     });
     expect(cards).has.length(3);
-    expect(cards[0].props().card.name).to.eq(CardName.CARTEL);
-    expect(cards[1].props().card.name).to.eq(CardName.ANTS);
-    expect(cards[2].props().card.name).to.eq(CardName.BIRDS);
-    const draggers = sortable.findAll('[draggable=true]');
-    await draggers[0].trigger('dragstart');
-    await sortable.vm.$nextTick();
-    const droppers = sortable.findAll('.drop-target');
-    await droppers[2].trigger('dragover');
-    await draggers[0].trigger('dragend');
+    expect(cards.at(0).props().card.name).to.eq(CardName.CARTEL);
+    expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
+    expect(cards.at(2).props().card.name).to.eq(CardName.BIRDS);
+    const draggers = sortable.findAllComponents({
+      ref: 'draggers',
+    });
+    await draggers.at(0).trigger('dragstart');
+    const droppers = sortable.findAllComponents({
+      ref: 'droppers',
+    });
+    await droppers.at(2).trigger('dragover');
+    await draggers.at(0).trigger('dragend');
     cards = sortable.findAllComponents({
       name: 'Card',
     });
-    expect(cards[0].props().card.name).to.eq(CardName.ANTS);
-    expect(cards[1].props().card.name).to.eq(CardName.CARTEL);
-    expect(cards[2].props().card.name).to.eq(CardName.BIRDS);
+    expect(cards.at(0).props().card.name).to.eq(CardName.ANTS);
+    expect(cards.at(1).props().card.name).to.eq(CardName.CARTEL);
+    expect(cards.at(2).props().card.name).to.eq(CardName.BIRDS);
     const order = localStorage.getItem('cardOrderfoo');
     expect(order).not.to.be.undefined;
     expect(JSON.parse(order!)).to.deep.eq({

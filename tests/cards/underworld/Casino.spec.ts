@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Casino} from '../../../src/server/cards/underworld/Casino';
 import {testGame} from '../../TestGame';
-import {addCity} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {addCity, cast} from '../../TestingUtils';
 
 describe('Casino', () => {
   it('canPlay', () => {

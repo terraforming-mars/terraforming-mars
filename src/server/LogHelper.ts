@@ -1,35 +1,34 @@
+import {CardName} from '../common/cards/CardName';
 import {Resource} from '../common/Resource';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
+import {Logger} from './logs/Logger';
 import {CardResource} from '../common/CardResource';
-import {From} from './logs/From';
-
-function resourceString(resource: CardResource | undefined, qty: number): string {
-  const result = resource ?? 'resource';
-  if (qty === 1) {
-    return result;
-  } else {
-    return result + '(s)';
-  }
-}
 
 export class LogHelper {
-  static logAddResource(player: IPlayer, card: ICard, qty: number = 1, from?: From): void {
-    if (from === undefined) {
-      player.game.log('${0} added ${1} ${2} to ${3}', (b) =>
-        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card));
-    } else {
-      player.game.log('${0} added ${1} ${2} to ${3} from ${4}', (b) =>
-        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).from(from));
+  static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
+    let resourceType = 'resource(s)';
+
+    if (card.resourceType) {
+      resourceType = card.resourceType.toLowerCase() + '(s)';
     }
+
+    player.game.log('${0} added ${1} ${2} to ${3}', (b) =>
+      b.player(player).number(qty).string(resourceType).card(card));
   }
 
   static logRemoveResource(player: IPlayer, card: ICard, qty: number = 1, effect: string): void {
+    let resourceType = 'resource(s)';
+
+    if (card.resourceType) {
+      resourceType = card.resourceType.toLowerCase() + '(s)';
+    }
+
     player.game.log('${0} removed ${1} ${2} from ${3} to ${4}', (b) =>
-      b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).string(effect));
+      b.player(player).number(qty).string(resourceType).card(card).string(effect));
   }
 
   static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
@@ -38,13 +37,9 @@ export class LogHelper {
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
-    if (space.x === -1 && space.y === -1) {
-      return;
-    }
+    if (space.x === -1 && space.y === -1) return;
     // Skip solo play random tiles
-    if (player.name === 'neutral') {
-      return;
-    }
+    if (player.name === 'neutral') return;
 
     player.game.log('${0} ${1} ${2} at ${3}', (b) =>
       b.player(player).string(action).string(description).space(space));
@@ -64,12 +59,36 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logTemperatureIncrease(player: IPlayer, steps: number) {
-    player.game.log('${0} raised the temperature ${1} step(s)', (b) => b.player(player).number(steps));
+  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
+    logger.log('${0} card(s) were discarded', (b) => {
+      b.rawString(cards.length.toString());
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+    });
   }
 
-  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard>, privateMessage: boolean = false) {
-    const message = cards.length === 0 ? '${0} drew no cards' : '${0} drew ${1}';
+  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>, privateMessage: boolean = false) {
+    // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
+    let message = '${0} drew ';
+    if (cards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let i = 0, length = cards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + 1) + '}';
+      }
+    }
     const options = privateMessage ? {reservedFor: player} : {};
 
     player.game.log(message, (b) => {
@@ -78,21 +97,14 @@ export class LogHelper {
       } else {
         b.string('You');
       }
-
-      if (cards.length > 0) {
-        b.cards(cards);
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
       }
     }, options);
-  }
-
-  static logRevealedCards(player: IPlayer, cards: ReadonlyArray<ICard>) {
-    const message = cards.length === 0 ? '${0} revealed no cards' : '${0} revealed ${1}';
-    player.game.log(message, (b) => {
-      b.player(player);
-      if (cards.length > 0) {
-        b.cards(cards);
-      }
-    });
   }
 
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {

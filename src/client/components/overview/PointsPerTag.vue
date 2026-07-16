@@ -9,28 +9,25 @@
 const ONE_THIRD = 1/3;
 const TWO_THIRDS = 2/3;
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 export type Points = {
   points: number;
   halfPoints: number;
-  asterisk?: boolean;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PointsPerTag',
   props: {
     points: {
       type: Object as () => Points,
-      required: true,
     },
   },
   computed: {
     amount(): string {
-      const asterisk = this.points.asterisk ? '*' : '';
       if (this.points.halfPoints === 2) {
         // This string is particularly good for rendering fractions because it's using a specific fraction slash.
-        return `2⁄2${asterisk}`;
+        return '2⁄2';
       }
 
       const points = this.points.points + (this.points.halfPoints / 2);
@@ -44,7 +41,7 @@ export default defineComponent({
       } else if (Math.abs(fraction - TWO_THIRDS) < Number.EPSILON) {
         vulgarFraction = '⅔';
       }
-      return `${integer || ''}${vulgarFraction}${asterisk}`;
+      return `${integer || ''}${vulgarFraction}`;
     },
     cssClasses(): string {
       if (this.points.halfPoints === 2) {
@@ -55,7 +52,7 @@ export default defineComponent({
         'points-per-tag points-per-tag--S';
     },
     show(): boolean {
-      return this.points.points !== 0 || this.points.halfPoints !== 0 || this.points.asterisk === true;
+      return this.points.points !== 0 || this.points.halfPoints !== 0;
     },
   },
 });

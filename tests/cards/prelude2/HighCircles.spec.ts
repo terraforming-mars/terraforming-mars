@@ -5,8 +5,7 @@ import {IGame} from '../../../src/server/IGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {HighCircles} from '../../../src/server/cards/prelude2/HighCircles';
-import {runAllActions, testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 
 describe('HighCircles', () => {
   let card: HighCircles;

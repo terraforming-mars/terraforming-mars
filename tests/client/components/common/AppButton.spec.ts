@@ -1,35 +1,23 @@
 import {shallowMount} from '@vue/test-utils';
-import {globalConfig} from '../getLocalVue';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import AppButton from '@/client/components/common/AppButton.vue';
 
 describe('AppButton', () => {
   it('emits click event on click', async () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-    });
-
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')?.length).to.be.greaterThanOrEqual(1);
-  });
-
-  it('click event fires exactly once per click', async () => {
-    const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
+      localVue: getLocalVue(),
     });
 
     await wrapper.trigger('click');
     expect(wrapper.emitted('click')?.length).to.eq(1);
-
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')?.length).to.eq(2);
   });
 
   it('renders title', () => {
     const title = 'test';
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {title},
+      localVue: getLocalVue(),
+      propsData: {title},
     });
 
     expect(wrapper.text()).to.eq(title);
@@ -41,8 +29,8 @@ describe('AppButton', () => {
 
     types.forEach((type) => {
       const wrapper = shallowMount(AppButton, {
-        ...globalConfig,
-        props: {title, type},
+        localVue: getLocalVue(),
+        propsData: {title, type},
       });
 
       expect(wrapper.text()).to.not.include(title);
@@ -51,16 +39,16 @@ describe('AppButton', () => {
 
   it('is disabled if disabled is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {disabled: true},
+      localVue: getLocalVue(),
+      propsData: {disabled: true},
     });
 
-    expect(wrapper.attributes('disabled')).to.not.be.undefined;
+    expect(wrapper.attributes('disabled')).to.eq('disabled');
   });
 
   it('is not disabled if no disabled is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
+      localVue: getLocalVue(),
     });
 
     expect(wrapper.attributes('disabled')).to.eq(undefined);
@@ -71,8 +59,8 @@ describe('AppButton', () => {
 
   // it('is disabled if disableOnServerBusy is passed and server is busy', async () => {
   //   const wrapper = shallowMount(AppButton, {
-  //     ...globalConfig,
-  //     props: {disableOnServerBusy: true},
+  //     localVue: getLocalVue(),
+  //     propsData: {disableOnServerBusy: true},
   //     mocks: {
   //       $root: {isServerSideRequestInProgress: true},
   //     },
@@ -83,8 +71,8 @@ describe('AppButton', () => {
 
   // it('is not disabled if disableOnServerBusy is passed and server is not busy', async () => {
   //   const wrapper = shallowMount(AppButton, {
-  //     ...globalConfig,
-  //     props: {disableOnServerBusy: true},
+  //     localVue: getLocalVue(),
+  //     propsData: {disableOnServerBusy: true},
   //     mocks: {
   //       $root: {isServerSideRequestInProgress: true},
   //     },
@@ -100,8 +88,8 @@ describe('AppButton', () => {
    */
   it('has float-left class if align left is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {align: 'left'},
+      localVue: getLocalVue(),
+      propsData: {align: 'left'},
     });
 
     expect(wrapper.classes()).to.include('float-left');
@@ -109,8 +97,8 @@ describe('AppButton', () => {
 
   it('has float-right class if align right is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {align: 'right'},
+      localVue: getLocalVue(),
+      propsData: {align: 'right'},
     });
 
     expect(wrapper.classes()).to.include('float-right');
@@ -121,8 +109,8 @@ describe('AppButton', () => {
    */
   it('has btn-tiny class if size tiny is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {size: 'tiny'},
+      localVue: getLocalVue(),
+      propsData: {size: 'tiny'},
     });
 
     expect(wrapper.classes()).to.include('btn-tiny');
@@ -130,8 +118,8 @@ describe('AppButton', () => {
 
   it('has btn-sm class if size small is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {size: 'small'},
+      localVue: getLocalVue(),
+      propsData: {size: 'small'},
     });
 
     expect(wrapper.classes()).to.include('btn-sm');
@@ -139,8 +127,8 @@ describe('AppButton', () => {
 
   it('has btn-lg class if size big is passed', () => {
     const wrapper = shallowMount(AppButton, {
-      ...globalConfig,
-      props: {size: 'big'},
+      localVue: getLocalVue(),
+      propsData: {size: 'big'},
     });
 
     expect(wrapper.classes()).to.include('btn-lg');
@@ -167,8 +155,8 @@ describe('AppButton', () => {
 
     types.forEach((type) => {
       const wrapper = shallowMount(AppButton, {
-        ...globalConfig,
-        props: {type},
+        localVue: getLocalVue(),
+        propsData: {type},
       });
 
       expect(wrapper.classes()).to.include(`btn-${type}`);
@@ -185,8 +173,8 @@ describe('AppButton', () => {
 
     iconTypes.forEach((iconType) => {
       const wrapper = shallowMount(AppButton, {
-        ...globalConfig,
-        props: {type: iconType},
+        localVue: getLocalVue(),
+        propsData: {type: iconType},
       });
 
       if (iconType === 'close') {

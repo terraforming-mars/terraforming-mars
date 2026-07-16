@@ -16,8 +16,6 @@ export type LogMessageDataAttrs = {
   tags?: boolean,
   /** When true for a card, also show the card's cost */
   cost?: boolean,
-  /** When true, don't show the whole list of cards. Show a clickable toolip. */
-  ellipsis?: boolean,
 }
 
 type Types = {
@@ -59,9 +57,6 @@ type Types = {
 } | {
   type: LogMessageDataType.SPACE;
   value: SpaceId,
-} | {
-  type: LogMessageDataType.CARDS;
-  value: ReadonlyArray<CardName>;
 };
 
 export type LogMessageData = Types & {

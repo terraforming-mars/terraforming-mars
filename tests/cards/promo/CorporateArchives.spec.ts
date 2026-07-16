@@ -1,10 +1,9 @@
 import {expect} from 'chai';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {CorporateArchives} from '../../../src/server/cards/promo/CorporateArchives';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CorporateArchives', () => {
   it('Should play', () => {

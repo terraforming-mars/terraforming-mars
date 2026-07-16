@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Nightclubs} from '../../../src/server/cards/underworld/Nightclubs';
 import {testGame} from '../../TestGame';
-import {addCity, runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {addCity, cast, runAllActions} from '../../TestingUtils';
 
 describe('Nightclubs', () => {
   it('canPlay', () => {

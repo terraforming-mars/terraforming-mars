@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card, productionBoxWithBonusResource} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
@@ -11,8 +11,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
 import {Units} from '../../../common/Units';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
-import {AdjustProduction} from '../../deferredActions/AdjustProduction';
 
 export class SpecializedSettlement extends Card implements IProjectCard {
   constructor() {
@@ -37,17 +35,11 @@ export class SpecializedSettlement extends Card implements IProjectCard {
     });
   }
 
-  public bonusResource: Array<Resource> | undefined;
+  public bonusResource?: Array<Resource>;
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.game.board.getAvailableSpacesForCity(player).length === 0) {
-      return false;
-    }
-    if (player.production.energy >= 1) {
-      return true;
-    }
-    // A Mars-track advance can grant +1 energy production, which offsets the cost.
-    return PathfindersExpansion.willGainEnergyProductionOnNextMarsTag(player);
+    return player.production.energy >= 1 &&
+      player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   private bonusResources(space: Space) {
@@ -75,9 +67,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    // Deferred in case the energy production gain comes from the Planetary track.
-    player.game.defer(new AdjustProduction(player, this.defaultProductionBox));
-
+    player.production.adjust(SpecializedSettlement.defaultProductionBox);
     return new SelectSpace(
       'Select space for city tile',
       player.game.board.getAvailableSpacesForCity(player))
@@ -86,13 +76,9 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
         player.game.addCity(player, space);
 
-        if (coveringExistingTile) {
-          return;
-        }
+        if (coveringExistingTile) return;
         const bonusResources = this.bonusResources(space);
-        if (bonusResources.length === 0) {
-          return;
-        }
+        if (bonusResources.length === 0) return;
 
         player.game.defer(new SelectResourceTypeDeferred(
           player, bonusResources,
@@ -108,15 +94,18 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       );
   }
 
-  public readonly defaultProductionBox = Units.of({energy: -1, megacredits: 3});
+  private static defaultProductionBox = Units.of({energy: -1, megacredits: 3});
+
   public productionBox() {
-    return productionBoxWithBonusResource(this);
+    const units = {...SpecializedSettlement.defaultProductionBox};
+    if (this.bonusResource && this.bonusResource.length === 1) {
+      units[this.bonusResource[0]] += 1;
+    }
+    return units;
   }
 
   public produceForTile(player: IPlayer, bonusResources: Array<Resource>) {
-    if (bonusResources.length === 0) {
-      return;
-    }
+    if (bonusResources.length === 0) return;
 
     player.game.defer(new SelectResourceTypeDeferred(
       player, bonusResources,

@@ -41,18 +41,15 @@ export type MultipleCountMode =
 export class Tags {
   private player: IPlayer;
 
-  // Leavitt Colony, Underworld
+  // Leavitt Station, Underworld
   public extraScienceTags: number;
   // Underworld
   public extraPlantTags: number;
-  // Delta Project
-  public extraJovianTags: number;
 
   constructor(player: IPlayer) {
     this.player = player;
     this.extraScienceTags = 0;
     this.extraPlantTags = 0;
-    this.extraJovianTags = 0;
   }
 
   /**
@@ -86,10 +83,6 @@ export class Tags {
 
     if (tag === Tag.PLANT) {
       tagCount += this.extraPlantTags;
-    }
-
-    if (tag === Tag.JOVIAN) {
-      tagCount += this.extraJovianTags;
     }
 
     if (includeTagSubstitutions) {
@@ -130,9 +123,7 @@ export class Tags {
    */
   public cardHasTag(card: ICard, target: Tag): boolean {
     for (const tag of card.tags) {
-      if (tag === target) {
-        return true;
-      }
+      if (tag === target) return true;
       if (tag === Tag.MARS &&
         target === Tag.SCIENCE &&
         this.player.tableau.has(CardName.HABITAT_MARTE)) {
@@ -195,14 +186,10 @@ export class Tags {
     if (mode !== 'award') {
       tagCount += this.rawCount(Tag.WILD, includeEvents);
       // Chimera has 2 wild tags but should only count as one for milestones.
-      if (this.player.tableau.has(CardName.CHIMERA) && mode === 'milestone') {
-        tagCount--;
-      }
+      if (this.player.tableau.has(CardName.CHIMERA) && mode === 'milestone') tagCount--;
     } else {
       // Chimera counts as one wild tag for awards
-      if (this.player.tableau.has(CardName.CHIMERA)) {
-        tagCount++;
-      }
+      if (this.player.tableau.has(CardName.CHIMERA)) tagCount++;
     }
 
     if (tags.includes(Tag.SCIENCE)) {
@@ -210,9 +197,6 @@ export class Tags {
     }
     if (tags.includes(Tag.PLANT)) {
       tagCount += this.extraPlantTags;
-    }
-    if (tags.includes(Tag.JOVIAN)) {
-      tagCount += this.extraJovianTags;
     }
 
     return tagCount;
@@ -268,29 +252,16 @@ export class Tags {
       uniqueTags.add(extraTag);
     }
 
-    if (this.extraScienceTags > 0) {
-      uniqueTags.add(Tag.SCIENCE);
-    }
-    if (this.extraPlantTags > 0) {
-      uniqueTags.add(Tag.PLANT);
-    }
-    if (this.extraJovianTags > 0) {
-      uniqueTags.add(Tag.JOVIAN);
-    }
+    if (this.extraScienceTags > 0) uniqueTags.add(Tag.SCIENCE);
+    if (this.extraPlantTags > 0) uniqueTags.add(Tag.PLANT);
 
     // Global events occur outside the action phase. Stop counting here, before wild tags apply.
-    if (mode === 'globalEvent') {
-      return uniqueTags.size;
-    }
+    if (mode === 'globalEvent') return uniqueTags.size;
 
-    if (mode === 'milestone' && this.player.tableau.has(CardName.CHIMERA)) {
-      wildTagCount--;
-    }
+    if (mode === 'milestone' && this.player.tableau.has(CardName.CHIMERA)) wildTagCount--;
 
     let maximum = this.tagsInGame();
-    if (playerIsOdyssey) {
-      maximum++;
-    }
+    if (playerIsOdyssey) maximum++;
     return Math.min(uniqueTags.size + wildTagCount, maximum);
   }
 

@@ -1,7 +1,6 @@
 import {IceAsteroid} from '../../../src/server/cards/base/IceAsteroid';
 import {testGame} from '../../TestGame';
-import {maxOutOceans, testRedsCosts} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, maxOutOceans, testRedsCosts} from '../../TestingUtils';
 
 describe('IceAsteroid', () => {
   it('Should play', () => {

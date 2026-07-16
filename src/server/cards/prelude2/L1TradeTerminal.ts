@@ -42,15 +42,13 @@ export class L1TradeTerminal extends Card {
   }
 
   private getEligibleCards(player: IPlayer) {
-    return player.getCardsWithResources().concat(
-      player.getSelfReplicatingRobotsTargetCards().filter((card) => card.resourceCount > 0)
-        .filter((c) => c.name !== this.name)); // When L1 Trade Terminal is coming from Self Replicating Robots, it might include itself.
+    return [...player.getCardsWithResources(), ...player.getSelfReplicatingRobotsTargetCards().filter((card) => card.resourceCount > 0)];
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const cards = this.getEligibleCards(player);
     if (cards.length === 0) {
-      this.addWarning('noMatchingCards');
+      this.warnings.add('noMatchingCards');
     }
     return true;
   }

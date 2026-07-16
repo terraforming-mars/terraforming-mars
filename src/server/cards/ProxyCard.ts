@@ -53,8 +53,4 @@ export class ProxyCard implements IProjectCard {
   public get warnings() {
     return EMPTY_SET;
   }
-  public addWarning(_warning: Warning): void {
-  }
-  public clearWarnings(): void {
-  }
 }

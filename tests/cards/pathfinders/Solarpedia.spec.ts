@@ -4,8 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('Solarpedia', () => {
   let card: Solarpedia;

@@ -1,5 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
+import {CardName} from '../../common/cards/CardName';
 
 export class Briber implements IMilestone {
   public readonly name = 'Briber';
@@ -8,6 +9,7 @@ export class Briber implements IMilestone {
     return player.spendableMegacredits();
   }
   public canClaim(player: IPlayer): boolean {
-    return player.canAfford(player.milestoneCost() + 12);
+    const baseCost = player.playedCards.has(CardName.VANALLEN) ? 0 : player.milestoneCost();
+    return player.canAfford(baseCost + 12);
   }
 }

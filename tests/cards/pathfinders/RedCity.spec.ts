@@ -11,9 +11,8 @@ import {TileType} from '../../../src/common/TileType';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Mangrove} from '../../../src/server/cards/base/Mangrove';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('RedCity', () => {
   let card: RedCity;

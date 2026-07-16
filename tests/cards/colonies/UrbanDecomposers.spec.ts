@@ -8,7 +8,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('UrbanDecomposers', () => {

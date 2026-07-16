@@ -1,5 +1,5 @@
-import '@/server/init';
-import fs from 'fs';
+require('dotenv').config();
+import * as fs from 'fs';
 
 import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
 import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
@@ -21,10 +21,6 @@ import {ClientAward, ClientMilestone} from '../../common/ma/ClientMilestoneAward
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
 import {globalInitialize} from '../globalInitialize';
-
-type Mutable<T> = {
-  -readonly [P in keyof T]: T[P];
-};
 
 class CardProcessor {
   public static json: Array<ClientCard> = [];
@@ -86,7 +82,7 @@ class CardProcessor {
     }
 
     const production = card.behavior?.production;
-    const clientCard: Mutable<ClientCard> = {
+    const clientCard: ClientCard = {
       module: module,
       name: card.name,
       tags: card.tags,
@@ -94,20 +90,15 @@ class CardProcessor {
       victoryPoints: card.victoryPoints,
       cost: card.cost,
       type: card.type,
+      requirements: card.requirements ?? [],
       metadata: card.metadata,
+      productionBox: Units.isUnits(production) ? production : Units.EMPTY, // Dynamic units aren't used on on the client side.
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,
       compatibility: [],
       hasAction: isIActionCard(card),
     };
-
-    if (card.requirements) {
-      clientCard.requirements = card.requirements;
-    }
-    if (Units.isUnits(production)) {
-      clientCard.productionBox = production;
-    }
 
     if (Array.isArray(compatibility)) {
       clientCard.compatibility.push(...compatibility);

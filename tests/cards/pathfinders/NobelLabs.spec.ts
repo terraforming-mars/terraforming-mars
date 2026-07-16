@@ -9,7 +9,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('NobelLabs', () => {
   let card: NobelLabs;

@@ -8,10 +8,6 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {LoseProduction} from '../../deferredActions/LoseProduction';
-import {Resource} from '../../../common/Resource';
-import {MarsBoard} from '../../boards/MarsBoard';
-import {Units} from '../../../common/Units';
 
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +18,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
       cost: 10,
 
       behavior: {
-        production: {megacredits: 2},
+        production: {energy: -1, megacredits: 2},
       },
 
       metadata: {
@@ -37,31 +33,18 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  public productionBox() {
-    return Units.of({energy: -1, megacredits: 2});
-  }
-
-  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
-    const available = this.getAvailableSpaces(player, canAffordOptions);
-    if (available.length === 0) {
-      return false;
-    }
-    return MarsBoard.hasEnergyCoverage(player, available);
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
-
   public override bespokePlay(player: IPlayer) {
-    const spaces = MarsBoard.filterForEnergy(player, this.getAvailableSpaces(player));
     player.game.defer(new PlaceCityTile(player, {
       title: 'Select space next to at least 2 other city tiles',
-      spaces,
-    })).andThen(() => {
-      player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
-    });
+      spaces: this.getAvailableSpaces(player),
+    }));
     return undefined;
   }
 }

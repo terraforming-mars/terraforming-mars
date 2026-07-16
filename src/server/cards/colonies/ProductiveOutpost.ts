@@ -7,7 +7,6 @@ import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {IColony} from '../../colonies/IColony';
 import {ColonyName} from '../../../common/colonies/ColonyName';
-import {uppercase} from '../Options';
 
 export class ProductiveOutpost extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C30',
         renderData: CardRenderer.builder((b) => {
-          b.text('Gain all your colony bonuses.', {size: Size.SMALL, uppercase});
+          b.text('Gain all your colony bonuses.', Size.SMALL, true);
         }),
       },
     });

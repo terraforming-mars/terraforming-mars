@@ -23,16 +23,10 @@ export class Landshaper extends BaseMilestone {
       .filter(Board.ownedBy(player))
       .filter(isSpecialTileSpace)
       .length;
-    if ((marsCount + moonCount) > 0) {
-      score+=1;
-    }
+    if ((marsCount + moonCount) > 0) score+=1;
 
-    if (player.game.board.getCities(player).length > 0) {
-      score+=1;
-    }
-    if (player.game.board.getGreeneries(player).length > 0) {
-      score+=1;
-    }
+    if (player.game.board.getCities(player).length > 0) score+=1;
+    if (player.game.board.getGreeneries(player).length > 0) score+=1;
 
     return score;
   }

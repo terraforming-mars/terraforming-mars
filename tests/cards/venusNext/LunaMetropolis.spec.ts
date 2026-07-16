@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LunaMetropolis} from '../../../src/server/cards/venusNext/LunaMetropolis';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('LunaMetropolis', () => {
   it('Should play', () => {

@@ -11,9 +11,7 @@ describe('CardMetadata', () => {
 
       for (const factory of CardManifest.values(factories)) {
         const card = new factory.Factory();
-        if (card.type === CardType.PROXY) {
-          continue;
-        }
+        if (card.type === CardType.PROXY) continue;
         if (card.victoryPoints !== undefined) {
           // if (card.victoryPoints === 'special') {
           expect(card.metadata.victoryPoints, card.name + ' should have victoryPoints metadata').is.not.undefined;

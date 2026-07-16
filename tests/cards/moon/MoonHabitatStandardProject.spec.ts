@@ -3,13 +3,13 @@ import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {runAllActions, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
+import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {assertPlaceMoonHabitat} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
-import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('MoonHabitatStandardProject', () => {
   let game: IGame;
@@ -53,10 +53,14 @@ describe('MoonHabitatStandardProject', () => {
   }
 
   it('has discount', () => {
-    expect(card.getAdjustedCost(player)).eq(22);
+    card.action(player);
+    let payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
+    expect(payAction.amount).eq(22);
 
     player.playedCards.push(new MooncrateBlockFactory());
-    expect(card.getAdjustedCost(player)).eq(18);
+    card.action(player);
+    payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
+    expect(payAction.amount).eq(18);
   });
 
   it('act', () => {
@@ -65,7 +69,7 @@ describe('MoonHabitatStandardProject', () => {
     expect(player.production.megacredits).eq(0);
     player.megaCredits = 22;
 
-    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(player.titanium).eq(2);
@@ -90,3 +94,4 @@ describe('MoonHabitatStandardProject', () => {
     testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
+

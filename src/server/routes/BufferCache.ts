@@ -1,5 +1,5 @@
 
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 
 interface BufferHash {
   buffer: Buffer,

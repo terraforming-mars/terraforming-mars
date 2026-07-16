@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {NeutralizerFactory} from '../../../src/server/cards/venusNext/NeutralizerFactory';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('NeutralizerFactory', () => {
   it('Should play', () => {

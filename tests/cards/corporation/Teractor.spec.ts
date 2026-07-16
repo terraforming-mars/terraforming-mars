@@ -5,7 +5,7 @@ import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/server/cards/corporation/Teractor';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('Teractor', () => {
   let card: Teractor;

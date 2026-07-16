@@ -76,9 +76,9 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
-    case BoardName.TERRA_CIMMERIA_NOVA:
+    case BoardName.TERRA_CIMMERIA_NOVUS:
     case BoardName.VASTITAS_BOREALIS:
-    case BoardName.VASTITAS_BOREALIS_NOVA:
+    case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
     default:
@@ -238,9 +238,7 @@ export function verifySynergyRules(
       const synergy = synergies.get(mas[i], mas[j]);
       max = Math.max(synergy, max);
       totalSynergy += synergy;
-      if (synergy >= constraints.highThreshold) {
-        numberOfHigh++;
-      }
+      if (synergy >= constraints.highThreshold) numberOfHigh++;
     }
   }
   return max <= constraints.maxSynergyAllowed &&

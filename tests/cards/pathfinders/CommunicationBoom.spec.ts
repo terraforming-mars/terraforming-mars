@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {fakeCard, runAllActions, testGame} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions, testGame} from '../../TestingUtils';
 import {CommunicationBoom} from '../../../src/server/cards/pathfinders/CommunicationBoom';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CommunicationBoom', () => {
   it('resolve play', () => {

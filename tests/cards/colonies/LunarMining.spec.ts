@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('LunarMining', () => {
   it('Should play', () => {

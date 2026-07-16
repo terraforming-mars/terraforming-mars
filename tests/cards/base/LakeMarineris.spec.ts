@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {maxOutOceans, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {cast, maxOutOceans, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {LakeMarineris} from '../../../src/server/cards/base/LakeMarineris';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('LakeMarineris', () => {
   let card: LakeMarineris;

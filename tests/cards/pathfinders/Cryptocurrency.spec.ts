@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('Cryptocurrency', () => {
   let card: Cryptocurrency;

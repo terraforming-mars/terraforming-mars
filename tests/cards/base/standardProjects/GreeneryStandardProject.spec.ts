@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {runAllActions, setOxygenLevel} from '../../../TestingUtils';
+import {churn, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
@@ -10,7 +10,6 @@ import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {TileType} from '../../../../src/common/TileType';
 import {testGame} from '../../../TestGame';
 import {assertPlaceTile} from '../../../assertions';
-import {Payment} from '../../../../src/common/inputs/Payment';
 
 describe('GreeneryStandardProject', () => {
   let card: GreeneryStandardProject;
@@ -34,9 +33,7 @@ describe('GreeneryStandardProject', () => {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
-    runAllActions(game);
-    assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
+    assertPlaceTile(player, churn(card.action(player), player), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
     expect(player.terraformRating).eq(21);

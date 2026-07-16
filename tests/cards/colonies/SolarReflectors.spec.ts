@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SolarReflectors} from '../../../src/server/cards/colonies/SolarReflectors';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SolarReflectors', () => {
   it('Should play', () => {

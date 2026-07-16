@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SkyDocks} from '../../../src/server/cards/colonies/SkyDocks';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SkyDocks', () => {
   it('Should play', () => {

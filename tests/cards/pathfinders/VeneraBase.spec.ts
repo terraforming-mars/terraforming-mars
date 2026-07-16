@@ -15,8 +15,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {churn} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, churn} from '../../TestingUtils';
 
 describe('VeneraBase', () => {
   let card: VeneraBase;

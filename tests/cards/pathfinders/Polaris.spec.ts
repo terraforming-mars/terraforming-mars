@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {IGame} from '../../../src/server/IGame';
-import {addOcean, runAllActions} from '../../TestingUtils';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Polaris', () => {
   let card: Polaris;

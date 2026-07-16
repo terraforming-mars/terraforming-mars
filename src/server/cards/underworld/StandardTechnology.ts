@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {IActionCard} from '../ICard';
 import {IStandardProjectCard} from '../IStandardProjectCard';
-import {SelectStandardProjectToPlay} from '../../inputs/SelectStandardProjectToPlay';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -53,11 +53,18 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
 
   public action(player: IPlayer) {
     const standardProjects = this.getStandardProjects(player);
-    return new SelectStandardProjectToPlay(player, standardProjects, {
-      title: 'Standard projects',
-      buttonLabel: 'Confirm',
-      adjustedCost: (card) => Math.max(0, card.getAdjustedCost(player) - 8),
-    });
+    return new SelectCard(
+      'Standard projects',
+      'Confirm',
+      standardProjects)
+      .andThen(([card]) => {
+        this.discount = true;
+        try {
+          return card.action(player);
+        } finally {
+          this.discount = false;
+        }
+      });
   }
 
   public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {

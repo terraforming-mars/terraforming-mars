@@ -32,7 +32,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
           b.text('STEAL').wild(2, {all}).asterix().br;
         }),
         description: 'Requires 2 corruption. Choose a standard resource type. ' +
-          'Steal up to 2 units of that resource from EACH OTHER player.',
+          'Steal 2 units of that resource from EACH OTHER player.',
       },
     });
   }
@@ -53,9 +53,10 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
 
   public override bespokePlay(player: IPlayer) {
     return new SelectResource(
-      'Select which resource type to steal 2 units from all other players.',
+      'Select which production to increase 1 step.',
       this.stealableResources(player))
-      .andThen((resource) => {
+      .andThen((unitKey) => {
+        const resource = Units.ResourceMap[unitKey];
         if (player.game.isSoloMode()) {
           player.stock.add(resource, 2, {log: true});
           player.resolveInsuranceInSoloGame();
@@ -84,7 +85,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
 
   public action(player: IPlayer) {
     return new SelectResource(
-      'Select which production to increase 1 step.')
+      'Select which resource type to steal 2 units from all other players.')
       .andThen((unitKey) => {
         UnderworldExpansion.loseCorruption(player, 1);
         const units = {...Units.EMPTY};

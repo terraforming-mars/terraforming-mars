@@ -10,19 +10,17 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardCost',
   props: {
     amount: {
       type: Number as () => number | undefined,
-      default: undefined,
     },
     newCost: {
       type: Number as () => number | undefined,
-      default: undefined,
     },
   },
   methods: {

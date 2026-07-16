@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {Musk} from '../../../src/server/cards/ceos/Musk';
 import {Tag} from '../../../src/common/cards/Tag';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
-import {cast} from '../../../src/common/utils/utils';
 
 
 describe('Musk', () => {

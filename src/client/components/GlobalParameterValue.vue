@@ -14,7 +14,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
 import {GlobalParameter} from '@/common/GlobalParameter';
 
@@ -23,7 +23,7 @@ type BaseGlobalParameter = Exclude<
   GlobalParameter,
   GlobalParameter.MOON_HABITAT_RATE |
   GlobalParameter.MOON_MINING_RATE |
-  GlobalParameter.MOON_LOGISTIC_RATE>;
+  GlobalParameter.MOON_LOGISTICS_RATE>;
 
 const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconClass: string}> = {
   [GlobalParameter.TEMPERATURE]: {max: MAX_TEMPERATURE, title: 'Temperature', iconClass: 'temperature-tile'},
@@ -32,16 +32,14 @@ const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconC
   [GlobalParameter.VENUS]: {max: MAX_VENUS_SCALE, title: 'Venus Scale', iconClass: 'venus-tile'},
 };
 
-export default defineComponent({
-  name: 'GlobalParameterValue',
+export default Vue.extend({
+  name: 'global-parameter-value',
   props: {
     param: {
       type: String as () => BaseGlobalParameter,
-      required: true,
     },
     value: {
       type: Number,
-      required: true,
     },
   },
   computed: {

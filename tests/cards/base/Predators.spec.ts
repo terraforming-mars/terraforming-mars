@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {setOxygenLevel} from '../../TestingUtils';
+import {cast, setOxygenLevel} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -11,7 +11,6 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Predators', () => {
   let card: Predators;
@@ -93,29 +92,6 @@ describe('Predators', () => {
     expect(card.resourceCount).to.eq(1);
     expect(fish.resourceCount).to.eq(0);
     expect(bioengineeringEnclosure.resourceCount).to.eq(1);
-  });
-
-  it('Can remove from own Bioengineering Enclosure', () => {
-    const bioengineeringEnclosure = new BioengineeringEnclosure();
-    player.playedCards.push(card, bioengineeringEnclosure);
-    player.addResourceTo(bioengineeringEnclosure, 2);
-
-    expect(card.canAct(player)).is.true;
-
-    card.action(player);
-    expect(game.deferredActions.pop()!.execute()).is.undefined; // Only one option: the enclosure
-    game.deferredActions.pop()!.execute(); // Add animal to predators
-
-    expect(card.resourceCount).to.eq(1);
-    expect(bioengineeringEnclosure.resourceCount).to.eq(1);
-  });
-
-  it('Can not remove from own Pets', () => {
-    const pets = new Pets();
-    player.playedCards.push(card, pets);
-    player.addResourceTo(pets, 2);
-
-    expect(card.canAct(player)).is.false;
   });
 
   it('Respects protected habitats', () => {

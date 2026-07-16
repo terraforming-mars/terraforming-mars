@@ -17,14 +17,14 @@
     <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colony.type === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colony.resource !== Resource.MEGACREDITS">
-          <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="metadata.colony.resource"></div>
+          <div v-for="n in metadata.colony.quantity" :key=n class="resource" :class="metadata.colony.resource"></div>
         </template>
         <template v-else>
           <div class="resource" :class="metadata.colony.resource">{{metadata.colony.quantity}}</div>
         </template>
       </template>
        <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
-        <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="colonyResourceClass"></div>
+        <div v-for="n in metadata.colony.quantity" :key=n class="resource" :class="colonyResourceClass"></div>
       </template>
       <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)" ></div>
 
@@ -58,9 +58,6 @@
         <div class="resource money">1</div> / <div class="tile hazard-tile"></div>
       </div>
 
-      <div v-if="colony.name === ColonyName.TERRA" class="terra-colony-bonus">
-        <div class="resource money">1</div> / 3&nbsp;<span class="tag tag-earth red-outline" style="transform:scale(0.8);margin-top:-4px;"></span>
-      </div>
       <span class="colony-background-color">
         <template v-if="colony.name !== ColonyName.TITANIA"><span v-i18n>Bonus</span></template>
         <template v-else><span v-i18n>Colony Fee</span></template>
@@ -80,7 +77,7 @@
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === ColonyName.PLUTO" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
-      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" ></div>
+      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" />
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === ColonyName.TITANIA" class="white-x" style="margin-left:42px;"></div>
@@ -90,31 +87,30 @@
       <div v-if="colony.name === ColonyName.VENUS" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
       <div v-if="colony.name === ColonyName.VENUS" class="resource wild" style="margin:10px 10px 10px -20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
       <div v-if="colony.name === ColonyName.LEAVITT" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
-
-      <span v-if="colony.name === ColonyName.PLUTO" class="colony-background-color" style="position:relative; top:-3px"
-        v-i18n>Trade Income</span>
-      <span v-else-if="colony.name === ColonyName.EUROPA" class="colony-background-color" style="margin-left: 3px;position: relative;top: -12px;"
-        v-i18n>Trade Income: Gain the indicated production</span>
-      <span v-else-if="colony.name === ColonyName.IAPETUS" class="colony-background-color" style="position:relative;top:-8px;left:30px"
-        v-i18n>Trade Income</span>
-      <span v-else-if="colony.name === ColonyName.TITANIA || colony.name === ColonyName.PALLAS" class="colony-background-color" style="position:relative;top:-14px;left:12px"
-        v-i18n>Trade Income</span>
-      <span v-else-if="colony.name === ColonyName.MERCURY" class="colony-background-color" style="margin-left: 3px;"
-        v-i18n>Trade Income</span>
-      <span v-else-if="colony.name === ColonyName.HYGIEA" class="colony-background-color" style="margin-left: 3px;"
-        v-i18n>Trade Income: Steal 3 indicated resources</span>
-      <span v-else-if="colony.name === ColonyName.LEAVITT" class="colony-background-color" style="margin-left: 3px;"
-        v-i18n>Trade Income: Draw X cards and keep 1</span>
-      <span v-else-if="colony.name === ColonyName.DEIMOS" class="colony-background-color" style="margin-left: 3px;"
-        v-i18n>Trade Income: Erode X adjacent spaces</span>
-      <span v-else-if="colony.name === ColonyName.TERRA" class="colony-background-color" style="margin-left: 3px; -webkit-text-stroke: .3px gray"
-        v-i18n>Trade Income: WGT raises global parameter</span>
-      <span v-else class="colony-background-color" v-i18n>Trade Income</span>
+      <template>
+        <span v-if="colony.name === ColonyName.PLUTO" class="colony-background-color" style="position:relative; top:-3px"
+          v-i18n>Trade Income</span>
+        <span v-else-if="colony.name === ColonyName.EUROPA" class="colony-background-color" style="margin-left: 3px;position: relative;top: -12px;"
+          v-i18n>Trade Income: Gain the indicated production</span>
+        <span v-else-if="colony.name === ColonyName.IAPETUS" class="colony-background-color" style="position:relative;top:-8px;left:30px"
+          v-i18n>Trade Income</span>
+        <span v-else-if="colony.name === ColonyName.TITANIA || colony.name === ColonyName.PALLAS" class="colony-background-color" style="position:relative;top:-14px;left:12px"
+          v-i18n>Trade Income</span>
+        <span v-else-if="colony.name === ColonyName.MERCURY" class="colony-background-color" style="margin-left: 3px;"
+          v-i18n>Trade Income</span>
+        <span v-else-if="colony.name === ColonyName.HYGIEA" class="colony-background-color" style="margin-left: 3px;"
+          v-i18n>Trade Income: Steal 3 indicated resources</span>
+        <span v-else-if="colony.name === ColonyName.LEAVITT" class="colony-background-color" style="margin-left: 3px;"
+          v-i18n>Trade Income: Draw X cards and keep 1</span>
+        <span v-else-if="colony.name === ColonyName.DEIMOS" class="colony-background-color" style="margin-left: 3px;"
+          v-i18n>Trade Income: Erode X adjacent spaces</span>
+        <span v-else class="colony-background-color" v-i18n>Trade Income</span>
+      </template>
 
     <!-- Show the spaces for the player cubes and the white cube -->
-    <ColonyRow :metadata="metadata" :colony="colony"/>
+    <colony-row :metadata="metadata" :colony="colony"></colony-row>
     <!-- show the numbers underneath the colony row -->
-    <ColonyTradeRow :metadata="metadata"/>
+    <colony-trade-row :metadata="metadata"></colony-trade-row>
   </div>
 <!-- </div> -->
 </div>
@@ -123,7 +119,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
@@ -135,12 +131,11 @@ import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 import {Resource} from '@/common/Resource';
 import {translateText} from '@/client/directives/i18n';
 
-export default defineComponent({
-  name: 'Colony',
+export default Vue.extend({
+  name: 'colony',
   props: {
     colony: {
       type: Object as () => ColonyModel,
-      required: true,
     },
     active: {
       type: Boolean,

@@ -1,19 +1,19 @@
 <template>
-  <div :class="getClasses()" ></div>
+  <div :class="getClasses()" />
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardTag',
   props: {
     index: {
       type: Number,
       required: true,
-      validator: (i: number) => i < 4,
+      validator: (i) => i < 4,
     },
     type: {
       type: String,

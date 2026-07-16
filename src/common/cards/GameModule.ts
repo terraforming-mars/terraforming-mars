@@ -13,7 +13,6 @@ export const EXPANSIONS = [
   'ceo',
   'starwars',
   'underworld',
-  'deltaProject',
 ] as const;
 
 export const GAME_MODULES = [
@@ -24,7 +23,7 @@ export type GameModule = typeof GAME_MODULES[number];
 
 export type Expansion = Exclude<GameModule, 'base'>;
 
-export const MODULE_NAMES = {
+export const MODULE_NAMES: Readonly<Record<GameModule, string>> = {
   base: 'Base',
   corpera: 'Corporate Era',
   promo: 'Promo',
@@ -40,10 +39,9 @@ export const MODULE_NAMES = {
   ceo: 'CEOs',
   starwars: 'Star Wars',
   underworld: 'Underworld',
-  deltaProject: 'Delta Project',
-} satisfies Record<GameModule, string>;
+};
 
-export const DEFAULT_EXPANSIONS = {
+export const DEFAULT_EXPANSIONS: Record<Expansion, boolean> = {
   corpera: true,
   promo: false,
   venus: false,
@@ -58,5 +56,4 @@ export const DEFAULT_EXPANSIONS = {
   ceo: false,
   starwars: false,
   underworld: false,
-  deltaProject: false,
-} satisfies Record<Expansion, boolean>;
+};

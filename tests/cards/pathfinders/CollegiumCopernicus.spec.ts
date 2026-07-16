@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -16,7 +16,6 @@ import {Pluto} from '../../../src/server/colonies/Pluto';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {Tag} from '../../../src/common/cards/Tag';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CollegiumCopernicus', () => {
   let card: CollegiumCopernicus;
@@ -113,7 +112,7 @@ describe('CollegiumCopernicus', () => {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards.push(lunarObservationPost);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
+    card.onCardPlayedForCorps(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
     const selectCard = cast(player.getWaitingFor(), SelectCard);
 

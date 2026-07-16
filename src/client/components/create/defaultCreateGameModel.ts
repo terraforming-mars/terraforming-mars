@@ -1,24 +1,24 @@
-import * as constants from '@/common/constants';
-import {BoardName} from '@/common/boards/BoardName';
-import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
-import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
-import {CreateGameModel} from './CreateGameModel';
+import * as constants from "@/common/constants";
+import { BoardName } from "@/common/boards/BoardName";
+import { DEFAULT_EXPANSIONS } from "@/common/cards/GameModule";
+import { RandomMAOptionType } from "@/common/ma/RandomMAOptionType";
+import { CreateGameModel } from "./CreateGameModel";
 
 export function defaultCreateGameModel(): CreateGameModel {
   return {
     firstIndex: 1,
     playersCount: 1,
     players: [
-      {name: '', color: 'red', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'green', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'yellow', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'blue', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'black', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'purple', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'orange', beginner: false, handicap: 0, first: false},
-      {name: '', color: 'pink', beginner: false, handicap: 0, first: false},
+      { name: "", color: "red", beginner: false, handicap: 0, first: false },
+      { name: "", color: "green", beginner: false, handicap: 0, first: false },
+      { name: "", color: "yellow", beginner: false, handicap: 0, first: false },
+      { name: "", color: "blue", beginner: false, handicap: 0, first: false },
+      { name: "", color: "black", beginner: false, handicap: 0, first: false },
+      { name: "", color: "purple", beginner: false, handicap: 0, first: false },
+      { name: "", color: "orange", beginner: false, handicap: 0, first: false },
+      { name: "", color: "pink", beginner: false, handicap: 0, first: false },
     ],
-    expansions: {...DEFAULT_EXPANSIONS},
+    expansions: { ...DEFAULT_EXPANSIONS },
     draftVariant: true,
     initialDraft: false,
     randomMA: RandomMAOptionType.NONE,
@@ -26,13 +26,11 @@ export function defaultCreateGameModel(): CreateGameModel {
     randomFirstPlayer: true,
     showOtherPlayersVP: false,
     // beginnerOption: false,
-    showCeosList: false,
     showColoniesList: false,
     showCorporationList: false,
     showPreludesList: false,
     showBannedCards: false,
     showIncludedCards: false,
-    customCeos: [],
     customColonies: [],
     customCorporations: [],
     customPreludes: [],
@@ -44,7 +42,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     solarPhaseOption: false,
     shuffleMapOption: false,
     aresExtremeVariant: false,
-    politicalAgendasExtension: 'Standard',
+    politicalAgendasExtension: "Standard",
     undoOption: false,
     showTimers: true,
     fastModeOption: false,
@@ -65,6 +63,8 @@ export function defaultCreateGameModel(): CreateGameModel {
     escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
     escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
     twoCorpsVariant: false,
+    doubleDown: false,
+    customCeos: [],
     startingCeos: 3,
     startingPreludes: 4,
     preludeDraftVariant: undefined,

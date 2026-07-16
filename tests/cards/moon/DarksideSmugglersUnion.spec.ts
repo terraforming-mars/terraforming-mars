@@ -8,7 +8,7 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {Message} from '../../../src/common/logs/Message';
 
 describe('DarksideSmugglersUnion', () => {

@@ -2,12 +2,12 @@
     <div class="cards-filter">
         <h2 v-i18n>{{ title }}</h2>
         <div class="cards-filter-results-cont" v-if="selected.length">
-            <div class="cards-filter-result" v-for="cardName in selected" :key="cardName">
+            <div class="cards-filter-result" v-for="cardName in selected" v-bind:key="cardName">
                 <label>{{ cardName }}
                   <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
                   <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                  <template v-for="expansion of expansions(cardName)" :key="expansion">
-                    <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                  <template v-for="expansion of expansions(cardName)">
+                    <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
                   </template>
                 </label>
                 <AppButton size="small" type="close" @click="removeCard(cardName)" />
@@ -15,16 +15,16 @@
         </div>
         <div class="cards-filter-input">
             <div>
-                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" >
+                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" />
             </div>
             <div class="cards-filter-suggest" v-if="searchMatches.length">
-                <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" :key="cardName">
-                    <a href="#" @click.prevent="addCard(cardName)">
+                <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" v-bind:key="cardName">
+                    <a href="#" v-on:click.prevent="addCard(cardName)">
                       {{ cardName }}
                       <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
                       <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                      <template v-for="expansion of expansions(cardName)" :key="expansion">
-                        <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                      <template v-for="expansion of expansions(cardName)">
+                        <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
                       </template>
                     </a>
                 </div>
@@ -34,7 +34,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import {CardName} from '@/common/cards/CardName';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
@@ -50,6 +51,9 @@ const ALL_CARDS: Array<CardName> = [
 ].map(toName)
   .sort((a, b) => a.localeCompare(b));
 
+type Refs = {
+  filter: HTMLInputElement,
+};
 
 type CardsFilterModel = {
   selected: Array<CardName>;
@@ -57,11 +61,7 @@ type CardsFilterModel = {
   searchTerm: string;
 }
 
-type Refs = {
-  filter: HTMLInputElement;
-};
-
-export default defineComponent({
+export default (Vue as WithRefs<Refs>).extend({
   name: 'CardsFilter',
   props: {
     title: {
@@ -83,11 +83,6 @@ export default defineComponent({
   components: {
     AppButton,
   },
-  computed: {
-    typedRefs(): Refs {
-      return this.$refs as unknown as Refs;
-    },
-  },
   methods: {
     isPrelude(cardName: CardName) {
       return getCard(cardName)?.type === CardType.PRELUDE;
@@ -102,21 +97,16 @@ export default defineComponent({
       inplaceRemove(this.selected, cardName);
     },
     addCard(cardName: CardName) {
-      if (this.selected.includes(cardName)) {
-        return;
-      }
+      if (this.selected.includes(cardName)) return;
       this.selected.push(cardName);
       this.selected.sort();
       this.searchTerm = '';
-      this.typedRefs.filter.focus();
+      this.$refs.filter.focus();
     },
   },
   watch: {
-    selected: {
-      handler(value) {
-        this.$emit('cards-list-changed', value);
-      },
-      deep: true,
+    selected(value) {
+      this.$emit('cards-list-changed', value);
     },
     searchTerm(value: string) {
       this.searchMatches = [];
@@ -149,7 +139,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.typedRefs.filter.focus();
+    this.$refs.filter.focus();
   },
 });
 </script>

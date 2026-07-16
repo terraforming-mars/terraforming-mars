@@ -1,12 +1,12 @@
 <template>
   <div class='board-space-bonuses'>
-    <i v-for="(spaceBonus, idx) in bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" ></i>
+    <i v-for="(spaceBonus, idx) in bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" />
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 const css: Record<SpaceBonus, string> = {
@@ -31,12 +31,11 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.TEMPERATURE_4MC]: 'bonustemperature4mc',
 };
 
-export default defineComponent({
-  name: 'Bonus',
+export default Vue.extend({
+  name: 'bonus',
   props: {
     bonus: {
       type: Array as () => Array<SpaceBonus>,
-      required: true,
     },
   },
   methods: {

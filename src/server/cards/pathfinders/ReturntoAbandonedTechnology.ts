@@ -19,7 +19,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf22',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.', {size: Size.SMALL}).br;
+          b.text('Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.', Size.SMALL).br;
         }),
       },
     });
@@ -33,9 +33,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     const cards = [];
     for (let idx = 0; idx < 4; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
-      if (card === undefined) {
-        break;
-      }
+      if (card === undefined) break;
       cards.push(card);
     }
 

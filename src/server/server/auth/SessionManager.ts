@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 import {Clock} from '../../../common/Timer';
 import {IDatabase} from '../../database/IDatabase';
 import {Database} from '../../database/Database';
-import {durationToMilliseconds} from '../../utils/durations';
+import {durationToMilliseconds} from '../../../server/utils/durations';
 
 export interface ISessionManager {
   initialize(): Promise<void>;
@@ -17,13 +17,10 @@ export interface ISessionManager {
 const DEFAULT_EXPIRATION_TIME = durationToMilliseconds(process.env.SESSION_DURATION || '30m');
 
 export class SessionManager implements ISessionManager {
-  private static instance: ISessionManager;
+  private static readonly INSTANCE = new SessionManager();
 
   public static getInstance(): ISessionManager {
-    if (!this.instance) {
-      this.instance = new SessionManager();
-    }
-    return this.instance;
+    return this.INSTANCE;
   }
 
   private sessions: Map<SessionId, Session> = new Map();

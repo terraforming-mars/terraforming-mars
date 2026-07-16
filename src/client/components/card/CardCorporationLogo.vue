@@ -141,7 +141,7 @@
         <span class="card-arcadian-logo"><span>Arcadian</span><br><span>Communities</span></span>
       </template>
       <template v-else-if="title === CardName.ASTRODRILL">
-        <span class="card-astrodril-logo">AstroDrill</span>
+        <span class="card-astrodril-logo">Astrodrill</span>
       </template>
       <template v-else-if="title === CardName.ATHENA">
         <div class="card-athena-logo">Athena</div>
@@ -440,11 +440,11 @@
               </g>
             </svg>
           </div>
-          <div class="kingdom-of-tauraro-title">Kingdom of<br>Tauraro</div>
+          <div class="kingdom-of-tauraro-title">Kingdom of<br/>Tauraro</div>
         </div>
       </template>
       <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
-        <div class="card-kuiper-logo">Kuiper<br >Cooperative</div>
+        <div class="card-kuiper-logo">Kuiper<br />Cooperative</div>
       </template>
       <template v-else-if="title === CardName.LAKEFRONT_RESORTS">
         <div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>
@@ -479,7 +479,7 @@
         <div class="card-palladin-shipping-logo"></div>
       </template>
       <template v-else-if="title === CardName.PHARMACY_UNION">
-        <div class="card-pharmacy-union-logo">Pharmacy<br >Union</div>
+        <div class="card-pharmacy-union-logo">Pharmacy<br />Union</div>
       </template>
       <template v-else-if="title === CardName.PHILARES">
         <div class="card-philares-logo">PHIL<span style="color:#ff5858">A</span>RES</div>
@@ -492,7 +492,7 @@
         <div class="card-poldertech-2-logo">Dutch</div>
       </template>
       <template v-else-if="title === CardName.PROJECT_WORKSHOP">
-        <div class="card-project-workshop-logo">PROJECT<br >WORKSHOP</div>
+        <div class="card-project-workshop-logo">PROJECT<br />WORKSHOP</div>
       </template>
       <template v-else-if="title === CardName.RECYCLON">
         <div class="card-recyclon-logo">Recyclon</div>
@@ -538,10 +538,10 @@
       </template>
       <template v-else-if="title === CardName.TERRALABS_RESEARCH">
         <div
-          style="font-size: 13px;left:32px;top:10px;font-family:Prototype, sans-serif;color:#222;transform:scale(2,1);position:absolute;">
+          style="font-size: 13px;left:32px;top:10px;font-family:Prototype;color:#222;transform:scale(2,1);position:absolute;">
           TERRALABS</div>
         <div
-          style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype, sans-serif;transform:scale(2,1)">
+          style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype;transform:scale(2,1)">
           RESEARCH</div>
       </template>
       <template v-else-if="title === CardName.THARSIS_REPUBLIC">
@@ -557,10 +557,10 @@
         </div>
       </template>
       <template v-else-if="title === CardName.UNITED_NATIONS_MARS_INITIATIVE">
-        <span class="card-unmi-logo">UNITED NATIONS<br >MARS INITIATIVE</span>
+        <span class="card-unmi-logo">UNITED NATIONS<br />MARS INITIATIVE</span>
       </template>
       <template v-else-if="title === CardName.UNITED_NATIONS_MISSION_ONE">
-        <span class="card-unmo-logo">UNITED NATIONS<br >MISSION ONE</span>
+        <span class="card-unmo-logo">UNITED NATIONS<br />MISSION ONE</span>
       </template>
       <template v-else-if="title === CardName.UTOPIA_INVEST">
         <div class="card-utopia-logo">
@@ -572,7 +572,7 @@
         <div class="card-valley-trust-logo">
           <div
             style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">
-            VALLEY<br > TRUST</div>
+            VALLEY<br /> TRUST</div>
         </div>
       </template>
       <template v-else-if="title === CardName.VITOR">
@@ -646,13 +646,12 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {CardName} from '@/common/cards/CardName';
 
 
 const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
-  [CardName.AEROTECH]: 'image',
   [CardName.AERON_GENOMICS]: 'bespoke',
   [CardName.AGRICOLA_INC]: 'bespoke',
   [CardName.AMBIENT]: 'image',
@@ -753,7 +752,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.VOLTAGON]: 'bespoke',
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardCorporationLogo',
   props: {
     title: {

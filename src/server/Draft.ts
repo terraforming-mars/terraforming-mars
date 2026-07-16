@@ -49,22 +49,16 @@ export abstract class Draft {
     } else {
       arrays.push(...this.game.players.map((player) => player.draftHand));
       if (this.passDirection() === 'after') {
-        const array = arrays.pop();
-        if (array) {
-          arrays.unshift(array);
-        }
+        arrays.unshift(arrays.pop()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
       } else {
-        const array = arrays.shift();
-        if (array) {
-          arrays.push(array);
-        }
+        arrays.push(arrays.shift()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
       }
     }
 
     for (const [player, draftHand] of zip(this.game.players, arrays)) {
       player.draftHand = draftHand;
       player.needsToDraft = true;
-      this.askPlayerToDraft(player, false);
+      this.askPlayerToDraft(player);
     }
     if (save) {
       this.game.save();
@@ -86,17 +80,13 @@ export abstract class Draft {
       return;
     }
 
-    const anybodyStillNeedsToDraft = players.some((p) => p.needsToDraft);
-
     for (const player of players) {
       if (player.needsToDraft) {
-        this.askPlayerToDraft(player, false);
-      } else if (anybodyStillNeedsToDraft) {
-        this.askPlayerToDraft(player, true);
+        this.askPlayerToDraft(player);
       }
     }
 
-    if (!anybodyStillNeedsToDraft) {
+    if (!players.some((p) => p.needsToDraft)) {
       this.endRound();
     }
   }
@@ -114,53 +104,27 @@ export abstract class Draft {
   /**
    * Ask the player to choose from a set of cards.
    */
-  private askPlayerToDraft(player: IPlayer, repick: boolean): void {
+  private askPlayerToDraft(player: IPlayer): void {
     const giveTo = this.givingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
 
-    let cardsToConsider: Array<IProjectCard>;
-    let enabled: Array<boolean> | undefined;
-    if (repick) {
-      cardsToConsider = [...player.draftHand, ...player.draftedCards.slice(-cardsToKeep)];
-      // Disable the picked card only if we're keeping one card. If we keep more than
-      // one card, we need to keep them all enabled since we might repick
-      // one of the cards we previously picked plus a new card.
-      if (cardsToKeep === 1) {
-        enabled = cardsToConsider.map((_, idx) => idx < player.draftHand.length);
-      }
-    } else {
-      cardsToConsider = player.draftHand;
-    }
-
-    const messageTitle = repick ?
-      'You can change your selection until all players have selected a card. Passing to ${0}' :
-      (cardsToKeep === 1 ?
-        'Select a card to keep and pass the rest to ${0}' :
-        'Select two cards to keep and pass the rest to ${0}');
-    const selectCard = new SelectCard(
-      message(messageTitle, (b) => b.player(giveTo)),
-      'Select',
-      cardsToConsider,
-      {
-        min: cardsToKeep, max: cardsToKeep, played: false,
-        enabled: enabled,
-      });
-    selectCard.optional = repick;
-    player.setWaitingFor(selectCard
-      .andThen((selected) => {
-        if (repick) {
-          const startIndex = player.draftedCards.length - cardsToKeep;
-
-          const movedCards = player.draftedCards.splice(startIndex, cardsToKeep);
-          player.draftHand.push(...movedCards);
-        }
-        for (const card of selected) {
-          player.draftedCards.push(card);
-          inplaceRemove(player.draftHand, card);
-        }
-        this.onCardDrafted(player);
-        return undefined;
-      }),
+    const messageTitle = cardsToKeep === 1 ?
+      'Select a card to keep and pass the rest to ${0}' :
+      'Select two cards to keep and pass the rest to ${0}';
+    player.setWaitingFor(
+      new SelectCard(
+        message(messageTitle, (b) => b.player(giveTo)),
+        'Keep',
+        player.draftHand,
+        {min: cardsToKeep, max: cardsToKeep, played: false})
+        .andThen((selected) => {
+          for (const card of selected) {
+            player.draftedCards.push(card);
+            inplaceRemove(player.draftHand, card);
+          }
+          this.onCardDrafted(player);
+          return undefined;
+        }),
     );
   }
 
@@ -170,16 +134,8 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.players.some((p) => p.needsToDraft)) {
-      this.askPlayerToDraft(player, true);
       this.game.save();
       return;
-    }
-
-    // Clear all pending Repick waitingFor.
-    for (const p of this.game.players) {
-      if (p.getWaitingFor() !== undefined) {
-        p.clearWaitingFor();
-      }
     }
 
     // If more than 1 card is to be passed to the next player, that means we're still drafting
@@ -293,9 +249,7 @@ class PreludeDraft extends Draft {
   }
 
   override draw(player: IPlayer) {
-    // Return a copy. Otherwise inplaceRemove on draftHand later mutates
-    // dealtPreludeCards, leaking other players' picks.
-    return [...player.dealtPreludeCards];
+    return player.dealtPreludeCards;
   }
 
   override cardsToKeep(_player: IPlayer): number {
@@ -328,9 +282,7 @@ class CEOsDraft extends Draft {
   }
 
   override draw(player: IPlayer) {
-    // Return a copy. Otherwise inplaceRemove on draftHand later mutates
-    // dealtCeoCards, leaking other players' picks.
-    return [...player.dealtCeoCards];
+    return player.dealtCeoCards;
   }
 
   override cardsToKeep(_player: IPlayer): number {

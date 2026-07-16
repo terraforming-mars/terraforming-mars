@@ -6,12 +6,11 @@ import {WGProject} from '../../../src/server/cards/prelude2/WGProject';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('WGProject', () => {
   let card: WGProject;

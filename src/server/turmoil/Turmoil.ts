@@ -28,14 +28,14 @@ export type Delegate = IPlayer | NeutralPlayer;
 
 export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES = {
+export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
   [PartyName.MARS]: MarsFirst,
   [PartyName.SCIENTISTS]: Scientists,
   [PartyName.UNITY]: Unity,
   [PartyName.GREENS]: Greens,
   [PartyName.REDS]: Reds,
   [PartyName.KELVINISTS]: Kelvinists,
-} satisfies Record<PartyName, PartyFactory>;
+};
 
 function createParties(): ReadonlyArray<IParty> {
   return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];
@@ -53,7 +53,7 @@ export class Turmoil {
   public usedFreeDelegateAction = new Set<IPlayer>();
   public delegateReserve = new MultiSet<Delegate>();
   public parties = createParties();
-  public playersInfluenceBonus = new Map<PlayerId, number>();
+  public playersInfluenceBonus = new Map<string, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
   public comingGlobalEvent: IGlobalEvent | undefined;
@@ -99,7 +99,7 @@ export class Turmoil {
 
   public static getTurmoil(game: IGame): Turmoil {
     if (game.turmoil === undefined) {
-      throw new Error(`Assertion failure: game.turmoil not defined for ${game.id}`);
+      throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
     }
     return game.turmoil;
   }
@@ -107,7 +107,7 @@ export class Turmoil {
   public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -117,7 +117,7 @@ export class Turmoil {
   public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -367,9 +367,7 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) {
-        steps += 1;
-      }
+      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
       // Raise TR
       chairman.defer(() => {
@@ -460,9 +458,7 @@ export class Turmoil {
 
   public getInfluence(player: IPlayer) {
     let influence = 0;
-    if (this.chairman === player) {
-      influence++;
-    }
+    if (this.chairman === player) influence++;
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player;
@@ -470,13 +466,9 @@ export class Turmoil {
 
     if (isPartyLeader) {
       influence++;
-      if (delegateCount > 1) {
-        influence++;
-      } // at least 1 non-leader delegate
+      if (delegateCount > 1) influence++; // at least 1 non-leader delegate
     } else {
-      if (delegateCount > 0) {
-        influence++;
-      }
+      if (delegateCount > 0) influence++;
     }
 
     if (this.playersInfluenceBonus.has(player.id)) {
@@ -527,9 +519,7 @@ export class Turmoil {
    */
   public getVictoryPoints(player: IPlayer): number {
     let victory = 0;
-    if (this.chairman === player) {
-      victory++;
-    }
+    if (this.chairman === player) victory++;
     this.parties.forEach((party) => {
       if (party.partyLeader === player) {
         victory++;
@@ -610,7 +600,7 @@ export class Turmoil {
       tp.partyLeader = deserializeDelegateOrUndefined(sp.partyLeader, players);
     });
 
-    turmoil.playersInfluenceBonus = new Map(d.playersInfluenceBonus);
+    turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
     if (d.distantGlobalEvent) {
       turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);

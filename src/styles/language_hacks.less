@@ -1,295 +1,454 @@
 .card-great-escarpment-consortium, .card-beam-from-a-thorium-asteroid {
-  .title {
-    font-size: 14px;
-  }
+    .title {
+        font-size: 14px;
+    }
 }
 
 .card-fish {
-  .description-half {
-    text-align: left;
-    margin-top: -5px;
-    width: 141px;
-  }
+    .description-half {
+        text-align: left;
+        margin-top: -5px;
+        width: 141px;
+    }
 }
 
 .card-pets {
-  .description-half {
-    margin-top: 10px;
-  }
+    .description-half {
+        margin-top: 10px;
+    }
+}
+
+.language-es {
+    .filterDiv {
+        .card-title {
+            font-size: 15px !important;
+        }
+
+        .card-title {
+            &.title-small {
+                font-size: 14px !important;
+            }
+            &.title-smaller {
+                font-size: 13px !important;
+            }
+        }
+    }
 }
 
 .language-ru {
-  .filterDiv {
-    &.card-agricola-inc {
-      .description {
-        line-height: 11px;
-      }
+    .filterDiv {
+        .card-requirements {
+            font-size: 13px;
+        }
+        .card-title {
+            font-size: 11px !important;
+        }
+
+        .card-title {
+            &.title-smaller {
+                font-size: 10px !important;
+            }
+        }
+
+        &.card-mining-quota, &.card-luxury-foods, &.card-omnicourt, &.card-solarnet {
+            .requirements {
+                font-size: 12px;
+            }
+        }
+
+        &.card-pristar {
+            .corporationEffectBox {
+                margin-top: 143px;
+                height: 139px;
+            }
+
+            .pointsCorporation {
+                margin-top: 243px;
+                margin-left: 132px;
+            }
+        }
+
+        &.card-herbivores {
+            .description {
+                font-size: 9px;
+                line-height: 11px;
+            }
+        }
+
+        &.card-fish {
+            .description {
+                font-size: 9px;
+            }
+        }
+
+        &.card-pets {
+            .description-half {
+                margin-top: -10px;
+            }
+        }
+
+        &.card-birds {
+            .card-description {
+                width: 60%;
+                align-self: flex-start;
+            }
+        }
+
+        &.card-agricola-inc {
+            .description {
+                line-height: 11px;
+            }
+        }
+
+        &.card-project-workshop {
+            .description {
+                font-size: 10px;
+            }
+            .corporationEffectBox .description {
+                margin-top: -6px;
+                line-height: 11px;
+            }
+        }
+
+        &.card-playwrights {
+            .start-text {
+                margin-top: -6px;
+            }
+        }
+
+        &.card-asteroid-rights {
+            .description {
+                line-height: 10px !important;
+            }
+
+            .effect2 .description {
+                white-space: nowrap !important;
+                padding-left: 30px;
+            }
+        }
+
+        &.card-asteroid-mining-consortium {
+            .card-requirements {
+                font-size: 14px;
+            }
+        }
+        &.Hygiea-background {
+            .colony-background-color {
+                white-space: nowrap;
+            }
+        }
+        &.card-tycho-magnetics {
+            .card-text-size--M {
+                font-size: 12px;
+            }
+        }
     }
 
-    &.card-project-workshop {
-      .description {
-        font-size: 10px;
-      }
-      .corporationEffectBox .description {
-        margin-top: -6px;
-        line-height: 11px;
-      }
+    .ma-name--terra-pioneer {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--spacefarer {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--land-specialist {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--forecaster {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--one-giant-step {
+        span {
+            font-size: 10px !important;
+        }
     }
 
-    &.card-playwrights {
-      .start-text {
-        margin-top: -6px;
-      }
+    .tag-none {
+        background-image: url(./assets/tags/tag-none-ru.png) !important;
     }
-
-    &.Hygiea-background {
-      .colony-background-color {
-        white-space: nowrap;
-      }
+    .tag-vp::before {
+        content: "ПО" !important;
     }
-    &.card-tycho-magnetics {
-      .card-text-size--M {
-        font-size: 12px;
-      }
-    }
-  }
-
-  .tag-none {
-    background-image: url(./assets/tags/tag-none-ru.png) !important;
-  }
-  .tag-vp::before {
-    content: "ПО" !important;
-  }
 }
 
 .language-de {
-  .tag-vp::before {
-    content: "SP" !important;
-  }
+    .tag-vp::before {
+        content: "SP" !important;
+    }
 }
 
 .language-nb {
-  .tag-vp::before {
-    content: "SP" !important;
-  }
+    .tag-vp::before {
+        content: "SP" !important;
+    }
 }
 
 .language-fr {
-  /***
+    /***
     Cards titles font size
     ***/
 
-  .card-artificial-photosynthesis .title,
-  .card-acquired-space-agency .title,
-  .card-building-industries .title,
-  .card-callisto-penal-mines .title,
-  .card-designed-micro-organisms .title,
-  .card-equatorial-magnetizer .title,
-  .card-electro-catapult .title,
-  .card-import-of-advanced-ghg .title,
-  .card-magnetic-field-dome .title,
-  .card-ore-processor .title,
-  .card-power-infrastructure .title,
-  .card-power-supply-consortium .title,
-  .card-rad-suits .title,
-  .card-terraforming-ganymede .title,
-  .card-tundra-farming .title,
-  .card-water-import-from-europa .title {
-    font-size: 14px;
-  }
-  .card-ghg-producing-bacteria .title,
-  .card-ice-cap-melting .title,
-  .card-research-coordination .title,
-  .card-technology-demonstration .title {
-    font-size: 13px;
-  }
-  .card-great-escarpment-consortium .title,
-  .card-indentured-workers .title,
-  .card-magnetic-field-generators .title {
-    font-size: 11px;
-  }
+    .card-artificial-photosynthesis .title,
+    .card-acquired-space-agency .title,
+    .card-building-industries .title,
+    .card-callisto-penal-mines .title,
+    .card-designed-micro-organisms .title,
+    .card-equatorial-magnetizer .title,
+    .card-electro-catapult .title,
+    .card-import-of-advanced-ghg .title,
+    .card-magnetic-field-dome .title,
+    .card-ore-processor .title,
+    .card-power-infrastructure .title,
+    .card-power-supply-consortium .title,
+    .card-rad-suits .title,
+    .card-terraforming-ganymede .title,
+    .card-tundra-farming .title,
+    .card-water-import-from-europa .title {
+        font-size: 14px;
+    }
+    .card-ghg-producing-bacteria .title,
+    .card-ice-cap-melting .title,
+    .card-research-coordination .title,
+    .card-technology-demonstration .title {
+        font-size: 13px;
+    }
+    .card-great-escarpment-consortium .title,
+    .card-indentured-workers .title,
+    .card-magnetic-field-generators .title {
+        font-size: 11px;
+    }
 
 
-  /***
+    /***
     Cards specific modifications
     ***/
 
-  /* Oiseaux */
-  .card-birds .production-box + .description {
-    margin-top: 0 !important;
-    width: 130px;
-  }
+    /* Ecosystèmes Avancés */
+    .card-advanced-ecosystems .requirements {
+        width: 100%;
+        margin-left: 0;
+        background-size: 249px 38px;
+        background-position: -20px -4px;
+    }
 
-  /* Quartier Commercial */
-  .card-commercial-district .special-tile + .description {
-    width: 95px !important;
-    margin-left: 25px;
-  }
+    /* Oiseaux */
+    .card-birds .production-box + .description {
+        margin-top: 0 !important;
+        width: 130px;
+    }
 
-  /* Agents de Décomposition */
-  .card-decomposers .description + .description {
-    margin-top: 10px;
-  }
+    /* Quartier Commercial */
+    .card-commercial-district .special-tile + .description {
+        width: 95px !important;
+        margin-left: 25px;
+    }
 
-  /* Cratère Couvert */
-  .card-domed-crater .card-content-plants {
-    display: inline-block;
-    right: 0;
-    position: absolute;
-    margin-top: 88px;
-    margin-right: 8px;
-  }
-  .card-domed-crater .description > div:first-child {
-    width: 100px;
-    margin-top: 5px;
-  }
-  .card-domed-crater .description > div + div {
-    margin-top: 10px;
-  }
+    /* Agents de Décomposition */
+    .card-decomposers .description + .description {
+        margin-top: 10px;
+    }
 
-  /* Zone Ecologique */
-  .card-ecological-zone .special-tile + .description {
-    margin-top: -55px !important;
-  }
+    /* Cratère Couvert */
+    .card-domed-crater .card-content-plants {
+        display: inline-block;
+        right: 0;
+        position: absolute;
+        margin-top: 88px;
+        margin-right: 8px;
+    }
+    .card-domed-crater .description > div:first-child {
+        width: 100px;
+        margin-top: 5px;
+    }
+    .card-domed-crater .description > div + div {
+        margin-top: 10px;
+    }
 
-  /* Catapulte Électromagnétique */
-  .card-electro-catapult .points {
-    width: 55px;
-    margin-left: 163px;
-  }
-  .card-electro-catapult .production-box + .description {
-    width: 155px;
-  }
+    /* Zone Ecologique */
+    .card-ecological-zone .special-tile + .description {
+        margin-top: -55px !important;
+    }
 
-  /* Réserve du Chasma d'Eos */
-  .card-eos-chasma-national-park .description {
-    text-align: left;
-    margin-top: -5px;
-    width: 141px;
-  }
+    /* Catapulte Électromagnétique */
+    .card-electro-catapult .points {
+        width: 55px;
+        margin-left: 163px;
+    }
+    .card-electro-catapult .production-box + .description {
+        width: 155px;
+    }
 
-  /* Herbivores */
-  .card-herbivores .description + .animal.resource {
-    margin-top: 10px;
-  }
-  .card-herbivores .production-box {
-    margin-top: 10px !important;
-  }
-  .card-herbivores .production-box + .description {
-    margin-top: -58px !important;
-    line-height: 12px;
-    width: 102px !important;
-  }
+    /* Réserve du Chasma d'Eos */
+    .card-eos-chasma-national-park .description {
+        text-align: left;
+        margin-top: -5px;
+        width: 141px;
+    }
 
-  /* Bétail */
-  .card-livestock .description:last-child {
-    margin-top: -95px !important;
-  }
+    /* Herbivores */
+    .card-herbivores .description + .animal.resource {
+        margin-top: 10px;
+    }
+    .card-herbivores .production-box {
+        margin-top: 10px !important;
+    }
+    .card-herbivores .production-box + .description {
+        margin-top: -58px !important;
+        line-height: 12px;
+        width: 102px !important;
+    }
 
-  /* Ville Ouverte */
-  .card-open-city .city-tile {
-    margin-left: 8px !important;
-  }
-  .card-open-city .city-tile + br {
-    display: none;
-  }
-  .card-open-city .plant.resource {
-    margin-bottom: 5px;
-  }
-  .card-open-city .description div + div {
-    width: 130px !important;
-    margin-top: 5px;
-  }
+    /* Bétail */
+    .card-livestock .description:last-child {
+        margin-top: -95px !important;
+    }
 
-  /* Animaux Domestiques */
-  .card-pets .description-half {
-    margin-top: 0 !important;
-    width: 130px !important;
-  }
+    /* Ville Ouverte */
+    .card-open-city .city-tile {
+        margin-left: 8px !important;
+    }
+    .card-open-city .city-tile + br {
+        display: none;
+    }
+    .card-open-city .plant.resource {
+        margin-bottom: 5px;
+    }
+    .card-open-city .description div + div {
+        width: 130px !important;
+        margin-top: 5px;
+    }
 
-  /* Main d'Oeuvre Robotique */
-  .card-robotic-workforce .production-box {
-    margin-left: 7px;
-  }
+    /* Animaux Domestiques */
+    .card-pets .description-half {
+        margin-top: 0 !important;
+        width: 130px !important;
+    }
 
-  /* Navettes */
-  .card-shuttles .content .points {
-    width: 65px;
-    margin-left: 153px;
-  }
+    /* Main d'Oeuvre Robotique */
+    .card-robotic-workforce .production-box {
+        margin-left: 7px;
+    }
 
-  /***
+    /* Navettes */
+    .card-shuttles .content .points {
+        width: 65px;
+        margin-left: 153px;
+    }
+
+    /***
     Corporations specific modifications
     ***/
 
-  /* Cheung Shing Mars */
-  .card-cheung-shing-mars .production-box {
-    margin-top: 0 !important;
-  }
+    /* Cheung Shing Mars */
+    .card-cheung-shing-mars .production-box {
+        margin-top: 0 !important;
+    }
 
-  /* Ecoline */
-  .card-ecoline .production-box {
-    margin-top: 0 !important;
-  }
+    /* Ecoline */
+    .card-ecoline .production-box {
+        margin-top: 0 !important;
+    }
 
-  /* Cinématiques Interplanétaires */
-  .card-interplanetary-cinematics .corporationEffectBox + .INTERPLANETARY.CINEMATICS {
-    font-size: 15px !important;
-    letter-spacing: 3.5px;
-  }
-  .card-interplanetary-cinematics div + div + div + .INTERPLANETARY.CINEMATICS {
-    font-size: 15px !important;
-    margin-left: 0 !important;
-    margin-top: 0 !important;
-    transform: none !important;
-    letter-spacing: 0.3px !important;
-  }
+    /* Cinématiques Interplanétaires */
+    .card-interplanetary-cinematics .corporationEffectBox + .INTERPLANETARY.CINEMATICS {
+        font-size: 15px !important;
+        letter-spacing: 3.5px;
+    }
+    .card-interplanetary-cinematics div + div + div + .INTERPLANETARY.CINEMATICS {
+        font-size: 15px !important;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+        transform: none !important;
+        letter-spacing: 0.3px !important;
+    }
 
-  /* République de Tharsis */
-  .card-tharsis-republic .corporationEffectBox + div {
-    font-size: 22px !important;
-  }
-  .card-tharsis-republic .corporationEffectBox + div > div {
-    margin-right: 5px !important;
-  }
-  .card-tharsis-republic .corporationEffectBox > .description {
-    margin-top: -4px !important;
-  }
+    /* République de Tharsis */
+    .card-tharsis-republic .corporationEffectBox + div {
+        font-size: 22px !important;
+    }
+    .card-tharsis-republic .corporationEffectBox + div > div {
+        margin-right: 5px !important;
+    }
+    .card-tharsis-republic .corporationEffectBox > .description {
+       margin-top: -4px !important;
+    }
 
-  /* Valley Trust */
-  .card-valley-trust .corporationEffectBox {
-    height: 110px;
-    margin-top: 180px;
-  }
+    /* Valley Trust */
+    .card-valley-trust .corporationEffectBox {
+        height: 110px;
+        margin-top: 180px;
+    }
 }
 
 .language-pl {
-  .card-tharsis-republic .card-content-corporation > .card-description {
-    margin-top: -5px !important;
-  }
+    .card-tharsis-republic .card-content-corporation > .card-description {
+        margin-top: -5px !important;
+    }
 }
 
 
+.language-br {
+    .milestones .ma-block .ma-name--polar-explorer {
+        font-size: 14px !important;
+    }
+    .awards .ma-block .ma-name--estate-dealer {
+        font-size: 12px !important;
+    }
+}
+
 .language-hu {
   .filterDiv {
-
+    
     /* Project cards */
-
+    &.card-terraforming-ganymede {
+       .card-title .title-small {
+          font-size: 14px !important;
+       }      
+    }
+    
+    &.card-museum-of-early-colonisation,
+    &.card-venus-orbital-survey,
+    &.card-asteroid-mining-consortium,
+    &.card-st\.-joseph-of-cupertino-mission,
+    &.card-cut-throat-budgeting {
+       .card-title .title-smaller {
+          font-size: 13px !important;
+       }
+    }
+    
+    &.card-archimedes-hydroponics-station,
+    &.card-power-infrastructure {
+       .card-title .title-smaller {
+         font-size: 12px !important;
+       }
+    }
+    
+    &.card-mining-robots-manuf\.-center .card-title .title-smaller {
+        font-size: 11px !important;
+    }
+    
     &.card-pride-of-the-earth-arkship,
     &.card-steel-market-monopolists,
     &.card-pollinators {
-      .card-description {
-        margin-top: 4px;
-      }
+       .card-description {
+          margin-top: 4px;
+       }
     }
-
+    
     &.card-venusian-plants,
     &.card-botanical-experience {
-      .card-description {
-        margin-top: -1px;
-      }
+       .card-description {
+          margin-top: -1px;
+       }
     }
-
+    
     &.card-asteroid-deflection-system {
       .card-content {
         margin-top: -21px;
@@ -302,26 +461,26 @@
         bottom: 55px;
       }
     }
-
+    
     &.card-asteroid-rights {
       .card-content {
         margin-top: -21px;
         overflow-y: hidden;
       }
       .card-content .card-description:first-child {
-        width: 99%;
+          width: 99%;
       }
     }
-
+    
     &.card-ceres-spaceport .card-description {
-      margin-top: -7px;
-      font-size: 10px !important;
-    }
-
+        margin-top: -7px;
+        font-size: 10px !important;
+    }    
+    
     &.card-summit-logistics .card-item-container {
       margin: -1px 4px;
     }
-
+    
     &.card-mare-serenitatis-mine {
       .card-content {
         margin-top: -10px;
@@ -331,7 +490,7 @@
         margin-top: -2px;
       }
     }
-
+    
     &.card-dyson-screens {
       .card-content {
         overflow-y: hidden;
@@ -343,21 +502,21 @@
         margin-top: 6px;
       }
     }
-
-    &.card-sky-docks,
+    
+    &.card-sky-docks, 
     &.card-electro-catapult,
     &.card-search-for-life,
     &.card-extractor-balloons,
     &.card-eos-chasma-national-park {
-      .card-description {
-        margin-top: 5px;
-      }
-    }
-
+       .card-description {
+          margin-top: 5px;
+       }
+    }      
+    
     &.card-special-design .card-plate {
       font-size: 13px;
     }
-
+    
     &.card-sub-zero-salt-fish {
       .card-content {
         overflow-y: hidden;
@@ -368,6 +527,9 @@
       .card-rows {
         margin-top: 2px;
       }
+      .card-requirements {
+        margin-top: -1px;
+      }
       .card-description-aligned {
         margin-top: -5px;
         width: 101%;
@@ -376,33 +538,36 @@
         bottom: 33px;
       }
     }
-
+    
     &.card-rotator-impacts {
       .card-content {
         overflow-y: hidden;
       }
       .card-description {
-        margin-top: 2px;
+          margin-top: 2px;
       }
       .card-effect-box-content {
-        margin-top: -5px;
+          margin-top: -5px;
       }
       .card-description:nth-child(3) {
         width: 95%;
       }
     }
-
+    
     &.card-earthquake-machine .card-row:nth-child(3) {
       width: 95%;
     }
-
+    
     &.card-capital {
       .card-description {
         margin-top: -2px;
       }
     }
-
+    
     &.card-capital\:ares {
+      .card-requirements {
+        margin-top: -4px;
+      }
       .card-rows {
         margin-top: 4px;
       }
@@ -417,14 +582,14 @@
         width: 100%;
       }
     }
-
+    
     &.card-freyja-biodomes {
       .card-requirements {
         margin-top: -5px;
-      }
+      }      
       .card-rows {
         margin-top: 0px;
-      }
+      }      
       .card-production-box {
         margin-top: -9px;
       }
@@ -433,13 +598,13 @@
         width: 100%;
       }
     }
-
+    
     &.card-gaia-city {
       .card-description {
         margin-top: 0px;
-      }
+      }      
     }
-
+    
     &.card-economic-help {
       .card-or--small {
         font-size: 10px;
@@ -448,24 +613,24 @@
         margin: 0;
       }
     }
-
+    
     &.card-geodesic-tents {
       .card-description {
         margin-top: 0;
       }
     }
-
+    
     &.card-global-audit {
       .card-description {
         width: 60%;
       }
     }
-
+    
     &.card-fish {
       .card-description-align--left {
         margin-top: -4px;
         width: 100%;
-      }
+      } 
       .card-rows {
         margin-top: 4px;
       }
@@ -474,27 +639,27 @@
         margin-top: -4px;
       }
     }
-
+    
     &.card-livestock {
       .card-requirements {
         margin-top: -6px;
-      }
+      }   
       .card-rows {
         margin-top: 2px;
       }
       .card-effect-box .card-description {
         margin-top: 1px;
-      }
+      } 
       .card-production-box {
         margin-top: -4px;
-      }
+      } 
       .card-description {
         width: 100%;
         font-size: 10px;
         margin-top: -4px;
-      }
+      }        
     }
-
+    
     &.card-local-heat-trapping {
       .card-res-amount {
         font-size: 17px;
@@ -503,7 +668,7 @@
         font-size: 10px;
       }
     }
-
+    
     &.card-hydrogen-processing-plant {
       .card-rows {
         margin-top: 4px;
@@ -515,7 +680,11 @@
         margin-top: -11px;
       }
     }
-
+    
+    &.card-hyperspace-drive-prototype .title-smaller {
+      font-size: 13px !important;
+    }
+    
     &.card-luna-mining-hub {
       .card-requirements,
       .card-description-aligned {
@@ -529,22 +698,30 @@
         }
       }
     }
-
+    
     &.card-mooncrate-block-factory .card-plate {
       font-size: 13px;
     }
-
+    
+    &.card-mooncrate-convoys-to-mars .title-smaller {
+      font-size: 12px !important;
+    }
+    
     &.card-lunar-security-stations {
-      .card-logistic-rate,
+      .card-logistics-rate,
       .card-description {
         margin-top: -5px;
       }
     }
-
+    
     &.card-lunar-embassy .card-description {
       margin-top: -10px;
     }
-
+    
+    &.card-undermoon-drug-lords-network .title-smaller {
+      font-size: 13px !important;
+    }
+    
     &.card-imported-hydrogen {
       .card-special.card-or.card-or--small {
         visibility: hidden;
@@ -556,18 +733,26 @@
         font-size: 33px;
       }
     }
-
+    
+    &.card-import-of-advanced-ghg .title-smaller {
+      font-size: 10px !important;
+    }
+    
+    &.card-imported-ghg .title-smaller {
+      font-size: 13px !important;
+    }    
+    
     &.card-directed-impactors {
       .card-content {
         overflow-x: unset;
       }
       .card-description:nth-child(2) {
         margin-left: 20px;
-      }
+      } 
     }
-
+    
     &.card-icy-impactors .card-description:nth-child(2) {
-      margin-left: 20px;
+        margin-left: 20px;
     }
 
     &.card-jovian-lanterns {
@@ -590,14 +775,14 @@
         font-size: 10px;
       }
     }
-
+    
     &.card-jupiter-floating-station {
       .card-requirements {
         margin-top: -5px;
       }
       .card-rows {
         margin-top: 2px;
-      }
+      }      
       .card-effect-box .card-description {
         margin-top: 1px;
       }
@@ -610,9 +795,9 @@
       .card-description-aligned {
         width: 100%;
         margin-top: -1px;
-      }
+      } 
     }
-
+    
     &.card-private-military-contractor {
       .card-row:nth-child(1) {
         margin-top: -21px;
@@ -621,54 +806,54 @@
         margin-top: 2px;
       }
     }
-
+    
     &.card-pets .card-content {
       margin-top: -16px;
       overflow-x: unset;
     }
-
+    
     &.card-sulphur-eating-bacteria {
       .card-content {
         margin-top: -5px;
         overflow-x: unset;
       }
-
+        
       .card-row:nth-child(1) .card-description {
         margin-top: 4px;
       }
-
+      
       .card-description:nth-child(3) {
-        margin-left: 18px;
-        margin-top: 1px;
+         margin-left: 18px;
+         margin-top: 1px;
       }
     }
-
+    
     &.card-crashlanding .card-content {
       margin-top: -20px;
       overflow-x: unset;
     }
-
+    
     &.card-search-for-life-underground .card-description {
       margin-top: 4px;
     }
-
+    
     &.card-commercial-district\:ares .card-content .card-rows {
       margin-top: 0px;
     }
-
+    
     &.card-desperate-measures .card-content .card-rows {
       margin-top: 0px;
     }
-
+    
     &.card-forced-precipitation .card-content {
       margin-top: -4px;
-      overflow-x: unset;
+      overflow-x: unset;      
     }
-
+    
     &.card-small-animals {
       .card-content {
         margin-top: -6px;
-        overflow-x: unset;
+        overflow-x: unset;      
       }
       .card-rows {
         margin-top: 2px;
@@ -686,7 +871,7 @@
         margin-top: -5px;
       }
     }
-
+    
     &.card-clone-troopers-\(ii\) {
       .card-or {
         margin-left: 0px;
@@ -700,12 +885,12 @@
         margin-right: 2px;
       }
     }
-
+    
     &.card-communication-center .card-content {
       margin-top: -18px;
       overflow-x: unset;
     }
-
+    
     &.card-hospitals {
       .card-content {
         overflow-x: unset;
@@ -737,31 +922,43 @@
         bottom: 42px;
       }
     }
-
+    
+    &.card-supported-research .card-title {
+      font-size: 13px !important;
+    }
+    
     &.card-domed-crater .card-content {
       overflow-x: unset;
     }
-
+    
     &.card-floating-refinery .card-content {
-      margin-top: -23px;
-      overflow-x: unset;
-
-      .card-or--small {
-        font-size: 12px;
-        margin-top: -5px;
-        margin-bottom: -5px;
-      }
-      .card-description:nth-last-child(2) {
-        margin-top: 2px;
-        margin-left: 46px;
-        width: 89%;
-      }
+       margin-top: -23px;
+       overflow-x: unset;
+       
+       .card-or--small {
+         font-size: 12px;
+         margin-top: -5px;
+         margin-bottom: -5px;
+       }
+       .card-description:nth-last-child(2) {
+         margin-top: 2px;
+         margin-left: 46px;
+         width: 89%;         
+       }
     }
-
+    
+    &.card-aerobraked-ammonia-asteroid .title-smaller {
+      font-size: 12px !important;
+    }
+    
     &.card-atmo-collectors .card-content {
       overflow-x: unset;
     }
-
+    
+    &.card-ai-controlled-mine-network .title-smaller {
+      font-size: 11px !important;
+    }
+    
     &.card-birds {
       .card-content {
         margin-top: -7px;
@@ -780,17 +977,20 @@
         margin-top: 1px;
       }
     }
-
+    
     &.card-private-investigator {
       .card-rows {
         margin-top: -13px;
-      }
+      }   
       .card-description {
         margin-top: 1px;
       }
     }
-
+    
     &.card-high-temp\.-superconductors {
+      .title-smaller {
+        font-size: 12px !important;
+      }
       .card-content {
         overflow-x: unset;
         margin-top: -7px;
@@ -809,17 +1009,17 @@
         margin-top: -4px;
       }
     }
-
+    
     &.card-magnetic-field-generators\:ares .card-content {
       overflow-x: unset;
       margin-top: -20px;
     }
-
+    
     &.card-martian-zoo .card-description-align--left {
       margin-left: 9px;
       margin-top: 4px;
     }
-
+    
     &.card-martian-express {
       .card-requirements {
         margin-top: -3px;
@@ -834,15 +1034,15 @@
         bottom: 30px;
       }
     }
-
+    
     &.card-martian-embassy .card-item-container {
       margin: 0px 0px;
     }
-
+    
     &.card-martian-repository .card-description {
       margin-top: 3px;
     }
-
+    
     &.card-maxwell-base {
       .card-content {
         overflow-x: unset;
@@ -859,17 +1059,17 @@
       .card-effect-box .card-description {
         margin-top: -5px;
       }
-
+      
       .card-description-aligned {
         font-size: 10px;
         margin-top: -2px;
       }
     }
-
+    
     &.card-reckless-detonation .card-item-container {
       margin: 0px 1px;
     }
-
+    
     &.card-ghg-producing-bacteria {
       .card-content {
         overflow-x: unset;
@@ -879,16 +1079,16 @@
         margin: -5px 0px;
       }
     }
-
+    
     &.card-momentum-virium-habitat {
       overflow-x: unset;
     }
-
+    
     &.card-labor-trafficking .card-text-size--M {
       font-size: 14px;
       margin-right: 2px;
     }
-
+    
     &.card-solar-logistics {
       .card-rows {
         margin-top: -11px;
@@ -897,7 +1097,7 @@
         margin-left: -34px;
       }
     }
-
+    
     &.card-neptunian-power-consultants {
       .card-rows {
         margin-top: -14px;
@@ -906,7 +1106,7 @@
         margin-top: 4px;
       }
     }
-
+    
     &.card-neutrinograph {
       .card-content {
         overflow-x: unset;
@@ -928,7 +1128,7 @@
         margin-top: -5px;
       }
     }
-
+    
     &.card-nitrite-reducing-bacteria {
       .card-content {
         overflow-x: unset;
@@ -938,7 +1138,11 @@
         margin-top: 4px;
       }
     }
-
+    
+    &.card-nitrogen-rich-asteroid .title-smaller {
+      font-size: 13px !important;
+    }
+    
     &.card-herbivores {
       .card-content {
         overflow-x: unset;
@@ -960,7 +1164,7 @@
         width: 100%;
       }
     }
-
+    
     &.card-public-spaceline {
       .card-rows {
         margin-top: 4px;
@@ -969,16 +1173,19 @@
         margin-top: 0px;
       }
     }
-
+    
     &.card-ocean-sanctuary .card-description {
       margin-top: -2px;
     }
-
+    
     &.card-investigative-journalism .card-rows {
       margin-top: -14px;
     }
-
+    
     &.card-oumuamua-type-object-survey {
+      .title-smaller {
+        font-size: 11px !important;
+      }
       .card-content {
         overflow-x: unset;
         margin-top: -7px;
@@ -991,12 +1198,12 @@
       }
       .card-text-size--S {
         font-size: 9px;
-      }
+      } 
       .card-description {
         margin-top: -3px;
       }
     }
-
+    
     &.card-ecological-zone {
       .card-rows .card-row:nth-child(2) {
         margin: -8px 0px;
@@ -1005,7 +1212,7 @@
         margin-top: -3px;
       }
     }
-
+    
     &.card-ecological-zone\:ares {
       .card-rows {
         margin-top: 4px;
@@ -1018,18 +1225,32 @@
         margin-top: 0px;
       }
     }
-
+    
+    &.card-volunteer-mining-initiative .title-smaller {
+      font-size: 11px !important;
+    }
+    
     &.card-solarpedia .card-description {
       margin-top: 3px;
     }
-
+    
     &.card-darkside-mining-syndicate {
+      .title-smaller {
+        font-size: 12px !important;
+      }
       .card-description {
         margin-top: -9px;
       }
     }
 
+    &.card-darkside-smugglers\'-union .title-smaller {
+      font-size: 10px !important;
+    }
+    
     &.card-darkside-incubation-plant {
+      .title-smaller {
+        font-size: 12px !important;
+      }
       .card-rows {
         margin-top: -13px;
       }
@@ -1044,7 +1265,11 @@
         margin-top: 0px;
       }
     }
-
+    
+    &.card-darkside-meteor-bombardment .title-smaller {
+      font-size: 13px !important;
+    }
+    
     &.card-star-vegas {
       .card-content {
         margin-top: -5px;
@@ -1053,20 +1278,24 @@
         margin-top: 0px;
       }
     }
-
+    
+    &.card-beam-from-a-thorium-asteroid .title-smaller {
+      font-size: 12px !important;
+    }
+    
     &.card-jet-stream-microscrappers .card-description {
       margin-top: 5px;
     }
-
+    
     &.card-saturn-surfing .card-description {
       margin-top: 6px;
     }
-
+    
     &.card-sinus-irdium-road-network .card-content {
       overflow-x: unset;
       margin-top: -2px;
     }
-
+    
     &.card-stratopolis {
       .card-requirements {
         margin-top: -5px;
@@ -1086,7 +1315,7 @@
         font-size: 10px;
       }
     }
-
+    
     &.card-stratospheric-birds {
       .card-requirements {
         margin-top: -5px;
@@ -1099,11 +1328,11 @@
         margin-top: 0px;
       }
     }
-
+    
     &.card-soil-detoxification .card-description {
       margin-top: 3px;
     }
-
+    
     &.card-thermophiles {
       .card-content {
         overflow-x: unset;
@@ -1122,7 +1351,7 @@
         margin: -2px 10px;
       }
     }
-
+    
     &.card-thiolava-vents {
       .card-requirements {
         margin-top: -5px;
@@ -1141,7 +1370,7 @@
         margin: -3px 0px;
       }
     }
-
+    
     &.card-titan-floating-launch-pad {
       .card-rows {
         margin-top: -13px;
@@ -1162,15 +1391,15 @@
         bottom: 57px;
       }
     }
-
+    
     &.card-titan-shuttles .card-rows {
       margin-top: -7px;
     }
-
+    
     &.card-titanium-market-monopolists .card-or--small {
       margin: -5px 2px;
     }
-
+    
     &.card-secret-labs {
       .card-requirements {
         margin-top: -6px;
@@ -1185,11 +1414,11 @@
         margin-top: -6px;
       }
     }
-
+    
     &.card-new-venice .card-description {
       margin-top: 0px;
     }
-
+    
     &.card-space-wargames {
       .card-rows {
         margin-top: -13px;
@@ -1211,7 +1440,7 @@
         margin-top: -2px;
       }
     }
-
+    
     &.card-space-privateers {
       .card-resource {
         width: 20px;
@@ -1258,7 +1487,7 @@
         background-size: 30px 30px;
       }
     }
-
+    
     &.card-space-port {
       .card-content {
         margin-top: -6px;
@@ -1270,15 +1499,19 @@
         margin-top: 0px;
       }
     }
-
+    
     &.card-shuttles .card-description-aligned {
-      margin-top: -2px;
+      margin-top: -2px; 
     }
-
+    
+    &.card-ghg-shipment .title-smaller {
+      font-size: 13px !important;
+    }
+    
     &.card-corporate-blackmail .card-description {
       margin-top: -10px;
     }
-
+    
     &.card-venera-base {
       .card-requirements {
         margin-top: -5px;
@@ -1307,30 +1540,34 @@
           width: 20px;
           height: 25px;
         }
-        .tag-space {
+        .card-tag-space {
           width: 15px;
           height: 15px;
           line-height: 20px;
           background-size: 15px;
         }
-      }
+      }        
       .card-rows .card-row:nth-child(3) {
         margin-top: 1px;
       }
       .card-content .card-description:nth-last-child(2) {
         font-size: 9px;
         margin-top: -3px;
-      }
+      }      
     }
-
+    
     &.card-off-world-city-living .card-description {
       margin-top: -3px;
     }
-
+    
     &.card-dawn-city .card-description {
       margin-top: -1px;
     }
-
+    
+    &.card-return-to-abandoned-technology .title-smaller {
+      font-size: 11px !important;
+    }
+    
     &.card-wetlands {
       .card-requirements {
         margin-top: -5px;
@@ -1338,7 +1575,7 @@
       .card-rows .card-row:nth-child(1) {
         margin-top: -2px;
       }
-      .card-rows .card-row:nth-child(2),
+      .card-rows .card-row:nth-child(2), 
       .card-rows .card-row:nth-child(3) {
         margin-top: -5px;
       }
@@ -1350,7 +1587,7 @@
         width: 60%;
       }
     }
-
+    
     &.card-red-spot-observatory {
       .card-requirements,
       .card-rows .card-row:nth-child(1),
@@ -1363,7 +1600,7 @@
         margin-top: 0px;
       }
     }
-
+    
     &.card-red-city {
       .card-rows {
         margin-top: 5px;
@@ -1374,8 +1611,8 @@
       }
     }
     /* End of project cards */
-
-
+    
+    
     /* Corporation cards */
     &.card-the-darkside-of-the-moon-syndicate {
       .card-the-darkside-of-the-moon-syndicate-logo {
@@ -1389,10 +1626,10 @@
         font-size: 10px;
       }
       .card-rows {
-        .card-item-container {
-          margin: 0 2px;
-        }
-        .card-row:nth-child(1) {
+       .card-item-container {
+         margin: 0 2px;
+       }         
+       .card-row:nth-child(1) {
           margin-top: 8px;
         }
         .card-row:nth-child(2) {
@@ -1410,11 +1647,11 @@
         }
       }
     }
-
+    
     &.card-adhai-high-orbit-constructions .card-effect-box .card-description {
       width: 92%;
     }
-
+    
     &.card-aeron-genomics {
       .card-corporation-logo {
         top: 14px;
@@ -1428,7 +1665,7 @@
         margin-top: 2px;
       }
     }
-
+    
     &.card-agricola-inc {
       .card-description {
         margin-top: -3px;
@@ -1437,16 +1674,16 @@
         margin-top: -34px;
       }
     }
-
+    
     &.card-ambient .card-description {
       margin-top: 6px;
     }
-
+    
     &.card-anubis-securities {
       .card-corporation-logo {
         top: 15px;
         left: -13px;
-        font-size: 19px;
+        font-size: 19px;        
       }
       .card-requirements {
         font-size: 13px;
@@ -1471,12 +1708,12 @@
         margin-top: 5px;
       }
     }
-
+    
     &.card-arborist-collective {
       .card-corporation-logo {
         top: 15px;
         left: -13px;
-        font-size: 19px;
+        font-size: 19px;        
       }
       .card-content {
         margin-top: -23px;
@@ -1493,17 +1730,17 @@
         .card-description {
           margin-top: 2px;
         }
-      }
+      }  
       .card-description {
         margin-top: -3px;
-      }
+      }      
     }
-
+    
     &.card-the-archaic-foundation-institute .card-description {
       font-size: 10px;
       margin-top: 2px;
     }
-
+    
     &.card-arklight {
       .card-description {
         margin-top: 2px;
@@ -1516,7 +1753,7 @@
         margin-top: -10px;
       }
     }
-
+    
     &.card-astrodrill {
       .card-description {
         font-size: 10px;
@@ -1533,15 +1770,15 @@
         margin-top: 3px;
       }
     }
-
+    
     &.card-aurorai .card-description {
       margin-top: 2px;
     }
-
+    
     &.card-bio-sol .card-effect-box {
       margin-top: -12px;
     }
-
+    
     &.card-celestic {
       .card-description {
         margin-top: -18px;
@@ -1550,7 +1787,7 @@
         margin-top: 2px;
       }
     }
-
+    
     &.card-demetron-labs {
       .card-corporation-logo {
         top: 19px;
@@ -1565,22 +1802,22 @@
         margin-top: 0px;
       }
     }
-
+    
     &.card-ecoline .card-ecoline-logo {
       font-size: 38px;
     }
-
+    
     &.card-eris .card-description {
       margin-top: 2px;
     }
-
+    
     &.card-factorum {
       .card-description {
         margin-top: -1px;
       }
       .card-special.card-or.card-or--small {
         visibility: hidden;
-      }
+      }      
       .card-special.card-or.card-or--small:after {
         visibility: visible;
         content: "/";
@@ -1606,7 +1843,7 @@
         margin-top: -2px;
       }
     }
-
+    
     &.card-pharmacy-union {
       .card-pharmacy-union-logo {
         font-size: 20px;
@@ -1619,15 +1856,15 @@
       }
       .card-row .card-corporation-box .card-effect-box {
         margin-top: -14px;
-      }
+      }    
     }
-
+    
     &.card-hadesphere .card-corporation-logo {
       top: 19px;
       left: -15px;
       font-size: 25px;
     }
-
+    
     &.card-hecate-speditions {
       .card-corporation-logo {
         top: 19px;
@@ -1653,17 +1890,17 @@
       left: -15px;
       font-size: 25px;
     }
-
+    
     &.card-intragen-sanctuary-headquarters .card-description {
       margin-top: 4px;
     }
-
+    
     &.card-jenson-boyle-\&-co .card-corporation-logo {
       top: 19px;
       left: -15px;
       font-size: 22px;
     }
-
+    
     &.card-junk-ventures .card-corporation-logo {
       top: 19px;
       left: 0px;
@@ -1675,7 +1912,7 @@
         top: 19px;
         left: -35px;
         font-size: 22px;
-      }
+      }  
       .card-content {
         margin-top: -14px;
         overflow-x: unset;
@@ -1688,13 +1925,13 @@
         margin-top: 1px;
       }
     }
-
+    
     &.card-beginner-corporation .card-corporation-logo {
       top: 19px;
       left: 0px;
       font-size: 21px;
     }
-
+    
     &.card-collegium-copernicus {
       .card-content {
         margin-top: -15px;
@@ -1704,7 +1941,7 @@
         margin-top: 3px;
       }
     }
-
+    
     &.card-kuiper-cooperative {
       .card-content {
         overflow-x: unset;
@@ -1715,13 +1952,13 @@
       .card-description {
         margin-top: 4px;
         font-size: 10px;
-      }
+      }      
     }
-
+    
     &.card-mind-set-mars .card-content {
       overflow-x: unset;
     }
-
+    
     &.card-morning-star-inc\. {
       .card-description {
         margin-top: -17px;
@@ -1730,17 +1967,17 @@
         margin-top: 9px;
       }
     }
-
+    
     &.card-nirgal-enterprises .card-corporation-logo {
       top: 12px;
     }
-
+    
     &.card-odyssey {
       .card-content {
         margin-top: -15px;
       }
       .card-row .card-text-normal {
-        margin-top: -14px;
+        margin-top: -14px;  
       }
       .card-row .card-effect-box {
         margin-top: -6px;
@@ -1749,11 +1986,11 @@
         margin-top: 1px;
       }
     }
-
+    
     &.card-philares .card-philares-logo {
       font-size: 12px;
     }
-
+    
     &.card-playwrights {
       .card-playwrights-logo {
         font-size: 25px;
@@ -1762,12 +1999,12 @@
         margin-top: 1px;
       }
     }
-
+    
     &.card-polaris .card-effect-box-row {
       margin-top: 8px;
     }
-
-
+    
+    
     &.card-pristar {
       .card-rows .card-row:nth-child(4) {
         margin-top: -22px;
@@ -1785,11 +2022,11 @@
         margin-top: -15px;
       }
     }
-
+    
     &.card-project-workshop .card-effect-box-content {
       margin: 0px 0px;
     }
-
+    
     &.card-recyclon {
       .card-rows {
         margin-top: -8px;
@@ -1808,9 +2045,9 @@
       }
       .card-description {
         margin-top: 4px;
-      }
+      }        
     }
-
+    
     &.card-robin-haulings {
       .card-special.card-or.card-or--small {
         visibility: hidden;
@@ -1820,9 +2057,9 @@
         content: "/";
         margin-left: -33px;
         font-size: 33px;
-      }
+      }      
     }
-
+    
     &.card-sagitta-frontier-services {
       .card-rows {
         margin-top: -2px;
@@ -1834,13 +2071,13 @@
         font-size: 10px;
       }
     }
-
+    
     &.card-solbank .card-corporation-logo {
       top: 19px;
       left: 0px;
       font-size: 21px;
     }
-
+    
     &.card-soylent-seedling-systems {
       .card-content {
         overflow-x: unset;
@@ -1856,7 +2093,7 @@
         font-size: 10px;
       }
     }
-
+    
     &.card-spire {
       .card-content {
         overflow-x: unset;
@@ -1880,7 +2117,7 @@
         margin: 2px 0px;
       }
     }
-
+    
     &.card-splice {
       .card-description {
         margin-top: -17px;
@@ -1895,12 +2132,12 @@
         margin-top: -7px;
       }
     }
-
+    
     &.card-steelaris .card-steelaris-logo {
       width: 145px;
       background-size: 145px 35px;
     }
-
+    
     &.card-stormcraft-incorporated {
       .card-row .card-description {
         margin-top: 2px;
@@ -1913,22 +2150,22 @@
       }
       .card-effect-box-row {
         margin-top: -7px;
-      }
+      }  
       .card-vspace--large {
         display: none;
       }
     }
-
+    
     &.card-kingdom-of-tauraro .card-corporation-logo {
       top: 19px;
       left: -10px;
       font-size: 21px;
     }
-
+    
     &.card-tycho-magnetics .card-text-size--M {
       font-size: 16px;
     }
-
+    
     &.card-voltagon {
       .card-corporation-logo {
         top: 19px;
@@ -1949,64 +2186,72 @@
       }
     }
     /* End of corporation cards */
-
+  
     /* Prelude cards */
     &.card-applied-science .card-description {
       margin-top: 4px;
     }
-
+    
+    &.card-anti-desertification-techniques .title-smaller {
+      font-size: 13px !important;
+    }
+    
+    &.card-ganymede-trading-company .title-smaller {
+      font-size: 12px !important;
+    }
+    
     &.card-board-of-directors {
       .card-rows .card-row:nth-child(4) {
         display: none;
       }
     }
-
+    
     &.card-crew-training .card-or--small {
       font-size: 11px;
     }
-
+    
     &.card-atmospheric-enhancers .card-content {
       overflow-x: unset;
       margin-top: -15px;
     }
-
+    
     &.card-ecology-experts .card-requirements {
       font-size: 14px;
-
+      
     }
-
+    
     &.card-political-uprising .turmoil-icon {
       position: unset;
       margin: unset;
     }
     /* End of prelude cards */
-
+    
     /* CEO cards */
     &.card-bjorn .card-resource-money {
       font-size: 16px;
     }
-
+    
     &.card-floyd .card-text-size--M {
       font-size: 14px;
     }
-
+    
     &.card-naomi .card-text-size--M {
       font-size: 16px;
     }
-
+    
     &.card-petra .card-text-size--M {
       font-size: 14px;
-    }
-
+    } 
+    
     &.card-rogers .card-requirements {
       font-size: 14px;
     }
-
+    
     &.card-xavier .card-description {
       margin-top: -1px;
     }
     /* End of CEO cards */
-
+    
     /* Standard projects */
     &.card-lunar-habitat-\(var\.-1\) {
       .card-red-arrow {
@@ -2020,7 +2265,7 @@
         background-size: 45px 44px;
       }
     }
-
+    
     &.card-lunar-mine,
     &.card-lunar-mine-\(var\.-1\),
     &.card-lunar-mine-\(var\.-2\) {
@@ -2047,7 +2292,7 @@
       .card-venus-global-requirement {
         width: 50px;
         height: 30px;
-        background-size: 50px 30px;
+        background-size: 50px 30px;        
       }
     }
     /* End of standard projects */
@@ -2078,19 +2323,19 @@
         margin: -25px;
         font-size: 27px;
       }
-    }
+    } 
 
     &.Hygiea-background .colony-content .colony-background-color:nth-child(4) {
       font-family: fantasy;
-    }
+    } 
 
     &.Titania-background {
       .white-x::after {
         margin: -27px;
         font-size: 23px;
       }
-    }
-
+    } 
+    
     &.Leavitt-background,
     &.Deimos-background {
       .colony-background-color {
@@ -2153,6 +2398,29 @@
   }
 
   /* Milestones & awards */
+  .ma-name--one-giant-step,
+  .ma-name--gambler,
+  .ma-name--risktaker,
+  .ma-name--a-zoologist,
+  .ma-name--naturalist {
+    > span {
+      font-size: 13px;
+    }
+  }
+
+  .ma-name--collector,
+  .ma-name--constructor,
+  .ma-name--highlander,
+  .ma-name--landscaper,
+  .ma-name--mogul,
+  .ma-name--traveller {
+    > span {
+      position: relative;
+      top: 5px;
+      font-size: 13px;
+    }
+  }
+
   .ma-name--metropolist > span {
     background-color: orange;
   }

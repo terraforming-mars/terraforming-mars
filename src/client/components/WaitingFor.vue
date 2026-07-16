@@ -1,25 +1,20 @@
 <template>
   <div>
-  <template v-if="waitingfor === undefined || waitingfor.optional">
-    <template v-if="waitingfor === undefined">
-      {{ $t('Not your turn to take any actions') }}
-    </template>
-    <template v-else>
-      {{ $t('Waiting for other players') }}
-    </template>
+  <template v-if="waitingfor === undefined">
+    {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="color in playersWaitingFor" class="log-player" :class="playerColorClass(color, 'bg')" :key="color">{{ getPlayerName(color) }}</span>)
+      (⌛ <span v-for="color in playersWaitingFor" :class="playerColorClass(color, 'bg')" :key="color">&nbsp;&nbsp;&nbsp;</span>)
     </template>
   </template>
-  <div v-if="waitingfor !== undefined" class="wf-root">
+  <div v-else class="wf-root">
     <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
-      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" @change="updateSuspend">
+      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" v-on:change="updateSuspend">
       <label for="suspend-checkbox">
         <span v-i18n>Suspend</span>
       </label>
       <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
     </template>
-    <PlayerInputFactory :players="playerView.players"
+    <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
                           :onsave="onsave"
@@ -32,13 +27,13 @@
 <script lang="ts">
 /* global RequestInit */
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import * as constants from '@/common/constants';
-import raw_settings from '@/genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {playerColorClass} from '@/common/utils/utils';
-import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
@@ -49,24 +44,12 @@ import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
-import {gameDocumentTitle} from '../utils/documentTitle';
-import {setFaviconStatus, setFaviconTurnFrame} from '@/client/utils/favicon';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
-let animationFrame = 0;
-
-// The spinning ◑◒◐◓ symbol used to indicate it's your turn.
-const TURN_SEQUENCE = '◑◒◐◓';
-
-// On a desktop browser the favicon is visible in the tab, so we spin it there
-// rather than cluttering the document title. Mobile browsers don't show tab
-// favicons, so they keep animating the title instead.
-function isDesktopBrowser(): boolean {
-  return !/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
 
 type DataModel = {
+  waitingForTimeout: typeof raw_settings.waitingForTimeout,
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
@@ -74,47 +57,44 @@ type DataModel = {
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
 
-export default defineComponent({
-  name: 'WaitingFor',
+export default Vue.extend({
+  name: 'waiting-for',
   props: {
     playerView: {
-      type: Object as () => ViewModel,
-      required: true,
+      type: Object as () => PlayerViewModel,
+    },
+    players: {
+      type: Array as () => Array<PublicPlayerModel>,
+    },
+    settings: {
+      type: Object as () => typeof raw_settings,
     },
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
-      default: undefined,
     },
   },
   data(): DataModel {
     return {
+      waitingForTimeout: this.settings.waitingForTimeout,
       playersWaitingFor: [],
       suspend: false,
       savedPlayerView: undefined,
     };
   },
   methods: {
-    getPlayerName(color: Color): string {
-      const player = this.playerView.players.find((p) => p.color === color);
-      return player ? player.name : color;
-    },
     animateTitle() {
       if (!getPreferences().animated_title) {
         return;
       }
 
-      animationFrame = (animationFrame + 1) % TURN_SEQUENCE.length;
-      const experimental = getPreferences().experimental_ui;
-      // The favicon annotation is an experimental feature.
-      if (experimental) {
-        setFaviconTurnFrame(animationFrame);
+      const sequence = '\u25D1\u25D2\u25D0\u25D3';
+      const first = document.title[0];
+      const position = sequence.indexOf(first);
+      let next = sequence[0];
+      if (position !== -1 && position < sequence.length - 1) {
+        next = sequence[position + 1];
       }
-      // Existing behavior spins the symbol in the document title. With
-      // experimental UI on a desktop browser we show it only in the tab favicon
-      // instead; otherwise keep animating the title.
-      if (!(experimental && isDesktopBrowser())) {
-        document.title = TURN_SEQUENCE[animationFrame] + ' ' + gameDocumentTitle(this.playerView.game);
-      }
+      document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
       this.fetchPlayerInput(
@@ -174,7 +154,7 @@ export default defineComponent({
         root.playerkey++;
         root.screen = 'player-home';
         if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-          window.location = window.location as any as (string & Location);
+          window.location = window.location as any as (string & Location); // eslint-disable-line no-self-assign
         }
         this.savedPlayerView = undefined;
       } else {
@@ -219,7 +199,7 @@ export default defineComponent({
         xhr.responseType = 'json';
         xhr.send();
       };
-      ui_update_timeout_id = window.setTimeout(askForUpdate, raw_settings.waitingForTimeout);
+      ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
     notify() {
       if (getPreferences().enable_sounds) {
@@ -259,21 +239,14 @@ export default defineComponent({
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
     },
-    playerName(color: Color) {
-      const player = this.playerView.players.find((p) => p.color === color);
-      return player?.name ?? '';
-    },
   },
   mounted() {
-    document.title = gameDocumentTitle(this.playerView.game);
-    if (getPreferences().experimental_ui) {
-      setFaviconStatus(this.waitingfor !== undefined ? 'turn' : 'idle');
-    }
+    document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
-    if (this.waitingfor === undefined || this.waitingfor.optional) {
+    if (this.waitingfor === undefined) {
       this.waitForUpdate();
     }
-    if (this.playerView.players.length > 1 && this.waitingfor !== undefined && !this.waitingfor.optional) {
+    if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

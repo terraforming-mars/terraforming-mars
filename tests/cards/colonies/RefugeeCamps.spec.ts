@@ -4,7 +4,7 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('RefugeeCamps', () => {
   let card: RefugeeCamps;

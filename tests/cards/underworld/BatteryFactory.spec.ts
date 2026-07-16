@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {BatteryFactory} from '../../../src/server/cards/underworld/BatteryFactory';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('BatteryFactory', () => {
   it('Should play', () => {

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {OldWorldMafia} from '../../../src/server/cards/underworld/OldWorldMafia';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OldWorldMafia', () => {
   it('play', () => {

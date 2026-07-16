@@ -1,12 +1,12 @@
-import * as constants from '../../common/constants';
-import {BoardName} from '../../common/boards/BoardName';
-import {CardName} from '../../common/cards/CardName';
-import {ColonyName} from '../../common/colonies/ColonyName';
-import {GameId} from '../../common/Types';
-import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
-import {AgendaStyle} from '../../common/turmoil/Types';
-import {Expansion} from '../../common/cards/GameModule';
-import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
+import * as constants from "../../common/constants";
+import { BoardName } from "../../common/boards/BoardName";
+import { CardName } from "../../common/cards/CardName";
+import { ColonyName } from "../../common/colonies/ColonyName";
+import { GameId } from "../../common/Types";
+import { RandomMAOptionType } from "../../common/ma/RandomMAOptionType";
+import { AgendaStyle } from "../../common/turmoil/Types";
+import { Expansion } from "../../common/cards/GameModule";
+import { EscapeVelocityOptions } from "../../common/game/NewGameConfig";
 
 export type GameOptions = {
   boardName: BoardName;
@@ -38,9 +38,8 @@ export type GameOptions = {
   ceoExtension: boolean;
   starWarsExpansion: boolean;
   underworldExpansion: boolean;
-  deltaProjectExpansion: boolean;
 
-  expansions: Record<Expansion, boolean>,
+  expansions: Record<Expansion, boolean>;
 
   // Variants
   draftVariant: boolean;
@@ -74,7 +73,8 @@ export type GameOptions = {
   altVenusBoard: boolean;
   escapeVelocity?: EscapeVelocityOptions;
   twoCorpsVariant: boolean;
-}
+  doubleDown: boolean;
+};
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
@@ -110,7 +110,6 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
     ceo: false,
     starwars: false,
     underworld: false,
-    deltaProject: false,
   },
   fastModeOption: false,
   includeFanMA: false,
@@ -120,7 +119,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   moonStandardProjectVariant: false,
   moonStandardProjectVariant1: false,
   pathfindersExpansion: false,
-  politicalAgendasExtension: 'Standard',
+  politicalAgendasExtension: "Standard",
   preludeDraftVariant: false,
   ceosDraftVariant: false,
   preludeExtension: false,
@@ -141,8 +140,8 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   starWarsExpansion: false,
   turmoilExtension: false,
   underworldExpansion: false,
-  deltaProjectExpansion: false,
   undoOption: false,
   venusNextExtension: false,
   twoCorpsVariant: false,
+  doubleDown: false,
 };

@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {PowerPlant} from '../../../src/server/cards/pathfinders/PowerPlant';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('PowerPlant', () => {
   let card: PowerPlant;

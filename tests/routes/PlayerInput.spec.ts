@@ -6,10 +6,9 @@ import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UndoActionOption} from '../../src/server/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../TestingUtils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
-import {Payment} from '../../src/common/inputs/Payment';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -31,14 +30,14 @@ describe('PlayerInput', () => {
   it('performs undo action', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid-foo', [player], player);
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process({type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}});
+    player.process({type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
@@ -59,14 +58,14 @@ describe('PlayerInput', () => {
   it('reverts to current game instance if undo fails', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid-foo', [player], player);
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process(<OrOptionsResponse>{type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}});
+    player.process(<OrOptionsResponse>{type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));
@@ -87,7 +86,7 @@ describe('PlayerInput', () => {
   it('sends 400 on server error', async () => {
     const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);

@@ -16,13 +16,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {Phase} from '@/common/Phase';
 
 type Status = 'loading' | 'error' | 'done';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'GameOverview',
   data() {
     return {
@@ -31,15 +31,12 @@ export default defineComponent({
   props: {
     status: {
       type: String as () => Status,
-      required: true,
     },
     game: {
       type: Object as () => SimpleGameModel | undefined,
-      required: true,
     },
     id: {
       type: String,
-      required: true,
     },
   },
   computed: {

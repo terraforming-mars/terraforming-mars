@@ -2,7 +2,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {expect} from 'chai';
 import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('SolarProbe', () => {
   it('Should play', () => {

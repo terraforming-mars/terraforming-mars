@@ -2,55 +2,57 @@
     <div class="help-container">
 
         <div class="help-tabs">
-
-            <input type="radio" name="help-tab" id="radio-symbols" value="iconology" v-model="currentPage">
-            <label for="radio-symbols">
+            <input type="radio" name="help-tab" id="radio-symbols" checked>
+            <label for="radio-symbols" v-on:click="setTab('iconology')">
                 <span v-i18n>Game Iconology</span>
             </label>
-            <input type="radio" name="help-tab" id="radio-standard-projects" value="standard-projects" v-model="currentPage">
-            <label for="radio-standard-projects">
+            <input type="radio" name="help-tab" id="radio-standard-projects">
+            <label for="radio-standard-projects" v-on:click="setTab('standard projects')">
                 <span v-i18n>Standard Projects</span>
             </label>
-
-            <input type="radio" name="help-tab" id="radio-phases" value="phases" v-model="currentPage">
-            <label for="radio-phases">
+            <input type="radio" name="help-tab" id="radio-phases">
+            <label for="radio-phases" v-on:click="setTab('phases')">
                 <span v-i18n>Game Phases</span>
             </label>
-
-            <input type="radio" name="help-tab" id="radio-hotkeys" value="hotkeys" v-model="currentPage">
-            <label for="radio-hotkeys">
+            <input type="radio" name="help-tab" id="radio-hotkeys">
+            <label for="radio-hotkeys" v-on:click="setTab('hotkeys')">
                 <span v-i18n>Hot Keys</span>
-            </label>
-
-            <input type="radio" name="help-tab" id="radio-rulebooks" value="rulebooks" v-model="currentPage">
-            <label for="radio-rulebooks">
-                <span v-i18n>Rules</span>
             </label>
         </div>
 
-        <HelpIconology v-if="isOpen('iconology')"/>
-        <HelpStandardProjects v-if="isOpen('standard-projects')"/>
-        <HelpPhases v-if="isOpen('phases')"/>
-        <HelpRulebooks v-if="isOpen('rulebooks')"/>
-        <HelpHotkeys v-if="isOpen('hotkeys')"/>
+        <HelpIconology v-if="isOpen('iconology')"></HelpIconology>
+
+        <HelpStandardProjects v-if="isOpen('standard projects')"></HelpStandardProjects>
+
+        <HelpPhases v-if="isOpen('phases')"></HelpPhases>
+
+        <div v-if="isOpen('hotkeys')">
+          <div class="help-hotkeys">
+            <div class="keys">
+              <div v-i18n>Main Board</div>
+              <div v-i18n>Players Overview Table</div>
+              <div v-i18n>Cards in Hand</div>
+              <div v-i18n>Colonies</div>
+            </div>
+          </div>
+          <div class="help-hotkeys-example"></div>
+        </div>
+
     </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import HelpIconology from '@/client/components/help/HelpIconology.vue';
 import HelpPhases from '@/client/components/help/HelpPhases.vue';
-import HelpHotkeys from '@/client/components/help/HelpHotkeys.vue';
-import HelpRulebooks from '@/client/components/help/HelpRulebooks.vue';
 import HelpStandardProjects from '@/client/components/help/HelpStandardProjects.vue';
 
-const TABS = ['iconology', 'standard-projects', 'phases', 'hotkeys', 'rulebooks'] as const;
-type Tab = typeof TABS[number];
+type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
 
 export interface HelpPageModel {
     currentPage: Tab;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'Help',
   data(): HelpPageModel {
     return {
@@ -59,22 +61,8 @@ export default defineComponent({
   },
   components: {
     HelpIconology,
-    HelpPhases,
-    HelpRulebooks,
     HelpStandardProjects,
-    HelpHotkeys,
-  },
-  mounted() {
-    const hash = window.location.hash.replace('#', '') as Tab;
-
-    if (TABS.includes(hash)) {
-      this.currentPage = hash;
-    }
-  },
-  watch: {
-    currentPage(newTab: Tab) {
-      window.location.hash = newTab;
-    },
+    HelpPhases,
   },
   methods: {
     setTab(tab: Tab): void {
@@ -84,5 +72,6 @@ export default defineComponent({
       return tab === this.currentPage;
     },
   },
+
 });
 </script>

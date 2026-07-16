@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {CloudTourism} from '../../../src/server/cards/prelude2/CloudTourism';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CloudTourism', () => {
   const playTests = [

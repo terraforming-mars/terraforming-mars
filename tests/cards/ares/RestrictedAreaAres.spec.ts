@@ -4,10 +4,9 @@ import {TileType} from '../../../src/common/TileType';
 import {RestrictedAreaAres} from '../../../src/server/cards/ares/RestrictedAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('RestrictedAreaAres', () => {
   let card: RestrictedAreaAres;

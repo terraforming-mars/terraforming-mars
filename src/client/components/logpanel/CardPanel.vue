@@ -5,40 +5,35 @@
       <Card :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in globalEvents" :key="name">
-      <GlobalEvent :globalEventName="name" type="prior" :showIcons="false"/>
+      <global-event :globalEventName="name" type="prior" :showIcons="false"></global-event>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in colonies" :key="name">
-      <Colony :colony="getColony(name)"/>
+      <colony :colony="getColony(name)"></colony>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardName} from '@/common/cards/CardName';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyModel, simpleColonyModel} from '@/common/models/ColonyModel';
+import {ColonyModel} from '@/common/models/ColonyModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
+import {deNull} from '@/common/utils/utils';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
-export default defineComponent({
-  name: 'LogPanel',
+export default Vue.extend({
+  name: 'log-panel',
   props: {
-    message: {
-      type: Object as () => LogMessage,
-      required: true,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
-      required: true,
-    },
+    message: Object as () => LogMessage | undefined,
+    players: Array as () => Array<PublicPlayerModel>,
   },
   components: {
     AppButton,
@@ -51,15 +46,25 @@ export default defineComponent({
       return this.cards.length + this.globalEvents.length + this.colonies.length > 0;
     },
     cards(): ReadonlyArray<CardName> {
-      return this.message.data
-        .filter((datum) => datum.type === LogMessageDataType.CARD || datum.type === LogMessageDataType.CARDS)
-        .flatMap((datum) => datum.type === LogMessageDataType.CARD ? [datum.value] : datum.value);
+      if (this.message === undefined) {
+        return [];
+      }
+      const entries = this.message.data.map((datum) => datum.type === LogMessageDataType.CARD ? datum.value : undefined);
+      return deNull(entries);
     },
     globalEvents(): Array<GlobalEventName> {
-      return this.message.data.filter((datum) => datum.type === LogMessageDataType.GLOBAL_EVENT).map((datum) => datum.value);
+      if (this.message === undefined) {
+        return [];
+      }
+      const entries = this.message.data.map((datum) => datum.type === LogMessageDataType.GLOBAL_EVENT ? datum.value : undefined);
+      return deNull(entries);
     },
     colonies(): Array<ColonyName> {
-      return this.message.data.filter((datum) => datum.type === LogMessageDataType.COLONY).map((datum) => datum.value);
+      if (this.message === undefined) {
+        return [];
+      }
+      const entries = this.message.data.map((datum) => datum.type === LogMessageDataType.COLONY ? datum.value : undefined);
+      return deNull(entries);
     },
   },
   methods: {
@@ -67,7 +72,13 @@ export default defineComponent({
       this.$emit('hide');
     },
     getColony(name: ColonyName): ColonyModel {
-      return simpleColonyModel(name);
+      return {
+        colonies: [],
+        isActive: false,
+        name: name,
+        trackPosition: 0,
+        visitor: undefined,
+      };
     },
     isSelfReplicatingRobotsCard(cardName: CardName) {
       for (const player of this.players) {

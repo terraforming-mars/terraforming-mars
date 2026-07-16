@@ -49,7 +49,7 @@ export const milestoneNames = [
   'Spacefarer', // TODO(kberg): Rename to T. Spacefarer
   'Gambler',
 
-  // Terra Cimmeria Nova
+  // Terra Cimmeria Novus
   'Architect',
   'Coastguard', // Also Modular
   'C. Forester',
@@ -61,7 +61,7 @@ export const milestoneNames = [
   'Irrigator',
   'Capitalist',
 
-  // Vastitas Borealis Nova
+  // Vastitas Borealis Novus
   'Agronomist',
   'Engineer',
   'V. Spacefarer',
@@ -84,7 +84,7 @@ export const milestoneNames = [
   'Landshaper',
   'Legend4',
   'Lobbyist',
-  'Merchant',
+  // 'Merchant',
   'Metallurgist', // Same as Smith
   'Philantropist',
   'Pioneer4',

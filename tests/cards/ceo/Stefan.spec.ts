@@ -3,10 +3,9 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Stefan} from '../../../src/server/cards/ceos/Stefan';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, fakeCard, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, fakeCard, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Stefan', () => {
   let card: Stefan;

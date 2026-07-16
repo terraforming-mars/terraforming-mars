@@ -12,7 +12,9 @@
             <div class="card-production-box-row">
               <div class="card-production-box-row-item">
                 <div class="card-item-container">
-                  <div v-for="num in repeats" :class="productionClass" :key="num"></div>
+                  <template v-for="num in repeats">
+                    <div :class="productionClass" :key="num"></div>
+                  </template>
                 </div>
               </div>
             </div>
@@ -20,7 +22,9 @@
         </template>
         <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
         <template v-else>
-            <div v-for="num in repeats" :key="num" :class="componentClasses"></div>
+          <template v-for="num in repeats">
+            <div :class="componentClasses" :key="num"></div>
+          </template>
         </template>
       </div>
   </div>
@@ -28,14 +32,14 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {CardRequirementDescriptor, requirementType} from '@/common/cards/CardRequirementDescriptor';
 import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardRequirementComponent',
   props: {
     requirement: {
@@ -114,31 +118,31 @@ export default defineComponent({
       case RequirementType.RESOURCE_TYPES:
         return ['card-resource', 'card-resource-wild'];
       case RequirementType.GREENERIES:
-        return ['card-tile', 'greenery-tile', 'tile-size--req'];
+        return ['card-tile', 'greenery-tile--M', 'tile--req'];
       case RequirementType.CITIES:
-        return ['card-tile', 'city-tile', 'tile-size--req'];
+        return ['card-tile', 'city-tile--M', 'tile--req'];
       case RequirementType.COLONIES:
         return ['card-resource-colony', 'card-resource-colony--req'];
       case RequirementType.FLOATERS:
-        return ['card-resource-tag--S', 'tag-floater'];
+        return ['card-resource-tag--S', 'card-tag-floater'];
       case RequirementType.CHAIRMAN:
         return ['card-chairman--req'];
       case RequirementType.PARTY_LEADERS:
         return ['card-party-leader--req'];
       case RequirementType.TAG:
-        return ['card-resource-tag--S', 'tag-' + this.requirement.tag];
+        return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
-        return ['card-habitat-rate', 'tile-size--req-square'];
+        return ['card-habitat-rate', 'card-habitat-rate--req'];
       case RequirementType.MINING_RATE:
-        return ['card-mining-rate', 'tile-size--req-square'];
+        return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
-        return ['card-logistic-rate', 'tile-size--req-square'];
+        return ['card-logistics-rate', 'card-logistics-rate--req'];
       case RequirementType.HABITAT_TILES:
-        return ['card-tile-lunar-habitat', 'tile-size--req'];
+        return ['card-tile-lunar-habitat--S', 'tile--req'];
       case RequirementType.MINING_TILES:
-        return ['card-tile-lunar-mine', 'tile-size--req'];
+        return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
-        return ['card-tile-lunar-road', 'tile-size--req'];
+        return ['card-tile-lunar-road--S', 'tile--req'];
       case RequirementType.UNDERGROUND_TOKENS:
         return ['card-underground-resources'];
       case RequirementType.CORRUPTION:

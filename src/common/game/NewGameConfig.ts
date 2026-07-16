@@ -1,12 +1,12 @@
-import {BoardName} from '../boards/BoardName';
-import {RandomBoardOption} from '../boards/RandomBoardOption';
-import {CardName} from '../cards/CardName';
-import {ColonyName} from '../colonies/ColonyName';
-import {Color} from '../Color';
-import {RandomMAOptionType} from '../ma/RandomMAOptionType';
-import {AgendaStyle} from '../turmoil/Types';
-import {GameId} from '../Types';
-import {Expansion} from '../cards/GameModule';
+import { BoardName } from "../boards/BoardName";
+import { RandomBoardOption } from "../boards/RandomBoardOption";
+import { CardName } from "../cards/CardName";
+import { ColonyName } from "../colonies/ColonyName";
+import { Color } from "../Color";
+import { RandomMAOptionType } from "../ma/RandomMAOptionType";
+import { AgendaStyle } from "../turmoil/Types";
+import { GameId } from "../Types";
+import { Expansion } from "../cards/GameModule";
 
 export type BoardNameType = BoardName | RandomBoardOption;
 
@@ -34,7 +34,7 @@ export type EscapeVelocityOptions = {
  */
 export interface NewGameConfig {
   players: Array<NewPlayerModel>;
-  expansions: Record<Expansion, boolean>,
+  expansions: Record<Expansion, boolean>;
   board: BoardNameType;
   seed: number;
   randomFirstPlayer: boolean;
@@ -64,7 +64,7 @@ export interface NewGameConfig {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
-  includeFanMA: boolean,
+  includeFanMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
@@ -78,6 +78,7 @@ export interface NewGameConfig {
   altVenusBoard: boolean;
   escapeVelocity: EscapeVelocityOptions | undefined;
   twoCorpsVariant: boolean;
+  doubleDown: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;
   startingPreludes: number;

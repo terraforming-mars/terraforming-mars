@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {ICard} from '../../../src/server/cards/ICard';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd} from '../../TestingUtils';
+import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {Will} from '../../../src/server/cards/ceos/Will';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Will', () => {
   let card: Will;

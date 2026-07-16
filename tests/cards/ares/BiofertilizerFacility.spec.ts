@@ -9,8 +9,7 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('BiofertilizerFacility', () => {
   let card: BiofertilizerFacility;

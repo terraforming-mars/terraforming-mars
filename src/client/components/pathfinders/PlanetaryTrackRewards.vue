@@ -1,31 +1,29 @@
 <template>
   <div class="rewards_cont">
-    <span v-if="mostTags" class="track-icon track-icon--most-tags"></span>
-    <PlanetaryTrackReward v-for="(reward, idx) in myReward" :reward="reward" :key="idx" :gameOptions="gameOptions"/>
+    <span v-if="mostTags">!&nbsp;</span>
+    <planetary-track-reward v-for="(reward, idx) in myReward" :reward="reward" :key="idx" :gameOptions="gameOptions"/>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PlanetaryTrackSpace} from '@/common/pathfinders/PlanetaryTrack';
 import PlanetaryTrackReward from './PlanetaryTrackReward.vue';
 import {Reward} from '@/common/pathfinders/Reward';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PlanetaryTrackRewards',
   props: {
     rewards: {
       type: Object as () => PlanetaryTrackSpace,
-      required: true,
     },
     type: {
-      type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
+      type: String as () => 'risingPlayer' | 'everyone',
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
-      required: true,
     },
   },
   components: {

@@ -8,9 +8,8 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, churn, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, cast, churn, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Ants', () => {
   let card: Ants;

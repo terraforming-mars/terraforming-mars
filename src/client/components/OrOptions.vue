@@ -4,20 +4,21 @@
     <label v-if="playerinput.warning !== undefined" class="card-warning"><div>({{ $t(playerinput.warning) }})</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
       <label class="form-radio" ref="optionLabels">
-        <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" >
-        <i class="form-icon" ></i>
+        <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" />
+        <i class="form-icon" />
         <span>{{ $t(option.title) }}</span>
       </label>
-      <div v-if="selectedIdx === idx" style="margin-left: 30px">
-        <PlayerInputFactory ref="inputfactory"
+      <div v-if="selectedOption === option" style="margin-left: 30px">
+        <player-input-factory ref="inputfactory"
+                              :players="players"
                               :playerView="playerView"
                               :playerinput="option"
-                              :onsave="playerFactorySaved(idx)"
-                              :showsave="showsave && showChildSaveButton(option)"
+                              :onsave="playerFactorySaved()"
+                              :showsave="false"
                               :showtitle="false" />
       </div>
     </div>
-    <div v-if="showsave && selectedOption && !showChildSaveButton(selectedOption)">
+    <div v-if="showsave && selectedOption">
       <div style="margin: 5px 30px 10px" class="wf-action">
         <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
@@ -27,30 +28,30 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {isHTMLElement} from '@/client/utils/vueUtils';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {OrOptionsModel, PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 
 let unique = 0;
 
-export default defineComponent({
-  name: 'OrOptions',
+export default Vue.extend({
+  name: 'or-options',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
+    },
+    players: {
+      type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
       type: Object as () => OrOptionsModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: OrOptionsResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,
@@ -63,40 +64,38 @@ export default defineComponent({
     AppButton,
   },
   data() {
-    const displayedOptions: Array<PlayerInputModel> = [];
-    const originalIndices: Array<number> = [];
-    this.playerinput.options.forEach((option, i) => {
-      if (option.type === 'card' && option.showOnlyInLearnerMode !== false && !getPreferences().learner_mode) {
-        return;
+    const displayedOptions = this.playerinput.options.filter((option) => {
+      if (option.type !== 'card') {
+        return true;
       }
-      displayedOptions.push(option);
-      originalIndices.push(i);
+      if (option.showOnlyInLearnerMode === false) {
+        return true;
+      }
+
+      return getPreferences().learner_mode;
     });
     const initialIdx = this.playerinput.initialIdx ?? 0;
-    // Special case: If the first recommended displayed option is SelectProjectCardToPlay, and none of them are enabled, skip it.
-    let selectedIdx = initialIdx;
+    // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
+    let selectedOption = displayedOptions[initialIdx];
     if (displayedOptions.length > 1 &&
-      displayedOptions[initialIdx].type === 'projectCard' &&
-      !displayedOptions[initialIdx].cards.some((card) => card.isDisabled !== true)) {
-      selectedIdx = initialIdx + 1;
+      selectedOption.type === 'card' &&
+      !selectedOption.cards.some((card) => card.isDisabled !== true)) {
+      selectedOption = displayedOptions[initialIdx + 1];
     }
     return {
       displayedOptions,
-      originalIndices,
       radioElementName: 'selectOption' + unique++,
-      selectedOption: displayedOptions[selectedIdx],
-      selectedIdx,
+      selectedOption,
     };
   },
   watch: {
     selectedOption(newOption: PlayerInputModel) {
-      this.selectedIdx = this.displayedOptions.indexOf(newOption);
       // Clicking the option can shift elements on the page.
       // This preserves the location of the option button the user just clicked by
       // tracking where it was on the screen, where it moved, and then repositioning it.
-      const anchorTop = this.getSelectedOptionTop();
+      const anchorTop = this.getTop(newOption);
       this.$nextTick(() => {
-        const newTop = this.getSelectedOptionTop();
+        const newTop = this.getTop(newOption);
         if (anchorTop !== undefined && newTop !== undefined) {
           const delta = newTop - anchorTop;
           if (Math.abs(delta) > 0.5) {
@@ -107,22 +106,28 @@ export default defineComponent({
     },
   },
   methods: {
-    getSelectedOptionTop(): number | undefined {
-      const element = this.getSelectedOptionLabelElement();
+    getTop(option: PlayerInputModel | undefined): number | undefined {
+      if (option === undefined) {
+        return undefined;
+      }
+      const element = this.getOptionLabelElement(option);
       return element?.getBoundingClientRect().top;
     },
-    getSelectedOptionLabelElement(): HTMLElement | undefined {
-      const idx = this.selectedIdx;
-      const optionLabels = this.$refs.optionLabels as HTMLElement | HTMLElement[] | undefined;
-      if (idx === -1 || !optionLabels) {
+    getOptionLabelElement(option: PlayerInputModel): HTMLElement | undefined {
+      const idx = this.displayedOptions.indexOf(option);
+      const refs = this.$refs.optionLabels;
+      if (idx === -1 || !refs) {
         return undefined;
       }
 
-      const val = Array.isArray(optionLabels) ? optionLabels[idx] : optionLabels;
+      const val = Array.isArray(refs) ? refs[idx] : refs;
       return isHTMLElement(val) ? val : undefined;
     },
-    playerFactorySaved(displayedIdx: number) {
-      const idx = this.originalIndices[displayedIdx];
+    playerFactorySaved() {
+      const idx = this.playerinput.options.indexOf(this.selectedOption);
+      if (idx === undefined || idx === -1) {
+        throw new Error('option not found');
+      }
       return (out: InputResponse) => {
         this.onsave({
           type: 'or',
@@ -131,17 +136,12 @@ export default defineComponent({
         });
       };
     },
-    // When the child component is a multi-select card, let it render its own save button.
-    // This allows the child to control the button label (e.g. "Sell 3 patents").
-    showChildSaveButton(option: PlayerInputModel): boolean {
-      return option.type === 'card' && !(option.max === 1 && option.min === 1);
-    },
     saveData() {
-      let ref = this.$refs['inputfactory'] as {saveData: () => void} | Array<{saveData: () => void}>;
+      let ref = this.$refs['inputfactory'];
       if (Array.isArray(ref)) {
         ref = ref[0];
       }
-      ref.saveData();
+      (ref as any).saveData();
     },
   },
 });

@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
+import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {ALL_RESOURCES} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,6 +14,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
 import {message} from '../../logs/MessageBuilder';
 import {SelectResource} from '../../inputs/SelectResource';
+import {Units} from '../../../common/Units';
 
 export class CloneTroopers extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -29,14 +30,11 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: 'SW02',
         renderData: CardRenderer.builder((b) => {
-          b.arrow(Size.SMALL).resource(CardResource.CLONE_TROOPER).or().resource(CardResource.CLONE_TROOPER).arrow(Size.SMALL).text('STEAL', {size: Size.SMALL}).wild(1, {all});
+          b.arrow(Size.SMALL).resource(CardResource.CLONE_TROOPER).or().resource(CardResource.CLONE_TROOPER).arrow(Size.SMALL).text('STEAL', Size.SMALL).wild(1, {all});
           b.br;
-          b.text('(Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.)', {size: Size.TINY, isBold: false});
-          b.br;
-          b.plainText('Requires 6 ocean tiles.', true);
-          b.br;
-          b.vpText('1 VP per Clone Trooper on this card.');
+          b.text('(Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.)', Size.TINY, false, false);
         }),
+        description: 'Requires 6 ocean tiles. 1 VP per Clone Trooper on this card.',
       },
     });
   }
@@ -45,7 +43,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
     return true;
   }
 
-  public action(player: IPlayer) {
+  public action(player: Player) {
     if (this.resourceCount > 0) {
       const options = new OrOptions();
       options.options.push(new SelectOption('Add a Clone Trooper to this card').andThen(() => {
@@ -55,7 +53,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       if (player.game.isSoloMode()) {
         options.options.push(new SelectResource('Steal a resource')
           .andThen((resource) => {
-            player.stock.add(resource, 1);
+            player.stock.add(Units.ResourceMap[resource], 1);
             player.removeResourceFrom(this, 1);
             return undefined;
           }));

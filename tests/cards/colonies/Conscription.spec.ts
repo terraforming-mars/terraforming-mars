@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Conscription} from '../../../src/server/cards/colonies/Conscription';
 import {TestPlayer} from '../../TestPlayer';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('Conscription', () => {
   let card: Conscription;

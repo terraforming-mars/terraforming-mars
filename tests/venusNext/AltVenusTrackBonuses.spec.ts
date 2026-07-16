@@ -3,11 +3,10 @@
 
 import {expect} from 'chai';
 import {IGame} from '../../src/server/IGame';
-import {setVenusScaleLevel} from '../TestingUtils';
+import {cast, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/server/venusNext/GrantVenusAltTrackBonusDeferred';
 import {testGame} from '../TestGame';
-import {cast} from '@/common/utils/utils';
 
 describe('AltVenusTrackBonuses', () => {
   let player: TestPlayer;

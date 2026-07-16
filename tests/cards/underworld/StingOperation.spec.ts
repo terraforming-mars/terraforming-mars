@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {StingOperation} from '../../../src/server/cards/underworld/StingOperation';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {cast, zip} from '../../../src/common/utils/utils';
+import {zip} from '../../../src/common/utils/utils';
 
 describe('StingOperation', () => {
   const canPlayRuns = [

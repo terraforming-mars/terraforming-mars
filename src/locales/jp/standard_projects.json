@@ -7,7 +7,7 @@
     "City (25 M€)": "都市配置(25 M€)",
     "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "25MC支払い、都市タイルを配置. MC産出+1.",
 
-    "Build Colony": "コロニー",
+    "Colony": "コロニー",
     "Build colony (17 M€)": "コロニー1つ配置(17 М€)",
     "Spend 17 M€ to place a colony.": "17MC支払い、コロニー1つ配置.",
 
@@ -59,6 +59,6 @@
     "Build Moon Road": "",
     "Road Infrastructure": "月の道路",
     "Road Infrastructure (var.)": "月の道路(ヴァリアント)",
-    "Spend 18 M€ and 1 steel to place a road on The Moon and raise the logistic rate 1 step.": "18MCと1建材支払い、月に道路タイルを配置. 物流レート+1段階.",
-    "Spend 21 M€ to place a road on The Moon and raise the logistic rate 1 step.": "21MC支払い、月に道路タイルを配置. 物流レート+1段階."
+    "Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.": "18MCと1建材支払い、月に道路タイルを配置. 物流レート+1段階.",
+    "Spend 21 M€ to place a road on The Moon and raise the Logistics Rate 1 step.": "21MC支払い、月に道路タイルを配置. 物流レート+1段階."
 }

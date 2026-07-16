@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('MedicalLab', () => {
   it('Should play', () => {

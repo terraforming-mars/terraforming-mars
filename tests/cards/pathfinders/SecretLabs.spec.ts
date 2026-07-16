@@ -3,14 +3,13 @@ import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {assertPlaceOcean} from '../../assertions';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('SecretLabs', () => {
   let card: SecretLabs;

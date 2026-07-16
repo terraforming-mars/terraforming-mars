@@ -4,9 +4,8 @@ import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedi
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {runAllActions, setTemperature, testGame} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature, testGame} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('EarlyExpedition', () => {
   let card: EarlyExpedition;
@@ -46,9 +45,7 @@ describe('EarlyExpedition', () => {
     let tiles = 0;
     selectSpace.spaces.forEach((space) => {
       game.board.getAdjacentSpaces(space).forEach((s) => {
-        if (s.tile !== undefined) {
-          tiles++;
-        }
+        if (s.tile !== undefined) tiles++;
       });
     });
     expect(tiles).eq(0);

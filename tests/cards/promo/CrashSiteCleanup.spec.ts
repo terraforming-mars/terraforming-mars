@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {CrashSiteCleanup} from '../../../src/server/cards/promo/CrashSiteCleanup';
 import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

@@ -9,9 +9,10 @@
         "type":"node",
         "request":"launch",
         "cwd":"${workspaceRoot}",
-        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/tsx",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
         "args":[
-           "watch",
+           "-r",
+           "tsconfig-paths/register",
            "${workspaceRoot}/src/server/server.ts"
         ],
         "restart":true,
@@ -25,13 +26,18 @@
       },
       {
         "name": "Single Unit Test",
-        "program": "${workspaceFolder}/node_modules/.bin/mocha",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
         "request": "launch",
         "type": "node",
         "args": [
-          "--import=tsx",
-          "-r", "tests/testing/setup.ts",
-          "-r", "tests/testing/log-the-log.ts",
+          "-p",
+          "tests/tsconfig.json",
+          "-r",
+          "tsconfig-paths/register",
+          "-r",
+          "tests/testing/setup.ts",
+          "-r",
+          "tests/testing/log-the-log.ts",
           "${file}",
           "--no-timeouts",
           "--reporter-option",
@@ -43,12 +49,14 @@
         // This allows you to run a single test in a file, by selecting the
         // text in the test definition.
         "name": "Single Unit Test: Grep",
-        "program": "${workspaceFolder}/node_modules/.bin/mocha",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
         "request": "launch",
         "type": "node",
         "args": [
-          "--import=tsx",
-          "-r", "tests/testing/setup.ts",
+          "-p",
+          "tests/tsconfig.json",
+          "-r",
+          "tests/testing/setup.ts",
           "${file}",
           "--no-timeouts",
           "-g",
@@ -58,11 +66,12 @@
       },
       {
         "name": "Single Integration Test",
-        "program": "${workspaceFolder}/node_modules/.bin/mocha",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
         "request": "launch",
         "type": "node",
         "args": [
-          "--import=tsx",
+          "-p",
+          "tests/tsconfig.json",
           "${file}",
           "--no-timeouts",
           "--reporter-option",
@@ -72,11 +81,12 @@
       },
       {
         "name": "Single Integration Test: Grep",
-        "program": "${workspaceFolder}/node_modules/.bin/mocha",
+        "program": "${workspaceFolder}/node_modules/ts-mocha/bin/ts-mocha",
         "request": "launch",
         "type": "node",
         "args": [
-          "--import=tsx",
+          "-p",
+          "tests/tsconfig.json",
           "${file}",
           "--no-timeouts",
           "-g",
@@ -104,7 +114,7 @@
         "type":"node",
         "request":"launch",
         "cwd":"${workspaceRoot}",
-        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/tsx",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
         "args":[
             "${workspaceRoot}/src/tools/export_game.ts"
         ],
@@ -117,7 +127,7 @@
         "type":"node",
         "request":"launch",
         "cwd":"${workspaceRoot}",
-        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/tsx",
+        "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
         "args":[
             "${workspaceRoot}/src/tools/rewrite_game.ts"
         ],

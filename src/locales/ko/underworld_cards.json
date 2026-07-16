@@ -44,7 +44,7 @@
 
 "Earthquake Machine": "",
 "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "",
-"Requires 2 science tags. Decrease any plant production 1 step.": "",
+"Requires 2 science tags. Decrease any plant production 1 step": "",
 
 "Excavator Leasing": "",
 "Effect: The excavate standard project costs 1 M€ less for all players.": "",
@@ -64,6 +64,7 @@
 "Gaia City": "",
 "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
 
+"Geological Survey": "",
 "Identify 3 underground resources. Claim 1 of them.": "",
 
 "Geologist Team": "",
@@ -84,8 +85,10 @@
 "Action: Spend 1 corruption to gain 3 of the same standard resource.": "",
 "Requires 2 corruption.": "",
 
+"Hackers": "",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "",
 
+"Hired Raiders": "",
 "Steal 3 M€, plus 2 extra M€ for each corruption resource you have, from any player.": "",
 
 "Hyperspace Drive Prototype": "",
@@ -133,7 +136,7 @@
 "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "",
 
 "Mining Market Insider": "",
-"Effect: After any player identifies 1 or more underground resources (at once), add 1 data resource to this card.": "",
+"Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "",
 "Action: Spend 4 data resources on this card to draw a card.": "",
 
 "Monopoly": "",
@@ -179,6 +182,7 @@
 
 "Private Military Contractor": "",
 "Effect: When blocking damage from other players, you can use fighters here as if they were corruption resources. You cannot use them for score bribing or collusion.": "",
+"Action: Spend 1 titanium to add 1 fighter resource to this card.": "행동: 티타늄 자원 1개 소비해서 이 카드에 전투기 자원 1개 추가.",
 "Add 1 fighter resource to this card.": "",
 
 "Private Resorts": "",
@@ -198,6 +202,7 @@
 
 "Search for Life Underground": "",
 "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "",
+"3 VPs if you have one or more science resources here.": "이 카드에 과학 자원 하나라도 있다면 3점.",
 "Temperature must -18° C or colder.": "",
 
 "Server Sabotage": "",
@@ -219,8 +224,10 @@
 "// Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "",
 
 "Staged Protests": "",
+"Awards and Milestones": "",
 "Requires 1 corruption. Gain 1 corruption. Until the end of this generation, milestones and awards cost +8 M€.": "",
 
+"Standard Technology": "",
 "REPEAT": "",
 "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "",
 
@@ -228,7 +235,7 @@
 "Whenever you play a science tag (including this), add 1 data to this card": "",
 
 "Subnautic Pirates": "",
-"Requires you have 1 corruption and 1 underground token. Steal up to 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+"Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
 "Subterranean Sea": "",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "",

@@ -92,7 +92,7 @@ describe('MilestoneAwardSelector', () => {
       milestoneManifest.boards[BoardName.ARABIA_TERRA],
       milestoneManifest.boards[BoardName.TERRA_CIMMERIA],
       milestoneManifest.boards[BoardName.VASTITAS_BOREALIS]].flat();
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 2000; idx++) {
       const mas = choose({
         randomMA: RandomMAOptionType.UNLIMITED,
         includeFanMA: false,
@@ -133,11 +133,11 @@ describe('MilestoneAwardSelector', () => {
     expect(intersection(milestones, avoidedMilestones)).is.empty;
   });
 
-  it('nova maps with no randomness render correctly', () => {
+  it('novus maps with no randomness render correctly', () => {
     const mas = chooseMilestonesAndAwards({
       ...DEFAULT_GAME_OPTIONS,
       'aresExtension': true,
-      'boardName': BoardName.TERRA_CIMMERIA_NOVA,
+      'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
       'includeFanMA': false,
       'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,
@@ -148,7 +148,7 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('Do not select Constructor when Colonies is not selected', () => {
-    for (let idx = 0; idx < 1_000; idx++) {
+    for (let idx = 0; idx < 2000; idx++) {
       const mas = chooseMilestonesAndAwards({
         ...DEFAULT_GAME_OPTIONS,
         coloniesExtension: false,
@@ -190,8 +190,8 @@ describe('MilestoneAwardSelector', () => {
       (name) => awardManifest.all[name as AwardName].deprecated,
     );
 
-    expect(intersection(milestones as Array<string>, deprecatedMilestones)).is.empty;
-    expect(intersection(awards as Array<string>, deprecatedAwards)).is.empty;
+    expect(intersection(milestones, deprecatedMilestones)).is.empty;
+    expect(intersection(awards, deprecatedAwards)).is.empty;
   });
 
   function choose(options: Partial<GameOptions>) {

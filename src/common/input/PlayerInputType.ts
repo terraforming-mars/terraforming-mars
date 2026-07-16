@@ -18,5 +18,4 @@ export type PlayerInputType =
     'policy' |
     'resource' |
     'resources' |
-    'claimedUndergroundToken' |
-    'deltaProject';
+    'claimedUndergroundToken';

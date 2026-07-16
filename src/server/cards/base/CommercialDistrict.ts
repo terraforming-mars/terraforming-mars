@@ -2,8 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
+import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {cities} from '../render/DynamicVictoryPoints';
@@ -30,6 +32,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
       name,
       tags: [Tag.BUILDING],
       cost: 16,
+      adjacencyBonus,
 
       behavior: {
         production: {energy: -1, megacredits: 4},
@@ -40,8 +43,18 @@ export class CommercialDistrict extends Card implements IProjectCard {
         },
       },
 
-      victoryPoints: {cities: {}, nextToThis: {}},
+      victoryPoints: 'special',
       metadata,
     });
+  }
+
+  public override getVictoryPoints(player: IPlayer) {
+    const usedSpace = player.game.board.getSpaceByTileCard(this.name);
+    if (usedSpace !== undefined) {
+      return player.game.board.getAdjacentSpaces(usedSpace).filter(
+        (adjacentSpace) => Board.isCitySpace(adjacentSpace),
+      ).length;
+    }
+    return 0;
   }
 }

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MediaArchives} from '../../../src/server/cards/base/MediaArchives';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('MediaArchives', () => {
   it('Should play', () => {

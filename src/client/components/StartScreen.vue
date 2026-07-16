@@ -13,7 +13,7 @@
     <a class="start-screen-link start-screen-link--changelog" href="https://github.com/terraforming-mars/terraforming-mars/wiki/Changelog" target="_blank" v-i18n>Whats new?</a>
     <a class="start-screen-link start-screen-link--chat" :href="DISCORD_INVITE" target="_blank" v-i18n>Join us on Discord</a>
     <div class="start-screen-header start-screen-link--languages">
-      <LanguageSwitcher />
+      <language-switcher />
       <div class="start-screen-version-cont">
         <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{raw_settings.builtAt}}</div>
         <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{raw_settings.head}}</div>
@@ -27,27 +27,24 @@
     </div>
   </div>
   <div class="free-floating-preferences-icon">
-    <LanguageIcon class="corner-language-icon"/>
-    <PreferencesIcon/>
+    <preferences-icon></preferences-icon>
   </div>
 </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
-import LanguageIcon from '@/client/components/LanguageIcon.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
-import raw_settings from '@/genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 import * as constants from '@/common/constants';
 
-export default defineComponent({
-  name: 'StartScreen',
+export default Vue.extend({
+  name: 'start-screen',
   components: {
     LanguageSwitcher,
-    LanguageIcon,
     PreferencesIcon,
   },
   computed: {

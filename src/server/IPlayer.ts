@@ -11,11 +11,13 @@ import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
+import {SelectCard} from './inputs/SelectCard';
 import {Priority} from './deferredActions/Priority';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
 import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
+import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
@@ -27,15 +29,12 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
-import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectPlayerModel';
 import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
-import {Tag} from '../common/cards/Tag';
-import {SelectStandardProjectToPlay} from './inputs/SelectStandardProjectToPlay';
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -109,7 +108,7 @@ export interface IPlayer {
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;
   preludeCardsInHand: Array<IPreludeCard>;
-  ceoCardsInHand: Set<ICeoCard>;
+  ceoCardsInHand: Set<IProjectCard>;
   playedCards: PlayedCards;
   cardCost: number;
   // This will eventually replace playedCards.
@@ -138,9 +137,6 @@ export interface IPlayer {
   plantsNeededForGreenery: number;
   // Lawsuit
   removingPlayers: Array<PlayerId>;
-  // Cards this player has played that count toward the Warmonger award but don't live
-  // in this player's tableau (e.g. Lawsuit, which lives in the sued player's event pile).
-  warmongerCards: number;
   // For Playwrights corp.
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
@@ -179,7 +175,6 @@ export interface IPlayer {
   totalDelegatesPlaced: number;
 
   underworldData: UnderworldPlayerData;
-  deltaProjectData?: DeltaProjectPlayerModel;
   readonly alliedParty?: AlliedParty;
 
   tearDown(): void;
@@ -196,6 +191,8 @@ export interface IPlayer {
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
+  /** @deprecated use #terraformRating. */
+  getTerraformRating(): number;
   increaseTerraformRating(steps?: number, opts?: {log?: boolean, from?: From}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
@@ -279,7 +276,7 @@ export interface IPlayer {
   /**
    * Add resources to this player's played card
    */
-  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean, from?: From}): void;
+  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
 
   /**
    * Returns the set of cards in play that have actual resources on them.
@@ -322,7 +319,6 @@ export interface IPlayer {
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: ICard): void;
-  triggerOnNonCardTagAdded(tag: Tag): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;
@@ -344,7 +340,7 @@ export interface IPlayer {
    */
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;
   canAfford(options: number | CanAffordOptions): boolean;
-  getStandardProjectOption(): SelectStandardProjectToPlay;
+  getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   /** Return possible mid-game actions like play a card and fund an award, but not play prelude card. */
   getActions(): OrOptions;
@@ -352,7 +348,6 @@ export interface IPlayer {
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
-  clearWaitingFor(): void;
   serialize(): SerializedPlayer;
 
   /** Returns the cost a player must spend to claim a milestone. Public for Briber. */

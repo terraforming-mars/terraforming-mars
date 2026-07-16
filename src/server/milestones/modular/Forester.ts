@@ -1,6 +1,6 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
-import {MilestoneName} from '../../../common/ma/MilestoneName';
+import {MilestoneName} from '@/common/ma/MilestoneName';
 
 export class Forester extends BaseMilestone {
   constructor(name: MilestoneName = 'Forester', threshold: number = 4) {
@@ -12,7 +12,7 @@ export class Forester extends BaseMilestone {
   }
 }
 
-// Forester variant from Terra Cimmeria Nova.
+// Forester variant from Terra Cimmeria Novus.
 export class CForester extends Forester {
   constructor() {
     super('C. Forester', 3);

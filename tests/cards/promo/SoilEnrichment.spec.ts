@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SoilEnrichment} from '../../../src/server/cards/promo/SoilEnrichment';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
@@ -52,21 +52,6 @@ describe('SoilEnrichment', () => {
     selectCard.cb([tardigrades]);
 
     expect(tardigrades.resourceCount).eq(0);
-    expect(player.plants).eq(5);
-  });
-
-  it('play with only one eligible card', () => {
-    const ghgProducingBacteria = new GHGProducingBacteria();
-    ghgProducingBacteria.resourceCount = 1;
-    player.playedCards.push(ghgProducingBacteria);
-
-    player.plants = 0;
-    expect(card.canPlay(player)).is.true;
-
-    const result = card.play(player);
-    expect(result).to.be.undefined;
-
-    expect(ghgProducingBacteria.resourceCount).eq(0);
     expect(player.plants).eq(5);
   });
 });

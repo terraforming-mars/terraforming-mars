@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": [
-    "src/client/**/*.ts",
-    "src/client/**/*.vue",
-    "src/common/**/*.ts"
-  ]
-}

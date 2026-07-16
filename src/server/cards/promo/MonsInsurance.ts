@@ -4,7 +4,7 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {all, uppercase} from '../Options';
+import {all} from '../Options';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class MonsInsurance extends CorporationCard implements ICorporationCard {
@@ -28,7 +28,7 @@ export class MonsInsurance extends CorporationCard implements ICorporationCard {
             cb.vSpace(Size.SMALL);
             cb.effect('When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.', (eb) => {
               eb.production((pb) => pb.wild(1, {all})).or().minus().wild(1, {all});
-              eb.startEffect.text('pay', {size: Size.SMALL, uppercase}).megacredits(3);
+              eb.startEffect.text('pay', Size.SMALL, true).megacredits(3);
             });
           });
         }),
@@ -48,9 +48,7 @@ export class MonsInsurance extends CorporationCard implements ICorporationCard {
   public payDebt(player: IPlayer, claimant : IPlayer | undefined) {
     if (player !== claimant) {
       const retribution = Math.min(player.megaCredits, 3);
-      if (claimant) {
-        claimant.megaCredits += retribution;
-      }
+      if (claimant) claimant.megaCredits += retribution;
       player.stock.deduct(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {

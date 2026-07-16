@@ -4,9 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;

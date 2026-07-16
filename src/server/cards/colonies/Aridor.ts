@@ -74,7 +74,7 @@ export class Aridor extends CorporationCard implements ICorporationCard {
     this.processTags(player, [tag]);
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     this.processTags(player, this.tagsForCard(card));
   }
 

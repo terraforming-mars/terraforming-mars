@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {Warning} from '@/common/cards/Warning';
 
 const descriptions: Record<Warning, string> = {
@@ -15,12 +15,11 @@ const descriptions: Record<Warning, string> = {
   'undoBestEffort': 'Undo is best effort only. Please do not report any bugs if it is broken.',
   'maxtemp': 'Note: the temperature is already at its goal.',
   'maxoxygen': 'Note: the oxygen level is already at its goal.',
-  'maxoxygen-reduce': 'Note: the oxygen level cannot be reduced once it\'s already at its goal.',
   'maxoceans': 'Note: all oceans are already on the board.',
   'maxvenus': 'Note: Venus scale is already at its goal.',
   'maxHabitatRate': 'Note: Moon habitat rate is already at its goal.',
   'maxMiningRate': 'Note: Moon mining rate is already at its goal.',
-  'maxLogisticRate': 'Note: Moon logistic rate is already at its goal.',
+  'maxLogisticsRate': 'Note: Moon logistics rate is already at its goal.',
   'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
   'removeOwnPlants': 'Warning: this will remove your own plants',
   'buildOnLuna': 'You will only be able to build the colony on Luna.',
@@ -38,11 +37,11 @@ const descriptions: Record<Warning, string> = {
   'underworldtokendiscard': 'Warning: You will have to discard an underworld resource token you rely on.',
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Array as () => ReadonlyArray<Warning>,
+      type: Array as () => Array<Warning>,
       default: () => {
         return [];
       },

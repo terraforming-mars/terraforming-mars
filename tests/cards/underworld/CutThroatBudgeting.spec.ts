@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {CutThroatBudgeting} from '../../../src/server/cards/underworld/CutThroatBudgeting';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CutThroatBudgeting', () => {
   it('Should play', () => {

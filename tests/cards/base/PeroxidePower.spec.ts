@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PeroxidePower} from '../../../src/server/cards/base/PeroxidePower';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('PeroxidePower', () => {
   it('Should play', () => {

@@ -4,9 +4,6 @@
     <template v-if="metadata.build.quantity[idx] === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
     </template>
-    <template v-else-if="metadata.build.quantity[idx] === 2">
-      <div class="colony-placement-bonus triple-res resource white-x white-x--2" :class="resource"></div>
-    </template>
     <template v-else>
       <!-- why margin-top? -->
       <div class="resource" style="margin-top:11px;" :class="resource"></div>
@@ -16,8 +13,8 @@
     <div class="copy-trade-box">Copy Trade</div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_CARDS && metadata.build.quantity[idx] === 2">
-    <div class="resource card card-with-border" style="margin-top: 0px; margin-left: 7px; transform: scale(0.8);"></div>
-    <div class="resource card card-with-border" style="position: absolute; margin: 7px 0 0 -30px; transform: scale(0.8);"></div>
+    <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
+    <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_INFLUENCE">
     <div class="influence" style="margin-top:5px"></div>
@@ -50,19 +47,16 @@
   <div v-else-if="metadata.build.type === ColonyBenefit.PLACE_HAZARD_TILE">
     <div class="tile hazard-tile"></div>
   </div>
-  <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_EARTH_CARD">
-    <div class="resource card card-with-border" style="margin-top:5px;transform:scale(0.8);"><div class="card-icon tag-earth"></div></div>
-  </div>
 </div>
 </template>
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'BuildBenefit',
   props: {
     metadata: {

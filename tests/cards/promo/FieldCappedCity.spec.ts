@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {FieldCappedCity} from '../../../src/server/cards/promo/FieldCappedCity';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('FieldCappedCity', () => {
   it('Should play', () => {

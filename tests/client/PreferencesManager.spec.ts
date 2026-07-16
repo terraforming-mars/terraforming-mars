@@ -14,7 +14,6 @@ describe('PreferencesManager', () => {
   });
   afterEach(() => {
     FakeLocalStorage.deregister(localStorage);
-    PreferencesManager.resetForTest();
   });
 
   it('default values', () => {

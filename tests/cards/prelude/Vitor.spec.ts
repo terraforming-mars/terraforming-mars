@@ -7,7 +7,7 @@ import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards'
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('Vitor', () => {
@@ -41,19 +41,19 @@ describe('Vitor', () => {
     player.playedCards.push(card);
 
     // Dust Seals has victory points
-    card.onCardPlayed(player, new DustSeals());
+    card.onCardPlayedForCorps(player, new DustSeals());
     expect(player.megaCredits).to.eq(3);
 
     // Lava flows has none
-    card.onCardPlayed(player, new LavaFlows());
+    card.onCardPlayedForCorps(player, new LavaFlows());
     expect(player.megaCredits).to.eq(3);
 
     // Ants has dynamic victory points
-    card.onCardPlayed(player, new Ants());
+    card.onCardPlayedForCorps(player, new Ants());
     expect(player.megaCredits).to.eq(6);
 
     // This card has negative dynamic victory points
-    card.onCardPlayed(player, new AncientShipyards());
+    card.onCardPlayedForCorps(player, new AncientShipyards());
     expect(player.megaCredits).to.eq(6);
   });
 });

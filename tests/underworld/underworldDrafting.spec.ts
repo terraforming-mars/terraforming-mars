@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {Phase} from '../../src/common/Phase';
-import {cast} from '@/common/utils/utils';
 
 describe('underworld drafting', () => {
   it('run research phase, 1p, no draft, player has corruption, declines', () => {

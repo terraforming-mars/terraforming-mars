@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {UndergroundSmugglingRing} from '../../../src/server/cards/underworld/UndergroundSmugglingRing';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {Units} from '../../../src/common/Units';
-import {cast} from '@/common/utils/utils';
 
 describe('UndergroundSmugglingRing', () => {
   it('canPlay', () => {

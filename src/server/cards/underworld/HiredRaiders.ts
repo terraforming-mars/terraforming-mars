@@ -7,7 +7,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, uppercase} from '../Options';
+import {Size} from '../../../common/cards/render/Size';
+import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -22,10 +23,10 @@ export class HiredRaiders extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'UX02',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', {uppercase}).megacredits(4, {all})
+          b.text('steal', Size.MEDIUM, true).megacredits(4, {all})
             .plus().megacredits(1, {all}).slash().corruption();
         }),
-        description: 'Steal up to 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.',
+        description: 'Steal 4 M€, plus 1 extra M€ for each corruption resource you have, from any player.',
       },
     });
   }

@@ -4,11 +4,10 @@ import {Karen} from '../../../src/server/cards/ceos/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Karen', () => {
   let card: Karen;

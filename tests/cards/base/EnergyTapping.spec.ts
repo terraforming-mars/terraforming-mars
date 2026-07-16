@@ -4,10 +4,9 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('EnergyTapping', () => {
   let card: EnergyTapping;

@@ -6,7 +6,8 @@
     "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Krever at du mister 1 svever. Stjel 5 M€ fra en valgfri spiller.",
 
     "Atmo Collectors": "Atmo-samlere",
-    "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Legg til en svever her ELLER bruk 1 svever her for å få 2 titan, 3 energi eller 4 varme.",
+    "Add one floater here.": "Legg til en svever her.",
+    "Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Bruk 1 svever her for å få 2 titan, 3 energi eller 4 varme.",
     "Add 2 floaters to ANY card.": "Legg til 2 svevere på ET VALGFRITT kort.",
 
     "Community Services": "Samfunnstjenester",
@@ -16,6 +17,7 @@
     "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Krever 2 Jord-symboler. Det neste kortet du spiller denne generasjonen koster 16 M€ mindre.",
 
     "Corona Extractor": "Korona-ekstraktor",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "Krever 4 vitenskap-symboler. Øk din energi-produksjon med 4.",
 
     "Cryo-Sleep": "Kryo-søvn",
     "When you trade, you pay 1 less resource for it.": "Når du handler, betaler du 1 ressurs mindre for det.",
@@ -55,7 +57,8 @@
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Krever 1 Jupiter-symbol. Øk din TR med 1 steg. Legg til 2 svevere på ET VALGFRITT kort.",
 
     "Jupiter Floating Station": "Jupiter-svever-stasjon",
-    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "Legg til 1 svever på ET JUPITER-KORT ELLER få 1 M€ for hver svever her [MAKS 4].",
+    "Add 1 floater to a JOVIAN CARD.": "Legg til 1 svever på ET JUPITER-KORT.",
+    "Gain 1 M€ for every floater here [MAX 4].": "Få 1 M€ for hver svever her [MAKS 4].",
     "Requires 3 science tags.": "Krever 3 vitenskap-symboler.",
 
     "Luna Governor": "Måne-guvernør",
@@ -128,19 +131,24 @@
 
     "Spin-off Department": "Spin-off-avdeling",
     "WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "NÅR DU SPILLER ET KORT MED EN GRUNNKOSTNAD PÅ 20M€ ELLER MER, trekk et kort.",
+    "Increase your M€ production 2 steps.": "Øk din M€-produksjon med 2.",
 
     "Sub-zero Salt Fish": "Ishavsfisk",
+    "Add 1 animal to this card.": "Legg til 1 dyr på dette kortet.",
+    "1 VP per 2 animals on this card.": "1 SP for hvert 2. dyr på dette kortet.",
     "Requires -6 C. Decrease any plant production 1 step.": "Krever -6 C. Reduser en valgfri plante-produksjon med 1 steg.",
 
     "Titan Air-scrapping": "Luftskraping på Titan",
-    "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Bruk 1 titan for å legge til 2 svevere her ELLER bruk 2 svevere her for å øke din TR med 1 steg.",
+    "Spend 1 titanium to add 2 floaters here.": "Bruk 1 titan for å legge til 2 svevere her.",
+    "Spend 2 floaters here to increase your TR 1 step.": "Bruk 2 svevere her for å øke din TR med 1 steg.",
 
     "Titan Floating Launch-pad": "Flytende Lanseringsplattform på Titan",
     "Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Legg til 1 svever på ET VALGFRITT JUPITER-KORT eller bruk 1 svever her for å handle gratis.",
     "Add two floaters to ANY JOVIAN CARD.": "Legg til 2 svevere på ET VALGFRITT JUPITER-KORT.",
 
     "Titan Shuttles": "Skytteltrafikk på Titan",
-    "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "Legg til 2 svevere på ET VALGFRITT JUPITER-KORT ELLER bruk et valgfritt antall svevere her for å få like mange titan.",
+    "Add 2 floaters to ANY JOVIAN CARD.": "Legg til 2 svevere på ET VALGFRITT JUPITER-KORT.",
+    "Spend any number of floaters here to gain the same number of titanium.": "Bruk et valgfritt antall svevere her for å få like mange titan.",
 
     "Trade Envoys": "Handelsutsendinger",
 

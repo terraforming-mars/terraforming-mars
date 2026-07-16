@@ -7,7 +7,6 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonData} from './MoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
-import {IStandardProjectCard} from '../cards/IStandardProjectCard';
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 import {Space} from '../boards/Space';
@@ -20,9 +19,6 @@ import {SpaceId} from '../../common/Types';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {Board} from '../boards/Board';
-import {GlobalParameter} from '../../common/GlobalParameter';
-
-type MoonGlobalParameter = GlobalParameter.MOON_MINING_RATE | GlobalParameter.MOON_HABITAT_RATE | GlobalParameter.MOON_LOGISTIC_RATE;
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -65,6 +61,7 @@ export class MoonExpansion {
       miningRate: 0,
       logisticRate: 0,
       lunaFirstPlayer: undefined,
+      lunaProjectOfficeLastGeneration: undefined,
     };
   }
 
@@ -117,7 +114,14 @@ export class MoonExpansion {
 
       MoonExpansion.logTilePlacement(player, space, tile.tileType);
 
-      game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MOON));
+      // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
+      // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
+      // it's not a problem until it is.
+      for (const p of game.players) {
+        for (const playedCard of p.tableau) {
+          playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
+        }
+      }
     });
   }
 
@@ -135,26 +139,24 @@ export class MoonExpansion {
   }
 
   private static RateData = {
-    [GlobalParameter.MOON_MINING_RATE]: {field: 'miningRate', bonusAt6: Resource.TITANIUM},
-    [GlobalParameter.MOON_HABITAT_RATE]: {field: 'habitatRate', bonusAt6: Resource.ENERGY},
-    [GlobalParameter.MOON_LOGISTIC_RATE]: {field: 'logisticRate', bonusAt6: Resource.STEEL},
+    'mining': {field: 'miningRate', bonusAt6: Resource.TITANIUM},
+    'habitat': {field: 'habitatRate', bonusAt6: Resource.ENERGY},
+    'logistic': {field: 'logisticRate', bonusAt6: Resource.STEEL},
   } as const;
 
-  private static raiseRate(player: IPlayer, count: number, parameter: MoonGlobalParameter) {
+  private static raiseRate(player: IPlayer, count: number, field: 'mining' | 'logistic' | 'habitat') {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const rateData = MoonExpansion.RateData[parameter];
+      const rateData = MoonExpansion.RateData[field];
       // This relies on all three tracks being the same value. If they were different
       // that could be part of the structure.
       const available = MAXIMUM_MOON_RATE - moonData[rateData.field];
       const increment = Math.min(count, available);
       if (increment > 0) {
-        const parameterName = parameter.replace('moon-', '').replace('-', ' ');
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the ' + parameterName + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} acted as World Government and raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
-          player.game.log('${0} raised the ' + parameterName + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.onGlobalParameterIncrease(parameter, increment);
+          player.game.log('${0} raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
           player.increaseTerraformRating(increment);
           if (this.maybeBonus(moonData[rateData.field], increment, 3)) {
             player.drawCard();
@@ -169,15 +171,15 @@ export class MoonExpansion {
     });
   }
   public static raiseMiningRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, GlobalParameter.MOON_MINING_RATE);
+    this.raiseRate(player, count, 'mining');
   }
 
   public static raiseHabitatRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, GlobalParameter.MOON_HABITAT_RATE);
+    this.raiseRate(player, count, 'habitat');
   }
 
   public static raiseLogisticRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, GlobalParameter.MOON_LOGISTIC_RATE);
+    this.raiseRate(player, count, 'logistic');
   }
 
   private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {
@@ -269,7 +271,7 @@ export class MoonExpansion {
   /*
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
-  public static adjustedReserveCosts(player: IPlayer, card: IProjectCard | IStandardProjectCard) : Units {
+  public static adjustedReserveCosts(player: IPlayer, card: IProjectCard) : Units {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 

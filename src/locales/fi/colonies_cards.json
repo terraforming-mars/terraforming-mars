@@ -6,7 +6,8 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Vaatii että menetät 1 kellukkeen. Varasta 5 M€ keneltä tahansa pelaajalta.",
 
   "Atmo Collectors": "Ilmakehänkeräilijät",
-  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "TOIMINTO: Lisää yksi kelluke tänne TAI käytä 1 kelluke täältä saadaksesi 2 titaania, tai 3 energiaa, tai 4 lämpöä.",
+  "Action: Add one floater here.": "TOIMINTO: Lisää yksi kelluke tänne.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "TOIMINTO: Käytä 1 kelluke täältä saadaksesi 2 titaania, tai 3 energiaa, tai 4 lämpöä.",
   "Add 2 floaters to ANY card.": "Lisää 2 kelluketta MILLE TAHANSA kortille.",
 
   "Community Services": "Yhteisöpalvelut",
@@ -16,6 +17,7 @@
   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Vaatii 2 Maa-ympyrää. Seuraava kortti, jonka pelaat tässä sukupolvessa, maksaa 16 M€ vähemmän.",
 
   "Corona Extractor": "Koronanpoistin",
+  "Requires 4 science tags. Increase your energy production 4 steps.": "Vaatii 4 tiedeympyrää. Lisää energiatuotantoasi 4 askelta.",
 
   "Cryo-Sleep": "Kryouniteho",
   "Effect: When you trade, you pay 1 less resource for it.": "VAIKUTUS: Kun käyt kauppaa, maksat 1 resurssin vähemmän siitä.",
@@ -55,7 +57,8 @@
   "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Vaatii 1 Jupiter-ympyrän. Nosta MKL:ääsi 1 askel. Lisää 2 kelluketta MILLE TAHANSA kortille.",
 
   "Jupiter Floating Station": "Jupiterin kelluva asema",
-  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "TOIMINTO: Lisää 1 kelluke JUPITER-KORTILLE TAI saat 1 M€ per kelluke täällä [MAX 4].",
+  "Action: Add 1 floater to a JOVIAN CARD.": "TOIMINTO: Lisää 1 kelluke JUPITER-KORTILLE.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].": "TOIMINTO: Saat 1 M€ per kelluke täällä [MAX 4].",
   "Requires 3 science tags.": "Vaatii 3 tiedeympyrää.",
 
   "Luna Governor": "Kuun kuvernööri",
@@ -110,6 +113,7 @@
   "Rim Freighters": "Reunanrahtilaivat",
 
   "Sky Docks": "Taivastelakoat",
+  "Effect: When you play a card, you pay 1 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 1 M€ vähemmän.",
   "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Vaatii 2 Maa-ympyrää. Saat 1 kauppalaivaston.",
 
   "Solar Probe": "Aurinkotutkain",
@@ -127,19 +131,24 @@
 
   "Spin-off Department": "Sivuosasto",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "VAIKUTUS: KUN PELAAT KORTIN, JONKA PERUSHINTA ON 20 M€ TAI ENEMMÄN, nosta kortti.",
+  "Increase your M€ production 2 steps.": "Lisää M€-tuotantoasi 2 askelta.",
 
   "Sub-zero Salt Fish": "Jääpakkasen suolakala",
+  "Action: Add 1 animal to this card.": "TOIMINTO: Lisää 1 eläin tälle kortille.",
+  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
   "Requires -6 C. Decrease any plant production 1 step.": "Vaatii -6°C. Vähennä kenenkään kasvituotantoa 1 askel.",
 
   "Titan Air-scrapping": "Titanin ilmankierrätys",
-  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "TOIMINTO: Käytä 1 titaania lisätäksesi 2 kelluketta tänne TAI käytä 2 kelluketta täältä nostaaksesi MKL:ääsi 1 askel.",
+  "Action: Spend 1 titanium to add 2 floaters here.": "TOIMINTO: Käytä 1 titaania lisätäksesi 2 kelluketta tänne.",
+  "Action: Spend 2 floaters here to increase your TR 1 step.": "TOIMINTO: Käytä 2 kelluketta täältä nostaaksesi MKL:ääsi 1 askel.",
 
   "Titan Floating Launch-pad": "Titanin kelluva laukaisualusta",
   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "TOIMINTO: Lisää 1 kelluke MIHIN TAHANSA JUPITER-KORTILLE tai käytä 1 kelluke täältä käydäksesi kauppaa ilmaiseksi.",
   "Add two floaters to ANY JOVIAN CARD.": "Lisää kaksi kelluketta MIHIN TAHANSA JUPITER-KORTILLE.",
 
   "Titan Shuttles": "Titanin sukkulat",
-  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "TOIMINTO: Lisää 2 kelluketta MIHIN TAHANSA JUPITER-KORTILLE TAI käytä mikä tahansa määrä kellukkeita täältä saadaksesi saman määrän titaania.",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.": "TOIMINTO: Lisää 2 kelluketta MIHIN TAHANSA JUPITER-KORTILLE.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "TOIMINTO: Käytä mikä tahansa määrä kellukkeita täältä saadaksesi saman määrän titaania.",
 
   "Trade Envoys": "Kauppaedustajat",
 

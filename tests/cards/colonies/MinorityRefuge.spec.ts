@@ -5,11 +5,10 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {churn, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('MinorityRefuge', () => {
   let card: MinorityRefuge;

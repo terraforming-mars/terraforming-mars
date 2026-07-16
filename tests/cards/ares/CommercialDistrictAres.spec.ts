@@ -5,9 +5,8 @@ import {Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {CommercialDistrictAres} from '../../../src/server/cards/ares/CommercialDistrictAres';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CommercialDistrictAres', () => {
   let card: CommercialDistrictAres;

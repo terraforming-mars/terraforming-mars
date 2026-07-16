@@ -3,7 +3,6 @@ import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PathfindersExpansion} from '../pathfinders/PathfindersExpansion';
-import {DeltaProjectExpansion} from '../delta/DeltaProjectExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdownBuilder} from './VictoryPointsBreakdownBuilder';
 import {FundedAward} from '../awards/FundedAward';
@@ -80,7 +79,6 @@ export function calculateVictoryPoints(player: IPlayer) {
   }
   MoonExpansion.calculateVictoryPoints(player, builder);
   PathfindersExpansion.calculateVictoryPoints(player, builder);
-  DeltaProjectExpansion.calculateVictoryPoints(player, builder);
 
   // Underworld Score Bribing
   if (player.game.gameOptions.underworldExpansion === true) {
@@ -118,9 +116,7 @@ function maybeSetVP(thisPlayer: IPlayer, awardWinner: IPlayer, fundedAward: Fund
 
 function giveAwards(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
   // Awards are disabled for 1 player games
-  if (player.game.isSoloMode()) {
-    return;
-  }
+  if (player.game.isSoloMode()) return;
 
   player.game.fundedAwards.forEach((fundedAward) => {
     const award = fundedAward.award;

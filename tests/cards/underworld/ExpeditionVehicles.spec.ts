@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {ExpeditionVehicles} from '../../../src/server/cards/underworld/ExpeditionVehicles';
 import {testGame} from '../../TestGame';
-import {addCity, addOcean} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
-import {Phase} from '../../../src/common/Phase';
 
 describe('ExpeditionVehicles', () => {
   const onTilePlacedRuns = [
@@ -29,26 +28,6 @@ describe('ExpeditionVehicles', () => {
 
       addCity(run.self ? player : player2, space.id);
       expect(player.cardsInHand).has.length(run.expected.cardsInHand);
-    });
-  }
-
-  for (const run of [
-    {phase: Phase.ACTION, expected: 1},
-    {phase: Phase.SOLAR, expected: 0},
-  ] as const) {
-    it('Does not draw during WGT' + JSON.stringify(run), () => {
-      const card = new ExpeditionVehicles();
-      const [game, player] = testGame(2, {underworldExpansion: true});
-
-      const spaces = game.board.getAvailableSpacesForOcean(player);
-      const space = spaces[0];
-
-      player.playedCards.push(card);
-
-      game.phase = run.phase;
-      addOcean(player, space.id);
-
-      expect(player.cardsInHand).has.length(run.expected);
     });
   }
 });

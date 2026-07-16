@@ -1,20 +1,18 @@
 <template>
   <button @click="$emit('click')" class="btn" :class="outerClass" :disabled="isDisabled" v-i18n>
-    <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"></span>
+    <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"/>
     <span v-else>{{ buttonText }}</span>
   </button>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-import {ComponentPublicInstance} from 'vue';
+import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 import {Message} from '@/common/logs/Message';
 import {translateText, translateMessage} from '@/client/directives/i18n';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'AppButton',
-  emits: ['click'],
   props: {
     title: {
       type: [String, Object as () => Message],
@@ -26,14 +24,14 @@ export default defineComponent({
     },
     align: {
       type: String,
-      validator: (align: string) => ['right', 'left', 'center'].includes(align),
+      validator: (align) => ['right', 'left', 'center'].includes(align),
       required: false,
       default: 'center',
     },
     size: {
       type: String,
       default: 'normal',
-      validator: (item: string) => ['tiny', 'small', 'normal', 'big', 'jumbo'].includes(item),
+      validator: (item) => ['tiny', 'small', 'normal', 'big', 'jumbo'].includes(item),
     },
     rounded: {
       type: Boolean,
@@ -46,7 +44,7 @@ export default defineComponent({
     type: {
       type: String,
       default: 'normal',
-      validator: (item: string) =>
+      validator: (item) =>
         [
           'normal',
           'action',
@@ -63,7 +61,7 @@ export default defineComponent({
   },
   computed: {
     isDisabledDueToServerBusy(): boolean {
-      return this.disableOnServerBusy && vueRoot(this as ComponentPublicInstance).isServerSideRequestInProgress;
+      return this.disableOnServerBusy && vueRoot(this).isServerSideRequestInProgress;
     },
     isDisabled(): boolean {
       return this.disabled || this.isDisabledDueToServerBusy;

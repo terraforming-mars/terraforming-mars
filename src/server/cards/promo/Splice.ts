@@ -12,7 +12,7 @@ import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 import {ICard} from '../ICard';
-import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
+import {GainResources} from '../../deferredActions/GainResources';
 
 export class Splice extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -38,7 +38,7 @@ export class Splice extends CorporationCard implements ICorporationCard {
               eb.megacredits(2, {all}).or().resource(CardResource.MICROBE, {all}).asterix();
             });
             ce.vSpace();
-            ce.effect('When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
+            ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
               eb.tag(Tag.MICROBE, {all}).startEffect;
               eb.megacredits(2);
             });
@@ -58,10 +58,10 @@ export class Splice extends CorporationCard implements ICorporationCard {
     const gain = microbeTags * 2;
 
     // Splice owner gets 2M€ per microbe tag
-    game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
+    game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
 
     const gainResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
-      cardPlayer.addResourceTo(card, {log: true});
+      cardPlayer.addResourceTo(card);
       return undefined;
     });
 
@@ -69,7 +69,7 @@ export class Splice extends CorporationCard implements ICorporationCard {
       message('Gain ${0} M€', (b) => b.number(gain)),
       'Gain M€')
       .andThen(() => {
-        game.defer(new GainResourcesDeferred(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
+        game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
         return undefined;
       });
 

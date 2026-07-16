@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('EarthCatapult', () => {
   it('Should play', () => {

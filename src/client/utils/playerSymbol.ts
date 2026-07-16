@@ -1,7 +1,7 @@
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Color} from '@/common/Color';
 
-export const SYMBOL_FOR_COLOR = {
+export const SYMBOL_FOR_COLOR: Record<Color, string> = {
   red: '▲',
   blue: '+',
   black: '∇',
@@ -12,7 +12,7 @@ export const SYMBOL_FOR_COLOR = {
   pink: '◈',
   bronze: '▦',
   neutral: '★',
-} satisfies Record<Color, string>;
+} as const;
 
 export function playerSymbol(color: Color, optionalSuffix: string = '') {
   if (getPreferences().symbol_overlay) {

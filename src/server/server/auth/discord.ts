@@ -1,5 +1,3 @@
-import {DEFAULT_URL_ROOT} from '../../../common/constants';
-
 export type DiscordId = string;
 
 export type DiscordUser = {
@@ -22,7 +20,7 @@ export type DiscordUser = {
   avatar_decoration_data?: any // data for the user's avatar decoration
 };
 
-const URL_ROOT = process.env.URL_ROOT || DEFAULT_URL_ROOT;
+const URL_ROOT = process.env.URL_ROOT || 'http://localhost:8080';
 
 export async function getDiscordUser(code: string): Promise<DiscordUser> {
   const data = {

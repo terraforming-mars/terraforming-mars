@@ -19,7 +19,7 @@ export class Petra extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.text('REPLACE ALL NEUTRAL', {size: Size.TINY}).delegates(1).colon().megacredits(3).asterix();
+          b.text('REPLACE ALL NEUTRAL', Size.TINY).delegates(1).colon().megacredits(3).asterix();
           b.br.br;
           b.plus().delegates(3).asterix;
         }),
@@ -35,9 +35,7 @@ export class Petra extends CeoCard {
     // We need to make sure that the player has enough delegates available to replace ALL neuts.
     //  including Chairman!
     const turmoil = player.game.turmoil;
-    if (turmoil === undefined || this.isDisabled === true) {
-      return false;
-    }
+    if (turmoil === undefined || this.isDisabled === true) return false;
     const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
     const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player);
     return playerTotalDelegateCount >= numNeutralDelegates;

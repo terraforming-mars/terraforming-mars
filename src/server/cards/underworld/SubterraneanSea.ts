@@ -27,26 +27,25 @@ export class SubterraneanSea extends Card implements IProjectCard {
     });
   }
 
-  private availableSpaces(player: IPlayer, cost: number) {
-    return player.game.board.getAvailableSpacesOnLand(
+  private availableSpaces(player: IPlayer) {
+    const availableSpcesOnLand = player.game.board.getAvailableSpacesOnLand(
       player, {
-        cost,
+        cost: player.getCardCost(this),
         tr: {oceans: 1},
-      })
-      .filter((space) => space.excavator === player);
+      });
+    return availableSpcesOnLand.filter((space) => space.excavator === player);
   }
 
   public override bespokeCanPlay(player: IPlayer) {
     if (!player.game.canAddOcean()) {
-      this.addWarning('maxoceans');
+      this.warnings.add('maxoceans');
     }
-    return this.availableSpaces(player, player.getCardCost(this)).length > 0;
+    return this.availableSpaces(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    // Card cost is already paid; only check space-specific additional costs.
     player.game.defer(new PlaceOceanTile(player, {
-      spaces: this.availableSpaces(player, 0),
+      spaces: this.availableSpaces(player),
     }));
     return undefined;
   }

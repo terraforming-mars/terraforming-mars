@@ -30,7 +30,7 @@ export class ProjectEden extends PreludeCard {
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.cardsInHand.length >= 3 && player.canAfford({cost: 0, tr: {oceans: 1, oxygen: 1}})) {
       if (!player.game.canAddOcean()) {
-        this.addWarning('maxoceans');
+        this.warnings.add('maxoceans');
       }
       return true;
     }

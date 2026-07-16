@@ -1,37 +1,31 @@
 <template>
     <tr>
-      <td><div :class="iconClass"></div></td>
+      <div class="track-icon">{{icon}}</div>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
-        <PlanetaryTrackRewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
+        <planetary-track-rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
     </tr>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {range} from '@/common/utils/utils';
 import {PlanetaryTrack as Track} from '@/common/pathfinders/PlanetaryTrack';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import PlanetaryTrackRewards from './PlanetaryTrackRewards.vue';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PlanetaryTrack',
   props: {
     val: {
       type: Number,
-      required: true,
     },
-    type: {
-      type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
-      required: true,
-    },
+    type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
     rewards: {
       type: Object as () => Track,
-      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
-      required: true,
     },
   },
   data() {
@@ -48,10 +42,11 @@ export default defineComponent({
     },
   },
   computed: {
-    iconClass(): string {
+    icon(): string {
       switch (this.type) {
-      case 'risingPlayer': return 'track-icon track-icon--rising-player';
-      case 'everyone': return 'track-icon track-icon--everyone';
+      case 'risingPlayer': return '^';
+      case 'everyone': return '*';
+      case 'mostTags': return '!';
       default: return '';
       }
     },

@@ -1,17 +1,12 @@
 <template>
-  <div :class="tiles">
-    <div v-if="symbols.length > 0" :class="symbols">
-    </div>
-    <AdjacencyBonus v-if="item.isAres" :tileType="item.tile" />
-  </div>
+  <div :class="tiles"><div v-if="symbols.length > 0" :class="symbols"></div></div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {ICardRenderTile} from '@/common/cards/render/Types';
 import {TileType} from '@/common/TileType';
-import AdjacencyBonus from '@/client/components/AdjacencyBonus.vue';
 
 type Classes = {
   // The tile div is used to display a full tile. If distinct version
@@ -147,21 +142,15 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
   },
-  [TileType.NEURAL_INSTANCE]: {
-    tile: 'card-tile-neural-instance',
-  },
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardRenderTileComponent',
   props: {
     item: {
       type: Object as () => ICardRenderTile,
       required: true,
     },
-  },
-  components: {
-    AdjacencyBonus,
   },
   computed: {
     tiles(): ReadonlyArray<string> {

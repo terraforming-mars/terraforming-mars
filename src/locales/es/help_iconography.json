@@ -8,6 +8,10 @@
     "Resources on Cards": "Recursos en cartas",
     "Building": "Edificio",
     "Space": "Espacio",
+    "Science": "Ciencia",
+    "Power": "Energía",
+    "Earth": "Tierra",
+    "Venus": "",
     "Plant": "Planta",
     "Microbe": "Microbio",
     "Animal": "",
@@ -21,6 +25,9 @@
     "Floater": "Flotador",
     "Asteroid": "Asteroide",
 
+    "Greenery": "Vegetación",
+    "City": "Ciudad",
+    "Ocean": "Océano",
     "Special": "Especial",
 
     "Temperature": "Temperatura",
@@ -32,6 +39,7 @@
     "Terraform Rating (TR)": "Valor de terraformación (VT)",
     "Project Card": "Carta de proyecto",
     "Colony": "Colonia",
+    "Trade": "Comerciar",
     "Trade Fleet": "Flota comercial",
     "Delegate": "Delegado",
     "Influence": "Influencia",
@@ -39,5 +47,6 @@
     "Hotkeys Mapping" : "Asignación teclas acceso rápido",
     "Main Board": "Tablero principal",
     "Players Overview Table": "Tablero resumen jugadores",
-    "Cards in Hand": "Cartas en mano"
+    "Cards in Hand": "Cartas en mano",
+    "Colonies": "Colonias"
 }

@@ -32,7 +32,7 @@ class UnityBonus01 extends Bonus {
   }
 
   grantForPlayer(player: IPlayer) {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.UNITY}});
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
@@ -45,7 +45,7 @@ class UnityBonus02 extends Bonus {
   }
 
   grantForPlayer(player: IPlayer) {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.UNITY}});
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
@@ -82,7 +82,7 @@ class UnityPolicy02 implements IPolicy {
         if (availableFloaterCards.length === 1) {
           orOptions.options.push(
             new SelectOption(message('Add ${0} floaters to ${1}', (b) => b.number(2).card(availableFloaterCards[0]))).andThen(() => {
-              player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true, from: {partyName: PartyName.UNITY}});
+              player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
               return undefined;
             }),
@@ -92,7 +92,7 @@ class UnityPolicy02 implements IPolicy {
             new SelectOption('Add 2 floaters to a card').andThen(() => {
               return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
                 .andThen(([card]) => {
-                  player.addResourceTo(card, {qty: 2, log: true, from: {partyName: PartyName.UNITY}});
+                  player.addResourceTo(card, {qty: 2, log: true});
                   return undefined;
                 });
             }),
@@ -100,13 +100,12 @@ class UnityPolicy02 implements IPolicy {
         }
 
         orOptions.options.push(new SelectOption('Gain 2 titanium').andThen(() => {
-          player.stock.add(Resource.TITANIUM, 2, {log: true, from: {partyName: PartyName.UNITY}});
+          player.stock.add(Resource.TITANIUM, 2);
+          game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;
         }));
 
-        if (orOptions.options.length === 1) {
-          return orOptions.options[0].cb();
-        }
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
         player.defer(orOptions);
         return undefined;

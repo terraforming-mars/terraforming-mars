@@ -23,7 +23,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private title: string | Message;
   private log: boolean;
 
-  public override priority: Priority = Priority.ATTACK_OPPONENT;
+  public override priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: IPlayer,
     cardResource: CardResource | undefined,
@@ -115,24 +115,16 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
     const resourceCards: Array<ICard> = [];
     for (const p of player.game.players) {
+      // Making this a function just to delay calling getCardsWithResources unless it's needed.
+      const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
       if (p === player) {
         if (source !== 'opponents') {
-          for (const card of p.getCardsWithResources(resourceType)) {
-            // Protected resources can't be removed, even by the owner (e.g. Pets), except for
-            // Bioengineering Enclosure, whose protection only stops *other* players.
-            if (card.protectedResources === true && card.name !== CardName.BIOENGINEERING_ENCLOSURE) {
-              continue;
-            }
-            resourceCards.push(card);
-          }
+          resourceCards.push(...get());
         }
       } else {
         if (source !== 'self') {
           const hasProtetedHabitats = p.tableau.has(CardName.PROTECTED_HABITATS);
-          for (const card of p.getCardsWithResources(resourceType)) {
-            if (card.protectedResources === true) {
-              continue;
-            }
+          for (const card of get()) {
             if (hasProtetedHabitats) {
               if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
                 continue;

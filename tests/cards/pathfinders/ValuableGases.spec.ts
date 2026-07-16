@@ -6,12 +6,11 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ValuableGases', () => {
   let card: ValuableGases;
@@ -58,7 +57,7 @@ describe('ValuableGases', () => {
 
     selectProjectCardToPlay.payAndPlay(localShading, {
       ...Payment.EMPTY,
-      megacredits: localShading.cost,
+      megaCredits: localShading.cost,
     });
 
     expect(localShading.resourceCount).eq(5);

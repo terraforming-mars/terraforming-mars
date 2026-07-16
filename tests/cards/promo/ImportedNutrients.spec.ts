@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
@@ -7,7 +7,6 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ImportedNutrients', () => {
   let card: ImportedNutrients;

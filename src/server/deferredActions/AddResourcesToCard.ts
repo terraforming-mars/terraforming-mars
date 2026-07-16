@@ -35,10 +35,7 @@ export class AddResourcesToCard extends DeferredAction {
       return this.resourceType === undefined || card.resourceType === this.resourceType;
     });
 
-    let cards = playedCards;
-    if (this.options.robotCards === true) {
-      cards = cards.concat(srrCards);
-    }
+    let cards = playedCards.concat(srrCards);
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
       cards = cards.filter((card) => {
@@ -56,13 +53,9 @@ export class AddResourcesToCard extends DeferredAction {
   }
 
   public execute() {
+    const qty = this.options.count ?? 1;
     const cards = this.getCards();
     if (cards.length === 0) {
-      return undefined;
-    }
-
-    const qty = this.options.count ?? 1;
-    if (qty === 0) {
       return undefined;
     }
 
@@ -71,9 +64,10 @@ export class AddResourcesToCard extends DeferredAction {
       return undefined;
     }
 
+    const count = this.options.count ?? 1;
     const title = this.options.title ??
-      message('Select card to add ${0} ${1}', (b) => b.number(qty).string(this.resourceType || 'resources'));
-    const buttonLabel = qty === 1 ? 'Add resource' : 'Add resources';
+      message('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
+    const buttonLabel = count === 1 ? 'Add resource' : 'Add resources';
 
     return new SelectCard(title, buttonLabel, cards)
       .andThen(([card]) => {

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

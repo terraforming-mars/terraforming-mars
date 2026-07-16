@@ -19,11 +19,10 @@ export type CardListModel = {
   showAdvanced: boolean;
   sortOrder: 'a' | '1';
   showMetadata: boolean;
-  tallCards: boolean;
   vps: number; // 0: all, 1: VPs, 2: no vps
 }
 
-const MODULE_ABBREVIATIONS = {
+const MODULE_ABBREVIATIONS: Record<GameModule, string> = {
   base: 'b',
   corpera: 'c',
   prelude: 'p',
@@ -39,10 +38,9 @@ const MODULE_ABBREVIATIONS = {
   ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
   starwars: 'w',
   underworld: 'u',
-  deltaProject: 'd',
-} satisfies Record<GameModule, string>;
+};
 
-const TYPE_ABBREVIATIONS = {
+const TYPE_ABBREVIATIONS: Record<TypeOption, string> = {
   [CardType.EVENT]: 'r',
   [CardType.ACTIVE]: 'b',
   [CardType.AUTOMATED]: 'g',
@@ -57,9 +55,9 @@ const TYPE_ABBREVIATIONS = {
   milestones: 'm',
   awards: 'a',
   agendas: 't',
-} satisfies Record<TypeOption, string>;
+};
 
-const TAG_ABBREVIATIONS = {
+const TAG_ABBREVIATIONS: Record<TagOption, string> = {
   [Tag.BUILDING]: '0',
   [Tag.SPACE]: '1',
   [Tag.SCIENCE]: '2',
@@ -78,7 +76,7 @@ const TAG_ABBREVIATIONS = {
   [Tag.CLONE]: 'f',
   none: 'g',
   [Tag.CRIME]: 'h',
-} satisfies Record<TagOption, string>;
+};
 
 export function hashToModel(windowLocationHash: string): CardListModel {
   const model: CardListModel = {
@@ -99,7 +97,6 @@ export function hashToModel(windowLocationHash: string): CardListModel {
       ceo: true,
       starwars: true,
       underworld: true,
-      deltaProject: true,
     },
     types: {
       event: true,
@@ -172,7 +169,6 @@ export function hashToModel(windowLocationHash: string): CardListModel {
     vps: 0,
     sortOrder: 'a',
     showMetadata: true,
-    tallCards: false,
   };
   if (windowLocationHash.length > 1) {
     const hash = decodeURIComponent(windowLocationHash).slice(1);

@@ -1,27 +1,24 @@
-import {mount, VueWrapper, DOMWrapper} from '@vue/test-utils';
+import {mount, Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
 import {Preference, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {globalConfig} from './getLocalVue';
+import {getLocalVue} from './getLocalVue';
 
 describe('PreferencesDialog', () => {
   const preferencesManager = PreferencesManager.INSTANCE;
 
-  function getDataTest(wrapper: VueWrapper<any>, field: Preference): DOMWrapper<Element> {
+  function getDataTest(wrapper: Wrapper<PreferencesDialog>, field: Preference): Wrapper<PreferencesDialog> {
     return wrapper.find(`[data-test=${field}]`);
   }
 
-  function getCheckbox(wrapper: VueWrapper<any>, field: Preference): HTMLInputElement {
+  function getCheckbox(wrapper: Wrapper<PreferencesDialog>, field: Preference): HTMLInputElement {
     return getDataTest(wrapper, field).element as HTMLInputElement;
   }
 
   it('defaults properly set', () => {
-    preferencesManager.set('learner_mode', true);
-    preferencesManager.set('hide_awards_and_milestones', false);
-
     const wrapper = mount(PreferencesDialog, {
-      ...globalConfig,
-      props: {preferencesManager},
+      localVue: getLocalVue(),
+      propsData: {preferencesManager},
     });
 
     expect(preferencesManager.values().hide_awards_and_milestones).is.false;
@@ -33,8 +30,8 @@ describe('PreferencesDialog', () => {
 
   it('toggling sets the underlying preferences', async () => {
     const wrapper = mount(PreferencesDialog, {
-      ...globalConfig,
-      props: {preferencesManager},
+      localVue: getLocalVue(),
+      propsData: {preferencesManager},
     });
 
     expect(preferencesManager.values().hide_awards_and_milestones).is.false;

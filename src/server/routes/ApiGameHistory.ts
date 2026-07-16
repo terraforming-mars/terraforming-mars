@@ -25,9 +25,7 @@ export class ApiGameHistory extends Handler {
     }
     try {
       const saveIds = await Database.getInstance().getSaveIds(gameId);
-      // Sort numerically. The default Array.sort compares stringwise, which would
-      // order save ids as [0, 1, 10, 11, 2, ...] once a game has ten or more saves.
-      responses.writeJson(res, ctx, [...saveIds].sort((a, b) => a - b));
+      responses.writeJson(res, ctx, [...saveIds].sort());
     } catch (err) {
       console.error(err);
       responses.badRequest(req, res, 'could not load admin stats');

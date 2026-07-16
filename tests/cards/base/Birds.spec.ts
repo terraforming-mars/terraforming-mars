@@ -4,9 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Birds', () => {
   let card: Birds;

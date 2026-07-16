@@ -1,6 +1,6 @@
 {
   "Basic Infrastructure": "",
-  "Place a road tile on The Moon and raise the logistic rate 1 step. Gain 1 trade fleet.": "",
+  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "",
 
   "Core Mine": "",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "",
@@ -12,7 +12,7 @@
   "Draw 2 cards with a Moon tag. Gain 6 steel.": "",
 
   "Mining Complex": "",
-  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. Pay 7 M€.": "",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "",
 
   "AI Controlled Mine Network": "",
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "",
@@ -26,20 +26,19 @@
   "Ancient Shipyards": "",
   "Ancient Shipyards (Nerfed)": "",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "",
-  "Spend 3 titanium.": "",
-  "-1 VP for every resource here.": "",
+  "Spend 3 titanium. -1 VP for every resource here.": "",
 
   "Archimedes Hydroponics Station": "",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "",
 
   "Aristarchus Road Network": "",
-  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the logistic rate 1 step.": "",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Colonist Shuttles": "",
   "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "",
 
   "Copernicus Solar Arrays": "",
-  "Spend 1 titanium. Gain 2 heat. Increase your energy production 1 step.": "",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "",
 
   "Copernicus Tower": "",
   "Requires you have 2 titanium production.": "",
@@ -66,7 +65,7 @@
 
   "Darkside Smugglers' Union": "",
   "Action: Perform a trade action.": "",
-  "raise the logistic rate 1 step.": "",
+  "Raise the logistics rate 1 step.": "",
 
   "Deep Lunar Mining": "",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "",
@@ -123,6 +122,7 @@
   "Luna Conference": "",
   "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "",
 
+  "Luna Mining Hub": "",
   "Requires a mining rate of 5 or higher.": "",
   "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "",
   "Place this tile on The Moon and raise the mining rate 1 step.": "",
@@ -145,6 +145,7 @@
   "Luna Staging Station": "",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "",
 
+  "Luna Trade Station": "",
   "Action: Gain 2 M€ for each habitat tile on The Moon.": "",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "",
 
@@ -169,6 +170,7 @@
   "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "",
 
   "Lunar Steel": "",
+  "Effect: Your steel resources are worth 1 M€ extra.": "",
 
   "Lunar Trade Fleet": "",
   "2 titanium production": "",
@@ -196,6 +198,7 @@
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "",
 
   "Moon Tether": "",
+  "Effect: When you play a card, you pay 2 M€ less for it.": "지속 효과: 모든 카드의 추진 비용 2 M€ 할인.",
   "Requires 6 space tags.": "",
 
   "Mooncrate Block Factory": "",
@@ -241,7 +244,7 @@
   "Action: Spend 1 steel to add 2 microbes here.": "",
 
   "Sinus Irdium Road Network": "",
-  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the logistic rate 1 step.": "",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Small Duty Rovers": "",
   "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "",
@@ -280,7 +283,7 @@
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "",
 
   "Tycho Road Network": "",
-  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Underground Detonators": "",
   "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "",

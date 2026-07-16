@@ -1,6 +1,6 @@
 
 import {shallowMount, mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
@@ -8,7 +8,7 @@ import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
 import {getAward} from '@/client/MilestoneAwardManifest';
-import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
@@ -20,7 +20,9 @@ function createAward({id = 1, funded = false}): FundedAwardModel {
   };
 }
 
-const learnerModeOn: Readonly<Preferences> = {...PreferencesManager.INSTANCE.values(), learner_mode: true};
+const PreferencesManagerWithLernerModeOn = {
+  loadBoolean: () => true,
+};
 
 describe('Awards', () => {
   it('shows passed awards', () => {
@@ -30,11 +32,11 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {awards},
+      localVue: getLocalVue(),
+      propsData: {awards},
     });
 
-    wrapper.findAllComponents(Award).forEach((awardWrapper, i) => {
+    wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper, i) => {
       expect(awardWrapper.props('award')).to.be.deep.eq(awards[i]);
     });
   });
@@ -46,14 +48,14 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards,
       },
     });
 
     expect(
-      wrapper.findAllComponents(Award).every((awardWrapper) => awardWrapper.isVisible()),
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => awardWrapper.isVisible()),
     ).to.be.true;
   });
 
@@ -64,14 +66,14 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {awards},
+      localVue: getLocalVue(),
+      propsData: {awards},
     });
 
     await wrapper.find('[data-test=toggle-awards]').trigger('click');
 
     expect(
-      wrapper.findAllComponents(Award).every((awardWrapper) => !awardWrapper.isVisible()),
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => !awardWrapper.isVisible()),
     ).to.be.true;
   });
 
@@ -82,8 +84,8 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: awards,
         preferences: {
           show_award_details: false,
@@ -92,7 +94,7 @@ describe('Awards', () => {
     });
 
     expect(
-      wrapper.findAllComponents(Award).every((awardWrapper) => !awardWrapper.isVisible()),
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => !awardWrapper.isVisible()),
     ).to.be.true;
   });
 
@@ -101,8 +103,8 @@ describe('Awards', () => {
     const notFundedAward = createAward({id: 2, funded: false});
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [fundedAward, notFundedAward],
       },
     });
@@ -117,10 +119,12 @@ describe('Awards', () => {
 
   it('shows award spot prices if learner mode is on', () => {
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [],
-        preferences: learnerModeOn,
+      },
+      data() {
+        return {PreferencesManager: PreferencesManagerWithLernerModeOn};
       },
     });
 
@@ -129,69 +133,81 @@ describe('Awards', () => {
 
   it('shows correct spot prices if no awards are funded', () => {
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [
           createAward({id: 1, funded: false}),
         ],
-        preferences: learnerModeOn,
+      },
+      data() {
+        return {PreferencesManager: PreferencesManagerWithLernerModeOn};
       },
     });
 
     const prices = wrapper.findAll('[data-test=spot-price]')
-      .map((priceWrapper) => parseInt(priceWrapper.text()));
+      .wrappers.map((priceWrapper) => parseInt(priceWrapper.text()));
 
     expect(prices).to.be.deep.eq(AWARD_COSTS);
   });
 
   it('shows correct spot prices if one award is funded', () => {
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [
           createAward({id: 1, funded: true}),
           createAward({id: 2, funded: false}),
         ],
-        preferences: learnerModeOn,
+      },
+      data() {
+        return {PreferencesManager: PreferencesManagerWithLernerModeOn};
       },
     });
 
     const prices = wrapper.findAll('[data-test=spot-price]')
-      .map((priceWrapper) => parseInt(priceWrapper.text()));
+      .wrappers.map((priceWrapper) => parseInt(priceWrapper.text()));
 
     expect(prices).to.be.deep.eq([AWARD_COSTS[1], AWARD_COSTS[2]]);
   });
 
   it('shows correct spot prices if two awards are funded', () => {
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [
           createAward({id: 1, funded: true}),
           createAward({id: 2, funded: true}),
           createAward({id: 3, funded: false}),
         ],
-        preferences: learnerModeOn,
+      },
+      data() {
+        return {PreferencesManager: PreferencesManagerWithLernerModeOn};
       },
     });
 
     const prices = wrapper.findAll('[data-test=spot-price]')
-      .map((priceWrapper) => parseInt(priceWrapper.text()));
+      .wrappers.map((priceWrapper) => parseInt(priceWrapper.text()));
 
     expect(prices).to.be.deep.eq([AWARD_COSTS[2]]);
   });
 
   it('shows correct spot prices if three awards are funded', () => {
+    const PreferencesManager = {
+      loadBoolean: () => true,
+    };
+
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         awards: [
           createAward({id: 1, funded: true}),
           createAward({id: 2, funded: true}),
           createAward({id: 3, funded: true}),
           createAward({id: 4, funded: false}),
         ],
-        preferences: learnerModeOn,
+      },
+      data() {
+        return {PreferencesManager};
       },
     });
 
@@ -205,11 +221,11 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {awards, showScores: false},
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: false},
     });
 
-    wrapper.findAllComponents(Award).forEach((awardWrapper) => {
+    wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper) => {
       expect(awardWrapper.props('showScores')).to.be.false;
     });
   });
@@ -221,11 +237,11 @@ describe('Awards', () => {
     ];
 
     const wrapper = shallowMount(Awards, {
-      ...globalConfig,
-      props: {awards, showScores: true},
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: true},
     });
 
-    wrapper.findAllComponents(Award).forEach((awardWrapper) => {
+    wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper) => {
       expect(awardWrapper.props('showScores')).to.be.true;
     });
   });
@@ -236,8 +252,8 @@ describe('Awards', () => {
       createAward({id: 2, funded: false}),
     ];
     const wrapper = mount(Awards, {
-      ...globalConfig,
-      props: {awards, showScores: true},
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: true},
     });
 
     const award0Description = getAward(awards[0].name).description;

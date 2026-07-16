@@ -55,14 +55,14 @@ export const GRAPHENE_VALUE = 4;
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST = 6;
 export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
-export const VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST = 4;
+export const VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST = 4;
 export const TERRA_CIMMERIA_COLONY_COST = 5;
 
 // Moon
 export const MAXIMUM_MOON_RATE = 8;
 export const MAXIMUM_HABITAT_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
-export const MAXIMUM_LOGISTIC_RATE = 8;
+export const MAXIMUM_LOGISTICS_RATE = 8;
 
 // Pathfinders
 export const SEED_VALUE = 5;
@@ -79,8 +79,8 @@ export const BONUS_SECONDS_PER_ACTION = 5;
 export const ASIMOV_AWARD_BONUS = 2;
 
 export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua', 'fi'] as const;
-export type LANGUAGE = typeof ALL_LANGUAGES[number];
-export const LANGUAGES: Record<LANGUAGE, [string, string]> = {
+
+export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> = {
   en: ['English', 'English'],
   de: ['Deutsch', 'German'],
   fr: ['Français', 'French'],
@@ -102,6 +102,3 @@ export const LANGUAGES: Record<LANGUAGE, [string, string]> = {
 
 export const APP_NAME = 'Terraforming Mars';
 export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
-export const DEFAULT_WAITING_FOR_TIMEOUT = 1000;
-export const DEFAULT_LOG_LENGTH = 50;
-export const DEFAULT_URL_ROOT = 'http://localhost:8080';

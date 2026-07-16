@@ -5,16 +5,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {isMarsSpace} from '@/common/boards/spaces';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'GoToMap',
   props: {
     playerinput: {
       type: Object as () => SelectSpaceModel,
-      required: true,
     },
   },
   methods: {

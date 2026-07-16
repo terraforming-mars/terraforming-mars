@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {ArtificialPhotosynthesis} from '../../../src/server/cards/base/ArtificialPhotosynthesis';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {

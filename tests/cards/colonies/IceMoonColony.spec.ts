@@ -1,10 +1,9 @@
 import {IceMoonColony} from '../../../src/server/cards/colonies/IceMoonColony';
 import {testGame} from '../../TestGame';
-import {maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {assertPlaceOcean} from '../../assertions';
 import {assertBuildColony} from '../../colonies/coloniesAssertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('IceMoonColony', () => {
   it('play', () => {

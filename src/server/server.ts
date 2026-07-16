@@ -1,25 +1,24 @@
-import '@/server/init';
+require('dotenv').config();
 require('console-stamp')(
   console,
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
 
-import https from 'https';
-import http from 'http';
-import fs from 'fs';
-import * as v8 from 'node:v8';
-import raw_settings from '../genfiles/settings.json';
-import prometheus from 'prom-client';
+import * as https from 'https';
+import * as http from 'http';
+import * as fs from 'fs';
+import * as raw_settings from '../genfiles/settings.json';
+import * as prometheus from 'prom-client';
 import * as responses from './server/responses';
-import ansi from 'ansi-escape-sequences';
+import * as ansi from 'ansi-escape-sequences';
 
-import {Database} from '@/server/database/Database';
-import {runId, serverId} from '@/server/utils/server-ids';
-import {processRequest} from '@/server/server/requestProcessor';
-import {timeAsync} from '@/server/utils/timer';
-import {GameLoader} from '@/server/database/GameLoader';
-import {globalInitialize} from '@/server/globalInitialize';
-import {SessionManager} from '@/server/server/auth/SessionManager';
+import {Database} from './database/Database';
+import {runId, serverId} from './utils/server-ids';
+import {processRequest} from './server/requestProcessor';
+import {timeAsync} from './utils/timer';
+import {GameLoader} from './database/GameLoader';
+import {globalInitialize} from './globalInitialize';
+import {SessionManager} from './server/auth/SessionManager';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -44,25 +43,7 @@ const metrics = {
     help: 'Time to initialize the database',
     registers: [prometheus.register],
   }),
-  // The V8 old-space ceiling. Compare against heap usage to see OOM headroom.
-  // Not included in prom-client's default metrics.
-  heapSizeLimit: new prometheus.Gauge({
-    name: 'nodejs_heap_size_limit_bytes',
-    help: 'V8 heap size limit in bytes',
-    registers: [prometheus.register],
-    collect() {
-      this.set(v8.getHeapStatistics().heap_size_limit);
-    },
-  }),
-  // A non-zero (and growing) value is a strong memory-leak signal.
-  detachedContexts: new prometheus.Gauge({
-    name: 'nodejs_detached_contexts',
-    help: 'Number of detached V8 contexts (a memory-leak signal)',
-    registers: [prometheus.register],
-    collect() {
-      this.set(v8.getHeapStatistics().number_of_detached_contexts);
-    },
-  }),
+
 };
 
 function createServer(): http.Server | https.Server {

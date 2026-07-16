@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
-import {GameId} from '@/common/Types';
-import {AgendaStyle} from '@/common/turmoil/Types';
-import {BoardNameType, NewPlayerModel} from '@/common/game/NewGameConfig';
-import {Expansion} from '@/common/cards/GameModule';
+import { CardName } from "@/common/cards/CardName";
+import { ColonyName } from "@/common/colonies/ColonyName";
+import { RandomMAOptionType } from "@/common/ma/RandomMAOptionType";
+import { GameId } from "@/common/Types";
+import { AgendaStyle } from "@/common/turmoil/Types";
+import { BoardNameType, NewPlayerModel } from "@/common/game/NewGameConfig";
+import { Expansion } from "@/common/cards/GameModule";
 
 export type CreateGameModel = {
   /* A checkbox when selected selects all official expansions */
@@ -25,7 +25,7 @@ export type CreateGameModel = {
   escapeVelocityPenalty: number;
   escapeVelocityPeriod: number;
   escapeVelocityThreshold: number;
-  expansions: Record<Expansion, boolean>,
+  expansions: Record<Expansion, boolean>;
   fastModeOption: boolean;
   firstIndex: number;
   includedCards: Array<CardName>;
@@ -46,7 +46,6 @@ export type CreateGameModel = {
   seed: number;
   seededGame: boolean;
   showBannedCards: boolean;
-  showCeosList: boolean;
   showColoniesList: boolean;
   showCorporationList: boolean;
   showIncludedCards: boolean;
@@ -60,5 +59,6 @@ export type CreateGameModel = {
   startingCorporations: number;
   startingPreludes: number;
   twoCorpsVariant: boolean;
+  doubleDown: boolean;
   undoOption: boolean;
-}
+};

@@ -1,9 +1,7 @@
 {
-  "Sterling Vents": "Sterling-Lüftungsöffnungen",
-  "Decrease heat production 2 steps. Increase energy production 2 steps.": "Senke deine Wärmeproduktion um 2. Erhöhe deine Energieproduktion um 2.",
-  
   "Weather Balloons": "Wetterballons",
   "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "AKTION: Füge dieser Karte 1 Schweber hinzu oder entferne 1 Schweber von dieser Karte, um 1 M€ je Stadtplättchen auf dem Mars zu erhalten.",
+  "Draw 1 card.": "Ziehe 1 Karte.",
   
   "Static Harvesting": "Statische Ernte",
   "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Benötigt 3 oder weniger Ozeanplättchen. Erhöhe deine Energieproduktion um 1. Erhalte 1 M€ pro eigenes Gebäudesymbol.",
@@ -43,7 +41,8 @@
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "Entferne 1 Mikrobe von einer eigenen Karten, um 5 Pflanzen zu erhalten.",
 
   "Icy Impactors": "Eisige Impaktoren",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Bezahle 10 M€ (Titan darf benutzt werden), um dieser Karte 2 Asteroiden hinzuzufügen, oder entferne 1 Asteroiden von dieser Karte, um 1 Ozeanplättchen zu platzieren. Der STARTSPIELER entscheidet, wo es platziert wird.",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Bezahle 10 M€ (Titan darf benutzt werden), um dieser Karte 2 Asteroiden hinzuzufügen.",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Entferne 1 Asteroiden von dieser Karte, um 1 Ozeanplättchen zu platzieren. Der STARTSPIELER entscheidet, wo es platziert wird.",
 
   "Floyd Continuum": "Floyd-Kontinuum",
   "Action: Gain 3 M€ per completed terraforming parameter.": "AKTION: Erhalte 3 M€ pro abgeschlossenem Terraform-Parameter.",
@@ -62,6 +61,7 @@
 
   "Red Ships": "Rote Schiffe",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "AKTION: Erhalte 1 M€ je Stadt- und Spezialplttchen, das an Ozeanplättchen grenzt, unabhängig des Besitzers.",
+  "Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",
 
   "Neptunian Power Consultants": "Neptun-Energie-Berater",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "EFFEKT: Wenn ein Ozeanplättchen platziert wird, darfst du 5 M€ zahlen (Stahl darf genutzt werden), um deine Energieproduktion um 1 zu erhöhen und 1 Wasserkraft auf diese Karte zu legen.",
@@ -76,6 +76,7 @@
 
   "Homeostasis Bureau": "Homöostase-Agentur",
   "Effect: When you raise the temperature, gain 3 M€.": "EFFEKT: Wenn du die Temperatur erhöhst, erhalte 3 M€.",
+  "Increase your heat production 2 steps.": "Erhöhe deine Wärme-Produktion um 2.",
 
   "Hermetic Order of Mars": "Mars' Hermetische Ordnung",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Der Sauerstoffgehalt muss 4% oder weniger betragen. Erhöhe deine M€-Produktion um 2. Erhalte 1 MC je leeres Gebiet, das an deine Plättchen angrenzt.",
@@ -111,7 +112,8 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
 
   "Comet Aiming": "Kometenzielen",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen, oder entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen.",
+  "Action: Remove 1 asteroid here to place an ocean.": "AKTION: Entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",
 
   "Cutting Edge Technology": "Neuste Technologie",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "EFFEKT: Wenn du eine Karte mit einer Bedingung spielst, zahle 2 M€ weniger.",
@@ -120,13 +122,17 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Erfordert, dass ein Spieler in dieser Generation eine Pflanze EINES ANDEREN SPIELERS entfernt hat. Erhalte 1 Titan oder 2 Stahl.",
 
   "Directed Impactors": "Gerichtete Impaktoren",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "AKTION: Zahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan kann zur Zahlung verwendet werden), oder entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "AKTION: Zahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan kann zur Zahlung verwendet werden).",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "AKTION: Entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
 
   "Field-Capped City": "Schutzschild-Stadt",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Erhöhe deine M€-Produktion um 2, erhöhe deine Energie-Produktion um 1, erhalte 3 Pflanzen und platziere ein Stadtplättchen.",
 
+  "Great Dam": "Staudamm",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Benötigt 4 oder mehr Ozeanplättchen im Spiel. Erhöhe deine Energie-Produktion um 2.",
 
   "Magnetic Shield": "Magnetschild",
+  "3 Power": "3 Energie",
   "Requires 3 power tags. Raise your TR 4 steps.": "Benötigt 3 eigene Energiesymbole. Erhöhe deinen TW um 4.",
 
   "Meltworks": "Schmelzwerk",
@@ -137,10 +143,12 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Erhalte 3 Pflanzen. Erhöhe die Temperatur um 2 °C und platziere ein Ozeanplättchen.",
 
   "Diversity Support": "Unterstützung der Vielfalt",
+  "9 Resource types": "9 Ressource-Typen",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "Erfordert, dass du 9 verschiedene Typen von Ressourcen besitzt. Erhalte 1 TW.)",
 
   "Topsoil Contract": "Topsoil-Vertrag",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "EFFEKT: Wenn IRGENDEINE deiner Karten 1 Mikrobe erhält, erhalte zusätzlich 1 M€.",
+  "Gain 3 plants.": "Erhalte 3 Pflanzen.",
 
   "Imported Nutrients": "Importierte Nährstoffe",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Erhalte 4 Pflanzen und füge einer ANDEREN KARTE 4 Mikroben hinzu.",
@@ -191,6 +199,7 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Erhöhe deine M€-Produktion um 1 für jedes unterschiedliche Symbol, das du besitzt (inklusive diesem).",
 
   "Penguins": "Pinguine",
+  "Action: Add 1 animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
   "Requires 8 oceans.": "Erfordert 8 Ozeane.",
 
   "Snow Algae": "Schnee-Algen",
@@ -206,15 +215,19 @@
   "Hi-Tech Lab": "High-Tech-Labor",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "AKTION: Zahle einen beliebigen Betrag an Energie, um dieselbe Anzahl an Karten zu ziehen. NEHME 1 KARTE IN DEINE HAND AUF UND WIRF DIE RESTLICHEN KARTEN AB.",
 
+  "Magnetic Field Generators": "Magnetfeld-Generatoren",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Senke deine Energie-Produktion um 4. Erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen Terraformwert um 3. Platziere dieses Plättchen.",
 
   "Mercurian Alloys": "Merkur-Legierungen",
   "Effect: Your titanium resources are worth 1 M€ extra.": "EFFEKT: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
 
   "Energy Market": "Energiemarkt",
+  "Action: Spend 2X M€ to gain X energy.": "AKTION: Zahle 2X M€, um X Energie zu erhalten.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "AKTION: Senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
 
   "Asteroid Rights": "Asteroidenrechte",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Bezahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroiden hinzuzufügen, oder verbrauche hier 1 Asteroiden, um deine M€-Produktion um 1 zu erhöhen oder 2 Titan zu erhalten.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "AKTION: Bezahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroiden hinzuzufügen.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Verbrauche hier 1 Asteroiden, um deine M€-Produktion um 1 zu erhöhen oder 2 Titan zu erhalten.",
   "Add 2 asteroids to this card.": "Füge dieser Karte 2 Asteroiden hinzu.",
 
   "Stanford Torus": "Stanford-Torus",

@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {PriceWars} from '../../../src/server/cards/underworld/PriceWars';
 import {testGame} from '../../TestGame';
-import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/cardSerialization';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('PriceWars', () => {
   it('canPlay', () => {

@@ -49,20 +49,9 @@ export class CuriosityII extends CorporationCard implements ICorporationCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE, SpaceBonus.ENERGY];
 
-    // onTilePlaced gets called with Mars Nomads, should be ignored here.
-    if (space.tile === undefined) {
-      return;
-    }
-
-    if (cardOwner.id !== activePlayer.id) {
-      return;
-    }
-    if (cardOwner.game.phase === Phase.SOLAR) {
-      return;
-    }
-    if (space.spaceType === SpaceType.COLONY) {
-      return;
-    }
+    if (cardOwner.id !== activePlayer.id) return;
+    if (cardOwner.game.phase === Phase.SOLAR) return;
+    if (space.spaceType === SpaceType.COLONY) return;
 
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
       cardOwner.defer(() => this.corpAction(cardOwner));
@@ -70,9 +59,7 @@ export class CuriosityII extends CorporationCard implements ICorporationCard {
   }
 
   private corpAction(player: IPlayer) {
-    if (!player.canAfford(2)) {
-      return undefined;
-    }
+    if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
       new SelectOption('Pay 2 M€ to draw a card').andThen(() => {

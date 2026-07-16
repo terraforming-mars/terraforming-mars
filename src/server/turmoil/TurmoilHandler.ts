@@ -7,7 +7,7 @@ import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3} from './parties/Greens';
-import {KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
+import {KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
@@ -25,11 +25,6 @@ export class TurmoilHandler {
       return undefined;
     }
     const policy: IPolicy = turmoil.rulingPolicy();
-    // kp03 is rendered in the Convert Heat slot by Player.getActions(); skip
-    // here to avoid double-rendering.
-    if (policy.id === KELVINISTS_POLICY_3.id) {
-      return undefined;
-    }
     if (policy.canAct?.(player)) {
       return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
     }
@@ -89,9 +84,7 @@ export class TurmoilHandler {
   }
 
   public static computeTerraformRatingBump(player: IPlayer, tr: TRSource = {}): number {
-    if (!PartyHooks.reds01PolicyInEffect(player)) {
-      return 0;
-    }
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) return 0;
 
     // Making a local copy since it's going to get mutated.
     tr = {...tr};
@@ -145,9 +138,9 @@ export class TurmoilHandler {
         total = total + Math.min(availableSteps, tr.moonMining);
       }
 
-      if (tr.moonLogistic !== undefined) {
-        const availableSteps = constants.MAXIMUM_LOGISTIC_RATE - moonData.logisticRate;
-        total = total + Math.min(availableSteps, tr.moonLogistic);
+      if (tr.moonLogistics !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistics);
       }
     });
 

@@ -19,7 +19,7 @@
   "Place a colony. Gain 3 energy.": "Placez une colonie. Gagnez 3 énergies.",
   "Floating Trade Hub": "Hub commercial flottant",
   "Action: Add 2 floaters to ANY card.": "Action : Ajoutez 2 flotteurs sur N'IMPORTE QUELLE CARTE.",
-  "Action: Add 2 floaters to ANY card, or remove any number of floaters here to gain that many of one standard resource.": "Action : Ajoutez 2 flotteurs sur N'IMPORTE QUELLE CARTE ou dépensez n'importe quel nombre de flotteurs de cette carte pour gagner autant d'une ressource standard.",
+  "Action: Remove any number of floaters here to gain that many of one standard resource.": "Action : Dépensez n'importe quel nombre de flotteurs de cette carte pour gagner autant d'une ressource standard.",
   "Focused Organization": "Priorités redéfinies",
   "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "Action : Défausser 1 carte et dépenser 1 ressource standard pour piocher 1 carte et gagner 1 ressource standard.",
   "Draw 1 card and gain 1 standard resource.": "Piochez 1 carte et gagnez 1 ressource standard.",
@@ -158,5 +158,7 @@
   "Acquired Space Agency": "Rachat d'une Agence Spatiale",
   "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Gagnez 6 titanes. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Espace : ajoutez ces cartes à votre main et défaussez les autres.",
   "Add resource to card GHG Producing Bacteria": "Ajouter une ressource à la carte Bactéries productrices de GES",
-  "Add resource to card Fish": "Ajouter une ressource à la carte Poisson"
+  "Add resource to card Fish": "Ajouter une ressource à la carte Poisson",
+  "Add resource": "",
+  "Gain plant": "Gagnez plante"
 }

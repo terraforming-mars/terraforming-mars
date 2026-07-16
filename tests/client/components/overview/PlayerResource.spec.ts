@@ -1,5 +1,5 @@
 import {shallowMount} from '@vue/test-utils';
-import {globalConfig} from '../getLocalVue';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import PlayerResource from '@/client/components/overview/PlayerResource.vue';
 import {Resource} from '@/common/Resource';
@@ -19,8 +19,8 @@ describe('PlayerResource', () => {
 
   it('Does not show resource value when it is zero', () => {
     const wrapper = shallowMount(PlayerResource, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         type: Resource.HEAT,
         count: 10,
         production: 1,
@@ -31,8 +31,8 @@ describe('PlayerResource', () => {
 
   it('Show resource value for heat', () => {
     const wrapper = shallowMount(PlayerResource, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         type: Resource.HEAT,
         count: 10,
         production: 1,

@@ -17,8 +17,8 @@
                 <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
                     <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
                 </div>
-                <StackedCards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"/>
-                <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"/>
+                <stacked-cards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"></stacked-cards>
+                <stacked-cards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"></stacked-cards>
             </div>
         </div>
         <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
@@ -35,7 +35,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import StackedCards from '@/client/components/StackedCards.vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -46,21 +46,19 @@ import {CardType} from '@/common/cards/CardType';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'OtherPlayer',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
-      required: true,
     },
     playerIndex: {
       type: Number,
-      required: true,
     },
   },
   components: {
     AppButton,
-    StackedCards,
+    'stacked-cards': StackedCards,
     Card,
   },
   methods: {

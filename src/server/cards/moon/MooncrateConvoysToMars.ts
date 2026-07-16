@@ -17,7 +17,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
       requirements: {party: PartyName.MARS},
 
       behavior: {
-        moon: {logisticRate: 1},
+        moon: {logisticsRate: 1},
       },
 
       metadata: {
@@ -25,7 +25,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
           'Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.',
         cardNumber: 'M60',
         renderData: CardRenderer.builder((b) => {
-          b.moonLogisticRate().br;
+          b.moonLogisticsRate().br;
           b.text('X').steel(1, {all}).colon().text('X').megacredits(3);
         }),
       },

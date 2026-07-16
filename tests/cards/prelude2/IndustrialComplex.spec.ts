@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {IndustrialComplex} from '../../../src/server/cards/prelude2/IndustrialComplex';
-import {runAllActions, testGame} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 import {newCorporationCard} from '../../../src/server/createCard';
 import {Units} from '../../../src/common/Units';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {cast} from '../../../src/common/utils/utils';
 
 const ONE_EACH = Units.of({megacredits: 1, steel: 1, titanium: 1, plants: 1, energy: 1, heat: 1});
 
@@ -109,7 +108,7 @@ describe('IndustrialComplex', () => {
 
           // Payment MC needs to be specified as "megaCredits"
           const adjusted = {...run.payment} as Partial<Payment>;
-          adjusted.megacredits = run.payment.megacredits;
+          adjusted.megaCredits = run.payment.megacredits;
 
           selectPayment.cb(Payment.of(adjusted));
           runAllActions(game);

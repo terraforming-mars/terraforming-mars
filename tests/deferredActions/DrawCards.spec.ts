@@ -6,9 +6,8 @@ import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ProjectDeck} from '../../src/server/cards/Deck';
-import {formatMessage, runAllActions} from '../TestingUtils';
+import {cast, formatMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
-import {cast} from '@/common/utils/utils';
 
 describe('DrawCards', () => {
   let game: IGame;
@@ -94,7 +93,7 @@ describe('DrawCards', () => {
 
     // Since the gameLog has two entries, these two filters account for both of them.
     const privateMessage = game.gameLog.filter((entry) => entry.playerId === player.id)[0];
-    expect(formatMessage(privateMessage)).matches(/You drew .*,.*/);
+    expect(formatMessage(privateMessage)).matches(/You drew .* and .*/);
 
     const publicMessage = game.gameLog.filter((entry) => entry.playerId === undefined)[0];
     expect(formatMessage(publicMessage)).eq('blue drew 2 card(s)');
@@ -107,9 +106,9 @@ describe('DrawCards', () => {
     expect(game.gameLog).has.length(2);
 
     const discardMessage = game.gameLog[0];
-    expect(formatMessage(discardMessage)).matches(/Discarded .* cards.*/);
+    expect(formatMessage(discardMessage)).matches(/.* card\(s\) were discarded/);
 
     const publicMessage = game.gameLog[1];
-    expect(formatMessage(publicMessage)).matches(/blue drew .*,.*/);
+    expect(formatMessage(publicMessage)).matches(/blue drew .* and .*/);
   });
 });

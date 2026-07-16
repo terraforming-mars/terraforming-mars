@@ -44,7 +44,7 @@ export class VenusShuttles extends Card implements IActionCard {
 
   public canAct(player: IPlayer) {
     if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
-      this.addWarning('maxvenus');
+      this.warnings.add('maxvenus');
     }
     return player.canAfford({cost: this.actionCost(player), tr: {venus: 1}});
   }

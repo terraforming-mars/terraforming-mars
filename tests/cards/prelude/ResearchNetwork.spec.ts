@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Units} from '../../../src/common/Units';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('ResearchNetwork', () => {
   it('Should play', () => {

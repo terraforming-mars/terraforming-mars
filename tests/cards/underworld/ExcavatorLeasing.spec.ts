@@ -3,13 +3,11 @@ import {expect} from 'chai';
 import {ExcavatorLeasing} from '../../../src/server/cards/underworld/ExcavatorLeasing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ExcavatorLeasing', () => {
   let game: IGame;
@@ -35,7 +33,7 @@ describe('ExcavatorLeasing', () => {
     player.playedCards.push(card);
     player.megaCredits = 6;
 
-    standardProject.payAndExecute(player, Payment.of({megacredits: standardProject.getAdjustedCost(player)}));
+    standardProject.action(player);
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
@@ -51,7 +49,7 @@ describe('ExcavatorLeasing', () => {
     player.playedCards.push(card);
     player2.megaCredits = 6;
 
-    standardProject.payAndExecute(player2, Payment.of({megacredits: standardProject.getAdjustedCost(player2)}));
+    standardProject.action(player2);
     runAllActions(game);
 
     const selectSpace = cast(player2.popWaitingFor(), SelectSpace);

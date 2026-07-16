@@ -4,8 +4,7 @@ import {CommunityServices} from '../../../src/server/cards/colonies/CommunitySer
 import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSponsor';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
-import {testGame} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('CommunityServices', () => {
   it('Should play', () => {

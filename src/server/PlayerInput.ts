@@ -10,9 +10,6 @@ export interface PlayerInput {
     buttonLabel: string;
     title: string | Message;
     warning?: string | Message;
-
-    // Contextual annotation identifying this PlayerInput.
-    annotation: string | undefined;
     /**
      * When false, this input should not be the default selected PlayerInput.
      * When unset or true, this input may be the default selected PlayerInput.
@@ -20,11 +17,6 @@ export interface PlayerInput {
      * Used only when this option is a child option of an OrOptions.
      */
     eligibleForDefault?: boolean;
-    /**
-     * When true, this indicates that the input is optional and the user should
-     * continue to poll for updates.
-     */
-  optional?: boolean;
 
     cb(...item: any): PlayerInput | undefined;
 
@@ -50,8 +42,6 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public warning?: string | Message;
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
-  public annotation: string | undefined;
-  public optional?: boolean;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
@@ -87,11 +77,6 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
 
   public setWarning(warning: string | Message) : this {
     this.warning = warning;
-    return this;
-  }
-
-  annotate(annotation: string): this {
-    this.annotation = annotation;
     return this;
   }
 }

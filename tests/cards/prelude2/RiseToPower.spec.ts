@@ -3,11 +3,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IGame} from '../../../src/server/IGame';
-import {runAllActions, testGame} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {RiseToPower} from '../../../src/server/cards/prelude2/RiseToPower';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('RiseToPower', () => {
   let card: RiseToPower;

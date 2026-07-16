@@ -3,10 +3,9 @@ import {expect} from 'chai';
 import {TunnelBoringMachine} from '../../../src/server/cards/underworld/TunnelBoringMachine';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
-import {cast} from '@/common/utils/utils';
 
 describe('TunnelBoringMachine', () => {
   let game: IGame;

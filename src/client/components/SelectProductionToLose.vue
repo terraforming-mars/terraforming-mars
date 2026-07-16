@@ -7,39 +7,39 @@
 
     <div class="payments_type input-group" v-if="canDeductMegaCredits()">
       <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
-      <button class="btn btn-primary" @click="delta('megacredits', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.megacredits" >
-      <button class="btn btn-primary" @click="delta('megacredits', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('megacredits', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.megacredits" />
+      <button class="btn btn-primary" v-on:click="delta('megacredits', 1)"><i class="icon icon-plus" /></button>
     </div>
     <div class="payments_type input-group" v-if="canDeductSteel()">
       <div class="production-box"><div class="production steel"></div></div>
-      <button class="btn btn-primary" @click="delta('steel', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.steel" >
-      <button class="btn btn-primary" @click="delta('steel', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('steel', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.steel" />
+      <button class="btn btn-primary" v-on:click="delta('steel', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductTitanium()" >
       <div class="production-box"><div class="production titanium"></div></div>
-      <button class="btn btn-primary" @click="delta('titanium', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.titanium" >
-      <button class="btn btn-primary" @click="delta('titanium', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('titanium', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.titanium" />
+      <button class="btn btn-primary" v-on:click="delta('titanium', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductPlants()" >
       <div class="production-box"><div class="production plant"></div></div>
-      <button class="btn btn-primary" @click="delta('plants', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.plants" >
-      <button class="btn btn-primary" @click="delta('plants', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('plants', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.plants" />
+      <button class="btn btn-primary" v-on:click="delta('plants', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductEnergy()" >
       <div class="production-box"><div class="production energy"></div></div>
-      <button class="btn btn-primary" @click="delta('energy', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.energy" >
-      <button class="btn btn-primary" @click="delta('energy', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('energy', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.energy" />
+      <button class="btn btn-primary" v-on:click="delta('energy', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductHeat()" >
       <div class="production-box"><div class="production heat"></div></div>
-      <button class="btn btn-primary" @click="delta('heat', -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units.heat" >
-      <button class="btn btn-primary" @click="delta('heat', 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" v-on:click="delta('heat', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="units.heat" />
+      <button class="btn btn-primary" v-on:click="delta('heat', 1)"><i class="icon icon-plus" /></button>
     </div >
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -47,15 +47,14 @@
     </div>
 
     <div v-if="showsave === true" class="nofloat">
-        <button class="btn btn-primary btn-submit" @click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
+        <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
     </div>
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
@@ -66,20 +65,14 @@ type DataModel = {
   warning: string | undefined;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SelectProductionToLose',
   props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
     playerinput: {
       type: Object as () => SelectProductionToLoseModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,

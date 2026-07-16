@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ResearchOutpost', () => {
   let card: ResearchOutpost;

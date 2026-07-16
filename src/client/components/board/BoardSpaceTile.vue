@@ -1,17 +1,14 @@
 <template>
-  <div :class="klass" :title="$t(description)" data-test="tile">
-    <AdjacencyBonus v-if="aresExtension && tileType !== undefined" :tileType="tileType" />
-  </div>
+  <div :class="klass" :title="$t(description)" data-test="tile"/>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
-import AdjacencyBonus from '@/client/components/AdjacencyBonus.vue';
 
 const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.OCEAN]: 'ocean',
@@ -58,7 +55,6 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
   [TileType.NEW_HOLLAND]: 'new-holland',
-  [TileType.NEURAL_INSTANCE]: 'neural-instance',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -101,15 +97,13 @@ const descriptions: Record<TileType, string> = {
   [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
 
   [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
-  [TileType.NEURAL_INSTANCE]: 'Neural Instance: MarsBot gains VP for adjacent non-human spaces',
 };
 
-export default defineComponent({
-  name: 'BoardSpaceTile',
+export default Vue.extend({
+  name: 'board-space-tile',
   props: {
     space: {
       type: Object as () => SpaceModel,
-      required: true,
     },
     aresExtension: {
       type: Boolean,
@@ -122,9 +116,6 @@ export default defineComponent({
   data() {
     return {};
   },
-  components: {
-    AdjacencyBonus,
-  },
   computed: {
     tileType(): TileType | undefined {
       return this.space.tileType;
@@ -136,12 +127,8 @@ export default defineComponent({
       return this.space.highlight;
     },
     description(): string {
-      if (this.tileType === undefined) {
-        return '';
-      }
-      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) {
-        return 'City in space.';
-      }
+      if (this.tileType === undefined) return '';
+      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
       return descriptions[this.tileType];
     },
     klass(): string {

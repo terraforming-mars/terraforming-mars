@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {OrbitalConstructionYard} from '../../../src/server/cards/prelude/OrbitalConstructionYard';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('OrbitalConstructionYard', () => {
   it('Should play', () => {

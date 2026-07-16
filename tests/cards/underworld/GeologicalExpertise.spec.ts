@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {GeologicalExpertise} from '../../../src/server/cards/underworld/GeologicalExpertise';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('GeologicalExpertise', () => {
   it('Should play', () => {

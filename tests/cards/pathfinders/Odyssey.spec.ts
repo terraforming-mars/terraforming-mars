@@ -3,7 +3,7 @@ import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -27,7 +27,6 @@ import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
 import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
 import {Ecologist} from '../../../src/server/milestones/Ecologist';
-import {cast} from '../../../src/common/utils/utils';
 
 
 describe('Odyssey', () => {
@@ -104,7 +103,7 @@ describe('Odyssey', () => {
     expect(player.playedCards.asArray()).has.members([odyssey, importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megacredits: importOfAdvancedGHG.cost});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -124,7 +123,7 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megacredits: 9});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);

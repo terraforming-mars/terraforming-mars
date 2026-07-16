@@ -6,9 +6,8 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ParadigmBreakdown} from '../../src/server/turmoil/globalEvents/ParadigmBreakdown';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
-import {cast} from '@/common/utils/utils';
 
 describe('ParadigmBreakdown', () => {
   it('resolve play', () => {

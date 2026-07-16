@@ -1,6 +1,6 @@
 import {ColonyName} from './ColonyName';
 
-export const COLONY_DESCRIPTIONS = {
+export const COLONY_DESCRIPTIONS: Record<ColonyName, string> = {
   [ColonyName.CALLISTO]: 'Energy',
   [ColonyName.CERES]: 'Steel',
   [ColonyName.ENCELADUS]: 'Microbes',
@@ -22,6 +22,4 @@ export const COLONY_DESCRIPTIONS = {
   [ColonyName.LEAVITT_II]: 'Science & Clone Tags',
   [ColonyName.IAPETUS_II]: 'Data',
   [ColonyName.DEIMOS]: 'Hazards',
-  [ColonyName.TERRA]: 'World Government',
-  [ColonyName.KUIPER]: 'Asteroids',
-} satisfies Record<ColonyName, string>;
+};

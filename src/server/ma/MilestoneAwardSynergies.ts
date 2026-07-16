@@ -575,7 +575,7 @@ class SynergyMap {
 
 export const synergies: SynergyMap = new SynergyMap();
 
-const VBN = [...milestoneManifest.boards[BoardName.VASTITAS_BOREALIS_NOVA], ...awardManifest.boards[BoardName.VASTITAS_BOREALIS_NOVA]];
+const VBN = [...milestoneManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS], ...awardManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS]];
 milestoneNames.forEach((name) => {
   for (const entry of VBN) {
     synergies.set(name, entry, 5);

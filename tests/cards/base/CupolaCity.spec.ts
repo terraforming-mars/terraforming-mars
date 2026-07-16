@@ -3,10 +3,9 @@ import {CupolaCity} from '../../../src/server/cards/base/CupolaCity';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CupolaCity', () => {
   let card: CupolaCity;

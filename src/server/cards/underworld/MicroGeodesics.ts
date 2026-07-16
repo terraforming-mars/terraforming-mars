@@ -43,7 +43,7 @@ export class MicroGeodesics extends Card implements IProjectCard, IActionCard {
       return false;
     }
     if (player.underworldData.tokens.every((t) => t.shelter || t.active)) {
-      this.addWarning('underworldtokendiscard');
+      this.warnings.add('underworldtokendiscard');
     }
 
     if (player.getResourceCount(CardResource.MICROBE) <= 0) {

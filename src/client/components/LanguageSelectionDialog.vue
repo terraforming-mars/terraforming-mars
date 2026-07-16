@@ -1,5 +1,5 @@
 <template>
-  <div class="preferences_panel preferences_panel--language-switcher">
+  <div class="preferences_panel">
     <div class="preferences_panel_item form-group">
       <div class="preferences_panel_langs">
         <label class="form-radio" v-for="lang in ALL_LANGUAGES" :key="lang">
@@ -8,10 +8,8 @@
             :class="`language-icon language-icon-for-switcher language-icon--${lang}`"
             :title="LANGUAGES[lang][1]"
             @click="switchLanguageTo(lang)"
-          ></div>
-          <span class="language-text" @click="switchLanguageTo(lang)">
-            &nbsp;({{ lang }}) {{ LANGUAGES[lang][0] }}
-          </span>
+          />
+          <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang] }}</span>
         </label>
       </div>
     </div>
@@ -19,17 +17,16 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'LanguageSelectionDialog',
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
-      required: true,
     },
   },
   methods: {

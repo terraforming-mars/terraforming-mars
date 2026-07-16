@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Acidizing} from '../../../src/server/cards/underworld/Acidizing';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Acidizing', () => {
   it('Should play', () => {

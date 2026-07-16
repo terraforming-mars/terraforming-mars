@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {JovianEnvoys} from '../../../src/server/cards/prelude2/JovianEnvoys';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, testGame} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('JovianEnvoys', () => {
   let card: JovianEnvoys;

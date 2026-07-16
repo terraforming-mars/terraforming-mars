@@ -31,8 +31,8 @@ import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
 import {TileType} from '../../../src/common/TileType';
 import {ErodeSpacesDeferred} from '../underworld/ErodeSpacesDeferred';
 import {CardName} from '../../common/cards/CardName';
-import {GlobalParameter} from '@/common/GlobalParameter';
 
+export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
   // Players can't build colonies on Miranda until someone has played an Animal card.
   // isActive is the gateway for that action and any other card with that type of constraint
@@ -105,7 +105,9 @@ export abstract class Colony implements IColony {
     }
 
     if (this.name === ColonyName.LEAVITT) {
-      player.triggerOnNonCardTagAdded(Tag.SCIENCE);
+      for (const card of player.tableau) {
+        card.onNonCardTagAdded?.(player, Tag.SCIENCE);
+      }
     }
   }
 
@@ -240,16 +242,12 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.GAIN_PRODUCTION:
-      if (resource === undefined) {
-        throw new Error('Resource cannot be undefined');
-      }
+      if (resource === undefined) throw new Error('Resource cannot be undefined');
       player.production.add(resource, quantity, {log: true});
       break;
 
     case ColonyBenefit.GAIN_RESOURCES:
-      if (resource === undefined) {
-        throw new Error('Resource cannot be undefined');
-      }
+      if (resource === undefined) throw new Error('Resource cannot be undefined');
       player.stock.add(resource, quantity, {log: true});
       break;
 
@@ -334,16 +332,12 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.OPPONENT_DISCARD:
-      if (game.isSoloMode()) {
-        break;
-      }
+      if (game.isSoloMode()) break;
       action = new SimpleDeferredAction(
         player,
         () => {
           const playersWithCards = game.players.filter((p) => p.cardsInHand.length > 0);
-          if (playersWithCards.length === 0) {
-            return undefined;
-          }
+          if (playersWithCards.length === 0) return undefined;
           return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
             .andThen((selectedPlayer) => {
               game.defer(new DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
@@ -357,42 +351,8 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.STEAL_RESOURCES:
-      if (resource === undefined) {
-        throw new Error('Resource cannot be undefined');
-      }
+      if (resource === undefined) throw new Error('Resource cannot be undefined');
       action = new StealResources(player, resource, quantity);
-      break;
-
-    case ColonyBenefit.DRAW_EARTH_CARD:
-      player.drawCard(quantity, {tag: Tag.EARTH});
-      break;
-
-    case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:
-      const globalParameters = [GlobalParameter.TEMPERATURE, GlobalParameter.OXYGEN, GlobalParameter.OCEANS];
-      const annotation = globalParameters[quantity];
-      const wgt = game.worldGovernmentTerraformingInput(player);
-      const option = wgt.options.find((option) => option.annotation === annotation);
-      if (option !== undefined) {
-        game.defer(new SimpleDeferredAction(player, () => {
-          game.temporarySolarPhase(player, () => {
-            // Placing an ocean requires the player to select a space, so it is
-            // deferred as a player input. Temperature and oxygen apply directly.
-            if (annotation === GlobalParameter.OCEANS) {
-              player.defer(option);
-            } else {
-              option.cb();
-            }
-          });
-        }));
-      }
-      break;
-
-    case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
-      const tagCount = sum(game.players.map((p) => p.tags.count(Tag.EARTH, p.id === player.id ? 'default' : 'raw')));
-      const mc = Math.floor(tagCount / 3);
-      if (mc > 0) {
-        player.stock.add(Resource.MEGACREDITS, mc, {log: true});
-      }
       break;
 
     default:

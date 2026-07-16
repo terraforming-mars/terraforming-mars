@@ -1,41 +1,50 @@
-import {CardModel} from '../../common/models/CardModel';
-import {Color} from '../../common/Color';
-import {IGame} from '../IGame';
-import {GameOptions} from '../game/GameOptions';
-import {SimpleGameModel} from '../../common/models/SimpleGameModel';
-import {GameOptionsModel} from '../../common/models/GameOptionsModel';
-import {Board} from '../boards/Board';
-import {Space} from '../boards/Space';
-import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from '../../common/models/PlayerInputModel';
-import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
-import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
-import {TileType} from '../../common/TileType';
-import {Phase} from '../../common/Phase';
-import {Resource} from '../../common/Resource';
-import {ClaimedMilestoneModel, MilestoneScore} from '../../common/models/ClaimedMilestoneModel';
-import {FundedAwardModel, AwardScore} from '../../common/models/FundedAwardModel';
-import {getTurmoilModel} from '../models/TurmoilModel';
-import {SpectatorModel} from '../../common/models/SpectatorModel';
-import {GameModel} from '../../common/models/GameModel';
-import {Turmoil} from '../turmoil/Turmoil';
-import {createPathfindersModel} from './PathfindersModel';
-import {MoonModel} from '../../common/models/MoonModel';
-import {CardName} from '../../common/cards/CardName';
-import {AwardScorer} from '../awards/AwardScorer';
-import {SpaceId} from '../../common/Types';
-import {cardsToModel, coloniesToModel} from './ModelUtils';
-import {runId} from '../utils/server-ids';
-import {toName} from '../../common/utils/utils';
-import {MAX_AWARDS, MAX_MILESTONES} from '../../common/constants';
+import { CardModel } from "../../common/models/CardModel";
+import { Color } from "../../common/Color";
+import { IGame } from "../IGame";
+import { GameOptions } from "../game/GameOptions";
+import { SimpleGameModel } from "../../common/models/SimpleGameModel";
+import { GameOptionsModel } from "../../common/models/GameOptionsModel";
+import { Board } from "../boards/Board";
+import { Space } from "../boards/Space";
+import { IPlayer } from "../IPlayer";
+import { PlayerInput } from "../PlayerInput";
+import { PlayerInputModel } from "../../common/models/PlayerInputModel";
+import {
+  PlayerViewModel,
+  Protection,
+  PublicPlayerModel,
+} from "../../common/models/PlayerModel";
+import { SpaceHighlight, SpaceModel } from "../../common/models/SpaceModel";
+import { TileType } from "../../common/TileType";
+import { Phase } from "../../common/Phase";
+import { Resource } from "../../common/Resource";
+import {
+  ClaimedMilestoneModel,
+  MilestoneScore,
+} from "../../common/models/ClaimedMilestoneModel";
+import {
+  FundedAwardModel,
+  AwardScore,
+} from "../../common/models/FundedAwardModel";
+import { getTurmoilModel } from "../models/TurmoilModel";
+import { SpectatorModel } from "../../common/models/SpectatorModel";
+import { GameModel } from "../../common/models/GameModel";
+import { Turmoil } from "../turmoil/Turmoil";
+import { createPathfindersModel } from "./PathfindersModel";
+import { MoonModel } from "../../common/models/MoonModel";
+import { CardName } from "../../common/cards/CardName";
+import { AwardScorer } from "../awards/AwardScorer";
+import { SpaceId } from "../../common/Types";
+import { cardsToModel, coloniesToModel } from "./ModelUtils";
+import { runId } from "../utils/server-ids";
+import { toName } from "../../common/utils/utils";
+import { MAX_AWARDS, MAX_MILESTONES } from "../../common/constants";
 
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
     return {
       activePlayer: game.activePlayer.color,
       id: game.id,
-      name: game.name,
       phase: game.phase,
       players: game.playersInGenerationOrder.map((player) => ({
         color: player.color,
@@ -69,13 +78,17 @@ export class Server {
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: this.getMoonModel(game),
-      name: game.name,
       oceans: game.board.getOceanSpaces().length,
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals, game.nomadSpace),
+      spaces: this.getSpaces(
+        game.board,
+        game.gagarinBase,
+        game.stJosephCathedrals,
+        game.nomadSpace,
+      ),
       spectatorId: game.spectatorId,
       step: game.lastSaveId,
       temperature: game.getTemperature(),
@@ -89,23 +102,31 @@ export class Server {
   public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map((p) => this.getPlayer(p, p.color === player.color));
+    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map(
+      (p) => this.getPlayer(p, p.color === player.color),
+    );
 
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
     const rv: PlayerViewModel = {
-      cardsInHand: cardsToModel(player, player.cardsInHand, {showCalculatedCost: true}),
+      cardsInHand: cardsToModel(player, player.cardsInHand, {
+        showCalculatedCost: true,
+      }),
       ceoCardsInHand: cardsToModel(player, Array.from(player.ceoCardsInHand)),
       dealtCorporationCards: cardsToModel(player, player.dealtCorporationCards),
       dealtPreludeCards: cardsToModel(player, player.dealtPreludeCards),
       dealtCeoCards: cardsToModel(player, player.dealtCeoCards),
       dealtProjectCards: cardsToModel(player, player.dealtProjectCards),
-      draftedCards: cardsToModel(player, player.draftedCards, {showCalculatedCost: true}),
+      draftedCards: cardsToModel(player, player.draftedCards, {
+        showCalculatedCost: true,
+      }),
       game: this.getGameModel(player.game),
       id: player.id,
       runId: runId,
-      pickedCorporationCard: player.pickedCorporationCard ? cardsToModel(player, [player.pickedCorporationCard]) : [],
+      pickedCorporationCard: player.pickedCorporationCard
+        ? cardsToModel(player, [player.pickedCorporationCard])
+        : [],
       preludeCardsInHand: cardsToModel(player, player.preludeCardsInHand),
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
@@ -117,16 +138,20 @@ export class Server {
 
   public static getSpectatorModel(game: IGame): SpectatorModel {
     return {
-      color: 'neutral',
+      color: "neutral",
       id: game.spectatorId,
       game: this.getGameModel(game),
-      players: game.playersInGenerationOrder.map((p) => this.getPlayer(p, false)),
+      players: game.playersInGenerationOrder.map((p) =>
+        this.getPlayer(p, false),
+      ),
       thisPlayer: undefined,
       runId: runId,
     };
   }
 
-  public static getSelfReplicatingRobotsTargetCards(player: IPlayer): Array<CardModel> {
+  public static getSelfReplicatingRobotsTargetCards(
+    player: IPlayer,
+  ): Array<CardModel> {
     return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
       const model: CardModel = {
         resources: targetCard.resourceCount,
@@ -208,7 +233,10 @@ export class Server {
   }
 
   /** When the model is for this player, show the VP. Players like seeing their own VP even if the feature is off. */
-  public static getPlayer(player: IPlayer, modelIsForThisPlayer: boolean): PublicPlayerModel {
+  public static getPlayer(
+    player: IPlayer,
+    modelIsForThisPlayer: boolean,
+  ): PublicPlayerModel {
     const game = player.game;
     const useHandicap = game.players.some((p) => p.handicap !== 0);
     const model: PublicPlayerModel = {
@@ -230,11 +258,15 @@ export class Server {
       heat: player.heat,
       heatProduction: player.production.heat,
       id: game.phase === Phase.END ? player.id : undefined,
-      influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getInfluence(player), () => 0),
+      influence: Turmoil.ifTurmoilElse(
+        game,
+        (turmoil) => turmoil.getInfluence(player),
+        () => 0,
+      ),
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
-      megacredits: player.megaCredits,
-      megacreditProduction: player.production.megacredits,
+      megaCredits: player.megaCredits,
+      megaCreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
@@ -243,8 +275,11 @@ export class Server {
       plantProduction: player.production.plants,
       protectedResources: Server.getResourceProtections(player),
       protectedProduction: Server.getProductionProtections(player),
-      tableau: cardsToModel(player, player.tableau.asArray(), {showResources: true}),
-      selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
+      tableau: cardsToModel(player, player.tableau.asArray(), {
+        showResources: true,
+      }),
+      selfReplicatingRobotsCards:
+        Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
       steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),
@@ -276,47 +311,49 @@ export class Server {
         negativeVP: 0,
       },
       victoryPointsByGeneration: [],
-      globalParameterSteps: {},
     };
 
-    if (game.phase === Phase.END || game.isSoloMode() ||
-        game.gameOptions.showOtherPlayersVP === true || modelIsForThisPlayer) {
+    if (
+      game.phase === Phase.END ||
+      game.isSoloMode() ||
+      game.gameOptions.showOtherPlayersVP === true ||
+      modelIsForThisPlayer
+    ) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
-      model.globalParameterSteps = player.globalParameterSteps;
     }
-
-    model.deltaProject = player.deltaProjectData;
 
     return model;
   }
 
   private static getResourceProtections(player: IPlayer) {
     const protection: Record<Resource, Protection> = {
-      megacredits: 'off',
-      steel: 'off',
-      titanium: 'off',
-      plants: 'off',
-      energy: 'off',
-      heat: 'off',
+      megacredits: "off",
+      steel: "off",
+      titanium: "off",
+      plants: "off",
+      energy: "off",
+      heat: "off",
     };
 
     if (player.alloysAreProtected()) {
-      protection.steel = 'on';
-      protection.titanium = 'on';
+      protection.steel = "on";
+      protection.titanium = "on";
     }
 
     if (player.plantsAreProtected()) {
-      protection.plants = 'on';
+      protection.plants = "on";
     } else if (player.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-      protection.plants = 'half';
+      protection.plants = "half";
     }
 
     return protection;
   }
 
   private static getProductionProtections(player: IPlayer) {
-    const defaultProteection = player.tableau.has(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
+    const defaultProteection = player.tableau.has(CardName.PRIVATE_SECURITY)
+      ? "on"
+      : "off";
     const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,
@@ -327,8 +364,8 @@ export class Server {
     };
 
     if (player.alloysAreProtected()) {
-      protection.steel = 'on';
-      protection.titanium = 'on';
+      protection.steel = "on";
+      protection.titanium = "on";
     }
 
     return protection;
@@ -339,12 +376,12 @@ export class Server {
   private static getColor(space: Space): Color | undefined {
     if (
       (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
-    space.player !== undefined
+      space.player !== undefined
     ) {
       return space.player.color;
     }
     if (space.tile?.protectedHazard === true) {
-      return 'bronze';
+      return "bronze";
     }
     return undefined;
   }
@@ -353,15 +390,17 @@ export class Server {
     board: Board,
     gagarin: ReadonlyArray<SpaceId> = [],
     cathedrals: ReadonlyArray<SpaceId> = [],
-    nomads: SpaceId | undefined = undefined): Array<SpaceModel> {
+    nomads: SpaceId | undefined = undefined,
+  ): Array<SpaceModel> {
+    const volcanicSpaceIds = board.volcanicSpaceIds;
     const noctisCitySpaceId = board.noctisCitySpaceId;
 
     return board.spaces.map((space) => {
       let highlight: SpaceHighlight = undefined;
-      if (space.volcanic) {
-        highlight = 'volcanic';
+      if (volcanicSpaceIds.includes(space.id)) {
+        highlight = "volcanic";
       } else if (noctisCitySpaceId === space.id) {
-        highlight = 'noctis';
+        highlight = "noctis";
       }
 
       const model: SpaceModel = {
@@ -432,7 +471,6 @@ export class Server {
         ceo: options.ceoExtension,
         starwars: options.starWarsExpansion,
         underworld: options.underworldExpansion,
-        deltaProject: options.deltaProjectExpansion,
       },
       fastModeOption: options.fastModeOption,
       includedCards: options.includedCards,
@@ -451,6 +489,7 @@ export class Server {
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       twoCorpsVariant: options.twoCorpsVariant,
+      doubleDown: options.doubleDown,
       undoOption: options.undoOption,
     };
   }
@@ -459,7 +498,7 @@ export class Server {
     const moonData = game.moonData;
     if (moonData) {
       return {
-        logisticRate: moonData.logisticRate,
+        logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
         spaces: this.getSpaces(moonData.moon),

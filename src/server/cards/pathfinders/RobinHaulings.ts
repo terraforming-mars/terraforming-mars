@@ -37,7 +37,7 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
@@ -52,9 +52,7 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    if (this.resourceCount < 3) {
-      return false;
-    }
+    if (this.resourceCount < 3) return false;
     return this.canRaiseVenus(player) || this.canRaiseOxygen(player);
   }
 

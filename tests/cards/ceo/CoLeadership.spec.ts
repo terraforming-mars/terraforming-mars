@@ -3,9 +3,8 @@ import {testGame} from '../../TestGame';
 import {CoLeadership} from '../../../src/server/cards/ceos/CoLeadership';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {ICeoCard} from '../../../src/server/cards/ceos/ICeoCard';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Co Leadership', () => {
   it('Should play', () => {

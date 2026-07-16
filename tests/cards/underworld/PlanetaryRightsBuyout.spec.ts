@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {PlanetaryRightsBuyout} from '../../../src/server/cards/underworld/PlanetaryRightsBuyout';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PlanetaryRightsBuyout', () => {
   it('Should play', () => {

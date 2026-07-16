@@ -1,3 +1,4 @@
+version: "3.7"  
 services:
   terraforming-mars:
     container_name: terraforming-mars

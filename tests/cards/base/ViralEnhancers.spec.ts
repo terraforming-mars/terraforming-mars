@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {EcologicalZone} from '../../../src/server/cards/base/EcologicalZone';

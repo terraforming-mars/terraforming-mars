@@ -29,7 +29,7 @@ class MarsFirstBonus01 extends Bonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
@@ -43,7 +43,7 @@ class MarsFirstBonus02 extends Bonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
@@ -53,7 +53,7 @@ class MarsFirstPolicy01 implements IPolicy {
 
   onTilePlaced(player: IPlayer, space: Space) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.stock.add(Resource.STEEL, 1, {log: true, from: {partyName: PartyName.MARS}});
+      player.stock.add(Resource.STEEL, 1);
     }
   }
 }
@@ -63,9 +63,7 @@ class MarsFirstPolicy02 implements IPolicy {
   readonly description = 'When you play a building tag, gain 2 M€';
 
   onCardPlayed(player: IPlayer, card: ICard) {
-    if (card.tags.includes(Tag.BUILDING)) {
-      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: {partyName: PartyName.MARS}});
-    }
+    if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
   }
 }
 

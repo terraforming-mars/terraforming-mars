@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {NuclearZoneAres} from '../../../src/server/cards/ares/NuclearZoneAres';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('NuclearZoneAres', () => {
   it('Should play', () => {

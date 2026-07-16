@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Biofuels} from '../../../src/server/cards/prelude/Biofuels';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('Biofuels', () => {
   it('Should play', () => {

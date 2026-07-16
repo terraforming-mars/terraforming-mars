@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/server/cards/base/CorporateStronghold';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CorporateStronghold', () => {
   let card: CorporateStronghold;

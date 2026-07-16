@@ -15,7 +15,7 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
+import {cast, runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Splice} from '../../../src/server/cards/promo/Splice';
@@ -33,7 +33,6 @@ import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/Bui
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {deserializeCorporationCard, serializeCorporationCard} from '../../../src/server/cards/cardSerialization';
 import {AntiGravityTechnology} from '../../../src/server/cards/base/AntiGravityTechnology';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('PharmacyUnion', () => {
   let pharmacyUnion: PharmacyUnion;
@@ -347,7 +346,7 @@ describe('PharmacyUnion', () => {
     // Play GHG Producing Bacteria, triggering the effects.
     expect(player.canPlay(ghgProducingBacteria)).is.true;
     expect(ghgProducingBacteria.additionalProjectCosts).deep.eq({redsCost: 3});
-    player.playCard(ghgProducingBacteria, Payment.of({megacredits: 8}));
+    player.playCard(ghgProducingBacteria, Payment.of({megaCredits: 8}));
     expect(player.megaCredits).eq(4);
 
     // Pharmacy Union science tag benefit.
@@ -402,7 +401,7 @@ describe('PharmacyUnion', () => {
     expect(player.canPlay(advancedAlloys)).is.true;
     expect(advancedAlloys.additionalProjectCosts).deep.eq({redsCost: 3});
 
-    player.playCard(advancedAlloys, Payment.of({megacredits: 9}));
+    player.playCard(advancedAlloys, Payment.of({megaCredits: 9}));
 
     expect(player.megaCredits).eq(4);
 
@@ -433,13 +432,13 @@ describe('PharmacyUnion', () => {
     setRulingParty(game, PartyName.REDS);
 
     const buildColonyStandardProject = new BuildColonyStandardProject();
-    buildColonyStandardProject.payAndExecute(player, Payment.of({megacredits: buildColonyStandardProject.cost}));
+    buildColonyStandardProject.action(player);
     runAllActions(game);
 
     expect(cast(player.popWaitingFor(), SelectColony).colonies).does.not.include(leavitt);
 
     player.megaCredits = 20;
-    buildColonyStandardProject.payAndExecute(player, Payment.of({megacredits: buildColonyStandardProject.cost}));
+    buildColonyStandardProject.action(player);
     runAllActions(game);
 
     expect(player.tags.count(Tag.SCIENCE)).eq(0);

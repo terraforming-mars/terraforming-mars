@@ -7,7 +7,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
 import {Priority} from '../../deferredActions/Priority';
-import {uppercase} from '../Options';
 
 export class CyberiaSystems extends RoboticWorkforceBase {
   constructor() {
@@ -22,7 +21,7 @@ export class CyberiaSystems extends RoboticWorkforceBase {
         cardNumber: 'X53',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(1));
-          b.text('Copy', {size: Size.SMALL, uppercase})
+          b.text('Copy', Size.SMALL, true)
             .production((pb) => pb.tag(Tag.BUILDING))
             .production((pb) => pb.tag(Tag.BUILDING))
             .br;

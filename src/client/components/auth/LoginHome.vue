@@ -13,21 +13,18 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-import raw_settings from '@/genfiles/settings.json';
+import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 
 type Data = {
   user: string | undefined;
-  discordClientId: string;
 };
 
-export default defineComponent({
-  name: 'LoginHome',
+export default Vue.extend({
+  name: 'login-home',
   data(): Data {
     return {
       user: undefined,
-      discordClientId: raw_settings.discordClientId,
     };
   },
   mounted() {
@@ -41,9 +38,7 @@ export default defineComponent({
         return resp.json();
       })
       .then((data) => {
-        if (!data) {
-          return;
-        }
+        if (!data) return;
         try {
           this.user = data._user.userid;
         } catch (e) {
@@ -61,11 +56,7 @@ export default defineComponent({
       const idx = window.location.href.lastIndexOf('/' + paths.LOGIN);
       const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
       const encoded = encodeURI(url);
-      const clientId = this.discordClientId;
-      if (!clientId) {
-        return '';
-      }
-      return 'https://discord.com/oauth2/authorize?client_id=' + clientId + '&response_type=code&scope=identify&redirect_uri=' + encoded;
+      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {
       return paths.API_LOGOUT;

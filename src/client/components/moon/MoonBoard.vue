@@ -7,7 +7,7 @@
           <tspan dy="15">Mare</tspan>
           <tspan x="12" dy="12">Imbrium</tspan>
         </text>
-        <line x1="24" y1="34" x2="33" y2="105" class="board-line"/>
+        <line x1="24" y1="34" x2="33" y2="105" class="board-line"></line>
         <text x="30" y="107" class="board-caption board_caption--black">●</text>
       </g>
 
@@ -16,7 +16,7 @@
             <tspan dy="15">Mare</tspan>
             <tspan x="4" dy="12">Serenitatis</tspan>
         </text>
-        <line x1="0" y1="25" x2="-120" y2="50" class="board-line"/>
+        <line x1="0" y1="25" x2="-120" y2="50" class="board-line"></line>
         <text x="-122" y="53" class="board-caption board_caption--black">●</text>
       </g>
 
@@ -26,7 +26,7 @@
           <tspan dy="15">Mare</tspan>
           <tspan x="-2" dy="12">Nubium</tspan>
         </text>
-        <line x1="29" y1="14" x2="115" y2="-64" class="board-line"/>
+        <line x1="29" y1="14" x2="115" y2="-64" class="board-line"></line>
         <text x="113" y="-62" class="board-caption board_caption--black">●</text>
       </g>
 
@@ -35,14 +35,14 @@
           <tspan dy="15">Mare</tspan>
           <tspan dy="12" x="48">Nectaris</tspan>
         </text>
-        <line x1="-39" y1="-12" x2="45" y2="15" class="board-line"/>
+        <line x1="-39" y1="-12" x2="45" y2="15" class="board-line"></line>
         <text x="-39" y="-9" class="board-caption board_caption--black">&#x25cf;</text>
       </g>
     </svg>
 
     <div id="moon_board_outer_spaces" class="board-outer-spaces">
-      <MoonSpace :space="getSpaceById('m01')" text="Luna Trade Station"/>
-      <MoonSpace :space="getSpaceById('m37')" text="Momentum Virium Habitat"/>
+      <MoonSpace :space="getSpaceById('m01')" text="Luna Trade Station"></MoonSpace>
+      <MoonSpace :space="getSpaceById('m37')" text="Momentum Virium Habitat"></MoonSpace>
     </div>
 
     <div class="global-numbers">
@@ -50,8 +50,8 @@
         <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('habitat')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
-      <div class="global-numbers-logistic">
-        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('logistic')" :key="i">{{ lvl.strValue }}</div>
+      <div class="global-numbers-logistics">
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('logistics')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
       <div class="global-numbers-mining">
@@ -74,7 +74,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
@@ -88,12 +88,11 @@ type MoonParamLevel = {
   strValue: string,
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'MoonBoard',
   props: {
     model: {
       type: Object as () => MoonModel,
-      required: true,
     },
     tileView: {
       type: String as () => TileView,
@@ -123,12 +122,12 @@ export default defineComponent({
       }
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
-    getValuesForParameter(targetParameter: 'logistic' | 'mining' | 'habitat'): Array<MoonParamLevel> {
+    getValuesForParameter(targetParameter: 'logistics' | 'mining' | 'habitat'): Array<MoonParamLevel> {
       let curValue: number;
 
       switch (targetParameter) {
-      case 'logistic':
-        curValue = this.model.logisticRate;
+      case 'logistics':
+        curValue = this.model.logisticsRate;
         break;
       case 'mining':
         curValue = this.model.miningRate;

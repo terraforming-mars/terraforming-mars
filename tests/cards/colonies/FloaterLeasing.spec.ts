@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {FloaterLeasing} from '../../../src/server/cards/colonies/FloaterLeasing';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('FloaterLeasing', () => {
   it('Should play', () => {

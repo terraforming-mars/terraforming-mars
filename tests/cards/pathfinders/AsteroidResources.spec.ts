@@ -8,8 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('AsteroidResources', () => {
   let card: AsteroidResources;

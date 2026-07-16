@@ -1,17 +1,15 @@
 
 import {mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import TagCount from '@/client/components/TagCount.vue';
 
 describe('TagCount', () => {
   it('renders with no count', () => {
     const tagCount = mount(TagCount, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         count: 0,
-        tag: 'building',
-        size: 'normal',
       },
     });
     expect(tagCount.find('div[class="tag-display tag-no-show"]').exists()).is.true;
@@ -19,11 +17,9 @@ describe('TagCount', () => {
   });
   it('renders with count', () => {
     const tagCount = mount(TagCount, {
-      ...globalConfig,
-      props: {
+      localVue: getLocalVue(),
+      propsData: {
         count: 2,
-        tag: 'building',
-        size: 'normal',
       },
     });
     expect(tagCount.find('div[class="tag-display"]').exists()).is.true;

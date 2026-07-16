@@ -5,9 +5,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('NaturalPreserveAres', () => {
   let card: NaturalPreserveAres;

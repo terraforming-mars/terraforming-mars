@@ -4,7 +4,7 @@ import {CometForVenus} from '../../../src/server/cards/venusNext/CometForVenus';
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('CometForVenus', () => {
   it('Should play', () => {

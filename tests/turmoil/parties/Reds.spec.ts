@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {runAllActions, setRulingParty, addGreenery} from '../../TestingUtils';
+import {cast, runAllActions, setRulingParty, addGreenery} from '../../TestingUtils';
 import {REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '@/common/utils/utils';
 
 describe('Reds', () => {
   let player: TestPlayer;

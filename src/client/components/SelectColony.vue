@@ -2,8 +2,8 @@
   <div class="wf-component wf-component--select-card">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
     <label v-for="colony in (playerinput.coloniesModel || [])" class="cardbox" :key="colony.name">
-      <input type="radio" v-model="selectedColony" :value="colony.name" >
-      <Colony :colony="colony"/>
+      <input type="radio" v-model="selectedColony" :value="colony.name" />
+      <colony :colony="colony"></colony>
     </label>
     <div v-if="showsave === true" class="nofloat">
       <AppButton @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
@@ -11,11 +11,10 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectColonyModel} from '@/common/models/PlayerInputModel';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
 
@@ -23,20 +22,14 @@ type DataModel = {
   selectedColony: ColonyName | undefined,
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SelectColony',
   props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
     playerinput: {
       type: Object as () => SelectColonyModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectColonyResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,
@@ -51,7 +44,7 @@ export default defineComponent({
     };
   },
   components: {
-    Colony,
+    'colony': Colony,
     AppButton,
   },
   methods: {

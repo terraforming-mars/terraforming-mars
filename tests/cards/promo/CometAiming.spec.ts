@@ -5,9 +5,8 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('CometAiming', () => {
   let card: CometAiming;

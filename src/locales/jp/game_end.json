@@ -27,6 +27,8 @@
     "generations": "世代数",
     "Player": "プレイヤー名",
     "Corporation": "企業",
+    "TR": "",
+    "VP": "",
     "Total": "合計",
     "Timer": "時間",
     "Colony VP": "チタニア(交易・コロニー建設)",
@@ -34,9 +36,13 @@
 
     "Completed!": "完了!",
     "% completed": "% 完了",
+    "Temperature": "温度",
+    "Oxygen": "酸素",
+    "Oceans": "海洋",
+    "Venus": "金星",
     "L. Habitat": "居住地レート",
     "L. Mining": "採掘レート",
-    "L. Logistic": "物流レート",
+    "L. Logistics": "物流レート",
 
     "Final situation on the board": "最終状況",
     "Final game log": "ゲームログ",
@@ -49,5 +55,6 @@
     "Milestones points": "称号",
     "Awards points": "褒賞",
 
+    "Actions taken this game": "アクション数",
     "Download game log": ""
 }

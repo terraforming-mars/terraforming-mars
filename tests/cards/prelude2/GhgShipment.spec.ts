@@ -3,9 +3,8 @@ import {testGame} from '../../TestGame';
 import {GhgShipment} from '../../../src/server/cards/prelude2/GhgShipment';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {setRulingParty} from '../../TestingUtils';
+import {cast, setRulingParty} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('GhgShipment', () => {
   it('canPlay', () => {

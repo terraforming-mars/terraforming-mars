@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {TunnelingSubcontractor} from '../../../src/server/cards/underworld/TunnelingSubcontractor';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
-import {cast} from '@/common/utils/utils';
 
 describe('TunnelingSubcontractor', () => {
   it('Should play', () => {

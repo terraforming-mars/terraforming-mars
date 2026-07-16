@@ -45,7 +45,7 @@ export class DemetronLabs extends ActiveCorporationCard implements ICorporationC
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, scienceTags);
   }

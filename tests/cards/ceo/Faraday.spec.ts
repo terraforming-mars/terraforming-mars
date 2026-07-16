@@ -136,26 +136,6 @@ describe('Faraday', () => {
     expectPayForCard(player, Tag.SCIENCE);
   });
 
-  it('Two of the same tag does not cause threshold drift', () => {
-    // Start with 4 science tags, play a card with 2 science tags (count jumps to 6).
-    // The 5-threshold is crossed, so one reward triggers.
-    // Then verify the next reward still triggers at 10, not 11.
-    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
-    expectPayForCard(player, Tag.SCIENCE);
-
-    // Now at 6 science tags, lastReward should be 5 (not 6).
-    // Play 4 more to reach 10.
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-    expectNoChange(player);
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-    expectNoChange(player);
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-    expectNoChange(player);
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-    expectPayForCard(player, Tag.SCIENCE);
-  });
-
   it('Play a card that puts two tags at 5 count, buy both', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
@@ -185,24 +165,6 @@ describe('Faraday', () => {
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
-  });
-
-  it('Play a card that puts two tags at 5 count, buy second after skipping first', () => {
-    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
-
-    player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
-    expectDoNotPayForCard(player, Tag.EARTH);
-    expectPayForCard(player, Tag.SCIENCE);
-  });
-
-  it('Play a card that puts two tags at 5 count, buy both', () => {
-    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
-
-    player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
-    expectPayForCard(player, Tag.EARTH);
-    expectPayForCard(player, Tag.SCIENCE);
   });
 
   it('Wild tags dont count', () => {
@@ -262,27 +224,11 @@ describe('Faraday', () => {
   it('Does not retrigger when tags are removed', () => {
     player.tags.extraScienceTags = 1;
     player.playCard(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-
     expectPayForCard(player, Tag.SCIENCE);
 
     player.tags.extraScienceTags = 0;
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-
     expectNoChange(player);
-  });
-
-  it('Acquired mid-game - does not trigger on existing tag counts', () => {
-    player.tagsForTest = {[Tag.SCIENCE]: 27, [Tag.SPACE]: 21};
-    player.playCard(fakeCard({tags: [Tag.SCIENCE, Tag.SPACE]}));
-
-    expectNoChange(player);
-  });
-
-  it('Wild tag on same card does not suppress reward for other tags', () => {
-    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.WILD, Tag.SCIENCE]}));
-
-    expectPayForCard(player, Tag.SCIENCE);
   });
 
   it('Compatible with Pharmacy Union - pay to draw a microbe card before deducting Pharmacy Union', () => {

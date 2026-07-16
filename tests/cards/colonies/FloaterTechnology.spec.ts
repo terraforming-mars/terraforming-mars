@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churn} from '../../TestingUtils';
+import {churn, cast} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -8,7 +8,6 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('FloaterTechnology', () => {
   let card: FloaterTechnology;

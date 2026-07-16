@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 export class Tycoon10 extends BaseMilestone {
   constructor() {
     super(
-      'Tycoon10',
+      'Tycoon',
       'Have 10 blue and green cards in play.',
       10);
   }

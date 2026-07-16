@@ -1,97 +1,57 @@
-// Generates the files settings.json and translations.json, stored in src/genfiles
-import '@/server/init';
-
-import fs from 'fs';
-import child_process from 'child_process';
-import path from 'path';
-import * as constants from '../common/constants';
-
-function mkdirQuietly(path: string) {
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
-  }
-}
-
-function readdir(path: string, predicate: (dirent: string) => boolean) {
-  const entries = fs.readdirSync(path);
-  return entries.filter(predicate);
-}
+// Generates the files settings.json and translations.json, stored in src/genfilesimport * as fs from 'fs';
+require('dotenv').config();
+import * as fs from 'fs';
+import * as child_process from 'child_process';
+import * as path from 'path';
 
 type Translation = {[lang: string]: string}
+function getAllTranslations(): {[key: string]: Translation} {
+  const pathToTranslationsDir = path.resolve('src/locales');
+  const translations: {[key: string]: Translation}= {};
 
-/**
- * Reads all the translations in src/locales, and returns a data structure of this
- * structure:
- *
- * {
- *   'Hello' : {
- *     'es': 'Hola',
- *     'de': 'Guten Tag',
- *   },
- * },
- */
+  const dirs = fs.readdirSync(pathToTranslationsDir);
+  for (const lang of dirs) {
+    const localeDir = path.join(pathToTranslationsDir, lang);
+    if (lang.length === 2 && fs.statSync(localeDir).isDirectory()) {
+      const translationDir = path.resolve(path.join(pathToTranslationsDir, lang));
 
-function getAllTranslations(): {[phrase: string]: Translation} {
-  const translationsPath = path.resolve('src/locales');
-  const translations: {[phrase: string]: Translation} = {};
-  const duplicates: Array<{lang: string, phrase: string}> = [];
-
-  const languageDirectories = readdir(
-    translationsPath,
-    (dirent) => dirent.length === 2 && fs.statSync(path.join(translationsPath, dirent)).isDirectory(),
-  );
-
-  for (const lang of languageDirectories) {
-    const translationDir = path.resolve(path.join(translationsPath, lang));
-    const languageFiles = readdir(
-      translationDir,
-      (dirent) => dirent.endsWith('.json'),
-    );
-
-    for (const file of languageFiles) {
-      const filename = path.join(translationDir, file);
-      try {
-        const content = fs.readFileSync(filename, 'utf8');
-        const json = JSON.parse(content);
-
-        for (const phrase of Object.keys(json)) {
-          if (translations[phrase] === undefined) {
-            translations[phrase] = {};
-          }
-          if (translations[phrase][lang] !== undefined) {
-            duplicates.push({lang, phrase});
-            continue;
-          }
-          const translated = json[phrase];
-          if (translated.trim() === phrase.trim()) {
-            throw new Error('Do not repeat a translation with its own text: ' + phrase);
-          }
-          if (translated.trim().length !== 0) {
-            translations[phrase][lang] = translated;
-          }
+      const files = fs.readdirSync(translationDir);
+      for (const file of files) {
+        if (!file.endsWith('.json')) {
+          continue;
         }
-      } catch (e) {
-        throw new Error(`While parsing ${filename}:` + e);
-      }
-    }
-  }
 
-  if (duplicates.length > 0) {
-    for (const {lang, phrase} of duplicates) {
-      console.error(`${lang}: Repeated translation for [${phrase}]`);
-    }
-    const msg = `Found ${duplicates.length} duplicate translation(s)`;
-    if (!process.argv.includes('--allow-duplicates')) {
-      throw new Error(msg);
-    } else {
-      console.error(msg);
+        const filename = path.join(translationDir, file);
+        try {
+          const content = fs.readFileSync(filename, 'utf8');
+          const json = JSON.parse(content);
+
+          for (const phrase of Object.keys(json)) {
+            if (translations[phrase] === undefined) {
+              translations[phrase] = {};
+            }
+            // if (translations[phrase][lang] !== undefined) {
+            //   console.log(`${lang}: Repeated translation for [${phrase}]`);
+            // }
+            const translated = json[phrase];
+            if (translated.trim() === phrase.trim()) {
+              throw new Error('Do not repeat a translation with its own text: ' + phrase);
+            }
+            if (translated.trim().length !== 0) {
+              translations[phrase][lang] = translated;
+            }
+          }
+        } catch (e) {
+          throw new Error(`While parsing ${filename}:` + e);
+        }
+      }
     }
   }
 
   return translations;
 }
 
-function getBuildMetadata(): {head: string, date: string} {
+function getBuildMetadata() /* {head: string, date: string} */ {
   // assumes SOURCE_VERSION is git hash
   if (process.env.SOURCE_VERSION) {
     return {
@@ -109,37 +69,53 @@ function getBuildMetadata(): {head: string, date: string} {
   }
 }
 
-function writeBuildMetadata() {
-  function getEnv(ev: string, dv: number) {
-    return process.env[ev] ? Number(process.env[ev]): dv;
+function getWaitingForTimeout() {
+  if (process.env.WAITING_FOR_TIMEOUT) {
+    return Number(process.env.WAITING_FOR_TIMEOUT);
   }
-
-  const buildmetadata = getBuildMetadata();
-  const settings = {
-    head: buildmetadata.head,
-    builtAt: buildmetadata.date,
-    waitingForTimeout: getEnv('WAITING_FOR_TIMEOUT', constants.DEFAULT_WAITING_FOR_TIMEOUT),
-    logLength: getEnv('LOG_LENGTH', constants.DEFAULT_LOG_LENGTH),
-    discordClientId: process.env['DISCORD_CLIENT_ID'] ?? '',
-  };
-  fs.writeFileSync('src/genfiles/settings.json', JSON.stringify(settings));
+  return 1000;
 }
+
+function getLogLength() {
+  if (process.env.LOG_LENGTH) {
+    return Number(process.env.LOG_LENGTH);
+  }
+  return 50;
+}
+
+if (!fs.existsSync('src/genfiles')) {
+  fs.mkdirSync('src/genfiles');
+}
+
+const buildmetadata = getBuildMetadata();
+fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
+  head: buildmetadata.head,
+  builtAt: buildmetadata.date,
+  waitingForTimeout: getWaitingForTimeout(),
+  logLength: getLogLength(),
+}));
+
+fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
+  getAllTranslations(),
+));
 
 /**
  * Generate translation files in `/assets/locales/*.json` to load them async by the client
  */
 function generateTranslations() {
   const localesDir = path.join(process.cwd(), 'src/locales');
+  const localesCodes = fs.readdirSync(localesDir);
   const destinationPath = path.join(process.cwd(), 'assets/locales');
 
-  mkdirQuietly(destinationPath);
+  if (!fs.existsSync(destinationPath)) {
+    fs.mkdirSync(destinationPath);
+  }
 
-  const localesCodes = fs.readdirSync(localesDir).filter(
-    (entry) => fs.statSync(path.join(localesDir, entry)).isDirectory(),
-  );
+  const isJSONExt = (fileName: string) => fileName.endsWith('.json');
+
   localesCodes.forEach((localeCode) => {
     const localeDir = path.join(localesDir, localeCode);
-    const localeFiles = fs.readdirSync(localeDir).filter((dirent) => dirent.endsWith('.json'));
+    const localeFiles = fs.readdirSync(localeDir).filter(isJSONExt);
 
     const localeObject = localeFiles.reduce((localeObject, localeFile) => {
       const filePath = path.join(localeDir, localeFile);
@@ -152,13 +128,4 @@ function generateTranslations() {
   });
 }
 
-function writeTranslations() {
-  const translations = getAllTranslations();
-  fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(translations));
-}
-
-mkdirQuietly('src/genfiles');
-
-writeBuildMetadata();
 generateTranslations();
-writeTranslations();

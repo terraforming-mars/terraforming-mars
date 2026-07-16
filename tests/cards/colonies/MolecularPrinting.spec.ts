@@ -3,7 +3,7 @@ import {MolecularPrinting} from '../../../src/server/cards/colonies/MolecularPri
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
 import {addCity, testGame} from '../../TestingUtils';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('MolecularPrinting', () => {
   it('Should play', () => {

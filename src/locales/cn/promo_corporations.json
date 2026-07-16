@@ -4,7 +4,7 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "行动：将你的社区（玩家标志）放置在与你的板块或标记区域相邻的非保留区域。",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "效果：标记区域为你保留。当你在该区域放置板块时，获得3M€。",
 
-  "AstroDrill": "天体钻井",
+  "Astrodrill": "天体钻井",
   "You start with 35 M€ and 3 asteroid resources.": "起始获得35M€和3个小行星资源。",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "行动：选择在任意卡牌添加1个小行星资源并获得1个标准资源，或移除此卡1个小行星资源获得3个钛。",
 
@@ -39,5 +39,5 @@
 
   "Splice": "基因重组",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "起始获得44M€。作为第一个行动，展示卡牌直至出现微生物标志，获得该牌并弃置其余。",
-  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "效果：当微生物标志（包括此牌）被使用时，该玩家选择获得2M€或在该卡添加1个微生物资源，且你获得2M€。"
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "效果：当微生物标志（包括此牌）被使用时，该玩家选择获得2M€或在该卡添加1个微生物资源，且你获得2M€。"
 }

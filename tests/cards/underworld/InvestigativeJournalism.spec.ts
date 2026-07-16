@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {InvestigativeJournalism} from '../../../src/server/cards/underworld/InvestigativeJournalism';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('InvestigativeJournalism', () => {
   it('canPlay', () => {

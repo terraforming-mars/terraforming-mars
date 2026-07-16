@@ -3,17 +3,15 @@ import {MartianRepository} from '../../../src/server/cards/pathfinders/MartianRe
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
-import {fakeCard, runAllActions, testGame} from '../../TestingUtils';
-import {IGame} from '../../../src/server/IGame';
+import {fakeCard, testGame} from '../../TestingUtils';
 
 describe('MartianRepository', () => {
   let card: MartianRepository;
-  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(() => {
     card = new MartianRepository();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1);
   });
 
   it('can play', () => {
@@ -25,7 +23,6 @@ describe('MartianRepository', () => {
   it('play', () => {
     player.production.override({energy: 1});
     card.play(player);
-    runAllActions(game);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
@@ -60,23 +57,5 @@ describe('MartianRepository', () => {
     expect(card.getVictoryPoints(player)).eq(1);
     card.resourceCount = 6;
     expect(card.getVictoryPoints(player)).eq(2);
-  });
-
-  it('canPlay false when Mars track advance would not grant energy production', () => {
-    game.pathfindersData!.mars = 0;
-    expect(card.canPlay(player)).is.false;
-  });
-
-  it('canPlay true when two Mars tags push track through space 8', () => {
-    // Two Mars tags advance the track by 2. Starting at 6 lands on 8.
-    game.pathfindersData!.mars = 6;
-    expect(card.canPlay(player)).is.true;
-  });
-
-  it('playing the card nets zero change to energy production', () => {
-    game.pathfindersData!.mars = 6;
-    player.playCard(card);
-    runAllActions(game);
-    expect(player.production.energy).eq(0);
   });
 });

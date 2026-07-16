@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {TestPlayer} from '../../TestPlayer';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('Helion', () => {
   let card: Helion;

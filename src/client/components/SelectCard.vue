@@ -3,8 +3,8 @@
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
-              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" >
-              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" >
+              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
             </template>
             <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
@@ -15,9 +15,8 @@
             </Card>
         </label>
         <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
-        <WarningsComponent :warnings="warnings"/>
+        <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
-            <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
@@ -26,7 +25,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import {Color} from '@/common/Color';
@@ -55,20 +54,17 @@ type WidgetDataModel = {
   owners: Map<CardName, Owner>,
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SelectCard',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-      required: true,
     },
     playerinput: {
       type: Object as () => SelectCardModel,
-      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectCardResponse) => void,
-      required: true,
     },
     showsave: {
       type: Boolean,
@@ -124,9 +120,7 @@ export default defineComponent({
         this.owners.clear();
         this.playerinput.cards.forEach((card) => {
           const owner = this.findOwner(card);
-          if (owner !== undefined) {
-            this.owners.set(card.name, owner);
-          }
+          if (owner !== undefined) this.owners.set(card.name, owner);
         });
       }
       return cards;
@@ -196,13 +190,6 @@ export default defineComponent({
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
-    toggleSelectAll() {
-      if (this.allSelected) {
-        this.cards = [];
-      } else {
-        this.cards = this.selectableCards.slice();
-      }
-    },
   },
   computed: {
     selectOnlyOneCard() : boolean {
@@ -212,17 +199,6 @@ export default defineComponent({
       return this.playerinput.max !== undefined &&
              this.playerinput.max > 1 &&
              this.playerinput.min === 0;
-    },
-    selectableCards(): Array<CardModel> {
-      return this.playerinput.cards.filter((card) => !card.isDisabled);
-    },
-    showSelectAll(): boolean {
-      return this.playerinput.showSelectAll === true &&
-             !this.selectOnlyOneCard &&
-             this.selectableCards.length > 1;
-    },
-    allSelected(): boolean {
-      return Array.isArray(this.cards) && this.cards.length === this.selectableCards.length;
     },
   },
 });

@@ -23,7 +23,9 @@ export class MarketManipulation extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text(
             'Increase one colony tile track 1 step. Decrease another colony tile track 1 step.',
-            {size: Size.SMALL, uppercase: true});
+            Size.SMALL,
+            true,
+          );
         }),
       },
     });
@@ -33,12 +35,8 @@ export class MarketManipulation extends Card implements IProjectCard {
     const increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
 
-    if (increasableColonies.length === 0) {
-      return false;
-    }
-    if (decreasableColonies.length === 0) {
-      return false;
-    }
+    if (increasableColonies.length === 0) return false;
+    if (decreasableColonies.length === 0) return false;
     if (
       increasableColonies.length === 1 &&
       decreasableColonies.length === 1 &&

@@ -1,12 +1,10 @@
-import {createApp, defineAsyncComponent} from 'vue';
+import Vue from 'vue';
 
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
-import App from '@/client/components/App.vue';
+import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
-const PlayerInputFactory = defineAsyncComponent(() => import(/* webpackChunkName: "player-input" */ '@/client/components/PlayerInputFactory.vue'));
 
 declare global {
   interface Window {
@@ -26,15 +24,11 @@ async function bootstrap() {
     }
   }
 
-  const app = createApp(App);
+  Vue.use(i18nPlugin);
 
-  app.use(i18nPlugin);
-
-  app.component('PlayerInputFactory', PlayerInputFactory);
-
-  app.directive('trim-whitespace', {
-    mounted: trimEmptyTextNodes,
-    updated: trimEmptyTextNodes,
+  Vue.directive('trim-whitespace', {
+    inserted: trimEmptyTextNodes,
+    componentUpdated: trimEmptyTextNodes,
   });
 
   if (window.isSecureContext && 'serviceWorker' in navigator) {
@@ -45,9 +39,10 @@ async function bootstrap() {
     });
   }
 
-  app.mount('#app');
+  new Vue(mainAppSettings);
 
   window.onload = startOauth;
 }
 
 bootstrap();
+

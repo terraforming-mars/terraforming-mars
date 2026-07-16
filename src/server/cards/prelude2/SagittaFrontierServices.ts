@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
+import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -22,6 +22,7 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
 
       metadata: {
         cardNumber: 'PC03', // Renumber
+        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): provide reasonable secondary tag. It's not rendered on CardRenderItemComponent.
           b.megacredits(31).production((pb) => pb.energy(1).megacredits(2)).cards(1, {secondaryTag: AltSecondaryTag.NO_TAGS}).br;
@@ -38,16 +39,16 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
     return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
     if (count === 0) {
-      player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 4}))
+      player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
         .andThen(() => {
           player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
         });
     }
     if (count === 1) {
-      player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 1}))
+      player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}))
         .andThen(() => {
           player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
         });

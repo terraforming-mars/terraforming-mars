@@ -4,9 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('AsteroidMiningConsortium', () => {
   let card: AsteroidMiningConsortium;

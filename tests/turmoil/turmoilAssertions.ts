@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../src/server/inputs/SelectParty';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
 

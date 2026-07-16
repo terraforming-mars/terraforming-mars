@@ -18,7 +18,8 @@
   "1 VP for each 2 asteroids on this card.": "本卡上每有2个小行星资源，获得1分。",
 
   "Asteroid Rights": "小行星权力",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "行动：支付1M€，在任意卡牌上添加1个小行星资源，或移除此卡的1个小行星资源，选择提升1点M€产能或获得2个钛。",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "行动：支付1M€，在任意卡牌上添加1个小行星资源。",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "行动：移除此卡的1个小行星资源，选择提升1点M€产能或获得2个钛。",
   "Add 2 asteroids to this card.": "在此卡添加2个小行星资源。",
 
   "Astra Mechanica": "星械会",
@@ -42,7 +43,8 @@
   "Requires that you have 3 cities. Gain 2 plants.": "需要你拥有3座城市。获得2个植物。",
 
   "Comet Aiming": "彗星瞄准",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "行动：消耗1个钛，在任意卡牌上添加1个小行星资源，或移除此卡的1个小行星资源来放置1个海洋板块。",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "行动：消耗1个钛，在任意卡牌上添加1个小行星资源。",
+  "Action: Remove 1 asteroid here to place an ocean.": "行动：移除此卡的1个小行星资源来放置1个海洋板块。",
 
   "Crash Site Cleanup": "陨石坑清洁",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "需要本时代有玩家移除了其他玩家的植物。获得1个钛或2个钢。",
@@ -53,22 +55,26 @@
   "Cyberia Systems": "赛博利亚系统",
   "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "提升1点钢铁产能。复制你2张建筑标志卡牌的产能效果。",
 
+  "Deimos Down": "火卫二陨落",
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "提升3级温度并获得4个钢。将此板块放置在不与其他城市相邻的位置。移除任意玩家最多6个植物。",
 
   "Directed Heat Usage": "热能定向利用",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "行动：消耗3点热能资源，选择获得4M€或2个植物。",
 
   "Directed Impactors": "定向冲撞器",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "行动：支付6M€（可用钛支付），在任意卡牌上添加1个小行星资源，或移除此卡的1个小行星资源来提升1级温度。",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "行动：支付6M€（可用钛支付），在任意卡牌上添加1个小行星资源。",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "行动：移除此卡的1个小行星资源来提升1级温度。",
 
   "Diversity Support": "多样性扶持",
+  "9 Resource types": "9种资源类型",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "需要你拥有9种不同类型的资源。提升1点改造度。",
 
   "Dusk Laser Mining": "黄昏激光矿业",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "需要2个科学标志。降低1点电力产能，提升1点钛产能。获得4个钛。",
 
   "Energy Market": "能源市场",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "行动：支付2X M€，获得X点电力资源，或降低1点电力产能，获得8M€。",
+  "Action: Spend 2X M€ to gain X energy.": "行动：支付2X M€，获得X点电力资源。",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "行动：降低1点电力产能，获得8M€。",
 
   "Field-Capped City": "磁场穹顶城市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "提升2点M€产能和1点电力产能。获得3个植物。放置1个城市板块。",
@@ -80,6 +86,9 @@
   "Great Dam": "大坝",
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "需要4个海洋板块。提升2点电力产能。将此板块放置在与海洋相邻的位置。",
 
+  "Harvest": "丰收",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "需要你拥有3个绿化板块。获得12M€。",
+
   "Hermetic Order of Mars": "火星秘教",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "需要氧气浓度≤4%。提升2点M€产能。每个与你板块相邻的空地获得1M€。",
 
@@ -88,6 +97,7 @@
 
   "Homeostasis Bureau": "稳态管理局",
   "Effect: When you raise the temperature, gain 3 M€.": "效果：每当你提升温度时，获得3M€。",
+  "Increase your heat production 2 steps.": "提升2点热能产能。",
 
   "Hospitals": "医院",
   "Effect: Each time a city is placed, gain a disease here.": "效果：每当有城市被放置时，在此卡获得1个疾病资源。",
@@ -95,7 +105,8 @@
   "Decrease your energy production 1 step.": "降低1点电力产能。",
 
   "Icy Impactors": "冰体撞击器",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "行动：支付10M€（可用钛支付），在此卡添加2个小行星资源，或移除此卡的1个小行星资源放置海洋板块，由起始玩家指定位置。",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "行动：支付10M€（可用钛支付），在此卡添加2个小行星资源。",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "行动：移除此卡的1个小行星资源放置海洋板块，由起始玩家指定位置。",
 
   "Imported Nutrients": "营养物输入",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "获得4个植物并在另一张卡牌上添加4个微生物资源。",
@@ -104,6 +115,7 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "你每有1种不同的标志（包括此牌），提升1点M€产能。",
 
   "Jovian Embassy": "木星大使馆",
+  "Raise your TR 1 step.": "提升1点改造度。",
 
   "Kaguya Tech": "辉夜科技",
   "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "提升2点M€产能。抽1张牌。移除你的1个绿化板块（不影响氧气），无视放置规则在该处放置城市板块并获得奖励。",
@@ -146,6 +158,12 @@
   "Orbital Cleanup": "轨道清洁",
   "Action: Gain 1 M€ per science tag you have.": "行动：你每有1个科学标志，获得1M€。",
   "Decrease your M€ production 2 steps.": "降低2点M€产能。",
+
+  "Outdoor Sports": "户外运动",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "需要任意城市与海洋相邻。提升2点M€产能。",
+
+  "Penguins": "企鹅",
+  "Action: Add 1 animal to this card.": "行动：在此卡添加1个动物资源。",
   "Requires 8 oceans.": "需要8个海洋板块。",
 
   "Potatoes": "土豆",
@@ -156,6 +174,7 @@
 
   "Red Ships": "红色舰队",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "行动：每个与海洋相邻的城市/特殊板块获得1M€。",
+  "Requires 4% oxygen.": "需要4%氧气浓度。",
 
   "Rego Plastics": "表土塑料",
   "Effect: Your steel resources are worth 1 M€ extra.": "效果：你的钢资源价值+1M€。",

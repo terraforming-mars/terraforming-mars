@@ -1,22 +1,20 @@
 <template>
-  <div :class="getClasses()" :data-tooltip="$t(tag)" ></div>
+  <div :class="getClasses()" :data-tooltip="$t(tag)" />
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'Tag',
   props: {
     tag: {
       type: String as () => Tag,
-      required: true,
     },
     size: {
       type: String,
-      required: true,
     },
     type: {
       type: String,

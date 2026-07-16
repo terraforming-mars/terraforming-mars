@@ -2,12 +2,12 @@
 <div>
   <div v-if="experimentalUI()" v-i18n>
     <label>
-      <input type="checkbox" v-model="showReorder" > Reorder Cards
+      <input type="checkbox" v-model="showReorder" /> Reorder Cards
     </label>
   </div>
   <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" @dragend="onDragEnd()" @dragstart="onDragStart(card.name)">
-      <div v-if="dragCard" ref="droppers" class="drop-target" @dragover="onDragOver(card.name)"></div>
+    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
+      <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
         <div v-if="showReorder" class="reorder-banners-container">
@@ -16,13 +16,13 @@
         </div>
       </div>
     </div>
-    <div v-if="dragCard" ref="dropend" class="drop-target" @dragover="onDragOver('end')"></div>
+    <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
   </div>
 </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
@@ -38,7 +38,7 @@ type DataModel = {
   dragCard: CardName | undefined;
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'SortableCards',
   components: {
     Card,
@@ -46,11 +46,9 @@ export default defineComponent({
   props: {
     cards: {
       type: Array as () => Array<CardModel>,
-      required: true,
     },
     playerId: {
       type: String,
-      required: true,
     },
   },
   data(): DataModel {
@@ -118,13 +116,9 @@ export default defineComponent({
       return this.showReorder ? 'do-not-drag-and-drop' : '';
     },
     clickMethod(e: MouseEvent) {
-      if (!this.showReorder) {
-        return;
-      }
+      if (!this.showReorder) return;
       const target = e.currentTarget as HTMLElement;
-      if (!target) {
-        return;
-      }
+      if (!target) return;
       if (target.matches('.sortable-cards *')) {
         const rect = target.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;

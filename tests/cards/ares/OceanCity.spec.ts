@@ -7,11 +7,10 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, runAllActions} from '../../TestingUtils';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {toID} from '../../../src/common/utils/utils';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('OceanCity', () => {
   let card: OceanCity;

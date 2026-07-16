@@ -6,10 +6,9 @@ import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrba
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
 
 describe('CorroderSuits', () => {
   let card: CorroderSuits;

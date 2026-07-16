@@ -3,8 +3,7 @@ import {NuclearZone} from '../../../src/server/cards/base/NuclearZone';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 
 describe('NuclearZone', () => {
   it('Should play', () => {

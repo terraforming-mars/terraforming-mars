@@ -23,6 +23,8 @@ export class ColonyDeserializer {
   }
 
   public static deserializeAndFilter(serialized: Array<SerializedColony | ColonyName>): Array<IColony> {
-    return serialized.map((c) => this.deserialize(c)).filter((c) => c !== undefined);
+    const colonies: Array<IColony | undefined> = serialized.map((c) => this.deserialize(c)).filter((c) => c !== undefined);
+    // as Array<Colony> is safe because filter removes the undefined colonies
+    return colonies as Array<IColony>;
   }
 }

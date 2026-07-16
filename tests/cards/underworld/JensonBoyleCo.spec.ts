@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {JensonBoyleCo} from '../../../src/server/cards/underworld/JensonBoyleCo';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {Units} from '../../../src/common/Units';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('JensonBoyleCo', () => {
   let card: JensonBoyleCo;

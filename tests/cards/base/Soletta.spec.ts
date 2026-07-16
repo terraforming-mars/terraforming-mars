@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {Soletta} from '../../../src/server/cards/base/Soletta';
 import {testGame} from '../../TestGame';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('Soletta', () => {
   it('Should play', () => {

@@ -3,10 +3,9 @@ import {DomedCrater} from '../../../src/server/cards/base/DomedCrater';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('DomedCrater', () => {
   let card: DomedCrater;

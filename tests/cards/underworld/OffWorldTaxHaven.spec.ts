@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {OffWorldTaxHaven} from '../../../src/server/cards/underworld/OffWorldTaxHaven';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OffWorldTaxHaven', () => {
   it('canPlay', () => {

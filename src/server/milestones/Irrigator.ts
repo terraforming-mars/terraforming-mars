@@ -1,7 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {MilestoneName} from '../../common/ma/MilestoneName';
+import {MilestoneName} from '@/common/ma/MilestoneName';
 
 export class Irrigator extends BaseMilestone {
   constructor(
@@ -19,7 +19,7 @@ export class Irrigator extends BaseMilestone {
   }
 }
 
-// Variant from Terra Cimmeria Nova.
+// Variant from Terra Cimmeria Novus.
 export class Coastguard extends Irrigator {
   constructor() {
     super('Coastguard', 3);

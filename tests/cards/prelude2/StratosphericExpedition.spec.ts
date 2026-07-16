@@ -6,8 +6,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('StratosphericExpedition', () => {
   let card: StratosphericExpedition;

@@ -5,7 +5,7 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('BioPrintingFacility', () => {
   let card: BioPrintingFacility;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {WaterToVenus} from '../../../src/server/cards/venusNext/WaterToVenus';
-import {cast} from '@/common/utils/utils';
+import {cast} from '../../TestingUtils';
 
 describe('WaterToVenus', () => {
   it('Should play', () => {

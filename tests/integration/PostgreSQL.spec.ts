@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
@@ -8,15 +8,15 @@ import {PostgreSQL, POSTGRESQL_TABLES} from '../../src/server/database/PostgreSQ
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
-import {cast, range} from '../../src/common/utils/utils';
+import {range} from '../../src/common/utils/utils';
 
-dotenv.config({path: 'tests/integration/.env', debug: true, quiet: true});
+dotenv.config({path: 'tests/integration/.env', debug: true});
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up
@@ -44,6 +44,16 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
 
   public override async stats(): Promise<{[key: string]: string | number}> {
     const response = await super.stats();
+    response['size-bytes-games'] = 'any';
+    response['size-bytes-game-results'] = 'any';
+    response['size-bytes-database'] = 'any';
+    response['size-bytes-participants'] = 'any';
+
+    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game', 'rows-session', 'size-bytes-session'];
+    for (const field of extraFields) {
+      expect(response[field], 'For ' + field).is.not.undefined;
+      delete response[field];
+    }
     return response;
   }
 
@@ -91,12 +101,6 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<QueryResult<any>> {
     return this.client.query('UPDATE completed_game SET completed_time = to_timestamp($1) WHERE game_id = $2', [timestampSeconds, gameId]);
   }
-
-  // Simulates an orphaned row: deletes every `games` row for a game while leaving its
-  // `game` and `participants` rows behind.
-  public async deleteGamesRows(gameId: GameId): Promise<void> {
-    await this.client.query('DELETE FROM games WHERE game_id = $1', [gameId]);
-  }
 }
 
 describeDatabaseSuite({
@@ -111,19 +115,24 @@ describeDatabaseSuite({
     'pool-total-count': 1,
     'pool-idle-count': 1,
     'pool-waiting-count': 0,
-    'orphaned-rows-game': '0',
-    'orphaned-rows-participants': '0',
+    'rows-game-results': '0',
+    'rows-games': '0',
+    'rows-participants': '0',
+    'size-bytes-games': 'any',
+    'size-bytes-game-results': 'any',
+    'size-bytes-database': 'any',
     'save-conflict-normal-count': 0,
     'save-conflict-undo-count': 0,
     'save-count': 0,
     'save-error-count': 0,
+    'size-bytes-participants': 'any',
   },
 
   otherTests: (dbFactory: () => TestPostgreSQL) => {
     it('saveGame with the same saveID', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       cast(player.popWaitingFor(), SelectInitialCards);
       await db.lastSaveGamePromise;
 
@@ -156,13 +165,13 @@ describeDatabaseSuite({
     it('getGames - returns in order of last saved', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game1 = Game.newInstance('game-id-1111', [player], player, 'spectatorid');
+      const game1 = Game.newInstance('game-id-1111', [player], player);
       await db.lastSaveGamePromise;
       const player2 = TestPlayer.RED.newPlayer();
-      const game2 = Game.newInstance('game-id-2222', [player2], player2, 'spectatorid');
+      const game2 = Game.newInstance('game-id-2222', [player2], player2);
       await db.lastSaveGamePromise;
       const player3 = TestPlayer.BLUE.newPlayer();
-      const game3 = Game.newInstance('game-id-3333', [player3], player3, 'spectatorid');
+      const game3 = Game.newInstance('game-id-3333', [player3], player3);
       await db.lastSaveGamePromise;
 
       expect(await db.getGameIds()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
@@ -187,7 +196,7 @@ describeDatabaseSuite({
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const player2 = TestPlayer.RED.newPlayer();
-      const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {draftVariant: false, undoOption: true});
+      const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
 
       await db.awaitAllSaves();
 
@@ -218,7 +227,7 @@ describeDatabaseSuite({
       }
 
       // Player's first action
-      expect(game.activePlayer.id).eq(player.id);
+      expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       // Taking an action triggers a save (when undo is enabled.)
@@ -233,7 +242,7 @@ describeDatabaseSuite({
       expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Player's second action
-      expect(game.activePlayer.id).eq(player.id);
+      expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(1);
 
       takeAction(player);
@@ -244,7 +253,7 @@ describeDatabaseSuite({
       // It is now the second player's turn. This test doesn't care about what the
       // second player does, but it is just a cue that the server has done a few things.
       // This test cares about the database things it does.
-      expect(game.activePlayer.id).eq(player2.id);
+      expect(game.activePlayer).eq(player2.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       // Notice how save-count was 3 and is now 5. It saved twice.
@@ -261,7 +270,7 @@ describeDatabaseSuite({
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const player2 = TestPlayer.RED.newPlayer();
-      const game = Game.newInstance('gameid', [player, player2], player2, 'spectatorid', {draftVariant: false, undoOption: true});
+      const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
       // Adding to the GameLoader because this is manually managed by the Game route, which is the real place responsible for
       // creating new games.
       GameLoader.getInstance().add(game);
@@ -274,14 +283,14 @@ describeDatabaseSuite({
       game.playerIsFinishedWithResearchPhase(player2);
       runAllActions(game);
       expect(game.phase).eq(Phase.ACTION);
-      expect(game.activePlayer.id).eq(player2.id);
+      expect(game.activePlayer).eq(player2.id);
 
       await db.awaitAllSaves();
 
       player2.pass();
       game.playerIsFinishedTakingActions();
       runAllActions(game);
-      expect(game.activePlayer.id).eq(player.id);
+      expect(game.activePlayer).eq(player.id);
 
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
@@ -298,7 +307,7 @@ describeDatabaseSuite({
         });
       }
 
-      expect(game.activePlayer.id).eq(player.id);
+      expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
@@ -357,7 +366,7 @@ describeDatabaseSuite({
     it('undo works in solo', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('gameid', [player], player, 'spectatorid', {undoOption: true});
+      const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase. This triggers a save.
@@ -380,7 +389,7 @@ describeDatabaseSuite({
         });
       }
 
-      expect(game.activePlayer.id).eq(player.id);
+      expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
@@ -441,7 +450,7 @@ describeDatabaseSuite({
       const db = dbFactory();
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -505,7 +514,7 @@ describeDatabaseSuite({
       db.setTrimCount(5);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -537,7 +546,7 @@ describeDatabaseSuite({
       db.setTrimCount(2);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -567,7 +576,7 @@ describeDatabaseSuite({
       db.setTrimCount(0);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -631,28 +640,12 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).has.members(range(20));
     });
 
-    it('stats - orphaned rows', async () => {
-      const db = dbFactory();
-      const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-orphan', [player], player, 'spectatorid');
-      await db.lastSaveGamePromise;
-
-      expect(await db.getStat('orphaned-rows-game')).eq('0');
-      expect(await db.getStat('orphaned-rows-participants')).eq('0');
-
-      // Delete the `games` rows directly, leaving `game` and `participants` behind orphaned.
-      await db.deleteGamesRows(game.id);
-
-      expect(await db.getStat('orphaned-rows-game')).eq('1');
-      expect(await db.getStat('orphaned-rows-participants')).eq('1');
-    });
-
     it('trim at -1', async () => {
       const db = dbFactory();
       db.setTrimCount(-1);
 
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid');
+      const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 

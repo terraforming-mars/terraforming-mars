@@ -4,12 +4,11 @@ import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addCity, addOcean, runAllActions, testGame} from '../../TestingUtils';
+import {addCity, addOcean, cast, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {partition, toID} from '../../../src/common/utils/utils';
 import {Board} from '../../../src/server/boards/Board';
-import {cast} from '../../../src/common/utils/utils';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewHolland', () => {
@@ -71,7 +70,6 @@ describe('NewHolland', () => {
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.NEW_HOLLAND);
-    expect(oceanSpace.tile!.covers?.tileType).to.eq(TileType.OCEAN);
   });
 
   it('Cannot place a city next to New Holland', () => {

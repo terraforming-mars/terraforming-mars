@@ -32,17 +32,11 @@ export class SendDelegateToArea extends DeferredAction {
     let parties = this.turmoil.parties;
     if (this.options.replace) {
       parties = this.turmoil.parties.filter((party) => {
-        if (party.delegates.size < 2) {
-          return false;
-        }
+        if (party.delegates.size < 2) return false;
 
         for (const delegate of party.delegates) {
-          if (delegate !== this.options.replace) {
-            continue;
-          }
-          if (delegate !== party.partyLeader) {
-            return true;
-          }
+          if (delegate !== this.options.replace) continue;
+          if (delegate !== party.partyLeader) return true;
           return party.delegates.get(this.options.replace) > 1;
         }
         return false;

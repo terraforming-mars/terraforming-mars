@@ -3,12 +3,11 @@ export type Warning =
  'undoBestEffort' |
  'maxtemp' |
  'maxoxygen' |
- 'maxoxygen-reduce' |
  'maxoceans' |
  'maxvenus' |
  'maxHabitatRate' |
  'maxMiningRate' |
- 'maxLogisticRate' |
+ 'maxLogisticsRate' |
  'decreaseOwnProduction' |
  'removeOwnPlants' |
  'buildOnLuna' |

@@ -7,7 +7,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import Vue from 'vue';
 import {CardRenderSymbolType} from '@/common/cards/render/CardRenderSymbolType';
 import {ICardRenderSymbol} from '@/common/cards/render/Types';
 import {Size} from '@/common/cards/render/Size';
@@ -36,7 +36,7 @@ const sizes: Record<Size, string> = {
   [Size.LARGE]: 'large',
 };
 
-export default defineComponent({
+export default Vue.extend({
   name: 'CardRenderSymbolComponent',
   props: {
     item: {

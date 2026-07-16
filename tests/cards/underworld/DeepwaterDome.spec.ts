@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {DeepwaterDome} from '../../../src/server/cards/underworld/DeepwaterDome';
 import {testGame} from '../../TestGame';
-import {addOcean, runAllActions} from '../../TestingUtils';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {assertPlaceOcean} from '../../assertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('DeepwaterDome', () => {
   it('play', () => {

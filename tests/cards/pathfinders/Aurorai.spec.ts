@@ -3,14 +3,11 @@ import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {CardName} from '../../../src/common/cards/CardName';
-import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
-import {Europa} from '../../../src/server/colonies/Europa';
 
 describe('Aurorai', () => {
   let card: Aurorai;
@@ -59,27 +56,21 @@ describe('Aurorai', () => {
     card.resourceCount = 3;
     expect(asteroid.canAct(player)).is.true;
 
-    const selectStandardProjectToPlay = new SelectStandardProjectToPlay(player, [asteroid]);
+    const playerInput = asteroid.action(player);
+    expect(playerInput).is.undefined;
+    runAllActions(game);
+
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    expect(selectPayment.paymentOptions.auroraiData).is.true;
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectStandardProjectToPlay.process({type: 'projectCard', card: CardName.ASTEROID_STANDARD_PROJECT, payment: {...Payment.EMPTY, megacredits: 4, auroraiData: 2}}),
+      selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 4, auroraiData: 2}}, player),
     ).to.throw(/Did not spend enough/);
 
-    selectStandardProjectToPlay.process({type: 'projectCard', card: CardName.ASTEROID_STANDARD_PROJECT, payment: {...Payment.EMPTY, megacredits: 8, auroraiData: 2}});
+    selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 8, auroraiData: 2}}, player),
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendable('auroraiData')).eq(1);
-  });
-
-  it('can use data for build colony standard project on Europa', () => {
-    [game, player] = testGame(1, {coloniesExtension: true});
-    player.playedCards.push(card);
-    game.colonies.push(new Europa());
-
-    player.megaCredits = 14;
-    card.resourceCount = 1;
-
-    expect(new BuildColonyStandardProject().canAct(player)).is.true;
   });
 });

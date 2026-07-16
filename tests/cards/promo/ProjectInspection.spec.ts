@@ -10,9 +10,8 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
-import {runAllActions, testGame} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ProjectInspection', () => {
   let card: ProjectInspection;

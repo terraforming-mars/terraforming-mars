@@ -29,7 +29,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     // no-op
   }
 
-  public action(player: IPlayer): SelectCard<IProjectCard> {
+  public override action(player: IPlayer): SelectCard<IProjectCard> {
     return new SelectCard(
       'Sell patents',
       'Sell',

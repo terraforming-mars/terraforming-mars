@@ -3,8 +3,7 @@ import {MoholeArea} from '../../../src/server/cards/base/MoholeArea';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions} from '../../TestingUtils';
-import {cast} from '../../../src/common/utils/utils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MoholeArea', () => {
   it('Should play', () => {

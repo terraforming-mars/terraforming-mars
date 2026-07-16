@@ -13,5 +13,3 @@ export const digit = true;
 export const max = true;
 export const nextTo = true;
 export const cancelled = true;
-export const uppercase = true;
-export const inParens = true;

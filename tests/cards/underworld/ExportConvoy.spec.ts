@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {ExportConvoy} from '../../../src/server/cards/underworld/ExportConvoy';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Birds} from '../../../src/server/cards/base/Birds';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ExportConvoy', () => {
   const canPlayRuns = [

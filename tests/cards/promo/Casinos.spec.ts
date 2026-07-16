@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {Casinos} from '../../../src/server/cards/promo/Casinos';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {addCity, runAllActions} from '../../TestingUtils';
+import {addCity, cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('Casinos', () => {
   let card: Casinos;

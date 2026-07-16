@@ -5,7 +5,7 @@ export enum GlobalParameter {
   VENUS = 'venus',
   MOON_HABITAT_RATE = 'moon-habitat',
   MOON_MINING_RATE = 'moon-mining',
-  MOON_LOGISTIC_RATE = 'moon-logistic',
+  MOON_LOGISTICS_RATE = 'moon-logistics',
 }
 
 export const GLOBAL_PARAMETERS = [
@@ -15,5 +15,5 @@ export const GLOBAL_PARAMETERS = [
   GlobalParameter.VENUS,
   GlobalParameter.MOON_HABITAT_RATE,
   GlobalParameter.MOON_MINING_RATE,
-  GlobalParameter.MOON_LOGISTIC_RATE,
+  GlobalParameter.MOON_LOGISTICS_RATE,
 ] as const;

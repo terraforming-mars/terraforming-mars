@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {ElectionSponsorship} from '../../../src/server/cards/underworld/ElectionSponsorship';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('ElectionSponsorship', () => {
   it('play', () => {

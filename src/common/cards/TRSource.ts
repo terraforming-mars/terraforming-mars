@@ -6,7 +6,7 @@ export const TR_SOURCES = [
   'venus',
   'moonHabitat',
   'moonMining',
-  'moonLogistic',
+  'moonLogistics',
 ] as const;
 
 // TRSource represents the ways an action will gain TR. This is used
@@ -19,5 +19,5 @@ export type TRSource = Partial<{
   venus: number
   moonHabitat: number,
   moonMining: number,
-  moonLogistic: number,
+  moonLogistics: number,
 }>

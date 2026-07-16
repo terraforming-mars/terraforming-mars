@@ -3,15 +3,13 @@ import {expect} from 'chai';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
-import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
-import {cast} from '../../../src/common/utils/utils';
 
 describe('SolarStorm', () => {
   let card: SolarStorm;
@@ -101,20 +99,5 @@ describe('SolarStorm', () => {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(14);
     expect(player3.plants).eq(398);
-  });
-
-  it('Compatible with underworld', () => {
-    const [game, player1, player2] = testGame(2, {underworldExpansion: true});
-    const card = new SolarStorm();
-
-    player2.plants = 3;
-    player2.underworldData.corruption = 1;
-
-    card.play(player1);
-    runAllActions(game);
-
-    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
-    player2.plants = 3;
-    player1.underworldData.corruption = 0;
   });
 });

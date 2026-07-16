@@ -473,7 +473,7 @@ export class PostgreSQL implements IDatabase {
     return map;
   }
 
-  // The actual (expensive) size-stat queries: table/index sizes, database size, and row counts.
+  // The size-stat queries: table/index sizes, database size, and row counts.
   // Throttled by collectSizeStatsIfStale() above; not intended to be called directly elsewhere.
   private collectSizeStats(): Promise<void> {
     if (this._client === undefined) {
@@ -481,29 +481,22 @@ export class PostgreSQL implements IDatabase {
     }
 
     return withDatabaseMetrics('collectSizeStats', async () => {
-      const columns = POSTGRESQL_TABLES.map((table) => `pg_total_relation_size('${table}') as ${table}_size`);
-      const sql = `SELECT ${columns.join(', ')}, pg_database_size(current_database()) as db_size`;
-      const result = await this.client.query(sql);
-      const row = result.rows[0];
-      POSTGRESQL_TABLES.forEach((table) => {
-        metrics.tableSizeBytes.set({table}, Number(row[`${table}_size`]));
-      });
-      metrics.databaseSizeBytes.set(Number(row.db_size));
-
-      // Using count(*) is inefficient, but the estimates from here
-      // https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
-      // seem wildly inaccurate.
-      //
-      // heroku pg:bloat --app terraforming-mars
-      // shows some bloat
-      // and the postgres command
-      // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
-      // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
-      // in testing. :fingers-crossed:
-      for (const table of POSTGRESQL_TABLES) {
-        const result = await this.client.query(`select count(*) as rowcount from ${table}`);
-        metrics.tableRows.set({table}, Number(result.rows[0].rowcount));
+      // Row counts use reltuples (a ~1%-accurate estimate) to avoid full count(*) scans.
+      // https://wiki.postgresql.org/wiki/Count_estimate
+      const rowCountResult = await this.client.query(
+        `SELECT s.relname, c.reltuples::bigint AS rowcount, pg_total_relation_size(c.oid) AS size
+         FROM pg_stat_user_tables s
+         JOIN pg_class c ON c.oid = s.relid
+         WHERE s.relname = ANY($1)`,
+        [POSTGRESQL_TABLES]);
+      for (const row of rowCountResult.rows) {
+        const table = row.relname;
+        metrics.tableSizeBytes.set({table}, Number(row.size));
+        metrics.tableRows.set({table}, Number(row.rowcount));
       }
+
+      const dbSizeResult = await this.client.query('SELECT pg_database_size(current_database()) as db_size');
+      metrics.databaseSizeBytes.set(Number(dbSizeResult.rows[0].db_size));
     });
   }
 

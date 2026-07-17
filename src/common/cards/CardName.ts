@@ -579,6 +579,7 @@ export enum CardName {
   FLOYD_CONTINUUM = 'Floyd Continuum',
   NEW_HOLLAND = 'New Holland',
   POLDERTECH_DUTCH = 'PolderTECH Dutch',
+  QUANTUM_RESEARCH = 'Quantum Research',
 
   // End of promo cards
 

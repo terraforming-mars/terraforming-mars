@@ -69,6 +69,7 @@ import {ProtectedGrowth} from './ProtectedGrowth';
 import {Psyche} from './16Psyche';
 import {PublicBaths} from './PublicBaths';
 import {PublicPlans} from './PublicPlans';
+import {QuantumResearch} from './QuantumResearch';
 import {Recyclon} from './Recyclon';
 import {RedShips} from './RedShips';
 import {RegoPlastics} from './RegoPlastics';
@@ -174,6 +175,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
     [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
     [CardName.STERLING_VENTS]: {Factory: SterlingVents},
+    [CardName.QUANTUM_RESEARCH]: {Factory: QuantumResearch},
   },
 
   preludeCards: {

@@ -414,17 +414,15 @@ export class PostgreSQL implements IDatabase {
 
   // Not part of IDatabase, invisible to MetricsDelegate, and invoked fire-and-forget (not awaited) by
   // saveGame above. Instrumented directly here instead.
-  private trim(game: IGame) {
-    return withDatabaseMetrics('trim', async () => {
-      if (this.trimCount <= 0) {
-        return;
-      }
-      if (game.lastSaveId % this.trimCount === 0) {
-        const maxSaveId = game.lastSaveId - this.trimCount;
-        await this.client.query(
-          'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
-      }
-    });
+  private async trim(game: IGame) {
+    if (this.trimCount <= 0) {
+      return;
+    }
+    if (game.lastSaveId % this.trimCount === 0) {
+      const maxSaveId = game.lastSaveId - this.trimCount;
+      await this.client.query(
+        'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
+    }
   }
 
   async deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {

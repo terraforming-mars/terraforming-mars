@@ -1,1 +1,26 @@
-
+{
+    "16 Psyche": "[16] Psyche",
+    "Increase titanium production 2 steps. Gain 3 titanium.": "Incrementa la producción de titanio 2 niveles. Obtén 3 de titanio.",
+    
+    "Astra Mechanica": "Astra Mechanica",
+    "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "DEVUELVE HASTA 2 DE TUS CARTAS DE EVENTO JUGADAS A TU MANO. NO PUEDES ESCOGER CARTAS QUE COLOQUEN LOSETAS ESPECIALES.",
+    
+    "Bactoviral Research": "Investigación Bactoviral",
+    "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Roba 1 carta. Escoge una de tus cartas jugadas y añádele 1 microbio por cada símbolo de ciencia que tengas, incluyendo este.",
+    
+    "Bio Printing Facility": "Instalación de bioimpresión",
+    "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Acción: Gasta 2 energías para obtener 2 plantas O para añadir 1 animal a OTRA carta.",
+    
+    "Casinos": "Casinos",
+    "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Requiere que tengas una ciudad en juego. Reduce tu producción de energía un nivel y aumenta tu producción de M€ en 4 niveles.",
+    
+    "City Parks": "Parques urbanos",
+    "Requires that you have 3 cities. Gain 2 plants.": "Requiere que tengas 3 ciudades en juego. Obtén 2 plantas",
+    
+    "Homeostasis Bureau": "Agencia de Homeostasis",
+    "Effect: When you raise the temperature, gain 3 M€.": "Efecto: cuando aumentes la temperatura, obtén 3 M€.",
+    
+    "Mars Nomads": "Nómadas de Marte",
+    "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "Acción: MUEVE LOS NÓMADAS a un área adyacente, vacía y no reservada y recibe EL BONUS POR COLOCACIÓN como si colocases una loseta especial allí. No se pueden colocar losetas en el área de los Nómadas.",
+    "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "COLOCA LOS NÓMADAS en un área vacía y no reservada en el tablero."
+}

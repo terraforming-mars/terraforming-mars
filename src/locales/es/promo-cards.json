@@ -10,6 +10,10 @@
     
     "Bio Printing Facility": "Instalación de bioimpresión",
     "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Acción: Gasta 2 energías para obtener 2 plantas O para añadir 1 animal a OTRA carta.",
+
+    "Carbon Nanosystems": "Nanosistemas de carbono",
+    "Effect: When you play a science tag, including this, add a graphene resource here.": "Efecto: Cuando juegues un símbolo de ciencia, incluyendo este, añade un recurso de grafeno a esta carta.",
+    "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Efecto: Al jugar una carta con símbolo de espacio o de ciudad, los grafenos se pueden usar como 4 M€ cada uno.",
     
     "Casinos": "",
     "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Requiere que tengas una ciudad en juego. Reduce tu producción de energía un nivel y aumenta tu producción de M€ en 4 niveles.",
@@ -19,8 +23,46 @@
     
     "Homeostasis Bureau": "Agencia de Homeostasis",
     "Effect: When you raise the temperature, gain 3 M€.": "Efecto: cuando aumentes la temperatura, obtén 3 M€.",
-    
+
+    "Icy Impactors": "Impactadores helados",
+    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Acción: Gasta 10 M€ (puedes usar titanio), para añadir 2 asteroides aquí, o gastar 1 asteroide para colocar una loseta de océano. EL JUGADOR INICIAL DECIDE DONDE COLOCARLA.",
+
+    "Kaguya Tech" : "",
+    "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Aumenta tu producción de M€ 2 niveles. Roba 1 carta. Elimina 1 de tus losetas de vegetación (no afecta al oxígeno). Coloca una loseta de ciudad allí, sin importar las reglas de colocación. Obtén los bonus de colocación como de costumbre.",
+     
     "Mars Nomads": "Nómadas de Marte",
     "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "Acción: MUEVE LOS NÓMADAS a un área adyacente, vacía y no reservada y recibe EL BONUS POR COLOCACIÓN como si colocases una loseta especial allí. No se pueden colocar losetas en el área de los Nómadas.",
-    "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "COLOCA LOS NÓMADAS en un área vacía y no reservada en el tablero."
+    "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "COLOCA LOS NÓMADAS en un área vacía y no reservada en el tablero.",
+
+    "Martian Lumber Corp": "Corporación Maderera Marciana",
+    "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Efecto: Cuando juegues un símbolo de edificio, las plantas pueden ser usadas como 3 M€ cada una.",
+    "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Requiere que tengas 2 losetas de vegetación. Incrementa tu producción de plantas 1 nivel.",
+    
+    "Robot Pollinators": "Robots polinizadores",
+    "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Requiere 4% de oxígeno. Aumenta tu producción de plantas 1 nivel. Obtén 1 planta por cada símbolo de planta que poseas.",
+    
+    "Soil Enrichment": "Fertilización del suelo",
+    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Gasta 1 microbio de CUALQUIERA de tus cartas para obtener 5 plantas.",
+    
+    "Solar Logistics": "Logística Solar",
+    "Effect: When you play an Earth tag, you pay 2 M€ less.": "Efecto: Cuando juegues un símbolo de Tierra, pagas 2 M€ menos.",
+    "Effect: When any player plays a space event, draw a card.": "Efecto: Cuando cualquier jugador juega un evento tipo espacio, roba una carta.",
+    "Gain 2 titanium.": "Obtén 2 titanios.",
+
+    "Static Harvesting": "Recolección Estática",
+    "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Requiere 3 o menos losetas de océano en juego. Aumenta tu producción de energía 1 nivel. Obtén 1 M€ por cada símbolo de edificio que poseas.",
+
+    "Sterling Vents": "Respiraderos Sterling",
+    "Decrease heat production 2 steps. Increase energy production 2 steps.": "Reduce tu producción de calor 2 niveles. Aumenta tu producción de energía 2 niveles.",
+
+    "Supercapacitors": "Supercondensadores",
+    "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "EFECTO: CONVERTIR LA ENERGÍA EN CALOR DURANTE LA PRODUCCIÓN ES OPCIONAL PARA CADA RECURSO DE ENERGÍA.",
+    "Increase M€ production 1 step.": "Aumenta tu producción de M€ 1 nivel.",
+
+    "Supermarkets": "Supermercados",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Requiere 2 ciudades en juego. Aumenta tu producción de M€ 2 niveles.",
+
+    "Teslaract": "Teslaracto",
+    "Action: Spend 1 energy production to gain 1 plant production.": "Acción: Reduce tu producción de energía 1 nivel para aumentar tu producción de plantas 1 nivel."
+
 }

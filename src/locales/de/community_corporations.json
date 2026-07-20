@@ -1,5 +1,5 @@
 {
-  "Aerotech": "",
+  "Aerotech": "AeroTech",
   "Effect: During each round's research phase, gain 1 titanium for each card you do not buy.": "EFFEKT: Während der Forschungsphase jeder Generation, erhältst du 1 Titan für jede Karte, die du nicht kaufst.",
   
   "Agricola Inc": "",
@@ -44,7 +44,7 @@
 
   "United Nations Mission One": "Vereinten Nationen, Mission Eins",
   "UNITED NATIONS MISSION ONE": "VEREINTEN NATIONEN, MISSION ONE",
-  "UNITED NATIONS": "VEREINTEN NATIONEN,",
+  "UNITED NATIONS": "VEREINTEN NATIONEN",
   "MISSION ONE": "MISSION EINS",
   "You start with 39 M€. Increase your TR 1 step.": "Du beginnst mit 39 M€. Erhöhe deinen TR um 1.",
   "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFEKT: Wenn ein Spieler eine Aktion durchführt oder eine Karte ausspielt, die den TR erhöht, einschließlich dieser, erhalte 1 M€ für jeden Schritt."

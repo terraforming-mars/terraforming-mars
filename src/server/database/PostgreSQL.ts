@@ -14,6 +14,7 @@ import {ThrottledCache} from './ThrottledCache';
 import {Clock} from '@/common/Timer';
 import {parseInterned} from './parseInterned';
 import {LogMessage} from '@/common/logs/LogMessage';
+import {compressToBrotli, decompressFromBrotli} from './compression';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
@@ -103,6 +104,7 @@ export class PostgreSQL implements IDatabase {
       players integer,
       save_id integer,
       game text,
+      game_compressed bytea,
       status text default 'running',
       created_time timestamp default now(),
       PRIMARY KEY (game_id, save_id));
@@ -149,6 +151,10 @@ export class PostgreSQL implements IDatabase {
     CREATE INDEX IF NOT EXISTS session_idx_expiration_time on session(expiration_time);
     `;
     await this.client.query(sql);
+
+    // games.game_compressed is already in the CREATE TABLE above for fresh databases;
+    // this covers databases where the table already existed without it.
+    await this.client.query('ALTER TABLE games ADD COLUMN IF NOT EXISTS game_compressed bytea;');
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -173,6 +179,19 @@ export class PostgreSQL implements IDatabase {
     ORDER BY created_time DESC`;
     const res = await this.client.query(sql);
     return res.rows.map((row) => row.game_id);
+  }
+
+  // game_compressed is the new format (Brotli-compressed JSON); game is the old
+  // plain-text format, kept for rows not yet migrated. New writes only populate
+  // game_compressed, so at most one of the two is ever set for a given row.
+  private resolveGameText(row: {game: string | null; game_compressed: Buffer | null}): string {
+    if (row.game_compressed !== null) {
+      return decompressFromBrotli(row.game_compressed);
+    }
+    if (row.game !== null) {
+      return row.game;
+    }
+    throw new Error('games row has neither game nor game_compressed set');
   }
 
   private compose(game: string, log: string, options: string): SerializedGame {
@@ -214,6 +233,7 @@ export class PostgreSQL implements IDatabase {
     const res = await this.client.query(
       `SELECT
         games.game as game,
+        games.game_compressed as game_compressed,
         game.log as log,
         game.options as options
       FROM games
@@ -227,13 +247,14 @@ export class PostgreSQL implements IDatabase {
       throw new Error(`Game ${gameId} not found`);
     }
     const row = res.rows[0];
-    return this.compose(row.game, row.log, row.options);
+    return this.compose(this.resolveGameText(row), row.log, row.options);
   }
 
   async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     const res = await this.client.query(
       `SELECT
         games.game as game,
+        games.game_compressed as game_compressed,
         game.log as log,
         game.options as options
       FROM games
@@ -247,7 +268,7 @@ export class PostgreSQL implements IDatabase {
       throw new Error(`Game ${gameId} not found at save_id ${saveId}`);
     }
     const row = res.rows[0];
-    return this.compose(row.game, row.log, row.options);
+    return this.compose(this.resolveGameText(row), row.log, row.options);
   }
 
   // Not part of IDatabase: void/callback-based, so MetricsDelegate can't observe its completion or
@@ -351,6 +372,7 @@ export class PostgreSQL implements IDatabase {
     (storedSerialized as any).gameLog = [];
     (storedSerialized as any).gameOptions = {};
     const gameJSON = JSON.stringify(storedSerialized);
+    const gameCompressed = compressToBrotli(gameJSON);
 
     this.statistics.saveCount++;
     try {
@@ -359,12 +381,14 @@ export class PostgreSQL implements IDatabase {
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
+      // Only game_compressed is written going forward; game is explicitly nulled so a
+      // row already carrying old plain-text data sheds it as soon as it's saved again.
       const res = await this.client.query(
-        `INSERT INTO games (game_id, save_id, game, players)
-        VALUES ($1, $2, $3, $4)
-        ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
+        `INSERT INTO games (game_id, save_id, game, game_compressed, players)
+        VALUES ($1, $2, NULL, $3, $4)
+        ON CONFLICT (game_id, save_id) DO UPDATE SET game = NULL, game_compressed = $3
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, gameJSON, game.players.length]);
+        [game.id, game.lastSaveId, gameCompressed, game.players.length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)
@@ -424,6 +448,46 @@ export class PostgreSQL implements IDatabase {
         'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
     }
   }
+
+  // // Not part of IDatabase: a one-off migration helper for converting existing games.game
+  // // (plain text) rows to games.game_compressed (Brotli). Intended to be driven by a
+  // // standalone tool, not called from application code.
+  // async migrateGameCompression(batchSize = 500): Promise<number> {
+  //   let converted = 0;
+  //   let cursor: {gameId: string; saveId: number} | undefined = undefined;
+  //   for (;;) {
+  //     const res: pg.QueryResult = cursor === undefined ?
+  //       await this.client.query(
+  //         `SELECT game_id, save_id, game FROM games
+  //          WHERE game IS NOT NULL AND game_compressed IS NULL
+  //          ORDER BY game_id, save_id
+  //          LIMIT $1`,
+  //         [batchSize]) :
+  //       await this.client.query(
+  //         `SELECT game_id, save_id, game FROM games
+  //          WHERE game IS NOT NULL AND game_compressed IS NULL
+  //          AND (game_id, save_id) > ($1, $2)
+  //          ORDER BY game_id, save_id
+  //          LIMIT $3`,
+  //         [cursor.gameId, cursor.saveId, batchSize]);
+  //     if (res.rows.length === 0) {
+  //       break;
+  //     }
+
+  //     for (const row of res.rows) {
+  //       const compressed = compressToBrotli(row.game);
+  //       await this.client.query(
+  //         'UPDATE games SET game_compressed = $1, game = NULL WHERE game_id = $2 AND save_id = $3',
+  //         [compressed, row.game_id, row.save_id]);
+  //       converted++;
+  //     }
+
+  //     const last = res.rows[res.rows.length - 1];
+  //     cursor = {gameId: last.game_id, saveId: last.save_id};
+  //     console.log(`Converted ${converted} rows so far...`);
+  //   }
+  //   return converted;
+  // }
 
   async deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {
     if (rollbackCount <= 0) {

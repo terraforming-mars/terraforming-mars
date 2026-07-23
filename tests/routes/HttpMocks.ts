@@ -41,4 +41,7 @@ export class MockResponse implements Response {
     this.statusCode = statusCode;
     return this as unknown as http.ServerResponse;
   }
+  public getHeader(name: string): number | string | string[] | undefined {
+    return this.headers.get(name);
+  }
 }

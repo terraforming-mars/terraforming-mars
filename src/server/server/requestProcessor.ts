@@ -194,9 +194,9 @@ export function processRequest(req: Request, res: Response): void {
     const url = new URL(req.url, `http://${req.headers.host}`);
 
     const pathname = url.pathname.substring(1); // Remove leading '/'
-    // No need to report every asset. Summarize.
     const handler = getHandler(pathname);
     if (handler !== undefined) {
+      // No need to report every asset. Summarize.
       metricsPathname = pathname.startsWith('assets/') ? 'assets/' : pathname;
       const {user, sessionid} = getAuthenticatedUser(req);
       const ctx: Context = {

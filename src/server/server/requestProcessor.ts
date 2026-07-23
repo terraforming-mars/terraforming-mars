@@ -171,8 +171,6 @@ function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; se
   return {user, sessionid};
 }
 
-// 1. Track blocked requests.
-// 2. Determine path in advacne.
 export function processRequest(req: Request, res: Response): void {
   const start = process.hrtime.bigint();
   let metricsPathname = '_unknown_';

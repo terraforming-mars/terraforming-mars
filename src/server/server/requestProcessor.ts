@@ -57,10 +57,10 @@ const metrics = {
   }),
   latency: new prometheus.Histogram({
     name: 'http_request_latency',
-    help: 'Request latency',
+    help: 'Request latency in milliseconds',
     registers: [prometheus.register],
     labelNames: ['path'],
-    buckets: [0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000],
+    buckets: [0, 0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000, 2500, 5000, 10000, 20000],
   }),
   response_count: new prometheus.Counter({
     name: 'http_response_count',
@@ -221,11 +221,13 @@ export function processRequest(req: Request, res: Response): void {
       responses.notFound(req, res);
     }
   } finally {
-    const durationMicros = Number(process.hrtime.bigint() - start) / 1_000_000;
+    const durationNanos = Number(process.hrtime.bigint() - start);
+    const durationMillis = durationNanos / 1_000_000;
     metrics.request_count.inc({path: metricsPathname, method: req.method});
     metrics.request_bytes.observe({path: metricsPathname}, Number(req.headers['content-length'] || 0));
     metrics.response_count.inc({code: res.statusCode.toString(), path: metricsPathname, method: req.method});
     metrics.response_bytes.observe({path: metricsPathname}, Number(res.getHeader('content-length') || 0));
-    metrics.latency.observe({path: metricsPathname}, Number(durationMicros));
+    metrics.latency.observe({path: metricsPathname}, Number(durationMillis));
+    console.log(metricsPathname, durationMillis);
   }
 }

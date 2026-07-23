@@ -226,6 +226,5 @@ export function processRequest(req: Request, res: Response): void {
     metrics.response_count.inc({code: res.statusCode.toString(), path: metricsPathname, method: req.method});
     metrics.response_bytes.observe({path: metricsPathname}, Number(res.getHeader('content-length') || 0));
     metrics.latency.observe({path: metricsPathname}, Number(durationMillis));
-    console.log(metricsPathname, durationMillis);
   }
 }

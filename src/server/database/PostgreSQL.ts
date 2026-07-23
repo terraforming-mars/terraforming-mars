@@ -31,7 +31,7 @@ const metrics = {
   tableSizeBytes: new prometheus.Gauge({
     name: 'postgresql_table_size_bytes',
     help: 'Total size (table + indexes) of a PostgreSQL table, in bytes',
-    labelNames: ['table'],
+    labelNames: ['table'] as const,
     registers: [prometheus.register],
     collect() {
       activeDatabase?.metricsScrapeCache.get();
@@ -48,7 +48,7 @@ const metrics = {
   tableRows: new prometheus.Gauge({
     name: 'postgresql_table_rows',
     help: 'Row count of a PostgreSQL table (select count(*))',
-    labelNames: ['table'],
+    labelNames: ['table'] as const,
     registers: [prometheus.register],
     collect() {
       activeDatabase?.metricsScrapeCache.get();

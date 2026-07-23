@@ -36,24 +36,25 @@ const metrics = {
   gamesCreated: new prometheus.Counter({
     name: 'game_created',
     help: 'Number of games created',
-    labelNames: ['players'],
+    labelNames: ['players'] as const,
     registers: [prometheus.register],
   }),
   gamesFinished: new prometheus.Counter({
     name: 'game_finished',
     help: 'Number of games finished',
-    labelNames: ['players'],
+    labelNames: ['players'] as const,
     registers: [prometheus.register],
   }),
   gamesPurged: new prometheus.Counter({
     name: 'game_purged',
     help: 'Number of games deleted because they are too old',
+    labelNames: ['players'] as const,
     registers: [prometheus.register],
   }),
   gamesInMemory: new prometheus.Gauge({
     name: 'games_in_memory',
     help: 'Number of games currently loaded in memory',
-    labelNames: ['has_log'],
+    labelNames: ['has_log'] as const,
     registers: [prometheus.register],
     collect() {
       const counts = GameLoader.getLoadedGameCount();
@@ -64,7 +65,7 @@ const metrics = {
   idleTime: new prometheus.Gauge({
     name: 'games_idle_time_seconds',
     help: 'Point-in-time distribution of idle time (seconds since last access) across games resident in memory, as cumulative histogram-style buckets. This is a snapshot gauge, not a cumulative histogram.',
-    labelNames: ['le'],
+    labelNames: ['le'] as const,
     registers: [prometheus.register],
     collect() {
       GameLoader.collectIdleTimes(this);

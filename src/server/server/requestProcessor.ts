@@ -55,7 +55,14 @@ const metrics = {
     labelNames: ['path'],
     buckets: [0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000],
   }),
+  response_count: new prometheus.Counter({
+    name: 'http_response_count',
+    help: 'Response count',
+    registers: [prometheus.register],
+    labelNames: ['code', 'path', 'method'],
+  }),
 };
+
 
 const clock = new Clock();
 
@@ -196,5 +203,6 @@ export function processRequest(req: Request, res: Response): void {
   } finally {
     const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
     metrics.latency.observe({path: pathnameForLatency}, Number(duration));
+    metrics.response_count.inc({code: res.statusCode.toString(), path: pathnameForLatency, method: req.method});
   }
 }

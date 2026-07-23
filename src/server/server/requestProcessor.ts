@@ -42,11 +42,18 @@ import {getHerokuIpAddress} from './heroku';
 import * as responses from './responses';
 
 const metrics = {
-  count: new prometheus.Counter({
+  request_count: new prometheus.Counter({
     name: 'http_request_count',
     help: 'Request count',
     registers: [prometheus.register],
     labelNames: ['path', 'method'],
+  }),
+  request_bytes: new prometheus.Histogram({
+    name: 'http_request_bytes',
+    help: 'Request bytes',
+    registers: [prometheus.register],
+    labelNames: ['path'],
+    buckets: [64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304],
   }),
   latency: new prometheus.Histogram({
     name: 'http_request_latency',
@@ -60,6 +67,13 @@ const metrics = {
     help: 'Response count',
     registers: [prometheus.register],
     labelNames: ['code', 'path', 'method'],
+  }),
+  response_bytes: new prometheus.Histogram({
+    name: 'http_response_bytes',
+    help: 'Response bytes',
+    registers: [prometheus.register],
+    labelNames: ['path'],
+    buckets: [64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304],
   }),
 };
 
@@ -142,9 +156,26 @@ function getHandler(pathname: string): IHandler | undefined {
   return undefined;
 }
 
+function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; sessionid: SessionId | undefined } {
+  const sessionManager = SessionManager.getInstance();
+  let user: DiscordUser | undefined = undefined;
+  let sessionid: SessionId | undefined = undefined;
+  try {
+    sessionid = authcookies.extract(req);
+    if (sessionid !== undefined) {
+      user = sessionManager.get(sessionid);
+    }
+  } catch (e) {
+    console.error('While extracting cookies', e);
+  }
+  return {user, sessionid};
+}
+
+// 1. Track blocked requests.
+// 2. Determine path in advacne.
 export function processRequest(req: Request, res: Response): void {
   const start = process.hrtime.bigint();
-  let pathnameForLatency: string | undefined = undefined;
+  let metricsPathname = '_unknown_';
   try {
     const ipAddress = getIPAddress(req);
     ipTracker.add(ipAddress);
@@ -162,47 +193,39 @@ export function processRequest(req: Request, res: Response): void {
       return;
     }
 
-    const sessionManager = SessionManager.getInstance();
-    let user: DiscordUser | undefined = undefined;
-    let sessionid: SessionId | undefined = undefined;
-    try {
-      sessionid = authcookies.extract(req);
-      if (sessionid !== undefined) {
-        user = sessionManager.get(sessionid);
-      }
-    } catch (e) {
-      console.error('While extracting cookies', e);
-    }
-
     const url = new URL(req.url, `http://${req.headers.host}`);
-    const ctx: Context = {
-      url: url,
-      clock,
-      gameLoader: GameLoader.getInstance(),
-      sessionManager: sessionManager,
-      ip: getIPAddress(req),
-      ipTracker: ipTracker,
-      ids: {
-        serverId,
-        statsId,
-      },
-      sessionid,
-      user: user,
-    };
 
     const pathname = url.pathname.substring(1); // Remove leading '/'
-    pathnameForLatency = pathname;
+    // No need to report every asset. Summarize.
     const handler = getHandler(pathname);
     if (handler !== undefined) {
-      metrics.count.inc({path: pathname, method: req.method});
+      metricsPathname = pathname.startsWith('assets/') ? 'assets/' : pathname;
+      const {user, sessionid} = getAuthenticatedUser(req);
+      const ctx: Context = {
+        url: url,
+        clock,
+        gameLoader: GameLoader.getInstance(),
+        sessionManager: SessionManager.getInstance(),
+        ip: getIPAddress(req),
+        ipTracker: ipTracker,
+        ids: {
+          serverId,
+          statsId,
+        },
+        sessionid: sessionid,
+        user: user,
+      };
+
       handler.processRequest(req, res, ctx);
     } else {
-      pathnameForLatency = undefined;
       responses.notFound(req, res);
     }
   } finally {
-    const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
-    metrics.latency.observe({path: pathnameForLatency}, Number(duration));
-    metrics.response_count.inc({code: res.statusCode.toString(), path: pathnameForLatency, method: req.method});
+    const durationMicros = Number(process.hrtime.bigint() - start) / 1_000_000;
+    metrics.request_count.inc({path: metricsPathname, method: req.method});
+    metrics.request_bytes.observe({path: metricsPathname}, Number(req.headers['content-length'] || 0));
+    metrics.response_count.inc({code: res.statusCode.toString(), path: metricsPathname, method: req.method});
+    metrics.response_bytes.observe({path: metricsPathname}, Number(res.getHeader('content-length') || 0));
+    metrics.latency.observe({path: metricsPathname}, Number(durationMicros));
   }
 }

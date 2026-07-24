@@ -8,10 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-3).slash().colonies(1).influence({size: Size.SMALL});
-});
-
 export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEv
       description: 'Lose 3 M€ for each colony (max 5, then reduced by influence).',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.SCIENTISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-3).slash().colonies(1).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

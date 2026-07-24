@@ -8,10 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('max 3').plants(1).influence({size: Size.SMALL});
-});
-
 export class EcoSabotage extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class EcoSabotage extends GlobalEvent implements IGlobalEvent {
       description: 'Lose all plants except 3 + influence.',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.text('max 3').plants(1).influence({size: Size.SMALL});
+      }),
     });
   }
 

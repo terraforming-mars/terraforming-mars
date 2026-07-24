@@ -10,11 +10,6 @@ import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-10).nbsp.resource(CardResource.DATA, 2).asterix().nbsp;
-  b.resource(CardResource.DATA).slash().influence();
-});
-
 export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -22,7 +17,10 @@ export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
       description: 'Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.SCIENTISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-10).nbsp.resource(CardResource.DATA, 2).asterix().nbsp;
+        b.resource(CardResource.DATA).slash().influence();
+      }),
     });
   }
 

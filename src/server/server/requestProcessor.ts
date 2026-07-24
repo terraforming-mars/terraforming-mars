@@ -171,7 +171,7 @@ function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; se
   return {user, sessionid};
 }
 
-export function processRequest(req: Request, res: Response): void {
+export async function processRequest(req: Request, res: Response): Promise<void> {
   const start = process.hrtime.bigint();
   let metricsPathname = '_unknown_';
   try {
@@ -214,7 +214,7 @@ export function processRequest(req: Request, res: Response): void {
         user: user,
       };
 
-      handler.processRequest(req, res, ctx);
+      await handler.processRequest(req, res, ctx);
     } else {
       responses.notFound(req, res);
     }

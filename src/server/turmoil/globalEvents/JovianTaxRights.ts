@@ -7,10 +7,6 @@ import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.megacredits(1)).slash().colonies(1).nbsp.titanium(1).slash().influence();
-});
-
 export class JovianTaxRights extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -18,7 +14,9 @@ export class JovianTaxRights extends GlobalEvent implements IGlobalEvent {
       description: 'Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.UNITY,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.megacredits(1)).slash().colonies(1).nbsp.titanium(1).slash().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

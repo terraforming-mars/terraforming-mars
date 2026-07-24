@@ -10,10 +10,6 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(3).slash().cards(1, {secondaryTag: AltSecondaryTag.BLUE}).influence({size: Size.SMALL});
-});
-
 export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -21,7 +17,9 @@ export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ for each blue card (max 5, then reduced by influence).',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().megacredits(3).slash().cards(1, {secondaryTag: AltSecondaryTag.BLUE}).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

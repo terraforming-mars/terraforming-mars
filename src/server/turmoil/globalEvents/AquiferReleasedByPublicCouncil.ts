@@ -8,10 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.oceans(1).nbsp.plants(1).steel(1).slash().influence();
-});
-
 export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlob
       description: 'First player places an ocean tile. Gain 1 plant and 1 steel per influence.',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.oceans(1).nbsp.plants(1).steel(1).slash().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

@@ -10,11 +10,6 @@ import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
-  b.text('1st:', {size: Size.SMALL}).tr(2, {size: Size.TINY}).nbsp.text('2nd:', {size: Size.SMALL}).tr(1, {size: Size.TINY});
-});
-
 export class Election extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -22,7 +17,10 @@ export class Election extends GlobalEvent implements IGlobalEvent {
       description: 'Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
+        b.text('1st:', {size: Size.SMALL}).tr(2, {size: Size.TINY}).nbsp.text('2nd:', {size: Size.SMALL}).tr(1, {size: Size.TINY});
+      }),
     });
   }
 

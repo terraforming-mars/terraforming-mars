@@ -9,10 +9,6 @@ import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(4).slash().city().influence({size: Size.SMALL});
-});
-
 export class Riots extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 4 M€ for each city tile (max 5, then reduced by influence).',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().megacredits(4).slash().city().influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

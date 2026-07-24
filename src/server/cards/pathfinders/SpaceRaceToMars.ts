@@ -9,11 +9,6 @@ import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;
-  b.energy(1).slash().influence();
-});
-
 export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -21,7 +16,10 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
       description: 'Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;
+        b.energy(1).slash().influence();
+      }),
     });
   }
 

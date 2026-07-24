@@ -8,10 +8,6 @@ import {CorrosiveRainDeferredAction} from '../../deferredActions/CorrosiveRainDe
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().resource(CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
-});
-
 export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 2 floaters from a card or 10 M€. Draw 1 card for each influence.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().resource(CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
+      }),
     });
   }
 

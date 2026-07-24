@@ -5,10 +5,6 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
 import {CardRenderer} from '../render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().temperature(2).nbsp.minus().oxygen(2);
-});
-
 export class MagneticFieldStimulationDelays extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -16,7 +12,9 @@ export class MagneticFieldStimulationDelays extends GlobalEvent implements IGlob
       description: 'Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().temperature(2).nbsp.minus().oxygen(2);
+      }),
     });
   }
 

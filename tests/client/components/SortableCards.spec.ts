@@ -10,12 +10,12 @@ type DropPosition = 'before' | 'after';
 async function dragCard(sortable: VueWrapper<InstanceType<typeof SortableCards>>, sourceIndex: number, targetIndex: number, position: DropPosition) {
   const draggers = sortable.findAll('[draggable=true]');
   const target = draggers[targetIndex];
-  const bounds = {left: 0, width: 2};
-  // jsdom does not calculate element bounds.
-  target.element.getBoundingClientRect = () => bounds as DOMRect;
+  // jsdom lacks layout; use unit bounds.
+  const targetBounds = {left: 0, width: 1};
+  target.element.getBoundingClientRect = () => targetBounds as DOMRect;
 
   await draggers[sourceIndex].trigger('dragstart');
-  await target.trigger('dragover', {clientX: position === 'before' ? bounds.left : bounds.left + bounds.width});
+  await target.trigger('dragover', {clientX: position === 'before' ? targetBounds.left : targetBounds.left + targetBounds.width});
   await draggers[sourceIndex].trigger('dragend');
 }
 

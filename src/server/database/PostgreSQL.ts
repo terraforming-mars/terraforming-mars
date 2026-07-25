@@ -5,7 +5,7 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {daysAgoToSeconds, stringToNumber} from './utils';
+import {daysAgoToSeconds, stringToBoolean, stringToNumber} from './utils';
 import {GameIdLedger} from './IDatabase';
 import {Session, SessionId} from '../auth/Session';
 import {toID} from '../../common/utils/utils';
@@ -21,6 +21,7 @@ type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {l
 export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game', 'session'] as const;
 
 const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
+const POSTGRES_COMPRESS_ON_WRITE = stringToBoolean(process.env.POSTGRES_COMPRESS_ON_WRITE, false);
 
 // How often the (expensive) table/database size stats are actually recomputed. Scrapes that land
 // between refreshes just get the cached values.
@@ -372,7 +373,7 @@ export class PostgreSQL implements IDatabase {
     (storedSerialized as any).gameLog = [];
     (storedSerialized as any).gameOptions = {};
     const gameJSON = JSON.stringify(storedSerialized);
-    const gameCompressed = compressToBrotli(gameJSON);
+    const gameCompressed = POSTGRES_COMPRESS_ON_WRITE ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
     try {
@@ -383,12 +384,13 @@ export class PostgreSQL implements IDatabase {
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       // Only game_compressed is written going forward; game is explicitly nulled so a
       // row already carrying old plain-text data sheds it as soon as it's saved again.
+
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, game_compressed, players)
-        VALUES ($1, $2, NULL, $3, $4)
+        VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = NULL, game_compressed = $3
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, gameCompressed, game.players.length]);
+        [game.id, game.lastSaveId, POSTGRES_COMPRESS_ON_WRITE ? null : gameJSON, POSTGRES_COMPRESS_ON_WRITE ? gameCompressed : null, game.players.length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)

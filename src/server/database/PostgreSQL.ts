@@ -21,7 +21,7 @@ type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {l
 export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game', 'session'] as const;
 
 const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
-const POSTGRES_COMPRESS_ON_WRITE = stringToBoolean(process.env.POSTGRES_COMPRESS_ON_WRITE, false);
+const DB_COMPRESS_ON_WRITE = stringToBoolean(process.env.DB_COMPRESS_ON_WRITE, false);
 
 // How often the (expensive) table/database size stats are actually recomputed. Scrapes that land
 // between refreshes just get the cached values.
@@ -60,6 +60,7 @@ const metrics = {
 
 export class PostgreSQL implements IDatabase {
   protected trimCount = POSTGRES_TRIM_COUNT;
+  protected compressOnWrite = DB_COMPRESS_ON_WRITE;
 
   protected statistics = {
     saveCount: 0,
@@ -373,7 +374,7 @@ export class PostgreSQL implements IDatabase {
     (storedSerialized as any).gameLog = [];
     (storedSerialized as any).gameOptions = {};
     const gameJSON = JSON.stringify(storedSerialized);
-    const gameCompressed = POSTGRES_COMPRESS_ON_WRITE ? compressToBrotli(gameJSON) : null;
+    const gameCompressed = this.compressOnWrite ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
     try {
@@ -382,15 +383,15 @@ export class PostgreSQL implements IDatabase {
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
-      // Only game_compressed is written going forward; game is explicitly nulled so a
-      // row already carrying old plain-text data sheds it as soon as it's saved again.
-
+      //
+      // When compressOnWrite is true, the game state is written to game_compressed; when it's
+      // false, it's written to game. The other column is set to null so a row never carries both.
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, game_compressed, players)
         VALUES ($1, $2, $3, $4, $5)
-        ON CONFLICT (game_id, save_id) DO UPDATE SET game = NULL, game_compressed = $3
+        ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3, game_compressed = $4
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, POSTGRES_COMPRESS_ON_WRITE ? null : gameJSON, POSTGRES_COMPRESS_ON_WRITE ? gameCompressed : null, game.players.length]);
+        [game.id, game.lastSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)

@@ -302,6 +302,28 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       await expect(db.getGameVersion('game-id-123', 0)).to.be.rejectedWith(/Game game-id-123 not found/);
     });
 
+    it('saveGame updates in place when re-saving an existing saveId', async () => {
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id', [player], player, 'spectatorid');
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      // A normal save at a fresh saveId (1).
+      player.megaCredits = 100;
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members([0, 1]);
+      expect((await db.getGameVersion(game.id, 1)).players[0].megaCredits).eq(100);
+
+      // Re-save the same saveId (1) with a changed value. This is the upsert / ON CONFLICT
+      // path: the existing row is updated in place rather than adding a new save, and the
+      // updated value reads back.
+      player.megaCredits = 200;
+      game.lastSaveId = 1;
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members([0, 1]);
+      expect((await db.getGameVersion(game.id, 1)).players[0].megaCredits).eq(200);
+    });
+
     it('participantIds', async () => {
       expect(await db.getParticipants()).is.empty;
       testGame(2, {}, '1');

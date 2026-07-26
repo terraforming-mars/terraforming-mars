@@ -452,46 +452,6 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  // // Not part of IDatabase: a one-off migration helper for converting existing games.game
-  // // (plain text) rows to games.game_compressed (Brotli). Intended to be driven by a
-  // // standalone tool, not called from application code.
-  // async migrateGameCompression(batchSize = 500): Promise<number> {
-  //   let converted = 0;
-  //   let cursor: {gameId: string; saveId: number} | undefined = undefined;
-  //   for (;;) {
-  //     const res: pg.QueryResult = cursor === undefined ?
-  //       await this.client.query(
-  //         `SELECT game_id, save_id, game FROM games
-  //          WHERE game IS NOT NULL AND game_compressed IS NULL
-  //          ORDER BY game_id, save_id
-  //          LIMIT $1`,
-  //         [batchSize]) :
-  //       await this.client.query(
-  //         `SELECT game_id, save_id, game FROM games
-  //          WHERE game IS NOT NULL AND game_compressed IS NULL
-  //          AND (game_id, save_id) > ($1, $2)
-  //          ORDER BY game_id, save_id
-  //          LIMIT $3`,
-  //         [cursor.gameId, cursor.saveId, batchSize]);
-  //     if (res.rows.length === 0) {
-  //       break;
-  //     }
-
-  //     for (const row of res.rows) {
-  //       const compressed = compressToBrotli(row.game);
-  //       await this.client.query(
-  //         'UPDATE games SET game_compressed = $1, game = NULL WHERE game_id = $2 AND save_id = $3',
-  //         [compressed, row.game_id, row.save_id]);
-  //       converted++;
-  //     }
-
-  //     const last = res.rows[res.rows.length - 1];
-  //     cursor = {gameId: last.game_id, saveId: last.save_id};
-  //     console.log(`Converted ${converted} rows so far...`);
-  //   }
-  //   return converted;
-  // }
-
   async deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {
     if (rollbackCount <= 0) {
       console.error(`invalid rollback count for ${gameId}: ${rollbackCount}`);

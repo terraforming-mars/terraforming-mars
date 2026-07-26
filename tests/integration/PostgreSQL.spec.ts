@@ -33,6 +33,8 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
       host: 'localhost',
       password: process.env.POSTGRES_INTEGRATION_TEST_PASSWORD,
     });
+    // Overwrite compression.
+    this.compressOnWrite = true;
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
@@ -49,6 +51,10 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
 
   public setTrimCount(trimCount: number) {
     this.trimCount = trimCount;
+  }
+
+  public setCompressOnWrite(compressOnWrite: boolean) {
+    this.compressOnWrite = compressOnWrite;
   }
 
   public async afterEach() {
@@ -96,6 +102,13 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   // `game` and `participants` rows behind.
   public async deleteGamesRows(gameId: GameId): Promise<void> {
     await this.client.query('DELETE FROM games WHERE game_id = $1', [gameId]);
+  }
+
+  // Reads the two raw storage columns for a single save so tests can assert which
+  // representation (plain-text `game` vs. compressed `game_compressed`) is populated.
+  public async getRawGame(gameId: GameId, saveId: number): Promise<{game: string | null, gameCompressed: Buffer | null}> {
+    const res = await this.client.query('SELECT game, game_compressed FROM games WHERE game_id = $1 AND save_id = $2', [gameId, saveId]);
+    return {game: res.rows[0].game, gameCompressed: res.rows[0].game_compressed};
   }
 }
 
@@ -663,6 +676,96 @@ describeDatabaseSuite({
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members(range(3));
+    });
+
+    // Verifies that each save lands in the column matching compressOnWrite, and that a row
+    // reads back correctly even when its stored format doesn't match the current setting.
+    it('saveGame on conflict swaps between plain-text and compressed storage', async () => {
+      const db = dbFactory();
+
+      // Save the game uncompressed: the plain-text `game` column is populated and
+      // `game_compressed` is empty.
+      db.setCompressOnWrite(false);
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-conflict', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+
+      let raw = await db.getRawGame(game.id, 0);
+      expect(raw.game).is.not.null;
+      expect(raw.gameCompressed).is.null;
+
+      // Resave save_id 0 with compression on. This is the ON CONFLICT DO UPDATE path:
+      // `game` is cleared and `game_compressed` is populated with the new value.
+      db.setCompressOnWrite(true);
+      player.megaCredits = 123;
+      game.lastSaveId = 0;
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0]);
+      raw = await db.getRawGame(game.id, 0);
+      expect(raw.game).is.null;
+      expect(raw.gameCompressed).is.not.null;
+      const compressed = await db.getGameVersion(game.id, 0);
+      expect(compressed.players[0].megaCredits).eq(123);
+
+      // Resave save_id 0 again, uncompressed. The conflict path now clears
+      // `game_compressed` and repopulates `game`.
+      db.setCompressOnWrite(false);
+      player.megaCredits = 456;
+      game.lastSaveId = 0;
+      await db.saveGame(game);
+
+      raw = await db.getRawGame(game.id, 0);
+      expect(raw.game).is.not.null;
+      expect(raw.gameCompressed).is.null;
+      const plain = await db.getGameVersion(game.id, 0);
+      expect(plain.players[0].megaCredits).eq(456);
+    });
+
+    it('reads an uncompressed row while compression is enabled', async () => {
+      const db = dbFactory();
+
+      // Write the row uncompressed.
+      db.setCompressOnWrite(false);
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-read-uncompressed', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const saveId = game.lastSaveId;
+      player.megaCredits = 87;
+      await db.saveGame(game);
+
+      // Confirm it really was stored as plain text.
+      const raw = await db.getRawGame(game.id, saveId);
+      expect(raw.game).is.not.null;
+      expect(raw.gameCompressed).is.null;
+
+      // Turn compression on. The read path must still decode the older uncompressed row.
+      db.setCompressOnWrite(true);
+      const serialized = await db.getGameVersion(game.id, saveId);
+      expect(serialized.players[0].megaCredits).eq(87);
+    });
+
+    it('reads a compressed row after compression is disabled', async () => {
+      const db = dbFactory();
+
+      // Write the row compressed.
+      db.setCompressOnWrite(true);
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-read-compressed', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const saveId = game.lastSaveId;
+      player.megaCredits = 91;
+      await db.saveGame(game);
+
+      // Confirm it really was stored compressed.
+      const raw = await db.getRawGame(game.id, saveId);
+      expect(raw.game).is.null;
+      expect(raw.gameCompressed).is.not.null;
+
+      // Turn compression off. The read path must still decompress the older compressed row.
+      db.setCompressOnWrite(false);
+      const serialized = await db.getGameVersion(game.id, saveId);
+      expect(serialized.players[0].megaCredits).eq(91);
     });
   },
 });

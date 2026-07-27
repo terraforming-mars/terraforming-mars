@@ -3,6 +3,7 @@ import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
 
 describe('MarsBotBonusDeck', () => {
+  const logger = {log: () => {}};
   let deck: MarsBotBonusDeck;
 
   beforeEach(() => {
@@ -15,13 +16,13 @@ describe('MarsBotBonusDeck', () => {
   });
 
   it('draws a card off the draw pile', () => {
-    const card = deck.draw();
+    const card = deck.draw(logger);
     expect(card).to.not.be.undefined;
     expect(deck.drawPile.length).to.eq(7);
   });
 
   it('discards a card to the discard pile', () => {
-    const card = deck.draw()!;
+    const card = deck.draw(logger)!;
     deck.discard(card);
     expect(deck.discardPile.length).to.eq(1);
   });
@@ -29,7 +30,7 @@ describe('MarsBotBonusDeck', () => {
   it('reshuffles the discard pile when the draw pile is empty', () => {
     const drawn = [];
     for (let i = 0; i < 8; i++) {
-      drawn.push(deck.draw()!);
+      drawn.push(deck.draw(logger)!);
     }
     expect(deck.drawPile.length).to.eq(0);
 
@@ -38,9 +39,16 @@ describe('MarsBotBonusDeck', () => {
     }
     expect(deck.discardPile.length).to.eq(8);
 
-    const card = deck.draw();
+    const card = deck.draw(logger);
     expect(card).to.not.be.undefined;
     expect(deck.discardPile.length).to.eq(0);
     expect(deck.drawPile.length).to.eq(7);
+  });
+
+  it('serialization round trip', () => {
+    deck.discard(deck.draw(logger)!, deck.draw(logger)!);
+    const restored = MarsBotBonusDeck.deserialize(deck.serialize(), new SeededRandom(42));
+    expect(restored.drawPile).to.deep.eq(deck.drawPile);
+    expect(restored.discardPile).to.deep.eq(deck.discardPile);
   });
 });

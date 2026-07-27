@@ -23,3 +23,18 @@ export function createBaseBonusCards(): Array<MarsBotBonusCard> {
     bonusCard(BonusCardId.B08_CORPORATE_COMPETITION, CardName.AUTOMA_CORPORATE_COMPETITION),
   ];
 }
+
+/** Restore bonus cards from their serialized names. */
+export function marsBotBonusCardsFromJSON(names: ReadonlyArray<CardName>): Array<MarsBotBonusCard> {
+  const byName = new Map(createBaseBonusCards().map((card) => [card.name, card]));
+  const cards: Array<MarsBotBonusCard> = [];
+  for (const name of names) {
+    const card = byName.get(name);
+    if (card !== undefined) {
+      cards.push(card);
+    } else {
+      console.warn(`bonus card ${name} not found while loading game.`);
+    }
+  }
+  return cards;
+}

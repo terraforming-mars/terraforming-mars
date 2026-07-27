@@ -50,14 +50,14 @@ export type MarsBotCorpPerGen = {
 };
 
 export type MarsBotCorpCardRef = {
-  readonly name: string;
+  readonly name: CardName;
   readonly tags: ReadonlyArray<Tag>;
   readonly cost: number;
   readonly hasRequirements: boolean;
   readonly victoryPoints: number;
 };
 
-export function toCorpCardRef(name: string, tags: ReadonlyArray<Tag>, cost: number, hasRequirements: boolean, victoryPoints: number): MarsBotCorpCardRef {
+export function toCorpCardRef(name: CardName, tags: ReadonlyArray<Tag>, cost: number, hasRequirements: boolean, victoryPoints: number): MarsBotCorpCardRef {
   return {name, tags, cost, hasRequirements, victoryPoints};
 }
 

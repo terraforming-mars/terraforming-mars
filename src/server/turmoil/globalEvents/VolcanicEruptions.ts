@@ -7,10 +7,6 @@ import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.temperature(2).nbsp.production((pb)=>pb.heat(1)).slash().influence();
-});
-
 export class VolcanicEruptions extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -18,7 +14,9 @@ export class VolcanicEruptions extends GlobalEvent implements IGlobalEvent {
       description: 'Increase temperature 2 steps. Increase heat production 1 step per influence.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.KELVINISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.temperature(2).nbsp.production((pb)=>pb.heat(1)).slash().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

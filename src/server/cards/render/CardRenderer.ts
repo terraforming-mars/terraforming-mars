@@ -8,9 +8,23 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {liteBoolean, LiteBoolean} from '../../../common/LiteBoolean';
+import {isLiveServer} from '../../utils/server';
+
+export type TextOptions = {
+  size?: Size;
+  uppercase?: boolean;
+  isBold?: boolean;
+  inParens?: boolean;
+}
 
 export class CardRenderer {
   public static builder(f: (builder: Builder<CardRenderRoot>) => void): ICardRenderRoot {
+    // The live server never reads renderData (only export_card_rendering.ts does,
+    // to build the client's cards.json at compile time), so skip building the
+    // real tree there to avoid the CPU cost and per-card-name retained memory.
+    if (isLiveServer()) {
+      return EMPTY_ROOT;
+    }
     const builder = new RootBuilder();
     f(builder);
     return builder.build();
@@ -21,6 +35,8 @@ class CardRenderRoot implements ICardRenderRoot {
   public readonly is ='root';
   constructor(public rows: Array<Array<ItemType>> = [[]]) {}
 }
+
+const EMPTY_ROOT = new CardRenderRoot();
 
 class CardRenderProductionBox implements ICardRenderProductionBox {
   public readonly is = 'production-box';
@@ -419,7 +435,7 @@ abstract class Builder<T> {
   }
 
   public claim(count: number = 1) {
-    return this.text('CLAIM').nbsp.text(count.toString());
+    return this.text('CLAIM').text(' ' + count.toString());
   }
 
   public corruption(count: number = 1, options?: ItemOptions) {
@@ -541,21 +557,31 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): this {
+  public text(text: string, options: TextOptions = {}): this {
+    const completeOptions = {
+      size: Size.MEDIUM,
+      uppercase: false,
+      isBold: true,
+      inParens: false,
+      ...options,
+    };
+
+
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
-    item.size = size;
-    item.isUppercase = liteBoolean(uppercase);
-    item.isBold = liteBoolean(isBold);
+    item.size = completeOptions.size;
+    item.isUppercase = liteBoolean(completeOptions.uppercase);
+    item.isBold = liteBoolean(completeOptions.isBold);
+    item.inParens = liteBoolean(completeOptions.inParens);
     return this._appendToRow(item);
   }
 
-  public plainText(text: string) {
-    return this.text(text, Size.SMALL, false, false);
+  public plainText(text: string, parens: boolean = false) {
+    return this.text(text, {size: Size.SMALL, isBold: false, inParens: parens});
   }
 
   public vpText(text: string): this {
-    return this.text(text, Size.TINY, true);
+    return this.text(text, {size: Size.TINY, uppercase: true});
   }
 
   public get br(): this {

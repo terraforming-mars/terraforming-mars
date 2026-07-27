@@ -2,7 +2,7 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <div class="flex">
-      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" >
       &nbsp;
       <AppButton size="big" type="max" @click="setMaxValue" title="MAX" />
       &nbsp;

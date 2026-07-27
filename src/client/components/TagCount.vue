@@ -1,6 +1,6 @@
 <template>
   <div :class="outerClass">
-    <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count"/>
+    <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count"/>
     <Tag v-else :tag="(tag as CardTag)" :size="size" :type="type"/>
     <span :class="innerClass">{{ count }}</span>
   </div>
@@ -20,7 +20,7 @@ import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 type DisplayTag = 'vp' | 'tr' | 'handicap' | 'cards' | 'escape';
 
 export default defineComponent({
-  name: 'tag-count',
+  name: 'TagCount',
   props: {
     tag: {
       type: String as () => CardTag | SpecialTags | DisplayTag,
@@ -43,6 +43,7 @@ export default defineComponent({
     },
     showWhenZero: {
       // When true, show even if the value is zero.
+      type: Boolean,
       required: false,
       default: false,
     },

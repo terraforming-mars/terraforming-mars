@@ -1,10 +1,9 @@
 .card-list-container {
   .selection-row label {
     color: #ccc;
-    display: inline-block;
     background-color: @grey_850;
     padding: 10px 20px 10px 20px;
-    font-family: Ubuntu, Sans;
+    font-family: Ubuntu, sans-serif;
     font-size: 23px;
     border-radius: 8px;
     text-align: center;
@@ -98,6 +97,10 @@
     /* Make the container a flexbox */
     justify-content: flex-end;
     /* Align items to the right */
+    /* When the row is too narrow, wrap whole widgets to the next line rather
+       than letting the button labels wrap inside their buttons. */
+    flex-wrap: wrap;
+    row-gap: 5px;
 
     input {
       flex: 1;
@@ -107,10 +110,33 @@
     button {
       width: 150px;
       margin-right: 5px;
+      /* Keep each label on one line so the widget wraps, not its text. */
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   }
 
   .small-card {
     font-size: 75%;
   }
+}
+
+// "Scroll to top" widget, pinned in the bottom-left corner stack above the
+// language flag. Styled like the sibling .sidebar_item boxes so it matches the
+// gear and flag; position: fixed so it stacks above them (which are also fixed).
+.card-list-scroll-top.sidebar_item {
+  position: fixed;
+  bottom: 112px;
+  left: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card-list-scroll-top-arrow {
+  color: #c6c6c6;
+  font-size: 30px;
+  line-height: 1;
 }

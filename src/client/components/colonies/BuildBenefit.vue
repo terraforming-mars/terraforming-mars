@@ -16,8 +16,8 @@
     <div class="copy-trade-box">Copy Trade</div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_CARDS && metadata.build.quantity[idx] === 2">
-    <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-    <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+    <div class="resource card card-with-border" style="margin-top: 0px; margin-left: 7px; transform: scale(0.8);"></div>
+    <div class="resource card card-with-border" style="position: absolute; margin: 7px 0 0 -30px; transform: scale(0.8);"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_INFLUENCE">
     <div class="influence" style="margin-top:5px"></div>

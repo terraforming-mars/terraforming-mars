@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {addCity, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
@@ -31,7 +32,6 @@ describe('GeologicalExpedition', () => {
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});
     scienceCard = fakeCard({resourceType: CardResource.SCIENCE});
     player.playedCards.push(card, microbeCard, scienceCard);
-    player.popWaitingFor();
   });
 
   it('no bonuses, gain 1 steel', () => {
@@ -102,6 +102,23 @@ describe('GeologicalExpedition', () => {
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(2);
+  });
+
+  it('does not grant covered ocean bonuses', () => {
+    const oceanSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    oceanSpace.spaceType = SpaceType.OCEAN;
+    oceanSpace.bonus = [SpaceBonus.PLANT];
+
+    game.simpleAddTile(player, space, {tileType: TileType.OCEAN});
+
+    game.addTile(player, oceanSpace, {tileType: TileType.OCEAN_FARM, covers: oceanSpace.tile});
+
+    expect(oceanSpace.tile?.tileType).eq(TileType.OCEAN_FARM);
+    expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);
+
+    // Covering an existing tile doesn't grant the space bonus, nor does it give the consolation steel.
+    expect(player.plants).eq(0);
+    expect(player.steel).eq(0);
   });
 
   it('variety', () => {

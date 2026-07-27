@@ -96,7 +96,21 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', {loader: 'css-loader', options: {url: false}}, 'less-loader'],
+        use: ['style-loader', {loader: 'css-loader', options: {url: false}}, {
+          loader: 'less-loader',
+          options: {
+            // Prepend the shared design tokens and mixins to every component's
+            // <style lang="less"> block. This lets scoped components use
+            // @variables (e.g. @player_red, @font_size_normal) and .mixins()
+            // (e.g. .raised-bevel()) directly, without importing them.
+            //
+            // Only include files that contain declarations and mixins, not actual styles.
+            additionalData: '@import "variables.less"; @import "mixins.less";',
+            lessOptions: {
+              paths: [path.resolve(__dirname, 'src/styles')],
+            },
+          },
+        }],
       },
     ],
   },

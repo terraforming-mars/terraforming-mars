@@ -23,7 +23,7 @@
   "Requires Venus 12%.": "Вимагає 12% Венери.",
 
   "Sulphur-Eating Bacteria": "Бактерії, що їдять сірку",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "Дія: Витратити будь-яку кількість мікробів тут, щоб отримати потрійну суму M€.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "Дія: Додати 1 мікроб до цієї карти АБО витратити будь-яку кількість мікробів тут, щоб отримати потрійну суму M€.",
   "Requires Venus 6%": "Вимагає 6% Венери",
 
   "Venus Waystation": "Венерійська зупинка",
@@ -50,16 +50,14 @@
 
   "Atalanta Planitia Lab": "Лаб. Аталанта Планітія",
   "Rotator Impacts": "Ротаторний удар",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Дія: Витратити 6 M€, щоб додати ресурс астероїда на цю карту [МОЖНА ВИКОРИСТОВУВАТИ ТИТАН].",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.": "Дія: Витратити 1 ресурс з цієї карти, щоб підвищити Венеру на 1.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "Дія: Витратити 6 M€, щоб додати ресурс астероїда на цю карту [МОЖНА ВИКОРИСТОВУВАТИ ТИТАН] АБО витратити 1 ресурс з цієї карти, щоб підвищити Венеру на 1.",
   "Venus must be 14% or lower": "Венера повинна бути 14% або менше",
 
   "Omnicourt": "Омнікорт",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Вимагає міток Венери, Землі та Юпітера. Збільшити РТ на 2.",
 
   "Jet Stream Microscrappers": "Реактивні мікроскрапери",
-  "Action: Spend 1 titanium to add 2 floaters here": "Дія: Витратити 1 титан, щоб додати 2 аеростатіви сюди.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "Дія: Витратити 2 аеростати тут, щоб підвищити Венеру на 1.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "Дія: Витратити 1 титан, щоб додати 2 аеростатіви сюди АБО витратити 2 аеростати тут, щоб підвищити Венеру на 1.",
 
   "Spin-Inducing Asteroid": "Астероїд обертання",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "Венера повинна бути 10% або менше. Підвищити Венеру на 2.",
@@ -83,8 +81,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "Підвищити Венеру на 1. Збільшити виробництво тепла на 3.",
 
   "Aerial Mappers": "Повітряні картографи",
-  "Action: Add floater to ANY card.": "Дія: Додати аеростат на БУДЬ-ЯКУ карту.",
-  "Action: Spend one floater here to draw 1 card.": "Дія: Витратити одну аеростат тут, щоб взяти 1 карту.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "Дія: Додати аеростат на БУДЬ-ЯКУ карту АБО витратити одну аеростат тут, щоб взяти 1 карту.",
 
   "Aerosport Tournament": "Аероспортивний турнір",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Вимагає, щоб у вас було 5 аеростатів. Отримати 1 M€ за кожен тайл міста в грі.",
@@ -103,15 +100,14 @@
 
   "Deuterium Export": "Експорт дейтерію",
   "Action: Add 1 floater to this card.": "Дія: Додати 1 аеростат на цю карту.",
-  "Action: Spend 1 floater here to increase your energy production 1 step.": "Дія: Витратити 1 аеростат тут, щоб збільшити виробництво енергії на 1.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.": "Дія: Додати 1 аеростат на цю карту АБО витратити 1 аеростат тут, щоб збільшити виробництво енергії на 1.",
 
   "Extractor Balloons": "Екстракторні кулі",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "Дія: Вилучити 2 аеростати тут, щоб підвищити Венеру на 1.",
-  "Add 3 floaters to this card": "Додати 3 аеростати на цю карту",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.": "Дія: Додати 1 аеростат на цю карту АБО вилучити 2 аеростати тут, щоб підвищити Венеру на 1.",
+  "Add 3 floaters to this card.": "Додати 3 аеростати на цю карту",
 
   "Forced Precipitation": "Примусове опадання",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "Дія: Витратити 2 M€, щоб додати 1 аеростат на ЦЮ карту.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "Дія: Витратити 2 аеростати тут, щоб підвищити Венеру на 1.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "Дія: Витратити 2 M€, щоб додати 1 аеростат на ЦЮ карту АБО витратити 2 аеростати тут, щоб підвищити Венеру на 1.",
 
   "Freyja Biodomes": "Фрейя Біодоми",
   "10% Venus": "10% Венера",
@@ -133,7 +129,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Збільшити виробництво M€ на 1 за кожну мітку Землі, який у вас є (включаючи цей). Розмістити тайл міста НА ЗАРЕЗЕРВОВАНУ ОБЛАСТЬ.",
 
   "Local Shading": "Місцеве затінення",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "Дія: Витратити 1 аеростат тут, щоб збільшити виробництво M€ на 1.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.": "Дія: Додати 1 аеростат на цю карту АБО витратити 1 аеростат тут, щоб збільшити виробництво M€ на 1.",
 
   "Maxwell Base": "Максвеллівська база",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "Дія: Додати 1 ресурс на ІНШУ КАРТУ ВЕНЕРИ.",

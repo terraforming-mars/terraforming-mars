@@ -18,14 +18,14 @@
       </div>
     </template>
     <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
-      <dynamic-title title="Drafted Cards" :color="thisPlayer.color"/>
+      <DynamicTitle title="Drafted Cards" :color="thisPlayer.color"/>
       <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
           <Card :card="card"/>
       </div>
     </div>
 
     <template v-if="playerView.pickedCorporationCard.length === 1">
-      <dynamic-title title="Your selected cards:" :color="thisPlayer.color"/>
+      <DynamicTitle title="Your selected cards:" :color="thisPlayer.color"/>
       <div>
         <div class="cardbox">
           <Card :card="playerView.pickedCorporationCard[0]"/>
@@ -48,10 +48,10 @@
       </div>
     </template>
 
-    <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-    <waiting-for v-if="game.phase !== 'end'" :playerView="playerView" :waitingfor="playerView.waitingFor"></waiting-for>
+    <DynamicTitle v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
+    <WaitingFor v-if="game.phase !== 'end'" :playerView="playerView" :waitingfor="playerView.waitingFor"/>
 
-    <dynamic-title title="Game details" :color="thisPlayer.color"/>
+    <DynamicTitle title="Game details" :color="thisPlayer.color"/>
 
     <div class="player_home_block" v-if="playerView.players.length > 1">
       <Milestones :showScores="false" :milestones="game.milestones" />
@@ -59,7 +59,7 @@
     </div>
 
     <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">
-      <dynamic-title title="Turn order" :color="thisPlayer.color"/>
+      <DynamicTitle title="Turn order" :color="thisPlayer.color"/>
       <div class="player_item" v-for="(p, idx) in playerView.players" :key="idx" v-trim-whitespace>
         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
           <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
@@ -76,22 +76,21 @@
         </div>
       </summary>
       <div class="accordion-body">
-        <board
+        <Board
           :spaces="game.spaces"
           :expansions="game.gameOptions.expansions"
           :venusScaleLevel="game.venusScaleLevel"
           :boardName ="game.gameOptions.boardName"
           :aresData="game.aresData"
-          :altVenusBoard="game.gameOptions.altVenusBoard">
-        </board>
+          :altVenusBoard="game.gameOptions.altVenusBoard"/>
 
-        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
+        <Turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
         <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
         <a name="moonBoard" class="player_home_anchor"></a>
-        <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
-        <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="playerView.players"></DeltaProjectBoard>
+        <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
+        <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="playerView.players"/>
       </div>
     </details>
   </div>
@@ -140,14 +139,14 @@ export default defineComponent({
     },
   },
   components: {
-    'board': Board,
+    Board,
     Card,
     DeltaProjectBoard,
     DynamicTitle,
-    'waiting-for': WaitingFor,
+    WaitingFor,
     Milestones,
     Awards,
-    'turmoil': Turmoil,
+    Turmoil,
     PlanetaryTracks,
     MoonBoard,
   },

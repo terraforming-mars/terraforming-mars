@@ -9,10 +9,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
-});
-
 export class HomeworldSupport extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class HomeworldSupport extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 2 M€ for each Earth tag (max 5) and influence.',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(2).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

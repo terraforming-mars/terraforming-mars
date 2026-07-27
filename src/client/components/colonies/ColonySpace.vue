@@ -1,6 +1,6 @@
 <template>
   <div>
-    <build-benefit v-if="idx <= 2" :metadata="metadata" :idx="idx"></build-benefit>
+    <BuildBenefit v-if="idx <= 2" :metadata="metadata" :idx="idx"/>
     <div v-if="player !== undefined" class="occupied-colony-space">
       <div :class="`board-cube colony-cube board-cube--${player}`"></div>
     </div>

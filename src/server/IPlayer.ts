@@ -352,6 +352,7 @@ export interface IPlayer {
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
+  clearWaitingFor(): void;
   serialize(): SerializedPlayer;
 
   /** Returns the cost a player must spend to claim a milestone. Public for Briber. */

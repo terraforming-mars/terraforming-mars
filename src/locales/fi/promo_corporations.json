@@ -46,7 +46,7 @@
   "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.": "Aloitat 35 M€:lla. Ensimmäisenä toimintanasi aseta valtameri ja viheralue vierekkäin. Nosta happea 1 askeleella.",
   "Effect: When you place an ocean tile, gain 1 energy.": "VAIKUTUS: Kun asetat valtamerilaatan, saat 1 energian.",
   "Effect: When you place a greenery, gain 1 plant.": "VAIKUTUS: Kun asetat viheralueen, saat 1 kasvin.",
-  
+
   "Recyclon": "",
   "You start with 38 M€ and 1 steel production.": "Aloitat 38 M€:lla ja 1 terästuotannolla.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "VAIKUTUS: Kun pelaat rakennusympyrän, tämä mukaan lukien, saat 1 mikrobin tälle kortille tai poista 2 mikrobia täältä ja nosta kasvintuotantoasi 1 askeleella.",
@@ -62,5 +62,5 @@
   "TACTICAL GENOMICS": "TAKTINEN GENOMIIKKA",
   "Splice": "Pilkonta",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Aloitat 44 M€:lla. Ensimmäisenä toimintanasi paljasta kortteja kunnes olet paljastanut mikrobiympyrän. Ota se ja hylkää loput.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "VAIKUTUS: Kun mikrobiympyrä pelataan, tämä mukaan lukien, KYSEINEN PELAAJA saa 2 M€ tai lisää mikrobin KYSEISELLE kortille, ja sinä saat 2 M€."
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "VAIKUTUS: Kun mikrobiympyrä pelataan, tämä mukaan lukien, KYSEINEN PELAAJA saa 2 M€ tai lisää mikrobin KYSEISELLE kortille, ja sinä saat 2 M€."
 }

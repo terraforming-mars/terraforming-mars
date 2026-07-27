@@ -68,7 +68,7 @@
 
 "Earthquake Machine": "Erdbeben-Maschine",
 "Action: Spend 1 energy to excavate an underground resource.": "AKTION: Bezahle 1 Energie aus, um eine unterirdische Ressource auszugraben.",
-"Requires 2 science tags. Decrease any plant production 1 step": "Benötigt 2 Wissenschafts-Symbole. Reduziere eine beliebige Pflanzenproduktion um 1.",
+"Requires 2 science tags. Decrease any plant production 1 step.": "Benötigt 2 Wissenschafts-Symbole. Reduziere eine beliebige Pflanzenproduktion um 1.",
 
 "Excavator Leasing": "Bagger-Leasing",
 "Effect: The excavate standard project costs 1 M€ less for all players.": "EFFEKT: Das Standardprojekt Ausgraben kostet für alle Spieler 1 M€ weniger.",
@@ -118,8 +118,7 @@
 "Every player with the lowest number of crime tags INCLUDING EVENTS gains 1 TR, if possible. Players with 0 crime tags gain 1 additional TR.": "Jeder Spieler mit der niedrigsten Anzahl von Verbrechenssymbolen EINSCHLIEßLICH EREIGNISSE erhält 1 TW, wenn möglich. Spieler mit 0 Verbrechenssymbolen erhalten 1 zusätzlichen TW.",
 
 "Grey Market Exploitation": "Ausbeutung des grauen Marktes",
-"Action: Spend 1 M€ to gain 1 standard resource.": "AKTION: Bezahle 1 M€, um 1 Standardressource zu erhalten.",
-"Action: Spend 1 corruption to gain 3 of the same standard resource.": "AKTION: Bezahle 1 Korruption, um 3 der gleichen Standardressource zu erhalten.",
+"Action: Spend 1 M€ to gain 1 standard resource, or spend 1 corruption to gain 3 of the same standard resource.": "AKTION: Bezahle 1 M€, um 1 Standardressource zu erhalten, oder bezahle 1 Korruption, um 3 der gleichen Standardressource zu erhalten.",
 "Requires 2 corruption.": "Benötigt 2 Korruption.",
 
 "Guerilla Ecologists": "Guerilla-Ökologen",
@@ -241,7 +240,6 @@
 "Requires 3 oceans. Reduce your heat production 1 step. Increase your M€ production 3 steps. Gain 1 corruption.": "Benötigt 3 Ozeanplättchen. Verringere deine Wärmeproduktion um 1. Erhöhe deine M€-Produktion um 3. Erhalte 1 Korruption.",
 
 "Public Spaceline": "Öffentliche Raumfahrtlinie",
-"Increase your M€ production 2 steps": "Erhöhe deine M€-Produktion um 2.",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Benötigt 5 Weltraum-Symbole. Diese Karte hat 2 Erd-, 2 Jupiter-, 2 Venus- und 2 Mars-Symbole.",
 
 "Racketeering": "Organisierte Kriminalität",
@@ -277,8 +275,7 @@
 "Requires 3 corruption.": "Benötigt 3 Korruption.",
 
 "Space Wargames": "Weltraum-Wargames",
-"Action: Spend 1 titanium to put 2 fighters on this card.": "AKTION: Bezahle 1 Titan, um 2 Jäger-Ressource für diese Karte zu erhalten.",
-"Action: Spend 6 fighter resource on this card to take first player next generation.": "AKTION: Bezahle 6 Jäger-Ressource von dieser Karte, um den Startspieler der nächsten Generation zu werden.",
+"Action: Spend 1 titanium to put 2 fighters on this card, or spend 6 fighter resource on this card to take first player next generation.": "AKTION: Bezahle 1 Titan, um 2 Jäger-Ressource für diese Karte zu erhalten, oder bezahle 6 Jäger-Ressource von dieser Karte, um den Startspieler der nächsten Generation zu werden.",
 "1 VP for each Jovian tag you have.": "1 SP für jedes eigene Jupiter-Symbol.",
 "Put 4 fighters on this card.": "Lege 4 Jäger auf diese Karte.",
 

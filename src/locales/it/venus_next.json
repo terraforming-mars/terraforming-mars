@@ -50,7 +50,7 @@
   "Requires Venus 12%.":"Richiede che Venere sia almeno al 12%.",
 
   "Sulphur-Eating Bacteria":"Batteri Mangiatori di Zolfo",
-  "Action: Spend any number of microbes here to gain triple amount of M€.":"Azione: aggiungi 1 Microbo a questa carta, oppure scarta un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.":"Azione: aggiungi 1 Microbo a questa carta, oppure scarta un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
   "Requires Venus 6%).":"Richiede che Venere sia almeno al 6%.",
 
   "Venus Waystation":"Stazione Intermedia di Venere",
@@ -85,16 +85,14 @@
   "Atalanta Planitia Lab":"Laboratorio di Atalanta Planitia",
 
   "Rotator Impacts":"Impatti da Rotatore",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].":"Azione: spendi 6 M€ per aggiungere a questa carta una risorsa Asteroide (PUOI USARE IL TITANIO).",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.":"Rimuovi una risorsa Asteroide da questa carta per incrementare Venere di 1 livello.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.":"Azione: spendi 6 M€ per aggiungere a questa carta una risorsa Asteroide (PUOI USARE IL TITANIO) OPPURE rimuovi una risorsa Asteroide da questa carta per incrementare Venere di 1 livello.",
   "Venus must be 14% or lower).":"Venere dev'essere al più al 14%.",
 
   "Omnicourt":"Corte Universale",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.":"Richiede 1 simbolo Venere, 1 simbolo Terra e 1 simbolo Gioviano. Incrementa il tuo TT di 2 livelli.",
 
   "Jet Stream Microscrappers":"Microframmentatori di Corrente a Getto",
-  "Action: Spend 1 titanium to add 2 floaters here":"Azione: spendi 1 risorsa Titanio per aggiungere 2 Galleggianti a questa carta.",
-  "Action: Spend 2 floaters here to raise Venus 1 step":"Azione: rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.":"Azione: spendi 1 risorsa Titanio per aggiungere 2 Galleggianti a questa carta OPPURE rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
 
   "Spin-Inducing Asteroid":"Asteroide Induttore di Rotazione",
   "Venus must be 10% or lower. Raise Venus 2 steps.":"Venere dev'essere al più al 10%. Incrementa Venere di 2 livelli.",
@@ -130,8 +128,7 @@
 
 
   "Aerial Mappers":"Mappatori Aerei",
-  "Action: Add floater to ANY card.":"Azione: aggiungi 1 Galleggiante ad una QUALUNQUE carta.",
-  "Action: Spend one floater here to draw 1 card.":"Azione: rimuovi 1 Galleggiante da questa carta per pescare 1 carta.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.":"Azione: aggiungi 1 Galleggiante ad una QUALUNQUE carta OPPURE rimuovi 1 Galleggiante da questa carta per pescare 1 carta.",
 
   "Aerosport Tournament":"Torneo Sport Aerospaziali",
   "5 floaters":"5 Galleggianti",
@@ -153,12 +150,12 @@
 
   "Deuterium Export":"Esportazione di Deuterio",
   "Action: Add 1 floater to this card.":"Azione: aggiungi 1 Galleggiante a questa carta.",
-  "Action: Spend 1 floater here to increase your energy production 1 step.":"Azione: rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di Energia di 1 livello.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.":"Azione: aggiungi 1 Galleggiante a questa carta OPPURE rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di Energia di 1 livello.",
 
   "Extractor Balloons":"Palloni Estrattori",
   "OR":"OPPURE",
-  "Action: Remove 2 floaters here to raise Venus 1 step.":"Azione: rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
-  "Add 3 floaters to this card":"Aggiungi 3 Galleggianti a questa carta.",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.":"Azione: aggiungi 1 Galleggiante a questa carta OPPURE rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
+  "Add 3 floaters to this card.":"Aggiungi 3 Galleggianti a questa carta.",
 
   "Requires 2 science tags. 1 VP for every 3rd Microbe on this card":"Richiede 2 simboli Scienza. 1 PV per ogni tre Microbi su questa carta.",
 
@@ -167,8 +164,7 @@
   "Requires 2 science tags. 1 VP for every 2nd Floater on this card":"Richiede 2 simboli Scienza. 1 PV per ogni coppia di Galleggianti su questa carta.",
 
   "Forced Precipitation":"Precipitazioni Forzate",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante a questa carta.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.":"Azione: rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante a questa carta OPPURE rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
 
   "Freyja Biodomes":"Biocupole di Freyja",
 
@@ -197,7 +193,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
 
   "Local Shading":"Schermatura Locale",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.":"Azione: rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di M€ di 1 livello.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.":"Azione: aggiungi 1 Galleggiante a questa carta OPPURE rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di M€ di 1 livello.",
 
   "Maxwell Base":"Base Maxwell",
   "Action: Add 1 resource to ANOTHER VENUS CARD.":"Azione: aggiungi 1 risorsa AD UN'ALTRA CARTA DI TIPO VENERE.",

@@ -29,7 +29,8 @@
   "Ancient Shipyards":"古代造船厂",
   "Ancient Shipyards (Nerfed)":"古代造船厂（削弱）",
   "Action: Steal 8 M€ from any player and add a resource cube here.":"行动：从任何玩家那里偷取8 M€并在这里添加一个资源立方体。",
-  "Spend 3 titanium. -1 VP for every resource here.":"花3钛。这里每个资源-1个VP。",
+  "Spend 3 titanium.":"花3钛。",
+  "-1 VP for every resource here.":"这里每个资源-1个VP。",
 
  "Archimedes Hydroponics Station":"阿基米德水培站",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.":"减少你的电力和M€产量1。增加你的绿叶产量2。",
@@ -53,8 +54,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.":"需要4个采矿效率。所有玩家为自己拥有的每个采矿板块支付4 M€费用。",
 
   "Darkside Incubation Plant":"黑暗孵化厂",
-  "Action: Add 1 microbe here.":"行动：在此处添加1个微生物",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.":"行动：花费2微生物来提高殖民效率1。",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.":"行动：在此处添加1个微生物，或花费2微生物来提高殖民效率1。",
   "Spend 1 titanium. 1 VP for every 2 microbes here.":"花费1钛。这里每2个微生物获得1 VP。",
 
   "Darkside Meteor Bombardment":"黑暗流星轰击",
@@ -64,7 +64,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.":"增加您的钛产量2级，如果采矿率至少为2，则增加1级。然后提高采矿效率1",
 
   "Darkside Observatory":"黑暗矿业集团",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"行动：在任意卡片上添加1门科学资源(每个科学资源给予2个VP或更多的卡片除外)",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.":"行动：在任意卡片上添加1门科学资源(每个科学资源给予2个VP或更多的卡片除外)，或增加2个数据资源到任意卡",
   "Action: Add 2 data to ANY card.":"行动：增加2个数据资源到任意卡",
 
   "Deep Lunar Mining":"深层月球采矿",
@@ -265,8 +265,7 @@
   "Steel Market Monopolists":"钢市场垄断",
   "3 Mining rate":"3 采矿效率",
   "Requires the mining rate to be 3 or higher.":"需要采矿效率为3或更高。",
-  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)":"行动：花费3X的M€，获得2X的钢（最大9M€）",
-  "Action: Spend X steel to gain 3X M€ (max 3 steel).":"行动：花费X钢，获得3X的M€（最大3钢）。",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).":"行动：花费3X的M€，获得2X的钢（最大9M€），或花费X钢，获得3X的M€（最大3钢）。",
 
   "Subterranean Habitats":"地下栖息地",
   "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.":"效果：当你在月球上建造殖民地时，你少花费1钛。",
@@ -285,8 +284,7 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.":"花费2钛。每有2级采矿效率，提升你的钛产量1级。",
 
   "Titanium Market Monopolists":"钛市场垄断",
-  "Action: Spend 2X M€ to gain X titanium [max 8 M€]":"行动：花费2X的M€，获得X的钛（最大8M€）",
-  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].":"行动：花费X钛，获得4X的M€（最大4钛）。",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€], or spend X titanium to gain 4X M€ [max 4 titanium].":"行动：花费2X的M€，获得X的钛（最大8M€），或花费X钛，获得4X的M€（最大4钛）。",
 
   "Tycho Road Network":"第谷公路网",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.":"花费1钢。提升你的M€产量1级。在月球上放置一个道路板块，并提升物流效率1级。",

@@ -1,12 +1,12 @@
 <template>
   <div v-if="space !== undefined" :class="mainClass" :data_space_id="space.id">
-    <board-space-tile
+    <BoardSpaceTile
       :space="space"
       :aresExtension="aresExtension"
       :tileView="tileView"
-    ></board-space-tile>
+    />
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
+    <Bonus :bonus="space.bonus" v-if="showBonus"/>
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
     </template>
@@ -22,7 +22,7 @@
       <template v-if="space.nomads === true">
         <div class='board-cube--nomad'></div>
       </template>
-      <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="board"></underground-token>
+      <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="board"/>
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
       <div v-if="space.spaceType === SpaceType.DEFLECTION_ZONE" class="board-space-type-deflection-zone"></div>
     </template>
@@ -43,7 +43,7 @@ import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 import {getSpaceName} from '@/common/boards/spaces';
 import {SpaceType} from '@/common/boards/SpaceType';
 export default defineComponent({
-  name: 'board-space',
+  name: 'BoardSpace',
   props: {
     space: {
       type: Object as () => SpaceModel,
@@ -65,9 +65,9 @@ export default defineComponent({
     return {};
   },
   components: {
-    'bonus': Bonus,
-    'board-space-tile': BoardSpaceTile,
-    'underground-token': UndergroundToken,
+    Bonus,
+    BoardSpaceTile,
+    UndergroundToken,
   },
   computed: {
     mainClass(): string {

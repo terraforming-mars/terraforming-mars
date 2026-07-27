@@ -3,8 +3,8 @@
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
-              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
-              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
+              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" >
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" >
             </template>
             <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
@@ -15,7 +15,7 @@
             </Card>
         </label>
         <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
-        <warnings-component :warnings="warnings"></warnings-component>
+        <WarningsComponent :warnings="warnings"/>
         <div v-if="showsave === true" class="nofloat">
             <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />

@@ -39,8 +39,7 @@ export class AsteroidResources extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf40',
         renderData: CardRenderer.builder((b) => {
-          b.minus().energy(3, {digit}).production((pb) => pb.steel(1).titanium(1)).br
-            .or(Size.SMALL).br;
+          b.minus().energy(3, {digit}).production((pb) => pb.steel(1).titanium(1)).or(Size.SMALL).br;
           b.minus().energy(3, {digit}).oceans(1, {size: Size.SMALL}).steel(2, {digit}).titanium(1);
         }),
         description: 'Spend 3 energy. Either increase your steel and titanium production one step, OR ' +

@@ -10,10 +10,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().tag(Tag.SCIENCE).influence({size: Size.SMALL});
-});
-
 export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -21,7 +17,9 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 2 M€ for each science tag (max 5) and influence.',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.SCIENTISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(2).slash().tag(Tag.SCIENCE).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

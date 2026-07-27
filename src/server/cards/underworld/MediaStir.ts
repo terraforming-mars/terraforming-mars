@@ -8,10 +8,6 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-3).slash().corruption().influence({size: Size.SMALL}).nbsp.text('0').corruption().colon().tr(1);
-});
-
 export class MediaStir extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-3).slash().corruption().influence({size: Size.SMALL}).nbsp.text('0').corruption().colon().tr(1);
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

@@ -11,13 +11,26 @@ describe('LanguageSwitcher', () => {
     ALL_LANGUAGES.forEach((lang) => {
       it('render ' + lang, () => {
         const icon = wrapper.find(`.language-icon--${lang}`);
-        const expected = icon.attributes('title') as string;
+        const expected = icon.attributes('data-title') as string;
         const e = LANGUAGES[lang];
         expect(expected).to.be.a('string');
         expect(expected).to.satisfy((title: string) => title.startsWith(e[0]));
         expect(expected).to.satisfy((title: string) => title.indexOf(e[1], 1) > 0);
       });
     });
+  });
+
+  it('marks the current language as selected', () => {
+    const originalLang = PreferencesManager.INSTANCE.values().lang;
+    PreferencesManager.INSTANCE.set('lang', 'de');
+    try {
+      const wrapper = shallowMount(LanguageSwitcher);
+      expect(wrapper.find('.language-icon--de').classes()).to.include('language-icon--selected');
+      expect(wrapper.find('.language-icon--en').classes()).to.not.include('language-icon--selected');
+      expect(wrapper.findAll('.language-icon--selected')).to.have.lengthOf(1);
+    } finally {
+      PreferencesManager.INSTANCE.set('lang', originalLang);
+    }
   });
 
   it('saves language preference', async () => {

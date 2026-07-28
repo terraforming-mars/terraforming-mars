@@ -21,16 +21,15 @@ export class EcologicalZone extends Card implements IProjectCard {
     cost = 12,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: CardMetadata = {
-      description: {
-        text: 'Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.',
-        align: 'left',
-      },
       cardNumber: '128',
       renderData: CardRenderer.builder((b) => {
         b.effect('When you play an animal or plant tag INCLUDING THESE, add an animal to this card.', (eb) => {
           eb.tag(Tag.ANIMAL).slash().tag(Tag.PLANT).startEffect.resource(CardResource.ANIMAL);
         }).br;
-        b.vpText('1 VP per 2 animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+        b.plainText('Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.', true);
+        b.tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+        b.br;
+        b.vpText('1 VP per 2 animals on this card.');
       }),
     },
   ) {

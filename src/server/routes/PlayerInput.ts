@@ -85,7 +85,7 @@ export class PlayerInput extends Handler {
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     // TODO(kberg): Find a better place for this optimization.
     for (const card of player.tableau) {
-      card.warnings.clear();
+      card.clearWarnings();
       if (isIProjectCard(card)) {
         card.additionalProjectCosts = undefined;
       }

@@ -35,13 +35,10 @@ export class LocalShading extends ActionCard implements IActionCard {
       metadata: {
         cardNumber: '235',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 floater to this card.', (eb) => {
-            eb.empty().startAction.resource(CardResource.FLOATER);
-          }).br;
-          b.or().br;
-          b.action('Spend 1 floater here to raise your M€ production 1 step.', (eb) => {
-            eb.resource(CardResource.FLOATER).startAction.production((pb) => pb.megacredits(1));
-          });
+          b.arrow().resource(CardResource.FLOATER).nbsp.or().br;
+          b.resource(CardResource.FLOATER).arrow().production((pb) => pb.megacredits(1)).br;
+
+          b.plainText('Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.', /* parens */ true);
         }),
       },
     });

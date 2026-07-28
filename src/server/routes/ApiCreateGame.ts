@@ -18,44 +18,54 @@ import {Response} from '../Response';
 import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
 
-function getQuotaConfig(): QuotaConfig {
+function parseQuotaConfig(struct: any): QuotaConfig {
+  let {limit} = struct;
+  const {per} = struct;
+  if (limit === undefined) {
+    throw new Error('limit is absent');
+  }
+  limit = Number.parseInt(limit);
+  if (isNaN(limit)) {
+    throw new Error('limit is invalid');
+  }
+  if (per === undefined) {
+    throw new Error('per is absent');
+  }
+  const perMs = durationToMilliseconds(per);
+  if (isNaN(perMs)) {
+    throw new Error('per is invalid');
+  }
+  return {limit, perMs};
+}
+
+// GAME_QUOTA accepts either a single {limit, per} object, or a JSON array of
+// them for multiple independent tiers (e.g. a burst limit and a daily limit).
+// A request must satisfy every configured tier to succeed.
+function getQuotaConfigs(): Array<QuotaConfig> {
   const defaultQuota = {limit: 1, perMs: 1}; // Effectively, no limit.
   const val = process.env.GAME_QUOTA;
-  try {
-    if (val !== undefined) {
-      const struct = JSON.parse(val);
-      let {limit} = struct;
-      const {per} = struct;
-      if (limit === undefined) {
-        throw new Error('limit is absent');
+  if (val) {
+    try {
+      const parsed = JSON.parse(val);
+      const structs = Array.isArray(parsed) ? parsed : [parsed];
+      if (structs.length === 0) {
+        throw new Error('GAME_QUOTA array is empty');
       }
-      limit = Number.parseInt(limit);
-      if (isNaN(limit)) {
-        throw new Error('limit is invalid');
-      }
-      if (per === undefined) {
-        throw new Error('per is absent');
-      }
-      const perMs = durationToMilliseconds(per);
-      if (isNaN(perMs)) {
-        throw new Error('perMillis is invalid');
-      }
-      return {limit, perMs};
+      return structs.map(parseQuotaConfig);
+    } catch (e) {
+      console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
     }
-    return defaultQuota;
-  } catch (e) {
-    console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
-    return defaultQuota;
   }
+  return [defaultQuota];
 }
 
 export class ApiCreateGame extends Handler {
   public static readonly INSTANCE = new ApiCreateGame();
-  private quotaHandler;
+  private quotaHandlers: Array<QuotaHandler>;
 
-  public constructor(quotaConfig: QuotaConfig = getQuotaConfig()) {
+  public constructor(quotaConfigs: Array<QuotaConfig> = getQuotaConfigs()) {
     super();
-    this.quotaHandler = new QuotaHandler(quotaConfig);
+    this.quotaHandlers = quotaConfigs.map((config) => new QuotaHandler(config));
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
@@ -78,7 +88,8 @@ export class ApiCreateGame extends Handler {
   // would be better.
   public override post(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
-      if (this.quotaHandler.measure(ctx) === false) {
+      const withinQuota = this.quotaHandlers.map((handler) => handler.measure(ctx)).every((ok) => ok);
+      if (!withinQuota) {
         responses.quotaExceeded(req, res);
         resolve();
         return;

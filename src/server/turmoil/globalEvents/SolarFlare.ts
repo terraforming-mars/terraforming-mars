@@ -9,10 +9,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(3).slash().tag(Tag.SPACE).influence({size: Size.SMALL});
-});
-
 export class SolarFlare extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class SolarFlare extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ for each space tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.KELVINISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().megacredits(3).slash().tag(Tag.SPACE).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

@@ -23,6 +23,6 @@ describe('CardRequirementComponent', () => {
         requirement: {tag: Tag.SCIENCE, count: 2},
       },
     });
-    expect(wrapper.find('.card-tag-science').exists()).to.be.true;
+    expect(wrapper.find('.tag-science').exists()).to.be.true;
   });
 });

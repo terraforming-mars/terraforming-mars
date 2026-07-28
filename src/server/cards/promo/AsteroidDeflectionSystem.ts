@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {uppercase} from '../Options';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
           b.action('REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.', (eb) => {
             eb.empty().startAction.cards(1).asterix().nbsp.tag(Tag.SPACE).colon().resource(CardResource.ASTEROID);
           }).br;
-          b.production((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', Size.SMALL, true);
+          b.production((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', {size: Size.SMALL, uppercase});
         }),
         description: {
           text: 'Decrease your energy production 1 step. 1 VP per asteroid on this card.',

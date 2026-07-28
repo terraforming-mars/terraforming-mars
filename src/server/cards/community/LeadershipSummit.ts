@@ -6,10 +6,6 @@ import {IGame} from '../../IGame';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.cards(1).slash().partyLeaders(1).plus().influence();
-});
-
 export class LeadershipSummit extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -17,7 +13,9 @@ export class LeadershipSummit extends GlobalEvent implements IGlobalEvent {
       description: 'Draw 1 card for each party leader (max 5) and influence.',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.cards(1).slash().partyLeaders(1).plus().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

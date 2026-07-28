@@ -165,7 +165,9 @@ export interface ICard {
    *
    * See: IProjectCard.additionalProjectCosts
    */
-  readonly warnings: Set<Warning>;
+  readonly warnings: ReadonlySet<Warning>;
+  addWarning(warning: Warning): void;
+  clearWarnings(): void;
 
   readonly behavior?: Behavior,
 

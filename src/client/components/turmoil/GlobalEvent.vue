@@ -12,7 +12,7 @@
       </div>
     </div>
     <span v-if="showDistance" class="global-event-distance" v-i18n>{{ type }}</span>
-    <slot/>
+    <slot></slot>
   </div>
 </template>
 
@@ -38,7 +38,7 @@ type DataModel = {
 };
 
 export default defineComponent({
-  name: 'global-event',
+  name: 'GlobalEvent',
   components: {
     CardRenderData,
     CardParty,

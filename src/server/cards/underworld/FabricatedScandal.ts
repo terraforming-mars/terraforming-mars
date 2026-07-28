@@ -43,7 +43,7 @@ export class FabricatedScandal extends Card implements IProjectCard {
 
     const lowestTR = Math.min(...game.players.map(((p) => p.terraformRating)));
     game.players.forEach((p) => {
-      if (p.terraformRating === lowestTR && player.canAfford({cost: 0, tr: {tr: 1}})) {
+      if (p.terraformRating === lowestTR && p.canAfford({cost: 0, tr: {tr: 1}})) {
         p.increaseTerraformRating(1, {log: true});
       }
     });

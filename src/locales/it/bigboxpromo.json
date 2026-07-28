@@ -31,7 +31,7 @@
 
   "Splice":"",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.":"Inizi con 44 M€. Come prima azione, rivela carte progetto fino a che non trovi un simbolo Microbo. Aggiungi quella carta alla tua mano e scarta le altre.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":"Effetto: ogni volta che viene messo in gioco da qualcuno un simbolo Microbo, incluso questo, QUEL GIOCATORE ottiene 2 M€ oppure aggiunge 1 Microbo su QUELLA carta, e tu ottieni 2 M€.",
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":"Effetto: ogni volta che viene messo in gioco da qualcuno un simbolo Microbo, incluso questo, QUEL GIOCATORE ottiene 2 M€ oppure aggiunge 1 Microbo su QUELLA carta, e tu ottieni 2 M€.",
 
   "Asteroid Hollowing":"Scavo Asteroidale",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.":"Azione: spendi 1 Titanio per aggiungere 1 risorsa Asteroide a questa carta e incrementare la produzione di M€ di 1 livello.",
@@ -41,8 +41,7 @@
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.":"Effetto: quando giochi una carta con un costo base di 20 M€ o più, aumenta la tua produzione di M€ di 1 livello.",
 
   "Comet Aiming":"Puntamento delle Comete",
-  "(Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.)":"(Azione: spendi 1 Titanio per aggiungere una risorsa Asteroide ad una carta QUALSIASI.)",
-  "(Action: Remove 1 asteroid here to place an ocean.)":"(Azione: rimuovi un Asteroide da qui per collocare un Oceano.)",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.":"Azione: spendi 1 Titanio per aggiungere una risorsa Asteroide ad una carta QUALSIASI OPPURE rimuovi un Asteroide da qui per collocare un Oceano.",
 
   "Cutting Edge Technology":"Tecnologia d'Avanguardia",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con dei requisiti la paghi 2 M€ in meno.",
@@ -50,8 +49,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":"Richiede che un giocatore abbia rimosso Piante a un ALTRO GIOCATORE in questa generazione. Ottieni 1 Titanio o 2 Acciaio.",
 
   "Directed Impactors":"Impattori Direzionati",
-  "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"(Azione: spendi 6 M€ per aggiungere 1 Asteroide a una carta QUALSIASI (puoi usare il Titanio per pagare).)",
-  "(Action: Remove 1 asteroid here to raise temperature 1 step.)":"(Azione: rimuovi da qui un Asteroide per aumentare la Temperatura di 1 livello.)",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.":"Azione: spendi 6 M€ per aggiungere 1 Asteroide a una carta QUALSIASI (puoi usare il Titanio per pagare) OPPURE rimuovi da qui un Asteroide per aumentare la Temperatura di 1 livello.",
 
   "Field-Capped City":"Città a Cupola di Campo",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.":"Aumenta la tua Produzione di M€ di 2 livelli, aumenta la tua Produzione di Energia di 1 livello, ottieni 3 Piante e colloca una tessera Città.",
@@ -86,12 +84,8 @@
   "Decrease your energy production 1 step. 1 VP per asteroid on this card.":"Abbassa la tua Produzione di Energia di 1 livello. 1 PV per ogni Asteroide su questa carta.",
 
   "Asteroid Rights":"Diritti sugli Asteroidi",
-  "(Action: Spend 1 M€ to add 1 asteroid to ANY card.)": "(Azione: spendi 1 M€ per aggiungere 1 Asteroide ad una carta QUALSIASI.)",
-  "(Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.)": "(Azione: spendi 1 Asteroide da qui per aumentare la Produzione di M€ di 1 livello OPPURE ottenere 2 Titanio.)",
+  "(Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.)": "(Azione: spendi 1 M€ per aggiungere 1 Asteroide ad una carta QUALSIASI OPPURE spendi 1 Asteroide da qui per aumentare la Produzione di M€ di 1 livello OPPURE ottenere 2 Titanio.)",
   "Add 2 asteroids to this card.": "Aggiungi 2 Asteroidi a questa carta.",
-
-  "(Action: Spend 2X M€ to gain X energy.)":"(Azione: spendi 2X M€ per ottenere X risorse Energia.)",
-  "(Action: Decrease energy production 1 step to gain 8 M€.)":"(Azione: diminuisci la tua produzione di Energia di 1 livello per ottenere 8 M€.)",
 
   "Penguin":"Pinguini",
   "Requires 8 oceans.":"Richiede 8 Oceani.",

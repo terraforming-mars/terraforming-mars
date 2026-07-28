@@ -8,7 +8,7 @@
 
   "Anthozoa": "Koralowce",
   "Action: Spend 1 plant to add an animal to this card.": "Akcja: Wydaj 1 jednostkę roślinności, aby umieścić 1 jednostkę zwierząt na tej karcie.",
-  "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "Na planszy muszą znajdować sie co najmniej 3 obszary oceanów. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+  "Requires 3 oceans on Mars.": "Na planszy muszą znajdować sie co najmniej 3 obszary oceanów.",
 
   "Asteroid Resources": "Górnictwo Kosmiczne",
   "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "Wydaj 3 jednostki energii. Podnieś swoją produkcję stali i tytanu o 1 poziom lub umieść na planszy obszar oceanu i otrzymujesz 2 jednostki stali i 1 jednostkę tytanu.",
@@ -45,8 +45,7 @@
   "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "W grze musi znajdować się co najmniej 1 kolonia. Wykonaj akcję handlu z dowolnym obiektem za darmo. Zbierz premię kolonialną za wszystkie kolonie na tym obiekcie. Inni gracze nie otrzymują premii kolonialnej z tej akcji.",
 
   "Cryptocurrency": "Kryptowaluty",
-  "Action: Spend 1 energy to add 1 data to this card.": "Akcja: Wydaj 1 jednostkę energii, aby umieścić 1 jednostkę danych na tej karcie.",
-  "Action: Remove all data from this card to gain 3M€ per data removed.": "Akcja: Wydaj wszystkie jednostki danych z tej karty, aby otrzymać po 3 M€ za każdą z nich.",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "Akcja: Wydaj 1 jednostkę energii, aby umieścić 1 jednostkę danych na tej karcie lub wydaj wszystkie jednostki danych z tej karty, aby otrzymać po 3 M€ za każdą z nich.",
 
   "Cultivation of Venus": "Kultywacja Wenus",
   "Action: Spend 3 plants to raise Venus 1 step.": "Akcja: Wydaj 3 jednostki roślinności, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
@@ -104,7 +103,7 @@
   "Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.": "Umieść kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Wykonaj akcję handlu z obiektem za darmo. Możesz użyć już wykorzystaną flotę handlową. Podnieś swój WT o 1 poziom. *",
 
   "Hydrogen Processing Plant": "Przetwórnia Wodoru",
-  "Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.": "Poziom tlenu musi wynosić co najmniej 3%. Obniż poziom tlenu o 1 poziom. Podnieś swoją produkcję energii o 1 poziom za każde 2 obszary oceanów na planszy.",
+  "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "Poziom tlenu musi wynosić co najmniej 3%. Obniż poziom tlenu o 1 poziom. Podnieś swoją produkcję energii o 1 poziom za każde 2 obszary oceanów na planszy.",
 
   "Interplanetary Transport": "Transport Kosmiczny",
   "Increase your M€ production 1 step for every offworld city tile.": "Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta poza planszą Marsa.",

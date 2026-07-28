@@ -583,6 +583,7 @@ export enum CardName {
   // End of promo cards
 
   // Community corps
+  AEROTECH = 'Aerotech',
   AGRICOLA_INC = 'Agricola Inc',
   CURIOSITY_II = 'Curiosity II',
   INCITE = 'Incite',
@@ -608,6 +609,16 @@ export enum CardName {
 
   // For Playwright.
   SPECIAL_DESIGN_PROXY = 'Special Design:proxy',
+
+  // Automa
+  AUTOMA_METEOR_SHOWER = 'Automa: Meteor Shower',
+  AUTOMA_INVASIVE_SPECIES = 'Automa: Invasive Species',
+  AUTOMA_RESEARCH_AND_DEVELOPMENT = 'Automa: Research and Development',
+  AUTOMA_OVERACHIEVEMENT = 'Automa: Overachievement',
+  AUTOMA_EXPEDITED_CONSTRUCTION = 'Automa: Expedited Construction',
+  AUTOMA_LOBBYISTS = 'Automa: Lobbyists',
+  AUTOMA_LOCAL_NEURAL_INSTANCE = 'Automa: Local Neural Instance',
+  AUTOMA_CORPORATE_COMPETITION = 'Automa: Corporate Competition',
 
   // Ares expansion.
   BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',

@@ -8,8 +8,10 @@
             :class="`language-icon language-icon-for-switcher language-icon--${lang}`"
             :title="LANGUAGES[lang][1]"
             @click="switchLanguageTo(lang)"
-          />
-          <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang][0] }}</span>
+          ></div>
+          <span class="language-text" @click="switchLanguageTo(lang)">
+            &nbsp;({{ lang }}) {{ LANGUAGES[lang][0] }}
+          </span>
         </label>
       </div>
     </div>

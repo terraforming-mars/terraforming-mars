@@ -8,7 +8,7 @@
 
   "Anthozoa": "サンゴ礁",
   "(Action: Spend 1 plant to add an animal to this card.)": "(アクション：1植物を支払い、1動物獲得)",
-  "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "条件：海洋3枚以上. このカード上の2動物毎に1VP",
+  "Requires 3 oceans on Mars.": "条件：海洋3枚以上.",
 
   "Asteroid Resources": "小惑星資源",
   "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "3電力支払う. 建材産出+1、チタン産出+1 または 海洋1枚配置し、2建材と1チタン獲得.",
@@ -48,8 +48,7 @@
   "Add 1 data to any card. Add 1 resource to any card.)": "1データ獲得. 好きな1資源を好きなカードに追加.",
 
   "Cryptocurrency": "仮想通貨",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "(アクション：1電力を支払い、このカード上に1データ追加.)",
-  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(アクション：このカード上から全てのデータを除去し、その数分3MC獲得.)",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "アクション：1電力を支払い、このカード上に1データ追加 または このカード上から全てのデータを除去し、その数分3MC獲得.",
 
   "Cultivation of Venus": "金星の開墾",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "(アクション：3植物支払い、金星+1段階",
@@ -107,7 +106,7 @@
   "Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.": "コロニー1つ配置(既に配置済みの天体でも可). 無料で交易する(すでに使用した交易艦隊の使用可). TR+1段階.",
 
   "Hydrogen Processing Plant": "水素処理プラント",
-  "Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.": "条件：酸素3%以上. 海洋タイル2枚毎に、電力産出+1. 酸素濃度-1段階.",
+  "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "条件：酸素3%以上. 海洋タイル2枚毎に、電力産出+1. 酸素濃度-1段階.",
 
   "Interplanetary Transport": "惑星間輸送",
   "Increase your M€ production 1 step for every offworld city tile.": "火星外の都市タイルの数分、MC産出+1.",

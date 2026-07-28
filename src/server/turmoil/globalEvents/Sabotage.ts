@@ -8,11 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
-  b.steel(1).slash().influence({size: Size.MEDIUM});
-});
-
 export class Sabotage extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +15,10 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
       description: 'Decrease steel and energy production 1 step each. Gain 1 steel per influence.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
+        b.steel(1).slash().influence({size: Size.MEDIUM});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

@@ -2,12 +2,12 @@
 <div>
   <div v-if="experimentalUI()" v-i18n>
     <label>
-      <input type="checkbox" v-model="showReorder" /> Reorder Cards
+      <input type="checkbox" v-model="showReorder" > Reorder Cards
     </label>
   </div>
   <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
-      <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
+    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" @dragend="onDragEnd()" @dragstart="onDragStart(card.name)">
+      <div v-if="dragCard" ref="droppers" class="drop-target" @dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
         <div v-if="showReorder" class="reorder-banners-container">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
+    <div v-if="dragCard" ref="dropend" class="drop-target" @dragover="onDragOver('end')"></div>
   </div>
 </div>
 </template>

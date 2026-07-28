@@ -6,7 +6,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {all} from '../Options';
+import {all, digit} from '../Options';
 
 export class AncientShipyards extends Card {
   constructor() {
@@ -21,13 +21,13 @@ export class AncientShipyards extends Card {
       reserveUnits: {titanium: 3},
 
       metadata: {
-        description: 'Spend 3 titanium. -1 VP for every resource here.',
         cardNumber: 'M19',
         renderData: CardRenderer.builder((b) => {
           b.action('Steal 2 M€ from each player and add a resource cube here.', (eb) => {
             eb.empty().startAction.text('Steal').nbsp.megacredits(2, {all}).asterix().colon().resource(CardResource.RESOURCE_CUBE);
           }).br.br;
-          b.minus().titanium(3);
+          b.minus().titanium(3, {digit}).plainText('Spend 3 titanium.', /** parens */ true).br;
+          b.vpText('-1 VP for every resource here.');
         }),
       },
     });

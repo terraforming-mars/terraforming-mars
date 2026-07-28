@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Tag} from '../../src/common/cards/Tag';
 import {MarsBotBoard, MarsBotTrack} from '../../src/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '../../src/server/automa/boards/TharsisMarsBot';
+import {VENUS_MARSBOT_TRACK} from '../../src/server/automa/boards/VenusMarsBot';
 
 describe('MarsBotBoard', () => {
   let board: MarsBotBoard;
@@ -150,5 +151,41 @@ describe('MarsBotTrack', () => {
     // peek looks at pos 2 which has 'ocean' in layout
     // peek does NOT check regression markers — it shows raw layout
     expect(track.peek()).to.eq('ocean');
+  });
+});
+
+describe('MarsBotBoard with the Venus track', () => {
+  let board: MarsBotBoard;
+
+  beforeEach(() => {
+    board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+  });
+
+  it('has 8 tracks', () => {
+    expect(board.tracks.length).to.eq(8);
+  });
+
+  it('maps Venus tag to track 7', () => {
+    expect(board.getTrackIndexForTag(Tag.VENUS)).to.eq(7);
+  });
+
+  it('Venus track maxes out at position 12', () => {
+    const track = board.tracks[7];
+    for (let i = 0; i < 12; i++) {
+      expect(track.canAdvance()).to.be.true;
+      track.advance();
+    }
+    expect(track.position).to.eq(12);
+    expect(track.canAdvance()).to.be.false;
+    expect(track.advance()).to.deep.eq({type: 'maxed'});
+  });
+
+  it('main tracks still max out at position 18', () => {
+    const track = board.tracks[0];
+    for (let i = 0; i < 18; i++) {
+      track.advance();
+    }
+    expect(track.position).to.eq(18);
+    expect(track.canAdvance()).to.be.false;
   });
 });

@@ -1,7 +1,7 @@
 <!-- Common widgets between player and spectator views -->
 <template>
   <a name="board" class="player_home_anchor hotkey-target"></a>
-  <board
+  <Board
     :spaces="game.spaces"
     :expansions="game.gameOptions.expansions"
     :venusScaleLevel="game.venusScaleLevel"
@@ -18,7 +18,7 @@
 
   <template v-if="game.turmoil">
     <a class="hotkey-target"></a>
-    <turmoil :turmoil="game.turmoil"/>
+    <Turmoil :turmoil="game.turmoil"/>
   </template>
 
   <template v-if="game.moon">
@@ -72,11 +72,11 @@ export default defineComponent({
   },
   emits: ['toggleTileView'],
   components: {
-    'board': Board,
+    Board,
     DeltaProjectBoard,
     Milestones,
     Awards,
-    'turmoil': Turmoil,
+    Turmoil,
     MoonBoard,
     PlanetaryTracks,
   },

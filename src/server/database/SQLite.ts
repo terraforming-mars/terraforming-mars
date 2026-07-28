@@ -194,15 +194,19 @@ export class SQLite implements IDatabase {
 
   async saveGame(game: IGame): Promise<void> {
     const gameJSON = JSON.stringify(game.serialize());
+
+    // This app has a bad habit of re-saving the same state. It hasn't been fully cleaned, but OK.
+    // If this is the first time we're saving the game, then store the participants. No need
+    // to store them again.
+    const isFirstSave = game.lastSaveId === 0 &&
+      await this.asyncGet('SELECT 1 FROM games WHERE game_id = ? AND save_id = 0', [game.id]) === undefined;
+
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
       [game.id, game.lastSaveId, gameJSON, game.players.length, gameJSON]);
 
-    // Save IDs on the very first save for this game. That's when the incoming saveId is 0, and also
-    // when the database operation was an insert. (We should figure out why multiple saves occur and
-    // try to stop them. But that's for another day.)
-    if (game.lastSaveId === 0) {
+    if (isFirstSave) {
       const participantIds: Array<ParticipantId> = game.players.map(toID);
       if (game.spectatorId) {
         participantIds.push(game.spectatorId);
@@ -243,7 +247,7 @@ export class SQLite implements IDatabase {
     // Sequence of [game_id, id] pairs.
     const values: Array<GameId | ParticipantId> = entry.participantIds.map((participant) => [entry.gameId, participant]).flat();
 
-    await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders, values);
+    await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders + ' ON CONFLICT (game_id, participant) DO NOTHING', values);
   }
 
   public async getParticipants(): Promise<Array<GameIdLedger>> {

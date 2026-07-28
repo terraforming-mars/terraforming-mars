@@ -9,11 +9,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().resource(CardResource.FLOATER).nbsp;
-  b.resource(CardResource.FLOATER).slash().influence();
-});
-
 export class CloudSocieties extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -21,7 +16,10 @@ export class CloudSocieties extends GlobalEvent implements IGlobalEvent {
       description: 'Add a floater to each card that can collect floaters. Add 1 floater for each influence to a card.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().resource(CardResource.FLOATER).nbsp;
+        b.resource(CardResource.FLOATER).slash().influence();
+      }),
     });
   }
 

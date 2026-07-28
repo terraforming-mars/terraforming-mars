@@ -9,10 +9,6 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().tag(Tag.MARS).influence({size: Size.SMALL});
-});
-
 export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 2M€ for each Mars tag you have (max 5) and influence.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(2).slash().tag(Tag.MARS).influence({size: Size.SMALL});
+      }),
     });
   }
 

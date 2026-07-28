@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -24,12 +24,12 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
         cardNumber: 'Pf53',
         renderData: CardRenderer.builder((b) => {
           b.resource(CardResource.DATA, 2).asterix().cards(2, {size: Size.SMALL}).asterix().br;
-          b.tag(Tag.SCIENCE).tag(Tag.MICROBE).colon().text('play ', Size.SMALL, false, true);
+          b.tag(Tag.SCIENCE).tag(Tag.MICROBE).colon().text('play ', {size: Size.SMALL, uppercase});
           b.tag(Tag.SPACE).colon().production((pb) => pb.energy(3, {digit})).br;
           b.text(
             'Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. ' +
             'If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.',
-            Size.SMALL, false, false);
+            {size: Size.SMALL, isBold: false});
         }),
         description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card.',
       },

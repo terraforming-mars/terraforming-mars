@@ -7,9 +7,8 @@ import {CardResource} from '../../../common/CardResource';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {all, uppercase} from '../Options';
 
 export class AirRaid extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class AirRaid extends Card implements IProjectCard {
         description: 'Requires that you lose 1 floater. Steal 5 M€ from any player.',
         renderData: CardRenderer.builder((b) => {
           b.minus().resource(CardResource.FLOATER);
-          b.text('steal', Size.MEDIUM, true).megacredits(5, {all});
+          b.text('steal', {uppercase}).megacredits(5, {all});
         }),
       },
     });

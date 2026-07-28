@@ -5,6 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {uppercase} from '../Options';
 
 export class JunkVentures extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -20,7 +21,7 @@ export class JunkVentures extends CorporationCard implements ICorporationCard {
           b.br.br;
           b.megacredits(43).text('DECK: ').minus().cards(3);
           b.corpBox('action', (cb) => {
-            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', Size.SMALL, true);
+            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', {size: Size.SMALL, uppercase});
           });
         }),
       },

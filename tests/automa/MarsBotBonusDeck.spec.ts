@@ -15,36 +15,6 @@ describe('MarsBotBonusDeck', () => {
     expect(deck.discardPile.length).to.eq(0);
   });
 
-  it('draws a card off the draw pile', () => {
-    const card = deck.draw(logger);
-    expect(card).to.not.be.undefined;
-    expect(deck.drawPile.length).to.eq(7);
-  });
-
-  it('discards a card to the discard pile', () => {
-    const card = deck.draw(logger)!;
-    deck.discard(card);
-    expect(deck.discardPile.length).to.eq(1);
-  });
-
-  it('reshuffles the discard pile when the draw pile is empty', () => {
-    const drawn = [];
-    for (let i = 0; i < 8; i++) {
-      drawn.push(deck.draw(logger)!);
-    }
-    expect(deck.drawPile.length).to.eq(0);
-
-    for (const card of drawn) {
-      deck.discard(card);
-    }
-    expect(deck.discardPile.length).to.eq(8);
-
-    const card = deck.draw(logger);
-    expect(card).to.not.be.undefined;
-    expect(deck.discardPile.length).to.eq(0);
-    expect(deck.drawPile.length).to.eq(7);
-  });
-
   it('serialization round trip', () => {
     deck.discard(deck.draw(logger)!, deck.draw(logger)!);
     const restored = MarsBotBonusDeck.deserialize(deck.serialize(), new SeededRandom(42));

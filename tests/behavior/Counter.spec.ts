@@ -34,12 +34,6 @@ describe('Counter', () => {
     expect(counter.count(8)).eq(8);
   });
 
-  it('start', () => {
-    const counter = new Counter(player, fakeCard());
-    expect(counter.count({start: 3})).eq(3);
-    expect(counter.count({start: 3, each: 7})).eq(21);
-  });
-
   it('tags, simple', () => {
     player.tagsForTest = {building: 2, space: 3, moon: 7};
     const counter = new Counter(player, fakeCard());

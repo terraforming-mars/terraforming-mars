@@ -68,6 +68,7 @@ export class Timer {
     timer.running = d.running;
     timer.afterFirstAction = d.afterFirstAction;
 
+    // Never move the shared timer backwards.
     Timer.lastStoppedAt = Math.max(Timer.lastStoppedAt, d.lastStoppedAt);
     return timer;
   }
@@ -140,4 +141,3 @@ export class Timer {
     return elapsedDate.toISOString().substr(14, 5);
   }
 }
-

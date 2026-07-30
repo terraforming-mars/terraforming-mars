@@ -56,7 +56,7 @@ describe('CometAiming', () => {
     card.resourceCount = 1;
 
     const action = cast(churn(card.action(player), player), OrOptions);
-    const selectCard = cast(churn(action.options[0].cb(), player), SelectCard<ICard>);
+    const selectCard = cast(churn(action.options[1].cb(), player), SelectCard<ICard>);
     selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(player.titanium).to.eq(0);

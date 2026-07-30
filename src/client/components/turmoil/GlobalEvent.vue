@@ -4,7 +4,7 @@
       <div class="card-content-wrapper" v-i18n>
         <CardParty class="card-party--revealed" :party="revealed" />
         <CardParty class="card-party--current" :party="current" />
-        <div class="global-event-title"><span class="global-event-name">{{globalEventName}}</span></div>
+        <div ref="title" class="global-event-title">{{globalEventName}}</div>
         <div class="card-content global-event-card-content">
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
           <CardDescription :item='description' />
@@ -27,6 +27,7 @@ import CardDescription from '@/client/components/card/CardDescription.vue';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {ICardRenderRoot} from '@/common/cards/render/Types';
 import {PartyName} from '@/common/turmoil/PartyName';
+import {fitTextWhenReady} from '@/client/utils/textFit';
 
 export type RenderType = 'coming' | 'current' | 'distant' | 'prior';
 
@@ -37,12 +38,26 @@ type DataModel = {
   current: PartyName;
 };
 
+type Refs = {
+  title: HTMLElement | undefined;
+};
+
 export default defineComponent({
   name: 'GlobalEvent',
   components: {
     CardRenderData,
     CardParty,
     CardDescription,
+  },
+  mounted() {
+    this.fitTitle();
+  },
+  watch: {
+    // Turmoil.vue renders each distant/coming/current slot without a :key, so as the game
+    // proceeds the same component instance can get a new globalEventName without remounting.
+    globalEventName() {
+      this.fitTitle();
+    },
   },
   props: {
     globalEventName: {
@@ -71,6 +86,11 @@ export default defineComponent({
       description: globalEvent.description,
     };
   },
+  methods: {
+    fitTitle(): void {
+      fitTextWhenReady(this.typedRefs.title, 'global-event-title');
+    },
+  },
   computed: {
     klass(): string {
       const common = 'global-event global-event--' + this.type;
@@ -78,6 +98,9 @@ export default defineComponent({
         return common + ' global-event--show-distance';
       }
       return common;
+    },
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
     },
   },
 });

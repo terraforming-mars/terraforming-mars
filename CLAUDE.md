@@ -119,7 +119,6 @@ Good wiki pages:
 - Server card tests: instantiate the card, call `canPlay()`/`play()`/`action()`, assert state changes.
 - Client tests: use `@vue/test-utils` mount/shallowMount with JSDOM setup from `tests/client/components/setup.ts`.
 - Test framework: Mocha + Chai (expect style). Client tests use mochapack.
-- describes inside describes is the exception, not the norm.
 
 ### Internationalization
 
@@ -127,8 +126,4 @@ Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Transla
 
 ## Style Guide
 
-- Follow the style of the code around the file. If this is a new file, follow the style of the code in the directory.
-- Prefer `type` to `intereface`. Only use `interface` when it will be used with classes. Interfaces always start with `I`.
-- Comment style: name the quirk/intent, don't narrate the mechanism.
-- Avoid inline or dynamic imports.
-- In Vue templates, pass boolean props explicitly (`:prop="true"`/`:prop="false"`), never the bare attribute-presence shorthand.
+Read STYLE.md. Adhere to it as best as you can, alling out outliers.

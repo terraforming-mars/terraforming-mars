@@ -58,7 +58,7 @@
     "stylelint": "^17.14.0",
     "stylelint-config-recommended-less": "^4.2.1",
     "ts-loader": "^9.5.7",
-    "tsc-alias": "^1.8.17",
+    "tsc-alias": "^1.9.1",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",

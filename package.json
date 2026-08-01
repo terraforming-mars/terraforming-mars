@@ -48,7 +48,7 @@
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
     "less": "^4.8.1",
-    "less-loader": "^12.3.2",
+    "less-loader": "^13.0.0",
     "mocha": "^11.7.5",
     "mochapack": "^2.1.5",
     "postcss-html": "^1.8.1",

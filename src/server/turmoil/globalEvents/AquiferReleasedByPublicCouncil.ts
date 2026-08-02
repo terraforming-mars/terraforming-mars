@@ -3,8 +3,6 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Resource} from '../../../common/Resource';
-import {Turmoil} from '../Turmoil';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
@@ -15,17 +13,18 @@ export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlob
       description: 'First player places an ocean tile. Gain 1 plant and 1 steel per influence.',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.GREENS,
+      behavior: {
+        stock: {
+          plants: {turmoil: {influence: {}}},
+          steel: {turmoil: {influence: {}}},
+        },
+      },
       renderData: CardRenderer.builder((b) => {
         b.oceans(1).nbsp.plants(1).steel(1).slash().influence();
       }),
     });
   }
   public override bespokeResolve(game: IGame) {
-    const turmoil = Turmoil.getTurmoil(game);
     game.defer(new PlaceOceanTile(game.first, {title: 'Select space for ocean tile for Global Event'}));
-    game.playersInGenerationOrder.forEach((player) => {
-      player.stock.add(Resource.PLANTS, turmoil.getInfluence(player), {log: true, from: {globalEvent: this}});
-      player.stock.add(Resource.STEEL, turmoil.getInfluence(player), {log: true, from: {globalEvent: this}});
-    });
   }
 }

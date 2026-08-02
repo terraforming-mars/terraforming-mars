@@ -21,4 +21,16 @@ describe('AsteroidMining (global event)', () => {
     expect(player.titanium).to.eq(1);
     expect(player2.titanium).to.eq(5);
   });
+
+  it('counts Delta Project extra Jovian tags', () => {
+    const card = new AsteroidMining();
+    const [game, player] = testGame(2, {turmoilExtension: true});
+    player.tagsForTest = {jovian: 1};
+    player.tags.extraJovianTags = 1;
+
+    card.resolve(game);
+
+    // Unlike wild tags, extra Jovian tags are real tags, so 'raw' counts them.
+    expect(player.titanium).to.eq(2);
+  });
 });

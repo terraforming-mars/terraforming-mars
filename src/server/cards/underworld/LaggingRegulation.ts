@@ -26,7 +26,8 @@ export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     const map: MultiMap<number, IPlayer> = new MultiMap();
     for (const player of game.players) {
       const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + player.tags.count(Tag.WILD);

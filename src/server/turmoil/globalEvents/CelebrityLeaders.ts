@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -22,14 +22,13 @@ export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const eventsCards = player.getPlayedEventsCount();
-      player.stock.add(
-        Resource.MEGACREDITS,
-        2 * (Math.min(5, eventsCards) + turmoil.getInfluence(player)),
-        {log: true, from: {globalEvent: this}},
-      );
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const eventsCards = player.getPlayedEventsCount();
+    player.stock.add(
+      Resource.MEGACREDITS,
+      2 * (Math.min(5, eventsCards) + turmoil.getInfluence(player)),
+      {log: true, from: {globalEvent: this}},
+    );
   }
 }

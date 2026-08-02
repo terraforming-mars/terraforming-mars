@@ -21,7 +21,8 @@ export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     game.playersInGenerationOrder.forEach((player) => {
       player.drawCard(turmoil.getInfluence(player));
       game.defer(new CorrosiveRainDeferredAction(player));

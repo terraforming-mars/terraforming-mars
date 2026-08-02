@@ -17,7 +17,7 @@ describe('AsteroidMining (global event)', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.titanium).to.eq(1);
     expect(player2.titanium).to.eq(5);
   });

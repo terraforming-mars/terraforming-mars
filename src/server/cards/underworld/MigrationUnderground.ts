@@ -3,11 +3,11 @@ import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
 
 export class MigrationUnderground extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -22,12 +22,11 @@ export class MigrationUnderground extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const sum = player.underworldData.tokens.length + turmoil.getInfluence(player);
-      const mc = Math.floor(sum / 2);
-      const max = Math.min(mc, 5);
-      player.production.add(Resource.MEGACREDITS, max, {log: true});
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const sum = player.underworldData.tokens.length + turmoil.getInfluence(player);
+    const mc = Math.floor(sum / 2);
+    const max = Math.min(mc, 5);
+    player.production.add(Resource.MEGACREDITS, max, {log: true});
   }
 }

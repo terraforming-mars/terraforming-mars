@@ -15,7 +15,7 @@ describe('LeadershipSummit', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player2.cardsInHand).has.lengthOf(3);
   });

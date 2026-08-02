@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
@@ -21,12 +21,11 @@ export class HomeworldSupport extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const amount = Math.min(5, player.tags.count(Tag.EARTH, 'raw')) + turmoil.getInfluence(player);
-      if (amount > 0) {
-        player.stock.add(Resource.MEGACREDITS, 2 * amount, {log: true, from: {globalEvent: this}});
-      }
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const amount = Math.min(5, player.tags.count(Tag.EARTH, 'raw')) + turmoil.getInfluence(player);
+    if (amount > 0) {
+      player.stock.add(Resource.MEGACREDITS, 2 * amount, {log: true, from: {globalEvent: this}});
+    }
   }
 }

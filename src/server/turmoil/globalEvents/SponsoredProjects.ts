@@ -20,7 +20,8 @@ export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     game.playersInGenerationOrder.forEach((player) => {
       player.getCardsWithResources().forEach((card) => card.resourceCount && player.addResourceTo(card));
       player.drawCard(turmoil.getInfluence(player));

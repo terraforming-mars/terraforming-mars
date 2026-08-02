@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
@@ -22,13 +22,12 @@ export class AsteroidMining extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      player.stock.add(
-        Resource.TITANIUM,
-        Math.min(5, player.tags.count(Tag.JOVIAN, 'raw')) + turmoil.getInfluence(player),
-        {log: true, from: {globalEvent: this}},
-      );
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    player.stock.add(
+      Resource.TITANIUM,
+      Math.min(5, player.tags.count(Tag.JOVIAN, 'raw')) + turmoil.getInfluence(player),
+      {log: true, from: {globalEvent: this}},
+    );
   }
 }

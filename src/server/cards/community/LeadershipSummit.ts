@@ -2,7 +2,7 @@ import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
 import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -18,10 +18,9 @@ export class LeadershipSummit extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const partyLeaderCount = turmoil.parties.filter((party) => party.partyLeader === player).length;
-      player.drawCard(Math.min(5, partyLeaderCount) + turmoil.getInfluence(player));
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const partyLeaderCount = turmoil.parties.filter((party) => party.partyLeader === player).length;
+    player.drawCard(Math.min(5, partyLeaderCount) + turmoil.getInfluence(player));
   }
 }

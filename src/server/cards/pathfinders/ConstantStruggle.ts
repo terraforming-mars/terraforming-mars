@@ -23,7 +23,8 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     game.playersInGenerationOrder.forEach((player) => {
       const influence = turmoil.getInfluence(player);
       const deducted = Math.max(10 - influence, 0);

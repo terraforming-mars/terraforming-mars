@@ -21,11 +21,12 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
     if (game.canRemoveOcean()) {
       game.defer(new RemoveOceanTile(game.playersInGenerationOrder[0], 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
     }
 
+    const turmoil = Turmoil.getTurmoil(game);
     game.playersInGenerationOrder.forEach((player) => {
       const count = turmoil.getInfluence(player);
       if (count > 0) {

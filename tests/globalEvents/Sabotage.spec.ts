@@ -18,7 +18,7 @@ describe('Sabotage', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.steel).to.eq(0);
     expect(player2.steel).to.eq(3);
     expect(player2.production.steel).to.eq(2);

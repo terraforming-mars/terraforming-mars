@@ -29,7 +29,7 @@ describe('SponsoredProjects', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(ants.resourceCount).to.eq(2);
     expect(securityFleet.resourceCount).to.eq(2);
     expect(fish.resourceCount).to.eq(0);

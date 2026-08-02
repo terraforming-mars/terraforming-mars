@@ -1,6 +1,8 @@
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {ICardRenderRoot} from '../../../common/cards/render/Types';
+import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 
 type StaticGlobalEventProperties = {
   name: GlobalEventName,
@@ -36,5 +38,17 @@ export abstract class GlobalEvent {
   }
   public get renderData() {
     return this.properties.renderData;
+  }
+  public resolve(game: IGame) {
+    return this.bespokeResolve(game);
+  }
+
+  public bespokeResolve(game: IGame) {
+    for (const player of game.playersInGenerationOrder) {
+      this.bespokeResolvePlayer(player);
+    }
+  }
+
+  public bespokeResolvePlayer(_player: IPlayer) {
   }
 }

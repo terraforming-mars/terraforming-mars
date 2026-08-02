@@ -18,7 +18,7 @@ export class MagneticFieldStimulationDelays extends GlobalEvent implements IGlob
     });
   }
 
-  public resolve(game: IGame) {
+  public override bespokeResolve(game: IGame) {
     game.increaseOxygenLevel(game.playersInGenerationOrder[0], -2);
     game.increaseTemperature(game.playersInGenerationOrder[0], -2);
   }

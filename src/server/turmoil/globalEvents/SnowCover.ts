@@ -18,7 +18,8 @@ export class SnowCover extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     game.increaseTemperature(game.playersInGenerationOrder[0], -2);
 
     game.playersInGenerationOrder.forEach((player) => {

@@ -23,7 +23,7 @@ describe('Election', () => {
     expect(card.getScore(player2, turmoil, game)).eq(4);
     expect(card.getScore(player3, turmoil, game)).eq(1);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.terraformRating).to.eq(21);
     expect(player2.terraformRating).to.eq(22);
@@ -42,28 +42,28 @@ describe('Election', () => {
     expect(player.terraformRating).to.eq(14);
     expect(card.getScore(player, turmoil, game)).eq(4);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.terraformRating).to.eq(14);
 
     player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(5);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.terraformRating).to.eq(15);
 
     player.playedCards.push(fakeCard({tags: [Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(9);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.terraformRating).to.eq(16);
 
     player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(10);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.terraformRating).to.eq(18);
   });

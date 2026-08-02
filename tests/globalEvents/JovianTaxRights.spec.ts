@@ -29,4 +29,18 @@ describe('JovianTaxRights', () => {
     expect(player.production.megacredits).to.eq(0);
     expect(player2.production.megacredits).to.eq(2);
   });
+
+  it('counts two colonies on the same tile', () => {
+    const card = new JovianTaxRights();
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const colony = new Luna();
+    colony.colonies.push(player.id, player.id);
+    game.colonies.push(colony);
+
+    card.resolve(game);
+
+    // Each cube counts, not each tile.
+    expect(player.production.megacredits).to.eq(2);
+    expect(player2.production.megacredits).to.eq(0);
+  });
 });

@@ -7,7 +7,7 @@ import {MarsBotTilePlacer} from '../../src/server/automa/MarsBotTilePlacer';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {cast} from '@/common/utils/utils';
+import {cast, toID} from '@/common/utils/utils';
 
 describe('MarsBotTilePlacer', () => {
   let game: IGame;
@@ -20,6 +20,7 @@ describe('MarsBotTilePlacer', () => {
     tilePlacer = new MarsBotTilePlacer(game, marsBot, human);
   });
 
+  // TODO(kberg): Move to TestingUtils.
   /** An empty land space whose six neighbours are all empty land, so tiles can be arranged around it. */
   function inlandSpace(): Space {
     return game.board.getAvailableSpacesOnLand(marsBot).find((space) => {
@@ -72,9 +73,8 @@ describe('MarsBotTilePlacer', () => {
 
     const space = tilePlacer.findGreenerySpace()!;
 
-    const adjacent = game.board.getAdjacentSpaces(space).map((s) => s.id);
-    expect(adjacent).to.include(first.id);
-    expect(adjacent).to.include(second.id);
+    const adjacent = game.board.getAdjacentSpaces(space).map(toID);
+    expect(adjacent).to.include.members([first.id, second.id]);
   });
 
   it('findGreenerySpace avoids the human\'s cities', () => {
@@ -106,9 +106,8 @@ describe('MarsBotTilePlacer', () => {
 
     const space = tilePlacer.findExpeditedConstructionCitySpace()!;
 
-    const adjacent = game.board.getAdjacentSpaces(space).map((s) => s.id);
-    expect(adjacent).to.include(first.id);
-    expect(adjacent).to.include(second.id);
+    const adjacent = game.board.getAdjacentSpaces(space).map(toID);
+    expect(adjacent).to.include.members([first.id, second.id]);
   });
 
   it('breaks ties on ocean adjacency first, then on bonus icons', () => {
@@ -122,17 +121,20 @@ describe('MarsBotTilePlacer', () => {
 
     expect(space.id).to.eq('09');
     expect(space.bonus).deep.eq([SpaceBonus.STEEL]);
-    // Spaces covering more bonus icons are available, they just aren't next to an ocean.
-    const richest = Math.max(...game.board.getAvailableSpacesOnLand(marsBot).map((s) => s.bonus.length));
-    expect(space.bonus.length).to.be.lessThan(richest);
+    // 09 is the only one of the three spaces still free next to the ocean that has a bonus at all.
+    const adjacentOceans = game.board.getAvailableSpacesOnLand(marsBot)
+      .filter((s) => game.board.getAdjacentSpaces(s).some((a) => a.tile?.tileType === TileType.OCEAN));
+    expect(adjacentOceans.map(toID)).deep.eq(['05', '09', '10']);
+    // Spaces covering two bonus icons are available, they just aren't next to an ocean.
+    expect(Math.max(...game.board.getAvailableSpacesOnLand(marsBot).map((s) => s.bonus.length))).to.eq(2);
   });
 
   it('draws and discards one project card when spaces are still tied', () => {
-    const discarded = game.projectDeck.discardPile.length;
+    game.projectDeck.discardPile.length = 0;
 
     tilePlacer.findOceanSpace();
 
-    expect(game.projectDeck.discardPile).has.length(discarded + 1);
+    expect(game.projectDeck.discardPile).has.length(1);
   });
 
   it('getPlacementBonusMC pays 1 M€ per bonus icon covered', () => {

@@ -1,7 +1,7 @@
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {Tags} from '../player/Tags';
 import {IPlayer} from '../IPlayer';
-import {MarsBotBoard} from './MarsBotBoard';
+import {MarsBotTracks} from './MarsBotTracks';
 
 /**
  * Override tag counting for MarsBot's player.
@@ -11,14 +11,14 @@ import {MarsBotBoard} from './MarsBotBoard';
  * of its played cards."
  */
 export class MarsBotTags extends Tags {
-  constructor(player: IPlayer, private readonly board: MarsBotBoard) {
+  constructor(player: IPlayer, private readonly tracks: MarsBotTracks) {
     super(player);
   }
 
   protected override rawCount(tag: Tag, _includeEventsTags: boolean): number {
-    const trackIndex = this.board.getTrackIndexForTag(tag);
+    const trackIndex = this.tracks.getTrackIndexForTag(tag);
     if (trackIndex !== undefined) {
-      return this.board.tracks[trackIndex].position;
+      return this.tracks.all[trackIndex].position;
     }
     return 0;
   }

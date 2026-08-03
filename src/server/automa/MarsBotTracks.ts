@@ -53,13 +53,13 @@ export class MarsBotTrack {
   }
 }
 
-/** The MarsBot board with tracks. Handles tag-to-track mapping and track state. */
-export class MarsBotBoard {
-  public readonly tracks: ReadonlyArray<MarsBotTrack>;
+/** MarsBot's tracks. Handles tag-to-track mapping and track state. */
+export class MarsBotTracks {
+  public readonly all: ReadonlyArray<MarsBotTrack>;
   private readonly tagToTrack: Map<Tag, number>;
 
   constructor(public readonly data: ReadonlyArray<TrackDefinition>) {
-    this.tracks = data.map((def) => new MarsBotTrack(def));
+    this.all = data.map((def) => new MarsBotTrack(def));
     this.tagToTrack = new Map();
     for (let i = 0; i < data.length; i++) {
       for (const tag of data[i].tags) {
@@ -79,11 +79,11 @@ export class MarsBotBoard {
 
   /** Index of the least-advanced track (first index if tied). */
   public getLeastAdvancedTrackIndex(): number {
-    let minPos = this.tracks[0].position;
+    let minPos = this.all[0].position;
     let minIndex = 0;
-    for (let i = 1; i < this.tracks.length; i++) {
-      if (this.tracks[i].position < minPos) {
-        minPos = this.tracks[i].position;
+    for (let i = 1; i < this.all.length; i++) {
+      if (this.all[i].position < minPos) {
+        minPos = this.all[i].position;
         minIndex = i;
       }
     }
@@ -92,11 +92,11 @@ export class MarsBotBoard {
 
   /** Index of the most-advanced track (first index if tied). */
   public getMostAdvancedTrackIndex(): number {
-    let maxPos = this.tracks[0].position;
+    let maxPos = this.all[0].position;
     let maxIndex = 0;
-    for (let i = 1; i < this.tracks.length; i++) {
-      if (this.tracks[i].position > maxPos) {
-        maxPos = this.tracks[i].position;
+    for (let i = 1; i < this.all.length; i++) {
+      if (this.all[i].position > maxPos) {
+        maxPos = this.all[i].position;
         maxIndex = i;
       }
     }
@@ -107,9 +107,9 @@ export class MarsBotBoard {
   public getMostAdvancedNonMaxedTrackIndex(): number | undefined {
     let maxPos = -1;
     let maxIndex: number | undefined;
-    for (let i = 0; i < this.tracks.length; i++) {
-      if (this.tracks[i].position > maxPos && this.tracks[i].canAdvance()) {
-        maxPos = this.tracks[i].position;
+    for (let i = 0; i < this.all.length; i++) {
+      if (this.all[i].position > maxPos && this.all[i].canAdvance()) {
+        maxPos = this.all[i].position;
         maxIndex = i;
       }
     }

@@ -15,7 +15,7 @@ describe('OrOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -60,7 +60,7 @@ describe('OrOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -109,7 +109,7 @@ describe('OrOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -135,7 +135,7 @@ describe('OrOptions', () => {
       },
     });
     // First option is selected by default
-    let factories = component.findAllComponents({name: 'player-input-factory'});
+    let factories = component.findAllComponents({name: 'PlayerInputFactory'});
     expect(factories.length).to.eq(1);
     expect(factories[0].props('playerinput').title).to.eq('select a');
 
@@ -143,7 +143,7 @@ describe('OrOptions', () => {
     const inputs = component.findAll('input');
     await inputs[1].setValue(true);
 
-    factories = component.findAllComponents({name: 'player-input-factory'});
+    factories = component.findAllComponents({name: 'PlayerInputFactory'});
     expect(factories.length).to.eq(1);
     expect(factories[0].props('playerinput').title).to.eq('select b');
   });
@@ -155,7 +155,7 @@ describe('OrOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -203,7 +203,7 @@ describe('OrOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -243,7 +243,7 @@ describe('OrOptions', () => {
   it('showChildSaveButton is true only for multi-select cards', () => {
     const vm = mount(OrOptions, {
       ...globalConfig,
-      global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
+      global: {...globalConfig.global, components: {'PlayerInputFactory': PlayerInputFactory}},
       props: {
         playerView: {},
         playerinput: {type: 'or', title: '', options: [{type: 'option', title: 'a'}]},
@@ -258,7 +258,7 @@ describe('OrOptions', () => {
   it('child save button label includes card count', () => {
     const component = mount(OrOptions, {
       ...globalConfig,
-      global: {...globalConfig.global, components: {'player-input-factory': PlayerInputFactory}},
+      global: {...globalConfig.global, components: {'PlayerInputFactory': PlayerInputFactory}},
       props: {
         playerView: {},
         playerinput: {

@@ -165,7 +165,6 @@ export class MoonExpansion {
           this.activateLunaFirst(player, player.game, increment);
         }
         moonData[rateData.field] += increment;
-        player.game.maybeLogMarsIsTerraformed();
       }
     });
   }

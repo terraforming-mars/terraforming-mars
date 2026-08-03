@@ -97,12 +97,9 @@
 
   "Titan Air-scrapping": "处理泰坦空气",
   "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "行动：花费1点钛来增加2个云资源到此卡上或消耗此卡上的2个云资源增加一点改造度",
-  "Action: Spend 2 floaters here to increase your TR 1 step.": "行动：消耗此卡上的2个云资源增加一点改造度",
-  "Action: Spend 1 titanium to add 2 floaters here.": "行动：花费1个钛资源在此卡上+2云资源",
 
   "Titan Shuttles": "泰坦穿梭机",
-  "Action: Add 2 floaters to ANY JOVIAN CARD.": "行动：增加2点云资源到任意木星卡上",
-  "Action: Spend any number of floaters here to gain the same number of titanium.": "行动：消耗此卡上的任意数量云资源来换取等量的钛",
+  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "行动：增加2点云资源到任意木星卡上，或消耗此卡上的任意数量云资源来换取等量的钛",
 
   "Floater Prototypes": "造云原型机",
   "Add two floaters to ANOTHER card.": "放置2个云资源到另一张牌",
@@ -116,8 +113,7 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "失去1个云资源。从任意玩家处偷5块钱。",
 
   "Atmo Collectors": "大气收藏家",
-  "Action: Add one floater here.": "行动：在此牌上增加1个云资源",
-  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "行动：花费此牌上一个云资源获得2个钛资源、或3个电力资源、或4个热力资源。",
+  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "行动：在此牌上增加1个云资源，或花费此牌上一个云资源获得2个钛资源、或3个电力资源、或4个热力资源。",
   "Add 2 floaters to ANY card.": "打牌时在任意卡牌上+2云资源",
 
   "Community Services": "社区服务",
@@ -148,8 +144,7 @@
   "1 VP per 2 floaters here.": "此牌2个云资源算1分",
 
   "Jupiter Floating Station": "木星浮动站",
-  "Action: Add 1 floater to a JOVIAN CARD.": "行动：在一张木星卡上+1云资源",
-  "Action: Gain 1 M€ for every floater here [MAX 4].": "行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
+  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "行动：在一张木星卡上+1云资源，或获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
   "Requires 3 science tags.": "需求：3个科技标志。",
 
   "Lunar Exports": "月球出口",

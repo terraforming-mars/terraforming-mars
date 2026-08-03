@@ -1,7 +1,7 @@
 <template>
   <div :class="getClasses">
     <div v-for="(req, idx) in requirements" :key="idx">
-      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
+      <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default defineComponent({
     },
   },
   components: {
-    'card-requirement': CardRequirementComponent,
+    CardRequirementComponent,
   },
   computed: {
     getClasses(): string {

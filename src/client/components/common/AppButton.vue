@@ -1,6 +1,6 @@
 <template>
   <button @click="$emit('click')" class="btn" :class="outerClass" :disabled="isDisabled" v-i18n>
-    <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"/>
+    <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"></span>
     <span v-else>{{ buttonText }}</span>
   </button>
 </template>

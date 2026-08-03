@@ -1,5 +1,7 @@
 <template>
-  <div :class="klass" :title="$t(description)" data-test="tile"/>
+  <div :class="klass" :title="$t(description)" data-test="tile">
+    <AdjacencyBonus v-if="aresExtension && tileType !== undefined" :tileType="tileType" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,6 +11,7 @@ import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
+import AdjacencyBonus from '@/client/components/AdjacencyBonus.vue';
 
 const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.OCEAN]: 'ocean',
@@ -102,7 +105,7 @@ const descriptions: Record<TileType, string> = {
 };
 
 export default defineComponent({
-  name: 'board-space-tile',
+  name: 'BoardSpaceTile',
   props: {
     space: {
       type: Object as () => SpaceModel,
@@ -118,6 +121,9 @@ export default defineComponent({
   },
   data() {
     return {};
+  },
+  components: {
+    AdjacencyBonus,
   },
   computed: {
     tileType(): TileType | undefined {

@@ -9,8 +9,7 @@
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "1微生物を支払う. 5植物獲得.",
 
   "Icy Impactors": "凍結衝突体",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能.",
-  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：このカード上から1小惑星を除去し、海洋配置. 配置場所は第1プレイヤーが決める.",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能 または このカード上から1小惑星を除去し、海洋配置. 配置場所は第1プレイヤーが決める.",
 
   "Floyd Continuum": "フロイド連続体",
   "Action: Gain 3 M€ per completed terraforming parameter.": "アクション：完了済みのグローバルパラメーター1つ毎に3MC獲得.",
@@ -80,8 +79,7 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "チタン産出+2. 3チタン獲得.",
 
   "Comet Aiming": "彗星誘導",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "アクション：1チタンを支払い、1小惑星獲得.",
-  "Action: Remove 1 asteroid here to place an ocean.": "アクション：このカード上から1小惑星を除去し、海洋配置.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "アクション：1チタンを支払い、1小惑星獲得 または このカード上から1小惑星を除去し、海洋配置.",
 
   "Cutting Edge Technology": "最先端テクノロジー",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "効果：条件付きカードのプレイコスト-2MC.",
@@ -90,8 +88,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "条件：この世代中に植物が除去されていること. 1チタン または 2建材獲得.",
 
   "Directed Impactors": "誘導落下",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能.",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "アクション：このカード上から1小惑星を除去し、温度+1段階.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能 または このカード上から1小惑星を除去し、温度+1段階.",
 
   "Field-Capped City": "磁界都市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "MC産出+2. 電力産出+1. 3植物獲得. 都市タイルを配置.",
@@ -180,12 +177,9 @@
   "Effect: Your titanium resources are worth 1 M€ extra.": "効果：チタンの価値+1MC.",
 
   "Energy Market": "電力市場",
-  "Action: Spend 2X M€ to gain X energy.": "アクション：2xMC支払い、x電力獲得.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "アクション：電力産出-1し、8MC獲得.",
 
   "Asteroid Rights": "小惑星の所有権",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "アクション：1MC支払い、1小惑星獲得.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：1MC支払い、1小惑星獲得 または このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
   "Add 2 asteroids to this card.": "このカード上に2小惑星追加.",
 
   "Stanford Torus": "スタンフォード・トーラス",

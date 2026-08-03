@@ -130,11 +130,9 @@
 
 	"Regolith Eaters": "Bakterie Regolitożerne",
     "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów lub wydaj 2 jednostki mikrobów z tej karty, aby podnieść poziom tlenu o 1 poziom.",
-    "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "Akcja: Wydaj 2 jednostki mikrobów z tej karty, aby podnieść poziom tlenu o 1 poziom.",
 
 	"GHG Producing Bacteria": "Bakterie Produkujące Gazy Cieplarniane",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów lub wydaj 2 jednostki mikrobów z tej karty i podnieś temperaturę o 1 poziom.",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)": "Akcja: Wydaj 2 jednostki mikrobów z tej karty, aby podnieść temperaturę o 1 poziom.",
     "Requires 4% oxygen.": "Poziom tlenu musi wynosić co najmniej 4%.",
 
 	"Ants": "Mrówki",
@@ -253,7 +251,7 @@
 
 	"Birds": "Ptaki",
     "Action: Add an animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Poziom tlenu musi wynosić co najmniej 13%. Obniż produkcję roślinności dowolnego gracza o 2 poziomy. Otrzymujesz 1 PZ za każdą jednostkę zwierząt znajdującą się na tej karcie.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Poziom tlenu musi wynosić co najmniej 13%. Obniż produkcję roślinności dowolnego gracza o 2 poziomy.",
 
 	"Mars University": "Uniwersytet Marsjański",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki (z tą włącznie), za każdy symbol Nauki na zagrywanej karcie możesz odrzucić kartę z ręki i dobrać nową kartę.",
@@ -449,8 +447,7 @@
     "Requires -14 C° or warmer.": "Temperatura musi wynosić co najmniej -14°C.",
 
 	"Extreme-Cold Fungus": "Grzyby Kriofilne",
-    "(Action: Gain 1 plant.)": "Akcja: Otrzymujesz 1 jednostkę roślinności.",
-    "(Action: Add 2 microbes to ANOTHER card.)": "Akcja: Umieść na innej karcie 2 jednostki mikrobów.",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Akcja: Otrzymujesz 1 jednostkę roślinności lub umieść na innej karcie 2 jednostki mikrobów.",
     "It must be -10 C or colder.": "Temperatura musi wynosić co najwyżej -10°C.",
 
 	"Advanced Ecosystems": "Zaawansowane Ekosystemy",
@@ -523,7 +520,6 @@
 
 	"Nitrite Reducing Bacteria": "Bakterie Rozkładające Azotany",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów, lub usuń 3 jednostki mikrobów z tej karty, aby podnieść swój WT o 1 poziom.",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "Akcja: Usuń z tej karty 3 jednostki mikrobów, aby podnieść swój WT o 1 poziom.",
     "Add 3 microbes to this card.": "Umieść 3 jednostki mikrobów na tej karcie.",
     "Remove 3 microbes to increase your terraform rating 1 step": "Usuń z tej karty 3 jednostki mikrobów, aby podnieść swój WT o 1 poziom.",
 	"Remove microbes": "Usuń jednostki mikrobów.",
@@ -613,7 +609,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Poziom tlenu musi wynosić co najmniej 6%. Obniż produkcję roślinności dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 2 poziomy.",
 
 	"Livestock": "Trzoda",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Poziom tlenu musi wynosić co najmniej 9%. Obniż swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Poziom tlenu musi wynosić co najmniej 9%. Obniż swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
 
 	"Olympus Conference": "Konferencja Olimpijska",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki (z tą włącznie), za każdy symbol Nauki na zagrywanej karcie, umieść na tej karcie 1 jednostkę nauki, lub usuń z tej karty 1 jednostkę nauki i dobierz kartę.",

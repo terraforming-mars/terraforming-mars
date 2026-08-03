@@ -25,7 +25,7 @@ export class ButterflyEffect extends Card implements IProjectCard {
         description: 'Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.',
         renderData: CardRenderer.builder((b) => {
           b.tr(1).br;
-          b.plate('All hazard markers').colon().text('-1 / 0 / +1', Size.SMALL);
+          b.plate('All hazard markers').colon().text('-1 / 0 / +1', {size: Size.SMALL});
         }),
       },
     });

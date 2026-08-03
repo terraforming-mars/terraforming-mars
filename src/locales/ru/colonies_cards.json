@@ -8,8 +8,7 @@
     "steal": "украдите",
 
     "Atmo Collectors": "Сбор атмосферы",
-    "Action: Add one floater here.": "Добавьте 1 аэростат сюда",
-    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Потратьте 1 аэростат отсюда, чтобы получить на выбор 2 титана, 3 энергии или 4 тепла",
+    "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Добавьте 1 аэростат сюда или потратьте 1 аэростат отсюда, чтобы получить на выбор 2 титана, 3 энергии или 4 тепла",
     "Add 2 floaters to ANY card.": "Добавьте 2 аэростата на ЛЮБУЮ карту",
 
     "Community Services": "Общественная работа",
@@ -61,13 +60,12 @@
     "Place a colony.": "Постройте 1 колонию",
 
     "Jovian Lanterns": "Огни Юпитера",
-    "Action: Spend 1 titanium to add 2 floaters here.": "Действие: Потратьте 1 титан, чтобы добавить 2 аэростата сюда",
+    "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Действие: Потратьте 1 титан, чтобы добавить 2 аэростата сюда или потратьте 2 аэростата с этой карты, чтобы увеличить свой РТ на 1",
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Требует 1 метку Юпитера. Увеличьте РТ на 1. Добавьте 2 аэростата на любую карту",
     "1 VP per 2 floaters here.": "1 ПО за каждые 2 аэростата здесь",
 
     "Jupiter Floating Station": "Станция Юпитера",
-    "Action: Add 1 floater to a JOVIAN CARD.": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера",
-    "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 M€ за каждый аэростат здесь, но не больше 4",
+    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера или получите 1 M€ за каждый аэростат здесь, но не больше 4",
     "Requires 3 science tags.": "Требует 3 метки Науки",
 
     "Luna Governor": "губернатор Луны",
@@ -143,15 +141,13 @@
     "Requires -6 C. Decrease any plant production 1 step.": "Требование: температура -6 C или выше. Уменьшите любое производство растений на 1",
 
     "Titan Air-scrapping": "Очистка воздуха Титана",
-    "Action: Spend 2 floaters here to increase your TR 1 step.": "Действие: Потратьте 2 титана с этой карты, чтобы увеличить свой РТ на 1",
 
     "Titan Floating Launch-pad": "Летающая платформа",
     "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Действие: Добавьте 1 аэростат на любую катру с меткой Юпитера или потратьте 1 аэростат, чтобы бесплатно поторговать с колонией",
     "Add two floaters to ANY JOVIAN CARD.": "+2 аэростата на любую карту с меткой Юпитера",
 
     "Titan Shuttles": "Челноки с Титана",
-    "Action: Add 2 floaters to ANY JOVIAN CARD.": "Действие: Добавьте 2 аэростата на любую карту с меткой Юпитера",
-    "Action: Spend any number of floaters here to gain the same number of titanium.": "Действие: Сбросьте N аэростатов отсюда, чтобы получить N титана",
+    "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "Действие: Добавьте 2 аэростата на любую карту с меткой Юпитера или сбросьте N аэростатов отсюда, чтобы получить N титана",
 
     "Trade Envoys": "Торговый агент",
     "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Эффект: Торгуя с колонией, сначала увеличьте трек этой колонии на 1",

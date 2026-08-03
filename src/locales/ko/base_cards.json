@@ -135,11 +135,9 @@
 
     "Regolith Eaters": "표토 섭식 미생물",
     "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "행동: 이 카드에 미생물 자원 1개 추가 또는 이 카드에 미생물 자원 2개 소비해서 산소 농도 1% 상승.",
-    "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "행동: 이 카드에 미생물 자원 2개 소비해서 산소 농도 1% 상승.",
 
     "GHG Producing Bacteria": "온실가스 생산 세균",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원 2개 소비해서 기온 1단계 상승.",
-    "Action: Remove 2 microbes to raise temperature 1 step.": "행동: 이 카드에 미생물 자원 2개 소비해서 기온 1단계 상승.",
     "Requires 4% oxygen.": "조건: 산소 농도 4% 이상.",
 
     "Ants": "개미",
@@ -256,7 +254,7 @@
 
     "Birds": "새",
     "Action: Add an animal to this card.": "행동: 이 카드에 동물 자원 1개 추가.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "조건: 산소 농도 13% 이상.) (아무 1명의 식물 생산력 2 감소. 이 카드의 동물 자원 1개당 승점 1점.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "조건: 산소 농도 13% 이상. 아무 1명의 식물 생산력 2 감소.",
 
     "Mars University": "화성 대학교",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다 손에 든 카드 1장 버리고, 새로운 카드 1장 획득.",
@@ -443,8 +441,7 @@
     "Requires -14 C° or warmer.": "조건: 기온 -14℃ 이상.",
 
     "Extreme-Cold Fungus": "극호냉성 진균류",
-    "Action: Gain 1 plant.": "행동: 식물 자원 1개 획득.",
-    "Action: Add 2 microbes to ANOTHER card.": "행동: 자신의 다른 카드 1장에 미생물 자원 2개 추가.",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "행동: 식물 자원 1개 획득 혹은 자신의 다른 카드 1장에 미생물 자원 2개 추가.",
     "It must be -10 C or colder.": "조건: 기온 -10℃ 이하.",
 
     "Advanced Ecosystems": "발달된 생태계",
@@ -511,7 +508,6 @@
 
     "Nitrite Reducing Bacteria": "질산환원균",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원 3개 소비해서 테라포밍 등급 1TR 상승.",
-    "Action: Remove 3 microbes to increase your TR 1 step.": "행동: 이 카드에 미생물 자원 3개 소비해서 테라포밍 등급 1TR 상승.",
     "Add 3 microbes to this card.": "이 카드에 미생물 자원 3개 추가.",
     "Remove 3 microbes to increase your terraform rating 1 step": "미생물 자원 2개를 제거해서 테라포밍 등급 1TR 상승.",
 
@@ -600,7 +596,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "조건: 산소 농도 6% 이상.) (아무 1명의 식물 생산력 1 감소. 에너지 생산력 2 증가.",
 
     "Livestock": "가축",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
 
     "Olympus Conference": "올림푸스 컨퍼런스",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다, 이 카드에 과학 자원 1개 추가하거나, 또는 이 카드에서 과학 자원 1개 제거해서 카드 1장 획득.",

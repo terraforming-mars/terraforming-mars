@@ -9,10 +9,6 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().tag(Tag.EVENT).influence({size: Size.SMALL});
-});
-
 export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 2 M€ for each event played (max 5) and influence.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(2).slash().tag(Tag.EVENT).influence({size: Size.SMALL});
+      }),
     });
   }
 

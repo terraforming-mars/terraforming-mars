@@ -4,8 +4,7 @@
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efeito: Quando QUALQUER ícone de micróbio for jogado, adicione uma doença aqui e perca 4 M€ ou o quanto for possível. Quando você joga um ícone de ciência, remova uma doença daqui e ganhe 1 IT OU se não houver mais doenças aqui, você PODE virar esta carta para baixo na sua PILHA DE EVENTOS para ganhar 3 ITs.",
 
   "Comet Aiming": "Mirando Cometas",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Ação: Gaste 1 titânio para adicionar um recurso de asteroide a QUALQUER CARTA.",
-  "Action: Remove 1 asteroid here to place an ocean.": "Ação: Remova um recurso de asteroide desta carta para colocar um tile de oceano.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "Ação: Gaste 1 titânio para adicionar um recurso de asteroide a QUALQUER CARTA OU remova um recurso de asteroide desta carta para colocar um tile de oceano.",
 
   "Cutting Edge Technology": "Tecnologia de Ponta",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Efeito: quando você jogar uma carta com requisitos, pague 2 M€ menos por ela.",
@@ -14,8 +13,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Requer que um jogador tenha removido plantas DE OUTRO JOGADOR esta geração. Receba 1 titânio ou 2 aço.",
 
   "Directed Impactors": "Impactos Direcionados",
-  "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": "Ação: Gaste 6 M€ para adicionar um asteroide a QUALQUER CARTA (titânio pode ser usado para pagar).",
-  "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "Ação: remova um asteroide desta carta para aumentar a temperatura 1 nível.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "Ação: Gaste 6 M€ para adicionar um asteroide a QUALQUER CARTA (titânio pode ser usado para pagar) OU remova um asteroide desta carta para aumentar a temperatura 1 nível.",
 
   "Field-Capped City": "Cidade com Cúpula Energética",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Coloque uma cidade. Aumente 2 níveis sua produção de M€ e 1 nível a produção de energia. Receba 3 plantas.",
@@ -110,12 +108,9 @@
   "Effect: Your titanium resources are worth 1 M€ extra.": "Efeito: Seu titânio vale 1 M€ extra.",
 
   "Energy Market": "Mercado de Energia",
-  "Action: Spend 2X M€ to gain X energy.": "Ação: Gaste 2X M€ para receber X energias.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "Ação: Diminua 1 nível sua produção de energia para receber 8 M€.",
 
   "Asteroid Rights": "Direitos de Asteroides",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Ação: gaste 1 M€ para adicionar um asteroide a QUALQUER carta.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Ação: remova um asteroide sobre esta carta para aumentar 1 nível sua produção de M€ OU receber 2 de titânio.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Ação: gaste 1 M€ para adicionar um asteroide a QUALQUER carta OU remova um asteroide sobre esta carta para aumentar 1 nível sua produção de M€ OU receber 2 de titânio.",
   "Add 2 asteroids to this card.": "Adicione 2 asteroides a esta carta.",
 
   "Stanford Torus": "Toroide de Stanford",
@@ -134,7 +129,7 @@
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFEITO: ÁREAS MARCADAS SÃO RESERVADAS PARA VOCÊ. QANDO VOCÊ COLOCAR UM TILE LÁ, RECEBA 3 M€",
 
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Você começa com 44 M€. Como sua primeira ação, compre uma carta e micróbio.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efeito: Quando um ícone de micróbio é jogado, incluindo este, AQUELE JOGADOR recebe 2 M€ ou adiciona um micróbio ÀQUELA carta, e você recebe 2 M€.",
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efeito: Quando um ícone de micróbio é jogado, incluindo este, AQUELE JOGADOR recebe 2 M€ ou adiciona um micróbio ÀQUELA carta, e você recebe 2 M€.",
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Aumente a temperatura 3 níveis e receba 4 de aço. Coloque este tile NÃO ADJACENTE a uma cidade. Remova até 6 plantas de um jogador.",
 

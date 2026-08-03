@@ -1,13 +1,13 @@
 <!-- Generic popup filter for grouped item selection. -->
 <template>
   <PopupPanel @close="$emit('close')">
-    <template v-slot:header>
+    <template #header>
       <div class="corporations-filter-toolbox-cont">
         <h2 v-i18n>{{ title }}</h2>
         <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-          <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
-          <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
-          <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+          <a href="#" v-i18n @click.prevent="selectAll('All')">All*</a> |
+          <a href="#" v-i18n @click.prevent="selectNone('All')">None*</a> |
+          <a href="#" v-i18n @click.prevent="invertSelection('All')">Invert*</a>
           <input class="filter" :placeholder="$t('filter')" v-model="filterText">
         </div>
       </div>
@@ -15,21 +15,21 @@
     <div>
       <div class="corporations-filter">
         <template v-for="group in groups">
-          <div class="corporations-filter-group" v-if="showGroup(group.key)" v-bind:key="group.key" >
+          <div class="corporations-filter-group" v-if="showGroup(group.key)" :key="group.key" >
             <div class="corporations-filter-toolbox-cont">
               <div>
                 <span v-i18n>{{ group.label }}</span>&nbsp;
                 <div :class="icon(group.key)"></div>
               </div>
               <div class="corporations-filter-toolbox">
-                <a href="#" v-i18n v-on:click.prevent="selectAll(group.key)">All</a> |
-                <a href="#" v-i18n v-on:click.prevent="selectNone(group.key)">None</a> |
-                <a href="#" v-i18n v-on:click.prevent="invertSelection(group.key)">Invert</a>
+                <a href="#" v-i18n @click.prevent="selectAll(group.key)">All</a> |
+                <a href="#" v-i18n @click.prevent="selectNone(group.key)">None</a> |
+                <a href="#" v-i18n @click.prevent="invertSelection(group.key)">Invert</a>
               </div>
             </div>
-            <div v-for="item in itemsByGroup[group.key]" v-bind:key="item" v-show="include(item)">
+            <div v-for="item in itemsByGroup[group.key]" :key="item" v-show="include(item)">
               <label class="form-checkbox">
-                <input type="checkbox" v-model="localSelected" :value="item"/>
+                <input type="checkbox" v-model="localSelected" :value="item">
                 <i class="form-icon"></i>
                 <slot name="item" :itemName="item" :icon="icon"></slot>
               </label>

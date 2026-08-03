@@ -171,8 +171,6 @@ export class Player implements IPlayer {
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
-  //
-  // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
   public withinDeflectionZone = false;
@@ -1081,7 +1079,7 @@ export class Player implements IPlayer {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: CardName.VANALLEN}});
       }
     };
 
@@ -1211,7 +1209,7 @@ export class Player implements IPlayer {
 
     const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
-      card.warnings.clear();
+      card.clearWarnings();
       card.additionalProjectCosts = undefined;
       if (this.canPlay(card)) {
         playableCards.push(card);
@@ -1266,7 +1264,7 @@ export class Player implements IPlayer {
     if (this.playedCards.has(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
       const pharmacyUnion = this.tableau.get(CardName.PHARMACY_UNION);
       if (pharmacyUnion?.isDisabled === false) {
-        card.warnings.add('pharmacyUnion');
+        card.addWarning('pharmacyUnion');
       }
     }
     return true;
@@ -1692,7 +1690,9 @@ export class Player implements IPlayer {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     try {
-      this.timer.stop();
+      if (!waitingFor.optional) {
+        this.timer.stop();
+      }
       this.defer(waitingFor.process(input, this));
       waitingForCb();
     } catch (err) {
@@ -1714,7 +1714,9 @@ export class Player implements IPlayer {
         console.warn(message);
       }
     }
-    this.timer.start();
+    if (!input.optional) {
+      this.timer.start();
+    }
     this.waitingFor = input;
     this.waitingForCb = cb;
     this.game.inputsThisRound++;
@@ -1741,6 +1743,15 @@ export class Player implements IPlayer {
           this.setWaitingForSafely(input, cb);
         };
       }
+    }
+  }
+
+  public clearWaitingFor(): void {
+    const waitingFor = this.waitingFor;
+    this.waitingFor = undefined;
+    this.waitingForCb = undefined;
+    if (waitingFor !== undefined && !waitingFor.optional) {
+      this.timer.stop();
     }
   }
 
@@ -1778,6 +1789,7 @@ export class Player implements IPlayer {
       preservationProgram: this.preservationProgram,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
+      availableActionsThisRound: this.availableActionsThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       pendingInitialActions: this.pendingInitialActions.map(toName),
       // Cards
@@ -1849,6 +1861,7 @@ export class Player implements IPlayer {
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsThisGeneration = new Set(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.availableActionsThisRound = d.availableActionsThisRound ?? 2;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
     player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;

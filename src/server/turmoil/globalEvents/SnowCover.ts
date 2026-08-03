@@ -6,10 +6,6 @@ import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().temperature(2).nbsp.cards(1).slash().influence();
-});
-
 export class SnowCover extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -17,7 +13,9 @@ export class SnowCover extends GlobalEvent implements IGlobalEvent {
       description: 'Decrease temperature 2 steps. Draw 1 card per influence.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.KELVINISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().temperature(2).nbsp.cards(1).slash().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

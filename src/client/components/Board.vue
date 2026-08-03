@@ -6,18 +6,18 @@
           </div>
         </div>
         <div class="board-outer-spaces" id="colony_spaces">
-          <board-space v-if="hasSpace(SpaceName.GANYMEDE_COLONY)" :space="getSpace(SpaceName.GANYMEDE_COLONY)" text="Ganymede Colony" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.PHOBOS_SPACE_HAVEN)" :space="getSpace(SpaceName.PHOBOS_SPACE_HAVEN)" text="Phobos Space Haven" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.STANFORD_TORUS)" :space="getSpace(SpaceName.STANFORD_TORUS)" text="Stanford Torus" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.LUNA_METROPOLIS)" :space="getSpace(SpaceName.LUNA_METROPOLIS)" text="Luna Metropolis" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.DAWN_CITY)" :space="getSpace(SpaceName.DAWN_CITY)" text="Dawn City" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.STRATOPOLIS)" :space="getSpace(SpaceName.STRATOPOLIS)" text="Stratopolis" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.MAXWELL_BASE)" :space="getSpace(SpaceName.MAXWELL_BASE)" text="Maxwell Base" :tileView="tileView"></board-space>
+          <BoardSpace v-if="hasSpace(SpaceName.GANYMEDE_COLONY)" :space="getSpace(SpaceName.GANYMEDE_COLONY)" text="Ganymede Colony" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.PHOBOS_SPACE_HAVEN)" :space="getSpace(SpaceName.PHOBOS_SPACE_HAVEN)" text="Phobos Space Haven" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.STANFORD_TORUS)" :space="getSpace(SpaceName.STANFORD_TORUS)" text="Stanford Torus" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.LUNA_METROPOLIS)" :space="getSpace(SpaceName.LUNA_METROPOLIS)" text="Luna Metropolis" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.DAWN_CITY)" :space="getSpace(SpaceName.DAWN_CITY)" text="Dawn City" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.STRATOPOLIS)" :space="getSpace(SpaceName.STRATOPOLIS)" text="Stratopolis" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.MAXWELL_BASE)" :space="getSpace(SpaceName.MAXWELL_BASE)" text="Maxwell Base" :tileView="tileView"/>
           <!-- <board-space :space="getSpace('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
-          <board-space v-if="hasSpace(SpaceName.CERES_SPACEPORT)" :space="getSpace(SpaceName.CERES_SPACEPORT)" text="Ceres Spaceport" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.DYSON_SCREENS)" :space="getSpace(SpaceName.DYSON_SCREENS)" text="Dyson Screens" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.LUNAR_EMBASSY)" :space="getSpace(SpaceName.LUNAR_EMBASSY)" text="Lunar Embassy" :tileView="tileView"></board-space>
-          <board-space v-if="hasSpace(SpaceName.VENERA_BASE)" :space="getSpace(SpaceName.VENERA_BASE)" text="Venera Base" :tileView="tileView"></board-space>
+          <BoardSpace v-if="hasSpace(SpaceName.CERES_SPACEPORT)" :space="getSpace(SpaceName.CERES_SPACEPORT)" text="Ceres Spaceport" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.DYSON_SCREENS)" :space="getSpace(SpaceName.DYSON_SCREENS)" text="Dyson Screens" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.LUNAR_EMBASSY)" :space="getSpace(SpaceName.LUNAR_EMBASSY)" text="Lunar Embassy" :tileView="tileView"/>
+          <BoardSpace v-if="hasSpace(SpaceName.VENERA_BASE)" :space="getSpace(SpaceName.VENERA_BASE)" text="Venera Base" :tileView="tileView"/>
         </div>
 
         <div class="global-numbers">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="board" id="main_board">
-            <board-space
+            <BoardSpace
               v-for="curSpace in getAllSpacesOnMars()"
               :key="curSpace.id"
               :space="curSpace"
@@ -90,7 +90,7 @@
                   <tspan :x="key.secondRowX || 0" y="1.1em">{{key.text[1]}}</tspan>
                 </text>
                 <template v-if="key.line !== undefined">
-                  <line :x1="key.line.from[0]" :y1="key.line.from[1]" :x2="key.line.to[0]" :y2="key.line.to[1]" class="board-line"></line>
+                  <line :x1="key.line.from[0]" :y1="key.line.from[1]" :x2="key.line.to[0]" :y2="key.line.to[1]" class="board-line"/>
                   <circle :cx="key.line.to[0]" :cy="key.line.to[1]" r="2" class="board-caption board_caption--black"/>
                 </template>
               </g>
@@ -101,7 +101,7 @@
                           <tspan dy="15">Ascraeus</tspan>
                           <tspan x="12" dy="12">Mons</tspan>
                       </text>
-                      <line x1="38" y1="20" x2="88" y2="26" class="board-line"></line>
+                      <line x1="38" y1="20" x2="88" y2="26" class="board-line"/>
                       <text x="86" y="29" class="board-caption board_caption--black">●</text>
                   </g>
 
@@ -128,7 +128,7 @@
                           <tspan dy="-7">Tharsis</tspan>
                           <tspan dy="12" x="48">Tholus</tspan>
                       </text>
-                      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
+                      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"/>
                       <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
 
@@ -137,7 +137,7 @@
                           <tspan dy="15">Noctis</tspan>
                           <tspan x="7" dy="12">City</tspan>
                       </text>
-                      <line x1="30" y1="20" x2="140" y2="-20" class="board-line"></line>
+                      <line x1="30" y1="20" x2="140" y2="-20" class="board-line"/>
                       <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
               </template>
@@ -219,28 +219,28 @@
                       <text class="board-caption">
                           <tspan>Tikhonarov</tspan>
                       </text>
-                      <line x1="15" y1="5" x2="3" y2="20" class="board-line"></line>
+                      <line x1="15" y1="5" x2="3" y2="20" class="board-line"/>
                       <text x="1" y="22" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="ladon" transform="translate(286, 496)">
                       <text class="board-caption">
                           <tspan>Ladon</tspan>
                       </text>
-                      <line x1="20" y1="-12" x2="17" y2="-70" class="board-line"></line>
+                      <line x1="20" y1="-12" x2="17" y2="-70" class="board-line"/>
                       <text x="14" y="-68" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="flaugergues" transform="translate(480, 405)">
                       <text class="board-caption">
                           <tspan>Flaugergues</tspan>
                       </text>
-                      <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
+                      <line x1="0" y1="2" x2="-15" y2="10" class="board-line"/>
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="charybdis" transform="translate(455, 450)">
                       <text class="board-caption">
                           <tspan>Charybdis</tspan>
                       </text>
-                      <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
+                      <line x1="0" y1="2" x2="-15" y2="10" class="board-line"/>
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
@@ -251,7 +251,7 @@
                           <tspan dy="-7">Albor</tspan>
                           <tspan dy="12" x="48">Tholus</tspan>
                       </text>
-                      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
+                      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"/>
                       <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="anseris_mons" transform="translate(525, 330)">
@@ -259,7 +259,7 @@
                           <tspan>Anseris</tspan>
                           <tspan x="5" dy="12">Mons</tspan>
                       </text>
-                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
+                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"/>
                       <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="pindus_mons" transform="translate(500, 370)">
@@ -267,7 +267,7 @@
                           <tspan>Pindus</tspan>
                           <tspan x="5" dy="12">Mons</tspan>
                       </text>
-                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
+                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"/>
                       <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="ulysses_tholus" transform="translate(325, 496)">
@@ -275,7 +275,7 @@
                           <tspan>Ulysses</tspan>
                           <tspan x="10" dy="12">Tholus</tspan>
                       </text>
-                      <line x1="20" y1="-1" x2="4" y2="-109" class="board-line"></line>
+                      <line x1="20" y1="-1" x2="4" y2="-109" class="board-line"/>
                       <text x="1" y="-107" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
@@ -288,7 +288,7 @@
                       </text>
                   </g>
                   <g id="alba_fossae"  transform="translate(350, 70)">
-                      <line x1="20" y1="30" x2="41" y2="82" class="board-line"></line>
+                      <line x1="20" y1="30" x2="41" y2="82" class="board-line"/>
                       <text x="39" y="85" class="board-caption board_caption--black">&#x25cf;</text>
                       <text class="board-caption">
                           <tspan dy="15">Alba</tspan>
@@ -319,7 +319,7 @@
                           <tspan dy="15">Albor</tspan>
                           <tspan x="5" dy="12">Tholus</tspan>
                       </text>
-                      <line x1="38" y1="26" x2="63" y2="38" class="board-line"></line>
+                      <line x1="38" y1="26" x2="63" y2="38" class="board-line"/>
                       <text x="61" y="41" class="board-caption board_caption--black">●</text>
                   </g>
                   <g id="apollinaris_mons" transform="translate(500, 210)">
@@ -327,7 +327,7 @@
                           <tspan>Apollinaris</tspan>
                           <tspan x="10" dy="12">Mons</tspan>
                       </text>
-                      <line x1="15" y1="5" x2="-35" y2="30" class="board-line"></line>
+                      <line x1="15" y1="5" x2="-35" y2="30" class="board-line"/>
                       <text x="-40" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="hadriacus_mons" transform="translate(78, 320)">
@@ -370,7 +370,7 @@ class GlobalParamLevel {
 }
 
 export default defineComponent({
-  name: 'board',
+  name: 'Board',
   props: {
     spaces: {
       type: Array as () => ReadonlyArray<SpaceModel>,

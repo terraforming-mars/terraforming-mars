@@ -23,7 +23,7 @@
   "Requires Venus 12%.":"Requiere 12% en la escala de Venus.",
 
   "Sulphur-Eating Bacteria":"Bacteria Devora-Sulfuro",
-  "Action: Spend any number of microbes here to gain triple amount of M€.":"Acción: gasta cualquier número de microbios de esta carta para ganar el triple en M€.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.":"Acción: añade 1 microbio a esta carta o gasta cualquier número de microbios de esta carta para ganar el triple en M€.",
   "Requires Venus 6%":"Requiere 6% en la escala de Venus.",
 
   "Venus Waystation":"Estación de Paso de Venus",
@@ -51,16 +51,14 @@
   "Atalanta Planitia Lab":"Laboratorio Atalanta Planitia",
 
   "Rotator Impacts":"Impactos Rotatorios",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Acción: gasta 5 M€ para añadir un recurso de asteroide a esta carta (PUEDE USARSE TITANIO).",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.":"Acción: gasta un recurso de esta carta para aumentar la escala de Venus 1 nivel.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "Acción: gasta 6 M€ para añadir un recurso de asteroide a esta carta (PUEDE USARSE TITANIO) o gasta un recurso de esta carta para aumentar la escala de Venus 1 nivel.",
   "Venus must be 14% or lower":"La escala de Venus debe estar al 14% o inferior.",
 
   "Omnicourt":"Omnitribunal",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano. Aumenta tu VT 2 niveles.",
 
   "Jet Stream Microscrappers":"Microdestructores Propulsados",
-  "Action: Spend 1 titanium to add 2 floaters here": "Acción: gasta 1 titanio para añadir 2 flotadores a esta carta.",
-  "Action: Spend 2 floaters here to raise Venus 1 step":"Acción: gasta 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "Acción: gasta 1 titanio para añadir 2 flotadores a esta carta o gasta 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
 
   "Spin-Inducing Asteroid":"Asteroide Inductor de Giro",
   "Venus must be 10% or lower. Raise Venus 2 steps.":"La escala de Venus debe estar al 10% o inferior. Aumenta la escala de Venus 2 niveles.",
@@ -84,8 +82,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.":"Incrementa la escala de Venus 1 nivel. Aumenta tu producción de calor 3 niveles.",
 
   "Aerial Mappers":"Cartógrafo Aéreo",
-  "Action: Add floater to ANY card.":"Acción: añade 1 flotador a CUALQUIER carta.",
-  "Action: Spend one floater here to draw 1 card.":"Acción: gasta un flotador de esta carta para robar una carta.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.":"Acción: añade 1 flotador a CUALQUIER carta o gasta un flotador de esta carta para robar una carta.",
 
   "Aerosport Tournament":"Torneo Aéreo-Deportivo",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.":"Requiere que tengas 5 flotadores. Gana 1 M€ por cada loseta de ciudad en juego.",
@@ -103,15 +100,14 @@
   "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.":"Requiere 4 símbolos tipo ciencia. Reduce tu producción de energíá 1 nivel. Aumenta tu producción de titanio 1 nivel. Coloca una loseta de ciudad EN EL ÁREA RESERVADA.",
 
   "Deuterium Export":"Exportación de Deuterio",
-  "Action: Spend 1 floater here to increase your energy production 1 step.":"Acción: gasta 1 flotador de esta carta para incrementar tu producción de energía 1 nivel.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.":"Acción: añade 1 flotador a esta carta o gasta 1 flotador de esta carta para incrementar tu producción de energía 1 nivel.",
 
   "Extractor Balloons":"Globos Extractores",
-  "Action: Remove 2 floaters here to raise Venus 1 step.":"Acción: elimina 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
-  "Add 3 floaters to this card":"Añade 3 flotadores a esta carta.",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.":"Acción: añade 1 flotador a esta carta o elimina 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
+  "Add 3 floaters to this card.":"Añade 3 flotadores a esta carta.",
 
   "Forced Precipitation":"Precipitaciones Forzadas",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.":"Acción: gasta 2 M€ para añadir un flotador a esta carta.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.":"Acción: gasta 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.":"Acción: gasta 2 M€ para añadir un flotador a esta carta o gasta 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
 
   "Freyja Biodomes":"Biodomos de Freya",
   "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.":"Requiere 10% en la escala de Venus. Añade 2 microbios o 2 animales a CUALQUIER OTRA CARTA TIPO VENUS. Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ 2 niveles.",
@@ -133,7 +129,7 @@
 
   "Local Shading":"Sombra Local",
   "Action: Add 1 floater to this card.":"Acción: añade 1 flotador a esta carta.",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.":"Acción: gasta 1 flotador de esta carta para incrementar tu producción de M€ 1 nivel.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.":"Acción: añade 1 flotador a esta carta o gasta 1 flotador de esta carta para incrementar tu producción de M€ 1 nivel.",
 
   "Maxwell Base":"Base Maxwell",
   "Action: Add 1 resource to ANOTHER VENUS CARD.":"Acción: añade 1 recurso a OTRA CARTA TIPO VENUS.",

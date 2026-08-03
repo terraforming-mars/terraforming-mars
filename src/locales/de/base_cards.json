@@ -132,11 +132,9 @@
 
   "Regolith Eaters": "Regolith-Fresser",
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "AKTION: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
-  "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "AKTION: Entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
 
   "GHG Producing Bacteria": "CO₂ produzierende Bakterien",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "AKTION: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
-  "Action: Remove 2 microbes to raise temperature 1 step.": "AKTION: Entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
   "Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",
 
   "Ants": "Ameisen",
@@ -252,7 +250,7 @@
 
   "Birds": "Vögel",
   "Action: Add an animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Benötigt Sauerstoffgehalt von 13% oder mehr. Senke eine Pflanzen-Produktion um 2. 1 SP je Tier auf dieser Karte.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Benötigt Sauerstoffgehalt von 13% oder mehr. Senke eine Pflanzen-Produktion um 2.",
 
   "Mars University": "Mars-Universität",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "EFFEKT: Wenn du ein Wissenschaftssymbol ausspielst (einschließlich diesem), darfst du 1 Karte aus der Hand abwerfen, um 1 neue zu ziehen.",
@@ -439,8 +437,7 @@
   "Requires -14 C° or warmer.": "Benötigt eine Temperatur von -14 °C oder wärmer.",
 
   "Extreme-Cold Fungus": "Extremkälte-Pilze",
-  "Action: Gain 1 plant.": "AKTION: Erhalte 1 Pflanze.",
-  "Action: Add 2 microbes to ANOTHER card.": "AKTION: Füge einer anderen Karte 2 Mikroben hinzu.",
+  "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "AKTION: Erhalte 1 Pflanze, oder füge einer anderen Karte 2 Mikroben hinzu.",
   "It must be -10 C or colder.": "Temperatur muss -10 °C oder kälter sein.",
 
   "Advanced Ecosystems": "Fortgeschrittenes Ökosystem",
@@ -510,7 +507,6 @@
 
   "Nitrite Reducing Bacteria": "Denitrifizierende Bakterien",
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu ODER entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
-  "Action: Remove 3 microbes to increase your TR 1 step.": "AKTION: Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
   "Add 3 microbes to this card.": "Füge dieser Karte 3 Mikroben hinzu.",
   "Remove 3 microbes to increase your terraform rating 1 step": "Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen",
 
@@ -597,7 +593,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Benötigt Sauerstoffgehalt von 6% oder mehr. Senke eine beliebige Pflanzen-Produktion um 1. Erhöhe deine Energie-Produktion um 2.",
 
   "Livestock": "Vieh",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.",
 
   "Olympus Conference": "Olympus-Konferenz",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "EFFEKT: Wenn du ein Wissenschaftssymbol ausspielst (einschließlich dieses), füge dieser Karte 1 Wissenschaft hinzu ODER entferne 1 Wissenschaft von dieser Karte, um 1 Karte zu ziehen.",

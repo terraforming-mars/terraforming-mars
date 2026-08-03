@@ -25,13 +25,10 @@ export class ForcedPrecipitation extends Card implements IActionCard {
       metadata: {
         cardNumber: '226',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 M€ to add 1 floater to THIS card.', (eb) => {
-            eb.megacredits(2).startAction.resource(CardResource.FLOATER);
-          }).br;
-          b.or().br;
-          b.action('Spend 2 floaters here to increase Venus 1 step.', (eb) => {
-            eb.resource(CardResource.FLOATER, 2).startAction.venus(1);
-          });
+          b.megacredits(2).arrow().resource(CardResource.FLOATER).nbsp.or().br;
+          b.resource(CardResource.FLOATER, 2).arrow().venus(1).br;
+
+          b.plainText('Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.', /* parens */ true);
         }),
       },
     });
@@ -43,7 +40,7 @@ export class ForcedPrecipitation extends Card implements IActionCard {
     }
     if (this.resourceCount > 1 && player.canAfford({cost: 0, tr: {venus: 1}})) {
       if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
-        this.warnings.add('maxvenus');
+        this.addWarning('maxvenus');
       }
       return true;
     }

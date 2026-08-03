@@ -9,10 +9,6 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.megacredits(1)).slash().undergroundResources(2, {digit}).influence({size: Size.SMALL});
-});
-
 export class MigrationUnderground extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class MigrationUnderground extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 1 M€ production (max 5) for every 2 underworld tokens you own. Each point of influence counts as an extra underworld token.',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.megacredits(1)).slash().undergroundResources(2, {digit}).influence({size: Size.SMALL});
+      }),
     });
   }
 

@@ -139,8 +139,6 @@ export interface IGame extends Logger {
   milestoneClaimed(milestone: IMilestone): boolean;
   /** Returns true if Mars is fully terraformed, meaning the game should end with this generation. */
   marsIsTerraformed(): boolean;
-  /** Logs a message if Mars is fully terraformed. */
-  maybeLogMarsIsTerraformed(): void;
   lastSoloGeneration(): number;
   isSoloModeWin(): boolean;
   getAwardFundingCost(): number;

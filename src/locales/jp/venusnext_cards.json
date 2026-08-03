@@ -23,15 +23,14 @@
   "Requires Venus 12%.": "条件：金星12％以上.",
 
   "Sulphur-Eating Bacteria": "硫黄細菌",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "アクション:このカード上からx微生物を除去し、3xMC獲得.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "アクション：このカード上に1微生物追加 または このカード上からx微生物を除去し、3xMC獲得.",
   "Requires Venus 6%": "条件：金星6％以上.",
 
   "Venus Waystation": "金星中継ステーション",
   "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "効果：金星タグカードのプレイコスト-2MC.",
 
   "Thermophiles": "好熱菌",
-  "Action: Add 1 microbe to ANY Venus CARD.": "アクション：金星タグカード上に1微生物追加.",
-  "Action: Remove 2 microbes to raise Venus 1 step": "アクション：このカード上から2微生物除去し、金星+1段階.",
+  "Action: Add 1 microbe to ANY Venus CARD, or remove 2 microbes to raise Venus 1 step.": "アクション：金星タグカード上に1微生物追加 または このカード上から2微生物除去し、金星+1段階.",
 
   "Sponsored Academies": "支援を受けた学会",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "カードを1枚捨て、3ドロー. 他プレイヤー全員は1ドロー.",
@@ -51,16 +50,14 @@
   "Atalanta Planitia Lab": "アタランテ平原研究所",
 
   "Rotator Impacts": "自転加速衝突",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "アクション：6MC支払い、このカード上に1小惑星追加.※チタンでの支払い可能.",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.": "アクション：このカード上から1小惑星除去し、金星+1段階.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "アクション：6MC支払い、このカード上に1小惑星追加.※チタンでの支払い可能 または このカード上から1小惑星除去し、金星+1段階.",
   "Venus must be 14% or lower": "条件：金星14％以下.",
 
   "Omnicourt": "オムニコート",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "条件：金星タグ、地球タグ、木星タグがそれぞれ1つ以上. TR+2段階.",
 
   "Jet Stream Microscrappers": "小型ジェット気流減圧体",
-  "Action: Spend 1 titanium to add 2 floaters here": "アクション：1チタンを支払い、このカード上に2浮遊体追加.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "アクション：このカード上から2浮遊体除去し、金星+1段階.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "アクション：1チタンを支払い、このカード上に2浮遊体追加 または このカード上から2浮遊体除去し、金星+1段階.",
 
   "Spin-Inducing Asteroid": "小惑星による自転強化",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "条件：金星10％以下. 金星+2段階.",
@@ -84,8 +81,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "金星+1段階. 温熱産出+3.",
 
   "Aerial Mappers": "大気図作成者",
-  "Action: Add floater to ANY card.": "アクション：浮遊体を獲得.",
-  "Action: Spend one floater here to draw 1 card.": "アクション：このカード上から1浮遊体除去し、1ドロー.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "アクション：浮遊体を獲得 または このカード上から1浮遊体除去し、1ドロー.",
 
   "Aerosport Tournament": "空中スポーツトーナメント",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "条件：浮遊体5つ以上. 配置済みの全都市タイル1枚毎に1MC獲得.",
@@ -107,11 +103,10 @@
 
   "Extractor Balloons": "抽出気球",
   "Action: Remove 2 floaters here to raise Venus 1 step.": "アクション：このカード上から2浮遊体除去し、金星+1段階.",
-  "Add 3 floaters to this card": "このカード上に3浮遊体追加.",
+  "Add 3 floaters to this card.": "このカード上に3浮遊体追加.",
 
   "Forced Precipitation": "強制沈降",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "アクション：2MC支払い、このカード上に1浮遊体追加.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "アクション：このカード上から2浮遊体除去し、金星+1段階.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "アクション：2MC支払い、このカード上に1浮遊体追加 または このカード上から2浮遊体除去し、金星+1段階.",
 
   "Freyja Biodomes": "フレイヤ環境ドーム",
   "10% Venus": "金星10％以上.",

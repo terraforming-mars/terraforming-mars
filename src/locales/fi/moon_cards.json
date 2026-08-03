@@ -26,7 +26,8 @@
   "Ancient Shipyards": "Muinaiset telakat",
   "Ancient Shipyards (Nerfed)": "Muinaiset telakat (Heikennetty)",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "TOIMINTO: Varasta 2 M€ jokaiselta pelaajalta ja lisää resurssinoppa tälle kortille.",
-  "Spend 3 titanium. -1 VP for every resource here.": "Käytä 3 titaania. -1 VP jokaisesta resurssista täällä.",
+  "Spend 3 titanium.": "Käytä 3 titaania.",
+  "-1 VP for every resource here.": "-1 VP jokaisesta resurssista täällä.",
 
   "Archimedes Hydroponics Station": "Arkhimedeen hydroponiikka-asema",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Vähennä energiatuotantoasi 1 askel ja M€-tuotantoasi 1 askel. Nosta kasvituotantoasi 2 askelta.",
@@ -49,8 +50,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Vaatii 4 kaivosasteen. Kaikki pelaajat maksavat 4M€ jokaisesta omistamastaan kaivoslaatasta.",
 
   "Darkside Incubation Plant": "Pimeän puolen kasvattamo",
-  "Action: Add 1 microbe here.": "TOIMINTO: Lisää 1 mikrobi tähän.",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "TOIMINTO: Käytä 2 mikrobia nostaaksesi asutusastetta 1 askel.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.": "TOIMINTO: Lisää 1 mikrobi tähän TAI käytä 2 mikrobia nostaaksesi asutusastetta 1 askel.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Käytä 1 titaani. 1 VP jokaisesta 2 mikrobista täällä.",
 
   "Darkside Meteor Bombardment": "Pimeän puolen meteoriittipommitus",
@@ -60,7 +60,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Nosta titaanituotantoasi 2 askelta, tai 1 askel jos kaivosaste on vähintään 2. Nosta sitten kaivosastetta 1 askel.",
 
   "Darkside Observatory": "Pimeän puolen observatorio",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "TOIMINTO: Lisää 1 tiede MILLE TAHANSA kortille [PAITSI niihin jotka antavat 2 VP tai enemmän per tiederesurssi.]",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.": "TOIMINTO: Lisää 1 tiede MILLE TAHANSA kortille [PAITSI niihin jotka antavat 2 VP tai enemmän per tiederesurssi.] TAI lisää 2 dataa MILLE TAHANSA kortille.",
   "Action: Add 2 data to ANY card.": "TOIMINTO: Lisää 2 dataa MILLE TAHANSA kortille.",
 
   "Darkside Smugglers' Union": "Pimeän puolen salakuljettajien liitto",
@@ -256,8 +256,7 @@
 
   "Steel Market Monopolists": "Teräsmarkkinoiden monopolistit",
   "Requires the mining rate to be 3 or higher.": "Vaatii kaivosasteen 3 tai korkeampi.",
-  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "TOIMINTO: Käytä 3X M€ saadaksesi 2X terästä (enintään 9 M€)",
-  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "TOIMINTO: Käytä X terästä saadaksesi 3X M€ (enintään 3 terästä).",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).": "TOIMINTO: Käytä 3X M€ saadaksesi 2X terästä (enintään 9 M€) TAI käytä X terästä saadaksesi 3X M€ (enintään 3 terästä).",
 
   "Subterranean Habitats": "Maanalaiset asutukset",
   "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "VAIKUTUS: Kun rakennat asutuksen KUUHUN, käytät 1 titaani vähemmän.",
@@ -276,8 +275,7 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Käytä 2 titaania. Nosta titaanituotantoasi 1 askel jokaisesta 2 kaivosasteen askeleesta.",
 
   "Titanium Market Monopolists": "Titaanimarkkinoiden monopolistit",
-  "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "TOIMINTO: Käytä 2X M€ saadaksesi X titaania [enintään 8 M€]",
-  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "TOIMINTO: Käytä X titaania saadaksesi 4X M€ [enintään 4 titaania].",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€], or spend X titanium to gain 4X M€ [max 4 titanium].": "TOIMINTO: Käytä 2X M€ saadaksesi X titaania [enintään 8 M€] TAI käytä X titaania saadaksesi 4X M€ [enintään 4 titaania].",
 
   "Tycho Road Network": "Tycho tieverkosto",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Käytä 1 teräs. Nosta M€-tuotantoasi 1 askel. Aseta tielaatta Kuuhun ja nosta logistiikka-astetta 1 askel.",

@@ -95,6 +95,29 @@ describe('Predators', () => {
     expect(bioengineeringEnclosure.resourceCount).to.eq(1);
   });
 
+  it('Can remove from own Bioengineering Enclosure', () => {
+    const bioengineeringEnclosure = new BioengineeringEnclosure();
+    player.playedCards.push(card, bioengineeringEnclosure);
+    player.addResourceTo(bioengineeringEnclosure, 2);
+
+    expect(card.canAct(player)).is.true;
+
+    card.action(player);
+    expect(game.deferredActions.pop()!.execute()).is.undefined; // Only one option: the enclosure
+    game.deferredActions.pop()!.execute(); // Add animal to predators
+
+    expect(card.resourceCount).to.eq(1);
+    expect(bioengineeringEnclosure.resourceCount).to.eq(1);
+  });
+
+  it('Can not remove from own Pets', () => {
+    const pets = new Pets();
+    player.playedCards.push(card, pets);
+    player.addResourceTo(pets, 2);
+
+    expect(card.canAct(player)).is.false;
+  });
+
   it('Respects protected habitats', () => {
     player.playedCards.push(card);
     const fish = new Fish();

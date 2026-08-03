@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {testGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {IGame} from '../../src/server/IGame';
+import {Board} from '../../src/server/boards/Board';
+import {Space} from '../../src/server/boards/Space';
 import {MarsBotTilePlacer} from '../../src/server/automa/MarsBotTilePlacer';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
@@ -17,130 +19,127 @@ describe('MarsBotTilePlacer', () => {
     tilePlacer = new MarsBotTilePlacer(game, marsBot, human);
   });
 
+  /** An empty land space whose six neighbours are all empty land, so tiles can be arranged around it. */
+  function inlandSpace(): Space {
+    return game.board.getAvailableSpacesOnLand(marsBot).find((space) => {
+      const adj = game.board.getAdjacentSpaces(space);
+      return adj.length === 6 && adj.every((s) => s.spaceType === SpaceType.LAND && s.tile === undefined);
+    })!;
+  }
+
   describe('findOceanSpace', () => {
-    it('finds an ocean space when available', () => {
+    it('finds an ocean-reserved space', () => {
       const space = tilePlacer.findOceanSpace();
-      expect(space).to.not.be.undefined;
-      // Should be an ocean-reserved space
       expect(space!.spaceType).to.eq(SpaceType.OCEAN);
     });
 
-    it('returns undefined when no ocean spaces available', () => {
-      // Fill all ocean spaces
-      const oceanSpaces = game.board.getAvailableSpacesForOcean(marsBot);
-      for (const s of oceanSpaces) {
-        game.simpleAddTile(marsBot, s, {tileType: TileType.OCEAN});
+    it('returns undefined once every ocean space is taken', () => {
+      for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
+        game.simpleAddTile(marsBot, space, {tileType: TileType.OCEAN});
       }
-      const space = tilePlacer.findOceanSpace();
-      expect(space).to.be.undefined;
+      expect(tilePlacer.findOceanSpace()).is.undefined;
     });
   });
 
   describe('findCitySpace', () => {
-    it('finds a city space when available', () => {
-      const space = tilePlacer.findCitySpace();
-      expect(space).to.not.be.undefined;
+    it('finds a city space', () => {
+      expect(tilePlacer.findCitySpace()).is.not.undefined;
     });
 
-    it('prefers spaces adjacent to greenery', () => {
-      // Place a greenery tile
-      const landSpaces = game.board.getAvailableSpacesOnLand(marsBot);
-      const greenerySpace = landSpaces[10]; // Pick a non-edge space
-      game.simpleAddTile(marsBot, greenerySpace, {tileType: TileType.GREENERY});
+    it('prefers a space next to a greenery', () => {
+      game.simpleAddTile(human, inlandSpace(), {tileType: TileType.GREENERY});
 
-      const citySpace = tilePlacer.findCitySpace();
-      if (citySpace) {
-        const adj = game.board.getAdjacentSpaces(citySpace);
-        const adjacentGreenery = adj.filter((s) => s.tile?.tileType === TileType.GREENERY);
-        // The chosen space should be adjacent to greenery (or at least the best available)
-        expect(adjacentGreenery.length).to.be.gte(0); // Basic assertion
-      }
+      const space = tilePlacer.findCitySpace();
+      expect(game.board.getAdjacentSpaces(space!).filter(Board.isGreenerySpace)).has.length(1);
     });
   });
 
   describe('findGreenerySpace', () => {
-    it('finds a greenery space when available', () => {
-      // MarsBot needs at least one tile for greenery placement rules
-      const landSpaces = game.board.getAvailableSpacesOnLand(marsBot);
-      game.simpleAddTile(marsBot, landSpaces[15], {tileType: TileType.CITY});
+    it('finds a greenery space', () => {
+      game.simpleAddTile(marsBot, inlandSpace(), {tileType: TileType.CITY});
 
-      const space = tilePlacer.findGreenerySpace();
-      expect(space).to.not.be.undefined;
-    });
-  });
-
-  describe('placement bonus MC', () => {
-    it('calculates placement bonus MC (1 per icon)', () => {
-      const spaces = game.board.spaces.filter((s) => s.bonus.length > 0 && s.tile === undefined);
-      if (spaces.length > 0) {
-        const mc = tilePlacer.getPlacementBonusMC(spaces[0]);
-        expect(mc).to.eq(spaces[0].bonus.length);
-      }
-    });
-
-    it('returns 0 for spaces with no bonus icons', () => {
-      const spaces = game.board.spaces.filter((s) => s.bonus.length === 0 && s.tile === undefined);
-      if (spaces.length > 0) {
-        expect(tilePlacer.getPlacementBonusMC(spaces[0])).to.eq(0);
-      }
-    });
-  });
-
-  describe('ocean adjacency MC', () => {
-    it('returns 2 MC per adjacent ocean', () => {
-      // Place an ocean tile
-      const oceanSpaces = game.board.getAvailableSpacesForOcean(marsBot);
-      game.simpleAddTile(marsBot, oceanSpaces[0], {tileType: TileType.OCEAN});
-
-      // Find a land space adjacent to the ocean
-      const adj = game.board.getAdjacentSpaces(oceanSpaces[0]);
-      const landAdj = adj.filter((s) => s.spaceType === SpaceType.LAND && s.tile === undefined);
-      if (landAdj.length > 0) {
-        const mc = tilePlacer.getOceanAdjacencyMC(landAdj[0]);
-        expect(mc).to.eq(2);
-      }
-    });
-
-    it('returns 0 for spaces not adjacent to oceans', () => {
-      // Find a space with no adjacent oceans
-      const space = game.board.spaces.find((s) =>
-        s.tile === undefined &&
-        s.spaceType === SpaceType.LAND &&
-        game.board.getAdjacentSpaces(s).every((adj) => adj.tile?.tileType !== TileType.OCEAN),
-      );
-      if (space) {
-        expect(tilePlacer.getOceanAdjacencyMC(space)).to.eq(0);
-      }
+      expect(tilePlacer.findGreenerySpace()).is.not.undefined;
     });
   });
 
   describe('findExpediteConstructionCitySpace', () => {
-    it('returns undefined when no space has 2+ adjacent greenery/ocean', () => {
-      const space = tilePlacer.findExpediteConstructionCitySpace();
-      // On a fresh board with no tiles, this should be undefined
-      expect(space).to.be.undefined;
+    it('returns undefined on an empty board', () => {
+      expect(tilePlacer.findExpediteConstructionCitySpace()).is.undefined;
     });
 
-    it('finds space when adjacent to 2+ greenery/ocean tiles', () => {
-      // Place greenery and ocean tiles near each other
-      const landSpaces = game.board.getAvailableSpacesOnLand(marsBot);
-      const center = landSpaces[15];
-      const adj = game.board.getAdjacentSpaces(center);
+    it('returns undefined when only one greenery is adjacent', () => {
+      game.simpleAddTile(human, inlandSpace(), {tileType: TileType.GREENERY});
 
-      // Place two greeneries adjacent to center
-      let placed = 0;
-      for (const s of adj) {
-        if (s.tile === undefined && s.spaceType === SpaceType.LAND && placed < 2) {
-          game.simpleAddTile(marsBot, s, {tileType: TileType.GREENERY});
-          placed++;
-        }
-      }
+      expect(tilePlacer.findExpediteConstructionCitySpace()).is.undefined;
+    });
 
-      if (placed >= 2) {
-        const space = tilePlacer.findExpediteConstructionCitySpace();
-        // Should find a valid space (the center or nearby)
-        expect(space).to.not.be.undefined;
-      }
+    it('finds the space next to two greeneries', () => {
+      const [first, second] = game.board.getAdjacentSpaces(inlandSpace());
+      game.simpleAddTile(human, first, {tileType: TileType.GREENERY});
+      game.simpleAddTile(human, second, {tileType: TileType.GREENERY});
+
+      const space = tilePlacer.findExpediteConstructionCitySpace();
+      const adjacent = game.board.getAdjacentSpaces(space!)
+        .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s));
+      expect(adjacent).has.length(2);
+    });
+  });
+
+  describe('tiebreakers', () => {
+    it('prefers a space next to an ocean, then the one covering the most bonuses', () => {
+      // MarsBot owns no tiles, so every land space is a greenery candidate and they all
+      // score 0 on city adjacency. That leaves the tiebreakers to decide.
+      const ocean = game.board.getAvailableSpacesForOcean(human)[0];
+      game.simpleAddTile(human, ocean, {tileType: TileType.OCEAN});
+
+      const space = tilePlacer.findGreenerySpace()!;
+      expect(game.board.getAdjacentSpaces(space).filter(Board.isOceanSpace)).has.length(1);
+
+      const candidates = game.board.getAdjacentSpaces(ocean).filter((s) => game.board.canPlaceTile(s));
+      expect(space.bonus.length).to.eq(Math.max(...candidates.map((s) => s.bonus.length)));
+    });
+
+    it('draws and discards one project card when spaces are still tied', () => {
+      const discarded = game.projectDeck.discardPile.length;
+
+      tilePlacer.findOceanSpace();
+
+      expect(game.projectDeck.discardPile).has.length(discarded + 1);
+    });
+  });
+
+  describe('placement M€', () => {
+    it('pays 1 M€ per bonus icon covered', () => {
+      const twoBonuses = game.board.spaces.find((space) => space.bonus.length === 2)!;
+      expect(tilePlacer.getPlacementBonusMC(twoBonuses)).to.eq(2);
+    });
+
+    it('pays nothing for a space without bonus icons', () => {
+      const noBonuses = game.board.spaces.find((space) => space.bonus.length === 0)!;
+      expect(tilePlacer.getPlacementBonusMC(noBonuses)).to.eq(0);
+    });
+
+    it('pays 2 M€ per adjacent ocean', () => {
+      const ocean = game.board.getAvailableSpacesForOcean(marsBot)[0];
+      game.simpleAddTile(marsBot, ocean, {tileType: TileType.OCEAN});
+      const neighbour = game.board.getAdjacentSpaces(ocean).find((s) => game.board.canPlaceTile(s))!;
+
+      expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(2);
+    });
+
+    it('pays nothing next to an ocean-reserved space with no tile on it', () => {
+      const dryOcean = game.board.getAvailableSpacesForOcean(marsBot)[0];
+      const neighbour = game.board.getAdjacentSpaces(dryOcean).find((s) => game.board.canPlaceTile(s))!;
+
+      expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(0);
+    });
+
+    it('adds both parts together', () => {
+      const ocean = game.board.getAvailableSpacesForOcean(marsBot)[0];
+      game.simpleAddTile(marsBot, ocean, {tileType: TileType.OCEAN});
+      const neighbour = game.board.getAdjacentSpaces(ocean).find((s) => game.board.canPlaceTile(s))!;
+
+      expect(tilePlacer.getTotalPlacementMC(neighbour)).to.eq(neighbour.bonus.length + 2);
     });
   });
 });

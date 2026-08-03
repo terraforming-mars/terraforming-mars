@@ -25,7 +25,7 @@
   "Requires Venus 12%.": "Requer 12% na terraformação de Vênus.",
 
   "Sulphur-Eating Bacteria": "Bactéria Devoradora de Enxofre",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "Ação: Gaste qualquer número de micróbios nesta carta para ganhar o triplo de M€.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "Ação: adicione 1 micróbio a esta carta OU gaste qualquer número de micróbios nesta carta para ganhar o triplo de M€.",
   "Requires Venus 6%": "Requer 6% na terraformação de Vênus.",
 
   "Venus Waystation": "Estação de Passagem de Vênus",
@@ -62,8 +62,7 @@
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Requer um ícone de Vênus, um de Terra e um Joviano. Aumente seu IT em 2 níveis.",
 
   "Jet Stream Microscrappers": "Micro Sucateiros Propulsionados",
-  "Action: Spend 1 titanium to add 2 floaters here": "Ação: Gaste 1 titânio para adicionar 2 flutuadores à esta carta.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "Ação: Gaste 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "Ação: Gaste 1 titânio para adicionar 2 flutuadores à esta carta OU gaste 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
 
   "Spin-Inducing Asteroid": "Asteróide Indutor de Giro",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "A terraformação de Vênus deve estar em 10% ou inferior. Aumente a terraformação de Vênus em 2 níveis.",
@@ -87,8 +86,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "Aumente a terraformação de Vênus em 1 nível. Aumente a sua produção de calor em 3 níveis.",
 
   "Aerial Mappers": "Cartógrafo Aéreo",
-  "Action: Add floater to ANY card.": "Ação: adicione 1 flutuador à qualquer carta.",
-  "Action: Spend one floater here to draw 1 card.": "Ação: Gaste um flutuador desta carta para receber uma carta.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "Ação: adicione 1 flutuador à qualquer carta OU gaste um flutuador desta carta para receber uma carta.",
 
   "Aerosport Tournament": "Torneio Esportivo Aéreo",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Requer 5 flutuadores. Ganhe 1 M€ para cada cidade em jogo.",
@@ -107,15 +105,14 @@
 
   "Deuterium Export": "Exportação de Deutério",
   "Action: Add 1 floater to this card.": "Ação: adicione 1 flutuador à esta carta.",
-  "Action: Spend 1 floater here to increase your energy production 1 step.": "Ação: Gaste 1 flutuador desta carta para aumentar a sua produção de energía em 1 nível.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.": "Ação: adicione 1 flutuador à esta carta OU gaste 1 flutuador desta carta para aumentar a sua produção de energía em 1 nível.",
 
   "Extractor Balloons": "Balões Extratores",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "Ação: remova 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
-  "Add 3 floaters to this card": "Adicione 3 flutuadores à esta carta.",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.": "Ação: adicione 1 flutuador à esta carta OU remova 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
+  "Add 3 floaters to this card.": "Adicione 3 flutuadores à esta carta.",
 
   "Forced Precipitation": "Precipitação Forçada",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "Ação: Gaste 2 M€ para adicionar um flutuador à esta carta.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "Ação: Gaste 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "Ação: Gaste 2 M€ para adicionar um flutuador à esta carta OU gaste 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
 
   "Freyja Biodomes": "Biodomos de Freya",
   "10% Venus": "10% Vênus",
@@ -138,7 +135,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Aumente a sua produção de M€ em 1 nível para cada ícone de Terra que tiver, incluindo este. Coloque uma cidade NA ÁREA RESERVADA.",
 
   "Local Shading": "Sombra Local",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "Ação: Gaste 1 flutuador desta carta para aumentar a sua produção de M€ em 1 nível.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.": "Ação: adicione 1 flutuador à esta carta OU gaste 1 flutuador desta carta para aumentar a sua produção de M€ em 1 nível.",
 
   "Maxwell Base": "Base Maxwell",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "Ação: adicione 1 recurso à OUTRA CARTA DE VÊNUS.",

@@ -5,9 +5,9 @@
       :class="{'sidebar_item--is-active': languagePanelOpen}">
       <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
       :title="title"
-      v-on:click="languagePanelOpen = !languagePanelOpen"/>
+      @click="languagePanelOpen = !languagePanelOpen"></div>
       </div>
-    <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
+    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ import {LANGUAGES} from '@/common/constants';
 export default defineComponent({
   name: 'LanguageIcon',
   components: {
-    'language-selection-dialog': LanguageSelectionDialog,
+    LanguageSelectionDialog,
   },
   data() {
     return {

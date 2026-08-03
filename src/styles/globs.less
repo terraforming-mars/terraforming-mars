@@ -1,278 +1,279 @@
 /* UI to display global parameters (oxygen, temperature, oceans count) */
 
 .global-numbers {
-	font-family: Prototype;
-	font-size: 14px;
-	margin: 11px 0 0 16px;
+  font-family: Prototype, sans-serif;
+  font-size: 14px;
+  margin: 11px 0 0 16px;
 
-	.global-numbers-value {
-		width: 26px;
-		height: 26px;
-		line-height: 26px;
-		text-align: center;
-		border-radius: 5px;
-	}
+  .global-numbers-value {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 5px;
+  }
 
-	.val-is-active {
-		color: white;
-		box-shadow: 0 0px 0px 2px @grey_900, 0px 0 0px 6px #bb8760, 0 0 2px 8px #000;
-		z-index: 1;
-	}
-	.global-numbers-oceans {
-		position: absolute;
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-		font-size: 30px;
-		margin: 524px 0 0 286px;
-	}
+  .val-is-active {
+    color: white;
+    box-shadow: 0 0px 0px 2px @grey_900, 0px 0 0px 6px #bb8760, 0 0 2px 8px #000;
+    z-index: 1;
+  }
+  .global-numbers-oceans {
+    position: absolute;
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype, sans-serif;
+    font-size: 30px;
+    margin: 524px 0 0 286px;
+  }
 
-	.global-ares-erosions-icon {
-		background: url(./assets/erosion.png) no-repeat;
-		position: absolute;
-		margin: 529px 0 0 206px;
-		transform: scale(.5, .5);
-		height: 34px;
-		width: 30px;
-	}
+  .global-ares-erosions-icon {
+    background: url(./assets/erosion.png) no-repeat;
+    position: absolute;
+    margin: 529px 0 0 206px;
+    transform: scale(.5, .5);
+    height: 34px;
+    width: 30px;
+  }
 
-	.global-ares-erosions-val {
-		position: absolute;
-		font-size: 15px;
-		margin: 535px 0 0 230px;
+  .global-ares-erosions-val {
+    position: absolute;
+    font-size: 15px;
+    margin: 535px 0 0 230px;
 
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-	}
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype, sans-serif;
+  }
 
-	.global-ares-remove-dust-storms-icon {
-		background: url(./assets/remove-dust-storms.png) no-repeat;
-		position: absolute;
-		margin: 436px 0 0 276px;
-		transform: scale(.12, .12);
-		height: 218px;
-		width: 175px;
-	}
+  .global-ares-remove-dust-storms-icon {
+    background: url(./assets/remove-dust-storms.png) no-repeat;
+    position: absolute;
+    margin: 436px 0 0 276px;
+    transform: scale(.12, .12);
+    height: 218px;
+    width: 175px;
+  }
 
-	.global-ares-remove-dust-storms-val {
-		position: absolute;
-		font-size: 15px;
-		margin: 535px 0 0 381px;
+  .global-ares-remove-dust-storms-val {
+    position: absolute;
+    font-size: 15px;
+    margin: 535px 0 0 381px;
 
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-	}
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype, sans-serif;
+  }
 
-	.global-ares-severe-erosions {
-		background: url(./assets/severe-erosion.png) no-repeat;
-		position: absolute;
-		margin: 222px 0 0 570px;
+  .global-ares-severe-erosions {
+    background: url(./assets/severe-erosion.png) no-repeat;
+    position: absolute;
+    margin: 222px 0 0 570px;
 
-		height: 60px;
-		width: 54px;
-	}
+    height: 60px;
+    width: 54px;
+  }
 
-	// Each entry: <suffix> <margin-top> <margin-left> <rotation>.
-	// Boundary values (0 and -8) are reachable only when Odyssey replays Butterfly Effect.
-	@severe-erosion-vals:
-		 0 164px 587px -17deg,
-		-2 195px 571px -14deg,
-		-4 222px 577px -11deg,
-		-6 247px 581px  -3deg,
-		-8 276px 580px  -3deg;
+  // Each entry: <suffix> <margin-top> <margin-left> <rotation>.
+  // Boundary values (0 and -8) are reachable only when Odyssey replays Butterfly Effect.
+  @severe-erosion-vals:
+    0 164px 587px -17deg,
+    -2 195px 571px -14deg,
+    -4 222px 577px -11deg,
+    -6 247px 581px  -3deg,
+    -8 276px 580px  -3deg;
 
-	each(@severe-erosion-vals, .(@v) {
-		@val: extract(@v, 1);
-		@top: extract(@v, 2);
-		@left: extract(@v, 3);
-		@rot: extract(@v, 4);
-		.global-ares-severe-erosions-@{val} {
-			margin: @top 0 0 @left;
-			transform: rotate(@rot) scale(.4, .4);
-		}
-	});
+  each(@severe-erosion-vals, .(@v) {
+    @val: extract(@v, 1);
+    @top: extract(@v, 2);
+    @left: extract(@v, 3);
+    @rot: extract(@v, 4);
+    .global-ares-severe-erosions-@{val} {
+      margin: @top 0 0 @left;
+      transform: rotate(@rot) scale(.4, .4);
+    }
+  });
 
-	.global-ares-severe-dust-storms {
-		background: url(./assets/severe-dust-storm.png) no-repeat;
-		position: absolute;
-		margin: 100px 0 0 250px;
-		height: 60px;
-		width: 54px;
-	}
+  .global-ares-severe-dust-storms {
+    background: url(./assets/severe-dust-storm.png) no-repeat;
+    position: absolute;
+    margin: 100px 0 0 250px;
+    height: 60px;
+    width: 54px;
+  }
 
-	// Each entry: <suffix> <margin-top> <margin-left> <rotation>.
-	// Boundary values (3 and 7) are reachable only when Odyssey (Pathfinders) replays Butterfly Effect (Ares).
-	@severe-dust-storm-vals:
-		3 436px  22px -38deg,
-		4 407px   5px -30deg,
-		5 378px  -9px -22deg,
-		6 346px -18px -15deg,
-		7 314px -24px  -8deg;
+  // Each entry: <suffix> <margin-top> <margin-left> <rotation>.
+  // Boundary values (3 and 7) are reachable only when Odyssey (Pathfinders) replays Butterfly Effect (Ares).
+  @severe-dust-storm-vals:
+    3 436px  22px -38deg,
+    4 407px   5px -30deg,
+    5 378px  -9px -22deg,
+    6 346px -18px -15deg,
+    7 314px -24px  -8deg;
 
-	each(@severe-dust-storm-vals, .(@v) {
-		@val: extract(@v, 1);
-		@top: extract(@v, 2);
-		@left: extract(@v, 3);
-		@rot: extract(@v, 4);
-		.global-ares-severe-dust-storms-@{val} {
-			margin: @top 0 0 @left;
-			transform: rotate(@rot) scale(.4, .4);
-		}
-	});
+  // stylelint-disable-next-line less/no-duplicate-variables
+  each(@severe-dust-storm-vals, .(@v) {
+    @val: extract(@v, 1);
+    @top: extract(@v, 2);
+    @left: extract(@v, 3);
+    @rot: extract(@v, 4);
+    .global-ares-severe-dust-storms-@{val} {
+      margin: @top 0 0 @left;
+      transform: rotate(@rot) scale(.4, .4);
+    }
+  });
 
 
-	.global-alt-venus {
-		.wild-resource {
-			background: url(./assets/resources/wild.png) no-repeat;
-			position: absolute;
-			height: 12px;
-			width: 12px;
-			background-size: 12px;
-	  }
+  .global-alt-venus {
+    .wild-resource {
+      background: url(./assets/resources/wild.png) no-repeat;
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      background-size: 12px;
+    }
 
-		.std-wild-resource {
-			background: url(./assets/resources/wild-std.png) no-repeat;
-			position: absolute;
-			height: 18px;
-			width: 18px;
-			background-size: 18px 18px;
-		}
+    .std-wild-resource {
+      background: url(./assets/resources/wild-std.png) no-repeat;
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      background-size: 18px 18px;
+    }
 
-		.p18 {
-			transform: rotate(7.8deg);
-			margin: 54px 0 0 326px;
-		}
-		.p20 {
-			transform: rotate(13.6deg);
-			margin: 59px 0 0 351px;
-		}
-		.p22 {
-			transform: rotate(19.6deg);
-			margin: 66px 0 0 373px;
-		}
-		.p24 {
-			transform: rotate(25.25deg);
-			margin: 75px 0 0 395px;
-		}
-		.p26 {
-			transform: rotate(30.65deg);
-			margin: 86px 0 0 416px;
-		}
-		.p28 {
-			transform: rotate(36.46deg);
-			margin: 99px 0 0 435px;
-		}
-		.p30 {
-			transform: rotate(41.7deg);
-			margin: 112px 0 0 448px;
-			background-size: 14px 14px;
-		}
-		.p30b {
-			transform: rotate(42.1deg);
-			margin: 122px 0 0 460px;
-		}
-	}
+    .p18 {
+      transform: rotate(7.8deg);
+      margin: 54px 0 0 326px;
+    }
+    .p20 {
+      transform: rotate(13.6deg);
+      margin: 59px 0 0 351px;
+    }
+    .p22 {
+      transform: rotate(19.6deg);
+      margin: 66px 0 0 373px;
+    }
+    .p24 {
+      transform: rotate(25.25deg);
+      margin: 75px 0 0 395px;
+    }
+    .p26 {
+      transform: rotate(30.65deg);
+      margin: 86px 0 0 416px;
+    }
+    .p28 {
+      transform: rotate(36.46deg);
+      margin: 99px 0 0 435px;
+    }
+    .p30 {
+      transform: rotate(41.7deg);
+      margin: 112px 0 0 448px;
+      background-size: 14px 14px;
+    }
+    .p30b {
+      transform: rotate(42.1deg);
+      margin: 122px 0 0 460px;
+    }
+  }
 
-	.checkmark {
-		display: none;
-	}
+  .checkmark {
+    display: none;
+  }
 
-	// Per-value placement of the moving marker on each global-parameter track
-	// (Venus, oxygen, temperature). Each track has a list of tuples — one per
-	// reachable parameter value — describing where the marker sits and how it
-	// is rotated to follow the curve printed on the board. The .pin-and-rotate
-	// mixin emits a .val-<n> rule for each tuple; .global-numbers-<track> applies
-	// the appropriate list.
+  // Per-value placement of the moving marker on each global-parameter track
+  // (Venus, oxygen, temperature). Each track has a list of tuples — one per
+  // reachable parameter value — describing where the marker sits and how it
+  // is rotated to follow the curve printed on the board. The .pin-and-rotate
+  // mixin emits a .val-<n> rule for each tuple; .global-numbers-<track> applies
+  // the appropriate list.
 
-	// Emit a .val-<val> rule positioning the marker at (@top, @left) and
-	// rotating it by @rot. @v is a 4-element list: <val> <margin-top>
-	// <margin-left> <rotation>, matching the entry format of the
-	// @venus-vals / @oxygen-vals / @temperature-vals lists below.
-	.pin-and-rotate(@v) {
-		@val: extract(@v, 1);
-		@top: extract(@v, 2);
-		@left: extract(@v, 3);
-		@rot: extract(@v, 4);
-		.val-@{val} {
-			position: absolute;
-			margin: @top 0 0 @left;
-			transform: rotate(@rot);
-		}
-	}
+  // Emit a .val-<val> rule positioning the marker at (@top, @left) and
+  // rotating it by @rot. @v is a 4-element list: <val> <margin-top>
+  // <margin-left> <rotation>, matching the entry format of the
+  // @venus-vals / @oxygen-vals / @temperature-vals lists below.
+  .pin-and-rotate(@v) {
+    @val: extract(@v, 1);
+    @top: extract(@v, 2);
+    @left: extract(@v, 3);
+    @rot: extract(@v, 4);
+    .val-@{val} {
+      position: absolute;
+      margin: @top 0 0 @left;
+      transform: rotate(@rot);
+    }
+  }
 
-	// Each entry: <val> <margin-top> <margin-left> <rotation>
-	@venus-vals:
-		 0 88px 107px -45deg,
-		 2 72px 129px -36deg,
-		 4 58px 150px -33deg,
-		 6 46px 173px -26deg,
-		 8 36px 197px -20deg,
-		10 28px 222px -15deg,
-		12 23px 247px  -8deg,
-		14 20px 274px  -2deg,
-		16 20px 301px   4deg,
-		18 23px 327px   9deg,
-		20 28px 352px  15deg,
-		22 36px 377px  21deg,
-		24 46px 401px  27deg,
-		26 58px 425px  31deg,
-		28 72px 446px  35deg,
-		30 88px 466px  42deg;
+  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  @venus-vals:
+    0 88px 107px -45deg,
+    2 72px 129px -36deg,
+    4 58px 150px -33deg,
+    6 46px 173px -26deg,
+    8 36px 197px -20deg,
+    10 28px 222px -15deg,
+    12 23px 247px -8deg,
+    14 20px 274px -2deg,
+    16 20px 301px 4deg,
+    18 23px 327px 9deg,
+    20 28px 352px 15deg,
+    22 36px 377px 21deg,
+    24 46px 401px 27deg,
+    26 58px 425px 31deg,
+    28 72px 446px 35deg,
+    30 88px 466px 42deg;
 
-	.global-numbers-venus {
-		position: absolute;
-		each(@venus-vals, .(@v) { .pin-and-rotate(@v); });
-	}
+  .global-numbers-venus {
+    position: absolute;
+    each(@venus-vals, .(@v) { .pin-and-rotate(@v); });
+  }
 
-	// Each entry: <val> <margin-top> <margin-left> <rotation>
-	@oxygen-vals:
-		 0 500px 125px -54deg,
-		 1 482px 104px -48deg,
-		 2 460px  82px -43deg,
-		 3 435px  64px -37deg,
-		 4 411px  49px -30deg,
-		 5 383px  37px -22deg,
-		 6 355px  28px -15deg,
-		 7 325px  23px -10deg,
-		 8 295px  20px  -2deg,
-		 9 265px  21px   6deg,
-		10 236px  25px  12deg,
-		11 207px  32px  19deg,
-		12 179px  43px  25deg,
-		13 153px  56px  31deg,
-		14 128px  72px  37deg;
+  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  @oxygen-vals:
+    0 500px 125px -54deg,
+    1 482px 104px -48deg,
+    2 460px 82px -43deg,
+    3 435px 64px -37deg,
+    4 411px 49px -30deg,
+    5 383px 37px -22deg,
+    6 355px 28px -15deg,
+    7 325px 23px -10deg,
+    8 295px 20px -2deg,
+    9 265px 21px  6deg,
+    10 236px 25px 12deg,
+    11 207px 32px 19deg,
+    12 179px 43px 25deg,
+    13 153px 56px 31deg,
+    14 128px 72px 37deg;
 
-	.global-numbers-oxygen {
-		position: absolute;
-		each(@oxygen-vals, .(@v) { .pin-and-rotate(@v); });
-	}
+  .global-numbers-oxygen {
+    position: absolute;
+    each(@oxygen-vals, .(@v) { .pin-and-rotate(@v); });
+  }
 
-	// Each entry: <val> <margin-top> <margin-left> <rotation>
-	@temperature-vals:
-		-30 508px 438px  55deg,
-		-28 493px 458px  52deg,
-		-26 478px 474px  48deg,
-		-24 461px 490px  43deg,
-		-22 443px 504px  36deg,
-		-20 423px 517px  33deg,
-		-18 403px 528px  25deg,
-		-16 381px 537px  22deg,
-		-14 360px 544px  17deg,
-		-12 337px 549px  12deg,
-		-10 314px 553px   8deg,
-		 -8 291px 554px   0deg,
-		 -6 268px 554px  -3deg,
-		 -4 244px 551px -11deg,
-		 -2 222px 546px -14deg,
-		  0 199px 540px -20deg,
-		  2 177px 531px -24deg,
-		  4 156px 521px -30deg,
-		  6 137px 509px -33deg,
-		  8 117px 494px -40deg;
+  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  @temperature-vals:
+    -30 508px 438px 55deg,
+    -28 493px 458px 52deg,
+    -26 478px 474px 48deg,
+    -24 461px 490px 43deg,
+    -22 443px 504px 36deg,
+    -20 423px 517px 33deg,
+    -18 403px 528px 25deg,
+    -16 381px 537px 22deg,
+    -14 360px 544px 17deg,
+    -12 337px 549px 12deg,
+    -10 314px 553px 8deg,
+    -8 291px 554px 0deg,
+    -6 268px 554px -3deg,
+    -4 244px 551px -11deg,
+    -2 222px 546px -14deg,
+    0 199px 540px -20deg,
+    2 177px 531px -24deg,
+    4 156px 521px -30deg,
+    6 137px 509px -33deg,
+    8 117px 494px -40deg;
 
-	.global-numbers-temperature {
-		each(@temperature-vals, .(@v) { .pin-and-rotate(@v); });
-	}
+  .global-numbers-temperature {
+    each(@temperature-vals, .(@v) { .pin-and-rotate(@v); });
+  }
 }

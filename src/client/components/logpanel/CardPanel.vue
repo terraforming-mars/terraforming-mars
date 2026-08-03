@@ -5,10 +5,10 @@
       <Card :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in globalEvents" :key="name">
-      <global-event :globalEventName="name" type="prior" :showIcons="false"></global-event>
+      <GlobalEvent :globalEventName="name" type="prior" :showIcons="false"/>
     </div>
     <div id="log_panel_card" class="cardbox" v-for="name in colonies" :key="name">
-      <colony :colony="getColony(name)"></colony>
+      <Colony :colony="getColony(name)"/>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ import Colony from '@/client/components/colonies/Colony.vue';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
 export default defineComponent({
-  name: 'log-panel',
+  name: 'LogPanel',
   props: {
     message: {
       type: Object as () => LogMessage,

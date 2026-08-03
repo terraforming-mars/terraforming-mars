@@ -181,10 +181,6 @@ export class Game implements IGame, Logger {
   public verminInEffect: boolean = false;
   public exploitationOfVenusInEffect: boolean = false;
 
-  // Whether the one-time "Mars is terraformed" announcement has been logged. Not serialized:
-  // once Mars is terraformed the global parameters stay maxed, so this is never re-triggered.
-  private marsIsTerraformedAnnounced: boolean = false;
-
   /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
 
@@ -586,16 +582,6 @@ export class Game implements IGame, Logger {
       return globalParametersMaxed && venusMaxed;
     }
     return globalParametersMaxed;
-  }
-
-  // Announce, exactly once, when Mars (and any required additional tracks) becomes fully
-  // terraformed. Called after every global parameter increase. The announcement fires the moment
-  // the final parameter is maxed, even mid-action, rather than only at game end.
-  public maybeLogMarsIsTerraformed(): void {
-    if (this.marsIsTerraformedAnnounced === false && this.marsIsTerraformed()) {
-      this.marsIsTerraformedAnnounced = true;
-      this.log('Mars is terraformed!', (b) => b.announcement());
-    }
   }
 
   public lastSoloGeneration(): number {
@@ -1222,7 +1208,6 @@ export class Game implements IGame, Logger {
     }
 
     this.oxygenLevel += steps;
-    this.maybeLogMarsIsTerraformed();
 
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOxygenChange(this, aresData);
@@ -1286,7 +1271,6 @@ export class Game implements IGame, Logger {
     }
 
     this.venusScaleLevel += steps * 2;
-    this.maybeLogMarsIsTerraformed();
 
     return steps;
   }
@@ -1333,7 +1317,6 @@ export class Game implements IGame, Logger {
     }
 
     this.temperature += steps * 2;
-    this.maybeLogMarsIsTerraformed();
 
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onTemperatureChange(this, aresData);
@@ -1360,10 +1343,7 @@ export class Game implements IGame, Logger {
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
-  public addTile(
-    player: IPlayer,
-    space: Space,
-    tile: Tile): void {
+  public addTile(player: IPlayer, space: Space, tile: Tile): void {
     // Part 1, basic validation checks.
 
     // Land claim a player can claim land for themselves
@@ -1505,8 +1485,11 @@ export class Game implements IGame, Logger {
     case SpaceBonus.OCEAN:
       // Hellas special requirements ocean tile
       if (this.canAddOcean()) {
-        this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
-        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}))
+          .andThen(() => {
+            this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
+            return undefined;
+          });
       }
       break;
     case SpaceBonus.MICROBE:
@@ -1595,7 +1578,6 @@ export class Game implements IGame, Logger {
     }
 
     this.addTile(player, space, {tileType: TileType.OCEAN});
-    this.maybeLogMarsIsTerraformed();
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);
@@ -1734,9 +1716,7 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    // TODO(kberg): remove ?? generateGameName(...) by 2026-07-01
-    const name = d.name ?? generateGameName(UnseededRandom.INSTANCE);
-    const game = new Game(d.id, name, players, first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
+    const game = new Game(d.id, d.name, players, first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);

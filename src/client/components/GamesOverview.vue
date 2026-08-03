@@ -3,7 +3,7 @@
     <h1 v-i18n>{{ constants.APP_NAME }} — Games Overview</h1>
       <p v-i18n>The following games are available on this server:</p>
       <table>
-        <game-overview v-for="entry in entries" :key="entry.id" :id="entry.id" :game="entry.game" :status="entry.status"></game-overview>
+        <GameOverview v-for="entry in entries" :key="entry.id" :id="entry.id" :game="entry.game" :status="entry.status"/>
       </table>
   </div>
 </template>
@@ -29,7 +29,7 @@ type DataModel = {
 type Response = {gameId: GameId, participants: Array<ParticipantId>};
 
 export default defineComponent({
-  name: 'games-overview',
+  name: 'GamesOverview',
   data(): DataModel {
     return {
       entries: [],

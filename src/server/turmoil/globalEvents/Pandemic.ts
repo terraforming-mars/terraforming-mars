@@ -9,10 +9,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-3).slash().tag(Tag.BUILDING).influence({size: Size.SMALL});
-});
-
 export class Pandemic extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ for each building tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-3).slash().tag(Tag.BUILDING).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

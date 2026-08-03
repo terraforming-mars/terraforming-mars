@@ -23,15 +23,14 @@
   "Requires Venus 12%.": "조건: 금성개척률 12% 이상.",
 
   "Sulphur-Eating Bacteria": "황 섭식 미생물",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원을 원하는 수만큼 소비해서 그 수의 3배만큼 메가크레딧 획득.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원을 원하는 수만큼 소비해서 그 수의 3배만큼 메가크레딧 획득.",
   "Requires Venus 6%": "조건: 금성개척률 6% 이상.",
 
   "Venus Waystation": "금성 중간기착지",
   "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성 카드 사용 시, 금성 태그 1개마다 2M€ 할인.",
 
   "Thermophiles": "호열성 미생물",
-  "Action: Add 1 microbe to ANY Venus CARD.": "행동: 자신의 아무 금성 카드 1장에 미생물 자원 1개 추가.",
-  "Action: Remove 2 microbes to raise Venus 1 step": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Add 1 microbe to ANY Venus CARD, or remove 2 microbes to raise Venus 1 step.": "행동: 자신의 아무 금성 카드 1장에 미생물 자원 1개 추가 혹은 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
   "Action: Spend 2 microbes here to raise Venus 1 step.": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Sponsored Academies": "대학 후원",
@@ -52,16 +51,14 @@
   "Atalanta Planitia Lab": "애틀란타 분지 연구실",
 
   "Rotator Impacts": "자전 촉진 충돌",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "행동: 6M€ 소비해서 이 카드에 소행성 자원 1개 추가. (티타늄 자원 소비 가능)",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.": "행동: 이 카드에 소행성 자원 1개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "행동: 6M€ 소비해서 이 카드에 소행성 자원 1개 추가. (티타늄 자원 소비 가능) 혹은 이 카드에 소행성 자원 1개 소비해서 금성 개척률 1단계 상승.",
   "Venus must be 14% or lower": "조건: 금성개척률 14% 이하.",
 
   "Omnicourt": "행성계 최고법원",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "조건: 보유한 금성/지구/목성 태그 각 1개 이상.) (테라포밍 등급 2TR 상승.",
 
   "Jet Stream Microscrappers": "소형 대기감쇄기 살포",
-  "Action: Spend 1 titanium to add 2 floaters here": "행동: 티타늄 자원 1개 소비해서 이 카드에 부양체 자원 2개 추가,",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "행동: 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "행동: 티타늄 자원 1개 소비해서 이 카드에 부양체 자원 2개 추가, 혹은 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Spin-Inducing Asteroid": "소행성 비껴치기",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "조건: 금성개척률 10% 이하.) (금성 개척률 2단계 상승.",
@@ -85,8 +82,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "금성 개척률 1단계 상승. 열 생산력 3 증가.",
 
   "Aerial Mappers": "항공지도 작성",
-  "Action: Add floater to ANY card.": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "Action: Spend one floater here to draw 1 card.": "행동: 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가 혹은 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
 
   "Aerosport Tournament": "공중스포츠 토너먼트",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "조건: 보유한 부양체 자원 5개 이상.) (배치된 아무 도시 타일 1장당 1M€ 획득.",
@@ -105,15 +101,14 @@
 
   "Deuterium Export": "금성에서 중수소 수출",
   "Action: Add 1 floater to this card.": "행동: 이 카드에 부양체 자원 1개 추가,",
-  "Action: Spend 1 floater here to increase your energy production 1 step.": "행동: 카드에 부양체 자원 1개 소비해서 에너지 생산력 1 증가.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.": "행동: 이 카드에 부양체 자원 1개 추가, 혹은 카드에 부양체 자원 1개 소비해서 에너지 생산력 1 증가.",
 
   "Extractor Balloons": "대기 포집 풍선",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "행동: 이 카드의 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
-  "Add 3 floaters to this card": "이 카드에 부양체 자원 3개 추가.",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.": "행동: 이 카드에 부양체 자원 1개 추가, 혹은 이 카드의 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Add 3 floaters to this card.": "이 카드에 부양체 자원 3개 추가.",
 
   "Forced Precipitation": "인공 강우",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "행동: 2M€ 소비해서 이 카드에 부양체 자원 1개 추가.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "행동: 이 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "행동: 2M€ 소비해서 이 카드에 부양체 자원 1개 추가 혹은 이 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Freyja Biodomes": "프레이야 바이오돔",
   "10% Venus": "조건: 금성개척률 10% 이상.",
@@ -136,7 +131,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "이 카드도 포함해서, 보유한 지구 태그 1개당 메가크레딧 생산력 1 증가. 루나 메트로폴리스 전용 구역에 도시 타일 1장 배치.",
 
   "Local Shading": "국지규모 햇빛가리개",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "행동: 이 카드에 부양체 자원 1개 소비해서 메가크레딧 생산력 1 증가.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.": "행동: 이 카드에 부양체 자원 1개 추가, 혹은 이 카드에 부양체 자원 1개 소비해서 메가크레딧 생산력 1 증가.",
 
   "Maxwell Base": "맥스웰 기지",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "행동: 자신의 아무 금성 카드 1장에 특수 자원 1개 추가.",

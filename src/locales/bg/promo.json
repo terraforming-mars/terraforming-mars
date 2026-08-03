@@ -6,8 +6,7 @@
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR": "Ефект: Когато се изиграе ЛЮБО микробно таг, добавете тук болест и загубете 4 M€. Когато изиграете таг за наука, премахнете болест тук и печелите 1 TR ИЛИ ако няма болести тук, МОЖЕТЕ да обърнете тази карта с лице надолу, за да печелите 3 TR.",
 
   "Comet Aiming": "Нацеливане на комета",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Действие: Изразходвайте 1 титан, за да добавите 1 астероиден ресурс към КОЯТО И ДА Е КАРТА.",
-  "Action: Remove 1 asteroid here to place an ocean.": "Действие: Премахнете 1 астероид тук, за да заложите океан.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "Действие: Изразходвайте 1 титан, за да добавите 1 астероиден ресурс към КОЯТО И ДА Е КАРТА ИЛИ премахнете 1 астероид тук, за да заложите океан.",
 
   "Cutting Edge Technology": "Технологии на ръба на ножа",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Ефект: Когато изигравате карта с изискване, плащате с 2 M€ по-малко за нея.",
@@ -16,8 +15,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Изисква играч да е премахнал растенията НА ДРУГ ИГРАЧ този ход. Получете 1 титан или 2 стомана.",
 
   "Directed Impactors": "Управляеми ударители",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Действие: Изразходвайте 6 M€, за да добавите 1 астероид към КОЯТО И ДА Е КАРТА (може да се използва титан за плащане).",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "Действие: Премахнете 1 астероид тук, за да повишите температурата с 1 стъпка.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "Действие: Изразходвайте 6 M€, за да добавите 1 астероид към КОЯТО И ДА Е КАРТА (може да се използва титан за плащане) ИЛИ премахнете 1 астероид тук, за да повишите температурата с 1 стъпка.",
 
   "Field-Capped City": "Град с поле върху него",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Увеличете производството си на M€ с 2 стъпки, увеличете производството си на енергия с 1 стъпка, спечелете 3 растения и поставете градска плочка.",
@@ -101,15 +99,13 @@
   "Effect: Your titanium resources are worth 1 M€ extra.": "Ефект: Вашите титанови ресурси струват 1 M€ повече.",
 
   "Energy Market": "Енергийния пазар",
-  "Action: Spend 2X M€ to gain X energy.": "Действие: Изразходвайте 2X M€, за да получите X енергия.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "Действие: Намалете производството си на енергия с 1 стъпка, за да получите 8 M€.",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Действие: Изразходвайте 2X M€, за да получите X енергия ИЛИ намалете производството си на енергия с 1 стъпка, за да получите 8 M€.",
   "Asteroid Rights": "Права на астероиди",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Действие: Изразходвайте 1 M€, за да добавите 1 астероид към ЛЮБА карта.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Действие: Изразходвайте 1 астероид оттук, за да увеличите производството на M€ с 1 стъпка ИЛИ получете 2 титаниума.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Действие: Изразходвайте 1 M€, за да добавите 1 астероид към ЛЮБА карта ИЛИ изразходвайте 1 астероид оттук, за да увеличите производството на M€ с 1 стъпка ИЛИ получете 2 титаниума.",
   "Add 2 asteroids to this card.": "Добавете 2 астероида към тази карта.",
   "Splice": "Сплайс",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Започвате с 44 M€. Като ваше първо действие, разкрийте карти, докато не разкриете етикет за микроби. Вземете го и оставете останалите.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Ефект: когато се разиграе етикет за микроби, включително този, ОНЗИ ИГРАЧ получава 2 M€ или добавя микроб към ТАЗИ карта, и вие получавате 2 M€.",
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Ефект: когато се разиграе етикет за микроби, включително този, ОНЗИ ИГРАЧ получава 2 M€ или добавя микроб към ТАЗИ карта, и вие получавате 2 M€.",
   "Recyclon": "Рециклон",
   "You start with 38 M€ and 1 steel production.": "Започвате с 38 M€ и 1 стоманено производство.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Ефект: Когато играете етикет за сграда, включително този, получавате 1 микроб за тази карта или премахнете 2 микроба тук и повишете производството на растения си с 1 стъпка.",

@@ -22,7 +22,7 @@
 	"Requires Venus 12%.": "Krever Venus 12%.",
 
 	"Sulphur-Eating Bacteria": "Svovelspisende bakterier",
-	"Action: Spend any number of microbes here to gain triple amount of M€.": "Handling: Bruk et valgfritt antall mikrober fra dette kortet for å få tredobbelt beløp i M€.",
+	"Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "Legg til 1 mikrobe på dette kortet ELLER bruk et valgfritt antall mikrober fra dette kortet for å få tredobbelt beløp i M€.",
 	"Requires Venus 6%": "Krever Venus 6%",
 
 	"Venus Waystation": "Venus veistasjon",
@@ -50,16 +50,14 @@
 	"Atalanta Planitia Lab": "Atalanta-Planitia-Laboratorium",
 
 	"Rotator Impacts": "Rotatorstøt",
-	"Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Handling: Bruk 6 M€ for å legge til en asteroide-ressurs på dette kortet [TITAN KAN BRUKES].",
-	"Action: Spend 1 resource from this card to increase Venus 1 step.": "Handling: Bruk 1 ressurs fra dette kortet for å øke Venus med 1 trinn.",
+	"Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "Handling: Bruk 6 M€ for å legge til en asteroide-ressurs på dette kortet [TITAN KAN BRUKES] ELLER bruk 1 ressurs fra dette kortet for å øke Venus med 1 trinn.",
 	"Venus must be 14% or lower": "Venus må være 14% eller lavere",
 
 	"Omnicourt": "",
 	"Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Krever Venus-, Jord- og Jupitersymboler. Øk TR med 2 trinn.",
 
 	"Jet Stream Microscrappers": "Jetstrøm-mikroskrapere",
-	"Action: Spend 1 titanium to add 2 floaters here": "Handling: Bruk 1 titan for å legge til 2 svevere her",
-	"Action: Spend 2 floaters here to raise Venus 1 step": "Handling: Bruk 2 svevere her for å øke Venus med 1 trinn",
+	"Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "Handling: Bruk 1 titan for å legge til 2 svevere her ELLER bruk 2 svevere her for å øke Venus med 1 trinn",
 
 	"Spin-Inducing Asteroid": "Rotasjonsinduserende asteroide",
 	"Venus must be 10% or lower. Raise Venus 2 steps.": "Venus må være 10% eller lavere. Øk Venus med 2 trinn.",
@@ -83,8 +81,7 @@
 	"Raise Venus 1 step. Increase your heat production 3 steps.": "Øk Venus med 1 trinn. Øk varmeproduksjonen din med 3 trinn.",
 
 	"Aerial Mappers": "Luftkartleggere",
-	"Action: Add floater to ANY card.": "Handling: Legg til svever på et valgfritt kort.",
-	"Action: Spend one floater here to draw 1 card.": "Handling: Bruk en svever her for å trekke 1 kort.",
+	"Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "Handling: Legg til svever på et valgfritt kort ELLER bruk en svever her for å trekke 1 kort.",
 
 	"Aerosport Tournament": "Aerosportturnering",
 	"Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Krever at du har 5 svevere. Få 1 M€ for hvert byplagg i spill.",
@@ -103,15 +100,14 @@
 
 	"Deuterium Export": "Deuterium-eksport",
 	"Action: Add 1 floater to this card.": "Handling: Legg til 1 svever på dette kortet.",
-	"Action: Spend 1 floater here to increase your energy production 1 step.": "Handling: Bruk 1 svever her for å øke energiproduksjonen din med 1 trinn.",
+	"Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.": "Handling: Legg til 1 svever på dette kortet ELLER bruk 1 svever her for å øke energiproduksjonen din med 1 trinn.",
 
 	"Extractor Balloons": "Ekstraktorballonger",
-	"Action: Remove 2 floaters here to raise Venus 1 step.": "Handling: Fjern 2 svevere her for å øke Venus med 1 trinn.",
-	"Add 3 floaters to this card": "Legg til 3 svevere på dette kortet",
+	"Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.": "Handling: Legg til 1 svever på dette kortet ELLER fjern 2 svevere her for å øke Venus med 1 trinn.",
+	"Add 3 floaters to this card.": "Legg til 3 svevere på dette kortet",
 
 	"Forced Precipitation": "Tvungen nedbør",
-	"Action: Spend 2 M€ to add 1 floater to THIS card.": "Handling: Bruk 2 M€ for å legge til 1 svever på DETTE kortet.",
-	"Action: Spend 2 floaters here to increase Venus 1 step.": "Handling: Bruk 2 svevere her for å øke Venus med 1 trinn.",
+	"Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "Handling: Bruk 2 M€ for å legge til 1 svever på DETTE kortet ELLER bruk 2 svevere her for å øke Venus med 1 trinn.",
 
 	"Freyja Biodomes": "Freyja biodomer",
 	"10% Venus": "",
@@ -134,7 +130,7 @@
 	"Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Øk M€-produksjonen din med 1 trinn for hvert Jord-symbol du har, inkludert dette. Plasser en by på det RESERVERTE OMRÅDE.",
 
 	"Local Shading": "Lokal skygge",
-	"Action: Spend 1 floater here to raise your M€ production 1 step.": "Handling: Bruk 1 svever her for å øke M€-produksjonen din med 1 trinn.",
+	"Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.": "Handling: Legg til 1 svever på dette kortet ELLER bruk 1 svever her for å øke M€-produksjonen din med 1 trinn.",
 
 	"Maxwell Base": "",
 	"Action: Add 1 resource to ANOTHER VENUS CARD.": "Handling: Legg til 1 ressurs på ET ANNET VENUS-KORT.",

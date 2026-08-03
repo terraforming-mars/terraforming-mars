@@ -30,7 +30,7 @@ async function bootstrap() {
 
   app.use(i18nPlugin);
 
-  app.component('player-input-factory', PlayerInputFactory);
+  app.component('PlayerInputFactory', PlayerInputFactory);
 
   app.directive('trim-whitespace', {
     mounted: trimEmptyTextNodes,

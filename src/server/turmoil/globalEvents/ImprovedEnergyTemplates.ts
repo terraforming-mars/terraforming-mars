@@ -9,10 +9,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.energy(1)).slash().tag(Tag.POWER, 2).influence({size: Size.SMALL});
-});
-
 export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent
       description: 'Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.KELVINISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.energy(1)).slash().tag(Tag.POWER, 2).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

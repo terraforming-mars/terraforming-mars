@@ -67,22 +67,22 @@ export class Executor implements BehaviorExecutor {
     if (behavior.global !== undefined) {
       const g = behavior.global;
       if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {
-        card.warnings.add('maxtemp');
+        card.addWarning('maxtemp');
       }
       if (g.oxygen !== undefined && game.getOxygenLevel() >= MAX_OXYGEN_LEVEL) {
         if (g.oxygen < 0) {
-          card.warnings.add('maxoxygen-reduce');
+          card.addWarning('maxoxygen-reduce');
         } else {
-          card.warnings.add('maxoxygen');
+          card.addWarning('maxoxygen');
         }
       }
       if (g.venus !== undefined && game.getVenusScaleLevel() >= MAX_VENUS_SCALE) {
-        card.warnings.add('maxvenus');
+        card.addWarning('maxvenus');
       }
     }
 
     if (behavior.ocean !== undefined && game.board.getOceanSpaces().length >= MAX_OCEAN_TILES) {
-      card.warnings.add('maxoceans');
+      card.addWarning('maxoceans');
     }
 
     if (behavior.stock !== undefined) {
@@ -170,7 +170,7 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
         if (targets.length === 1 && targets[0] === player) {
-          card.warnings.add('decreaseOwnProduction');
+          card.addWarning('decreaseOwnProduction');
         }
       }
     }
@@ -272,13 +272,13 @@ export class Executor implements BehaviorExecutor {
         }
       }
       if ((moon.habitatRate ?? 0) >= MAXIMUM_HABITAT_RATE) {
-        card.warnings.add('maxHabitatRate');
+        card.addWarning('maxHabitatRate');
       }
       if ((moon.miningRate ?? 0) >= MAXIMUM_MINING_RATE) {
-        card.warnings.add('maxMiningRate');
+        card.addWarning('maxMiningRate');
       }
       if ((moon.logisticRate ?? 0) >= MAXIMUM_LOGISTIC_RATE) {
-        card.warnings.add('maxLogisticRate');
+        card.addWarning('maxLogisticRate');
       }
     }
 

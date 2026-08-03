@@ -6,8 +6,7 @@
     "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Odrzuć 1 jednostkę dryfowców. Ukradnij dowolnemu graczowi 5 M€.",
 
     "Atmo Collectors": "Zagarniacze Atmosfery",
-    "Action: Add one floater here.": "Akcja: Umieść 1 jednostkę dryfowców na tej karcie.",
-    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Akcja: Wydaj z tej karty 1 jednostkę dryfowców, aby otrzymać 2 jednostki tytanu, lub 3 jednostki energii lub 4 jednostki ciepła.",
+    "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Akcja: Umieść 1 jednostkę dryfowców na tej karcie lub wydaj z tej karty 1 jednostkę dryfowców, aby otrzymać 2 jednostki tytanu, lub 3 jednostki energii lub 4 jednostki ciepła.",
     "Add 2 floaters to ANY card.": "Umieść 2 jednostki dryfowców na dowolnej karcie.",
 
     "Community Services": "Usługi Społeczne",
@@ -54,11 +53,10 @@
     "Jovian Lanterns": "Reflektory Atmosferyczne",
     "1 VP per 2 floaters here.": "1 PZ za każde 2 jednostki dryfowców na tej karcie.",
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Musisz posiadać co najmniej 1 symbol Jowisza. Podnieś swój WT o 1 poziom. Umieść 2 jednostki dryfowców na dowolnej karcie.",
-    "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
+    "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców lub wydaj 2 jednostki dryfowców z tej karty, aby podnieść swój WT o 1 poziom.",
 
     "Jupiter Floating Station": "Stacja Dryfowa na Jowiszu",
-    "Action: Add 1 floater to a JOVIAN CARD.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza.",
-    "Action: Gain 1 M€ for every floater here [MAX 4].": "Akcja: Otrzymujesz 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
+    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza lub otrzymujesz 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
     "Requires 3 science tags.": "Musisz posiadać co najmniej 3 symbole Nauki.",
 
     "Luna Governor": "Gubernator Księżyca",
@@ -136,15 +134,13 @@
     "Requires -6 C. Decrease any plant production 1 step.": "Temperatura musi wynosić co najmniej -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",
-    "Action: Spend 2 floaters here to increase your TR 1 step.": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść swój WT o 1 poziom.",
 
     "Titan Floating Launch-pad": "Dryfujące Lądowisko na Tytanie",
     "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza, lub wydaj 1 jednostkę dryfowców z tej karty, aby wykonać akcję handlu z obiektem za darmo.",
     "Add two floaters to ANY JOVIAN CARD.": "Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
 
     "Titan Shuttles": "Wahadłowce na Tytanie",
-    "Action: Add 2 floaters to ANY JOVIAN CARD.": "Akcja: Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
-    "Action: Spend any number of floaters here to gain the same number of titanium.": "Akcja: Wydaj dowolną liczbę jednostek dryfowców z tej karty, aby otrzymać tyle samo jednostek tytanu.",
+    "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "Akcja: Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza lub wydaj dowolną liczbę jednostek dryfowców z tej karty, aby otrzymać tyle samo jednostek tytanu.",
 
     "Trade Envoys": "Przedstawiciele Handlowi",
     "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, możesz najpierw przesunąć biały znacznik obiektu o 1 pole w prawo na torze kolonii.",

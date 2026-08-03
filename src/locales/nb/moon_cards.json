@@ -26,7 +26,8 @@
   "Ancient Shipyards": "Gamle skipsverft",
   "Ancient Shipyards (Nerfed)": "Gamle skipsverft (Nerfed)",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "Handling: Stjel 2 M€ fra hver spiller og legg til en ressurskube på dette kortet.",
-  "Spend 3 titanium. -1 VP for every resource here.": "Bruk 3 titan. -1 SP for hver ressurs på dette kortet.",
+  "Spend 3 titanium.": "Bruk 3 titan.",
+  "-1 VP for every resource here.": "-1 SP for hver ressurs på dette kortet.",
 
   "Archimedes Hydroponics Station": "Arkimedes hydroponisk stasjon",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Reduser energiproduksjonen din med 1 og M€-produksjonen din med 1. Øk planteproduksjonen din med 2.",
@@ -49,7 +50,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Krever 4 gruvenivå. Alle spillere betaler 4 M€ for hver gruvebrikke de eier.",
 
   "Darkside Incubation Plant": "Darkside Inkubasjonsanlegg",
-  "Add 1 microbe here.": "Legg til 1 mikrobe her.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.": "Legg til 1 mikrobe her ELLER bruk 2 mikrober for å øke habitatraten 1 trinn.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Bruk 1 titan. 1 SP for hver 2. mikrobe på dette kortet.",
 
   "Darkside Meteor Bombardment": "Darkside Meteorbombardement",
@@ -59,7 +60,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Øk titanproduksjonen din med 2, eller 1 hvis gruvenivået er minst 2. Øk deretter gruvenivået med 1.",
 
   "Darkside Observatory": "Darkside Observatorium",
-  "Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "Legg til 1 vitenskap på et valgfritt kort (UNNTATT de som gir 2 SP eller mer per vitenskapsressurs).",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.": "Legg til 1 vitenskap på et valgfritt kort (UNNTATT de som gir 2 SP eller mer per vitenskapsressurs) ELLER legg til 2 data på et valgfritt kort.",
   "Add 2 data to ANY card.": "Legg til 2 data på et valgfritt kort.",
 
   "Darkside Smugglers' Union": "Darkside Smuglerforening",
@@ -253,8 +254,7 @@
 
   "Steel Market Monopolists": "Stålmarkedets monopolister",
   "Requires the mining rate to be 3 or higher.": "Krever at gruvenivået er 3 eller høyere.",
-  "Spend 3X M€ to gain 2X steel (max 9 M€)": "Bruk 3X M€ for å få 2X stål (maks 9 M€)",
-  "Spend X steel to gain 3X M€ (max 3 steel).": "Bruk X stål for å få 3X M€ (maks 3 stål).",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).": "Bruk 3X M€ for å få 2X stål (maks 9 M€) ELLER bruk X stål for å få 3X M€ (maks 3 stål).",
 
   "Subterranean Habitats": "Underjordiske habitat",
   "When you build a habitat on The Moon, you spend 1 titanium less.": "Du betaler 1 titan mindre når du bygger et habitat på Månen.",
@@ -273,8 +273,7 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Bruk 2 titan. Øk titanproduksjonen din med 1 for hver 2 økte gruvenivåer.",
 
   "Titanium Market Monopolists": "Monopolister i titanmarkedet",
-  "Spend 2X M€ to gain X titanium [max 8 M€]": "Bruk 2X M€ for å få X titan [maks 8 M€]",
-  "Spend X titanium to gain 4X M€ [max 4 titanium].": "Bruk X titan for å få 4X M€ [maks 4 titan].",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€], or spend X titanium to gain 4X M€ [max 4 titanium].": "Bruk 2X M€ for å få X titan [maks 8 M€] ELLER bruk X titan for å få 4X M€ [maks 4 titan].",
 
   "Tycho Road Network": "Tycho veinettverk",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Bruk 1 stål. Øk M€-produksjonen din med 1. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",

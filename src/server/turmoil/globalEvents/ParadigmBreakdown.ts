@@ -8,10 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().cards(2).nbsp.megacredits(2).slash().influence();
-});
-
 export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
       description: 'Discard 2 cards from hand. Gain 2 M€ per influence.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().cards(2).nbsp.megacredits(2).slash().influence();
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

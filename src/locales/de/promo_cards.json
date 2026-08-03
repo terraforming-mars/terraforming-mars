@@ -43,8 +43,7 @@
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "Entferne 1 Mikrobe von einer eigenen Karten, um 5 Pflanzen zu erhalten.",
 
   "Icy Impactors": "Eisige Impaktoren",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Bezahle 10 M€ (Titan darf benutzt werden), um dieser Karte 2 Asteroiden hinzuzufügen.",
-  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Entferne 1 Asteroiden von dieser Karte, um 1 Ozeanplättchen zu platzieren. Der STARTSPIELER entscheidet, wo es platziert wird.",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Bezahle 10 M€ (Titan darf benutzt werden), um dieser Karte 2 Asteroiden hinzuzufügen, oder entferne 1 Asteroiden von dieser Karte, um 1 Ozeanplättchen zu platzieren. Der STARTSPIELER entscheidet, wo es platziert wird.",
 
   "Floyd Continuum": "Floyd-Kontinuum",
   "Action: Gain 3 M€ per completed terraforming parameter.": "AKTION: Erhalte 3 M€ pro abgeschlossenem Terraform-Parameter.",
@@ -112,8 +111,7 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
 
   "Comet Aiming": "Kometenzielen",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen.",
-  "Action: Remove 1 asteroid here to place an ocean.": "AKTION: Entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen, oder entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",
 
   "Cutting Edge Technology": "Neuste Technologie",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "EFFEKT: Wenn du eine Karte mit einer Bedingung spielst, zahle 2 M€ weniger.",
@@ -122,8 +120,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Erfordert, dass ein Spieler in dieser Generation eine Pflanze EINES ANDEREN SPIELERS entfernt hat. Erhalte 1 Titan oder 2 Stahl.",
 
   "Directed Impactors": "Gerichtete Impaktoren",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "AKTION: Zahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan kann zur Zahlung verwendet werden).",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "AKTION: Entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "AKTION: Zahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan kann zur Zahlung verwendet werden), oder entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
 
   "Field-Capped City": "Schutzschild-Stadt",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Erhöhe deine M€-Produktion um 2, erhöhe deine Energie-Produktion um 1, erhalte 3 Pflanzen und platziere ein Stadtplättchen.",
@@ -215,12 +212,9 @@
   "Effect: Your titanium resources are worth 1 M€ extra.": "EFFEKT: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
 
   "Energy Market": "Energiemarkt",
-  "Action: Spend 2X M€ to gain X energy.": "AKTION: Zahle 2X M€, um X Energie zu erhalten.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "AKTION: Senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
 
   "Asteroid Rights": "Asteroidenrechte",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "AKTION: Bezahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroiden hinzuzufügen.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Verbrauche hier 1 Asteroiden, um deine M€-Produktion um 1 zu erhöhen oder 2 Titan zu erhalten.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Bezahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroiden hinzuzufügen, oder verbrauche hier 1 Asteroiden, um deine M€-Produktion um 1 zu erhöhen oder 2 Titan zu erhalten.",
   "Add 2 asteroids to this card.": "Füge dieser Karte 2 Asteroiden hinzu.",
 
   "Stanford Torus": "Stanford-Torus",

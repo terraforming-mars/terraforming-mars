@@ -44,7 +44,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
       if (lunaIsAvailable === false) {
         return false;
       }
-      this.warnings.add('buildOnLuna');
+      this.addWarning('buildOnLuna');
     }
 
     return true;

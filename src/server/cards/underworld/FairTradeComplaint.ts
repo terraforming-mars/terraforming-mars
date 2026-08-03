@@ -9,11 +9,6 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../../cards/Options';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-1).slash().cards(1, {over: 6}).influence({size: Size.SMALL}).nbsp;
-  b.text('MAX 6').cards(1).colon().cards(2, {digit});
-});
-
 export class FairTradeComplaint extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -23,7 +18,10 @@ export class FairTradeComplaint extends GlobalEvent implements IGlobalEvent {
         'Draw 2 cards if your hand contains 6 cards or less.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.UNITY,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-1).slash().cards(1, {over: 6}).influence({size: Size.SMALL}).nbsp;
+        b.text('MAX 6').cards(1).colon().cards(2, {digit});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

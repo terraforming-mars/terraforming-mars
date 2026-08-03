@@ -26,7 +26,8 @@
   "Ancient Shipyards": "Стародавні верфи",
   "Ancient Shipyards (Nerfed)": "Стародавні верфи (зменшено)",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "Дія: Вкрадіть 2 M€ у кожного гравця і додайте сюди куб ресурсу.",
-  "Spend 3 titanium. -1 VP for every resource here.": "Витратити 3 титану. -1 ПО за кожен ресурс тут.",
+  "Spend 3 titanium.": "Витратити 3 титану.",
+  "-1 VP for every resource here.": "-1 ПО за кожен ресурс тут.",
 
   "Archimedes Hydroponics Station": "Гідропонічна станція Архімеда",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Зменште виробництво енергії на 1 і виробництво M€ на 1. Збільште виробництво рослин на 2.",
@@ -49,8 +50,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Вимагає рівня видобутку руди 4. Усі гравці платять 4M€ за кожен шахтний тайл, яким вони володіють.",
 
   "Darkside Incubation Plant": "Інкубаційний центр на темній стороні",
-  "Action: Add 1 microbe here.": "Дія: Додайте 1 мікроба сюди.",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "Дія: Витратіть 2 мікроби, щоб підвищити рівень житла на 1.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.": "Дія: Додайте 1 мікроба сюди АБО витратіть 2 мікроби, щоб підвищити рівень житла на 1.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Витратити 1 титан. 1 ПО за кожні 2 мікроби тут.",
 
   "Darkside Meteor Bombardment": "Метеорний обстріл на темній стороні",
@@ -60,7 +60,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Збільште виробництво титану на 2 або на 1, якщо рівень видобутку руди є щонайменше 2. А потім підвищте рівень видобутку руди на 1.",
 
   "Darkside Observatory": "Обсерваторія на темній стороні",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "Дія: Додайте 1 науковий ресурс до БУДЬ-ЯКОЇ карти [КРІМ тих, які дають 2 ПО або більше за кожен науковий ресурс].",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.": "Дія: Додайте 1 науковий ресурс до БУДЬ-ЯКОЇ карти [КРІМ тих, які дають 2 ПО або більше за кожен науковий ресурс] АБО додайте 2 дані до БУДЬ-ЯКОЇ карти.",
   "Action: Add 2 data to ANY card.": "Дія: Додайте 2 дані до БУДЬ-ЯКОЇ карти.",
 
   "Darkside Smugglers' Union": "Союз контрабандистів на темній стороні",
@@ -256,8 +256,7 @@
 
   "Steel Market Monopolists": "Монополісти сталевого ринку",
   "Requires the mining rate to be 3 or higher.": "Вимагає, щоб рейтинг видобутку був 3 або вище.",
-  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "Дія: Витратити 3X M€, щоб отримати 2X сталі (максимум 9 M€)",
-  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "Дія: Витратити X сталі, щоб отримати 3X M€ (максимум 3 сталі).",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).": "Дія: Витратити 3X M€, щоб отримати 2X сталі (максимум 9 M€) АБО витратити X сталі, щоб отримати 3X M€ (максимум 3 сталі).",
 
   "Subterranean Habitats": "Підземні житла",
   "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "Ефект: Коли ви будуєте житло на МІСЯЦІ, ви витрачаєте на 1 титану менше.",
@@ -275,8 +274,7 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Витратити 2 титану. Збільште виробництво титану на 1 за кожні 2 підвищені кроки рейтингу видобутку.",
 
   "Titanium Market Monopolists": "Монополісти на ринку титану",
-  "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "Дія: Витратити 2X M€, щоб отримати X титану [максимум 8 M€]",
-  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "Дія: Витратити X титану, щоб отримати 4X M€ [максимум 4 титану].",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€], or spend X titanium to gain 4X M€ [max 4 titanium].": "Дія: Витратити 2X M€, щоб отримати X титану [максимум 8 M€] АБО витратити X титану, щоб отримати 4X M€ [максимум 4 титану].",
 
   "Tycho Road Network": "Тихо-дорожня мережа",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Витратити 1 сталь. Збільшити виробництво M€ на 1. Розмістити дорожній тайл на Місяці і підвищити рейтинг логістики на 1.",

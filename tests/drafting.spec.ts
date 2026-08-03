@@ -9,6 +9,7 @@ import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
+import {Message} from '@/common/logs/Message';
 
 // Tests for drafting
 describe('drafting', () => {
@@ -48,7 +49,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.BIOFERTILIZER_FACILITY);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.GENE_REPAIR);
 
     expect(player.draftedCards.map(toName)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
@@ -68,7 +69,7 @@ describe('drafting', () => {
 
 
     selectCard(player, CardName.FISH);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.ACQUIRED_COMPANY);
 
     expect(player.draftedCards.map(toName)).deep.eq([
@@ -91,7 +92,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.DECOMPOSERS);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.EARTH_OFFICE);
 
     // No longer drafted cards, they're just cards to buy.
@@ -113,6 +114,105 @@ describe('drafting', () => {
 
     // A nice next step would be to show that those cards above are for purchase, and acquiring them puts them in cardsInHand
     // and that the rest of them are discarded.
+  });
+
+  it('2 player - project draft - reselect card', () => {
+    const [game, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+    });
+    const drawPile = game.projectDeck.drawPile;
+
+    unshiftCards(drawPile, [
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    game.generation = 1;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    // First round
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    selectCard(player, CardName.BIOFERTILIZER_FACILITY);
+
+    // The first player has drafted a card. The other player has not drafted yet.
+    // Verify that the other player's draft selection is unchanged when the first player reselects.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    // First player should now have a reselect choice.
+    // The previously drafted card should be present but disabled.
+    expectReselect(player);
+    const selectCardInput = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput.cards.map(toName)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY,
+    ]);
+    expect(selectCardInput.config.enabled).deep.eq([true, true, true, false]);
+
+    // Reselect: player chooses CAPITAL instead
+    selectCard(player, CardName.CAPITAL);
+
+    // Verify other player's draft selection is STILL unchanged after player reselects.
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    // First player should now be able to reselect again, with CAPITAL disabled
+    // and BIOFERTILIZER_FACILITY re-enabled.
+    expectReselect(player);
+    const selectCardInput2 = cast(player.getWaitingFor(), SelectCard);
+    expect(selectCardInput2.cards.map(toName)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+    ]);
+    expect(selectCardInput2.config.enabled).deep.eq([true, true, true, false]);
+
+    // Other player makes their choice
+    selectCard(otherPlayer, CardName.GENE_REPAIR);
+
+    // Both players have now made their selections.
+    // Verify that player drafted CAPITAL and otherPlayer drafted GENE_REPAIR.
+    expect(player.draftedCards.map(toName)).deep.eq([CardName.CAPITAL]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.GENE_REPAIR]);
+
+    // Second card round should start, passing hands
+    expect(draftSelection(player)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.HACKERS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.DECOMPOSERS,
+      CardName.BIOFERTILIZER_FACILITY]);
   });
 
   it('3 player - project draft - even generation', () => {
@@ -393,7 +493,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.ALGAE);
 
     expect(player.draftedCards.map(toName)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
@@ -414,7 +514,7 @@ describe('drafting', () => {
       CardName.ANTS]);
 
     selectCard(player, CardName.ARCTIC_ALGAE);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.ANTS);
 
     expect(player.draftedCards.map(toName)).deep.eq([
@@ -438,7 +538,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    cast(player.getWaitingFor(), undefined);
+    expectReselect(player);
     selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
 
     expect(player.draftedCards.map(toName)).deep.eq([
@@ -770,7 +870,7 @@ describe('drafting', () => {
     ]);
 
     // dealtPreludeCards must not be mutated by drafting; it would leak the
-    // other player's pick to this player's client.
+    // other player's select to this player's client.
     expect(player.dealtPreludeCards.map(toName)).deep.eq(dealtToPlayer);
     expect(otherPlayer.dealtPreludeCards.map(toName)).deep.eq(dealtToOtherPlayer);
 
@@ -915,7 +1015,7 @@ describe('drafting', () => {
     ]);
 
     // dealtCeoCards must not be mutated by drafting; it would leak the
-    // other player's pick to this player's client.
+    // other player's select to this player's client.
     expect(player.dealtCeoCards.map(toName)).deep.eq(dealtToPlayer);
     expect(otherPlayer.dealtCeoCards.map(toName)).deep.eq(dealtToOtherPlayer);
 
@@ -1054,6 +1154,18 @@ describe('drafting', () => {
     selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
   }
 });
+
+// Asserts that the player is offered to reselect their draft card
+// while waiting for others to draft.
+function expectReselect(player: IPlayer) {
+  const waitingFor = player.getWaitingFor();
+  if (waitingFor === undefined) {
+    throw new Error('Player is not waiting for anything');
+  }
+
+  expect(waitingFor.optional).is.true;
+  expect((waitingFor.title as Message).message).to.include('You can change your selection');
+}
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
   return cast(player.getWaitingFor(), SelectCard<IProjectCard>);

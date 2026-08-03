@@ -12,7 +12,7 @@
                     <div class="create-game-page-container">
                         <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
-                            <div v-for="pCount in [1,2,3,4,5,6]" v-bind:key="pCount">
+                            <div v-for="pCount in [1,2,3,4,5,6]" :key="pCount">
                               <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                               <label :for="pCount+'-radio'">
                                   {{ getPlayersCountText(pCount) }}
@@ -116,7 +116,7 @@
                             </template>
 
                             <template v-if="expansions.turmoil">
-                                <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
+                                <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" @change="politicalAgendasExtensionToggle()">
                                 <label for="politicalAgendas-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-agendas"></div>
                                     <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
@@ -180,7 +180,7 @@
                         <div class="create-game-page-column">
                             <h4 v-i18n>Board</h4>
 
-                            <div v-for="boardName in boards" v-bind:key="boardName">
+                            <div v-for="boardName in boards" :key="boardName">
                               <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                               <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                               <label :for="boardName+'-checkbox'" class="expansion-button">
@@ -241,7 +241,7 @@
                             <div v-if="undoOption">
                               <span v-i18n>Undo is now in best effort support.</span>
                               <a href="https://github.com/terraforming-mars/terraforming-mars/discussions/7647" target="_blank">&#9432;</a>
-                              <br/>
+                              <br>
                               <span v-i18n>No effort will be spent to fix it.</span>
                             </div>
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
@@ -294,7 +294,7 @@
                             </label>
 
                             <div v-if="seededGame">
-                                <input type="text" name="clonedGamedId" v-model="clonedGameId" />
+                                <input type="text" name="clonedGamedId" v-model="clonedGameId" >
                             </div>
 
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
@@ -387,7 +387,7 @@
                                 <span v-i18n>Random first player</span>
                             </label>
 
-                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
+                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" @change="randomMAToggle()">
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
@@ -415,8 +415,8 @@
                             </div>
 
                             <div v-if="modularMA">
-                              The new Milestones and Awards are still in active development.<br/>
-                              Please don't report anything unless it breaks the game.<br/>
+                              The new Milestones and Awards are still in active development.<br>
+                              Please don't report anything unless it breaks the game.<br>
                               These are <b>always fully random</b>.
                             </div>
                             <template v-if="expansions.venus">
@@ -447,14 +447,14 @@
                         <div class="create-game-players-cont">
                             <div class="container">
                                 <div class="columns">
-                                  <template v-for="(newPlayer, index) in getPlayers()" v-bind:key="index">
+                                  <template v-for="(newPlayer, index) in getPlayers()" :key="index">
                                     <div>
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
-                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
+                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" >
                                           </div>
                                           <div class="create-game-page-color-row">
-                                              <template v-for="color in PLAYER_COLORS" v-bind:key="color">
+                                              <template v-for="color in PLAYER_COLORS" :key="color">
                                                 <div>
                                                   <input type="radio" :value="color" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
                                                   <label :for="'radioBox' + color + (index + 1)">
@@ -471,7 +471,7 @@
                                                   </label>
 
                                                   <label class="form-label">
-                                                      <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
+                                                      <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" >
                                                       <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a :href="wikiUrls.trBoost" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                                   </label>
                                               <!-- </template> -->
@@ -490,14 +490,15 @@
 
                         <div class="create-game-action">
                             <AppButton title="Create game" size="big" @click="createGame"/>
+                            <AppButton title="Reset" size="big" @click="resetSettings"/>
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" v-on:change="uploadSettings()"/>
+                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()">
                             </label>
 
                             <label>
-                                <div v-on:click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                                <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
                             </label>
                         </div>
                     </div>
@@ -509,60 +510,60 @@
                 ref="corporationsFilter"
                 v-show="showCorporationList"
                 v-if="showCorporationList"
-                v-on:corporation-list-changed="updateCustomCorporations"
-                v-bind:expansions="expansions"
-                v-bind:selected="customCorporations"
+                @corporation-list-changed="updateCustomCorporations"
+                :expansions="expansions"
+                :selected="customCorporations"
                 @close="showCorporationList = false"
-            ></CorporationsFilter>
+            />
 
             <PreludesFilter
                 ref="preludesFilter"
                 v-show="showPreludesList"
                 v-if="showPreludesList"
-                v-on:prelude-list-changed="updateCustomPreludes"
-                v-bind:expansions="expansions"
-                v-bind:selected="customPreludes"
+                @prelude-list-changed="updateCustomPreludes"
+                :expansions="expansions"
+                :selected="customPreludes"
                 @close="showPreludesList = false"
-            ></PreludesFilter>
+            />
 
             <ColoniesFilter
                 ref="coloniesFilter"
                 v-show="showColoniesList"
                 v-if="showColoniesList"
-                v-on:colonies-list-changed="updateCustomColonies"
-                v-bind:expansions="expansions"
-                v-bind:selected="customColonies"
+                @colonies-list-changed="updateCustomColonies"
+                :expansions="expansions"
+                :selected="customColonies"
                 @close="showColoniesList = false"
-            ></ColoniesFilter>
+            />
 
             <CeosFilter
                 ref="ceosFilter"
                 v-show="showCeosList"
                 v-if="showCeosList"
-                v-on:ceo-list-changed="updateCustomCeos"
-                v-bind:expansions="expansions"
-                v-bind:selected="customCeos"
+                @ceo-list-changed="updateCustomCeos"
+                :expansions="expansions"
+                :selected="customCeos"
                 @close="showCeosList = false"
-            ></CeosFilter>
+            />
 
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
-                  v-on:cards-list-changed="updateBannedCards"
+                  @cards-list-changed="updateBannedCards"
                   :title="'Cards to exclude from the game'"
                   :hint="'Start typing the card name to exclude'"
-              ></CardsFilter>
+              />
             </div>
 
             <div class="create-game--block" v-if="showIncludedCards">
               <CardsFilter
                   ref="cardsFilter2"
-                  v-on:cards-list-changed="updateIncludedCards"
+                  @cards-list-changed="updateIncludedCards"
                   :title="'Cards to include in the game'"
                   :hint="'Start typing the card name to include'"
-              ></CardsFilter>
+              />
             </div>
-          <preferences-icon></preferences-icon>
+          <PreferencesIcon/>
         </div>
 </template>
 
@@ -584,7 +585,7 @@ import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
-import {GameId} from '@/common/Types';
+import {GameId, JSONObject} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -594,11 +595,13 @@ import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
 import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
+import {CreateGameSettingsStorage} from './CreateGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 const REVISED_COUNT_ALGORITHM = false;
+const createGameSettingsStorage = new CreateGameSettingsStorage();
 
 
 type Refs = {
@@ -676,6 +679,7 @@ export default defineComponent({
   },
   mounted() {
     setDocumentTitle('Create New Game');
+    this.restoreLastSettings();
   },
   computed: {
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {
@@ -715,6 +719,74 @@ export default defineComponent({
     },
   },
   methods: {
+    restoreLastSettings() {
+      const settings = createGameSettingsStorage.loadSettings();
+      if (settings === undefined) {
+        return;
+      }
+      try {
+        const processor = this.applySettings(settings);
+        if (processor.warnings.length > 0) {
+          this.showSettingsLoadResult('Restore settings', processor);
+        }
+      } catch (e) {
+        // TODO(rusliksu): show the restore error in the UI instead of logging only to the console.
+        console.warn('Could not restore create game settings:', e);
+      }
+    },
+    applySettings(json: JSONObject): JSONProcessor {
+      const component: CreateGameModel = this;
+      const refs = this.typedRefs;
+      const processor = new JSONProcessor(component);
+      this.uploading = true;
+      try {
+        processor.applyJSON(json);
+      } catch (e) {
+        this.uploading = false;
+        throw e;
+      }
+      nextTick(() => {
+        try {
+          if (component.showBannedCards && refs.cardsFilter) {
+            refs.cardsFilter.selected = processor.bannedCards;
+          }
+          if (component.showIncludedCards && refs.cardsFilter2) {
+            refs.cardsFilter2.selected = processor.includedCards;
+          }
+          if (!component.seededGame) {
+            component.seed = Math.random();
+          }
+          component.solarPhaseOption = Boolean(processor.solarPhaseOption);
+        } finally {
+          this.uploading = false;
+        }
+      });
+      return processor;
+    },
+    showSettingsLoadResult(title: string, processor: JSONProcessor) {
+      const root = vueRoot(this);
+      if (processor.warnings.length > 0) {
+        root.showAlert(title, 'Settings loaded with these warnings: \n' + processor.warnings.join('\n'));
+      } else {
+        root.showAlert(title, 'Settings loaded.');
+      }
+    },
+    resetSettings() {
+      createGameSettingsStorage.clearSettings();
+      Object.assign(this, defaultCreateGameModel(), {
+        preludeToggled: false,
+        uploading: false,
+      });
+      nextTick(() => {
+        const refs = this.typedRefs;
+        if (refs.cardsFilter) {
+          refs.cardsFilter.selected = [];
+        }
+        if (refs.cardsFilter2) {
+          refs.cardsFilter2.selected = [];
+        }
+      });
+    },
     async downloadSettings() {
       const serializedData = await this.serializeSettings();
 
@@ -730,44 +802,16 @@ export default defineComponent({
       const refs = this.typedRefs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
-      const component: CreateGameModel = this;
-      const root = vueRoot(this);
-
 
       reader.addEventListener('load', () => {
         try {
           const readerResults = reader.result;
-          const processor = new JSONProcessor(component);
           if (typeof(readerResults) === 'string') {
-            this.uploading = true;
-            const results = JSON.parse(readerResults);
-            processor.applyJSON(results);
-
-            nextTick(() => {
-              try {
-                if (component.showBannedCards) {
-                  refs.cardsFilter.selected = processor.bannedCards;
-                }
-                if (component.showIncludedCards) {
-                  refs.cardsFilter2.selected = processor.includedCards;
-                }
-                if (!component.seededGame) {
-                  component.seed = Math.random();
-                }
-                // set to alter after any watched properties
-                component.solarPhaseOption = Boolean(processor.solarPhaseOption);
-                this.uploading = false;
-              } catch (e) {
-                root.showAlert('Upload settings', 'Error reading JSON ' + e);
-              }
-            });
-          }
-          if (processor.warnings.length > 0) {
-            root.showAlert('Upload settings', 'Settings loaded with these warnings: \n' + processor.warnings.join('\n'));
-          } else {
-            root.showAlert('Upload settings', 'Settings loaded.');
+            const processor = this.applySettings(JSON.parse(readerResults));
+            this.showSettingsLoadResult('Upload settings', processor);
           }
         } catch (e) {
+          const root = vueRoot(this);
           root.showAlert('Upload settings', 'Error loading settings ' + e);
         }
       }, false);
@@ -1217,6 +1261,7 @@ export default defineComponent({
       if (dataToSend === undefined) {
         return;
       }
+      createGameSettingsStorage.saveSettings(JSON.parse(dataToSend) as JSONObject);
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;

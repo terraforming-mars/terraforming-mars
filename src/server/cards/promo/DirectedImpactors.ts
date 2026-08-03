@@ -27,13 +27,10 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: 'X19',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
-            eb.megacredits(6).super((b) => b.titanium(1)).startAction.resource(CardResource.ASTEROID).asterix();
-          }).br;
-          b.or().br;
-          b.action('Remove 1 asteroid here to raise temperature 1 step.', (eb) => {
-            eb.resource(CardResource.ASTEROID).startAction.temperature(1);
-          });
+          b.megacredits(6).super((b) => b.titanium(1)).arrow().resource(CardResource.ASTEROID).asterix().nbsp.or().br;
+          b.resource(CardResource.ASTEROID).arrow().temperature(1).br;
+
+          b.plainText('Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.', /* parens */ true);
         }),
       },
     });

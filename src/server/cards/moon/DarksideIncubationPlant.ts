@@ -31,13 +31,10 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
         },
         cardNumber: 'M45',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 microbe here.', (eb) => {
-            eb.empty().startAction.resource(CardResource.MICROBE);
-          }).br;
-          b.action('Spend 2 microbes to raise the habitat rate 1 step.', (eb) => {
-            eb.resource(CardResource.MICROBE, 2).startAction.moonHabitatRate();
-          });
+          b.arrow().resource(CardResource.MICROBE).nbsp.or().br;
+          b.resource(CardResource.MICROBE, 2).arrow().moonHabitatRate().br;
 
+          b.plainText('Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.', /* parens */ true);
           b.br;
           b.minus().titanium(1);
         }),

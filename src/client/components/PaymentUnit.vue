@@ -4,9 +4,9 @@
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"
-      v-bind:value="modelValue"
-      v-on:input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-    />
+      :value="modelValue"
+      @input="onInput"
+    >
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
   </div>
@@ -52,6 +52,11 @@ export default defineComponent({
       case 'seeds': return 'resource_icon--seed';
       default: return 'resource_icon--' + this.unit;
       }
+    },
+  },
+  methods: {
+    onInput(event: Event) {
+      this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
     },
   },
 });

@@ -10,8 +10,7 @@
     "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Podnieś swój poziom produkcji M€ o 1 poziom. Dobierz 2 karty preludiów i zagraj jedną z nich a drugą odrzuć.",
 
 	"Comet Aiming": "Celowana Kometa",
-    "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić 1 jednostkę asteroid na dowolnej karcie.",
-    "Action: Remove 1 asteroid here to place an ocean.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty, aby umieścić na planszy obszar oceanu.",
+    "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić 1 jednostkę asteroid na dowolnej karcie lub wydaj 1 jednostkę asteroid z tej karty, aby umieścić na planszy obszar oceanu.",
 
 	"Cutting Edge Technology": "Nowoczesna Technologia",
     "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z wymaganiami, płacisz za nią o 2 M€ mniej.",
@@ -20,8 +19,7 @@
     "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Możesz zagrać te kartę, jeśli którykolwiek z graczy spowodował, że inny gracz musiał stracić w tym pokoleniu jednostki roślinności. Otrzymujesz 1 jednostkę tytanu lub 2 jednostki stali.",
 
 	"Directed Impactors": "Sterowane Uderzenia",
-    "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": "Akcja: Wydaj 6 M€ (można użyć tytanu), aby umieścić 1 jednostkę asteroid na dowolnej karcie.",
-    "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "Akcja: Wydaj 1 jednostkę asteroid z tej karty, aby podnieść temperaturę o 1 poziom.",
+    "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "Akcja: Wydaj 6 M€ (można użyć tytanu), aby umieścić 1 jednostkę asteroid na dowolnej karcie lub wydaj 1 jednostkę asteroid z tej karty, aby podnieść temperaturę o 1 poziom.",
 
 	"Field-Capped City": "Miasto pod Kopułą",
     "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Podnieś swoją produkcję M€ o 2 poziomy. Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
@@ -108,12 +106,9 @@
     "Effect: Your titanium resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 M€ więcej.",
 
 	"Energy Market": "Rynek Energetyczny",
-    "Action: Spend 2X M€ to gain X energy.": "Akcja: Wydaj 2X M€, aby otrzymać X jednostek energii.",
-    "Action: Decrease energy production 1 step to gain 8 M€.": "Akcja: Obniż swoją produkcję energii o 1 poziom, aby otrzymać 8 M€.",
 
 	"Asteroid Rights": "Przechwytywanie asteroid",
-    "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Akcja: Wydaj 1 M€, aby umieścić 1 jednostkę asteroid na dowolnej karcie.",
-    "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję M€ o 1 poziom lub otrzymaj 2 jednostki tytanu.",
+    "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 M€, aby umieścić 1 jednostkę asteroid na dowolnej karcie lub wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję M€ o 1 poziom lub otrzymaj 2 jednostki tytanu.",
     "Add 2 asteroids to this card.": "Umieść na tej karcie 2 jednostki asteroid.",
 
 	"Stanford Torus": "Torus Stanforda",
@@ -179,8 +174,7 @@
     "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Poziom tlenu musi wynosić 4% lub mniej. Podnieś swoją produkcję M€ o 2 poziomy. Otrzymujesz 1 M€ za każdy pusty obszar przylegający do twoich kafelków.",
 
   "Icy Impactors": "Lodowe Impaktory",
-    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Akcja: Wydaj 10 M€ (można użyć tytanu), aby dodać 2 asteroid na tę kartę.",
-    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Akcja: Wydaj 1 asteroid, aby umieścić kafelek oceanu. Pierwszy gracz wybiera gdzie go umieścisz.",
+    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Akcja: Wydaj 10 M€ (można użyć tytanu), aby dodać 2 asteroid na tę kartę lub wydaj 1 asteroid, aby umieścić kafelek oceanu. Pierwszy gracz wybiera gdzie go umieścisz.",
 
   "Kaguya Tech": "",
     "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Zwiększ produkcję M€ o 2 poziomy. Dobierz 1 kartę. Usuń 1 z twoich kafelków zieleni (nie wpływa na poziom tlenu). Umieść tam kafelek miasta, niezależnie od zasad umieszczania. Otrzymujesz bonusy za umieszczenie jak zwykle.",

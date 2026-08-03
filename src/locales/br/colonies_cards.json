@@ -6,8 +6,7 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Requer que gaste 1 flutuador. Roube 5 M€ de qualquer jogador.",
 
   "Atmo Collectors": "Coletores Atmosféricos",
-  "Action: Add one floater here.": "Ação: Adicione 1 flutuador à esta carta.",
-  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Ação: Remova 1 flutuador desta carta para receber 2 de titânio ou 3 de energía ou 4 de calor.",
+  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Ação: Adicione 1 flutuador à esta carta OU remova 1 flutuador desta carta para receber 2 de titânio ou 3 de energía ou 4 de calor.",
   "Add 2 floaters to ANY card.": "Adicione 2 flutuadores à qualquer carta.",
 
   "Community Services": "Serviços Comunitários",
@@ -52,14 +51,13 @@
   "Place a colony.": "Coloque uma colônia.",
 
   "Jovian Lanterns": "Lanternas Jovianas",
-  "Action: Spend 1 titanium to add 2 floaters here.": "Ação: Gaste 1 de titânio para receber 2 flutuadores nesta carta.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Ação: Gaste 1 de titânio para receber 2 flutuadores nesta carta OU remova 2 flutuadores desta carta para aumentar seu IT em 1 nível.",
 
   "1 VP per 2 floaters here.": "1 PV para cada 2 flutuadores nesta carta.",
   "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Requer 1 ícone Joviano. Aumente seu IT em 1 nível. Adicione 2 flutuadores à qualquer carta.",
 
   "Jupiter Floating Station": "Estação Flutuante de Júpiter",
-  "Action: Add 1 floater to a JOVIAN CARD.": "Ação: Adicione 1 flutuador à uma CARTA JOVIANA.",
-  "Action: Gain 1 M€ for every floater here [MAX 4].": "Ação: Receba 1 M€ para cada flutuador nesta carta (máx. 4)",
+  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "Ação: Adicione 1 flutuador à uma CARTA JOVIANA OU receba 1 M€ para cada flutuador nesta carta (máx. 4)",
   "Requires 3 science tags.": "Requer 3 ícones de ciência.",
   "Gain 1 M€ per floater here (max 4)": "Receba 1 M€ para cara flutuador aqui (máx. 4)",
 
@@ -133,15 +131,13 @@
   "Requires -6 C. Decrease any plant production 1 step.": "Requer -6°C ou mais de temperatura. Reduza qualquer produção de planta em 1 nível.",
 
   "Titan Air-scrapping": "Coletor Aéreo em Titã",
-  "Action: Spend 2 floaters here to increase your TR 1 step.": "Ação: Remova 2 flutuadores desta carta para aumentar seu IT em 1 nível.",
 
   "Titan Floating Launch-pad": "Plataforma de Flutuadores em Titã",
   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Ação: Adicione 1 flutuador à qualquer CARTA JOVIANA, ou remova 1 flutuador desta carta para negociar sem custo.",
   "Add two floaters to ANY JOVIAN CARD.": "Adicione 2 flutuadores à qualquer CARTA JOVIANA.",
 
   "Titan Shuttles": "Transportadores em Titã",
-  "Action: Add 2 floaters to ANY JOVIAN CARD.": "Ação: Adicione 2 flutuadores à qualquer CARTA JOVIANA.",
-  "Action: Spend any number of floaters here to gain the same number of titanium.": "Ação: Remova qualquer número de flutuadores desta carta para receber essa quantia de titânio.",
+  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "Ação: Adicione 2 flutuadores à qualquer CARTA JOVIANA OU remova qualquer número de flutuadores desta carta para receber essa quantia de titânio.",
 
   "Trade Envoys": "Enviados Comerciais",
   "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efeito: Antes de negociar, aumente o marcador da colônia em 1 nível.",

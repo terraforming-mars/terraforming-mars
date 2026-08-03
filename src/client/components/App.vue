@@ -12,37 +12,37 @@
       </dialog>
     </section>
     <div class="main-container">
-      <start-screen v-if="screen === 'start-screen'"></start-screen>
-      <create-game-form
+      <StartScreen v-if="screen === 'start-screen'"/>
+      <CreateGameForm
         v-else-if="screen === 'create-game-form'"
-      ></create-game-form>
-      <load-game-form v-else-if="screen === 'load'"></load-game-form>
-      <game-home
+      />
+      <LoadGameForm v-else-if="screen === 'load'"/>
+      <GameHome
         v-else-if="screen === 'game-home' && game !== undefined"
         :game="game"
-      ></game-home>
-      <player-home
+      />
+      <PlayerHome
         v-else-if="screen === 'player-home' && playerView !== undefined"
         :player-view="playerView"
         :key="playerkey"
-      ></player-home>
-      <spectator-home
+      />
+      <SpectatorHome
         v-else-if="screen === 'spectator-home' && spectator !== undefined"
         :spectator="spectator"
         :key="'spectator-' + playerkey"
-      ></spectator-home>
-      <game-end
+      />
+      <GameEnd
         v-else-if="screen === 'the-end'"
         :player-view="playerView"
         :spectator="spectator"
-      ></game-end>
-      <games-overview
+      />
+      <GamesOverview
         v-else-if="screen === 'games-overview'"
-      ></games-overview>
-      <card-list v-else-if="screen === 'cards'"></card-list>
-      <admin-home v-else-if="screen === 'admin'"></admin-home>
-      <login-home v-else-if="screen === 'login-home'"></login-home>
-      <help v-else-if="screen === 'help'"></help>
+      />
+      <CardList v-else-if="screen === 'cards'"/>
+      <AdminHome v-else-if="screen === 'admin'"/>
+      <LoginHome v-else-if="screen === 'login-home'"/>
+      <Help v-else-if="screen === 'help'"/>
     </div>
     <div class="notice" v-i18n>
       Not affiliated with FryxGames, Asmodee Digital or Steam in any way.
@@ -142,18 +142,18 @@ export default defineComponent({
     };
   },
   components: {
-    'start-screen': StartScreen,
-    'create-game-form': CreateGameForm,
-    'load-game-form': LoadGameForm,
-    'game-home': GameHome,
-    'player-home': PlayerHome,
-    'spectator-home': SpectatorHome,
-    'game-end': GameEnd,
-    'games-overview': GamesOverview,
-    'card-list': CardList,
-    'help': Help,
-    'admin-home': AdminHome,
-    'login-home': LoginHome,
+    StartScreen,
+    CreateGameForm,
+    LoadGameForm,
+    GameHome,
+    PlayerHome,
+    SpectatorHome,
+    GameEnd,
+    GamesOverview,
+    CardList,
+    Help,
+    AdminHome,
+    LoginHome,
   },
   methods: {
     showAlert(title: string, message: string, cb: () => void = () => {}): void {

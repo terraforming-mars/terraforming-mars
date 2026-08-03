@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {IPlayer} from '../../IPlayer';
 import {Priority} from '../../deferredActions/Priority';
+import {uppercase} from '../Options';
 
 export class RoboticWorkforce extends RoboticWorkforceBase {
   constructor() {
@@ -17,7 +18,7 @@ export class RoboticWorkforce extends RoboticWorkforceBase {
       metadata: {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {
-          b.text('Copy A', Size.SMALL, true).nbsp;
+          b.text('Copy A', {size: Size.SMALL, uppercase}).nbsp;
           b.production((pb) => pb.tag(Tag.BUILDING));
         }),
         description: 'Duplicate only the production box of one of your building cards.',

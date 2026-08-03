@@ -36,7 +36,7 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
 
   public canAct(player: IPlayer) {
     if (!player.canAfford(12)) {
-      this.warnings.add('cannotAffordBoardOfDirectors');
+      this.addWarning('cannotAffordBoardOfDirectors');
     }
     return this.resourceCount > 0 && player.game.preludeDeck.canDraw(1);
   }
@@ -54,7 +54,7 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
 
     if (player.canAfford(12)) {
       if (prelude.canPlay?.(player, {cost: 12}) === false) {
-        prelude.warnings.add('preludeFizzle');
+        prelude.addWarning('preludeFizzle');
       }
 
       return new SelectCard(

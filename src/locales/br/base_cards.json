@@ -135,11 +135,9 @@
 
   "Regolith Eaters": "Comedores de Regolito",
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Ação: adicione 1 micróbio a esta carta, ou remova 2 micróbios desta carta para aumentar o oxigênio 1 nível.",
-  "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "Ação: remova 2 micróbios desta carta para aumentar o oxigênio 1 nível.",
 
   "GHG Producing Bacteria": "Bactéria Produtora de GEE",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Ação: adicione 1 micróbio a esta carta, ou remova 2 micróbios desta carta para aumentar a temperatura em 1 nível.",
-  "(Action: Remove 2 microbes to raise temperature 1 step.)": "Ação: remova 2 micróbios para aumentar a temperatura 1 nível",
   "Requires 4% oxygen.": "Requer 4% de oxigênio.",
 
   "Ants": "Formigas",
@@ -260,7 +258,7 @@
 
   "Birds": "Pássaros",
   "Action: Add an animal to this card.": "Ação: adicione 1 animal a esta carta.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Requer 13% de oxigênio. Diminua qualquer produção de plantas 2 níveis. 1 PV por cada animal nesta carta.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Requer 13% de oxigênio. Diminua qualquer produção de plantas 2 níveis.",
 
   "Mars University": "Universidade de Marte",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Efeito: quando você joga um ícone de ciência, incluindo este, você pode descartar 1 carta de sua mão para pegar outra.",
@@ -452,8 +450,7 @@
   "Requires -14 C° or warmer.": "Requer -14°C ou mais.",
 
   "Extreme-Cold Fungus": "Fungo Psicrófilos",
-  "(Action: Gain 1 plant.)": "Ação: ganhe 1 planta",
-  "(Action: Add 2 microbes to ANOTHER card.)": "Ação: adicione 2 micróbios a OUTRA carta.",
+  "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Ação: ganhe 1 planta OU adicione 2 micróbios a OUTRA carta.",
   "It must be -10 C or colder.": "A temperatura deve estar a -10°C ou menos.",
 
   "Advanced Ecosystems": "Ecossistemas Avançados",
@@ -522,7 +519,6 @@
 
   "Nitrite Reducing Bacteria": "Bactérias Redutoras de Nitrito",
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Ação: adicione 1 micróbio a esta carta, ou remova 3 micróbios para aumentar seu IT 1 nível.",
-  "(Action: Remove 3 microbes to increase your TR 1 step.)": "Ação: remova 3 Micróbios para aumentar seu IT em 1 nível.",
   "Add 3 microbes to this card.": "Adicione 3 micróbios a esta carta.",
 
   "Industrial Microbes": "Micróbios Industriais",
@@ -608,7 +604,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Requer 6% de oxigênio. Diminua qualquer produção de plantas 1 nível e aumente sua produção de energia em 2.",
 
   "Livestock": "Pecuária",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M€ em 2.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M€ em 2.",
 
   "Olympus Conference": "Conferência de Olimpo",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Quando você joga um ícone de ciência, incluindo este, você pode ou adicionar um recurso de ciência a esta carta, ou retirar dela um recurso de ciência para comprar uma carta.",

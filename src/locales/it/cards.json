@@ -98,13 +98,11 @@
     "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Colloca una tessera Città. Diminuisci la tua Produzione di Energia di 2 livelli e incrementa la tua Produzione di Acciaio di 2 livelli.",
 
     "Regolith Eaters": "Mangiatori di Regolite",
-    "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Azione: aggiungi 1 Microbo a questa carta.",
-    "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "(Azione: rimuovi 2 Microbi da questa carta per aumentare di 1 il livello di Ossigeno.)",
+    "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi 2 Microbi da questa carta per aumentare di 1 il livello di Ossigeno.",
 
 
     "GHG Producing Bacteria": "Batteri Produttori di Gas Serra",
-    "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Azione: aggiungi 1 Microbo a questa carta.",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)":"(Azione: rimuovi 2 Microbi da questa carta per aumentare la Temperatura di 1 livello.)",
+    "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi 2 Microbi da questa carta per aumentare la Temperatura di 1 livello.",
     "Requires 4% oxygen.": "Richiede almeno il 4% di Ossigeno.",
 
     "Ants": "Formiche",
@@ -219,7 +217,7 @@
 
     "Birds": "Uccelli",
     "Action: Add an animal to this card.": "Azione: aggiungi 1 Animale a questa carta.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Richiede almeno il 13% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 2 livelli. 1 PV per ogni Animale su questa carta.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Richiede almeno il 13% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 2 livelli.",
 
     "Mars University": "Università di Marte",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Effetto: quando giochi una carta con un simbolo Scienza, inclusa questa, puoi scartare 1 carta dalla tua mano per pescarne 1 dal mazzo.",
@@ -397,8 +395,7 @@
     "Requires -14 C° or warmer.": "Richiede una Temperatura maggiore o uguale a -14°C.",
 
     "Extreme-Cold Fungus": "Fungo del Freddo Estremo",
-    "(Action: Gain 1 plant.)": "(Azione: ottieni 1 Pianta.)",
-    "(Action: Add 2 microbes to ANOTHER card.)": "(Azione: aggiungi 2 Microbi ad UN'ALTRA carta.)",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Azione: ottieni 1 Pianta OPPURE aggiungi 2 Microbi ad UN'ALTRA carta.",
     "It must be -10 C or colder.": "Richiede che la Temperatura sia minore o uguale a -10°C.",
 
     "Advanced Ecosystems": "Ecosistemi Avanzati",
@@ -467,7 +464,6 @@
 
     "Nitrite Reducing Bacteria": "Batteri Denitrificanti",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Azione: rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.)",
     "Add 3 microbes to this card.": "Aggiungi 3 Microbi a questa carta.",
 
     "Industrial Microbes": "Microbi Industriali",
@@ -554,7 +550,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
 
   "Livestock": "Bestiame",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
   "1 VP for each animal on this card.": "1 PV per ogni Animale su questa carta.",
   "(Action: Add 1 animal to this card.)": "(Azione: aggiungi un Animale a questa carta.)",
 

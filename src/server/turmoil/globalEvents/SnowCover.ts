@@ -13,7 +13,9 @@ export class SnowCover extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.KELVINISTS,
       behavior: {
-        drawCard: {count: {turmoil: {influence: {}}}},
+        drawCard: {
+          count: {turmoil: {influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.minus().temperature(2).nbsp.cards(1).slash().influence();

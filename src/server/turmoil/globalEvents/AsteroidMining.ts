@@ -14,7 +14,11 @@ export class AsteroidMining extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
       behavior: {
-        stock: {titanium: {tag: Tag.JOVIAN, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          titanium: {
+            tag: Tag.JOVIAN,
+            turmoil: {max: 5, influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.titanium(1).slash().tag(Tag.JOVIAN).influence({size: Size.SMALL});

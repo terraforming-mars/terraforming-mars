@@ -14,7 +14,13 @@ export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.KELVINISTS,
       behavior: {
-        production: {energy: {tag: Tag.POWER, turmoil: {influence: {}}, per: 2}},
+        production: {
+          energy: {
+            tag: Tag.POWER,
+            turmoil: {influence: {}},
+            per: 2,
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => pb.energy(1)).slash().tag(Tag.POWER, 2).influence({size: Size.SMALL});

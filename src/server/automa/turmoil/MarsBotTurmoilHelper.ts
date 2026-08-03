@@ -5,169 +5,134 @@ import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
 
 /**
- * T-7: Select which party MarsBot should place a delegate into.
+ * Places MarsBot's delegates and keeps its party leadership up to date.
  *
- * Uses a NARROWING approach: each tier restricts the candidate set.
- * If a tier yields no matches within the current candidates, the candidate
- * set is left unchanged and the next tier is applied.
- *
- *  Tier 1: Party where +1 makes MarsBot become Party Leader AND the party become Dominant.
- *  Tier 2: Party where +1 makes MarsBot become Party Leader.
- *  Tier 3: Party where MarsBot is already Party Leader, and +1 makes it become Dominant
- *          (party must NOT already be Dominant — both conditions require a state transition).
- *  Tier 4: Party where the human player has fewest delegates (incl. zero).
- *  Tier 5: Party where MarsBot has fewest delegates (incl. zero).
- *  Tier 6: Next party clockwise from the Dominance marker (circling around). Always yields 1.
+ * Party.checkPartyLeader only considers game.playersInGenerationOrder plus NEUTRAL, and MarsBot
+ * is in neither, so leadership has to be applied here instead.
  */
-export function selectPartyForDelegate(
-  turmoil: Turmoil,
-  marsBotPlayer: IPlayer,
-  humanPlayer: IPlayer,
-): PartyName | undefined {
-  if (!turmoil.hasDelegatesInReserve(marsBotPlayer)) {
-    return undefined;
+export class MarsBotTurmoilHelper {
+  constructor(
+    private readonly game: IGame,
+    private readonly turmoil: Turmoil,
+    private readonly marsBotPlayer: IPlayer,
+    private readonly humanPlayer: IPlayer,
+  ) {}
+
+  /**
+   * Chooses the party for MarsBot's next delegate, or undefined when its reserve is empty (T-7).
+   *
+   * Each tier narrows the candidates. A tier that matches nothing leaves the candidates alone
+   * and the next tier runs against the same set.
+   *
+   *  Tier 1: Party where +1 makes MarsBot become Party Leader AND the party become Dominant.
+   *  Tier 2: Party where +1 makes MarsBot become Party Leader.
+   *  Tier 3: Party where MarsBot is already Party Leader, and +1 makes it become Dominant
+   *          (the party must NOT already be Dominant, since both conditions are transitions).
+   *  Tier 4: Party where the human player has fewest delegates (including zero).
+   *  Tier 5: Party where MarsBot has fewest delegates (including zero).
+   *  Tier 6: Next party clockwise from the Dominance marker, circling around. Always yields one.
+   */
+  public selectParty(): PartyName | undefined {
+    if (!this.turmoil.hasDelegatesInReserve(this.marsBotPlayer)) {
+      return undefined;
+    }
+
+    const allParties = this.turmoil.parties;
+    let candidates = allParties;
+
+    candidates = narrow(candidates, (party) =>
+      this.wouldBecomePartyLeader(party) && this.wouldBecomeDominant(party));
+
+    candidates = narrow(candidates, (party) => this.wouldBecomePartyLeader(party));
+
+    candidates = narrow(candidates, (party) =>
+      party.partyLeader === this.marsBotPlayer && this.wouldBecomeDominant(party));
+
+    const fewestHuman = Math.min(...candidates.map((party) => party.delegates.get(this.humanPlayer)));
+    candidates = narrow(candidates, (party) => party.delegates.get(this.humanPlayer) === fewestHuman);
+
+    const fewestMarsBot = Math.min(...candidates.map((party) => party.delegates.get(this.marsBotPlayer)));
+    candidates = narrow(candidates, (party) => party.delegates.get(this.marsBotPlayer) === fewestMarsBot);
+
+    const dominantIndex = allParties.indexOf(this.turmoil.dominantParty);
+    const nearest = [...candidates].sort((a, b) =>
+      clockwiseDistance(dominantIndex, allParties.indexOf(a), allParties.length) -
+      clockwiseDistance(dominantIndex, allParties.indexOf(b), allParties.length));
+
+    return nearest[0]?.name;
   }
 
-  const allParties = turmoil.parties as ReadonlyArray<IParty>;
-  let candidates: ReadonlyArray<IParty> = allParties;
+  /**
+   * Sends one delegate from MarsBot's reserve to the party it picks (T-7).
+   * Returns the party it went to, or undefined when the reserve is empty.
+   */
+  public maybePlaceDelegate(): PartyName | undefined {
+    const partyName = this.selectParty();
+    if (partyName === undefined) {
+      return undefined;
+    }
+    this.turmoil.sendDelegateToParty(this.marsBotPlayer, partyName, this.game);
+    this.maybeUpdatePartyLeader(this.turmoil.getPartyByName(partyName));
+    this.game.log('${0} adds a delegate in ${1}', (b) => b.player(this.marsBotPlayer).partyName(partyName));
+    return partyName;
+  }
 
-  // Tier 1: +1 → MarsBot becomes PL AND party becomes Dominant (both transitions)
-  candidates = narrow(candidates, (p) =>
-    wouldBecomePartyLeader(p, marsBotPlayer) && wouldBecomeDominant(turmoil, p, allParties),
-  );
+  /** Makes MarsBot the party leader when it now holds strictly more delegates than the current leader. */
+  public maybeUpdatePartyLeader(party: IParty): void {
+    const marsBotCount = party.delegates.get(this.marsBotPlayer);
+    if (marsBotCount === 0) {
+      return;
+    }
+    if (marsBotCount > this.leaderCount(party)) {
+      party.partyLeader = this.marsBotPlayer;
+    }
+  }
 
-  // Tier 2: +1 → MarsBot becomes Party Leader
-  candidates = narrow(candidates, (p) => wouldBecomePartyLeader(p, marsBotPlayer));
+  /**
+   * Would placing one MarsBot delegate make MarsBot the Party Leader?
+   * MarsBot must not already lead, so that this is a genuine transition.
+   */
+  private wouldBecomePartyLeader(party: IParty): boolean {
+    if (party.partyLeader === this.marsBotPlayer) {
+      return false;
+    }
+    return party.delegates.get(this.marsBotPlayer) + 1 > this.leaderCount(party);
+  }
 
-  // Tier 3: MarsBot is already PL AND +1 → party becomes Dominant (not already dominant)
-  candidates = narrow(candidates, (p) =>
-    p.partyLeader === marsBotPlayer && wouldBecomeDominant(turmoil, p, allParties),
-  );
+  /**
+   * Would placing one delegate make this party the new Dominant party?
+   * The party must not already be Dominant, since "becomes" implies a transition.
+   */
+  private wouldBecomeDominant(party: IParty): boolean {
+    if (this.turmoil.dominantParty === party) {
+      return false;
+    }
+    const countAfter = party.delegates.size + 1;
+    return this.turmoil.parties.every((other) => other === party || other.delegates.size < countAfter);
+  }
 
-  // Tier 4: party where human has fewest delegates (minimum is always reached — no empty result)
-  const minHuman = Math.min(...candidates.map((p) => totalDelegates(p, humanPlayer)));
-  candidates = narrow(candidates, (p) => totalDelegates(p, humanPlayer) === minHuman);
-
-  // Tier 5: party where MarsBot has fewest delegates
-  const minMarsBot = Math.min(...candidates.map((p) => totalDelegates(p, marsBotPlayer)));
-  candidates = narrow(candidates, (p) => totalDelegates(p, marsBotPlayer) === minMarsBot);
-
-  // Tier 6: sort remaining candidates by clockwise distance from dominant; pick nearest
-  const dominantIndex = allParties.indexOf(turmoil.dominantParty);
-  const sorted = [...candidates].sort((a, b) => {
-    const distA = clockwiseDistance(dominantIndex, allParties.indexOf(a), allParties.length);
-    const distB = clockwiseDistance(dominantIndex, allParties.indexOf(b), allParties.length);
-    return distA - distB;
-  });
-
-  return sorted[0]?.name;
+  private leaderCount(party: IParty): number {
+    return party.partyLeader !== undefined ? party.delegates.get(party.partyLeader) : 0;
+  }
 }
 
-/**
- * Narrowing helper: if any party in `candidates` passes `predicate`, return only those.
- * Otherwise return `candidates` unchanged.
- */
+/** Keeps the parties that pass the predicate, or all of them when none does. */
 function narrow(
   candidates: ReadonlyArray<IParty>,
-  predicate: (p: IParty) => boolean,
+  predicate: (party: IParty) => boolean,
 ): ReadonlyArray<IParty> {
   const filtered = candidates.filter(predicate);
-  return filtered.length >= 1 ? filtered : candidates;
-}
-
-/**
- * T-7 + game engine: Place 1 MarsBot delegate from reserve into the selected party.
- * Returns the party name the delegate was placed in, or undefined if no reserve.
- */
-export function placeDelegateForMarsBot(
-  turmoil: Turmoil,
-  marsBotPlayer: IPlayer,
-  humanPlayer: IPlayer,
-  game: IGame,
-): PartyName | undefined {
-  const partyName = selectPartyForDelegate(turmoil, marsBotPlayer, humanPlayer);
-  if (partyName === undefined) {
-    return undefined;
-  }
-  turmoil.sendDelegateToParty(marsBotPlayer, partyName, game);
-  // Party.checkPartyLeader only considers game.playersInGenerationOrder + NEUTRAL, not MarsBot.
-  // Manually update the party leader if MarsBot now has the most delegates.
-  const party = turmoil.getPartyByName(partyName);
-  updatePartyLeaderForMarsBot(party, marsBotPlayer);
-  game.log('MarsBot places delegate in ${0} (Party Politics)', (b) => b.partyName(partyName));
-  return partyName;
-}
-
-/**
- * After placing a MarsBot delegate, set MarsBot as party leader if it now has
- * strictly more delegates than the current leader.
- *
- * The Party class's checkPartyLeader only iterates game.playersInGenerationOrder + NEUTRAL.
- * MarsBot is not in that list, so we must update leadership manually.
- */
-export function updatePartyLeaderForMarsBot(party: IParty, marsBotPlayer: IPlayer): void {
-  const marsBotCount = party.delegates.get(marsBotPlayer);
-  if (marsBotCount === 0) {
-    return;
-  }
-  const leaderCount = party.partyLeader !== undefined ?
-    party.delegates.get(party.partyLeader) :
-    0;
-  if (marsBotCount > leaderCount) {
-    party.partyLeader = marsBotPlayer;
-  }
-}
-
-/** Count all delegates for `player` in `party`. */
-export function totalDelegates(party: IParty, player: IPlayer): number {
-  return party.delegates.get(player);
-}
-
-/**
- * Would placing 1 MarsBot delegate make MarsBot the Party Leader of `party`?
- * Requires MarsBot is NOT already the party leader (a genuine transition),
- * and after placement MarsBot would have strictly more delegates than the current leader.
- */
-function wouldBecomePartyLeader(party: IParty, marsBotPlayer: IPlayer): boolean {
-  // MarsBot already leads — Tier 3 handles this case
-  if (party.partyLeader === marsBotPlayer) {
-    return false;
-  }
-
-  const currentLeaderCount = party.partyLeader !== undefined ?
-    party.delegates.get(party.partyLeader) :
-    0;
-  const marsBotCountAfter = party.delegates.get(marsBotPlayer) + 1;
-
-  return marsBotCountAfter > currentLeaderCount;
-}
-
-/**
- * Would placing 1 delegate in `party` make it the new Dominant party?
- * The party must NOT already be Dominant (condition requires a state transition).
- * After placement, the party must have strictly more delegates than all others.
- */
-function wouldBecomeDominant(
-  turmoil: Turmoil,
-  party: IParty,
-  allParties: ReadonlyArray<IParty>,
-): boolean {
-  // Must not already be the dominant party ("becomes" implies a transition)
-  if (turmoil.dominantParty === party) {
-    return false;
-  }
-  const partyCountAfter = party.delegates.size + 1;
-  return allParties.every((p) => p === party || p.delegates.size < partyCountAfter);
+  return filtered.length > 0 ? filtered : candidates;
 }
 
 /**
  * Clockwise distance from `fromIndex` to `toIndex` in a circular array of `size`.
- * Clockwise = decreasing-index direction (consistent with Turmoil.setNextPartyAsDominant).
- * Distance from a party to itself is `size` (to put it last in clockwise sort).
+ * Distance from a party to itself is `size`, which sorts it last.
  */
 function clockwiseDistance(fromIndex: number, toIndex: number, size: number): number {
   if (fromIndex === toIndex) {
     return size;
-  } // same party — put last
+  }
+  // Clockwise runs towards lower indexes, matching Turmoil.setNextPartyAsDominant.
   return (fromIndex - toIndex + size) % size;
 }

@@ -32,11 +32,11 @@ export class MarsBotTilePlacer {
     }
 
     return this.selectBestSpace(spaces, (space) => {
-      const adj = board.getAdjacentSpaces(space);
-      const marsBotCities = adj.filter((s) => s.player === this.marsBot && Board.isCitySpace(s)).length;
-      const humanCities = adj.filter((s) => s.player === this.humanPlayer && Board.isCitySpace(s)).length;
+      const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
+      const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
+      const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
       // Maximize MarsBot cities adjacency, then minimize human cities adjacency
-      return marsBotCities * 100 - humanCities;
+      return marsBotCities.length * 100 - humanCities.length;
     });
   }
 
@@ -57,24 +57,16 @@ export class MarsBotTilePlacer {
   /** Find the best space for MarsBot to place a city adjacent to ≥2 greenery/ocean tiles (B05). */
   public findExpediteConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot);
-    const eligible = spaces.filter((space) => {
-      const adj = board.getAdjacentSpaces(space);
-      const greeneryOrOcean = adj.filter((s) =>
-        Board.isGreenerySpace(s) || Board.isOceanSpace(s),
-      ).length;
-      return greeneryOrOcean >= 2;
-    });
+    const adjacentGreeneryOrOcean = (space: Space) => board.getAdjacentSpaces(space)
+      .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s)).length;
+
+    const eligible = board.getAvailableSpacesForCity(this.marsBot)
+      .filter((space) => adjacentGreeneryOrOcean(space) >= 2);
     if (eligible.length === 0) {
       return undefined;
     }
 
-    return this.selectBestSpace(eligible, (space) => {
-      const adj = board.getAdjacentSpaces(space);
-      return adj.filter((s) =>
-        Board.isGreenerySpace(s) || Board.isOceanSpace(s),
-      ).length;
-    });
+    return this.selectBestSpace(eligible, adjacentGreeneryOrOcean);
   }
 
   /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
@@ -90,7 +82,6 @@ export class MarsBotTilePlacer {
   /** Find a space for the Neural Instance tile: not adjacent to any tiles, not on edge, not on/adjacent to reserved spaces. */
   public findNeuralInstanceSpace(): Space | undefined {
     const board = this.game.board;
-    const isReserved = (s: Space) => s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED;
     const spaces = board.getAvailableSpacesOnLand(this.marsBot).filter((space) => {
       const adj = board.getAdjacentSpaces(space);
       // Adjacent to no tiles
@@ -102,14 +93,7 @@ export class MarsBotTilePlacer {
         return false;
       }
       // Not adjacent to reserved spaces (ocean-reserved, restricted, specific cities)
-      if (adj.some(isReserved)) {
-        return false;
-      }
-      // Not on a reserved space itself
-      if (isReserved(space)) {
-        return false;
-      }
-      return true;
+      return !adj.some((s) => s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED);
     });
     if (spaces.length === 0) {
       return undefined;
@@ -135,12 +119,10 @@ export class MarsBotTilePlacer {
       return spaces[0];
     }
 
-    const board = this.game.board;
-
     const scored = spaces.map((space) => ({
       space,
       primary: primaryScore(space),
-      adjacentOceans: board.getAdjacentSpaces(space).filter((s) => Board.isOceanSpace(s) && s.tile !== undefined).length,
+      adjacentOceans: this.game.board.getAdjacentSpaces(space).filter(Board.isOceanSpace).length,
       bonusIcons: space.bonus.length,
     }));
 
@@ -173,13 +155,9 @@ export class MarsBotTilePlacer {
 
   /** Break a tie by flipping a project card and counting through spaces. */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
-    const card = this.game.projectDeck.draw(this.game);
-    const cost = card?.cost ?? 0;
-    if (card) {
-      this.game.projectDeck.discardPile.push(card);
-    }
-    const index = cost % spaces.length;
-    return spaces[index];
+    const card = this.game.projectDeck.drawOrThrow(this.game);
+    this.game.projectDeck.discard(card);
+    return spaces[card.cost % spaces.length];
   }
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */
@@ -189,8 +167,7 @@ export class MarsBotTilePlacer {
 
   /** Calculate MC MarsBot gains from ocean adjacency (2 MC per adjacent ocean). */
   public getOceanAdjacencyMC(space: Space): number {
-    const adj = this.game.board.getAdjacentSpaces(space);
-    const oceans = adj.filter((s) => Board.isOceanSpace(s) && s.tile !== undefined).length;
+    const oceans = this.game.board.getAdjacentSpaces(space).filter(Board.isOceanSpace).length;
     return oceans * 2;
   }
 

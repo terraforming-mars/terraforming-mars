@@ -139,11 +139,9 @@
 
   "Regolith Eaters": "Regoliitinsyöjät",
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
-  "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
 
   "GHG Producing Bacteria": "Kasvihuonebakteerit",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
-  "Action: Remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
   "Requires 4% oxygen.": "Vaatii 4 % happea.",
 
   "Ants": "Muurahaiset",
@@ -260,7 +258,7 @@
 
   "Birds": "Linnut",
   "Action: Add an animal to this card.": "TOIMINTO: Lisää eläin tälle kortille.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Vaatii 13 % happea. Vähennä mitä tahansa kasvituotantoa 2 askelta. 1 VP per eläin tällä kortilla.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Vaatii 13 % happea. Vähennä mitä tahansa kasvituotantoa 2 askelta.",
 
   "Mars University": "Mars-yliopisto",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, saat hylätä kortin kädestäsi nostaaksesi kortin.",
@@ -447,8 +445,7 @@
   "Requires -14 C° or warmer.": "Vaatii -14°C tai lämpimämmän.",
 
   "Extreme-Cold Fungus": "Äärimmäisen kylmä sieni",
-  "Action: Gain 1 plant.": "TOIMINTO: Saa 1 kasvi.",
-  "Action: Add 2 microbes to ANOTHER card.": "TOIMINTO: Lisää 2 mikrobia TOISELLE kortille.",
+  "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "TOIMINTO: Saa 1 kasvi TAI lisää 2 mikrobia TOISELLE kortille.",
   "It must be -10 C or colder.": "Lämpötilan tulee olla -10°C tai kylmempi.",
 
   "Advanced Ecosystems": "Kehittyneet ekosysteemit",
@@ -517,7 +514,6 @@
 
   "Nitrite Reducing Bacteria": "Nitriittejä vähentävät bakteerit",
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille TAI poista 3 mikrobia nostaaksesi MKL:ääsi 1 askel.",
-  "Action: Remove 3 microbes to increase your TR 1 step.": "TOIMINTO: Poista 3 mikrobia nostaaksesi MKL:ääsi 1 askel.",
   "Add 3 microbes to this card.": "Lisää 3 mikrobia tälle kortille.",
   "Remove 3 microbes to increase your terraform rating 1 step": "Poista 3 mikrobia lisätäksesi MKL:ääsi 1 askel",
 
@@ -605,7 +601,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Vaatii 6 % happea. Vähennä mitä tahansa kasvituotantoa 1 askel ja lisää energiatuotantoasi 2 askelta.",
 
   "Livestock": "Karja",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Vaatii 9 % happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Vaatii 9 % happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
 
   "Olympus Conference": "Olympus-konferenssi",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, joko lisää tiederesurssi tälle kortille tai poista tiederesurssi tältä kortilta nostaaksesi kortin.",

@@ -1,12 +1,12 @@
 <template>
   <div class="resource_items_cont">
-    <player-resource
+    <PlayerResource
       :type="Resource.MEGACREDITS"
       :count="player.megacredits"
       :production="player.megacreditProduction"
       :resourceProtection="player.protectedResources.megacredits"
       :productionProtection="player.protectedProduction.megacredits"/>
-    <player-resource
+    <PlayerResource
       :type="Resource.STEEL"
       :count="player.steel"
       :production="player.steelProduction"
@@ -14,26 +14,26 @@
       :resourceProtection="player.protectedResources.steel"
       :productionProtection="player.protectedProduction.steel"/>
     <!-- TODO LUNA TRADE FEDERATION -->
-    <player-resource
+    <PlayerResource
       :type="Resource.TITANIUM"
       :count="player.titanium"
       :production="player.titaniumProduction"
       :value="player.titaniumValue"
       :resourceProtection="player.protectedResources.titanium"
       :productionProtection="player.protectedProduction.titanium"/>
-    <player-resource
+    <PlayerResource
       :type="Resource.PLANTS"
       :count="player.plants"
       :production="player.plantProduction"
       :resourceProtection="player.protectedResources.plants"
       :productionProtection="player.protectedProduction.plants"/>
-    <player-resource
+    <PlayerResource
       :type="Resource.ENERGY"
       :count="player.energy"
       :production="player.energyProduction"
       :resourceProtection="player.protectedResources.energy"
       :productionProtection="player.protectedProduction.energy"/>
-    <player-resource
+    <PlayerResource
       :type="Resource.HEAT"
       :count="player.heat"
       :production="player.heatProduction"
@@ -68,7 +68,7 @@ export default defineComponent({
     },
   },
   components: {
-    'player-resource': PlayerResource,
+    PlayerResource,
   },
 });
 </script>

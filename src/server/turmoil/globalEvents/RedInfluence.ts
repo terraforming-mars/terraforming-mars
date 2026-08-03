@@ -8,11 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence().br;
-});
-
-
 export class RedInfluence extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +15,9 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ for each set of 5 TR over 10 (max 5 sets). Increase M€ production 1 step per influence.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence().br;
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

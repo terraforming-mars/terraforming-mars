@@ -6,8 +6,7 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Benötigt Abgabe eines 1 eigenen Schwebers. Klaue 5 M€ von einem anderen Spieler.",
 
   "Atmo Collectors": "Atmo-Kollektoren",
-  "Action: Add one floater here.": "AKTION: Füge dieser Karte einen Schweber hinzu",
-  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "AKTION: Entferne einen Schweber von dieser Karte, um entweder 2 Titan, 3 Energie oder 4 Wärme zu erhalten.",
+  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "AKTION: Füge dieser Karte einen Schweber hinzu, oder entferne einen Schweber von dieser Karte, um entweder 2 Titan, 3 Energie oder 4 Wärme zu erhalten.",
   "Add 2 floaters to ANY card.": "Füge einer BELIEBIGEN Karte 2 Schweber hinzu.",
 
   "Community Services": "Gemeinschaftsdienste",
@@ -57,8 +56,7 @@
   "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Erfordert 1 Jupitersymbol. Erhöhe deinen TW um 1. Füge 2 Schweber einer BELIEBIGEN Karte hinzu.",
 
   "Jupiter Floating Station": "Jupiter-Schweber-Station",
-  "Action: Add 1 floater to a JOVIAN CARD.": "AKTION: Füge einer JUPITER-KARTE einen Schweber hinzu.",
-  "Action: Gain 1 M€ for every floater here [MAX 4].": "AKTION: Erhalte 1 M€ für jeden Schweber auf dieser Karte [max. 4].",
+  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "AKTION: Füge einer JUPITER-KARTE einen Schweber hinzu, oder erhalte 1 M€ für jeden Schweber auf dieser Karte [max. 4].",
   "Requires 3 science tags.": "Erfordert 3 Wissenschaftssymbole.",
 
   "Luna Governor": "Gouverneur des Mondes",
@@ -136,16 +134,14 @@
   "Requires -6 C. Decrease any plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
 
   "Titan Air-scrapping": "Titan-Luft-Recycling",
-  "Action: Spend 1 titanium to add 2 floaters here.": "AKTION: Bezahle 1 Titan, um dieser Karte 2 Schweber hinzuzufügen.",
-  "Action: Spend 2 floaters here to increase your TR 1 step.": "AKTION: Entferne 2 Schweber von dieser Karte, um deine TW um 1 zu erhöhen.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "AKTION: Bezahle 1 Titan, um dieser Karte 2 Schweber hinzuzufügen, oder entferne 2 Schweber von dieser Karte, um deine TW um 1 zu erhöhen.",
 
   "Titan Floating Launch-pad": "Titan-Schweber-Startplattform",
   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "AKTION: Füge einer BELIEBIGEN JUPITER-KARTE einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um kostenlos zu handeln.",
   "Add two floaters to ANY JOVIAN CARD.": "Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
 
   "Titan Shuttles": "Titan-Shuttles",
-  "Action: Add 2 floaters to ANY JOVIAN CARD.": "AKTION: Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
-  "Action: Spend any number of floaters here to gain the same number of titanium.": "AKTION: Entferne eine beliebige Anzahl an Schwebern von dieser Karte, um dieselbe Menge Titan zu erhalten.",
+  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "AKTION: Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu, oder entferne eine beliebige Anzahl an Schwebern von dieser Karte, um dieselbe Menge Titan zu erhalten.",
 
   "Trade Envoys": "Handelsvertreter",
 

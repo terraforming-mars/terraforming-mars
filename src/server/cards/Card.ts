@@ -29,6 +29,8 @@ import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 import {Resource} from '@/common/Resource';
 
+const NO_WARNINGS: ReadonlySet<Warning> = new Set();
+
 /**
  * Cards that do not need a cost attribute.
  */
@@ -109,7 +111,8 @@ const cardProperties = new Map<CardName, InternalProperties>();
 export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
-  public warnings = new Set<Warning>();
+  // Warnings are a read-only set because the X00_000 sets that are just empty consume many MB for no value.
+  public warnings: ReadonlySet<Warning> = NO_WARNINGS;
   public additionalProjectCosts?: AdditionalProjectCosts = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
@@ -450,6 +453,17 @@ export abstract class Card implements ICard {
       return globalParameterRequirementBonus.steps;
     }
     return 0;
+  }
+
+  public addWarning(warning: Warning): void {
+    if (this.warnings === NO_WARNINGS) {
+      this.warnings = new Set();     // allocate only on first real warning
+    }
+    (this.warnings as Set<Warning>).add(warning);
+  }
+
+  public clearWarnings(): void {
+    this.warnings = NO_WARNINGS;      // drop the per-card Set, back to shared empty
   }
 }
 

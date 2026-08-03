@@ -26,13 +26,13 @@ export class BotanicalExperience extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf50',
         renderData: CardRenderer.builder((b) => {
-          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA, {size: Size.SMALL});
+          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA);
           b.nbsp;
           b.resource(CardResource.DATA, {amount: 3, digit}).asterix().colon().production((pb) => pb.plants(1));
           b.br;
           b.text('(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) ' +
             '(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) ' +
-            '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', Size.SMALL, false, false);
+            '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', {size: Size.SMALL, isBold: false});
         }),
         description: 'Requires one greenery tile on Mars.',
       },

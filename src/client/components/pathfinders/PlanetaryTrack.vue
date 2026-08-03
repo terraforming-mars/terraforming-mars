@@ -2,7 +2,7 @@
     <tr>
       <td><div :class="iconClass"></div></td>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
-        <planetary-track-rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
+        <PlanetaryTrackRewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
     </tr>
 </template>

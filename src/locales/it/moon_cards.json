@@ -28,7 +28,8 @@
 
   "Ancient Shipyards":"Antico Cantiere Navale",
   "Action: Steal 8 M€ from any player and add a resource cube here.":"Azione: ruba 8 M€ da un altro giocatore e aggiungi 1 cubo risorsa a questa carta.",
-  "Spend 3 titanium. -1 VP for every resource here.":"Spendi 3 risorse Titanio. -1 PV per ogni risorsa su questa carta.",
+  "Spend 3 titanium.":"Spendi 3 risorse Titanio.",
+  "-1 VP for every resource here.":"-1 PV per ogni risorsa su questa carta.",
 
  "Archimedes Hydroponics Station":"Stazione Idroponica Archimede",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.":"Diminuisci la tua Produzione di Energia di 1 livello e la tua Produzione di M€ di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
@@ -52,8 +53,7 @@
   "Requires 4 mining rate. All players pay 4 M€ for each mining tile they own.":"Richiede che la Traccia Scavi sia almeno a livello 4. Tutti i giocatori pagano 4 M€ per ciascuna tessera Miniera posseduta.",
 
   "Darkside Incubation Plant":"Fabbrica di Incubazione sul Lato Oscuro",
-  "Action: Add 1 microbe here.":"Azione: aggiungi 1 Microbo a questa carta.",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.":"Azione: rimuovi 2 Microbi da questa carta per incrementare la Traccia Colonie di 1 livello.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.":"Azione: aggiungi 1 Microbo a questa carta OPPURE rimuovi 2 Microbi da questa carta per incrementare la Traccia Colonie di 1 livello.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.":"Spendi 1 risorsa Titanio. 1 PV ogni 2 Microbi su questa carta.",
 
   "Darkside Meteor Bombardment":"Bombardamento Meteore sul Lato Oscuro",
@@ -63,7 +63,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.":"Incrementa la tua Produzione di Titanio di 2 livelli, o di 1 livello se la Traccia Scavi è almeno al livello 2. Dopodiché incrementa la Traccia Scavi di 1 livello.",
 
   "Darkside Observatory":"Osservatorio sul Lato Oscuro",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"Azione: aggiungi 1 risorsa Scienza a una qualunque carta [tranne a quelle che danno 2 o più PV per risorsa].",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.":"Azione: aggiungi 1 risorsa Scienza a una qualunque carta [tranne a quelle che danno 2 o più PV per risorsa] OPPURE aggiungi 2 risorse Dati a una qualunque carta.",
   "Action: Add 2 data to ANY card.":"Azione: aggiungi 2 risorse Dati a una qualunque carta.",
 
   "Deep Lunar Mining":"Scavi Lunari Profondi",

@@ -8,7 +8,7 @@
 
   "Anthozoa": "珊瑚动物",
   "(Action: Spend 1 plant to add an animal to this card.)": "（行动：消耗1个植物，将1只动物添加到此卡牌。）",
-  "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "（需要3个海洋板块。本卡上每有2个动物资源，获得1分。）",
+  "Requires 3 oceans on Mars.": "需要3个海洋板块。",
 
   "Asteroid Resources": "小行星资源",
   "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "（消耗3点电力资源。将你的钢铁和钛产量增加1，或放置一个海洋地块并获得2个钢和1个钛。）",
@@ -49,8 +49,7 @@
   "Add 1 data to any card. Add 1 resource to any card.)": "在任意卡牌上添加1个数据资源。在任意卡牌上添加1个资源。)",
 
   "Cryptocurrency": "加密货币",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "（行动：消耗1点电力资源，将1个数据资源添加到此卡上。）",
-  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "（行动：移除此卡上所有的数据资源，每移除1个数据资源可获得3M€。）",
+  "Action: Spend 1 energy to add 1 data to this card, or remove all data from this card to gain 3M€ per data removed.": "行动：消耗1点电力资源，将1个数据资源添加到此卡上，或移除此卡上所有的数据资源，每移除1个数据资源可获得3M€。",
 
   "Cultivation of Venus": "金星育种",
   "(Action: Spend 3 plants to raise Venus 1 step.)": "（行动：花费3个植物资源，提升1格金星改造度。）",
@@ -108,7 +107,7 @@
   "Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.": "（放置一个殖民地。可以放置在你已经拥有殖民地的殖民地板块上。免费进行一次贸易。你可以使用已经位于殖民地板块上的贸易舰队，但不能与该舰队来源的板块进行贸易。提升1点改造度。）",
 
   "Hydrogen Processing Plant": "氢气处理厂",
-  "Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.": "需要至少3%的氧气浓度。降低1级氧气浓度，每2个海洋板块增加1点电力产能。",
+  "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "需要至少3%的氧气浓度。降低1级氧气浓度，每2个海洋板块增加1点电力产能。",
 
   "Interplanetary Transport": "星际运输",
   "Increase your M€ production 1 step for every offworld city tile.": "提升x点M€产能，x为太空城市板块数量。",

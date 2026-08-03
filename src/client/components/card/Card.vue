@@ -4,7 +4,7 @@
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
               <div v-if="showPlayerCube" :class="playerCubeClass"></div>
-              <card-help v-if="hasHelpText" :name="card.name" :hovering="hovering" />
+              <CardHelp v-if="hasHelpText" :name="card.name" :hovering="hovering" />
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
@@ -18,7 +18,7 @@
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
       <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
       <CardExtraContent :card="card" />
-      <slot/>
+      <slot></slot>
   </div>
 </template>
 

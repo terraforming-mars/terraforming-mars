@@ -1,12 +1,12 @@
 <template>
   <div :class="mainClass" :data_space_id="space.id">
-    <board-space-tile
+    <BoardSpaceTile
       :space="space"
       :aresExtension="false"
       :tileView="tileView"
-    ></board-space-tile>
+    />
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
+    <Bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
     </template>
@@ -43,7 +43,7 @@ export default defineComponent({
   },
   components: {
     Bonus,
-    'board-space-tile': BoardSpaceTile,
+    BoardSpaceTile,
   },
   computed: {
     mainClass(): string {

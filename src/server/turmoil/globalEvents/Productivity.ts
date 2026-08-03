@@ -8,10 +8,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.steel(1).slash().production((pb) => pb.steel(1)).nbsp.influence({size: Size.SMALL});
-});
-
 export class Productivity extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -19,7 +15,9 @@ export class Productivity extends GlobalEvent implements IGlobalEvent {
       description: 'Gain 1 steel for each steel production (max 5) and influence.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.steel(1).slash().production((pb) => pb.steel(1)).nbsp.influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

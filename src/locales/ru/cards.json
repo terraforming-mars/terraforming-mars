@@ -109,10 +109,10 @@
     "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Постройте город. Снизьте своё производство энергии на 2 и повысьте своё производство стали на 2.",
 
     "Regolith Eaters": "Поедатели реголита",
-    "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 2 жетона бактерий с этой карты, чтобы повысить уровень кислорода на 1.",
+    "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 2 жетона бактерий с этой карты, чтобы повысить уровень кислорода на 1.",
 
     "GHG Producing Bacteria": "Бактерии, выделяющие парниковые газы",
-    "Action: Remove 2 microbes to raise temperature 1 step.": "Действие: Сбросьте 2 жетона бактерий с этой карты, чтобы повысить температуру на 1.",
+    "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 2 жетона бактерий с этой карты, чтобы повысить температуру на 1.",
     "Requires 4% oxygen.": "Уровень кислорода должен быть 4%.",
 
     "Ants": "Муравьи",
@@ -234,7 +234,8 @@
 
     "Birds": "Птицы",
     "Action: Add an animal to this card.": "Действие: положите жетон животных на эту карту.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Уровень кислорода должен быть 13%. Снизьте у любого игрока производство растений на 2. 1 ПО за каждый жетон животных на этой карте.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Уровень кислорода должен быть 13%. Снизьте у любого игрока производство растений на 2.",
+    "1 VP for each animal on this card.": "1 ПО за каждый жетон животных на этой карте.",
 
     "Mars University": "Марсианский университет",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Свойство: когда вы играете карту с символом науки, включая эту, можете сбросить карту с руки, чтобы взять карту.",
@@ -431,8 +432,7 @@
     "Requires -14 C° or warmer.": "Температура должна быть -14 градусов или выше.",
 
     "Extreme-Cold Fungus": "Грибок для сверхнизких температур",
-    "Action: Gain 1 plant.": "Действие: получите 1 растение",
-    "Action: Add 2 microbes to ANOTHER card.": "Действие: Положите 2 жетона бактерий на другую карту.",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Действие: получите 1 растение или положите 2 жетона бактерий на другую карту.",
     "It must be -10 C or colder.": "Температура должна быть -10 градусов или ниже.",
 
     "Advanced Ecosystems": "Улучшенная экосистема",
@@ -502,7 +502,7 @@
     "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Свойство: после того как вы оплатите стандартный проект, кроме «продажи патентов», получите 3 M€.",
 
     "Nitrite Reducing Bacteria": "Бактерия, перерабатывающая нитриты",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Действие: положите жетон бактерий на эту карту или сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.)",
+    "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.",
     "Add 3 microbes to this card.": "Положите 3 жетона бактерий на эту карту.",
 
     "Industrial Microbes": "Промышленные микробы",
@@ -589,7 +589,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Уровень кислорода должен быть 6%. Снизьте производство растений у любого игрока на 1 и повысьте своё производство энергии на 2.",
 
     "Livestock": "Домашний скот",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Уровень кислорода должен быть 9%. Снизьте своё производство растений на 1 и повысьте свой доход на 2. 1 ПО за каждый жетон животных на этой карте.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Уровень кислорода должен быть 9%. Снизьте своё производство растений на 1 и повысьте свой доход на 2. 1 ПО за каждый жетон животных на этой карте.",
 
     "Olympus Conference": "Конференция на Олимпе",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Когда вы вводите в игру символ науки на карте, включая этот, положите жетон науки на эту карту или удалите жетон науки с этой карты, чтобы взять карту.",
@@ -681,8 +681,7 @@
     "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}",
 
     "Floating Refinery": "Облачная переработка",
-    "Action: Add 1 floater here.": "Действие: Добавьте 1 аэростат на эту карту.",
-    "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Действие: Удалите 2 аэростата с любой карты, чтобы получить 1 титан и 2 М€.",
+    "Action: Add 1 floater here, or remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Действие: Добавьте 1 аэростат на эту карту или удалите 2 аэростата с любой карты, чтобы получить 1 титан и 2 М€.",
     "Add 1 floater here for each Venus tag you have.": "Добавьте 1 аэростат на эту карту за каждую вашу метку Венеры.",
 
     "Floyd Continuum": "Континуум Флойда",

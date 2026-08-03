@@ -11,7 +11,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {all} from '../Options';
+import {all, uppercase} from '../Options';
 
 export class Pets extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +36,7 @@ export class Pets extends Card implements IProjectCard {
             eb.city({size: Size.SMALL, all}).startEffect.resource(CardResource.ANIMAL);
           }).br;
           b.resource(CardResource.ANIMAL).br;
-          b.text('Animals may not be removed from this card', Size.SMALL, true).br;
+          b.text('Animals may not be removed from this card', {size: Size.SMALL, uppercase}).br;
           b.vpText('1 VP per 2 animals here.');
         }),
         description: {text: 'Add 1 animal to this card.', align: 'left'},

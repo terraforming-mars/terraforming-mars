@@ -36,7 +36,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
           b.effect(
             'When playing an animal card, you can remove animals from here to ' +
             'change the card\'s global requirement by 1 step for every 1 animal removed.',
-            (eb) => eb.resource(CardResource.ANIMAL).startEffect.text('+/-1 global parameter', Size.SMALL)).br;
+            (eb) => eb.resource(CardResource.ANIMAL).startEffect.text('+/-1 global parameter', {size: Size.SMALL})).br;
           b.action('Discard up to 2 of your claimed underground resource tokens to place the same number of animals on ANY card.', (ab) => {
             ab.undergroundResources(2).asterix().startAction.resource(CardResource.ANIMAL, 2).asterix();
           });
@@ -47,7 +47,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.underworldData.tokens.every((t) => t.shelter || t.active)) {
-      this.warnings.add('underworldtokendiscard');
+      this.addWarning('underworldtokendiscard');
     }
     return player.underworldData.tokens.length > 0;
   }
@@ -69,7 +69,9 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
         return undefined;
       }));
     andOptions.cb = (() => {
-      const sorted = indexes.slice().sort().reverse();
+      // Remove from the highest index down so earlier removals don't shift the
+      // indexes still to be removed. Sort numerically, not stringwise.
+      const sorted = indexes.slice().sort((a, b) => b - a);
       for (const idx of sorted) {
         UnderworldExpansion.removeClaimedToken(player, idx);
       }

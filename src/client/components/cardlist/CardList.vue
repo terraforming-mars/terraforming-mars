@@ -6,34 +6,34 @@
 
       <div class="search-container">
         <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-        <button id="namesOnlyToggle" name="namesOnly" v-on:click="toggleNamesOnly()">
+        <button id="namesOnlyToggle" name="namesOnly" @click="toggleNamesOnly()">
             <span v-if="namesOnly === true" v-i18n>Names only</span>
             <span v-else v-i18n>Full text</span>
         </button>
 
-        <button id="sort-order" v-on:click="toggleSortOrder()" style="width: 85px;">
+        <button id="sort-order" @click="toggleSortOrder()" style="width: 85px;">
             <span v-if="sortOrder === 'a'" v-i18n>A-Z</span>
             <span v-else v-i18n>0-9</span>
             &#x2195;
         </button>
 
-        <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
+        <button id="show-vps-only" @click="toggleVps()" style="width: 63px;">
             <span v-if="vps === 0" v-i18n>all</span>
             <span v-if="vps === 1" v-i18n>+VPs</span>
             <span v-if="vps === 2" v-i18n>-VPs</span>
         </button>
 
-        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
+        <button id="show-metadata" @click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
             <span v-if="showMetadata === true">🛰️■</span>
             <span v-else>🛰️□</span>
         </button>
 
-        <button id="tall-cards" v-on:click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
+        <button id="tall-cards" @click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
             <span v-if="tallCards === true">🂠→<span class="small-card">🂠</span></span>
               <span v-else><span class="small-card">🂠</span>→🂠</span>
         </button>
 
-        <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
+        <button id="advanced-search-collapser" @click="toggleAdvancedSearch()">
             <span v-if="showAdvanced === true" v-i18n>Advanced «</span>
             <span v-else v-i18n>Advanced »</span>
         </button>
@@ -42,7 +42,7 @@
       <div id="selections" v-show="showAdvanced">
         <!-- expansions -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertExpansions()">-</button>
+          <button id="toggle-checkbox" @click="invertExpansions()">-</button>
 
           <span v-for="expansion in allModules" :key="expansion">
             <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
@@ -54,7 +54,7 @@
 
         <!-- types -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertTypes()">
+          <button id="toggle-checkbox" @click="invertTypes()">
               <span v-i18n>-</span>
           </button>
 
@@ -70,7 +70,7 @@
 
         <!-- tags -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertTags()">
+          <button id="toggle-checkbox" @click="invertTags()">
               <span v-i18n>-</span>
           </button>
           <span v-for="tag in allTags" :key="tag">
@@ -85,7 +85,7 @@
 
         <!-- card resources -->
         <div class="selection-row">
-          <button id="toggle-checkbox" v-on:click="invertResources()">
+          <button id="toggle-checkbox" @click="invertResources()">
               <span v-i18n>-</span>
           </button>
           <span v-for="resource in allResources" :key="resource">
@@ -139,7 +139,7 @@
       <section v-show="visibleGlobalEvents.length > 0" class="card-list-cards-list">
         <h2 v-i18n>Global Events</h2>
         <div class="cardbox" v-for="globalEventName in visibleGlobalEvents" :key="globalEventName" v-memo="[globalEventName]">
-          <global-event :globalEventName="globalEventName" type="distant"></global-event>
+          <GlobalEvent :globalEventName="globalEventName" type="distant"/>
         </div>
       </section>
 
@@ -147,7 +147,7 @@
         <h2 v-i18n>Colonies</h2>
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
-            <colony :colony="colonyModel(colonyName)"></colony>
+            <Colony :colony="colonyModel(colonyName)"/>
           </div>
         </div>
       </section>
@@ -157,7 +157,7 @@
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
             <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-              <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+              <Milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"/>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
             <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-              <award :award="awardModel(awardName)" :showDescription="true"></award>
+              <Award :award="awardModel(awardName)" :showDescription="true"/>
             </div>
           </div>
         </div>
@@ -184,7 +184,11 @@
       </section>
 
       <div class="free-floating-preferences-icon">
-        <preferences-icon></preferences-icon>
+        <div v-show="scrolled" class="sidebar_item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
+          <div class="card-list-scroll-top-arrow">↑</div>
+        </div>
+        <LanguageIcon class="corner-language-icon"/>
+        <PreferencesIcon/>
       </div>
   </div>
 </template>
@@ -218,12 +222,14 @@ import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import LanguageIcon from '@/client/components/LanguageIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import TurmoilAgendaContainer from '@/client/components/cardlist/TurmoilAgendaContainer.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {textFitMetrics} from '@/client/utils/textFit';
 
 
 type Refs = {
@@ -231,7 +237,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: 'card-list',
+  name: 'CardList',
   components: {
     Card,
     GlobalEvent,
@@ -240,14 +246,24 @@ export default defineComponent({
     Award,
     TurmoilAgendaContainer,
     PreferencesIcon,
+    LanguageIcon,
   },
-  data(): CardListModel {
-    return hashToModel(window.location.hash);
+  data() {
+    return {
+      ...hashToModel(window.location.hash),
+      // Whether the page has been scrolled down at all; gates the "scroll to top" widget.
+      scrolled: false,
+    };
   },
   mounted() {
     setDocumentTitle('Cards List');
     this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
+    this.measureTitleFit();
+    window.addEventListener('scroll', this.handleScroll, {passive: true});
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {
     typedRefs(): Refs {
@@ -424,6 +440,9 @@ export default defineComponent({
         return true;
       }
       if (this.namesOnly) {
+        if (normalized.startsWith('^')) {
+          return name.toLocaleUpperCase().startsWith(normalized.substring(1));
+        }
         return name.toLocaleUpperCase().includes(normalized);
       } else {
         return this.searchIndex.matches(this.filterText, type, name);
@@ -538,6 +557,27 @@ export default defineComponent({
     // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
+    },
+    // Reports how long it took to resize every card title once they've all been
+    // fitted. Each CardTitle defers its fit until document.fonts.ready, so we
+    // wait on the same signal: our child components register their fit callbacks
+    // before this parent mounted hook runs, so by the time this resolves they
+    // have all recorded their timings.
+    measureTitleFit(): void {
+      textFitMetrics.reset();
+      const report = () => console.log(`Resized ${textFitMetrics.count} card titles in ${textFitMetrics.total.toFixed(1)}ms`);
+      // document.fonts is unavailable outside a real browser (e.g. JSDOM tests).
+      if (document.fonts === undefined) {
+        report();
+      } else {
+        document.fonts.ready.then(report);
+      }
+    },
+    scrollToTop(): void {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    },
+    handleScroll(): void {
+      this.scrolled = window.scrollY > 0;
     },
     toggleNamesOnly(): void {
       this.namesOnly = !this.namesOnly;

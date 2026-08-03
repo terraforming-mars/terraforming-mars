@@ -134,11 +134,9 @@
 
     "Regolith Eaters": "Regoliet eter",
     "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "ACTIE: Voeg 1 microbe toe aan deze kaart OF verwijder 2 microben van deze kaart om de zuurstof met 1% te verhogen.",
-    "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "(ACTIE: verwijder 2 microben van deze kaart om de zuurstof met 1% te verhogen.)",
 
     "GHG Producing Bacteria": "CO₂ producerende bacteriën",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "ACTIE: Voeg 1 microbe toe aan deze kaart OF verwijder 2 microben van deze kaart om de temperatuur met 2°C te verhogen.",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)": "(ACTIE: Verwijder 2 microben. Verhoog temperatuur met 2 °C.)",
     "Requires 4% oxygen.": "Vereist zuurstofgehalte van 4% of meer.",
 
     "Ants": "Mieren",
@@ -259,7 +257,7 @@
 
     "Birds": "Vogels",
     "Action: Add an animal to this card.": "ACTIE: Voeg 1 dier toe aan deze kaart.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Vereist een zuurstofniveau van 13% of meer. Verminder de plantproductie van een speler met 2. 1 OP per dier op deze kaart.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Vereist een zuurstofniveau van 13% of meer. Verminder de plantproductie van een speler met 2.",
 
     "Mars University": "Mars Universiteit",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "EFFECT: Elke keer dat je een wetenschapssymbool speelt (inclusief deze), mag je 1 kaart uit je hand afleggen om 1 nieuwe te trekken.",
@@ -453,8 +451,7 @@
     "Requires -14 C° or warmer.": "Vereist een temperatuur van -14 °C of warmer.",
 
     "Extreme-Cold Fungus": "Extreem koude schimmel",
-    "(Action: Gain 1 plant.)": "(ACTIE: Ontvang 1 Plant.)",
-    "(Action: Add 2 microbes to ANOTHER card.)": "(ACTIE: voeg 2 microben toe aan een andere kaart.)",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "ACTIE: Ontvang 1 Plant of voeg 2 microben toe aan een andere kaart.",
     "It must be -10 C or colder.": "De temperatuur moet -10°C of kouder zijn.",
 
     "Advanced Ecosystems": "Geavanceerd ecosysteem",
@@ -527,7 +524,6 @@
 
     "Nitrite Reducing Bacteria": "Nitrietreducerende bacteriën",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "ACTIE: Voeg 1 microbe toe aan deze kaart OF verwijder 3 microben om je terraformwaarde met 1 te verhogen.",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(ACTIE: verwijder 3 microben om je terraformwaarde met 1 te verhogen.)",
     "Add 3 microbes to this card.": "Voeg 3 microben toe aan deze kaart.",
     "Remove 3 microbes to increase your terraform rating 1 step": "Verwijder 3 microben om je terraformwaarde met 1 te verhogen.",
 
@@ -616,7 +612,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Vereist een zuurstofgehalte van 6% of meer. Verlaag je plantproductie met 1. Verhoog je energieproductie met 2.",
 
     "Livestock": "Vee",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Vereist een zuurstofgehalte van 9% of meer. Verlaag je plantproductie met 1. Verhoog je M€-productie met 2.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Vereist een zuurstofgehalte van 9% of meer. Verlaag je plantproductie met 1. Verhoog je M€-productie met 2.",
 
     "Olympus Conference": "Olympus-conferentie",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "EFFECT: Als je een wetenschapssymbool speelt (inclusief dit symbool), voeg dan 1 wetenschap toe aan deze kaart OF verwijder 1 wetenschap van deze kaart om 1 kaart te trekken.",

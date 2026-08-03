@@ -1,0 +1,23 @@
+{
+  "extends": ["stylelint-config-recommended-less"],
+  "plugins": ["@stylistic/stylelint-plugin"],
+  "rules": {
+    "@stylistic/indentation": 2,
+    "no-descending-specificity": null,
+    "declaration-block-no-redundant-longhand-properties": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.vue"],
+      "customSyntax": "postcss-html",
+      "rules": {
+        "selector-pseudo-class-no-unknown": [
+          true,
+          {
+            "ignorePseudoClasses": ["deep", "global", "slotted"]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 <template>
   <div id="game-home" class="game-home-container">
     <h1><span v-i18n>Terraforming Mars</span> [<span v-i18n>game id:</span> <span>{{getGameId()}}</span>]</h1>
-    <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br/><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
+    <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
     <ul>
       <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
         <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
@@ -11,7 +11,7 @@
         <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
       </li>
       <li v-if="game !== undefined && game.spectatorId">
-        <p/>
+        <p></p>
         <span class="turn-order"></span>
         <span class="color-square"></span>
         <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
@@ -21,12 +21,12 @@
 
     <div class="spacing-setup"></div>
 
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
 
     <div class="spacing-setup"></div>
     <div v-if="game !== undefined">
       <h1 v-i18n>Game settings</h1>
-      <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"></game-setup-detail>
+      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@ function copyToClipboard(text: string): void {
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
 export default defineComponent({
-  name: 'game-home',
+  name: 'GameHome',
   props: {
     game: {
       type: Object as () => SimpleGameModel,
@@ -71,7 +71,7 @@ export default defineComponent({
   },
   components: {
     AppButton,
-    'game-setup-detail': GameSetupDetail,
+    GameSetupDetail,
     PurgeWarning,
   },
   data() {

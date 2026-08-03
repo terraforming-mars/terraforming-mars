@@ -5,6 +5,7 @@ import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {uppercase} from '../Options';
 
 export class EccentricSponsor extends PreludeCard {
   constructor() {
@@ -14,7 +15,7 @@ export class EccentricSponsor extends PreludeCard {
       metadata: {
         cardNumber: 'P11',
         renderData: CardRenderer.builder((b) => {
-          b.text('Play a card from hand, reducing its cost by 25 M€', Size.SMALL, true);
+          b.text('Play a card from hand, reducing its cost by 25 M€', {size: Size.SMALL, uppercase});
         }),
       },
     });

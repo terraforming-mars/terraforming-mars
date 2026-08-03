@@ -4,13 +4,14 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import {defineComponent, PropType} from 'vue';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 
 export default defineComponent({
   name: 'CardDescription',
   props: {
     item: {
+      type: [String, Object] as PropType<unknown>,
       required: true,
     },
   },

@@ -26,7 +26,7 @@ export class Lowell extends CeoCard {
 
   public override canAct(player: IPlayer): boolean {
     if (!player.game.ceoDeck.canDraw(3)) {
-      this.warnings.add('deckTooSmall');
+      this.addWarning('deckTooSmall');
     }
     if (!super.canAct(player)) {
       return false;

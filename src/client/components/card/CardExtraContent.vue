@@ -1,8 +1,8 @@
 <template>
     <div class="card-extra-content-container">
-      <div v-if="lifeFound()" class="little-green-men" />
-      <div v-if="isMiningTileOnSteel()" class="mined-metal mined-steel" />
-      <div v-if="isMiningTileOnTitanium()" class="mined-metal mined-titanium" />
+      <div v-if="lifeFound()" class="little-green-men" ></div>
+      <div v-if="isMiningTileOnSteel()" class="mined-metal mined-steel" ></div>
+      <div v-if="isMiningTileOnTitanium()" class="mined-metal mined-titanium" ></div>
     </div>
 </template>
 

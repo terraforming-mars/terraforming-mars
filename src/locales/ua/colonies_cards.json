@@ -6,8 +6,7 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Вимагає втрати 1 аеростату. Вкрадіть 5 M€ у будь-якого гравця.",
 
   "Atmo Collectors": "Атмосферні колектори",
-  "Action: Add one floater here.": "Дія: Додайте 1 аеростат сюди.",
-  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Дія: Витратити 1 аеростат тут, щоб отримати 2 титану, або 3 енергії, або 4 тепла.",
+  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Дія: Додайте 1 аеростат сюди АБО витратити 1 аеростат тут, щоб отримати 2 титану, або 3 енергії, або 4 тепла.",
   "Add 2 floaters to ANY card.": "Додайте 2 аеростати до БУДЬ-ЯКОЇ карти.",
 
   "Community Services": "Соціальні служби",
@@ -55,8 +54,7 @@
   "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Вимагає 1 мітки Юпітера. Збільште РТ на 1. Додайте 2 аеростати на БУДЬ-ЯКУ карту.",
 
   "Jupiter Floating Station": "Плавуча станція Юпітера",
-  "Action: Add 1 floater to a JOVIAN CARD.": "Дія: Додайте 1 аеростат на карту Юпітера.",
-  "Action: Gain 1 M€ for every floater here [MAX 4].": "Дія: Отримайте 1 M€ за кожну аеростат тут [МАКС 4].",
+  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "Дія: Додайте 1 аеростат на карту Юпітера АБО отримайте 1 M€ за кожну аеростат тут [МАКС 4].",
   "Requires 3 science tags.": "Вимагає 3 міток науки.",
 
   "Luna Governor": "Губернатор Луни",
@@ -134,16 +132,14 @@
   "Requires -6 C. Decrease any plant production 1 step.": "Вимагає -6 C. Зменште виробництво будь-яких рослин на 1.",
 
   "Titan Air-scrapping": "Вилучення повітря з Титану",
-  "Action: Spend 1 titanium to add 2 floaters here.": "Дія: Витратити 1 титан, щоб додати 2 аеростати сюди.",
-  "Action: Spend 2 floaters here to increase your TR 1 step.": "Дія: Витратити 2 аеростати сюди, щоб збільшити РТ на 1.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Дія: Витратити 1 титан, щоб додати 2 аеростати сюди АБО витратити 2 аеростати сюди, щоб збільшити РТ на 1.",
 
   "Titan Floating Launch-pad": "Плавуча стартова платформа на Титані",
   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Дія: Додайте 1 аеростат на БУДЬ-ЯКУ карту Юпітера або витратіть 1 аеростат тут, щоб торгувати безкоштовно.",
   "Add two floaters to ANY JOVIAN CARD.": "Додайте два аеростати на БУДЬ-ЯКУ карту Юпітера.",
 
   "Titan Shuttles": "Титанські шатли",
-  "Action: Add 2 floaters to ANY JOVIAN CARD.": "Дія: Додайте 2 аеростати на БУДЬ-ЯКУ карту Юпітера.",
-  "Action: Spend any number of floaters here to gain the same number of titanium.": "Дія: Витратити будь-яку кількість аеростатів тут, щоб отримати таку ж кількість титану.",
+  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "Дія: Додайте 2 аеростати на БУДЬ-ЯКУ карту Юпітера АБО витратити будь-яку кількість аеростатів тут, щоб отримати таку ж кількість титану.",
 
   "Trade Envoys": "Торгові посла",
 

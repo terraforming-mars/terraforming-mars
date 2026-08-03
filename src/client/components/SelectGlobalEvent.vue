@@ -2,8 +2,8 @@
     <div class="wf-component wf-component--select-global-event">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="globalEventName in playerinput.globalEventNames" :key="globalEventName" class="cardBox">
-          <input type="radio" v-model="selected" :value="globalEventName" />
-          <GlobalEvent :globalEventName="globalEventName" type="distant"></GlobalEvent>
+          <input type="radio" v-model="selected" :value="globalEventName" >
+          <GlobalEvent :globalEventName="globalEventName" type="distant"/>
         </label>
         <div v-if="showsave === true" class="nofloat">
           <AppButton :disabled="selected === undefined" type="submit" @click="saveData" title="OK" />

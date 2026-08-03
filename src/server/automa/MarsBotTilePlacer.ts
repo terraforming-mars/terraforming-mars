@@ -54,8 +54,11 @@ export class MarsBotTilePlacer {
     });
   }
 
-  /** Find the best space for MarsBot to place a city adjacent to ≥2 greenery/ocean tiles (B05). */
-  public findExpediteConstructionCitySpace(): Space | undefined {
+  /**
+   * Find the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
+   * This is what the Expedited Construction bonus card (B05) asks for.
+   */
+  public findExpeditedConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
     const adjacentGreeneryOrOcean = (space: Space) => board.getAdjacentSpaces(space)
       .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s)).length;

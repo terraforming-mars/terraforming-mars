@@ -21,7 +21,7 @@ npm run lint:fix             # ESLint autofix
 npm run test                 # All tests (server + client)
 npm run test:server          # Mocha server tests (~6700 tests)
 npm run test:client          # Mochapack client component tests
-
+npm run test:integration     # Run the PostgreSQL tests
 # Single server test file
 npx mocha --import=tsx --require tests/testing/setup.ts "tests/cards/base/Algae.spec.ts"
 
@@ -36,6 +36,8 @@ npm run dev:server           # Server with hot reload (tsx watch)
 npm run dev:client           # Webpack watch mode
 npm run watch:less           # CSS rebuild on change
 ```
+
+However `npm run dev` is much easier to run and a little more powerful / flexible.
 
 ## Architecture
 
@@ -59,6 +61,8 @@ Cards are the core domain object (~1000 cards across 15 modules). Each card invo
 
 Card types: `EVENT`, `ACTIVE` (has action), `AUTOMATED`, `PRELUDE`, `CORPORATION`, `CEO`, `STANDARD_PROJECT`, `STANDARD_ACTION`.
 
+See the wiki's [Adding New Cards](https://github.com/terraforming-mars/terraforming-mars/wiki/Adding-New-Cards) page for practical advice (finding a similar existing card as a template, testing at `/cards` locally) and special-case mechanics (Robotic Workforce, Celestic, resource storage/VP interactions).
+
 ### Behavior System
 
 The `Behavior` type (`src/server/behavior/Behavior.ts`) is a declarative DSL for card effects: production changes, resource gains, tile placement, TR changes, etc. Cards set `behavior` (on play) and/or `action` (repeatable) properties. The `BehaviorExecutor` (`src/server/behavior/Executor.ts`) interprets these at runtime. Prefer declarative `behavior` over imperative `play()` overrides when possible.
@@ -75,13 +79,38 @@ When a player needs to make a choice, the server returns a `PlayerInput` (e.g., 
 
 Each expansion has its own directory under `src/server/cards/` and a manifest. Modules: `base`, `corpera` (Corporate Era), `promo`, `venus`, `colonies`, `prelude`, `prelude2`, `turmoil`, `community`, `ares`, `moon`, `pathfinders`, `ceo`, `starwars`, `underworld`. Cross-expansion card compatibility is declared via `compatibility` in `CardFactorySpec`.
 
+The official expansions are base, corpera, promo, venus, colonies, prelude, prelude2, turmoil. Any other expansion is a fan expansion. Even still, promo has some cards that are almost fan expansions; they're the ones from the Dutch Open,
+and are listed as such in CardName.ts
+
+### Board System
+
+Adding a new board touches several files:
+
+1. **`BoardName` enum entry** (`src/common/boards/BoardName.ts`)
+2. **Board class** (`src/server/boards/<BoardName>.ts`) - extends `Board`/`MarsBoard`
+3. **`GameSetup.ts`** - register the factory in the `boards` record
+4. **`src/server/awards/Awards.ts`** - add a board entry (can be `[]`)
+5. **`src/server/milestones/Milestones.ts`** - add a board entry (can be `[]`)
+6. **`src/client/components/Legends.ts`** - add a board entry (can be `[]`)
+7. **`tests/routes/ApiCreateGame.spec.ts`** - add to the fan-map list if applicable
+
 ### Client Components
 
 Vue 3 with Options API. Components are in `src/client/components/`. The root `App.ts` routes between screens. `PlayerHome.vue` is the main game view. Card rendering components are in `src/client/components/card/`. Styles use Less (`src/styles/`).
 
+- New Vue components can use the Vue 3 style.
+- Every new Vue component must have a test class, even if it is minially a sanity test. However, ask the user if they want feature-rich tests when creating new components. Not every feature needs a test.
+
 ### Database
 
 Pluggable backends in `src/server/database/`: `SQLite`, `PostgreSQL`, `LocalFilesystem`. Games are serialized/deserialized through `SerializedGame`/`SerializedPlayer` types. `GameLoader` handles caching and retrieval.
+
+### Wiki
+Good wiki pages:
+- [Databases](https://github.com/terraforming-mars/terraforming-mars/wiki/Databases)
+- [dot-env](https://github.com/terraforming-mars/terraforming-mars/wiki/dot-env) pages for local setup
+- [Development tips](https://github.com/terraforming-mars/terraforming-mars/wiki/Development-tips)
+- [Changing game data for local testing](https://github.com/terraforming-mars/terraforming-mars/wiki/Changing-game-data-for-local-testing)
 
 ### Testing Patterns
 
@@ -93,8 +122,8 @@ Pluggable backends in `src/server/database/`: `SQLite`, `PostgreSQL`, `LocalFile
 
 ### Internationalization
 
-Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Translation files in `src/locales/`. Strings are matched by exact text content.
+Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Translation files in `src/locales/`. Strings are matched by exact text content. See the wiki's [Translations](https://github.com/terraforming-mars/terraforming-mars/wiki/Translations) page for the contributor workflow.
 
 ## Style Guide
 
-- Follow the style of the code around the file. If this is a new file, follow the style of the code in the directory.
+Read STYLE.md. Adhere to it as best as you can, alling out outliers.

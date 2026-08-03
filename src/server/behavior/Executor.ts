@@ -42,6 +42,21 @@ import {SelectCard} from '../inputs/SelectCard';
 import {IGlobalEvent, isIGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ProxyCard} from '../cards/ProxyCard';
 import {From} from '../logs/From';
+import {BaseStock} from '../player/StockBase';
+
+/**
+ * Caps each count at what `lose` is allowed to take: never below zero, so a countable that
+ * went negative takes nothing instead of granting a gain, and never more than the player
+ * can give up, so `add` logs the amount that really changed.
+ */
+function loseable(units: Units, stock: BaseStock, minMegacredits: number): Units {
+  const capped = {...Units.EMPTY};
+  for (const key of Units.keys) {
+    const floor = key === 'megacredits' ? minMegacredits : 0;
+    capped[key] = Math.max(0, Math.min(units[key], stock[key] - floor));
+  }
+  return capped;
+}
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -400,6 +415,18 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.lose !== undefined) {
+      const lose = behavior.lose;
+      if (lose.production) {
+        // Production megacredits bottom out at -5, not 0.
+        const units = loseable(ctx.countUnits(lose.production), player.production, -5);
+        player.production.adjust(Units.negative(units), {log: true, from});
+      }
+      if (lose.stock) {
+        const units = loseable(ctx.countUnits(lose.stock), player.stock, 0);
+        player.stock.adjust(Units.negative(units), {log: true, from});
+      }
+    }
     if (behavior.production !== undefined) {
       const units = ctx.countUnits(behavior.production);
       player.production.adjust(units, {log: true, from});

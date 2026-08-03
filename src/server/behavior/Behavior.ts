@@ -1,11 +1,7 @@
-// import {SpaceType} from '../../common/boards/SpaceType';
 import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
 import {Resource} from '../../common/Resource';
 import {Tag} from '../../common/cards/Tag';
-// import {SpaceId} from '../../common/Types';
-// import {CardResource} from '../../common/CardResource';
-// import {TileType} from '../../common/TileType';
 import {SpaceId} from '../../common/Types';
 import {NamedMoonSpace} from '../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../common/TileType';
@@ -43,11 +39,23 @@ export type Behavior = {
   or?: OrBehavior;
 
   /**
-   * Spend one of resources bdecreaseTerraformRatingefore taking the action.
+   * Spend one of resources before taking the action.
    *
    * This is specifically designed to spend only one resource type.
    */
   spend?: Partial<OneOfType<Spend>>;
+
+  /**
+   * Lose one of the resources here, or as much of it as the player has.
+   *
+   * This is forgiving, compred to `spend`: it never blocks the behavior, never asks
+   * the player to choose how to pay, and takes what it can when the player comes up short.
+   * Values can't go negative, and the player can't lose more than they have.)
+   */
+  lose?: Partial<OneOfType<{
+    production: Partial<CountableUnits>,
+    stock: Partial<CountableUnits>,
+  }>>;
 
   /** Gain or lose production */
   production?: Partial<CountableUnits>;

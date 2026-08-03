@@ -9,10 +9,6 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().plants(1).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
-});
-
 export class TiredEarth extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().plants(1).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
+      }),
     });
   }
 

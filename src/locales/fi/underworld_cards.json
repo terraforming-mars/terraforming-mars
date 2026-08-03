@@ -68,7 +68,7 @@
 
 "Earthquake Machine": "Maanjäristyskone",
 "Action: Spend 1 energy to excavate an underground resource.": "TOIMINTO: Käytä 1 energia kaivaaksesi maanalaisen resurssin.",
-"Requires 2 science tags. Decrease any plant production 1 step": "Vaatii 2 tiedeympyrää. Vähennä jonkun kasvihuonetuotantoa 1 askel",
+"Requires 2 science tags. Decrease any plant production 1 step.": "Vaatii 2 tiedeympyrää. Vähennä jonkun kasvihuonetuotantoa 1 askel",
 
 "Excavator Leasing": "Kaivukoneiden vuokraus",
 "Effect: The excavate standard project costs 1 M€ less for all players.": "VAIKUTUS: Kaivamisen standardiprojekti maksaa 1 M€ vähemmän kaikille pelaajille.",
@@ -118,8 +118,7 @@
 "Every player with the lowest number of crime tags INCLUDING EVENTS gains 1 TR, if possible. Players with 0 crime tags gain 1 additional TR.": "Jokainen pelaaja jolla on vähiten rikosympyröitä TAPAHTUMAT MUKAAN LUKIEN nostaa MKL:äänsä 1 askeleen, jos mahdollista. Pelaajat joilla on 0 rikosympyrää nostavat MKL:äänsä 1 ylimääräisen askeleen.",
 
 "Grey Market Exploitation": "Harmaan markkinan hyväksikäyttö",
-"Action: Spend 1 M€ to gain 1 standard resource.": "TOIMINTO: Käytä 1 M€ saadaksesi 1 standardiresurssin.",
-"Action: Spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Käytä 1 korruptio saadaksesi 3 samaa standardiresurssia.",
+"Action: Spend 1 M€ to gain 1 standard resource, or spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Käytä 1 M€ saadaksesi 1 standardiresurssin TAI käytä 1 korruptio saadaksesi 3 samaa standardiresurssia.",
 "Requires 2 corruption.": "Vaatii 2 korruptiota.",
 
 "Guerilla Ecologists": "Sissiekologit",
@@ -238,7 +237,6 @@
 "Requires 3 oceans. Reduce your heat production 1 step. Increase your M€ production 3 steps. Gain 1 corruption.": "Vaatii 3 valtamerta. Vähennä lämpötuotantoasi 1 askel. Lisää M€-tuotantoasi 3 askelta. Saat 1 korruption.",
 
 "Public Spaceline": "Julkinen avaruuslinja",
-"Increase your M€ production 2 steps": "Lisää M€-tuotantoasi 2 askelta.",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Vaatii 5 avaruusympyrää. Tässä kortissa on 2 Maa-, 2 Jupiter-, 2 Venus- ja 2 Mars-ympyrää.",
 
 "Racketeering": "Kiristysbisnekset",
@@ -274,8 +272,7 @@
 "Requires 3 corruption.": "Vaatii 3 korruptiota.",
 
 "Space Wargames": "Avaruussotapelit",
-"Action: Spend 1 titanium to put 2 fighters on this card.": "TOIMINTO: Käytä 1 titaania asettaaksesi 2 hävittäjää tälle kortille.",
-"Action: Spend 6 fighter resource on this card to take first player next generation.": "TOIMINTO: Käytä 6 hävittäjäresurssia tältä kortilta tullaksesi ensimmäiseksi pelaajaksesi seuraavassa sukupolvessa.",
+"Action: Spend 1 titanium to put 2 fighters on this card, or spend 6 fighter resource on this card to take first player next generation.": "TOIMINTO: Käytä 1 titaania asettaaksesi 2 hävittäjää tälle kortille TAI käytä 6 hävittäjäresurssia tältä kortilta tullaksesi ensimmäiseksi pelaajaksesi seuraavassa sukupolvessa.",
 "Put 4 fighters on this card.": "Aseta 4 hävittäjää tälle kortille.",
 
 "Staged Protests": "Lavasterrokset",

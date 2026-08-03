@@ -24,6 +24,7 @@ export const HomeMixin = defineComponent({
   },
   computed: {
     // Consumers must define `game`.
+    // eslint-disable-next-line vue/return-in-computed-property
     game(): GameModel {
       throw new Error('HomeMixin consumers must override the `game` computed property.');
     },

@@ -28,4 +28,17 @@ describe('Route', () => {
     expect(res.statusCode).eq(statusCode.internalServerError);
     expect(res.content).eq('Internal server error: &lt;img src=x onerror=alert(1)&gt;');
   });
+
+  it('writeJson sets Content-Length to the byte length of the body', () => {
+    responses.writeJson(res, scaffolding.ctx, {foo: 'bar'});
+    expect(res.getHeader('Content-Length')).eq(Buffer.byteLength(res.content));
+  });
+
+  it('writeJson sets Content-Length by byte length, not string length', () => {
+    // A multi-byte character makes byte length diverge from string length,
+    // guarding against a regression back to using `s.length`.
+    responses.writeJson(res, scaffolding.ctx, {name: '🚀'});
+    expect(res.getHeader('Content-Length')).eq(Buffer.byteLength(res.content));
+    expect(res.getHeader('Content-Length')).not.eq(res.content.length);
+  });
 });

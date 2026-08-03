@@ -114,31 +114,31 @@ export default defineComponent({
       case RequirementType.RESOURCE_TYPES:
         return ['card-resource', 'card-resource-wild'];
       case RequirementType.GREENERIES:
-        return ['card-tile', 'greenery-tile--M', 'tile--req'];
+        return ['card-tile', 'greenery-tile', 'tile-size--req'];
       case RequirementType.CITIES:
-        return ['card-tile', 'city-tile--M', 'tile--req'];
+        return ['card-tile', 'city-tile', 'tile-size--req'];
       case RequirementType.COLONIES:
         return ['card-resource-colony', 'card-resource-colony--req'];
       case RequirementType.FLOATERS:
-        return ['card-resource-tag--S', 'card-tag-floater'];
+        return ['card-resource-tag--S', 'tag-floater'];
       case RequirementType.CHAIRMAN:
         return ['card-chairman--req'];
       case RequirementType.PARTY_LEADERS:
         return ['card-party-leader--req'];
       case RequirementType.TAG:
-        return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
+        return ['card-resource-tag--S', 'tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
-        return ['card-habitat-rate', 'card-habitat-rate--req'];
+        return ['card-habitat-rate', 'tile-size--req-square'];
       case RequirementType.MINING_RATE:
-        return ['card-mining-rate', 'card-mining-rate--req'];
+        return ['card-mining-rate', 'tile-size--req-square'];
       case RequirementType.LOGISTIC_RATE:
-        return ['card-logistic-rate', 'card-logistic-rate--req'];
+        return ['card-logistic-rate', 'tile-size--req-square'];
       case RequirementType.HABITAT_TILES:
-        return ['card-tile-lunar-habitat--S', 'tile--req'];
+        return ['card-tile-lunar-habitat', 'tile-size--req'];
       case RequirementType.MINING_TILES:
-        return ['card-tile-lunar-mine--S', 'tile--req'];
+        return ['card-tile-lunar-mine', 'tile-size--req'];
       case RequirementType.ROAD_TILES:
-        return ['card-tile-lunar-road--S', 'tile--req'];
+        return ['card-tile-lunar-road', 'tile-size--req'];
       case RequirementType.UNDERGROUND_TOKENS:
         return ['card-underground-resources'];
       case RequirementType.CORRUPTION:

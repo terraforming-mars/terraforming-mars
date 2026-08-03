@@ -37,6 +37,7 @@ export class CardRenderItem implements ICardRenderItem {
   public text?: string;
   public isUppercase?: true;
   public isBold?: true;
+  public inParens?: true;
   public isPlate?: boolean;
   public size?: Size;
   public secondaryTag?: Tag | AltSecondaryTag;

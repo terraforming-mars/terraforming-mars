@@ -6,8 +6,7 @@
     "Requires that you lose 1 floater. Steal 5 M€ from any player.": "1浮遊体を支払い、望むならプレイヤー1人から最大5MC盗む.",
 
     "Atmo Collectors": "大気収集施設",
-    "Action: Add one floater here.": "アクション：このカード上に1浮遊体追加.",
-    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "アクション：このカード上から1浮遊体除去し、2チタン または 3電力 または 4温熱を獲得.",
+    "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "アクション：このカード上に1浮遊体追加 または このカード上から1浮遊体除去し、2チタン または 3電力 または 4温熱を獲得.",
     "Add 2 floaters to ANY card.": "2浮遊体獲得.",
 
     "Community Services": "コミュニティサービス",
@@ -56,8 +55,7 @@
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "条件：木星タグ1つ以上. TR+1段階. 2浮遊体獲得.",
 
     "Jupiter Floating Station": "木星浮遊ステーション",
-    "Action: Add 1 floater to a JOVIAN CARD.": "アクション：木星タグカード上に1浮遊体追加.",
-    "Action: Gain 1 M€ for every floater here [MAX 4].": "このカード上の浮遊体毎に1MC獲得.(最大4MC)",
+    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "アクション：木星タグカード上に1浮遊体追加 または このカード上の浮遊体毎に1MC獲得.(最大4MC)",
     "Requires 3 science tags.": "条件：科学タグ3つ以上.",
     "[max 4]": "(最大4)",
 
@@ -135,16 +133,14 @@
     "Requires -6 C. Decrease any plant production 1 step.": "条件：温度-6℃以上. プレイヤー1人の植物産出-1.",
 
     "Titan Air-scrapping": "タイタン大気減圧",
-    "Action: Spend 1 titanium to add 2 floaters here.": "アクション：1チタンを支払い、このカード上に2浮遊体追加.",
-    "Action: Spend 2 floaters here to increase your TR 1 step.": "アクション：このカード上から2浮遊体除去し、TR+1段階.",
+    "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "アクション：1チタンを支払い、このカード上に2浮遊体追加 または このカード上から2浮遊体除去し、TR+1段階.",
 
     "Titan Floating Launch-pad": "タイタン浮遊発着便",
     "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "アクション：木星タグカード上に1浮遊体追加 または このカード上から1浮遊体除去し、交易コスト無料で交易.",
     "Add two floaters to ANY JOVIAN CARD.": "木星タグカード上に2浮遊体追加.",
 
     "Titan Shuttles": "タイタンシャトル",
-    "Action: Add 2 floaters to ANY JOVIAN CARD.": "アクション：木星タグカード上に2浮遊体追加.",
-    "Action: Spend any number of floaters here to gain the same number of titanium.": "アクション：このカード上からx浮遊体除去し、xチタン獲得.",
+    "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "アクション：木星タグカード上に2浮遊体追加 または このカード上からx浮遊体除去し、xチタン獲得.",
 
     "Trade Envoys": "交易大使",
 

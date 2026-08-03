@@ -126,11 +126,9 @@
 
     "Regolith Eaters": "风化层蚕食者",
     "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "行动： 增加1个媒生物资源到本卡，或移除本卡上的2个微生物资源来提升氧气1级。",
-    "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "移除本卡上的2个微生物资源来提升氧气1级",
 
     "GHG Producing Bacteria": "温室气体生产细菌",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "行动： 增加1个微生物资源到本卡，或移除本卡上的2个微生物来提升火星温度1级。",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)": "或移除本卡上的2个微生物来提升火星温度1级",
     "Requires 4% oxygen.": "需要4%氧气浓度。",
 
     "Ants": "蚂蚁",
@@ -245,7 +243,7 @@
 
     "Birds": "鸟",
     "Action: Add an animal to this card.": "行动： 增加一个动物资源到本卡。",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "需要至少13%氧气。降低任一玩家的植物产量2级。本卡上每有1个动物资源，获得1分。",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "需要至少13%氧气。降低任一玩家的植物产量2级。",
 
     "Mars University": "火星大学",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "效果： 当你打出一个科学标志,包括本牌,你可以从手牌中弃掉1张牌，然后抽1张牌。",
@@ -425,8 +423,7 @@
     "Requires -14 C° or warmer.": "需要火星温度至少-14度以上",
 
     "Extreme-Cold Fungus": "极寒真菌",
-    "(Action: Gain 1 plant.)": "行动： 获得1个植物资源",
-    "(Action: Add 2 microbes to ANOTHER card.)": "行动：放置2个微生物资源到其它的牌",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "行动： 获得1个植物资源，或放置2个微生物资源到其它的牌",
     "It must be -10 C or colder.": "火星温度必须不高于-10度。",
 
     "Advanced Ecosystems": "先进的生态系统",
@@ -491,7 +488,6 @@
 
     "Nitrite Reducing Bacteria": "亚硝酸盐还原菌",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "行动： 放置1个微生物资源到本牌，或移除3个微生物资源来提升你的改造度(TR) 1级。",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "移除3个微生物资源来提升你的改造度(TR) 1级",
     "Add 3 microbes to this card.": "放置3个微生物到本牌。",
 
     "Industrial Microbes": "工业微生物",
@@ -574,7 +570,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "（需求：氧气≥6％） 任一玩家植物产量-1 你的电力产量+2。",
 
     "Livestock": "畜牧",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "（需求：氧气≥9％ 植物产量+1 M€产量+2）",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "（需求：氧气≥9％ 植物产量+1 M€产量+2）",
     "1 VP for each animal on this card.": "此牌上一枚动物资源=1分。",
 
     "Olympus Conference": "奥林巴斯峰会",

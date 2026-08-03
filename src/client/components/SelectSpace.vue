@@ -1,19 +1,19 @@
 <template>
   <div class="select_space_cont">
-    <confirm-dialog
+    <ConfirmDialog
         message="Place your tile here?"
         :enableDontShowAgainCheckbox="true"
         ref="confirmation"
-        v-on:accept="confirmPlacement"
-        v-on:dismiss="cancelPlacement"
-        v-on:hide="hideDialog" />
+        @accept="confirmPlacement"
+        @dismiss="cancelPlacement"
+        @hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">
       {{ $t(playerinput.title) }}
-      <go-to-map :playerinput="playerinput"></go-to-map>
+      <GoToMap :playerinput="playerinput"/>
     </div>
     <div v-if="warning" class="nes-container is-rounded">
       <span class="nes-text is-warning" v-i18n>{{ warning }}</span>
-      <go-to-map :playerinput="playerinput"></go-to-map>
+      <GoToMap :playerinput="playerinput"/>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default defineComponent({
     };
   },
   components: {
-    'confirm-dialog': ConfirmDialog,
+    ConfirmDialog,
     GoToMap,
   },
   computed: {

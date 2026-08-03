@@ -8,9 +8,9 @@
       </div>
     </div>
 
-    <sidebar v-trim-whitespace
-      :acting_player="false"
-      :player_color="spectator.color"
+    <Sidebar v-trim-whitespace
+      :actingPlayer="false"
+      :playerColor="spectator.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
       :temperature = "game.temperature"
@@ -21,17 +21,15 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "spectator.players.length"
-      :isTerraformed="game.isTerraformed"
       :lastSoloGeneration = "game.lastSoloGeneration"
       :deckSize = "game.deckSize"
-      :discardPileSize = "game.discardPileSize">
-    </sidebar>
+      :discardPileSize = "game.discardPileSize"/>
 
     <div class="player_home_block nofloat">
-        <log-panel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"></log-panel>
+        <LogPanel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"/>
     </div>
 
-    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
     <GameBoardView
       :game="game"
@@ -42,24 +40,24 @@
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
-      <dynamic-title title="Colonies" :color="spectator.color"/>
+      <DynamicTitle title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
-        <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
-            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" v-bind:key="idx"></div>
+        <div class="colonies-player-fleets" v-for="player in spectator.players" :key="player.color">
+            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
         </div>
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-            <colony :colony="colony" :active="colony.isActive"></colony>
+            <Colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"></waiting-for>
+    <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
-    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"></KeyboardShortcuts>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
   </div>
 </template>
 
@@ -76,7 +74,6 @@ import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {range} from '@/common/utils/utils';
@@ -102,7 +99,6 @@ export default defineComponent({
     GameBoardView,
     KeyboardShortcuts,
     LogPanel,
-    PlanetaryTracks,
     PlayersOverview,
     PurgeWarning,
     Sidebar,

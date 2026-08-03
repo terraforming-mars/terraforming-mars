@@ -30,8 +30,7 @@ export class SinusIrdiumRoadNetwork extends Card {
           b.production((pb) => {
             pb.minus().energy(1).nbsp.plus().megacredits(3);
           }).br;
-          b.minus().steel(1).br;
-          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
+          b.minus().steel(1).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },
     });

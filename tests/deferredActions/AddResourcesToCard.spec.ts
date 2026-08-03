@@ -56,15 +56,12 @@ describe('AddResourcesToCard', () => {
     expect(ants.resourceCount).eq(0);
   });
 
-  it('many microbe cards', () => {
+  it('many microbe cards, 0 qty', () => {
     player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
-    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE).execute(), SelectCard);
+    cast(new AddResourcesToCard(player, CardResource.MICROBE, {count: 0}).execute(), undefined);
 
-    expect(selectCard.cards).has.length(3);
-    selectCard.cb([ghgProducingBacteria]);
-
-    expect(ghgProducingBacteria.resourceCount).eq(1);
+    expect(ghgProducingBacteria.resourceCount).eq(0);
     expect(tardigrades.resourceCount).eq(0);
     expect(ants.resourceCount).eq(0);
   });

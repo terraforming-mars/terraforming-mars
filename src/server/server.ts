@@ -1,12 +1,17 @@
+
 import '@/server/init';
 require('console-stamp')(
   console,
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
+import {markAsLiveServer} from '@/server/utils/server';
+// Must run first.
+markAsLiveServer();
 
 import https from 'https';
 import http from 'http';
 import fs from 'fs';
+import * as v8 from 'node:v8';
 import raw_settings from '../genfiles/settings.json';
 import prometheus from 'prom-client';
 import * as responses from './server/responses';
@@ -25,11 +30,9 @@ process.on('uncaughtException', (err: any) => {
 });
 
 function requestHandler(req: http.IncomingMessage, res: http.ServerResponse): void {
-  try {
-    processRequest(req, res);
-  } catch (error) {
+  processRequest(req, res).catch((error) => {
     responses.internalServerError(req, res, error);
-  }
+  });
 }
 
 const metrics = {
@@ -43,7 +46,25 @@ const metrics = {
     help: 'Time to initialize the database',
     registers: [prometheus.register],
   }),
-
+  // The V8 old-space ceiling. Compare against heap usage to see OOM headroom.
+  // Not included in prom-client's default metrics.
+  heapSizeLimit: new prometheus.Gauge({
+    name: 'nodejs_heap_size_limit_bytes',
+    help: 'V8 heap size limit in bytes',
+    registers: [prometheus.register],
+    collect() {
+      this.set(v8.getHeapStatistics().heap_size_limit);
+    },
+  }),
+  // A non-zero (and growing) value is a strong memory-leak signal.
+  detachedContexts: new prometheus.Gauge({
+    name: 'nodejs_detached_contexts',
+    help: 'Number of detached V8 contexts (a memory-leak signal)',
+    registers: [prometheus.register],
+    collect() {
+      this.set(v8.getHeapStatistics().number_of_detached_contexts);
+    },
+  }),
 };
 
 function createServer(): http.Server | https.Server {

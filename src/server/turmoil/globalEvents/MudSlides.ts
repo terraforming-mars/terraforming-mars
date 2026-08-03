@@ -9,10 +9,6 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(4).slash().oceans(1).emptyTile().influence({size: Size.SMALL});
-});
-
 export class MudSlides extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,7 +16,9 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 4 M€ for each tile adjacent to ocean (max 5, then reduced by influence).',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.GREENS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().megacredits(4).slash().oceans(1).emptyTile().influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

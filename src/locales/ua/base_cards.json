@@ -132,11 +132,9 @@
 
   "Regolith Eaters": "Реголітові їжаки",
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Дія: Додати 1 мікроб до цієї карти або видалити 2 мікроби з цієї карти, щоб підняти рівень кисню на 1.",
-  "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "Дія: Видалити 2 мікроби з цієї карти, щоб підняти рівень кисню на 1.",
 
   "GHG Producing Bacteria": "Бактерії, що виробляють парникові гази",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Дія: Додати 1 мікроб до цієї карти або видалити 2 мікроби, щоб підняти температуру на 1.",
-  "Action: Remove 2 microbes to raise temperature 1 step.": "Дія: Видалити 2 мікроби, щоб підняти температуру на 1.",
   "Requires 4% oxygen.": "Вимагає 4% або більше рівня кисню.",
 
   "Ants": "Мурахи",
@@ -252,7 +250,7 @@
 
   "Birds": "Птахи",
   "Action: Add an animal to this card.": "Дія: Додати 1 тварину до цієї карти.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Вимагає 13% кисню. Зменшити виробництво будь-яких рослин на 2. 1 ПО за кожну тварину на цій карті.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps.": "Вимагає 13% кисню. Зменшити виробництво будь-яких рослин на 2.",
 
   "Mars University": "Університет Марса",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Ефект: Коли ви граєте карту з міткою науки, включаючи цю, ви можете відкинути карту з руки, щоб взяти нову карту.",
@@ -435,8 +433,7 @@
   "Requires -14 C° or warmer.": "Вимагає температуру -14 °C або тепліше.",
 
   "Extreme-Cold Fungus": "Гриби екстремальних холодів",
-  "Action: Gain 1 plant.": "Дія: Отримати 1 рослину.",
-  "Action: Add 2 microbes to ANOTHER card.": "Дія: Додати 2 мікробів на ІНШУ карту.",
+  "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Дія: Отримати 1 рослину АБО додати 2 мікробів на ІНШУ карту.",
   "It must be -10 C or colder.": "Температура повинна бути -10 °C або холодніше.",
 
   "Advanced Ecosystems": "Розширені екосистеми",
@@ -502,7 +499,6 @@
 
   "Nitrite Reducing Bacteria": "Бактерії, що знижують нітрити",
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Дія: Додайте 1 мікроба на цю карту або видаліть 3 мікробів, щоб збільшити вашу оцінку терраформування на 1.",
-  "Action: Remove 3 microbes to increase your TR 1 step.": "Дія: Видаліть 3 мікробів, щоб збільшити вашу оцінку терраформування на 1.",
   "Add 3 microbes to this card.": "Додайте 3 мікроби на цю карту.",
   "Remove 3 microbes to increase your terraform rating 1 step": "Видаліть 3 мікробів, щоб збільшити вашу оцінку терраформування на 1",
 
@@ -590,7 +586,7 @@
   "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Вимагає 6% кисню. Зменшити будь-яке виробництво рослин на 1 одиницю і збільшити виробництво енергії на 2 одиниці.",
 
   "Livestock": "Сільськогосподарські тварини",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Вимагає 9% кисню. Зменшити виробництво рослин на 1 одиницю і збільшити виробництво M€ на 2 одиниці.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Вимагає 9% кисню. Зменшити виробництво рослин на 1 одиницю і збільшити виробництво M€ на 2 одиниці.",
 
   "Olympus Conference": "Олімпійська конференція",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Коли ви граєте карточку з міткою науки, включаючи цю, додайте науковий ресурс на цю карту або видаліть науковий ресурс з цієї карти, щоб взяти карту.",

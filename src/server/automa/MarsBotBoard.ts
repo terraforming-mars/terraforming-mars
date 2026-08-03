@@ -2,7 +2,6 @@ import {Tag} from '../../common/cards/Tag';
 import {
   TrackAction,
   TrackDefinition,
-  MARSBOT_MAX_TRACK_POSITION,
 } from '../../common/automa/AutomaTypes';
 
 /** Result of advancing a track. */
@@ -20,7 +19,7 @@ export class MarsBotTrack {
   constructor(public readonly definition: TrackDefinition) {}
 
   public canAdvance(): boolean {
-    return this.position < MARSBOT_MAX_TRACK_POSITION;
+    return this.position < this.definition.layout.length - 1;
   }
 
   /** Advance the track by 1. */

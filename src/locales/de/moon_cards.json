@@ -26,7 +26,8 @@
   "Ancient Shipyards": "Antike Schiffswerften",
   "Ancient Shipyards (Nerfed)": "Antike Schiffswerften (Nerfed)",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "AKTION: Klaue 2 M€ von jedem Spieler und füge dieser Karte einen Rohstoffwürfel hinzu.",
-  "Spend 3 titanium. -1 VP for every resource here.": "Bezahle 3 Titan. -1 SP je Rohstoffwürfel auf dieser Karte. ",
+  "Spend 3 titanium.": "Bezahle 3 Titan.",
+  "-1 VP for every resource here.": "-1 SP je Rohstoffwürfel auf dieser Karte.",
 
   "Archimedes Hydroponics Station": "Archimedische Hydroponik-Station",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Reduziere deine Energie-Produktion und deine M€-Produktion um 1. Erhöhe deine Pflanzenproduktion um 2.",
@@ -49,8 +50,7 @@
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Benötigt Minenwertung von 4. Alle Spieler zahlen 4 M€ für jedes Minenplättchen, das sie besitzen.",
 
   "Darkside Incubation Plant": "Darkside-Inkubationsanlage",
-  "Action: Add 1 microbe here.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
-  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "AKTION: Entferne 2 Mikroben von dieser Karte, um die Habitatwertung um 1 zu erhöhen.",
+  "Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu, oder entferne 2 Mikroben von dieser Karte, um die Habitatwertung um 1 zu erhöhen.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Bezahle 1 Titan. 1 SP je 2 Mikroben auf dieser Karte. ",
 
   "Darkside Meteor Bombardment": "Darkside-Meteoritenbombardement",
@@ -60,7 +60,7 @@
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Erhöhe deine Titan-Produktion um 2 oder um 1, wenn die Minenwertung mindestens 2 oder mehr beträgt; und erhöhe dann die Minenwertung um 1.",
 
   "Darkside Observatory": "Darkside-Observatorium",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "AKTION: Füge einer beliebigen Karte 1 Wissenschaft hinzu, [außer denen, die 2 oder mehr SP je Wissenschaft geben].",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.], or add 2 data to ANY card.": "AKTION: Füge einer beliebigen Karte 1 Wissenschaft hinzu, [außer denen, die 2 oder mehr SP je Wissenschaft geben], oder füge zu einer beliebigen Karte 2 Daten hinzu.",
   "Action: Add 2 data to ANY card.": "AKTION: Füge zu einer beliebigen Karte 2 Daten hinzu.",
 
   "Darkside Smugglers' Union": "Darkside-Schmugglervereinigung",
@@ -256,8 +256,7 @@
 
   "Steel Market Monopolists": "Stahlmarkt-Monopolisten",
   "Requires the mining rate to be 3 or higher.": "Benötigt eine Minienwertung von 3 oder höher.",
-  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "AKTION: Bezahle 3X M€, um 2X Stahl zu erhalten (max. 9 M€)",
-  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "AKTION: Bezahle X Stahl, um 3X M€ zu erhalten (max. 3 Stahl).",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€), or spend X steel to gain 3X M€ (max 3 steel).": "AKTION: Bezahle 3X M€, um 2X Stahl zu erhalten (max. 9 M€), oder bezahle X Stahl, um 3X M€ zu erhalten (max. 3 Stahl).",
 
   "Subterranean Habitats": "Unterirdische Habitate",
   "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "EFFEKT: Wenn du ein Habitatplättchen auf DEM MOND platzierst, bezahlst du 1 Titan weniger.",
@@ -275,8 +274,7 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Bezahle 2 Titan. Erhöhe deine Titan-Produktion um 1 je 2 erhöhte Minenwertung.",
 
   "Titanium Market Monopolists": "Titanmarkt-Monopolisten",
-  "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "AKTION: Bezahle 2X M€, um X Titan zu erhalten [max. 8 M€]",
-  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "AKTION: Bezahle X Titan, um 4X M€ zu erhalten [max. 4 Titan].",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€], or spend X titanium to gain 4X M€ [max 4 titanium].": "AKTION: Bezahle 2X M€, um X Titan zu erhalten [max. 8 M€], oder bezahle X Titan, um 4X M€ zu erhalten [max. 4 Titan].",
 
   "Tycho Road Network": "Tycho-Straßennetz",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the logistic rate 1 step.": "Bezahle 1 Stahl. Erhöhe deine M€-Produktion um 1. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",

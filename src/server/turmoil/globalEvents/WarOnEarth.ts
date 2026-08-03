@@ -7,10 +7,6 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().text('4').tr(1).influence({size: Size.SMALL});
-});
-
 export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -18,7 +14,9 @@ export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
       description: 'Reduce TR 4 steps. Each influence prevents 1 step.',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.KELVINISTS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().text('4').tr(1).influence({size: Size.SMALL});
+      }),
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {

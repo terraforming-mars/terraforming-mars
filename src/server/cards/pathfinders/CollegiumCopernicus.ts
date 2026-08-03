@@ -12,6 +12,7 @@ import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {message} from '../../logs/MessageBuilder';
+import {digit} from '../Options';
 
 function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
@@ -38,9 +39,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
           b.effect('When you play a card with a science tag (including this) Add 1 data to ANY card.', (eb) => {
             eb.tag(Tag.SCIENCE).asterix().startEffect.resource(CardResource.DATA).asterix();
           }).br;
-          b.action('Spend 3 data from this card to trade.', (eb) => {
-            eb.resource(CardResource.DATA, 3).startAction.trade();
-          });
+          b.resource(CardResource.DATA, {amount: 3, digit}).arrow().trade().plainText('Action: Spend 3 data from this card to trade.', true);
         }),
       },
     });

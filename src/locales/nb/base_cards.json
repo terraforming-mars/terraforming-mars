@@ -132,12 +132,10 @@
 	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-brikke. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
 
 	"Regolith Eaters": "Regolitt-spisere",
-	"Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
-	"Remove 2 microbes from this card to raise oxygen level 1 step.": "Fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
+	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
 
 	"GHG Producing Bacteria": "CO₂ produserende bakterier",
-	"Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober for å øke temperaturen 1 steg.",
-	"Remove 2 microbes to raise temperature 1 step.": "Fjern 2 mikrober for å øke temperaturen 1 steg.",
+	"Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 2 mikrober for å øke temperaturen 1 steg.",
 	"Requires 4% oxygen.": "Krever 4% oksygen.",
 
 	"Ants": "Maur",
@@ -254,7 +252,7 @@
 
 	"Birds": "Fugler",
 	"Add an animal to this card.": "Legg til et dyr på dette kortet.",
-	"Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Krever 13% oksygen. Senk en valgfri spillers planteproduksjon med 2 trinn. 1 SP per dyr på dette kortet.",
+	"Requires 13% oxygen. Decrease any plant production 2 steps.": "Krever 13% oksygen. Senk en valgfri spillers planteproduksjon med 2 trinn.",
 
 	"Mars University": "Mars-universitet",
 	"Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Effekt: Når du spiller et vitenskapssymbol, inkludert dette, kan du kaste et kort fra hånden for å trekke et kort.",
@@ -438,8 +436,7 @@
 	"Requires -14 C° or warmer.": "Krever -14 °C eller varmere.",
 
 	"Extreme-Cold Fungus": "Frosttolerante sopper",
-	"Gain 1 plant.": "Få 1 plante.",
-	"Add 2 microbes to ANOTHER card.": "Legg til 2 mikrober på ET ANNET kort.",
+	"Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Få 1 plante ELLER legg til 2 mikrober på ET ANNET kort.",
 	"It must be -10 C or colder.": "Temperaturen må være -10 °C eller kaldere.",
 
 	"Advanced Ecosystems": "Avanserte økosystemer",
@@ -507,8 +504,7 @@
 	"Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Effekt: Etter at du har betalt for et standardprosjekt, unntatt salg av patenter, får du 3 M€.",
 
 	"Nitrite Reducing Bacteria": "Nitritt-reduserende bakterier",
-	"Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
-	"Remove 3 microbes to increase your TR 1 step.": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
+	"Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Legg til 1 mikrobe på dette kortet ELLER fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
 	"Add 3 microbes to this card.": "Legg til 3 mikrober på dette kortet.",
 	"Remove 3 microbes to increase your terraform rating 1 step": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn",
 
@@ -598,7 +594,7 @@
 	"Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Krever 6% oksygen. Senk en valgfri spillers planteproduksjon med 1 trinn og øk din energiproduksjon med 2 trinn.",
 
 	"Livestock": "Husdyr",
-	"Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Krever 9% oksygen. Senk din planteproduksjon med 1 trinn og øk din M€-produksjon med 2 trinn.",
+	"Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Krever 9% oksygen. Senk din planteproduksjon med 1 trinn og øk din M€-produksjon med 2 trinn.",
 
 	"Olympus Conference": "Olympus-konferanse",
 	"When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Når du spiller et vitenskapssymbol, inkludert dette, legg til en vitenskapsressurs på dette kortet, eller fjern en vitenskapsressurs fra dette kortet for å trekke et kort.",

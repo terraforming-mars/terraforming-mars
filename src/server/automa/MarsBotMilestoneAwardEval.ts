@@ -1,214 +1,193 @@
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
+import {CardType} from '../../common/cards/CardType';
+import {GlobalParameter} from '../../common/GlobalParameter';
+import {IProjectCard} from '../cards/IProjectCard';
+import {Board} from '../boards/Board';
+import {IMarsBot} from './MarsBotCorpTypes';
+
+/** Venus Next adds its track after the seven Mars tracks. */
+const VENUS_TRACK = 7;
+
+function trackPos(bot: IMarsBot, index: number): number {
+  return bot.board.tracks[index]?.position ?? 0;
+}
+
+/** Every track position, including the Venus track when that expansion is in play. */
+function trackPositions(bot: IMarsBot): Array<number> {
+  return bot.board.tracks.map((track) => track.position);
+}
+
+/** The seven Mars tracks, leaving the Venus track out. */
+function marsTrackPositions(bot: IMarsBot): Array<number> {
+  return trackPositions(bot).slice(0, VENUS_TRACK);
+}
+
+function hasVenus(bot: IMarsBot): boolean {
+  return bot.game.gameOptions.venusNextExtension;
+}
+
+function venusTrackPos(bot: IMarsBot): number {
+  return bot.board.tracks.length > VENUS_TRACK ? bot.board.tracks[VENUS_TRACK].position : 0;
+}
+
+function allMarsTracksAtOrAbove(bot: IMarsBot, pos: number): boolean {
+  return marsTrackPositions(bot).every((position) => position >= pos);
+}
+
+function anyTrackAtOrAbove(bot: IMarsBot, pos: number): boolean {
+  return marsTrackPositions(bot).some((position) => position >= pos) ||
+    (hasVenus(bot) && venusTrackPos(bot) >= pos);
+}
+
+function tracksAtOrAbove(bot: IMarsBot, pos: number): number {
+  return trackPositions(bot).filter((position) => position >= pos).length;
+}
+
+function topThreeTracksSum(bot: IMarsBot): number {
+  const [first, second, third] = marsTrackPositions(bot).sort((a, b) => b - a);
+  return first + second + third;
+}
+
+function ownedTiles(bot: IMarsBot) {
+  return bot.game.board.spaces.filter(Board.ownedBy(bot.player));
+}
+
+function tilesAdjacentToOcean(bot: IMarsBot): number {
+  return ownedTiles(bot).filter((space) =>
+    bot.game.board.getAdjacentSpaces(space).some(Board.isOceanSpace)).length;
+}
+
+function playedCards(bot: IMarsBot, include: (card: IProjectCard) => boolean): number {
+  return bot.playedProjectCards.filter(include).length;
+}
+
+const isEvent = (card: IProjectCard) => card.type === CardType.EVENT;
+const isGreenOrBlue = (card: IProjectCard) => !isEvent(card);
+const isGreen = (card: IProjectCard) => card.type !== CardType.EVENT && card.type !== CardType.ACTIVE;
 
 /**
- * Context provided to milestone/award evaluation functions for MarsBot.
+ * How MarsBot claims a milestone. True when it qualifies, false when it does not, and
+ * undefined for the milestones it reads off the board like any other player.
  */
-export type MarsBotMAContext = {
-  trackPos: (trackIndex: number) => number;
-  allTrackPositions: () => ReadonlyArray<number>;
-  tr: number;
-  mc: number;
-  cityCount: number;
-  greeneryCount: number;
-  oceanCount: number;
-  tilesOwned: number;
-  tilesAdjacentToOcean: number;
-  tilesOnEdge: number;
-  tilesNotAdjacentToOcean: number;
-  playedCards: {
-    total: number;
-    green: number;
-    blue: number;
-    red: number;
-    greenOrBlue: number;
-    withoutTags: number;
-    costing20Plus: number;
-    costing10OrLess: number;
-    withNonNegativeVP: number;
-    withRequirements: number;
-  };
-  destroyedBonusCards: number;
-  temperatureRaises: number;
-  highestTrackPos: number;
-  lowestTrackPos: number;
-  tracksAtOrAbove: (pos: number) => number;
-  largestConnectedTileGroup: number;
-  specialTilesOwned: number;
-  hasVenus: boolean;
-  venusTrackPos: number;
-  floaterCount: number;
-}
-
-function allTracksAtOrAbove(ctx: MarsBotMAContext, pos: number, includeVenus: boolean): boolean {
-  for (let t = 0; t < 7; t++) {
-    if (ctx.trackPos(t) < pos) {
-      return false;
-    }
-  }
-  if (includeVenus && ctx.hasVenus && ctx.venusTrackPos < pos) {
-    return false;
-  }
-  return true;
-}
-
-function tracksAtOrAboveCount(ctx: MarsBotMAContext, pos: number): number {
-  let count = 0;
-  for (let t = 0; t < 7; t++) {
-    if (ctx.trackPos(t) >= pos) {
-      count++;
-    }
-  }
-  if (ctx.hasVenus && ctx.venusTrackPos >= pos) {
-    count++;
-  }
-  return count;
-}
-
-function anyTrackAtOrAbove(ctx: MarsBotMAContext, pos: number): boolean {
-  for (let t = 0; t < 7; t++) {
-    if (ctx.trackPos(t) >= pos) {
-      return true;
-    }
-  }
-  if (ctx.hasVenus && ctx.venusTrackPos >= pos) {
-    return true;
-  }
-  return false;
-}
-
-function topThreeTracksSum(ctx: MarsBotMAContext): number {
-  const positions: Array<number> = [];
-  for (let t = 0; t < 7; t++) {
-    positions.push(ctx.trackPos(t));
-  }
-  positions.sort((a, b) => b - a);
-  return positions[0] + positions[1] + positions[2];
-}
-
-/**
- * Milestone evaluation functions for MarsBot.
- * Returns true if MarsBot qualifies, false if not, undefined for fallback to default game evaluation.
- */
-type MilestoneEval = (ctx: MarsBotMAContext) => boolean | undefined;
+type MilestoneEval = (bot: IMarsBot) => boolean | undefined;
 export const MILESTONE_EVALS = new Map<MilestoneName, MilestoneEval>([
   // Tharsis
-  ['Terraformer', (ctx: MarsBotMAContext) => ctx.tr >= 35],
-  ['Mayor', (ctx: MarsBotMAContext) => ctx.cityCount >= 3],
-  ['Gardener', (ctx: MarsBotMAContext) => ctx.greeneryCount >= 3],
-  ['Builder', (ctx: MarsBotMAContext) => ctx.trackPos(0) >= 8],
-  ['Planner', (ctx: MarsBotMAContext) => allTracksAtOrAbove(ctx, 4, false)],
+  ['Terraformer', (bot) => bot.player.terraformRating >= 35],
+  ['Mayor', (bot) => bot.game.board.getCities(bot.player).length >= 3],
+  ['Gardener', (bot) => bot.game.board.getGreeneries(bot.player).length >= 3],
+  ['Builder', (bot) => trackPos(bot, 0) >= 8],
+  ['Planner', (bot) => allMarsTracksAtOrAbove(bot, 4)],
   // Hellas
-  ['Diversifier', (ctx: MarsBotMAContext) => {
-    if (!ctx.hasVenus) {
-      return allTracksAtOrAbove(ctx, 3, false);
+  ['Diversifier', (bot) => {
+    if (!hasVenus(bot)) {
+      return allMarsTracksAtOrAbove(bot, 3);
     }
-    // With Venus: 7 of 8 tracks at 3+ (Venus can substitute one other track)
-    return tracksAtOrAboveCount(ctx, 3) >= 7;
+    // With Venus the Venus track can stand in for one Mars track, so 7 of 8 is enough
+    return tracksAtOrAbove(bot, 3) >= 7;
   }],
-  ['Tactician', (ctx: MarsBotMAContext) => ctx.mc >= 35],
+  ['Tactician', (bot) => bot.mcSupply >= 35],
   ['Polar Explorer', () => undefined],
-  ['Energizer', (ctx: MarsBotMAContext) => ctx.trackPos(4) >= 6],
-  ['Rim Settler', (ctx: MarsBotMAContext) => ctx.trackPos(1) >= 6 && ctx.trackPos(3) >= 6],
+  ['Energizer', (bot) => trackPos(bot, 4) >= 6],
+  ['Rim Settler', (bot) => trackPos(bot, 1) >= 6 && trackPos(bot, 3) >= 6],
   // Elysium
-  ['Generalist', (ctx: MarsBotMAContext) => allTracksAtOrAbove(ctx, 2, false)],
-  ['Specialist', (ctx: MarsBotMAContext) => anyTrackAtOrAbove(ctx, 10)],
-  ['Ecologist', (ctx: MarsBotMAContext) => ctx.trackPos(6) >= 4],
-  ['Tycoon', (ctx: MarsBotMAContext) => ctx.playedCards.greenOrBlue >= 15],
-  ['Legend', (ctx: MarsBotMAContext) => ctx.playedCards.red >= 5],
+  ['Generalist', (bot) => allMarsTracksAtOrAbove(bot, 2)],
+  ['Specialist', (bot) => anyTrackAtOrAbove(bot, 10)],
+  ['Ecologist', (bot) => trackPos(bot, 6) >= 4],
+  ['Tycoon', (bot) => playedCards(bot, isGreenOrBlue) >= 15],
+  ['Legend', (bot) => playedCards(bot, isEvent) >= 5],
   // Terra Cimmeria Nova
-  ['Architect', (ctx: MarsBotMAContext) => ctx.trackPos(3) >= 6],
-  ['Coastguard', (ctx: MarsBotMAContext) => ctx.tilesAdjacentToOcean >= 4],
-  ['C. Forester', (ctx: MarsBotMAContext) => ctx.trackPos(6) >= 10],
+  ['Architect', (bot) => trackPos(bot, 3) >= 6],
+  ['Coastguard', (bot) => tilesAdjacentToOcean(bot) >= 4],
+  ['C. Forester', (bot) => trackPos(bot, 6) >= 10],
   // Vastitas Borealis Nova
-  ['Agronomist', (ctx: MarsBotMAContext) => ctx.trackPos(6) >= 4 && ctx.trackPos(3) >= 4],
-  ['Engineer', (ctx: MarsBotMAContext) => ctx.trackPos(4) + ctx.trackPos(3) >= 10],
-  ['V. Spacefarer', (ctx: MarsBotMAContext) => ctx.trackPos(1) >= 5],
+  ['Agronomist', (bot) => trackPos(bot, 6) >= 4 && trackPos(bot, 3) >= 4],
+  ['Engineer', (bot) => trackPos(bot, 4) + trackPos(bot, 3) >= 10],
+  ['V. Spacefarer', (bot) => trackPos(bot, 1) >= 5],
   ['Geologist', () => undefined],
-  ['Farmer', (ctx: MarsBotMAContext) => (ctx.trackPos(3) >= 6 && ctx.trackPos(2) >= 6) || (ctx.trackPos(6) >= 6 && ctx.trackPos(3) >= 6)],
+  ['Farmer', (bot) => (trackPos(bot, 3) >= 6 && trackPos(bot, 2) >= 6) || (trackPos(bot, 6) >= 6 && trackPos(bot, 3) >= 6)],
   // Modular
-  ['Briber', (ctx: MarsBotMAContext) => ctx.mc >= 20],
-  ['Builder7', (ctx: MarsBotMAContext) => ctx.trackPos(0) >= 7],
-  ['Forester', (ctx: MarsBotMAContext) => ctx.trackPos(6) >= 6],
-  ['Fundraiser', (ctx: MarsBotMAContext) => ctx.trackPos(4) >= 8],
-  ['Hydrologist', (ctx: MarsBotMAContext) => ctx.oceanCount >= 4],
-  ['Landshaper', (ctx: MarsBotMAContext) => ctx.cityCount >= 1 && ctx.greeneryCount >= 1 && ctx.trackPos(0) >= 5],
-  ['Legend4', (ctx: MarsBotMAContext) => ctx.playedCards.red >= 4],
+  ['Briber', (bot) => bot.mcSupply >= 20],
+  ['Builder7', (bot) => trackPos(bot, 0) >= 7],
+  ['Forester', (bot) => trackPos(bot, 6) >= 6],
+  ['Fundraiser', (bot) => trackPos(bot, 4) >= 8],
+  // Ocean tiles have no owner, so this counts the ocean steps MarsBot paid for, as the real milestone does
+  ['Hydrologist', (bot) => bot.player.globalParameterSteps[GlobalParameter.OCEANS] >= 4],
+  ['Landshaper', (bot) => bot.game.board.getCities(bot.player).length >= 1 &&
+    bot.game.board.getGreeneries(bot.player).length >= 1 && trackPos(bot, 0) >= 5],
+  ['Legend4', (bot) => playedCards(bot, isEvent) >= 4],
   ['Lobbyist', () => false],
-  ['Merchant', (ctx: MarsBotMAContext) => allTracksAtOrAbove(ctx, 2, false)],
-  ['Metallurgist', (ctx: MarsBotMAContext) => ctx.trackPos(0) + ctx.trackPos(1) >= 9],
-  ['Philantropist', (ctx: MarsBotMAContext) => ctx.playedCards.withNonNegativeVP >= 5],
+  ['Merchant', (bot) => allMarsTracksAtOrAbove(bot, 2)],
+  ['Metallurgist', (bot) => trackPos(bot, 0) + trackPos(bot, 1) >= 9],
+  ['Philantropist', (bot) => playedCards(bot, (card) => card.getVictoryPoints(bot.player) >= 0) >= 5],
   ['Pioneer4', () => undefined],
   ['Planetologist', () => false],
-  ['Producer', (ctx: MarsBotMAContext) => topThreeTracksSum(ctx) >= 16],
-  ['Researcher', (ctx: MarsBotMAContext) => ctx.trackPos(3) >= 4],
-  ['Spacefarer4', (ctx: MarsBotMAContext) => ctx.trackPos(1) >= 4],
-  ['Sponsor', (ctx: MarsBotMAContext) => ctx.playedCards.costing20Plus >= 3],
-  ['Tactician4', (ctx: MarsBotMAContext) => ctx.mc >= 30],
+  ['Producer', (bot) => topThreeTracksSum(bot) >= 16],
+  ['Researcher', (bot) => trackPos(bot, 3) >= 4],
+  ['Spacefarer4', (bot) => trackPos(bot, 1) >= 4],
+  ['Sponsor', (bot) => playedCards(bot, (card) => card.cost >= 20) >= 3],
+  ['Tactician4', (bot) => bot.mcSupply >= 30],
   ['Terraformer29', () => false],
-  ['Terran5', (ctx: MarsBotMAContext) => ctx.trackPos(5) >= 5],
-  ['Thawer', (ctx: MarsBotMAContext) => ctx.temperatureRaises >= 5],
-  ['Hoverlord', (ctx: MarsBotMAContext) => ctx.floaterCount >= 7],
+  ['Terran5', (bot) => trackPos(bot, 5) >= 5],
+  ['Thawer', (bot) => bot.temperatureRaises >= 5],
+  ['Hoverlord', (bot) => bot.floaterCount >= 7],
   ['Trader', () => false],
-  ['Tycoon10', (ctx: MarsBotMAContext) => ctx.playedCards.greenOrBlue >= 10],
+  ['Tycoon10', (bot) => playedCards(bot, isGreenOrBlue) >= 10],
 ]);
 
 /**
- * Award evaluation functions for MarsBot.
- * Returns the numeric score, or undefined for fallback to default game evaluation.
+ * How MarsBot scores an award, or undefined for the awards it scores off the board like
+ * any other player.
  */
-type AwardEval = (ctx: MarsBotMAContext) => number | undefined;
+type AwardEval = (bot: IMarsBot) => number | undefined;
 export const AWARD_EVALS = new Map<AwardName, AwardEval>([
   // Tharsis
-  ['Landlord', (ctx: MarsBotMAContext) => ctx.tilesOwned],
-  ['Banker', (ctx: MarsBotMAContext) => ctx.trackPos(0) + ctx.trackPos(2)],
-  ['Scientist', (ctx: MarsBotMAContext) => ctx.trackPos(3)],
-  ['Thermalist', (ctx: MarsBotMAContext) => ctx.trackPos(4) + 5],
-  ['Miner', (ctx: MarsBotMAContext) => ctx.trackPos(1) + 5],
+  ['Landlord', (bot) => ownedTiles(bot).length],
+  ['Banker', (bot) => trackPos(bot, 0) + trackPos(bot, 2)],
+  ['Scientist', (bot) => trackPos(bot, 3)],
+  ['Thermalist', (bot) => trackPos(bot, 4) + 5],
+  ['Miner', (bot) => trackPos(bot, 1) + 5],
   // Hellas
   ['Cultivator', () => undefined],
-  ['Magnate', (ctx: MarsBotMAContext) => ctx.playedCards.green],
-  ['Space Baron', (ctx: MarsBotMAContext) => ctx.trackPos(1)],
-  ['Excentric', (ctx: MarsBotMAContext) => Math.floor(ctx.mc / 5)],
-  ['Contractor', (ctx: MarsBotMAContext) => ctx.trackPos(0)],
+  ['Magnate', (bot) => playedCards(bot, isGreen)],
+  ['Space Baron', (bot) => trackPos(bot, 1)],
+  ['Excentric', (bot) => Math.floor(bot.mcSupply / 5)],
+  ['Contractor', (bot) => trackPos(bot, 0)],
   // Elysium
-  ['Celebrity', (ctx: MarsBotMAContext) => ctx.playedCards.costing20Plus],
-  ['Industrialist', (ctx: MarsBotMAContext) => ctx.trackPos(4) + 5],
+  ['Celebrity', (bot) => playedCards(bot, (card) => card.cost >= 20)],
+  ['Industrialist', (bot) => trackPos(bot, 4) + 5],
   ['Desert Settler', () => undefined],
   ['Estate Dealer', () => undefined],
-  ['Benefactor', (ctx: MarsBotMAContext) => Math.max(0, ctx.tr - 15)],
+  ['Benefactor', (bot) => Math.max(0, bot.player.terraformRating - 15)],
   // Terra Cimmeria
-  ['Electrician', (ctx: MarsBotMAContext) => ctx.trackPos(4)],
+  ['Electrician', (bot) => trackPos(bot, 4)],
   ['Founder', () => undefined],
-  ['Mogul', (ctx: MarsBotMAContext) => ctx.highestTrackPos * 2],
-  ['Zoologist', (ctx: MarsBotMAContext) => ctx.trackPos(6) + 5],
-  ['Forecaster', (ctx: MarsBotMAContext) => Math.floor(ctx.mc / 7)],
+  ['Mogul', (bot) => Math.max(...trackPositions(bot)) * 2],
+  ['Zoologist', (bot) => trackPos(bot, 6) + 5],
+  ['Forecaster', (bot) => Math.floor(bot.mcSupply / 7)],
   // Utopia Planitia
   ['Suburbian', () => undefined],
-  ['Investor', (ctx: MarsBotMAContext) => ctx.trackPos(0) + ctx.trackPos(3)],
-  ['Botanist', (ctx: MarsBotMAContext) => Math.max(0, ctx.trackPos(6) - 2)],
-  ['Incorporator', (ctx: MarsBotMAContext) => ctx.playedCards.costing10OrLess],
+  ['Investor', (bot) => trackPos(bot, 0) + trackPos(bot, 3)],
+  ['Botanist', (bot) => Math.max(0, trackPos(bot, 6) - 2)],
+  ['Incorporator', (bot) => playedCards(bot, (card) => card.cost <= 10)],
   ['Metropolist', () => undefined],
   // Vastitas Borealis Nova
-  ['Traveller', (ctx: MarsBotMAContext) => ctx.trackPos(0) + ctx.trackPos(3) + 5],
+  ['Traveller', (bot) => trackPos(bot, 0) + trackPos(bot, 3) + 5],
   ['Landscaper', () => undefined],
   ['Highlander', () => undefined],
-  ['Manufacturer', (ctx: MarsBotMAContext) => ctx.trackPos(0) + ctx.trackPos(4)],
-  ['Blacksmith', (ctx: MarsBotMAContext) => Math.max(ctx.trackPos(0), ctx.trackPos(1))],
+  ['Manufacturer', (bot) => trackPos(bot, 0) + trackPos(bot, 4)],
+  ['Blacksmith', (bot) => Math.max(trackPos(bot, 0), trackPos(bot, 1))],
   // Modular
-  ['Administrator', (ctx: MarsBotMAContext) => ctx.playedCards.withoutTags + 2],
-  ['Collector', (ctx: MarsBotMAContext) => ctx.tracksAtOrAbove(3)],
+  ['Administrator', (bot) => playedCards(bot, (card) => card.tags.length === 0) + 2],
+  ['Collector', (bot) => tracksAtOrAbove(bot, 3)],
   ['Constructor', () => undefined],
   ['Politician', () => 5],
-  ['Visionary', (ctx: MarsBotMAContext) => {
-    if (!ctx.hasVenus) {
-      return ctx.lowestTrackPos * 2;
-    }
-    // With Venus: 2nd lowest track position doubled
-    const all = [...ctx.allTrackPositions(), ctx.venusTrackPos].sort((a, b) => a - b);
-    return all[1] * 2;
+  ['Visionary', (bot) => {
+    const positions = trackPositions(bot).sort((a, b) => a - b);
+    // Venus in play means the second lowest counts instead of the lowest
+    return (hasVenus(bot) ? positions[1] : positions[0]) * 2;
   }],
-  ['Promoter', (ctx: MarsBotMAContext) => ctx.trackPos(4)],
+  ['Promoter', (bot) => trackPos(bot, 4)],
   // Venus Next
-  ['Venuphile', (ctx: MarsBotMAContext) => ctx.venusTrackPos],
+  ['Venuphile', (bot) => venusTrackPos(bot)],
 ]);

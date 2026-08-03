@@ -1,149 +1,110 @@
 import {IProjectCard} from '../../cards/IProjectCard';
 import {MarsBotDraftPriority} from '../MarsBotCorpTypes';
 import {Tag} from '../../../common/cards/Tag';
-import {Random} from '../../../common/utils/Random';
 import {MarsBotBoard} from '../MarsBotBoard';
-import {inplaceShuffle} from '../../utils/shuffle';
 
-/**
- * Pick the item with the highest score, breaking ties randomly.
- * If all scores are 0, returns undefined (caller handles fallback).
- */
-function pickBest<T>(items: T[], scorer: (t: T) => number, rng: Random): T | undefined {
-  let bestScore = -1;
-  const bestItems: T[] = [];
-  for (const item of items) {
-    const score = scorer(item);
-    if (score > bestScore) {
-      bestScore = score;
-      bestItems.length = 0;
-      bestItems.push(item);
-    } else if (score === bestScore) {
-      bestItems.push(item);
-    }
-  }
-  if (bestScore <= 0) {
-    return undefined;
-  }
-  return bestItems[rng.nextInt(bestItems.length)];
-}
+/** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
+export type Shuffler = <T>(items: Array<T>) => void;
 
-/**
- * Handles MarsBot draft card selection and post-draft discard based on corp draft priority.
- */
+/** Chooses MarsBot's draft card and its post-draft discard from the corp's draft priority. */
 export class MarsBotDraftResolver {
-  /**
-   * Pick the best card for MarsBot from a hand based on the draft priority.
-   */
-  public static pickCardForMarsBot(
-    hand: IProjectCard[],
-    priority: MarsBotDraftPriority,
-    rng: Random,
-    board?: MarsBotBoard,
-  ): IProjectCard {
+  constructor(
+    private readonly tracks: MarsBotBoard,
+    private readonly shuffle: Shuffler,
+  ) {}
+
+  /** The card MarsBot takes from `hand`. */
+  public pickCard(hand: Array<IProjectCard>, priority: MarsBotDraftPriority): IProjectCard {
     if (hand.length === 0) {
-      throw new Error('Cannot pick from empty hand');
-    }
-    if (hand.length === 1) {
-      return hand[0];
+      throw new Error('Cannot pick from an empty hand');
     }
 
     switch (priority.type) {
     case 'tags':
-      return MarsBotDraftResolver.pickByTags(hand, priority.tags, rng);
+      return this.pickByTags(hand, priority.tags);
     case 'mostExpensive':
-      return pickBest(hand, (c) => c.cost, rng) ?? hand[rng.nextInt(hand.length)];
+      return this.pickBest(hand, (card) => card.cost);
     case 'leastAdvancedTrack':
-      return MarsBotDraftResolver.pickByLeastAdvancedTrack(hand, rng, board);
+      return this.pickByLeastAdvancedTrack(hand);
     case 'mostTags':
-      return pickBest(hand, (c) => c.tags.filter((t) => t !== Tag.WILD).length, rng) ?? hand[rng.nextInt(hand.length)];
+      return this.pickBest(hand, (card) => this.countTags(card));
     }
   }
 
   /**
-   * Post-draft discard: shuffle drafted cards, reveal from top.
-   * If card has NO matching priority tag → discard. If it HAS a match → stop.
-   * If all 4 checked → keep all.
+   * Reveals the drafted cards one at a time, discarding those without a priority tag and
+   * stopping at the first card that carries one. Corps drafting on anything other than tags
+   * keep their whole draft.
    */
-  public static postDraftDiscard(
-    drafted: IProjectCard[],
+  public discardAfterDraft(
+    drafted: Array<IProjectCard>,
     priority: MarsBotDraftPriority,
-    rng: Random,
-  ): {kept: IProjectCard[], discarded: IProjectCard[]} {
+  ): {kept: Array<IProjectCard>, discarded: Array<IProjectCard>} {
     if (priority.type !== 'tags') {
       return {kept: [...drafted], discarded: []};
     }
 
     const cards = [...drafted];
-    inplaceShuffle(cards, rng);
+    this.shuffle(cards);
 
-    const discarded: IProjectCard[] = [];
-    const kept: IProjectCard[] = [];
-
-    let foundMatch = false;
-    for (const card of cards) {
-      if (foundMatch) {
-        kept.push(card);
-        continue;
-      }
-      if (MarsBotDraftResolver.cardMatchesTags(card, priority.tags)) {
-        foundMatch = true;
-        kept.push(card);
-      } else {
-        discarded.push(card);
-      }
-    }
-
-    // If none matched, keep all (no discard)
-    if (!foundMatch) {
+    const firstMatch = cards.findIndex((card) => this.hasAnyTag(card, priority.tags));
+    if (firstMatch === -1) {
       return {kept: cards, discarded: []};
     }
-
-    return {kept, discarded};
-  }
-
-  private static pickByTags(hand: IProjectCard[], priorityTags: ReadonlyArray<Tag>, rng: Random): IProjectCard {
-    return pickBest(hand, (c) => MarsBotDraftResolver.scoreCardByTags(c, priorityTags), rng) ??
-      hand[rng.nextInt(hand.length)];
+    return {kept: cards.slice(firstMatch), discarded: cards.slice(0, firstMatch)};
   }
 
   /**
-   * Score a card by matching its tags against the priority list.
-   * Higher-priority tags (earlier in the list) are weighted more.
-   * Multiple matching tags score higher than a single match.
+   * The highest scoring item, breaking ties at random. A hand where nothing scores at all
+   * is one big tie, which is how a card gets picked when none of them match.
    */
-  private static scoreCardByTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): number {
-    let score = 0;
-    for (const cardTag of card.tags) {
-      if (cardTag === Tag.WILD) {
-        continue;
+  private pickBest<T>(items: Array<T>, score: (item: T) => number): T {
+    let best = -1;
+    let tied: Array<T> = [];
+    for (const item of items) {
+      const value = score(item);
+      if (value > best) {
+        best = value;
+        tied = [item];
+      } else if (value === best) {
+        tied.push(item);
       }
-      const priorityIndex = priorityTags.indexOf(cardTag);
-      if (priorityIndex >= 0) {
-        score += (priorityTags.length - priorityIndex);
+    }
+    this.shuffle(tied);
+    return tied[0];
+  }
+
+  private pickByTags(hand: Array<IProjectCard>, priorityTags: ReadonlyArray<Tag>): IProjectCard {
+    return this.pickBest(hand, (card) => this.scoreByTags(card, priorityTags));
+  }
+
+  private pickByLeastAdvancedTrack(hand: Array<IProjectCard>): IProjectCard {
+    const leastAdvanced = this.tracks.getLeastAdvancedTrackIndex();
+    return this.pickByTags(hand, this.tracks.data[leastAdvanced].tags);
+  }
+
+  /**
+   * Tags earlier in the priority list are worth more, so a card matching the first priority
+   * beats one matching the second, and a card matching several beats one matching a single tag.
+   * Priorities only ever list printed tags, so a wild tag matches nothing and scores zero.
+   */
+  private scoreByTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): number {
+    let score = 0;
+    for (const tag of card.tags) {
+      const priority = priorityTags.indexOf(tag);
+      if (priority >= 0) {
+        score += priorityTags.length - priority;
       }
     }
     return score;
   }
 
-  private static cardMatchesTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): boolean {
-    for (const cardTag of card.tags) {
-      if (cardTag === Tag.WILD) {
-        continue;
-      }
-      if (priorityTags.includes(cardTag)) {
-        return true;
-      }
-    }
-    return false;
+  private hasAnyTag(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): boolean {
+    return card.tags.some((tag) => priorityTags.includes(tag));
   }
 
-  private static pickByLeastAdvancedTrack(hand: IProjectCard[], rng: Random, board?: MarsBotBoard): IProjectCard {
-    if (board === undefined) {
-      return hand[rng.nextInt(hand.length)];
-    }
-    const leastIndex = board.getLeastAdvancedTrackIndex();
-    const trackTags = board.data[leastIndex].tags;
-    return MarsBotDraftResolver.pickByTags(hand, trackTags, rng);
+  /** Wild tags count for nothing here: MarsBot reads the tags printed on the card. */
+  private countTags(card: IProjectCard): number {
+    return card.tags.filter((tag) => tag !== Tag.WILD).length;
   }
 }

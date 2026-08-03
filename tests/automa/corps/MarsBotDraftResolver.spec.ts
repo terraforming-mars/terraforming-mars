@@ -1,229 +1,180 @@
 import {expect} from 'chai';
-import {MarsBotDraftResolver} from '../../../src/server/automa/corps/MarsBotDraftResolver';
+import {MarsBotDraftResolver, Shuffler} from '../../../src/server/automa/corps/MarsBotDraftResolver';
 import {MarsBotDraftPriority} from '../../../src/server/automa/MarsBotCorpTypes';
 import {Tag} from '../../../src/common/cards/Tag';
-import {SeededRandom} from '../../../src/common/utils/Random';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {CardType} from '../../../src/common/cards/CardType';
-import {CardName} from '../../../src/common/cards/CardName';
 import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
+import {fakeCard} from '../../TestingUtils';
+import {CarbonateProcessing} from '../../../src/server/cards/base/CarbonateProcessing';
+import {Asteroid} from '../../../src/server/cards/base/Asteroid';
+import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
+import {SpaceElevator} from '../../../src/server/cards/base/SpaceElevator';
+import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
+import {Algae} from '../../../src/server/cards/base/Algae';
+import {Lichen} from '../../../src/server/cards/base/Lichen';
 
-function fakeCard(name: string, tags: Tag[], cost: number = 10): IProjectCard {
-  return {
-    name: name as CardName,
-    tags,
-    cost,
-    type: CardType.ACTIVE,
-  } as unknown as IProjectCard;
+// Real cards, named for the reason they are in the test.
+const buildingCard = new CarbonateProcessing(); // Building, 6 M€
+const spaceCard = new Asteroid(); // Space, 14 M€
+const buildingAndSpaceCard = new SpaceElevator(); // Space and Building, 27 M€
+const expensiveSpaceCard = new BigAsteroid(); // Space, 27 M€
+const earthCard = new AcquiredCompany(); // Earth, 10 M€
+const plantCard = new Algae(); // Plant, 10 M€
+const otherPlantCard = new Lichen(); // Plant, 7 M€
+
+/** Leaves the order alone, so the test sets it by writing the cards in the order it wants. */
+const keepOrder: Shuffler = () => {};
+/** Reverses the order, to show a choice really does follow the shuffle. */
+const reverseOrder: Shuffler = (items) => {
+  items.reverse();
+};
+
+function resolver(shuffle: Shuffler = keepOrder): MarsBotDraftResolver {
+  return new MarsBotDraftResolver(new MarsBotBoard(THARSIS_MARSBOT_BOARD), shuffle);
 }
 
 describe('MarsBotDraftResolver', () => {
-  describe('pickCardForMarsBot - tags priority', () => {
+  describe('pickCard, tags priority', () => {
     const priority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.BUILDING, Tag.SPACE]};
 
-    it('picks card with matching first-priority tag', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.BUILDING]),
-        fakeCard('C', [Tag.PLANT]),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('picks the card carrying a priority tag', () => {
+      const picked = resolver().pickCard([earthCard, buildingCard, plantCard], priority);
+
+      expect(picked).to.eq(buildingCard);
     });
 
-    it('prefers higher-priority tag', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.SPACE]),     // Second priority, score = 1
-        fakeCard('B', [Tag.BUILDING]),  // First priority, score = 2
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('prefers the tag listed first', () => {
+      const picked = resolver().pickCard([spaceCard, buildingCard], priority);
+
+      expect(picked).to.eq(buildingCard);
     });
 
-    it('multi-tag card scores higher than single-tag', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.BUILDING]),                 // score = 2
-        fakeCard('B', [Tag.BUILDING, Tag.SPACE]),      // score = 2 + 1 = 3
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('prefers a card carrying two priority tags to one carrying the first', () => {
+      const picked = resolver().pickCard([buildingCard, buildingAndSpaceCard], priority);
+
+      expect(picked).to.eq(buildingAndSpaceCard);
     });
 
-    it('wild tag does NOT match', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.WILD]),
-        fakeCard('B', [Tag.BUILDING]),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('does not count a wild tag as a match', () => {
+      const wildCard = fakeCard({tags: [Tag.WILD]});
+
+      const picked = resolver().pickCard([wildCard, buildingCard], priority);
+
+      expect(picked).to.eq(buildingCard);
     });
 
-    it('no matches picks randomly', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.PLANT]),
-      ];
-      // Should not throw, just picks one
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(['A', 'B']).to.include(picked.name);
+    it('treats a hand with no match as one tie across every card', () => {
+      const hand = [earthCard, plantCard];
+
+      expect(resolver(keepOrder).pickCard(hand, priority)).to.eq(earthCard);
+      expect(resolver(reverseOrder).pickCard(hand, priority)).to.eq(plantCard);
+    });
+
+    it('throws on an empty hand', () => {
+      expect(() => resolver().pickCard([], priority)).to.throw('Cannot pick from an empty hand');
     });
   });
 
-  describe('pickCardForMarsBot - mostExpensive', () => {
+  describe('pickCard, mostExpensive priority', () => {
     const priority: MarsBotDraftPriority = {type: 'mostExpensive'};
 
     it('picks the most expensive card', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [], 5),
-        fakeCard('B', [], 20),
-        fakeCard('C', [], 12),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+      const picked = resolver().pickCard([plantCard, expensiveSpaceCard, spaceCard], priority);
+
+      expect(picked).to.eq(expensiveSpaceCard);
     });
 
-    it('ties pick randomly', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [], 20),
-        fakeCard('B', [], 20),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(['A', 'B']).to.include(picked.name);
+    it('breaks a tie on cost with the shuffle, and only between the tied cards', () => {
+      // Big Asteroid and Space Elevator both cost 27, Asteroid costs 14 and never wins.
+      const hand = [expensiveSpaceCard, buildingAndSpaceCard, spaceCard];
+
+      expect(resolver(keepOrder).pickCard(hand, priority)).to.eq(expensiveSpaceCard);
+      expect(resolver(reverseOrder).pickCard(hand, priority)).to.eq(buildingAndSpaceCard);
     });
   });
 
-  describe('pickCardForMarsBot - leastAdvancedTrack', () => {
+  describe('pickCard, leastAdvancedTrack priority', () => {
     const priority: MarsBotDraftPriority = {type: 'leastAdvancedTrack'};
 
-    it('uses least-advanced track tags to pick', () => {
-      const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
-      const rng = new SeededRandom(42);
-
-      // Advance all tracks except Track 1 (Building/Microbe)
-      for (let i = 1; i < board.tracks.length; i++) {
-        board.tracks[i].advance();
-        board.tracks[i].advance();
+    it('drafts for the tags on the least advanced track', () => {
+      const tracks = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+      // Leave track 0 (Building and Microbe) behind, so its tags become the priority.
+      for (let i = 1; i < tracks.tracks.length; i++) {
+        tracks.tracks[i].advance();
       }
+      expect(tracks.data[tracks.getLeastAdvancedTrackIndex()].tags).to.include(Tag.BUILDING);
 
-      // Track 0 (Building) is least advanced at position 0
-      // Its tags are Building and Microbe
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.BUILDING]),
-        fakeCard('C', [Tag.PLANT]),
-      ];
+      const picked = new MarsBotDraftResolver(tracks, keepOrder)
+        .pickCard([earthCard, buildingCard, plantCard], priority);
 
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng, board);
-      expect(picked.name).to.eq('B' as CardName);
-    });
-
-    it('falls back to random without board', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.BUILDING]),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(['A', 'B']).to.include(picked.name);
+      expect(picked).to.eq(buildingCard);
     });
   });
 
-  describe('pickCardForMarsBot - mostTags', () => {
+  describe('pickCard, mostTags priority', () => {
     const priority: MarsBotDraftPriority = {type: 'mostTags'};
 
-    it('picks card with most tags', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.BUILDING, Tag.SPACE, Tag.EARTH]),
-        fakeCard('C', [Tag.PLANT, Tag.MICROBE]),
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('picks the card with the most tags', () => {
+      const picked = resolver().pickCard([earthCard, buildingAndSpaceCard, plantCard], priority);
+
+      expect(picked).to.eq(buildingAndSpaceCard);
     });
 
-    it('wild tags do not count', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.WILD, Tag.WILD, Tag.WILD]),  // 0 non-wild tags
-        fakeCard('B', [Tag.BUILDING, Tag.SPACE]),        // 2 non-wild tags
-      ];
-      const picked = MarsBotDraftResolver.pickCardForMarsBot(cards, priority, rng);
-      expect(picked.name).to.eq('B' as CardName);
+    it('does not count wild tags', () => {
+      const threeWildCard = fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD]});
+
+      const picked = resolver().pickCard([threeWildCard, buildingCard], priority);
+
+      expect(picked).to.eq(buildingCard);
     });
   });
 
-  describe('postDraftDiscard', () => {
+  describe('discardAfterDraft', () => {
     const priority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.BUILDING, Tag.SPACE]};
 
-    it('discards non-matching cards from top, stops at first match', () => {
-      // Use a fixed seed so shuffle is deterministic
-      const rng = new SeededRandom(1);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),     // No match
-        fakeCard('B', [Tag.PLANT]),     // No match
-        fakeCard('C', [Tag.BUILDING]),  // Match
-        fakeCard('D', [Tag.EARTH]),     // After match — kept
-      ];
+    it('discards from the top until a priority tag turns up, and keeps the rest', () => {
+      const drafted = [plantCard, earthCard, buildingCard, otherPlantCard];
 
-      const result = MarsBotDraftResolver.postDraftDiscard(cards, priority, rng);
-      // After shuffle, order may vary, but logic should work:
-      // Non-matching before first match → discarded, rest → kept
-      const totalCards = result.kept.length + result.discarded.length;
-      expect(totalCards).to.eq(4);
-      // At least the matching card should be kept
-      expect(result.kept.some((c) => c.tags.includes(Tag.BUILDING))).to.be.true;
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, priority);
+
+      expect(discarded).to.deep.eq([plantCard, earthCard]);
+      expect(kept).to.deep.eq([buildingCard, otherPlantCard]);
     });
 
-    it('keeps all when none match', () => {
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH]),
-        fakeCard('B', [Tag.PLANT]),
-        fakeCard('C', [Tag.EARTH]),
-        fakeCard('D', [Tag.PLANT]),
-      ];
+    it('reveals in the shuffled order', () => {
+      const drafted = [plantCard, earthCard, buildingCard, otherPlantCard];
 
-      const result = MarsBotDraftResolver.postDraftDiscard(cards, priority, rng);
-      expect(result.kept.length).to.eq(4);
-      expect(result.discarded.length).to.eq(0);
+      const {kept, discarded} = resolver(reverseOrder).discardAfterDraft(drafted, priority);
+
+      expect(discarded).to.deep.eq([otherPlantCard]);
+      expect(kept).to.deep.eq([buildingCard, earthCard, plantCard]);
     });
 
-    it('keeps all when first card matches', () => {
-      // Create cards where at least one has a matching tag
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.BUILDING]),
-        fakeCard('B', [Tag.BUILDING]),
-        fakeCard('C', [Tag.BUILDING]),
-        fakeCard('D', [Tag.BUILDING]),
-      ];
+    it('keeps everything when the first card revealed matches', () => {
+      const drafted = [buildingCard, plantCard, earthCard];
 
-      const result = MarsBotDraftResolver.postDraftDiscard(cards, priority, rng);
-      // All match, so no discard regardless of shuffle order
-      expect(result.discarded.length).to.eq(0);
-      expect(result.kept.length).to.eq(4);
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, priority);
+
+      expect(discarded).is.empty;
+      expect(kept).to.deep.eq(drafted);
     });
 
-    it('non-tag priority returns all cards', () => {
-      const costPriority: MarsBotDraftPriority = {type: 'mostExpensive'};
-      const rng = new SeededRandom(42);
-      const cards = [
-        fakeCard('A', [Tag.EARTH], 5),
-        fakeCard('B', [Tag.PLANT], 10),
-      ];
+    it('keeps everything when no card matches', () => {
+      const drafted = [plantCard, earthCard, otherPlantCard];
 
-      const result = MarsBotDraftResolver.postDraftDiscard(cards, costPriority, rng);
-      expect(result.kept.length).to.eq(2);
-      expect(result.discarded.length).to.eq(0);
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, priority);
+
+      expect(discarded).is.empty;
+      expect(kept).to.deep.eq(drafted);
+    });
+
+    it('keeps everything for a corp that does not draft on tags', () => {
+      const drafted = [plantCard, earthCard];
+
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, {type: 'mostExpensive'});
+
+      expect(discarded).is.empty;
+      expect(kept).to.deep.eq(drafted);
     });
   });
 });

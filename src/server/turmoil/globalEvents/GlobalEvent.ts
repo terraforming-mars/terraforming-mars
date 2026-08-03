@@ -3,12 +3,15 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {ICardRenderRoot} from '../../../common/cards/render/Types';
 import {IGame} from '../../IGame';
 import {IPlayer} from '../../IPlayer';
+import {Behavior} from '../../behavior/Behavior';
+import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 
 type StaticGlobalEventProperties = {
   name: GlobalEventName,
   description: string,
   revealedDelegate: PartyName,
   currentDelegate: PartyName,
+  behavior?: Behavior,
   renderData: ICardRenderRoot;
 }
 
@@ -36,17 +39,25 @@ export abstract class GlobalEvent {
   public get currentDelegate() {
     return this.properties.currentDelegate;
   }
+  public get behavior() {
+    return this.properties.behavior;
+  }
   public get renderData() {
     return this.properties.renderData;
   }
   public resolve(game: IGame) {
+    const behavior = this.behavior;
+    const executor = getBehaviorExecutor();
+    for (const player of game.playersInGenerationOrder) {
+      if (behavior !== undefined) {
+        executor.execute(behavior, player, this);
+      }
+      this.bespokeResolvePlayer(player);
+    }
     return this.bespokeResolve(game);
   }
 
-  public bespokeResolve(game: IGame) {
-    for (const player of game.playersInGenerationOrder) {
-      this.bespokeResolvePlayer(player);
-    }
+  public bespokeResolve(_game: IGame) {
   }
 
   public bespokeResolvePlayer(_player: IPlayer) {

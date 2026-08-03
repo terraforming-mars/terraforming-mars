@@ -37,6 +37,7 @@ import {Helion} from '../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {CardName} from '../../src/common/cards/CardName';
 import {cast} from '@/common/utils/utils';
+import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMining';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -802,6 +803,28 @@ describe('Executor', () => {
     player.underworldData.corruption = 3;
     executor.execute({spend: {corruption: 2}}, player, fake);
     expect(player.underworldData.corruption).eq(1);
+  });
+
+  it('global events are attributed in the log', () => {
+    const globalEvent = new AsteroidMining();
+
+    game.gameLog.length = 0;
+    executor.execute({stock: {steel: 2}, production: {megacredits: 1}}, player, globalEvent);
+
+    expect(game.gameLog.map(formatMessage)).deep.eq([
+      'blue gained 1 M€ production because of Asteroid Mining',
+      'blue gained 2 steel because of Asteroid Mining',
+    ]);
+  });
+
+  it('cards are not attributed in the log', () => {
+    game.gameLog.length = 0;
+    executor.execute({stock: {steel: 2}, production: {megacredits: 1}}, player, fake);
+
+    expect(game.gameLog.map(formatMessage)).deep.eq([
+      'blue gained 1 M€ production',
+      'blue gained 2 steel',
+    ]);
   });
 
   const logRuns = [

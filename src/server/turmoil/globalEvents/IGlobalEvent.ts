@@ -13,9 +13,10 @@ export interface IGlobalEvent {
 }
 
 export function isIGlobalEvent(object: any): object is IGlobalEvent {
+  // `in` rather than hasOwnProperty: GlobalEvent exposes these as prototype getters.
   return (
     object !== undefined &&
-    object.hasOwnProperty('revealedDelegate') &&
-    object.hasOwnProperty('revealedDelegate')
+    'revealedDelegate' in object &&
+    'currentDelegate' in object
   );
 }

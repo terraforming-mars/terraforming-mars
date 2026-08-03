@@ -55,8 +55,9 @@ export type MarsBotCorpEffect = {
   onHumanCardPlayed?(bot: IMarsBot, card: IProjectCard): void;
   /** A tile landed on the board, placed by either side. */
   onTilePlaced?(bot: IMarsBot, placedByMarsBot: boolean, tileType: TileType): void;
+  /** Called once after the bot raises Venus, however many steps it moved. */
   onVenusRaised?(bot: IMarsBot): void;
-  /** Called before the bot raises a global parameter. Return true to consume the raise: the parameter does not move. */
+  /** Called before the bot raises a global parameter. Returning true cancels that raise: the global parameter stays at its current value. */
   interceptGlobalParameterRaise?(bot: IMarsBot, parameter: GlobalParameter): boolean;
   /** The bot's M€ supply just grew by this amount. */
   onMcGained?(bot: IMarsBot, amount: number): void;
@@ -74,9 +75,9 @@ export interface IMarsBot {
   readonly board: MarsBotBoard;
 
   /** The bot's M€ pool. */
-  mcSupply: number;
+  megacredits: number;
   /** Floaters stored by Venus corps. */
-  readonly floaterCount: number;
+  readonly floaters: number;
   addFloaters(count: number): void;
   /** Removes floaters, stopping at zero. */
   spendFloaters(count: number): void;
@@ -86,11 +87,14 @@ export interface IMarsBot {
   raiseTR(steps: number): void;
   advanceTrack(trackIndex: number): void;
 
-  /** Draws the top project card and resolves it as a bot action. False when the deck is empty. */
+  /**
+   * Draws the top project card and resolves it as a bot action. The deck reshuffles its
+   * discard pile when it runs out, so false means both piles were empty.
+   */
   drawAndResolveProjectCard(): boolean;
   /** Same, but the card's first n tags are ignored while resolving. */
   drawAndResolveProjectCardIgnoringFirstNTags(n: number): boolean;
-  /** Draws the top bonus card and resolves it. False when the deck is empty. */
+  /** Draws the top bonus card and resolves it. False when the draw and discard piles are both empty. */
   drawAndResolveBonusCard(): boolean;
 
   /** Draws project cards into the bot's action deck. */

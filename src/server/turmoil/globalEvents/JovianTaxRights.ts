@@ -12,8 +12,12 @@ export class JovianTaxRights extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.UNITY,
       behavior: {
-        stock: {titanium: {turmoil: {influence: {}}}},
-        production: {megacredits: {colonies: {}}},
+        stock: {
+          titanium: {turmoil: {influence: {}}},
+        },
+        production: {
+          megacredits: {colonies: {}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => pb.megacredits(1)).slash().colonies(1).nbsp.titanium(1).slash().influence();

@@ -14,7 +14,9 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.REDS,
       behavior: {
-        stock: {megacredits: {each: 2, turmoil: {influence: {}}}},
+        stock: {
+          megacredits: {each: 2, turmoil: {influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.minus().cards(2).nbsp.megacredits(2).slash().influence();

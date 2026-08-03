@@ -13,7 +13,9 @@ export class VolcanicEruptions extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.KELVINISTS,
       behavior: {
-        production: {heat: {turmoil: {influence: {}}}},
+        production: {
+          heat: {turmoil: {influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.temperature(2).nbsp.production((pb)=>pb.heat(1)).slash().influence();

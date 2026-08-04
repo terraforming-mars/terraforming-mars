@@ -53,37 +53,27 @@ export class MarsBotTrack {
   }
 }
 
-/** MarsBot's tracks. Handles tag-to-track mapping and track state. */
-export class MarsBotTracks {
-  public readonly all: ReadonlyArray<MarsBotTrack>;
-  private readonly tagToTrack: Map<Tag, number>;
+/** MarsBot's player board: its tracks and which track each tag advances. */
+export class MarsBotBoard {
+  public readonly tracks: ReadonlyArray<MarsBotTrack>;
+  public readonly tagToTrack: Partial<Record<Tag, number>> = {};
 
-  constructor(public readonly data: ReadonlyArray<TrackDefinition>) {
-    this.all = data.map((def) => new MarsBotTrack(def));
-    this.tagToTrack = new Map();
-    for (let i = 0; i < data.length; i++) {
-      for (const tag of data[i].tags) {
-        this.tagToTrack.set(tag, i);
+  constructor(public readonly definitions: ReadonlyArray<TrackDefinition>) {
+    this.tracks = definitions.map((def) => new MarsBotTrack(def));
+    for (let i = 0; i < definitions.length; i++) {
+      for (const tag of definitions[i].tags) {
+        this.tagToTrack[tag] = i;
       }
     }
   }
 
-  public getTrackIndexForTag(tag: Tag): number | undefined {
-    return this.tagToTrack.get(tag);
-  }
-
-  /** Check if a tag is mapped to any track. */
-  public hasTrackForTag(tag: Tag): boolean {
-    return this.tagToTrack.has(tag);
-  }
-
   /** Index of the least-advanced track (first index if tied). */
   public getLeastAdvancedTrackIndex(): number {
-    let minPos = this.all[0].position;
+    let minPos = this.tracks[0].position;
     let minIndex = 0;
-    for (let i = 1; i < this.all.length; i++) {
-      if (this.all[i].position < minPos) {
-        minPos = this.all[i].position;
+    for (let i = 1; i < this.tracks.length; i++) {
+      if (this.tracks[i].position < minPos) {
+        minPos = this.tracks[i].position;
         minIndex = i;
       }
     }
@@ -92,11 +82,11 @@ export class MarsBotTracks {
 
   /** Index of the most-advanced track (first index if tied). */
   public getMostAdvancedTrackIndex(): number {
-    let maxPos = this.all[0].position;
+    let maxPos = this.tracks[0].position;
     let maxIndex = 0;
-    for (let i = 1; i < this.all.length; i++) {
-      if (this.all[i].position > maxPos) {
-        maxPos = this.all[i].position;
+    for (let i = 1; i < this.tracks.length; i++) {
+      if (this.tracks[i].position > maxPos) {
+        maxPos = this.tracks[i].position;
         maxIndex = i;
       }
     }
@@ -107,9 +97,9 @@ export class MarsBotTracks {
   public getMostAdvancedNonMaxedTrackIndex(): number | undefined {
     let maxPos = -1;
     let maxIndex: number | undefined;
-    for (let i = 0; i < this.all.length; i++) {
-      if (this.all[i].position > maxPos && this.all[i].canAdvance()) {
-        maxPos = this.all[i].position;
+    for (let i = 0; i < this.tracks.length; i++) {
+      if (this.tracks[i].position > maxPos && this.tracks[i].canAdvance()) {
+        maxPos = this.tracks[i].position;
         maxIndex = i;
       }
     }

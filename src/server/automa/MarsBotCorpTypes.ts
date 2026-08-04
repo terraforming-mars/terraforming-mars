@@ -6,7 +6,7 @@ import {TileType} from '../../common/TileType';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
-import {MarsBotTracks} from './MarsBotTracks';
+import {MarsBotBoard} from './MarsBotBoard';
 
 /** How the bot picks a card in the research draft. Each corp names one priority. */
 export type MarsBotDraftPriority =
@@ -72,7 +72,7 @@ export interface IMarsBot {
   readonly game: IGame;
   /** The neutral player that holds the bot's terraform rating and owns its tiles. */
   readonly player: IPlayer;
-  readonly tracks: MarsBotTracks;
+  readonly marsBotBoard: MarsBotBoard;
 
   /** The bot's M€ pool. */
   megacredits: number;

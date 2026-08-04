@@ -19,7 +19,7 @@ describe('GenerousFunding', () => {
     player.setTerraformRating(25);
     player2.setTerraformRating(50);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(14);
     expect(player2.megaCredits).to.eq(26);
   });
@@ -39,7 +39,7 @@ describe('GenerousFunding', () => {
     player.setTerraformRating(12);
     player2.setTerraformRating(50);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(10);
     expect(player2.megaCredits).to.eq(26);
   });

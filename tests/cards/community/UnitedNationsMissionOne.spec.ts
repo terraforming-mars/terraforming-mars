@@ -61,7 +61,7 @@ describe('UnitedNationsMissionOne', () => {
     turmoil.initGlobalEvent(game);
 
     const election = new Election();
-    election.resolve(game, turmoil);
+    election.resolve(game);
     expect(player2.terraformRating).eq(22);
     expect(player.megaCredits).eq(0); // no increase
   });

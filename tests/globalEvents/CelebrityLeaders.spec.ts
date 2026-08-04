@@ -24,7 +24,7 @@ describe('CelebrityLeaders', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(12);
     expect(player2.megaCredits).to.eq(20);
   });

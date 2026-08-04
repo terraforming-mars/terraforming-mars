@@ -15,6 +15,10 @@ export class UnitedNationsMissionOne extends CorporationCard implements ICorpora
       tags: [Tag.EARTH],
       startingMegaCredits: 40, // +1 for the initial change in TR.
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'R50',
         description: 'You start with 39 M€. Increase your TR 1 step.',
@@ -32,10 +36,6 @@ export class UnitedNationsMissionOne extends CorporationCard implements ICorpora
     });
   }
 
-  public override bespokePlay(player: IPlayer): undefined {
-    player.increaseTerraformRating();
-    return undefined;
-  }
 
   // TODO(kberg): Since UNMO can generate MC for raising TR, that MC can offset reds costs, can't it?
   public onIncreaseTerraformRatingByAnyPlayer(

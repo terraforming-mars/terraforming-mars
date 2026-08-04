@@ -519,6 +519,21 @@ describe('Counter for Turmoil', () => {
     expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {}}})).eq(7);
   });
 
+  it('influence subtracts', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    player.tagsForTest = {earth: 7};
+
+    turmoil.chairman = player;
+    turmoil.dominantParty.partyLeader = player;
+    expect(turmoil.getInfluence(player)).eq(2);
+
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {subtract: true}}})).eq(3);
+
+    // The count runs below zero. `lose` is what clamps it, not the counter.
+    turmoil.addInfluenceBonus(player, 6);
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {subtract: true}}})).eq(-3);
+  });
+
   it('each applies after max and influence', () => {
     const counter = new Counter(player, GLOBAL_EVENT_PROXY);
     player.tagsForTest = {earth: 7};

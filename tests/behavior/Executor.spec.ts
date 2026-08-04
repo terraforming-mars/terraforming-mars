@@ -805,6 +805,73 @@ describe('Executor', () => {
     expect(player.underworldData.corruption).eq(1);
   });
 
+  it('lose stock', () => {
+    player.stock.override({megacredits: 10, steel: 4});
+
+    executor.execute({lose: {stock: {megacredits: 3, steel: 1}}}, player, fake);
+
+    expect(player.megaCredits).eq(7);
+    expect(player.steel).eq(3);
+  });
+
+  it('lose production', () => {
+    player.production.override({energy: 3, steel: 1});
+
+    executor.execute({lose: {production: {energy: 1, steel: 1}}}, player, fake);
+
+    expect(player.production.energy).eq(2);
+    expect(player.production.steel).eq(0);
+  });
+
+  it('lose takes as much as it can', () => {
+    player.stock.override({megacredits: 2});
+    player.production.override({steel: 0});
+
+    // Unlike spend, this neither blocks nor overdraws.
+    expect(executor.canExecute({lose: {stock: {megacredits: 8}}}, player, fake)).is.true;
+    executor.execute({lose: {stock: {megacredits: 8}}}, player, fake);
+    executor.execute({lose: {production: {steel: 1}}}, player, fake);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.production.steel).eq(0);
+  });
+
+  it('lose production stops megacredit production at -5', () => {
+    player.production.override({megacredits: -3});
+
+    executor.execute({lose: {production: {megacredits: 4}}}, player, fake);
+
+    expect(player.production.megacredits).eq(-5);
+  });
+
+  it('lose treats a negative count as zero', () => {
+    player.stock.override({megacredits: 10});
+    player.tagsForTest = {building: 2};
+
+    // 2 building tags less 5 influence is -3, which must not become a gain.
+    setRulingParty(game, PartyName.REDS);
+    game.turmoil!.addInfluenceBonus(player, 5);
+
+    executor.execute({lose: {stock: {megacredits: {tag: Tag.BUILDING, turmoil: {influence: {subtract: true}}, each: 3}}}}, player, fake);
+
+    expect(player.megaCredits).eq(10);
+  });
+
+  it('lose logs what actually changed', () => {
+    player.stock.override({megacredits: 2});
+    player.production.override({energy: 0});
+    game.gameLog.length = 0;
+
+    executor.execute({lose: {stock: {megacredits: 8}}}, player, new AsteroidMining());
+    executor.execute({lose: {production: {energy: 1}}}, player, new AsteroidMining());
+
+    // 8 was asked for but only 2 was there, and the energy production line is absent
+    // entirely because nothing changed.
+    expect(game.gameLog.map(formatMessage)).deep.eq([
+      'blue lost 2 M€ because of Asteroid Mining',
+    ]);
+  });
+
   it('global events are attributed in the log', () => {
     const globalEvent = new AsteroidMining();
 

@@ -14,7 +14,9 @@ export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.GREENS,
       behavior: {
-        drawCard: {count: {turmoil: {influence: {}}}},
+        drawCard: {
+          count: {turmoil: {influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.cards(1, {secondaryTag: AltSecondaryTag.WILD_RESOURCE}).colon().wild(1).nbsp;

@@ -14,7 +14,13 @@ export class HomeworldSupport extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
       behavior: {
-        stock: {megacredits: {tag: Tag.EARTH, each: 2, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          megacredits: {
+            tag: Tag.EARTH,
+            each: 2,
+            turmoil: {max: 5, influence: {}},
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(2).slash().tag(Tag.EARTH).influence({size: Size.SMALL});

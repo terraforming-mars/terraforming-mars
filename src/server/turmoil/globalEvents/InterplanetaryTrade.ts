@@ -14,7 +14,13 @@ export class InterplanetaryTrade extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.UNITY,
       behavior: {
-        stock: {megacredits: {tag: Tag.SPACE, each: 2, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          megacredits: {
+            tag: Tag.SPACE,
+            each: 2,
+            turmoil: {max: 5, influence: {}},
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(2).slash().tag(Tag.SPACE).influence({size: Size.SMALL});

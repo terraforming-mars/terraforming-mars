@@ -2,12 +2,8 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resource} from '../../../common/Resource';
-import {Turmoil} from '../Turmoil';
-import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {IPlayer} from '@/server/IPlayer';
 
 export class Riots extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -16,19 +12,21 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 4 M€ for each city tile (max 5, then reduced by influence).',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.REDS,
+      behavior: {
+        lose: {
+          stock: {
+            megacredits: {
+              cities: {},
+              all: false,
+              turmoil: {max: 5, influence: {subtract: true}},
+              each: 4,
+            },
+          },
+        },
+      },
       renderData: CardRenderer.builder((b) => {
         b.minus().megacredits(4).slash().city().influence({size: Size.SMALL});
       }),
     });
-  }
-  public override bespokeResolvePlayer(player: IPlayer) {
-    const turmoil = Turmoil.getTurmoil(player.game);
-    const city = player.game.board.spaces.filter(
-      (space) => Board.isCitySpace(space) && space.player === player,
-    ).length;
-    const amount = Math.min(5, city) - turmoil.getInfluence(player);
-    if (amount > 0) {
-      player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
-    }
   }
 }

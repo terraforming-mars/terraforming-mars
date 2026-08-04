@@ -15,7 +15,9 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.REDS,
       behavior: {
-        production: {megacredits: {turmoil: {influence: {}}}},
+        production: {
+          megacredits: {turmoil: {influence: {}}},
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence().br;

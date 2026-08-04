@@ -72,9 +72,13 @@ export type _Countable = {
      */
     max?: number;
     /**
-     * Add this player's Turmoil influence.
+     * Add this player's Turmoil influence, or subtract it when `subtract` is set.
+     *
+     * Penalty global events reduce a capped count by influence, which is what `subtract`
+     * is for. The result can go negative; pair it with `lose`, which treats a negative
+     * count as zero.
      */
-    influence?: NoAttributes,
+    influence?: {subtract?: boolean},
   }
 
   /**

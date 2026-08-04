@@ -14,7 +14,13 @@ export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.GREENS,
       behavior: {
-        stock: {megacredits: {eventsPlayed: true, each: 2, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          megacredits: {
+            eventsPlayed: true,
+            each: 2,
+            turmoil: {max: 5, influence: {}},
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(2).slash().tag(Tag.EVENT).influence({size: Size.SMALL});

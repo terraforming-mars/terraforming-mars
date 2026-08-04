@@ -13,7 +13,14 @@ export class StrongSociety extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.MARS,
       behavior: {
-        stock: {megacredits: {cities: {}, all: false, each: 2, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          megacredits: {
+            cities: {},
+            all: false,
+            each: 2,
+            turmoil: {max: 5, influence: {}},
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(2).slash().city().influence({size: Size.SMALL});

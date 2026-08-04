@@ -3,11 +3,11 @@ import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../../cards/Options';
+import {IPlayer} from '@/server/IPlayer';
 
 export class FairTradeComplaint extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -24,17 +24,16 @@ export class FairTradeComplaint extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const penalty = Math.max(0, (player.cardsInHand.length - 6));
-      if (penalty === 0) {
-        player.drawCard(2);
-      }
-      const savings = 2 * turmoil.getInfluence(player);
-      const cost = Math.max(0, penalty - savings);
-      if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
-      }
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const penalty = Math.max(0, (player.cardsInHand.length - 6));
+    if (penalty === 0) {
+      player.drawCard(2);
+    }
+    const savings = 2 * turmoil.getInfluence(player);
+    const cost = Math.max(0, penalty - savings);
+    if (cost > 0) {
+      player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
+    }
   }
 }

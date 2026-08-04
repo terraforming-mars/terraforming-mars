@@ -24,6 +24,7 @@ export type _Countable = {
   /** Count the number of floaters on all cards. */
   floaters?: NoAttributes,
   colonies?: {
+    /** Count the number of colonies this player has (or all colonies.) */
     colonies?: {},
   },
   moon?: {
@@ -53,6 +54,28 @@ export type _Countable = {
    * When true, include events when counting tags.
    */
   includeEvents?: true;
+
+  /**
+   * Count the number of events this player has played.
+   */
+  eventsPlayed?: true;
+
+  turmoil?: {
+    /**
+     * Count the number of parties this player leads.
+     */
+    partyLeaders?: NoAttributes,
+    /**
+     * Cap the count so far at this value. Global events commonly cap a count
+     * before adding influence, so this is applied before `influence`, and
+     * before `each` and `per`.
+     */
+    max?: number;
+    /**
+     * Add this player's Turmoil influence.
+     */
+    influence?: NoAttributes,
+  }
 
   /**
    * Multiply the sum by this value.

@@ -610,6 +610,9 @@ export enum CardName {
   // For Playwright.
   SPECIAL_DESIGN_PROXY = 'Special Design:proxy',
 
+  // Proxy for when Executor is used for Global Events.
+  GLOBAL_EVENT_PROXY = 'Global Event Proxy',
+
   // Automa
   AUTOMA_METEOR_SHOWER = 'Meteor Shower:automa',
   AUTOMA_INVASIVE_SPECIES = 'Invasive Species:automa',

@@ -23,7 +23,7 @@ describe('SolarnetShutdown', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(7);
     expect(player2.megaCredits).to.eq(10);
   });

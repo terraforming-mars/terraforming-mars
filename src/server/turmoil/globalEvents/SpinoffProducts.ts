@@ -3,12 +3,12 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
 
 export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -22,15 +22,14 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      player.stock.add(
-        Resource.MEGACREDITS,
-        2 *
-          (Math.min(5, player.tags.count(Tag.SCIENCE, 'raw-pf')) +
-            turmoil.getInfluence(player)),
-        {log: true, from: {globalEvent: this}},
-      );
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    player.stock.add(
+      Resource.MEGACREDITS,
+      2 *
+        (Math.min(5, player.tags.count(Tag.SCIENCE, 'raw-pf')) +
+          turmoil.getInfluence(player)),
+      {log: true, from: {globalEvent: this}},
+    );
   }
 }

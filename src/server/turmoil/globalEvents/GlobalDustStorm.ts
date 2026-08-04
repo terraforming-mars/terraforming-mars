@@ -21,7 +21,9 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil): void {
+  public override bespokeResolve(game: IGame): void {
+    const turmoil = Turmoil.getTurmoil(game);
+
     game.playersInGenerationOrder.forEach((player) => {
       if (player.heat > 0) {
         player.stock.deduct(Resource.HEAT, player.heat, {log: true, from: {globalEvent: this}});

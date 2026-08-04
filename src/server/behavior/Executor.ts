@@ -39,6 +39,9 @@ import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OC
 import {CardName} from '../../common/cards/CardName';
 import {asArray, inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
+import {IGlobalEvent, isIGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {ProxyCard} from '../cards/ProxyCard';
+import {From} from '../logs/From';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -304,7 +307,13 @@ export class Executor implements BehaviorExecutor {
     return true;
   }
 
-  public execute(behavior: Behavior, player: IPlayer, card: ICard) {
+  public execute(behavior: Behavior, player: IPlayer, inputCard: ICard | IGlobalEvent) {
+    const card = isIGlobalEvent(inputCard) ? new ProxyCard(CardName.GLOBAL_EVENT_PROXY) : inputCard;
+    const globalEvent = isIGlobalEvent(inputCard) ? inputCard : undefined;
+
+    // Only log from for global events
+    const from: From | undefined = globalEvent ? {globalEvent} : undefined;
+
     const ctx = new Counter(player, card);
 
     if (behavior.or !== undefined) {
@@ -313,7 +322,7 @@ export class Executor implements BehaviorExecutor {
         .map((behavior) => {
           return new SelectOption(behavior.title)
             .andThen(() => {
-              this.execute(behavior, player, card);
+              this.execute(behavior, player, inputCard);
               return undefined;
             });
         });
@@ -333,7 +342,7 @@ export class Executor implements BehaviorExecutor {
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: TITLES.payForCardAction(card.name),
-        })).andThen(() => this.execute(remainder, player, card));
+        })).andThen(() => this.execute(remainder, player, inputCard));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -393,11 +402,11 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.production !== undefined) {
       const units = ctx.countUnits(behavior.production);
-      player.production.adjust(units, {log: true});
+      player.production.adjust(units, {log: true, from});
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.stock.adjust(units, {log: true});
+      player.stock.adjust(units, {log: true, from});
     }
     if (behavior.standardResource) {
       const entry = behavior.standardResource;
@@ -407,14 +416,14 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
             .andThen((units) => {
-              player.stock.adjust(units, {log: true});
+              player.stock.adjust(units, {log: true, from});
               return undefined;
             }));
       } else {
         player.defer(
           new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))
             .andThen((unit) => {
-              player.stock.add(unit, count, {log: true});
+              player.stock.add(unit, count, {log: true, from});
               return undefined;
             }));
       }
@@ -478,7 +487,7 @@ export class Executor implements BehaviorExecutor {
       } else {
         const count = ctx.count(addResources);
         player.defer(() => {
-          player.addResourceTo(card, {qty: count, log: true});
+          player.addResourceTo(card, {qty: count, log: true, from});
           return undefined;
         });
       }

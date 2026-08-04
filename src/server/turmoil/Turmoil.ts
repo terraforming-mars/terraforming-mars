@@ -259,7 +259,7 @@ export class Turmoil {
       const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
       game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
       // TODO(kberg): if current global event adds an action, all of the rest of this should wait.
-      currentGlobalEvent.resolve(game, this);
+      currentGlobalEvent.resolve(game);
     }
 
     // WOW THIS BREAKS THINGS

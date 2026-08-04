@@ -91,7 +91,7 @@ describe('LaggingRegulation', () => {
       player3.tagsForTest = {crime: run.values[2].crimeTags};
       turmoil.addInfluenceBonus(player3, run.values[2].influence);
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player1.underworldData.corruption).eq(run.values[0].expected.corruption);
       expect(player1.stock.megacredits).eq(run.values[0].expected.mc);

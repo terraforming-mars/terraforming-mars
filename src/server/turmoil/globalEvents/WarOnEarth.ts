@@ -2,10 +2,10 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
 
 export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -19,9 +19,8 @@ export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      player.decreaseTerraformRating(Math.max(0, 4 - turmoil.getInfluence(player)), {log: true});
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    player.decreaseTerraformRating(Math.max(0, 4 - turmoil.getInfluence(player)), {log: true});
   }
 }

@@ -63,7 +63,7 @@
                           <th><div class="table-forest-tile"></div></th>
                           <th><div class="table-city-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
-                          <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
+                          <th v-if="game.moon !== undefined"><div class="table-moon-habitat-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                           <th v-if="game.pathfinders !== undefined"><div class="table-planetary-track"></div></th>
                           <th><div class="vp">VP</div></th>
@@ -156,9 +156,9 @@
                           <th><div class="tile oxygen-tile"></div></th>
                           <th><div class="tile ocean-tile"></div></th>
                           <th v-if="game.gameOptions.expansions.venus"><div class="tile venus-tile"></div></th>
-                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-colony-tile"></div></th>
-                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-road-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-habitat-tile"></div></th>
                           <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-mine-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-road-tile"></div></th>
                           <th><div class="game-end-total-column">Total</div></th>
                       </tr>
                   </thead>
@@ -170,8 +170,8 @@
                           <td>{{ data.oceans }}</td>
                           <td v-if="game.gameOptions.expansions.venus">{{ data.venus }}</td>
                           <td v-if="game.gameOptions.expansions.moon">{{ data.moonHabitat }}</td>
-                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistic }}</td>
                           <td v-if="game.gameOptions.expansions.moon">{{ data.moonMining }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistic }}</td>
                           <td class="game-end-total">{{ data.total }}</td>
                       </tr>
                   </tbody>

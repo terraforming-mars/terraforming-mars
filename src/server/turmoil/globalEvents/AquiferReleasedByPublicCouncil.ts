@@ -2,8 +2,6 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlobalEvent {
@@ -14,6 +12,7 @@ export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlob
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.GREENS,
       behavior: {
+        once: {ocean: {}},
         stock: {
           plants: {turmoil: {influence: {}}},
           steel: {turmoil: {influence: {}}},
@@ -23,8 +22,5 @@ export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlob
         b.oceans(1).nbsp.plants(1).steel(1).slash().influence();
       }),
     });
-  }
-  public override bespokeResolve(game: IGame) {
-    game.defer(new PlaceOceanTile(game.first, {title: 'Select space for ocean tile for Global Event'}));
   }
 }

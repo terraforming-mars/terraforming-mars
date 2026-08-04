@@ -14,7 +14,13 @@ export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.MARS,
       behavior: {
-        stock: {megacredits: {tag: Tag.MARS, each: 2, turmoil: {max: 5, influence: {}}}},
+        stock: {
+          megacredits: {
+            tag: Tag.MARS,
+            each: 2,
+            turmoil: {max: 5, influence: {}},
+          },
+        },
       },
       renderData: CardRenderer.builder((b) => {
         b.megacredits(2).slash().tag(Tag.MARS).influence({size: Size.SMALL});

@@ -249,7 +249,8 @@ export class Counter {
         sum = Math.min(sum, turmoil.max);
       }
       if (turmoil.influence !== undefined) {
-        sum += Turmoil.getTurmoil(game).getInfluence(player);
+        const influence = Turmoil.getTurmoil(game).getInfluence(player);
+        sum += turmoil.influence.subtract === true ? -influence : influence;
       }
     }
 

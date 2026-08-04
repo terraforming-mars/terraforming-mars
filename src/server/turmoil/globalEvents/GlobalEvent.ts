@@ -6,12 +6,16 @@ import {IPlayer} from '../../IPlayer';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 
+type GlobalEventBehavior = Behavior & {
+  once?: Behavior;
+};
+
 type StaticGlobalEventProperties = {
   name: GlobalEventName,
   description: string,
   revealedDelegate: PartyName,
   currentDelegate: PartyName,
-  behavior?: Behavior,
+  behavior?: GlobalEventBehavior,
   renderData: ICardRenderRoot;
 }
 
@@ -45,21 +49,24 @@ export abstract class GlobalEvent {
   public get renderData() {
     return this.properties.renderData;
   }
-  public resolve(game: IGame) {
+  public resolve(game: IGame): void {
     const behavior = this.behavior;
     const executor = getBehaviorExecutor();
+    if (behavior?.once) {
+      executor.execute(behavior.once, game.playersInGenerationOrder[0], this);
+    }
+    this.bespokeResolve(game);
     for (const player of game.playersInGenerationOrder) {
       if (behavior !== undefined) {
         executor.execute(behavior, player, this);
       }
       this.bespokeResolvePlayer(player);
     }
-    return this.bespokeResolve(game);
   }
 
-  public bespokeResolve(_game: IGame) {
+  public bespokeResolve(_game: IGame): void {
   }
 
-  public bespokeResolvePlayer(_player: IPlayer) {
+  public bespokeResolvePlayer(_player: IPlayer): void {
   }
 }

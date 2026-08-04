@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SelectCard} from '../../inputs/SelectCard';
+import {selectCardOrOption} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
@@ -51,27 +51,16 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       return undefined;
     });
 
-    if (otherMicrobeCards.length === 1) {
-      const targetCard = otherMicrobeCards[0];
-
-      return new OrOptions(
-        new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(targetCard)), 'Add microbes').andThen(() => {
-          player.addResourceTo(targetCard, {qty: 2, log: true});
-          return undefined;
-        }),
-        gainPlantOption,
-      );
-    }
-
     return new OrOptions(
-      new SelectCard(
-        'Select card to add 2 microbes',
-        'Add microbes',
-        otherMicrobeCards)
-        .andThen(([card]) => {
+      selectCardOrOption(otherMicrobeCards, {
+        title: 'Select card to add 2 microbes',
+        buttonLabel: 'Add microbes',
+        singleTitle: (card) => message('Add ${0} microbes to ${1}', (b) => b.number(2).card(card)),
+        onSelect: (card) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        }),
+        },
+      }),
       gainPlantOption,
     );
   }

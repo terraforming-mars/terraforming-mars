@@ -1,5 +1,5 @@
 import {OrOptions} from '../inputs/OrOptions';
-import {SelectCard} from '../inputs/SelectCard';
+import {selectCardOrOption} from '../inputs/SelectCard';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
 import {IPlayer} from '../IPlayer';
@@ -30,11 +30,15 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
       return this.selectStandardResources(this.standardResourceCount);
     }
 
-    const selectCard = new SelectCard('Add resource to card', 'Add resource', resourceCards)
-      .andThen(([card]) => {
+    const selectCard = selectCardOrOption(resourceCards, {
+      title: 'Add resource to card',
+      buttonLabel: 'Add resource',
+      singleTitle: (card) => message('Add resource to ${0}', (b) => b.card(card)),
+      onSelect: (card) => {
         this.player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
-      });
+      },
+    });
     const wild = new OrOptions(selectCard, this.selectStandardResources(1));
     if (this.standardResourceCount > 0) {
       wild.andThen(() => {

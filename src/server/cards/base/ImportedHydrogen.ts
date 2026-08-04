@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SelectCard} from '../../inputs/SelectCard';
+import {selectCardOrOption} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
@@ -58,34 +58,28 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
-    if (availableMicrobeCards.length === 1) {
-      const targetMicrobeCard = availableMicrobeCards[0];
-      availableActions.push(new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(3).card(targetMicrobeCard)), 'Add microbes').andThen(() => {
-        player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
-        return undefined;
-      }));
-    } else if (availableMicrobeCards.length > 1) {
-      availableActions.push(new SelectCard('Add 3 microbes to a card',
-        'Add microbes',
-        availableMicrobeCards)
-        .andThen(([card]) => {
+    if (availableMicrobeCards.length > 0) {
+      availableActions.push(selectCardOrOption(availableMicrobeCards, {
+        title: 'Add 3 microbes to a card',
+        buttonLabel: 'Add microbes',
+        singleTitle: (card) => message('Add ${0} microbes to ${1}', (b) => b.number(3).card(card)),
+        onSelect: (card) => {
           player.addResourceTo(card, {qty: 3, log: true});
           return undefined;
-        }));
+        },
+      }));
     }
 
-    if (availableAnimalCards.length === 1) {
-      const targetAnimalCard = availableAnimalCards[0];
-      availableActions.push(new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(targetAnimalCard)), 'Add animals').andThen(() => {
-        player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
-        return undefined;
-      }));
-    } else if (availableAnimalCards.length > 1) {
-      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards)
-        .andThen(([card]) => {
+    if (availableAnimalCards.length > 0) {
+      availableActions.push(selectCardOrOption(availableAnimalCards, {
+        title: 'Add 2 animals to a card',
+        buttonLabel: 'Add animals',
+        singleTitle: (card) => message('Add ${0} animals to ${1}', (b) => b.number(2).card(card)),
+        onSelect: (card) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        }));
+        },
+      }));
     }
 
     return new OrOptions(...availableActions);

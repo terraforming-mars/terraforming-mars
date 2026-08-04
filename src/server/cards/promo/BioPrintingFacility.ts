@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {SelectCard} from '../../inputs/SelectCard';
+import {selectCardOrOption} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
@@ -53,27 +53,16 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       return undefined;
     });
 
-    if (availableAnimalCards.length === 1) {
-      const targetCard = availableAnimalCards[0];
-
-      return new OrOptions(
-        new SelectOption(message('Add ${0} animal to ${1}', (b) => b.number(1).card(targetCard)), 'Add animal').andThen(() => {
-          player.addResourceTo(targetCard, {log: true});
-          return undefined;
-        }),
-        gainPlantOption,
-      );
-    }
-
     return new OrOptions(
-      new SelectCard(
-        'Select card to add 1 animal',
-        'Add animal',
-        availableAnimalCards)
-        .andThen(([card]) => {
+      selectCardOrOption(availableAnimalCards, {
+        title: 'Select card to add 1 animal',
+        buttonLabel: 'Add animal',
+        singleTitle: (card) => message('Add ${0} animal to ${1}', (b) => b.number(1).card(card)),
+        onSelect: (card) => {
           player.addResourceTo(card, {log: true});
           return undefined;
-        }),
+        },
+      }),
       gainPlantOption,
     );
   }

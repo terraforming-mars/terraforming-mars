@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
+import {selectCardOrOption} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
@@ -8,6 +8,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
+import {message} from '../logs/MessageBuilder';
 
 export class GainAnyResourceButScienceDeferred extends DeferredAction {
   constructor(player: IPlayer) {
@@ -19,11 +20,15 @@ export class GainAnyResourceButScienceDeferred extends DeferredAction {
 
     const cards = this.player.getResourceCards(undefined).filter((card) => card.resourceType !== CardResource.SCIENCE);
     if (cards.length > 0) {
-      orOptions.options.push(new SelectCard('Gain 1 card resource', undefined, cards)
-        .andThen(([card]) => {
+      orOptions.options.push(selectCardOrOption(cards, {
+        title: 'Gain 1 card resource',
+        buttonLabel: 'Add resource',
+        singleTitle: (card) => message('Add resource to ${0}', (b) => b.card(card)),
+        onSelect: (card) => {
           this.player.addResourceTo(card, {log: true});
           return undefined;
-        }));
+        },
+      }));
     }
     orOptions.options.push(new SelectResource('Gain 1 standard resource')
       .andThen((resource) => {

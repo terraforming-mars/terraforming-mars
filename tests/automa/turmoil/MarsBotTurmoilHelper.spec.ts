@@ -4,14 +4,23 @@ import {DELEGATES_PER_PLAYER} from '../../../src/common/constants';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MarsBotTurmoilHelper} from '../../../src/server/automa/turmoil/MarsBotTurmoilHelper';
+import {Player} from '../../../src/server/Player';
+import {PlayerId} from '../../../src/common/Types';
 
 /**
- * The helper only needs two IPlayers, so a regular two player Turmoil game
- * stands in: the second player takes the MarsBot role.
+ * Builds a Turmoil game whose MarsBot player is put together the way the game puts it together:
+ * set up against the game, given its own delegate reserve, and left out of game.players.
+ *
+ * Standing a regular second player in for MarsBot would be easier to read but would test the
+ * wrong thing, because Party.checkPartyLeader can only ever promote someone it finds in
+ * game.playersInGenerationOrder.
  */
 function createTurmoilGame() {
-  const [game, humanPlayer, marsBotPlayer] = testGame(2, {turmoilExtension: true});
+  const [game, humanPlayer] = testGame(1, {turmoilExtension: true});
   const turmoil = Turmoil.getTurmoil(game);
+  const marsBotPlayer = new Player('MarsBot', 'bronze', false, 0, 'p-marsbot' as PlayerId);
+  marsBotPlayer.setup(game);
+  turmoil.delegateReserve.add(marsBotPlayer, DELEGATES_PER_PLAYER);
   const helper = new MarsBotTurmoilHelper(game, turmoil, marsBotPlayer, humanPlayer);
   return {game, turmoil, humanPlayer, marsBotPlayer, helper};
 }
@@ -147,6 +156,23 @@ describe('maybePlaceDelegate', () => {
     expect(partyName).is.not.undefined;
     expect(turmoil.getPartyByName(partyName!).delegates.get(marsBotPlayer)).to.eq(1);
     expect(turmoil.getAvailableDelegateCount(marsBotPlayer)).to.eq(before - 1);
+  });
+
+  it('takes the party leadership the delegate earns', () => {
+    const {game, turmoil, marsBotPlayer, helper} = createTurmoilGame();
+    // One NEUTRAL delegate everywhere leaves Greens as the only party where one more MarsBot
+    // delegate takes the lead, so that is the party selectParty settles on.
+    for (const name of Object.values(PartyName)) {
+      turmoil.sendDelegateToParty('NEUTRAL', name, game);
+    }
+    turmoil.sendDelegateToParty(marsBotPlayer, PartyName.GREENS, game);
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
+    expect(greens.partyLeader).to.equal('NEUTRAL');
+
+    expect(helper.maybePlaceDelegate()).to.eq(PartyName.GREENS);
+
+    expect(greens.delegates.get(marsBotPlayer)).to.eq(2);
+    expect(greens.partyLeader).to.equal(marsBotPlayer);
   });
 
   it('does nothing when the reserve is empty', () => {

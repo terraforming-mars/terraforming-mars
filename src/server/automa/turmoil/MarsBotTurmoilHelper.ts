@@ -73,7 +73,7 @@ export class MarsBotTurmoilHelper {
     }
     this.turmoil.sendDelegateToParty(this.marsBotPlayer, partyName, this.game);
     this.maybeUpdatePartyLeader(this.turmoil.getPartyByName(partyName));
-    this.game.log('${0} adds a delegate in ${1}', (b) => b.player(this.marsBotPlayer).partyName(partyName));
+    this.game.log('${0} added a delegate in ${1}', (b) => b.player(this.marsBotPlayer).partyName(partyName));
     return partyName;
   }
 

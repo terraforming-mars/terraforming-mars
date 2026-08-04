@@ -38,6 +38,7 @@ import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
+import {IAutomaGameHooks} from './automa/IAutomaGameHooks';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {AresData} from '../common/ares/AresData';
@@ -150,6 +151,7 @@ export class Game implements IGame, Logger {
   public colonies: Array<IColony> = [];
   public discardedColonies: Array<IColony> = []; // Not serialized
   public turmoil: Turmoil | undefined;
+  public automaHooks: IAutomaGameHooks | undefined;
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;

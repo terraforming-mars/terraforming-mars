@@ -70,6 +70,13 @@ export abstract class Party {
       // Add NEUTRAL in the list
       playersToCheck.push('NEUTRAL');
 
+      // A delegate that is not a game player (MarsBot's) can still lead the party.
+      for (const other of new Set(this.delegates)) {
+        if (!playersToCheck.includes(other)) {
+          playersToCheck.push(other);
+        }
+      }
+
       playersToCheck.some((nextPlayer) => {
         if (this.delegates.get(nextPlayer) === max) {
           this.setPartyLeader(nextPlayer, game);

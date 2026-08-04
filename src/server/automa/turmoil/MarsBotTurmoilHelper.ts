@@ -4,19 +4,20 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
 
-/**
- * Places MarsBot's delegates and keeps its party leadership up to date.
- *
- * Party.checkPartyLeader only considers game.playersInGenerationOrder plus NEUTRAL, and MarsBot
- * is in neither, so leadership has to be applied here instead.
- */
+/** Picks the party for MarsBot's delegates and places them (T-7). */
 export class MarsBotTurmoilHelper {
-  constructor(
-    private readonly game: IGame,
-    private readonly turmoil: Turmoil,
-    private readonly marsBotPlayer: IPlayer,
-    private readonly humanPlayer: IPlayer,
-  ) {}
+  private readonly turmoil: Turmoil;
+  private readonly marsBotPlayer: IPlayer;
+  private readonly humanPlayer: IPlayer;
+
+  constructor(private readonly game: IGame) {
+    if (game.automaHooks === undefined) {
+      throw new Error('MarsBotTurmoilHelper needs an automa game');
+    }
+    this.turmoil = Turmoil.getTurmoil(game);
+    this.marsBotPlayer = game.automaHooks.marsBotPlayer;
+    this.humanPlayer = game.players[0];
+  }
 
   /**
    * Chooses the party for MarsBot's next delegate, or undefined when its reserve is empty (T-7).
@@ -72,20 +73,8 @@ export class MarsBotTurmoilHelper {
       return undefined;
     }
     this.turmoil.sendDelegateToParty(this.marsBotPlayer, partyName, this.game);
-    this.maybeUpdatePartyLeader(this.turmoil.getPartyByName(partyName));
     this.game.log('${0} added a delegate in ${1}', (b) => b.player(this.marsBotPlayer).partyName(partyName));
     return partyName;
-  }
-
-  /** Makes MarsBot the party leader when it now holds strictly more delegates than the current leader. */
-  public maybeUpdatePartyLeader(party: IParty): void {
-    const marsBotCount = party.delegates.get(this.marsBotPlayer);
-    if (marsBotCount === 0) {
-      return;
-    }
-    if (marsBotCount > this.leaderCount(party)) {
-      party.partyLeader = this.marsBotPlayer;
-    }
   }
 
   /**

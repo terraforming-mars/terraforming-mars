@@ -35,29 +35,50 @@ export class MarsBotDraftResolver {
   /**
    * Splits the drafted cards into the ones MarsBot keeps and the one it discards.
    *
-   * Taking the cards in shuffled order, the first one without a priority tag is discarded and
-   * everything else is kept, so at most one card leaves. A draft where every card carries a
-   * priority tag loses nothing. Corps drafting on anything other than tags keep their whole draft.
+   * The corp's draft priority protects its best cards, and the first card it does not protect,
+   * in shuffled order, is the one discarded. At most one card leaves, and a draft where the
+   * priority protects everything loses nothing.
    */
   public discardAfterDraft(
     drafted: Array<IProjectCard>,
     priority: MarsBotDraftPriority,
   ): {kept: Array<IProjectCard>, discarded: Array<IProjectCard>} {
-    if (priority.type !== 'tags') {
-      return {kept: [...drafted], discarded: []};
-    }
-
     const cards = [...drafted];
     this.shuffler(cards);
 
-    const firstMiss = cards.findIndex((card) => !this.hasAnyTag(card, priority.tags));
-    if (firstMiss === -1) {
+    const saved = this.savedFromDiscard(cards, priority);
+    const discardable = cards.findIndex((card) => !saved.has(card));
+    if (discardable === -1) {
       return {kept: cards, discarded: []};
     }
     return {
-      kept: cards.filter((_, index) => index !== firstMiss),
-      discarded: [cards[firstMiss]],
+      kept: cards.filter((_, index) => index !== discardable),
+      discarded: [cards[discardable]],
     };
+  }
+
+  /**
+   * Returns the drafted cards the corp's draft priority keeps out of the discard.
+   *
+   * Corps drafting on tags save every card carrying one, and the others save the cards that
+   * won the draft on their own terms: the most expensive, or the most tags. Aridor reads the
+   * same track it drafted on, which cannot have moved since, as tracks only advance once
+   * MarsBot starts resolving cards.
+   */
+  private savedFromDiscard(
+    cards: ReadonlyArray<IProjectCard>,
+    priority: MarsBotDraftPriority,
+  ): ReadonlySet<IProjectCard> {
+    switch (priority.type) {
+    case 'tags':
+      return new Set(cards.filter((card) => this.hasAnyTag(card, priority.tags)));
+    case 'leastAdvancedTrack':
+      return new Set(cards.filter((card) => this.hasAnyTag(card, this.leastAdvancedTrackTags())));
+    case 'mostExpensive':
+      return topScoring(cards, (card) => card.cost);
+    case 'mostTags':
+      return topScoring(cards, (card) => this.countTags(card));
+    }
   }
 
   /**
@@ -89,8 +110,11 @@ export class MarsBotDraftResolver {
   }
 
   private pickByLeastAdvancedTrack(hand: Array<IProjectCard>): IProjectCard {
-    const leastAdvanced = this.tracks.getLeastAdvancedTrackIndex();
-    return this.pickByTags(hand, this.tracks.data[leastAdvanced].tags);
+    return this.pickByTags(hand, this.leastAdvancedTrackTags());
+  }
+
+  private leastAdvancedTrackTags(): ReadonlyArray<Tag> {
+    return this.tracks.data[this.tracks.getLeastAdvancedTrackIndex()].tags;
   }
 
   /**
@@ -114,6 +138,12 @@ export class MarsBotDraftResolver {
   private countTags(card: IProjectCard): number {
     return card.tags.filter((tag) => tag !== Tag.WILD).length;
   }
+}
+
+/** Returns the items tied for the highest score, which is every item when they all score alike. */
+function topScoring<T>(items: ReadonlyArray<T>, scorer: (item: T) => number): ReadonlySet<T> {
+  const best = Math.max(...items.map(scorer));
+  return new Set(items.filter((item) => scorer(item) === best));
 }
 
 /** Compares two scores entry by entry. Positive when `a` outranks `b`, negative when it loses. */

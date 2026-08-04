@@ -199,13 +199,50 @@ describe('MarsBotDraftResolver', () => {
       expect(kept).to.deep.eq([earthCard, otherPlantCard]);
     });
 
-    it('keeps everything for a corp that does not draft on tags', () => {
+    it('drafting on the least advanced track saves the cards carrying its tags', () => {
+      const tracks = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+      // Leave track 0 (Building and Microbe) behind, so its tags protect the Building card.
+      for (let i = 1; i < tracks.tracks.length; i++) {
+        tracks.tracks[i].advance();
+      }
+      // The Building card comes first, so a discard that ignored the track would take it.
+      const drafted = [buildingCard, plantCard, earthCard];
+
+      const {kept, discarded} = new MarsBotDraftResolver(tracks, keepOrder)
+        .discardAfterDraft(drafted, {type: 'leastAdvancedTrack'});
+
+      expect(discarded).to.deep.eq([plantCard]);
+      expect(kept).to.deep.eq([buildingCard, earthCard]);
+    });
+
+    it('Credicor saves the most expensive card and discards one of the others', () => {
+      // Big Asteroid comes first, so a discard that ignored the cost would take it.
+      const drafted = [expensiveSpaceCard, plantCard, spaceCard];
+
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, {type: 'mostExpensive'});
+
+      expect(discarded).to.deep.eq([plantCard]);
+      expect(kept).to.deep.eq([expensiveSpaceCard, spaceCard]);
+    });
+
+    it('Credicor discards nothing when every drafted card costs the same', () => {
+      // Algae and Acquired Company both cost 10 M€.
       const drafted = [plantCard, earthCard];
 
       const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, {type: 'mostExpensive'});
 
       expect(discarded).is.empty;
       expect(kept).to.deep.eq(drafted);
+    });
+
+    it('Spire saves the card with the most tags and discards one of the others', () => {
+      // Space Elevator comes first, so a discard that ignored the tag count would take it.
+      const drafted = [buildingAndSpaceCard, buildingCard, earthCard];
+
+      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, {type: 'mostTags'});
+
+      expect(discarded).to.deep.eq([buildingCard]);
+      expect(kept).to.deep.eq([buildingAndSpaceCard, earthCard]);
     });
   });
 });

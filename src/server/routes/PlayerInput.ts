@@ -11,10 +11,9 @@ import {Request} from '../Request';
 import {Response} from '../Response';
 import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
-import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {AppErrorResponse, INVALID_RUN_ID, RESPONDING_TOO_QUICKLY} from '../../common/app/AppErrorId';
+import {INVALID_RUN_ID, RESPONDING_TOO_QUICKLY} from '../../common/app/AppErrorId';
 import {RouteError} from './RouteError';
 import {readBody} from './readBody';
 import {stringToNumber} from '../database/utils';
@@ -109,19 +108,7 @@ export class PlayerInput extends Handler {
       if (!(e instanceof AppError || e instanceof InputError)) {
         console.warn('Error processing input from player', e);
       }
-      // TODO(kberg): use responses.ts, though that changes the output.
-      res.writeHead(statusCode.badRequest, {
-        'Content-Type': 'application/json',
-      });
-
-      const id = e instanceof AppError ? e.id : undefined;
-      const message = e instanceof Error ? e.message : String(e);
-      const response: AppErrorResponse = {
-        id: id,
-        message: message,
-      };
-      res.write(JSON.stringify(response));
-      res.end();
+      responses.badInputRequest(req, res, e);
     }
   }
 

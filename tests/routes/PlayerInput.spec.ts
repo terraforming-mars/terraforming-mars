@@ -5,6 +5,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UndoActionOption} from '../../src/server/inputs/UndoActionOption';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {cast} from '@/common/utils/utils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
@@ -86,6 +87,29 @@ describe('PlayerInput', () => {
     const model = JSON.parse(res.content);
     expect(game.gameAge).not.eq(undo.gameAge);
     expect(model.game.gameAge).eq(model.game.gameAge);
+  });
+
+  it('sends 400 when input processing throws a plain Error', async () => {
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
+    scaffolding.url = '/player/input?id=' + player.id;
+    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    await scaffolding.ctx.gameLoader.add(game);
+
+    const options = cast(player.getWaitingFor(), OrOptions);
+    options.options.push(new SelectOption('Throw').andThen(() => {
+      throw new Error('You cannot overspend heat');
+    }));
+
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
+      req.emitString(JSON.stringify(orOptionsResponse));
+      req.emitter.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(JSON.parse(res.content)).deep.eq({message: 'You cannot overspend heat'});
   });
 
   it('sends 400 on server error', async () => {

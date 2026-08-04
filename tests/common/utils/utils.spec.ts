@@ -68,6 +68,27 @@ describe('utils', () => {
     ]);
   });
 
+  it('rankedTiers', () => {
+    expect(utils.rankedTiers([], (n: number) => n)).deep.eq([]);
+    expect(utils.rankedTiers(['a'], () => 4)).deep.eq([
+      {score: 4, items: ['a']},
+    ]);
+    expect(utils.rankedTiers(['a', 'b', 'c', 'd'], (s) => s.charCodeAt(0))).deep.eq([
+      {score: 100, items: ['d']},
+      {score: 99, items: ['c']},
+      {score: 98, items: ['b']},
+      {score: 97, items: ['a']},
+    ]);
+    expect(utils.rankedTiers([1, 2, 2, 3, 1], (n) => n)).deep.eq([
+      {score: 3, items: [3]},
+      {score: 2, items: [2, 2]},
+      {score: 1, items: [1, 1]},
+    ]);
+    expect(utils.rankedTiers(['x', 'y'], () => 0)).deep.eq([
+      {score: 0, items: ['x', 'y']},
+    ]);
+  });
+
   it('oneWayDifference', () => {
     expect(utils.oneWayDifference([], [])).is.empty;
     expect(utils.oneWayDifference([1], [1])).is.empty;

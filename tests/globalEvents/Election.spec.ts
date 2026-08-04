@@ -31,6 +31,35 @@ describe('Election', () => {
   });
 
 
+  it('a tie for first place gives every tied player 2 TR and skips second place', () => {
+    const card = new Election();
+    const [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
+    turmoil.initGlobalEvent(game);
+    player.tagsForTest = {building: 3};
+    player2.tagsForTest = {building: 3};
+    player3.tagsForTest = {building: 1};
+
+    card.resolve(game);
+
+    expect(player.terraformRating).to.eq(22);
+    expect(player2.terraformRating).to.eq(22);
+    expect(player3.terraformRating).to.eq(20);
+  });
+
+  it('with two players, second place gets 1 TR', () => {
+    const card = new Election();
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
+    turmoil.initGlobalEvent(game);
+    player.tagsForTest = {building: 2};
+
+    card.resolve(game);
+
+    expect(player.terraformRating).to.eq(22);
+    expect(player2.terraformRating).to.eq(21);
+  });
+
   it('solo play', () => {
     const card = new Election();
     const [game, player] = testGame(1, {turmoilExtension: true});

@@ -9,6 +9,7 @@ import {IPlayer} from '../../IPlayer';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {rankedTiers} from '../../../common/utils/utils';
 
 export class Election extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -37,36 +38,19 @@ export class Election extends GlobalEvent implements IGlobalEvent {
         player.increaseTerraformRating(1, {log: true});
       }
     } else {
-      const players = game.players.slice().sort(
-        (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
-      );
+      const [first, second] = rankedTiers(game.players, (player) => this.getScore(player, turmoil, game));
 
-      // We have one rank 1 player
-      if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-        players[0].increaseTerraformRating(2, {log: true});
-        players.shift();
-
-        if (players.length === 1) {
-          players[0].increaseTerraformRating(1, {log: true});
-        } else if (players.length > 1) {
-          // We have one rank 2 player
-          if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-            players[0].increaseTerraformRating(1, {log: true});
-            // We have at least two rank 2 players
-          } else {
-            const score = this.getScore(players[0], turmoil, game);
-            while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-              players[0].increaseTerraformRating(1, {log: true});
-              players.shift();
-            }
+      if (first.items.length === 1) {
+        first.items[0].increaseTerraformRating(2, {log: true});
+        if (second !== undefined) {
+          for (const player of second.items) {
+            player.increaseTerraformRating(1, {log: true});
           }
         }
-        // We have at least two rank 1 players
       } else {
-        const score = this.getScore(players[0], turmoil, game);
-        while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-          players[0].increaseTerraformRating(2, {log: true});
-          players.shift();
+        // A tie for first place is friendly, and takes the second place prize with it.
+        for (const player of first.items) {
+          player.increaseTerraformRating(2, {log: true});
         }
       }
     }

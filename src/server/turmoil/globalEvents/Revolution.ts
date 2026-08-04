@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {rankedTiers} from '../../../common/utils/utils';
 
 export class Revolution extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -30,40 +31,19 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
         game.playersInGenerationOrder[0].decreaseTerraformRating(2, {log: true});
       }
     } else {
-      const players = [...game.playersInGenerationOrder].sort(
-        (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
-      );
+      const [first, second] = rankedTiers(game.playersInGenerationOrder, (player) => this.getScore(player, turmoil));
 
-      // We have one rank 1 player
-      if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-        players[0].decreaseTerraformRating(2, {log: true});
-        players.shift();
-
-        if (players.length === 1 && this.getScore(players[0], turmoil) > 0) {
-          players[0].decreaseTerraformRating(1, {log: true});
-        } else if (players.length > 1) {
-          // We have one rank 2 player
-          if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-            players[0].decreaseTerraformRating(1, {log: true});
-            // We have at least two rank 2 players
-          } else {
-            const score = this.getScore(players[0], turmoil);
-            while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
-              if (this.getScore(players[0], turmoil) > 0) {
-                players[0].decreaseTerraformRating(1, {log: true});
-              }
-              players.shift();
-            }
+      if (first.items.length === 1) {
+        first.items[0].decreaseTerraformRating(2, {log: true});
+        if (second !== undefined && second.score > 0) {
+          for (const player of second.items) {
+            player.decreaseTerraformRating(1, {log: true});
           }
         }
-        // We have at least two rank 1 players
-      } else {
-        const score = this.getScore(players[0], turmoil);
-        while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
-          if (this.getScore(players[0], turmoil) > 0) {
-            players[0].decreaseTerraformRating(2, {log: true});
-          }
-          players.shift();
+      } else if (first.score > 0) {
+        // A tie for first place is friendly, and takes the second place penalty with it.
+        for (const player of first.items) {
+          player.decreaseTerraformRating(2, {log: true});
         }
       }
     }

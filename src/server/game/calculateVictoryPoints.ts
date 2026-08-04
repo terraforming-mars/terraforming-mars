@@ -6,6 +6,7 @@ import {PathfindersExpansion} from '../pathfinders/PathfindersExpansion';
 import {DeltaProjectExpansion} from '../delta/DeltaProjectExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdownBuilder} from './VictoryPointsBreakdownBuilder';
+import {rankedTiers} from '../../common/utils/utils';
 import {FundedAward} from '../awards/FundedAward';
 import {AwardScorer} from '../awards/AwardScorer';
 import {CardName} from '../../common/cards/CardName';
@@ -125,33 +126,21 @@ function giveAwards(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
   player.game.fundedAwards.forEach((fundedAward) => {
     const award = fundedAward.award;
     const scorer = new AwardScorer(player.game, award);
-    const players: Array<IPlayer> = player.game.players.slice();
-    players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
+    const players = player.game.players;
+    const [first, second] = rankedTiers(players, (p) => scorer.get(p));
 
-    // There is one rank 1 player
-    if (scorer.get(players[0]) > scorer.get(players[1])) {
-      maybeSetVP(player, players[0], fundedAward, 5, '1st', builder);
-      players.shift();
-
-      if (players.length > 1) {
-        // There is one rank 2 player
-        if (scorer.get(players[0]) > scorer.get(players[1])) {
-          maybeSetVP(player, players[0], fundedAward, 2, '2nd', builder);
-        } else {
-          // There are at least two rank 2 players
-          const score = scorer.get(players[0]);
-          while (players.length > 0 && scorer.get(players[0]) === score) {
-            maybeSetVP(player, players[0], fundedAward, 2, '2nd', builder);
-            players.shift();
-          }
+    if (first.items.length === 1) {
+      maybeSetVP(player, first.items[0], fundedAward, 5, '1st', builder);
+      // Second place is not awarded in 2 player games.
+      if (players.length > 2 && second !== undefined) {
+        for (const p of second.items) {
+          maybeSetVP(player, p, fundedAward, 2, '2nd', builder);
         }
       }
     } else {
-      // There are at least two rank 1 players
-      const score = scorer.get(players[0]);
-      while (players.length > 0 && scorer.get(players[0]) === score) {
-        maybeSetVP(player, players[0], fundedAward, 5, '1st', builder);
-        players.shift();
+      // A tie for first place is friendly, and takes the second place award with it.
+      for (const p of first.items) {
+        maybeSetVP(player, p, fundedAward, 5, '1st', builder);
       }
     }
   });

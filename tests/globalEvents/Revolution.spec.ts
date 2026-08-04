@@ -40,4 +40,16 @@ describe('Revolution', () => {
     expect(player.terraformRating).to.eq(20);
     expect(player2.terraformRating).to.eq(18);
   });
+
+  it('a tie for first place costs every tied player 2 TR', () => {
+    // Two influence come with player2's chairman and party leader seats, so three Earth
+    // tags against one make the scores equal.
+    player.tagsForTest = {earth: 3};
+    player2.tagsForTest = {earth: 1};
+    expect(card.getScore(player, turmoil)).to.eq(card.getScore(player2, turmoil));
+
+    card.resolve(game);
+    expect(player.terraformRating).to.eq(18);
+    expect(player2.terraformRating).to.eq(18);
+  });
 });

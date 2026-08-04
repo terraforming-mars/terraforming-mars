@@ -14,7 +14,7 @@ describe('VolcanicEruptions', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.production.heat).to.eq(0);
     expect(player2.production.heat).to.eq(3);
     expect(game.getTemperature()).to.eq(-26);

@@ -24,7 +24,9 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
+
     // Solo
     if (game.isSoloMode()) {
       const player = game.players[0];

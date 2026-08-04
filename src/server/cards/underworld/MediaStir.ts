@@ -3,10 +3,10 @@ import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
 
 export class MediaStir extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -20,17 +20,16 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const corruption = Math.min(player.underworldData.corruption, 5);
-      const adjusted = Math.max(0, corruption - turmoil.getInfluence(player));
-      if (adjusted > 0) {
-        const cost = adjusted * 3;
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
-      }
-      if (player.underworldData.corruption === 0) {
-        player.increaseTerraformRating(1, {log: true, from: {globalEvent: this}});
-      }
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const corruption = Math.min(player.underworldData.corruption, 5);
+    const adjusted = Math.max(0, corruption - turmoil.getInfluence(player));
+    if (adjusted > 0) {
+      const cost = adjusted * 3;
+      player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
+    }
+    if (player.underworldData.corruption === 0) {
+      player.increaseTerraformRating(1, {log: true, from: {globalEvent: this}});
+    }
   }
 }

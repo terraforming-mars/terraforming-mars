@@ -2,13 +2,13 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IPlayer} from '@/server/IPlayer';
 
 export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -22,12 +22,11 @@ export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {
       }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const amount = Math.min(5, player.playedCards.filter((card) => card.type === CardType.ACTIVE).length) - turmoil.getInfluence(player);
-      if (amount > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: {globalEvent: this}});
-      }
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const amount = Math.min(5, player.playedCards.filter((card) => card.type === CardType.ACTIVE).length) - turmoil.getInfluence(player);
+    if (amount > 0) {
+      player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: {globalEvent: this}});
+    }
   }
 }

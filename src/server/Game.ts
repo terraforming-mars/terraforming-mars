@@ -38,6 +38,8 @@ import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
+import {AutomaGameHooks} from './automa/AutomaGameHooks';
+import {AutomaGameSetup} from './automa/AutomaGameSetup';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {AresData} from '../common/ares/AresData';
@@ -150,6 +152,7 @@ export class Game implements IGame, Logger {
   public colonies: Array<IColony> = [];
   public discardedColonies: Array<IColony> = []; // Not serialized
   public turmoil: Turmoil | undefined;
+  public automaHooks: AutomaGameHooks | undefined;
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
@@ -357,7 +360,9 @@ export class Game implements IGame, Logger {
     }
 
     // and 2 neutral cities and forests on board
-    if (players.length === 1) {
+    if (players.length === 1 && gameOptions.automaOption) {
+      game.automaHooks = AutomaGameSetup.setup(game);
+    } else if (players.length === 1) {
       //  Setup solo player's starting tiles
       GameSetup.setupNeutralPlayer(game);
     }
@@ -530,6 +535,10 @@ export class Game implements IGame, Logger {
   }
 
   public isSoloMode() :boolean {
+    // An automa game has one human player, but plays by MarsBot's rules, not the solo ones.
+    if (this.automaHooks !== undefined) {
+      return false;
+    }
     return this.players.length === 1;
   }
 
@@ -1706,7 +1715,15 @@ export class Game implements IGame, Logger {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    const board = GameSetup.deserializeBoard(players, gameOptions, d);
+    // MarsBot's player is not in d.players, so it is recreated for the subsystems that
+    // resolve players by id, like the board and the Turmoil delegates.
+    let marsBotPlayer: IPlayer | undefined;
+    if (gameOptions.automaOption) {
+      marsBotPlayer = AutomaGameSetup.createMarsBotPlayer(d.id);
+    }
+    const playersWithMarsBot = marsBotPlayer !== undefined ? [...players, marsBotPlayer] : players;
+
+    const board = GameSetup.deserializeBoard(playersWithMarsBot, gameOptions, d);
 
     const rng = new SeededRandom(d.seed, d.currentSeed);
 
@@ -1758,7 +1775,12 @@ export class Game implements IGame, Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, players);
+      game.turmoil = Turmoil.deserialize(d.turmoil, playersWithMarsBot);
+    }
+
+    if (marsBotPlayer !== undefined) {
+      marsBotPlayer.setup(game);
+      game.automaHooks = {marsBotPlayer};
     }
 
     // Reload moon elements if needed

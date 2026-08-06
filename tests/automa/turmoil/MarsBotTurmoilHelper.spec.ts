@@ -4,20 +4,15 @@ import {DELEGATES_PER_PLAYER} from '../../../src/common/constants';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MarsBotTurmoilHelper} from '../../../src/server/automa/turmoil/MarsBotTurmoilHelper';
-import {Player} from '../../../src/server/Player';
 
 /**
- * Builds a Turmoil game with its MarsBot player put together the way the game will put it
- * together: set up against the game, registered in automaHooks, given its own delegate
- * reserve, and deliberately not in game.players.
+ * Builds a Turmoil automa game. The game's own setup creates the MarsBot player, which is
+ * deliberately not in game.players, and seeds its delegate reserve.
  */
 function createTurmoilGame() {
-  const [game, humanPlayer] = testGame(1, {turmoilExtension: true});
+  const [game, humanPlayer] = testGame(1, {automaOption: true, turmoilExtension: true});
   const turmoil = Turmoil.getTurmoil(game);
-  const marsBotPlayer = new Player('MarsBot', 'bronze', false, 0, 'p-marsbot');
-  marsBotPlayer.setup(game);
-  game.automaHooks = {marsBotPlayer};
-  turmoil.delegateReserve.add(marsBotPlayer, DELEGATES_PER_PLAYER);
+  const marsBotPlayer = game.automaHooks!.marsBotPlayer;
   const helper = new MarsBotTurmoilHelper(game);
   return {game, turmoil, humanPlayer, marsBotPlayer, helper};
 }

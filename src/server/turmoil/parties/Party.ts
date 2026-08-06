@@ -70,11 +70,10 @@ export abstract class Party {
       // Add NEUTRAL in the list
       playersToCheck.push('NEUTRAL');
 
-      // A delegate that is not a game player (MarsBot's) can still lead the party.
-      for (const other of new Set(this.delegates)) {
-        if (!playersToCheck.includes(other)) {
-          playersToCheck.push(other);
-        }
+      // MarsBot is not a game player, but its delegates can still lead the party.
+      const marsBotPlayer = game.automaHooks?.marsBotPlayer;
+      if (marsBotPlayer !== undefined && this.delegates.has(marsBotPlayer)) {
+        playersToCheck.push(marsBotPlayer);
       }
 
       playersToCheck.some((nextPlayer) => {

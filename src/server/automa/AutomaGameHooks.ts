@@ -5,6 +5,6 @@ import {IPlayer} from '../IPlayer';
  * Grows as the automa port lands. For now it only names the MarsBot player,
  * which is deliberately not part of game.players.
  */
-export interface IAutomaGameHooks {
-  readonly marsBotPlayer: IPlayer;
-}
+export type AutomaGameHooks = {
+  marsBotPlayer: IPlayer;
+};

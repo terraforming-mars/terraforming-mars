@@ -20,7 +20,7 @@ import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {ICard} from './cards/ICard';
 import {Turmoil} from './turmoil/Turmoil';
-import {IAutomaGameHooks} from './automa/IAutomaGameHooks';
+import {AutomaGameHooks} from './automa/AutomaGameHooks';
 import {AresData} from '../common/ares/AresData';
 import {MoonData} from './moon/MoonData';
 import {SeededRandom} from '../common/utils/Random';
@@ -80,7 +80,7 @@ export interface IGame extends Logger {
   colonies: Array<IColony>;
   discardedColonies: Array<IColony>; // Not serialized
   turmoil: Turmoil | undefined;
-  automaHooks: IAutomaGameHooks | undefined;
+  automaHooks: AutomaGameHooks | undefined;
   // True when resolving Turmoil phase. Does not need to be serialized since the turmoil phase isn't saved in between.
   inTurmoil: boolean;
   aresData: AresData | undefined;

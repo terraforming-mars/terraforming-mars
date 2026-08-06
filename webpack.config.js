@@ -118,7 +118,7 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     hashFunction: 'xxhash64',
-    publicPath: '/',
+    publicPath: '',
     chunkFilename: 'chunks/[name].js',
   },
   optimization: {

@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Administrator} from '../../../src/server/awards/modular/Administrator';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
 
 describe('Administrator', () => {
   let award: Administrator;
@@ -62,5 +63,12 @@ describe('Administrator', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.WILD]}));
     expect(award.getScore(player)).eq(3);
+  });
+
+  it('MarsBot counts the tagless cards in its own pile, plus 2', () => {
+    const pile = [fakeCard({tags: []}), fakeCard({tags: [Tag.EARTH]})];
+    const bot = {playedProjectCards: pile} as unknown as IMarsBot;
+
+    expect(award.marsBotScore(bot)).to.eq(3);
   });
 });

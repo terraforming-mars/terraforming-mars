@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
 import {MilestoneName} from '../../common/ma/MilestoneName';
+import {IMarsBot} from '../automa/MarsBotCorpTypes';
 
 export class Irrigator extends BaseMilestone {
   constructor(
@@ -23,5 +24,10 @@ export class Irrigator extends BaseMilestone {
 export class Coastguard extends Irrigator {
   constructor() {
     super('Coastguard', 3);
+  }
+
+  /** The automa rules put MarsBot's threshold at 4 tiles adjacent to oceans. */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return this.getScore(bot.player) >= 4;
   }
 }

@@ -1,6 +1,7 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
+import {IMarsBot} from '../../automa/MarsBotCorpTypes';
 
 export class Tactician4 extends BaseMilestone {
   constructor() {
@@ -20,5 +21,10 @@ export class Tactician4 extends BaseMilestone {
     });
 
     return validCards.length;
+  }
+
+  /** MarsBot's cards carry no requirements. It qualifies with 30 M€ on hand. */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return bot.mcSupply >= 30;
   }
 }

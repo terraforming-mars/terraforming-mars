@@ -3,6 +3,9 @@ import {testGame} from '../../TestGame';
 import {Producer} from '../../../src/server/milestones/modular/Producer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
+import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
+import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 
 describe('Producer', () => {
   let milestone: Producer;
@@ -59,5 +62,21 @@ describe('Producer', () => {
     player.production.add(Resource.HEAT, 10);
 
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot claims it with its top three tracks summing to 16', () => {
+    const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+    const bot = {board} as unknown as IMarsBot;
+    for (let i = 0; i < 6; i++) {
+      board.tracks[0].advance();
+      board.tracks[1].advance();
+    }
+    for (let i = 0; i < 3; i++) {
+      board.tracks[2].advance();
+    }
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    board.tracks[2].advance();
+    expect(milestone.marsBotCanClaim(bot)).is.true;
   });
 });

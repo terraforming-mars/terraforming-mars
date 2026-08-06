@@ -1,6 +1,7 @@
 import {IAward} from '../IAward';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
+import {IMarsBot} from '../../automa/MarsBotCorpTypes';
 
 export class Incorporator implements IAward {
   public readonly name = 'Incorporator';
@@ -9,5 +10,10 @@ export class Incorporator implements IAward {
     return player.playedCards.projects().filter((card) => {
       return (card.cost <= 10) && (card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED);
     }).length;
+  }
+
+  /** MarsBot counts its own played pile, events included. */
+  public marsBotScore(bot: IMarsBot): number {
+    return bot.playedProjectCards.filter((card) => card.cost <= 10).length;
   }
 }

@@ -1,5 +1,6 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
+import {IMarsBot} from '../automa/MarsBotCorpTypes';
 
 export class Excentric implements IAward {
   public readonly name = 'Excentric';
@@ -12,5 +13,10 @@ export class Excentric implements IAward {
     });
 
     return score;
+  }
+
+  /** The automa rules count every 5 of MarsBot's M€ as one resource. */
+  public marsBotScore(bot: IMarsBot): number {
+    return Math.floor(bot.mcSupply / 5);
   }
 }

@@ -10,6 +10,9 @@ import {Units} from '../../../src/common/Units';
 import {ALL_RESOURCES} from '../../../src/common/Resource';
 import {NirgalEnterprises} from '../../../src/server/cards/prelude2/NirgalEnterprises';
 import {StagedProtests} from '../../../src/server/cards/underworld/StagedProtests';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
+import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
+import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 
 describe('Merchant', () => {
   let milestone: Merchant;
@@ -136,5 +139,19 @@ describe('Merchant', () => {
       expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 2, titanium: 3})}, player))
         .to.throw();
     });
+  });
+
+  it('MarsBot claims it with every Mars track at space 2', () => {
+    const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+    const bot = {board} as unknown as IMarsBot;
+    for (let index = 0; index < 6; index++) {
+      board.tracks[index].advance();
+      board.tracks[index].advance();
+    }
+    board.tracks[6].advance();
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    board.tracks[6].advance();
+    expect(milestone.marsBotCanClaim(bot)).is.true;
   });
 });

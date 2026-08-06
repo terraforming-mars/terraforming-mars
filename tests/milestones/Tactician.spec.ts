@@ -9,6 +9,7 @@ import {Algae} from '../../src/server/cards/base/Algae';
 import {TestPlayer} from '../TestPlayer';
 import {fakeCard} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
+import {IMarsBot} from '../../src/server/automa/MarsBotCorpTypes';
 
 describe('Tactician', () => {
   let milestone: Tactician;
@@ -62,5 +63,10 @@ describe('Tactician', () => {
     player.playedCards.push(new Algae());
 
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot claims it with 35 M€', () => {
+    expect(milestone.marsBotCanClaim({mcSupply: 34} as unknown as IMarsBot)).is.false;
+    expect(milestone.marsBotCanClaim({mcSupply: 35} as unknown as IMarsBot)).is.true;
   });
 });

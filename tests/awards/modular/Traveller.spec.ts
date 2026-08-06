@@ -6,6 +6,9 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
+import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
+import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 
 describe('Traveller', () => {
   let award: Traveller;
@@ -65,5 +68,18 @@ describe('Traveller', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.EARTH]}));
     expect(award.getScore(player)).eq(3);
+  });
+
+  it('MarsBot scores the higher of its Jovian and earth tracks, plus 5', () => {
+    const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+    const bot = {board} as unknown as IMarsBot;
+    for (let i = 0; i < 3; i++) {
+      board.tracks[4].advance();
+    }
+    for (let i = 0; i < 6; i++) {
+      board.tracks[5].advance();
+    }
+
+    expect(award.marsBotScore(bot)).to.eq(11);
   });
 });

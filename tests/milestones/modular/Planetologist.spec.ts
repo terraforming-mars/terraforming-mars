@@ -1,6 +1,10 @@
 import {expect} from 'chai';
 import {Planetologist} from '../../../src/server/milestones/modular/Planetologist';
 import {TestPlayer} from '../../TestPlayer';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
+import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
+import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
+import {VENUS_MARSBOT_TRACK} from '../../../src/server/automa/boards/VenusMarsBot';
 
 describe('Planetologist', () => {
   const canClaimRuns = [
@@ -22,4 +26,22 @@ describe('Planetologist', () => {
       expect(milestone.canClaim(player)).eq(run.expected.canClaim);
     });
   }
+
+  it('MarsBot claims it with two of power, earth and Venus tracks at space 3', () => {
+    const milestone = new Planetologist();
+    const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+    const bot = {board} as unknown as IMarsBot;
+    for (let i = 0; i < 3; i++) {
+      board.tracks[4].advance();
+    }
+    for (let i = 0; i < 2; i++) {
+      board.tracks[5].advance();
+    }
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    for (let i = 0; i < 3; i++) {
+      board.tracks[7].advance();
+    }
+    expect(milestone.marsBotCanClaim(bot)).is.true;
+  });
 });

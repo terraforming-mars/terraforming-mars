@@ -10,8 +10,9 @@ import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
-import {fakeCard, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
+import {fakeCard, formatMessage, runAllActions, setOxygenLevel, setRulingParty, setVenusScaleLevel} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../src/server/cards/base/Ants';
@@ -38,6 +39,7 @@ import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {CardName} from '../../src/common/cards/CardName';
 import {cast} from '@/common/utils/utils';
 import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMining';
+import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../src/common/constants';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -699,6 +701,19 @@ describe('Executor', () => {
     expect(executor.canExecute(behavior, player, fake)).is.true;
   });
 
+  it('or, canExecute, checks every sub-behavior so warnings are not lost to short-circuiting', () => {
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+    const behavior: Behavior = {or: {behaviors: [
+      {stock: {megacredits: 1}, title: 'MC'},
+      {global: {oxygen: 1}, title: 'Oxygen'},
+    ]}};
+
+    // The first sub-behavior alone is enough to make this executable, but the second
+    // sub-behavior's warning must still be set on the card.
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+    expect(fake.warnings).deep.eq(new Set(['maxoxygen']));
+  });
+
   it('or, execute', () => {
     const behavior: Behavior = {or: {behaviors: [
       {stock: {megacredits: 3}, title: '3MC'},
@@ -740,6 +755,37 @@ describe('Executor', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(player.megaCredits).eq(1);
+  });
+
+  it('or, execute, warnings apply only to the option that earned them', () => {
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
+    const behavior: Behavior = {or: {behaviors: [
+      {global: {venus: 1}, title: 'Venus'},
+      {stock: {megacredits: 1}, title: 'MC'},
+    ]}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const [venusOption, mcOption] = orOptions.options.map((option) => cast(option, SelectOption));
+
+    expect(venusOption.warnings).deep.eq(['maxvenus']);
+    expect(mcOption.warnings).is.undefined;
+    // The warning was scoped to the option, not left dangling on the card.
+    expect(fake.warnings.size).eq(0);
+  });
+
+  it('or, execute, does not clobber warnings the card already had', () => {
+    fake.addWarning('decreaseOwnProduction');
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
+    const behavior: Behavior = {or: {behaviors: [
+      {global: {venus: 1}, title: 'Venus'},
+      {stock: {megacredits: 1}, title: 'MC'},
+    ]}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    expect(fake.warnings).deep.eq(new Set(['decreaseOwnProduction']));
   });
 
   it('underworld, identify', () => {

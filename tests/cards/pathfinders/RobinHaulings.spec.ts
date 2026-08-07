@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {churn, fakeCard, runAllActions, setOxygenLevel, setVenusScaleLevel} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {cast} from '../../../src/common/utils/utils';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '@/common/constants';
 
@@ -59,6 +60,22 @@ describe('RobinHaulings', () => {
     expect(card.canAct(player)).is.true;
   });
 
+  it('canAct also flags a warning on the card', () => {
+    card.resourceCount = 4;
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
+
+    expect(card.canAct(player)).is.true;
+    expect(card.warnings).deep.eq(new Set(['maxvenus']));
+  });
+
+  it('canAct also flags a warning for the second option, not just the first', () => {
+    card.resourceCount = 4;
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+
+    expect(card.canAct(player)).is.true;
+    expect(card.warnings).deep.eq(new Set(['maxoxygen']));
+  });
+
   it('action, venus', () => {
     card.resourceCount = 4;
     const orOptions = cast(churn(card.action(player), player), OrOptions);
@@ -85,15 +102,30 @@ describe('RobinHaulings', () => {
     expect(game.getOxygenLevel()).eq(1);
   });
 
-  it('Shows a warning on the card when both global parameters are at max', () => {
+  it('Shows a warning on the affected option when both global parameters are at max', () => {
     card.resourceCount = 4;
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
 
-    // The action is still offered (spending the floaters is a no-op, not blocked), but
-    // canExecute flags the card itself, not the individual OrOptions choices.
+    // The action is still offered (spending the floaters is a no-op, not blocked). Each
+    // warning is scoped to the option it applies to, not left dangling on the card.
     const orOptions = cast(churn(card.action(player), player), OrOptions);
     expect(orOptions.options).has.length(2);
-    expect(card.warnings).deep.eq(new Set(['maxvenus', 'maxoxygen']));
+    const [venusOption, oxygenOption] = orOptions.options.map((option) => cast(option, SelectOption));
+
+    expect(venusOption.warnings).deep.eq(['maxvenus']);
+    expect(oxygenOption.warnings).deep.eq(['maxoxygen']);
+    expect(card.warnings.size).eq(0);
+  });
+
+  it('Shows a warning only on the affected option when just one global parameter is at max', () => {
+    card.resourceCount = 4;
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
+
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
+    const [venusOption, oxygenOption] = orOptions.options.map((option) => cast(option, SelectOption));
+
+    expect(venusOption.warnings).deep.eq(['maxvenus']);
+    expect(oxygenOption.warnings).is.undefined;
   });
 });

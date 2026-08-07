@@ -69,7 +69,10 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.or) {
-      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
+      // Checks every sub-behavior (using map vs some)
+      // so that all warnings get set on the card.
+      const executable = behavior.or.behaviors.map((behavior) => this.canExecute(behavior, player, card, canAffordOptions));
+      if (!executable.some((result) => result)) {
         return false;
       }
     }
@@ -332,16 +335,28 @@ export class Executor implements BehaviorExecutor {
     const ctx = new Counter(player, card);
 
     if (behavior.or !== undefined) {
-      const options = behavior.or.behaviors
-        .filter((behavior) => this.canExecute(behavior, player, card))
-        .map((behavior) => {
-          return new SelectOption(behavior.title)
-            .andThen(() => {
-              this.execute(behavior, player, inputCard);
-              return undefined;
-            });
-        });
-
+      // Warnings the card already had (unrelated to this or-block) must survive it.
+      const saved = new Set(card.warnings);
+      const options: Array<SelectOption> = [];
+      for (const subBehavior of behavior.or.behaviors) {
+        // Check (and clear) one sub-behavior at a time so its warnings don't bleed into
+        // the next sub-behavior's option.
+        card.clearWarnings();
+        if (!this.canExecute(subBehavior, player, card)) {
+          continue;
+        }
+        const option = new SelectOption(subBehavior.title)
+          .andThen(() => {
+            this.execute(subBehavior, player, inputCard);
+            return undefined;
+          });
+        if (card.warnings.size > 0) {
+          option.warnings = Array.from(card.warnings);
+        }
+        options.push(option);
+      }
+      card.clearWarnings();
+      saved.forEach((warning) => card.addWarning(warning));
       if (options.length === 1 && behavior.or.autoSelect === true) {
         options[0].cb(undefined);
       } else {

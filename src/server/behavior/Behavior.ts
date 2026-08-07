@@ -210,6 +210,12 @@ export interface AddResource {
   count: Countable,
   type?: CardResource,
   tag?: Tag,
+
+  /**
+   * If true, this card cannot be the target of the resource, even if it matches.
+   */
+  excludeThis?: true,
+
   /**
    * If true, then there must be a card that matches this requirement to take the action.
    *

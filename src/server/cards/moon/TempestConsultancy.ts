@@ -37,13 +37,6 @@ export class TempestConsultancy extends CorporationCard implements ICorporationC
     });
   }
 
-  public override initialAction(player: IPlayer) {
-    const title = 'Tempest Consultancy first action - Select where to send two delegates';
-    player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
-
-    return undefined;
-  }
-
   public canAct(player: IPlayer) {
     return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
   }

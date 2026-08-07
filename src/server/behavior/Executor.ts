@@ -1,7 +1,6 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {TRSource} from '../../common/cards/TRSource';
-import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
@@ -37,12 +36,13 @@ import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCar
 import {isIProjectCard} from '../cards/IProjectCard';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
-import {asArray, inplaceRemove} from '../../common/utils/utils';
+import {inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
 import {IGlobalEvent, isIGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ProxyCard} from '../cards/ProxyCard';
 import {From} from '../logs/From';
 import {BaseStock} from '../player/StockBase';
+import {AddResourcesToAnyCardExecutor} from './AddResourcesToAnyCardExecutor';
 
 /**
  * Caps each count at what `lose` is allowed to take: never below zero, so a countable that
@@ -230,27 +230,9 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.addResourcesToAnyCard !== undefined) {
-      const arctac = behavior.addResourcesToAnyCard;
-      if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-        const action = new AddResourcesToCard(player, arctac.type, {
-          count: ctx.count(arctac.count),
-          restrictedTag: arctac.tag,
-          min: arctac.min,
-          robotCards: arctac.robotCards !== undefined,
-        });
-        const cards = action.getCards();
-        if (cards.length === 0) {
-          return false;
-        }
-        // Not playable if the behavior is based on spending a resource
-        // from itself to add to itself, like Applied Science.
-        if (cards.length === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
-          // TODO(kberg): also check wither arctac.min + spend is enough.
-          // but that's just to make this future-proof.
-          if (cards[0]?.name === card.name) {
-            return false;
-          }
-        }
+      const subExecutor = new AddResourcesToAnyCardExecutor(player, card, behavior, ctx, behavior.addResourcesToAnyCard);
+      if (!subExecutor.canExecute()) {
+        return false;
       }
     }
 
@@ -540,22 +522,8 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.addResourcesToAnyCard) {
-      const array = asArray(behavior.addResourcesToAnyCard);
-      for (const arctac of array) {
-        const count = ctx.count(arctac.count);
-        if (count > 0) {
-          player.game.defer(
-            new AddResourcesToCard(
-              player,
-              arctac.type,
-              {
-                count,
-                restrictedTag: arctac.tag,
-                min: arctac.min,
-                robotCards: arctac.robotCards !== undefined,
-              }));
-        }
-      }
+      const subExecutor = new AddResourcesToAnyCardExecutor(player, card, behavior, ctx, behavior.addResourcesToAnyCard);
+      subExecutor.execute();
     }
 
     // if (behavior.removeResourcesFromAnyCard !== undefined) {

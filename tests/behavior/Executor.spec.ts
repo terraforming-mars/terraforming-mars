@@ -431,6 +431,46 @@ describe('Executor', () => {
     expect(executor.canExecute({addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL, mustHaveCard: true}}, player, fake)).is.false;
   });
 
+  it('add resources to any card, without excludeThis the acting card is a candidate too', () => {
+    const actingCard = new Birds(); // Holds animals
+    const livestock = new Livestock(); // Holds animals
+    player.playedCards.set(actingCard, livestock);
+
+    executor.execute({addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL}}, player, actingCard);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.members([actingCard, livestock]);
+  });
+
+  it('add resources to any card, excludeThis rules out the acting card', () => {
+    const actingCard = new Birds(); // Holds animals
+    const livestock = new Livestock(); // Holds animals
+    player.playedCards.set(actingCard, livestock);
+
+    executor.execute({addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL, excludeThis: true}}, player, actingCard);
+    runAllActions(game);
+
+    // livestock is the only eligible target once the acting card excludes itself, so it's auto-populated.
+    cast(player.popWaitingFor(), undefined);
+    expect(livestock.resourceCount).eq(1);
+    expect(actingCard.resourceCount).eq(0);
+  });
+
+  it('add resources to any card, excludeThis combined with mustHaveCard', () => {
+    const actingCard = new Birds(); // Holds animals
+    player.playedCards.set(actingCard);
+
+    const behavior: Behavior = {addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL, excludeThis: true, mustHaveCard: true}};
+
+    // The acting card is the only animal-holding card, but excludeThis rules it out, so there's nothing to target.
+    expect(executor.canExecute(behavior, player, actingCard)).is.false;
+
+    const livestock = new Livestock();
+    player.playedCards.push(livestock);
+    expect(executor.canExecute(behavior, player, actingCard)).is.true;
+  });
+
   it('decrease any production - cannot execute with zero targets', () => {
     expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}}, player, fake)).is.false;
   });

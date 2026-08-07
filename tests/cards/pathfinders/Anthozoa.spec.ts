@@ -1,15 +1,17 @@
 import {expect} from 'chai';
 import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean, testGame} from '../../TestingUtils';
+import {addOcean, runAllActions, testGame} from '../../TestingUtils';
 
 describe('Anthozoa', () => {
   let card: Anthozoa;
   let player: TestPlayer;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Anthozoa();
-    [/* game */, player] = testGame(1);
+    [game, player] = testGame(1);
   });
 
   it('canPlay', () => {
@@ -34,6 +36,7 @@ describe('Anthozoa', () => {
     expect(card.resourceCount).eq(0);
 
     card.action(player);
+    runAllActions(game);
 
     expect(player.plants).eq(0);
     expect(card.resourceCount).eq(1);

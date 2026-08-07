@@ -345,7 +345,11 @@ export class Executor implements BehaviorExecutor {
       if (options.length === 1 && behavior.or.autoSelect === true) {
         options[0].cb(undefined);
       } else {
-        player.defer(new OrOptions(...options));
+        const orOptions = new OrOptions(...options);
+        if (behavior.or.title) {
+          orOptions.title = behavior.or.title;
+        }
+        player.defer(orOptions);
       }
     }
 

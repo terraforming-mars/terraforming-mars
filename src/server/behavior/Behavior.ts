@@ -10,6 +10,7 @@ import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Units} from '../../common/Units';
 import {NoAttributes} from './NoAttributes';
+import {Message} from '@/common/logs/Message';
 
 type ValueOf<Obj> = Obj[keyof Obj];
 type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
@@ -241,4 +242,5 @@ export interface TitledBehavior extends Behavior {
 export interface OrBehavior {
   behaviors: Array<TitledBehavior>;
   autoSelect?: boolean;
+  title?: string | Message;
 }

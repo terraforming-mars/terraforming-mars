@@ -1,15 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 
-export class Anthozoa extends Card implements IProjectCard, IActionCard {
+export class Anthozoa extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -19,6 +17,11 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       requirements: {oceans: 3},
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
+
+      action: {
+        spend: {plants: 1},
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: 'Pf55',
@@ -31,18 +34,6 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
         description: 'Requires 3 oceans on Mars.',
       },
     });
-  }
-
-
-  public canAct(player: IPlayer) {
-    return player.plants > 0;
-  }
-
-  public action(player: IPlayer) {
-    player.stock.deduct(Resource.PLANTS, 1);
-    player.addResourceTo(this);
-    player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));
-    return undefined;
   }
 }
 

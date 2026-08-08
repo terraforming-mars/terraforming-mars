@@ -20,6 +20,14 @@
       </div>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
+    <button
+      type="button"
+      class="log-latest-button"
+      aria-label="Latest logs"
+      title="Latest logs"
+      data-test="log-latest"
+      @click="showLatestLogs"
+    >&#x2193;</button>
     <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" @hide="selectedMessage = undefined"/>
   </div>
 </template>
@@ -40,6 +48,15 @@ import CardPanel from '@/client/components/logpanel/CardPanel.vue';
 import {isMarsSpace} from '@/common/boards/spaces';
 
 let logAbortController: AbortController | undefined;
+
+type LogPanelViewState = {
+  participantId: ParticipantId,
+  selectedGeneration: number,
+  scrollTop: number,
+  stickToBottom: boolean,
+};
+
+let logPanelViewState: LogPanelViewState | undefined;
 
 type LogPanelModel = {
   messages: Array<LogMessage>,
@@ -108,7 +125,11 @@ export default defineComponent({
       }
       this.selectedGeneration = gen;
     },
-    getLogsForGeneration(generation: number): void {
+    showLatestLogs(): void {
+      this.selectedGeneration = this.generation;
+      this.getLogsForGeneration(this.generation, undefined, true);
+    },
+    getLogsForGeneration(generation: number, restoredState?: LogPanelViewState, forceScrollToEnd = false): void {
       const messages = this.messages;
       // abort any pending requests
       if (logAbortController) {
@@ -137,8 +158,10 @@ export default defineComponent({
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
-          if (generation === this.generation) {
+          if (forceScrollToEnd || restoredState?.stickToBottom === true || (restoredState === undefined && generation === this.generation)) {
             this.$nextTick(this.scrollToEnd);
+          } else if (restoredState !== undefined) {
+            this.$nextTick(() => this.restoreScrollTop(restoredState.scrollTop));
           }
         })
         .catch((err) => {
@@ -150,10 +173,27 @@ export default defineComponent({
         });
     },
     scrollToEnd() {
-      const scrollablePanel = document.getElementById('logpanel-scrollable');
+      const scrollablePanel = this.getScrollablePanel();
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
+    },
+    restoreScrollTop(scrollTop: number) {
+      const scrollablePanel = this.getScrollablePanel();
+      if (scrollablePanel !== null) {
+        scrollablePanel.scrollTop = scrollTop;
+      }
+    },
+    getScrollablePanel(): HTMLElement | null {
+      return document.getElementById('logpanel-scrollable');
+    },
+    isNearBottom(): boolean {
+      const scrollablePanel = this.getScrollablePanel();
+      if (scrollablePanel === null) {
+        return true;
+      }
+      const remaining = scrollablePanel.scrollHeight - scrollablePanel.clientHeight - scrollablePanel.scrollTop;
+      return remaining <= 24;
     },
     getClassesGenIndicator(gen: number): string {
       const classes = ['log-gen-indicator'];
@@ -193,8 +233,20 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.selectedGeneration = this.generation;
-    this.getLogsForGeneration(this.generation);
+    const restoredState = this.id !== undefined && logPanelViewState?.participantId === this.id ? logPanelViewState : undefined;
+    this.selectedGeneration = restoredState?.selectedGeneration ?? this.generation;
+    this.getLogsForGeneration(this.selectedGeneration, restoredState);
+  },
+  beforeUnmount() {
+    const scrollablePanel = this.getScrollablePanel();
+    if (this.id !== undefined) {
+      logPanelViewState = {
+        participantId: this.id,
+        selectedGeneration: this.selectedGeneration,
+        scrollTop: scrollablePanel?.scrollTop ?? 0,
+        stickToBottom: this.isNearBottom(),
+      };
+    }
   },
 });
 

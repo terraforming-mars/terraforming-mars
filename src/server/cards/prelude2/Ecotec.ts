@@ -35,7 +35,7 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public process(player: IPlayer, count: number): void {
+  private process(player: IPlayer, count: number): void {
     if (count === 0) {
       return;
     }

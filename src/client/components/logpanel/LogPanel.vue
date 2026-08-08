@@ -25,7 +25,11 @@
         title="Latest logs"
         data-test="log-latest"
         @click="showLatestLogs"
-      ><span class="log-latest-button-icon" aria-hidden="true"></span></button>
+      >
+        <svg class="log-latest-button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </button>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
     <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" @hide="selectedMessage = undefined"/>

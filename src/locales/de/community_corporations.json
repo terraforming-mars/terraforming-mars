@@ -1,4 +1,7 @@
 {
+  "Aerotech": "AeroTech",
+  "Effect: During each round's research phase, gain 1 titanium for each card you do not buy.": "EFFEKT: Während der Forschungsphase jeder Generation, erhältst du 1 Titan für jede Karte, die du nicht kaufst.",
+  
   "Agricola Inc": "",
   "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Du beginnst mit einer Pflanzen-Produktion von 1, M€-Produktion von 1, Wärme-Produktion von 1 und 40 M€.",
   "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "EFFEKT: Am Ende des Spieles erhältst du -2 / 0 / 1 / 2 SP pro Symboltyp für jeweils 0 / 1-2 / 3-4 / 5+ Symbole.",
@@ -20,6 +23,7 @@
   "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "EFFEKT: Du hast +1 Einfluss. Wenn du einen Deligierten per Lobby-Aktion einbringst, zahle 2 M€ weniger.",
 
   "Midas": "",
+  "MIDAS": "",
   "You start with 120 M€. Lower your TR 7 steps.": "Du beginnst mit 120 M€. Senke deine TW um 7.",
 
   "Playwrights": "Dramaturgen",
@@ -27,15 +31,21 @@
   "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "AKTION: Spiele ein gespieltes Ereignis eines beliebigen Spielers noch einmal (inklusive Ereignisse, die Spezialplättchen legen), indem du die Kosten NUR in M€ zahlst (Abzüge und Rabatte gelten), dann ENTFERNE SIE AUS DEM SPIEL.",
 
   "Project Workshop": "Projekt-Werkstatt",
+  "PROJECT": "PROJEKT",
+  "WORKSHOP": "WERKSTATT",
   "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Du beginnst mit 39 M€, 1 Stahl und 1 Titan. As deine erste Aktion, ziehe eine blaue Karte.",
   "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "AKTION: Drehe und entferne eine gespielte blaue Karte, um sämtliche SP auf ihr in TW umzuwandeln und ziehe 2 Karten oder zahle 3 M€, um eine blaue Karte zu ziehen.",
 
   "Junk Ventures": "Schrott-Ventures",
+  "JUNK VENTURES": "SCHROTT-VENTURES",
+  "DECK:": "STAPEL:",
   "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Du beginnst mit 43 M€. Als erste Aktion legst du die obersten 3 Karten des Stapels ab.",
   "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "AKTION: MISCHE DEN ABLAGESTAPEL UND ZIEHE DANN 3 KARTEN DAVON. BEHALTE 1 UND LEGE DIE ANDEREN 2 AB.",
 
-  "UNITED NATIONS MISSION ONE": "VEREINTEN NATIONEN, MISSION ONE",
   "United Nations Mission One": "Vereinten Nationen, Mission Eins",
+  "UNITED NATIONS MISSION ONE": "VEREINTEN NATIONEN, MISSION ONE",
+  "UNITED NATIONS": "VEREINTEN NATIONEN",
+  "MISSION ONE": "MISSION EINS",
   "You start with 39 M€. Increase your TR 1 step.": "Du beginnst mit 39 M€. Erhöhe deinen TR um 1.",
   "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFEKT: Wenn ein Spieler eine Aktion durchführt oder eine Karte ausspielt, die den TR erhöht, einschließlich dieser, erhalte 1 M€ für jeden Schritt."
 }

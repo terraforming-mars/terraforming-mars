@@ -53,28 +53,18 @@ export class MarsBotTrack {
   }
 }
 
-/** The MarsBot board with tracks. Handles tag-to-track mapping and track state. */
+/** MarsBot's player board: its tracks and which track each tag advances. */
 export class MarsBotBoard {
   public readonly tracks: ReadonlyArray<MarsBotTrack>;
-  private readonly tagToTrack: Map<Tag, number>;
+  public readonly tagToTrack: Partial<Record<Tag, number>> = {};
 
-  constructor(public readonly data: ReadonlyArray<TrackDefinition>) {
-    this.tracks = data.map((def) => new MarsBotTrack(def));
-    this.tagToTrack = new Map();
-    for (let i = 0; i < data.length; i++) {
-      for (const tag of data[i].tags) {
-        this.tagToTrack.set(tag, i);
+  constructor(public readonly definitions: ReadonlyArray<TrackDefinition>) {
+    this.tracks = definitions.map((def) => new MarsBotTrack(def));
+    for (let i = 0; i < definitions.length; i++) {
+      for (const tag of definitions[i].tags) {
+        this.tagToTrack[tag] = i;
       }
     }
-  }
-
-  public getTrackIndexForTag(tag: Tag): number | undefined {
-    return this.tagToTrack.get(tag);
-  }
-
-  /** Check if a tag is mapped to any track. */
-  public hasTrackForTag(tag: Tag): boolean {
-    return this.tagToTrack.has(tag);
   }
 
   /** Index of the least-advanced track (first index if tied). */

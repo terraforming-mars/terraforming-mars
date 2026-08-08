@@ -11,14 +11,14 @@ import {MarsBotBoard} from './MarsBotBoard';
  * of its played cards."
  */
 export class MarsBotTags extends Tags {
-  constructor(player: IPlayer, private readonly board: MarsBotBoard) {
+  constructor(player: IPlayer, private readonly marsBotBoard: MarsBotBoard) {
     super(player);
   }
 
   protected override rawCount(tag: Tag, _includeEventsTags: boolean): number {
-    const trackIndex = this.board.getTrackIndexForTag(tag);
+    const trackIndex = this.marsBotBoard.tagToTrack[tag];
     if (trackIndex !== undefined) {
-      return this.board.tracks[trackIndex].position;
+      return this.marsBotBoard.tracks[trackIndex].position;
     }
     return 0;
   }

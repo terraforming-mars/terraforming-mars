@@ -515,6 +515,9 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
     if (spend.heat) {
       validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
+    if (spend.canUseSteel || spend.canUseTitanium) {
+      validate(spend.megacredits !== undefined, 'spend.canUseSteel and spend.canUseTitanium only works with spend.megacredits');
+    }
   }
 }
 

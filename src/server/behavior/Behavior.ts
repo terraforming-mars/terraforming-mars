@@ -44,7 +44,10 @@ export type Behavior = {
    *
    * This is specifically designed to spend only one resource type.
    */
-  spend?: Partial<OneOfType<Spend>>;
+  spend?: Partial<OneOfType<Spend>> & {
+    canUseSteel?: boolean,
+    canUseTitanium?: boolean,
+  };
 
   /**
    * Lose one of the resources here, or as much of it as the player has.
@@ -105,6 +108,8 @@ export type Behavior = {
   ocean?: {
     count?: 2,
     on?: PlacementType,
+    /** The first player selects the space; the acting player is still credited. (Icy Impactors) */
+    firstPlayerPlaces?: true,
   },
 
   tile?: {

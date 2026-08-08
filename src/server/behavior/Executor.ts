@@ -125,7 +125,12 @@ export class Executor implements BehaviorExecutor {
     // TODO(kberg): Spend is not combined with PredictedCost.
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
-      if (spend.megacredits && !player.canAfford(spend.megacredits)) {
+      if (spend.megacredits && !player.canAfford({
+        cost: spend.megacredits,
+        steel: spend.canUseSteel,
+        titanium: spend.canUseTitanium,
+        tr: asTrSource,
+      })) {
         return false;
       }
       if (spend.steel && player.steel < spend.steel) {
@@ -358,6 +363,8 @@ export class Executor implements BehaviorExecutor {
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: TITLES.payForCardAction(card.name),
+          canUseSteel: spend.canUseSteel,
+          canUseTitanium: spend.canUseTitanium,
         })).andThen(() => this.execute(remainder, player, inputCard));
         // Exit early as the rest of handled by the deferred action.
         return;
@@ -558,6 +565,11 @@ export class Executor implements BehaviorExecutor {
       if (behavior.ocean.count === 2) {
         player.game.defer(new PlaceOceanTile(player, {title: 'Select space for first ocean'}));
         player.game.defer(new PlaceOceanTile(player, {title: 'Select space for second ocean'}));
+      } else if (behavior.ocean.firstPlayerPlaces === true) {
+        player.game.defer(new PlaceOceanTile(player.game.first, {
+          creditedPlayer: player,
+          title: message('Select space for ${0} to place an ocean', (b) => b.player(player)),
+        }));
       } else {
         player.game.defer(new PlaceOceanTile(player, {on: behavior.ocean.on}));
       }

@@ -1,19 +1,13 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {MAX_VENUS_SCALE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {max} from '../Options';
-import {TITLES} from '../../inputs/titles';
 
-export class RotatorImpacts extends Card implements IActionCard {
+export class RotatorImpacts extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.ROTATOR_IMPACTS,
@@ -23,6 +17,25 @@ export class RotatorImpacts extends Card implements IActionCard {
       resourceType: CardResource.ASTEROID,
 
       requirements: {venus: 14, max},
+
+      action: {
+        or: {
+          autoSelect: true,
+          behaviors: [
+            {
+              title: 'Remove 1 asteroid to raise Venus 1 step',
+              spend: {resourcesHere: 1},
+              global: {venus: 1},
+            },
+            {
+              title: 'Pay 6 M€ to add 1 asteroid to this card',
+              spend: {megacredits: 6, canUseTitanium: true},
+              addResources: 1,
+            },
+          ],
+        },
+      },
+
       metadata: {
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {
@@ -34,53 +47,5 @@ export class RotatorImpacts extends Card implements IActionCard {
         description: 'Venus must be 14% or lower',
       },
     });
-  }
-
-  private canAddResource(player: IPlayer) {
-    return player.canAfford({cost: 6, titanium: true});
-  }
-
-  private canSpendResource(player: IPlayer) {
-    return this.resourceCount > 0 && player.canAfford({cost: 0, tr: {venus: 1}});
-  }
-
-  public canAct(player: IPlayer): boolean {
-    if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
-      this.addWarning('maxvenus');
-    }
-    return this.canAddResource(player) || this.canSpendResource(player);
-  }
-
-  public action(player: IPlayer) {
-    const opts = [];
-
-    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to this card', 'Pay').andThen(() => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));
-
-    if (this.canSpendResource(player)) {
-      opts.push(spendResource);
-    }
-
-    if (this.canAddResource(player)) {
-      opts.push(addResource);
-    }
-
-    if (opts.length === 1) {
-      return opts[0].cb(undefined);
-    }
-    return new OrOptions(...opts);
-  }
-
-  private addResource(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: TITLES.payForCardAction(this.name)}));
-    player.addResourceTo(this, {log: true});
-    return undefined;
-  }
-
-  private spendResource(player: IPlayer) {
-    player.removeResourceFrom(this);
-    player.game.increaseVenusScaleLevel(player, 1);
-    player.game.log('${0} removed an asteroid resource to increase Venus scale 1 step', (b) => b.player(player));
-    return undefined;
   }
 }

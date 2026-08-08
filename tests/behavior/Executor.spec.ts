@@ -40,6 +40,7 @@ import {CardName} from '../../src/common/cards/CardName';
 import {cast} from '@/common/utils/utils';
 import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMining';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../src/common/constants';
+import {TileType} from '../../src/common/TileType';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -249,6 +250,25 @@ describe('Executor', () => {
     executor.execute({tr: -1}, player, fake);
 
     expect(player.terraformRating).eq(21);
+  });
+
+  it('ocean - first player places, acting player is credited (Icy Impactors)', () => {
+    const behavior: Behavior = {ocean: {firstPlayerPlaces: true}};
+    expect(game.first).eq(player);
+    expect(player2.terraformRating).eq(20);
+
+    executor.execute(behavior, player2, fake);
+    runAllActions(game);
+
+    // The acting player isn't the one placing the tile.
+    expect(player2.popWaitingFor()).is.undefined;
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+
+    expect(selectSpace.spaces[0].tile?.tileType).eq(TileType.OCEAN);
+    expect(player2.terraformRating).eq(21);
+    expect(player.terraformRating).eq(20);
   });
 
   it('add resources to specific card', () => {
@@ -592,6 +612,61 @@ describe('Executor', () => {
     expect(player.megaCredits).eq(1);
     runAllActions(game);
     expect(player.megaCredits).eq(0);
+  });
+
+  it('spend - megacredits, steel not allowed by default', () => {
+    const behavior: Behavior = {spend: {megacredits: 8}};
+    player.steel = 4;
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+  });
+
+  it('spend - megacredits, canUseSteel', () => {
+    const behavior: Behavior = {spend: {megacredits: 8, canUseSteel: true}};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.steel = 3; // worth 6 M€, not enough alone
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.megaCredits = 2;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb(Payment.of({steel: 3, megacredits: 2}));
+
+    expect(player.steel).eq(0);
+    expect(player.megaCredits).eq(0);
+  });
+
+  it('spend - megacredits, canUseTitanium', () => {
+    const behavior: Behavior = {spend: {megacredits: 6, canUseTitanium: true}};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.titanium = 1; // worth 3 M€, not enough alone
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.megaCredits = 3;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb(Payment.of({titanium: 1, megacredits: 3}));
+
+    expect(player.titanium).eq(0);
+    expect(player.megaCredits).eq(0);
+  });
+
+  it('spend - megacredits, canUseSteel accounts for reds tax', () => {
+    const behavior: Behavior = {spend: {megacredits: 8, canUseSteel: true}, ocean: {}};
+    setRulingParty(game, PartyName.REDS);
+    player.steel = 4;
+    player.megaCredits = 0;
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.megaCredits = 3;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
   });
 
   it('spend - heat', () => {

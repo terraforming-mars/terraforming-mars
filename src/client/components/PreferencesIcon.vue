@@ -21,6 +21,19 @@ export default defineComponent({
       preferencesPanelOpen: false,
     };
   },
+  mounted() {
+    document.addEventListener('click', this.closeOnOutsideClick);
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.closeOnOutsideClick);
+  },
+  methods: {
+    closeOnOutsideClick(event: MouseEvent) {
+      if (this.preferencesPanelOpen && event.target instanceof Node && !this.$el.contains(event.target)) {
+        this.preferencesPanelOpen = false;
+      }
+    },
+  },
   computed: {
     preferencesManager(): PreferencesManager {
       return PreferencesManager.INSTANCE;

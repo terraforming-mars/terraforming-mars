@@ -28,6 +28,19 @@ export default defineComponent({
       languagePanelOpen: false,
     };
   },
+  mounted() {
+    document.addEventListener('click', this.closeOnOutsideClick);
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.closeOnOutsideClick);
+  },
+  methods: {
+    closeOnOutsideClick(event: MouseEvent) {
+      if (this.languagePanelOpen && event.target instanceof Node && !this.$el.contains(event.target)) {
+        this.languagePanelOpen = false;
+      }
+    },
+  },
   computed: {
     preferencesManager(): PreferencesManager {
       return PreferencesManager.INSTANCE;

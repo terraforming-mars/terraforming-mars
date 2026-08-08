@@ -50,6 +50,25 @@ export default defineComponent({
     LanguageIcon,
     PreferencesIcon,
   },
+  data() {
+    return {
+      previousViewport: '',
+    };
+  },
+
+  mounted() {
+    // Temporary: keep the responsive viewport limited to the homepage. Once responsiveness covers the
+    // whole project, update <meta name="viewport" content='width=1260, user-scalable=1' /> directly.
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport !== null) {
+      this.previousViewport = viewport.getAttribute('content') ?? '';
+      viewport.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover');
+    }
+  },
+
+  beforeUnmount() {
+    document.querySelector('meta[name="viewport"]')?.setAttribute('content', this.previousViewport);
+  },
   computed: {
     raw_settings(): typeof raw_settings {
       return raw_settings;

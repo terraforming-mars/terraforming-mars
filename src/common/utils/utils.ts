@@ -134,6 +134,27 @@ export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Ar
 }
 
 /**
+ * Groups items by score, highest first: the first tier holds everything tied for first
+ * place, the second tier everything tied for second place, and so on.
+ *
+ * `scorer` is called once per item.
+ */
+export function rankedTiers<T>(items: ReadonlyArray<T>, scorer: (item: T) => number): Array<{score: number, items: Array<T>}> {
+  const scored = items.map((item) => ({item, score: scorer(item)}));
+  scored.sort((a, b) => b.score - a.score);
+  const tiers: Array<{score: number, items: Array<T>}> = [];
+  for (const {item, score} of scored) {
+    const tier = tiers[tiers.length - 1];
+    if (tier !== undefined && tier.score === score) {
+      tier.items.push(item);
+    } else {
+      tiers.push({score, items: [item]});
+    }
+  }
+  return tiers;
+}
+
+/**
  * Returns `elem` if it is an array. If it is not an array, returns `[elem]`
  */
 export function asArray<T>(elem: OneOrArray<T>): Array<T> {

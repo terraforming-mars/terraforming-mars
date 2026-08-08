@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {selectCardOrOption} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
@@ -59,27 +59,21 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     availableActions.push(gainPlantsOption);
 
     if (availableMicrobeCards.length > 0) {
-      availableActions.push(selectCardOrOption(availableMicrobeCards, {
-        title: 'Add 3 microbes to a card',
-        buttonLabel: 'Add microbes',
-        singleTitle: (card) => message('Add ${0} microbes to ${1}', (b) => b.number(3).card(card)),
-        onSelect: (card) => {
+      availableActions.push(new SelectCard('Add 3 microbes to a card', 'Add microbes', availableMicrobeCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 3, log: true});
           return undefined;
-        },
-      }));
+        })
+        .maybeConvertToSelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(3).card(availableMicrobeCards[0]))));
     }
 
     if (availableAnimalCards.length > 0) {
-      availableActions.push(selectCardOrOption(availableAnimalCards, {
-        title: 'Add 2 animals to a card',
-        buttonLabel: 'Add animals',
-        singleTitle: (card) => message('Add ${0} animals to ${1}', (b) => b.number(2).card(card)),
-        onSelect: (card) => {
+      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        },
-      }));
+        })
+        .maybeConvertToSelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(availableAnimalCards[0]))));
     }
 
     return new OrOptions(...availableActions);

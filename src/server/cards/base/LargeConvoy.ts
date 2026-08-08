@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
-import {selectCardOrOption} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
@@ -57,15 +57,12 @@ export class LargeConvoy extends Card implements IProjectCard {
     const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
-    availableActions.push(selectCardOrOption(animalCards, {
-      title: 'Select card to add 4 animals',
-      buttonLabel: 'Add animals',
-      singleTitle: (card) => message('Add ${0} animals to ${1}', (b) => b.number(4).card(card)),
-      onSelect: (card) => {
+    availableActions.push(new SelectCard('Select card to add 4 animals', 'Add animals', animalCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {qty: 4, log: true});
         return undefined;
-      },
-    }));
+      })
+      .maybeConvertToSelectOption(message('Add ${0} animals to ${1}', (b) => b.number(4).card(animalCards[0]))));
 
     return new OrOptions(...availableActions);
   }

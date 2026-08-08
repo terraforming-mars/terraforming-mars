@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {selectCardOrOption} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/SelectCard';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
@@ -80,15 +80,12 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     } else {
       availableActions.options.push(
         gainPlantsOption,
-        selectCardOrOption(animalCards, {
-          title: 'Select card to add 2 animals',
-          buttonLabel: 'Add animals',
-          singleTitle: (card) => message('Add ${0} animals to ${1}', (b) => b.number(2).card(card)),
-          onSelect: (card) => {
+        new SelectCard('Select card to add 2 animals', 'Add animals', animalCards)
+          .andThen(([card]) => {
             player.addResourceTo(card, {qty: 2, log: true});
             return undefined;
-          },
-        }));
+          })
+          .maybeConvertToSelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(animalCards[0]))));
     }
 
     return player.spendHeat(5, () => {

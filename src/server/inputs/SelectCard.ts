@@ -1,7 +1,7 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
 import {getCardFromPlayerInput} from '../PlayerInput';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 import {SelectCardModel} from '../../common/models/PlayerInputModel';
@@ -9,23 +9,6 @@ import {IPlayer} from '../IPlayer';
 import {cardsToModel} from '../models/ModelUtils';
 import {InputError} from './InputError';
 import {SelectOption} from './SelectOption';
-
-type SelectCardOrOptionOptions<T extends ICard> = {
-  title: string | Message;
-  buttonLabel: string;
-  singleTitle: (card: T) => string | Message;
-  onSelect: (card: T) => PlayerInput | undefined;
-}
-
-export function selectCardOrOption<T extends ICard>(cards: ReadonlyArray<T>, options: SelectCardOrOptionOptions<T>): PlayerInput {
-  if (cards.length === 1) {
-    const card = cards[0];
-    return new SelectOption(options.singleTitle(card), options.buttonLabel)
-      .andThen(() => options.onSelect(card));
-  }
-  return new SelectCard(options.title, options.buttonLabel, cards)
-    .andThen(([card]) => options.onSelect(card));
-}
 
 export type Options = {
   max: number,
@@ -61,6 +44,13 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
       showSelectAll: config?.showSelectAll ?? false,
     };
     this.buttonLabel = buttonLabel;
+  }
+
+  public maybeConvertToSelectOption(title: string | Message): SelectCard<T> | SelectOption {
+    if (this.cards.length !== 1) {
+      return this;
+    }
+    return new SelectOption(title, this.buttonLabel).andThen(() => this.cb(this.cards));
   }
 
   public toModel(player: IPlayer): SelectCardModel {

@@ -77,6 +77,10 @@ export interface IMarsBot {
   mcSupply: number;
   /** Floaters stored by Venus corps. */
   readonly floaterCount: number;
+  /** Project cards the bot has drawn and resolved, in the order it played them. */
+  readonly playedProjectCards: ReadonlyArray<IProjectCard>;
+  /** How many times the bot has raised the temperature. */
+  readonly temperatureRaises: number;
   addFloaters(count: number): void;
   /** Removes floaters, stopping at zero. */
   spendFloaters(count: number): void;

@@ -18,16 +18,16 @@
           <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
         </ul>
       </div>
+      <button
+        type="button"
+        class="log-latest-button"
+        aria-label="Latest logs"
+        title="Latest logs"
+        data-test="log-latest"
+        @click="showLatestLogs"
+      ><span class="log-latest-button-icon" aria-hidden="true"></span></button>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <button
-      type="button"
-      class="log-latest-button"
-      aria-label="Latest logs"
-      title="Latest logs"
-      data-test="log-latest"
-      @click="showLatestLogs"
-    >&#x2193;</button>
     <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" @hide="selectedMessage = undefined"/>
   </div>
 </template>

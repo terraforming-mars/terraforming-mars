@@ -190,9 +190,9 @@ export class Executor implements BehaviorExecutor {
     if (behavior.removeResourcesFromAnyCard !== undefined) {
       const r = behavior.removeResourcesFromAnyCard;
       const source = r.source ?? 'self';
-      const count = ctx.count(r.count ?? 1);
       // Solo mode has no opponents to steal from, but the attack still resolves (as insurance) — see execute().
       if (!(source !== 'self' && game.isSoloMode())) {
+        const count = ctx.count(r.count ?? 1);
         if (RemoveResourcesFromCard.getAvailableTargetCards(player, r.type, source, count).length === 0) {
           return false;
         }

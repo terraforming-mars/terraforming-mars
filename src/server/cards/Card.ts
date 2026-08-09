@@ -227,6 +227,17 @@ export abstract class Card implements ICard {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
+  /**
+   * The data-defined behavior of this card's repeatable action.
+   *
+   * Named to avoid colliding with `IActionCard.action`, which executes it.
+   */
+  public get actionBehavior() {
+    return this.properties.action;
+  }
+  public get globalParameterRequirementBonus() {
+    return this.properties.globalParameterRequirementBonus;
+  }
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }

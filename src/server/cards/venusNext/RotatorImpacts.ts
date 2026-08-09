@@ -46,7 +46,7 @@ export class RotatorImpacts extends Card implements IActionCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
-      this.warnings.add('maxvenus');
+      this.addWarning('maxvenus');
     }
     return this.canAddResource(player) || this.canSpendResource(player);
   }

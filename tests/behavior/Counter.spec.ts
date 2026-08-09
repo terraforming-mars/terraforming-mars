@@ -14,6 +14,14 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
 import {TileType} from '../../src/common/TileType';
 import {cast} from '../../src/common/utils/utils';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
+import {Virus} from '../../src/server/cards/base/Virus';
+import {IceAsteroid} from '../../src/server/cards/base/IceAsteroid';
+import {ImportedHydrogen} from '../../src/server/cards/base/ImportedHydrogen';
+import {ProxyCard} from '../../src/server/cards/ProxyCard';
+import {CardName} from '../../src/common/cards/CardName';
+
+const GLOBAL_EVENT_PROXY = new ProxyCard(CardName.GLOBAL_EVENT_PROXY);
 
 describe('Counter', () => {
   let game: IGame;
@@ -32,12 +40,6 @@ describe('Counter', () => {
     const counter = new Counter(player, fakeCard());
     expect(counter.count(3)).eq(3);
     expect(counter.count(8)).eq(8);
-  });
-
-  it('start', () => {
-    const counter = new Counter(player, fakeCard());
-    expect(counter.count({start: 3})).eq(3);
-    expect(counter.count({start: 3, each: 7})).eq(21);
   });
 
   it('tags, simple', () => {
@@ -295,6 +297,18 @@ describe('Counter', () => {
 
     expect(units).deep.eq(Units.of({megacredits: 3, energy: -1, heat: 4}));
   });
+
+  it('eventsPlayed', () => {
+    const counter = new Counter(player, fakeCard());
+    expect(counter.count({eventsPlayed: true})).eq(0);
+
+    player.playedCards.push(new Virus());
+    player2.playedCards.push(new IceAsteroid(), new ImportedHydrogen());
+
+    expect(counter.count({eventsPlayed: true})).eq(1);
+    expect(counter.count({eventsPlayed: true, all: true})).eq(3);
+    expect(counter.count({eventsPlayed: true, each: 2})).eq(2);
+  });
 });
 
 
@@ -450,5 +464,93 @@ describe('Counter for Underworld', () => {
 
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
     expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);
+  });
+});
+
+describe('Counter for Turmoil', () => {
+  let game: IGame;
+  let player: TestPlayer;
+  let turmoil: Turmoil;
+
+  beforeEach(() => {
+    [game, player] = testGame(2, {turmoilExtension: true});
+    turmoil = Turmoil.getTurmoil(game);
+  });
+
+  it('influence', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    expect(counter.count({turmoil: {influence: {}}})).eq(0);
+
+    turmoil.chairman = player;
+    expect(counter.count({turmoil: {influence: {}}})).eq(1);
+
+    turmoil.dominantParty.partyLeader = player;
+    expect(counter.count({turmoil: {influence: {}}})).eq(2);
+
+    game.turmoil!.addInfluenceBonus(player, 3);
+    expect(counter.count({turmoil: {influence: {}}})).eq(5);
+  });
+
+  it('partyLeaders', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    expect(counter.count({turmoil: {partyLeaders: {}}})).eq(0);
+
+    turmoil.parties[0].partyLeader = player;
+    expect(counter.count({turmoil: {partyLeaders: {}}})).eq(1);
+
+    turmoil.parties[1].partyLeader = player;
+    expect(counter.count({turmoil: {partyLeaders: {}}})).eq(2);
+
+    // Chariman is not a party leader.
+    turmoil.chairman = player;
+    expect(counter.count({turmoil: {partyLeaders: {}}})).eq(2);
+  });
+
+  it('max and influence', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    player.tagsForTest = {earth: 7};
+
+    turmoil.chairman = player;
+    turmoil.dominantParty.partyLeader = player;
+    expect(turmoil.getInfluence(player)).eq(2);
+
+    expect(counter.count({tag: Tag.EARTH, turmoil: {}})).eq(7);
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5}})).eq(5);
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {}}})).eq(7);
+  });
+
+  it('influence subtracts', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    player.tagsForTest = {earth: 7};
+
+    turmoil.chairman = player;
+    turmoil.dominantParty.partyLeader = player;
+    expect(turmoil.getInfluence(player)).eq(2);
+
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {subtract: true}}})).eq(3);
+
+    // The count runs below zero. `lose` is what clamps it, not the counter.
+    turmoil.addInfluenceBonus(player, 6);
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {subtract: true}}})).eq(-3);
+  });
+
+  it('each applies after max and influence', () => {
+    const counter = new Counter(player, GLOBAL_EVENT_PROXY);
+    player.tagsForTest = {earth: 7};
+
+    turmoil.chairman = player;
+    expect(turmoil.getInfluence(player)).eq(1);
+
+    expect(counter.count({tag: Tag.EARTH, turmoil: {max: 5, influence: {}}})).eq(6);
+    expect(counter.count({tag: Tag.EARTH, each: 2, turmoil: {max: 5, influence: {}}})).eq(12);
+  });
+
+  it('global events do not count wild tags', () => {
+    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    player.tagsForTest = {earth: 1, wild: 1};
+
+    // Wild tags apply when taking an action, but not when a global event resolves.
+    expect(new Counter(player, fakeCard()).count({tag: Tag.EARTH})).eq(2);
+    expect(new Counter(player, GLOBAL_EVENT_PROXY).count({tag: Tag.EARTH})).eq(1);
   });
 });

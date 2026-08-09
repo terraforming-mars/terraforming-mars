@@ -11,8 +11,6 @@ import {message} from '../logs/MessageBuilder';
 export type Options = {
   count?: number;
   restrictedTag?: Tag;
-  // TODO(kberg): replace min with filter.
-  min?: number;
   title?: string | Message;
   robotCards?: boolean;
   filter?(card: ICard): boolean;
@@ -47,10 +45,6 @@ export class AddResourcesToCard extends DeferredAction {
     }
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
-    }
-    const min = this.options.min;
-    if (min) {
-      cards = cards.filter((c) => c.resourceCount >= min);
     }
     return cards;
   }

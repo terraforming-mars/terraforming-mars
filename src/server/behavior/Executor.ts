@@ -1,7 +1,6 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {TRSource} from '../../common/cards/TRSource';
-import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
@@ -37,8 +36,27 @@ import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCar
 import {isIProjectCard} from '../cards/IProjectCard';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
-import {asArray, inplaceRemove} from '../../common/utils/utils';
+import {inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
+import {IGlobalEvent, isIGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {ProxyCard} from '../cards/ProxyCard';
+import {From} from '../logs/From';
+import {BaseStock} from '../player/StockBase';
+import {AddResourcesToAnyCardExecutor} from './AddResourcesToAnyCardExecutor';
+
+/**
+ * Caps each count at what `lose` is allowed to take: never below zero, so a countable that
+ * went negative takes nothing instead of granting a gain, and never more than the player
+ * can give up, so `add` logs the amount that really changed.
+ */
+function loseable(units: Units, stock: BaseStock, minMegacredits: number): Units {
+  const capped = {...Units.EMPTY};
+  for (const key of Units.keys) {
+    const floor = key === 'megacredits' ? minMegacredits : 0;
+    capped[key] = Math.max(0, Math.min(units[key], stock[key] - floor));
+  }
+  return capped;
+}
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -51,7 +69,10 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.or) {
-      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
+      // Checks every sub-behavior (using map vs some)
+      // so that all warnings get set on the card.
+      const executable = behavior.or.behaviors.map((behavior) => this.canExecute(behavior, player, card, canAffordOptions));
+      if (!executable.some((result) => result)) {
         return false;
       }
     }
@@ -67,22 +88,22 @@ export class Executor implements BehaviorExecutor {
     if (behavior.global !== undefined) {
       const g = behavior.global;
       if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {
-        card.warnings.add('maxtemp');
+        card.addWarning('maxtemp');
       }
       if (g.oxygen !== undefined && game.getOxygenLevel() >= MAX_OXYGEN_LEVEL) {
         if (g.oxygen < 0) {
-          card.warnings.add('maxoxygen-reduce');
+          card.addWarning('maxoxygen-reduce');
         } else {
-          card.warnings.add('maxoxygen');
+          card.addWarning('maxoxygen');
         }
       }
       if (g.venus !== undefined && game.getVenusScaleLevel() >= MAX_VENUS_SCALE) {
-        card.warnings.add('maxvenus');
+        card.addWarning('maxvenus');
       }
     }
 
     if (behavior.ocean !== undefined && game.board.getOceanSpaces().length >= MAX_OCEAN_TILES) {
-      card.warnings.add('maxoceans');
+      card.addWarning('maxoceans');
     }
 
     if (behavior.stock !== undefined) {
@@ -170,7 +191,7 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
         if (targets.length === 1 && targets[0] === player) {
-          card.warnings.add('decreaseOwnProduction');
+          card.addWarning('decreaseOwnProduction');
         }
       }
     }
@@ -209,27 +230,9 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.addResourcesToAnyCard !== undefined) {
-      const arctac = behavior.addResourcesToAnyCard;
-      if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-        const action = new AddResourcesToCard(player, arctac.type, {
-          count: ctx.count(arctac.count),
-          restrictedTag: arctac.tag,
-          min: arctac.min,
-          robotCards: arctac.robotCards !== undefined,
-        });
-        const cards = action.getCards();
-        if (cards.length === 0) {
-          return false;
-        }
-        // Not playable if the behavior is based on spending a resource
-        // from itself to add to itself, like Applied Science.
-        if (cards.length === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
-          // TODO(kberg): also check wither arctac.min + spend is enough.
-          // but that's just to make this future-proof.
-          if (cards[0]?.name === card.name) {
-            return false;
-          }
-        }
+      const subExecutor = new AddResourcesToAnyCardExecutor(player, card, behavior, ctx, behavior.addResourcesToAnyCard);
+      if (!subExecutor.canExecute()) {
+        return false;
       }
     }
 
@@ -272,13 +275,13 @@ export class Executor implements BehaviorExecutor {
         }
       }
       if ((moon.habitatRate ?? 0) >= MAXIMUM_HABITAT_RATE) {
-        card.warnings.add('maxHabitatRate');
+        card.addWarning('maxHabitatRate');
       }
       if ((moon.miningRate ?? 0) >= MAXIMUM_MINING_RATE) {
-        card.warnings.add('maxMiningRate');
+        card.addWarning('maxMiningRate');
       }
       if ((moon.logisticRate ?? 0) >= MAXIMUM_LOGISTIC_RATE) {
-        card.warnings.add('maxLogisticRate');
+        card.addWarning('maxLogisticRate');
       }
     }
 
@@ -304,24 +307,46 @@ export class Executor implements BehaviorExecutor {
     return true;
   }
 
-  public execute(behavior: Behavior, player: IPlayer, card: ICard) {
+  public execute(behavior: Behavior, player: IPlayer, inputCard: ICard | IGlobalEvent) {
+    const card = isIGlobalEvent(inputCard) ? new ProxyCard(CardName.GLOBAL_EVENT_PROXY) : inputCard;
+    const globalEvent = isIGlobalEvent(inputCard) ? inputCard : undefined;
+
+    // Only log from for global events
+    const from: From | undefined = globalEvent ? {globalEvent} : undefined;
+
     const ctx = new Counter(player, card);
 
     if (behavior.or !== undefined) {
-      const options = behavior.or.behaviors
-        .filter((behavior) => this.canExecute(behavior, player, card))
-        .map((behavior) => {
-          return new SelectOption(behavior.title)
-            .andThen(() => {
-              this.execute(behavior, player, card);
-              return undefined;
-            });
-        });
-
+      // Warnings the card already had (unrelated to this or-block) must survive it.
+      const saved = new Set(card.warnings);
+      const options: Array<SelectOption> = [];
+      for (const subBehavior of behavior.or.behaviors) {
+        // Check (and clear) one sub-behavior at a time so its warnings don't bleed into
+        // the next sub-behavior's option.
+        card.clearWarnings();
+        if (!this.canExecute(subBehavior, player, card)) {
+          continue;
+        }
+        const option = new SelectOption(subBehavior.title)
+          .andThen(() => {
+            this.execute(subBehavior, player, inputCard);
+            return undefined;
+          });
+        if (card.warnings.size > 0) {
+          option.warnings = Array.from(card.warnings);
+        }
+        options.push(option);
+      }
+      card.clearWarnings();
+      saved.forEach((warning) => card.addWarning(warning));
       if (options.length === 1 && behavior.or.autoSelect === true) {
         options[0].cb(undefined);
       } else {
-        player.defer(new OrOptions(...options));
+        const orOptions = new OrOptions(...options);
+        if (behavior.or.title) {
+          orOptions.title = behavior.or.title;
+        }
+        player.defer(orOptions);
       }
     }
 
@@ -333,7 +358,7 @@ export class Executor implements BehaviorExecutor {
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: TITLES.payForCardAction(card.name),
-        })).andThen(() => this.execute(remainder, player, card));
+        })).andThen(() => this.execute(remainder, player, inputCard));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -391,13 +416,25 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.lose !== undefined) {
+      const lose = behavior.lose;
+      if (lose.production) {
+        // Production megacredits bottom out at -5, not 0.
+        const units = loseable(ctx.countUnits(lose.production), player.production, -5);
+        player.production.adjust(Units.negative(units), {log: true, from});
+      }
+      if (lose.stock) {
+        const units = loseable(ctx.countUnits(lose.stock), player.stock, 0);
+        player.stock.adjust(Units.negative(units), {log: true, from});
+      }
+    }
     if (behavior.production !== undefined) {
       const units = ctx.countUnits(behavior.production);
-      player.production.adjust(units, {log: true});
+      player.production.adjust(units, {log: true, from});
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.stock.adjust(units, {log: true});
+      player.stock.adjust(units, {log: true, from});
     }
     if (behavior.standardResource) {
       const entry = behavior.standardResource;
@@ -407,14 +444,14 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
             .andThen((units) => {
-              player.stock.adjust(units, {log: true});
+              player.stock.adjust(units, {log: true, from});
               return undefined;
             }));
       } else {
         player.defer(
           new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))
             .andThen((unit) => {
-              player.stock.add(unit, count, {log: true});
+              player.stock.add(unit, count, {log: true, from});
               return undefined;
             }));
       }
@@ -478,29 +515,15 @@ export class Executor implements BehaviorExecutor {
       } else {
         const count = ctx.count(addResources);
         player.defer(() => {
-          player.addResourceTo(card, {qty: count, log: true});
+          player.addResourceTo(card, {qty: count, log: true, from});
           return undefined;
         });
       }
     }
 
     if (behavior.addResourcesToAnyCard) {
-      const array = asArray(behavior.addResourcesToAnyCard);
-      for (const arctac of array) {
-        const count = ctx.count(arctac.count);
-        if (count > 0) {
-          player.game.defer(
-            new AddResourcesToCard(
-              player,
-              arctac.type,
-              {
-                count,
-                restrictedTag: arctac.tag,
-                min: arctac.min,
-                robotCards: arctac.robotCards !== undefined,
-              }));
-        }
-      }
+      const subExecutor = new AddResourcesToAnyCardExecutor(player, card, behavior, ctx, behavior.addResourcesToAnyCard);
+      subExecutor.execute();
     }
 
     // if (behavior.removeResourcesFromAnyCard !== undefined) {

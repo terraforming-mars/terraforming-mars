@@ -45,7 +45,7 @@ export class IcyImpactors extends Card implements IActionCard {
     }
     if (this.canAffordToPlaceOcean(player)) {
       if (!player.game.canAddOcean()) {
-        this.warnings.add('maxoceans');
+        this.addWarning('maxoceans');
       }
       return true;
     }

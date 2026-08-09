@@ -12,11 +12,6 @@ import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.tag(Tag.CRIME).plus().influence().colon();
-  b.text('1st/2nd', {size: Size.SMALL}).corruption().megacredits(9).slash().megacredits(3);
-});
-
 export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -25,10 +20,14 @@ export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
       'Players with 2nd most get 1 corruption and 3 M€. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.REDS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.tag(Tag.CRIME).plus().influence().colon();
+        b.text('1st/2nd', {size: Size.SMALL}).corruption().megacredits(9).slash().megacredits(3);
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     const map: MultiMap<number, IPlayer> = new MultiMap();
     for (const player of game.players) {
       const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + player.tags.count(Tag.WILD);

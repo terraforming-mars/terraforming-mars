@@ -11,10 +11,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {cancelled} from '../../cards/Options';
 import {Tag} from '../../../common/cards/Tag';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().tag(Tag.BUILDING).minus().undergroundResources().influence({size: Size.SMALL});
-});
-
 export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -23,10 +19,13 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
       'Lose 2 M€ for each building tag (max 7) minus influence and claimed underground resource tokens.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().tag(Tag.BUILDING).minus().undergroundResources().influence({size: Size.SMALL});
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
     for (const player of game.playersInGenerationOrder) {

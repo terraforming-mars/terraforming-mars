@@ -2,12 +2,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
-import {sum} from '../../../common/utils/utils';
 
 export class MediaArchives extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +14,10 @@ export class MediaArchives extends Card implements IProjectCard {
       tags: [Tag.EARTH],
       cost: 8,
 
+      behavior: {
+        stock: {megacredits: {eventsPlayed: true, all: true}},
+      },
+
       metadata: {
         cardNumber: '107',
         renderData: CardRenderer.builder((b) => {
@@ -25,11 +26,5 @@ export class MediaArchives extends Card implements IProjectCard {
         description: 'Gain 1 M€ for each event EVER PLAYED by all players.',
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    const allPlayedEvents = sum(player.game.players.map((player) => player.getPlayedEventsCount()));
-    player.stock.add(Resource.MEGACREDITS, allPlayedEvents, {log: true});
-    return undefined;
   }
 }

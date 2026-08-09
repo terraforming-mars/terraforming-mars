@@ -4,6 +4,7 @@ import {TitanAirScrapping} from '../../../src/server/cards/colonies/TitanAirScra
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {churn} from '../../TestingUtils';
 
 describe('TitanAirScrapping', () => {
   let card: TitanAirScrapping;
@@ -25,7 +26,7 @@ describe('TitanAirScrapping', () => {
     player.addResourceTo(card, 7);
     expect(card.canAct(player)).is.true;
 
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
 
     expect(player.terraformRating).to.eq(21);

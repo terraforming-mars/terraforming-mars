@@ -1,8 +1,12 @@
+
 import '@/server/init';
 require('console-stamp')(
   console,
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
+import {markAsLiveServer} from '@/server/utils/server';
+// Must run first.
+markAsLiveServer();
 
 import https from 'https';
 import http from 'http';
@@ -26,11 +30,9 @@ process.on('uncaughtException', (err: any) => {
 });
 
 function requestHandler(req: http.IncomingMessage, res: http.ServerResponse): void {
-  try {
-    processRequest(req, res);
-  } catch (error) {
+  processRequest(req, res).catch((error) => {
     responses.internalServerError(req, res, error);
-  }
+  });
 }
 
 const metrics = {

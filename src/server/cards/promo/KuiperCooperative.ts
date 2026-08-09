@@ -1,6 +1,5 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
@@ -8,7 +7,7 @@ import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class KuiperCooperative extends CorporationCard implements ICorporationCard, IActionCard {
+export class KuiperCooperative extends ActiveCorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.KUIPER_COOPERATIVE,
@@ -18,6 +17,10 @@ export class KuiperCooperative extends CorporationCard implements ICorporationCa
 
       behavior: {
         production: {titanium: 1},
+      },
+
+      action: {
+        addResources: {tag: Tag.SPACE},
       },
 
       metadata: {
@@ -34,14 +37,5 @@ export class KuiperCooperative extends CorporationCard implements ICorporationCa
         }),
       },
     });
-  }
-
-  public action(player: IPlayer) {
-    player.addResourceTo(this, {qty: player.tags.count(Tag.SPACE), log: true});
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return true;
   }
 }

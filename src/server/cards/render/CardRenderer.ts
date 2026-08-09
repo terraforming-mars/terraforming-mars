@@ -8,6 +8,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {liteBoolean, LiteBoolean} from '../../../common/LiteBoolean';
+import {isLiveServer} from '../../utils/server';
 
 export type TextOptions = {
   size?: Size;
@@ -18,6 +19,12 @@ export type TextOptions = {
 
 export class CardRenderer {
   public static builder(f: (builder: Builder<CardRenderRoot>) => void): ICardRenderRoot {
+    // The live server never reads renderData (only export_card_rendering.ts does,
+    // to build the client's cards.json at compile time), so skip building the
+    // real tree there to avoid the CPU cost and per-card-name retained memory.
+    if (isLiveServer()) {
+      return EMPTY_ROOT;
+    }
     const builder = new RootBuilder();
     f(builder);
     return builder.build();
@@ -28,6 +35,8 @@ class CardRenderRoot implements ICardRenderRoot {
   public readonly is ='root';
   constructor(public rows: Array<Array<ItemType>> = [[]]) {}
 }
+
+const EMPTY_ROOT = new CardRenderRoot();
 
 class CardRenderProductionBox implements ICardRenderProductionBox {
   public readonly is = 'production-box';

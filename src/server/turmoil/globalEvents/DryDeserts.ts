@@ -9,10 +9,6 @@ import {GainResources} from '../../inputs/GainResources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
-});
-
 export class DryDeserts extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -20,14 +16,17 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
       description: 'First player removes 1 ocean tile from the gameboard. Gain 1 standard resource per influence.',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
     if (game.canRemoveOcean()) {
       game.defer(new RemoveOceanTile(game.playersInGenerationOrder[0], 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
     }
 
+    const turmoil = Turmoil.getTurmoil(game);
     game.playersInGenerationOrder.forEach((player) => {
       const count = turmoil.getInfluence(player);
       if (count > 0) {

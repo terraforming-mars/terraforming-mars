@@ -28,7 +28,7 @@ describe('AquiferReleasedByPublicCouncil', () => {
     turmoil.dominantParty.delegates.add(opponent);
     turmoil.dominantParty.delegates.add(opponent);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.steel).to.eq(1);
     expect(opponent.steel).to.eq(3);
     expect(player.plants).to.eq(1);
@@ -38,12 +38,11 @@ describe('AquiferReleasedByPublicCouncil', () => {
   it('Compatible with Whales', () => {
     const card = new AquiferReleasedByPublicCouncil();
     const [game, player, opponent] = testGame(2, {turmoilExtension: true});
-    const turmoil = game.turmoil!;
     const whales = new Whales();
     player.playedCards.push(whales);
 
     maxOutOceans(opponent);
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     runAllActions(game);
 
@@ -59,7 +58,7 @@ describe('AquiferReleasedByPublicCouncil', () => {
     player.playedCards.push(whales);
     maxOutOceans(opponent);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     runAllActions(game);
 
     expect(player.game.deferredActions).has.lengthOf(0);

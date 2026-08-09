@@ -93,6 +93,7 @@ export function writeJson(res: Response, ctx: Context, json: any, space?: string
     json._user = {userid: ctx.user.global_name};
   }
   const s = JSON.stringify(json, undefined, space);
+  res.setHeader('Content-Length', Buffer.byteLength(s));
   res.end(s);
 }
 

@@ -22,11 +22,11 @@
   "Full randomized": "Volledig willekeurig",
   "Randomized with limited synergy": "Willekeurig met beperkte synergie",
   "Include fan Milestones/Awards": "Inclusief mijlpalen/onderscheidingen van fans",
-  "Draft:": "Draft:",
+  "Draft:": "",
   "Research phase": "Onderzoeksfase",
   "Initial": "Start",
   "Game configs:": "Spelconfiguraties: ",
-  "timer": "timer",
+  "timer": "",
   "real-time vp": "Real-time OP",
   "fast mode": "Snelle Modus",
   "Banned cards:": "Uitgesloten kaarten: ",
@@ -48,6 +48,6 @@
   "Official Random α": "Officieel Willekeurig α",
   "The new Milestones and Awards are still in active development.": "De nieuwe mijlpalen en onderscheidingen zijn nog in actieve ontwikkeling.",
   "Please don't report anything but functional issues. ": "Meld alsjeblieft alleen functionele problemen. ",
-  "Turmoil:": "Turmoil:",
+  "Turmoil:": "",
   "No negative Turmoil event": "Geen negatief Turmoil-evenement"
 }

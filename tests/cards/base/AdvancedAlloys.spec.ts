@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
-import {testGame} from '../../TestGame';
+import {AdvancedAlloys} from '@/server/cards/base/AdvancedAlloys';
+import {testGame} from '@tests/TestGame';
 
 describe('AdvancedAlloys', () => {
   it('Should play', () => {

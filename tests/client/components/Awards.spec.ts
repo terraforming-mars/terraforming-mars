@@ -1,6 +1,6 @@
 
 import {shallowMount, mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {globalConfig} from '@tests/client/components/getLocalVue';
 import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';

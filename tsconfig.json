@@ -30,7 +30,8 @@
         "esModuleInterop": true,
         "allowUnreachableCode": false,
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@tests/*": ["./tests/*"]
         },
         "plugins": [
             { "transform": "transformer-module" },

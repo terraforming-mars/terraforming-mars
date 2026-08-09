@@ -1,6 +1,6 @@
 
 import {mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {globalConfig} from '@tests/client/components/getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';

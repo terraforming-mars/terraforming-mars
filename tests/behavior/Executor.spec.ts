@@ -491,6 +491,84 @@ describe('Executor', () => {
     expect(executor.canExecute(behavior, player, actingCard)).is.true;
   });
 
+  it('removeResourcesFromAnyCard - count is a minimum, not just a presence check', () => {
+    const target = fakeCard({resourceType: CardResource.ANIMAL});
+    player.playedCards.push(target);
+    target.resourceCount = 1;
+
+    const behavior: Behavior = {removeResourcesFromAnyCard: {type: CardResource.ANIMAL, count: 2}};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    target.resourceCount = 2;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+  });
+
+  it('removeResourcesFromAnyCard - source self is unblockable and chains the rest of the behavior', () => {
+    const target = fakeCard({resourceType: CardResource.ANIMAL});
+    player.playedCards.push(target);
+    target.resourceCount = 2;
+
+    const behavior: Behavior = {
+      removeResourcesFromAnyCard: {type: CardResource.ANIMAL, count: 2, source: 'self'},
+      stock: {megacredits: 3},
+    };
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    expect(target.resourceCount).eq(0);
+    expect(player.megaCredits).eq(3);
+  });
+
+  it('removeResourcesFromAnyCard - source defaults to self', () => {
+    const target = fakeCard({resourceType: CardResource.ANIMAL});
+    player.playedCards.push(target);
+    target.resourceCount = 1;
+
+    const behavior: Behavior = {removeResourcesFromAnyCard: {type: CardResource.ANIMAL}, stock: {megacredits: 3}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    // No block prompt, unlike the explicit source: 'all' cases below.
+    expect(target.resourceCount).eq(0);
+    expect(player.megaCredits).eq(3);
+  });
+
+  it('removeResourcesFromAnyCard - a blocked attack skips the rest of the behavior', () => {
+    const target = fakeCard({resourceType: CardResource.ANIMAL});
+    player2.playedCards.push(target);
+    target.resourceCount = 1;
+    player2.underworldData.corruption = 1;
+
+    const behavior: Behavior = {removeResourcesFromAnyCard: {type: CardResource.ANIMAL, source: 'all'}, stock: {megacredits: 3}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    const orOptions = cast(player2.popWaitingFor(), OrOptions);
+    orOptions.options[0].cb(); // Block with corruption
+    runAllActions(game);
+
+    expect(target.resourceCount).eq(1);
+    expect(player.megaCredits).eq(0);
+  });
+
+  it('removeResourcesFromAnyCard - an unblocked attack still runs the rest of the behavior', () => {
+    const target = fakeCard({resourceType: CardResource.ANIMAL});
+    player2.playedCards.push(target);
+    target.resourceCount = 1;
+    player2.underworldData.corruption = 1;
+
+    const behavior: Behavior = {removeResourcesFromAnyCard: {type: CardResource.ANIMAL, source: 'all'}, stock: {megacredits: 3}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    const orOptions = cast(player2.popWaitingFor(), OrOptions);
+    orOptions.options[1].cb(); // Do not block
+    runAllActions(game);
+
+    expect(target.resourceCount).eq(0);
+    expect(player.megaCredits).eq(3);
+  });
+
   it('decrease any production - cannot execute with zero targets', () => {
     expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}}, player, fake)).is.false;
   });

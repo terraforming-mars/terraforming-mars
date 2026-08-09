@@ -187,6 +187,18 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.removeResourcesFromAnyCard !== undefined) {
+      const r = behavior.removeResourcesFromAnyCard;
+      const source = r.source ?? 'self';
+      const count = ctx.count(r.count ?? 1);
+      // Solo mode has no opponents to steal from, but the attack still resolves (as insurance) — see execute().
+      if (!(source !== 'self' && game.isSoloMode())) {
+        if (RemoveResourcesFromCard.getAvailableTargetCards(player, r.type, source, count).length === 0) {
+          return false;
+        }
+      }
+    }
+
     if (behavior.decreaseAnyProduction !== undefined) {
       if (!game.isSoloMode()) {
         const dap = behavior.decreaseAnyProduction;
@@ -240,16 +252,6 @@ export class Executor implements BehaviorExecutor {
         return false;
       }
     }
-
-    // if (behavior.removeResourcesFromAnyCard !== undefined) {
-    //   const rrfac = behavior.removeResourcesFromAnyCard;
-    //   if (rrfac.tag !== undefined || rrfac.count !== 1) {
-    //     throw new Error('Tag and sophisticated counts are not yet implemented.');
-    //   }
-    //   if (player.getCardsWithResources(behavior.removeResourcesFromAnyCard.type).length === 0) {
-    //     return false;
-    //   }
-    // }
 
     if (behavior.turmoil) {
       const turmoil = Turmoil.getTurmoil(game);
@@ -423,6 +425,22 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.removeResourcesFromAnyCard !== undefined) {
+      const r = behavior.removeResourcesFromAnyCard;
+      const remainder = {...behavior};
+      delete remainder['removeResourcesFromAnyCard'];
+      const source = r.source ?? 'self';
+      const count = ctx.count(r.count ?? 1);
+      player.game.defer(new RemoveResourcesFromCard(player, r.type, count, {source, blockable: source !== 'self', log: true, min: count}))
+        .andThen((response) => {
+          if (response.proceed) {
+            this.execute(remainder, player, inputCard);
+          }
+        });
+      // Exit early — the rest only runs if the removal isn't blocked.
+      return;
+    }
+
     if (behavior.lose !== undefined) {
       const lose = behavior.lose;
       if (lose.production) {
@@ -532,10 +550,6 @@ export class Executor implements BehaviorExecutor {
       const subExecutor = new AddResourcesToAnyCardExecutor(player, card, behavior, ctx, behavior.addResourcesToAnyCard);
       subExecutor.execute();
     }
-
-    // if (behavior.removeResourcesFromAnyCard !== undefined) {
-    //   throw new Error('not yet');
-    // }
 
     if (behavior.decreaseAnyProduction !== undefined) {
       player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));

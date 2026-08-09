@@ -1,20 +1,18 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
-import {SelectCard} from '../../inputs/SelectCard';
 import {all} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Hospitals extends Card implements IProjectCard, IActionCard {
+export class Hospitals extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -25,6 +23,11 @@ export class Hospitals extends Card implements IProjectCard, IActionCard {
 
       behavior: {
         production: {energy: -1},
+      },
+
+      action: {
+        spend: {resourceFromAnyCard: {type: CardResource.DISEASE}},
+        stock: {megacredits: {cities: {}}},
       },
 
       victoryPoints: 1,
@@ -47,35 +50,9 @@ export class Hospitals extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public canAct(player: IPlayer) {
-    return player.getResourceCount(CardResource.DISEASE) > 0;
-  }
-
   public onTilePlaced(cardowner: IPlayer, _activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       cardowner.addResourceTo(this, {qty: 1, log: true});
     }
-  }
-
-  public action(player: IPlayer) {
-    const diseaseCards = player.getCardsWithResources(CardResource.DISEASE);
-    const game = player.game;
-
-    const input = new SelectCard('Remove a disease from ANY OF YOUR CARD to gain 1M€ per city in play',
-      'Choose a card to remove 1 disease.',
-      diseaseCards)
-      .andThen(([card]) => {
-        player.removeResourceFrom(card, 1);
-        player.stock.add(Resource.MEGACREDITS, (game.board.getCities()).length, {log: true});
-        return undefined;
-      });
-    if (diseaseCards.length === 0) {
-      return undefined;
-    }
-    if (diseaseCards.length === 1) {
-      input.cb(diseaseCards);
-      return undefined;
-    }
-    return input;
   }
 }

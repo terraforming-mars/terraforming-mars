@@ -86,7 +86,6 @@ export type Behavior = {
   removeResourcesFromAnyCard?: {
     type: CardResource,
     count?: Countable,
-    /** Whose cards are eligible. Default 'self' (unblockable, no cost to trigger); 'opponents'/'all' is a steal-style attack that can be blocked. */
     source?: 'self' | 'opponents' | 'all',
   };
 

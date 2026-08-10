@@ -151,6 +151,104 @@ export const CARD_OVERLAY: Partial<Record<CardName, Overlay>> = {
     semantics: 'Places a city tile on a volcanic area, ignoring the usual rule that cities may not be placed next to another city. On a board with no volcanic spaces the city may go on any city-legal space.',
     play_restriction: 'you must have at least 1 energy production and there must be a legal volcanic space',
   },
+
+  // ---------------------------------------------------------------------------
+  // Base: triggered and continuous effects
+  // ---------------------------------------------------------------------------
+  [CardName.ARCTIC_ALGAE]: {
+    status: 'documented',
+    semantics: 'The trigger fires for every player\'s ocean placements, not only your own.',
+    passive: [{trigger: 'any player places an ocean tile', effect: 'gain 2 plants'}],
+  },
+  [CardName.DECOMPOSERS]: {
+    status: 'documented',
+    semantics: 'Worth 1 victory point for every 3 microbes on this card. If this card is played in the prelude phase immediately after Ecology Experts, it starts with 2 extra microbes.',
+    passive: [{
+      trigger: 'you play a card with an animal, plant, or microbe tag',
+      effect: 'add 1 microbe to this card for each matching tag',
+    }],
+  },
+  [CardName.ECOLOGICAL_ZONE]: {
+    status: 'documented',
+    semantics: 'On play, place the Ecological Zone special tile. If this card is played in the prelude phase immediately after Ecology Experts, it starts with 1 extra animal.',
+    passive: [{
+      trigger: 'you play a card with an animal or plant tag',
+      effect: 'add 1 animal to this card for each matching tag',
+    }],
+    play_restriction: 'the Ecological Zone tile must go on a land space adjacent to a greenery tile',
+  },
+  [CardName.HERBIVORES]: {
+    status: 'documented',
+    semantics: 'On play, add 1 animal to this card and decrease any player\'s plant production 1 step.',
+    passive: [{trigger: 'you place a greenery tile', effect: 'add 1 animal to this card'}],
+  },
+  [CardName.IMMIGRANT_CITY]: {
+    status: 'documented',
+    semantics: 'On play, place a city tile, then decrease your energy production 1 step and your M€ production 2 steps.',
+    passive: [{trigger: 'any player places a city tile', effect: 'increase your M€ production 1 step'}],
+    play_restriction: 'you need 1 energy production, a legal city space, and enough M€ production to absorb the 2 step loss',
+  },
+  [CardName.INDENTURED_WORKERS]: {
+    status: 'documented',
+    semantics: 'The discount applies once, to the very next card you play this generation, and is lost if you play no further card.',
+    passive: [{trigger: 'you play your next card this generation', effect: 'it costs 8 M€ less'}],
+  },
+  [CardName.MARS_UNIVERSITY]: {
+    status: 'documented',
+    semantics: 'Triggers once for each science tag played, including this card\'s own science tag when it enters play. If your hand is empty the trigger does nothing.',
+    passive: [{
+      trigger: 'you play a card with a science tag, including this card',
+      effect: 'for each science tag, you may discard 1 card from your hand to draw 1 card',
+    }],
+  },
+  [CardName.MEDIA_GROUP]: {
+    status: 'documented',
+    semantics: 'A trigger on your own event cards only.',
+    passive: [{trigger: 'you play an event card', effect: 'gain 3 M€'}],
+  },
+  [CardName.OLYMPUS_CONFERENCE]: {
+    status: 'documented',
+    semantics: 'The choice is only offered when there is already a science resource here; otherwise a resource is simply added.',
+    passive: [{
+      trigger: 'you play a card with a science tag, including this card',
+      effect: 'for each science tag, either add 1 science resource to this card, or remove 1 science resource from this card to draw a card',
+    }],
+  },
+  [CardName.OPTIMAL_AEROBRAKING]: {
+    status: 'documented',
+    semantics: 'The played card must be both an event and carry a space tag.',
+    passive: [{trigger: 'you play a space event card', effect: 'gain 3 M€ and 3 heat'}],
+  },
+  [CardName.PETS]: {
+    status: 'documented',
+    semantics: 'On play, add 1 animal to this card. Animals here are protected: other players cannot remove them.',
+    passive: [{trigger: 'any player places a city tile', effect: 'add 1 animal to this card'}],
+  },
+  [CardName.ROVER_CONSTRUCTION]: {
+    status: 'documented',
+    semantics: 'The trigger fires for every player\'s city placements, not only your own.',
+    passive: [{trigger: 'any player places a city tile', effect: 'gain 2 M€'}],
+  },
+  [CardName.SEARCH_FOR_LIFE]: {
+    status: 'documented',
+    semantics: 'Worth 3 victory points if this card holds at least 1 science resource, and 0 otherwise. The action costs 1 M€: reveal the top card of the project deck, add 1 science resource to this card if the revealed card has a microbe tag, then discard the revealed card.',
+  },
+  [CardName.STANDARD_TECHNOLOGY]: {
+    status: 'documented',
+    semantics: 'Sell Patents is explicitly excluded.',
+    passive: [{
+      trigger: 'you pay for a standard project other than Sell Patents',
+      effect: 'gain 3 M€',
+    }],
+  },
+  [CardName.VIRAL_ENHANCERS]: {
+    status: 'documented',
+    semantics: 'The choice between a plant and a card resource is offered once per matching tag, and only when the played card itself stores microbes or animals. Otherwise you simply gain the plants.',
+    passive: [{
+      trigger: 'you play a card with a plant, microbe, or animal tag',
+      effect: 'for each matching tag, gain 1 plant, or add 1 resource to the played card if it stores microbes or animals',
+    }],
+  },
 };
 
 /**

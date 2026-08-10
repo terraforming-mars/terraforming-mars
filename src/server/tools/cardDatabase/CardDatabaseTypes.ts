@@ -3,6 +3,7 @@ import {CardType} from '@/common/cards/CardType';
 import {Expansion} from '@/common/cards/GameModule';
 import {Resource} from '@/common/Resource';
 import {Tag} from '@/common/cards/Tag';
+import {TileType} from '@/common/TileType';
 
 /** The game modules this database covers. */
 export const CARD_SETS = ['base', 'corpera', 'prelude'] as const;
@@ -77,7 +78,7 @@ export type ResourceAmounts = Partial<Record<Resource, Amount>>;
 /** A tile this card puts on the board. */
 export type PlaceTile = {
   /** 'ocean', 'city', 'greenery', or a `TileType` value for a special tile. */
-  tile: string,
+  tile: string | TileType,
   /** How many tiles. Defaults to 1 when absent. */
   count?: number,
   /** The `PlacementType` restricting where the tile may go. */

@@ -54,10 +54,8 @@
   "Action: Gain 1 M€ per animal here.": "Azione: ottieni 1 M€ per ogni Animale su questa carta.",
   "(Requires 2 city)":"Richiede che ci siano",
   "(tiles in play.)":"2 tessere Città in gioco",
-  "Any 2 Cities":"Richiede che ci siano 2 Città in gioco.",
 
   "Luna Governor":"Governatore della Luna",
-  "3 Earth":"3 Terra",
   "Requires 3 Earth tags. Increase your M€ production 2 steps.":"Richiede 3 simboli Terra. Incrementa la tua produzione di M€ di 2 livelli.",
 
   "Minority Refuge":"Rifugio per le Minoranze",
@@ -83,7 +81,6 @@
   "Add two floaters to ANY JOVIAN CARD.": "Aggiungi 2 Galleggianti ad UNA QUALUNQUE CARTA GIOVIANA.",
 
   "Heavy Taxation": "Tassazione Pesante",
-  "2 Earth": "2 Terra",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 2 livelli e ottieni 4 M€.",
 
   "Refugee Camps": "Campi dei Rifugiati",
@@ -107,7 +104,6 @@
   "Add two floaters to ANOTHER card.":"Aggiungi 2 Galleggianti AD UN'ALTRA CARTA.",
 
   "Airliners":"Aerei di Linea",
-  "3 floaters":"3 Galleggianti",
   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":"Richiede che tu abbia in gioco 3 Galleggianti. Incrementa la tua Produzione di M€ di 2 livelli. Aggiungi 2 Galleggianti ad una QUALUNQUE carta.",
 
   "Air Raid":"Raid Aereo",
@@ -138,7 +134,6 @@
   "Ice Moon Colony":"Colonia sulla Luna Ghiacciata",
   "Place 1 colony and 1 ocean tile.":"Colloca 1 Colonia ed 1 tessera Oceano.",
 
-  "2 Jovian":"2 Gioviani",
   "Jovian Lanterns":"Lanterne Gioviane",
   "Jovian":"Gioviano",
 
@@ -152,7 +147,6 @@
 
   "Lunar Exports":"Esportazioni Lunari",
   "Increase your plant production 2 steps, or your M€ production 5 steps.":"Incrementa la tua Produzione di Piante di 2 livelli, oppure incrementa la tua Produzione di M€ di 5 livelli.",
-  "2 Cities":"2 Città",
   "Requires 2 city tiles in play.":"Richiede 2 tessere Città in gioco.",
   "Mining Colony":"Colonia Mineraria",
   "Increase your titanium production 1 step. Place a colony.":"Incrementa la tua Produzione di Titanio di 1 livello. Colloca 1 Colonia.",
@@ -164,7 +158,6 @@
   "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.":"Incrementa il tuo TT di 2 livelli. Aggiungi 2 Galleggianti ad una qualunque CARTA GIOVIANA.",
 
   "Pioneer Settlement":"Insediamento Pioneristico",
-  "max 1 Colony":"AL MASSIMO 1 Colonia",
   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.":"Richiede che tu possieda al massimo 1 Colonia. Diminuisci la tua Produzione di M€ di 2 livelli. Colloca 1 Colonia.",
   "Quantum Communications":"Comunicazioni Quantistiche",
   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":"Richiede 4 simboli Scienza. Incrementa la tua Produzione di M€ di 1 livello per ogni Colonia in gioco.",
@@ -183,7 +176,6 @@
   "Requires -6 C. Decrease any plant production 1 step.":"Richiede una Temperatura maggiore o uguale a -6°C. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.",
 
   "Titan Floating Launch-Pad":"Piattaforma di Lancio",
-  "Colony City":"Colonia Città",
   "Warp Drive":"Motore a Curvatura",
   "Effect: When you play a space card, you pay 4 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Spazio, la paghi 4 M€ in meno.",
   "Requires 5 science tags.":"Richiede 5 simboli Scienza.",

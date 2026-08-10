@@ -399,7 +399,6 @@
     "It must be -10 C or colder.": "Richiede che la Temperatura sia minore o uguale a -10°C.",
 
     "Advanced Ecosystems": "Ecosistemi Avanzati",
-    "Plant Animal Microbe": "Pianta Animale Microbo",
     "Requires a plant tag, a microbe tag, and an animal tag.": "Richiede almeno un simbolo Pianta, un simbolo Microbo e un simbolo Animale.",
 
     "Great Dam": "Grande Diga",
@@ -625,23 +624,12 @@
   "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Incrementa la tua Produzione di M€ di 1 livello per ogni coppia di simboli Edificio che possiedi, incluso questo.",
 
   "AI Central": "Centrale IA",
-  "2 Science": "2 simboli Scienza",
-  "3 Science": "3 simboli Scienza",
-  "5 Science": "5 simboli Scienza",
   "(Effect: Draw 2 cards.)": "(Azione: pesca 2 carte.)",
 
   "Requires 3 science tags to play. Decrease your energy production 1 step.": "Richiede 3 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello.",
 
   "HYDROGEN TO VENUS":"Idrogeno per Venere",
 
-  "Plant Microbe Animal":"Pianta Microbo Animale",
-  "max 3 Oceans":"al massimo 3 tessere Oceano",
-  "Forest":"Foresta",
-  "2 Power":"2 simboli Potenza",
-  "7 Science":"7 simboli Scienza",
-  "Titanium production":"Produzione di Titanio",
-  "Steel production":"Produzione di Acciaio",
-  "4 Science":"4 simboli Scienza",
   "Standard projects":"Progetti Standard",
    "steal":"ruba",
    "next card":"prossima carta",

@@ -12,6 +12,7 @@ import {cardId} from './cardId';
 import {hasBespokeLogic} from './hasBespokeLogic';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {normalizeRequirements} from './normalizeRequirements';
+import {applyOverlay} from './overlay';
 
 /** The sets this database covers, in the order they are emitted. */
 const SETS: ReadonlyArray<CardSet> = ['base', 'corpera', 'prelude'];
@@ -132,7 +133,7 @@ function entriesFromDeck<T extends ICard>(deck: CardManifest<T>, set: CardSet, e
     if (!(card instanceof Card)) {
       throw new Error('Not a data-driven card: ' + card.name);
     }
-    entries.push(entryFor(set, card, factory.compatibility));
+    entries.push(applyOverlay(entryFor(set, card, factory.compatibility)));
   }
 }
 

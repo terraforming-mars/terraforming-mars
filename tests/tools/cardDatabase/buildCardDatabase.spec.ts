@@ -4,6 +4,7 @@ import {CardType} from '@/common/cards/CardType';
 import {Tag} from '@/common/cards/Tag';
 import {CardEntry} from '@/server/tools/cardDatabase/CardDatabaseTypes';
 import {buildCardDatabase, buildIndex} from '@/server/tools/cardDatabase/buildCardDatabase';
+import {CARD_OVERLAY} from '@/server/tools/cardDatabase/overlay';
 
 describe('buildCardDatabase', () => {
   const entries = buildCardDatabase();
@@ -98,6 +99,30 @@ describe('buildCardDatabase', () => {
     expect(get(CardName.ROBOTIC_WORKFORCE).bespoke).is.true;
     expect(get(CardName.HELION).bespoke).is.true;
     expect(get(CardName.ALGAE).bespoke).is.false;
+  });
+
+  it('documents every card whose behavior is not fully declarative', () => {
+    const undocumented = entries
+      .filter((entry) => entry.bespoke && entry.semantics === undefined && entry.passive === undefined)
+      .map((entry) => `${entry.set}/${entry.name}`);
+    expect(undocumented, 'cards missing an entry in CARD_OVERLAY').deep.eq([]);
+  });
+
+  it('has no overlay entry for a card that does not need one', () => {
+    const documented = new Set(Object.keys(CARD_OVERLAY));
+    const unnecessary = entries
+      .filter((entry) => !entry.bespoke && documented.has(entry.name) && entry.semantics !== undefined)
+      .map((entry) => entry.name);
+    expect(unnecessary, 'overlay entries for cards that no longer need one').deep.eq([]);
+  });
+
+  it('applies corporation semantics', () => {
+    const helion = get(CardName.HELION);
+    expect(helion.semantics).contains('heat may be spent as if it were M€');
+    expect(helion.passive).deep.eq([{
+      trigger: 'you pay for anything',
+      effect: 'you may substitute heat for M€ one for one',
+    }]);
   });
 });
 

@@ -8,7 +8,7 @@ describe('UndergroundTokens', () => {
     const wrapper = shallowMount(UndergroundTokens, {
       ...globalConfig,
       props: {
-        underworldData: {corruption: 0, excavations: [], tokens: []},
+        underworldData: {corruption: 0, activeBonus: undefined, tokens: []},
       },
     });
     expect(wrapper.exists()).to.be.true;

@@ -249,6 +249,139 @@ export const CARD_OVERLAY: Partial<Record<CardName, Overlay>> = {
       effect: 'for each matching tag, gain 1 plant, or add 1 resource to the played card if it stores microbes or animals',
     }],
   },
+
+  // ---------------------------------------------------------------------------
+  // Base: bespoke play and action logic
+  // ---------------------------------------------------------------------------
+  [CardName.ANTS]: {
+    status: 'documented',
+    semantics: 'The action removes 1 microbe from any other player\'s card and adds 1 microbe to this card. In a solo game the action is always available.',
+  },
+  [CardName.ARTIFICIAL_LAKE]: {
+    status: 'complete',
+    reason: 'The bespoke code only checks that a legal land space exists; the ocean placement itself is in immediate.place.',
+  },
+  [CardName.ASTEROID_MINING_CONSORTIUM]: {
+    status: 'documented',
+    semantics: 'Decrease any one player\'s titanium production 1 step and increase your own 1 step. You may target yourself, which nets no change.',
+  },
+  [CardName.ENERGY_TAPPING]: {
+    status: 'documented',
+    semantics: 'Decrease any one player\'s energy production 1 step and increase your own 1 step. You may target yourself.',
+  },
+  [CardName.POWER_SUPPLY_CONSORTIUM]: {
+    status: 'documented',
+    semantics: 'Decrease any one player\'s energy production 1 step and increase your own 1 step. You may target yourself.',
+  },
+  [CardName.GREAT_ESCARPMENT_CONSORTIUM]: {
+    status: 'documented',
+    semantics: 'Decrease any one player\'s steel production 1 step and increase your own 1 step. You may target yourself.',
+  },
+  [CardName.HACKERS]: {
+    status: 'documented',
+    semantics: 'Decrease your energy production 1 step and increase your M€ production 2 steps, and separately decrease any one player\'s M€ production 2 steps. You may target yourself.',
+  },
+  [CardName.EXTREME_COLD_FUNGUS]: {
+    status: 'documented',
+    semantics: 'The action is a choice: add 2 microbes to another card, or gain 1 plant. With no other microbe card in play the plant is taken automatically.',
+  },
+  [CardName.FLOODING]: {
+    status: 'documented',
+    semantics: 'Place an ocean tile. If any tile owned by another player is adjacent to it, you may remove 4 M€ from one of those owners. Worth -1 victory point.',
+  },
+  [CardName.HIRED_RAIDERS]: {
+    status: 'documented',
+    semantics: 'Steal 2 steel or 3 M€ from one opponent of your choice. Steel cannot be taken from a player whose alloys are protected. In a solo game you simply gain the resources.',
+  },
+  [CardName.IMPORTED_HYDROGEN]: {
+    status: 'documented',
+    semantics: 'Place an ocean tile, then choose one: gain 3 plants, add 3 microbes to another card, or add 2 animals to another card. With no eligible card, the plants are taken automatically.',
+  },
+  [CardName.INDUSTRIAL_CENTER]: {
+    status: 'documented',
+    semantics: 'On play, place the Industrial Center special tile. The repeatable action is fully described in the action field: spend 7 M€ to increase your steel production 1 step.',
+    play_restriction: 'the Industrial Center tile must go on a land space adjacent to a city tile',
+  },
+  [CardName.INSULATION]: {
+    status: 'documented',
+    semantics: 'Choose any number of steps, at least 1 and at most your heat production. Decrease your heat production by that amount and increase your M€ production by the same amount.',
+    play_restriction: 'you must have at least 1 heat production',
+  },
+  [CardName.LAND_CLAIM]: {
+    status: 'documented',
+    semantics: 'Reserve any non-reserved land space. Only you may place a tile on that space for the rest of the game. No tile is placed now.',
+  },
+  [CardName.LARGE_CONVOY]: {
+    status: 'documented',
+    semantics: 'Place an ocean tile, draw 2 cards, then choose one: gain 5 plants, or add 4 animals to another card. With no animal card in play the plants are taken automatically.',
+  },
+  [CardName.LOCAL_HEAT_TRAPPING]: {
+    status: 'documented',
+    semantics: 'Spend 5 heat, then choose one: gain 4 plants, or add 2 animals to another card. With no animal card in play the plants are taken automatically. The heat this card spends is reserved so it cannot be paid for with Helion\'s heat-as-M€ substitution; Stormcraft Incorporated floaters may still cover part of the cost, each floater counting as 2 heat.',
+  },
+  [CardName.MINING_AREA]: {
+    status: 'documented',
+    semantics: 'Place the Mining Area special tile and permanently increase your production of the resource that space grants: steel or titanium. If the space grants both, you choose.',
+    play_restriction: 'the tile must go on a space with a steel or titanium placement bonus that is adjacent to one of your own non-ocean tiles',
+  },
+  [CardName.MINING_RIGHTS]: {
+    status: 'documented',
+    semantics: 'Place the Mining Rights special tile and permanently increase your production of the resource that space grants: steel or titanium. If the space grants both, you choose.',
+    play_restriction: 'the tile must go on any space with a steel or titanium placement bonus',
+  },
+  [CardName.MOSS]: {
+    status: 'documented',
+    semantics: 'You pay 1 plant as an additional cost when this card is played.',
+    play_restriction: 'you must have 1 plant, or a card that supplies one such as Viral Enhancers or Manutech',
+  },
+  [CardName.NITROPHILIC_MOSS]: {
+    status: 'documented',
+    semantics: 'You pay 2 plants as an additional cost when this card is played.',
+    play_restriction: 'you must have 2 plants, or 1 plant plus Viral Enhancers, or Manutech',
+  },
+  [CardName.NITROGEN_RICH_ASTEROID]: {
+    status: 'documented',
+    semantics: 'Raise your terraform rating 2 steps and the temperature 1 step, then increase your plant production 1 step — or 4 steps instead if you have at least 3 plant tags, counted after this card is played.',
+  },
+  [CardName.NOCTIS_CITY]: {
+    status: 'documented',
+    semantics: 'Place a city tile on the reserved Noctis City area, ignoring the usual placement restrictions, and decrease your energy production 1 step while increasing your M€ production 3 steps. On a board with no reserved Noctis area, the city goes on any legal city space.',
+    play_restriction: 'you must have at least 1 energy production',
+  },
+  [CardName.POWER_INFRASTRUCTURE]: {
+    status: 'documented',
+    semantics: 'The action converts energy to M€ one for one. You choose the amount, from 1 up to all the energy you hold.',
+  },
+  [CardName.PREDATORS]: {
+    status: 'documented',
+    semantics: 'The action removes 1 animal from any other player\'s card and adds 1 animal to this card. In a solo game the action is always available.',
+  },
+  [CardName.ROBOTIC_WORKFORCE]: {
+    status: 'documented',
+    semantics: 'Copy the production box of one card you have already played that carries a building tag. Only the production change is copied, nothing else the card does.',
+    play_restriction: 'you must have a played building-tag card whose production box can be applied again',
+  },
+  [CardName.SABOTAGE]: {
+    status: 'documented',
+    semantics: 'Remove 3 titanium, 4 steel, or 7 M€ from one opponent of your choice. Titanium and steel cannot be taken from a player whose alloys are protected.',
+  },
+  [CardName.TERRAFORMING_GANYMEDE]: {
+    status: 'documented',
+    semantics: 'Raise your terraform rating 1 step for each Jovian tag you have, counting this card\'s own Jovian tag.',
+  },
+  [CardName.URBANIZED_AREA]: {
+    status: 'documented',
+    semantics: 'Place a city tile, decrease your energy production 1 step and increase your M€ production 2 steps.',
+    play_restriction: 'the city must go on a land space adjacent to at least 2 other city tiles, and you must have 1 energy production',
+  },
+  [CardName.VIRUS]: {
+    status: 'documented',
+    semantics: 'Choose one: remove up to 2 animals from any one card, or remove up to 5 plants from any one player.',
+  },
+  [CardName.WATER_SPLITTING_PLANT]: {
+    status: 'complete',
+    reason: 'The bespoke code only re-checks that the player can afford the Reds tax on raising oxygen; the action itself is declarative.',
+  },
 };
 
 /**

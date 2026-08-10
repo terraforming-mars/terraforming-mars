@@ -20,7 +20,7 @@ export class GainAnyResourceButScienceDeferred extends DeferredAction {
 
     const cards = this.player.getResourceCards(undefined).filter((card) => card.resourceType !== CardResource.SCIENCE);
     if (cards.length > 0) {
-      orOptions.options.push(new SelectCard('Gain 1 card resource', 'Add resource', cards)
+      orOptions.options.push(new SelectCard('Gain 1 card resource', undefined, cards)
         .andThen(([card]) => {
           this.player.addResourceTo(card, {log: true});
           return undefined;

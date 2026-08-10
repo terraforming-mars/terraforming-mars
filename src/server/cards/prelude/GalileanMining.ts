@@ -4,7 +4,6 @@ import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class GalileanMining extends PreludeCard {
   constructor() {
@@ -33,9 +32,7 @@ export class GalileanMining extends PreludeCard {
     return player.canAfford(5);
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
-      PathfindersExpansion.addToSolBank(player);
-    });
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
     return undefined;
   }
 }

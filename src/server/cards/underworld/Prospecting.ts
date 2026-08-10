@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class Prospecting extends PreludeCard {
   constructor() {
@@ -37,9 +36,7 @@ export class Prospecting extends PreludeCard {
         }
       }});
 
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
-      PathfindersExpansion.addToSolBank(player);
-    });
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
 
     return undefined;
   }

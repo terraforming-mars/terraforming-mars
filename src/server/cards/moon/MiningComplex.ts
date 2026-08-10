@@ -12,7 +12,6 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {MoonBoard} from '../../moon/MoonBoard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class MiningComplex extends PreludeCard {
   constructor() {
@@ -64,10 +63,7 @@ export class MiningComplex extends PreludeCard {
             'Select a space next to the mine for a road',
           ))
           .andThen(() => {
-            player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits))
-              .andThen(() => {
-                PathfindersExpansion.addToSolBank(player);
-              });
+            player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
           });
       });
     return undefined;

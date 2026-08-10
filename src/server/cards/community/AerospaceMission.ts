@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {
@@ -32,9 +31,7 @@ export class AerospaceMission extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
-      PathfindersExpansion.addToSolBank(player);
-    });
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
     return undefined;
   }
 }

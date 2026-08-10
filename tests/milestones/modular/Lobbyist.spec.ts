@@ -6,6 +6,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
 
 describe('Lobbyist Milestone', () => {
   let milestone: Lobbyist;
@@ -59,5 +60,15 @@ describe('Lobbyist Milestone', () => {
     turmoil.sendDelegateToParty(player2, PartyName.KELVINISTS, game);
     expect(milestone.getScore(player)).to.eq(2); // Only player delegates, ignores player2 chairman and delegate
     expect(milestone.getScore(player2)).to.eq(2); // Only player’s 2 delegates, ignores player delegates and party leaders
+  });
+
+  it('MarsBot claims it as Chairman leading two parties', () => {
+    const bot = {game, player} as unknown as IMarsBot;
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    turmoil.chairman = player;
+    expect(milestone.marsBotCanClaim(bot)).is.true;
   });
 });

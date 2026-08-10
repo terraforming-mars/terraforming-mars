@@ -9,6 +9,7 @@ import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 import {LargeConvoy} from '../../../src/server/cards/base/LargeConvoy';
 import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
 import {SpaceStation} from '../../../src/server/cards/base/SpaceStation';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
 
 
 describe('Philantropist', () => {
@@ -57,5 +58,14 @@ describe('Philantropist', () => {
     player.playedCards.push(new SpaceStation());
     expect(milestone.getScore(player)).eq(5);
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot counts its own played pile', () => {
+    const pile = [new DustSeals(), new AntiGravityTechnology(), new Ants(), new GanymedeColony()];
+    const bot = {playedProjectCards: pile} as unknown as IMarsBot;
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    pile.push(new SpaceStation());
+    expect(milestone.marsBotCanClaim(bot)).is.true;
   });
 });

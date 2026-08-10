@@ -1,5 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
+import {IMarsBot} from '../automa/MarsBotCorpTypes';
+import {marsBotMarsTrackPositions} from '../automa/MarsBotMilestoneAwardEval';
 
 export class Generalist extends BaseMilestone {
   constructor() {
@@ -33,5 +35,10 @@ export class Generalist extends BaseMilestone {
     }
 
     return score;
+  }
+
+  /** MarsBot generalizes by reaching space 2 on every Mars track. */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return marsBotMarsTrackPositions(bot).every((position) => position >= 2);
   }
 }

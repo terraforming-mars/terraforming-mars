@@ -7,6 +7,9 @@ import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMarsBot} from '../../../src/server/automa/MarsBotCorpTypes';
+import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
+import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 
 describe('Landshaper', () => {
   let milestone: Landshaper;
@@ -75,5 +78,19 @@ describe('Landshaper', () => {
     game.simpleAddTile(player, spaces[1], {tileType: TileType.GREENERY});
     game.simpleAddTile(player, moonSpaces[0], {tileType: TileType.LUNA_TRAIN_STATION});
     expect(milestone.canClaim(player)).to.be.true;
+  });
+
+  it('MarsBot claims it with a city, a greenery and building track at space 5', () => {
+    const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+    const bot = {game, player, board} as unknown as IMarsBot;
+    game.simpleAddTile(player, spaces[0], {tileType: TileType.CITY});
+    game.simpleAddTile(player, spaces[1], {tileType: TileType.GREENERY});
+    for (let i = 0; i < 4; i++) {
+      board.tracks[0].advance();
+    }
+    expect(milestone.marsBotCanClaim(bot)).is.false;
+
+    board.tracks[0].advance();
+    expect(milestone.marsBotCanClaim(bot)).is.true;
   });
 });

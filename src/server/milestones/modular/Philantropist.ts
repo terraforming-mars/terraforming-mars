@@ -1,6 +1,7 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
+import {IMarsBot} from '../../automa/MarsBotCorpTypes';
 export class Philantropist extends BaseMilestone {
   constructor() {
     super(
@@ -29,5 +30,16 @@ export class Philantropist extends BaseMilestone {
     });
 
     return cardsWithVP.length;
+  }
+
+  /** MarsBot's cards live in its own played pile; the same VP filter applies there. */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return bot.playedProjectCards.filter((card) => {
+      const victoryPoints = card.metadata.victoryPoints;
+      if (card.type === CardType.EVENT || victoryPoints === undefined) {
+        return false;
+      }
+      return typeof victoryPoints === 'number' ? victoryPoints > 0 : victoryPoints.points > 0;
+    }).length >= 5;
   }
 }

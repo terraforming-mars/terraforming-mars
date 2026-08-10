@@ -1,5 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
+import {IMarsBot} from '../automa/MarsBotCorpTypes';
+import {marsBotAllTrackPositions} from '../automa/MarsBotMilestoneAwardEval';
 
 export class Specialist extends BaseMilestone {
   constructor() {
@@ -15,5 +17,10 @@ export class Specialist extends BaseMilestone {
       player.production.plants,
       player.production.energy,
       player.production.heat);
+  }
+
+  /** MarsBot specializes by pushing any one track to space 10. */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return marsBotAllTrackPositions(bot).some((position) => position >= 10);
   }
 }

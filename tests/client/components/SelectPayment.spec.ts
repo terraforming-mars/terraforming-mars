@@ -7,6 +7,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
+import {asComplete} from './utils/models';
 
 describe('SelectPayment', () => {
   it('Uses heat', async () => {
@@ -311,21 +312,21 @@ describe('SelectPayment', () => {
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<SelectPaymentModel>) {
-    const thisPlayer: Partial<PublicPlayerModel> = {
+    const thisPlayer: PublicPlayerModel = asComplete<PublicPlayerModel>({
       steel: 0,
       titanium: 0,
       heat: 0,
       steelValue: 2,
       titaniumValue: 3,
       tableau: [],
-      ...playerFields};
+      ...playerFields});
 
-    const playerView: Partial<PlayerViewModel> = {
+    const playerView: PlayerViewModel = asComplete<PlayerViewModel>({
       thisPlayer: thisPlayer as PublicPlayerModel,
       id: 'playerid-foo',
-    };
+    });
 
-    const playerInput: SelectPaymentModel = {
+    const playerInput: SelectPaymentModel = asComplete<SelectPaymentModel>({
       type: 'payment',
       buttonLabel: '',
       title: 'foo',
@@ -340,7 +341,7 @@ describe('SelectPayment', () => {
       graphene: 0,
       reserveUnits: undefined,
       ...playerInputFields,
-    };
+    });
 
     return mount(SelectPayment, {
       ...globalConfig,

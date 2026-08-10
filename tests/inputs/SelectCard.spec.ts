@@ -45,7 +45,7 @@ describe('SelectCard', () => {
     const selectOption = cast(input.maybeConvertToSelectOption('Add resource to Aquifer Pumping'), SelectOption);
 
     expect(selectOption.buttonLabel).eq('Add resource');
-    selectOption.cb();
+    selectOption.cb(undefined);
     expect(selected).deep.eq([aquiferPumping]);
   });
 

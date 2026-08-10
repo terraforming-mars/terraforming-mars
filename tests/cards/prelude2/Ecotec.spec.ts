@@ -75,7 +75,7 @@ describe('Ecotec', () => {
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     const selectOption = cast(orOptions.options[0], SelectOption);
-    selectOption.cb();
+    selectOption.cb(undefined);
 
     expect(tardigrades.resourceCount).to.eq(1);
     expect(player.plants).to.eq(0);

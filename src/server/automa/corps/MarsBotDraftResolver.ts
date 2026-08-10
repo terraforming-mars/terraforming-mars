@@ -10,7 +10,7 @@ export type Shuffler = <T>(items: Array<T>) => void;
 /** Chooses MarsBot's draft card and its post-draft discard from the corp's draft priority. */
 export class MarsBotDraftResolver {
   constructor(
-    private readonly tracks: MarsBotBoard,
+    private readonly marsBotBoard: MarsBotBoard,
     private readonly shuffler: Shuffler,
   ) {}
 
@@ -114,7 +114,7 @@ export class MarsBotDraftResolver {
   }
 
   private leastAdvancedTrackTags(): ReadonlyArray<Tag> {
-    return this.tracks.data[this.tracks.getLeastAdvancedTrackIndex()].tags;
+    return this.marsBotBoard.definitions[this.marsBotBoard.getLeastAdvancedTrackIndex()].tags;
   }
 
   /**

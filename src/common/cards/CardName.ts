@@ -614,14 +614,14 @@ export enum CardName {
   GLOBAL_EVENT_PROXY = 'Global Event Proxy',
 
   // Automa
-  AUTOMA_METEOR_SHOWER = 'Automa: Meteor Shower',
-  AUTOMA_INVASIVE_SPECIES = 'Automa: Invasive Species',
-  AUTOMA_RESEARCH_AND_DEVELOPMENT = 'Automa: Research and Development',
-  AUTOMA_OVERACHIEVEMENT = 'Automa: Overachievement',
-  AUTOMA_EXPEDITED_CONSTRUCTION = 'Automa: Expedited Construction',
-  AUTOMA_LOBBYISTS = 'Automa: Lobbyists',
-  AUTOMA_LOCAL_NEURAL_INSTANCE = 'Automa: Local Neural Instance',
-  AUTOMA_CORPORATE_COMPETITION = 'Automa: Corporate Competition',
+  AUTOMA_METEOR_SHOWER = 'Meteor Shower:automa',
+  AUTOMA_INVASIVE_SPECIES = 'Invasive Species:automa',
+  AUTOMA_RESEARCH_AND_DEVELOPMENT = 'Research and Development:automa',
+  AUTOMA_OVERACHIEVEMENT = 'Overachievement:automa',
+  AUTOMA_EXPEDITED_CONSTRUCTION = 'Expedited Construction:automa',
+  AUTOMA_LOBBYISTS = 'Lobbyists:automa',
+  AUTOMA_LOCAL_NEURAL_INSTANCE = 'Local Neural Instance:automa',
+  AUTOMA_CORPORATE_COMPETITION = 'Corporate Competition:automa',
 
   // Ares expansion.
   BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',

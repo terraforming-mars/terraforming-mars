@@ -9,8 +9,10 @@ import * as constants from '@/common/constants';
 
 const previousViewport = ref('');
 
-// Temporary: keep the responsive viewport limited to the homepage. Once responsiveness covers the
-// whole project, update <meta name="viewport" content='width=1260, user-scalable=1' /> directly.
+// The current global viewport is width=1260, which prevents the home page from using the device width on phones.
+// On the start screen, this code changes it to width=device-width, so mobile browsers use their actual CSS viewport width.
+// This is a temporary solution in order to make this edit scoped to the start screen.
+// Once responsiveness covers the whole project, this code should be removed and the <meta name="viewport" content='width=1260, user-scalable=1' /> tag in index.html should be updated directly.
 onMounted(() => {
   const viewport = document.querySelector('meta[name="viewport"]');
   if (viewport !== null) {

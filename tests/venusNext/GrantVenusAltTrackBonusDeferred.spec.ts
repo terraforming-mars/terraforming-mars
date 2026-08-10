@@ -76,8 +76,8 @@ describe('GrantVenusAltTrackBonusDeferred', () => {
     const card = new Tardigrades();
     player.playedCards.push(card);
 
-    const input = cast(new GrantVenusAltTrackBonusDeferred(player, 0, true).execute(), OrOptions);
-    const option = cast(input.options[0], SelectOption);
+    const orOptions = cast(new GrantVenusAltTrackBonusDeferred(player, 0, true).execute(), OrOptions);
+    const option = cast(orOptions.options[0], SelectOption);
     option.cb(undefined);
 
     expect(card.resourceCount).eq(1);

@@ -64,7 +64,7 @@ describe('Ecotec', () => {
     setupForMicrobeChoice();
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[1].cb(); // options[0] adds the microbe, options[1] gains the plant
+    orOptions.options[1].cb(); // Second option gains the plant.
 
     expect(player.plants).to.eq(1);
     expect(tardigrades.resourceCount).to.eq(0);

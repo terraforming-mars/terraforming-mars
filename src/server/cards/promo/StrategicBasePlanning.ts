@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class StrategicBasePlanning extends PreludeCard {
   constructor() {
@@ -34,9 +33,7 @@ export class StrategicBasePlanning extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
-      PathfindersExpansion.addToSolBank(player);
-    });
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
     return undefined;
   }
 }

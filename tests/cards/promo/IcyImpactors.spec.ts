@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {maxOutOceans, runAllActions} from '../../TestingUtils';
+import {churn, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
@@ -60,7 +60,7 @@ describe('IcyImpactors', () => {
     player.megaCredits = 10;
     card.resourceCount = 1;
 
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[1].cb();
     runAllActions(game);
 
@@ -72,7 +72,7 @@ describe('IcyImpactors', () => {
     player.megaCredits = 10;
     card.resourceCount = 1;
 
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);

@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {globalConfig} from './getLocalVue';
+import {globalConfig} from '@tests/client/components/getLocalVue';
 import AdjacencyBonus from '@/client/components/AdjacencyBonus.vue';
 import {TileType} from '@/common/TileType';
 

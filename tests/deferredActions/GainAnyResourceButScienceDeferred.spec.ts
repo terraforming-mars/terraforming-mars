@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Birds} from '../../src/server/cards/base/Birds';
-import {PhysicsComplex} from '../../src/server/cards/base/PhysicsComplex';
-import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
-import {GainAnyResourceButScienceDeferred} from '../../src/server/deferredActions/GainAnyResourceButScienceDeferred';
-import {OrOptions} from '../../src/server/inputs/OrOptions';
-import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {SelectOption} from '../../src/server/inputs/SelectOption';
-import {cast} from '../../src/common/utils/utils';
-import {testGame} from '../TestGame';
+import {Birds} from '@/server/cards/base/Birds';
+import {PhysicsComplex} from '@/server/cards/base/PhysicsComplex';
+import {Tardigrades} from '@/server/cards/base/Tardigrades';
+import {GainAnyResourceButScienceDeferred} from '@/server/deferredActions/GainAnyResourceButScienceDeferred';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {cast} from '@/common/utils/utils';
+import {testGame} from '@tests/TestGame';
 
 describe('GainAnyResourceButScienceDeferred', () => {
   it('selects among non-science resource cards', () => {

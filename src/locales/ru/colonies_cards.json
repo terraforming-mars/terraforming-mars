@@ -1,6 +1,5 @@
 {
     "Airliners": "Авиалайнеры",
-    "3 floaters": "3 аэростата",
     "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Требует 3 аэростата. Увеличьте ваше производство M€ на 2. Добавьте 2 аэростата на ЛЮБУЮ карту",
 
     "Air Raid": "Авианалёт",
@@ -48,12 +47,6 @@
     "Place 1 colony and 1 ocean tile.": "Постройте 1 колонию и залейте 1 океан",
 
     "Impactor Swarm": "Астероидный рой",
-    "2 Jovian": "2 Юпитера",
-    "3 Jovian": "3 Юпитера",
-    "4 Jovian": "4 Юпитеров",
-    "5 Jovian": "5 Юпитеров",
-    "6 Jovian": "6 Юпитеров",
-    "7 Jovian": "7 Юпитеров",
     "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Требует 2 метки Юпитера. Получите 12 тепла. Уберите до 2 растений у любого игрока",
 
     "Interplanetary Colony Ship": "Корабль-колония",
@@ -159,9 +152,6 @@
 
     "Warp Drive": "Варп-двигатель",
     "Effect: When you play a space card, you pay 4 M€ less for it.": "Эффект: Тратьте розыгрыш карт с меткой космоса на 4 M€ меньше",
-    "Requires 5 science tags.": "Требует 5 меток Науки",
+    "Requires 5 science tags.": "Требует 5 меток Науки"
 
-    "Colony City": "Колония Город",
-    "max 1 Colony": "max 1 Колония",
-    "2 Cities": "2 Города"
 }

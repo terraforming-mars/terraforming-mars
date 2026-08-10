@@ -53,11 +53,6 @@
 
 
     "Capital": "",
-    "2 Oceans": "2 Océanos",
-    "3 Oceans": "3 Océanos",
-    "4 Oceans": "4 Océanos",
-    "5 Oceans": "5 Océanos",
-    "6 Oceans": "6 Océanos",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Requiere 4 losetas de océano. Coloca esta loseta. Reduce tu producción de energía en 2 y aumenta tu producción de M€ en 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "1 PV ADICIONAL POR CADA LOSETA DE OCÉANO ADYACENTE A ESTA LOSETA DE CIUDAD.",
 
@@ -695,9 +690,6 @@
     "AI Central": "Central IA",
 
     "Action: Draw 2 cards.": "Acción: Roba 2 cartas.",
-    "2 Science": "2 Ciencia",
-    "3 Science": "3 Ciencia",
-    "5 Science": "5 Ciencia",
     "(Effect: Draw 2 cards.)": "(Efecto: Roba 2 cartas.)",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "Requiere 3 símbolos de Ciencia para ser jugada. Reduce tu producción de energía 1 nivel.",
@@ -705,13 +697,6 @@
   "HYDROGEN TO VENUS":"Hidrógeno a Venus",
 
   "Jovian":"Joviano",
-  "max 3 Oceans":"max 3 Océanos",
-  "Forest":"Bosque",
-  "7 Science":"7 Ciencia",
-  "Titanium production":"Producción de Titanio",
-  "Steel production":"Producción de Acero",
-  "4 Science":"4 Ciencia",
-  "2 Cities":"2 Ciudades",
   "Standard projects":"Proyectos Estándar",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.":"Requiere 2 símbolos de Tierra. Incrementa tu producción de M€ en 4.",

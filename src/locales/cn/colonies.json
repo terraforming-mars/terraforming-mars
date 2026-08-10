@@ -52,10 +52,8 @@
   "Action: Gain 1M€ per animal here.": "行动：此卡上每有1点动物，获得1块钱",
   "(Requires 2 city)": "需要2个城市",
   "(tiles in play.)": "",
-  "Any 2 Cities": "任何两个城市",
 
   "Luna Governor": "月球政府",
-  "3 Earth": "3 地球",
   "Requires 3 Earth tags. Increase your M€ production 2 steps.": "（需要：三个地球图标）增加自身2点M€产量",
 
   "Minority Refuge": "少数民族难民",
@@ -81,7 +79,6 @@
   "Add two floaters to ANY JOVIAN CARD.": "增加2点云资源到任意木星卡上",
 
   "Heavy Taxation": "重税",
-  "2 Earth": "2 地球",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
   "Refugee Camps": "难民营",
@@ -105,7 +102,6 @@
   "Add two floaters to ANOTHER card.": "放置2个云资源到另一张牌",
 
   "Airliners": "航空公司",
-  "3 floaters": "3个云资源",
   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "需求：你有3个云资源。你的金钱产量+2，在任意卡牌上增加2个云资源。",
 
   "Air Raid": "空袭",
@@ -136,7 +132,6 @@
   "Ice Moon Colony": "冰月殖民地",
   "Place 1 colony and 1 ocean tile.": "放置1块殖民地和1片海洋",
 
-  "2 Jovian": "2个木星标志",
   "Jovian Lanterns": "木星灯",
   "Jovian": "木星",
 
@@ -149,7 +144,6 @@
 
   "Lunar Exports": "月球出口",
   "Increase your plant production 2 steps, or your M€ production 5 steps.": "你的植物产量+2，或你的金钱产量+5。",
-  "2 Cities": "2个城市",
   "Requires 2 city tiles in play.": "需求：2个城市被放置。",
   "Mining Colony": "采矿殖民地",
   "Increase your titanium production 1 step. Place a colony.": "你的钛产量+1。放置1块殖民地。",
@@ -161,7 +155,6 @@
   "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "提升2点改造度。在1张木星牌上+2云资源。",
 
   "Pioneer Settlement": "定居点",
-  "max 1 Colony": "最多1块殖民地",
   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "需求：你拥有不超过1块殖民地。金钱产量-2。放置1块殖民地。",
   "Quantum Communications": "量子通信",
   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",

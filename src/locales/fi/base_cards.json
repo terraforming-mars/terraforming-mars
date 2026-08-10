@@ -51,11 +51,6 @@
   "Martian Rails": "Marsin rautatie",
   "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "TOIMINTO: Käytä 1 energia hankkiaksesi 1 M€ jokaisesta kaupunkilaatasta MARSISSA.",
 
-  "2 Oceans": "2 merta",
-  "3 Oceans": "3 merta",
-  "4 Oceans": "4 merta",
-  "5 Oceans": "5 merta",
-  "6 Oceans": "6 merta",
   "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Vaatii 4 merilaattaa. Aseta tämä laatta. Vähennä energiatuotantoasi 2 askelta ja lisää M€-tuotantoasi 5 askelta.",
   "1 additional VP for each ocean tile adjacent to this city tile.": "1 ylimääräinen VP jokaista tämän kaupunkilaatan vieressä olevaa merilaattaa kohden.",
 
@@ -686,7 +681,6 @@
 
   "HYDROGEN TO VENUS": "VETY VENUKSELLE",
 
-  "max 3 Oceans": "max 3 valtamerta",
   "Standard projects": "Standardiprojektit",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Vaatii 2 Maa-ympyrää. Lisää M€-tuotantoasi 4 askelta.",

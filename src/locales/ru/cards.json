@@ -7,7 +7,6 @@
 
     "Deep Well Heating": "Тепло глубин",
     "Increase your energy production 1 step. Increase temperature 1 step.": "Повысьте своё производство энергии на 1. Повысьте температуру на 1.",
-    "Titanium production": "Производство титана",
 
     "Cloud Seeding": "Засев облаков",
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Необходимо 3 тайла океана. Снизьте свой доход на 1 и производство тепла любого игрока на 1. Повысьте своё производство растений на 2.",
@@ -23,11 +22,6 @@
     "Martian Rails": "Марсианский монорельс",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 M€ за каждый город на поверхности Марса.",
 
-    "2 Oceans": "2 Океана",
-    "3 Oceans": "3 Океана",
-    "4 Oceans": "4 Океана",
-    "5 Oceans": "5 Океанов",
-    "6 Oceans": "6 Океанов",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Необходимо 4 тайла океана. Постройте этот особый тайл города. Снизьте своё производство энергии на 2 и повысьте свой доход на 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "Дополнительно принесёт 1 ПО за каждый тайл океана, соседний с этим городом.",
 
@@ -197,7 +191,6 @@
     "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": "Температура должна быть -4 градуса или выше. Получите 1 растение, повысьте своё производство растений на 3.",
 
     "Great Escarpment Consortium": "Консорциум Большого Уступа",
-    "Steel production": "Произв-во стали",
     "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": "Необходимо производство стали 1 или выше. Снизьте у любого игрока производство стали на 1 и повысьте своё производство стали на 1.",
 
     "Mineral Deposit": "Залежи ископаемых",
@@ -381,7 +374,6 @@
     "Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.": "Температура должна быть +4 градуса или выше. Повысьте свой доход на 2 и своё производство растений на 2. Получите 2 растения.",
 
     "Dust Seals": "Пылезащита",
-    "max 3 Oceans": "max 3 океана",
     "Requires 3 or less ocean tiles.": "Необходимо 3 или меньше тайлов океана.",
 
     "Urbanized Area": "Городской массив",
@@ -664,9 +656,6 @@
     "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Повысьте свой доход на 1 за каждые ваши 2 символа строительства, включая этот.",
 
     "AI Central": "Центр ИИ",
-    "2 Science": "2 Науки",
-    "3 Science": "3 Науки",
-    "5 Science": "5 Науки",
     "Action: Draw 2 cards.": "Действие: Доберите 2 карты",
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
     "Jovian": "Юпитер",
@@ -678,7 +667,6 @@
     "Select space for ocean tile": "Выберите место для размещения океана",
     "Select space adjacent to a city tile": "Выберите место, примыкающее к тайлу города",
 
-    "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}",
 
     "Floating Refinery": "Облачная переработка",
     "Action: Add 1 floater here, or remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "Действие: Добавьте 1 аэростат на эту карту или удалите 2 аэростата с любой карты, чтобы получить 1 титан и 2 М€.",

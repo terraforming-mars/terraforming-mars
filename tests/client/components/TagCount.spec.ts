@@ -3,6 +3,7 @@ import {mount} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import TagCount from '@/client/components/TagCount.vue';
+import {Tag} from '@/common/cards/Tag';
 
 describe('TagCount', () => {
   it('renders with no count', () => {
@@ -10,7 +11,7 @@ describe('TagCount', () => {
       ...globalConfig,
       props: {
         count: 0,
-        tag: 'building',
+        tag: Tag.BUILDING,
         size: 'normal',
       },
     });
@@ -22,7 +23,7 @@ describe('TagCount', () => {
       ...globalConfig,
       props: {
         count: 2,
-        tag: 'building',
+        tag: Tag.BUILDING,
         size: 'normal',
       },
     });

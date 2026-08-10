@@ -87,6 +87,7 @@
     "lint:css:fix": "stylelint --fix \"src/styles/**/*.less\" \"src/client/**/*.vue\"",
     "lint:fix": "eslint --fix src tests",
     "make:cards": "npx tsx src/server/tools/export_card_rendering.ts",
+    "make:card-db": "npx tsx src/server/tools/export_card_database.ts",
     "make:css": "lessc src/styles/common.less build/styles.css && node src/server/tools/gzip.js",
     "watch:less": "npx tsx scripts/watchcss.ts src/styles",
     "watch:cards": "npx tsx scripts/watchcards.ts src/server/cards",

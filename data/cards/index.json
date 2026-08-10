@@ -1,0 +1,3275 @@
+[
+  {
+    "id": "adaptation_technology",
+    "name": "Adaptation Technology",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 1
+  },
+  {
+    "id": "adapted_lichen",
+    "name": "Adapted Lichen",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "advanced_ecosystems",
+    "name": "Advanced Ecosystems",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "microbe",
+      "animal"
+    ],
+    "bespoke": false,
+    "cost": 11,
+    "vp": 3
+  },
+  {
+    "id": "aerobraked_ammonia_asteroid",
+    "name": "Aerobraked Ammonia Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 26
+  },
+  {
+    "id": "algae",
+    "name": "Algae",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "ants",
+    "name": "Ants",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 9
+  },
+  {
+    "id": "aquifer_pumping",
+    "name": "Aquifer Pumping",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 18
+  },
+  {
+    "id": "archaebacteria",
+    "name": "ArchaeBacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "arctic_algae",
+    "name": "Arctic Algae",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "cost": 12
+  },
+  {
+    "id": "artificial_lake",
+    "name": "Artificial Lake",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 15,
+    "vp": 1
+  },
+  {
+    "id": "artificial_photosynthesis",
+    "name": "Artificial Photosynthesis",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "asteroid",
+    "name": "Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 14
+  },
+  {
+    "id": "asteroid_mining",
+    "name": "Asteroid Mining",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 30,
+    "vp": 2
+  },
+  {
+    "id": "beam_from_a_thorium_asteroid",
+    "name": "Beam From A Thorium Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space",
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 32,
+    "vp": 1
+  },
+  {
+    "id": "beginner_corporation",
+    "name": "Beginner Corporation",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": false
+  },
+  {
+    "id": "big_asteroid",
+    "name": "Big Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 27
+  },
+  {
+    "id": "biomass_combustors",
+    "name": "Biomass Combustors",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 4,
+    "vp": -1
+  },
+  {
+    "id": "birds",
+    "name": "Birds",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "black_polar_dust",
+    "name": "Black Polar Dust",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 15
+  },
+  {
+    "id": "breathing_filters",
+    "name": "Breathing Filters",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 11,
+    "vp": 2
+  },
+  {
+    "id": "bushes",
+    "name": "Bushes",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "capital",
+    "name": "Capital",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 26
+  },
+  {
+    "id": "carbonate_processing",
+    "name": "Carbonate Processing",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "cloud_seeding",
+    "name": "Cloud Seeding",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "colonizer_training_camp",
+    "name": "Colonizer Training Camp",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 8,
+    "vp": 2
+  },
+  {
+    "id": "comet",
+    "name": "Comet",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 21
+  },
+  {
+    "id": "convoy_from_europa",
+    "name": "Convoy From Europa",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 15
+  },
+  {
+    "id": "credicor",
+    "name": "CrediCor",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": true
+  },
+  {
+    "id": "cupola_city",
+    "name": "Cupola City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 16
+  },
+  {
+    "id": "decomposers",
+    "name": "Decomposers",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 5
+  },
+  {
+    "id": "deep_well_heating",
+    "name": "Deep Well Heating",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "deimos_down",
+    "name": "Deimos Down",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 31
+  },
+  {
+    "id": "designed_microorganisms",
+    "name": "Designed Microorganisms",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 16
+  },
+  {
+    "id": "domed_crater",
+    "name": "Domed Crater",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 24,
+    "vp": 1
+  },
+  {
+    "id": "dust_seals",
+    "name": "Dust Seals",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 2,
+    "vp": 1
+  },
+  {
+    "id": "ecoline",
+    "name": "Ecoline",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false
+  },
+  {
+    "id": "ecological_zone",
+    "name": "Ecological Zone",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal",
+      "plant"
+    ],
+    "bespoke": true,
+    "cost": 12
+  },
+  {
+    "id": "energy_saving",
+    "name": "Energy Saving",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 15
+  },
+  {
+    "id": "eos_chasma_national_park",
+    "name": "Eos Chasma National Park",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 16,
+    "vp": 1
+  },
+  {
+    "id": "equatorial_magnetizer",
+    "name": "Equatorial Magnetizer",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "extreme_cold_fungus",
+    "name": "Extreme-Cold Fungus",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 13
+  },
+  {
+    "id": "farming",
+    "name": "Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 16,
+    "vp": 2
+  },
+  {
+    "id": "fish",
+    "name": "Fish",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "flooding",
+    "name": "Flooding",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 7,
+    "vp": -1
+  },
+  {
+    "id": "food_factory",
+    "name": "Food Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 1
+  },
+  {
+    "id": "fueled_generators",
+    "name": "Fueled Generators",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 1
+  },
+  {
+    "id": "fusion_power",
+    "name": "Fusion Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 14
+  },
+  {
+    "id": "ganymede_colony",
+    "name": "Ganymede Colony",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space",
+      "city"
+    ],
+    "bespoke": false,
+    "cost": 20
+  },
+  {
+    "id": "geothermal_power",
+    "name": "Geothermal Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "ghg_factories",
+    "name": "GHG Factories",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "ghg_producing_bacteria",
+    "name": "GHG Producing Bacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "giant_ice_asteroid",
+    "name": "Giant Ice Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 36
+  },
+  {
+    "id": "giant_space_mirror",
+    "name": "Giant Space Mirror",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 17
+  },
+  {
+    "id": "grass",
+    "name": "Grass",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "great_dam",
+    "name": "Great Dam",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 1
+  },
+  {
+    "id": "greenhouses",
+    "name": "Greenhouses",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "heat_trappers",
+    "name": "Heat Trappers",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6,
+    "vp": -1
+  },
+  {
+    "id": "heather",
+    "name": "Heather",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "helion",
+    "name": "Helion",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "herbivores",
+    "name": "Herbivores",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": true,
+    "cost": 12
+  },
+  {
+    "id": "ice_asteroid",
+    "name": "Ice Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 23
+  },
+  {
+    "id": "ice_cap_melting",
+    "name": "Ice Cap Melting",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 5
+  },
+  {
+    "id": "immigrant_city",
+    "name": "Immigrant City",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 13
+  },
+  {
+    "id": "immigration_shuttles",
+    "name": "Immigration Shuttles",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 31
+  },
+  {
+    "id": "import_of_advanced_ghg",
+    "name": "Import of Advanced GHG",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "imported_ghg",
+    "name": "Imported GHG",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 7
+  },
+  {
+    "id": "imported_hydrogen",
+    "name": "Imported Hydrogen",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": true,
+    "cost": 16
+  },
+  {
+    "id": "imported_nitrogen",
+    "name": "Imported Nitrogen",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 23
+  },
+  {
+    "id": "industrial_microbes",
+    "name": "Industrial Microbes",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "insects",
+    "name": "Insects",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "insulation",
+    "name": "Insulation",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "cost": 2
+  },
+  {
+    "id": "interplanetary_cinematics",
+    "name": "Interplanetary Cinematics",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "inventrix",
+    "name": "Inventrix",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false
+  },
+  {
+    "id": "ironworks",
+    "name": "Ironworks",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "kelp_farming",
+    "name": "Kelp Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 17,
+    "vp": 1
+  },
+  {
+    "id": "lake_marineris",
+    "name": "Lake Marineris",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 18,
+    "vp": 2
+  },
+  {
+    "id": "large_convoy",
+    "name": "Large Convoy",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": true,
+    "cost": 36,
+    "vp": 2
+  },
+  {
+    "id": "lava_flows",
+    "name": "Lava Flows",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 18
+  },
+  {
+    "id": "lichen",
+    "name": "Lichen",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 7
+  },
+  {
+    "id": "livestock",
+    "name": "Livestock",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "local_heat_trapping",
+    "name": "Local Heat Trapping",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 1
+  },
+  {
+    "id": "lunar_beam",
+    "name": "Lunar Beam",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth",
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "magnetic_field_dome",
+    "name": "Magnetic Field Dome",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 5
+  },
+  {
+    "id": "magnetic_field_generators",
+    "name": "Magnetic Field Generators",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 20
+  },
+  {
+    "id": "mangrove",
+    "name": "Mangrove",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 1
+  },
+  {
+    "id": "martian_rails",
+    "name": "Martian Rails",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "methane_from_titan",
+    "name": "Methane From Titan",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 28,
+    "vp": 2
+  },
+  {
+    "id": "micro_mills",
+    "name": "Micro-Mills",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 3
+  },
+  {
+    "id": "mining_expedition",
+    "name": "Mining Expedition",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "mining_guild",
+    "name": "Mining Guild",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building",
+      "building"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "mining_rights",
+    "name": "Mining Rights",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 9
+  },
+  {
+    "id": "mohole_area",
+    "name": "Mohole Area",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 20
+  },
+  {
+    "id": "moss",
+    "name": "Moss",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "cost": 4
+  },
+  {
+    "id": "natural_preserve",
+    "name": "Natural Preserve",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 9,
+    "vp": 1
+  },
+  {
+    "id": "nitrite_reducing_bacteria",
+    "name": "Nitrite Reducing Bacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "nitrogen_rich_asteroid",
+    "name": "Nitrogen-Rich Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true,
+    "cost": 31
+  },
+  {
+    "id": "nitrophilic_moss",
+    "name": "Nitrophilic Moss",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "cost": 8
+  },
+  {
+    "id": "noctis_city",
+    "name": "Noctis City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 18
+  },
+  {
+    "id": "noctis_farming",
+    "name": "Noctis Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 10,
+    "vp": 1
+  },
+  {
+    "id": "nuclear_power",
+    "name": "Nuclear Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "nuclear_zone",
+    "name": "Nuclear Zone",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 10,
+    "vp": -2
+  },
+  {
+    "id": "open_city",
+    "name": "Open City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 23,
+    "vp": 1
+  },
+  {
+    "id": "optimal_aerobraking",
+    "name": "Optimal Aerobraking",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true,
+    "cost": 7
+  },
+  {
+    "id": "ore_processor",
+    "name": "Ore Processor",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "permafrost_extraction",
+    "name": "Permafrost Extraction",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "peroxide_power",
+    "name": "Peroxide Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 7
+  },
+  {
+    "id": "pets",
+    "name": "Pets",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth",
+      "animal"
+    ],
+    "bespoke": true,
+    "cost": 10
+  },
+  {
+    "id": "phobolog",
+    "name": "PhoboLog",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false
+  },
+  {
+    "id": "phobos_space_haven",
+    "name": "Phobos Space Haven",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space",
+      "city"
+    ],
+    "bespoke": false,
+    "cost": 25,
+    "vp": 3
+  },
+  {
+    "id": "plantation",
+    "name": "Plantation",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 15
+  },
+  {
+    "id": "power_grid",
+    "name": "Power Grid",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 18
+  },
+  {
+    "id": "power_plant",
+    "name": "Power Plant",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "predators",
+    "name": "Predators",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": true,
+    "cost": 14
+  },
+  {
+    "id": "protected_valley",
+    "name": "Protected Valley",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 23
+  },
+  {
+    "id": "rad_chem_factory",
+    "name": "Rad-Chem Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "regolith_eaters",
+    "name": "Regolith Eaters",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "release_of_inert_gases",
+    "name": "Release of Inert Gases",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 14
+  },
+  {
+    "id": "research_outpost",
+    "name": "Research Outpost",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 18
+  },
+  {
+    "id": "rover_construction",
+    "name": "Rover Construction",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 8,
+    "vp": 1
+  },
+  {
+    "id": "search_for_life",
+    "name": "Search For Life",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "cost": 3
+  },
+  {
+    "id": "shuttles",
+    "name": "Shuttles",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 10,
+    "vp": 1
+  },
+  {
+    "id": "small_animals",
+    "name": "Small Animals",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "soil_factory",
+    "name": "Soil Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 9,
+    "vp": 1
+  },
+  {
+    "id": "solar_power",
+    "name": "Solar Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11,
+    "vp": 1
+  },
+  {
+    "id": "solar_wind_power",
+    "name": "Solar Wind Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space",
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "soletta",
+    "name": "Soletta",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 35
+  },
+  {
+    "id": "space_mirrors",
+    "name": "Space Mirrors",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "power",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 3
+  },
+  {
+    "id": "special_design",
+    "name": "Special Design",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "steelworks",
+    "name": "Steelworks",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 15
+  },
+  {
+    "id": "strip_mine",
+    "name": "Strip Mine",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 25
+  },
+  {
+    "id": "subterranean_reservoir",
+    "name": "Subterranean Reservoir",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "symbiotic_fungus",
+    "name": "Symbiotic Fungus",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "tectonic_stress_power",
+    "name": "Tectonic Stress Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 18,
+    "vp": 1
+  },
+  {
+    "id": "tharsis_republic",
+    "name": "Tharsis Republic",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "thorgate",
+    "name": "ThorGate",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "towing_a_comet",
+    "name": "Towing A Comet",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 23
+  },
+  {
+    "id": "trees",
+    "name": "Trees",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 13,
+    "vp": 1
+  },
+  {
+    "id": "tundra_farming",
+    "name": "Tundra Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 16,
+    "vp": 2
+  },
+  {
+    "id": "underground_city",
+    "name": "Underground City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 18
+  },
+  {
+    "id": "underground_detonations",
+    "name": "Underground Detonations",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "united_nations_mars_initiative",
+    "name": "United Nations Mars Initiative",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "urbanized_area",
+    "name": "Urbanized Area",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 10
+  },
+  {
+    "id": "water_import_from_europa",
+    "name": "Water Import From Europa",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 25
+  },
+  {
+    "id": "water_splitting_plant",
+    "name": "Water Splitting Plant",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "wave_power",
+    "name": "Wave Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 8,
+    "vp": 1
+  },
+  {
+    "id": "windmills",
+    "name": "Windmills",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6,
+    "vp": 1
+  },
+  {
+    "id": "worms",
+    "name": "Worms",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "zeppelins",
+    "name": "Zeppelins",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 13,
+    "vp": 1
+  },
+  {
+    "id": "acquired_company",
+    "name": "Acquired Company",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "advanced_alloys",
+    "name": "Advanced Alloys",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "ai_central",
+    "name": "AI Central",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 21,
+    "vp": 1
+  },
+  {
+    "id": "anti_gravity_technology",
+    "name": "Anti-Gravity Technology",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 14,
+    "vp": 3
+  },
+  {
+    "id": "asteroid_mining_consortium",
+    "name": "Asteroid Mining Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true,
+    "cost": 13,
+    "vp": 1
+  },
+  {
+    "id": "bribed_committee",
+    "name": "Bribed Committee",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 7,
+    "vp": -2
+  },
+  {
+    "id": "building_industries",
+    "name": "Building Industries",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "business_contacts",
+    "name": "Business Contacts",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 7
+  },
+  {
+    "id": "business_network",
+    "name": "Business Network",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "callisto_penal_mines",
+    "name": "Callisto Penal Mines",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 24,
+    "vp": 2
+  },
+  {
+    "id": "caretaker_contract",
+    "name": "Caretaker Contract",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [],
+    "bespoke": false,
+    "cost": 3
+  },
+  {
+    "id": "cartel",
+    "name": "Cartel",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "ceo_s_favorite_project",
+    "name": "CEO's Favorite Project",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 1
+  },
+  {
+    "id": "commercial_district",
+    "name": "Commercial District",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 16
+  },
+  {
+    "id": "corporate_stronghold",
+    "name": "Corporate Stronghold",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11,
+    "vp": -2
+  },
+  {
+    "id": "development_center",
+    "name": "Development Center",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "earth_catapult",
+    "name": "Earth Catapult",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 23,
+    "vp": 2
+  },
+  {
+    "id": "earth_office",
+    "name": "Earth Office",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 1
+  },
+  {
+    "id": "electro_catapult",
+    "name": "Electro Catapult",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 17,
+    "vp": 1
+  },
+  {
+    "id": "energy_tapping",
+    "name": "Energy Tapping",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "cost": 3,
+    "vp": -1
+  },
+  {
+    "id": "fuel_factory",
+    "name": "Fuel Factory",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "gene_repair",
+    "name": "Gene Repair",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 2
+  },
+  {
+    "id": "great_escarpment_consortium",
+    "name": "Great Escarpment Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "cost": 6
+  },
+  {
+    "id": "hackers",
+    "name": "Hackers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "cost": 3,
+    "vp": -1
+  },
+  {
+    "id": "hired_raiders",
+    "name": "Hired Raiders",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 1
+  },
+  {
+    "id": "indentured_workers",
+    "name": "Indentured Workers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 0,
+    "vp": -1
+  },
+  {
+    "id": "industrial_center",
+    "name": "Industrial Center",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 4
+  },
+  {
+    "id": "interstellar_colony_ship",
+    "name": "Interstellar Colony Ship",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 24,
+    "vp": 4
+  },
+  {
+    "id": "invention_contest",
+    "name": "Invention Contest",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 2
+  },
+  {
+    "id": "inventors_guild",
+    "name": "Inventors' Guild",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 9
+  },
+  {
+    "id": "investment_loan",
+    "name": "Investment Loan",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 3
+  },
+  {
+    "id": "io_mining_industries",
+    "name": "Io Mining Industries",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 41
+  },
+  {
+    "id": "lagrange_observatory",
+    "name": "Lagrange Observatory",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 9,
+    "vp": 1
+  },
+  {
+    "id": "land_claim",
+    "name": "Land Claim",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 1
+  },
+  {
+    "id": "lightning_harvest",
+    "name": "Lightning Harvest",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 8,
+    "vp": 1
+  },
+  {
+    "id": "mars_university",
+    "name": "Mars University",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 8,
+    "vp": 1
+  },
+  {
+    "id": "mass_converter",
+    "name": "Mass Converter",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "media_archives",
+    "name": "Media Archives",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 8
+  },
+  {
+    "id": "media_group",
+    "name": "Media Group",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "cost": 6
+  },
+  {
+    "id": "medical_lab",
+    "name": "Medical Lab",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 13,
+    "vp": 1
+  },
+  {
+    "id": "mine",
+    "name": "Mine",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "mineral_deposit",
+    "name": "Mineral Deposit",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "cost": 5
+  },
+  {
+    "id": "mining_area",
+    "name": "Mining Area",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 4
+  },
+  {
+    "id": "miranda_resort",
+    "name": "Miranda Resort",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 12,
+    "vp": 1
+  },
+  {
+    "id": "olympus_conference",
+    "name": "Olympus Conference",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "earth",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 10,
+    "vp": 1
+  },
+  {
+    "id": "physics_complex",
+    "name": "Physics Complex",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "power_infrastructure",
+    "name": "Power Infrastructure",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": true,
+    "cost": 4
+  },
+  {
+    "id": "power_supply_consortium",
+    "name": "Power Supply Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "cost": 5
+  },
+  {
+    "id": "protected_habitats",
+    "name": "Protected Habitats",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [],
+    "bespoke": false,
+    "cost": 5
+  },
+  {
+    "id": "quantum_extractor",
+    "name": "Quantum Extractor",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 13
+  },
+  {
+    "id": "rad_suits",
+    "name": "Rad-Suits",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "cost": 6,
+    "vp": 1
+  },
+  {
+    "id": "research",
+    "name": "Research",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 11,
+    "vp": 1
+  },
+  {
+    "id": "restricted_area",
+    "name": "Restricted Area",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 11
+  },
+  {
+    "id": "robotic_workforce",
+    "name": "Robotic Workforce",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "cost": 9
+  },
+  {
+    "id": "sabotage",
+    "name": "Sabotage",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "cost": 1
+  },
+  {
+    "id": "satellites",
+    "name": "Satellites",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 10
+  },
+  {
+    "id": "saturn_systems",
+    "name": "Saturn Systems",
+    "set": "corpera",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "security_fleet",
+    "name": "Security Fleet",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "space_elevator",
+    "name": "Space Elevator",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 27,
+    "vp": 2
+  },
+  {
+    "id": "space_station",
+    "name": "Space Station",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 10,
+    "vp": 1
+  },
+  {
+    "id": "sponsors",
+    "name": "Sponsors",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 6
+  },
+  {
+    "id": "standard_technology",
+    "name": "Standard Technology",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "cost": 6
+  },
+  {
+    "id": "tardigrades",
+    "name": "Tardigrades",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "technology_demonstration",
+    "name": "Technology Demonstration",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 5
+  },
+  {
+    "id": "teractor",
+    "name": "Teractor",
+    "set": "corpera",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false
+  },
+  {
+    "id": "terraforming_ganymede",
+    "name": "Terraforming Ganymede",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": true,
+    "cost": 33,
+    "vp": 2
+  },
+  {
+    "id": "titanium_mine",
+    "name": "Titanium Mine",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 7
+  },
+  {
+    "id": "toll_station",
+    "name": "Toll Station",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "trans_neptune_probe",
+    "name": "Trans-Neptune Probe",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 6,
+    "vp": 1
+  },
+  {
+    "id": "tropical_resort",
+    "name": "Tropical Resort",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 13,
+    "vp": 2
+  },
+  {
+    "id": "vesta_shipyard",
+    "name": "Vesta Shipyard",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 15,
+    "vp": 1
+  },
+  {
+    "id": "viral_enhancers",
+    "name": "Viral Enhancers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 9
+  },
+  {
+    "id": "virus",
+    "name": "Virus",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 1
+  },
+  {
+    "id": "acquired_space_agency",
+    "name": "Acquired Space Agency",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "allied_bank",
+    "name": "Allied Bank",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "aquifer_turbines",
+    "name": "Aquifer Turbines",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "biofuels",
+    "name": "Biofuels",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "biolab",
+    "name": "Biolab",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "biosphere_support",
+    "name": "Biosphere Support",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "business_empire",
+    "name": "Business Empire",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "cheung_shing_mars",
+    "name": "Cheung Shing MARS",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false
+  },
+  {
+    "id": "dome_farming",
+    "name": "Dome Farming",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "donation",
+    "name": "Donation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "early_settlement",
+    "name": "Early Settlement",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "eccentric_sponsor",
+    "name": "Eccentric Sponsor",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "ecology_experts",
+    "name": "Ecology Experts",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant",
+      "microbe"
+    ],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "experimental_forest",
+    "name": "Experimental Forest",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "galilean_mining",
+    "name": "Galilean Mining",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "great_aquifer",
+    "name": "Great Aquifer",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "house_printing",
+    "name": "House Printing",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 10,
+    "vp": 1
+  },
+  {
+    "id": "huge_asteroid",
+    "name": "Huge Asteroid",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": true,
+    "cost": 0
+  },
+  {
+    "id": "io_research_outpost",
+    "name": "Io Research Outpost",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "jovian",
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "lava_tube_settlement",
+    "name": "Lava Tube Settlement",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": true,
+    "cost": 15
+  },
+  {
+    "id": "loan",
+    "name": "Loan",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "martian_industries",
+    "name": "Martian Industries",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "martian_survey",
+    "name": "Martian Survey",
+    "set": "prelude",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "cost": 9,
+    "vp": 1
+  },
+  {
+    "id": "metal_rich_asteroid",
+    "name": "Metal-Rich Asteroid",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "metals_company",
+    "name": "Metals Company",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "mining_operations",
+    "name": "Mining Operations",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "mohole",
+    "name": "Mohole",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "mohole_excavation",
+    "name": "Mohole Excavation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "nitrogen_shipment",
+    "name": "Nitrogen Shipment",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "orbital_construction_yard",
+    "name": "Orbital Construction Yard",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "point_luna",
+    "name": "Point Luna",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space",
+      "earth"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "polar_industries",
+    "name": "Polar Industries",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "power_generation",
+    "name": "Power Generation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "psychrophiles",
+    "name": "Psychrophiles",
+    "set": "prelude",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "cost": 2
+  },
+  {
+    "id": "research_coordination",
+    "name": "Research Coordination",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "wild"
+    ],
+    "bespoke": false,
+    "cost": 4
+  },
+  {
+    "id": "research_network",
+    "name": "Research Network",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "wild"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "robinson_industries",
+    "name": "Robinson Industries",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": true
+  },
+  {
+    "id": "self_sufficient_settlement",
+    "name": "Self-Sufficient Settlement",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "sf_memorial",
+    "name": "SF Memorial",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 7,
+    "vp": 1
+  },
+  {
+    "id": "smelting_plant",
+    "name": "Smelting Plant",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "society_support",
+    "name": "Society Support",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "space_hotels",
+    "name": "Space Hotels",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space",
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 12
+  },
+  {
+    "id": "supplier",
+    "name": "Supplier",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "supply_drop",
+    "name": "Supply Drop",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "unmi_contractor",
+    "name": "UNMI Contractor",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "cost": 0
+  },
+  {
+    "id": "valley_trust",
+    "name": "Valley Trust",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true
+  },
+  {
+    "id": "vitor",
+    "name": "Vitor",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true
+  }
+]

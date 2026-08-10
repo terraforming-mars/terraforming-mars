@@ -1,0 +1,6450 @@
+[
+  {
+    "id": "adaptation_technology",
+    "name": "Adaptation Technology",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "153",
+    "cost": 12,
+    "vp": 1,
+    "global_parameter_requirement_bonus": {
+      "steps": 2
+    }
+  },
+  {
+    "id": "adapted_lichen",
+    "name": "Adapted Lichen",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "048",
+    "description": "Increase your plant production 1 step.",
+    "cost": 9,
+    "immediate": {
+      "production": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "advanced_ecosystems",
+    "name": "Advanced Ecosystems",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "microbe",
+      "animal"
+    ],
+    "bespoke": false,
+    "card_number": "135",
+    "description": "Requires a plant tag, a microbe tag, and an animal tag.",
+    "cost": 11,
+    "vp": 3,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "plant",
+        "min": 1
+      },
+      {
+        "type": "tag",
+        "tag": "animal",
+        "min": 1
+      },
+      {
+        "type": "tag",
+        "tag": "microbe",
+        "min": 1
+      }
+    ]
+  },
+  {
+    "id": "aerobraked_ammonia_asteroid",
+    "name": "Aerobraked Ammonia Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "170",
+    "description": "Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.",
+    "cost": 26,
+    "immediate": {
+      "production": {
+        "plants": 1,
+        "heat": 3
+      },
+      "add_resources_to_any_card": [
+        {
+          "count": 2,
+          "resource": "Microbe"
+        }
+      ]
+    }
+  },
+  {
+    "id": "algae",
+    "name": "Algae",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "047",
+    "description": "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.",
+    "cost": 10,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 5
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 2
+      },
+      "gain": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "ants",
+    "name": "Ants",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "035",
+    "description": "Requires 4% oxygen.",
+    "cost": 9,
+    "resource_type": "Microbe",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 2
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 4
+      }
+    ],
+    "semantics": "The action removes 1 microbe from any other player's card and adds 1 microbe to this card. In a solo game the action is always available."
+  },
+  {
+    "id": "aquifer_pumping",
+    "name": "Aquifer Pumping",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "187",
+    "cost": 18,
+    "action": {
+      "spend": {
+        "megacredits": 8,
+        "can_pay_with": [
+          "steel"
+        ]
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "archaebacteria",
+    "name": "ArchaeBacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "042",
+    "description": "It must be -18 C or colder. Increase your plant production 1 step.",
+    "cost": 6,
+    "requirements": [
+      {
+        "type": "temperature",
+        "max": -18
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "arctic_algae",
+    "name": "Arctic Algae",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "card_number": "023",
+    "description": "It must be -12 C or colder to play. Gain 1 plant.",
+    "cost": 12,
+    "requirements": [
+      {
+        "type": "temperature",
+        "max": -12
+      }
+    ],
+    "immediate": {
+      "gain": {
+        "plants": 1
+      }
+    },
+    "semantics": "The trigger fires for every player's ocean placements, not only your own.",
+    "passive": [
+      {
+        "trigger": "any player places an ocean tile",
+        "effect": "gain 2 plants"
+      }
+    ]
+  },
+  {
+    "id": "artificial_lake",
+    "name": "Artificial Lake",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "116",
+    "description": "Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.",
+    "cost": 15,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -6
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean",
+          "on": "land"
+        }
+      ]
+    }
+  },
+  {
+    "id": "artificial_photosynthesis",
+    "name": "Artificial Photosynthesis",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "115",
+    "description": "Increase your plant production 1 step or your energy production 2 steps.",
+    "cost": 12,
+    "immediate": {
+      "or": [
+        {
+          "title": "Increase your energy production 2 steps",
+          "production": {
+            "energy": 2
+          }
+        },
+        {
+          "title": "Increase your plant production 1 step",
+          "production": {
+            "plants": 1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "asteroid",
+    "name": "Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "009",
+    "description": "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.",
+    "cost": 14,
+    "immediate": {
+      "gain": {
+        "titanium": 2
+      },
+      "global": {
+        "temperature": 1
+      },
+      "remove_any_plants": 3
+    }
+  },
+  {
+    "id": "asteroid_mining",
+    "name": "Asteroid Mining",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "040",
+    "description": "Increase your titanium production 2 steps.",
+    "cost": 30,
+    "vp": 2,
+    "immediate": {
+      "production": {
+        "titanium": 2
+      }
+    }
+  },
+  {
+    "id": "beam_from_a_thorium_asteroid",
+    "name": "Beam From A Thorium Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space",
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "058",
+    "description": "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.",
+    "cost": 32,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "jovian",
+        "min": 1
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 3,
+        "heat": 3
+      }
+    }
+  },
+  {
+    "id": "beginner_corporation",
+    "name": "Beginner Corporation",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "R00",
+    "description": "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.",
+    "starting_megacredits": 42,
+    "immediate": {
+      "draw": {
+        "count": 10
+      }
+    }
+  },
+  {
+    "id": "big_asteroid",
+    "name": "Big Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "011",
+    "description": "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.",
+    "cost": 27,
+    "immediate": {
+      "gain": {
+        "titanium": 4
+      },
+      "global": {
+        "temperature": 2
+      },
+      "remove_any_plants": 4
+    }
+  },
+  {
+    "id": "biomass_combustors",
+    "name": "Biomass Combustors",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "183",
+    "description": "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.",
+    "cost": 4,
+    "vp": -1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 6
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 2
+      },
+      "decrease_any_production": {
+        "resource": "plants",
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "birds",
+    "name": "Birds",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "card_number": "072",
+    "cost": 10,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here"
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 13
+      }
+    ],
+    "immediate": {
+      "decrease_any_production": {
+        "resource": "plants",
+        "count": 2
+      }
+    },
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "black_polar_dust",
+    "name": "Black Polar Dust",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "022",
+    "description": "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.",
+    "cost": 15,
+    "immediate": {
+      "production": {
+        "megacredits": -2,
+        "heat": 3
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "breathing_filters",
+    "name": "Breathing Filters",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "114",
+    "description": "Requires 7% oxygen.",
+    "cost": 11,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 7
+      }
+    ]
+  },
+  {
+    "id": "bushes",
+    "name": "Bushes",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "093",
+    "description": "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.",
+    "cost": 10,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -10
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 2
+      },
+      "gain": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "capital",
+    "name": "Capital",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "008",
+    "description": "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.",
+    "cost": 26,
+    "vp_dynamic": {
+      "counts": "oceans",
+      "next_to_this": true
+    },
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 5,
+        "energy": -2
+      },
+      "place": [
+        {
+          "tile": 3,
+          "on": "city",
+          "title": "Select space for special city tile"
+        }
+      ]
+    }
+  },
+  {
+    "id": "carbonate_processing",
+    "name": "Carbonate Processing",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "043",
+    "description": "Decrease your energy production 1 step and increase your heat production 3 steps.",
+    "cost": 6,
+    "immediate": {
+      "production": {
+        "energy": -1,
+        "heat": 3
+      }
+    }
+  },
+  {
+    "id": "cloud_seeding",
+    "name": "Cloud Seeding",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "004",
+    "description": "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.",
+    "cost": 11,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": -1,
+        "plants": 2
+      },
+      "decrease_any_production": {
+        "resource": "heat",
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "colonizer_training_camp",
+    "name": "Colonizer Training Camp",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "001",
+    "description": "Oxygen must be 5% or less.",
+    "cost": 8,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 5
+      }
+    ]
+  },
+  {
+    "id": "comet",
+    "name": "Comet",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "010",
+    "description": "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.",
+    "cost": 21,
+    "immediate": {
+      "global": {
+        "temperature": 1
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ],
+      "remove_any_plants": 3
+    }
+  },
+  {
+    "id": "convoy_from_europa",
+    "name": "Convoy From Europa",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "161",
+    "description": "Place 1 ocean tile and draw 1 card.",
+    "cost": 15,
+    "immediate": {
+      "draw": {
+        "count": 1
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "credicor",
+    "name": "CrediCor",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "R08",
+    "description": "You start with 57 M€.",
+    "starting_megacredits": 57,
+    "semantics": "A continuous effect that pays out on expensive purchases. The 20 M€ threshold is the printed basic cost, before any discounts.",
+    "passive": [
+      {
+        "trigger": "you pay for a project card or a standard project whose basic cost is 20 M€ or more",
+        "effect": "gain 4 M€"
+      }
+    ]
+  },
+  {
+    "id": "cupola_city",
+    "name": "Cupola City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "029",
+    "description": "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
+    "cost": 16,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 9
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 3,
+        "energy": -1
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "decomposers",
+    "name": "Decomposers",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "131",
+    "description": "Requires 3% oxygen.",
+    "cost": 5,
+    "resource_type": "Microbe",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 3
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 3
+      }
+    ],
+    "semantics": "Worth 1 victory point for every 3 microbes on this card. If this card is played in the prelude phase immediately after Ecology Experts, it starts with 2 extra microbes.",
+    "passive": [
+      {
+        "trigger": "you play a card with an animal, plant, or microbe tag",
+        "effect": "add 1 microbe to this card for each matching tag"
+      }
+    ]
+  },
+  {
+    "id": "deep_well_heating",
+    "name": "Deep Well Heating",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "003",
+    "description": "Increase your energy production 1 step. Increase temperature 1 step.",
+    "cost": 13,
+    "immediate": {
+      "production": {
+        "energy": 1
+      },
+      "global": {
+        "temperature": 1
+      }
+    }
+  },
+  {
+    "id": "deimos_down",
+    "name": "Deimos Down",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "039",
+    "description": "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.",
+    "cost": 31,
+    "immediate": {
+      "gain": {
+        "steel": 4
+      },
+      "global": {
+        "temperature": 3
+      },
+      "remove_any_plants": 8
+    }
+  },
+  {
+    "id": "designed_microorganisms",
+    "name": "Designed Microorganisms",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "155",
+    "description": "It must be -14 C or colder. Increase your plant production 2 steps.",
+    "cost": 16,
+    "requirements": [
+      {
+        "type": "temperature",
+        "max": -14
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "domed_crater",
+    "name": "Domed Crater",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "016",
+    "description": "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
+    "cost": 24,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 7
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 3,
+        "energy": -1
+      },
+      "gain": {
+        "plants": 3
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "dust_seals",
+    "name": "Dust Seals",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "119",
+    "description": "Requires 3 or less ocean tiles.",
+    "cost": 2,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oceans",
+        "max": 3
+      }
+    ]
+  },
+  {
+    "id": "ecoline",
+    "name": "Ecoline",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "R17",
+    "description": "You start with 2 plant production, 3 plants, and 36 M€.",
+    "starting_megacredits": 36,
+    "immediate": {
+      "production": {
+        "plants": 2
+      },
+      "gain": {
+        "plants": 3
+      },
+      "greenery_discount": 1
+    }
+  },
+  {
+    "id": "ecological_zone",
+    "name": "Ecological Zone",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal",
+      "plant"
+    ],
+    "bespoke": true,
+    "card_number": "128",
+    "cost": 12,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 2
+    },
+    "requirements": [
+      {
+        "type": "greeneries",
+        "min": 1
+      }
+    ],
+    "semantics": "On play, place the Ecological Zone special tile. If this card is played in the prelude phase immediately after Ecology Experts, it starts with 1 extra animal.",
+    "passive": [
+      {
+        "trigger": "you play a card with an animal or plant tag",
+        "effect": "add 1 animal to this card for each matching tag"
+      }
+    ],
+    "play_restriction": "the Ecological Zone tile must go on a land space adjacent to a greenery tile"
+  },
+  {
+    "id": "energy_saving",
+    "name": "Energy Saving",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "189",
+    "description": "Increase your energy production 1 step for each city tile in play.",
+    "cost": 15,
+    "immediate": {
+      "production": {
+        "energy": {
+          "dynamic": {
+            "counts": "cities"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "eos_chasma_national_park",
+    "name": "Eos Chasma National Park",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "026",
+    "description": "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.",
+    "cost": 16,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -12
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      },
+      "gain": {
+        "plants": 3
+      },
+      "add_resources_to_any_card": [
+        {
+          "count": 1,
+          "resource": "Animal"
+        }
+      ]
+    }
+  },
+  {
+    "id": "equatorial_magnetizer",
+    "name": "Equatorial Magnetizer",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "015",
+    "cost": 11,
+    "action": {
+      "production": {
+        "energy": -1
+      },
+      "gain": {
+        "tr": 1
+      }
+    }
+  },
+  {
+    "id": "extreme_cold_fungus",
+    "name": "Extreme-Cold Fungus",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "134",
+    "description": "It must be -10 C or colder.",
+    "cost": 13,
+    "requirements": [
+      {
+        "type": "temperature",
+        "max": -10
+      }
+    ],
+    "semantics": "The action is a choice: add 2 microbes to another card, or gain 1 plant. With no other microbe card in play the plant is taken automatically."
+  },
+  {
+    "id": "farming",
+    "name": "Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "118",
+    "description": "Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.",
+    "cost": 16,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "plants": 2
+      },
+      "gain": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "fish",
+    "name": "Fish",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "card_number": "052",
+    "description": "Requires +2 C° or warmer. Decrease any plant production 1 step.",
+    "cost": 9,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here"
+    },
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "decrease_any_production": {
+        "resource": "plants",
+        "count": 1
+      }
+    },
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "flooding",
+    "name": "Flooding",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "188",
+    "description": "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.",
+    "cost": 7,
+    "vp": -1,
+    "semantics": "Place an ocean tile. If any tile owned by another player is adjacent to it, you may remove 4 M€ from one of those owners. Worth -1 victory point."
+  },
+  {
+    "id": "food_factory",
+    "name": "Food Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "041",
+    "description": "Decrease your plant production 1 step and increase your M€ production 4 steps.",
+    "cost": 12,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "megacredits": 4,
+        "plants": -1
+      }
+    }
+  },
+  {
+    "id": "fueled_generators",
+    "name": "Fueled Generators",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "100",
+    "description": "Decrease your M€ production 1 step and increase your energy production 1 steps.",
+    "cost": 1,
+    "immediate": {
+      "production": {
+        "megacredits": -1,
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "fusion_power",
+    "name": "Fusion Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "132",
+    "description": "Requires 2 power tags. Increase your energy production 3 steps.",
+    "cost": 14,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "power",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 3
+      }
+    }
+  },
+  {
+    "id": "ganymede_colony",
+    "name": "Ganymede Colony",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space",
+      "city"
+    ],
+    "bespoke": false,
+    "card_number": "081",
+    "description": "Place a city tile ON THE RESERVED AREA.",
+    "cost": 20,
+    "vp_dynamic": {
+      "counts": "tag",
+      "tag": "jovian"
+    },
+    "immediate": {
+      "place": [
+        {
+          "tile": "city",
+          "space": "01"
+        }
+      ]
+    }
+  },
+  {
+    "id": "geothermal_power",
+    "name": "Geothermal Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "117",
+    "description": "Increase your energy production 2 steps.",
+    "cost": 11,
+    "immediate": {
+      "production": {
+        "energy": 2
+      }
+    }
+  },
+  {
+    "id": "ghg_factories",
+    "name": "GHG Factories",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "126",
+    "description": "Decrease your energy production 1 step and increase your heat production 4 steps.",
+    "cost": 11,
+    "immediate": {
+      "production": {
+        "energy": -1,
+        "heat": 4
+      }
+    }
+  },
+  {
+    "id": "ghg_producing_bacteria",
+    "name": "GHG Producing Bacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "034",
+    "description": "Requires 4% oxygen.",
+    "cost": 8,
+    "resource_type": "Microbe",
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 4
+      }
+    ],
+    "action": {
+      "or": [
+        {
+          "title": "Remove 2 microbes to raise temperature 1 step",
+          "spend": {
+            "resources_here": 2
+          },
+          "global": {
+            "temperature": 1
+          }
+        },
+        {
+          "title": "Add 1 microbe to this card",
+          "gain": {
+            "resources_here": 1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "giant_ice_asteroid",
+    "name": "Giant Ice Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "080",
+    "description": "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.",
+    "cost": 36,
+    "immediate": {
+      "global": {
+        "temperature": 2
+      },
+      "place": [
+        {
+          "tile": "ocean",
+          "count": 2
+        }
+      ],
+      "remove_any_plants": 6
+    }
+  },
+  {
+    "id": "giant_space_mirror",
+    "name": "Giant Space Mirror",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "083",
+    "description": "Increase your energy production 3 steps.",
+    "cost": 17,
+    "immediate": {
+      "production": {
+        "energy": 3
+      }
+    }
+  },
+  {
+    "id": "grass",
+    "name": "Grass",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "087",
+    "description": "Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.",
+    "cost": 11,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -16
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 1
+      },
+      "gain": {
+        "plants": 3
+      }
+    }
+  },
+  {
+    "id": "great_dam",
+    "name": "Great Dam",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "136",
+    "description": "Requires 4 ocean tiles. Increase your energy production 2 steps.",
+    "cost": 12,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 2
+      }
+    }
+  },
+  {
+    "id": "greenhouses",
+    "name": "Greenhouses",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "096",
+    "description": "Gain 1 plant for each city tile in play.",
+    "cost": 6,
+    "immediate": {
+      "gain": {
+        "plants": {
+          "dynamic": {
+            "counts": "cities"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "heat_trappers",
+    "name": "Heat Trappers",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "178",
+    "description": "Decrease any heat production 2 steps and increase your energy production 1 step.",
+    "cost": 6,
+    "vp": -1,
+    "immediate": {
+      "production": {
+        "energy": 1
+      },
+      "decrease_any_production": {
+        "resource": "heat",
+        "count": 2
+      }
+    }
+  },
+  {
+    "id": "heather",
+    "name": "Heather",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "88",
+    "description": "Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.",
+    "cost": 6,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -14
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 1
+      },
+      "gain": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "helion",
+    "name": "Helion",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "R18",
+    "description": "You start with 3 heat production and 42 M€.",
+    "starting_megacredits": 42,
+    "immediate": {
+      "production": {
+        "heat": 3
+      }
+    },
+    "semantics": "A continuous payment ability: heat may be spent as if it were M€, at 1 heat per 1 M€, when paying for anything. M€ may never be spent as heat.",
+    "passive": [
+      {
+        "trigger": "you pay for anything",
+        "effect": "you may substitute heat for M€ one for one"
+      }
+    ]
+  },
+  {
+    "id": "herbivores",
+    "name": "Herbivores",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": true,
+    "card_number": "147",
+    "description": "Requires 8% oxygen. +1 animal to this card. -1 any plant production",
+    "cost": 12,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 2
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 8
+      }
+    ],
+    "immediate": {
+      "gain": {
+        "resources_here": 1
+      },
+      "decrease_any_production": {
+        "resource": "plants",
+        "count": 1
+      }
+    },
+    "semantics": "On play, add 1 animal to this card and decrease any player's plant production 1 step.",
+    "passive": [
+      {
+        "trigger": "you place a greenery tile",
+        "effect": "add 1 animal to this card"
+      }
+    ]
+  },
+  {
+    "id": "ice_asteroid",
+    "name": "Ice Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "078",
+    "description": "Place 2 ocean tiles.",
+    "cost": 23,
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "ice_cap_melting",
+    "name": "Ice Cap Melting",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "181",
+    "description": "Requires +2 C or warmer. Place 1 ocean tile.",
+    "cost": 5,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "immigrant_city",
+    "name": "Immigrant City",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "200",
+    "description": "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.",
+    "cost": 13,
+    "semantics": "On play, place a city tile, then decrease your energy production 1 step and your M€ production 2 steps.",
+    "passive": [
+      {
+        "trigger": "any player places a city tile",
+        "effect": "increase your M€ production 1 step"
+      }
+    ],
+    "play_restriction": "you need 1 energy production, a legal city space, and enough M€ production to absorb the 2 step loss"
+  },
+  {
+    "id": "immigration_shuttles",
+    "name": "Immigration Shuttles",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "198",
+    "description": "Increase your M€ production 5 steps.",
+    "cost": 31,
+    "vp_dynamic": {
+      "counts": "cities",
+      "scope": "everyone",
+      "per": 3
+    },
+    "immediate": {
+      "production": {
+        "megacredits": 5
+      }
+    }
+  },
+  {
+    "id": "import_of_advanced_ghg",
+    "name": "Import of Advanced GHG",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "167",
+    "description": "Increase your heat production 2 steps.",
+    "cost": 9,
+    "immediate": {
+      "production": {
+        "heat": 2
+      }
+    }
+  },
+  {
+    "id": "imported_ghg",
+    "name": "Imported GHG",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "162",
+    "description": "Increase your heat production 1 step and gain 3 heat.",
+    "cost": 7,
+    "immediate": {
+      "production": {
+        "heat": 1
+      },
+      "gain": {
+        "heat": 3
+      }
+    }
+  },
+  {
+    "id": "imported_hydrogen",
+    "name": "Imported Hydrogen",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "019",
+    "description": "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.",
+    "cost": 16,
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    },
+    "semantics": "Place an ocean tile, then choose one: gain 3 plants, add 3 microbes to another card, or add 2 animals to another card. With no eligible card, the plants are taken automatically."
+  },
+  {
+    "id": "imported_nitrogen",
+    "name": "Imported Nitrogen",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "163",
+    "description": "Raise your TR 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.",
+    "cost": 23,
+    "immediate": {
+      "gain": {
+        "plants": 4,
+        "tr": 1
+      },
+      "add_resources_to_any_card": [
+        {
+          "count": 3,
+          "resource": "Microbe"
+        },
+        {
+          "count": 2,
+          "resource": "Animal"
+        }
+      ]
+    }
+  },
+  {
+    "id": "industrial_microbes",
+    "name": "Industrial Microbes",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "158",
+    "description": "Increase your energy production and your steel production 1 step each.",
+    "cost": 12,
+    "immediate": {
+      "production": {
+        "steel": 1,
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "insects",
+    "name": "Insects",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "148",
+    "description": "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.",
+    "cost": 9,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 6
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "plant"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "insulation",
+    "name": "Insulation",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "152",
+    "description": "Decrease your heat production any number of steps and increase your M€ production the same number of steps.",
+    "cost": 2,
+    "semantics": "Choose any number of steps, at least 1 and at most your heat production. Decrease your heat production by that amount and increase your M€ production by the same amount.",
+    "play_restriction": "you must have at least 1 heat production"
+  },
+  {
+    "id": "interplanetary_cinematics",
+    "name": "Interplanetary Cinematics",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "R19",
+    "description": "You start with 20 steel and 30 M€.",
+    "starting_megacredits": 30,
+    "immediate": {
+      "gain": {
+        "steel": 20
+      }
+    },
+    "semantics": "A trigger on your own event cards only.",
+    "passive": [
+      {
+        "trigger": "you play an event card",
+        "effect": "gain 2 M€"
+      }
+    ]
+  },
+  {
+    "id": "inventrix",
+    "name": "Inventrix",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "R43",
+    "description": "As your first action in the game, draw 3 cards. Start with 45 M€.",
+    "starting_megacredits": 45,
+    "first_action": {
+      "draw": {
+        "count": 3
+      },
+      "text": "Draw 3 cards"
+    },
+    "global_parameter_requirement_bonus": {
+      "steps": 2
+    }
+  },
+  {
+    "id": "ironworks",
+    "name": "Ironworks",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "101",
+    "cost": 11,
+    "action": {
+      "spend": {
+        "energy": 4
+      },
+      "gain": {
+        "steel": 1
+      },
+      "global": {
+        "oxygen": 1
+      }
+    }
+  },
+  {
+    "id": "kelp_farming",
+    "name": "Kelp Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "055",
+    "description": "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.",
+    "cost": 17,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 6
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "plants": 3
+      },
+      "gain": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "lake_marineris",
+    "name": "Lake Marineris",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "053",
+    "description": "Requires 0° C or warmer. Place 2 ocean tiles.",
+    "cost": 18,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 0
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "large_convoy",
+    "name": "Large Convoy",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "143",
+    "description": "Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.",
+    "cost": 36,
+    "vp": 2,
+    "immediate": {
+      "draw": {
+        "count": 2
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    },
+    "semantics": "Place an ocean tile, draw 2 cards, then choose one: gain 5 plants, or add 4 animals to another card. With no animal card in play the plants are taken automatically."
+  },
+  {
+    "id": "lava_flows",
+    "name": "Lava Flows",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "140",
+    "description": "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.",
+    "cost": 18,
+    "immediate": {
+      "global": {
+        "temperature": 2
+      },
+      "place": [
+        {
+          "tile": 7,
+          "on": "volcanic",
+          "title": "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons"
+        }
+      ]
+    }
+  },
+  {
+    "id": "lichen",
+    "name": "Lichen",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "159",
+    "description": "Requires -24 C or warmer. Increase your plant production 1 step.",
+    "cost": 7,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -24
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "livestock",
+    "name": "Livestock",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "card_number": "184",
+    "description": "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.",
+    "cost": 13,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here"
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 9
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "plants": -1
+      }
+    },
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "local_heat_trapping",
+    "name": "Local Heat Trapping",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "190",
+    "description": "Spend 5 heat to gain either 4 plants, or to add 2 animals to ANOTHER card.",
+    "cost": 1,
+    "semantics": "Spend 5 heat, then choose one: gain 4 plants, or add 2 animals to another card. With no animal card in play the plants are taken automatically. The heat this card spends is reserved so it cannot be paid for with Helion's heat-as-M€ substitution; Stormcraft Incorporated floaters may still cover part of the cost, each floater counting as 2 heat."
+  },
+  {
+    "id": "lunar_beam",
+    "name": "Lunar Beam",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth",
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "030",
+    "description": "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.",
+    "cost": 13,
+    "immediate": {
+      "production": {
+        "megacredits": -2,
+        "energy": 2,
+        "heat": 2
+      }
+    }
+  },
+  {
+    "id": "magnetic_field_dome",
+    "name": "Magnetic Field Dome",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "171",
+    "description": "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.",
+    "cost": 5,
+    "immediate": {
+      "production": {
+        "plants": 1,
+        "energy": -2
+      },
+      "gain": {
+        "tr": 1
+      }
+    }
+  },
+  {
+    "id": "magnetic_field_generators",
+    "name": "Magnetic Field Generators",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "165",
+    "description": "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.",
+    "cost": 20,
+    "immediate": {
+      "production": {
+        "plants": 2,
+        "energy": -4
+      },
+      "gain": {
+        "tr": 3
+      }
+    }
+  },
+  {
+    "id": "mangrove",
+    "name": "Mangrove",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "059",
+    "description": "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.",
+    "cost": 12,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "greenery",
+          "on": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "martian_rails",
+    "name": "Martian Rails",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "007",
+    "cost": 13,
+    "action": {
+      "spend": {
+        "energy": 1
+      },
+      "gain": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "cities"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "methane_from_titan",
+    "name": "Methane From Titan",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "018",
+    "description": "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.",
+    "cost": 28,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 2,
+        "heat": 2
+      }
+    }
+  },
+  {
+    "id": "micro_mills",
+    "name": "Micro-Mills",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "164",
+    "description": "Increase your heat production 1 step.",
+    "cost": 3,
+    "immediate": {
+      "production": {
+        "heat": 1
+      }
+    }
+  },
+  {
+    "id": "mining_expedition",
+    "name": "Mining Expedition",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "063",
+    "description": "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.",
+    "cost": 12,
+    "immediate": {
+      "gain": {
+        "steel": 2
+      },
+      "global": {
+        "oxygen": 1
+      },
+      "remove_any_plants": 2
+    }
+  },
+  {
+    "id": "mining_guild",
+    "name": "Mining Guild",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "R24",
+    "description": "You start with 30 M€, 5 steel and 1 steel production.",
+    "starting_megacredits": 30,
+    "immediate": {
+      "production": {
+        "steel": 1
+      },
+      "gain": {
+        "steel": 5
+      }
+    },
+    "semantics": "A trigger on your own tile placements on Mars. It does not fire for tiles you place off Mars, nor during the solar phase.",
+    "passive": [
+      {
+        "trigger": "you place a tile on Mars on a space with a steel or titanium placement bonus",
+        "effect": "increase your steel production 1 step"
+      }
+    ]
+  },
+  {
+    "id": "mining_rights",
+    "name": "Mining Rights",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "067",
+    "description": "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.",
+    "cost": 9,
+    "semantics": "Place the Mining Rights special tile and permanently increase your production of the resource that space grants: steel or titanium. If the space grants both, you choose.",
+    "play_restriction": "the tile must go on any space with a steel or titanium placement bonus"
+  },
+  {
+    "id": "mohole_area",
+    "name": "Mohole Area",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "142",
+    "description": "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.",
+    "cost": 20,
+    "immediate": {
+      "production": {
+        "heat": 4
+      },
+      "place": [
+        {
+          "tile": 10,
+          "on": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "moss",
+    "name": "Moss",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "card_number": "122",
+    "description": "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.",
+    "cost": 4,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 1
+      }
+    },
+    "semantics": "You pay 1 plant as an additional cost when this card is played.",
+    "play_restriction": "you must have 1 plant, or a card that supplies one such as Viral Enhancers or Manutech"
+  },
+  {
+    "id": "natural_preserve",
+    "name": "Natural Preserve",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "044",
+    "description": "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.",
+    "cost": 9,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 1
+      },
+      "place": [
+        {
+          "tile": 11,
+          "on": "isolated"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nitrite_reducing_bacteria",
+    "name": "Nitrite Reducing Bacteria",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "157",
+    "description": "Add 3 microbes to this card.",
+    "cost": 11,
+    "resource_type": "Microbe",
+    "immediate": {
+      "gain": {
+        "resources_here": 3
+      }
+    },
+    "action": {
+      "or": [
+        {
+          "title": "Remove 3 microbes to increase your terraform rating 1 step",
+          "spend": {
+            "resources_here": 3
+          },
+          "gain": {
+            "tr": 1
+          }
+        },
+        {
+          "title": "Add 1 microbe to this card",
+          "gain": {
+            "resources_here": 1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "nitrogen_rich_asteroid",
+    "name": "Nitrogen-Rich Asteroid",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "037",
+    "description": "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.",
+    "cost": 31,
+    "immediate": {
+      "gain": {
+        "tr": 2
+      },
+      "global": {
+        "temperature": 1
+      }
+    },
+    "semantics": "Raise your terraform rating 2 steps and the temperature 1 step, then increase your plant production 1 step — or 4 steps instead if you have at least 3 plant tags, counted after this card is played."
+  },
+  {
+    "id": "nitrophilic_moss",
+    "name": "Nitrophilic Moss",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": true,
+    "card_number": "146",
+    "description": "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.",
+    "cost": 8,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 2
+      }
+    },
+    "semantics": "You pay 2 plants as an additional cost when this card is played.",
+    "play_restriction": "you must have 2 plants, or 1 plant plus Viral Enhancers, or Manutech"
+  },
+  {
+    "id": "noctis_city",
+    "name": "Noctis City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "017",
+    "description": "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.",
+    "cost": 18,
+    "immediate": {
+      "production": {
+        "megacredits": 3
+      }
+    },
+    "semantics": "Place a city tile on the reserved Noctis City area, ignoring the usual placement restrictions, and decrease your energy production 1 step while increasing your M€ production 3 steps. On a board with no reserved Noctis area, the city goes on any legal city space.",
+    "play_restriction": "you must have at least 1 energy production"
+  },
+  {
+    "id": "noctis_farming",
+    "name": "Noctis Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "176",
+    "description": "Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 plants.",
+    "cost": 10,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -20
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 1
+      },
+      "gain": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "nuclear_power",
+    "name": "Nuclear Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "045",
+    "description": "Decrease your M€ production 2 steps and increase your energy production 3 steps.",
+    "cost": 10,
+    "immediate": {
+      "production": {
+        "megacredits": -2,
+        "energy": 3
+      }
+    }
+  },
+  {
+    "id": "nuclear_zone",
+    "name": "Nuclear Zone",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "097",
+    "description": "Place this tile and raise temperature 2 steps.",
+    "cost": 10,
+    "vp": -2,
+    "immediate": {
+      "global": {
+        "temperature": 2
+      },
+      "place": [
+        {
+          "tile": 12,
+          "on": "land"
+        }
+      ]
+    }
+  },
+  {
+    "id": "open_city",
+    "name": "Open City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "108",
+    "description": "Requires 12% oxygen. Gain 2 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
+    "cost": 23,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 12
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 4,
+        "energy": -1
+      },
+      "gain": {
+        "plants": 2
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "optimal_aerobraking",
+    "name": "Optimal Aerobraking",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "031",
+    "cost": 7,
+    "semantics": "The played card must be both an event and carry a space tag.",
+    "passive": [
+      {
+        "trigger": "you play a space event card",
+        "effect": "gain 3 M€ and 3 heat"
+      }
+    ]
+  },
+  {
+    "id": "ore_processor",
+    "name": "Ore Processor",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "104",
+    "cost": 13,
+    "action": {
+      "spend": {
+        "energy": 4
+      },
+      "gain": {
+        "titanium": 1
+      },
+      "global": {
+        "oxygen": 1
+      }
+    }
+  },
+  {
+    "id": "permafrost_extraction",
+    "name": "Permafrost Extraction",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "191",
+    "description": "Requires -8 C or warmer. Place 1 ocean tile.",
+    "cost": 8,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -8
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "peroxide_power",
+    "name": "Peroxide Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "089",
+    "description": "Decrease your M€ production 1 step and increase your energy production 2 steps.",
+    "cost": 7,
+    "immediate": {
+      "production": {
+        "megacredits": -1,
+        "energy": 2
+      }
+    }
+  },
+  {
+    "id": "pets",
+    "name": "Pets",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth",
+      "animal"
+    ],
+    "bespoke": true,
+    "card_number": "172",
+    "description": "Add 1 animal to this card.",
+    "cost": 10,
+    "resource_type": "Animal",
+    "protected_resources": true,
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 2
+    },
+    "immediate": {
+      "gain": {
+        "resources_here": 1
+      }
+    },
+    "semantics": "On play, add 1 animal to this card. Animals here are protected: other players cannot remove them.",
+    "passive": [
+      {
+        "trigger": "any player places a city tile",
+        "effect": "add 1 animal to this card"
+      }
+    ]
+  },
+  {
+    "id": "phobolog",
+    "name": "PhoboLog",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "R09",
+    "description": "You start with 10 titanium and 23 M€.",
+    "starting_megacredits": 23,
+    "immediate": {
+      "gain": {
+        "titanium": 10
+      },
+      "titanium_value": 1
+    }
+  },
+  {
+    "id": "phobos_space_haven",
+    "name": "Phobos Space Haven",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space",
+      "city"
+    ],
+    "bespoke": false,
+    "card_number": "021",
+    "description": "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.",
+    "cost": 25,
+    "vp": 3,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      },
+      "place": [
+        {
+          "tile": "city",
+          "space": "02"
+        }
+      ]
+    }
+  },
+  {
+    "id": "plantation",
+    "name": "Plantation",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "193",
+    "description": "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.",
+    "cost": 15,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "place": [
+        {
+          "tile": "greenery"
+        }
+      ]
+    }
+  },
+  {
+    "id": "power_grid",
+    "name": "Power Grid",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "102",
+    "description": "Increase your energy production step for each power tag you have, including this.",
+    "cost": 18,
+    "immediate": {
+      "production": {
+        "energy": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "power"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "power_plant",
+    "name": "Power Plant",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "141",
+    "description": "Increase your energy production 1 step.",
+    "cost": 4,
+    "immediate": {
+      "production": {
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "predators",
+    "name": "Predators",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": true,
+    "card_number": "024",
+    "description": "Requires 11% oxygen.",
+    "cost": 14,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here"
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 11
+      }
+    ],
+    "semantics": "The action removes 1 animal from any other player's card and adds 1 animal to this card. In a solo game the action is always available."
+  },
+  {
+    "id": "protected_valley",
+    "name": "Protected Valley",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "174",
+    "description": "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.",
+    "cost": 23,
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      },
+      "place": [
+        {
+          "tile": "greenery",
+          "on": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "rad_chem_factory",
+    "name": "Rad-Chem Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "205",
+    "description": "Decrease your energy production 1 step. Raise your TR 2 steps.",
+    "cost": 8,
+    "immediate": {
+      "production": {
+        "energy": -1
+      },
+      "gain": {
+        "tr": 2
+      }
+    }
+  },
+  {
+    "id": "regolith_eaters",
+    "name": "Regolith Eaters",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "033",
+    "cost": 13,
+    "resource_type": "Microbe",
+    "action": {
+      "or": [
+        {
+          "title": "Remove 2 microbes to raise oxygen level 1 step",
+          "spend": {
+            "resources_here": 2
+          },
+          "global": {
+            "oxygen": 1
+          }
+        },
+        {
+          "title": "Add 1 microbe to this card",
+          "gain": {
+            "resources_here": 1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "release_of_inert_gases",
+    "name": "Release of Inert Gases",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "036",
+    "description": "Raise your terraforming rating 2 steps.",
+    "cost": 14,
+    "immediate": {
+      "gain": {
+        "tr": 2
+      }
+    }
+  },
+  {
+    "id": "research_outpost",
+    "name": "Research Outpost",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "020",
+    "description": "Place a city tile NEXT TO NO OTHER TILE.",
+    "cost": 18,
+    "immediate": {
+      "place": [
+        {
+          "tile": "city",
+          "on": "isolated"
+        }
+      ]
+    },
+    "card_discount": [
+      {
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "rover_construction",
+    "name": "Rover Construction",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "038",
+    "cost": 8,
+    "vp": 1,
+    "semantics": "The trigger fires for every player's city placements, not only your own.",
+    "passive": [
+      {
+        "trigger": "any player places a city tile",
+        "effect": "gain 2 M€"
+      }
+    ]
+  },
+  {
+    "id": "search_for_life",
+    "name": "Search For Life",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "card_number": "005",
+    "description": "Oxygen must be 6% or less.",
+    "cost": 3,
+    "resource_type": "Science",
+    "vp_special": true,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 6
+      }
+    ],
+    "semantics": "Worth 3 victory points if this card holds at least 1 science resource, and 0 otherwise. The action costs 1 M€: reveal the top card of the project deck, add 1 science resource to this card if the revealed card has a microbe tag, then discard the revealed card."
+  },
+  {
+    "id": "shuttles",
+    "name": "Shuttles",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "166",
+    "description": "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.",
+    "cost": 10,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 5
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "energy": -1
+      }
+    },
+    "card_discount": [
+      {
+        "tag": "space",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "small_animals",
+    "name": "Small Animals",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "animal"
+    ],
+    "bespoke": false,
+    "card_number": "054",
+    "description": "Requires 6% oxygen. Decrease any plant production 1 step.",
+    "cost": 6,
+    "resource_type": "Animal",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 2
+    },
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 6
+      }
+    ],
+    "immediate": {
+      "decrease_any_production": {
+        "resource": "plants",
+        "count": 1
+      }
+    },
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "soil_factory",
+    "name": "Soil Factory",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "179",
+    "description": "Decrease your energy production 1 step and increase your plant production 1 step.",
+    "cost": 9,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "plants": 1,
+        "energy": -1
+      }
+    }
+  },
+  {
+    "id": "solar_power",
+    "name": "Solar Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "113",
+    "description": "Increase your energy production 1 step.",
+    "cost": 11,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "solar_wind_power",
+    "name": "Solar Wind Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space",
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "077",
+    "description": "Increase your energy production 1 step and gain 2 titanium.",
+    "cost": 11,
+    "immediate": {
+      "production": {
+        "energy": 1
+      },
+      "gain": {
+        "titanium": 2
+      }
+    }
+  },
+  {
+    "id": "soletta",
+    "name": "Soletta",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "203",
+    "description": "Increase your heat production 7 steps.",
+    "cost": 35,
+    "immediate": {
+      "production": {
+        "heat": 7
+      }
+    }
+  },
+  {
+    "id": "space_mirrors",
+    "name": "Space Mirrors",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "power",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "076",
+    "cost": 3,
+    "action": {
+      "spend": {
+        "megacredits": 7
+      },
+      "production": {
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "special_design",
+    "name": "Special Design",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "206",
+    "description": "The next card you play this generation is +2 or -2 steps in global requirements, your choice.",
+    "cost": 4,
+    "global_parameter_requirement_bonus": {
+      "steps": 2,
+      "next_card_only": true
+    }
+  },
+  {
+    "id": "steelworks",
+    "name": "Steelworks",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "103",
+    "cost": 15,
+    "action": {
+      "spend": {
+        "energy": 4
+      },
+      "gain": {
+        "steel": 2
+      },
+      "global": {
+        "oxygen": 1
+      }
+    }
+  },
+  {
+    "id": "strip_mine",
+    "name": "Strip Mine",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "138",
+    "description": "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.",
+    "cost": 25,
+    "immediate": {
+      "production": {
+        "steel": 2,
+        "titanium": 1,
+        "energy": -2
+      },
+      "global": {
+        "oxygen": 2
+      }
+    }
+  },
+  {
+    "id": "subterranean_reservoir",
+    "name": "Subterranean Reservoir",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "127",
+    "description": "Place 1 ocean tile.",
+    "cost": 11,
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "symbiotic_fungus",
+    "name": "Symbiotic Fungus",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "133",
+    "description": "Requires -14 C° or warmer.",
+    "cost": 4,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -14
+      }
+    ],
+    "action": {
+      "add_resources_to_any_card": [
+        {
+          "count": 1,
+          "resource": "Microbe"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tectonic_stress_power",
+    "name": "Tectonic Stress Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "145",
+    "description": "Requires 2 science tags. Increase your energy production 3 steps.",
+    "cost": 18,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 3
+      }
+    }
+  },
+  {
+    "id": "tharsis_republic",
+    "name": "Tharsis Republic",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "R31",
+    "description": "You start with 40 M€. As your first action in the game, place a city tile.",
+    "starting_megacredits": 40,
+    "first_action": {
+      "place": [
+        {
+          "tile": "city"
+        }
+      ],
+      "text": "Place a city tile"
+    },
+    "semantics": "In a solo game the two neutral cities placed during setup pay out immediately, so playing this corporation grants 2 M€ production straight away.",
+    "passive": [
+      {
+        "trigger": "any player places a city tile on Mars",
+        "effect": "increase your M€ production 1 step"
+      },
+      {
+        "trigger": "you place a city tile anywhere",
+        "effect": "gain 3 M€"
+      }
+    ]
+  },
+  {
+    "id": "thorgate",
+    "name": "ThorGate",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "card_number": "R13",
+    "description": "You start with 1 energy production and 48 M€.",
+    "starting_megacredits": 48,
+    "immediate": {
+      "production": {
+        "energy": 1
+      }
+    },
+    "card_discount": [
+      {
+        "tag": "power",
+        "amount": 3
+      }
+    ],
+    "semantics": "The 3 M€ discount on power-tag cards is in card_discount. What the data cannot express is that the same discount also applies to the Power Plant standard project.",
+    "passive": [
+      {
+        "trigger": "you buy the Power Plant standard project",
+        "effect": "pay 3 M€ less for it"
+      }
+    ]
+  },
+  {
+    "id": "towing_a_comet",
+    "name": "Towing A Comet",
+    "set": "base",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "075",
+    "description": "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.",
+    "cost": 23,
+    "immediate": {
+      "gain": {
+        "plants": 2
+      },
+      "global": {
+        "oxygen": 1
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "trees",
+    "name": "Trees",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "060",
+    "description": "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.",
+    "cost": 13,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": 3
+      },
+      "gain": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "tundra_farming",
+    "name": "Tundra Farming",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "169",
+    "description": "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.",
+    "cost": 16,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": -6
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "plants": 1
+      },
+      "gain": {
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "underground_city",
+    "name": "Underground City",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "032",
+    "description": "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.",
+    "cost": 18,
+    "immediate": {
+      "production": {
+        "steel": 2,
+        "energy": -2
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "underground_detonations",
+    "name": "Underground Detonations",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "202",
+    "cost": 6,
+    "action": {
+      "spend": {
+        "megacredits": 10
+      },
+      "production": {
+        "heat": 2
+      }
+    }
+  },
+  {
+    "id": "united_nations_mars_initiative",
+    "name": "United Nations Mars Initiative",
+    "set": "base",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "R32",
+    "description": "You start with 40 M€.",
+    "starting_megacredits": 40,
+    "semantics": "The action costs 3 M€ and raises your terraform rating 1 step. It is only available if your terraform rating already went up this generation for some other reason."
+  },
+  {
+    "id": "urbanized_area",
+    "name": "Urbanized Area",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "120",
+    "description": "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.",
+    "cost": 10,
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      }
+    },
+    "semantics": "Place a city tile, decrease your energy production 1 step and increase your M€ production 2 steps.",
+    "play_restriction": "the city must go on a land space adjacent to at least 2 other city tiles, and you must have 1 energy production"
+  },
+  {
+    "id": "water_import_from_europa",
+    "name": "Water Import From Europa",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "012",
+    "cost": 25,
+    "vp_dynamic": {
+      "counts": "tag",
+      "tag": "jovian"
+    },
+    "action": {
+      "spend": {
+        "megacredits": 12,
+        "can_pay_with": [
+          "titanium"
+        ]
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "water_splitting_plant",
+    "name": "Water Splitting Plant",
+    "set": "base",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "177",
+    "description": "Requires 2 ocean tiles.",
+    "cost": 12,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 2
+      }
+    ],
+    "action": {
+      "spend": {
+        "energy": 3
+      },
+      "global": {
+        "oxygen": 1
+      }
+    }
+  },
+  {
+    "id": "wave_power",
+    "name": "Wave Power",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "139",
+    "description": "Requires 3 ocean tiles. Increase your energy production 1 step.",
+    "cost": 8,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oceans",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "windmills",
+    "name": "Windmills",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "168",
+    "description": "Requires 7% oxygen. Increase your energy production 1 step.",
+    "cost": 6,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 7
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "worms",
+    "name": "Worms",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "130",
+    "description": "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.",
+    "cost": 8,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "plants": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "microbe",
+            "per": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "zeppelins",
+    "name": "Zeppelins",
+    "set": "base",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "129",
+    "description": "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.",
+    "cost": 13,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "min": 5
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "cities"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "acquired_company",
+    "name": "Acquired Company",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "106",
+    "description": "Increase your M€ production 3 steps.",
+    "cost": 10,
+    "immediate": {
+      "production": {
+        "megacredits": 3
+      }
+    }
+  },
+  {
+    "id": "advanced_alloys",
+    "name": "Advanced Alloys",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "071",
+    "cost": 9,
+    "immediate": {
+      "steel_value": 1,
+      "titanium_value": 1
+    }
+  },
+  {
+    "id": "ai_central",
+    "name": "AI Central",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "208",
+    "cost": 21,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": -1
+      }
+    },
+    "action": {
+      "draw": {
+        "count": 2
+      }
+    }
+  },
+  {
+    "id": "anti_gravity_technology",
+    "name": "Anti-Gravity Technology",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "150",
+    "description": "Requires 7 science tags.",
+    "cost": 14,
+    "vp": 3,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 7
+      }
+    ],
+    "card_discount": [
+      {
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "asteroid_mining_consortium",
+    "name": "Asteroid Mining Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true,
+    "card_number": "002",
+    "description": "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.",
+    "cost": 13,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "production",
+        "resource": "titanium",
+        "min": 1
+      }
+    ],
+    "semantics": "Decrease any one player's titanium production 1 step and increase your own 1 step. You may target yourself, which nets no change."
+  },
+  {
+    "id": "bribed_committee",
+    "name": "Bribed Committee",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "112",
+    "description": "Raise your TR 2 steps.",
+    "cost": 7,
+    "vp": -2,
+    "immediate": {
+      "gain": {
+        "tr": 2
+      }
+    }
+  },
+  {
+    "id": "building_industries",
+    "name": "Building Industries",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "065",
+    "description": "Decrease your energy production 1 step and increase your steel production 2 steps.",
+    "cost": 6,
+    "immediate": {
+      "production": {
+        "steel": 2,
+        "energy": -1
+      }
+    }
+  },
+  {
+    "id": "business_contacts",
+    "name": "Business Contacts",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "111",
+    "cost": 7,
+    "immediate": {
+      "draw": {
+        "count": 4,
+        "keep": 2
+      }
+    }
+  },
+  {
+    "id": "business_network",
+    "name": "Business Network",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "110",
+    "description": "Decrease your M€ production 1 step.",
+    "cost": 4,
+    "immediate": {
+      "production": {
+        "megacredits": -1
+      }
+    },
+    "action": {
+      "draw": {
+        "count": 1,
+        "pay": true
+      }
+    }
+  },
+  {
+    "id": "callisto_penal_mines",
+    "name": "Callisto Penal Mines",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "082",
+    "description": "Increase your M€ production 3 steps.",
+    "cost": 24,
+    "vp": 2,
+    "immediate": {
+      "production": {
+        "megacredits": 3
+      }
+    }
+  },
+  {
+    "id": "caretaker_contract",
+    "name": "Caretaker Contract",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "154",
+    "description": "Requires 0° C or warmer.",
+    "cost": 3,
+    "requirements": [
+      {
+        "type": "temperature",
+        "min": 0
+      }
+    ],
+    "action": {
+      "spend": {
+        "heat": 8
+      },
+      "gain": {
+        "tr": 1
+      }
+    }
+  },
+  {
+    "id": "cartel",
+    "name": "Cartel",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "137",
+    "description": "Increase your M€ production 1 step for each Earth tag you have, including this.",
+    "cost": 8,
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "earth"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ceo_s_favorite_project",
+    "name": "CEO's Favorite Project",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "149",
+    "cost": 1,
+    "immediate": {
+      "add_resources_to_any_card": [
+        {
+          "count": 1,
+          "must_have_card": true,
+          "min": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "commercial_district",
+    "name": "Commercial District",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "085",
+    "description": "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
+    "cost": 16,
+    "vp_dynamic": {
+      "counts": "cities",
+      "next_to_this": true
+    },
+    "immediate": {
+      "production": {
+        "megacredits": 4,
+        "energy": -1
+      },
+      "place": [
+        {
+          "tile": 4,
+          "on": "land"
+        }
+      ]
+    }
+  },
+  {
+    "id": "corporate_stronghold",
+    "name": "Corporate Stronghold",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "city",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "182",
+    "description": "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile.",
+    "cost": 11,
+    "vp": -2,
+    "immediate": {
+      "production": {
+        "megacredits": 3,
+        "energy": -1
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "development_center",
+    "name": "Development Center",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "014",
+    "cost": 11,
+    "action": {
+      "spend": {
+        "energy": 1
+      },
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "earth_catapult",
+    "name": "Earth Catapult",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "070",
+    "cost": 23,
+    "vp": 2,
+    "card_discount": [
+      {
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "earth_office",
+    "name": "Earth Office",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "105",
+    "cost": 1,
+    "card_discount": [
+      {
+        "tag": "earth",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "electro_catapult",
+    "name": "Electro Catapult",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "069",
+    "cost": 17,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 8
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": -1
+      }
+    },
+    "action": {
+      "or": [
+        {
+          "title": "Spend 1 plant to gain 7 M€.",
+          "spend": {
+            "plants": 1
+          },
+          "gain": {
+            "megacredits": 7
+          }
+        },
+        {
+          "title": "Spend 1 steel to gain 7 M€.",
+          "spend": {
+            "steel": 1
+          },
+          "gain": {
+            "megacredits": 7
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "energy_tapping",
+    "name": "Energy Tapping",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "card_number": "201",
+    "description": "Decrease any energy production 1 step and increase your own 1 step.",
+    "cost": 3,
+    "vp": -1,
+    "semantics": "Decrease any one player's energy production 1 step and increase your own 1 step. You may target yourself."
+  },
+  {
+    "id": "fuel_factory",
+    "name": "Fuel Factory",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "180",
+    "description": "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.",
+    "cost": 6,
+    "immediate": {
+      "production": {
+        "megacredits": 1,
+        "titanium": 1,
+        "energy": -1
+      }
+    }
+  },
+  {
+    "id": "gene_repair",
+    "name": "Gene Repair",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "091",
+    "description": "Requires 3 science tags. Increase your M€ production 2 steps.",
+    "cost": 12,
+    "vp": 2,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      }
+    }
+  },
+  {
+    "id": "great_escarpment_consortium",
+    "name": "Great Escarpment Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "061",
+    "description": "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.",
+    "cost": 6,
+    "requirements": [
+      {
+        "type": "production",
+        "resource": "steel",
+        "min": 1
+      }
+    ],
+    "semantics": "Decrease any one player's steel production 1 step and increase your own 1 step. You may target yourself."
+  },
+  {
+    "id": "hackers",
+    "name": "Hackers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "125",
+    "description": "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.",
+    "cost": 3,
+    "vp": -1,
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "energy": -1
+      }
+    },
+    "semantics": "Decrease your energy production 1 step and increase your M€ production 2 steps, and separately decrease any one player's M€ production 2 steps. You may target yourself."
+  },
+  {
+    "id": "hired_raiders",
+    "name": "Hired Raiders",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "124",
+    "description": "Steal up to 2 steel, or 3 M€ from any player.",
+    "cost": 1,
+    "semantics": "Steal 2 steel or 3 M€ from one opponent of your choice. Steel cannot be taken from a player whose alloys are protected. In a solo game you simply gain the resources."
+  },
+  {
+    "id": "indentured_workers",
+    "name": "Indentured Workers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "195",
+    "description": "The next card you play this generation costs 8 M€ less.",
+    "cost": 0,
+    "vp": -1,
+    "semantics": "The discount applies once, to the very next card you play this generation, and is lost if you play no further card.",
+    "passive": [
+      {
+        "trigger": "you play your next card this generation",
+        "effect": "it costs 8 M€ less"
+      }
+    ]
+  },
+  {
+    "id": "industrial_center",
+    "name": "Industrial Center",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "123",
+    "description": "Place this tile adjacent to a city tile.",
+    "cost": 4,
+    "action": {
+      "spend": {
+        "megacredits": 7
+      },
+      "production": {
+        "steel": 1
+      }
+    },
+    "semantics": "On play, place the Industrial Center special tile. The repeatable action is fully described in the action field: spend 7 M€ to increase your steel production 1 step.",
+    "play_restriction": "the Industrial Center tile must go on a land space adjacent to a city tile"
+  },
+  {
+    "id": "interstellar_colony_ship",
+    "name": "Interstellar Colony Ship",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "027",
+    "description": "Requires that you have 5 science tags.",
+    "cost": 24,
+    "vp": 4,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 5
+      }
+    ]
+  },
+  {
+    "id": "invention_contest",
+    "name": "Invention Contest",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "192",
+    "cost": 2,
+    "immediate": {
+      "draw": {
+        "count": 3,
+        "keep": 1
+      }
+    }
+  },
+  {
+    "id": "inventors_guild",
+    "name": "Inventors' Guild",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "006",
+    "cost": 9,
+    "action": {
+      "draw": {
+        "count": 1,
+        "pay": true
+      }
+    }
+  },
+  {
+    "id": "investment_loan",
+    "name": "Investment Loan",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "151",
+    "description": "Decrease your M€ production 1 step. Gain 10 M€.",
+    "cost": 3,
+    "immediate": {
+      "production": {
+        "megacredits": -1
+      },
+      "gain": {
+        "megacredits": 10
+      }
+    }
+  },
+  {
+    "id": "io_mining_industries",
+    "name": "Io Mining Industries",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "092",
+    "description": "Increase your titanium production 2 steps and your M€ production 2 steps.",
+    "cost": 41,
+    "vp_dynamic": {
+      "counts": "tag",
+      "tag": "jovian"
+    },
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "titanium": 2
+      }
+    }
+  },
+  {
+    "id": "lagrange_observatory",
+    "name": "Lagrange Observatory",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "196",
+    "description": "Draw 1 card.",
+    "cost": 9,
+    "vp": 1,
+    "immediate": {
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "land_claim",
+    "name": "Land Claim",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "066",
+    "cost": 1,
+    "semantics": "Reserve any non-reserved land space. Only you may place a tile on that space for the rest of the game. No tile is placed now."
+  },
+  {
+    "id": "lightning_harvest",
+    "name": "Lightning Harvest",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "046",
+    "description": "Requires 3 science tags. Increase your energy production and your M€ production one step each.",
+    "cost": 8,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 3
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 1,
+        "energy": 1
+      }
+    }
+  },
+  {
+    "id": "mars_university",
+    "name": "Mars University",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "073",
+    "cost": 8,
+    "vp": 1,
+    "semantics": "Triggers once for each science tag played, including this card's own science tag when it enters play. If your hand is empty the trigger does nothing.",
+    "passive": [
+      {
+        "trigger": "you play a card with a science tag, including this card",
+        "effect": "for each science tag, you may discard 1 card from your hand to draw 1 card"
+      }
+    ]
+  },
+  {
+    "id": "mass_converter",
+    "name": "Mass Converter",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "094",
+    "description": "Requires 5 science tags. Increase your energy production 6 steps.",
+    "cost": 8,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 5
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 6
+      }
+    },
+    "card_discount": [
+      {
+        "tag": "space",
+        "amount": 2,
+        "per": "card"
+      }
+    ]
+  },
+  {
+    "id": "media_archives",
+    "name": "Media Archives",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "107",
+    "description": "Gain 1 M€ for each event EVER PLAYED by all players.",
+    "cost": 8,
+    "immediate": {
+      "gain": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "events_played",
+            "scope": "everyone"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "media_group",
+    "name": "Media Group",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "109",
+    "cost": 6,
+    "semantics": "A trigger on your own event cards only.",
+    "passive": [
+      {
+        "trigger": "you play an event card",
+        "effect": "gain 3 M€"
+      }
+    ]
+  },
+  {
+    "id": "medical_lab",
+    "name": "Medical Lab",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "207",
+    "description": "Increase your M€ production 1 step for every 2 building tags you have, including this.",
+    "cost": 13,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "building",
+            "per": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "mine",
+    "name": "Mine",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "056",
+    "description": "Increase your steel production 1 step.",
+    "cost": 4,
+    "immediate": {
+      "production": {
+        "steel": 1
+      }
+    }
+  },
+  {
+    "id": "mineral_deposit",
+    "name": "Mineral Deposit",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "062",
+    "description": "Gain 5 steel.",
+    "cost": 5,
+    "immediate": {
+      "gain": {
+        "steel": 5
+      }
+    }
+  },
+  {
+    "id": "mining_area",
+    "name": "Mining Area",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "064",
+    "description": "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.",
+    "cost": 4,
+    "semantics": "Place the Mining Area special tile and permanently increase your production of the resource that space grants: steel or titanium. If the space grants both, you choose.",
+    "play_restriction": "the tile must go on a space with a steel or titanium placement bonus that is adjacent to one of your own non-ocean tiles"
+  },
+  {
+    "id": "miranda_resort",
+    "name": "Miranda Resort",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "051",
+    "description": "Increase your M€ production 1 step for each Earth tag you have.",
+    "cost": 12,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "earth"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "olympus_conference",
+    "name": "Olympus Conference",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "earth",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "185",
+    "description": "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.",
+    "cost": 10,
+    "resource_type": "Science",
+    "vp": 1,
+    "semantics": "The choice is only offered when there is already a science resource here; otherwise a resource is simply added.",
+    "passive": [
+      {
+        "trigger": "you play a card with a science tag, including this card",
+        "effect": "for each science tag, either add 1 science resource to this card, or remove 1 science resource from this card to draw a card"
+      }
+    ]
+  },
+  {
+    "id": "physics_complex",
+    "name": "Physics Complex",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "095",
+    "cost": 12,
+    "resource_type": "Science",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "each": 2
+    },
+    "action": {
+      "spend": {
+        "energy": 6
+      },
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "power_infrastructure",
+    "name": "Power Infrastructure",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "power",
+      "building"
+    ],
+    "bespoke": true,
+    "card_number": "194",
+    "cost": 4,
+    "semantics": "The action converts energy to M€ one for one. You choose the amount, from 1 up to all the energy you hold."
+  },
+  {
+    "id": "power_supply_consortium",
+    "name": "Power Supply Consortium",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "card_number": "160",
+    "description": "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.",
+    "cost": 5,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "power",
+        "min": 2
+      }
+    ],
+    "semantics": "Decrease any one player's energy production 1 step and increase your own 1 step. You may target yourself."
+  },
+  {
+    "id": "protected_habitats",
+    "name": "Protected Habitats",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "173",
+    "cost": 5
+  },
+  {
+    "id": "quantum_extractor",
+    "name": "Quantum Extractor",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "079",
+    "description": "Requires 4 science tags. Increase your energy production 4 steps.",
+    "cost": 13,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "science",
+        "min": 4
+      }
+    ],
+    "immediate": {
+      "production": {
+        "energy": 4
+      }
+    },
+    "card_discount": [
+      {
+        "tag": "space",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "rad_suits",
+    "name": "Rad-Suits",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "186",
+    "description": "Requires two cities in play. Increase your M€ production 1 step.",
+    "cost": 6,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "cities",
+        "min": 2,
+        "scope": "any_player"
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 1
+      }
+    }
+  },
+  {
+    "id": "research",
+    "name": "Research",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "090",
+    "description": "Counts as playing 2 science cards. Draw 2 cards.",
+    "cost": 11,
+    "vp": 1,
+    "immediate": {
+      "draw": {
+        "count": 2
+      }
+    }
+  },
+  {
+    "id": "restricted_area",
+    "name": "Restricted Area",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "199",
+    "description": "Place this tile.",
+    "cost": 11,
+    "immediate": {
+      "place": [
+        {
+          "tile": 13,
+          "on": "land"
+        }
+      ]
+    },
+    "action": {
+      "spend": {
+        "megacredits": 2
+      },
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "robotic_workforce",
+    "name": "Robotic Workforce",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "card_number": "086",
+    "description": "Duplicate only the production box of one of your building cards.",
+    "cost": 9,
+    "semantics": "Copy the production box of one card you have already played that carries a building tag. Only the production change is copied, nothing else the card does.",
+    "play_restriction": "you must have a played building-tag card whose production box can be applied again"
+  },
+  {
+    "id": "sabotage",
+    "name": "Sabotage",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "121",
+    "description": "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.",
+    "cost": 1,
+    "semantics": "Remove 3 titanium, 4 steel, or 7 M€ from one opponent of your choice. Titanium and steel cannot be taken from a player whose alloys are protected."
+  },
+  {
+    "id": "satellites",
+    "name": "Satellites",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "175",
+    "description": "Increase your M€ production 1 step for each space tag you have, including this one.",
+    "cost": 10,
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "space"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "saturn_systems",
+    "name": "Saturn Systems",
+    "set": "corpera",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true,
+    "card_number": "R03",
+    "description": "You start with 1 titanium production and 42 M€.",
+    "starting_megacredits": 42,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      }
+    },
+    "semantics": "A trigger on every player, including yourself, and including this card's own Jovian tag when it is played.",
+    "passive": [
+      {
+        "trigger": "any player puts a Jovian tag into play",
+        "effect": "increase your M€ production 1 step for each Jovian tag played"
+      }
+    ]
+  },
+  {
+    "id": "security_fleet",
+    "name": "Security Fleet",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "028",
+    "cost": 12,
+    "resource_type": "Fighter",
+    "vp_dynamic": {
+      "counts": "resources_here"
+    },
+    "action": {
+      "spend": {
+        "titanium": 1
+      },
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "space_elevator",
+    "name": "Space Elevator",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "013",
+    "description": "Increase your titanium production 1 step.",
+    "cost": 27,
+    "vp": 2,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      }
+    },
+    "action": {
+      "spend": {
+        "steel": 1
+      },
+      "gain": {
+        "megacredits": 5
+      }
+    }
+  },
+  {
+    "id": "space_station",
+    "name": "Space Station",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "025",
+    "cost": 10,
+    "vp": 1,
+    "card_discount": [
+      {
+        "tag": "space",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "sponsors",
+    "name": "Sponsors",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "068",
+    "description": "Increase your M€ production 2 steps.",
+    "cost": 6,
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      }
+    }
+  },
+  {
+    "id": "standard_technology",
+    "name": "Standard Technology",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science"
+    ],
+    "bespoke": true,
+    "card_number": "156",
+    "cost": 6,
+    "semantics": "Sell Patents is explicitly excluded.",
+    "passive": [
+      {
+        "trigger": "you pay for a standard project other than Sell Patents",
+        "effect": "gain 3 M€"
+      }
+    ]
+  },
+  {
+    "id": "tardigrades",
+    "name": "Tardigrades",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "049",
+    "cost": 4,
+    "resource_type": "Microbe",
+    "vp_dynamic": {
+      "counts": "resources_here",
+      "per": 4
+    },
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "technology_demonstration",
+    "name": "Technology Demonstration",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "204",
+    "description": "Draw two cards.",
+    "cost": 5,
+    "immediate": {
+      "draw": {
+        "count": 2
+      }
+    }
+  },
+  {
+    "id": "teractor",
+    "name": "Teractor",
+    "set": "corpera",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "R30",
+    "description": "You start with 60 M€.",
+    "starting_megacredits": 60,
+    "card_discount": [
+      {
+        "tag": "earth",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "terraforming_ganymede",
+    "name": "Terraforming Ganymede",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": true,
+    "card_number": "197",
+    "description": "Raise your TR 1 step for each Jovian tag you have, including this.",
+    "cost": 33,
+    "vp": 2,
+    "semantics": "Raise your terraform rating 1 step for each Jovian tag you have, counting this card's own Jovian tag."
+  },
+  {
+    "id": "titanium_mine",
+    "name": "Titanium Mine",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "144",
+    "description": "Increase your titanium production 1 step.",
+    "cost": 7,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      }
+    }
+  },
+  {
+    "id": "toll_station",
+    "name": "Toll Station",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "099",
+    "description": "Increase your M€ production 1 step for each space tag your OPPONENTS have.",
+    "cost": 12,
+    "immediate": {
+      "production": {
+        "megacredits": {
+          "dynamic": {
+            "counts": "tag",
+            "tag": "space",
+            "scope": "opponents"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "trans_neptune_probe",
+    "name": "Trans-Neptune Probe",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "science",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "084",
+    "cost": 6,
+    "vp": 1
+  },
+  {
+    "id": "tropical_resort",
+    "name": "Tropical Resort",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "098",
+    "description": "Reduce your heat production 2 steps and increase your M€ production 3 steps.",
+    "cost": 13,
+    "vp": 2,
+    "immediate": {
+      "production": {
+        "megacredits": 3,
+        "heat": -2
+      }
+    }
+  },
+  {
+    "id": "vesta_shipyard",
+    "name": "Vesta Shipyard",
+    "set": "corpera",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "jovian",
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "057",
+    "description": "Increase your titanium production 1 step.",
+    "cost": 15,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      }
+    }
+  },
+  {
+    "id": "viral_enhancers",
+    "name": "Viral Enhancers",
+    "set": "corpera",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "science",
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "074",
+    "cost": 9,
+    "semantics": "The choice between a plant and a card resource is offered once per matching tag, and only when the played card itself stores microbes or animals. Otherwise you simply gain the plants.",
+    "passive": [
+      {
+        "trigger": "you play a card with a plant, microbe, or animal tag",
+        "effect": "for each matching tag, gain 1 plant, or add 1 resource to the played card if it stores microbes or animals"
+      }
+    ]
+  },
+  {
+    "id": "virus",
+    "name": "Virus",
+    "set": "corpera",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "050",
+    "description": "Remove up to 2 animals or 5 plants from any player.",
+    "cost": 1,
+    "semantics": "Choose one: remove up to 2 animals from any one card, or remove up to 5 plants from any one player."
+  },
+  {
+    "id": "acquired_space_agency",
+    "name": "Acquired Space Agency",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P35",
+    "description": "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "gain": {
+        "titanium": 6
+      },
+      "draw": {
+        "count": 2,
+        "tag": "space"
+      }
+    }
+  },
+  {
+    "id": "allied_bank",
+    "name": "Allied Bank",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "P01",
+    "description": "Increase your M€ production 4 steps. Gain 3 M€.",
+    "cost": 0,
+    "starting_megacredits": 3,
+    "immediate": {
+      "production": {
+        "megacredits": 4
+      },
+      "gain": {
+        "megacredits": 3
+      }
+    }
+  },
+  {
+    "id": "aquifer_turbines",
+    "name": "Aquifer Turbines",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": true,
+    "card_number": "P02",
+    "description": "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.",
+    "cost": 0,
+    "starting_megacredits": -3,
+    "immediate": {
+      "production": {
+        "energy": 2
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    },
+    "semantics": "The starting_megacredits of -3 is a cost: you pay 3 M€ when this prelude is played, you do not gain it.",
+    "play_restriction": "you must be able to pay 3 M€"
+  },
+  {
+    "id": "biofuels",
+    "name": "Biofuels",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "P03",
+    "description": "Increase your energy and plant production 1 step. Gain 2 plants.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "plants": 1,
+        "energy": 1
+      },
+      "gain": {
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "biolab",
+    "name": "Biolab",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "P04",
+    "description": "Increase your plant production 1 step. Draw 3 cards.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "plants": 1
+      },
+      "draw": {
+        "count": 3
+      }
+    }
+  },
+  {
+    "id": "biosphere_support",
+    "name": "Biosphere Support",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "P05",
+    "description": "Increase your plant production 2 steps. Decrease your M€ production 1 step.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": -1,
+        "plants": 2
+      }
+    }
+  },
+  {
+    "id": "business_empire",
+    "name": "Business Empire",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "P06",
+    "description": "Increase your M€ production 6 steps. Pay 6 M€.",
+    "cost": 0,
+    "starting_megacredits": -6,
+    "immediate": {
+      "production": {
+        "megacredits": 6
+      }
+    },
+    "semantics": "The starting_megacredits of -6 is a cost: you pay 6 M€ when this prelude is played, you do not gain it.",
+    "play_restriction": "you must be able to pay 6 M€, unless you have Manutech, whose M€ production gain covers the cost"
+  },
+  {
+    "id": "cheung_shing_mars",
+    "name": "Cheung Shing MARS",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "R16",
+    "description": "You start with 3 M€ production and 44 M€.",
+    "starting_megacredits": 44,
+    "immediate": {
+      "production": {
+        "megacredits": 3
+      }
+    },
+    "card_discount": [
+      {
+        "tag": "building",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "dome_farming",
+    "name": "Dome Farming",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant",
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P07",
+    "description": "Increase your M€ production 2 steps and plant production 1 step.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "plants": 1
+      }
+    }
+  },
+  {
+    "id": "donation",
+    "name": "Donation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P08",
+    "description": "Gain 21 M€.",
+    "cost": 0,
+    "starting_megacredits": 21,
+    "immediate": {
+      "gain": {
+        "megacredits": 21
+      }
+    }
+  },
+  {
+    "id": "early_settlement",
+    "name": "Early Settlement",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": false,
+    "card_number": "P09",
+    "description": "Increase your plant production 1 step. Place a city tile.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "plants": 1
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "eccentric_sponsor",
+    "name": "Eccentric Sponsor",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "P11",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "semantics": "Play one card from your hand at a 25 M€ discount, which makes almost any card free. If you play no card the prelude fizzles and the discount is not carried over."
+  },
+  {
+    "id": "ecology_experts",
+    "name": "Ecology Experts",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant",
+      "microbe"
+    ],
+    "bespoke": true,
+    "card_number": "P10",
+    "description": "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "plants": 1
+      }
+    },
+    "semantics": "Increase your plant production 1 step, then play one card from your hand ignoring its global parameter requirements. Tag and other non-global requirements still apply.",
+    "play_restriction": "you must have at least one card in hand that becomes playable once global requirements are ignored"
+  },
+  {
+    "id": "experimental_forest",
+    "name": "Experimental Forest",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "plant"
+    ],
+    "bespoke": false,
+    "card_number": "P12",
+    "description": "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "draw": {
+        "count": 2,
+        "tag": "plant"
+      },
+      "place": [
+        {
+          "tile": "greenery"
+        }
+      ]
+    }
+  },
+  {
+    "id": "galilean_mining",
+    "name": "Galilean Mining",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "jovian"
+    ],
+    "bespoke": true,
+    "card_number": "P13",
+    "description": "Increase your titanium production 2 steps. Pay 5 M€.",
+    "cost": 0,
+    "starting_megacredits": -5,
+    "immediate": {
+      "production": {
+        "titanium": 2
+      }
+    },
+    "semantics": "The starting_megacredits of -5 is a cost: you pay 5 M€ when this prelude is played, you do not gain it.",
+    "play_restriction": "you must be able to pay 5 M€"
+  },
+  {
+    "id": "great_aquifer",
+    "name": "Great Aquifer",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P14",
+    "description": "Place 2 ocean tiles.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "place": [
+        {
+          "tile": "ocean",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "house_printing",
+    "name": "House Printing",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P36",
+    "description": "Increase your steel production 1 step.",
+    "cost": 10,
+    "vp": 1,
+    "immediate": {
+      "production": {
+        "steel": 1
+      }
+    }
+  },
+  {
+    "id": "huge_asteroid",
+    "name": "Huge Asteroid",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "P15",
+    "description": "Increase temperature 3 steps. Pay 5 M€.",
+    "cost": 0,
+    "starting_megacredits": -5,
+    "immediate": {
+      "global": {
+        "temperature": 3
+      }
+    },
+    "semantics": "The starting_megacredits of -5 is a cost: you pay 5 M€ when this prelude is played, you do not gain it.",
+    "play_restriction": "you must be able to pay 5 M€"
+  },
+  {
+    "id": "io_research_outpost",
+    "name": "Io Research Outpost",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "jovian",
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "P16",
+    "description": "Increase your titanium production 1 step. Draw a card.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      },
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "lava_tube_settlement",
+    "name": "Lava Tube Settlement",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": true,
+    "card_number": "P37",
+    "description": "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.",
+    "cost": 15,
+    "immediate": {
+      "production": {
+        "megacredits": 2,
+        "energy": -1
+      }
+    },
+    "semantics": "Places a city tile on a volcanic area, ignoring the usual rule that cities may not be placed next to another city. On a board with no volcanic spaces the city may go on any city-legal space.",
+    "play_restriction": "you must have at least 1 energy production and there must be a legal volcanic space"
+  },
+  {
+    "id": "loan",
+    "name": "Loan",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P17",
+    "description": "Gain 30 M€. Decrease your M€ production 2 steps.",
+    "cost": 0,
+    "starting_megacredits": 30,
+    "immediate": {
+      "production": {
+        "megacredits": -2
+      },
+      "gain": {
+        "megacredits": 30
+      }
+    }
+  },
+  {
+    "id": "martian_industries",
+    "name": "Martian Industries",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P18",
+    "description": "Increase your energy and steel production 1 step. Gain 6 M€.",
+    "cost": 0,
+    "starting_megacredits": 6,
+    "immediate": {
+      "production": {
+        "steel": 1,
+        "energy": 1
+      },
+      "gain": {
+        "megacredits": 6
+      }
+    }
+  },
+  {
+    "id": "martian_survey",
+    "name": "Martian Survey",
+    "set": "prelude",
+    "kind": "project",
+    "type": "event",
+    "tags": [
+      "science"
+    ],
+    "bespoke": false,
+    "card_number": "P38",
+    "description": "Oxygen must be 4% or lower. Draw two cards.",
+    "cost": 9,
+    "vp": 1,
+    "requirements": [
+      {
+        "type": "oxygen",
+        "max": 4
+      }
+    ],
+    "immediate": {
+      "draw": {
+        "count": 2
+      }
+    }
+  },
+  {
+    "id": "metal_rich_asteroid",
+    "name": "Metal-Rich Asteroid",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P19",
+    "description": "Increase temperature 1 step. Gain 4 titanium and 4 steel.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "gain": {
+        "steel": 4,
+        "titanium": 4
+      },
+      "global": {
+        "temperature": 1
+      }
+    }
+  },
+  {
+    "id": "metals_company",
+    "name": "Metals Company",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P20",
+    "description": "Increase your M€, steel and titanium production 1 step.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": 1,
+        "steel": 1,
+        "titanium": 1
+      }
+    }
+  },
+  {
+    "id": "mining_operations",
+    "name": "Mining Operations",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P21",
+    "description": "Increase your steel production 2 steps. Gain 4 steel.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "steel": 2
+      },
+      "gain": {
+        "steel": 4
+      }
+    }
+  },
+  {
+    "id": "mohole",
+    "name": "Mohole",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P22",
+    "description": "Increase your heat production 3 steps. Gain 3 heat.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "heat": 3
+      },
+      "gain": {
+        "heat": 3
+      }
+    }
+  },
+  {
+    "id": "mohole_excavation",
+    "name": "Mohole Excavation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P23",
+    "description": "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "steel": 1,
+        "heat": 2
+      },
+      "gain": {
+        "heat": 2
+      }
+    }
+  },
+  {
+    "id": "nitrogen_shipment",
+    "name": "Nitrogen Shipment",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P24",
+    "description": "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.",
+    "cost": 0,
+    "starting_megacredits": 5,
+    "immediate": {
+      "production": {
+        "plants": 1
+      },
+      "gain": {
+        "megacredits": 5,
+        "tr": 1
+      }
+    }
+  },
+  {
+    "id": "orbital_construction_yard",
+    "name": "Orbital Construction Yard",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "space"
+    ],
+    "bespoke": false,
+    "card_number": "P25",
+    "description": "Increase your titanium production 1 step. Gain 4 titanium.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      },
+      "gain": {
+        "titanium": 4
+      }
+    }
+  },
+  {
+    "id": "point_luna",
+    "name": "Point Luna",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "space",
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "R10",
+    "description": "You start with 1 titanium production and 38 M€.",
+    "starting_megacredits": 38,
+    "immediate": {
+      "production": {
+        "titanium": 1
+      }
+    },
+    "semantics": "A trigger on your own cards only.",
+    "passive": [
+      {
+        "trigger": "you play a card with at least one Earth tag",
+        "effect": "draw 1 card for each Earth tag on it"
+      }
+    ]
+  },
+  {
+    "id": "polar_industries",
+    "name": "Polar Industries",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P26",
+    "description": "Increase your heat production 2 steps. Place an ocean tile.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "heat": 2
+      },
+      "place": [
+        {
+          "tile": "ocean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "power_generation",
+    "name": "Power Generation",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "P27",
+    "description": "Increase your energy production 3 steps.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "energy": 3
+      }
+    }
+  },
+  {
+    "id": "psychrophiles",
+    "name": "Psychrophiles",
+    "set": "prelude",
+    "kind": "project",
+    "type": "active",
+    "tags": [
+      "microbe"
+    ],
+    "bespoke": false,
+    "card_number": "P39",
+    "description": "Temperature must be -20 C or lower.",
+    "cost": 2,
+    "resource_type": "Microbe",
+    "requirements": [
+      {
+        "type": "temperature",
+        "max": -20
+      }
+    ],
+    "action": {
+      "gain": {
+        "resources_here": 1
+      }
+    }
+  },
+  {
+    "id": "research_coordination",
+    "name": "Research Coordination",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "wild"
+    ],
+    "bespoke": false,
+    "card_number": "P40",
+    "description": "After being played, when you perform an action, the wild tag counts as any tag of your choice.",
+    "cost": 4
+  },
+  {
+    "id": "research_network",
+    "name": "Research Network",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "wild"
+    ],
+    "bespoke": false,
+    "card_number": "P28",
+    "description": "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": 1
+      },
+      "draw": {
+        "count": 3
+      }
+    }
+  },
+  {
+    "id": "robinson_industries",
+    "name": "Robinson Industries",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [],
+    "bespoke": true,
+    "card_number": "R27",
+    "description": "You start with 47 M€.",
+    "starting_megacredits": 47,
+    "semantics": "The action costs 4 M€ and increases your lowest production 1 step. Only productions tied for lowest are eligible; if several tie, you choose among them."
+  },
+  {
+    "id": "self_sufficient_settlement",
+    "name": "Self-Sufficient Settlement",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building",
+      "city"
+    ],
+    "bespoke": false,
+    "card_number": "P29",
+    "description": "Increase your M€ production 2 steps. Place a city tile.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": 2
+      },
+      "place": [
+        {
+          "tile": "city"
+        }
+      ]
+    }
+  },
+  {
+    "id": "sf_memorial",
+    "name": "SF Memorial",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P41",
+    "description": "Draw 1 card.",
+    "cost": 7,
+    "vp": 1,
+    "immediate": {
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "smelting_plant",
+    "name": "Smelting Plant",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "building"
+    ],
+    "bespoke": false,
+    "card_number": "P30",
+    "description": "Raise oxygen 2 steps. Gain 5 steel.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "gain": {
+        "steel": 5
+      },
+      "global": {
+        "oxygen": 2
+      }
+    }
+  },
+  {
+    "id": "society_support",
+    "name": "Society Support",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P31",
+    "description": "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "megacredits": -1,
+        "plants": 1,
+        "energy": 1,
+        "heat": 1
+      }
+    }
+  },
+  {
+    "id": "space_hotels",
+    "name": "Space Hotels",
+    "set": "prelude",
+    "kind": "project",
+    "type": "automated",
+    "tags": [
+      "space",
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "P42",
+    "description": "Requires 2 Earth tags. Increase M€ production 4 steps.",
+    "cost": 12,
+    "requirements": [
+      {
+        "type": "tag",
+        "tag": "earth",
+        "min": 2
+      }
+    ],
+    "immediate": {
+      "production": {
+        "megacredits": 4
+      }
+    }
+  },
+  {
+    "id": "supplier",
+    "name": "Supplier",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "power"
+    ],
+    "bespoke": false,
+    "card_number": "P32",
+    "description": "Increase your energy production 2 steps. Gain 4 steel.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "production": {
+        "energy": 2
+      },
+      "gain": {
+        "steel": 4
+      }
+    }
+  },
+  {
+    "id": "supply_drop",
+    "name": "Supply Drop",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [],
+    "bespoke": false,
+    "card_number": "P33",
+    "description": "Gain 3 titanium, 8 steel and 3 plants.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "gain": {
+        "steel": 8,
+        "titanium": 3,
+        "plants": 3
+      }
+    }
+  },
+  {
+    "id": "unmi_contractor",
+    "name": "UNMI Contractor",
+    "set": "prelude",
+    "kind": "prelude",
+    "type": "prelude",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": false,
+    "card_number": "P34",
+    "description": "Increase your TR 3 steps. Draw a card.",
+    "cost": 0,
+    "starting_megacredits": 0,
+    "immediate": {
+      "gain": {
+        "tr": 3
+      },
+      "draw": {
+        "count": 1
+      }
+    }
+  },
+  {
+    "id": "valley_trust",
+    "name": "Valley Trust",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "R34",
+    "description": "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.",
+    "starting_megacredits": 37,
+    "first_action": {
+      "text": "Draw 3 Prelude cards, and play one of them"
+    },
+    "card_discount": [
+      {
+        "tag": "science",
+        "amount": 2
+      }
+    ],
+    "semantics": "The 2 M€ discount on science-tag cards is in card_discount. The first action draws 3 Prelude cards from the prelude deck; you play one and discard the other two."
+  },
+  {
+    "id": "vitor",
+    "name": "Vitor",
+    "set": "prelude",
+    "kind": "corporation",
+    "type": "corporation",
+    "tags": [
+      "earth"
+    ],
+    "bespoke": true,
+    "card_number": "R35",
+    "description": "You start with 45 M€. As your first action, fund an award for free.",
+    "starting_megacredits": 48,
+    "first_action": {
+      "text": "Fund an award for free"
+    },
+    "semantics": "The printed starting M€ is 45. The database says 48 because Vitor's own effect fires when the corporation is played. The first action funds one award at no cost; in a solo game there are no awards, so it does nothing.",
+    "passive": [
+      {
+        "trigger": "you play a card with a printed victory point value greater than zero",
+        "effect": "gain 3 M€"
+      }
+    ]
+  }
+]

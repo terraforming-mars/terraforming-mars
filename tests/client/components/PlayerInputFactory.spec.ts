@@ -10,6 +10,7 @@ import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/S
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {RecursivePartial} from '@/common/utils/utils';
+import {asComplete} from './utils/models';
 
 describe('PlayerInputFactory', () => {
   it('AndOptions', async () => {
@@ -131,7 +132,7 @@ describe('PlayerInputFactory', () => {
     const wrapper = mount(PlayerInputFactory, {
       ...globalConfig,
       props: {
-        playerView: playerView,
+        playerView: asComplete(playerView),
         playerinput: {
           type: 'option',
           title: 'test',
@@ -167,7 +168,7 @@ describe('PlayerInputFactory', () => {
     const wrapper = mount(PlayerInputFactory, {
       ...globalConfig,
       props: {
-        playerView: playerView,
+        playerView: asComplete(playerView),
         playerinput: {
           type: 'option',
           title: 'test',
@@ -231,8 +232,8 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     },
     props: {
       players: [],
-      playerView: playerView,
-      playerinput: fullInput,
+      playerView: asComplete(playerView),
+      playerinput: asComplete<PlayerInputModel>(fullInput),
       onsave: () => {
       },
       showsave: true,

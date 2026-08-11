@@ -1,5 +1,5 @@
 {
-  "game id: ": "Spiel-ID: ",
+  "game id:": "Spiel-ID: ",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Anleitung: Um das Spiel zu starten, kopiere und teile die Links mit allen Mitspielern und klicke dann auf deinen Namen.",
   "Save this page in case you or one of your opponents loses a link.": "Speichere diese Seite für denn Fall dass du oder einer deiner Mitspieler den Link verliert.",
   "Read our changelog to get the latest updates.": "Lese unser Changelog, um die neuesten Updates zu erhalten.",
@@ -14,7 +14,6 @@
   "Copied!": "Kopiert",
   "copy": "kopieren",
   "Close": "Schließen",
-  " show tiles ": "Zeige Teile",
   "1st": "1.",
   "2nd": "2.",
   "3rd": "3.",
@@ -38,7 +37,7 @@
   "Include fan Milestones/Awards": "Inkl. Fan Meilensteine/Auszeichungen",
   "Official Random α": "Offiziell zufällig α",
   "The new Milestones and Awards are still in active development.": "Die neuen Meilensteine und Auszeichnungen befinden sich noch in der Entwicklung.",
-  "Please don't report anything but functional issues. ": "Bitte melde nur funktionale Probleme.",
+  "Please don't report anything but functional issues.": "Bitte melde nur funktionale Probleme.",
   "Draft:": "",
   "Research phase": "Forschungsphase",
   "Initial": "Start",

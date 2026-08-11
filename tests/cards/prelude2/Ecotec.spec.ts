@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Ecotec} from '@/server/cards/prelude2/Ecotec';
 import {Tardigrades} from '@/server/cards/base/Tardigrades';
+import {Ants} from '@/server/cards/base/Ants';
 import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {newCard} from '@/server/createCard';
@@ -8,6 +9,7 @@ import {ICard} from '@/server/cards/ICard';
 import {IGame} from '@/server/IGame';
 import {OrOptions} from '@/server/inputs/OrOptions';
 import {SelectCard} from '@/server/inputs/SelectCard';
+import {SelectOption} from '@/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
@@ -62,21 +64,36 @@ describe('Ecotec', () => {
     setupForMicrobeChoice();
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    orOptions.options[1].cb(); // options[0] is the microbe SelectCard, options[1] is "Gain plant"
+    orOptions.options[1].cb(); // Second option gains the plant.
 
     expect(player.plants).to.eq(1);
     expect(tardigrades.resourceCount).to.eq(0);
   });
 
-  it('choosing to add a microbe adds it to the selected card', () => {
+  it('offers the only microbe card directly', () => {
     setupForMicrobeChoice();
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    const selectCard = cast(orOptions.options[0], SelectCard<ICard>);
-    expect(selectCard.cards).deep.eq([tardigrades]);
-    selectCard.cb([tardigrades]);
+    const selectOption = cast(orOptions.options[0], SelectOption);
+    selectOption.cb(undefined);
 
     expect(tardigrades.resourceCount).to.eq(1);
+    expect(player.plants).to.eq(0);
+  });
+
+  it('choosing to add a microbe selects from multiple cards', () => {
+    const ants = new Ants();
+    player.playedCards.push(tardigrades, ants);
+    card.onCardPlayed(player, new ProtectedGrowth());
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard<ICard>);
+    expect(selectCard.cards).deep.eq([tardigrades, ants]);
+    selectCard.cb([ants]);
+
+    expect(tardigrades.resourceCount).eq(0);
+    expect(ants.resourceCount).eq(1);
     expect(player.plants).to.eq(0);
   });
 

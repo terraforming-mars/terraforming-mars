@@ -8,6 +8,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
+import {message} from '../logs/MessageBuilder';
 
 export class GainAnyResourceButScienceDeferred extends DeferredAction {
   constructor(player: IPlayer) {
@@ -23,7 +24,8 @@ export class GainAnyResourceButScienceDeferred extends DeferredAction {
         .andThen(([card]) => {
           this.player.addResourceTo(card, {log: true});
           return undefined;
-        }));
+        })
+        .maybeConvertToSelectOption(message('Add resource to ${0}', (b) => b.card(cards[0]))));
     }
     orOptions.options.push(new SelectResource('Gain 1 standard resource')
       .andThen((resource) => {

@@ -34,7 +34,8 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
       .andThen(([card]) => {
         this.player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
-      });
+      })
+      .maybeConvertToSelectOption(message('Add resource to ${0}', (b) => b.card(resourceCards[0])));
     const wild = new OrOptions(selectCard, this.selectStandardResources(1));
     if (this.standardResourceCount > 0) {
       wild.andThen(() => {

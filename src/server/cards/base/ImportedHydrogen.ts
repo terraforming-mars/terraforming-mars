@@ -58,34 +58,22 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
-    if (availableMicrobeCards.length === 1) {
-      const targetMicrobeCard = availableMicrobeCards[0];
-      availableActions.push(new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(3).card(targetMicrobeCard)), 'Add microbes').andThen(() => {
-        player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
-        return undefined;
-      }));
-    } else if (availableMicrobeCards.length > 1) {
-      availableActions.push(new SelectCard('Add 3 microbes to a card',
-        'Add microbes',
-        availableMicrobeCards)
+    if (availableMicrobeCards.length > 0) {
+      availableActions.push(new SelectCard('Add 3 microbes to a card', 'Add microbes', availableMicrobeCards)
         .andThen(([card]) => {
           player.addResourceTo(card, {qty: 3, log: true});
           return undefined;
-        }));
+        })
+        .maybeConvertToSelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(3).card(availableMicrobeCards[0]))));
     }
 
-    if (availableAnimalCards.length === 1) {
-      const targetAnimalCard = availableAnimalCards[0];
-      availableActions.push(new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(targetAnimalCard)), 'Add animals').andThen(() => {
-        player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
-        return undefined;
-      }));
-    } else if (availableAnimalCards.length > 1) {
+    if (availableAnimalCards.length > 0) {
       availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards)
         .andThen(([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        }));
+        })
+        .maybeConvertToSelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(availableAnimalCards[0]))));
     }
 
     return new OrOptions(...availableActions);

@@ -5,6 +5,8 @@ import {RoboticWorkforce} from '../../src/server/cards/base/RoboticWorkforce';
 import {IoMiningIndustries} from '../../src/server/cards/base/IoMiningIndustries';
 import {ICard} from '../../src/server/cards/ICard';
 import {CardName} from '../../src/common/cards/CardName';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
+import {cast} from '../../src/common/utils/utils';
 
 describe('SelectCard', () => {
   let aquiferPumping: ICard;
@@ -37,6 +39,24 @@ describe('SelectCard', () => {
     expect(selected).deep.eq([ioMiningIndustries]);
   });
 
+  it('Converts a single card to an option', () => {
+    const input = new SelectCard('Select card', 'Add resource', [aquiferPumping])
+      .andThen(cb);
+    const selectOption = cast(input.maybeConvertToSelectOption('Add resource to Aquifer Pumping'), SelectOption);
+
+    expect(selectOption.buttonLabel).eq('Add resource');
+    selectOption.cb(undefined);
+    expect(selected).deep.eq([aquiferPumping]);
+  });
+
+  it('Keeps a card selection for multiple cards', () => {
+    const input = new SelectCard('Select card', 'Add resource', [aquiferPumping, ioMiningIndustries])
+      .andThen(cb);
+    const selectCard = cast(input.maybeConvertToSelectOption('Add resource'), SelectCard);
+
+    expect(selectCard).eq(input);
+  });
+
   it('Cannot select unavailable card', () => {
     const selectCards = new SelectCard(
       'Select card',
@@ -66,4 +86,3 @@ describe('SelectCard', () => {
       .to.throw(Error, /Robotic Workforce is not available/);
   });
 });
-

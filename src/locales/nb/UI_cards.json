@@ -159,9 +159,9 @@
     "STEAL 2": "STJEL 2",
     "OR STEAL": "ELLER STJEL",
     "* OR": "* ELLER",
-    "*  4": "",
-    "+    4": "",
-    "*    +": "",
+    "* 4": "",
+    "+ 4": "",
+    "* +": "",
     "colony": "Koloni",
     "awards": "Utmerkelse",
 

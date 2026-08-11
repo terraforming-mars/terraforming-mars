@@ -11,7 +11,7 @@
 
     "ECOLINE": "",
     "Ecoline": "エコライン",
-    " EcoLine ": "エコライン",
+    "EcoLine": "エコライン",
     "You start with 2 plant production, 3 plants, and 36 M€.": "初期資源：36MC. 3植物. 初期産出：植物産出+2.",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "効果：緑地を配置するコストが8植物→7植物へ減る.",
 
@@ -45,7 +45,7 @@
 
     "THORGATE": "",
     "ThorGate": "トールゲート",
-    " Thorgate ": "トールゲート",
+    "Thorgate": "トールゲート",
     "You start with 1 energy production and 48 M€.":"初期資源：48MC. 初期産出：電力産出+1.",
     "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "効果：電力タグカードのプレイコスト-3MC. 標準プロジェクト「発電所の設置」のコスト-3MC.",
 

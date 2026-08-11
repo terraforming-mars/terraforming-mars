@@ -37,6 +37,7 @@
   "7 Jovian": "7 Jupiter",
   "Venus Earth Jovian": "Venus Aarde Jupiter",
   "Plant Microbe Animal": "Plant Microbe Dier",
+  "Plant Animal Microbe": "Plant Dier Microbe",
   "9 Resource types": "9 Soorten grondstoffen",
   "3 floaters": "3 floater",
   "5 floaters": "5 zwevers",
@@ -163,19 +164,22 @@
   "*  4": "",
   "+    4": "",
   "*    +": "",
-  "Gain 3 plants.": "Ontvang 3 planten.",
-  "colony": "Kolonie",
-  "awards": "onderscheidingen",
-  "Colony City": "Koloniestad",
-  "max 1 Colony": "max. 1 Kolonie",
-  "play": "spelen",
-  "replay": "speel opnieuw",
-  "1 VP per 2 animals on this card.": "1 OP per twee dieren op deze kaart.",
-  "${0} placed ${1} tile on (${2}, ${3}": "${0} heeft \"${1}\" geplaatst op (${2}, ${3}.",
   "X": "",
   "x": "",
   "4x": "",
   "Yes": "Ja",
   "No": "Nee",
-  "max": ""
+  "max": "",
+  "Gain 3 plants.": "Ontvang 3 planten.",
+  "colony": "Kolonie",
+  "awards": "onderscheidingen",
+
+  "Colony City": "Koloniestad",
+  "max 1 Colony": "max. 1 Kolonie",
+  "play": "spelen",
+  "replay": "speel opnieuw",
+
+  "1 VP per 2 animals on this card.": "1 OP per twee dieren op deze kaart.",
+
+  "${0} placed ${1} tile on (${2}, ${3}": "${0} heeft \"${1}\" geplaatst op (${2}, ${3}."
 }

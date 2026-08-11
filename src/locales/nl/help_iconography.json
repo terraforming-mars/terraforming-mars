@@ -10,6 +10,7 @@
   "Tiles": "Tegels",
   "Global Parameters": "Globale parameters",
   "Others": "Overig",
+
   "Building": "Gebouw",
   "Space": "Ruimte",
   "Wild": "Wildcard",
@@ -22,10 +23,13 @@
   "Preservation": "Behoud",
   "Camp": "Kamp",
   "Disease": "Ziekte",
+
   "Special": "Speciaal",
+
   "Temperature": "Temperatuur",
   "Oxygen": "Zuurstof",
   "Oceans": "Oceanen",
+
   "Victory Point (VP)": "Overwinningspunt (OP)",
   "Terraform Rating (TR)": "Terraformniveau (TN)",
   "Project Card": "Projectkaart",
@@ -33,14 +37,17 @@
   "Colony": "Kolonie",
   "Trade Fleet": "Handelsvloot",
   "Delegate": "Afgevaardigde",
+
   "Standard Projects from Expansions and Solo Mode": "Standaardprojecten van uitbreidingen en solo-modus",
   "Standard Project from Fan-made Expansions": "Standaardproject van door fans gemaakte uitbreidingen",
+
   "Initial Drafting (optional variant)": "Initiële draft (optionele variant)",
   "Draw 3 corporation cards": "Trek 3 corporatiekaarten",
   "Draw 4 prelude cards": "Trek 4 preludekaarten",
   "Draw 5 project cards. Draft. Pick one card and pass to the player above in turn order. Repeat until you have 5 cards.": "Trek 5 projectkaarten. Draft. Kies één kaart en geef die aan de speler voor jou in de beurtvolgorde. Herhaal totdat je 5 kaarten hebt.",
   "Draw 5 more project cards. Draft and pass to the player below in turn order instead.": "Trek 5 extra projectkaarten. Draft en geef in plaats daarvan aan de speler na jou in de beurtvolgorde.",
   "Draft the prelude cards. Pick one card and pass to the player above in turn order. Repeat until you have 4 preludes.": "Draft de preludekaarten. Kies één kaart en geef die aan de speler voor jou in de beurtvolgorde. Herhaal totdat je 4 preludes hebt.",
+
   "Each generation": "Elke generatie",
   "Initial Research Phase (Generation 1 only)": "Initiële onderzoeksfase (alleen generatie 1)",
   "Select which corporation, 2 preludes and project cards to keep.": "Kies welke corporatie, 2 preludekaarten en projectkaarten je behoudt.",
@@ -93,10 +100,12 @@
   "Move the coming (middle) Global Event to current position (right). Add its lower neutral delegate.": "Verplaats de komende (middelste) globale gebeurtenis naar de huidige positie (rechts). Voeg de lagere neutrale afgevaardigde toe.",
   "Move the distant (left) Global Event to coming position (middle)": "Verplaats de verre (linkse) globale gebeurtenis naar de komende positie (midden)",
   "Reveal a new Global Event in the distant (left) position. Add its top neutral delegate": "Plaats een nieuwe globale gebeurtenis op de verre (linkse) positie. Voeg de bovenste neutrale afgevaardigde toe",
+
   "End Game": "Einde van het spel",
   "In turn order, convert plants to greeneries.": "In beurtvolgorde zet je planten om in groentegels.",
   "Assign awards": "Wijs onderscheidingen toe",
   "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Score: TN + tegels + kaarten + mijlpalen + onderscheidingen + (1 OP per voorzitter en partijleider",
+
   "Game Iconology": "Speliconologie",
   "Game Phases": "Spelfasen",
   "Hot Keys": "Sneltoetsen",

@@ -7,6 +7,7 @@
   "Don't be greedy with card selection": "Wees niet te hebberig bij het kiezen van kaarten",
   "Try to increase heat production, not Megacredits": "Probeer je warmteproductie te verhogen, niet je megacredits",
   "Try starting with the Beginner corporation": "Probeer te starten met de beginnerscorporatie",
+
   "You win!": "Je wint!",
   "${0} won!": "${0} heeft gewonnen!",
   "won!": "heeft gewonnen!",
@@ -17,6 +18,7 @@
   "Can you get": "Kun jij",
   "+ Victory Points?": "+ overwinningspunten halen?",
   "Go to main page": "Ga naar de hoofdpagina",
+
   "Victory point breakdown after": "Verdeling van overwinningspunten na",
   "Victory points details": "Details van overwinningspunten",
   "Victory points details for": "Details van overwinningspunten voor",
@@ -35,24 +37,30 @@
   "Nuclear Zone:ares": "Nucleaire Zone:ares",
   "Ecological Zone:ares": "Ecologische Zone:ares",
   "Underworld Corruption Bribe": "Onderwereld-corruptieomkoping",
+
   "Global Parameter Contributions": "Bijdragen aan globale parameters",
   "Completed!": "Voltooid!",
   "% completed": "% voltooid",
   "L. Habitat": "M. Habitat",
   "L. Mining": "M. Mijnbouw",
   "L. Logistic": "M. Logistiek",
+
   "Final situation on the board": "Eindsituatie op het bord",
   "Final game log": "Eindspel-log",
+
   "Most tags on the earth track": "Meeste labels op het aardespoor",
   "Most tags on the venus track": "Meeste labels op het venusspoor",
   "Most tags on the jovian track": "Meeste labels op het jupiterspoor",
   "Most tags on the mars track": "Meeste labels op het marsspoor",
   "Most tags on the moon track": "Meeste labels op het maanspoor",
+
   "${0} place for ${1} award (funded by ${2})": "${0}e plaats voor onderscheiding ${1} (gefinancierd door ${2})",
   "Claimed ${0} milestone": "Mijlpaal ${0} geclaimd",
+
   "M": "",
   "A": "O",
   "Milestones points": "Punten voor mijlpalen",
   "Awards points": "Punten voor onderscheidingen",
+
   "Download game log": "Download spel-log"
 }

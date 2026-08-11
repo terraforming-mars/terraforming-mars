@@ -18,12 +18,12 @@
   "Hide tile confirmation": "Tegelplaatsing niet bevestigen",
   "Show discount on cards": "Toon korting op kaarten",
   "Show sidebar notification": "Toon meldingen in zijbalk",
+  "Symbol Overlay": "labeloverlay",
+  "Add symbols on top of player colors.": "Voeg symbolen toe boven op de spelerskleuren.",
   "Experimental UI": "Experimentele gebruikersinterface",
   "Tutorial Mode (req. refresh)": "Zelfstudie modus (vereist opnieuw laden)",
   "Language": "Taal",
   "refresh page": "pagina vernieuwen",
   "to see changes": "om veranderingen te zien",
-  "Report a bug": "Meld een fout",
-  "Symbol Overlay": "labeloverlay",
-  "Add symbols on top of player colors.": "Voeg symbolen toe boven op de spelerskleuren."
+  "Report a bug": "Meld een fout"
 }

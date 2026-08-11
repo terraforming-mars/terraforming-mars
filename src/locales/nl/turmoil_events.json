@@ -4,6 +4,7 @@
   "Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.": "Verlies 3 M€ per corruptiegrondstof die je hebt (max 5), min invloed. Spelers met 0 corruptie verhogen hun TN met 1.",
   "Gain 1 M€ production (max 5) for every 2 underworld tokens you own. Each point of influence counts as an extra underworld token.": "Verhoog je M€-productie met 1 (max 5) voor elke 2 onderwereldtokens die je bezit. Elk punt invloed telt als een extra onderwereldtoken.",
   "Discard all unclaimed underground resources. Lose 2 M€ for each building tag (max 7) minus influence and claimed underground resource tokens.": "Leg alle niet-opgeeiste ondergrondse grondstoffen af. Verlies 2 M€ voor elk bouwlabel (max 7), min invloed en opgeeiste ondergrondse grondstoftokens.",
+
   "Discard 2 cards from hand. Gain 2 M€ per influence.": "Leg 2 kaarten uit je hand af. Ontvang 2 M€ per invloed.",
   "Gain 2 M€ per Venus tag (max 5) and influence.": "Ontvang 2 M€ per Venuslabel (max 5) en invloed.",
   "Gain 1 plant per plant production (max 5) and influence.": "Ontvang 1 plant per plantproductie (max 5) en invloed.",
@@ -47,6 +48,7 @@
   "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "Verlies 1 plant voor elk Aardelabel dat je bezit (max 5), daarna verminderd met invloed.",
   "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "Verlaag de temperatuur en het zuurstofniveau elk met 2 stappen. (-4 °C, -2% O2)",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "Betaal 10 M€. Voeg 2 data toe aan ELKE datakaart. Voeg 1 data toe aan een willekeurige datakaart voor elke invloed die je hebt.",
+
   "Seismic Predictions": "Seismische Voorspellingen",
   "Migration Underground": "Migratie Ondergronds",
   "Media Stir": "Media-Ophef",

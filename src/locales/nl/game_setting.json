@@ -1,5 +1,5 @@
 {
-  "game id: ": "Spel-ID: ",
+  "game id:": "Spel-ID:",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Instructies: Om het spel te starten, kopieer en deel je de links met alle spelers en klik je vervolgens op je naam.",
   "Save this page in case you or one of your opponents loses a link.": "Sla deze pagina op voor het geval jij of een van je medespelers de link kwijtraakt.",
   "Read our changelog to get the latest updates.": "Lees onze changelog voor de nieuwste updates.",
@@ -14,7 +14,6 @@
   "Copied!": "Gekopieerd!",
   "copy": "kopiëren",
   "Close": "Sluiten",
-  " show tiles ": " toon tegels ",
   "1st": "1.",
   "2nd": "2.",
   "3rd": "3.",
@@ -38,7 +37,7 @@
   "Include fan Milestones/Awards": "Inclusief mijlpalen/onderscheidingen van fans",
   "Official Random α": "Officieel Willekeurig α",
   "The new Milestones and Awards are still in active development.": "De nieuwe mijlpalen en onderscheidingen zijn nog in actieve ontwikkeling.",
-  "Please don't report anything but functional issues. ": "Meld alsjeblieft alleen functionele problemen. ",
+  "Please don't report anything but functional issues.": "Meld alsjeblieft alleen functionele problemen.",
   "Draft:": "",
   "Research phase": "Onderzoeksfase",
   "Initial": "Start",

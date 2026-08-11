@@ -7,6 +7,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
 import {SpecialTags} from '@/client/cards/SpecialTags';
+import {asComplete} from '../utils/models';
 
 describe('PlayerTags', () => {
   let wrapper: VueWrapper<any>;
@@ -114,8 +115,8 @@ describe('PlayerTags', () => {
         },
       },
       props: {
-        player: player,
-        playerView: playerView,
+        player: asComplete<PublicPlayerModel>(player),
+        playerView: asComplete<PlayerViewModel>(playerView),
         hideZeroTags: false,
         conciseTagsViewDefaultValue: false,
       },

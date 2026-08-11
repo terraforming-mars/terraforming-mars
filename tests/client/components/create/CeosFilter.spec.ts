@@ -1,8 +1,8 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
+import {findModuleItemFilter} from '../utils/findComponent';
 import CeosFilter from '@/client/components/create/CeosFilter.vue';
-import ModuleItemFilter from '@/client/components/create/ModuleItemFilter.vue';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {CardName} from '@/common/cards/CardName';
 
@@ -25,7 +25,7 @@ describe('CeosFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, selected: []},
     });
-    expect(wrapper.findComponent(ModuleItemFilter).exists()).to.be.true;
+    expect(findModuleItemFilter(wrapper).exists()).to.be.true;
   });
 
   it('passes "CEOs" as the title', () => {
@@ -33,7 +33,7 @@ describe('CeosFilter', () => {
       ...globalConfig,
       props: {expansions: EXPANSIONS, selected: []},
     });
-    expect(wrapper.findComponent(ModuleItemFilter).props('title')).to.eq('CEOs');
+    expect(findModuleItemFilter(wrapper).props('title')).to.eq('CEOs');
   });
 
   it('uses the provided selection when selected is non-empty', () => {
@@ -42,7 +42,7 @@ describe('CeosFilter', () => {
       ...globalConfig,
       props: {expansions: EXPANSIONS, selected: provided},
     });
-    const inner = wrapper.findComponent(ModuleItemFilter);
+    const inner = findModuleItemFilter(wrapper);
     expect(inner.props('selected')).to.deep.eq(provided);
   });
 
@@ -51,7 +51,7 @@ describe('CeosFilter', () => {
       ...globalConfig,
       props: {expansions: EXPANSIONS, selected: []},
     });
-    const inner = wrapper.findComponent(ModuleItemFilter);
+    const inner = findModuleItemFilter(wrapper);
     const selected: Array<string> = inner.props('selected');
     expect(selected.length).to.be.greaterThan(0);
     // Beginner Corporation must be excluded
@@ -64,7 +64,7 @@ describe('CeosFilter', () => {
       props: {expansions: EXPANSIONS, selected: []},
     });
     const payload: Array<CardName> = [CardName.HELION];
-    await wrapper.findComponent(ModuleItemFilter).vm.$emit('update:selected', payload);
+    await findModuleItemFilter(wrapper).vm.$emit('update:selected', payload);
     const emitted = wrapper.emitted('ceo-list-changed');
     expect(emitted).to.have.length(1);
     expect(emitted![0][0]).to.deep.eq(payload);
@@ -75,7 +75,7 @@ describe('CeosFilter', () => {
       ...globalConfig,
       props: {expansions: EXPANSIONS, selected: []},
     });
-    await wrapper.findComponent(ModuleItemFilter).vm.$emit('close');
+    await findModuleItemFilter(wrapper).vm.$emit('close');
     expect(wrapper.emitted('close')).to.have.length(1);
   });
 });

@@ -7,10 +7,6 @@
     "src/client/**/*.ts",
     "src/client/**/*.vue",
     "src/common/**/*.ts",
-    "tests/client/components/AdjacencyBonus.spec.ts",
-    "tests/client/components/Bonus.spec.ts",
-    "tests/client/components/App.spec.ts",
-    "tests/client/components/Award.spec.ts",
-    "tests/client/components/Awards.spec.ts"
+    "tests/client/**/*.ts",
   ]
 }

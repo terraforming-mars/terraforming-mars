@@ -24,8 +24,8 @@
   "victoryPoints": "Очки перемоги",
   "terraformRating": "Рейтинг терраформування",
   "milestones": "Віхи",
-  "Claimed ": "Завоювано ",
-  " milestone": " Віха",
+  "Claimed": "Завоювано ",
+  "milestone": " Віха",
   "greenery": "Ліс",
   "city": "Місто",
 
@@ -38,7 +38,7 @@
   "random": "Випадково",
 
   "GEN": "ГЕН",
-  "Gen: ": "Ген",
+  "Gen:": "Ген",
   "Venus scale": "Шкала Венери",
   "Generation Marker": "Маркер покоління",
   "Ruling Party": "Партія, що править",

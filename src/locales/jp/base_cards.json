@@ -23,11 +23,6 @@
     "Martian Rails": "火星鉄道",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市タイルの数分、1MC獲得.",
 
-    "2 Oceans": "海洋2枚",
-    "3 Oceans": "海洋3枚",
-    "4 Oceans": "海洋4枚",
-    "5 Oceans": "海洋5枚",
-    "6 Oceans": "海洋6枚",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 特殊タイルを配置. 電力産出-2し、MC産出+5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "首都に隣接する海洋1枚毎に1VP.",
 
@@ -650,21 +645,12 @@
     "AI Central": "AIセントラル",
 
     "Action: Draw 2 cards.": "アクション：2ドロー.",
-    "2 Science": "科学タグ2つ以上.",
-    "3 Science": "科学タグ3つ以上.",
-    "5 Science": "科学タグ5つ以上.",
     "(Effect: Draw 2 cards.)": "(効果：2ドロー.)",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "条件：科学タグ3つ以上. 電力産出-1.",
 
     "HYDROGEN TO VENUS": "金星への水素",
 
-    "Plant Microbe Animal": "植物タグ、微生物タグ、動物タグ.",
-    "max 3 Oceans": "海洋3枚以下.",
-    "2 Power": "電力タグ2つ以上.",
-    "7 Science": "科学タグ7つ以上.",
-    "4 Science": "科学タグ4つ以上.",
-    "2 Cities": "都市タイル2枚以上",
     "Standard projects": "標準プロジェクト",
 
     "Requires 2 Earth tags. Increase M€ production 4 steps.": "条件：地球タグ2つ以上. MC産出+4.",

@@ -31,7 +31,7 @@ describe('Sidebar', () => {
         oxygen: 0,
         oceans: 0,
         venus: 0,
-        moonData: {habitatRate: 0, miningRate: 0, logisticRate: 0},
+        moonData: {habitatRate: 0, miningRate: 0, logisticRate: 0, spaces: []},
         turmoil: undefined,
         lastSoloGeneration: 14,
         deckSize: 100,

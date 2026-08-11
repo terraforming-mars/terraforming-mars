@@ -47,11 +47,6 @@
     "Martian Rails": "화성 열차",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "행동: 에너지 자원 1개 소비해서 화성에 배치된 아무 도시 타일 1장당 1 M€ 획득.",
 
-    "2 Oceans": "해양 타일 2장",
-    "3 Oceans": "해양 타일 3장",
-    "4 Oceans": "해양 타일 4장",
-    "5 Oceans": "해양 타일 5장",
-    "6 Oceans": "해양 타일 6장",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 감소. 메가크레딧 생산력 5 증가. 도시 타일 1장 배치.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "이 특수 타일과 인접한 해양 타일 1장당 1점.",
 
@@ -445,7 +440,6 @@
     "It must be -10 C or colder.": "조건: 기온 -10℃ 이하.",
 
     "Advanced Ecosystems": "발달된 생태계",
-    "Plant Animal Microbe": "식물/동물/미생물",
     "Requires a plant tag, a microbe tag, and an animal tag.": "조건: 보유한 식물/미생물/동물 태그 각 1개 이상.",
 
     "Requires 4 ocean tiles. Increase your energy production 2 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 증가.",
@@ -673,23 +667,12 @@
 
     "AI Central": "중앙 인공지능 센터",
     "Action: Draw 2 cards.": "행동: 카드 2장 획득.",
-    "2 Science": "과학 태그 2개 이상",
-    "3 Science": "과학 태그 3개 이상",
-    "5 Science": "과학 태그 5개 이상",
     "Effect: Draw 2 cards.": "지속 효과: 카드 2장 획득.",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 감소.",
 
   "HYDROGEN TO VENUS": "금성으로 수소 수송",
 
-  "Plant Microbe Animal": "식물 미생물 동물 태그 각각 1개 이상",
-  "Forest": "녹지 타일 1개 이상",
-  "2 Power": "전기 태그 2개 이상",
-  "7 Science": "과학 태그 7개 이상",
-  "Titanium production": "티타늄 생산력 1 이상",
-  "Steel production": "강철 생산력 1 이상",
-  "4 Science": "과학 태그 4개 이상",
-  "2 Cities": "도시 타일 2개 이상",
 
   "Increase your energy production 1 step": "",
   "Increase your energy production 3 steps": ""

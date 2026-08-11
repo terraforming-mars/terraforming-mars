@@ -12,6 +12,7 @@ import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import {asComplete} from './utils/models';
 
 describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
@@ -34,7 +35,7 @@ describe('SelectProjectCardToPlay', () => {
     const sortable = mount(SelectProjectCardToPlay, {
       ...globalConfig,
       props: {
-        playerView: {
+        playerView: asComplete<PlayerViewModel>({
           cardsInHand: [{
             calculatedCost: 4,
             name: CardName.ANTS,
@@ -43,13 +44,12 @@ describe('SelectProjectCardToPlay', () => {
             name: CardName.BIRDS,
           }],
           id: 'p-foo',
-          selfReplicatingRobotCards: [],
           thisPlayer: {
             steel: 0,
             tableau: [],
           },
-        },
-        playerinput: {
+        }),
+        playerinput: asComplete<SelectProjectCardToPlayModel>({
           type: 'projectCard',
           title: 'foo',
           cards: [{
@@ -61,7 +61,7 @@ describe('SelectProjectCardToPlay', () => {
           }],
           paymentOptions: {},
           buttonLabel: 'Save',
-        },
+        }),
         onsave: () => {},
         showsave: true,
         showtitle: true,
@@ -806,7 +806,7 @@ describe('SelectProjectCardToPlay', () => {
     return mount(SelectProjectCardToPlay, {
       ...globalConfig,
       props: {
-        playerView: playerView,
+        playerView: asComplete<PlayerViewModel>(playerView),
         playerinput: playerInput,
         onsave: (response: SelectProjectCardToPlayResponse) => {
           saveResponse = response;

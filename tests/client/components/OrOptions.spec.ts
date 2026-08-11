@@ -5,6 +5,9 @@ import OrOptions from '@/client/components/OrOptions.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {PlayerInputModel, SelectCardModel} from '@/common/models/PlayerInputModel';
+import {asComplete} from './utils/models';
 
 describe('OrOptions', () => {
   it('saves the options ignoring hidden', async () => {
@@ -23,15 +26,16 @@ describe('OrOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: 'foo',
-          options: [{
+          buttonLabel: '',
+          options: [asComplete<SelectCardModel>({
             type: 'card',
             title: 'hide this',
             showOnlyInLearnerMode: true,
-          }, {
+          }), {
             type: 'option',
             title: 'select a',
             buttonLabel: '',
@@ -68,15 +72,16 @@ describe('OrOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: 'foo',
-          options: [{
+          buttonLabel: '',
+          options: [asComplete<SelectCardModel>({
             type: 'card',
             title: 'hide this',
             showOnlyInLearnerMode: true,
-          }, {
+          }), {
             type: 'option',
             title: 'select a',
             buttonLabel: '',
@@ -117,16 +122,19 @@ describe('OrOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: 'foo',
+          buttonLabel: '',
           options: [{
             type: 'option',
             title: 'select a',
+            buttonLabel: '',
           }, {
             type: 'option',
             title: 'select b',
+            buttonLabel: '',
           }],
         },
         onsave: () => {},
@@ -163,10 +171,11 @@ describe('OrOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: 'foo',
+          buttonLabel: '',
           options: [{
             type: 'option',
             title: 'select a',
@@ -211,10 +220,11 @@ describe('OrOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: 'foo',
+          buttonLabel: '',
           options: [{
             type: 'option',
             title: 'select a',
@@ -245,14 +255,14 @@ describe('OrOptions', () => {
       ...globalConfig,
       global: {...globalConfig.global, components: {'PlayerInputFactory': PlayerInputFactory}},
       props: {
-        playerView: {},
-        playerinput: {type: 'or', title: '', options: [{type: 'option', title: 'a'}]},
+        playerView: asComplete<PlayerViewModel>({}),
+        playerinput: {type: 'or', title: '', buttonLabel: '', options: [{type: 'option', title: 'a', buttonLabel: ''}]},
         onsave: () => {},
       },
     }).vm;
-    expect(vm.showChildSaveButton({type: 'card', min: 0, max: 5})).to.be.true;
-    expect(vm.showChildSaveButton({type: 'card', min: 1, max: 1})).to.be.false;
-    expect(vm.showChildSaveButton({type: 'option'})).to.be.false;
+    expect(vm.showChildSaveButton(asComplete<PlayerInputModel>({type: 'card', min: 0, max: 5}))).to.be.true;
+    expect(vm.showChildSaveButton(asComplete<PlayerInputModel>({type: 'card', min: 1, max: 1}))).to.be.false;
+    expect(vm.showChildSaveButton(asComplete<PlayerInputModel>({type: 'option'}))).to.be.false;
   });
 
   it('child save button label includes card count', () => {
@@ -260,10 +270,11 @@ describe('OrOptions', () => {
       ...globalConfig,
       global: {...globalConfig.global, components: {'PlayerInputFactory': PlayerInputFactory}},
       props: {
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
           type: 'or',
           title: '',
+          buttonLabel: '',
           options: [{
             type: 'card',
             title: 'Sell Patents',
@@ -274,6 +285,7 @@ describe('OrOptions', () => {
             showOnlyInLearnerMode: false,
             selectBlueCardAction: false,
             showOwner: false,
+            showSelectAll: false,
           }],
         },
         onsave: () => {},

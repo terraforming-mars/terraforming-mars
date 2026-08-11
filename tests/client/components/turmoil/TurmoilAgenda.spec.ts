@@ -8,7 +8,7 @@ describe('TurmoilAgenda', () => {
     const wrapper = shallowMount(TurmoilAgenda, {
       ...globalConfig,
       props: {
-        id: 'mfp01',
+        id: 'mp01',
       },
     });
     expect(wrapper.exists()).to.be.true;

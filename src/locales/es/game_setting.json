@@ -1,11 +1,11 @@
 {
   "Game Id:${0}":"Id de partida:${0}",
-  "game id: ": "ID de la partida: ",
+  "game id:": "ID de la partida: ",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Instrucciones: Para iniciar el juego, copia y comparte los enlaces por separado con todos los jugadores, y luego haz clic en tu nombre",
   "Save this page in case you or one of your opponents loses a link.": "Por favor, guarda esta página. En caso de que tú o uno de tus oponentes perdáis un enlace o cambiéis de dispositivo, se puede enviar nuevamente",
   "Read our changelog to get the latest updates.": "Lea nuestro registro de cambios para tener las últimas actualizaciones.",
   "Add information useful for development and debugging.": "Agregar información útil para el desarrollo y la resolución de problemas.",
-  " source code ": "codigo fuente",
+  "source code": "codigo fuente",
   "Debug View": "Vista de depuracion",
   "Copy the text below and then paste it in": "Copie y pegue el texto a continuacion en",
   "a GitHub issue": "un issue de GitHub",

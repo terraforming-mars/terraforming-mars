@@ -24,8 +24,8 @@
 	"victoryPoints": "Seierspoeng",
 	"terraformRating": "Terraform-vurdering",
 	"milestones": "milepæler",
-	"Claimed ": "Gjort krav på ",
-	" milestone": " milepæl",
+	"Claimed": "Gjort krav på ",
+	"milestone": " milepæl",
 	"greenery": "skogområder",
 	"city": "by",
 
@@ -268,7 +268,7 @@
 	"Played Cards": "Spilte kort",
 	"played cards": "spilte kort",
 	"SHOW TILES": "VIS BRIKKER",
-	" ${0} played cards ": "${0} spilte kort",
+	"${0} played cards": "${0} spilte kort",
 	"Self-replicating Robots cards": "Selvreplikerende roboter-kort",
 
 	"Select which cards to take into hand": "Velg hvilke kort å ta inn på hånd",
@@ -745,7 +745,7 @@
 	"Assign the clone tag for ${0}": "Tildel klone-symbolet for ${0}",
 	"Select an additional bonus from this space": "Velg en ekstra bonus fra dette feltet.",
 	"Philares effect: select ${0} resource(s)": "Philares Effekt: Velg ${0} ressurs(er)",
-	" show tiles ": " vis brikker ",
+	"show tiles": " vis brikker ",
 	"Global Event - Select 2 cards to discard": "Globalt hendelseskort - Velg 2 kort å kaste",
 	"Dry Deserts Global Event - Gain ${0} resource(s) for influence": "Tørre ørkener global hendelse - Få ${0} ressurs for innflytelse.",
 

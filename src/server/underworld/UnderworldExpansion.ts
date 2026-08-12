@@ -24,6 +24,8 @@ import {Tag} from '../../common/cards/Tag';
 import {UnderworldPlayerData} from '../../common/underworld/UnderworldPlayerData';
 import {GainAnyResourceButScienceDeferred} from '../deferredActions/GainAnyResourceButScienceDeferred';
 import {TileType} from '../../common/TileType';
+import {GainResourcesDeferred} from '../deferredActions/GainResourcesDeferred';
+import {GainProduction} from '../deferredActions/GainProduction';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -553,7 +555,7 @@ export class UnderworldExpansion {
     }
   }
 
-  //   // TODOc(kberg): add viz for temperature bonus.
+  // TODO(kberg): add viz for temperature bonus.
   static onTemperatureChange(game: IGame, steps: number) {
     game.playersInGenerationOrder.forEach((player) => {
       switch (player.underworldData.activeBonus) {
@@ -571,16 +573,16 @@ export class UnderworldExpansion {
         break;
 
       case 'mcprod1pertemp':
-        player.production.add(Resource.MEGACREDITS, steps, {log: true});
+        player.game.defer(new GainProduction(player, Resource.MEGACREDITS, {count: steps, log: true}));
         break;
       case 'plant2pertemp':
-        player.stock.add(Resource.PLANTS, 2 * steps, {log: true});
+        player.game.defer(new GainResourcesDeferred(player, Resource.PLANTS, {count: 2 * steps, log: true}));
         break;
       case 'steel2pertemp':
-        player.stock.add(Resource.STEEL, 2 * steps, {log: true});
+        player.game.defer(new GainResourcesDeferred(player, Resource.STEEL, {count: 2 * steps, log: true}));
         break;
       case 'titanium1pertemp':
-        player.stock.add(Resource.TITANIUM, steps, {log: true});
+        player.game.defer(new GainResourcesDeferred(player, Resource.TITANIUM, {count: steps, log: true}));
         break;
       case undefined:
         break;

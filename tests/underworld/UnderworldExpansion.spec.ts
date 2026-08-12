@@ -494,18 +494,21 @@ describe('UnderworldExpansion', () => {
   it('on temperature change - plant2pertemp', () => {
     player1.underworldData.activeBonus = 'plant2pertemp';
     game.increaseTemperature(player2, 2);
+    runAllActions(game);
     expect(player1.stock.plants).eq(4);
   });
 
   it('on temperature change - steel2pertemp', () => {
     player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
+    runAllActions(game);
     expect(player1.stock.steel).eq(4);
   });
 
   it('on temperature change - titanium1pertemp', () => {
     player1.underworldData.activeBonus = 'titanium1pertemp';
     game.increaseTemperature(player2, 2);
+    runAllActions(game);
     expect(player1.stock.titanium).eq(2);
   });
 
@@ -513,12 +516,14 @@ describe('UnderworldExpansion', () => {
     player1.underworldData.activeBonus = 'titanium1pertemp';
     game.phase = Phase.SOLAR;
     game.increaseTemperature(player2, 2);
+    runAllActions(game);
     expect(player1.stock.titanium).eq(2);
   });
 
   it('temperature bonus does not apply next generation', () => {
     player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
+    runAllActions(game);
     expect(player1.stock.steel).eq(4);
     player1.stock.steel = 0;
 
@@ -526,6 +531,7 @@ describe('UnderworldExpansion', () => {
 
     expect(player1.underworldData.activeBonus).is.undefined;
     game.increaseTemperature(player2, 1);
+    runAllActions(game);
     expect(player1.stock.steel).eq(0);
   });
 

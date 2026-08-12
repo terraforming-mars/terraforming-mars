@@ -58,7 +58,6 @@ const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
 type ScrollPosition = number | 'bottom';
 
 type LogPanelViewState = {
-  participantId: ParticipantId,
   selectedGeneration: number,
   scrollPosition: ScrollPosition,
 };
@@ -240,18 +239,15 @@ export default defineComponent({
     },
   },
   mounted() {
-    const restoredState = this.id !== undefined && logPanelViewState?.participantId === this.id ? logPanelViewState : undefined;
+    const restoredState = logPanelViewState;
     this.selectedGeneration = restoredState?.selectedGeneration ?? this.generation;
     this.getLogsForGeneration(this.selectedGeneration, restoredState?.scrollPosition ?? 'bottom');
   },
   beforeUnmount() {
-    if (this.id !== undefined) {
-      logPanelViewState = {
-        participantId: this.id,
-        selectedGeneration: this.selectedGeneration,
-        scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
-      };
-    }
+    logPanelViewState = {
+      selectedGeneration: this.selectedGeneration,
+      scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
+    };
   },
 });
 

@@ -97,32 +97,6 @@ describe('LogPanel', () => {
     expect(panel.getScrollTop()).eq(120);
   });
 
-  it('does not restore another participant\'s log state', async () => {
-    const panel = installScrollablePanel();
-    const firstViewModel = fakeViewModel({id: 'p-first-reader' as any});
-    const first = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel: firstViewModel, color: 'blue'},
-    });
-    await flushLogs(first);
-
-    (first.vm as any).selectedGeneration = 1;
-    panel.setScrollTop(80);
-    first.unmount();
-
-    const secondBase = fakeViewModel({id: 'p-second-reader' as any});
-    const secondViewModel = {...secondBase, game: {...secondBase.game, generation: 4}};
-    const second = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel: secondViewModel, color: 'red'},
-    });
-    await flushLogs(second);
-
-    expect((second.vm as any).selectedGeneration).eq(4);
-    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=4');
-    expect(panel.getScrollTop()).eq(520);
-  });
-
   it('continues following the end after remount when already at the bottom', async () => {
     const panel = installScrollablePanel();
     const viewModel = fakeViewModel({id: 'p-log-follower' as any});

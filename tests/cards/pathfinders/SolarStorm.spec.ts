@@ -3,15 +3,18 @@ import {expect} from 'chai';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 import {cast} from '../../../src/common/utils/utils';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 describe('SolarStorm', () => {
   let card: SolarStorm;
@@ -116,5 +119,42 @@ describe('SolarStorm', () => {
     assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
     player2.plants = 3;
     player1.underworldData.corruption = 0;
+  });
+
+  it('Compatible with underworld plant2pertemp bonus', () => {
+    const [game, player1] = testGame(1, {underworldExpansion: true});
+    const card = new SolarStorm();
+
+    player1.underworldData.activeBonus = 'plant2pertemp';
+    player1.plants = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    // Loses min(2, 1) = 1 plant from the Solar Storm effect, then gains 2
+    // plants from the temperature-raise bonus.
+    expect(player1.plants).eq(2);
+  });
+
+  it('Compatible with placing an ocean when crossing 0 degrees', () => {
+    const [game, player1] = testGame(1);
+    const card = new SolarStorm();
+
+    setTemperature(game, -2);
+    player1.plants = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    const selectSpace = cast(player1.popWaitingFor(), SelectSpace);
+    const space = selectSpace.spaces[0];
+    space.bonus = [SpaceBonus.PLANT, SpaceBonus.PLANT, SpaceBonus.PLANT];
+
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    expect(space.tile?.tileType).eq(TileType.OCEAN);
+    expect(game.getTemperature()).eq(0);
+    expect(player1.plants).eq(3);
   });
 });

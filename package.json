@@ -111,5 +111,11 @@
   "bugs": {
     "url": "https://github.com/terraforming-mars/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme"
+  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme",
+  "allowScripts": {
+    "better-sqlite3@12.10.0": true,
+    "core-js-pure": true,
+    "esbuild@0.28.1": true,
+    "nodent-runtime": true
+  }
 }

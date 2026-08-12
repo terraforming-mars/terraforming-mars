@@ -1,17 +1,14 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Predators extends Card implements IProjectCard, IActionCard {
+export class Predators extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -22,6 +19,11 @@ export class Predators extends Card implements IProjectCard, IActionCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
       requirements: {oxygen: 11},
+
+      action: {
+        removeResourcesFromAnyCard: {type: CardResource.ANIMAL, source: 'all'},
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: '024',
@@ -34,23 +36,5 @@ export class Predators extends Card implements IProjectCard, IActionCard {
         description: 'Requires 11% oxygen.',
       },
     });
-  }
-
-  public canAct(player: IPlayer): boolean {
-    if (player.game.isSoloMode()) {
-      return true;
-    }
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.ANIMAL).length > 0;
-  }
-
-  public action(player: IPlayer) {
-    player.game.defer(
-      new RemoveResourcesFromCard(player, CardResource.ANIMAL, 1, {log: true})
-        .andThen((response) => {
-          if (response.proceed) {
-            player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
-          }
-        }));
-    return undefined;
   }
 }

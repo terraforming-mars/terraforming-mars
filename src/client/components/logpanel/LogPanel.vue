@@ -53,11 +53,14 @@ import {isMarsSpace} from '@/common/boards/spaces';
 
 let logAbortController: AbortController | undefined;
 
+const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
+
+type ScrollPosition = number | 'bottom';
+
 type LogPanelViewState = {
   participantId: ParticipantId,
   selectedGeneration: number,
-  scrollTop: number,
-  stickToBottom: boolean,
+  scrollPosition: ScrollPosition,
 };
 
 let logPanelViewState: LogPanelViewState | undefined;
@@ -125,15 +128,15 @@ export default defineComponent({
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
-        this.getLogsForGeneration(gen);
+        this.getLogsForGeneration(gen, gen === this.generation ? 'bottom' : undefined);
       }
       this.selectedGeneration = gen;
     },
     showLatestLogs(): void {
       this.selectedGeneration = this.generation;
-      this.getLogsForGeneration(this.generation, undefined, true);
+      this.getLogsForGeneration(this.generation, 'bottom');
     },
-    getLogsForGeneration(generation: number, restoredState?: LogPanelViewState, forceScrollToEnd = false): void {
+    getLogsForGeneration(generation: number, scrollPosition?: ScrollPosition): void {
       const messages = this.messages;
       // abort any pending requests
       if (logAbortController) {
@@ -162,10 +165,10 @@ export default defineComponent({
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
-          if (forceScrollToEnd || restoredState?.stickToBottom === true || (restoredState === undefined && generation === this.generation)) {
+          if (scrollPosition === 'bottom') {
             this.$nextTick(this.scrollToEnd);
-          } else if (restoredState !== undefined) {
-            this.$nextTick(() => this.restoreScrollTop(restoredState.scrollTop));
+          } else if (scrollPosition !== undefined) {
+            this.$nextTick(() => this.restoreScrollTop(scrollPosition));
           }
         })
         .catch((err) => {
@@ -177,27 +180,24 @@ export default defineComponent({
         });
     },
     scrollToEnd() {
-      const scrollablePanel = this.getScrollablePanel();
+      const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
     restoreScrollTop(scrollTop: number) {
-      const scrollablePanel = this.getScrollablePanel();
+      const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollTop;
       }
     },
-    getScrollablePanel(): HTMLElement | null {
-      return document.getElementById('logpanel-scrollable');
-    },
     isNearBottom(): boolean {
-      const scrollablePanel = this.getScrollablePanel();
+      const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel === null) {
         return true;
       }
       const remaining = scrollablePanel.scrollHeight - scrollablePanel.clientHeight - scrollablePanel.scrollTop;
-      return remaining <= 24;
+      return remaining <= BOTTOM_SCROLL_THRESHOLD;
     },
     getClassesGenIndicator(gen: number): string {
       const classes = ['log-gen-indicator'];
@@ -235,20 +235,21 @@ export default defineComponent({
     id(): ParticipantId | undefined {
       return this.viewModel.id;
     },
+    scrollablePanel(): HTMLElement | null {
+      return document.getElementById('logpanel-scrollable');
+    },
   },
   mounted() {
     const restoredState = this.id !== undefined && logPanelViewState?.participantId === this.id ? logPanelViewState : undefined;
     this.selectedGeneration = restoredState?.selectedGeneration ?? this.generation;
-    this.getLogsForGeneration(this.selectedGeneration, restoredState);
+    this.getLogsForGeneration(this.selectedGeneration, restoredState?.scrollPosition ?? 'bottom');
   },
   beforeUnmount() {
-    const scrollablePanel = this.getScrollablePanel();
     if (this.id !== undefined) {
       logPanelViewState = {
         participantId: this.id,
         selectedGeneration: this.selectedGeneration,
-        scrollTop: scrollablePanel?.scrollTop ?? 0,
-        stickToBottom: this.isNearBottom(),
+        scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
       };
     }
   },

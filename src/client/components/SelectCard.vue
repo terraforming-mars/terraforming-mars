@@ -195,7 +195,7 @@ export default defineComponent({
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
     selectedChange(e: Event) {
-      (e.currentTarget as HTMLElement)?.querySelector('input')?.click();
+      e.currentTarget?.querySelector('input')?.click();
     },
     toggleSelectAll() {
       if (this.allSelected) {

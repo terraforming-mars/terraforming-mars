@@ -26,7 +26,10 @@ export class PreservationProgram extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.preservationProgram = true;
+    // If this card is played during the action phase, the player may
+    // have already gained TR this generation and that prevents the effect
+    // from being applied this generation.
+    player.preservationProgram = player.trThisGeneration === 0;
     // This is executed now because if it were in `behavior` it would be
     // rewarded before the effect was put in place.
     player.increaseTerraformRating(5);

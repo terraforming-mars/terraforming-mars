@@ -287,6 +287,7 @@ describe('Player', () => {
         lastStoppedAt: 0,
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
+      trThisGeneration: 1,
       victoryPointsByGeneration: [],
       underworldData: {corruption: 0, activeBonus: undefined, tokens: []},
       alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},

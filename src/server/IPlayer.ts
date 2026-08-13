@@ -152,6 +152,13 @@ export interface IPlayer {
    */
   preservationProgram: boolean;
   /**
+   * Total TR gained during this generation's action phase so far. Reset to 0 at the start of
+   * each generation.
+   *
+   * For Preservation Program.
+   */
+  trThisGeneration: number;
+  /**
    * The list of standard projects (EXCEPT SELL PATENTS) this player has taken this generation.
    *
    * For Underworld: Standard Technology and Labor Trafficking

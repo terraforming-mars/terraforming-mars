@@ -898,6 +898,7 @@ export class Game implements IGame, Logger {
       if (player.tableau.has(CardName.PRESERVATION_PROGRAM)) {
         player.preservationProgram = true;
       }
+      player.trThisGeneration = 0;
     });
 
     if (this.gameOptions.draftVariant) {

@@ -75,7 +75,20 @@ describe('PreservationProgram', () => {
   it('only grants 4 TR when played during action phase', () => {
     game.phase = Phase.ACTION;
     card.play(player);
+
     expect(player.terraformRating).eq(24);
+    expect(player.preservationProgram).is.false;
+  });
+
+  it('grants full 5 TR when played during action phase, after an earlier TR gain that generation', () => {
+    game.phase = Phase.ACTION;
+
+    player.increaseTerraformRating();
+    expect(player.terraformRating).eq(21);
+
+    card.play(player);
+
+    expect(player.terraformRating).eq(26);
     expect(player.preservationProgram).is.false;
   });
 

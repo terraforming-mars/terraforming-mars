@@ -1,45 +1,41 @@
 <template>
   <div class="log-container">
-    <div class="log-generations">
-      <h2 :class="getTitleClasses()">
+    <LogGenerationList
+      :max="viewModel.game.generation"
+      :selected="selectedGeneration"
+      :lastSoloGeneration="lastSoloGeneration"
+      @selected="selectGeneration">
+      <template #title>
+        <h2 :class="titleClasses">
           <span v-i18n>Game log</span>
-      </h2>
-      <div class="log-gen-title"  v-i18n>Gen: </div>
-      <div class="log-gen-numbers">
-        <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" @click.prevent="selectGeneration(n)">
-          {{ n }}
-        </div>
-      </div>
-      <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{lastSoloGeneration}}</span></span>
-    </div>
+        </h2>
+      </template>
+    </LogGenerationList>
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
-        <ul v-if="messages">
-          <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
-        </ul>
+        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" @hide="selectedMessage = undefined"/>
+    <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="viewModel.players" @hide="selectedMessage = undefined"/>
   </div>
 </template>
 
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {paths} from '@/common/app/paths';
 import {LogMessage} from '@/common/logs/LogMessage';
-import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
+import {ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ParticipantId, SpaceId} from '@/common/Types';
+import {SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
+import LogGenerationList from '@/client/components/logpanel/LogGenerationList.vue';
 import {isMarsSpace} from '@/common/boards/spaces';
-
-let logAbortController: AbortController | undefined;
+import {fetchLogs} from '@/client/utils/fetchLogs';
 
 type LogPanelModel = {
   messages: Array<LogMessage>,
@@ -74,6 +70,7 @@ export default defineComponent({
   components: {
     LogMessageComponent,
     CardPanel,
+    LogGenerationList,
   },
   methods: {
     messageClicked(message: LogMessage) {
@@ -102,51 +99,27 @@ export default defineComponent({
         }
       }
     },
-    selectGeneration(gen: number): void {
-      if (gen !== this.selectedGeneration) {
-        this.getLogsForGeneration(gen);
+    selectGeneration(selected: number): void {
+      if (selected !== this.selectedGeneration) {
+        this.selectedGeneration = selected;
+        this.getLogsForGeneration(selected);
       }
-      this.selectedGeneration = gen;
     },
     getLogsForGeneration(generation: number): void {
       const messages = this.messages;
-      // abort any pending requests
-      if (logAbortController) {
-        logAbortController.abort();
-        logAbortController = undefined;
-      }
-
-      const url = `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`;
-      const controller = new AbortController();
-      logAbortController = controller;
-
-      fetch(url, {signal: controller.signal})
-        .then((resp) => {
-          if (!resp.ok) {
-            console.error(`error updating messages, response code ${resp.status}`);
-            return null;
-          }
-          return resp.json();
-        })
+      fetchLogs(this.viewModel.id, generation)
         .then((data) => {
           if (!data) {
             return;
           }
-          messages.splice(0, messages.length);
+          messages.length = 0;
           messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
-          if (generation === this.generation) {
+          if (generation === this.viewModel.game.generation) {
             this.$nextTick(this.scrollToEnd);
           }
-        })
-        .catch((err) => {
-          if (err.name === 'AbortError') {
-            // ignore aborted requests
-            return;
-          }
-          console.error('error updating messages, unable to reach server');
         });
     },
     scrollToEnd() {
@@ -155,46 +128,20 @@ export default defineComponent({
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    getClassesGenIndicator(gen: number): string {
-      const classes = ['log-gen-indicator'];
-      if (gen === this.selectedGeneration) {
-        classes.push('log-gen-indicator--selected');
-      }
-      return classes.join(' ');
+  },
+  computed: {
+    lastSoloGeneration(): number | undefined {
+      return this.viewModel.players.length === 1 ? this.viewModel.game.lastSoloGeneration : undefined;
     },
-    getGenerationsRange(): Array<number> {
-      const generations: Array<number> = [];
-      for (let i = 1; i <= this.generation; i++) {
-        generations.push(i);
-      }
-      return generations;
-    },
-    getTitleClasses(): string {
+    titleClasses(): string {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color, 'shadow'));
       return classes.join(' ');
     },
-    lastGenerationClass(): string {
-      return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-  },
-  computed: {
-    generation(): number {
-      return this.viewModel.game.generation;
-    },
-    lastSoloGeneration(): number {
-      return this.viewModel.game.lastSoloGeneration;
-    },
-    players(): Array<PublicPlayerModel> {
-      return this.viewModel.players;
-    },
-    id(): ParticipantId | undefined {
-      return this.viewModel.id;
-    },
   },
   mounted() {
-    this.selectedGeneration = this.generation;
-    this.getLogsForGeneration(this.generation);
+    this.selectedGeneration = -1;
+    this.selectGeneration(this.viewModel.game.generation);
   },
 });
 

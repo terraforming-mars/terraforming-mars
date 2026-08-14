@@ -13,12 +13,13 @@
       <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{lastSoloGeneration}}</span></span>
     </div>
     <div class="panel log-panel">
-      <div id="logpanel-scrollable" class="panel-body">
+      <div id="logpanel-scrollable" class="panel-body" @scroll="updateScrollState">
         <ul v-if="messages">
           <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
         </ul>
       </div>
       <button
+        v-show="showScrollToBottomButton"
         type="button"
         class="log-latest-button"
         aria-label="Latest logs"
@@ -68,6 +69,7 @@ type LogPanelModel = {
   messages: Array<LogMessage>,
   selectedGeneration: number,
   selectedMessage: LogMessage | undefined,
+  showScrollToBottomButton: boolean,
 };
 
 export default defineComponent({
@@ -92,6 +94,7 @@ export default defineComponent({
       messages: [],
       selectedGeneration: -1,
       selectedMessage: undefined,
+      showScrollToBottomButton: false,
     };
   },
   components: {
@@ -182,13 +185,18 @@ export default defineComponent({
       const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
+        this.updateScrollState();
       }
     },
     restoreScrollTop(scrollTop: number) {
       const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollTop;
+        this.updateScrollState();
       }
+    },
+    updateScrollState(): void {
+      this.showScrollToBottomButton = !this.isNearBottom();
     },
     isNearBottom(): boolean {
       const scrollablePanel = this.scrollablePanel;

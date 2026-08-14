@@ -119,6 +119,25 @@ describe('LogPanel', () => {
     expect(panel.getScrollTop()).eq(640);
   });
 
+  it('shows the scroll button only when away from the bottom', async () => {
+    const panel = installScrollablePanel();
+    const wrapper = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel: fakeViewModel(), color: 'blue'},
+    });
+    await flushLogs(wrapper);
+
+    expect((wrapper.vm as any).showScrollToBottomButton).is.false;
+
+    panel.setScrollTop(100);
+    await wrapper.find('#logpanel-scrollable').trigger('scroll');
+    expect((wrapper.vm as any).showScrollToBottomButton).is.true;
+
+    panel.setScrollTop(320);
+    await wrapper.find('#logpanel-scrollable').trigger('scroll');
+    expect((wrapper.vm as any).showScrollToBottomButton).is.false;
+  });
+
   it('returns to the current generation and the end of the log', async () => {
     const panel = installScrollablePanel();
     const baseViewModel = fakeViewModel({id: 'p-latest-reader' as any});

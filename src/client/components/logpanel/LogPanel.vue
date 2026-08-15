@@ -58,12 +58,16 @@ const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
 
 type ScrollPosition = number | 'bottom';
 
-type LogPanelViewState = {
+type ViewState = {
+  // The current generation viewed in the log panel, which might be different
+  // from the current generation in the game.
   selectedGeneration: number,
+  // Either 'bottom' which means continue scrolling as new entries appear,
+  // or a number which is the pixel height from the top of the widget.
   scrollPosition: ScrollPosition,
 };
 
-let logPanelViewState: LogPanelViewState | undefined;
+let viewState: ViewState | undefined;
 
 type LogPanelModel = {
   messages: Array<LogMessage>,
@@ -247,12 +251,12 @@ export default defineComponent({
     },
   },
   mounted() {
-    const restoredState = logPanelViewState;
+    const restoredState = viewState;
     this.selectedGeneration = restoredState?.selectedGeneration ?? this.generation;
     this.getLogsForGeneration(this.selectedGeneration, restoredState?.scrollPosition ?? 'bottom');
   },
   beforeUnmount() {
-    logPanelViewState = {
+    viewState = {
       selectedGeneration: this.selectedGeneration,
       scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
     };

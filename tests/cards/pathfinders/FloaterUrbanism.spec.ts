@@ -78,15 +78,16 @@ describe('FloaterUrbanism', () => {
     expect(card.resourceCount).eq(2);
   });
 
-  it('act - can take a floater from an opponent\'s card', () => {
+  it('act - cannot take a floater from an opponent\'s card', () => {
     const opponentFloaters = new TitanShuttles();
     player2.playedCards.push(opponentFloaters);
     opponentFloaters.resourceCount = 1;
+    floater1.resourceCount = 1;
 
     card.action(player);
     runAllActions(game);
 
-    expect(opponentFloaters.resourceCount).eq(0);
+    expect(opponentFloaters.resourceCount).eq(1);
     expect(floater1.resourceCount).eq(0);
     expect(card.resourceCount).eq(1);
   });

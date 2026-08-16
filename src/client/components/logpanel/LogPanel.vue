@@ -13,7 +13,7 @@
     </LogGenerationList>
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body" @scroll="updateScrollState">
-        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="spaceClicked"/>
+        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="$emit('spaceClicked', $event)"/>
       </div>
       <button
         v-show="showScrollToBottomButton"
@@ -43,11 +43,9 @@ import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
 import LogGenerationList from '@/client/components/logpanel/LogGenerationList.vue';
-import {isMarsSpace} from '@/common/boards/spaces';
 import {fetchLogs} from '@/client/utils/fetchLogs';
 
 const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
@@ -102,32 +100,10 @@ export default defineComponent({
     CardPanel,
     LogGenerationList,
   },
+  emits: ['spaceClicked'],
   methods: {
     messageClicked(message: LogMessage) {
       this.selectedMessage = message;
-    },
-    spaceClicked(spaceId: SpaceId) {
-      const id = isMarsSpace(spaceId) ? 'shortkey-board' : 'shortkey-moonBoard';
-      const el = document.getElementById(id);
-      el?.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
-
-      const regions = ['main_board', 'moon_board', 'moon_board_outer_spaces'];
-      for (const region of regions) {
-        const board = document.getElementById(region);
-        if (board !== null) {
-          const array = board.getElementsByClassName('board-log-highlight');
-          for (let i = 0, length = array.length; i < length; i++) {
-            const element = array[i] as HTMLElement;
-            if (element.getAttribute('data_log_highlight_id') === spaceId) {
-              element.classList.add('highlight');
-              setTimeout(() => {
-                element.classList.remove('highlight');
-              }, 3000);
-              return;
-            }
-          }
-        }
-      }
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {

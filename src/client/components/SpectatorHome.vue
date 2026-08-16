@@ -26,12 +26,13 @@
       :discardPileSize = "game.discardPileSize"/>
 
     <div class="player_home_block nofloat">
-        <LogPanel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"/>
+        <LogPanel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step" @spaceClicked="onSpaceClicked"/>
     </div>
 
     <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
     <GameBoardView
+      ref="gameBoardView"
       :game="game"
       :tileView="tileView"
       :players="spectator.players"

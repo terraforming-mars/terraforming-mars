@@ -29,6 +29,7 @@
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
         <GameBoardView
+          ref="gameBoardView"
           :game="game"
           :tileView="tileView"
           :players="playerView.players"
@@ -41,7 +42,7 @@
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
-        <LogPanel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"/>
+        <LogPanel :viewModel="playerView" :color="thisPlayer.color" :step="game.step" @spaceClicked="onSpaceClicked"/>
       </div>
 
       <a class="hotkey-target"></a>

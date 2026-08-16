@@ -2,7 +2,12 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
+import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
 import {fakeViewModel} from '../testHelpers';
+import {LogMessage} from '@/common/logs/LogMessage';
+import {LogMessageType} from '@/common/logs/LogMessageType';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
+import {SpaceId} from '@/common/Types';
 
 describe('LogPanel', () => {
   let originalFetch: any;
@@ -70,6 +75,24 @@ describe('LogPanel', () => {
       },
     });
     expect(wrapper.exists()).to.be.true;
+  });
+
+  it('emits spaceClicked when a log message emits spaceClicked', async () => {
+    const wrapper = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel: fakeViewModel(), color: 'blue'},
+    });
+    await flushLogs(wrapper);
+
+    const message = new LogMessage(LogMessageType.DEFAULT, '${0}', [
+      {type: LogMessageDataType.SPACE, value: '05' as SpaceId},
+    ]);
+    (wrapper.vm as any).messages.push(message);
+    await wrapper.vm.$nextTick();
+
+    await wrapper.findComponent(LogMessageComponent).vm.$emit('spaceClicked', '05');
+
+    expect(wrapper.emitted('spaceClicked')).to.deep.eq([['05']]);
   });
 
   it('restores the selected generation and scroll position after remount', async () => {

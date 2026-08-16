@@ -12,13 +12,6 @@
     </template>
   </template>
   <div v-if="waitingfor !== undefined" class="wf-root">
-    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
-      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" @change="updateSuspend">
-      <label for="suspend-checkbox">
-        <span v-i18n>Suspend</span>
-      </label>
-      <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
-    </template>
     <PlayerInputFactory :players="playerView.players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -68,8 +61,6 @@ function isDesktopBrowser(): boolean {
 
 type DataModel = {
   playersWaitingFor: Array<Color>
-  suspend: boolean,
-  savedPlayerView: PlayerViewModel | undefined;
 }
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
@@ -89,8 +80,6 @@ export default defineComponent({
   data(): DataModel {
     return {
       playersWaitingFor: [],
-      suspend: false,
-      savedPlayerView: undefined,
     };
   },
   methods: {
@@ -167,18 +156,13 @@ export default defineComponent({
         });
     },
     updatePlayerView(playerView: PlayerViewModel | undefined) {
-      if (this.suspend === false) {
-        const root = vueRoot(this);
-        root.screen = 'empty';
-        root.playerView = playerView;
-        root.playerkey++;
-        root.screen = 'player-home';
-        if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-          window.location = window.location as any as (string & Location);
-        }
-        this.savedPlayerView = undefined;
-      } else {
-        this.savedPlayerView = playerView;
+      const root = vueRoot(this);
+      root.screen = 'empty';
+      root.playerView = playerView;
+      root.playerkey++;
+      root.screen = 'player-home';
+      if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
+        window.location = window.location as any as (string & Location);
       }
     },
     waitForUpdate() {
@@ -250,14 +234,6 @@ export default defineComponent({
           });
         }
       }
-    },
-    updateSuspend() {
-      if (this.suspend === false && this.savedPlayerView !== undefined) {
-        this.updatePlayerView(this.savedPlayerView);
-      }
-    },
-    showRefresh(): boolean {
-      return this.suspend === true && this.savedPlayerView !== undefined;
     },
     playerName(color: Color) {
       const player = this.playerView.players.find((p) => p.color === color);

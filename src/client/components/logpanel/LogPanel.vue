@@ -30,7 +30,7 @@
       </button>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="viewModel.players" @hide="selectedMessage = undefined"/>
+    <LogMessageInspector ref="messageInspector" :viewModel="viewModel"/>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
-import CardPanel from '@/client/components/logpanel/CardPanel.vue';
+import LogMessageInspector from '@/client/components/logpanel/LogMessageInspector.vue';
 import LogGenerationList from '@/client/components/logpanel/LogGenerationList.vue';
 import {fetchLogs} from '@/client/utils/fetchLogs';
 
@@ -63,10 +63,13 @@ type ViewState = {
 
 let viewState: ViewState | undefined;
 
+type Refs = {
+  messageInspector: InstanceType<typeof LogMessageInspector>;
+};
+
 type LogPanelModel = {
   messages: Array<LogMessage>,
   selectedGeneration: number,
-  selectedMessage: LogMessage | undefined,
   showScrollToBottomButton: boolean,
 };
 
@@ -91,19 +94,18 @@ export default defineComponent({
     return {
       messages: [],
       selectedGeneration: -1,
-      selectedMessage: undefined,
       showScrollToBottomButton: false,
     };
   },
   components: {
     LogMessageComponent,
-    CardPanel,
+    LogMessageInspector,
     LogGenerationList,
   },
   emits: ['spaceClicked'],
   methods: {
     messageClicked(message: LogMessage) {
-      this.selectedMessage = message;
+      this.typedRefs.messageInspector.show(message);
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
@@ -161,6 +163,9 @@ export default defineComponent({
     },
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     generation(): number {
       return this.viewModel.game.generation;
     },

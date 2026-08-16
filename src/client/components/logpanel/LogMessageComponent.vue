@@ -20,7 +20,7 @@
           {{undergroundResourceTokenDescription[data.value]}}
         </span>
         <span v-else-if="data.type === LogMessageDataType.SPACE" class="log-space-id" @click.prevent="$emit('spaceClicked', data.value)">
-            <svg width="20" height="14" viewBox="0 0 28 37">
+            <svg width="20" height="14" viewBox="0 0 28 38">
               <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="isMoonSpace(data.value) ? 'gray' : '#b7410e'" />
             </svg>
             {{ getSpaceName(data.value) }}

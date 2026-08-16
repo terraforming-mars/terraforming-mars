@@ -105,7 +105,7 @@ describe('LogPanel', () => {
     });
     await flushLogs(first);
 
-    (first.vm as any).selectedGeneration = 1;
+    (first.vm as any).selectGeneration(1);
     panel.setScrollTop(120);
     first.unmount();
 
@@ -179,5 +179,58 @@ describe('LogPanel', () => {
     expect((wrapper.vm as any).selectedGeneration).eq(3);
     expect(fetchCalls[fetchCalls.length - 1]).includes('generation=3');
     expect(panel.getScrollTop()).eq(520);
+  });
+
+  // The real app never patches an existing LogPanel's props in place: App.vue forces a
+  // full unmount/remount (via a `:key` bump) on every game-state refresh. These tests
+  // simulate that by unmounting and mounting a fresh instance, exactly like the app does.
+  it('follows the newest generation across a remount when previously following', async () => {
+    const baseViewModel = fakeViewModel({id: 'p-live-follower' as any});
+    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
+    const first = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel, color: 'blue'},
+    });
+    await flushLogs(first);
+    // Module-level view state can be left behind by earlier tests, so explicitly
+    // establish "following" mode rather than relying on the freshly-mounted default.
+    (first.vm as any).showLatestLogs();
+    await flushLogs(first);
+    first.unmount();
+
+    const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 3}};
+    const second = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel: nextViewModel, color: 'blue'},
+    });
+    await flushLogs(second);
+
+    expect((second.vm as any).selectedGeneration).eq(3);
+    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=3');
+  });
+
+  it('does not jump generations across a remount after the player navigates away', async () => {
+    const baseViewModel = fakeViewModel({id: 'p-history-reader' as any});
+    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
+    const first = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel, color: 'blue'},
+    });
+    await flushLogs(first);
+
+    (first.vm as any).selectGeneration(1);
+    await flushLogs(first);
+    first.unmount();
+    fetchCalls.length = 0;
+
+    const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 4}};
+    const second = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel: nextViewModel, color: 'blue'},
+    });
+    await flushLogs(second);
+
+    expect((second.vm as any).selectedGeneration).eq(1);
+    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=1');
   });
 });

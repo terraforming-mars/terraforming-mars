@@ -19,7 +19,7 @@ export class FloaterUrbanism extends ActionCard implements IProjectCard, IAction
       victoryPoints: {resourcesHere: {}},
 
       action: {
-        removeResourcesFromAnyCard: {type: CardResource.FLOATER, source: 'all'},
+        removeResourcesFromAnyCard: {type: CardResource.FLOATER, source: 'self'},
         addResources: 1,
       },
 

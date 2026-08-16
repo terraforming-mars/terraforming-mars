@@ -56,6 +56,9 @@ type ViewState = {
   // The current generation viewed in the log panel, which might be different
   // from the current generation in the game.
   selectedGeneration: number,
+  // True if the player was viewing the newest generation, and so should be moved
+  // forward to whatever generation is newest after a remount.
+  following: boolean,
   // Either 'bottom' which means continue scrolling as new entries appear,
   // or a number which is the pixel height from the top of the widget.
   scrollPosition: ScrollPosition,
@@ -71,6 +74,9 @@ type LogPanelModel = {
   messages: Array<LogMessage>,
   selectedGeneration: number,
   showScrollToBottomButton: boolean,
+  // True while the panel should keep following the newest generation as it changes.
+  // False once the player manually navigates to an earlier generation.
+  following: boolean,
 };
 
 export default defineComponent({
@@ -95,6 +101,7 @@ export default defineComponent({
       messages: [],
       selectedGeneration: -1,
       showScrollToBottomButton: false,
+      following: true,
     };
   },
   components: {
@@ -108,12 +115,14 @@ export default defineComponent({
       this.typedRefs.messageInspector.show(message);
     },
     selectGeneration(gen: number): void {
+      this.following = gen === this.generation;
       if (gen !== this.selectedGeneration) {
         this.getLogsForGeneration(gen, gen === this.generation ? 'bottom' : undefined);
       }
       this.selectedGeneration = gen;
     },
     showLatestLogs(): void {
+      this.following = true;
       this.selectedGeneration = this.generation;
       this.getLogsForGeneration(this.generation, 'bottom');
     },
@@ -183,12 +192,22 @@ export default defineComponent({
   },
   mounted() {
     const restoredState = viewState;
-    this.selectedGeneration = restoredState?.selectedGeneration ?? this.generation;
-    this.getLogsForGeneration(this.selectedGeneration, restoredState?.scrollPosition ?? 'bottom');
+    if (restoredState !== undefined && restoredState.following === false) {
+      this.following = false;
+      this.selectedGeneration = restoredState.selectedGeneration;
+      this.getLogsForGeneration(this.selectedGeneration, restoredState.scrollPosition);
+    } else {
+      // Either this is the first mount, or the panel was following the newest
+      // generation, which may have advanced since the previous instance unmounted.
+      this.following = true;
+      this.selectedGeneration = this.generation;
+      this.getLogsForGeneration(this.selectedGeneration, 'bottom');
+    }
   },
   beforeUnmount() {
     viewState = {
       selectedGeneration: this.selectedGeneration,
+      following: this.following,
       scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
     };
   },

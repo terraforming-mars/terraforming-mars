@@ -3,6 +3,7 @@
 // and setting the document title on mount.
 import {defineComponent} from 'vue';
 import {GameModel} from '@/common/models/GameModel';
+import {SpaceId} from '@/common/Types';
 import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import {nextTileView, TileView} from '@/client/components/board/TileView';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
@@ -68,6 +69,11 @@ export const HomeMixin = defineComponent({
     },
     cycleTileView(): void {
       this.tileView = nextTileView(this.tileView);
+    },
+    // Consumers must set `ref="gameBoardView"` on their <GameBoardView> for this to have any effect.
+    onSpaceClicked(spaceId: SpaceId): void {
+      const gameBoardView = this.$refs.gameBoardView as {highlightSpace: (spaceId: SpaceId) => void} | undefined;
+      gameBoardView?.highlightSpace(spaceId);
     },
   },
   mounted() {

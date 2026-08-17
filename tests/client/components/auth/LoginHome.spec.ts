@@ -4,15 +4,15 @@ import {globalConfig} from '../getLocalVue';
 import LoginHome from '@/client/components/auth/LoginHome.vue';
 
 describe('LoginHome', () => {
-  let originalFetch: any;
+  let originalFetch: typeof global.fetch;
 
   beforeEach(() => {
-    originalFetch = (global as any).fetch;
-    (global as any).fetch = () => Promise.resolve({ok: false, statusText: 'stubbed'});
+    originalFetch = global.fetch;
+    global.fetch = () => Promise.resolve({ok: false, statusText: 'stubbed'} as Response);
   });
 
   afterEach(() => {
-    (global as any).fetch = originalFetch;
+    global.fetch = originalFetch;
   });
 
   function mount(discordClientId: string) {

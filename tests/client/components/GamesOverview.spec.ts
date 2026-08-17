@@ -4,18 +4,18 @@ import {globalConfig} from './getLocalVue';
 import GamesOverview from '@/client/components/GamesOverview.vue';
 
 describe('GamesOverview', () => {
-  let originalFetch: any;
+  let originalFetch: typeof global.fetch;
 
   beforeEach(() => {
-    originalFetch = (global as any).fetch;
-    (global as any).fetch = () => Promise.resolve({
+    originalFetch = global.fetch;
+    global.fetch = () => Promise.resolve({
       ok: true,
       json: () => Promise.resolve([]),
-    });
+    } as Response);
   });
 
   afterEach(() => {
-    (global as any).fetch = originalFetch;
+    global.fetch = originalFetch;
   });
 
   it('mounts without errors', () => {

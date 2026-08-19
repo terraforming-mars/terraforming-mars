@@ -22,13 +22,18 @@
       border: 2px solid rgba(170, 170, 170, 0.6);
       border-radius: 8px;
       &:hover{
-        background: #ccc;
+        background: #aaa;
         color: black;
       }
     }
     .log-gen-indicator--selected {
       background: #ccc;
       color: black;
+      // Beats .log-gen-indicator:hover's higher specificity so the selected
+      // color wins when a selected button is also being hovered.
+      &:hover {
+        background: #ccc;
+      }
     }
   }
 }

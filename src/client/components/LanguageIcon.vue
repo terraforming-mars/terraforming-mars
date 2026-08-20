@@ -1,3 +1,16 @@
+<template>
+  <div ref="root" class="sidebar_item sidebar_item--language" :title="$t('Language')">
+    <div
+      class="sidebar_icon sidebar_icon--language"
+      :class="{'sidebar_item--is-active': languagePanelOpen}">
+      <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
+      :title="title"
+      @click="languagePanelOpen = !languagePanelOpen"></div>
+      </div>
+    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="PreferencesManager.INSTANCE"/>
+  </div>
+</template>
+
 <script setup lang="ts">
 
 import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
@@ -22,16 +35,3 @@ function closeOnOutsideClick(event: MouseEvent) {
 onMounted(() => document.addEventListener('click', closeOnOutsideClick));
 onBeforeUnmount(() => document.removeEventListener('click', closeOnOutsideClick));
 </script>
-
-<template>
-  <div ref="root" class="sidebar_item sidebar_item--language" :title="$t('Language')">
-    <div
-      class="sidebar_icon sidebar_icon--language"
-      :class="{'sidebar_item--is-active': languagePanelOpen}">
-      <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
-      :title="title"
-      @click="languagePanelOpen = !languagePanelOpen"></div>
-      </div>
-    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="PreferencesManager.INSTANCE"/>
-  </div>
-</template>

@@ -56,7 +56,7 @@
 
     "Jupiter Floating Station": "",
     "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "ACTIE: Voeg een floater toe aan een JUPITERKAART of ontvang 1 M€ voor elke floater op deze kaart [max. 4].",
-    "Requires 3 science tags.": "Vereist 3 wetenschapslabels.",
+    "Requires 3 science tags.": "Vereist 3 wetenschaps-labels.",
 
     "Luna Governor": "Gouverneur van de Maan",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Vereist 3 aarde-labels. Verhoog je M€-productie met 2.",
@@ -65,13 +65,13 @@
     "Increase your plant production 2 steps, or your M€ production 5 steps.": "Verhoog je plant-productie met 2 of je M€-productie met 5.",
 
     "Lunar Mining": "Lunaire Mijnbouw",
-    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Verhoog je titanium-productie met 1 stap voor elke 2 aardelabels die je in het spel hebt, inclusief deze.",
+    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Verhoog je titanium-productie met 1 stap voor elke 2 aarde-labels die je in het spel hebt, inclusief deze.",
 
     "Market Manipulation": "Marktmanipulatie",
     "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Verhoog je koloniewaarde met 1. Verlaag een andere koloniewaarde met 1.",
 
     "Martian Zoo": "Mars Dierentuin",
-    "Effect: When you play an Earth tag, place an animal here.": "EFFECT: Als je een aardelabel speelt, voeg dan 1 dier toe aan deze kaart.",
+    "Effect: When you play an Earth tag, place an animal here.": "EFFECT: Als je een aarde-label speelt, voeg dan 1 dier toe aan deze kaart.",
     "Action: Gain 1M€ per animal here.": "Actie: ontvang 1 M€ per dier op deze kaart.",
     "Requires 2 city tiles in play.": "Vereist 2 stadstegels in het spel.",
 
@@ -94,11 +94,11 @@
     "Gain all your colony bonuses.": "Krijg al je koloniebonussen.",
 
     "Quantum Communications": "Kwantumcommunicatie",
-    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Vereist 4 wetenschapslabels. Verhoog je M€-productie met 1 voor elke kolonie in het spel.",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Vereist 4 wetenschaps-labels. Verhoog je M€-productie met 1 voor elke kolonie in het spel.",
 
     "Red Spot Observatory": "Rode Vlek Observatorium",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "ACTIE: Voeg 1 floater toe aan deze kaart of verwijder 1 floater van deze kaart om een kaart te trekken.",
-    "Requires 3 science tags. Draw 2 cards.": "Vereist 3 wetenschapslabels. Trek 2 kaarten.",
+    "Requires 3 science tags. Draw 2 cards.": "Vereist 3 wetenschaps-labels. Trek 2 kaarten.",
 
     "Refugee Camps": "Vluchtelingenkamp",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "ACTIE: Verlaag je M€-productie met 1 om een kampgrondstof aan deze kaart toe te voegen.",
@@ -113,7 +113,7 @@
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Vereist 2 aarde-labels. Krijg 1 handelsvloot.",
 
     "Solar Probe": "Zonnesonde",
-    "Draw 1 card for every 3 science tags you have, including this.": "Trek 1 kaart voor elk 3 wetenschapslabels in je bezit (inclusief deze).",
+    "Draw 1 card for every 3 science tags you have, including this.": "Trek 1 kaart voor elk 3 wetenschaps-labels in je bezit (inclusief deze).",
 
     "Solar Reflectors": "Zonnereflectoren",
     "Increase your heat production 5 steps.": "Verhoog je warmteproductie 5 stappen.",
@@ -154,5 +154,5 @@
 
     "Warp Drive": "Warp Aandrijving",
     "Effect: When you play a space card, you pay 4 M€ less for it.": "EFFECT: Als je een ruimtekaart speelt, betaal je 4 M€ minder.",
-    "Requires 5 science tags.": "Vereist 5 wetenschapslabels."
+    "Requires 5 science tags.": "Vereist 5 wetenschaps-labels."
 }

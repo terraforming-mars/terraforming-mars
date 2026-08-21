@@ -98,7 +98,7 @@
     "Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.": "Vereist regerende partij: KELVINISTEN of 2+ eigen afgevaardigden daar. Verhoog je energieproductie met 2.",
 
     "Huygens Observatory": "Huygens-Observatorium",
-    "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that you used this generation already, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Plaats een kolonie. DEZE MAG OOK WORDEN GEPLAATST OP EEN KOLONIETEGEL WAAR JE AL EEN KOLONIE HEBT. Handel gratis. Je mag een handelsvloot gebruiken die je deze generatie al hebt gebruikt, maar je mag niet ruilen met de tegel waar die vloot vandaan kwam. Ontvang 1 TR.)",
+    "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that you used this generation already, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Plaats een kolonie. DEZE MAG OOK WORDEN GEPLAATST OP EEN KOLONIETEGEL WAAR JE AL EEN KOLONIE HEBT. Handel gratis. Je mag een handelsvloot gebruiken die je deze generatie al hebt gebruikt, maar je mag niet ruilen met de tegel waar die vloot vandaan kwam. Ontvang 1 TN.)",
 
     "Hydrogen Processing Plant": "Waterstof verwerking",
     "Oxygen level must be 3% or higher. Decrease oxygen level 1%. Raise your energy production 1 step for every two ocean tiles on Mars.": "Vereist een zuurstofgehalte van 3% of meer. Verhoog je energieproductie met 1 voor elke 2 oceaantegels die in het spel zijn. Verlaag het zuurstofgehalte met 1%.",
@@ -126,7 +126,7 @@
     "(Requires ANY 2 Mars tags in play. 1 VP for every 2 data here.)": "(Vereist 2 Mars-labels in het spel. 1 OP voor elke 2 data op deze kaart.)",
 
     "Martian Dust Processing Plant": "Marsstofverwerkingsinstallatie",
-    "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.": "Verlaag je energieproductie met 1 en verhoog je staalproductie met 2. Verhoog je TW met 1.",
+    "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.": "Verlaag je energieproductie met 1 en verhoog je staalproductie met 2. Verhoog je TN met 1.",
 
     "Martian Monuments": "Marsmonumenten",
     "Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)": "Vereist 1 eigen stad op Mars. Verhoog je M€-productie met 1 voor elk Marslabel dat je bezit (inclusief deze).",
@@ -142,7 +142,7 @@
     "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(EFFECT: Als je een microbelabel speelt, verhoog je je M€-productie met 1.)",
 
     "Museum of Early Colonisation": "Vroege Kolonisatie Museum",
-    "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Vereist 1 oceaan-, stads- en groentegel op Mars. Verlaagt je energieproductie met 1. Verhoogt je staal-, titanium- en plantproductie met 1. Verhoogt je TW met 1.",
+    "Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.": "Vereist 1 oceaan-, stads- en groentegel op Mars. Verlaagt je energieproductie met 1. Verhoogt je staal-, titanium- en plantproductie met 1. Verhoogt je TN met 1.",
 
     "New Venice": "Nieuw Venetië",
     "Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Vereist 3 oceaantegels. Verbruikt 2 planten. Verhoog je energieproductie met 1 en je M€-productie met 2. Plaats deze tegel op een oceaantegel, NEGEER DE NORMALE PLAATSINGSEISEN VOOR STEDEN. Deze tegel telt als een stadstegel en een oceaantegel. ",
@@ -159,7 +159,7 @@
     "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Vereist 1 eigen ruimte- en wetenschapslabel. Voeg 2 data toe aan een willekeurige kaart.",
 
     "Ozone Generators": "Ozongenerator",
-    "(Action: Spend 3 energy to gain 1 TR.)": "(ACTIE: besteed 3 energie om je TW met 1 te verhogen.)",
+    "(Action: Spend 3 energy to gain 1 TR.)": "(ACTIE: besteed 3 energie om je TN met 1 te verhogen.)",
     "Requires 6% Oxygen.": "Vereist een zuurstofgehalte van 6% of meer.",
 
     "Pollinators": "Bestuivers",
@@ -202,7 +202,7 @@
     "Increase your steel production 2 steps OR increase your titanium production 1 step.": "Verhoog je staalproductie met 2 OF verhoog je titaniumproductie met 1.",
 
     "Social Events": "Sociale evenementen",
-    "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Verhoog je TW met 1 voor elke 2 eigen Mars-labels (inclusief deze).",
+    "Gain 1 TR for every 2 Mars tags you have (including this one.)": "Verhoog je TN met 1 voor elke 2 eigen Mars-labels (inclusief deze).",
 
     "Soil Detoxification": "Bodemontgifting",
     "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(EFFECT: De standaard groentegel kost je 1 plant minder.)",
@@ -227,7 +227,7 @@
 
     "Terraforming Control Station": "Terraforming-besturingsstation",
     "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(EFFECT: Als je een Venus- of Marslabel speelt, betaal je 2 M€ minder.)",
-    "(Erhöhe deinen TW um 2.)": "(Verhoog je TW met 2).",
+    "(Erhöhe deinen TW um 2.)": "(Verhoog je TN met 2).",
 
     "Terraforming Robots": "Terraforming-robots",
     "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFECT: Als je een Mars-label speelt, voeg je 1 robot toe aan deze kaart.)",
@@ -240,6 +240,6 @@
     "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Vereist regerende partij: EENHEID of 2+ eigen afgevaardigden daar. Verhoog je M€-productie met 3. Plaats een stadstegel op het gereserveerde gebied.",
 
     "Wetlands": "",
-    "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Vereist 2 oceaantegels. Verbruikt 4 planten. Verhoog de zuurstof met 1%. Verhoog je TW met 1. Plaats deze tegel naast 2 oceaantegels.)",
+    "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Vereist 2 oceaantegels. Verbruikt 4 planten. Verhoog de zuurstof met 1%. Verhoog je TN met 1. Plaats deze tegel naast 2 oceaantegels.)",
     "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(EFFECT: Het telt als een groentegel en een oceaantegel. Andere tegels kunnen het niet bedekken en het telt niet mee voor de 9 te plaatsen oceanen.)"
 }

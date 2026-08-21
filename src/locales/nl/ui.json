@@ -179,7 +179,7 @@
     "Estate Dealer": "Makelaar",
     "Most tiles adjacent to ocean tiles": "Bezit de meeste tegels grenzend aan oceaanvelden.",
     "Benefactor": "Weldoener",
-    "Highest terraform rating": "De hoogste Terraformwaarde hebben.",
+    "Highest terraform rating": "De hoogste Terraformniveau hebben.",
     "Venuphile": "Venusianer",
     "Having the most Venus tags in play": "De meeste Venus-labels in het spel hebben (gebeurteniskaarten tellen niet mee).",
     "Entrepreneur": "Ondernemer",
@@ -499,7 +499,7 @@
     "Remove 2 floaters to raise Venus 1 step": "Verwijder 2 floaters om de Venus-score met 2% te verhogen",
     "Select an option for Olympus Conference": "Kies een optie voor Olympus-conferentie",
     "Remove a science resource from this card to draw a card": "Verwijder 1 wetenschappelijke grondstof van deze kaart om 1 kaart te trekken",
-    "Remove 1 science resource to increase TR 1 step": "Verwijder 1 wetenschappelijke grondstof om 1 TW te krijgen",
+    "Remove 1 science resource to increase TR 1 step": "Verwijder 1 wetenschappelijke grondstof om 1 TN te krijgen",
     "Add a science resource to this card": "Voeg 1 wetenschappelijke grondstof toe aan deze kaart",
     "Add 1 science resource to this card": "Voeg 1 wetenschappelijke grondstof toe aan deze kaart",
     "Remove resource": "Verwijder grondstof",
@@ -671,11 +671,11 @@
     "Limited synergy": "Beperkte synergieën",
     "Full random": "Volledig willekeurig",
     "Mandatory Venus Terraforming": "Vereiste Venus Terraforming",
-    "63 TR solo mode": "63-TW-Solo-Modus",
+    "63 TR solo mode": "63-TN-Solo-Modus",
     "Cards to exclude from the game": "Uit te sluiten kaarten",
     "Start typing the card name to exclude": "Typ de naam van de kaart die u wilt uitsluiten",
     "Filter": "",
-    "TR Boost": "TW-Boost",
+    "TR Boost": "TN-Boost",
     "Player ${0} name": "Naam speler ${0}",
     "Multiplayer Options": "Multiplayer-opties",
     "Tags Overview": "Labelsoverzicht",
@@ -689,7 +689,7 @@
 
     "Turmoil": "",
 
-    "TR solo mode": "TW-Solo-Modus",
+    "TR solo mode": "TN-Solo-Modus",
 
     "Players": "Spelers",
 
@@ -736,8 +736,8 @@
     "Select space for ocean from temperature increase": "Kies een veld voor de oceaan door temperatuurstijging",
 
     "14 Gens": "14 Gen.",
-    "TR all": "alle TW",
-    "63 TR": "63 TW",
+    "TR all": "alle TN",
+    "63 TR": "63 TN",
     "Ok": "",
 
     "The number of available actions on active cards": "Aantal beschikbare acties op actieve kaarten",
@@ -746,7 +746,7 @@
     "Show information that can be helpful to players who are still learning the games": "Toon informatie die nuttig kan zijn voor spelers die de spellen nog aan het leren zijn",
     "Test out any possible new experimental UI features for feedback.": "Test alle mogelijke nieuwe experimentele UI-functies voor feedback.",
 
-    "Select how to pay for TR increase": "Kies hoe je wilt betalen voor TW-verhoging",
+    "Select how to pay for TR increase": "Kies hoe je wilt betalen voor TN-verhoging",
     "Select how to pay for Colony project": "Kies hoe je wilt betalen voor Kolonie project",
     "Select how to pay for Air Scrapping project": "Kies hoe je wilt betalen voor Air Scrapping project",
     "Select how to pay for Buffer Gas project": "Kies hoe je wilt betalen voor Buffer Gas project",

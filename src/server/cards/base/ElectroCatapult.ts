@@ -5,6 +5,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Resource} from '../../../common/Resource';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class ElectroCatapult extends ActionCard implements IProjectCard {
   constructor() {
@@ -49,8 +54,41 @@ export class ElectroCatapult extends ActionCard implements IProjectCard {
     });
   }
 
-  // KEEP THIS
-  // private log(player: IPlayer, resource: Resources) {
-  //   player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) => b.player(player).string(resource));
-  // }
+  public override action(player: IPlayer) {
+    const options: Array<SelectOption> = [];
+
+    if (player.plants > 0) {
+      options.push(new SelectOption('Spend 1 plant to gain 7 M€.').andThen(() => {
+        this.spendAndGain(player, Resource.PLANTS);
+        return undefined;
+      }));
+    }
+
+    if (player.steel > 0) {
+      options.push(new SelectOption('Spend 1 steel to gain 7 M€.').andThen(() => {
+        this.spendAndGain(player, Resource.STEEL);
+        return undefined;
+      }));
+    }
+
+    if (options.length === 1) {
+      options[0].cb(undefined);
+      return undefined;
+    }
+
+    player.defer(new OrOptions(...options));
+    return undefined;
+  }
+
+  private spendAndGain(player: IPlayer, resource: Resource.PLANTS | Resource.STEEL) {
+    if (resource === Resource.PLANTS) {
+      player.stock.deduct(Resource.PLANTS, 1);
+    } else {
+      player.pay(Payment.of({steel: 1}));
+    }
+
+    player.stock.add(Resource.MEGACREDITS, 7);
+    player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) =>
+      b.player(player).string(resource === Resource.PLANTS ? 'plant' : 'steel'));
+  }
 }

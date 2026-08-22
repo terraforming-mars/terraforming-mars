@@ -1,0 +1,63 @@
+{
+  "Select a ${0} bonus": "Selecteer een ${0}-bonus",
+  "Select a ${0} policy": "Selecteer een ${0}-beleid",
+
+  "Gain 1 M€ for each building tag you have": "Ontvang 1 M€ voor elk gebouwlabel dat je hebt",
+  "Gain 1 M€ for each tile you have ON MARS": "Ontvang 1 M€ voor elke tegel die je OP MARS hebt",
+  "Gain 1 M€ for each building tag you have (${0})": "Ontvang 1 M€ voor elk gebouwlabel dat je hebt (${0})",
+  "Gain 1 M€ for each tile you have ON MARS (${0})": "Ontvang 1 M€ voor elke tegel die je OP MARS hebt (${0})",
+
+  "When you place a tile ON MARS, gain 1 steel": "Wanneer je een tegel OP MARS plaatst, ontvang je 1 staal",
+  "When you play a building tag, gain 2 M€": "Wanneer je een gebouwlabel speelt, ontvang je 2 M€",
+  "Your steel resources are worth 1 M€ extra": "Je staalgrondstoffen zijn 1 M€ extra waard",
+  "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Besteed 4 M€ om een gebouwkaart te trekken (Turmoil Mars Eerst)",
+
+  "Gain 1 M€ for each science tag you have": "Ontvang 1 M€ voor elk wetenschapslabel dat je hebt",
+  "Gain 1 M€ for every 3 cards in hand": "Ontvang 1 M€ voor elke 3 kaarten in je hand",
+  "Gain 1 M€ for each science tag you have (${0})": "Ontvang 1 M€ voor elk wetenschapslabel dat je hebt (${0})",
+  "Gain 1 M€ for every 3 cards in hand (${0})": "Ontvang 1 M€ voor elke 3 kaarten in je hand (${0})",
+
+  "Your global requirements are +/- 2 steps": "Je globale vereisten zijn +/- 2 stappen",
+  "When you raise a global parameter, draw a card per step raised": "Wanneer je een globale parameter verhoogt, trek je 1 kaart per verhoogde stap",
+  "Cards with Science tag requirements may be played with 1 less Science tag": "Kaarten met wetenschapslabelvereisten mogen met 1 wetenschapslabel minder worden gespeeld",
+
+  "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "Ontvang 1 M€ voor elk Venus-, Aarde- en Jupiterlabel dat je hebt",
+  "Gain 1 M€ for each Space tag you have": "Ontvang 1 M€ voor elk ruimtelabel dat je hebt",
+  "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "Ontvang 1 M€ voor elk Venus-, Aarde- en Jupiterlabel dat je hebt (${0})",
+  "Gain 1 M€ for each Space tag you have (${0})": "Ontvang 1 M€ voor elk ruimtelabel dat je hebt (${0})",
+
+  "Your titanium resources are worth 1 M€ extra": "Je titaniumgrondstoffen zijn 1 M€ extra waard",
+  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Besteed 4 M€ om 2 titanium te ontvangen of voeg 2 zwevers toe aan EEN WILLEKEURIGE kaart (Turmoil Eenheid)",
+  "Spend 4 M€ to draw a Space card (Turmoil Unity)": "Besteed 4 M€ om een ruimtekaart te trekken (Turmoil Eenheid)",
+  "Cards with Space tags cost 2 M€ less to play": "Kaarten met ruimtelabel kosten 2 M€ minder om te spelen",
+
+  "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Ontvang 1 M€ voor elk planten-, microben- en dierenlabel dat je hebt",
+  "Gain 2 M€ for each greenery tile you have": "Ontvang 2 M€ voor elke groentegel die je hebt",
+  "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "Ontvang 1 M€ voor elk planten-, microben- en dierenlabel dat je hebt (${0})",
+  "Gain 2 M€ for each greenery tile you have (${0})": "Ontvang 2 M€ voor elke groentegel die je hebt (${0})",
+
+  "When you place a greenery tile, gain 4 M€": "Wanneer je een groentegel plaatst, ontvang je 4 M€",
+  "When you place a tile, gain 1 plant": "Wanneer je een tegel plaatst, ontvang je 1 plant",
+  "When you play an animal, plant or microbe tag, gain 2 M€": "Wanneer je een dieren-, planten- of microbenlabel speelt, ontvang je 2 M€",
+  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Besteed 5 M€ om 3 planten te ontvangen of voeg 2 microben toe aan EEN WILLEKEURIGE kaart (Turmoil Groenen)",
+
+  "The player(s) with the lowest TR gains 1 TR": "Spelers met de laagste TN verhogen hun TN met 1",
+  "The player(s) with the highest TR loses 1 TR": "Spelers met de hoogste TN verlagen hun TN met 1",
+  "The player(s) with the lowest TR gains 1 TR (${0})": "Spelers met de laagste TN verhogen hun TN met 1 (${0})",
+  "The player(s) with the highest TR loses 1 TR (${0})": "Spelers met de hoogste TN verlagen hun TN met 1 (${0})",
+
+  "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Wanneer je een actie uitvoert die TN verhoogt, MOET je 3 M€ betalen per verhoogde stap",
+  "When you place a tile, pay 3 M€ or as much as possible": "Wanneer je een tegel plaatst, betaal je 3 M€ of zoveel mogelijk",
+  "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Betaal 4 M€ om een globale parameter die nog niet op maximum staat 1 stap te verlagen (krijg geen spoorbonussen)",
+  "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Wanneer je een globale parameter verhoogt, verlaag je je M€-productie met 1 per verhoogde stap indien mogelijk",
+
+  "Gain 1 M€ for each heat production you have": "Ontvang 1 M€ voor elke warmteproductie die je hebt",
+  "Gain 1 heat for each heat production you have": "Ontvang 1 warmte voor elke warmteproductie die je hebt",
+  "Gain 1 M€ for each heat production you have (${0})": "Ontvang 1 M€ voor elke warmteproductie die je hebt (${0})",
+  "Gain 1 heat for each heat production you have (${0})": "Ontvang 1 warmte voor elke warmteproductie die je hebt (${0})",
+
+  "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Betaal 10 M€ om je energie- en warmteproductie elk met 1 te verhogen (Turmoil Kelvinisten)",
+  "When you raise temperature, gain 3 M€ per step raised": "Wanneer je de temperatuur verhoogt, ontvang je 3 M€ per verhoogde stap",
+  "Convert 6 heat into temperature (Turmoil Kelvinists)": "Zet 6 warmte om in temperatuur (Turmoil Kelvinisten)",
+  "When you place a tile, gain 2 heat": "Wanneer je een tegel plaatst, ontvang je 2 warmte"
+}

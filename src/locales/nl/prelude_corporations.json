@@ -1,0 +1,62 @@
+{
+  "SPIRE": "",
+  "Spire": "",
+  "Standard Project": "Standaardproject",
+  "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Je begint met 50 M€. Als je eerste actie trek je 4 kaarten en leg je daarna 3 kaarten uit je hand af.",
+  "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "EFFECT: Wanneer je een kaart met ten minste 2 labels speelt, inclusief deze, voeg je hier 1 wetenschapsgrondstof toe.",
+  "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.": "EFFECT: Wanneer je voor een standaardproject betaalt, mogen wetenschapsgrondstoffen hier als 2 M€ per stuk worden gebruikt.",
+
+  "SAGITTA FRONTIER SERVICES": "",
+  "Sagitta Frontier Services": "",
+  "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Je begint met 31 M€. Verhoog je energieproductie met 1 en je M€-productie met 2. Trek een kaart zonder label.",
+  "Effect: When you play a card with no tags, including this, gain 4 M€.": "EFFECT: Wanneer je een kaart zonder labels speelt, inclusief deze, ontvang je 4 M€.",
+  "Effect: When you play a card with EXACTLY 1 TAG, you gain 1 M€.": "EFFECT: Wanneer je een kaart met PRECIES 1 label speelt, ontvang je 1 M€.",
+
+  "ECOTEC": "",
+  "EcoTec": "",
+  "You start with 42 M€. Increase your plant production 1 step.": "Je begint met 42 M€. Verhoog je plantproductie met 1.",
+  "Effect: When you play a bio tag, gain 1 plant or add a microbe to ANY card.": "EFFECT: Wanneer je een biolabel speelt, ontvang je 1 plant of voeg je 1 microbe toe aan EEN WILLEKEURIGE kaart.",
+
+  "PALLADIN SHIPPING": "",
+  "Palladin Shipping": "",
+  "You start with 36 M€. Gain 5 titanium.": "Je begint met 36 M€. Ontvang 5 titanium.",
+  "effect/action": "effect/actie",
+  "Effect: When you play a space event, gain 1 titanium.": "EFFECT: Wanneer je een ruimte-evenement speelt, ontvang je 1 titanium.",
+  "Action: Spend 2 titanium to raise the temperature 1 step.": "ACTIE: Besteed 2 titanium om de temperatuur met 1 stap te verhogen.",
+
+  "NIRGAL ENTERPRISES": "",
+  "Nirgal Enterprises": "",
+  "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Je begint met 30 M€. Verhoog je energie-, plant- en staalproductie elk met 1.",
+  "Effect: AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "EFFECT: ONDERSCHEIDINGEN EN MIJLPALEN KOSTEN VOOR JOU ALTIJD 0 M€.",
+
+  "Cheung Shing": "",
+  "■■MARS■■": "",
+  "Cheung Sing Mars": "",
+  "Cheung Shing Mars": "",
+  "Cheung Shing MARS": "",
+  "You start with 3 M€ production and 44 M€.": "Je begint met 3 M€-productie en 44 M€.",
+  "Effect: When you play a building tag, you pay 2 M€ less for it.": "EFFECT: Wanneer je een gebouwlabel speelt, betaal je er 2 M€ minder voor.",
+
+  "POINT LUNA": "",
+  "Point Luna": "",
+  "You start with 1 titanium production and 38 M€.": "Je begint met 1 titaniumproductie en 38 M€.",
+  "Effect: When you play an Earth tag, including this, draw a card.": "EFFECT: Wanneer je een Aardelabel speelt, inclusief deze, trek je een kaart.",
+
+  "ROBINSON": "",
+  "Robinson Industries": "",
+  "You start with 47 M€.": "Je begint met 47 M€.",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "ACTIE: Besteed 4 M€ om (een van) je LAAGSTE producties met 1 stap te verhogen.",
+
+  "VALLEY": "",
+  "TRUST": "",
+  "Valley Trust": "",
+  "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Je begint met 37 M€. Als je eerste actie trek je 3 Prelude-kaarten en speel je er 1 van. Leg de andere 2 af.",
+  "Effect: When you play a science tag, you pay 2M€ less for it.": "EFFECT: Wanneer je een wetenschapslabel speelt, betaal je er 2 M€ minder voor.",
+
+  "VIT": "",
+  "O": "",
+  "R": "",
+  "Vitor": "",
+  "You start with 45 M€. As your first action, fund an award for free.": "Je begint met 45 M€. Als je eerste actie financier je gratis een onderscheiding.",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "EFFECT: Wanneer je een kaart met een NIET-NEGATIEF OP-icoon speelt, inclusief deze, ontvang je 3 M€."
+}

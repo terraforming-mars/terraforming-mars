@@ -32,7 +32,9 @@
   line-height: 28px;
   border-radius: 10px;
   color: #eee;
-  text-shadow: 0 0 2px black, 0 2px 1px black;
+  text-shadow:
+    0 0 2px black,
+    0 2px 1px black;
   padding-left: 17px;
   width: 369px;
   height: 90px;
@@ -46,7 +48,10 @@
   flex-direction: column-reverse;
   background-image: url("assets/buttons-homepage/planets.jpg");
 
-  &:hover, &:visited, &:active, &:focus {
+  &:hover,
+  &:visited,
+  &:active,
+  &:focus {
     color: #eee;
     text-decoration: none;
   }
@@ -64,7 +69,9 @@
   line-height: 30px;
   color: #daab63;
   display: block;
-  text-shadow: 0 0 2px black, 0 2px 2px black;
+  text-shadow:
+    0 0 2px black,
+    0 2px 2px black;
   letter-spacing: 1px;
   background: url("assets/buttons-homepage/planets.jpg") no-repeat;
 }
@@ -143,7 +150,9 @@
 .source-code-text {
   color: white;
   font-size: smaller;
-  text-shadow: 0 0 2px darkgrey, 0 2px 2px darkgrey;
+  text-shadow:
+    0 0 2px darkgrey,
+    0 2px 2px darkgrey;
   letter-spacing: 0.25rem;
   text-decoration: none;
 }
@@ -158,4 +167,83 @@
 
 .source-code-text:visited {
   color: white;
+}
+
+@media only screen and (max-width: 1023px) {
+  .topmost-start-screen {
+    min-height: 100dvh;
+
+    .main-container {
+      margin: 0;
+    }
+  }
+
+  .start-screen {
+    box-sizing: border-box;
+    width: calc(100% - 64px);
+    max-width: 520px;
+  }
+
+  .start-screen-link,
+  .start-screen-header {
+    box-sizing: border-box;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 900%;
+  }
+
+  .start-screen-title-top,
+  .start-screen-title-bottom {
+    transform: none;
+    white-space: nowrap;
+  }
+
+  .start-screen-link--languages {
+    background-size: 100% 810px;
+    background-position: center -720px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .topmost-start-screen {
+    overflow-x: clip;
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+
+    .notice {
+      position: static;
+      padding: 16px;
+      text-align: center;
+    }
+  }
+
+  .start-screen {
+    width: calc(100% - 32px);
+    max-width: 400px;
+  }
+
+  .start-screen-links {
+    padding-top: max(24px, env(safe-area-inset-top));
+  }
+
+  .start-screen-link {
+    min-height: 90px;
+    height: 90px;
+    padding: 12px 16px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .start-screen-link {
+    height: 104px;
+    font-size: 28px;
+  }
+
+  .start-screen-title-top {
+    font-size: 20px;
+  }
+
+  .start-screen-title-bottom {
+    font-size: 38px;
+  }
 }

@@ -23,12 +23,12 @@ export class ElectroCatapult extends ActionCard implements IProjectCard {
           autoSelect: true,
           behaviors: [{
             title: 'Spend 1 plant to gain 7 M€.',
-            spend: {plants: 1},
+            spend: {plants: 1, log: true},
             stock: {megacredits: 7},
           },
           {
             title: 'Spend 1 steel to gain 7 M€.',
-            spend: {steel: 1},
+            spend: {steel: 1, log: true},
             stock: {megacredits: 7},
           }],
         },

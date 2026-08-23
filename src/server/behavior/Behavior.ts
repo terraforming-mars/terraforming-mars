@@ -47,6 +47,8 @@ export type Behavior = {
   spend?: Partial<OneOfType<Spend>> & {
     canUseSteel?: boolean,
     canUseTitanium?: boolean,
+    /** Log a direct steel, titanium, plant, or energy spend. */
+    log?: true,
   };
 
   /**

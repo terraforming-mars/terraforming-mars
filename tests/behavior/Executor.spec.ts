@@ -623,12 +623,14 @@ describe('Executor', () => {
   });
 
   it('spend - steel', () => {
-    const behavior = {spend: {steel: 1}};
+    const behavior: Behavior = {spend: {steel: 1, log: true}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
     player.steel = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
+    game.gameLog = [];
     executor.execute(behavior, player, fake);
     expect(player.steel).eq(0);
+    expect(game.gameLog.map(formatMessage)).deep.eq(['blue spent 1 steel']);
   });
 
   it('spend - titanium', () => {

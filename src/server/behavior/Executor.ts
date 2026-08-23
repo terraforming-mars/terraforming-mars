@@ -382,6 +382,9 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy) {
         player.stock.deduct(Resource.ENERGY, spend.energy);
       }
+      if (spend.log === true) {
+        this.logSpend(player, spend);
+      }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat, () => {
           this.execute(remainder, player, card);
@@ -723,6 +726,22 @@ export class Executor implements BehaviorExecutor {
       .replaceAll('${player}', '${0}')
       .replaceAll('${card}', '${1}');
     player.game.log(replaced, (b) => b.player(player).card(card));
+  }
+
+  private logSpend(player: IPlayer, spend: NonNullable<Behavior['spend']>) {
+    const directSpend = [
+      {amount: spend.steel, resource: 'steel'},
+      {amount: spend.titanium, resource: 'titanium'},
+      {amount: spend.plants, resource: spend.plants === 1 ? 'plant' : 'plants'},
+      {amount: spend.energy, resource: 'energy'},
+    ].find((entry) => typeof entry.amount === 'number');
+
+    if (typeof directSpend?.amount !== 'number') {
+      throw new Error('Cannot log this type of behavior spend.');
+    }
+
+    const amount = directSpend.amount;
+    player.game.log('${0} spent ${1} ${2}', (b) => b.player(player).number(amount).string(directSpend.resource));
   }
 
   public onDiscard(behavior: Behavior, player: IPlayer, _card: ICard) {

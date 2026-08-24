@@ -87,6 +87,11 @@
   position: fixed;
   width: 0;
 }
+
+.create-game-page-column input:focus-visible + label {
+  outline: 3px solid #ffcc64;
+  outline-offset: 2px;
+}
 .create-game-page-column input[type="radio"] {
   opacity: 0;
   position: fixed;
@@ -300,5 +305,92 @@
 
   .changelog {
     padding: 0px 15px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .topmost-create-game-form {
+    min-height: 100dvh;
+    overflow-x: clip;
+
+    .main-container {
+      margin: 0;
+    }
+
+    .notice {
+      position: static;
+      padding: 16px;
+      text-align: center;
+    }
+  }
+
+  .create-game {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .create-game--block {
+    margin: 16px 0 0;
+    padding: 0px 10px;
+  }
+
+  .create-game-page-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .create-game-page-column {
+    min-width: 0;
+    padding: 16px;
+
+    label {
+      min-height: 52px;
+      height: auto;
+      padding: 6px 12px;
+      font-size: 18px;
+      line-height: 1.25;
+      align-items: center;
+    }
+  }
+
+  .create-game-players-cont,
+  .create-game-action {
+    grid-column: 1 / -1;
+  }
+
+  .create-game-action {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 10px;
+    background: #000000;
+
+    .btn {
+      min-height: 44px;
+    }
+  }
+
+  .create-game-player {
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  .create-game {
+    h1 {
+      font-size: 28px;
+      line-height: 1.15;
+    }
+  }
+
+  .create-game-page-container,
+  .create-game-page-column {
+    display: block;
   }
 }

@@ -417,7 +417,6 @@ export default defineComponent({
   },
   data() {
     return {
-      constants,
       spaceMap: new Map<string, SpaceModel>(this.spaces.map((s) => [s.id, s])),
     };
   },
@@ -514,6 +513,9 @@ export default defineComponent({
     },
     SpaceName(): typeof SpaceName {
       return SpaceName;
+    },
+    constants(): typeof constants {
+      return constants;
     },
   },
 });

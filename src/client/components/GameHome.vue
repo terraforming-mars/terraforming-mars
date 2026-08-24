@@ -74,10 +74,12 @@ export default defineComponent({
     GameSetupDetail,
     PurgeWarning,
   },
+
   data() {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
       urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID,
+      previousViewport: '',
     };
   },
   methods: {
@@ -129,8 +131,24 @@ export default defineComponent({
     // Reset the copied player id after 3 seconds to hide the "copied" message
     setInterval(this.setCopiedIdToDefault, 3000);
     setDocumentTitle(this.game.name);
+    // Set the viewport width to width=device-width on the create game form so mobile browsers use their actual CSS viewport width.
+    // The current global viewport is width=1260, which prevents the create game form from using the device width on phones.
+    // This is a temporary solution in order to make this edit scoped to the create game form.
+    // TODO: Once responsiveness covers the whole project, this code should be removed and the tag in index.html should be updated directly.
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport !== null) {
+      this.previousViewport = viewport.getAttribute('content') ?? '';
+      viewport.setAttribute(
+        'content',
+        'width=device-width, initial-scale=1, viewport-fit=cover',
+      );
+    }
+  },
+  beforeUnmount() {
+    document
+      .querySelector('meta[name="viewport"]')
+      ?.setAttribute('content', this.previousViewport);
   },
 });
 
 </script>
-

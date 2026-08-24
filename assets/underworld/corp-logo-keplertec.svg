@@ -1,0 +1,33 @@
+<svg version="1.1" viewBox="0.0 0.0 112.33070866141732 112.50393700787401" fill="none" stroke="none"
+  stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg">
+  <clipPath id="p.keplertec">
+    <path d="m0 0l112.33071 0l0 112.50394l-112.33071 0l0 -112.50394z" clip-rule="nonzero" />
+  </clipPath>
+  <g clip-path="url(#p.keplertec)">
+    <path fill="#000000" fill-opacity="0.0" d="m0 0l112.33071 0l0 112.50394l-112.33071 0z"
+      fill-rule="evenodd" />
+    <defs>
+      <linearGradient id="p.keplertec-gradient" gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(10.556205549592645 0.0 0.0 10.556205549592645 0.0 0.0)" spreadMethod="pad"
+        x1="0.017901922908279133" y1="0.05366742744995899" x2="0.01786370872945341" y2="10.609872976973433">
+        <stop offset="0.0" stop-color="#bfbfbf" />
+        <stop offset="1.0" stop-color="#000000" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#p.keplertec-gradient)"
+      d="m0.18897638 56.283466l0 0c0 -30.771395 25.02975 -55.716537 55.905514 -55.716537l0 0c14.8270645 0 29.046844 5.870118 39.531166 16.318996c10.484314 10.448877 16.374344 24.620594 16.374344 39.39754l0 0c0 30.771389 -25.029747 55.716534 -55.90551 55.716534l0 0c-30.875763 0 -55.905514 -24.945145 -55.905514 -55.716534z"
+      fill-rule="evenodd" />
+    <path fill="#000000" fill-opacity="0.0" d="m56.174488 32.283466l0 47.999996" fill-rule="evenodd" />
+    <path stroke="#ffff00" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
+      d="m56.174488 32.283466l0 47.999996" fill-rule="evenodd" />
+    <path fill="#000000" fill-opacity="0.0" d="m80.01449 80.28346l-15.370079 -23.999996l15.370079 -24.0z"
+      fill-rule="evenodd" />
+    <path stroke="#ffff00" stroke-width="8.0" stroke-linejoin="bevel"
+      d="m80.01449 80.28346l-15.370079 -23.999996l15.370079 -24.0z" fill-rule="evenodd" />
+    <path fill="#000000" fill-opacity="0.0" d="m32.174488 32.283466l15.370079 24.0l-15.370079 23.999996z"
+      fill-rule="evenodd" />
+    <path stroke="#f1c232" stroke-width="8.0" stroke-linejoin="bevel"
+      d="m32.174488 32.283466l15.370079 24.0l-15.370079 23.999996z" fill-rule="evenodd" />
+  </g>
+</svg>

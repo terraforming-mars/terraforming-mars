@@ -123,7 +123,7 @@
     </div>
 
     <template v-if="thisPlayer.tableau.length === 0">
-      <PlayerSetupView :playerView="playerView" :tileView="tileView"/>
+      <PlayerSetupView :playerView="playerView" :tileView="tileView" @toggleTileView="cycleTileView()"/>
     </template>
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">

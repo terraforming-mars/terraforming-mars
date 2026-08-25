@@ -31,11 +31,23 @@
 - Avoid inline or dynamic imports.
 
 ## Comments
+
+### Comments for Javascript elements
 - The first sentence of a comment summarizes the item.
-- Comments describe the behavior, not narrate the mechanism. Internal methods and comments might violate that
-  as is necessary.
-- JSDoc notation makes sense when attaching to a JavaScript element, not as some disjointed separate comment.
-- Use `name` to describe variables, methods, parameters, etc.
+- Comments describe the behavior, not narrate the mechanism.
+- JSDoc notation makes sense when attaching to an exported JavaScript element. But
+  if you're not using any sophisticated JSdoc, just use /* */
+- Use backticks to describe variables, methods, parameters, etc, e.g. `name`.
+  - Not necessary for primitives.
+- If there's multiple sentences in a comment, put two newlines after the first sentence.
+
+### Comments in code blocks
+- Don't repeat what the code says. Summarize it only when the code cannot be
+  summarized on sight. That happens when the code is particularly tricky,
+  or longer than fits in an editor window.
+
+### Comments in tests
+- Don't repeat what `it` or `expect` states.
 
 ## Naming
 - Types, classes, interfaces are UpperCamelCase.
@@ -48,6 +60,9 @@
 - Build games with `testGame`: `const [game, player, player2] = testGame(2, {venusNextExtension: true});`
 - Resolve deferred actions with `runAllActions(game)`, then take the next input with `player.popWaitingFor()`.
 - Narrow a player input with `cast(input, SelectSpace)` rather than `as`.
+- 100% test coverage is a troublesome pattern. For instance, if something wasn't logged and
+  now it is, that is not worth a test, unless the logging change itself has some meaningful
+  change.
 
 ## Vue
 - In Vue templates, pass boolean props explicitly (`:prop="true"`/`:prop="false"`), never the bare

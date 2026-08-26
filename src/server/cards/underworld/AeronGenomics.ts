@@ -71,7 +71,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
     andOptions.cb = (() => {
       // Remove from the highest index down so earlier removals don't shift the
       // indexes still to be removed. Sort numerically, not stringwise.
-      const sorted = indexes.slice().sort((a, b) => b - a);
+      const sorted = indexes.toSorted((a, b) => b - a);
       for (const idx of sorted) {
         UnderworldExpansion.removeClaimedToken(player, idx);
       }

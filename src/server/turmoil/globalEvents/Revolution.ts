@@ -30,7 +30,7 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
         game.playersInGenerationOrder[0].decreaseTerraformRating(2, {log: true});
       }
     } else {
-      const players = [...game.playersInGenerationOrder].sort(
+      const players = game.playersInGenerationOrder.toSorted(
         (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
       );
 

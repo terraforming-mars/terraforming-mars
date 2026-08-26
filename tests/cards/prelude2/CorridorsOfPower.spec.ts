@@ -49,7 +49,7 @@ describe('CorridorsOfPower', () => {
       run.delegates.forEach((delegate) => unity.sendDelegate(getDelegate(delegate)!, game));
       expect(unity.partyLeader).eq(getDelegate(run.initialLeader));
 
-      if (!run.hasOwnProperty('playedCard') || run['playedCard'] !== false) {
+      if (run.playedCard !== false) {
         player.playedCards.push(card);
       }
 

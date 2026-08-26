@@ -42,7 +42,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
       }
       return 0;
     };
-    const sorted = [...player.game.colonies].sort((a, b) => value(b) - value(a));
+    const sorted = player.game.colonies.toSorted((a, b) => value(b) - value(a));
 
     sorted.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {

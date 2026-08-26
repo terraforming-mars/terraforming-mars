@@ -84,7 +84,7 @@ export default defineComponent({
       return 'ma-name--' + this.award.name.replaceAll(' ', '-').replaceAll('.', '').toLowerCase();
     },
     sortedScores(): Array<AwardScore> {
-      return [...this.award.scores].sort((s1, s2) => s2.score - s1.score);
+      return this.award.scores.toSorted((s1, s2) => s2.score - s1.score);
     },
     description(): string {
       return getAward(this.award.name).description;

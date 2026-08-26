@@ -291,7 +291,7 @@ export default defineComponent({
     allTags(): Array<TagOption> {
       const results: Array<TagOption> = [];
       for (const tag in Tag) {
-        if (Object.prototype.hasOwnProperty.call(Tag, tag)) {
+        if (Object.hasOwn(Tag, tag)) {
           results.push((<any>Tag)[tag]);
         }
       }
@@ -301,10 +301,10 @@ export default defineComponent({
       return [...getEnumStringValues(CardResource), 'none'];
     },
     allMilestoneNames(): ReadonlyArray<MilestoneName> {
-      return [...milestoneNames].sort();
+      return milestoneNames.toSorted();
     },
     allAwardNames(): ReadonlyArray<AwardName> {
-      return [...awardNames].sort();
+      return awardNames.toSorted();
     },
     allAgendaIds(): ReadonlyArray<PolicyId | BonusId> {
       const ids = (POLICY_IDS as ReadonlyArray<PolicyId | BonusId>).concat(BONUS_IDS);

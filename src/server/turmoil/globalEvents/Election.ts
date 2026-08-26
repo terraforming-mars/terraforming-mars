@@ -37,7 +37,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
         player.increaseTerraformRating(1, {log: true});
       }
     } else {
-      const players = game.players.slice().sort(
+      const players = game.players.toSorted(
         (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
       );
 

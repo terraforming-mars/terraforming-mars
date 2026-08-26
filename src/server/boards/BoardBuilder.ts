@@ -170,8 +170,8 @@ export class BoardBuilder {
 export function preservingShuffle(array: Array<unknown>, preservedIndexes: ReadonlyArray<number>, rng: Random): void {
   // Reversing the indexes so the elements are pulled from the right.
   // Reversing the result so elements are listed left to right.
-  const forward = [...preservedIndexes].sort((a, b) => a - b);
-  const backward = [...forward].reverse();
+  const forward = preservedIndexes.toSorted((a, b) => a - b);
+  const backward = forward.toReversed();
   const spliced = backward.map((idx) => array.splice(idx, 1)[0]).reverse();
   inplaceShuffle(array, rng);
   for (let idx = 0; idx < forward.length; idx++) {

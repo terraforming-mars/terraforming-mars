@@ -96,7 +96,7 @@ export default defineComponent({
       return 'ma-name ma-name--' + this.milestone.name.replaceAll(' ', '-').replaceAll('.', '').toLowerCase();
     },
     sortedScores(): Array<MilestoneScore> {
-      return [...this.milestone.scores].sort((s1, s2) => s2.score - s1.score);
+      return this.milestone.scores.toSorted((s1, s2) => s2.score - s1.score);
     },
     description(): string {
       return getMilestone(this.milestone.name).description;

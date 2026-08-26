@@ -198,7 +198,7 @@ export class Turmoil {
    */
   public checkDominantParty(): void {
     // If there is a dominant party
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -214,7 +214,7 @@ export class Turmoil {
    */
   // Function to get next dominant party taking into account the clockwise order
   private setNextPartyAsDominant(currentDominantParty: IParty) {
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -398,7 +398,7 @@ export class Turmoil {
       partiesToCheck = [...this.parties.slice(currentIndex + 1), ...this.parties.slice(0, currentIndex)];
     }
 
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const first = sortParties[0].delegates.size;

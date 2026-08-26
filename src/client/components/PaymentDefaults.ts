@@ -44,7 +44,7 @@ export function computeDefaultPayment(
   // Post-pass: if resources overspent (can happen when two high-rate resources
   // combine), reduce units in reverse order until overspend is gone.
   if (amountCovered > cost) {
-    for (const unit of [...order].reverse()) {
+    for (const unit of order.toReversed()) {
       if (unit === 'megacredits') {
         continue;
       }

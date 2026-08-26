@@ -71,7 +71,7 @@ function getAllTranslations(): {[phrase: string]: Translation} {
           }
         }
       } catch (e) {
-        throw new Error(`While parsing ${filename}:` + e);
+        throw new Error(`While parsing ${filename}`, {cause: e});
       }
     }
   }

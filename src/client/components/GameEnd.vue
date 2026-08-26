@@ -290,8 +290,7 @@ export default defineComponent({
       return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
     },
     playersInPlace(): Array<PublicPlayerModel> {
-      const copy = [...this.viewModel.players];
-      copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      const sorted = this.viewModel.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) {
           return -1;
         }
@@ -306,7 +305,7 @@ export default defineComponent({
         }
         return 0;
       });
-      return copy.reverse();
+      return sorted.reverse();
     },
     winners() {
       const sortedPlayers = this.playersInPlace;

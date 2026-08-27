@@ -5,7 +5,8 @@ import {ICard} from '../cards/ICard';
 import {Tag} from '../../common/cards/Tag';
 import {SelectColony} from '../inputs/SelectColony';
 import {IPlayer} from '../IPlayer';
-import {inplaceRemove} from '../../common/utils/utils';
+import {inplaceRemove, toName} from '../../common/utils/utils';
+import {comparing} from '../../common/utils/Ordering';
 import {CardName} from '../../common/cards/CardName';
 
 export class ColoniesHandler {
@@ -100,7 +101,7 @@ export class ColoniesHandler {
     const selectColonyTile = new SelectColony(title, 'Add colony tile', [...colonyTiles])
       .andThen((colonyTile) => {
         game.colonies.push(colonyTile);
-        game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        game.colonies.sort(comparing(toName));
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));
         if (!colonyTile.isActive && colonyTileWillEnterActive(colonyTile, game)) {
           colonyTile.isActive = true;

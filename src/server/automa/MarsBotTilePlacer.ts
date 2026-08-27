@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Space} from '../boards/Space';
 import {Board} from '../boards/Board';
 import {SpaceType} from '../../common/boards/SpaceType';
+import {byKey, Comparator, compound, reversed} from '../../common/utils/Ordering';
 
 /**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
@@ -129,24 +130,17 @@ export class MarsBotTilePlacer {
       bonusIcons: space.bonus.length,
     }));
 
-    // Sort by primary desc, then adjacent oceans desc, then bonus icons desc
-    scored.sort((a, b) => {
-      if (a.primary !== b.primary) {
-        return b.primary - a.primary;
-      }
-      if (a.adjacentOceans !== b.adjacentOceans) {
-        return b.adjacentOceans - a.adjacentOceans;
-      }
-      return b.bonusIcons - a.bonusIcons;
-    });
+    // Sort by primary descending, then adjacent oceans descending, then bonus icons descending
+    const ranking: Comparator<(typeof scored)[number]> =
+      reversed(compound(
+        byKey('primary'),
+        byKey('adjacentOceans'),
+        byKey('bonusIcons')));
+    scored.sort(ranking);
 
     // Find all tied for best
     const best = scored[0];
-    const tied = scored.filter((s) =>
-      s.primary === best.primary &&
-      s.adjacentOceans === best.adjacentOceans &&
-      s.bonusIcons === best.bonusIcons,
-    );
+    const tied = scored.filter((s) => ranking(s, best) === 0);
 
     if (tied.length === 1) {
       return tied[0].space;

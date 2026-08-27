@@ -26,6 +26,7 @@ import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {getPreferences} from '@/client/utils/PreferencesManager';
+import {comparing} from '@/common/utils/Ordering';
 
 type DataModel = {
   /** When true use the point-and-click reorder UI */
@@ -128,7 +129,7 @@ export default defineComponent({
               const thisCard = textContent.trim();
               this.cardOrder[thisCard] += direction;
               Object.entries(this.cardOrder)
-                .sort((a, b) => a[1]-b[1])
+                .sort(comparing((entry) => entry[1]))
                 .forEach((entry, i) => {
                   this.cardOrder[entry[0]] = i+1;
                 });

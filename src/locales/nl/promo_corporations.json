@@ -1,0 +1,68 @@
+{
+  "Arcadian": "",
+  "Communities": "",
+  "Arcadian Communities": "",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Je start met 40 M€ en 10 staal. ALS JE EERSTE ACTIE PLAATS JE EEN COMMUNITY [SPELERSMARKERING] OP EEN NIET-GERESERVEERD GEBIED.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "ACTIE: PLAATS EEN COMMUNITY (SPELERSMARKERING) OP EEN NIET-GERESERVEERD GEBIED AANGRENZEND AAN EEN VAN JE TEGELS OF GEMARKEERDE GEBIEDEN.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFFECT: GEMARKEERDE GEBIEDEN ZIJN VOOR JOU GERESERVEERD. WANNEER JE DAAR EEN TEGEL PLAATST, ONTVANG JE 3 M€.",
+
+  "AstroDrill": "",
+  "Astrodrill ENT": "",
+  "You start with 35 M€ and 3 asteroid resources.": "Je start met 35 M€ en 3 asteroidegrondstoffen.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Actie: Voeg een asteroidegrondstof toe aan EEN WILLEKEURIGE kaart OF ontvang een willekeurige standaardgrondstof, OF verwijder een asteroidegrondstof van deze kaart om 3 titanium te ontvangen.",
+
+  "FACTORUM": "",
+  "Factorum": "",
+  "You start with 37 M€. Increase your steel production 1 step.": "Je start met 37 M€. Verhoog je staalproductie met 1 stap.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Actie: Verhoog je energieproductie met 1 stap ALS JE GEEN ENERGIEGRONDSTOFFEN HEBT, of besteed 3M€ om een bouwkaart te trekken.",
+
+  "KUIPER COOPERATIVE": "",
+  "Kuiper Cooperative": "",
+  "Cooperative": "",
+  "You start with 33 M€. Increase titanium production 1 step.": "Je start met 33 M€. Verhoog je titaniumproductie met 1 stap.",
+  "Action: Add 1 asteroid here for every space tag you have.": "Actie: Voeg hier 1 asteroide toe voor elk ruimtelabel dat je hebt.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "Effect: Wanneer je de standaardprojecten AQUIFER of ASTEROIDE gebruikt, mag je asteroiden op deze kaart besteden als 1M€ per stuk.",
+
+  "mons": "",
+  "INSURANCE": "VERZEKERING",
+  "Mons Insurance": "Mons Verzekering",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Je start met 48 M€. Verhoog je M€-productie met 4 stappen. ALLE TEGENSTANDERS VERLAGEN HUN M€-PRODUCTIE MET 2 STAPPEN. DIT ACTIVEERT HET ONDERSTAANDE EFFECT NIET.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Effect: Wanneer een speler ervoor zorgt dat een andere speler productie verlaagt of grondstoffen verliest, betaal dan 3M€ aan het slachtoffer, of zoveel als mogelijk.",
+
+  "Pharmacy": "Apotheek",
+  "Union": "Unie",
+  "Pharmacy Union": "Pharmacy Unie",
+  "You start with 54 M€. Draw a Science card.": "Je start met 54 M€. Trek een wetenschapskaart.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Effect: Wanneer EEN WILLEKEURIG microbelabel wordt gespeeld, voeg hier een ziekte toe en verlies 4 M€ of zoveel als mogelijk. Wanneer je een wetenschapslabel speelt, verwijder hier een ziekte en ontvang 1 TN OF als er hier geen ziektes liggen, MAG je deze kaart met de afbeelding naar beneden in je EVENEMENTENSTAPEL plaatsen om 3 TN te ontvangen.",
+
+  "PHIL": "",
+  "RES": "",
+  "Philares": "",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Je start met 47 M€. Als je eerste actie plaats je een groentegel en verhoog je het zuurstofniveau met 1 stap.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Effect: Elke nieuwe aangrenzing tussen jouw tegel en een tegel van een tegenstander geeft je een standaardgrondstof naar keuze [ongeacht wie zojuist een tegel heeft geplaatst].",
+
+  "PolderTECH Dutch": "",
+  "PolderTECH": "",
+  "Dutch": "Nederlands",
+  "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.": "Je start met 35 M€. Als je eerste actie plaats je een oceaantegel en een groentegel naast elkaar, WAARBIJ JE PLAATSINGSBEPERKINGEN VOOR GROENTEGELS NEGEERT. Verhoog het zuurstofniveau met 1 stap.",
+  "Effect: When you place an ocean tile, gain 1 energy.": "Effect: Wanneer je een oceaantegel plaatst, ontvang je 1 energie.",
+  "Effect: When you place a greenery, gain 1 plant.": "Effect: Wanneer je een groentegel plaatst, ontvang je 1 plant.",
+
+  "Recyclon": "",
+  "You start with 38 M€ and 1 steel production.": "Je start met 38 M€ en 1 staalproductie.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Effect: Wanneer je een bouwlabel speelt, inclusief deze kaart, ontvang je 1 microbe op deze kaart, of verwijder hier 2 microben en verhoog je plantproductie met 1 stap.",
+
+  "Tycho Magnetics": "",
+  "MAGNETICS": "",
+  "You start with 42 M€. Increase your energy production 1 step.": "Je start met 42 M€. Verhoog je energieproductie met 1 stap.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "Actie: Besteed een willekeurige hoeveelheid energie om dat aantal kaarten te trekken. Houd er 1 en leg de rest af.",
+  "KEEP 1": "HOUD 1",
+
+  "SPLI": "",
+  "C": "",
+  "E": "",
+  "TACTICAL GENOMICS": "TACTISCHE GENOMICS",
+  "Splice": "",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Je start met 44 M€. Als je eerste actie onthul je kaarten totdat je een microbelabel hebt onthuld. Neem die kaart en leg de rest af.",
+  "Effect: When a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Effect: Wanneer een microbelabel wordt gespeeld, incl. deze kaart, ontvangt DIE SPELER 2 M€, of voegt een microbe toe aan DIE kaart, en jij ontvangt 2 M€."
+}

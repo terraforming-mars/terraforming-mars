@@ -84,6 +84,7 @@ import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
 import {ICard} from './cards/ICard';
 import {generateGameName} from './GameName';
+import {byKey} from '@/common/utils/Ordering';
 
 // Can be overridden by tests
 let createGameLog: () => Array<LogMessage> = () => [];
@@ -1660,7 +1661,7 @@ export class Game implements IGame, Logger {
           return true;
         }
       })
-      .sort((a, b) => a.cost - b.cost);
+      .toSorted(byKey('cost'));
   }
 
   public log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}) {

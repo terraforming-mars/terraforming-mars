@@ -9,6 +9,7 @@ import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
+import {comparing, reversed} from '../../../common/utils/Ordering';
 
 type Triplet = [Space, Space, Space];
 export class SurveyMission extends PreludeCard {
@@ -93,8 +94,9 @@ export class SurveyMission extends PreludeCard {
       'Select third space',
     ];
     const spaceSet: Set<Space> = new Set(triplets.flat());
-    const spaces = Array.from(spaceSet).filter((space) => space.player === undefined);
-    spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
+    const spaces = Array.from(spaceSet)
+      .filter((space) => space.player === undefined)
+      .sort(reversed(comparing((space) => parseInt(space.id))));
     return new SelectSpace(messages[iteration], spaces)
       .andThen((space) => {
         space.player = player;

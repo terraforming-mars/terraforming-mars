@@ -11,6 +11,7 @@ import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {comparing, reversed} from '../../common/utils/Ordering';
 
 function processRequest(req: Request, res: Response): void {
   if (req.url === undefined) {
@@ -87,7 +88,7 @@ function calc(params: URLSearchParams): string {
   }
 
   const copy: Array<[string, number]> = [...results.multiplicities()];
-  copy.sort((a, b) => b[1] - a[1]);
+  copy.sort(reversed(comparing((entry) => entry[1])));
   return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }
 

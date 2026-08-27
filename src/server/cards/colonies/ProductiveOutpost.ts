@@ -5,11 +5,16 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
-import {IColony} from '../../colonies/IColony';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {uppercase} from '../Options';
+import {comparing} from '../../../common/utils/Ordering';
 
 export class ProductiveOutpost extends Card implements IProjectCard {
+  private rank: Readonly<Partial<Record<ColonyName, number>>> = {
+    [ColonyName.TITANIA]: -1,
+    [ColonyName.LEAVITT]: 1,
+  };
+
   constructor() {
     super({
       cost: 0,
@@ -25,24 +30,9 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     });
   }
 
-  // Order:
-  // Titania
-  // All colonies
-  // Leavitt
-  //
-  // TODO(kberg): Make it possible for Leavitt to resolve before Titania.
-
   public override bespokePlay(player: IPlayer) {
-    const value = (c: IColony): number => {
-      if (c.name === ColonyName.TITANIA) {
-        return 1;
-      }
-      if (c.name === ColonyName.LEAVITT) {
-        return -1;
-      }
-      return 0;
-    };
-    const sorted = player.game.colonies.toSorted((a, b) => value(b) - value(a));
+    // TODO(kberg): Make it possible for Leavitt to resolve before Titania.
+    const sorted = player.game.colonies.toSorted(comparing((c) => this.rank[c.name] ?? 0));
 
     sorted.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {

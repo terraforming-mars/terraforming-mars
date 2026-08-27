@@ -12,6 +12,7 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {ICard} from '../ICard';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
+import {numeric, reversed} from '../../../common/utils/Ordering';
 
 export class AeronGenomics extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -70,8 +71,8 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
       }));
     andOptions.cb = (() => {
       // Remove from the highest index down so earlier removals don't shift the
-      // indexes still to be removed. Sort numerically, not stringwise.
-      const sorted = indexes.toSorted((a, b) => b - a);
+      // indexes still to be removed.
+      const sorted = indexes.toSorted(reversed(numeric));
       for (const idx of sorted) {
         UnderworldExpansion.removeClaimedToken(player, idx);
       }

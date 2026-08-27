@@ -81,6 +81,7 @@ import {SpaceType} from '@/common/boards/SpaceType';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 import {TileView} from '../board/TileView';
 import {SpaceId} from '@/common/Types';
+import {comparing} from '@/common/utils/Ordering';
 
 type MoonParamLevel = {
   value: number,
@@ -105,15 +106,9 @@ export default defineComponent({
   },
   methods: {
     getAllNonColonySpaces(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = [...this.model.spaces];
-      boardSpaces.sort(
-        (space1: SpaceModel, space2: SpaceModel) => {
-          return parseInt(space1.id) - parseInt(space2.id);
-        },
-      );
-      return boardSpaces.filter((s: SpaceModel) => {
-        return s.spaceType !== SpaceType.COLONY;
-      });
+      return this.model.spaces
+        .filter((space) => space.spaceType !== SpaceType.COLONY)
+        .toSorted(comparing((space) => parseInt(space.id)));
     },
     getSpaceById(spaceId: SpaceId) {
       for (const space of this.model.spaces) {

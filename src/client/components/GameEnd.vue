@@ -290,7 +290,7 @@ export default defineComponent({
       if (id === undefined) {
         return undefined;
       }
-      return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
+      return `${paths.END_GAME_LOG}?id=${id}`;
     },
     playersInPlace(): Array<PublicPlayerModel> {
       const sorted = this.viewModel.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {

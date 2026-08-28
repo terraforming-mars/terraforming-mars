@@ -18,6 +18,7 @@ export const paths = {
   AUTH_DISCORD_CALLBACK: 'auth/discord/callback',
   AUTOPASS: 'autopass',
   CARDS: 'cards',
+  END_GAME_LOG: 'end_game_log',
   GAME: 'game',
   GAMES_OVERVIEW: 'games-overview',
   HELP: 'help',

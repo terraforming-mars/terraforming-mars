@@ -6,8 +6,8 @@ import {isPlayerId, isSpectatorId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
 
-export class ApiGameLogs extends Handler {
-  public static readonly INSTANCE = new ApiGameLogs();
+export class EndGameLog extends Handler {
+  public static readonly INSTANCE = new EndGameLog();
   private constructor(private gameLogs = new GameLogs()) {
     super();
   }
@@ -29,9 +29,15 @@ export class ApiGameLogs extends Handler {
       return;
     }
 
-    const generation = searchParams.get('generation');
-    const logs = this.gameLogs.getLogsForGameView(id, game, generation);
-    responses.writeJson(res, ctx, logs);
+    let logs = '';
+    try {
+      logs = this.gameLogs.getLogsForGameEnd(game).join('\n');
+    } catch (e) {
+      responses.badRequest(req, res, 'cannot fetch game-end log');
+      return;
+    }
+    res.setHeader('Content-Type', 'text/plain');
+    res.end(logs);
   }
 }
 

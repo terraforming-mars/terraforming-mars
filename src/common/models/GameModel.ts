@@ -23,7 +23,6 @@ export type GameModel = {
   deckSize: number;
   discardPileSize: number;
   expectedPurgeTimeMs: number;
-  experimentalReset?: boolean;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;

@@ -1,6 +1,8 @@
 import {expect} from 'chai';
 import {CreateGameSettingsStorage} from '@/client/components/create/CreateGameSettingsStorage';
 import {FakeLocalStorage} from '../FakeLocalStorage';
+import {BoardName} from '@/common/boards/BoardName';
+import {NewGameConfig} from '@/common/game/NewGameConfig';
 
 describe('CreateGameSettingsStorage', () => {
   let localStorage: FakeLocalStorage;
@@ -12,15 +14,17 @@ describe('CreateGameSettingsStorage', () => {
   });
 
   it('saves and reloads game settings', () => {
-    storage.saveSettings({
-      players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0}],
-      board: 'hellas',
-      clonedGamedId: 'g123',
+    const config: Partial<NewGameConfig>  = {
+      players: [ {name: 'Alice', color: 'red', beginner: false, handicap: 0, first: true} ],
+      board: BoardName.HELLAS,
       solarPhaseOption: true,
-    });
+      clonedGamedId: 'g123',
+    };
+
+    storage.saveSettings(config as NewGameConfig);
 
     expect(storage.loadSettings()).deep.eq({
-      players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0}],
+      players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0, first: true}],
       board: 'hellas',
       solarPhaseOption: true,
     });
@@ -47,7 +51,7 @@ describe('CreateGameSettingsStorage', () => {
       players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0}],
       board: 'hellas',
       solarPhaseOption: true,
-    });
+    } as NewGameConfig);
 
     storage.clearSettings();
 

@@ -1,3 +1,4 @@
+import {NewGameConfig} from '@/common/game/NewGameConfig';
 import {JSONObject} from '@/common/Types';
 
 const SETTINGS_KEY = 'tm_last_game_settings';
@@ -11,7 +12,7 @@ function getLocalStorage(): Storage | undefined {
   }
 }
 
-function settingsWithoutClonedGameId(settings: JSONObject): JSONObject {
+function settingsWithoutClonedGameId(settings: NewGameConfig): NewGameConfig {
   const sanitized = {...settings};
   delete sanitized.clonedGamedId;
   return sanitized;
@@ -21,7 +22,7 @@ export class CreateGameSettingsStorage {
   constructor(private readonly storage?: Storage) {
   }
 
-  public saveSettings(settings: JSONObject): void {
+  public saveSettings(settings: NewGameConfig): void {
     const storage = this.storage ?? getLocalStorage();
     if (storage === undefined) {
       return;

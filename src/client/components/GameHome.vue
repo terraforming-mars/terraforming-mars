@@ -10,7 +10,7 @@
         <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
         <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
       </li>
-      <li v-if="game !== undefined && game.spectatorId">
+      <li v-if="game !== undefined">
         <p></p>
         <span class="turn-order"></span>
         <span class="color-square"></span>

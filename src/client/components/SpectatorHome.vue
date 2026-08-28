@@ -54,7 +54,7 @@
       </div>
     </div>
     <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
-    <div v-if="game.spectatorId">
+    <div>
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
     <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>

@@ -39,7 +39,7 @@ export type GameModel = {
   pathfinders: PathfindersModel | undefined;
   phase: Phase;
   spaces: ReadonlyArray<SpaceModel>;
-  spectatorId?: SpectatorId;
+  spectatorId: SpectatorId;
   step: number;
   tags: ReadonlyArray<Tag>;
   temperature: number;

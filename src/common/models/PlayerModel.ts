@@ -17,7 +17,7 @@ import {DeltaProjectPlayerModel} from './DeltaProjectPlayerModel';
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id?: ParticipantId;
+  id: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
   runId: string;
 }

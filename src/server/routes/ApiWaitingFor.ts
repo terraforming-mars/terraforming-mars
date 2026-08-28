@@ -52,7 +52,11 @@ export class ApiWaitingFor extends Handler {
   }
 
   public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
-    const id = String(ctx.url.searchParams.get('id'));
+    const id = ctx.url.searchParams.get('id');
+    if (id === null) {
+      responses.badRequest(req, res, 'missing id parameter');
+      return;
+    }
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
 

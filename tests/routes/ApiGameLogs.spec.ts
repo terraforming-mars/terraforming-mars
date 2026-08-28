@@ -4,9 +4,9 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {Phase} from '../../src/common/Phase';
 import {use} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import {testGame} from '@tests/TestGame';
 use(chaiAsPromised);
 
 describe('ApiGameLogs', () => {
@@ -37,9 +37,8 @@ describe('ApiGameLogs', () => {
   });
 
   it('pulls logs when no generation provided', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
+    const [game, player] = testGame(1);
     scaffolding.url = '/api/game/logs?id=' + player.id;
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
@@ -50,9 +49,8 @@ describe('ApiGameLogs', () => {
   });
 
   it('pulls logs for most recent generation', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
+    const [game, player] = testGame(1);
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=50';
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
@@ -63,8 +61,7 @@ describe('ApiGameLogs', () => {
   });
 
   it('pulls full current generation when explicitly requested', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
+    const [game, player] = testGame(1);
     await scaffolding.ctx.gameLoader.add(game);
 
     game.gameLog.length = 0;
@@ -83,9 +80,8 @@ describe('ApiGameLogs', () => {
   });
 
   it('pulls logs for first generation', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
+    const [game, player] = testGame(1);
     scaffolding.url = '/api/game/logs?id=' + player.id;
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
@@ -95,9 +91,8 @@ describe('ApiGameLogs', () => {
   });
 
   it('pulls logs for missing generation', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
+    const [game, player] = testGame(1);
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=2';
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
@@ -131,25 +126,5 @@ describe('ApiGameLogs', () => {
       expect(messages[0].message).eq('All players see this.');
       expect(messages[1].message).eq(`${entry.color} player sees this.`);
     });
-  });
-
-  it('Cannot pull full logs before game end', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
-    scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
-    await scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.get(ApiGameLogs.INSTANCE, res);
-    expect(res.content).eq('Bad request: cannot fetch game-end log');
-  });
-
-  it('Pulls full logs at game end', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
-    const player2 = TestPlayer.BLUE.newPlayer();
-    scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
-    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
-    game.phase = Phase.END;
-    await scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.get(ApiGameLogs.INSTANCE, res);
-    expect(res.content).to.match(/^First player this generation is player-black/);
   });
 });

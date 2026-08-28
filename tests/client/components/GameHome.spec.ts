@@ -17,7 +17,7 @@ describe('GameHome', () => {
           id: 'game-id-123',
           phase: Phase.ACTION,
           players: [{color: 'blue', id: 'p-blue', name: 'Blue'}],
-          spectatorId: undefined,
+          spectatorId: 'spectator-id-123',
           gameOptions: fakeGameOptionsModel(),
           lastSoloGeneration: 14,
           expectedPurgeTimeMs: 0,

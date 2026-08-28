@@ -80,7 +80,7 @@ export default defineComponent({
     },
     url(playerView: PlayerViewModel | undefined) {
       const url = new URL(window.location.href);
-      const spectatorId: SpectatorId | undefined = playerView?.game?.spectatorId;
+      const spectatorId: SpectatorId | undefined = playerView?.game.spectatorId;
       if (spectatorId && url.pathname === '/player' && url.searchParams.has('id')) {
         url.searchParams.set('id', spectatorId);
         url.pathname = '/spectator';

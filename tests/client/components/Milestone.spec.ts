@@ -46,7 +46,7 @@ describe('Milestone', () => {
   ] as const;
   for (const run of showScoresRuns) {
     it('Show scores ' + run.value, () => {
-      const milestone = createMilestone({claimed: true, scores: [{color: 'red', score: 2}]});
+      const milestone = createMilestone({claimed: true, scores: [{color: 'red', score: 2, claimable: false}]});
       const wrapper = mount(Milestone, {...globalConfig, props: {milestone, showScores: run.value}});
 
       expect(wrapper.find('[data-test=player-score]').exists()).to.eq(run.expected);
@@ -57,7 +57,7 @@ describe('Milestone', () => {
     const milestone = createMilestone({
       claimed: true,
       scores: [
-        {color: 'red', score: 2},
+        {color: 'red', score: 2, claimable: false},
       ],
     });
 
@@ -71,10 +71,10 @@ describe('Milestone', () => {
     const milestone = createMilestone({
       claimed: false,
       scores: [
-        {color: 'red', score: 2},
-        {color: 'blue', score: 4},
-        {color: 'yellow', score: 0},
-        {color: 'green', score: 4},
+        {color: 'red', score: 2, claimable: false},
+        {color: 'blue', score: 4, claimable: false},
+        {color: 'yellow', score: 0, claimable: false},
+        {color: 'green', score: 4, claimable: false},
       ],
     });
 

@@ -4,7 +4,7 @@ import {ParticipantId} from '@/common/Types';
 
 let abortController: AbortController | undefined;
 
-export async function fetchLogs(id: ParticipantId | undefined, generation: number): Promise<Array<LogMessage> | undefined> {
+export async function fetchLogs(id: ParticipantId, generation: number): Promise<Array<LogMessage> | undefined> {
   // Aborts any pending request for a previous generation before starting the new one.
   // If the past call is complete, .abort() does nothing.
   abortController?.abort();

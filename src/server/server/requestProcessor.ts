@@ -41,6 +41,7 @@ import {DiscordUser} from './auth/discord';
 import {getHerokuIpAddress} from './heroku';
 import * as responses from './responses';
 import {EndGameLog} from '../routes/EndGameLog';
+import {UrlParams} from '../routes/UrlParams';
 
 const metrics = {
   request_count: new prometheus.Counter({
@@ -214,6 +215,7 @@ export async function processRequest(req: Request, res: Response): Promise<void>
         },
         sessionid: sessionid,
         user: user,
+        urlParams: new UrlParams(url.searchParams),
       };
 
       await handler.processRequest(req, res, ctx);

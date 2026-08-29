@@ -66,10 +66,10 @@ export function internalServerError(
   res.end();
 }
 
-export function notAuthorized(req: Request, res: Response): void {
-  console.warn('Not authorized', req.method, req.url);
+export function forbidden(req: Request, res: Response): void {
+  console.warn('Forbidden', req.method, req.url);
   res.writeHead(statusCode.forbidden);
-  res.write('Not authorized');
+  res.write('forbidden');
   res.end();
 }
 

@@ -6,7 +6,6 @@ import {Context} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../../common/inputs/InputResponse';
-import {isPlayerId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {runId} from '../utils/server-ids';
@@ -15,39 +14,27 @@ import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
+import {RouteError} from './RouteError';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
 
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
-    const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      responses.badRequest(req, res, 'missing id parameter');
-      return;
-    }
-
-    if (!isPlayerId(playerId)) {
-      responses.badRequest(req, res, 'invalid player id');
-      return;
-    }
+    const playerId = ctx.urlParams.playerId('id');
 
     ctx.ipTracker.addParticipant(playerId, ctx.ip);
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
-      responses.notFound(req, res);
-      return;
+      throw RouteError.notFound();
     }
-    let player: IPlayer | undefined;
+    let player: IPlayer;
     try {
       player = game.getPlayerById(playerId);
     } catch (err) {
       console.warn(`unable to find player ${playerId}`, err);
-    }
-    if (player === undefined) {
-      responses.notFound(req, res);
-      return;
+      throw RouteError.notFound();
     }
     return this.processInput(req, res, ctx, player);
   }

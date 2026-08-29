@@ -26,7 +26,7 @@ describe('EndGameLog', () => {
     scaffolding.url = '/end_game_log?id=game-id';
     await scaffolding.get(EndGameLog.INSTANCE, res);
     expect(res.statusCode).eq(statusCode.badRequest);
-    expect(res.content).eq('Bad request: invalid player id');
+    expect(res.content).eq('Bad request: invalid participant id');
   });
 
   it('fails when game not found', async () => {

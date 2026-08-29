@@ -10,6 +10,7 @@ import {cast} from '@/common/utils/utils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -25,6 +26,7 @@ describe('PlayerInput', () => {
   it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
     await scaffolding.post(PlayerInput.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
@@ -97,6 +99,7 @@ describe('PlayerInput', () => {
     });
     await Promise.all(([emit, post]));
 
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).matches(/Unexpected token/);
   });
 });

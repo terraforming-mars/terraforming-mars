@@ -7,6 +7,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {use} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import {testGame} from '@tests/TestGame';
+import {statusCode} from '@/common/http/statusCode';
 use(chaiAsPromised);
 
 describe('ApiGameLogs', () => {
@@ -21,18 +22,21 @@ describe('ApiGameLogs', () => {
   it('fails when id not provided', async () => {
     scaffolding.url = '/api/game/logs';
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('fails with invalid id', async () => {
     scaffolding.url = '/api/game/logs?id=game-id';
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
-    expect(res.content).eq('Bad request: invalid player id');
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).eq('Bad request: invalid participant id');
   });
 
   it('fails when game not found', async () => {
     scaffolding.url = '/api/game/logs?id=player-invalid-id';
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: game not found');
   });
 

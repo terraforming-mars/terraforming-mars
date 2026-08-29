@@ -5,6 +5,7 @@ import {IPTracker} from '../../src/server/server/IPTracker';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {FakeClock} from '../common/FakeClock';
 import {ISessionManager} from '../../src/server/server/auth/SessionManager';
+import {UrlParams} from '@/server/routes/UrlParams';
 
 describe('QuotaHandler', () => {
   let ctx: Context;
@@ -12,8 +13,9 @@ describe('QuotaHandler', () => {
 
   beforeEach(() => {
     fakeClock = new FakeClock;
+    const url = new URL('http://boo.com');
     ctx = {
-      url: new URL('http://boo.com'),
+      url: url,
       ip: '123.45.678.90',
       ipTracker: {} as IPTracker,
       gameLoader: {} as GameLoader,
@@ -23,6 +25,7 @@ describe('QuotaHandler', () => {
         statsId: '2',
       },
       clock: fakeClock,
+      urlParams: new UrlParams(url.searchParams),
     };
   });
 

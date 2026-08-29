@@ -5,6 +5,7 @@ import {GameId} from '../../src/common/Types';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('ApiGameHistory', () => {
   let scaffolding: RouteTestScaffolding;
@@ -22,13 +23,15 @@ describe('ApiGameHistory', () => {
   it('fails when id not provided', async () => {
     scaffolding.url = '/api/game/history?serverId=1';
     await scaffolding.get(ApiGameHistory.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('fails with invalid id', async () => {
     scaffolding.url = '/api/game/history?serverId=1&id=not-a-game-id';
     await scaffolding.get(ApiGameHistory.INSTANCE, res);
-    expect(res.content).eq('Bad request: Invalid game id');
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).eq('Bad request: invalid game id');
   });
 
   it('returns save ids in numeric order', async () => {

@@ -3,6 +3,8 @@ import {IHandler, Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {DiscordId} from '../server/auth/discord';
+import {RouteError} from './RouteError';
+import {assertNever} from '../../common/utils/utils';
 
 export type Options = {
   validateServerId: boolean;
@@ -43,6 +45,9 @@ export abstract class Handler implements IHandler {
     };
   }
 
+  // TODO(kberg): provide a good not authorized path. This collapses two failures into
+  // one boolean: no session at all (401) and someone else's data (403). Callers can only
+  // report `forbidden`.
   protected isUser(userId: DiscordId | undefined, ctx: Context): boolean {
     // Nobody's data to protect
     if (userId === undefined) {
@@ -64,59 +69,79 @@ export abstract class Handler implements IHandler {
     if (ctx.user?.id && DISCORD_ADMIN_USER_IDS.includes(ctx.user?.id)) {
       return true;
     }
-    const serverId = ctx.url.searchParams.get('serverId');
-    if (serverId !== null && serverId === ctx.ids.serverId) {
-      return true;
-    }
-    return false;
+    const serverId = ctx.urlParams.stringOrUndefined('serverId');
+    return serverId === ctx.ids.serverId;
   }
 
   private isStatsIdValid(ctx: Context): boolean {
-    const serverId = ctx.url.searchParams.get('serverId');
+    const serverId = ctx.urlParams.stringOrUndefined('serverId');
     return serverId !== null && serverId === ctx.ids.statsId;
   }
 
-  processRequest(req: Request, res: Response, ctx: Context): Promise<void> {
-    if (this.options.validateServerId && !this.isServerIdValid(ctx)) {
-      responses.notAuthorized(req, res);
-      return Promise.resolve();
+  /* Routes are async, so a thrown RouteError surfaces as a rejection, not a synchronous throw. */
+  private handleError(e: unknown, req: Request, res: Response): void {
+    if (e instanceof RouteError) {
+      switch (e.kind) {
+      case 'badRequest':
+        responses.badRequest(req, res, e.detail);
+        break;
+      case 'forbidden':
+        responses.forbidden(req, res);
+        break;
+      case 'notFound':
+        responses.notFound(req, res, e.detail);
+        break;
+      case 'internalServerError':
+        responses.internalServerError(req, res, e.detail);
+        break;
+      default:
+        assertNever(e.kind);
+      }
+      return;
     }
+    responses.internalServerError(req, res, e);
+  }
 
-    if (this.options.validateStatsId) {
-      if (this.isServerIdValid(ctx)) {
-        responses.downgradeRedirect(req, res, ctx);
-        return Promise.resolve();
+  public async processRequest(req: Request, res: Response, ctx: Context): Promise<void> {
+    try {
+      if (this.options.validateServerId && !this.isServerIdValid(ctx)) {
+        throw RouteError.forbidden();
       }
 
-      if (!this.isStatsIdValid(ctx)) {
-        responses.notAuthorized(req, res);
-        return Promise.resolve();
-      }
-    }
+      if (this.options.validateStatsId) {
+        if (this.isServerIdValid(ctx)) {
+          responses.downgradeRedirect(req, res, ctx);
+          return Promise.resolve();
+        }
 
-    switch (req.method) {
-    case 'GET':
-      return this.get(req, res, ctx);
-    case 'PUT':
-      return this.put(req, res, ctx);
-    case 'POST':
-      return this.post(req, res, ctx);
-    default:
-      responses.badRequest(req, res, 'Bad method');
+        if (!this.isStatsIdValid(ctx)) {
+          throw RouteError.forbidden();
+        }
+      }
+
+      switch (req.method) {
+      case 'GET':
+        return await this.get(req, res, ctx);
+      case 'POST':
+        return await this.post(req, res, ctx);
+      case 'PUT':
+        return await this.put(req, res, ctx);
+      default:
+        throw RouteError.badRequest('Bad method');
+      }
+    } catch (e) {
+      this.handleError(e, req, res);
       return Promise.resolve();
     }
   }
 
-  public get(req: Request, res: Response, _ctx: Context): Promise<void> {
-    responses.notFound(req, res);
-    return Promise.resolve();
+  public get(_req: Request, _res: Response, _ctx: Context): Promise<void> {
+    throw RouteError.notFound();
   }
-  public put(req: Request, res: Response, _ctx: Context): Promise<void> {
-    responses.notFound(req, res);
-    return Promise.resolve();
+  public put(_req: Request, _res: Response, _ctx: Context): Promise<void> {
+    throw RouteError.notFound();
   }
-  public post(req: Request, res: Response, _ctx: Context): Promise<void> {
-    responses.notFound(req, res);
-    return Promise.resolve();
+  public post(_req: Request, _res: Response, _ctx: Context): Promise<void> {
+    throw RouteError.notFound();
   }
 }

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {ApiSpectator} from '../../src/server/routes/ApiSpectator';
-import {Game} from '../../src/server/Game';
-import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {SpectatorModel} from '../../src/common/models/SpectatorModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '@/common/http/statusCode';
+import {testGame} from '@tests/TestGame';
 
 describe('ApiSpectator', () => {
   let scaffolding: RouteTestScaffolding;
@@ -15,24 +15,24 @@ describe('ApiSpectator', () => {
     res = new MockResponse();
   });
 
-  it('fails game not found', async () => {
+  it('fails malformed id', async () => {
     scaffolding.url = '/api/spectator?id=googoo';
     await scaffolding.get(ApiSpectator.INSTANCE, res);
-    expect(res.content).eq('Not found');
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).eq('Bad request: invalid spectator id');
   });
 
-  it('fails invalid id', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player, 'spectator-id', undefined, undefined);
-    scaffolding.url = '/api/spectator?id=' + player.id;
+  it('fails not found', async () => {
+    const [game] = testGame(2);
+    scaffolding.url = '/api/spectator?id=' + 's-invalid';
     scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiSpectator.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found');
   });
 
   it('pulls spectator', async () => {
-    const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player, 'spectator-id', undefined, undefined);
+    const [game] = testGame(2);
     scaffolding.url = '/api/spectator?id=' + game.spectatorId;
     scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiSpectator.INSTANCE, res);

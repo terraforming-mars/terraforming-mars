@@ -3,6 +3,7 @@ import {ApiIPs} from '../../src/server/routes/ApiIPs';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {PlayerId, SpectatorId} from '../../src/common/Types';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('ApiIPs', () => {
   let res: MockResponse;
@@ -17,7 +18,8 @@ describe('ApiIPs', () => {
   it('validates server id', () => {
     scaffolding.url = '/api/ips';
     ApiIPs.INSTANCE.processRequest(scaffolding.req, res, scaffolding.ctx);
-    expect(res.content).eq('Not authorized');
+    expect(res.statusCode).eq(statusCode.forbidden);
+    expect(res.content).eq('forbidden');
   });
 
   it('simple', async () => {

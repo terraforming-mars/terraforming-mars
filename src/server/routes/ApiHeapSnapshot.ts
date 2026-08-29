@@ -1,11 +1,11 @@
 import * as v8 from 'node:v8';
 import {Readable, Writable} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
-import * as responses from '../server/responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {RouteError} from './RouteError';
 
 type SnapshotSource = () => Readable;
 
@@ -35,7 +35,7 @@ export class ApiHeapSnapshot extends Handler {
     return new ApiHeapSnapshot(snapshotSource);
   }
 
-  public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
+  public override async get(_req: Request, res: Response, _ctx: Context): Promise<void> {
     try {
       res.setHeader('Content-Type', 'application/octet-stream');
       res.setHeader('Content-Disposition', 'attachment; filename="server.heapsnapshot"');
@@ -47,7 +47,7 @@ export class ApiHeapSnapshot extends Handler {
     } catch (err) {
       console.error('ApiHeapSnapshot', err);
       // If piping already started, headers/data may be sent; this is best-effort.
-      responses.badRequest(req, res, 'could not create heap snapshot');
+      throw RouteError.badRequest('could not create heap snapshot');
     } finally {
       console.log('Heap snapshot done');
     }

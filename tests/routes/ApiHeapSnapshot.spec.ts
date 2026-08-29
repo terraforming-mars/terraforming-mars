@@ -4,6 +4,7 @@ import {ApiHeapSnapshot} from '../../src/server/routes/ApiHeapSnapshot';
 import {Response} from '../../src/server/Response';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '@/common/http/statusCode';
 
 // A Response that is also a real Writable stream, so the handler's
 // stream.pipeline(snapshot, res) has something to pipe into. MockResponse
@@ -41,7 +42,8 @@ describe('ApiHeapSnapshot', () => {
     const res = new MockResponse();
     scaffolding.url = '/api/heapsnapshot';
     ApiHeapSnapshot.INSTANCE.processRequest(scaffolding.req, res, scaffolding.ctx);
-    expect(res.content).eq('Not authorized');
+    expect(res.statusCode).eq(statusCode.forbidden);
+    expect(res.content).eq('forbidden');
   });
 
   it('streams the heap snapshot to the response', async () => {

@@ -9,6 +9,7 @@ import {Handler} from './Handler';
 import {isProduction} from '../utils/server';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {RouteError} from './RouteError';
 
 type Encoding = 'gzip' | 'br';
 
@@ -56,8 +57,7 @@ export class ServeAsset extends Handler {
 
   public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
     if (req.url === undefined) {
-      responses.internalServerError(req, res, new Error('no url on request'));
-      return;
+      throw RouteError.internalServerError('no url on request');
     }
 
     // Remove leading slash.
@@ -67,7 +67,7 @@ export class ServeAsset extends Handler {
     const toFile: {file?: string, encoding?: Encoding } = this.toFile(path, supportedEncodings);
 
     if (toFile.file === undefined) {
-      return responses.notFound(req, res);
+      throw RouteError.notFound();
     }
 
     const file = toFile.file;
@@ -102,14 +102,14 @@ export class ServeAsset extends Handler {
 
     try {
       const data = await this.fileApi.readFile(file);
-      res.setHeader('Content-Length', data.length);
-      res.end(data);
       if (this.cacheAssets === true) {
         this.cache.set(file, data);
       }
+      res.setHeader('Content-Length', data.length);
+      res.end(data);
     } catch (err) {
       console.log(err);
-      responses.internalServerError(req, res, 'Cannot serve ' + path);
+      throw RouteError.internalServerError('Cannot serve ' + path);
     }
   }
 

@@ -4,6 +4,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('ApiGames', () => {
   let res: MockResponse;
@@ -18,7 +19,8 @@ describe('ApiGames', () => {
   it('validates server id', () => {
     scaffolding.url = '/api/games';
     ApiGames.INSTANCE.processRequest(scaffolding.req, res, scaffolding.ctx);
-    expect(res.content).eq('Not authorized');
+    expect(res.statusCode).eq(statusCode.forbidden);
+    expect(res.content).eq('forbidden');
   });
 
   it('simple', async () => {

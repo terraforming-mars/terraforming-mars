@@ -14,25 +14,34 @@ import {Response} from '../Response';
 import {comparing, reversed} from '../../common/utils/Ordering';
 
 function processRequest(req: Request, res: Response): void {
-  if (req.url === undefined) {
-    return;
-  }
-  const url = new URL(req.url, `http://localhost`);
-  if (url.pathname === '/') {
-    fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
-      if (err) {
-        responses.internalServerError(req, res, err);
-      }
+  try {
+    if (req.url === undefined) {
+      return;
+    }
+    const url = new URL(req.url, `http://localhost`);
+    if (url.pathname === '/') {
+      fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
+        try {
+          if (err) {
+            responses.internalServerError(req, res, err);
+            return;
+          }
+          res.setHeader('Content-Length', data.length);
+          res.end(data);
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    } else if (url.pathname === '/data') {
+      const data = calc(url.searchParams);
+      res.setHeader('Content-type', 'text/csv');
       res.setHeader('Content-Length', data.length);
       res.end(data);
-    });
-  } else if (url.pathname === '/data') {
-    const data = calc(url.searchParams);
-    res.setHeader('Content-type', 'text/csv');
-    res.setHeader('Content-Length', data.length);
-    res.end(data);
-  } else {
-    responses.notFound(req, res);
+    } else {
+      responses.notFound(req, res);
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 

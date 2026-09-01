@@ -18,12 +18,7 @@ import {defineComponent} from 'vue';
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
 import {GlobalParameter} from '@/common/GlobalParameter';
 
-// This component is only configured for offial global parameters, and not the moon global parameters.
-type BaseGlobalParameter = Exclude<
-  GlobalParameter,
-  GlobalParameter.MOON_HABITAT_RATE |
-  GlobalParameter.MOON_MINING_RATE |
-  GlobalParameter.MOON_LOGISTIC_RATE>;
+type BaseGlobalParameter = 'temperature' | 'oxygen' | 'oceans' | 'venus';
 
 const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconClass: string}> = {
   [GlobalParameter.TEMPERATURE]: {max: MAX_TEMPERATURE, title: 'Temperature', iconClass: 'temperature-tile'},

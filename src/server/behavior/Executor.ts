@@ -487,6 +487,9 @@ export class Executor implements BehaviorExecutor {
     if (behavior.titanumValue === 1) {
       player.increaseTitaniumValue();
     }
+    if (behavior.titanumValue === -1) {
+      player.decreaseTitaniumValue();
+    }
 
     if (behavior?.greeneryDiscount) {
       player.plantsNeededForGreenery -= behavior.greeneryDiscount;
@@ -731,6 +734,9 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.titanumValue === 1) {
       player.decreaseTitaniumValue();
+    }
+    if (behavior.titanumValue === -1) {
+      player.increaseTitaniumValue();
     }
 
     if (behavior?.greeneryDiscount) {

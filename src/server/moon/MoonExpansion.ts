@@ -22,8 +22,6 @@ import {GameOptions} from '../game/GameOptions';
 import {Board} from '../boards/Board';
 import {GlobalParameter} from '../../common/GlobalParameter';
 
-type MoonGlobalParameter = GlobalParameter.MOON_MINING_RATE | GlobalParameter.MOON_HABITAT_RATE | GlobalParameter.MOON_LOGISTIC_RATE;
-
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
     TileType.MOON_MINE,
@@ -140,7 +138,7 @@ export class MoonExpansion {
     [GlobalParameter.MOON_LOGISTIC_RATE]: {field: 'logisticRate', bonusAt6: Resource.STEEL},
   } as const;
 
-  private static raiseRate(player: IPlayer, count: number, parameter: MoonGlobalParameter) {
+  private static raiseRate(player: IPlayer, count: number, parameter: keyof typeof this.RateData) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const rateData = MoonExpansion.RateData[parameter];
       // This relies on all three tracks being the same value. If they were different

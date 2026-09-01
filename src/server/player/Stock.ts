@@ -1,13 +1,13 @@
 import {LawSuit} from '../cards/promo/LawSuit';
 import {IPlayer} from '../IPlayer';
-import {Resource, StandardResource} from '../../common/Resource';
+import {Resource} from '../../common/Resource';
 import {CrashSiteCleanup} from '../cards/promo/CrashSiteCleanup';
 import {From, isFromPlayer} from '../logs/From';
 import {BaseStock} from './StockBase';
 
 export class Stock extends BaseStock {
   public add(
-    resource: Resource | StandardResource,
+    resource: Resource,
     amount : number,
     options? : {
       log?: boolean,
@@ -63,7 +63,7 @@ export class Stock extends BaseStock {
    * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public steal(resource: Resource | StandardResource, qty: number, thief: IPlayer, options?: {log?: boolean}) {
+  public steal(resource: Resource, qty: number, thief: IPlayer, options?: {log?: boolean}) {
     const qtyToSteal = Math.min(this[resource], qty);
     if (qtyToSteal > 0) {
       this.deduct(resource, qtyToSteal, {log: options?.log ?? true, from: {player: thief}, stealing: true});

@@ -12,6 +12,7 @@ import {AstraMechanica} from './AstraMechanica';
 import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
+import {BoomTown} from './BoomTown';
 import {CarbonNanosystems} from './CarbonNanosystems';
 import {Casinos} from './Casinos';
 import {CityParks} from './CityParks';
@@ -190,6 +191,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
     [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
     [CardName.ALBEDO_PLANTS]: {Factory: AlbedoPlants},
+    [CardName.BOOM_TOWN]: {Factory: BoomTown},
   },
 
   cardsToRemove: [

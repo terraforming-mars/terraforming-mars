@@ -117,6 +117,14 @@ describe('Executor', () => {
     expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(12);
   });
 
+  it('titaniumValue, negative', () => {
+    expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(12);
+    executor.execute({titanumValue: -1}, player, fake);
+    expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(8);
+    executor.onDiscard({titanumValue: -1}, player, fake);
+    expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(12);
+  });
+
   it('greeneryDiscount', () => {
     player.plants = 8;
     expect(game.canPlaceGreenery(player)).is.true;

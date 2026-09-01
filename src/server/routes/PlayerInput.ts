@@ -15,6 +15,7 @@ import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
 import {RouteError} from './RouteError';
+import {readBody} from './readBody';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -69,7 +70,7 @@ export class PlayerInput extends Handler {
     responses.writeJson(res, ctx, Server.getPlayerModel(player));
   }
 
-  private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
+  private async processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     // TODO(kberg): Find a better place for this optimization.
     for (const card of player.tableau) {
       card.clearWarnings();
@@ -77,43 +78,34 @@ export class PlayerInput extends Handler {
         card.additionalProjectCosts = undefined;
       }
     }
-    return new Promise((resolve) => {
-      let body = '';
-      req.on('data', (data) => {
-        body += data.toString();
+    const body = await readBody(req);
+    try {
+      const entity = JSON.parse(body);
+      validateRunId(entity);
+      if (this.isWaitingForUndo(player, entity)) {
+        await this.performUndo(req, res, ctx, player);
+      } else {
+        player.process(entity);
+        responses.writeJson(res, ctx, Server.getPlayerModel(player));
+      }
+    } catch (e) {
+      if (!(e instanceof AppError || e instanceof InputError)) {
+        console.warn('Error processing input from player', e);
+      }
+      // TODO(kberg): use responses.ts, though that changes the output.
+      res.writeHead(statusCode.badRequest, {
+        'Content-Type': 'application/json',
       });
-      req.once('end', async () => {
-        try {
-          const entity = JSON.parse(body);
-          validateRunId(entity);
-          if (this.isWaitingForUndo(player, entity)) {
-            await this.performUndo(req, res, ctx, player);
-          } else {
-            player.process(entity);
-            responses.writeJson(res, ctx, Server.getPlayerModel(player));
-          }
-          resolve();
-        } catch (e) {
-          if (!(e instanceof AppError || e instanceof InputError)) {
-            console.warn('Error processing input from player', e);
-          }
-          // TODO(kberg): use responses.ts, though that changes the output.
-          res.writeHead(statusCode.badRequest, {
-            'Content-Type': 'application/json',
-          });
 
-          const id = e instanceof AppError ? e.id : undefined;
-          const message = e instanceof Error ? e.message : String(e);
-          const response: AppErrorResponse = {
-            id: id,
-            message: message,
-          };
-          res.write(JSON.stringify(response));
-          res.end();
-          resolve();
-        }
-      });
-    });
+      const id = e instanceof AppError ? e.id : undefined;
+      const message = e instanceof Error ? e.message : String(e);
+      const response: AppErrorResponse = {
+        id: id,
+        message: message,
+      };
+      res.write(JSON.stringify(response));
+      res.end();
+    }
   }
 }
 function validateRunId(entity: any) {

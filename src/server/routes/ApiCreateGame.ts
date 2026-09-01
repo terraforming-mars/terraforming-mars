@@ -17,6 +17,7 @@ import {Request} from '../Request';
 import {Response} from '../Response';
 import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
+import {readBody} from './readBody';
 
 function parseQuotaConfig(struct: any): QuotaConfig {
   let {limit} = struct;
@@ -86,115 +87,106 @@ export class ApiCreateGame extends Handler {
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override post(req: Request, res: Response, ctx: Context): Promise<void> {
-    return new Promise((resolve) => {
-      const withinQuota = this.quotaHandlers.map((handler) => handler.measure(ctx)).every((ok) => ok);
-      if (!withinQuota) {
-        responses.quotaExceeded(req, res);
-        resolve();
-        return;
+  public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
+    const withinQuota = this.quotaHandlers.map((handler) => handler.measure(ctx)).every((ok) => ok);
+    if (!withinQuota) {
+      responses.quotaExceeded(req, res);
+      return;
+    }
+
+    const body = await readBody(req);
+    try {
+      const gameReq = JSON.parse(body) as NewGameConfig;
+      const gameId = safeCast(generateRandomId('g'), isGameId);
+      const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
+      const players = gameReq.players.map((p) => {
+        return new Player(
+          p.name,
+          p.color,
+          p.beginner,
+          Number(p.handicap), // For some reason handicap is coming up a string.
+          safeCast(generateRandomId('p'), isPlayerId),
+        );
+      });
+      let firstPlayerIdx = 0;
+      for (let i = 0; i < gameReq.players.length; i++) {
+        if (gameReq.players[i].first === true) {
+          firstPlayerIdx = i;
+          break;
+        }
       }
 
-      let body = '';
-      req.on('data', function(data) {
-        body += data.toString();
-      });
-      req.once('end', async () => {
-        try {
-          const gameReq = JSON.parse(body) as NewGameConfig;
-          const gameId = safeCast(generateRandomId('g'), isGameId);
-          const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
-          const players = gameReq.players.map((p) => {
-            return new Player(
-              p.name,
-              p.color,
-              p.beginner,
-              Number(p.handicap), // For some reason handicap is coming up a string.
-              safeCast(generateRandomId('p'), isPlayerId),
-            );
-          });
-          let firstPlayerIdx = 0;
-          for (let i = 0; i < gameReq.players.length; i++) {
-            if (gameReq.players[i].first === true) {
-              firstPlayerIdx = i;
-              break;
-            }
-          }
+      const boards = ApiCreateGame.boardOptions(gameReq.board);
+      gameReq.board = boards[Math.floor(Math.random() * boards.length)];
 
-          const boards = ApiCreateGame.boardOptions(gameReq.board);
-          gameReq.board = boards[Math.floor(Math.random() * boards.length)];
+      const gameOptions: GameOptions = {
+        altVenusBoard: gameReq.altVenusBoard,
+        aresExtension: gameReq.expansions.ares,
+        aresHazards: true, // Not a runtime option.
+        aresExtremeVariant: gameReq.aresExtremeVariant,
+        bannedCards: gameReq.bannedCards,
+        boardName: gameReq.board,
+        ceoExtension: gameReq.expansions.ceo,
+        clonedGamedId: gameReq.clonedGamedId,
+        coloniesExtension: gameReq.expansions.colonies,
+        communityCardsOption: gameReq.expansions.community,
+        expansions: gameReq.expansions,
+        ceosDraftVariant: gameReq.ceosDraftVariant,
+        corporateEra: gameReq.expansions.corpera,
+        customCeos: gameReq.customCeos,
+        customColoniesList: gameReq.customColoniesList,
+        customCorporationsList: gameReq.customCorporationsList,
+        customPreludes: gameReq.customPreludes,
+        draftVariant: gameReq.draftVariant,
+        escapeVelocity: gameReq.escapeVelocity,
+        fastModeOption: gameReq.fastModeOption,
+        includedCards: gameReq.includedCards,
+        includeFanMA: gameReq.includeFanMA,
+        initialDraftVariant: gameReq.initialDraft,
+        modularMA: gameReq.modularMA,
+        moonExpansion: gameReq.expansions.moon,
+        moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
+        moonStandardProjectVariant1: gameReq.moonStandardProjectVariant1,
+        pathfindersExpansion: gameReq.expansions.pathfinders,
+        politicalAgendasExtension: gameReq.politicalAgendasExtension,
+        prelude2Expansion: gameReq.expansions.prelude2,
+        preludeDraftVariant: gameReq.preludeDraftVariant,
+        preludeExtension: gameReq.expansions.prelude,
+        promoCardsOption: gameReq.expansions.promo,
+        randomMA: gameReq.randomMA,
+        removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,
+        requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
+        requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
+        showOtherPlayersVP: gameReq.showOtherPlayersVP,
+        showTimers: gameReq.showTimers,
+        shuffleMapOption: gameReq.shuffleMapOption,
+        solarPhaseOption: gameReq.solarPhaseOption,
+        soloTR: gameReq.soloTR,
+        startingCeos: gameReq.startingCeos,
+        startingCorporations: gameReq.startingCorporations,
+        startingPreludes: gameReq.startingPreludes,
+        starWarsExpansion: gameReq.expansions.starwars,
+        turmoilExtension: gameReq.expansions.turmoil,
+        twoCorpsVariant: gameReq.twoCorpsVariant,
+        underworldExpansion: gameReq.expansions.underworld,
+        deltaProjectExpansion: gameReq.expansions.deltaProject,
+        undoOption: gameReq.undoOption,
+        venusNextExtension: gameReq.expansions.venus,
+      };
 
-          const gameOptions: GameOptions = {
-            altVenusBoard: gameReq.altVenusBoard,
-            aresExtension: gameReq.expansions.ares,
-            aresHazards: true, // Not a runtime option.
-            aresExtremeVariant: gameReq.aresExtremeVariant,
-            bannedCards: gameReq.bannedCards,
-            boardName: gameReq.board,
-            ceoExtension: gameReq.expansions.ceo,
-            clonedGamedId: gameReq.clonedGamedId,
-            coloniesExtension: gameReq.expansions.colonies,
-            communityCardsOption: gameReq.expansions.community,
-            expansions: gameReq.expansions,
-            ceosDraftVariant: gameReq.ceosDraftVariant,
-            corporateEra: gameReq.expansions.corpera,
-            customCeos: gameReq.customCeos,
-            customColoniesList: gameReq.customColoniesList,
-            customCorporationsList: gameReq.customCorporationsList,
-            customPreludes: gameReq.customPreludes,
-            draftVariant: gameReq.draftVariant,
-            escapeVelocity: gameReq.escapeVelocity,
-            fastModeOption: gameReq.fastModeOption,
-            includedCards: gameReq.includedCards,
-            includeFanMA: gameReq.includeFanMA,
-            initialDraftVariant: gameReq.initialDraft,
-            modularMA: gameReq.modularMA,
-            moonExpansion: gameReq.expansions.moon,
-            moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
-            moonStandardProjectVariant1: gameReq.moonStandardProjectVariant1,
-            pathfindersExpansion: gameReq.expansions.pathfinders,
-            politicalAgendasExtension: gameReq.politicalAgendasExtension,
-            prelude2Expansion: gameReq.expansions.prelude2,
-            preludeDraftVariant: gameReq.preludeDraftVariant,
-            preludeExtension: gameReq.expansions.prelude,
-            promoCardsOption: gameReq.expansions.promo,
-            randomMA: gameReq.randomMA,
-            removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,
-            requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
-            requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
-            showOtherPlayersVP: gameReq.showOtherPlayersVP,
-            showTimers: gameReq.showTimers,
-            shuffleMapOption: gameReq.shuffleMapOption,
-            solarPhaseOption: gameReq.solarPhaseOption,
-            soloTR: gameReq.soloTR,
-            startingCeos: gameReq.startingCeos,
-            startingCorporations: gameReq.startingCorporations,
-            startingPreludes: gameReq.startingPreludes,
-            starWarsExpansion: gameReq.expansions.starwars,
-            turmoilExtension: gameReq.expansions.turmoil,
-            twoCorpsVariant: gameReq.twoCorpsVariant,
-            underworldExpansion: gameReq.expansions.underworld,
-            deltaProjectExpansion: gameReq.expansions.deltaProject,
-            undoOption: gameReq.undoOption,
-            venusNextExtension: gameReq.expansions.venus,
-          };
-
-          let game: IGame;
-          if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-            const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
-            game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
-          } else {
-            const seed = Math.random();
-            game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, seed);
-          }
-          ctx.gameLoader.add(game);
-          responses.writeJson(res, ctx, Server.getSimpleGameModel(game));
-        } catch (error) {
-          responses.internalServerError(req, res, error);
-        }
-        resolve();
-      });
-    });
+      let game: IGame;
+      if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
+        const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
+        game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
+      } else {
+        const seed = Math.random();
+        game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, seed);
+      }
+      ctx.gameLoader.add(game);
+      responses.writeJson(res, ctx, Server.getSimpleGameModel(game));
+    } catch (error) {
+      responses.internalServerError(req, res, error);
+    }
   }
 }
 

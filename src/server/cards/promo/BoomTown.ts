@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Size} from '../../../common/cards/render/Size';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 
 export class BoomTown extends PreludeCard {
@@ -22,7 +21,7 @@ export class BoomTown extends PreludeCard {
       metadata: {
         cardNumber: 'X80',
         renderData: CardRenderer.builder((b) => {
-          b.titanium(1).equals().minus(Size.SMALL).megacredits(1).br;
+          b.titanium(1).equals().megacredits(-1).br;
           b.plainText('Effect: Your titanium is worth 1 M€ less.').br;
           b.city().asterix().production((pb) => pb.titanium(2));
         }),

@@ -8,19 +8,7 @@ import {Request} from '../Request';
 import {Response} from '../Response';
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {RouteError} from './RouteError';
-
-// TODO(kberg): share this with ApiCreateGame and PlayerInput, which both hand-roll
-// the same accumulation.
-/* Resolves once the whole request body has arrived. */
-function readBody(req: Request): Promise<string> {
-  return new Promise((resolve) => {
-    let body = '';
-    req.on('data', (data) => {
-      body += data.toString();
-    });
-    req.once('end', () => resolve(body));
-  });
-}
+import {readBody} from './readBody';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();

@@ -71,8 +71,6 @@ module.exports = {
     extensions: ['.ts', '.vue', '.js'],
     alias: {
       'vue$': 'vue/dist/vue.esm-bundler.js',
-      // Force CJS build of test-utils so webpack doesn't choke on its ESM export map.
-      '@vue/test-utils': path.resolve(__dirname, 'node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js'),
     },
   },
   module: {

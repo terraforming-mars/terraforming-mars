@@ -20,7 +20,7 @@
     "uuid": "^14.0.1",
     "vue": "^3.4.0",
     "webpack": "^5.108.3",
-    "webpack-cli": "^7.0.2"
+    "webpack-cli": "^7.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",

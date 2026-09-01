@@ -20,13 +20,13 @@ npm run lint:fix             # ESLint autofix
 ```bash
 npm run test                 # All tests (server + client)
 npm run test:server          # Mocha server tests (~6700 tests)
-npm run test:client          # Mochapack client component tests
+npm run test:client          # Vitest client component tests
 npm run test:integration     # Run the PostgreSQL tests
 # Single server test file
 npx mocha --import=tsx --require tests/testing/setup.ts "tests/cards/base/Algae.spec.ts"
 
 # Single client test file
-cross-env NODE_ENV=development mochapack --require tests/client/components/setup.ts "tests/client/components/Board.spec.ts"
+npx vitest run tests/client/components/Board.spec.ts
 ```
 
 ### Dev Servers
@@ -117,8 +117,8 @@ Good wiki pages:
 - **`testGame(n, options?)`** - Creates a game with n players, returns `[game, ...players]`. Skips initial card selection by default.
 - **`TestPlayer`** - Extends `Player` with test utilities. Use static factories: `TestPlayer.BLUE`, `TestPlayer.RED`, etc.
 - Server card tests: instantiate the card, call `canPlay()`/`play()`/`action()`, assert state changes.
-- Client tests: use `@vue/test-utils` mount/shallowMount with JSDOM setup from `tests/client/components/setup.ts`.
-- Test framework: Mocha + Chai (expect style). Client tests use mochapack.
+- Client tests: use `@vue/test-utils` mount/shallowMount. Vitest supplies the DOM via `environment: 'jsdom'`; `tests/client/vitest.setup.ts` auto-unmounts wrappers after each test.
+- Test framework: Mocha + Chai (expect style) on the server. Client tests run under Vitest, still asserting with Chai.
 
 ### Internationalization
 

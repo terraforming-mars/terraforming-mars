@@ -253,6 +253,13 @@ export default defineComponent({
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },
+  beforeUnmount() {
+    window.clearTimeout(ui_update_timeout_id);
+    ui_update_timeout_id = undefined;
+
+    window.clearInterval(documentTitleTimer);
+    documentTitleTimer = undefined;
+  },
   computed: {
     Phase(): typeof Phase {
       return Phase;

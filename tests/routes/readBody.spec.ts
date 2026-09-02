@@ -101,4 +101,39 @@ describe('readBody', () => {
     await emitted;
     expect(cast(error, RouteError).kind).eq('contentTooLarge');
   });
+
+  it('rejects when the request stream errors', async () => {
+    const read = readBody(req);
+    const boom = new Error('socket blew up');
+    const emitted = Promise.resolve().then(() => {
+      req.emitString('partial');
+      req.emitError(boom);
+    });
+    const error = await rejection(read);
+    await emitted;
+    expect(error).eq(boom);
+  });
+
+  it('rejects when the client disconnects before the body arrives', async () => {
+    const read = readBody(req);
+    const emitted = Promise.resolve().then(() => {
+      req.emitString('partial');
+      req.emitClose();
+    });
+    const error = await rejection(read);
+    await emitted;
+    expect(cast(error, RouteError).kind).eq('badRequest');
+  });
+
+  it('ignores the close that follows a completed body', async () => {
+    const read = readBody(req);
+    const emitted = Promise.resolve().then(() => {
+      req.emitString('done');
+      req.emitter.emit('end');
+      // A healthy request emits 'close' after 'end'; it must not turn a success into a failure.
+      req.emitClose();
+    });
+    expect(await read).eq('done');
+    await emitted;
+  });
 });

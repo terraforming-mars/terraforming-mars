@@ -20,6 +20,8 @@ export const MAX_BODY_BYTES = 1_000_000;
  *
  * Rejects with a `contentTooLarge` `RouteError` when the body is larger than `limit`, which is
  * itself capped at `MAX_BODY_BYTES`.
+ *
+ * A healthy read receives events in this order: data* → end → close.
  */
 export function readBody(req: Request, limit: number = DEFAULT_MAX_BODY_BYTES): Promise<string> {
   const cap = Math.min(limit, MAX_BODY_BYTES);
@@ -55,6 +57,28 @@ export function readBody(req: Request, limit: number = DEFAULT_MAX_BODY_BYTES): 
       }
       settled = true;
       resolve(Buffer.concat(chunks).toString('utf8'));
+    });
+
+    // Rejects when the request ends without delivering a body: a stream failure, or a
+    // client that disconnected.
+    req.once('error', (err?: Error) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      chunks.length = 0;
+      reject(err ?? new Error('request stream failed'));
+    });
+
+    // Treats a 'close' with no preceding 'end' as the client hanging up mid-body.
+    // 'close' also follows a healthy 'end', which `settled` absorbs.
+    req.once('close', () => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      chunks.length = 0;
+      reject(RouteError.badRequest('client closed the request before the body arrived'));
     });
   });
 }

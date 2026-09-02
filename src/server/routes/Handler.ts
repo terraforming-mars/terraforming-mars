@@ -85,17 +85,17 @@ export abstract class Handler implements IHandler {
       case 'badRequest':
         responses.badRequest(req, res, e.detail);
         break;
-      case 'forbidden':
-        responses.forbidden(req, res);
-        break;
       case 'contentTooLarge':
         responses.contentTooLarge(req, res);
         break;
-      case 'notFound':
-        responses.notFound(req, res, e.detail);
+      case 'forbidden':
+        responses.forbidden(req, res);
         break;
       case 'internalServerError':
         responses.internalServerError(req, res, e.detail);
+        break;
+      case 'notFound':
+        responses.notFound(req, res, e.detail);
         break;
       default:
         assertNever(e.kind);

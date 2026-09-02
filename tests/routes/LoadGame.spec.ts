@@ -26,7 +26,7 @@ describe('LoadGame', () => {
   function put(form: Form): Promise<unknown> {
     const response = scaffolding.put(LoadGame.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      req.emitter.emit('data', JSON.stringify(form));
+      req.emitString(JSON.stringify(form));
       req.emitter.emit('end');
     });
     return Promise.all([emit, response]);
@@ -53,7 +53,7 @@ describe('LoadGame', () => {
   it('fails when the body is not valid json', async () => {
     const response = scaffolding.put(LoadGame.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      req.emitter.emit('data', '}{');
+      req.emitString('}{');
       req.emitter.emit('end');
     });
     await Promise.all([emit, response]);

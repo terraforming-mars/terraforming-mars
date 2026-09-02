@@ -17,6 +17,10 @@ export class MockRequest implements Request {
   public on(type: 'data', cb: (dat: Buffer) => void): void {
     this.emitter.on(type, cb);
   }
+  // Delivers `chunk` as the buffer a real request would carry.
+  public emitString(chunk: string): void {
+    this.emitter.emit('data', Buffer.from(chunk));
+  }
 }
 
 export class MockResponse implements Response {

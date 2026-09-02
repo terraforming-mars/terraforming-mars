@@ -34,12 +34,39 @@
 
 ### Comments for Javascript elements
 - The first sentence of a comment summarizes the item.
-- Comments describe the behavior, not narrate the mechanism.
+- Comments describe the behavior, not narrate the mechanism. Say what a caller can rely on, not the steps the
+  body takes to get there. One test: if rewriting the body a different way would make the comment wrong, the
+  comment was describing the mechanism.
 - JSDoc notation makes sense when attaching to an exported JavaScript element. But
   if you're not using any sophisticated JSdoc, just use /* */
 - Use backticks to describe variables, methods, parameters, etc, e.g. `name`.
   - Not necessary for primitives.
 - If there's multiple sentences in a comment, put two newlines after the first sentence.
+
+  - Nouns: Classes, Interfaces, and Types:
+    - Comments for structural entities must describe what the object represents using a clear noun phrase.
+    - Do not start with verbs like "Handles" or "Manages".
+    - Rule: Use a singular noun phrase.
+    - Format: Describe the entity's purpose, followed by any critical operational constraints.
+
+  - Verbs: Functions and Methods
+    - Comments for functional operations must describe what the action executes using an active, third-person
+      singular verb (e.g., "Fetches", "Calculates", "Validates").
+    - Rule: Begin with an active verb. Never use passive phrases like "Is used to...".
+    - Can omit the leading word "Returns", but capitalize the first word.
+    - Format: State the action, document non-obvious parameters and non-obvious returns.
+
+  - Modifiers/State: Booleans and Properties
+    - Comments for class properties or interface fields must define the current state, ownership, or boundary values
+      of the variable.
+    - Rule: Use short noun or adjective phrases.
+    - Format: For booleans, explicitly state what a true value indicates.
+
+  - Enums and Namespaces:
+    - Don't add any new enums or namespaces, but document each one as if it were a noun type.
+    - Document enum members like variables.
+
+  - /** for testing */ is an acceptable and complete comment, and can be a leading comment to the fuller description.
 
 ### Comments in code blocks
 - Don't repeat what the code says. Summarize it only when the code cannot be

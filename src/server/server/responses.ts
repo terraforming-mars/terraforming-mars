@@ -97,6 +97,13 @@ export function writeJson(res: Response, ctx: Context, json: any, space?: string
   res.end(s);
 }
 
+export function contentTooLarge(req: Request, res: Response) {
+  console.warn('Content too large for', req.method, req.url);
+  res.writeHead(statusCode.contentTooLarge);
+  res.write('Content too large');
+  res.end();
+}
+
 export function quotaExceeded(req: Request, res: Response) {
   console.warn('Quota exceeded for', req.method, req.url);
   res.writeHead(statusCode.tooManyRequests);

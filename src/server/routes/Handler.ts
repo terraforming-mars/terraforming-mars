@@ -88,6 +88,9 @@ export abstract class Handler implements IHandler {
       case 'forbidden':
         responses.forbidden(req, res);
         break;
+      case 'contentTooLarge':
+        responses.contentTooLarge(req, res);
+        break;
       case 'notFound':
         responses.notFound(req, res, e.detail);
         break;

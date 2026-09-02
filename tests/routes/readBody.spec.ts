@@ -102,6 +102,22 @@ describe('readBody', () => {
     expect(cast(error, RouteError).kind).eq('contentTooLarge');
   });
 
+  it('stops reading a body that goes over the limit', async () => {
+    const read = readBody(req, 8);
+    const emitted = emit('123456789');
+    await rejection(read);
+    await emitted;
+    expect(req.paused).is.true;
+  });
+
+  it('keeps reading a body within the limit', async () => {
+    const read = readBody(req, 8);
+    const emitted = emit('12345');
+    expect(await read).eq('12345');
+    await emitted;
+    expect(req.paused).is.false;
+  });
+
   it('rejects when the request stream errors', async () => {
     const read = readBody(req);
     const boom = new Error('socket blew up');

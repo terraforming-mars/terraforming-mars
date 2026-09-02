@@ -1,5 +1,5 @@
 /* The failures a route can report without knowing how they're written to the wire. */
-export type RouteErrorKind = 'badRequest' | 'contentTooLarge' | 'notFound' | 'forbidden' | 'internalServerError';
+export type RouteErrorKind = 'badRequest' | 'contentTooLarge' | 'forbidden' | 'internalServerError' | 'notFound';
 
 /**
  * A failure that maps to an HTTP status.
@@ -21,15 +21,15 @@ export class RouteError extends Error {
     return new RouteError('contentTooLarge', message);
   }
 
-  public static notFound(message?: string): RouteError {
-    return new RouteError('notFound', message);
-  }
-
   public static forbidden(message?: string): RouteError {
     return new RouteError('forbidden', message);
   }
 
   public static internalServerError(message?: string): RouteError {
     return new RouteError('internalServerError', message);
+  }
+
+  public static notFound(message?: string): RouteError {
+    return new RouteError('notFound', message);
   }
 }

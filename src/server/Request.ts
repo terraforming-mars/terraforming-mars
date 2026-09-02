@@ -8,20 +8,29 @@ import type * as net from 'net';
  */
 export type Request = Pick<http.IncomingMessage, 'headers' | 'method' | 'url'> & {
   /**
-   * @see EventListener.once
+   * Registers a listener that runs at most once.
    *
-   * https://nodejs.org/docs/latest/api/events.html#emitteronceeventname-listener
+   * 'end' means the body arrived whole. 'error' and 'close' are the ways it does not.
    *
-   * 'end' means the body arrived whole. 'error' and 'close' are the ways
-   * it does not.
+   * @see https://nodejs.org/docs/latest/api/events.html#emitteronceeventname-listener
    */
   once: (type: 'end' | 'error' | 'close', func: (err?: Error) => void) => void;
   /**
-   * @see EventListener.on
+   * Registers a listener for every chunk of the body.
+   *
+   * @see https://nodejs.org/docs/latest/api/stream.html#event-data
    */
   on: (type: 'data', func: (dat: Buffer) => void) => void;
   /**
-   * @see IncomingMessage.socket
+   * Stops 'data' events, applying TCP backpressure to the sender.
+   *
+   * @see https://nodejs.org/docs/latest/api/stream.html#readablepause
+   */
+  pause: () => void;
+  /**
+   * The connection the request arrived on.
+   *
+   * @see https://nodejs.org/docs/latest/api/http.html#messagesocket
    */
   socket: {
     address(): string | {} | net.AddressInfo;

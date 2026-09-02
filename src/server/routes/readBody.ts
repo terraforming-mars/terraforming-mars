@@ -45,6 +45,9 @@ export function readBody(req: Request, limit: number = DEFAULT_MAX_BODY_BYTES): 
       if (length > cap) {
         settled = true;
         chunks.length = 0;
+        // Stops reading the rest of the body. Pausing rather than destroying leaves the
+        // connection able to carry the response that says why.
+        req.pause();
         reject(RouteError.contentTooLarge(`Request body exceeds ${cap} bytes`));
         return;
       }

@@ -17,6 +17,11 @@ export class MockRequest implements Request {
   public on(type: 'data', cb: (dat: Buffer) => void): void {
     this.emitter.on(type, cb);
   }
+  /* True once `pause` has been called. */
+  public paused = false;
+  public pause(): void {
+    this.paused = true;
+  }
   // Delivers `chunk` as the buffer a real request would carry.
   public emitString(chunk: string): void {
     this.emitter.emit('data', Buffer.from(chunk));

@@ -5,23 +5,24 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean, cast} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('OceanSanctuary', function() {
+describe('OceanSanctuary', () => {
   let card: OceanSanctuary;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OceanSanctuary();
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     addOcean(player);
     expect(card.canPlay(player)).is.false;
 
@@ -38,7 +39,7 @@ describe('OceanSanctuary', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Play', function() {
+  it('Play', () => {
     const oceanSpace = addOcean(player);
     card.play(player);
     runAllActions(game);
@@ -51,7 +52,7 @@ describe('OceanSanctuary', function() {
     expect(card.resourceCount).is.eq(1);
   });
 
-  it('Ocean Sanctuary counts as ocean for adjacency', function() {
+  it('Ocean Sanctuary counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
     card.play(player);
     runAllActions(game);
@@ -66,7 +67,7 @@ describe('OceanSanctuary', function() {
     expect(otherPlayer.megaCredits).eq(2);
   });
 
-  it('Victory Points', function() {
+  it('Victory Points', () => {
     card.resourceCount = 7;
     expect(card.getVictoryPoints(player)).eq(7);
   });

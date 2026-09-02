@@ -1,9 +1,9 @@
 import {PlayerId} from '../Types';
 
 export type AresData = {
-    includeHazards: boolean;
-    hazardData: HazardData;
-    milestoneResults: Array<MilestoneCount>;
+  includeHazards: boolean;
+  hazardData: HazardData;
+  milestoneResults: Array<MilestoneCount>;
 }
 
 export type HazardConstraint = {
@@ -21,7 +21,7 @@ export const HAZARD_CONSTRAINTS = [
 /*
  * This is the same as
  * type HazardData = {
- *    erosionOceanCount: HazardConstraint;
+ *   erosionOceanCount: HazardConstraint;
  *   removeDustStormsOceanCount: HazardConstraint;
  *   severeErosionTemperature: HazardConstraint;
  *   severeDustStormOxygen: HazardConstraint;
@@ -30,6 +30,7 @@ export const HAZARD_CONSTRAINTS = [
 export type HazardData = Record<typeof HAZARD_CONSTRAINTS[number], HazardConstraint>;
 
 export type MilestoneCount = {
-    id: PlayerId;
-    count: number;
+  id: PlayerId;
+  networkerCount: number;
+  purifierCount: number;
 }

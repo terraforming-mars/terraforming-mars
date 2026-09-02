@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {LunaMetropolis} from '../../../src/server/cards/venusNext/LunaMetropolis';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('LunaMetropolis', function() {
-  it('Should play', function() {
+describe('LunaMetropolis', () => {
+  it('Should play', () => {
     const card = new LunaMetropolis();
     const [/* game */, player] = testGame(2, {venusNextExtension: true});
 

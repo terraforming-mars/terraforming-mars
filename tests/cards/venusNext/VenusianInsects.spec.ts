@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '@/common/utils/utils';
 
 describe('VenusianInsects', () => {
   let card: VenusianInsects;

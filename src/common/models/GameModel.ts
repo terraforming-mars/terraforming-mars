@@ -12,6 +12,7 @@ import {PathfindersModel} from './PathfindersModel';
 import {SpectatorId} from '../Types';
 import {ColonyName} from '../colonies/ColonyName';
 import {GlobalParameter} from '../GlobalParameter';
+import {Tag} from '../cards/Tag';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export type GameModel = {
@@ -20,8 +21,8 @@ export type GameModel = {
   colonies: ReadonlyArray<ColonyModel>;
   discardedColonies: ReadonlyArray<ColonyName>;
   deckSize: number;
+  discardPileSize: number;
   expectedPurgeTimeMs: number;
-  experimentalReset?: boolean;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;
@@ -30,14 +31,16 @@ export type GameModel = {
   lastSoloGeneration: number,
   milestones: ReadonlyArray<ClaimedMilestoneModel>;
   moon: MoonModel | undefined;
+  name: string;
   oceans: number;
   oxygenLevel: number;
   passedPlayers: ReadonlyArray<Color>;
   pathfinders: PathfindersModel | undefined;
   phase: Phase;
   spaces: ReadonlyArray<SpaceModel>;
-  spectatorId?: SpectatorId;
+  spectatorId: SpectatorId;
   step: number;
+  tags: ReadonlyArray<Tag>;
   temperature: number;
   isTerraformed: boolean;
   turmoil: TurmoilModel | undefined;

@@ -42,7 +42,7 @@ export class Caesar extends CeoCard {
 
     player.defer(() => {
       const units = game.board.getHazards().length < 6 ? 1 : 2;
-      player.getOpponents().forEach((opponent) => {
+      player.opponents.forEach((opponent) => {
         game.defer(new SelectProductionToLoseDeferred(opponent, units));
       });
       return undefined;

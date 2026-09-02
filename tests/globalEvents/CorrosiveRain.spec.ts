@@ -3,7 +3,7 @@ import {IGame} from '../../src/server/IGame';
 import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TitanShuttles} from '../../src/server/cards/colonies/TitanShuttles';
 import {TitanAirScrapping} from '../../src/server/cards/colonies/TitanAirScrapping';
@@ -12,8 +12,9 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {testGame} from '../TestGame';
+import {cast} from '@/common/utils/utils';
 
-describe('CorrosiveRain', function() {
+describe('CorrosiveRain', () => {
   let card: CorrosiveRain;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -26,7 +27,7 @@ describe('CorrosiveRain', function() {
     turmoil = game.turmoil!;
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
@@ -36,7 +37,7 @@ describe('CorrosiveRain', function() {
     player.megaCredits = 15;
     player2.megaCredits = 15;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(game.deferredActions).has.lengthOf(2);
     runAllActions(game);
     expect(game.deferredActions).has.lengthOf(0);
@@ -50,7 +51,7 @@ describe('CorrosiveRain', function() {
     const titanShuttles = new TitanShuttles();
     const titanAirScrapping = new TitanAirScrapping();
     const birds = new Birds();
-    player.playedCards = [titanShuttles, titanAirScrapping, birds];
+    player.playedCards.push(titanShuttles, titanAirScrapping, birds);
 
     titanShuttles.resourceCount = 3;
     titanAirScrapping.resourceCount = 1;
@@ -58,7 +59,7 @@ describe('CorrosiveRain', function() {
 
     player.megaCredits = 3;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     const reduce10MC = cast(orOptions.options[0], SelectOption);

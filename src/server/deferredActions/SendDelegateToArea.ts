@@ -4,6 +4,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {Delegate, Turmoil} from '../turmoil/Turmoil';
+import {toName} from '../../common/utils/utils';
 
 export type Options = {
   /** The number of delegates to replace. Default is 1. */
@@ -31,18 +32,24 @@ export class SendDelegateToArea extends DeferredAction {
     let parties = this.turmoil.parties;
     if (this.options.replace) {
       parties = this.turmoil.parties.filter((party) => {
-        if (party.delegates.size < 2) return false;
+        if (party.delegates.size < 2) {
+          return false;
+        }
 
         for (const delegate of party.delegates) {
-          if (delegate !== this.options.replace) continue;
-          if (delegate !== party.partyLeader) return true;
+          if (delegate !== this.options.replace) {
+            continue;
+          }
+          if (delegate !== party.partyLeader) {
+            return true;
+          }
           return party.delegates.get(this.options.replace) > 1;
         }
         return false;
       });
     }
 
-    return parties.map((party) => party.name);
+    return parties.map(toName);
   }
 
   public execute() {

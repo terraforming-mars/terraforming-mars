@@ -31,7 +31,7 @@ export class OrOptions extends OptionsInput<undefined> {
     if (this.options.length <= input.index) {
       throw new InputError('Invalid index');
     }
-    player.runInput(input.response, this.options[input.index]);
+    player.defer(this.options[input.index].process(input.response, player));
     return this.cb(undefined);
   }
 

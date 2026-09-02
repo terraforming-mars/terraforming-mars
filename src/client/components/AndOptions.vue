@@ -1,9 +1,9 @@
 <template>
   <div class='wf-options'>
     <div v-if="showtitle" class="wf-title">{{ $t(playerinput.title) }}</div>
-    <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
+    <PlayerInputFactory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
-      :players="players"
+      ref="childInputs"
       :playerView="playerView"
       :playerinput="option"
       :onsave="playerFactorySaved(idx)"
@@ -17,8 +17,8 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {defineComponent} from 'vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {AndOptionsModel} from '@/common/models/PlayerInputModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
@@ -27,20 +27,20 @@ interface DataModel {
   responded: Array<InputResponse | undefined>,
 }
 
-export default Vue.extend({
-  name: 'and-options',
+export default defineComponent({
+  name: 'AndOptions',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     playerinput: {
       type: Object as () => AndOptionsModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: AndOptionsResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
@@ -64,10 +64,13 @@ export default Vue.extend({
       };
     },
     canSave(): boolean {
-      for (const child of this.$children) {
-        const canSave = (child as any).canSave;
-        if (canSave instanceof Function) {
-          if (canSave() === false) {
+      const refs = this.$refs.childInputs as Array<{canSave?: () => boolean}> | undefined;
+      if (!refs) {
+        return true;
+      }
+      for (const child of refs) {
+        if (child.canSave instanceof Function) {
+          if (child.canSave() === false) {
             return false;
           }
         }
@@ -79,9 +82,12 @@ export default Vue.extend({
         alert('Not all options selected');
         return;
       }
-      for (const child of this.$children) {
-        if ((child as any).saveData instanceof Function) {
-          (child as any).saveData();
+      const refs = this.$refs.childInputs as Array<{saveData?: () => void}> | undefined;
+      if (refs) {
+        for (const child of refs) {
+          if (child.saveData instanceof Function) {
+            child.saveData();
+          }
         }
       }
       this.onsave({

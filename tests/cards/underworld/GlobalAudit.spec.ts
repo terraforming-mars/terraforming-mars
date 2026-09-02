@@ -1,56 +1,106 @@
 import {expect} from 'chai';
 import {GlobalAudit} from '../../../src/server/cards/underworld/GlobalAudit';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {formatMessage, runAllActions, setRulingParty} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {Payment} from '../../../src/common/inputs/Payment';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GlobalAudit', () => {
-  it('Should play', () => {
+  for (const run of [
+    {tags: [1, 2], expected: [21, 20]},
+    {tags: [0, 2], expected: [22, 20]},
+    {tags: [2, 2], expected: [21, 21]},
+  ] as const) {
+    it('Should play ' + JSON.stringify(run), () => {
+      const card = new GlobalAudit();
+      const [/* game */, player, player2] = testGame(2);
+
+      player.tagsForTest = {crime: run.tags[0]};
+      player2.tagsForTest = {crime: run.tags[1]};
+
+      cast(card.play(player), undefined);
+
+      expect(player.terraformRating).eq(run.expected[0]);
+      expect(player2.terraformRating).eq(run.expected[1]);
+    });
+  }
+
+  for (const run of [
+    {tags: [1, 2], mc: [2, 6], expected: [20, 20]},
+    {tags: [1, 2], mc: [6, 6], expected: [21, 20]},
+    {tags: [0, 2], mc: [2, 6], expected: [20, 20]},
+    {tags: [0, 2], mc: [3, 6], expected: [21, 20]},
+    {tags: [0, 2], mc: [5, 6], expected: [21, 20]},
+    {tags: [0, 2], mc: [6, 6], expected: [22, 20]},
+    {tags: [2, 2], mc: [2, 6], expected: [20, 21]},
+    {tags: [2, 2], mc: [6, 6], expected: [21, 21]},
+  ] as const) {
+    it('Should play - reds' + JSON.stringify(run), () => {
+      const card = new GlobalAudit();
+      const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+      setRulingParty(game, PartyName.REDS);
+
+      player.tagsForTest = {crime: run.tags[0]};
+      player2.tagsForTest = {crime: run.tags[1]};
+      player.stock.megacredits = run.mc[0];
+      player2.stock.megacredits = run.mc[1];
+
+      cast(card.play(player), undefined);
+      runAllActions(game);
+
+      expect(player.terraformRating).eq(run.expected[0]);
+      expect(player2.terraformRating).eq(run.expected[1]);
+    });
+  }
+
+  it('logs when a player gains less TR than entitled - reds, 3 MC', () => {
     const card = new GlobalAudit();
-    const [/* game */, player, player2, player3, player4] = testGame(4);
-
-    player.underworldData.corruption = 0;
-    player2.underworldData.corruption = 1;
-    player3.underworldData.corruption = 0;
-    player4.underworldData.corruption = 2;
-
-    cast(card.play(player), undefined);
-
-    expect(player.getTerraformRating()).eq(21);
-    expect(player2.getTerraformRating()).eq(20);
-    expect(player3.getTerraformRating()).eq(21);
-    expect(player4.getTerraformRating()).eq(20);
-  });
-
-  it('Should play - reds', () => {
-    const card = new GlobalAudit();
-    const [game, player, player2, player3, player4] = testGame(4, {turmoilExtension: true});
-
-    player.underworldData.corruption = 0;
-    player.megaCredits = 4;
-    player2.underworldData.corruption = 0;
-    player2.megaCredits = 3;
-    player3.underworldData.corruption = 0;
-    player3.megaCredits = 2;
-    player4.underworldData.corruption = 0;
-    player4.megaCredits = 1;
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
 
     setRulingParty(game, PartyName.REDS);
 
+    player.tagsForTest = {crime: 0};
+    player2.tagsForTest = {crime: 2};
+    player.stock.megacredits = 3;
+    player2.stock.megacredits = 6;
+
     cast(card.play(player), undefined);
     runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
-    cast(player2.popWaitingFor(), undefined);
-    cast(player3.popWaitingFor(), undefined);
-    cast(player4.popWaitingFor(), undefined);
 
-    expect(player.getTerraformRating()).eq(21);
-    expect(player.megaCredits).eq(1);
-    expect(player2.getTerraformRating()).eq(21);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.getTerraformRating()).eq(20);
-    expect(player3.megaCredits).eq(2);
-    expect(player4.getTerraformRating()).eq(20);
-    expect(player4.megaCredits).eq(1);
+    expect(player.terraformRating).eq(21);
+    const log = game.gameLog.map((m) => formatMessage(m));
+    expect(log.some((m) => m.includes('instead of'))).is.true;
+  });
+
+  it('logs when a player gains less TR than entitled - reds, Helion with 2 heat + 2 MC', () => {
+    const card = new GlobalAudit();
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+    setRulingParty(game, PartyName.REDS);
+
+    const helion = new Helion();
+    helion.play(player);
+    player.playedCards.push(helion);
+
+    player.tagsForTest = {crime: 0};
+    player2.tagsForTest = {crime: 2};
+    player.stock.megacredits = 2;
+    player.heat = 2;
+    player2.stock.megacredits = 6;
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+
+    // Helion's heat prevents auto-pay, so the player is waiting for SelectPayment.
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megacredits: 2, heat: 1});
+
+    expect(player.terraformRating).eq(21);
+    const log = game.gameLog.map((m) => formatMessage(m));
+    expect(log.some((m) => m.includes('instead of'))).is.true;
   });
 });

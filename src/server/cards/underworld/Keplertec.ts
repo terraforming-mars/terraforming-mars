@@ -6,11 +6,12 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {digit} from '../Options';
 import {ICard} from '../ICard';
-import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
+import {UndergroundResourceToken, undergroundResourceTokenDescription} from '../../../common/underworld/UndergroundResourceToken';
 import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Keplertec extends ActiveCorporationCard {
   constructor() {
@@ -43,9 +44,9 @@ export class Keplertec extends ActiveCorporationCard {
           b.action('Spend 1 titanium to put a fighter resource on ANY card.', (ab) => {
             ab.titanium(1).startAction.resource(CardResource.FIGHTER).asterix();
           }).br;
-          b.effect('When you place a fighter resource on this card, draw 4 random underground resource tokens. ' +
-            'Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.', (eb) => {
-            eb.resource(CardResource.FIGHTER).startEffect.undergroundResources(1, {text: '?'}).asterix();
+          b.effect('When you place a fighter on this card, identify 4 underground resources FROM THE PILE. ' +
+            'Claim 1. Shuffle the remaining tokens back into the pile.', (eb) => {
+            eb.resource(CardResource.FIGHTER).startEffect.identify(4, {digit}).asterix().claim(1);
           }).br;
         }),
       },
@@ -59,22 +60,19 @@ export class Keplertec extends ActiveCorporationCard {
     }
     const tokens: Array<UndergroundResourceToken> = [];
     for (let i = 0; i < 4; i++) {
-      const token = game.underworldData.tokens.pop();
-      if (token === undefined) {
-        // TODO(kberg): handle
-        break;
-      }
+      const token = UnderworldExpansion.drawExcavationToken(game);
       tokens.push(token);
     }
-    if (tokens.length === 0) {
-      // TODO(kberg): handle
-      return;
+
+    for (const token of tokens) {
+      game.triggerForAllCards((p, c) => c.onIdentificationByAnyPlayer?.(p, player, token));
     }
 
     const orOptions = new OrOptions();
     for (const token of tokens) {
-      orOptions.options.push(new SelectOption(token).andThen(() => {
-        UnderworldExpansion.grant(player, token);
+      orOptions.options.push(new SelectOption(undergroundResourceTokenDescription[token]).andThen(() => {
+        UnderworldExpansion.claimToken(player, token, /* isExcavate=*/ false, /* space= */undefined);
+        inplaceRemove(tokens, token);
         UnderworldExpansion.addTokens(game, tokens);
         if (idx > 1) {
           game.defer(new SimpleDeferredAction(player, () => {

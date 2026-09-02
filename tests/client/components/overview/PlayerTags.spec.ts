@@ -1,20 +1,20 @@
-import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {shallowMount, VueWrapper, DOMWrapper} from '@vue/test-utils';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {Color} from '@/common/Color';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
-import {Wrapper} from '@vue/test-utils';
+import {SpecialTags} from '@/client/cards/SpecialTags';
+import {asComplete} from '../utils/models';
 
-describe('PlayerTags', function() {
-  let wrapper: Wrapper<PlayerTags>;
+describe('PlayerTags', () => {
+  let wrapper: VueWrapper<any>;
 
   beforeEach(() => {
     const player: RecursivePartial<PublicPlayerModel> = {
-      color: Color.BLUE,
+      color: 'blue',
       tableau: [
         {
           name: CardName.CRESCENT_RESEARCH_ASSOCIATION, // 1/3 VP per moon tag
@@ -39,32 +39,84 @@ describe('PlayerTags', function() {
           // 1 VP per Moon tag
           name: CardName.LUNA_SENATE,
         },
+        {
+          // 1 VP per adjacent city tile (uses nextToThis)
+          name: CardName.COMMERCIAL_DISTRICT,
+        },
       ],
-      tags: [],
+      tags: {
+        [Tag.BUILDING]: 0,
+        [Tag.SPACE]: 0,
+        [Tag.SCIENCE]: 0,
+        [Tag.POWER]: 0,
+        [Tag.EARTH]: 0,
+        [Tag.JOVIAN]: 0,
+        [Tag.VENUS]: 0,
+        [Tag.PLANT]: 0,
+        [Tag.MICROBE]: 0,
+        [Tag.ANIMAL]: 0,
+        [Tag.CITY]: 0,
+        [Tag.CRIME]: 0,
+        [Tag.EVENT]: 0,
+      },
+      underworldData: {
+        tokens: [],
+      },
       victoryPointsBreakdown: {
         total: 1,
       },
+      terraformRating: 100,
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: player,
       id: 'playerid-foo',
       game: {
         gameOptions: {
+          expansions: {
+            corpera: true,
+            promo: false,
+            venus: true,
+            colonies: false,
+            prelude: false,
+            prelude2: false,
+            turmoil: false,
+            community: false,
+            ares: false,
+            moon: false,
+            pathfinders: false,
+            ceo: false,
+            starwars: false,
+            underworld: false,
+          },
           showTimers: false,
         },
+        tags: [
+          Tag.BUILDING,
+          Tag.SPACE,
+          Tag.SCIENCE,
+          Tag.POWER,
+          Tag.EARTH,
+          Tag.JOVIAN,
+          Tag.VENUS,
+          Tag.PLANT,
+          Tag.MICROBE,
+          Tag.ANIMAL,
+          Tag.CITY,
+          Tag.EVENT,
+        ],
       },
       players: [player],
     };
     wrapper = shallowMount(PlayerTags, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         methods: {
-          getVisibilityState: function() {},
+          getVisibilityState: () => {},
         },
       },
-      propsData: {
-        player: player,
-        playerView: playerView,
+      props: {
+        player: asComplete<PublicPlayerModel>(player),
+        playerView: asComplete<PlayerViewModel>(playerView),
         hideZeroTags: false,
         conciseTagsViewDefaultValue: false,
       },
@@ -73,14 +125,33 @@ describe('PlayerTags', function() {
     wrapper.vm.$data.conciseView = false;
   });
 
-  it('tag discounts', function() {
-    const test = function(tag: Tag | 'all', value: number) {
-      const elem = wrapper.find(`[data-test="discount-${tag}"]`);
-      expect(elem.attributes()['amount']).to.eq(`${value}`);
-    };
-    test(Tag.MICROBE, 3);
-    test(Tag.VENUS, 1);
-    expect(() => test(Tag.EARTH, 0)).to.throw(/find did not return/);
-    test('all', 4);
+  function elem(tag: Tag | 'all'): DOMWrapper<Element> {
+    return wrapper.find(`[data-test="discount-${tag}"]`);
+  }
+
+  function amount(e: DOMWrapper<Element>): string {
+    return e.attributes()['amount'];
+  }
+
+  it('tag discounts - microbe', () => {
+    expect(amount(elem(Tag.MICROBE))).to.eq('3');
+  });
+
+  it('tag discounts - venus', () => {
+    expect(amount(elem(Tag.VENUS))).to.eq('1');
+  });
+
+  it('tag discounts - all', () => {
+    expect(amount(elem('all'))).to.eq('4');
+  });
+
+  it('tag discounts - earth', () => {
+    expect(elem(Tag.EARTH).exists()).to.eq(false);
+  });
+
+  it('nextToThis card sets asterisk on city-count tag', () => {
+    const cityCount = wrapper.vm.tagsInOrder.find((t: any) => t.name === SpecialTags.CITY_COUNT);
+    expect(cityCount.points).to.eq(0);
+    expect(cityCount.asterisk).to.eq(true);
   });
 });

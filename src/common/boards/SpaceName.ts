@@ -1,0 +1,21 @@
+export const SpaceName = {
+  GANYMEDE_COLONY: '01',
+  NOCTIS_CITY: '31',
+  PHOBOS_SPACE_HAVEN: '02',
+  LUNA_METROPOLIS: '70',
+  DAWN_CITY: '71',
+  STRATOPOLIS: '72',
+  MAXWELL_BASE: '73',
+  HELLAS_OCEAN_TILE: '61',
+
+  STANFORD_TORUS: '69',
+
+  // Vastitas Borealis
+  VASTITAS_BOREALIS_NORTH_POLE: '33',
+
+  // Pathfinders
+  CERES_SPACEPORT: '75',
+  DYSON_SCREENS: '76',
+  LUNAR_EMBASSY: '77',
+  VENERA_BASE: '78',
+} as const;

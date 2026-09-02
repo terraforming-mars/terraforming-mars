@@ -5,7 +5,7 @@ import {Cultivator} from '../../src/server/awards/Cultivator';
 import {Industrialist} from '../../src/server/awards/Industrialist';
 import {TestPlayer} from '../TestPlayer';
 
-describe('FundedAwards', function() {
+describe('FundedAwards', () => {
   it('test serialization', () => {
     const bluePlayer = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();

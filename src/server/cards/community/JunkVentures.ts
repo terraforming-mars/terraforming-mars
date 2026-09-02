@@ -4,8 +4,10 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {IPlayer} from '../../IPlayer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {uppercase} from '../Options';
 
-export class JunkVentures extends CorporationCard {
+export class JunkVentures extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.JUNK_VENTURES,
@@ -19,14 +21,14 @@ export class JunkVentures extends CorporationCard {
           b.br.br;
           b.megacredits(43).text('DECK: ').minus().cards(3);
           b.corpBox('action', (cb) => {
-            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', Size.SMALL, true);
+            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', {size: Size.SMALL, uppercase});
           });
         }),
       },
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const cards = player.game.projectDeck.drawN(player.game, 3);
     for (const card of cards) {
       player.game.projectDeck.discard(card);

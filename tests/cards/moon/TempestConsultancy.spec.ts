@@ -7,9 +7,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;
@@ -36,6 +37,20 @@ describe('TempestConsultancy', () => {
     expect(card.canAct(player)).is.true;
     turmoil.delegateReserve.clear();
     expect(card.canAct(player)).is.false;
+  });
+
+  it('initial action, places 2 delegates', () => {
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
+    expect(marsFirst.delegates.get(player)).eq(0);
+
+    card.initialAction(player);
+    const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
+    const options = cast(action.execute(), SelectParty);
+    options.cb(marsFirst.name);
+
+    expect(marsFirst.delegates.get(player)).eq(2);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
   });
 
   it('action, 1 delegate', () => {
@@ -88,26 +103,26 @@ describe('TempestConsultancy', () => {
   });
 
   it('new chairman', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     turmoil.dominantParty = new Greens();
     turmoil.dominantParty.partyLeader = player;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     turmoil.setRulingParty(game);
     runAllActions(game);
 
     expect(turmoil.chairman).eq(player);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
   it('With Vote of No Confidence', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     turmoil.chairman = 'NEUTRAL';
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player;
 
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
 
     const voteOfNoConfidence = new VoteOfNoConfidence();
     voteOfNoConfidence.play(player);
@@ -115,7 +130,7 @@ describe('TempestConsultancy', () => {
     expect(turmoil.chairman).eq(player);
     runAllActions(game);
     // With Vote of No Confidence, player becomes chairman and gains 1 TR. Tempest gives player a second TR.
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });
 

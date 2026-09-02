@@ -27,24 +27,62 @@
       <div><div class="production-box"><div class="production plant"></div></div></div>
       <div><div class="production-box"><div class="production plant"></div></div></div>
     </template>
-    <template v-else v-for="idx in range(7)">
-      <div :key="idx">{{metadata.tradeQuantity[idx]}}</div>
+    <template v-else-if="metadata.name === ColonyName.TERRA">
+     <div>
+        <div class="tile temperature-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile temperature-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile temperature-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile oxygen-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile oxygen-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile ocean-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+    <div>
+        <div class="tile ocean-tile" style="transform: scale(0.8);">
+            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+        </div>
+    </div>
+
+    </template>
+    <template v-else v-for="idx in range(7)" :key="idx">
+      <div>{{metadata.trade.quantity[idx]}}</div>
     </template>
   </div>
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {range} from '@/common/utils/utils';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ColonyTradeRow',
   props: {
     metadata: {
-      type: Object as () => IColonyMetadata,
+      type: Object as () => ColonyMetadata,
       required: true,
     },
   },

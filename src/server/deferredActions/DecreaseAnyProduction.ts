@@ -25,9 +25,10 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
   }
 
   private attack(target: IPlayer): void {
-    target.maybeBlockAttack(this.player, (proceed: boolean) => {
+    const msg = message('lose ${0} ${1} production', (b) => b.number(this.options.count).string(this.resource));
+    target.maybeBlockAttack(this.player, msg, (proceed: boolean) => {
       if (proceed) {
-        target.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+        target.production.add(this.resource, -this.options.count, {log: true, from: {player: this.player}, stealing: this.options.stealing});
       }
       this.cb(proceed);
       return undefined;
@@ -39,7 +40,7 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
       this.player.resolveInsuranceInSoloGame();
       this.cb(true);
     } else {
-      const targets = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
+      const targets = this.player.game.players.filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
       if (targets.length === 0) {
         this.cb(false);

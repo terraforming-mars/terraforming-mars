@@ -3,12 +3,14 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Scapegoat extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SCAPEGOAT,
       type: CardType.EVENT,
+      tags: [Tag.CRIME],
       cost: 5,
 
       behavior: {
@@ -16,7 +18,7 @@ export class Scapegoat extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U40',
+        cardNumber: 'U040',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1);
         }),

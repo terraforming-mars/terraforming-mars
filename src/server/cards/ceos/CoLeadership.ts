@@ -3,8 +3,9 @@ import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
-import {ICeoCard} from './ICeoCard';
-import {SelectCard} from '../../inputs/SelectCard';
+import {DrawCeoCardFromDeck} from '../../deferredActions/DrawCeoCardFromDeck';
+import {Phase} from '../../../common/Phase';
+import {uppercase} from '../Options';
 
 export class CoLeadership extends PreludeCard {
   constructor() {
@@ -13,7 +14,7 @@ export class CoLeadership extends PreludeCard {
       metadata: {
         cardNumber: 'xxx',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.', Size.SMALL, true);
+          b.text('Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.', {size: Size.SMALL, uppercase});
         }),
       },
     });
@@ -21,38 +22,27 @@ export class CoLeadership extends PreludeCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (!player.game.ceoDeck.canDraw(3)) {
-      this.warnings.add('deckTooSmall');
+      this.addWarning('deckTooSmall');
     }
     return true;
   }
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    let ceosDrawn: Array<ICeoCard> = game.ceoDeck.drawN(game, 3);
-
-    // TODO(d-little): This is not being tested, but currently every CEO is always playable
-    ceosDrawn = ceosDrawn.filter((ceo) => {
-      if (ceo.canPlay?.(player) === false) {
-        game.ceoDeck.discard(ceo);
-        game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), {reservedFor: player});
-        return false;
+    game.defer(new DrawCeoCardFromDeck(player, 3)).andThen((card) => {
+      if (card !== undefined) {
+        if (game.phase === Phase.ACTION) {
+          if (player.canPlay(card)) {
+            player.playCard(card);
+          } else {
+            game.log('Discarding ${0} because it is not playable', (b) => b.card(card));
+            game.ceoDeck.discard(card);
+          }
+        } else {
+          player.ceoCardsInHand.add(card);
+        }
       }
-      return true;
     });
-
-    if (ceosDrawn.length === 0) {
-      game.log('${0} drew no playable CEO cards', (b) => b.player(player));
-      return undefined;
-    }
-
-    return new SelectCard('Choose CEO card', 'Take', ceosDrawn)
-      .andThen(([chosenCeo]) => {
-      // Discard unchosen CEOs
-        ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
-        // Add chosen CEO to hand
-        player.ceoCardsInHand.push(chosenCeo);
-        return undefined;
-      });
+    return undefined;
   }
 }
-

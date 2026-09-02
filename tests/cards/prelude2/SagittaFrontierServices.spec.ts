@@ -22,34 +22,34 @@ describe('SagittaFrontierServices', () => {
     player.playCorporationCard(card);
     runAllActions(game);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 1, megacredits: 2}));
-    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 32})); // +4 for playing this card.
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 35})); // +4 for playing this card.
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].tags.length).eq(0);
+    expect(player.cardsInHand[0].tags).has.length(0);
   });
 
   it('Zero tags, gain 4 M€', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     card.onCardPlayed(player, fakeCard({tags: []}));
     runAllActions(game);
     expect(player.megaCredits).eq(4);
   });
 
   it('One tag, gain 1 M€', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
     expect(player.megaCredits).eq(1);
   });
 
   it('Event tag is a tag', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     card.onCardPlayed(player, fakeCard({type: CardType.EVENT, tags: []}));
     runAllActions(game);
     expect(player.megaCredits).eq(1);
   });
 
   it('Wild tag is not a tag', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     card.onCardPlayed(player, fakeCard({tags: [Tag.WILD]}));
     runAllActions(game);
     expect(player.megaCredits).eq(4);

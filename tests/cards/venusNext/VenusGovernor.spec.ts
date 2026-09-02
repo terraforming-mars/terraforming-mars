@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('VenusGovernor', function() {
-  it('Should play', function() {
+describe('VenusGovernor', () => {
+  it('Should play', () => {
     const card = new VenusGovernor();
     const [/* game */, player] = testGame(1);
 

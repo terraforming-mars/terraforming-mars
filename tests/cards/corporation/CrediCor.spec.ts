@@ -7,32 +7,32 @@ import {GreeneryStandardProject} from '../../../src/server/cards/base/standardPr
 import {CrediCor} from '../../../src/server/cards/corporation/CrediCor';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('CrediCor', function() {
+describe('CrediCor', () => {
   let card: CrediCor;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CrediCor();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     card.onStandardProject(player, new AsteroidStandardProject());
     card.onStandardProject(player, new CityStandardProject());
     card.onStandardProject(player, new GreeneryStandardProject());
     expect(player.megaCredits).to.eq(8);
   });
 
-  it('Runs onCardPlayed', function() {
-    player.setCorporationForTest(card);
+  it('Runs onCardPlayed', () => {
+    player.playedCards.push(card);
     expect(player.megaCredits).to.eq(0);
-    card.onCardPlayed(player, new GiantIceAsteroid());
+    player.playCard(new GiantIceAsteroid());
     expect(player.megaCredits).to.eq(4);
-    card.onCardPlayed(player, new Bushes());
+    player.playCard(new Bushes());
     expect(player.megaCredits).to.eq(4);
   });
 });

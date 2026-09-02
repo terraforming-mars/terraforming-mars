@@ -6,8 +6,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Priority} from '../../deferredActions/Priority';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Aurorai extends CorporationCard {
+export class Aurorai extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AURORAI,
@@ -20,7 +21,7 @@ export class Aurorai extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfC9',
+        cardNumber: 'PfC15',
         description: 'You start with 33 M€. and 2 data on this card',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(33).resource(CardResource.DATA, 2).br;
@@ -35,7 +36,7 @@ export class Aurorai extends CorporationCard {
     });
   }
 
-  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
+  public onIncreaseTerraformRatingByAnyPlayer(cardOwner: IPlayer, player: IPlayer, steps: number) {
     if (player === cardOwner) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }

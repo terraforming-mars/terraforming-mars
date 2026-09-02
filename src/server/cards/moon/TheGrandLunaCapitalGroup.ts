@@ -8,12 +8,13 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Space} from '../../boards/Space';
 import {SpaceId} from '../../../common/Types';
 import {Resource} from '../../../common/Resource';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonHabitatTile} from '../render/DynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheGrandLunaCapitalGroup extends CorporationCard {
+export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
@@ -31,10 +32,7 @@ export class TheGrandLunaCapitalGroup extends CorporationCard {
       },
 
       metadata: {
-        description: {
-          text: 'You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.',
-          align: 'left',
-        },
+        description: 'You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.',
         cardNumber: 'MC7',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(32).titanium(1).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).br;
@@ -45,7 +43,7 @@ export class TheGrandLunaCapitalGroup extends CorporationCard {
           }).br,
           b.vpText('1 VP for each habitat tile adjacent to your habitat tiles.').br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonHabitatTile(1),
+        victoryPoints: moonHabitatTile(1),
       },
     });
   }

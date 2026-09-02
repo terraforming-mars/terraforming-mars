@@ -1,38 +1,39 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {cast, runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {testGame} from '../../TestGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('AirScrappingStandardProject', function() {
+describe('AirScrappingStandardProject', () => {
   let card: AirScrappingStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirScrappingStandardProject();
     [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, altVenusBoard: false, turmoilExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = 14;
     expect(card.canAct(player)).is.false;
     player.megaCredits = 15;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = 15;
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
 
-    card.action(player);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
@@ -42,14 +43,14 @@ describe('AirScrappingStandardProject', function() {
 
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
-    cast(card.action(player), undefined);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(MAX_VENUS_SCALE);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
   });
 

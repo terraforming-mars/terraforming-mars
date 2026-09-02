@@ -10,7 +10,7 @@ import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Units} from '../../../src/common/Units';
 
-describe('Naomi', function() {
+describe('Naomi', () => {
   let card: Naomi;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -30,8 +30,8 @@ describe('Naomi', function() {
     {player: 1, colony: 1, expected: [[0, 0], [0, 0]]},
   ] as const;
   for (const run of onColonyAddedRuns) {
-    it('Gains 2 energy and 2 M€ when building a colony ' + JSON.stringify(run), function() {
-      const players = game.getPlayers();
+    it('Gains 2 energy and 2 M€ when building a colony ' + JSON.stringify(run), () => {
+      const players = game.players;
       players[0].playedCards.push(card);
 
       expect(player.stock.asUnits()).deep.eq(Units.of({}));
@@ -44,7 +44,7 @@ describe('Naomi', function() {
     });
   }
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     card.action(player);
     expect(game.deferredActions).has.length(2);
 
@@ -59,7 +59,7 @@ describe('Naomi', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

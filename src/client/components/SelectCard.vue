@@ -3,8 +3,8 @@
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
-              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
-              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
+              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" >
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" >
             </template>
             <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
@@ -14,9 +14,10 @@
               </template>
             </Card>
         </label>
-        <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
-        <warnings-component :warnings="warnings"></warnings-component>
+        <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
+        <WarningsComponent :warnings="warnings"/>
         <div v-if="showsave === true" class="nofloat">
+            <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
@@ -25,14 +26,14 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
@@ -48,23 +49,26 @@ type Owner = {
 
 type WidgetDataModel = {
   // The selected item or items
-  cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
+  cards: CardModel | Array<CardModel>;
   warning: string | Message | undefined;
   warnings: ReadonlyArray<Warning> | undefined;
   owners: Map<CardName, Owner>,
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectCard',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectCardModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectCardResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
@@ -97,13 +101,13 @@ export default Vue.extend({
     cardsSelected(): number {
       if (Array.isArray(this.cards)) {
         return this.cards.length;
-      } else if (this.cards === false || this.cards === undefined) {
+      } else if (this.cards === undefined) {
         return 0;
       }
       return 1;
     },
-    getOrderedCards(): Array<CardModel> {
-      let cards: Array<CardModel> = [];
+    getOrderedCards(): ReadonlyArray<CardModel> {
+      let cards: ReadonlyArray<CardModel> = [];
       if (this.playerinput.cards !== undefined) {
         if (this.playerinput.selectBlueCardAction) {
           cards = sortActiveCards(this.playerinput.cards);
@@ -120,25 +124,38 @@ export default Vue.extend({
         this.owners.clear();
         this.playerinput.cards.forEach((card) => {
           const owner = this.findOwner(card);
-          if (owner !== undefined) this.owners.set(card.name, owner);
+          if (owner !== undefined) {
+            this.owners.set(card.name, owner);
+          }
         });
       }
       return cards;
     },
+    getData(): Array<CardName> {
+      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+    },
     hasCardWarning() {
+      // This is pretty clunky, to be honest.
       if (Array.isArray(this.cards)) {
+        if (this.cards.length === 1) {
+          this.warnings = this.cards[0].warnings;
+        }
         return false;
       } else if (typeof this.cards === 'object') {
         this.warnings = this.cards.warnings;
-        if (this.cards.warning !== undefined) {
-          this.warning = this.cards.warning;
-          return true;
-        }
       }
       return false;
     },
-    getData(): Array<CardName> {
-      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+
+    canSave() {
+      const len = this.getData().length;
+      if (len > this.playerinput.min) {
+        return false;
+      }
+      if (len < this.playerinput.max) {
+        return false;
+      }
+      return true;
     },
     saveData() {
       this.onsave({type: 'card', cards: this.getData()});
@@ -158,17 +175,33 @@ export default Vue.extend({
       return undefined;
     },
     getOwner(card: CardModel): Owner {
-      return this.owners.get(card.name) ?? {name: 'unknown', color: Color.NEUTRAL};
+      return this.owners.get(card.name) ?? {name: 'unknown', color: 'neutral'};
     },
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.
       return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
-    buttonLabel(): string {
-      return this.selectOnlyOneCard ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    buttonLabel(): string | Message {
+      if (this.selectOnlyOneCard) {
+        return this.playerinput.buttonLabel;
+      }
+      return {
+        message: this.playerinput.buttonLabel + ' ${0}',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(this.cardsSelected()),
+        }],
+      };
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
+    },
+    toggleSelectAll() {
+      if (this.allSelected) {
+        this.cards = [];
+      } else {
+        this.cards = this.selectableCards.slice();
+      }
     },
   },
   computed: {
@@ -179,6 +212,17 @@ export default Vue.extend({
       return this.playerinput.max !== undefined &&
              this.playerinput.max > 1 &&
              this.playerinput.min === 0;
+    },
+    selectableCards(): Array<CardModel> {
+      return this.playerinput.cards.filter((card) => !card.isDisabled);
+    },
+    showSelectAll(): boolean {
+      return this.playerinput.showSelectAll === true &&
+             !this.selectOnlyOneCard &&
+             this.selectableCards.length > 1;
+    },
+    allSelected(): boolean {
+      return Array.isArray(this.cards) && this.cards.length === this.selectableCards.length;
     },
   },
 });

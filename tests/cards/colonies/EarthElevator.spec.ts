@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {EarthElevator} from '../../../src/server/cards/colonies/EarthElevator';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('EarthElevator', function() {
-  it('Should play', function() {
+describe('EarthElevator', () => {
+  it('Should play', () => {
     const card = new EarthElevator();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

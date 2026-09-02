@@ -4,17 +4,17 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
-describe('EconomicEspionage', function() {
+describe('EconomicEspionage', () => {
   let card: EconomicEspionage;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EconomicEspionage();
     [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 
-  it('can act', function() {
+  it('can act', () => {
     player.megaCredits = 1;
 
     expect(card.canAct(player)).is.false;
@@ -24,7 +24,7 @@ describe('EconomicEspionage', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = 2;
 
     card.action(player);
@@ -33,7 +33,7 @@ describe('EconomicEspionage', function() {
     expect(card.resourceCount).eq(1);
   });
 
-  it('victoryPoints', function() {
+  it('victoryPoints', () => {
     card.resourceCount = 2;
     expect(card.getVictoryPoints(player)).eq(0);
 

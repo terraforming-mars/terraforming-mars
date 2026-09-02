@@ -1,12 +1,13 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonSpaces} from '../../../common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {ActionCard} from '../ActionCard';
 import {all} from '../Options';
+import {Size} from '@/common/cards/render/Size';
 
 export class LunaTradeStation extends ActionCard implements IActionCard {
   constructor() {
@@ -25,7 +26,7 @@ export class LunaTradeStation extends ActionCard implements IActionCard {
         moon: {
           tile: {
             type: TileType.LUNA_TRADE_STATION,
-            space: MoonSpaces.LUNA_TRADE_STATION,
+            space: NamedMoonSpaces.LUNA_TRADE_STATION,
           },
         },
       },
@@ -35,7 +36,7 @@ export class LunaTradeStation extends ActionCard implements IActionCard {
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 2 M€ for each habitat tile on The Moon.', (eb) =>
-            eb.empty().startAction.megacredits(2).slash().moonHabitat({all}));
+            eb.empty().startAction.megacredits(2).slash().moonHabitat({size: Size.SMALL, all}));
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },

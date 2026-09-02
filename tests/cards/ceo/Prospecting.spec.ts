@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Prospecting} from '../../../src/server/cards/underworld/Prospecting';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('Prospecting', function() {
+describe('Prospecting', () => {
   let card: Prospecting;
   let player: TestPlayer;
   let game: IGame;
@@ -18,19 +19,27 @@ describe('Prospecting', function() {
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
+    player.megaCredits = 3;
+    expect(card.canPlay(player)).is.false;
+    player.megaCredits = 4;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
+    player.megaCredits = 4;
     const coloniesInPlay = game.colonies.length;
     cast(card.play(player), undefined);
     runAllActions(player.game);
     const selectColony = cast(player.popWaitingFor(), SelectColony);
     const selectedColony = selectColony.colonies[0];
     selectColony.cb(selectedColony);
+    runAllActions(game);
+
     expect(game.colonies).to.contain(selectedColony);
-    expect(game.colonies.length).to.eq(coloniesInPlay + 1);
+    expect(game.colonies).has.length(coloniesInPlay + 1);
+
+    expect(player.megaCredits).eq(0);
   });
 
   it('Venus cannot be activated, so is not selectable', () => {
@@ -43,7 +52,7 @@ describe('Prospecting', function() {
   });
 
   it('Venus can be activated, so is not selectable', () => {
-    player.setCorporationForTest(new Celestic());
+    player.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);

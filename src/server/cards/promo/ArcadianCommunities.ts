@@ -6,9 +6,10 @@ import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ArcadianCommunities extends CorporationCard implements IActionCard {
+export class ArcadianCommunities extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ARCADIAN_COMMUNITIES,
@@ -26,19 +27,17 @@ export class ArcadianCommunities extends CorporationCard implements IActionCard 
           b.br;
           b.megacredits(40).nbsp.steel(10, {digit}).nbsp.community().asterix();
           b.corpBox('action', (ce) => {
-            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.', Size.TINY, true);
+            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.', {size: Size.TINY, uppercase});
             ce.vSpace(Size.MEDIUM);
-            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.', Size.TINY, true);
+            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.', {size: Size.TINY, uppercase});
           });
         }),
       },
     });
   }
 
-  public initialAction(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for claim',
-      player.game.board.getAvailableSpacesOnLand(player))
+  private askToClaimSpace(player: IPlayer, spaces: ReadonlyArray<Space>) {
+    return new SelectSpace('Select space for claim', spaces)
       .andThen((space: Space) => {
         space.player = player;
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
@@ -46,12 +45,18 @@ export class ArcadianCommunities extends CorporationCard implements IActionCard 
       });
   }
 
+  public override initialAction(player: IPlayer) {
+    return this.askToClaimSpace(player, player.game.board.getAvailableSpacesOnLand(player));
+  }
+
   public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
     const board = player.game.board;
     const candidateSpaces = board.getAvailableSpacesOnLand(player);
     const spaces = candidateSpaces.filter((space) => {
       // Exclude spaces that already have a player marker.
-      if (space.player !== undefined) return false;
+      if (space.player !== undefined) {
+        return false;
+      }
       const adjacentSpaces = board.getAdjacentSpaces(space);
       return adjacentSpaces.find((adj) => adj.player === player) !== undefined;
     });
@@ -64,10 +69,6 @@ export class ArcadianCommunities extends CorporationCard implements IActionCard 
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('Select space for claim', this.getAvailableSpacesForMarker(player))
-      .andThen((space) => {
-        space.player = player;
-        return undefined;
-      });
+    return this.askToClaimSpace(player, this.getAvailableSpacesForMarker(player));
   }
 }

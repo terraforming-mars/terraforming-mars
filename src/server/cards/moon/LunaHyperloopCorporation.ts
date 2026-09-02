@@ -23,12 +23,14 @@ export class LunaHyperloopCorporation extends ActiveCorporationCard {
 
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',
-        cardNumber: '',
+        cardNumber: 'MC4',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).steel(4).br;
-          b.action('Gain 1 M€ for each road tile on The Moon.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().moonRoad({all});
-          }).br,
+          b.corpBox('action', (cb) => {
+            cb.action('Gain 1 M€ for each road tile on The Moon', (eb) => {
+              eb.empty().startAction.megacredits(1).slash().moonRoad({all});
+            });
+          }).br;
           b.vpText('1 VP for each road tile on The Moon.').br;
         }),
       },

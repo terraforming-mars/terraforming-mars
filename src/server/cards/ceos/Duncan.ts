@@ -4,7 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Resource} from '../../../common/Resource';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {questionmark} from '../render/DynamicVictoryPoints';
 
 
 export class Duncan extends CeoCard {
@@ -20,7 +20,7 @@ export class Duncan extends CeoCard {
           b.opgArrow().vpIcon().asterix().megacredits(1, {text: '4x'});
           b.br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        victoryPoints: questionmark(),
         description: 'Once per game, gain 7-X VP and 4X M€, where X is the current generation number.',
       },
     });

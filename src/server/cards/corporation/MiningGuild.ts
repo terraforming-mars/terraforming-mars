@@ -10,8 +10,10 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
+import {AresHandler} from '../../ares/AresHandler';
+import {ICorporationCard} from './ICorporationCard';
 
-export class MiningGuild extends CorporationCard {
+export class MiningGuild extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MINING_GUILD,
@@ -25,7 +27,6 @@ export class MiningGuild extends CorporationCard {
 
       metadata: {
         cardNumber: 'R24',
-        hasExternalHelp: true,
         description: 'You start with 30 M€, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
@@ -49,11 +50,19 @@ export class MiningGuild extends CorporationCard {
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
       return;
     }
+    // Don't grant a bonus for Mars Nomads (no tile actually placed)
+    if (cardOwner.game.nomadSpace === space.id && space.tile === undefined) {
+      return;
+    }
     // Don't grant a bonus if the card is overplaced (like Ares Ocean City)
     if (space.tile?.covers !== undefined) {
       return;
     }
-    if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {
+    const board = cardOwner.game.board;
+    const grant = space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM) ||
+      AresHandler.anyAdjacentSpaceGivesBonus(board, space, SpaceBonus.STEEL) ||
+      AresHandler.anyAdjacentSpaceGivesBonus(board, space, SpaceBonus.TITANIUM);
+    if (grant) {
       cardOwner.game.defer(new GainProduction(cardOwner, Resource.STEEL));
     }
   }

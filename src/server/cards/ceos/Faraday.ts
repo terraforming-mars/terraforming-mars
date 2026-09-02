@@ -1,10 +1,9 @@
-import {MultiSet} from 'mnemonist';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Tag} from '../../../common/cards/Tag';
@@ -13,6 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {message} from '../../logs/MessageBuilder';
 import {TITLES} from '../../inputs/titles';
+import {Priority} from '../../deferredActions/Priority';
 
 const INVALID_TAGS = [
   Tag.EVENT,
@@ -27,7 +27,7 @@ export class Faraday extends CeoCard {
         cardNumber: 'L27',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.text('5', Size.LARGE).diverseTag(1).colon().megacredits(-3).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
+          b.text('5', {size: Size.LARGE}).diverseTag(1).colon().megacredits(-3).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
           b.br.br;
         }),
         description: 'When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.',
@@ -35,52 +35,72 @@ export class Faraday extends CeoCard {
     });
   }
 
-  public override canAct(): boolean {
-    return false;
-  }
+  public data: {counts: Partial<Record<Tag, number>>} = {
+    counts: {},
+  };
 
-  // This _could_ save CPU cycles instead of running multiple finds?
-  private countTags(player: IPlayer): Record<Tag, number> {
-    const record: Partial<Record<Tag, number>> = {};
-    for (const entry of player.tags.countAllTags()) {
-      record[entry.tag] = entry.count;
+  public onCardPlayed(player: IPlayer, card: ICard) {
+    if (card.tags.length === 0 || card.type === CardType.EVENT) {
+      return;
     }
-    // This is safe because countAllTags returns all tags. I wish it were easy to initialize a Record type.
-    // Actually it doesn't return Clone tags.
-    return record as Record<Tag, number>;
+
+    this.processTags(player, card.tags);
   }
 
-  private gainedMultiple(tagsOnCard: number, total: number): boolean {
-    const priorTagCount = total - tagsOnCard;
-    // Modulo 5 what the tag count was before the card was played.
-    // Sum that pre-played count with the new cards tags.  If this sum is >=5, offer a card draw.
-    // this wont work if someone makes a card with > 5 tags of one type, but...
-    return priorTagCount % 5 + tagsOnCard >= 5;
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    this.processTags(player, [tag]);
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(2)) return;
+  private processTags(player: IPlayer, tags: ReadonlyArray<Tag>) {
+    const rewards: Array<Tag> = [];
 
-    const counts = this.countTags(player);
-
-    const tagsOnCard = MultiSet.from(card.tags);
-    tagsOnCard.forEachMultiplicity((countOnCard, tagOnCard) => {
-      if (INVALID_TAGS.includes(tagOnCard)) return;
-      if (this.gainedMultiple(countOnCard, counts[tagOnCard])) {
-        player.defer(this.effectOptions(player, tagOnCard));
+    for (const tag of tags) {
+      if (INVALID_TAGS.includes(tag)) {
+        continue;
       }
-    });
+
+      const count = player.tags.count(tag, 'raw');
+      const tagsFromCurrentCard = tags.filter((t) => t === tag).length;
+      const priorCount = count - tagsFromCurrentCard;
+      const lastReward = this.data.counts[tag] ?? Math.floor(priorCount / 5) * 5;
+      this.data.counts[tag] = lastReward;  // ensure initialized for future plays
+      const newRewardThreshold = lastReward + 5;
+      if (count >= newRewardThreshold) {
+        this.data.counts[tag] = newRewardThreshold;
+        rewards.push(tag);
+      }
+    }
+
+    // TODO(kberg): If a player only has 4MC and surpasses with 2 tags, this is awkward
+    player.defer(this.effectOptions(player, rewards), Priority.BEFORE_PHARMACY_UNION);
   }
 
-  public effectOptions(player: IPlayer, tag: Tag) {
-    if (!player.canAfford(3)) return;
+  public effectOptions(player: IPlayer, tags: Array<Tag>) {
+    const tag = tags.shift();
+    if (tag === undefined) {
+      return;
+    }
+    if (!player.canAfford(3)) {
+      player.game.log(
+        '${0} cannot afford to take advantage of the ${1} effect to draw a ${2} card',
+        (b) => b.player(player).card(this).string(tag));
+      return;
+    }
     return new OrOptions(
-      new SelectOption(message('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag))).andThen(() => {
-        player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
-          .andThen(() => player.drawCard(1, {tag: tag}));
+      new SelectOption(message('Pay 3 M€ to draw a ${0} card', (b) => b.string(tag))).andThen(() => {
+        player.game.defer(
+          new SelectPaymentDeferred(
+            player, 3, {title: TITLES.payForCardAction(this.name)}), Priority.BEFORE_PHARMACY_UNION)
+          .andThen(() => {
+            player.drawCard(1, {tag: tag});
+            player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
+          });
         return undefined;
       }),
-      new SelectOption('Do nothing'),
+      new SelectOption('Do nothing').andThen(() => {
+        player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
+        return undefined;
+      }),
     );
   }
 }

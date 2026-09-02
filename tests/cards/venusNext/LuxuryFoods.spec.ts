@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {LuxuryFoods} from '../../../src/server/cards/venusNext/LuxuryFoods';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('LuxuryFoods', function() {
-  it('Should play', function() {
+describe('LuxuryFoods', () => {
+  it('Should play', () => {
     const card = new LuxuryFoods();
     const [/* game */, player] = testGame(1);
     expect(card.canPlay(player)).is.not.true;

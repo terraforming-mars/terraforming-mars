@@ -3,8 +3,8 @@ import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {Advertising} from '../../../src/server/cards/promo/Advertising';
 import {testGame} from '../../TestGame';
 
-describe('Advertising', function() {
-  it('Should play', function() {
+describe('Advertising', () => {
+  it('Should play', () => {
     const advertising = new Advertising();
     const [/* game */, player] = testGame(1);
     testGame(1);

@@ -1,4 +1,4 @@
-import * as prometheus from 'prom-client';
+import prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
 import {IGame} from '../IGame';
@@ -23,6 +23,54 @@ const metrics = {
     help: 'Game evictions count',
     registers: [prometheus.register],
   }),
+  logsTrimmed: new prometheus.Counter({
+    name: 'game_log_trimmed',
+    help: 'Number of resident game logs dropped from memory while idle',
+    registers: [prometheus.register],
+  }),
+  logsRestored: new prometheus.Counter({
+    name: 'game_log_restored',
+    help: 'Number of resident game logs reloaded from the database on access',
+    registers: [prometheus.register],
+  }),
+  gamesCreated: new prometheus.Counter({
+    name: 'game_created',
+    help: 'Number of games created',
+    labelNames: ['players'] as const,
+    registers: [prometheus.register],
+  }),
+  gamesFinished: new prometheus.Counter({
+    name: 'game_finished',
+    help: 'Number of games finished',
+    labelNames: ['players'] as const,
+    registers: [prometheus.register],
+  }),
+  gamesPurged: new prometheus.Counter({
+    name: 'game_purged',
+    help: 'Number of games deleted because they are too old',
+    labelNames: ['players'] as const,
+    registers: [prometheus.register],
+  }),
+  gamesInMemory: new prometheus.Gauge({
+    name: 'games_in_memory',
+    help: 'Number of games currently loaded in memory',
+    labelNames: ['has_log'] as const,
+    registers: [prometheus.register],
+    collect() {
+      const counts = GameLoader.getLoadedGameCount();
+      this.set({has_log: 'true'}, counts.untrimmed);
+      this.set({has_log: 'false'}, counts.trimmed);
+    },
+  }),
+  idleTime: new prometheus.Gauge({
+    name: 'games_idle_time_seconds',
+    help: 'Point-in-time distribution of idle time (seconds since last access) across games resident in memory, as cumulative histogram-style buckets. This is a snapshot gauge, not a cumulative histogram.',
+    labelNames: ['le'] as const,
+    registers: [prometheus.register],
+    collect() {
+      GameLoader.collectIdleTimes(this);
+    },
+  }),
 };
 
 /**
@@ -30,7 +78,7 @@ const metrics = {
  * Loads games from database sequentially as needed
  */
 export class GameLoader implements IGameLoader {
-  private static instance?: GameLoader;
+  private static instance: GameLoader;
 
   private cache: Cache;
   private readonly config: CacheConfig;
@@ -41,6 +89,8 @@ export class GameLoader implements IGameLoader {
     this.config = config;
     this.clock = clock;
     this.cache = new Cache(config, clock);
+    this.cache.on('evicted', (count: number) => metrics.evictions.inc(count));
+    this.cache.on('trimmed', (count: number) => metrics.logsTrimmed.inc(count));
     this.purgedGames = [];
     timeAsync(this.cache.load())
       .then((v) => {
@@ -49,7 +99,7 @@ export class GameLoader implements IGameLoader {
   }
 
   public static getInstance(): IGameLoader {
-    if (GameLoader.instance === undefined) {
+    if (!GameLoader.instance) {
       const config = parseConfigString(process.env.GAME_CACHE ?? '');
       GameLoader.instance = new GameLoader(config, new Clock());
     }
@@ -60,19 +110,52 @@ export class GameLoader implements IGameLoader {
     return new GameLoader(config, clock);
   }
 
+  public static getLoadedGameCount(): {trimmed: number, untrimmed: number} {
+    return GameLoader.instance?.cache.countLoadedGames() ?? {trimmed: 0, untrimmed: 0};
+  }
+
+  public static getIdleTimes(): Array<number> {
+    const loader = GameLoader.getInstance();
+    return loader instanceof GameLoader ? loader.cache.idleTimes() : [];
+  }
+
+  // Populates `gauge` with the cumulative histogram-style distribution of
+  // resident-game idle time (seconds since last access) across fixed buckets.
+  public static collectIdleTimes(gauge: prometheus.Gauge<'le'>): void {
+    const bucketBoundsSeconds = [60, 300, 900, 1800, 3600, 10800, 21600, 86400, Infinity];
+    const idleSeconds = GameLoader.getIdleTimes().map((millis) => millis / 1000);
+    for (const le of bucketBoundsSeconds) {
+      const count = idleSeconds.filter((seconds) => seconds <= le).length;
+      gauge.set({le: le === Infinity ? '+Inf' : String(le)}, count);
+    }
+  }
+
   public resetForTesting(): void {
     this.cache = new Cache(this.config, this.clock);
     this.cache.load();
   }
 
+  /**
+   * Returns the time in milliseconds since `gameId` was last accessed, or
+   * undefined if the game is not resident in memory.
+   */
+  public idleTimeMillis(gameId: GameId): number | undefined {
+    return this.cache.idleTimeMillis(gameId);
+  }
+
   public async add(game: IGame): Promise<void> {
     const d = await this.cache.getGames();
+    const isNew = !d.games.has(game.id);
     d.games.set(game.id, game);
+    this.cache.touch(game.id);
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
     }
-    for (const player of game.getPlayers()) {
+    for (const player of game.players) {
       d.participantIds.set(player.id, game.id);
+    }
+    if (isNew) {
+      metrics.gamesCreated.inc({players: String(game.players.length)});
     }
   }
 
@@ -92,10 +175,22 @@ export class GameLoader implements IGameLoader {
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<IGame | undefined> {
     const d = await this.cache.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
-    if (gameId === undefined) return undefined;
+    if (gameId === undefined) {
+      return undefined;
+    }
 
     // 1. Check the cache as long as forceLoad isn't true.
-    if (forceLoad === false && d.games.get(gameId) !== undefined) return d.games.get(gameId);
+    const cached = d.games.get(gameId);
+    if (forceLoad === false && cached !== undefined) {
+      this.cache.touch(gameId);
+      // An idle sweep may have dropped the log to save memory (see Cache.trimIdleLogs).
+      // Reload it from the database before returning so callers never see or persist a
+      // truncated log.
+      if (cached.gameLog.length === 0) {
+        await this.restoreGameLog(cached);
+      }
+      return cached;
+    }
 
     // 2. The game isn't cached. If it's in the database, there will still be an entry
     // for it in the cache.
@@ -120,18 +215,30 @@ export class GameLoader implements IGameLoader {
     return undefined;
   }
 
+  /**
+   * Reloads the `gameLog` for a resident game whose log was dropped by an idle sweep.
+   * The database copy always retains the full log; we read that copy and move its log
+   * onto the live game object rather than deserializing the whole game.
+   */
+  private async restoreGameLog(game: IGame): Promise<void> {
+    const serializedGame = await Database.getInstance().getGame(game.id);
+    game.gameLog = serializedGame.gameLog;
+    metrics.logsRestored.inc();
+  }
+
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
+      console.error('GameLoader cannot find game ' + gameId);
       throw new Error('Cannot find game');
     }
     const currentSaveId = current.lastSaveId;
-    const serializedGame = await Database.getInstance().getGameVersion(gameId, saveId);
-    const game = Game.deserialize(serializedGame);
     const deletes = (currentSaveId - saveId) - 1;
     if (deletes > 0) {
       await Database.getInstance().deleteGameNbrSaves(gameId, deletes);
     }
+    const serializedGame = await Database.getInstance().getGame(gameId);
+    const game = Game.deserialize(serializedGame);
     await this.add(game);
     game.undoCount++;
     return game;
@@ -141,7 +248,7 @@ export class GameLoader implements IGameLoader {
     this.cache.mark(gameId);
   }
 
-  public sweep() {
+  public sweep(): void {
     this.cache.sweep();
   }
 
@@ -151,6 +258,7 @@ export class GameLoader implements IGameLoader {
     try {
       this.mark(game.id);
       await database.markFinished(game.id);
+      metrics.gamesFinished.inc({players: String(game.players.length)});
       await this.maintenance();
     } catch (err) {
       console.error(err);
@@ -168,6 +276,7 @@ export class GameLoader implements IGameLoader {
     const database = Database.getInstance();
     const purgedGames = await database.purgeUnfinishedGames();
     this.purgedGames.push(...purgedGames);
+    metrics.gamesPurged.inc(purgedGames.length);
     await database.compressCompletedGames();
   }
 }
@@ -177,6 +286,7 @@ function parseConfigString(stringValue: string): CacheConfig {
     sweep: 'manual', // default is manual
     evictMillis: durationToMilliseconds('15m'),
     sleepMillis: durationToMilliseconds('5m'),
+    idleMillis: durationToMilliseconds('1h'),
   };
   const parsed = Object.fromEntries((stringValue ?? '').split(';').map((s) => s.split('=', 2)));
   if (parsed.sweep === 'auto' || parsed.sweep === 'manual') {
@@ -185,8 +295,17 @@ function parseConfigString(stringValue: string): CacheConfig {
     throw new Error('invalid sweep option from GAME_CACHE: ' + parsed.sweep);
   }
   const evictMillis = durationToMilliseconds(parsed.eviction_age);
-  if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
+  if (!isNaN(evictMillis)) {
+    options.evictMillis = evictMillis;
+  }
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
-  if (isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  if (!isNaN(sleepMillis)) {
+    options.sleepMillis = sleepMillis;
+  }
+  // Set idle_age=0s to disable idle eviction; a bare 0 parses to NaN and is ignored.
+  const idleMillis = durationToMilliseconds(parsed.idle_age);
+  if (!isNaN(idleMillis)) {
+    options.idleMillis = idleMillis;
+  }
   return options;
 }

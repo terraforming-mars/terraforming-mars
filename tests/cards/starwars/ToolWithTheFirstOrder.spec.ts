@@ -3,7 +3,7 @@ import {ToolWithTheFirstOrder} from '../../../src/server/cards/starwars/ToolWith
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Phase} from '`.`./../../src/common/Phase';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
@@ -12,6 +12,7 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 import {PlayerInput} from '../../../src/server/PlayerInput';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ToolWithTheFirstOrder', () => {
   let card: ToolWithTheFirstOrder;
@@ -36,20 +37,20 @@ describe('ToolWithTheFirstOrder', () => {
     player.cardsInHand = [ants, bactoviralResearch, card];
 
     expect(player.actionsTakenThisRound).eq(0);
-    expect(game.activePlayer).eq(player.id);
+    expect(game.activePlayer.id).eq(player.id);
 
     player.megaCredits = card.cost;
     player.takeAction();
     const [waitingFor, cb] = player.popWaitingFor2();
     const playProjectCard = findOption(waitingFor!, 'Play project card');
-    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megaCredits: 5}));
+    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megacredits: 5}));
     cb!();
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     expect(player.actionsTakenThisRound).eq(1);
-    expect(game.activePlayer).eq(player.id);
+    expect(game.activePlayer.id).eq(player.id);
 
     player.takeAction();
     const [waitingFor1, cb1] = player.popWaitingFor2();
@@ -58,13 +59,13 @@ describe('ToolWithTheFirstOrder', () => {
     cb1!();
 
     expect(player.actionsTakenThisRound).eq(2);
-    expect(game.activePlayer).eq(player.id);
+    expect(game.activePlayer.id).eq(player.id);
 
     const [waitingFor2, cb2] = player.popWaitingFor2();
     const patents2 = cast(findOption(waitingFor2!, 'Sell patents'), SelectCard);
     patents2.cb([player.cardsInHand[0]]);
     cb2!();
 
-    expect(game.activePlayer).eq(player2.id);
+    expect(game.activePlayer.id).eq(player2.id);
   });
 });

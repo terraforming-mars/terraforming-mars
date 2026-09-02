@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {CardName} from '../../../src/common/cards/CardName';
 
-describe('SpecialDesign', function() {
-  it('Should play', function() {
+describe('SpecialDesign', () => {
+  it('Should play', () => {
     const card = new SpecialDesign();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

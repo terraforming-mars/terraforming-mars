@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {NeutralizerFactory} from '../../../src/server/cards/venusNext/NeutralizerFactory';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('NeutralizerFactory', function() {
-  it('Should play', function() {
+describe('NeutralizerFactory', () => {
+  it('Should play', () => {
     const card = new NeutralizerFactory();
     const [game, player] = testGame(2);
     expect(card.canPlay(player)).is.not.true;

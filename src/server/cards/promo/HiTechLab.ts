@@ -4,9 +4,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardRenderer} from '../render/CardRenderer';
+import {canSpendEnergyForCards, spendEnergyForCards} from './energyForCards';
 
 export class HiTechLab extends Card implements IProjectCard {
   constructor() {
@@ -29,20 +28,10 @@ export class HiTechLab extends Card implements IProjectCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0;
+    return canSpendEnergyForCards(player);
   }
 
   public action(player: IPlayer) {
-    return new SelectAmount('Select amount of energy to spend', 'OK', 1, player.energy)
-      .andThen((amount) => {
-        player.stock.deduct(Resource.ENERGY, amount);
-        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-        if (amount === 1) {
-          player.drawCard();
-          return undefined;
-        }
-        player.drawCardKeepSome(amount, {keepMax: 1});
-        return undefined;
-      });
+    return spendEnergyForCards(player);
   }
 }

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('MicroMills', function() {
-  it('Should play', function() {
+describe('MicroMills', () => {
+  it('Should play', () => {
     const card = new MicroMills();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

@@ -22,7 +22,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
   }
 
   public override canPayWith(player: IPlayer) {
-    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
+    if (player.tableau.has(CardName.KUIPER_COOPERATIVE)) {
       return {kuiperAsteroids: true};
     } else {
       return {};
@@ -31,7 +31,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
 
   public override canAct(player: IPlayer): boolean {
     if (player.game.getTemperature() >= constants.MAX_TEMPERATURE) {
-      this.warnings.add('maxtemp');
+      this.addWarning('maxtemp');
     }
     return super.canAct(player);
   }

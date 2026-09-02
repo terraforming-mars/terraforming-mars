@@ -3,11 +3,11 @@
     <form method="dialog">
       <p v-i18n class="newlines">{{ message }}</p>
       <menu class="dialog-menu centered-content">
-        <button class="btn btn-lg btn-primary" v-on:click="accept()" v-i18n>Yes</button>
-        <button class="btn btn-lg" v-on:click="dismiss()" v-i18n>No</button>
+        <button class="btn btn-lg btn-primary" @click="accept()" v-i18n>Yes</button>
+        <button class="btn btn-lg" @click="dismiss()" v-i18n>No</button>
       </menu>
       <template v-if="enableDontShowAgainCheckbox">
-        <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
+        <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" >
         <label for="dialog-confirm-dismiss" v-i18n>Don't show this again</label>
       </template>
     </form>
@@ -15,21 +15,22 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from 'vue';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 
-const dialogPolyfill = require('dialog-polyfill');
+import dialogPolyfill from 'dialog-polyfill';
+
 
 type Refs = {
-  dialog: HTMLElement,
-}
+  dialog: HTMLDialogElement;
+};
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'ConfirmDialog',
   props: {
     message: {
       type: String,
+      required: true,
     },
     enableDontShowAgainCheckbox: {
       type: Boolean,
@@ -47,6 +48,11 @@ export default (Vue as WithRefs<Refs>).extend({
       this.$emit('hide', this.hide);
     },
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
+  },
   methods: {
     accept() {
       this.$emit('accept');
@@ -56,11 +62,13 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     show() {
       this.shown = true;
-      showModal(this.$refs.dialog);
+      showModal(this.typedRefs.dialog);
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    if (!windowHasHTMLDialogElement()) {
+      dialogPolyfill.registerDialog(this.typedRefs.dialog);
+    }
   },
 });
 </script>

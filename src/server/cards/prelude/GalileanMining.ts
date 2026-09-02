@@ -32,7 +32,7 @@ export class GalileanMining extends PreludeCard {
     return player.canAfford(5);
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 5));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
     return undefined;
   }
 }

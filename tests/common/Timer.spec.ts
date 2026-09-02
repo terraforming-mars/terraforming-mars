@@ -13,11 +13,11 @@ describe('Timer', () => {
     (Timer as any).lastStoppedAt = 0;
   });
 
-  it('starts at 00:00', function() {
+  it('starts at 00:00', () => {
     expect(Timer.toString(timer.serialize())).eq('00:00');
   });
 
-  it('changes running with start and stop', function() {
+  it('changes running with start and stop', () => {
     expect(timer.serialize().running).eq(false);
     timer.start();
     expect(timer.serialize().running).eq(true);
@@ -27,7 +27,7 @@ describe('Timer', () => {
     expect(timer.serialize().running).eq(true);
   });
 
-  it('shows 00:01 after 1 sec', function() {
+  it('shows 00:01 after 1 sec', () => {
     timer.start(); // Skipping first action.
     timer.stop();
     expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
@@ -40,7 +40,7 @@ describe('Timer', () => {
     expect(Timer.toString(timer.serialize(), clock)).eq('00:01');
   });
 
-  it('shows 1:00:01 after 3601 sec', function() {
+  it('shows 1:00:01 after 3601 sec', () => {
     timer.start(); // Skipping first action
     timer.stop();
 
@@ -49,6 +49,27 @@ describe('Timer', () => {
     expect(Timer.toString(timer.serialize(), clock)).eq('1:00:01');
     timer.stop();
     expect(Timer.toString(timer.serialize(), clock)).eq('1:00:01');
+  });
+
+  it('does not move the shared stop time backwards when loading another game', () => {
+    const target = Timer.deserialize({
+      sumElapsed: 0,
+      startedAt: 0,
+      running: false,
+      afterFirstAction: true,
+      lastStoppedAt: 5000,
+    });
+
+    Timer.deserialize({
+      sumElapsed: 0,
+      startedAt: 0,
+      running: false,
+      afterFirstAction: true,
+      lastStoppedAt: 1000,
+    });
+
+    target.start();
+    expect(target.serialize().startedAt).eq(5000);
   });
 
   it('rebate', () => {

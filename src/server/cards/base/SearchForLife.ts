@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {searchForLife} from '../render/DynamicVictoryPoints';
 import {max} from '../Options';
 import {TITLES} from '../../inputs/titles';
 
@@ -28,12 +28,12 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
         cardNumber: '005',
         description: 'Oxygen must be 6% or less.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 M€ to reveal the top card of the deck. If that card has a microbe tag, add a science resource here.', (eb) => {
+          b.action('Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.', (eb) => {
             eb.megacredits(1).startAction.tag(Tag.MICROBE).asterix().nbsp.colon().nbsp.resource(CardResource.SCIENCE);
           }).br;
           b.vpText('3 VPs if you have one or more science resources here.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.searchForLife(),
+        victoryPoints: searchForLife(),
       },
     });
   }
@@ -45,18 +45,13 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     return 0;
   }
   public canAct(player: IPlayer): boolean {
-    if (!player.game.projectDeck.canDraw(1)) {
-      this.warnings.add('deckTooSmall');
-    }
-    return player.canAfford(1);
+    return player.canAfford(1) && player.game.projectDeck.canDraw(1);
   }
+
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
-        const card = player.game.projectDeck.draw(player.game);
-        if (card === undefined) {
-          return;
-        }
+        const card = player.game.projectDeck.drawOrThrow(player.game);
         player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, {tags: true}));
         if (card.tags.includes(Tag.MICROBE)) {
           player.addResourceTo(this, 1);

@@ -5,8 +5,8 @@ import {MicrogravityHealthProblems} from '../../src/server/turmoil/globalEvents/
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('MicrogravityHealthProblems', function() {
-  it('resolve play', function() {
+describe('MicrogravityHealthProblems', () => {
+  it('resolve play', () => {
     const card = new MicrogravityHealthProblems();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -24,7 +24,7 @@ describe('MicrogravityHealthProblems', function() {
     turmoil.dominantParty.delegates.add(player2);
     player.megaCredits = 20;
     player2.megaCredits = 20;
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(14);
     expect(player2.megaCredits).to.eq(20);
   });

@@ -24,7 +24,7 @@ export class SpaceElevator extends ActionCard implements IProjectCard {
       victoryPoints: 2,
 
       metadata: {
-        cardNumber: '203',
+        cardNumber: '013',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 steel to gain 5 M€.', (eb) => {
             eb.steel(1).startAction.megacredits(5);

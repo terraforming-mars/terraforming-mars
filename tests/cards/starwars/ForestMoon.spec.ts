@@ -3,9 +3,10 @@ import {ForestMoon} from '../../../src/server/cards/starwars/ForestMoon';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ForestMoon', () => {
   let card: ForestMoon;
@@ -39,7 +40,7 @@ describe('ForestMoon', () => {
     player.production.override({energy: 2});
     player2.production.override({energy: 1});
     player3.production.override({energy: 2});
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 
@@ -58,7 +59,7 @@ describe('ForestMoon', () => {
     const fish = new Fish();
     player.playedCards.push(fish);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;

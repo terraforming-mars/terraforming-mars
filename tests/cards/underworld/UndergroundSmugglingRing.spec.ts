@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {UndergroundSmugglingRing} from '../../../src/server/cards/underworld/UndergroundSmugglingRing';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
+import {runAllActions} from '../../TestingUtils';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {Units} from '../../../src/common/Units';
+import {cast} from '@/common/utils/utils';
 
 describe('UndergroundSmugglingRing', () => {
   it('canPlay', () => {
@@ -13,7 +13,7 @@ describe('UndergroundSmugglingRing', () => {
 
     expect(card.canPlay(player)).is.false;
 
-    UnderworldExpansion.excavatableSpaces(player)[0].excavator = player;
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
 
     expect(card.canPlay(player)).is.true;
   });
@@ -31,7 +31,7 @@ describe('UndergroundSmugglingRing', () => {
     runAllActions(game);
     const selectResource = cast(player.popWaitingFor(), SelectResource);
     expect(selectResource.include).to.have.members(Units.keys);
-    selectResource.options[0].cb(0);
+    selectResource.cb('megacredits');
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 });

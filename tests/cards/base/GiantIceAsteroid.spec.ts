@@ -4,33 +4,38 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('GiantIceAsteroid', function() {
+describe('GiantIceAsteroid', () => {
   let card: GiantIceAsteroid;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GiantIceAsteroid();
     [game, player, player2, player3] = testGame(3);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.plants = 4;
     player3.plants = 6;
     card.play(player);
-    expect(game.deferredActions).has.lengthOf(3);
+    runAllActions(game);
 
-    const firstOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
+    const firstOcean = cast(player.popWaitingFor(), SelectSpace);
     firstOcean.cb(firstOcean.spaces[0]);
-    const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
+
+    runAllActions(game);
+
+    const secondOcean = cast(player.popWaitingFor(), SelectSpace);
     secondOcean.cb(secondOcean.spaces[1]);
 
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[0].cb();
@@ -40,7 +45,7 @@ describe('GiantIceAsteroid', function() {
     expect(player3.plants).to.eq(0);
 
     expect(game.getTemperature()).to.eq(-26);
-    expect(player.getTerraformRating()).to.eq(24);
+    expect(player.terraformRating).to.eq(24);
   });
 
   const redsRuns = [

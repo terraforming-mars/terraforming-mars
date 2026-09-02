@@ -13,7 +13,7 @@ describe('FloydContinuum', () => {
   beforeEach(() => {
     card = new FloydContinuum();
     [game, player] = testGame(1, {venusNextExtension: true});
-    player.playedCards = [card];
+    player.playedCards.push(card);
   });
 
   it('No global parameters at max', () => {

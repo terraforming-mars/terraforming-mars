@@ -1,30 +1,15 @@
 <template>
-  <div :class="classes"></div>
+  <div :class="templateClasses">
+    <div class="project-icon" :class="iconClass(expansion)"></div>
+    <div v-for="module in modules" class="project-icon" :class="module + '-icon'" :key="module"></div>
+  </div>
 </template>
-
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
-const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
-  corpera: 'corporate-icon',
-  promo: 'promo-icon',
-  venus: 'venus-icon',
-  colonies: 'colonies-icon',
-  prelude: 'prelude-icon',
-  prelude2: 'prelude2-icon',
-  turmoil: 'turmoil-icon',
-  community: 'community-icon',
-  ares: 'ares-icon',
-  moon: 'moon-icon',
-  pathfinders: 'pathfinders-icon',
-  ceo: 'ceo-icon',
-  starwars: 'starwars-icon',
-  underworld: 'underworld-icon',
-};
-
-export default Vue.extend({
+export default defineComponent({
   name: 'CardExpansion',
   props: {
     expansion: {
@@ -35,21 +20,36 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
+    isResourceCard: {
+      type: Boolean,
+      required: true,
+    },
+    compatibility: {
+      type: Array as () => Array<GameModule>,
+      required: true,
+    },
+  },
+  methods: {
+    iconClass(module: GameModule): string {
+      return module === 'base' ? '' : module + '-icon';
+    },
   },
   computed: {
-    classes(): string {
-      const classes = ['card-expansion', 'project-icon'];
-      if (this.expansion !== 'base') {
-        classes.push(MODULE_TO_CSS[this.expansion]);
-      }
+    modules(): ReadonlyArray<GameModule> {
+      return this.compatibility.filter((e) => e !== this.expansion);
+    },
+    templateClasses(): string {
       if (this.isCorporation) {
-        classes.push('card-corporation-expansion');
+        return 'card-corporation-expansion';
+      } else {
+        if (this.isResourceCard) {
+          return 'resource-card-icon-expansion-container';
+        } else {
+          return 'project-icon-expansion-container';
+        }
       }
-
-      return classes.join(' ');
     },
   },
 });
 
 </script>
-

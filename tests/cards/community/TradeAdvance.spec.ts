@@ -6,12 +6,12 @@ import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('TradeAdvance', function() {
+describe('TradeAdvance', () => {
   let card: TradeAdvance;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TradeAdvance();
     [game, player] = testGame(2, {
       coloniesExtension: true,
@@ -19,8 +19,9 @@ describe('TradeAdvance', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
+    expect(player.megaCredits).to.eq(2);
 
     runAllActions(player.game);
 
@@ -35,5 +36,16 @@ describe('TradeAdvance', function() {
         expect(colony.trackPosition).to.eq(1);
       }
     });
+  });
+
+  it('Should play, solo', () => {
+    const [/* game */, player] = testGame(1, {
+      coloniesExtension: true,
+      customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
+    });
+
+    card.play(player);
+
+    expect(player.megaCredits).to.eq(10);
   });
 });

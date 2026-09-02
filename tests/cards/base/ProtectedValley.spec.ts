@@ -4,12 +4,13 @@ import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {assertPlaceTile} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('ProtectedValley', function() {
-  it('Should play', function() {
+describe('ProtectedValley', () => {
+  it('Should play', () => {
     const card = new ProtectedValley();
     const [game, player] = testGame(2);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);

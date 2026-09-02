@@ -6,13 +6,11 @@ import {Tag} from '../../common/cards/Tag';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
-import {IProjectCard} from '../cards/IProjectCard';
 import {message} from '../logs/MessageBuilder';
 
 export type Options = {
   count?: number;
   restrictedTag?: Tag;
-  min?: number;
   title?: string | Message;
   robotCards?: boolean;
   filter?(card: ICard): boolean;
@@ -29,57 +27,36 @@ export class AddResourcesToCard extends DeferredAction {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 
-  private getCardsInPlay(): Array<ICard> {
-    let cards = this.player.getResourceCards(this.resourceType);
+  public getCards(): Array<ICard> {
+    const playedCards = this.player.getResourceCards(this.resourceType);
+    const srrCards = this.player.getSelfReplicatingRobotsTargetCards().filter((card) => {
+      return this.resourceType === undefined || card.resourceType === this.resourceType;
+    });
+
+    let cards = playedCards;
+    if (this.options.robotCards === true) {
+      cards = cards.concat(srrCards);
+    }
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
-      cards = cards.filter((card) => card.tags.includes(restrictedTag));
+      cards = cards.filter((card) => {
+        return card.tags.includes(restrictedTag) || card.tags.includes(Tag.WILD);
+      });
     }
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
     }
-    const min = this.options.min;
-    if (min) {
-      cards = cards.filter((c) => c.resourceCount >= min);
-    }
     return cards;
-  }
-
-  private getSelfReplicatingRobotCards(): Array<IProjectCard> {
-    if (this.options.robotCards !== true) {
-      return [];
-    }
-    let cards = this.player.getSelfReplicatingRobotsTargetCards();
-    if (this.options.restrictedTag !== undefined) {
-      throw new Error('restrictedTag does not work when filtering SRR cards');
-    }
-    if (this.options.filter !== undefined) {
-      throw new Error('Filter does not work when filtering SRR cards');
-    }
-    if (this.options.min) {
-      const min = this.options.min;
-      cards = cards.filter((c) => c.resourceCount >= min);
-    }
-    return cards;
-  }
-
-  /**
-   * Returns the cards this deferredAction could apply to. Does not cache results.
-   *
-   * This is made public because of `Executor.canExecute` and should probably be someplace else.
-   */
-  public getCardCount(): number {
-    return this.getCardsInPlay().length + this.getSelfReplicatingRobotCards().length;
-  }
-
-  public getCards(): Array<ICard> {
-    return [...this.getCardsInPlay(), ...this.getSelfReplicatingRobotCards()];
   }
 
   public execute() {
-    const qty = this.options.count ?? 1;
     const cards = this.getCards();
     if (cards.length === 0) {
+      return undefined;
+    }
+
+    const qty = this.options.count ?? 1;
+    if (qty === 0) {
       return undefined;
     }
 
@@ -88,10 +65,9 @@ export class AddResourcesToCard extends DeferredAction {
       return undefined;
     }
 
-    const count = this.options.count ?? 1;
     const title = this.options.title ??
-      message('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
-    const buttonLabel = count === 1 ? 'Add resource' : 'Add resources';
+      message('Select card to add ${0} ${1}', (b) => b.number(qty).string(this.resourceType || 'resources'));
+    const buttonLabel = qty === 1 ? 'Add resource' : 'Add resources';
 
     return new SelectCard(title, buttonLabel, cards)
       .andThen(([card]) => {

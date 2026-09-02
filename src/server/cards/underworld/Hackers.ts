@@ -7,6 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Hackers extends Card implements IProjectCard {
   constructor() {
@@ -14,16 +15,17 @@ export class Hackers extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.HACKERS_UNDERWORLD,
       cost: 3,
-      victoryPoints: -1,
+      tags: [Tag.CRIME],
 
       requirements: {corruption: 2},
+      victoryPoints: -1,
 
       behavior: {
         production: {megacredits: {underworld: {corruption: {}}}},
       },
 
       metadata: {
-        cardNumber: '125',
+        cardNumber: 'UX01',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().megacredits(2, {all}).br;

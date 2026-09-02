@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '@/common/utils/utils';
 
 describe('TunnelBoringMachine', () => {
   let game: IGame;
@@ -22,7 +23,7 @@ describe('TunnelBoringMachine', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('can act', () => {

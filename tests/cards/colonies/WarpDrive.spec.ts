@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {WarpDrive} from '../../../src/server/cards/colonies/WarpDrive';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('WarpDrive', function() {
-  it('Should play', function() {
+describe('WarpDrive', () => {
+  it('Should play', () => {
     const card = new WarpDrive();
     const [/* game */, player/* , player2 */] = testGame(2);
     expect(card.canPlay(player)).is.not.true;

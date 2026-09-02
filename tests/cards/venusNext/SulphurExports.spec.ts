@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
 import {testGame} from '../../TestGame';
 
-describe('SulphurExports', function() {
-  it('Should play', function() {
+describe('SulphurExports', () => {
+  it('Should play', () => {
     const card = new SulphurExports();
     const [game, player] = testGame(2);
 

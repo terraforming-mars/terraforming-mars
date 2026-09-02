@@ -1,24 +1,24 @@
 import {expect} from 'chai';
-import {testGame} from '../../TestGame';
-import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
-import {OpenCity} from '../../../src/server/cards/base/OpenCity';
-import {Resource} from '../../../src/common/Resource';
-import {setOxygenLevel} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
-import {IGame} from '../../../src/server/IGame';
-import {GlobalParameter} from '../../../src/common/GlobalParameter';
+import {testGame} from '@tests/TestGame';
+import {AdaptationTechnology} from '@/server/cards/base/AdaptationTechnology';
+import {OpenCity} from '@/server/cards/base/OpenCity';
+import {Resource} from '@/common/Resource';
+import {setOxygenLevel} from '@tests/TestingUtils';
+import {TestPlayer} from '@tests/TestPlayer';
+import {IGame} from '@/server/IGame';
+import {GlobalParameter} from '@/common/GlobalParameter';
 
-describe('AdaptationTechnology', function() {
+describe('AdaptationTechnology', () => {
   let adaptationTechnology: AdaptationTechnology;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     adaptationTechnology = new AdaptationTechnology();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(player.playCard(adaptationTechnology)).is.undefined;
 
     expect(adaptationTechnology.getVictoryPoints(player)).to.eq(1);

@@ -2,12 +2,12 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {BaseBonus, Bonus} from '../Bonus';
-import {Policy} from '../Policy';
+import {IBonus} from '../Bonus';
+import {IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -21,80 +21,70 @@ export class Reds extends Party implements IParty {
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-class RedsBonus01 extends BaseBonus {
+class RedsBonus01 implements IBonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
 
-  getScore(player: IPlayer) {
-    const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
-
-    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
-
-    players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
-    const min = players[0].getTerraformRating();
-
-    if (player.getTerraformRating() === min) return 1;
-    return 0;
-  }
-
-  override grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
-    const scores = players.map((player) => this.getScore(player));
-
-    players.forEach((player, idx) => {
-      if (scores[idx] > 0) {
-        player.increaseTerraformRating(1, {log: true});
-      }
-    });
-  }
-
-  grantForPlayer(player: IPlayer): void {
-    if (this.getScore(player) > 0) {
-      player.increaseTerraformRating(1, {log: true});
-    }
-  }
-}
-
-class RedsBonus02 implements Bonus {
-  readonly id = 'rb02' as const;
-  readonly description = 'The player(s) with the highest TR loses 1 TR';
-
-  getScore(player: IPlayer) {
-    const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
-
-    if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
-
-    players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
-    const max = players[0].getTerraformRating();
-
-    if (player.getTerraformRating() === max) return -1;
-    return 0;
+  getScore(player: IPlayer): number {
+    return player.terraformRating;
   }
 
   grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
-    const scores = players.map((player) => this.getScore(player));
+    if (game.isSoloMode()) {
+      const player = game.players[0];
+      if (player.terraformRating <= 20) {
+        player.increaseTerraformRating();
+      }
+    }
+    const min = Math.min(...game.players.map((p) => p.terraformRating));
 
-    players.forEach((player, idx) => {
-      if (scores[idx] < 0) player.decreaseTerraformRating();
+    game.players.forEach((player) => {
+      if (player.terraformRating === min) {
+        player.increaseTerraformRating();
+      }
     });
   }
 }
 
-class RedsPolicy01 implements Policy {
+class RedsBonus02 implements IBonus {
+  readonly id = 'rb02' as const;
+  readonly description = 'The player(s) with the highest TR loses 1 TR';
+
+  getScore(player: IPlayer): number {
+    return player.terraformRating;
+  }
+
+  grant(game: IGame) {
+    if (game.isSoloMode()) {
+      const player = game.players[0];
+      if (player.terraformRating > 20) {
+        player.decreaseTerraformRating();
+      }
+    }
+    const max = Math.max(...game.players.map((p) => p.terraformRating));
+
+    game.players.forEach((player) => {
+      if (player.terraformRating === max) {
+        player.decreaseTerraformRating();
+      }
+    });
+  }
+}
+
+class RedsPolicy01 implements IPolicy {
   readonly id = 'rp01' as const;
   readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
-class RedsPolicy02 implements Policy {
+class RedsPolicy02 implements IPolicy {
   readonly id = 'rp02' as const;
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.tableau.has(CardName.HELION)) {
+      amountPlayerHas += player.heat;
+    }
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
@@ -103,7 +93,7 @@ class RedsPolicy02 implements Policy {
   }
 }
 
-class RedsPolicy03 implements Policy {
+class RedsPolicy03 implements IPolicy {
   readonly id = 'rp03' as const;
   readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
 
@@ -121,29 +111,31 @@ class RedsPolicy03 implements Policy {
       const venusScaleLevel = game.getVenusScaleLevel();
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
     case GlobalParameter.MOON_HABITAT_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.habitatRate;
+      if (game.moonData) {
+        const rate = game.moonData.habitatRate;
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
-      },
-      () => false);
-    case GlobalParameter.MOON_LOGISTICS_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.logisticRate;
-        return rate > 0 && rate !== MAXIMUM_LOGISTICS_RATE;
-      },
-      () => false);
+      }
+      return false;
+    case GlobalParameter.MOON_LOGISTIC_RATE:
+      if (game.moonData) {
+        const rate = game.moonData.logisticRate;
+        return rate > 0 && rate !== MAXIMUM_LOGISTIC_RATE;
+      }
+      return false;
     case GlobalParameter.MOON_MINING_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.miningRate;
+      if (game.moonData) {
+        const rate = game.moonData.miningRate;
         return rate > 0 && rate !== MAXIMUM_MINING_RATE;
-      },
-      () => false);
+      }
+      return false;
     }
   }
 
   canAct(player: IPlayer) {
     const game = player.game;
-    if (game.marsIsTerraformed()) return false;
+    if (game.marsIsTerraformed()) {
+      return false;
+    }
 
     const temperature = game.getTemperature();
     const oceansPlaced = game.board.getOceanSpaces().length;
@@ -156,10 +148,8 @@ class RedsPolicy03 implements Policy {
       oxygenLevel === MIN_OXYGEN_LEVEL &&
       venusScaleLevel === MIN_VENUS_SCALE;
 
-    const moonParametersAtMinimum= MoonExpansion.ifElseMoon(
-      game,
-      (moonData) => moonData.habitatRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
-      () => false);
+    const moonData = player.game.moonData;
+    const moonParametersAtMinimum = moonData === undefined ? true : Math.max(moonData.habitatRate, moonData.logisticRate, moonData.miningRate) === 0;
 
     if (basicParametersAtMinimum && moonParametersAtMinimum) {
       return false;
@@ -226,14 +216,16 @@ class RedsPolicy03 implements Policy {
           }));
         }
 
-        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate').andThen(() => {
+        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTIC_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon logistic rate').andThen(() => {
             MoonExpansion.lowerLogisticRate(player, 1);
             return undefined;
           }));
         }
 
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) {
+          return orOptions.options[0].cb();
+        }
 
         player.defer(orOptions);
         return undefined;
@@ -243,7 +235,7 @@ class RedsPolicy03 implements Policy {
   }
 }
 
-class RedsPolicy04 implements Policy {
+class RedsPolicy04 implements IPolicy {
   readonly id = 'rp04' as const;
   readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
 }

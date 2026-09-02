@@ -22,7 +22,7 @@ export class CloudTourism extends ActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P69',
         description: 'Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card.', (eb) => {
@@ -43,7 +43,7 @@ export class CloudTourism extends ActionCard {
       // The +1 is "including this"
       venus: player.tags.count(Tag.VENUS, 'raw') + 1,
     };
-    if (player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+    if (player.tableau.has(CardName.EARTH_EMBASSY)) {
       counts.earth += player.tags.count(Tag.MOON, 'raw');
     }
     let wildTags = player.tags.count(Tag.WILD, 'raw');

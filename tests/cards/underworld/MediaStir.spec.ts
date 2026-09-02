@@ -5,7 +5,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('MediaStir', function() {
+describe('MediaStir', () => {
   let card: MediaStir;
   let player: TestPlayer;
   let game: IGame;
@@ -39,10 +39,10 @@ describe('MediaStir', function() {
       turmoil.addInfluenceBonus(player, run.influence);
       player.underworldData.corruption = run.corruption;
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player.megaCredits).eq(run.expect.mc);
-      expect(player.getTerraformRating()).eq(run.expect.tr);
+      expect(player.terraformRating).eq(run.expect.tr);
     });
   }
 });

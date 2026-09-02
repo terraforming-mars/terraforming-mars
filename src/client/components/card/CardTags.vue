@@ -11,14 +11,17 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import CardTag from '@/client/components/card/CardTag.vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardTags',
   props: {
-    tags: Array as () => Array<Tag>,
+    tags: {
+      type: Array as () => Array<Tag>,
+      required: true,
+    },
   },
   components: {
     CardTag,

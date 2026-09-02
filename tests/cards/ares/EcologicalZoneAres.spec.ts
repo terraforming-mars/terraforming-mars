@@ -5,28 +5,32 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('EcologicalZoneAres', function() {
+describe('EcologicalZoneAres', () => {
   let card: EcologicalZoneAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EcologicalZoneAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
+    expect(card.canPlay(player)).is.false;
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    const adjacentSpace = action.spaces[0];
-    action.cb(adjacentSpace);
+    const adjacentSpace = selectSpace.spaces[0];
+    selectSpace.cb(adjacentSpace);
     expect(adjacentSpace.tile?.tileType).to.eq(TileType.ECOLOGICAL_ZONE);
 
     card.onCardPlayed(player, card);

@@ -17,7 +17,7 @@ export class CardOrderStorage {
     }
   }
 
-  public static getOrdered(order: {[x: string]: number}, cards: Array<CardModel>): Array<CardModel> {
+  public static getOrdered(order: {[x: string]: number}, cards: ReadonlyArray<CardModel>): ReadonlyArray<CardModel> {
     const [misses, hits] = partition(cards, (card: CardModel) => order[card.name] === undefined);
     hits.sort((a: CardModel, b: CardModel) => {
       return order[a.name] - order[b.name];

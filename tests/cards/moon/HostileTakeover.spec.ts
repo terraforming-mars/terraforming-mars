@@ -2,14 +2,15 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {HostileTakeover} from '../../../src/server/cards/moon/HostileTakeover';
 import {TestPlayer} from '../../TestPlayer';
-import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../../../src/server/game/VictoryPointsBreakdownBuilder';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {IPlayer} from '../../../src/server/IPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HostileTakeover', () => {
   let player: TestPlayer;
@@ -143,16 +144,14 @@ describe('HostileTakeover', () => {
   });
 
   it('computeVictoryPoints', () => {
-    const vps = new VictoryPointsBreakdown();
     function computeVps(player: IPlayer) {
-      vps.points.moonHabitats = 0;
-      vps.points.moonMines = 0;
-      vps.points.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player, vps);
+      const builder = new VictoryPointsBreakdownBuilder();
+      MoonExpansion.calculateVictoryPoints(player, builder);
+      const vps = builder.build();
       return {
-        habitats: vps.points.moonHabitats,
-        mines: vps.points.moonMines,
-        roads: vps.points.moonRoads,
+        habitats: vps.moonHabitats,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
       };
     }
 

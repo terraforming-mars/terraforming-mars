@@ -2,6 +2,7 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
+import {Session, SessionId} from '../auth/Session';
 
 export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>}
 
@@ -19,7 +20,6 @@ export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>
  * in the game. Why, I have no idea, says kberg.
 */
 export interface IDatabase {
-
     /**
      * Creates any tables needed
      */
@@ -104,7 +104,6 @@ export interface IDatabase {
      */
     markFinished(gameId: GameId): Promise<void>;
 
-
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
@@ -132,4 +131,8 @@ export interface IDatabase {
 
     storeParticipants(entry: GameIdLedger): Promise<void>;
     getParticipants(): Promise<Array<GameIdLedger>>;
+
+    createSession(session: Session): Promise<void>;
+    deleteSession(sessionId: SessionId): Promise<void>;
+    getSessions(): Promise<Array<Session>>;
 }

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {PeroxidePower} from '../../../src/server/cards/base/PeroxidePower';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('PeroxidePower', function() {
-  it('Should play', function() {
+describe('PeroxidePower', () => {
+  it('Should play', () => {
     const card = new PeroxidePower();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

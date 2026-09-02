@@ -4,27 +4,27 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('AquiferTurbines', function() {
+describe('AquiferTurbines', () => {
   let card: AquiferTurbines;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AquiferTurbines();
     [game, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.megaCredits = 2;
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.megaCredits = 3;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 3;
     card.play(player);
 

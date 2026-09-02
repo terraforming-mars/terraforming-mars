@@ -2,14 +2,16 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/server/venusNext/GrantVenusAltTrackBonusDeferred';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
-import {cast} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Birds} from '../../src/server/cards/base/Birds';
 import {testGame} from '../TestGame';
+import {cast} from '@/common/utils/utils';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 
-describe('GrantVenusAltTrackBonusDeferred', function() {
+describe('GrantVenusAltTrackBonusDeferred', () => {
   let player: TestPlayer;
 
   beforeEach(() => {
@@ -35,6 +37,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
 
   it('reject too many bonuses', () => {
     const input = cast(new GrantVenusAltTrackBonusDeferred(player, 2, false).execute(), AndOptions);
+    expect(formatMessage(input.title)).to.contain('Gain 2 resource(s) for your');
     input.options[0].cb(0);
     input.options[0].cb(0);
     input.options[0].cb(0);
@@ -42,7 +45,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[0].cb(0);
     input.options[5].cb(3);
 
-    expect(() => input.cb(undefined)).to.throw('Select 2 resources.');
+    expect(() => input.cb(undefined)).to.throw('Select 2 resource(s)');
 
     player.heat = 0;
     input.options[5].cb(2);
@@ -67,5 +70,16 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
 
     // The second option is the standard resource section.
     expect(input.options[1]).instanceof(AndOptions);
+  });
+
+  it('offers the only resource card directly', () => {
+    const card = new Tardigrades();
+    player.playedCards.push(card);
+
+    const orOptions = cast(new GrantVenusAltTrackBonusDeferred(player, 0, true).execute(), OrOptions);
+    const option = cast(orOptions.options[0], SelectOption);
+    option.cb(undefined);
+
+    expect(card.resourceCount).eq(1);
   });
 });

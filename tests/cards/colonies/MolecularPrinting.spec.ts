@@ -3,10 +3,10 @@ import {MolecularPrinting} from '../../../src/server/cards/colonies/MolecularPri
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
 import {addCity, testGame} from '../../TestingUtils';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('MolecularPrinting', function() {
-  it('Should play', function() {
+describe('MolecularPrinting', () => {
+  it('Should play', () => {
     const card = new MolecularPrinting();
     const [/* game */, player/* , player2 */] = testGame(2);
     const colonyTile1 = new Luna();

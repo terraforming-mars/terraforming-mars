@@ -4,30 +4,31 @@ import {CommunityServices} from '../../../src/server/cards/colonies/CommunitySer
 import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSponsor';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('CommunityServices', function() {
-  it('Should play', function() {
+describe('CommunityServices', () => {
+  it('Should play', () => {
     const card = new CommunityServices();
     const corp = new Aridor();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(corp);
+    player.playedCards.push(corp);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
 
-  it('Wild Tags', function() {
+  it('Wild Tags', () => {
     const card = new CommunityServices();
     const septumTribus = new SeptumTribus();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(septumTribus);
+    player.playedCards.push(septumTribus);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);

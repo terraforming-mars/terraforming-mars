@@ -74,7 +74,6 @@
     "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "需求有4块海洋。提升你的热能产量1级，提升你的植物产量1级。放置此板块到一个已有的海洋板块上，此板块的相邻收益为1个植物资源",
 
     "Ocean Sanctuary": "海洋保护区",
-    "1 VP per animal on this card.": "此卡每有1个动物资源获得1分",
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "需求有5块海洋。放置此板块到一个已有的海洋板块上，此板块的相邻收益为1个动物资源。添加1个动物资源到此卡",
 
     "Restricted Area": "管制区",
@@ -82,14 +81,9 @@
     "Place this tile which grants an ADJACENCY BONUS of 1 card.": "放置此板块，此板块的相邻收益为1张牌",
 
     "Solar Farm": "太阳能农场",
-    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "放置此板块，此板块的相邻收益为2个电力资源。你放置此板块的格子每有1个植物资源，提升你的电力产量1级",
+    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "放置此板块，此板块的相邻收益为2个电力资源。你放置此板块的格子每有1个植物资源，提升你的电力产量1级"
 
 
-    "2 Oceans": "2 海洋",
-    "3 Oceans": "3 海洋",
-    "4 Oceans": "4 海洋",
-    "5 Oceans": "5 海洋",
-    "6 Oceans": "6 海洋"
 
 
 

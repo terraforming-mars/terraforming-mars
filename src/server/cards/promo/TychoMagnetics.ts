@@ -2,11 +2,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {canSpendEnergyForCards, spendEnergyForCards} from './energyForCards';
 
-export class TychoMagnetics extends CorporationCard {
+export class TychoMagnetics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TYCHO_MAGNETICS,
@@ -17,7 +17,7 @@ export class TychoMagnetics extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'XC02', // Rename
         description: 'You start with 42 M€. Increase your energy production 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
@@ -32,22 +32,11 @@ export class TychoMagnetics extends CorporationCard {
     });
   }
 
-  // TODO(kberg): this is a direct copy from hi-tech lab.
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0;
+    return canSpendEnergyForCards(player);
   }
 
   public action(player: IPlayer) {
-    return new SelectAmount('Select amount of energy to spend', 'OK', 1, player.energy)
-      .andThen((amount) => {
-        player.stock.deduct(Resource.ENERGY, amount);
-        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-        if (amount === 1) {
-          player.drawCard();
-          return undefined;
-        }
-        player.drawCardKeepSome(amount, {keepMax: 1});
-        return undefined;
-      });
+    return spendEnergyForCards(player);
   }
 }

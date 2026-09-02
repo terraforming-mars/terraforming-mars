@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
-import {isHazardTileType} from '../../common/AresTileType';
+import {Board} from '../boards/Board';
 
 export class Edgedancer implements IAward {
   public readonly name = 'Edgedancer';
@@ -8,9 +8,7 @@ export class Edgedancer implements IAward {
 
   public getScore(player: IPlayer): number {
     return player.game.board.getEdges()
-      .filter((space) => space.player !== undefined &&
-        space.player === player &&
-        space.tile !== undefined &&
-        isHazardTileType(space.tile.tileType) === false).length;
+      .filter(Board.hasRealTile)
+      .filter(Board.ownedBy(player)).length;
   }
 }

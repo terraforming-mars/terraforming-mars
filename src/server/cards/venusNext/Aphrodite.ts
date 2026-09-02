@@ -3,8 +3,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Aphrodite extends CorporationCard {
+export class Aphrodite extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.APHRODITE,

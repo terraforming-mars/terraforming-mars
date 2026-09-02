@@ -14,9 +14,9 @@
           <span class="ma-player-cube">
             <i
               class="board-cube"
-              :class="`board-cube--${award.playerColor}`"
-              :data-test-player-cube="award.playerColor"
-            />
+              :class="`board-cube--${award.color}`"
+              :data-test-player-cube="award.color"
+            ></i>
           </span>
         </span>
 
@@ -26,7 +26,7 @@
             :key="spotPrice"
             class="milestone-award-inline unpaid"
           >
-            <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" />
+            <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" ></div>
           </span>
         </span>
       </div>
@@ -47,23 +47,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Awards',
   components: {Award},
   props: {
     awards: {
-      type: Array as () => FundedAwardModel[],
+      type: Array as () => ReadonlyArray<FundedAwardModel>,
       required: true,
     },
     showScores: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     preferences: {
       type: Object as () => Readonly<Preferences>,
@@ -91,7 +91,7 @@ export default Vue.extend({
       const isFunded = (award: FundedAwardModel) => !!award.playerName;
       return this.awards.filter(isFunded);
     },
-    availableAwardSpots(): Number[] {
+    availableAwardSpots(): number[] {
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {

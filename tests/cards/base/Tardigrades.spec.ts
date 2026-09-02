@@ -4,23 +4,23 @@ import {runAllActions} from '../../TestingUtils';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('Tardigrades', function() {
+describe('Tardigrades', () => {
   let card: Tardigrades;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Tardigrades();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(card);
     card.play(player);
     player.addResourceTo(card, 7);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     card.action(player);
     runAllActions(player.game);

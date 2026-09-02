@@ -4,11 +4,12 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {TileType, tileTypeToString} from '@/common/TileType';
+import {tileTypeToString} from '@/common/TileType';
+import {Color} from '@/common/Color';
 
 type Context = {
   playerView: PlayerViewModel | undefined;
-  players: Map<string /* Color */, string>;
+  players: Map<Color, string>;
 }
 
 const context: Context = {
@@ -16,10 +17,10 @@ const context: Context = {
   players: new Map(),
 };
 
-export function setTranslationContext(game: PlayerViewModel) {
-  context.playerView = game;
+export function setTranslationContext(playerView: PlayerViewModel) {
+  context.playerView = playerView;
   context.players.clear();
-  for (const player of game.players) {
+  for (const player of playerView.players) {
     context.players.set(player.color, player.name);
   }
 }
@@ -31,19 +32,12 @@ export function translateMessage(message: Message): string {
       return '';
     }
     switch (datum.type) {
-    case LogMessageDataType.RAW_STRING:
-      return datum.value;
     case LogMessageDataType.PLAYER:
       return context.players.get(datum.value) ?? datum.value;
     case LogMessageDataType.TILE_TYPE:
-      return tileTypeToString[datum.value as unknown as TileType];
-    case LogMessageDataType.CARD:
-    case LogMessageDataType.GLOBAL_EVENT:
-    case LogMessageDataType.STRING:
-    case LogMessageDataType.PARTY:
-      return translateText(datum.value);
+      return tileTypeToString[datum.value];
     default:
-      return translateText(datum.value);
+      return translateText(String(datum.value));
     }
   });
 }
@@ -86,7 +80,9 @@ export function translateText(englishText: string): string {
     if (translated === undefined) {
       translated = new Set();
       for (const k in translations) {
-        if (translations.hasOwnProperty(k)) translated.add(translations[k]);
+        if (Object.hasOwn(translations, k)) {
+          translated.add(translations[k]);
+        }
       }
     }
     if (!translated.has(englishText)) {
@@ -114,31 +110,44 @@ export function translateTextWithParams(englishText: string, params: Array<strin
 }
 
 function normalizeText(text: string): string {
-  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ');
+  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ').trim();
 }
 
-function translateChildren(node: Node) {
+function translateChildren(node: Node, params: string[] | undefined) {
   for (let i = 0, length = node.childNodes.length; i < length; i++) {
     const child = node.childNodes[i];
     if (child.nodeType === Node.TEXT_NODE) {
       const text = child as Text;
-      const translatedText = translateText(text.data);
+      const translatedText = params ? translateTextWithParams(text.data, params) : translateText(text.data);
       if (translatedText !== text.data) {
         text.data = translatedText;
       }
     } else {
-      translateChildren(child);
+      if (child.nodeType === Node.ELEMENT_NODE && (child as HTMLElement).getAttribute('tm-has-i18n') === 'true') {
+        continue;
+      }
+      translateChildren(child, params);
     }
   }
 }
 
-export function translateTextNode(el: HTMLElement) {
-  translateChildren(el);
+export function translateTextNode(el: HTMLElement, binding: any) {
+  let params: string[] | undefined = undefined;
+  if (binding?.value) {
+    params = binding.value instanceof Array ? binding.value : [binding.value];
+  }
+  translateChildren(el, params);
 }
 
 export const $t = function(msg: string | Message | number | undefined) {
-  if (!msg) return '';
-  if (typeof msg === 'number') return msg.toString();
-  if (typeof msg === 'string') return translateText(msg);
+  if (!msg) {
+    return '';
+  }
+  if (typeof msg === 'number') {
+    return msg.toString();
+  }
+  if (typeof msg === 'string') {
+    return translateText(msg);
+  }
   return translateMessage(msg);
 };

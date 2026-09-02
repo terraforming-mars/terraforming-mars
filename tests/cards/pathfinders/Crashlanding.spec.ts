@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {addCity, cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {addCity, fakeCard, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -14,7 +14,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Units} from '../../../src/common/Units';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
+import {cast} from '../../../src/common/utils/utils';
 
 /*
  * Partial map of Tharsis used in this test.
@@ -141,7 +142,7 @@ describe('Crashlanding', () => {
   });
 
   it('play - resources', () => {
-    player.playedCards = [dataCard, animalCard, microbeCard];
+    player.playedCards.push(dataCard, animalCard, microbeCard);
 
     card.play(player);
     runAllActions(game);

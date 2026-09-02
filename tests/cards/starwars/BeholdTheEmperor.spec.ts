@@ -68,8 +68,8 @@ describe('BeholdTheEmperor', () => {
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);
-    expect(player.getTerraformRating()).to.eq(20);
-    expect(player2.getTerraformRating()).to.eq(19);
+    expect(player.terraformRating).to.eq(20);
+    expect(player2.terraformRating).to.eq(19);
 
     expect(turmoil.rulingParty).to.eq(kelvinists);
     expect(turmoil.dominantParty).to.eq(reds);

@@ -3,10 +3,10 @@ import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {VenusWaystation} from '../../../src/server/cards/venusNext/VenusWaystation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('VenusWaystation', function() {
-  it('Should play', function() {
+describe('VenusWaystation', () => {
+  it('Should play', () => {
     const card = new VenusWaystation();
     const card2 = new LocalShading();
     const card3 = new VenusGovernor();

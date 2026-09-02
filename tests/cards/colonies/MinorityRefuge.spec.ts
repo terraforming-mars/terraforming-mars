@@ -5,18 +5,19 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, churnPlay, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 import {Luna} from '../../../src/server/colonies/Luna';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('MinorityRefuge', function() {
+describe('MinorityRefuge', () => {
   let card: MinorityRefuge;
   let player: TestPlayer;
   let game: IGame;
   let triton: IColony;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MinorityRefuge();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
@@ -42,7 +43,7 @@ describe('MinorityRefuge', function() {
 
   it('play)', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    const selectColony = cast(churnPlay(card, player), SelectColony);
+    const selectColony = cast(churn(card.play(player), player), SelectColony);
     expect(selectColony.colonies).has.length(5);
     expect(selectColony.title).eq('Select colony for Minority Refuge');
 
@@ -64,7 +65,7 @@ describe('MinorityRefuge', function() {
     expect(card.canPlay(player)).is.false;
     game.colonies[0] = luna;
     expect(card.canPlay(player)).is.true;
-    const selectColony = cast(churnPlay(card, player), SelectColony);
+    const selectColony = cast(churn(card.play(player), player), SelectColony);
 
     // Gain plant production
     selectColony.cb(luna);

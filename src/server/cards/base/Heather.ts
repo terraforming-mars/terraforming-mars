@@ -20,7 +20,7 @@ export class Heather extends Card implements IProjectCard {
 
       requirements: {temperature: -14},
       metadata: {
-        cardNumber: '178',
+        cardNumber: '88',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).plants(1);
         }),

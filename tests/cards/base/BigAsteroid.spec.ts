@@ -3,21 +3,22 @@ import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('BigAsteroid', function() {
+describe('BigAsteroid', () => {
   let card: BigAsteroid;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BigAsteroid();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.plants = 5;
     card.play(player);
     runAllActions(game);
@@ -32,7 +33,7 @@ describe('BigAsteroid', function() {
     expect(player.titanium).to.eq(4);
   });
 
-  it('Works fine in solo', function() {
+  it('Works fine in solo', () => {
     const [game, player] = testGame(1);
     player.plants = 5;
     card.play(player);

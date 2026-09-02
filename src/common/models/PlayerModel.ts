@@ -1,7 +1,6 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
-import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {TagCount} from '../cards/TagCount';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
@@ -10,11 +9,15 @@ import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
+import {Tag} from '../cards/Tag';
+import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
+import {GlobalParameter} from '../GlobalParameter';
+import {DeltaProjectPlayerModel} from './DeltaProjectPlayerModel';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id?: ParticipantId;
+  id: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
   runId: string;
 }
@@ -32,8 +35,9 @@ export type Protection = 'off' | 'on' | 'half';
 /** The public information about a player */
 export type PublicPlayerModel = {
   actionsTakenThisRound: number;
-  actionsThisGeneration: Array<string /* CardName */>;
+  actionsThisGeneration: ReadonlyArray<CardName>;
   actionsTakenThisGame: number;
+  alliedParty?: AlliedPartyModel;
   availableBlueCardActionCount: number;
   cardCost: number;
   cardDiscount: number;
@@ -41,19 +45,19 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  corruption: number,
+  deltaProject?: DeltaProjectPlayerModel;
   energy: number;
   energyProduction: number;
-  excavations: number,
   fleetSize: number;
+  handicap: number | undefined;
   heat: number;
   heatProduction: number;
   id: PlayerId | undefined;
   influence: number;
   isActive: boolean;
   lastCardPlayed?: CardName;
-  megaCredits: number;
-  megaCreditProduction: number;
+  megacredits: number;
+  megacreditProduction: number;
   name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
@@ -62,36 +66,37 @@ export type PublicPlayerModel = {
   plantProduction: number;
   protectedResources: Record<Resource, Protection>;
   protectedProduction: Record<Resource, Protection>;
-  tableau: Array<CardModel>;
+  tableau: ReadonlyArray<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: Array<TagCount>;
+  tags: Record<Tag, number>
   terraformRating: number;
   timer: TimerModel;
   titanium: number;
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  victoryPointsBreakdown: IVictoryPointsBreakdown;
-  victoryPointsByGeneration: Array<number>;
-  alliedParty?: AlliedPartyModel;
+  underworldData: UnderworldPlayerData,
+  victoryPointsBreakdown: VictoryPointsBreakdown;
+  victoryPointsByGeneration: ReadonlyArray<number>;
+  globalParameterSteps: Partial<Record<GlobalParameter, number>>;
 }
 
 /** A player's view of the game, including their secret information. */
 export interface PlayerViewModel extends ViewModel {
   autopass: boolean;
-  cardsInHand: Array<CardModel>;
-  dealtCorporationCards: Array<CardModel>;
-  dealtPreludeCards: Array<CardModel>;
-  dealtProjectCards: Array<CardModel>;
-  dealtCeoCards: Array<CardModel>;
-  draftedCards: Array<CardModel>;
+  cardsInHand: ReadonlyArray<CardModel>;
+  dealtCorporationCards: ReadonlyArray<CardModel>;
+  dealtPreludeCards: ReadonlyArray<CardModel>;
+  dealtProjectCards: ReadonlyArray<CardModel>;
+  dealtCeoCards: ReadonlyArray<CardModel>;
+  draftedCards: ReadonlyArray<CardModel>;
   id: PlayerId;
-  ceoCardsInHand: Array<CardModel>;
-  pickedCorporationCard: Array<CardModel>; // Why Array?
-  preludeCardsInHand: Array<CardModel>;
+  ceoCardsInHand: ReadonlyArray<CardModel>;
+  pickedCorporationCard: ReadonlyArray<CardModel>; // Why Array?
+  preludeCardsInHand: ReadonlyArray<CardModel>;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

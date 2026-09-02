@@ -6,12 +6,13 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('NewPartner', function() {
+describe('NewPartner', () => {
   let card: NewPartner;
   let player: TestPlayer;
   let game: IGame;
@@ -29,7 +30,7 @@ describe('NewPartner', function() {
     galileanMining = new GalileanMining();
   });
 
-  it('Should play with at least 1 playable prelude', function() {
+  it('Should play with at least 1 playable prelude', () => {
     game.preludeDeck.drawPile.push(smeltingPlant, donation);
 
     const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
@@ -38,10 +39,10 @@ describe('NewPartner', function() {
     selectCard.cb([selectCard.cards[0]]);
 
     expect(player.production.megacredits).to.eq(1);
-    expect(player.playedCards.every((card) => isPreludeCard(card))).is.true;
+    expect(player.playedCards.asArray().every((card) => isPreludeCard(card))).is.true;
   });
 
-  it('Can play with no playable preludes drawn', function() {
+  it('Can play with no playable preludes drawn', () => {
     player.megaCredits = 0;
     // Both of these cards cost MC which the player does not have, and so
     // if the player plays this they will have to fizzle one of the cards.

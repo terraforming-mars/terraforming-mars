@@ -3,15 +3,20 @@ import {expect} from 'chai';
 import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
-describe('SolarStorm', function() {
+describe('SolarStorm', () => {
   let card: SolarStorm;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -19,15 +24,15 @@ describe('SolarStorm', function() {
   let cryptocurrency: Cryptocurrency;
   let communicationCenter: CommunicationCenter;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SolarStorm();
     [/* game */, player, player2, player3] = testGame(3);
     cryptocurrency = new Cryptocurrency();
     communicationCenter = new CommunicationCenter();
   });
 
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(20);
+  it('play', () => {
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
     player.plants = 5;
@@ -36,7 +41,7 @@ describe('SolarStorm', function() {
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);
@@ -44,18 +49,18 @@ describe('SolarStorm', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 1}));
   });
 
-  it('remove data, nobody has data', function() {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+  it('remove data, nobody has data', () => {
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
     card.play(player);
 
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
   });
 
-  it('remove data, only you have data', function() {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+  it('remove data, only you have data', () => {
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
 
@@ -70,9 +75,9 @@ describe('SolarStorm', function() {
     expect(cryptocurrency.resourceCount).eq(0);
   });
 
-  it('remove data, two players with data', function() {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+  it('remove data, two players with data', () => {
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
     communicationCenter.resourceCount = 6;
@@ -99,5 +104,57 @@ describe('SolarStorm', function() {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(14);
     expect(player3.plants).eq(398);
+  });
+
+  it('Compatible with underworld', () => {
+    const [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    const card = new SolarStorm();
+
+    player2.plants = 3;
+    player2.underworldData.corruption = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    player2.plants = 3;
+    player1.underworldData.corruption = 0;
+  });
+
+  it('Compatible with underworld plant2pertemp bonus', () => {
+    const [game, player1] = testGame(1, {underworldExpansion: true});
+    const card = new SolarStorm();
+
+    player1.underworldData.activeBonus = 'plant2pertemp';
+    player1.plants = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    // Loses min(2, 1) = 1 plant from the Solar Storm effect, then gains 2
+    // plants from the temperature-raise bonus.
+    expect(player1.plants).eq(2);
+  });
+
+  it('Compatible with placing an ocean when crossing 0 degrees', () => {
+    const [game, player1] = testGame(1);
+    const card = new SolarStorm();
+
+    setTemperature(game, -2);
+    player1.plants = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    const selectSpace = cast(player1.popWaitingFor(), SelectSpace);
+    const space = selectSpace.spaces[0];
+    space.bonus = [SpaceBonus.PLANT, SpaceBonus.PLANT, SpaceBonus.PLANT];
+
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    expect(space.tile?.tileType).eq(TileType.OCEAN);
+    expect(game.getTemperature()).eq(0);
+    expect(player1.plants).eq(3);
   });
 });

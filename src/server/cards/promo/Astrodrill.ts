@@ -12,8 +12,9 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Astrodrill extends CorporationCard implements IActionCard {
+export class Astrodrill extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ASTRODRILL,
@@ -106,7 +107,9 @@ export class Astrodrill extends CorporationCard implements IActionCard {
       return undefined;
     });
 
-    if (this.resourceCount > 0) opts.push(spendResource);
+    if (this.resourceCount > 0) {
+      opts.push(spendResource);
+    }
     asteroidCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
     opts.push(gainStandardResource);
 

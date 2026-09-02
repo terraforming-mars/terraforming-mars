@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {LocalHeatTrapping} from '../../../src/server/cards/base/LocalHeatTrapping';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -73,7 +73,7 @@ describe('LocalHeatTrapping', () => {
 
   it('Cannot play as Helion if not enough heat left after paying for card', () => {
     helion.play(player);
-    player.setCorporationForTest(helion);
+    player.playedCards.push(helion);
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat
@@ -86,8 +86,8 @@ describe('LocalHeatTrapping', () => {
   it('Helion / Stormcraft merger canPlay', () => {
     const stormcraft = new StormCraftIncorporated();
     helion.play(player);
-    player.setCorporationForTest(helion);
-    player.corporations.push(stormcraft);
+    player.playedCards.push(helion);
+    player.playedCards.push(stormcraft);
     player.cardsInHand = [card];
 
     function canPlay(config: {mc: number, heat: number, floaters: number, discount: number}) {

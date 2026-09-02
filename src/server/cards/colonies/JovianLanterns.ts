@@ -1,14 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Payment} from '../../../common/inputs/Payment';
 
-export class JovianLanterns extends Card implements IProjectCard {
+export class JovianLanterns extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 20,
@@ -23,6 +21,11 @@ export class JovianLanterns extends Card implements IProjectCard {
       behavior: {
         tr: 1,
         addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2},
+      },
+
+      action: {
+        spend: {titanium: 1},
+        addResources: 2,
       },
 
       metadata: {
@@ -40,16 +43,5 @@ export class JovianLanterns extends Card implements IProjectCard {
         },
       },
     });
-  }
-
-
-  public canAct(player: IPlayer): boolean {
-    return player.titanium > 0;
-  }
-
-  public action(player: IPlayer) {
-    player.pay(Payment.of({titanium: 1}));
-    player.addResourceTo(this, {qty: 2, log: true});
-    return undefined;
   }
 }

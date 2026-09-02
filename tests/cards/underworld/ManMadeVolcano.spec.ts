@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {ManMadeVolcano} from '../../../src/server/cards/underworld/ManMadeVolcano';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ManMadeVolcano', () => {
   it('canPlay', () => {

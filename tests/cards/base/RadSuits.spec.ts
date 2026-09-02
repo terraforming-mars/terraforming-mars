@@ -4,21 +4,21 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('RadSuits', function() {
+describe('RadSuits', () => {
   let card: RadSuits;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RadSuits();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const lands = game.board.getAvailableSpacesOnLand(player);
     game.addCity(player, lands[0]);
     game.addCity(player, lands[1]);

@@ -22,7 +22,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   public override canPayWith(player: IPlayer) {
-    if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
+    if (player.tableau.has(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
       return {seeds: true};
     } else {
       return {};

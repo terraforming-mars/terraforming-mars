@@ -1,16 +1,17 @@
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('InventionContest', function() {
-  it('Should play', function() {
+describe('InventionContest', () => {
+  it('Should play', () => {
     const card = new InventionContest();
     const [game, player] = testGame(2);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const action = cast(player.popWaitingFor(), SelectCard<IProjectCard>);

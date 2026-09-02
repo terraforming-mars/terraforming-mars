@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
@@ -29,8 +29,8 @@ describe('NanotechIndustries', () => {
   });
 
   it('act', () => {
-    player.setCorporationForTest(nanotechIndustries);
-    player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
+    player.playedCards.push(nanotechIndustries);
+    player.playedCards.push(physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship);
     nanotechIndustries.action(player);
 
     const action = cast(player.game.deferredActions.pop()?.execute(), SelectCard<IProjectCard>);

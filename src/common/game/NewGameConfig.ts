@@ -6,6 +6,7 @@ import {Color} from '../Color';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {GameId} from '../Types';
+import {Expansion} from '../cards/GameModule';
 
 export type BoardNameType = BoardName | RandomBoardOption;
 
@@ -17,15 +18,23 @@ export interface NewPlayerModel {
   first: boolean;
 }
 
+export type EscapeVelocityOptions = {
+  /** Time in minutes a player has to complete a game. */
+  thresholdMinutes: number;
+  /** Number of seconds a player gets back with every action. */
+  bonusSectionsPerAction: number;
+  /** Period in minutes after `escapeVelocityThreshold` after which player loses `escapeVelocityPenalty` VP. */
+  penaltyPeriodMinutes: number;
+  /** VP a player loses for every `escapeVelocityPeriod` minutes after `escapeVelocityThreshold`. */
+  penaltyVPPerPeriod: number;
+};
+
 /**
  * Like GameOptions, but the data structure sent from the new game page.
  */
 export interface NewGameConfig {
   players: Array<NewPlayerModel>;
-  prelude: boolean;
-  venusNext: boolean;
-  colonies: boolean;
-  turmoil: boolean;
+  expansions: Record<Expansion, boolean>,
   board: BoardNameType;
   seed: number;
   randomFirstPlayer: boolean;
@@ -40,28 +49,18 @@ export interface NewGameConfig {
   showOtherPlayersVP: boolean;
 
   // Extensions
-  corporateEra: boolean;
-  // venusNextExtension: boolean;
-  // coloniesExtension: boolean;
-  // preludeExtension: boolean;
-  // turmoilExtension: boolean;
-  prelude2Expansion: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
   // aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-  ceoExtension: boolean;
+  modularMA: boolean;
 
   // Variants
   draftVariant: boolean;
   initialDraft: boolean; // initialDraftVariant: boolean;
   preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
@@ -77,14 +76,9 @@ export interface NewGameConfig {
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
-  escapeVelocityMode: boolean;
-  escapeVelocityThreshold: number | undefined;
-  escapeVelocityBonusSeconds: number | undefined;
-  escapeVelocityPeriod: number | undefined;
-  escapeVelocityPenalty: number | undefined;
+  escapeVelocity: EscapeVelocityOptions | undefined;
   twoCorpsVariant: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;
-  starWarsExpansion: boolean,
-  underworldExpansion: boolean,
+  startingPreludes: number;
 }

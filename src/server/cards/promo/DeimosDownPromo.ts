@@ -15,11 +15,10 @@ export class DeimosDownPromo extends Card implements IProjectCard {
     metadata = {
       cardNumber: 'X31',
       renderData: CardRenderer.builder((b) => {
-        b.temperature(3).br;
-        b.tile(TileType.DEIMOS_DOWN, true).asterix().br;
+        b.temperature(3).nbsp.tile(TileType.DEIMOS_DOWN, true).asterix().br;
         b.steel(4, {digit}).nbsp.minus().plants(-6, {all});
       }),
-      description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.',
+      description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.',
     },
   ) {
     super({
@@ -34,7 +33,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
         removeAnyPlants: 6,
         tile: {
           type: TileType.DEIMOS_DOWN,
-          on: 'city',
+          on: 'away-from-cities',
           adjacencyBonus: adjacencyBonus,
         },
       },

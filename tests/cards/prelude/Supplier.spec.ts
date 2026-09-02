@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Supplier} from '../../../src/server/cards/prelude/Supplier';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Supplier', function() {
-  it('Should play', function() {
+describe('Supplier', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new Supplier();
     cast(card.play(player), undefined);

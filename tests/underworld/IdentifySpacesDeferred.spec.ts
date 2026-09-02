@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {Phase} from '../../src/common/Phase';
 import {IdentifySpacesDeferred} from '../../src/server/underworld/IdentifySpacesDeferred';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {cast} from '@/common/utils/utils';
 
 describe('IdentifySpacesDeferred', () => {
   let player: TestPlayer;
@@ -38,10 +39,11 @@ describe('IdentifySpacesDeferred', () => {
     const space = selectSpace.spaces[0];
 
     expect(space.undergroundResources).is.undefined;
-    const selectSpace2 = cast(selectSpace.cb(space), SelectSpace);
-
+    cast(selectSpace.cb(space), undefined);
     expect(space.undergroundResources).is.not.undefined;
 
+    runAllActions(game);
+    const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
     const space2 = selectSpace2.spaces[0];
     expect(selectSpace2.spaces).does.not.contain(space);
     expect(selectSpace2.spaces).does.contain(space2); // This line just supports the line above.

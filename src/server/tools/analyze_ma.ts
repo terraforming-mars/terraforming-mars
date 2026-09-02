@@ -1,8 +1,8 @@
-require('dotenv').config();
+import '@/server/init';
 
-import * as http from 'http';
-import * as fs from 'fs';
-import * as responses from '../server/responses';
+import http from 'http';
+import fs from 'fs';
+import * as responses from '@/server/server/responses';
 
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
@@ -11,27 +11,37 @@ import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {comparing, reversed} from '../../common/utils/Ordering';
 
 function processRequest(req: Request, res: Response): void {
-  if (req.url === undefined) {
-    return;
-  }
-  const url = new URL(req.url, `http://localhost`);
-  if (url.pathname === '/') {
-    fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
-      if (err) {
-        responses.internalServerError(req, res, err);
-      }
+  try {
+    if (req.url === undefined) {
+      return;
+    }
+    const url = new URL(req.url, `http://localhost`);
+    if (url.pathname === '/') {
+      fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
+        try {
+          if (err) {
+            responses.internalServerError(req, res, err);
+            return;
+          }
+          res.setHeader('Content-Length', data.length);
+          res.end(data);
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    } else if (url.pathname === '/data') {
+      const data = calc(url.searchParams);
+      res.setHeader('Content-type', 'text/csv');
       res.setHeader('Content-Length', data.length);
       res.end(data);
-    });
-  } else if (url.pathname === '/data') {
-    const data = calc(url.searchParams);
-    res.setHeader('Content-type', 'text/csv');
-    res.setHeader('Content-Length', data.length);
-    res.end(data);
-  } else {
-    responses.notFound(req, res);
+    } else {
+      responses.notFound(req, res);
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 
@@ -45,7 +55,6 @@ function calc(params: URLSearchParams): string {
 
   if (params.get('venus') === 'true') {
     options.venusNextExtension = true;
-    options.includeVenusMA = true;
   }
 
   if (params.get('ares') === 'true') {
@@ -78,16 +87,17 @@ function calc(params: URLSearchParams): string {
     }
     try {
       const mas = chooseMilestonesAndAwards(options);
-      mas.awards.forEach((award) => results.add(award.name));
-      mas.milestones.forEach((milestone) => results.add(milestone.name));
+      for (const ma of (mas.milestones as Array<string>).concat(mas.awards)) {
+        results.add(ma);
+      }
     } catch (err) {
       console.log(err);
       results.add('ERROR');
     }
   }
 
-  const copy: Array<[string, number]> = new Array(...results.multiplicities());
-  copy.sort((a, b) => b[1] - a[1]);
+  const copy: Array<[string, number]> = [...results.multiplicities()];
+  copy.sort(reversed(comparing((entry) => entry[1])));
   return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }
 
@@ -105,7 +115,6 @@ function simpleGameOptions(): GameOptions {
     boardName: BoardName.THARSIS,
     venusNextExtension: false,
     aresExtension: false,
-    includeVenusMA: false,
     moonExpansion: false,
     pathfindersExpansion: false,
     includeFanMA: false,

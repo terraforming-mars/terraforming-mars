@@ -3,9 +3,10 @@ import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {addGreenery, cast, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
+import {addGreenery, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Herbivores', () => {
   let card: Herbivores;

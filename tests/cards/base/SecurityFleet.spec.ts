@@ -4,20 +4,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
-describe('SecurityFleet', function() {
+describe('SecurityFleet', () => {
   let card: SecurityFleet;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SecurityFleet();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not act if no titanium', function() {
+  it('Can not act if no titanium', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     player.titanium = 1;
     expect(card.canAct(player)).is.true;

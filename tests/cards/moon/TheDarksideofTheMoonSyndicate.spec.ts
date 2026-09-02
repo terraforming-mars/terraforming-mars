@@ -1,5 +1,5 @@
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
@@ -9,6 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('TheDarksideofTheMoonSyndicate', () => {
   let game: IGame;
@@ -31,7 +32,12 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     player.titanium = 0;
     card.resourceCount = 1;
+    player2.megaCredits = 2;
+    player3.megaCredits = 2;
     expect(card.canAct(player)).is.true;
+
+    player2.megaCredits = 1; // one opponent can't cover the steal
+    expect(card.canAct(player)).is.false;
 
     player.titanium = 0;
     card.resourceCount = 0;
@@ -42,8 +48,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     player.titanium = 3;
     card.resourceCount = 0;
 
-    const options = card.action(player);
-    expect(options).is.undefined;
+    cast(card.action(player), undefined);
     expect(game.deferredActions).has.length(0);
 
     expect(player.titanium).eq(2);
@@ -58,8 +63,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     player2.megaCredits = 5;
     player3.megaCredits = 5;
 
-    const options = card.action(player);
-    expect(options).is.undefined;
+    cast(card.action(player), undefined);
 
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
@@ -96,11 +100,27 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     expect(player3.megaCredits).eq(3);
   });
 
+  it('steal in solo mode', () => {
+    [game, player] = testGame(1, {moonExpansion: true});
+    moonData = MoonExpansion.moonData(game);
+
+    player.titanium = 0;
+    card.resourceCount = 3;
+
+    player.megaCredits = 5;
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(card.resourceCount).eq(2);
+    expect(player.megaCredits).eq(7);
+  });
+
   it('effect', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
-    // Space 0 intentionallyleft blank
+    // Space 0 intentionally left blank
     MoonExpansion.addMineTile(player2, adjacentSpaces[1].id);
     MoonExpansion.addHabitatTile(player2, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(player2, adjacentSpaces[3].id);
@@ -113,7 +133,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(4);
@@ -134,7 +154,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
-    // Space 0 intentionallyleft blank
+    // Space 0 intentionally left blank
     MoonExpansion.addMineTile(player2, adjacentSpaces[1].id);
     MoonExpansion.addHabitatTile(player2, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(player2, adjacentSpaces[3].id);
@@ -147,7 +167,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
 
     player.game.phase = Phase.SOLAR;
 
@@ -155,6 +175,28 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(10);
     expect(player.megaCredits).eq(0);
+  });
+
+  it('Compatible with Hostile Takeover', () => {
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
+    const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
+
+    const space = adjacentSpaces[1];
+
+    MoonExpansion.addMineTile(player2, space.id);
+    space.coOwner = player3;
+
+    player.megaCredits = 0;
+    player2.megaCredits = 10;
+    player3.megaCredits = 10;
+    player.playedCards.push(card);
+
+    // Trigger the effect.
+    MoonExpansion.addMineTile(player, centerSpace.id);
+
+    expect(player.megaCredits).eq(4);
+    expect(player2.megaCredits).eq(8);
+    expect(player3.megaCredits).eq(8);
   });
 });
 

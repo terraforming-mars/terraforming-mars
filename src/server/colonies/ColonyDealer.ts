@@ -1,8 +1,10 @@
 import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {Random} from '../../common/utils/Random';
-import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES, PATHFINDERS_COLONIES_TILES} from './ColonyManifest';
+import {ALL_COLONIES_TILES, BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES, PATHFINDERS_COLONIES_TILES} from './ColonyManifest';
 import {GameOptions} from '../game/GameOptions';
+import {comparing} from '../../common/utils/Ordering';
+import {toName} from '../../common/utils/utils';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on the RNG.
@@ -17,16 +19,32 @@ export class ColonyDealer {
   constructor(private rng: Random, private gameOptions: GameOptions) {
     let colonyTiles = BASE_COLONIES_TILES;
 
-    if (ColonyDealer.includesCommunityColonies(gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
-    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
-    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II); // Leavitt II isn't built yet but this is pre-emptive
-    if (!gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
-    if (!gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    if (ColonyDealer.includesCommunityColonies(gameOptions)) {
+      colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+    }
+    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) {
+      colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
+    }
+    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) {
+      // Leavitt II isn't built yet but this is pre-emptive
+      colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II);
+    }
+    if (!gameOptions.venusNextExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+    }
+    if (!gameOptions.turmoilExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    }
+    if (!gameOptions.aresExtension) {
+      colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
+    }
     this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 
   private static includesCommunityColonies(gameOptions: GameOptions) : boolean {
-    if (gameOptions.communityCardsOption) return true;
+    if (gameOptions.communityCardsOption) {
+      return true;
+    }
     const communityColonyNames = COMMUNITY_COLONIES_TILES.map((cf) => cf.colonyName);
     return gameOptions.customColoniesList.some((colonyName) => communityColonyNames.includes(colonyName));
   }
@@ -42,7 +60,10 @@ export class ColonyDealer {
 
   public drawColonies(players: number): void {
     const customColonies = this.gameOptions.customColoniesList;
-    const colonies = customColonies.length === 0 ? this.gameColonies : this.gameColonies.filter((c) => customColonies.includes(c.name));
+    let colonies = this.gameColonies;
+    if (customColonies.length > 0) {
+      colonies = ALL_COLONIES_TILES.filter((c) => customColonies.includes(c.colonyName)).map((cf) => new cf.Factory());
+    }
 
     const count = (players + 2) +
       (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
@@ -61,8 +82,8 @@ export class ColonyDealer {
     }
 
     this.discardedColonies.push(...tempDeck);
-    this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    this.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    this.discardedColonies.sort(comparing(toName));
+    this.colonies.sort(comparing(toName));
   }
 
   public restore(activeColonies: Array<IColony>): void {

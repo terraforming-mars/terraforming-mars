@@ -25,20 +25,24 @@ export class Xavier extends CeoCard {
     });
   }
 
-  public opgActionIsActive = false;
-
   public override get tags(): Array<Tag> {
     return this.opgActionIsActive ? [Tag.WILD, Tag.WILD] : [];
   }
 
-  public action(): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
-    this.opgActionIsActive = true;
+    player.playedCards.retagCard(this, () => this.opgActionIsActive = true);
     return undefined;
   }
 
+  public onProductionPhase(player: IPlayer) {
+    player.playedCards.retagCard(this, () => this.opgActionIsActive = false);
+  }
+
   public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
-    if (this.isDisabled && card.requirements.length > 0) return 1;
+    if (this.isDisabled && card.requirements.length > 0) {
+      return 1;
+    }
     return 0;
   }
 }

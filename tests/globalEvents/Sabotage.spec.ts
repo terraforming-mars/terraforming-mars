@@ -4,8 +4,8 @@ import {Sabotage} from '../../src/server/turmoil/globalEvents/Sabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('Sabotage', function() {
-  it('resolve play', function() {
+describe('Sabotage', () => {
+  it('resolve play', () => {
     const card = new Sabotage();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -18,7 +18,7 @@ describe('Sabotage', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.steel).to.eq(0);
     expect(player2.steel).to.eq(3);
     expect(player2.production.steel).to.eq(2);

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Mohole} from '../../../src/server/cards/prelude/Mohole';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Mohole', function() {
-  it('Should play', function() {
+describe('Mohole', () => {
+  it('Should play', () => {
     const card = new Mohole();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

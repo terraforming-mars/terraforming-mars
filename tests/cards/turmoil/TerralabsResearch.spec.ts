@@ -1,14 +1,15 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
 import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('TerralabsResearch', function() {
-  it('Should play', function() {
+describe('TerralabsResearch', () => {
+  it('Should play', () => {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
@@ -21,7 +22,7 @@ describe('TerralabsResearch', function() {
     // 14 starting MC - 1 for each card select at the start (total: 2)
     expect(player.megaCredits).to.eq(12);
     // 14 Solo TR - 1
-    expect(player.getTerraformRating()).to.eq(13);
+    expect(player.terraformRating).to.eq(13);
 
     player.playedCards.push(card3);
     expect(card3.action(player)).is.undefined;

@@ -42,7 +42,7 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
     };
 
     const policyActionUsers = Array.from(
-      game.getPlayersInGenerationOrder(),
+      game.playersInGenerationOrder,
       (player) => {
         return {
           color: player.color,
@@ -92,5 +92,5 @@ function getParties(game: IGame): Array<PartyModel> {
 }
 
 function delegateColor(delegate: Delegate) {
-  return delegate === 'NEUTRAL' ? Color.NEUTRAL : delegate.color;
+  return delegate === 'NEUTRAL' ? 'neutral' : delegate.color;
 }

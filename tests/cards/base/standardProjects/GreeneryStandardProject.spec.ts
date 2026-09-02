@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction, setOxygenLevel} from '../../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
@@ -10,33 +10,36 @@ import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {TileType} from '../../../../src/common/TileType';
 import {testGame} from '../../../TestGame';
 import {assertPlaceTile} from '../../../assertions';
+import {Payment} from '../../../../src/common/inputs/Payment';
 
-describe('GreeneryStandardProject', function() {
+describe('GreeneryStandardProject', () => {
   let card: GreeneryStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GreeneryStandardProject();
     [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    runAllActions(game);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getOxygenLevel()).eq(1);
   });
 

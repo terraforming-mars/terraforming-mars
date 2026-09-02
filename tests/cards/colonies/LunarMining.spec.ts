@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('LunarMining', function() {
-  it('Should play', function() {
+describe('LunarMining', () => {
+  it('Should play', () => {
     const card = new LunarMining();
     const card2 = new SpaceHotels();
     const card3 = new LunaGovernor();

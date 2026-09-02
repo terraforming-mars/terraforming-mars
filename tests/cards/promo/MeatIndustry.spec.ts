@@ -6,8 +6,8 @@ import {Predators} from '../../../src/server/cards/base/Predators';
 import {MeatIndustry} from '../../../src/server/cards/promo/MeatIndustry';
 import {runAllActions} from '../../TestingUtils';
 
-describe('MeatIndustry', function() {
-  it('Gives 2 M€ whenever player gains an animal', function() {
+describe('MeatIndustry', () => {
+  it('Gives 2 M€ whenever player gains an animal', () => {
     const card = new MeatIndustry();
     const [game, player, player2] = testGame(2);
 

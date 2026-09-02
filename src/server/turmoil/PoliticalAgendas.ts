@@ -1,9 +1,9 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {IGame} from '../IGame';
-import {Bonus} from './Bonus';
+import {IBonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {Policy} from './Policy';
+import {IPolicy} from './Policy';
 import {Turmoil} from './Turmoil';
 import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
 
@@ -26,7 +26,7 @@ export class PoliticalAgendas {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
-      if (agendaStyle === AgendaStyle.STANDARD) {
+      if (agendaStyle === 'Standard') {
         agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
       } else {
         agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
@@ -40,8 +40,8 @@ export class PoliticalAgendas {
   }
 
   private static getRandomAgenda(party: IParty): Agenda {
-    const bonus: Bonus = PoliticalAgendas.randomElement(party.bonuses);
-    const policy: Policy = PoliticalAgendas.randomElement(party.policies);
+    const bonus: IBonus = PoliticalAgendas.randomElement(party.bonuses);
+    const policy: IPolicy = PoliticalAgendas.randomElement(party.policies);
 
     return {bonusId: bonus.id, policyId: policy.id};
   }
@@ -71,7 +71,7 @@ export class PoliticalAgendas {
 
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
-    if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
+    if (politicalAgendasData.agendaStyle === 'Chairman' && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
         chairman,

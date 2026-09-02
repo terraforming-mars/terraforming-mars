@@ -1,28 +1,49 @@
 export enum CardResource {
-    ANIMAL = 'Animal',
-    MICROBE = 'Microbe',
-    FIGHTER = 'Fighter',
-    SCIENCE = 'Science',
-    FLOATER = 'Floater',
-    ASTEROID = 'Asteroid',
-    PRESERVATION = 'Preservation',
-    CAMP = 'Camp',
-    DISEASE = 'Disease',
-    RESOURCE_CUBE = 'Resource cube',
-    DATA = 'Data',
-    SYNDICATE_FLEET = 'Syndicate Fleet',
-    VENUSIAN_HABITAT = 'Venusian Habitat',
-    SPECIALIZED_ROBOT = 'Specialized Robot',
-    SEED = 'Seed',
-    AGENDA = 'Agenda',
-    ORBITAL = 'Orbital',
-    GRAPHENE = 'Graphene',
-    HYDROELECTRIC_RESOURCE = 'Hydroelectric resource',
-    CLONE_TROOPER = 'Clone Trooper',
-    TOOL = 'Tool',
-    WARE = 'Ware',
-    SCOOP = 'Scoop',
-    JOURNALISM = 'Journalism',
-    ACTIVIST = 'Activist',
-    SUPPLY_CHAIN = 'Supply Chain',
+  // Base
+  ANIMAL = 'Animal',
+  MICROBE = 'Microbe',
+  FIGHTER = 'Fighter',
+  SCIENCE = 'Science',
+
+  // Venus
+  FLOATER = 'Floater',
+  ASTEROID = 'Asteroid',
+
+  // Colonines
+  CAMP = 'Camp',
+
+  // Turmoil
+  PRESERVATION = 'Preservation',
+
+  // Prelude 2
+  DIRECTOR = 'Director',
+
+  // Promo
+  DISEASE = 'Disease',
+  GRAPHENE = 'Graphene',
+  HYDROELECTRIC_RESOURCE = 'Hydroelectric resource',
+
+  // Fan cards
+  RESOURCE_CUBE = 'Resource cube',
+  DATA = 'Data',
+
+  // Moon
+  SYNDICATE_FLEET = 'Syndicate Fleet',
+
+  // Pathfinders
+  VENUSIAN_HABITAT = 'Venusian Habitat',
+  SPECIALIZED_ROBOT = 'Specialized Robot',
+  SEED = 'Seed',
+  AGENDA = 'Agenda',
+  ORBITAL = 'Orbital',
+
+  // Star Wars
+  CLONE_TROOPER = 'Clone Trooper',
+
+  // Underworld
+  TOOL = 'Tool',
+  WARE = 'Ware',
+  JOURNALISM = 'Journalism',
+  ACTIVIST = 'Activist',
+  SUPPLY_CHAIN = 'Supply Chain',
 }

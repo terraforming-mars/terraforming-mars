@@ -12,7 +12,7 @@ export enum AltSecondaryTag {
 
   MOON_MINING_RATE = 'moon-mine',
   MOON_HABITAT_RATE = 'moon-colony',
-  MOON_LOGISTICS_RATE = 'moon-road',
+  MOON_LOGISTIC_RATE = 'moon-road',
 
   NO_PLANETARY_TAG = 'no_planetary_tag',
   WILD_RESOURCE = 'wild-resource',

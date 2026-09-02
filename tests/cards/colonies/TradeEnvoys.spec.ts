@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {TradeEnvoys} from '../../../src/server/cards/colonies/TradeEnvoys';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('TradeEnvoys', function() {
-  it('Should play', function() {
+describe('TradeEnvoys', () => {
+  it('Should play', () => {
     const card = new TradeEnvoys();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

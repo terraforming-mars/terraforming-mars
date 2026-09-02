@@ -20,7 +20,7 @@ export class SponsoringNation extends Card {
       requirements: {tag: Tag.EARTH, count: 4},
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P83',
         description: 'Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.',
         renderData: CardRenderer.builder((b) => {
           b.tr(3).br.delegates(2);

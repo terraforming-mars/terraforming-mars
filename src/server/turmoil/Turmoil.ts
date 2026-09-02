@@ -12,29 +12,30 @@ import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedDelegate, SerializedTurmoil} from './SerializedTurmoil';
 import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
-import {AgendaStyle} from '../../common/turmoil/Types';
+import {AgendaStyle, PolicyId} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
-import {Policy, PolicyId, policyDescription} from './Policy';
+import {IPolicy, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
 import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
+import {toID} from '../../common/utils/utils';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = IPlayer | NeutralPlayer;
 
 export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
+export const ALL_PARTIES = {
   [PartyName.MARS]: MarsFirst,
   [PartyName.SCIENTISTS]: Scientists,
   [PartyName.UNITY]: Unity,
   [PartyName.GREENS]: Greens,
   [PartyName.REDS]: Reds,
   [PartyName.KELVINISTS]: Kelvinists,
-};
+} satisfies Record<PartyName, PartyFactory>;
 
 function createParties(): ReadonlyArray<IParty> {
   return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];
@@ -42,7 +43,7 @@ function createParties(): ReadonlyArray<IParty> {
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendas: new Map(),
-  agendaStyle: AgendaStyle.CHAIRMAN,
+  agendaStyle: 'Chairman',
 };
 
 export class Turmoil {
@@ -52,7 +53,7 @@ export class Turmoil {
   public usedFreeDelegateAction = new Set<IPlayer>();
   public delegateReserve = new MultiSet<Delegate>();
   public parties = createParties();
-  public playersInfluenceBonus = new Map<string, number>();
+  public playersInfluenceBonus = new Map<PlayerId, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
   public comingGlobalEvent: IGlobalEvent | undefined;
@@ -70,7 +71,7 @@ export class Turmoil {
     this.globalEventDealer = globalEventDealer;
   }
 
-  public static newInstance(game: IGame, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
+  public static newInstance(game: IGame, agendaStyle: AgendaStyle = 'Standard'): Turmoil {
     const dealer = GlobalEventDealer.newInstance(game);
 
     // The game begins with Greens in power and a Neutral chairman
@@ -82,7 +83,7 @@ export class Turmoil {
     // Init parties
     turmoil.parties = createParties();
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       turmoil.delegateReserve.add(player, DELEGATES_PER_PLAYER);
     });
     // One Neutral delegate is already Chairman
@@ -98,7 +99,7 @@ export class Turmoil {
 
   public static getTurmoil(game: IGame): Turmoil {
     if (game.turmoil === undefined) {
-      throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
+      throw new Error(`Assertion failure: game.turmoil not defined for ${game.id}`);
     }
     return game.turmoil;
   }
@@ -106,7 +107,7 @@ export class Turmoil {
   public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -116,7 +117,7 @@ export class Turmoil {
   public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -140,7 +141,7 @@ export class Turmoil {
     return party;
   }
 
-  rulingPolicy(): Policy {
+  rulingPolicy(): IPolicy {
     const rulingParty = this.rulingParty;
     const rulingPolicyId: PolicyId = PoliticalAgendas.currentAgenda(this).policyId;
     const policy = rulingParty.policies.find((policy) => policy.id === rulingPolicyId);
@@ -150,18 +151,18 @@ export class Turmoil {
     return policy;
   }
 
-  public sendDelegateToParty(playerId: Delegate, partyName: PartyName, game: IGame, throwIfError = false): void {
+  public sendDelegateToParty(delegate: Delegate, partyName: PartyName, game: IGame, throwIfError = false): void {
     const party = this.getPartyByName(partyName);
-    if (this.delegateReserve.has(playerId)) {
-      this.delegateReserve.remove(playerId);
+    if (this.delegateReserve.has(delegate)) {
+      this.delegateReserve.remove(delegate);
     } else {
-      console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
+      console.log(`${delegate}/${game.id} tried to get a delegate from an empty reserve.`);
       if (throwIfError) {
         throw new Error('No available delegate');
       }
       return;
     }
-    party.sendDelegate(playerId, game);
+    party.sendDelegate(delegate, game);
     this.checkDominantParty();
   }
 
@@ -197,7 +198,7 @@ export class Turmoil {
    */
   public checkDominantParty(): void {
     // If there is a dominant party
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -213,7 +214,7 @@ export class Turmoil {
    */
   // Function to get next dominant party taking into account the clockwise order
   private setNextPartyAsDominant(currentDominantParty: IParty) {
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -248,7 +249,8 @@ export class Turmoil {
   // Launch the turmoil phase
   public endGeneration(game: IGame): void {
     // 1 - All player lose 1 TR
-    game.getPlayers().forEach((player) => {
+    game.log('All players lose 1 TR.');
+    game.players.forEach((player) => {
       player.decreaseTerraformRating();
     });
 
@@ -257,7 +259,7 @@ export class Turmoil {
       const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
       game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
       // TODO(kberg): if current global event adds an action, all of the rest of this should wait.
-      currentGlobalEvent.resolve(game, this);
+      currentGlobalEvent.resolve(game);
     }
 
     // WOW THIS BREAKS THINGS
@@ -318,7 +320,7 @@ export class Turmoil {
     this.rulingPolicy().onPolicyEnd?.(game);
 
     // Mars Frontier Alliance ends allied party policy
-    const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+    const alliedPlayer = game.players.find((p) => p.alliedParty !== undefined);
     this.executeAlliedOnPolicyEnd(alliedPlayer);
 
     // Behold the Emperor Hook prevents changing the ruling party.
@@ -365,7 +367,9 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.isCorporation(CardName.TEMPEST_CONSULTANCY)) steps += 1;
+      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) {
+        steps += 1;
+      }
 
       // Raise TR
       chairman.defer(() => {
@@ -394,7 +398,7 @@ export class Turmoil {
       partiesToCheck = [...this.parties.slice(currentIndex + 1), ...this.parties.slice(0, currentIndex)];
     }
 
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const first = sortParties[0].delegates.size;
@@ -420,7 +424,7 @@ export class Turmoil {
     const rulingParty = this.rulingParty;
 
     // Ruling bonus should be chosen between global or allied party if MFA is in play
-    const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+    const alliedPlayer = game.players.find((p) => p.alliedParty !== undefined);
     this.applyRulingBonus(game, alliedPlayer);
 
     // Resolve Ruling Bonus
@@ -454,9 +458,11 @@ export class Turmoil {
     policy.onPolicyStart?.(game);
   }
 
-  public getPlayerInfluence(player: IPlayer) {
+  public getInfluence(player: IPlayer) {
     let influence = 0;
-    if (this.chairman === player) influence++;
+    if (this.chairman === player) {
+      influence++;
+    }
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player;
@@ -464,9 +470,13 @@ export class Turmoil {
 
     if (isPartyLeader) {
       influence++;
-      if (delegateCount > 1) influence++; // at least 1 non-leader delegate
+      if (delegateCount > 1) {
+        influence++;
+      } // at least 1 non-leader delegate
     } else {
-      if (delegateCount > 0) influence++;
+      if (delegateCount > 0) {
+        influence++;
+      }
     }
 
     if (this.playersInfluenceBonus.has(player.id)) {
@@ -476,12 +486,9 @@ export class Turmoil {
       }
     }
 
-    player.tableau.forEach((card) => {
-      const bonus = card.getInfluenceBonus?.(player);
-      if (bonus !== undefined) {
-        influence += bonus;
-      }
-    });
+    for (const card of player.tableau) {
+      influence += card.getInfluenceBonus?.(player) ?? 0;
+    }
 
     return influence;
   }
@@ -518,9 +525,11 @@ export class Turmoil {
    *
    * Players get 1 VP at the end of the game for each chairman and party leader they have.
    */
-  public getPlayerVictoryPoints(player: IPlayer): number {
+  public getVictoryPoints(player: IPlayer): number {
     let victory = 0;
-    if (this.chairman === player) victory++;
+    if (this.chairman === player) {
+      victory++;
+    }
     this.parties.forEach((party) => {
       if (party.partyLeader === player) {
         victory++;
@@ -534,7 +543,7 @@ export class Turmoil {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-      } else if (player.isCorporation(CardName.INCITE) && player.canAfford(3)) {
+      } else if (player.tableau.has(CardName.INCITE) && player.canAfford(3)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (player.canAfford(5)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});
@@ -551,7 +560,7 @@ export class Turmoil {
       chairman: serializeDelegateOrUndefined(this.chairman),
       rulingParty: this.rulingParty.name,
       dominantParty: this.dominantParty.name,
-      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map((p) => p.id),
+      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map(toID),
       delegateReserve: Array.from(this.delegateReserve.values()).map(serializeDelegate),
       parties: this.parties.map((p) => {
         return {
@@ -601,7 +610,7 @@ export class Turmoil {
       tp.partyLeader = deserializeDelegateOrUndefined(sp.partyLeader, players);
     });
 
-    turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
+    turmoil.playersInfluenceBonus = new Map(d.playersInfluenceBonus);
 
     if (d.distantGlobalEvent) {
       turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);

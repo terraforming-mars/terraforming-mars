@@ -5,12 +5,9 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
+import {GainResources} from '../../inputs/GainResources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
-});
+import {message} from '../../logs/MessageBuilder';
 
 export class DryDeserts extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -19,21 +16,24 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
       description: 'First player removes 1 ocean tile from the gameboard. Gain 1 standard resource per influence.',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
     if (game.canRemoveOcean()) {
-      game.defer(new RemoveOceanTile(game.getPlayersInGenerationOrder()[0], 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
+      game.defer(new RemoveOceanTile(game.playersInGenerationOrder[0], 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
     }
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const count = turmoil.getPlayerInfluence(player);
+    const turmoil = Turmoil.getTurmoil(game);
+    game.playersInGenerationOrder.forEach((player) => {
+      const count = turmoil.getInfluence(player);
       if (count > 0) {
-        game.defer(new SelectResourcesDeferred(
+        player.defer(new GainResources(
           player,
           count,
-          'Dry Deserts Global Event - Gain ' + count + ' resource(s) for influence',
+          message('Dry Deserts Global Event - Gain ${0} resource(s) for influence', (b) => b.number(count)),
         ));
       }
     });

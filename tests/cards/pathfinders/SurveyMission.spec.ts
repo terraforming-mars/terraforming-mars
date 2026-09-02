@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {SurveyMission} from '../../../src/server/cards/pathfinders/SurveyMission';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {runAllActions} from '../../TestingUtils';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Space} from '../../../src/server/boards/Space';
@@ -12,6 +12,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);
@@ -32,7 +33,7 @@ describe('SurveyMission', () => {
   //
   // O is an ocean space, and G is another claimed space.
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SurveyMission();
     [game, player] = testGame(1, {pathfindersExpansion: true});
     board = EmptyBoard.newInstance();
@@ -98,7 +99,7 @@ describe('SurveyMission', () => {
   });
 
   it('Compatible with Mining Guild', () => {
-    player.setCorporationForTest(new MiningGuild());
+    player.playedCards.push(new MiningGuild());
     const selectSpace = cast(card.play(player), SelectSpace);
 
     expect(player.steel).eq(5); // Comes from playing the Prelude
@@ -114,6 +115,45 @@ describe('SurveyMission', () => {
     expect(player.plants).eq(1);
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
-  // TODO Hazards are playable, but you won't get anything.
-  // TODO Arcadian communities should not interfere with Survey Mission.
+  it('Protected hazard spaces are included in valid triplets', () => {
+    const space10 = board.getSpaceOrThrow('10');
+    space10.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];
+
+    // Place a protected hazard on space 10 (the center of the test area).
+    space10.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: true};
+
+    expect(card.canPlay(player)).is.true;
+
+    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(selectSpace.spaces).to.include(space10);
+
+    selectSpace.cb(space10);
+    expect(player.heat).eq(0);
+    expect(player.plants).eq(0);
+  });
+
+  it('ArcadianCommunities-marked spaces are excluded from valid triplets', () => {
+    // Mark space 04 (part of triplet [4,5,10] only), leaving other triplets valid.
+    const space04 = board.getSpaceOrThrow('04');
+    space04.player = player;
+
+    // Space 04 is excluded but triplets [5,10,11], [10,16,17], [10,11,17] remain.
+    expect(card.canPlay(player)).is.true;
+
+    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(selectSpace.spaces).not.to.include(space04);
+    expect(selectSpace.spaces.map(toSpaceIdDigit)).to.have.members([5, 10, 11, 16, 17]);
+  });
+
+  it('Spaces with unaffordable placement bonuses are filtered', () => {
+    // Put a Hellas-style ocean bonus on space 04. Space 04 only appears in triplet [4,5,10].
+    const space04 = board.getSpaceOrThrow('04');
+    space04.bonus = [SpaceBonus.OCEAN];
+
+    player.megaCredits = 5;
+    expect(cast(card.play(player), SelectSpace).spaces).not.to.include(space04);
+
+    player.megaCredits = 6;
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(space04);
+  });
 });

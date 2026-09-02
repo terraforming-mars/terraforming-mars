@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
 import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {CorporateBlackmail} from '../../../src/server/cards/underworld/CorporateBlackmail';
+import {PatentManipulation} from '../../../src/server/cards/underworld/PatentManipulation';
 
 describe('Risktaker', () => {
   let milestone: Risktaker;
@@ -44,7 +44,7 @@ describe('Risktaker', () => {
     expect(milestone.canClaim(player)).is.true;
 
     // -2 VP event
-    player.playedCards.push(new CorporateBlackmail());
+    player.playedCards.push(new PatentManipulation());
 
     expect(milestone.getScore(player)).eq(7);
     expect(milestone.canClaim(player)).is.true;

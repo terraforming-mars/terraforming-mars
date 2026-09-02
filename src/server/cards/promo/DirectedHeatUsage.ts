@@ -29,7 +29,7 @@ export class DirectedHeatUsage extends ActionCard {
       },
 
       metadata: {
-        // cardNumber: '',
+        cardNumber: 'X48',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 3 heat to gain either 4 M€ or 2 plants.', (eb) =>
             eb.empty().heat(3, {digit}).startAction.megacredits(4).or().plants(2));

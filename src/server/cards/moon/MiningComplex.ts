@@ -6,10 +6,12 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {IPlayer} from '../../IPlayer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resource} from '../../../common/Resource';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {Space} from '../../boards/Space';
+import {MoonBoard} from '../../moon/MoonBoard';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class MiningComplex extends PreludeCard {
   constructor() {
@@ -17,40 +19,53 @@ export class MiningComplex extends PreludeCard {
       name: CardName.MINING_COMPLEX,
       tags: [Tag.MOON],
       startingMegacredits: -7,
+      tr: {
+        moonMining: 1,
+        moonLogistic: 1,
+      },
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {
         description: 'Place a mine tile on The Moon and raise the mining rate 1 step. ' +
-        'Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. ' +
+        'Place a road tile adjacent to placed mine tile and raise the logistic rate 1 step. ' +
         'Pay 7 M€.',
-        cardNumber: '',
+        cardNumber: 'MP5',
         renderData: CardRenderer.builder((b) =>
-          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE}).asterix().br.minus().megacredits(7),
+          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE}).asterix().br.minus().megacredits(7),
         ),
       },
     });
   }
 
+  // Land spaces next to |space| where a road tile could be placed.
+  private adjacentRoadSpaces(moon: MoonBoard, space: Space): Array<Space> {
+    return moon.getAdjacentSpaces(space).filter((s) => s.player === undefined && s.spaceType === SpaceType.LAND);
+  }
+
+  // A mine may only be placed where an adjacent road can also be placed.
+  private availableMineSpaces(player: IPlayer): Array<Space> {
+    const moon = MoonExpansion.moonData(player.game).moon;
+    return moon.getAvailableSpacesForMine(player).filter((space) => this.adjacentRoadSpaces(moon, space).length > 0);
+  }
+
   public override bespokeCanPlay(player: IPlayer) {
-    return player.canAfford(7);
+    return player.canAfford(7) && this.availableMineSpaces(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new PlaceMoonMineTile(player))
+    const moon = MoonExpansion.moonData(player.game).moon;
+    player.game.defer(new PlaceMoonMineTile(player, this.availableMineSpaces(player)))
       .andThen((space) => {
-        const moon = MoonExpansion.moonData(player.game).moon;
-        const spaces = moon.getAdjacentSpaces(space);
-        const availableRoadSpaces = spaces.filter((space) => {
-          return space.player === undefined && space.spaceType === SpaceType.LAND;
-        });
         player.game.defer(
           new PlaceMoonRoadTile(
             player,
-            availableRoadSpaces,
+            this.adjacentRoadSpaces(moon, space),
             'Select a space next to the mine for a road',
-          ));
+          ))
+          .andThen(() => {
+            player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
+          });
       });
-    player.stock.deduct(Resource.MEGACREDITS, 7);
     return undefined;
   }
 }

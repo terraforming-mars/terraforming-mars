@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
@@ -9,8 +9,11 @@ import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {IapetusII} from '../../../src/server/cards/pathfinders/IapetusII';
 import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
+import {Callisto} from '../../../src/server/colonies/Callisto';
+import {Titan} from '../../../src/server/colonies/Titan';
+import {cast, toName} from '../../../src/common/utils/utils';
 
-describe('Maria', function() {
+describe('Maria', () => {
   let card: Maria;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -21,11 +24,11 @@ describe('Maria', function() {
     [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action generation 1', function() {
+  it('Takes action generation 1', () => {
     const coloniesInPlay = game.colonies.length;
     cast(card.action(player), undefined);
     runAllActions(player.game);
@@ -33,10 +36,23 @@ describe('Maria', function() {
     const selectedColony = selectColony.colonies[0];
     selectColony.cb(selectedColony);
     expect(game.colonies).to.contain(selectedColony);
-    expect(game.colonies.length).to.eq(coloniesInPlay + 1);
+    expect(game.colonies).has.length(coloniesInPlay + 1);
   });
 
-  it('Takes action in Generation 4', function() {
+  it('Draws from discarded colonies without mutating their order', () => {
+    game.discardedColonies = [new Titan(), new Callisto()];
+
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
+    const drawnColonyNames = selectColony.colonies.map(toName);
+    expect(drawnColonyNames).has.length(1);
+    expect(['Titan', 'Callisto']).contains(drawnColonyNames[0]);
+    expect(game.discardedColonies.map(toName)).deep.eq(['Titan', 'Callisto']);
+  });
+
+  it('Takes action in Generation 4', () => {
     game.generation = 4;
 
     cast(card.action(player), undefined);
@@ -60,7 +76,7 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Venus, which is activated', () => {
-    player2.setCorporationForTest(new Celestic());
+    player2.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
@@ -89,7 +105,7 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Ieptus II, which is activated', () => {
-    player2.setCorporationForTest(new CollegiumCopernicus());
+    player2.playedCards.push(new CollegiumCopernicus());
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
@@ -103,7 +119,7 @@ describe('Maria', function() {
     expect(iapetusii.colonies).is.not.empty;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

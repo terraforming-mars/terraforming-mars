@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, forceGenerationEnd, churnAction} from '../../TestingUtils';
+import {runAllActions, forceGenerationEnd, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 
-describe('Clarke', function() {
+describe('Clarke', () => {
   let card: Clarke;
   let player: TestPlayer;
   let game: IGame;
@@ -15,7 +15,7 @@ describe('Clarke', function() {
     [game, player] = testGame(1);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
@@ -26,8 +26,8 @@ describe('Clarke', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action', function() {
-    expect(churnAction(card, player)).is.undefined;
+  it('Takes action', () => {
+    expect(churn(card.action(player), player)).is.undefined;
     expect(player.production.plants).eq(1);
     expect(player.production.heat).eq(1);
     expect(player.plants).eq(5);

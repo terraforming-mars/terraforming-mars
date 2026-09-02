@@ -7,8 +7,6 @@ import {NoAttributes} from './NoAttributes';
  * Describes something that can be counted.
  */
 export type _Countable = {
-  start?: number;
-
   /**
    * Count the number of tags on the players' played cards.
    *
@@ -26,6 +24,7 @@ export type _Countable = {
   /** Count the number of floaters on all cards. */
   floaters?: NoAttributes,
   colonies?: {
+    /** Count the number of colonies this player has (or all colonies.) */
     colonies?: {},
   },
   moon?: {
@@ -39,10 +38,48 @@ export type _Countable = {
   underworld?: {
     corruption?: NoAttributes,
     excavationMarkers?: NoAttributes,
+    undergroundTokens?: NoAttributes,
   },
 
-  all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
-  others?: true; // For tags this has a behavior.
+  /** When counting tiles (cities, oceans, greeneries, moon tiles), only count tiles adjacent to this card's tile. */
+  nextToThis?: NoAttributes,
+
+  // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
+  all?: boolean;
+  /**
+   * When counting tags, this counts other players' tags, not yours.
+   */
+  others?: true;
+  /**
+   * When true, include events when counting tags.
+   */
+  includeEvents?: true;
+
+  /**
+   * Count the number of events this player has played.
+   */
+  eventsPlayed?: true;
+
+  turmoil?: {
+    /**
+     * Count the number of parties this player leads.
+     */
+    partyLeaders?: NoAttributes,
+    /**
+     * Cap the count so far at this value. Global events commonly cap a count
+     * before adding influence, so this is applied before `influence`, and
+     * before `each` and `per`.
+     */
+    max?: number;
+    /**
+     * Add this player's Turmoil influence, or subtract it when `subtract` is set.
+     *
+     * Penalty global events reduce a capped count by influence, which is what `subtract`
+     * is for. The result can go negative; pair it with `lose`, which treats a negative
+     * count as zero.
+     */
+    influence?: {subtract?: boolean},
+  }
 
   /**
    * Multiply the sum by this value.

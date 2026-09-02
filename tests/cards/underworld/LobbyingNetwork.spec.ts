@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LobbyingNetwork} from '../../../src/server/cards/underworld/LobbyingNetwork';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('LobbyingNetwork', () => {
   it('Should play', () => {

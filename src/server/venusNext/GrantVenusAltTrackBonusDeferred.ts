@@ -3,7 +3,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
 import {IPlayer} from '../IPlayer';
-import {SelectResources} from '../inputs/SelectResources';
+import {GainResources} from '../inputs/GainResources';
 import {message} from '../logs/MessageBuilder';
 
 export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
@@ -16,10 +16,10 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
   }
 
   private selectStandardResources(count: number) {
-    return new SelectResources(
+    return new GainResources(
       this.player,
       count,
-      `Gain ${count} resources for your Venus track bonus.`,
+      message('Gain ${0} resource(s) for your Venus track bonus.', (b) => b.number(count)),
     );
   }
 
@@ -34,7 +34,8 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
       .andThen(([card]) => {
         this.player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
-      });
+      })
+      .maybeConvertToSelectOption(message('Add resource to ${0}', (b) => b.card(resourceCards[0])));
     const wild = new OrOptions(selectCard, this.selectStandardResources(1));
     if (this.standardResourceCount > 0) {
       wild.andThen(() => {

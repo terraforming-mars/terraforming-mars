@@ -1,7 +1,8 @@
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCanPayWith, StandardProjectCard} from '../StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
+import {StandardProjectCanPayWith} from '../../../common/cards/Types';
 import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
@@ -34,7 +35,7 @@ export class ExcavateStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
+    if (!UnderworldExpansion.canExcavateN(player, 1)) {
       return false;
     }
     return super.canAct(player);

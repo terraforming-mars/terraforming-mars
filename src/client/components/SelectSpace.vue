@@ -1,36 +1,37 @@
 <template>
   <div class="select_space_cont">
-    <confirm-dialog
+    <ConfirmDialog
         message="Place your tile here?"
         :enableDontShowAgainCheckbox="true"
         ref="confirmation"
-        v-on:accept="confirmPlacement"
-        v-on:dismiss="cancelPlacement"
-        v-on:hide="hideDialog" />
+        @accept="confirmPlacement"
+        @dismiss="cancelPlacement"
+        @hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">
       {{ $t(playerinput.title) }}
-      <go-to-map :playerinput="playerinput"></go-to-map>
+      <GoToMap :playerinput="playerinput"/>
     </div>
     <div v-if="warning" class="nes-container is-rounded">
       <span class="nes-text is-warning" v-i18n>{{ warning }}</span>
-      <go-to-map :playerinput="playerinput"></go-to-map>
+      <GoToMap :playerinput="playerinput"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
 import {SpaceId} from '@/common/Types';
 
+
 type Refs = {
-  confirmation: InstanceType<typeof ConfirmDialog>,
-}
+  confirmation: InstanceType<typeof ConfirmDialog>;
+};
 
 type DataModel = {
   spaces: Set<SpaceId>;
@@ -39,20 +40,28 @@ type DataModel = {
   warning: string | undefined;
 };
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'SelectSpace',
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectSpaceModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectSpaceResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   data(): DataModel {
@@ -64,8 +73,13 @@ export default (Vue as WithRefs<Refs>).extend({
     };
   },
   components: {
-    'confirm-dialog': ConfirmDialog,
+    ConfirmDialog,
     GoToMap,
+  },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
   },
   methods: {
     animateSpace(tile: Element, activate: boolean) {
@@ -141,7 +155,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        this.$refs.confirmation.show();
+        this.typedRefs.confirmation.show();
       }
     },
     saveData() {

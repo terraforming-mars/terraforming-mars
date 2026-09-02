@@ -1,42 +1,34 @@
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
-import {DeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
+import {RunNTimes} from '../deferredActions/RunNTimes';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from './UnderworldExpansion';
 
-export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
-  private nth: number = 1;
-  constructor(player: IPlayer, public count: number) {
-    super(player, Priority.IDENTIFY_UNDERGROUND_RESOURCE);
+export class IdentifySpacesDeferred extends RunNTimes<Space | UndergroundResourceToken> {
+  constructor(player: IPlayer, count: number) {
+    super(player, count, Priority.IDENTIFY_UNDERGROUND_RESOURCE);
   }
 
-  private selectSpace(): PlayerInput | undefined {
-    const prefix = 'Select space to identify';
-    const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
-    const selectedSpaces: Array<Space> = [];
-
-    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player);
-    if (identifiableSpaces.length === 0) {
-      return undefined;
-    }
-    return new SelectSpace(title, identifiableSpaces)
-      .andThen((space) => {
-        UnderworldExpansion.identify(this.player.game, space, this.player);
-        selectedSpaces.push(space);
-        this.nth++;
-        if (this.nth <= this.count) {
-          return this.selectSpace();
-        }
-        this.cb(selectedSpaces);
-        return undefined;
-      });
-  }
-  public execute(): PlayerInput | undefined {
-    if (this.count === 0) {
-      return undefined;
-    }
-    return this.selectSpace();
+  protected run() {
+    const title = this.createTitle('Select space to identify');
+    this.player.defer(() => {
+      const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player);
+      if (identifiableSpaces.length === 0) {
+        const token = UnderworldExpansion.drawExcavationToken(this.player.game);
+        this.collection.push(token);
+        this.player.game.log('${0} identified ${1} from the draw pile', (b) => b.player(this.player).undergroundToken(token));
+        this.player.game.triggerForAllCards((p, c) => c.onIdentificationByAnyPlayer?.(p, this.player, token));
+        return this.next();
+      }
+      return new SelectSpace(title, identifiableSpaces)
+        .andThen((space) => {
+          UnderworldExpansion.identify(this.player.game, space, this.player);
+          this.collection.push(space);
+          return this.next();
+        });
+    });
+    return undefined;
   }
 }

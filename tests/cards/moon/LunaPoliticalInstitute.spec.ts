@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tag} from '../../../src/common/cards/Tag';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LunaPoliticalInstitute', () => {
   let player: TestPlayer;
@@ -25,13 +26,13 @@ describe('LunaPoliticalInstitute', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tag.MOON]})];
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
+    expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tag.MOON, Tag.MOON]})];
-    expect(player.getPlayableCardsForTest()).includes(card);
+    player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
+    expect(player.getPlayableCards()).includes(card);
   });
 
   it('can act', () => {

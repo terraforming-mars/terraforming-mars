@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Psychrophiles', () => {
   let card: Psychrophiles;

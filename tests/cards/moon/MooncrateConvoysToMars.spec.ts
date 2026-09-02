@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
@@ -29,10 +29,10 @@ describe('MooncrateConvoysToMars', () => {
     player1.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new MarsFirst();
-    expect(player1.getPlayableCardsForTest()).does.include(card);
+    expect(player1.getPlayableCards()).does.include(card);
 
     game.turmoil!.rulingParty = new Reds();
-    expect(player1.getPlayableCardsForTest()).does.not.include(card);
+    expect(player1.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

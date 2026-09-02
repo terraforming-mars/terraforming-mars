@@ -7,7 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {Priority} from '../../deferredActions/Priority';
-import {GainResources} from '../../deferredActions/GainResources';
+import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -36,7 +36,7 @@ export class RoverConstruction extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new GainResources(cardOwner, Resource.MEGACREDITS, {count: 2, log: true}),
+        new GainResourcesDeferred(cardOwner, Resource.MEGACREDITS, {count: 2, log: true}),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

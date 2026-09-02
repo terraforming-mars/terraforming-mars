@@ -3,14 +3,14 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {BaseBonus} from '../Bonus';
+import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {BasePolicy, Policy} from '../Policy';
+import {Policy, IPolicy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {IProjectCard} from '../../cards/IProjectCard';
+import {ICard} from '../../cards/ICard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {TITLES} from '../../inputs/titles';
 
@@ -20,8 +20,7 @@ export class MarsFirst extends Party implements IParty {
   readonly policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
-// TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
-class MarsFirstBonus01 extends BaseBonus {
+class MarsFirstBonus01 extends Bonus {
   readonly id = 'mb01' as const;
   readonly description = 'Gain 1 M€ for each building tag you have';
 
@@ -30,11 +29,11 @@ class MarsFirstBonus01 extends BaseBonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
   }
 }
 
-class MarsFirstBonus02 extends BaseBonus {
+class MarsFirstBonus02 extends Bonus {
   readonly id = 'mb02' as const;
   readonly description = 'Gain 1 M€ for each tile you have ON MARS';
 
@@ -44,32 +43,34 @@ class MarsFirstBonus02 extends BaseBonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
   }
 }
 
-class MarsFirstPolicy01 implements Policy {
-  readonly id = 'mfp01' as const;
+class MarsFirstPolicy01 implements IPolicy {
+  readonly id = 'mp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: IPlayer, space: Space) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.stock.add(Resource.STEEL, 1);
+      player.stock.add(Resource.STEEL, 1, {log: true, from: {partyName: PartyName.MARS}});
     }
   }
 }
 
-class MarsFirstPolicy02 implements Policy {
-  readonly id = 'mfp02' as const;
+class MarsFirstPolicy02 implements IPolicy {
+  readonly id = 'mp02' as const;
   readonly description = 'When you play a building tag, gain 2 M€';
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
+  onCardPlayed(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.BUILDING)) {
+      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: {partyName: PartyName.MARS}});
+    }
   }
 }
 
-class MarsFirstPolicy03 extends BasePolicy {
-  readonly id = 'mfp03' as const;
+class MarsFirstPolicy03 extends Policy {
+  readonly id = 'mp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
   override onPolicyStartForPlayer(player: IPlayer): void {
@@ -81,8 +82,8 @@ class MarsFirstPolicy03 extends BasePolicy {
   }
 }
 
-class MarsFirstPolicy04 implements Policy {
-  readonly id = 'mfp04' as const;
+class MarsFirstPolicy04 implements IPolicy {
+  readonly id = 'mp04' as const;
   readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
 
   canAct(player: IPlayer) {

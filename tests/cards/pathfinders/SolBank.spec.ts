@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SolBank} from '../../../src/server/cards/pathfinders/SolBank';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
@@ -19,6 +19,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('SolBank', () => {
   let solBank: SolBank;
@@ -43,7 +44,7 @@ describe('SolBank', () => {
     spctp.process({
       type: 'projectCard',
       card: CardName.MICRO_MILLS,
-      payment: Payment.of({megaCredits: 3}),
+      payment: Payment.of({megacredits: 3}),
     });
     runAllActions(game);
 
@@ -51,7 +52,7 @@ describe('SolBank', () => {
   });
 
   it('discounted card does not trigger', () => {
-    player.playedCards = [new IndenturedWorkers()];
+    player.playedCards.push(new IndenturedWorkers());
     player.lastCardPlayed = CardName.INDENTURED_WORKERS; // 8 MC discount
     player.cardsInHand = [new MicroMills()];
     const spctp = new SelectProjectCardToPlay(player);
@@ -110,7 +111,7 @@ describe('SolBank', () => {
     expect(game.getTemperature()).eq(-30);
 
     const asteroidStandardProject = new AsteroidStandardProject();
-    asteroidStandardProject.action(player);
+    asteroidStandardProject.payAndExecute(player, Payment.of({megacredits: asteroidStandardProject.cost}));
     runAllActions(game);
 
     expect(game.getTemperature()).eq(-28);
@@ -203,6 +204,28 @@ describe('SolBank', () => {
     finishGeneration(game);
 
     expect(player.megaCredits).eq(18);
+    expect(solBank.resourceCount).eq(0);
+  });
+
+  it('Initial card selection - add resource', () => {
+    [game, player] = testGame(1, {});
+    solBank = new SolBank();
+
+    player.cardsInHand.push(new MicroMills(), new BiomassCombustors(), new AerobrakedAmmoniaAsteroid());
+    player.playCorporationCard(solBank);
+
+    // Starting 40 - paying for 3 played cards.
+    expect(player.megaCredits).eq(31);
+    expect(solBank.resourceCount).eq(1);
+  });
+
+  it('Initial card selection - no cards chosen, no resource', () => {
+    [game, player] = testGame(1, {});
+    solBank = new SolBank();
+
+    player.playCorporationCard(solBank);
+
+    expect(player.megaCredits).eq(40);
     expect(solBank.resourceCount).eq(0);
   });
 });

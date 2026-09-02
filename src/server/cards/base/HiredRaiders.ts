@@ -7,8 +7,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {all} from '../Options';
+import {all, uppercase} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 
 export class HiredRaiders extends Card implements IProjectCard {
@@ -21,9 +20,9 @@ export class HiredRaiders extends Card implements IProjectCard {
       metadata: {
         cardNumber: '124',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', Size.MEDIUM, true).steel(2, {all}).br;
+          b.text('steal', {uppercase}).steel(2, {all}).br;
           b.or().br;
-          b.text('steal', Size.MEDIUM, true).megacredits(3, {all});
+          b.text('steal', {uppercase}).megacredits(3, {all});
         }),
         description: 'Steal up to 2 steel, or 3 M€ from any player.',
       },
@@ -46,19 +45,13 @@ export class HiredRaiders extends Card implements IProjectCard {
 
     const availableActions = new OrOptions();
 
-    player.getOpponents().forEach((target) => {
+    player.opponents.forEach((target) => {
       if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountStolen = Math.min(2, target.steel);
         const optionTitle = message('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
-              player.steel += amountStolen;
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.STEEL, 2, {stealing: true, log: true});
           return undefined;
         }));
       }
@@ -68,13 +61,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              player.megaCredits += amountStolen;
-              target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.MEGACREDITS, 3, {log: true, stealing: true});
           return undefined;
         }));
       }

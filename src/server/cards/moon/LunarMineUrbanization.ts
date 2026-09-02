@@ -24,7 +24,8 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       tr: {moonHabitat: 1},
 
       metadata: {
-        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. ' +
+        cardNumber: 'M55',
+        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. ' +
         'Remove 1 of your mine tiles (does not affect the mining rate.) ' +
         'Place this special tile there, regardless of placement rules. ' +
         'Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.',
@@ -50,9 +51,18 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         if (space.tile === undefined) {
           throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
         }
+        // #6982, make compatible with Hostile Takeover
+        const owner = space.player;
+        const coOwner = space.coOwner;
+
         space.tile = undefined;
         space.player = undefined;
+        space.coOwner = undefined;
         MoonExpansion.addTile(player, space.id, {tileType: TileType.LUNAR_MINE_URBANIZATION, card: this.name});
+
+        space.player = owner;
+        space.coOwner = coOwner;
+
         MoonExpansion.raiseHabitatRate(player);
         return undefined;
       });

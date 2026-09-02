@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {ImportedNitrogen} from '../../../src/server/cards/base/ImportedNitrogen';
@@ -11,23 +11,23 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('ImportedNitrogen', function() {
+describe('ImportedNitrogen', () => {
   let card: ImportedNitrogen;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ImportedNitrogen();
     [game, player] = testGame(2);
   });
 
-  it('Should play without animals and microbes', function() {
+  it('Should play without animals and microbes', () => {
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
-  it('Should play with only animals', function() {
+  it('Should play with only animals', () => {
     const pets = new Pets();
     const birds = new Birds();
     player.playedCards.push(pets, birds);
@@ -39,11 +39,11 @@ describe('ImportedNitrogen', function() {
     addAnimals.cb([pets]);
     expect(pets.resourceCount).to.eq(2);
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
-  it('Should play with only microbes', function() {
+  it('Should play with only microbes', () => {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
@@ -55,11 +55,11 @@ describe('ImportedNitrogen', function() {
 
     expect(game.deferredActions.pop()!.execute()).is.undefined;
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
-  it('Should play with animals and microbes', function() {
+  it('Should play with animals and microbes', () => {
     const pets = new Pets();
     const birds = new Birds();
     const tardigrades = new Tardigrades();
@@ -75,7 +75,7 @@ describe('ImportedNitrogen', function() {
     addAnimals.cb([pets]);
     expect(pets.resourceCount).to.eq(2);
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 });

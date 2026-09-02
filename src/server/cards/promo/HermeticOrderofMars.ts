@@ -6,9 +6,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {isHazardTileType} from '../../../common/AresTileType';
 import {Resource} from '../../../common/Resource';
-import {Space} from '../../boards/Space';
+import {Board} from '../../boards/Board';
 
 export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +23,7 @@ export class HermeticOrderOfMars extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X56',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).nbsp.megacredits(1).slash().emptyTile().asterix();
         }),
@@ -33,17 +32,13 @@ export class HermeticOrderOfMars extends Card implements IProjectCard {
     });
   }
 
-  private hasTile(space: Space): boolean {
-    return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
-  }
-
   public override bespokePlay(player: IPlayer) {
     const board = player.game.board;
     const spaces = board.spaces.filter((space) => {
-      if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED || this.hasTile(space)) {
+      if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED ||Board.hasRealTile(space)) {
         return false;
       }
-      return board.getAdjacentSpaces(space).some((s) => s.player === player && this.hasTile(s));
+      return board.getAdjacentSpaces(space).some((s) => s.player === player &&Board.hasRealTile(s));
     }).length;
 
     player.stock.add(Resource.MEGACREDITS, spaces, {log: true});

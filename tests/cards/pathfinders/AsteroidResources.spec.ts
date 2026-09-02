@@ -8,26 +8,27 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('AsteroidResources', function() {
+describe('AsteroidResources', () => {
   let card: AsteroidResources;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AsteroidResources();
     [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.energy = 2;
     expect(card.canPlay(player)).is.false;
     player.energy = 3;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play, gain production', function() {
+  it('play, gain production', () => {
     player.energy = 3;
 
     card.play(player);
@@ -41,7 +42,7 @@ describe('AsteroidResources', function() {
     expect(player.steel).eq(0);
   });
 
-  it('play, place ocean', function() {
+  it('play, place ocean', () => {
     player.energy = 3;
 
     card.play(player);

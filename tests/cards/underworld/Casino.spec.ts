@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {Casino} from '../../../src/server/cards/underworld/Casino';
 import {testGame} from '../../TestGame';
-import {addCity, cast} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Casino', () => {
   it('canPlay', () => {
@@ -12,10 +13,15 @@ describe('Casino', () => {
 
     expect(card.canPlay(player)).is.false;
 
-    addCity(player2);
+    addCity(player);
+
+    expect(card.canPlay(player)).is.false;
+    expect(card.canPlay(player2)).is.false;
+
+    addCity(player);
 
     expect(card.canPlay(player)).is.true;
-    expect(card.canPlay(player2)).is.true;
+    expect(card.canPlay(player2)).is.false;
   });
 
   it('Should play', () => {
@@ -27,6 +33,6 @@ describe('Casino', () => {
     cast(card.play(player), undefined);
 
     expect(player.underworldData.corruption).to.eq(1);
-    expect(player.production.megacredits).eq(2);
+    expect(player.production.megacredits).eq(4);
   });
 });

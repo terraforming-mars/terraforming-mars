@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Greenhouses} from '../../../src/server/cards/base/Greenhouses';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Greenhouses', function() {
-  it('Should play', function() {
+describe('Greenhouses', () => {
+  it('Should play', () => {
     const card = new Greenhouses();
     const [game, player, player2] = testGame(2);
     const action = card.play(player);

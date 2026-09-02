@@ -15,12 +15,11 @@ export class Zan extends CeoCard {
       metadata: {
         cardNumber: 'L26',
         renderData: CardRenderer.builder((b) => {
+          b.effect('You are immune to Reds\' ruling policy.', (eb) => eb.startEffect.redsInactive().asterix());
           b.br.br;
-          b.redsInactive().asterix();
-          b.br.br;
-          b.opgArrow().text('ALL', Size.SMALL).delegates(1).colon().reds().megacredits(1);
+          b.opgArrow().text('ALL', {size: Size.SMALL}).delegates(1).colon().reds().megacredits(1);
         }),
-        description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
+        description: 'Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
       },
     });
   }
@@ -33,7 +32,7 @@ export class Zan extends CeoCard {
     while (turmoil.getAvailableDelegateCount(player) > 0) {
       turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     }
-    // If we dont do this player will not get the bonus for POLITICAN Awards
+    // If we dont do this player will not get the bonus for POLITICIAN Awards
     player.totalDelegatesPlaced += totalAvailableDelegates;
     player.stock.add(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;

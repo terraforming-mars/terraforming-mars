@@ -13,10 +13,11 @@ dist/
 .nyc_output/
 .vscode/
 .idea/
+.zed/
 pid
 *.log
 .eslintcache
-tsconfig.tsbuildinfo
+tsconfig*.tsbuildinfo
 assets/locales
 
 # Local Packages
@@ -24,3 +25,7 @@ node_modules/
 
 # misc
 .gitconfig
+./logs/
+
+# For any local work you don't want caught up in git.
+local/

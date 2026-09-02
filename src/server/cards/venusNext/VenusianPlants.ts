@@ -41,7 +41,9 @@ export class VenusianPlants extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const cards = this.getResCards(player);
-    if (cards.length === 0) return undefined;
+    if (cards.length === 0) {
+      return undefined;
+    }
 
     if (cards.length === 1) {
       player.addResourceTo(cards[0], {log: true});

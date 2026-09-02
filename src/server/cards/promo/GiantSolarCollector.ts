@@ -15,7 +15,7 @@ export class GiantSolarCollector extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X55',
         description: 'Increase your energy production 2 steps. Raise Venus 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2)).venus(1);

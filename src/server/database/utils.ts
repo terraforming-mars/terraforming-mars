@@ -14,13 +14,30 @@ export function dateToSeconds(date: Date) {
   return Math.round(date.getTime() / 1000);
 }
 
-export function dayStringToDays(dayString: string | undefined, defaultValue: number): number {
-  const parsed = parseInt(dayString || '');
+export function stringToNumber(s: string | undefined, defaultValue: number): number {
+  if (s === undefined) {
+    return defaultValue;
+  }
+  const parsed = parseInt(s);
   return Number.isInteger(parsed) ? parsed : defaultValue;
 }
 
+export function stringToBoolean(s: string | undefined, defaultValue: boolean): boolean {
+  if (s === undefined) {
+    return defaultValue;
+  }
+  if (s === 'true') {
+    return true;
+  }
+  if (s === 'false') {
+    return false;
+  }
+  const parsed = parseInt(s);
+  return Number.isInteger(parsed) ? parsed > 0 : defaultValue;
+}
+
 export function daysAgoToSeconds(dayString: string | undefined, defaultValue: number): number {
-  const days = dayStringToDays(dayString, defaultValue);
+  const days = stringToNumber(dayString, defaultValue);
   const date = addDays(new Date(), -days);
   return dateToSeconds(date);
 }

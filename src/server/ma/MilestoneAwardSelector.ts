@@ -1,58 +1,23 @@
-import {
-  AMAZONIS_PLANITIA_AWARDS,
-  ARABIA_TERRA_AWARDS,
-  ARES_AWARDS,
-  Awards,
-  ELYSIUM_AWARDS,
-  HELLAS_AWARDS,
-  MOON_AWARDS,
-  TERRA_CIMMERIA_AWARDS,
-  THARSIS_AWARDS,
-  UNDERWORLD_AWARDS,
-  // UTOPIA_PLANITIA_AWARDS,
-  VASTITAS_BOREALIS_AWARDS,
-  VENUS_AWARDS,
-} from '../awards/Awards';
-import {IAward} from '../awards/IAward';
+import {awardManifest} from '../awards/Awards';
 import {BoardName} from '../../common/boards/BoardName';
 import {GameOptions} from '../game/GameOptions';
-import {IMilestone} from '../milestones/IMilestone';
-import {
-  AMAZONIS_PLANITIA_MILESTONES,
-  ARABIA_TERRA_MILESTONES,
-  ARES_MILESTONES,
-  ELYSIUM_MILESTONES,
-  HELLAS_MILESTONES,
-  Milestones,
-  MOON_MILESTONES,
-  TERRA_CIMMERIA_MILESTONES,
-  THARSIS_MILESTONES,
-  UNDERWORLD_MILESTONES,
-  // UTOPIA_PLANITIA_MILESTONES,
-  VASTITAS_BOREALIS_MILESTONES,
-  VENUS_MILESTONES,
-} from '../milestones/Milestones';
-import {FullMoon} from '../moon/FullMoon';
-import {Lunarchitect} from '../moon/Lunarchitect';
-import {LunarMagnate} from '../moon/LunarMagnate';
-import {OneGiantStep} from '../moon/OneGiantStep';
+import {milestoneManifest} from '../milestones/Milestones';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
 import {UnseededRandom} from '../../common/utils/Random';
-import {MilestoneName} from '../../common/ma/MilestoneName';
-import {AwardName} from '../../common/ma/AwardName';
-import {inplaceRemove} from '../../common/utils/utils';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
+import {isCompatible, MAManifest} from './MAManifest';
+import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
-  milestones: Array<IMilestone>,
-  awards: Array<IAward>
+  milestones: Array<MilestoneName>,
+  awards: Array<AwardName>
 }
 
-
-// Function to compute max synergy of a given set of milestones and awards.
-// Exported for testing
-export function maximumSynergy(names: Array<string>) : number {
+// Compute max synergy of a given set of milestones and awards. Exported for testing.
+export function maximumSynergy(names: ReadonlyArray<MilestoneName | AwardName>) : number {
   let max = 0;
   for (let i = 0; i < names.length - 1; i++) {
     for (let j = i + 1; j < names.length; j++) {
@@ -93,56 +58,44 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     awards: [],
   };
 
-  function push(milestones: Array<IMilestone>, awards: Array<IAward>) {
+  function push(milestones: ReadonlyArray<MilestoneName>, awards: ReadonlyArray<AwardName>) {
     drawnMilestonesAndAwards.milestones.push(...milestones);
     drawnMilestonesAndAwards.awards.push(...awards);
   }
 
-  const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-  const requiredQty = includeVenus ? 6 : 5;
+  const requiredQty = gameOptions.venusNextExtension ? 6 : 5;
 
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
+    const boardName = gameOptions.boardName;
     switch (gameOptions.boardName) {
     case BoardName.THARSIS:
-      push(THARSIS_MILESTONES, THARSIS_AWARDS);
-      break;
     case BoardName.HELLAS:
-      push(HELLAS_MILESTONES, HELLAS_AWARDS);
-      break;
     case BoardName.ELYSIUM:
-      push(ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
-      break;
-    case BoardName.ARABIA_TERRA:
-      push(ARABIA_TERRA_MILESTONES, ARABIA_TERRA_AWARDS);
-      break;
-    case BoardName.AMAZONIS:
-      push(AMAZONIS_PLANITIA_MILESTONES, AMAZONIS_PLANITIA_AWARDS);
-      break;
-    case BoardName.TERRA_CIMMERIA:
-      push(TERRA_CIMMERIA_MILESTONES, TERRA_CIMMERIA_AWARDS);
-      break;
-    case BoardName.VASTITAS_BOREALIS:
-      push(VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS);
-      break;
     case BoardName.UTOPIA_PLANITIA:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
-    case BoardName.TERRA_CIMMERIA_NOVUS:
-      // There's no need to add more milestones and awards for these boards, so it returns.
+    case BoardName.ARABIA_TERRA:
+    case BoardName.AMAZONIS:
+    case BoardName.TERRA_CIMMERIA:
+    case BoardName.TERRA_CIMMERIA_NOVA:
+    case BoardName.VASTITAS_BOREALIS:
+    case BoardName.VASTITAS_BOREALIS_NOVA:
+      push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
+      break;
+    default:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
-    if (includeVenus) {
-      push(VENUS_MILESTONES, VENUS_AWARDS);
+    if (gameOptions.venusNextExtension) {
+      push(milestoneManifest.expansions['venus'], awardManifest.expansions['venus']);
     }
     if (gameOptions.aresExtension) {
-      push(ARES_MILESTONES, ARES_AWARDS);
+      push(milestoneManifest.expansions['ares'], awardManifest.expansions['ares']);
     }
     if (gameOptions.moonExpansion) {
       // One MA will reward moon tags, the other will reward moon tiles.
       if (Math.random() > 0.5) {
-        push([new OneGiantStep], [new LunarMagnate()]);
+        push(['One Giant Step'], ['Lunar Magnate']);
       } else {
-        push([new Lunarchitect], [new FullMoon()]);
+        push(['Lunarchitect'], ['Full Moon']);
       }
     }
     break;
@@ -160,6 +113,58 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   return drawnMilestonesAndAwards;
 }
 
+/**
+ * Return the list of possible milestones and awards for a given game. Only meant to work with random selection.
+ *
+ * Isn't meant to work with RandomMAOptionType.NONE
+ *
+ * exported for tests
+ */
+export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
+  function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
+    }
+
+    const random = manifest.all[name].random;
+    if (gameOptions.modularMA) {
+      if (random === undefined) {
+        return false;
+      }
+      // TODO(kberg): Exclude Geologist if the board has no volcanic spaces
+    } else {
+      // The game boards this MA appears in, if any.
+      const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));
+
+      // Always include the milestones and awards from the official boards
+      if (intersection(boards, [BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS]).length > 0) {
+        return true;
+      }
+      // Conditionally include milestones and awards from unofficial boards.
+      if (boards.length > 0 && gameOptions.includeFanMA === false) {
+        return false;
+      }
+      // Modular MAs are not part of our own built random MAs.
+      if (random === 'modular') {
+        return false;
+      }
+    }
+
+    if (!isCompatible(name, manifest, gameOptions)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const candidateMilestones = milestoneNames.filter((name) => include(name, milestoneManifest));
+  const candidateAwards = awardNames.filter((name) => include(name, awardManifest));
+
+  return [candidateMilestones, candidateAwards];
+}
+
 // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
 // Venusian.) It does this by following these rules:
 // 1) No pair with synergy above |maxSynergyAllowed|.
@@ -172,64 +177,13 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
   // didn't get past 3.
   // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
+  // 2025-11-30: raised to 6.
+  const maxAttempts = 6;
   if (attempt > maxAttempts) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }
 
-  function toName<T>(e: {name: T}): T {
-    return e.name;
-  }
-
-  const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-  const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
-
-  if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
-    candidateMilestones.push(...VENUS_MILESTONES.map(toName));
-    candidateAwards.push(...VENUS_AWARDS.map(toName));
-  }
-  if (gameOptions.aresExtension) {
-    candidateMilestones.push(...ARES_MILESTONES.map(toName));
-    candidateAwards.push(...ARES_AWARDS.map(toName));
-  }
-  if (gameOptions.moonExpansion) {
-    candidateMilestones.push(...MOON_MILESTONES.map(toName));
-    candidateAwards.push(...MOON_AWARDS.map(toName));
-  }
-
-  if (gameOptions.underworldExpansion) {
-    candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
-    candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
-  }
-
-  if (gameOptions.includeFanMA) {
-    candidateMilestones.push(
-      ...ARABIA_TERRA_MILESTONES.map(toName),
-      ...AMAZONIS_PLANITIA_MILESTONES.map(toName),
-      ...TERRA_CIMMERIA_MILESTONES.map(toName),
-      ...VASTITAS_BOREALIS_MILESTONES.map(toName));
-
-    candidateAwards.push(
-      ...ARABIA_TERRA_AWARDS.map(toName),
-      ...AMAZONIS_PLANITIA_AWARDS.map(toName),
-      ...TERRA_CIMMERIA_AWARDS.map(toName),
-      ...VASTITAS_BOREALIS_AWARDS.map(toName));
-
-    if (!gameOptions.pathfindersExpansion) {
-      inplaceRemove(candidateMilestones, 'Martian');
-    }
-    if (!gameOptions.coloniesExtension) {
-      inplaceRemove(candidateMilestones, 'Colonizer');
-      inplaceRemove(candidateMilestones, 'Pioneer');
-    }
-    if (!gameOptions.turmoilExtension) {
-      inplaceRemove(candidateAwards, 'Politician');
-    }
-    // Special-case Terran and Businessperson, which are exactly the same.
-    if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
-      inplaceRemove(candidateMilestones, 'Terran');
-    }
-  }
+  const [candidateMilestones, candidateAwards] = getCandidates(gameOptions);
 
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);
   inplaceShuffle(candidateAwards, UnseededRandom.INSTANCE);
@@ -256,13 +210,13 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     }
   }
 
-  if (!verifySynergyRules(accum.milestones.concat(accum.awards), constraints)) {
+  if (!verifySynergyRules(accum.milestones, accum.awards, constraints)) {
     throw new Error('The randomized milestones and awards set does not satisfy the given synergy rules.');
   }
 
   return {
-    milestones: accum.milestones.map((name) => Milestones.getByName(name)),
-    awards: accum.awards.map((name) => Awards.getByName(name)),
+    milestones: accum.milestones,
+    awards: accum.awards,
   };
 }
 
@@ -271,17 +225,22 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
 // 2) Total synergy is |totalSynergyAllowed| or below.
 // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
 export function verifySynergyRules(
-  mas: Array<string>,
+  milestones: ReadonlyArray<MilestoneName>,
+  awards: ReadonlyArray<AwardName>,
   constraints: Constraints): boolean {
   let max = 0;
   let totalSynergy = 0;
   let numberOfHigh = 0;
+  const mas: Array<string> = [...milestones];
+  mas.push(...awards);
   for (let i = 0; i < mas.length - 1; i++) {
     for (let j = i + 1; j < mas.length; j++) {
       const synergy = synergies.get(mas[i], mas[j]);
       max = Math.max(synergy, max);
       totalSynergy += synergy;
-      if (synergy >= constraints.highThreshold) numberOfHigh++;
+      if (synergy >= constraints.highThreshold) {
+        numberOfHigh++;
+      }
     }
   }
   return max <= constraints.maxSynergyAllowed &&
@@ -290,8 +249,8 @@ export function verifySynergyRules(
 }
 
 class Accumulator {
-  milestones: Array<string> = [];
-  awards: Array<string> = [];
+  milestones: Array<MilestoneName> = [];
+  awards: Array<AwardName> = [];
 
   private accumulatedHighCount = 0;
   private accumulatedTotalSynergy = 0;
@@ -308,13 +267,13 @@ class Accumulator {
   //
   // Returns true when successful, false otherwise.
   //
-  add(candidate: string, milestone: boolean): boolean {
+  add(candidate: MilestoneName | AwardName, milestone: boolean): boolean {
     let totalSynergy = this.accumulatedTotalSynergy;
     let highCount = this.accumulatedHighCount;
     let max = 0;
 
     // Find the maximum synergy of this new item compared to the others
-    this.milestones.concat(this.awards).forEach((ma) => {
+    (this.milestones as Array<string>).concat(this.awards).forEach((ma) => {
       const synergy = synergies.get(ma, candidate);
       totalSynergy += synergy;
       if (synergy >= this.constraints.highThreshold) {
@@ -327,9 +286,9 @@ class Accumulator {
         highCount <= this.constraints.numberOfHighAllowed &&
         totalSynergy <= this.constraints.totalSynergyAllowed) {
       if (milestone) {
-        this.milestones.push(candidate);
+        this.milestones.push(candidate as MilestoneName);
       } else {
-        this.awards.push(candidate);
+        this.awards.push(candidate as AwardName);
       }
       // Update the stats
       this.accumulatedHighCount = highCount;

@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('CloudCity', () => {
   let card: CloudCity;
@@ -31,7 +32,7 @@ describe('CloudCity', () => {
     player.playedCards.push(jovianLanterns);
     setVenusScaleLevel(game, 4);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 

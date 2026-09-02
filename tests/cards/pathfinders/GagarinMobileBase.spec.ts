@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GagarinMobileBase} from '../../../src/server/cards/pathfinders/GagarinMobileBase';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -10,6 +10,9 @@ import {TileType} from '../../../src/common/TileType';
 import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
 import {UnseededRandom} from '../../../src/common/utils/Random';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GagarinMobileBase', () => {
   let game: IGame;
@@ -22,7 +25,7 @@ describe('GagarinMobileBase', () => {
     [game, player, player2] = testGame(2);
     card = new GagarinMobileBase();
     space13 = game.board.getSpaceOrThrow('13');
-    player.playedCards = [card];
+    player.playedCards.push(card);
   });
 
   it('solo game, initial action includes fewer spaces', () => {
@@ -98,5 +101,23 @@ describe('GagarinMobileBase', () => {
 
     expect(player2.cardsInHand).is.empty;
     expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Hellas ocean space is filtered out when player cannot afford bonus', () => {
+    [game, player] = testGame(2, {boardName: BoardName.HELLAS});
+    card = new GagarinMobileBase();
+    player.playedCards.push(card);
+    const board = game.board;
+
+    const gagarinSpace = board.getAdjacentSpaces(board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE))[0];
+    game.gagarinBase = [gagarinSpace.id];
+
+    player.megaCredits = 5;
+    expect(cast(card.action(player), SelectSpace).spaces.map((s) => s.id))
+      .to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+
+    player.megaCredits = 6;
+    expect(cast(card.action(player), SelectSpace).spaces.map((s) => s.id))
+      .to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 });

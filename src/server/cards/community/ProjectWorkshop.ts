@@ -11,14 +11,14 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../common/turmoil/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ProjectWorkshop extends CorporationCard {
+export class ProjectWorkshop extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,
@@ -42,8 +42,8 @@ export class ProjectWorkshop extends CorporationCard {
           b.corpBox('action', (cb) => {
             cb.vSpace(Size.LARGE);
             cb.action(undefined, (eb) => {
-              eb.text('flip', Size.SMALL, true).cards(1, {secondaryTag: AltSecondaryTag.BLUE});
-              eb.startAction.text('?', Size.MEDIUM, true).tr(1, {size: Size.SMALL});
+              eb.text('flip', {size: Size.SMALL, uppercase}).cards(1, {secondaryTag: AltSecondaryTag.BLUE});
+              eb.startAction.text('?', {uppercase}).tr(1, {size: Size.SMALL});
               eb.cards(2, {digit});
             });
             cb.vSpace(Size.SMALL);
@@ -56,13 +56,15 @@ export class ProjectWorkshop extends CorporationCard {
     });
   }
 
-  private getEligibleCards(player: IPlayer) {
-    const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
+  private getEligibleCards(player: IPlayer): ReadonlyArray<IProjectCard> {
+    const cards = player.playedCards.projects()
+      .filter((card) => card.type === CardType.ACTIVE);
+
+    if (!PartyHooks.reds01PolicyInEffect(player)) {
       return cards;
     }
     return cards.filter((card) => {
-      const vp = card.getVictoryPoints(player);
+      const vp = card.getVictoryPoints(player, 'projectWorkshop');
       if (vp <= 0) {
         return true;
       }
@@ -109,15 +111,18 @@ export class ProjectWorkshop extends CorporationCard {
       return undefined;
     });
 
-    if (activeCards.length === 0) return drawBlueCard;
-    if (!player.canAfford(3)) return flipBlueCard;
+    if (activeCards.length === 0) {
+      return drawBlueCard;
+    }
+    if (!player.canAfford(3)) {
+      return flipBlueCard;
+    }
 
     return new OrOptions(drawBlueCard, flipBlueCard);
   }
 
   private convertCardPointsToTR(player: IPlayer, card: ICard) {
-    const steps = card.getVictoryPoints(player);
-    // TODO(kberg): this doesn't reduce VPs below 0. What to do?
+    const steps = card.getVictoryPoints(player, 'projectWorkshop');
     if (steps > 0) {
       player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {

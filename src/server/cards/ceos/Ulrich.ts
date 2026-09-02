@@ -15,7 +15,7 @@ export class Ulrich extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().oceans(1).colon().megacredits(1, {text: '4x'}).slash().megacredits(15).asterix();
         }),
-        description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.',
+        description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are already placed, gain only 15 M€.',
       },
     });
   }

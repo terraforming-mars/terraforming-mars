@@ -4,38 +4,39 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {IGame} from '../../../src/server/IGame';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, getSendADelegateOption, runAllActions, testGame} from '../../TestingUtils';
+import {getSendADelegateOption, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('Incite', function() {
+describe('Incite', () => {
   let card: Incite;
   let player: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Incite();
 
     [game, player] = testGame(1, {turmoilExtension: true});
 
     card.play(player);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     turmoil = game.turmoil!;
   });
 
-  it('Starts with +1 influence', function() {
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
+  it('Starts with +1 influence', () => {
+    expect(game.turmoil!.getInfluence(player)).to.eq(1);
   });
 
-  it('Works with Event Analysts', function() {
+  it('Works with Event Analysts', () => {
     const eventAnalysts = new EventAnalysts();
     eventAnalysts.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
+    expect(game.turmoil!.getInfluence(player)).to.eq(2);
   });
 
-  it('Can perform initial action', function() {
-    player.deferInitialAction(card);
+  it('Can perform initial action', () => {
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     const sendDelegate = cast(player.getWaitingFor(), SelectParty);

@@ -8,6 +8,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {SelectParty} from '../../inputs/SelectParty';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
+import {toName} from '../../../common/utils/utils';
 
 export class Petra extends CeoCard {
   constructor() {
@@ -18,7 +19,7 @@ export class Petra extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.text('REPLACE ALL NEUTRAL', Size.TINY).delegates(1).colon().megacredits(3).asterix();
+          b.text('REPLACE ALL NEUTRAL', {size: Size.TINY}).delegates(1).colon().megacredits(3).asterix();
           b.br.br;
           b.plus().delegates(3).asterix;
         }),
@@ -34,7 +35,9 @@ export class Petra extends CeoCard {
     // We need to make sure that the player has enough delegates available to replace ALL neuts.
     //  including Chairman!
     const turmoil = player.game.turmoil;
-    if (turmoil === undefined || this.isDisabled === true) return false;
+    if (turmoil === undefined || this.isDisabled === true) {
+      return false;
+    }
     const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
     const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player);
     return playerTotalDelegateCount >= numNeutralDelegates;
@@ -71,12 +74,12 @@ export class Petra extends CeoCard {
       turmoil.delegateReserve.remove(player);
       count += 1;
     }
-    // If we dont do this player will not get the bonus for POLITICAN Awards
+    // If we dont do this player will not get the bonus for POLITICIAN Awards
     player.totalDelegatesPlaced += count;
     player.stock.add(Resource.MEGACREDITS, count * 3, {log: true});
 
     // Place 3 Neutral delegates
-    const availableParties = turmoil.parties.map((party) => party.name);
+    const availableParties = turmoil.parties.map(toName);
     const title = 'Select where to send a Neutral delegate';
     const previousDominantParty = turmoil.dominantParty.name;
 

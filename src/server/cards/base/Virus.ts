@@ -33,11 +33,12 @@ export class Virus extends Card implements IProjectCard {
   }
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     if (player.game.isSoloMode()) {
+      // TODO(kberg): Special case for Mons Insurance owner.
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }
 
-    const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {mandatory: false}).execute() as OrOptions;
+    const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {mandatory: false, log: true}).execute() as OrOptions;
     const removeAnimals = orOptionsAnimals !== undefined ?
       orOptionsAnimals.options[0] :
       undefined;

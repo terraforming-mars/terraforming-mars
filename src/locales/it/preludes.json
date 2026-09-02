@@ -1,21 +1,21 @@
 {
-  "Cheung Shing MARS":"Cheung Shing MARS",
+  "Cheung Shing MARS":"",
   "You start with 3 M€ production and 44 M€.":"Inizi con 44 M€ e una Produzione di M€ pari a 3.",
   "Effect: When you play a building tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Edificio, la paghi 2 M€ in meno.",
 
-  "Point Luna":"Point Luna",
+  "Point Luna":"",
   "Effect: When you play an Earth tag, including this, draw a card.":"Effetto: quando giochi una carta con un simbolo Terra, inclusa questa, pesca 1 carta.",
   "You start with 1 titanium production and 38 M€.":"Inizi con 38 M€ e 1 Produzione di Titanio.",
 
-  "Robinson Industries":"Robinson Industries",
+  "Robinson Industries":"",
   "You start with 47 M€.":"Inizi con 47 M€.",
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"Azione: spendi 4 M€ per incrementare di 1 livello la tua PRODUZIONE PIÙ BASSA (una sola).",
 
-  "Valley Trust":"Valley Trust",
+  "Valley Trust":"",
   "Effect: When you play a science tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Scienza, la paghi 2 M€ in meno.",
   "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"Inizi con 37 M€. Come prima azione, pesca 3 carte Prelude, giocane una e scarta le altre due.",
 
-  "Vitor":"Vitor",
+  "Vitor":"",
   "You start with 45 M€. As your first action, fund an award for free.":"Inizi con 45 M€. Come prima azione, finanzia un Riconoscimento senza spendere M€.",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.":"Effetto: quando giochi una carta contenente una qualunque icona PV NON NEGATIVA, inclusa questa, guadagni 3 M€.",
 
@@ -24,10 +24,8 @@
 
 
     "max":"al massimo",
-    "Global requirements":"Parametri Globali",
 
     "House Printing":"Stampaggio di Abitazioni",
-    "Increase your steel production 1 step.":"Incrementa la tua Produzione di Acciaio di 1 livello.",
 
     "Lava Tube Settlement":"Colonia del Tunnel nella Lava",
     "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.":"Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Città SU UN'AREA VULCANICA, indipendentemente dal fatto che ci siano altre Città adiacenti.",
@@ -44,7 +42,6 @@
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",
 
     "SF Memorial":"Memoriale Sci-Fi",
-    "Draw 1 card.":"Pesca 1 carta.",
 
     "Space Hotels":"Hotel Spaziali",
     "Requires 2 Earth tags. Increase M€ production 4 steps.":"Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 4 livelli.",
@@ -63,7 +60,7 @@
     "Biofuels": "Biocarburanti",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Incrementa le tue produzioni di Piante e di Energia di 1 livello ciascuna. Ottieni 2 Piante.",
 
-    "Biolab": "Biolab",
+    "Biolab": "",
     "Increase your plant production 1 step. Draw 3 cards.": "Incrementa la tua Produzione di Piante di 1 livello. Pesca 3 carte.",
 
     "Biosphere Support": "Supporto alla Biosfera",
@@ -94,7 +91,6 @@
     "Increase your titanium production 2 steps. Pay 5 M€.": "Incrementa la tua Produzione di Titanio di 2 livelli. Spendi 5 M€.",
 
     "Great Aquifer": "Grande Falda Acquifera",
-    "Place 2 ocean tiles.": "Colloca 2 tessere Oceano.",
 
     "Huge Asteroid": "Asteroide Enorme",
     "Increase temperature 3 steps. Pay 5 M€.": "Incrementa la Temperatura di 3 livelli. Spendi 5 M€.",
@@ -117,7 +113,7 @@
     "Mining Operations": "Operazioni di Estrazione Mineraria",
     "Increase your steel production 2 steps. Gain 4 steel.": "Incrementa la tua Produzione di Acciaio di 2 livelli. Ottieni 4 risorse Acciaio.",
 
-    "Mohole": "Mohole",
+    "Mohole": "",
     "Increase your heat production 3 steps. Gain 3 heat.": "Incrementa la tua Produzione di Calore di 3 livelli. Ottieni 3 risorse Calore.",
 
     "Mohole Excavation": "Scavo Mohole",
@@ -133,7 +129,6 @@
     "Increase your heat production 2 steps. Place an ocean tile.": "Colloca 1 tessera Oceano. Incrementa la tua Produzione di Calore di 2 livelli.",
 
     "Power Generation": "Creazione di Potenza",
-    "Increase your energy production 3 steps.": "Incrementa la tua Produzione di Energia di 3 livelli.",
 
     "Research Network": "Rete di Ricerca",
     "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Incrementa la tua Produzione di M€ di 1 livello. Pesca 3 carte. Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",

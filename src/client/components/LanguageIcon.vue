@@ -1,45 +1,37 @@
 <template>
-  <div class="sidebar_item sidebar_item--language" :title="$t('Language')">
+  <div ref="root" class="sidebar_item sidebar_item--language" :title="$t('Language')">
     <div
       class="sidebar_icon sidebar_icon--language"
       :class="{'sidebar_item--is-active': languagePanelOpen}">
       <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
       :title="title"
-      v-on:click="languagePanelOpen = !languagePanelOpen"/>
+      @click="languagePanelOpen = !languagePanelOpen"></div>
       </div>
-    <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
+    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="PreferencesManager.INSTANCE"/>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-import Vue from 'vue';
+import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {LANGUAGES} from '@/common/constants';
 
-export default Vue.extend({
-  name: 'LanguageIcon',
-  components: {
-    'language-selection-dialog': LanguageSelectionDialog,
-  },
-  data() {
-    return {
-      languagePanelOpen: false,
-    };
-  },
-  computed: {
-    preferencesManager(): PreferencesManager {
-      return PreferencesManager.INSTANCE;
-    },
-    lang(): keyof typeof LANGUAGES {
-      return PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES;
-    },
-    title(): string {
-      const lang = LANGUAGES[this.lang];
-      return `${lang[0]} (${lang[1]})`;
-    },
-  },
+const root = ref<HTMLElement>();
+const languagePanelOpen = ref(false);
+const lang = computed(() => PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES);
+const title = computed(() => {
+  const language = LANGUAGES[lang.value];
+  return `${language[0]} (${language[1]})`;
 });
 
+function closeOnOutsideClick(event: MouseEvent) {
+  if (languagePanelOpen.value && event.target instanceof Node && root.value?.contains(event.target) === false) {
+    languagePanelOpen.value = false;
+  }
+}
+
+onMounted(() => document.addEventListener('click', closeOnOutsideClick));
+onBeforeUnmount(() => document.removeEventListener('click', closeOnOutsideClick));
 </script>

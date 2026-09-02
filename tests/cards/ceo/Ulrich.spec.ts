@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Ulrich} from '../../../src/server/cards/ceos/Ulrich';
 
-describe('Ulrich', function() {
+describe('Ulrich', () => {
   let card: Ulrich;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -16,24 +16,24 @@ describe('Ulrich', function() {
     [game, player, player2] = testGame(2, {ceoExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action: Some Oceans Placed, 4MC per Ocean', function() {
+  it('Takes action: Some Oceans Placed, 4MC per Ocean', () => {
     const oceansPlaced = 5;
     maxOutOceans(player2, oceansPlaced);
     card.action(player);
     expect(player.megaCredits).eq(oceansPlaced * 4);
   });
 
-  it('Takes action: All oceans placed - gain only 15 M€', function() {
+  it('Takes action: All oceans placed - gain only 15 M€', () => {
     maxOutOceans(player2);
     card.action(player);
     expect(player.megaCredits).eq(15);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

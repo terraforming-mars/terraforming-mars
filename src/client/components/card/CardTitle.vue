@@ -1,25 +1,31 @@
 <template>
-  <div :class="getMainClasses()">
+  <div :class="[getMainClasses(), { 'is-corporation': isCorporation() }]">
     <div v-if="isPrelude()" class="prelude-label">prelude</div>
     <div v-if="isCorporation()" class="corporation-label">corporation</div>
     <div v-if="isCeo()" class="ceo-label">CEO</div>
     <CardCorporationLogo v-if="isCorporation()" :title="title"/>
-    <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
+    <div v-else ref="title" :class="getClasses()">{{ titleWithoutSuffix }}</div>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {CardType} from '@/common/cards/CardType';
-import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
+import {CardName} from '@/common/cards/CardName';
+import {fitTextWhenReady} from '@/client/utils/textFit';
 
-export default Vue.extend({
+type Refs = {
+  // Only rendered for non-corporation cards (corporations show a logo instead).
+  title: HTMLElement | undefined;
+};
+
+export default defineComponent({
   name: 'CardTitle',
   props: {
     title: {
-      type: String,
+      type: String as () => CardName,
       required: true,
     },
     type: {
@@ -30,7 +36,26 @@ export default Vue.extend({
   components: {
     CardCorporationLogo,
   },
+  mounted() {
+    this.fitTitle();
+  },
+  watch: {
+    // Re-fit if the title prop changes on a reused instance. Card lists are keyed
+    // by name today, so this is insurance against an unkeyed or index-keyed list.
+    title() {
+      this.fitTitle();
+    },
+  },
   methods: {
+    // Size the title to fit by measuring the rendered text rather than guessing
+    // from its length. Corporations show a logo instead of a title element, so
+    // nothing to fit.
+    fitTitle(): void {
+      if (this.isCorporation()) {
+        return;
+      }
+      fitTextWhenReady(this.typedRefs.title, 'card-title');
+    },
     isCeo(): boolean {
       return this.type === CardType.CEO;
     },
@@ -40,7 +65,7 @@ export default Vue.extend({
     isPrelude(): boolean {
       return this.type === CardType.PRELUDE;
     },
-    getClasses(title: string): string {
+    getClasses(): string {
       const classes: Array<String> = ['card-title'];
 
       if (this.type === CardType.AUTOMATED) {
@@ -57,14 +82,7 @@ export default Vue.extend({
         classes.push('background-color-standard-project');
       }
 
-      const localeSpecificTitle = translateText(this.getCardTitleWithoutSuffix(title));
-
-      if (localeSpecificTitle.length > 26) {
-        classes.push('title-smaller');
-      } else if (localeSpecificTitle.length > 23) {
-        classes.push('title-small');
-      }
-
+      // The title is sized by measuring the rendered text (see fitTitle).
       return classes.join(' ');
     },
     getMainClasses() {
@@ -74,8 +92,13 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getCardTitleWithoutSuffix(title: string): string {
-      return title.split(':')[0];
+  },
+  computed: {
+    titleWithoutSuffix(): string {
+      return this.title.split(':')[0];
+    },
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
     },
   },
 });

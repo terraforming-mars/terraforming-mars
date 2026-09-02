@@ -9,10 +9,14 @@ import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
+import {Units} from '../Units';
+import {ClaimedToken} from '../underworld/UnderworldPlayerData';
 
 export type BaseInputModel = {
   title: string | Message;
+  warning?: string | Message;
   buttonLabel: string;
+  optional?: boolean;
 }
 
 export type AndOptionsModel = BaseInputModel & {
@@ -35,12 +39,12 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
-  warnings?: Array<Warning>;
+  warnings?: ReadonlyArray<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
   type: 'projectCard';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   paymentOptions: Partial<PaymentOptions>,
   microbes: number;
   floaters: number;
@@ -48,22 +52,24 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
   seeds: number;
   graphene: number;
   kuiperAsteroids: number;
-  corruption: number;
+  auroraiData: number;
+  spireScience: number;
 }
 
 export type SelectCardModel = BaseInputModel & {
   type: 'card';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   max: number;
   min: number;
   showOnlyInLearnerMode: boolean;
   selectBlueCardAction: boolean;
   showOwner: boolean;
+  showSelectAll: boolean;
 }
 
 export type SelectColonyModel = BaseInputModel & {
   type: 'colony';
-  coloniesModel: Array<ColonyModel>;
+  coloniesModel: ReadonlyArray<ColonyModel>;
 }
 
 export type SelectPaymentModel = BaseInputModel & {
@@ -74,16 +80,21 @@ export type SelectPaymentModel = BaseInputModel & {
   auroraiData: number;
   kuiperAsteroids: number;
   spireScience: number;
+  reserveUnits: Readonly<Units> | undefined; // Built to support the Merchant milestone.
+
+  floaters: 0,
+  microbes: 0,
+  graphene: 0,
 }
 
 export type SelectPlayerModel = BaseInputModel & {
   type: 'player';
-  players: Array<Color>;
+  players: ReadonlyArray<Color>;
 }
 
 export type SelectSpaceModel = BaseInputModel & {
   type: 'space';
-  spaces: Array<SpaceId>;
+  spaces: ReadonlyArray<SpaceId>;
 }
 
 export type SelectAmountModel = BaseInputModel & {
@@ -91,6 +102,11 @@ export type SelectAmountModel = BaseInputModel & {
   min: number;
   max: number;
   maxByDefault: boolean;
+}
+
+export type DeltaProjectInputModel = BaseInputModel & {
+  type: 'deltaProject';
+  validSteps: ReadonlyArray<number>;
 }
 
 export type SelectDelegateModel = BaseInputModel & {
@@ -118,6 +134,23 @@ export type SelectGlobalEventModel = BaseInputModel & {
   globalEventNames: Array<GlobalEventName>;
 }
 
+export type SelectResourceModel = BaseInputModel & {
+  type: 'resource';
+  include: ReadonlyArray<keyof Units>;
+}
+
+export type SelectResourcesModel = BaseInputModel & {
+  type: 'resources';
+  count: number;
+}
+
+export type SelectClaimedUndergroundTokenModel = BaseInputModel & {
+  type: 'claimedUndergroundToken';
+  max: number;
+  min: number;
+  tokens: ReadonlyArray<ClaimedToken>;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -136,4 +169,8 @@ export type PlayerInputModel =
   SelectProjectCardToPlayModel |
   SelectSpaceModel |
   ShiftAresGlobalParametersModel |
-  SelectGlobalEventModel;
+  SelectGlobalEventModel |
+  SelectResourceModel |
+  SelectResourcesModel |
+  SelectClaimedUndergroundTokenModel |
+  DeltaProjectInputModel;

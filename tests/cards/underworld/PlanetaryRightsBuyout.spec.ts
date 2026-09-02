@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {PlanetaryRightsBuyout} from '../../../src/server/cards/underworld/PlanetaryRightsBuyout';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PlanetaryRightsBuyout', () => {
   it('Should play', () => {
@@ -13,11 +14,11 @@ describe('PlanetaryRightsBuyout', () => {
     player.underworldData.corruption = 5;
     expect(card.canPlay(player)).is.true;
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(27);
+    expect(player.terraformRating).eq(27);
   });
 });

@@ -25,7 +25,10 @@ export class EarlyExpedition extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf18',
         renderData: CardRenderer.builder((b) => {
-          b.minus().production((pb) => pb.energy(1)).production((pb) => pb.megacredits(3)).br;
+          b.production((pb) => {
+            pb.minus().energy(1).br;
+            pb.plus().megacredits(3);
+          });
           b.resource(CardResource.DATA).asterix().city().asterix();
         }),
         description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +

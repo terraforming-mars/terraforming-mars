@@ -5,8 +5,9 @@ import {RemoveAnyPlants} from '../../src/server/deferredActions/RemoveAnyPlants'
 import {ProtectedHabitats} from '../../src/server/cards/base/ProtectedHabitats';
 import {BotanicalExperience} from '../../src/server/cards/pathfinders/BotanicalExperience';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
-import {cast, formatMessage} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
+import {cast} from '@/common/utils/utils';
 
 describe('RemoveAnyPlants', () => {
   let player: TestPlayer;

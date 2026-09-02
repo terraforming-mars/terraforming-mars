@@ -1,5 +1,5 @@
 import * as constants from '../../common/constants';
-import {IProjectCard} from '../cards/IProjectCard';
+import {ICard} from '../cards/ICard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
@@ -7,14 +7,14 @@ import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3} from './parties/Greens';
-import {KELVINISTS_POLICY_4} from './parties/Kelvinists';
+import {KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {REDS_POLICY_2} from './parties/Reds';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TRSource} from '../../common/cards/TRSource';
-import {Policy, policyDescription} from './Policy';
+import {IPolicy, policyDescription} from './Policy';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -24,21 +24,26 @@ export class TurmoilHandler {
     if (turmoil === undefined) {
       return undefined;
     }
-    const policy: Policy = turmoil.rulingPolicy();
+    const policy: IPolicy = turmoil.rulingPolicy();
+    // kp03 is rendered in the Convert Heat slot by Player.getActions(); skip
+    // here to avoid double-rendering.
+    if (policy.id === KELVINISTS_POLICY_3.id) {
+      return undefined;
+    }
     if (policy.canAct?.(player)) {
       return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
     }
     return undefined;
   }
 
-  public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: IProjectCard): void {
+  public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: ICard): void {
     // PoliticalAgendas Greens P3 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp03')) {
       GREENS_POLICY_3.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp02')) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mp02')) {
       MARS_FIRST_POLICY_2.onCardPlayed(player, selectedCard);
     }
   }
@@ -83,10 +88,10 @@ export class TurmoilHandler {
     }
   }
 
-  // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
-  // It works, but4 a test would be helpful.
   public static computeTerraformRatingBump(player: IPlayer, tr: TRSource = {}): number {
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) return 0;
+    if (!PartyHooks.reds01PolicyInEffect(player)) {
+      return 0;
+    }
 
     // Making a local copy since it's going to get mutated.
     tr = {...tr};
@@ -140,13 +145,17 @@ export class TurmoilHandler {
         total = total + Math.min(availableSteps, tr.moonMining);
       }
 
-      if (tr.moonLogistics !== undefined) {
-        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
-        total = total + Math.min(availableSteps, tr.moonLogistics);
+      if (tr.moonLogistic !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTIC_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistic);
       }
     });
 
     total += tr.tr ?? 0;
+
+    if (player.preservationProgram === true) {
+      total = Math.max(total - 1, 0);
+    }
 
     return total;
   }

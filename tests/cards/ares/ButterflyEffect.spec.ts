@@ -4,16 +4,17 @@ import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlo
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, churnPlay} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {HAZARD_CONSTRAINTS} from '../../../src/common/ares/AresData';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('ButterflyEffect', function() {
+describe('ButterflyEffect', () => {
   let card: ButterflyEffect;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ButterflyEffect();
     [game, player] = testGame(2, {
       aresExtension: true,
@@ -21,11 +22,11 @@ describe('ButterflyEffect', function() {
     });
   });
 
-  it('play', function() {
-    const priorTerraformingRating = player.getTerraformRating();
+  it('play', () => {
+    const priorTerraformingRating = player.terraformRating;
 
-    const input = cast(churnPlay(card, player), ShiftAresGlobalParameters);
-    expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
+    const input = cast(churn(card.play(player), player), ShiftAresGlobalParameters);
+    expect(player.terraformRating).eq(priorTerraformingRating + 1);
 
     const originalHazardData = game.aresData!.hazardData;
     expect(originalHazardData.erosionOceanCount.threshold).eq(3);
@@ -56,9 +57,9 @@ describe('ButterflyEffect', function() {
       }
     });
 
-    const priorTerraformingRating = player.getTerraformRating();
+    const priorTerraformingRating = player.terraformRating;
 
-    expect(churnPlay(card, player)).is.undefined;
-    expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
+    expect(churn(card.play(player), player)).is.undefined;
+    expect(player.terraformRating).eq(priorTerraformingRating + 1);
   });
 });

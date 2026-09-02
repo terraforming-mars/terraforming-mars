@@ -6,9 +6,10 @@ import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
-import {isHazardTileType} from '../../../common/AresTileType';
+import {Board} from '../../boards/Board';
 import {BoardType} from '../../boards/BoardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Phase} from '../../../common/Phase';
 
 export class ExpeditionVehicles extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
       victoryPoints: 1,
 
       metadata: {
-        cardNumber: 'U79',
+        cardNumber: 'U079',
         renderData: CardRenderer.builder((b) => {
           b.effect(
             'After you place a tile (on Mars or in space) that has no adjacent tiles, draw a card.',
@@ -32,13 +33,21 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
   }
 
   onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
+    // onTilePlaced gets called with Mars Nomads, should be ignored here.
+    if (space.tile === undefined) {
+      return;
+    }
+
+    // During World Government Terraforming the active player places the tile but
+    // it is not "their" placement, so the effect should not trigger.
+    if (cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
+
     if (cardOwner === activePlayer) {
       const game = activePlayer.game;
       const board = boardType === BoardType.MARS ? game.board : MoonExpansion.moonData(game).moon;
-      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space)
-        .filter((space) => {
-          return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
-        });
+      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space).filter(Board.hasRealTile);
       if (adjacentSpacesWithTiles.length === 0) {
         cardOwner.drawCard(1);
       }

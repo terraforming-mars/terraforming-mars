@@ -4,13 +4,14 @@ import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('WildlifeDome', function() {
+describe('WildlifeDome', () => {
   let card: WildlifeDome;
   let player: TestPlayer;
   let game: IGame;
@@ -26,13 +27,13 @@ describe('WildlifeDome', function() {
     greens = turmoil.getPartyByName(PartyName.GREENS);
   });
 
-  it('Should play: reds', function() {
+  it('Should play: reds', () => {
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Play when greens are in power', function() {
+  it('Play when greens are in power', () => {
     game.phase = Phase.ACTION;
     turmoil.rulingParty = greens;
     PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -40,7 +41,7 @@ describe('WildlifeDome', function() {
     player.megaCredits = 15;
     expect(player.canPlay(card)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
@@ -48,7 +49,7 @@ describe('WildlifeDome', function() {
     expect(game.getOxygenLevel()).to.eq(1);
   });
 
-  it('Should play: reds in power, 2 green delegates', function() {
+  it('Should play: reds in power, 2 green delegates', () => {
     game.phase = Phase.ACTION;
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -60,6 +61,7 @@ describe('WildlifeDome', function() {
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 18;
-    expect(player.canPlay(card)).deep.eq({redsCost: 3});
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
   });
 });

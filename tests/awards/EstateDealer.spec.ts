@@ -4,8 +4,8 @@ import {EstateDealer} from '../../src/server/awards/EstateDealer';
 import {TileType} from '../../src/common/TileType';
 import {addGreenery, addOcean} from '../TestingUtils';
 
-describe('EstateDealer', function() {
-  it('Correctly counts ocean tiles', function() {
+describe('EstateDealer', () => {
+  it('Correctly counts ocean tiles', () => {
     const award = new EstateDealer();
     const [/* game */, player, player2] = testGame(2);
 
@@ -24,7 +24,7 @@ describe('EstateDealer', function() {
     expect(award.getScore(player)).to.eq(1);
   });
 
-  it('Correctly counts Ares upgraded oceans', function() {
+  it('Correctly counts Ares upgraded oceans', () => {
     const award = new EstateDealer();
     const [game, player, player2] = testGame(2);
 

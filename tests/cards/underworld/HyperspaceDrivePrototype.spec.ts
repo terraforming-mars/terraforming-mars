@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {HyperspaceDrivePrototype} from '../../../src/server/cards/underworld/HyperspaceDrivePrototype';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SpacePrivateers} from '../../../src/server/cards/underworld/SpacePrivateers';
 import {TestPlayer} from '../../TestPlayer';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('HyperspaceDrivePrototype', () => {
   let game: IGame;
@@ -41,11 +42,11 @@ describe('HyperspaceDrivePrototype', () => {
       if (run.science) {
         player.playedCards.push(scienceCard);
       }
-      expect(player.getTerraformRating()).eq(20);
+      expect(player.terraformRating).eq(20);
       cast(card.play(player), undefined);
       runAllActions(game);
       expect(player.stock.titanium).eq(run.titanium);
-      expect(player.getTerraformRating()).eq(run.tr);
+      expect(player.terraformRating).eq(run.tr);
       expect(fighterCard.resourceCount).eq(run.fighter ? 1 : 0);
       expect(scienceCard.resourceCount).eq(run.science ? 1 : 0);
     });

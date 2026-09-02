@@ -4,6 +4,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {message} from '../logs/MessageBuilder';
 
 export class RemoveResources extends DeferredAction<number> {
   constructor(
@@ -32,17 +33,18 @@ export class RemoveResources extends DeferredAction<number> {
     let qtyLost = Math.min(this.target.stock.get(this.resource), this.count);
 
     // Botanical Experience hook.
-    if (this.resource === Resource.PLANTS && this.target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    if (this.resource === Resource.PLANTS && this.target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       qtyLost = Math.ceil(qtyLost / 2);
     }
 
     if (qtyLost === 0) {
       return undefined;
     }
+    const msg = message('lose ${0} ${1}', (b) => b.number(qtyLost).string(this.resource));
     // Move to this.target.maybeBlockAttack?
-    this.target.defer(UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
+    this.target.defer(UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, msg, (proceed) => {
       if (proceed) {
-        this.target.stock.deduct(this.resource, qtyLost, {log: true, from: this.perpetrator});
+        this.target.stock.deduct(this.resource, qtyLost, {log: true, from: {player: this.perpetrator}});
         this.cb(qtyLost);
       }
       return undefined;

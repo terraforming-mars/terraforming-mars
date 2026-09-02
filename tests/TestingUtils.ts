@@ -1,6 +1,6 @@
+import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {IGame} from '../src/server/IGame';
-import * as constants from '../src/common/constants';
 import {Space} from '../src/server/boards/Space';
 import {Phase} from '../src/common/Phase';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
@@ -10,18 +10,19 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
 import {PlayerInput} from '../src/server/PlayerInput';
-import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 import {Warning} from '../src/common/cards/Warning';
 import {testGame as testGameProxy} from './TestGame';
+import {LogMessage} from '../src/common/logs/LogMessage';
+import {cast} from '@/common/utils/utils';
 
 /**
  * Creates a new game for testing. Has some hidden behavior for testing:
@@ -82,13 +83,6 @@ export function addCity(player: IPlayer, spaceId?: SpaceId): Space {
   return space;
 }
 
-export function resetBoard(game: IGame): void {
-  game.board.spaces.forEach((space) => {
-    space.player = undefined;
-    space.tile = undefined;
-  });
-}
-
 export function setRulingParty(game: IGame, partyName: PartyName, policyId?: PolicyId) {
   const turmoil = Turmoil.getTurmoil(game);
   const party = turmoil.getPartyByName(partyName);
@@ -110,28 +104,14 @@ export function runAllActions(game: IGame) {
 }
 
 export function runNextAction(game: IGame) {
-  return game.deferredActions.pop()?.execute();
-}
-
-// Use churnAction instead.
-export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
-  const input = card.action(player);
-  if (input !== undefined) {
-    return input;
-  }
-  runAllActions(player.game);
-  return player.popWaitingFor();
+  const action = game.deferredActions.pop();
+  return action?.execute();
 }
 
 export function forceGenerationEnd(game: IGame) {
-  while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
-  game.getPlayersInGenerationOrder().forEach((player) => player.pass());
+  while (game.deferredActions.pop() !== undefined) { /* empty */ }
+  game.playersInGenerationOrder.forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
-}
-
-/** Provides a readable version of a log message for easier testing. */
-export function formatLogMessage(message: Message): string {
-  return Log.applyData(message, (datum) => datum.value);
 }
 
 /** Provides a readable version of a message for easier testing. */
@@ -139,7 +119,10 @@ export function formatMessage(message: Message | string): string {
   if (typeof message === 'string') {
     return message;
   }
-  return Log.applyData(message, (datum) => datum.value);
+  const text = Log.applyData(message, (datum) => datum.value.toString());
+  const prefix = (message instanceof LogMessage && message.playerId) ?
+    `(${message.playerId}): ` : '';
+  return prefix + text;
 }
 
 /**
@@ -150,7 +133,7 @@ export function formatMessage(message: Message | string): string {
  * @param initialMegacredits starting money
  * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
  */
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
+export function testRedsCosts(cb: () => boolean, player: IPlayer, initialMegacredits: number, passingDelta: number) {
   const turmoil = Turmoil.getTurmoil(player.game);
 
   {
@@ -181,16 +164,21 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
 }
 
 class FakeCard implements IProjectCard {
+  static idx = 0;
+
   public name = 'Fake Card' as CardName;
   public cost = 0;
   public tags = [];
   public requirements = [];
   public warnings = new Set<Warning>();
-  public canPlay(player: IPlayer) {
+  public canPlay(player: IPlayer): boolean {
     if (this.requirements.length === 0) {
       return true;
     }
-    return CardRequirements.compile(this.requirements).satisfies(player);
+    return CardRequirements.compile(this.requirements).satisfies(player, this);
+  }
+  public canPlayPostRequirements(): boolean {
+    return true;
   }
   public play() {
     return undefined;
@@ -205,34 +193,21 @@ class FakeCard implements IProjectCard {
   public metadata = {};
   public resourceCount = 0;
   public tilesBuilt = [];
+  public addWarning(warning: Warning): void {
+    this.warnings.add(warning);
+  }
+  public clearWarnings(): void {
+    this.warnings.clear();
+  }
 }
 
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
   const card = new FakeCard();
   Object.assign(card, attrs);
+  if (attrs.name === undefined) {
+    card.name = 'Fake Card ' + FakeCard.idx++ as CardName;
+  }
   return card;
-}
-
-type ConstructorOf<T> = new (...args: any[]) => T;
-
-/**
- * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
- *
- * Accepts `undefined` as class and fails when obj is not undefined.
- */
-export function cast<T>(obj: any, klass: ConstructorOf<T>): T;
-export function cast<T>(obj: any, klass: undefined): undefined;
-export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | undefined {
-  if (klass === undefined) {
-    if (obj !== undefined) {
-      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
-    }
-    return undefined;
-  }
-  if (!(obj instanceof klass)) {
-    throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);
-  }
-  return obj;
 }
 
 export async function sleep(ms: number): Promise<void> {
@@ -243,7 +218,7 @@ export async function sleep(ms: number): Promise<void> {
 
 export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
+  game.playersInGenerationOrder.forEach((player) => {
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
   });
@@ -256,26 +231,6 @@ export function finishGeneration(game: IGame): void {
 export function getSendADelegateOption(player: IPlayer) {
   return player.getActions().options.find(
     (option) => option.title.toString().startsWith('Send a delegate'));
-}
-
-/**
- * Simulate the behavior of a playing a project card run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnPlay(card: IProjectCard, player: TestPlayer) {
-  return churn(() => card.play(player), player);
-}
-
-/**
- * Simulate the behavior of a card action run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnAction(card: IActionCard, player: TestPlayer) {
-  return churn(() => card.action(player), player);
 }
 
 /**
@@ -301,4 +256,9 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
   const [waitingFor, cb] = player.popWaitingFor2();
   f(cast(waitingFor, klass));
   cb?.();
+}
+
+export function simulateFinishingAction(player: IPlayer) {
+  player.actionsTakenThisGame++;
+  player.actionsTakenThisRound++;
 }

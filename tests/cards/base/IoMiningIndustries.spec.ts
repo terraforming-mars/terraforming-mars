@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustries';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('IoMiningIndustries', function() {
-  it('Should play', function() {
+describe('IoMiningIndustries', () => {
+  it('Should play', () => {
     const card = new IoMiningIndustries();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

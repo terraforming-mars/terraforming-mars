@@ -17,8 +17,11 @@ export class ByElection extends PreludeCard implements IProjectCard {
         cardNumber: 'Y02',
         renderData: CardRenderer.builder((b) => {
           b.rulingParty().plus().influence();
+          b.br;
+          b.plainText('Set the ruling party to one of your choice. Gain 1 influence.'),
+          b.br;
+          b.plainText('After being played, when you perform an action, the wild tag counts as any tag of your choice.');
         }),
-        description: 'Set the ruling party to one of your choice. Gain 1 influence.',
       },
     });
   }

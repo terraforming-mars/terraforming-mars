@@ -1,40 +1,52 @@
+import {inplaceRemove} from '../../common/utils/utils';
 import {IPlayer} from '../IPlayer';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Space} from '../boards/Space';
 import {Priority} from '../deferredActions/Priority';
+import {RunNTimes} from '../deferredActions/RunNTimes';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
-export class ExcavateSpacesDeferred extends DeferredAction {
-  private nth: number = 1;
+export class ExcavateSpacesDeferred extends RunNTimes<void> {
+  private spaces: Array<Space> | undefined;
+  private ignorePlacementRestrictions: boolean;
   constructor(
     player: IPlayer,
-    public count: number,
-    private ignorePlacementRestrictions: boolean = false,
+    count: number,
+    ignorePlacementRestrictions: boolean = false,
+    spaces?: ReadonlyArray<Space>,
   ) {
-    super(player, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
+    super(player, count, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
+    this.ignorePlacementRestrictions = ignorePlacementRestrictions;
+    this.spaces = spaces ? spaces.slice() : undefined;
   }
 
-  private selectSpace(): void {
-    const prefix = 'Select space to excavate';
-    const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
+  protected run() {
+    const title = this.createTitle('Select space to excavate');
     this.player.defer(() => {
-      return new SelectSpace(title,
-        UnderworldExpansion.excavatableSpaces(this.player, this.ignorePlacementRestrictions))
+      const spaces =
+        this.spaces ??
+        UnderworldExpansion.excavatableSpaces(this.player, {
+          ignorePlacementRestrictions: this.ignorePlacementRestrictions,
+        });
+      if (spaces.length === 0) {
+        const undergroundResource = UnderworldExpansion.drawExcavationToken(this.player.game);
+        this.player.game.log('${0} excavated ${1} from the draw pile', (b) =>
+          b.player(this.player).undergroundToken(undergroundResource));
+        UnderworldExpansion.claimToken(this.player, undergroundResource, /* isExcavate= */ true, /* space= */ undefined);
+        return this.next();
+      }
+
+      // slicing a copy because the spaces array is mutated between calls.
+      return new SelectSpace(title, spaces.slice())
         .andThen((space) => {
           UnderworldExpansion.excavate(this.player, space);
-          this.nth++;
-          if (this.nth <= this.count) {
-            this.selectSpace();
+          if (this.spaces) {
+            inplaceRemove(this.spaces, space);
           }
+          this.next();
           return undefined;
         });
-    });
-  }
-
-  public execute(): undefined {
-    if (this.count > 0) {
-      this.selectSpace();
-    }
+    }, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
     return undefined;
   }
 }

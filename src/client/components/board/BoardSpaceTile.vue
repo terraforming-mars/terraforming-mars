@@ -1,14 +1,17 @@
 <template>
-  <div :class="klass" :title="$t(description)" data-test="tile"/>
+  <div :class="klass" :title="$t(description)" data-test="tile">
+    <AdjacencyBonus v-if="aresExtension && tileType !== undefined" :tileType="tileType" />
+  </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
+import AdjacencyBonus from '@/client/components/AdjacencyBonus.vue';
 
 const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.OCEAN]: 'ocean',
@@ -54,6 +57,8 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.MARS_NOMADS]: '', // This never actually renders.
   [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
+  [TileType.NEW_HOLLAND]: 'new-holland',
+  [TileType.NEURAL_INSTANCE]: 'neural-instance',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -85,7 +90,7 @@ const descriptions: Record<TileType, string> = {
   [TileType.MINING_STEEL_BONUS]: 'Mining: steel bonus',
   [TileType.MINING_TITANIUM_BONUS]: 'Mining: titanium bonus',
   [TileType.MOON_MINE]: 'Moon Mine: 1 VP per adjacent road',
-  [TileType.MOON_HABITAT]: 'Moon Colony: 1 VP per adjacent road',
+  [TileType.MOON_HABITAT]: 'Moon Habitat: 1 VP per adjacent road',
   [TileType.MOON_ROAD]: 'Moon Road: 1 VP',
   [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station: 2 VP per adjacent road',
   [TileType.LUNAR_MINE_URBANIZATION]: 'Luna Mine Urbanization: counts as both a colony and a mine tile.',
@@ -94,13 +99,17 @@ const descriptions: Record<TileType, string> = {
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders: nothing may be placed here',
   [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
+
+  [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
+  [TileType.NEURAL_INSTANCE]: 'Neural Instance: MarsBot gains VP for adjacent non-human spaces',
 };
 
-export default Vue.extend({
-  name: 'board-space-tile',
+export default defineComponent({
+  name: 'BoardSpaceTile',
   props: {
     space: {
       type: Object as () => SpaceModel,
+      required: true,
     },
     aresExtension: {
       type: Boolean,
@@ -113,6 +122,9 @@ export default Vue.extend({
   data() {
     return {};
   },
+  components: {
+    AdjacencyBonus,
+  },
   computed: {
     tileType(): TileType | undefined {
       return this.space.tileType;
@@ -124,8 +136,12 @@ export default Vue.extend({
       return this.space.highlight;
     },
     description(): string {
-      if (this.tileType === undefined) return '';
-      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
+      if (this.tileType === undefined) {
+        return '';
+      }
+      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) {
+        return 'City in space.';
+      }
       return descriptions[this.tileType];
     },
     klass(): string {
@@ -141,17 +157,22 @@ export default Vue.extend({
         }
         css += ' board-space-tile--' + cssClass;
       } else {
-        if (this.spaceType === SpaceType.OCEAN) {
+        switch (this.spaceType) {
+        case SpaceType.OCEAN:
           css += ' board-space-type-ocean';
-        } else if (this.spaceType === SpaceType.COVE) {
+          break;
+        case SpaceType.COVE:
           if (this.highlight !== 'volcanic') {
             // Custom for Arabia Terra's space Tikhonarov.
             css += ' board-space-type-cove';
           } else {
             css += ' board-space-type-volcanic-cove';
           }
-        } else if (this.spaceType !== SpaceType.RESTRICTED) {
-          css += ` board-space-type-land`;
+          break;
+        case SpaceType.RESTRICTED:
+          break;
+        default:
+          css += ' board-space-type-land';
 
           if (this.highlight) {
             css += ` board-space-type-land-${this.highlight}`;

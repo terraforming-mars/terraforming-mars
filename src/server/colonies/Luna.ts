@@ -7,20 +7,24 @@ export class Luna extends Colony {
   constructor() {
     super({
       name: ColonyName.LUNA,
-      description: [
-        'Gain 2 M€ production',
-        'Gain n M€',
-        'Gain 2 M€',
-      ],
-      buildType: ColonyBenefit.GAIN_PRODUCTION,
-      buildQuantity: [2, 2, 2],
-      buildResource: Resource.MEGACREDITS,
-      tradeType: ColonyBenefit.GAIN_RESOURCES,
-      tradeQuantity: [1, 2, 4, 7, 10, 13, 17],
-      tradeResource: Resource.MEGACREDITS,
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusQuantity: 2,
-      colonyBonusResource: Resource.MEGACREDITS,
+      build: {
+        description: 'Gain 2 M€ production',
+        type: ColonyBenefit.GAIN_PRODUCTION,
+        quantity: [2, 2, 2],
+        resource: Resource.MEGACREDITS,
+      },
+      trade: {
+        description: 'Gain n M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [1, 2, 4, 7, 10, 13, 17],
+        resource: Resource.MEGACREDITS,
+      },
+      colony: {
+        description: 'Gain 2 M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 2,
+        resource: Resource.MEGACREDITS,
+      },
     });
   }
 }

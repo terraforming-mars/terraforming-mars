@@ -3,11 +3,13 @@ import {expect} from 'chai';
 import {ExcavatorLeasing} from '../../../src/server/cards/underworld/ExcavatorLeasing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ExcavatorLeasing', () => {
   let game: IGame;
@@ -33,32 +35,32 @@ describe('ExcavatorLeasing', () => {
     player.playedCards.push(card);
     player.megaCredits = 6;
 
-    standardProject.action(player);
+    standardProject.payAndExecute(player, Payment.of({megacredits: standardProject.getAdjustedCost(player)}));
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space.undergroundResources = 'plant1';
+    space.undergroundResources = 'plant2';
     selectSpace.cb(space);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 2}));
   });
 
   it('action - other player', () => {
     player.playedCards.push(card);
     player2.megaCredits = 6;
 
-    standardProject.action(player2);
+    standardProject.payAndExecute(player2, Payment.of({megacredits: standardProject.getAdjustedCost(player2)}));
     runAllActions(game);
 
     const selectSpace = cast(player2.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space.undergroundResources = 'plant1';
+    space.undergroundResources = 'plant2';
     selectSpace.cb(space);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
-    expect(player2.stock.asUnits()).deep.eq(Units.of({plants: 1}));
+    expect(player2.stock.asUnits()).deep.eq(Units.of({plants: 2}));
   });
 });

@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import * as responses from '../server/responses';
 
 import {Context} from './IHandler';
@@ -9,6 +9,7 @@ import {Handler} from './Handler';
 import {isProduction} from '../utils/server';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {RouteError} from './RouteError';
 
 type Encoding = 'gzip' | 'br';
 
@@ -56,8 +57,7 @@ export class ServeAsset extends Handler {
 
   public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
     if (req.url === undefined) {
-      responses.internalServerError(req, res, new Error('no url on request'));
-      return;
+      throw RouteError.internalServerError('no url on request');
     }
 
     // Remove leading slash.
@@ -67,7 +67,7 @@ export class ServeAsset extends Handler {
     const toFile: {file?: string, encoding?: Encoding } = this.toFile(path, supportedEncodings);
 
     if (toFile.file === undefined) {
-      return responses.notFound(req, res);
+      throw RouteError.notFound();
     }
 
     const file = toFile.file;
@@ -102,41 +102,39 @@ export class ServeAsset extends Handler {
 
     try {
       const data = await this.fileApi.readFile(file);
-      res.setHeader('Content-Length', data.length);
-      res.end(data);
       if (this.cacheAssets === true) {
         this.cache.set(file, data);
       }
+      res.setHeader('Content-Length', data.length);
+      res.end(data);
     } catch (err) {
       console.log(err);
-      responses.internalServerError(req, res, 'Cannot serve ' + path);
+      throw RouteError.internalServerError('Cannot serve ' + path);
     }
   }
 
   private toMainFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
-    let file = `build/${urlPath}`;
-    let encoding: Encoding | undefined;
-    if (encodings.has('br')) {
-      encoding = 'br';
-      file += '.br';
-    } else if (encodings.has('gzip')) {
-      encoding = 'gzip';
-      file += '.gz';
+    const file = `build/${urlPath}`;
+
+    // Only serve compressed versions in production. Development mode serves
+    // uncompressed versions because they can be hot-swapped.
+    if (isProduction()) {
+      if (encodings.has('br')) {
+        return {file: file + '.br', encoding: 'br'};
+      } else if (encodings.has('gzip')) {
+        return {file: file + '.gz', encoding: 'gzip'};
+      }
     }
 
-    // Return not-compressed .js files for development mode
-    if (!isProduction() && !this.fileApi.existsSync(file)) {
-      encoding = undefined;
-      file = `build/${urlPath}`;
-    }
-
-    return {file, encoding};
+    // Fallback on uncompressed file if in development or no compressed
+    // file exists.
+    return {file, encoding: undefined};
   }
 
   private toServiceWorkerFile(urlPath: string): { file?: string, encoding?: Encoding } {
-    const file = `build/src/client/${urlPath}`;
-
-    return {file};
+    return {
+      file: `build/${urlPath}`,
+    };
   }
 
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
@@ -159,16 +157,33 @@ export class ServeAsset extends Handler {
 
     case 'main.js':
     case 'main.js.map':
+    case 'vendors.js':
+    case 'vendors.js.map':
       return this.toMainFile(urlPath, encodings);
 
+    // sw.js is empty. Although not confirmed, it seems sw.js is necessary
+    // for mobile notifications. If confirmed that it is not necessary, this
+    // can be removed.
     case 'sw.js':
+    case '/sw.js':
       return this.toServiceWorkerFile(urlPath);
 
     case 'favicon.ico':
       return {file: 'assets/favicon.ico'};
 
     default:
-      if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg') || urlPath.endsWith('.json')) {
+      // Serve JS chunks produced by webpack code splitting.
+      if (urlPath.startsWith('chunks/')) {
+        const chunksRoot = path.resolve('./build/chunks');
+        const resolvedFile = path.resolve(path.normalize('build/' + urlPath));
+        if (resolvedFile.startsWith(chunksRoot)) {
+          if (urlPath.endsWith('.js') || urlPath.endsWith('.js.map')) {
+            return this.toMainFile(urlPath, encodings);
+          }
+        }
+      }
+
+      if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg') || urlPath.endsWith('.json') || urlPath.endsWith('.svg')) {
         const assetsRoot = path.resolve('./assets');
         const resolvedFile = path.resolve(path.normalize(urlPath));
 

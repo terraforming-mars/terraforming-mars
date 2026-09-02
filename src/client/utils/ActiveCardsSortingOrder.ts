@@ -1,9 +1,9 @@
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 
-export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {
+export function sortActiveCards(inCards: ReadonlyArray<CardModel>): ReadonlyArray<CardModel> {
   const firstCardIndex = -1;
-  return inCards.slice().sort(function(cardA: CardModel, cardB: CardModel) {
+  return inCards.toSorted(function(cardA: CardModel, cardB: CardModel) {
     return (ActiveCardsSortingOrder.get(cardA.name) || firstCardIndex) - (ActiveCardsSortingOrder.get(cardB.name) || firstCardIndex);
   });
 }

@@ -20,7 +20,7 @@ export class MartianLumberCorp extends Card {
       requirements: {greeneries: 2},
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X60',
         renderData: CardRenderer.builder((b) => {
           b.effect('When playing a building tag, plants may be used as 3 M€ each.',
             (eb) => eb.tag(Tag.BUILDING).startEffect.plants(1).equals().megacredits(3)).br;

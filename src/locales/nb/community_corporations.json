@@ -1,5 +1,5 @@
 {
-    "Agricola Inc": "Agricola Inc",
+    "Agricola Inc": "",
     "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Du starter med 1 planteproduksjon, 1 M€ produksjon, 1 varmeproduksjon og 40 M€.",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Effekt: Ved spillslutt, score -2 / 0 / 1 / 2 SP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.",
 
@@ -15,10 +15,10 @@
     "You start with 38 M€ and 1 energy production.": "Du starter med 38 M€ og 1 energiproduksjon.",
     "Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Spill en spilt hendelse fra en hvilken som helst spiller (INKLUDERT hendelser som plasserer spesialplater) ved å betale kostnaden KUN i M€ (rabatter og refusjoner gjelder), og FJERN HENDELSEN FRA SPILLET.",
 
-    "Midas": "Midas",
+    "Midas": "",
     "You start with 120 M€. Lower your TR 7 steps.": "Du starter med 120 M€. Senk din TR 7 trinn.",
 
-    "Curosity II": "Curosity II",
+    "Curosity II": "",
     "You start with 40 M€ and 2 steel production.": "Du starter med 40 M€ og 2 stålproduksjon.",
     "When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "Når du plasserer en brikke på et område som gir deg en RESSURS som plasseringsbonus, eller på toppen av en annen plate, kan du betale 2 M€ for å trekke et kort.",
 

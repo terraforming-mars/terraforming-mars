@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ImportedHeavyMachinery', () => {
   let game: IGame;
@@ -22,7 +23,7 @@ describe('ImportedHeavyMachinery', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);

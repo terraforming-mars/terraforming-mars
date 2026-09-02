@@ -6,6 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
+import {ICard} from '../ICard';
 
 export class TitanManufacturingColony extends ActionCard implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
       },
 
       metadata: {
-        cardNumber: 'U44',
+        cardNumber: 'U044',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.',
             (ab) => ab.tag(Tag.JOVIAN).startEffect.resource(CardResource.TOOL)).br;
@@ -33,7 +34,7 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
     });
   }
 
-  onCardPlayed(player: IPlayer, card: IProjectCard): undefined {
+  onCardPlayed(player: IPlayer, card: ICard): undefined {
     const count = card.tags.filter((tag) => tag === Tag.JOVIAN).length;
     player.addResourceTo(this, {qty: count, log: true});
     return undefined;

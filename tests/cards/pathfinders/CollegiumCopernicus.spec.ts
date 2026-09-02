@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {cast, fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
+import {fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -16,16 +16,16 @@ import {Pluto} from '../../../src/server/colonies/Pluto';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {Tag} from '../../../src/common/cards/Tag';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('CollegiumCopernicus', function() {
+describe('CollegiumCopernicus', () => {
   let card: CollegiumCopernicus;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CollegiumCopernicus();
     [game, player] = testGame(2, {coloniesExtension: true, pathfindersExpansion: true});
-    player.setCorporationForTest(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),
@@ -55,7 +55,7 @@ describe('CollegiumCopernicus', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('action with multiple coloniess available', function() {
+  it('action with multiple coloniess available', () => {
     game.colonies = [new Luna(), new Triton()];
     card.resourceCount = 10;
 
@@ -68,6 +68,7 @@ describe('CollegiumCopernicus', function() {
 
 
   it('is available through standard trade action', () => {
+    player.playedCards.push(card);
     const luna = new Luna();
     player.game.colonies = [luna];
 
@@ -100,16 +101,17 @@ describe('CollegiumCopernicus', function() {
     expect(player.megaCredits).eq(2);
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player);
+    player.playCorporationCard(card);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 
   it('onCardPlayed', () => {
+    player.playedCards.push(card);
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
@@ -125,9 +127,9 @@ describe('CollegiumCopernicus', function() {
     expect(card.resourceCount).eq(0);
   });
 
-  it('initialAction', function() {
+  it('initialAction', () => {
     expect(player.cardsInHand).is.empty;
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SCIENCE))).has.length(2);

@@ -27,29 +27,29 @@ describe('LunaMiningHub', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 0;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 4;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.titanium = 3;
     player.steel = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -57,7 +57,7 @@ describe('LunaMiningHub', () => {
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const placeTileAction = game.deferredActions.pop() as PlaceSpecialMoonTile;
@@ -65,7 +65,7 @@ describe('LunaMiningHub', () => {
     placeTileAction.execute()!.cb(space);
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     expect(space.player).eq(player);
     expect(space.tile!.tileType).eq(TileType.LUNA_MINING_HUB);

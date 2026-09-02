@@ -11,7 +11,7 @@ export class NarrativeSpin extends Card implements IProjectCard {
       name: CardName.NARRATIVE_SPIN,
       type: CardType.EVENT,
       cost: 5,
-      tags: [Tag.EARTH],
+      tags: [Tag.CRIME],
 
       behavior: {
         underworld: {corruption: 2},
@@ -21,7 +21,7 @@ export class NarrativeSpin extends Card implements IProjectCard {
       victoryPoints: -1,
 
       metadata: {
-        cardNumber: 'U37',
+        cardNumber: 'U037',
         renderData: CardRenderer.builder((b) => {
           b.corruption(2);
         }),

@@ -12,7 +12,7 @@ export class VitalColony extends PreludeCard {
       tags: [Tag.MARS, Tag.SPACE],
 
       metadata: {
-        cardNumber: 'P08',
+        cardNumber: 'PfP11',
         renderData: CardRenderer.builder((b) => {
           b.colonies().text('2x bonus');
         }),

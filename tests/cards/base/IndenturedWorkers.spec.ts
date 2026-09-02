@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, testGame} from '../../TestingUtils';
+import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('IndenturedWorkers', function() {
+describe('IndenturedWorkers', () => {
   let card: IndenturedWorkers;
   let player: TestPlayer;
 

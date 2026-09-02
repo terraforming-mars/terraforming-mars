@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Solarnet} from '../../../src/server/cards/venusNext/Solarnet';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Solarnet', function() {
-  it('Should play', function() {
+describe('Solarnet', () => {
+  it('Should play', () => {
     const card = new Solarnet();
     const [/* game */, player] = testGame(2);
     expect(card.canPlay(player)).is.not.true;

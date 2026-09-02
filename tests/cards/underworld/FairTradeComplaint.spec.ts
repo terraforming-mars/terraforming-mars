@@ -6,7 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {fakeCard} from '../../TestingUtils';
 
-describe('FairTradeComplaint', function() {
+describe('FairTradeComplaint', () => {
   let card: FairTradeComplaint;
   let player: TestPlayer;
   let game: IGame;
@@ -45,7 +45,7 @@ describe('FairTradeComplaint', function() {
         player.cardsInHand.push(fakeCard());
       }
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player.cardsInHand).has.length(run.expect.handSize);
       expect(player.megaCredits).eq(run.expect.mc);

@@ -1,20 +1,21 @@
 import {expect} from 'chai';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
-import {churnAction} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Celestic', function() {
-  it('Should play', function() {
+describe('Celestic', () => {
+  it('Should play', () => {
     const card = new Celestic();
     const [/* game */, player] = testGame(2);
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
+    player.playedCards.push(card);
 
-    player.setCorporationForTest(card);
-
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
+
     player.addResourceTo(card, 4);
+
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

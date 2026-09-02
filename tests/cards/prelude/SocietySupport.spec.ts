@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/server/cards/prelude/SocietySupport';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('SocietySupport', function() {
-  it('Should play', function() {
+describe('SocietySupport', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new SocietySupport();
     cast(card.play(player), undefined);

@@ -6,8 +6,8 @@ import {CardResource} from '../../../src/common/CardResource';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {CardType} from '../../../src/common/cards/CardType';
 
-describe('floaterCards', function() {
-  it('Ensure static list contains all cards that mention floaters', function() {
+describe('floaterCards', () => {
+  it('Ensure static list contains all cards that mention floaters', () => {
     const found: Array<CardName> = [];
     ALL_MODULE_MANIFESTS.forEach((manifest) => {
       CardManifest.entries(manifest.projectCards).forEach((entry) => {
@@ -16,11 +16,17 @@ describe('floaterCards', function() {
 
         // Only looking for cards that mention floaters in the metadata
         // or requirements. Cards with floater resources don't need to be hand-verified.
-        if (card.resourceType === CardResource.FLOATER) return;
-        if (card.type === CardType.PROXY) return;
+        if (card.resourceType === CardResource.FLOATER) {
+          return;
+        }
+        if (card.type === CardType.PROXY) {
+          return;
+        }
 
         const renderData = card.metadata.renderData;
-        if (renderData === undefined) return;
+        if (renderData === undefined) {
+          return;
+        }
 
         const string = JSON.stringify(renderData);
         if (string.toLowerCase().includes('floater')) {

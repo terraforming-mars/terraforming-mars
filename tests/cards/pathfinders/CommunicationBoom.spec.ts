@@ -1,13 +1,14 @@
 import {expect} from 'chai';
-import {cast, fakeCard, runAllActions, testGame} from '../../TestingUtils';
+import {fakeCard, runAllActions, testGame} from '../../TestingUtils';
 import {CommunicationBoom} from '../../../src/server/cards/pathfinders/CommunicationBoom';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('CommunicationBoom', function() {
-  it('resolve play', function() {
+describe('CommunicationBoom', () => {
+  it('resolve play', () => {
     const card = new CommunicationBoom();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -16,11 +17,11 @@ describe('CommunicationBoom', function() {
     const b = fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
     const c = fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
     const d = fakeCard({name: 'D' as CardName, resourceType: CardResource.DATA});
-    player.playedCards = [a, b, c, d];
+    player.playedCards.push(a, b, c, d);
 
     const e = fakeCard({name: 'E' as CardName, resourceType: CardResource.DATA});
     const f = fakeCard({name: 'F' as CardName, resourceType: CardResource.DATA});
-    player2.playedCards = [e, f];
+    player2.playedCards.push(e, f);
 
     player.megaCredits = 8;
     player2.megaCredits = 12;
@@ -33,7 +34,7 @@ describe('CommunicationBoom', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).eq(0);
     expect(a.resourceCount).eq(0);

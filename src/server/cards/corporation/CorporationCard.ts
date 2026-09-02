@@ -4,6 +4,7 @@ import {Card, StaticCardProperties} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 import {IActionCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
 
 export abstract class CorporationCard extends Card implements ICorporationCard {
   constructor(external: Omit<StaticCardProperties, 'type'>) {
@@ -12,6 +13,13 @@ export abstract class CorporationCard extends Card implements ICorporationCard {
   }
   public override get type(): CardType.CORPORATION {
     return CardType.CORPORATION;
+  }
+
+  public initialAction(player: IPlayer): PlayerInput | undefined {
+    if (this.firstAction !== undefined) {
+      getBehaviorExecutor().execute(this.firstAction, player, this);
+    }
+    return undefined;
   }
 }
 

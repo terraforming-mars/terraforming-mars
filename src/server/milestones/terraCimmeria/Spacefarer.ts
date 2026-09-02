@@ -1,6 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {BaseMilestone} from '../IMilestone'; export class Spacefarer extends BaseMilestone {
+import {BaseMilestone} from '../IMilestone';
+
+export class Spacefarer extends BaseMilestone {
   constructor() {
     super(
       'Spacefarer',
@@ -9,6 +11,6 @@ import {BaseMilestone} from '../IMilestone'; export class Spacefarer extends Bas
   }
 
   public getScore(player: IPlayer): number {
-    return player.tags.count(Tag.SPACE);
+    return player.tags.count(Tag.SPACE, 'milestone');
   }
 }

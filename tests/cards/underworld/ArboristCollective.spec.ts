@@ -1,10 +1,11 @@
 import {expect} from 'chai';
 import {ArboristCollective} from '../../../src/server/cards/underworld/ArboristCollective';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ArboristCollective', () => {
   let card: ArboristCollective;
@@ -20,8 +21,8 @@ describe('ArboristCollective', () => {
     player.playCorporationCard(card);
     runAllActions(game);
 
-    expect(player.stock.plants).eq(3);
-    expect(player.production.plants).eq(1);
+    expect(player.stock.plants).eq(2);
+    expect(player.production.plants).eq(2);
   });
 
   it('canAct', () => {
@@ -32,7 +33,7 @@ describe('ArboristCollective', () => {
   });
 
   it('action', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
 
     card.resourceCount = 3;
 
@@ -44,7 +45,7 @@ describe('ArboristCollective', () => {
   });
 
   it('onCardPlayed', () => {
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
 
     expect(card.resourceCount).eq(0);
 

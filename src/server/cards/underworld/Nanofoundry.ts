@@ -23,7 +23,7 @@ export class Nanofoundry extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U74',
+        cardNumber: 'U074',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().energy(5, {digit})).cards(1).slash().tag(Tag.POWER);
         }),

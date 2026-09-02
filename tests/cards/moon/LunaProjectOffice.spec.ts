@@ -1,35 +1,34 @@
 import {expect} from 'chai';
-import {cast, finishGeneration} from '../../TestingUtils';
+import {finishGeneration} from '../../TestingUtils';
 import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffice';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
-    const [/* game */, player] = testGame(1, {moonExpansion: true});
+    const [/* game */, player] = testGame(1);
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
     player.tagsForTest = {science: 2};
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.tagsForTest = {science: 1};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
-  it('play - solo', function() {
-    const [game, player] = testGame(1, {
-      moonExpansion: true,
-    });
+  it('play - solo', () => {
+    const [game, player] = testGame(1);
 
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -62,9 +61,8 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but they take
   // different paths in the code.
-  it('play - 2 player - draft', function() {
+  it('play - 2 player - draft', () => {
     const [game, player, player2] = testGame(2, {
-      moonExpansion: true,
       draftVariant: true,
       turmoilExtension: false,
     });
@@ -72,7 +70,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -112,16 +110,13 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but it takes
   // different paths in the code.
-  it('play - 2 player - no draft', function() {
-    const [game, player, player2] = testGame(2, {
-      moonExpansion: true,
-      draftVariant: false,
-    });
+  it('play - 2 player - no draft', () => {
+    const [game, player, player2] = testGame(2, {draftVariant: false});
 
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 

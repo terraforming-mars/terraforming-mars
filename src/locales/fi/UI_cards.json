@@ -1,0 +1,30 @@
+{
+  "prelude": "Alkusoitto",
+  "Power": "Energia",
+  "Venus": "",
+  "Earth": "Maa",
+  "Jovian": "Jupiter",
+  "Ocean": "Valtameri",
+  "Global Requirements": "Globaalit vaatimukset",
+  "Venus requirements": "Venus-vaatimukset",
+  "effect": "vaikutus",
+  "action": "toiminto",
+  "flip": "käännä",
+  "next card": "seuraava kortti",
+  "Copy A": "Kopioi",
+  "OR": "TAI",
+  "steal": "varasta",
+  "x": " × ",
+  "2x": "2 × ",
+  "x2": " × 2",
+  "-X": " − X",
+  "Gain 3 plants.": "Saat 3 kasvia.",
+  "colony": "siirtokunta",
+  "awards": "palkinnot",
+
+  "play": "pelaa",
+  "replay": "pelaa uudelleen",
+
+  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla."
+
+}

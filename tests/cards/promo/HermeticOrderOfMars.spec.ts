@@ -8,13 +8,13 @@ import {addGreenery, addOcean, setOxygenLevel} from '../../TestingUtils';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 
-describe('HermeticOrderOfMars', function() {
+describe('HermeticOrderOfMars', () => {
   let card: HermeticOrderOfMars;
   let player: TestPlayer;
   let game: IGame;
   let board: MarsBoard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HermeticOrderOfMars();
     [game, player/* , player2 */] = testGame(2);
     board = game.board;

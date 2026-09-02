@@ -8,18 +8,18 @@ import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
-describe('LobbyHalls', function() {
+describe('LobbyHalls', () => {
   let card: LobbyHalls;
   let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LobbyHalls();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true, venusNextExtension: true});
     turmoil = game.turmoil!;
   });
 
@@ -30,7 +30,7 @@ describe('LobbyHalls', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
@@ -41,7 +41,7 @@ describe('LobbyHalls', function() {
 
     card.play(player);
 
-    expect(game.deferredActions.length).eq(2);
+    expect(game.deferredActions).has.length(2);
 
     // First action is define a clone tag
     assertCloneTagAction(game.deferredActions.pop()!);
@@ -52,7 +52,7 @@ describe('LobbyHalls', function() {
 
   function assertCloneTagAction(action: IDeferredAction) {
     const options = cast(action, DeclareCloneTag).execute();
-    options.options[0].cb();
+    options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);
   }
 });

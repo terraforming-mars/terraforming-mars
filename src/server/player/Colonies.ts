@@ -2,7 +2,7 @@ import {MAX_FLEET_SIZE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 import {ColoniesHandler} from '../colonies/ColoniesHandler';
 import {AndOptions} from '../inputs/AndOptions';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
 import {IColony} from '../colonies/IColony';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
@@ -13,18 +13,19 @@ import {SelectOption} from '../inputs/SelectOption';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
 import {TradeWithHectateSpeditions} from '../cards/underworld/HecateSpeditions';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 export class Colonies {
   private player: IPlayer;
 
-  // Each ship in the player's fleet allows a single trade.
+  /** The number of trade fleets assigned to this player. */
   private fleetSize: number = 1;
-  public tradesThisGeneration: number = 0;
+  /** The number of consumed trade fleets. When this == `fleetSize` the player has no trade fleets. */
+  public usedTradeFleets: number = 0;
   // When trading you may increase the Colony track this many steps.
   public tradeOffset: number = 0;
 
@@ -43,7 +44,7 @@ export class Colonies {
    */
   public canTrade() {
     return ColoniesHandler.tradeableColonies(this.player.game).length > 0 &&
-      this.getFleetSize() > this.tradesThisGeneration &&
+      this.getFleetSize() > this.usedTradeFleets &&
       this.player.game.tradeEmbargo !== true;
   }
 
@@ -69,9 +70,9 @@ export class Colonies {
 
     let selected: IColonyTrader | undefined = undefined;
 
-    const howToPayForTrade = new OrOptions();
-    howToPayForTrade.title = 'Pay trade fee';
-    howToPayForTrade.buttonLabel = 'Pay';
+    const howToPayForTrade = new OrOptions()
+      .setTitle('Pay trade fee')
+      .setButtonLabel('Pay');
     handlers.forEach((handler) => {
       if (handler.canUse()) {
         howToPayForTrade.options.push(new SelectOption(
@@ -95,24 +96,43 @@ export class Colonies {
         return undefined;
       });
 
-    const trade = new AndOptions(howToPayForTrade, selectColony);
-    trade.title = 'Trade with a colony tile';
-    trade.buttonLabel = 'Trade';
-
-    return trade;
+    return new AndOptions(howToPayForTrade, selectColony)
+      .setTitle('Trade with a colony tile')
+      .setButtonLabel('Trade');
   }
 
-  public getPlayableColonies(allowDuplicate: boolean = false) {
+  public getPlayableColonies(allowDuplicate: boolean = false, canAffordOptions: number | CanAffordOptions = 0) {
+    const options: CanAffordOptions = typeof canAffordOptions === 'number' ? {cost: canAffordOptions} : canAffordOptions;
+
     return this.player.game.colonies
-      .filter((colony) => colony.isActive && !colony.isFull())
-      .filter((colony) => allowDuplicate || !colony.colonies.includes(this.player.id));
+      .filter((colony) => {
+        if (colony.isActive === false) {
+          return false;
+        }
+        if (colony.isFull()) {
+          return false;
+        }
+        if (!allowDuplicate && colony.colonies.includes(this.player.id)) {
+          return false;
+        }
+        if (colony.name === ColonyName.VENUS && !this.player.canAfford({...options, tr: {venus: 1}})) {
+          return false;
+        }
+        if (colony.name === ColonyName.EUROPA && !this.player.canAfford({...options, tr: {oceans: 1}})) {
+          return false;
+        }
+        if (colony.name === ColonyName.LEAVITT) {
+          const pharmacyUnion = this.player.tableau.get(CardName.PHARMACY_UNION);
+          if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({...options, tr: {tr: 1}})) {
+            return false;
+          }
+        }
+        return true;
+      });
   }
 
-  public calculateVictoryPoints(victoryPointsBreakdown: VictoryPointsBreakdown) {
-    // Titania Colony VP
-    if (this.player.colonies.victoryPoints > 0) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.victoryPoints, 'Colony VP');
-    }
+  public getVictoryPoints(): number {
+    return this.player.colonies.victoryPoints;
   }
 
   public getFleetSize(): number {
@@ -120,13 +140,17 @@ export class Colonies {
   }
 
   public increaseFleetSize(): void {
-    if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+    if (this.fleetSize < MAX_FLEET_SIZE) {
+      this.fleetSize++;
+    }
   }
 
   public decreaseFleetSize(): void {
     // This fleet size management is a little tricky, because with The Moon, it's possible to
     // have more fleets than MAX_FLEET_SIZE which are then discarded.
-    if (this.fleetSize > 0) this.fleetSize--;
+    if (this.fleetSize > 0) {
+      this.fleetSize--;
+    }
   }
 
   public setFleetSize(fleetSize: number) {
@@ -139,15 +163,23 @@ export class Colonies {
     // retrieve their fleets.
     // See Colony.ts for the other half of this effect, and Game.ts which disables it.
     if (syndicatePirateRaider === undefined) {
-      this.tradesThisGeneration = 0;
+      this.usedTradeFleets = 0;
     } else if (syndicatePirateRaider === this.player.id) {
-      this.tradesThisGeneration = 0;
+      // CEO effect: Disable all other players from trading next gen,
+      // but free up all colonies (don't leave their trade fleets stuck there)
+      if (this.player.tableau.has(CardName.HUAN)) {
+        for (const player of this.player.opponents) {
+          // Magic number high enough to disable other players' trading
+          player.colonies.usedTradeFleets = 50;
+        }
+      }
+      this.usedTradeFleets = 0;
     }
   }
 }
 
 export class TradeWithEnergy implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = ENERGY_TRADE_COST - player.colonies.tradeDiscount;
@@ -168,7 +200,7 @@ export class TradeWithEnergy implements IColonyTrader {
 }
 
 export class TradeWithTitanium implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = TITANIUM_TRADE_COST - player.colonies.tradeDiscount;
@@ -190,11 +222,11 @@ export class TradeWithTitanium implements IColonyTrader {
 
 
 export class TradeWithMegacredits implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = MC_TRADE_COST- player.colonies.tradeDiscount;
-    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    const adhai = player.tableau.get(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     if (adhai !== undefined) {
       const adhaiDiscount = Math.floor(adhai.resourceCount / 2);
       this.tradeCost = Math.max(0, this.tradeCost - adhaiDiscount);

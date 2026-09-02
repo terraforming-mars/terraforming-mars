@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {GuerillaEcologists} from '../../../src/server/cards/underworld/GuerillaEcologists';
 import {testGame} from '../../TestGame';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('GuerillaEcologists', () => {
   const canPlayRuns = [
@@ -71,7 +72,7 @@ describe('GuerillaEcologists', () => {
     expect(player.plants).eq(0);
   });
 
-  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', function() {
+  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', () => {
     const card = new GuerillaEcologists();
     const [game, player] = testGame(2);
     game.board = EmptyBoard.newInstance();

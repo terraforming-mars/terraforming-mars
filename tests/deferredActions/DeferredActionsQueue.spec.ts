@@ -13,7 +13,7 @@ describe('DeferredActionsQueue', () => {
     queue.push(new SimpleDeferredAction(player, () => expectedInput));
     queue.push(new SimpleDeferredAction(otherPlayer, () => undefined));
     let finished = false;
-    expect(queue.length).eq(2);
+    expect(queue).has.length(2);
     queue.runAllFor(player, () => {
       finished = true;
     });
@@ -21,6 +21,6 @@ describe('DeferredActionsQueue', () => {
     player.process({type: 'option'});
     expect(player.getWaitingFor()).eq(undefined);
     expect(finished).eq(true);
-    expect(queue.length).eq(1);
+    expect(queue).has.length(1);
   });
 });

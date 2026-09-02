@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {RimFreighters} from '../../../src/server/cards/colonies/RimFreighters';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('RimFreighters', function() {
-  it('Should play', function() {
+describe('RimFreighters', () => {
+  it('Should play', () => {
     const card = new RimFreighters();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

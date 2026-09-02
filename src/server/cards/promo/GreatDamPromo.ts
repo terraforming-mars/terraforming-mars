@@ -8,7 +8,7 @@ import {Card} from '../Card';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceTile} from '../../deferredActions/PlaceTile';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {message} from '../../logs/MessageBuilder';
 
@@ -45,17 +45,14 @@ export class GreatDamPromo extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const availableSpaces = this.getAvailableSpaces(player);
-    if (availableSpaces.length < 1) return undefined;
-
-    return new SelectSpace(
-      message('Select space for ${0}', (b) => b.card(this)),
-      availableSpaces)
-      .andThen((space) => {
-        player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
-        space.adjacency = this.adjacencyBonus;
-        return undefined;
-      });
+    player.game.defer(
+      new PlaceTile(player, {
+        tile: {tileType: TileType.GREAT_DAM, card: this.name},
+        on: () => this.getAvailableSpaces(player),
+        title: message('Select space for ${0}', (b) => b.card(this)),
+        adjacencyBonus: this.adjacencyBonus,
+      }));
+    return undefined;
   }
 
   private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {

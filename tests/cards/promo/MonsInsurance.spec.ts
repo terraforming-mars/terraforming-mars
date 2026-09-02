@@ -11,8 +11,10 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MonsInsurance', () => {
   let card: MonsInsurance;
@@ -25,7 +27,7 @@ describe('MonsInsurance', () => {
 
     [/* game */, player, player2, player3] = testGame(3);
     card.play(player);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -39,9 +41,9 @@ describe('MonsInsurance', () => {
     player2.titanium = 3;
 
     const card2 = new Sabotage();
-    const action = cast(card2.play(player3), OrOptions);
+    const orOptions = cast(card2.play(player3), OrOptions);
 
-    action.options[1].cb();
+    orOptions.options[1].cb();
     expect(player2.titanium).to.eq(0);
     expect(player2.megaCredits).to.eq(2);
     expect(player.megaCredits).to.eq(0);
@@ -80,7 +82,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.stock.add(Resource.STEEL, -1, {log: false, from: player3});
+    player2.stock.add(Resource.STEEL, -1, {log: false, from: {player: player3}});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -91,7 +93,10 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.stock.add(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.stock.add(Resource.STEEL, -1, {
+      log: false,
+      from: {globalEvent: GlobalEventName.ECO_SABOTAGE},
+    });
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -102,7 +107,7 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: player3});
+    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: {player: player3}});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -113,7 +118,10 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.production.add(Resource.MEGACREDITS, -1, {
+      log: false,
+      from: {globalEvent: GlobalEventName.ECO_SABOTAGE},
+    });
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -122,14 +130,15 @@ describe('MonsInsurance', () => {
 
 describe('MonsInsurance - Solo', () => {
   let card: MonsInsurance;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(() => {
     card = new MonsInsurance();
 
-    [/* game */, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {preludeExtension: true});
     card.play(player);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -142,7 +151,7 @@ describe('MonsInsurance - Solo', () => {
     // AirRaid steals 5 resources from any player.
     const airRaid = new AirRaid();
     airRaid.play(player);
-    runAllActions(player.game);
+    runAllActions(game);
     cast(player.getWaitingFor(), undefined);
 
     // 10 + 5 - 3 = 12
@@ -155,7 +164,7 @@ describe('MonsInsurance - Solo', () => {
     // Birds removes 2 plant production
     const birds = new Birds();
     birds.play(player);
-    runAllActions(player.game);
+    runAllActions(game);
     cast(player.getWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(7);
@@ -168,8 +177,10 @@ describe('MonsInsurance - Solo', () => {
     const comet = new DeimosDown();
 
     comet.play(player);
-    runAllActions(player.game);
-    cast(player.getWaitingFor(), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.getWaitingFor(), OrOptions);
+    orOptions.options[0].cb();
+    runAllActions(game);
 
     expect(player.megaCredits).eq(7);
   });
@@ -179,11 +190,11 @@ describe('MonsInsurance - Solo', () => {
 
     // Predators steals one animal from another player
     const predators = new Predators();
-    player.playedCards = [predators];
+    player.playedCards.push(predators);
     expect(predators.resourceCount).eq(0);
 
     predators.action(player);
-    runAllActions(player.game);
+    runAllActions(game);
     cast(player.getWaitingFor(), undefined);
 
     expect(predators.resourceCount).eq(1);

@@ -11,14 +11,14 @@ export class OldWorldMafia extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.OLD_WORLD_MAFIA,
       cost: 11,
-      tags: [Tag.EARTH],
+      tags: [Tag.EARTH, Tag.CRIME],
 
       behavior: {
         underworld: {corruption: {tag: Tag.EARTH, per: 2}},
       },
 
       metadata: {
-        cardNumber: 'U07',
+        cardNumber: 'U007',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).slash().tag(Tag.EARTH, 2);
         }),

@@ -8,6 +8,8 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {message} from '../logs/MessageBuilder';
+import {CardName} from '../../common/cards/CardName';
 
 export type Source = 'self' | 'opponents' | 'all';
 export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
@@ -19,8 +21,10 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private blockable: boolean;
   private autoselect: boolean;
   private title: string | Message;
+  private log: boolean;
+  private min: number;
 
-  public override priority = Priority.ATTACK_OPPONENT;
+  public override priority: Priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: IPlayer,
     cardResource: CardResource | undefined,
@@ -34,6 +38,9 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       autoselect?: boolean
       title?: string | Message,
       blockable?: boolean,
+      log?: boolean,
+      /** Minimum resources a card must have to be offered as a target. Default 1 — most callers remove "up to count," not exactly count. */
+      min?: number,
     }) {
     super(player, Priority.ATTACK_OPPONENT);
     this.cardResource = cardResource;
@@ -42,7 +49,9 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     this.mandatory = options?.mandatory ?? true;
     this.blockable = options?.blockable ?? true;
     this.autoselect = options?.autoselect ?? true;
+    this.log = options?.log ?? false;
     this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
+    this.min = options?.min ?? 1;
     if (this.source === 'self') {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
       if (this.blockable) {
@@ -58,7 +67,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       return undefined;
     }
 
-    const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source);
+    const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source, this.min);
 
     if (cards.length === 0) {
       this.cb({card: undefined, owner: undefined, proceed: false});
@@ -69,7 +78,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       this.title,
       'Remove resource(s)',
       cards,
-      {showOwner: true})
+      {showOwner: this.source !== 'self'})
       .andThen(([card]) => {
         this.attack(card);
         return undefined;
@@ -91,41 +100,55 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private attack(card: ICard) {
     const target = this.player.game.getCardPlayerOrThrow(card.name);
 
-    // // TODO(kberg): Consolidate the blockable in mayBlock.
-    // if (this.blockable === false) {
-    //   target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
-    //   this.cb(true);
-    //   return;
-    // }
-    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
+    // TODO(kberg): Consolidate the blockable in maybeBlock.
+    if (this.blockable === false) {
+      target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      this.cb({card: card, owner: target, proceed: true});
+      return;
+    }
+    const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
+    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
       if (proceed) {
-        target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+        target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
-    })));
+    }));
   }
 
-  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
+  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all', min: number = 1): Array<ICard> {
     const resourceCards: Array<ICard> = [];
-    for (const p of player.game.getPlayers()) {
-      // Making this a function just to delay calling getCardsWithResources unless it's needed.
-      const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
+    for (const p of player.game.players) {
       if (p === player) {
         if (source !== 'opponents') {
-          resourceCards.push(...get());
+          for (const card of p.getCardsWithResources(resourceType)) {
+            if (card.resourceCount < min) {
+              continue;
+            }
+            // Protected resources can't be removed, even by the owner (e.g. Pets), except for
+            // Bioengineering Enclosure, whose protection only stops *other* players.
+            if (card.protectedResources === true && card.name !== CardName.BIOENGINEERING_ENCLOSURE) {
+              continue;
+            }
+            resourceCards.push(card);
+          }
         }
       } else {
         if (source !== 'self') {
-          switch (resourceType) {
-          case CardResource.ANIMAL:
-          case CardResource.MICROBE:
-            if (!p.hasProtectedHabitats()) {
-              resourceCards.push(...get());
+          const hasProtetedHabitats = p.tableau.has(CardName.PROTECTED_HABITATS);
+          for (const card of p.getCardsWithResources(resourceType)) {
+            if (card.resourceCount < min) {
+              continue;
             }
-            break;
-          default:
-            resourceCards.push(...get());
+            if (card.protectedResources === true) {
+              continue;
+            }
+            if (hasProtetedHabitats) {
+              if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
+                continue;
+              }
+            }
+            resourceCards.push(card);
           }
         }
       }

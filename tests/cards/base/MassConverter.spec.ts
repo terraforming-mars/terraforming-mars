@@ -6,26 +6,26 @@ import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {testGame} from '../../TestGame';
 
-describe('MassConverter', function() {
+describe('MassConverter', () => {
   let card: MassConverter;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MassConverter();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.tagsForTest = {science: 4};
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.tagsForTest = {science: 5};
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     expect(player.production.energy).to.eq(6);

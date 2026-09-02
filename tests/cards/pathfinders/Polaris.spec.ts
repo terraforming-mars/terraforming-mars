@@ -1,26 +1,27 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {IGame} from '../../../src/server/IGame';
-import {addOcean, cast, runAllActions} from '../../TestingUtils';
+import {addOcean, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('Polaris', function() {
+describe('Polaris', () => {
   let card: Polaris;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Polaris();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
   });
 
-  it('initial action', function() {
-    player.deferInitialAction(card);
+  it('initial action', () => {
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const space = game.board.getSpaceOrThrow('06');
@@ -38,7 +39,7 @@ describe('Polaris', function() {
     expect(player2.megaCredits).to.eq(0);
   });
 
-  it('When anyone plays ocean tile', function() {
+  it('When anyone plays ocean tile', () => {
     addOcean(player2, '06');
     runAllActions(game);
 
@@ -48,7 +49,7 @@ describe('Polaris', function() {
     expect(player2.megaCredits).to.eq(0);
   });
 
-  it('When you play ocean tile', function() {
+  it('When you play ocean tile', () => {
     addOcean(player, '06');
     runAllActions(game);
 

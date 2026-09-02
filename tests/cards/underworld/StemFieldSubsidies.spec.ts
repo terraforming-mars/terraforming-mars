@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {StemFieldSubsidies} from '../../../src/server/cards/underworld/StemFieldSubsidies';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
-import {assertIsAddResourceToCard} from '../../assertions';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('StemFieldSubsidies', () => {
   let card: StemFieldSubsidies;
@@ -37,21 +38,11 @@ describe('StemFieldSubsidies', () => {
 
   it('onCardPlayed, one tag, one card', () => {
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
-    runAllActions(game);
-    assertIsIdentificationAction(player, player.popWaitingFor());
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).eq(1);
   });
 
   it('onCardPlayed, two tags, one card', () => {
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
-    runAllActions(game);
-    assertIsIdentificationAction(player, player.popWaitingFor());
-    runAllActions(game);
-    assertIsIdentificationAction(player, player.popWaitingFor());
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).eq(2);
   });
 
@@ -60,12 +51,32 @@ describe('StemFieldSubsidies', () => {
 
     player.playedCards.push(otherCard);
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('Test action', () => {
+    card.resourceCount = 1;
+    expect(card.canAct(player)).is.false;
+    card.resourceCount = 2;
+    expect(card.canAct(player)).is.true;
+
+    card.action(player);
+    expect(card.resourceCount).eq(0);
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsAddResourceToCard(player.popWaitingFor(), 1, [card, otherCard], card);
-    cast(player.popWaitingFor(), undefined);
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    expect(card.resourceCount).eq(1);
+    assertIsIdentificationAction(player, player.popWaitingFor());
+    runAllActions(game);
+    assertIsClaimAction(player, player.popWaitingFor());
+    runAllActions(game);
+    expect(player.popWaitingFor()).to.be.undefined;
   });
 });

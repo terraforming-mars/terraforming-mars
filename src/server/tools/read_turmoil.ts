@@ -1,6 +1,6 @@
 // Searches through a game's log for an event.
 // e.g. node build/src/server/tools/read_turmoil.js ge120f6729fca
-require('dotenv').config();
+import '@/server/init';
 
 import {MultiSet} from 'mnemonist';
 import {isGameId} from '../../common/Types';
@@ -31,7 +31,9 @@ async function main() {
       throw new Error('!');
     }
     const set = new MultiSet<SerializedDelegate>();
-    if (turmoil.chairman) set.add(turmoil.chairman);
+    if (turmoil.chairman) {
+      set.add(turmoil.chairman);
+    }
     turmoil.lobby?.forEach((delegate) => set.add(delegate));
     turmoil.delegateReserve.forEach((delegate) => set.add(delegate));
     turmoil.parties.forEach((party) => {

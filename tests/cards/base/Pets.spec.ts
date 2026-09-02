@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {addCity, runAllActions, testGame} from '../../TestingUtils';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Pets', function() {
-  it('Should play', function() {
+describe('Pets', () => {
+  it('Should play', () => {
     const card = new Pets();
     const [game, player] = testGame(1);
     player.playedCards.push(card);

@@ -102,7 +102,6 @@ import {SpaceRaceToMars} from './SpaceRaceToMars';
 import {SpaceRelay} from './SpaceRelay';
 import {SpecializedSettlement} from './SpecializedSettlement';
 import {Steelaris} from './Steelaris';
-import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
@@ -114,7 +113,6 @@ import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 import {VitalColony} from './VitalColony';
 import {Wetlands} from './Wetlands';
-import {MarsFrontierAlliance} from './MarsFrontierAlliance';
 
 export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
   module: 'pathfinders',
@@ -133,7 +131,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.TERRAFORMING_CONTROL_STATION]: {Factory: TerraformingControlStation, compatibility: 'venus'},
     // // [CardName.MARTIAN_TRANSHIPMENT_STATION]: {Factory: MartianTranshipmentStation},  // COMPLICATED EFFECT.
     [CardName.CERES_SPACEPORT]: {Factory: CeresSpaceport},
-    [CardName.DYSON_SCREENS]: {Factory: DysonScreens},
+    [CardName.DYSON_SCREENS]: {Factory: DysonScreens, compatibility: 'venus'},
     [CardName.LUNAR_EMBASSY]: {Factory: LunarEmbassy},
     [CardName.GEOLOGICAL_EXPEDITION]: {Factory: GeologicalExpedition},
     [CardName.EARLY_EXPEDITION]: {Factory: EarlyExpedition},
@@ -160,14 +158,14 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.FLAT_MARS_THEORY]: {Factory: FlatMarsTheory},
     [CardName.ASTEROID_RESOURCES]: {Factory: AsteroidResources},
     [CardName.KICKSTARTER]: {Factory: Kickstarter},
-    [CardName.ECONOMIC_HELP]: {Factory: EconomicHelp},
+    [CardName.ECONOMIC_HELP]: {Factory: EconomicHelp, compatibility: ['venus', 'moon']},
     [CardName.INTERPLANETARY_TRANSPORT]: {Factory: InterplanetaryTransport},
     [CardName.MARTIAN_DUST_PROCESSING_PLANT]: {Factory: MartianDustProcessingPlant},
     [CardName.CULTIVATION_OF_VENUS]: {Factory: CultivationOfVenus, compatibility: 'venus'},
     [CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: {Factory: ExpeditionToTheSurfaceVenus, compatibility: 'venus'},
     [CardName.LAST_RESORT_INGENUITY]: {Factory: LastResortIngenuity},
     [CardName.CRASHLANDING]: {Factory: Crashlanding, compatibility: 'ares'},
-    [CardName.THINK_TANK]: {Factory: ThinkTank},
+    [CardName.THINK_TANK]: {Factory: ThinkTank, compatibility: 'venus'},
     [CardName.BOTANICAL_EXPERIENCE]: {Factory: BotanicalExperience},
     [CardName.CRYPTOCURRENCY]: {Factory: Cryptocurrency},
     [CardName.RICH_DEPOSITS]: {Factory: RichDeposits},
@@ -216,7 +214,8 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ROBIN_HAULINGS]: {Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
     [CardName.ODYSSEY]: {Factory: Odyssey},
     [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
-    [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance, compatibility: 'turmoil'},
+    // Broken. #7519
+    // [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance, compatibility: 'turmoil'},
     [CardName.MIND_SET_MARS]: {Factory: MindSetMars, compatibility: 'turmoil'},
     [CardName.HABITAT_MARTE]: {Factory: HabitatMarte, compatibility: 'pathfinders'},
     [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: {Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},
@@ -227,13 +226,12 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.CO2_REDUCERS]: {Factory: CO2Reducers, compatibility: 'venus'},
     [CardName.HYDROGEN_BOMBARDMENT]: {Factory: HydrogenBombardment, compatibility: 'venus'},
     [CardName.RESEARCH_GRANT_PATHFINDERS]: {Factory: ResearchGrant},
-    [CardName.CREW_TRAINING]: {Factory: CrewTraining, compatibility: 'pathfinders'},
+    [CardName.CREW_TRAINING]: {Factory: CrewTraining, compatibility: ['pathfinders', 'venus', 'moon']},
     [CardName.SURVEY_MISSION]: {Factory: SurveyMission},
     [CardName.DESIGN_COMPANY]: {Factory: DesignCompany},
     // [CardName.CONSOLIDATION]: {Factory: Consolidation},
     [CardName.PERSONAL_AGENDA]: {Factory: PersonalAgenda},
     [CardName.VITAL_COLONY]: {Factory: VitalColony, compatibility: 'colonies'},
-    [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},

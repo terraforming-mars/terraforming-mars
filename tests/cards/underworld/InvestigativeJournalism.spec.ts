@@ -1,19 +1,20 @@
 import {expect} from 'chai';
 import {InvestigativeJournalism} from '../../../src/server/cards/underworld/InvestigativeJournalism';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('InvestigativeJournalism', () => {
   it('canPlay', () => {
     const card = new InvestigativeJournalism();
     const [/* game */, player] = testGame(2);
 
-    player.production.override({megacredits: -4});
+    player.production.override({megacredits: -5});
 
     expect(card.canPlay(player)).is.false;
 
-    player.production.override({megacredits: -3});
+    player.production.override({megacredits: -4});
 
     expect(card.canPlay(player)).is.true;
   });
@@ -25,7 +26,7 @@ describe('InvestigativeJournalism', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(player.production.megacredits).eq(-2);
+    expect(player.production.megacredits).eq(-1);
   });
 
   const canActRuns = [

@@ -5,16 +5,15 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {inplaceShuffle} from '../../utils/shuffle';
 import {UnseededRandom} from '../../../common/utils/Random';
-import {ASIMOV_AWARD_BONUS} from '../../../common/constants';
-
-import {IAward} from '../../awards/IAward';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
-
-import {ALL_AWARDS} from '../../awards/Awards';
+import {awardManifest} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
 import {message} from '../../logs/MessageBuilder';
+import {AwardName, awardNames} from '../../../common/ma/AwardName';
+import {inplaceRemove} from '../../../common/utils/utils';
+import {isCompatible} from '../../ma/MAManifest';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -24,11 +23,13 @@ export class Asimov extends CeoCard {
         cardNumber: 'L01',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.award().nbsp.colon().text('+' + ASIMOV_AWARD_BONUS, Size.LARGE);
+          b.effect('You have +2 score for all awards.', (eb) => {
+            eb.award().startEffect.text('+2', {size: Size.LARGE});
+          });
           b.br.br.br;
           b.opgArrow().text('10-X').award().asterix();
         }),
-        description: 'You have +' + ASIMOV_AWARD_BONUS + ' score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.',
+        description: 'Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.',
       },
     });
   }
@@ -37,7 +38,10 @@ export class Asimov extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    if (player.game.isSoloMode()) return false; // Awards are disabled in solo mode
+    if (player.game.isSoloMode()) {
+      // Awards are disabled in solo mode
+      return false;
+    }
     return !player.game.allAwardsFunded();
   }
 
@@ -48,9 +52,9 @@ export class Asimov extends CeoCard {
     const validAwards = this.getValidAwards(player);
     inplaceShuffle(validAwards, UnseededRandom.INSTANCE);
 
-    const freeAward = new OrOptions();
-    freeAward.title = 'Select award to put into play and fund';
-    freeAward.buttonLabel = 'Confirm';
+    const freeAward = new OrOptions()
+      .setTitle('Select award to put into play and fund')
+      .setButtonLabel('Confirm');
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(
@@ -63,11 +67,12 @@ export class Asimov extends CeoCard {
     return freeAward;
   }
 
-  private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
+  private selectAwardToFund(player: IPlayer, awardName: AwardName): SelectOption {
     const game = player.game;
+    const award = awardManifest.createOrThrow(awardName);
     const scorer = new AwardScorer(game, award);
     // Sort the players by score:
-    const players: Array<IPlayer> = game.getPlayers().slice();
+    const players: Array<IPlayer> = game.players.slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
     const title = message('Fund ${0} award [${1}]', (b) => b.award(award).string(
       players.map((player) => player.name + ': ' + scorer.get(player)).join(' / ')));
@@ -79,25 +84,17 @@ export class Asimov extends CeoCard {
     });
   }
 
-  private getValidAwards(player: IPlayer): Array<IAward> {
+  private getValidAwards(player: IPlayer): Array<AwardName> {
     // NB: This makes no effort to maintain Award synergy.
     const gameOptions = player.game.gameOptions;
-    const validAwards = ALL_AWARDS.filter((award) => {
-      // TODO(kberg): Centralize this so this card doesn't have to be updated.
-
-      // Remove awards already in the game
-      if (player.game.awards.includes(award)) return false;
-      // Remove awards that require unused variants/expansions
-      if (!gameOptions.venusNextExtension && award.name === 'Venuphile') return false;
-      if (!gameOptions.turmoilExtension && award.name === 'Politician') return false;
-      if (!gameOptions.aresExtension && award.name === 'Entrepreneur') return false;
-      if (!gameOptions.moonExpansion && award.name === 'Full Moon') return false;
-      if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
-      if (!gameOptions.underworldExpansion && award.name === 'Kingpin') return false;
-      if (!gameOptions.underworldExpansion && award.name === 'EdgeLord') return false;
-      return true;
-    });
-    if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');
+    const candidates = [...awardNames];
+    for (const award of player.game.awards) {
+      inplaceRemove(candidates, award.name);
+    }
+    const validAwards = candidates.filter((awardName) => isCompatible(awardName, awardManifest, gameOptions));
+    if (validAwards.length === 0) {
+      throw new Error('getValidAwards award list is empty.');
+    }
     return validAwards;
   }
 }

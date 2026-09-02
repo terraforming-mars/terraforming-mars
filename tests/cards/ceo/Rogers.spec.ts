@@ -9,7 +9,7 @@ import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Rogers', function() {
+describe('Rogers', () => {
   let card: Rogers;
   let player: TestPlayer;
   let game: IGame;
@@ -21,7 +21,7 @@ describe('Rogers', function() {
     player.megaCredits = 30;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.isDisabled).is.false;
     expect(card.canAct(player)).is.true;
     expect(card.opgActionIsActive).is.false;
@@ -39,7 +39,7 @@ describe('Rogers', function() {
     expect(card.opgActionIsActive).is.false;
   });
 
-  it('Takes OPG action, cards discounted', function() {
+  it('Takes OPG action, cards discounted', () => {
     // Sanity
     expect(card.getCardDiscount(player, new LocalShading())).eq(0);
     expect(card.getCardDiscount(player, new VenusGovernor())).eq(0);
@@ -52,7 +52,7 @@ describe('Rogers', function() {
     expect(card.getCardDiscount(player, new VenusGovernor())).eq(6);
   });
 
-  it('Takes OPG action, ignored global requirements', function() {
+  it('Takes OPG action, ignored global requirements', () => {
     card.action();
     expect(card.opgActionIsActive).is.true;
 

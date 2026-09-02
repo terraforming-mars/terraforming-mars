@@ -7,7 +7,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {GameId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';
 
-describe('Autopass', function() {
+describe('Autopass', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 
@@ -25,9 +25,9 @@ describe('Autopass', function() {
 
   it('fails when player not found', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('g' + player.id as GameId, [player], player);
+    const game = Game.newInstance('g' + player.id as GameId, [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getPlayerById = function() {
+    (game as any).getPlayerById = () => {
       throw new Error('player does not exist');
     };
 
@@ -39,7 +39,7 @@ describe('Autopass', function() {
 
   it('sets autopass', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player);
+    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     scaffolding.url = '/autopass?id=' + player.id + '&autopass=true';
@@ -51,7 +51,7 @@ describe('Autopass', function() {
 
   it('disables autopass', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player);
+    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     player.autopass = true;
 
@@ -65,9 +65,9 @@ describe('Autopass', function() {
   it('fails when spectator not found', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player);
+    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getBySpectatorId = function() {
+    (game as any).getBySpectatorId = () => {
       throw new Error('spectator does not exist');
     };
 

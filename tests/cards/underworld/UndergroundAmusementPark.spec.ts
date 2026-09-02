@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {UndergroundAmusementPark} from '../../../src/server/cards/underworld/UndergroundAmusementPark';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('UndergroundAmusementPark', () => {
   it('canPlay', () => {
     const card = new UndergroundAmusementPark();
-    const [game, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
-    game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.true;
   });
 

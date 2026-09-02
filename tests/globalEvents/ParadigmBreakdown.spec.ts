@@ -5,17 +5,16 @@ import {PowerPlant} from '../../src/server/cards/base/PowerPlant';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ParadigmBreakdown} from '../../src/server/turmoil/globalEvents/ParadigmBreakdown';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
+import {cast} from '@/common/utils/utils';
 
-describe('ParadigmBreakdown', function() {
-  it('resolve play', function() {
+describe('ParadigmBreakdown', () => {
+  it('resolve play', () => {
     const card = new ParadigmBreakdown();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
-    const turmoil = Turmoil.newInstance(game);
+    const turmoil = game.turmoil!;
 
-    turmoil.initGlobalEvent(game);
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
@@ -32,7 +31,7 @@ describe('ParadigmBreakdown', function() {
     player2.megaCredits = 10;
     player2.cardsInHand.push(dustSeals);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     // Only |player| should be asked which cards to discard
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);

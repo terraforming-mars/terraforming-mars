@@ -4,22 +4,23 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('MartianNatureWonders', function() {
+describe('MartianNatureWonders', () => {
   let card: MartianNatureWonders;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianNatureWonders();
     [game, player] = testGame(2);
   });
 
-  it('play', function() {
+  it('play', () => {
     const dataCard = new LunarObservationPost();
     player.playedCards.push(dataCard);
     expect(dataCard.resourceCount).eq(0);

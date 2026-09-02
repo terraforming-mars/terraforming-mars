@@ -5,16 +5,16 @@ import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('CO2Reducers', function() {
+describe('CO2Reducers', () => {
   let card: CO2Reducers;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CO2Reducers();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));

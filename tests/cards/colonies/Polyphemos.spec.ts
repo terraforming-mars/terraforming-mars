@@ -1,14 +1,15 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {Polyphemos} from '../../../src/server/cards/colonies/Polyphemos';
 import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('Polyphemos', function() {
-  it('Should play', function() {
+describe('Polyphemos', () => {
+  it('Should play', () => {
     const card = new Polyphemos();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();

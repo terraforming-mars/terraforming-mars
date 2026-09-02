@@ -27,15 +27,25 @@ export class GameLogs {
     return newMessages;
   }
 
-  public getLogsForGameView(playerId: ParticipantId, game: IGame, generation: string | null): Array<LogMessage> {
-    const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
+  public getLogsForGameView(playerId: ParticipantId, game: IGame, generation: number | undefined): Array<LogMessage> {
+    const messagesForPlayer = (message: LogMessage) => {
+      try {
+        if (message === undefined || message === null) {
+          return false;
+        }
+        return message.playerId === undefined || message.playerId === playerId;
+      } catch (e) {
+        console.error('Error checking message for player', e);
+        return false;
+      }
+    };
 
-    // for most recent generation pull last 50 log messages
-    if (generation === null || Number(generation) === game.generation) {
+    // Default view keeps the payload small. An explicit generation request should
+    // always return the full generation, including the current one.
+    if (generation === undefined) {
       return game.gameLog.filter(messagesForPlayer).slice(-50);
-    } else { // pull all logs for generation
-      return this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
     }
+    return this.getLogsForGeneration(game.gameLog, generation).filter(messagesForPlayer);
   }
 
   public getLogsForGameEnd(game: IGame): Array<string> {
@@ -50,7 +60,7 @@ export class GameLogs {
 
       switch (datum.type) {
       case LogMessageDataType.PLAYER:
-        for (const player of game.getPlayers()) {
+        for (const player of game.players) {
           if (datum.value === player.color) {
             return player.name;
           }
@@ -63,7 +73,7 @@ export class GameLogs {
       case LogMessageDataType.TILE_TYPE:
       case LogMessageDataType.COLONY:
       default:
-        return datum.value;
+        return datum.value.toString();
       }
     }));
   }

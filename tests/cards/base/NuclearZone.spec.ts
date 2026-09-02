@@ -3,10 +3,11 @@ import {NuclearZone} from '../../../src/server/cards/base/NuclearZone';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('NuclearZone', function() {
-  it('Should play', function() {
+describe('NuclearZone', () => {
+  it('Should play', () => {
     const card = new NuclearZone();
     const [game, player] = testGame(2);
     card.play(player);

@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
-import {CardResource} from '../../../common/CardResource';
 
 export class MicroprobingTechnology extends Card implements IProjectCard {
   constructor() {
@@ -13,22 +12,21 @@ export class MicroprobingTechnology extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.MICROPROBING_TECHNOLOGY,
       tags: [Tag.SCIENCE],
-      cost: 7,
+      cost: 8,
 
-      requirements: {tag: Tag.SCIENCE, count: 1},
+      requirements: {tag: Tag.SCIENCE},
 
       behavior: {
         stock: {plants: 3},
-        addResourcesToAnyCard: {count: 2, type: CardResource.DATA},
-        underworld: {identify: 3},
+        underworld: {identify: {count: 2, claim: 1}},
       },
 
       metadata: {
-        cardNumber: 'U22',
+        cardNumber: 'U022',
         renderData: CardRenderer.builder((b) => {
-          b.plants(3, {digit}).resource(CardResource.DATA, {amount: 2, digit}).identify(3, {digit});
+          b.plants(3, {digit}).identify(2, {digit}).claim(1);
         }),
-        description: 'Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.',
+        description: 'Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.',
       },
     });
   }

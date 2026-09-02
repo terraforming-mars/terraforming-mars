@@ -1,0 +1,41 @@
+{
+  "Agricola Inc": "Agricola Oy",
+  "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Aloitat 1 kasvituotannolla, 1 M€-tuotannolla, 1 lämpötuotannolla ja 40 M€:llä.",
+  "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "VAIKUTUS: Pelin lopussa, saat −2 / 0 / 1 / 2 VP YMPYRÄTYYPIN MUKAAN 0 / 1-2 / 3-4 / 5+ ympyrästä.",
+
+  "Athena": "",
+  "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Aloitat 62 M€:llä. Ensimmäisenä toimintona aseta 2 vaaralattaa ei minkään muun laatan viereen.",
+  "Effect: You do not lose production when placing adjacent to hazard tiles.": "VAIKUTUS: Et menetä tuotantoa kun asetat viereen vaaralaatat.",
+
+  "Curosity II": "Uteliaisuus II",
+  "You start with 40 M€ and 2 steel production.": "Aloitat 40 M€:llä ja 2 terästuotannolla.",
+  "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "VAIKUTUS: Kun asetat laatan alueelle jossa on RESURSSI-sijoitusbonus, tai toisen laatan päälle, voit maksaa 2 M€ nostaaksesi kortin.",
+
+  "Eris": "",
+  "You start with 46 M€. As your first action, draw an Ares card.": "Aloitat 46 M€:llä. Ensimmäisenä toimintona nosta Ares-kortti.",
+  "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "TOIMINTO: Aseta uusi vaaralaatta EI MINKÄÄN MUUN LAATAN viereen, TAI poista vaaralaatta nostaaksesi MKL:ääsi 1 askeleen.",
+
+  "Incite": "Yllytä",
+  "You start with 32 M€. As your first action, place two delegates in one party.": "Aloitat 32 M€:llä. Ensimmäisenä toimintona aseta kaksi edustajaa yhteen puolueeseen.",
+  "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "VAIKUTUS: Sinulla on +1 vaikutus. Kun lähetät edustajan lobbaus-toiminnolla, maksat siitä 2 M€ vähemmän.",
+
+  "Midas": "",
+  "You start with 120 M€. Lower your TR 7 steps.": "Aloitat 120 M€:llä. Laske MKL:ääsi 7 askelta.",
+
+  "Playwrights": "Näytelmäkirjailijat",
+  "You start with 38 M€ and 1 energy production.": "Aloitat 38 M€:llä ja 1 energiatuotannolla.",
+  "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "TOIMINTO: Toista pelattu tapahtuma keneltä tahansa pelaajalta (SISÄLTÄEN tapahtumat jotka asettavat erikoislaattoja) maksamalla sen kustannus VAIN M€:ssä (alennukset ja hyvitykset pätevät), sitten POISTA SE PELISTÄ.",
+
+  "Project Workshop": "Projektityöpaja",
+  "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Aloitat 39 M€:llä, 1 teräksellä ja 1 titaanilla. Ensimmäisenä toimintona nosta sininen kortti.",
+  "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "TOIMINTO: Käännä ja hylkää pelattu sininen kortti muuttaaksesi kaikki VP:t siinä MKL:ksi ja nosta 2 korttia, tai kuluta 3 M€ nostaaksesi sinisen kortin.",
+
+  "Junk Ventures": "Romu Ventures",
+  "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Aloitat 43 M€:llä. Ensimmäisenä toimintona hylkää pakan 3 ylintä korttia.",
+  "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "TOIMINTO: SEKOITA HYLKYPIINO, SITTEN NOSTA 3 KORTTIA SIITÄ. PIDÄ 1 JA HYLKÄÄ 2 MUUTA.",
+
+  "UNITED NATIONS MISSION ONE": "YK TEHTÄVÄ 1",
+  "United Nations Mission One": "YK tehtävä 1",
+  "You start with 39 M€. Increase your TR 1 step.": "Aloitat 39 M€:llä. Nosta MKL:ääsi 1 askel.",
+  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "VAIKUTUS: Kun kuka tahansa pelaaja tekee toiminnon tai pelaa kortin joka lisää TR:ää, sisältäen tämän, saat 1 M€ jokaista askelta kohden."
+}

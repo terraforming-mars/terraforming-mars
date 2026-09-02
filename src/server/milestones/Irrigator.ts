@@ -1,22 +1,27 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {isHazardTileType} from '../../common/AresTileType';
+import {MilestoneName} from '../../common/ma/MilestoneName';
 
 export class Irrigator extends BaseMilestone {
-  constructor() {
-    super(
-      'Irrigator',
-      'Own 4 tiles adjacent to oceans',
-      4);
+  constructor(
+    name: MilestoneName = 'Irrigator',
+    threshold: number = 4) {
+    super(name, `Own ${threshold} tiles adjacent to oceans`, threshold);
   }
 
   public getScore(player: IPlayer): number {
     return player.game.board.spaces.filter((space) =>
       space.player === player &&
-        space.tile !== undefined &&
-        isHazardTileType(space.tile.tileType) === false &&
-        player.game.board.getAdjacentSpaces(space).some((space) => Board.isOceanSpace(space)),
+     Board.hasRealTile(space) &&
+      player.game.board.getAdjacentSpaces(space).some((space) => Board.isOceanSpace(space)),
     ).length;
+  }
+}
+
+// Variant from Terra Cimmeria Nova.
+export class Coastguard extends Irrigator {
+  constructor() {
+    super('Coastguard', 3);
   }
 }

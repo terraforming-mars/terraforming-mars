@@ -1,16 +1,17 @@
 <template>
-  <div :class="classes" v-i18n>({{ description }})</div>
+  <div :class="classes">(<span v-i18n>{{ description }}</span>)</div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent, PropType} from 'vue';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardDescription',
   props: {
     item: {
+      type: [String, Object] as PropType<unknown>,
       required: true,
     },
   },

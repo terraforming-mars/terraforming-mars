@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SoilEnrichment} from '../../../src/server/cards/promo/SoilEnrichment';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
@@ -9,11 +9,11 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 
-describe('SoilEnrichment', function() {
+describe('SoilEnrichment', () => {
   let card: SoilEnrichment;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SoilEnrichment();
     [/* game*/, player] = testGame(2);
   });
@@ -24,7 +24,7 @@ describe('SoilEnrichment', function() {
     {ghgResources: 1, searchForLifeResources: 0, expected: true},
   ] as const;
   for (const run of canPlayRuns) {
-    it('canplay ' + JSON.stringify(run), function() {
+    it('canplay ' + JSON.stringify(run), () => {
       const ghgProducingBacteria = new GHGProducingBacteria();
       const searchForLife = new SearchForLife();
       ghgProducingBacteria.resourceCount = run.ghgResources;
@@ -35,7 +35,7 @@ describe('SoilEnrichment', function() {
     });
   }
 
-  it('play', function() {
+  it('play', () => {
     const ghgProducingBacteria = new GHGProducingBacteria();
     const tardigrades = new Tardigrades();
     const nitriteReducingBacteria = new NitriteReducingBacteria();
@@ -52,6 +52,21 @@ describe('SoilEnrichment', function() {
     selectCard.cb([tardigrades]);
 
     expect(tardigrades.resourceCount).eq(0);
+    expect(player.plants).eq(5);
+  });
+
+  it('play with only one eligible card', () => {
+    const ghgProducingBacteria = new GHGProducingBacteria();
+    ghgProducingBacteria.resourceCount = 1;
+    player.playedCards.push(ghgProducingBacteria);
+
+    player.plants = 0;
+    expect(card.canPlay(player)).is.true;
+
+    const result = card.play(player);
+    expect(result).to.be.undefined;
+
+    expect(ghgProducingBacteria.resourceCount).eq(0);
     expect(player.plants).eq(5);
   });
 });

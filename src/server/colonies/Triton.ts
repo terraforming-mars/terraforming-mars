@@ -7,20 +7,23 @@ export class Triton extends Colony {
   constructor() {
     super({
       name: ColonyName.TRITON,
-      description: [
-        'Gain 3 titanium',
-        'Gain n titanium',
-        'Gain 1 titanium',
-      ],
-
-      buildType: ColonyBenefit.GAIN_RESOURCES,
-      buildQuantity: [3, 3, 3],
-      buildResource: Resource.TITANIUM,
-      tradeType: ColonyBenefit.GAIN_RESOURCES,
-      tradeQuantity: [0, 1, 1, 2, 3, 4, 5],
-      tradeResource: Resource.TITANIUM,
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resource.TITANIUM,
+      build: {
+        description: 'Gain 3 titanium',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [3, 3, 3],
+        resource: Resource.TITANIUM,
+      },
+      trade: {
+        description: 'Gain n titanium',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [0, 1, 1, 2, 3, 4, 5],
+        resource: Resource.TITANIUM,
+      },
+      colony: {
+        description: 'Gain 1 titanium',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        resource: Resource.TITANIUM,
+      },
     });
   }
 }

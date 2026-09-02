@@ -14,10 +14,8 @@ export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
   }
 
   public execute() {
-    const setRulingParty = new OrOptions();
-
     // Interesting that this doesn't use SelectParty. Perhaps that's the right choice.
-    setRulingParty.title = 'Select new ruling party';
+    const setRulingParty = new OrOptions().setTitle('Select new ruling party');
     setRulingParty.options = this.turmoil.parties.map((p: IParty) => new SelectOption(p.name).andThen(() => {
       this.turmoil.rulingPolicy().onPolicyEnd?.(this.player.game);
       this.turmoil.rulingParty = p;

@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {runAllActions} from '../../TestingUtils';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -13,17 +13,17 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {OneOrArray} from '../../../src/common/utils/types';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('SpecializedSettlement', function() {
+describe('SpecializedSettlement', () => {
   let card: SpecializedSettlement;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpecializedSettlement();
     [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
-    player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });
 
   it('Can play', () => {
@@ -33,7 +33,7 @@ describe('SpecializedSettlement', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     singleResourceTest(
       SpaceBonus.DRAW_CARD,
       {},
@@ -41,7 +41,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - steel', function() {
+  it('play - steel', () => {
     singleResourceTest(
       SpaceBonus.STEEL,
       {steel: 1},
@@ -49,7 +49,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - titanium', function() {
+  it('play - titanium', () => {
     singleResourceTest(
       SpaceBonus.TITANIUM,
       {titanium: 1},
@@ -57,7 +57,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - plants', function() {
+  it('play - plants', () => {
     singleResourceTest(
       SpaceBonus.PLANT,
       {plants: 1},
@@ -65,7 +65,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - heat', function() {
+  it('play - heat', () => {
     singleResourceTest(
       SpaceBonus.HEAT,
       {heat: 1},
@@ -73,7 +73,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - energy', function() {
+  it('play - energy', () => {
     singleResourceTest(
       SpaceBonus.ENERGY,
       {energy: 1},
@@ -82,7 +82,7 @@ describe('SpecializedSettlement', function() {
   });
 
 
-  it('play - megacredits', function() {
+  it('play - megacredits', () => {
     expect(() => {
       singleResourceTest(
         SpaceBonus.MEGACREDITS,
@@ -92,7 +92,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - 2 of the same', function() {
+  it('play - 2 of the same', () => {
     singleResourceTest(
       [SpaceBonus.HEAT, SpaceBonus.HEAT],
       {heat: 2},
@@ -100,7 +100,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - 3 different', function() {
+  it('play - 3 different', () => {
     singleResourceTest(
       [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
       {heat: 1, steel: 1, titanium: 1},
@@ -112,7 +112,7 @@ describe('SpecializedSettlement', function() {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('play - 3 different, then play Robotic Workforce', function() {
+  it('play - 3 different, then play Robotic Workforce', () => {
     singleResourceTest(
       [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
       {heat: 1, steel: 1, titanium: 1},
@@ -122,7 +122,7 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     cast(player.popWaitingFor(), undefined);
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const roboticWorkforce = new RoboticWorkforce();
     expect(roboticWorkforce.canPlay(player)).is.false;
@@ -139,7 +139,7 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
   });
 
-  it('play on hazard space', function() {
+  it('play on hazard space', () => {
     player.production.override({energy: 1});
     player.megaCredits = 8; // Placing on a mild hazard costs 8MC
 
@@ -159,13 +159,37 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
+  describe('Pathfinders Mars track offset', () => {
+    it('canPlay false when Mars track advance would not grant energy production', () => {
+      game.pathfindersData!.mars = 0;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.false;
+    });
+
+    it('canPlay true when Mars track advance lands on energy_production reward', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      expect(card.canPlay(player)).is.true;
+    });
+
+    it('playing the card nets zero change to energy production', () => {
+      game.pathfindersData!.mars = 7;
+      player.production.override({energy: 0});
+      const action = cast(card.play(player), SelectSpace);
+      action.cb(action.spaces[0]);
+      runAllActions(game);
+      expect(player.production.energy).eq(0);
+      expect(player.production.megacredits).eq(3);
+    });
+  });
+
   function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
-    const action = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
+    runAllActions(game);
 
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
-    const selectSpace = cast(action, SelectSpace);
     const space = selectSpace.spaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);

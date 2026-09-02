@@ -5,31 +5,31 @@ import {maxOutOceans, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('WaterSplittingPlant', function() {
+describe('WaterSplittingPlant', () => {
   let card: WaterSplittingPlant;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new WaterSplittingPlant();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.energy = 2;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.energy = 3;
     expect(card.canAct(player)).is.true;
 

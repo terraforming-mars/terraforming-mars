@@ -3,18 +3,20 @@ import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/Geolog
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {addCity, cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {addCity, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('GeologicalExpedition', function() {
+describe('GeologicalExpedition', () => {
   let card: GeologicalExpedition;
   let player: TestPlayer;
   let game: IGame;
@@ -22,15 +24,14 @@ describe('GeologicalExpedition', function() {
   let microbeCard: IProjectCard;
   let scienceCard: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GeologicalExpedition();
     [game, player] = testGame(1);
     game.board = EmptyBoard.newInstance();
     space = game.board.getAvailableSpacesOnLand(player)[0];
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});
     scienceCard = fakeCard({resourceType: CardResource.SCIENCE});
-    player.playedCards = [card, microbeCard, scienceCard];
-    player.popWaitingFor();
+    player.playedCards.push(card, microbeCard, scienceCard);
   });
 
   it('no bonuses, gain 1 steel', () => {
@@ -101,6 +102,23 @@ describe('GeologicalExpedition', function() {
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(2);
+  });
+
+  it('does not grant covered ocean bonuses', () => {
+    const oceanSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    oceanSpace.spaceType = SpaceType.OCEAN;
+    oceanSpace.bonus = [SpaceBonus.PLANT];
+
+    game.simpleAddTile(player, space, {tileType: TileType.OCEAN});
+
+    game.addTile(player, oceanSpace, {tileType: TileType.OCEAN_FARM, covers: oceanSpace.tile});
+
+    expect(oceanSpace.tile?.tileType).eq(TileType.OCEAN_FARM);
+    expect(oceanSpace.tile?.covers?.tileType).eq(TileType.OCEAN);
+
+    // Covering an existing tile doesn't grant the space bonus, nor does it give the consolation steel.
+    expect(player.plants).eq(0);
+    expect(player.steel).eq(0);
   });
 
   it('variety', () => {

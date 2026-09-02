@@ -1,25 +1,27 @@
 <template>
 <div class="reward">
   <div :class="outerClass">
-    <div :class="getClass" />
+    <div :class="getClass" ></div>
   </div>
 </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {Reward} from '@/common/pathfinders/Reward';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTrackReward',
   props: {
     reward: {
       type: String as () => Reward,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   computed: {
@@ -36,7 +38,7 @@ export default Vue.extend({
       case 'city':
         return 'tag-city-count tag-size-big';
       case 'delegate':
-        return this.gameOptions.turmoilExtension ? 'delegate' : 'reward-3mc';
+        return this.gameOptions.expansions.turmoil ? 'delegate' : 'reward-3mc';
       case 'energy':
       case 'energy_production':
         return 'resource_icon resource_icon--energy';
@@ -82,7 +84,7 @@ export default Vue.extend({
       case '6mc':
         return 'reward-6mc';
       case 'delegate':
-        return this.gameOptions.turmoilExtension ? '' : 'reward-3mc';
+        return this.gameOptions.expansions.turmoil ? '' : 'reward-3mc';
       case 'energy_production':
       case 'heat_production':
       case 'plant_production':

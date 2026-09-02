@@ -1,8 +1,16 @@
 <template>
-  <div id="spectator-home">
-    <sidebar v-trim-whitespace
-      :acting_player="false"
-      :player_color="spectator.color"
+  <div id="spectator-home" :class="(game.turmoil ? 'with-turmoil': '')">
+
+    <div v-if="game.phase === 'end'">
+      <div class="player_home_block">
+        <DynamicTitle title="This game is over!" :color="spectator.color"/>
+        <a :href="'the-end?id='+ spectator.id" v-i18n>Go to game results</a>
+      </div>
+    </div>
+
+    <Sidebar v-trim-whitespace
+      :actingPlayer="false"
+      :playerColor="spectator.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
       :temperature = "game.temperature"
@@ -13,109 +21,72 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "spectator.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration">
-        <div class="deck-size">{{ game.deckSize }}</div>
-    </sidebar>
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize"/>
 
     <div class="player_home_block nofloat">
-        <log-panel v-if="spectator.id !== undefined" :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
+<LogPanel :viewModel="spectator" :color="spectator.color" :step="game.step" @spaceClicked="onSpaceClicked"/>
     </div>
 
-    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
-    <a name="board" class="player_home_anchor"></a>
-    <board
-      :spaces="game.spaces"
-      :venusNextExtension="game.gameOptions.venusNextExtension"
-      :venusScaleLevel="game.venusScaleLevel"
-      :boardName ="game.gameOptions.boardName"
-      :oceans_count="game.oceans"
-      :oxygen_level="game.oxygenLevel"
-      :temperature="game.temperature"
-      :aresExtension="game.gameOptions.aresExtension"
-      :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
-      :altVenusBoard="game.gameOptions.altVenusBoard"
-      :aresData="game.aresData"
+    <GameBoardView
+      ref="gameBoardView"
+      :game="game"
       :tileView="tileView"
+      :players="spectator.players"
       @toggleTileView="cycleTileView()"
-      id="shortkey-board"
     />
 
-    <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
-
-    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
-
-    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
-
-    <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
-        <Milestone :milestones="game.milestones" />
-        <Awards :awards="game.awards" show-scores />
-    </div>
-
-    <!-- TODO(kberg): add the spectator tab. -->
-    <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
+    <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
-      <dynamic-title title="Colonies" :color="spectator.color"/>
+      <DynamicTitle title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
-        <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
-            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
+        <div class="colonies-player-fleets" v-for="player in spectator.players" :key="player.color">
+            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
         </div>
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-            <colony :colony="colony"></colony>
+            <Colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
-        <div v-if="game.gameOptions.pathfindersExpansion">
-          <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
-        </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+    <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
+    <div>
+      <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
+    </div>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
-
-import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
-import Awards from '@/client/components/Awards.vue';
-import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
-import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
-import LogPanel from '@/client/components/LogPanel.vue';
-import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import Milestone from '@/client/components/Milestones.vue';
+import GameBoardView from '@/client/components/GameBoardView.vue';
+import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
-import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
+import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {range} from '@/common/utils/utils';
-import {nextTileView, TileView} from './board/TileView';
+import {HomeMixin} from '@/client/mixins/HomeMixin';
 
-export interface SpectatorHomeModel {
-  tileView: TileView;
-  waitingForTimeout: number;
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'SpectatorHome',
-  data(): SpectatorHomeModel {
-    return {
-      tileView: 'show',
-      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
-    };
-  },
+  mixins: [HomeMixin],
   props: {
     spectator: {
       type: Object as () => SpectatorModel,
-    },
-    settings: {
-      type: Object as () => typeof raw_settings,
+      required: true,
     },
   },
   computed: {
@@ -124,17 +95,14 @@ export default Vue.extend({
     },
   },
   components: {
-    Awards,
-    Board,
     Colony,
     DynamicTitle,
+    GameBoardView,
+    KeyboardShortcuts,
     LogPanel,
-    Milestone,
-    MoonBoard,
-    PlanetaryTracks,
     PlayersOverview,
+    PurgeWarning,
     Sidebar,
-    Turmoil,
     WaitingFor,
   },
   methods: {
@@ -144,9 +112,6 @@ export default Vue.extend({
     },
     range(n: number): Array<number> {
       return range(n);
-    },
-    cycleTileView(): void {
-      this.tileView = nextTileView(this.tileView);
     },
   },
 });

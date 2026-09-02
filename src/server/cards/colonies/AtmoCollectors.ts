@@ -50,12 +50,11 @@ export class AtmoCollectors extends ActionCard implements IProjectCard {
         description: 'Add 2 floaters to ANY card.',
         cardNumber: 'C03',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add one floater here.', (eb) => {
-            eb.empty().startAction.resource(CardResource.FLOATER).or(Size.SMALL);
-          }).br;
-          b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-            eb.resource(CardResource.FLOATER).startAction.titanium(2, {digit}).slash(Size.SMALL).energy(3, {digit}).slash(Size.SMALL).heat(4, {digit});
-          }).br;
+          b.arrow().resource(CardResource.FLOATER).or(Size.SMALL).br;
+          b.resource(CardResource.FLOATER).arrow().titanium(2, {digit}).slash(Size.SMALL).energy(3, {digit}).slash(Size.SMALL).heat(4, {digit}).br;
+
+          b.plainText('Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', /* parens */ true);
+          b.br;
           b.resource(CardResource.FLOATER, 2).asterix();
         }),
       },

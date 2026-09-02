@@ -7,9 +7,10 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {runAllActions, setRulingParty} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Eris', () => {
   let card: Eris;
@@ -20,7 +21,7 @@ describe('Eris', () => {
     card = new Eris();
     [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
     card.play(player);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
   });
 
   it('Starts with 1 Ares card', () => {
@@ -31,22 +32,22 @@ describe('Eris', () => {
   it('Can act', () => {
     const action = cast(card.action(player), OrOptions);
     const initialHazardsCount = game.board.getHazards().length;
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
 
     // Place a hazard tile
     action.options[0].cb();
     runAllActions(game);
     const placeHazard = cast(player.popWaitingFor(), SelectSpace);
     placeHazard.cb(placeHazard.spaces[0]);
-    expect(game.board.getHazards().length).eq(initialHazardsCount + 1);
+    expect(game.board.getHazards()).has.length(initialHazardsCount + 1);
     expect(placeHazard.spaces[0].tile?.tileType).eq(TileType.EROSION_MILD);
 
     // Remove a hazard tile to gain 1 TR
     const removeHazard = cast(action.options[1].cb(), SelectSpace);
     removeHazard.cb(removeHazard.spaces[0]);
     expect(removeHazard.spaces[0].tile).is.undefined;
-    expect(game.board.getHazards().length).eq(initialHazardsCount);
-    expect(player.getTerraformRating()).eq(initialTR + 1);
+    expect(game.board.getHazards()).has.length(initialHazardsCount);
+    expect(player.terraformRating).eq(initialTR + 1);
   });
 
   it('Respects Reds', () => {
@@ -64,7 +65,7 @@ describe('Eris', () => {
     runAllActions(game);
     const placeHazard = cast(player.popWaitingFor(), SelectSpace);
     placeHazard.cb(placeHazard.spaces[0]);
-    expect(game.board.getHazards().length).eq(initialHazardsCount + 1);
+    expect(game.board.getHazards()).has.length(initialHazardsCount + 1);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

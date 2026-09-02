@@ -14,7 +14,7 @@ function name(card: ICard): CardName {
   return card.name;
 }
 
-describe('PreludeDeck', function() {
+describe('PreludeDeck', () => {
   const random = new UnseededRandom();
 
   it('addresses incompatible fan preludes', () => {
@@ -77,7 +77,7 @@ describe('PreludeDeck', function() {
   });
 });
 
-describe('CeoDeck', function() {
+describe('CeoDeck', () => {
   const random = new UnseededRandom();
 
   it('serialization compatibility', () => {
@@ -91,9 +91,6 @@ describe('CeoDeck', function() {
       log: () => {},
     };
 
-    // TODO(dl): Once CEOs is deployed, we can hard-value these deckLength checks.
-    // But while we're constantly adding CEOs we cannot expect the drawPile to have a static length
-    // Instead, I'm getting the length of the deck prior to the draws, and just making sure it shrinks after we draw.
     const drawCardsCount = 3;
     const deckLength = deck.drawPile.length - drawCardsCount;
     for (let i = 0; i < drawCardsCount; i++) {
@@ -116,7 +113,7 @@ describe('CeoDeck', function() {
   });
 });
 
-describe('draw()', function() {
+describe('draw()', () => {
   let deck: ProjectDeck;
   let game: IGame;
   let drawnCard: IProjectCard | undefined;
@@ -124,15 +121,15 @@ describe('draw()', function() {
   let topCard: IProjectCard | undefined;
   let bottomCard: IProjectCard | undefined;
 
-  describe('with more than enough cards in the draw pile', function() {
-    beforeEach(function() {
+  describe('with more than enough cards in the draw pile', () => {
+    beforeEach(() => {
       [game] = testGame(2);
       deck = game.projectDeck;
       originalLength = game.projectDeck.drawPile.length;
     });
 
-    describe('drawing from the top', function() {
-      beforeEach(function() {
+    describe('drawing from the top', () => {
+      beforeEach(() => {
         topCard = deck.drawPile[originalLength - 1];
         drawnCard = deck.draw(game);
       });
@@ -142,12 +139,12 @@ describe('draw()', function() {
       });
 
       it('should remove the card from the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(originalLength - 1);
+        expect(deck.drawPile).has.length(originalLength - 1);
       });
     });
 
-    describe('drawing from the bottom', function() {
-      beforeEach(function() {
+    describe('drawing from the bottom', () => {
+      beforeEach(() => {
         bottomCard = deck.drawPile[0];
         drawnCard = deck.draw(game, 'bottom');
       });
@@ -157,13 +154,13 @@ describe('draw()', function() {
       });
 
       it('should remove the card from the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(originalLength - 1);
+        expect(deck.drawPile).has.length(originalLength - 1);
       });
     });
   });
 
-  describe('draw from the top with only 1 card left in the draw pile', function() {
-    beforeEach(function() {
+  describe('draw from the top with only 1 card left in the draw pile', () => {
+    beforeEach(() => {
       [game] = testGame(2);
       deck = game.projectDeck;
       originalLength = game.projectDeck.drawPile.length;
@@ -181,15 +178,15 @@ describe('draw()', function() {
     });
 
     it('should shuffle the discard pile back into the draw pile', () => {
-      expect(deck.drawPile.length).to.equal(originalLength - 1);
-      expect(deck.discardPile.length).to.equal(0);
+      expect(deck.drawPile).has.length(originalLength - 1);
+      expect(deck.discardPile).has.length(0);
     });
   });
 
-  describe('draw from the top with no cards left in the draw pile', function() {
+  describe('draw from the top with no cards left in the draw pile', () => {
     let removedCards: IProjectCard[];
 
-    beforeEach(function() {
+    beforeEach(() => {
       [game] = testGame(2);
       deck = game.projectDeck;
       originalLength = game.projectDeck.drawPile.length;
@@ -202,15 +199,15 @@ describe('draw()', function() {
     });
 
     it('should have an empty discard pile', () => {
-      expect(deck.discardPile.length).to.equal(0);
+      expect(deck.discardPile).has.length(0);
     });
 
-    it('the drawn card should be undefined', function() {
+    it('the drawn card should be undefined', () => {
       expect(drawnCard).to.equal(undefined);
     });
 
-    describe('some cards are discarded before drawing from the top again', function() {
-      beforeEach(function() {
+    describe('some cards are discarded before drawing from the top again', () => {
+      beforeEach(() => {
         deck.discardPile = [...removedCards.splice(0, 11)];
 
         drawnCard = deck.draw(game);
@@ -221,16 +218,16 @@ describe('draw()', function() {
       });
 
       it('should empty the discard pile', () => {
-        expect(deck.discardPile.length).to.equal(0);
+        expect(deck.discardPile).has.length(0);
       });
 
       it('should have the correct number of remaining cards in the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(10);
+        expect(deck.drawPile).has.length(10);
       });
     });
   });
 
-  it('drawN', function() {
+  it('drawN', () => {
     const [game] = testGame(2);
     expect(game.projectDeck.drawN(game, 3)).to.have.length(3);
     game.projectDeck.drawPile.length = 2;
@@ -238,11 +235,19 @@ describe('draw()', function() {
     expect(game.projectDeck.drawN(game, 3)).to.have.length(0);
   });
 
-  it('drawNOrThrow', function() {
+  it('drawNOrThrow', () => {
     const [game] = testGame(2);
     expect(game.projectDeck.drawNOrThrow(game, 3)).to.have.length(3);
     game.projectDeck.drawPile.length = 2;
     expect(() => game.projectDeck.drawNOrThrow(game, 3)).to.throw();
+  });
+
+  it('size', () => {
+    const [game] = testGame(2);
+    game.projectDeck.drawPile.length = 2;
+    expect(game.projectDeck.size()).eq(2);
+    game.projectDeck.discardPile.push(fakeCard());
+    expect(game.projectDeck.size()).eq(3);
   });
 
   it('canDraw', () => {
@@ -251,6 +256,6 @@ describe('draw()', function() {
     game.projectDeck.drawPile.length = 2;
     expect(game.projectDeck.canDraw(3)).is.false;
     game.projectDeck.discardPile.push(fakeCard());
-    expect(game.projectDeck.canDraw(3)).is.false;
+    expect(game.projectDeck.canDraw(3)).is.true;
   });
 });

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('DeepWellHeating', function() {
-  it('Should play', function() {
+describe('DeepWellHeating', () => {
+  it('Should play', () => {
     const card = new DeepWellHeating();
     const [game, player] = testGame(2);
     const action = player.playCard(card);

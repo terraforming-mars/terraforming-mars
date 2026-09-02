@@ -28,19 +28,17 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'X31',
-        description: 'Add 2 asteroids to this card.',
+        cardNumber: 'X34',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 M€ to add 1 asteroid to ANY card.', (eb) => {
-            eb.megacredits(1).startAction.resource(CardResource.ASTEROID).asterix().nbsp.or();
-          }).br;
-          b.action('Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.', (eb) => {
-            eb.resource(CardResource.ASTEROID)
-              .startAction.production((pb) => pb.megacredits(1))
-              .or()
-              .titanium(2);
-          }).br;
-          b.resource(CardResource.ASTEROID, 2);
+          b.megacredits(1).arrow().resource(CardResource.ASTEROID).asterix().nbsp.or().br;
+          b.resource(CardResource.ASTEROID)
+            .arrow().production((pb) => pb.megacredits(1))
+            .or()
+            .titanium(2).br;
+
+          b.plainText('Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.', /* parens */ true);
+          b.br;
+          b.resource(CardResource.ASTEROID, 2).plainText('Add 2 asteroids to this card.');
         }),
       },
     });
@@ -85,11 +83,15 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
       });
 
     // Spend asteroid
-    if (!canAddAsteroid) return new OrOptions(gainTitaniumOption, increaseMcProdOption);
+    if (!canAddAsteroid) {
+      return new OrOptions(gainTitaniumOption, increaseMcProdOption);
+    }
 
     // Add asteroid to any card
     if (!hasAsteroids) {
-      if (asteroidCards.length === 1) return addAsteroidToSelf.cb(undefined);
+      if (asteroidCards.length === 1) {
+        return addAsteroidToSelf.cb(undefined);
+      }
       return addAsteroidOption;
     }
 

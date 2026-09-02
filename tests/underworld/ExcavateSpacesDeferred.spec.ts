@@ -2,17 +2,18 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
-import {cast, runAllActions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {Phase} from '../../src/common/Phase';
 import {ExcavateSpacesDeferred} from '../../src/server/underworld/ExcavateSpacesDeferred';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {cast} from '@/common/utils/utils';
 
 describe('ExcavateSpacesDeferred', () => {
   let player: TestPlayer;
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(2, {underworldExpansion: true});
     game.phase = Phase.ACTION;
   });
 
@@ -37,7 +38,7 @@ describe('ExcavateSpacesDeferred', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
 
-    expect(selectSpace.spaces).has.length(59);
+    expect(selectSpace.spaces).has.length(61);
     expect(space.excavator).is.undefined;
 
     cast(selectSpace.cb(space), undefined);
@@ -46,8 +47,8 @@ describe('ExcavateSpacesDeferred', () => {
 
     runAllActions(game);
     const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
-
     const space2 = selectSpace2.spaces[0];
+
     expect(selectSpace2.spaces).does.not.contain(space);
     expect(selectSpace2.spaces).does.contain(space2); // This line just supports the line above.
     expect(selectSpace2.spaces).has.length(3);

@@ -5,22 +5,22 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Miranda} from '../../../src/server/colonies/Miranda';
 import {IGame} from '../../../src/server/IGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('TradingColony', function() {
+describe('TradingColony', () => {
   let card: TradingColony;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TradingColony();
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(game.deferredActions).has.length(1);
 
@@ -30,12 +30,12 @@ describe('TradingColony', function() {
     expect(player.colonies.tradeOffset).to.eq(1);
   });
 
-  it('Can play if there are available colony tiles to build on', function() {
+  it('Can play if there are available colony tiles to build on', () => {
     game.colonies[0].colonies.push(player.id);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Cannot play if there are no available colony tiles to build on', function() {
+  it('Cannot play if there are no available colony tiles to build on', () => {
     game.colonies[0].colonies.push(player.id);
     game.colonies[1].colonies.push(player.id);
     expect(card.canPlay(player)).is.false;

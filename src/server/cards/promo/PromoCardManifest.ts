@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
+import {AlbedoPlants} from './AlbedoPlants';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AqueductSystems} from './AqueductSystems';
 import {ArcadianCommunities} from './ArcadianCommunities';
@@ -11,8 +12,10 @@ import {AstraMechanica} from './AstraMechanica';
 import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
+import {BoomTown} from './BoomTown';
 import {CarbonNanosystems} from './CarbonNanosystems';
-import {CityPark} from './CityPark';
+import {Casinos} from './Casinos';
+import {CityParks} from './CityParks';
 import {CometAiming} from './CometAiming';
 import {CorporateArchives} from './CorporateArchives';
 import {CrashSiteCleanup} from './CrashSiteCleanup';
@@ -25,6 +28,7 @@ import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
 import {EnergyMarket} from './EnergyMarket';
+import {EstablishedMethods} from './EstablishedMethods';
 import {Factorum} from './Factorum';
 import {FieldCappedCity} from './FieldCappedCity';
 import {FloydContinuum} from './FloydContinuum';
@@ -59,9 +63,13 @@ import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';
 import {PharmacyUnion} from './PharmacyUnion';
 import {Philares} from './Philares';
+import {PolderTechDutch} from './PolderTechDutch';
 import {Potatoes} from './Potatoes';
 import {ProjectInspection} from './ProjectInspection';
+import {ProtectedGrowth} from './ProtectedGrowth';
 import {Psyche} from './16Psyche';
+import {PublicBaths} from './PublicBaths';
+import {PublicPlans} from './PublicPlans';
 import {Recyclon} from './Recyclon';
 import {RedShips} from './RedShips';
 import {RegoPlastics} from './RegoPlastics';
@@ -74,6 +82,8 @@ import {SoilEnrichment} from './SoilEnrichment';
 import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
+import {StaticHarvesting} from './StaticHarvesting';
+import {SterlingVents} from './SterlingVents';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
@@ -81,6 +91,12 @@ import {Supermarkets} from './Supermarkets';
 import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
+import {Hospitals} from './Hospitals';
+import {NewHolland} from './NewHolland';
+import {Vermin} from './Vermin';
+import {WeatherBalloons} from './WeatherBalloons';
+
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -147,8 +163,18 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.ICY_IMPACTORS]: {Factory: IcyImpactors},
     [CardName.SOIL_ENRICHMENT]: {Factory: SoilEnrichment},
-    [CardName.CITY_PARK]: {Factory: CityPark},
+    [CardName.CITY_PARKS]: {Factory: CityParks},
     [CardName.SUPERMARKETS]: {Factory: Supermarkets},
+    [CardName.HOSPITALS]: {Factory: Hospitals},
+    [CardName.CASINOS]: {Factory: Casinos},
+    [CardName.PUBLIC_BATHS]: {Factory: PublicBaths},
+    [CardName.PROTECTED_GROWTH]: {Factory: ProtectedGrowth},
+    [CardName.NEW_HOLLAND]: {Factory: NewHolland},
+    [CardName.VERMIN]: {Factory: Vermin},
+    [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
+    [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
+    [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
+    [CardName.STERLING_VENTS]: {Factory: SterlingVents},
   },
 
   preludeCards: {
@@ -156,10 +182,16 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
+
+    // https://github.com/terraforming-mars/terraforming-mars/issues/5852
     // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
+
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
-    // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
+    [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
+    [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
+    [CardName.ALBEDO_PLANTS]: {Factory: AlbedoPlants},
+    [CardName.BOOM_TOWN]: {Factory: BoomTown},
   },
 
   cardsToRemove: [
@@ -178,5 +210,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
     [CardName.KUIPER_COOPERATIVE]: {Factory: KuiperCooperative},
+    [CardName.POLDERTECH_DUTCH]: {Factory: PolderTechDutch},
   },
 });

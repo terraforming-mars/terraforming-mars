@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {DomeFarming} from '../../../src/server/cards/prelude/DomeFarming';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('DomeFarming', function() {
-  it('Should play', function() {
+describe('DomeFarming', () => {
+  it('Should play', () => {
     const card = new DomeFarming();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

@@ -8,17 +8,21 @@ export class Miranda extends Colony {
   constructor() {
     super({
       name: ColonyName.MIRANDA,
-      description: [
-        'Add 1 animal to ANY card',
-        'Add n animals to ANY card',
-        'Draw 1 card',
-      ],
-
       cardResource: CardResource.ANIMAL,
-      buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
-      tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
-      tradeQuantity: [0, 1, 1, 2, 2, 3, 3],
-      colonyBonusType: ColonyBenefit.DRAW_CARDS,
+
+      build: {
+        description: 'Add 1 animal to ANY card',
+        type: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+      },
+      trade: {
+        description: 'Add n animals to ANY card',
+        type: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+        quantity: [0, 1, 1, 2, 2, 3, 3],
+      },
+      colony: {
+        description: 'Draw 1 card',
+        type: ColonyBenefit.DRAW_CARDS,
+      },
     });
   }
 }

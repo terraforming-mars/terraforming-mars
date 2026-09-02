@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {addCity} from '../../TestingUtils';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MartianRails', () => {
   let card: MartianRails;
@@ -15,7 +16,7 @@ describe('MartianRails', () => {
   });
 
   it('Can not act without energy', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.canAct(player)).is.not.true;
   });
 

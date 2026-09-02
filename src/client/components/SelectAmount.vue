@@ -2,7 +2,7 @@
   <div>
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <div class="flex">
-      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" >
       &nbsp;
       <AppButton size="big" type="max" @click="setMaxValue" title="MAX" />
       &nbsp;
@@ -12,9 +12,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectAmountModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
 interface DataModel {
@@ -22,17 +23,23 @@ interface DataModel {
   amount: string;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectAmount',
   components: {
     AppButton,
   },
   props: {
+    playerView: {
+      type: Object as () => PlayerViewModel,
+      required: true,
+    },
     playerinput: {
       type: Object as () => SelectAmountModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectAmountResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,

@@ -6,12 +6,13 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Units} from '../../../src/common/Units';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MiningRights', () => {
   let card: MiningRights;
@@ -72,7 +73,7 @@ describe('MiningRights', () => {
 
     action.cb(space);
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
 
     const deferredAction = game.deferredActions.pop();
 
@@ -98,7 +99,7 @@ describe('MiningRights', () => {
     orOptions.options[0].cb();
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const roboticWorkforce = new RoboticWorkforce();
     cast(roboticWorkforce.play(player), undefined);

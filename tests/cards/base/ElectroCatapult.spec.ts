@@ -4,8 +4,9 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {churnAction, cast, setOxygenLevel} from '../../TestingUtils';
+import {churn, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('ElectroCatapult', () => {
   let card: ElectroCatapult;
@@ -44,7 +45,7 @@ describe('ElectroCatapult', () => {
     player.plants = 1;
     player.steel = 1;
 
-    const orOptions = cast(churnAction(card, player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
 
     orOptions.options[0].cb();

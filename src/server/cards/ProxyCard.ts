@@ -1,6 +1,6 @@
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
-import {ICardMetadata} from '../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../common/cards/CardMetadata';
 import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from './IProjectCard';
 import {IPlayer} from '../IPlayer';
@@ -26,7 +26,10 @@ export class ProxyCard implements IProjectCard {
   public canPlay() {
     return false;
   }
-  public get metadata(): ICardMetadata {
+  public canPlayPostRequirements(): boolean {
+    return false;
+  }
+  public get metadata(): CardMetadata {
     throw new Error(this.name + ' is a proxy card, not a real card. Should not render');
   }
   public play() {
@@ -49,5 +52,9 @@ export class ProxyCard implements IProjectCard {
   }
   public get warnings() {
     return EMPTY_SET;
+  }
+  public addWarning(_warning: Warning): void {
+  }
+  public clearWarnings(): void {
   }
 }

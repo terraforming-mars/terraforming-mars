@@ -4,21 +4,22 @@ import {TileType} from '../../../src/common/TileType';
 import {RestrictedAreaAres} from '../../../src/server/cards/ares/RestrictedAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('RestrictedAreaAres', function() {
+describe('RestrictedAreaAres', () => {
   let card: RestrictedAreaAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RestrictedAreaAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);

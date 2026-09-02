@@ -13,8 +13,9 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CuriosityII extends CorporationCard {
+export class CuriosityII extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CURIOSITY_II,
@@ -26,7 +27,7 @@ export class CuriosityII extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'Y07',
         description: 'You start with 40 M€ and 2 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
@@ -48,9 +49,20 @@ export class CuriosityII extends CorporationCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE, SpaceBonus.ENERGY];
 
-    if (cardOwner.id !== activePlayer.id) return;
-    if (cardOwner.game.phase === Phase.SOLAR) return;
-    if (space.spaceType === SpaceType.COLONY) return;
+    // onTilePlaced gets called with Mars Nomads, should be ignored here.
+    if (space.tile === undefined) {
+      return;
+    }
+
+    if (cardOwner.id !== activePlayer.id) {
+      return;
+    }
+    if (cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
+    if (space.spaceType === SpaceType.COLONY) {
+      return;
+    }
 
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
       cardOwner.defer(() => this.corpAction(cardOwner));
@@ -58,7 +70,9 @@ export class CuriosityII extends CorporationCard {
   }
 
   private corpAction(player: IPlayer) {
-    if (!player.canAfford(2)) return undefined;
+    if (!player.canAfford(2)) {
+      return undefined;
+    }
 
     return new OrOptions(
       new SelectOption('Pay 2 M€ to draw a card').andThen(() => {

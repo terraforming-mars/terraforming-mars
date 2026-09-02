@@ -5,24 +5,25 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('MiningArea', function() {
+describe('MiningArea', () => {
   let card: MiningArea;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningArea();
     [game, player] = testGame(2);
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     for (const spaces of game.board.getAvailableSpacesOnLand(player)) {
       if (spaces.bonus.includes(SpaceBonus.STEEL) || spaces.bonus.includes(SpaceBonus.TITANIUM)) {
         const adjacents = game.board.getAdjacentSpaces(spaces);

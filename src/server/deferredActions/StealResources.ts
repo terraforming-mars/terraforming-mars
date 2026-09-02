@@ -14,8 +14,39 @@ export class StealResources extends DeferredAction {
     public resource: Resource,
     public count: number = 1,
     public title: string | Message = message('Select player to steal up to ${0} ${1} from', (b) => b.number(count).string(resource)),
+    public mandatory: boolean = false,
   ) {
     super(player, Priority.ATTACK_OPPONENT);
+  }
+
+  public static getCandidates(
+    player: IPlayer,
+    resource: Resource,
+    count: number,
+    mandatory: boolean = false): Array<IPlayer> {
+    return player.opponents.filter((p) => {
+      const minimum = mandatory ? count : 1;
+      const amt = p.stock.get(resource);
+      if (amt < minimum) {
+        return false;
+      }
+      if (resource === Resource.PLANTS) {
+        if (p.plantsAreProtected()) {
+          return false;
+        }
+        if (p.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
+          if (amt < minimum * 2) {
+            return false;
+          }
+        }
+      }
+      if ((resource === Resource.STEEL || resource === Resource.TITANIUM)) {
+        if (p.alloysAreProtected()) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 
   public execute() {
@@ -25,13 +56,7 @@ export class StealResources extends DeferredAction {
       return undefined;
     }
 
-    let candidates: Array<IPlayer> = this.player.getOpponents().filter((p) => p.stock.get(this.resource) > 0);
-    if (this.resource === Resource.PLANTS) {
-      candidates = candidates.filter((p) => !p.plantsAreProtected());
-    }
-    if (this.resource === Resource.STEEL || this.resource === Resource.TITANIUM) {
-      candidates = candidates.filter((p) => !p.alloysAreProtected());
-    }
+    const candidates = StealResources.getCandidates(this.player, this.resource, this.count, this.mandatory);
 
     if (candidates.length === 0) {
       return undefined;
@@ -41,7 +66,7 @@ export class StealResources extends DeferredAction {
       let qtyToSteal = Math.min(target.stock.get(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (this.resource === Resource.PLANTS && target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resource.PLANTS && target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 
@@ -49,20 +74,14 @@ export class StealResources extends DeferredAction {
         message('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(target)),
         'Steal')
         .andThen(() => {
-          target.maybeBlockAttack(this.player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
-              this.player.stock.add(this.resource, qtyToSteal);
-            }
-            return undefined;
-          });
+          target.attack(this.player, this.resource, qtyToSteal, {log: true, stealing: true});
           return undefined;
         });
     });
 
-    return new OrOptions(
-      ...stealOptions,
-      new SelectOption('Do not steal'),
-    );
+    if (!this.mandatory) {
+      stealOptions.push(new SelectOption('Do not steal'));
+    }
+    return new OrOptions(...stealOptions);
   }
 }

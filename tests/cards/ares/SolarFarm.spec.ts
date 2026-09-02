@@ -6,20 +6,21 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('SolarFarm', function() {
+describe('SolarFarm', () => {
   let card: SolarFarm;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SolarFarm();
     [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
-  it('Play', function() {
+  it('Play', () => {
     // Find the first spot with no hazard tile on it to place a city.
     const space = game.board.getAvailableSpacesForCity(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
     // Hack the space to have a large number of plants, just to show a matching
@@ -34,10 +35,15 @@ describe('SolarFarm', function() {
       SpaceBonus.PLANT,
     ];
 
-    const action = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpcae = cast(player.popWaitingFor(), SelectSpace);
+
     expect(player.production.energy).eq(0);
+
     const citySpace = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
-    action.cb(citySpace);
+    selectSpcae.cb(citySpace);
+
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);
     expect(citySpace.adjacency).to.deep.eq({

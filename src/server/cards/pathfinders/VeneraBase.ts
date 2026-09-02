@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {SpaceName} from '../../SpaceName';
+import {SpaceName} from '../../../common/boards/SpaceName';
 import {ActionCard} from '../ActionCard';
 
 export class VeneraBase extends ActionCard {

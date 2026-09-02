@@ -5,23 +5,24 @@ import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnima
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
-describe('VenusianAnimals', function() {
+describe('VenusianAnimals', () => {
   let card: VenusianAnimals;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VenusianAnimals();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setVenusScaleLevel(game, 16);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setVenusScaleLevel(game, 18);
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
@@ -34,5 +35,16 @@ describe('VenusianAnimals', function() {
     expect(card.resourceCount).to.eq(3);
 
     expect(card.getVictoryPoints(player)).to.eq(3);
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    player.playedCards.push(card);
+
+    expect(card.resourceCount).eq(0);
+
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    expect(card.resourceCount).eq(1);
   });
 });

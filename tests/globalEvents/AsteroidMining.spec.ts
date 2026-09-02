@@ -1,18 +1,15 @@
 import {expect} from 'chai';
-import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
 import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMining';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('AsteroidMining', function() {
-  it('resolve play', function() {
+describe('AsteroidMining (global event)', () => {
+  it('resolve play', () => {
     const card = new AsteroidMining();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    // turmoil.initGlobalEvent(game);
-    player.playedCards.push(new MethaneFromTitan());
-    player2.playedCards.push(new MethaneFromTitan());
-    player2.playedCards.push(new MethaneFromTitan());
+    player.tagsForTest = {jovian: 1};
+    player2.tagsForTest = {jovian: 2};
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
@@ -20,8 +17,20 @@ describe('AsteroidMining', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.titanium).to.eq(1);
     expect(player2.titanium).to.eq(5);
+  });
+
+  it('counts Delta Project extra Jovian tags', () => {
+    const card = new AsteroidMining();
+    const [game, player] = testGame(2, {turmoilExtension: true});
+    player.tagsForTest = {jovian: 1};
+    player.tags.extraJovianTags = 1;
+
+    card.resolve(game);
+
+    // Unlike wild tags, extra Jovian tags are real tags, so 'raw' counts them.
+    expect(player.titanium).to.eq(2);
   });
 });

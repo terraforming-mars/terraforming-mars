@@ -21,16 +21,16 @@ describe('SyndicatePirateRaids', () => {
     game.colonies[0].trade(player);
     game.colonies[1].trade(otherPlayer);
 
-    expect(player.colonies.tradesThisGeneration).eq(1);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(1);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(1);
 
     expect(game.colonies[0].visitor).eq(player.id);
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
 
     forceGenerationEnd(game);
 
-    expect(player.colonies.tradesThisGeneration).eq(0);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(0);
+    expect(player.colonies.usedTradeFleets).eq(0);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(0);
 
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).is.undefined;
@@ -40,8 +40,8 @@ describe('SyndicatePirateRaids', () => {
     game.colonies[0].trade(player);
     game.colonies[1].trade(otherPlayer);
 
-    expect(player.colonies.tradesThisGeneration).eq(1);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(1);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(1);
 
     expect(game.colonies[0].visitor).eq(player.id);
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
@@ -50,8 +50,8 @@ describe('SyndicatePirateRaids', () => {
 
     forceGenerationEnd(game);
 
-    expect(player.colonies.tradesThisGeneration).eq(0);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(0);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(1);
 
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
@@ -61,8 +61,8 @@ describe('SyndicatePirateRaids', () => {
     game.colonies[0].trade(player);
     game.colonies[1].trade(otherPlayer);
 
-    expect(player.colonies.tradesThisGeneration).eq(1);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(1);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(1);
 
     expect(game.colonies[0].visitor).eq(player.id);
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
@@ -71,16 +71,16 @@ describe('SyndicatePirateRaids', () => {
 
     forceGenerationEnd(game);
 
-    expect(player.colonies.tradesThisGeneration).eq(0);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(0);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(1);
 
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
 
     forceGenerationEnd(game);
 
-    expect(player.colonies.tradesThisGeneration).eq(0);
-    expect(otherPlayer.colonies.tradesThisGeneration).eq(0);
+    expect(player.colonies.usedTradeFleets).eq(0);
+    expect(otherPlayer.colonies.usedTradeFleets).eq(0);
 
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).is.undefined;

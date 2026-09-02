@@ -1,9 +1,10 @@
 import {IceAsteroid} from '../../../src/server/cards/base/IceAsteroid';
 import {testGame} from '../../TestGame';
-import {cast, maxOutOceans, testRedsCosts} from '../../TestingUtils';
+import {maxOutOceans, testRedsCosts} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('IceAsteroid', function() {
-  it('Should play', function() {
+describe('IceAsteroid', () => {
+  it('Should play', () => {
     const card = new IceAsteroid();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

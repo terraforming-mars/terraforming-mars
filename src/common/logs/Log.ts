@@ -7,4 +7,17 @@ export class Log {
       return cb(message.data[idx], idx);
     });
   }
+  public static parse(message: Message): Array<string | LogMessageData> {
+    // Regex that captures the placeholder strings like '${0}'
+    const regex = /(\$\{\d+\})/g;
+    const parsedArray = message.message.split(regex).filter(Boolean);
+
+    return parsedArray.map((item) => {
+      if (item.startsWith('${') && item.endsWith('}')) {
+        const idx = Number(item.substring(2, item.length - 1));
+        return message.data[idx];
+      }
+      return item;
+    });
+  }
 }

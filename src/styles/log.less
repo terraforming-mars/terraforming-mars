@@ -1,99 +1,164 @@
 .log-generations {
-    .log-title {
-        display: inline-block;
-        margin: 0px;
-        padding-bottom: 6px;
-        margin-right: 16px;
-    }
+  .log-title {
+    display: inline-block;
+    margin: 0px;
+    padding-bottom: 6px;
+    margin-right: 16px;
+  }
+  display: flex;
+  margin-bottom: 16px;
+  align-items: center;
+  .log-gen-title {
+    margin-left: 16px;
+    text-transform: uppercase;
+    font-family: Prototype, sans-serif;
+  }
+  .log-gen-numbers {
     display: flex;
-    margin-bottom: 16px;
-    align-items: center;
-    .log-gen-title {
-        margin-left: 16px;
-        text-transform: uppercase;
-        font-family: Prototype;
+    .log-gen-indicator {
+      padding: 2px 12px;
+      margin-left: 8px;
+      cursor: pointer;
+      border: 2px solid rgba(170, 170, 170, 0.6);
+      border-radius: 8px;
+      &:hover{
+        background: #aaa;
+        color: black;
+      }
     }
-    .log-gen-numbers {
-        display: flex;
-        .log-gen-indicator {
-            padding: 2px 12px;
-            margin-left: 8px;
-            cursor: pointer;
-            border: 2px solid rgba(170, 170, 170, 0.6);
-            border-radius: 8px;
-            &:hover{
-                background: #ccc;
-                color: black;
-            }
-        }
-        .log-gen-indicator--selected {
-            background: #ccc;
-            color: black;
-        }
+    .log-gen-indicator--selected {
+      background: #ccc;
+      color: black;
+      // Beats .log-gen-indicator:hover's higher specificity so the selected
+      // color wins when a selected button is also being hovered.
+      &:hover {
+        background: #ccc;
+      }
     }
+  }
 }
 
 .log-panel {
-    height: 240px;
-    max-height: 240px;
-    border-style: none;
-    font-size: 18px;
-    padding: 5px;
-    max-width: 860px;
-    background: #222;
-    position: relative;
-    .log-panel-actions {
-        position: absolute;
-        top: 20px;
-        right: 60px;
-    }
+  height: 240px;
+  max-height: 240px;
+  border-style: none;
+  font-size: 18px;
+  padding: 5px;
+  max-width: 860px;
+  background: @grey_900;
+  position: relative;
 
-    li {
-        margin-top: 0 !important;
-        list-style-type: none;
+  > .panel-body {
+    padding-right: 64px;
+    scrollbar-gutter: stable;
+  }
 
-        span {
-            margin-right: 5px;
-            font-size: 15px;
-        }
+  li {
+    margin-top: 0;
+    list-style-type: none;
+  }
 
-    }
+  ul {
+    margin: 0 !important;
+  }
+}
 
-    ul {
-        margin: 0 !important;
-    }
+.log-latest-button {
+  position: absolute;
+  right: 28px;
+  bottom: 8px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(170, 170, 170, 0.55);
+  border-radius: 4px;
+  background: rgba(51, 51, 51, 0.9);
+  color: #ddd;
+  cursor: pointer;
+
+  &:hover {
+    background: #ccc;
+    color: black;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ccc;
+    outline-offset: 2px;
+  }
+}
+
+.log-latest-button-icon {
+  width: 16px;
+  height: 16px;
+
+  path {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 }
 .card-panel{
-    display: inline-block;
-    .btn {
-        margin-top: 10px;
-    }
+  display: inline-block;
+  .btn {
+    margin-top: 10px;
+  }
 }
 
 .log-player {
-    text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
-    padding: 2px 10px;
-    border-radius: 2px;
-    font-weight: bold;
+  text-shadow:1px 1px 1px @grey_900, -1px -1px 1px #666;
+  padding: 2px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .log-card {
-    color: #000;
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-family: Ubuntu;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .log-tag {
   display: inline-block;
+  background-position: 0; // Override any tag-specific background position, which science currently has
   background-size: 18px;
   width: 18px;
   height: 18px;
   margin: 0 -6px -4px 0px;
+}
+
+.log-excavation-token {
+  color: #fff;
+  background: linear-gradient(-60deg, #805700 10%, #816a4c, #805700 90%);    // TODO(kberg): Add a pointer when this is clickable?
+  // cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.log-space-id {
+  color: black;
+  background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: Ubuntu, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .log-resource-megacredits {
@@ -107,11 +172,11 @@
 }
 
 .log-container {
-    .debugid {
-        font-size: 9px;
-        color: #888;
-        position: absolute;
-        bottom: 0px;
-        right: 50px;
-    }
+  .debugid {
+    font-size: 9px;
+    color: #888;
+    position: absolute;
+    bottom: 0px;
+    right: 68px;
+  }
 }

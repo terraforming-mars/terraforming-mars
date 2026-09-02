@@ -32,7 +32,7 @@ export class AquiferTurbines extends PreludeCard {
     return player.canAfford(3);
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 3));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
     return undefined;
   }
 }

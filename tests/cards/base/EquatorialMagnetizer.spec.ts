@@ -4,25 +4,25 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('EquatorialMagnetizer', function() {
+describe('EquatorialMagnetizer', () => {
   let card: EquatorialMagnetizer;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EquatorialMagnetizer();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     expect(player.production.energy).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 });

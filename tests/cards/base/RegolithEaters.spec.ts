@@ -1,30 +1,24 @@
 import {expect} from 'chai';
-import {cardAction, cast, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions, setRulingParty} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
-import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('RegolithEaters', function() {
-  let card: RegolithEaters;
-  let player: TestPlayer;
-  let game: IGame;
+describe('RegolithEaters', () => {
+  it('Should act', () => {
+    const card = new RegolithEaters();
+    const [game, player] = testGame(2);
 
-  beforeEach(function() {
-    card = new RegolithEaters();
-    [game, player] = testGame(2);
-  });
-
-  it('Should act', function() {
     player.playedCards.push(card);
-    expect(cardAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
-    expect(cardAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(2);
 
-    const orOptions = cast(cardAction(card, player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
 
     orOptions.options[1].cb();
     runAllActions(game);
@@ -34,5 +28,39 @@ describe('RegolithEaters', function() {
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
     expect(game.getOxygenLevel()).to.eq(1);
+  });
+
+  it('Cannot act with reds, 2MC', () => {
+    const card = new RegolithEaters();
+    const [game, player] = testGame(2, {turmoilExtension: true});
+
+    setRulingParty(game, PartyName.REDS);
+
+    card.resourceCount = 2;
+    player.megaCredits = 2;
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(card.resourceCount).to.eq(3);
+  });
+
+  it('Can act with reds, 3MC', () => {
+    const card = new RegolithEaters();
+    const [game, player] = testGame(2, {turmoilExtension: true});
+
+    setRulingParty(game, PartyName.REDS);
+
+    card.resourceCount = 2;
+    player.megaCredits = 3;
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
+
+    orOptions.options[0].cb();
+    runAllActions(game);
+    expect(card.resourceCount).to.eq(0);
+    expect(game.getOxygenLevel()).to.eq(1);
+    expect(player.megaCredits).eq(0);
   });
 });

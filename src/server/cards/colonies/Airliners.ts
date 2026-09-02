@@ -23,8 +23,7 @@ export class Airliners extends Card implements IProjectCard {
         cardNumber: 'C01',
         description: 'Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(2)).br;
-          b.resource(CardResource.FLOATER, 2).asterix();
+          b.production((pb) => pb.megacredits(2)).resource(CardResource.FLOATER, 2).asterix();
         }),
       },
     });

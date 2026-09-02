@@ -3,9 +3,10 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {IGame} from '../../IGame';
 import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {GlobalEventManifest, ModuleManifest} from '../../cards/ModuleManifest';
-import {isCompatibleWith} from '../../cards/ICardFactory';
+import {isCompatibleWith} from '../../cards/CardFactorySpec';
 import {inplaceShuffle} from '../../utils/shuffle';
-import {GameModule} from '@/common/cards/GameModule';
+import {GameModule} from '../../../common/cards/GameModule';
+import {toName} from '../../../common/utils/utils';
 
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
@@ -38,7 +39,9 @@ export function initializeGlobalEventDealer(allModuleManifests: Array<ModuleMani
 export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalEvent | undefined {
   const Factory = ALL_EVENTS.get(globalEventName);
 
-  if (Factory !== undefined) return new Factory();
+  if (Factory !== undefined) {
+    return new Factory();
+  }
   console.warn(`unable to find global event ${globalEventName}`);
   return undefined;
 }
@@ -69,6 +72,7 @@ export class GlobalEventDealer {
       ceo: gameOptions.ceoExtension,
       starwars: gameOptions.starWarsExpansion,
       underworld: gameOptions.underworldExpansion,
+      deltaProject: gameOptions.deltaProjectExpansion,
     };
 
     for (const manifest of ALL_MODULE_MANIFESTS) {
@@ -99,8 +103,8 @@ export class GlobalEventDealer {
 
   public serialize(): SerializedGlobalEventDealer {
     return {
-      deck: this.deck.map((card) => card.name),
-      discarded: this.discards.map((card) => card.name),
+      deck: this.deck.map(toName),
+      discarded: this.discards.map(toName),
     };
   }
 
@@ -108,12 +112,16 @@ export class GlobalEventDealer {
     const deck: Array<IGlobalEvent> = [];
     d.deck.forEach((element: GlobalEventName) => {
       const globalEvent = getGlobalEventByName(element);
-      if (globalEvent !== undefined) deck.push(globalEvent);
+      if (globalEvent !== undefined) {
+        deck.push(globalEvent);
+      }
     });
     const discardPile: Array<IGlobalEvent> = [];
     d.discarded.forEach((element: GlobalEventName) => {
       const globalEvent = getGlobalEventByName(element);
-      if (globalEvent !== undefined) discardPile.push(globalEvent);
+      if (globalEvent !== undefined) {
+        discardPile.push(globalEvent);
+      }
     });
     return new GlobalEventDealer(deck, discardPile);
   }

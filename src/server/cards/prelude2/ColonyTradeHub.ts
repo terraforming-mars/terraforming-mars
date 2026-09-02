@@ -5,8 +5,9 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
-export class ColonyTradeHub extends PreludeCard {
+export class ColonyTradeHub extends PreludeCard implements IPreludeCard {
   constructor() {
     super({
       name: CardName.COLONY_TRADE_HUB,
@@ -14,21 +15,21 @@ export class ColonyTradeHub extends PreludeCard {
 
       behavior: {
         production: {energy: 1},
-        stock: {titanium: 3},
+        stock: {titanium: 2},
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P46',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).titanium(3).br;
-          b.effect('When a colony is placed, gain 2 M€', (eb) => eb.colonies(1, {all}).startEffect.megacredits(2));
+          b.production((pb) => pb.energy(1)).titanium(2).br;
+          b.effect('When any colony is placed, gain 2 M€.', (eb) => eb.colonies(1, {all}).startEffect.megacredits(2));
         }),
-        description: 'Increase your energy production 1 step. Gain 3 titanium',
+        description: 'Increase your energy production 1 step. Gain 2 titanium',
       },
     });
   }
 
-  onColonyAdded(_player: IPlayer, cardOwner: IPlayer) {
+  onColonyAddedByAnyPlayer(cardOwner: IPlayer) {
     cardOwner.stock.add(Resource.MEGACREDITS, 2, {log: true});
   }
 }

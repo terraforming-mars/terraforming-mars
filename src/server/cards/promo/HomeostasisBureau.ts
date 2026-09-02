@@ -21,7 +21,7 @@ export class HomeostasisBureau extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X57',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you raise the temperature, gain 3 M€.', (eb) => eb.temperature(1).startEffect.megacredits(3));
           b.br;

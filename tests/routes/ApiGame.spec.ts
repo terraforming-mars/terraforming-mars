@@ -24,27 +24,29 @@ describe('ApiGame', () => {
 
   it('invalid id', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player, 'spectatorid'));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.get(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(statusCode.notFound);
-    expect(res.content).eq('Not found: game not found');
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).eq('Bad request: invalid game id');
   });
 
   it('valid id', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player, 'spectatorid'));
     scaffolding.url = '/api/game?id=game-valid-id';
     await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
     const json = JSON.parse(res.content);
     json.expectedPurgeTimeMs = -1;
+    json.name = 'game-name';
     expect(json).deep.eq(
       {
         'activePlayer': 'black',
         'expectedPurgeTimeMs': -1,
         'id': 'game-valid-id',
         'lastSoloGeneration': 14,
+        'name': 'game-name',
         'phase': 'research',
         'players': [
           {
@@ -53,33 +55,37 @@ describe('ApiGame', () => {
             'name': 'player-black',
           },
         ],
+        'spectatorId': 'spectatorid',
         'gameOptions': {
           'altVenusBoard': false,
-          'aresExtension': false,
+          'aresExtremeVariant': false,
           'bannedCards': [],
           'boardName': 'tharsis',
-          'ceoExtension': false,
-          'coloniesExtension': false,
-          'communityCardsOption': false,
-          'corporateEra': true,
           'draftVariant': false,
-          'escapeVelocityBonusSeconds': 2,
-          'escapeVelocityMode': false,
-          'escapeVelocityPenalty': 1,
-          'escapeVelocityPeriod': 2,
-          'escapeVelocityThreshold': 30,
+          'expansions': {
+            'ares': false,
+            'ceo': false,
+            'colonies': false,
+            'community': false,
+            'corpera': true,
+            'deltaProject': false,
+            'moon': false,
+            'pathfinders': false,
+            'prelude': false,
+            'prelude2': false,
+            'promo': false,
+            'starwars': false,
+            'turmoil': false,
+            'underworld': false,
+            'venus': false,
+          },
           'fastModeOption': false,
           'includedCards': [],
           'includeFanMA': false,
-          'includeVenusMA': true,
           'initialDraftVariant': false,
-          'moonExpansion': false,
-          'pathfindersExpansion': false,
+          'ceosDraftVariant': false,
           'politicalAgendasExtension': 'Standard',
-          'prelude2Expansion': false,
           'preludeDraftVariant': false,
-          'preludeExtension': false,
-          'promoCardsOption': false,
           'randomMA': 'No randomization',
           'removeNegativeGlobalEvents': false,
           'requiresMoonTrackCompletion': false,
@@ -89,11 +95,8 @@ describe('ApiGame', () => {
           'shuffleMapOption': false,
           'solarPhaseOption': false,
           'soloTR': false,
-          'turmoilExtension': false,
           'twoCorpsVariant': false,
-          'underworldExpansion': false,
           'undoOption': false,
-          'venusNextExtension': false,
         },
       },
     );

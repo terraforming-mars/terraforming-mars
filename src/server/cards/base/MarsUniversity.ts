@@ -9,6 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
 
 export class MarsUniversity extends Card implements IProjectCard {
   constructor() {
@@ -30,9 +31,17 @@ export class MarsUniversity extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-    for (let i = 0; i < scienceTags; i++) {
+    this.onScienceTagAdded(player, scienceTags);
+  }
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
+  }
+  public onScienceTagAdded(player: IPlayer, count: number) {
+    for (let i = 0; i < count; i++) {
       player.defer(() => {
         // No card to discard
         if (player.cardsInHand.length === 0) {

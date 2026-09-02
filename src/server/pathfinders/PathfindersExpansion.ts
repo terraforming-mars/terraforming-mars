@@ -1,8 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../../common/cards/CardName';
 import {IGame} from '../IGame';
-import {GameOptions} from '../game/GameOptions';
-import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
 import {PathfindersData, PlanetaryTag, isPlanetaryTag} from './PathfindersData';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
@@ -10,32 +8,31 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {PlanetaryTracks} from '../../common/pathfinders/PlanetaryTracks';
+import {PLANETARY_TRACKS} from '../../common/pathfinders/PlanetaryTracks';
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
-import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
+import {SelectResource} from '../inputs/SelectResource';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {Priority} from '../deferredActions/Priority';
-
-export const TRACKS = PlanetaryTracks.initialize();
+import {message} from '../logs/MessageBuilder';
 
 export class PathfindersExpansion {
   private constructor() {
   }
 
-  public static initialize(gameOptions: GameOptions): PathfindersData {
+  public static initialize(game: IGame): PathfindersData {
     return {
-      venus: gameOptions.venusNextExtension ? 0 : -1,
+      venus: game.tags.includes(Tag.VENUS) ? 0 : -1,
       earth: 0,
       mars: 0,
       jovian: 0,
-      moon: gameOptions.moonExpansion ? 0 : -1,
+      moon: game.tags.includes(Tag.MOON) ? 0 : -1,
       vps: [],
     };
   }
@@ -50,6 +47,26 @@ export class PathfindersExpansion {
         PathfindersExpansion.raiseTrack(tag, player);
       }
     });
+  }
+
+  public static willGainEnergyProductionOnNextMarsTag(player: IPlayer, count: 1 | 2 = 1): boolean {
+    const data = player.game.pathfindersData;
+    if (data === undefined) {
+      return false;
+    }
+    const idx = data[Tag.MARS] + count;
+    const rewards = PLANETARY_TRACKS[Tag.MARS].spaces[idx]?.risingPlayer;
+
+    if (rewards === undefined) {
+      return false;
+    }
+    if (rewards.includes('energy_production')) {
+      return true;
+    }
+    if (count === 2) {
+      return this.willGainEnergyProductionOnNextMarsTag(player, 1);
+    }
+    return false;
   }
 
   public static raiseTrack(tag: PlanetaryTag, player: IPlayer, steps: number = 1): void {
@@ -67,7 +84,7 @@ export class PathfindersExpansion {
       // throw new Error('Pathfinders not defined');
     }
 
-    const track = TRACKS[tag];
+    const track = PLANETARY_TRACKS[tag];
     if (track === undefined) {
       return;
     }
@@ -81,7 +98,9 @@ export class PathfindersExpansion {
 
     const lastSpace = Math.min(track.spaces.length - 1, space + steps);
     const distance = lastSpace - space;
-    if (distance === 0) return;
+    if (distance === 0) {
+      return;
+    }
 
     if (typeof(from) === 'object') {
       game.log('${0} raised the ${1} planetary track ${2} step(s)', (b) => {
@@ -106,22 +125,22 @@ export class PathfindersExpansion {
             PathfindersExpansion.grant(reward, from, tag);
           });
         }
-        rewards.everyone.forEach((reward) => {
-          game.getPlayers().forEach((p) => {
+      }
+      rewards.everyone.forEach((reward) => {
+        game.players.forEach((p) => {
+          PathfindersExpansion.grant(reward, p, tag);
+        });
+      });
+      if (rewards.mostTags.length > 0) {
+        const players = PathfindersExpansion.playersWithMostTags(
+          tag,
+          game.players.slice(),
+          (typeof(from) === 'object') ? from : undefined);
+        rewards.mostTags.forEach((reward) => {
+          players.forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
-        if (rewards.mostTags.length > 0) {
-          const players = PathfindersExpansion.playersWithMostTags(
-            tag,
-            game.getPlayers().slice(),
-            (typeof(from) === 'object') ? from : undefined);
-          rewards.mostTags.forEach((reward) => {
-            players.forEach((p) => {
-              PathfindersExpansion.grant(reward, p, tag);
-            });
-          });
-        }
       }
       // game.indentation--;
     }
@@ -152,9 +171,7 @@ export class PathfindersExpansion {
     case '6mc':
       player.stock.add(Resource.MEGACREDITS, 6, {log: true});
       break;
-    case 'any_resource':
-      game.defer(new GrantResourceDeferred(player, false));
-      break;
+    //   break;
     case 'card':
       player.drawCard();
       break;
@@ -203,8 +220,13 @@ export class PathfindersExpansion {
     case 'plant_production':
       player.production.add(Resource.PLANTS, 1, {log: true});
       break;
+    case 'any_resource':
     case 'resource':
-      game.defer(new SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
+      player.defer(new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(1)))
+        .andThen((unit) => {
+          player.stock.add(unit, 1, {log: true});
+          return undefined;
+        }));
       break;
     case 'steel':
       player.stock.add(Resource.STEEL, 1, {log: true});
@@ -246,18 +268,18 @@ export class PathfindersExpansion {
     return result;
   }
 
-  public static calculateVictoryPoints(player: IPlayer, victoryPointsBreakdown: VictoryPointsBreakdown) {
+  public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
     const data = player.game.pathfindersData;
     if (data === undefined) {
       return;
     }
     data.vps
       .filter((vp) => vp.id === player.id)
-      .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
+      .forEach((vp) => builder.setVictoryPoints('planetary tracks', vp.points, vp.tag));
   }
 
   public static addToSolBank(player: IPlayer) {
-    const solBank = player.getCorporation(CardName.SOLBANK);
+    const solBank = player.tableau.get(CardName.SOLBANK);
     if (solBank !== undefined) {
       player.defer(
         () => player.addResourceTo(solBank, {qty: 1, log: true}),

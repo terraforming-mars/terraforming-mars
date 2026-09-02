@@ -42,7 +42,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: IPlayer) {
-    player.stock.add(Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
+    player.stock.add(Resource.MEGACREDITS, Math.min(5, this.resourceCount--), {log: true});
     return undefined;
   }
 }

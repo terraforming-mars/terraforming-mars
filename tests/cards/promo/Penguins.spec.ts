@@ -5,27 +5,27 @@ import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('Penguins', function() {
+describe('Penguins', () => {
   let card: Penguins;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Penguins();
     [game, player] = testGame(1);
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     maxOutOceans(player, 7);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     maxOutOceans(player, 8);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
     card.action(player);
@@ -33,7 +33,7 @@ describe('Penguins', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
     player.playedCards.push(card);
     card.action(player);
     runAllActions(game);

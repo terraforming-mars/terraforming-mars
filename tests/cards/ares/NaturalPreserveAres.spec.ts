@@ -5,20 +5,21 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('NaturalPreserveAres', function() {
+describe('NaturalPreserveAres', () => {
   let card: NaturalPreserveAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NaturalPreserveAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     runAllActions(game);

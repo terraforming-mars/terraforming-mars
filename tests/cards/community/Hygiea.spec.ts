@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Hygiea} from '../../../src/server/cards/community/Hygiea';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
@@ -10,6 +10,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('Hygiea', () => {
   let hygiea: Hygiea;
@@ -59,7 +60,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[0].cb();
 
     expect(player.megaCredits).to.eq(13);
@@ -73,7 +74,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[1].cb();
 
     expect(player.megaCredits).to.eq(10);
@@ -102,7 +103,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[0].cb();
 
     expect(player.megaCredits).to.eq(13);
@@ -114,6 +115,6 @@ describe('Hygiea', () => {
 
     expect(player.megaCredits).to.eq(10);
     expect(player2.megaCredits).to.eq(10);
-    expect(player.playedCards).to.have.members([lawSuit]);
+    expect(player.playedCards.asArray()).to.have.members([lawSuit]);
   });
 });

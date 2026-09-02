@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SelfSufficientSettlement} from '../../../src/server/cards/prelude/SelfSufficientSettlement';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TileType} from '../../../src/common/TileType';
+import {runAllActions} from '../../TestingUtils';
+import {assertPlaceCity} from '../../assertions';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('SelfSufficientSettlement', function() {
-  it('Should play', function() {
+describe('SelfSufficientSettlement', () => {
+  it('Should play', () => {
     const [game, player] = testGame(1);
     const card = new SelfSufficientSettlement();
 
@@ -18,15 +18,6 @@ describe('SelfSufficientSettlement', function() {
     cast(action, undefined);
 
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
-    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    const space = selectSpace.spaces[0];
-
-    expect(space.player).is.undefined;
-    expect(space.tile).is.undefined;
-
-    selectSpace.cb(space);
-
-    expect(space.player).eq(player);
-    expect(space.tile?.tileType).eq(TileType.CITY);
+    assertPlaceCity(player, player.popWaitingFor());
   });
 });

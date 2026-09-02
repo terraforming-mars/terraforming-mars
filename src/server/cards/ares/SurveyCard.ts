@@ -6,7 +6,6 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../../common/Phase';
 import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
@@ -14,6 +13,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Board} from '../../boards/Board';
+import {AresHandler} from '../../ares/AresHandler';
 
 /**
  * Abstraction for cards that give rewards based on tile placement.  (e.g. Ecological Survey, Geological Survey.)
@@ -23,10 +23,16 @@ export abstract class SurveyCard extends Card implements IProjectCard {
     super(properties);
   }
 
-  private anyAdjacentSpaceGivesBonus(player: IPlayer, space: Space, bonus: SpaceBonus): boolean {
-    return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
+  /**
+   * Returns true if this space yields an adjacency bonus.
+   */
+  private anyAdjacentSpaceGivesBonus(board: Board, space: Space, bonus: SpaceBonus): boolean {
+    return board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 
+  /**
+   * Returns true if the tile just placed gives a bonus of a given type.
+   */
   private grantsBonusNow(space: Space, bonus: SpaceBonus) {
     return space.tile?.covers === undefined && space.bonus.includes(bonus);
   }
@@ -51,31 +57,40 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       (b) => b.player(cardOwner).string(resource).cardName(this.name));
   }
 
-  protected testForStandardResource(cardOwner: IPlayer, space: Space, resource: Resource, bonus: SpaceBonus) {
-    let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus);
+  /**
+   * Optionally grants a unit of `resource` (which matches `bonus`) based on `cardOwner` having placed a tile on `space`.
+   */
+  protected maybeRewardStandardResource(cardOwner: IPlayer, space: Space, resource: Resource, bonus: SpaceBonus): void {
+    const board = cardOwner.game.board;
+    let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(board, space, bonus);
     if (!grant) {
       switch (resource) {
       case Resource.STEEL:
         grant = space.spaceType !== SpaceType.COLONY &&
-            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mfp01');
+            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mp01');
         break;
       case Resource.PLANTS:
         grant = Board.isUncoveredOceanSpace(space) &&
-          cardOwner.cardIsInEffect(CardName.ARCTIC_ALGAE);
+          cardOwner.tableau.has(CardName.ARCTIC_ALGAE);
       }
     }
     if (grant) {
-      cardOwner.game.defer(new GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
+      cardOwner.stock.add(resource, 1);
+      this.log(cardOwner, resource);
     }
   }
 
-  protected testForCardResource(cardOwner: IPlayer, space: Space, resource: CardResource, bonus: SpaceBonus) {
+  /**
+   * Optionally grants a unit of `resource` (which matches `bonus`) based on `cardOwner` having placed a tile on `space`.
+   */
+  protected maybeRewardCardResource(cardOwner: IPlayer, space: Space, resource: CardResource, bonus: SpaceBonus) {
+    const board = cardOwner.game.board;
     if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
-        (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
+        (this.grantsBonusNow(space, bonus) || AresHandler.anyAdjacentSpaceGivesBonus(board, space, bonus))) {
       cardOwner.game.defer(new AddResourcesToCard(
         cardOwner,
         resource,
-        {log: false}))
+        {log: true}))
         .andThen(() => this.log(cardOwner, resource));
     }
   }

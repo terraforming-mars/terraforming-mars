@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {MetalRichAsteroid} from '../../../src/server/cards/prelude/MetalRichAsteroid';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('Metal-RichAsteroid', function() {
-  it('Should play', function() {
+describe('Metal-RichAsteroid', () => {
+  it('Should play', () => {
     const card = new MetalRichAsteroid();
     const [game, player] = testGame(1);
     cast(card.play(player), undefined);

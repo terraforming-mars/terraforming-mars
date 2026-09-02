@@ -5,9 +5,12 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';
+import {AresHandler} from '../../ares/AresHandler';
+import {BoardType} from '../../boards/BoardType';
+import {MarsBoard} from '../../boards/MarsBoard';
+import {Space} from '../../boards/Space';
 export class MarsNomads extends Card implements IActionCard {
   /*
    * A good page about this card: https://boardgamegeek.com/thread/3154812.
@@ -26,7 +29,7 @@ export class MarsNomads extends Card implements IActionCard {
       cost: 13,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X59',
         renderData: CardRenderer.builder((b) => {
           b.action('MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS ' +
             'as if placing a special tile there. No tiles may be placed on the Nomad area.', (ab) => {
@@ -55,6 +58,14 @@ export class MarsNomads extends Card implements IActionCard {
       });
   }
 
+  private canAffordPlacementBonus(player: IPlayer, space: Space): boolean {
+    // Bonuses are not granted when moving onto a hazard tile.
+    if (AresHandler.hasHazardTile(space)) {
+      return true;
+    }
+    return MarsBoard.canAffordPlacementBonuses(player, space);
+  }
+
   private eliglbleDestinationSpaces(player: IPlayer) {
     const game = player.game;
     const board = game.board;
@@ -62,17 +73,18 @@ export class MarsNomads extends Card implements IActionCard {
       return [];
     }
 
-    const availableSpaces = board.getAvailableSpacesOnLand(player);
+    const availableSpaces = board.getNonReservedLandSpaces();
     const currentNomadSpace = board.getSpaceOrThrow(game.nomadSpace);
     const adjacentSpaces = board.getAdjacentSpaces(currentNomadSpace);
-    return intersection(availableSpaces, adjacentSpaces);
+    return intersection(availableSpaces, adjacentSpaces)
+      .filter((space) => this.canAffordPlacementBonus(player, space));
   }
 
   public canAct(player: IPlayer) {
     return this.eliglbleDestinationSpaces(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const spaces = this.eliglbleDestinationSpaces(player);
 
     return new SelectSpace(
@@ -80,7 +92,15 @@ export class MarsNomads extends Card implements IActionCard {
       spaces)
       .andThen((space) => {
         player.game.nomadSpace = space.id;
-        player.game.grantPlacementBonuses(player, space, false);
+
+        // Don't grant bonuses when moving onto hazard tiles. Even though you're allowed
+        // to move Mars Nomads onto that space.
+        const coveringExistingSpace = AresHandler.hasHazardTile(space);
+        player.game.grantPlacementBonuses(player, space, coveringExistingSpace);
+
+        // Trigger onTilePlaced callbacks even though no actual tile is placed.
+        // Note: all onTilePlaced callbacks must handle space.tile being undefined.
+        player.game.triggerForAllCards((p, c) => c.onTilePlaced?.(p, player, space, BoardType.MARS));
 
         return undefined;
       });

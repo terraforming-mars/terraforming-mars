@@ -1,39 +1,40 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {RedSpotObservatory} from '../../../src/server/cards/colonies/RedSpotObservatory';
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {churn} from '../../TestingUtils';
 
-describe('RedSpotObservatory', function() {
+describe('RedSpotObservatory', () => {
   let card: RedSpotObservatory;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RedSpotObservatory();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.tagsForTest = {science: 2};
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.tagsForTest = {science: 3};
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
 
     player.addResourceTo(card, 3);
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
 
     expect(player.cardsInHand).has.lengthOf(1);

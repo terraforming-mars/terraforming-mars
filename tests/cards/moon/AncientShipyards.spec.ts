@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {churnAction} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 
@@ -19,9 +19,9 @@ describe('AncientShipyards', () => {
     player.cardsInHand = [card];
     player.titanium = 2;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.titanium = 3;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -33,13 +33,22 @@ describe('AncientShipyards', () => {
     expect(player.titanium).eq(0);
   });
 
+  it('canAct: false when any opponent has fewer than 2 M€', () => {
+    player2.megaCredits = 2;
+    player3.megaCredits = 1;
+    expect(card.canAct(player)).is.false;
+
+    player3.megaCredits = 2;
+    expect(card.canAct(player)).is.true;
+  });
+
   it('act', () => {
     expect(card.resourceCount).eq(0);
     player.megaCredits = 0;
     player2.megaCredits = 10;
     player3.megaCredits = 7;
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(player.megaCredits).eq(4);
     expect(player2.megaCredits).eq(8);
@@ -53,7 +62,7 @@ describe('AncientShipyards', () => {
     expect(card.resourceCount).eq(0);
     player.megaCredits = 10;
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(player.megaCredits).eq(12);
     expect(card.resourceCount).eq(1);

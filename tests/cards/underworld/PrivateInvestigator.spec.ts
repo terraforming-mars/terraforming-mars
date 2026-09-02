@@ -1,8 +1,9 @@
 import {expect} from 'chai';
 import {PrivateInvestigator} from '../../../src/server/cards/underworld/PrivateInvestigator';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('PrivateInvestigator', () => {
   it('Should play', () => {
@@ -14,17 +15,17 @@ describe('PrivateInvestigator', () => {
     player3.underworldData.corruption = 0;
     player4.underworldData.corruption = 3;
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     player.playCard(card);
     runAllActions(game);
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     expect(selectPlayer.players).to.have.members([player2, player4]);
     selectPlayer.cb(player2);
-    expect(player2.playedCards).includes(card);
-    expect(player.playedCards).does.not.include(card);
+    expect(player2.playedCards.get(card.name)).deep.eq(card);
+    expect(player.playedCards.get(card.name)).is.undefined;
   });
 });

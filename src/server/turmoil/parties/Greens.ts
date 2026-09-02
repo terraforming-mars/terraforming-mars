@@ -3,11 +3,11 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {BaseBonus} from '../Bonus';
-import {Policy} from '../Policy';
+import {Bonus} from '../Bonus';
+import {IPolicy} from '../Policy';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../../cards/IProjectCard';
+import {ICard} from '../../cards/ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -25,7 +25,7 @@ export class Greens extends Party implements IParty {
   readonly policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
 
-class GreensBonus01 extends BaseBonus {
+class GreensBonus01 extends Bonus {
   readonly id = 'gb01' as const;
   readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
@@ -36,11 +36,11 @@ class GreensBonus01 extends BaseBonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
-class GreensBonus02 extends BaseBonus {
+class GreensBonus02 extends Bonus {
   readonly id = 'gb02' as const;
   readonly description = 'Gain 2 M€ for each greenery tile you have';
 
@@ -51,43 +51,43 @@ class GreensBonus02 extends BaseBonus {
   }
 
   grantForPlayer(player: IPlayer): void {
-    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
-class GreensPolicy01 implements Policy {
+class GreensPolicy01 implements IPolicy {
   readonly id = 'gp01' as const;
   readonly description = 'When you place a greenery tile, gain 4 M€';
 
   onTilePlaced(player: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
-      player.stock.add(Resource.MEGACREDITS, 4);
+      player.stock.add(Resource.MEGACREDITS, 4, {log: true, from: {partyName: PartyName.GREENS}});
     }
   }
 }
 
-class GreensPolicy02 implements Policy {
+class GreensPolicy02 implements IPolicy {
   readonly id = 'gp02' as const;
   readonly description = 'When you place a tile, gain 1 plant';
 
   onTilePlaced(player: IPlayer) {
-    player.stock.add(Resource.PLANTS, 1);
+    player.stock.add(Resource.PLANTS, 1, {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
-class GreensPolicy03 implements Policy {
+class GreensPolicy03 implements IPolicy {
   readonly id = 'gp03' as const;
   readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: ICard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
-    player.stock.add(Resource.MEGACREDITS, tagCount * 2);
+    player.defer(() => player.stock.add(Resource.MEGACREDITS, tagCount * 2, {log: true, from: {partyName: PartyName.GREENS}}));
   }
 }
 
-class GreensPolicy04 implements Policy {
+class GreensPolicy04 implements IPolicy {
   readonly id = 'gp04' as const;
   readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
 
@@ -108,7 +108,7 @@ class GreensPolicy04 implements Policy {
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
             new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
-              player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
+              player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true, from: {partyName: PartyName.GREENS}});
 
               return undefined;
             }),
@@ -118,7 +118,7 @@ class GreensPolicy04 implements Policy {
             new SelectOption('Add 2 microbes to a card').andThen(() => {
               return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards)
                 .andThen(([card]) => {
-                  player.addResourceTo(card, {qty: 2, log: true});
+                  player.addResourceTo(card, {qty: 2, log: true, from: {partyName: PartyName.GREENS}});
                   return undefined;
                 });
             }),
@@ -126,12 +126,13 @@ class GreensPolicy04 implements Policy {
         }
 
         orOptions.options.push(new SelectOption('Gain 3 plants').andThen(() => {
-          player.stock.add(Resource.PLANTS, 3);
-          game.log('${0} gained 3 plants', (b) => b.player(player));
+          player.stock.add(Resource.PLANTS, 3, {log: true, from: {partyName: PartyName.GREENS}});
           return undefined;
         }));
 
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) {
+          return orOptions.options[0].cb();
+        }
 
         player.defer(orOptions);
         return undefined;

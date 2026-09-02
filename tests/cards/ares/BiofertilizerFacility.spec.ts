@@ -9,9 +9,10 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('BiofertilizerFacility', function() {
+describe('BiofertilizerFacility', () => {
   let card: BiofertilizerFacility;
   let player: TestPlayer;
   let game: IGame;
@@ -19,18 +20,18 @@ describe('BiofertilizerFacility', function() {
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BiofertilizerFacility();
     [game, player] = testGame(2, {aresExtension: true});
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });
 
-  it('Cannot play without a science tag', function() {
+  it('Cannot play without a science tag', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Play', function() {
+  it('Play', () => {
     // Set up the cards.
     // Adds the necessary Science tag.
     player.playCard(scienceTagCard);

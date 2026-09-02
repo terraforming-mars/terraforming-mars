@@ -71,10 +71,8 @@
     "Miranda": "Миранда",
     "Add 1 animal to ANY card": "Добавьте 1 животное на любую карту",
     "Add n animals to ANY card": "Добавьте X животных на любую карту",
-    "Draw 1 card": "Доберите 1 карту",
 
     "Pluto": "Плутон",
-    "Draw 2 cards": "Доберите 2 карты",
     "Draw n cards": "Коберите X карт",
     "Draw 1 card and then discard 1 card": "Доберите 1 карту, затем сбросьте 1 карту",
 
@@ -114,7 +112,7 @@
     "Leavitt": "Ливитт",
     "Gain 1 science tag": "Получите 1 метку науки",
     "Draw n cards, keep 1": "Доберите X карт, оставьте себе 1 одних, остальные сбросьте",
-    "Draw 1 card which you may pay to keep": "Доберите 1 карту, можете оставить ее себе",
+    "Reveal 1 card which you may pay to keep": "Доберите 1 карту, можете оставить ее себе",
 
     "Pallas": "Паллада",
     "Gain +1 influence": "Получите 1 влияние",

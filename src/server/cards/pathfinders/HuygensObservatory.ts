@@ -53,8 +53,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
       return;
     }
 
-    const orOptions = new OrOptions();
-    orOptions.title = 'Select a trade fleet';
+    const orOptions = new OrOptions().setTitle('Select a trade fleet');
 
     const visitedColonies = game.colonies.filter((colony) => colony.visitor === player.id);
     const hasFreeTradeFleet = visitedColonies.length < player.colonies.getFleetSize();
@@ -70,8 +69,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
               '${0} is reusing a trade fleet from ${1}',
               (b) => b.player(player).colony(colony));
             colony.visitor = undefined;
-            // TODO(kberg): counting the trades in a generation is not the same as using trade fleets. :[
-            player.colonies.tradesThisGeneration--;
+            player.colonies.usedTradeFleets--;
             player.defer(() => tradeInput);
             return undefined;
           }));

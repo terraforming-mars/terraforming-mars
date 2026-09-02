@@ -3,7 +3,7 @@ import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {BasicInfrastructure} from '../../../src/server/cards/moon/BasicInfrastructure';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
@@ -22,7 +22,7 @@ describe('BasicInfrastructure', () => {
 
   it('play', () => {
     expect(player.production.megacredits).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.logisticRate).eq(0);
     expect(player.colonies.getFleetSize()).eq(1);
 
@@ -31,7 +31,7 @@ describe('BasicInfrastructure', () => {
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.colonies.getFleetSize()).eq(2);
   });
 });

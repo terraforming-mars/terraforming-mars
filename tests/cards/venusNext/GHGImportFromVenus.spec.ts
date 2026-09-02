@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {GHGImportFromVenus} from '../../../src/server/cards/venusNext/GHGImportFromVenus';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('GHGImportFromVenus', function() {
-  it('Should play', function() {
+describe('GHGImportFromVenus', () => {
+  it('Should play', () => {
     const card = new GHGImportFromVenus();
     const [game, player] = testGame(2);
 

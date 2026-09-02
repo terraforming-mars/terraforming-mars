@@ -3,10 +3,10 @@ import {expect} from 'chai';
 import {TropicalResort} from '../../../src/server/cards/base/TropicalResort';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('TropicalResort', function() {
-  it('Should play', function() {
+describe('TropicalResort', () => {
+  it('Should play', () => {
     const card = new TropicalResort();
     const [/* game */, player] = testGame(1);
     player.production.add(Resource.HEAT, 2);

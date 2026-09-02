@@ -1,26 +1,27 @@
 <template>
     <div class="player-allied-party">
         <div v-if="player.alliedParty" class='allied-policy-block'>
-            <AlliedPartyAgenda :id="player.alliedParty.agenda.policyId" :partyName="player.alliedParty.partyName"></AlliedPartyAgenda>
+            <TurmoilAgenda :id="player.alliedParty.agenda.policyId" :show-party-badge="true"/>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import AlliedPartyAgenda from '@/client/components/turmoil/AlliedPartyAgenda.vue';
+import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerAlliedParty',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
   },
   components: {
-    AlliedPartyAgenda,
+    TurmoilAgenda,
   },
 });
 

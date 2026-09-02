@@ -3,10 +3,11 @@ import {MoholeArea} from '../../../src/server/cards/base/MoholeArea';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('MoholeArea', function() {
-  it('Should play', function() {
+describe('MoholeArea', () => {
+  it('Should play', () => {
     const card = new MoholeArea();
     const [game, player] = testGame(2);
     card.play(player);

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {GeothermalNetwork} from '../../../src/server/cards/underworld/GeothermalNetwork';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
 describe('GeothermalNetwork', () => {
   it('canPlay', () => {
     const card = new GeothermalNetwork();
-    const [game, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
-    game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.false;
-    game.board.getAvailableSpacesOnLand(player)[1].excavator = player;
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.false;
-    game.board.getAvailableSpacesOnLand(player)[2].excavator = player;
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.true;
   });
 

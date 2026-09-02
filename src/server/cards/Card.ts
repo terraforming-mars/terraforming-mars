@@ -1,4 +1,4 @@
-import {ICardMetadata} from '../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../common/cards/CardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardDiscount, GlobalParameterRequirementBonus} from '../../common/cards/Types';
@@ -8,10 +8,10 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {ICard} from './ICard';
-import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
+import {GetVictoryPointsContext, ICard} from './ICard';
+import * as DynamicVictoryPoints from './render/DynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
-import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
@@ -24,9 +24,12 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {YesAnd} from './requirements/CardRequirement';
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {Resource} from '@/common/Resource';
+
+const NO_WARNINGS: ReadonlySet<Warning> = new Set();
 
 /**
  * Cards that do not need a cost attribute.
@@ -40,7 +43,7 @@ const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
 
 /* Properties that are the same internally and externally */
 type SharedProperties = {
-  /** @deprecated use behavior */
+  /** Prefer setting adjacencyBonus inside behavior.tile instead. */
   adjacencyBonus?: AdjacencyBonus;
   action?: Behavior | undefined;
   behavior?: Behavior | undefined;
@@ -51,16 +54,22 @@ type SharedProperties = {
   initialActionText?: string;
   firstAction?: Behavior & {text: string};
   globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
-  metadata: ICardMetadata;
+  metadata: CardMetadata;
   requirements?: CardRequirementsDescriptor;
   name: CardName;
   resourceType?: CardResource;
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  /** Describes where the card's TR comes from. */
+  /**
+   * Describes where the card's TR comes from.
+   *
+   * No need to be explicit about this if all the TR raising
+   * comes from `behavior`.
+   */
+
   tr?: TRSource,
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
 }
 
 /* Internal representation of card properties. */
@@ -102,7 +111,9 @@ const cardProperties = new Map<CardName, InternalProperties>();
 export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
-  public warnings = new Set<Warning>();
+  // Warnings are a read-only set because the X00_000 sets that are just empty consume many MB for no value.
+  public warnings: ReadonlySet<Warning> = NO_WARNINGS;
+  public additionalProjectCosts?: AdditionalProjectCosts = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;
@@ -129,7 +140,7 @@ export abstract class Card implements ICard {
       Card.validateTilesBuilt(external);
       step = 5;
     } catch (e) {
-      throw new Error(`Cannot validate ${name} (${step}): ${e}`);
+      throw new Error(`Cannot validate ${name} (${step})`, {cause: e});
     }
 
     const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
@@ -222,22 +233,20 @@ export abstract class Card implements ICard {
   public get tr(): TRSource | undefined {
     return this.properties.tr;
   }
-  public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
+  public get victoryPoints(): number | 'special' | CountableVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let yesAnd: YesAnd | undefined = undefined;
-    const satisfied = this.properties.compiledRequirements.satisfies(player);
-    if (satisfied === false) {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+    if (!this.properties.compiledRequirements.satisfies(player, this)) {
       return false;
     }
-    if (satisfied !== true) {
-      yesAnd = satisfied;
-    }
+    return this.canPlayPostRequirements(player, canAffordOptions);
+  }
 
+  public canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions) {
     if (this.behavior !== undefined) {
       if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
         return false;
@@ -247,13 +256,8 @@ export abstract class Card implements ICard {
     if (bespokeCanPlay === false) {
       return false;
     }
-
-    if (yesAnd !== undefined) {
-      return yesAnd;
-    }
     return true;
   }
-
   public bespokeCanPlay(_player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {
     return true;
   }
@@ -261,7 +265,8 @@ export abstract class Card implements ICard {
   public play(player: IPlayer): PlayerInput | undefined {
     player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
-      getBehaviorExecutor().execute(this.behavior, player, this);
+      const executor = getBehaviorExecutor();
+      executor.execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
@@ -280,13 +285,25 @@ export abstract class Card implements ICard {
   public bespokeOnDiscard(_player: IPlayer): void {
   }
 
-  public getVictoryPoints(player: IPlayer): number {
+  public getVictoryPoints(player: IPlayer, context: GetVictoryPointsContext = 'default'): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;
     }
-    if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp, 'vps');
+    if (typeof (vp) === 'object') {
+      const counter = new Counter(player, this);
+      // This looks backwards, but what it's saying is:
+      //   Most of the time, use the VP counter when calculating VP.
+      //   But project inspection is special, and uses the regular form of calculating VP
+      //   ...  which is mostly a special case for counting tags.
+      switch (context) {
+      case 'default':
+        return counter.count(vp, 'vps');
+      case 'projectWorkshop':
+        return counter.count(vp, 'default');
+      default:
+        throw new Error('Unknown context for getVictoryPoints: ' + context);
+      }
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -297,7 +314,9 @@ export abstract class Card implements ICard {
       return 0;
     }
 
-    if (typeof(vps) === 'number') return vps;
+    if (typeof(vps) === 'number') {
+      return vps;
+    }
 
     if (vps.targetOneOrMore === true || vps.anyPlayer === true) {
       throw new Error('Not yet handled');
@@ -331,7 +350,14 @@ export abstract class Card implements ICard {
 
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
-        throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
+        throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
+      }
+      return;
+    } else if (typeof(vps) === 'object' && vps.nextToThis !== undefined) {
+      // nextToThis VP needs explicit metadata.victoryPoints for rendering since auto-generation
+      // cannot express adjacency-scoped VP icons.
+      if (properties.metadata.victoryPoints === undefined) {
+        throw new Error('When card.victoryPoints uses nextToThis, metadata.victoryPoints must also be supplied for rendering');
       }
       return;
     } else {
@@ -350,18 +376,18 @@ export abstract class Card implements ICard {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
     } else if (vps.tag !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.tag(vps.tag, each, per);
     } else if (vps.cities !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.cities(each, per, vps.all);
     } else if (vps.colonies !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.colonies(each, per, vps.all);
     } else if (vps.moon !== undefined) {
       if (vps.moon.road !== undefined) {
         // vps.per is ignored
-        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
+        properties.metadata.victoryPoints = DynamicVictoryPoints.moonRoadTile(each, vps.all);
       } else {
         throw new Error('moon defined, but no valid sub-object defined');
       }
@@ -390,20 +416,20 @@ export abstract class Card implements ICard {
     }
   }
 
-  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
+  public getCardDiscount(player: IPlayer, card: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
     let sum = 0;
-    const discounts = Array.isArray(this.cardDiscount) ? this.cardDiscount : [this.cardDiscount];
+    const discounts = asArray(this.cardDiscount);
     for (const discount of discounts) {
       if (discount.tag === undefined) {
         sum += discount.amount;
       } else {
-        const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
+        const tagCount = player.tags.cardTagCount(card, discount.tag);
         if (discount.per !== 'card') {
-          sum += discount.amount * tags;
-        } else if (tags > 0) {
+          sum += discount.amount * tagCount;
+        } else if (tagCount > 0) {
           sum += discount.amount;
         }
       }
@@ -428,6 +454,17 @@ export abstract class Card implements ICard {
     }
     return 0;
   }
+
+  public addWarning(warning: Warning): void {
+    if (this.warnings === NO_WARNINGS) {
+      this.warnings = new Set();     // allocate only on first real warning
+    }
+    (this.warnings as Set<Warning>).add(warning);
+  }
+
+  public clearWarnings(): void {
+    this.warnings = NO_WARNINGS;      // drop the per-card Set, back to shared empty
+  }
 }
 
 function populateCount(requirement: CardRequirementDescriptor): CardRequirementDescriptor {
@@ -451,7 +488,7 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
     requirement.miningTiles ??
     requirement.roadTiles ??
     requirement.corruption ??
-    requirement.excavation;
+    requirement.undergroundTokens;
 
   return requirement;
 }
@@ -471,12 +508,27 @@ export function validateBehavior(behavior: Behavior | undefined, name: CardName)
       validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
       validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
       validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.logisticRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticRate');
       validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
     }
     // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
     if (spend.heat) {
       validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
+    if (spend.canUseSteel || spend.canUseTitanium) {
+      validate(spend.megacredits !== undefined, 'spend.canUseSteel and spend.canUseTitanium only works with spend.megacredits');
+    }
   }
+}
+
+type CardWithBonusResource = Card & {defaultProductionBox?: Units, bonusResource: Array<Resource> | undefined}
+/* Not sure this belongs here. */
+export function productionBoxWithBonusResource(card: CardWithBonusResource) {
+  const units: Units = card.defaultProductionBox ?
+    {...card.defaultProductionBox} :
+    {...Units.EMPTY};
+  if (card.bonusResource && card.bonusResource.length === 1) {
+    units[card.bonusResource[0]] += 1;
+  }
+  return units;
 }

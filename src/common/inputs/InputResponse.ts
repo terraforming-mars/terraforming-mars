@@ -40,6 +40,15 @@ export function isAndOptionsResponse(response: InputResponse): response is AndOp
   return response.type === 'and' && matches(response, ['type', 'responses']);
 }
 
+export interface SelectInitialCardsResponse {
+  type: 'initialCards',
+  responses: Array<InputResponse>;
+}
+
+export function isSelectInitialCardsResponse(response: InputResponse): response is SelectInitialCardsResponse {
+  return response.type === 'initialCards' && matches(response, ['type', 'responses']);
+}
+
 export interface SelectCardResponse {
   type: 'card',
   cards: Array<CardName>;
@@ -164,10 +173,48 @@ export function isSelectPolicyResponse(response: InputResponse): response is Sel
   return response.type === 'policy' && matches(response, ['type', 'policyId']);
 }
 
+export interface SelectResourceResponse {
+  type: 'resource',
+  resource: keyof Units,
+}
+
+export function isSelectResourceResponse(response: InputResponse): response is SelectResourceResponse {
+  return response.type === 'resource' && matches(response, ['type', 'resource']);
+}
+
+export interface SelectResourcesResponse {
+  type: 'resources',
+  units: Units,
+}
+
+export function isSelectResourcesResponse(response: InputResponse): response is SelectResourcesResponse {
+  return response.type === 'resources' && matches(response, ['type', 'units']);
+}
+
+export interface SelectClaimedUndergroundTokenResponse {
+  type: 'claimedUndergroundToken',
+  selected: Array<number>;
+}
+
+export function isSelectClaimedUndergroundTokenResponse(response: InputResponse): response is SelectClaimedUndergroundTokenResponse {
+  return response.type === 'claimedUndergroundToken' && matches(response, ['type', 'selected']);
+}
+
+export interface DeltaProjectInputResponse {
+  type: 'deltaProject',
+  amount: number;
+}
+
+export function isDeltaProjectInputResponse(response: InputResponse): response is DeltaProjectInputResponse {
+  return response.type === 'deltaProject' && matches(response, ['type', 'amount']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
+  SelectInitialCardsResponse |
   SelectAmountResponse |
+  DeltaProjectInputResponse |
   SelectCardResponse |
   SelectColonyResponse |
   SelectDelegateResponse |
@@ -180,4 +227,7 @@ export type InputResponse =
   SelectSpaceResponse |
   ShiftAresGlobalParametersResponse |
   SelectGlobalEventResponse |
-  SelectPolicyResponse;
+  SelectPolicyResponse |
+  SelectResourceResponse |
+  SelectResourcesResponse |
+  SelectClaimedUndergroundTokenResponse;

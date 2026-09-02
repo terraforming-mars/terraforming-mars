@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Ender} from '../../../src/server/cards/ceos/Ender';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Research} from '../../../src/server/cards/base/Research';
 import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('Ender', function() {
+describe('Ender', () => {
   let card: Ender;
   let player: TestPlayer;
   let game: IGame;
@@ -18,11 +19,11 @@ describe('Ender', function() {
     [game, player] = testGame(2);
   });
 
-  it('Cannot act without cards', function() {
+  it('Cannot act without cards', () => {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     const initialCards = [new Research(), new MicroMills()];
 
     player.cardsInHand.push(...initialCards);
@@ -41,7 +42,7 @@ describe('Ender', function() {
     expect(player.cardsInHand).does.not.include(initialCards[1]);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     player.cardsInHand.push(new Research(), new MicroMills());
     expect(card.isDisabled).is.false;
     expect(card.canAct(player)).is.true;

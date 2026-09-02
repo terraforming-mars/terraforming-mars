@@ -3,7 +3,7 @@
         <div class="player-status-and-res">
         <div class="player-status">
           <div class="player-info-details">
-            <div class="player-info-name" @click="togglePlayerDetails">{{ player.name }}</div>
+            <div class="player-info-name" @click="togglePlayerDetails">{{ playerSymbol + player.name }}</div>
             <span @click="togglePlayerDetails" v-for="(corporationName, index) in getCorporationName()" :key="index" v-i18n>
               <div class="player-info-corp" :title="$t(corporationName)">
                 {{ corporationName }}
@@ -12,7 +12,7 @@
           </div>
           <div>
             <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1" v-i18n>1st</div>
-            <player-status :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
+            <PlayerStatus :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
           </div>
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
@@ -54,26 +54,31 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {Phase} from '@/common/Phase';
+import {ActionLabel} from './ActionLabel';
+import {playerSymbol} from '@/client/utils/playerSymbol';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerInfo',
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
     playerView: {
       type: Object as () => ViewModel,
+      required: true,
     },
     firstForGen: {
       type: Boolean,
       default: false,
     },
     actionLabel: {
-      type: String,
-      default: '',
+      type: String as () => ActionLabel,
+      required: true,
     },
     playerIndex: {
       type: Number,
+      required: true,
     },
     hideZeroTags: {
       type: Boolean,
@@ -89,11 +94,14 @@ export default Vue.extend({
     PlayerResources,
     PlayerTags,
     PlayerAlliedParty,
-    'player-status': PlayerStatus,
+    PlayerStatus,
   },
   computed: {
     tooltipCss(): string {
       return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
+    },
+    playerSymbol(): string {
+      return playerSymbol(this.player.color, ' ');
     },
     Phase(): typeof Phase {
       return Phase;

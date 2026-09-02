@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('IshtarMining', function() {
-  it('Should play', function() {
+describe('IshtarMining', () => {
+  it('Should play', () => {
     const card = new IshtarMining();
     const [game, player] = testGame(2);
     game.increaseVenusScaleLevel(player, 3);

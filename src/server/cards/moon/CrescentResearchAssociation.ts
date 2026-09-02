@@ -4,8 +4,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CrescentResearchAssociation extends CorporationCard {
+export class CrescentResearchAssociation extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CRESCENT_RESEARCH_ASSOCIATION,
@@ -15,22 +16,27 @@ export class CrescentResearchAssociation extends CorporationCard {
       victoryPoints: {tag: Tag.MOON, per: 3},
 
       metadata: {
-        description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',
-        cardNumber: '',
+        description: 'You start with 50 M€.',
+        cardNumber: 'MC5',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).br;
-          b.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
-            eb.tag(Tag.MOON).startEffect.megacredits(1).slash().tag(Tag.MOON);
+          b.corpBox('effect', (ce) => {
+            ce.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
+              eb.tag(Tag.MOON).startEffect.megacredits(1).slash().tag(Tag.MOON);
+            });
           });
+          b.br;
+          b.vpText('1 VP for every 3 Moon tags you have.');
         }),
       },
     });
   }
 
   public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    if (card.tags.indexOf(Tag.MOON) === -1) {
+    const tags = player.tags.cardTagCount(card, Tag.MOON);
+    if (tags === 0) {
       return 0;
     }
-    return player.tags.count(Tag.MOON);
+    return player.tags.count(Tag.MOON) * tags;
   }
 }

@@ -1,24 +1,22 @@
 <template>
   <div class="language-switcher">
-    <template v-for="lang in ALL_LANGUAGES">
+    <template v-for="lang in ALL_LANGUAGES" :key="lang">
     <div
-      :key="lang"
-      :class="`language-icon language-icon--${lang} language-icon-for-switcher`"
-      :title="title(lang)"
+      :class="[`language-icon language-icon--${lang} language-icon-for-switcher`, {'language-icon--selected': lang === currentLang}]"
+      :data-title="title(lang)"
       @click="switchLanguageTo(lang)"
-    />
-    &nbsp;
+    ></div>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default Vue.extend({
-  name: 'language-switcher',
+export default defineComponent({
+  name: 'LanguageSwitcher',
   methods: {
     reloadWindow() {
       window.location.reload();
@@ -33,6 +31,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    currentLang(): string {
+      return PreferencesManager.INSTANCE.values().lang;
+    },
     ALL_LANGUAGES(): typeof ALL_LANGUAGES {
       return ALL_LANGUAGES;
     },

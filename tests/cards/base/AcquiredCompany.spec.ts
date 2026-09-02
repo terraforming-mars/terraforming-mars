@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {testGame} from '../../TestGame';
-import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
+import {testGame} from '@tests/TestGame';
+import {AcquiredCompany} from '@/server/cards/base/AcquiredCompany';
 
-describe('AcquiredCompany', function() {
-  it('Should play', function() {
+describe('AcquiredCompany', () => {
+  it('Should play', () => {
     const card = new AcquiredCompany();
     const [/* game */, player] = testGame(1);
 

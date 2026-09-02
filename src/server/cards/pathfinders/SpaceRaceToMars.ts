@@ -2,18 +2,10 @@ import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
 import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Turmoil} from '../../turmoil/Turmoil';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
-import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {isSpecialTileSpace, Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;
-  b.energy(1).slash().influence();
-});
 
 export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -22,33 +14,31 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
       description: 'Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      behavior: {stock: {energy: {turmoil: {influence: {}}}}},
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;
+        b.energy(1).slash().influence();
+      }),
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const specialTileCount = this.specialTileCount(player);
-      const bonus = Math.min(specialTileCount, 5);
-      player.production.add(Resource.MEGACREDITS, bonus, {log: true, from: this.name});
-      player.stock.add(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    const specialTileCount = this.specialTileCount(player);
+    const bonus = Math.min(specialTileCount, 5);
+    player.production.add(Resource.MEGACREDITS, bonus, {log: true, from: {globalEvent: this}});
   }
 
   private specialTileCount(player: IPlayer) {
-    // This code is repeated in Land Specialist
-    const spaces = player.game.board.spaces
-      .filter(playerTileFn(player))
-      .filter(isSpecialTileSpace);
+    const marsSpaces = player.game.board.spaces;
+    const marsCount = marsSpaces.filter(Board.ownedBy(player))
+      .filter(isSpecialTileSpace).length;
 
-    const marsCount = spaces.length;
-    const moonCount = MoonExpansion.ifElseMoon(player.game, (moonData) => {
-      return moonData.moon.spaces
-        .filter(playerTileFn(player))
-        .filter(isSpecialTileSpace)
-        .length;
-    },
-    () => 0);
+    const moonSpaces = player.game.moonData?.moon.spaces ?? [];
+    const moonCount = moonSpaces
+      .filter(Board.ownedBy(player))
+      .filter(isSpecialTileSpace)
+      .length;
+
     return marsCount + moonCount;
   }
 }

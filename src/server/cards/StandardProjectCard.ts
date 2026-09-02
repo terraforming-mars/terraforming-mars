@@ -1,32 +1,24 @@
 import {CardType} from '../../common/cards/CardType';
 import {IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
-import {PlayerInput} from '../PlayerInput';
-import {ICardMetadata} from '../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../common/cards/CardMetadata';
 import {CardName} from '../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
-import {message} from '../logs/MessageBuilder';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {sum} from '../../common/utils/utils';
+import {Payment} from '../../common/inputs/Payment';
+import {StandardProjectCanPayWith} from '../../common/cards/Types';
 
 type StaticStandardProjectCardProperties = {
   name: CardName,
   cost: number,
-  metadata: ICardMetadata,
+  metadata: CardMetadata,
   reserveUnits?: Partial<Units>,
   tr?: TRSource,
 }
 
-export type StandardProjectCanPayWith = {
-  steel?: boolean,
-  titanium?: boolean,
-  seeds?: boolean,
-  kuiperAsteroids?: boolean,
-  // tr?: TRSource,
-}
 
 export abstract class StandardProjectCard extends Card implements IStandardProjectCard {
   constructor(properties: StaticStandardProjectCardProperties) {
@@ -44,8 +36,10 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return 0;
   }
 
-  private adjustedCost(player: IPlayer) {
-    const discountFromCards = sum(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+  public getAdjustedCost(player: IPlayer) {
+    const discountFromCards =
+      sum(player.tableau.asArray()
+        .map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
     const discount = discountFromCards + this.discount(player);
     const adjusted = Math.max(0, this.cost - discount);
     return adjusted;
@@ -63,7 +57,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     const canPayWith = this.canPayWith(player);
     return {
       ...canPayWith,
-      cost: this.adjustedCost(player),
+      cost: this.getAdjustedCost(player),
       tr: this.tr,
       auroraiData: true,
       spireScience: true,
@@ -75,33 +69,22 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return player.canAfford(this.canPlayOptions(player));
   }
 
-  // TODO(kberg): Replace with abstract method.
   public canPayWith(_player: IPlayer): StandardProjectCanPayWith {
     return {};
   }
 
-  protected projectPlayed(player: IPlayer) {
-    player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
-    this.onStandardProject(player);
+  public payAndExecute(player: IPlayer, payment: Payment): void {
+    player.pay(payment);
+    this.projectPlayed(player);
+    this.actionEssence(player);
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
-    const canPayWith = this.canPayWith(player);
-    player.game.defer(new SelectPaymentDeferred(
-      player,
-      this.adjustedCost(player),
-      {
-        canUseSteel: canPayWith.steel,
-        canUseTitanium: canPayWith.titanium,
-        canUseSeeds: canPayWith.seeds,
-        canUseAuroraiData: player.isCorporation(CardName.AURORAI),
-        canUseSpireScience: player.isCorporation(CardName.SPIRE),
-        canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
-        title: message('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
-      })).andThen(() => {
-      this.projectPlayed(player);
-      this.actionEssence(player);
-    });
-    return undefined;
+  protected projectPlayed(player: IPlayer) {
+    player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    // standardProjectsThisGeneration does not include Sell Patents.
+    if (this.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
+      player.standardProjectsThisGeneration.add(this.name);
+    }
+    this.onStandardProject(player);
   }
 }

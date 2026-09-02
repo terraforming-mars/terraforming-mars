@@ -23,6 +23,6 @@ export type SpaceModel = {
   nomads?: true; // Absent or true
   coOwner?: Color;
 
-  undergroundResources?: UndergroundResourceToken;
+  undergroundResource?: UndergroundResourceToken;
   excavator?: Color;
 }

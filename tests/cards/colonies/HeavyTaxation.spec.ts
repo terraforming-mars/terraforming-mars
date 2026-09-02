@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {HeavyTaxation} from '../../../src/server/cards/colonies/HeavyTaxation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('HeavyTaxation', function() {
-  it('Should play', function() {
+describe('HeavyTaxation', () => {
+  it('Should play', () => {
     const card = new HeavyTaxation();
     const [/* game */, player] = testGame(1);
     expect(card.canPlay(player)).is.not.true;

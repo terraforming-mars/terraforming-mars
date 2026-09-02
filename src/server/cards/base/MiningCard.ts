@@ -1,5 +1,5 @@
-import {Card} from '../Card';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
+import {Card, productionBoxWithBonusResource} from '../Card';
+import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -12,10 +12,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
-import {Units} from '../../../common/Units';
 
 export abstract class MiningCard extends Card implements IProjectCard {
-  public bonusResource?: Array<Resource>;
+  public bonusResource: Array<Resource> | undefined;
   protected abstract readonly title: string;
   protected readonly isAres: boolean = false;
   protected readonly placeTile: boolean = true;
@@ -23,7 +22,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   constructor(
     name: CardName,
     cost: number,
-    metadata: ICardMetadata) {
+    metadata: CardMetadata) {
     super({
       type: CardType.AUTOMATED,
       name,
@@ -60,12 +59,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   public productionBox() {
-    // TODO(kberg): Matches Specialzied Settlement
-    const units = {...Units.EMPTY};
-    if (this.bonusResource && this.bonusResource.length === 1) {
-      units[this.bonusResource[0]] += 1;
-    }
-    return units;
+    return productionBoxWithBonusResource(this);
   }
 
   public override bespokePlay(player: IPlayer): SelectSpace {
@@ -77,7 +71,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   protected spaceSelected(player: IPlayer, space: Space): void {
-    const bonusResources = [];
+    const bonusResources: Array<Resource> = [];
     if (space.bonus.includes(SpaceBonus.STEEL)) {
       bonusResources.push(Resource.STEEL);
     }

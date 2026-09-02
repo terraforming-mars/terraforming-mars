@@ -3,8 +3,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MarsMaths extends CorporationCard {
+export class MarsMaths extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MARS_MATHS,
@@ -17,7 +18,7 @@ export class MarsMaths extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfCXX',
+        cardNumber: 'PfC10',
         description: 'You start with 40 M€. As your first action, draw 2 cards',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).nbsp.cards(2).br;

@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
 import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
+import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
 
 export class GeologistTeam extends ActionCard implements IProjectCard {
   constructor() {
@@ -14,14 +14,14 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.GEOLOGIST_TEAM,
       cost: 6,
-      tags: [Tag.MARS, Tag.SCIENCE],
+      tags: [Tag.SCIENCE],
 
       action: {
         underworld: {identify: 1},
       },
 
       metadata: {
-        cardNumber: 'U01',
+        cardNumber: 'U001',
         renderData: CardRenderer.builder((b) => {
           b.action('Identify 1 underground resource.',
             (ab) => ab.empty().startAction.identify(1));
@@ -33,8 +33,8 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
     });
   }
 
-  public onIdentification(_identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space) {
-    if (space.undergroundResources === 'ocean') {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, token: UndergroundResourceToken) {
+    if (token === 'ocean') {
       if (cardOwner.canAfford({cost: 0, tr: {tr: 1}})) {
         cardOwner.increaseTerraformRating(1, {log: true});
       }

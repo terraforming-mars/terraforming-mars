@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -7,8 +7,9 @@ import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {SelectGlobalEvent} from '../../../src/server/inputs/SelectGlobalEvent';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('ExecutiveOrder', function() {
+describe('ExecutiveOrder', () => {
   let card: ExecutiveOrder;
   let player: TestPlayer;
   let game: IGame;
@@ -18,7 +19,7 @@ describe('ExecutiveOrder', function() {
     [game, player] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const turmoil = game.turmoil!;
     const selectGlobalEvent = cast(card.play(player), SelectGlobalEvent);
     expect(selectGlobalEvent.globalEvents).has.length(4);

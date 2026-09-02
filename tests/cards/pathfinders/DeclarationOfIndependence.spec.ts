@@ -1,23 +1,24 @@
 import {expect} from 'chai';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('DeclarationOfIndependence', function() {
+describe('DeclarationOfIndependence', () => {
   let card: DeclarationOfIndependence;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DeclarationOfIndependence();
     [/* game */, player] = testGame(1, {turmoilExtension: true});
     turmoil = player.game.turmoil!;
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {mars: 5};
@@ -31,7 +32,7 @@ describe('DeclarationOfIndependence', function() {
   });
 
 
-  it('play', function() {
+  it('play', () => {
     expect(turmoil.getAvailableDelegateCount(player)).eq(7);
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.delegates.get(player)).eq(0);

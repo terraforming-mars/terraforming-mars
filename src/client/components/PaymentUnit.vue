@@ -1,41 +1,46 @@
 <template>
   <div class="payments_type input-group" :data-test="unit">
-    <i class="resource_icon payments_type_icon" :class="iconClass"  :title="$t('Pay with ' + description)"></i>
+    <i class="resource_icon payments_type_icon" :class="iconClass" @click="$emit('plus')" :title="$t('Pay with ' + description)"></i>
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"
-      v-bind:value="value"
-      v-on:input="$emit('input', $event.target.value)"
-    />
+      :value="modelValue"
+      @input="onInput"
+    >
     <AppButton type="plus" @click="$emit('plus')" />
-    <AppButton type="max" @click="$emit('max')" title="MAX" />
+    <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
+import {defineComponent} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SpendableResource} from '@/common/inputs/Spendable';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PaymentUnitComponent',
   props: {
-    value: {
+    // TODO(kberg): Rename to count.
+    modelValue: {
       type: Number,
+      required: true,
     },
     unit: {
       type: String as () => SpendableResource,
+      required: true,
     },
     description: {
       type: String,
+      required: true,
+    },
+    showMax: {
+      type: Boolean,
+      default: true,
+      required: false,
     },
   },
   components: {
     AppButton,
-  },
-  methods: {
-    ...PaymentWidgetMixin.methods,
   },
   computed: {
     iconClass(): string {
@@ -43,10 +48,15 @@ export default Vue.extend({
       case 'kuiperAsteroids': return 'resource_icon--asteroid';
       case 'lunaArchivesScience': return 'resource_icon--science';
       case 'spireScience': return 'resource_icon--science';
+      case 'auroraiData': return 'resource_icon--auroraidata';
       case 'seeds': return 'resource_icon--seed';
-      // TODO(kberg): remove toLowerCase
-      default: return 'resource_icon--' + this.unit.toLowerCase();
+      default: return 'resource_icon--' + this.unit;
       }
+    },
+  },
+  methods: {
+    onInput(event: Event) {
+      this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
     },
   },
 });

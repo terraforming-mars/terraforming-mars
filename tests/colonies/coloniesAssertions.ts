@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast, formatMessage} from '../TestingUtils';
+import {formatMessage} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {Luna} from '../../src/server/colonies/Luna';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
+import {cast} from '@/common/utils/utils';
 
 export function assertBuildColony(player: TestPlayer, input: PlayerInput | undefined, idx: number = 0) {
   const selectColony = cast(input, SelectColony);
@@ -28,10 +29,13 @@ export function assertNoTradeAction(player: TestPlayer) {
 export function assertTradeAction(player: TestPlayer, optionTitle: string) {
   const luna = new Luna();
   player.game.colonies = [luna];
+  const mc = player.megaCredits;
 
   const actions = player.getActions();
-  const tradeAction = actions.options.find(
-    (option) => option.title === 'Trade with a colony tile');
+  const tradeAction = actions.options.find((option) => option.title === 'Trade with a colony tile');
+  if (tradeAction === undefined) {
+    throw new Error('No trade action found');
+  }
 
   const andOptions = cast(tradeAction, AndOptions);
 
@@ -45,5 +49,5 @@ export function assertTradeAction(player: TestPlayer, optionTitle: string) {
   option.cb();
   andOptions.options[1].cb(luna);
 
-  expect(player.megaCredits).eq(2);
+  expect(player.megaCredits).eq(mc + 2);
 }

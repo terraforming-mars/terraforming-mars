@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {churn, runAllActions, setRulingParty, setTemperature} from '../../TestingUtils';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
@@ -11,9 +12,15 @@ import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Philares} from '../../../src/server/cards/promo/Philares';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
+import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/GeologicalExpedition';
+import {Steelaris} from '../../../src/server/cards/pathfinders/Steelaris';
+import {CuriosityII} from '../../../src/server/cards/community/CuriosityII';
+import {ExpeditionVehicles} from '../../../src/server/cards/underworld/ExpeditionVehicles';
+import {intersection} from '../../../src/common/utils/utils';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;
@@ -135,6 +142,55 @@ describe('MarsNomads', () => {
     expect(player.megaCredits).to.eq(2);
   });
 
+  for (const run of [
+    {bonus: SpaceBonus.OCEAN, megaCredits: 5, expected: false},
+    {bonus: SpaceBonus.OCEAN, megaCredits: 6, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 2, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 3, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 3, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 4, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 0, temperature: 8, expected: true},
+  ] as const) {
+    it('Destination filtered by placement-bonus affordability (Bug #7326) ' + JSON.stringify(run), () => {
+      const nomadSpace = board.getAvailableSpacesOnLand(player)[12];
+      game.nomadSpace = nomadSpace.id;
+      const destinationSpace = game.board.getAdjacentSpaces(nomadSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+      destinationSpace.bonus = [run.bonus];
+      if (run.temperature) {
+        setTemperature(game, run.temperature);
+      }
+      player.megaCredits = run.megaCredits;
+
+      const spaces = cast(card.action(player), SelectSpace).spaces;
+      expect(spaces.includes(destinationSpace)).to.eq(run.expected);
+    });
+  }
+
+  for (const run of [
+    {bonus: SpaceBonus.OCEAN, mc: 8, expected: false},
+    {bonus: SpaceBonus.OCEAN, mc: 9, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, mc: 5, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE, mc: 6, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 6, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 7, expected: true},
+  ] as const) {
+    it('Destination filter includes Reds TR tax' + JSON.stringify(run), () => {
+      const [game, player] = testGame(2, {turmoilExtension: true});
+      const card = new MarsNomads();
+      const board = game.board;
+      setRulingParty(game, PartyName.REDS);
+
+      const nomadSpace = board.getAvailableSpacesOnLand(player)[12];
+      game.nomadSpace = nomadSpace.id;
+      const destinationSpace = board.getAdjacentSpaces(nomadSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+      destinationSpace.bonus = [run.bonus];
+      player.megaCredits = run.mc;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces.includes(destinationSpace)).to.eq(run.expected);
+    });
+  }
+
   it('Can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
     player.megaCredits = 0;
     const space3 = game.board.getSpaceOrThrow('03');
@@ -146,29 +202,48 @@ describe('MarsNomads', () => {
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     space3.bonus = [SpaceBonus.TEMPERATURE];
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
-  it('Compatible with Land Claim', () => {
+  it('Compatible with Land Claim on placement', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
 
     expect(cast(card.play(player), SelectSpace).spaces).to.include(space);
 
     const landClaim = new LandClaim();
-    const claimLand = cast(landClaim.play(player), SelectSpace);
+    const selectSpace = cast(landClaim.play(player), SelectSpace);
 
-    expect(claimLand.spaces).to.include(space);
+    expect(selectSpace.spaces).to.include(space);
 
-    claimLand.cb(space);
+    selectSpace.cb(space);
 
-    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(space);
+    const spaces = cast(card.play(player), SelectSpace).spaces;
+    expect(spaces).to.not.include(space);
+
+    const adjacentSpace = intersection(game.board.getAdjacentSpaces(space), spaces)[0];
+    game.nomadSpace = adjacentSpace.id;
+  });
+
+  it('Compatible with Land Claim movement', () => {
+    const availableSpaces = game.board.getAvailableSpacesOnLand(player);
+    const space = availableSpaces[0];
+    const adjacentSpace = intersection(game.board.getAdjacentSpaces(space), availableSpaces)[0];
+    game.nomadSpace = space.id;
+    const selectSpace = cast(churn(card.action(player), player), SelectSpace);
+
+    expect(selectSpace.spaces).includes(adjacentSpace);
+
+    adjacentSpace.player = player;
+    const selectSpace2 = cast(churn(card.action(player), player), SelectSpace);
+
+    expect(selectSpace2.spaces).to.not.include(adjacentSpace);
   });
 
   describe('Compatible with Philares', () => {
@@ -177,7 +252,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       philares = new Philares();
-      player2.setCorporationForTest(philares);
+      player2.playedCards.push(philares);
     });
 
     it('Placement does not trigger Philares', () => {
@@ -218,7 +293,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       miningGuild = new MiningGuild();
-      player.setCorporationForTest(miningGuild);
+      player.playedCards.push(miningGuild);
     });
 
     it('Placement does not trigger Mining Guild', () => {
@@ -249,6 +324,124 @@ describe('MarsNomads', () => {
       expect(game.nomadSpace).eq(space.id);
       expect(player.steel).eq(1);
       expect(player.production.steel).eq(0);
+    });
+  });
+
+  it('Move triggers Geological Expedition bonus', () => {
+    game.board = EmptyBoard.newInstance();
+    const geologicalExpedition = new GeologicalExpedition();
+    player.playedCards.push(geologicalExpedition);
+
+    const firstSpace = game.board.getSpaceOrThrow('05');
+    const space = game.board.getSpaceOrThrow('04');
+    game.nomadSpace = firstSpace.id;
+
+    space.bonus = [SpaceBonus.STEEL];
+    const selectSpace = cast(card.action(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space);
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    // Player gets 1 steel from placement bonus + 1 steel from Geological Expedition
+    expect(player.steel).eq(2);
+  });
+
+  it('Move to empty bonus space grants 1 steel from Geological Expedition', () => {
+    game.board = EmptyBoard.newInstance();
+    const geologicalExpedition = new GeologicalExpedition();
+    player.playedCards.push(geologicalExpedition);
+
+    const firstSpace = game.board.getSpaceOrThrow('05');
+    const space = game.board.getSpaceOrThrow('04');
+    game.nomadSpace = firstSpace.id;
+
+    space.bonus = [];
+    const selectSpace = cast(card.action(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space);
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    // No placement bonus, but Geological Expedition grants 1 steel for empty bonus spaces
+    expect(player.steel).eq(1);
+  });
+
+  it('Compatible with Steelaris', () => {
+    game.board = EmptyBoard.newInstance();
+    const steelaris = new Steelaris();
+    player.playedCards.push(steelaris);
+
+    const firstSpace = game.board.getSpaceOrThrow('05');
+    const space = game.board.getSpaceOrThrow('04');
+    game.nomadSpace = firstSpace.id;
+
+    const selectSpace = cast(card.action(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space);
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    // Move does not trigger Steelaris
+    expect(player.steel).eq(0);
+    expect(player.plants).eq(0);
+  });
+
+  it('Compatible with Curiosity II', () => {
+    game.board = EmptyBoard.newInstance();
+    const curiosityII = new CuriosityII();
+    player.playedCards.push(curiosityII);
+
+    const firstSpace = game.board.getSpaceOrThrow('05');
+    const space = game.board.getSpaceOrThrow('04');
+    game.nomadSpace = firstSpace.id;
+
+    space.bonus = [SpaceBonus.STEEL];
+    const selectSpace = cast(card.action(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space);
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    // Move does not trigger Curiosity II
+    // Only the placement bonus is collected; Curiosity II does not trigger
+    expect(player.steel).eq(1);
+    cast(player.popWaitingFor(), undefined);
+  });
+
+  it('Compatible with Expedition Vehicles', () => {
+    game.board = EmptyBoard.newInstance();
+    const expeditionVehicles = new ExpeditionVehicles();
+    player.playedCards.push(expeditionVehicles);
+
+    const firstSpace = game.board.getSpaceOrThrow('05');
+    const space = game.board.getSpaceOrThrow('04');
+    game.nomadSpace = firstSpace.id;
+
+    // Space is isolated — no adjacent real tiles — but still should not draw a card
+    const selectSpace = cast(card.action(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space);
+    selectSpace.cb(space);
+    runAllActions(game);
+
+    // Expeccted that move does not trigger Expedition Vehicles.0
+    expect(player.cardsInHand).has.length(0);
+  });
+
+  describe('Compatible with Ares', () => {
+    it('Hazards are selectable but grant nothing', () => {
+      const [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+
+      const firstSpace = game.board.getSpaceOrThrow('05');
+      const space = game.board.getSpaceOrThrow('04');
+      space.spaceType = SpaceType.LAND;
+      space.tile = {tileType: TileType.EROSION_MILD};
+      space.bonus = [SpaceBonus.STEEL];
+      game.nomadSpace = firstSpace.id;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(0);
     });
   });
 });

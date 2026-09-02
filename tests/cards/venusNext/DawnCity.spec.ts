@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {DawnCity} from '../../../src/server/cards/venusNext/DawnCity';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('DawnCity', function() {
-  it('Should play', function() {
+describe('DawnCity', () => {
+  it('Should play', () => {
     const card = new DawnCity();
     const [/* game */, player] = testGame(2, {venusNextExtension: true});
     player.production.add(Resource.ENERGY, 1);

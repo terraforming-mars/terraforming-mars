@@ -21,8 +21,7 @@ export class PriceWars extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U63',
-        hasExternalHelp: true,
+        cardNumber: 'U063',
         renderData: CardRenderer.builder((b) => {
           b.steel(1).titanium(1).colon().plus().megacredits(1).asterix().br;
           b.steel(1, {all}).titanium(1, {all}).colon().minus().megacredits(1, {all}).asterix().br;
@@ -37,7 +36,7 @@ export class PriceWars extends Card implements IProjectCard {
   public generationUsed: number | undefined = undefined;
 
   private increase(player: IPlayer) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.playersInGenerationOrder) {
       if (p === player) {
         p.increaseSteelValue();
         p.increaseTitaniumValue();
@@ -49,7 +48,7 @@ export class PriceWars extends Card implements IProjectCard {
   }
 
   private decrease(player: IPlayer) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.playersInGenerationOrder) {
       if (p === player) {
         p.decreaseSteelValue();
         p.decreaseTitaniumValue();

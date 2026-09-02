@@ -1,19 +1,18 @@
-import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {shallowMount, VueWrapper} from '@vue/test-utils';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
-import {Wrapper} from '@vue/test-utils';
 
-describe('PointsPerTag', function() {
+describe('PointsPerTag', () => {
   function doTest(points: any, expected: string) {
-    const wrapper: Wrapper<PointsPerTag> = shallowMount(PointsPerTag, {
-      localVue: getLocalVue(),
+    const wrapper: VueWrapper<any> = shallowMount(PointsPerTag, {
+      ...globalConfig,
       parentComponent: {
         methods: {
-          getVisibilityState: function() {},
+          getVisibilityState: () => {},
         },
       },
-      propsData: {
+      props: {
         points: points,
       },
     });
@@ -38,5 +37,13 @@ describe('PointsPerTag', function() {
 
   it('half point special case 2', () => {
     doTest({points: 0, halfPoints: 2}, '2⁄2');
+  });
+
+  it('asterisk', () => {
+    doTest({points: 1, halfPoints: 0, asterisk: true}, '1*');
+  });
+
+  it('asterisk - half point special case 2', () => {
+    doTest({points: 0, halfPoints: 2, asterisk: true}, '2⁄2*');
   });
 });

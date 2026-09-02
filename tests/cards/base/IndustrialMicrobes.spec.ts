@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {IndustrialMicrobes} from '../../../src/server/cards/base/IndustrialMicrobes';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('IndustrialMicrobes', function() {
-  it('Should play', function() {
+describe('IndustrialMicrobes', () => {
+  it('Should play', () => {
     const card = new IndustrialMicrobes();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

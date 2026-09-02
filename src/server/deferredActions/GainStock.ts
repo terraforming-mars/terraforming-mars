@@ -21,7 +21,7 @@ export class GainStock extends DeferredAction {
   }
 
   public execute() {
-    this.player.stock.addUnits(this.units, {log: this.options.log});
+    this.player.stock.adjust(this.units, {log: this.options.log});
     this.options.cb?.();
     return undefined;
   }

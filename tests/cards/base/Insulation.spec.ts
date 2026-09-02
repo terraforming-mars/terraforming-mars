@@ -4,8 +4,8 @@ import {Insulation} from '../../../src/server/cards/base/Insulation';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
-describe('Insulation', function() {
-  it('Should play', function() {
+describe('Insulation', () => {
+  it('Should play', () => {
     const card = new Insulation();
     const [/* game */, player] = testGame(2);
 
@@ -15,7 +15,9 @@ describe('Insulation', function() {
 
     const action = card.play(player);
     expect(action).is.not.undefined;
-    if (action === undefined) return;
+    if (action === undefined) {
+      return;
+    }
     action.cb(1);
     expect(player.production.heat).to.eq(0);
     expect(player.production.megacredits).to.eq(1);

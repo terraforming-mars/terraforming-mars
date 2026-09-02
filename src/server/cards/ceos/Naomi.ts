@@ -8,8 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {Resource} from '../../../common/Resource';
+import {ICeoCard} from './ICeoCard';
 
-export class Naomi extends CeoCard {
+export class Naomi extends CeoCard implements ICeoCard {
   constructor() {
     super({
       name: CardName.NAOMI,
@@ -17,11 +18,13 @@ export class Naomi extends CeoCard {
         cardNumber: 'L14',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.colonies(1).colon().energy(2).megacredits(3);
+          b.effect('When you build a colony, gain 2 energy and 3 M€.', (eb) => {
+            eb.colonies(1).startEffect.energy(2).megacredits(3);
+          });
           b.br.br.br;
           b.opgArrow().text('SET ALL').colonies(1).asterix();
         }),
-        description: 'When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.',
+        description: 'Once per game, move each colony tile track marker to its highest or lowest value.',
       },
     });
   }
@@ -50,10 +53,10 @@ export class Naomi extends CeoCard {
     return undefined;
   }
 
-  public onColonyAdded(player: IPlayer, cardOwner: IPlayer) {
-    if (player === cardOwner) {
-      player.stock.add(Resource.ENERGY, 2, {log: true});
-      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+  public onColonyAddedByAnyPlayer(cardOwner: IPlayer, colonyOwner: IPlayer) {
+    if (colonyOwner === cardOwner) {
+      cardOwner.stock.add(Resource.ENERGY, 2, {log: true});
+      cardOwner.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }
   }
 }

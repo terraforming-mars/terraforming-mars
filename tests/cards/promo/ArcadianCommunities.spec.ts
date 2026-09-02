@@ -3,13 +3,14 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {IGame} from '../../../src/server/IGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('ArcadianCommunities', function() {
+describe('ArcadianCommunities', () => {
   let card: ArcadianCommunities;
   let player: TestPlayer;
   let game: IGame;
@@ -18,7 +19,7 @@ describe('ArcadianCommunities', function() {
   beforeEach(() => {
     card = new ArcadianCommunities();
     [game, player] = testGame(2);
-    player.setCorporationForTest(card);
+    player.playedCards.push(card);
     board = player.game.board;
   });
 
@@ -36,8 +37,7 @@ describe('ArcadianCommunities', function() {
   });
 
   it('play', () => {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.steel).to.eq(10);
   });
 

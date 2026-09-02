@@ -4,33 +4,33 @@ import {TestPlayer} from '../../TestPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('PrivateSecurity', function() {
+describe('PrivateSecurity', () => {
   let card: PrivateSecurity;
   let player: TestPlayer;
   let opponent1: TestPlayer;
   let opponent2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PrivateSecurity();
     [/* game */, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
   });
 
-  it('protects against Fish', function() {
+  it('protects against Fish', () => {
     opponent1.production.override({plants: 2});
     opponent2.production.override({plants: 4});
 
     const fish = new Fish();
 
-    opponent2.playedCards = [];
     fish.play(player);
     const action = cast(player.game.deferredActions.pop()?.execute(), SelectPlayer);
     // Options for both opponents.
     expect(action.players).has.lengthOf(2);
 
     // Opponent 2 has Private Security
-    opponent2.playedCards = [card];
+    opponent2.playedCards.push(card);
     fish.play(player);
     // Options for only one opponent.
     expect(player.game.deferredActions.pop()?.execute()).is.undefined;
@@ -45,9 +45,8 @@ describe('PrivateSecurity', function() {
     const fish = new Fish();
     setTemperature(player.game, 2);
 
-    opponent2.playedCards = [];
     expect(fish.canPlay(player)).is.true;
-    opponent1.playedCards = [card];
+    opponent1.playedCards.push(card);
     expect(fish.canPlay(player)).is.false;
   });
 
@@ -60,7 +59,7 @@ describe('PrivateSecurity', function() {
     const fish = new Fish();
     setTemperature(player.game, 2);
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(fish.canPlay(player)).is.true;
     expect(fish.play(player)).is.undefined;
 

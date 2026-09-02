@@ -20,6 +20,12 @@ export interface IGameLoader {
    * That's what `restoreGameAt` is for.
    */
   getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<IGame | undefined>;
+  /**
+   * Reload a game at a specific version, deleting all versions ahead of it.
+   *
+   * @param {GameId} gameId the id of the game to retrieve
+   * @param {number} saveId the save id to load
+   */
   restoreGameAt(gameId: GameId, saveId: number): Promise<IGame>;
   /**
    * Mark a game to be purged from the cache. It will be

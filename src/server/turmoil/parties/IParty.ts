@@ -1,7 +1,7 @@
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Bonus} from '../Bonus';
-import {Policy} from '../Policy';
+import {IBonus} from '../Bonus';
+import {IPolicy} from '../Policy';
 import {Delegate} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
 
@@ -11,6 +11,6 @@ export interface IParty {
     partyLeader: undefined | Delegate;
     sendDelegate(playerId: Delegate, game: IGame): void;
     removeDelegate(playerId: Delegate, game: IGame): void;
-    bonuses: ReadonlyArray<Bonus>;
-    policies: ReadonlyArray<Policy>;
+    bonuses: ReadonlyArray<IBonus>;
+    policies: ReadonlyArray<IPolicy>;
 }

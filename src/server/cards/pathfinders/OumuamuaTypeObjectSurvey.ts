@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -24,14 +24,14 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
         cardNumber: 'Pf53',
         renderData: CardRenderer.builder((b) => {
           b.resource(CardResource.DATA, 2).asterix().cards(2, {size: Size.SMALL}).asterix().br;
-          b.tag(Tag.SCIENCE).tag(Tag.MICROBE).colon().text('play ', Size.SMALL, false, true);
+          b.tag(Tag.SCIENCE).tag(Tag.MICROBE).colon().text('play ', {size: Size.SMALL, uppercase});
           b.tag(Tag.SPACE).colon().production((pb) => pb.energy(3, {digit})).br;
           b.text(
-            'Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. ' +
-            'If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.',
-            Size.SMALL, false, false);
+            'Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. ' +
+            'If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.',
+            {size: Size.SMALL, isBold: false});
         }),
-        description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card. ',
+        description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card.',
       },
     });
   }
@@ -44,9 +44,14 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   private processCard(player: IPlayer, card: IProjectCard): boolean {
     const tags = card.tags;
     if (player.tags.cardHasTag(card, Tag.SCIENCE) || player.tags.cardHasTag(card, Tag.MICROBE)) {
-      player.playCard(card, undefined);
-      return true;
-    } else if (tags.includes(Tag.SPACE)) {
+      if (!card.canPlayPostRequirements(player)) {
+        player.game.log('${0} cannot play ${1}', (b) => b.player(player).card(card));
+      } else {
+        player.playCard(card, undefined);
+        return true;
+      }
+    }
+    if (tags.includes(Tag.SPACE)) {
       player.production.add(Resource.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;

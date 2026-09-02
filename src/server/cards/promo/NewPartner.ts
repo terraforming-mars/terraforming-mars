@@ -14,7 +14,7 @@ export class NewPartner extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P43',
+        cardNumber: 'X42',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).prelude().asterix();
         }),
@@ -26,7 +26,7 @@ export class NewPartner extends PreludeCard {
   public override bespokeCanPlay(player: IPlayer) {
     const game = player.game;
     if (!game.preludeDeck.canDraw(2)) {
-      this.warnings.add('deckTooSmall');
+      this.addWarning('deckTooSmall');
     }
     return true;
   }
@@ -34,6 +34,6 @@ export class NewPartner extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, 2);
-    return PreludesExpansion.playPrelude(player, cards);
+    return PreludesExpansion.selectPreludeToPlay(player, cards);
   }
 }

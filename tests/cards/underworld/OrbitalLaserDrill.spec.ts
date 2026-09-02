@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('OrbitalLaserDrill', () => {
   let game: IGame;
@@ -28,18 +29,18 @@ describe('OrbitalLaserDrill', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    // Set up an excavation space, which would limit excavation to its neighbors.
+    game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+
+    cast(card.play(player), undefined);
 
     runAllActions(game);
-
-    assertIsExcavationAction(player, player.popWaitingFor(), true);
-
-    runAllActions(game);
-
-    assertIsExcavationAction(player, player.popWaitingFor(), true);
+    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions= */ true);
 
     runAllActions(game);
+    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions= */ true);
 
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
   });
 });

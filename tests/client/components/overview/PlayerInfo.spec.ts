@@ -1,25 +1,27 @@
 import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {Color} from '@/common/Color';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
+import {fakeTimerModel} from '../testHelpers';
+import {asComplete} from '../utils/models';
 
-describe('PlayerInfo', function() {
-  it('Played card count test', function() {
+describe('PlayerInfo', () => {
+  it('Played card count test', () => {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
-      color: Color.BLUE,
+      color: 'blue',
       tableau: [
         {name: CardName.HELION},
         {name: CardName.ACQUIRED_COMPANY},
         {name: CardName.BACTOVIRAL_RESEARCH},
       ],
+      timer: fakeTimerModel(),
       victoryPointsBreakdown: {
         total: 1,
       },
-      tags: [],
+      tags: {},
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: thisPlayer,
@@ -32,16 +34,20 @@ describe('PlayerInfo', function() {
       players: [thisPlayer],
     };
     const playerInfo = shallowMount(PlayerInfo, {
-      localVue: getLocalVue(),
-      parentComponent: {
-        methods: {
-          getVisibilityState: function() {},
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        mocks: {
+          getVisibilityState: () => false,
+          setVisibilityState: () => {},
+          isServerSideRequestInProgress: false,
         },
       },
-      propsData: {
-        player: thisPlayer,
-        playerView: playerView,
+      props: {
+        player: asComplete<PublicPlayerModel>(thisPlayer),
+        playerView: asComplete<PlayerViewModel>(playerView),
         playerIndex: 0,
+        actionLabel: 'none',
       },
     });
     const test = playerInfo.find('div[class*="played-cards-count"]');

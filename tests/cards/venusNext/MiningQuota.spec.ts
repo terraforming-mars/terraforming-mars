@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {MiningQuota} from '../../../src/server/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('MiningQuota', function() {
-  it('Should play', function() {
+describe('MiningQuota', () => {
+  it('Should play', () => {
     const card = new MiningQuota();
     const [/* game */, player] = testGame(1);
     player.playedCards.push(new SisterPlanetSupport);

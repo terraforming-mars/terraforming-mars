@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -18,7 +18,7 @@ describe('PreliminaryDarkside', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

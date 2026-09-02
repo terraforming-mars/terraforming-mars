@@ -1,36 +1,38 @@
-require('dotenv').config();
+
+import '@/server/init';
 require('console-stamp')(
   console,
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
+import {markAsLiveServer} from '@/server/utils/server';
+// Must run first.
+markAsLiveServer();
 
-import * as https from 'https';
-import * as http from 'http';
-import * as fs from 'fs';
-import * as raw_settings from '../genfiles/settings.json';
-import * as prometheus from 'prom-client';
+import https from 'https';
+import http from 'http';
+import fs from 'fs';
+import * as v8 from 'node:v8';
+import raw_settings from '../genfiles/settings.json';
+import prometheus from 'prom-client';
 import * as responses from './server/responses';
+import ansi from 'ansi-escape-sequences';
 
-import {Database} from './database/Database';
-import {runId, serverId} from './utils/server-ids';
-import {processRequest} from './server/requestProcessor';
-import {timeAsync} from './utils/timer';
-import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {Executor} from './behavior/Executor';
-import {GameLoader} from './database/GameLoader';
-import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
-import {initializeGlobalEventDealer} from './turmoil/globalEvents/GlobalEventDealer';
+import {Database} from '@/server/database/Database';
+import {runId, serverId} from '@/server/utils/server-ids';
+import {processRequest} from '@/server/server/requestProcessor';
+import {timeAsync} from '@/server/utils/timer';
+import {GameLoader} from '@/server/database/GameLoader';
+import {globalInitialize} from '@/server/globalInitialize';
+import {SessionManager} from '@/server/server/auth/SessionManager';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
 
 function requestHandler(req: http.IncomingMessage, res: http.ServerResponse): void {
-  try {
-    processRequest(req, res);
-  } catch (error) {
+  processRequest(req, res).catch((error) => {
     responses.internalServerError(req, res, error);
-  }
+  });
 }
 
 const metrics = {
@@ -44,7 +46,25 @@ const metrics = {
     help: 'Time to initialize the database',
     registers: [prometheus.register],
   }),
-
+  // The V8 old-space ceiling. Compare against heap usage to see OOM headroom.
+  // Not included in prom-client's default metrics.
+  heapSizeLimit: new prometheus.Gauge({
+    name: 'nodejs_heap_size_limit_bytes',
+    help: 'V8 heap size limit in bytes',
+    registers: [prometheus.register],
+    collect() {
+      this.set(v8.getHeapStatistics().heap_size_limit);
+    },
+  }),
+  // A non-zero (and growing) value is a strong memory-leak signal.
+  detachedContexts: new prometheus.Gauge({
+    name: 'nodejs_detached_contexts',
+    help: 'Number of detached V8 contexts (a memory-leak signal)',
+    registers: [prometheus.register],
+    collect() {
+      this.set(v8.getHeapStatistics().number_of_detached_contexts);
+    },
+  }),
 };
 
 function createServer(): http.Server | https.Server {
@@ -78,8 +98,7 @@ async function start() {
     app: 'terraforming-mars-app',
   });
   prometheus.collectDefaultMetrics();
-  initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);
-  registerBehaviorExecutor(new Executor());
+  globalInitialize();
 
   const server = createServer();
 
@@ -88,23 +107,33 @@ async function start() {
       metrics.startDatabase.set(v.duration);
     });
 
+  // Initialize the session manager after initializing the database.
+  await SessionManager.getInstance().initialize();
+
   try {
-    const stats = await Database.getInstance().stats();
-    console.log(JSON.stringify(stats, undefined, 2));
+    Database.getInstance().stats().then((stats) => {
+      console.log(JSON.stringify(stats, undefined, 2));
+    });
   } catch (err) {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);
   }
   GameLoader.getInstance().maintenance();
 
-  const port = process.env.PORT || 8080;
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
-  console.log(`Starting server on port ${port}`);
 
-  server.listen(port);
+  const port = process.env.PORT || 8080;
+  const host = process.env.HOST;
+  if (host) {
+    console.log(`Starting server listening to ${host} on port ${port}`);
+  } else {
+    console.log(`Starting server on port ${port}`);
+  }
+
+  server.listen({port: port, host: host});
 
   if (!process.env.SERVER_ID) {
-    console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
+    console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);
     console.log(`Administrative routes can be found at admin?serverId=${serverId}`);
   }
   console.log(`The public run ID is ${runId}`);

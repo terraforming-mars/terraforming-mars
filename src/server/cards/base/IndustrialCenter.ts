@@ -4,7 +4,7 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceTile} from '../../../server/deferredActions/PlaceTile';
 import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
@@ -48,11 +48,13 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player))
-      .andThen((space) => {
-        player.game.addTile(player, space, {tileType: TileType.INDUSTRIAL_CENTER});
-        space.adjacency = this.adjacencyBonus;
-        return undefined;
-      });
+    player.game.defer(
+      new PlaceTile(player, {
+        tile: {tileType: TileType.INDUSTRIAL_CENTER, card: this.name},
+        on: () => this.getAvailableSpaces(player),
+        title: 'Select space adjacent to a city tile',
+        adjacencyBonus: this.adjacencyBonus,
+      }));
+    return undefined;
   }
 }

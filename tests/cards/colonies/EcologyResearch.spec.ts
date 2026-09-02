@@ -7,32 +7,32 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('EcologyResearch', function() {
+describe('EcologyResearch', () => {
   let card: EcologyResearch;
   let player: TestPlayer;
   let game: IGame;
-  let colony1: Luna;
+  let colony: Luna;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EcologyResearch();
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
-
-    colony1 = new Luna();
-    colony1.colonies.push(player.id);
-    player.game.colonies.push(colony1);
   });
 
-  it('Should play without targets', function() {
+  it('Should play without targets', () => {
+    colony = new Luna();
+    colony.colonies.push(player.id);
+    player.game.colonies.push(colony);
+    colony.colonies.push(player.id);
     cast(card.play(player), undefined);
-    expect(player.production.plants).to.eq(1);
+    expect(player.production.plants).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should play with single targets', function() {
+  it('Should play with single targets', () => {
     const tardigrades = new Tardigrades();
     const fish = new Fish();
     player.playedCards.push(tardigrades, fish);
@@ -48,10 +48,9 @@ describe('EcologyResearch', function() {
 
     expect(tardigrades.resourceCount).to.eq(2);
     expect(fish.resourceCount).to.eq(1);
-    expect(player.production.plants).to.eq(1);
   });
 
-  it('Should play with multiple targets', function() {
+  it('Should play with multiple targets', () => {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
@@ -64,6 +63,5 @@ describe('EcologyResearch', function() {
     selectCard.cb([ants]);
 
     expect(ants.resourceCount).to.eq(2);
-    expect(player.production.plants).to.eq(1);
   });
 });

@@ -1,36 +1,33 @@
 import {expect} from 'chai';
 import {IGame} from '../../src/server/IGame';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Space} from '../../src/server/boards/Space';
 import {TileType} from '../../src/common/TileType';
 
-describe('MudSlides', function() {
+describe('MudSlides', () => {
   let card: MudSlides;
   let player: TestPlayer;
   let game: IGame;
-  let turmoil: Turmoil;
 
   beforeEach(() => {
     card = new MudSlides();
     [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
-    turmoil = Turmoil.getTurmoil(game);
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
     game.addCity(player, game.board.getAdjacentSpaces(oceanTile)[0]);
     game.addOcean(player, oceanTile);
     player.megaCredits = 10;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).to.eq(6);
   });
 
-  it('resolve play with overplaced tiles', function() {
+  it('resolve play with overplaced tiles', () => {
     [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
 
     // Find two adjacent ocean spaces
@@ -60,7 +57,7 @@ describe('MudSlides', function() {
 
     player.megaCredits = 10;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).to.eq(6);
   });

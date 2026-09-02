@@ -1,37 +1,40 @@
 import {expect} from 'chai';
-import {cast, churnAction, runAllActions, testRedsCosts} from '../../../TestingUtils';
+import {runAllActions, testRedsCosts} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
 import {testGame} from '../../../TestGame';
 import {assertPlaceOcean} from '../../../assertions';
+import {Payment} from '../../../../src/common/inputs/Payment';
 
-describe('AquiferStandardProject', function() {
+describe('AquiferStandardProject', () => {
   let card: AquiferStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AquiferStandardProject();
     [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
-    assertPlaceOcean(player, churnAction(card, player));
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
+    runAllActions(game);
+    assertPlaceOcean(player, player.popWaitingFor());
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);
   });
 
@@ -42,14 +45,14 @@ describe('AquiferStandardProject', function() {
     maxOutOceans(player);
 
     player.megaCredits = 18;
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(card.canAct(player)).eq(true);
 
-    cast(card.action(player), undefined);
+    card.payAndExecute(player, Payment.of({megacredits: card.cost}));
     runAllActions(game);
 
     expect(game.board.getOceanSpaces()).has.length(9);
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.megaCredits).eq(0);
   });
 

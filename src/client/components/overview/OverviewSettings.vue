@@ -1,16 +1,16 @@
 <template>
   <div class="players-overview-settings">
-    <div class="setting-button" v-on:click.prevent="toggleTagsView()" v-i18n>{{ getTagToggleLabel() }}</div>
+    <div class="setting-button" @click.prevent="toggleTagsView()" v-i18n>{{ getTagToggleLabel() }}</div>
     <div class="setting-label" v-i18n>[ toggle tags view ]</div>
   </div>
 </template>
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'OverviewSettings',
   methods: {
     toggleTagsView() {

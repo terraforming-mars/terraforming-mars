@@ -17,7 +17,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
       requirements: [{tag: Tag.VENUS}, {tag: Tag.EARTH}, {tag: Tag.JOVIAN}],
       metadata: {
         description: 'Requires that you have a Venus tag, an Earth tag and a Jovian tag.',
-        cardNumber: 'T10',
+        cardNumber: '237',
       },
     });
   }

@@ -4,7 +4,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {Tile} from '../Tile';
 import {IPlayer} from '../IPlayer';
 import {MoonExpansion} from './MoonExpansion';
-import {Message} from '@/common/logs/Message';
+import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
 
 export class PlaceSpecialMoonTile extends DeferredAction {

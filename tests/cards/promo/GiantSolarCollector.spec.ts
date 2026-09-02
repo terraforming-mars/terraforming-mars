@@ -4,16 +4,16 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
-describe('GiantSolarCollector', function() {
+describe('GiantSolarCollector', () => {
   let card: GiantSolarCollector;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GiantSolarCollector();
     [/* game */, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({}));
     expect(player.game.getVenusScaleLevel()).eq(0);
 

@@ -5,8 +5,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {GainResources} from '../../deferredActions/GainResources';
+import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
 import {Resource} from '../../../common/Resource';
+import {ICard} from '../ICard';
 
 export class MediaGroup extends Card implements IProjectCard {
   constructor() {
@@ -27,9 +28,9 @@ export class MediaGroup extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT) {
-      player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3, log: true}));
+      player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 3, log: true}));
     }
   }
 }

@@ -3,11 +3,12 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {MoholeAreaAres} from '../../../src/server/cards/ares/MoholeAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('MoholeAreaAres', function() {
-  it('Should play', function() {
+describe('MoholeAreaAres', () => {
+  it('Should play', () => {
     const card = new MoholeAreaAres();
     const [game, player] = testGame(2, {aresExtension: true});
     card.play(player);

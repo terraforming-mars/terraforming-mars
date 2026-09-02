@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('PolarIndustries', function() {
-  it('Should play', function() {
+describe('PolarIndustries', () => {
+  it('Should play', () => {
     const card = new PolarIndustries();
     const [/* game */, player] = testGame(1);
 

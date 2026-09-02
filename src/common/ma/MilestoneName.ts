@@ -32,7 +32,6 @@ export const milestoneNames = [
 
   // Amazonis Planitia
   'Colonizer',
-  'Farmer',
   'Minimalist',
   'Terran',
   'Tropicalist',
@@ -42,25 +41,77 @@ export const milestoneNames = [
   'Pioneer',
   'Land Specialist',
   'Martian',
-  'Businessperson',
 
   // Terra Cimmeria
-  'Collector',
+  'T. Collector',
   'Firestarter',
   'Terra Pioneer',
-  'Spacefarer',
+  'Spacefarer', // TODO(kberg): Rename to T. Spacefarer
   'Gambler',
 
+  // Terra Cimmeria Nova
+  'Architect',
+  'Coastguard', // Also Modular
+  'C. Forester',
+
   // Vastitas Borealis
-  'Electrician',
+  'V. Electrician',
   'Smith',
   'Tradesman',
   'Irrigator',
   'Capitalist',
 
+  // Vastitas Borealis Nova
+  'Agronomist',
+  'Engineer',
+  'V. Spacefarer',
+  'Geologist',
+  'Farmer', // And modular
+
   // Underworld
   'Tunneler',
   'Risktaker',
+
+  // Ares Extreme
+  'Purifier',
+
+  // Modular
+  'Briber',
+  'Builder7',
+  'Forester',
+  'Fundraiser',
+  'Hydrologist',
+  'Landshaper',
+  'Legend4',
+  'Lobbyist',
+  'Merchant',
+  'Metallurgist', // Same as Smith
+  'Philantropist',
+  'Pioneer4',
+  'Planetologist',
+  'Producer',
+  'Researcher',
+  'Spacefarer4',
+  'Sponsor',
+  'Tactician4',
+  'Terraformer29',
+  'Terran5',
+  'Thawer',
+  'Trader',
+  'Tycoon10',
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];
+
+const MILESTONE_RENAMES = new Map<string, MilestoneName>([
+  // When renaming an award add the old name here (like the example below), and add a TODO (like the example below)
+  // And remember to add a test in spec.ts.
+
+  // TODO(yournamehere): remove after 2021-04-05
+  // ['Electrician', 'V. Electrician'],
+]);
+
+export function maybeRenamedMilestone(name: string): MilestoneName {
+  const renamed = MILESTONE_RENAMES.get(name);
+  return renamed ?? (name as MilestoneName);
+}

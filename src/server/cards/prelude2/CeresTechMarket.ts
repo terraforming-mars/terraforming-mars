@@ -28,7 +28,7 @@ export class CeresTechMarket extends Card implements IActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P68',
         renderData: CardRenderer.builder((b) => {
           b.action('Discard any number of cards from your hand to gain 2 M€ for each discarded card.', (ab) =>
             ab.text('-X').cards(1).startAction.text('2x').megacredits(1, {digit})).br;

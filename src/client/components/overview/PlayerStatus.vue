@@ -3,7 +3,7 @@
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()"><span v-i18n>{{ actionLabel }}</span></div>
-            <div class="player-status-timer" v-if="showTimer"><player-timer :timer="timer" :live="liveTimer"/></div>
+            <div class="player-status-timer" v-if="showTimer"><PlayerTimer :timer="timer" :live="liveTimer"/></div>
           </div>
         </div>
       </div>
@@ -11,19 +11,21 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from 'vue';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import PlayerTimer from '@/client/components/overview/PlayerTimer.vue';
 import {TimerModel} from '@/common/models/TimerModel';
 
-export default Vue.extend({
-  name: 'player-status',
+export default defineComponent({
+  name: 'PlayerStatus',
   props: {
     timer: {
       type: Object as () => TimerModel,
+      required: true,
     },
     actionLabel: {
-      type: String,
+      type: String as () => ActionLabel,
+      required: true,
     },
     showTimer: {
       type: Boolean,
@@ -43,16 +45,16 @@ export default Vue.extend({
       if (!this.showTimer) {
         classes.push('no-timer');
       }
-      if (this.actionLabel === ActionLabel.PASSED) {
+      if (this.actionLabel === 'passed') {
         classes.push(`${baseClass}--passed`);
-      } else if (this.actionLabel === ActionLabel.ACTIVE || this.actionLabel === ActionLabel.DRAFTING || this.actionLabel === ActionLabel.RESEARCHING) {
+      } else if (this.actionLabel === 'active' || this.actionLabel === 'drafting' || this.actionLabel === 'researching') {
         classes.push(`${baseClass}--active`);
       }
       return classes.join(' ');
     },
     getActionStatusClasses(): string {
       const classes: Array<string> = ['player-action-status'];
-      if (this.actionLabel === ActionLabel.NONE) {
+      if (this.actionLabel === 'none') {
         classes.push('visibility-hidden');
       }
       return classes.join(' ');

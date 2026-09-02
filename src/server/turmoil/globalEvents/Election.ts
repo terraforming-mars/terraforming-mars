@@ -10,11 +10,6 @@ import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
-  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY}).nbsp.text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
-});
-
 export class Election extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
@@ -22,14 +17,19 @@ export class Election extends GlobalEvent implements IGlobalEvent {
       description: 'Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
+        b.text('1st:', {size: Size.SMALL}).tr(2, {size: Size.TINY}).nbsp.text('2nd:', {size: Size.SMALL}).tr(1, {size: Size.TINY});
+      }),
     });
   }
 
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
+
     // Solo
     if (game.isSoloMode()) {
-      const player = game.getPlayers()[0];
+      const player = game.players[0];
       const score = this.getScore(player, turmoil, game);
       if (score >= 10) {
         player.increaseTerraformRating(2, {log: true});
@@ -37,7 +37,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
         player.increaseTerraformRating(1, {log: true});
       }
     } else {
-      const players = game.getPlayers().slice().sort(
+      const players = game.players.toSorted(
         (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
       );
 
@@ -73,7 +73,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   }
 
   public getScore(player: IPlayer, turmoil: Turmoil, game: IGame) {
-    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
+    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getInfluence(player);
 
     const cities = game.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.player === player,

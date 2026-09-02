@@ -2,15 +2,14 @@
   "Supermarkets": "スーパーマーケット",
   "Requires two cities in play. Increase your M€ production 2 steps.": "条件：都市2つ以上. MC産出+2.",
 
-  "City Park": "都市公園",
+  "City Parks": "都市公園",
   "Requires that you have 3 cities. Gain 2 plants.": "条件：都市3つ以上所持. 2植物獲得.",
 
   "Soil Enrichment": "土壌強化",
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "1微生物を支払う. 5植物獲得.",
 
   "Icy Impactors": "凍結衝突体",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能.",
-  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：このカード上から1小惑星を除去し、海洋配置. 配置場所は第1プレイヤーが決める.",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能 または このカード上から1小惑星を除去し、海洋配置. 配置場所は第1プレイヤーが決める.",
 
   "Floyd Continuum": "フロイド連続体",
   "Action: Gain 3 M€ per completed terraforming parameter.": "アクション：完了済みのグローバルパラメーター1つ毎に3MC獲得.",
@@ -27,11 +26,9 @@
 
   "Teslaract": "テスラ制御技術",
   "Action: Spend 1 energy production to gain 1 plant production.": "アクション：電力産出-1し、植物産出+1.",
-  "Raise your TR 1 step.": "TR+1段階.",
 
   "Red Ships": "赤き船",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市と特殊タイルの合計数分、1MC獲得.",
-  "Requires 4% oxygen.": "条件：酸素4%以上.",
 
   "Neptunian Power Consultants": "海王星電力コンサルタント",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "効果：海洋1枚配置された時、5MC支払っても良い. ※建材での支払い可能. 支払った場合、電力産出+1し、このカード上に1ハイドロリソース追加.",
@@ -46,7 +43,6 @@
 
   "Homeostasis Bureau": "恒常性事務局",
   "Effect: When you raise the temperature, gain 3 M€.": "効果：温度+1段階する毎に3MC獲得.",
-  "Increase your heat production 2 steps.": "温熱産出+2.",
 
   "Hermetic Order of Mars": "火星密教団",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "条件：酸素4%以下. MC産出+2. 所有するタイルに隣接する空きマス毎に1MC獲得.",
@@ -56,7 +52,7 @@
   "1 VP per City with a Cathedral in it.": "配置した大聖堂1つ毎に1VP.",
 
   "Cyberia Systems": "サイベリア・システム",
-  "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "建材産出+2. 異なる土建タグカード2枚を選択し、その産出効果をコピー",
+  "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "建材産出+2. 異なる土建タグカード2枚を選択し、その産出効果をコピー",
 
   "Carbon Nanosystems": "カーボンナノシステム",
   "Effect: When you play a science tag, including this, add a graphene resource here.": "効果：科学タグをプレイ時、このカード上に1グラフェン追加.",
@@ -83,8 +79,7 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "チタン産出+2. 3チタン獲得.",
 
   "Comet Aiming": "彗星誘導",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "アクション：1チタンを支払い、1小惑星獲得.",
-  "Action: Remove 1 asteroid here to place an ocean.": "アクション：このカード上から1小惑星を除去し、海洋配置.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "アクション：1チタンを支払い、1小惑星獲得 または このカード上から1小惑星を除去し、海洋配置.",
 
   "Cutting Edge Technology": "最先端テクノロジー",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "効果：条件付きカードのプレイコスト-2MC.",
@@ -93,16 +88,13 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "条件：この世代中に植物が除去されていること. 1チタン または 2建材獲得.",
 
   "Directed Impactors": "誘導落下",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能.",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "アクション：このカード上から1小惑星を除去し、温度+1段階.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能 または このカード上から1小惑星を除去し、温度+1段階.",
 
   "Field-Capped City": "磁界都市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "MC産出+2. 電力産出+1. 3植物獲得. 都市タイルを配置.",
 
-  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "条件：海洋4枚以上. 電力産出+2.",
 
   "Magnetic Shield": "磁界シールド",
-  "3 Power": "電力タグ3つ以上",
   "Requires 3 power tags. Raise your TR 4 steps.": "条件：電力タグ3つ以上. TR+4段階",
 
   "Meltworks": "溶融産業",
@@ -113,12 +105,10 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "3植物獲得. 温度+1段階. 海洋1枚配置.",
 
   "Diversity Support": "多様性支援",
-  "9 Resource types": "リソース9種類",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "条件：リソース9種類以上を所持. TR+1段階.",
 
   "Topsoil Contract": "表土契約",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "効果：カード上に1微生物配置する毎に1MC獲得.",
-  "Gain 3 plants.": "3植物獲得.",
 
   "Imported Nutrients": "栄養素の輸入",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "4植物獲得. 4微生物獲得.",
@@ -126,14 +116,13 @@
   "Asteroid Deflection System": "微天体斥退システム",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "アクション: デッキトップを1枚確認し捨てる. そのカードに宇宙タグがあればこのカード上に1小惑星追加.",
   "opponents may not remove your plants": "除去無効：あなたの植物",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "電力産出-1. このカード上の1小惑星毎に1VP",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "電力産出-1. このカード上の1小惑星毎に1VP",
 
   "Jovian Embassy": "木星大使館",
   "Raise your TR 1 step.": "TR+1段階.",
 
   "Sub-Crust Measurements": "地殻下観測",
   "Action: Draw a card.": "アクション：1ドロー.",
-  "Requires 2 science tags.": "条件：科学タグ2つ以上.",
 
   "Potatoes": "じゃがいも",
   "Lose 2 plants. Increase your M€ production 2 steps.": "2植物を支払う. MC産出+2.",
@@ -155,7 +144,7 @@
 
   "Asteroid Hollowing": "小惑星中空化",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "アクション：1チタンを支払い、このカード上に小惑星追加し、MC産出+1.",
-  "1VP for each 2 asteroids on this card.": "このカード上の2小惑星毎に1VP.",
+  "1 VP for each 2 asteroids on this card.": "このカード上の2小惑星毎に1VP.",
 
   "Advertising": "広告戦略",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "効果：元のプレイコスト20MC以上のカードをプレイ時、MC産出+1.",
@@ -166,11 +155,9 @@
   "Rego Plastics": "レゴ・プラスチック",
   "Effect: Your steel resources are worth 1 M€ extra.": "効果：建材の価値+1MC.",
 
-  "Interplanetary Trade": "惑星間交易",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "プレイ済みのタグ種類毎にMC産出+1.",
 
   "Penguins": "ペンギン",
-  "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
   "Requires 8 oceans.": "条件：海洋8枚以上.",
 
   "Snow Algae": "氷雪藻",
@@ -190,19 +177,16 @@
   "Effect: Your titanium resources are worth 1 M€ extra.": "効果：チタンの価値+1MC.",
 
   "Energy Market": "電力市場",
-  "Action: Spend 2X M€ to gain X energy.": "アクション：2xMC支払い、x電力獲得.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "アクション：電力産出-1し、8MC獲得.",
 
   "Asteroid Rights": "小惑星の所有権",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "アクション：1MC支払い、1小惑星獲得.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：1MC支払い、1小惑星獲得 または このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
   "Add 2 asteroids to this card.": "このカード上に2小惑星追加.",
 
   "Stanford Torus": "スタンフォード・トーラス",
   "Place a city tile IN SPACE, outside and separate from the planet.": "宇宙空間上に都市タイルを配置.",
 
   "Deimos Down:promo": "ダイモス落とし",
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去.",
 
   "Great Dam:promo": "水力発電",
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "条件：海洋4枚以上. 電力産出+2. 海洋タイルに隣接させて特殊タイルを配置.",

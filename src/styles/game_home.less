@@ -35,13 +35,6 @@
   .copied-notice {
     margin-left: 12px;
     font-size: @font_size_normal;
-    .dismissed {
-      font-size: @font_size_small;
-      padding: 1px 3px;
-      border-radius: 2px;
-      color: black;
-      background: #e8e8e8;
-    }
   }
   .spacing-setup{
     padding-bottom: 64px;
@@ -86,13 +79,90 @@
       background-color: #49597a;
     }
     &.board-tharsis{
-      background-color: rgb(202, 117, 64);
+      background-color: @board_tharsis_chip;
     }
     &.board-hellas{
-      background-color: rgb(55,111,156);
+      background-color: @board-hellas;
     }
     &.board-elysium{
-      background-color: rgb(31,121,32);
+      background-color: @board-elysium;
     }
   }
+}
+
+@media only screen and (max-width: 1023px) {
+  
+  .topmost-game-home {
+    min-height: 100dvh;
+
+    .main-container {
+      margin: 0;
+    }
+  }
+
+  .game-home-container {
+
+    padding: 24px;
+
+    h1 {
+      padding: 0px;
+    }
+
+    >h4 {
+      margin-left: 0;
+    }
+
+    .spacing-setup{
+      padding-bottom: 32px;
+    }
+  }
+
+  .game-setup-detail-container {
+    >ul {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .topmost-game-home {
+    .notice {
+      position: static;
+      padding: 16px;
+      text-align: center;
+    }
+  }
+
+  .game-home-container {
+    h1 {
+      font-size: 28px;
+      line-height: 1.15;
+      padding: 0px;
+    }
+
+    >h4 {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    >ul >li {
+      font-size: 18px;
+    }
+    
+    .spacing-setup{
+      padding-bottom: 32px;
+    }
+  }
+
+  .game-setup-detail-container {
+    >ul >li {
+      font-size: 17px;
+    }
+
+    .setup-item {
+      font-size: 17px;
+    }
+  }
+
 }

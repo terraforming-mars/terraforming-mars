@@ -4,12 +4,12 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Harvest', function() {
+describe('Harvest', () => {
   let card: Harvest;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Harvest();
     [game, player] = testGame(2);
 
@@ -17,11 +17,11 @@ describe('Harvest', function() {
     landSpaces.forEach((space) => game.addGreenery(player, space));
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);
     expect(card.canPlay(player)).is.true;

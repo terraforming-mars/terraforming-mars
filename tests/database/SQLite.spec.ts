@@ -2,7 +2,7 @@ import {describeDatabaseSuite} from './databaseSuite';
 import {IGame} from '../../src/server/IGame';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/server/database/SQLite';
 import {GameId} from '../../src/common/Types';
-import {RunResult} from 'sqlite3';
+import {RunResult} from 'better-sqlite3';
 import {ITestDatabase, Status} from './ITestDatabase';
 
 class TestSQLite extends SQLite implements ITestDatabase {

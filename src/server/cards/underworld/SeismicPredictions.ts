@@ -7,49 +7,34 @@ import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {isHazardTileType} from '../../../common/AresTileType';
 import {Size} from '../../../common/cards/render/Size';
 import {cancelled} from '../../cards/Options';
-import {SpaceType} from '../../../common/boards/SpaceType';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().emptyTile().asterix().influence({size: Size.SMALL});
-});
+import {Tag} from '../../../common/cards/Tag';
 
 export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.SEISMIC_PREDICTIONS,
       description: 'Discard all unclaimed underground resources. ' +
-      'Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.',
+      'Lose 2 M€ for each building tag (max 7) minus influence and claimed underground resource tokens.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      renderData: CardRenderer.builder((b) => {
+        b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().tag(Tag.BUILDING).minus().undergroundResources().influence({size: Size.SMALL});
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
+  public override bespokeResolve(game: IGame) {
+    const turmoil = Turmoil.getTurmoil(game);
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const playerSpaces = player.game.board.spaces.filter((space) => {
-        if (space.spaceType === SpaceType.COLONY) {
-          return false;
-        }
-        if (space.tile === undefined) {
-          return false;
-        }
-        if (space.player !== player) {
-          return false;
-        }
-        return !isHazardTileType(space.tile?.tileType);
-      });
-      const filtered = playerSpaces.filter(
-        (space) => space.undergroundResources === undefined && space.excavator === undefined);
-      const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);
-      const cost = penalty * 2;
+    for (const player of game.playersInGenerationOrder) {
+      const penalty = Math.min(7, player.tags.count(Tag.BUILDING, 'raw'));
+      const rebate = turmoil.getInfluence(player) + player.underworldData.tokens.length;
+      const cost = (penalty - rebate) * 2;
       if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
-    });
+    }
   }
 }

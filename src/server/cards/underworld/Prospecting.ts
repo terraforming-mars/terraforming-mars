@@ -4,6 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {PreludeCard} from '../prelude/PreludeCard';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class Prospecting extends PreludeCard {
   constructor() {
@@ -22,6 +23,10 @@ export class Prospecting extends PreludeCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    return player.canAfford(4);
+  }
+
   public override bespokePlay(player: IPlayer) {
     ColoniesHandler.addColonyTile(player, {
       activateableOnly: true,
@@ -30,6 +35,9 @@ export class Prospecting extends PreludeCard {
           colony.addColony(player);
         }
       }});
+
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
+
     return undefined;
   }
 }

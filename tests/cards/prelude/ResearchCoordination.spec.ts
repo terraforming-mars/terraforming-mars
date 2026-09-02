@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {Tag} from '../../../src/common/cards/Tag';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('ResearchCoordination', function() {
-  it('Should play', function() {
+describe('ResearchCoordination', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new ResearchCoordination();
     cast(card.play(player), undefined);

@@ -3,10 +3,11 @@ import {expect} from 'chai';
 import {BehemothExcavator} from '../../../src/server/cards/underworld/BehemothExcavator';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('BehemothExcavator', () => {
   let game: IGame;
@@ -23,17 +24,17 @@ describe('BehemothExcavator', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 
     const selectSpace1 = cast(player.popWaitingFor(), SelectSpace);
     const space1 = selectSpace1.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space1.undergroundResources = 'plant1';
+    space1.undergroundResources = 'plant2';
     selectSpace1.cb(space1);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2}));
     expect(space1.excavator).eq(player);
 
     runAllActions(game);
@@ -44,7 +45,7 @@ describe('BehemothExcavator', () => {
     space2.undergroundResources = 'titanium2';
     selectSpace2.cb(space2);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2, titanium: 2}));
     expect(space2.excavator).eq(player);
 
     runAllActions(game);
@@ -52,10 +53,10 @@ describe('BehemothExcavator', () => {
     const selectSpace3 = cast(player.popWaitingFor(), SelectSpace);
     const space3 = selectSpace3.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space3.undergroundResources = 'steel2';
+    space3.undergroundResources = 'titaniumandplant';
     selectSpace3.cb(space3);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, steel: 2, titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 3, titanium: 3}));
     expect(space3.excavator).eq(player);
 
     runAllActions(game);

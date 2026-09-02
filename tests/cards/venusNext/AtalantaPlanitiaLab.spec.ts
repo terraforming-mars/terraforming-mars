@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {AtalantaPlanitiaLab} from '../../../src/server/cards/venusNext/AtalantaPlanitiaLab';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast} from '@/common/utils/utils';
 
-describe('AtalantaPlanitiaLab', function() {
-  it('Should play', function() {
+describe('AtalantaPlanitiaLab', () => {
+  it('Should play', () => {
     const card = new AtalantaPlanitiaLab();
     const [/* game */, player] = testGame(2);
     expect(card.canPlay(player)).is.not.true;

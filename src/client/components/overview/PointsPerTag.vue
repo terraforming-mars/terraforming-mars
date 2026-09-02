@@ -6,25 +6,31 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+const ONE_THIRD = 1/3;
+const TWO_THIRDS = 2/3;
+
+import {defineComponent} from 'vue';
 
 export type Points = {
   points: number;
   halfPoints: number;
+  asterisk?: boolean;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PointsPerTag',
   props: {
     points: {
       type: Object as () => Points,
+      required: true,
     },
   },
   computed: {
     amount(): string {
+      const asterisk = this.points.asterisk ? '*' : '';
       if (this.points.halfPoints === 2) {
         // This string is particularly good for rendering fractions because it's using a specific fraction slash.
-        return '2⁄2';
+        return `2⁄2${asterisk}`;
       }
 
       const points = this.points.points + (this.points.halfPoints / 2);
@@ -33,10 +39,12 @@ export default Vue.extend({
       let vulgarFraction = '';
       if (fraction === 0.5) {
         vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
+      } else if (Math.abs(fraction - ONE_THIRD) < Number.EPSILON) {
         vulgarFraction = '⅓';
+      } else if (Math.abs(fraction - TWO_THIRDS) < Number.EPSILON) {
+        vulgarFraction = '⅔';
       }
-      return `${integer || ''}${vulgarFraction}`;
+      return `${integer || ''}${vulgarFraction}${asterisk}`;
     },
     cssClasses(): string {
       if (this.points.halfPoints === 2) {
@@ -47,7 +55,7 @@ export default Vue.extend({
         'points-per-tag points-per-tag--S';
     },
     show(): boolean {
-      return this.points.points !== 0 || this.points.halfPoints !== 0;
+      return this.points.points !== 0 || this.points.halfPoints !== 0 || this.points.asterisk === true;
     },
   },
 });

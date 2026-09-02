@@ -4,12 +4,19 @@ import {ICard} from '../../src/server/cards/ICard';
 import {CardResource} from '../../src/common/CardResource';
 import {MoonCards} from '../../src/server/moon/MoonCards';
 import {fail} from 'assert';
+import {CardName} from '../../src/common/cards/CardName';
 
-describe('MoonCards', function() {
+const OTHER_SCIENCE_CARDS: ReadonlySet<CardName> = new Set([
+  CardName.PHYSICS_COMPLEX,
+  CardName.SEARCH_FOR_LIFE,
+  CardName.SEARCH_FOR_LIFE_UNDERGROUND,
+]);
+
+describe('MoonCards', () => {
   describe('Moon science card test', () => {
     function contains(card: ICard): boolean {
       return MoonCards.scienceCardsWithLessThan2VP.has(card.name) ||
-         MoonCards.otherScienceCards.has(card.name);
+         OTHER_SCIENCE_CARDS.has(card.name);
     }
     function processDeck(deck: CardManifest<ICard>) {
       for (const factory of CardManifest.values(deck)) {

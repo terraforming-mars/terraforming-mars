@@ -15,4 +15,8 @@ export type PlayerInputType =
     'productionToLose' |
     'aresGlobalParameters' |
     'globalEvent' |
-    'policy';
+    'policy' |
+    'resource' |
+    'resources' |
+    'claimedUndergroundToken' |
+    'deltaProject';

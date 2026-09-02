@@ -8,6 +8,7 @@ import {SelectCardModel} from '../../common/models/PlayerInputModel';
 import {IPlayer} from '../IPlayer';
 import {cardsToModel} from '../models/ModelUtils';
 import {InputError} from './InputError';
+import {SelectOption} from './SelectOption';
 
 export type Options = {
   max: number,
@@ -15,13 +16,15 @@ export type Options = {
   /** Default is false. When true, ??? */
   selectBlueCardAction: boolean,
   /** When provided, then the cards with false in `enabled` are not selectable and grayed out */
-  enabled: Array<boolean> | undefined,
+  enabled: ReadonlyArray<boolean> | undefined,
   /** Default is true. If true, then shows resources on those cards. If false than shows discounted price. */
   played: boolean | CardName.SELF_REPLICATING_ROBOTS
   /** Default is false. If true then show the name of the card owner below. */
   showOwner: boolean,
+  /** Default is false. If true, show a "Select All" / "Deselect All" toggle button. */
+  showSelectAll: boolean,
 }
-export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
+export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T>> {
   public config: Options;
 
   constructor(
@@ -38,8 +41,16 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
       enabled: config?.enabled,
       played: config?.played ?? true,
       showOwner: config?.showOwner ?? false,
+      showSelectAll: config?.showSelectAll ?? false,
     };
     this.buttonLabel = buttonLabel;
+  }
+
+  public maybeConvertToSelectOption(title: string | Message): SelectCard<T> | SelectOption {
+    if (this.cards.length !== 1) {
+      return this;
+    }
+    return new SelectOption(title, this.buttonLabel).andThen(() => this.cb(this.cards));
   }
 
   public toModel(player: IPlayer): SelectCardModel {
@@ -57,6 +68,8 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
       showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false) ?? false,
       selectBlueCardAction: this.config.selectBlueCardAction,
       showOwner: this.config.showOwner === true,
+      showSelectAll: this.config.showSelectAll === true,
+      optional: this.optional,
     };
   }
 

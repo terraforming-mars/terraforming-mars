@@ -9,22 +9,23 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
-import {cast, fakeCard} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('ExperiencedMartians', function() {
+describe('ExperiencedMartians', () => {
   let card: ExperiencedMartians;
   let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ExperiencedMartians();
     [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
     turmoil = game.turmoil!;
   });
 
-  it('play', function() {
+  it('play', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.MARS]});
     const b = fakeCard({name: 'B' as CardName, tags: []});
     const c = fakeCard({name: 'C' as CardName, tags: [Tag.MARS]});
@@ -38,7 +39,7 @@ describe('ExperiencedMartians', function() {
 
     expect(turmoil.getAvailableDelegateCount(player)).eq(7);
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
 
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 

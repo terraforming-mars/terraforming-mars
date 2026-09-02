@@ -5,8 +5,9 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../../src/common/utils/utils';
 
 describe('EosChasmaNationalPark', () => {
   let card: EosChasmaNationalPark;
@@ -32,7 +33,7 @@ describe('EosChasmaNationalPark', () => {
     player.playedCards.push(birds, fish);
 
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);

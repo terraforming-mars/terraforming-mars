@@ -1,53 +1,84 @@
-import * as prometheus from 'prom-client';
-import * as responses from './responses';
-
+import prometheus from 'prom-client';
+import {Clock} from '../../common/Timer';
 import {paths} from '../../common/app/paths';
-
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {SessionId} from '../auth/Session';
+import {GameLoader} from '../database/GameLoader';
 import {ApiCloneableGame} from '../routes/ApiCloneableGame';
-import {ApiGameLogs} from '../routes/ApiGameLogs';
-import {ApiGames} from '../routes/ApiGames';
+import {ApiCreateGame} from '../routes/ApiCreateGame';
 import {ApiGame} from '../routes/ApiGame';
 import {ApiGameHistory} from '../routes/ApiGameHistory';
-import {ApiPlayer} from '../routes/ApiPlayer';
-import {ApiStats} from '../routes/ApiStats';
+import {ApiGameLogs} from '../routes/ApiGameLogs';
+import {ApiGames} from '../routes/ApiGames';
+import {ApiHeapSnapshot} from '../routes/ApiHeapSnapshot';
+import {ApiIPs} from '../routes/ApiIPs';
+import {ApiLogout} from '../routes/ApiLogout';
 import {ApiMetrics} from '../routes/ApiMetrics';
+import {ApiPlayer} from '../routes/ApiPlayer';
+import {ApiProfile} from '../routes/ApiProfile';
 import {ApiSpectator} from '../routes/ApiSpectator';
+import {ApiStats} from '../routes/ApiStats';
 import {ApiWaitingFor} from '../routes/ApiWaitingFor';
+import {Autopass} from '../routes/Autopass';
+import {DiscordAuth} from '../routes/DiscordAuth';
 import {GameHandler} from '../routes/Game';
-import {GameLoader} from '../database/GameLoader';
 import {GamesOverview} from '../routes/GamesOverview';
 import {Context, IHandler} from '../routes/IHandler';
 import {Load} from '../routes/Load';
 import {LoadGame} from '../routes/LoadGame';
+import {Login} from '../routes/Login';
 import {PlayerInput} from '../routes/PlayerInput';
+import {Reset} from '../routes/Reset';
 import {ServeApp} from '../routes/ServeApp';
 import {ServeAsset} from '../routes/ServeAsset';
 import {serverId, statsId} from '../utils/server-ids';
-import {Reset} from '../routes/Reset';
 import {newIpBlocklist} from './IPBlocklist';
-import {ApiIPs} from '../routes/ApiIPs';
 import {newIpTracker} from './IPTracker';
+import {SessionManager} from './auth/SessionManager';
+import * as authcookies from './auth/authcookies';
+import {DiscordUser} from './auth/discord';
 import {getHerokuIpAddress} from './heroku';
-import {Request} from '../Request';
-import {Response} from '../Response';
-import {Clock} from '../../common/Timer';
-import {Autopass} from '../routes/Autopass';
+import * as responses from './responses';
+import {EndGameLog} from '../routes/EndGameLog';
+import {UrlParams} from '../routes/UrlParams';
 
 const metrics = {
-  count: new prometheus.Counter({
+  request_count: new prometheus.Counter({
     name: 'http_request_count',
     help: 'Request count',
     registers: [prometheus.register],
-    labelNames: ['path', 'method'],
+    labelNames: ['path', 'method'] as const,
+  }),
+  request_bytes: new prometheus.Histogram({
+    name: 'http_request_bytes',
+    help: 'Request bytes',
+    registers: [prometheus.register],
+    labelNames: ['path'] as const,
+    buckets: [64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304],
   }),
   latency: new prometheus.Histogram({
     name: 'http_request_latency',
-    help: 'Request latency',
+    help: 'Request latency in milliseconds',
     registers: [prometheus.register],
-    labelNames: ['path'],
-    buckets: [0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000],
+    labelNames: ['path'] as const,
+    buckets: [0, 0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000, 2500, 5000, 10000, 20000],
+  }),
+  response_count: new prometheus.Counter({
+    name: 'http_response_count',
+    help: 'Response count',
+    registers: [prometheus.register],
+    labelNames: ['code', 'path', 'method'] as const,
+  }),
+  response_bytes: new prometheus.Histogram({
+    name: 'http_response_bytes',
+    help: 'Response bytes',
+    registers: [prometheus.register],
+    labelNames: ['path'] as const,
+    buckets: [64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304],
   }),
 };
+
 
 const clock = new Clock();
 
@@ -60,10 +91,12 @@ const handlers: Map<string, IHandler> = new Map(
     ['', ServeApp.INSTANCE],
     [paths.ADMIN, ServeApp.INSTANCE],
     [paths.API_CLONEABLEGAME, ApiCloneableGame.INSTANCE],
+    [paths.API_CREATEGAME, ApiCreateGame.INSTANCE],
     [paths.API_GAME, ApiGame.INSTANCE],
     [paths.API_GAME_HISTORY, ApiGameHistory.INSTANCE],
     [paths.API_GAME_LOGS, ApiGameLogs.INSTANCE],
     [paths.API_GAMES, ApiGames.INSTANCE],
+    [paths.API_HEAP_SNAPSHOT, ApiHeapSnapshot.INSTANCE],
     [paths.API_IPS, ApiIPs.INSTANCE],
     [paths.API_METRICS, ApiMetrics.INSTANCE],
     [paths.API_PLAYER, ApiPlayer.INSTANCE],
@@ -72,21 +105,27 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_WAITING_FOR, ApiWaitingFor.INSTANCE],
     [paths.AUTOPASS, Autopass.INSTANCE],
     [paths.CARDS, ServeApp.INSTANCE],
+    [paths.END_GAME_LOG, EndGameLog.INSTANCE],
     ['favicon.ico', ServeAsset.INSTANCE],
     [paths.GAME, GameHandler.INSTANCE],
     [paths.GAMES_OVERVIEW, GamesOverview.INSTANCE],
     [paths.HELP, ServeApp.INSTANCE],
     [paths.LOAD, Load.INSTANCE],
     [paths.LOAD_GAME, LoadGame.INSTANCE],
+    [paths.LOGIN, Login.INSTANCE],
+    [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
+    ['vendors.js', ServeAsset.INSTANCE],
+    ['vendors.js.map', ServeAsset.INSTANCE],
+    [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
     [paths.PLAYER_INPUT, PlayerInput.INSTANCE],
+    [paths.API_PROFILE, ApiProfile.INSTANCE],
     [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
     ['styles.css', ServeAsset.INSTANCE],
-    ['sw.js', ServeAsset.INSTANCE],
     [paths.THE_END, ServeApp.INSTANCE],
   ],
 );
@@ -97,10 +136,13 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object') {
+  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
     return '!' + socketIpAddress.address + '!';
   }
-  return socketIpAddress;
+  if (typeof socketIpAddress === 'string') {
+    return socketIpAddress;
+  }
+  return '';
 }
 
 function getHandler(pathname: string): IHandler | undefined {
@@ -111,19 +153,36 @@ function getHandler(pathname: string): IHandler | undefined {
   if (pathname.startsWith('assets/')) {
     return ServeAsset.INSTANCE;
   }
+  if (pathname.startsWith('chunks/')) {
+    return ServeAsset.INSTANCE;
+  }
   return undefined;
 }
 
-export function processRequest(
-  req: Request,
-  res: Response): void {
+function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; sessionid: SessionId | undefined } {
+  const sessionManager = SessionManager.getInstance();
+  let user: DiscordUser | undefined = undefined;
+  let sessionid: SessionId | undefined = undefined;
+  try {
+    sessionid = authcookies.extract(req);
+    if (sessionid !== undefined) {
+      user = sessionManager.get(sessionid);
+    }
+  } catch (e) {
+    console.error('While extracting cookies', e);
+  }
+  return {user, sessionid};
+}
+
+export async function processRequest(req: Request, res: Response): Promise<void> {
   const start = process.hrtime.bigint();
-  let pathnameForLatency: string | undefined = undefined;
+  let metricsPathname = '_unknown_';
   try {
     const ipAddress = getIPAddress(req);
     ipTracker.add(ipAddress);
     if (ipBlocklist.isBlocked(ipAddress)) {
       responses.notFound(req, res);
+      return;
     }
 
     if (req.method === 'HEAD') {
@@ -136,29 +195,40 @@ export function processRequest(
     }
 
     const url = new URL(req.url, `http://${req.headers.host}`);
-    const ctx: Context = {
-      url: url,
-      clock,
-      gameLoader: GameLoader.getInstance(),
-      ip: getIPAddress(req),
-      ipTracker: ipTracker,
-      ids: {
-        serverId,
-        statsId,
-      }};
 
     const pathname = url.pathname.substring(1); // Remove leading '/'
-    pathnameForLatency = pathname;
     const handler = getHandler(pathname);
     if (handler !== undefined) {
-      metrics.count.inc({path: pathname, method: req.method});
-      handler.processRequest(req, res, ctx);
+      // No need to report every asset. Summarize.
+      metricsPathname = pathname.startsWith('assets/') ? 'assets/' : pathname;
+      const {user, sessionid} = getAuthenticatedUser(req);
+      const ctx: Context = {
+        url: url,
+        clock,
+        gameLoader: GameLoader.getInstance(),
+        sessionManager: SessionManager.getInstance(),
+        ip: getIPAddress(req),
+        ipTracker: ipTracker,
+        ids: {
+          serverId,
+          statsId,
+        },
+        sessionid: sessionid,
+        user: user,
+        urlParams: new UrlParams(url.searchParams),
+      };
+
+      await handler.processRequest(req, res, ctx);
     } else {
-      pathnameForLatency = undefined;
       responses.notFound(req, res);
     }
   } finally {
-    const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
-    metrics.latency.observe({path: pathnameForLatency}, Number(duration));
+    const durationNanos = Number(process.hrtime.bigint() - start);
+    const durationMillis = durationNanos / 1_000_000;
+    metrics.request_count.inc({path: metricsPathname, method: req.method});
+    metrics.request_bytes.observe({path: metricsPathname}, Number(req.headers['content-length'] || 0));
+    metrics.response_count.inc({code: res.statusCode.toString(), path: metricsPathname, method: req.method});
+    metrics.response_bytes.observe({path: metricsPathname}, Number(res.getHeader('content-length') || 0));
+    metrics.latency.observe({path: metricsPathname}, Number(durationMillis));
   }
 }

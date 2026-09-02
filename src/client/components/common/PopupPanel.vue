@@ -1,0 +1,40 @@
+<template>
+  <div class="popup-outer">
+    <div class="popup-inner">
+      <div class="popup-header">
+        <slot name="header"></slot>
+        <button class="close-button" @click="onclick">Close</button>
+      </div>
+      <div class="popup-body">
+        <slot></slot>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import {defineComponent} from 'vue';
+
+export default defineComponent({
+  name: 'PopupPanel',
+  methods: {
+    onclick() {
+      this.$emit('close');
+    },
+    keylistener(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        this.onclick();
+        return;
+      }
+    },
+  },
+  computed: {
+  },
+  unmounted() {
+    window.removeEventListener('keydown', this.keylistener);
+  },
+  mounted() {
+    window.addEventListener('keydown', this.keylistener);
+  },
+});
+</script>

@@ -6,6 +6,7 @@ import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {Units} from '../../common/Units';
 
 export type Options = {
   canUseSteel?: boolean;
@@ -15,6 +16,7 @@ export type Options = {
   canUseGraphene?: boolean;
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
+  reserveUnits?: Units | undefined;
   title?: string | Message;
 }
 
@@ -34,16 +36,13 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
     if (this.options.canUseSteel && this.player.steel > 0) {
       return false;
     }
-    if (this.options.canUseTitanium && this.player.titanium > 0) {
+    if ((this.options.canUseTitanium || this.player.canUseTitaniumAsMegacredits) && this.player.titanium > 0) {
       return false;
     }
     if (this.options.canUseGraphene && this.player.resourcesOnCard(CardName.CARBON_NANOSYSTEMS) > 0) {
       return false;
     }
     if (this.options.canUseAsteroids && this.player.resourcesOnCard(CardName.KUIPER_COOPERATIVE) > 0) {
-      return false;
-    }
-    if (this.player.isCorporation(CardName.LUNA_TRADE_FEDERATION) && this.player.titanium > 0) {
       return false;
     }
     if (this.options.canUseSeeds && (this.player.resourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS) > 0)) {
@@ -60,11 +59,16 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
   }
 
   public execute() {
+    if (this.amount === 0) {
+      this.cb(Payment.of({}));
+      return undefined;
+    }
+
     if (this.mustPayWithMegacredits()) {
       if (this.player.megaCredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
-      const payment = Payment.of({megaCredits: this.amount});
+      const payment = Payment.of({megacredits: this.amount});
       this.player.pay(payment);
       this.cb(payment);
       return undefined;
@@ -82,7 +86,8 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
-      })
+        graphene: this.options.canUseGraphene || false,
+      }, this.options.reserveUnits)
       .andThen((payment) => {
         this.player.pay(payment);
         this.cb(payment);

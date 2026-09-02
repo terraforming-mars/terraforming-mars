@@ -81,13 +81,13 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   private titanFloatingLaunchPad: TitanFloatingLaunchPad | undefined;
 
   constructor(private player: IPlayer) {
-    const card = player.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
+    const card = player.tableau.get(CardName.TITAN_FLOATING_LAUNCHPAD);
     this.titanFloatingLaunchPad = card === undefined ? undefined : (card as TitanFloatingLaunchPad);
   }
 
   public canUse() {
     return (this.titanFloatingLaunchPad?.resourceCount ?? 0) > 0 &&
-      !this.player.getActionsThisGeneration().has(CardName.TITAN_FLOATING_LAUNCHPAD);
+      !this.player.actionsThisGeneration.has(CardName.TITAN_FLOATING_LAUNCHPAD);
   }
 
   public optionText() {
@@ -99,7 +99,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
     if (this.titanFloatingLaunchPad !== undefined) {
       this.titanFloatingLaunchPad.resourceCount--;
     }
-    this.player.addActionThisGeneration(CardName.TITAN_FLOATING_LAUNCHPAD);
+    this.player.actionsThisGeneration.add(CardName.TITAN_FLOATING_LAUNCHPAD);
     this.player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(this.player).colony(colony));
     colony.trade(this.player);
   }

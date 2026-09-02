@@ -1,11 +1,9 @@
 import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {moonMiningTile} from '../render/DynamicVictoryPoints';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -27,35 +25,21 @@ export class LunaMiningHub extends Card {
         },
       },
 
-      victoryPoints: 'special',
+      victoryPoints: {moon: {mine: {}}, nextToThis: {}, each: 2},
       requirements: {miningRate: 5},
 
       metadata: {
         cardNumber: 'M14',
-        description: {
-          text: '2 VP PER MINING TILE ADJACENT TO THIS TILE.',
-          align: 'left',
-        },
         renderData: CardRenderer.builder((b) => {
-          b.text('Requires a mining rate of 5 or higher.', Size.TINY, false, false).br;
+          b.text('Requires a mining rate of 5 or higher.', {size: Size.TINY, isBold: false}).br;
           b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
-          b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', Size.TINY, false, false).br;
+          b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', {size: Size.TINY, isBold: false}).br;
           b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
-          b.text('Place this tile on The Moon and raise the mining rate 1 step.', Size.TINY, false, false);
+          b.text('Place this tile on The Moon and raise the mining rate 1 step.', {size: Size.TINY, isBold: false}).br;
+          b.vpText('2 VP PER MINING TILE ADJACENT TO THIS TILE.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
+        victoryPoints: moonMiningTile(2, true),
       },
     });
-  }
-
-  public override getVictoryPoints(player: IPlayer) {
-    const moonData = MoonExpansion.moonData(player.game);
-    const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
-    if (usedSpace !== undefined) {
-      const adjacentSpaces = moonData.moon.getAdjacentSpaces(usedSpace);
-      const adjacentMines = adjacentSpaces.filter((s) => MoonExpansion.spaceHasType(s, TileType.MOON_MINE));
-      return 2 * adjacentMines.length;
-    }
-    return 0;
   }
 }

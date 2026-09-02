@@ -21,7 +21,7 @@ export class Karen extends CeoCard {
 
   public override canAct(player: IPlayer) {
     if (!player.game.preludeDeck.canDraw(player.game.generation)) {
-      this.warnings.add('deckTooSmall');
+      this.addWarning('deckTooSmall');
     }
     return super.canAct(player);
   }
@@ -29,6 +29,6 @@ export class Karen extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, game.generation);
-    return PreludesExpansion.playPrelude(player, cards);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

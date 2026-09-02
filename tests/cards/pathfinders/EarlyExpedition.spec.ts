@@ -4,21 +4,21 @@ import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedi
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions, setTemperature, testGame} from '../../TestingUtils';
+import {runAllActions, setTemperature, testGame} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../../src/common/utils/utils';
 
-describe('EarlyExpedition', function() {
+describe('EarlyExpedition', () => {
   let card: EarlyExpedition;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EarlyExpedition();
     [game, player] = testGame(1);
-    player.playedCards.push(card);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     setTemperature(game, -16);
     player.production.override({energy: 1});
     expect(card.canPlay(player)).is.false;
@@ -32,12 +32,12 @@ describe('EarlyExpedition', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override({energy: 1});
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
@@ -46,7 +46,9 @@ describe('EarlyExpedition', function() {
     let tiles = 0;
     selectSpace.spaces.forEach((space) => {
       game.board.getAdjacentSpaces(space).forEach((s) => {
-        if (s.tile !== undefined) tiles++;
+        if (s.tile !== undefined) {
+          tiles++;
+        }
       });
     });
     expect(tiles).eq(0);

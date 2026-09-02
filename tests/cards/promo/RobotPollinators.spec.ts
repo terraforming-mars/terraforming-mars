@@ -6,25 +6,25 @@ import {fakeCard, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('Robot Pollinators', function() {
+describe('Robot Pollinators', () => {
   let card: RobotPollinators;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RobotPollinators();
     [game, player] = testGame(1);
   });
 
 
-  it('Can not play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', () => {
     setOxygenLevel(game, 1);
     expect(card.canPlay(player)).is.not.true;
     setOxygenLevel(game, 10);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Play, No tags', function() {
+  it('Play, No tags', () => {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
@@ -37,7 +37,7 @@ describe('Robot Pollinators', function() {
     expect(player.plants).to.eq(0);
   });
 
-  it('Play, Yes tags', function() {
+  it('Play, Yes tags', () => {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);

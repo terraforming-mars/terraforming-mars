@@ -42,7 +42,7 @@ export class Celestic extends ActiveCorporationCard {
   }
 
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     player.drawCard(2, {
       include: (card) => floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });

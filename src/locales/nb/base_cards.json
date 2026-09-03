@@ -12,7 +12,8 @@
 	"Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Krever 3 hav. Senk din M€-produksjon med 1 og en spillers varmeproduksjon med 1. Øk din planteproduksjon med 2.",
 
 	"Search For Life": "Søken etter liv",
-	"Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Betal 1 M€ for å vise det øverste kortet i kortstokken. Hvis det kortet har et mikrobesymbol, legg til en vitenskapsressurs her.",
+	"max": "maks. ",
+	"Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Handling: Betal 1 M€ for å vise frem det øverste kortet i kortstokken. Hvis det kortet har et mikrobesymbol, legg til en vitenskapsressurs her.",
 	"3 VPs if you have one or more science resources here.": "3 SP hvis du har en eller flere vitenskapsressurser her.",
 
 	"Oxygen must be 6% or less.": "Oksygen må være 6% eller mindre.",
@@ -67,14 +68,14 @@
 	"1 VP for each Jovian tag you have.": "1 SP for hvert Jupiter symbol du har.",
 
 	"Space Elevator": "Romheis",
-	"Spend 1 steel to gain 5 M€.": "Betal 1 stål, for å få 5 M€.",
+	"Spend 1 steel to gain 5 M€.": "Betal 1 stål for å få 5 M€.",
 	"Increase your titanium production 1 step.": "Øk titan-produksjonen din med 1 steg.",
 
 	"Development Center": "Utviklingssenter",
-	"Spend 1 energy to draw a card.": "Bruk 1 energi for å trekke et kort.",
+	"Action: Spend 1 energy to draw a card.": "Handling: Bruk 1 energi for å trekke et kort.",
 
 	"Equatorial Magnetizer": "Ekvatorial magnetisator",
-	"Decrease your energy production 1 step to increase your terraform rating 1 step.": "Reduser din energiproduksjon med 1 steg for å øke din terraforming-vurdering med 1 steg.",
+	"Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Reduser din energiproduksjon med 1 steg for å øke din terraforming-vurdering med 1 steg.",
 
 	"Domed Crater": "Kuppelkrater",
 	"Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 7% eller mindre. Få 3 planter. Plasser en by-brikke. Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg.",
@@ -281,7 +282,7 @@
 	"Place a city tile ON THE RESERVED AREA.": "Plasser en by-brikke på det reserverte området.",
 	"1 VP per Jovian tag you have.": "1 SP per Jupitersymbol du har.",
 
-	"Callisto Penal Mines": "Callisto fengselsgruver",
+	"Callisto Penal Mines": "Fengselsgruver på Callisto",
 	"Increase your M€ production 3 steps.": "Øk din M€-produksjon med 3 trinn.",
 
 	"Giant Space Mirror": "Gigantisk rom-solreflektor",
@@ -603,7 +604,7 @@
 	"Requires two cities in play. Increase your M€ production 1 step.": "Krever to byer i spill. Øk din M€-produksjon med 1 trinn.",
 
 	"Aquifer Pumping": "Akvifer-pumping",
-	"Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Bruk 8 M€ for å plassere 1 havbrikke. STÅL KAN BRUKES som om du spilte et byggingskort.",
+	"Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Bruk 8 M€ for å plassere 1 havbrikke. STÅL KAN BRUKES som om du spilte et byggingskort.",
 
 	"Flooding": "Oversvømming",
 	"Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Plasser en havbrikke. HVIS DET ER BRIKKER VED SIDEN AV DENNE HAVBRIKKEN, KAN DU FJERNE 4 M€ FRA EIEREN AV EN AV DISSE BRIKKENE.",

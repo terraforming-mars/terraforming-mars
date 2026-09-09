@@ -4,6 +4,7 @@ import {
   isErrors,
   parseSubmission,
   toNewGameConfig,
+  toPrefill,
   type ParsedSubmission,
   type RawSlot,
 } from '../src/handlers/parseSubmission.js';
@@ -23,7 +24,7 @@ function makeState(opts: {
   randomFirst?: boolean;
   firstSlot?: number;
   startingPreludes?: string;
-  startingCeos?: string;
+  startingCorporations?: string;
   escapeVelocity?: 'off' | 'on';
   escapeVelocityMinutes?: string;
 }): Record<string, Record<string, unknown>> {
@@ -90,8 +91,11 @@ function makeState(opts: {
   state[BlockIds.startingPreludes] = {
     [ActionIds.startingPreludes]: {type: 'plain_text_input', value: opts.startingPreludes ?? '4'},
   };
-  state[BlockIds.startingCeos] = {
-    [ActionIds.startingCeos]: {type: 'plain_text_input', value: opts.startingCeos ?? '3'},
+  state[BlockIds.startingCorporations] = {
+    [ActionIds.startingCorporations]: {
+      type: 'plain_text_input',
+      value: opts.startingCorporations ?? '3',
+    },
   };
   state[BlockIds.escapeVelocity] = {
     [ActionIds.escapeVelocity]: {
@@ -159,6 +163,38 @@ describe('parseSubmission', () => {
     const result = parseSubmission(state);
     expect(isErrors(result)).toBe(true);
     expect((result as {errors: Record<string, string>}).errors[BlockIds.startingPreludes]).toBeDefined();
+  });
+
+  it('defaults starting corporations to 3 when the field is blank', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      startingCorporations: '',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.startingCorporations).toBe(3);
+  });
+
+  it('parses an explicit starting corporations count', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      startingCorporations: '5',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.startingCorporations).toBe(5);
+  });
+
+  it('rejects a starting corporations count outside the web form 1-6 range', () => {
+    for (const value of ['0', '7', 'x']) {
+      const state = makeState({
+        slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+        startingCorporations: value,
+      });
+      const result = parseSubmission(state);
+      expect(isErrors(result), `expected ${value} to be rejected`).toBe(true);
+      expect(
+        (result as {errors: Record<string, string>}).errors[BlockIds.startingCorporations],
+      ).toBeDefined();
+    }
   });
 
   it('rejects firstPlayerSlot pointing to an empty slot when random is off', () => {
@@ -260,7 +296,7 @@ describe('toNewGameConfig', () => {
       boolean
     >,
     startingPreludes: 4,
-    startingCeos: 3,
+    startingCorporations: 3,
     escapeVelocityOn: true,
     escapeVelocityThresholdMinutes: 20,
   };
@@ -277,7 +313,7 @@ describe('toNewGameConfig', () => {
     expect(config.expansions.corpera).toBe(true);
     expect(config.expansions.venus).toBe(false);
     expect(config.startingPreludes).toBe(4);
-    expect(config.startingCeos).toBe(3);
+    expect(config.startingCorporations).toBe(3);
     expect(config.escapeVelocity).toBeDefined();
     expect(config.escapeVelocity?.thresholdMinutes).toBe(20);
     // empty long-list fields per design
@@ -334,5 +370,48 @@ describe('toNewGameConfig', () => {
   it('falls back to a sensible name if Slack lookup returns undefined', () => {
     const out = toNewGameConfig(parsed, () => undefined);
     expect(out.config.players[0]!.name).toMatch(/red/i);
+  });
+});
+
+describe('toPrefill', () => {
+  const parsed: ParsedSubmission = {
+    slots: [
+      {index: 1, slackUserId: 'U_ALICE', color: 'red'},
+      {index: 4, slackUserId: 'U_BOB', color: 'pink'},
+    ],
+    randomFirstPlayer: false,
+    firstPlayerSlot: 4,
+    board: 'hellas',
+    expansions: Object.fromEntries(
+      EXPANSIONS.map((e) => [e, e === 'corpera' || e === 'venus']),
+    ) as Record<typeof EXPANSIONS[number], boolean>,
+    toggles: Object.fromEntries(
+      TOGGLES.map((t) => [t.value, t.value === 'undoOption']),
+    ) as Record<typeof TOGGLES[number]['value'], boolean>,
+    startingPreludes: 4,
+    startingCorporations: 3,
+    escapeVelocityOn: true,
+    escapeVelocityThresholdMinutes: 45,
+  };
+
+  it('keeps only the enabled expansions and toggles', () => {
+    const prefill = toPrefill(parsed);
+    expect(prefill.expansions).toEqual(['corpera', 'venus']);
+    expect(prefill.toggles).toEqual(['undoOption']);
+  });
+
+  it('preserves slot indices, colors and every numeric answer', () => {
+    const prefill = toPrefill(parsed);
+    expect(prefill.slots).toEqual([
+      {index: 1, slackUserId: 'U_ALICE', color: 'red'},
+      {index: 4, slackUserId: 'U_BOB', color: 'pink'},
+    ]);
+    expect(prefill.board).toBe('hellas');
+    expect(prefill.randomFirstPlayer).toBe(false);
+    expect(prefill.firstPlayerSlot).toBe(4);
+    expect(prefill.startingCorporations).toBe(3);
+    expect(prefill.startingPreludes).toBe(4);
+    expect(prefill.escapeVelocityOn).toBe(true);
+    expect(prefill.escapeVelocityThresholdMinutes).toBe(45);
   });
 });

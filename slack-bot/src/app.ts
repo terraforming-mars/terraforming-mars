@@ -6,6 +6,7 @@
 import {App} from '@slack/bolt';
 import {VercelReceiver} from './receiver.js';
 import {onSlashCommand, SLASH_COMMAND} from './handlers/onSlashCommand.js';
+import {onRematchAction, REMATCH_ACTION_ID} from './handlers/onRematchAction.js';
 import {onViewSubmission, VIEW_CALLBACK_ID} from './handlers/onViewSubmission.js';
 
 let _receiver: VercelReceiver | undefined;
@@ -42,6 +43,7 @@ export function getApp(): App {
 
     _app.command(SLASH_COMMAND, onSlashCommand);
     _app.view(VIEW_CALLBACK_ID, onViewSubmission);
+    _app.action(REMATCH_ACTION_ID, onRematchAction);
   }
   return _app;
 }

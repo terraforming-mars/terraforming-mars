@@ -46,7 +46,8 @@ export function buildNewGameConfig(overrides: PartialNewGameConfig): NewGameConf
     initialDraft: overrides.initialDraft ?? false,
     preludeDraftVariant: overrides.preludeDraftVariant ?? false,
     ceosDraftVariant: overrides.ceosDraftVariant ?? false,
-    startingCorporations: overrides.startingCorporations ?? 2,
+    // Deliberately 3 rather than the web form's 2 - see issue #5.
+    startingCorporations: overrides.startingCorporations ?? 3,
     shuffleMapOption: overrides.shuffleMapOption ?? false,
     randomMA: overrides.randomMA ?? 'Full random',
     includeFanMA: overrides.includeFanMA ?? true,

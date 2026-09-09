@@ -8,7 +8,8 @@
  *    - Look up each Slack user's display name (users.info).
  *    - Build the NewGameConfig.
  *    - POST it to /api/creategame.
- *    - DM each player their link, then DM the host a summary.
+ *    - DM each player their link, then DM the host a summary. The summary
+ *      carries a "New game, same settings" button holding this submission.
  *    - On failure, DM the host the error.
  */
 
@@ -24,7 +25,9 @@ import {
   isErrors,
   parseSubmission,
   toNewGameConfig,
+  toPrefill,
 } from './parseSubmission.js';
+import {encodePrefill} from '../views/prefill.js';
 import {
   createGame,
   hostGameUrl,
@@ -99,6 +102,7 @@ export async function onViewSubmission(
           game.name,
           hostGameUrl(base, game.id),
           game.spectatorId !== undefined ? spectatorUrl(base, game.spectatorId) : undefined,
+          encodePrefill(toPrefill(parsed)),
         );
         await dmHostSummary(client, meta.hostUserId, summary);
       } catch (err) {

@@ -9,6 +9,7 @@ import {
   VIEW_CALLBACK_ID,
 } from '../src/views/newGameView.js';
 import {BOARDS, EXPANSIONS, PLAYER_COLORS} from '../src/tm/types.js';
+import type {Prefill} from '../src/views/prefill.js';
 
 describe('buildNewGameView', () => {
   const meta = {hostUserId: 'U123', channelId: 'C456'};
@@ -87,9 +88,106 @@ describe('buildNewGameView', () => {
     expect(el.options.map((o) => o.value)).toEqual(TOGGLES.map((t) => t.value));
   });
 
+  it('offers a starting-corporations input defaulting to 3', () => {
+    const view = buildNewGameView(meta);
+    const block = findBlock(view, BlockIds.startingCorporations);
+    expect((block as {element: {initial_value?: string}}).element.initial_value).toBe('3');
+  });
+
+  it('no longer offers a starting-CEOs input', () => {
+    const view = buildNewGameView(meta);
+    const blockIds = view.blocks.map((b) => (b as {block_id?: string}).block_id ?? '');
+    expect(blockIds.some((id) => /ceo/i.test(id))).toBe(false);
+  });
+
   it('stays well under Slack 100-block modal limit', () => {
     const view = buildNewGameView(meta);
     expect(view.blocks.length).toBeLessThan(100);
+  });
+});
+
+describe('buildNewGameView with a prefill', () => {
+  const meta = {hostUserId: 'U123', channelId: 'C456'};
+  const prefill: Prefill = {
+    slots: [
+      {index: 1, slackUserId: 'U_ALICE', color: 'pink'},
+      {index: 3, slackUserId: 'U_BOB', color: 'black'},
+    ],
+    randomFirstPlayer: false,
+    firstPlayerSlot: 3,
+    board: 'hellas',
+    expansions: ['corpera', 'turmoil'],
+    toggles: ['fastModeOption'],
+    startingCorporations: 5,
+    startingPreludes: 2,
+    escapeVelocityOn: false,
+    escapeVelocityThresholdMinutes: 45,
+  };
+
+  it('preselects the previous players in their original slots', () => {
+    const view = buildNewGameView(meta, prefill);
+    const el = (i: number) =>
+      (findBlock(view, BlockIds.slotUser(i)) as {element: {initial_user?: string}}).element;
+    expect(el(1).initial_user).toBe('U_ALICE');
+    expect(el(2).initial_user).toBeUndefined();
+    expect(el(3).initial_user).toBe('U_BOB');
+  });
+
+  it('preselects the previous colors, leaving empty slots on their defaults', () => {
+    const view = buildNewGameView(meta, prefill);
+    const color = (i: number) =>
+      (findBlock(view, BlockIds.slotColor(i)) as {element: {initial_option: {value: string}}})
+        .element.initial_option.value;
+    expect(color(1)).toBe('pink');
+    expect(color(3)).toBe('black');
+    expect(color(2)).toBe(PLAYER_COLORS[1]);
+  });
+
+  it('preselects board, expansions and toggles', () => {
+    const view = buildNewGameView(meta, prefill);
+    const board = (findBlock(view, BlockIds.board) as {
+      element: {initial_option: {value: string}};
+    }).element.initial_option.value;
+    expect(board).toBe('hellas');
+    const initialValues = (blockId: string) =>
+      ((findBlock(view, blockId) as {element: {initial_options?: Array<{value: string}>}})
+        .element.initial_options ?? []).map((o) => o.value);
+    expect(initialValues(BlockIds.expansions)).toEqual(['corpera', 'turmoil']);
+    expect(initialValues(BlockIds.toggles)).toEqual(['fastModeOption']);
+  });
+
+  it('restores the first-player choice', () => {
+    const view = buildNewGameView(meta, prefill);
+    const randomBlock = findBlock(view, BlockIds.randomFirstPlayer) as {
+      element: {initial_options?: Array<{value: string}>};
+    };
+    expect(randomBlock.element.initial_options).toBeUndefined();
+    const slot = (findBlock(view, BlockIds.firstPlayerSlot) as {
+      element: {initial_option?: {value: string}};
+    }).element.initial_option;
+    expect(slot?.value).toBe('3');
+  });
+
+  it('restores the numeric answers and the escape velocity radio', () => {
+    const view = buildNewGameView(meta, prefill);
+    const value = (blockId: string) =>
+      (findBlock(view, blockId) as {element: {initial_value?: string}}).element.initial_value;
+    expect(value(BlockIds.startingCorporations)).toBe('5');
+    expect(value(BlockIds.startingPreludes)).toBe('2');
+    expect(value(BlockIds.escapeVelocityMinutes)).toBe('45');
+    const ev = (findBlock(view, BlockIds.escapeVelocity) as {
+      element: {initial_option: {value: string}};
+    }).element.initial_option.value;
+    expect(ev).toBe('off');
+  });
+
+  it('omits initial_options entirely when nothing was selected', () => {
+    // Slack rejects an empty initial_options array.
+    const view = buildNewGameView(meta, {...prefill, expansions: [], toggles: []});
+    for (const blockId of [BlockIds.expansions, BlockIds.toggles]) {
+      const el = (findBlock(view, blockId) as unknown as {element: Record<string, unknown>}).element;
+      expect('initial_options' in el).toBe(false);
+    }
   });
 });
 

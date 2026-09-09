@@ -6,6 +6,10 @@
  * code simple - no block_actions handler, no state preservation logic - at
  * the cost of always showing 6 slots. The submission handler ignores slots
  * with no Slack user picked.
+ *
+ * Every block also accepts an optional prefill so the "New game, same
+ * settings" button on the host summary DM can reopen the modal with the
+ * previous game's answers already filled in.
  */
 
 import type {KnownBlock, ModalView, PlainTextOption} from '@slack/types';
@@ -16,9 +20,16 @@ import {
   EXPANSION_LABELS,
   PLAYER_COLORS,
 } from '../tm/types.js';
+import type {Prefill} from './prefill.js';
 
 export const VIEW_CALLBACK_ID = 'tm_newgame_modal';
 export const MAX_PLAYER_SLOTS = 6;
+
+/** Web form's `min`/`max` on the starting-corporations input. */
+export const MIN_STARTING_CORPORATIONS = 1;
+export const MAX_STARTING_CORPORATIONS = 6;
+export const DEFAULT_STARTING_CORPORATIONS = 3;
+export const DEFAULT_STARTING_PRELUDES = 4;
 
 /** Block IDs referenced by onViewSubmission when reading view.state.values. */
 export const BlockIds = {
@@ -28,7 +39,7 @@ export const BlockIds = {
   expansions: 'expansions',
   toggles: 'toggles',
   startingPreludes: 'starting_preludes',
-  startingCeos: 'starting_ceos',
+  startingCorporations: 'starting_corporations',
   escapeVelocity: 'escape_velocity',
   escapeVelocityMinutes: 'escape_velocity_minutes',
   randomFirstPlayer: 'random_first_player',
@@ -43,7 +54,7 @@ export const ActionIds = {
   expansions: 'expansions_action',
   toggles: 'toggles_action',
   startingPreludes: 'starting_preludes_action',
-  startingCeos: 'starting_ceos_action',
+  startingCorporations: 'starting_corporations_action',
   escapeVelocity: 'escape_velocity_action',
   escapeVelocityMinutes: 'escape_velocity_minutes_action',
   randomFirstPlayer: 'random_first_player_action',
@@ -83,33 +94,35 @@ export function decodePrivateMetadata(raw: string): PrivateMetadata {
   return JSON.parse(raw) as PrivateMetadata;
 }
 
-export function buildNewGameView(privateMetadata: PrivateMetadata): ModalView {
+export function buildNewGameView(privateMetadata: PrivateMetadata, prefill?: Prefill): ModalView {
   const blocks: Array<KnownBlock> = [];
 
   blocks.push({
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: '*Set up a Terraforming Mars game.* Pick 1-6 Slack teammates below. Each player will receive a DM with their personal game link.',
+      text: prefill === undefined
+        ? '*Set up a Terraforming Mars game.* Pick 1-6 Slack teammates below. Each player will receive a DM with their personal game link.'
+        : '*Same players and options as your last game.* Change anything you like, then hit Create game.',
     },
   });
   blocks.push({type: 'divider'});
 
   for (let i = 1; i <= MAX_PLAYER_SLOTS; i++) {
-    blocks.push(slotUserBlock(i));
-    blocks.push(slotColorBlock(i));
+    blocks.push(slotUserBlock(i, prefill));
+    blocks.push(slotColorBlock(i, prefill));
   }
 
   blocks.push({type: 'divider'});
-  blocks.push(boardBlock());
-  blocks.push(expansionsBlock());
-  blocks.push(togglesBlock());
-  blocks.push(randomFirstPlayerBlock());
-  blocks.push(firstPlayerSlotBlock());
-  blocks.push(startingPreludesBlock());
-  blocks.push(startingCeosBlock());
-  blocks.push(escapeVelocityBlock());
-  blocks.push(escapeVelocityMinutesBlock());
+  blocks.push(boardBlock(prefill));
+  blocks.push(expansionsBlock(prefill));
+  blocks.push(togglesBlock(prefill));
+  blocks.push(randomFirstPlayerBlock(prefill));
+  blocks.push(firstPlayerSlotBlock(prefill));
+  blocks.push(startingCorporationsBlock(prefill));
+  blocks.push(startingPreludesBlock(prefill));
+  blocks.push(escapeVelocityBlock(prefill));
+  blocks.push(escapeVelocityMinutesBlock(prefill));
 
   return {
     type: 'modal',
@@ -123,7 +136,8 @@ export function buildNewGameView(privateMetadata: PrivateMetadata): ModalView {
   };
 }
 
-function slotUserBlock(i: number): KnownBlock {
+function slotUserBlock(i: number, prefill?: Prefill): KnownBlock {
+  const initialUser = prefill?.slots.find((s) => s.index === i)?.slackUserId;
   return {
     type: 'input',
     block_id: BlockIds.slotUser(i),
@@ -132,13 +146,16 @@ function slotUserBlock(i: number): KnownBlock {
     element: {
       type: 'users_select',
       action_id: ActionIds.slotUser(i),
+      ...(initialUser !== undefined ? {initial_user: initialUser} : {}),
       placeholder: {type: 'plain_text', text: 'Pick a teammate'},
     },
   };
 }
 
-function slotColorBlock(i: number): KnownBlock {
-  const defaultColor = PLAYER_COLORS[(i - 1) % PLAYER_COLORS.length]!;
+function slotColorBlock(i: number, prefill?: Prefill): KnownBlock {
+  const defaultColor =
+    prefill?.slots.find((s) => s.index === i)?.color ??
+    PLAYER_COLORS[(i - 1) % PLAYER_COLORS.length]!;
   return {
     type: 'input',
     block_id: BlockIds.slotColor(i),
@@ -161,12 +178,15 @@ function colorOption(color: string): PlainTextOption {
   };
 }
 
-function boardBlock(): KnownBlock {
+function boardBlock(prefill?: Prefill): KnownBlock {
   const options = BOARDS.map((b) => ({
     text: {type: 'plain_text' as const, text: b.label},
     value: b.value,
   }));
-  const defaultOption = options.find((o) => o.value === 'random all') ?? options[0]!;
+  const wanted = prefill?.board ?? 'random all';
+  const defaultOption = options.find((o) => o.value === wanted) ??
+    options.find((o) => o.value === 'random all') ??
+    options[0]!;
   return {
     type: 'input',
     block_id: BlockIds.board,
@@ -180,12 +200,13 @@ function boardBlock(): KnownBlock {
   };
 }
 
-function expansionsBlock(): KnownBlock {
+function expansionsBlock(prefill?: Prefill): KnownBlock {
   const options = EXPANSIONS.map((key) => ({
     text: {type: 'plain_text' as const, text: EXPANSION_LABELS[key]},
     value: key,
   }));
-  const initial = options.filter((o) => DEFAULT_EXPANSION_KEYS.includes(o.value));
+  const selected: ReadonlyArray<string> = prefill?.expansions ?? DEFAULT_EXPANSION_KEYS;
+  const initial = options.filter((o) => selected.includes(o.value));
   return {
     type: 'input',
     block_id: BlockIds.expansions,
@@ -194,20 +215,20 @@ function expansionsBlock(): KnownBlock {
     element: {
       type: 'multi_static_select',
       action_id: ActionIds.expansions,
-      initial_options: initial,
+      // Slack rejects an empty initial_options array.
+      ...(initial.length > 0 ? {initial_options: initial} : {}),
       options,
     },
   };
 }
 
-function togglesBlock(): KnownBlock {
+function togglesBlock(prefill?: Prefill): KnownBlock {
   const options = TOGGLES.map((t) => ({
     text: {type: 'plain_text' as const, text: t.text},
     value: t.value,
   }));
-  const initial = options.filter((o) =>
-    (DEFAULT_TOGGLES as ReadonlyArray<string>).includes(o.value),
-  );
+  const selected: ReadonlyArray<string> = prefill?.toggles ?? DEFAULT_TOGGLES;
+  const initial = options.filter((o) => selected.includes(o.value));
   return {
     type: 'input',
     block_id: BlockIds.toggles,
@@ -216,17 +237,18 @@ function togglesBlock(): KnownBlock {
     element: {
       type: 'checkboxes',
       action_id: ActionIds.toggles,
-      initial_options: initial,
+      ...(initial.length > 0 ? {initial_options: initial} : {}),
       options,
     },
   };
 }
 
-function randomFirstPlayerBlock(): KnownBlock {
+function randomFirstPlayerBlock(prefill?: Prefill): KnownBlock {
   const option = {
     text: {type: 'plain_text' as const, text: 'Pick first player randomly'},
     value: 'random',
   };
+  const checked = prefill?.randomFirstPlayer ?? true;
   return {
     type: 'input',
     block_id: BlockIds.randomFirstPlayer,
@@ -235,17 +257,18 @@ function randomFirstPlayerBlock(): KnownBlock {
     element: {
       type: 'checkboxes',
       action_id: ActionIds.randomFirstPlayer,
-      initial_options: [option],
+      ...(checked ? {initial_options: [option]} : {}),
       options: [option],
     },
   };
 }
 
-function firstPlayerSlotBlock(): KnownBlock {
+function firstPlayerSlotBlock(prefill?: Prefill): KnownBlock {
   const options = Array.from({length: MAX_PLAYER_SLOTS}, (_, i) => ({
     text: {type: 'plain_text' as const, text: `Player ${i + 1}`},
     value: String(i + 1),
   }));
+  const initial = options.find((o) => o.value === String(prefill?.firstPlayerSlot));
   return {
     type: 'input',
     block_id: BlockIds.firstPlayerSlot,
@@ -257,13 +280,29 @@ function firstPlayerSlotBlock(): KnownBlock {
     element: {
       type: 'static_select',
       action_id: ActionIds.firstPlayerSlot,
+      ...(initial !== undefined ? {initial_option: initial} : {}),
       placeholder: {type: 'plain_text', text: 'Choose a slot'},
       options,
     },
   };
 }
 
-function startingPreludesBlock(): KnownBlock {
+function startingCorporationsBlock(prefill?: Prefill): KnownBlock {
+  return {
+    type: 'input',
+    block_id: BlockIds.startingCorporations,
+    optional: true,
+    label: {type: 'plain_text', text: 'Corporations dealt per player'},
+    element: {
+      type: 'plain_text_input',
+      action_id: ActionIds.startingCorporations,
+      initial_value: String(prefill?.startingCorporations ?? DEFAULT_STARTING_CORPORATIONS),
+      max_length: 1,
+    },
+  };
+}
+
+function startingPreludesBlock(prefill?: Prefill): KnownBlock {
   return {
     type: 'input',
     block_id: BlockIds.startingPreludes,
@@ -272,28 +311,13 @@ function startingPreludesBlock(): KnownBlock {
     element: {
       type: 'plain_text_input',
       action_id: ActionIds.startingPreludes,
-      initial_value: '4',
+      initial_value: String(prefill?.startingPreludes ?? DEFAULT_STARTING_PRELUDES),
       max_length: 2,
     },
   };
 }
 
-function startingCeosBlock(): KnownBlock {
-  return {
-    type: 'input',
-    block_id: BlockIds.startingCeos,
-    optional: true,
-    label: {type: 'plain_text', text: 'Starting CEOs per player'},
-    element: {
-      type: 'plain_text_input',
-      action_id: ActionIds.startingCeos,
-      initial_value: '3',
-      max_length: 2,
-    },
-  };
-}
-
-function escapeVelocityBlock(): KnownBlock {
+function escapeVelocityBlock(prefill?: Prefill): KnownBlock {
   const off = {text: {type: 'plain_text' as const, text: 'Off'}, value: 'off'};
   const on = {
     text: {type: 'plain_text' as const, text: `On (+${DEFAULT_ESCAPE_VELOCITY.bonusSectionsPerAction}s/action)`},
@@ -307,13 +331,13 @@ function escapeVelocityBlock(): KnownBlock {
     element: {
       type: 'radio_buttons',
       action_id: ActionIds.escapeVelocity,
-      initial_option: on,
+      initial_option: prefill !== undefined && !prefill.escapeVelocityOn ? off : on,
       options: [off, on],
     },
   };
 }
 
-function escapeVelocityMinutesBlock(): KnownBlock {
+function escapeVelocityMinutesBlock(prefill?: Prefill): KnownBlock {
   return {
     type: 'input',
     block_id: BlockIds.escapeVelocityMinutes,
@@ -322,7 +346,9 @@ function escapeVelocityMinutesBlock(): KnownBlock {
     element: {
       type: 'plain_text_input',
       action_id: ActionIds.escapeVelocityMinutes,
-      initial_value: String(DEFAULT_ESCAPE_VELOCITY.thresholdMinutes),
+      initial_value: String(
+        prefill?.escapeVelocityThresholdMinutes ?? DEFAULT_ESCAPE_VELOCITY.thresholdMinutes,
+      ),
       max_length: 3,
     },
   };

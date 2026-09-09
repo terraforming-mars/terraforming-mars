@@ -12,6 +12,7 @@
 import type {WebClient} from '@slack/web-api';
 import type {KnownBlock} from '@slack/types';
 import type {PlayerColor, SimplePlayerModel} from '../tm/types.js';
+import {REMATCH_ACTION_ID} from '../handlers/onRematchAction.js';
 
 export interface PlayerDmResult {
   slackUserId: string;
@@ -32,6 +33,12 @@ export interface HostSummary {
   hostDashboardUrl: string;
   spectatorUrl: string | undefined;
   players: Array<HostSummaryPlayer>;
+  /**
+   * Encoded prefill (see views/prefill.ts) carried by the "New game, same
+   * settings" button. The bot has no database, so this message is where the
+   * previous game's settings live. Undefined omits the button.
+   */
+  rematchValue?: string | undefined;
 }
 
 export async function dmPlayerLink(
@@ -114,6 +121,20 @@ export async function dmHostSummary(
       },
     },
   ];
+
+  if (summary.rematchValue !== undefined) {
+    blocks.push({
+      type: 'actions',
+      elements: [
+        {
+          type: 'button',
+          text: {type: 'plain_text', text: 'New game, same settings'},
+          action_id: REMATCH_ACTION_ID,
+          value: summary.rematchValue,
+        },
+      ],
+    });
+  }
 
   try {
     const dm = await client.conversations.open({users: hostSlackUserId});
@@ -214,12 +235,14 @@ export function buildHostSummaryFromGameModel(
   gameName: string,
   hostDashboardUrl: string,
   spectator: string | undefined,
+  rematchValue?: string | undefined,
 ): HostSummary {
   const failedSet = new Set(dmResults.filter((r) => !r.ok).map((r) => r.slackUserId));
   return {
     gameName,
     hostDashboardUrl,
     spectatorUrl: spectator,
+    rematchValue,
     // Match each returned player back to its Slack user by color, since the
     // server returns players in generation order rather than submission order.
     players: players.map((p) => {

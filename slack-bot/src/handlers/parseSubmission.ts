@@ -8,10 +8,15 @@
 import {
   ActionIds,
   BlockIds,
+  DEFAULT_STARTING_CORPORATIONS,
+  DEFAULT_STARTING_PRELUDES,
   MAX_PLAYER_SLOTS,
+  MAX_STARTING_CORPORATIONS,
+  MIN_STARTING_CORPORATIONS,
   TOGGLES,
   type ToggleKey,
 } from '../views/newGameView.js';
+import type {Prefill} from '../views/prefill.js';
 import {
   buildNewGameConfig,
   type PartialNewGameConfig,
@@ -41,7 +46,7 @@ export interface ParsedSubmission {
   expansions: Record<Expansion, boolean>;
   toggles: Record<ToggleKey, boolean>;
   startingPreludes: number;
-  startingCeos: number;
+  startingCorporations: number;
   escapeVelocityOn: boolean;
   escapeVelocityThresholdMinutes: number;
 }
@@ -125,17 +130,20 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
   // -- Numbers --
   const startingPreludes = parseNonNegInt(
     readTextInput(state, BlockIds.startingPreludes, ActionIds.startingPreludes),
-    4,
+    DEFAULT_STARTING_PRELUDES,
   );
   if (startingPreludes === undefined) {
     errors[BlockIds.startingPreludes] = 'Must be a whole number 0-20.';
   }
-  const startingCeos = parseNonNegInt(
-    readTextInput(state, BlockIds.startingCeos, ActionIds.startingCeos),
-    3,
+  const startingCorporations = parseIntInRange(
+    readTextInput(state, BlockIds.startingCorporations, ActionIds.startingCorporations),
+    DEFAULT_STARTING_CORPORATIONS,
+    MIN_STARTING_CORPORATIONS,
+    MAX_STARTING_CORPORATIONS,
   );
-  if (startingCeos === undefined) {
-    errors[BlockIds.startingCeos] = 'Must be a whole number 0-20.';
+  if (startingCorporations === undefined) {
+    errors[BlockIds.startingCorporations] =
+      `Must be a whole number ${MIN_STARTING_CORPORATIONS}-${MAX_STARTING_CORPORATIONS}.`;
   }
 
   // -- Escape Velocity --
@@ -161,7 +169,7 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
     expansions,
     toggles,
     startingPreludes: startingPreludes!,
-    startingCeos: startingCeos!,
+    startingCorporations: startingCorporations!,
     escapeVelocityOn,
     escapeVelocityThresholdMinutes: escapeVelocityThresholdMinutes ?? DEFAULT_ESCAPE_VELOCITY.thresholdMinutes,
   };
@@ -240,7 +248,7 @@ export function toNewGameConfig(
     removeNegativeGlobalEventsOption: parsed.toggles.removeNegativeGlobalEventsOption,
     shuffleMapOption: parsed.toggles.shuffleMapOption,
     startingPreludes: parsed.startingPreludes,
-    startingCeos: parsed.startingCeos,
+    startingCorporations: parsed.startingCorporations,
     escapeVelocity: parsed.escapeVelocityOn
       ? {...DEFAULT_ESCAPE_VELOCITY, thresholdMinutes: parsed.escapeVelocityThresholdMinutes}
       : undefined,
@@ -258,6 +266,26 @@ export function toNewGameConfig(
     config: buildNewGameConfig(overrides),
     slackUserIds: ordered.map((s) => s.slackUserId),
     slackUserIdByColor,
+  };
+}
+
+/**
+ * Reduce a submission to the compact shape that reopens the modal with the
+ * same answers. Colors come from the raw slots rather than the deduped
+ * seating order so a rematch reproduces what the host actually picked.
+ */
+export function toPrefill(parsed: ParsedSubmission): Prefill {
+  return {
+    slots: parsed.slots.map((s) => ({...s})),
+    randomFirstPlayer: parsed.randomFirstPlayer,
+    firstPlayerSlot: parsed.firstPlayerSlot,
+    board: parsed.board,
+    expansions: EXPANSIONS.filter((e) => parsed.expansions[e]),
+    toggles: TOGGLES.map((t) => t.value).filter((k) => parsed.toggles[k]),
+    startingCorporations: parsed.startingCorporations,
+    startingPreludes: parsed.startingPreludes,
+    escapeVelocityOn: parsed.escapeVelocityOn,
+    escapeVelocityThresholdMinutes: parsed.escapeVelocityThresholdMinutes,
   };
 }
 
@@ -319,6 +347,18 @@ function parseNonNegInt(raw: string | undefined, fallback: number): number | und
   if (raw === undefined || raw.trim() === '') return fallback;
   const n = Number.parseInt(raw, 10);
   if (!Number.isFinite(n) || n < 0 || n > 20 || String(n) !== raw.trim()) return undefined;
+  return n;
+}
+
+function parseIntInRange(
+  raw: string | undefined,
+  fallback: number,
+  min: number,
+  max: number,
+): number | undefined {
+  if (raw === undefined || raw.trim() === '') return fallback;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < min || n > max || String(n) !== raw.trim()) return undefined;
   return n;
 }
 

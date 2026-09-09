@@ -67,10 +67,13 @@ slack-bot/
 ├── src/
 │   ├── app.ts                   # Bolt App + Vercel receiver (lazy init)
 │   ├── receiver.ts              # Custom Web-standards Receiver
-│   ├── views/newGameView.ts     # Block Kit modal builder
+│   ├── views/
+│   │   ├── newGameView.ts       # Block Kit modal builder
+│   │   └── prefill.ts           # Compact "same settings again" payload
 │   ├── handlers/
 │   │   ├── onSlashCommand.ts
 │   │   ├── onViewSubmission.ts
+│   │   ├── onRematchAction.ts   # "New game, same settings" button
 │   │   └── parseSubmission.ts   # view.state.values -> NewGameConfig
 │   ├── slack/notify.ts          # conversations.open + chat.postMessage helpers
 │   └── tm/
@@ -96,14 +99,30 @@ slack-bot/
   Delta Project).
 - Common toggles (undo, timers, fast mode, draft, initial draft, show others'
   VP, solar phase, two corporations, no negative global events, shuffle map).
-- Starting preludes / starting CEOs per player.
+- Corporations dealt per player (1-6, defaulting to 3) and starting preludes
+  per player.
 - Escape Velocity (off / on, with a configurable threshold time in minutes,
   defaulting to 20).
 
+## Playing again with the same settings
+
+The summary DM the host receives after each game carries a **New game, same
+settings** button. Clicking it reopens the modal with the previous game's
+players, colors, board, expansions and options already filled in - change
+anything you like, or just hit *Create game*.
+
+The bot has no database. The settings ride along inside the button's own
+Block Kit `value` (see `src/views/prefill.ts`), which Slack caps at 2000
+characters; `encodePrefill` returns `undefined` above that and the button is
+simply omitted. A button from an older deploy whose payload no longer parses
+opens a blank modal rather than failing.
+
 **Not exposed** to keep the modal under Slack's element-size limits: custom
 corporations / banned cards / included cards / custom CEOs / custom preludes /
-custom colonies (these fields are sent as empty arrays). The web `New Game`
-form remains the place to use those.
+custom colonies (these fields are sent as empty arrays), and starting CEOs
+per player (the CEOs expansion is off by default; the server default of 3
+still applies if you turn it on). The web `New Game` form remains the place
+to use those.
 
 ## Costs
 

@@ -120,14 +120,14 @@
               <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-random" for="randomAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('random') }}</span>
                   </label>
                 </div>
 
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('chairman')" id="chairmanAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-chairman" for="chairmanAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-chairman" for="chairmanAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('chairman') }}</span>
                   </label>
                 </div>
@@ -167,7 +167,7 @@
 
             <input type="checkbox" name="deltaProject" id="deltaProject-checkbox" v-model="expansions.deltaProject">
             <label for="deltaProject-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-deltaProject"></div>
+              <div class="create-game-expansion-icon expansion-icon-deltaproject"></div>
               <span v-i18n>Delta Project</span>&nbsp;<span title="Alpha — work in progress">(&#945;)</span><span></span>&nbsp;<a :href="wikiUrls.deltaProject" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
             </label>
           </div>

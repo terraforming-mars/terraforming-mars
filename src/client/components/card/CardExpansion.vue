@@ -1,7 +1,7 @@
 <template>
   <div :class="templateClasses">
     <div class="project-icon" :class="iconClass(expansion)"></div>
-    <div v-for="module in modules" class="project-icon" :class="module + '-icon'" :key="module"></div>
+    <div v-for="module in modules" class="project-icon" :class="iconClass(module)" :key="module"></div>
   </div>
 </template>
 <script lang="ts">
@@ -31,7 +31,7 @@ export default defineComponent({
   },
   methods: {
     iconClass(module: GameModule): string {
-      return module === 'base' ? '' : module + '-icon';
+      return module === 'base' ? '' : module.toLowerCase() + '-icon';
     },
   },
   computed: {

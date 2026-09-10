@@ -16,8 +16,8 @@ describe('markdown', () => {
   });
 
   it('allows uppercase names', () => {
-    expect(renderMarkdown(':expansion:deltaProject:')).eq(
-      '<p><span class="expansion-icon expansion-icon-deltaProject"></span></p>\n');
+    expect(renderMarkdown(':expansion:CE:')).eq(
+      '<p><span class="expansion-icon expansion-icon-CE"></span></p>\n');
   });
 
   it('renders standard resources', () => {

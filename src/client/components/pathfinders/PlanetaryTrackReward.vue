@@ -41,14 +41,14 @@ export default defineComponent({
         return this.gameOptions.expansions.turmoil ? 'delegate' : 'reward-3mc';
       case 'energy':
       case 'energy_production':
-        return 'resource_icon resource_icon--energy';
+        return 'resource-icon resource-icon--energy';
       case 'floater':
         return 'floater';
       case 'greenery':
         return 'greenery';
       case 'heat':
       case 'heat_production':
-        return 'resource_icon resource_icon--heat';
+        return 'resource-icon resource-icon--heat';
       case 'moon_mine':
         return 'card-play-moon-mine--S';
       case 'moon_road':
@@ -57,15 +57,15 @@ export default defineComponent({
         return 'ocean';
       case 'plant':
       case 'plant_production':
-        return 'resource_icon resource_icon--plants';
+        return 'resource-icon resource-icon--plants';
       case 'resource':
         return 'std-wild-resource';
       case 'steel':
       case 'steel_production':
-        return 'resource_icon resource_icon--steel';
+        return 'resource-icon resource-icon--steel';
       case 'titanium':
       case 'titanium_production':
-        return 'resource_icon resource_icon--titanium';
+        return 'resource-icon resource-icon--titanium';
       case 'tr':
         return 'tag-tr tag-size-big tag-type-main';
       case 'venus_scale':

@@ -8,7 +8,7 @@
       </template>
       <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
         <template v-if="playerinput.showOwner">
-          <div :class="'card-owner-label player_translucent_bg_color_'+ getOwner(card).color">
+          <div :class="'card-owner-label player-translucent-bg-color-'+ getOwner(card).color">
             {{ getOwner(card).name }}
           </div>
         </template>

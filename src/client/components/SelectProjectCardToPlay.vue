@@ -1,5 +1,5 @@
 <template>
-  <div class="payments_cont">
+  <div class="payments-cont">
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
     <template v-for="c in cards" :key="c.name">
       <label v-if="experimentalUI || !c.isDisabled" class="payments_cards">

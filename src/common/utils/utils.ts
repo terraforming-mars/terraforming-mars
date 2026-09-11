@@ -3,9 +3,9 @@ import {OneOrArray} from './types';
 
 export const playerColorClass = (color: Color, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
   const prefix = {
-    shadow: 'player_shadow_color_',
-    bg_transparent: 'player_translucent_bg_color_',
-    bg: 'player_bg_color_',
+    shadow: 'player-shadow-color-',
+    bg_transparent: 'player-translucent-bg-color-',
+    bg: 'player-bg-color-',
   }[type];
 
   return `${prefix}${color}`;

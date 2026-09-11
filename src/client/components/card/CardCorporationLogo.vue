@@ -120,7 +120,7 @@
           style="height:5px;margin-top:-2px;width:143px;background:linear-gradient(to right,yellow,black,yellow,black,yellow);border:5px solid #cc3333;box-shadow:3px 3px 6px grey;">
         </div>
         <div
-          style="color: #020202;font-size:24px;margin-left:-89px;margin-top:-5px; display:inline-block; -webkit-transform:scale(0.5,1); -moz-transform:scale(0.5,1); -ms-transform:scale(0.5,1); -o-transform:scale(0.5,1); transform:scale(1,0.5); margin-bottom:15px;">
+          style="color: #020202;font-size:24px;margin-left:-89px;margin-top:-5px; display:inline-block; transform:scale(1,0.5); margin-bottom:15px;">
           CINEMATICS</div>
       </template>
       <template v-else-if="title === CardName.INVENTRIX">

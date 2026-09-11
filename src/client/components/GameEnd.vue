@@ -4,12 +4,12 @@
     <div class="game_end">
       <div v-if="isSoloGame">
         <div v-if="game.isSoloModeWin">
-          <div class="game_end_success">
+          <div class="game-end-success">
             <h2 v-i18n>You win!</h2>
-            <div class="game_end_solo_img">
+            <div class="game-end-solo-img">
               <img src="assets/solo_win.png">
             </div>
-            <div class="game_end_notice">
+            <div class="game-end-notice">
               <span v-i18n>But it isn't the reason to stop making Mars better.</span>
             </div>
             <ul class="game_end_list">
@@ -20,9 +20,9 @@
           </div>
         </div>
         <div v-else>
-          <div class="game_end_fail">
+          <div class="game-end-fail">
             <h2 v-i18n>Sorry, you lose.</h2>
-            <div class="game_end_notice">
+            <div class="game-end-notice">
               <span v-i18n>Next time you will get more luck!</span><br>
               <span v-i18n>Also, take into account these small hints to win:</span>
             </div>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="game_end_navigation">
+      <div class="game-end-navigation">
         <div>
           <a href="new-game">
             <AppButton size="big" type="back" />
@@ -53,7 +53,7 @@
       </div>
       <div class="game_end_victory_points">
         <h2><span v-i18n>Victory point breakdown after</span> {{ game.generation }} <span v-i18n>generations</span></h2>
-        <table class="table game_end_table">
+        <table class="table game-end-table">
           <thead>
             <tr v-i18n>
               <th><div class="card-delegate"></div></th>
@@ -148,7 +148,7 @@
       </div>
       <div class="game_end_victory_points">
         <h2 v-i18n>Global Parameter Contributions</h2>
-        <table class="table game_end_table">
+        <table class="table game-end-table">
           <thead>
             <tr>
               <th><div class="card-delegate"></div></th>

@@ -1,9 +1,9 @@
 <template>
-  <div class="payments_type input-group" :data-test="unit">
-    <i class="resource_icon payments_type_icon" :class="iconClass" @click="$emit('plus')" :title="$t('Pay with ' + description)"></i>
+  <div class="payments-type input-group" :data-test="unit">
+    <i class="resource-icon payments-type-icon" :class="iconClass" @click="$emit('plus')" :title="$t('Pay with ' + description)"></i>
     <AppButton type="minus" @click="$emit('minus')" />
     <input
-      class="form-input form-inline payments_input"
+      class="form-input form-inline payments-input"
       :value="count"
       @input="onInput"
     >
@@ -45,12 +45,12 @@ export default defineComponent({
   computed: {
     iconClass(): string {
       switch (this.unit) {
-      case 'kuiperAsteroids': return 'resource_icon--asteroid';
-      case 'lunaArchivesScience': return 'resource_icon--science';
-      case 'spireScience': return 'resource_icon--science';
-      case 'auroraiData': return 'resource_icon--auroraidata';
-      case 'seeds': return 'resource_icon--seed';
-      default: return 'resource_icon--' + this.unit;
+      case 'kuiperAsteroids': return 'resource-icon--asteroid';
+      case 'lunaArchivesScience': return 'resource-icon--science';
+      case 'spireScience': return 'resource-icon--science';
+      case 'auroraiData': return 'resource-icon--auroraidata';
+      case 'seeds': return 'resource-icon--seed';
+      default: return 'resource-icon--' + this.unit;
       }
     },
   },

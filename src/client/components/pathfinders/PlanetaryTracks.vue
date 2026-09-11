@@ -1,5 +1,5 @@
 <template>
-  <div v-if="tracks" class="pathfinders_cont">
+  <div v-if="tracks" class="pathfinders-cont">
     <div class="track track-background-venus" v-if="tracks.venus >= 0">
       <div class="track-tag track-tag-venus"></div>
       <table class="track-venus">

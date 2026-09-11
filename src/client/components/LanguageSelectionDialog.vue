@@ -1,6 +1,6 @@
 <template>
-  <div class="preferences_panel preferences_panel--language-switcher">
-    <div class="preferences_panel_item form-group">
+  <div class="preferences-panel preferences-panel--language-switcher">
+    <div class="preferences-panel-item form-group">
       <div class="preferences_panel_langs">
         <label class="form-radio" v-for="lang in ALL_LANGUAGES" :key="lang">
           <div

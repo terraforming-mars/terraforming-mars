@@ -42,8 +42,6 @@ export enum Priority {
   DISCARD_AND_DRAW,
   /** Effects that make your opponents lose resources or production. */
   ATTACK_OPPONENT,
-  /** Effects that make you lose resource or production "as much as possible". Pharmacy Union, Mons. */
-  LOSE_AS_MUCH_AS_POSSIBLE,
   GAIN_RESOURCE_OR_PRODUCTION,
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,

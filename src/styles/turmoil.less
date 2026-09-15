@@ -691,3 +691,24 @@ input[type="radio"]:checked + .party-container::after {
   background-size: 50px 46px;
   width: 50px;
 }
+
+// This is teleported to <body> and positioned in TurmoilAgenda.vue's onMouseEnter (viewport
+// coordinates from the trigger's own bounding rect), rather than a plain CSS ::after bubble --
+// the turmoil board sits inside both an `overflow: hidden` accordion (needed for its collapse
+// animation) and a scale() transform, either of which would clip/reposition anything anchored
+// to the trigger element itself the moment it grows past that box's edge.
+.agenda-tooltip-portal {
+  position: fixed;
+  transform: translateX(-50%);
+  background: rgba(48, 55, 66, .95);
+  color: #fff;
+  border-radius: .1rem;
+  padding: .3rem .5rem;
+  width: max-content;
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.35;
+  font-size: .75rem;
+  pointer-events: none;
+  z-index: 9999;
+}

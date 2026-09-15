@@ -21,6 +21,7 @@ import {OneGiantStep} from '../moon/OneGiantStep';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {Economizer} from './arabiaTerra/Economizer';
 import {Pioneer} from './arabiaTerra/Pioneer';
+import {Pioneer4} from './arabiaTerra/Pioneer4';
 import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
 import {Capitalist} from './Capitalist';
@@ -113,7 +114,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'One Giant Step': {Factory: OneGiantStep, compatibility: 'moon'},
     'Philantropist': {Factory: Philantropist, random: 'modular'},
     'Pioneer': {Factory: Pioneer, compatibility: 'colonies'},
-    'Pioneer4': {Factory: Pioneer, compatibility: 'colonies', random: 'modular'},
+    'Pioneer4': {Factory: Pioneer4, compatibility: 'colonies', random: 'modular'},
     'Planetologist': {Factory: Planetologist, compatibility: 'venus', random: 'modular'},
     'Planner': {Factory: Planner, random: 'both'},
     'Polar Explorer': {Factory: PolarExplorer},

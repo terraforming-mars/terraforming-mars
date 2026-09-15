@@ -26,6 +26,7 @@ import {GainAnyResourceButScienceDeferred} from '../deferredActions/GainAnyResou
 import {TileType} from '../../common/TileType';
 import {GainResourcesDeferred} from '../deferredActions/GainResourcesDeferred';
 import {GainProduction} from '../deferredActions/GainProduction';
+import {Priority} from '../deferredActions/Priority';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -555,34 +556,45 @@ export class UnderworldExpansion {
     }
   }
 
+  static gainCardResource(player: IPlayer, resource: CardResource, steps: number, count: number) {
+    for (let i = 0; i < steps; i++) {
+      player.game.defer(new AddResourcesToCard(player, resource, {count}));
+    }
+  }
+
+  static gainStandardResource(player: IPlayer, resource: Resource, steps: number, count: number) {
+    // The default priority runs before ATTACK_OPPONENT, so in this case an opponent (here, known as `player`
+    // gains their plants from your asteroid-type card before you remove them afterwards from the same card.
+    player.game.defer(
+      new GainResourcesDeferred(player, resource, {count: count * steps, log: true}),
+      Priority.DEFAULT);
+  }
+
   // TODO(kberg): add viz for temperature bonus.
   static onTemperatureChange(game: IGame, steps: number) {
     game.playersInGenerationOrder.forEach((player) => {
       switch (player.underworldData.activeBonus) {
       case 'data1pertemp':
+        this.gainCardResource(player, CardResource.DATA, steps, 1);
+        break;
       case 'microbe1pertemp':
-        const resource = player.underworldData.activeBonus === 'data1pertemp' ? CardResource.DATA : CardResource.MICROBE;
-        for (let i = 0; i < steps; i++) {
-          player.game.defer(new AddResourcesToCard(player, resource));
-        }
+        this.gainCardResource(player, CardResource.MICROBE, steps, 1);
         break;
       case 'microbe2pertemp':
-        for (let i = 0; i < steps; i++) {
-          player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
-        }
+        this.gainCardResource(player, CardResource.MICROBE, steps, 2);
         break;
 
       case 'mcprod1pertemp':
         player.game.defer(new GainProduction(player, Resource.MEGACREDITS, {count: steps, log: true}));
         break;
       case 'plant2pertemp':
-        player.game.defer(new GainResourcesDeferred(player, Resource.PLANTS, {count: 2 * steps, log: true}));
+        this.gainStandardResource(player, Resource.PLANTS, steps, 2);
         break;
       case 'steel2pertemp':
-        player.game.defer(new GainResourcesDeferred(player, Resource.STEEL, {count: 2 * steps, log: true}));
+        this.gainStandardResource(player, Resource.STEEL, steps, 2);
         break;
       case 'titanium1pertemp':
-        player.game.defer(new GainResourcesDeferred(player, Resource.TITANIUM, {count: steps, log: true}));
+        this.gainStandardResource(player, Resource.TITANIUM, steps, 1);
         break;
       case undefined:
         break;

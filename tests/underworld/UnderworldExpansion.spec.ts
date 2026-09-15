@@ -10,6 +10,7 @@ import {Units} from '../../src/common/Units';
 import {Cryptocurrency} from '../../src/server/cards/pathfinders/Cryptocurrency';
 import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture';
 import {GHGProducingBacteria} from '../../src/server/cards/base/GHGProducingBacteria';
+import {Asteroid} from '../../src/server/cards/base/Asteroid';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TileType} from '../../src/common/TileType';
@@ -475,6 +476,7 @@ describe('UnderworldExpansion', () => {
     game.increaseTemperature(player2, 2);
     runAllActions(game);
     const selectCard1 = cast(player1.popWaitingFor(), SelectCard);
+    expect(selectCard1.cards).deep.eq([microbeCard1, microbeCard2]);
     selectCard1.cb([microbeCard1]);
 
     expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
@@ -483,6 +485,7 @@ describe('UnderworldExpansion', () => {
     runAllActions(game);
 
     const selectCard2 = cast(player1.popWaitingFor(), SelectCard);
+    expect(selectCard2.cards).deep.eq([microbeCard1, microbeCard2]);
     selectCard2.cb([microbeCard2]);
     expect(player1.getCardsWithResources()).deep.eq([microbeCard1, microbeCard2]);
     expect(microbeCard2.resourceCount).eq(1);
@@ -510,6 +513,20 @@ describe('UnderworldExpansion', () => {
     game.increaseTemperature(player2, 2);
     runAllActions(game);
     expect(player1.stock.titanium).eq(2);
+  });
+
+  it('temperature bonus resolves before the temperature-raising card removes plants', () => {
+    player1.underworldData.activeBonus = 'plant2pertemp';
+    expect(player1.stock.plants).eq(0);
+
+    // Asteroid raises the temperature 1 step and then removes up to 3 plants.
+    player2.playCard(new Asteroid());
+    runAllActions(game);
+
+    expect(player1.stock.plants).eq(2);
+
+    const orOptions = cast(player2.popWaitingFor(), OrOptions);
+    expect(orOptions.options.map((option) => formatMessage(option.title))).includes(`Remove 2 plants from ${player1.color}`);
   });
 
   it('temperature bonus applies to Solar Phase', () => {

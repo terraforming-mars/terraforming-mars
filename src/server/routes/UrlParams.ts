@@ -7,7 +7,7 @@ export class UrlParams {
     this.urlSearchParmams = urlSearchParams;
   }
 
-  private get(name: string): string {
+  public get(name: string): string {
     const value = this.urlSearchParmams.get(name);
     if (value === null) {
       throw RouteError.badRequest('missing ' + name + ' parameter');

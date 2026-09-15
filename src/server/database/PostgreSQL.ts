@@ -533,7 +533,11 @@ export class PostgreSQL implements IDatabase {
     await this.client.query('DELETE FROM session where session_id = $1', [sessionId]);
   }
 
-  // TODO(kberg): this doesn't prune expired sessions.
+  public async deleteExpiredSessions(): Promise<number> {
+    const res = await this.client.query('DELETE FROM session WHERE expiration_time <= to_timestamp($1)', [Date.now() / 1000]);
+    return res.rowCount ?? 0;
+  }
+
   async getSessions(): Promise<Array<Session>> {
     const res = await this.client.query('SELECT session_id, data, expiration_time FROM session WHERE expiration_time > to_timestamp($1)', [Date.now() / 1000]);
     return res.rows.map((row) => {

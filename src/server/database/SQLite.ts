@@ -269,6 +269,12 @@ export class SQLite implements IDatabase {
     await this.asyncRun('DELETE FROM session where session_id = ?', [sessionId]);
   }
 
+  public async deleteExpiredSessions(): Promise<number> {
+    const expired = await this.asyncAll('SELECT session_id FROM session where expiration_time <= ?', [Date.now() / 1000]);
+    await this.asyncRun('DELETE FROM session where expiration_time <= ?', [Date.now() / 1000]);
+    return expired.length;
+  }
+
   async getSessions(): Promise<Array<Session>> {
     const selectResult = await this.asyncAll('SELECT session_id, data, expiration_time FROM session where expiration_time > ?', [Date.now() / 1000]);
     return selectResult.map((row) => {

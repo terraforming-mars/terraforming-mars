@@ -135,4 +135,9 @@ export interface IDatabase {
     createSession(session: Session): Promise<void>;
     deleteSession(sessionId: SessionId): Promise<void>;
     getSessions(): Promise<Array<Session>>;
+
+    /**
+     * Remove every expired session, returning how many were removed.
+     */
+    deleteExpiredSessions(): Promise<number>;
 }

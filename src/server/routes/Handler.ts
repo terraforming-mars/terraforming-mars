@@ -16,12 +16,14 @@ const DISCORD_ADMIN_USER_IDS: Array<string> = [];
 
 {
   const idsString = process.env.DISCORD_ADMIN_USER_IDS ?? '';
-  for (const idString of idsString.split(';')) {
+  for (const entry of idsString.split(';')) {
+    const idString = entry.trim();
     if (idString === '') {
       continue;
     }
-    const id = Number(idString);
-    if (isNaN(id) || id <= 0) {
+    // Discord snowflakes are 64-bit, so they exceed Number.MAX_SAFE_INTEGER. They're
+    // validated as positive digit strings, which is also how `isUser` compares them.
+    if (!/^[1-9][0-9]*$/.test(idString)) {
       console.error('invalid discord admin id ' + idString);
       continue;
     }

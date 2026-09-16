@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Flooding} from '../../../src/server/cards/base/Flooding';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
+import {NeptunianPowerConsultants} from '../../../src/server/cards/promo/NeptunianPowerConsultants';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
@@ -87,6 +88,35 @@ describe('Flooding', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.cb(oceanSpaces[0])).is.undefined;
+  });
+
+  it('Removing M€ resolves before an opponent trigger', () => {
+    const neptunianPowerConsultants = new NeptunianPowerConsultants();
+    player2.playedCards.push(neptunianPowerConsultants);
+    player2.megaCredits = 8;
+    const space5 = addGreenery(player2, '05');
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    const space4 = game.board.getSpaceOrThrow('04');
+    expect(game.board.getAdjacentSpaces(space5)).includes(space4);
+    expect(selectSpace.spaces).includes(space4);
+
+    selectSpace.cb(space4);
+    runAllActions(game);
+
+    // The Flooding player chooses before the Neptunian Power Consultants player does.
+    cast(player2.popWaitingFor(), undefined);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    cast(orOptions.options[0], SelectPlayer).cb(player2);
+    expect(player2.megaCredits).to.eq(4);
+
+    // Which leaves player2 unable to use Neptunian Power Consultants.
+    runAllActions(game);
+    cast(player2.popWaitingFor(), undefined);
+    expect(neptunianPowerConsultants.resourceCount).to.eq(0);
   });
 
   it('Does not suggest to remove money if oceans are already maxed', () => {

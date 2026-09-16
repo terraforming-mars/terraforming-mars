@@ -67,6 +67,20 @@ describe('NeptunianPowerConsultants', () => {
     expect(player.steel).eq(0);
   });
 
+  it('Affordability is evaluated when the effect resolves', () => {
+    player.megaCredits = 5;
+    addOcean(player2);
+
+    // An effect resolving before this one (e.g. Flooding) can take the M€ away first.
+    player.megaCredits = 4;
+    runAllActions(game);
+
+    // NPC isn't able to take an action.
+    cast(player.popWaitingFor(), undefined);
+    expect(card.resourceCount).eq(0);
+    expect(player.megaCredits).eq(4);
+  });
+
   it('Plays in correct priority order', () => {
     player.megaCredits = 6;
     const iceAsteroid = new IceAsteroid();

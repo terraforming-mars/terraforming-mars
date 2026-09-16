@@ -47,11 +47,7 @@ const description = computed<string>(() => getAgendaDescription(props.agendaId))
     margin-left: 80px !important;
   }
 
-  // TurmoilAgenda's template has two top-level nodes: its <div> and, alongside it, a
-  // <Teleport> for the hover tooltip. When a child component's template has more than one
-  // top-level node, Vue can't tag which one is "the root" to attach this parent's scoped-CSS
-  // ID to, so a plain `> div:first-child` (with no :deep()) does not match it.
-  > :deep(div:first-child) {
+  > div:first-child {
     text-align: center;
     height: 50px;
   }

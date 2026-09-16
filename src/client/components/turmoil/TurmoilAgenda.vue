@@ -1,5 +1,6 @@
 <template>
-  <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div>
+    <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <template v-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
@@ -183,16 +184,17 @@
     <template v-else>
       <div>Unknown agenda ID {{id}}</div>
     </template>
-  </div>
-  <Teleport to="body">
-    <div
-      v-if="showTooltip"
-      class="agenda-tooltip-portal"
-      v-i18n
-      :style="{top: tooltipTop + 'px', left: tooltipLeft + 'px'}">
-      {{ resolvedDescription }}
     </div>
-  </Teleport>
+    <Teleport to="body">
+      <div
+        v-if="showTooltip"
+        class="agenda-tooltip-portal"
+        v-i18n
+        :style="{top: tooltipTop + 'px', left: tooltipLeft + 'px'}">
+        {{ resolvedDescription }}
+      </div>
+    </Teleport>
+  </div>
 </template>
 
 <script lang="ts">

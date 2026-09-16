@@ -245,7 +245,7 @@ export class MarsBoard extends Board {
 
   public getAvailableIsolatedSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return this.getAvailableSpacesOnLand(player, canAffordOptions)
-      .filter((space: Space) => this.getAdjacentSpaces(space).every((space) => space.tile === undefined));
+      .filter((space: Space) => this.getAdjacentSpaces(space).every((adjacent) => adjacent.tile === undefined || Board.isCubeSpace(adjacent)));
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {

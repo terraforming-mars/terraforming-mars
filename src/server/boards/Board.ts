@@ -2,7 +2,7 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
+import {BASE_OCEAN_TILES, CITY_TILES, CUBE_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
@@ -296,6 +296,15 @@ export abstract class Board {
 
   public static isGreenerySpace(space: Space): boolean {
     return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
+  }
+
+  /**
+   * Returns true when the space holds a neutral player cube (e.g. Martian Nature Wonders.)
+   *
+   * Cubes are stored in `space.tile` so they render, but they are not tiles.
+   */
+  public static isCubeSpace(space: Space): boolean {
+    return space.tile !== undefined && CUBE_TILES.has(space.tile.tileType);
   }
 
   public static ownedBy(player: IPlayer): (space: Space) => boolean {

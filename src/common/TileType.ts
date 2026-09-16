@@ -120,3 +120,5 @@ export const CITY_TILES = new Set([TileType.CITY, TileType.CAPITAL, TileType.OCE
 export const OCEAN_TILES = new Set([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY, TileType.WETLANDS, TileType.NEW_HOLLAND]);
 export const BASE_OCEAN_TILES = new Set([TileType.OCEAN, TileType.WETLANDS]);
 export const GREENERY_TILES = new Set([TileType.GREENERY, TileType.WETLANDS]);
+/** Tiles that represent a neutral player cube reserving a space, rather than an actual tile. */
+export const CUBE_TILES = new Set([TileType.MARTIAN_NATURE_WONDERS, TileType.REY_SKYWALKER]);

@@ -120,6 +120,27 @@ describe('MarsBoard', () => {
     expect(board.getAvailableSpacesForGreenery(player)).has.length(45);
   });
 
+  it('getAvailableIsolatedSpaces ignores neutral player cubes', () => {
+    const [game, player] = testGame(2, {pathfindersExpansion: true, starWarsExpansion: true});
+    const board = game.board;
+    const space = board.getSpaceOrThrow('15');
+    const adjacent = board.getAdjacentSpaces(space)[0];
+
+    expect(board.getAvailableIsolatedSpaces(player)).to.include(space);
+
+    adjacent.tile = {tileType: TileType.CITY};
+    adjacent.player = player;
+    expect(board.getAvailableIsolatedSpaces(player)).to.not.include(space);
+
+    // Martian Nature Wonders and Rey Skywalker place neutral cubes, not tiles.
+    adjacent.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+    adjacent.player = undefined;
+    expect(board.getAvailableIsolatedSpaces(player)).to.include(space);
+
+    adjacent.tile = {tileType: TileType.REY_SKYWALKER};
+    expect(board.getAvailableIsolatedSpaces(player)).to.include(space);
+  });
+
   describe('canAffordPlacementBonuses', () => {
     let game: IGame;
     let space: Space;

@@ -416,7 +416,8 @@ export function isSpecialTile(tileType: TileType | undefined): boolean {
   case TileType.EROSION_SEVERE:
   case TileType.DUST_STORM_MILD:
   case TileType.DUST_STORM_SEVERE:
-  case TileType.REY_SKYWALKER:
+  case TileType.REY_SKYWALKER: // Neutral player cubes are stored as tiles, but they aren't tiles at all.
+  case TileType.MARTIAN_NATURE_WONDERS:
   case undefined:
     return false;
   default:

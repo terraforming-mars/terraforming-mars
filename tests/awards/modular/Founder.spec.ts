@@ -8,6 +8,7 @@ import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
 import {cast} from '../../../src/common/utils/utils';
+import {TileType} from '../../../src/common/TileType';
 
 describe('Founder', () => {
   let founder: Founder;
@@ -48,5 +49,14 @@ describe('Founder', () => {
     addCity(player3, adjacentSpaces[1].id);
 
     expect(scores()).deep.eq([0, 1, 1]);
+  });
+
+  it('Neutral cubes are not special tiles', () => {
+    const cubeSpace = game.board.getSpaceOrThrow('15');
+    cubeSpace.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+
+    addGreenery(player, game.board.getAdjacentSpaces(cubeSpace)[0].id);
+
+    expect(scores()).deep.eq([0, 0, 0]);
   });
 });

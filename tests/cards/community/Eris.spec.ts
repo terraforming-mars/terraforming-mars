@@ -29,6 +29,27 @@ describe('Eris', () => {
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
+  it('Neutral cube does not block hazard placement', () => {
+    // A game without starting hazards, so the board around space 15 is predictably empty.
+    [game, player] = testGame(2, {aresExtension: true, aresHazards: false});
+    card.play(player);
+    player.playedCards.push(card);
+
+    const cubeSpace = game.board.getSpaceOrThrow('15');
+    const adjacentSpace = game.board.getSpaceOrThrow('08');
+    cubeSpace.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+
+    // With no hazards on the board there is only one option, so it resolves directly.
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    // The cube is not a tile, so its neighbor is still adjacent to no other tile.
+    expect(selectSpace.spaces).contains(adjacentSpace);
+    // But a hazard may not be placed on the cube's own space.
+    expect(selectSpace.spaces).does.not.contain(cubeSpace);
+  });
+
   it('Can act', () => {
     const action = cast(card.action(player), OrOptions);
     const initialHazardsCount = game.board.getHazards().length;

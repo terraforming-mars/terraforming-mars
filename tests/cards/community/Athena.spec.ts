@@ -46,6 +46,26 @@ describe('Athena', () => {
     cast(player.popWaitingFor(), undefined);
   });
 
+  it('Neutral cube does not block hazard placement', () => {
+    // A game without starting hazards, so the board around space 15 is predictably empty.
+    [game, player] = testGame(2, {aresExtension: true, aresHazards: false});
+    card.play(player);
+    player.playedCards.push(card);
+
+    const cubeSpace = game.board.getSpaceOrThrow('15');
+    const adjacentSpace = game.board.getSpaceOrThrow('08');
+    cubeSpace.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+
+    card.initialAction(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    // The cube is not a tile, so its neighbor is still adjacent to no other tile.
+    expect(selectSpace.spaces).contains(adjacentSpace);
+    // But a hazard may not be placed on the cube's own space.
+    expect(selectSpace.spaces).does.not.contain(cubeSpace);
+  });
+
   it('Can place next to hazard tiles without incurring production loss', () => {
     const hazardSpace = game.board.getHazards()[0];
     const adjacentEmptySpace = game.board.getAdjacentSpaces(hazardSpace).find((space) => space.tile === undefined && space.spaceType === SpaceType.LAND)!;

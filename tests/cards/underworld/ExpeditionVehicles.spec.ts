@@ -32,6 +32,22 @@ describe('ExpeditionVehicles', () => {
     });
   }
 
+  it('A neutral cube is not an adjacent tile', () => {
+    const card = new ExpeditionVehicles();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+
+    const spaces = game.board.getAvailableSpacesOnLand(player);
+    const neighbor = spaces[0];
+    const space = game.board.getAdjacentSpaces(neighbor)[0];
+
+    neighbor.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+
+    player.playedCards.push(card);
+
+    addCity(player, space.id);
+    expect(player.cardsInHand).has.length(1);
+  });
+
   for (const run of [
     {phase: Phase.ACTION, expected: 1},
     {phase: Phase.SOLAR, expected: 0},

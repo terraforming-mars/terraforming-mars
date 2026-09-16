@@ -47,7 +47,9 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
     if (cardOwner === activePlayer) {
       const game = activePlayer.game;
       const board = boardType === BoardType.MARS ? game.board : MoonExpansion.moonData(game).moon;
-      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space).filter(Board.hasRealTile);
+      // Neither hazard tiles nor neutral player cubes count as adjacent tiles.
+      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space)
+        .filter((adjacent) => Board.hasRealTile(adjacent) && !Board.isCubeSpace(adjacent));
       if (adjacentSpacesWithTiles.length === 0) {
         cardOwner.drawCard(1);
       }

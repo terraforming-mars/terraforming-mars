@@ -135,12 +135,8 @@ export class Eris extends CorporationCard implements ICorporationCard {
   }
 
   private getAvailableSpaces(player: IPlayer) {
-    const board = player.game.board;
-    return board.getAvailableSpacesOnLand(player)
-      .filter(((space) => space.tile === undefined))
-      .filter((space) => {
-        const adjacentSpaces = board.getAdjacentSpaces(space);
-        return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
-      });
+    // Isolated spaces include unprotected hazard spaces, which cannot hold a second hazard.
+    return player.game.board.getAvailableIsolatedSpaces(player)
+      .filter((space) => space.tile === undefined);
   }
 }

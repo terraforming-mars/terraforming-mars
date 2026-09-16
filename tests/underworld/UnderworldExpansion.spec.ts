@@ -19,6 +19,9 @@ import {Phase} from '../../src/common/Phase';
 import {LawSuit} from '../../src/server/cards/promo/LawSuit';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
+import {Priority} from '../../src/server/deferredActions/Priority';
+import {Resource} from '../../src/common/Resource';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
 import {Tag} from '../../src/common/cards/Tag';
 import {BoardName} from '../../src/common/boards/BoardName';
@@ -642,6 +645,26 @@ describe('UnderworldExpansion', () => {
     expect(tester.called).is.true;
     expect(tester.proceed).is.false;
     expect(player1.underworldData.corruption).eq(0);
+  });
+
+  it('maybeBlockAttack - resolves before opponent triggers', () => {
+    player1.underworldData.corruption = 1;
+    player1.megaCredits = 10;
+    // Stands in for one of player1's cards that triggers during player2's turn.
+    player1.defer(new SelectOption('opponent trigger'), Priority.OPPONENT_TRIGGER);
+
+    player1.attack(player2, Resource.MEGACREDITS, 4);
+    runAllActions(game);
+
+    // Even though it was deferred second, blocking is resolved first.
+    const orOptions = cast(player1.popWaitingFor(), OrOptions);
+    expect(orOptions.options.map((option) => option.title)).deep.eq(['Block with corruption', 'Do not block']);
+
+    orOptions.options[1].cb();
+    expect(player1.megaCredits).eq(6);
+
+    runAllActions(game);
+    expect(cast(player1.popWaitingFor(), SelectOption).title).eq('opponent trigger');
   });
 
   it('maybeBlockAttack - block self', () => {

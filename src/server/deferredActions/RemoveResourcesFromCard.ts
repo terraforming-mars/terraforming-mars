@@ -7,7 +7,6 @@ import {ICard} from '../cards/ICard';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
 import {CardName} from '../../common/cards/CardName';
 
@@ -107,13 +106,13 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       return;
     }
     const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
-    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
+    target.maybeBlockAttack(this.player, msg, (proceed) => {
       if (proceed) {
         target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
-    }));
+    });
   }
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all', min: number = 1): Array<ICard> {

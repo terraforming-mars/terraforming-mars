@@ -423,7 +423,9 @@ export class Player implements IPlayer {
   }
 
   public maybeBlockAttack(perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void {
-    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, msg, cb));
+    this.defer(
+      UnderworldExpansion.maybeBlockAttack(this, perpetrator, msg, cb),
+      Priority.MAYBE_BLOCK_ATTACK);
   }
 
   public attack(perpetrator: IPlayer, resource: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void {

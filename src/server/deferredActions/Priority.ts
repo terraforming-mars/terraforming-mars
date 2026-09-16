@@ -5,6 +5,8 @@ export enum Priority {
   DECLARE_CLONE_TAG,
   /** Cost of a blue card action, or paying Reds costs. Must happen before the effects. */
   COST,
+  /** Pay to block Underworld attacks */
+  MAYBE_BLOCK_ATTACK,
   /** Special case effects that should occur before Pharmacy Union */
   BEFORE_PHARMACY_UNION,
   /** Pharmacy Union special case, players typically prefer to resolve this early. */

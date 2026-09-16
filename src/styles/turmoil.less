@@ -692,11 +692,12 @@ input[type="radio"]:checked + .party-container::after {
   width: 50px;
 }
 
-// This is teleported to <body> and positioned in TurmoilAgenda.vue's onMouseEnter (viewport
-// coordinates from the trigger's own bounding rect), rather than a plain CSS ::after bubble --
-// the turmoil board sits inside both an `overflow: hidden` accordion (needed for its collapse
-// animation) and a scale() transform, either of which would clip/reposition anything anchored
-// to the trigger element itself the moment it grows past that box's edge.
+// Styles the hover tooltip shown by TurmoilAgenda.vue. That component moves this element out
+// to the very end of <body> (via Vue's <Teleport>) instead of leaving it next to the icon it
+// describes, and positions it in JavaScript using the icon's on-screen coordinates. That's
+// needed because the turmoil board's container clips or shrinks anything drawn inside it, so a
+// tooltip placed the normal way (as a child of the icon, sized by CSS alone) would get cut off
+// or squashed along with it.
 .agenda-tooltip-portal {
   position: fixed;
   transform: translateX(-50%);

@@ -188,6 +188,7 @@
     <div
       v-if="showTooltip"
       class="agenda-tooltip-portal"
+      v-i18n
       :style="{top: tooltipTop + 'px', left: tooltipLeft + 'px'}">
       {{ resolvedDescription }}
     </div>
@@ -196,7 +197,7 @@
 
 <script lang="ts">
 
-import {AGENDA_DESCRIPTIONS} from '@/common/turmoil/AgendaDescriptions';
+import {getAgendaDescription} from '@/client/turmoil/ClientAgendaManifest';
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import {defineComponent} from 'vue';
 
@@ -232,7 +233,7 @@ export default defineComponent({
       return 'party-badge party-badge--' + partyBadgeSlugs[this.id[0]];
     },
     resolvedDescription(): string {
-      return AGENDA_DESCRIPTIONS[this.id] ?? `Unknown agenda ${this.id}`;
+      return getAgendaDescription(this.id);
     },
   },
   methods: {

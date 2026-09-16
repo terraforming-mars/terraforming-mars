@@ -5,14 +5,14 @@
   <div class="line2">
     {{ $t(agenda.name) }} {{ $t(agenda.type) }} {{ agenda.num }}
   </div>
-  <div class="description" v-if="showDescription">{{ $t(description) }}</div>
+  <div class="description" v-if="showDescription" v-i18n>{{ description }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from 'vue';
 import {agendaInfoById, AgendaInfo, BonusId, PolicyId} from '@/common/turmoil/Types';
-import {AGENDA_DESCRIPTIONS} from '@/common/turmoil/AgendaDescriptions';
+import {getAgendaDescription} from '@/client/turmoil/ClientAgendaManifest';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 
 
@@ -25,7 +25,7 @@ const props = defineProps({
 
 const agenda = computed<AgendaInfo>(() => agendaInfoById(props.agendaId));
 const showDescription = ref(false);
-const description = computed<string>(() => AGENDA_DESCRIPTIONS[props.agendaId] ?? `Unknown agenda ${props.agendaId}`);
+const description = computed<string>(() => getAgendaDescription(props.agendaId));
 </script>
 
 <style scoped lang="less">
@@ -47,9 +47,10 @@ const description = computed<string>(() => AGENDA_DESCRIPTIONS[props.agendaId] ?
     margin-left: 80px !important;
   }
 
-  // TurmoilAgenda's template root is no longer a single element (it now has a sibling
-  // <Teleport> alongside its root <div>), so Vue can't apply this component's scope-id to it
-  // the normal way -- an unqualified `> div:first-child` silently stops matching.
+  // TurmoilAgenda's template has two top-level nodes: its <div> and, alongside it, a
+  // <Teleport> for the hover tooltip. When a child component's template has more than one
+  // top-level node, Vue can't tag which one is "the root" to attach this parent's scoped-CSS
+  // ID to, so a plain `> div:first-child` (with no :deep()) does not match it.
   > :deep(div:first-child) {
     text-align: center;
     height: 50px;

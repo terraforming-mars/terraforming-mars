@@ -7,6 +7,8 @@ import {ICard, isIActionCard} from '../cards/ICard';
 import {Expansion, GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
+import {IClientAgenda} from '../../common/turmoil/IClientAgenda';
+import {ALL_PARTIES} from '../turmoil/Turmoil';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {isPreludeCard} from '../cards/prelude/IPreludeCard';
@@ -144,6 +146,20 @@ class GlobalEventProcessor {
   }
 }
 
+class AgendaProcessor {
+  public static json: Array<IClientAgenda> = [];
+  public static makeJson() {
+    for (const PartyClass of Object.values(ALL_PARTIES)) {
+      const party = new PartyClass();
+      party.bonuses.forEach((bonus) => AgendaProcessor.json.push({id: bonus.id, description: bonus.description}));
+      party.policies.forEach((policy) => AgendaProcessor.json.push({
+        id: policy.id,
+        description: typeof policy.description === 'function' ? policy.description(undefined) : policy.description,
+      }));
+    }
+  }
+}
+
 class ColoniesProcessor {
   public static json: Array<ColonyMetadata> = [];
   public static makeJson() {
@@ -205,12 +221,14 @@ if (!fs.existsSync('src/genfiles')) {
 globalInitialize();
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
+AgendaProcessor.makeJson();
 ColoniesProcessor.makeJson();
 MilestoneProcessor.makeJson();
 AwardProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(CardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/agendas.json', JSON.stringify(AgendaProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/milestones.json', JSON.stringify(MilestoneProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/awards.json', JSON.stringify(AwardProcessor.json, null, 2));

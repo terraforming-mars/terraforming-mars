@@ -46,7 +46,11 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: Space) {
     const game = cardOwner.game;
     if (Board.isUncoveredOceanSpace(space)) {
-      if (cardOwner.canAfford({cost: 5, steel: true})) {
+      cardOwner.defer(() => {
+        if (!cardOwner.canAfford({cost: 5, steel: true})) {
+          game.log('${0} cannot afford to use the ${1} effect', (b) => b.player(cardOwner).card(this));
+          return undefined;
+        }
         const orOptions = new OrOptions();
         orOptions.options.push(new SelectPayment(
           'Spend 5 M€ for one energy production and hydroelectric resource',
@@ -61,10 +65,8 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
           game.log('${0} declined to use the ${1} effect', (b) => b.player(cardOwner).card(this));
           return undefined;
         }));
-        cardOwner.defer(orOptions, Priority.OPPONENT_TRIGGER);
-      } else {
-        game.log('${0} cannot afford to use the ${1} effect', (b) => b.player(cardOwner).card(this));
-      }
+        return orOptions;
+      }, Priority.OPPONENT_TRIGGER);
     }
   }
 }

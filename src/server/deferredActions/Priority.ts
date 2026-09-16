@@ -9,6 +9,11 @@ export enum Priority {
   BEFORE_PHARMACY_UNION,
   /** Pharmacy Union special case, players typically prefer to resolve this early. */
   PHARMACY_UNION,
+  /**
+   * A choice belonging to the active player which should resolve before their opponents'
+   * triggered effects. (e.g. Flooding's attack, which changes what an opponent can afford.)
+   */
+  BEFORE_OPPONENT_TRIGGER,
   /** Any effect from one of your opponent's card that triggers during your turn. */
   OPPONENT_TRIGGER,
   /**

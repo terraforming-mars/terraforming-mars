@@ -50,6 +50,7 @@ export enum Priority {
   /** Effects that make your opponents lose resources or production. */
   ATTACK_OPPONENT,
   GAIN_RESOURCE_OR_PRODUCTION,
+  /** Lose (or spend) resources or production. */
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,

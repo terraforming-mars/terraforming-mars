@@ -201,7 +201,7 @@ export default defineComponent({
       }
       const corpName = this.selectedCorporations[0];
       const corporation = getCardOrThrow(corpName);
-      // The ?? 0 is only because IClientCard applies to _all_ cards.
+      // The ?? 0 is only because ClientCard applies to _all_ cards.
 
       let starting = corporation.startingMegaCredits ?? 0;
       const cardCost = corporation.cardCost === undefined ? constants.CARD_COST : corporation.cardCost;

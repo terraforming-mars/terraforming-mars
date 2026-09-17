@@ -12,8 +12,9 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all, uppercase} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IHasCheckLoops} from '../ICard';
 
-export class Playwrights extends CorporationCard implements ICorporationCard {
+export class Playwrights extends CorporationCard implements ICorporationCard, IHasCheckLoops {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,

@@ -10,16 +10,20 @@
             <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
           </div>
 
-          <div class="help-agenda-row" v-for="id in party.bonusIds" :key="id">
-            <TurmoilAgenda :id="id" />
-            <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
+          <div class="help-agenda-section">
+            <div class="help-agenda-card" v-for="id in party.bonusIds" :key="id">
+              <TurmoilAgenda :id="id" />
+              <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
+            </div>
           </div>
 
           <div class="help-agenda-divider"></div>
 
-          <div class="help-agenda-row" v-for="id in party.policyIds" :key="id">
-            <TurmoilAgenda :id="id" />
-            <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
+          <div class="help-agenda-section">
+            <div class="help-agenda-card" v-for="id in party.policyIds" :key="id">
+              <TurmoilAgenda :id="id" />
+              <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
+            </div>
           </div>
         </div>
       </div>

@@ -94,9 +94,7 @@ import {defineComponent} from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
 // A single icon-legend entry: the CSS class that draws the icon, its label, and (for anything
-// that came from a specific expansion) the small expansion badge(s) shown next to it. This lets
-// new tags/resources/tiles be added as a data entry instead of a hand-typed markup block --
-// and the `official` split below is what makes this cleanly separable for an upstream PR.
+// that came from a specific expansion) the small expansion badge(s) shown next to it.
 type IconEntry = {
   iconClass: string;
   label: string;

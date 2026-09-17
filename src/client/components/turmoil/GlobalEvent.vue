@@ -21,7 +21,7 @@
 import {defineComponent} from 'vue';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
-import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
+import {ClientGlobalEvent} from '@/common/turmoil/ClientGlobalEvent';
 import {getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
@@ -74,7 +74,7 @@ export default defineComponent({
     },
   },
   data(): DataModel {
-    const globalEvent: IClientGlobalEvent | undefined = getGlobalEvent(this.globalEventName);
+    const globalEvent: ClientGlobalEvent | undefined = getGlobalEvent(this.globalEventName);
     if (globalEvent === undefined) {
       throw new Error(`Can't find card ${this.globalEventName}`);
     }

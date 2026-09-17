@@ -12,7 +12,7 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
+import {isDescription as isCardRenderDescription} from '@/common/cards/render/CardRenderDescription';
 import {
   ICardRenderCorpBoxAction,
   ICardRenderCorpBoxEffect,
@@ -57,7 +57,7 @@ export default defineComponent({
     isSymbol: isICardRenderSymbol,
     isEffect: isICardRenderEffect,
     isDescription(componentData: ItemType): boolean {
-      return typeof componentData === 'string' || componentData instanceof String || isIDescription(this.componentData);
+      return typeof componentData === 'string' || componentData instanceof String || isCardRenderDescription(this.componentData);
     },
     isTile: isICardRenderTile,
     isProduction: isICardRenderProductionBox,

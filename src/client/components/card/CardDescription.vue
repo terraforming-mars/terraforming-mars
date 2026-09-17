@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import {defineComponent, PropType} from 'vue';
-import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
+import {isDescription} from '@/common/cards/render/CardRenderDescription';
 
 export default defineComponent({
   name: 'CardDescription',
@@ -18,7 +18,7 @@ export default defineComponent({
   computed: {
     classes(): ReadonlyArray<string> {
       const classes: string[] = ['card-description'];
-      if (isIDescription(this.item)) {
+      if (isDescription(this.item)) {
         if (this.item.align !== 'center') {
           // we want to reduce size for aligned left of right to 60%
           classes.push('card-description-aligned');
@@ -28,7 +28,7 @@ export default defineComponent({
       return classes;
     },
     description(): string {
-      return isIDescription(this.item) ? this.item.text : String(this.item);
+      return isDescription(this.item) ? this.item.text : String(this.item);
     },
   },
 });

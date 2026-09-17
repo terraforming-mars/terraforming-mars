@@ -1,8 +1,8 @@
-export interface ICardRenderDescription {
+export type CardRenderDescription = {
   text: string,
   align: 'left' | 'center' | 'right',
 }
 
-export function isIDescription(item: any): item is ICardRenderDescription {
+export function isDescription(item: any): item is CardRenderDescription {
   return item && item.text && typeof(item.text) === 'string';
 }

@@ -32,7 +32,7 @@ export interface ICounter {
  *
  * The constructor accepts the game state, which is essentially the player, and the card being played or acted upon.
  */
-export class Counter {
+export class Counter implements ICounter {
   /**
    * True if the `this.card` is still in the player's hand.
    *

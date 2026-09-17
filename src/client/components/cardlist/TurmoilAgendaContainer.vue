@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import {computed, ref} from 'vue';
 import {agendaInfoById, AgendaInfo, BonusId, PolicyId} from '@/common/turmoil/Types';
-import {getAgendaDescription} from '@/client/turmoil/ClientAgendaManifest';
+import {getAgendaOrThrow} from '@/client/turmoil/ClientAgendaManifest';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 
 
@@ -25,7 +25,7 @@ const props = defineProps({
 
 const agenda = computed<AgendaInfo>(() => agendaInfoById(props.agendaId));
 const showDescription = ref(false);
-const description = computed<string>(() => getAgendaDescription(props.agendaId));
+const description = computed<string>(() => getAgendaOrThrow(props.agendaId).description);
 </script>
 
 <style scoped lang="less">

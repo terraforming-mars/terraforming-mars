@@ -9,6 +9,7 @@ import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {IClientAgenda} from '../../common/turmoil/IClientAgenda';
 import {ALL_PARTIES} from '../turmoil/Turmoil';
+import {BonusId, PolicyId} from '../../common/turmoil/Types';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {isPreludeCard} from '../cards/prelude/IPreludeCard';
@@ -147,15 +148,17 @@ class GlobalEventProcessor {
 }
 
 class AgendaProcessor {
-  public static json: Array<IClientAgenda> = [];
+  public static json: Partial<Record<BonusId | PolicyId, IClientAgenda>> = {};
   public static makeJson() {
     for (const PartyClass of Object.values(ALL_PARTIES)) {
       const party = new PartyClass();
-      party.bonuses.forEach((bonus) => AgendaProcessor.json.push({id: bonus.id, description: bonus.description}));
-      party.policies.forEach((policy) => AgendaProcessor.json.push({
-        id: policy.id,
-        description: typeof policy.description === 'function' ? policy.description(undefined) : policy.description,
-      }));
+      party.bonuses.forEach((bonus) => {
+        AgendaProcessor.json[bonus.id] = {description: bonus.description};
+      });
+      party.policies.forEach((policy) => {
+        const description = typeof policy.description === 'function' ? policy.description(undefined) : policy.description;
+        AgendaProcessor.json[policy.id] = {description};
+      });
     }
   }
 }

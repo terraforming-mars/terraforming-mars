@@ -199,7 +199,7 @@
 
 <script lang="ts">
 
-import {getAgendaDescription} from '@/client/turmoil/ClientAgendaManifest';
+import {getAgendaOrThrow} from '@/client/turmoil/ClientAgendaManifest';
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import {defineComponent} from 'vue';
 
@@ -235,7 +235,7 @@ export default defineComponent({
       return 'party-badge party-badge--' + partyBadgeSlugs[this.id[0]];
     },
     resolvedDescription(): string {
-      return getAgendaDescription(this.id);
+      return getAgendaOrThrow(this.id).description;
     },
   },
   methods: {

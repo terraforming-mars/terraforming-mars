@@ -1,6 +1,3 @@
-import {BonusId, PolicyId} from './Types';
-
-export interface IClientAgenda {
-  id: BonusId | PolicyId;
+export type IClientAgenda = {
   description: string;
-}
+};

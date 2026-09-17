@@ -7,7 +7,7 @@ import {ICard, isIActionCard} from '../cards/ICard';
 import {Expansion, GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
-import {IClientAgenda} from '../../common/turmoil/IClientAgenda';
+import {ClientAgenda} from '../../common/turmoil/ClientAgenda';
 import {ALL_PARTIES} from '../turmoil/Turmoil';
 import {BonusId, PolicyId} from '../../common/turmoil/Types';
 import {ClientCard} from '../../common/cards/ClientCard';
@@ -148,7 +148,7 @@ class GlobalEventProcessor {
 }
 
 class AgendaProcessor {
-  public static json: Partial<Record<BonusId | PolicyId, IClientAgenda>> = {};
+  public static json: Partial<Record<BonusId | PolicyId, ClientAgenda>> = {};
   public static makeJson() {
     for (const PartyClass of Object.values(ALL_PARTIES)) {
       const party = new PartyClass();

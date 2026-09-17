@@ -133,12 +133,30 @@ describe('MarsBoard', () => {
     expect(board.getAvailableIsolatedSpaces(player)).to.not.include(space);
 
     // Martian Nature Wonders and Rey Skywalker place neutral cubes, not tiles.
-    adjacent.tile = {tileType: TileType.MARTIAN_NATURE_WONDERS};
+    adjacent.tile = undefined;
     adjacent.player = undefined;
+    adjacent.cube = 'martian-nature-wonders';
     expect(board.getAvailableIsolatedSpaces(player)).to.include(space);
 
-    adjacent.tile = {tileType: TileType.REY_SKYWALKER};
+    adjacent.cube = 'rey-skywalker';
     expect(board.getAvailableIsolatedSpaces(player)).to.include(space);
+  });
+
+  it('A cube reserves its own space', () => {
+    const [game, player] = testGame(2, {pathfindersExpansion: true});
+    const board = game.board;
+    const space = board.getSpaceOrThrow('15');
+
+    expect(board.getAvailableSpacesOnLand(player)).to.include(space);
+    expect(board.getNonReservedLandSpaces()).to.include(space);
+    expect(board.canPlaceTile(space)).is.true;
+
+    space.cube = 'martian-nature-wonders';
+
+    expect(board.getAvailableSpacesOnLand(player)).to.not.include(space);
+    expect(board.getNonReservedLandSpaces()).to.not.include(space);
+    expect(board.canPlaceTile(space)).is.false;
+    expect(MarsBoard.canCover(space, {tileType: TileType.CITY})).is.false;
   });
 
   describe('canAffordPlacementBonuses', () => {

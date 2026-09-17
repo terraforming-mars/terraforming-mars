@@ -5,9 +5,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resource} from '../../../common/Resource';
-import {Board} from '../../boards/Board';
+import {RedTourismWave} from '../turmoil/RedTourismWave';
 
 export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {
@@ -33,13 +32,7 @@ export class HermeticOrderOfMars extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const board = player.game.board;
-    const spaces = board.spaces.filter((space) => {
-      if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED ||Board.hasRealTile(space)) {
-        return false;
-      }
-      return board.getAdjacentSpaces(space).some((s) => s.player === player &&Board.hasRealTile(s));
-    }).length;
+    const spaces = RedTourismWave.getAdjacentEmptySpacesCount(player);
 
     player.stock.add(Resource.MEGACREDITS, spaces, {log: true});
     return undefined;

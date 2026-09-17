@@ -350,7 +350,7 @@ describe('UnderworldExpansion', () => {
 
   it('Rey Skywalker space is not identifiable or excavatable', () => {
     const space = UnderworldExpansion.identifiableSpaces(player1)[0];
-    game.simpleAddTile(player1, space, {tileType: TileType.REY_SKYWALKER});
+    space.cube = 'rey-skywalker';
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).not.contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).not.contains(space);
@@ -360,7 +360,7 @@ describe('UnderworldExpansion', () => {
 
   it('Martian Nature Wonders space is identifiable and excavatable', () => {
     const space = UnderworldExpansion.identifiableSpaces(player1)[0];
-    game.simpleAddTile(player1, space, {tileType: TileType.MARTIAN_NATURE_WONDERS});
+    space.cube = 'martian-nature-wonders';
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);

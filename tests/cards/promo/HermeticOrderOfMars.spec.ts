@@ -78,4 +78,13 @@ describe('HermeticOrderOfMars', () => {
 
     expect(player.megaCredits).eq(7);
   });
+
+  it('Neutral cube counts', () => {
+    addGreenery(player, '50');
+    addGreenery(player, '51');
+    board.getSpaceOrThrow('43').cube = 'martian-nature-wonders';
+    card.play(player);
+
+    expect(player.megaCredits).eq(8);
+  });
 });

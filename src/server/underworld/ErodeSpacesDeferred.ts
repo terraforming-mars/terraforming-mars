@@ -19,7 +19,7 @@ export class ErodeSpacesDeferred extends RunNTimes<Space> {
     const spaces: Set<Space> = new Set();
     for (const hazardTile of game.board.getHazards()) {
       for (const space of game.board.getAdjacentSpaces(hazardTile)) {
-        if (space.spaceType === SpaceType.LAND && space.tile === undefined) {
+        if (space.spaceType === SpaceType.LAND && space.tile === undefined && space.cube === undefined) {
           spaces.add(space);
         }
       }

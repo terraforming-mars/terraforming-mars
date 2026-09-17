@@ -1450,9 +1450,7 @@ export class Game implements IGame, Logger {
 
   public simpleAddTile(player: IPlayer, space: Space, tile: Tile) {
     space.tile = tile;
-    if (tile.tileType === TileType.OCEAN ||
-      tile.tileType === TileType.MARTIAN_NATURE_WONDERS ||
-      tile.tileType === TileType.REY_SKYWALKER) {
+    if (tile.tileType === TileType.OCEAN) {
       space.player = undefined;
     } else {
       space.player = player;

@@ -45,7 +45,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.MINING_TITANIUM_BONUS]: 'mining-titanium',
   [TileType.WETLANDS]: 'wetlands',
   [TileType.RED_CITY]: 'red-city',
-  [TileType.MARTIAN_NATURE_WONDERS]: 'martian-nature-wonders',
+  [TileType._DEPRECATED_MARTIAN_NATURE_WONDERS]: '',
   [TileType.MOON_ROAD]: 'road',
   [TileType.MOON_HABITAT]: 'habitat',
   [TileType.MOON_MINE]: 'mine',
@@ -55,7 +55,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.LUNAR_MINE_URBANIZATION]: 'lunar-mine-urbanization',
   [TileType.CRASHLANDING]: 'crashlanding',
   [TileType.MARS_NOMADS]: '', // This never actually renders.
-  [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
+  [TileType._DEPRECATED_REY_SKYWALKER]: '',
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
   [TileType.NEW_HOLLAND]: 'new-holland',
   [TileType.NEURAL_INSTANCE]: 'neural-instance',
@@ -97,9 +97,6 @@ const descriptions: Record<TileType, string> = {
 
   [TileType.WETLANDS]: 'Wetlands: counts as an ocean and a greenery. Does not count toward 9 oceans.',
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
-  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders: nothing may be placed here',
-  [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
-
   [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
   [TileType.NEURAL_INSTANCE]: 'Neural Instance: MarsBot gains VP for adjacent non-human spaces',
 };

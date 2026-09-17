@@ -245,7 +245,7 @@ export class MarsBoard extends Board {
 
   public getAvailableIsolatedSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return this.getAvailableSpacesOnLand(player, canAffordOptions)
-      .filter((space: Space) => this.getAdjacentSpaces(space).every((adjacent) => adjacent.tile === undefined || Board.isCubeSpace(adjacent)));
+      .filter((space: Space) => this.getAdjacentSpaces(space).every((adjacent) => adjacent.tile === undefined));
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
@@ -266,12 +266,18 @@ export class MarsBoard extends Board {
       }
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE || space.spaceType === SpaceType.DEFLECTION_ZONE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
+        space.cube === undefined &&
         space.player === undefined;
     });
   }
 
   // Returns true if |newTile| can cover go on |space|, particularly if |space| already has a tile.
   public static canCover(space: Space, newTile: Tile): boolean {
+    // A neutral player cube reserves its space for the rest of the game.
+    if (space.cube !== undefined) {
+      return false;
+    }
+
     if (space.tile === undefined) {
       return true;
     }

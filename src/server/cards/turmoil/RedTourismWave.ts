@@ -36,7 +36,14 @@ export class RedTourismWave extends Card implements IProjectCard {
     return undefined;
   }
 
-  // This is static because it's shared with Tourist.
+  /**
+   * Return the number of empty areas adjacent to `player`'s tiles.
+   *
+   * An area is empty when nothing real stands on it: a hazard tile still counts as empty.
+   *
+   * This is public and static because it is shared.
+   */
+  // TODO(kberg): Move to Board.
   public static getAdjacentEmptySpacesCount(player: IPlayer): number {
     const board = player.game.board;
     return board.spaces.filter((space) => {

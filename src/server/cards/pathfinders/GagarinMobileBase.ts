@@ -69,7 +69,7 @@ export class GagarinMobileBase extends CorporationCard implements ICorporationCa
     const availableSpaces = board.spaces
       .filter((space) => space.spaceType !== SpaceType.COLONY)
       .filter((space) => space.spaceType !== SpaceType.RESTRICTED)
-      .filter((space) => space.tile === undefined)
+      .filter((space) => space.tile === undefined && space.cube === undefined)
       .filter((space) => !visited.includes(space.id))
       .filter((space) => MarsBoard.canAffordPlacementBonuses(player, space));
 

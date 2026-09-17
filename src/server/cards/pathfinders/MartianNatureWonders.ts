@@ -7,8 +7,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardResource} from '../../../common/CardResource';
-import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
+import {LogHelper} from '../../LogHelper';
 
 export class MartianNatureWonders extends Card implements IProjectCard {
   constructor() {
@@ -44,7 +44,8 @@ export class MartianNatureWonders extends Card implements IProjectCard {
       message('Select space for ${0}', (b) => b.card(this)),
       player.game.board.getAvailableSpacesOnLand(player))
       .andThen((space) => {
-        player.game.simpleAddTile(player, space, {tileType: TileType.MARTIAN_NATURE_WONDERS});
+        space.cube = 'martian-nature-wonders';
+        LogHelper.logBoardTileAction(player, space, this.name + ' cube');
         player.game.grantSpaceBonuses(player, space);
         return undefined;
       });

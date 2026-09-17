@@ -57,7 +57,8 @@ describe('MartianNatureWonders', () => {
 
     cast(card.play(player), SelectSpace).cb(cubeSpace);
     runAllActions(game);
-    expect(cubeSpace.tile?.tileType).eq(TileType.MARTIAN_NATURE_WONDERS);
+    expect(cubeSpace.cube).eq('martian-nature-wonders');
+    expect(cubeSpace.tile).is.undefined;
 
     cast(researchOutpost.play(player), undefined);
     runAllActions(game);

@@ -22,6 +22,7 @@
       <template v-if="space.nomads === true">
         <div class='board-cube--nomad'></div>
       </template>
+      <BoardSpaceCube v-if="space.cube !== undefined" :cube="space.cube"/>
       <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="board"/>
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
       <div v-if="space.spaceType === SpaceType.DEFLECTION_ZONE" class="board-space-type-deflection-zone"></div>
@@ -35,6 +36,7 @@
 import {defineComponent} from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
+import BoardSpaceCube from '@/client/components/board/BoardSpaceCube.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
@@ -67,6 +69,7 @@ export default defineComponent({
   components: {
     Bonus,
     BoardSpaceTile,
+    BoardSpaceCube,
     UndergroundToken,
   },
   computed: {
@@ -76,7 +79,10 @@ export default defineComponent({
       return css;
     },
     showBonus(): boolean {
-      return this.space.tileType === undefined || this.tileView === 'hide';
+      if (this.tileView === 'hide') {
+        return true;
+      }
+      return this.space.tileType === undefined && this.space.cube === undefined;
     },
     playerColorCss(): string {
       if (this.space.color === undefined) {

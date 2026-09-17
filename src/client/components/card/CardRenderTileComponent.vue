@@ -141,9 +141,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.EROSION_MILD]: {},
   [TileType.EROSION_SEVERE]: {},
   [TileType.RED_CITY]: {}, // This isn't shown on a card
-  [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
+  [TileType._DEPRECATED_MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
   [TileType.MARS_NOMADS]: {}, // This isn't shown on a card
-  [TileType.REY_SKYWALKER]: {}, // This isn't shown on a card
+  [TileType._DEPRECATED_REY_SKYWALKER]: {}, // This isn't shown on a card
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
   },

@@ -375,6 +375,9 @@ export class Server {
       if (tileType !== undefined) {
         model.tileType = tileType;
       }
+      if (space.cube !== undefined) {
+        model.cube = space.cube;
+      }
       const color = this.getColor(space);
       if (color !== undefined) {
         model.color = color;

@@ -4,12 +4,12 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
+import {IActionCard, IHasCheckLoops} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard {
+export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard, IHasCheckLoops {
   constructor() {
     super({
       name: CardName.ODYSSEY,

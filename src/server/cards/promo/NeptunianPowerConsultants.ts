@@ -43,7 +43,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: Space) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     const game = cardOwner.game;
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.defer(() => {
@@ -66,7 +66,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
           return undefined;
         }));
         return orOptions;
-      }, Priority.OPPONENT_TRIGGER);
+      }, cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.OPTIONAL_SPEND);
     }
   }
 }

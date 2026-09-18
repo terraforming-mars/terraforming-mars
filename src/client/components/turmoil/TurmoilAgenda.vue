@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <template v-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
@@ -183,11 +184,22 @@
     <template v-else>
       <div>Unknown agenda ID {{id}}</div>
     </template>
+    </div>
+    <Teleport to="body">
+      <div
+        v-if="showTooltip"
+        class="agenda-tooltip-portal"
+        v-i18n
+        :style="{top: tooltipTop + 'px', left: tooltipLeft + 'px'}">
+        {{ resolvedDescription }}
+      </div>
+    </Teleport>
   </div>
 </template>
 
 <script lang="ts">
 
+import {getAgendaOrThrow} from '@/client/turmoil/ClientAgendaManifest';
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import {defineComponent} from 'vue';
 
@@ -203,6 +215,13 @@ export default defineComponent({
       default: false,
     },
   },
+  data() {
+    return {
+      showTooltip: false,
+      tooltipTop: 0,
+      tooltipLeft: 0,
+    };
+  },
   computed: {
     partyBadgeClass(): string {
       const partyBadgeSlugs: Record<string, string> = {
@@ -214,6 +233,20 @@ export default defineComponent({
         g: 'greens',
       };
       return 'party-badge party-badge--' + partyBadgeSlugs[this.id[0]];
+    },
+    resolvedDescription(): string {
+      return getAgendaOrThrow(this.id).description;
+    },
+  },
+  methods: {
+    onMouseEnter(event: MouseEvent) {
+      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+      this.tooltipTop = rect.bottom + 6;
+      this.tooltipLeft = rect.left + rect.width / 2;
+      this.showTooltip = true;
+    },
+    onMouseLeave() {
+      this.showTooltip = false;
     },
   },
 });

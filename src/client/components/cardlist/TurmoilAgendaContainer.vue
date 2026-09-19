@@ -35,7 +35,6 @@ const agendaType = computed<string>(() => agenda.value.type === 'Bonus' ? '⚡' 
   min-height: 120px;
   width: 250px;
   margin: 0 5px;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 10px;

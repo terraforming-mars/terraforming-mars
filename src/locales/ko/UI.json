@@ -299,7 +299,6 @@
     "Select which cards to take into hand": "손으로 가져갈 카드 선택",
     "Select which resource type to steal from all other players.": "다른 플레이어들에게서 가져올 자원 유형을 선택",
 
-    "Convert 6 heat into temperature": "열 자원 6개로 온난화 사업",
     "Convert 7 heat into temperature": "열 자원 7개로 온난화 사업",
     "Convert 8 heat into temperature": "열 자원 8개로 온난화 사업",
     "Convert heat": "온난화 사업",
@@ -432,7 +431,7 @@
     "Send a delegate in an area (3 M€)": "의원석에 의원 하나를 보내기 (3 M€)",
     "Send 1 or 2 delegates": "의원 1명 또는 2명 보내기",
     "Choose a party": "정당 선택",
-    "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "10 М€ 지불하고 카드 3장 뽑기 (과학당 정책 행동)",
+    "Pay 10 M€ to draw 3 cards": "10 М€ 지불하고 카드 3장 뽑기",
     "Select card to keep or none to discard": "보관할 카드를 선택하거나 선택하지 않고 버립니다.",
     "Select card to add 1 floater": "부양체 자원 1개를 추가할 카드 선택",
     "Select one of your mines to upgrade": "향상시킬 광산 중 하나를 선택",

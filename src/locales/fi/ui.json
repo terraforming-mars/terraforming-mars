@@ -380,7 +380,6 @@
   "Select resource to discard": "Valitse poistettava resurssi",
   "Select resource to gain": "Valitse saatava resurssi",
 
-  "Convert 6 heat into temperature": "Muunna 6 lämpöä lämpötilaksi",
   "Convert 7 heat into temperature": "Muunna 7 lämpöä lämpötilaksi",
   "Convert 8 heat into temperature": "Muunna 8 lämpöä lämpötilaksi",
   "Convert heat": "Muunna lämpö",
@@ -526,7 +525,7 @@
   "Send a delegate in an area (3 M€)": "Lähetä edustaja puolueeseen (3 M€)",
   "Send 1 or 2 delegates": "Lähetä yksi tai kaksi edustajaa",
   "Choose a party": "Valitse puolue",
-  "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Maksa 10 M€ nostaaksesi 3 korttia (Myllerrys Tutkijat)",
+  "Pay 10 M€ to draw 3 cards": "Maksa 10 M€ nostaaksesi 3 korttia",
   "Select card to keep or none to discard": "Valitse pidettävä kortti tai ei mitään hylätäksesi",
   "Select Venus card to add ${0} resource(s)": "Valitse Venus-kortti johon lisätään ${0} resurssia",
   "Select one of your mines to upgrade": "Valitse yksi kaivoksistasi päivitettäväksi",
@@ -1147,11 +1146,11 @@
   "Turmoil": "Myllerrys",
   "Select an allied party": "Valitse liittoutunut puolue",
   "[Mars First] - Bonus: Gain 1 M€ for each building tag you have - Policy: When you place a tile ON MARS, gain 1 steel": "[Mars Ensin] - Bonus: Saat 1 M€ jokaisesta rakennusympyrästäsi - Politiikka: Kun asetat laatan MARSIIN, saat 1 terästä",
-  "[Scientists] - Bonus: Gain 1 M€ for each science tag you have - Policy: Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "[Tutkijat] - Bonus: Saat 1 M€ jokaisesta tiedeympyrästäsi - Politiikka: Maksa 10 M€ nostaaksesi 3 korttia (Myllerryksen tutkijat)",
+  "[Scientists] - Bonus: Gain 1 M€ for each science tag you have - Policy: Pay 10 M€ to draw 3 cards": "[Tutkijat] - Bonus: Saat 1 M€ jokaisesta tiedeympyrästäsi - Politiikka: Maksa 10 M€ nostaaksesi 3 korttia",
   "[Unity] - Bonus: Gain 1 M€ for each Venus, Earth and Jovian tag you have - Policy: Your titanium resoures are worth 1 M€ extra": "[Yhtenäisyys] - Bonus: Saat 1 M€ jokaisesta Venus-, Maa- ja Jupiter-ympyrästäsi - Politiikka: Titaaniresurssisi ovat 1 M€ arvokkaampia",
   "[Greens] - Bonus: Gain 1 M€ for each plant, microbe and animal tag you have - Policy: When you place a greenery tile, gain 4 M€": "[Vihreät] - Bonus: Saat 1 M€ jokaisesta kasvi-, mikrobi- ja eläinympyrästäsi - Politiikka: Kun asetat viheralueen, saat 4 M€",
   "[Reds] - Bonus: The players(s) with the lowest TR gains 1 TR - Policy: When you take an action that raises TR, you MUST pay 3 M€ per step raised": "[Punaiset] - Bonus: Alhaisimman MKL:n omaavat pelaajat nostavat MKL:äänsä 1 askeleen - Politiikka: Kun teet toiminnon joka nostaa MKL:ää, sinun TÄYTYY maksaa 3 M€ per nostettu askel",
-  "[Kelvinists] - Bonus: Gain 1 M€ for each heat production you have - Policy: Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "[Kelvinistit] - Bonus: Saat 1 M€ jokaisesta lämpötuotannostasi - Politiikka: Maksa 10 M€ nostaaksesi energia- ja lämpötuotantoasi 1 askel (Myllerryksen kelvinistit)",
+  "[Kelvinists] - Bonus: Gain 1 M€ for each heat production you have - Policy: Pay 10 M€ to increase your energy and heat production 1 step": "[Kelvinistit] - Bonus: Saat 1 M€ jokaisesta lämpötuotannostasi - Politiikka: Maksa 10 M€ nostaaksesi energia- ja lämpötuotantoasi 1 askel",
 
   "TR solo mode": "MKL soolo-tila",
 

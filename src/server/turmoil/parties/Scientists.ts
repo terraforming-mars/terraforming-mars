@@ -43,7 +43,7 @@ class ScientistsBonus02 extends Bonus {
 
 class ScientistsPolicy01 implements IPolicy {
   readonly id = 'sp01' as const;
-  readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
+  readonly description = 'Pay 10 M€ to draw 3 cards';
 
   canAct(player: IPlayer) {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;

@@ -406,7 +406,6 @@
   "Select resource to discard": "Wähle Ressource, die du abgeben möchtest",
   "Select resource to gain": "Wähle Ressource, die du erhalten möchtest",
 
-  "Convert 6 heat into temperature": "Wandle 6 Wärme in Temperatur um",
   "Convert 7 heat into temperature": "Wandle 7 Wärme in Temperatur um",
   "Convert 8 heat into temperature": "Wandle 8 Wärme in Temperatur um",
   "Convert heat": "Wandle Wärme",
@@ -556,7 +555,7 @@
   "Send a delegate in an area (3 M€)": "Entsende einen Deligierten in eine Partei (3 M€)",
   "Send 1 or 2 delegates": "Entsende einen oder zwei Deligierte",
   "Choose a party": "Wähle eine Partei",
-  "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Zahle 10 М€, um 3 Karten zu ziehen (Forschung-Aufruhr)",
+  "Pay 10 M€ to draw 3 cards": "Zahle 10 М€, um 3 Karten zu ziehen",
   "Select card to keep or none to discard": "Wähle eine Karte, die du behältst oder keine Karte, um sie abzuwerfen",
   "Select Venus card to add ${0} resource(s)": "Wähle eine Venus-Karte um ${0} Ressource(n) hinzuzufügen",
   "Select one of your mines to upgrade": "Wähle eine deiner Minen zum Aufrüsten aus",
@@ -1192,11 +1191,11 @@
   "Turmoil": "Aufruhr",
   "Select an allied party": "Wähle eine verbündete Partei",
   "[Mars First] - Bonus: Gain 1 M€ for each building tag you have - Policy: When you place a tile ON MARS, gain 1 steel": "[Mars First] - Bonus: Erhalte 1 M€ für jedes Gebäudesymbol, das du hast - Politik: Wenn du ein Plättchen auf dem MARS platzierst, erhältst du 1 Stahl.",
-  "[Scientists] - Bonus: Gain 1 M€ for each science tag you have - Policy: Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "[Forschung] - Bonus: Erhalte 1 M€ für jede Wissenschaftssymbol, das du hast - Politik: Zahle 10 M€, um 3 Karten zu ziehen (Forschung in Aufruhr).",
+  "[Scientists] - Bonus: Gain 1 M€ for each science tag you have - Policy: Pay 10 M€ to draw 3 cards": "[Forschung] - Bonus: Erhalte 1 M€ für jede Wissenschaftssymbol, das du hast - Politik: Zahle 10 M€, um 3 Karten zu ziehen.",
   "[Unity] - Bonus: Gain 1 M€ for each Venus, Earth and Jovian tag you have - Policy: Your titanium resoures are worth 1 M€ extra": "[Einheit] - Bonus: Erhalte 1 M€ für jedes Venus-, Erd- und Jupiter-Symbol, das du hast - Politik: Deine Titan-Ressourcen sind 1 M€ extra wert.",
   "[Greens] - Bonus: Gain 1 M€ for each plant, microbe and animal tag you have - Policy: When you place a greenery tile, gain 4 M€": "[Grün] - Bonus: 1 M€ für jedes Pflanzen-, Mikroben- und Tier-Symbol, das du hast - Politik: Wenn du ein Grünflächen-Plättchen legst, erhältst du 4 M€.",
   "[Reds] - Bonus: The players(s) with the lowest TR gains 1 TR - Policy: When you take an action that raises TR, you MUST pay 3 M€ per step raised": "[Rot] - Bonus: Der/die Spieler mit dem niedrigsten TW erhält 1 TW - Politik: Wenn du eine Aktion ausführst, die den TW erhöht, MUSST du 3 M€ pro Schritt zahlen.",
-  "[Kelvinists] - Bonus: Gain 1 M€ for each heat production you have - Policy: Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "[Kelvinisten] - Bonus: Du erhältst 1 M€ für jede Wärmeproduktion, die du hast - Politik: Zahle 10 M€, um deine Energie- und Wärmeproduktion um 1 zu erhöhen (Kelvinisten in Aufruhr).",
+  "[Kelvinists] - Bonus: Gain 1 M€ for each heat production you have - Policy: Pay 10 M€ to increase your energy and heat production 1 step": "[Kelvinisten] - Bonus: Du erhältst 1 M€ für jede Wärmeproduktion, die du hast - Politik: Zahle 10 M€, um deine Energie- und Wärmeproduktion um 1 zu erhöhen.",
 
   "TR solo mode": "TW-Solo-Modus",
 

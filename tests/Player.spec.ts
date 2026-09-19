@@ -12,7 +12,7 @@ import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
-import {doWait, getSendADelegateOption, runAllActions, setRulingParty} from './TestingUtils';
+import {doWait, formatMessage, getSendADelegateOption, runAllActions, setRulingParty} from './TestingUtils';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -664,7 +664,7 @@ describe('Player', () => {
   describe('Convert Heat / Kelvinists kp03 swap', () => {
     function findOption(player: TestPlayer, title: string): SelectOption | undefined {
       const actions = cast(player.getActions(), OrOptions);
-      const option = actions.options.find((o) => o.title === title);
+      const option = actions.options.find((o) => formatMessage(o.title) === title);
       return option === undefined ? undefined : cast(option, SelectOption);
     }
 

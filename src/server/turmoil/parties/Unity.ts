@@ -63,7 +63,7 @@ class UnityPolicy01 extends Policy {
 
 class UnityPolicy02 implements IPolicy {
   id = 'up02' as const;
-  description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
+  description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card';
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -118,7 +118,7 @@ class UnityPolicy02 implements IPolicy {
 
 class UnityPolicy03 implements IPolicy {
   id = 'up03' as const;
-  description = 'Spend 4 M€ to draw a space card (Turmoil Unity)';
+  description = 'Spend 4 M€ to draw a space card';
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

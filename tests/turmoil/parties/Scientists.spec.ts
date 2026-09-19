@@ -83,7 +83,7 @@ describe('Scientists', () => {
     expect(player.cardsInHand).has.lengthOf(3);
   });
 
-  it('Ruling policy 4: Cards with Science tag requirements may be played with 1 less Science tag', () => {
+  it('Ruling policy 4: Cards with science tag requirements may be played with 1 less science tag', () => {
     setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_4.id);
 
     const card = new GeneRepair();
@@ -95,7 +95,7 @@ describe('Scientists', () => {
     expect(card.canPlay(player)).to.be.true;
   });
 
-  it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', () => {
+  it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less science tag', () => {
     // Meet all card requirements except the Science tag
     player.playedCards.push(new SpaceStation(), new Satellites());
     player.titanium = 2;

@@ -55,7 +55,7 @@ describe('MarsFirst', () => {
     expect(player.getSteelValue()).to.eq(2);
   });
 
-  it('Ruling policy 4: Spend 4 M€ to draw a Building card', () => {
+  it('Ruling policy 4: Spend 4 M€ to draw a building card', () => {
     setRulingParty(game, PartyName.MARS, 'mp04');
 
     const marsFirstPolicy = MARS_FIRST_POLICY_4;

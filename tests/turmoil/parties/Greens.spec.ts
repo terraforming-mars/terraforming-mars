@@ -22,7 +22,7 @@ describe('Greens', () => {
     [game, player] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Plant, Microbe and Animal tag you have', () => {
+  it('Ruling bonus 1: Gain 1 M€ for each plant, microbe and animal tag you have', () => {
     player.playedCards.push(new Tardigrades(), new Lichen(), new Fish());
 
     const bonus = GREENS_BONUS_1;

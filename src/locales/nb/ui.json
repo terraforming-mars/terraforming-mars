@@ -273,7 +273,6 @@
 
 	"Select which cards to take into hand": "Velg hvilke kort å ta inn på hånd",
 
-	"Convert 6 heat into temperature": "Konverter 6 varme til temperatur",
 	"Convert 7 heat into temperature": "Konverter 7 varme til temperatur",
 	"Convert 8 heat into temperature": "Konverter 8 varme til temperatur",
 	"Convert heat": "Konverter varme",
@@ -392,7 +391,7 @@
 	"Select player delegate to remove from Kelvinists party": "Velg hvilken spillerdelegat du vil fjerne fra Kelvinistene-partiet",
 	"Send a delegate in an area (5 M€)": "Send en delegat i et område (5 M€)",
 	"Send a delegate in an area (3 M€)": "Send en delegat i et område (3 M€)",
-	"Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Betal 10 M€ for å trekke 3 kort (Omveltning - Forskerne)",
+	"Pay 10 M€ to draw 3 cards": "Betal 10 M€ for å trekke 3 kort",
 	"Select card to keep or none to discard": "Velg kort å beholde eller ingen for å kaste",
 	"Select card to add 1 floater": "Velg kort å legge til 1 svever på",
 	"Select one of your mines to upgrade": "Velg en av dine miner å oppgradere",

@@ -84,7 +84,7 @@ class MarsFirstPolicy03 extends Policy {
 
 class MarsFirstPolicy04 implements IPolicy {
   readonly id = 'mp04' as const;
-  readonly description = 'Spend 4 M€ to draw a building card (Turmoil Mars First)';
+  readonly description = 'Spend 4 M€ to draw a building card';
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

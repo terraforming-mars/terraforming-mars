@@ -11,6 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {TITLES} from '../../inputs/titles';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Units} from '../../../common/Units';
+import {message} from '../../logs/MessageBuilder';
 
 export class Kelvinists extends Party implements IParty {
   readonly name = PartyName.KELVINISTS;
@@ -48,7 +49,7 @@ class KelvinistsPolicy01 implements IPolicy {
   readonly id = 'kp01' as const;
   description(player: IPlayer | undefined): string {
     const cost = player === undefined ? 10 : this.cost(player);
-    return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
+    return `Pay ${cost} M€ to increase your energy and heat production 1 step`;
   }
 
   cost(player: IPlayer): number {
@@ -82,7 +83,7 @@ class KelvinistsPolicy02 implements IPolicy {
 // rendering it twice, TurmoilHandler.partyAction() skips kp03.
 class KelvinistsPolicy03 implements IPolicy {
   readonly id = 'kp03' as const;
-  readonly description = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
+  readonly description = 'Convert 6 heat into temperature';
 
   canAct(player: IPlayer): boolean {
     return player.availableHeat() >= 6 && player.canAfford({
@@ -93,7 +94,8 @@ class KelvinistsPolicy03 implements IPolicy {
   }
 
   action(player: IPlayer): SelectOption {
-    const option = new SelectOption('Convert 6 heat into temperature (Turmoil Kelvinists)', 'Convert heat').andThen(() => {
+    const m = message('${0} (Turmoil ${1})', (b) => b.string(this.description).partyName(PartyName.KELVINISTS));
+    const option = new SelectOption(m, 'Convert heat').andThen(() => {
       return player.spendHeat(6, () => {
         const game = player.game;
         game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.KELVINISTS));

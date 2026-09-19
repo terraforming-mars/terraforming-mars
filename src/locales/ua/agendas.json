@@ -8,7 +8,7 @@
   "When you place a tile ON MARS, gain 1 steel": "Коли ви розміщуєте тайл НА МАРСІ, отримайте 1 сталь",
   "When you play a building tag, gain 2 M€": "Коли ви граєте мітку будівництва, отримайте 2 M€",
   "Your steel resources are worth 1 M€ extra": "Ваші сталеві ресурси варто на 1 M€ більше",
-  "Spend 4 M€ to draw a building card (Turmoil Mars First)": "Витратити 4 M€, щоб витягнути карту будівлі (Турбулентність: Марс Перший)",
+  "Spend 4 M€ to draw a building card": "Витратити 4 M€, щоб витягнути карту будівлі",
 
   "Gain 1 M€ for each science tag you have": "Отримайте 1 M€ за кожну мітку науки, який у вас є",
   "Gain 1 M€ for every 3 cards in hand": "Отримайте 1 M€ за кожні 3 карти в руці",
@@ -21,8 +21,8 @@
   "Gain 1 M€ for each space tag you have": "Отримайте 1 M€ за кожну космічну мітку, який у вас є",
 
   "Your titanium resources are worth 1 M€ extra": "Ваші титанові ресурси варто на 1 M€ більше",
-  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Витратити 4 M€, щоб отримати 2 титану або додати 2 аеростати до БУДЬ-ЯКОЇ карти (Турбулентність: Єдність)",
-  "Spend 4 M€ to draw a space card (Turmoil Unity)": "Витратити 4 M€, щоб витягнути космічну карту (Турбулентність: Єдність)",
+  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card": "Витратити 4 M€, щоб отримати 2 титану або додати 2 аеростати до БУДЬ-ЯКОЇ карти",
+  "Spend 4 M€ to draw a space card": "Витратити 4 M€, щоб витягнути космічну карту",
   "Cards with space tags cost 2 M€ less to play": "Карти з космічними мітками коштують на 2 M€ менше для гри",
 
   "Gain 1 M€ for each plant, microbe and animal tag you have": "Отримайте 1 M€ за кожну мітку Рослини, Мікроба та Тварини, який у вас є",
@@ -31,7 +31,7 @@
   "When you place a greenery tile, gain 4 M€": "Коли ви розміщуєте тайл лісу, отримайте 4 M€",
   "When you place a tile, gain 1 plant": "Коли ви розміщуєте тайл, отримайте 1 рослину",
   "When you play an animal, plant or microbe tag, gain 2 M€": "Коли ви граєте мітку тварини, рослини або мікроба, отримайте 2 M€",
-  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Витратити 5 M€, щоб отримати 3 рослини або додати 2 мікробів до БУДЬ-ЯКОЇ карти (Турбулентність: Зелені)",
+  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card": "Витратити 5 M€, щоб отримати 3 рослини або додати 2 мікробів до БУДЬ-ЯКОЇ карти",
 
   "The player(s) with the lowest TR gains 1 TR": "Гравець(гравці) з найнижчим РТ отримує(отримують) 1 РТ",
   "The player(s) with the highest TR loses 1 TR": "Гравець(гравці) з найвищим РТ втрачає(втрачають) 1 РТ",
@@ -44,8 +44,8 @@
   "Gain 1 M€ for each heat production you have": "Отримайте 1 M€ за кожен пункт вашої виробництва тепла",
   "Gain 1 heat for each heat production you have": "Отримайте 1 тепло за кожен пункт вашої виробництва тепла",
 
-  "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Заплатити 10 M€, щоб збільшити ваше виробництво енергії та тепла на 1 (Турбулентність: Кельвіністи)",
+  "Pay 10 M€ to increase your energy and heat production 1 step": "Заплатити 10 M€, щоб збільшити ваше виробництво енергії та тепла на 1",
   "When you raise temperature, gain 3 M€ per step raised": "Коли ви підвищуєте температуру, отримайте 3 M€ за кожен підвищений крок",
-  "Convert 6 heat into temperature (Turmoil Kelvinists)": "Перетворити 6 тепла в температуру (Турбулентність: Кельвіністи)",
+  "Convert 6 heat into temperature": "Перетворити 6 тепла в температуру",
   "When you place a tile, gain 2 heat": "Коли ви розміщуєте тайл, отримайте 2 тепла"
 }

@@ -89,7 +89,7 @@ class GreensPolicy03 implements IPolicy {
 
 class GreensPolicy04 implements IPolicy {
   readonly id = 'gp04' as const;
-  readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
+  readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card';
 
   canAct(player: IPlayer) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

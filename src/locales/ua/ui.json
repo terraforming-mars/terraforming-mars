@@ -382,7 +382,6 @@
 
   "Select which cards to take into hand": "Виберіть, які карти взяти в руки",
 
-  "Convert 6 heat into temperature": "Перетворити 6 тепла в температуру",
   "Convert 7 heat into temperature": "Перетворити 7 тепла в температуру",
   "Convert 8 heat into temperature": "Перетворити 8 тепла в температуру",
   "Convert heat": "Перетворити тепло",
@@ -507,7 +506,7 @@
   "Select player delegate to remove from Kelvinists party": "Виберіть делегата гравця для видалення з партії Кельвіністи",
   "Send a delegate in an area (5 M€)": "Відправити делегата в область (5 M€)",
   "Send a delegate in an area (3 M€)": "Відправити делегата в область (3 M€)",
-  "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Заплатити 10 M€, щоб взяти 3 карти (Науковці - Турбулентність)",
+  "Pay 10 M€ to draw 3 cards": "Заплатити 10 M€, щоб взяти 3 карти",
   "Select card to keep or none to discard": "Виберіть карту, яку тримати, або нічого, щоб видалити",
   "Select card to add 1 floater": "Виберіть карту, щоб додати 1 аеростат",
   "Select one of your mines to upgrade": "Виберіть одну з ваших шахт для модернізації",

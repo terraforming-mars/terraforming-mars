@@ -27,7 +27,7 @@ export class Greens extends Party implements IParty {
 
 class GreensBonus01 extends Bonus {
   readonly id = 'gb01' as const;
-  readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
+  readonly description = 'Gain 1 M€ for each plant, microbe and animal tag you have';
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.PLANT, 'raw') +

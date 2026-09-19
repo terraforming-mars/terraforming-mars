@@ -28,7 +28,7 @@ describe('Unity', () => {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Ruling bonus 2: Gain 1 M€ for each Space tag you have', () => {
+  it('Ruling bonus 2: Gain 1 M€ for each space tag you have', () => {
     player.playedCards.push(new VestaShipyard());
 
     const bonus = UNITY_BONUS_2;
@@ -68,7 +68,7 @@ describe('Unity', () => {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Ruling policy 3: Spend 4 M€ to draw a Space card', () => {
+  it('Ruling policy 3: Spend 4 M€ to draw a space card', () => {
     setRulingParty(game, PartyName.UNITY, 'up03');
 
     const unityPolicy = UNITY_POLICY_3;
@@ -84,7 +84,7 @@ describe('Unity', () => {
     expect(unityPolicy.canAct(player)).to.be.false;
   });
 
-  it('Ruling policy 4: Cards with Space tags cost 2 M€ less to play', () => {
+  it('Ruling policy 4: Cards with space tags cost 2 M€ less to play', () => {
     setRulingParty(game, PartyName.UNITY, 'up04');
 
     const card = new VestaShipyard();

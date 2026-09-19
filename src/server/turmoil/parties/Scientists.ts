@@ -74,7 +74,7 @@ class ScientistsPolicy03 implements IPolicy {
 
 class ScientistsPolicy04 extends Policy {
   readonly id = 'sp04' as const;
-  readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  readonly description = 'Cards with science tag requirements may be played with 1 less science tag';
 
   override onPolicyStartForPlayer(player: IPlayer) {
     player.hasTurmoilScienceTagBonus = true;

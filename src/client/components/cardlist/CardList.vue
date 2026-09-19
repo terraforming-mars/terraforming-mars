@@ -179,6 +179,7 @@
         <div class="player_home_colony_cont">
           <div class="player_home_colony" v-for="id in visibleAgendaIds" :key="id" v-memo="[id]">
             <TurmoilAgendaContainer :agendaId="id" />
+            <TurmoilAgendaContainer :agendaId="id" :useRenderData="true" />
           </div>
         </div>
       </section>

@@ -12,6 +12,7 @@ export const CardRenderItemType = {
   MEGACREDITS: 'megacredits',
   CARDS: 'cards',
   TAG: 'tag',
+  TAG_REQUIREMENT: 'tag_requirement',
   RESOURCE: 'resource',
 
   COLONIES: 'colonies',

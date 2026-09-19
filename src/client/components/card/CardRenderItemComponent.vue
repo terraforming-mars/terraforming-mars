@@ -261,6 +261,8 @@ export default defineComponent({
         return [cardResource, this.resourceClass, this.resourceSizeClass];
       case CardRenderItemType.TAG:
         return ['card-resource-tag', this.tagClass, this.tagSizeClass];
+      case CardRenderItemType.TAG_REQUIREMENT:
+        return ['card-tag-requirement'];
       case CardRenderItemType.NEUTRAL_DELEGATE:
         return ['card-neutral-delegate'];
       case CardRenderItemType.UNDERGROUND_RESOURCES:
@@ -318,6 +320,9 @@ export default defineComponent({
         if (this.item.inParens) {
           result += ')';
         }
+      }
+      if (this.item.type === CardRenderItemType.TAG_REQUIREMENT) {
+        result = '<div class="card-resource-tag tag-' + this.item.tag + '"></div>';
       }
       if (this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';

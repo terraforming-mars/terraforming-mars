@@ -7,6 +7,8 @@ export const CardRenderSymbolType = {
   EMPTY: ' ',
   SLASH: '/',
   ARROW: '->',
+  ARROW_INFINITY: '->inf',
+  ARROW_3X: '->3x',
   BRACKET_OPEN: '(',
   BRACKET_CLOSE: ')',
   NBSP: 'nbsp',

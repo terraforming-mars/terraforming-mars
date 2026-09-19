@@ -6,8 +6,11 @@ import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
-import {Policy, IPolicy} from '../Policy';
+import {Policy} from '../Policy';
 import {TITLES} from '../../inputs/titles';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '@/server/cards/Options';
 
 export class Scientists extends Party implements IParty {
   readonly name = PartyName.SCIENTISTS as const;
@@ -16,34 +19,49 @@ export class Scientists extends Party implements IParty {
 }
 
 class ScientistsBonus01 extends Bonus {
-  readonly id = 'sb01' as const;
-  readonly description = 'Gain 1 M€ for each science tag you have';
+  constructor() {
+    super(
+      'sb01',
+      'Gain 1 M€ for each science tag you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().tag(Tag.SCIENCE)),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.SCIENCE, 'raw-pf');
   }
 
-  grantForPlayer(player: IPlayer) {
+  override grantForPlayer(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.SCIENTISTS}});
   }
 }
 
 class ScientistsBonus02 extends Bonus {
-  readonly id = 'sb02' as const;
-  readonly description = 'Gain 1 M€ for every 3 cards in hand';
+  constructor() {
+    super(
+      'sb02',
+      'Gain 1 M€ for every 3 cards in hand',
+      CardRenderer.builder((b) => b.megacredits(1).slash().cards(3, {digit})),
+    );
+  }
 
   getScore(player: IPlayer) {
     return Math.floor(player.cardsInHand.length / 3);
   }
 
-  grantForPlayer(player: IPlayer) {
+  override grantForPlayer(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.SCIENTISTS}});
   }
 }
 
-class ScientistsPolicy01 implements IPolicy {
-  readonly id = 'sp01' as const;
-  readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
+class ScientistsPolicy01 extends Policy {
+  constructor() {
+    super(
+      'sp01',
+      'Pay 10 M€ to draw 3 cards (Turmoil Scientists)',
+      CardRenderer.builder((b) => b.megacredits(10).arrow().cards(3, {digit})),
+    );
+  }
 
   canAct(player: IPlayer) {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
@@ -62,19 +80,34 @@ class ScientistsPolicy01 implements IPolicy {
   }
 }
 
-class ScientistsPolicy02 implements IPolicy {
-  readonly id = 'sp02' as const;
-  readonly description = 'Your global requirements are +/- 2 steps';
+class ScientistsPolicy02 extends Policy {
+  constructor() {
+    super(
+      'sp02',
+      'Your global requirements are +/- 2 steps',
+      CardRenderer.builder((b) => b.oxygen(1).oceans(1).temperature(1).colon().text('± 2', {size: Size.LARGE, isBold: false})),
+    );
+  }
 }
 
-class ScientistsPolicy03 implements IPolicy {
-  readonly id = 'sp03' as const;
-  readonly description = 'When you raise a global parameter, draw a card per step raised';
+class ScientistsPolicy03 extends Policy {
+  constructor() {
+    super(
+      'sp03',
+      'When you raise a global parameter, draw a card per step raised',
+      CardRenderer.builder((b) => b.oxygen(1).oceans(1).temperature(1).colon().cards(1)),
+    );
+  }
 }
 
 class ScientistsPolicy04 extends Policy {
-  readonly id = 'sp04' as const;
-  readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  constructor() {
+    super(
+      'sp04',
+      'Cards with Science tag requirements may be played with 1 less Science tag',
+      CardRenderer.builder((b) => b.tagRequirement(Tag.SCIENCE)),
+    );
+  }
 
   override onPolicyStartForPlayer(player: IPlayer) {
     player.hasTurmoilScienceTagBonus = true;

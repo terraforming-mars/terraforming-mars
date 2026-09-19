@@ -45,6 +45,12 @@ export class CardRenderSymbol implements ICardRenderSymbol {
   public static arrow(size?: Size): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ARROW, {size, isIcon: true});
   }
+  public static arrowInfinity(size?: Size): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.ARROW_INFINITY, {size, isIcon: true});
+  }
+  public static arrow3x(size?: Size): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.ARROW_3X, {size, isIcon: true});
+  }
   public static bracketOpen(): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.BRACKET_OPEN, {isSuperscript: true});
   }

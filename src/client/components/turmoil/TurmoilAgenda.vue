@@ -1,7 +1,11 @@
 <template>
   <div>
     <div @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-    <template v-if="id === 'mb01'">
+    <!-- .card-container is what all of the card item/row styling in cards_v2.less hangs off of. -->
+    <div class="card-container agenda-render-data" v-if="renderData !== undefined">
+      <CardRenderData :renderData="renderData" />
+    </div>
+    <template v-else-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
     </template>
@@ -201,16 +205,26 @@
 
 import {getAgendaOrThrow} from '@/client/turmoil/ClientAgendaManifest';
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
+import {ICardRenderRoot, isICardRenderRoot} from '@/common/cards/render/Types';
+import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'TurmoilAgenda',
+  components: {
+    CardRenderData,
+  },
   props: {
     id: {
       type: String as () => BonusId | PolicyId,
       required: true,
     },
     showPartyBadge: {
+      type: Boolean,
+      default: false,
+    },
+    /** When true, render from the agenda's renderData instead of the hand-written markup. */
+    useRenderData: {
       type: Boolean,
       default: false,
     },
@@ -237,6 +251,14 @@ export default defineComponent({
     resolvedDescription(): string {
       return getAgendaOrThrow(this.id).description;
     },
+    /** Undefined when this agenda renders as the hand-written markup in the template. */
+    renderData(): ICardRenderRoot | undefined {
+      if (this.useRenderData !== true) {
+        return undefined;
+      }
+      const renderData = getAgendaOrThrow(this.id).renderData;
+      return isICardRenderRoot(renderData) ? renderData : undefined;
+    },
   },
   methods: {
     onMouseEnter(event: MouseEvent) {
@@ -253,3 +275,56 @@ export default defineComponent({
 
 </script>
 
+<style scoped lang="less">
+.agenda-render-data {
+  // `.card-text-normal` (added by isBold: false) sets font-size: 11px alongside
+  // the weight, and being defined later at equal specificity it overrides the
+  // size class. Keep the weight, restore the size. Values mirror
+  // @font_size_normal / @font_size_big, which scoped styles can't reach.
+  :deep(.card-text-normal) {
+    line-height: normal;
+
+    &.card-text-size--M {
+      font-size: 18px;
+    }
+
+    &.card-text-size--L {
+      font-size: 23px;
+    }
+  }
+
+  // rb01/rb02's "lowest/highest TR" marker. The turmoil markup draws it with
+  // `.party-inferior-rating`; `plate()` is the nearest render item, so reshape
+  // it to match rather than invent an item type for two agendas.
+  :deep(.card-plate) {
+    // `plate()` forces isBold and `.card-plate` sets font-weight: bold; the
+    // turmoil marker is drawn with a normal weight.
+    font-weight: normal;
+    width: 30px;
+    font-size: 30px;
+    line-height: 30px;
+    border-radius: 0;
+    background: linear-gradient(orange, orangered);
+  }
+
+  // Card items are spaced for a full-size card. An agenda renders in a much
+  // smaller box, where that reads as a gap between a run of tags.
+  :deep(.card-item-container) {
+    margin-left: 0;
+    margin-right: 0;
+
+    // Tags carry side margins of their own on top of the container's, and at
+    // 30px they read as small next to the tiles. Scaled to 40px, matching a
+    // medium tile's width; the background numbers keep the base ratio.
+    > .card-resource-tag {
+      margin-left: 0;
+      margin-right: 0;
+      width: 40px;
+      height: 40px;
+      background-size: 45px 45px;
+      background-position: -3px;
+      line-height: 38px;
+    }
+  }
+}
+</style>

@@ -12,6 +12,7 @@ import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {policyDescription} from '../../../src/server/turmoil/Policy';
 
 describe('HighTempSuperconductors', () => {
   let card: HighTempSuperconductors;
@@ -84,10 +85,10 @@ describe('HighTempSuperconductors', () => {
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
     player.megaCredits = 10;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
-    expect(KELVINISTS_POLICY_1.description(player)).matches(/10 M/);
+    expect(policyDescription(KELVINISTS_POLICY_1, player)).matches(/10 M/);
 
     player.playedCards.push(card);
-    expect(KELVINISTS_POLICY_1.description(player)).matches(/7 M/);
+    expect(policyDescription(KELVINISTS_POLICY_1, player)).matches(/7 M/);
 
     player.megaCredits = 6;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;

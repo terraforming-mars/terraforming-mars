@@ -1812,6 +1812,26 @@
     background-repeat: no-repeat;
     background-position: 0px;
   }
+  .card-red-arrow-infinity {
+    background-image: url(./assets/misc/arrow_infinity.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 0px;
+  }
+  .card-red-arrow-3x {
+    background-image: url(./assets/misc/arrow_3x.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 0px;
+  }
   .card-red-arrow--small {
     background-image: url(./assets/misc/short-arrow.png);
     background-size: 15px;
@@ -1926,6 +1946,23 @@
       .card-resource-tag-base();
       background-size: 34px;
       margin-left: 2px;
+    }
+  }
+  // A tag on a 'minimum' requisite plate, e.g. Scientists Policy 4.
+  .card-tag-requirement {
+    background-image: url(./assets/requisites/min_small.png);
+    background-repeat: no-repeat;
+    background-size: 60px 30px;
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // The tag's own side margins would throw off the centring.
+    .card-resource-tag {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   .card-no-tags {

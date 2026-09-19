@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
-import {IPolicy} from '../Policy';
+import {Policy} from '../Policy';
 import {IPlayer} from '../../IPlayer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {MAX_TEMPERATURE} from '../../../common/constants';
@@ -11,6 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {TITLES} from '../../inputs/titles';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Units} from '../../../common/Units';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class Kelvinists extends Party implements IParty {
   readonly name = PartyName.KELVINISTS;
@@ -19,49 +20,64 @@ export class Kelvinists extends Party implements IParty {
 }
 
 class KelvinistsBonus01 extends Bonus {
-  readonly id = 'kb01' as const;
-  readonly description = 'Gain 1 M€ for each heat production you have';
+  constructor() {
+    super(
+      'kb01',
+      'Gain 1 M€ for each heat production you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().production((pb) => pb.heat(1))),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.production.heat;
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.KELVINISTS}});
   }
 }
 
 class KelvinistsBonus02 extends Bonus {
-  readonly id = 'kb02' as const;
-  readonly description = 'Gain 1 heat for each heat production you have';
+  constructor() {
+    super(
+      'kb02',
+      'Gain 1 heat for each heat production you have',
+      CardRenderer.builder((b) => b.heat(1).slash().production((pb) => pb.heat(1))),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.production.heat;
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.HEAT, this.getScore(player), {log: true, from: {partyName: PartyName.KELVINISTS}});
   }
 }
 
-class KelvinistsPolicy01 implements IPolicy {
-  readonly id = 'kp01' as const;
-  description(player: IPlayer | undefined): string {
-    const cost = player === undefined ? 10 : this.cost(player);
-    return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
+class KelvinistsPolicy01 extends Policy {
+  constructor() {
+    super(
+      'kp01',
+      (player) => {
+        const cost = player === undefined ? 10 : KelvinistsPolicy01.cost(player);
+        return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
+      },
+      CardRenderer.builder((b) => b.megacredits(10).arrowInfinity().production((pb) => pb.energy(1).heat(1))),
+    );
   }
 
-  cost(player: IPlayer): number {
+  static cost(player: IPlayer): number {
     return player.tableau.has(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
   }
   canAct(player: IPlayer) {
-    return player.canAfford(this.cost(player));
+    return player.canAfford(KelvinistsPolicy01.cost(player));
   }
 
   action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.KELVINISTS));
-    game.defer(new SelectPaymentDeferred(player, this.cost(player), {title: TITLES.payForPartyAction(PartyName.KELVINISTS)}))
+    game.defer(new SelectPaymentDeferred(player, KelvinistsPolicy01.cost(player), {title: TITLES.payForPartyAction(PartyName.KELVINISTS)}))
       .andThen(() => {
         player.production.add(Resource.ENERGY, 1);
         player.production.add(Resource.HEAT, 1);
@@ -72,17 +88,27 @@ class KelvinistsPolicy01 implements IPolicy {
   }
 }
 
-class KelvinistsPolicy02 implements IPolicy {
-  readonly id = 'kp02' as const;
-  readonly description = 'When you raise temperature, gain 3 M€ per step raised';
+class KelvinistsPolicy02 extends Policy {
+  constructor() {
+    super(
+      'kp02',
+      'When you raise temperature, gain 3 M€ per step raised',
+      CardRenderer.builder((b) => b.temperature(1).colon().megacredits(3)),
+    );
+  }
 }
 
 // Hack: action() returns the SelectOption that Player.getActions() drops into
 // the Convert Heat slot, instead of performing the conversion itself. To avoid
 // rendering it twice, TurmoilHandler.partyAction() skips kp03.
-class KelvinistsPolicy03 implements IPolicy {
-  readonly id = 'kp03' as const;
-  readonly description = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
+class KelvinistsPolicy03 extends Policy {
+  constructor() {
+    super(
+      'kp03',
+      'Convert 6 heat into temperature (Turmoil Kelvinists)',
+      CardRenderer.builder((b) => b.heat(6).arrowInfinity().temperature(1)),
+    );
+  }
 
   canAct(player: IPlayer): boolean {
     return player.availableHeat() >= 6 && player.canAfford({
@@ -110,9 +136,14 @@ class KelvinistsPolicy03 implements IPolicy {
   }
 }
 
-class KelvinistsPolicy04 implements IPolicy {
-  readonly id = 'kp04' as const;
-  readonly description = 'When you place a tile, gain 2 heat';
+class KelvinistsPolicy04 extends Policy {
+  constructor() {
+    super(
+      'kp04',
+      'When you place a tile, gain 2 heat',
+      CardRenderer.builder((b) => b.emptyTile().colon().heat(2)),
+    );
+  }
 
   onTilePlaced(player: IPlayer) {
     player.stock.add(Resource.HEAT, 2, {log: true, from: {partyName: PartyName.KELVINISTS}});

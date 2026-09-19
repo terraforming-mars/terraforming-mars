@@ -153,11 +153,11 @@ class AgendaProcessor {
     for (const PartyClass of Object.values(ALL_PARTIES)) {
       const party = new PartyClass();
       party.bonuses.forEach((bonus) => {
-        AgendaProcessor.json[bonus.id] = {description: bonus.description};
+        AgendaProcessor.json[bonus.id] = {description: bonus.description, renderData: bonus.renderData};
       });
       party.policies.forEach((policy) => {
         const description = typeof policy.description === 'function' ? policy.description(undefined) : policy.description;
-        AgendaProcessor.json[policy.id] = {description};
+        AgendaProcessor.json[policy.id] = {description, renderData: policy.renderData};
       });
     }
   }

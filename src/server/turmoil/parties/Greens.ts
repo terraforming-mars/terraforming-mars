@@ -4,7 +4,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
-import {IPolicy} from '../Policy';
+import {Policy} from '../Policy';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../../cards/ICard';
@@ -18,6 +18,9 @@ import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 import {TITLES} from '../../inputs/titles';
 import {message} from '../../logs/MessageBuilder';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '@/server/cards/Options';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
@@ -26,8 +29,13 @@ export class Greens extends Party implements IParty {
 }
 
 class GreensBonus01 extends Bonus {
-  readonly id = 'gb01' as const;
-  readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
+  constructor() {
+    super(
+      'gb01',
+      'Gain 1 M€ for each Plant, Microbe and Animal tag you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().tag(Tag.PLANT).tag(Tag.MICROBE).tag(Tag.ANIMAL)),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.PLANT, 'raw') +
@@ -35,14 +43,19 @@ class GreensBonus01 extends Bonus {
       player.tags.count(Tag.ANIMAL, 'raw');
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
 class GreensBonus02 extends Bonus {
-  readonly id = 'gb02' as const;
-  readonly description = 'Gain 2 M€ for each greenery tile you have';
+  constructor() {
+    super(
+      'gb02',
+      'Gain 2 M€ for each greenery tile you have',
+      CardRenderer.builder((b) => b.megacredits(2).slash().greenery()),
+    );
+  }
 
   getScore(player: IPlayer) {
     const boardSpaces = player.game.board.spaces;
@@ -50,14 +63,19 @@ class GreensBonus02 extends Bonus {
     return count * 2;
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
-class GreensPolicy01 implements IPolicy {
-  readonly id = 'gp01' as const;
-  readonly description = 'When you place a greenery tile, gain 4 M€';
+class GreensPolicy01 extends Policy {
+  constructor() {
+    super(
+      'gp01',
+      'When you place a greenery tile, gain 4 M€',
+      CardRenderer.builder((b) => b.greenery({size: Size.LARGE}).colon().megacredits(4)),
+    );
+  }
 
   onTilePlaced(player: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
@@ -66,18 +84,28 @@ class GreensPolicy01 implements IPolicy {
   }
 }
 
-class GreensPolicy02 implements IPolicy {
-  readonly id = 'gp02' as const;
-  readonly description = 'When you place a tile, gain 1 plant';
+class GreensPolicy02 extends Policy {
+  constructor() {
+    super(
+      'gp02',
+      'When you place a tile, gain 1 plant',
+      CardRenderer.builder((b) => b.emptyTile().colon().plants(1)),
+    );
+  }
 
   onTilePlaced(player: IPlayer) {
     player.stock.add(Resource.PLANTS, 1, {log: true, from: {partyName: PartyName.GREENS}});
   }
 }
 
-class GreensPolicy03 implements IPolicy {
-  readonly id = 'gp03' as const;
-  readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
+class GreensPolicy03 extends Policy {
+  constructor() {
+    super(
+      'gp03',
+      'When you play an animal, plant or microbe tag, gain 2 M€',
+      CardRenderer.builder((b) => b.tag(Tag.PLANT).tag(Tag.MICROBE).tag(Tag.ANIMAL).colon().megacredits(2)),
+    );
+  }
 
   onCardPlayed(player: IPlayer, card: ICard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
@@ -87,9 +115,14 @@ class GreensPolicy03 implements IPolicy {
   }
 }
 
-class GreensPolicy04 implements IPolicy {
-  readonly id = 'gp04' as const;
-  readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
+class GreensPolicy04 extends Policy {
+  constructor() {
+    super(
+      'gp04',
+      'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)',
+      CardRenderer.builder((b) => b.megacredits(5).arrow3x().plants(3, {digit}).slash().resource(CardResource.MICROBE, {amount: 2, digit})),
+    );
+  }
 
   canAct(player: IPlayer) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

@@ -19,6 +19,8 @@ const configs: Record<CardRenderSymbolType, {class: string, sizes?: Array<Size>}
   [CardRenderSymbolType.OR]: {class: 'card-or', sizes: [Size.SMALL, Size.TINY]},
   [CardRenderSymbolType.COLON]: {class: 'card-colon'},
   [CardRenderSymbolType.ARROW]: {class: 'card-arrow', sizes: [Size.SMALL]},
+  [CardRenderSymbolType.ARROW_INFINITY]: {class: 'card-red-arrow-infinity'},
+  [CardRenderSymbolType.ARROW_3X]: {class: 'card-red-arrow-3x'},
   [CardRenderSymbolType.NBSP]: {class: 'card-nbsp'},
   [CardRenderSymbolType.VSPACE]: {class: 'card-vspace', sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE]},
   [CardRenderSymbolType.SLASH]: {class: 'card-slash', sizes: [Size.SMALL]},

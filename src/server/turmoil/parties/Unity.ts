@@ -4,7 +4,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
-import {Policy, IPolicy} from '../Policy';
+import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
@@ -15,6 +15,8 @@ import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
 import {TITLES} from '../../inputs/titles';
 import {message} from '../../logs/MessageBuilder';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -23,35 +25,50 @@ export class Unity extends Party implements IParty {
 }
 
 class UnityBonus01 extends Bonus {
-  id = 'ub01' as const;
-  description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
+  constructor() {
+    super(
+      'ub01',
+      'Gain 1 M€ for each Venus, Earth and Jovian tag you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
+    );
+  }
 
   getScore(player: IPlayer) {
     const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
     return sum(tags.map((tag) => player.tags.count(tag, 'raw')));
   }
 
-  grantForPlayer(player: IPlayer) {
+  override grantForPlayer(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.UNITY}});
   }
 }
 
 class UnityBonus02 extends Bonus {
-  id = 'ub02' as const;
-  description = 'Gain 1 M€ for each Space tag you have';
+  constructor() {
+    super(
+      'ub02',
+      'Gain 1 M€ for each Space tag you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().tag(Tag.SPACE)),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.SPACE, 'raw');
   }
 
-  grantForPlayer(player: IPlayer) {
+  override grantForPlayer(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.UNITY}});
   }
 }
 
 class UnityPolicy01 extends Policy {
-  id = 'up01' as const;
-  description = 'Your titanium resources are worth 1 M€ extra';
+  constructor() {
+    super(
+      'up01',
+      'Your titanium resources are worth 1 M€ extra',
+      CardRenderer.builder((b) => b.titanium(1).colon().text('+').megacredits(1)),
+    );
+  }
 
   override onPolicyStartForPlayer(player: IPlayer): void {
     player.increaseTitaniumValue();
@@ -61,9 +78,14 @@ class UnityPolicy01 extends Policy {
   }
 }
 
-class UnityPolicy02 implements IPolicy {
-  id = 'up02' as const;
-  description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
+class UnityPolicy02 extends Policy {
+  constructor() {
+    super(
+      'up02',
+      'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)',
+      CardRenderer.builder((b) => b.megacredits(4).arrow3x().titanium(2, {digit}).slash().resource(CardResource.FLOATER, {amount: 2, digit})),
+    );
+  }
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -116,9 +138,14 @@ class UnityPolicy02 implements IPolicy {
   }
 }
 
-class UnityPolicy03 implements IPolicy {
-  id = 'up03' as const;
-  description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
+class UnityPolicy03 extends Policy {
+  constructor() {
+    super(
+      'up03',
+      'Spend 4 M€ to draw a Space card (Turmoil Unity)',
+      CardRenderer.builder((b) => b.megacredits(4).arrow3x().cards(1, {secondaryTag: Tag.SPACE})),
+    );
+  }
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -136,9 +163,14 @@ class UnityPolicy03 implements IPolicy {
   }
 }
 
-class UnityPolicy04 implements IPolicy {
-  id = 'up04' as const;
-  description = 'Cards with Space tags cost 2 M€ less to play';
+class UnityPolicy04 extends Policy {
+  constructor() {
+    super(
+      'up04',
+      'Cards with Space tags cost 2 M€ less to play',
+      CardRenderer.builder((b) => b.tag(Tag.SPACE).colon().megacredits(-2)),
+    );
+  }
 }
 
 export const UNITY_BONUS_1 = new UnityBonus01();

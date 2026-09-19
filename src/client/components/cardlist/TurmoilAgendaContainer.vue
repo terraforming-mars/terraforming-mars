@@ -1,6 +1,6 @@
 <template>
   <div class="container" @click="showDescription = !showDescription">
-  <TurmoilAgenda :id="agendaId" />
+  <TurmoilAgenda :id="agendaId" :useRenderData="useRenderData" />
   <div class="line1">{{ agendaId }}</div>
   <div class="line2">
     {{ $t(agenda.name) }} {{ $t(agenda.type) }} {{ agenda.num }}
@@ -20,6 +20,10 @@ const props = defineProps({
   agendaId: {
     type: String as () => BonusId | PolicyId,
     required: true,
+  },
+  useRenderData: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -50,6 +54,11 @@ const description = computed<string>(() => getAgendaOrThrow(props.agendaId).desc
   > div:first-child {
     text-align: center;
     height: 50px;
+    // Spectre sets `html {box-sizing: border-box}` with `* {box-sizing: inherit}`,
+    // so box-sizing effectively cascades. The turmoil markup sizes its padded
+    // tiles for content-box, which it gets on the board from `.turmoil`; without
+    // it here, rb01/rb02's rating tiles collapse from 30x16 to 20x6.
+    box-sizing: content-box;
   }
 
   .line1, .line2 {
@@ -58,6 +67,7 @@ const description = computed<string>(() => getAgendaOrThrow(props.agendaId).desc
   }
 
   .description {
+    color: white;
     margin-top: 6px;
     text-align: center;
     font-size: 12px;

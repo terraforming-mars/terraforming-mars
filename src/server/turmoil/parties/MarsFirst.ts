@@ -7,12 +7,14 @@ import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {Policy, IPolicy} from '../Policy';
+import {Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {ICard} from '../../cards/ICard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {TITLES} from '../../inputs/titles';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class MarsFirst extends Party implements IParty {
   readonly name = PartyName.MARS;
@@ -21,35 +23,50 @@ export class MarsFirst extends Party implements IParty {
 }
 
 class MarsFirstBonus01 extends Bonus {
-  readonly id = 'mb01' as const;
-  readonly description = 'Gain 1 M€ for each building tag you have';
+  constructor() {
+    super(
+      'mb01',
+      'Gain 1 M€ for each building tag you have',
+      CardRenderer.builder((b) => b.megacredits(1).slash().tag(Tag.BUILDING)),
+    );
+  }
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.BUILDING, 'raw');
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
   }
 }
 
 class MarsFirstBonus02 extends Bonus {
-  readonly id = 'mb02' as const;
-  readonly description = 'Gain 1 M€ for each tile you have ON MARS';
+  constructor() {
+    super(
+      'mb02',
+      'Gain 1 M€ for each tile you have ON MARS',
+      CardRenderer.builder((b) => b.megacredits(1).slash().emptyTile().text('ON MARS', {size: Size.LARGE, isBold: false})),
+    );
+  }
 
   getScore(player: IPlayer) {
     const boardSpaces = player.game.board.spaces;
     return boardSpaces.filter((space) => space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY).length;
   }
 
-  grantForPlayer(player: IPlayer): void {
+  override grantForPlayer(player: IPlayer): void {
     player.stock.add(Resource.MEGACREDITS, this.getScore(player), {log: true, from: {partyName: PartyName.MARS}});
   }
 }
 
-class MarsFirstPolicy01 implements IPolicy {
-  readonly id = 'mp01' as const;
-  readonly description = 'When you place a tile ON MARS, gain 1 steel';
+class MarsFirstPolicy01 extends Policy {
+  constructor() {
+    super(
+      'mp01',
+      'When you place a tile ON MARS, gain 1 steel',
+      CardRenderer.builder((b) => b.emptyTile().colon().steel(1)),
+    );
+  }
 
   onTilePlaced(player: IPlayer, space: Space) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
@@ -58,9 +75,14 @@ class MarsFirstPolicy01 implements IPolicy {
   }
 }
 
-class MarsFirstPolicy02 implements IPolicy {
-  readonly id = 'mp02' as const;
-  readonly description = 'When you play a building tag, gain 2 M€';
+class MarsFirstPolicy02 extends Policy {
+  constructor() {
+    super(
+      'mp02',
+      'When you play a building tag, gain 2 M€',
+      CardRenderer.builder((b) => b.tag(Tag.BUILDING).colon().megacredits(2)),
+    );
+  }
 
   onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.BUILDING)) {
@@ -70,8 +92,13 @@ class MarsFirstPolicy02 implements IPolicy {
 }
 
 class MarsFirstPolicy03 extends Policy {
-  readonly id = 'mp03' as const;
-  readonly description = 'Your steel resources are worth 1 M€ extra';
+  constructor() {
+    super(
+      'mp03',
+      'Your steel resources are worth 1 M€ extra',
+      CardRenderer.builder((b) => b.steel(1).colon().text('+').megacredits(1)),
+    );
+  }
 
   override onPolicyStartForPlayer(player: IPlayer): void {
     player.increaseSteelValue();
@@ -82,9 +109,14 @@ class MarsFirstPolicy03 extends Policy {
   }
 }
 
-class MarsFirstPolicy04 implements IPolicy {
-  readonly id = 'mp04' as const;
-  readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
+class MarsFirstPolicy04 extends Policy {
+  constructor() {
+    super(
+      'mp04',
+      'Spend 4 M€ to draw a Building card (Turmoil Mars First)',
+      CardRenderer.builder((b) => b.megacredits(4).arrow3x().cards(1, {secondaryTag: Tag.BUILDING})),
+    );
+  }
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

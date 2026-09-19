@@ -2,8 +2,8 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {IBonus} from '../Bonus';
-import {IPolicy} from '../Policy';
+import {Bonus} from '../Bonus';
+import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,6 +14,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {TITLES} from '../../inputs/titles';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
@@ -21,15 +23,20 @@ export class Reds extends Party implements IParty {
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-class RedsBonus01 implements IBonus {
-  readonly id = 'rb01' as const;
-  readonly description = 'The player(s) with the lowest TR gains 1 TR';
+class RedsBonus01 extends Bonus {
+  constructor() {
+    super(
+      'rb01',
+      'The player(s) with the lowest TR gains 1 TR',
+      CardRenderer.builder((b) => b.plate('<').colon().tr(1)),
+    );
+  }
 
   getScore(player: IPlayer): number {
     return player.terraformRating;
   }
 
-  grant(game: IGame) {
+  override grant(game: IGame) {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating <= 20) {
@@ -46,15 +53,20 @@ class RedsBonus01 implements IBonus {
   }
 }
 
-class RedsBonus02 implements IBonus {
-  readonly id = 'rb02' as const;
-  readonly description = 'The player(s) with the highest TR loses 1 TR';
+class RedsBonus02 extends Bonus {
+  constructor() {
+    super(
+      'rb02',
+      'The player(s) with the highest TR loses 1 TR',
+      CardRenderer.builder((b) => b.plate('>').colon().text('-').tr(1)),
+    );
+  }
 
   getScore(player: IPlayer): number {
     return player.terraformRating;
   }
 
-  grant(game: IGame) {
+  override grant(game: IGame) {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating > 20) {
@@ -71,14 +83,24 @@ class RedsBonus02 implements IBonus {
   }
 }
 
-class RedsPolicy01 implements IPolicy {
-  readonly id = 'rp01' as const;
-  readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
+class RedsPolicy01 extends Policy {
+  constructor() {
+    super(
+      'rp01',
+      'When you take an action that raises TR, you MUST pay 3 M€ per step raised',
+      CardRenderer.builder((b) => b.tr(1).colon().megacredits(-3)),
+    );
+  }
 }
 
-class RedsPolicy02 implements IPolicy {
-  readonly id = 'rp02' as const;
-  readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
+class RedsPolicy02 extends Policy {
+  constructor() {
+    super(
+      'rp02',
+      'When you place a tile, pay 3 M€ or as much as possible',
+      CardRenderer.builder((b) => b.emptyTile('normal', {size: Size.SMALL}).colon().megacredits(-3)),
+    );
+  }
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
@@ -93,9 +115,14 @@ class RedsPolicy02 implements IPolicy {
   }
 }
 
-class RedsPolicy03 implements IPolicy {
-  readonly id = 'rp03' as const;
-  readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+class RedsPolicy03 extends Policy {
+  constructor() {
+    super(
+      'rp03',
+      'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)',
+      CardRenderer.builder((b) => b.megacredits(4).arrow3x().text('🡇').oxygen(1).slash().oceans(1).slash().temperature(1)),
+    );
+  }
 
   private canDecrease(game: IGame, parameter: GlobalParameter) {
     switch (parameter) {
@@ -235,9 +262,14 @@ class RedsPolicy03 implements IPolicy {
   }
 }
 
-class RedsPolicy04 implements IPolicy {
-  readonly id = 'rp04' as const;
-  readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
+class RedsPolicy04 extends Policy {
+  constructor() {
+    super(
+      'rp04',
+      'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible',
+      CardRenderer.builder((b) => b.oxygen(1).oceans(1).temperature(1).colon().production((pb) => pb.megacredits(-1))),
+    );
+  }
 }
 
 export const REDS_BONUS_1 = new RedsBonus01();

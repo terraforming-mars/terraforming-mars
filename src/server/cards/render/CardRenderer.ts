@@ -315,6 +315,12 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TAG, opts.amount, opts));
   }
 
+  /** A tag sitting on a requisite plate: a requirement expressed in tags. */
+  public tagRequirement(tag: Tag, options?: ItemOptions) {
+    const opts: ItemOptions = {...options, tag};
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TAG_REQUIREMENT, opts.amount, opts));
+  }
+
   public resource(resource: CardResource, options?: number | ItemOptions) {
     let opts: ItemOptions;
     if (typeof(options) === 'number') {
@@ -535,6 +541,16 @@ abstract class Builder<T> {
 
   public arrow(size: Size = Size.MEDIUM): this {
     return this._appendToRow(CardRenderSymbol.arrow(size));
+  }
+
+  /** An arrow marked with an infinity sign: an action with no limit on how often it is used. */
+  public arrowInfinity(size: Size = Size.MEDIUM): this {
+    return this._appendToRow(CardRenderSymbol.arrowInfinity(size));
+  }
+
+  /** An arrow marked 3x: an action used at most three times a generation. */
+  public arrow3x(size: Size = Size.MEDIUM): this {
+    return this._appendToRow(CardRenderSymbol.arrow3x(size));
   }
 
   public equals(size: Size = Size.MEDIUM): this {

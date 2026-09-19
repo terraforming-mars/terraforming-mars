@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {RedTourismWave} from '../turmoil/RedTourismWave';
 
 export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {
@@ -32,7 +31,7 @@ export class HermeticOrderOfMars extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const spaces = RedTourismWave.getAdjacentEmptySpacesCount(player);
+    const spaces = player.game.board.getAdjacentEmptySpacesCount(player);
 
     player.stock.add(Resource.MEGACREDITS, spaces, {log: true});
     return undefined;

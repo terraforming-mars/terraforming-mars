@@ -277,6 +277,28 @@ export abstract class Board {
     return spaces[idx];
   }
 
+  /**
+   * Return the number of empty areas adjacent to `player`'s tiles.
+   *
+   * An area is empty when nothing real stands on it: a hazard tile counts as empty.
+   */
+  public getAdjacentEmptySpacesCount(player: IPlayer): number {
+    return this.spaces.filter((space) => {
+      if (space.spaceType === SpaceType.COLONY) {
+        return false;
+      }
+      if (space.spaceType === SpaceType.RESTRICTED) {
+        return false;
+      }
+      if (Board.hasRealTile(space)) {
+        return false;
+      }
+      return this.getAdjacentSpaces(space).some((adj) => {
+        return Board.hasRealTile(adj) && adj.player === player;
+      });
+    }).length;
+  }
+
   public canPlaceTile(space: Space): boolean {
     return space.spaceType === SpaceType.LAND &&
       space.tile === undefined &&

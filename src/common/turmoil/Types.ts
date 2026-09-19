@@ -44,14 +44,14 @@ const names: Record<Party, PartyName> = {
 } as const;
 
 export type AgendaInfo = {
-  name: string;
-  type: string;
+  name: PartyName;
+  type: 'Bonus' | 'Policy';
   num: string;
 };
 
 export function agendaInfoById(id: BonusId | PolicyId): AgendaInfo {
   const p = id[0] as Party;
-  const type = id[1] === 'b' ? 'Bonus' : 'Policy';
+  const type: 'Bonus' | 'Policy' = id[1] === 'b' ? 'Bonus' : 'Policy';
   const num = id.substring(2);
   const name = names[p];
   return {name, type, num};

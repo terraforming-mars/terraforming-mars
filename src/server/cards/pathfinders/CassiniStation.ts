@@ -44,7 +44,7 @@ export class CassiniStation extends Card implements IProjectCard {
       return undefined;
     }
     const input = new SelectCard(
-      'Select card to gain 2 floaters or 3 data',
+      'Select card to add 2 floaters or 3 data',
       'Add resources',
       cards)
       .andThen(([card]) => {

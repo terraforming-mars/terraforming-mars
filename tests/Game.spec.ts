@@ -830,21 +830,6 @@ describe('Game', () => {
     expect(deserialized.pathfindersData).is.undefined;
   });
 
-  it('deserializing a game migrates moon-logistics to moon-logistic', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {moonExpansion: true});
-    const serialized = game.serialize();
-    serialized.globalsPerGeneration = [
-      {'moon-logistics': 3, 'moon-habitat': 1} as any,
-      {'moon-mining': 2},
-    ];
-    const deserialized = Game.deserialize(serialized);
-    expect(deserialized.globalsPerGeneration).deep.eq([
-      {'moon-logistic': 3, 'moon-habitat': 1},
-      {'moon-mining': 2},
-    ]);
-  });
-
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: false});

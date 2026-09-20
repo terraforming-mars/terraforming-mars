@@ -13,6 +13,7 @@ import {max} from '../Options';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
 import {TITLES} from '../../inputs/titles';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
 
 export class SearchforLifeUnderground extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -51,6 +52,8 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
     return player.canAfford(1) && player.game.underworldData.tokens.length > 0;
   }
 
+  private static MICROBE_TOKENS: UndergroundResourceToken[] = ['microbe2', 'microbe1pertemp', 'microbe2pertemp'];
+
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
@@ -66,7 +69,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
             }
 
             player.game.log('${0} revealed ${1}', (b) => b.player(player).undergroundToken(undergroundResources));
-            if (['microbe1', 'microbe2', 'microbe1pertemp'].includes(undergroundResources)) {
+            if (SearchforLifeUnderground.MICROBE_TOKENS.includes(undergroundResources)) {
               player.addResourceTo(this, 1);
               player.game.log('${0} found life!', (b) => b.player(player));
             }

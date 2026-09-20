@@ -31,8 +31,8 @@ export class CommunicationCenter extends Card implements IProjectCard {
         cardNumber: 'Pf28',
         renderData: CardRenderer.builder((b) => {
           b.tag(Tag.EVENT, {all}).colon().resource(CardResource.DATA).nbsp.resource(CardResource.DATA, {amount: 3, digit}).colon().cards(1).br;
-          b.text('(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)', Size.TINY, false, false).br;
-          b.text('(Effect: Remove 3 data to draw a card automatically.)', Size.TINY, false, false).br;
+          b.text('(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)', {size: Size.TINY, isBold: false}).br;
+          b.text('(Effect: Remove 3 data to draw a card automatically.)', {size: Size.TINY, isBold: false}).br;
           b.minus().production((pb) => pb.energy(1)).resource(CardResource.DATA, 2);
         }),
         description: 'Decrease your energy production 1 step. Place 2 data on this card.',

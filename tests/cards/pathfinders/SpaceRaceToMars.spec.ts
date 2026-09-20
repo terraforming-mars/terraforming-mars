@@ -27,7 +27,7 @@ describe('SpaceRaceToMars', () => {
   it('Simple resolve', () => {
     game.simpleAddTile(player, spaces[0], {tileType: TileType.COMMERCIAL_DISTRICT});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(1);
     expect(player2.production.megacredits).eq(0);
@@ -37,7 +37,7 @@ describe('SpaceRaceToMars', () => {
     // Cities won't doesn't change this card's reward.
     game.simpleAddTile(player, spaces[1], {tileType: TileType.CITY});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
@@ -47,7 +47,7 @@ describe('SpaceRaceToMars', () => {
     // Ocean City is supposed to be on an ocean but that doesn't matter for this test.
     game.simpleAddTile(player, spaces[2], {tileType: TileType.OCEAN_CITY});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(1);
     expect(player2.production.megacredits).eq(0);
@@ -57,7 +57,7 @@ describe('SpaceRaceToMars', () => {
     // Greenery won't doesn't change this card's reward.
     game.simpleAddTile(player, spaces[3], {tileType: TileType.GREENERY});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
@@ -67,7 +67,7 @@ describe('SpaceRaceToMars', () => {
     // Greenery won't doesn't change this card's reward.
     game.simpleAddTile(player, spaces[3], {tileType: TileType.EROSION_SEVERE});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
@@ -76,7 +76,7 @@ describe('SpaceRaceToMars', () => {
   it('Other players special tile', () => {
     game.simpleAddTile(player2, spaces[3], {tileType: TileType.LAVA_FLOWS});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(1);
@@ -88,7 +88,7 @@ describe('SpaceRaceToMars', () => {
     const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
     MoonExpansion.addRoadTile(player, space.id);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
@@ -100,7 +100,7 @@ describe('SpaceRaceToMars', () => {
     const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
     MoonExpansion.addTile(player, space.id, {tileType: TileType.LUNA_TRADE_STATION});
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.production.megacredits).eq(1);
     expect(player2.production.megacredits).eq(0);
@@ -114,7 +114,7 @@ describe('SpaceRaceToMars', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.energy).eq(1);
     expect(player2.energy).eq(3);

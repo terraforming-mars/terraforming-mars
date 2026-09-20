@@ -1,16 +1,13 @@
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectCardDeferred} from '../../deferredActions/SelectCardDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {LogHelper} from '../../LogHelper';
 
-export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
+export class BioengineeringEnclosure extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -22,6 +19,16 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
 
       behavior: {
         addResources: 2,
+      },
+
+      action: {
+        spend: {resourcesHere: 1},
+        addResourcesToAnyCard: {
+          count: 1,
+          type: CardResource.ANIMAL,
+          excludeThis: true,
+          mustHaveCard: true,
+        },
       },
 
       requirements: {tag: Tag.SCIENCE},
@@ -36,31 +43,5 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         }),
       },
     });
-  }
-
-  private availableCards(player: IPlayer) {
-    return player.getResourceCards(this.resourceType).filter((card) => card.name !== this.name);
-  }
-
-  public canAct(player: IPlayer): boolean {
-    return this.resourceCount > 0 && this.availableCards(player).length > 0;
-  }
-
-  public action(player: IPlayer) {
-    player.game.defer(
-      new SelectCardDeferred(
-        player,
-        this.availableCards(player),
-        {
-          title: 'Select card to add 1 animal',
-          buttonLabel: 'Add animal',
-        },
-      ))
-      .andThen((card) => {
-        this.resourceCount--;
-        player.addResourceTo(card, 1);
-        LogHelper.logMoveResource(player, CardResource.ANIMAL, this, card);
-      });
-    return undefined;
   }
 }

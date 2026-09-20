@@ -156,4 +156,33 @@ describe('RedCity', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.spaces).does.not.contain(oceanSpace);
   });
+
+  it('A restricted area is not an empty area', () => {
+    const redCitySpace = board.getSpaceOrThrow('53');
+    player.production.override({energy: 1});
+    card.play(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace).cb(redCitySpace);
+
+    expect(card.getVictoryPoints(player)).eq(4);
+
+    board.getAdjacentSpaces(redCitySpace)[0].spaceType = SpaceType.RESTRICTED;
+
+    expect(card.getVictoryPoints(player)).eq(3);
+  });
+
+  it('A neutral cube is an empty area', () => {
+    const redCitySpace = board.getSpaceOrThrow('53');
+    player.production.override({energy: 1});
+    card.play(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace).cb(redCitySpace);
+
+    expect(card.getVictoryPoints(player)).eq(4);
+
+    // A cube reserves a space, but nothing is built there.
+    board.getAdjacentSpaces(redCitySpace)[0].cube = 'martian-nature-wonders';
+
+    expect(card.getVictoryPoints(player)).eq(4);
+  });
 });

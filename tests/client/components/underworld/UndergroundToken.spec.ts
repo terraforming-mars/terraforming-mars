@@ -8,7 +8,11 @@ describe('UndergroundToken', () => {
     const wrapper = shallowMount(UndergroundToken, {
       ...globalConfig,
       props: {
-        token: {token: 'data1', spaceId: '01'},
+        token: {
+          token: 'data1pertemp',
+          shelter: false,
+          active: false,
+        },
         location: 'player-home',
       },
     });

@@ -32,7 +32,7 @@ export class WorldGovernmentAdvisor extends PreludeCard implements IActionCard {
   public canAct(player: IPlayer) {
     const orOptions = player.game.worldGovernmentTerraformingInput(player);
     if (orOptions.options.length === 0) {
-      this.warnings.add('marsIsTerraformed');
+      this.addWarning('marsIsTerraformed');
     }
     return true;
   }

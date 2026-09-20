@@ -10,6 +10,7 @@ import {Resource} from '../../../common/Resource';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {Priority} from '../../deferredActions/Priority';
 
 export class Flooding extends Card implements IProjectCard {
   constructor() {
@@ -49,7 +50,7 @@ export class Flooding extends Card implements IProjectCard {
       });
 
       if (adjacentPlayers.size > 0) {
-        return new OrOptions(
+        player.defer(new OrOptions(
           new SelectPlayer(
             Array.from(adjacentPlayers),
             'Select adjacent player to remove 4 M€ from',
@@ -58,7 +59,8 @@ export class Flooding extends Card implements IProjectCard {
             target.attack(player, Resource.MEGACREDITS, 4, {log: true});
             return undefined;
           }),
-          new SelectOption('Don\'t remove M€ from adjacent player'));
+          new SelectOption('Don\'t remove M€ from adjacent player')),
+        Priority.BEFORE_OPPONENT_TRIGGER);
       }
       return undefined;
     });

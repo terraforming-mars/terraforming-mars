@@ -1,14 +1,20 @@
 import {ParticipantId} from '../../common/Types';
 
-export interface IPTracker {
-  addParticipant(participantId: ParticipantId, ip: string): void;
-  add(ip: string): void;
-  toJSON(): any;
+export type IpStats = {
+  count: number,
+  ids: Array<ParticipantId>,
 }
 
+// Internal representation of IPStats, which stores participant ids as a set.
 type Value = {
   count: number,
   participantIds: Set<ParticipantId>;
+}
+
+export interface IPTracker {
+  addParticipant(participantId: ParticipantId, ip: string): void;
+  add(ip: string): void;
+  toJSON(): Record<string, IpStats>;
 }
 
 class IPTrackerImpl implements IPTracker {
@@ -34,8 +40,8 @@ class IPTrackerImpl implements IPTracker {
     this.map.set(ip, value);
   }
 
-  public toJSON(): any {
-    const json: any = {};
+  public toJSON(): Record<string, IpStats> {
+    const json: Record<string, IpStats> = {};
     this.map.forEach((v, k) => {
       json[k] = {
         count: v.count,

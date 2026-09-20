@@ -31,11 +31,11 @@ export class MindSetMars extends CorporationCard implements ICorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(44).resource(CardResource.AGENDA).nbsp.tag(Tag.BUILDING).asterix().colon(Size.SMALL).resource(CardResource.AGENDA).br;
-          b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
+          b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', {size: Size.SMALL, isBold: false}).br;
           b.resource(CardResource.AGENDA, {amount: 2, digit}).arrow(Size.SMALL).delegates(1).nbsp;
           b.resource(CardResource.AGENDA, {amount: 5, digit}).arrow(Size.SMALL).city().br;
-          b.text('(Action: Spend 2 agenda resources to place 1 delegate in any party.)', Size.SMALL, false, false).br;
-          b.text('(Action: Spend 5 agenda resources to place a city tile on Mars.)', Size.SMALL, false, false);
+          b.text('(Action: Spend 2 agenda resources to place 1 delegate in any party.)', {size: Size.SMALL, isBold: false}).br;
+          b.text('(Action: Spend 5 agenda resources to place a city tile on Mars.)', {size: Size.SMALL, isBold: false});
         }),
       },
     });

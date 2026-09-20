@@ -3,6 +3,7 @@ import {MiningMarketInsider} from '../../../src/server/cards/underworld/MiningMa
 import {testGame} from '../../TestGame';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 import {IPlayer} from '../../../src/server/IPlayer';
+import {simulateFinishingAction} from '../../TestingUtils';
 
 describe('MiningMarketInsider', () => {
   it('effect', () => {
@@ -13,10 +14,6 @@ describe('MiningMarketInsider', () => {
 
     function identify(player: IPlayer) {
       UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(player)[0], player);
-    }
-    function simulateFinishingAction(player: IPlayer) {
-      player.actionsTakenThisGame++;
-      player.actionsTakenThisRound++;
     }
 
     identify(player);

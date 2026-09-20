@@ -25,14 +25,11 @@ export class AICentral extends ActionCard implements IProjectCard {
 
       requirements: {tag: Tag.SCIENCE, count: 3},
       metadata: {
-        description: {
-          text: 'Requires 3 science tags to play. Decrease your energy production 1 step.',
-          align: 'left',
-        },
         cardNumber: '208',
         renderData: CardRenderer.builder((b) => {
           b.action('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
-          b.production((pb) => pb.minus().energy(1));
+          b.production((pb) => pb.minus().energy(1))
+            .plainText('Requires 3 science tags to play. Decrease your energy production 1 step.', /* parens= */ true);
         }),
       },
     });

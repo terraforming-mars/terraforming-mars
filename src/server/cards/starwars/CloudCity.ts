@@ -22,7 +22,7 @@ export class CloudCity extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'SW05',
-        renderData: CardRenderer.builder((b) => b.venus(1).resource(CardResource.FLOATER, 2)),
+        renderData: CardRenderer.builder((b) => b.venus(1).resource(CardResource.FLOATER, 2).asterix()),
         description: 'Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.',
       },
     });

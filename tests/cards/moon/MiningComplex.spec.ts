@@ -9,6 +9,7 @@ import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast} from '../../../src/common/utils/utils';
 
 describe('MiningComplex', () => {
@@ -29,6 +30,20 @@ describe('MiningComplex', () => {
 
     player.megaCredits = 7;
     expect(card.canPlay(player)).is.true;
+  });
+
+  it('cannot play when no mine has an adjacent road space', () => {
+    player.megaCredits = 7;
+    expect(card.canPlay(player)).is.true;
+
+    // Occupy every land space so no road tile can be placed next to any mine.
+    for (const space of moonData.moon.spaces) {
+      if (space.spaceType === SpaceType.LAND && space.tile === undefined) {
+        MoonExpansion.addRoadTile(player, space.id);
+      }
+    }
+
+    expect(card.canPlay(player)).is.false;
   });
 
   it('play', () => {

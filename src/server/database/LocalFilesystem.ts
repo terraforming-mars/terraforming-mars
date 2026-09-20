@@ -232,6 +232,29 @@ export class LocalFilesystem implements IDatabase {
     unlinkSync(this.sessionFilename(sessionId));
     return Promise.resolve();
   }
+  async deleteExpiredSessions(): Promise<number> {
+    let deleted = 0;
+    const now = Date.now();
+    for (const dirent of readdirSync(this.sessionsFolder, {withFileTypes: true})) {
+      if (!dirent.isFile() || !dirent.name.endsWith('.json')) {
+        continue;
+      }
+      const filename = path.resolve(this.sessionsFolder, dirent.name);
+      try {
+        const session: Session = JSON.parse(readFileSync(filename).toString());
+        if (session.expirationTimeMillis <= now) {
+          await this.deleteSession(session.id);
+          deleted++;
+        }
+      } catch (e) {
+        // A corrupt session file can never be pruned, so it has to be skipped rather than
+        // allowed to abort the sweep over every other file.
+        console.error(`While pruning ${dirent.name} `, e);
+      }
+    }
+    return deleted;
+  }
+
   getSessions(): Promise<Array<Session>> {
     const sessions: Array<Session> = [];
     const now = Date.now();

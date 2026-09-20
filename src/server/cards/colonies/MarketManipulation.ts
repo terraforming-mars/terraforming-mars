@@ -23,9 +23,7 @@ export class MarketManipulation extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text(
             'Increase one colony tile track 1 step. Decrease another colony tile track 1 step.',
-            Size.SMALL,
-            true,
-          );
+            {size: Size.SMALL, uppercase: true});
         }),
       },
     });

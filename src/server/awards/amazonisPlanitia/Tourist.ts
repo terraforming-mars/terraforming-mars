@@ -1,4 +1,3 @@
-import {RedTourismWave} from '../../cards/turmoil/RedTourismWave';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -9,7 +8,7 @@ export class Tourist implements IAward {
   public readonly description = 'Have the most empty spaces adjacent to your tiles';
 
   public getScore(player: IPlayer): number {
-    const spacesOnMars = RedTourismWave.getAdjacentEmptySpacesCount(player);
+    const spacesOnMars = player.game.board.getAdjacentEmptySpacesCount(player);
     if (!player.game.moonData) {
       return spacesOnMars;
     }

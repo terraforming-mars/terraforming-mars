@@ -10,6 +10,7 @@ import {Units} from '../../common/Units';
 import {hazardSeverity} from '../../common/AresTileType';
 import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
+import {LEGACY_CUBE_TILES} from '@/common/boards/SpaceCube';
 
 /**
  * The bonus costs to place a tile on a space. For instance, spending 6MC to place an ocean,
@@ -233,6 +234,10 @@ export abstract class Board {
         return false;
       }
 
+      if (space.cube !== undefined) {
+        return false;
+      }
+
       const playableSpace = space.tile === undefined || (AresHandler.hasHazardTile(space) && space.tile?.protectedHazard !== true);
 
       if (!playableSpace) {
@@ -272,8 +277,33 @@ export abstract class Board {
     return spaces[idx];
   }
 
+  /**
+   * Return the number of empty areas adjacent to `player`'s tiles.
+   *
+   * An area is empty when nothing real stands on it: a hazard tile counts as empty.
+   */
+  public getAdjacentEmptySpacesCount(player: IPlayer): number {
+    return this.spaces.filter((space) => {
+      if (space.spaceType === SpaceType.COLONY) {
+        return false;
+      }
+      if (space.spaceType === SpaceType.RESTRICTED) {
+        return false;
+      }
+      if (Board.hasRealTile(space)) {
+        return false;
+      }
+      return this.getAdjacentSpaces(space).some((adj) => {
+        return Board.hasRealTile(adj) && adj.player === player;
+      });
+    }).length;
+  }
+
   public canPlaceTile(space: Space): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.id !== this.noctisCitySpaceId;
+    return space.spaceType === SpaceType.LAND &&
+      space.tile === undefined &&
+      space.id !== this.noctisCitySpaceId &&
+      space.cube === undefined;
   }
 
   public static isCitySpace(space: Space): boolean {
@@ -332,6 +362,9 @@ export abstract class Board {
           x: space.x,
           y: space.y,
         };
+        if (space.cube !== undefined) {
+          serialized.cube = space.cube;
+        }
         if (space.undergroundResources !== undefined) {
           serialized.undergroundResources = space.undergroundResources;
         }
@@ -365,8 +398,16 @@ export abstract class Board {
       y: serialized.y,
     };
 
+    if (serialized.cube !== undefined) {
+      space.cube = serialized.cube;
+    }
     if (serialized.tile !== undefined) {
-      space.tile = serialized.tile;
+      const legacyCube = LEGACY_CUBE_TILES.get(serialized.tile.tileType);
+      if (legacyCube) {
+        space.cube = legacyCube;
+      } else {
+        space.tile = serialized.tile;
+      }
     }
     if (player !== undefined) {
       space.player = player;
@@ -407,7 +448,8 @@ export function isSpecialTile(tileType: TileType | undefined): boolean {
   case TileType.EROSION_SEVERE:
   case TileType.DUST_STORM_MILD:
   case TileType.DUST_STORM_SEVERE:
-  case TileType.REY_SKYWALKER:
+  case TileType._DEPRECATED_REY_SKYWALKER:
+  case TileType._DEPRECATED_MARTIAN_NATURE_WONDERS:
   case undefined:
     return false;
   default:

@@ -9,9 +9,8 @@ import {intersection} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';
 import {AresHandler} from '../../ares/AresHandler';
 import {BoardType} from '../../boards/BoardType';
+import {MarsBoard} from '../../boards/MarsBoard';
 import {Space} from '../../boards/Space';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import * as constants from '../../../common/constants';
 export class MarsNomads extends Card implements IActionCard {
   /*
    * A good page about this card: https://boardgamegeek.com/thread/3154812.
@@ -64,23 +63,7 @@ export class MarsNomads extends Card implements IActionCard {
     if (AresHandler.hasHazardTile(space)) {
       return true;
     }
-    const game = player.game;
-    if (space.bonus.includes(SpaceBonus.OCEAN) && game.canAddOcean()) {
-      if (!player.canAfford({cost: constants.HELLAS_BONUS_OCEAN_COST})) {
-        return false;
-      }
-    }
-    if (space.bonus.includes(SpaceBonus.TEMPERATURE) && game.getTemperature() < constants.MAX_TEMPERATURE) {
-      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST})) {
-        return false;
-      }
-    }
-    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC) && game.getTemperature() < constants.MAX_TEMPERATURE) {
-      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST})) {
-        return false;
-      }
-    }
-    return true;
+    return MarsBoard.canAffordPlacementBonuses(player, space);
   }
 
   private eliglbleDestinationSpaces(player: IPlayer) {

@@ -88,7 +88,7 @@ const DEFAULT_GLOBAL_PARAMETER_STEPS = {
   [GlobalParameter.VENUS]: 0,
   [GlobalParameter.MOON_HABITAT_RATE]: 0,
   [GlobalParameter.MOON_MINING_RATE]: 0,
-  [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
+  [GlobalParameter.MOON_LOGISTIC_RATE]: 0,
 } as const;
 
 export class Player implements IPlayer {
@@ -164,6 +164,7 @@ export class Player implements IPlayer {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
   public preservationProgram = false;
+  public trThisGeneration = 0;
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
   public deltaProjectData?: DeltaProjectPlayerModel;
   public standardProjectsThisGeneration: Set<CardName> = new Set();
@@ -171,8 +172,6 @@ export class Player implements IPlayer {
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
-  //
-  // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
   public withinDeflectionZone = false;
@@ -322,7 +321,12 @@ export class Player implements IPlayer {
   }
 
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean, from?: From} = {}) {
-    if (this.preservationProgram === true && this.game.phase === Phase.ACTION) {
+    const inActionPhase = this.game.phase === Phase.ACTION;
+    const isFirstTrThisGeneration = this.trThisGeneration === 0;
+    if (inActionPhase) {
+      this.trThisGeneration += steps;
+    }
+    if (this.preservationProgram === true && inActionPhase && isFirstTrThisGeneration) {
       steps--;
       this.game.log('${0} for ${1} is blocking 1 TR', (b) => b.cardName(CardName.PRESERVATION_PROGRAM).player(this));
       this.preservationProgram = false;
@@ -419,7 +423,9 @@ export class Player implements IPlayer {
   }
 
   public maybeBlockAttack(perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void {
-    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, msg, cb));
+    this.defer(
+      UnderworldExpansion.maybeBlockAttack(this, perpetrator, msg, cb),
+      Priority.MAYBE_BLOCK_ATTACK);
   }
 
   public attack(perpetrator: IPlayer, resource: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void {
@@ -1081,7 +1087,7 @@ export class Player implements IPlayer {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: CardName.VANALLEN}});
       }
     };
 
@@ -1211,7 +1217,7 @@ export class Player implements IPlayer {
 
     const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
-      card.warnings.clear();
+      card.clearWarnings();
       card.additionalProjectCosts = undefined;
       if (this.canPlay(card)) {
         playableCards.push(card);
@@ -1266,7 +1272,7 @@ export class Player implements IPlayer {
     if (this.playedCards.has(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
       const pharmacyUnion = this.tableau.get(CardName.PHARMACY_UNION);
       if (pharmacyUnion?.isDisabled === false) {
-        card.warnings.add('pharmacyUnion');
+        card.addWarning('pharmacyUnion');
       }
     }
     return true;
@@ -1692,7 +1698,9 @@ export class Player implements IPlayer {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     try {
-      this.timer.stop();
+      if (!waitingFor.optional) {
+        this.timer.stop();
+      }
       this.defer(waitingFor.process(input, this));
       waitingForCb();
     } catch (err) {
@@ -1714,7 +1722,9 @@ export class Player implements IPlayer {
         console.warn(message);
       }
     }
-    this.timer.start();
+    if (!input.optional) {
+      this.timer.start();
+    }
     this.waitingFor = input;
     this.waitingForCb = cb;
     this.game.inputsThisRound++;
@@ -1741,6 +1751,15 @@ export class Player implements IPlayer {
           this.setWaitingForSafely(input, cb);
         };
       }
+    }
+  }
+
+  public clearWaitingFor(): void {
+    const waitingFor = this.waitingFor;
+    this.waitingFor = undefined;
+    this.waitingForCb = undefined;
+    if (waitingFor !== undefined && !waitingFor.optional) {
+      this.timer.stop();
     }
   }
 
@@ -1776,8 +1795,10 @@ export class Player implements IPlayer {
       // Luna Trade Federation
       canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
       preservationProgram: this.preservationProgram,
+      trThisGeneration: this.trThisGeneration,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
+      availableActionsThisRound: this.availableActionsThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       pendingInitialActions: this.pendingInitialActions.map(toName),
       // Cards
@@ -1849,6 +1870,7 @@ export class Player implements IPlayer {
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsThisGeneration = new Set(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.availableActionsThisRound = d.availableActionsThisRound ?? 2;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
     player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;
@@ -1915,6 +1937,8 @@ export class Player implements IPlayer {
     player.draftedCards = cardsFromJSON(d.draftedCards);
     player.autopass = d.autoPass ?? false;
     player.preservationProgram = d.preservationProgram ?? false;
+    // TODO(kberg): remove ?? 0 by 2026-11-01
+    player.trThisGeneration = d.trThisGeneration ?? 0;
 
     player.timer = Timer.deserialize(d.timer);
     player.underworldData = d.underworldData;

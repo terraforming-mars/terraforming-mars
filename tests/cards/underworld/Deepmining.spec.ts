@@ -23,7 +23,7 @@ describe('Deepmining', () => {
   });
 
   const playRuns = [
-    {resourceToken: 'steel2', production: 'steel'},
+    {resourceToken: 'steel2plant', production: 'steel'},
     {resourceToken: 'titanium2', production: 'titanium'},
   ] as const;
   for (const run of playRuns) {

@@ -50,7 +50,7 @@ export class L1TradeTerminal extends Card {
   public override bespokeCanPlay(player: IPlayer): boolean {
     const cards = this.getEligibleCards(player);
     if (cards.length === 0) {
-      this.warnings.add('noMatchingCards');
+      this.addWarning('noMatchingCards');
     }
     return true;
   }

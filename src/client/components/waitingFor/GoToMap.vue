@@ -7,7 +7,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
-import {isMarsSpace} from '@/common/boards/spaces';
+import {scrollToSpace} from '@/client/utils/boardScroll';
 
 export default defineComponent({
   name: 'GoToMap',
@@ -19,11 +19,8 @@ export default defineComponent({
   },
   methods: {
     onclick(event: MouseEvent) {
-      const id = isMarsSpace(this.playerinput.spaces?.[0] ?? '00') ? 'shortkey-board' : 'shortkey-moonBoard';
-      const el = document.getElementById(id);
-      if (el) {
+      if (scrollToSpace(this.playerinput.spaces?.[0] ?? '00') !== null) {
         event.preventDefault();
-        el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
       }
     },
   },

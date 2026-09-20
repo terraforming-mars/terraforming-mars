@@ -6,10 +6,10 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
 import {CardResource} from '../../../common/CardResource';
 import {AresHandler} from '../../ares/AresHandler';
+import {LogHelper} from '../../LogHelper';
 
 export class ReySkywalker extends Card implements IProjectCard {
   constructor() {
@@ -42,7 +42,8 @@ export class ReySkywalker extends Card implements IProjectCard {
       message('Select space for ${0}', (b) => b.card(this)),
       player.game.board.getAvailableSpacesOnLand(player).filter((space) => !AresHandler.hasHazardTile(space)))
       .andThen((space) => {
-        player.game.simpleAddTile(player, space, {tileType: TileType.REY_SKYWALKER});
+        space.cube = 'rey-skywalker';
+        LogHelper.logBoardTileAction(player, space, this.name + ' cube');
         return undefined;
       });
   }

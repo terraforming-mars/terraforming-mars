@@ -24,7 +24,7 @@ describe('MicrogravityHealthProblems', () => {
     turmoil.dominantParty.delegates.add(player2);
     player.megaCredits = 20;
     player2.megaCredits = 20;
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(14);
     expect(player2.megaCredits).to.eq(20);
   });

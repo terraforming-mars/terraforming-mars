@@ -46,15 +46,13 @@ export class Cloner {
     }
     const keys = Object.entries(obj);
     keys.forEach(([key, val]) => {
-      if (obj.hasOwnProperty(key)) {
-        if (isPlayerId(val)) {
-          const idx = oldPlayerIds.indexOf(val);
-          if (idx > -1) {
-            obj[key] = newPlayerIds[idx];
-          }
-        } else if (typeof val === 'object') {
-          Cloner.replacePlayerIds(val, oldPlayerIds, newPlayerIds);
+      if (isPlayerId(val)) {
+        const idx = oldPlayerIds.indexOf(val);
+        if (idx > -1) {
+          obj[key] = newPlayerIds[idx];
         }
+      } else if (typeof val === 'object') {
+        Cloner.replacePlayerIds(val, oldPlayerIds, newPlayerIds);
       }
     });
   }

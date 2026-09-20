@@ -39,6 +39,20 @@ describe('TempestConsultancy', () => {
     expect(card.canAct(player)).is.false;
   });
 
+  it('initial action, places 2 delegates', () => {
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
+    expect(marsFirst.delegates.get(player)).eq(0);
+
+    card.initialAction(player);
+    const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
+    const options = cast(action.execute(), SelectParty);
+    options.cb(marsFirst.name);
+
+    expect(marsFirst.delegates.get(player)).eq(2);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+  });
+
   it('action, 1 delegate', () => {
     player.tagsForTest = {moon: 5};
     expect(turmoil.getAvailableDelegateCount(player)).eq(7);

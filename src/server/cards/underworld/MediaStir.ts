@@ -1,16 +1,10 @@
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
 import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-
-const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(-3).slash().corruption().influence({size: Size.SMALL}).nbsp.text('0').corruption().colon().tr(1);
-});
+import {IPlayer} from '@/server/IPlayer';
 
 export class MediaStir extends GlobalEvent implements IGlobalEvent {
   constructor() {
@@ -19,20 +13,25 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
       description: 'Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.MARS,
-      renderData: RENDER_DATA,
+      behavior: {
+        lose: {
+          stock: {
+            megacredits: {
+              underworld: {corruption: {}},
+              turmoil: {max: 5, influence: {subtract: true}},
+              each: 3,
+            },
+          },
+        },
+      },
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(-3).slash().corruption().influence({size: Size.SMALL}).nbsp.text('0').corruption().colon().tr(1);
+      }),
     });
   }
-  public resolve(game: IGame, turmoil: Turmoil) {
-    game.playersInGenerationOrder.forEach((player) => {
-      const corruption = Math.min(player.underworldData.corruption, 5);
-      const adjusted = Math.max(0, corruption - turmoil.getInfluence(player));
-      if (adjusted > 0) {
-        const cost = adjusted * 3;
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
-      }
-      if (player.underworldData.corruption === 0) {
-        player.increaseTerraformRating(1, {log: true, from: {globalEvent: this}});
-      }
-    });
+  public override bespokeResolvePlayer(player: IPlayer) {
+    if (player.underworldData.corruption === 0) {
+      player.increaseTerraformRating(1, {log: true, from: {globalEvent: this}});
+    }
   }
 }

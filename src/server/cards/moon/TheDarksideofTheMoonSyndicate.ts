@@ -33,12 +33,12 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard implements IC
         cardNumber: 'MC3',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).resource(CardResource.SYNDICATE_FLEET, 2).br;
-          b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
+          b.text('You start with 40 M€ and 2 syndicate fleets on this card.', {size: Size.SMALL, isBold: false}).br;
           b.titanium(1).arrow(Size.SMALL).resource(CardResource.SYNDICATE_FLEET)
             .slash(Size.SMALL)
-            .resource(CardResource.SYNDICATE_FLEET).arrow(Size.SMALL).text('steal', Size.TINY).megacredits(2, {all}).asterix().br;
+            .resource(CardResource.SYNDICATE_FLEET).arrow(Size.SMALL).text('steal', {size: Size.TINY}).megacredits(2, {all}).asterix().br;
           b.text('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR ' +
-                'remove 1 syndicate fleet from this card to steal 2 M€ from every opponent.', Size.TINY, false, false).br;
+                'remove 1 syndicate fleet from this card to steal 2 M€ from every opponent.', {size: Size.TINY, isBold: false}).br;
           b.effect('When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
             eb.emptyTile('normal', {size: Size.SMALL, secondaryTag: Tag.MOON})
               .startEffect

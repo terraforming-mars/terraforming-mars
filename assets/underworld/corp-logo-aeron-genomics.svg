@@ -1,0 +1,28 @@
+<svg version="1.1" viewBox="0.0 0.0 108.33333333333333 77.1504811898446" fill="none" stroke="none"
+  stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg">
+  <clipPath id="p.aeron-genomics">
+    <path d="m0 0l108.33333 0l0 77.15048l-108.33333 0l0 -77.15048z" clip-rule="nonzero" />
+  </clipPath>
+  <g clip-path="url(#p.aeron-genomics)">
+    <path fill="#000000" fill-opacity="0.0" d="m0 0l108.33333 0l0 77.15048l-108.33333 0z"
+      fill-rule="evenodd" />
+    <path fill="#85c588" d="m0 77.21785l37.84678 -77.21785l32.74738 0l37.84679 77.21785z"
+      fill-rule="evenodd" />
+    <path fill="#0a8503" d="m1.700038 76.00293l36.65812 -74.79265l31.72312 0l36.65813 74.79265z"
+      fill-rule="evenodd" />
+    <path fill="#bbe2e3" d="m17.10987 67.46523l28.29118 -57.72179l17.63286 0l28.29118 57.72179z"
+      fill-rule="evenodd" />
+    <path fill="#072600" d="m46.71572 32.31165l6.72031 -13.71129l8.50163 0l6.72031 13.71129z"
+      fill-rule="evenodd" />
+    <path fill="#072600" d="m19.36677 76.00486l4.18347 -8.53543l61.34434 0l4.18348 8.53543z"
+      fill-rule="evenodd" />
+    <path fill="#072600" d="m34.31274 57.93857l5.51621 -11.25459l28.81009 0l5.51621 11.25459z"
+      fill-rule="evenodd" />
+    <path fill="#0a8503"
+      d="m46.72185 32.31136l6.93755 0l5.72145 10.11339l6.86338 0l2.41043 4.26077l-28.87036 0z"
+      fill-rule="evenodd" />
+    <path fill="#0a8503" d="m61.92246 18.60006l6.71185 13.71128l6.96794 0l-6.71185 -13.71128z"
+      fill-rule="evenodd" />
+  </g>
+</svg>

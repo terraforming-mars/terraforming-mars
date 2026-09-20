@@ -1,0 +1,41 @@
+{
+  "Agricola Inc": "",
+  "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Je begint met 1 plantproductie, 1 M€-productie, 1 warmteproductie en 40 M€.",
+  "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "EFFECT: Aan het einde van het spel scoor je -2 / 0 / 1 / 2 OP PER TYPE LABEL voor 0 / 1-2 / 3-4 / 5+ labels.",
+
+  "Athena": "",
+  "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Je begint met 62 M€. Als je eerste actie plaats je 2 gevarentegels niet aangrenzend aan andere tegels.",
+  "Effect: You do not lose production when placing adjacent to hazard tiles.": "EFFECT: Je verliest geen productie wanneer je aangrenzend aan gevarentegels plaatst.",
+
+  "Curiosity II": "",
+  "You start with 40 M€ and 2 steel production.": "Je begint met 40 M€ en 2 staalproductie.",
+  "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "EFFECT: Wanneer je een tegel plaatst op een gebied met een RESOURCE-plaatsingsbonus, of boven op een andere tegel, mag je 2 M€ betalen om een kaart te trekken.",
+
+  "Eris": "",
+  "You start with 46 M€. As your first action, draw an Ares card.": "Je begint met 46 M€. Als je eerste actie trek je een Ares-kaart.",
+  "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "ACTIE: Plaats een nieuwe gevarentegel aangrenzend aan GEEN ENKELE ANDERE TEGEL, OF verwijder een gevarentegel om je TN met 1 te verhogen.",
+
+  "Incite": "",
+  "You start with 32 M€. As your first action, place two delegates in one party.": "Je begint met 32 M€. Als je eerste actie plaats je twee afgevaardigden in één partij.",
+  "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "EFFECT: Je hebt +1 invloed. Wanneer je met de lobbyactie een afgevaardigde stuurt, betaal je er 2 M€ minder voor.",
+
+  "Midas": "",
+  "You start with 120 M€. Lower your TR 7 steps.": "Je begint met 120 M€. Verlaag je TN met 7 stappen.",
+
+  "Playwrights": "",
+  "You start with 38 M€ and 1 energy production.": "Je begint met 38 M€ en 1 energieproductie.",
+  "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "ACTIE: Speel een gespeeld evenement van een willekeurige speler opnieuw (INCLUSIEF evenementen die speciale tegels plaatsen) door de kosten UITSLUITEND in M€ te betalen (kortingen en teruggaven zijn van toepassing), en VERWIJDER HET DAARNA UIT HET SPEL.",
+
+  "Project Workshop": "",
+  "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Je begint met 39 M€, 1 staal en 1 titanium. Als je eerste actie trek je een blauwe kaart.",
+  "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "ACTIE: Draai een gespeelde blauwe kaart om en leg die af om eventuele OP erop om te zetten naar TN en trek 2 kaarten, of besteed 3 M€ om een blauwe kaart te trekken.",
+
+  "Junk Ventures": "",
+  "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Je begint met 43 M€. Als je eerste actie leg je de bovenste 3 kaarten van de stapel af.",
+  "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "ACTIE: SCHUD DE AFLEGSTAPEL, TREK DAARVAN DAARNA 3 KAARTEN. HOUD ER 1 EN LEG DE ANDERE 2 AF.",
+
+  "UNITED NATIONS MISSION ONE": "",
+  "United Nations Mission One": "",
+  "You start with 39 M€. Increase your TR 1 step.": "Je begint met 39 M€. Verhoog je TN met 1 stap.",
+  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFECT: Wanneer een speler een actie uitvoert of een kaart speelt die TN verhoogt, inclusief deze, ontvang je 1 M€ per stap."
+}

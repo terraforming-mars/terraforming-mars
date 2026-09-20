@@ -1,11 +1,13 @@
 
 import {mount} from '@vue/test-utils';
-import {globalConfig} from './getLocalVue';
+import {globalConfig} from '@tests/client/components/getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {asComplete} from './utils/models';
 
 describe('AndOptions', () => {
   it('saveData calls saveData on all child refs and captures responses', async () => {
@@ -15,7 +17,7 @@ describe('AndOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -23,16 +25,20 @@ describe('AndOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
+          type: 'and',
           title: 'foo',
           options: [{
             type: 'option',
             title: 'select a',
+            buttonLabel: 'select a',
           }, {
             type: 'option',
             title: 'select b',
+            buttonLabel: 'select b',
           }],
+          buttonLabel: 'save',
         },
         onsave: function(data: InputResponse) {
           savedData = data;
@@ -58,7 +64,7 @@ describe('AndOptions', () => {
       global: {
         ...globalConfig.global,
         components: {
-          'player-input-factory': PlayerInputFactory,
+          'PlayerInputFactory': PlayerInputFactory,
         },
       },
       props: {
@@ -66,16 +72,20 @@ describe('AndOptions', () => {
           id: 'foo',
         },
         players: [],
-        playerView: {},
+        playerView: asComplete<PlayerViewModel>({}),
         playerinput: {
+          type: 'and',
           title: 'foo',
           options: [{
             type: 'option',
             title: 'select a',
+            buttonLabel: 'select a',
           }, {
             title: 'select b',
+            buttonLabel: 'select b',
             type: 'option',
           }],
+          buttonLabel: 'save',
         },
         onsave: function(data: InputResponse) {
           savedData = data;

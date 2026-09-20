@@ -20,7 +20,7 @@ describe('EcoSabotage', () => {
     expect(turmoil.getInfluence(player)).eq(0);
     expect(turmoil.getInfluence(player2)).eq(2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.plants).to.eq(3);
     expect(player2.plants).to.eq(5);

@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {DarksideIncubationPlant} from '../../../src/server/cards/moon/DarksideIncubationPlant';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {churn, runAllActions} from '../../TestingUtils';
 
 describe('DarksideIncubationPlant', () => {
   let player: TestPlayer;
@@ -31,18 +32,19 @@ describe('DarksideIncubationPlant', () => {
   it('act', () => {
     expect(card.resourceCount).eq(0);
 
-    const action1 = card.action(player);
+    const action1 = churn(card.action(player), player);
     expect(action1).is.undefined;
     expect(card.resourceCount).eq(1);
 
-    const action2 = card.action(player);
+    const action2 = churn(card.action(player), player);
     expect(action2).is.undefined;
     expect(card.resourceCount).eq(2);
 
-    const action3 = cast(card.action(player), OrOptions);
+    const action3 = cast(churn(card.action(player), player), OrOptions);
 
     // Second option is add a resource.
     action3.options[1].cb();
+    runAllActions(game);
     expect(card.resourceCount).eq(3);
 
     // First option removes 2 resources and raises the habitat rate.

@@ -13,7 +13,7 @@ import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 
 export default defineComponent({
-  name: 'stacked-cards',
+  name: 'StackedCards',
   props: {
     cards: {
       type: Array as () => ReadonlyArray<CardModel>,

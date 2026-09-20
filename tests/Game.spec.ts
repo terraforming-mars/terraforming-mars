@@ -1053,7 +1053,7 @@ describe('Game', () => {
       GlobalParameter.OCEANS,
       GlobalParameter.MOON_MINING_RATE,
       GlobalParameter.MOON_HABITAT_RATE,
-      GlobalParameter.MOON_LOGISTICS_RATE]);
+      GlobalParameter.MOON_LOGISTIC_RATE]);
   });
 
   it('Deal preludes when starting preludes is undefined', () => {
@@ -1194,8 +1194,8 @@ function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
     if (title.includes('mining')) {
       return GlobalParameter.MOON_MINING_RATE;
     }
-    if (title.includes('logistics')) {
-      return GlobalParameter.MOON_LOGISTICS_RATE;
+    if (title.includes('logistic')) {
+      return GlobalParameter.MOON_LOGISTIC_RATE;
     }
     throw new Error('title does not match any description: ' + title);
   }

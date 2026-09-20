@@ -9,6 +9,7 @@ import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
+import {comparing, reversed} from '../../../common/utils/Ordering';
 
 type Triplet = [Space, Space, Space];
 export class SurveyMission extends PreludeCard {
@@ -34,9 +35,18 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  private validTriplets(board: MarsBoard): Array<Triplet> {
+  private validTriplets(board: MarsBoard, player: IPlayer): Array<Triplet> {
     const spaces = board.getNonReservedLandSpaces().filter((space) => {
-      return space.player === undefined && (space.tile === undefined || space.tile.protectedHazard === true);
+      if (space.player !== undefined) {
+        return false;
+      }
+      if (space.tile !== undefined && space.tile.protectedHazard !== true) {
+        return false;
+      }
+      // Filter out spaces whose placement bonuses the player can't afford (e.g. Hellas ocean
+      // when low on M€). Without this, claiming such a space would queue PlaceOceanTile +
+      // SelectPaymentDeferred and leave the player stuck. See #7218.
+      return MarsBoard.canAffordPlacementBonuses(player, space);
     });
 
     const result: Array<Triplet> = [];
@@ -74,7 +84,7 @@ export class SurveyMission extends PreludeCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return this.validTriplets(player.game.board).length > 0;
+    return this.validTriplets(player.game.board, player).length > 0;
   }
 
   private selectSpace(player: IPlayer, iteration: number, triplets: Array<Triplet>): SelectSpace {
@@ -84,8 +94,9 @@ export class SurveyMission extends PreludeCard {
       'Select third space',
     ];
     const spaceSet: Set<Space> = new Set(triplets.flat());
-    const spaces = Array.from(spaceSet).filter((space) => space.player === undefined);
-    spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
+    const spaces = Array.from(spaceSet)
+      .filter((space) => space.player === undefined)
+      .sort(reversed(comparing((space) => parseInt(space.id))));
     return new SelectSpace(messages[iteration], spaces)
       .andThen((space) => {
         space.player = player;
@@ -113,7 +124,7 @@ export class SurveyMission extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const triplets = this.validTriplets(player.game.board);
+    const triplets = this.validTriplets(player.game.board, player);
     return this.selectSpace(player, 0, triplets);
   }
 }

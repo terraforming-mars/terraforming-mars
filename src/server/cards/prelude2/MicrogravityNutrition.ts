@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,6 +15,10 @@ export class MicrogravityNutrition extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       victoryPoints: 1,
 
+      behavior: {
+        production: {megacredits: {colonies: {}}},
+      },
+
       metadata: {
         description: 'Increase your M€ production 1 step for each colony you have.',
         cardNumber: 'P79',
@@ -25,11 +27,5 @@ export class MicrogravityNutrition extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    const coloniesCount = player.getColoniesCount();
-    player.production.add(Resource.MEGACREDITS, coloniesCount, {log: true});
-    return undefined;
   }
 }

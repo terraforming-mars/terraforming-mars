@@ -5,9 +5,9 @@ import {addCity, addGreenery, addOcean, runAllActions} from '../../TestingUtils'
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
-import {EmptyBoard} from '../../testing/EmptyBoard';
 import {assertPlaceGreenery, assertPlaceOcean} from '../../assertions';
 import {cast} from '../../../src/common/utils/utils';
+import {Phase} from '../../../src/common/Phase';
 
 describe('PolderTechDutch', () => {
   it('Initial action', () => {
@@ -60,14 +60,17 @@ describe('PolderTechDutch', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const middleOceanSpace = game.board.getSpaceOrThrow('35');
+
     expect(selectSpace.spaces).to.not.include([middleOceanSpace]);
+
     const neighbors = game.board.getAdjacentSpaces(middleOceanSpace);
+
     expect(neighbors.every((space) => space.spaceType === SpaceType.OCEAN)).is.true;
   });
 
   it('Effect, ocean', () => {
     const card = new PolderTechDutch();
-    const [game, player, player2] = testGame(2, {boardName: BoardName.HELLAS});
+    const [game, player, player2] = testGame(2);
     game.board.spaces.forEach((space) => space.bonus = []);
     player.playedCards.push(card);
     addOcean(player);
@@ -81,10 +84,24 @@ describe('PolderTechDutch', () => {
     expect(player2.energy).eq(0);
   });
 
+  it('Effect, ocean, no energy during World Government Terraforming', () => {
+    const card = new PolderTechDutch();
+    const [game, player] = testGame(2);
+    game.board.spaces.forEach((space) => space.bonus = []);
+    player.playedCards.push(card);
+
+    // The World Government Terraforming action runs during the solar phase, and
+    // the active player places the ocean, but the effect should not trigger.
+    game.phase = Phase.SOLAR;
+    addOcean(player);
+
+    expect(player.energy).eq(0);
+  });
+
   it('Effect, greenery', () => {
     const card = new PolderTechDutch();
-    const [game, player, player2] = testGame(2, {boardName: BoardName.HELLAS});
-    game.board = EmptyBoard.newInstance();
+    const [game, player, player2] = testGame(2);
+    game.board.spaces.forEach((space) => space.bonus = []);
     player.playedCards.push(card);
     addGreenery(player);
 

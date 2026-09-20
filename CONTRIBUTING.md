@@ -85,6 +85,9 @@ AI-generated code has recognizable anti-patterns: verbosity, nonexistent APIs, o
 the same standards to all contributions regardless of how they were written. Code that looks like it didn't get a
 careful pass before submission will be sent back for revision.
 
+## Style guide
+There is now STYLE.md which covers some of the most common code style issues we encounter.
+
 ## Questions?
 
 [Post an issue](https://github.com/terraforming-mars/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/VR8TbrD)

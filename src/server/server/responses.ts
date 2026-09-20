@@ -66,10 +66,10 @@ export function internalServerError(
   res.end();
 }
 
-export function notAuthorized(req: Request, res: Response): void {
-  console.warn('Not authorized', req.method, req.url);
+export function forbidden(req: Request, res: Response): void {
+  console.warn('Forbidden', req.method, req.url);
   res.writeHead(statusCode.forbidden);
-  res.write('Not authorized');
+  res.write('forbidden');
   res.end();
 }
 
@@ -93,7 +93,15 @@ export function writeJson(res: Response, ctx: Context, json: any, space?: string
     json._user = {userid: ctx.user.global_name};
   }
   const s = JSON.stringify(json, undefined, space);
+  res.setHeader('Content-Length', Buffer.byteLength(s));
   res.end(s);
+}
+
+export function contentTooLarge(req: Request, res: Response) {
+  console.warn('Content too large for', req.method, req.url);
+  res.writeHead(statusCode.contentTooLarge);
+  res.write('Content too large');
+  res.end();
 }
 
 export function quotaExceeded(req: Request, res: Response) {

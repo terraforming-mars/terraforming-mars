@@ -3,6 +3,7 @@ import {Jansson} from '../../../src/server/cards/ceos/Jansson';
 import {addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
@@ -10,16 +11,38 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 describe('Jansson', () => {
   let card: Jansson;
   let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new Jansson();
-    [/* game */, player] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Can only act once per game', () => {
     card.action(player);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
+  });
+
+  it('canAct is false when an owned tile has an unaffordable placement bonus', () => {
+    const space = player.game.board.getSpaceOrThrow('35');
+    addGreenery(player, space.id);
+    space.bonus = [SpaceBonus.OCEAN];
+
+    player.megaCredits = 5;
+    expect(card.canAct(player)).is.false;
+
+    player.megaCredits = 6;
+    expect(card.canAct(player)).is.true;
+  });
+
+  it('canAct ignores tiles owned by other players', () => {
+    const space = player.game.board.getSpaceOrThrow('35');
+    addGreenery(player2, space.id);
+    space.bonus = [SpaceBonus.OCEAN];
+    player.megaCredits = 0;
+
+    expect(card.canAct(player)).is.true;
   });
 
   it('Takes action', () => {

@@ -2,6 +2,7 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import Party from '@/client/components/Party.vue';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('Party', () => {
   it('mounts without errors', () => {
@@ -9,7 +10,7 @@ describe('Party', () => {
       ...globalConfig,
       props: {
         party: {
-          name: 'Mars First',
+          name: PartyName.MARS,
           partyLeader: undefined,
           delegates: [],
         },

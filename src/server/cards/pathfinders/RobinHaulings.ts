@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
@@ -7,18 +7,25 @@ import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {digit} from '../Options';
 import {ICard} from '../ICard';
-import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class RobinHaulings extends CorporationCard implements ICorporationCard {
+export class RobinHaulings extends ActiveCorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ROBIN_HAULINGS,
       tags: [Tag.MARS, Tag.VENUS],
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
+
+      action: {
+        or: {
+          autoSelect: true,
+          behaviors: [
+            {title: 'Spend 3 floaters here to raise Venus 1 step', spend: {resourcesHere: 3}, global: {venus: 1}},
+            {title: 'Spend 3 floaters here to raise oxygen 1 step', spend: {resourcesHere: 3}, global: {oxygen: 1}},
+          ],
+        },
+      },
 
       metadata: {
         cardNumber: 'PfC17',
@@ -41,50 +48,5 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
     if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
-  }
-
-  private canRaiseVenus(player: IPlayer) {
-    return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford({cost: 0, tr: {venus: 1}});
-  }
-
-  private canRaiseOxygen(player: IPlayer) {
-    return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford({cost: 0, tr: {oxygen: 1}});
-  }
-
-  public canAct(player: IPlayer) {
-    if (this.resourceCount < 3) {
-      return false;
-    }
-    return this.canRaiseVenus(player) || this.canRaiseOxygen(player);
-  }
-
-  public action(player: IPlayer) {
-    const options = new OrOptions();
-    if (this.canRaiseVenus(player)) {
-      options.options.push(
-        new SelectOption('Spend 3 floaters to raise Venus 1 step')
-          .andThen(() => {
-            player.game.increaseVenusScaleLevel(player, 1);
-            this.resourceCount -= 3;
-            return undefined;
-          }));
-    }
-    if (this.canRaiseOxygen(player)) {
-      options.options.push(
-        new SelectOption('Spend 3 floaters to raise oxygen 1 step')
-          .andThen(() => {
-            player.game.increaseOxygenLevel(player, 1);
-            this.resourceCount -= 3;
-            return undefined;
-          }));
-    }
-
-    if (options.options.length === 0) {
-      return undefined;
-    }
-    if (options.options.length === 1) {
-      return options.options[0];
-    }
-    return options;
   }
 }

@@ -5,6 +5,7 @@ import {FakeSessionManager} from './FakeSessionManager';
 import {MockRequest, MockResponse} from './HttpMocks';
 import {newIpTracker} from '../../src/server/server/IPTracker';
 import {FakeClock} from '../common/FakeClock';
+import {UrlParams} from '@/server/routes/UrlParams';
 
 export type Header = 'accept-encoding';
 
@@ -13,8 +14,9 @@ export class RouteTestScaffolding {
   public ctx: Context;
 
   constructor(public req: MockRequest = new MockRequest()) {
+    const url = new URL('http://boo.com');
     this.ctx = {
-      url: new URL('http://boo.com'),
+      url: url,
       ip: '123.45.678.90',
       ipTracker: newIpTracker(),
       gameLoader: new FakeGameLoader(),
@@ -24,6 +26,7 @@ export class RouteTestScaffolding {
         statsId: '2',
       },
       clock: new FakeClock(),
+      urlParams: new UrlParams(url.searchParams),
     };
     if (!this.req.headers) {
       this.req.headers = {};
@@ -33,18 +36,23 @@ export class RouteTestScaffolding {
   // Strictly speaking |url| can also accept a fragment.
   public set url(headlessUri: string) {
     this.req.url = headlessUri;
-    this.ctx.url = new URL('http://boo.com' + headlessUri);
+    const url = new URL('http://boo.com' + headlessUri);
+    this.ctx.url = url;
+    this.ctx.urlParams = new UrlParams(url.searchParams);
   }
 
   public get(handler: Handler, res: MockResponse): Promise<void> {
-    return handler.get(this.req, res, this.ctx);
+    this.req.method = 'GET';
+    return handler.processRequest(this.req, res, this.ctx);
   }
 
-  public post(handler: Handler, res: MockResponse) {
-    return handler.post(this.req, res, this.ctx);
+  public post(handler: Handler, res: MockResponse): Promise<void> {
+    this.req.method = 'POST';
+    return handler.processRequest(this.req, res, this.ctx);
   }
 
-  public put(handler: Handler, res: MockResponse) {
-    return handler.put(this.req, res, this.ctx);
+  public put(handler: Handler, res: MockResponse): Promise<void> {
+    this.req.method = 'PUT';
+    return handler.processRequest(this.req, res, this.ctx);
   }
 }

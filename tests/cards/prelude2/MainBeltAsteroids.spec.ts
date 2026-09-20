@@ -72,7 +72,7 @@ describe('MainBeltAsteroids', () => {
     player.playCard(cometAiming);
 
     player.titanium = 1;
-    const cometChoice = cast(cometAiming.action(player), SelectCard<ICard>);
+    const cometChoice = cast(churn(cometAiming.action(player), player), SelectCard<ICard>);
     cometChoice.cb([card]);
 
     expect(card.resourceCount).to.eq(1);

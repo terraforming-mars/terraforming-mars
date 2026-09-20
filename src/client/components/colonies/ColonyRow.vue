@@ -1,12 +1,11 @@
 <template>
    <div class="colony-grid-container">
-    <colony-space v-for="idx in [0, 1, 2, 3, 4, 5, 6]"
+    <ColonySpace v-for="idx in [0, 1, 2, 3, 4, 5, 6]"
       :key="idx"
       :idx="idx"
       :metadata="metadata"
       :player="colony.colonies[idx]"
-      :marker="colony.isActive && colony.trackPosition === idx">
-    </colony-space>
+      :marker="colony.isActive && colony.trackPosition === idx"/>
   </div>
 </template>
 <script lang="ts">

@@ -39,7 +39,7 @@ describe('MediaStir', () => {
       turmoil.addInfluenceBonus(player, run.influence);
       player.underworldData.corruption = run.corruption;
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player.megaCredits).eq(run.expect.mc);
       expect(player.terraformRating).eq(run.expect.tr);

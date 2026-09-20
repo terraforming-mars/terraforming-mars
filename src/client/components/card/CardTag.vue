@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()" />
+  <div :class="getClasses()" ></div>
 </template>
 
 <script lang="ts">

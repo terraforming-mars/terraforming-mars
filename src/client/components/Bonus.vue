@@ -1,6 +1,6 @@
 <template>
   <div class='board-space-bonuses'>
-    <i v-for="(spaceBonus, idx) in bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" />
+    <i v-for="(spaceBonus, idx) in bonus" :key="idx" :class="getClass(idx + 1, spaceBonus)" ></i>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ const css: Record<SpaceBonus, string> = {
 };
 
 export default defineComponent({
-  name: 'bonus',
+  name: 'Bonus',
   props: {
     bonus: {
       type: Array as () => Array<SpaceBonus>,

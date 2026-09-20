@@ -53,7 +53,7 @@ describe('TerraformingDeal', () => {
     turmoil.initGlobalEvent(game);
 
     const election = new Election();
-    election.resolve(game, turmoil);
+    election.resolve(game);
     expect(player2.terraformRating).eq(22);
     expect(player2.megaCredits).eq(0);
     expect(player.terraformRating).eq(21);

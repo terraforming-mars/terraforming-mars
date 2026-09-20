@@ -257,3 +257,12 @@ export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | unde
   }
   return obj;
 }
+
+/**
+ * Fails to compile when `x` is reachable, which makes a switch over a union
+ * exhaustive: adding a member to the union breaks the build at every switch
+ * that doesn't handle it.
+ */
+export function assertNever(x: never): never {
+  throw new Error('unexpected value: ' + x);
+}

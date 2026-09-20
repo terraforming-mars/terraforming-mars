@@ -12,7 +12,7 @@ import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
-import {doWait, getSendADelegateOption, runAllActions, setRulingParty} from './TestingUtils';
+import {doWait, formatMessage, getSendADelegateOption, runAllActions, setRulingParty} from './TestingUtils';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -37,6 +37,30 @@ import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 import {cast} from '@/common/utils/utils';
+import {Timer} from '../src/common/Timer';
+import {FakeClock} from './common/FakeClock';
+
+function playerWithRunningTimer(): [Player, FakeClock] {
+  const player = new Player('blue', 'blue', false, 0, 'p-blue');
+  Game.newInstance('gameid', [player], player, 'spectatorid');
+  player.clearWaitingFor();
+  const clock = new FakeClock();
+  (Timer as any).lastStoppedAt = 0;
+  player.timer = Timer.newInstance(clock);
+
+  const firstInput = new SelectOption('First input');
+  player.setWaitingFor(firstInput);
+  clock.millis = 1_000;
+  player.process({type: 'option'});
+
+  const secondInput = new SelectOption('Second input');
+  player.setWaitingFor(secondInput);
+  clock.millis = 2_000;
+  player.process({type: 'option'});
+
+  expect(player.timer.getElapsed()).eq(1_000);
+  return [player, clock];
+}
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {
@@ -48,9 +72,35 @@ describe('Player', () => {
   it('Should throw error if nothing to process', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player, 'spectatorid');
-    (player as any).setWaitingFor(undefined, undefined);
+    player.clearWaitingFor();
 
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
+  });
+
+  it('does not stop the timer when processing optional input', () => {
+    const [player, clock] = playerWithRunningTimer();
+    const elapsed = player.timer.getElapsed();
+
+    const optionalInput = new SelectOption('Optional input');
+    optionalInput.optional = true;
+    player.setWaitingFor(optionalInput);
+    clock.millis += 10_000;
+    player.process({type: 'option'});
+
+    expect(player.timer.getElapsed()).eq(elapsed);
+  });
+
+  it('does not stop the timer when clearing optional input', () => {
+    const [player, clock] = playerWithRunningTimer();
+    const elapsed = player.timer.getElapsed();
+
+    const optionalInput = new SelectOption('Optional input');
+    optionalInput.optional = true;
+    player.setWaitingFor(optionalInput);
+    clock.millis += 10_000;
+    player.clearWaitingFor();
+
+    expect(player.timer.getElapsed()).eq(elapsed);
   });
 
   it('Should run select player for PowerSupplyConsortium', () => {
@@ -74,7 +124,7 @@ describe('Player', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
     Game.newInstance('gameid', [player, player2], player, 'spectatorid');
-    (player as any).setWaitingFor(undefined, undefined);
+    player.clearWaitingFor();
 
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new EnergyTapping());
@@ -237,6 +287,7 @@ describe('Player', () => {
         lastStoppedAt: 0,
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
+      trThisGeneration: 1,
       victoryPointsByGeneration: [],
       underworldData: {corruption: 0, activeBonus: undefined, tokens: []},
       alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},
@@ -248,7 +299,7 @@ describe('Player', () => {
         [GlobalParameter.VENUS]: 0,
         [GlobalParameter.MOON_HABITAT_RATE]: 0,
         [GlobalParameter.MOON_MINING_RATE]: 0,
-        [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
+        [GlobalParameter.MOON_LOGISTIC_RATE]: 0,
       },
       standardProjectsThisGeneration: [],
       jovianTagCount: 0,
@@ -613,7 +664,7 @@ describe('Player', () => {
   describe('Convert Heat / Kelvinists kp03 swap', () => {
     function findOption(player: TestPlayer, title: string): SelectOption | undefined {
       const actions = cast(player.getActions(), OrOptions);
-      const option = actions.options.find((o) => o.title === title);
+      const option = actions.options.find((o) => formatMessage(o.title) === title);
       return option === undefined ? undefined : cast(option, SelectOption);
     }
 
@@ -652,4 +703,3 @@ describe('Player', () => {
     expect(player.megaCredits).eq(14);
   });
 });
-

@@ -5,10 +5,9 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Resource} from '../../../common/Resource';
-import {digit} from '../Options';
+import {digit, uppercase} from '../Options';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
@@ -25,7 +24,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         cardNumber: 'PfP02',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(10);
-          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br.projectRequirements().br;
+          b.text('play', {uppercase}).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br.projectRequirements().br;
           b.resource(CardResource.FLOATER, {amount: 5, digit});
         }),
         description: 'Gain 10 M€. PLAY AN ACTIVE FLOATER CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS, and add 5 floaters to it.',

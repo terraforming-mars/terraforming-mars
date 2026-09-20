@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {testGame} from '../../TestGame';
-import {AdaptedLichen} from '../../../src/server/cards/base/AdaptedLichen';
+import {testGame} from '@tests/TestGame';
+import {AdaptedLichen} from '@/server/cards/base/AdaptedLichen';
 
 describe('AdaptedLichen', () => {
   it('Should play', () => {

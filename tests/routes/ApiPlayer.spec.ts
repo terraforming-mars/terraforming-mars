@@ -5,6 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {PlayerViewModel} from '../../src/common/models/PlayerModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('ApiPlayer', () => {
   let scaffolding: RouteTestScaffolding;
@@ -18,18 +19,21 @@ describe('ApiPlayer', () => {
   it('no parameter', async () => {
     scaffolding.url = '/api/player';
     await scaffolding.get(ApiPlayer.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('fails invalid player id', async () => {
     scaffolding.url = '/api/player?id=googoo';
     await scaffolding.get(ApiPlayer.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: invalid player id');
   });
 
   it('fails game not found', async () => {
     scaffolding.url = '/api/player?id=p123';
     await scaffolding.get(ApiPlayer.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found');
   });
 

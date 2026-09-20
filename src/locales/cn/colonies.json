@@ -52,10 +52,8 @@
   "Action: Gain 1M€ per animal here.": "行动：此卡上每有1点动物，获得1块钱",
   "(Requires 2 city)": "需要2个城市",
   "(tiles in play.)": "",
-  "Any 2 Cities": "任何两个城市",
 
   "Luna Governor": "月球政府",
-  "3 Earth": "3 地球",
   "Requires 3 Earth tags. Increase your M€ production 2 steps.": "（需要：三个地球图标）增加自身2点M€产量",
 
   "Minority Refuge": "少数民族难民",
@@ -81,7 +79,6 @@
   "Add two floaters to ANY JOVIAN CARD.": "增加2点云资源到任意木星卡上",
 
   "Heavy Taxation": "重税",
-  "2 Earth": "2 地球",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
   "Refugee Camps": "难民营",
@@ -97,18 +94,14 @@
 
   "Titan Air-scrapping": "处理泰坦空气",
   "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "行动：花费1点钛来增加2个云资源到此卡上或消耗此卡上的2个云资源增加一点改造度",
-  "Action: Spend 2 floaters here to increase your TR 1 step.": "行动：消耗此卡上的2个云资源增加一点改造度",
-  "Action: Spend 1 titanium to add 2 floaters here.": "行动：花费1个钛资源在此卡上+2云资源",
 
   "Titan Shuttles": "泰坦穿梭机",
-  "Action: Add 2 floaters to ANY JOVIAN CARD.": "行动：增加2点云资源到任意木星卡上",
-  "Action: Spend any number of floaters here to gain the same number of titanium.": "行动：消耗此卡上的任意数量云资源来换取等量的钛",
+  "Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.": "行动：增加2点云资源到任意木星卡上，或消耗此卡上的任意数量云资源来换取等量的钛",
 
   "Floater Prototypes": "造云原型机",
   "Add two floaters to ANOTHER card.": "放置2个云资源到另一张牌",
 
   "Airliners": "航空公司",
-  "3 floaters": "3个云资源",
   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "需求：你有3个云资源。你的金钱产量+2，在任意卡牌上增加2个云资源。",
 
   "Air Raid": "空袭",
@@ -116,8 +109,7 @@
   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "失去1个云资源。从任意玩家处偷5块钱。",
 
   "Atmo Collectors": "大气收藏家",
-  "Action: Add one floater here.": "行动：在此牌上增加1个云资源",
-  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "行动：花费此牌上一个云资源获得2个钛资源、或3个电力资源、或4个热力资源。",
+  "Action: Add one floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "行动：在此牌上增加1个云资源，或花费此牌上一个云资源获得2个钛资源、或3个电力资源、或4个热力资源。",
   "Add 2 floaters to ANY card.": "打牌时在任意卡牌上+2云资源",
 
   "Community Services": "社区服务",
@@ -140,7 +132,6 @@
   "Ice Moon Colony": "冰月殖民地",
   "Place 1 colony and 1 ocean tile.": "放置1块殖民地和1片海洋",
 
-  "2 Jovian": "2个木星标志",
   "Jovian Lanterns": "木星灯",
   "Jovian": "木星",
 
@@ -148,13 +139,11 @@
   "1 VP per 2 floaters here.": "此牌2个云资源算1分",
 
   "Jupiter Floating Station": "木星浮动站",
-  "Action: Add 1 floater to a JOVIAN CARD.": "行动：在一张木星卡上+1云资源",
-  "Action: Gain 1 M€ for every floater here [MAX 4].": "行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
+  "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here [MAX 4].": "行动：在一张木星卡上+1云资源，或获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
   "Requires 3 science tags.": "需求：3个科技标志。",
 
   "Lunar Exports": "月球出口",
   "Increase your plant production 2 steps, or your M€ production 5 steps.": "你的植物产量+2，或你的金钱产量+5。",
-  "2 Cities": "2个城市",
   "Requires 2 city tiles in play.": "需求：2个城市被放置。",
   "Mining Colony": "采矿殖民地",
   "Increase your titanium production 1 step. Place a colony.": "你的钛产量+1。放置1块殖民地。",
@@ -166,7 +155,6 @@
   "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "提升2点改造度。在1张木星牌上+2云资源。",
 
   "Pioneer Settlement": "定居点",
-  "max 1 Colony": "最多1块殖民地",
   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "需求：你拥有不超过1块殖民地。金钱产量-2。放置1块殖民地。",
   "Quantum Communications": "量子通信",
   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",

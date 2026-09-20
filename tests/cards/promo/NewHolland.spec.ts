@@ -71,6 +71,7 @@ describe('NewHolland', () => {
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.NEW_HOLLAND);
+    expect(oceanSpace.tile!.covers?.tileType).to.eq(TileType.OCEAN);
   });
 
   it('Cannot place a city next to New Holland', () => {

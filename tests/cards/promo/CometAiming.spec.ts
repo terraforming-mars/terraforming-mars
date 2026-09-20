@@ -2,10 +2,12 @@ import {expect} from 'chai';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {testGame} from '../../TestGame';
+import {ICard} from '../../../src/server/cards/ICard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {maxOutOceans, runAllActions} from '../../TestingUtils';
+import {churn, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {cast} from '../../../src/common/utils/utils';
 
@@ -35,6 +37,7 @@ describe('CometAiming', () => {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
+    runAllActions(game);
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
 
@@ -52,8 +55,9 @@ describe('CometAiming', () => {
     player.titanium = 1;
     card.resourceCount = 1;
 
-    const action = cast(card.action(player), OrOptions);
-    action.options[1].cb([card2]);
+    const action = cast(churn(card.action(player), player), OrOptions);
+    const selectCard = cast(churn(action.options[1].cb(), player), SelectCard<ICard>);
+    selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(player.titanium).to.eq(0);
   });

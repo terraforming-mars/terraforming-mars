@@ -2,8 +2,8 @@
   <div class="wf-component wf-component--select-card">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
     <label v-for="colony in (playerinput.coloniesModel || [])" class="cardbox" :key="colony.name">
-      <input type="radio" v-model="selectedColony" :value="colony.name" />
-      <colony :colony="colony"></colony>
+      <input type="radio" v-model="selectedColony" :value="colony.name" >
+      <Colony :colony="colony"/>
     </label>
     <div v-if="showsave === true" class="nofloat">
       <AppButton @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
@@ -51,7 +51,7 @@ export default defineComponent({
     };
   },
   components: {
-    'colony': Colony,
+    Colony,
     AppButton,
   },
   methods: {

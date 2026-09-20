@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
-import {Size} from '../../../common/cards/render/Size';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 // import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 // import {all, multiplier} from '../Options';
@@ -38,7 +37,7 @@ export class LunaTradeFederation extends CorporationCard implements ICorporation
           //   eb.moonMine({size: Size.SMALL, all}).startEffect.production((pb) => pb.titanium(1)).nbsp;
           // });
           b.effect('When you place a mine tile on The Moon, raise your titanium production 1 step.', (eb) => {
-            eb.moonMine({size: Size.SMALL}).startEffect.production((pb) => pb.titanium(1)).nbsp;
+            eb.moonMine().startEffect.production((pb) => pb.titanium(1)).nbsp;
           });
           b.br;
           b.effect('You may use titanium resources as 2M€ each.', (eb) => {

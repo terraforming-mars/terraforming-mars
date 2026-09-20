@@ -95,6 +95,27 @@ describe('Underworld / StandardTechnology', () => {
     select.payAndPlay(excavateStandardProject, Payment.of({megacredits: 0}));
   });
 
+  it('process validates discounted cost, not full cost (#8247)', () => {
+    [game, player] = testGame(1, {underworldExpansion: true});
+    player.playedCards.push(card);
+    player.standardProjectsThisGeneration.add(CardName.EXCAVATE_STANDARD_PROJECT);
+    // Excavate costs 7, Standard Technology discounts by 8, floor is 0.
+    // The player can afford the discounted cost (0) but not the full cost (7).
+    player.megaCredits = 6;
+
+    expect(card.canAct(player)).is.true;
+
+    const select = cast(card.action(player), SelectStandardProjectToPlay);
+
+    // process() runs validate(), which must accept the play even though the
+    // full, undiscounted cost (7) exceeds the player's M€.
+    expect(() => select.process({
+      type: 'projectCard',
+      card: CardName.EXCAVATE_STANDARD_PROJECT,
+      payment: Payment.of({megacredits: 0}),
+    })).to.not.throw();
+  });
+
   it('action', () => {
     player.playedCards.push(card);
     player.standardProjectsThisGeneration.add(CardName.ASTEROID_STANDARD_PROJECT);

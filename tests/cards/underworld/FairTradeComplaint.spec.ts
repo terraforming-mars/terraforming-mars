@@ -45,7 +45,7 @@ describe('FairTradeComplaint', () => {
         player.cardsInHand.push(fakeCard());
       }
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player.cardsInHand).has.length(run.expect.handSize);
       expect(player.megaCredits).eq(run.expect.mc);

@@ -2,10 +2,10 @@
     <div class="milestones_cont" v-trim-whitespace>
         <div class="milestones">
             <div class="ma-title">
-                <a class="ma-clickable" href="#" v-on:click.prevent="toggleList()" v-i18n>Milestones</a>
+                <a class="ma-clickable" href="#" @click.prevent="toggleList()" v-i18n>Milestones</a>
                 <span v-for="milestone in milestones.filter((m) => m.playerName)" :key="milestone.name" class="milestone-award-inline paid" :title="milestone.playerName">
                     <span v-i18n>{{ milestone.name }}</span>
-                    <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.color" /></span>
+                    <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.color" ></i></span>
                 </span>
                 <span v-if="isLearnerModeOn()">
                     <span v-for="(spotPrice, index) in getAvailableMilestoneSpots()" :key="index" class="milestone-award-inline unpaid">
@@ -21,7 +21,7 @@
                     :milestone="milestone"
                     :showScores="showScores"
                     :showDescription="showDescription"
-                  ></Milestone>
+                  />
               </div>
             </span>
         </div>

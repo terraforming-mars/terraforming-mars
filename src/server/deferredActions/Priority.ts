@@ -5,10 +5,17 @@ export enum Priority {
   DECLARE_CLONE_TAG,
   /** Cost of a blue card action, or paying Reds costs. Must happen before the effects. */
   COST,
+  /** Pay to block Underworld attacks */
+  MAYBE_BLOCK_ATTACK,
   /** Special case effects that should occur before Pharmacy Union */
   BEFORE_PHARMACY_UNION,
   /** Pharmacy Union special case, players typically prefer to resolve this early. */
   PHARMACY_UNION,
+  /**
+   * A choice belonging to the active player which should resolve before their opponents'
+   * triggered effects. (e.g. Flooding's attack, which changes what an opponent can afford.)
+   */
+  BEFORE_OPPONENT_TRIGGER,
   /** Any effect from one of your opponent's card that triggers during your turn. */
   OPPONENT_TRIGGER,
   /**
@@ -42,9 +49,8 @@ export enum Priority {
   DISCARD_AND_DRAW,
   /** Effects that make your opponents lose resources or production. */
   ATTACK_OPPONENT,
-  /** Effects that make you lose resource or production "as much as possible". Pharmacy Union, Mons. */
-  LOSE_AS_MUCH_AS_POSSIBLE,
   GAIN_RESOURCE_OR_PRODUCTION,
+  /** Lose (or spend) resources or production. */
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,

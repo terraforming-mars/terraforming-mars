@@ -23,7 +23,6 @@ export type GameModel = {
   deckSize: number;
   discardPileSize: number;
   expectedPurgeTimeMs: number;
-  experimentalReset?: boolean;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;
@@ -39,7 +38,7 @@ export type GameModel = {
   pathfinders: PathfindersModel | undefined;
   phase: Phase;
   spaces: ReadonlyArray<SpaceModel>;
-  spectatorId?: SpectatorId;
+  spectatorId: SpectatorId;
   step: number;
   tags: ReadonlyArray<Tag>;
   temperature: number;

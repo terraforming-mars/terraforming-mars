@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class LunaConference extends Card implements IProjectCard {
@@ -26,8 +25,8 @@ export class LunaConference extends Card implements IProjectCard {
         'Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(2).slash().moonRoad({size: Size.SMALL, all}).br;
-          b.megacredits(2).slash().moonHabitat({size: Size.SMALL, all}).br;
+          b.megacredits(2).slash().moonRoad({all}).br;
+          b.megacredits(2).slash().moonHabitat({all}).br;
         }),
       },
     });

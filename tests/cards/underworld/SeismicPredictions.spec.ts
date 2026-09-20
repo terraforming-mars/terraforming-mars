@@ -44,7 +44,7 @@ describe('SeismicPredictions', () => {
         player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
 
-      card.resolve(game, turmoil);
+      card.resolve(game);
 
       expect(player.megaCredits).eq(run.expect.mc);
 

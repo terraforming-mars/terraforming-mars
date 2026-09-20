@@ -218,12 +218,12 @@ describe('Odyssey', () => {
     turmoil.dominantParty.delegates.add(player);
 
     // Not enough tags, because the event does not count.
-    diversity.resolve(game, turmoil);
+    diversity.resolve(game);
     expect(player.megaCredits).to.eq(0);
 
     // Now there will be enough tags, with the event.
     player.playedCards.push(odyssey);
-    diversity.resolve(game, turmoil);
+    diversity.resolve(game);
 
     expect(player.megaCredits).to.eq(10);
   });

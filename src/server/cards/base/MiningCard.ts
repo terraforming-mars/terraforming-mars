@@ -71,7 +71,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   protected spaceSelected(player: IPlayer, space: Space): void {
-    const bonusResources = [];
+    const bonusResources: Array<Resource> = [];
     if (space.bonus.includes(SpaceBonus.STEEL)) {
       bonusResources.push(Resource.STEEL);
     }

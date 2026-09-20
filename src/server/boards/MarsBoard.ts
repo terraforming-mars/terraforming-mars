@@ -10,6 +10,7 @@ import {SpaceId} from '../../common/Types';
 import {oneWayDifference} from '../../common/utils/utils';
 import {Tile} from '../Tile';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import * as constants from '../../common/constants';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
@@ -70,7 +71,7 @@ export class MarsBoard extends Board {
    * The default condition is to return those oceans used to count toward the global parameter, so
    * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
    */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean, newHolland?: boolean}): ReadonlyArray<Space> {
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       if (!Board.isOceanSpace(space)) {
         return false;
@@ -184,6 +185,42 @@ export class MarsBoard extends Board {
       .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
   }
 
+  /**
+   * Returns true when the player can afford the M€ (and Reds TR tax) that each of the
+   * space's placement bonuses will charge.
+   *
+   * Used by cards that hand the player a non-tile-placement choice of space and then call
+   * `grantSpaceBonuses` (Mars Nomads, Gagarin Mobile Base, Survey Mission). Without this
+   * filter, picking e.g. the Hellas ocean space without 6 M€ leaves the player stuck on
+   * the ocean-bonus prompt because `SelectPaymentDeferred` throws. See #7218.
+   *
+   * Tile placement itself goes through `Board.canAfford`/`spaceCosts` and is unaffected.
+   */
+  public static canAffordPlacementBonuses(player: IPlayer, space: Space): boolean {
+    const game = player.game;
+    if (space.bonus.includes(SpaceBonus.OCEAN) && game.canAddOcean()) {
+      if (!player.canAfford({cost: constants.HELLAS_BONUS_OCEAN_COST, tr: {oceans: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, tr: {temperature: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+      if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST, tr: {temperature: 1}})) {
+        return false;
+      }
+    }
+    if (space.bonus.includes(SpaceBonus.COLONY)) {
+      if (!player.canAfford({cost: constants.TERRA_CIMMERIA_COLONY_COST})) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   private computeEdges(): ReadonlyArray<Space> {
     return this.spaces.filter((space) => {
       if (space.y === 0 || space.y === 8 || space.x === 8) {
@@ -208,7 +245,7 @@ export class MarsBoard extends Board {
 
   public getAvailableIsolatedSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return this.getAvailableSpacesOnLand(player, canAffordOptions)
-      .filter((space: Space) => this.getAdjacentSpaces(space).every((space) => space.tile === undefined));
+      .filter((space: Space) => this.getAdjacentSpaces(space).every((adjacent) => adjacent.tile === undefined));
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
@@ -229,12 +266,18 @@ export class MarsBoard extends Board {
       }
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE || space.spaceType === SpaceType.DEFLECTION_ZONE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
+        space.cube === undefined &&
         space.player === undefined;
     });
   }
 
   // Returns true if |newTile| can cover go on |space|, particularly if |space| already has a tile.
   public static canCover(space: Space, newTile: Tile): boolean {
+    // A neutral player cube reserves its space for the rest of the game.
+    if (space.cube !== undefined) {
+      return false;
+    }
+
     if (space.tile === undefined) {
       return true;
     }

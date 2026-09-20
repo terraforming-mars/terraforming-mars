@@ -1,4 +1,4 @@
-import {Resource, StandardResource} from '../../common/Resource';
+import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {IPlayer} from '../IPlayer';
 import {From} from '../logs/From';
@@ -62,7 +62,7 @@ export abstract class BaseStock {
   }
 
   public deduct(
-    resource: Resource | StandardResource,
+    resource: Resource,
     amount: number,
     options? : {
       log?: boolean,
@@ -73,7 +73,7 @@ export abstract class BaseStock {
   }
 
   public abstract add(
-    resource: Resource | StandardResource,
+    resource: Resource,
     amount : number,
     options? : {log?: boolean, from? : From, stealing?: boolean},
   ): void;
@@ -114,7 +114,7 @@ export abstract class BaseStock {
   }
 
   protected logUnitDelta(
-    resource: Resource | StandardResource,
+    resource: Resource,
     amount: number,
     production: boolean,
     from: From | undefined,

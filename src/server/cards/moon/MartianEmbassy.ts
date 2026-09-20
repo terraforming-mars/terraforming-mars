@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {digit} from '../Options';
 
 export class MartianEmbassy extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
         cardNumber: 'M76',
         description: 'Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.',
         renderData: CardRenderer.builder((b) => {
-          b.tag(Tag.MARS).planetaryTrack().text('+1').slash().tag(Tag.MOON, 3);
+          b.tag(Tag.MARS).planetaryTrack().text('+1').slash().tag(Tag.MOON, {amount: 3, digit});
         }),
       },
     });

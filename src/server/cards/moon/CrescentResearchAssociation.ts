@@ -16,13 +16,17 @@ export class CrescentResearchAssociation extends CorporationCard implements ICor
       victoryPoints: {tag: Tag.MOON, per: 3},
 
       metadata: {
-        description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',
+        description: 'You start with 50 M€.',
         cardNumber: 'MC5',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).br;
-          b.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
-            eb.tag(Tag.MOON).startEffect.megacredits(1).slash().tag(Tag.MOON);
+          b.corpBox('effect', (ce) => {
+            ce.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
+              eb.tag(Tag.MOON).startEffect.megacredits(1).slash().tag(Tag.MOON);
+            });
           });
+          b.br;
+          b.vpText('1 VP for every 3 Moon tags you have.');
         }),
       },
     });

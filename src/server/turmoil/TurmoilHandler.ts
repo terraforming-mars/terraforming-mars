@@ -15,6 +15,8 @@ import {REDS_POLICY_2} from './parties/Reds';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TRSource} from '../../common/cards/TRSource';
 import {IPolicy, policyDescription} from './Policy';
+import {message} from '../logs/MessageBuilder';
+import {agendaInfoById} from '@/common/turmoil/Types';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -31,7 +33,10 @@ export class TurmoilHandler {
       return undefined;
     }
     if (policy.canAct?.(player)) {
-      return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
+      const description = policyDescription(policy, player);
+      const partyName = agendaInfoById(policy.id).name;
+      const m = message('${0} (Turmoil ${1})', (b) => b.string(description).partyName(partyName));
+      return new SelectOption(m, 'Pay').andThen(() => policy.action?.(player));
     }
     return undefined;
   }
@@ -145,9 +150,9 @@ export class TurmoilHandler {
         total = total + Math.min(availableSteps, tr.moonMining);
       }
 
-      if (tr.moonLogistics !== undefined) {
-        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
-        total = total + Math.min(availableSteps, tr.moonLogistics);
+      if (tr.moonLogistic !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTIC_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistic);
       }
     });
 

@@ -1,0 +1,241 @@
+{
+  "Sterling Vents": "Sterling-ventielen",
+  "Decrease heat production 2 steps. Increase energy production 2 steps.": "Verlaag je warmteproductie met 2 stappen. Verhoog je energieproductie met 2 stappen.",
+
+  "Weather Balloons": "Weerballonnen",
+  "Action: Add 1 floater here, or spend 1 floater here to gain 1 M€ per city ON MARS.": "Actie: Voeg hier 1 zwever toe, of besteed hier 1 zwever om 1 M€ te ontvangen per stad OP MARS.",
+
+  "Static Harvesting": "Statische oogst",
+  "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Vereist 3 of minder oceaantegels. Verhoog je energieproductie met 1 stap. Ontvang 1 M€ per bouwlabel dat je hebt.",
+
+  "Public Plans": "Openbare plannen",
+  "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ONTHUL EEN WILLEKEURIG AANTAL ANDERE KAARTEN UIT JE HAND. (JE TEGENSTANDERS MOGEN ZE BEKIJKEN.) ONTVANG 1 M€ VOOR ELKE ONTHULDE KAART.",
+
+  "Vermin": "Ongedierte",
+  "Effect: When any city is placed, add 1 animal here.": "Effect: Wanneer een stad wordt geplaatst, voeg hier 1 dier toe.",
+  "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "Actie: Voeg hier 1 dier toe of 1 microbe aan EEN ANDERE kaart.",
+  "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Elke speler, inclusief jij, krijgt -1 OP per stad die hij heeft ALS HIER TEN MINSTE 10 DIEREN LIGGEN.",
+
+  "New Holland": "Nieuw Holland",
+  "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Vereist 4 stadstegels OP MARS. Verhoog je M€-productie met 3 stappen. Plaats een stadstegel bovenop een al geplaatste oceaantegel, VOLGENS DE NORMALE PLAATSINGSBEPERKINGEN VOOR STEDEN. De tegel telt als een stad en een oceaan.",
+
+  "Protected Growth": "Beschermde groei",
+  "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Zuurstof moet 7% of lager zijn. Ontvang 1 plant per energielabel dat je hebt.",
+
+  "Public Baths": "Openbare baden",
+  "Requires 6 oceans. Gain 6 M€.": "Vereist 6 oceanen. Ontvang 6 M€.",
+
+  "Casinos": "Casino's",
+  "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Vereist dat je een stad hebt. Verlaag je energieproductie met 1 stap en verhoog je M€-productie met 4 stappen.",
+
+  "Hospitals": "Ziekenhuizen",
+  "Effect: Each time a city is placed, gain a disease here.": "Effect: Elke keer dat een stad wordt geplaatst, ontvang je hier 1 ziekte.",
+  "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "Actie: Verwijder 1 ziekte van EEN VAN JE KAARTEN om 1 M€ te ontvangen per stad in het spel.",
+  "Decrease your energy production 1 step.": "Verlaag je energieproductie met 1 stap.",
+
+  "Supermarkets": "Supermarkten",
+  "Requires two cities in play. Increase your M€ production 2 steps.": "Vereist twee steden in het spel. Verhoog je M€-productie met 2 stappen.",
+
+  "City Parks": "Stadsparken",
+  "Requires that you have 3 cities. Gain 2 plants.": "Vereist dat je 3 steden hebt. Ontvang 2 planten.",
+
+  "Soil Enrichment": "Bodemverrijking",
+  "Spend 1 microbe from ANY of your cards to gain 5 plants": "Besteed 1 microbe van EEN van je kaarten om 5 planten te ontvangen",
+
+  "Icy Impactors": "IJzige inslagers",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here, or spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Actie: Besteed 10 M€ (titanium mag worden gebruikt) om hier 2 asteroiden toe te voegen, of besteed hier 1 asteroide om een oceaantegel te plaatsen. DE EERSTE SPELER KIEST WAAR JE DEZE MOET PLAATSEN.",
+
+  "Floyd Continuum": "Floyd-continuum",
+  "Action: Gain 3 M€ per completed terraforming parameter.": "Actie: Ontvang 3 M€ per voltooide terraformingsparameter.",
+
+  "Martian Lumber Corp": "",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Effect: Bij het spelen van een bouwlabel mogen planten als 3 M€ per stuk worden gebruikt.",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Vereist dat je 2 groentegels hebt. Verhoog je plantproductie met 1 stap.",
+
+  "Solar Logistics": "Zonnelogistiek",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "Effect: Wanneer je een Aardelabel speelt, betaal je 2 M€ minder.",
+  "Effect: When any player plays a space event, draw a card.": "Effect: Wanneer een speler een ruimte-evenement speelt, trek je een kaart.",
+  "Gain 2 titanium.": "Ontvang 2 titanium.",
+
+  "Teslaract": "",
+  "Action: Spend 1 energy production to gain 1 plant production.": "Actie: Besteed 1 energieproductie om 1 plantproductie te ontvangen.",
+
+  "Red Ships": "Rode schepen",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Actie: Ontvang 1 M€ voor elke STAD EN SPECIALE TEGEL aangrenzend aan een oceaan.",
+
+  "Neptunian Power Consultants": "Neptuniaanse energieconsultants",
+  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Effect: Wanneer een oceaantegel wordt geplaatst, MAG je 5 M€ betalen (staal mag worden gebruikt) om je energieproductie met 1 stap te verhogen en 1 hydro-elektrische grondstof aan deze kaart toe te voegen.",
+  "1 VP per hydroelectric resource on this card": "1 OP per hydro-elektrische grondstof op deze kaart",
+
+  "Mars Nomads": "Marsnomaden",
+  "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "Actie: VERPLAATS DE NOMADEN naar een aangrenzend, niet-gereserveerd leeg gebied en ontvang DE PLAATSINGSBONUS alsof je daar een speciale tegel plaatst. Er mogen geen tegels op het Nomaden-gebied worden geplaatst.",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "PLAATS DE NOMADEN op een niet-gereserveerd, leeg gebied op het spelbord.",
+
+  "Kaguya Tech": "",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Verhoog je M€-productie met 2 stappen. Trek 1 kaart. Verwijder 1 van je groentegels (dit heeft geen invloed op zuurstof). Plaats daar een stadstegel, ongeacht plaatsingsregels. Ontvang plaatsingsbonussen zoals gebruikelijk.",
+
+  "Homeostasis Bureau": "Homeostasebureau",
+  "Effect: When you raise the temperature, gain 3 M€.": "Effect: Wanneer je de temperatuur verhoogt, ontvang je 3 M€.",
+
+  "Hermetic Order of Mars": "Hermetische Orde van Mars",
+  "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Zuurstof moet 4% of lager zijn. Verhoog je M€-productie met 2 stappen. Ontvang 1 M€ per leeg gebied aangrenzend aan je tegels.",
+
+  "St. Joseph of Cupertino Mission": "St. Joseph van Cupertino Missie",
+  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "Actie: Betaal 5 M€ (STAAL MAG WORDEN GEBRUIKT) om 1 kathedraal in een stad te bouwen. Maximaal 1 per stad. De stadseigenaar kan 2 M€ betalen om 1 kaart te trekken.",
+  "1 VP per City with a Cathedral in it.": "1 OP per stad met een kathedraal erin.",
+
+  "Cyberia Systems": "",
+  "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "Verhoog je staalproductie met 1 stap. Kopieer de PRODUCTIEVAKKEN van 2 van je kaarten met bouwlabels.",
+
+  "Carbon Nanosystems": "",
+  "Effect: When you play a science tag, including this, add a graphene resource here.": "Effect: Wanneer je een wetenschapslabel speelt, inclusief deze kaart, voeg hier 1 grafeengrondstof toe.",
+  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Effect: Bij het spelen van een ruimte- of stadslabel mogen grafeengrondstoffen als 4 M€ per stuk worden gebruikt.",
+
+  "Astra Mechanica": "",
+  "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "NEEM TOT 2 VAN JE GESPEELDE EVENEMENTKAARTEN TERUG IN JE HAND. DIT MOGEN GEEN KAARTEN ZIJN DIE SPECIALE TEGELS PLAATSEN.",
+
+  "Aqueduct Systems": "Aqueductsystemen",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Vereist dat je een stad naast een oceaan hebt. Trek 3 kaarten met een bouwlabel.",
+
+  "Directed Heat Usage": "Gericht warmtegebruik",
+  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Actie: Besteed 3 warmte om 4 M€ of 2 planten te ontvangen.",
+
+  "Supercapacitors": "Supercondensatoren",
+  "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "EFFECT: HET OMZETTEN VAN ENERGIE IN WARMTE TIJDENS PRODUCTIE IS OPTIONEEL VOOR ELKE ENERGIEGRONDSTOF.",
+  "Increase M€ production 1 step.": "Verhoog je M€-productie met 1 stap.",
+
+  "Robot Pollinators": "Robotbestuivers",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Vereist 4% zuurstof. Verhoog je plantproductie met 1 stap. Ontvang 1 plant voor elk plantlabel dat je hebt.",
+
+  "16 Psyche": "",
+  "Increase titanium production 2 steps. Gain 3 titanium.": "Verhoog je titaniumproductie met 2 stappen. Ontvang 3 titanium.",
+
+  "Comet Aiming": "Kometensturing",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "Actie: Besteed 1 titanium om 1 asteroidegrondstof aan EEN WILLEKEURIGE KAART toe te voegen, of verwijder hier 1 asteroide om een oceaantegel te plaatsen.",
+
+  "Cutting Edge Technology": "Geavanceerde technologie",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Effect: Wanneer je een kaart met een vereiste speelt, betaal je er 2 M€ minder voor.",
+
+  "Crash Site Cleanup": "Crashsite-opruiming",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Vereist dat een speler deze generatie planten van EEN ANDERE SPELER heeft verwijderd. Ontvang 1 titanium of 2 staal.",
+
+  "Directed Impactors": "Gerichte inslagers",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "Actie: Besteed 6 M€ om 1 asteroide toe te voegen aan EEN WILLEKEURIGE KAART (titanium mag worden gebruikt om dit te betalen), of verwijder hier 1 asteroide om de temperatuur met 1 stap te verhogen.",
+
+  "Field-Capped City": "Afgedekte veldstad",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Verhoog je M€-productie met 2 stappen, verhoog je energieproductie met 1 stap, ontvang 3 planten en plaats een stadstegel.",
+
+  "Magnetic Shield": "Magnetisch schild",
+  "Requires 3 power tags. Raise your TR 4 steps.": "Vereist 3 energielabels. Verhoog je TN met 4 stappen.",
+
+  "Meltworks": "Smeltfabriek",
+  "Action: Spend 5 heat to gain 3 steel.": "Actie: Besteed 5 warmte om 3 staal te ontvangen.",
+
+  "Mohole Lake": "Moholemeer",
+  "Action: Add a microbe or animal to ANOTHER card.": "Actie: Voeg een microbe of dier toe aan EEN ANDERE kaart.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Ontvang 3 planten. Verhoog de temperatuur met 1 stap en plaats 1 oceaantegel.",
+
+  "Diversity Support": "Diversiteitssteun",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Vereist dat je 9 verschillende soorten grondstoffen hebt. Ontvang 1 TN.",
+
+  "Topsoil Contract": "Bovengrondcontract",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Effect: Wanneer je een microbe op EEN WILLEKEURIGE KAART ontvangt, ontvang je ook 1 M€.",
+
+  "Imported Nutrients": "Geimporteerde voedingsstoffen",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Ontvang 4 planten en voeg 4 microben toe aan EEN ANDERE KAART.",
+
+  "Asteroid Deflection System": "Asteroideafweersysteem",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Actie: ONTHUL EN LEG de bovenste kaart van de trekstapel AF. Als die een ruimtelabel heeft, voeg hier een asteroide toe.",
+  "opponents may not remove your plants": "tegenstanders mogen je planten niet verwijderen",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Verlaag je energieproductie met 1 stap. 1 OP per asteroide op deze kaart.",
+
+  "Jovian Embassy": "Joviaanse ambassade",
+  "Raise your TR 1 step.": "Verhoog je TN met 1 stap.",
+
+  "Sub-Crust Measurements": "Onderkorstmetingen",
+  "Action: Draw a card.": "Actie: Trek een kaart.",
+
+  "Potatoes": "Aardappelen",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Verlies 2 planten. Verhoog je M€-productie met 2 stappen.",
+
+  "Meat Industry": "Vleesindustrie",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Effect: Wanneer je een dier op EEN WILLEKEURIGE KAART ontvangt, ontvang je 2 M€.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Verlaag je energieproductie met 4 stappen en verhoog je plantproductie met 2 stappen. Verhoog je TN met 3 stappen en plaats deze tegel.",
+
+  "Orbital Cleanup": "Orbitale schoonmaak",
+  "Action: Gain 1 M€ per science tag you have.": "Actie: Ontvang 1 M€ per wetenschapslabel dat je hebt.",
+  "Decrease your M€ production 2 steps.": "Verlaag je M€-productie met 2 stappen.",
+
+  "Law Suit": "Rechtszaak",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Steel 3 M€ van een speler die deze generatie JE GRONDSTOFFEN HEEFT VERWIJDERD OF JE PRODUCTIE HEEFT VERLAAGD. Plaats deze kaart met de afbeelding naar beneden in DE EVENEMENTENSTAPEL VAN DIE SPELER.",
+
+  "Small Asteroid": "Kleine asteroide",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "Verhoog de temperatuur met 1 stap. Verwijder maximaal 2 planten van een speler.",
+
+  "Asteroid Hollowing": "Asteroide-uitholling",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Actie: Besteed 1 titanium om hier 1 asteroidegrondstof toe te voegen en je M€-productie met 1 stap te verhogen.",
+  "1 VP for each 2 asteroids on this card.": "1 OP voor elke 2 asteroiden op deze kaart.",
+
+  "Advertising": "Reclame",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Effect: Wanneer je een kaart speelt met een basiskost van 20 M€ of meer, verhoog je je M€-productie met 1 stap.",
+
+  "Project Inspection": "Projectinspectie",
+  "Use a card action that has been used this generation.": "Gebruik een kaartactie die deze generatie al is gebruikt.",
+
+  "Rego Plastics": "Regoplastics",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Effect: Je staalgrondstoffen zijn 1 M€ extra waard.",
+
+  "Interplanetary Trade": "Interplanetaire handel",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Verhoog je M€-productie met 1 stap per verschillend label dat je in het spel hebt, inclusief deze kaart.",
+
+  "Penguins": "Pinguins",
+  "Requires 8 oceans.": "Vereist 8 oceanen.",
+
+  "Snow Algae": "Sneeuwalgen",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Vereist 2 oceanen. Verhoog je plantproductie en je warmteproductie elk met 1 stap.",
+
+  "Self-replicating Robots": "Zelfreplicerende robots",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Actie: Onthul en plaats een RUIMTE- OF BOUWKAART uit je hand hier en plaats er 2 grondstoffen op, OF verdubbel de grondstoffen op een kaart hier.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Effect: Een kaart hier mag worden gespeeld alsof die uit je hand komt, met kosten verminderd met het aantal grondstoffen erop.",
+
+  "Dusk Laser Mining": "Schemer-lasermijnbouw",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Vereist 2 wetenschapslabels. Verlaag je energieproductie met 1 stap en verhoog je titaniumproductie met 1 stap. Ontvang 4 titanium.",
+
+  "Hi-Tech Lab": "Hightechlab",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Actie: Besteed een willekeurige hoeveelheid energie om hetzelfde aantal kaarten te trekken. NEEM ER 1 IN JE HAND EN LEG DE REST AF.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Verlaag je energieproductie met 4 stappen en verhoog je plantproductie met 2 stappen. Verhoog je TN met 3 stappen. Plaats deze tegel.",
+
+  "Mercurian Alloys": "Mercuriaanse legeringen",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "Effect: Je titaniumgrondstoffen zijn 1 M€ extra waard.",
+
+  "Energy Market": "Energiemarkt",
+
+  "Asteroid Rights": "Asteroiderechten",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Actie: Besteed 1 M€ om 1 asteroide aan EEN WILLEKEURIGE kaart toe te voegen OF besteed hier 1 asteroide om je M€-productie met 1 stap te verhogen OF ontvang 2 titanium.",
+  "Add 2 asteroids to this card.": "Voeg 2 asteroiden toe aan deze kaart.",
+
+  "Stanford Torus": "",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "Plaats een stadstegel IN DE RUIMTE, buiten en los van de planeet.",
+
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Verhoog de temperatuur met 3 stappen en ontvang 4 staal. Plaats deze tegel AANGRENZEND AAN GEEN ENKELE stadstegel. Verwijder maximaal 6 planten van een speler.",
+
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Vereist 4 oceaantegels. Verhoog je energieproductie met 2 stappen. Plaats deze tegel AANGRENZEND AAN een oceaantegel.",
+
+  "Requires 8 oceans. 1 VP for each animal on this card.": "Vereist 8 oceanen. 1 OP voor elk dier op deze kaart.",
+  "Requires 2 science tags.": "Vereist 2 wetenschapslabels.",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Actie: Besteed 2X M€ om X energie te ontvangen, of verlaag je energieproductie met 1 stap om 8 M€ te ontvangen.",
+
+  "Bactoviral Research": "Bactoviraal onderzoek",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Trek 1 kaart. Kies 1 van je gespeelde kaarten en voeg er 1 microbe aan toe voor elk wetenschapslabel dat je hebt, inclusief deze kaart.",
+
+  "Bio Printing Facility": "Bioprintfaciliteit",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Actie: Besteed 2 energie om 2 planten te ontvangen OF om 1 dier toe te voegen aan EEN ANDERE kaart.",
+
+  "Harvest": "Oogst",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Vereist dat je 3 groentegels in het spel hebt. Ontvang 12 M€.",
+
+  "Outdoor Sports": "Buitensport",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Vereist een stad aangrenzend aan een oceaan. Verhoog je M€-productie met 2 stappen."
+}

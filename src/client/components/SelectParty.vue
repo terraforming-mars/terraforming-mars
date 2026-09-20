@@ -3,7 +3,7 @@
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <div class="wf-component--list-party" v-if="turmoil !== undefined">
           <label v-for="party in turmoil.parties" :key="party.name">
-              <input type="radio" v-model="selectedParty" :value="party.name" v-if="partyAvailableToSelect(party.name)"/>
+              <input type="radio" v-model="selectedParty" :value="party.name" v-if="partyAvailableToSelect(party.name)">
               <Party :party="party" :isDominant="isDominant(party.name)" :isAvailable="partyAvailableToSelect(party.name)"/>
           </label>
         </div>

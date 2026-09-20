@@ -3,6 +3,8 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {Random} from '../../common/utils/Random';
 import {ALL_COLONIES_TILES, BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES, PATHFINDERS_COLONIES_TILES} from './ColonyManifest';
 import {GameOptions} from '../game/GameOptions';
+import {comparing} from '../../common/utils/Ordering';
+import {toName} from '../../common/utils/utils';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on the RNG.
@@ -80,8 +82,8 @@ export class ColonyDealer {
     }
 
     this.discardedColonies.push(...tempDeck);
-    this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    this.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    this.discardedColonies.sort(comparing(toName));
+    this.colonies.sort(comparing(toName));
   }
 
   public restore(activeColonies: Array<IColony>): void {

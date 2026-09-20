@@ -23,15 +23,14 @@
   "Requires Venus 12%.": "Vaatii Venus 12 %.",
 
   "Sulphur-Eating Bacteria": "Rikkiä syövät bakteerit",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "TOIMINTO: Käytä mikä tahansa määrä mikrobeja täältä saadaksesi kolminkertaisen määrän M€.",
+  "Action: Add 1 microbe to this card, or spend any number of microbes here to gain triple amount of M€.": "TOIMINTO: Lisää 1 mikrobi tälle kortille TAI käytä mikä tahansa määrä mikrobeja täältä saadaksesi kolminkertaisen määrän M€.",
   "Requires Venus 6%": "Vaatii Venus 6 %.",
 
   "Venus Waystation": "Venus-välipysäkki",
   "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat Venus-ympyrän, maksat siitä 2 M€ vähemmän.",
 
   "Thermophiles": "Lämpöfilit",
-  "Action: Add 1 microbe to ANY Venus CARD.": "TOIMINTO: Lisää 1 mikrobi MILLE TAHANSA Venus-kortille.",
-  "Action: Remove 2 microbes to raise Venus 1 step": "TOIMINTO: Poista 2 mikrobia nostaaksesi Venusta 1 askel.",
+  "Action: Add 1 microbe to ANY Venus CARD, or remove 2 microbes to raise Venus 1 step.": "TOIMINTO: Lisää 1 mikrobi MILLE TAHANSA Venus-kortille TAI poista 2 mikrobia nostaaksesi Venusta 1 askel.",
 
   "Sponsored Academies": "Sponsoroidut akatemiat",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Hylkää 1 kortti kädestäsi ja SITTEN nosta 3 korttia. Kaikki VASTUSTAJAT nostavat 1 kortin.",
@@ -51,16 +50,14 @@
   "Atalanta Planitia Lab": "Atalanta Planitia -laboratorio",
 
   "Rotator Impacts": "Rotaattoritörmäykset",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "TOIMINTO: Maksa 6 M€ lisätäksesi asteroidiresurssin tälle kortille [TITAANIA SAA KÄYTTÄÄ].",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.": "TOIMINTO: Käytä 1 resurssi tältä kortilta nostaaksesi Venusta 1 askel.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED], or spend 1 resource from this card to increase Venus 1 step.": "TOIMINTO: Maksa 6 M€ lisätäksesi asteroidiresurssin tälle kortille [TITAANIA SAA KÄYTTÄÄ] TAI käytä 1 resurssi tältä kortilta nostaaksesi Venusta 1 askel.",
   "Venus must be 14% or lower": "Venuksen täytyy olla 14 % tai alempi",
 
   "Omnicourt": "Yleistuomioistuin",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Vaatii Venus-, Maa- ja Jupiter-ympyrät. Nosta MKL:ääsi 2 askelta.",
 
   "Jet Stream Microscrappers": "Suihkuvirtamikrokaapijat",
-  "Action: Spend 1 titanium to add 2 floaters here": "TOIMINTO: Käytä 1 titaania lisätäksesi 2 kelluketta tänne.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "TOIMINTO: Käytä 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to raise Venus 1 step.": "TOIMINTO: Käytä 1 titaania lisätäksesi 2 kelluketta tänne TAI käytä 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
 
   "Spin-Inducing Asteroid": "Pyörimisen aiheuttava asteroidi",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "Venuksen täytyy olla 10 % tai alempi. Nosta Venusta 2 askelta.",
@@ -84,8 +81,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "Nosta Venusta 1 askel. Lisää lämpötuotantoasi 3 askelta.",
 
   "Aerial Mappers": "Ilmakartoittajat",
-  "Action: Add floater to ANY card.": "TOIMINTO: Lisää kelluke MILLE TAHANSA kortille.",
-  "Action: Spend one floater here to draw 1 card.": "TOIMINTO: Käytä yksi kelluke täältä nostaaksesi 1 kortin.",
+  "Action: Add floater to ANY card, or spend one floater here to draw 1 card.": "TOIMINTO: Lisää kelluke MILLE TAHANSA kortille TAI käytä yksi kelluke täältä nostaaksesi 1 kortin.",
 
   "Aerosport Tournament": "Ilmaurheiluturnaus",
   "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Vaatii että sinulla on 5 kelluketta. Saat 1 M€ per kaupunkilaatta pelissä.",
@@ -104,15 +100,14 @@
 
   "Deuterium Export": "Deuteriumvienti",
   "Action: Add 1 floater to this card.": "TOIMINTO: Lisää 1 kelluke tälle kortille.",
-  "Action: Spend 1 floater here to increase your energy production 1 step.": "TOIMINTO: Käytä 1 kelluke täältä lisätäksesi energiatuotantoasi 1 askel.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to increase your energy production 1 step.": "TOIMINTO: Lisää 1 kelluke tälle kortille TAI käytä 1 kelluke täältä lisätäksesi energiatuotantoasi 1 askel.",
 
   "Extractor Balloons": "Uuttopallot",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "TOIMINTO: Poista 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
-  "Add 3 floaters to this card": "Lisää 3 kelluketta tälle kortille.",
+  "Action: Add 1 floater to this card, or remove 2 floaters here to raise Venus 1 step.": "TOIMINTO: Lisää 1 kelluke tälle kortille TAI poista 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
+  "Add 3 floaters to this card.": "Lisää 3 kelluketta tälle kortille.",
 
   "Forced Precipitation": "Pakotettu sade",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "TOIMINTO: Maksa 2 M€ lisätäksesi 1 kellukkeen TÄLLE kortille.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "TOIMINTO: Käytä 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card, or spend 2 floaters here to increase Venus 1 step.": "TOIMINTO: Maksa 2 M€ lisätäksesi 1 kellukkeen TÄLLE kortille TAI käytä 2 kelluketta täältä nostaaksesi Venusta 1 askel.",
 
   "Freyja Biodomes": "Freya-Biokuppelat",
   "10% Venus": "10 % Venus",
@@ -134,7 +129,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Lisää M€-tuotantoasi 1 askel per Maa-ympyrä joka sinulla on, tämä mukaan lukien. Aseta kaupunkilaatta VARATULLE ALUEELLE.",
 
   "Local Shading": "Paikallinen varjostus",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "TOIMINTO: Käytä 1 kelluke täältä lisätäksesi M€-tuotantoasi 1 askel.",
+  "Action: Add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step.": "TOIMINTO: Lisää 1 kelluke tälle kortille TAI käytä 1 kelluke täältä lisätäksesi M€-tuotantoasi 1 askel.",
 
   "Maxwell Base": "Maxwell-tukikohta",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "TOIMINTO: Lisää 1 resurssi TOISELLE VENUS-KORTTILLE.",

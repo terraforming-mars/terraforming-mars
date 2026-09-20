@@ -375,6 +375,9 @@ export class Server {
       if (tileType !== undefined) {
         model.tileType = tileType;
       }
+      if (space.cube !== undefined) {
+        model.cube = space.cube;
+      }
       const color = this.getColor(space);
       if (color !== undefined) {
         model.color = color;
@@ -459,7 +462,7 @@ export class Server {
     const moonData = game.moonData;
     if (moonData) {
       return {
-        logisticsRate: moonData.logisticRate,
+        logisticRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
         spaces: this.getSpaces(moonData.moon),

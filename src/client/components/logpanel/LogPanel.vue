@@ -1,54 +1,86 @@
 <template>
   <div class="log-container">
-    <div class="log-generations">
-      <h2 :class="getTitleClasses()">
+    <LogGenerationList
+      :max="viewModel.game.generation"
+      :selected="selectedGeneration"
+      :lastSoloGeneration="lastSoloGeneration"
+      @selected="selectGeneration">
+      <template #title>
+        <h2 :class="titleClasses">
           <span v-i18n>Game log</span>
-      </h2>
-      <div class="log-gen-title"  v-i18n>Gen: </div>
-      <div class="log-gen-numbers">
-        <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
-          {{ n }}
-        </div>
-      </div>
-      <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{lastSoloGeneration}}</span></span>
-    </div>
+        </h2>
+      </template>
+    </LogGenerationList>
     <div class="panel log-panel">
-      <div id="logpanel-scrollable" class="panel-body">
-        <ul v-if="messages">
-          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)" @spaceClicked="spaceClicked"></log-message-component>
-        </ul>
+      <div id="logpanel-scrollable" class="panel-body" @scroll="updateScrollState">
+        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="$emit('spaceClicked', $event)"/>
       </div>
+      <button
+        v-show="showScrollToBottomButton"
+        type="button"
+        class="log-latest-button"
+        aria-label="Latest logs"
+        title="Latest logs"
+        data-test="log-latest"
+        @click="showLatestLogs"
+      >
+        <svg class="log-latest-button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </button>
       <div class='debugid'>(debugid {{step}})</div>
     </div>
-    <card-panel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
+    <LogMessageInspector ref="messageInspector" :viewModel="viewModel"/>
   </div>
 </template>
 
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {paths} from '@/common/app/paths';
 import {LogMessage} from '@/common/logs/LogMessage';
-import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
+import {ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ParticipantId, SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
-import CardPanel from '@/client/components/logpanel/CardPanel.vue';
-import {isMarsSpace} from '@/common/boards/spaces';
+import LogMessageInspector from '@/client/components/logpanel/LogMessageInspector.vue';
+import LogGenerationList from '@/client/components/logpanel/LogGenerationList.vue';
+import {fetchLogs} from '@/client/utils/fetchLogs';
 
-let logAbortController: AbortController | undefined;
+const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
+
+type ScrollPosition = number | 'bottom';
+
+type ViewState = {
+  // The current generation viewed in the log panel, which might be different
+  // from the current generation in the game.
+  selectedGeneration: number,
+  // True if the player was viewing the newest generation, and so should be moved
+  // forward to whatever generation is newest after a remount.
+  following: boolean,
+  // Either 'bottom' which means continue scrolling as new entries appear,
+  // or a number which is the pixel height from the top of the widget.
+  scrollPosition: ScrollPosition,
+};
+
+let viewState: ViewState | undefined;
+
+type Refs = {
+  messageInspector: InstanceType<typeof LogMessageInspector>;
+};
 
 type LogPanelModel = {
   messages: Array<LogMessage>,
   selectedGeneration: number,
-  selectedMessage: LogMessage | undefined,
+  showScrollToBottomButton: boolean,
+  // True while the panel should keep following the newest generation as it changes.
+  // False once the player manually navigates to an earlier generation.
+  following: boolean,
 };
 
 export default defineComponent({
-  name: 'log-panel',
+  name: 'LogPanel',
   props: {
     viewModel: {
       type: Object as () => ViewModel,
@@ -68,133 +100,116 @@ export default defineComponent({
     return {
       messages: [],
       selectedGeneration: -1,
-      selectedMessage: undefined,
+      showScrollToBottomButton: false,
+      following: true,
     };
   },
   components: {
     LogMessageComponent,
-    CardPanel,
+    LogMessageInspector,
+    LogGenerationList,
   },
+  emits: ['spaceClicked'],
   methods: {
     messageClicked(message: LogMessage) {
-      this.selectedMessage = message;
-    },
-    spaceClicked(spaceId: SpaceId) {
-      const id = isMarsSpace(spaceId) ? 'shortkey-board' : 'shortkey-moonBoard';
-      const el = document.getElementById(id);
-      el?.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
-
-      const regions = ['main_board', 'moon_board', 'moon_board_outer_spaces'];
-      for (const region of regions) {
-        const board = document.getElementById(region);
-        if (board !== null) {
-          const array = board.getElementsByClassName('board-log-highlight');
-          for (let i = 0, length = array.length; i < length; i++) {
-            const element = array[i] as HTMLElement;
-            if (element.getAttribute('data_log_highlight_id') === spaceId) {
-              element.classList.add('highlight');
-              setTimeout(() => {
-                element.classList.remove('highlight');
-              }, 3000);
-              return;
-            }
-          }
-        }
-      }
+      this.typedRefs.messageInspector.show(message);
     },
     selectGeneration(gen: number): void {
+      this.following = gen === this.generation;
       if (gen !== this.selectedGeneration) {
-        this.getLogsForGeneration(gen);
+        this.getLogsForGeneration(gen, gen === this.generation ? 'bottom' : undefined);
       }
       this.selectedGeneration = gen;
     },
-    getLogsForGeneration(generation: number): void {
+    showLatestLogs(): void {
+      this.following = true;
+      this.selectedGeneration = this.generation;
+      this.getLogsForGeneration(this.generation, 'bottom');
+    },
+    getLogsForGeneration(generation: number, scrollPosition?: ScrollPosition): void {
       const messages = this.messages;
-      // abort any pending requests
-      if (logAbortController) {
-        logAbortController.abort();
-        logAbortController = undefined;
-      }
-
-      const url = `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`;
-      const controller = new AbortController();
-      logAbortController = controller;
-
-      fetch(url, {signal: controller.signal})
-        .then((resp) => {
-          if (!resp.ok) {
-            console.error(`error updating messages, response code ${resp.status}`);
-            return null;
-          }
-          return resp.json();
-        })
+      fetchLogs(this.viewModel.id, generation)
         .then((data) => {
           if (!data) {
             return;
           }
-          messages.splice(0, messages.length);
+          messages.length = 0;
           messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
-          if (generation === this.generation) {
+          if (scrollPosition === 'bottom') {
             this.$nextTick(this.scrollToEnd);
+          } else if (scrollPosition !== undefined) {
+            this.$nextTick(() => this.restoreScrollTop(scrollPosition));
           }
-        })
-        .catch((err) => {
-          if (err.name === 'AbortError') {
-            // ignore aborted requests
-            return;
-          }
-          console.error('error updating messages, unable to reach server');
         });
     },
     scrollToEnd() {
-      const scrollablePanel = document.getElementById('logpanel-scrollable');
+      const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
+        this.updateScrollState();
       }
     },
-    getClassesGenIndicator(gen: number): string {
-      const classes = ['log-gen-indicator'];
-      if (gen === this.selectedGeneration) {
-        classes.push('log-gen-indicator--selected');
+    restoreScrollTop(scrollTop: number) {
+      const scrollablePanel = this.scrollablePanel;
+      if (scrollablePanel !== null) {
+        scrollablePanel.scrollTop = scrollTop;
+        this.updateScrollState();
       }
-      return classes.join(' ');
     },
-    getGenerationsRange(): Array<number> {
-      const generations: Array<number> = [];
-      for (let i = 1; i <= this.generation; i++) {
-        generations.push(i);
+    updateScrollState(): void {
+      this.showScrollToBottomButton = !this.isNearBottom();
+    },
+    isNearBottom(): boolean {
+      const scrollablePanel = this.scrollablePanel;
+      if (scrollablePanel === null) {
+        return true;
       }
-      return generations;
+      const remaining = scrollablePanel.scrollHeight - scrollablePanel.clientHeight - scrollablePanel.scrollTop;
+      return remaining <= BOTTOM_SCROLL_THRESHOLD;
     },
-    getTitleClasses(): string {
+  },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
+    generation(): number {
+      return this.viewModel.game.generation;
+    },
+    lastSoloGeneration(): number | undefined {
+      return this.viewModel.players.length === 1 ? this.viewModel.game.lastSoloGeneration : undefined;
+    },
+    titleClasses(): string {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color, 'shadow'));
       return classes.join(' ');
     },
-    lastGenerationClass(): string {
-      return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-  },
-  computed: {
-    generation(): number {
-      return this.viewModel.game.generation;
-    },
-    lastSoloGeneration(): number {
-      return this.viewModel.game.lastSoloGeneration;
-    },
-    players(): Array<PublicPlayerModel> {
-      return this.viewModel.players;
-    },
-    id(): ParticipantId | undefined {
-      return this.viewModel.id;
+    scrollablePanel(): HTMLElement | null {
+      return document.getElementById('logpanel-scrollable');
     },
   },
   mounted() {
-    this.selectedGeneration = this.generation;
-    this.getLogsForGeneration(this.generation);
+    const restoredState = viewState;
+    if (restoredState !== undefined && restoredState.following === false) {
+      this.following = false;
+      this.selectedGeneration = restoredState.selectedGeneration;
+      this.getLogsForGeneration(this.selectedGeneration, restoredState.scrollPosition);
+    } else {
+      // Either this is the first mount, or the panel was following the newest
+      // generation, which may have advanced since the previous instance unmounted.
+      this.following = true;
+      this.selectedGeneration = this.generation;
+      this.getLogsForGeneration(this.selectedGeneration, 'bottom');
+    }
+  },
+  beforeUnmount() {
+    viewState = {
+      selectedGeneration: this.selectedGeneration,
+      following: this.following,
+      scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
+    };
   },
 });
 

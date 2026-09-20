@@ -10,15 +10,14 @@
         <template v-if="ledger[unit]?.available > 0">
           <tr>
             <td>
-              <payment-unit-component
+              <PaymentUnitComponent
                 v-model.number="payment[unit]"
                 :unit="unit"
                 :description="descriptions[unit]"
                 :rate="ledger[unit].rate"
                 @plus="addValue(unit)"
                 @minus="reduceValue(unit)"
-                @max="maxValue(unit)">
-              </payment-unit-component>
+                @max="maxValue(unit)"/>
               <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
               Some ${0} are reserved and unavailable here.</div>
             </td>

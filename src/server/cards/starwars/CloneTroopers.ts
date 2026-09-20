@@ -29,11 +29,14 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: 'SW02',
         renderData: CardRenderer.builder((b) => {
-          b.arrow(Size.SMALL).resource(CardResource.CLONE_TROOPER).or().resource(CardResource.CLONE_TROOPER).arrow(Size.SMALL).text('STEAL', Size.SMALL).wild(1, {all});
+          b.arrow(Size.SMALL).resource(CardResource.CLONE_TROOPER).or().resource(CardResource.CLONE_TROOPER).arrow(Size.SMALL).text('STEAL', {size: Size.SMALL}).wild(1, {all});
           b.br;
-          b.text('(Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.)', Size.TINY, false, false);
+          b.text('(Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.)', {size: Size.TINY, isBold: false});
+          b.br;
+          b.plainText('Requires 6 ocean tiles.', true);
+          b.br;
+          b.vpText('1 VP per Clone Trooper on this card.');
         }),
-        description: 'Requires 6 ocean tiles. 1 VP per Clone Trooper on this card.',
       },
     });
   }

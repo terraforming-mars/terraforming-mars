@@ -3,9 +3,9 @@ import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {IPlayer} from '../IPlayer';
-import {isPlayerId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {RouteError} from './RouteError';
 
 /**
  * Reloads the game from the last action.
@@ -23,23 +23,13 @@ export class Reset extends Handler {
     super();
   }
 
-  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
-    const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      responses.badRequest(req, res, 'missing id parameter');
-      return;
-    }
-
-    if (!isPlayerId(playerId)) {
-      responses.badRequest(req, res, 'invalid player id');
-      return;
-    }
+  public override async get(_req: Request, res: Response, ctx: Context): Promise<void> {
+    const playerId = ctx.urlParams.playerId('id');
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
-      responses.notFound(req, res);
-      return;
+      throw RouteError.notFound();
     }
 
     // While prototyping, this is only available for solo games
@@ -54,25 +44,18 @@ export class Reset extends Handler {
       console.warn(`unable to find player ${playerId}`, err);
     }
     if (player === undefined) {
-      responses.notFound(req, res);
-      return;
+      throw RouteError.notFound();
     }
     if (player.game.activePlayer.id !== player.id) {
-      responses.badRequest(req, res, 'Not the active player');
-      return;
+      throw RouteError.badRequest('Not the active player');
     }
 
-    try {
-      const game = await ctx.gameLoader.getGame(player.game.id, /** force reload */ true);
-      if (game !== undefined) {
-        const reloadedPlayer = game.getPlayerById(player.id);
-        game.inputsThisRound = 0;
-        responses.writeJson(res, ctx, Server.getPlayerModel(reloadedPlayer));
-        return;
-      }
-    } catch (err) {
-      console.error(err);
+    const reloadedGame = await ctx.gameLoader.getGame(player.game.id, /** force reload */ true);
+    if (reloadedGame === undefined) {
+      throw RouteError.badRequest('Could not reset');
     }
-    responses.badRequest(req, res, 'Could not reset');
+    const reloadedPlayer = reloadedGame.getPlayerById(player.id);
+    reloadedGame.inputsThisRound = 0;
+    responses.writeJson(res, ctx, Server.getPlayerModel(reloadedPlayer));
   }
 }

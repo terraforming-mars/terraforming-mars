@@ -1,10 +1,12 @@
 import {expect} from 'chai';
-import {setVenusScaleLevel} from '../../TestingUtils';
+import {churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast} from '@/common/utils/utils';
@@ -53,6 +55,10 @@ describe('RotatorImpacts', () => {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
+    runAllActions(game);
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megacredits: 6});
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 
@@ -78,7 +84,7 @@ describe('RotatorImpacts', () => {
     card.resourceCount = 1;
 
     // two possible actions: add resource or spend titanium
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

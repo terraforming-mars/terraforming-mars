@@ -17,7 +17,7 @@ export interface IPolicy {
   onPolicyStartForPlayer?(player: IPlayer): void;
   onPolicyEnd?(game: IGame): void;
   onPolicyEndForPlayer?(player: IPlayer): void;
-  }
+}
 
 export abstract class Policy implements IPolicy {
   abstract readonly id: PolicyId;

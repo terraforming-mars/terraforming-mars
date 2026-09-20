@@ -10,6 +10,7 @@ import {cast} from '@/common/utils/utils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
+import {statusCode} from '@/common/http/statusCode';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -25,6 +26,7 @@ describe('PlayerInput', () => {
   it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
     await scaffolding.post(PlayerInput.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
@@ -46,7 +48,7 @@ describe('PlayerInput', () => {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      req.emitString(JSON.stringify(orOptionsResponse));
       req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
@@ -74,7 +76,7 @@ describe('PlayerInput', () => {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      scaffolding.req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      scaffolding.req.emitString(JSON.stringify(orOptionsResponse));
       scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
@@ -92,11 +94,12 @@ describe('PlayerInput', () => {
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      scaffolding.req.emitter.emit('data', '}{');
+      scaffolding.req.emitString('}{');
       scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).matches(/Unexpected token/);
   });
 });

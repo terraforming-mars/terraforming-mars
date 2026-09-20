@@ -1,11 +1,7 @@
-// import {SpaceType} from '../../common/boards/SpaceType';
 import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
 import {Resource} from '../../common/Resource';
 import {Tag} from '../../common/cards/Tag';
-// import {SpaceId} from '../../common/Types';
-// import {CardResource} from '../../common/CardResource';
-// import {TileType} from '../../common/TileType';
 import {SpaceId} from '../../common/Types';
 import {NamedMoonSpace} from '../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../common/TileType';
@@ -14,6 +10,7 @@ import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Units} from '../../common/Units';
 import {NoAttributes} from './NoAttributes';
+import {Message} from '@/common/logs/Message';
 
 type ValueOf<Obj> = Obj[keyof Obj];
 type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
@@ -43,11 +40,26 @@ export type Behavior = {
   or?: OrBehavior;
 
   /**
-   * Spend one of resources bdecreaseTerraformRatingefore taking the action.
+   * Spend one of resources before taking the action.
    *
    * This is specifically designed to spend only one resource type.
    */
-  spend?: Partial<OneOfType<Spend>>;
+  spend?: Partial<OneOfType<Spend>> & {
+    canUseSteel?: boolean,
+    canUseTitanium?: boolean,
+  };
+
+  /**
+   * Lose one of the resources here, or as much of it as the player has.
+   *
+   * This is forgiving, compred to `spend`: it never blocks the behavior, never asks
+   * the player to choose how to pay, and takes what it can when the player comes up short.
+   * Values can't go negative, and the player can't lose more than they have.)
+   */
+  lose?: Partial<OneOfType<{
+    production: Partial<CountableUnits>,
+    stock: Partial<CountableUnits>,
+  }>>;
 
   /** Gain or lose production */
   production?: Partial<CountableUnits>;
@@ -68,8 +80,14 @@ export type Behavior = {
   /** Add resources to any cards */
   addResourcesToAnyCard?: AddResource | Array<Omit<AddResource, 'mustHaveCard'>>;
 
-  // /** Remove resources from any card */
-  // removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
+  /**
+   * Remove resources from any card.
+   */
+  removeResourcesFromAnyCard?: {
+    type: CardResource,
+    count?: Countable,
+    source?: 'self' | 'opponents' | 'all',
+  };
 
   /** Decrease any production */
   decreaseAnyProduction?: DecreaseAnyProduction;
@@ -96,6 +114,8 @@ export type Behavior = {
   ocean?: {
     count?: 2,
     on?: PlacementType,
+    /** The first player selects the space; the acting player is still credited. (Icy Impactors) */
+    firstPlayerPlaces?: true,
   },
 
   tile?: {
@@ -111,8 +131,8 @@ export type Behavior = {
   /** Remove resources from any player.
   // removeAnyResource: {type: CardResource, count: number},
 
-  /** Raise the titanium and steel value. On discard, reduce them. */
-  titanumValue?: 1;
+  /** Raise or lower the titanium and steel value. On discard, reverse it. */
+  titanumValue?: 1 | -1;
   steelValue?: 1;
 
   /** Draw this many cards from the deck. */
@@ -152,13 +172,13 @@ export type Behavior = {
     habitatTile?: PlaceMoonTile,
     /** Places a mine tile and also raises the mining rate */
     mineTile?: PlaceMoonTile,
-    /** Places a road tile and also raises the logistics rate */
+    /** Places a road tile and also raises the logistic rate */
     roadTile?: PlaceMoonTile,
     /** Places a special tile on the Moon. */
     tile?: PlaceMoonTile & {type: TileType},
     habitatRate?: number,
     miningRate?: number,
-    logisticsRate?: number,
+    logisticRate?: number,
   },
 
   underworld?: {
@@ -201,6 +221,12 @@ export interface AddResource {
   count: Countable,
   type?: CardResource,
   tag?: Tag,
+
+  /**
+   * If true, this card cannot be the target of the resource, even if it matches.
+   */
+  excludeThis?: true,
+
   /**
    * If true, then there must be a card that matches this requirement to take the action.
    *
@@ -233,4 +259,5 @@ export interface TitledBehavior extends Behavior {
 export interface OrBehavior {
   behaviors: Array<TitledBehavior>;
   autoSelect?: boolean;
+  title?: string | Message;
 }

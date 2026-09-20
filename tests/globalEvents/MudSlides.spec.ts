@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {IGame} from '../../src/server/IGame';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Space} from '../../src/server/boards/Space';
@@ -11,12 +10,10 @@ describe('MudSlides', () => {
   let card: MudSlides;
   let player: TestPlayer;
   let game: IGame;
-  let turmoil: Turmoil;
 
   beforeEach(() => {
     card = new MudSlides();
     [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
-    turmoil = Turmoil.getTurmoil(game);
   });
 
   it('resolve play', () => {
@@ -25,7 +22,7 @@ describe('MudSlides', () => {
     game.addOcean(player, oceanTile);
     player.megaCredits = 10;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).to.eq(6);
   });
@@ -60,7 +57,7 @@ describe('MudSlides', () => {
 
     player.megaCredits = 10;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).to.eq(6);
   });

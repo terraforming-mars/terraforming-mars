@@ -106,13 +106,13 @@
     "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Zwiększ temperaturę o 2 poziomy, lub zwiększ tlen o 2 poziomy, lub zwiększ Wenus o 2 poziomy. Dobierz 2 karty z symbolem dryfowców.",
 
   "Board of Directors": "Rada Dyrektorów",
-    "ACTION: ": "AKCJA: ",
+    "ACTION:": "AKCJA: ",
     "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Dobierz 1 kartę Preludium: albo odrzuć ją, albo zapłać 12 M€ i usuń 1 zasób dyrektora z tej karty, aby ją zagrać.",
     "Add 4 director resources here.": "Dodaj 4 zasoby dyrektora do tej karty.",
   
   "Floating Trade Hub": "Podniebne Centrum Handlowe",
     "Action: Add 2 floaters to ANY card.": "Akcja: Dodaj 2 dryfowce do dowolnej karty.",
-    "Action: Remove any number of floaters here to gain that many of one standard resource.": "Akcja: Usuń dowolną liczbę dryfowców z tej karty, aby otrzymać tyle standardowych zasobów.",
+    "Action: Add 2 floaters to ANY card, or remove any number of floaters here to gain that many of one standard resource.": "Akcja: Dodaj 2 dryfowce do dowolnej karty lub usuń dowolną liczbę dryfowców z tej karty, aby otrzymać tyle standardowych zasobów.",
   
   "Early Colonization": "Wczesna Kolonizacja",
     "INCREASE ALL COLONY TRACKS 2 STEPS": "Przesuń postęp na wszystkich koloniach o 2 kroki",

@@ -37,7 +37,7 @@ describe('CorrosiveRain', () => {
     player.megaCredits = 15;
     player2.megaCredits = 15;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(game.deferredActions).has.lengthOf(2);
     runAllActions(game);
     expect(game.deferredActions).has.lengthOf(0);
@@ -59,7 +59,7 @@ describe('CorrosiveRain', () => {
 
     player.megaCredits = 3;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     const reduce10MC = cast(orOptions.options[0], SelectOption);

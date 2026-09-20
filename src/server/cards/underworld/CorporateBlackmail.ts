@@ -29,8 +29,8 @@ export class CorporateBlackmail extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U039',
         renderData: CardRenderer.builder((b) => {
-          b.text('PAYS YOU', Size.SMALL).megacredits(10, {all}).or().corruption(2, {all}).br;
-          b.text('THIS CANNOT BE BLOCKED BY CORRUPTION', Size.SMALL).br;
+          b.text('PAYS YOU', {size: Size.SMALL}).megacredits(10, {all}).or().corruption(2, {all}).br;
+          b.text('THIS CANNOT BE BLOCKED BY CORRUPTION', {size: Size.SMALL}).br;
         }),
         description: 'Requires 1 corruption. Target a player that has at least 3 corruption. ' +
           'That player pays you 10 M€ or 2 corruption - their choice.',

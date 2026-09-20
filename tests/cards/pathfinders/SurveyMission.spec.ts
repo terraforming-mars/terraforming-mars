@@ -144,4 +144,16 @@ describe('SurveyMission', () => {
     expect(selectSpace.spaces).not.to.include(space04);
     expect(selectSpace.spaces.map(toSpaceIdDigit)).to.have.members([5, 10, 11, 16, 17]);
   });
+
+  it('Spaces with unaffordable placement bonuses are filtered', () => {
+    // Put a Hellas-style ocean bonus on space 04. Space 04 only appears in triplet [4,5,10].
+    const space04 = board.getSpaceOrThrow('04');
+    space04.bonus = [SpaceBonus.OCEAN];
+
+    player.megaCredits = 5;
+    expect(cast(card.play(player), SelectSpace).spaces).not.to.include(space04);
+
+    player.megaCredits = 6;
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(space04);
+  });
 });

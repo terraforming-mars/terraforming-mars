@@ -17,7 +17,7 @@ describe('GlobalDustStorm', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
     player.heat = 7;
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(8);
     expect(player.heat).to.eq(0);
     expect(player2.megaCredits).to.eq(10);

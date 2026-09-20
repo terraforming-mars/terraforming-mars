@@ -7,7 +7,7 @@
                   <div class="game_end_success">
                       <h2 v-i18n>You win!</h2>
                       <div class="game_end_solo_img">
-                          <img src="assets/solo_win.png" />
+                          <img src="assets/solo_win.png" >
                       </div>
                       <div class="game_end_notice">
                         <span v-i18n>But it isn't the reason to stop making Mars better.</span>
@@ -102,14 +102,14 @@
                       </tr>
                   </tbody>
               </table>
-              <br/>
+              <br>
               <h2 v-i18n>Victory points details</h2>
-              <victory-point-chart
+              <VictoryPointChart
                 :datasets="vpDataset"
                 :generation="game.generation"
                 :animation="true"
                 :id="'victory-point-chart'"
-                ></victory-point-chart>
+                />
               <div class="game-end-flexrow">
                   <div v-for="p in playersInPlace" :key="p.color" class="game-end-column">
                       <div class="game-end-winer-scorebreak-player-title">
@@ -157,8 +157,8 @@
                           <th><div class="tile ocean-tile"></div></th>
                           <th v-if="game.gameOptions.expansions.venus"><div class="tile venus-tile"></div></th>
                           <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-colony-tile"></div></th>
-                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-mine-tile"></div></th>
                           <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-road-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-mine-tile"></div></th>
                           <th><div class="game-end-total-column">Total</div></th>
                       </tr>
                   </thead>
@@ -170,8 +170,8 @@
                           <td>{{ data.oceans }}</td>
                           <td v-if="game.gameOptions.expansions.venus">{{ data.venus }}</td>
                           <td v-if="game.gameOptions.expansions.moon">{{ data.moonHabitat }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistic }}</td>
                           <td v-if="game.gameOptions.expansions.moon">{{ data.moonMining }}</td>
-                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistics }}</td>
                           <td class="game-end-total">{{ data.total }}</td>
                       </tr>
                   </tbody>
@@ -179,15 +179,15 @@
           </div>
           <div class="game-end-flexrow">
           <div class="game_end_block--board game-end-column">
-              <victory-point-chart
+              <VictoryPointChart
                 :datasets="globalsDataset"
                 :generation="game.generation"
                 :animation="true"
                 :id="'global-parameter-chart'"
                 :yAxisLabel="'% completed'"
-              ></victory-point-chart>
+              />
               <h2 v-i18n>Final situation on the board</h2>
-              <board
+              <Board
                   :spaces="game.spaces"
                   :expansions="game.gameOptions.expansions"
                   :venusScaleLevel="game.venusScaleLevel"
@@ -195,15 +195,17 @@
                   :boardName ="game.gameOptions.boardName"
                   :oceans_count="game.oceans"
                   :oxygen_level="game.oxygenLevel"
-                  :temperature="game.temperature"></board>
-            <MoonBoard v-if="game.moon !== undefined" :model="game.moon"></MoonBoard>
+                  :temperature="game.temperature"
+                  :tileView="tileView"
+                  @toggleTileView="cycleTileView()"/>
+            <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
-            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"></DeltaProjectBoard>
+            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
           </div>
           <div class="game_end_block--log game-end-column">
-            <log-panel :color="color" :viewModel="viewModel"></log-panel>
+            <LogPanel :color="color" :viewModel="viewModel"/>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -216,11 +218,14 @@
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {setFaviconStatus} from '@/client/utils/favicon';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import {nextTileView, TileView} from '@/client/components/board/TileView';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
@@ -250,7 +255,7 @@ function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | 
 }
 
 export default defineComponent({
-  name: 'game-end',
+  name: 'GameEnd',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel | undefined,
@@ -285,11 +290,10 @@ export default defineComponent({
       if (id === undefined) {
         return undefined;
       }
-      return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
+      return `${paths.END_GAME_LOG}?id=${id}`;
     },
     playersInPlace(): Array<PublicPlayerModel> {
-      const copy = [...this.viewModel.players];
-      copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      const sorted = this.viewModel.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) {
           return -1;
         }
@@ -304,7 +308,7 @@ export default defineComponent({
         }
         return 0;
       });
-      return copy.reverse();
+      return sorted.reverse();
     },
     winners() {
       const sortedPlayers = this.playersInPlace;
@@ -350,11 +354,11 @@ export default defineComponent({
       if (this.game.gameOptions.expansions.moon === true) {
         dataset.push({label: $t('L. Habitat'), color: 'orange', data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
         dataset.push({label: $t('L. Mining'), color: 'pink', data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
-        dataset.push({label: $t('L. Logistics'), color: 'purple', data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
+        dataset.push({label: $t('L. Logistic'), color: 'purple', data: getValues(GlobalParameter.MOON_LOGISTIC_RATE, 0, 8)});
       }
       return dataset;
     },
-    playerContributionsData(): Array<{player: string, color: Color, temp: number, oxygen: number, oceans: number, venus?: number, moonHabitat?: number, moonMining?: number, moonLogistics?: number, total: number}> {
+    playerContributionsData(): Array<{player: string, color: Color, temp: number, oxygen: number, oceans: number, venus?: number, moonHabitat?: number, moonMining?: number, moonLogistic?: number, total: number}> {
       return this.players.map((player) => {
         const steps = player.globalParameterSteps || {};
         const temp = steps[GlobalParameter.TEMPERATURE] || 0;
@@ -363,7 +367,7 @@ export default defineComponent({
         const venus = steps[GlobalParameter.VENUS] || 0;
         const moonHabitat = steps[GlobalParameter.MOON_HABITAT_RATE] || 0;
         const moonMining = steps[GlobalParameter.MOON_MINING_RATE] || 0;
-        const moonLogistics = steps[GlobalParameter.MOON_LOGISTICS_RATE] || 0;
+        const moonLogistic = steps[GlobalParameter.MOON_LOGISTIC_RATE] || 0;
 
         return {
           player: player.name,
@@ -374,20 +378,23 @@ export default defineComponent({
           venus,
           moonHabitat,
           moonMining,
-          moonLogistics,
-          total: temp + oxygen + oceans + venus + moonHabitat + moonMining + moonLogistics,
+          moonLogistic: moonLogistic,
+          total: temp + oxygen + oceans + venus + moonHabitat + moonMining + moonLogistic,
         };
       });
     },
+    constants(): typeof constants {
+      return constants;
+    },
   },
-  data() {
+  data(): {tileView: TileView} {
     return {
-      constants,
+      tileView: 'show',
     };
   },
   components: {
-    'board': Board,
-    'log-panel': LogPanel,
+    Board,
+    LogPanel,
     AppButton,
     MoonBoard,
     PlanetaryTracks,
@@ -396,8 +403,14 @@ export default defineComponent({
   },
   mounted() {
     setDocumentTitle('🏁 | ' + this.game.name);
+    if (getPreferences().experimental_ui) {
+      setFaviconStatus('ended');
+    }
   },
   methods: {
+    cycleTileView(): void {
+      this.tileView = nextTileView(this.tileView);
+    },
     getEndGamePlayerRowColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');
     },

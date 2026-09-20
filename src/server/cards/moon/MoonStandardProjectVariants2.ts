@@ -64,14 +64,14 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
       name: CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2,
       cost: 21,
       reserveUnits: Units.EMPTY,
-      tr: {moonLogistics: 1},
+      tr: {moonLogistic: 1},
       tilesBuilt: [TileType.MOON_ROAD],
 
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 21 M€ to place a road on The Moon and raise the Logistics Rate 1 step.', (eb) => {
-            eb.megacredits(21).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
+          b.standardProject('Spend 21 M€ to place a road on The Moon and raise the logistic rate 1 step.', (eb) => {
+            eb.megacredits(21).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
           }),
         ),
       },

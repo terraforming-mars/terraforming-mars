@@ -24,7 +24,7 @@ export class SoilExport extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U058',
         renderData: CardRenderer.builder((b) => {
-          b.excavate().resource(CardResource.FLOATER, 3).br;
+          b.excavate().resource(CardResource.FLOATER, 3).asterix().br;
           b.plainText('Excavate an underground resource. Add 3 floaters to any card').br;
         }),
       },

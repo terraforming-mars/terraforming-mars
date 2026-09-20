@@ -73,6 +73,6 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   private isEmpty(space: Space): boolean {
-    return space.spaceType === SpaceType.RESTRICTED ||Board.hasRealTile(space) === false;
+    return space.spaceType !== SpaceType.RESTRICTED && Board.hasRealTile(space) === false;
   }
 }

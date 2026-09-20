@@ -23,7 +23,7 @@ type Data = {
 };
 
 export default defineComponent({
-  name: 'login-home',
+  name: 'LoginHome',
   data(): Data {
     return {
       user: undefined,

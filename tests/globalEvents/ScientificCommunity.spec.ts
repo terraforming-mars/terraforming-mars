@@ -19,7 +19,7 @@ describe('ScientificCommunity', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(1);
     expect(player2.megaCredits).to.eq(5);
   });

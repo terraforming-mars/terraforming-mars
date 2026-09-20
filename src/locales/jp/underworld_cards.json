@@ -49,7 +49,7 @@
 
     "Earthquake Machine": "地震発生装置",
     "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
-    "Requires 2 science tags. Decrease any plant production 1 step": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
+    "Requires 2 science tags. Decrease any plant production 1 step.": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
 
     "Excavator Leasing": "貸し掘削機",
     "Effect: The excavate standard project costs 1 M€ less for all players.": "効果：全プレイヤーは標準プロジェクト「地下採掘」のプレイコスト-1MC.",
@@ -95,8 +95,7 @@
     "// Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
 
     "Grey Market Exploitation": "グレーマーケットでの搾取",
-    "Action: Spend 1 M€ to gain 1 standard resource.": "アクション：1MC支払い、1標準リソース獲得.",
-    "Action: Spend 1 corruption to gain 3 of the same standard resource.": "アクション：1汚職支払い、同一の3標準リソース獲得",
+    "Action: Spend 1 M€ to gain 1 standard resource, or spend 1 corruption to gain 3 of the same standard resource.": "アクション：1MC支払い、1標準リソース獲得 または 1汚職支払い、同一の3標準リソース獲得",
     "Requires 2 corruption.": "条件：汚職2つ以上.",
 
     "Guerilla Ecologists": "ゲリラ生態学者",

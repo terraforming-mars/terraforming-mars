@@ -20,7 +20,7 @@ export class TradeEnvoys extends Card implements IProjectCard {
         cardNumber: 'C46',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
-            eb.trade().startEffect.text('+1', Size.LARGE);
+            eb.trade().startEffect.text('+1', {size: Size.LARGE});
           });
         }),
       },

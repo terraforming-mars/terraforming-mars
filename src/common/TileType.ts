@@ -1,8 +1,7 @@
-// There might be a temptation to rename or reorder these, but TileType is stored in the database
-// as its number. Would have been better if this was stored as a string, but that ship has sailed,
-
 import {CardName} from './cards/CardName';
 
+// There might be a temptation to rename or reorder these, but TileType is stored in the database
+// as its number. Would have been better if this was stored as a string, but that ship has sailed,
 // for now.
 export enum TileType {
     GREENERY, // 0
@@ -49,11 +48,11 @@ export enum TileType {
     // Pathfinders
     WETLANDS, // 36
     RED_CITY, // 37
-    MARTIAN_NATURE_WONDERS, // 38
+    _DEPRECATED_MARTIAN_NATURE_WONDERS, // 38
     CRASHLANDING, // 39
 
     MARS_NOMADS, // 40
-    REY_SKYWALKER, // 41
+    _DEPRECATED_REY_SKYWALKER, // 41
 
     // Underworld
     MAN_MADE_VOLCANO, // 42
@@ -105,10 +104,10 @@ export const tileTypeToString: Record<TileType, string> = {
   [TileType.LUNAR_MINE_URBANIZATION]: CardName.LUNAR_MINE_URBANIZATION,
   [TileType.WETLANDS]: CardName.WETLANDS,
   [TileType.RED_CITY]: CardName.RED_CITY,
-  [TileType.MARTIAN_NATURE_WONDERS]: CardName.MARTIAN_NATURE_WONDERS,
+  [TileType._DEPRECATED_MARTIAN_NATURE_WONDERS]: '',
   [TileType.CRASHLANDING]: CardName.CRASHLANDING,
   [TileType.MARS_NOMADS]: CardName.MARS_NOMADS,
-  [TileType.REY_SKYWALKER]: CardName.REY_SKYWALKER,
+  [TileType._DEPRECATED_REY_SKYWALKER]: '',
   [TileType.MAN_MADE_VOLCANO]: CardName.MAN_MADE_VOLCANO,
   [TileType.NEW_HOLLAND]: CardName.NEW_HOLLAND,
   [TileType.NEURAL_INSTANCE]: 'Neural Instance',

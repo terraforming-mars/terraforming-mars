@@ -31,7 +31,7 @@ describe('ConstantStruggle', () => {
       vps: [],
     });
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).eq(0);
     expect(player2.megaCredits).eq(5);
@@ -61,7 +61,7 @@ describe('ConstantStruggle', () => {
 
     game.pathfindersData!.jovian = 1;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(game.pathfindersData).deep.eq({
       venus: 2,

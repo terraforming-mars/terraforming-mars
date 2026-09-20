@@ -65,7 +65,7 @@ describe('SearchForLifeUnderground', () => {
 
     card.action(player);
     runAllActions(game); // pays for card.
-    game.underworldData.tokens.push('microbe1');
+    game.underworldData.tokens.push('microbe2');
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
@@ -74,6 +74,24 @@ describe('SearchForLifeUnderground', () => {
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(1);
   });
+
+  // Every microbe token depicts at least 1 microbe and so grants a science resource.
+  for (const token of ['microbe2', 'microbe1pertemp', 'microbe2pertemp'] as const) {
+    it('action succeeds, ' + token, () => {
+      player.playedCards.push(card);
+      player.megaCredits = 1;
+
+      card.action(player);
+      runAllActions(game); // pays for card.
+      game.underworldData.tokens.push(token);
+
+      const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+      selectSpace.cb(selectSpace.spaces[0]);
+
+      expect(player.megaCredits).to.eq(0);
+      expect(card.resourceCount).eq(1);
+    });
+  }
 
   it('No places on the map to identify, draws from pile', () => {
     player.playedCards.push(card);
@@ -87,7 +105,7 @@ describe('SearchForLifeUnderground', () => {
     expect(UnderworldExpansion.identifiableSpaces(player)).is.empty;
     expect(card.canAct(player)).is.true;
 
-    game.underworldData.tokens.push('microbe1');
+    game.underworldData.tokens.push('microbe2');
     const size = game.underworldData.tokens.length;
     card.action(player);
     runAllActions(game); // pays for card.

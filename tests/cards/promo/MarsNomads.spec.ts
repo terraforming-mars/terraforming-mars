@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {churn, runAllActions, setTemperature} from '../../TestingUtils';
+import {churn, runAllActions, setRulingParty, setTemperature} from '../../TestingUtils';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
@@ -162,6 +163,31 @@ describe('MarsNomads', () => {
 
       const spaces = cast(card.action(player), SelectSpace).spaces;
       expect(spaces.includes(destinationSpace)).to.eq(run.expected);
+    });
+  }
+
+  for (const run of [
+    {bonus: SpaceBonus.OCEAN, mc: 8, expected: false},
+    {bonus: SpaceBonus.OCEAN, mc: 9, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE, mc: 5, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE, mc: 6, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 6, expected: false},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 7, expected: true},
+  ] as const) {
+    it('Destination filter includes Reds TR tax' + JSON.stringify(run), () => {
+      const [game, player] = testGame(2, {turmoilExtension: true});
+      const card = new MarsNomads();
+      const board = game.board;
+      setRulingParty(game, PartyName.REDS);
+
+      const nomadSpace = board.getAvailableSpacesOnLand(player)[12];
+      game.nomadSpace = nomadSpace.id;
+      const destinationSpace = board.getAdjacentSpaces(nomadSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+      destinationSpace.bonus = [run.bonus];
+      player.megaCredits = run.mc;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces.includes(destinationSpace)).to.eq(run.expected);
     });
   }
 

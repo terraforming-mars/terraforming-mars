@@ -1,0 +1,69 @@
+{
+  "BEGINNER CORPORATION": "BEGINNERSCORPORATIE",
+  "Beginner Corporation": "Beginnerscorporatie",
+  "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Je begint met 42 M€. In plaats van tijdens de setup uit 10 kaarten te kiezen, krijg je 10 kaarten gratis.",
+
+  "CREDICOR": "",
+  "Credicor": "",
+  "You start with 57 M€.": "Je begint met 57 M€.",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "EFFECT: Nadat je hebt betaald voor een kaart of standaardproject met een basiskost van 20 M€ of meer, ontvang je 4 M€.",
+
+  "ECOLINE": "",
+  "Ecoline": "",
+  "You start with 2 plant production, 3 plants, and 36 M€.": "Je begint met 2 plantproductie, 3 planten en 36 M€.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "EFFECT: Je mag altijd 7 planten betalen in plaats van 8 om een groentegel te plaatsen.",
+
+  "HELION": "",
+  "Helion": "",
+  "You start with 3 heat production and 42 M€.": "Je begint met 3 warmteproductie en 42 M€.",
+  "Effect: You may use heat as M€. You may not use M€ as heat.": "EFFECT: Je mag warmte als M€ gebruiken. Je mag M€ niet als warmte gebruiken.",
+
+  "INTERPLANETARY": "",
+  "CINEMATICS": "",
+  "Interplanetary Cinematics": "",
+  "You start with 20 steel and 30 M€.": "Je begint met 20 staal en 30 M€.",
+  "Effect: Each time you play an event, you gain 2 M€.": "EFFECT: Elke keer dat je een evenement speelt, ontvang je 2 M€.",
+
+  "INVENTRIX": "",
+  "Inventrix": "",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.": "Als je eerste actie in het spel trek je 3 kaarten. Je begint met 45 M€.",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "EFFECT: Je vereisten voor temperatuur, zuurstof, oceanen en Venus zijn +2 of -2 stappen, naar keuze per geval.",
+
+  "PHOBOLOG": "",
+  "Phobolog": "",
+  "PhoboLog": "",
+  "You start with 10 titanium and 23 M€.": "Je begint met 10 titanium en 23 M€.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "EFFECT: Je titaniumgrondstoffen zijn elk 1 M€ extra waard.",
+
+  "THARSIS": "",
+  "REPUBLIC": "",
+  "Tharsis Republic": "",
+  "You start with 40 M€. As your first action in the game, place a city tile.": "Je begint met 40 M€. Als je eerste actie in het spel plaats je een stadstegel.",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "EFFECT: Wanneer een stadstegel OP MARS wordt geplaatst, verhoog je je M€-productie met 1. Wanneer je een stadstegel plaatst, ontvang je 3 M€.",
+
+  "THORGATE": "",
+  "ThorGate": "",
+  "You start with 1 energy production and 48 M€.": "Je begint met 1 energieproductie en 48 M€.",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "EFFECT: Wanneer je een energiekaart speelt OF HET STANDAARDPROJECT ENERGIECENTRALE gebruikt, betaal je er 3 M€ minder voor.",
+
+  "UNITED NATIONS MARS INITIATIVE": "",
+  "United Nations Mars Initiative": "",
+  "UNMI": "",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "ACTIE: Als je terraformniveau deze generatie is verhoogd, mag je 3 M€ betalen om het nog 1 stap te verhogen.",
+
+  "MINING": "",
+  "GUILD": "",
+  "Mining Guild": "",
+  "You start with 30 M€, 5 steel and 1 steel production.": "Je begint met 30 M€, 5 staal en 1 staalproductie.",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "EFFECT: Elke keer dat je een tegel plaatst op een gebied met een staal- of titaniumplaatsingsbonus, verhoog je je staalproductie met 1",
+
+  "TERACTOR": "",
+  "Teractor": "",
+  "You start with 60 M€.": "Je begint met 60 M€.",
+
+  "SATURN": "",
+  "SYSTEMS": "",
+  "Saturn Systems": "",
+  "You start with 1 titanium production and 42 M€.": "Je begint met 1 titaniumproductie en 42 M€.",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "EFFECT: Elke keer dat een Jupiterlabel in het spel komt, inclusief deze, verhoog je je M€-productie met 1."
+}

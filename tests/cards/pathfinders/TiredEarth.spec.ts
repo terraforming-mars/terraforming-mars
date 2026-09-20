@@ -20,7 +20,7 @@ describe('TiredEarth', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.plants).to.eq(19);
     expect(player2.plants).to.eq(20);

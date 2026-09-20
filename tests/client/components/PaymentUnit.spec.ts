@@ -9,7 +9,7 @@ describe('PaymentUnit', () => {
       ...globalConfig,
       props: {
         modelValue: 5,
-        unit: 'megaCredits',
+        unit: 'megacredits',
         description: 'MegaCredits',
       },
     });
@@ -22,7 +22,7 @@ describe('PaymentUnit', () => {
       ...globalConfig,
       props: {
         modelValue: 0,
-        unit: 'megaCredits',
+        unit: 'megacredits',
         description: 'MegaCredits',
       },
     });
@@ -39,7 +39,7 @@ describe('PaymentUnit', () => {
       ...globalConfig,
       props: {
         modelValue: 5,
-        unit: 'megaCredits',
+        unit: 'megacredits',
         description: 'MegaCredits',
         showMax: true,
       },

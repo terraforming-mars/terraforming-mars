@@ -53,11 +53,6 @@
 
 
     "Capital": "",
-    "2 Oceans": "2 Océanos",
-    "3 Oceans": "3 Océanos",
-    "4 Oceans": "4 Océanos",
-    "5 Oceans": "5 Océanos",
-    "6 Oceans": "6 Océanos",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Requiere 4 losetas de océano. Coloca esta loseta. Reduce tu producción de energía en 2 y aumenta tu producción de M€ en 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "1 PV ADICIONAL POR CADA LOSETA DE OCÉANO ADYACENTE A ESTA LOSETA DE CIUDAD.",
 
@@ -142,12 +137,10 @@
 
     "Regolith Eaters": "Devorador de Regolito",
     "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Acción: añade 1 microbio a esta carta, o elimina 2 microbios de esta carta para aumentar el oxígeno 1 nivel.",
-    "(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "Acción: quita 2 Microbios de esta carta para aumentar el oxígeno 1 nivel.",
 
 
     "GHG Producing Bacteria": "Bacteria Productora de GEI",
     "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Acción: añade 1 microbio a esta carta, o elimina 2 microbios de esta carta para aumentar la temperatura en 1.",
-    "(Action: Remove 2 microbes to raise temperature 1 step.)":"Acción: quita 2 microbios para aumentar la temperatura 1 nivel",
     "Requires 4% oxygen.": "Requiere 4% de oxígeno.",
 
     "Ants": "Hormigas",
@@ -270,7 +263,7 @@
 
     "Birds": "Aves",
     "Action: Add an animal to this card.": "Acción: añade 1 animal a esta carta.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Requiere 13% de oxígeno. Reduce cualquier producción de plantas 2 niveles. 1 PV por cada animal en esta carta.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps.": "Requiere 13% de oxígeno. Reduce cualquier producción de plantas 2 niveles.",
 
     "Mars University": "Universidad de Marte",
     "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Efecto: por cada símbolo de ciencia que juegues, incluyendo este, puedes descartar 1 carta de tu mano para coger otra.",
@@ -463,8 +456,7 @@
     "Requires -14 C° or warmer.": "Requiere -14°C o más cálido.",
 
     "Extreme-Cold Fungus": "Hongos de Frío Extremo",
-    "(Action: Gain 1 plant.)": "Acción: obtén 1 planta",
-    "(Action: Add 2 microbes to ANOTHER card.)": "Acción: añade 2 microbios a OTRA carta.",
+    "Action: Gain 1 plant, or add 2 microbes to ANOTHER card.": "Acción: obtén 1 planta o añade 2 microbios a OTRA carta.",
     "It must be -10 C or colder.": "La temperatura debe ser -10°C o más fría.",
 
     "Advanced Ecosystems": "Ecosistemas Avanzados",
@@ -534,7 +526,6 @@
 
     "Nitrite Reducing Bacteria": "Bacteria Reductora de Nitrito",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Acción: añade 1 microbio a esta carta, o elimina 3 microbios para incrementar tu VT 1 nivel.",
-    "(Action: Remove 3 microbes to increase your TR 1 step.)": "Acción: quita 3 Microbios para incrementar tu VT en 1.",
     "Add 3 microbes to this card.": "Añade 3 microbios a esta carta.",
 
     "Industrial Microbes": "Microbios Industriales",
@@ -620,7 +611,7 @@
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Requiere 6% de oxígeno. Reduce cualquier producción de plantas 1 nivel e incrementa tu producción de energía en 2.",
 
     "Livestock": "Ganado",
-    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Requiere 9% de oxígeno. Reduce tu producción de plantas 1 nivel e incrementa tu producción de M€ en 2.",
+    "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps.": "Requiere 9% de oxígeno. Reduce tu producción de plantas 1 nivel e incrementa tu producción de M€ en 2.",
 
     "Olympus Conference": "Conferencia de Olympus",
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Al jugar un símbolo de ciencia, incluyendo este, o bien añades un recurso de ciencia a esta carta o bien eliminas un recurso de ciencia de esta carta para coger una carta.",
@@ -699,9 +690,6 @@
     "AI Central": "Central IA",
 
     "Action: Draw 2 cards.": "Acción: Roba 2 cartas.",
-    "2 Science": "2 Ciencia",
-    "3 Science": "3 Ciencia",
-    "5 Science": "5 Ciencia",
     "(Effect: Draw 2 cards.)": "(Efecto: Roba 2 cartas.)",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "Requiere 3 símbolos de Ciencia para ser jugada. Reduce tu producción de energía 1 nivel.",
@@ -709,13 +697,6 @@
   "HYDROGEN TO VENUS":"Hidrógeno a Venus",
 
   "Jovian":"Joviano",
-  "max 3 Oceans":"max 3 Océanos",
-  "Forest":"Bosque",
-  "7 Science":"7 Ciencia",
-  "Titanium production":"Producción de Titanio",
-  "Steel production":"Producción de Acero",
-  "4 Science":"4 Ciencia",
-  "2 Cities":"2 Ciudades",
   "Standard projects":"Proyectos Estándar",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.":"Requiere 2 símbolos de Tierra. Incrementa tu producción de M€ en 4.",

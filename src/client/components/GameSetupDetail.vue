@@ -102,7 +102,7 @@ const boardColorClass: Record<BoardName, string> = {
 };
 
 export default defineComponent({
-  name: 'game-setup-detail',
+  name: 'GameSetupDetail',
   props: {
     playerNumber: {
       type: Number,

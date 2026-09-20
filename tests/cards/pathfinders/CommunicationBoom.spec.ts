@@ -34,7 +34,7 @@ describe('CommunicationBoom', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).eq(0);
     expect(a.resourceCount).eq(0);

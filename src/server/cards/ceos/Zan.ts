@@ -17,7 +17,7 @@ export class Zan extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.effect('You are immune to Reds\' ruling policy.', (eb) => eb.startEffect.redsInactive().asterix());
           b.br.br;
-          b.opgArrow().text('ALL', Size.SMALL).delegates(1).colon().reds().megacredits(1);
+          b.opgArrow().text('ALL', {size: Size.SMALL}).delegates(1).colon().reds().megacredits(1);
         }),
         description: 'Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
       },

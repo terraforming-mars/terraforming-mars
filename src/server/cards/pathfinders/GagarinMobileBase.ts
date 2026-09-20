@@ -9,6 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';
+import {MarsBoard} from '../../boards/MarsBoard';
 import {message} from '../../logs/MessageBuilder';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
@@ -68,8 +69,9 @@ export class GagarinMobileBase extends CorporationCard implements ICorporationCa
     const availableSpaces = board.spaces
       .filter((space) => space.spaceType !== SpaceType.COLONY)
       .filter((space) => space.spaceType !== SpaceType.RESTRICTED)
-      .filter((space) => space.tile === undefined)
-      .filter((space) => !visited.includes(space.id));
+      .filter((space) => space.tile === undefined && space.cube === undefined)
+      .filter((space) => !visited.includes(space.id))
+      .filter((space) => MarsBoard.canAffordPlacementBonuses(player, space));
 
     if (visited[0] === undefined) {
       return availableSpaces;

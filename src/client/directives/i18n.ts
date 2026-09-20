@@ -80,7 +80,7 @@ export function translateText(englishText: string): string {
     if (translated === undefined) {
       translated = new Set();
       for (const k in translations) {
-        if (translations.hasOwnProperty(k)) {
+        if (Object.hasOwn(translations, k)) {
           translated.add(translations[k]);
         }
       }

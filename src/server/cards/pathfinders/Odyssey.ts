@@ -4,12 +4,12 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
+import {IActionCard, IHasCheckLoops} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard {
+export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard, IHasCheckLoops {
   constructor() {
     super({
       name: CardName.ODYSSEY,
@@ -22,7 +22,7 @@ export class Odyssey extends CorporationCard implements ICorporationCard, IActio
           b.megacredits(33);
           b.colon().cards(1, {secondaryTag: Tag.EVENT}).asterix().br;
           b.text('(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)',
-            Size.TINY, false, false).br;
+            {size: Size.TINY, isBold: false}).br;
           b.action('Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.', (e) => {
             e.empty().startAction.tag(Tag.EVENT).asterix().nbsp.text('≤').nbsp.megacredits(16);
           });

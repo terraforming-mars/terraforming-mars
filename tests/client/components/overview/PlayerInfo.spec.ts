@@ -6,6 +6,7 @@ import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {fakeTimerModel} from '../testHelpers';
+import {asComplete} from '../utils/models';
 
 describe('PlayerInfo', () => {
   it('Played card count test', () => {
@@ -43,8 +44,8 @@ describe('PlayerInfo', () => {
         },
       },
       props: {
-        player: thisPlayer,
-        playerView: playerView,
+        player: asComplete<PublicPlayerModel>(thisPlayer),
+        playerView: asComplete<PlayerViewModel>(playerView),
         playerIndex: 0,
         actionLabel: 'none',
       },

@@ -8,6 +8,7 @@ import {inplaceShuffle} from '../utils/shuffle';
 import {GameOptions} from '../game/GameOptions';
 import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
 import {CardName} from '../../common/cards/CardName';
+import {numeric} from '../../common/utils/Ordering';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -152,7 +153,7 @@ export class BoardBuilder {
   // |lands| so that those IDs most definitely have land spaces.
   public shuffle(rng: Random) {
     const preservedSpaces = [...this.unshufflableSpaces, ...this.volcanicSpaces];
-    preservedSpaces.sort((a, b) => a - b);
+    preservedSpaces.sort((a, b) => a - b); // TODO(kberg): this can be removed.
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
     preservingShuffle(this.bonuses, preservedSpaces, rng);
     return;
@@ -170,8 +171,8 @@ export class BoardBuilder {
 export function preservingShuffle(array: Array<unknown>, preservedIndexes: ReadonlyArray<number>, rng: Random): void {
   // Reversing the indexes so the elements are pulled from the right.
   // Reversing the result so elements are listed left to right.
-  const forward = [...preservedIndexes].sort((a, b) => a - b);
-  const backward = [...forward].reverse();
+  const forward = preservedIndexes.toSorted(numeric);
+  const backward = forward.toReversed();
   const spliced = backward.map((idx) => array.splice(idx, 1)[0]).reverse();
   inplaceShuffle(array, rng);
   for (let idx = 0; idx < forward.length; idx++) {

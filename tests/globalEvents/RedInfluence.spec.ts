@@ -19,7 +19,7 @@ describe('RedInfluence', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     expect(player.megaCredits).to.eq(4);
     expect(player2.megaCredits).to.eq(4);
@@ -30,12 +30,11 @@ describe('RedInfluence', () => {
   it('Max 5', () => {
     const card = new RedInfluence();
     const [game, player] = testGame(1, {turmoilExtension: true});
-    const turmoil = game.turmoil!;
 
     player.setTerraformRating(59);
     player.megaCredits = 20;
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(5);
   });
 });

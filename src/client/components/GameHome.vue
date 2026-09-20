@@ -1,7 +1,7 @@
 <template>
   <div id="game-home" class="game-home-container">
     <h1><span v-i18n>Terraforming Mars</span> [<span v-i18n>game id:</span> <span>{{getGameId()}}</span>]</h1>
-    <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br/><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
+    <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
     <ul>
       <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
         <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
@@ -10,8 +10,8 @@
         <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
         <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
       </li>
-      <li v-if="game !== undefined && game.spectatorId">
-        <p/>
+      <li v-if="game !== undefined">
+        <p></p>
         <span class="turn-order"></span>
         <span class="color-square"></span>
         <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
@@ -21,12 +21,12 @@
 
     <div class="spacing-setup"></div>
 
-    <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
 
     <div class="spacing-setup"></div>
     <div v-if="game !== undefined">
       <h1 v-i18n>Game settings</h1>
-      <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"></game-setup-detail>
+      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@ function copyToClipboard(text: string): void {
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
 export default defineComponent({
-  name: 'game-home',
+  name: 'GameHome',
   props: {
     game: {
       type: Object as () => SimpleGameModel,
@@ -71,13 +71,15 @@ export default defineComponent({
   },
   components: {
     AppButton,
-    'game-setup-detail': GameSetupDetail,
+    GameSetupDetail,
     PurgeWarning,
   },
+
   data() {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
       urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID,
+      previousViewport: '',
     };
   },
   methods: {
@@ -129,8 +131,24 @@ export default defineComponent({
     // Reset the copied player id after 3 seconds to hide the "copied" message
     setInterval(this.setCopiedIdToDefault, 3000);
     setDocumentTitle(this.game.name);
+    // Set the viewport width to width=device-width on the create game form so mobile browsers use their actual CSS viewport width.
+    // The current global viewport is width=1260, which prevents the create game form from using the device width on phones.
+    // This is a temporary solution in order to make this edit scoped to the create game form.
+    // TODO: Once responsiveness covers the whole project, this code should be removed and the tag in index.html should be updated directly.
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport !== null) {
+      this.previousViewport = viewport.getAttribute('content') ?? '';
+      viewport.setAttribute(
+        'content',
+        'width=device-width, initial-scale=1, viewport-fit=cover',
+      );
+    }
+  },
+  beforeUnmount() {
+    document
+      .querySelector('meta[name="viewport"]')
+      ?.setAttribute('content', this.previousViewport);
   },
 });
 
 </script>
-

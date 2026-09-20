@@ -7,6 +7,7 @@ import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {uppercase} from '../Options';
 
 export class ProjectInspection extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X02',
         renderData: CardRenderer.builder((b) => {
-          b.text('Use a card action that has been used this generation.', Size.SMALL, true);
+          b.text('Use a card action that has been used this generation.', {size: Size.SMALL, uppercase});
         }),
       },
     });

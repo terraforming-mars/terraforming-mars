@@ -10,7 +10,7 @@ export type SimpleGameModel = {
     name: string;
     phase: Phase;
     players: Array<SimplePlayerModel>;
-    spectatorId: SpectatorId | undefined;
+    spectatorId: SpectatorId;
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
     expectedPurgeTimeMs: number;

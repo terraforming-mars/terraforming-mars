@@ -4,7 +4,7 @@ import {MilestoneName} from '../ma/MilestoneName';
 export type MilestoneScore = {
   color: Color;
   score: number;
-  claimable?: boolean;
+  claimable: boolean;
 }
 
 export type ClaimedMilestoneModel = {

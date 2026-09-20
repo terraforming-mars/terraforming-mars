@@ -110,7 +110,7 @@ class Builder {
       const idx = Number(spaceId.substring(1, 3));
       preservedSpaces.push(idx - 2);
     }
-    preservedSpaces.sort((a, b) => a - b);
+    preservedSpaces.sort((a, b) => a - b); // TODO(kberg): this can be removed.
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
     preservingShuffle(this.bonuses, preservedSpaces, rng);
     return;

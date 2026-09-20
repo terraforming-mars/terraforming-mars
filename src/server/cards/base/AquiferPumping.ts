@@ -1,23 +1,23 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {TITLES} from '../../inputs/titles';
 
-export const OCEAN_COST = 8;
-export class AquiferPumping extends Card implements IActionCard, IProjectCard {
+export class AquiferPumping extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
       name: CardName.AQUIFER_PUMPING,
       tags: [Tag.BUILDING],
       cost: 18,
+
+      action: {
+        spend: {megacredits: 8, canUseSteel: true},
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: '187',
@@ -27,18 +27,5 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(player: IPlayer): boolean {
-    const canAct = player.canAfford({cost: OCEAN_COST, steel: true, tr: {oceans: 1}});
-    if (!player.game.canAddOcean()) {
-      this.warnings.add('maxoceans');
-    }
-    return canAct;
-  }
-  public action(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))
-      .andThen(() => player.game.defer(new PlaceOceanTile(player)));
-    return undefined;
   }
 }

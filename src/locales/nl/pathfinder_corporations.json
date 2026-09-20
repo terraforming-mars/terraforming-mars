@@ -1,0 +1,96 @@
+{
+  "Adhai High Orbit Constructions": "",
+  "Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.": "EFFECT: Wanneer je een kaart speelt met een ruimteLABEL MAAR ZONDER PLANEETLABEL (inclusief deze), voeg je 1 orbitaal toe aan deze kaart.",
+  "Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.": "EFFECT: Voor elke 2 orbitalen op deze kaart kosten kaarten met een ruimtelabel maar zonder planeetlabel, of het STANDAARD KOLONIEPROJECT of de HANDELSACTIE, 1 M€ minder.",
+  "You start with 43 M€.": "Je begint met 43 M€.",
+
+  "Ambient": "",
+  "Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.": "EFFECT: Wanneer je een kaart met een Venuslabel speelt (inclusief deze), verhoog je je warmteproductie met 1.",
+  "Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.": "ACTIE: Wanneer de temperatuur op maximum staat, besteed 8 warmte en verhoog je TN met 1. Je mag deze actie herhalen zoals een standaardproject.",
+  "You start with 38 M€. As your first action, raise the Venus scale 2 steps.": "Je begint met 38 M€. Als je eerste actie verhoog je het Venusschaalniveau met 2 stappen.",
+
+  "Aurorai": "",
+  "Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.": "EFFECT: Wanneer je je terraformniveau verhoogt, voeg je 1 data per stap toe aan EEN WILLEKEURIGE kaart.",
+  "Effect: You can use data on this card as 3M€ each to pay for standard projects.": "EFFECT: Je kunt data op deze kaart gebruiken als 3 M€ per stuk om standaardprojecten te betalen.",
+  "You start with 33 M€. and 2 data on this card": "Je begint met 33 M€ en 2 data op deze kaart",
+
+  "Bio-Sol": "",
+  "Action: Add 1 microbe to ANY card": "ACTIE: Voeg 1 microbe toe aan EEN WILLEKEURIGE kaart",
+  "You start with 42 M€. As your first action, draw 2 cards with a microbe tag.": "Je begint met 42 M€. Als je eerste actie trek je 2 kaarten met een microbenlabel.",
+
+  "Chimera": "",
+  "Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.)": "EFFECT: Wanneer je een actie uitvoert, tellen deze jokerlabels als labels naar keuze. Voor het claimen van mijlpalen en financieren van onderscheidingen tellen beide labels als één. (Andere jokerlabels tellen nog steeds niet mee voor onderscheidingen.)",
+  "You start with 36 M€, 1 steel, and 1 titanium.": "Je begint met 36 M€, 1 staal en 1 titanium.",
+
+  "Collegium Copernicus": "",
+  "Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.": "EFFECT: Wanneer je een kaart met een wetenschapslabel speelt (inclusief deze), voeg je 1 data toe aan EEN WILLEKEURIGE kaart.",
+  "Action: Spend 3 data from this card to trade.": "ACTIE: Besteed 3 data van deze kaart om te handelen.",
+  "You start with 33 M€. As your first action, draw 2 cards with a science tag.": "Je begint met 33 M€. Als je eerste actie trek je 2 kaarten met een wetenschapslabel.",
+
+  "Habitat Marte": "",
+  "Effect: Mars tags also count as science tags.": "EFFECT: Marslabels tellen ook als wetenschapslabels.",
+  "You start with 40 M€": "Je begint met 40 M€",
+
+  "Mars Direct": "",
+  "Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.": "EFFECT: Wanneer je een Marslabel speelt, betaal je 1 M€ minder voor elk Marslabel dat je hebt.",
+  "You start with 52 M€.": "Je begint met 52 M€.",
+
+  "Mars Frontier Alliance": "",
+  "Effect: After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation).": "EFFECT: Nadat een nieuwe regerende partij is gekozen, plaats je de tegel van het politieke programma van de op een na populairste partij op deze kaart (je mag het effect gebruiken als passief effect van je corporatie of als regerende partij deze generatie).",
+  "You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).": "Je begint met 40 M€. Wanneer je deze kaart onthult, kies je een overgebleven tegel van een politiek programma (je mag het effect gebruiken als passief effect van je corporatie of als regerende partij deze generatie).",
+
+  "Mars Maths": "",
+  "MATHS": "",
+  "Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.": "EFFECT: Aan het begin van de onderzoeksfase trek je 5 kaarten, maar je mag er NOG STEEDS maar 4 kopen. Als je draft, houd je 2 kaarten voor je eerste draft.",
+  "Action: Take another two actions this turn.": "ACTIE: Voer deze beurt nog twee acties uit.",
+  "You start with 40 M€. As your first action, draw 2 cards": "Je begint met 40 M€. Als je eerste actie trek je 2 kaarten",
+
+  "Martian Insurance Group": "",
+  "Effect: Whenever you play an event card, raise your M€ production 1 step.": "EFFECT: Wanneer je een evenementenkaart speelt, verhoog je je M€-productie met 1.",
+  "You start with 42 M€ and 1 M€ production.": "Je begint met 42 M€ en 1 M€-productie.",
+
+  "Mind Set Mars": "",
+  "Action: When you play a card with a building tag, add 1 agenda on this card.": "ACTIE: Wanneer je een kaart met een gebouwlabel speelt, voeg je 1 agenda toe aan deze kaart.",
+  "Action: Spend 2 agenda resources to place 1 delegate in any party.": "ACTIE: Besteed 2 agendagrondstoffen om 1 afgevaardigde in een willekeurige partij te plaatsen.",
+  "Action: Spend 5 agenda resources to place a city tile on Mars.": "ACTIE: Besteed 5 agendagrondstoffen om een stadstegel op Mars te plaatsen.",
+  "You start with 44 M€ and 1 agenda resource to this card.": "Je begint met 44 M€ en 1 agendagrondstof op deze kaart.",
+
+  "move": "verplaatsen",
+  "Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.": "ACTIE: Verplaats de Basis naar EEN WILLEKEURIG dichtstbijzijnd leeg gebied waar die nog niet is geweest. Ontvang de bonus.",
+  "Effect: When another player places a tile where the Base is, move the Base.": "EFFECT: Wanneer een andere speler een tegel plaatst waar de Basis is, verplaats je de Basis.",
+  "You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.": "Je begint met 42 M€. Als je eerste actie plaats je de Gagarin Mobiele Basis op EEN WILLEKEURIG gebied op Mars. Ontvang de bonus.",
+
+  "Polaris": "",
+  "Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.": "EFFECT: Wanneer een oceaantegel OP MARS wordt geplaatst, verhoog je je M€-productie met 1. Wanneer je een oceaantegel plaatst, ontvang je 4 M€.",
+  "You start with 32 M€. As your first action, place an ocean tile.": "Je begint met 32 M€. Als je eerste actie plaats je een oceaantegel.",
+
+  "Ringcom": "",
+  "Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.": "EFFECT: Wanneer een speler een kaart met een Jupiterlabel speelt (inclusief deze), ontvang je 1 titanium.",
+  "You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.": "Je begint met 39 M€ en 3 M€-productie. Als je eerste actie trek je 2 kaarten met een Jupiterlabel.",
+
+  "Robin Haulings": "",
+  "Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.": "EFFECT: Wanneer je een kaart met een Venuslabel speelt, voeg je 1 zwever toe aan EEN WILLEKEURIGE kaart.",
+  "Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step": "ACTIE: Verwijder 3 zwevers van deze kaart om Venus met 1 stap te verhogen of het zuurstofniveau met 1 stap te verhogen",
+  "You start with 39 M€.": "Je begint met 39 M€.",
+
+  "SolBank": "",
+  "SOL": "",
+  "Bank": "",
+  "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "EFFECT: Wanneer je M€ (of staal of titanium) besteedt, voeg je 1 data toe aan deze kaart.",
+  "Effect: During the production phase convert each data from this card into 1M€ each.": "EFFECT: Tijdens de productiefase zet je elke data op deze kaart om in 1 M€ per stuk.",
+  "You start with 40 M€.": "Je begint met 40 M€.",
+
+  "Soylent Seedling Systems": "",
+  "Effect: When you place a greenery tile, add 1 seed resource to this card.": "EFFECT: Wanneer je een groentegel plaatst, voeg je 1 zaadgrondstof toe aan deze kaart.",
+  "Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.": "EFFECT: Wanneer je betaalt voor een plantenkaart, of voor het STANDAARD GROENTEGELPROJECT, mogen zaden hier elk als 5 M€ worden gebruikt.",
+  "You start with 38M€ and 2 seeds on this card.": "Je begint met 38 M€ en 2 zaden op deze kaart.",
+
+  "Steelaris": "",
+  "Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.": "EFFECT: Wanneer een stadstegel of speciale tegel OP MARS wordt geplaatst, ontvang je 1 staal en 1 plant.",
+  "You start with 42 M€.": "Je begint met 42 M€.",
+
+  "Odyssey": "",
+  "Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.": "EFFECT: Je evenementenkaarten blijven open liggen, en hun labels tellen mee alsof het geautomatiseerde (groene) kaarten zijn.",
+  "Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.": "ACTIE: Betaal voor en speel een evenementenkaart die je al hebt gespeeld met een basiskost van 16 M€ of minder (INCLUSIEF evenementen die speciale tegels plaatsen), en leg die kaart daarna af.",
+  "You start with 33 M€.": "Je begint met 33 M€."
+}

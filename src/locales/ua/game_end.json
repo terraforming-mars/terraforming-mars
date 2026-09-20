@@ -42,7 +42,7 @@
   "% completed": "% завершено",
   "L. Habitat": "Лунне житло",
   "L. Mining": "Лунна шахта",
-  "L. Logistics": "Лунні логістика",
+  "L. Logistic": "Лунні логістика",
 
   "Final situation on the board": "Остаточна ситуація на дошці",
   "Final game log": "Остаточний журнал гри",
@@ -61,5 +61,6 @@
   "Milestones points": "Очки віхових пунктів",
   "Awards points": "Очки нагород",
 
-  "Download game log": "Завантажити журнал гри"
+  "Download game log": "Завантажити журнал гри",
+  "Global Parameter Contributions": "Внески до глобальних параметрів"
 }

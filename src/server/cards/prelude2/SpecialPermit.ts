@@ -5,9 +5,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, digit} from '../Options';
+import {all, digit, uppercase} from '../Options';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {message} from '../../logs/MessageBuilder';
@@ -25,7 +24,7 @@ export class SpecialPermit extends Card implements IProjectCard {
         cardNumber: 'P82',
         description: 'Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', Size.MEDIUM, true).plants(4, {all, digit});
+          b.text('steal', {uppercase}).plants(4, {all, digit});
         }),
       },
     });

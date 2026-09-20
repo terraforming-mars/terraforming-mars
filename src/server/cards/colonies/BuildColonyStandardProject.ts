@@ -21,7 +21,9 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    return super.canAct(player) && player.colonies.getPlayableColonies(/* allowDuplicate= */ false, this.cost).length > 0;
+    const canPlayOptions = this.canPlayOptions(player);
+    return super.canAct(player) &&
+      player.colonies.getPlayableColonies(/* allowDuplicate= */ false, canPlayOptions).length > 0;
   }
 
   actionEssence(player: IPlayer): void {

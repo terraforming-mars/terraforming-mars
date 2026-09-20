@@ -24,13 +24,10 @@ export class TitanShuttles extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C45',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 2 floaters to ANY JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.resource(CardResource.FLOATER, {amount: 2, secondaryTag: Tag.JOVIAN});
-          }).br;
-          b.or().br;
-          b.action('Spend any number of floaters here to gain the same number of titanium.', (eb) => {
-            eb.text('x').resource(CardResource.FLOATER).startAction.text('x').titanium(1);
-          }).br;
+          b.arrow().resource(CardResource.FLOATER, {amount: 2, secondaryTag: Tag.JOVIAN}).nbsp.or().br;
+          b.text('x').resource(CardResource.FLOATER).arrow().text('x').titanium(1).br;
+
+          b.plainText('Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.', /* parens */ true);
         }),
       },
     });

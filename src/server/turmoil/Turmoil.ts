@@ -99,7 +99,7 @@ export class Turmoil {
 
   public static getTurmoil(game: IGame): Turmoil {
     if (game.turmoil === undefined) {
-      throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
+      throw new Error(`Assertion failure: game.turmoil not defined for ${game.id}`);
     }
     return game.turmoil;
   }
@@ -107,7 +107,7 @@ export class Turmoil {
   public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -117,7 +117,7 @@ export class Turmoil {
   public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
       } else {
         return cb(game.turmoil);
       }
@@ -198,7 +198,7 @@ export class Turmoil {
    */
   public checkDominantParty(): void {
     // If there is a dominant party
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -214,7 +214,7 @@ export class Turmoil {
    */
   // Function to get next dominant party taking into account the clockwise order
   private setNextPartyAsDominant(currentDominantParty: IParty) {
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const max = sortParties[0].delegates.size;
@@ -259,7 +259,7 @@ export class Turmoil {
       const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
       game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
       // TODO(kberg): if current global event adds an action, all of the rest of this should wait.
-      currentGlobalEvent.resolve(game, this);
+      currentGlobalEvent.resolve(game);
     }
 
     // WOW THIS BREAKS THINGS
@@ -398,7 +398,7 @@ export class Turmoil {
       partiesToCheck = [...this.parties.slice(currentIndex + 1), ...this.parties.slice(0, currentIndex)];
     }
 
-    const sortParties = [...this.parties].sort(
+    const sortParties = this.parties.toSorted(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
     const first = sortParties[0].delegates.size;

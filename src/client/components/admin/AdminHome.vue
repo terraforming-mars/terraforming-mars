@@ -1,7 +1,7 @@
 <template>
   <div class="admin-home">
     <ul>
-      <li v-for="path of paths" v-bind:key="path">
+      <li v-for="path of paths" :key="path">
         <a :href="path + '?serverId=' + serverId">{{path}}</a>
       </li>
     </ul>
@@ -13,7 +13,7 @@ import {defineComponent} from 'vue';
 import {paths} from '@/common/app/paths';
 
 export default defineComponent({
-  name: 'admin-home',
+  name: 'AdminHome',
   data() {
     return {
       paths: [
@@ -23,6 +23,7 @@ export default defineComponent({
         paths.API_METRICS,
         paths.LOAD,
         paths.API_IPS,
+        paths.API_HEAP_SNAPSHOT,
       ],
     };
   },

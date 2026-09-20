@@ -2,7 +2,6 @@ import {SerializedDeck} from './SerializedDeck';
 import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
 import {Random} from '../../common/utils/Random';
-import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';
 import {inplaceShuffle} from '../utils/shuffle';
@@ -10,12 +9,13 @@ import {Logger} from '../logs/Logger';
 import {IPreludeCard} from './prelude/IPreludeCard';
 import {ICeoCard} from './ceos/ICeoCard';
 import {toName} from '../../common/utils/utils';
+import {Named} from '@/common/Types';
 
 /**
  * A deck of cards to draw from, and also its discard pile.
  */
-export class Deck<T extends ICard> {
-  private readonly type;
+export class Deck<T extends Named<CardName>> {
+  private readonly type: string;
   public drawPile: Array<T>;
   public discardPile: Array<T>;
   private readonly random: Random;

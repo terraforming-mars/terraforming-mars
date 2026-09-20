@@ -12,11 +12,7 @@ export class DiscordAuth extends Handler {
   public static readonly INSTANCE = new DiscordAuth();
 
   public override async get(_req: Request, res: Response, ctx: Context): Promise<void> {
-    const url = ctx.url;
-    const code = url.searchParams.get('code');
-    if (code === null) {
-      return;
-    }
+    const code = ctx.urlParams.get('code');
     const discordUser = await getDiscordUser(code);
     const sessionId = await ctx.sessionManager.create(discordUser);
 

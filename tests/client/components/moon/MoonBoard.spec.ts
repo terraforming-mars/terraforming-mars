@@ -8,7 +8,7 @@ import {SpaceType} from '@/common/boards/SpaceType';
 
 const model: MoonModel = {
   habitatRate: 0,
-  logisticsRate: 0,
+  logisticRate: 0,
   miningRate: 0,
   spaces: [
     {

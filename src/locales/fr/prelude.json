@@ -5,7 +5,7 @@
   "Atmospheric Enhancers": "Enrichisseurs atmosphériques",
   "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Augmentez la température de 2, ou augmentez l'oxygène de 2, ou augmentez Vénus de 2. Piochez 2 cartes ayant un symbole Flotteurs.",
   "Board of Directors": "Conseil d'administration",
-  "ACTION: ": "ACTION : ",
+  "ACTION:": "ACTION : ",
   "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "PIOCHEZ 1 CARTE PRÉLUDE : DÉFAUSSER-LA OU DÉPENSEZ 12 M€ ET 1 RESSOURCE DIRECTEUR SUR CETTE CARTE POUR LA JOUER.",
   "Add 4 director resources here.": "Ajoutez 4 ressources directeurs sur cette carte.",
   "Colony Trade Hub": "Hub commercial de la colonie",
@@ -19,7 +19,7 @@
   "Place a colony. Gain 3 energy.": "Placez une colonie. Gagnez 3 énergies.",
   "Floating Trade Hub": "Hub commercial flottant",
   "Action: Add 2 floaters to ANY card.": "Action : Ajoutez 2 flotteurs sur N'IMPORTE QUELLE CARTE.",
-  "Action: Remove any number of floaters here to gain that many of one standard resource.": "Action : Dépensez n'importe quel nombre de flotteurs de cette carte pour gagner autant d'une ressource standard.",
+  "Action: Add 2 floaters to ANY card, or remove any number of floaters here to gain that many of one standard resource.": "Action : Ajoutez 2 flotteurs sur N'IMPORTE QUELLE CARTE ou dépensez n'importe quel nombre de flotteurs de cette carte pour gagner autant d'une ressource standard.",
   "Focused Organization": "Priorités redéfinies",
   "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "Action : Défausser 1 carte et dépenser 1 ressource standard pour piocher 1 carte et gagner 1 ressource standard.",
   "Draw 1 card and gain 1 standard resource.": "Piochez 1 carte et gagnez 1 ressource standard.",
@@ -156,7 +156,5 @@
   "UNMI Contractor": "Sous-Traitant pour l'UNMI",
   "Increase your TR 3 steps. Draw a card.": "Augmentez votre NT de 3. Piochez 1 carte.",
   "Acquired Space Agency": "Rachat d'une Agence Spatiale",
-  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Gagnez 6 titanes. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Espace : ajoutez ces cartes à votre main et défaussez les autres.",
-  "Add resource to card GHG Producing Bacteria": "Ajouter une ressource à la carte Bactéries productrices de GES",
-  "Add resource to card Fish": "Ajouter une ressource à la carte Poisson"
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Gagnez 6 titanes. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Espace : ajoutez ces cartes à votre main et défaussez les autres."
 }

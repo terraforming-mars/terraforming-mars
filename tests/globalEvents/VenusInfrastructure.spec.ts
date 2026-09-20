@@ -18,7 +18,7 @@ describe('VenusInfrastructure', () => {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(12);
   });

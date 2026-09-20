@@ -15,8 +15,25 @@ export function dateToSeconds(date: Date) {
 }
 
 export function stringToNumber(s: string | undefined, defaultValue: number): number {
-  const parsed = parseInt(s || '');
+  if (s === undefined) {
+    return defaultValue;
+  }
+  const parsed = parseInt(s);
   return Number.isInteger(parsed) ? parsed : defaultValue;
+}
+
+export function stringToBoolean(s: string | undefined, defaultValue: boolean): boolean {
+  if (s === undefined) {
+    return defaultValue;
+  }
+  if (s === 'true') {
+    return true;
+  }
+  if (s === 'false') {
+    return false;
+  }
+  const parsed = parseInt(s);
+  return Number.isInteger(parsed) ? parsed > 0 : defaultValue;
 }
 
 export function daysAgoToSeconds(dayString: string | undefined, defaultValue: number): number {

@@ -2,12 +2,12 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Bonus, IBonus} from '../Bonus';
+import {IBonus} from '../Bonus';
 import {IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -21,42 +21,28 @@ export class Reds extends Party implements IParty {
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-class RedsBonus01 extends Bonus {
+class RedsBonus01 implements IBonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
 
-  getScore(player: IPlayer) {
-    const game = player.game;
-    const players = [...game.playersInGenerationOrder];
-
-    if (game.isSoloMode() && players[0].terraformRating <= 20) {
-      return 1;
-    }
-
-    players.sort((p1, p2) => p1.terraformRating - p2.terraformRating);
-    const min = players[0].terraformRating;
-
-    if (player.terraformRating === min) {
-      return 1;
-    }
-    return 0;
+  getScore(player: IPlayer): number {
+    return player.terraformRating;
   }
 
-  override grant(game: IGame) {
-    const players = game.playersInGenerationOrder;
-    const scores = players.map((player) => this.getScore(player));
+  grant(game: IGame) {
+    if (game.isSoloMode()) {
+      const player = game.players[0];
+      if (player.terraformRating <= 20) {
+        player.increaseTerraformRating();
+      }
+    }
+    const min = Math.min(...game.players.map((p) => p.terraformRating));
 
-    players.forEach((player, idx) => {
-      if (scores[idx] > 0) {
-        player.increaseTerraformRating(1, {log: true});
+    game.players.forEach((player) => {
+      if (player.terraformRating === min) {
+        player.increaseTerraformRating();
       }
     });
-  }
-
-  grantForPlayer(player: IPlayer): void {
-    if (this.getScore(player) > 0) {
-      player.increaseTerraformRating(1, {log: true});
-    }
   }
 }
 
@@ -64,29 +50,21 @@ class RedsBonus02 implements IBonus {
   readonly id = 'rb02' as const;
   readonly description = 'The player(s) with the highest TR loses 1 TR';
 
-  getScore(player: IPlayer) {
-    const game = player.game;
-    const players = [...game.playersInGenerationOrder];
-
-    if (game.isSoloMode() && players[0].terraformRating > 20) {
-      return -1;
-    }
-
-    players.sort((p1, p2) => p2.terraformRating - p1.terraformRating);
-    const max = players[0].terraformRating;
-
-    if (player.terraformRating === max) {
-      return -1;
-    }
-    return 0;
+  getScore(player: IPlayer): number {
+    return player.terraformRating;
   }
 
   grant(game: IGame) {
-    const players = game.playersInGenerationOrder;
-    const scores = players.map((player) => this.getScore(player));
+    if (game.isSoloMode()) {
+      const player = game.players[0];
+      if (player.terraformRating > 20) {
+        player.decreaseTerraformRating();
+      }
+    }
+    const max = Math.max(...game.players.map((p) => p.terraformRating));
 
-    players.forEach((player, idx) => {
-      if (scores[idx] < 0) {
+    game.players.forEach((player) => {
+      if (player.terraformRating === max) {
         player.decreaseTerraformRating();
       }
     });
@@ -138,10 +116,10 @@ class RedsPolicy03 implements IPolicy {
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       }
       return false;
-    case GlobalParameter.MOON_LOGISTICS_RATE:
+    case GlobalParameter.MOON_LOGISTIC_RATE:
       if (game.moonData) {
         const rate = game.moonData.logisticRate;
-        return rate > 0 && rate !== MAXIMUM_LOGISTICS_RATE;
+        return rate > 0 && rate !== MAXIMUM_LOGISTIC_RATE;
       }
       return false;
     case GlobalParameter.MOON_MINING_RATE:
@@ -238,8 +216,8 @@ class RedsPolicy03 implements IPolicy {
           }));
         }
 
-        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate').andThen(() => {
+        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTIC_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon logistic rate').andThen(() => {
             MoonExpansion.lowerLogisticRate(player, 1);
             return undefined;
           }));

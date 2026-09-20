@@ -53,7 +53,7 @@ export class AstraMechanica extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (this.hasUnusableCards(player)) {
-      this.warnings.add('unusableEventsForAstraMechanica');
+      this.addWarning('unusableEventsForAstraMechanica');
     }
     return this.getCards(player).length > 0;
   }

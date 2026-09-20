@@ -72,8 +72,7 @@
   "Increase titanium production 2 steps. Gain 3 titanium.": "Øk titanproduksjonen med 2 steg. Få 3 titan.",
 
   "Comet Aiming": "Kometstyring",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Handling: Bruk 1 titan for å legge til 1 asteroideressurs på ET KORT.",
-  "Action: Remove 1 asteroid here to place an ocean.": "Handling: Fjern 1 asteroideressurs her for å plassere en havbrikke.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD, or remove 1 asteroid here to place an ocean.": "Handling: Bruk 1 titan for å legge til 1 asteroideressurs på ET KORT ELLER fjern 1 asteroideressurs her for å plassere en havbrikke.",
 
   "Cutting Edge Technology": "Spydspissteknologi",
   "When playing a card with a requirement, you pay 2 M€ less for it.": "Effekt: Når du spiller et kort med et krav, betaler du 2 M€ mindre for det.",
@@ -82,8 +81,7 @@
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Krever at en spiller fjernet EN ANNEN SPILLERs planter denne generasjonen. Få 1 titan eller 2 stål.",
 
   "Directed Impactors": "Styrte nedslagsobjekter",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Handling: Bruk 6 M€ for å legge til 1 asteroideressurs på ET VALGFRITT KORT (titan kan brukes til å betale for dette)",
-  "Action: Remove 1 asteroid here to raise temperature 1 step.": "Handling: Fjern 1 asteroideressurs her for å øke temperaturen med 1 trinn.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this), or remove 1 asteroid here to raise temperature 1 step.": "Handling: Bruk 6 M€ for å legge til 1 asteroideressurs på ET VALGFRITT KORT (titan kan brukes til å betale for dette) ELLER fjern 1 asteroideressurs her for å øke temperaturen med 1 trinn.",
 
   "Field-Capped City": "Feltkappet by",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Øk din M€ produksjon med 2 steg, øk din energiproduksjon med 1 steg, få 3 planter og plasser en by-brikke.",
@@ -179,12 +177,9 @@
   "Your titanium resources are worth 1 M€ extra.": "Effekt: Dine titanressurser er verdt 1 M€ mer.",
 
   "Energy Market": "Energimarked",
-  "Action: Spend 2X M€ to gain X energy.": "Handling: Bruk 2X M€ for å få X energi.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "Handling: Senk energiproduksjonen din med 1 steg for å få 8 M€.",
 
   "Asteroid Rights": "Asteroide-rettigheter",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Handling: Bruk 1 M€ for å legge til 1 asteroideressurs på ET KORT.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Handling: Bruk 1 asteroideressurs her for å øke M€ produksjonen med 1 steg ELLER få 2 titan.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card OR spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Handling: Bruk 1 M€ for å legge til 1 asteroideressurs på ET KORT ELLER bruk 1 asteroideressurs her for å øke M€ produksjonen med 1 steg ELLER få 2 titan.",
   "Add 2 asteroids to this card.": "Legg til 2 asteroideressurser på dette kortet.",
 
   "Stanford Torus": "",

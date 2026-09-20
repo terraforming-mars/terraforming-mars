@@ -41,7 +41,7 @@ export class StingOperation extends Card implements IProjectCard {
   public override bespokeCanPlay(player: IPlayer) {
     const targets = this.targets(player);
     if (targets.length === 1 && targets[0] === player) {
-      this.warnings.add('selfTarget');
+      this.addWarning('selfTarget');
     }
     return targets.length > 0;
   }

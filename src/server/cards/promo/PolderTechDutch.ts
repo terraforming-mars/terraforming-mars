@@ -11,6 +11,7 @@ import {intersection} from '../../../common/utils/utils';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
+import {Phase} from '../../../common/Phase';
 
 // TODO(kberg): PolderTech is not yet compatible with Ares or Red City.
 export class PolderTechDutch extends CorporationCard implements ICorporationCard {
@@ -67,6 +68,11 @@ export class PolderTechDutch extends CorporationCard implements ICorporationCard
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space): void {
     if (cardOwner !== activePlayer) {
+      return;
+    }
+    // During World Government Terraforming the active player places the ocean but
+    // it is not "their" placement, so the effect should not trigger.
+    if (cardOwner.game.phase === Phase.SOLAR) {
       return;
     }
     if (space.tile?.tileType === TileType.OCEAN) {

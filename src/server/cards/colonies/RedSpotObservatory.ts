@@ -1,15 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 
-export class RedSpotObservatory extends Card implements IProjectCard {
+export class RedSpotObservatory extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 17,
@@ -21,6 +18,23 @@ export class RedSpotObservatory extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 2,
+      },
+
+      action: {
+        or: {
+          autoSelect: true,
+          behaviors: [
+            {
+              spend: {resourcesHere: 1},
+              drawCard: 1,
+              title: 'Remove 1 floater here to draw a card',
+            },
+            {
+              addResources: 1,
+              title: 'Add 1 floater to this card',
+            },
+          ],
+        },
       },
 
       requirements: {tag: Tag.SCIENCE, count: 3},
@@ -39,38 +53,5 @@ export class RedSpotObservatory extends Card implements IProjectCard {
         },
       },
     });
-  }
-
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: IPlayer) {
-    if (this.resourceCount < 1) {
-      player.addResourceTo(this, 1);
-      return undefined;
-    }
-
-    const opts = [];
-
-    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater').andThen(() => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater').andThen(() => this.spendResource(player));
-
-    opts.push(spendResource);
-    opts.push(addResource);
-
-    return new OrOptions(...opts);
-  }
-
-  private addResource(player: IPlayer) {
-    player.addResourceTo(this, 1);
-    return undefined;
-  }
-
-  private spendResource(player: IPlayer) {
-    this.resourceCount--;
-    player.drawCard();
-    return undefined;
   }
 }

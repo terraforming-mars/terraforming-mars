@@ -10,8 +10,7 @@
       :showsave="showsave"
       :buttonLabel="playerinput.buttonLabel"
       @change="(p) => payment = p"
-      @save="doSave">
-    </PaymentForm>
+      @save="doSave"/>
   </section>
 </div>
 </template>

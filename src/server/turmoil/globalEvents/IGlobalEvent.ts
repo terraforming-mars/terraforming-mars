@@ -2,7 +2,6 @@ import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventN
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {ICardRenderRoot} from '../../../common/cards/render/Types';
 import {IGame} from '../../IGame';
-import {Turmoil} from '../Turmoil';
 
 export interface IGlobalEvent {
   name: GlobalEventName,
@@ -10,13 +9,14 @@ export interface IGlobalEvent {
   revealedDelegate: PartyName,
   currentDelegate: PartyName,
   renderData: ICardRenderRoot;
-  resolve: (game: IGame, turmoil: Turmoil) => void;
+  resolve: (game: IGame) => void;
 }
 
 export function isIGlobalEvent(object: any): object is IGlobalEvent {
+  // `in` rather than hasOwnProperty: GlobalEvent exposes these as prototype getters.
   return (
     object !== undefined &&
-    object.hasOwnProperty('revealedDelegate') &&
-    object.hasOwnProperty('revealedDelegate')
+    'revealedDelegate' in object &&
+    'currentDelegate' in object
   );
 }

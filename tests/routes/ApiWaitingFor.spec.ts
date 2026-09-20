@@ -16,6 +16,13 @@ describe('ApiWaitingFor', () => {
     res = new MockResponse();
   });
 
+  it('fails when id is missing', async () => {
+    scaffolding.url = '/api/waitingfor?gameAge=123&undoCount=0';
+    await scaffolding.get(ApiWaitingFor.INSTANCE, res);
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).eq('Bad request: missing id parameter');
+  });
+
   it('fails when game not found', async () => {
     scaffolding.url = '/api/waitingfor?id=p-some-player-id&gameAge=123&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);

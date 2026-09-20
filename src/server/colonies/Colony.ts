@@ -374,7 +374,15 @@ export abstract class Colony implements IColony {
       const option = wgt.options.find((option) => option.annotation === annotation);
       if (option !== undefined) {
         game.defer(new SimpleDeferredAction(player, () => {
-          game.temporarySolarPhase(player, () => option.cb());
+          game.temporarySolarPhase(player, () => {
+            // Placing an ocean requires the player to select a space, so it is
+            // deferred as a player input. Temperature and oxygen apply directly.
+            if (annotation === GlobalParameter.OCEANS) {
+              player.defer(option);
+            } else {
+              option.cb();
+            }
+          });
         }));
       }
       break;

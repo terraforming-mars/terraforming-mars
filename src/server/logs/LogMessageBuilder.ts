@@ -14,6 +14,11 @@ export class LogMessageBuilder extends MessageBuilder {
     this.type = LogMessageType.DEFAULT;
   }
 
+  public forNotice(): this {
+    this.type = LogMessageType.NOTICE;
+    return this;
+  }
+
   public forNewGeneration(): this {
     this.type = LogMessageType.NEW_GENERATION;
     return this;

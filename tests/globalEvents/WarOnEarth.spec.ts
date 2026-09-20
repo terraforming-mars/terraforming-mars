@@ -18,7 +18,7 @@ describe('WarOnEarth', () => {
     turmoil.addInfluenceBonus(player, 2);
 
     player.setTerraformRating(20);
-    card.resolve(game, turmoil);
+    card.resolve(game);
 
     // 5 influence covers all 4 TR loss; TR should stay at 20, not increase
     expect(player.terraformRating).to.eq(20);
@@ -37,7 +37,7 @@ describe('WarOnEarth', () => {
     player.setTerraformRating(15);
     player2.setTerraformRating(15);
 
-    card.resolve(game, turmoil);
+    card.resolve(game);
     expect(player.terraformRating).to.eq(11);
     expect(player2.terraformRating).to.eq(14);
   });

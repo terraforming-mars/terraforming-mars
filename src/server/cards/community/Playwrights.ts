@@ -9,11 +9,12 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {all} from '../Options';
+import {all, uppercase} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IHasCheckLoops} from '../ICard';
 
-export class Playwrights extends CorporationCard implements ICorporationCard {
+export class Playwrights extends CorporationCard implements ICorporationCard, IHasCheckLoops {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
@@ -33,7 +34,7 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
           b.corpBox('action', (cb) => {
             cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
               eb.megacredits(1, {text: '?'}).startAction;
-              eb.text('replay', Size.SMALL, true);
+              eb.text('replay', {size: Size.SMALL, uppercase});
               eb.nbsp.cards(1, {all, secondaryTag: Tag.EVENT});
             });
           });

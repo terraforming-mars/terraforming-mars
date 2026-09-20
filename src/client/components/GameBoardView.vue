@@ -1,7 +1,7 @@
 <!-- Common widgets between player and spectator views -->
 <template>
   <a name="board" class="player_home_anchor hotkey-target"></a>
-  <board
+  <Board
     :spaces="game.spaces"
     :expansions="game.gameOptions.expansions"
     :venusScaleLevel="game.venusScaleLevel"
@@ -18,7 +18,7 @@
 
   <template v-if="game.turmoil">
     <a class="hotkey-target"></a>
-    <turmoil :turmoil="game.turmoil"/>
+    <Turmoil :turmoil="game.turmoil"/>
   </template>
 
   <template v-if="game.moon">
@@ -45,6 +45,7 @@ import {defineComponent, PropType} from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {SpaceId} from '@/common/Types';
 import Board from '@/client/components/Board.vue';
 import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import Milestones from '@/client/components/Milestones.vue';
@@ -53,6 +54,7 @@ import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import {TileView} from './board/TileView';
+import {scrollToSpace} from '@/client/utils/boardScroll';
 
 export default defineComponent({
   name: 'GameBoardView',
@@ -72,13 +74,36 @@ export default defineComponent({
   },
   emits: ['toggleTileView'],
   components: {
-    'board': Board,
+    Board,
     DeltaProjectBoard,
     Milestones,
     Awards,
-    'turmoil': Turmoil,
+    Turmoil,
     MoonBoard,
     PlanetaryTracks,
+  },
+  methods: {
+    highlightSpace(spaceId: SpaceId) {
+      scrollToSpace(spaceId);
+
+      const regions = ['main_board', 'moon_board', 'moon_board_outer_spaces'];
+      for (const region of regions) {
+        const board = document.getElementById(region);
+        if (board !== null) {
+          const array = board.getElementsByClassName('board-log-highlight');
+          for (let i = 0, length = array.length; i < length; i++) {
+            const element = array[i] as HTMLElement;
+            if (element.getAttribute('data_log_highlight_id') === spaceId) {
+              element.classList.add('highlight');
+              setTimeout(() => {
+                element.classList.remove('highlight');
+              }, 3000);
+              return;
+            }
+          }
+        }
+      }
+    },
   },
 });
 </script>

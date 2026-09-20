@@ -64,6 +64,10 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
+  static logTemperatureIncrease(player: IPlayer, steps: number) {
+    player.game.log('${0} raised the temperature ${1} step(s)', (b) => b.player(player).number(steps));
+  }
+
   static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard>, privateMessage: boolean = false) {
     const message = cards.length === 0 ? '${0} drew no cards' : '${0} drew ${1}';
     const options = privateMessage ? {reservedFor: player} : {};

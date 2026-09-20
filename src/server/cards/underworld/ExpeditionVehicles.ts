@@ -9,6 +9,7 @@ import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 import {BoardType} from '../../boards/BoardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Phase} from '../../../common/Phase';
 
 export class ExpeditionVehicles extends Card implements IProjectCard {
   constructor() {
@@ -34,6 +35,12 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
   onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     // onTilePlaced gets called with Mars Nomads, should be ignored here.
     if (space.tile === undefined) {
+      return;
+    }
+
+    // During World Government Terraforming the active player places the tile but
+    // it is not "their" placement, so the effect should not trigger.
+    if (cardOwner.game.phase === Phase.SOLAR) {
       return;
     }
 

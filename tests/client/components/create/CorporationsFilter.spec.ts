@@ -1,8 +1,8 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
+import {findModuleItemFilter} from '../utils/findComponent';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
-import ModuleItemFilter from '@/client/components/create/ModuleItemFilter.vue';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {CardName} from '@/common/cards/CardName';
 
@@ -23,7 +23,7 @@ describe('CorporationsFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
     });
-    expect(wrapper.findComponent(ModuleItemFilter).exists()).to.be.true;
+    expect(findModuleItemFilter(wrapper).exists()).to.be.true;
   });
 
   it('passes "Corporations" as the title', () => {
@@ -31,7 +31,7 @@ describe('CorporationsFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
     });
-    expect(wrapper.findComponent(ModuleItemFilter).props('title')).to.eq('Corporations');
+    expect(findModuleItemFilter(wrapper).props('title')).to.eq('Corporations');
   });
 
   it('uses the provided selection when selected is non-empty', () => {
@@ -40,7 +40,7 @@ describe('CorporationsFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: provided},
     });
-    const inner = wrapper.findComponent(ModuleItemFilter);
+    const inner = findModuleItemFilter(wrapper);
     expect(inner.props('selected')).to.deep.eq(provided);
   });
 
@@ -49,7 +49,7 @@ describe('CorporationsFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
     });
-    const inner = wrapper.findComponent(ModuleItemFilter);
+    const inner = findModuleItemFilter(wrapper);
     const selected: Array<string> = inner.props('selected');
     expect(selected.length).to.be.greaterThan(0);
     // Beginner Corporation must be excluded
@@ -62,7 +62,7 @@ describe('CorporationsFilter', () => {
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
     });
     const payload: Array<CardName> = [CardName.HELION];
-    await wrapper.findComponent(ModuleItemFilter).vm.$emit('update:selected', payload);
+    await findModuleItemFilter(wrapper).vm.$emit('update:selected', payload);
     const emitted = wrapper.emitted('corporation-list-changed');
     expect(emitted).to.have.length(1);
     expect(emitted![0][0]).to.deep.eq(payload);
@@ -73,7 +73,7 @@ describe('CorporationsFilter', () => {
       ...globalConfig,
       props: {expansions: {...DEFAULT_EXPANSIONS}, selected: []},
     });
-    await wrapper.findComponent(ModuleItemFilter).vm.$emit('close');
+    await findModuleItemFilter(wrapper).vm.$emit('close');
     expect(wrapper.emitted('close')).to.have.length(1);
   });
 });

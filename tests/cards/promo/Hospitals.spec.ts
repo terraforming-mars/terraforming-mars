@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {cast} from '@/common/utils/utils';
 import {Hospitals} from '../../../src/server/cards/promo/Hospitals';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {ICard} from '../../../src/server/cards/ICard';
-import {addCity} from '../../TestingUtils';
+import {addCity, churn, runAllActions} from '../../TestingUtils';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 
@@ -14,6 +15,7 @@ describe('Hospitals', () => {
   let card: Hospitals;
   let player: TestPlayer;
   let player2: TestPlayer;
+  let game: IGame;
   let pharmacy: PharmacyUnion;
   let other: IProjectCard;
 
@@ -21,7 +23,7 @@ describe('Hospitals', () => {
     card = new Hospitals();
     pharmacy = new PharmacyUnion();
     other = new MartianCulture();
-    [/* game */, player, player2] = testGame(2);
+    [game, player, player2] = testGame(2);
   });
 
   it('Add resources', () => {
@@ -46,6 +48,7 @@ describe('Hospitals', () => {
     card.resourceCount = 6;
     const input = card.action(player);
     expect(input).to.be.undefined;
+    runAllActions(game);
     expect(card.resourceCount).to.eq(5);
     expect(player.stock.megacredits).to.eq(6);
   });
@@ -58,10 +61,11 @@ describe('Hospitals', () => {
     pharmacy.resourceCount = 12;
     expect(card.resourceCount).eq(2);
     other.resourceCount = 1;
-    const input = card.action(player);
+    const input = churn(card.action(player), player);
     const selectCard = cast(input, SelectCard<ICard>);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([pharmacy]);
+    runAllActions(game);
     expect(pharmacy.resourceCount).eq(11);
     expect(player.stock.megacredits).to.eq(2);
     expect(card.resourceCount).eq(2);
@@ -75,10 +79,11 @@ describe('Hospitals', () => {
     addCity(player2);
     pharmacy.resourceCount = 12;
     expect(card.resourceCount).eq(3);
-    const input = card.action(player);
+    const input = churn(card.action(player), player);
     const selectCard = cast(input, SelectCard<ICard>);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([card]);
+    runAllActions(game);
     expect(card.resourceCount).eq(2);
     expect(pharmacy.resourceCount).eq(12);
     expect(player.stock.megacredits).to.eq(3);

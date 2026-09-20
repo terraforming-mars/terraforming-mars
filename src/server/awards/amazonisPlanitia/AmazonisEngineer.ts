@@ -41,7 +41,6 @@ export const BESPOKE_PRODUCTION_CARDS: ReadonlyArray<CardName> = [
   CardName.STAR_VEGAS,
   // Prelude 2
   CardName.CLOUD_TOURISM,
-  CardName.MICROGRAVITY_NUTRITION,
 ] as const;
 
 // Mapping from [CardName => boolean] indicating whether a card is eligible for Engineer.

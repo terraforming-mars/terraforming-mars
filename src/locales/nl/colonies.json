@@ -1,0 +1,141 @@
+{
+  "Build Colony bonus": "Koloniebouwbonus",
+  "Colony bonus": "Koloniebonus",
+  "Trade bonus": "Handelsbonus",
+
+  "Callisto": "",
+  "Gain 1 energy production": "Verhoog je energieproductie met 1",
+  "Gain n energy": "Ontvang n energie",
+  "Gain 3 energy": "Ontvang 3 energie",
+
+  "Ceres": "",
+  "Gain 1 steel production": "Verhoog je staalproductie met 1",
+  "Gain n steel": "Ontvang n staal",
+
+  "Enceladus": "",
+  "Add 3 microbes to ANY card": "Voeg 3 microben toe aan EEN WILLEKEURIGE kaart",
+  "Add n microbes to ANY card": "Voeg n microben toe aan EEN WILLEKEURIGE kaart",
+
+  "Europa": "",
+  "Place an ocean tile": "Plaats een oceaantegel",
+  "Gain 1 unit of production of the type under the track marker": "Verhoog 1 productie van het type onder de spoormarker",
+
+  "Ganymede": "",
+  "Gain 1 plant production": "Verhoog je plantproductie met 1",
+  "Gain n plants": "Ontvang n planten",
+
+  "Io": "",
+  "Gain 1 heat production": "Verhoog je warmteproductie met 1",
+  "Gain n heat": "Ontvang n warmte",
+  "Gain 2 heat": "Ontvang 2 warmte",
+
+  "Luna": "",
+  "Gain 2 M€ production": "Verhoog je M€-productie met 2",
+  "Gain n M€": "Ontvang n M€",
+
+  "Miranda": "",
+  "Add 1 animal to ANY card": "Voeg 1 dier toe aan EEN WILLEKEURIGE kaart",
+  "Add n animals to ANY card": "Voeg n dieren toe aan EEN WILLEKEURIGE kaart",
+
+  "Pluto": "",
+  "Draw n cards": "Trek n kaarten",
+  "Draw 1 card and then discard 1 card": "Trek 1 kaart en leg daarna 1 kaart af",
+
+  "Titan": "",
+  "Add 3 floaters to ANY card": "Voeg 3 zwevers toe aan EEN WILLEKEURIGE kaart",
+  "Add n floaters to ANY card": "Voeg n zwevers toe aan EEN WILLEKEURIGE kaart",
+
+  "Triton": "",
+  "Gain n titanium": "Ontvang n titanium",
+
+  "Iapetus": "",
+  "Gain n TR": "Verhoog je TN met n",
+  "Pay 1 M€ less for cards this generation": "Betaal deze generatie 1 M€ minder voor kaarten",
+
+  "Mercury": "Mercurius",
+  "Gain the trade bonus of any colony tile. (This does not move the markers.)": "Ontvang de handelsbonus van een willekeurige kolonietegel. (Dit verplaatst de markers niet.)",
+  "Gain 1 unit of production of the type below the track marker": "Verhoog 1 productie van het type onder de spoormarker",
+
+  "Hygiea": "",
+  "Choose opponent to discard 1 card": "Kies een tegenstander die 1 kaart moet afleggen",
+  "Steal 3 units of the listed type": "Steel 3 eenheden van het aangegeven type",
+  "Gain 3 M€": "Ontvang 3 M€",
+
+  "Titania": "",
+  "Gain 5, 3, or 2 VP": "Ontvang 5, 3 of 2 OP",
+  "Gain n VP": "Ontvang n OP",
+  "Lose 3 M€": "Verlies 3 M€",
+
+  "Leavitt": "",
+  "Gain 1 science tag": "Ontvang 1 wetenschapslabel",
+  "Draw n cards, keep 1": "Trek n kaarten, houd er 1",
+  "Reveal 1 card which you may pay to keep": "Onthul 1 kaart die je tegen betaling mag houden",
+
+  "Increase Venus 1 step": "Verhoog Venus met 1 stap",
+  "Add n resources to ANY Venus card": "Voeg n grondstoffen toe aan EEN WILLEKEURIGE Venuskaart",
+  "Add 1 resource to ANY Venus card": "Voeg 1 grondstof toe aan EEN WILLEKEURIGE Venuskaart",
+
+  "Pallas": "",
+  "Gain +1 influence": "Krijg +1 invloed",
+  "Place n delegates": "Plaats n afgevaardigden",
+  "Gain 1 M€ for each delegate in any party": "Ontvang 1 M€ voor elke afgevaardigde in een partij",
+
+  "Iapetus II": "",
+  "Add 3 data to ANY card": "Voeg 3 data toe aan EEN WILLEKEURIGE kaart",
+  "Add n data to ANY card": "Voeg n data toe aan EEN WILLEKEURIGE kaart",
+  "Add 1 data to ANY card": "Voeg 1 data toe aan EEN WILLEKEURIGE kaart",
+
+  "Kuiper": "",
+  "Add 2 asteroids to ANY card": "Voeg 2 asteroïden toe aan EEN WILLEKEURIGE kaart",
+  "Add N asteroids to ANY card": "Voeg N asteroïden toe aan EEN WILLEKEURIGE kaart",
+
+  "Terra": "",
+  "Draw an Earth card": "Trek een Aardekaart",
+  "WGT raises indicated global parameter": "WGT verhoogt de aangegeven globale parameter",
+  "Gain 1 M€ per 3 Earth tags in play": "Ontvang 1 M€ per 3 Aardelabels in het spel",
+
+  "Deimos": "",
+  "Place a hazard tile next to no other tile": "Plaats een gevarentegel niet naast een andere tegel",
+  "Erode n spaces adjacent to hazard tiles (gaining placement bonuses)": "Erodeer n velden aangrenzend aan gevarentegels (met plaatsingsbonussen)",
+  "Gain 1 M€ per hazard tile on Mars": "Ontvang 1 M€ per gevarentegel op Mars",
+
+  "Colony Bonus": "Koloniebonus",
+  "Trade Income": "Handelsinkomen",
+  "Select where to build a colony": "Kies waar je een kolonie wilt bouwen",
+
+  "Colony Fee": "Koloniekosten",
+  "Bonus": "",
+  "Trade Income: Gain the indicated production": "Handelsinkomen: ontvang de aangegeven productie",
+  "REVEAL TOP CARD OF DECK.": "ONTHUL DE BOVENSTE KAART VAN DE STAPEL.",
+  "BUY OR DISCARD IT.": "KOOP OF LEG HAAR AF.",
+  "Trade Income: Draw X cards and keep 1": "Handelsinkomen: trek X kaarten en houd er 1",
+  "Trade Income: Steal 3 indicated resources": "Handelsinkomen: steel 3 aangegeven grondstoffen",
+  "Trade Income: WGT raises global parameter": "Handelsinkomen: WGT verhoogt de globale parameter",
+  "Trade Income: Erode X adjacent spaces": "Handelsinkomen: erodeer X aangrenzende velden",
+  "Copy Trade": "Kopieer handel",
+  "/ party": "/ partij",
+  "WGT": "",
+
+  "Callisto - (Energy)": "Callisto - (Energie)",
+  "Ceres - (Steel)": "Ceres - (Staal)",
+  "Enceladus - (Microbes)": "Enceladus - (Microben)",
+  "Europa - (Production)": "Europa - (Productie)",
+  "Ganymede - (Plants)": "Ganymede - (Planten)",
+  "Io - (Heat)": "Io - (Warmte)",
+  "Luna - (MegaCredits)": "Luna - (M€)",
+  "Miranda - (Animals)": "Miranda - (Dieren)",
+  "Pluto - (Cards)": "Pluto - (Kaarten)",
+  "Titan - (Floaters)": "Titan - (Zwevers)",
+  "Triton - (Titanium)": "",
+  "Leavitt - (Science)": "Leavitt - (Wetenschap)",
+  "Titania - (VP)": "Titania - (OP)",
+  "Venus - (Venus)": "",
+  "Hygiea - (Attack)": "Hygiea - (Aanval)",
+  "Iapetus - (TR)": "Iapetus - (TN)",
+  "Mercury - (Production)": "Mercurius - (Productie)",
+  "Pallas - (Politics)": "Pallas - (Politiek)",
+  "Iapetus II - (Data)": "",
+  "Kuiper - (Asteroids)": "Kuiper - (Asteroïden)",
+  "Terra - (World Government)": "Terra - (Wereldregering)",
+  "Deimos - (Hazards)": "Deimos - (Gevaren)"
+}

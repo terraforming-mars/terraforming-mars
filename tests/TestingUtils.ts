@@ -193,6 +193,12 @@ class FakeCard implements IProjectCard {
   public metadata = {};
   public resourceCount = 0;
   public tilesBuilt = [];
+  public addWarning(warning: Warning): void {
+    this.warnings.add(warning);
+  }
+  public clearWarnings(): void {
+    this.warnings.clear();
+  }
 }
 
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
@@ -250,4 +256,9 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
   const [waitingFor, cb] = player.popWaitingFor2();
   f(cast(waitingFor, klass));
   cb?.();
+}
+
+export function simulateFinishingAction(player: IPlayer) {
+  player.actionsTakenThisGame++;
+  player.actionsTakenThisRound++;
 }

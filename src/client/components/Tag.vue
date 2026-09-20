@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()" :data-tooltip="$t(tag)" />
+  <div :class="getClasses()" :data-tooltip="$t(tag)" ></div>
 </template>
 
 <script lang="ts">

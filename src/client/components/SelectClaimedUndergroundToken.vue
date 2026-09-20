@@ -4,12 +4,12 @@
     <div class="underground-tokens">
       <label v-for="(token, idx) in playerinput.tokens" :key="idx">
          <!-- disabled="selected.length >= playerinput.count -->
-        <input type="checkbox" :name="String(idx)" v-model="selected" :value="idx" />
-        <underground-token
+        <input type="checkbox" :name="String(idx)" v-model="selected" :value="idx" >
+        <UndergroundToken
           :token="token"
           :key="idx"
           location="tag-count"
-          ></underground-token>
+          />
           <br>
       </label>
     </div>
@@ -72,7 +72,7 @@ export default defineComponent({
       return true;
     },
     saveData() {
-      this.onsave({type: 'claimedUndergroundToken', selected: this.selected.sort()});
+      this.onsave({type: 'claimedUndergroundToken', selected: this.selected});
     },
   },
 });

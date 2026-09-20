@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
@@ -8,10 +9,13 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {cast} from '@/common/utils/utils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {churn, runAllActions} from '../../TestingUtils';
 
 describe('FloaterUrbanism', () => {
   let card: FloaterUrbanism;
   let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: IGame;
 
   let floater1: IProjectCard;
   let floater2: IProjectCard;
@@ -19,7 +23,7 @@ describe('FloaterUrbanism', () => {
 
   beforeEach(() => {
     card = new FloaterUrbanism();
-    [/* game */, player] = testGame(1);
+    [game, player, player2] = testGame(2);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
@@ -47,6 +51,7 @@ describe('FloaterUrbanism', () => {
     other.resourceCount = 1;
 
     card.action(player);
+    runAllActions(game);
 
     expect(floater1.resourceCount).eq(0);
     expect(card.resourceCount).eq(1);
@@ -58,16 +63,32 @@ describe('FloaterUrbanism', () => {
     floater2.resourceCount = 1;
     other.resourceCount = 1;
 
-    const options = cast(card.action(player), SelectCard);
+    const options = cast(churn(card.action(player), player), SelectCard);
     expect(options.cards).has.length(2);
     options.cb([options.cards[0]]);
+    runAllActions(game);
     expect(floater1.resourceCount).eq(0);
     expect(floater2.resourceCount).eq(1);
     expect(card.resourceCount).eq(1);
 
     options.cb([options.cards[1]]);
+    runAllActions(game);
     expect(floater1.resourceCount).eq(0);
     expect(floater2.resourceCount).eq(0);
     expect(card.resourceCount).eq(2);
+  });
+
+  it('act - cannot take a floater from an opponent\'s card', () => {
+    const opponentFloaters = new TitanShuttles();
+    player2.playedCards.push(opponentFloaters);
+    opponentFloaters.resourceCount = 1;
+    floater1.resourceCount = 1;
+
+    card.action(player);
+    runAllActions(game);
+
+    expect(opponentFloaters.resourceCount).eq(1);
+    expect(floater1.resourceCount).eq(0);
+    expect(card.resourceCount).eq(1);
   });
 });

@@ -12,7 +12,7 @@ export class Yvonne extends CeoCard {
       metadata: {
         cardNumber: 'L25',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('GAIN ALL YOUR COLONY BONUSES TWICE', Size.SMALL);
+          b.opgArrow().text('GAIN ALL YOUR COLONY BONUSES TWICE', {size: Size.SMALL});
         }),
         description: 'Once per game, gain all your colony bonuses twice.',
       },

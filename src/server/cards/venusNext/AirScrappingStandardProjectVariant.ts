@@ -17,7 +17,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
           b.standardProject('Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.', (eb) => {
             eb.megacredits(15).text('(').megacredits(-1).slash().tag(Tag.VENUS).text(')').startAction.venus(1);
           });
-          b.br.text('(max -5M€)', Size.SMALL);
+          b.br.text('(max -5M€)', {size: Size.SMALL});
         }),
       },
     });

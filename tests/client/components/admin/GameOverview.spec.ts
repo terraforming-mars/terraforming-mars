@@ -2,7 +2,8 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
-import {fakeGameModel} from '../testHelpers';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
+import {asComplete} from '../utils/models';
 
 describe('GameOverview', () => {
   it('mounts without errors', () => {
@@ -10,7 +11,7 @@ describe('GameOverview', () => {
       ...globalConfig,
       props: {
         status: 'loading',
-        game: fakeGameModel(),
+        game: asComplete<SimpleGameModel>({}),
         id: 'game-123',
       },
     });

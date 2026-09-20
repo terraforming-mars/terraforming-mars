@@ -1,8 +1,12 @@
 {
+  "Boom Town": "Boomtown",
+  "Effect: Your titanium is worth 1 M€ less.": "EFFEKT: Dein Titan ist 1 M€ weniger wert.",
+  "Place a city tile on an area with a STEEL OR TITANIUM PLACEMENT BONUS. Increase your titanium production 2 steps.": "Platziere ein Stadtplättchen auf ein Gebiet mit einem STAHL- ODER TITAN-PLATZIERUNGSBONUS. Erhöhe deine Titan-Produktion um 2.",
+  
   "Albedo Plants": "Albedo-Pflanzen",
   "Effect: When you play a plant tag, including this, gain 3 heat.": "EFFEKT: Wenn du eine Pflanzensymbol spielst, einschließlich dieses, erhältst du 3 Wärme.",
   "Increase plant production 1 step. Gain 1 plant.": "Erhöhe deine Pflanzenproduktion um 1. Erhalte 1 Pflanze.",
-  
+
   "Applied Science": "Angewandte Wissenschaft",
   "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "AKTION: Entferne 1 Wissenschaft von dieser Karte, um einer Karte deiner Wahl mit einer Ressource 1 Ressource hinzuzufügen oder 1 Standard-Ressource zu erhalten.",
   "Add 6 science resources here.": "Füge dieser Karte 6 Wissenschaft hinzu.",
@@ -29,7 +33,7 @@
 
   "Floating Trade Hub": "Schwebender Handelsposten",
   "Action: Add 2 floaters to ANY card.": "AKTION: Füge einer Karte deiner Wahl 2 Schweber hinzu.",
-  "Action: Remove any number of floaters here to gain that many of one standard resource.": "AKTION: Entferne Schweber von dieser Karte, um in gleicher Anzahl Standard-Ressourcen einer Sorte zu erhalten.",
+  "Action: Add 2 floaters to ANY card, or remove any number of floaters here to gain that many of one standard resource.": "AKTION: Füge einer Karte deiner Wahl 2 Schweber hinzu, oder entferne Schweber von dieser Karte, um in gleicher Anzahl Standard-Ressourcen einer Sorte zu erhalten.",
 
   "Focused Organization": "Zielgerichtete Organisation",
   "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "AKTION: Wirf 1 Karte und 1 Standardressource ab, um 1 Karte zu ziehen und 1 Standard-Ressource zu erhalten.",
@@ -231,8 +235,5 @@
   "Increase your TR 3 steps. Draw a card.": "Erhöhe deinen TW um 3. Ziehe eine Karte.",
 
   "Acquired Space Agency": "Erworbene Raumfahrtbehörde",
-  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
-
-  "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
-  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen"
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab."
 }

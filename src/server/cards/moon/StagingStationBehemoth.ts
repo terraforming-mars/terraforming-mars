@@ -14,7 +14,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       cost: 24,
 
       behavior: {
-        moon: {logisticsRate: 1},
+        moon: {logisticRate: 1},
         colonies: {addTradeFleet: 2},
       },
 
@@ -22,7 +22,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
         description: 'Gain 2 Trade Fleets. Raise the logistic rate 1 step.',
         cardNumber: 'M68',
         renderData: CardRenderer.builder((b) => {
-          b.tradeFleet().tradeFleet().moonLogisticsRate();
+          b.tradeFleet().tradeFleet().moonLogisticRate();
         }),
       },
     });

@@ -573,6 +573,8 @@ export enum CardName {
   STATIC_HARVESTING = 'Static Harvesting',
   WEATHER_BALLOONS = 'Weather Balloons',
   ALBEDO_PLANTS = 'Albedo Plants',
+  STERLING_VENTS = 'Sterling Vents',
+  BOOM_TOWN = 'Boom Town',
 
   // Promo cards from Dutch Open
   FLOYD_CONTINUUM = 'Floyd Continuum',
@@ -582,6 +584,7 @@ export enum CardName {
   // End of promo cards
 
   // Community corps
+  AEROTECH = 'Aerotech',
   AGRICOLA_INC = 'Agricola Inc',
   CURIOSITY_II = 'Curiosity II',
   INCITE = 'Incite',
@@ -607,6 +610,19 @@ export enum CardName {
 
   // For Playwright.
   SPECIAL_DESIGN_PROXY = 'Special Design:proxy',
+
+  // Proxy for when Executor is used for Global Events.
+  GLOBAL_EVENT_PROXY = 'Global Event Proxy',
+
+  // Automa
+  AUTOMA_METEOR_SHOWER = 'Meteor Shower:automa',
+  AUTOMA_INVASIVE_SPECIES = 'Invasive Species:automa',
+  AUTOMA_RESEARCH_AND_DEVELOPMENT = 'Research and Development:automa',
+  AUTOMA_OVERACHIEVEMENT = 'Overachievement:automa',
+  AUTOMA_EXPEDITED_CONSTRUCTION = 'Expedited Construction:automa',
+  AUTOMA_LOBBYISTS = 'Lobbyists:automa',
+  AUTOMA_LOCAL_NEURAL_INSTANCE = 'Local Neural Instance:automa',
+  AUTOMA_CORPORATE_COMPETITION = 'Corporate Competition:automa',
 
   // Ares expansion.
   BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',

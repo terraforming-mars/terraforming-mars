@@ -1,0 +1,28 @@
+{
+  "LAKEFRONT": "MEEROEVER",
+  "RESORTS": "",
+  "Lakefront Resorts": "",
+  "You start with 54 M€.": "Je start met 54 M€.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "EFFECT: Wanneer een oceaantegel wordt geplaatst, verhoog je je M€-productie met 1 stap. Je bonus voor plaatsen aangrenzend aan oceanen is 3 M€ in plaats van 2 M€.",
+
+  "TERRALABS": "",
+  "RESEARCH": "ONDERZOEK",
+  "TerraLabs Research": "TerraLabs Onderzoek",
+  "You start with 14 M€. Lower your TR 1 step.": "Je start met 14 M€. Verlaag je TN met 1 stap.",
+  "Effect: Buying cards to hand costs 1 M€.": "EFFECT: Kaarten kopen naar je hand kost 1 M€.",
+
+  "UTOPIA": "",
+  "INVEST": "",
+  "Utopia Invest": "",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Je start met 40 M€. Verhoog je staal- en titaniumproductie elk met 1 stap.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "ACTIE: Verlaag een willekeurige productie om 4 grondstoffen van dat type te krijgen.",
+
+  "PRISTAR": "",
+  "Pristar": "",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Je start met 53 M€. Verlaag je TN met 2 stappen. 1 OP per conserveringsgrondstof hier.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "EFFECT: Tijdens de productiefase, als je deze generatie nog geen TN hebt ontvangen, voeg hier dan 1 conserveringsgrondstof toe en ontvang 6 M€.",
+
+  "Septem Tribus": "",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Je start met 36 M€. Wanneer je een actie uitvoert, telt het jokerlabel als elk label naar keuze.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "ACTIE: Ontvang 2 M€ voor elke partij waar je ten minste 1 gedelegeerde hebt."
+}

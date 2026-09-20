@@ -9,6 +9,8 @@ import {Preferences} from '@/client/utils/PreferencesManager';
 import * as titles from '@/common/inputs/SelectInitialCards';
 import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {CardModel} from '@/common/models/CardModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {asComplete} from './utils/models';
 
 let savedData: InputResponse | undefined;
 
@@ -214,14 +216,16 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
   return mount(SelectInitialCards, {
     ...globalConfig,
     props: {
-      playerView: {
-        id: 'foo',
+      playerView: asComplete<PlayerViewModel>({
+        id: 'p1',
         dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
         game: {},
-      },
+      }),
       playerinput: {
+        type: 'initialCards',
         title: 'selectInitialCards',
+        buttonLabel: 'save',
         options,
       },
       onsave: function(data: SelectInitialCardsResponse) {

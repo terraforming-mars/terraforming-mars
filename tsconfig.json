@@ -3,13 +3,7 @@
 {
     // Compiler options are mostly for the sub-configurations
     "compilerOptions": {
-        // ES2019 support is pretty broad for Browsers, except for Function.prototype.toString, which is just not
-        // likely to be a problem
-        // ES2020 is very well supported in modern browsers.
-        // ES 2021 has a couple of features not supported in Opera, but they're WeakRef and Promise.any.
-        // It is safe to assume those features won't be run on a browser.
-        // "lib": ["dom", "es2021"],
-        "lib": ["dom", "es2021"],
+        "lib": ["dom", "es2023"],
         "incremental": true,
         "module": "commonjs",
         "strict": true,
@@ -23,14 +17,14 @@
         "skipLibCheck": true,
         "target": "es2021",
         "types": ["node"],
-        "moduleResolution": "node",
-        "ignoreDeprecations": "6.0",
+        "moduleResolution": "bundler",
         "rootDir": ".",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "allowUnreachableCode": false,
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@tests/*": ["./tests/*"]
         },
         "plugins": [
             { "transform": "transformer-module" },
@@ -39,6 +33,8 @@
     },
     // This gives the VS Code IDE its magic.
     "include": [
-        "**/*.ts",
+        "src/**/*.ts",
+        "tests/**/*.ts",
+        "scripts/**/*.ts",
     ],
 }

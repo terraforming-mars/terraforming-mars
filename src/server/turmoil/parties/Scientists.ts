@@ -43,7 +43,7 @@ class ScientistsBonus02 extends Bonus {
 
 class ScientistsPolicy01 implements IPolicy {
   readonly id = 'sp01' as const;
-  readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
+  readonly description = 'Pay 10 M€ to draw 3 cards';
 
   canAct(player: IPlayer) {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
@@ -74,7 +74,7 @@ class ScientistsPolicy03 implements IPolicy {
 
 class ScientistsPolicy04 extends Policy {
   readonly id = 'sp04' as const;
-  readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  readonly description = 'Cards with science tag requirements may be played with 1 less science tag';
 
   override onPolicyStartForPlayer(player: IPlayer) {
     player.hasTurmoilScienceTagBonus = true;

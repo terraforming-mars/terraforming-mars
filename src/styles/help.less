@@ -287,6 +287,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
   padding: 10px 12px 12px;
   border: 1px solid #444;
   border-radius: 8px;
@@ -310,20 +311,27 @@
 }
 
 // A fixed 2-column grid (1 row of 2 bonuses, 2 rows of 2 policies) so every card is exactly
-// the same size regardless of which section it's in.
+// the same size regardless of which section it's in. minmax(0, 1fr) (not plain 1fr) is required
+// here: a plain 1fr column's minimum width still defaults to its content's natural width, so a
+// wide multi-icon agenda (e.g. "Pay 10 M€ to draw 3 cards") would force that whole column wider
+// than the others instead of wrapping inside its own cell -- this got much worse on narrow
+// screens, where there's less room to absorb the overflow.
 .help-agenda-section {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
 // A bonus/policy shown as its real board icon on its own background tile (matching how it
-// looks on /cards), with its plain-text effect underneath.
+// looks on /cards), with its plain-text effect underneath. min-width: 0 is the other half of
+// the fix above -- a flex/grid item won't actually shrink below its content's natural width
+// just because its track is constrained, unless the item itself allows it too.
 .help-agenda-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  min-width: 0;
   padding: 8px 6px;
   background-image: linear-gradient(#9c602d, #25170a);
   border-radius: 8px;
@@ -341,6 +349,15 @@
 .help-agenda-divider {
   border-top: 1px solid #444;
   margin: 4px 0;
+}
+
+// 3 fixed party columns are too narrow to hold a 2-column bonus/policy grid on an actual phone
+// screen, even with the minmax(0, 1fr) fix above -- drop to 1 column so each party card gets
+// the full width instead.
+@media only screen and (max-width: 767px) {
+  .help-parties-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .help-rulebooks-container {

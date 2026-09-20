@@ -64,7 +64,7 @@ export class FloatingTradeHub extends PreludeCard implements IActionCard {
         return this.add2Floaters(player, floatingTradeHub);
       });
     }
-    return new SelectCard('Select card to gain 2 floaters', undefined, floaterCards).andThen(([card]) => {
+    return new SelectCard('Select card to add 2 floaters', undefined, floaterCards).andThen(([card]) => {
       return this.add2Floaters(player, card);
     });
   }

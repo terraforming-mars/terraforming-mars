@@ -59,7 +59,7 @@ export class AeronGenomics extends CorporationCard implements ICorporationCard {
     let indexes: Array<number> = [];
 
     andOptions.options.push(
-      new SelectCard('Select card to gain animals', '', player.getResourceCards(CardResource.ANIMAL))
+      new SelectCard('Select card to add animals', '', player.getResourceCards(CardResource.ANIMAL))
         .andThen(([card]) => {
           selected = card;
           return undefined;

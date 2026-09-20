@@ -53,7 +53,7 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
         return undefined;
       });
 
-      const addMicrobe = new SelectCard('Select card to gain a microbe', 'Add microbe', microbeCards)
+      const addMicrobe = new SelectCard('Select card to add a microbe', 'Add microbe', microbeCards)
         .andThen(([card]) => {
           player.addResourceTo(card, {qty: 1, log: true});
           return undefined;

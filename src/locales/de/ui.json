@@ -983,7 +983,7 @@
   "Perform an action from a played card again": "Führe eine Karten-Aktion von einer gespielten Karte erneut aus",
   "Select amount of heat to spend": "Wähle die Menge an Wärme, um zu bezahlen",
   "Select amount of floaters on corporation to spend": "Wähle die Menge an Schweber auf dem Konzern, um zu bezahlen",
-  "You cannot overspend heat": "Du darfst keine Wärme überbezahlen",
+  "You cannot overspend ${0}": "Du darfst ${0} nicht überbezahlen",
   "Select card to add 1 floater(s)": "Wähle 1 Karte, um 1 Schweber hinzuzufügen",
   "Select card to add 1 Floater(s)": "Wähle 1 Karte, um 1 Schweber hinzuzufügen",
   "Select card to add 4 Floater(s)": "Wähle 1 Karte, um 4 Schweber hinzuzufügen",

@@ -945,7 +945,7 @@
   "Perform an action from a played card again": "Suorita toiminto pelatusta kortista uudelleen",
   "Select amount of heat to spend": "Valitse käytettävän lämmön määrä",
   "Select amount of floaters on corporation to spend": "Valitse yhtiöstä käytettävien kellujien määrä",
-  "You cannot overspend heat": "Et voi käyttää liikaa lämpöä",
+  "You cannot overspend ${0}": "Et voi käyttää liikaa ${0}",
   "Select card to add 1 floater(s)": "Valitse kortti johon lisätään 1 kelluja",
   "Select card to add 1 Floater(s)": "Valitse kortti johon lisätään 1 kelluja",
   "Select card to add 4 Floater(s)": "Valitse kortti johon lisätään 4 kellujaa",

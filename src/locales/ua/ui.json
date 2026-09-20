@@ -872,7 +872,7 @@
   "Perform an action from a played card again": "Виконати дію зі зіграної карти знову",
   "Select amount of heat to spend": "Виберіть кількість тепла, яку ви хочете витратити",
   "Select amount of floaters on corporation to spend": "Виберіть кількість аеростатів на корпорації, яку ви хочете витратити",
-  "You cannot overspend heat": "Ви не можете перевитратити тепло",
+  "You cannot overspend ${0}": "Ви не можете перевитратити ${0}",
   "Select card to add 1 floater(s)": "Виберіть карту, щоб додати 1 аеростат(и)",
   "Select card to add 1 Floater(s)": "Виберіть карту, щоб додати 1 аеростат(и)",
   "Select card to add 4 Floater(s)": "Виберіть карту, щоб додати 4 аеростатів",

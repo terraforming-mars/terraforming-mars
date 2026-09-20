@@ -714,7 +714,7 @@
     "Perform an action from a played card again": "アクションカードを再使用",
     "Select amount of heat to spend": "支払う温熱の数を入力",
     "Select amount of floaters on corporation to spend": "支払う浮遊体の数を入力",
-    "You cannot overspend heat": "選択数が多すぎます",
+    "You cannot overspend ${0}": "${0}を使いすぎることはできません",
     "Select card to add 1 floater(s)": "1浮遊体を追加するカードを選択",
     "Select card to add 1 Floater(s)": "1浮遊体を追加するカードを選択",
     "Select card to add 4 Floater(s)": "4浮遊体を追加するカードを選択",

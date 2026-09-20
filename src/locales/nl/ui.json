@@ -569,7 +569,7 @@
     "Perform an action from a played card again": "Voer een kaartactie van een gespeelde kaart opnieuw uit",
     "Select amount of heat to spend": "Kies de hoeveelheid warmte waarmee je wilt betalen",
     "Select amount of floaters on corporation to spend": "Kies het aantal floaters op de corporatie waarmee je wilt betalen",
-    "You cannot overspend heat": "U mag niet te veel betalen voor warmte",
+    "You cannot overspend ${0}": "U mag niet te veel betalen voor ${0}",
     "Select card to add 1 floater(s)": "Kies kaart om 1 floater toe te voegen",
     "Add resource": "Grondstoffen toevoegen",
     "Add resource to card": "Grondstoffen toevoegen aan een kaart",

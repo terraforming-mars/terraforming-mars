@@ -428,7 +428,7 @@
     "Perform an action from a played card again": "选择 1 张已经执行过的行动牌再次行动",
     "Select amount of heat to spend": "选择消费的热量资源数量",
     "Select amount of floaters on corporation to spend": "选择需要消费的公司牌上云资源的数量",
-    "You cannot overspend heat": "你不能支付过多的热量",
+    "You cannot overspend ${0}": "你不能支付过多的${0}",
     "Select colony for Mining Colony": "为 采矿殖民地 选择殖民地",
     "Select card to add 1 floater(s)": "选择 1 张牌添加 1 个云资源",
     "Add resource": "添加资源",

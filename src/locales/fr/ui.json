@@ -886,7 +886,7 @@
   "Perform an action from a played card again": "",
   "Select amount of heat to spend": "",
   "Select amount of floaters on corporation to spend": "",
-  "You cannot overspend heat": "",
+  "You cannot overspend ${0}": "",
   "Select card to add 1 floater(s)": "",
   "Select card to add 1 Floater(s)": "",
   "Select card to add 4 Floater(s)": "",

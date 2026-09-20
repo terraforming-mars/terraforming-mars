@@ -710,7 +710,7 @@
 	"Perform an action from a played card again": "Gjennomfør en handling fra et spilt kort igjen",
 	"Select amount of heat to spend": "Velg mengde varme å bruke",
 	"Select amount of floaters on corporation to spend": "Velg mengde svevere på selskapet du vil bruke",
-	"You cannot overspend heat": "Du kan ikke bruke mer varme enn du har",
+	"You cannot overspend ${0}": "Du kan ikke bruke mer ${0} enn du har",
 	"Select card to add 1 floater(s)": "Velg kort hvor det skal legges til 1 svever",
 	"Select card to add 1 Floater(s)": "Velg kort hvor det skal legges til 1 svever",
 	"Select card to add 4 Floater(s)": "Velg kort hvor det skal legges til 4 svevere",

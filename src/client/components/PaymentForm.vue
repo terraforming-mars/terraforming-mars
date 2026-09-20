@@ -56,6 +56,8 @@ import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {Ledger} from '@/client/components/PaymentLedger';
 import {computeDefaultPayment} from '@/client/components/PaymentDefaults';
 import {sum} from '@/common/utils/utils';
+import {Message} from '@/common/logs/Message';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 
 const DESCRIPTIONS: Record<SpendableResource, string> = {
   steel: 'Steel',
@@ -73,9 +75,20 @@ const DESCRIPTIONS: Record<SpendableResource, string> = {
   plants: 'Plants',
 };
 
+function mapRecord<T extends string, U, V>(record: Record<T, U>, f: (value: U) => V): Record<T, V> {
+  const entries: Array<[T, U]> = Object.entries(record) as Array<[T, U]>;
+  const mapped: Array<[T, V]> = entries.map(([k, v]) => [k, f(v)]);
+  return Object.fromEntries(mapped) as Record<T, V>;
+}
+
+const IN_SENTENCE_DESCRIPTIONS: Record<SpendableResource, string> = {
+  ...mapRecord(DESCRIPTIONS, (v) => v.toLowerCase()),
+  megacredits: 'M€',
+};
+
 type DataModel = {
   payment: Payment;
-  warning: string | undefined;
+  warning: string | Message | undefined;
 };
 
 export default defineComponent({
@@ -194,8 +207,10 @@ export default defineComponent({
       }
       for (const unit of this.order) {
         if (this.payment[unit] > this.ledger[unit].available) {
-          // TODO(kberg): Make this a Message
-          this.warning = `You do not have enough ${unit}`;
+          this.warning = {
+            message: 'You do not have enough ${0}',
+            data: [{type: LogMessageDataType.STRING, value: IN_SENTENCE_DESCRIPTIONS[unit]}],
+          };
           return;
         }
       }
@@ -207,8 +222,10 @@ export default defineComponent({
       if (delta > 0) {
         for (const unit of this.order) {
           if (this.payment[unit] > 0 && delta >= this.ledger[unit].rate) {
-            // TODO(kberg): Make this a Message
-            this.warning = `You cannot overspend ${unit}`;
+            this.warning = {
+              message: 'You cannot overspend ${0}',
+              data: [{type: LogMessageDataType.STRING, value: IN_SENTENCE_DESCRIPTIONS[unit]}],
+            };
             return;
           }
         }

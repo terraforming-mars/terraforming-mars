@@ -5,7 +5,8 @@ import {newCard} from '@/server/createCard';
 import {IGame} from '@/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, setTemperature} from '../../TestingUtils';
+import {runAllActions, setRulingParty, setTemperature} from '../../TestingUtils';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('PalladinShipping', () => {
   let card: PalladinShipping;
@@ -28,6 +29,19 @@ describe('PalladinShipping', () => {
     expect(card.canAct(player)).is.false;
 
     player.stock.titanium = 2;
+    expect(card.canAct(player)).is.true;
+  });
+
+  it('canAct when reds are in power', () => {
+    [game, player] = testGame(2, {turmoilExtension: true});
+    setRulingParty(game, PartyName.REDS);
+    player.stock.titanium = 2;
+    player.megaCredits = 2;
+
+    expect(card.canAct(player)).is.false;
+
+    player.megaCredits = 3;
+
     expect(card.canAct(player)).is.true;
   });
 

@@ -133,34 +133,19 @@ export class Executor implements BehaviorExecutor {
       })) {
         return false;
       }
-      if (spend.steel && player.steel < spend.steel) {
-        return false;
-      }
-      if (spend.titanium && player.titanium < spend.titanium) {
-        return false;
-      }
-      if (spend.plants && player.plants < spend.plants) {
-        return false;
-      }
-      if (spend.energy) {
-        if (player.energy < spend.energy) {
+
+      for (const unit of ['steel', 'titanium', 'plants', 'heat', 'energy'] as const) {
+        const required = spend[unit];
+        if (!required) {
+          continue;
+        }
+        const available = unit === 'heat' ? player.availableHeat() : player[unit];
+        if (available < required) {
           return false;
         }
         if (!player.canAfford({
           cost: 0,
-          reserveUnits: Units.of({energy: spend.energy}),
-          tr: asTrSource,
-        })) {
-          return false;
-        }
-      }
-      if (spend.heat) {
-        if (player.availableHeat() < spend.heat) {
-          return false;
-        }
-        if (!player.canAfford({
-          cost: 0,
-          reserveUnits: Units.of({heat: spend.heat}),
+          reserveUnits: Units.of({[unit]: required}),
           tr: asTrSource,
         })) {
           return false;
@@ -174,14 +159,27 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
       }
-      if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
-        return false;
+      if (spend.resourceFromAnyCard) {
+        if (player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
+          return false;
+        }
+        if (!player.canAfford({cost: 0, tr: asTrSource})) {
+          return false;
+        }
       }
-      if (spend.corruption && player.underworldData.corruption < spend.corruption) {
-        return false;
+      if (spend.corruption) {
+        if (player.underworldData.corruption < spend.corruption) {
+          return false;
+        }
+        if (!player.canAfford({cost: 0, tr: asTrSource})) {
+          return false;
+        }
       }
       if (spend.cards) {
         if (player.cardsInHand.filter((c) => card !== c).length < spend.cards) {
+          return false;
+        }
+        if (!player.canAfford({cost: 0, tr: asTrSource})) {
           return false;
         }
       }

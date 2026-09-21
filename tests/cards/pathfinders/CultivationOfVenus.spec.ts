@@ -3,6 +3,8 @@ import {CultivationOfVenus} from '../../../src/server/cards/pathfinders/Cultivat
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {setRulingParty} from '../../TestingUtils';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('CultivationOfVenus', () => {
   let card: CultivationOfVenus;
@@ -18,6 +20,19 @@ describe('CultivationOfVenus', () => {
     player.plants = 2;
     expect(card.canAct(player)).is.false;
     player.plants = 3;
+    expect(card.canAct(player)).is.true;
+  });
+
+  it('Can act when reds are in power', () => {
+    [game, player] = testGame(1, {turmoilExtension: true, venusNextExtension: true});
+    setRulingParty(game, PartyName.REDS);
+    player.plants = 3;
+    player.megaCredits = 2;
+
+    expect(card.canAct(player)).is.false;
+
+    player.megaCredits = 3;
+
     expect(card.canAct(player)).is.true;
   });
 

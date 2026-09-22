@@ -54,4 +54,15 @@ describe('NewPartner', () => {
     runAllActions(game);
     expect(player.megaCredits).eq(15);
   });
+
+  it('Discards the prelude that was not played', () => {
+    game.preludeDeck.drawPile.push(smeltingPlant, donation);
+
+    const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
+    selectCard.cb([donation]);
+    runAllActions(game);
+
+    expect(game.preludeDeck.discardPile).contains(smeltingPlant);
+    expect(game.preludeDeck.discardPile).does.not.contain(donation);
+  });
 });

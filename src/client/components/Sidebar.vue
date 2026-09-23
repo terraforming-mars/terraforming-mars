@@ -49,7 +49,6 @@
       @click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
       :title="$t('game setup details')"></i>
     <div class="info_panel" v-if="ui.gamesetup_detail_open">
-      <div class="info_panel-spacing"></div>
       <div class="info-panel-title" v-i18n>Game Setup Details</div>
       <GameSetupDetail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"/>
 

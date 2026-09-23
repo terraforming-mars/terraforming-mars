@@ -1,7 +1,7 @@
 <template>
   <div class="resource_item" :class="mainCSS">
       <div class="resource_item_stock">
-          <i class="resource_icon tooltip tooltip-bottom" :class="iconCSS" :data-tooltip="resourceTypeTooltip"></i>
+          <span class="resource_icon tooltip tooltip-bottom" :class="iconCSS" :data-tooltip="resourceTypeTooltip"></span>
           <div class="resource_item_stock_count" data-test="stock-count">{{ count }}</div>
       </div>
       <div class="resource_item_prod">

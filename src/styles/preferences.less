@@ -384,7 +384,7 @@
   font-family: Arial, sans-serif;
   font-weight: bold;
   text-align: left;
-  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .info_panel {
@@ -397,6 +397,11 @@
   background: #000000;
   max-height: calc(85vh);
   overflow-y: auto;
+}
+
+// Outranks .game-setup-detail-container .game-config, which sets the margin.
+.info_panel .game-config.info-panel-deck-size {
+  margin-left: auto;
 }
 
 .info_panel_actions {

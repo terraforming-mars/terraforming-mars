@@ -69,6 +69,18 @@ export function fakeGameOptionsModel(overrides?: RecursivePartial<GameOptionsMod
     requiresVenusTrackCompletion: false,
     twoCorpsVariant: false,
     undoOption: false,
+
+    aresHazards: false,
+    customCeos: [],
+    customColoniesList: [],
+    customCorporationsList: [],
+    customPreludes: [],
+    modularMA: false,
+    moonStandardProjectVariant: false,
+    moonStandardProjectVariant1: false,
+    startingCeos: 3,
+    startingCorporations: 2,
+    startingPreludes: 4,
     ...overrides,
   } as GameOptionsModel;
 }

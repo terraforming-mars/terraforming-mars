@@ -298,13 +298,64 @@
 }
 
 .create-game {
+  // Fit the page to the screen: the form panel takes the leftover height and scrolls
+  // on its own, so the heading and the links below it are always visible.
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100dvh;
+
+  > * {
+    flex: none;
+  }
+
+  > .create-game-form {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  > h1 {
+    margin: 0px;
+  }
+
+  // The left padding clears the fixed preferences gear in the bottom-left corner.
   .discord-invite {
-    padding: 0px 15px;
+    padding: 0px 15px 0px 60px;
     font-size: 20px;
   }
 
   .changelog {
-    padding: 0px 15px;
+    padding: 0px 15px 0px 60px;
+  }
+
+  .create-game-players-cont {
+    // Keep the gap under the Players heading the same as under the other column headings.
+    > .create-game-page-column {
+      padding-bottom: 0;
+    }
+
+    > .container {
+      margin-top: 0;
+    }
+  }
+
+  // Keep the action buttons in view while the rest of the form scrolls. The row takes a
+  // full line so the bar starts at the left, but is transparent and lets clicks through,
+  // so only the bar itself covers the form.
+  .create-game-action-row {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    flex-basis: 100%;
+    pointer-events: none;
+  }
+
+  .create-game-action {
+    width: fit-content;
+    padding: 10px;
+    background: #000000;
+    pointer-events: auto;
   }
 }
 
@@ -355,19 +406,14 @@
   }
 
   .create-game-players-cont,
-  .create-game-action {
+  .create-game-action-row {
     grid-column: 1 / -1;
   }
 
   .create-game-action {
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
     display: flex;
     gap: 6px;
     align-items: center;
-    padding: 10px;
-    background: #000000;
 
     .btn {
       min-height: 44px;

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {onMounted, onUnmounted, ref} from 'vue';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import GameOptionsPopup from '@/client/components/GameOptionsPopup.vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
@@ -28,4 +28,14 @@ const emit = defineEmits<{
 }>();
 
 const gameOptionsPopupOpen = ref(false);
+
+// When the game options popup is open it captures key presses, so Escape closes only the popup.
+function keylistener(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    emit('close');
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', keylistener));
+onUnmounted(() => window.removeEventListener('keydown', keylistener));
 </script>

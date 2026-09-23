@@ -297,13 +297,13 @@ export class Game implements IGame, Logger {
     projectDeck.shuffle();
 
     const corporationDeck = new CorporationDeck(gameCards.getCorporationCards(), [], rng);
-    corporationDeck.shuffle(gameOptions.customCorporationsList);
+    corporationDeck.shuffle();
 
     const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
-    preludeDeck.shuffle(gameOptions.customPreludes);
+    preludeDeck.shuffle();
 
     const ceoDeck = new CeoDeck(gameCards.getCeoCards(), [], rng);
-    ceoDeck.shuffle(gameOptions.customCeos);
+    ceoDeck.shuffle();
 
     const activePlayer = firstPlayer.id;
 

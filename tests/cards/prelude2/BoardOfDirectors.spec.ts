@@ -6,6 +6,7 @@ import {runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {cast} from '../../../src/common/utils/utils';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('BoardOfDirectors', () => {
   it('play', () => {
@@ -123,5 +124,25 @@ describe('BoardOfDirectors', () => {
     expect(game.preludeDeck.discardPile).contains(prelude);
     expect(card.resourceCount).eq(1);
     expect(player.megaCredits).eq(15);
+  });
+
+  it('action draws only from the custom prelude list', () => {
+    const customPreludes = [
+      CardName.ALLIED_BANK, CardName.AQUIFER_TURBINES, CardName.BIOFUELS,
+      CardName.BIOLAB, CardName.BIOSPHERE_SUPPORT, CardName.BUSINESS_EMPIRE,
+    ];
+    const card = new BoardOfDirectors();
+    const [game, player] = testGame(1, {preludeExtension: true, prelude2Expansion: true, customPreludes});
+
+    // The player keeps two dealt preludes and discards the rest, as in initial card selection.
+    game.preludeDeck.discard(...player.dealtPreludeCards.slice(2));
+
+    card.resourceCount = 1;
+    player.megaCredits = 0;
+    for (let i = 0; i < 4; i++) {
+      cast(card.action(player), undefined);
+      const drawn = game.preludeDeck.discardPile[game.preludeDeck.discardPile.length - 1];
+      expect(customPreludes).contains(drawn.name);
+    }
   });
 });

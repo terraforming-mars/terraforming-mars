@@ -36,6 +36,7 @@ describe('Sidebar', () => {
         lastSoloGeneration: 14,
         deckSize: 100,
         discardPileSize: 0,
+        otherDeckSizes: {corporations: {drawPile: 0, discardPile: 0}, preludes: undefined, ceos: undefined, globalEvents: undefined},
       },
     });
     expect(wrapper.exists()).to.be.true;

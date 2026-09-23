@@ -48,7 +48,7 @@
       :class="{'sidebar_item--is-active': ui.gamesetup_detail_open}"
       @click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
       :title="$t('game setup details')"></i>
-    <InfoPanel v-if="ui.gamesetup_detail_open" :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration" @close="ui.gamesetup_detail_open=false" />
+    <InfoPanel v-if="ui.gamesetup_detail_open" :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration" :deckSize="deckSize" :discardPileSize="discardPileSize" :otherDeckSizes="otherDeckSizes" @close="ui.gamesetup_detail_open=false" />
   </div>
 
   <a href="help" target="_blank">
@@ -70,6 +70,7 @@ import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import InfoPanel from '@/client/components/InfoPanel.vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
+import {OtherDeckSizesModel} from '@/common/models/GameModel';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/common/GlobalParameter';
@@ -135,6 +136,10 @@ export default defineComponent({
     },
     discardPileSize: {
       type: Number,
+      required: true,
+    },
+    otherDeckSizes: {
+      type: Object as () => OtherDeckSizesModel,
       required: true,
     },
   },

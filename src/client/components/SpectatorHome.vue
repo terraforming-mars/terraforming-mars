@@ -23,7 +23,8 @@
       :playerNumber = "spectator.players.length"
       :lastSoloGeneration = "game.lastSoloGeneration"
       :deckSize = "game.deckSize"
-      :discardPileSize = "game.discardPileSize"/>
+      :discardPileSize = "game.discardPileSize"
+      :otherDeckSizes = "game.otherDeckSizes"/>
 
     <div class="player_home_block nofloat">
 <LogPanel :viewModel="spectator" :color="spectator.color" :step="game.step" @spaceClicked="onSpaceClicked"/>

@@ -455,6 +455,21 @@ export class Server {
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       twoCorpsVariant: options.twoCorpsVariant,
       undoOption: options.undoOption,
+
+      // These are only supplied for the JSON, and
+      // some of them can be a bit large.
+      aresHazards: options.aresHazards,
+      clonedGamedId: options.clonedGamedId,
+      customCeos: options.customCeos,
+      customColoniesList: options.customColoniesList,
+      customCorporationsList: options.customCorporationsList,
+      customPreludes: options.customPreludes,
+      modularMA: options.modularMA,
+      moonStandardProjectVariant: options.moonStandardProjectVariant,
+      moonStandardProjectVariant1: options.moonStandardProjectVariant1,
+      startingCeos: options.startingCeos,
+      startingCorporations: options.startingCorporations,
+      startingPreludes: options.startingPreludes,
     };
   }
 

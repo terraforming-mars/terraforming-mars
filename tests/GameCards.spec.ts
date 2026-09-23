@@ -169,5 +169,61 @@ describe('GameCards', () => {
     expect(thorgates).to.have.length(1);
     expect(ecolines).to.have.length(1);
   });
+
+  it('customCorporationsList restricts the corporation deck to only those corps', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      customCorporationsList: [CardName.INVENTRIX, CardName.HELION, CardName.THARSIS_REPUBLIC],
+    };
+    const names = new GameCards(gameOptions).getCorporationCards().map(toName);
+    expect(names).to.have.members([CardName.INVENTRIX, CardName.HELION, CardName.THARSIS_REPUBLIC]);
+    expect(names).to.have.length(3);
+  });
+
+  it('customCorporationsList accepts an old card name on its own', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      customCorporationsList: ['Thorgate' as CardName, CardName.HELION],
+    };
+    const names = new GameCards(gameOptions).getCorporationCards().map(toName);
+    expect(names).to.have.members([CardName.THORGATE, CardName.HELION]);
+    expect(names).to.have.length(2);
+  });
+
+  it('customCorporationsList includes corps from disabled expansions', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      moonExpansion: false,
+      customCorporationsList: [CardName.INVENTRIX, CardName.LUNA_TRADE_FEDERATION],
+    };
+    const names = new GameCards(gameOptions).getCorporationCards().map(toName);
+    expect(names).to.have.members([CardName.INVENTRIX, CardName.LUNA_TRADE_FEDERATION]);
+    expect(names).to.have.length(2);
+  });
+
+  it('customPreludes restricts the prelude deck to only those preludes', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      preludeExtension: true,
+      customPreludes: [CardName.ALLIED_BANK, CardName.AQUIFER_TURBINES],
+    };
+    const names = new GameCards(gameOptions).getPreludeCards().map(toName);
+    expect(names).to.have.members([CardName.ALLIED_BANK, CardName.AQUIFER_TURBINES]);
+    expect(names).to.have.length(2);
+  });
+
+  it('customCeos restricts the CEO deck to only those CEOs', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      ceoExtension: true,
+      customCeos: [CardName.FLOYD, CardName.HAL9000],
+    };
+    const names = new GameCards(gameOptions).getCeoCards().map(toName);
+    expect(names).to.have.members([CardName.FLOYD, CardName.HAL9000]);
+    expect(names).to.have.length(2);
+  });
 });
 

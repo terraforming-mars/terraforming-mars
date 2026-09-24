@@ -9,6 +9,8 @@ import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {JSONObject} from '@/common/Types';
 import {defineComponent} from 'vue';
 import {NewGameConfig} from '@/common/game/NewGameConfig';
+import {CardName} from '@/common/cards/CardName';
+import {CreateGameModel} from '@/client/components/create/CreateGameModel';
 
 // Minimal serialized Create Game payload used by settings restore tests.
 function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
@@ -25,6 +27,42 @@ function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
     ...overrides,
   };
   return config as NewGameConfig;
+}
+
+/*
+ * Returns `count` distinct card names of any type.
+ *
+ * Suitable only for checks that count a list's cards.
+ */
+function cardNames(count: number): Array<CardName> {
+  return Object.values(CardName).slice(0, count);
+}
+
+/*
+ * Serializes a two-player game's settings after `setup` adjusts the form.
+ *
+ * Accepts every confirmation and collects every alert.
+ */
+async function serializeTwoPlayerGameSettings(setup: (model: CreateGameModel) => void): Promise<{config: NewGameConfig | undefined, alerts: Array<string>}> {
+  const originalAlert = global.alert;
+  const originalConfirm = global.confirm;
+  const alerts: Array<string> = [];
+  global.alert = ((message: string) => alerts.push(message)) as typeof alert;
+  global.confirm = (() => true) as typeof confirm;
+
+  try {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    const model = wrapper.vm as unknown as CreateGameModel;
+    model.playersCount = 2;
+    setup(model);
+    const config = await (wrapper.vm as any).serializeSettings();
+    return {config, alerts};
+  } finally {
+    global.alert = originalAlert;
+    global.confirm = originalConfirm;
+  }
 }
 
 describe('CreateGameForm', () => {
@@ -153,5 +191,52 @@ describe('CreateGameForm', () => {
       global.fetch = originalFetch;
       global.alert = originalAlert;
     }
+  });
+  it('requires enough custom corporations for every player', async () => {
+    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customCorporations = cardNames(3));
+    expect(tooFew.config).is.undefined;
+    expect(tooFew.alerts).deep.eq(['Must select at least 4 corporations']);
+
+    const enough = await serializeTwoPlayerGameSettings((model) => model.customCorporations = cardNames(4));
+    expect(enough.config?.customCorporationsList).has.length(4);
+    expect(enough.alerts).is.empty;
+  });
+
+  it('requires enough custom preludes for every player', async () => {
+    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customPreludes = cardNames(7));
+    expect(tooFew.config).is.undefined;
+    expect(tooFew.alerts).deep.eq(['Must select at least 8 Preludes']);
+
+    const enough = await serializeTwoPlayerGameSettings((model) => model.customPreludes = cardNames(8));
+    expect(enough.config?.customPreludes).has.length(8);
+    expect(enough.alerts).is.empty;
+  });
+
+  it('requires enough custom CEOs for every player', async () => {
+    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customCeos = cardNames(5));
+    expect(tooFew.config).is.undefined;
+    expect(tooFew.alerts).deep.eq(['Must select at least 6 CEOs']);
+
+    const enough = await serializeTwoPlayerGameSettings((model) => model.customCeos = cardNames(6));
+    expect(enough.config?.customCeos).has.length(6);
+    expect(enough.alerts).is.empty;
+  });
+
+  it('requires enough custom CEOs for more than the minimum starting CEOs', async () => {
+    const tooFew = await serializeTwoPlayerGameSettings((model) => {
+      model.startingCeos = 4;
+      model.customCeos = cardNames(7);
+    });
+    expect(tooFew.config).is.undefined;
+    expect(tooFew.alerts).deep.eq(['Must select at least 8 CEOs']);
+  });
+
+  it('requires the minimum number of custom CEOs even with fewer starting CEOs', async () => {
+    const tooFew = await serializeTwoPlayerGameSettings((model) => {
+      model.startingCeos = 1;
+      model.customCeos = cardNames(5);
+    });
+    expect(tooFew.config).is.undefined;
+    expect(tooFew.alerts).deep.eq(['Must select at least 6 CEOs']);
   });
 });

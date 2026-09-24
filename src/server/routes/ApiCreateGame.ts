@@ -18,6 +18,8 @@ import {Response} from '../Response';
 import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
+import {RouteError} from './RouteError';
+import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
 
 function parseQuotaConfig(struct: any): QuotaConfig {
   let {limit} = struct;
@@ -85,6 +87,29 @@ export class ApiCreateGame extends Handler {
     return [board];
   }
 
+  /**
+   * Validates that each custom list can deal every player their starting cards.
+   *
+   * Throws a bad request `RouteError` naming the minimum size when a list is too small. Matches the checks in
+   * CreateGameForm.
+   */
+  public validateCustomLists(gameReq: NewGameConfig): void {
+    const playerCount = gameReq.players.length;
+
+    function validate(list: Array<unknown> | undefined, perPlayerCount: number, type: string): void {
+      if (list === undefined) {
+        return;
+      }
+      const required = playerCount * perPlayerCount;
+      if (list.length > 0 && list.length < required) {
+        throw RouteError.badRequest(`Must select at least ${required} ${type}`);
+      }
+    }
+    validate(gameReq.customCorporationsList, gameReq.startingCorporations, 'corporations');
+    validate(gameReq.customPreludes, gameReq.startingPreludes, 'preludes');
+    validate(gameReq.customCeos, Math.max(gameReq.startingCeos ?? 0, CEO_CARDS_DEALT_PER_PLAYER), 'CEOs');
+  }
+
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
@@ -97,6 +122,7 @@ export class ApiCreateGame extends Handler {
     const body = await readBody(req);
     try {
       const gameReq = JSON.parse(body) as NewGameConfig;
+      this.validateCustomLists(gameReq);
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
       const players = gameReq.players.map((p) => {
@@ -185,6 +211,9 @@ export class ApiCreateGame extends Handler {
       ctx.gameLoader.add(game);
       responses.writeJson(res, ctx, Server.getSimpleGameModel(game));
     } catch (error) {
+      if (error instanceof RouteError) {
+        throw error;
+      }
       responses.internalServerError(req, res, error);
     }
   }

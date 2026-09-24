@@ -1199,6 +1199,15 @@ export default defineComponent({
         customPreludes.length = 0;
       }
 
+      // Check custom CEO count. The server deals at least CEO_CARDS_DEALT_PER_PLAYER CEOs to each player.
+      if (customCeos.length > 0) {
+        const requiredCeoCount = players.length * Math.max(startingCeos, constants.CEO_CARDS_DEALT_PER_PLAYER);
+        if (customCeos.length < requiredCeoCount) {
+          window.alert(translateTextWithParams('Must select at least ${0} CEOs', [requiredCeoCount.toString()]));
+          return undefined;
+        }
+      }
+
       // Clone game checks
       if (this.clonedGameId !== undefined && this.seededGame) {
         const gameData = await fetch(paths.API_CLONEABLEGAME + '?id=' + this.clonedGameId)

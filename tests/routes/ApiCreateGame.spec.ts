@@ -9,6 +9,7 @@ import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {FakeClock} from '../common/FakeClock';
+import {CardName} from '../../src/common/cards/CardName';
 
 describe('ApiCreateGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -137,6 +138,61 @@ describe('ApiCreateGame', () => {
     await Promise.all(([emit, post]));
 
     expect(res.statusCode).eq(statusCode.internalServerError);
+  });
+
+  async function postConfig(config: object) {
+    const post = scaffolding.post(apiCreateGame, res);
+    const emit = Promise.resolve().then(() => {
+      scaffolding.req.emitString(JSON.stringify(config));
+      scaffolding.req.emitter.emit('end');
+    });
+    await Promise.all(([emit, post]));
+  }
+
+  const twoPlayers = [{name: 'a', color: 'red'}, {name: 'b', color: 'blue'}];
+
+  it('rejects a custom corporation list smaller than players × starting corporations', async () => {
+    await postConfig({
+      players: twoPlayers,
+      startingCorporations: 2,
+      customCorporationsList: [CardName.CREDICOR, CardName.ECOLINE, CardName.HELION],
+      customPreludes: [],
+    });
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('at least 4 corporations');
+  });
+
+  it('accepts a custom corporation list of exactly players × starting corporations', async () => {
+    await postConfig({
+      players: twoPlayers,
+      startingCorporations: 2,
+      customCorporationsList: [CardName.CREDICOR, CardName.ECOLINE, CardName.HELION, CardName.INVENTRIX],
+      customPreludes: [],
+    });
+    expect(res.statusCode).not.eq(statusCode.badRequest);
+  });
+
+  it('rejects a custom prelude list smaller than players × starting preludes', async () => {
+    await postConfig({
+      players: twoPlayers,
+      startingPreludes: 4,
+      customCorporationsList: [],
+      customPreludes: [CardName.ALLIED_BANK, CardName.AQUIFER_TURBINES, CardName.BIOFUELS, CardName.BIOLAB, CardName.BIOSPHERE_SUPPORT, CardName.BUSINESS_EMPIRE, CardName.DOME_FARMING],
+    });
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('at least 8 preludes');
+  });
+
+  it('rejects a custom CEO list smaller than players × CEOs dealt', async () => {
+    await postConfig({
+      players: twoPlayers,
+      startingCeos: 1,
+      customCorporationsList: [],
+      customPreludes: [],
+      customCeos: [CardName.FLOYD, CardName.HAL9000, CardName.KAREN, CardName.GORDON, CardName.ULRICH],
+    });
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('at least 6 CEOs');
   });
 
   // Issues one create-game POST against `handler`, using fresh request/response objects,

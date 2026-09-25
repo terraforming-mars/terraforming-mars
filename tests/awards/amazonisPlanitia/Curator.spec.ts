@@ -5,6 +5,7 @@ import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
+import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
 
 describe('Curator', () => {
   let award: Curator;
@@ -43,5 +44,20 @@ describe('Curator', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.BUILDING], type: CardType.EVENT}));
     expect(award.getScore(player)).to.eq(1);
+  });
+
+  it('Compatible with Chimera', () => {
+    // Chimera's two wild tags count as one tag of each type.
+    player.playedCards.push(new Chimera());
+    expect(award.getScore(player)).eq(1);
+
+    player.playedCards.push(fakeCard({tags: [Tag.WILD]}));
+    expect(award.getScore(player)).eq(1);
+
+    player.playedCards.push(fakeCard({tags: [Tag.SPACE]}));
+    expect(award.getScore(player)).eq(2);
+
+    player.playedCards.push(fakeCard({tags: [Tag.SPACE]}));
+    expect(award.getScore(player)).eq(3);
   });
 });

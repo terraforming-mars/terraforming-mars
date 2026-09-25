@@ -11,7 +11,7 @@ export class Curator implements IAward {
     for (const tagString in Tag) {
       if (Object.hasOwn(Tag, tagString)) {
         const tag: Tag = (<any>Tag)[tagString];
-        if (tag === Tag.EVENT) {
+        if (tag === Tag.EVENT || tag === Tag.WILD || tag === Tag.CLONE) {
           continue;
         }
         const count = player.tags.count(tag, 'award');

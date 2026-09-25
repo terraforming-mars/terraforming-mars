@@ -6,6 +6,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 
 describe('Curator', () => {
   let award: Curator;
@@ -58,6 +59,22 @@ describe('Curator', () => {
     expect(award.getScore(player)).eq(2);
 
     player.playedCards.push(fakeCard({tags: [Tag.SPACE]}));
+    expect(award.getScore(player)).eq(3);
+  });
+
+  it('Counts events with Odyssey', () => {
+    player.playedCards.push(new Odyssey());
+    player.playedCards.push(fakeCard({tags: [Tag.SPACE], type: CardType.EVENT}));
+    player.playedCards.push(fakeCard({tags: [Tag.SPACE], type: CardType.EVENT}));
+    player.playedCards.push(fakeCard({tags: [], type: CardType.EVENT}));
+    expect(award.getScore(player)).eq(3);
+  });
+
+  it('Counts events with Odyssey and Chimera', () => {
+    player.playedCards.push(new Odyssey());
+    player.playedCards.push(new Chimera());
+    player.playedCards.push(fakeCard({tags: [], type: CardType.EVENT}));
+    player.playedCards.push(fakeCard({tags: [], type: CardType.EVENT}));
     expect(award.getScore(player)).eq(3);
   });
 });

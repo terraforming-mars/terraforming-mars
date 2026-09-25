@@ -830,6 +830,26 @@ describe('Game', () => {
     expect(deserialized.pathfindersData).is.undefined;
   });
 
+  it('deserializing a game replaces invalid escape velocity options with defaults', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {
+      escapeVelocity: {
+        thresholdMinutes: 35,
+        bonusSectionsPerAction: 2,
+        // Before the server validated escape velocity options, a cleared form field was stored as "".
+        penaltyPeriodMinutes: '' as unknown as number,
+        penaltyVPPerPeriod: 1,
+      },
+    });
+    const deserialized = Game.deserialize(game.serialize());
+    expect(deserialized.gameOptions.escapeVelocity).deep.eq({
+      thresholdMinutes: 35,
+      bonusSectionsPerAction: 2,
+      penaltyPeriodMinutes: 2,
+      penaltyVPPerPeriod: 1,
+    });
+  });
+
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: false});

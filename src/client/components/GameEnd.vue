@@ -15,7 +15,7 @@
                       <ul class="game_end_list">
                           <li v-i18n>Try to win with expansions enabled</li>
                           <li v-i18n>Try to win before the last generation</li>
-                          <li><span v-i18n>Can you get</span> {{ players[0].victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
+                          <li><span v-i18n>Can you get</span> {{ participant.players[0].victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
                       </ul>
                   </div>
               </div>
@@ -202,10 +202,10 @@
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>
-            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
+            <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="participant.players"/>
           </div>
           <div class="game_end_block--log game-end-column">
-            <LogPanel :viewModel="viewModel"/>
+            <LogPanel :viewModel="participant"/>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -252,20 +252,14 @@ export default defineComponent({
     },
   },
   computed: {
-    viewModel(): ViewModel {
-      return this.participant;
-    },
     game(): GameModel {
       return this.participant.game;
-    },
-    players(): Array<PublicPlayerModel> {
-      return this.participant.players;
     },
     downloadLogUrl() {
       return `${paths.END_GAME_LOG}?id=${this.participant.id}`;
     },
     playersInPlace(): Array<PublicPlayerModel> {
-      const sorted = this.viewModel.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      const sorted = this.participant.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) {
           return -1;
         }
@@ -295,10 +289,10 @@ export default defineComponent({
       return winners;
     },
     isSoloGame(): boolean {
-      return this.players.length === 1;
+      return this.participant.players.length === 1;
     },
     vpDataset(): ReadonlyArray<DataSet> {
-      return this.players.map((player) => {
+      return this.participant.players.map((player) => {
         return {
           label: player.name,
           data: player.victoryPointsByGeneration,
@@ -331,7 +325,7 @@ export default defineComponent({
       return dataset;
     },
     playerContributionsData(): Array<{player: string, color: Color, temp: number, oxygen: number, oceans: number, venus?: number, moonHabitat?: number, moonMining?: number, moonLogistic?: number, total: number}> {
-      return this.players.map((player) => {
+      return this.participant.players.map((player) => {
         const steps = player.globalParameterSteps || {};
         const temp = steps[GlobalParameter.TEMPERATURE] || 0;
         const oxygen = steps[GlobalParameter.OXYGEN] || 0;

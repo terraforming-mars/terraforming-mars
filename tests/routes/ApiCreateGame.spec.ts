@@ -11,6 +11,73 @@ import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {FakeClock} from '../common/FakeClock';
 import {CardName} from '../../src/common/cards/CardName';
 
+// A complete create-game request for a one-player game.
+function newGameConfigForTest(): NewGameConfig {
+  return {
+    players: [{
+      name: 'Robot',
+      color: 'blue',
+      beginner: false,
+      handicap: 0,
+      first: true,
+    }],
+    expansions: {
+      corpera: true,
+      promo: false,
+      venus: false,
+      colonies: false,
+      prelude: false,
+      prelude2: false,
+      turmoil: false,
+      community: false,
+      ares: false,
+      moon: false,
+      pathfinders: false,
+      ceo: false,
+      starwars: false,
+      underworld: false,
+      deltaProject: false,
+    },
+    board: RandomBoardOption.OFFICIAL,
+    seed: 0,
+    randomFirstPlayer: false,
+    clonedGamedId: undefined,
+    undoOption: false,
+    showTimers: false,
+    fastModeOption: false,
+    showOtherPlayersVP: false,
+    aresExtremeVariant: false,
+    politicalAgendasExtension: 'Standard',
+    solarPhaseOption: false,
+    removeNegativeGlobalEventsOption: false,
+    modularMA: false,
+    draftVariant: false,
+    initialDraft: false,
+    preludeDraftVariant: false,
+    ceosDraftVariant: false,
+    startingCorporations: 0,
+    shuffleMapOption: false,
+    randomMA: RandomMAOptionType.NONE,
+    includeFanMA: false,
+    soloTR: false,
+    customCorporationsList: [],
+    bannedCards: [],
+    includedCards: [],
+    customColoniesList: [],
+    customPreludes: [],
+    requiresMoonTrackCompletion: false,
+    requiresVenusTrackCompletion: false,
+    moonStandardProjectVariant: false,
+    moonStandardProjectVariant1: false,
+    altVenusBoard: false,
+    escapeVelocity: undefined,
+    twoCorpsVariant: false,
+    customCeos: [],
+    startingCeos: 0,
+    startingPreludes: 0,
+  };
+}
+
 describe('ApiCreateGame', () => {
   let scaffolding: RouteTestScaffolding;
   let req: MockRequest;
@@ -52,69 +119,7 @@ describe('ApiCreateGame', () => {
   it('simple create', async () => {
     const post = scaffolding.post(apiCreateGame, res);
     const emit = Promise.resolve().then(() => {
-      const newGameConfig: NewGameConfig = {
-        players: [{
-          name: 'Robot',
-          color: 'blue',
-          beginner: false,
-          handicap: 0,
-          first: true,
-        }],
-        expansions: {
-          corpera: true,
-          promo: false,
-          venus: false,
-          colonies: false,
-          prelude: false,
-          prelude2: false,
-          turmoil: false,
-          community: false,
-          ares: false,
-          moon: false,
-          pathfinders: false,
-          ceo: false,
-          starwars: false,
-          underworld: false,
-          deltaProject: false,
-        },
-        board: RandomBoardOption.OFFICIAL,
-        seed: 0,
-        randomFirstPlayer: false,
-        clonedGamedId: undefined,
-        undoOption: false,
-        showTimers: false,
-        fastModeOption: false,
-        showOtherPlayersVP: false,
-        aresExtremeVariant: false,
-        politicalAgendasExtension: 'Standard',
-        solarPhaseOption: false,
-        removeNegativeGlobalEventsOption: false,
-        modularMA: false,
-        draftVariant: false,
-        initialDraft: false,
-        preludeDraftVariant: false,
-        ceosDraftVariant: false,
-        startingCorporations: 0,
-        shuffleMapOption: false,
-        randomMA: RandomMAOptionType.NONE,
-        includeFanMA: false,
-        soloTR: false,
-        customCorporationsList: [],
-        bannedCards: [],
-        includedCards: [],
-        customColoniesList: [],
-        customPreludes: [],
-        requiresMoonTrackCompletion: false,
-        requiresVenusTrackCompletion: false,
-        moonStandardProjectVariant: false,
-        moonStandardProjectVariant1: false,
-        altVenusBoard: false,
-        escapeVelocity: undefined,
-        twoCorpsVariant: false,
-        customCeos: [],
-        startingCeos: 0,
-        startingPreludes: 0,
-      };
+      const newGameConfig = newGameConfigForTest();
       req.emitString(JSON.stringify(newGameConfig));
       req.emitter.emit('end');
     });
@@ -193,6 +198,38 @@ describe('ApiCreateGame', () => {
     });
     expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).contains('at least 6 CEOs');
+  });
+
+  async function createdEscapeVelocity(escapeVelocity: object) {
+    await postConfig({...newGameConfigForTest(), escapeVelocity});
+    expect(res.statusCode).eq(statusCode.ok);
+    const model = JSON.parse(res.content) as SimpleGameModel;
+    const game = await scaffolding.ctx.gameLoader.getGame(model.id);
+    return game?.gameOptions.escapeVelocity;
+  }
+
+  it('keeps valid escape velocity options', async () => {
+    const options = {
+      thresholdMinutes: 35,
+      bonusSectionsPerAction: 2,
+      penaltyPeriodMinutes: 3,
+      penaltyVPPerPeriod: 1,
+    };
+    expect(await createdEscapeVelocity(options)).deep.eq(options);
+  });
+
+  it('replaces invalid escape velocity options with defaults', async () => {
+    expect(await createdEscapeVelocity({
+      thresholdMinutes: '35',
+      bonusSectionsPerAction: -1,
+      penaltyPeriodMinutes: '',
+      penaltyVPPerPeriod: 1,
+    })).deep.eq({
+      thresholdMinutes: 35,
+      bonusSectionsPerAction: 2,
+      penaltyPeriodMinutes: 2,
+      penaltyVPPerPeriod: 1,
+    });
   });
 
   // Issues one create-game POST against `handler`, using fresh request/response objects,

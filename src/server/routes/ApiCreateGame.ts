@@ -20,6 +20,7 @@ import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
 import {RouteError} from './RouteError';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
+import {sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
 
 function parseQuotaConfig(struct: any): QuotaConfig {
   let {limit} = struct;
@@ -164,7 +165,7 @@ export class ApiCreateGame extends Handler {
         customCorporationsList: gameReq.customCorporationsList,
         customPreludes: gameReq.customPreludes,
         draftVariant: gameReq.draftVariant,
-        escapeVelocity: gameReq.escapeVelocity,
+        escapeVelocity: gameReq.escapeVelocity === undefined ? undefined : sanitizeEscapeVelocityOptions(gameReq.escapeVelocity),
         fastModeOption: gameReq.fastModeOption,
         includedCards: gameReq.includedCards,
         includeFanMA: gameReq.includeFanMA,

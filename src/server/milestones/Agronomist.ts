@@ -11,6 +11,6 @@ export class Agronomist extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.tags.count(Tag.PLANT);
+    return player.tags.count(Tag.PLANT, 'milestone');
   }
 }

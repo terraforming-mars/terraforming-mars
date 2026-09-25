@@ -15,7 +15,7 @@ export class Planetologist extends BaseMilestone {
     const earthTags = Math.min(player.tags.count(Tag.EARTH, 'raw'), 2);
     const venusTags = Math.min(player.tags.count(Tag.VENUS, 'raw'), 2);
     const jovianTags = Math.min(player.tags.count(Tag.JOVIAN, 'raw'), 2);
-    const wildTags = player.tags.count(Tag.WILD);
+    const wildTags = player.tags.count(Tag.WILD, 'milestone');
     return Math.min(earthTags + venusTags + jovianTags + wildTags, 6);
   }
 }

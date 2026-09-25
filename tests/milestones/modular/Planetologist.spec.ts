@@ -1,6 +1,10 @@
 import {expect} from 'chai';
 import {Planetologist} from '../../../src/server/milestones/modular/Planetologist';
 import {TestPlayer} from '../../TestPlayer';
+import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {fakeCard} from '../../TestingUtils';
+import {Tag} from '../../../src/common/cards/Tag';
+import {testGame} from '../../TestGame';
 
 describe('Planetologist', () => {
   const canClaimRuns = [
@@ -22,4 +26,16 @@ describe('Planetologist', () => {
       expect(milestone.canClaim(player)).eq(run.expected.canClaim);
     });
   }
+
+  it('Compatible with Chimera', () => {
+    const milestone = new Planetologist();
+    const [/* game */, player] = testGame(2);
+    player.playedCards.push(new Chimera());
+    expect(milestone.getScore(player)).eq(1);
+
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.VENUS, Tag.VENUS]}));
+    player.playedCards.push(fakeCard({tags: [Tag.JOVIAN]}));
+    expect(milestone.getScore(player)).eq(6);
+    expect(milestone.canClaim(player)).is.true;
+  });
 });

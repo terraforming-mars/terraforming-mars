@@ -222,7 +222,7 @@ import {setFaviconStatus} from '@/client/utils/favicon';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import {nextTileView, TileView} from '@/client/components/board/TileView';
@@ -233,7 +233,6 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import VictoryPointChart, {DataSet} from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
-import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -244,44 +243,26 @@ import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {MADetail} from '@/common/game/VictoryPointsBreakdown';
 import {AwardName} from '@/common/ma/AwardName';
 
-function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
-  if (playerView !== undefined) {
-    return playerView;
-  }
-  if (spectator !== undefined) {
-    return spectator;
-  }
-  throw new Error('Neither playerView nor spectator are defined');
-}
-
 export default defineComponent({
   name: 'GameEnd',
   props: {
-    playerView: {
-      type: Object as () => PlayerViewModel | undefined,
-      required: true,
-    },
-    spectator: {
-      type: Object as () => SpectatorModel | undefined,
+    participant: {
+      type: Object as () => ViewModel,
       required: true,
     },
   },
   computed: {
     viewModel(): ViewModel {
-      return getViewModel(this.playerView, this.spectator);
+      return this.participant;
     },
     game(): GameModel {
-      return getViewModel(this.playerView, this.spectator).game;
+      return this.participant.game;
     },
     players(): Array<PublicPlayerModel> {
-      return getViewModel(this.playerView, this.spectator).players;
+      return this.participant.players;
     },
     downloadLogUrl() {
-      const id = this.playerView?.id || this.spectator?.id;
-      if (id === undefined) {
-        return undefined;
-      }
-      return `${paths.END_GAME_LOG}?id=${id}`;
+      return `${paths.END_GAME_LOG}?id=${this.participant.id}`;
     },
     playersInPlace(): Array<PublicPlayerModel> {
       const sorted = this.viewModel.players.toSorted(function(a:PublicPlayerModel, b:PublicPlayerModel) {

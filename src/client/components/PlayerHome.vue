@@ -43,7 +43,7 @@
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
-        <LogPanel :viewModel="playerView" :color="thisPlayer.color" :step="game.step" @spaceClicked="onSpaceClicked"/>
+        <LogPanel :viewModel="playerView" :step="game.step" @spaceClicked="onSpaceClicked"/>
       </div>
 
       <a class="hotkey-target"></a>

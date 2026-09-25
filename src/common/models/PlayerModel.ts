@@ -18,6 +18,7 @@ export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
   id: ParticipantId;
+  color: Color;
   thisPlayer: PublicPlayerModel | undefined;
   runId: string;
 }

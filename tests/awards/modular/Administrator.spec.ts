@@ -49,7 +49,7 @@ describe('Administrator', () => {
     expect(award.getScore(player)).to.eq(1);
   });
 
-  it('Chimera Corp scenario', () => {
+  it('Compatible with Chimera', () => {
     // A wild tag counts as no tag when determining Award winners (via rulebook)
     player.playedCards.push(new Chimera());
     expect(award.getScore(player)).eq(1);

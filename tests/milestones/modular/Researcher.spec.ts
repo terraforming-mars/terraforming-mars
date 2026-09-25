@@ -29,7 +29,7 @@ describe('Researcher', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Chimera Corp scenario', () => {
+  it('Compatible with Chimera', () => {
     player.playedCards.push(new Chimera());
     expect(milestone.getScore(player)).eq(1);
 

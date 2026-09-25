@@ -216,6 +216,25 @@ const cases: Array<Case> = [
       escapeVelocityThreshold: 35,
     },
   },
+  {
+    description: 'invalid escape velocity values use defaults',
+    input: {
+      ...TEMPLATE_INPUT,
+      escapeVelocity: {
+        thresholdMinutes: '35',
+        penaltyPeriodMinutes: '',
+        penaltyVPPerPeriod: 3,
+      },
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      escapeVelocityBonusSeconds: 2,
+      escapeVelocityMode: true,
+      escapeVelocityPenalty: 3,
+      escapeVelocityPeriod: 2,
+      escapeVelocityThreshold: 35,
+    },
+  },
 ];
 
 

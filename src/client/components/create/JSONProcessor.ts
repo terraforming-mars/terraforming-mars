@@ -7,6 +7,7 @@ import {NewPlayerModel} from '@/common/game/NewGameConfig';
 import {CardName} from '@/common/cards/CardName';
 import {cast} from '@/common/utils/utils';
 import {CARD_RENAMES} from '@/common/cards/CardRenames';
+import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 
 function safeBoolean(val: JSONValue): boolean {
   if (typeof val === 'boolean') {
@@ -54,11 +55,12 @@ export class JSONProcessor {
     initializeArrayFieldWithBackup(json_constants.OLD_BANNED_CARDS, json_constants.BANNED_CARDS);
     const ev = json.escapeVelocity as JSONObject;
     if (ev !== undefined && typeof ev === 'object') {
+      const options = sanitizeEscapeVelocityOptions(ev);
       json.escapeVelocityMode = true;
-      json.escapeVelocityBonusSeconds = ev['bonusSectionsPerAction'];
-      json.escapeVelocityPenalty = ev['penaltyVPPerPeriod'];
-      json.escapeVelocityPeriod = ev['penaltyPeriodMinutes'];
-      json.escapeVelocityThreshold = Number.parseInt(ev['thresholdMinutes'] as string ?? '');
+      json.escapeVelocityBonusSeconds = options.bonusSectionsPerAction;
+      json.escapeVelocityPenalty = options.penaltyVPPerPeriod;
+      json.escapeVelocityPeriod = options.penaltyPeriodMinutes;
+      json.escapeVelocityThreshold = options.thresholdMinutes;
     }
 
     function set<T>(field: string): Array<T> {

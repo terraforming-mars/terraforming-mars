@@ -239,4 +239,19 @@ describe('CreateGameForm', () => {
     expect(tooFew.config).is.undefined;
     expect(tooFew.alerts).deep.eq(['Must select at least 6 CEOs']);
   });
+
+  it('replaces a cleared escape velocity field with its default', async () => {
+    const {config} = await serializeTwoPlayerGameSettings((model) => {
+      model.escapeVelocityMode = true;
+      model.escapeVelocityThreshold = 35;
+      // A cleared number input binds as an empty string.
+      model.escapeVelocityPeriod = '' as unknown as number;
+    });
+    expect(config?.escapeVelocity).deep.eq({
+      thresholdMinutes: 35,
+      bonusSectionsPerAction: 2,
+      penaltyPeriodMinutes: 2,
+      penaltyVPPerPeriod: 1,
+    });
+  });
 });

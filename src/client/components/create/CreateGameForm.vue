@@ -603,6 +603,7 @@ import {CreateGameSettingsStorage} from './CreateGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
+import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 
 const REVISED_COUNT_ALGORITHM = false;
 const createGameSettingsStorage = new CreateGameSettingsStorage();
@@ -1276,12 +1277,12 @@ export default defineComponent({
         moonStandardProjectVariant1: this.moonStandardProjectVariant1,
         altVenusBoard: this.altVenusBoard,
         escapeVelocity: this.escapeVelocityMode ?
-          {
+          sanitizeEscapeVelocityOptions({
             thresholdMinutes: this.escapeVelocityThreshold,
             bonusSectionsPerAction: this.escapeVelocityBonusSeconds,
             penaltyPeriodMinutes: this.escapeVelocityPeriod,
             penaltyVPPerPeriod: this.escapeVelocityPenalty,
-          } : undefined,
+          }) : undefined,
         twoCorpsVariant,
         startingCeos,
         startingPreludes,

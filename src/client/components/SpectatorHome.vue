@@ -27,7 +27,7 @@
       :otherDeckSizes = "game.otherDeckSizes"/>
 
     <div class="player_home_block nofloat">
-<LogPanel :viewModel="spectator" :color="spectator.color" :step="game.step" @spaceClicked="onSpaceClicked"/>
+<LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked"/>
     </div>
 
     <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>

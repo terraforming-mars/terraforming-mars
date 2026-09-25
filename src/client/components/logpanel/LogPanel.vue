@@ -40,7 +40,6 @@ import {defineComponent} from 'vue';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
-import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
@@ -84,10 +83,6 @@ export default defineComponent({
   props: {
     viewModel: {
       type: Object as () => ViewModel,
-      required: true,
-    },
-    color: {
-      type: String as () => Color,
       required: true,
     },
     step: {
@@ -183,7 +178,7 @@ export default defineComponent({
     },
     titleClasses(): string {
       const classes = ['log-title'];
-      classes.push(playerColorClass(this.color, 'shadow'));
+      classes.push(playerColorClass(this.viewModel.color, 'shadow'));
       return classes.join(' ');
     },
     scrollablePanel(): HTMLElement | null {

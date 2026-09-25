@@ -71,7 +71,6 @@ describe('LogPanel', () => {
       ...globalConfig,
       props: {
         viewModel: fakeViewModel(),
-        color: 'blue',
       },
     });
     expect(wrapper.exists()).to.be.true;
@@ -80,7 +79,7 @@ describe('LogPanel', () => {
   it('emits spaceClicked when a log message emits spaceClicked', async () => {
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel: fakeViewModel(), color: 'blue'},
+      props: {viewModel: fakeViewModel()},
     });
     await flushLogs(wrapper);
 
@@ -101,7 +100,7 @@ describe('LogPanel', () => {
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
     const first = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(first);
 
@@ -111,7 +110,7 @@ describe('LogPanel', () => {
 
     const second = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(second);
 
@@ -125,7 +124,7 @@ describe('LogPanel', () => {
     const viewModel = fakeViewModel({id: 'p-log-follower' as any});
     const first = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(first);
 
@@ -135,7 +134,7 @@ describe('LogPanel', () => {
 
     const second = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(second);
 
@@ -146,7 +145,7 @@ describe('LogPanel', () => {
     const panel = installScrollablePanel();
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel: fakeViewModel(), color: 'blue'},
+      props: {viewModel: fakeViewModel()},
     });
     await flushLogs(wrapper);
 
@@ -167,7 +166,7 @@ describe('LogPanel', () => {
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(wrapper);
 
@@ -189,7 +188,7 @@ describe('LogPanel', () => {
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
     const first = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(first);
     // Module-level view state can be left behind by earlier tests, so explicitly
@@ -201,7 +200,7 @@ describe('LogPanel', () => {
     const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 3}};
     const second = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel: nextViewModel, color: 'blue'},
+      props: {viewModel: nextViewModel},
     });
     await flushLogs(second);
 
@@ -214,7 +213,7 @@ describe('LogPanel', () => {
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
     const first = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel, color: 'blue'},
+      props: {viewModel},
     });
     await flushLogs(first);
 
@@ -226,7 +225,7 @@ describe('LogPanel', () => {
     const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 4}};
     const second = shallowMount(LogPanel, {
       ...globalConfig,
-      props: {viewModel: nextViewModel, color: 'blue'},
+      props: {viewModel: nextViewModel},
     });
     await flushLogs(second);
 

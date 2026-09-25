@@ -205,7 +205,7 @@
             <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
           </div>
           <div class="game_end_block--log game-end-column">
-            <LogPanel :color="color" :viewModel="viewModel"/>
+            <LogPanel :viewModel="viewModel"/>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -275,15 +275,6 @@ export default defineComponent({
     },
     players(): Array<PublicPlayerModel> {
       return getViewModel(this.playerView, this.spectator).players;
-    },
-    color(): Color {
-      if (this.playerView !== undefined) {
-        return this.playerView.thisPlayer.color;
-      }
-      if (this.spectator !== undefined) {
-        return this.spectator.color;
-      }
-      throw new Error('Neither playerView nor spectator are defined');
     },
     downloadLogUrl() {
       const id = this.playerView?.id || this.spectator?.id;

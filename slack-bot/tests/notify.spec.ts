@@ -7,9 +7,12 @@ import {
 } from '../src/slack/notify.js';
 import {
   claudeCodeCommand,
-  claudeOperatorUserId,
+  claudeOperatorSetting,
   claudePlayerName,
   claudeSeatMarkerLine,
+  DEFAULT_CLAUDE_OPERATOR,
+  resolveClaudeOperator,
+  type UsersListClient,
 } from '../src/claude.js';
 
 const URL = 'https://tm.example/player?id=pCLAUDE';
@@ -57,6 +60,7 @@ function blockTexts(blocks: Array<Record<string, unknown>>): Array<string> {
 afterEach(() => {
   delete process.env.CLAUDE_PLAYER_NAME;
   delete process.env.CLAUDE_OPERATOR_SLACK_USER_ID;
+  delete process.env.CLAUDE_OPERATOR;
 });
 
 describe('claude env helpers', () => {
@@ -68,10 +72,52 @@ describe('claude env helpers', () => {
     expect(claudePlayerName()).toBe('Claude Bot');
   });
 
-  it('falls back to the host when CLAUDE_OPERATOR_SLACK_USER_ID is unset', () => {
-    expect(claudeOperatorUserId('U_HOST')).toBe('U_HOST');
-    process.env.CLAUDE_OPERATOR_SLACK_USER_ID = ' U_OP ';
-    expect(claudeOperatorUserId('U_HOST')).toBe('U_OP');
+  it('uses env overrides, else the hardcoded default operator', () => {
+    expect(claudeOperatorSetting()).toBe(DEFAULT_CLAUDE_OPERATOR);
+    process.env.CLAUDE_OPERATOR = ' Someone Else ';
+    expect(claudeOperatorSetting()).toBe('Someone Else');
+    process.env.CLAUDE_OPERATOR_SLACK_USER_ID = ' U0OPERATOR ';
+    expect(claudeOperatorSetting()).toBe('U0OPERATOR');
+  });
+});
+
+describe('resolveClaudeOperator', () => {
+  const member = (id: string, real: string, extra: object = {}) =>
+    ({id, name: real.toLowerCase().replace(/ /g, '.'), real_name: real, profile: {real_name: real, display_name: ''}, ...extra});
+  const client = (pages: Array<Array<object>>) => {
+    const list = vi.fn(async ({cursor}: {cursor?: string}) => {
+      const i = cursor === undefined ? 0 : Number(cursor);
+      return {members: pages[i], response_metadata: {next_cursor: i + 1 < pages.length ? String(i + 1) : ''}};
+    });
+    return {users: {list}} as unknown as UsersListClient & {users: {list: typeof list}};
+  };
+
+  it('returns a member id setting without calling Slack', async () => {
+    process.env.CLAUDE_OPERATOR_SLACK_USER_ID = 'U0OPERATOR';
+    const c = client([[]]);
+    expect(await resolveClaudeOperator(c, 'U_HOST')).toBe('U0OPERATOR');
+    expect(c.users.list).not.toHaveBeenCalled();
+  });
+
+  it('resolves the default name across pages, case-insensitively, skipping bots and deactivated users', async () => {
+    const c = client([
+      [member('U1', 'Alice A'), member('UBOT', 'Simas Glinskis', {is_bot: true})],
+      [member('UOLD', 'simas  glinskis', {deleted: true}), member('U0SIMAS', 'simas glinskis')],
+    ]);
+    expect(await resolveClaudeOperator(c, 'U_HOST')).toBe('U0SIMAS');
+    expect(c.users.list).toHaveBeenCalledTimes(2);
+  });
+
+  it('matches display name too', async () => {
+    process.env.CLAUDE_OPERATOR = 'simas';
+    const c = client([[member('U2', 'Somebody', {profile: {real_name: 'Somebody', display_name: 'Simas'}})]]);
+    expect(await resolveClaudeOperator(c, 'U_HOST')).toBe('U2');
+  });
+
+  it('falls back to the host when no one matches or the lookup throws', async () => {
+    expect(await resolveClaudeOperator(client([[member('U1', 'Alice A')]]), 'U_HOST')).toBe('U_HOST');
+    const failing = {users: {list: vi.fn(async () => { throw new Error('missing_scope'); })}} as unknown as UsersListClient;
+    expect(await resolveClaudeOperator(failing, 'U_HOST')).toBe('U_HOST');
   });
 
   it('formats the marker line and the Claude Code command', () => {

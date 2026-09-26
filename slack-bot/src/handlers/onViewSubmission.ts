@@ -11,7 +11,8 @@
  *    - DM each player their link, then DM the host a summary. The summary
  *      carries a "New game, same settings" button holding this submission.
  *    - If Claude plays, its link goes to the Claude operator
- *      (CLAUDE_OPERATOR_SLACK_USER_ID, else the host) instead.
+ *      (env id/name, else DEFAULT_CLAUDE_OPERATOR resolved by name, else
+ *      the host) instead.
  *    - On failure, DM the host the error.
  */
 
@@ -48,7 +49,7 @@ import {
   type ClaudeSeat,
   type PlayerDmResult,
 } from '../slack/notify.js';
-import {claudeOperatorUserId, claudePlayerName} from '../claude.js';
+import {claudePlayerName, resolveClaudeOperator} from '../claude.js';
 
 export {VIEW_CALLBACK_ID} from '../views/newGameView.js';
 
@@ -85,7 +86,7 @@ export async function onViewSubmission(
         const {config, slackUserIdByColor, claudeColor} =
           toNewGameConfig(parsed, (id) => nameMap.get(id), claudeName);
         const claude: ClaudeSeat | undefined = claudeColor !== undefined ?
-          {color: claudeColor, operatorUserId: claudeOperatorUserId(meta.hostUserId)} :
+          {color: claudeColor, operatorUserId: await resolveClaudeOperator(client, meta.hostUserId)} :
           undefined;
 
         const game = await createGame(config);

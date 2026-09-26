@@ -42,7 +42,7 @@ Slack and Vercel each need information the other produces:
 | `SLACK_BOT_TOKEN` | yes | `xoxb-...` from the Slack app's OAuth & Permissions page. |
 | `SLACK_SIGNING_SECRET` | yes | From the Slack app's Basic Information page. Bolt verifies every incoming request with this. |
 | `TM_BASE_URL` | no | Defaults to `https://terraforming-mars.herokuapp.com`. Set to your own TM origin if self-hosting. |
-| `CLAUDE_OPERATOR_SLACK_USER_ID` | no | Slack user id (`U...`) of the person who runs Claude Code. Receives Claude's link when a game includes Claude. Defaults to the host who ran `/tm-newgame`. |
+| `CLAUDE_OPERATOR_SLACK_USER_ID` / `CLAUDE_OPERATOR` | no | Who runs Claude Code and receives Claude's link: a Slack user id (`U...`) or a name (matched against real/display name via `users.list`). Defaults to the hardcoded `DEFAULT_CLAUDE_OPERATOR` in `src/claude.ts` (currently "Simas Glinskis"), then to the host who ran `/tm-newgame` if no one matches. |
 | `CLAUDE_PLAYER_NAME` | no | Player name Claude is seated under. Defaults to `Claude`. |
 
 ## Local development
@@ -120,8 +120,9 @@ human slot; if it clashes with a human's pick at submit time, the human keeps
 the color and Claude is moved to the next free one.
 
 Claude plays by being handed its `/player?id=p...` URL. When the game is
-created the bot DMs that URL to the **Claude operator** - the Slack user in
-`CLAUDE_OPERATOR_SLACK_USER_ID`, or the host if that is unset. The DM looks
+created the bot DMs that URL to the **Claude operator**: the env var if set, else
+`DEFAULT_CLAUDE_OPERATOR` (a name, resolved to a member id at runtime), else
+the host. The DM looks
 like this (`text` fallback shown; the blocks carry the same content):
 
 ```

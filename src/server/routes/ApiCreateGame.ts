@@ -20,7 +20,7 @@ import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
 import {RouteError} from './RouteError';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
-import {sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
+import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
 
 function parseQuotaConfig(struct: any): QuotaConfig {
   let {limit} = struct;
@@ -124,6 +124,9 @@ export class ApiCreateGame extends Handler {
     try {
       const gameReq = JSON.parse(body) as NewGameConfig;
       this.validateCustomLists(gameReq);
+      if (gameReq.escapeVelocity !== undefined && hasNegativeEscapeVelocityOption(gameReq.escapeVelocity)) {
+        throw RouteError.badRequest('Escape Velocity values cannot be negative');
+      }
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
       const players = gameReq.players.map((p) => {

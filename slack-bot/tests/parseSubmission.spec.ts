@@ -8,7 +8,7 @@ import {
   type ParsedSubmission,
   type RawSlot,
 } from '../src/handlers/parseSubmission.js';
-import {ActionIds, BlockIds, TOGGLES} from '../src/views/newGameView.js';
+import {ActionIds, BlockIds, CLAUDE_OPTION_VALUE, TOGGLES} from '../src/views/newGameView.js';
 import {EXPANSIONS, PLAYER_COLORS} from '../src/tm/types.js';
 
 /**
@@ -22,7 +22,9 @@ function makeState(opts: {
   selectedToggles?: Array<string>;
   board?: string;
   randomFirst?: boolean;
-  firstSlot?: number;
+  firstSlot?: number | 'claude';
+  claude?: boolean;
+  claudeColor?: string;
   startingPreludes?: string;
   startingCorporations?: string;
   escapeVelocity?: 'off' | 'on';
@@ -43,6 +45,24 @@ function makeState(opts: {
         },
       };
     }
+  }
+  if (opts.claude !== undefined) {
+    state[BlockIds.claude] = {
+      [ActionIds.claude]: {
+        type: 'checkboxes',
+        selected_options: opts.claude ?
+          [{value: CLAUDE_OPTION_VALUE, text: {type: 'plain_text', text: 'Claude'}}] :
+          [],
+      },
+    };
+  }
+  if (opts.claudeColor !== undefined) {
+    state[BlockIds.claudeColor] = {
+      [ActionIds.claudeColor]: {
+        type: 'static_select',
+        selected_option: {value: opts.claudeColor, text: {type: 'plain_text', text: opts.claudeColor}},
+      },
+    };
   }
   state[BlockIds.board] = {
     [ActionIds.board]: {
@@ -83,7 +103,7 @@ function makeState(opts: {
         type: 'static_select',
         selected_option: {
           value: String(opts.firstSlot),
-          text: {type: 'plain_text', text: `Player ${opts.firstSlot}`},
+          text: {type: 'plain_text', text: String(opts.firstSlot)},
         },
       },
     };
@@ -130,6 +150,7 @@ describe('parseSubmission', () => {
     expect(parsed.expansions.corpera).toBe(true);
     expect(parsed.expansions.venus).toBe(false);
     expect(parsed.escapeVelocityOn).toBe(false);
+    expect(parsed.claude).toBeUndefined();
   });
 
   it('errors when zero slots are populated', () => {
@@ -284,6 +305,7 @@ describe('toNewGameConfig', () => {
       {index: 1, slackUserId: 'U_ALICE', color: 'red'},
       {index: 2, slackUserId: 'U_BOB', color: 'blue'},
     ],
+    claude: undefined,
     randomFirstPlayer: false,
     firstPlayerSlot: 2,
     board: 'hellas',
@@ -379,6 +401,7 @@ describe('toPrefill', () => {
       {index: 1, slackUserId: 'U_ALICE', color: 'red'},
       {index: 4, slackUserId: 'U_BOB', color: 'pink'},
     ],
+    claude: undefined,
     randomFirstPlayer: false,
     firstPlayerSlot: 4,
     board: 'hellas',
@@ -413,5 +436,197 @@ describe('toPrefill', () => {
     expect(prefill.startingPreludes).toBe(4);
     expect(prefill.escapeVelocityOn).toBe(true);
     expect(prefill.escapeVelocityThresholdMinutes).toBe(45);
+    expect(prefill.claudeColor).toBeUndefined();
+  });
+
+  it('carries the Claude seat and a Claude first-player choice', () => {
+    const prefill = toPrefill({...parsed, claude: {color: 'orange'}, firstPlayerSlot: 'claude'});
+    expect(prefill.claudeColor).toBe('orange');
+    expect(prefill.firstPlayerSlot).toBe('claude');
+  });
+});
+
+describe('parseSubmission - Claude seat', () => {
+  const errorsOf = (r: ReturnType<typeof parseSubmission>) =>
+    (r as {errors: Record<string, string>}).errors;
+
+  it('ignores the Claude color when the checkbox is unchecked', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      claude: false,
+      claudeColor: 'orange',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.claude).toBeUndefined();
+  });
+
+  it('parses Claude with the chosen color', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      claude: true,
+      claudeColor: 'purple',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.claude).toEqual({color: 'purple'});
+  });
+
+  it('defaults Claude to the first color no human picked', () => {
+    const state = makeState({
+      slots: [
+        {i: 1, user: 'U_ALICE', color: 'red'},
+        {i: 2, user: 'U_BOB', color: 'green'},
+      ],
+      claude: true,
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.claude).toEqual({color: 'yellow'});
+  });
+
+  it('allows 5 humans plus Claude', () => {
+    const state = makeState({
+      slots: [1, 2, 3, 4, 5].map((i) => ({i, user: `U_${i}`, color: PLAYER_COLORS[i - 1]})),
+      claude: true,
+      claudeColor: 'orange',
+    });
+    expect(isErrors(parseSubmission(state))).toBe(false);
+  });
+
+  it('rejects 6 humans plus Claude', () => {
+    const state = makeState({
+      slots: [1, 2, 3, 4, 5, 6].map((i) => ({i, user: `U_${i}`, color: PLAYER_COLORS[i - 1]})),
+      claude: true,
+      claudeColor: 'orange',
+    });
+    const result = parseSubmission(state);
+    expect(isErrors(result)).toBe(true);
+    expect(errorsOf(result)[BlockIds.claude]).toMatch(/at most 6/);
+  });
+
+  it('rejects an unknown Claude color', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      claude: true,
+      claudeColor: 'chartreuse',
+    });
+    const result = parseSubmission(state);
+    expect(isErrors(result)).toBe(true);
+    expect(errorsOf(result)[BlockIds.claudeColor]).toBeDefined();
+  });
+
+  it('accepts Claude as the explicit first player', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      claude: true,
+      claudeColor: 'orange',
+      randomFirst: false,
+      firstSlot: 'claude',
+    });
+    const parsed = parseSubmission(state) as ParsedSubmission;
+    expect(parsed.firstPlayerSlot).toBe('claude');
+  });
+
+  it('rejects Claude as first player when Claude is not playing', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      randomFirst: false,
+      firstSlot: 'claude',
+    });
+    const result = parseSubmission(state);
+    expect(isErrors(result)).toBe(true);
+    expect(errorsOf(result)[BlockIds.firstPlayerSlot]).toMatch(/Claude is not playing/);
+  });
+
+  it('ignores a Claude first-player choice when random is checked', () => {
+    const state = makeState({
+      slots: [{i: 1, user: 'U_ALICE', color: 'red'}],
+      randomFirst: true,
+      firstSlot: 'claude',
+    });
+    expect(isErrors(parseSubmission(state))).toBe(false);
+  });
+});
+
+describe('toNewGameConfig - Claude seat', () => {
+  const base: ParsedSubmission = {
+    slots: [
+      {index: 1, slackUserId: 'U_ALICE', color: 'red'},
+      {index: 2, slackUserId: 'U_BOB', color: 'blue'},
+    ],
+    claude: {color: 'orange'},
+    randomFirstPlayer: false,
+    firstPlayerSlot: undefined,
+    board: 'tharsis',
+    expansions: Object.fromEntries(EXPANSIONS.map((e) => [e, false])) as Record<
+      typeof EXPANSIONS[number],
+      boolean
+    >,
+    toggles: Object.fromEntries(TOGGLES.map((t) => [t.value, false])) as Record<
+      typeof TOGGLES[number]['value'],
+      boolean
+    >,
+    startingPreludes: 4,
+    startingCorporations: 3,
+    escapeVelocityOn: false,
+    escapeVelocityThresholdMinutes: 20,
+  };
+  const names: Record<string, string> = {U_ALICE: 'Alice', U_BOB: 'Bob'};
+
+  it('seats Claude after the humans under the given name', () => {
+    const out = toNewGameConfig(base, (id) => names[id], 'Claude');
+    expect(out.config.players.map((p) => [p.name, p.color])).toEqual([
+      ['Alice', 'red'],
+      ['Bob', 'blue'],
+      ['Claude', 'orange'],
+    ]);
+    expect(out.claudeColor).toBe('orange');
+    // Claude has no Slack user, so it stays out of the Slack maps.
+    expect(out.slackUserIds).toEqual(['U_ALICE', 'U_BOB']);
+    expect(out.slackUserIdByColor).toEqual({red: 'U_ALICE', blue: 'U_BOB'});
+  });
+
+  it('uses CLAUDE_PLAYER_NAME when no name is passed', () => {
+    process.env.CLAUDE_PLAYER_NAME = 'Claude (AI)';
+    try {
+      const out = toNewGameConfig(base, (id) => names[id]);
+      expect(out.config.players[2]!.name).toBe('Claude (AI)');
+    } finally {
+      delete process.env.CLAUDE_PLAYER_NAME;
+    }
+  });
+
+  it('defaults the Claude name to "Claude"', () => {
+    delete process.env.CLAUDE_PLAYER_NAME;
+    const out = toNewGameConfig(base, (id) => names[id]);
+    expect(out.config.players[2]!.name).toBe('Claude');
+  });
+
+  it('gives Claude a new color when it clashes with a human, keeping the human color', () => {
+    const out = toNewGameConfig({...base, claude: {color: 'red'}}, (id) => names[id], 'Claude');
+    const claude = out.config.players.find((p) => p.name === 'Claude')!;
+    expect(out.config.players[0]).toMatchObject({name: 'Alice', color: 'red'});
+    expect(claude.color).not.toBe('red');
+    expect(claude.color).not.toBe('blue');
+    expect(out.claudeColor).toBe(claude.color);
+    expect(new Set(out.config.players.map((p) => p.color)).size).toBe(3);
+  });
+
+  it('marks Claude first when chosen explicitly', () => {
+    const out = toNewGameConfig({...base, firstPlayerSlot: 'claude'}, (id) => names[id], 'Claude');
+    expect(out.config.players.filter((p) => p.first).map((p) => p.name)).toEqual(['Claude']);
+  });
+
+  it('marks a human first when chosen explicitly alongside Claude', () => {
+    const out = toNewGameConfig({...base, firstPlayerSlot: 2}, (id) => names[id], 'Claude');
+    expect(out.config.players.filter((p) => p.first).map((p) => p.name)).toEqual(['Bob']);
+  });
+
+  it('includes Claude in the random seating with exactly one first player', () => {
+    for (let n = 0; n < 20; n++) {
+      const out = toNewGameConfig({...base, randomFirstPlayer: true}, (id) => names[id], 'Claude');
+      expect(out.config.players).toHaveLength(3);
+      expect(out.config.players.filter((p) => p.first)).toHaveLength(1);
+      const claude = out.config.players.find((p) => p.name === 'Claude')!;
+      expect(out.claudeColor).toBe(claude.color);
+    }
   });
 });

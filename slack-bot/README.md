@@ -42,6 +42,8 @@ Slack and Vercel each need information the other produces:
 | `SLACK_BOT_TOKEN` | yes | `xoxb-...` from the Slack app's OAuth & Permissions page. |
 | `SLACK_SIGNING_SECRET` | yes | From the Slack app's Basic Information page. Bolt verifies every incoming request with this. |
 | `TM_BASE_URL` | no | Defaults to `https://terraforming-mars.herokuapp.com`. Set to your own TM origin if self-hosting. |
+| `CLAUDE_OPERATOR_SLACK_USER_ID` | no | Slack user id (`U...`) of the person who runs Claude Code. Receives Claude's link when a game includes Claude. Defaults to the host who ran `/tm-newgame`. |
+| `CLAUDE_PLAYER_NAME` | no | Player name Claude is seated under. Defaults to `Claude`. |
 
 ## Local development
 
@@ -66,6 +68,7 @@ slack-bot/
 ├── public/index.html            # Landing page at the root URL (also satisfies Vercel's default outputDirectory)
 ├── src/
 │   ├── app.ts                   # Bolt App + Vercel receiver (lazy init)
+│   ├── claude.ts                # "Claude plays" seat: env config, marker line, command
 │   ├── receiver.ts              # Custom Web-standards Receiver
 │   ├── views/
 │   │   ├── newGameView.ts       # Block Kit modal builder
@@ -90,7 +93,10 @@ slack-bot/
 ## What the modal exposes
 
 - Up to 6 players, each picking a Slack user + color.
-- "Random first player?" checkbox plus an optional explicit first-player slot.
+- An optional **Claude plays** seat (checkbox + color) - see below. Claude
+  counts toward the 6-player limit.
+- "Random first player?" checkbox plus an optional explicit first-player slot
+  (any of the 6 slots, or Claude).
 - Board (Tharsis / Hellas / Elysium / Utopia / Vastitas Borealis Nova / Terra
   Cimmeria Nova / Arabia Terra / Vastitas Borealis / Amazonis / T. Cimmeria /
   Hollandia / Random official / Random all).
@@ -104,6 +110,41 @@ slack-bot/
 - Escape Velocity (off / on, with a configurable threshold time in minutes,
   defaulting to 20).
 
+## Claude as a player
+
+Claude (an AI agent run from [Claude Code](https://claude.com/claude-code) on
+somebody's machine) is not a Slack user, so it can't be picked in a player
+slot. Instead, tick **Add Claude as a player** under the player slots and
+pick its color. The color defaults to the first color not preselected in any
+human slot; if it clashes with a human's pick at submit time, the human keeps
+the color and Claude is moved to the next free one.
+
+Claude plays by being handed its `/player?id=p...` URL. When the game is
+created the bot DMs that URL to the **Claude operator** - the Slack user in
+`CLAUDE_OPERATOR_SLACK_USER_ID`, or the host if that is unset. The DM looks
+like this (`text` fallback shown; the blocks carry the same content):
+
+```
+TM-CLAUDE-SEAT https://terraforming-mars.herokuapp.com/player?id=p1a2b3c
+Claude's seat in <game name>: https://terraforming-mars.herokuapp.com/player?id=p1a2b3c
+Paste into Claude Code: /terraforming-mars https://terraforming-mars.herokuapp.com/player?id=p1a2b3c play
+```
+
+- The blocks show the game name and URL, the Claude Code command in a code
+  block, and the `TM-CLAUDE-SEAT <player-url>` marker as a plain-text
+  context line.
+- `TM-CLAUDE-SEAT <player-url>` is a stable machine-readable marker for an
+  automated watcher. It is the first line of the message `text`. Slack may
+  hand the URL back wrapped as `<https://...>` when you read the message via
+  the API, so match it tolerantly, e.g.
+  `/TM-CLAUDE-SEAT <?(https?:\/\/[^\s>|]+)/`.
+- The host's summary DM shows Claude's row as
+  `:robot_face: *Claude* — link sent to @operator`, or flags it with the raw
+  link if that DM failed.
+- The rematch button remembers the Claude seat (and Claude as first player).
+
+No extra Slack scopes are needed - it is just one more `chat:write` DM.
+
 ## Playing again with the same settings
 
 The summary DM the host receives after each game carries a **New game, same
@@ -114,8 +155,10 @@ anything you like, or just hit *Create game*.
 The bot has no database. The settings ride along inside the button's own
 Block Kit `value` (see `src/views/prefill.ts`), which Slack caps at 2000
 characters; `encodePrefill` returns `undefined` above that and the button is
-simply omitted. A button from an older deploy whose payload no longer parses
-opens a blank modal rather than failing.
+simply omitted. The payload is versioned: buttons posted before the Claude
+seat existed (version 1) still reopen the modal, just without Claude. A
+button whose payload no longer parses opens a blank modal rather than
+failing.
 
 **Not exposed** to keep the modal under Slack's element-size limits: custom
 corporations / banned cards / included cards / custom CEOs / custom preludes /

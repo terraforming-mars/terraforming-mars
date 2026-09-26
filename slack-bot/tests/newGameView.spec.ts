@@ -2,7 +2,9 @@ import {describe, expect, it} from 'vitest';
 import {
   BlockIds,
   buildNewGameView,
+  CLAUDE_OPTION_VALUE,
   decodePrivateMetadata,
+  defaultClaudeColor,
   encodePrivateMetadata,
   MAX_PLAYER_SLOTS,
   TOGGLES,
@@ -100,6 +102,46 @@ describe('buildNewGameView', () => {
     expect(blockIds.some((id) => /ceo/i.test(id))).toBe(false);
   });
 
+  it('offers an optional, unchecked "Claude plays" checkbox', () => {
+    const view = buildNewGameView(meta);
+    const block = findBlock(view, BlockIds.claude) as {
+      optional?: boolean;
+      element: {type: string; options: Array<{value: string}>; initial_options?: unknown};
+    };
+    expect(block.optional).toBe(true);
+    expect(block.element.type).toBe('checkboxes');
+    expect(block.element.options.map((o) => o.value)).toEqual([CLAUDE_OPTION_VALUE]);
+    expect(block.element.initial_options).toBeUndefined();
+  });
+
+  it('defaults the Claude color to the first color not used by a human slot', () => {
+    const view = buildNewGameView(meta);
+    const block = findBlock(view, BlockIds.claudeColor) as {
+      element: {initial_option: {value: string}; options: Array<{value: string}>};
+    };
+    // Slots 1-6 default to the first six colors.
+    expect(block.element.initial_option.value).toBe(PLAYER_COLORS[MAX_PLAYER_SLOTS]);
+    expect(block.element.options.map((o) => o.value)).toEqual([...PLAYER_COLORS]);
+  });
+
+  it('places the Claude blocks right after the human slots', () => {
+    const view = buildNewGameView(meta);
+    const ids = view.blocks.map((b) => (b as {block_id?: string}).block_id ?? '');
+    const lastSlot = ids.indexOf(BlockIds.slotColor(MAX_PLAYER_SLOTS));
+    expect(ids[lastSlot + 1]).toBe(BlockIds.claude);
+    expect(ids[lastSlot + 2]).toBe(BlockIds.claudeColor);
+  });
+
+  it('offers Claude in the first-player select', () => {
+    const view = buildNewGameView(meta);
+    const block = findBlock(view, BlockIds.firstPlayerSlot) as {
+      element: {options: Array<{value: string}>};
+    };
+    const values = block.element.options.map((o) => o.value);
+    expect(values).toHaveLength(MAX_PLAYER_SLOTS + 1);
+    expect(values[values.length - 1]).toBe(CLAUDE_OPTION_VALUE);
+  });
+
   it('stays well under Slack 100-block modal limit', () => {
     const view = buildNewGameView(meta);
     expect(view.blocks.length).toBeLessThan(100);
@@ -115,6 +157,7 @@ describe('buildNewGameView with a prefill', () => {
     ],
     randomFirstPlayer: false,
     firstPlayerSlot: 3,
+    claudeColor: undefined,
     board: 'hellas',
     expansions: ['corpera', 'turmoil'],
     toggles: ['fastModeOption'],
@@ -179,6 +222,31 @@ describe('buildNewGameView with a prefill', () => {
       element: {initial_option: {value: string}};
     }).element.initial_option.value;
     expect(ev).toBe('off');
+  });
+
+  it('leaves Claude unchecked when the previous game had no Claude', () => {
+    const view = buildNewGameView(meta, prefill);
+    const el = (findBlock(view, BlockIds.claude) as unknown as {element: Record<string, unknown>}).element;
+    expect('initial_options' in el).toBe(false);
+    // Default color skips every color preselected in a human slot
+    // (pink, empty-slot default green, black, and the slot 4-6 defaults).
+    expect(defaultClaudeColor(prefill)).toBe('red');
+  });
+
+  it('restores the Claude seat, its color and Claude as first player', () => {
+    const view = buildNewGameView(meta, {...prefill, claudeColor: 'orange', firstPlayerSlot: 'claude'});
+    const claude = findBlock(view, BlockIds.claude) as {
+      element: {initial_options?: Array<{value: string}>};
+    };
+    expect(claude.element.initial_options?.map((o) => o.value)).toEqual([CLAUDE_OPTION_VALUE]);
+    const color = (findBlock(view, BlockIds.claudeColor) as {
+      element: {initial_option: {value: string}};
+    }).element.initial_option.value;
+    expect(color).toBe('orange');
+    const first = (findBlock(view, BlockIds.firstPlayerSlot) as {
+      element: {initial_option?: {value: string}};
+    }).element.initial_option;
+    expect(first?.value).toBe(CLAUDE_OPTION_VALUE);
   });
 
   it('omits initial_options entirely when nothing was selected', () => {

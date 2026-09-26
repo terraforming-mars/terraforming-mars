@@ -8,15 +8,18 @@
 import {
   ActionIds,
   BlockIds,
+  CLAUDE_OPTION_VALUE,
   DEFAULT_STARTING_CORPORATIONS,
   DEFAULT_STARTING_PRELUDES,
   MAX_PLAYER_SLOTS,
+  MAX_PLAYERS,
   MAX_STARTING_CORPORATIONS,
   MIN_STARTING_CORPORATIONS,
   TOGGLES,
   type ToggleKey,
 } from '../views/newGameView.js';
-import type {Prefill} from '../views/prefill.js';
+import type {FirstPlayerChoice, Prefill} from '../views/prefill.js';
+import {claudePlayerName} from '../claude.js';
 import {
   buildNewGameConfig,
   type PartialNewGameConfig,
@@ -40,8 +43,11 @@ export interface RawSlot {
 
 export interface ParsedSubmission {
   slots: Array<RawSlot>;
+  /** Claude's seat when "Claude plays" is checked; undefined otherwise. */
+  claude: {color: PlayerColor} | undefined;
   randomFirstPlayer: boolean;
-  firstPlayerSlot: number | undefined;
+  /** A human slot index, 'claude', or undefined for "no explicit choice". */
+  firstPlayerSlot: FirstPlayerChoice;
   board: BoardNameType;
   expansions: Record<Expansion, boolean>;
   toggles: Record<ToggleKey, boolean>;
@@ -91,6 +97,25 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
     errors[BlockIds.slotUser(1)] = 'Pick at least one Slack user.';
   }
 
+  // -- Claude seat --
+  const claudeChecked = readCheckboxValues(state, BlockIds.claude, ActionIds.claude)
+    .includes(CLAUDE_OPTION_VALUE);
+  let claude: {color: PlayerColor} | undefined;
+  if (claudeChecked) {
+    const claudeColorValue =
+      readSelectedValue(state, BlockIds.claudeColor, ActionIds.claudeColor) ??
+      firstUnusedColor(slots.map((s) => s.color));
+    if (!isPlayerColor(claudeColorValue)) {
+      errors[BlockIds.claudeColor] = `Unknown color: ${claudeColorValue}.`;
+    } else {
+      claude = {color: claudeColorValue};
+    }
+    if (slots.length + 1 > MAX_PLAYERS) {
+      errors[BlockIds.claude] =
+        `Claude would make ${slots.length + 1} players; the game allows at most ${MAX_PLAYERS}. Remove a teammate or uncheck Claude.`;
+    }
+  }
+
   // -- First-player choice --
   const randomFirstPlayer = readCheckboxValues(
     state,
@@ -102,8 +127,18 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
     BlockIds.firstPlayerSlot,
     ActionIds.firstPlayerSlot,
   );
-  const firstPlayerSlot = firstPlayerRaw !== undefined ? Number.parseInt(firstPlayerRaw, 10) : undefined;
-  if (!randomFirstPlayer && firstPlayerSlot !== undefined) {
+  let firstPlayerSlot: FirstPlayerChoice;
+  if (firstPlayerRaw === CLAUDE_OPTION_VALUE) {
+    firstPlayerSlot = 'claude';
+  } else if (firstPlayerRaw !== undefined) {
+    firstPlayerSlot = Number.parseInt(firstPlayerRaw, 10);
+  }
+  if (!randomFirstPlayer && firstPlayerSlot === 'claude') {
+    if (!claudeChecked) {
+      errors[BlockIds.firstPlayerSlot] =
+        'Claude is not playing. Check "Add Claude as a player" or pick another first player.';
+    }
+  } else if (!randomFirstPlayer && firstPlayerSlot !== undefined) {
     const populated = slots.some((s) => s.index === firstPlayerSlot);
     if (!populated) {
       errors[BlockIds.firstPlayerSlot] = `Slot ${firstPlayerSlot} has no Slack user picked.`;
@@ -163,6 +198,7 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
 
   return {
     slots,
+    claude,
     randomFirstPlayer,
     firstPlayerSlot,
     board,
@@ -180,9 +216,9 @@ export function parseSubmission(state: ViewState): ParsedSubmission | Validation
  * Retains the first occurrence of each color and assigns the first available
  * unused color (in PLAYER_COLORS order) to subsequent duplicates.
  */
-export function dedupeColors(slots: Array<RawSlot>): Array<RawSlot> {
+export function dedupeColors<T extends {color: PlayerColor}>(slots: Array<T>): Array<T> {
   const used = new Set<PlayerColor>();
-  const result: Array<RawSlot> = [];
+  const result: Array<T> = [];
   for (const slot of slots) {
     if (!used.has(slot.color)) {
       used.add(slot.color);
@@ -204,28 +240,54 @@ export function dedupeColors(slots: Array<RawSlot>): Array<RawSlot> {
 /** Map each slot's Slack user id to a display name to use as the player name. */
 export type DisplayNameLookup = (slackUserId: string) => string | undefined;
 
+/** One seat at the table: a human slot, or Claude (no Slack user). */
+type Seat =
+  | {kind: 'human'; index: number; slackUserId: string; color: PlayerColor}
+  | {kind: 'claude'; color: PlayerColor};
+
+export interface NewGameConfigResult {
+  config: NewGameConfig;
+  /** Human players' Slack ids in seating order (Claude is not included). */
+  slackUserIds: Array<string>;
+  /** Final (deduped) color -> Slack user id, humans only. */
+  slackUserIdByColor: Record<string, string>;
+  /** Claude's final (deduped) color, or undefined when Claude is not playing. */
+  claudeColor: PlayerColor | undefined;
+}
+
 export function toNewGameConfig(
   parsed: ParsedSubmission,
   lookup: DisplayNameLookup,
-): {config: NewGameConfig; slackUserIds: Array<string>; slackUserIdByColor: Record<string, string>} {
+  claudeName: string = claudePlayerName(),
+): NewGameConfigResult {
+  // Claude goes last so that on a color clash the humans keep what they picked.
+  const seats: Array<Seat> = parsed.slots.map((s) => ({kind: 'human' as const, ...s}));
+  if (parsed.claude !== undefined) {
+    seats.push({kind: 'claude', color: parsed.claude.color});
+  }
+
   // The TM server ignores the `randomFirstPlayer` flag - it seats players in
   // the array order it receives and reads the per-player `first` flag. So we
   // do the randomization here, mirroring CreateGameForm.vue's serializeSettings:
   // shuffle the seating order and pick a random player to go first.
-  let ordered = dedupeColors(parsed.slots);
+  let ordered = dedupeColors(seats);
   let firstIndex0: number;
   if (parsed.randomFirstPlayer) {
     ordered = shuffle(ordered);
     firstIndex0 = Math.floor(Math.random() * ordered.length);
+  } else if (parsed.firstPlayerSlot === 'claude') {
+    firstIndex0 = ordered.findIndex((s) => s.kind === 'claude');
   } else if (parsed.firstPlayerSlot !== undefined) {
-    firstIndex0 = ordered.findIndex((s) => s.index === parsed.firstPlayerSlot);
+    firstIndex0 = ordered.findIndex((s) => s.kind === 'human' && s.index === parsed.firstPlayerSlot);
   } else {
     firstIndex0 = -1;
   }
 
-  const players: Array<NewPlayerModel> = ordered.map((slot, idx) => ({
-    name: lookup(slot.slackUserId) ?? fallbackName(slot.color, idx),
-    color: slot.color,
+  const players: Array<NewPlayerModel> = ordered.map((seat, idx) => ({
+    name: seat.kind === 'claude' ?
+      claudeName :
+      lookup(seat.slackUserId) ?? fallbackName(seat.color, idx),
+    color: seat.color,
     beginner: false,
     handicap: 0,
     first: idx === firstIndex0,
@@ -258,14 +320,22 @@ export function toNewGameConfig(
   // correct even though the server returns players in generation order, which
   // starts at the first player rather than our submission order.
   const slackUserIdByColor: Record<string, string> = {};
-  for (const slot of ordered) {
-    slackUserIdByColor[slot.color] = slot.slackUserId;
+  const slackUserIds: Array<string> = [];
+  let claudeColor: PlayerColor | undefined;
+  for (const seat of ordered) {
+    if (seat.kind === 'claude') {
+      claudeColor = seat.color;
+    } else {
+      slackUserIdByColor[seat.color] = seat.slackUserId;
+      slackUserIds.push(seat.slackUserId);
+    }
   }
 
   return {
     config: buildNewGameConfig(overrides),
-    slackUserIds: ordered.map((s) => s.slackUserId),
+    slackUserIds,
     slackUserIdByColor,
+    claudeColor,
   };
 }
 
@@ -279,6 +349,7 @@ export function toPrefill(parsed: ParsedSubmission): Prefill {
     slots: parsed.slots.map((s) => ({...s})),
     randomFirstPlayer: parsed.randomFirstPlayer,
     firstPlayerSlot: parsed.firstPlayerSlot,
+    claudeColor: parsed.claude?.color,
     board: parsed.board,
     expansions: EXPANSIONS.filter((e) => parsed.expansions[e]),
     toggles: TOGGLES.map((t) => t.value).filter((k) => parsed.toggles[k]),
@@ -287,6 +358,10 @@ export function toPrefill(parsed: ParsedSubmission): Prefill {
     escapeVelocityOn: parsed.escapeVelocityOn,
     escapeVelocityThresholdMinutes: parsed.escapeVelocityThresholdMinutes,
   };
+}
+
+function firstUnusedColor(used: ReadonlyArray<PlayerColor>): PlayerColor {
+  return PLAYER_COLORS.find((c) => !used.includes(c)) ?? PLAYER_COLORS[PLAYER_COLORS.length - 1]!;
 }
 
 function fallbackName(color: PlayerColor, idx: number): string {

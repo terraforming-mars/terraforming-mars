@@ -10,6 +10,8 @@
  *    - POST it to /api/creategame.
  *    - DM each player their link, then DM the host a summary. The summary
  *      carries a "New game, same settings" button holding this submission.
+ *    - If Claude plays, its link goes to the Claude operator
+ *      (CLAUDE_OPERATOR_SLACK_USER_ID, else the host) instead.
  *    - On failure, DM the host the error.
  */
 
@@ -38,12 +40,15 @@ import {
 } from '../tm/createGame.js';
 import {
   buildHostSummaryFromGameModel,
+  dmClaudeSeat,
   dmHostError,
   dmHostSummary,
   dmPlayerLink,
   lookupDisplayName,
+  type ClaudeSeat,
   type PlayerDmResult,
 } from '../slack/notify.js';
+import {claudeOperatorUserId, claudePlayerName} from '../claude.js';
 
 export {VIEW_CALLBACK_ID} from '../views/newGameView.js';
 
@@ -76,21 +81,33 @@ export async function onViewSubmission(
         );
         const nameMap = new Map<string, string | undefined>(lookups);
 
-        const {config, slackUserIdByColor} = toNewGameConfig(parsed, (id) => nameMap.get(id));
+        const claudeName = claudePlayerName();
+        const {config, slackUserIdByColor, claudeColor} =
+          toNewGameConfig(parsed, (id) => nameMap.get(id), claudeName);
+        const claude: ClaudeSeat | undefined = claudeColor !== undefined ?
+          {color: claudeColor, operatorUserId: claudeOperatorUserId(meta.hostUserId)} :
+          undefined;
 
         const game = await createGame(config);
         const base = tmBaseUrl();
 
         const dmResults: Array<PlayerDmResult> = await Promise.all(
-          game.players.map((player) => {
+          game.players.map(async (player) => {
+            const url = playerUrl(base, player.id);
+            if (claude !== undefined && player.color === claude.color) {
+              return dmClaudeSeat(
+                client,
+                claude.operatorUserId,
+                player.name,
+                game.name,
+                url,
+                meta.hostUserId,
+                player.color,
+              );
+            }
             const slackUserId = slackUserIdByColor[player.color] ?? '';
-            return dmPlayerLink(
-              client,
-              slackUserId,
-              player.name,
-              game.name,
-              playerUrl(base, player.id),
-            );
+            const result = await dmPlayerLink(client, slackUserId, player.name, game.name, url);
+            return {...result, color: player.color};
           }),
         );
 
@@ -103,6 +120,7 @@ export async function onViewSubmission(
           hostGameUrl(base, game.id),
           game.spectatorId !== undefined ? spectatorUrl(base, game.spectatorId) : undefined,
           encodePrefill(toPrefill(parsed)),
+          claude,
         );
         await dmHostSummary(client, meta.hostUserId, summary);
       } catch (err) {

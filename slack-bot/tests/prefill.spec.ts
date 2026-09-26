@@ -3,6 +3,7 @@ import {
   decodePrefill,
   encodePrefill,
   MAX_PREFILL_VALUE_LENGTH,
+  PREFILL_VERSION,
   type Prefill,
 } from '../src/views/prefill.js';
 import {MAX_PLAYER_SLOTS, TOGGLES} from '../src/views/newGameView.js';
@@ -15,6 +16,7 @@ const sample: Prefill = {
   ],
   randomFirstPlayer: false,
   firstPlayerSlot: 3,
+  claudeColor: undefined,
   board: 'hellas',
   expansions: ['corpera', 'venus'],
   toggles: ['undoOption', 'draftVariant'],
@@ -47,6 +49,8 @@ describe('encodePrefill / decodePrefill', () => {
       })),
       randomFirstPlayer: true,
       firstPlayerSlot: MAX_PLAYER_SLOTS,
+      // Can't be submitted alongside 6 humans, but worst case for the payload.
+      claudeColor: 'orange',
       board: 'vastitas borealis nova',
       expansions: [...EXPANSIONS],
       toggles: TOGGLES.map((t) => t.value),
@@ -59,6 +63,51 @@ describe('encodePrefill / decodePrefill', () => {
     expect(encoded).toBeDefined();
     expect(encoded!.length).toBeLessThanOrEqual(MAX_PREFILL_VALUE_LENGTH);
     expect(decodePrefill(encoded)).toEqual(maxed);
+  });
+
+  it('round-trips the Claude seat', () => {
+    const p: Prefill = {...sample, claudeColor: 'orange'};
+    expect(decodePrefill(encodePrefill(p))).toEqual(p);
+  });
+
+  it('round-trips Claude as the first player', () => {
+    const p: Prefill = {...sample, claudeColor: 'purple', firstPlayerSlot: 'claude'};
+    const encoded = encodePrefill(p);
+    expect(JSON.parse(encoded!)).toMatchObject({v: PREFILL_VERSION, k: 'purple', f: 'c'});
+    expect(decodePrefill(encoded)).toEqual(p);
+  });
+
+  it('omits the Claude key when Claude is not playing', () => {
+    expect(JSON.parse(encodePrefill(sample)!)).not.toHaveProperty('k');
+  });
+
+  it('drops a Claude first-player choice when there is no Claude seat', () => {
+    const raw = JSON.stringify({v: 2, s: [[1, 'U_ALICE', 'red']], r: 0, f: 'c'});
+    const decoded = decodePrefill(raw);
+    expect(decoded!.claudeColor).toBeUndefined();
+    expect(decoded!.firstPlayerSlot).toBeUndefined();
+  });
+
+  it('drops an unknown Claude color', () => {
+    const raw = JSON.stringify({v: 2, s: [[1, 'U_ALICE', 'red']], r: 1, k: 'chartreuse'});
+    expect(decodePrefill(raw)!.claudeColor).toBeUndefined();
+  });
+
+  it('still decodes a v1 payload from an older deploy', () => {
+    const v1 = JSON.stringify({
+      v: 1,
+      s: [[1, 'U_ALICE', 'red'], [3, 'U_BOB', 'pink']],
+      r: 0,
+      f: 3,
+      b: 'hellas',
+      e: ['corpera', 'venus'],
+      t: ['undoOption', 'draftVariant'],
+      c: 5,
+      p: 2,
+      ev: 1,
+      em: 45,
+    });
+    expect(decodePrefill(v1)).toEqual(sample);
   });
 
   it('returns undefined rather than an oversized value', () => {

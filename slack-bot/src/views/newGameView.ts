@@ -10,6 +10,10 @@
  * Every block also accepts an optional prefill so the "New game, same
  * settings" button on the host summary DM can reopen the modal with the
  * previous game's answers already filled in.
+ *
+ * Below the human slots sits an optional "Claude plays" seat: Claude is not a
+ * Slack user, so it gets a checkbox + color rather than a users_select. It
+ * counts toward MAX_PLAYERS.
  */
 
 import type {KnownBlock, ModalView, PlainTextOption} from '@slack/types';
@@ -19,11 +23,16 @@ import {
   EXPANSIONS,
   EXPANSION_LABELS,
   PLAYER_COLORS,
+  type PlayerColor,
 } from '../tm/types.js';
 import type {Prefill} from './prefill.js';
 
 export const VIEW_CALLBACK_ID = 'tm_newgame_modal';
 export const MAX_PLAYER_SLOTS = 6;
+/** Total seats the game allows, humans plus Claude. */
+export const MAX_PLAYERS = 6;
+/** Checkbox value for "Add Claude as a player", and the first-player select value for Claude. */
+export const CLAUDE_OPTION_VALUE = 'claude';
 
 /** Web form's `min`/`max` on the starting-corporations input. */
 export const MIN_STARTING_CORPORATIONS = 1;
@@ -35,6 +44,8 @@ export const DEFAULT_STARTING_PRELUDES = 4;
 export const BlockIds = {
   slotUser: (i: number) => `slot_${i}_user`,
   slotColor: (i: number) => `slot_${i}_color`,
+  claude: 'claude_player',
+  claudeColor: 'claude_color',
   board: 'board',
   expansions: 'expansions',
   toggles: 'toggles',
@@ -50,6 +61,8 @@ export const BlockIds = {
 export const ActionIds = {
   slotUser: (i: number) => `slot_${i}_user_action`,
   slotColor: (i: number) => `slot_${i}_color_action`,
+  claude: 'claude_player_action',
+  claudeColor: 'claude_color_action',
   board: 'board_action',
   expansions: 'expansions_action',
   toggles: 'toggles_action',
@@ -102,7 +115,7 @@ export function buildNewGameView(privateMetadata: PrivateMetadata, prefill?: Pre
     text: {
       type: 'mrkdwn',
       text: prefill === undefined
-        ? '*Set up a Terraforming Mars game.* Pick 1-6 Slack teammates below. Each player will receive a DM with their personal game link.'
+        ? '*Set up a Terraforming Mars game.* Pick 1-6 Slack teammates below (or up to 5 plus Claude). Each player will receive a DM with their personal game link.'
         : '*Same players and options as your last game.* Change anything you like, then hit Create game.',
     },
   });
@@ -112,6 +125,8 @@ export function buildNewGameView(privateMetadata: PrivateMetadata, prefill?: Pre
     blocks.push(slotUserBlock(i, prefill));
     blocks.push(slotColorBlock(i, prefill));
   }
+  blocks.push(claudeBlock(prefill));
+  blocks.push(claudeColorBlock(prefill));
 
   blocks.push({type: 'divider'});
   blocks.push(boardBlock(prefill));
@@ -152,10 +167,27 @@ function slotUserBlock(i: number, prefill?: Prefill): KnownBlock {
   };
 }
 
-function slotColorBlock(i: number, prefill?: Prefill): KnownBlock {
-  const defaultColor =
-    prefill?.slots.find((s) => s.index === i)?.color ??
+/** The color a human slot's select starts on: the prefilled color, else the slot default. */
+function initialSlotColor(i: number, prefill?: Prefill): PlayerColor {
+  return prefill?.slots.find((s) => s.index === i)?.color ??
     PLAYER_COLORS[(i - 1) % PLAYER_COLORS.length]!;
+}
+
+/**
+ * Default color for Claude: the first color not preselected in any human
+ * slot's color select (so orange on a fresh modal). Any clash the host
+ * creates afterwards is resolved by dedupeColors at submit time.
+ */
+export function defaultClaudeColor(prefill?: Prefill): PlayerColor {
+  const used = new Set<PlayerColor>();
+  for (let i = 1; i <= MAX_PLAYER_SLOTS; i++) {
+    used.add(initialSlotColor(i, prefill));
+  }
+  return PLAYER_COLORS.find((c) => !used.has(c)) ?? PLAYER_COLORS[PLAYER_COLORS.length - 1]!;
+}
+
+function slotColorBlock(i: number, prefill?: Prefill): KnownBlock {
+  const defaultColor = initialSlotColor(i, prefill);
   return {
     type: 'input',
     block_id: BlockIds.slotColor(i),
@@ -165,6 +197,45 @@ function slotColorBlock(i: number, prefill?: Prefill): KnownBlock {
       type: 'static_select',
       action_id: ActionIds.slotColor(i),
       initial_option: colorOption(defaultColor),
+      options: PLAYER_COLORS.map(colorOption),
+    },
+  };
+}
+
+function claudeBlock(prefill?: Prefill): KnownBlock {
+  const option = {
+    text: {type: 'plain_text' as const, text: 'Add Claude as a player'},
+    description: {
+      type: 'plain_text' as const,
+      text: 'An AI player run from Claude Code; its link goes to its operator.',
+    },
+    value: CLAUDE_OPTION_VALUE,
+  };
+  const checked = prefill?.claudeColor !== undefined;
+  return {
+    type: 'input',
+    block_id: BlockIds.claude,
+    optional: true,
+    label: {type: 'plain_text', text: 'Claude plays'},
+    element: {
+      type: 'checkboxes',
+      action_id: ActionIds.claude,
+      ...(checked ? {initial_options: [option]} : {}),
+      options: [option],
+    },
+  };
+}
+
+function claudeColorBlock(prefill?: Prefill): KnownBlock {
+  return {
+    type: 'input',
+    block_id: BlockIds.claudeColor,
+    optional: true,
+    label: {type: 'plain_text', text: 'Color (Claude, ignored if unchecked)'},
+    element: {
+      type: 'static_select',
+      action_id: ActionIds.claudeColor,
+      initial_option: colorOption(prefill?.claudeColor ?? defaultClaudeColor(prefill)),
       options: PLAYER_COLORS.map(colorOption),
     },
   };
@@ -264,10 +335,13 @@ function randomFirstPlayerBlock(prefill?: Prefill): KnownBlock {
 }
 
 function firstPlayerSlotBlock(prefill?: Prefill): KnownBlock {
-  const options = Array.from({length: MAX_PLAYER_SLOTS}, (_, i) => ({
-    text: {type: 'plain_text' as const, text: `Player ${i + 1}`},
-    value: String(i + 1),
-  }));
+  const options = [
+    ...Array.from({length: MAX_PLAYER_SLOTS}, (_, i) => ({
+      text: {type: 'plain_text' as const, text: `Player ${i + 1}`},
+      value: String(i + 1),
+    })),
+    {text: {type: 'plain_text' as const, text: 'Claude'}, value: CLAUDE_OPTION_VALUE},
+  ];
   const initial = options.find((o) => o.value === String(prefill?.firstPlayerSlot));
   return {
     type: 'input',

@@ -6,6 +6,12 @@
  * in the Block Kit button's `value` on the host summary DM. Slack caps that
  * field at 2000 characters, hence the one-letter keys and the
  * `MAX_PREFILL_VALUE_LENGTH` guard in `encodePrefill`.
+ *
+ * Versions:
+ *   1 - original shape.
+ *   2 - adds the Claude seat (`k`, its color) and lets `f` be `'c'` for
+ *       "Claude goes first". v1 payloads (from buttons posted by an older
+ *       deploy) still decode; they simply have no Claude seat.
  */
 
 import {
@@ -18,10 +24,18 @@ import {
 } from '../tm/types.js';
 import {MAX_PLAYER_SLOTS, TOGGLES, type ToggleKey} from './newGameView.js';
 
+/** First-player choice: a human slot index, Claude, or none. */
+export type FirstPlayerChoice = number | 'claude' | undefined;
+
 /** Slack's hard limit on a button element's `value`. */
 export const MAX_PREFILL_VALUE_LENGTH = 2000;
 
-export const PREFILL_VERSION = 1;
+export const PREFILL_VERSION = 2;
+/** Versions decodePrefill accepts. Older buttons stay usable after a deploy. */
+const SUPPORTED_PREFILL_VERSIONS: ReadonlyArray<number> = [1, 2];
+
+/** Wire value of `f` meaning "Claude goes first". */
+const CLAUDE_FIRST_WIRE = 'c';
 
 export interface PrefillSlot {
   index: number;
@@ -33,7 +47,9 @@ export interface PrefillSlot {
 export interface Prefill {
   slots: Array<PrefillSlot>;
   randomFirstPlayer: boolean;
-  firstPlayerSlot: number | undefined;
+  firstPlayerSlot: FirstPlayerChoice;
+  /** Claude's color when "Claude plays" was checked; undefined when it wasn't. */
+  claudeColor: PlayerColor | undefined;
   board: BoardNameType;
   /** Only the enabled expansions, so the payload stays short. */
   expansions: Array<Expansion>;
@@ -50,7 +66,9 @@ interface WirePrefill {
   v: number;
   s: Array<[number, string, string]>;
   r: 0 | 1;
-  f?: number;
+  f?: number | typeof CLAUDE_FIRST_WIRE;
+  /** Claude's color; present only when Claude plays (v2+). */
+  k?: string;
   b: string;
   e: Array<string>;
   t: Array<string>;
@@ -78,7 +96,10 @@ export function encodePrefill(prefill: Prefill): string | undefined {
     em: prefill.escapeVelocityThresholdMinutes,
   };
   if (prefill.firstPlayerSlot !== undefined) {
-    wire.f = prefill.firstPlayerSlot;
+    wire.f = prefill.firstPlayerSlot === 'claude' ? CLAUDE_FIRST_WIRE : prefill.firstPlayerSlot;
+  }
+  if (prefill.claudeColor !== undefined) {
+    wire.k = prefill.claudeColor;
   }
   const encoded = JSON.stringify(wire);
   return encoded.length > MAX_PREFILL_VALUE_LENGTH ? undefined : encoded;
@@ -97,7 +118,9 @@ export function decodePrefill(raw: string | undefined): Prefill | undefined {
   } catch {
     return undefined;
   }
-  if (wire.v !== PREFILL_VERSION || !Array.isArray(wire.s)) return undefined;
+  if (typeof wire.v !== 'number' || !SUPPORTED_PREFILL_VERSIONS.includes(wire.v) || !Array.isArray(wire.s)) {
+    return undefined;
+  }
 
   const slots: Array<PrefillSlot> = [];
   for (const entry of wire.s) {
@@ -110,10 +133,19 @@ export function decodePrefill(raw: string | undefined): Prefill | undefined {
   }
   if (slots.length === 0) return undefined;
 
+  const claudeColor = isPlayerColor(wire.k) ? wire.k : undefined;
+  let firstPlayerSlot: FirstPlayerChoice;
+  if (typeof wire.f === 'number') {
+    firstPlayerSlot = wire.f;
+  } else if (wire.f === CLAUDE_FIRST_WIRE && claudeColor !== undefined) {
+    firstPlayerSlot = 'claude';
+  }
+
   return {
     slots,
     randomFirstPlayer: wire.r === 1,
-    firstPlayerSlot: typeof wire.f === 'number' ? wire.f : undefined,
+    firstPlayerSlot,
+    claudeColor,
     board: isBoard(wire.b) ? wire.b : 'random all',
     expansions: keepKnown(wire.e, EXPANSIONS),
     toggles: keepKnown(wire.t, TOGGLES.map((t) => t.value)),

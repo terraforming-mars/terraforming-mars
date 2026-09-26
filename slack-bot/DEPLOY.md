@@ -48,6 +48,8 @@ default checkboxes on for **Production**, **Preview**, and **Development**.
 | `SLACK_BOT_TOKEN` | `xoxb-...` | [SLACK_SETUP.md](./SLACK_SETUP.md) Part A step 8 |
 | `SLACK_SIGNING_SECRET` | long hex string | [SLACK_SETUP.md](./SLACK_SETUP.md) Part A step 7 |
 | `TM_BASE_URL` | `https://terraforming-mars.herokuapp.com` | Optional. Defaults to the community-run TM instance if unset. Override only if you self-host TM. |
+| `CLAUDE_OPERATOR_SLACK_USER_ID` | `U0123ABCD` | Optional. Slack user id of the person who runs Claude Code; receives Claude's player link when a game includes Claude. Defaults to the host. Find it in Slack via the person's profile -> **...** -> **Copy member ID**. |
+| `CLAUDE_PLAYER_NAME` | `Claude` | Optional. Player name Claude is seated under. Defaults to `Claude`. |
 
 ## Step 3 - Deploy
 
@@ -79,7 +81,7 @@ Slack must reach your bot over HTTPS, so local development needs a public
 tunnel:
 
 1. `cd slack-bot && npm install`
-2. Copy `.env.sample` to `.env.local` and fill in the same three env vars.
+2. Copy `.env.sample` to `.env.local` and fill in the same env vars.
 3. Run the dev server:
    ```bash
    npx vercel dev

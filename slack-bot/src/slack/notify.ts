@@ -1,6 +1,8 @@
 /**
  * Direct-message helpers. After a game is created, we DM:
  *   - each player their personal /player?id=... link
+ *   - if Claude plays, the Claude operator (the human who runs Claude Code)
+ *     Claude's link, a paste-ready Claude Code command and a marker line
  *   - the host a summary block listing every player + URL plus the host
  *     dashboard (/game?id=...) and spectator (/spectator?id=...) links
  *
@@ -13,19 +15,33 @@ import type {WebClient} from '@slack/web-api';
 import type {KnownBlock} from '@slack/types';
 import type {PlayerColor, SimplePlayerModel} from '../tm/types.js';
 import {REMATCH_ACTION_ID} from '../handlers/onRematchAction.js';
+import {claudeCodeCommand, claudeSeatMarkerLine} from '../claude.js';
 
 export interface PlayerDmResult {
   slackUserId: string;
   ok: boolean;
   error?: string;
+  /**
+   * Color of the seat this DM was for. Needed because one Slack user can get
+   * two DMs (their own link plus Claude's, when they run Claude Code).
+   */
+  color?: PlayerColor;
 }
 
 export interface HostSummaryPlayer {
+  /** For Claude's row, the Claude operator who was sent the link. */
   slackUserId: string;
   name: string;
   color: PlayerColor;
   url: string;
   dmFailed: boolean;
+  isClaude?: boolean;
+}
+
+/** Claude's seat, for matching the returned game players back up. */
+export interface ClaudeSeat {
+  color: PlayerColor;
+  operatorUserId: string;
 }
 
 export interface HostSummary {
@@ -87,6 +103,66 @@ export async function dmPlayerLink(
     const message = err instanceof Error ? err.message : String(err);
     console.error('[slack-bot] dmPlayerLink failed', {slackUserId, error: message});
     return {slackUserId, ok: false, error: message};
+  }
+}
+
+/**
+ * DM the Claude operator Claude's seat. The message carries, in both the
+ * `text` fallback and the blocks, the marker line `TM-CLAUDE-SEAT <url>` so
+ * an automated watcher can pick the seat up, plus the Claude Code command.
+ */
+export async function dmClaudeSeat(
+  client: WebClient,
+  operatorUserId: string,
+  claudeName: string,
+  gameName: string,
+  url: string,
+  hostUserId: string,
+  color?: PlayerColor,
+): Promise<PlayerDmResult> {
+  const marker = claudeSeatMarkerLine(url);
+  const command = claudeCodeCommand(url);
+  const requestedBy = hostUserId !== operatorUserId ? ` <@${hostUserId}> added Claude to this game.` : '';
+  try {
+    const dm = await client.conversations.open({users: operatorUserId});
+    const channel = dm.channel?.id;
+    if (channel === undefined) {
+      return {slackUserId: operatorUserId, ok: false, error: 'No DM channel id returned', color};
+    }
+    await client.chat.postMessage({
+      channel,
+      text: [
+        marker,
+        `${claudeName}'s seat in ${gameName}: ${url}`,
+        `Paste into Claude Code: ${command}`,
+      ].join('\n'),
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `:robot_face: *Terraforming Mars - ${escapeMrkdwn(gameName)}*\n*${escapeMrkdwn(claudeName)}* has a seat in this game, and you're its Claude Code operator.${requestedBy} This link IS Claude's seat - only hand it to Claude.\n*Player URL:* ${url}`,
+          },
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `Paste into Claude Code:\n\`\`\`${command}\`\`\``,
+          },
+        },
+        {
+          type: 'context',
+          // plain_text so Slack leaves the line exactly as written.
+          elements: [{type: 'plain_text', text: marker, emoji: false}],
+        },
+      ],
+    });
+    return {slackUserId: operatorUserId, ok: true, color};
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[slack-bot] dmClaudeSeat failed', {operatorUserId, error: message});
+    return {slackUserId: operatorUserId, ok: false, error: message, color};
   }
 }
 
@@ -198,6 +274,18 @@ export async function lookupDisplayName(
 
 function playerSummaryBlock(player: HostSummaryPlayer): KnownBlock {
   const dot = colorEmoji(player.color);
+  if (player.isClaude === true) {
+    const status = player.dmFailed ?
+      `:warning: _DM to <@${player.slackUserId}> failed - give Claude this link manually: ${player.url}_` :
+      `link sent to <@${player.slackUserId}> (<${player.url}|player link>)`;
+    return {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `${dot} :robot_face: *${escapeMrkdwn(player.name)}* — ${status}`,
+      },
+    };
+  }
   const flag = player.dmFailed ? ' :warning: _DM failed - share this link manually_' : '';
   return {
     type: 'section',
@@ -236,8 +324,13 @@ export function buildHostSummaryFromGameModel(
   hostDashboardUrl: string,
   spectator: string | undefined,
   rematchValue?: string | undefined,
+  claude?: ClaudeSeat | undefined,
 ): HostSummary {
-  const failedSet = new Set(dmResults.filter((r) => !r.ok).map((r) => r.slackUserId));
+  const failed = dmResults.filter((r) => !r.ok);
+  // Prefer the per-seat color; fall back to the Slack id for callers that
+  // don't set it.
+  const dmFailed = (color: PlayerColor, slackUserId: string) =>
+    failed.some((r) => r.color !== undefined ? r.color === color : r.slackUserId === slackUserId);
   return {
     gameName,
     hostDashboardUrl,
@@ -246,13 +339,15 @@ export function buildHostSummaryFromGameModel(
     // Match each returned player back to its Slack user by color, since the
     // server returns players in generation order rather than submission order.
     players: players.map((p) => {
-      const slackUserId = slackUserIdByColor[p.color] ?? '?';
+      const isClaude = claude !== undefined && p.color === claude.color;
+      const slackUserId = isClaude ? claude.operatorUserId : slackUserIdByColor[p.color] ?? '?';
       return {
         slackUserId,
         name: p.name,
         color: p.color,
         url: `${baseUrl}/player?id=${encodeURIComponent(p.id)}`,
-        dmFailed: failedSet.has(slackUserId),
+        dmFailed: dmFailed(p.color, slackUserId),
+        ...(isClaude ? {isClaude: true} : {}),
       };
     }),
   };

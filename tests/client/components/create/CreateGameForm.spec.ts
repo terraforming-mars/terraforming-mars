@@ -254,4 +254,13 @@ describe('CreateGameForm', () => {
       penaltyVPPerPeriod: 1,
     });
   });
+
+  it('rejects a negative escape velocity field', async () => {
+    const {config, alerts} = await serializeTwoPlayerGameSettings((model) => {
+      model.escapeVelocityMode = true;
+      model.escapeVelocityThreshold = -5;
+    });
+    expect(config).is.undefined;
+    expect(alerts).deep.eq(['Escape Velocity values cannot be negative']);
+  });
 });

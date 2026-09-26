@@ -605,7 +605,7 @@ import {CreateGameSettingsStorage} from './CreateGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
-import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
+import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 
 const REVISED_COUNT_ALGORITHM = false;
 const createGameSettingsStorage = new CreateGameSettingsStorage();
@@ -1076,6 +1076,17 @@ export default defineComponent({
       const startingPreludes = this.startingPreludes;
       let clonedGamedId: undefined | GameId = undefined;
 
+      const escapeVelocity = {
+        thresholdMinutes: this.escapeVelocityThreshold,
+        bonusSectionsPerAction: this.escapeVelocityBonusSeconds,
+        penaltyPeriodMinutes: this.escapeVelocityPeriod,
+        penaltyVPPerPeriod: this.escapeVelocityPenalty,
+      };
+      if (this.escapeVelocityMode && hasNegativeEscapeVelocityOption(escapeVelocity)) {
+        window.alert(translateText('Escape Velocity values cannot be negative'));
+        return undefined;
+      }
+
       // Check custom colony count
       if (customColonies.length > 0) {
         const playersCount = players.length;
@@ -1295,13 +1306,7 @@ export default defineComponent({
         moonStandardProjectVariant: this.moonStandardProjectVariant,
         moonStandardProjectVariant1: this.moonStandardProjectVariant1,
         altVenusBoard: this.altVenusBoard,
-        escapeVelocity: this.escapeVelocityMode ?
-          sanitizeEscapeVelocityOptions({
-            thresholdMinutes: this.escapeVelocityThreshold,
-            bonusSectionsPerAction: this.escapeVelocityBonusSeconds,
-            penaltyPeriodMinutes: this.escapeVelocityPeriod,
-            penaltyVPPerPeriod: this.escapeVelocityPenalty,
-          }) : undefined,
+        escapeVelocity: this.escapeVelocityMode ? sanitizeEscapeVelocityOptions(escapeVelocity) : undefined,
         twoCorpsVariant,
         startingCeos,
         startingPreludes,

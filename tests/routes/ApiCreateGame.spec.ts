@@ -221,7 +221,7 @@ describe('ApiCreateGame', () => {
   it('replaces invalid escape velocity options with defaults', async () => {
     expect(await createdEscapeVelocity({
       thresholdMinutes: '35',
-      bonusSectionsPerAction: -1,
+      bonusSectionsPerAction: 'x',
       penaltyPeriodMinutes: '',
       penaltyVPPerPeriod: 1,
     })).deep.eq({
@@ -230,6 +230,20 @@ describe('ApiCreateGame', () => {
       penaltyPeriodMinutes: 2,
       penaltyVPPerPeriod: 1,
     });
+  });
+
+  it('rejects negative escape velocity options', async () => {
+    await postConfig({
+      ...newGameConfigForTest(),
+      escapeVelocity: {
+        thresholdMinutes: -5,
+        bonusSectionsPerAction: 2,
+        penaltyPeriodMinutes: 2,
+        penaltyVPPerPeriod: 1,
+      },
+    });
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('Escape Velocity values cannot be negative');
   });
 
   // Issues one create-game POST against `handler`, using fresh request/response objects,

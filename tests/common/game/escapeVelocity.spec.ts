@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {sanitizeEscapeVelocityOptions} from '../../../src/common/game/escapeVelocity';
+import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../../src/common/game/escapeVelocity';
 import {
   DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
   DEFAULT_ESCAPE_VELOCITY_PENALTY,
@@ -69,5 +69,22 @@ describe('escapeVelocity', () => {
       penaltyPeriodMinutes: 0,
       penaltyVPPerPeriod: 1,
     }).penaltyPeriodMinutes).eq(DEFAULT_ESCAPE_VELOCITY_PERIOD);
+  });
+
+  it('finds negative values', () => {
+    const valid = {
+      thresholdMinutes: 35,
+      bonusSectionsPerAction: 0,
+      penaltyPeriodMinutes: 3,
+      penaltyVPPerPeriod: 4,
+    };
+    expect(hasNegativeEscapeVelocityOption(valid)).is.false;
+    expect(hasNegativeEscapeVelocityOption({})).is.false;
+    expect(hasNegativeEscapeVelocityOption({thresholdMinutes: '', penaltyVPPerPeriod: 'x'})).is.false;
+    expect(hasNegativeEscapeVelocityOption({...valid, thresholdMinutes: -1})).is.true;
+    expect(hasNegativeEscapeVelocityOption({...valid, bonusSectionsPerAction: -1})).is.true;
+    expect(hasNegativeEscapeVelocityOption({...valid, penaltyPeriodMinutes: -1})).is.true;
+    expect(hasNegativeEscapeVelocityOption({...valid, penaltyVPPerPeriod: -1})).is.true;
+    expect(hasNegativeEscapeVelocityOption({...valid, thresholdMinutes: '-5'})).is.true;
   });
 });

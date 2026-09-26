@@ -6,9 +6,21 @@ import {
   DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
 } from '../constants';
 
+function toNumber(value: unknown): number {
+  return typeof value === 'number' ? value : typeof value === 'string' ? Number.parseFloat(value) : NaN;
+}
+
 function nonNegativeOrDefault(value: unknown, defaultValue: number): number {
-  const n = typeof value === 'number' ? value : typeof value === 'string' ? Number.parseFloat(value) : NaN;
+  const n = toNumber(value);
   return Number.isFinite(n) && n >= 0 ? n : defaultValue;
+}
+
+/**
+ * Returns true when any of `options` is a negative number, or a string that parses to one.
+ */
+export function hasNegativeEscapeVelocityOption(options: {[K in keyof EscapeVelocityOptions]?: unknown}): boolean {
+  const values = [options.thresholdMinutes, options.bonusSectionsPerAction, options.penaltyPeriodMinutes, options.penaltyVPPerPeriod];
+  return values.some((value) => toNumber(value) < 0);
 }
 
 /**

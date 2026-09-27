@@ -486,22 +486,22 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="create-game-action-row">
-                            <div class="create-game-action">
-                                <AppButton title="Create game" size="big" @click="createGame"/>
-                                <AppButton title="Reset" size="big" @click="resetSettings"/>
+                <div class="create-game-action-row">
+                    <div class="create-game-action">
+                        <AppButton title="Create game" size="big" @click="createGame"/>
+                        <AppButton title="Reset" size="big" @click="resetSettings"/>
 
-                                <label>
-                                    <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                    <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()">
-                                </label>
+                        <label>
+                            <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
+                            <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()">
+                        </label>
 
-                                <label>
-                                    <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
-                                </label>
-                            </div>
-                        </div>
+                        <label>
+                            <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                        </label>
                     </div>
                 </div>
             </div>

@@ -305,6 +305,7 @@
                               <label for="customPreludes-checkbox">
                                   <span v-i18n>Custom Preludes list</span>
                                   <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
+                                  <span v-if="tooFewCustomPreludes || preludeDrawingCards.length > 0" class="create-game-custom-preludes-warning" @click.prevent="showCustomPreludesWarning">&nbsp;&#9888;&#xFE0E;</span>
                               </label>
                             </template>
 
@@ -599,6 +600,7 @@ import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
 import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
+import {preludeDrawingCards} from './preludeDrawingCards';
 import {CreateGameSettingsStorage} from './CreateGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
@@ -710,6 +712,12 @@ export default defineComponent({
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {
       return {...RULEBOOK_URLS, ...WIKI_URLS};
     },
+    tooFewCustomPreludes(): boolean {
+      return this.customPreludes.length > 0 && this.customPreludes.length < this.playersCount * this.startingPreludes;
+    },
+    preludeDrawingCards(): Array<CardName> {
+      return preludeDrawingCards(this);
+    },
     typedRefs(): Refs {
       return this.$refs as Refs;
     },
@@ -787,6 +795,17 @@ export default defineComponent({
         }
       });
       return processor;
+    },
+    showCustomPreludesWarning() {
+      const root = vueRoot(this);
+      if (this.tooFewCustomPreludes) {
+        root.showAlert('Custom Preludes list', translateTextWithParams('Must select at least ${0} Preludes', [String(this.playersCount * this.startingPreludes)]));
+        return;
+      }
+      const cards = this.preludeDrawingCards.map((card) => '<br>&bull; ' + translateText(card)).join('');
+      const message = translateText('These cards draw extra preludes, so your custom Preludes list may run out:') + cards +
+        `<br><br><a href="${WIKI_URLS.customPreludes}" target="_blank">${translateText('Learn more')}</a>`;
+      root.showAlert('Custom Preludes list', message);
     },
     showSettingsLoadResult(title: string, processor: JSONProcessor) {
       const root = vueRoot(this);

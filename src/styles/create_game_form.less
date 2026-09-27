@@ -297,25 +297,31 @@
   margin-top: 15px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .create-game {
+    // Fit the page to the screen: the form panel takes the leftover height and scrolls
+    // on its own, so the heading and the links below it are always visible. Narrower
+    // screens stack the options, which leaves too little room for this, so the whole
+    // page scrolls instead.
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100dvh;
+
+    > * {
+      flex: none;
+    }
+
+    > .create-game-form {
+      flex: 1 1 auto;
+      min-height: 0;
+      // Hidden tooltips can stick out past the right edge; don't scroll sideways for them.
+      overflow: hidden auto;
+    }
+  }
+}
+
 .create-game {
-  // Fit the page to the screen: the form panel takes the leftover height and scrolls
-  // on its own, so the heading and the links below it are always visible.
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  height: 100dvh;
-
-  > * {
-    flex: none;
-  }
-
-  > .create-game-form {
-    flex: 1 1 auto;
-    min-height: 0;
-    // Hidden tooltips can stick out past the right edge; don't scroll sideways for them.
-    overflow: hidden auto;
-  }
-
   > h1 {
     margin: 0px;
   }

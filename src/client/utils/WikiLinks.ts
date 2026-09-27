@@ -41,4 +41,5 @@ export const WIKI_URLS = {
   fastMode: `${WIKI}/Variants#fast-mode`,
   beginnerCorporation: `${WIKI}/Variants#beginner-corporation`,
   trBoost: `${WIKI}/Variants#tr-boost`,
+  customPreludes: `${WIKI}/FAQ#custom-prelude-lists`,
 } as const;

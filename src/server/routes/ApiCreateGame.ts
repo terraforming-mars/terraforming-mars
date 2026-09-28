@@ -97,7 +97,7 @@ export class ApiCreateGame extends Handler {
   public validateCustomLists(gameReq: NewGameConfig): void {
     const playerCount = gameReq.players.length;
 
-    function validate(list: Array<unknown> | undefined, perPlayerCount: number, type: string): void {
+    function validate(list: ReadonlyArray<unknown> | undefined, perPlayerCount: number, type: string): void {
       if (list === undefined) {
         return;
       }

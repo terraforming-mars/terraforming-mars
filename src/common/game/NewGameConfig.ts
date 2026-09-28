@@ -32,7 +32,7 @@ export type EscapeVelocityOptions = {
 /**
  * Like GameOptions, but the data structure sent from the new game page.
  */
-export interface NewGameConfig {
+export type NewGameConfig = {
   players: Array<NewPlayerModel>;
   expansions: Record<Expansion, boolean>,
   board: BoardNameType;

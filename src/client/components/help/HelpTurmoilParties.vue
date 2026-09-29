@@ -1,7 +1,7 @@
 <template>
     <div class="help-turmoil-parties-container">
       <h2 v-i18n>Political Parties</h2>
-      <p v-i18n>The ruling party's bonus applies once, scaled by how well each player matches it. Its policy stays active until a new party takes power.</p>
+      <p v-i18n>A party bonus is granted once, during the Turmoil phase. Its policy applies ONLY DURING THE ACTION PHASE of the following generation.</p>
 
       <div class="help-parties-grid">
         <div class="help-party-card" v-for="party in parties" :key="party.name">

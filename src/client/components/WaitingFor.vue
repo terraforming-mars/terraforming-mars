@@ -217,8 +217,9 @@ export default defineComponent({
      */
     watchOtherPlayers() {
       const playerView = this.playerView;
-      window.clearInterval(otherPlayersTimer);
-      otherPlayersTimer = window.setInterval(async () => {
+      window.clearTimeout(otherPlayersTimer);
+      // Schedule the next poll only after this one finishes, so responses can't arrive out of order.
+      const timer = window.setTimeout(async () => {
         try {
           const response = await fetch(paths.API_PLAYER + window.location.search);
           if (response.ok) {
@@ -228,7 +229,12 @@ export default defineComponent({
         } catch (e) {
           console.warn('Unable to update other players', e);
         }
+        // Stop if the component unmounted or another poll started while this one was in flight.
+        if (otherPlayersTimer === timer) {
+          this.watchOtherPlayers();
+        }
       }, OTHER_PLAYERS_INTERVAL);
+      otherPlayersTimer = timer;
     },
     notify() {
       if (getPreferences().enable_sounds) {
@@ -283,7 +289,7 @@ export default defineComponent({
   beforeUnmount() {
     window.clearTimeout(ui_update_timeout_id);
     ui_update_timeout_id = undefined;
-    window.clearInterval(otherPlayersTimer);
+    window.clearTimeout(otherPlayersTimer);
     otherPlayersTimer = undefined;
     window.clearInterval(documentTitleTimer);
     documentTitleTimer = undefined;

@@ -109,6 +109,23 @@ describe('WaitingFor', () => {
     expect(wrapper.find('.stub-pif').exists()).to.be.true;
   });
 
+  it('waits for a slow poll before polling again', async () => {
+    vi.useFakeTimers();
+    let respond = () => {};
+    const fetchStub = vi.fn(() => new Promise<Response>((resolve) => {
+      respond = () => resolve({ok: true, json: async () => ({players: []})} as unknown as Response);
+    }));
+    vi.stubGlobal('fetch', fetchStub);
+    mountDrafting(draftingView());
+
+    await vi.advanceTimersByTimeAsync(10000);
+    expect(fetchStub.mock.calls).has.length(1);
+
+    respond();
+    await vi.advanceTimersByTimeAsync(3500);
+    expect(fetchStub.mock.calls).has.length(2);
+  });
+
   it('does not watch other players during the action phase', async () => {
     vi.useFakeTimers();
     const fetchStub = stubServer([]);

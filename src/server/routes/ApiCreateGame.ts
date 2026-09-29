@@ -125,7 +125,7 @@ export class ApiCreateGame extends Handler {
       const gameReq = JSON.parse(body) as NewGameConfig;
       this.validateCustomLists(gameReq);
       if (gameReq.escapeVelocity !== undefined && hasNegativeEscapeVelocityOption(gameReq.escapeVelocity)) {
-        throw RouteError.badRequest('Escape Velocity values cannot be negative');
+        throw RouteError.badRequest('Escape Velocity values cannot be negative.');
       }
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);

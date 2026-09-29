@@ -373,6 +373,10 @@
     background: #000000;
     pointer-events: auto;
   }
+
+  .create-game-action-gap {
+    margin-left: 12px;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -444,6 +448,24 @@
 .create-game-custom-preludes-warning {
   color: red;
   cursor: pointer;
+}
+
+.create-game-validation-warning {
+  cursor: pointer;
+}
+
+// The text-style warning sign renders smaller than the emoji one.
+.create-game-validation-blocker {
+  font-size: 1.5em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+// Size the popup to its content rather than PopupPanel's fixed 90vw x 90vh.
+.popup-outer.create-game-validation-popup .popup-inner {
+  width: min(90vw, 800px);
+  height: auto;
+  max-height: 90vh;
 }
 
 @media only screen and (max-width: 767px) {

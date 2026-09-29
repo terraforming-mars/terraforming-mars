@@ -229,11 +229,21 @@ describe('validateNewGameConfig', () => {
       bannedCards: [CardName.WG_PROJECT],
       expansions,
     }).maybeNotEnoughPreludes).deep.eq([]);
+
+    const base = {customPreludes: SIX_CARDS, customCorporationsList: [CardName.ECOLINE]};
+    const noExpansions = newGameConfig().expansions;
+    // WG Project requires Turmoil.
+    expect(validate({...base, expansions: {...noExpansions, prelude2: true}}).maybeNotEnoughPreludes).deep.eq([]);
+    expect(validate({...base, expansions: {...noExpansions, turmoil: true}, includedCards: [CardName.WG_PROJECT]}).maybeNotEnoughPreludes).deep.eq([CardName.WG_PROJECT]);
+    expect(validate({...base, expansions: {...noExpansions, ceo: true}, customCeos: [CardName.KAREN]}).maybeNotEnoughPreludes).deep.eq([CardName.KAREN]);
+    expect(validate({...base, customCeos: [CardName.KAREN]}).maybeNotEnoughPreludes).deep.eq([]);
   });
 
   it('not enough CEOs', () => {
     expect(validate({customCeos: [CardName.KAREN]}).notEnoughCeos).eq(2 * Math.max(3, CEO_CARDS_DEALT_PER_PLAYER));
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 0}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
+    expect(validate({customCeos: [CardName.KAREN], startingCeos: 1}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
+    expect(validate({customCeos: [CardName.KAREN], startingCeos: 4}).notEnoughCeos).eq(2 * 4);
   });
 
   it('messages', () => {

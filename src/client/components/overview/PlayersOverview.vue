@@ -114,6 +114,9 @@ export default defineComponent({
         } else {
           return 'none';
         }
+      } else if (this.playerView.game.phase === Phase.SOLAR) {
+        // During World Government Terraforming, activePlayer is stale. The running timer shows who is deciding.
+        return player.timer.running ? 'active' : 'none';
       }
       if (this.playerView.game.passedPlayers.includes(player.color)) {
         return 'passed';

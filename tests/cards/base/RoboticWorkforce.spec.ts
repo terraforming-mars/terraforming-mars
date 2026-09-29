@@ -426,8 +426,8 @@ describe('RoboticWorkforce', () => {
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)
         while (game.deferredActions.length) {
-          runNextAction(game);
-          const waitingFor = player.popWaitingFor();
+          // Some actions (e.g. PlaceCityTile) return their input rather than setting waitingFor.
+          const waitingFor = runNextAction(game) ?? player.popWaitingFor();
           if (waitingFor instanceof SelectSpace) {
             waitingFor.cb(waitingFor.spaces[0]);
           }
@@ -438,13 +438,15 @@ describe('RoboticWorkforce', () => {
       }
 
       console.log(`        ${card.name}: ${include ? 'eligible' : 'ineligible'}`);
-      // The card must have behavior, or a productionBox method.
+      // Every production that changed must be declared in behavior or a productionBox method.
       if (include) {
-        if (card.productionBox === undefined) {
-          const production = card.behavior?.production;
-          if (production === undefined || (Units.isUnits(production) && Units.isEmpty(production))) {
-            fail(card.name + ' should be registered for Robotic Workforce');
-          }
+        const changed = ALL_RESOURCES.filter((r) => player.production[r] !== 2);
+        const declared = card.productionBox !== undefined ?
+          ALL_RESOURCES.filter((r) => card.productionBox!(player)[r] !== 0) :
+          Object.keys(card.behavior?.production ?? {});
+        const missing = changed.filter((r) => !declared.includes(r));
+        if (missing.length > 0) {
+          fail(card.name + ' should be registered for Robotic Workforce (undeclared: ' + missing.join(', ') + ')');
         }
       }
     };

@@ -36,6 +36,9 @@ import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrb
 import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
 import {cast, toName} from '../../../src/common/utils/utils';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
+import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
+import {NoctisCity} from '../../../src/server/cards/base/NoctisCity';
+import {FrontierTown} from '../../../src/server/cards/prelude2/FrontierTown';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -290,6 +293,51 @@ describe('RoboticWorkforce', () => {
     runAllActions(game);
 
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
+  });
+
+  it('Should work with Immigrant City', () => {
+    const immigrantCity = new ImmigrantCity();
+    player.playedCards.push(immigrantCity);
+    player.production.add(Resource.ENERGY, 2);
+
+    expect(card.canPlay(player)).is.true;
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    selectCard.cb([immigrantCity]);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.megacredits).to.eq(-2);
+  });
+
+  it('Should work with Frontier Town', () => {
+    const frontierTown = new FrontierTown();
+    player.playedCards.push(frontierTown);
+    player.production.add(Resource.ENERGY, 2);
+
+    expect(card.canPlay(player)).is.true;
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    selectCard.cb([frontierTown]);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.megacredits).to.eq(0);
+  });
+
+  it('Should work with Noctis City', () => {
+    const noctisCity = new NoctisCity();
+    player.playedCards.push(noctisCity);
+    player.production.add(Resource.ENERGY, 2);
+
+    expect(card.canPlay(player)).is.true;
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    selectCard.cb([noctisCity]);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.megacredits).to.eq(3);
   });
 
   it('Events with building tags should be unselectable without Odyssey', () => {

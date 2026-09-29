@@ -47,4 +47,30 @@ describe('PlayersOverview', () => {
     expect(vm.getActionLabel(blue)).eq('none');
     expect(vm.getActionLabel(red)).eq('active');
   });
+
+  it('keeps normal labels during a temporary Solar phase', () => {
+    // World Government Advisor and Terra switch to the Solar phase during the active player's turn.
+    const blue = fakePublicPlayerModel({color: 'blue', isActive: true});
+    blue.timer.running = true;
+    const red = fakePublicPlayerModel({color: 'red'});
+    const wrapper = shallowMount(PlayersOverview, {
+      ...globalConfig,
+      parentComponent: {
+        methods: {
+          getVisibilityState: () => true,
+          setVisibilityState: () => {},
+        },
+      } as any,
+      props: {
+        playerView: fakeViewModel({
+          game: fakeGameModel({phase: Phase.SOLAR, passedPlayers: ['red']}),
+          players: [blue, red],
+          thisPlayer: blue,
+        }),
+      },
+    });
+    const vm = wrapper.vm as any;
+    expect(vm.getActionLabel(blue)).eq('active');
+    expect(vm.getActionLabel(red)).eq('passed');
+  });
 });

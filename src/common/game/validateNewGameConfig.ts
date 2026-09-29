@@ -191,8 +191,6 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
 
 /**
  * Cards that draw from the prelude deck and might be in this game.
- *
- * Duplicates src/client/components/create/preludeDrawingCards.ts.
  */
 function preludeDrawingCards(config: NewGameConfig): Array<CardName> {
   const cards: Array<CardName> = [];

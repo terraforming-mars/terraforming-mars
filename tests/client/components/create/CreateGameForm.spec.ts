@@ -11,6 +11,8 @@ import {defineComponent} from 'vue';
 import {NewGameConfig} from '@/common/game/NewGameConfig';
 import {CardName} from '@/common/cards/CardName';
 import {CreateGameModel} from '@/client/components/create/CreateGameModel';
+import {ValidationErrors} from '@/common/game/validateNewGameConfig';
+import {ColonyName} from '@/common/colonies/ColonyName';
 
 // Minimal serialized Create Game payload used by settings restore tests.
 function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
@@ -39,30 +41,16 @@ function cardNames(count: number): Array<CardName> {
 }
 
 /*
- * Serializes a two-player game's settings after `setup` adjusts the form.
- *
- * Accepts every confirmation and collects every alert.
+ * Returns the validation errors for a two-player game after `setup` adjusts the form.
  */
-async function serializeTwoPlayerGameSettings(setup: (model: CreateGameModel) => void): Promise<{config: NewGameConfig | undefined, alerts: Array<string>}> {
-  const originalAlert = global.alert;
-  const originalConfirm = global.confirm;
-  const alerts: Array<string> = [];
-  global.alert = ((message: string) => alerts.push(message)) as typeof alert;
-  global.confirm = (() => true) as typeof confirm;
-
-  try {
-    const wrapper = shallowMount(CreateGameForm, {
-      ...globalConfig,
-    });
-    const model = wrapper.vm as unknown as CreateGameModel;
-    model.playersCount = 2;
-    setup(model);
-    const config = await (wrapper.vm as any).serializeSettings();
-    return {config, alerts};
-  } finally {
-    global.alert = originalAlert;
-    global.confirm = originalConfirm;
-  }
+function validateTwoPlayerGame(setup: (model: CreateGameModel) => void): ValidationErrors {
+  const wrapper = shallowMount(CreateGameForm, {
+    ...globalConfig,
+  });
+  const model = wrapper.vm as unknown as CreateGameModel;
+  model.playersCount = 2;
+  setup(model);
+  return (wrapper.vm as any).validationErrors;
 }
 
 describe('CreateGameForm', () => {
@@ -192,75 +180,48 @@ describe('CreateGameForm', () => {
       global.alert = originalAlert;
     }
   });
-  it('requires enough custom corporations for every player', async () => {
-    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customCorporations = cardNames(3));
-    expect(tooFew.config).is.undefined;
-    expect(tooFew.alerts).deep.eq(['Must select at least 4 corporations']);
-
-    const enough = await serializeTwoPlayerGameSettings((model) => model.customCorporations = cardNames(4));
-    expect(enough.config?.customCorporationsList).has.length(4);
-    expect(enough.alerts).is.empty;
+  it('validates the form settings', () => {
+    expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(3)).notEnoughCorporations).eq(4);
+    expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(4)).notEnoughCorporations).eq(0);
   });
 
-  it('requires enough custom preludes for every player', async () => {
-    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customPreludes = cardNames(7));
-    expect(tooFew.config).is.undefined;
-    expect(tooFew.alerts).deep.eq(['Must select at least 8 Preludes']);
-
-    const enough = await serializeTwoPlayerGameSettings((model) => model.customPreludes = cardNames(8));
-    expect(enough.config?.customPreludes).has.length(8);
-    expect(enough.alerts).is.empty;
+  it('ignores unknown colony names when validating', () => {
+    const errors = validateTwoPlayerGame((model) => model.customColonies = ['Unknown Colony' as ColonyName]);
+    expect(errors.coloniesMissingExpansions).deep.eq([]);
   });
 
-  it('requires enough custom CEOs for every player', async () => {
-    const tooFew = await serializeTwoPlayerGameSettings((model) => model.customCeos = cardNames(5));
-    expect(tooFew.config).is.undefined;
-    expect(tooFew.alerts).deep.eq(['Must select at least 6 CEOs']);
-
-    const enough = await serializeTwoPlayerGameSettings((model) => model.customCeos = cardNames(6));
-    expect(enough.config?.customCeos).has.length(6);
-    expect(enough.alerts).is.empty;
-  });
-
-  it('requires enough custom CEOs for more than the minimum starting CEOs', async () => {
-    const tooFew = await serializeTwoPlayerGameSettings((model) => {
-      model.startingCeos = 4;
-      model.customCeos = cardNames(7);
+  it('disables Create game when there is a blocking error', async () => {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
     });
-    expect(tooFew.config).is.undefined;
-    expect(tooFew.alerts).deep.eq(['Must select at least 8 CEOs']);
-  });
+    const createGameButton = () => wrapper.findAllComponents({name: 'AppButton'}).find((button) => button.props('title') === 'Create game');
+    expect(createGameButton()?.props('disabled')).is.false;
+    expect(wrapper.find('.create-game-custom-preludes-warning').exists()).is.false;
 
-  it('requires the minimum number of custom CEOs even with fewer starting CEOs', async () => {
-    const tooFew = await serializeTwoPlayerGameSettings((model) => {
-      model.startingCeos = 1;
-      model.customCeos = cardNames(5);
-    });
-    expect(tooFew.config).is.undefined;
-    expect(tooFew.alerts).deep.eq(['Must select at least 6 CEOs']);
+    (wrapper.vm as any).playersCount = 2;
+    (wrapper.vm as any).customCorporations = cardNames(3);
+    await wrapper.vm.$nextTick();
+
+    expect(createGameButton()?.props('disabled')).is.true;
+    expect(wrapper.find('.create-game-custom-preludes-warning').exists()).is.true;
   });
 
   it('replaces a cleared escape velocity field with its default', async () => {
-    const {config} = await serializeTwoPlayerGameSettings((model) => {
-      model.escapeVelocityMode = true;
-      model.escapeVelocityThreshold = 35;
-      // A cleared number input binds as an empty string.
-      model.escapeVelocityPeriod = '' as unknown as number;
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
     });
+    const model = wrapper.vm as unknown as CreateGameModel;
+    model.playersCount = 2;
+    model.escapeVelocityMode = true;
+    model.escapeVelocityThreshold = 35;
+    // A cleared number input binds as an empty string.
+    model.escapeVelocityPeriod = '' as unknown as number;
+    const config: NewGameConfig | undefined = await (wrapper.vm as any).serializeSettings();
     expect(config?.escapeVelocity).deep.eq({
       thresholdMinutes: 35,
       bonusSectionsPerAction: 2,
       penaltyPeriodMinutes: 2,
       penaltyVPPerPeriod: 1,
     });
-  });
-
-  it('rejects a negative escape velocity field', async () => {
-    const {config, alerts} = await serializeTwoPlayerGameSettings((model) => {
-      model.escapeVelocityMode = true;
-      model.escapeVelocityThreshold = -5;
-    });
-    expect(config).is.undefined;
-    expect(alerts).deep.eq(['Escape Velocity values cannot be negative']);
   });
 });

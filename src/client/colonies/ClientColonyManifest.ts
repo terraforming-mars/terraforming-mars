@@ -12,6 +12,7 @@ export function allColonyNames() {
   return colonies.keys();
 }
 
+// TODO(kberg): Rename to getColonyOrThrow
 export function getColony(name: ColonyName): ColonyMetadata {
   const metadata = colonies.get(name);
   if (metadata === undefined) {

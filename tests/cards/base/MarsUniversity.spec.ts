@@ -14,6 +14,13 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {cast} from '../../../src/common/utils/utils';
+import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {ResearchColony} from '../../../src/server/cards/colonies/ResearchColony';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {Callisto} from '../../../src/server/colonies/Callisto';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Miranda} from '../../../src/server/colonies/Miranda';
 
 describe('MarsUniversity', () => {
   let card: MarsUniversity;
@@ -94,6 +101,40 @@ describe('MarsUniversity', () => {
     expect(roboticWorkforceAction.title).to.match(/Select builder card/);
 
     expect(game.deferredActions.pop()).is.undefined;
+  });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5488
+  it('Tile placement comes before Mars U', () => {
+    player.cardsInHand = [new EarthOffice()];
+    player.playedCards.push(card);
+
+    player.playCard(new NaturalPreserve());
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    expect(orOptions.options[0].title).to.match(/Select a card to discard/);
+  });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5488
+  it('Colony placement comes before Mars U', () => {
+    [game, player] = testGame(2, {coloniesExtension: true});
+    game.colonies = [new Callisto(), new Ceres(), new Miranda()];
+    player.cardsInHand = [new EarthOffice()];
+    player.playedCards.push(card);
+
+    player.playCard(new ResearchColony());
+    runAllActions(game);
+
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
+    selectColony.cb(selectColony.colonies[0]);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    expect(orOptions.options[0].title).to.match(/Select a card to discard/);
   });
 
   it('Compatible with Leavitt #6349', () => {

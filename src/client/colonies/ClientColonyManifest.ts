@@ -12,8 +12,11 @@ export function allColonyNames() {
   return colonies.keys();
 }
 
-// TODO(kberg): Rename to getColonyOrThrow
-export function getColony(name: ColonyName): ColonyMetadata {
+export function getColony(name: ColonyName): ColonyMetadata | undefined {
+  return colonies.get(name);
+}
+
+export function getColonyOrThrow(name: ColonyName): ColonyMetadata {
   const metadata = colonies.get(name);
   if (metadata === undefined) {
     throw new Error(`Unknown colony ${name}`);

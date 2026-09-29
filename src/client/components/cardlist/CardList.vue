@@ -208,7 +208,7 @@ import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
-import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {getColonyOrThrow} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 import {translateText} from '@/client/directives/i18n';
 import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
@@ -520,8 +520,8 @@ export default defineComponent({
       if (!this.include(name, 'colony')) {
         return false;
       }
-      const colony = getColony(name);
-      return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
+      const colony = getColonyOrThrow(name);
+      return this.expansions[colony.module ?? 'base'] === true;
     },
     showMilestone(name: MilestoneName): boolean {
       if (!this.include(name, 'ma')) {

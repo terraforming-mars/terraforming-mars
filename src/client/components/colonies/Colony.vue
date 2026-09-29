@@ -130,7 +130,7 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import ColonyRow from '@/client/components/colonies/ColonyRow.vue';
 import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
-import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {getColonyOrThrow} from '@/client/colonies/ClientColonyManifest';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 import {Resource} from '@/common/Resource';
 import {translateText} from '@/client/directives/i18n';
@@ -153,7 +153,7 @@ export default defineComponent({
   },
   computed: {
     metadata(): ColonyMetadata {
-      return getColony(this.colony.name);
+      return getColonyOrThrow(this.colony.name);
     },
     colonyResourceClass(): string {
       const resource = this.metadata.cardResource;

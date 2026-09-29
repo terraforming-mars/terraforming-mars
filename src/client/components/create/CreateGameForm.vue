@@ -774,13 +774,7 @@ export default defineComponent({
       return validateNewGameConfig(this.newGameConfig, {
         getCardCompatibility: (name) => getCard(name)?.compatibility ?? [],
         getColonyExpansion: (name) => {
-          // Uploaded settings files can contain colony names that no longer exist.
-          // TODO(kberg): Have getColony return | undefined
-          try {
-            return getColony(name).expansion;
-          } catch {
-            return undefined;
-          }
+          return getColony(name)?.expansion;
         },
       });
     },

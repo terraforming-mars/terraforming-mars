@@ -17,6 +17,11 @@
                 <span v-i18n>Game Phases</span>
             </label>
 
+            <input type="radio" name="help-tab" id="radio-turmoil-parties" value="turmoil-parties" v-model="currentPage">
+            <label for="radio-turmoil-parties">
+                <span v-i18n>Political Parties</span>
+            </label>
+
             <input type="radio" name="help-tab" id="radio-hotkeys" value="hotkeys" v-model="currentPage">
             <label for="radio-hotkeys">
                 <span v-i18n>Hot Keys</span>
@@ -31,6 +36,7 @@
         <HelpIconology v-if="isOpen('iconology')"/>
         <HelpStandardProjects v-if="isOpen('standard-projects')"/>
         <HelpPhases v-if="isOpen('phases')"/>
+        <HelpTurmoilParties v-if="isOpen('turmoil-parties')"/>
         <HelpRulebooks v-if="isOpen('rulebooks')"/>
         <HelpHotkeys v-if="isOpen('hotkeys')"/>
     </div>
@@ -42,8 +48,9 @@ import HelpPhases from '@/client/components/help/HelpPhases.vue';
 import HelpHotkeys from '@/client/components/help/HelpHotkeys.vue';
 import HelpRulebooks from '@/client/components/help/HelpRulebooks.vue';
 import HelpStandardProjects from '@/client/components/help/HelpStandardProjects.vue';
+import HelpTurmoilParties from '@/client/components/help/HelpTurmoilParties.vue';
 
-const TABS = ['iconology', 'standard-projects', 'phases', 'hotkeys', 'rulebooks'] as const;
+const TABS = ['iconology', 'standard-projects', 'phases', 'turmoil-parties', 'hotkeys', 'rulebooks'] as const;
 type Tab = typeof TABS[number];
 
 export interface HelpPageModel {
@@ -62,6 +69,7 @@ export default defineComponent({
     HelpPhases,
     HelpRulebooks,
     HelpStandardProjects,
+    HelpTurmoilParties,
     HelpHotkeys,
   },
   mounted() {

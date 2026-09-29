@@ -225,6 +225,12 @@ export default defineComponent({
           if (response.ok) {
             const latest: PlayerViewModel = await response.json();
             playerView.players = latest.players;
+          } else {
+            console.warn('Unable to update other players', response.status, response.statusText);
+            // Client errors (e.g. the game no longer exists) won't recover, so stop polling.
+            if (response.status < 500) {
+              return;
+            }
           }
         } catch (e) {
           console.warn('Unable to update other players', e);

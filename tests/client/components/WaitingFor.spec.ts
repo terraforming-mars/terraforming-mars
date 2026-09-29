@@ -94,6 +94,7 @@ describe('WaitingFor', () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it('updates other players while drafting', async () => {
@@ -124,6 +125,30 @@ describe('WaitingFor', () => {
     respond();
     await vi.advanceTimersByTimeAsync(3500);
     expect(fetchStub.mock.calls).has.length(2);
+  });
+
+  it('stops polling after a client error', async () => {
+    vi.useFakeTimers();
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const fetchStub = vi.fn(async () => ({ok: false, status: 404, statusText: 'Not Found'}) as Response);
+    vi.stubGlobal('fetch', fetchStub);
+    mountDrafting(draftingView());
+
+    await vi.advanceTimersByTimeAsync(10000);
+
+    expect(fetchStub.mock.calls).has.length(1);
+  });
+
+  it('keeps polling after a server error', async () => {
+    vi.useFakeTimers();
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const fetchStub = vi.fn(async () => ({ok: false, status: 503, statusText: 'Service Unavailable'}) as Response);
+    vi.stubGlobal('fetch', fetchStub);
+    mountDrafting(draftingView());
+
+    await vi.advanceTimersByTimeAsync(10000);
+
+    expect(fetchStub.mock.calls).has.length(3);
   });
 
   it('does not watch other players during the action phase', async () => {

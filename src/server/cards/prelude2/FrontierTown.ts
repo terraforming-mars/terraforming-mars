@@ -9,6 +9,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Resource} from '../../../common/Resource';
+import {Units} from '../../../common/Units';
 import {MarsBoard} from '../../boards/MarsBoard';
 
 export class FrontierTown extends Card implements IProjectCard {
@@ -31,6 +32,10 @@ export class FrontierTown extends Card implements IProjectCard {
         'GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.',
       },
     });
+  }
+
+  public productionBox() {
+    return Units.of({energy: -1});
   }
 
   private availableSpaces(player: IPlayer, cost: number) {

@@ -13,7 +13,7 @@
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
     </div>
 
-    <div class="colony-content" :style="'margin-top: {{colonyContentOffset}}px;'">
+    <div class="colony-content">
     <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colony.type === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colony.resource !== Resource.MEGACREDITS">

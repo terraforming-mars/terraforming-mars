@@ -132,12 +132,12 @@ export class Timer {
    * Used to display the timer.
    */
   public static toString(d: SerializedTimer, clock: Clock = REAL_CLOCK) : string {
-    const elapsed = d.sumElapsed + (d.running ? clock.now() - d.startedAt : 0);
-    const elapsedDate = new Date(elapsed);
-    const hours = Math.floor(elapsed / 3_600_000);
+    const elapsedMs = d.sumElapsed + (d.running ? clock.now() - d.startedAt : 0);
+    const hours = Math.floor(elapsedMs / 3_600_000);
+    const asString = new Date(elapsedMs).toISOString();
     if (hours > 0) {
-      return String(hours) + elapsedDate.toISOString().substr(13, 6);
+      return String(hours) + asString.slice(13, 19);
     }
-    return elapsedDate.toISOString().substr(14, 5);
+    return asString.slice(14, 19);
   }
 }

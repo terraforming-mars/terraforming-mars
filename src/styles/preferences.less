@@ -344,38 +344,41 @@
 }
 
 /* Card Magnification */
-.preferences_magnify_cards {
-  .filterDiv {
-    transition: transform 0.15s;
-  }
-  .filterDiv:hover {
-    transform: scale(1.2);
-    z-index: 100;
-  }
+/* Only on devices with a real pointer; on touch screens :hover sticks after a tap. */
+@media (hover: hover) and (pointer: fine) {
+  .preferences_magnify_cards {
+    .filterDiv {
+      transition: transform 0.15s;
+    }
+    .filterDiv:hover {
+      transform: scale(1.2);
+      z-index: 100;
+    }
 
-  .dragging .filterDiv:hover {
-    transform: none;
-  }
+    .dragging .filterDiv:hover {
+      transform: none;
+    }
 
-  .sortable-cards > div:active .filterDiv {
-    transition: none;
-    transform: none;
-  }
+    .sortable-cards > div:active .filterDiv {
+      transition: none;
+      transform: none;
+    }
 
-  .cards-stack:hover,
-  .cards-stack-first:hover {
-    z-index: 2;
-    transform: scale(1);
-  }
+    .cards-stack:hover,
+    .cards-stack-first:hover {
+      z-index: 2;
+      transform: scale(1);
+    }
 
-  .global-event:hover {
-    transform: scale(1.2);
-    z-index: 2;
+    .global-event:hover {
+      transform: scale(1.2);
+      z-index: 2;
+    }
   }
-}
-/* Magnify the wee little cards in a special way, if requested */
-.preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
-  transform: scale(0.95);
+  /* Magnify the wee little cards in a special way, if requested */
+  .preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
+    transform: scale(0.95);
+  }
 }
 
 .info-panel-title {

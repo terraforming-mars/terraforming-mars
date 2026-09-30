@@ -134,7 +134,7 @@ export class Timer {
   public static toString(d: SerializedTimer, clock: Clock = REAL_CLOCK) : string {
     const elapsed = d.sumElapsed + (d.running ? clock.now() - d.startedAt : 0);
     const elapsedDate = new Date(elapsed);
-    const hours = elapsedDate.getUTCHours() + (elapsedDate.getUTCDate() - 1) * 24;
+    const hours = Math.floor(elapsed / 3_600_000);
     if (hours > 0) {
       return String(hours) + elapsedDate.toISOString().substr(13, 6);
     }

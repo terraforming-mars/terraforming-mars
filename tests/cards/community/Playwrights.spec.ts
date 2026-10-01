@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
+import {Conscription} from '../../../src/server/cards/colonies/Conscription';
 import {LocalHeatTrapping} from '../../../src/server/cards/base/LocalHeatTrapping';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
 import {Playwrights} from '../../../src/server/cards/community/Playwrights';
@@ -106,6 +107,39 @@ describe('Playwrights', () => {
 
     player.playCard(deimosDown);
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
+  });
+
+  const opponentDiscountRuns = [
+    {factory: () => new IndenturedWorkers(), discount: 8},
+    {factory: () => new Conscription(), discount: 16},
+  ] as const;
+  for (const run of opponentDiscountRuns) {
+    it('Replaying opponent one time discount keeps it for both players: ' + run.factory().name, () => {
+      const event = run.factory();
+      player2.playCard(event);
+
+      player.megaCredits = event.cost;
+      const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+      selectCard.cb([event]);
+      runAllActions(game);
+
+      const deimosDown = new DeimosDown();
+      expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - run.discount);
+      expect(player2.getCardCost(deimosDown)).to.eq(deimosDown.cost - run.discount);
+    });
+  }
+
+  it('Replaying own one time discount does not double it', () => {
+    const indenturedWorkers = new IndenturedWorkers();
+    player.playCard(indenturedWorkers);
+
+    player.megaCredits = indenturedWorkers.cost;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    selectCard.cb([indenturedWorkers]);
+    runAllActions(game);
+
+    const deimosDown = new DeimosDown();
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
   });
 
   it('Works with Law Suit', () => {

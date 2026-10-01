@@ -413,3 +413,49 @@
   background-size: 568px 749px;
   margin: 25px;
 }
+.help-solo-rules-container {
+  padding-bottom: 20px;
+
+  .help-icons-section-heading {
+    text-align: left;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  // The global ul style puts bullets inside, so wrapped lines start under the bullet.
+  ul {
+    list-style-position: outside;
+    padding-left: 1.2em;
+  }
+
+  li {
+    margin: 4px 0;
+  }
+
+  .expansion-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  .help-solo-mode-icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 24px;
+    margin: 0 2px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .help-solo-mode-standard {
+    width: 24px;
+    background-image: url(./assets/tags/mars.png);
+  }
+
+  .help-solo-mode-tr {
+    width: 32px;
+    background-image: url(./assets/resources/tr.png);
+  }
+}

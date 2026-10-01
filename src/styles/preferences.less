@@ -11,6 +11,18 @@
   height: 100%;
 }
 
+/* On touch screens the page is scaled down to fit the 1260px viewport, which makes the sidebar and corner icons too small to tap.
+   Portrait only: in landscape there is not enough height for a larger sidebar. */
+@media (hover: none) and (pointer: coarse) and (orientation: portrait) {
+  .sidebar_cont,
+  .card-list-container .free-floating-preferences-icon {
+    zoom: 2;
+  }
+  .main-container:has(.sidebar_cont) {
+    margin-left: 120px;
+  }
+}
+
 .sidebar {
   .tm {
     background: url(./assets/board/mars.png);

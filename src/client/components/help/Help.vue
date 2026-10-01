@@ -31,6 +31,11 @@
             <label for="radio-rulebooks">
                 <span v-i18n>Rules</span>
             </label>
+
+            <input type="radio" name="help-tab" id="radio-solo-rules" value="solo-rules" v-model="currentPage">
+            <label for="radio-solo-rules">
+                <span v-i18n>Solo Rules</span>
+            </label>
         </div>
 
         <HelpIconology v-if="isOpen('iconology')"/>
@@ -39,6 +44,7 @@
         <HelpTurmoilParties v-if="isOpen('turmoil-parties')"/>
         <HelpRulebooks v-if="isOpen('rulebooks')"/>
         <HelpHotkeys v-if="isOpen('hotkeys')"/>
+        <HelpSoloRules v-if="isOpen('solo-rules')"/>
     </div>
 </template>
 <script lang="ts">
@@ -47,10 +53,11 @@ import HelpIconology from '@/client/components/help/HelpIconology.vue';
 import HelpPhases from '@/client/components/help/HelpPhases.vue';
 import HelpHotkeys from '@/client/components/help/HelpHotkeys.vue';
 import HelpRulebooks from '@/client/components/help/HelpRulebooks.vue';
+import HelpSoloRules from '@/client/components/help/HelpSoloRules.vue';
 import HelpStandardProjects from '@/client/components/help/HelpStandardProjects.vue';
 import HelpTurmoilParties from '@/client/components/help/HelpTurmoilParties.vue';
 
-const TABS = ['iconology', 'standard-projects', 'phases', 'turmoil-parties', 'hotkeys', 'rulebooks'] as const;
+const TABS = ['iconology', 'standard-projects', 'phases', 'turmoil-parties', 'hotkeys', 'rulebooks', 'solo-rules'] as const;
 type Tab = typeof TABS[number];
 
 export interface HelpPageModel {
@@ -71,6 +78,7 @@ export default defineComponent({
     HelpStandardProjects,
     HelpTurmoilParties,
     HelpHotkeys,
+    HelpSoloRules,
   },
   mounted() {
     const hash = window.location.hash.replace('#', '') as Tab;

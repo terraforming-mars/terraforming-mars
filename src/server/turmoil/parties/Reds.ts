@@ -35,6 +35,7 @@ class RedsBonus01 implements IBonus {
       if (player.terraformRating <= 20) {
         player.increaseTerraformRating();
       }
+      return;
     }
     const min = Math.min(...game.players.map((p) => p.terraformRating));
 
@@ -60,6 +61,7 @@ class RedsBonus02 implements IBonus {
       if (player.terraformRating > 20) {
         player.decreaseTerraformRating();
       }
+      return;
     }
     const max = Math.max(...game.players.map((p) => p.terraformRating));
 

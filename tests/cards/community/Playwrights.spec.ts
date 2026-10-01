@@ -147,6 +147,7 @@ describe('Playwrights', () => {
     player2.playedCards.push(event);
 
     player.megaCredits = event.cost;
+    player2.megaCredits = 5;
     player.removingPlayers = [player2.id];
     expect(card.canAct(player)).is.true;
 
@@ -162,6 +163,64 @@ describe('Playwrights', () => {
     expect(player.playedCards.asArray()).deep.eq([card]);
     expect(player2.playedCards.length).eq(0); // Card is removed from play for sued player
     expect(player.removedFromPlayCards).has.lengthOf(1);
+    expect(player.megaCredits).eq(3);
+    expect(player2.megaCredits).eq(2);
+  });
+
+  it('Works with Law Suit from own event pile', () => {
+    const event = new LawSuit();
+    player.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    player2.megaCredits = 5;
+    player.removingPlayers = [player2.id];
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    selectCard.cb([event]);
+
+    game.deferredActions.pop()!.execute(); // SelectPayment
+    const selectPlayer = cast(game.deferredActions.pop()!.execute(), SelectPlayer);
+    selectPlayer.cb(player2);
+
+    runAllActions(player.game);
+
+    expect(player.playedCards.asArray()).deep.eq([card]);
+    expect(player2.playedCards.length).eq(0);
+    expect(player.removedFromPlayCards).deep.eq([event]);
+    expect(player.megaCredits).eq(3);
+    expect(player2.megaCredits).eq(2);
+  });
+
+  it('Works with Law Suit when suing someone other than its owner', () => {
+    const [game, player, player2, player3] = testGame(3);
+    const card = new Playwrights();
+    card.play(player);
+    player.playedCards.push(card);
+
+    const event = new LawSuit();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    player3.megaCredits = 5;
+    player.removingPlayers = [player3.id];
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    selectCard.cb([event]);
+
+    game.deferredActions.pop()!.execute(); // SelectPayment
+    const selectPlayer = cast(game.deferredActions.pop()!.execute(), SelectPlayer);
+    selectPlayer.cb(player3);
+
+    runAllActions(game);
+
+    expect(player.playedCards.asArray()).deep.eq([card]);
+    expect(player2.playedCards.length).eq(0);
+    expect(player3.playedCards.length).eq(0);
+    expect(player.removedFromPlayCards).deep.eq([event]);
+    expect(player.megaCredits).eq(3);
+    expect(player3.megaCredits).eq(2);
   });
 
   it('Works with Special Design', () => {

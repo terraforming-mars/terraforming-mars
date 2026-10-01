@@ -59,40 +59,38 @@ export class Playwrights extends CorporationCard implements ICorporationCard, IH
       'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents, {played: false})
       .andThen(
         ([card]) => {
-          const selectedCard: IProjectCard = card;
-
-          players.forEach((p) => {
-            if (p.playedCards.get(selectedCard.name)) {
+          for (const p of players) {
+            if (p.playedCards.has(card.name)) {
               p.playedCards.remove(card);
               // Keep any pending 'next card' discount alive for the original owner.
               // (The replaying player gets the card in removedFromPlayCards below.)
               if (p !== player) {
-                p.removedFromPlayCards.push(selectedCard);
+                p.removedFromPlayCards.push(card);
               }
+              break;
             }
-          });
+          }
 
-          const cost = player.getCardCost(selectedCard);
+          const cost = player.getCardCost(card);
           player.game.defer(new SelectPaymentDeferred(player, cost, {title: 'Select how to pay to replay the event'}))
             .andThen(() => {
-              player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
-              player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-              if (selectedCard.name === CardName.SPECIAL_DESIGN) {
+              player.playCard(card, undefined, 'nothing'); // Play the card but don't add it to played cards
+              player.removedFromPlayCards.push(card); // Remove card from the game
+              if (card.name === CardName.SPECIAL_DESIGN) {
                 player.playedCards.push(new SpecialDesignProxy());
-              } else if (selectedCard.name === CardName.LAW_SUIT) {
+              } else if (card.name === CardName.LAW_SUIT) {
               /*
                * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                * Needs to be deferred to happen after Law Suit's `play()` method.
                */
                 player.defer(() => {
-                  player.game.players.some((p) => {
+                  for (const p of player.game.players) {
                     const card = p.playedCards.last();
-                    if (card?.name === selectedCard.name) {
+                    if (card?.name === CardName.LAW_SUIT) {
                       p.playedCards.remove(card);
-                      return true;
+                      break;
                     }
-                    return false;
-                  });
+                  }
                   return undefined;
                 });
               }

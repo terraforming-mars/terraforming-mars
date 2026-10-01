@@ -18,12 +18,19 @@
   "Moon": "Mond",
   "Mars": "",
   "Clone": "Klon",
+  "Crime": "Kriminalität",
   "MegaCredits (M€)": "Mega Credits (M€)",
   "Floater": "Schweber",
   "Preservation": "Erhaltungsressource",
   "Camp": "Lager",
   "Disease": "Krankheit",
+  "Data": "Daten",
+  "Venusian Habitat": "Venusianischer Lebensraum",
+  "Specialized Robot": "spezialisierten Roboter",
+  "Agenda": "Agenden",
+  "Ware": "Waren",
 
+  "Fan Expansion Card Resources": "Ressourcen zu Fan-Erweiterungskarten",
   "Special": "Spezial",
 
   "Temperature": "Temperatur",
@@ -37,6 +44,9 @@
   "Colony": "Kolonie",
   "Trade Fleet": "Handelsflotte",
   "Delegate": "Abgesandter",
+
+  "Political Parties": "Politische Parteien",
+  "A party bonus is granted once, during the Turmoil phase. Its policy applies ONLY DURING THE ACTION PHASE of the following generation.": "Der Partybonus wird einmalig während der Aufruhrphase ausbezahlt. Die Politik gilt AUSSCHLIESSLICH WÄHREND DER AKTIONS-PHASE der folgenden Generation.",
 
   "Standard Projects from Expansions and Solo Mode": "Standardprojekte aus Erweiterungen und Solo-Herausforderung",
   "Standard Project from Fan-made Expansions": "Standardprojekte aus von Fans erstellten Erweiterungen",

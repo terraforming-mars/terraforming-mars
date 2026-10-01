@@ -95,6 +95,7 @@
                     <li v-i18n>• Venus Next: The Venus track must be completed for solo mode victory.</li>
                     <li v-i18n>• The Moon (63TR condition): No changes.</li>
                     <li v-i18n>• The Moon (Terraforming condition): The game ends 2 generations later. The Moon tracks must be completed for solo mode victory.</li>
+                    <li v-i18n>• Ares Extreme (Terraforming condition): All unprotected hazards must be removed for solo mode victory.</li>
                   </ul>
                 </li>
                 <li>

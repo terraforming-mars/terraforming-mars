@@ -64,6 +64,11 @@ export class Playwrights extends CorporationCard implements ICorporationCard, IH
           players.forEach((p) => {
             if (p.playedCards.get(selectedCard.name)) {
               p.playedCards.remove(card);
+              // Keep any pending 'next card' discount alive for the original owner.
+              // (The replaying player gets the card in removedFromPlayCards below.)
+              if (p !== player) {
+                p.removedFromPlayCards.push(selectedCard);
+              }
             }
           });
 

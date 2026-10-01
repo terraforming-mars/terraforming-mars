@@ -159,9 +159,10 @@ export class Player implements IPlayer {
   public removingPlayers: Array<PlayerId> = [];
   // Warmonger
   public warmongerCards: number = 0;
-  // For Playwrights corp.
-  // removedFromPlayCards is a bit of a misname: it's a temporary storage for
-  // cards that provide 'next card' discounts. This will clear between turns.
+  // For Playwrights and Odyssey.
+  // removedFromPlayCards is a bit of a misname: it holds replayed events, so their
+  // 'next card' discounts still apply. It is never cleared; stale entries are
+  // harmless because those discounts only apply while lastCardPlayed matches.
   public removedFromPlayCards: Array<IProjectCard> = [];
   public preservationProgram = false;
   public trThisGeneration = 0;

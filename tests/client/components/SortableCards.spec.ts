@@ -93,4 +93,128 @@ describe('SortableCards', () => {
       [CardName.BIRDS]: 3,
     });
   });
+
+  it('sorts by cost', async () => {
+    // Ants: 9, Cartel: 8, Birds: 10
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ANTS}, {name: CardName.CARTEL}, {name: CardName.BIRDS}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'cost', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.CARTEL, CardName.ANTS, CardName.BIRDS]);
+    expect(CardOrderStorage.getCardOrder('player1')).to.deep.eq({
+      [CardName.CARTEL]: 1,
+      [CardName.ANTS]: 2,
+      [CardName.BIRDS]: 3,
+    });
+  });
+
+  it('sorts in reverse', async () => {
+    // Ants: 9, Cartel: 8, Birds: 10
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ANTS}, {name: CardName.CARTEL}, {name: CardName.BIRDS}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'cost', reversed: true}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.BIRDS, CardName.ANTS, CardName.CARTEL]);
+  });
+
+  it('dragging a card clears the sort', async () => {
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ANTS}, {name: CardName.CARTEL}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'cost', reversed: false}});
+    await dragCard(sortable, 0, 1, 'right');
+
+    expect(sortable.emitted('update:sortOrder')).to.deep.eq([[]]);
+  });
+
+  it('sorts by cost, preferring calculated cost', async () => {
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ANTS}, {name: CardName.BIRDS, calculatedCost: 2}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'cost', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.BIRDS, CardName.ANTS]);
+  });
+
+  it('sorts by type', async () => {
+    // Asteroid: event, Ants: active, Cartel: automated (8), Mine: automated (4)
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ASTEROID}, {name: CardName.ANTS}, {name: CardName.CARTEL}, {name: CardName.MINE}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'type', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.MINE, CardName.CARTEL, CardName.ANTS, CardName.ASTEROID]);
+  });
+
+  it('sorts by type, corporations and preludes first', async () => {
+    // Asteroid: event, Mine: automated, Donation: prelude, Ecoline: corporation
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ASTEROID}, {name: CardName.MINE}, {name: CardName.DONATION}, {name: CardName.ECOLINE}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'type', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.ECOLINE, CardName.DONATION, CardName.MINE, CardName.ASTEROID]);
+  });
+
+  it('sorts by resource', async () => {
+    // Cartel: none, Birds: animal, Ants: microbe (9), Tardigrades: microbe (4)
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.CARTEL}, {name: CardName.BIRDS}, {name: CardName.ANTS}, {name: CardName.TARDIGRADES}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'resource', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.BIRDS, CardName.TARDIGRADES, CardName.ANTS, CardName.CARTEL]);
+  });
+
+  it('sorts by vp', async () => {
+    // Nuclear Zone: -2, Cartel: 0, Ants: variable, Asteroid Mining: 2
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.NUCLEAR_ZONE}, {name: CardName.CARTEL}, {name: CardName.ANTS}, {name: CardName.ASTEROID_MINING}],
+        playerId: 'player1',
+      },
+    });
+
+    await sortable.setProps({sortOrder: {key: 'vp', reversed: false}});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.ASTEROID_MINING, CardName.ANTS, CardName.CARTEL, CardName.NUCLEAR_ZONE]);
+  });
 });

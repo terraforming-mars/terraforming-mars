@@ -6,10 +6,9 @@ import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES,
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
-import {Units} from '../../common/Units';
+import {AresProductionCost, EMPTY_ARES_PRODUCTION_COST} from '../ares/AdjacencyCost';
 import {hazardSeverity} from '../../common/AresTileType';
 import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
-import {sum} from '../../common/utils/utils';
 import {LEGACY_CUBE_TILES} from '@/common/boards/SpaceCube';
 
 /**
@@ -18,7 +17,7 @@ import {LEGACY_CUBE_TILES} from '@/common/boards/SpaceCube';
  */
 export type SpaceCosts = {
   megacredits: number,
-  production: number,
+  production: AresProductionCost,
   tr: TRSource,
 };
 
@@ -142,7 +141,7 @@ export abstract class Board {
    * @returns `true` when costs has changed, `false` when it has not.
    */
   protected spaceCosts(_space: Space): SpaceCosts {
-    return {megacredits: 0, production: 0, tr: {}};
+    return {megacredits: 0, production: {...EMPTY_ARES_PRODUCTION_COST}, tr: {}};
   }
 
   private computeAdditionalCosts(space: Space, aresExtension: boolean, multiplier: number | undefined): SpaceCosts {
@@ -173,13 +172,9 @@ export abstract class Board {
     }
 
     for (const adjacentSpace of this.getAdjacentSpaces(space)) {
-      switch (hazardSeverity(adjacentSpace.tile?.tileType)) {
-      case 'mild':
-        costs.production += 1;
-        break;
-      case 'severe':
-        costs.production += 2;
-        break;
+      const severity = hazardSeverity(adjacentSpace.tile?.tileType);
+      if (severity !== 'none') {
+        costs.production[severity]++;
       }
       if (adjacentSpace.adjacency !== undefined) {
         const adjacency = adjacentSpace.adjacency;
@@ -214,12 +209,7 @@ export abstract class Board {
         return false;
       }
     }
-    if (additionalCosts.production > 0) {
-      // +5 because megacredits goes to -5
-      const availableProduction = sum(Units.values(player.production)) + 5;
-      return availableProduction > additionalCosts.production;
-    }
-    return true;
+    return AresHandler.canPayProduction(player, additionalCosts.production);
   }
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {

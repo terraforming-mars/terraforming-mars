@@ -149,8 +149,84 @@ describe('AresHandler', () => {
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(2);
-    input.cb(Units.of({plants: 2}));
+    expect(input.pairs).eq(1);
+    input.process({type: 'productionToLose', units: Units.of({plants: 2})}, player);
     expect(player.production.plants).eq(5);
+  });
+
+  it('pay adjacent hazard costs - severe must come from a single production', () => {
+    const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_SEVERE);
+
+    player.production.add(Resource.MEGACREDITS, -5);
+    player.production.add(Resource.STEEL, 1);
+    player.production.add(Resource.TITANIUM, 1);
+
+    const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+    expect(() => {
+      game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
+    }).to.throw(/Placing here costs 2 units of production/);
+
+    player.production.add(Resource.STEEL, 1);
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
+    runAllActions(game);
+    const input = cast(player.getWaitingFor(), SelectProductionToLose);
+    expect(() => input.process({type: 'productionToLose', units: Units.of({steel: 1, titanium: 1})}, player))
+      .to.throw(/must be 2 steps from a single production/);
+    input.process({type: 'productionToLose', units: Units.of({steel: 2})}, player);
+    expect(player.production.steel).eq(0);
+    expect(player.production.titanium).eq(1);
+  });
+
+  it('available spaces - severe hazard must be payable from a single production', () => {
+    const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_SEVERE);
+    const adjacentSpace = game.board.getAdjacentSpaces(firstSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+
+    player.production.add(Resource.MEGACREDITS, -5);
+    player.production.add(Resource.PLANTS, 1);
+    player.production.add(Resource.HEAT, 1);
+    player.production.add(Resource.ENERGY, 1);
+    expect(game.board.getAvailableSpacesOnLand(player)).does.not.include(adjacentSpace);
+
+    player.production.add(Resource.HEAT, 1);
+    expect(game.board.getAvailableSpacesOnLand(player)).includes(adjacentSpace);
+  });
+
+  it('available spaces - exactly enough production', () => {
+    const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
+    const adjacentSpace = game.board.getAdjacentSpaces(firstSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+
+    player.production.add(Resource.MEGACREDITS, -5);
+    expect(game.board.getAvailableSpacesOnLand(player)).does.not.include(adjacentSpace);
+
+    player.production.add(Resource.PLANTS, 1);
+    expect(game.board.getAvailableSpacesOnLand(player)).includes(adjacentSpace);
+  });
+
+  it('pay adjacent hazard costs - severe and mild', () => {
+    const spaces = game.board.getAvailableSpacesOnLand(player);
+    const target = spaces.find((space) => game.board.getAdjacentSpaces(space).filter((s) => s.spaceType === SpaceType.LAND).length >= 2)!;
+    const [severeSpace, mildSpace] = game.board.getAdjacentSpaces(target).filter((s) => s.spaceType === SpaceType.LAND);
+    AresHazards.putHazardAt(game, severeSpace, TileType.DUST_STORM_SEVERE);
+    AresHazards.putHazardAt(game, mildSpace, TileType.EROSION_MILD);
+
+    player.production.add(Resource.MEGACREDITS, -5);
+    player.production.add(Resource.PLANTS, 2);
+    player.production.add(Resource.HEAT, 1);
+
+    game.addTile(player, target, {tileType: TileType.GREENERY});
+    runAllActions(game);
+
+    const input = cast(player.popWaitingFor(), SelectProductionToLose);
+    expect(input.unitsToLose).eq(3);
+    expect(input.pairs).eq(1);
+    input.process({type: 'productionToLose', units: Units.of({plants: 2, heat: 1})}, player);
+    expect(player.production.plants).eq(0);
+    expect(player.production.heat).eq(0);
+    runAllActions(game);
+    expect(player.popWaitingFor()).is.undefined;
   });
 
   it('Adjacenct hazard costs do not apply to oceans', () => {

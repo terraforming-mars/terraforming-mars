@@ -13,6 +13,8 @@ export class SelectProductionToLose extends BasePlayerInput<Units> {
     public unitsToLose: number,
     public player: IPlayer,
     buttonLabel: string = 'Save',
+    /** The number of 2-step losses that must each come from a single production (e.g. Ares severe hazards.) */
+    public pairs: number = 0,
   ) {
     super('productionToLose', title);
     this.buttonLabel = buttonLabel;
@@ -47,6 +49,10 @@ export class SelectProductionToLose extends BasePlayerInput<Units> {
     }
     if (sum(array) !== this.unitsToLose) {
       throw new InputError(`Select ${this.unitsToLose} steps of production.`);
+    }
+    const pairs = sum(array.map((count) => Math.floor(count / 2)));
+    if (pairs < this.pairs) {
+      throw new InputError(`${this.pairs} of these losses must be 2 steps from a single production.`);
     }
     this.cb(input.units);
     return undefined;

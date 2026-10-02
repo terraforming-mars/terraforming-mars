@@ -7,7 +7,6 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
 import {AresProductionCost, EMPTY_ARES_PRODUCTION_COST} from '../ares/AdjacencyCost';
-import {hazardSeverity} from '../../common/AresTileType';
 import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
 import {LEGACY_CUBE_TILES} from '@/common/boards/SpaceCube';
 
@@ -144,7 +143,7 @@ export abstract class Board {
     return {megacredits: 0, production: {...EMPTY_ARES_PRODUCTION_COST}, tr: {}};
   }
 
-  private computeAdditionalCosts(space: Space, aresExtension: boolean, multiplier: number | undefined): SpaceCosts {
+  private computeAdditionalCosts(player: IPlayer, space: Space, multiplier: number | undefined): SpaceCosts {
     const costs: SpaceCosts = this.spaceCosts(space);
     if (multiplier !== undefined) {
       costs.megacredits *= multiplier;
@@ -156,45 +155,21 @@ export abstract class Board {
       }
     }
 
-    if (aresExtension === false) {
+    if (player.game.gameOptions.aresExtension === false) {
       return costs;
     }
 
-    switch (hazardSeverity(space.tile?.tileType)) {
-    case 'mild':
-      costs.megacredits += 8;
-      costs.tr.tr = (costs.tr.tr ?? 0) + 1;
-      break;
-    case 'severe':
-      costs.megacredits += 16;
-      costs.tr.tr = (costs.tr.tr ?? 0) + 2;
-      break;
+    const aresCosts = AresHandler.computePlacementCosts(player, this, space, true);
+    costs.megacredits += aresCosts.megacredits;
+    if (aresCosts.tr > 0) {
+      costs.tr.tr = (costs.tr.tr ?? 0) + aresCosts.tr;
     }
-
-    for (const adjacentSpace of this.getAdjacentSpaces(space)) {
-      const severity = hazardSeverity(adjacentSpace.tile?.tileType);
-      if (severity !== 'none') {
-        costs.production[severity]++;
-      }
-      if (adjacentSpace.adjacency !== undefined) {
-        const adjacency = adjacentSpace.adjacency;
-        costs.megacredits += adjacency.cost ?? 0;
-        // TODO(kberg): offset costs with heat and MC bonuses.
-        // for (const bonus of adjacency.bonus) {
-        //   case (bonus) {
-        //     switch SpaceBonus.MEGACREDITS:
-        //       costs.stock.megacredits--;
-        //     switch SpaceBonus.MEGACREDITS:
-        //       costs.stock.megacredits--;
-        //   }
-        // }
-      }
-    }
+    costs.production = aresCosts.production;
     return costs;
   }
 
   public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
-    const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension, canAffordOptions?.bonusMultiplier);
+    const additionalCosts = this.computeAdditionalCosts(player, space, canAffordOptions?.bonusMultiplier);
     if (additionalCosts.megacredits > 0) {
       const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
       plan.cost += additionalCosts.megacredits;

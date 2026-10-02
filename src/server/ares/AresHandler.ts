@@ -159,16 +159,24 @@ export class AresHandler {
     return hazardSeverity(space.tile?.tileType) !== 'none';
   }
 
-  private static computePlacementCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  public static computePlacementCosts(player: IPlayer, board: Board, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.tableau.has(CardName.ATHENA)) {
       subjectToHazardAdjacency = false;
     }
 
-    const game = player.game;
     let megaCreditCost = 0;
     const productionCost: AresProductionCost = {...EMPTY_ARES_PRODUCTION_COST};
-    game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+    board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       megaCreditCost += adjacentSpace.adjacency?.cost || 0;
+      // TODO(kberg): offset costs with heat and MC bonuses.
+      // for (const bonus of adjacency.bonus) {
+      //   case (bonus) {
+      //     switch SpaceBonus.MEGACREDITS:
+      //       costs.stock.megacredits--;
+      //     switch SpaceBonus.MEGACREDITS:
+      //       costs.stock.megacredits--;
+      //   }
+      // }
       if (subjectToHazardAdjacency === true) {
         const severity = hazardSeverity(adjacentSpace.tile?.tileType);
         if (severity !== 'none') {
@@ -188,7 +196,7 @@ export class AresHandler {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: EMPTY_ARES_PRODUCTION_COST, tr: 0};
     }
-    const cost = AresHandler.computePlacementCosts(player, space, subjectToHazardAdjacency);
+    const cost = AresHandler.computePlacementCosts(player, player.game.board, space, subjectToHazardAdjacency);
 
     if (AresHandler.canPayProduction(player, cost.production) && player.canAfford({cost: cost.megacredits, tr: {tr: cost.tr}})) {
       return cost;

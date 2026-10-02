@@ -58,17 +58,18 @@ export class Playwrights extends CorporationCard implements ICorporationCard, IH
       'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents, {played: false})
       .andThen(
         ([card]) => {
+          // Remove the card before computing its cost, so it can't discount its own replay.
+          const owner = player.game.getCardPlayerOrThrow(card.name);
+          owner.playedCards.remove(card);
+          if (owner !== player) {
+            // Keep any pending 'next card' discount alive for the original owner.
+            // (The replaying player gets the card in removedFromPlayCards below.)
+            owner.removedFromPlayCards.push(card);
+          }
+
           const cost = player.getCardCost(card);
           player.game.defer(new SelectPaymentDeferred(player, cost, {title: 'Select how to pay to replay the event'}))
             .andThen(() => {
-              const owner = player.game.getCardPlayerOrThrow(card.name);
-              owner.playedCards.remove(card);
-              if (owner !== player) {
-                // Keep any pending 'next card' discount alive for the original owner.
-                // (The replaying player gets the card in removedFromPlayCards below.)
-                owner.removedFromPlayCards.push(card);
-              }
-
               player.playCard(card, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(card); // Remove card from the game
 

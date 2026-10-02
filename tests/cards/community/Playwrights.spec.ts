@@ -142,6 +142,18 @@ describe('Playwrights', () => {
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
   });
 
+  it('Replaying own one time discount does not discount itself', () => {
+    const conscription = new Conscription();
+    player.playCard(conscription);
+
+    player.megaCredits = 10;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    selectCard.cb([conscription]);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(10 - conscription.cost);
+  });
+
   it('Works with Law Suit', () => {
     const event = new LawSuit();
     player2.playedCards.push(event);

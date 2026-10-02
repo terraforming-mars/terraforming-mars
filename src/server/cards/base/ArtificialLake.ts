@@ -33,6 +33,7 @@ export class ArtificialLake extends Card implements IProjectCard {
     if (!player.game.canAddOcean()) {
       return true;
     } // Card is playable, it just has no effect.
-    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
+    // Oceans aren't subject to Ares hazard adjacency costs.
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions, false).length > 0;
   }
 }

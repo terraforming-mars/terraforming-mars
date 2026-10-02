@@ -41,7 +41,10 @@ export class PlaceOceanTile extends DeferredAction<Space | undefined> {
       availableSpaces = this.options.spaces;
     } else {
       const on = this.options?.on || 'ocean';
-      availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
+      // Oceans aren't subject to Ares hazard adjacency costs.
+      availableSpaces = on === 'land' ?
+        this.player.game.board.getAvailableSpacesOnLand(this.player, undefined, false) :
+        this.player.game.board.getAvailableSpacesForType(this.player, on);
       title = this.options?.title ?? this.getTitle(on);
     }
 

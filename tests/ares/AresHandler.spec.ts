@@ -8,6 +8,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resource} from '../../src/common/Resource';
 import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
+import {PlaceOceanTile} from '../../src/server/deferredActions/PlaceOceanTile';
 import {Athena} from '../../src/server/cards/community/Athena';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
@@ -192,6 +193,18 @@ describe('AresHandler', () => {
 
     player.production.add(Resource.HEAT, 1);
     expect(game.board.getAvailableSpacesOnLand(player)).includes(adjacentSpace);
+  });
+
+  it('available spaces - oceans on land ignore hazard production costs', () => {
+    const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_SEVERE);
+    const adjacentSpace = game.board.getAdjacentSpaces(firstSpace).find((s) => s.spaceType === SpaceType.LAND)!;
+
+    player.production.add(Resource.MEGACREDITS, -5);
+    expect(game.board.getAvailableSpacesOnLand(player)).does.not.include(adjacentSpace);
+
+    const selectSpace = cast(new PlaceOceanTile(player, {on: 'land'}).execute(), SelectSpace);
+    expect(selectSpace.spaces).includes(adjacentSpace);
   });
 
   it('available spaces - Athena ignores hazard production costs', () => {

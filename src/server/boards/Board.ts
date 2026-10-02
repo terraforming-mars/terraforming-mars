@@ -143,7 +143,7 @@ export abstract class Board {
     return {megacredits: 0, production: {...EMPTY_ARES_PRODUCTION_COST}, tr: {}};
   }
 
-  private computeAdditionalCosts(player: IPlayer, space: Space, multiplier: number | undefined): SpaceCosts {
+  private computeAdditionalCosts(player: IPlayer, space: Space, multiplier: number | undefined, subjectToHazardAdjacency: boolean): SpaceCosts {
     const costs: SpaceCosts = this.spaceCosts(space);
     if (multiplier !== undefined) {
       costs.megacredits *= multiplier;
@@ -159,7 +159,7 @@ export abstract class Board {
       return costs;
     }
 
-    const aresCosts = AresHandler.computePlacementCosts(player, this, space, true);
+    const aresCosts = AresHandler.computePlacementCosts(player, this, space, subjectToHazardAdjacency);
     costs.megacredits += aresCosts.megacredits;
     if (aresCosts.tr > 0) {
       costs.tr.tr = (costs.tr.tr ?? 0) + aresCosts.tr;
@@ -168,8 +168,13 @@ export abstract class Board {
     return costs;
   }
 
-  public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
-    const additionalCosts = this.computeAdditionalCosts(player, space, canAffordOptions?.bonusMultiplier);
+  /**
+   * Returns true when `player` can pay the additional costs of placing a tile on `space`.
+   *
+   * `subjectToHazardAdjacency` is false for ocean tiles, which don't pay Ares hazard production costs.
+   */
+  public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions, subjectToHazardAdjacency: boolean = true) {
+    const additionalCosts = this.computeAdditionalCosts(player, space, canAffordOptions?.bonusMultiplier, subjectToHazardAdjacency);
     if (additionalCosts.megacredits > 0) {
       const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
       plan.cost += additionalCosts.megacredits;
@@ -187,7 +192,7 @@ export abstract class Board {
     return AresHandler.canPayProduction(player, additionalCosts.production);
   }
 
-  public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+  public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions, subjectToHazardAdjacency: boolean = true): ReadonlyArray<Space> {
     // Does this also apply to cove spaces?
     const landSpaces = this.getSpaces(SpaceType.LAND).filter((space) => {
       // A space is available if it doesn't have a player marker on it, or it belongs to |player|
@@ -213,7 +218,7 @@ export abstract class Board {
         return false;
       }
 
-      return this.canAfford(player, space, canAffordOptions);
+      return this.canAfford(player, space, canAffordOptions, subjectToHazardAdjacency);
     });
     return landSpaces;
   }

@@ -27,7 +27,8 @@ export class CentralReservoir extends PreludeCard {
 
   private availableSpaces(player: IPlayer) {
     const excavatableSpaces = UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true});
-    const oceanSpaces = player.game.board.getAvailableSpacesOnLand(player);
+    // Oceans aren't subject to Ares hazard adjacency costs.
+    const oceanSpaces = player.game.board.getAvailableSpacesOnLand(player, undefined, false);
     return oceanSpaces.filter((space) => {
       return intersection(player.game.board.getAdjacentSpaces(space), excavatableSpaces).length > 0;
     });

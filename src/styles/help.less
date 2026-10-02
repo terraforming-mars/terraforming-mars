@@ -416,8 +416,10 @@
 .help-solo-rules-container {
   padding-bottom: 20px;
 
-  .help-icons-section-heading {
+  h3 {
+    .help-icons-section-heading();
     text-align: left;
+    margin: 0;
   }
 
   a {
@@ -438,24 +440,5 @@
     display: inline-block;
     vertical-align: middle;
     margin-right: 6px;
-  }
-
-  .help-solo-mode-icon {
-    display: inline-block;
-    vertical-align: middle;
-    height: 24px;
-    margin: 0 2px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-
-  .help-solo-mode-standard {
-    width: 24px;
-    background-image: url(./assets/tags/mars.png);
-  }
-
-  .help-solo-mode-tr {
-    width: 32px;
-    background-image: url(./assets/resources/tr.png);
   }
 }

@@ -115,6 +115,18 @@
   "Move the distant (left) Global Event to coming position (middle)": "Das zukünftige Globale Eregnis (links) wird zum Nächsten Globalen Ergeinis (Mitte)",
   "Reveal a new Global Event in the distant (left) position. Add its top neutral delegate": "Ein neues Zukünftiges Globale Ereignis (links) aufdecken. 1 neutraler Delegierter wird eingesetzt (oben links)",
 
+  "Solo Rules": "Solo-Regeln",
+  "Adapted from": "Adaptiert aus",
+  "Terraforming Mars: solo rules summary": "Terraforming Mars: Zusammenfassung der Solo-Regeln",
+  "• Ares Extreme (Terraforming condition): All unprotected hazards must be removed for solo mode victory.": "• Ares Extrem (Terraforming-Bedingung): Alle ungeschützten Gefahren müssen entfernt werden, um im Solo-Modus zu gewinnen.",
+  "Your goal": "Dein Ziel",
+  "Score as many victory points as you can, but make sure you meet the victory condition in time, or you lose.": "Erziele so viele Siegpunkte wie möglich, aber stelle sicher, dass du die Siegbedingung rechtzeitig erfüllst, sonst verlierst du.",
+  "Choose one of two game modes when creating the game. Each has a different victory condition.": "Wähle beim Spielaufbau einen von zwei Spielmodi aus. Jeder hat eine andere Siegbedingung.",
+  "Standard Mode": "Standardmodus",
+  "you win if every global parameter is maxed before time runs out.": "Du gewinnst, wenn alle globalen Parameter vor Ablauf der Zeit ihr Maximum erreicht haben.",
+  "This includes Venus if Venus Next is included.": "Dies schließt die Venus ein, wenn ‚Venus Next‘ enthalten ist.",
+  "This includes Moon tracks if The Moon is included with Moon track completion required.": "Dies schließt die Mondstrecken ein, wenn ‚The Moon‘ enthalten ist und die Mondstrecken abgeschlossen werden müssen.",
+
   "End Game": "Spielende",
   "In turn order, convert plants to greeneries.": "In Zugreihenfolge, konvertiere Pflanzen zu Grünflächen",
   "Assign awards": "Vergebe Auszeichnungen",

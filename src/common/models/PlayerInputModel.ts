@@ -122,6 +122,8 @@ export type SelectPartyModel = BaseInputModel & {
 export type SelectProductionToLoseModel = BaseInputModel & {
   type: 'productionToLose';
   payProduction: PayProductionModel;
+  /** Required two-step losses from a single production type. */
+  pairs?: number;
 }
 
 export type ShiftAresGlobalParametersModel = BaseInputModel & {

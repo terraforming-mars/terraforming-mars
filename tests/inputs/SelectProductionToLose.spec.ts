@@ -23,6 +23,13 @@ describe('SelectProductionToLose', () => {
     expect(selected).deep.eq(Units.of({megacredits: 2}));
   });
 
+  it('includes required production pairs in the input model', () => {
+    const input = new SelectProductionToLose('', 2, player, undefined, 1);
+
+    expect(input.toModel()).to.include({type: 'productionToLose', pairs: 1});
+    expect(input.toModel().payProduction.cost).eq(2);
+  });
+
   for (const run of [
     {units: Units.EMPTY, expected: /Select 2 steps of production/},
     {units: Units.of({megacredits: 1}), expected: /Select 2 steps of production/},

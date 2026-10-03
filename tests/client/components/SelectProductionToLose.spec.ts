@@ -32,5 +32,6 @@ describe('SelectProductionToLose', () => {
       },
     });
     expect(wrapper.exists()).to.be.true;
+    expect(wrapper.find('.payments_title').exists()).is.false;
   });
 });

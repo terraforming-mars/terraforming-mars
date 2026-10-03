@@ -12,12 +12,14 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
     private unitsToLose: number,
     private title: string | Message = message('Choose ${0} unit(s) of production to lose', (b) => b.number(unitsToLose)),
     private pairs: number = 0,
+    /** Shown under the title. */
+    private warning: string | Message | undefined = undefined,
   ) {
     super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);
   }
 
   public execute() {
-    return new SelectProductionToLose(
+    const input = new SelectProductionToLose(
       this.title,
       this.unitsToLose,
       this.player,
@@ -27,5 +29,9 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
         this.player.production.adjust(Units.negative(production), {log: true});
         return undefined;
       });
+    if (this.warning !== undefined) {
+      input.setWarning(this.warning);
+    }
+    return input;
   }
 }

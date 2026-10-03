@@ -127,6 +127,7 @@ describe('AresHandler', () => {
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(1);
+    expect(input.warning).is.undefined;
     input.cb(Units.of({plants: 1}));
     expect(player.production.plants).eq(6);
   });
@@ -152,6 +153,7 @@ describe('AresHandler', () => {
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(2);
     expect(input.pairs).eq(1);
+    expect(input.warning).eq('Placing next to severe hazards requires losing 2 units of the same production.');
     input.process({type: 'productionToLose', units: Units.of({plants: 2})}, player);
     expect(player.production.plants).eq(5);
   });

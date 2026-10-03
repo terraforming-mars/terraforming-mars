@@ -60,6 +60,7 @@ import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 import {sum} from '@/common/utils/utils';
+import {PRODUCTION_MINIMUMS} from '@/common/constants';
 
 type DataModel = {
   units: Units,
@@ -96,7 +97,7 @@ export default defineComponent({
   },
   methods: {
     canDeductMegaCredits() {
-      return this.playerinput.payProduction.units.megacredits > -5;
+      return this.playerinput.payProduction.units.megacredits > PRODUCTION_MINIMUMS.megacredits;
     },
     canDeductSteel() {
       return this.playerinput.payProduction.units.steel > 0;
@@ -120,7 +121,7 @@ export default defineComponent({
       const expendableProductionQuantity = function(type: keyof Units, model: PayProductionModel): number {
         switch (type) {
         case 'megacredits':
-          return model.units.megacredits + 5;
+          return model.units.megacredits - PRODUCTION_MINIMUMS.megacredits;
         case 'steel':
           return model.units.steel;
         case 'titanium':

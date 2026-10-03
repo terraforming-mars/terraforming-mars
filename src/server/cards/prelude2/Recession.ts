@@ -5,6 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
+import {PRODUCTION_MINIMUMS} from '../../../common/constants';
 
 
 export class Recession extends PreludeCard {
@@ -28,7 +29,7 @@ export class Recession extends PreludeCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     for (const target of player.opponents) {
-      if (target.production.megacredits === -5) {
+      if (target.production.megacredits === PRODUCTION_MINIMUMS.megacredits) {
         return false;
       }
     }

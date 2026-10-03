@@ -34,7 +34,7 @@ import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, PRODUCTION_MINIMUMS} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 import {inplaceRemove} from '../../common/utils/utils';
 import {SelectCard} from '../inputs/SelectCard';
@@ -49,11 +49,10 @@ import {AddResourcesToAnyCardExecutor} from './AddResourcesToAnyCardExecutor';
  * went negative takes nothing instead of granting a gain, and never more than the player
  * can give up, so `add` logs the amount that really changed.
  */
-function loseable(units: Units, stock: BaseStock, minMegacredits: number): Units {
+function loseable(units: Units, stock: BaseStock, minimums: Units): Units {
   const capped = {...Units.EMPTY};
   for (const key of Units.keys) {
-    const floor = key === 'megacredits' ? minMegacredits : 0;
-    capped[key] = Math.max(0, Math.min(units[key], stock[key] - floor));
+    capped[key] = Math.max(0, Math.min(units[key], stock[key] - minimums[key]));
   }
   return capped;
 }
@@ -442,12 +441,11 @@ export class Executor implements BehaviorExecutor {
     if (behavior.lose !== undefined) {
       const lose = behavior.lose;
       if (lose.production) {
-        // Production megacredits bottom out at -5, not 0.
-        const units = loseable(ctx.countUnits(lose.production), player.production, -5);
+        const units = loseable(ctx.countUnits(lose.production), player.production, PRODUCTION_MINIMUMS);
         player.production.adjust(Units.negative(units), {log: true, from});
       }
       if (lose.stock) {
-        const units = loseable(ctx.countUnits(lose.stock), player.stock, 0);
+        const units = loseable(ctx.countUnits(lose.stock), player.stock, Units.EMPTY);
         player.stock.adjust(Units.negative(units), {log: true, from});
       }
     }

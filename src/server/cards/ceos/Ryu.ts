@@ -9,6 +9,9 @@ import {ALL_RESOURCES, Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {message} from '../../logs/MessageBuilder';
+import {PRODUCTION_MINIMUMS} from '../../../common/constants';
+import {Units} from '../../../common/Units';
+import {sum} from '../../../common/utils/utils';
 
 export class Ryu extends CeoCard {
   constructor() {
@@ -36,7 +39,7 @@ export class Ryu extends CeoCard {
               player.production.titanium +
               player.production.plants +
               player.production.energy +
-              player.production.heat > -5;
+              player.production.heat > sum(Units.values(PRODUCTION_MINIMUMS));
   }
 
   public action(player: IPlayer): PlayerInput | undefined {
@@ -45,11 +48,7 @@ export class Ryu extends CeoCard {
 
     ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
       const selectOption = new SelectOption(message('Decrease ${0} production', (b) => b.string(resourceToDecrease))).andThen(() => {
-        // M€ production can go down to -5
-        let decreasable = player.production.get(resourceToDecrease);
-        if (resourceToDecrease === Resource.MEGACREDITS) {
-          decreasable += 5;
-        }
+        const decreasable = player.production.get(resourceToDecrease) - PRODUCTION_MINIMUMS[resourceToDecrease];
         const maxDecreasableAmt = Math.min(player.game.generation + 2, decreasable);
 
         return new SelectAmount(
@@ -79,10 +78,6 @@ export class Ryu extends CeoCard {
   }
 
   private productionIsDecreasable(player: IPlayer, resource: Resource): boolean {
-    let minProduction = 0;
-    if (resource === Resource.MEGACREDITS) {
-      minProduction -= 5;
-    }
-    return player.production.get(resource) > minProduction;
+    return player.production.get(resource) > PRODUCTION_MINIMUMS[resource];
   }
 }

@@ -246,8 +246,11 @@ export class AresHandler {
     if (steps > 0) {
       const title = message('Choose ${0} units of production to lose from ${1} mild and ${2} severe hazards',
         (b) => b.number(steps).number(cost.production.mild).number(cost.production.severe));
+      const warning = cost.production.severe > 0 ?
+        'Placing next to severe hazards requires losing 2 units of the same production.' :
+        undefined;
       // TODO(kberg): don't send interrupt if total is available.
-      player.game.defer(new SelectProductionToLoseDeferred(player, steps, title, cost.production.severe));
+      player.game.defer(new SelectProductionToLoseDeferred(player, steps, title, cost.production.severe, warning));
     }
     if (cost.megacredits > 0) {
       player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));

@@ -3,6 +3,8 @@
   <div class="wf-component wf-component--select-production-to-lose">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 
+    <h3 v-if="playerinput.warning !== undefined" class="payments_title">{{ $t(playerinput.warning) }}</h3>
+
     <div class="payments_type input-group" v-if="canDeductMegaCredits()">
       <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
       <button class="btn btn-primary" @click="delta('megacredits', -1)"><i class="icon icon-minus" ></i></button>

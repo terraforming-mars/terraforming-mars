@@ -3,17 +3,18 @@ import {Resource} from '../../common/Resource';
 import {From, isFromPlayer} from '../logs/From';
 import {BaseStock} from './StockBase';
 import {IPlayer} from '../IPlayer';
+import {PRODUCTION_MINIMUMS} from '../../common/constants';
 
 export class Production extends BaseStock {
   constructor(player: IPlayer) {
-    super(player, -5);
+    super(player, PRODUCTION_MINIMUMS.megacredits);
   }
   public add(
     resource: Resource,
     amount : number,
     options? : { log: boolean, from? : From, stealing?: boolean},
   ) {
-    const adj = resource === Resource.MEGACREDITS ? -5 : 0;
+    const adj = PRODUCTION_MINIMUMS[resource];
     const delta = (amount >= 0) ? amount : Math.max(amount, -(this[resource] - adj));
     this[resource] += delta;
 

@@ -105,3 +105,12 @@ export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
 export const DEFAULT_WAITING_FOR_TIMEOUT = 1000;
 export const DEFAULT_LOG_LENGTH = 50;
 export const DEFAULT_URL_ROOT = 'http://localhost:8080';
+
+export const PRODUCTION_MINIMUMS = {
+  megacredits: -5,
+  steel: 0,
+  titanium: 0,
+  plants: 0,
+  energy: 0,
+  heat: 0,
+};

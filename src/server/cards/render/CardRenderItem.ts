@@ -12,7 +12,7 @@ import {liteBoolean} from '../../../common/LiteBoolean';
 
 export type ItemOptions = Partial<{
   size: Size;
-  amount: number;
+  amount?: number;
   all: boolean;
   digit: boolean;
   played: boolean;
@@ -49,7 +49,7 @@ export class CardRenderItem implements ICardRenderItem {
   public resource?: CardResource | undefined;
   public tag?: Tag | undefined;
 
-  constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
+  constructor(public type: CardRenderItemType, public amount?: number, options?: ItemOptions) {
     switch (options?.digit) {
     case true:
       this.showDigit = true;
@@ -57,7 +57,7 @@ export class CardRenderItem implements ICardRenderItem {
     case false:
       break; // it's undefined
     default:
-      this.showDigit = liteBoolean(Math.abs(this.amount) > 5);
+      this.showDigit = liteBoolean(Math.abs(this.amount ?? 0) > 5);
     }
 
     if (options === undefined) {

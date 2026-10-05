@@ -96,6 +96,7 @@ import {Hospitals} from './Hospitals';
 import {NewHolland} from './NewHolland';
 import {Vermin} from './Vermin';
 import {WeatherBalloons} from './WeatherBalloons';
+import {ShipmentToEarth} from './ShipmentToEarth';
 
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
@@ -175,6 +176,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
     [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
     [CardName.STERLING_VENTS]: {Factory: SterlingVents},
+    [CardName.SHIPMENT_TO_EARTH]: {Factory: ShipmentToEarth},
   },
 
   preludeCards: {

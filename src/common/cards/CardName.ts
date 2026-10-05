@@ -575,6 +575,7 @@ export enum CardName {
   ALBEDO_PLANTS = 'Albedo Plants',
   STERLING_VENTS = 'Sterling Vents',
   BOOM_TOWN = 'Boom Town',
+  SHIPMENT_TO_EARTH = 'Shipment to Earth',
 
   // Promo cards from Dutch Open
   FLOYD_CONTINUUM = 'Floyd Continuum',

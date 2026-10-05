@@ -25,9 +25,9 @@ export class ExportConvoy extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U097',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(4, {digit}).or()
-            .minus().resource(CardResource.MICROBE, {amount: 3, digit}).asterix().br
-            .or().minus().resource(CardResource.ANIMAL, {amount: 2, digit}).asterix().br;
+          b.plants(-4, {digit}).or()
+            .resource(CardResource.MICROBE, {amount: -3, digit}).asterix().br
+            .or().resource(CardResource.ANIMAL, {amount: -2, digit}).asterix().br;
           b.megacredits(20).corruption(1);
         }),
         description: 'Pay 4 plants, or 3 microbes, or 2 animals from any of your cards. ' +

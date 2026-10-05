@@ -23,7 +23,7 @@ export class SterlingVents extends Card implements IProjectCard {
         cardNumber: 'X79',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().heat(2).br;
+            pb.heat(-2).br;
             pb.plus().energy(2);
           });
         }),

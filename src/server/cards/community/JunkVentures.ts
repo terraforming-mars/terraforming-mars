@@ -19,7 +19,7 @@ export class JunkVentures extends CorporationCard implements ICorporationCard {
         description: 'You start with 43 M€. As your first action, discard the top 3 cards of the deck.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(43).text('DECK: ').minus().cards(3);
+          b.megacredits(43).text('DECK: ').cards(-3);
           b.corpBox('action', (cb) => {
             cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', {size: Size.SMALL, uppercase});
           });

@@ -31,7 +31,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       metadata: {
         cardNumber: '190',
         renderData: CardRenderer.builder((b) => {
-          b.minus().heat(5, {digit});
+          b.heat(-5, {digit});
           b.plus().plants(4, {digit});
           b.or().resource(CardResource.ANIMAL, {amount: 2, digit}).asterix();
         }),

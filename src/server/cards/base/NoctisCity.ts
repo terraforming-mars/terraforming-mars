@@ -28,7 +28,7 @@ export class NoctisCity extends Card implements IProjectCard {
         cardNumber: '017',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(3);
           }).nbsp.city().asterix();
         }),

@@ -27,7 +27,7 @@ export class MonsInsurance extends CorporationCard implements ICorporationCard {
           b.corpBox('effect', (cb) => {
             cb.vSpace(Size.SMALL);
             cb.effect('When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.', (eb) => {
-              eb.production((pb) => pb.wild(1, {all})).or().minus().wild(1, {all});
+              eb.production((pb) => pb.wild(1, {all})).or().wild(-1, {all});
               eb.startEffect.text('pay', {size: Size.SMALL, uppercase}).megacredits(3);
             });
           });

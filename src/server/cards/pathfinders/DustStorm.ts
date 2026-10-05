@@ -23,7 +23,7 @@ export class DustStorm extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf08',
         renderData: CardRenderer.builder((b) => {
-          b.minus().energy(1, {all}).asterix();
+          b.energy(-1, {all}).asterix();
           b.br;
           b.temperature(2);
         }),

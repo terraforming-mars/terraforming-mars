@@ -26,7 +26,7 @@ export class BigAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).br;
           b.titanium(4).br;
-          b.minus().plants(-4, {all});
+          b.plants(-4, {all});
         }),
       },
     });

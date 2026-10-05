@@ -28,7 +28,7 @@ export class AICentral extends ActionCard implements IProjectCard {
         cardNumber: '208',
         renderData: CardRenderer.builder((b) => {
           b.action('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
-          b.production((pb) => pb.minus().energy(1))
+          b.production((pb) => pb.energy(-1))
             .plainText('Requires 3 science tags to play. Decrease your energy production 1 step.', /* parens= */ true);
         }),
       },

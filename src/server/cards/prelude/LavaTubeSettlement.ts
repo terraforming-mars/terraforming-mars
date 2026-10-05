@@ -24,7 +24,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
         cardNumber: 'P37',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(2);
           }).br;
           b.city().asterix();

@@ -23,7 +23,7 @@ export class SmallAsteroid extends Card implements IProjectCard {
         cardNumber: '209',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).br;
-          b.minus().plants(2, {all});
+          b.plants(-2, {all});
         }),
         description: 'Increase temperature 1 step. Remove up to 2 plants from any player.',
       },

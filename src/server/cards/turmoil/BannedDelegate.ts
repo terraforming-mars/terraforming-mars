@@ -23,7 +23,7 @@ export class BannedDelegate extends Card implements IProjectCard {
         cardNumber: 'T02',
         description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',
         renderData: CardRenderer.builder((b) => {
-          b.minus().delegates(1, {all});
+          b.delegates(-1, {all});
         }),
       },
     });

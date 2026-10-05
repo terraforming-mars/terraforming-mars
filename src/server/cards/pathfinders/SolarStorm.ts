@@ -27,7 +27,7 @@ export class SolarStorm extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf32',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(2, {all}).asterix().nbsp.minus().resource(CardResource.DATA, {amount: 3, digit, all}).br;
+          b.plants(-2, {all}).asterix().nbsp.resource(CardResource.DATA, {amount: -3, digit, all}).br;
           b.production((pb) => pb.heat(1)).nbsp.temperature(1);
         }),
         description: 'Every player loses 2 plants. Remove up to 3 data from any player. ' +

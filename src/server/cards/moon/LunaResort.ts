@@ -25,8 +25,8 @@ export class LunaResort extends Card {
           'Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.',
         cardNumber: 'M21',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(2).production((pb) => {
-            pb.minus().energy(1).nbsp.plus().megacredits(3);
+          b.titanium(-2).production((pb) => {
+            pb.energy(-1).nbsp.plus().megacredits(3);
           }).br;
           b.moonHabitatRate();
         }),

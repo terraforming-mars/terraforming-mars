@@ -26,7 +26,7 @@ export class DeimosDown extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
           b.steel(4).br;
-          b.minus().plants(-8, {all});
+          b.plants(-8, {all});
         }),
       },
     });

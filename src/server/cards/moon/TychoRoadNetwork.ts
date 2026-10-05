@@ -26,7 +26,7 @@ export class TychoRoadNetwork extends Card {
         'Place a road tile on The Moon and raise the logistic rate 1 step.',
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(1).br;
+          b.steel(-1).br;
           b.production((eb) => eb.megacredits(1)).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE});
         }),
       },

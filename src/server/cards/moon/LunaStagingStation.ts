@@ -22,7 +22,7 @@ export class LunaStagingStation extends Card {
         description: 'Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.',
         cardNumber: 'M30',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).br;
+          b.titanium(-1).br;
           b.moonLogisticRate({amount: 2});
         }),
       },

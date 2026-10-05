@@ -22,7 +22,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
         cardNumber: '171',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(2).br;
+            pb.energy(-2).br;
             pb.plus().plants(1);
           });
           b.tr(1);

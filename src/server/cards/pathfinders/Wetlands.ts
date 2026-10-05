@@ -28,7 +28,7 @@ export class Wetlands extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf03',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(4, {digit}).tile(TileType.WETLANDS, false, false).asterix();
+          b.plants(-4, {digit}).tile(TileType.WETLANDS, false, false).asterix();
           b.oxygen(1, {size: Size.SMALL}).tr(1, {size: Size.SMALL});
           b.br;
           b.text('(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ' +

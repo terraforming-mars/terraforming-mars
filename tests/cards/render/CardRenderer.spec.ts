@@ -7,6 +7,7 @@ import {AltSecondaryTag} from '../../../src/common/cards/render/AltSecondaryTag'
 import {CardResource} from '../../../src/common/CardResource';
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast} from '../../../src/common/utils/utils';
+import {CardRenderSymbol} from '../../../src/server/cards/render/CardRenderSymbol';
 
 describe('CardRenderer', () => {
   describe('temperature', () => {
@@ -42,10 +43,10 @@ describe('CardRenderer', () => {
     });
   });
   it('plants: success', () => {
-    const renderer = CardRenderer.builder((b) => b.plants(-5));
+    const renderer = CardRenderer.builder((b) => b.plants(5));
     const item = cast(renderer.rows[0][0], CardRenderItem);
     expect(item.type).to.equal(CardRenderItemType.PLANTS);
-    expect(item.amount).to.equal(-5);
+    expect(item.amount).to.equal(5);
   });
   it('heat: success', () => {
     const renderer = CardRenderer.builder((b) => b.heat(2));
@@ -327,5 +328,36 @@ describe('CardRenderer', () => {
     const item = cast(renderer.rows[0][0], CardRenderItem);
     expect(item.type).to.equal(CardRenderItemType.MULTIPLIER_WHITE);
     expect(item.amount).is.undefined;
+  });
+  it('negative digit: prefixed with minus', () => {
+    const renderer = CardRenderer.builder((b) => b.plants(-3, {digit: true}).steel(-3, {digit: true}));
+    const row = renderer.rows[0];
+    expect(row).has.length(4);
+    expect(row[0]).deep.eq(CardRenderSymbol.minus(Size.MEDIUM));
+    expect(cast(row[1], CardRenderItem).amount).eq(3);
+    expect(row[2]).deep.eq(CardRenderSymbol.minus(Size.MEDIUM));
+    expect(cast(row[3], CardRenderItem).amount).eq(3);
+  });
+  it('negative without digit: prefixed with minus', () => {
+    const renderer = CardRenderer.builder((b) => b.plants(-3));
+    const row = renderer.rows[0];
+    expect(row).has.length(2);
+    expect(row[0]).deep.eq(CardRenderSymbol.minus(Size.MEDIUM));
+    expect(cast(row[1], CardRenderItem).amount).eq(3);
+  });
+  it('no amount: no minus', () => {
+    const renderer = CardRenderer.builder((b) => b.tag(Tag.EARTH));
+    const row = renderer.rows[0];
+    expect(row).has.length(1);
+    expect(cast(row[0], CardRenderItem).amount).is.undefined;
+  });
+  it('negative megacredits: no minus', () => {
+    const renderer = CardRenderer.builder((b) => b.megacredits(-6));
+    const row = renderer.rows[0];
+    expect(row).has.length(1);
+    expect(cast(row[0], CardRenderItem).amount).eq(-6);
+  });
+  it('negative digit: explicit minus throws', () => {
+    expect(() => CardRenderer.builder((b) => b.minus().plants(-1))).to.throw(/already has a minus symbol/);
   });
 });

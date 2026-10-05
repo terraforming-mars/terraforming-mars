@@ -22,7 +22,7 @@ export class MiningExpedition extends Card implements IProjectCard {
         cardNumber: '063',
         renderData: CardRenderer.builder((b) => {
           b.oxygen(1).br;
-          b.minus().plants(-2, {all});
+          b.plants(-2, {all});
           b.steel(2);
         }),
         description: 'Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.',

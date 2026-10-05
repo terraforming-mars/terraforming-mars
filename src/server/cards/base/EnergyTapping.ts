@@ -24,7 +24,7 @@ export class EnergyTapping extends Card implements IProjectCard {
         description: 'Decrease any energy production 1 step and increase your own 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1, {all}).br;
+            pb.energy(-1, {all}).br;
             pb.plus().energy(1);
           });
         }),

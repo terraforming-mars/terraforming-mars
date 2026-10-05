@@ -41,7 +41,7 @@ export class DarksideIncubationPlant extends ActionCard implements IActionCard, 
 
           b.plainText('Action: Add 1 microbe here, or spend 2 microbes to raise the habitat rate 1 step.', /* parens */ true);
           b.br;
-          b.minus().titanium(1);
+          b.titanium(-1);
         }),
       },
     });

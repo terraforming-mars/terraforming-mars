@@ -32,7 +32,7 @@ export class RedCity extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'PFT2',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1).megacredits(2));
+          b.production((pb) => pb.energy(-1).megacredits(2));
         }),
         description: 'Requires that Reds are ruling or that you have 2 delegates there. ' +
           '-1 energy prod, +2 M€ prod. ' +

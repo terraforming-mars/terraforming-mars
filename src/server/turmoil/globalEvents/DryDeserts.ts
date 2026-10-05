@@ -17,7 +17,7 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.UNITY,
       renderData: CardRenderer.builder((b) => {
-        b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
+        b.oceans(-1).nbsp.nbsp.wild(1).slash().influence();
       }),
     });
   }

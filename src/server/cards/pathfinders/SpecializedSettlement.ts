@@ -28,7 +28,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
           'Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(3);
             pb.plus().wild(1);
           }).nbsp.city();

@@ -59,7 +59,7 @@ export class Eris extends CorporationCard implements ICorporationCard {
           b.megacredits(46).nbsp.cards(1, {secondaryTag: AltSecondaryTag.ARES});
           b.corpBox('action', (ce) => {
             ce.action('Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.', (eb) => {
-              eb.empty().startAction.plus().hazardTile().slash().minus().hazardTile().colon().tr(1, {size: Size.SMALL});
+              eb.empty().startAction.plus().hazardTile().slash().hazardTile(-1).colon().tr(1, {size: Size.SMALL});
             });
           });
         }),

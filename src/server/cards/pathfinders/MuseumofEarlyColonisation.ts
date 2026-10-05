@@ -26,7 +26,7 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf11',
         renderData: CardRenderer.builder((b) => {
-          b.production(((pb) => pb.minus().energy(1).nbsp.steel(1).titanium(1).plants(1)));
+          b.production(((pb) => pb.energy(-1).nbsp.steel(1).titanium(1).plants(1)));
           b.br.tr(1);
         }),
         description: 'Requires 1 ocean, 1 city and one greenery on Mars. ' +

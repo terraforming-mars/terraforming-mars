@@ -24,9 +24,9 @@ export class Habitat14 extends Card {
         cardNumber: 'M05',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).minus().megacredits(1);
+            pb.energy(-1).minus().megacredits(1);
           }).br;
-          b.minus().titanium(1).nbsp.moonHabitat();
+          b.titanium(-1).nbsp.moonHabitat();
         }),
       },
     });

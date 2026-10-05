@@ -26,7 +26,7 @@ export class Asteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).br;
           b.titanium(2).br;
-          b.minus().plants(-3, {all});
+          b.plants(-3, {all});
         }),
       },
     });

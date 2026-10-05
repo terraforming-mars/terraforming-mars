@@ -22,7 +22,7 @@ export class StripMine extends Card implements IProjectCard {
         cardNumber: '138',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(2).br;
+            pb.energy(-2).br;
             pb.plus().steel(2).titanium(1);
           }).br;
           b.oxygen(2);

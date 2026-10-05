@@ -89,7 +89,7 @@ export interface ICardRenderItem extends CardComponent {
   /** The thing being drawn */
   type: CardRenderItemType;
   /** The number of times it is drawn (or MC count) */
-  amount: number;
+  amount?: number;
   /** activated for any player */
   anyPlayer?: boolean;
   /** render a digit instead of chain of items */

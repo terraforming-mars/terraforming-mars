@@ -276,7 +276,7 @@ export default defineComponent({
       }
     },
     amountAbs(): number {
-      return this.item.amountInside ? 1 : Math.abs(this.item.amount);
+      return this.item.amountInside ? 1 : Math.abs(this.item.amount ?? 1);
     },
     itemsToShow(): number {
       return this.item.showDigit ? 1 : this.amountAbs;
@@ -289,7 +289,7 @@ export default defineComponent({
         if (this.item.innerText) {
           result += this.item.innerText;
         } else if (this.item.amountInside) {
-          if (this.item.amount !== 0) {
+          if (this.item.amount) {
             result += this.item.amount.toString();
           }
 

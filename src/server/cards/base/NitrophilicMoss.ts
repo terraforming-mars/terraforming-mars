@@ -24,7 +24,7 @@ export class NitrophilicMoss extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(2);
-          }).nbsp.minus().plants(2);
+          }).nbsp.plants(-2);
         }),
         description: 'Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.',
       },

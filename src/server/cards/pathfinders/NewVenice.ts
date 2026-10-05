@@ -27,7 +27,7 @@ export class NewVenice extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf3',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(2).br;
+          b.plants(-2).br;
           b.production((pb) => {
             pb.energy(1).megacredits(2);
           }).nbsp.tile(TileType.OCEAN_CITY, false, true);

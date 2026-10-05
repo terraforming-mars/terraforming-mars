@@ -21,7 +21,7 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
+        b.production((pb) => pb.energy(-1).steel(1)).nbsp.nbsp;
         b.steel(1).slash().influence({size: Size.MEDIUM});
       }),
     });

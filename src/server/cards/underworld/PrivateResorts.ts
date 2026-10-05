@@ -23,7 +23,7 @@ export class PrivateResorts extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U054',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().heat(1).megacredits(3)).br;
+          b.production((pb) => pb.heat(-1).megacredits(3)).br;
           b.corruption(1);
         }),
         description: 'Requires 3 oceans. Reduce your heat production 1 step. ' +

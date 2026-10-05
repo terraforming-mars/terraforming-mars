@@ -25,7 +25,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
         cardNumber: '002',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().titanium(-1, {all}).br;
+            pb.titanium(-1, {all}).br;
             pb.plus().titanium(1);
           });
         }),

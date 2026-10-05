@@ -21,7 +21,7 @@ export class Capital extends Card implements IProjectCard {
       },
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => {
-          pb.minus().energy(2).br;
+          pb.energy(-2).br;
           pb.plus().megacredits(5);
         }).nbsp.tile(TileType.CAPITAL, false).br;
         b.vpText('1 additional VP for each ocean tile adjacent to this city tile.');

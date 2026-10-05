@@ -24,7 +24,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U086',
         renderData: CardRenderer.builder((b) => {
-          b.minus().corruption(1, {all}).cards(2, {secondaryTag: Tag.EVENT});
+          b.corruption(-1, {all}).cards(2, {secondaryTag: Tag.EVENT});
         }),
         description: 'Remove up to 1 corruption from another player. Reveal 2 cards from the deck until you reveal 2 event cards. Take them into hand and discard the rest.',
       },

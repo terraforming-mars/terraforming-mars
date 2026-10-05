@@ -20,7 +20,7 @@ export class OldMiningColony extends PreludeCard {
       metadata: {
         cardNumber: 'P55',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.titanium(1)).colonies(1).minus().cards(1);
+          b.production((pb) => pb.titanium(1)).colonies(1).cards(-1);
         }),
         description: 'Increase your titanium production 1 step. Place 1 colony. Discard 1 card.',
       },

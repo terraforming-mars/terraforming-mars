@@ -28,7 +28,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
           b.resource(CardResource.MICROBE, {amount: 2, secondaryTag: Tag.VENUS}).or().resource(CardResource.ANIMAL, {amount: 2, secondaryTag: Tag.VENUS}).br;
-          b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
+          b.production((pb) => pb.energy(-1).nbsp.plus().megacredits(2));
         }),
         description: {
           text: 'Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.',

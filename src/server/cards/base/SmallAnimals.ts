@@ -34,7 +34,7 @@ export class SmallAnimals extends ActionCard implements IProjectCard {
           b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
-          b.production((pb) => pb.minus().plants(1, {all})).br;
+          b.production((pb) => pb.plants(-1, {all})).br;
           b.vpText('1 VP per 2 animals on this card.');
         }),
         description: {

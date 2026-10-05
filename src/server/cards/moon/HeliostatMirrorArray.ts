@@ -22,7 +22,7 @@ export class HeliostatMirrorArray extends Card {
         description: 'Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.',
         cardNumber: 'M41',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).heat(1);
+          b.titanium(-1).heat(1);
           b.br;
           b.production((pb) => pb.energy(2));
         }),

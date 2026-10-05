@@ -21,7 +21,7 @@ export class Deepnuking extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U006',
         renderData: CardRenderer.builder((b) => {
-          b.excavate(2).minus().plants(3, {all});
+          b.excavate(2).plants(-3, {all});
         }),
         description: 'Excavate 2 underground resources. Remove up to 3 plants from any player.',
       },

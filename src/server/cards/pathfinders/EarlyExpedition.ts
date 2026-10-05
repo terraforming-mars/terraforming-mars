@@ -26,7 +26,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
         cardNumber: 'Pf18',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(3);
           });
           b.resource(CardResource.DATA).asterix().city().asterix();

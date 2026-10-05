@@ -27,7 +27,7 @@ export class MareImbriumMine extends Card implements IProjectCard {
         description: 'Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.',
         cardNumber: 'M03',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1);
+          b.titanium(-1);
           b.production((pb) => pb.steel(1).titanium(1)).br;
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),

@@ -17,7 +17,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
       description: 'Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.',
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => {
-          pb.minus().energy(1).br;
+          pb.energy(-1).br;
           pb.plus().megacredits(4).br;
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
         b.vpText('1 VP per adjacent city tile.');

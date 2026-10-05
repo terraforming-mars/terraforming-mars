@@ -25,7 +25,7 @@ export class FrontierTown extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'P74',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1)).city().asterix();
+          b.production((pb) => pb.energy(-1)).city().asterix();
         }),
         description: 'Requires that Mars First is ruling or that you have 2 delegates there. ' +
         'Decrease your energy production one step. Place a city tile. ' +

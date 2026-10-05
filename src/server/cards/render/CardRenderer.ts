@@ -3,7 +3,8 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
 import {TileType} from '../../../common/TileType';
-import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEffectAction, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem} from '../../../common/cards/render/Types';
+import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEffectAction, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem, isICardRenderSymbol} from '../../../common/cards/render/Types';
+import {CardRenderSymbolType} from '../../../common/cards/render/CardRenderSymbolType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
@@ -155,7 +156,20 @@ abstract class Builder<T> {
     if (this.superscript && isICardRenderItem(thing)) {
       thing.isSuperscript = true;
     }
-    this._currentRow().push(thing);
+    const row = this._currentRow();
+    // A negative amount renders as a minus symbol followed by the absolute value.
+    // Items that show their amount inside (e.g. megacredits) render their own sign.
+    if (isICardRenderItem(thing) && !thing.amountInside && thing.amount !== undefined && thing.amount < 0) {
+      // TODO(kberg): Remove this guard after 2028-10-05. It is here for forks of this repo, whose cards
+      // may still be written as minus().x(-n), which would now render two minus symbols.
+      const previous = row[row.length - 1];
+      if (isICardRenderSymbol(previous) && previous.type === CardRenderSymbolType.MINUS) {
+        throw new Error('Negative amount already has a minus symbol; remove minus() or use a positive amount.');
+      }
+      row.push(CardRenderSymbol.minus(Size.MEDIUM));
+      thing.amount = -thing.amount;
+    }
+    row.push(thing);
     return this;
   }
 

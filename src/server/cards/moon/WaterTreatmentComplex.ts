@@ -22,7 +22,7 @@ export class WaterTreatmentComplex extends Card {
       metadata: {
         description: 'Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.',
         cardNumber: 'M46',
-        renderData: CardRenderer.builder((b) => b.minus().titanium(1).br.moonHabitatRate({amount: 2})),
+        renderData: CardRenderer.builder((b) => b.titanium(-1).br.moonHabitatRate({amount: 2})),
       },
     });
   }

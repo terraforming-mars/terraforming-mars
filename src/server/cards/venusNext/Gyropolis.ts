@@ -22,7 +22,7 @@ export class Gyropolis extends Card implements IProjectCard {
         cardNumber: '230',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(2).br;
+            pb.energy(-2).br;
             pb.plus().megacredits(1).slash().tag(Tag.VENUS).br;
             pb.plus().megacredits(1).slash().tag(Tag.EARTH).br;
           }).nbsp.city();

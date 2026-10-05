@@ -22,7 +22,7 @@ export class UndergroundRailway extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U004',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1)).br;
+          b.production((pb) => pb.energy(-1)).br;
           b.tr(1).slash().undergroundResources(4, {digit});
         }),
         description: 'Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.',

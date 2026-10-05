@@ -21,7 +21,7 @@ export class FuelFactory extends Card implements IProjectCard {
         cardNumber: '180',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().titanium(1).megacredits(1);
           });
         }),

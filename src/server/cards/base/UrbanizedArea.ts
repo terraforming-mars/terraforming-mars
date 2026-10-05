@@ -29,7 +29,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
         cardNumber: '120',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(2);
           }).city().asterix();
         }),

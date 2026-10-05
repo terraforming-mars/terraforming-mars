@@ -22,7 +22,7 @@ export class SnowCover extends GlobalEvent implements IGlobalEvent {
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().temperature(2).nbsp.cards(1).slash().influence();
+        b.temperature(-2).nbsp.cards(1).slash().influence();
       }),
     });
   }

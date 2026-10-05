@@ -33,7 +33,7 @@ export class LunaTrainStation extends Card {
         '2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(2, {digit});
+          b.steel(-2, {digit});
           b.production((pb) => pb.megacredits(4));
           b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticRate();
         }),

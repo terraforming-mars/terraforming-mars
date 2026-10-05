@@ -26,7 +26,7 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).br;
           b.oceans(2).br;
-          b.minus().plants(-6, {all});
+          b.plants(-6, {all});
         }),
       },
     });

@@ -21,7 +21,7 @@ export class RadChemFactory extends Card implements IProjectCard {
       metadata: {
         cardNumber: '205',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1)).br;
+          b.production((pb) => pb.energy(-1)).br;
           b.tr(2);
         }),
         description: 'Decrease your energy production 1 step. Raise your TR 2 steps.',

@@ -18,8 +18,8 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
       currentDelegate: PartyName.MARS,
       renderData: CardRenderer.builder((b) => {
         b.tag(Tag.EARTH, {size: Size.SMALL}).plus().influence().colon().br;
-        b.text('1st:', {size: Size.SMALL}).minus().tr(2, {size: Size.TINY}).nbsp;
-        b.text('2nd:', {size: Size.SMALL}).minus().tr(1, {size: Size.TINY});
+        b.text('1st:', {size: Size.SMALL}).tr(-2, {size: Size.TINY}).nbsp;
+        b.text('2nd:', {size: Size.SMALL}).tr(-1, {size: Size.TINY});
       }),
     });
   }

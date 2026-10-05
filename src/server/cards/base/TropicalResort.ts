@@ -22,7 +22,7 @@ export class TropicalResort extends Card implements IProjectCard {
         cardNumber: '098',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) =>{
-            pb.minus().heat(2).br;
+            pb.heat(-2).br;
             pb.plus().megacredits(3);
           });
         }),

@@ -26,7 +26,7 @@ export class DawnCity extends Card implements IProjectCard {
         description: 'Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().titanium(1);
           }).nbsp.city().asterix();
         }),

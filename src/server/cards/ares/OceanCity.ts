@@ -27,7 +27,7 @@ export class OceanCity extends Card implements IProjectCard {
         cardNumber: 'A20',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().megacredits(3);
           }).nbsp.tile(TileType.OCEAN_CITY, false, true);
         }),

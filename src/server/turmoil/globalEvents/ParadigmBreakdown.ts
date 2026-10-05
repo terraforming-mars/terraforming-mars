@@ -19,7 +19,7 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().cards(2).nbsp.megacredits(2).slash().influence();
+        b.cards(-2).nbsp.megacredits(2).slash().influence();
       }),
     });
   }

@@ -22,7 +22,7 @@ export class GHGFactories extends Card implements IProjectCard {
         cardNumber: '126',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).br;
+            pb.energy(-1).br;
             pb.plus().heat(4, {digit});
           });
         }),

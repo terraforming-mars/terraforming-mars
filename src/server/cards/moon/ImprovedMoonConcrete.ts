@@ -23,9 +23,9 @@ export class ImprovedMoonConcrete extends Card implements IProjectCard {
         cardNumber: 'M37',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you build a mine on The Moon, you spend 1 titanium less.', (eb) => {
-            eb.moonMine().startEffect.minus().titanium(1);
+            eb.moonMine().startEffect.titanium(-1);
           }).br;
-          b.minus().steel(2).moonMiningRate();
+          b.steel(-2).moonMiningRate();
         }),
       },
     });

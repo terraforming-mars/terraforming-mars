@@ -20,7 +20,7 @@ export class MagneticFieldStimulationDelays extends GlobalEvent implements IGlob
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().temperature(2).nbsp.minus().oxygen(2);
+        b.temperature(-2).nbsp.oxygen(-2);
       }),
     });
   }

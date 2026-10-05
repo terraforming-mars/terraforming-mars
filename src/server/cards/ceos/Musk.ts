@@ -18,7 +18,7 @@ export class Musk extends CeoCard {
       metadata: {
         cardNumber: 'L28',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().minus().cards(1, {secondaryTag: Tag.EARTH}).colon().cards(1, {secondaryTag: Tag.SPACE}).titanium(1).asterix();
+          b.opgArrow().cards(-1, {secondaryTag: Tag.EARTH}).colon().cards(1, {secondaryTag: Tag.SPACE}).titanium(1).asterix();
           b.br;
           b.titanium(6);
           b.br.br;

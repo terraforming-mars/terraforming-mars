@@ -14,7 +14,7 @@ export class MagneticFieldGeneratorsAres extends MagneticFieldGeneratorsPromo {
         cardNumber: 'Axx',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(4, {digit}).nbsp;
+            pb.energy(-4, {digit}).nbsp;
             pb.plus().plants(2);
           }).br;
           b.tr(3, {digit});

@@ -24,7 +24,7 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf44',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1).nbsp.steel(2)).br;
+          b.production((pb) => pb.energy(-1).nbsp.steel(2)).br;
           b.tr(1);
         }),
         description: 'Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.',

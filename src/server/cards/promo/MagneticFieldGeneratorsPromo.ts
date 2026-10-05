@@ -16,7 +16,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       cardNumber: 'X33',
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => {
-          pb.minus().energy(4, {digit}).br;
+          pb.energy(-4, {digit}).br;
           pb.plus().plants(2);
         }).br;
         b.tr(3, {digit}).tile(TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();

@@ -27,7 +27,7 @@ export class SmallComet extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf37',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(2, {all}).asterix();
+          b.plants(-2, {all}).asterix();
           b.br;
           b.temperature(1).oxygen(1).oceans(1).asterix();
           b.br;

@@ -23,7 +23,7 @@ export class FabricatedScandal extends Card implements IProjectCard {
         cardNumber: 'U013',
         renderData: CardRenderer.builder((b) => {
           b.corruption().br;
-          b.text('most').tr(1, {all}).colon().minus().tr(1).br;
+          b.text('most').tr(1, {all}).colon().tr(-1).br;
           b.text('least').tr(1, {all}).colon().plus().tr(1).br;
         }),
         description: 'Gain 1 corruption. The players with the highest TR lose 1 TR. ' +

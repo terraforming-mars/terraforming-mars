@@ -24,7 +24,7 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().plants(1).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
+        b.plants(-1).slash().tag(Tag.EARTH).influence({size: Size.SMALL});
       }),
     });
   }

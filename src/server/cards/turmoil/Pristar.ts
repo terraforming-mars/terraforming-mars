@@ -26,7 +26,7 @@ export class Pristar extends CorporationCard implements ICorporationCard {
 
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
-          b.megacredits(53).nbsp.nbsp.minus().tr(2, {size: Size.SMALL});
+          b.megacredits(53).nbsp.nbsp.tr(-2, {size: Size.SMALL});
           b.corpBox('effect', (ce) => {
             ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.', (eb) => {
               eb.tr(1, {size: Size.SMALL, cancelled: true}).startEffect.resource(CardResource.PRESERVATION).megacredits(6);

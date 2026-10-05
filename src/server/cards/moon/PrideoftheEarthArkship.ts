@@ -30,7 +30,7 @@ export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
           b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
             eb.empty().startAction.resource(CardResource.SCIENCE).slash().text('5').tag(Tag.SCIENCE);
           }).br;
-          b.minus().titanium(2);
+          b.titanium(-2);
         }),
       },
     });

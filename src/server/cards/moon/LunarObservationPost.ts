@@ -29,7 +29,7 @@ export class LunarObservationPost extends ActionCard {
             ab.empty().startAction.resource(CardResource.DATA).asterix();
           });
           b.br;
-          b.minus().titanium(1);
+          b.titanium(-1);
         }),
       },
     });

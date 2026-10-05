@@ -30,7 +30,7 @@ export class MareSerenitatisMine extends Card {
         'Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.',
         cardNumber: 'M04',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(2).minus().steel(1).br;
+          b.titanium(-2).steel(-1).br;
           b.production((pb) => pb.steel(1).titanium(1)).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix().moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTIC_RATE}).asterix();
         }),
       },

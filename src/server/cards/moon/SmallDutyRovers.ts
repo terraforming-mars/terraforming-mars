@@ -29,7 +29,7 @@ export class SmallDutyRovers extends Card implements IProjectCard {
         description: 'Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.',
         cardNumber: 'M73',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonLogisticRate().br;
+          b.titanium(-1).moonLogisticRate().br;
           b.megacredits(1).slash()
             .moonHabitat({size: Size.SMALL, all})
             .moonMine({size: Size.SMALL, all})

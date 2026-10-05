@@ -40,7 +40,7 @@ export class Hospitals extends ActionCard implements IProjectCard, IActionCard {
           b.action('Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.', (ab) => {
             ab.resource(CardResource.DISEASE).asterix().startAction.megacredits(1).slash().city({size: Size.SMALL, all});
           }).br;
-          b.production((pb) => pb.minus().energy(1));
+          b.production((pb) => pb.energy(-1));
         }),
         description: {
           text: 'Decrease your energy production 1 step.',

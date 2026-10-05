@@ -24,7 +24,7 @@ export class MinersOnStrike extends GlobalEvent implements IGlobalEvent {
         },
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().titanium(1).slash().tag(Tag.JOVIAN).influence({size: Size.SMALL});
+        b.titanium(-1).slash().tag(Tag.JOVIAN).influence({size: Size.SMALL});
       }),
     });
   }

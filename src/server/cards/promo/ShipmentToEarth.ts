@@ -24,7 +24,7 @@ export class ShipmentToEarth extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X87',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(3, {digit}).minus().steel(3, {digit}).br;
+          b.plants(-3, {digit}).steel(-3, {digit}).br;
           b.tr(3, {digit}).br;
           b.megacredits(2).slash().tag(Tag.EARTH);
         }),

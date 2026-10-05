@@ -22,7 +22,7 @@ export class DeepLunarMining extends Card {
         description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.',
         cardNumber: 'M18',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).production((pb) => {
+          b.titanium(-1).production((pb) => {
             pb.titanium(2);
           }).br;
           b.moonMiningRate();

@@ -26,7 +26,7 @@ export class LunaEcumenopolis extends Card {
         'Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. ' +
         'Increase your TR 1 step for each 2 steps of the habitat rate.',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(2).nbsp;
+          b.titanium(-2).nbsp;
           b.text('2').moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).asterix().br;
           b.tr(1).slash().moonHabitatRate().moonHabitatRate();
         }),

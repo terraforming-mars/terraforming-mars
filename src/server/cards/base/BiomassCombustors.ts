@@ -28,7 +28,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
         cardNumber: '183',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().plants(-1, {all}).br;
+            pb.plants(-1, {all}).br;
             pb.plus().energy(2);
           });
         }),

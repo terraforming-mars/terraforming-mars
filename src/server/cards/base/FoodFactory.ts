@@ -22,7 +22,7 @@ export class FoodFactory extends Card implements IProjectCard {
         cardNumber: '041',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().plants(1).br;
+            pb.plants(-1).br;
             pb.plus().megacredits(4);
           });
         }),

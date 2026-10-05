@@ -26,7 +26,7 @@ export class AncientShipyards extends Card {
           b.action('Steal 2 M€ from each player and add a resource cube here.', (eb) => {
             eb.empty().startAction.text('Steal').nbsp.megacredits(2, {all}).asterix().colon().resource(CardResource.RESOURCE_CUBE);
           }).br.br;
-          b.minus().titanium(3, {digit}).plainText('Spend 3 titanium.', /** parens */ true).br;
+          b.titanium(-3, {digit}).plainText('Spend 3 titanium.', /** parens */ true).br;
           b.vpText('-1 VP for every resource here.');
         }),
       },

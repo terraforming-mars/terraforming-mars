@@ -22,7 +22,7 @@ export class AlgaeBioreactors extends Card {
         description: 'Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.',
         cardNumber: 'M47',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().plants(1)).moonHabitatRate().oxygen(1);
+          b.production((pb) => pb.plants(-1)).moonHabitatRate().oxygen(1);
         }),
       },
     });

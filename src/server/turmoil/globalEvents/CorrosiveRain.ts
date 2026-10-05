@@ -18,7 +18,7 @@ export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {
         drawCard: {count: {turmoil: {influence: {}}}},
       },
       renderData: CardRenderer.builder((b) => {
-        b.minus().resource(CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
+        b.resource(CardResource.FLOATER, -2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
       }),
     });
   }

@@ -23,7 +23,7 @@ export class SponsoredAcademies extends Card implements IProjectCard {
       metadata: {
         cardNumber: '247',
         renderData: CardRenderer.builder((b) => {
-          b.minus().cards(1).br;
+          b.cards(-1).br;
           b.plus().cards(3, {digit}).asterix().nbsp.plus().cards(1, {all}).asterix();
         }),
         description: 'Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.',

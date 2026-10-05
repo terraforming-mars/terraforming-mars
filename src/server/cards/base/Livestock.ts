@@ -33,7 +33,7 @@ export class Livestock extends ActionCard implements IProjectCard {
             eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
           b.production((pb) => {
-            pb.minus().plants(1).nbsp.plus().megacredits(2);
+            pb.plants(-1).nbsp.plus().megacredits(2);
           }).br;
           b.vpText('1 VP for each animal on this card.');
         }),

@@ -7,6 +7,8 @@ import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {BoardName} from '@/common/boards/BoardName';
+import {SpaceName} from '@/common/boards/SpaceName';
+import {TileType} from '@/common/TileType';
 
 const spaces: SpaceModel[] = [
   {
@@ -109,5 +111,18 @@ describe('Board', () => {
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('hide tiles');
+  });
+
+  it('updates off-Mars spaces when the spaces change', async () => {
+    const wrapper = shallowMount(Board, {
+      ...globalConfig,
+      props: {spaces, expansions: DEFAULT_EXPANSIONS, venusScaleLevel: 0, boardName: BoardName.THARSIS},
+    });
+
+    const updated = spaces.map((s) => s.id === SpaceName.GANYMEDE_COLONY ? {...s, tileType: TileType.CITY} : s);
+    await wrapper.setProps({spaces: updated});
+
+    const ganymede = wrapper.findAllComponents(BoardSpace).find((w) => w.props('text') === 'Ganymede Colony');
+    expect(ganymede?.props('space').tileType).to.eq(TileType.CITY);
   });
 });

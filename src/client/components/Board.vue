@@ -415,11 +415,6 @@ export default defineComponent({
   components: {
     BoardSpace,
   },
-  data() {
-    return {
-      spaceMap: new Map<string, SpaceModel>(this.spaces.map((s) => [s.id, s])),
-    };
-  },
   methods: {
     getAllSpacesOnMars(): Array<SpaceModel> {
       return this.spaces
@@ -499,6 +494,9 @@ export default defineComponent({
     },
   },
   computed: {
+    spaceMap(): Map<SpaceId, SpaceModel> {
+      return new Map(this.spaces.map((s) => [s.id, s]));
+    },
     BoardName(): typeof BoardName {
       return BoardName;
     },

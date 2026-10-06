@@ -33,9 +33,8 @@ export class RoverDriversUnion extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
-      player.production.add(Resource.MEGACREDITS, moonData.logisticRate, {log: true});
-    });
+    const moonData = MoonExpansion.getMoonData(player.game);
+    player.production.add(Resource.MEGACREDITS, moonData.logisticRate, {log: true});
     return undefined;
   }
 }

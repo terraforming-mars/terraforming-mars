@@ -182,17 +182,17 @@ export class Counter implements ICounter {
 
     if (countable.moon !== undefined) {
       const moon = countable.moon;
-      MoonExpansion.ifMoon(game, (moonData) => {
-        if (moon.habitatRate) {
-          sum += moonData.habitatRate;
-        }
-        if (moon.miningRate) {
-          sum += moonData.miningRate;
-        }
-        if (moon.logisticRate) {
-          sum += moonData.logisticRate;
-        }
-      });
+      const moonData = MoonExpansion.getMoonData(game);
+      if (moon.habitatRate) {
+        sum += moonData.habitatRate;
+      }
+      if (moon.miningRate) {
+        sum += moonData.miningRate;
+      }
+      if (moon.logisticRate) {
+        sum += moonData.logisticRate;
+      }
+
       if (moon.habitat) {
         sum += maybeAdjacentSpaces(MoonExpansion.spaces(game, TileType.MOON_HABITAT, {surfaceOnly: true})).length;
       }

@@ -575,18 +575,16 @@ export class Game implements IGame, Logger {
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
     const oceansMaxed = !this.canAddOcean();
     let globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
+
+    if (this.moonData && this.gameOptions.requiresMoonTrackCompletion) {
+      const moonMaxed =
+        this.moonData.habitatRate === constants.MAXIMUM_HABITAT_RATE &&
+        this.moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
+        this.moonData.logisticRate === constants.MAXIMUM_LOGISTIC_RATE;
+      globalParametersMaxed = globalParametersMaxed && moonMaxed;
+    }
+
     const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
-
-    MoonExpansion.ifMoon(this, (moonData) => {
-      if (this.gameOptions.requiresMoonTrackCompletion) {
-        const moonMaxed =
-          moonData.habitatRate === constants.MAXIMUM_HABITAT_RATE &&
-          moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
-          moonData.logisticRate === constants.MAXIMUM_LOGISTIC_RATE;
-        globalParametersMaxed = globalParametersMaxed && moonMaxed;
-      }
-    });
-
     // Solo games with Venus needs Venus maxed to end the game.
     if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
       return globalParametersMaxed && venusMaxed;
@@ -877,11 +875,11 @@ export class Game implements IGame, Logger {
     if (this.gameOptions.venusNextExtension) {
       entry[GlobalParameter.VENUS] = this.venusScaleLevel;
     }
-    MoonExpansion.ifMoon(this, (moonData) => {
-      entry[GlobalParameter.MOON_HABITAT_RATE] = moonData.habitatRate;
-      entry[GlobalParameter.MOON_MINING_RATE] = moonData.miningRate;
-      entry[GlobalParameter.MOON_LOGISTIC_RATE] = moonData.logisticRate;
-    });
+    if (this.moonData) {
+      entry[GlobalParameter.MOON_HABITAT_RATE] = this.moonData.habitatRate;
+      entry[GlobalParameter.MOON_MINING_RATE] = this.moonData.miningRate;
+      entry[GlobalParameter.MOON_LOGISTIC_RATE] = this.moonData.logisticRate;
+    }
   }
 
   private startGeneration() {
@@ -975,7 +973,8 @@ export class Game implements IGame, Logger {
       }
     }
 
-    MoonExpansion.ifMoon(this, (moonData) => {
+    const moonData = this.moonData;
+    if (moonData) {
       if (moonData.habitatRate < constants.MAXIMUM_HABITAT_RATE) {
         orOptions.options.push(
           new SelectOption('Increase the Moon habitat rate', 'Increase').andThen(() => {
@@ -1002,7 +1001,7 @@ export class Game implements IGame, Logger {
           }),
         );
       }
-    });
+    }
 
     return orOptions;
   }

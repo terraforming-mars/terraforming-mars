@@ -36,14 +36,12 @@ export class Neil extends CeoCard {
 
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
-    const game = player.game;
-    MoonExpansion.ifMoon(game, (moonData) => {
-      const lowestRate = Math.min(moonData.habitatRate, moonData.logisticRate, moonData.miningRate);
+    const moonData = MoonExpansion.getMoonData(player.game);
+    const lowestRate = Math.min(moonData.habitatRate, moonData.logisticRate, moonData.miningRate);
 
-      if (lowestRate > 0) {
-        player.production.add(Resource.MEGACREDITS, lowestRate, {log: true});
-      }
-    });
+    if (lowestRate > 0) {
+      player.production.add(Resource.MEGACREDITS, lowestRate, {log: true});
+    }
 
     return undefined;
   }

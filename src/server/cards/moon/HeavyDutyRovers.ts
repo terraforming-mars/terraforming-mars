@@ -33,16 +33,15 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
-      const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
-      const minesNextToRoads = mines.filter((mine) => {
-        const spacesNextToMine = moonData.moon.getAdjacentSpaces(mine);
-        const firstRoad = spacesNextToMine.find((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));
-        return firstRoad !== undefined;
-      });
-      const count = minesNextToRoads.length;
-      player.stock.add(Resource.MEGACREDITS, count * 4, {log: true});
+    const moonData = MoonExpansion.getMoonData(player.game);
+    const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
+    const minesNextToRoads = mines.filter((mine) => {
+      const spacesNextToMine = moonData.moon.getAdjacentSpaces(mine);
+      const firstRoad = spacesNextToMine.find((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));
+      return firstRoad !== undefined;
     });
+    const count = minesNextToRoads.length;
+    player.stock.add(Resource.MEGACREDITS, count * 4, {log: true});
     return undefined;
   }
 }

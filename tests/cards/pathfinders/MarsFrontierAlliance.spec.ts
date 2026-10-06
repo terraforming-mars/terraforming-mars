@@ -50,7 +50,7 @@ describe('MarsFrontierAlliance', () => {
     player.setAlliedParty(reds);
 
     game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     const selectBonus: OrOptions = getWaitingFor(player);
@@ -85,7 +85,7 @@ describe('MarsFrontierAlliance', () => {
     turmoil.sendDelegateToParty(player, greens.name, game);
 
     game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     expect(player.getTitaniumValue()).to.equal(3);
   });
 

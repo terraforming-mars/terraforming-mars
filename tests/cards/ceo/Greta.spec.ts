@@ -141,7 +141,7 @@ describe('Greta', () => {
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
 
     card.action();
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);

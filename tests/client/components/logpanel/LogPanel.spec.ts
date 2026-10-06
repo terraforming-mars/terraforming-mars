@@ -180,9 +180,7 @@ describe('LogPanel', () => {
     expect(panel.getScrollTop()).eq(520);
   });
 
-  // The real app never patches an existing LogPanel's props in place: App.vue forces a
-  // full unmount/remount (via a `:key` bump) on every game-state refresh. These tests
-  // simulate that by unmounting and mounting a fresh instance, exactly like the app does.
+  // LogPanel can also be remounted, e.g. when leaving and returning to the game screen.
   it('follows the newest generation across a remount when previously following', async () => {
     const baseViewModel = fakeViewModel({id: 'p-live-follower' as any});
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};

@@ -1,4 +1,5 @@
 import {mount, shallowMount} from '@vue/test-utils';
+import {defineComponent} from 'vue';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {afterEach, vi} from 'vitest';
@@ -161,5 +162,57 @@ describe('WaitingFor', () => {
     await vi.advanceTimersByTimeAsync(3500);
 
     expect(fetchStub.mock.calls).is.empty;
+  });
+
+  const PlayerInputFactoryStub = defineComponent({name: 'PlayerInputFactory', template: '<div class="stub-pif"></div>'});
+
+  function stubXhr() {
+    const urls: Array<string> = [];
+    vi.stubGlobal('XMLHttpRequest', class {
+      open(_method: string, url: string) {
+        urls.push(url);
+      }
+      send() {}
+    });
+    return urls;
+  }
+
+  function mountWithInput(playerView: PlayerViewModel) {
+    return mount(WaitingFor, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        stubs: {'PlayerInputFactory': PlayerInputFactoryStub},
+      },
+      props: {
+        playerView,
+        waitingfor: {type: 'option', title: 'test', buttonLabel: 'save'} as any,
+      },
+    });
+  }
+
+  it('remounts the input when the player view changes', async () => {
+    const playerView = draftingView();
+    playerView.game.phase = Phase.ACTION;
+    const wrapper = mountWithInput(playerView);
+    const input = wrapper.findComponent(PlayerInputFactoryStub).vm;
+
+    await wrapper.setProps({playerView: {...playerView}});
+
+    expect(wrapper.findComponent(PlayerInputFactoryStub).vm).to.not.eq(input);
+  });
+
+  it('starts polling when a new player view has nothing to do', async () => {
+    vi.useFakeTimers();
+    const urls = stubXhr();
+    const playerView = draftingView();
+    playerView.game.phase = Phase.ACTION;
+    const wrapper = mountWithInput(playerView);
+
+    await wrapper.setProps({playerView: {...playerView}, waitingfor: undefined});
+    await vi.advanceTimersByTimeAsync(5000);
+
+    expect(urls).has.length(1);
+    expect(urls[0]).includes('api/waitingfor');
   });
 });

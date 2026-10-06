@@ -31,13 +31,6 @@ import {fitTextWhenReady} from '@/client/utils/textFit';
 
 export type RenderType = 'coming' | 'current' | 'distant' | 'prior';
 
-type DataModel = {
-  renderData: ICardRenderRoot;
-  description: string;
-  revealed: PartyName;
-  current: PartyName;
-};
-
 type Refs = {
   title: HTMLElement | undefined;
 };
@@ -73,25 +66,31 @@ export default defineComponent({
       default: false,
     },
   },
-  data(): DataModel {
-    const globalEvent: ClientGlobalEvent | undefined = getGlobalEvent(this.globalEventName);
-    if (globalEvent === undefined) {
-      throw new Error(`Can't find card ${this.globalEventName}`);
-    }
-
-    return {
-      renderData: globalEvent.renderData,
-      revealed: globalEvent.revealedDelegate,
-      current: globalEvent.currentDelegate,
-      description: globalEvent.description,
-    };
-  },
   methods: {
     fitTitle(): void {
       fitTextWhenReady(this.typedRefs.title, 'global-event-title');
     },
   },
   computed: {
+    globalEvent(): ClientGlobalEvent {
+      const globalEvent = getGlobalEvent(this.globalEventName);
+      if (globalEvent === undefined) {
+        throw new Error(`Can't find card ${this.globalEventName}`);
+      }
+      return globalEvent;
+    },
+    renderData(): ICardRenderRoot {
+      return this.globalEvent.renderData;
+    },
+    revealed(): PartyName {
+      return this.globalEvent.revealedDelegate;
+    },
+    current(): PartyName {
+      return this.globalEvent.currentDelegate;
+    },
+    description(): string {
+      return this.globalEvent.description;
+    },
     klass(): string {
       const common = 'global-event global-event--' + this.type;
       if (this.showDistance) {

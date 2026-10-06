@@ -821,18 +821,21 @@ export class Game implements IGame, Logger {
       this.gotoWorldGovernmentTerraforming();
       return;
     }
-    this.gotoEndGeneration();
+    this.finishSolarPhase();
   }
 
-  private gotoEndGeneration() {
+  private finishSolarPhase() {
     if (this.deferredActions.length > 0) {
-      this.deferredActions.runAll(() => this.gotoEndGeneration());
+      this.deferredActions.runAll(() => this.finishSolarPhase());
       return;
     }
 
     ColoniesHandler.endGeneration(this);
     UnderworldExpansion.endGeneration(this);
+    this.gotoTurmoilPhase();
+  }
 
+  private gotoTurmoilPhase() {
     if (this.turmoil) {
       // this.phase = Phase.TURMOIL;
       this.inTurmoil = true;
@@ -841,7 +844,6 @@ export class Game implements IGame, Logger {
       this.beholdTheEmperor = false;
     }
 
-    // turmoil.endGeneration might have added actions.
     this.deferredActions.runAll(() => {
       this.inTurmoil = false;
       this.startGeneration();
@@ -1000,7 +1002,7 @@ export class Game implements IGame, Logger {
     const player = this.first;
     const input = this.worldGovernmentTerraformingInput(player);
     player.setWaitingFor(input, () => {
-      this.gotoEndGeneration();
+      this.finishSolarPhase();
     });
   }
 

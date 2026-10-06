@@ -836,15 +836,20 @@ export class Game implements IGame, Logger {
   }
 
   private gotoTurmoilPhase() {
-    if (this.turmoil) {
-      // this.phase = Phase.TURMOIL;
-      this.inTurmoil = true;
-      this.turmoil.runTurmoilPhase(this);
+    const turmoil = this.turmoil;
+    if (turmoil === undefined) {
+      this.startGeneration();
+      return;
     }
 
-    this.deferredActions.runAll(() => {
-      this.inTurmoil = false;
-      this.startGeneration();
+    // this.phase = Phase.TURMOIL;
+    this.inTurmoil = true;
+    turmoil.runTurmoilPhase(this, () => {
+      // The new government might have added actions.
+      this.deferredActions.runAll(() => {
+        this.inTurmoil = false;
+        this.startGeneration();
+      });
     });
   }
 

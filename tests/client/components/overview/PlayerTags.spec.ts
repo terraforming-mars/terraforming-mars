@@ -124,8 +124,6 @@ describe('PlayerTags', () => {
         conciseTagsViewDefaultValue: false,
       },
     });
-    // For tests.
-    wrapper.vm.$data.conciseView = false;
   });
 
   function elem(tag: Tag | 'all'): DOMWrapper<Element> {

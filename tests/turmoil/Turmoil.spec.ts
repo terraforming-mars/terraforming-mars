@@ -39,6 +39,8 @@ import {testGame} from '../TestGame';
 import {MultiSet} from 'mnemonist';
 import {TowingAComet} from '../../src/server/cards/base/TowingAComet';
 import {cast} from '@/common/utils/utils';
+import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
+import {Pandemic} from '../../src/server/turmoil/globalEvents/Pandemic';
 
 describe('Turmoil', () => {
   let player: TestPlayer;
@@ -193,6 +195,49 @@ describe('Turmoil', () => {
     forceGenerationEnd(game);
 
     expect(turmoil.chairman).to.eq(player);
+    expect(game.generation).eq(2);
+    expect(game.inTurmoil).is.false;
+  });
+
+  it('New government waits for the global event to resolve', () => {
+    const pandemic = new Pandemic();
+    const aquiferReleasedByPublicCouncil = new AquiferReleasedByPublicCouncil();
+    // New government will be Reds.
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+
+    // Requires placing an ocean
+    turmoil.currentGlobalEvent = aquiferReleasedByPublicCouncil;
+    turmoil.comingGlobalEvent = pandemic;
+
+    const firstPlayer = game.playersInGenerationOrder[0];
+
+    forceGenerationEnd(game);
+
+    expect(turmoil.chairman).to.eq('NEUTRAL');
+    expect(turmoil.rulingParty.name).to.eq(PartyName.GREENS);
+    expect(turmoil.currentGlobalEvent).to.eq(aquiferReleasedByPublicCouncil);
+
+    const selectSpace = cast(firstPlayer.getWaitingFor(), SelectSpace);
+    firstPlayer.process({type: 'space', spaceId: selectSpace.spaces[0].id});
+
+    expect(turmoil.chairman).to.eq(player);
+    expect(turmoil.rulingParty.name).to.eq(PartyName.REDS);
+    expect(turmoil.currentGlobalEvent).to.eq(pandemic);
+  });
+
+  it('Generation does not advance while the global event is resolving', () => {
+    turmoil.currentGlobalEvent = new AquiferReleasedByPublicCouncil();
+    const firstPlayer = game.playersInGenerationOrder[0];
+
+    forceGenerationEnd(game);
+
+    expect(game.generation).eq(1);
+    expect(game.inTurmoil).is.true;
+
+    const selectSpace = cast(firstPlayer.getWaitingFor(), SelectSpace);
+    firstPlayer.process({type: 'space', spaceId: selectSpace.spaces[0].id});
+
     expect(game.generation).eq(2);
     expect(game.inTurmoil).is.false;
   });

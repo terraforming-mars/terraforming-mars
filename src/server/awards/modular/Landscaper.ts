@@ -2,7 +2,6 @@ import {IAward} from '../IAward';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 
 export class Landscaper implements IAward {
   public readonly name = 'Landscaper';
@@ -11,11 +10,12 @@ export class Landscaper implements IAward {
     const board = player.game.board;
     const marsCount = new SpaceCounter(board, this.getSpaces(board, player)).compute();
 
-    let moonCount = 0;
-    MoonExpansion.ifMoon(player.game, (moonData) => {
-      const moon = moonData.moon;
-      moonCount = new SpaceCounter(moon, this.getSpaces(moon, player)).compute();
-    });
+    const moon = player.game.moonData?.moon;
+    if (!moon) {
+      return marsCount;
+    }
+
+    const moonCount = new SpaceCounter(moon, this.getSpaces(moon, player)).compute();
     return Math.max(marsCount, moonCount);
   }
 

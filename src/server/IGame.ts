@@ -48,6 +48,8 @@ export interface IGame extends Logger {
   readonly rng: SeededRandom;
   readonly spectatorId: SpectatorId;
   deferredActions: DeferredActionsQueue;
+  /** Run every deferred action, including any added while running them, and then call `cb`. */
+  drainQueue(cb: () => void): void;
   createdTime: Date;
   gameAge: number; // Each log event increases it
   gameLog: Array<LogMessage>;

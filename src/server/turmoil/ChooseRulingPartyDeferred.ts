@@ -8,9 +8,9 @@ import {SelectOption} from '../inputs/SelectOption';
 
 export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
   private turmoil: Turmoil;
-  constructor(player: IPlayer, turmoil: Turmoil) {
+  constructor(player: IPlayer) {
     super(player);
-    this.turmoil = turmoil;
+    this.turmoil = Turmoil.getTurmoil(player.game);
   }
 
   public execute() {

@@ -844,13 +844,13 @@ export class Game implements IGame, Logger {
     this.endGenerationForColonies();
     UnderworldExpansion.endGeneration(this);
 
-    Turmoil.ifTurmoil(this, (turmoil) => {
+    if (this.turmoil) {
       // this.phase = Phase.TURMOIL;
       this.inTurmoil = true;
-      turmoil.endGeneration(this);
+      this.turmoil.endGeneration(this);
       // Behold The Emperor hook
       this.beholdTheEmperor = false;
-    });
+    }
 
     // turmoil.endGeneration might have added actions.
     this.deferredActions.runAll(() => {
@@ -1524,7 +1524,9 @@ export class Game implements IGame, Logger {
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
       break;
     case SpaceBonus.DELEGATE:
-      Turmoil.ifTurmoil(this, () => this.defer(new SendDelegateToArea(player)));
+      if (this.turmoil) {
+        this.defer(new SendDelegateToArea(player));
+      }
       break;
     case SpaceBonus.COLONY:
       this.defer(new SelectPaymentDeferred(

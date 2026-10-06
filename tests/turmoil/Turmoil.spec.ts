@@ -7,7 +7,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Delegate, Turmoil} from '../../src/server/turmoil/Turmoil';
-import {forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
+import {forceGenerationEnd, formatMessage, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/server/turmoil/parties/Reds';
 import {Greens} from '../../src/server/turmoil/parties/Greens';
@@ -41,6 +41,7 @@ import {TowingAComet} from '../../src/server/cards/base/TowingAComet';
 import {cast} from '@/common/utils/utils';
 import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
 import {Pandemic} from '../../src/server/turmoil/globalEvents/Pandemic';
+import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 
 describe('Turmoil', () => {
   let player: TestPlayer;
@@ -240,6 +241,25 @@ describe('Turmoil', () => {
 
     expect(game.generation).eq(2);
     expect(game.inTurmoil).is.false;
+  });
+
+  // #4176
+  it('Global event resources are logged as coming from that global event', () => {
+    turmoil.chairman = player;
+    turmoil.currentGlobalEvent = new AquiferReleasedByPublicCouncil();
+    turmoil.comingGlobalEvent = new CorrosiveRain();
+    const firstPlayer = game.playersInGenerationOrder[0];
+
+    forceGenerationEnd(game);
+    const selectSpace = cast(firstPlayer.getWaitingFor(), SelectSpace);
+    firstPlayer.process({type: 'space', spaceId: selectSpace.spaces[0].id});
+
+    const messages = game.gameLog.map(formatMessage).filter((m) => m.includes('because of'));
+    expect(messages).to.include.members([
+      `${player.color} gained 1 steel because of Aquifer Released by Public Council`,
+      `${player.color} gained 1 plant because of Aquifer Released by Public Council`,
+    ]);
+    expect(messages.filter((m) => m.includes('Corrosive Rain'))).is.empty;
   });
 
   it('Does not give Mars First bonus for World Government terraforming', () => {

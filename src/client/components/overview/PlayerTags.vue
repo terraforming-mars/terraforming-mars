@@ -59,7 +59,7 @@ type TagDetail = {
   substitution?: Tag;
 };
 
-type DataModel = {
+type TagDetails = {
   all: TagDetail;
   tagsInOrder: Array<TagDetail>;
 };
@@ -162,89 +162,6 @@ export default defineComponent({
       default: true,
     },
   },
-  data(): DataModel {
-    type TagDetails = Record<InterfaceTagsType | 'all', TagDetail>;
-
-    // Start by giving every entry a default value
-    const interim = ORDER.map((key) => [
-      key,
-      {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0, asterisk: false},
-    ]);
-    const details: TagDetails = Object.fromEntries(interim);
-
-    // Initialize all's card discount.
-    details['all'] = {
-      name: 'all',
-      discount: this.player?.cardDiscount ?? 0,
-      points: 0,
-      count: 0,
-      halfPoints: 0,
-      asterisk: false,
-    };
-
-    // For each card
-    for (const card of this.player.tableau) {
-      // Calculate discount
-      for (const discount of card.discount ?? []) {
-        const tag = discount.tag ?? 'all';
-        details[tag].discount += discount.amount;
-      }
-
-      // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
-      if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
-        details[Tag.VENUS].halfPoints++;
-      } else {
-        const vps = getCard(card.name)?.victoryPoints;
-        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special') {
-          // Special case Commercial District etc.
-          const asterisk = vps.nextToThis !== undefined;
-          if (vps.tag !== undefined) {
-            if (!asterisk) {
-              details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
-            } else {
-              details[vps.tag].asterisk = true;
-            }
-          }
-          if (vps.cities !== undefined) {
-            if (!asterisk) {
-              details['city-count'].points += ((vps.each ?? 1) / (vps.per ?? 1));
-            } else {
-              details['city-count'].asterisk = true;
-            }
-          }
-        }
-      }
-    }
-
-    // Other modifiers
-    if (this.playerView.game.turmoil?.ruling === PartyName.UNITY &&
-      this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') {
-      details[Tag.SPACE].discount += 2;
-    }
-
-    // Tag substitutions
-    for (const card of this.player.tableau) {
-      if (card.name === CardName.EARTH_EMBASSY) {
-        details[Tag.EARTH].substitution = Tag.MOON;
-      }
-      if (card.name === CardName.HABITAT_MARTE) {
-        details[Tag.SCIENCE].substitution = Tag.MARS;
-      }
-    }
-
-    // Put them in order.
-    const tagsInOrder = [];
-    for (const tag of ORDER) {
-      const entry = details[tag];
-      tagsInOrder.push(entry);
-    }
-
-    return {
-      all: details['all'],
-      tagsInOrder,
-    };
-  },
-
   components: {
     TagCount,
     PlayerTagDiscount,
@@ -252,6 +169,94 @@ export default defineComponent({
     PlayerTagSubstitution,
   },
   computed: {
+    tagDetails(): TagDetails {
+      type DetailsByTag = Record<InterfaceTagsType | 'all', TagDetail>;
+
+      // Start by giving every entry a default value
+      const interim = ORDER.map((key) => [
+        key,
+        {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0, asterisk: false},
+      ]);
+      const details: DetailsByTag = Object.fromEntries(interim);
+
+      // Initialize all's card discount.
+      details['all'] = {
+        name: 'all',
+        discount: this.player?.cardDiscount ?? 0,
+        points: 0,
+        count: 0,
+        halfPoints: 0,
+        asterisk: false,
+      };
+
+      // For each card
+      for (const card of this.player.tableau) {
+        // Calculate discount
+        for (const discount of card.discount ?? []) {
+          const tag = discount.tag ?? 'all';
+          details[tag].discount += discount.amount;
+        }
+
+        // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
+        if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
+          details[Tag.VENUS].halfPoints++;
+        } else {
+          const vps = getCard(card.name)?.victoryPoints;
+          if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special') {
+            // Special case Commercial District etc.
+            const asterisk = vps.nextToThis !== undefined;
+            if (vps.tag !== undefined) {
+              if (!asterisk) {
+                details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+              } else {
+                details[vps.tag].asterisk = true;
+              }
+            }
+            if (vps.cities !== undefined) {
+              if (!asterisk) {
+                details['city-count'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+              } else {
+                details['city-count'].asterisk = true;
+              }
+            }
+          }
+        }
+      }
+
+      // Other modifiers
+      if (this.playerView.game.turmoil?.ruling === PartyName.UNITY &&
+        this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') {
+        details[Tag.SPACE].discount += 2;
+      }
+
+      // Tag substitutions
+      for (const card of this.player.tableau) {
+        if (card.name === CardName.EARTH_EMBASSY) {
+          details[Tag.EARTH].substitution = Tag.MOON;
+        }
+        if (card.name === CardName.HABITAT_MARTE) {
+          details[Tag.SCIENCE].substitution = Tag.MARS;
+        }
+      }
+
+      // Put them in order.
+      const tagsInOrder = [];
+      for (const tag of ORDER) {
+        const entry = details[tag];
+        tagsInOrder.push(entry);
+      }
+
+      return {
+        all: details['all'],
+        tagsInOrder,
+      };
+    },
+    all(): TagDetail {
+      return this.tagDetails.all;
+    },
+    tagsInOrder(): Array<TagDetail> {
+      return this.tagDetails.tagsInOrder;
+    },
     isThisPlayer(): boolean {
       return this.player.color === this.playerView.thisPlayer?.color;
     },

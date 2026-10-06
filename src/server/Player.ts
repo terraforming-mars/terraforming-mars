@@ -45,7 +45,6 @@ import {KELVINISTS_POLICY_3} from './turmoil/parties/Kelvinists';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
-import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
@@ -1633,12 +1632,10 @@ export class Player implements IPlayer {
     }
 
     // Add delegates
-    Turmoil.ifTurmoil(this.game, (turmoil) => {
-      const input = turmoil.getSendDelegateInput(this);
-      if (input !== undefined) {
-        action.options.push(input);
-      }
-    });
+    const input = this.game.turmoil?.getSendDelegateInput(this);
+    if (input !== undefined) {
+      action.options.push(input);
+    }
 
     // End turn
     if (this.game.players.length > 1 &&

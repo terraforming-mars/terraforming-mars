@@ -4,7 +4,6 @@ import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
-import {Turmoil} from '../turmoil/Turmoil';
 import {Space} from './Space';
 import {
   VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST,
@@ -49,10 +48,8 @@ export class VastitasBorealisNovaBoard extends MarsBoard {
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {
     return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => {
       if (space.bonus.includes(SpaceBonus.DELEGATE)) {
-        return Turmoil.ifTurmoilElse(
-          player.game,
-          (turmoil) => turmoil.hasDelegatesInReserve(player),
-          () => true);
+        const turmoil = player.game.turmoil;
+        return !turmoil || turmoil.hasDelegatesInReserve(player);
       }
       return true;
     });

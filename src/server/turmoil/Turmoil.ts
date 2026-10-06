@@ -104,27 +104,6 @@ export class Turmoil {
     return game.turmoil;
   }
 
-  public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
-    if (game.gameOptions.turmoilExtension !== false) {
-      if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
-      } else {
-        return cb(game.turmoil);
-      }
-    }
-  }
-
-  public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
-    if (game.gameOptions.turmoilExtension !== false) {
-      if (game.turmoil === undefined) {
-        console.log(`Assertion failure: game.turmoil not defined for ${game.id}`);
-      } else {
-        return cb(game.turmoil);
-      }
-    }
-    return elseCb();
-  }
-
   public initGlobalEvent(game: IGame) {
     // Draw the first global event to setup the game
     this.comingGlobalEvent = this.globalEventDealer.draw();

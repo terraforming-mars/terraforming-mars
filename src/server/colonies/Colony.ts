@@ -20,7 +20,6 @@ import {StealResources} from '../deferredActions/StealResources';
 import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {IGame} from '../IGame';
-import {Turmoil} from '../turmoil/Turmoil';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
 import {ColonyMetadata, colonyMetadata, InputColonyMetadata} from '../../common/colonies/ColonyMetadata';
@@ -266,27 +265,27 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.GAIN_INFLUENCE:
-      Turmoil.ifTurmoil(game, (turmoil) => {
-        turmoil.addInfluenceBonus(player);
+      if (game.turmoil) {
+        game.turmoil.addInfluenceBonus(player);
         game.log('${0} gained 1 influence', (b) => b.player(player));
-      });
+      }
       break;
 
     case ColonyBenefit.PLACE_DELEGATES:
-      Turmoil.ifTurmoil(game, (turmoil) => {
-        const availablePlayerDelegates = turmoil.getAvailableDelegateCount(player);
+      if (game.turmoil) {
+        const availablePlayerDelegates = game.turmoil.getAvailableDelegateCount(player);
         const qty = Math.min(quantity, availablePlayerDelegates);
         for (let i = 0; i < qty; i++) {
           game.defer(new SendDelegateToArea(player));
         }
-      });
+      }
       break;
 
     case ColonyBenefit.GIVE_MC_PER_DELEGATE:
-      Turmoil.ifTurmoil(game, (turmoil) => {
-        const partyDelegateCount = sum(turmoil.parties.map((party) => party.delegates.get(player)));
+      if (game.turmoil) {
+        const partyDelegateCount = sum(game.turmoil.parties.map((party) => party.delegates.get(player)));
         player.stock.add(Resource.MEGACREDITS, partyDelegateCount, {log: true});
-      });
+      }
       break;
 
     case ColonyBenefit.PLACE_HAZARD_TILE:

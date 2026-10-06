@@ -4,7 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Turmoil} from '../../turmoil/Turmoil';
 import {ChooseRulingPartyDeferred} from '../../turmoil/ChooseRulingPartyDeferred';
 
 export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
@@ -27,12 +26,8 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
     });
   }
   public override bespokePlay(player: IPlayer) {
-    const game = player.game;
-    game.overrideFirstPlayer(player);
-    Turmoil.ifTurmoil((player.game), (turmoil) => {
-      player.game.defer(new ChooseRulingPartyDeferred(player, turmoil));
-    });
-
+    player.game.overrideFirstPlayer(player);
+    player.game.defer(new ChooseRulingPartyDeferred(player));
     return undefined;
   }
 }

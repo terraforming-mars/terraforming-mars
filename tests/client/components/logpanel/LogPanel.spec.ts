@@ -232,4 +232,65 @@ describe('LogPanel', () => {
     expect((second.vm as any).selectedGeneration).eq(1);
     expect(fetchCalls[fetchCalls.length - 1]).includes('generation=1');
   });
+
+  it('follows the newest generation when the view model updates while following', async () => {
+    const panel = installScrollablePanel();
+    const baseViewModel = fakeViewModel({id: 'p-in-place-follower' as any});
+    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
+    const wrapper = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel},
+    });
+    await flushLogs(wrapper);
+    (wrapper.vm as any).showLatestLogs();
+    await flushLogs(wrapper);
+    fetchCalls.length = 0;
+    panel.setScrollHeight(640);
+
+    await wrapper.setProps({viewModel: {...viewModel, game: {...viewModel.game, generation: 3}}});
+    await flushLogs(wrapper);
+
+    expect((wrapper.vm as any).selectedGeneration).eq(3);
+    expect(fetchCalls).has.length(1);
+    expect(fetchCalls[0]).includes('generation=3');
+    expect(panel.getScrollTop()).eq(640);
+  });
+
+  it('refetches the current generation when the view model updates within a generation', async () => {
+    const baseViewModel = fakeViewModel({id: 'p-in-place-same-gen' as any});
+    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
+    const wrapper = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel},
+    });
+    await flushLogs(wrapper);
+    (wrapper.vm as any).showLatestLogs();
+    await flushLogs(wrapper);
+    fetchCalls.length = 0;
+
+    await wrapper.setProps({viewModel: {...viewModel}});
+    await flushLogs(wrapper);
+
+    expect(fetchCalls).has.length(1);
+    expect(fetchCalls[0]).includes('generation=2');
+  });
+
+  it('stays on an earlier generation when the view model updates after the player navigates away', async () => {
+    const baseViewModel = fakeViewModel({id: 'p-in-place-history' as any});
+    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
+    const wrapper = shallowMount(LogPanel, {
+      ...globalConfig,
+      props: {viewModel},
+    });
+    await flushLogs(wrapper);
+    (wrapper.vm as any).selectGeneration(1);
+    await flushLogs(wrapper);
+    fetchCalls.length = 0;
+
+    await wrapper.setProps({viewModel: {...viewModel, game: {...viewModel.game, generation: 4}}});
+    await flushLogs(wrapper);
+
+    expect((wrapper.vm as any).selectedGeneration).eq(1);
+    expect(fetchCalls).is.empty;
+  });
 });

@@ -1161,50 +1161,47 @@ export class Player implements IPlayer {
   }
 
   public takeActionForFinalGreenery(): void {
-    const resolveFinalGreeneryDeferredActions = () => {
-      this.game.deferredActions.runAll(() => this.takeActionForFinalGreenery());
-    };
-
     // Resolve any deferredAction before placing the next greenery
     // Otherwise if two tiles are placed next to Philares, only the last benefit is triggered
     // if Philares does not accept the first bonus before the second tile is down
-    if (this.game.deferredActions.length > 0) {
-      resolveFinalGreeneryDeferredActions();
-      return;
-    }
+    this.game.drainQueue(() => {
+      const resolveFinalGreeneryDeferredActions = () => {
+        this.game.deferredActions.runAll(() => this.takeActionForFinalGreenery());
+      };
 
-    if (this.game.canPlaceGreenery(this)) {
-      const action = new OrOptions()
-        .setTitle('Place any final greenery from plants')
-        .setButtonLabel('Confirm');
-      action.options.push(
-        new SelectSpace(
-          'Select space for greenery tile',
-          this.game.board.getAvailableSpacesForGreenery(this))
-          .andThen((space) => {
-            // Do not raise oxygen or award TR for final greenery placements
-            this.game.addGreenery(this, space, false);
-            this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery);
+      if (this.game.canPlaceGreenery(this)) {
+        const action = new OrOptions()
+          .setTitle('Place any final greenery from plants')
+          .setButtonLabel('Confirm');
+        action.options.push(
+          new SelectSpace(
+            'Select space for greenery tile',
+            this.game.board.getAvailableSpacesForGreenery(this))
+            .andThen((space) => {
+              // Do not raise oxygen or award TR for final greenery placements
+              this.game.addGreenery(this, space, false);
+              this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery);
 
-            // Resolve Philares deferred actions and maybe place another greenery
-            resolveFinalGreeneryDeferredActions();
+              // Resolve Philares deferred actions and maybe place another greenery
+              resolveFinalGreeneryDeferredActions();
+              return undefined;
+            }));
+        action.options.push(
+          new SelectOption('Don\'t place a greenery').andThen(() => {
+            this.game.playerIsDoneWithGame(this);
             return undefined;
-          }));
-      action.options.push(
-        new SelectOption('Don\'t place a greenery').andThen(() => {
-          this.game.playerIsDoneWithGame(this);
-          return undefined;
-        }),
-      );
-      this.setWaitingForSafely(action);
-      return;
-    }
+          }),
+        );
+        this.setWaitingForSafely(action);
+        return;
+      }
 
-    if (this.game.deferredActions.length > 0) {
-      resolveFinalGreeneryDeferredActions();
-    } else {
-      this.game.playerIsDoneWithGame(this);
-    }
+      if (this.game.deferredActions.length > 0) {
+        resolveFinalGreeneryDeferredActions();
+      } else {
+        this.game.playerIsDoneWithGame(this);
+      }
+    });
   }
 
   public getPlayableCards(): Array<IProjectCard> {
@@ -1442,116 +1439,113 @@ export class Player implements IPlayer {
    */
   // @ts-ignore saveBeforeTakingAction is unused at the moment.
   public takeAction(saveBeforeTakingAction: boolean = true): void {
-    const game = this.game;
+    this.game.drainQueue(() => {
+      const game = this.game;
 
-    if (game.deferredActions.length > 0) {
-      game.deferredActions.runAll(() => this.takeAction());
-      return;
-    }
-
-    if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
-      game.save();
-    }
-    // if (saveBeforeTakingAction) game.save();
-
-
-    // Autopass is disabled.
-    // if (this.autopass) {
-    //   this.passOption().cb();
-    // }
-    const headStartIsInEffect = this.headStartIsInEffect();
-    this.game.inDoubleDown = false;
-
-    if (!headStartIsInEffect) {
-      // Prelude cards have to be played first
-      if (this.preludeCardsInHand.length > 0) {
-        game.phase = Phase.PRELUDES;
-
-        const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
-
-        this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
-          this.incrementActionsTaken();
-          if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
-            game.playerIsFinishedTakingActions();
-            return;
-          }
-          this.takeAction();
-        }));
-
-        return;
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        game.save();
       }
+      // if (saveBeforeTakingAction) game.save();
 
-      if (this.ceoCardsInHand.size > 0) {
-        // The CEO phase occurs between the Prelude phase and before the Action phase.
-        // All CEO cards are played before players take their first normal actions.
-        game.phase = Phase.CEOS;
 
-        // start from the end of the list and work backwards, not sure why.
-        const playableCeoCards = Array.from(this.ceoCardsInHand).filter((card) => card.canPlay?.(this) === true).reverse();
-        for (const ceo of playableCeoCards) {
-          this.playCard(ceo);
-        }
-        // Null out ceoCardsInHand, anything left was unplayable.
-        this.ceoCardsInHand.clear();
-        this.takeAction(); // back to top
-        return;
-      } else {
-        game.phase = Phase.ACTION;
-      }
-
-      if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
-        this.actionsTakenThisRound = 0;
-        this.availableActionsThisRound = 2;
-        game.resettable = true;
-        game.playerIsFinishedTakingActions();
-        return;
-      }
-    }
-
-    // Terraforming Mars FAQ says:
-    //   If for any reason you are not able to perform your mandatory first action (e.g. if
-    //   all 3 Awards are claimed before starting your turn as Vitor), you can skip this and
-    //   proceed with other actions instead.
-    // This code just uses "must skip" instead of "can skip".
-    const vitor = this.tableau.get(CardName.VITOR);
-    if (vitor !== undefined && this.game.allAwardsFunded()) {
-      this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
-    }
-
-    if (this.pendingInitialActions.length > 0) {
-      const orOptions = new OrOptions();
-
-      this.pendingInitialActions.forEach((corp) => {
-        const option = new SelectOption(
-          message('Take first action of ${0} corporation', (b) => b.card(corp)),
-          corp.initialActionText)
-          .andThen(() => {
-            game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
-            this.defer(corp.initialAction?.(this));
-            inplaceRemove(this.pendingInitialActions, corp);
-            return undefined;
-          });
-        orOptions.options.push(option);
-      });
+      // Autopass is disabled.
+      // if (this.autopass) {
+      //   this.passOption().cb();
+      // }
+      const headStartIsInEffect = this.headStartIsInEffect();
+      this.game.inDoubleDown = false;
 
       if (!headStartIsInEffect) {
-        orOptions.options.push(this.passOption());
+        // Prelude cards have to be played first
+        if (this.preludeCardsInHand.length > 0) {
+          game.phase = Phase.PRELUDES;
+
+          const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
+
+          this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
+            this.incrementActionsTaken();
+            if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
+              game.playerIsFinishedTakingActions();
+              return;
+            }
+            this.takeAction();
+          }));
+
+          return;
+        }
+
+        if (this.ceoCardsInHand.size > 0) {
+          // The CEO phase occurs between the Prelude phase and before the Action phase.
+          // All CEO cards are played before players take their first normal actions.
+          game.phase = Phase.CEOS;
+
+          // start from the end of the list and work backwards, not sure why.
+          const playableCeoCards = Array.from(this.ceoCardsInHand).filter((card) => card.canPlay?.(this) === true).reverse();
+          for (const ceo of playableCeoCards) {
+            this.playCard(ceo);
+          }
+          // Null out ceoCardsInHand, anything left was unplayable.
+          this.ceoCardsInHand.clear();
+          this.takeAction(); // back to top
+          return;
+        } else {
+          game.phase = Phase.ACTION;
+        }
+
+        if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
+          this.actionsTakenThisRound = 0;
+          this.availableActionsThisRound = 2;
+          game.resettable = true;
+          game.playerIsFinishedTakingActions();
+          return;
+        }
       }
 
-      this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
-        if (this.pendingInitialActions.length === 0) {
-          this.incrementActionsTaken();
+      // Terraforming Mars FAQ says:
+      //   If for any reason you are not able to perform your mandatory first action (e.g. if
+      //   all 3 Awards are claimed before starting your turn as Vitor), you can skip this and
+      //   proceed with other actions instead.
+      // This code just uses "must skip" instead of "can skip".
+      const vitor = this.tableau.get(CardName.VITOR);
+      if (vitor !== undefined && this.game.allAwardsFunded()) {
+        this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
+      }
+
+      if (this.pendingInitialActions.length > 0) {
+        const orOptions = new OrOptions();
+
+        this.pendingInitialActions.forEach((corp) => {
+          const option = new SelectOption(
+            message('Take first action of ${0} corporation', (b) => b.card(corp)),
+            corp.initialActionText)
+            .andThen(() => {
+              game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
+              this.defer(corp.initialAction?.(this));
+              inplaceRemove(this.pendingInitialActions, corp);
+              return undefined;
+            });
+          orOptions.options.push(option);
+        });
+
+        if (!headStartIsInEffect) {
+          orOptions.options.push(this.passOption());
         }
-        this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
+
+        this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
+          if (this.pendingInitialActions.length === 0) {
+            this.incrementActionsTaken();
+          }
+          this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
+          this.takeAction();
+        }));
+        return;
+      }
+
+      this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
+        this.incrementActionsTaken();
         this.takeAction();
       }));
-      return;
-    }
-
-    this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
-      this.incrementActionsTaken();
-      this.takeAction();
-    }));
+    });
   }
 
   private incrementActionsTaken(): void {

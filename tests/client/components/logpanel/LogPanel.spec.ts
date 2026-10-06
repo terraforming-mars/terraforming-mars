@@ -94,53 +94,6 @@ describe('LogPanel', () => {
     expect(wrapper.emitted('spaceClicked')).to.deep.eq([['05']]);
   });
 
-  it('restores the selected generation and scroll position after remount', async () => {
-    const panel = installScrollablePanel();
-    const baseViewModel = fakeViewModel({id: 'p-log-reader' as any});
-    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
-    const first = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(first);
-
-    (first.vm as any).selectGeneration(1);
-    panel.setScrollTop(120);
-    first.unmount();
-
-    const second = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(second);
-
-    expect((second.vm as any).selectedGeneration).eq(1);
-    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=1');
-    expect(panel.getScrollTop()).eq(120);
-  });
-
-  it('continues following the end after remount when already at the bottom', async () => {
-    const panel = installScrollablePanel();
-    const viewModel = fakeViewModel({id: 'p-log-follower' as any});
-    const first = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(first);
-
-    panel.setScrollTop(320);
-    first.unmount();
-    panel.setScrollHeight(640);
-
-    const second = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(second);
-
-    expect(panel.getScrollTop()).eq(640);
-  });
-
   it('shows the scroll button only when away from the bottom', async () => {
     const panel = installScrollablePanel();
     const wrapper = shallowMount(LogPanel, {
@@ -178,57 +131,6 @@ describe('LogPanel', () => {
     expect((wrapper.vm as any).selectedGeneration).eq(3);
     expect(fetchCalls[fetchCalls.length - 1]).includes('generation=3');
     expect(panel.getScrollTop()).eq(520);
-  });
-
-  // LogPanel can also be remounted, e.g. when leaving and returning to the game screen.
-  it('follows the newest generation across a remount when previously following', async () => {
-    const baseViewModel = fakeViewModel({id: 'p-live-follower' as any});
-    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
-    const first = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(first);
-    // Module-level view state can be left behind by earlier tests, so explicitly
-    // establish "following" mode rather than relying on the freshly-mounted default.
-    (first.vm as any).showLatestLogs();
-    await flushLogs(first);
-    first.unmount();
-
-    const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 3}};
-    const second = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel: nextViewModel},
-    });
-    await flushLogs(second);
-
-    expect((second.vm as any).selectedGeneration).eq(3);
-    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=3');
-  });
-
-  it('does not jump generations across a remount after the player navigates away', async () => {
-    const baseViewModel = fakeViewModel({id: 'p-history-reader' as any});
-    const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
-    const first = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel},
-    });
-    await flushLogs(first);
-
-    (first.vm as any).selectGeneration(1);
-    await flushLogs(first);
-    first.unmount();
-    fetchCalls.length = 0;
-
-    const nextViewModel = {...viewModel, game: {...viewModel.game, generation: 4}};
-    const second = shallowMount(LogPanel, {
-      ...globalConfig,
-      props: {viewModel: nextViewModel},
-    });
-    await flushLogs(second);
-
-    expect((second.vm as any).selectedGeneration).eq(1);
-    expect(fetchCalls[fetchCalls.length - 1]).includes('generation=1');
   });
 
   it('follows the newest generation when the view model updates while following', async () => {

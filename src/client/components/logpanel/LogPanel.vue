@@ -49,22 +49,6 @@ import {fetchLogs} from '@/client/utils/fetchLogs';
 
 const BOTTOM_SCROLL_THRESHOLD = 24; // Roughly one line of log text.
 
-type ScrollPosition = number | 'bottom';
-
-type ViewState = {
-  // The current generation viewed in the log panel, which might be different
-  // from the current generation in the game.
-  selectedGeneration: number,
-  // True if the player was viewing the newest generation, and so should be moved
-  // forward to whatever generation is newest after a remount.
-  following: boolean,
-  // Either 'bottom' which means continue scrolling as new entries appear,
-  // or a number which is the pixel height from the top of the widget.
-  scrollPosition: ScrollPosition,
-};
-
-let viewState: ViewState | undefined;
-
 type Refs = {
   messageInspector: InstanceType<typeof LogMessageInspector>;
 };
@@ -129,7 +113,7 @@ export default defineComponent({
       this.selectedGeneration = this.generation;
       this.getLogsForGeneration(this.generation, 'bottom');
     },
-    getLogsForGeneration(generation: number, scrollPosition?: ScrollPosition): void {
+    getLogsForGeneration(generation: number, scrollPosition?: 'bottom'): void {
       const messages = this.messages;
       fetchLogs(this.viewModel.id, generation)
         .then((data) => {
@@ -143,8 +127,6 @@ export default defineComponent({
           }
           if (scrollPosition === 'bottom') {
             this.$nextTick(this.scrollToEnd);
-          } else if (scrollPosition !== undefined) {
-            this.$nextTick(() => this.restoreScrollTop(scrollPosition));
           }
         });
     },
@@ -152,13 +134,6 @@ export default defineComponent({
       const scrollablePanel = this.scrollablePanel;
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
-        this.updateScrollState();
-      }
-    },
-    restoreScrollTop(scrollTop: number) {
-      const scrollablePanel = this.scrollablePanel;
-      if (scrollablePanel !== null) {
-        scrollablePanel.scrollTop = scrollTop;
         this.updateScrollState();
       }
     },
@@ -194,25 +169,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    const restoredState = viewState;
-    if (restoredState !== undefined && restoredState.following === false) {
-      this.following = false;
-      this.selectedGeneration = restoredState.selectedGeneration;
-      this.getLogsForGeneration(this.selectedGeneration, restoredState.scrollPosition);
-    } else {
-      // Either this is the first mount, or the panel was following the newest
-      // generation, which may have advanced since the previous instance unmounted.
-      this.following = true;
-      this.selectedGeneration = this.generation;
-      this.getLogsForGeneration(this.selectedGeneration, 'bottom');
-    }
-  },
-  beforeUnmount() {
-    viewState = {
-      selectedGeneration: this.selectedGeneration,
-      following: this.following,
-      scrollPosition: this.isNearBottom() ? 'bottom' : this.scrollablePanel?.scrollTop ?? 'bottom',
-    };
+    this.showLatestLogs();
   },
 });
 

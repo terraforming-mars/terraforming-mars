@@ -113,4 +113,16 @@ export class ColoniesHandler {
     selectColonyTile.showTileOnly = true;
     player.defer(selectColonyTile);
   }
+
+  public static endGeneration(game: IGame) {
+    if (game.gameOptions.coloniesExtension) {
+      game.colonies.forEach((colony) => {
+        colony.endGeneration(game);
+      });
+      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+      game.syndicatePirateRaider = undefined;
+      // Trade embargo hook.
+      game.tradeEmbargo = false;
+    }
+  }
 }

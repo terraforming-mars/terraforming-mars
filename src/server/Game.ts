@@ -86,6 +86,7 @@ import {ICard} from './cards/ICard';
 import {generateGameName} from './GameName';
 import {byKey} from '@/common/utils/Ordering';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
+import {ColoniesHandler} from './colonies/ColoniesHandler';
 
 // Can be overridden by tests
 let createGameLog: () => Array<LogMessage> = () => [];
@@ -823,25 +824,13 @@ export class Game implements IGame, Logger {
     this.gotoEndGeneration();
   }
 
-  private endGenerationForColonies() {
-    if (this.gameOptions.coloniesExtension) {
-      this.colonies.forEach((colony) => {
-        colony.endGeneration(this);
-      });
-      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
-      this.syndicatePirateRaider = undefined;
-      // Trade embargo hook.
-      this.tradeEmbargo = false;
-    }
-  }
-
   private gotoEndGeneration() {
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.gotoEndGeneration());
       return;
     }
 
-    this.endGenerationForColonies();
+    ColoniesHandler.endGeneration(this);
     UnderworldExpansion.endGeneration(this);
 
     if (this.turmoil) {

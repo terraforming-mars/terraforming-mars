@@ -105,6 +105,14 @@ export default defineComponent({
     LogGenerationList,
   },
   emits: ['spaceClicked'],
+  watch: {
+    viewModel(): void {
+      // Earlier generations don't change, so only refresh when following the newest one.
+      if (this.following) {
+        this.showLatestLogs();
+      }
+    },
+  },
   methods: {
     messageClicked(message: LogMessage) {
       this.typedRefs.messageInspector.show(message);

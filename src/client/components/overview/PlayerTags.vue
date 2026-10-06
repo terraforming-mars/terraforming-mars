@@ -8,7 +8,7 @@
             <TagCount tag="tr" :count="player.terraformRating" :size="'big'" :type="'main'"/>
             <TagCount v-if="player.handicap !== undefined" :tag="'handicap'" :count="player.handicap" :size="'big'" :type="'main'" :showWhenZero="true"/>
             <div class="tag-and-discount">
-              <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
+              <PlayerTagDiscount v-if="allDiscount" :amount="allDiscount" :color="player.color"  :data-test="'discount-all'"/>
               <TagCount tag="cards" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
@@ -20,7 +20,6 @@
               </div>
             </template>
             <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
-            <template v-else-if="tagDetail.name === 'all'"></template>
             <div v-else class="tag-and-discount">
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
@@ -48,7 +47,7 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CardName} from '@/common/cards/CardName';
 
-type InterfaceTagsType = Tag | SpecialTags | 'separator' | 'all';
+type InterfaceTagsType = Tag | SpecialTags | 'separator';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
@@ -57,11 +56,6 @@ type TagDetail = {
   count: number;
   asterisk: boolean;
   substitution?: Tag;
-};
-
-type TagDetails = {
-  all: TagDetail;
-  tagsInOrder: Array<TagDetail>;
 };
 
 const ORDER: Array<InterfaceTagsType> = [
@@ -131,7 +125,6 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   case SpecialTags.NEGATIVE_VP:
     return player.victoryPointsBreakdown.negativeVP;
   case 'separator':
-  case 'all':
     return -1;
   default:
     return player.tags[tagName];
@@ -169,8 +162,20 @@ export default defineComponent({
     PlayerTagSubstitution,
   },
   computed: {
-    tagDetails(): TagDetails {
-      type DetailsByTag = Record<InterfaceTagsType | 'all', TagDetail>;
+    /** The discount that applies to every card, regardless of its tags. */
+    allDiscount(): number {
+      let discount = this.player.cardDiscount ?? 0;
+      for (const card of this.player.tableau) {
+        for (const d of card.discount ?? []) {
+          if (d.tag === undefined) {
+            discount += d.amount;
+          }
+        }
+      }
+      return discount;
+    },
+    tagsInOrder(): Array<TagDetail> {
+      type DetailsByTag = Record<InterfaceTagsType, TagDetail>;
 
       // Start by giving every entry a default value
       const interim = ORDER.map((key) => [
@@ -179,22 +184,13 @@ export default defineComponent({
       ]);
       const details: DetailsByTag = Object.fromEntries(interim);
 
-      // Initialize all's card discount.
-      details['all'] = {
-        name: 'all',
-        discount: this.player?.cardDiscount ?? 0,
-        points: 0,
-        count: 0,
-        halfPoints: 0,
-        asterisk: false,
-      };
-
       // For each card
       for (const card of this.player.tableau) {
         // Calculate discount
         for (const discount of card.discount ?? []) {
-          const tag = discount.tag ?? 'all';
-          details[tag].discount += discount.amount;
+          if (discount.tag !== undefined) {
+            details[discount.tag].discount += discount.amount;
+          }
         }
 
         // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
@@ -246,16 +242,7 @@ export default defineComponent({
         tagsInOrder.push(entry);
       }
 
-      return {
-        all: details['all'],
-        tagsInOrder,
-      };
-    },
-    all(): TagDetail {
-      return this.tagDetails.all;
-    },
-    tagsInOrder(): Array<TagDetail> {
-      return this.tagDetails.tagsInOrder;
+      return tagsInOrder;
     },
     isThisPlayer(): boolean {
       return this.player.color === this.playerView.thisPlayer?.color;

@@ -847,7 +847,7 @@ export class Game implements IGame, Logger {
     if (this.turmoil) {
       // this.phase = Phase.TURMOIL;
       this.inTurmoil = true;
-      this.turmoil.endGeneration(this);
+      this.turmoil.runTurmoilPhase(this);
       // Behold The Emperor hook
       this.beholdTheEmperor = false;
     }

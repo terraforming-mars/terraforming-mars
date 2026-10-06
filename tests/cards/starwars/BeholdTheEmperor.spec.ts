@@ -64,7 +64,7 @@ describe('BeholdTheEmperor', () => {
     expect(greens.delegates.size).eq(1);
 
     game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);

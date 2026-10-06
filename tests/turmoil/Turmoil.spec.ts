@@ -154,7 +154,7 @@ describe('Turmoil', () => {
     expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
 
     game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);
@@ -177,7 +177,7 @@ describe('Turmoil', () => {
     expect(turmoil.getAvailableDelegateCount(player)).eq(5);
 
     game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
+    turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);

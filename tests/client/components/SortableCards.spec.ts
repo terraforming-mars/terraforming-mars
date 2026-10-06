@@ -94,6 +94,31 @@ describe('SortableCards', () => {
     });
   });
 
+  it('keeps the order when the cards change', async () => {
+    const sortable = mount(SortableCards, {
+      ...globalConfig,
+      props: {
+        cards: [{name: CardName.ANTS}, {name: CardName.CARTEL}, {name: CardName.DECOMPOSERS}],
+        playerId: 'player1',
+      },
+    });
+    await dragCard(sortable, 0, 1, 'right');
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.CARTEL, CardName.ANTS, CardName.DECOMPOSERS]);
+
+    await sortable.setProps({cards: [{name: CardName.ANTS}, {name: CardName.CARTEL}, {name: CardName.BIRDS}]});
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.CARTEL, CardName.ANTS, CardName.BIRDS]);
+
+    await dragCard(sortable, 0, 2, 'left');
+
+    expect(cardsInOrder(sortable)).to.deep.eq([CardName.ANTS, CardName.CARTEL, CardName.BIRDS]);
+    expect(CardOrderStorage.getCardOrder('player1')).to.deep.eq({
+      [CardName.ANTS]: 1,
+      [CardName.CARTEL]: 2,
+      [CardName.BIRDS]: 3,
+    });
+  });
+
   it('sorts by cost', async () => {
     // Ants: 9, Cartel: 8, Birds: 10
     const sortable = mount(SortableCards, {

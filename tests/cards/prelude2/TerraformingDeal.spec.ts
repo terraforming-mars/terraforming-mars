@@ -7,7 +7,8 @@ import {TerraformingDeal} from '../../../src/server/cards/prelude2/TerraformingD
 import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
 import {IGame} from '../../../src/server/IGame';
 import {Election} from '../../../src/server/turmoil/globalEvents/Election';
-import {runAllActions} from '../../../tests/TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../../tests/TestingUtils';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('TerraformingDeal', () => {
   let card: TerraformingDeal;
@@ -71,5 +72,27 @@ describe('TerraformingDeal', () => {
 
     expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(2);
+  });
+
+  it('Does not give MC outside the action phase after the player becomes chairman', () => {
+    player.playedCards.push(card);
+    game.phase = Phase.ACTION;
+
+    const turmoil = game.turmoil!;
+    turmoil.parties.forEach((p) => p.delegates.clear());
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.currentGlobalEvent = undefined;
+
+    forceGenerationEnd(game);
+
+    expect(turmoil.chairman).eq(player);
+    expect(game.generation).eq(2);
+
+    // e.g. final greenery placement, which happens during the production phase.
+    game.phase = Phase.PRODUCTION;
+    const megaCredits = player.megaCredits;
+    player.increaseTerraformRating();
+    expect(player.megaCredits).eq(megaCredits);
   });
 });

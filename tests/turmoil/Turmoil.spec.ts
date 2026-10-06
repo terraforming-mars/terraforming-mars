@@ -7,7 +7,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Delegate, Turmoil} from '../../src/server/turmoil/Turmoil';
-import {maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
+import {forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/server/turmoil/parties/Reds';
 import {Greens} from '../../src/server/turmoil/parties/Greens';
@@ -182,6 +182,19 @@ describe('Turmoil', () => {
 
     expect(turmoil.chairman).to.eq(player);
     expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+  });
+
+  it('inTurmoil is cleared when the new government adds actions', () => {
+    // Player becomes chairman, which queues their TR gain.
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.currentGlobalEvent = undefined;
+
+    forceGenerationEnd(game);
+
+    expect(turmoil.chairman).to.eq(player);
+    expect(game.generation).eq(2);
+    expect(game.inTurmoil).is.false;
   });
 
   it('Does not give Mars First bonus for World Government terraforming', () => {

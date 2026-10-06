@@ -853,12 +853,10 @@ export class Game implements IGame, Logger {
     });
 
     // turmoil.endGeneration might have added actions.
-    if (this.deferredActions.length > 0) {
-      this.deferredActions.runAll(() => this.startGeneration());
-    } else {
+    this.deferredActions.runAll(() => {
       this.inTurmoil = false;
       this.startGeneration();
-    }
+    });
   }
 
   private updatePlayerVPForTheGeneration(): void {

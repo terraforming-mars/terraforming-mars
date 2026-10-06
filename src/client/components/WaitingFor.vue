@@ -197,7 +197,6 @@ export default defineComponent({
     },
     updatePlayerView(playerView: PlayerViewModel | undefined) {
       const root = vueRoot(this);
-      root.screen = 'empty';
       root.playerView = playerView;
       root.screen = 'player-home';
       if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {

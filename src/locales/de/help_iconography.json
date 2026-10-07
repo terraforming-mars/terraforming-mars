@@ -120,7 +120,7 @@
   "Score as many victory points as you can, but make sure you meet the victory condition in time, or you lose.": "Sammle so viele Siegpunkte wie möglich, aber achte darauf, die Siegbedingung rechtzeitig zu erfüllen, sonst verlierst du.",
   "Game modes": "Spielmodi",
   "Choose one of two game modes when creating the game. Each has a different victory condition.": "Wähle beim Erstellen des Spiels einen von zwei Spielmodi aus. Jeder hat eine andere Siegbedingung.",
-  "Standard Mode (:tag:mars:): you win if every global parameter is maxed before time runs out.": "Standardmodus: Du gewinnst, wenn alle globalen Parameter vor Ablauf der Zeit ihren Höchstwert erreicht haben.",
+  "Standard Mode (:tag:mars:): you win if every global parameter is maxed before time runs out.": "Standardmodus (:tag:mars): Du gewinnst, wenn alle globalen Parameter vor Ablauf der Zeit ihren Höchstwert erreicht haben.",
   ":expansion:venus: This includes Venus if Venus Next is included.": "Dies schließt Venus ein, sofern Nächster Halt: Venus enthalten ist.",
   ":expansion:themoon: This includes Moon tracks if The Moon is included with Moon track completion required.": "Dies umfasst auch Mond-Strecken, wenn Der Mond enthalten ist und das Vollenden der globalen Mond-Werte erforderlich ist.",
   "63 TR Mode (:icon:tr:): you win if your TR is 63 or higher when time runs out.": "63 TW-Modus: Du gewinnst, wenn dein TW bei Ablauf der Zeit 63 oder höher ist.",

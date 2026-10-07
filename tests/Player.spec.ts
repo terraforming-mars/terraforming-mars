@@ -77,6 +77,17 @@ describe('Player', () => {
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
   });
 
+  it('records when input was requested', () => {
+    const [/* game */, player] = testGame(1);
+    const clock = new FakeClock();
+    player.clock = clock;
+    player.clearWaitingFor();
+
+    clock.millis = 5000;
+    player.setWaitingFor(new SelectOption('Input'));
+    expect(player.inputRequestedAt).eq(5000);
+  });
+
   it('does not stop the timer when processing optional input', () => {
     const [player, clock] = playerWithRunningTimer();
     const elapsed = player.timer.getElapsed();

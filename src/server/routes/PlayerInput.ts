@@ -1,4 +1,5 @@
 import * as responses from '../server/responses';
+import prometheus from 'prom-client';
 import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
@@ -13,12 +14,26 @@ import {AppError} from '../server/AppError';
 import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
+import {AppErrorResponse, INVALID_RUN_ID, RESPONDING_TOO_QUICKLY} from '../../common/app/AppErrorId';
 import {RouteError} from './RouteError';
 import {readBody} from './readBody';
+import {stringToNumber} from '../database/utils';
+
+export const playerInputMetrics = {
+  responseInterval: new prometheus.Histogram({
+    name: 'player_input_response_interval',
+    help: 'Time a user takes to respond to an input request',
+    buckets: [50, 100, 250, 500, 1000, 2000, 5000, 10000, 30000, 60000, 300000],
+    registers: [prometheus.register],
+  }),
+};
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
+
+  public constructor(private readonly minResponseIntervalMs = stringToNumber(process.env.MIN_RESPONSE_INTERVAL_MS, 0)) {
+    super();
+  }
 
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.urlParams.playerId('id');
@@ -71,17 +86,19 @@ export class PlayerInput extends Handler {
   }
 
   private async processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
-    // TODO(kberg): Find a better place for this optimization.
-    for (const card of player.tableau) {
-      card.clearWarnings();
-      if (isIProjectCard(card)) {
-        card.additionalProjectCosts = undefined;
-      }
-    }
+    const responseInterval = this.responseInterval(player, ctx);
     const body = await readBody(req);
+    this.observeResponseInterval(responseInterval);
     try {
+      if (this.isRespondingTooQuickly(responseInterval)) {
+        throw new AppError(RESPONDING_TOO_QUICKLY, "You're responding a little too quickly.");
+      }
       const entity = JSON.parse(body);
       validateRunId(entity);
+
+      // Placed here because it fits in a temporally cohesive sense.
+      this.resetTableauCardState(player);
+
       if (this.isWaitingForUndo(player, entity)) {
         await this.performUndo(req, res, ctx, player);
       } else {
@@ -106,6 +123,39 @@ export class PlayerInput extends Handler {
       res.write(JSON.stringify(response));
       res.end();
     }
+  }
+
+  // TODO(kberg): Find a better place for this optimization.
+  private resetTableauCardState(player: IPlayer): void {
+    for (const card of player.tableau) {
+      card.clearWarnings();
+      if (isIProjectCard(card)) {
+        card.additionalProjectCosts = undefined;
+      }
+    }
+  }
+
+  private responseInterval(player: IPlayer, ctx: Context): number | undefined {
+    if (player.inputRequestedAt === undefined) {
+      return undefined;
+    }
+    return ctx.clock.now() - player.inputRequestedAt;
+  }
+
+  private observeResponseInterval(responseInterval: number | undefined): void {
+    if (responseInterval !== undefined) {
+      playerInputMetrics.responseInterval.observe(responseInterval);
+    }
+  }
+
+  private isRespondingTooQuickly(responseInterval: number | undefined): boolean {
+    if (this.minResponseIntervalMs <= 0) {
+      return false;
+    }
+    if (responseInterval === undefined) {
+      return false;
+    }
+    return responseInterval < this.minResponseIntervalMs;
   }
 }
 function validateRunId(entity: any) {

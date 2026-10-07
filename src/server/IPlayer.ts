@@ -195,6 +195,13 @@ export interface IPlayer {
   // When set, this player can only be accessed by the user.
   user?: DiscordId;
 
+  /**
+   * When this player was given their current input request. Used to throttle bots.
+   *
+   * Not serialized: reloading the game asks for input again, which resets it.
+   */
+  inputRequestedAt?: number;
+
   setup(game: IGame): void;
 
   getTitaniumValue(): number;

@@ -33,7 +33,7 @@ import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
-import {Timer} from '../common/Timer';
+import {Clock, Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {AllOptions, DrawCards, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
@@ -183,6 +183,8 @@ export class Player implements IPlayer {
   public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
 
   public user?: DiscordId;
+  public inputRequestedAt?: number;
+  public clock: Clock = new Clock();
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -1719,6 +1721,7 @@ export class Player implements IPlayer {
     }
     this.waitingFor = input;
     this.waitingForCb = cb;
+    this.inputRequestedAt = this.clock.now();
     this.game.inputsThisRound++;
   }
 

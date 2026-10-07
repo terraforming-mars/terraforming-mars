@@ -87,9 +87,9 @@
 
 @resource_types: titanium, steel, heat, data, science, seed, graphene, asteroid, hydroelectric-resource;
 each(@resource_types, {
-.resource_icon--@{value} {
-  background-image: url("assets/resources/@{value}.png");
-}
+  .resource_icon--@{value} {
+    background-image: url("assets/resources/@{value}.png");
+  }
 })
 .resource_icon--floaters {
   background-image: url(./assets/resources/floater.png);

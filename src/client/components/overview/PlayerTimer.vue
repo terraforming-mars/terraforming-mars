@@ -29,20 +29,23 @@ export default defineComponent({
   data() {
     return {
       timerText: '',
+      intervalId: undefined as number | undefined,
     };
   },
   mounted() {
     this.updateTimer();
+    this.intervalId = window.setInterval(() => {
+      if (this.live) {
+        this.updateTimer();
+      }
+    }, 1000);
+  },
+  beforeUnmount() {
+    window.clearInterval(this.intervalId);
   },
   watch: {
-    timerText: {
-      handler() {
-        if (this.live) {
-          setTimeout(() => {
-            this.updateTimer();
-          }, 1000);
-        }
-      },
+    timer() {
+      this.updateTimer();
     },
   },
   methods: {

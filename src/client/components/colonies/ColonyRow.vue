@@ -5,7 +5,8 @@
       :idx="idx"
       :metadata="metadata"
       :player="colony.colonies[idx]"
-      :marker="colony.isActive && colony.trackPosition === idx"/>
+      :marker="colony.isActive && colony.trackPosition === idx"
+      :fadeMarker="fadeMarker"/>
   </div>
 </template>
 <script lang="ts">
@@ -29,6 +30,9 @@ export default defineComponent({
     colony: {
       type: Object as () => ColonyModel,
       required: true,
+    },
+    fadeMarker: {
+      type: Boolean,
     },
   },
 });

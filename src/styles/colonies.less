@@ -15,6 +15,23 @@
   height: 30px;
 }
 
+// Reveals the build bonus beneath the marker while choosing where to build a colony.
+.colony-track-marker--fading {
+  animation: colony-track-marker-fade 4s ease-in-out infinite;
+}
+
+@keyframes colony-track-marker-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .colony-track-marker--fading {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
 .colony-spaceship {
   position: absolute;
   margin-top: 70px;

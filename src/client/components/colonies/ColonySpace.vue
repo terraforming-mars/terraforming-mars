@@ -4,7 +4,7 @@
     <div v-if="player !== undefined" class="occupied-colony-space">
       <div :class="`board-cube colony-cube board-cube--${player}`"></div>
     </div>
-    <div v-if="marker" class="colony-track-marker"></div>
+    <div v-if="marker" class="colony-track-marker" :class="{'colony-track-marker--fading': fadeMarker && idx <= 2}"></div>
   </div>
 </template>
 <script lang="ts">
@@ -33,6 +33,9 @@ export default defineComponent({
       default: undefined,
     },
     marker: {
+      type: Boolean,
+    },
+    fadeMarker: {
       type: Boolean,
     },
   },

@@ -112,7 +112,7 @@
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
     <!-- Show the spaces for the player cubes and the white cube -->
-    <ColonyRow :metadata="metadata" :colony="colony"/>
+    <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker"/>
     <!-- show the numbers underneath the colony row -->
     <ColonyTradeRow :metadata="metadata"/>
   </div>
@@ -145,6 +145,10 @@ export default defineComponent({
     active: {
       type: Boolean,
       default: true,
+    },
+    // When true, the trade track marker fades in and out so the build bonus underneath is visible.
+    fadeMarker: {
+      type: Boolean,
     },
   },
   components: {

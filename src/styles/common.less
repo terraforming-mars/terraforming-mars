@@ -148,18 +148,18 @@ h2 {
 
 // normal backgrounds
 each(@players, {
-@c: ~"player_@{value}";
-.player_bg_color_@{value} {
-  background-color: @@c;
-}
+  @c: ~"player_@{value}";
+  .player_bg_color_@{value} {
+    background-color: @@c;
+  }
 })
 
 // backgrounds with opacity
 each(@players, {
-@c: ~"player_@{value}";
-.player_translucent_bg_color_@{value} {
-  background: rgba(@@c, 0.7);
-}
+  @c: ~"player_@{value}";
+  .player_translucent_bg_color_@{value} {
+    background: rgba(@@c, 0.7);
+  }
 })
 
 .alert-dialog {

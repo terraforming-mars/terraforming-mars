@@ -8,8 +8,7 @@
       <div class="colony-placement-bonus triple-res resource white-x white-x--2" :class="resource"></div>
     </template>
     <template v-else>
-      <!-- why margin-top? -->
-      <div class="resource" style="margin-top:11px;" :class="resource"></div>
+      <div class="resource" style="margin: 9px 0 0 11px;" :class="resource"></div>
     </template>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.COPY_TRADE">
@@ -20,7 +19,7 @@
     <div class="resource card card-with-border" style="position: absolute; margin: 7px 0 0 -30px; transform: scale(0.8);"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_INFLUENCE">
-    <div class="influence" style="margin-top:5px"></div>
+    <div class="influence" style="margin: 4px 0 0 6px"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_PRODUCTION">
     <div class="production-box"><div class="production" :class="resource">{{buildQuantityText}}</div></div>
@@ -42,7 +41,7 @@
     <div class="tile venus-tile venus-colony-bonus"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.OPPONENT_DISCARD">
-    <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+    <div class="resource card red-outline" style="margin-left: 11px; margin-top: 4px; transform: scale(0.8);"></div>
   </div>
   <div v-else-if="metadata.build.type === ColonyBenefit.PLACE_OCEAN_TILE">
     <div class="tile ocean-tile ocean-tile-colony"></div>

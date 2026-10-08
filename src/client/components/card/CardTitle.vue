@@ -1,10 +1,10 @@
 <template>
-  <div :class="[getMainClasses(), { 'is-corporation': isCorporation }]">
+  <div class="card-title" :class="{'card-title-standard-project': isStandardProject, 'is-corporation': isCorporation}">
     <div v-if="isPrelude" class="prelude-label">prelude</div>
     <div v-if="isCorporation" class="corporation-label">corporation</div>
     <div v-if="isCeo" class="ceo-label">CEO</div>
     <CardCorporationLogo v-if="isCorporation" :title="title"/>
-    <div v-else ref="title" :class="getClasses()">{{ titleWithoutSuffix }}</div>
+    <div v-else ref="title" class="card-title" :class="backgroundColorClass">{{ titleWithoutSuffix }}</div>
   </div>
 </template>
 
@@ -56,35 +56,27 @@ export default defineComponent({
       }
       fitTextWhenReady(this.typedRefs.title, 'card-title');
     },
-    getClasses(): string {
-      const classes: Array<String> = ['card-title'];
-
-      if (this.type === CardType.AUTOMATED) {
-        classes.push('background-color-automated');
-      } else if (this.type === CardType.ACTIVE) {
-        classes.push('background-color-active');
-      } else if (this.type === CardType.EVENT) {
-        classes.push('background-color-events');
-      } else if (this.type === CardType.PRELUDE) {
-        classes.push('background-color-prelude');
-      } else if (this.type === CardType.CEO) {
-        classes.push('background-color-ceo');
-      } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
-        classes.push('background-color-standard-project');
-      }
-
-      // The title is sized by measuring the rendered text (see fitTitle).
-      return classes.join(' ');
-    },
-    getMainClasses() {
-      const classes: Array<String> = ['card-title'];
-      if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
-        classes.push('card-title-standard-project');
-      }
-      return classes.join(' ');
-    },
   },
   computed: {
+    backgroundColorClass(): string | undefined {
+      switch (this.type) {
+      case CardType.AUTOMATED:
+        return 'background-color-automated';
+      case CardType.ACTIVE:
+        return 'background-color-active';
+      case CardType.EVENT:
+        return 'background-color-events';
+      case CardType.PRELUDE:
+        return 'background-color-prelude';
+      case CardType.CEO:
+        return 'background-color-ceo';
+      case CardType.STANDARD_PROJECT:
+      case CardType.STANDARD_ACTION:
+        return 'background-color-standard-project';
+      default:
+        return undefined;
+      }
+    },
     titleWithoutSuffix(): string {
       return this.title.split(':')[0];
     },
@@ -96,6 +88,9 @@ export default defineComponent({
     },
     isCorporation(): boolean {
       return this.type === CardType.CORPORATION;
+    },
+    isStandardProject(): boolean {
+      return this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION;
     },
     isPrelude(): boolean {
       return this.type === CardType.PRELUDE;

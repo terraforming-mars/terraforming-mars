@@ -1,5 +1,5 @@
 <template>
-      <div :class="classes">
+      <div class="player-info" :class="colorClass">
         <div class="player-status-and-res">
         <div class="player-status">
           <div class="player-info-details">
@@ -109,8 +109,8 @@ export default defineComponent({
     buttonLabel(): string {
       return this.isPinned(this.playerIndex) ? 'hide' : 'show';
     },
-    classes(): string {
-      return `player-info ${playerColorClass(this.player.color, 'bg_transparent')}`;
+    colorClass(): string {
+      return playerColorClass(this.player.color, 'bg_transparent');
     },
     numberOfPlayedCards(): number {
       return this.player.tableau.length;

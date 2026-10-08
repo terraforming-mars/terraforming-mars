@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses">
+  <div class="card-requirements" :class="{'card-requirements-max': hasMax}">
     <div v-for="(req, idx) in requirements" :key="idx">
       <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
@@ -24,9 +24,8 @@ export default defineComponent({
     CardRequirementComponent,
   },
   computed: {
-    getClasses(): string {
-      const hasMax = this.requirements?.some((req) => req.max);
-      return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
+    hasMax(): boolean {
+      return this.requirements?.some((req) => req.max) ?? false;
     },
     indentRight(): ReadonlyArray<boolean> {
       const indentations = [false];

@@ -153,7 +153,6 @@ export class BoardBuilder {
   // |lands| so that those IDs most definitely have land spaces.
   public shuffle(rng: Random) {
     const preservedSpaces = [...this.unshufflableSpaces, ...this.volcanicSpaces];
-    preservedSpaces.sort((a, b) => a - b); // TODO(kberg): this can be removed.
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
     preservingShuffle(this.bonuses, preservedSpaces, rng);
     return;

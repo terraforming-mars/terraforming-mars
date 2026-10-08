@@ -7,10 +7,10 @@ import {CardName} from '@/common/cards/CardName';
 describe('CardsFilter', () => {
   it('deep watcher detects array mutation', async () => {
     const wrapper = shallowMount(CardsFilter, {...globalConfig, props: {title: 'title', hint: 'hint'}, attachTo: document.body});
-    (wrapper.vm as any).addCard(CardName.ACQUIRED_COMPANY);
+    wrapper.vm.addCard(CardName.ACQUIRED_COMPANY);
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
-    (wrapper.vm as any).addCard(CardName.ADAPTED_LICHEN);
+    wrapper.vm.addCard(CardName.ADAPTED_LICHEN);
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
@@ -21,8 +21,7 @@ describe('CardsFilter', () => {
 
   it('emits', async () => {
     const wrapper = shallowMount(CardsFilter, {...globalConfig, props: {title: 'title', hint: 'hint'}, attachTo: document.body});
-    // TODO(kberg): wrapper.vm.addCard exists, but npm run build:tests doesn't think so.
-    (wrapper.vm as any).addCard(CardName.ACQUIRED_COMPANY);
+    wrapper.vm.addCard(CardName.ACQUIRED_COMPANY);
 
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();

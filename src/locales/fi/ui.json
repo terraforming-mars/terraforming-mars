@@ -1090,7 +1090,7 @@
   "corporation": "yhtiö",
   "Hide discount on cards": "Piilota alennukset korteissa",
   "Hide sidebar notification": "Piilota sivupalkin ilmoitukset",
-  "Learner Mode (req. refresh)": "Opettelutila (vaatii päivityksen)",
+  "Learner Mode": "Opettelutila",
   "The id of this game is ${0}": "Tämän pelin tunnus on ${0}",
   "Select how to pay for action": "Valitse kuinka maksat toiminnon",
   "Game Setup Details": "Pelin asetukset",

@@ -3,7 +3,13 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
+import {Space} from '../../boards/Space';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {REDS_RULING_POLICY_COST} from '../../../common/constants';
+import {Phase} from '../../../common/Phase';
 
 export class AquiferTurbines extends PreludeCard {
   constructor() {
@@ -13,7 +19,6 @@ export class AquiferTurbines extends PreludeCard {
 
       behavior: {
         production: {energy: 2},
-        ocean: {},
       },
 
       startingMegacredits: -3,
@@ -28,12 +33,57 @@ export class AquiferTurbines extends PreludeCard {
       },
     });
   }
-  public override bespokeCanPlay(player: IPlayer) {
-    return player.canAfford(3);
+
+  /**
+   * Ocean spaces where the M€ gained from placing the ocean covers what's left of the 3 M€ cost.
+   */
+  private availableSpaces(player: IPlayer): ReadonlyArray<Space> {
+    const redsCost = TurmoilHandler.computeTerraformRatingBump(player, {oceans: 1}) * REDS_RULING_POLICY_COST;
+    const spendable = player.spendableMegacredits();
+
+    // Reds is paid before deferred gains (e.g. Polaris) arrive, so it must be affordable up front.
+    // TODO(kberg): Try to fix that.
+    if (spendable < redsCost) {
+      return [];
+    }
+
+    const amountAvailable = spendable + this.megacreditsFromCards(player);
+    const amountToPay = -this.startingMegaCredits + redsCost;
+    const board = player.game.board;
+    return board.getAvailableSpacesForOcean(player)
+      .filter((space) => {
+        return amountAvailable + board.megacreditsFromOceanPlacement(player, space) >= amountToPay;
+      });
   }
+
+  /** M€ `player`'s cards give them for placing an ocean, on any space. */
+  private megacreditsFromCards(player: IPlayer): number {
+    let megacredits = 0;
+    if (player.tableau.has(CardName.POLARIS) && player.game.phase !== Phase.SOLAR) {
+      megacredits += 4;
+      // Polaris's M€ production increase.
+      if (player.tableau.has(CardName.MANUTECH)) {
+        megacredits += 1;
+      }
+    }
+    return megacredits;
+  }
+
+  public override bespokeCanPlay(player: IPlayer) {
+    if (!player.game.canAddOcean()) {
+      this.addWarning('maxoceans');
+      return player.canAfford(-this.startingMegaCredits);
+    }
+    // availableSpaces covers the same canAfford check.
+    return this.availableSpaces(player).length > 0;
+  }
+
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
+    const game = player.game;
+    const spaces = game.canAddOcean() ? this.availableSpaces(player) : [];
+    game.defer(new PlaceOceanTile(player, {spaces: spaces})).andThen(() => {
+      game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits), Priority.LOSE_RESOURCE_OR_PRODUCTION);
+    });
     return undefined;
   }
 }
-

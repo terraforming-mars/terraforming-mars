@@ -103,6 +103,10 @@ export default defineComponent({
     showPaymentSection(): boolean {
       return this.card !== undefined && this.card.isDisabled !== true;
     },
+    canUseTitaniumRegularly(): boolean {
+      return this.tags.includes(Tag.SPACE) ||
+          this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+    },
   },
   watch: {
     // Vue runs watchers before re-rendering the component that owns them, so
@@ -173,10 +177,6 @@ export default defineComponent({
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
       this.available.plants = Math.max(thisPlayer.plants - this.reserveUnits.plants, 0);
     },
-    canUseTitaniumRegularly(): boolean {
-      return this.tags.includes(Tag.SPACE) ||
-          this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
-    },
     canUse(unit: SpendableResource): boolean {
       if (this.card === undefined) {
         return false;
@@ -222,7 +222,7 @@ export default defineComponent({
           return this.tags.includes(Tag.BUILDING) ||
           this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
         case 'titanium':
-          return this.canUseTitaniumRegularly() ||
+          return this.canUseTitaniumRegularly ||
           this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
         case 'plants':
           return this.tags.includes(Tag.BUILDING) && this.playerinput.paymentOptions.plants === true;
@@ -249,7 +249,7 @@ export default defineComponent({
     /** @override */
     getTitaniumResourceRate(): number {
       const titaniumValue = this.playerView.thisPlayer.titaniumValue;
-      if (this.canUseTitaniumRegularly() || this.card?.standardProjectCanPayWith?.titanium === true) {
+      if (this.canUseTitaniumRegularly || this.card?.standardProjectCanPayWith?.titanium === true) {
         return titaniumValue;
       }
       return titaniumValue - 1;

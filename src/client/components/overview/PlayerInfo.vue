@@ -1,10 +1,10 @@
 <template>
-      <div :class="getClasses()">
+      <div :class="getClasses">
         <div class="player-status-and-res">
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name" @click="togglePlayerDetails">{{ playerSymbol + player.name }}</div>
-            <span @click="togglePlayerDetails" v-for="(corporationName, index) in getCorporationName()" :key="index" v-i18n>
+            <span @click="togglePlayerDetails" v-for="(corporationName, index) in getCorporationName" :key="index" v-i18n>
               <div class="player-info-corp" :title="$t(corporationName)">
                 {{ corporationName }}
               </div>
@@ -22,17 +22,17 @@
                 <div class="played-cards-icon hiding-card-button active"></div>
                 <div class="played-cards-icon hiding-card-button automated"></div>
                 <div class="played-cards-icon hiding-card-button event"></div>
-                <div class="played-cards-count">{{numberOfPlayedCards()}}</div>
+                <div class="played-cards-count">{{numberOfPlayedCards}}</div>
               </div>
             </div>
-            <AppButton class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
+            <AppButton class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel" />
           </div>
           <div class="tag-display player-board-blue-action-counter" :class="tooltipCss" :data-tooltip="$t('The number of available actions on active cards')">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>
             </div>
-            <span class="tag-count-display">{{ availableBlueActionCount() }}</span>
+            <span class="tag-count-display">{{ availableBlueActionCount }}</span>
           </div>
         </div>
         <PlayerTags :player="player" :playerView="playerView" :hideZeroTags="hideZeroTags" :isTopBar="isTopBar" />
@@ -106,6 +106,25 @@ export default defineComponent({
     Phase(): typeof Phase {
       return Phase;
     },
+    buttonLabel(): string {
+      return this.isPinned(this.playerIndex) ? 'hide' : 'show';
+    },
+    getClasses(): string {
+      return `player-info ${playerColorClass(this.player.color, 'bg_transparent')}`;
+    },
+    numberOfPlayedCards(): number {
+      return this.player.tableau.length;
+    },
+    availableBlueActionCount(): number {
+      return this.player.availableBlueCardActionCount;
+    },
+    getCorporationName(): string[] {
+      const cards = this.player.tableau;
+      const corporationCards = cards
+        .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
+        .map((card) => card.name);
+      return corporationCards.length === 0 ? [''] : corporationCards;
+    },
   },
   methods: {
     isPinned(playerIndex: number): boolean {
@@ -135,9 +154,6 @@ export default defineComponent({
         }
       }
     },
-    buttonLabel(): string {
-      return this.isPinned(this.playerIndex) ? 'hide' : 'show';
-    },
     togglePlayerDetails() {
       // for the player viewing this page => scroll to cards UI
       if (this.player.color === this.playerView.thisPlayer?.color) {
@@ -150,22 +166,6 @@ export default defineComponent({
       }
       // any other player show cards container and hide all other
       this.pinPlayer();
-    },
-    getClasses(): string {
-      return `player-info ${playerColorClass(this.player.color, 'bg_transparent')}`;
-    },
-    numberOfPlayedCards(): number {
-      return this.player.tableau.length;
-    },
-    availableBlueActionCount(): number {
-      return this.player.availableBlueCardActionCount;
-    },
-    getCorporationName(): string[] {
-      const cards = this.player.tableau;
-      const corporationCards = cards
-        .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
-        .map((card) => card.name);
-      return corporationCards.length === 0 ? [''] : corporationCards;
     },
   },
 });

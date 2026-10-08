@@ -1,5 +1,5 @@
 <template>
-    <div :class="getGameBoardClassName()">
+    <div :class="getGameBoardClassName">
         <div class="hide-tile-button-container">
           <div class="hide-tile-button" @click="$emit('toggleTileView')" data-test="hide-tiles-button" v-i18n>
             {{ tileView }} tiles
@@ -75,7 +75,7 @@
 
         <div class="board" id="main_board">
             <BoardSpace
-              v-for="curSpace in getAllSpacesOnMars()"
+              v-for="curSpace in getAllSpacesOnMars"
               :key="curSpace.id"
               :space="curSpace"
               :aresExtension="expansions.ares"
@@ -416,11 +416,6 @@ export default defineComponent({
     BoardSpace,
   },
   methods: {
-    getAllSpacesOnMars(): Array<SpaceModel> {
-      return this.spaces
-        .filter((s) => s.spaceType !== SpaceType.COLONY)
-        .toSorted((space1, space2) => parseInt(space1.id) - parseInt(space2.id));
-    },
     hasSpace(spaceId: SpaceId): boolean {
       return this.spaceMap.has(spaceId);
     },
@@ -489,9 +484,6 @@ export default defineComponent({
         return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
       }
     },
-    getGameBoardClassName(): string {
-      return this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
-    },
   },
   computed: {
     spaceMap(): Map<SpaceId, SpaceModel> {
@@ -508,6 +500,14 @@ export default defineComponent({
     },
     constants(): typeof constants {
       return constants;
+    },
+    getAllSpacesOnMars(): Array<SpaceModel> {
+      return this.spaces
+        .filter((s) => s.spaceType !== SpaceType.COLONY)
+        .toSorted((space1, space2) => parseInt(space1.id) - parseInt(space2.id));
+    },
+    getGameBoardClassName(): string {
+      return this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
   },
 });

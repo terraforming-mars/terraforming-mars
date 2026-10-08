@@ -1,7 +1,7 @@
 <template>
-  <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name) + getUnavailablePartyClass()">
+  <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name) + getUnavailablePartyClass">
     <div :class="'board-party board-party--' + partyNameToCss(party.name)">
-      <div :class="getDominantClass()">
+      <div :class="getDominantClass">
         <div class="send-delegate-leader-spot">
           <div v-if="party.partyLeader" :class="['player-token', party.partyLeader]"></div>
         </div>
@@ -36,6 +36,14 @@ export default defineComponent({
       type: Boolean,
     },
   },
+  computed: {
+    getDominantClass(): string {
+      return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
+    },
+    getUnavailablePartyClass(): string {
+      return this.isAvailable ? '' : ' unavailable-party';
+    },
+  },
   methods: {
     partyNameToCss(party: PartyName | undefined): string {
       if (party === undefined) {
@@ -43,12 +51,6 @@ export default defineComponent({
         return '';
       }
       return party.toLowerCase().split(' ').join('_');
-    },
-    getDominantClass(): string {
-      return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
-    },
-    getUnavailablePartyClass(): string {
-      return this.isAvailable ? '' : ' unavailable-party';
     },
   },
 });

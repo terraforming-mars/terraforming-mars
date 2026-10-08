@@ -23,7 +23,7 @@
                 class="delta-project-board__cube"
               ></i>
               <div
-                v-for="n in emptySlotsStart()"
+                v-for="n in emptySlotsStart"
                 :key="'empty-start-' + n"
                 class="delta-project-board__slot"
               ></div>
@@ -172,6 +172,12 @@ export default defineComponent({
       steps: STEPS,
     };
   },
+  computed: {
+    emptySlotsStart(): number {
+      const occupied = this.playersAtPosition(0).length;
+      return Math.max(0, this.players.length - occupied);
+    },
+  },
   methods: {
     cubeCss(color: Color): string {
       const css = 'board-cube board-cube--' + color;
@@ -190,10 +196,6 @@ export default defineComponent({
       const occupied = this.playersAtPosition(position).length;
       const minSlots = step.dynamicSlots ? this.players.length : 1;
       return Math.max(0, minSlots - occupied);
-    },
-    emptySlotsStart(): number {
-      const occupied = this.playersAtPosition(0).length;
-      return Math.max(0, this.players.length - occupied);
     },
   },
 });

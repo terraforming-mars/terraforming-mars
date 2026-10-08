@@ -117,7 +117,7 @@
                                     <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                 </label>
 
-                                <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled()">
+                                <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                                     <div>
                                     <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
                                     <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
@@ -387,7 +387,7 @@
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
 
-                            <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
+                            <div class="create-game-page-column-row" v-if="isRandomMAEnabled">
                                 <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
                                 <label class="label-randomMAOption" for="limitedRandomMA-radio">
@@ -445,7 +445,7 @@
                             </div>
                             <div class="container">
                                 <div class="columns">
-                                  <template v-for="(newPlayer, index) in getPlayers()" :key="index">
+                                  <template v-for="(newPlayer, index) in getPlayers" :key="index">
                                     <div>
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
@@ -463,7 +463,7 @@
                                           </div>
                                           <div>
                                               <!-- <template v-if="beginnerOption"> -->
-                                                  <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
+                                                  <label v-if="isBeginnerToggleEnabled" class="form-switch form-inline create-game-beginner-option-label">
                                                       <input type="checkbox" v-model="newPlayer.beginner">
                                                       <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a :href="wikiUrls.beginnerCorporation" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                                   </label>
@@ -819,6 +819,18 @@ export default defineComponent({
         RandomBoardOption.ALL,
       ];
     },
+    getPlayers(): Array<NewPlayerModel> {
+      return this.players.slice(0, this.playersCount);
+    },
+    isRandomMAEnabled(): Boolean {
+      return this.randomMA !== RandomMAOptionType.NONE;
+    },
+    isPoliticalAgendasExtensionEnabled(): Boolean {
+      return this.politicalAgendasExtension !== 'Standard';
+    },
+    isBeginnerToggleEnabled(): Boolean {
+      return !(this.initialDraft || this.expansions.prelude || this.expansions.venus || this.expansions.colonies || this.expansions.turmoil);
+    },
   },
   methods: {
     restoreLastSettings() {
@@ -944,12 +956,6 @@ export default defineComponent({
     updateCustomCeos(customCeos: Array<CardName>) {
       this.customCeos = customCeos;
     },
-    getPlayers(): Array<NewPlayerModel> {
-      return this.players.slice(0, this.playersCount);
-    },
-    isRandomMAEnabled(): Boolean {
-      return this.randomMA !== RandomMAOptionType.NONE;
-    },
     randomMAToggle() {
       if (this.randomMA === RandomMAOptionType.NONE) {
         this.randomMA = RandomMAOptionType.LIMITED;
@@ -965,9 +971,6 @@ export default defineComponent({
       } else {
         return RandomMAOptionType.NONE;
       }
-    },
-    isPoliticalAgendasExtensionEnabled(): Boolean {
-      return this.politicalAgendasExtension !== 'Standard';
     },
     politicalAgendasExtensionToggle() {
       if (this.politicalAgendasExtension === 'Standard') {
@@ -985,9 +988,6 @@ export default defineComponent({
         console.warn('AgendaStyle not found');
         return 'Standard';
       }
-    },
-    isBeginnerToggleEnabled(): Boolean {
-      return !(this.initialDraft || this.expansions.prelude || this.expansions.venus || this.expansions.colonies || this.expansions.turmoil);
     },
     getPlayersCountText(count: number): string {
       if (count === 1) {

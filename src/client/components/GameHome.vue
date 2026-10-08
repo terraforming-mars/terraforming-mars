@@ -1,6 +1,6 @@
 <template>
   <div id="game-home" class="game-home-container">
-    <h1><HomeLink>Terraforming Mars</HomeLink> [<span v-i18n>game id:</span> <span>{{getGameId()}}</span>]</h1>
+    <h1><HomeLink>Terraforming Mars</HomeLink> [<span v-i18n>game id:</span> <span>{{getGameId}}</span>]</h1>
     <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
     <ul>
       <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
@@ -84,10 +84,12 @@ export default defineComponent({
       previousViewport: '',
     };
   },
-  methods: {
+  computed: {
     getGameId(): string {
       return this.game !== undefined ? this.game.id.toString() : 'n/a';
     },
+  },
+  methods: {
     getTurnOrder(index: number): string {
       if (index === 0) {
         return '1st';

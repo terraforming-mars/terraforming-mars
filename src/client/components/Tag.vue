@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()" :data-tooltip="$t(tag)" ></div>
+  <div class="tag-count tooltip tooltip-bottom" :class="classes" :data-tooltip="$t(tag)" ></div>
 </template>
 
 <script lang="ts">
@@ -22,17 +22,16 @@ export default defineComponent({
       type: String,
     },
   },
-  methods: {
-    getClasses(): string {
-      const classes = ['tag-count', 'tooltip', 'tooltip-bottom'];
-      classes.push(`tag-${this.tag}`);
+  computed: {
+    classes(): Array<string> {
+      const classes = [`tag-${this.tag}`];
       if (this.size !== undefined) {
         classes.push(`tag-size-${this.size}`);
       }
       if (this.type !== undefined) {
         classes.push(`tag-type-${this.type}`);
       }
-      return classes.join(' ');
+      return classes;
     },
   },
 });

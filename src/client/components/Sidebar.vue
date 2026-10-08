@@ -1,5 +1,5 @@
 <template>
-<div :class="'sidebar_cont sidebar '+getSideBarClass()">
+<div :class="'sidebar_cont sidebar '+sideBarClass">
   <div class="tm" :title="$t('Generation Marker')">
     <div class="gen-text" v-i18n>GEN</div>
     <div class="gen-marker">{{ genMarker }}</div>
@@ -15,7 +15,7 @@
     <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"/>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
-    <div :class="getPlayerColorCubeClass()+' player_bg_color_' + playerColor"></div>
+    <div :class="playerColorCubeClass+' player_bg_color_' + playerColor"></div>
   </div>
 
   <a href="#board" :title="$t('Jump to board')">
@@ -158,15 +158,13 @@ export default defineComponent({
       'globalParameter': GlobalParameter,
     };
   },
-  methods: {
-    getPlayerColorCubeClass(): string {
+  computed: {
+    playerColorCubeClass(): string {
       return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
-    getSideBarClass(): string {
+    sideBarClass(): string {
       return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
-  },
-  computed: {
     genMarker(): string {
       return `${this.generation}`;
     },

@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()" ></div>
+  <div class="card-tag" :class="`tag-${type}`"></div>
 </template>
 
 <script lang="ts">
@@ -19,14 +19,6 @@ export default defineComponent({
       type: String,
       required: true,
       validator: (type: Tag | 'asterisk') => type === 'asterisk' || Object.values(Tag).includes(type),
-    },
-  },
-  methods: {
-    getClasses(): string {
-      const classes = ['card-tag'];
-      classes.push(`tag-${this.type.toLocaleLowerCase()}`);
-
-      return classes.join(' ');
     },
   },
 });

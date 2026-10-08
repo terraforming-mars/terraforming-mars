@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes">(<span v-i18n>{{ description }}</span>)</div>
+  <div class="card-description" :class="alignClasses">(<span v-i18n>{{ description }}</span>)</div>
 </template>
 
 <script lang="ts">
@@ -16,8 +16,8 @@ export default defineComponent({
     },
   },
   computed: {
-    classes(): ReadonlyArray<string> {
-      const classes: string[] = ['card-description'];
+    alignClasses() {
+      const classes = [];
       if (isDescription(this.item)) {
         if (this.item.align !== 'center') {
           // we want to reduce size for aligned left of right to 60%

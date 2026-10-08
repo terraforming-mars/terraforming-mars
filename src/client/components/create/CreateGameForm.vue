@@ -602,15 +602,13 @@ import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
 import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
-import {CreateGameSettingsStorage} from './CreateGameSettingsStorage';
+import {createGameSettingsStorage} from './createGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 import {validateNewGameConfig, validationDetails, ValidationErrors} from '@/common/game/validateNewGameConfig';
 import ValidationErrorsPopup from './ValidationErrorsPopup.vue';
-
-const createGameSettingsStorage = new CreateGameSettingsStorage();
 
 type Refs = {
   file: HTMLInputElement;
@@ -834,7 +832,7 @@ export default defineComponent({
   },
   methods: {
     restoreLastSettings() {
-      const settings = createGameSettingsStorage.loadSettings();
+      const settings = createGameSettingsStorage.load();
       if (settings === undefined) {
         return;
       }
@@ -886,7 +884,7 @@ export default defineComponent({
       }
     },
     resetSettings() {
-      createGameSettingsStorage.clearSettings();
+      createGameSettingsStorage.clear();
       Object.assign(this, defaultCreateGameModel(), {
         preludeToggled: false,
         uploading: false,
@@ -1154,7 +1152,7 @@ export default defineComponent({
       if (newGameConfig === undefined) {
         return;
       }
-      createGameSettingsStorage.saveSettings(newGameConfig);
+      createGameSettingsStorage.save(newGameConfig);
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;

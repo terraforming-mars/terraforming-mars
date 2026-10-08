@@ -11,42 +11,42 @@ describe('OldWorldMafia', () => {
 
     player.underworldData.corruption = 0;
 
-    player.tagsForTest = {earth: 0},
+    player.tagsForTest = {earth: 0};
     cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.underworldData.corruption).to.eq(0);
 
     player.underworldData.corruption = 0;
-    player.tagsForTest = {earth: 1},
+    player.tagsForTest = {earth: 1};
     cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.underworldData.corruption).to.eq(1);
 
     player.underworldData.corruption = 0;
-    player.tagsForTest = {earth: 2},
+    player.tagsForTest = {earth: 2};
     cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.underworldData.corruption).to.eq(1);
 
     player.underworldData.corruption = 0;
-    player.tagsForTest = {earth: 3},
+    player.tagsForTest = {earth: 3};
     cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.underworldData.corruption).to.eq(2);
 
     player.underworldData.corruption = 0;
-    player.tagsForTest = {earth: 4},
+    player.tagsForTest = {earth: 4};
     cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.underworldData.corruption).to.eq(2);
 
     player.underworldData.corruption = 0;
-    player.tagsForTest = {earth: 5},
+    player.tagsForTest = {earth: 5};
     cast(card.play(player), undefined);
     runAllActions(game);
 

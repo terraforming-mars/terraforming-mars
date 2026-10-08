@@ -111,7 +111,7 @@ describe('EcologicalSurvey', () => {
       SpaceBonus.PLANT,
       SpaceBonus.DRAW_CARD,
       SpaceBonus.HEAT,
-    ],
+    ];
     player.playedCards.push(card);
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 
@@ -178,7 +178,7 @@ describe('EcologicalSurvey', () => {
     player.playedCards.push(card, microbeCard);
 
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    space.bonus = [SpaceBonus.MICROBE],
+    space.bonus = [SpaceBonus.MICROBE];
 
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
     runAllActions(game);

@@ -28,7 +28,7 @@ describe('SoilEnrichment', () => {
       const ghgProducingBacteria = new GHGProducingBacteria();
       const searchForLife = new SearchForLife();
       ghgProducingBacteria.resourceCount = run.ghgResources;
-      searchForLife.resourceCount = run.searchForLifeResources,
+      searchForLife.resourceCount = run.searchForLifeResources;
       player.playedCards.push(ghgProducingBacteria, searchForLife);
 
       expect(card.canPlay(player)).eq(run.expected);

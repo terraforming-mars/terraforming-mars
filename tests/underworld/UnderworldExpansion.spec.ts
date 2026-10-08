@@ -752,7 +752,7 @@ describe('UnderworldExpansion', () => {
     space2.excavator = player1;
     space2.undergroundResources = 'card2';
 
-    space3.undergroundResources = 'corruption1',
+    space3.undergroundResources = 'corruption1';
     game.underworldData.tokens = [];
 
     expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
@@ -776,7 +776,7 @@ describe('UnderworldExpansion', () => {
     space2.excavator = player1;
     space2.undergroundResources = 'card2';
 
-    space3.undergroundResources = 'corruption1',
+    space3.undergroundResources = 'corruption1';
     game.underworldData.tokens = [];
 
     expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);

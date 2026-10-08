@@ -56,6 +56,7 @@ const projectRules = {
   'no-extra-semi': 'error',
   'curly': 'error',
   'brace-style': 'error',
+  'no-sequences': 'error',
 
   // Disabled entries from eslint:recommended
   'no-case-declarations': 'off',

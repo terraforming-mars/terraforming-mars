@@ -62,7 +62,7 @@ describe('Crashlanding', () => {
 
   it('play - cannot play next to 2 cities', () => {
     const spaceBetweenTwoCities = game.board.getSpaceOrThrow('36');
-    addCity(player, '37'),
+    addCity(player, '37');
     expect(cast(card.play(player), SelectSpace).spaces).to.include(spaceBetweenTwoCities);
     addCity(player, '35');
     expect(cast(card.play(player), SelectSpace).spaces).to.not.include(spaceBetweenTwoCities);

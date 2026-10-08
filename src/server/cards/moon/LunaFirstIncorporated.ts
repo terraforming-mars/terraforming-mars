@@ -32,7 +32,7 @@ export class LunaFirstIncorporated extends CorporationCard implements ICorporati
               .moonMiningRate({size: Size.SMALL}).slash()
               .moonLogisticRate({size: Size.SMALL})
               .startEffect.production((pb) => pb.megacredits(1));
-          }).br,
+          }).br;
           b.effect('When any player raises any Moon Rate, gain 1M€ per step.', (eb) => {
             eb.moonHabitatRate({size: Size.SMALL, all}).slash()
               .moonMiningRate({size: Size.SMALL, all}).slash()

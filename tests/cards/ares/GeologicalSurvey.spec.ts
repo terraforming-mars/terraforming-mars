@@ -120,7 +120,7 @@ describe('GeologicalSurvey', () => {
       SpaceBonus.PLANT,
       SpaceBonus.DRAW_CARD,
       SpaceBonus.HEAT,
-    ],
+    ];
     player.playedCards.set(card);
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 

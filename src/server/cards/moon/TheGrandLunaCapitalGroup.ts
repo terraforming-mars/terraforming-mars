@@ -40,7 +40,7 @@ export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorpor
             eb.moonHabitat({size: Size.SMALL, all}).moonHabitat({size: Size.SMALL}).asterix()
               .startEffect
               .megacredits(2).slash().moonHabitat({size: Size.SMALL, all});
-          }).br,
+          }).br;
           b.vpText('1 VP for each habitat tile adjacent to your habitat tiles.').br;
         }),
         victoryPoints: moonHabitatTile(1),

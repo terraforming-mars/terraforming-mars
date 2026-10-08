@@ -8,6 +8,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {isSpecialTile} from '../../boards/Board';
 
+const HELP_TEXT = `Fan expansion note: You may not choose cards that return cards to your hand. This would create a situation where cards could be endlessly retrieved.` as const;
+
 export class AstraMechanica extends Card implements IProjectCard {
   constructor() {
     super({
@@ -22,6 +24,7 @@ export class AstraMechanica extends Card implements IProjectCard {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
         }),
         description: 'RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
+        helpText: HELP_TEXT,
       },
     });
   }

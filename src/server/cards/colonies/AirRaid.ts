@@ -10,6 +10,8 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, uppercase} from '../Options';
 
+const HELP_TEXT = `Air Raid requires removing 1 floater and stealing exactly 5 M€ from one opponent. These are treated as a package deal, so Air Raid cannot be played unless an opponent has at least 5 M€. If no opponent has 5 M€, the card is unavailable even if you have a floater.` as const;
+
 export class AirRaid extends Card implements IProjectCard {
   constructor() {
     super({
@@ -24,6 +26,7 @@ export class AirRaid extends Card implements IProjectCard {
           b.minus().resource(CardResource.FLOATER);
           b.text('steal', {uppercase}).megacredits(5, {all});
         }),
+        helpText: HELP_TEXT,
       },
     });
   }

@@ -10,6 +10,7 @@ describe('CardHelp', () => {
       ...globalConfig,
       props: {
         name: CardName.ECOLINE,
+        helpText: 'Some help.',
       },
     });
     expect(wrapper.exists()).to.be.true;

@@ -94,9 +94,6 @@ export default defineComponent({
     OverviewSettings,
     OtherPlayer,
   },
-  data() {
-    return {};
-  },
   methods: {
     getIsFirstForGen(player: PublicPlayerModel): boolean {
       return playerIndex(player.color, this.players) === 0;

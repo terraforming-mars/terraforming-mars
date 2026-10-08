@@ -31,10 +31,6 @@ export default defineComponent({
   components: {
     PlanetaryTrackReward,
   },
-  data() {
-    return {
-    };
-  },
   computed: {
     myReward(): ReadonlyArray<Reward> {
       switch (this.type) {

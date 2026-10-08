@@ -4,7 +4,7 @@
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"
-      :value="modelValue"
+      :value="count"
       @input="onInput"
     >
     <AppButton type="plus" @click="$emit('plus')" />
@@ -20,8 +20,7 @@ import {SpendableResource} from '@/common/inputs/Spendable';
 export default defineComponent({
   name: 'PaymentUnitComponent',
   props: {
-    // TODO(kberg): Rename to count.
-    modelValue: {
+    count: {
       type: Number,
       required: true,
     },
@@ -56,7 +55,7 @@ export default defineComponent({
   },
   methods: {
     onInput(event: Event) {
-      this.$emit('update:modelValue', (event.target as HTMLInputElement).value);
+      this.$emit('update:count', (event.target as HTMLInputElement).value);
     },
   },
 });

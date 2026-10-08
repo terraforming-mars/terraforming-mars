@@ -3,7 +3,7 @@
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
     <template v-for="unit in keys" :key="unit">
         <PaymentUnitComponent
-          v-model.number="units[unit]"
+          v-model:count.number="units[unit]"
           :unit="(unit as SpendableResource)"
           :showMax="false"
           description=""

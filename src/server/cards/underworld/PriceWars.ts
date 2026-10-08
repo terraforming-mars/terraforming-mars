@@ -6,9 +6,11 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 
-const HELP_TEXT = `Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the ongoing effect is also removed from play. It is strange for an event to have a generational effect.
+const HELP_TEXT = `
+Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the ongoing effect is also removed from play. It is strange for an event to have a generational effect.
 
-That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Workers and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.` as const;
+That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Workers and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.
+` as const;
 
 export class PriceWars extends Card implements IProjectCard {
   constructor() {

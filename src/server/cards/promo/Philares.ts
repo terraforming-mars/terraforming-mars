@@ -12,7 +12,9 @@ import {SelectResources} from '../../inputs/SelectResources';
 import {message} from '../../logs/MessageBuilder';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-const HELP_TEXT = `Philares's effect does not trigger when tiles are placed on The Moon. This is an intentional decision to prevent it from being overpowered.` as const;
+const HELP_TEXT = `
+Philares's effect does not trigger when tiles are placed on The Moon. This is an intentional decision to prevent it from being overpowered.
+` as const;
 
 export class Philares extends CorporationCard implements ICorporationCard {
   constructor() {

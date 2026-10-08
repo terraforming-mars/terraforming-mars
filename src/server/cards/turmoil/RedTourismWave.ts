@@ -9,7 +9,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 
-const HELP_TEXT = `Fan expansion note: This does not apply to The Moon.` as const;
+const HELP_TEXT = `
+Fan expansion note: This does not apply to The Moon.
+` as const;
 
 export class RedTourismWave extends Card implements IProjectCard {
   constructor() {

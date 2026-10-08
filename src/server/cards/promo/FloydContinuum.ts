@@ -12,7 +12,9 @@ import {IActionCard} from '../ICard';
 // Note: Floyd Continuum comes from the Dutch international open.
 // https://boardgamegeek.com/thread/3120204/dutch-open-terraformingmars-international-4th-tour
 
-const HELP_TEXT = `Fan expansion note: This will apply to Venus but not The Moon.` as const;
+const HELP_TEXT = `
+Fan expansion note: This will apply to Venus but not The Moon.
+` as const;
 
 export class FloydContinuum extends Card implements IProjectCard, IActionCard {
   constructor() {

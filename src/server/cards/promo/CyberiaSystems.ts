@@ -9,7 +9,9 @@ import {ICard} from '../ICard';
 import {Priority} from '../../deferredActions/Priority';
 import {uppercase} from '../Options';
 
-const HELP_TEXT = `Officially this requires 2 cards with production bonuses, but can't be predicted on this server, so the language here is changed to "up to 2 cards."` as const;
+const HELP_TEXT = `
+Officially this requires 2 cards with production bonuses, but can't be predicted on this server, so the language here is changed to "up to 2 cards."
+` as const;
 
 export class CyberiaSystems extends RoboticWorkforceBase {
   constructor() {

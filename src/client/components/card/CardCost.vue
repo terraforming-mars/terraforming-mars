@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card-cost" :class="{'visibility-hidden': amount === undefined}">{{ amount }}</div>
-    <template v-if="displayTwoCosts()">
+    <template v-if="displayTwoCosts">
       <div class="card-cost-transition"></div>
       <div class="card-old-cost">{{ newCost }}</div>
     </template>
@@ -25,7 +25,7 @@ export default defineComponent({
       default: undefined,
     },
   },
-  methods: {
+  computed: {
     displayTwoCosts(): boolean {
       const hideDiscount = getPreferences().hide_discount_on_cards;
       return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;

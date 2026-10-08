@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="experimentalUI()" v-i18n>
+  <div v-if="experimentalUI" v-i18n>
     <label>
       <input type="checkbox" v-model="showReorder" > Reorder Cards
     </label>
@@ -173,6 +173,8 @@ export default defineComponent({
         }
       }
     },
+  },
+  computed: {
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
     },

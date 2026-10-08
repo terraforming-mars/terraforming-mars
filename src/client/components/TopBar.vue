@@ -1,6 +1,6 @@
 <template>
     <div class="top-bar-container">
-      <div class="top-bar" :class="{'top-bar-collapsed': !isExpanded}" :key="componentKey">
+      <div class="top-bar" :class="{'top-bar-collapsed': !isExpanded}">
         <PlayerInfo v-show="isExpanded" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
         <div class="top-bar-collapser" @click="toggleBar()">
           <img src="assets/arrows_left.png">
@@ -30,18 +30,9 @@ export default defineComponent({
     PlayerInfo,
     TerraformedBanner,
   },
-  data() {
-    return {
-      componentKey: 0,
-    };
-  },
   methods: {
-    forceRerender() {
-      this.componentKey += 1;
-    },
     toggleBar() {
       PreferencesManager.INSTANCE.set('hide_top_bar', this.isExpanded);
-      this.forceRerender();
     },
   },
   computed: {

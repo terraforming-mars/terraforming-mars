@@ -1,7 +1,7 @@
 <template>
     <div class="top-bar-container">
       <div :class="formatCssClass()" :key="componentKey">
-        <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
+        <PlayerInfo v-show="isExpanded" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
         <div class="top-bar-collapser" @click="toggleBar()">
           <img src="assets/arrows_left.png">
         </div>
@@ -40,18 +40,20 @@ export default defineComponent({
       this.componentKey += 1;
     },
     toggleBar() {
-      PreferencesManager.INSTANCE.set('hide_top_bar', this.isExpanded());
+      PreferencesManager.INSTANCE.set('hide_top_bar', this.isExpanded);
       this.forceRerender();
-    },
-    isExpanded(): boolean {
-      return !getPreferences().hide_top_bar;
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];
-      if ( ! this.isExpanded()) {
+      if ( ! this.isExpanded) {
         cssClasses.push('top-bar-collapsed');
       }
       return cssClasses.join(' ');
+    },
+  },
+  computed: {
+    isExpanded(): boolean {
+      return !getPreferences().hide_top_bar;
     },
   },
 });

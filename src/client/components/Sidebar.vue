@@ -1,11 +1,11 @@
 <template>
-<div :class="'sidebar_cont sidebar '+sideBarClass">
+<div class="sidebar_cont sidebar" :class="sideBarClass">
   <div class="tm" :title="$t('Generation Marker')">
     <div class="gen-text" v-i18n>GEN</div>
     <div class="gen-marker">{{ genMarker }}</div>
   </div>
   <div v-if="gameOptions.expansions.turmoil" :title="$t('Ruling Party')">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss"> <span v-i18n>{{ rulingParty }}</span></div>
+    <div class="party-name party-name-indicator" :class="rulingPartyClass"> <span v-i18n>{{ rulingParty }}</span></div>
   </div>
   <div class="global_params">
     <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature"/>
@@ -15,7 +15,7 @@
     <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"/>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
-    <div :class="playerColorCubeClass+' player_bg_color_' + playerColor"></div>
+    <div class="preferences_player_inner" :class="[`player_bg_color_${playerColor}`, {active: isAnimated}]"></div>
   </div>
 
   <a href="#board" :title="$t('Jump to board')">
@@ -159,21 +159,21 @@ export default defineComponent({
     };
   },
   computed: {
-    playerColorCubeClass(): string {
-      return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+    isAnimated(): boolean {
+      return this.actingPlayer && getPreferences().hide_animated_sidebar === false;
     },
     sideBarClass(): string {
-      return this.actingPlayer && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.isAnimated ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     genMarker(): string {
       return `${this.generation}`;
     },
-    rulingPartyToCss(): string {
+    rulingPartyClass(): string | undefined {
       if (this.turmoil?.ruling === undefined) {
         console.warn('no party provided');
-        return '';
+        return undefined;
       }
-      return this.turmoil.ruling.toLowerCase().split(' ').join('_');
+      return `party-name--${this.turmoil.ruling.toLowerCase().split(' ').join('_')}`;
     },
     rulingParty(): string {
       const ruling = this.turmoil?.ruling;

@@ -685,14 +685,14 @@ export class Game implements IGame, Logger {
   }
 
   private playerHasPickedCorporationCard(player: IPlayer, corporationCard: ICorporationCard): void {
-    // TODO(kberg): I think we can get rid of this weird validation at a later time.
     player.pickedCorporationCard = corporationCard;
-    if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
-      for (const somePlayer of this.playersInGenerationOrder) {
-        if (somePlayer.pickedCorporationCard === undefined) {
-          throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
+    const players = this.playersInGenerationOrder;
+    if (players.every((p) => p.pickedCorporationCard !== undefined)) {
+      for (const p of players) {
+        // This if cluase is necessary because `every` above doesn't help.
+        if (p.pickedCorporationCard) {
+          p.playCorporationCard(p.pickedCorporationCard);
         }
-        somePlayer.playCorporationCard(somePlayer.pickedCorporationCard);
       }
     }
   }

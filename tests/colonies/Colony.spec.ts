@@ -163,17 +163,23 @@ describe('Colony', () => {
     expect(luna.trackPosition).to.eq(0);
   });
 
-  it('Should trade', () => {
-    // TODO (Lynesth): Do this better with next colony refactor PR
-    const income = [1, 2, 4, 7, 10, 13, 17];
-    for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
+  for (const run of [
+    {position: 0, expected: 1},
+    {position: 1, expected: 2},
+    {position: 2, expected: 4},
+    {position: 3, expected: 7},
+    {position: 4, expected: 10},
+    {position: 5, expected: 13},
+    {position: 6, expected: 17},
+  ] as const) {
+    it('Should trade ' + JSON.stringify(run), () => {
       player.megaCredits = 0;
-      luna.trackPosition = i;
+      luna.trackPosition = run.position;
       luna.trade(player);
       runAllActions(game);
-      expect(player.megaCredits).to.eq(income[i]);
-    }
-  });
+      expect(player.megaCredits).to.eq(run.expected);
+    });
+  }
 
   it('Should give trade bonus to players with colonies only', () => {
     // No colonies

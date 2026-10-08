@@ -66,34 +66,39 @@ describe('AppButton', () => {
     expect(wrapper.attributes('disabled')).to.eq(undefined);
   });
 
-  // TODO - why mock $root doesn't work?
-  // (info: $root in vue app and $root in test environment are not the same)
+  // A component mounted on its own is its own $root, so vueRoot() reads
+  // isServerSideRequestInProgress from the global mocks.
+  function mountWithServerBusy(isServerSideRequestInProgress: boolean, disableOnServerBusy: boolean) {
+    return shallowMount(AppButton, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        mocks: {isServerSideRequestInProgress},
+      },
+      props: {disableOnServerBusy},
+    });
+  }
 
-  // it('is disabled if disableOnServerBusy is passed and server is busy', async () => {
-  //   const wrapper = shallowMount(AppButton, {
-  //     ...globalConfig,
-  //     props: {disableOnServerBusy: true},
-  //     mocks: {
-  //       $root: {isServerSideRequestInProgress: true},
-  //     },
-  //   });
+  it('is disabled if disableOnServerBusy is passed and server is busy', () => {
+    const wrapper = mountWithServerBusy(true, true);
 
-  //   expect(wrapper.attributes('disabled')).to.eq('disabled');
-  // });
+    expect(wrapper.attributes('disabled')).to.not.be.undefined;
+    expect(wrapper.classes()).to.include('loading');
+  });
 
-  // it('is not disabled if disableOnServerBusy is passed and server is not busy', async () => {
-  //   const wrapper = shallowMount(AppButton, {
-  //     ...globalConfig,
-  //     props: {disableOnServerBusy: true},
-  //     mocks: {
-  //       $root: {isServerSideRequestInProgress: true},
-  //     },
-  //   });
+  it('is not disabled if disableOnServerBusy is passed and server is not busy', () => {
+    const wrapper = mountWithServerBusy(false, true);
 
-  //   expect(wrapper.attributes('disabled')).to.eq(undefined);
-  // });
+    expect(wrapper.attributes('disabled')).to.be.undefined;
+    expect(wrapper.classes()).to.not.include('loading');
+  });
 
-  // it('has loading class if disableOnServerBusy is passed and server is busy', () => {});
+  it('is not disabled if disableOnServerBusy is false and server is busy', () => {
+    const wrapper = mountWithServerBusy(true, false);
+
+    expect(wrapper.attributes('disabled')).to.be.undefined;
+    expect(wrapper.classes()).to.not.include('loading');
+  });
 
   /**
    * Align classes

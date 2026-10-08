@@ -28,7 +28,6 @@ export const SPENDABLE_CARD_RESOURCES = [
   'lunaArchivesScience',
   // Spire corporation can spend its science resources on standrad projects.
   'spireScience',
-  // TODO(kberg): add test for Soylent Seedling Systems + Psychophiles.
   // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   'seeds',
   // Aurorai corporation can use its data to pay for standard projects.

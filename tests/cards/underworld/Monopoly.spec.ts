@@ -9,6 +9,7 @@ import {IGame} from '../../../src/server/IGame';
 import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
 import {cast} from '../../../src/common/utils/utils';
+import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 
 describe('Monopoly', () => {
   let card: Monopoly;
@@ -98,6 +99,25 @@ describe('Monopoly', () => {
     expect(opponent1.stock.megacredits).eq(1);
     expect(opponent2.stock.megacredits).eq(3);
     expect(opponent3.stock.megacredits).eq(1);
+  });
+
+  it('Triggers Mons Insurance once per victim', () => {
+    const monsInsurance = new MonsInsurance();
+    monsInsurance.play(opponent1);
+    opponent1.playedCards.push(monsInsurance);
+
+    setup(opponent1, {megacredits: 10, corruption: 0});
+    setup(opponent2, {steel: 3, corruption: 0});
+    setup(opponent3, {corruption: 0});
+
+    const selectResource = cast(card.play(player), SelectResource);
+    selectResource.cb('steel');
+    runAllActions(game);
+
+    expect(player.stock.steel).eq(2);
+    expect(opponent2.stock.steel).eq(1);
+    expect(opponent2.stock.megacredits).eq(3);
+    expect(opponent1.stock.megacredits).eq(7);
   });
 
   it('Works in solo', () => {

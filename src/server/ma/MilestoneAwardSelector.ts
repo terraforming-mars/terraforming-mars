@@ -113,6 +113,13 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   return drawnMilestonesAndAwards;
 }
 
+/** Boards with no volcanic spaces. Exported for tests. */
+export const BOARDS_WITHOUT_VOLCANIC_SPACES: ReadonlyArray<BoardName> = [
+  BoardName.HELLAS,
+  BoardName.UTOPIA_PLANITIA,
+  BoardName.HOLLANDIA,
+];
+
 /**
  * Return the list of possible milestones and awards for a given game. Only meant to work with random selection.
  *
@@ -133,7 +140,9 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
       if (random === undefined) {
         return false;
       }
-      // TODO(kberg): Exclude Geologist if the board has no volcanic spaces
+      if (name === 'Geologist' && BOARDS_WITHOUT_VOLCANIC_SPACES.includes(gameOptions.boardName)) {
+        return false;
+      }
     } else {
       // The game boards this MA appears in, if any.
       const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));

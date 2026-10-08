@@ -8,6 +8,8 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
+import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('SoylentSeedlingSystems', () => {
   let soylent: SoylentSeedlingSystems;
@@ -76,6 +78,27 @@ describe('SoylentSeedlingSystems', () => {
 
     soylent.resourceCount++;
     expect(player.canPlay(plantCard)).is.true;
+  });
+
+  it('plant tag, with Psychrophiles', () => {
+    const psychrophiles = new Psychrophiles();
+    player.playedCards.push(psychrophiles);
+    const plantCard = fakeCard({name: 'A' as CardName, cost: 10, tags: [Tag.PLANT]});
+
+    // 1 M€ + 1 seed (5 M€) + 2 microbes (4 M€) = 10 M€
+    player.megaCredits = 1;
+    soylent.resourceCount = 1;
+    psychrophiles.resourceCount = 1;
+    expect(player.canPlay(plantCard)).is.false;
+
+    psychrophiles.resourceCount = 2;
+    expect(player.canPlay(plantCard)).is.true;
+
+    player.checkPaymentAndPlayCard(plantCard, Payment.of({megacredits: 1, seeds: 1, microbes: 2}));
+
+    expect(player.megaCredits).eq(0);
+    expect(soylent.resourceCount).eq(0);
+    expect(psychrophiles.resourceCount).eq(0);
   });
 
   it('on wetlands placed', () => {

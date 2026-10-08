@@ -67,8 +67,6 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
             target.maybeBlockAttack(player, msg, (proceed: boolean) => {
               if (proceed) {
                 target.stock.steal(resource, 2, player, {log: true});
-                // TODO(kberg): Confirm this is done.
-                // target.resolveInsurance();
               }
               return undefined;
             });

@@ -1,13 +1,15 @@
 import {expect} from 'chai';
 import {awardManifest} from '../../src/server/awards/Awards';
 import {milestoneManifest} from '../../src/server/milestones/Milestones';
-import {chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {BOARDS_WITHOUT_VOLCANIC_SPACES, chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {intersection} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
 import {MilestoneName} from '../../src/common/ma/MilestoneName';
+import {GameSetup} from '../../src/server/GameSetup';
+import {SeededRandom} from '../../src/common/utils/Random';
 
 describe('MilestoneAwardSelector', () => {
   const maximumSynergyRuns = [
@@ -192,6 +194,34 @@ describe('MilestoneAwardSelector', () => {
 
     expect(intersection(milestones as Array<string>, deprecatedMilestones)).is.empty;
     expect(intersection(awards as Array<string>, deprecatedAwards)).is.empty;
+  });
+
+  it('BOARDS_WITHOUT_VOLCANIC_SPACES is accurate', () => {
+    const expected = Object.values(BoardName).filter((boardName) => {
+      const board = GameSetup.newBoard({...DEFAULT_GAME_OPTIONS, boardName}, new SeededRandom(0));
+      return board.volcanicSpaceIds.length === 0;
+    });
+    expect(BOARDS_WITHOUT_VOLCANIC_SPACES).to.have.members(expected);
+  });
+
+  it('Modular MA excludes Geologist as a candidate on boards without volcanic spaces', () => {
+    const [milestones] = getCandidates({
+      ...DEFAULT_GAME_OPTIONS,
+      boardName: BoardName.HELLAS,
+      modularMA: true,
+      randomMA: RandomMAOptionType.UNLIMITED,
+    });
+    expect(milestones).does.not.contain('Geologist');
+  });
+
+  it('Modular MA includes Geologist as a candidate on boards with volcanic spaces', () => {
+    const [milestones] = getCandidates({
+      ...DEFAULT_GAME_OPTIONS,
+      boardName: BoardName.THARSIS,
+      modularMA: true,
+      randomMA: RandomMAOptionType.UNLIMITED,
+    });
+    expect(milestones).contains('Geologist');
   });
 
   function choose(options: Partial<GameOptions>) {

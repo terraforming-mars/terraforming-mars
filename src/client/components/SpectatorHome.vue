@@ -67,7 +67,6 @@
 import {defineComponent} from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
-import {vueRoot} from '@/client/components/vueRoot';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Colony from '@/client/components/colonies/Colony.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
@@ -107,10 +106,6 @@ export default defineComponent({
     WaitingFor,
   },
   methods: {
-    forceRerender() {
-      // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
-      vueRoot(this).updateSpectator();
-    },
     range(n: number): Array<number> {
       return range(n);
     },

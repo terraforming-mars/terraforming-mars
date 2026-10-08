@@ -1,9 +1,9 @@
 <template>
-  <div :class="[getMainClasses(), { 'is-corporation': isCorporation() }]">
-    <div v-if="isPrelude()" class="prelude-label">prelude</div>
-    <div v-if="isCorporation()" class="corporation-label">corporation</div>
-    <div v-if="isCeo()" class="ceo-label">CEO</div>
-    <CardCorporationLogo v-if="isCorporation()" :title="title"/>
+  <div :class="[getMainClasses(), { 'is-corporation': isCorporation }]">
+    <div v-if="isPrelude" class="prelude-label">prelude</div>
+    <div v-if="isCorporation" class="corporation-label">corporation</div>
+    <div v-if="isCeo" class="ceo-label">CEO</div>
+    <CardCorporationLogo v-if="isCorporation" :title="title"/>
     <div v-else ref="title" :class="getClasses()">{{ titleWithoutSuffix }}</div>
   </div>
 </template>
@@ -51,19 +51,10 @@ export default defineComponent({
     // from its length. Corporations show a logo instead of a title element, so
     // nothing to fit.
     fitTitle(): void {
-      if (this.isCorporation()) {
+      if (this.isCorporation) {
         return;
       }
       fitTextWhenReady(this.typedRefs.title, 'card-title');
-    },
-    isCeo(): boolean {
-      return this.type === CardType.CEO;
-    },
-    isCorporation(): boolean {
-      return this.type === CardType.CORPORATION;
-    },
-    isPrelude(): boolean {
-      return this.type === CardType.PRELUDE;
     },
     getClasses(): string {
       const classes: Array<String> = ['card-title'];
@@ -99,6 +90,15 @@ export default defineComponent({
     },
     typedRefs(): Refs {
       return this.$refs as unknown as Refs;
+    },
+    isCeo(): boolean {
+      return this.type === CardType.CEO;
+    },
+    isCorporation(): boolean {
+      return this.type === CardType.CORPORATION;
+    },
+    isPrelude(): boolean {
+      return this.type === CardType.PRELUDE;
     },
   },
 });

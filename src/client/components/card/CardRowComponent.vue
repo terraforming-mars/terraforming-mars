@@ -5,7 +5,7 @@
   <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="componentData" />
   <CardRenderTileComponent v-else-if="isTile(componentData)" :item="componentData" />
   <CardDescription v-else-if="isDescription(componentData)" :item="componentData" />
-  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel()" />
+  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel" />
   <div v-else>n/a</div>
 </template>
 
@@ -52,6 +52,18 @@ export default defineComponent({
     CardRenderTileComponent,
     CardDescription,
   },
+  computed: {
+    corpBoxLabel(): string {
+      if (this.isCorpBoxEffect(this.componentData)) {
+        return 'effect';
+      } else if (this.isCorpBoxAction(this.componentData)) {
+        return 'action';
+      } else if (this.isCorpBoxEffectAction(this.componentData)) {
+        return 'effect/action';
+      }
+      return 'n/a';
+    },
+  },
   methods: {
     isItem: isICardRenderItem,
     isSymbol: isICardRenderSymbol,
@@ -66,16 +78,6 @@ export default defineComponent({
     isCorpBoxEffectAction: isICardRenderCorpBoxEffectAction,
     isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction | ICardRenderCorpBoxEffectAction {
       return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item) || this.isCorpBoxEffectAction(item);
-    },
-    corpBoxLabel(): string {
-      if (this.isCorpBoxEffect(this.componentData)) {
-        return 'effect';
-      } else if (this.isCorpBoxAction(this.componentData)) {
-        return 'action';
-      } else if (this.isCorpBoxEffectAction(this.componentData)) {
-        return 'effect/action';
-      }
-      return 'n/a';
     },
 
   },

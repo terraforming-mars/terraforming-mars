@@ -18,8 +18,8 @@
         <WarningsComponent :warnings="warnings"/>
         <div v-if="showsave === true" class="nofloat">
             <AppButton v-if="showSelectAll" @click="toggleSelectAll" type="submit" :title="allSelected ? $t('Deselect All') : $t('Select All')" />
-            <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
-            <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected === 0" type="submit" @click="saveData" :title="buttonLabel" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
     </div>
 </template>
@@ -94,18 +94,10 @@ export default defineComponent({
   },
   watch: {
     cards() {
-      this.$emit('cardschanged', this.getData());
+      this.$emit('cardschanged', this.getData);
     },
   },
   methods: {
-    cardsSelected(): number {
-      if (Array.isArray(this.cards)) {
-        return this.cards.length;
-      } else if (this.cards === undefined) {
-        return 0;
-      }
-      return 1;
-    },
     getOrderedCards(): ReadonlyArray<CardModel> {
       let cards: ReadonlyArray<CardModel> = [];
       if (this.playerinput.cards !== undefined) {
@@ -131,9 +123,6 @@ export default defineComponent({
       }
       return cards;
     },
-    getData(): Array<CardName> {
-      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
-    },
     hasCardWarning() {
       // This is pretty clunky, to be honest.
       if (Array.isArray(this.cards)) {
@@ -148,7 +137,7 @@ export default defineComponent({
     },
 
     canSave() {
-      const len = this.getData().length;
+      const len = this.getData.length;
       if (len > this.playerinput.min) {
         return false;
       }
@@ -158,7 +147,7 @@ export default defineComponent({
       return true;
     },
     saveData() {
-      this.onsave({type: 'card', cards: this.getData()});
+      this.onsave({type: 'card', cards: this.getData});
     },
     getCardBoxClass(card: CardModel): string {
       if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {
@@ -180,18 +169,6 @@ export default defineComponent({
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.
       return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
-    },
-    buttonLabel(): string | Message {
-      if (this.selectOnlyOneCard) {
-        return this.playerinput.buttonLabel;
-      }
-      return {
-        message: this.playerinput.buttonLabel + ' ${0}',
-        data: [{
-          type: LogMessageDataType.RAW_STRING,
-          value: String(this.cardsSelected()),
-        }],
-      };
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
@@ -223,6 +200,29 @@ export default defineComponent({
     },
     allSelected(): boolean {
       return Array.isArray(this.cards) && this.cards.length === this.selectableCards.length;
+    },
+    cardsSelected(): number {
+      if (Array.isArray(this.cards)) {
+        return this.cards.length;
+      } else if (this.cards === undefined) {
+        return 0;
+      }
+      return 1;
+    },
+    getData(): Array<CardName> {
+      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+    },
+    buttonLabel(): string | Message {
+      if (this.selectOnlyOneCard) {
+        return this.playerinput.buttonLabel;
+      }
+      return {
+        message: this.playerinput.buttonLabel + ' ${0}',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(this.cardsSelected),
+        }],
+      };
     },
   },
 });

@@ -24,10 +24,6 @@ type Status = 'loading' | 'error' | 'done';
 
 export default defineComponent({
   name: 'GameOverview',
-  data() {
-    return {
-    };
-  },
   props: {
     status: {
       type: String as () => Status,

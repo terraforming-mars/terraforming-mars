@@ -98,10 +98,6 @@ export default defineComponent({
   },
   components: {
   },
-  data() {
-    return {
-    };
-  },
 });
 
 </script>

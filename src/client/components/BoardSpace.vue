@@ -63,9 +63,6 @@ export default defineComponent({
       required: true,
     },
   },
-  data() {
-    return {};
-  },
   components: {
     Bonus,
     BoardSpaceTile,

@@ -53,10 +53,6 @@ export default defineComponent({
       default: 0,
     },
   },
-  data() {
-    return {
-    };
-  },
   methods: {
     showResourceValue(): boolean {
       const learnerModeOn = getPreferences().learner_mode;

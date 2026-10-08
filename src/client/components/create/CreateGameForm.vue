@@ -842,8 +842,8 @@ export default defineComponent({
           this.showSettingsLoadResult('Restore settings', processor);
         }
       } catch (e) {
-        // TODO(rusliksu): show the restore error in the UI instead of logging only to the console.
         console.warn('Could not restore create game settings:', e);
+        vueRoot(this).showAlert('Restore settings', 'Error restoring settings ' + e);
       }
     },
     applySettings(json: JSONObject): JSONProcessor {

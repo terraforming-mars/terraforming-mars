@@ -426,7 +426,6 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       });
 
       it('deleteSession', async () => {
-        // TODO(kberg): Make databases rely on Clock. /shrug
         const expirationTimeMillis = Date.now() + 100000;
         await db.createSession({id: '123', expirationTimeMillis, data: {discordUser}});
         let sessions = await db.getSessions();

@@ -357,7 +357,6 @@ export default defineComponent({
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === undefined) {
         result = '?';
       }
-      // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.cancelled === true) {
         switch (this.item.type) {
         case CardRenderItemType.TR:

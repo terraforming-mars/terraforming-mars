@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-// TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class ThoriumRush extends Card implements IProjectCard {
   constructor() {
     super({

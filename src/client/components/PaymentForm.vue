@@ -11,7 +11,7 @@
           <tr>
             <td>
               <PaymentUnitComponent
-                v-model.number="payment[unit]"
+                v-model:count.number="payment[unit]"
                 :unit="unit"
                 :description="descriptions[unit]"
                 :rate="ledger[unit].rate"

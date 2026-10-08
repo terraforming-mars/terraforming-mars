@@ -4,11 +4,11 @@ import {expect} from 'chai';
 import PaymentUnit from '@/client/components/PaymentUnit.vue';
 
 describe('PaymentUnit', () => {
-  it('renders modelValue in the input', () => {
+  it('renders count in the input', () => {
     const wrapper = shallowMount(PaymentUnit, {
       ...globalConfig,
       props: {
-        modelValue: 5,
+        count: 5,
         unit: 'megacredits',
         description: 'MegaCredits',
       },
@@ -17,18 +17,18 @@ describe('PaymentUnit', () => {
     expect(input.element.value).to.eq('5');
   });
 
-  it('emits update:modelValue on input change', async () => {
+  it('emits update:count on input change', async () => {
     const wrapper = shallowMount(PaymentUnit, {
       ...globalConfig,
       props: {
-        modelValue: 0,
+        count: 0,
         unit: 'megacredits',
         description: 'MegaCredits',
       },
     });
     const input = wrapper.find('input');
     await input.setValue('3');
-    const emitted = wrapper.emitted('update:modelValue');
+    const emitted = wrapper.emitted('update:count');
     expect(emitted).to.not.be.undefined;
     expect(emitted!.length).to.be.greaterThanOrEqual(1);
     expect(emitted![0][0]).to.eq('3');
@@ -38,7 +38,7 @@ describe('PaymentUnit', () => {
     const wrapper = shallowMount(PaymentUnit, {
       ...globalConfig,
       props: {
-        modelValue: 5,
+        count: 5,
         unit: 'megacredits',
         description: 'MegaCredits',
         showMax: true,

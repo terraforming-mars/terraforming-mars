@@ -1,20 +1,11 @@
-// The single point of contact with the browser's localStorage. Every read or
-// write goes through here so that the typeof guard (localStorage may not exist,
-// e.g. during SSR or in some privacy modes) and error handling (access can throw
-// when storage is disabled or over quota) live in exactly one place.
-//
-// All methods fail soft: reads return null/[] and writes are dropped rather than
-// throwing, so callers never need their own try/catch.
-
-function supported(): boolean {
-  return typeof localStorage !== 'undefined';
-}
-
+/**
+ * A smaller, fail-soft interface to the browser's `localStorage`.
+ *
+ * When storage is missing, disabled, or full, reads return null or [] and writes are dropped, so
+ * callers don't need their own try/catch.
+ */
 export const safeLocalStorage = {
   getItem(key: string): string | null {
-    if (!supported()) {
-      return null;
-    }
     try {
       return localStorage.getItem(key);
     } catch (err) {
@@ -24,9 +15,6 @@ export const safeLocalStorage = {
   },
 
   setItem(key: string, value: string): void {
-    if (!supported()) {
-      return;
-    }
     try {
       localStorage.setItem(key, value);
     } catch (err) {
@@ -35,9 +23,6 @@ export const safeLocalStorage = {
   },
 
   removeItem(key: string): void {
-    if (!supported()) {
-      return;
-    }
     try {
       localStorage.removeItem(key);
     } catch (err) {
@@ -45,12 +30,13 @@ export const safeLocalStorage = {
     }
   },
 
-  // A snapshot of all keys currently in storage. Returns [] when storage is
-  // unavailable or enumeration throws, so callers can iterate unconditionally.
+  /**
+   * A snapshot of all keys currently in storage.
+   *
+   * Returns [] when storage is unavailable or enumeration throws, so callers can iterate
+   * unconditionally.
+   */
   keys(): Array<string> {
-    if (!supported()) {
-      return [];
-    }
     try {
       const result: Array<string> = [];
       for (let i = 0; i < localStorage.length; i++) {

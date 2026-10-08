@@ -7,10 +7,8 @@
                     <span v-i18n>{{ milestone.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.color" ></i></span>
                 </span>
-                <span v-if="isLearnerModeOn">
-                    <span v-for="(spotPrice, index) in availableMilestoneSpots" :key="index" class="milestone-award-inline unpaid">
-                        <div class="milestone-award-price">{{spotPrice}}</div>
-                    </span>
+                <span v-for="(spotPrice, index) in availableMilestoneSpots" :key="index" class="milestone-award-inline unpaid">
+                    <div class="milestone-award-price">{{spotPrice}}</div>
                 </span>
             </div>
             <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
@@ -65,9 +63,6 @@ export default defineComponent({
     availableMilestoneSpots(): Array<number> {
       const count = this.milestones.filter((milestone) => milestone.playerName).length;
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
-    },
-    isLearnerModeOn(): boolean {
-      return this.preferences.learner_mode;
     },
   },
   methods: {

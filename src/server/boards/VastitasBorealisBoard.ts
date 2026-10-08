@@ -5,7 +5,7 @@ import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
+import {VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {MarsBoard} from './MarsBoard';
 
 export class VastitasBorealisBoard extends MarsBoard {
@@ -17,7 +17,7 @@ export class VastitasBorealisBoard extends MarsBoard {
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const HEAT = SpaceBonus.HEAT;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TEMPERATURE = SpaceBonus.TEMPERATURE;
+    const TEMPERATURE = SpaceBonus.TEMPERATURE_4MC;
 
     // y=0
     builder.land(STEEL, STEEL).land(PLANT).land().land().volcanic(TITANIUM, TITANIUM);
@@ -46,7 +46,7 @@ export class VastitasBorealisBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
-      costs.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      costs.megacredits = VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }
     return costs;

@@ -41,4 +41,21 @@ describe('PlayerResource', () => {
     });
     expect(wrapper.find('[data-test="resource-value"]').exists()).is.true;
   });
+
+  it('Updates when learner mode changes', async () => {
+    const wrapper = shallowMount(PlayerResource, {
+      ...globalConfig,
+      props: {
+        type: Resource.STEEL,
+        count: 10,
+        production: 1,
+        value: 2,
+      },
+    });
+    expect(wrapper.find('[data-test="resource-value"]').exists()).is.true;
+
+    PreferencesManager.INSTANCE.set('learner_mode', false);
+    await wrapper.vm.$nextTick();
+    expect(wrapper.find('[data-test="resource-value"]').exists()).is.false;
+  });
 });

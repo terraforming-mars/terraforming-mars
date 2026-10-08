@@ -58,7 +58,7 @@
         <label class="form-switch">
           <input type="checkbox" @change="updatePreferences" v-model="prefs.learner_mode" data-test="learner_mode">
           <i class="form-icon"></i>
-          <span v-i18n>Learner Mode (req. refresh)</span>
+          <span v-i18n>Learner Mode</span>
           <span class="tooltip tooltip-left" :data-tooltip="$t('Show information that can be helpful\n to players who are still learning the games')">&#9432;</span>
         </label>
       </div>

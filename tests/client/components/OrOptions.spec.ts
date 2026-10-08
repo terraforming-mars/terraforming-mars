@@ -108,6 +108,93 @@ describe('OrOptions', () => {
     expect(savedData).to.deep.eq({type: 'or', index: 2, response: {type: 'option'}});
   });
 
+  it('updates displayed options when learner mode changes', async () => {
+    PreferencesManager.INSTANCE.set('learner_mode', false);
+    const component = mount(OrOptions, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        components: {
+          'PlayerInputFactory': PlayerInputFactory,
+        },
+      },
+      props: {
+        playerView: asComplete<PlayerViewModel>({}),
+        playerinput: {
+          type: 'or',
+          title: 'foo',
+          buttonLabel: '',
+          options: [asComplete<SelectCardModel>({
+            type: 'card',
+            title: 'hide this',
+            showOnlyInLearnerMode: true,
+          }), {
+            type: 'option',
+            title: 'select a',
+            buttonLabel: '',
+          }],
+        },
+        onsave: () => {},
+        showsave: true,
+        showtitle: true,
+      },
+    });
+    expect(component.findAll('input').length).to.eq(1);
+
+    PreferencesManager.INSTANCE.set('learner_mode', true);
+    await component.vm.$nextTick();
+    expect(component.findAll('input').length).to.eq(2);
+  });
+
+  it('falls back to the first displayed option when the selected one is hidden', async () => {
+    let savedData: InputResponse | undefined;
+    PreferencesManager.INSTANCE.set('learner_mode', true);
+    const component = mount(OrOptions, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        components: {
+          'PlayerInputFactory': PlayerInputFactory,
+        },
+      },
+      props: {
+        playerView: asComplete<PlayerViewModel>({}),
+        playerinput: {
+          type: 'or',
+          title: 'foo',
+          buttonLabel: '',
+          options: [{
+            type: 'option',
+            title: 'select a',
+            buttonLabel: '',
+          }, asComplete<SelectCardModel>({
+            type: 'card',
+            title: 'hide this',
+            showOnlyInLearnerMode: true,
+            min: 1,
+            max: 1,
+          })],
+        },
+        onsave: function(data: InputResponse) {
+          savedData = data;
+        },
+        showsave: true,
+        showtitle: true,
+      },
+    });
+    await component.findAll('input')[1].setValue(true);
+
+    PreferencesManager.INSTANCE.set('learner_mode', false);
+    await component.vm.$nextTick();
+    const factories = component.findAllComponents({name: 'PlayerInputFactory'});
+    expect(factories.length).to.eq(1);
+    expect(factories[0].props('playerinput').title).to.eq('select a');
+
+    const buttons = component.findAllComponents({name: 'AppButton'});
+    await buttons[0].trigger('click');
+    expect(savedData).to.deep.eq({type: 'or', index: 0, response: {type: 'option'}});
+  });
+
   it('selecting different radio options shows correct sub-form', async () => {
     const component = mount(OrOptions, {
       ...globalConfig,

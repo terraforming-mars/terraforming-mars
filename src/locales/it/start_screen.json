@@ -10,7 +10,7 @@
     "deployed": "Rilasciato",
     "version": "versione",
     "source code": " codice sorgente ",
-    "Learner Mode (req. refresh)": "Modalità apprendista (fai refresh)",
+    "Learner Mode": "Modalità apprendista",
     "Show information that can be helpful to players who are still learning the games": "Mostra informazioni che possono essere di aiuto a giocatori che stanno imparando il gioco",
     "Test out any possible new experimental UI features for feedback.": "Testa ogini nuova interfaccia sperimentale per dare feedback",
     "Add information useful for development and debugging.": "Aggiungi informazioni utili per lo sviluppo e il debug",

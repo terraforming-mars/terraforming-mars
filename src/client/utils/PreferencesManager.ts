@@ -1,3 +1,5 @@
+import {reactive} from 'vue';
+
 export type Preferences = {
   learner_mode: boolean,
   enable_sounds: boolean,
@@ -66,7 +68,8 @@ export class PreferencesManager {
   }
 
   private constructor() {
-    this._values = {...defaults};
+    // Reactive so components update when preferences change, without a page refresh.
+    this._values = reactive({...defaults});
     for (const key of Object.keys(defaults) as Array<Preference>) {
       const value = this.localStorageSupported() ? localStorage.getItem(key) : undefined;
       if (value) {

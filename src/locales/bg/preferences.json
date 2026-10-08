@@ -24,10 +24,9 @@
   "Show discount on cards": "Покажи отстъпката на картите",
   "Hide sidebar notification": "Скрий страничното уведомление",
   "Show sidebar notification": "Покажи страничното уведомление",
-  "Learner Mode (req. refresh)": "Режим на ученика (изисква обновяване)",
+  "Learner Mode": "Режим на ученика",
   "Experimental UI": "Експериментален UI",
   "Debug View": "Изглед за дебъгване",
-  "Tutorial Mode (req. refresh)": "Режим на урок (изисква обновяване)",
   "Ok": "Добре",
   "Report a bug": "Сигнализирай за грешка"
 }

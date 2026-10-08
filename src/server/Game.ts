@@ -1502,13 +1502,11 @@ export class Game implements IGame, Logger {
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
       break;
-    case SpaceBonus.TEMPERATURE:
     case SpaceBonus.TEMPERATURE_4MC:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        const cost = spaceBonus === SpaceBonus.TEMPERATURE ? constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST : constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
         this.defer(new SelectPaymentDeferred(
           player,
-          cost,
+          constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST,
           {title: 'Select how to pay for placement bonus temperature'}))
           .andThen(() => this.increaseTemperature(player, 1));
       }

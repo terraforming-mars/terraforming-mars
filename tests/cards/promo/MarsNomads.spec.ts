@@ -145,11 +145,9 @@ describe('MarsNomads', () => {
   for (const run of [
     {bonus: SpaceBonus.OCEAN, megaCredits: 5, expected: false},
     {bonus: SpaceBonus.OCEAN, megaCredits: 6, expected: true},
-    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 2, expected: false},
-    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 3, expected: true},
     {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 3, expected: false},
     {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 4, expected: true},
-    {bonus: SpaceBonus.TEMPERATURE, megaCredits: 0, temperature: 8, expected: true},
+    {bonus: SpaceBonus.TEMPERATURE_4MC, megaCredits: 0, temperature: 8, expected: true},
   ] as const) {
     it('Destination filtered by placement-bonus affordability (Bug #7326) ' + JSON.stringify(run), () => {
       const nomadSpace = board.getAvailableSpacesOnLand(player)[12];
@@ -169,8 +167,6 @@ describe('MarsNomads', () => {
   for (const run of [
     {bonus: SpaceBonus.OCEAN, mc: 8, expected: false},
     {bonus: SpaceBonus.OCEAN, mc: 9, expected: true},
-    {bonus: SpaceBonus.TEMPERATURE, mc: 5, expected: false},
-    {bonus: SpaceBonus.TEMPERATURE, mc: 6, expected: true},
     {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 6, expected: false},
     {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 7, expected: true},
   ] as const) {
@@ -204,7 +200,7 @@ describe('MarsNomads', () => {
     cast(player.popWaitingFor(), undefined);
     expect(player.terraformRating).eq(20);
 
-    space3.bonus = [SpaceBonus.TEMPERATURE];
+    space3.bonus = [SpaceBonus.TEMPERATURE_4MC];
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

@@ -57,7 +57,7 @@ describe('VastitasBorealisBoard', () => {
       {id: '30', spaceType: 'land', x: 1, y: 4, bonus: []},
       {id: '31', spaceType: 'land', x: 2, y: 4, bonus: []},
       {id: '32', spaceType: 'ocean', x: 3, y: 4, bonus: [4, 4]},
-      {id: '33', spaceType: 'land', x: 4, y: 4, bonus: [13]},
+      {id: '33', spaceType: 'land', x: 4, y: 4, bonus: [18]},
       {id: '34', spaceType: 'land', x: 5, y: 4, bonus: [1]},
       {id: '35', spaceType: 'land', x: 6, y: 4, bonus: []},
       {id: '36', spaceType: 'land', x: 7, y: 4, bonus: [2]},
@@ -95,10 +95,10 @@ describe('VastitasBorealisBoard', () => {
   it('Grants temperature bonus', () => {
     const space = board.getSpaceOrThrow(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
-    player.megaCredits = 2;
+    player.megaCredits = 3;
     expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
-    player.megaCredits = 3;
+    player.megaCredits = 4;
     expect(board.getAvailableSpacesOnLand(player).map(toID)).includes(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
     expect(game.getTemperature()).eq(-30);
 

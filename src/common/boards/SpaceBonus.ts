@@ -22,7 +22,7 @@ export enum SpaceBonus {
     ENERGY_PRODUCTION, // 12
 
     // Vastitas Borealis-specific
-    TEMPERATURE, // 13
+    _TEMPERATURE_3MC, // 13 Deprecated. Saved games have it migrated to TEMPERATURE_4MC on load.
 
     // Amazonis-specific
     _RESTRICTED, // 14
@@ -32,7 +32,8 @@ export enum SpaceBonus {
     DELEGATE, // 16
     // Terra Cimmeria Nova-specific
     COLONY, // 17
-    TEMPERATURE_4MC, // 18, Vastitas Borealis Nova-specific, costs 4MC not 3
+    // TODO(kberg): Rename to TEMPERATURE after 2026-12-01
+    TEMPERATURE_4MC, // 18 Vastitas Borealis and Vastitas Borealis Nova
 }
 
 const TO_STRING_MAP = {
@@ -49,7 +50,7 @@ const TO_STRING_MAP = {
   [SpaceBonus.DATA]: 'Data',
   [SpaceBonus.SCIENCE]: 'Science',
   [SpaceBonus.ENERGY_PRODUCTION]: 'Energy Production',
-  [SpaceBonus.TEMPERATURE]: 'Temperature',
+  [SpaceBonus._TEMPERATURE_3MC]: 'UNUSED',
   [SpaceBonus._RESTRICTED]: 'UNUSED',
   [SpaceBonus.ASTEROID]: 'Asteroid',
   [SpaceBonus.DELEGATE]: 'Delegate',

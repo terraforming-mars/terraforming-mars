@@ -11,7 +11,9 @@ import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {Space} from '../../boards/Space';
 import {MoonData} from '../../moon/MoonData';
 
-const HELP_TEXT = `This is a tricky card to understand, but it goes like this: you'll wind up placing two colony tiles. The first one has to be next to two colony tiles _already on The Moon._ The second one has to be next to two colony tiles, one of which could be the one you already placed.` as const;
+const HELP_TEXT = `
+This is a tricky card to understand, but it goes like this: you'll wind up placing two colony tiles. The first one has to be next to two colony tiles _already on The Moon._ The second one has to be next to two colony tiles, one of which could be the one you already placed.
+` as const;
 
 export class LunaEcumenopolis extends Card {
   constructor() {

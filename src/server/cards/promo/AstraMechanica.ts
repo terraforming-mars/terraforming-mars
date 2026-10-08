@@ -8,7 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {isSpecialTile} from '../../boards/Board';
 
-const HELP_TEXT = `Fan expansion note: You may not choose cards that return cards to your hand. This would create a situation where cards could be endlessly retrieved.` as const;
+const HELP_TEXT = `
+Fan expansion note: You may not choose cards that return cards to your hand. This would create a situation where cards could be endlessly retrieved.
+` as const;
 
 export class AstraMechanica extends Card implements IProjectCard {
   constructor() {

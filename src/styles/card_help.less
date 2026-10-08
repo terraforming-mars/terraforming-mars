@@ -2,6 +2,13 @@
   overflow-wrap: anywhere;
   max-width: 100%;
 
+  // Spectre puts list markers inside the text box, so wrapped lines start under the
+  // marker. Hang the marker outside instead so wrapped lines align with the text.
+  ul, ol {
+    list-style-position: outside;
+    margin-left: 1.5em;
+  }
+
   li > p {
     margin: 0.5em 0;
   }
@@ -9,6 +16,16 @@
     display: inline;
   }
   li > p:last-child {
+    margin-bottom: 0;
+  }
+
+  // Compatibility between Spectre and markdown-it: Spectre only trims the last
+  // paragraph inside a blockquote, but markdown-it can start or end one with a
+  // list, whose margin then shows as an empty line inside the quote.
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+  blockquote > :last-child {
     margin-bottom: 0;
   }
 }

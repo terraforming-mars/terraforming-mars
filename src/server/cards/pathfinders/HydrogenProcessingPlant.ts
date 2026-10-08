@@ -5,7 +5,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-const HELP_TEXT = `Oxygen cannot be reduced once it's already at its goal.` as const;
+const HELP_TEXT = `
+Oxygen cannot be reduced once it's already at its goal.
+` as const;
 
 export class HydrogenProcessingPlant extends Card implements IProjectCard {
   constructor() {

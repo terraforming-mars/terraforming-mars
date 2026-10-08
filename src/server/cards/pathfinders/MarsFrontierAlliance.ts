@@ -7,7 +7,9 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {ChooseAlliedParty} from '../../../server/deferredActions/ChooseAlliedParty';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
-const HELP_TEXT = `This card allows the player to use a party's passive effects. Kelvinists and Scientists have _active_ effects. That is why they are not available as options.` as const;
+const HELP_TEXT = `
+This card allows the player to use a party's passive effects. Kelvinists and Scientists have _active_ effects. That is why they are not available as options.
+` as const;
 
 export class MarsFrontierAlliance extends CorporationCard implements ICorporationCard {
   constructor() {

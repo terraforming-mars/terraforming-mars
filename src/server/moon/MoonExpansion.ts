@@ -114,7 +114,6 @@ export class MoonExpansion {
   }
 
   private static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
-    // TODO(kberg): this can probably be removed now.
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
       player.game.log('${0} placed a ${1} tile at ${2}', (b) =>

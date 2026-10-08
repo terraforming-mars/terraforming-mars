@@ -11,7 +11,6 @@ import {digit, uppercase} from '../Options';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
-// TODO(kberg) like #3644, this card may have similar behavior.
 export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
     super({

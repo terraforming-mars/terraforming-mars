@@ -783,7 +783,6 @@ export class Player implements IPlayer {
       }
     }
 
-    // TODO(kberg): Move this.paymentOptionsForCard to a parameter.
     const totalToPay = this.payingAmount(payment, this.paymentOptionsForCard(selectedCard));
 
     if (totalToPay < cardCost) {

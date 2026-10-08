@@ -31,8 +31,6 @@ export class SelectProductionToLose extends BasePlayerInput<Units> {
       },
     };
   }
-  // TODO(kberg): Could merge this with SelectResources, though it
-  // would take some work.
   public process(input: InputResponse, player: IPlayer) {
     if (!isSelectProductionToLoseResponse(input)) {
       throw new InputError('Not a valid SelectProductionToLoseResponse');

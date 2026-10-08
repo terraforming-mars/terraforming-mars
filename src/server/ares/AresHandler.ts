@@ -249,7 +249,6 @@ export class AresHandler {
       const warning = cost.production.severe > 0 ?
         'Placing next to severe hazards requires losing 2 units of the same production.' :
         undefined;
-      // TODO(kberg): don't send interrupt if total is available.
       player.game.defer(new SelectProductionToLoseDeferred(player, steps, title, cost.production.severe, warning));
     }
     if (cost.megacredits > 0) {

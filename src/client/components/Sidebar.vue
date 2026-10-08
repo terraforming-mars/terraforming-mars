@@ -65,7 +65,7 @@
 
 import {defineComponent} from 'vue';
 import {Color} from '@/common/Color';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import InfoPanel from '@/client/components/InfoPanel.vue';
@@ -167,9 +167,6 @@ export default defineComponent({
     },
   },
   computed: {
-    preferencesManager(): PreferencesManager {
-      return PreferencesManager.INSTANCE;
-    },
     genMarker(): string {
       return `${this.generation}`;
     },

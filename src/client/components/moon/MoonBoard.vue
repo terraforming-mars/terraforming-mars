@@ -62,7 +62,7 @@
 
     <div class="board" id="moon_board">
       <MoonSpace
-        v-for="space in getAllNonColonySpaces"
+        v-for="space in allNonColonySpaces"
         :key="space.id"
         :space="space"
         :tileView="tileView"
@@ -105,7 +105,7 @@ export default defineComponent({
     MoonSpace,
   },
   computed: {
-    getAllNonColonySpaces(): Array<SpaceModel> {
+    allNonColonySpaces(): Array<SpaceModel> {
       return this.model.spaces
         .filter((space) => space.spaceType !== SpaceType.COLONY)
         .toSorted(comparing((space) => parseInt(space.id)));

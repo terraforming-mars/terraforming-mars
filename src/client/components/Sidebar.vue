@@ -2,10 +2,10 @@
 <div :class="'sidebar_cont sidebar '+getSideBarClass()">
   <div class="tm" :title="$t('Generation Marker')">
     <div class="gen-text" v-i18n>GEN</div>
-    <div class="gen-marker">{{ getGenMarker }}</div>
+    <div class="gen-marker">{{ genMarker }}</div>
   </div>
   <div v-if="gameOptions.expansions.turmoil" :title="$t('Ruling Party')">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss"> <span v-i18n>{{ getRulingParty }}</span></div>
+    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss"> <span v-i18n>{{ rulingParty }}</span></div>
   </div>
   <div class="global_params">
     <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature"/>
@@ -170,7 +170,7 @@ export default defineComponent({
     preferencesManager(): PreferencesManager {
       return PreferencesManager.INSTANCE;
     },
-    getGenMarker(): string {
+    genMarker(): string {
       return `${this.generation}`;
     },
     rulingPartyToCss(): string {
@@ -180,7 +180,7 @@ export default defineComponent({
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
-    getRulingParty(): string {
+    rulingParty(): string {
       const ruling = this.turmoil?.ruling;
       switch (ruling) {
       case PartyName.MARS:

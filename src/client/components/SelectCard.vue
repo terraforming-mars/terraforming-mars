@@ -94,7 +94,7 @@ export default defineComponent({
   },
   watch: {
     cards() {
-      this.$emit('cardschanged', this.getData);
+      this.$emit('cardschanged', this.cardNames);
     },
   },
   methods: {
@@ -137,7 +137,7 @@ export default defineComponent({
     },
 
     canSave() {
-      const len = this.getData.length;
+      const len = this.cardNames.length;
       if (len > this.playerinput.min) {
         return false;
       }
@@ -147,7 +147,7 @@ export default defineComponent({
       return true;
     },
     saveData() {
-      this.onsave({type: 'card', cards: this.getData});
+      this.onsave({type: 'card', cards: this.cardNames});
     },
     getCardBoxClass(card: CardModel): string {
       if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {
@@ -209,7 +209,7 @@ export default defineComponent({
       }
       return 1;
     },
-    getData(): Array<CardName> {
+    cardNames(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
     buttonLabel(): string | Message {

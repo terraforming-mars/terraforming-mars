@@ -2,11 +2,11 @@
         <div class="players-overview" v-if="hasPlayers">
             <OverviewSettings />
             <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
-                <div v-for="(otherPlayer, index) in getPlayersInOrder" :key="otherPlayer.color">
+                <div v-for="(otherPlayer, index) in playersInOrder" :key="otherPlayer.color">
                     <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
-            <PlayerInfo v-for="(p, index) in getPlayersInOrder"
+            <PlayerInfo v-for="(p, index) in playersInOrder"
               :player="p"
               :key="p.color"
               :playerView="playerView"
@@ -67,7 +67,7 @@ export default defineComponent({
     hasPlayers(): boolean {
       return this.players.length > 0;
     },
-    getPlayersInOrder(): Array<PublicPlayerModel> {
+    playersInOrder(): Array<PublicPlayerModel> {
       const players = this.players;
       if (this.thisPlayer === undefined) {
         return players;

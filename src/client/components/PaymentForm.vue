@@ -132,7 +132,7 @@ export default defineComponent({
     descriptions(): Record<SpendableResource, string> {
       return DESCRIPTIONS;
     },
-    getMegaCreditsMax(): number {
+    megaCreditsMax(): number {
       return Math.min(this.ledger['megacredits'].available, this.cost);
     },
     totalSpent(): number {
@@ -174,7 +174,7 @@ export default defineComponent({
     addValue(unit: SpendableResource): void {
       // MC is special-cased because it's the currency being spent.
       if (unit === 'megacredits') {
-        if (this.payment[unit] < this.getMegaCreditsMax) {
+        if (this.payment[unit] < this.megaCreditsMax) {
           this.payment[unit] += 1;
         }
       } else {

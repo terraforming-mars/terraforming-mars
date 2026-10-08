@@ -1,5 +1,5 @@
 <template>
-      <div :class="getClasses">
+      <div :class="classes">
           <div class="card-corporation-label">{{ label }}</div>
           <div v-for="(rowData, index) in rows[0]" :key="index">
             <CardRenderItemComponent v-if="isICardRenderItem(rowData)" :item="rowData"/>
@@ -35,7 +35,7 @@ export default defineComponent({
     CardRenderEffectBoxComponent,
   },
   computed: {
-    getClasses(): string {
+    classes(): string {
       const classes: Array<string> = ['card-corporation-box'];
       return classes.join(' ');
     },

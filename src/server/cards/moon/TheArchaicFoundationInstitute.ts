@@ -10,6 +10,8 @@ import {digit} from '../Options';
 import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
+const HELP_TEXT = `This card has an extra action for turning 3 resource cubes into a TR. The reason for this seemingly obvious action is to account for the outside case that a player can't afford to raise their TR when playing Turmoil because the Reds are in power.` as const;
+
 export class TheArchaicFoundationInstitute extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
@@ -33,6 +35,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
             ab.resource(CardResource.RESOURCE_CUBE, {amount: 3, digit}).startAction.tr(1, {size: Size.TINY});
           });
         }),
+        helpText: HELP_TEXT,
       },
     });
   }

@@ -6,6 +6,10 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 
+const HELP_TEXT = `Price Wars cannot be replayed by Odyssey or Playwrights. Once it is discarded, the ongoing effect is also removed from play. It is strange for an event to have a generational effect.
+
+That makes this card's interaction with Odyssey and Playwrights different from cards like Indentured Workers and Conscription, which have an additional effect after it is discarded. For the moment, rather than have bad effects, it's being considered not playable.` as const;
+
 export class PriceWars extends Card implements IProjectCard {
   constructor() {
     super({
@@ -29,6 +33,7 @@ export class PriceWars extends Card implements IProjectCard {
         description: 'Requires 2 corruption. Until the end of this generation, ' +
           'your steel and titanium are worth 1 more M€ each, ' +
           'and steel and titanium for other players is worth 1 M€ less.',
+        helpText: HELP_TEXT,
       },
     });
   }

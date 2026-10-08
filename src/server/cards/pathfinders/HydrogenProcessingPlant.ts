@@ -5,6 +5,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
+const HELP_TEXT = `Oxygen cannot be reduced once it's already at its goal.` as const;
+
 export class HydrogenProcessingPlant extends Card implements IProjectCard {
   constructor() {
     super({
@@ -28,6 +30,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
         }),
         description: 'Oxygen level must be 3% or higher. Decrease oxygen level 1%. ' +
           'Raise your energy production 1 step for every two ocean tiles on Mars.',
+        helpText: HELP_TEXT,
       },
     });
   }

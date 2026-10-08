@@ -13,6 +13,12 @@ import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
 import {Resource} from '../../../common/Resource';
 
+const HELP_TEXT = `Botanical Experience has the following text: "Players may remove your plants, but you only lose half, rounded up." It is not clear whether this means:
+1. Half your plants are protected or
+2. The event does half of its damage.
+
+The decision is to go with 2 - the effect is reduced by half.` as const;
+
 export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {
     super({
@@ -35,6 +41,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
             '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', {size: Size.SMALL, isBold: false});
         }),
         description: 'Requires one greenery tile on Mars.',
+        helpText: HELP_TEXT,
       },
     });
   }

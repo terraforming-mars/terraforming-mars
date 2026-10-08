@@ -13,6 +13,8 @@ import {digit} from '../Options';
 import {AresHandler} from '../../ares/AresHandler';
 import {ICorporationCard} from './ICorporationCard';
 
+const HELP_TEXT = `Mining Guild's effect does not trigger when tiles are placed on The Moon. This is an intentional decision to prevent it from being overpowered.` as const;
+
 export class MiningGuild extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
@@ -38,6 +40,7 @@ export class MiningGuild extends CorporationCard implements ICorporationCard {
             });
           });
         }),
+        helpText: HELP_TEXT,
       },
     });
   }

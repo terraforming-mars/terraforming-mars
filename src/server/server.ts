@@ -1,4 +1,3 @@
-
 import '@/server/init';
 require('console-stamp')(
   console,

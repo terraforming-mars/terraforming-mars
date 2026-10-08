@@ -12,4 +12,6 @@ export type CardMetadata = {
   description?: string | CardRenderDescription;
   renderData?: CardComponent;
   victoryPoints?: number | CardRenderDynamicVictoryPoints;
+  /** Extended rules explanation, in Markdown, shown in the card's help popup. */
+  helpText?: string;
 }

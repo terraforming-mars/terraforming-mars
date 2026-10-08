@@ -8,7 +8,7 @@ import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
 import {getAward} from '@/client/MilestoneAwardManifest';
-import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
@@ -19,8 +19,6 @@ function createAward({id = 1, funded = false}): FundedAwardModel {
     scores: [],
   };
 }
-
-const learnerModeOn: Readonly<Preferences> = {...PreferencesManager.INSTANCE.values(), learner_mode: true};
 
 describe('Awards', () => {
   it('shows passed awards', () => {
@@ -120,7 +118,6 @@ describe('Awards', () => {
       ...globalConfig,
       props: {
         awards: [],
-        preferences: learnerModeOn,
       },
     });
 
@@ -134,7 +131,6 @@ describe('Awards', () => {
         awards: [
           createAward({id: 1, funded: false}),
         ],
-        preferences: learnerModeOn,
       },
     });
 
@@ -152,7 +148,6 @@ describe('Awards', () => {
           createAward({id: 1, funded: true}),
           createAward({id: 2, funded: false}),
         ],
-        preferences: learnerModeOn,
       },
     });
 
@@ -171,7 +166,6 @@ describe('Awards', () => {
           createAward({id: 2, funded: true}),
           createAward({id: 3, funded: false}),
         ],
-        preferences: learnerModeOn,
       },
     });
 
@@ -191,7 +185,6 @@ describe('Awards', () => {
           createAward({id: 3, funded: true}),
           createAward({id: 4, funded: false}),
         ],
-        preferences: learnerModeOn,
       },
     });
 

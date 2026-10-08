@@ -1,10 +1,10 @@
 <template>
-      <div :class="getClasses">
+      <div :class="classes">
         <div class="player-status-and-res">
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name" @click="togglePlayerDetails">{{ playerSymbol + player.name }}</div>
-            <span @click="togglePlayerDetails" v-for="(corporationName, index) in getCorporationName" :key="index" v-i18n>
+            <span @click="togglePlayerDetails" v-for="(corporationName, index) in corporationNames" :key="index" v-i18n>
               <div class="player-info-corp" :title="$t(corporationName)">
                 {{ corporationName }}
               </div>
@@ -109,7 +109,7 @@ export default defineComponent({
     buttonLabel(): string {
       return this.isPinned(this.playerIndex) ? 'hide' : 'show';
     },
-    getClasses(): string {
+    classes(): string {
       return `player-info ${playerColorClass(this.player.color, 'bg_transparent')}`;
     },
     numberOfPlayedCards(): number {
@@ -118,7 +118,7 @@ export default defineComponent({
     availableBlueActionCount(): number {
       return this.player.availableBlueCardActionCount;
     },
-    getCorporationName(): string[] {
+    corporationNames(): string[] {
       const cards = this.player.tableau;
       const corporationCards = cards
         .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)

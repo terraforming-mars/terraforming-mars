@@ -1,5 +1,5 @@
 <template>
-      <div :class="getClasses">
+      <div :class="classes">
         <div class="card-effect-box-row">
             <div v-if="delimiter !== undefined && cause !== undefined" class="card-effect-box-content">
                 <div v-for="(rowItem, rowIndex) in cause" class="card-effect-box-item" :key="rowIndex">
@@ -72,7 +72,7 @@ export default defineComponent({
     description(): ItemType {
       return this.effectData.rows[2].slice(-1)[0];
     },
-    getClasses(): string {
+    classes(): string {
       return 'card-effect-box';
     },
   },

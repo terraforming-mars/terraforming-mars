@@ -1,6 +1,6 @@
 <template>
   <div class="players-overview-settings">
-    <div class="setting-button" @click.prevent="toggleTagsView()" v-i18n>{{ getTagToggleLabel }}</div>
+    <div class="setting-button" @click.prevent="toggleTagsView()" v-i18n>{{ tagToggleLabel }}</div>
     <div class="setting-label" v-i18n>[ toggle tags view ]</div>
   </div>
 </template>
@@ -13,7 +13,7 @@ import {vueRoot} from '@/client/components/vueRoot';
 export default defineComponent({
   name: 'OverviewSettings',
   computed: {
-    getTagToggleLabel(): string {
+    tagToggleLabel(): string {
       return vueRoot(this).componentsVisibility['tags_concise'] ? 'full' : 'concise';
     },
   },

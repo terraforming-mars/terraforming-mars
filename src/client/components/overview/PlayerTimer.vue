@@ -1,12 +1,12 @@
 <template>
   <div class="player-timer">
     <template v-if="hasHours">
-        <div class="player-timer-hours">{{ getHours }}</div>
+        <div class="player-timer-hours">{{ hours }}</div>
         <div class="timer-delimiter">:</div>
     </template>
-    <div class="player-timer-minutes">{{ getMinutes }}</div>
+    <div class="player-timer-minutes">{{ minutes }}</div>
     <div class="timer-delimiter">:</div>
-    <div class="player-timer-seconds">{{ getSeconds }}</div>
+    <div class="player-timer-seconds">{{ seconds }}</div>
   </div>
 </template>
 
@@ -55,19 +55,19 @@ export default defineComponent({
       }
       return 0;
     },
-    getHours(): string {
+    hours(): string {
       if (this.hasHours) {
         return this.timerText.split(':')[0];
       }
       return '';
     },
-    getMinutes(): string {
+    minutes(): string {
       if (this.hasHours) {
         return this.timerText.split(':')[1];
       }
       return this.timerText.split(':')[0];
     },
-    getSeconds(): string {
+    seconds(): string {
       if (this.hasHours) {
         return this.timerText.split(':')[2];
       }

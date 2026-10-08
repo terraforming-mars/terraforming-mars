@@ -1,16 +1,19 @@
 import {expect} from 'chai';
-import {CreateGameSettingsStorage} from '@/client/components/create/CreateGameSettingsStorage';
+import {createGameSettingsStorage} from '@/client/components/create/createGameSettingsStorage';
 import {FakeLocalStorage} from '../FakeLocalStorage';
 import {BoardName} from '@/common/boards/BoardName';
 import {NewGameConfig} from '@/common/game/NewGameConfig';
 
 describe('CreateGameSettingsStorage', () => {
   let localStorage: FakeLocalStorage;
-  let storage: CreateGameSettingsStorage;
 
   beforeEach(() => {
     localStorage = new FakeLocalStorage();
-    storage = new CreateGameSettingsStorage(localStorage);
+    FakeLocalStorage.register(localStorage);
+  });
+
+  afterEach(() => {
+    FakeLocalStorage.deregister(localStorage);
   });
 
   it('saves and reloads game settings', () => {
@@ -21,9 +24,9 @@ describe('CreateGameSettingsStorage', () => {
       clonedGamedId: 'g123',
     };
 
-    storage.saveSettings(config as NewGameConfig);
+    createGameSettingsStorage.save(config as NewGameConfig);
 
-    expect(storage.loadSettings()).deep.eq({
+    expect(createGameSettingsStorage.load()).deep.eq({
       players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0, first: true}],
       board: 'hellas',
       solarPhaseOption: true,
@@ -39,7 +42,7 @@ describe('CreateGameSettingsStorage', () => {
     localStorage.setItem('tm_last_game_settings', '{bad json');
 
     try {
-      expect(storage.loadSettings()).eq(undefined);
+      expect(createGameSettingsStorage.load()).eq(undefined);
     } finally {
       console.warn = originalWarn;
     }
@@ -47,14 +50,14 @@ describe('CreateGameSettingsStorage', () => {
   });
 
   it('clears saved settings', () => {
-    storage.saveSettings({
+    createGameSettingsStorage.save({
       players: [{name: 'Alice', color: 'red', beginner: false, handicap: 0}],
       board: 'hellas',
       solarPhaseOption: true,
     } as NewGameConfig);
 
-    storage.clearSettings();
+    createGameSettingsStorage.clear();
 
-    expect(storage.loadSettings()).eq(undefined);
+    expect(createGameSettingsStorage.load()).eq(undefined);
   });
 });

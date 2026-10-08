@@ -10,7 +10,7 @@ import {Message} from '../../common/logs/Message';
 type Options = {
   title?: string | Message,
   on?: PlacementType,
-  spaces?: Array<Space>,
+  spaces?: ReadonlyArray<Space>,
   /** For Icy Impactors */
   creditedPlayer?: IPlayer,
 };
@@ -29,9 +29,9 @@ export class PlaceOceanTile extends DeferredAction<Space | undefined> {
       const whales = this.creditedPlayer.tableau.get(CardName.WHALES);
       if (whales !== undefined) {
         this.player.addResourceTo(whales, {qty: 1, log: true});
-        const input = this.cb(undefined);
-        this.player?.defer(input);
       }
+      const input = this.cb(undefined);
+      this.player?.defer(input);
       return undefined;
     }
 

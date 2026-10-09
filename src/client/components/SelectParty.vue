@@ -8,7 +8,7 @@
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
-            <AppButton @click="saveData" :title="playerinput.buttonLabel" />
+            <AppButton :disabled="selectedParty === undefined" @click="saveData" :title="playerinput.buttonLabel" />
         </div>
     </div>
 </template>

@@ -27,10 +27,6 @@ export class SelectParty extends BasePlayerInput<PartyName> {
     if (!isSelectPartyResponse(input)) {
       throw new InputError('Not a valid SelectPartyResponse');
     }
-    if (input.partyName === undefined) {
-      // TODO(kberg): prevent click unless party is selected.
-      throw new InputError('No party selected');
-    }
     if (!this.parties.includes(input.partyName)) {
       throw new InputError('Invalid party selected');
     }

@@ -64,7 +64,7 @@ import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
 import {Tag} from '../common/cards/Tag';
-import {IGame, Score} from './IGame';
+import {GlobalParameterMaximums, IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
 import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
@@ -129,6 +129,7 @@ export class Game implements IGame, Logger {
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
   private temperature: number = constants.MIN_TEMPERATURE;
   private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
+  public readonly max: GlobalParameterMaximums;
 
   // Player data
   public activePlayer: IPlayer;
@@ -233,6 +234,12 @@ export class Game implements IGame, Logger {
     this.preludeDeck = preludeDeck;
     this.ceoDeck = ceoDeck;
     this.board = board;
+    this.max = {
+      temperature: constants.MAX_TEMPERATURE,
+      oxygen: constants.MAX_OXYGEN_LEVEL,
+      oceans: constants.MAX_OCEAN_TILES,
+      venus: constants.MAX_VENUS_SCALE,
+    };
 
     this.players.forEach((player) => {
       player.setup(this);

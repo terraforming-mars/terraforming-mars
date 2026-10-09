@@ -1,4 +1,3 @@
-import * as constants from '../../../common/constants';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
@@ -43,16 +42,16 @@ export class FloydContinuum extends Card implements IProjectCard, IActionCard {
   public action(player: IPlayer) {
     let count = 0;
     const game = player.game;
-    if (game.getTemperature() === constants.MAX_TEMPERATURE) {
+    if (game.getTemperature() === game.max.temperature) {
       count++;
     }
-    if (game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL) {
+    if (game.getOxygenLevel() === game.max.oxygen) {
       count++;
     }
     if (!game.canAddOcean()) {
       count++;
     }
-    if (game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE) {
+    if (game.getVenusScaleLevel() === game.max.venus) {
       count++;
     }
     player.stock.add(Resource.MEGACREDITS, 3 * count, {log: true});

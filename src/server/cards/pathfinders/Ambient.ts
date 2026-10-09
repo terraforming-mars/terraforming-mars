@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 import {ICard} from '../ICard';
-import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 
@@ -48,7 +47,7 @@ export class Ambient extends CorporationCard implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.availableHeat() >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
+    return player.availableHeat() >= 8 && player.game.getTemperature() === player.game.max.temperature && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {

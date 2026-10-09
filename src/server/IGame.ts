@@ -39,6 +39,14 @@ export interface Score {
   playerScore: number;
 }
 
+/** The maximum values of the global parameters. */
+export interface GlobalParameterMaximums {
+  readonly temperature: number;
+  readonly oxygen: number;
+  readonly oceans: number;
+  readonly venus: number;
+}
+
 export interface IGame extends Logger {
   readonly id: GameId;
   readonly name: string;
@@ -191,6 +199,7 @@ export interface IGame extends Logger {
   getVenusScaleLevel(): number;
   increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined;
   getTemperature(): number;
+  readonly max: GlobalParameterMaximums;
   getGeneration(): number;
   getPassedPlayers():ReadonlyArray<Color>;
   /**

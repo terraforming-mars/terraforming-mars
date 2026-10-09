@@ -792,6 +792,7 @@ describe('Game', () => {
       'rng',
       'underworldDraftEnabled',
       'doubleDownPrelude',
+      'max',
     ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',

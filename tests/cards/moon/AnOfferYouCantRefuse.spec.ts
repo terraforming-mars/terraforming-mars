@@ -97,15 +97,14 @@ describe('AnOfferYouCantRefuse', () => {
 
     // Now do a delegate exchange
     // Swap with Reds / red
-    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
-    expect(turmoil.getAvailableDelegateCount(redPlayer)).eq(7);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+    expect(turmoil.getAvailableDelegateCount(redPlayer)).eq(3);
     expectDelegates(parties.reds, 'NEUTRAL', 'NEUTRAL', redPlayer, redPlayer);
 
     const switchParties = cast(orOptions.options[2].cb(), OrOptions);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
-    // TODO(kberg): rewrite this test, because it shouldn't be possible for red to have this many delegates.
-    expect(turmoil.getAvailableDelegateCount(redPlayer)).eq(8);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(4);
+    expect(turmoil.getAvailableDelegateCount(redPlayer)).eq(4);
     expectDelegates(parties.reds, 'NEUTRAL', 'NEUTRAL', redPlayer, player);
 
     // Now player may switch parties.
@@ -168,7 +167,7 @@ describe('AnOfferYouCantRefuse', () => {
   }
 
   function populateParty(party: IParty, ...delegates: Array<Delegate>) {
-    delegates.forEach((delegate) => party.sendDelegate(delegate, game));
+    delegates.forEach((delegate) => turmoil.sendDelegateToParty(delegate, party.name, game, true));
   }
 
   function assertExchanges(delegates: Array<Delegate>, leader: Delegate, expectedOptions: Array<IPlayer>) {

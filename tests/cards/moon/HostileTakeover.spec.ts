@@ -93,10 +93,10 @@ describe('HostileTakeover', () => {
 
   describe('Compatible with Lunar Mine Urbanization', () => {
     const canPlayRuns = [
-      {habitatTiles: false, miningTiles: false, expected: false},
-      {habitatTiles: false, miningTiles: true, expected: true},
-      {habitatTiles: true, miningTiles: false, expected: true},
-      {habitatTiles: true, miningTiles: true, expected: true},
+      {habitatTiles: false, miningTiles: false, expected: false, warning: false},
+      {habitatTiles: false, miningTiles: true, expected: true, warning: true},
+      {habitatTiles: true, miningTiles: false, expected: true, warning: true},
+      {habitatTiles: true, miningTiles: true, expected: true, warning: false},
     ] as const;
 
     for (const run of canPlayRuns) {
@@ -112,6 +112,7 @@ describe('HostileTakeover', () => {
         }
         MoonExpansion.addTile(opponent, 'm07', {tileType: TileType.LUNAR_MINE_URBANIZATION});
         expect(card.canPlay(player)).eq(run.expected);
+        expect(card.warnings.has('hostileTakeover')).eq(run.warning);
       });
     }
 

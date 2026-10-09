@@ -2,7 +2,6 @@ import {StandardActionCard} from '../../StandardActionCard';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {IPlayer} from '../../../IPlayer';
-import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {Units} from '../../../../common/Units';
 import {message} from '../../../logs/MessageBuilder';
@@ -30,7 +29,7 @@ export class ConvertPlants extends StandardActionCard {
     if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
       return false;
     }
-    if (player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL) {
+    if (player.game.getOxygenLevel() === player.game.max.oxygen) {
       // The level is maximized, and that means you don't have to try to figure out if the
       // player can afford the reds tax when increasing the oxygen level.
       return true;

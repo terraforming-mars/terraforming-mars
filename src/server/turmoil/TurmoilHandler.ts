@@ -113,7 +113,7 @@ export class TurmoilHandler {
     let total = 0;
 
     if (tr.oxygen !== undefined) {
-      const availableSteps = constants.MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
+      const availableSteps = player.game.max.oxygen - player.game.getOxygenLevel();
       const steps = Math.min(availableSteps, tr.oxygen);
       total = total + steps;
       if (player.game.getOxygenLevel() < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
@@ -123,7 +123,7 @@ export class TurmoilHandler {
     }
 
     if (tr.temperature !== undefined) {
-      const availableSteps = Math.floor((constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2);
+      const availableSteps = Math.floor((player.game.max.temperature - player.game.getTemperature()) / 2);
       const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
       if (player.game.getTemperature() < constants.TEMPERATURE_FOR_OCEAN_BONUS &&
@@ -133,13 +133,13 @@ export class TurmoilHandler {
     }
 
     if (tr.oceans !== undefined) {
-      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceanSpaces().length;
+      const availableSteps = player.game.max.oceans - player.game.board.getOceanSpaces().length;
       const steps = Math.min(availableSteps, tr.oceans);
       total = total + steps;
     }
 
     if (tr.venus !== undefined) {
-      const availableSteps = Math.floor((constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2);
+      const availableSteps = Math.floor((player.game.max.venus - player.game.getVenusScaleLevel()) / 2);
       const steps = Math.min(availableSteps, tr.venus);
       total = total + steps;
       if (player.game.getVenusScaleLevel() < constants.VENUS_LEVEL_FOR_TR_BONUS &&

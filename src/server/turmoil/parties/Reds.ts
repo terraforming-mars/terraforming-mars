@@ -7,7 +7,7 @@ import {IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTIC_RATE, MAXIMUM_MINING_RATE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -103,15 +103,15 @@ class RedsPolicy03 implements IPolicy {
     switch (parameter) {
     case GlobalParameter.TEMPERATURE:
       const temp = game.getTemperature();
-      return temp > MIN_TEMPERATURE && temp !== MAX_TEMPERATURE;
+      return temp > MIN_TEMPERATURE && temp !== game.max.temperature;
     case GlobalParameter.OCEANS:
       return game.canRemoveOcean();
     case GlobalParameter.OXYGEN:
       const oxygenLevel = game.getOxygenLevel();
-      return oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== MAX_OXYGEN_LEVEL;
+      return oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== game.max.oxygen;
     case GlobalParameter.VENUS:
       const venusScaleLevel = game.getVenusScaleLevel();
-      return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
+      return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== game.max.venus;
     case GlobalParameter.MOON_HABITAT_RATE:
       if (game.moonData) {
         const rate = game.moonData.habitatRate;

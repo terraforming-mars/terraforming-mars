@@ -4,7 +4,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Resource} from '../../../common/Resource';
-import {MAX_OCEAN_TILES} from '../../../common/constants';
 
 export class Ulrich extends CeoCard {
   constructor() {
@@ -24,7 +23,7 @@ export class Ulrich extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const oceansPlaced = game.board.getOceanSpaces().length;
-    const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
+    const bonusCredits = oceansPlaced < game.max.oceans ? (oceansPlaced * 4) : 15;
     player.stock.add(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;
   }

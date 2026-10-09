@@ -217,7 +217,7 @@ export class MarsBoard extends Board {
         return false;
       }
     }
-    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC) && game.getTemperature() < game.max.temperature) {
       if (!player.canAfford({cost: constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST, tr: {temperature: 1}})) {
         return false;
       }

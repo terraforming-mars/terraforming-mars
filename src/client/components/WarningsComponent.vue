@@ -35,6 +35,7 @@ const descriptions: Record<Warning, string> = {
   'selfTarget': 'Note: This action will target you.',
   'pharmacyUnion': 'Note: playing a card with a microbe tag will cause you to lose 4 M€ (or as much as possible).',
   'kaguyaTech': 'Warning: Your only greeneries are special tiles.',
+  'hostileTakeover': 'Note: One of the tiles you co-own will have to be Lunar Mine Urbanization.',
   'underworldtokendiscard': 'Warning: You will have to discard an underworld resource token you rely on.',
 };
 

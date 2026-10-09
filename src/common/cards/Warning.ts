@@ -23,4 +23,6 @@ export type Warning =
  'selfTarget' |
  'pharmacyUnion' |
  'kaguyaTech' |
- 'underworldtokendiscard';
+ 'underworldtokendiscard' |
+ 'hostileTakeover';
+

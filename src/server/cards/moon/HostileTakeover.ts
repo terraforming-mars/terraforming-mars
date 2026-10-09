@@ -42,11 +42,11 @@ export class HostileTakeover extends Card {
     const habitatSpaces = this.availableSpaces(player, TileType.MOON_HABITAT);
     const mineSpaces = this.availableSpaces(player, TileType.MOON_MINE);
     const lunarMineUrbanizationSpaces = this.availableSpaces(player, TileType.LUNAR_MINE_URBANIZATION);
-    // TODO(kberg): warn if Lunar Mine Urbanization is one of the few eligibile cards.
     if (habitatSpaces.length > 0 && mineSpaces.length > 0) {
       return true;
     }
     if (habitatSpaces.length + mineSpaces.length > 0 && lunarMineUrbanizationSpaces.length > 0) {
+      this.addWarning('hostileTakeover');
       return true;
     }
     return false;

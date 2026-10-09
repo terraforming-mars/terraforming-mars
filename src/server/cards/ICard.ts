@@ -86,6 +86,12 @@ export interface ICard {
   onCardPlayedFromAnyPlayer?: never;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
+  /**
+   * Estimates what `onTilePlaced` will give `player` when they place a tile of `tileType` on `space`.
+   *
+   * Used by cards that let a placement pay for their own cost. Manutech is applied by the caller.
+   */
+  gainsFromTilePlacement?(player: IPlayer, space: Space, tileType: TileType): {stock: Units, production: Units};
   onDiscard?(player: IPlayer): void;
   /**
    * Called when anybody gains TR

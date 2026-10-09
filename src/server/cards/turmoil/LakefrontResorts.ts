@@ -11,6 +11,8 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {TileType} from '../../../common/TileType';
+import {Units} from '../../../common/Units';
 
 export class LakefrontResorts extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -45,6 +47,11 @@ export class LakefrontResorts extends CorporationCard implements ICorporationCar
 
   public override onDiscard(player: IPlayer) {
     player.oceanBonus = 2;
+  }
+
+  /** The adjacency bonus is in player.oceanBonus. */
+  public gainsFromTilePlacement(_player: IPlayer, _space: Space, tileType: TileType) {
+    return {stock: Units.EMPTY, production: Units.of({megacredits: tileType === TileType.OCEAN ? 1 : 0})};
   }
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {

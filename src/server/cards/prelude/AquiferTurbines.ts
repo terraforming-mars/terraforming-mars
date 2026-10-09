@@ -9,7 +9,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Space} from '../../boards/Space';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
-import {Phase} from '../../../common/Phase';
+import {TileType} from '../../../common/TileType';
+import {Units} from '../../../common/Units';
 
 export class AquiferTurbines extends PreludeCard {
   constructor() {
@@ -47,26 +48,34 @@ export class AquiferTurbines extends PreludeCard {
       return [];
     }
 
-    const amountAvailable = spendable + this.megacreditsFromCards(player);
     const amountToPay = -this.startingMegaCredits + redsCost;
     const board = player.game.board;
     return board.getAvailableSpacesForOcean(player)
       .filter((space) => {
-        return amountAvailable + board.megacreditsFromOceanPlacement(player, space) >= amountToPay;
+        const gained = board.megacreditsFromOceanPlacement(player, space) + this.megacreditsFromCards(player, space);
+        return spendable + gained >= amountToPay;
       });
   }
 
-  /** M€ `player`'s cards give them for placing an ocean, on any space. */
-  private megacreditsFromCards(player: IPlayer): number {
+  /** M€ `player`'s cards give them for placing an ocean on `space`. */
+  private megacreditsFromCards(player: IPlayer, space: Space): number {
+    const hasManutech = player.tableau.has(CardName.MANUTECH);
     let megacredits = 0;
-    if (player.tableau.has(CardName.POLARIS) && player.game.phase !== Phase.SOLAR) {
-      megacredits += 4;
-      // Polaris's M€ production increase.
-      if (player.tableau.has(CardName.MANUTECH)) {
-        megacredits += 1;
+    for (const card of player.tableau) {
+      const gain = card.gainsFromTilePlacement?.(player, space, TileType.OCEAN);
+      if (gain !== undefined) {
+        megacredits += this.spendable(player, gain.stock);
+        if (hasManutech) {
+          megacredits += this.spendable(player, gain.production);
+        }
       }
     }
     return megacredits;
+  }
+
+  /** The part of `units` that `player` can spend as M€. */
+  private spendable(player: IPlayer, units: Units): number {
+    return units.megacredits + (player.canUseHeatAsMegaCredits ? units.heat : 0);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

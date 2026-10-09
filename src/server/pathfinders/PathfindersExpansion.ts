@@ -246,7 +246,7 @@ export class PathfindersExpansion {
       if (game.gameOptions.venusNextExtension) {
         game.increaseVenusScaleLevel(player, 1);
       } else {
-        player.game.log('TODO: come up with some reward in place of Increase Venus Scale.');
+        console.warn('Unexpected state: gaining venus reward without a Venus Next in play.');
       }
       break;
     default:

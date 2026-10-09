@@ -234,12 +234,7 @@ export class Game implements IGame, Logger {
     this.preludeDeck = preludeDeck;
     this.ceoDeck = ceoDeck;
     this.board = board;
-    this.max = {
-      temperature: constants.MAX_TEMPERATURE,
-      oxygen: constants.MAX_OXYGEN_LEVEL,
-      oceans: constants.MAX_OCEAN_TILES,
-      venus: constants.MAX_VENUS_SCALE,
-    };
+    this.max = board.max;
 
     this.players.forEach((player) => {
       player.setup(this);

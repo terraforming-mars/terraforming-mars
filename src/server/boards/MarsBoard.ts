@@ -11,14 +11,23 @@ import {oneWayDifference} from '../../common/utils/utils';
 import {Tile} from '../Tile';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import * as constants from '../../common/constants';
+import {GlobalParameterMaximums} from '../IGame';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
+  public readonly max: GlobalParameterMaximums;
 
   public constructor(
     spaces: ReadonlyArray<Space>,
-    noctisCitySpaceId?: SpaceId | undefined) {
+    noctisCitySpaceId?: SpaceId | undefined,
+    max?: Partial<GlobalParameterMaximums>) {
     super(spaces, noctisCitySpaceId);
+    this.max = {
+      temperature: max?.temperature ?? constants.MAX_TEMPERATURE,
+      oxygen: max?.oxygen ?? constants.MAX_OXYGEN_LEVEL,
+      oceans: max?.oceans ?? constants.MAX_OCEAN_TILES,
+      venus: max?.venus ?? constants.MAX_VENUS_SCALE,
+    };
     this.edges = this.computeEdges();
   }
 

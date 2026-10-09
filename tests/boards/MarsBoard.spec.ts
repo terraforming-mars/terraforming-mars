@@ -251,4 +251,19 @@ describe('MarsBoard', () => {
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
     });
   });
+
+  it('global parameter maximums default to the standard values', () => {
+    expect(board.max.temperature).eq(constants.MAX_TEMPERATURE);
+    expect(board.max.oxygen).eq(constants.MAX_OXYGEN_LEVEL);
+    expect(board.max.oceans).eq(constants.MAX_OCEAN_TILES);
+    expect(board.max.venus).eq(constants.MAX_VENUS_SCALE);
+  });
+
+  it('global parameter maximums can be overridden', () => {
+    const customBoard = new MarsBoard(board.spaces, undefined, {temperature: 14, oxygen: 18, oceans: 11});
+    expect(customBoard.max.temperature).eq(14);
+    expect(customBoard.max.oxygen).eq(18);
+    expect(customBoard.max.oceans).eq(11);
+    expect(customBoard.max.venus).eq(constants.MAX_VENUS_SCALE);
+  });
 });

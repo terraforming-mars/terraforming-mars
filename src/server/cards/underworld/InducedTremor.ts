@@ -7,6 +7,8 @@ import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {cancelled} from '../Options';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
 
 
 export class InducedTremor extends Card implements IProjectCard {
@@ -21,29 +23,37 @@ export class InducedTremor extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.undergroundResources(1, {cancelled}).asterix().excavate();
         }),
-        // TODO(kberg) make discard optional
-        description: 'Discard 1 underground resource from the board. Then excavate an underground resource.',
+        description: 'You may discard 1 underground resource of your choice from the board. Then excavate an underground resource.',
       },
     });
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.game.board.spaces.some((space) => space.undergroundResources !== undefined) &&
-      UnderworldExpansion.excavatableSpaces(player).length > 0;
+    return UnderworldExpansion.excavatableSpaces(player).length > 0;
+  }
+
+  private excavate(player: IPlayer) {
+    return new SelectSpace('Select space to excavate', UnderworldExpansion.excavatableSpaces(player))
+      .andThen((excavatedSpace) => {
+        UnderworldExpansion.excavate(player, excavatedSpace);
+        return undefined;
+      });
   }
 
   public override bespokePlay(player: IPlayer) {
-    const game = player.game;
-    const identifiedSpaces = game.board.spaces.filter((space) => space.undergroundResources !== undefined);
-    player.defer(new SelectSpace('Select unclaimed resource token to remove', identifiedSpaces).andThen((space) => {
-      UnderworldExpansion.removeTokenFromSpace(game, space);
-      return new SelectSpace('Select space to excavate',
-        UnderworldExpansion.excavatableSpaces(player))
-        .andThen((excavatedSpace) => {
-          UnderworldExpansion.excavate(player, excavatedSpace);
-          return undefined;
-        });
-    }));
+    const identifiedSpaces = player.game.board.spaces.filter((space) => space.undergroundResources !== undefined);
+    if (identifiedSpaces.length === 0) {
+      player.defer(this.excavate(player));
+      return undefined;
+    }
+
+    player.defer(new OrOptions(
+      new SelectSpace('Select unclaimed resource token to remove', identifiedSpaces).andThen((space) => {
+        UnderworldExpansion.removeTokenFromSpace(player.game, space);
+        return this.excavate(player);
+      }),
+      new SelectOption('Do not remove resource').andThen(() => this.excavate(player)),
+    ));
 
     return undefined;
   }

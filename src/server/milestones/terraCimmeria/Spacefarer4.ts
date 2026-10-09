@@ -5,6 +5,7 @@ import {BaseMilestone} from '../IMilestone';
 export class Spacefarer4 extends BaseMilestone {
   constructor() {
     super(
+      // TODO(kberg): After completing the T. Spacefarer migration, rename this to Spacefarer.
       'Spacefarer4',
       'Have 4 space tags in play',
       4);

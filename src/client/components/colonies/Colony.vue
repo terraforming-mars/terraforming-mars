@@ -31,14 +31,14 @@
       <template v-if="colony.name === ColonyName.IAPETUS" >
         <div class="resource card card-with-border" style="transform: scale(0.8);"></div>
         <span class="white-char">:</span>
-        <div class="resource money">-1</div>
+        <div class="resource megacredits">-1</div>
       </template>
 
-      <div v-if="colony.name === ColonyName.TITANIA" class="resource money">-3</div>
+      <div v-if="colony.name === ColonyName.TITANIA" class="resource megacredits">-3</div>
       <div v-if="colony.name === ColonyName.VENUS" class="resource wild" style="margin:15px 10px 10px 20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
 
       <div v-if="colony.name === ColonyName.PALLAS" style="display:inline-block">
-        <div class="resource money">1</div> <span v-i18n>/ party</span> <div class="delegate"></div>
+        <div class="resource megacredits">1</div> <span v-i18n>/ party</span> <div class="delegate"></div>
       </div>
 
       <template v-if="colony.name === ColonyName.LEAVITT">
@@ -55,11 +55,11 @@
       </template>
 
       <div v-if="colony.name === ColonyName.DEIMOS" class="deimos-colony-bonus">
-        <div class="resource money">1</div> / <div class="tile hazard-tile"></div>
+        <div class="resource megacredits">1</div> / <div class="tile hazard-tile"></div>
       </div>
 
       <div v-if="colony.name === ColonyName.TERRA" class="terra-colony-bonus">
-        <div class="resource money">1</div> / 3&nbsp;<span class="tag tag-earth red-outline" style="transform:scale(0.8);margin-top:-4px;"></span>
+        <div class="resource megacredits">1</div> / 3&nbsp;<span class="tag tag-earth red-outline" style="transform:scale(0.8);margin-top:-4px;"></span>
       </div>
       <span class="colony-background-color">
         <template v-if="colony.name !== ColonyName.TITANIA"><span v-i18n>Bonus</span></template>

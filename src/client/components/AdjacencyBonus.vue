@@ -1,6 +1,6 @@
 <template>
   <div :class="positionClass">
-    <i v-for="(suffix, idx) in bonus" :key="idx" :class="`adjacency-bonus board-space-bonus--${suffix}`"></i>
+    <i v-for="(suffix, idx) in bonus" :key="idx" :class="['adjacency-bonus', iconClass(suffix)]"></i>
   </div>
 </template>
 
@@ -31,6 +31,12 @@ const tileToSuffix: Partial<Record<TileType, Array<string>>> = {
   [TileType.SOLAR_FARM]: ['energy', 'energy'],
 };
 
+// These icons only appear as adjacency bonuses, never as board space bonuses.
+const adjacencyOnlyIcons = ['megacredit', '2mc', 'lose2mc'];
+
+function iconClass(suffix: string): string {
+  return adjacencyOnlyIcons.includes(suffix) ? `adjacency-bonus--${suffix}` : `board-space-bonus--${suffix}`;
+}
 
 const props = defineProps<{
   tileType: TileType;
@@ -81,6 +87,21 @@ const positionClass = computed(() => {
   height: 16px;
   background-size: 16px;
   border-radius: 1px;
+
+  &--megacredit {
+    background: url(./assets/misc/1mc.png) no-repeat;
+    background-size: 16px;
+  }
+
+  &--2mc {
+    background: url(./assets/misc/2mc.png) no-repeat;
+    background-size: 16px;
+  }
+
+  &--lose2mc {
+    background: url(./assets/misc/lose2mc.png) no-repeat;
+    background-size: 16px;
+  }
 
   &.board-space-bonus--city {
     background: url(./assets/tiles/city.png) no-repeat;

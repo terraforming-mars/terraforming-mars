@@ -39,7 +39,7 @@ describe('SelectProductionToLose', () => {
     const icons = wrapper.findAll('.payments_type .production').map((w) => w.classes());
     expect(icons).to.have.length(3);
     expect(icons[0]).to.include('steel');
-    expect(icons[1]).to.include('plant');
+    expect(icons[1]).to.include('plants');
     expect(icons[2]).to.include('heat');
   });
 

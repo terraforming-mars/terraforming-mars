@@ -120,7 +120,7 @@ export default defineComponent({
       case RequirementType.COLONIES:
         return ['card-resource-colony', 'card-resource-colony--req'];
       case RequirementType.FLOATERS:
-        return ['card-resource-tag--S', 'tag-floater'];
+        return ['card-resource-tag--S', 'card-icon-resource--floater'];
       case RequirementType.CHAIRMAN:
         return ['card-chairman--req'];
       case RequirementType.PARTY_LEADERS:

@@ -133,10 +133,10 @@ const CARD_TAGS: ReadonlyArray<IconEntry> = [
 ];
 
 const STANDARD_RESOURCES: ReadonlyArray<IconEntry> = [
-  {iconClass: 'money', label: 'MegaCredits (M€)', official: true, innerText: '€'},
+  {iconClass: 'megacredits', label: 'MegaCredits (M€)', official: true, innerText: '€'},
   {iconClass: 'steel', label: 'Steel', official: true},
   {iconClass: 'titanium', label: 'Titanium', official: true},
-  {iconClass: 'plant', label: 'Plant', official: true},
+  {iconClass: 'plants', label: 'Plant', official: true},
   {iconClass: 'energy', label: 'Energy', official: true},
   {iconClass: 'heat', label: 'Heat', official: true},
 ];

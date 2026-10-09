@@ -1545,25 +1545,14 @@
   }
 
 
-  // TODO(kberg): this is a duplicate of .card-resources-counter / .card-resource@{value})
-  // Not only can this be reduced using the same construct, but let's get rid of the CSS duplication.
-  .card-resource-steel {
-    background-image: url(./assets/resources/steel.png);
-  }
-  .card-resource-titanium {
-    background-image: url(./assets/resources/titanium.png);
-  }
-  .card-resource-plant {
-    background-image: url(./assets/resources/plant.png);
-  }
+  @card_standard_resource_types: steel, titanium, plant, heat, wild, one;
+  each(@card_standard_resource_types, {
+    .card-resource-@{value} {
+      background-image: url("./assets/resources/@{value}.png");
+    }
+  });
   .card-resource-energy {
     background-image: url(./assets/resources/power.png);
-  }
-  .card-resource-heat {
-    background-image: url(./assets/resources/heat.png);
-  }
-  .card-resource-wild {
-    background-image: url(./assets/resources/wild.png);
   }
   .card-resource-diverse {
     background: linear-gradient(to bottom right, green, yellow, red);
@@ -1577,9 +1566,6 @@
   .card-resource-nomads {
     background: linear-gradient(to bottom right, gold, goldenrod, gold);
     border: 1px solid black;
-  }
-  .card-resource-one {
-    background-image: url(./assets/resources/one.png);
   }
   .card-resource-size--S {
     height: 18px;
@@ -1957,13 +1943,12 @@
   // .card-resource-tag), which only works nested here, after those rules, in this
   // file (imported last). Flattening to bare .tag-* in cards.less was #8250's
   // regression (round req/blue/floater). See cards.less for the matching note.
-  // TODO(kberg): floater is a resource, not a tag — this is misnamed as tag-*.
-  // (Same for tag-wild-resource below.) Rename to a resource-based class.
-  .tag-floater {
+  // Floaters and wild resources are secondary icons, but they're resources, not tags.
+  .card-icon-resource--floater {
     background-image: url("./assets/resources/floater.png");
     border-radius: 0px;
   }
-  .tag-wild-resource {
+  .card-icon-resource--wild {
     background-image: url("./assets/resources/wild.png");
     border-radius: 0px;
   }

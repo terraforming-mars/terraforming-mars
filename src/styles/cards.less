@@ -488,7 +488,7 @@ input[type="radio"]:checked+.filterDiv::after {
   background-image: url("./assets/tags/empty.png");
 }
 
-// Tag shape/size overrides (req, blue, floater, size--S, ...) live in
+// Tag shape/size overrides (req, blue, size--S, ...) live in
 // cards_v2.less, nested under .card-container, so they outrank the base tag
 // shapes there. As bare .tag-* here they lose that cascade (#8250 regression).
 
@@ -745,11 +745,6 @@ input[type="radio"]:checked+.filterDiv::after {
 }
 
 .megacredits {
-  // TODO(kberg): replace money with megacredits as the resource type is 'megacredits'
-  &:extend(.money);
-}
-
-.money {
   font-family: Prototype, sans-serif;
   color: black;
   background-image: url(./assets/resources/megacredit.png);
@@ -766,14 +761,8 @@ input[type="radio"]:checked+.filterDiv::after {
   background-image: url(./assets/resources/titanium.png);
 }
 
-/* TODO(kberg): Remove plant, as the resource type in the game is the string "plants" */
-.plant {
-  background-image: url(./assets/resources/plant.png);
-}
-
-// TODO(kberg): move plant, above to plants since that's how it's listed as a resource.
 .plants {
-  &:extend(.plant);
+  background-image: url(./assets/resources/plant.png);
 }
 
 .energy {
@@ -961,7 +950,7 @@ input[type="radio"]:checked+.filterDiv::after {
 }
 
 .card-beginner-corporation {
-  .resource.money {
+  .resource.megacredits {
     margin: 25px 0 25px 95px;
   }
 

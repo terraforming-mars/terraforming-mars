@@ -10,22 +10,22 @@
       <div><div class="production-box mercury-production-box"><div class="production titanium"></div></div></div>
     </template>
     <template v-else-if="metadata.name === ColonyName.HYGIEA">
-      <div><div class="resource money red-outline"></div></div>
-      <div><div class="resource money red-outline"></div></div>
+      <div><div class="resource megacredits red-outline"></div></div>
+      <div><div class="resource megacredits red-outline"></div></div>
       <div><div class="resource heat red-outline"></div></div>
       <div><div class="resource energy red-outline"></div></div>
-      <div><div class="resource plant red-outline"></div></div>
+      <div><div class="resource plants red-outline"></div></div>
       <div><div class="resource steel red-outline"></div></div>
       <div><div class="resource titanium red-outline"></div></div>
     </template>
     <template v-else-if="metadata.name === ColonyName.EUROPA">
-      <div><div class="production-box"><div class="production money">1</div></div></div>
-      <div><div class="production-box"><div class="production money">1</div></div></div>
+      <div><div class="production-box"><div class="production megacredits">1</div></div></div>
+      <div><div class="production-box"><div class="production megacredits">1</div></div></div>
       <div><div class="production-box"><div class="production energy"></div></div></div>
       <div><div class="production-box"><div class="production energy"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
+      <div><div class="production-box"><div class="production plants"></div></div></div>
+      <div><div class="production-box"><div class="production plants"></div></div></div>
+      <div><div class="production-box"><div class="production plants"></div></div></div>
     </template>
     <template v-else-if="metadata.name === ColonyName.TERRA">
      <div>

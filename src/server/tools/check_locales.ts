@@ -1,8 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import raw_translations from '../../genfiles/translations.json';
 
 const LOCALES_DIR = path.resolve('./src/locales/');
+// Read at runtime rather than imported to save memory at compile time.
+const raw_translations: Record<string, Record<string, string>> =
+  JSON.parse(fs.readFileSync(path.resolve('./src/genfiles/translations.json'), 'utf8'));
 const locales: Array<string> = [];
 
 fs.readdirSync(LOCALES_DIR).forEach((localeName) => {

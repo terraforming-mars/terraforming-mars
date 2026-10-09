@@ -17,7 +17,7 @@ It is possible to run these tools "directly" by using ts-node package
 
 #### Check locales tool compares localizations and shows missing translations.
 
-How to run: `node build/src/server/tools/check_locales.js`
+How to run: `npm run make:json && npx tsx src/server/tools/check_locales.ts`
 
 Result will be something like this:
 ```
@@ -30,7 +30,7 @@ The languages in quotes are missing that translation. (In this case, Spanish, Du
 
 #### If you want to see warnings for given locale only use --locales switch
 
-`node build/src/server/tools/check_locales.js --locales cn,ru`
+`npx tsx src/server/tools/check_locales.ts --locales cn,ru`
 
 as result you will see the warnings for Chinese and Russian languages only.
 

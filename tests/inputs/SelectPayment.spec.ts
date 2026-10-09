@@ -29,6 +29,15 @@ describe('SelectPayment', () => {
       .to.throw(/You do not have that many resources/);
   });
 
+  it('toModel includes player payment options', () => {
+    const selectPayment = new SelectPayment('', 10, {steel: true});
+    expect(selectPayment.toModel(player).paymentOptions).deep.eq({heat: false, lunaTradeFederationTitanium: false, steel: true});
+
+    player.canUseHeatAsMegaCredits = true;
+    player.canUseTitaniumAsMegacredits = true;
+    expect(selectPayment.toModel(player).paymentOptions).deep.eq({heat: true, lunaTradeFederationTitanium: true, steel: true});
+  });
+
   it('Simple, can pay with steel', () => {
     player.megaCredits = 6;
     player.steel = 2;

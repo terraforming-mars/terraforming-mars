@@ -1368,10 +1368,6 @@ export class Player implements IPlayer {
    * Returns information about whether a player can afford to spend money with other costs and ways to pay taken into account.
    */
   private canAffordInternal(options: CanAffordOptions): {redsCost: number, canAfford: boolean} {
-    // TODO(kberg): These are set both here and in SelectPayment. Consolidate, perhaps.
-    options.heat = this.canUseHeatAsMegaCredits;
-    options.lunaTradeFederationTitanium = this.canUseTitaniumAsMegacredits;
-
     const reserveUnits = options.reserveUnits ?? Units.EMPTY;
     if (reserveUnits.heat > 0) {
       // Special-case heat

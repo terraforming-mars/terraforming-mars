@@ -69,7 +69,7 @@ export class ExportConvoy extends Card implements IProjectCard {
     if (microbeCards.length > 0) {
       orOptions.options.push(new SelectOption('Spend 3 microbes').andThen(() => {
         player.game.defer(
-          new RemoveResourcesFromCard(player, CardResource.MICROBE, 3, {source: 'self', log: true, blockable: false})
+          new RemoveResourcesFromCard(player, CardResource.MICROBE, 3, {source: 'self', blockable: false})
             .andThen((response) => {
               if (response.proceed) {
                 player.stock.add(Resource.MEGACREDITS, 20);
@@ -85,7 +85,7 @@ export class ExportConvoy extends Card implements IProjectCard {
     if (animalCards.length > 0) {
       orOptions.options.push(new SelectOption('Spend 2 animals').andThen(() => {
         player.game.defer(
-          new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {source: 'self', log: true, blockable: false})
+          new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {source: 'self', blockable: false})
             .andThen((response) => {
               if (response.proceed) {
                 player.stock.add(Resource.MEGACREDITS, 20);

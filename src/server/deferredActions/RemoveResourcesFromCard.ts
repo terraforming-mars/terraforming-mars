@@ -37,6 +37,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       autoselect?: boolean
       title?: string | Message,
       blockable?: boolean,
+      /** Log the removal. Default true. */
       log?: boolean,
       /** Minimum resources a card must have to be offered as a target. Default 1 — most callers remove "up to count," not exactly count. */
       min?: number,
@@ -48,7 +49,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     this.mandatory = options?.mandatory ?? true;
     this.blockable = options?.blockable ?? true;
     this.autoselect = options?.autoselect ?? true;
-    this.log = options?.log ?? false;
+    this.log = options?.log ?? true;
     this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
     this.min = options?.min ?? 1;
     if (this.source === 'self') {
@@ -99,20 +100,19 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private attack(card: ICard) {
     const target = this.player.game.getCardPlayerOrThrow(card.name);
 
-    // TODO(kberg): Consolidate the blockable in maybeBlock.
-    if (this.blockable === false) {
-      target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
-      this.cb({card: card, owner: target, proceed: true});
-      return;
-    }
-    const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
-    target.maybeBlockAttack(this.player, msg, (proceed) => {
+    const resolve = (proceed: boolean) => {
       if (proceed) {
         target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
-    });
+    };
+    if (this.blockable === false) {
+      resolve(true);
+      return;
+    }
+    const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
+    target.maybeBlockAttack(this.player, msg, resolve);
   }
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all', min: number = 1): Array<ICard> {

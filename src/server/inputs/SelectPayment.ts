@@ -50,8 +50,6 @@ export class SelectPayment extends BasePlayerInput<Payment> {
     if (!isPayment(payment)) {
       throw new InputError('payment is not a valid type');
     }
-    // TODO(kberg): This is called here and in SelectPaymentDeferred.
-    // There's no reason for both.
     if (!player.canSpend(payment, this.reserveUnits)) {
       throw new InputError('You do not have that many resources');
     }

@@ -66,7 +66,6 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
                 new OrOptions(
                   new SelectPayment('Pay 2 M€ to draw a card', 2, {})
                     .andThen((payment) => {
-                    // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
                       spaceOwner.pay(payment);
                       spaceOwner.drawCard();
                       return undefined;

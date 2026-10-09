@@ -214,7 +214,8 @@ export class Server {
     if (waitingFor === undefined) {
       return undefined;
     }
-    // TODO(kberg): in theory this should be in all the other toModel calls.
+    // Only the top-level input's warning reaches the client. Warnings on inputs
+    // nested in OrOptions, AndOptions, or SelectInitialCards are not sent.
     const model = waitingFor.toModel(player);
     model.warning = waitingFor.warning;
     return model;

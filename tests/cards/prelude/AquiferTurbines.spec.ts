@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
+import {LakefrontResorts} from '../../../src/server/cards/turmoil/LakefrontResorts';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean, maxOutOceans, runAllActions, setRulingParty, testGame} from '../../TestingUtils';
@@ -85,6 +86,43 @@ describe('AquiferTurbines', () => {
     const adjacentSpaces = game.board.getAvailableSpacesForOcean(player)
       .filter((space) => game.board.getAdjacentSpaces(space).includes(ocean));
     expect(adjacentSpaces).is.not.empty;
+    expect(selectSpace.spaces).to.have.members(adjacentSpaces);
+
+    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
+
+    expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Lakefront Resorts and Manutech pay for the card', () => {
+    player.playedCards.push(new LakefrontResorts(), new Manutech());
+    player.megaCredits = 2;
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
+
+    expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Lakefront Resorts ocean adjacency pays for the card', () => {
+    const lakefrontResorts = new LakefrontResorts();
+    player.playedCards.push(lakefrontResorts);
+    lakefrontResorts.play(player);
+    const ocean = addOcean(player, '06');
+    player.megaCredits = 0;
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const adjacentSpaces = game.board.getAvailableSpacesForOcean(player)
+      .filter((space) => game.board.getAdjacentSpaces(space).includes(ocean));
     expect(selectSpace.spaces).to.have.members(adjacentSpaces);
 
     selectSpace.cb(selectSpace.spaces[0]);

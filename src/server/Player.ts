@@ -785,6 +785,18 @@ export class Player implements IPlayer {
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
     }
+
+    const deductCardResources = (amt: number | undefined, cardName: CardName) => {
+      if (amt !== undefined && amt > 0) {
+        const card = this.playedCards.get(cardName);
+        if (card) {
+          this.removeResourceFrom(card, amt, {log: true});
+        }
+      }
+    };
+    deductCardResources(selectedCard.additionalProjectCosts?.aeronGenomicsResources, CardName.AERON_GENOMICS);
+    deductCardResources(selectedCard.additionalProjectCosts?.thinkTankResources, CardName.THINK_TANK);
+
     return this.playCard(selectedCard, payment, cardAction);
   }
 

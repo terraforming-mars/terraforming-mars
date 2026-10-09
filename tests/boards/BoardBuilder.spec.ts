@@ -95,7 +95,7 @@ describe('BoardBuilder', () => {
       turmoilExtension: true,
     },
     new SeededRandom(0));
-    expect(board.getSpaceOrThrow('78')).to.not.be.undefined;
+    expect(board.getSpaceOrThrow('c78')).to.not.be.undefined;
   });
 
   it('Venera base spot does not show when Turmoil is not in play', () => {
@@ -106,7 +106,7 @@ describe('BoardBuilder', () => {
       turmoilExtension: false,
     },
     new SeededRandom(0));
-    expect(() => board.getSpaceOrThrow('78')).to.throw();
+    expect(() => board.getSpaceOrThrow('c78')).to.throw();
   });
 
   it('Venera base spot shows when added to deck, even when Pathfinders is not in play', () => {
@@ -118,6 +118,6 @@ describe('BoardBuilder', () => {
       includedCards: [CardName.VENERA_BASE],
     },
     new SeededRandom(0));
-    expect(board.getSpaceOrThrow('78')).to.not.be.undefined;
+    expect(board.getSpaceOrThrow('c78')).to.not.be.undefined;
   });
 });

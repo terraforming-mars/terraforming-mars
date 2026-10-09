@@ -35,6 +35,8 @@ import {Tag} from '../src/common/cards/Tag';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
 import {Spacefarer} from '../src/server/milestones/terraCimmeria/Spacefarer';
+import {SpaceName} from '../src/common/boards/SpaceName';
+import {SpaceType} from '../src/common/boards/SpaceType';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -850,6 +852,23 @@ describe('Game', () => {
       penaltyPeriodMinutes: 2,
       penaltyVPPerPeriod: 1,
     });
+  });
+
+  it('deserializing a game with legacy colony space ids', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: true});
+    const serialized = game.serialize();
+
+    const legacy = (id: SpaceId) => id.startsWith('c') ? id.substring(1) as SpaceId : id;
+    serialized.board.spaces = serialized.board.spaces.map((space) => ({...space, id: legacy(space.id)}));
+    expect(serialized.board.spaces.map((space) => space.id)).includes('01');
+    expect(serialized.board.spaces.map((space) => space.id)).includes('75');
+
+    const deserialized = Game.deserialize(serialized);
+
+    expect(deserialized.board.spaces.map((space) => space.id)).deep.eq(game.board.spaces.map((space) => space.id));
+    expect(deserialized.board.getSpaceOrThrow(SpaceName.GANYMEDE_COLONY).spaceType).eq(SpaceType.COLONY);
+    expect(deserialized.board.getSpaceOrThrow(SpaceName.CERES_SPACEPORT).spaceType).eq(SpaceType.COLONY);
   });
 
   it('deserializing a game with awards', () => {

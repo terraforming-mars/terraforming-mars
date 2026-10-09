@@ -89,5 +89,8 @@ describe('Unity', () => {
 
     const card = new VestaShipyard();
     expect(player.getCardCost(card)).to.eq(card.cost - 2);
+
+    const nonSpaceCard = new SisterPlanetSupport();
+    expect(player.getCardCost(nonSpaceCard)).to.eq(nonSpaceCard.cost);
   });
 });

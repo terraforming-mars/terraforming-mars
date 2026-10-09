@@ -730,10 +730,7 @@ export class Player implements IPlayer {
       }
     });
 
-    // TODO(kberg): put this in a callback.
-    if (card.tags.includes(Tag.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
-      cost -= 2;
-    }
+    cost -= TurmoilHandler.getCardDiscount(this, card);
 
     return Math.max(cost, 0);
   }

@@ -16,6 +16,12 @@ import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 import {cardResourceCSS} from '../common/cardResources';
 
+// Secondary icons that are resources, not tags.
+const secondaryResourceClasses: Partial<Record<Tag | AltSecondaryTag, string>> = {
+  [AltSecondaryTag.FLOATER]: 'card-icon-resource--floater',
+  [AltSecondaryTag.WILD_RESOURCE]: 'card-icon-resource--wild',
+};
+
 export default defineComponent({
   name: 'CardRenderItemComponent',
   props: {
@@ -308,7 +314,8 @@ export default defineComponent({
       // Oxygen is handled specially separately.
       const secondaryTag = this.item.secondaryTag;
       if (secondaryTag !== undefined && !previouslyRendered.includes(secondaryTag)) {
-        result += '<div class="card-icon tag-' + secondaryTag + '"></div>';
+        const secondaryClass = secondaryResourceClasses[secondaryTag] ?? 'tag-' + secondaryTag;
+        result += '<div class="card-icon ' + secondaryClass + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {
         if (this.item.inParens) {

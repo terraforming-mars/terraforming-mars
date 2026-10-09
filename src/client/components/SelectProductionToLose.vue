@@ -34,7 +34,7 @@ const iconClasses: Record<keyof Units, string> = {
   megacredits: 'resource_icon--megacredits',
   steel: 'steel',
   titanium: 'titanium',
-  plants: 'plant',
+  plants: 'plants',
   energy: 'energy',
   heat: 'heat',
 };

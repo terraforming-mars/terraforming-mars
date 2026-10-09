@@ -46,7 +46,7 @@ export const milestoneNames = [
   'T. Collector',
   'Firestarter',
   'Terra Pioneer',
-  'Spacefarer', // TODO(kberg): Rename to T. Spacefarer
+  'T. Spacefarer',
   'Gambler',
 
   // Terra Cimmeria Nova
@@ -109,6 +109,9 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
 
   // TODO(yournamehere): remove after YYYY-MM-DD
   // ['Electrician', 'V. Electrician'],
+
+  // TODO(kberg): remove after 2026-12-01
+  ['Spacefarer', 'T. Spacefarer'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

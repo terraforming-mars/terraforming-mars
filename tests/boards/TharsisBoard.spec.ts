@@ -7,8 +7,8 @@ describe('TharsisBoard', () => {
   it('sanity test', () => {
     const board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
-      {id: '01', spaceType: 'colony', bonus: [], x: -1, y: -1},
-      {id: '02', spaceType: 'colony', bonus: [], x: -1, y: -1},
+      {id: 'c01', spaceType: 'colony', bonus: [], x: -1, y: -1},
+      {id: 'c02', spaceType: 'colony', bonus: [], x: -1, y: -1},
       {id: '03', spaceType: 'land', bonus: [1, 1], x: 4, y: 0},
       {id: '04', spaceType: 'ocean', bonus: [1, 1], x: 5, y: 0},
       {id: '05', spaceType: 'land', bonus: [], x: 6, y: 0},

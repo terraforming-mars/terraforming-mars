@@ -7,8 +7,8 @@ describe('AmazonisBoard', () => {
   it('sanity test', () => {
     const board = AmazonisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
-      {id: '01', spaceType: 'colony', x: -1, y: -1, bonus: []},
-      {id: '02', spaceType: 'colony', x: -1, y: -1, bonus: []},
+      {id: 'c01', spaceType: 'colony', x: -1, y: -1, bonus: []},
+      {id: 'c02', spaceType: 'colony', x: -1, y: -1, bonus: []},
       {id: '03', spaceType: 'land', x: 4, y: 0, bonus: []},
       {id: '04', spaceType: 'ocean', x: 5, y: 0, bonus: [2]},
       {id: '05', spaceType: 'land', x: 6, y: 0, bonus: [2, 2, 2]},

@@ -34,15 +34,15 @@ describe('Board', () => {
   });
 
   it('getSpace', () => {
-    expect(board.getSpaceOrThrow('01').spaceType).eq(SpaceType.COLONY);
-    expect(board.getSpaceOrThrow('01').id).eq('01');
+    expect(board.getSpaceOrThrow('c01').spaceType).eq(SpaceType.COLONY);
+    expect(board.getSpaceOrThrow('c01').id).eq('c01');
     expect(() => board.getSpaceOrThrow(NamedMoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
   });
 
   it('getAdjacentSpaces', () => {
     const expectedAdjacentSpaces: Map<string, Array<string>> = new Map([
-      ['01', []],
-      ['02', []],
+      ['c01', []],
+      ['c02', []],
       ['03', ['04', '09', '08']],
       ['04', ['05', '10', '09', '03']],
       ['05', ['06', '11', '10', '04']],
@@ -104,7 +104,7 @@ describe('Board', () => {
       ['61', ['55', '56', '62', '60']],
       ['62', ['56', '57', '63', '61']],
       ['63', ['57', '58', '62']],
-      ['69', []],
+      ['c69', []],
     ]);
     board.spaces.forEach((space) => {
       const expected = expectedAdjacentSpaces.get(space.id);
@@ -240,7 +240,7 @@ describe('Board', () => {
     const boardJson: SerializedBoard = {
       'spaces': [
         {
-          'id': '01',
+          'id': 'c01',
           'spaceType': SpaceType.COLONY, 'bonus': [],
           'x': -1, 'y': -1, 'player': 'p-name-1-id',
           'tile': {'tileType': 2},
@@ -268,7 +268,7 @@ describe('Board', () => {
     const player2 = new Player('name-2', 'yellow', false, 0, 'p-name-2-id');
 
     const board = new TestBoard(Board.deserialize(boardJson, [player1, player2]).spaces);
-    expect(board.getSpaceOrThrow('01').player).eq(player1);
+    expect(board.getSpaceOrThrow('c01').player).eq(player1);
     expect(board.getSpaceOrThrow('03').player).eq(player2);
   });
 

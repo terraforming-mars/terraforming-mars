@@ -7,6 +7,7 @@ import {Bonus} from '../Bonus';
 import {Policy, IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
+import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -139,6 +140,10 @@ class UnityPolicy03 implements IPolicy {
 class UnityPolicy04 implements IPolicy {
   id = 'up04' as const;
   description = 'Cards with space tags cost 2 M€ less to play';
+
+  getCardDiscount(_player: IPlayer, card: IProjectCard): number {
+    return card.tags.includes(Tag.SPACE) ? 2 : 0;
+  }
 }
 
 export const UNITY_BONUS_1 = new UnityBonus01();

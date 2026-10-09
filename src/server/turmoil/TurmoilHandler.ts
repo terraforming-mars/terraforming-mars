@@ -1,5 +1,6 @@
 import * as constants from '../../common/constants';
 import {ICard} from '../cards/ICard';
+import {IProjectCard} from '../cards/IProjectCard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
@@ -12,6 +13,7 @@ import {MARS_FIRST_POLICY_2} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {REDS_POLICY_2} from './parties/Reds';
+import {UNITY_POLICY_4} from './parties/Unity';
 import {TRSource} from '../../common/cards/TRSource';
 import {IPolicy, policyDescription} from './Policy';
 import {message} from '../logs/MessageBuilder';
@@ -50,6 +52,14 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mp02')) {
       MARS_FIRST_POLICY_2.onCardPlayed(player, selectedCard);
     }
+  }
+
+  public static getCardDiscount(player: IPlayer, card: IProjectCard): number {
+    // PoliticalAgendas Unity P4 hook
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, 'up04')) {
+      return UNITY_POLICY_4.getCardDiscount(player, card);
+    }
+    return 0;
   }
 
   public static resolveTilePlacementCosts(player: IPlayer): void {

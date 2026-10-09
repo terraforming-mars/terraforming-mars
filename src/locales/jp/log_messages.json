@@ -291,7 +291,7 @@
     "${0} decreased ${1} production 1 step to gain 4 ${2}": "${0}が${1}産出-1し、4${2}獲得(企業効果)",
     "${0} removed neutral delegate from ${1}": "${0}が${1}から中立の代議員を取り除いた",
     "${0} removed ${1}'s delegate from ${2}": "${0}が${2}から${1}の代議員を取り除いた",
-    "${0} was discarded as ${1} could not play it.": "${1}がプレイ出来なかった為、${0}は捨て札になりました.",
+    "Discarding ${0} as you could not play it.": "プレイ出来ないため、${0}を捨て札にします。",
     "${0} was discarded.": "${0}は捨て札になりました",
     "${0} is replaying ${1}": "${0}は${1}をリプレイ",
     "${0} discarded ${1}": "${0}が${1}を捨て札へ",

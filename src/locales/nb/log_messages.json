@@ -268,7 +268,7 @@
 	"${0} decreased ${1} production 1 step to gain 4 ${2}": "${0} senket ${1}-produksjonen med 1 trinn for å få 4 ${2}",
 	"${0} removed neutral delegate from ${1}": "${0} fjernet nøytral delegat fra ${1}",
 	"${0} removed ${1}'s delegate from ${2}": "${0} fjernet ${1}s delegat fra ${2}",
-	"${0} was discarded as ${1} could not play it.": "${0} ble kastet fordi ${1} ikke kunne spille det.",
+	"Discarding ${0} as you could not play it.": "Kaster ${0} fordi du ikke kunne spille det.",
 	"${0} was discarded.": "${0} ble kastet.",
 	"${0} is replaying ${1}": "${0} spiller ${1} på nytt",
 	"${0} discarded ${1}": "${0} kastet ${1}",

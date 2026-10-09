@@ -308,7 +308,7 @@
   "${0} replaced ${1} neutral delegate(s) in ${2} area": "${0} lecserélt ${1} semleges küldötett a(z) ${2} pártban.",
   "${0} removed neutral delegate from ${1}": "${0} eltávolította a semleges küldöttet a(z) ${1} pártból.",
   "${0} removed ${1}'s delegate from ${2}": "${0} eltávolította ${1} küldöttét a(z) ${2} pártból.",
-  "${0} was discarded as ${1} could not play it.": "${0} el lett dobatva ${1} miatt, nem lehet kijátszani.",
+  "Discarding ${0} as you could not play it.": "${0} eldobva, mert nem tudod kijátszani.",
   "${0} was discarded.": "${0} el lett dobva.",
   "${0} is replaying ${1}": "${0} újrajátsza ${1}-t.",
   "${0} discarded ${1}": "${0} eldobta a(z) ${1} kártyát.",

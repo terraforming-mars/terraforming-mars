@@ -640,7 +640,7 @@ export class UnderworldExpansion {
     const tokens = player.underworldData.tokens;
     const [token] = tokens.splice(idx, 1);
     if (token.active) {
-      // TODO(kberg): Log the discard.
+      player.game.log('${0} discarded ${1}, ending its bonus for this generation', (b) => b.player(player).undergroundToken(token.token));
       player.underworldData.activeBonus = undefined;
     }
     if (token.token === 'sciencetag') {

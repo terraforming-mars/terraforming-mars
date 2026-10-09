@@ -20,8 +20,7 @@ export class DrawCeoCardFromDeck extends DeferredAction<ICeoCard | undefined> {
         return true;
       }
       this.player.game.ceoDeck.discard(card);
-      // TODO(kberg): rewrite to "Discarding ${1} as you could not play it."
-      game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(card).player(this.player), {reservedFor: this.player});
+      game.log('Discarding ${0} as you could not play it.', (b) => b.card(card), {reservedFor: this.player});
       return false;
     });
 

@@ -13,7 +13,6 @@
       :value="player.steelValue"
       :resourceProtection="player.protectedResources.steel"
       :productionProtection="player.protectedProduction.steel"/>
-    <!-- TODO LUNA TRADE FEDERATION -->
     <PlayerResource
       :type="Resource.TITANIUM"
       :count="player.titanium"
@@ -62,7 +61,6 @@ export default defineComponent({
     Resource(): typeof Resource {
       return Resource;
     },
-    // TODO LUNA TRADE FEDERATION
     canUseHeatAsMegaCredits(): boolean {
       return this.player.tableau.some((card) => card.name === CardName.HELION);
     },

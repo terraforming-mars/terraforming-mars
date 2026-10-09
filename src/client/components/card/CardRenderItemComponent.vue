@@ -174,7 +174,6 @@ export default defineComponent({
           return ['card-resource-trade'];
         }
       case CardRenderItemType.COLONIES:
-        // TODO (chosta): think about an abstraction for item size
         if (this.item.size === Size.SMALL) {
           return ['card-resource-colony', 'card-resource-colony--S'];
         } else {

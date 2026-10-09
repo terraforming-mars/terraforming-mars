@@ -5,7 +5,7 @@ import {IAward} from '../IAward';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';
-  public readonly description = 'Play the most cards that reduce other players\' resources or production, INCLUDING EVENTS';
+  public readonly description = 'Have the most cards in play that reduce other players\' resources or production, INCLUDING EVENTS';
 
   public getScore(player: IPlayer): number {
     return player.tableau.filter(Warmonger.include).length + player.warmongerCards;

@@ -428,7 +428,7 @@ export class Executor implements BehaviorExecutor {
       delete remainder['removeResourcesFromAnyCard'];
       const source = r.source ?? 'self';
       const count = ctx.count(r.count ?? 1);
-      player.game.defer(new RemoveResourcesFromCard(player, r.type, count, {source, blockable: source !== 'self', log: true, min: count}))
+      player.game.defer(new RemoveResourcesFromCard(player, r.type, count, {source, blockable: source !== 'self', min: count}))
         .andThen((response) => {
           if (response.proceed) {
             this.execute(remainder, player, inputCard);

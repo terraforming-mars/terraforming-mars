@@ -23,6 +23,7 @@ import {Player} from '../src/server/Player';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
+import {SelectResource} from '../src/server/inputs/SelectResource';
 import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
@@ -750,6 +751,21 @@ describe('Game', () => {
 
     expect(player.cardsInHand).has.length(4);
     expect(player.plants).eq(1);
+    expect(player.titanium).eq(1);
+  });
+
+  it('grants the standard resource space bonus', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+
+    game.addTile(player, space, {tileType: TileType.GREENERY});
+    runAllActions(game);
+
+    const selectResource = cast(player.popWaitingFor(), SelectResource);
+    expect(selectResource.include).to.have.members(['megacredits', 'steel', 'titanium', 'plants', 'energy', 'heat']);
+    selectResource.process({type: 'resource', resource: 'titanium'});
     expect(player.titanium).eq(1);
   });
 

@@ -20,6 +20,11 @@ export const MIN_TEMPERATURE = -30;
 export const MIN_OXYGEN_LEVEL = 0;
 export const MIN_VENUS_SCALE = 0;
 export const MAX_VENUS_SCALE = 30;
+export const MAX_OCEAN_TILES_AMAZONIS = 11;
+export const MAX_TEMPERATURE_AMAZONIS = 14;
+export const MAX_OXYGEN_LEVEL_AMAZONIS = 18;
+// As displayed. Internally the Venus scale reaches 36 on Amazonis Planitia; see venusScaleLevelForDisplay.
+export const MAX_VENUS_SCALE_AMAZONIS = 33;
 
 export const OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS = 8;
 export const TEMPERATURE_FOR_OCEAN_BONUS = 0;

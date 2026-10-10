@@ -72,6 +72,24 @@ describe('CreateGameForm', () => {
     expect(wrapper.exists()).to.be.true;
   });
 
+  for (const run of [
+    {nodeEnv: 'development', offered: true},
+    {nodeEnv: 'production', offered: false},
+  ]) {
+    it(`offers Amazonis Planitia only in development builds (${run.nodeEnv})`, () => {
+      const nodeEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = run.nodeEnv;
+      try {
+        const wrapper = shallowMount(CreateGameForm, {
+          ...globalConfig,
+        });
+        expect((wrapper.vm as any).boards.includes(BoardName.AMAZONIS_PLANITIA)).eq(run.offered);
+      } finally {
+        process.env.NODE_ENV = nodeEnv;
+      }
+    });
+  }
+
   it('restores the last saved game settings on load', async () => {
     createGameSettingsStorage.save(createNewGameConfig({
       expansions: {...DEFAULT_EXPANSIONS, venus: true},

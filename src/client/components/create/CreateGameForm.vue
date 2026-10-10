@@ -811,6 +811,8 @@ export default defineComponent({
         BoardName.TERRA_CIMMERIA_NOVA,
         BoardName.ARABIA_TERRA,
         BoardName.AMAZONIS,
+        // TODO(kberg): Offer Amazonis Planitia in every build once it's ready to play.
+        ...(process.env.NODE_ENV === 'development' ? [BoardName.AMAZONIS_PLANITIA] : []),
         BoardName.TERRA_CIMMERIA,
         BoardName.VASTITAS_BOREALIS,
         BoardName.HOLLANDIA,

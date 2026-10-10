@@ -19,6 +19,7 @@ import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
 import {RouteError} from './RouteError';
+import {isProduction} from '@/server/utils/server';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
 import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
 
@@ -128,6 +129,10 @@ export class ApiCreateGame extends Handler {
       this.validateCustomLists(gameReq);
       if (gameReq.escapeVelocity !== undefined && hasNegativeEscapeVelocityOption(gameReq.escapeVelocity)) {
         throw RouteError.badRequest('Escape Velocity values cannot be negative.');
+      }
+      // TODO(kberg): Remove once Amazonis Planitia is ready to play. Until then, only development servers create it.
+      if (gameReq.board === BoardName.AMAZONIS_PLANITIA && isProduction()) {
+        throw RouteError.badRequest('Amazonis Planitia is not available yet.');
       }
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);

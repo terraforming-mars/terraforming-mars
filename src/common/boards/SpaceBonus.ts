@@ -34,6 +34,8 @@ export enum SpaceBonus {
     COLONY, // 17
     // TODO(kberg): Rename to TEMPERATURE after 2026-12-01
     TEMPERATURE_4MC, // 18 Vastitas Borealis and Vastitas Borealis Nova
+    // Amazonis Planitia-specific
+    STANDARD_RESOURCE, // 19 The player chooses any one standard resource.
 }
 
 const TO_STRING_MAP = {
@@ -56,6 +58,7 @@ const TO_STRING_MAP = {
   [SpaceBonus.DELEGATE]: 'Delegate',
   [SpaceBonus.COLONY]: 'Colony',
   [SpaceBonus.TEMPERATURE_4MC]: 'Temperature',
+  [SpaceBonus.STANDARD_RESOURCE]: 'Standard resource',
 } satisfies Record<SpaceBonus, string>;
 
 export namespace SpaceBonus {

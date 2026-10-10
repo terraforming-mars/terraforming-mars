@@ -281,8 +281,6 @@
   "Have the most cards in play that reduce other players' resources or production, INCLUDING EVENTS": "Eniten kortteja pelattua jotka vähentävät muiden pelaajien resursseja tai tuotantoa, TAPAHTUMAT MUKAAN LUKIEN.",
   "Forecaster": "Ennustaja",
   "Have the most cards with requirements in play": "Eniten kortteja vaatimuksilla pelissä.",
-  "Edgedancer": "Reunatanssija",
-  "Own the most tiles on the edges of the board": "Eniten laattoja laudan reunoilla.",
   "Visionary": "Visionääri",
   "Have the most cards in hand": "Eniten kortteja kädessä.",
   "Naturalist": "Luonnontieteilijä",
@@ -324,7 +322,7 @@
   "Traveller": "Matkustaja",
   "Have the most Jovian and Earth tags in play combined": "Eniten Jupiter- ja Maa-ympyröitä pelissä yhteensä (tapahtumakortteja ei lasketa).",
   "Suburbian": "Esikaupunkilainen",
-  "Most tiles on areas along the edges of the map.": "Eniten laattoja kartan reunoilla.",
+  "Most tiles on areas along the edges of the map": "Eniten laattoja kartan reunoilla.",
 
   "Actions": "Toiminnot",
   "Hide active cards": "Piilota aktiiviset kortit",

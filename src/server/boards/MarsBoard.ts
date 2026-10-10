@@ -240,17 +240,28 @@ export class MarsBoard extends Board {
   }
 
   private computeEdges(): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => {
-      if (space.y === 0 || space.y === 8 || space.x === 8) {
+    const boardSpaces = this.spaces.filter((s) => s.spaceType !== SpaceType.COLONY);
+    if (boardSpaces.length === 0) {
+      return [];
+    }
+    const maxY = Math.max(...boardSpaces.map((s) => s.y));
+    const maxX = Math.max(...boardSpaces.map((s) => s.x));
+    const halfY = maxY / 2;
+    return boardSpaces.filter((space) => {
+      // top and bottom rows
+      if (space.y === 0 || space.y === maxY) {
         return true;
       }
-      // left side is tricky.
-      // top-left is easy with math. Look at the map.
-      if (space.y + space.x === 4) {
+      // right column
+      if (space.x === maxX) {
         return true;
       }
-      // bottom-left is also easy with math. Look at the map.
-      if (space.y - space.x === 4) {
+      // top-left diagonal: y + x = halfY
+      if (space.y + space.x === halfY) {
+        return true;
+      }
+      // bottom-left diagonal: y - x = halfY
+      if (space.y - space.x === halfY) {
         return true;
       }
       return false;

@@ -6,7 +6,7 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {MultiSet} from 'mnemonist';
 import {SpaceName} from '../../src/common/boards/SpaceName';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
-import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
+import {BoardBuilder, preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
 import {CardName} from '../../src/common/cards/CardName';
 
@@ -119,5 +119,29 @@ describe('BoardBuilder', () => {
     },
     new SeededRandom(0));
     expect(board.getSpaceOrThrow('c78')).to.not.be.undefined;
+  });
+
+  it('tilesPerRow parameter is respected', () => {
+    const builder = new BoardBuilder(DEFAULT_GAME_OPTIONS, new SeededRandom(0), [3, 4, 5, 4, 3]);
+    for (let i = 0; i < 19; i++) {
+      builder.land();
+    }
+    const spaces = builder.build().filter((s) => s.spaceType !== SpaceType.COLONY);
+    expect(spaces).has.length(19);
+
+    // Row 0: 3 tiles, xOffset = 5-3 = 2, x in {2, 3, 4}
+    const row0 = spaces.filter((s) => s.y === 0);
+    expect(row0).has.length(3);
+    expect(row0.map((s) => s.x)).to.have.members([2, 3, 4]);
+
+    // Row 2: 5 tiles, xOffset = 0, x in {0..4}
+    const row2 = spaces.filter((s) => s.y === 2);
+    expect(row2).has.length(5);
+    expect(row2.map((s) => s.x)).to.have.members([0, 1, 2, 3, 4]);
+
+    // Row 4: 3 tiles, xOffset = 2, x in {2, 3, 4}
+    const row4 = spaces.filter((s) => s.y === 4);
+    expect(row4).has.length(3);
+    expect(row4.map((s) => s.x)).to.have.members([2, 3, 4]);
   });
 });

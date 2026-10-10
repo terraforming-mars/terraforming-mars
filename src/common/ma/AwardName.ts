@@ -52,8 +52,8 @@ export const awardNames = [
   // NB: the fifth award for Terra Cimmeria is Incorporator, a modular award.
 
   // Vastitas Borealis
+  // NB: the second award for Vastitas Borealis is Suburbian, a modular award.
   'Forecaster',
-  'Edgedancer',
   'Visionary',
   'Naturalist',
   'Voyager',
@@ -85,7 +85,7 @@ export const awardNames = [
   'Mogul',
   'Physicist',
   'Politician',
-  'Suburbian', // Matches Edgedancer.
+  'Suburbian',
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2
 ] as const;
 
@@ -97,6 +97,9 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
 
   // TODO(yournamehere): remove after YYYY-MM-DD
   // ['EdgeLord', 'Excavator'],
+
+  // TODO(kberg): remove after 2026-12-01
+  ['Edgedancer', 'Suburbian'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

@@ -24,7 +24,6 @@ import {Promoter} from './arabiaTerra/Promoter';
 import {Zoologist} from './arabiaTerra/Zoologist';
 import {AManufacturer} from './arabiaTerra/Manufacturer';
 import {Forecaster} from './Forecaster';
-import {Edgedancer} from './Edgedancer';
 import {Visionary} from './Visionary';
 import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
@@ -78,7 +77,6 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Cultivator': {Factory: Cultivator, random: 'both'},
     'Curator': {Factory: Curator},
     'Desert Settler': {Factory: DesertSettler},
-    'Edgedancer': {Factory: Edgedancer},
     'Electrician': {Factory: Electrician, random: 'modular'},
     'Entrepreneur': {Factory: Entrepreneur, compatibility: 'ares'},
     'Estate Dealer': {Factory: EstateDealer, random: 'both'},
@@ -125,8 +123,8 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.AMAZONIS]: ['Curator', 'A. Engineer', 'Promoter', 'Tourist', 'A. Zoologist'],
     [BoardName.ARABIA_TERRA]: ['Cosmic Settler', 'Botanist', 'Promoter', 'Zoologist', 'A. Manufacturer'],
     [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
-    [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
-    [BoardName.UTOPIA_PLANITIA]: ['Edgedancer', 'Investor', 'Botanist', 'Incorporator', 'Metropolist'],
+    [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Suburbian', 'Visionary', 'Naturalist', 'Voyager'],
+    [BoardName.UTOPIA_PLANITIA]: ['Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist'],
     [BoardName.VASTITAS_BOREALIS_NOVA]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Blacksmith'],
     [BoardName.TERRA_CIMMERIA_NOVA]: ['Electrician', 'Founder', 'Mogul', 'A. Zoologist', 'Forecaster'],
     [BoardName.HOLLANDIA]: [],

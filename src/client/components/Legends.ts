@@ -25,4 +25,5 @@ export const LEGENDS = {
     {text: ['Hadriacus', 'Mons'], position: [90, 365], line: {from: [48, -7], to: [63, -18]}},
   ],
   [BoardName.HOLLANDIA]: [],
+  [BoardName.AMAZONIS_PLANITIA]: [],
 } satisfies Record<BoardName, Array<Key>>;

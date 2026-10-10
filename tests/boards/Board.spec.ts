@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import * as constants from '@/common/constants';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
@@ -370,4 +371,11 @@ describe('Board', () => {
       expect(spaceIds).to.have.members(run.spaces);
     });
   }
+
+  it('standard board still uses original parameter limits (regression)', () => {
+    const [stdGame] = testGame(2);
+    expect(stdGame.max.temperature).to.eq(constants.MAX_TEMPERATURE);
+    expect(stdGame.max.oxygen).to.eq(constants.MAX_OXYGEN_LEVEL);
+    expect(stdGame.max.oceans).to.eq(constants.MAX_OCEAN_TILES);
+  });
 });

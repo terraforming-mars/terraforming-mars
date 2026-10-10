@@ -73,7 +73,9 @@ export class ApiCreateGame extends Handler {
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
-    const allBoards = Object.values(BoardName);
+    const allBoards = Object.values(BoardName)
+      // TODO(kberg): Re-enable Amazonis Planitia once it's offered in the create-game form.
+      .filter((name) => name !== BoardName.AMAZONIS_PLANITIA);
 
     if (board === RandomBoardOption.ALL) {
       return allBoards;

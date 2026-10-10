@@ -9,6 +9,8 @@ import {runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 describe('CuriosityII', () => {
   let card: CuriosityII;
@@ -81,5 +83,16 @@ describe('CuriosityII', () => {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Triggers when placing a tile on a standard resource space', () => {
+    const space = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    game.addCity(player, space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: 'steel'});
+    runAllActions(game);
+
+    cast(player.popWaitingFor(), OrOptions);
   });
 });

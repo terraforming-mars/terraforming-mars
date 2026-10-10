@@ -34,11 +34,11 @@
             </div>
 
             <div class="global-numbers-oceans">
-              <span v-if="oceans_count === constants.MAX_OCEAN_TILES">
+              <span v-if="oceans_count === globalParameterMaximums.oceans">
                 <img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
               </span>
               <span v-else>
-                {{oceans_count}}/{{constants.MAX_OCEAN_TILES}}
+                {{oceans_count}}/{{globalParameterMaximums.oceans}}
               </span>
             </div>
 
@@ -353,6 +353,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import * as constants from '@/common/constants';
+import {getGlobalParameterMaximums} from '@/common/boards/GlobalParameterMaximums';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {AresData} from '@/common/ares/AresData';
 import {SpaceModel} from '@/common/models/SpaceModel';
@@ -441,13 +442,13 @@ export default defineComponent({
       switch (targetParameter) {
       case 'oxygen':
         startValue = constants.MIN_OXYGEN_LEVEL;
-        endValue = constants.MAX_OXYGEN_LEVEL;
+        endValue = this.globalParameterMaximums.oxygen;
         step = 1;
         curValue = this.oxygen_level;
         break;
       case 'temperature':
         startValue = constants.MIN_TEMPERATURE;
-        endValue = constants.MAX_TEMPERATURE;
+        endValue = this.globalParameterMaximums.temperature;
         step = 2;
         curValue = this.temperature;
         break;
@@ -461,6 +462,12 @@ export default defineComponent({
         throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
+      // Above 30%, the Venus scale moves 1% per step (Amazonis Planitia goes to 33%).
+      if (targetParameter === 'venus') {
+        for (let value = this.globalParameterMaximums.venus; value > endValue; value--) {
+          values.push(new GlobalParamLevel(value, value === curValue, value.toString()));
+        }
+      }
       for (let value = endValue; value >= startValue; value -= step) {
         strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
         values.push(
@@ -478,15 +485,19 @@ export default defineComponent({
     },
     oceansValue() {
       const oceans_count = this.oceans_count || 0;
-      const leftover = constants.MAX_OCEAN_TILES - oceans_count;
+      const leftover = this.globalParameterMaximums.oceans - oceans_count;
       if (leftover === 0) {
         return '<img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
       } else {
-        return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
+        return `${oceans_count}/${this.globalParameterMaximums.oceans}`;
       }
     },
   },
   computed: {
+    // The per-map maximum values of the global parameters (the larger maps raise them).
+    globalParameterMaximums() {
+      return getGlobalParameterMaximums(this.boardName);
+    },
     BoardName(): typeof BoardName {
       return BoardName;
     },

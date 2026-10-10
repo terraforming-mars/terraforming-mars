@@ -15,16 +15,17 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
 import {GlobalParameter} from '@/common/GlobalParameter';
+import {BoardName} from '@/common/boards/BoardName';
+import {getGlobalParameterMaximums} from '@/common/boards/GlobalParameterMaximums';
 
 type BaseGlobalParameter = 'temperature' | 'oxygen' | 'oceans' | 'venus';
 
-const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconClass: string}> = {
-  [GlobalParameter.TEMPERATURE]: {max: MAX_TEMPERATURE, title: 'Temperature', iconClass: 'temperature-tile'},
-  [GlobalParameter.OXYGEN]: {max: MAX_OXYGEN_LEVEL, title: 'Oxygen Level', iconClass: 'oxygen-tile'},
-  [GlobalParameter.OCEANS]: {max: MAX_OCEAN_TILES, title: 'Oceans', iconClass: 'ocean-tile'},
-  [GlobalParameter.VENUS]: {max: MAX_VENUS_SCALE, title: 'Venus Scale', iconClass: 'venus-tile'},
+const attributes: Record<BaseGlobalParameter, {title: string, iconClass: string}> = {
+  [GlobalParameter.TEMPERATURE]: {title: 'Temperature', iconClass: 'temperature-tile'},
+  [GlobalParameter.OXYGEN]: {title: 'Oxygen Level', iconClass: 'oxygen-tile'},
+  [GlobalParameter.OCEANS]: {title: 'Oceans', iconClass: 'ocean-tile'},
+  [GlobalParameter.VENUS]: {title: 'Venus Scale', iconClass: 'venus-tile'},
 };
 
 export default defineComponent({
@@ -38,10 +39,25 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    boardName: {
+      type: String as () => BoardName,
+      required: true,
+    },
   },
   computed: {
+    // Maximum value of this parameter, which depends on the map (the larger maps raise them).
+    max(): number {
+      const maximums = getGlobalParameterMaximums(this.boardName);
+      const byParam: Record<BaseGlobalParameter, number> = {
+        [GlobalParameter.TEMPERATURE]: maximums.temperature,
+        [GlobalParameter.OXYGEN]: maximums.oxygen,
+        [GlobalParameter.OCEANS]: maximums.oceans,
+        [GlobalParameter.VENUS]: maximums.venus,
+      };
+      return byParam[this.param];
+    },
     isMax(): boolean {
-      return this.value === attributes[this.param].max;
+      return this.value === this.max;
     },
     title(): string {
       return attributes[this.param].title;

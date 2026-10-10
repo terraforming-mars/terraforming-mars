@@ -35,6 +35,7 @@ import {Tag} from '../src/common/cards/Tag';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
 import {Spacefarer} from '../src/server/milestones/terraCimmeria/Spacefarer';
+import {Suburbian} from '../src/server/awards/modular/Suburbian';
 import {SpaceName} from '../src/common/boards/SpaceName';
 import {SpaceType} from '../src/common/boards/SpaceType';
 
@@ -1007,6 +1008,33 @@ describe('Game', () => {
     expect(deserialized.claimedMilestones).has.length(1);
     expect(deserialized.claimedMilestones[0].milestone.name).eq('T. Spacefarer');
     expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
+  });
+
+  it('deserializing a game with renamed awards', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    const suburbian = new Suburbian();
+
+    game.awards.unshift(suburbian);
+
+    game.fundedAwards.push({
+      award: suburbian,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    expect(serialized.awards[0]).eq('Suburbian');
+    expect(serialized.fundedAwards[0].name).eq('Suburbian');
+
+    serialized.awards[0] = 'Edgedancer' as any;
+    serialized.fundedAwards[0].name = 'Edgedancer' as any;
+
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.awards[0]).deep.eq(suburbian);
+    expect(deserialized.fundedAwards).has.length(1);
+    expect(deserialized.fundedAwards[0].award.name).eq('Suburbian');
+    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
   });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572

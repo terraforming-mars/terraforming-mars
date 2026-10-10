@@ -6,6 +6,7 @@ import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {CardResource} from '../common/CardResource';
 import {From} from './logs/From';
+import {SpaceType} from '@/common/boards/SpaceType';
 
 function resourceString(resource: CardResource | undefined, qty: number): string {
   const result = resource ?? 'resource';
@@ -38,7 +39,7 @@ export class LogHelper {
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
-    if (space.x === -1 && space.y === -1) {
+    if (space.spaceType === SpaceType.COLONY) {
       return;
     }
     // Skip solo play random tiles

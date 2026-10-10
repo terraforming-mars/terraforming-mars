@@ -11,8 +11,6 @@ describe('BoardSpaceTile', () => {
       props: {
         space: {
           id: '01',
-          x: 0,
-          y: 0,
           bonus: [],
           color: undefined,
           tileType: undefined,

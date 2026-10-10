@@ -13,8 +13,6 @@ describe('BoardSpace', () => {
         space: {
           id: 'm01',
           bonus: [],
-          x: 0,
-          y: 0,
           spaceType: SpaceType.LAND,
         },
         tileView: 'show',
@@ -31,8 +29,6 @@ describe('BoardSpace', () => {
         space: {
           id: 'm01',
           bonus: [],
-          x: 0,
-          y: 0,
           spaceType: SpaceType.LAND,
         },
         tileView: 'hide',
@@ -49,8 +45,6 @@ describe('BoardSpace', () => {
         space: {
           id: 'm01',
           bonus: [SpaceBonus.STEEL],
-          x: 0,
-          y: 0,
           spaceType: SpaceType.LAND,
           cube: 'martian-nature-wonders',
         },

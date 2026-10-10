@@ -13,8 +13,6 @@ import {TileType} from '@/common/TileType';
 const spaces: SpaceModel[] = [
   {
     id: 'c01',
-    x: 1,
-    y: 1,
     bonus: [],
     spaceType: SpaceType.COLONY,
     color: undefined,
@@ -23,8 +21,6 @@ const spaces: SpaceModel[] = [
   },
   {
     id: 'c02',
-    x: 2,
-    y: 1,
     bonus: [],
     spaceType: SpaceType.COLONY,
     color: undefined,
@@ -33,8 +29,6 @@ const spaces: SpaceModel[] = [
   },
   {
     id: 'c69',
-    x: 3,
-    y: 1,
     bonus: [],
     spaceType: SpaceType.COLONY,
     color: undefined,
@@ -43,8 +37,6 @@ const spaces: SpaceModel[] = [
   },
   {
     id: '04',
-    x: 3,
-    y: 1,
     bonus: [],
     spaceType: SpaceType.OCEAN,
     color: undefined,

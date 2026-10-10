@@ -12,8 +12,6 @@ describe('MoonSpace', () => {
         space: {
           id: 'm01',
           bonus: [],
-          x: 0,
-          y: 0,
           spaceType: SpaceType.LAND,
         },
       },
@@ -29,8 +27,6 @@ describe('MoonSpace', () => {
         space: {
           id: 'm01',
           bonus: [],
-          x: 0,
-          y: 0,
           spaceType: SpaceType.LAND,
         },
         tileView: 'hide',

@@ -13,8 +13,6 @@ const model: MoonModel = {
   spaces: [
     {
       id: 'm01',
-      x: 1,
-      y: 1,
       bonus: [],
       spaceType: SpaceType.COLONY,
       color: undefined,
@@ -23,8 +21,6 @@ const model: MoonModel = {
     },
     {
       id: 'm37',
-      x: 2,
-      y: 1,
       bonus: [],
       spaceType: SpaceType.COLONY,
       color: undefined,
@@ -33,8 +29,6 @@ const model: MoonModel = {
     },
     {
       id: 'm02',
-      x: 3,
-      y: 1,
       bonus: [],
       spaceType: SpaceType.LUNAR_MINE,
       color: undefined,
@@ -43,8 +37,6 @@ const model: MoonModel = {
     },
     {
       id: 'm03',
-      x: 3,
-      y: 1,
       bonus: [],
       spaceType: SpaceType.LAND,
       color: undefined,

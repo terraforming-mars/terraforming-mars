@@ -47,7 +47,7 @@ export class AresHandler {
     }
     const adjacentPlayer = adjacentSpace.player;
     if (adjacentPlayer === undefined) {
-      throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
+      throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.id} ${adjacentSpace.adjacency.bonus}`);
     }
 
     const addResourceToCard = function(player: IPlayer, resourceType: CardResource, resourceAsText: string) {

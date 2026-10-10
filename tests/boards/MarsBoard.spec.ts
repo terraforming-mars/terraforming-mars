@@ -4,6 +4,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {MarsBoard} from '../../src/server/boards/MarsBoard';
+import {BoardBuilder} from '../../src/server/boards/BoardBuilder';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunities';
@@ -107,6 +108,24 @@ describe('MarsBoard', () => {
         '46', '52',
         '53', '58',
         '59', '60', '61', '62', '63',
+      ]);
+  });
+
+  it('edges on a board of another size', () => {
+    // Rows of 3, 4, 5, 4, 3 tiles: ids '03'..'21', row by row.
+    const builder = new BoardBuilder(DEFAULT_GAME_OPTIONS, new SeededRandom(0), [3, 4, 5, 4, 3]);
+    for (let i = 0; i < 19; i++) {
+      builder.land();
+    }
+    const smallBoard = new MarsBoard(builder.build());
+
+    expect(smallBoard.getEdges().map(toID)).to.have.members(
+      [
+        '03', '04', '05',
+        '06', '09',
+        '10', '14',
+        '15', '18',
+        '19', '20', '21',
       ]);
   });
 

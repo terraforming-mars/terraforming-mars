@@ -130,6 +130,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.VASTITAS_BOREALIS_NOVA]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Blacksmith'],
     [BoardName.TERRA_CIMMERIA_NOVA]: ['Electrician', 'Founder', 'Mogul', 'A. Zoologist', 'Forecaster'],
     [BoardName.HOLLANDIA]: [],
+    [BoardName.AMAZONIS_PLANITIA]: [],
   },
   expansions: {
     venus: ['Venuphile'],

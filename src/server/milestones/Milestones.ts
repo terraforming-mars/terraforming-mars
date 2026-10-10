@@ -58,6 +58,7 @@ import {Purifier} from './Purifier';
 import {VSpacefarer} from './VSpacefarer';
 import {Agronomist} from './Agronomist';
 import {Merchant} from './modular/Merchant';
+import {Merchant3} from '@/server/milestones/Merchant3';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
@@ -100,14 +101,15 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Hydrologist': {Factory: Hydrologist, random: 'modular'},
     'Irrigator': {Factory: Irrigator, deprecated: true},
     'Land Specialist': {Factory: LandSpecialist},
-    'Landshaper': {Factory: Landshaper, random: 'modular'},
+    'Landshaper': {Factory: Landshaper, random: 'both'},
     'Legend': {Factory: Legend},
     'Legend4': {Factory: Legend4, random: 'modular'},
-    'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil', random: 'modular'},
+    'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil', random: 'both'},
     'Lunarchitect': {Factory: Lunarchitect, compatibility: 'moon'},
     'Martian': {Factory: Martian, compatibility: 'pathfinders'},
     'Mayor': {Factory: Mayor, random: 'both'},
     'Merchant': {Factory: Merchant, random: 'modular'},
+    'Merchant3': {Factory: Merchant3},
     'Metallurgist': {Factory: Metallurgist, random: 'modular'},
     'Minimalist': {Factory: Minimalist},
     'Networker': {Factory: Networker, compatibility: 'ares'},
@@ -127,7 +129,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'T. Spacefarer': {Factory: Spacefarer},
     'Spacefarer4': {Factory: Spacefarer4, random: 'modular'},
     'Specialist': {Factory: Specialist},
-    'Sponsor': {Factory: Sponsor, random: 'modular'},
+    'Sponsor': {Factory: Sponsor, random: 'both'},
     'T. Collector': {Factory: Collector},
     'Tactician': {Factory: Tactician},
     'Tactician4': {Factory: Tactician4, random: 'modular'},
@@ -135,7 +137,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Terraformer': {Factory: Terraformer},
     'Terraformer29': {Factory: Terraformer29, random: 'modular'},
     'Terran': {Factory: Terran},
-    'Terran5': {Factory: Terran5, random: 'modular'},
+    'Terran5': {Factory: Terran5, random: 'both'},
     'Thawer': {Factory: Thawer, random: 'modular'},
     'Trader': {Factory: Trader, random: 'modular'},
     'Tradesman': {Factory: Tradesman},
@@ -158,7 +160,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.VASTITAS_BOREALIS_NOVA]: ['Agronomist', 'V. Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
     [BoardName.TERRA_CIMMERIA_NOVA]: ['Planetologist', 'Architect', 'Coastguard', 'C. Forester', 'Fundraiser'],
     [BoardName.HOLLANDIA]: [],
-    [BoardName.AMAZONIS_PLANITIA]: [],
+    [BoardName.AMAZONIS_PLANITIA]: ['Terran5', 'Landshaper', 'Merchant3', 'Sponsor', 'Lobbyist'],
   },
   expansions: {
     venus: ['Hoverlord'],

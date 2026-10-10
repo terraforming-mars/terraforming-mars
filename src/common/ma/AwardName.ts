@@ -79,9 +79,11 @@ export const awardNames = [
   'Electrician',
   'Founder',
   'Incorporator',
+  'Innovator',
   'Investor',
   'Metropolist',
   'Mogul',
+  'Physicist',
   'Politician',
   'Suburbian', // Matches Edgedancer.
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2

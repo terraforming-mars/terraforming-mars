@@ -79,6 +79,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.TERRA_CIMMERIA_NOVA:
     case BoardName.VASTITAS_BOREALIS:
     case BoardName.VASTITAS_BOREALIS_NOVA:
+    case BoardName.AMAZONIS_PLANITIA:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
     default:

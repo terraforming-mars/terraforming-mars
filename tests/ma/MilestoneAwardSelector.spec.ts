@@ -224,6 +224,12 @@ describe('MilestoneAwardSelector', () => {
     expect(milestones).contains('Geologist');
   });
 
+  it('Amazonis Planitia uses its own milestones and awards when not randomized', () => {
+    const mas = choose({boardName: BoardName.AMAZONIS_PLANITIA, randomMA: RandomMAOptionType.NONE});
+    expect(mas.milestones).deep.eq(milestoneManifest.boards[BoardName.AMAZONIS_PLANITIA]);
+    expect(mas.awards).deep.eq(awardManifest.boards[BoardName.AMAZONIS_PLANITIA]);
+  });
+
   function choose(options: Partial<GameOptions>) {
     return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});
   }

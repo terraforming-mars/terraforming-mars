@@ -7,7 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 
-describe('Lobbyist Milestone', () => {
+describe('Lobbyist', () => {
   let milestone: Lobbyist;
   let game: IGame;
   let player: TestPlayer;
@@ -59,5 +59,10 @@ describe('Lobbyist Milestone', () => {
     turmoil.sendDelegateToParty(player2, PartyName.KELVINISTS, game);
     expect(milestone.getScore(player)).to.eq(2); // Only player delegates, ignores player2 chairman and delegate
     expect(milestone.getScore(player2)).to.eq(2); // Only player’s 2 delegates, ignores player delegates and party leaders
+  });
+
+  it('Gives 0 score without Turmoil', () => {
+    const [/* game */, player] = testGame(1, {turmoilExtension: false});
+    expect(milestone.getScore(player)).to.eq(0);
   });
 });

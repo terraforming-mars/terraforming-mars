@@ -1793,7 +1793,9 @@ export class Game implements IGame, Logger {
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;
-    game.stJosephCathedrals = d.stJosephCathedrals;
+    // TODO(kberg): Remove after 2028-01-01
+    // Cathedrals can sit on space colony cities, whose ids used to lack the leading 'c'.
+    game.stJosephCathedrals = d.stJosephCathedrals.map((id) => board.spaces.some((space) => space.id === id) ? id : `c${id}` as SpaceId);
     game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;

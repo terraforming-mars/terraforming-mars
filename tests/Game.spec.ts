@@ -871,6 +871,17 @@ describe('Game', () => {
     expect(deserialized.board.getSpaceOrThrow(SpaceName.CERES_SPACEPORT).spaceType).eq(SpaceType.COLONY);
   });
 
+  it('deserializing a game with St. Joseph cathedrals on legacy colony space ids', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: true});
+    const serialized = game.serialize();
+    serialized.stJosephCathedrals = ['75', '31'];
+
+    const deserialized = Game.deserialize(serialized);
+
+    expect(deserialized.stJosephCathedrals).deep.eq([SpaceName.CERES_SPACEPORT, '31']);
+  });
+
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: false});

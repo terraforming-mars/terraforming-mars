@@ -9,6 +9,7 @@ import {testGame} from '../TestGame';
 import {Server} from '../../src/server/models/ServerModel';
 import {GlobalParameter} from '../../src/common/GlobalParameter';
 import {Phase} from '../../src/common/Phase';
+import {setVenusScaleLevel} from '../TestingUtils';
 
 describe('ServerModel', () => {
   let player: TestPlayer;
@@ -136,5 +137,12 @@ describe('ServerModel', () => {
       drawPile: game.turmoil!.globalEventDealer.deck.length,
       discardPile: game.turmoil!.globalEventDealer.discards.length,
     });
+  });
+
+  it('reports Venus above 30 in display units', () => {
+    [game] = testGame(2, {venusNextExtension: true});
+    setVenusScaleLevel(game, 34);
+
+    expect(Server.getGameModel(game).venusScaleLevel).eq(32);
   });
 });

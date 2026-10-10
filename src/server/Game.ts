@@ -1,4 +1,5 @@
 import * as constants from '../common/constants';
+import {venusScaleLevelForDisplay} from './venusNext/venusScale';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {CardName} from '../common/cards/CardName';
@@ -876,7 +877,7 @@ export class Game implements IGame, Logger {
     entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
     entry[GlobalParameter.OCEANS] = this.board.getOceanSpaces().length;
     if (this.gameOptions.venusNextExtension) {
-      entry[GlobalParameter.VENUS] = this.venusScaleLevel;
+      entry[GlobalParameter.VENUS] = venusScaleLevelForDisplay(this.venusScaleLevel);
     }
     if (this.moonData) {
       entry[GlobalParameter.MOON_HABITAT_RATE] = this.moonData.habitatRate;

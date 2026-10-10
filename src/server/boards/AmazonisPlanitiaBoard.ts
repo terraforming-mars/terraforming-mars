@@ -9,7 +9,7 @@ const TILES_PER_ROW = [6, 7, 8, 9, 10, 11, 10, 9, 8, 7, 6];
 const MAX_OCEANS = 11;
 const MAX_TEMPERATURE = 14;
 const MAX_OXYGEN = 18;
-const MAX_VENUS = 30;
+const MAX_VENUS = 36; // Displayed as 33%; see venusScaleLevelForDisplay.
 
 export class AmazonisPlanitiaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisPlanitiaBoard {

@@ -21,9 +21,9 @@
         </span>
         <span v-else-if="data.type === LogMessageDataType.SPACE" class="log-space-id" @click.prevent="$emit('spaceClicked', data.value)">
             <svg width="20" height="14" viewBox="0 0 28 38">
-              <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="isMoonSpace(data.value) ? 'gray' : '#b7410e'" />
+              <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="data.value.startsWith('m') ? 'gray' : '#b7410e'" />
             </svg>
-            {{ getSpaceName(data.value) }}
+            {{ spaceName(data.value) }}
         </span>
         <span v-else-if="data.type === LogMessageDataType.CARDS" v-html="cardsToHtml(data)"></span>
 
@@ -49,7 +49,8 @@ import {tileTypeToString} from '@/common/TileType';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
-import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
+import {SpaceId} from '@/common/Types';
+import {spacesById} from '@/client/utils/spacesById';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {gameLocaleToIntlLocale} from '@/client/utils/LocaleUtils';
 import {range} from '@/common/utils/utils';
@@ -79,6 +80,14 @@ export default defineComponent({
     },
   },
   methods: {
+    spaceName(id: SpaceId): string {
+      const game = this.viewModel.game;
+      const spaces = id.startsWith('m') ? game.moon?.spaces : game.spaces;
+      if (spaces === undefined) {
+        return 'n/a';
+      }
+      return spacesById(spaces).get(id)?.a9 ?? 'n/a';
+    },
     cardToHtml(data: LogMessageData & {type: LogMessageDataType.CARD, value: CardName}) {
       return this.innerCardToHtml(data.value, data.attrs);
     },
@@ -151,12 +160,6 @@ export default defineComponent({
     },
     LogMessageDataType(): typeof LogMessageDataType {
       return LogMessageDataType;
-    },
-    getSpaceName(): typeof getSpaceName {
-      return getSpaceName;
-    },
-    isMoonSpace(): typeof isMoonSpace {
-      return isMoonSpace;
     },
     undergroundResourceTokenDescription(): typeof undergroundResourceTokenDescription {
       return undergroundResourceTokenDescription;

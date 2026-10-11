@@ -385,6 +385,10 @@ export class Server {
         spaceType: space.spaceType,
         bonus: space.bonus,
       };
+      const a9 = board.A9[space.id];
+      if (a9 !== undefined) {
+        model.a9 = a9;
+      }
       const tileType = space.tile?.tileType;
       if (tileType !== undefined) {
         model.tileType = tileType;

@@ -236,6 +236,7 @@ describe('Board', () => {
   });
 
   class TestBoard extends Board {
+    public readonly A9 = {};
   }
 
   it('deserialize', () => {

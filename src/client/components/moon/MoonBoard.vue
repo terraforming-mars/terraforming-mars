@@ -82,6 +82,7 @@ import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 import {TileView} from '../board/TileView';
 import {SpaceId} from '@/common/Types';
 import {comparing} from '@/common/utils/Ordering';
+import {spacesById} from '@/client/utils/spacesById';
 
 type MoonParamLevel = {
   value: number,
@@ -113,10 +114,9 @@ export default defineComponent({
   },
   methods: {
     getSpaceById(spaceId: SpaceId) {
-      for (const space of this.model.spaces) {
-        if (space.id === spaceId) {
-          return space;
-        }
+      const space = spacesById(this.model.spaces).get(spaceId);
+      if (space !== undefined) {
+        return space;
       }
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },

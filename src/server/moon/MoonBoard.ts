@@ -13,7 +13,46 @@ function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: [], edge: false};
 }
 
+const MOON_A9 = {
+  'm02': 'S1',
+  'm03': 'S2',
+  'm04': 'S3',
+  'm05': 'S4',
+  'm06': 'T1',
+  'm07': 'T2',
+  'm08': 'T3',
+  'm09': 'T4',
+  'm10': 'T5',
+  'm11': 'V1',
+  'm12': 'V2',
+  'm13': 'V3',
+  'm14': 'V4',
+  'm15': 'V5',
+  'm16': 'V6',
+  'm17': 'W1',
+  'm18': 'W2',
+  'm19': 'W3',
+  'm20': 'W4',
+  'm21': 'W5',
+  'm22': 'X1',
+  'm23': 'X2',
+  'm24': 'X3',
+  'm25': 'X4',
+  'm26': 'X5',
+  'm27': 'X6',
+  'm28': 'Y1',
+  'm29': 'Y2',
+  'm30': 'Y3',
+  'm31': 'Y4',
+  'm32': 'Y5',
+  'm33': 'Z1',
+  'm34': 'Z2',
+  'm35': 'Z3',
+  'm36': 'Z4',
+} as const;
+
 export class MoonBoard extends Board {
+  public readonly A9 = MOON_A9;
   public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&

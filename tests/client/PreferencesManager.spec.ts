@@ -20,6 +20,7 @@ describe('PreferencesManager', () => {
     expect(values.lang).eq('en');
     expect(values.enable_sounds).eq(true);
     expect(values.animated_title).eq(true);
+    expect(values.experimental_layout).is.false;
   });
 
   it('setter updates storage and references', () => {
@@ -61,5 +62,13 @@ describe('PreferencesManager', () => {
     const values = PreferencesManager.INSTANCE.values();
 
     expect(values.lang).eq('fr');
+  });
+
+  it('persists the optional layout independently of Experimental UI', () => {
+    instance.set('experimental_layout', true);
+    expect(instance.values().experimental_ui).is.false;
+    PreferencesManager.resetForTest();
+    expect(PreferencesManager.INSTANCE.values().experimental_layout).is.true;
+    expect(PreferencesManager.INSTANCE.values().experimental_ui).is.false;
   });
 });

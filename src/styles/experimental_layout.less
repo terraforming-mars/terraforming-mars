@@ -1,0 +1,233 @@
+// Opt-in player view, inspired by wrybit's desktop/mobile layout.
+.main-container:has(> .player-home--experimental) {
+  margin-left: 0;
+}
+
+#player-home.player-home--experimental {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 16px 24px 24px 80px;
+  background: linear-gradient(145deg, #111827, #17141e);
+
+  .player-layout-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 18px;
+
+    small {
+      display: inline-block;
+      margin-left: 12px;
+      color: #abb4c8;
+      font-size: 13px;
+    }
+  }
+
+  .top-bar-container {
+    position: static;
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 16px;
+  }
+
+  .top-bar {
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .player_home_block {
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 16px;
+    margin: 0 0 16px;
+    border: 1px solid #42495d;
+    border-radius: 14px;
+    background: #171c2b;
+    overflow: auto;
+  }
+
+  .dynamic-title {
+    font-size: 22px;
+  }
+
+  .player-layout-nav {
+    display: none;
+  }
+
+  .preferences_panel {
+    max-width: calc(100vw - 24px);
+    max-height: 80vh;
+    overflow: auto;
+  }
+}
+
+// A full board and action form fit side by side from the showcase's desktop breakpoint.
+@media (min-width: 1400px) {
+  #player-home.player-home--experimental [data-player-panels] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(670px, 1fr);
+    gap: 16px;
+    align-items: start;
+
+    > a {
+      display: none;
+    }
+
+    > .player_home_block {
+      margin: 0;
+      grid-column: 1;
+    }
+
+    > .player-layout-board {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      max-height: 75vh;
+    }
+
+    > .player_home_block--players {
+      grid-row: 1;
+      max-height: 28vh;
+    }
+
+    > .player_home_block--actions {
+      grid-row: 2;
+      max-height: 60vh;
+    }
+
+    > .player-layout-log {
+      grid-column: 2;
+      grid-row: 3 / span 6;
+      max-height: 65vh;
+    }
+  }
+}
+
+@media (max-width: 1399px) {
+  #player-home.player-home--experimental {
+    padding: 12px 12px calc(88px + env(safe-area-inset-bottom));
+
+    .top-bar-container {
+      display: none;
+    }
+
+    .player-layout-toolbar {
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+
+      small {
+        display: block;
+        margin-left: 0;
+      }
+    }
+
+    .sidebar_cont {
+      position: relative;
+      top: auto;
+      left: auto;
+      flex-flow: row wrap;
+      justify-content: center;
+      width: 100%;
+      height: auto;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      background: #111827;
+      zoom: 1;
+
+      > a,
+      .preferences_player {
+        display: none;
+      }
+
+      .global_params {
+        display: flex;
+        align-items: center;
+        width: auto;
+      }
+
+      .sidebar_item {
+        position: static;
+        margin: 0;
+        flex-shrink: 0;
+      }
+    }
+
+    .player_home_block {
+      padding: 10px;
+    }
+
+    .preferences_panel {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      width: calc(100vw - 24px);
+    }
+
+    .board-cont:not(.board-cont--custom) {
+      zoom: var(--player-layout-board-scale);
+    }
+
+    [data-layout-panel] {
+      display: none;
+    }
+
+    &[data-active-panel="actions"] [data-layout-panel="actions"],
+    &[data-active-panel="cards"] [data-layout-panel="cards"],
+    &[data-active-panel="board"] [data-layout-panel="board"],
+    &[data-active-panel="players"] [data-layout-panel="players"],
+    &[data-active-panel="log"] [data-layout-panel="log"] {
+      display: block;
+    }
+
+    // The map and its confirmation stay reachable during a placement prompt.
+    &.player-home--placing[data-active-panel="actions"] [data-layout-panel="board"],
+    &.player-home--placing[data-active-panel="board"] [data-layout-panel="actions"] {
+      display: block;
+    }
+
+    .player-layout-nav {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+      border-top: 1px solid #454b61;
+      background: #111827;
+
+      button {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        min-height: 52px;
+        padding: 4px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: #c5ccdc;
+        font-size: 12px;
+        cursor: pointer;
+
+        > span:first-child {
+          font-size: 22px;
+        }
+
+        &[aria-pressed="true"] {
+          background: #4b44ba;
+          color: #fff;
+        }
+
+        &:focus-visible {
+          outline: 2px solid #fff;
+          outline-offset: -2px;
+        }
+      }
+    }
+  }
+}

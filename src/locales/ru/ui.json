@@ -394,5 +394,10 @@
     "excavation-count": "Раскопки",
     "You will not take any more actions this generation.": "Вы больше не сможете совершить какие либо действия в этом поколении.",
     "Remove any number of microbes to gain 3 M€ per microbe removed": "Удалите любое количество микробов, чтобы получить по 3 M€ за каждого удалённого микроба",
-    "Reorder Cards": "Переупорядочить карты"
+    "Reorder Cards": "Переупорядочить карты",
+    "Experimental layout": "Экспериментальный дизайн",
+    "Use a two-column desktop layout and mobile navigation.": "Две колонки на компьютере и нижняя навигация на телефоне.",
+    "Classic layout": "Классический дизайн",
+    "Game sections": "Разделы игры",
+    "Cards": "Карты"
 }

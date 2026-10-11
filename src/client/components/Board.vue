@@ -358,6 +358,7 @@ import {AresData} from '@/common/ares/AresData';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
+import {spacesById} from '@/client/utils/spacesById';
 import {TileView} from '@/client/components/board/TileView';
 import {BoardName} from '@/common/boards/BoardName';
 import {LEGENDS} from '@/client/components/Legends';
@@ -417,10 +418,10 @@ export default defineComponent({
   },
   methods: {
     hasSpace(spaceId: SpaceId): boolean {
-      return this.spaceMap.has(spaceId);
+      return spacesById(this.spaces).has(spaceId);
     },
     getSpace(spaceId: SpaceId): SpaceModel {
-      const space = this.spaceMap.get(spaceId);
+      const space = spacesById(this.spaces).get(spaceId);
       if (space === undefined) {
         // For some reason Vue still calls getSpace when hasSpace is false. I thought it didn't.
         // Returning undefined as SpaceModel satisfies the type checker, but the value isn't
@@ -486,9 +487,6 @@ export default defineComponent({
     },
   },
   computed: {
-    spaceMap(): Map<SpaceId, SpaceModel> {
-      return new Map(this.spaces.map((s) => [s.id, s]));
-    },
     BoardName(): typeof BoardName {
       return BoardName;
     },

@@ -11,9 +11,10 @@ export class Tropicalist extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.game.board.spaces
+    const board = player.game.board;
+    return board.spaces
       .filter(Board.ownedBy(player))
       .filter(Board.hasRealTile)
-      .filter((space) => space.y >= 3 && space.y <= 5).length;
+      .filter((space) => space.y >= board.equatorRow - 1 && space.y <= board.equatorRow + 1).length;
   }
 }

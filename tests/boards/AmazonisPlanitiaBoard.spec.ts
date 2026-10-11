@@ -124,6 +124,8 @@ describe('AmazonisPlanitiaBoard', () => {
       {id: '93', spaceType: 'land', bonus: [3], edge: true, x: 10, y: 10},
     ]);
     expect(board.volcanicSpaceIds).deep.eq(['33', '70', '72', '80', '87']);
+    expect(board.bottomRow).eq(10);
+    expect(board.equatorRow).eq(5);
     expect(board.max.oceans).to.eq(11);
     expect(board.max.temperature).to.eq(14);
     expect(board.max.oxygen).to.eq(18);

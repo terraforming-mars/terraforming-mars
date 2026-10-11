@@ -72,5 +72,7 @@ describe('TharsisBoard', () => {
       {id: '63', spaceType: 'ocean', bonus: [0, 0], edge: true, x: 8, y: 8},
     ]);
     expect(board.volcanicSpaceIds).deep.eq(['09', '14', '21', '29']);
+    expect(board.bottomRow).eq(8);
+    expect(board.equatorRow).eq(4);
   });
 });

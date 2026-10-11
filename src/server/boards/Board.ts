@@ -30,7 +30,9 @@ export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
   private map: Map<SpaceId, Space> = new Map();
-  public volcanicSpaceIds: ReadonlyArray<SpaceId>;
+  public readonly volcanicSpaceIds: ReadonlyArray<SpaceId>;
+  public readonly bottomRow: number;
+  public readonly equatorRow: number;
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<Space>>();
@@ -48,6 +50,8 @@ export abstract class Board {
     });
 
     this.volcanicSpaceIds = this.spaces.filter((space) => space.volcanic).map((space) => space.id);
+    this.bottomRow = this.maxY;
+    this.equatorRow = this.bottomRow / 2;
   }
 
   /* Returns the space given a Space ID. */

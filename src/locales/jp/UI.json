@@ -180,7 +180,7 @@
     "Industrialist": "産業王",
     "Have most steel and energy": "最終生産後の建材と電力の合計数",
     "Desert Settler": "砂漠王",
-    "Own the most tiles south of the equator (the four bottom rows)": "マップの下段4列の所有タイル数",
+    "Own the most tiles south of the equator (the rows below the middle row)": "マップ中央の列より下の列の所有タイル数",
     "Estate Dealer": "絶景王",
     "Own the most tiles adjacent to ocean tiles": "海洋隣接の所有タイル数",
     "Benefactor": "支援王",

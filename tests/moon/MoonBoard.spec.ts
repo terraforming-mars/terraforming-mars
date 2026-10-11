@@ -53,6 +53,8 @@ describe('MoonBoard', () => {
       {id: 'm36', spaceType: 'land', x: 5, y: 6, bonus: [], edge: false},
       {id: 'm37', spaceType: 'colony', x: -1, y: -1, bonus: [], edge: false},
     ]);
+    expect(board.bottomRow).eq(6);
+    expect(board.equatorRow).eq(3);
   });
 
   it('getSpace', () => {

@@ -7,7 +7,8 @@ export class Edgedancer implements IAward {
   public readonly description = 'Own the most tiles on the edges of the board';
 
   public getScore(player: IPlayer): number {
-    return player.game.board.getEdges()
+    return player.game.board.spaces
+      .filter((s) => s.edge === true)
       .filter(Board.hasRealTile)
       .filter(Board.ownedBy(player)).length;
   }

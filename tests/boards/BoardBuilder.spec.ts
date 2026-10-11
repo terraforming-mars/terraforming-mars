@@ -123,9 +123,11 @@ describe('BoardBuilder', () => {
 
   it('tilesPerRow parameter is respected', () => {
     const builder = new BoardBuilder(DEFAULT_GAME_OPTIONS, new SeededRandom(0), [3, 4, 5, 4, 3]);
-    for (let i = 0; i < 19; i++) {
-      builder.land();
-    }
+    builder.row((r) => r.land().land().land());
+    builder.row((r) => r.land().land().land().land());
+    builder.row((r) => r.land().land().land().land().land());
+    builder.row((r) => r.land().land().land().land());
+    builder.row((r) => r.land().land().land());
     const spaces = builder.build().filter((s) => s.spaceType !== SpaceType.COLONY);
     expect(spaces).has.length(19);
 

@@ -61,6 +61,7 @@ export class GameSetup {
   public static deserializeBoard(players: Array<IPlayer>, gameOptions: GameOptions, d: SerializedGame) {
     const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
     migrateColonySpaceIds(d.board);
+    migrateEdges(d.board, gameOptions.boardName);
     const deserialized = Board.deserialize(d.board, playersForBoard).spaces;
     const Factory: BoardFactory = boards[gameOptions.boardName];
     return new Factory(deserialized);
@@ -111,6 +112,34 @@ function migrateColonySpaceIds(board: SerializedBoard): void {
   for (const space of board.spaces) {
     if (space.spaceType === SpaceType.COLONY && !space.id.startsWith('c')) {
       space.id = `c${space.id}` as SpaceId;
+    }
+  }
+}
+
+// TODO(kberg): Remove after 2026-12-01
+// Spaces used to have no edge attribute. Every 61-space board shares the same edges.
+// Amazonis Planitia is excluded because it postdates the edge attribute.
+const LEGACY_EDGES: ReadonlyArray<string> = [
+  '03', '04', '05', '06', '07',
+  '08', '13',
+  '14', '20',
+  '21', '28',
+  '29', '37',
+  '38', '45',
+  '46', '52',
+  '53', '58',
+  '59', '60', '61', '62', '63',
+];
+function migrateEdges(board: SerializedBoard, boardName: BoardName): void {
+  if (boardName === BoardName.AMAZONIS_PLANITIA) {
+    return;
+  }
+  if (board.spaces.find((space) => space.id === '03')?.edge === true) {
+    return;
+  }
+  for (const space of board.spaces) {
+    if (LEGACY_EDGES.includes(space.id)) {
+      space.edge = true;
     }
   }
 }

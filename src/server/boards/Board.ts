@@ -348,6 +348,9 @@ export abstract class Board {
         if (space.volcanic) {
           serialized.volcanic = true;
         }
+        if (space.edge) {
+          serialized.edge = true;
+        }
         return serialized;
       }),
     };
@@ -367,6 +370,7 @@ export abstract class Board {
       // TODO(kberg): Remove after 2026-12-01
       // _TEMPERATURE_3MC was merged into TEMPERATURE_4MC.
       bonus: serialized.bonus.map((b) => b === SpaceBonus._TEMPERATURE_3MC ? SpaceBonus.TEMPERATURE_4MC : b),
+      edge: serialized.edge ?? false,
       x: serialized.x,
       y: serialized.y,
     };

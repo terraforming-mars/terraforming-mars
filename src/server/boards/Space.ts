@@ -20,6 +20,8 @@ export type Space = {
 
   /** When true, this is a volcanic space. */
   volcanic?: boolean;
+  /** When true, is along the edge of the grid. */
+  edge: boolean;
 
   /** The tile placed on top of the space. Could be a hazard tile. */
   tile?: Tile;

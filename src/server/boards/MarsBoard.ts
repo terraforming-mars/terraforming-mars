@@ -14,7 +14,6 @@ import * as constants from '../../common/constants';
 import {GlobalParameterMaximums} from '../IGame';
 
 export class MarsBoard extends Board {
-  private readonly edges: ReadonlyArray<Space>;
   public readonly max: GlobalParameterMaximums;
 
   public constructor(
@@ -28,7 +27,6 @@ export class MarsBoard extends Board {
       oceans: max?.oceans ?? constants.MAX_OCEAN_TILES,
       venus: max?.venus ?? constants.MAX_VENUS_SCALE,
     };
-    this.edges = this.computeEdges();
   }
 
   public getCitiesOffMars(player?: IPlayer): Array<Space> {
@@ -237,39 +235,6 @@ export class MarsBoard extends Board {
       }
     }
     return true;
-  }
-
-  private computeEdges(): ReadonlyArray<Space> {
-    const boardSpaces = this.spaces.filter((s) => s.spaceType !== SpaceType.COLONY);
-    if (boardSpaces.length === 0) {
-      return [];
-    }
-    const maxY = Math.max(...boardSpaces.map((s) => s.y));
-    const maxX = Math.max(...boardSpaces.map((s) => s.x));
-    const halfY = maxY / 2;
-    return boardSpaces.filter((space) => {
-      // top and bottom rows
-      if (space.y === 0 || space.y === maxY) {
-        return true;
-      }
-      // right column
-      if (space.x === maxX) {
-        return true;
-      }
-      // top-left diagonal: y + x = halfY
-      if (space.y + space.x === halfY) {
-        return true;
-      }
-      // bottom-left diagonal: y - x = halfY
-      if (space.y - space.x === halfY) {
-        return true;
-      }
-      return false;
-    });
-  }
-
-  public getEdges(): ReadonlyArray<Space> {
-    return this.edges;
   }
 
   public getAvailableIsolatedSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {

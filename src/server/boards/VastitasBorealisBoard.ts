@@ -20,23 +20,23 @@ export class VastitasBorealisBoard extends MarsBoard {
     const TEMPERATURE = SpaceBonus.TEMPERATURE_4MC;
 
     // y=0
-    builder.land(STEEL, STEEL).land(PLANT).land().land().volcanic(TITANIUM, TITANIUM);
+    builder.row((r) => r.land(STEEL, STEEL).land(PLANT).land().land().volcanic(TITANIUM, TITANIUM));
     // y=1
-    builder.land(STEEL, STEEL).land(STEEL).land().land().volcanic(TITANIUM).land(PLANT);
+    builder.row((r) => r.land(STEEL, STEEL).land(STEEL).land().land().volcanic(TITANIUM).land(PLANT));
     // y=2
-    builder.land(TITANIUM).land().land().land().land(DRAW_CARD).ocean(PLANT, DRAW_CARD).ocean(PLANT);
+    builder.row((r) => r.land(TITANIUM).land().land().land().land(DRAW_CARD).ocean(PLANT, DRAW_CARD).ocean(PLANT));
     // y=3
-    builder.volcanic(STEEL, TITANIUM).volcanic(STEEL, DRAW_CARD).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT);
+    builder.row((r) => r.volcanic(STEEL, TITANIUM).volcanic(STEEL, DRAW_CARD).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT));
     // y=4
-    builder.land().land().land().ocean(HEAT, HEAT).land(TEMPERATURE).doNotShuffleLastSpace().land(STEEL).land().land(PLANT).ocean(TITANIUM);
+    builder.row((r) => r.land().land().land().ocean(HEAT, HEAT).land(TEMPERATURE).doNotShuffleLastSpace().land(STEEL).land().land(PLANT).ocean(TITANIUM));
     // y=5
-    builder.land(PLANT).land().land(PLANT).ocean(HEAT, HEAT).land(HEAT, HEAT).land().land(PLANT).land(TITANIUM, PLANT);
+    builder.row((r) => r.land(PLANT).land().land(PLANT).ocean(HEAT, HEAT).land(HEAT, HEAT).land().land(PLANT).land(TITANIUM, PLANT));
     // y=6
-    builder.land(PLANT, PLANT).land().ocean().land().land(STEEL, PLANT).land(PLANT).land(PLANT, PLANT);
+    builder.row((r) => r.land(PLANT, PLANT).land().ocean().land().land(STEEL, PLANT).land(PLANT).land(PLANT, PLANT));
     // y=7
-    builder.ocean(PLANT).land().land(DRAW_CARD).land(STEEL).land().land(PLANT, PLANT);
+    builder.row((r) => r.ocean(PLANT).land().land(DRAW_CARD).land(STEEL).land().land(PLANT, PLANT));
     // y=8
-    builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
+    builder.row((r) => r.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT));
 
 
     const spaces = builder.build();

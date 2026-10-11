@@ -22,6 +22,7 @@ export interface SerializedSpace {
   adjacency?: AdjacencyBonus,
   x: number;
   y: number;
+  edge?: boolean;
   undergroundResources?: UndergroundResourceToken;
   excavator?: PlayerId;
   coOwner?: PlayerId;

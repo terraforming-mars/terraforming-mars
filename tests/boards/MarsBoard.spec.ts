@@ -97,7 +97,7 @@ describe('MarsBoard', () => {
   });
 
   it('edges', () => {
-    expect(board.getEdges().map(toID)).to.have.members(
+    expect(board.spaces.filter((s) => s.edge).map(toID)).to.have.members(
       [
         '03', '04', '05', '06', '07',
         '08', '13',
@@ -114,12 +114,14 @@ describe('MarsBoard', () => {
   it('edges on a board of another size', () => {
     // Rows of 3, 4, 5, 4, 3 tiles: ids '03'..'21', row by row.
     const builder = new BoardBuilder(DEFAULT_GAME_OPTIONS, new SeededRandom(0), [3, 4, 5, 4, 3]);
-    for (let i = 0; i < 19; i++) {
-      builder.land();
-    }
+    builder.row((r) => r.land().land().land());
+    builder.row((r) => r.land().land().land().land());
+    builder.row((r) => r.land().land().land().land().land());
+    builder.row((r) => r.land().land().land().land());
+    builder.row((r) => r.land().land().land());
     const smallBoard = new MarsBoard(builder.build());
 
-    expect(smallBoard.getEdges().map(toID)).to.have.members(
+    expect(smallBoard.spaces.filter((s) => s.edge).map(toID)).to.have.members(
       [
         '03', '04', '05',
         '06', '09',

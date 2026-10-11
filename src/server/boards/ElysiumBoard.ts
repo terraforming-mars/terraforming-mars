@@ -14,23 +14,23 @@ export class ElysiumBoard extends MarsBoard {
     const TITANIUM = SpaceBonus.TITANIUM;
 
     // y=0
-    builder.ocean().ocean(TITANIUM).ocean(DRAW_CARD).ocean(STEEL).land(DRAW_CARD);
+    builder.row((r) => r.ocean().ocean(TITANIUM).ocean(DRAW_CARD).ocean(STEEL).land(DRAW_CARD));
     // y=1
-    builder.volcanic(TITANIUM).land().land().ocean().ocean().land(STEEL, STEEL);
+    builder.row((r) => r.volcanic(TITANIUM).land().land().ocean().ocean().land(STEEL, STEEL));
     // y=2
-    builder.volcanic(TITANIUM, TITANIUM).land().land(DRAW_CARD).land().ocean(PLANT).ocean().volcanic(DRAW_CARD, DRAW_CARD, DRAW_CARD);
+    builder.row((r) => r.volcanic(TITANIUM, TITANIUM).land().land(DRAW_CARD).land().ocean(PLANT).ocean().volcanic(DRAW_CARD, DRAW_CARD, DRAW_CARD));
     // y=3
-    builder.land(PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).land(PLANT, STEEL);
+    builder.row((r) => r.land(PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).land(PLANT, STEEL));
     // y=4
-    builder.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).volcanic(PLANT, TITANIUM);
+    builder.row((r) => r.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).volcanic(PLANT, TITANIUM));
     // y=5
-    builder.land(STEEL).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land();
+    builder.row((r) => r.land(STEEL).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land());
     // y=6
-    builder.land(TITANIUM).land(STEEL).land().land().land(STEEL).land().land();
+    builder.row((r) => r.land(TITANIUM).land(STEEL).land().land().land(STEEL).land().land());
     // y=7
-    builder.land(STEEL, STEEL).land().land().land().land(STEEL, STEEL).land();
+    builder.row((r) => r.land(STEEL, STEEL).land().land().land().land(STEEL, STEEL).land());
     // y=8
-    builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
+    builder.row((r) => r.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL));
 
     const spaces = builder.build();
     return new ElysiumBoard(spaces);

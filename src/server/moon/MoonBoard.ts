@@ -10,7 +10,7 @@ import {Random} from '../../common/utils/Random';
 import {preservingShuffle} from '../../server/boards/BoardBuilder';
 
 function colonySpace(id: SpaceId): Space {
-  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
+  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: [], edge: false};
 }
 
 export class MoonBoard extends Board {
@@ -95,6 +95,7 @@ class Builder {
           x: xCoordinate,
           y: row,
           bonus: this.bonuses[idx],
+          edge: false, // There are no edges on The Moon
         };
         this.spaces.push(space);
         idx++;

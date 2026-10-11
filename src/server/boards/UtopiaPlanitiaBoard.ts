@@ -15,23 +15,23 @@ export class UtopiaPlanitiaBoard extends MarsBoard {
     const TITANIUM = SpaceBonus.TITANIUM;
 
     // y=0
-    builder.land().land().land(ENERGY, ENERGY).land().land();
+    builder.row((r) => r.land().land().land(ENERGY, ENERGY).land().land());
     // y=1
-    builder.land().land(STEEL, STEEL).land(ENERGY, ENERGY).land(ENERGY, ENERGY, DRAW_CARD).land().land();
+    builder.row((r) => r.land().land(STEEL, STEEL).land(ENERGY, ENERGY).land(ENERGY, ENERGY, DRAW_CARD).land().land());
     // y=2
-    builder.ocean(PLANT, PLANT, PLANT).land().land(STEEL).land().land().land(DRAW_CARD, DRAW_CARD, TITANIUM).land(TITANIUM, TITANIUM);
+    builder.row((r) => r.ocean(PLANT, PLANT, PLANT).land().land(STEEL).land().land().land(DRAW_CARD, DRAW_CARD, TITANIUM).land(TITANIUM, TITANIUM));
     // y=3
-    builder.ocean(PLANT, DRAW_CARD).land(PLANT).land(PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT).ocean(PLANT).land(PLANT);
+    builder.row((r) => r.ocean(PLANT, DRAW_CARD).land(PLANT).land(PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT).ocean(PLANT).land(PLANT));
     // y=4
-    builder.land().land().land().land(PLANT).land(PLANT).land(PLANT, PLANT).land().ocean().land(PLANT, TITANIUM);
+    builder.row((r) => r.land().land().land().land(PLANT).land(PLANT).land(PLANT, PLANT).land().ocean().land(PLANT, TITANIUM));
     // y=5
-    builder.land(STEEL).land(STEEL, STEEL).ocean(PLANT, PLANT).land(PLANT, PLANT).land().land().land(STEEL, STEEL).land();
+    builder.row((r) => r.land(STEEL).land(STEEL, STEEL).ocean(PLANT, PLANT).land(PLANT, PLANT).land().land().land(STEEL, STEEL).land());
     // y=6
-    builder.land(STEEL).land().ocean().ocean(PLANT, PLANT).land().land().land();
+    builder.row((r) => r.land(STEEL).land().ocean().ocean(PLANT, PLANT).land().land().land());
     // y=7
-    builder.land().land(DRAW_CARD, DRAW_CARD).ocean().ocean(PLANT, PLANT).land(STEEL, TITANIUM).land(PLANT, PLANT);
+    builder.row((r) => r.land().land(DRAW_CARD, DRAW_CARD).ocean().ocean(PLANT, PLANT).land(STEEL, TITANIUM).land(PLANT, PLANT));
     // y=8
-    builder.land().land().land(STEEL, STEEL).ocean(PLANT).land(PLANT);
+    builder.row((r) => r.land().land().land(STEEL, STEEL).ocean(PLANT).land(PLANT));
 
     const spaces = builder.build();
     return new UtopiaPlanitiaBoard(spaces);

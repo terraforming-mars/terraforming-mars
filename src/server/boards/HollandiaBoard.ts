@@ -17,23 +17,23 @@ export class HollandiaBoard extends MarsBoard {
     const HEAT = SpaceBonus.HEAT;
 
     // y=0
-    builder.ocean(STEEL).land(PLANT, PLANT).land(DRAW_CARD).ocean(TITANIUM).deflectionZone(PLANT);
+    builder.row((r) => r.ocean(STEEL).land(PLANT, PLANT).land(DRAW_CARD).ocean(TITANIUM).deflectionZone(PLANT));
     // y=1
-    builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land().land(STEEL).deflectionZone().deflectionZone();
+    builder.row((r) => r.ocean(PLANT, PLANT).land(PLANT, PLANT).land().land(STEEL).deflectionZone().deflectionZone());
     // y=2
-    builder.land(DRAW_CARD).ocean(PLANT).land(STEEL, PLANT).land().deflectionZone(PLANT, PLANT).deflectionZone().deflectionZone(DRAW_CARD);
+    builder.row((r) => r.land(DRAW_CARD).ocean(PLANT).land(STEEL, PLANT).land().deflectionZone(PLANT, PLANT).deflectionZone().deflectionZone(DRAW_CARD));
     // y=3
-    builder.land(STEEL, STEEL, STEEL).land(PLANT).ocean().land(STEEL, PLANT).land().deflectionZone(TITANIUM).deflectionZone().deflectionZone(STEEL);
+    builder.row((r) => r.land(STEEL, STEEL, STEEL).land(PLANT).ocean().land(STEEL, PLANT).land().deflectionZone(TITANIUM).deflectionZone().deflectionZone(STEEL));
     // y=4
-    builder.land(TITANIUM).land().land(PLANT).ocean(PLANT, PLANT).land().land().deflectionZone().deflectionZone(PLANT).deflectionZone();
+    builder.row((r) => r.land(TITANIUM).land().land(PLANT).ocean(PLANT, PLANT).land().land().deflectionZone().deflectionZone(PLANT).deflectionZone());
     // y=5
-    builder.land(STEEL, PLANT).land().land().land(PLANT, STEEL).land().land().land(PLANT, PLANT).ocean(TITANIUM, TITANIUM);
+    builder.row((r) => r.land(STEEL, PLANT).land().land().land(PLANT, STEEL).land().land().land(PLANT, PLANT).ocean(TITANIUM, TITANIUM));
     // y=6
-    builder.ocean(PLANT, PLANT).land().land().land(HEAT, HEAT).land(HEAT, HEAT, HEAT).land(PLANT).ocean(PLANT);
+    builder.row((r) => r.ocean(PLANT, PLANT).land().land().land(HEAT, HEAT).land(HEAT, HEAT, HEAT).land(PLANT).ocean(PLANT));
     // y=7
-    builder.ocean().ocean(PLANT, PLANT).land(PLANT, PLANT).land(HEAT, HEAT).land(TITANIUM, PLANT).ocean(PLANT);
+    builder.row((r) => r.ocean().ocean(PLANT, PLANT).land(PLANT, PLANT).land(HEAT, HEAT).land(TITANIUM, PLANT).ocean(PLANT));
     // y=8
-    builder.land(DRAW_CARD, DRAW_CARD).land(PLANT, PLANT).land().land().land(DRAW_CARD);
+    builder.row((r) => r.land(DRAW_CARD, DRAW_CARD).land(PLANT, PLANT).land().land().land(DRAW_CARD));
 
     if (gameOptions.shuffleMapOption) {
       // TODO(kberg): This only shuffles the spaces outside the zone. The spaces inside the zone could be shuffled too.

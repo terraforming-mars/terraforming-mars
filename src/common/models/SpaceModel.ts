@@ -10,8 +10,8 @@ export type SpaceHighlight = undefined | 'noctis' | 'volcanic';
 
 export type SpaceModel = {
   id: SpaceId;
+  a9?: string;
   spaceType: SpaceType;
-
   bonus: Array<SpaceBonus>;
   color?: Color;
   tileType?: TileType;

@@ -33,6 +33,8 @@ export abstract class Board {
   public readonly volcanicSpaceIds: ReadonlyArray<SpaceId>;
   public readonly bottomRow: number;
   public readonly equatorRow: number;
+  /** Each space's coordinate label on the printed map (e.g. 'A9'). Off-board spaces have none. */
+  public abstract readonly A9: Readonly<Partial<Record<SpaceId, string>>>;
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<Space>>();

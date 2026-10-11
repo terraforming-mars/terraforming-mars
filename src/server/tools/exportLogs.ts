@@ -3,12 +3,15 @@ import {GameId} from '../../common/Types';
 import {IDatabase} from '../database/IDatabase';
 import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
 import {tileTypeToString} from '../../common/TileType';
-import {getSpaceName} from '../../common/boards/spaces';
+import {Game} from '../Game';
 
 export async function exportLogs(db: IDatabase, gameId: GameId): Promise<Array<string>> {
   const saveIds = await db.getSaveIds(gameId);
   let lastIdx = 0;
   const entries = [];
+  // Every version of a game has the same boards, so any one of them labels the spaces.
+  const game = Game.deserialize(await db.getGameVersion(gameId, saveIds[0]));
+  const a9 = {...game.board.A9, ...game.moonData?.moon.A9};
   for (const saveId of saveIds) {
     const {gameLog} = await db.getGameVersion(gameId, saveId);
     for (let idx = lastIdx; idx < gameLog.length; idx++) {
@@ -17,7 +20,7 @@ export async function exportLogs(db: IDatabase, gameId: GameId): Promise<Array<s
         const text = Log.applyData(logEntry, (datum) => {
           switch (datum.type) {
           case LogMessageDataType.SPACE:
-            return getSpaceName(datum.value);
+            return a9[datum.value] ?? 'n/a';
           case LogMessageDataType.TILE_TYPE:
             return tileTypeToString[datum.value];
           default:

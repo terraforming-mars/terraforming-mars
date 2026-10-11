@@ -8,7 +8,7 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <Bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
     <template v-if="tileView === 'coords'">
-      <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
+      <div class="board-space-coords">{{ space.a9 ?? 'n/a' }}</div>
     </template>
     <div v-if="space.color !== undefined && tileView === 'show'" :class="playerColorCss"></div>
     <div v-if="space.coOwner !== undefined && tileView === 'show'" :class="coOwnerColorCss"></div>
@@ -23,7 +23,6 @@ import Bonus from '@/client/components/Bonus.vue';
 import {TileView} from '../board/TileView';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {getSpaceName} from '@/common/boards/spaces';
 
 export default defineComponent({
   name: 'MoonSpace',
@@ -71,9 +70,6 @@ export default defineComponent({
       }
       const css = 'board-cube-coOwner board-cube--' + this.space.coOwner;
       return getPreferences().symbol_overlay ? css + ' overlay' : css;
-    },
-    getSpaceName(): typeof getSpaceName {
-      return getSpaceName;
     },
   },
 });

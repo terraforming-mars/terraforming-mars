@@ -85,7 +85,10 @@ export class ApiCreateGame extends Handler {
       return allBoards.filter((name) => {
         return name === BoardName.THARSIS ||
           name === BoardName.HELLAS ||
-          name === BoardName.ELYSIUM;
+          name === BoardName.ELYSIUM ||
+          name === BoardName.UTOPIA_PLANITIA ||
+          name === BoardName.VASTITAS_BOREALIS_NOVA ||
+          name === BoardName.TERRA_CIMMERIA_NOVA;
       });
     }
     return [board];

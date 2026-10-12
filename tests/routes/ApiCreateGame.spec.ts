@@ -92,7 +92,9 @@ describe('ApiCreateGame', () => {
   });
 
   it('Official random boards do not include fan maps', () => {
-    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).to.have.members([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).to.have.members([
+      BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM,
+      BoardName.VASTITAS_BOREALIS_NOVA, BoardName.TERRA_CIMMERIA_NOVA, BoardName.UTOPIA_PLANITIA]);
   });
   it('Fully random boards do include fan maps', () => {
     expect(ApiCreateGame.boardOptions(RandomBoardOption.ALL)).to.have.members([

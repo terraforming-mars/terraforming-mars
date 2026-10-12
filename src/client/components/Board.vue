@@ -20,7 +20,7 @@
           <BoardSpace v-if="hasSpace(SpaceName.VENERA_BASE)" :space="getSpace(SpaceName.VENERA_BASE)" text="Venera Base" :tileView="tileView"/>
         </div>
 
-        <div class="global-numbers">
+        <div class="global-numbers" :class="{'global-numbers--large': isLargeBoard}">
             <div class="global-numbers-temperature">
                 <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('temperature')" :key="idx">{{ lvl.strValue }}</div>
             </div>
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="board" id="main_board">
+        <div class="board" :class="{'board--large': isLargeBoard}" id="main_board">
             <BoardSpace
               v-for="curSpace in allSpacesOnMars"
               :key="curSpace.id"
@@ -498,6 +498,10 @@ export default defineComponent({
     globalParameterMaximums() {
       return getGlobalParameterMaximums(this.boardName);
     },
+    // The larger map needs a bigger board container.
+    isLargeBoard(): boolean {
+      return this.boardName === BoardName.AMAZONIS_PLANITIA;
+    },
     BoardName(): typeof BoardName {
       return BoardName;
     },
@@ -516,7 +520,8 @@ export default defineComponent({
         .toSorted((space1, space2) => parseInt(space1.id) - parseInt(space2.id));
     },
     gameBoardClassName(): string {
-      return this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+      const css = this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+      return this.isLargeBoard ? css + ' board-cont--large' : css;
     },
   },
 });

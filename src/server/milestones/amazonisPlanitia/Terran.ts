@@ -6,8 +6,8 @@ export class Terran extends BaseMilestone {
   constructor() {
     super(
       'Terran',
-      'Have 6 Earth tags in play',
-      6);
+      'Have 5 Earth tags in play',
+      5);
   }
 
   public getScore(player: IPlayer): number {

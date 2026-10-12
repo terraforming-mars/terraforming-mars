@@ -123,7 +123,6 @@
     }
   });
 
-
   .global-alt-venus {
     .wild-resource {
       background: url(./assets/resources/wild.png) no-repeat;
@@ -180,100 +179,279 @@
     display: none;
   }
 
-  // Per-value placement of the moving marker on each global-parameter track
-  // (Venus, oxygen, temperature). Each track has a list of tuples — one per
-  // reachable parameter value — describing where the marker sits and how it
-  // is rotated to follow the curve printed on the board. The .pin-and-rotate
-  // mixin emits a .val-<n> rule for each tuple; .global-numbers-<track> applies
-  // the appropriate list.
+  // ===========================================================================
+  // Global-parameter dial marker placement
+  // ===========================================================================
+  //
+  // HOW A MARKER'S POSITION IS COMPUTED
+  // -----------------------------------
+  // Inputs (measured once per board image, in IMAGE pixels):
+  //   (CX, CY) = centre of the printed dial circle
+  //   R        = radius of the printed dial circle
+  // Per value, an angle theta on the circle (0 = +x / right, growing clockwise
+  // because y points down). The three arcs occupy different theta ranges of the
+  // same circle.
+  //
+  // A marker is a 26px square (see .global-numbers-value), and we want its CENTRE
+  // on the circle. But `margin` is NOT in image pixels: the markers live inside
+  // `.global-numbers`, whose own `margin: 11px 0 0 16px` shifts them, so margin
+  // space is offset from image space by DELTA ~= (17, 14) (measure it: image
+  // dial centre minus the centre you get by fitting a circle to the existing
+  // marker CENTRES, i.e. (margin-left + 13, margin-top + 13)).
+  //
+  // Putting it together, for a value at angle theta (this is what .pin-at-angle
+  // computes; the lists below hold only <val> <theta>, and the @dial-* constants
+  // are the circle already in margin space, i.e. (CX, CY) - DELTA):
+  //   point on circle (image):  Px = CX + R*cos(theta),  Py = CY + R*sin(theta)
+  //   marker centre (margin):   Px - DELTA.x,            Py - DELTA.y
+  //   margin-left = Px - DELTA.x - 13      (13 = half the 26px marker)
+  //   margin-top  = Py - DELTA.y - 13
+  //   rotation    = theta - a per-track offset (kept the same when only R changes,
+  //                 since rotate() pivots about the marker centre and never moves it).
+  //
+  // CREATING A LIST FOR A NEW DIAL (e.g. a bigger board image)
+  // ----------------------------------------------------------
+  //  1. Measure (CX, CY, R) of the printed circle and DELTA on the new image.
+  //  2. Get each value's theta. Each TRACK keeps the SAME total arc it has on the
+  //     standard dial (find its endpoint angles by fitting a circle to the existing
+  //     list's marker centres and taking atan2 of the first and last markers). If
+  //     the track's value range is unchanged, reuse each value's angle as-is. If it
+  //     grew (the larger maps raise oxygen to 18% and temperature to +14C), the
+  //     larger range is PACKED into that same arc — spread the values evenly between
+  //     the endpoint angles, i.e. theta(value) = a0 + (a1 - a0) * t, where t is the
+  //     value's fraction through its range (so the markers sit tighter, the arc is
+  //     NOT extended). The rotation can follow the tangent (oxygen ~= angle - 180,
+  //     temperature ~= angle).
+  //  3. Set the @dial-* constants to (CX, CY) - DELTA and R, and list <val> <theta>.
+  // The standard maps use the dial on mars.png (CX,CY ~= 317,314, R ~= 267); the
+  // larger maps use the bigger dial on mars-large.png (CX,CY = 368,363, R = 314)
+  // via @oxygen-vals-large / @temperature-vals-large / @venus-vals-large below.
 
-  // Emit a .val-<val> rule positioning the marker at (@top, @left) and
-  // rotating it by @rot. @v is a 4-element list: <val> <margin-top>
-  // <margin-left> <rotation>, matching the entry format of the
-  // @venus-vals / @oxygen-vals / @temperature-vals lists below.
-  .pin-and-rotate(@v) {
+  // Emit a .val-<val> rule centring the marker on the dial circle (@cx, @cy, @r, in margin space,
+  // marker-centre coordinates) at angle @theta, rotated by @theta - @rot-offset. @v is a 2-element
+  // list: <val> <angle>, matching the entry format of the @venus-vals / @oxygen-vals /
+  // @temperature-vals lists below. Each track has its own @rot-offset because its markers face a
+  // different way relative to the circle.
+  .pin-at-angle(@v, @cx, @cy, @r, @rot-offset) {
     @val: extract(@v, 1);
-    @top: extract(@v, 2);
-    @left: extract(@v, 3);
-    @rot: extract(@v, 4);
+    @theta: extract(@v, 2);
     .val-@{val} {
       position: absolute;
-      margin: @top 0 0 @left;
-      transform: rotate(@rot);
+      margin: round(@cy + @r * sin(@theta) - 13px) 0 0 round(@cx + @r * cos(@theta) - 13px);
+      transform: rotate(round(@theta - @rot-offset, 1));
     }
   }
 
-  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  // The standard dial. These constants and the angle lists below were fitted from the original
+  // per-value positions by scripts/fitdial.ts.
+  @dial-cx: 300px;
+  @dial-cy: 300.2px;
+  @dial-r: 267.4px;
+
+  // Each entry: <val> <angle>. Rotation = angle - 270.1deg.
   @venus-vals:
-    0 88px 107px -45deg,
-    2 72px 129px -36deg,
-    4 58px 150px -33deg,
-    6 46px 173px -26deg,
-    8 36px 197px -20deg,
-    10 28px 222px -15deg,
-    12 23px 247px -8deg,
-    14 20px 274px -2deg,
-    16 20px 301px 4deg,
-    18 23px 327px 9deg,
-    20 28px 352px 15deg,
-    22 36px 377px 21deg,
-    24 46px 401px 27deg,
-    26 58px 425px 31deg,
-    28 72px 446px 35deg,
-    30 88px 466px 42deg;
+    0 227.9deg,
+    2 233.7deg,
+    4 239.1deg,
+    6 244.7deg,
+    8 250.3deg,
+    10 255.9deg,
+    12 261.4deg,
+    14 267.2deg,
+    16 273deg,
+    18 278.6deg,
+    20 284.1deg,
+    22 289.7deg,
+    24 295.3deg,
+    26 301deg,
+    28 306.4deg,
+    30 311.9deg;
 
   .global-numbers-venus {
     position: absolute;
-    each(@venus-vals, .(@v) { .pin-and-rotate(@v); });
+    each(@venus-vals, .(@v) { .pin-at-angle(@v, @dial-cx, @dial-cy, @dial-r, 270.1deg); });
   }
 
-  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  // Each entry: <val> <angle>. Rotation = angle - 180.6deg.
   @oxygen-vals:
-    0 500px 125px -54deg,
-    1 482px 104px -48deg,
-    2 460px 82px -43deg,
-    3 435px 64px -37deg,
-    4 411px 49px -30deg,
-    5 383px 37px -22deg,
-    6 355px 28px -15deg,
-    7 325px 23px -10deg,
-    8 295px 20px -2deg,
-    9 265px 21px  6deg,
-    10 236px 25px 12deg,
-    11 207px 32px 19deg,
-    12 179px 43px 25deg,
-    13 153px 56px 31deg,
-    14 128px 72px 37deg;
+    0 127.3deg,
+    1 133.2deg,
+    2 139.9deg,
+    3 146.5deg,
+    4 152.5deg,
+    5 159deg,
+    6 165.3deg,
+    7 171.9deg,
+    8 178.3deg,
+    9 184.8deg,
+    10 191.1deg,
+    11 197.5deg,
+    12 203.9deg,
+    13 210.2deg,
+    14 216.5deg;
 
   .global-numbers-oxygen {
     position: absolute;
-    each(@oxygen-vals, .(@v) { .pin-and-rotate(@v); });
+    each(@oxygen-vals, .(@v) { .pin-at-angle(@v, @dial-cx, @dial-cy, @dial-r, 180.6deg); });
   }
 
-  // Each entry: <val> <margin-top> <margin-left> <rotation>
+  // Each entry: <val> <angle>. Rotation = angle - -0.6deg.
   @temperature-vals:
-    -30 508px 438px 55deg,
-    -28 493px 458px 52deg,
-    -26 478px 474px 48deg,
-    -24 461px 490px 43deg,
-    -22 443px 504px 36deg,
-    -20 423px 517px 33deg,
-    -18 403px 528px 25deg,
-    -16 381px 537px 22deg,
-    -14 360px 544px 17deg,
-    -12 337px 549px 12deg,
-    -10 314px 553px 8deg,
-    -8 291px 554px 0deg,
-    -6 268px 554px -3deg,
-    -4 244px 551px -11deg,
-    -2 222px 546px -14deg,
-    0 199px 540px -20deg,
-    2 177px 531px -24deg,
-    4 156px 521px -30deg,
-    6 137px 509px -33deg,
-    8 117px 494px -40deg;
+    -30 55.6deg,
+    -28 50.3deg,
+    -26 45.6deg,
+    -24 40.6deg,
+    -22 35.7deg,
+    -20 30.6deg,
+    -18 25.7deg,
+    -16 20.6deg,
+    -14 15.8deg,
+    -12 10.8deg,
+    -10 5.7deg,
+    -8 0.8deg,
+    -6 -4.1deg,
+    -4 -9.3deg,
+    -2 -14.1deg,
+    0 -19.2deg,
+    2 -24.3deg,
+    4 -29.3deg,
+    6 -34.1deg,
+    8 -39.4deg;
 
   .global-numbers-temperature {
-    each(@temperature-vals, .(@v) { .pin-and-rotate(@v); });
+    each(@temperature-vals, .(@v) { .pin-at-angle(@v, @dial-cx, @dial-cy, @dial-r, -0.6deg); });
+  }
+
+  // The larger maps (e.g. Amazonis Planitia) raise the maximums (18% oxygen, +14C) and use the
+  // bigger dial on mars-large.png. Computed with the formulas documented above the .pin-at-angle
+  // mixin (CX,CY = 368,363, R = 314, DELTA = (17,14)). The oxygen and temperature arcs are mirror
+  // images about the dial's vertical axis and span the SAME total angle; each track's values are
+  // spread evenly along its arc. The arcs run from a bottom angle (90deg +/- G) up to a top angle
+  // (270deg -/+ H), here G = 20, H = 52 (so each arc is 108deg). To de-squish the markers, lengthen
+  // the arc by lowering G (moving the bottom start nearer 90deg, the bottom-centre); raise G to
+  // shorten it. Venus is unchanged (still 0..30) so @venus-vals-large is just the standard track
+  // reprojected. `.global-numbers--large` (set by the Board component) selects these; its higher
+  // specificity overrides the standard rules.
+  //
+  // As with the standard dial, the constants and angle lists were fitted from the per-value positions
+  // by scripts/fitdial.ts.
+  @dial-cx-large: 353px;
+  @dial-cy-large: 351.2px;
+  @dial-r-large: 313.9px;
+
+  // Each entry: <val> <angle>. Rotation = angle - 180deg.
+  @oxygen-vals-large:
+    0 110deg,
+    1 116.1deg,
+    2 122deg,
+    3 128deg,
+    4 134deg,
+    5 140.1deg,
+    6 145.9deg,
+    7 152.1deg,
+    8 158deg,
+    9 164deg,
+    10 169.9deg,
+    11 176deg,
+    12 182deg,
+    13 188.1deg,
+    14 194deg,
+    15 200deg,
+    16 206.1deg,
+    17 212deg,
+    18 218deg;
+
+  // Each entry: <val> <angle>. Rotation = angle - 0deg.
+  @temperature-vals-large:
+    -30 70.1deg,
+    -28 65.1deg,
+    -26 60.2deg,
+    -24 55.2deg,
+    -22 50.4deg,
+    -20 45.5deg,
+    -18 40.5deg,
+    -16 35.6deg,
+    -14 30.6deg,
+    -12 25.8deg,
+    -10 20.9deg,
+    -8 16deg,
+    -6 11deg,
+    -4 6.2deg,
+    -2 1.2deg,
+    0 -3.7deg,
+    2 -8.6deg,
+    4 -13.5deg,
+    6 -18.4deg,
+    8 -23.3deg,
+    10 -28.1deg,
+    12 -33.1deg,
+    14 -38deg;
+
+  // Above 30%, the Venus scale moves 1% per step (Amazonis Planitia goes to 33%), so the large
+  // track has 19 values instead of 16. They are packed, equally spaced, into the arc that 0..30
+  // occupy on the standard track: @venus-arc-*-large are the fitted angles of 0 and 30, and each
+  // value's angle is interpolated from its position in @venus-vals-large. Rotation = angle - 270.1deg.
+  @venus-arc-start-large: 228deg;
+  @venus-arc-end-large: 312deg;
+  @venus-vals-large: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 31, 32, 33;
+
+  &.global-numbers--large {
+    .global-numbers-oxygen {
+      each(@oxygen-vals-large, .(@v) { .pin-at-angle(@v, @dial-cx-large, @dial-cy-large, @dial-r-large, 180deg); });
+    }
+    .global-numbers-temperature {
+      each(@temperature-vals-large, .(@v) { .pin-at-angle(@v, @dial-cx-large, @dial-cy-large, @dial-r-large, 0deg); });
+    }
+    .global-numbers-venus {
+      each(@venus-vals-large, .(@val, @key, @i) {
+        @theta: (@venus-arc-start-large + (@venus-arc-end-large - @venus-arc-start-large) * (@i - 1) / (length(@venus-vals-large) - 1));
+        .pin-at-angle(@val @theta, @dial-cx-large, @dial-cy-large, @dial-r-large, 270.1deg);
+      });
+    }
+    // Ocean count sits in the gap at the bottom-centre of the dial. Centre is at margin
+    // (368-17, 363-14) = (351, 349); this places the "X/11" text horizontally centred and near
+    // the bottom of the larger circle (bottom of the circle is at margin-y 349 + 314 = 663).
+    .global-numbers-oceans {
+      margin: 632px 0 0 326px;
+    }
+
+    // Ares hazard markers. The ocean-related ones (erosion / remove-dust-storm) are anchored to
+    // the ocean count, so they take the same translation the ocean count took (+108 top, +40 left
+    // from the standard layout) — keeping the erosion icon/value on the same row as the oceans.
+    .global-ares-erosions-icon { margin: 637px 0 0 261px; } // nudged right to clear the 0% oxygen marker
+    .global-ares-erosions-val { margin: 643px 0 0 285px; }
+    .global-ares-remove-dust-storms-icon { margin: 544px 0 0 316px; }
+    .global-ares-remove-dust-storms-val { margin: 643px 0 0 421px; }
+
+    // Each "severe" marker sits just outboard of its matching track value marker (severe-erosion V
+    // outboard of temperature V; severe-dust-storm V outboard of oxygen V) and SHARES that value's
+    // rotation. Because the large tracks are repacked (see above), the standard transform's rotation
+    // is wrong here and must be overridden — the rotation below matches the corresponding large
+    // @temperature-vals-large / @oxygen-vals-large entry. Each margin is that large value marker's
+    // centre pushed ~45px radially out from the dial centre (351 left, 349 top), minus the marker's
+    // half-size (27, 30). The scale(.4) is re-stated because we override the whole transform.
+    .global-ares-severe-erosions-0 { margin: 296px 0 0 682px; transform: rotate(-4deg) scale(.4, .4); }
+    .global-ares-severe-erosions--2 { margin: 327px 0 0 683px; transform: rotate(1deg) scale(.4, .4); }
+    .global-ares-severe-erosions--4 { margin: 358px 0 0 681px; transform: rotate(6deg) scale(.4, .4); }
+    .global-ares-severe-erosions--6 { margin: 388px 0 0 676px; transform: rotate(11deg) scale(.4, .4); }
+    .global-ares-severe-erosions--8 { margin: 418px 0 0 669px; transform: rotate(16deg) scale(.4, .4); }
+    .global-ares-severe-dust-storms-3 { margin: 601px 0 0 103px; transform: rotate(-52deg) scale(.4, .4); }
+    .global-ares-severe-dust-storms-4 { margin: 577px 0 0 75px; transform: rotate(-46deg) scale(.4, .4); }
+    .global-ares-severe-dust-storms-5 { margin: 550px 0 0 48px; transform: rotate(-40deg) scale(.4, .4); }
+    .global-ares-severe-dust-storms-6 { margin: 520px 0 0 27px; transform: rotate(-34deg) scale(.4, .4); }
+    .global-ares-severe-dust-storms-7 { margin: 487px 0 0 7px; transform: rotate(-28deg) scale(.4, .4); }
+
+    // Alt-Venus board wild-resource bonuses (venus 18..30) sit beside the tail end of the venus
+    // track, so they follow the reprojected large venus track (offset from the matching value).
+    .global-alt-venus {
+      .p18 { margin: 60px 0 0 385px; }
+      .p20 { margin: 66px 0 0 414px; }
+      .p22 { margin: 74px 0 0 440px; }
+      .p24 { margin: 84px 0 0 466px; }
+      .p26 { margin: 98px 0 0 490px; }
+      .p28 { margin: 114px 0 0 513px; }
+      .p30 { margin: 129px 0 0 528px; }
+      .p30b { margin: 141px 0 0 542px; }
+    }
   }
 }

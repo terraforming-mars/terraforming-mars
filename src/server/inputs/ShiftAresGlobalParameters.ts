@@ -40,6 +40,7 @@ export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParamet
   }
 
   private inRange(val: number) {
-    return (val >= -1 && val <= 1);
+    // Only -1, 0 or 1: a string like "1" would pass the comparison and turn the shared thresholds into text
+    return Number.isInteger(val) && val >= -1 && val <= 1;
   }
 }

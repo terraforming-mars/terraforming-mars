@@ -20,8 +20,12 @@ export function isPayment(obj: unknown): obj is Payment {
     return false;
   }
   const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
-  return SPENDABLE_RESOURCES.every((key) =>
-    h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
+  // Whole numbers of at least 0 only, and no other fields: a fraction like 3.3334 titanium would otherwise
+  // pay a 10 M€ card without overpaying, and unknown fields would end up in logs unchecked.
+  const knownKeys: ReadonlyArray<string> = SPENDABLE_RESOURCES;
+  return Object.keys(h).every((key) => knownKeys.includes(key)) &&
+    SPENDABLE_RESOURCES.every((key) =>
+      h.hasOwnProperty(key) && Number.isInteger(h[key]) && h[key] >= 0);
 }
 
 export const DEFAULT_PAYMENT_VALUES = {

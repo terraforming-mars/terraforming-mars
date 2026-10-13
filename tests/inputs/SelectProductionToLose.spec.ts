@@ -29,4 +29,16 @@ describe('SelectProductionToLose', () => {
     expect(() => selectProductionToLose.process({type: 'productionToLose', units: Units.of({titanium: 1})}, player))
       .to.throw(/You do not have those units/);
   });
+
+  it('Rejects extra fields and fractions', () => {
+    const selectProductionToLose = new SelectProductionToLose('', 2, player).andThen(cb);
+    selected = undefined;
+    // An extra field would count towards the sum without costing any production
+    const withExtraField = {...Units.EMPTY, x: 2} as unknown as Units;
+    expect(() => selectProductionToLose.process({type: 'productionToLose', units: withExtraField}, player))
+      .to.throw(/not a units object/);
+    expect(() => selectProductionToLose.process({type: 'productionToLose', units: Units.of({megacredits: 1.5, heat: 0.5})}, player))
+      .to.throw(/not a units object/);
+    expect(selected).is.undefined;
+  });
 });

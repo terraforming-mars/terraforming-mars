@@ -28,6 +28,10 @@ export class SelectResources extends BasePlayerInput<Units> {
     if (!isSelectResourcesResponse(input)) {
       throw new InputError('Not a valid SelectResourcesResponse');
     }
+    // Strict: extra fields or fractions would count towards the sum without being granted as chosen
+    if (!Units.isChosenUnits(input.units)) {
+      throw new InputError('not a units object');
+    }
     const array = Object.values(input.units);
     if (array.some((count) => count < 0)) {
       throw new InputError('All units must be positive');

@@ -48,6 +48,19 @@ export namespace Units {
   }
 
   /**
+   * Like isUnits, but for amounts a player sends: exactly the six unit fields, each a whole number of at least 0.
+   * Extra fields or fractions would otherwise slip past sums and range checks.
+   */
+  export function isChosenUnits(arg: unknown): arg is Units {
+    if (!isUnits(arg)) {
+      return false;
+    }
+    const knownKeys: ReadonlyArray<string> = keys;
+    return Object.keys(arg).every((key) => knownKeys.includes(key)) &&
+      keys.every((key) => Number.isInteger(arg[key]) && arg[key] >= 0);
+  }
+
+  /**
    * Converts partial units to a full Units, allowing code to use a Units structure,
    * reducing the need to check for undefined everywhere.
    */

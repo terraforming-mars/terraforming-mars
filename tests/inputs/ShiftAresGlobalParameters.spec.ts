@@ -69,4 +69,17 @@ describe('ShiftAresGlobalParameters', () => {
       temperatureDelta: 1,
     });
   });
+
+  it('fail, values that are not whole numbers', () => {
+    resp = undefined;
+    // A string would pass the range comparison and turn the shared thresholds into text
+    for (const value of ['1', 0.5]) {
+      expect(() =>
+        shiftAresGlobalParameters.process({type: 'aresGlobalParameters', response: {
+          lowOceanDelta: value as unknown as 1, highOceanDelta: 0, temperatureDelta: 0, oxygenDelta: 0,
+        }}, player))
+        .to.throw(/values out of range/);
+    }
+    expect(resp).is.undefined;
+  });
 });

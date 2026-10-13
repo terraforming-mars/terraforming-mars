@@ -180,6 +180,7 @@
                               <label :for="boardName+'-checkbox'" class="expansion-button">
                                   <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
                                   <span class="capitalized" v-i18n>{{ boardName }}</span>
+                                  <template v-if="boardName === BoardName.AMAZONIS_PLANITIA">&nbsp;<span title="In development">(dev)</span></template>
                                   <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
                                     &nbsp;<a :href="boardHref(boardName)" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                   </template>
@@ -787,6 +788,9 @@ export default defineComponent({
     },
     typedRefs(): Refs {
       return this.$refs as Refs;
+    },
+    BoardName(): typeof BoardName {
+      return BoardName;
     },
     RandomBoardOption(): typeof RandomBoardOption {
       return RandomBoardOption;

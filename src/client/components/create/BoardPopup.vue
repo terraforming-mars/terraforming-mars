@@ -13,7 +13,7 @@
           <label :for="boardName+'-checkbox'" class="expansion-button">
             <span v-if="!isRandomBoard(boardName)" class="create-game-board-hexagon" :class="boardColorClass(boardName)">&#x2B22;</span>
             <span class="capitalized" v-i18n>{{ boardName }}</span>
-            <template v-if="boardName === BoardName.AMAZONIS_PLANITIA">&nbsp;<span title="In development">(dev)</span></template>
+            <template v-if="boardName === BoardName.AMAZONIS_PLANITIA">&nbsp;<span title="In development">(α)</span></template>
             <template v-if="!isRandomBoard(boardName)">
               &nbsp;<a :href="boardHref(boardName)" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
             </template>
@@ -83,8 +83,7 @@ const groups: ReadonlyArray<BoardGroup> = [
       BoardName.UTOPIA_PLANITIA,
       BoardName.VASTITAS_BOREALIS_NOVA,
       BoardName.TERRA_CIMMERIA_NOVA,
-      // TODO(kberg): Offer Amazonis Planitia in every build once it's ready to play.
-      ...(process.env.NODE_ENV === 'development' ? [BoardName.AMAZONIS_PLANITIA] : []),
+      BoardName.AMAZONIS_PLANITIA,
       RandomBoardOption.OFFICIAL,
     ],
   },

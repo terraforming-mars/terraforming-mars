@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-outer">
+  <div class="popup-outer" @mousedown="onMousedown" @mouseup="onMouseup" @click.self="outerOnClick">
     <div class="popup-inner">
       <div class="popup-header">
         <slot name="header"></slot>
@@ -17,9 +17,39 @@ import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'PopupPanel',
+  props: {
+    /** True when clicking outside the panel closes it. */
+    closeOnOutsideClick: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      /** True when the latest mouse press started outside the panel. */
+      pressedOutside: false,
+      /** True when the latest mouse release ended outside the panel. */
+      releasedOutside: false,
+    };
+  },
   methods: {
     onclick() {
       this.$emit('close');
+    },
+    /** Returns true when `event` happened on the backdrop rather than the panel. */
+    isOutside(event: MouseEvent): boolean {
+      return event.target === event.currentTarget;
+    },
+    onMousedown(event: MouseEvent) {
+      this.pressedOutside = this.isOutside(event);
+    },
+    onMouseup(event: MouseEvent) {
+      this.releasedOutside = this.isOutside(event);
+    },
+    outerOnClick() {
+      if (this.closeOnOutsideClick && this.pressedOutside && this.releasedOutside) {
+        this.onclick();
+      }
     },
     keylistener(event: KeyboardEvent) {
       if (event.key === 'Escape') {

@@ -1024,10 +1024,14 @@ export default defineComponent({
         return 'create-game-board-hexagon create-game-vastitas-borealis-nova';
       case BoardName.AMAZONIS:
         return 'create-game-board-hexagon create-game-amazonis';
+      case BoardName.AMAZONIS_PLANITIA:
+        return 'create-game-board-hexagon create-game-amazonis-planitia';
       case BoardName.ARABIA_TERRA:
         return 'create-game-board-hexagon create-game-arabia-terra';
       case BoardName.TERRA_CIMMERIA:
         return 'create-game-board-hexagon create-game-terra-cimmeria';
+      case BoardName.TERRA_CIMMERIA_NOVA:
+        return 'create-game-board-hexagon create-game-terra-cimmeria-nova';
       case BoardName.VASTITAS_BOREALIS:
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       case BoardName.HOLLANDIA:

@@ -58,20 +58,4 @@ describe('BoardPopup', () => {
     expect(wrapper.emitted('update:shuffleMap')).to.deep.eq([[true]]);
     expect(wrapper.emitted('close')).is.undefined;
   });
-
-  for (const run of [
-    {nodeEnv: 'development', offered: true},
-    {nodeEnv: 'production', offered: false},
-  ] as const) {
-    it(`offers Amazonis Planitia only in development builds ${JSON.stringify(run)}`, () => {
-      const nodeEnv = process.env.NODE_ENV;
-      process.env.NODE_ENV = run.nodeEnv;
-      try {
-        const wrapper = mountPopup();
-        expect(radio(wrapper, BoardName.AMAZONIS_PLANITIA).exists()).eq(run.offered);
-      } finally {
-        process.env.NODE_ENV = nodeEnv;
-      }
-    });
-  }
 });

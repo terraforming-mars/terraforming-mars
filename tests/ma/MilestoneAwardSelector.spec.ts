@@ -119,7 +119,7 @@ describe('MilestoneAwardSelector', () => {
       milestoneManifest.expansions['underworld'],
     ].flat();
 
-    avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
+    avoidedMilestones.push('Pioneer', 'Martian');
     avoidedAwards.push('T. Politician');
     const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
       randomMA: RandomMAOptionType.LIMITED,

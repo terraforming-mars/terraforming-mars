@@ -101,7 +101,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     tag: Tag.EARTH,
     dynamicSlots: true,
     rewardIcons: [
-      {cssClass: 'resource money', production: true, text: '2'},
+      {cssClass: 'resource megacredits', production: true, text: '2'},
     ],
   },
   {

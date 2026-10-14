@@ -31,14 +31,12 @@ export const milestoneNames = [
   'Lunarchitect',
 
   // Amazonis Planitia
-  'Colonizer',
   'Minimalist',
   'Terran',
   'Tropicalist',
 
   // Arabia Terra
   'Economizer',
-  'Pioneer',
   'Land Specialist',
   'Martian',
 
@@ -88,7 +86,7 @@ export const milestoneNames = [
   'Merchant3',
   'Metallurgist', // Same as Smith
   'Philantropist',
-  'Pioneer4',
+  'Pioneer',
   'Planetologist',
   'Producer',
   'Researcher',
@@ -113,6 +111,8 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
 
   // TODO(kberg): remove after 2026-12-01
   ['Spacefarer', 'T. Spacefarer'],
+  ['Colonizer', 'Pioneer'],
+  ['Pioneer4', 'Pioneer'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

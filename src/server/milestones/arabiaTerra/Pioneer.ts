@@ -5,8 +5,8 @@ export class Pioneer extends BaseMilestone {
   constructor() {
     super(
       'Pioneer',
-      'Have 3 colonies',
-      3);
+      'Have 4 colonies',
+      4);
   }
   public getScore(player: IPlayer): number {
     return player.getColoniesCount();

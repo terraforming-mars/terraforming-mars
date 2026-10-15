@@ -11,7 +11,7 @@
         <text x="30" y="107" class="board-caption board_caption--black">●</text>
       </g>
 
-      <g id="mare_sereitatis" transform="translate(485, 140)">
+      <g id="mare_serenitatis" transform="translate(485, 140)">
         <text class="board-caption">
             <tspan dy="15">Mare</tspan>
             <tspan x="4" dy="12">Serenitatis</tspan>

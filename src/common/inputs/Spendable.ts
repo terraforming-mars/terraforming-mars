@@ -26,7 +26,7 @@ export const SPENDABLE_CARD_RESOURCES = [
   'floaters',
   // Luna Archives corporation can spend its science resources for cards with Moon tags.
   'lunaArchivesScience',
-  // Spire corporation can spend its science resources on standrad projects.
+  // Spire corporation can spend its science resources on standard projects.
   'spireScience',
   // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   'seeds',

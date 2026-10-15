@@ -10,7 +10,7 @@ import {InputError} from './InputError';
 export class SelectColony extends BasePlayerInput<IColony> {
   // When true, show just the tile, and none of the cubes on top.
   // Used for tiles that are not yet in the game, or for a clearer
-  // visualziation when necesary.
+  // visualization when necessary.
   public showTileOnly = false;
 
   constructor(

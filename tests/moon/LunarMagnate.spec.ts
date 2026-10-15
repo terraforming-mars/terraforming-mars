@@ -37,7 +37,7 @@ describe('LunarMagnate', () => {
     expect(award.getScore(otherPlayer)).eq(1);
   });
 
-  it('Comatible with Hostile Takeover', () => {
+  it('Compatible with Hostile Takeover', () => {
     const award = new LunarMagnate();
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
 

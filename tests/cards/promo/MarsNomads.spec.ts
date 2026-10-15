@@ -416,7 +416,7 @@ describe('MarsNomads', () => {
     selectSpace.cb(space);
     runAllActions(game);
 
-    // Expeccted that move does not trigger Expedition Vehicles.0
+    // Expected that move does not trigger Expedition Vehicles.0
     expect(player.cardsInHand).has.length(0);
   });
 

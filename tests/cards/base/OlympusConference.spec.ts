@@ -87,7 +87,7 @@ describe('OlympusConference', () => {
     const marsUniversity = new MarsUniversity();
     const scienceTagCard = new AdaptationTechnology();
 
-    // Olypus Conference played before Mars University
+    // Olympus Conference played before Mars University
     player.playedCards.push(card);
     player.playedCards.push(marsUniversity);
     card.resourceCount = 1;

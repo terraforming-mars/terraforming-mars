@@ -234,7 +234,7 @@ export class MarsBoard extends Board {
     if (player.tableau.has(CardName.GORDON)) {
       return availableLandSpaces;
     }
-    // Spaces next to Red City are always unavialable for Greeneries.
+    // Spaces next to Red City are always unavailable for Greeneries.
     availableLandSpaces = this.filterSpacesAroundRedCity(availableLandSpaces);
 
     // player can place a greenery in an available land space that is next

@@ -70,7 +70,7 @@ describe('SuitableInfrastructure', () => {
     game.phase = Phase.ACTION;
     const saturnSystems = new SaturnSystems();
     player.playedCards.push(card);
-    // Gain 1 MC prouduction when anybody plays a card with a jovian tag.
+    // Gain 1 MC production when anybody plays a card with a jovian tag.
     player.playedCards.push(saturnSystems);
     const jovianLanterns = new JovianLanterns();
 

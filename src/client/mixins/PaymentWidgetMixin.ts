@@ -126,14 +126,14 @@ export const PaymentWidgetMixin = defineComponent({
       // That the card being paid for by the client shows that there's already a spare microbe around, and
       // that the server has decided there's enough money to play it.
       //
-      // The only microbes that can be used for payment are those on Psychopriles.
-      // If you don't have Psychopriles but are still paying for Soil Enrichment,
+      // The only microbes that can be used for payment are those on Psychrophiles.
+      // If you don't have Psychrophiles but are still paying for Soil Enrichment,
       // then amount, below would be -1, so the Math.max makes sure it's zero.
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
       if (this.card?.name === CardName.SOIL_ENRICHMENT) {
-        // Find a card other than Psychopriles with microbes.
-        // If there is none, then Psychopriles can't use every one.
+        // Find a card other than Psychrophiles with microbes.
+        // If there is none, then Psychrophiles can't use every one.
         if (!thisPlayer.tableau.some((card) => {
           return card.name !== CardName.PSYCHROPHILES && getCard(card.name)?.resourceType === CardResource.MICROBE && (card.resources ?? 0) > 0;
         })) {

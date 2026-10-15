@@ -150,9 +150,9 @@
                       </text>
                   </g>
 
-                  <g id="hecatus_tholus"  transform="translate(130, 150)">
+                  <g id="hecates_tholus"  transform="translate(130, 150)">
                       <text class="board-caption">
-                          <tspan dy="15">Hecatus</tspan>
+                          <tspan dy="15">Hecates</tspan>
                           <tspan x="3" dy="12">Tholus</tspan>
                       </text>
                   </g>
@@ -173,10 +173,10 @@
                 </template>
 
                 <template v-if="boardName === BoardName.VASTITAS_BOREALIS_NOVA">
-                  <g id="hectates_tholius_vastitas_borealis_novus"  transform="translate(270, 70)">
+                  <g id="hecates_tholus_vastitas_borealis_novus"  transform="translate(270, 70)">
                       <text class="board-caption">
-                          <tspan dy="15">Hectates</tspan>
-                          <tspan x="5" dy="12">Tholius</tspan>
+                          <tspan dy="15">Hecates</tspan>
+                          <tspan x="5" dy="12">Tholus</tspan>
                       </text>
                   </g>
 

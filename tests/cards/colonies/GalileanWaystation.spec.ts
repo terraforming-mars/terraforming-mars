@@ -27,7 +27,7 @@ describe('GalileanWaystation', () => {
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Corectly counts wildtags', () => {
+  it('Correctly counts wildtags', () => {
     const card2 = new ColonizerTrainingCamp();
     const card3 = new MethaneFromTitan();
     const researchCoordination = new ResearchCoordination();

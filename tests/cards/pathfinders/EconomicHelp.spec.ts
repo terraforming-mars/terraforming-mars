@@ -87,7 +87,7 @@ describe('EconomicHelp', () => {
     game.pathfindersData = {
       venus: 17, // At the maximum
       earth: 18, // Max is 22
-      mars: 17, // At the maximmum
+      mars: 17, // At the maximum
       jovian: 14, // At the maximum
       moon: -1,
       vps: [],

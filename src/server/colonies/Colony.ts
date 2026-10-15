@@ -188,7 +188,7 @@ export abstract class Colony implements IColony {
         *
         * This is related to how certain colony bonuses require player interaction.
         * The deferred action queue doesn't work well when asking for inputs for
-        * multple players.
+        * multiple players.
         */
       return action.execute();
     } else {

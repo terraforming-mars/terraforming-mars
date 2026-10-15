@@ -57,7 +57,7 @@ function getQuotaConfigs(): Array<QuotaConfig> {
       }
       return structs.map(parseQuotaConfig);
     } catch (e) {
-      console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
+      console.warn('While initializing quota:', (e instanceof Error ? e.message : e));
     }
   }
   return [defaultQuota];

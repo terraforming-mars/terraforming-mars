@@ -1,4 +1,4 @@
-// A fake version of global.localStorage that  also regsiters as
+// A fake version of global.localStorage that also registers as
 // the global instance. Used for testing.
 export class FakeLocalStorage implements Storage {
   private saved: Storage | undefined;

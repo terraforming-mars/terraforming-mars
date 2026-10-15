@@ -28,7 +28,7 @@ describe('ValuableGases', () => {
 
     // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
-    // Jovian Lanters is active, has floaters, requires a jovian tag, but costs 20
+    // Jovian Lanterns is active, has floaters, requires a jovian tag, but costs 20
     jovianLanters = new JovianLanterns();
     // Local Shading has floaters and no requirements. Costs 4.
     localShading = new LocalShading();

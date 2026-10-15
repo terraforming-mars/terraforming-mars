@@ -10,7 +10,7 @@ import {UrlParams} from './UrlParams';
 
 // Processes a request for a specific path.
 //
-// Don't impement this directly, use `Handler`.
+// Don't implement this directly, use `Handler`.
 export interface IHandler {
   /**
    * Process an inbound HTTP request.

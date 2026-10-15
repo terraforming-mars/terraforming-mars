@@ -257,7 +257,7 @@ describe('AresHandler', () => {
     expect(player.popWaitingFor()).is.undefined;
   });
 
-  it('Adjacenct hazard costs do not apply to oceans', () => {
+  it('Adjacent hazard costs do not apply to oceans', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 

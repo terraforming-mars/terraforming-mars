@@ -45,7 +45,7 @@ export class RemoveAnyPlants extends DeferredAction {
 
     if (game.isSoloMode()) {
       const option = new SelectOption(
-        'Remove plants from the neutral oppponent',
+        'Remove plants from the neutral opponent',
         'Remove plants')
         .andThen(() => {
           game.someoneHasRemovedOtherPlayersPlants = true;

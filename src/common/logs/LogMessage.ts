@@ -11,7 +11,7 @@ export class LogMessage implements Message {
     type: LogMessageType,
     public message: string,
     public data: Array<LogMessageData>,
-    // When set, this message is private for the specifed player.
+    // When set, this message is private for the specified player.
     // Always filter messages so they're not sent to the wrong player.
     playerId?: PlayerId) {
     // setting in body to avoid setting property when

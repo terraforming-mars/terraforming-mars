@@ -4,7 +4,7 @@ Tool directory is for specific scripts for project maintenance.
 
 Before use them build the project `npm run build`
 
-... then run any of compilled scripts from build directory `node <path-to-the-toolname>.js`
+... then run any of compiled scripts from build directory `node <path-to-the-toolname>.js`
 
 For example check_locales.ts tool can be run like this: `node build/src/server/tools/check_locales.js`
 
@@ -47,7 +47,7 @@ or
 
 ```
 heroku pg:credentials:url --app <heroku-app-name>
-POSTGRES_HOST=<postges:...> node build/src/tools/export_game.js <game id | player id | spectator id>
+POSTGRES_HOST=<postgres:...> node build/src/tools/export_game.js <game id | player id | spectator id>
 ```
 
 ### Description

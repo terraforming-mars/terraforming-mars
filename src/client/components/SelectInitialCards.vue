@@ -23,7 +23,7 @@
     <div v-if="warning !== undefined" class="tm-warning">
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
-    <!-- :key=warning is a way of validing that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
+    <!-- :key=warning is a way of validating that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
     <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
   </div>
 </template>

@@ -19,7 +19,7 @@ describe('Gordon', () => {
     player.playedCards.push(card);
   });
 
-  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', () => {
+  it('Can place greenery tile on any available land space, not just adjacent to existing greenery', () => {
     addGreenery(player, '35');
     expect(game.board.getAvailableSpacesForGreenery(player).length).greaterThan(6);
   });

@@ -361,7 +361,7 @@ export class Game implements IGame, Logger {
 
     // Must configure this before solo placement.
     if (gameOptions.underworldExpansion) {
-      game.underworldData = UnderworldExpansion.initialize(rng);
+      game.underworldData = UnderworldExpansion.initialize(rng, gameOptions.boardName === BoardName.AMAZONIS_PLANITIA);
     }
 
     // and 2 neutral cities and forests on board

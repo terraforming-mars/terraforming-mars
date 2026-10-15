@@ -64,6 +64,11 @@ describe('UnderworldExpansion', () => {
     expect(underworldData.tokens).has.length(91);
   });
 
+  it('sanity, Amazonis Planitia', () => {
+    const [game] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    expect(game.underworldData.tokens).has.length(136);
+  });
+
   it('identify', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 

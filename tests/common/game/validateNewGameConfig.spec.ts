@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {validationDetails, Helpers, validateNewGameConfig, ValidationErrors} from '../../../src/common/game/validateNewGameConfig';
 import {NewGameConfig, NewPlayerModel} from '../../../src/common/game/NewGameConfig';
 import {RandomBoardOption} from '../../../src/common/boards/RandomBoardOption';
+import {BoardName} from '../../../src/common/boards/BoardName';
 import {RandomMAOptionType} from '../../../src/common/ma/RandomMAOptionType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
@@ -90,6 +91,7 @@ const NO_ERRORS: ValidationErrors = {
   ceosMissingExpansions: [],
   soloWithoutCorporateEra: false,
   infiniteEnergyBug: false,
+  altVenusBoardOnAmazonis: false,
   notEnoughCorporations: 0,
 };
 
@@ -169,6 +171,16 @@ describe('validateNewGameConfig', () => {
     expect(validate({expansions, bannedCards: [CardName.HIGH_TEMP_SUPERCONDUCTORS]}).infiniteEnergyBug).is.false;
     expect(validate({expansions: {...expansions, prelude2: false}}).infiniteEnergyBug).is.false;
     expect(validate({expansions: {...expansions, pathfinders: false}}).infiniteEnergyBug).is.false;
+  });
+
+  it('alt venus board on amazonis', () => {
+    const expansions = {...newGameConfig().expansions, venus: true};
+    expect(validate({expansions, altVenusBoard: true, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, board: RandomBoardOption.ALL}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, board: RandomBoardOption.OFFICIAL}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({expansions, altVenusBoard: true, board: BoardName.THARSIS}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({expansions, altVenusBoard: false, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({altVenusBoard: true, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
   });
 
   it('not enough corporations', () => {

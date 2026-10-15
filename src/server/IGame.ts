@@ -17,6 +17,7 @@ import {Priority} from './deferredActions/Priority';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
+import {GlobalParameterMaximums} from '../common/boards/GlobalParameterMaximums';
 import {TileType} from '../common/TileType';
 import {ICard} from './cards/ICard';
 import {Turmoil} from './turmoil/Turmoil';
@@ -37,14 +38,6 @@ import {IStandardProjectCard} from './cards/IStandardProjectCard';
 export interface Score {
   corporation: String;
   playerScore: number;
-}
-
-/** The maximum values of the global parameters. */
-export interface GlobalParameterMaximums {
-  readonly temperature: number;
-  readonly oxygen: number;
-  readonly oceans: number;
-  readonly venus: number;
 }
 
 export interface IGame extends Logger {

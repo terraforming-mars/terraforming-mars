@@ -1,4 +1,5 @@
-import * as constants from '@/common/constants';
+import {getGlobalParameterMaximums} from '@/common/boards/GlobalParameterMaximums';
+import {BoardName} from '@/common/boards/BoardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
@@ -144,11 +145,6 @@ export class AmazonisPlanitiaBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, {
-      oceans: constants.MAX_OCEAN_TILES_AMAZONIS,
-      temperature: constants.MAX_TEMPERATURE_AMAZONIS,
-      oxygen: constants.MAX_OXYGEN_LEVEL_AMAZONIS,
-      venus: constants.MAX_VENUS_SCALE_AMAZONIS,
-    });
+    super(spaces, undefined, getGlobalParameterMaximums(BoardName.AMAZONIS_PLANITIA));
   }
 }

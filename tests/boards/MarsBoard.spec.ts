@@ -281,10 +281,10 @@ describe('MarsBoard', () => {
   });
 
   it('global parameter maximums can be overridden', () => {
-    const customBoard = new MarsBoard(board.spaces, undefined, {temperature: 14, oxygen: 18, oceans: 11});
+    const customBoard = new MarsBoard(board.spaces, undefined, {temperature: 14, oxygen: 18, oceans: 11, venus: 36});
     expect(customBoard.max.temperature).eq(14);
     expect(customBoard.max.oxygen).eq(18);
     expect(customBoard.max.oceans).eq(11);
-    expect(customBoard.max.venus).eq(constants.MAX_VENUS_SCALE);
+    expect(customBoard.max.venus).eq(36);
   });
 });

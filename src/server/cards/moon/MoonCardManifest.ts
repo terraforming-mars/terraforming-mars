@@ -88,7 +88,7 @@ import {RevoltingColonists} from './RevoltingColonists';
 import {RoadPiracy} from './RoadPiracy';
 import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
-import {SinusIrdiumRoadNetwork} from './SinusIrdiumRoadNetwork';
+import {SinusIridumRoadNetwork} from './SinusIridumRoadNetwork';
 import {SmallDutyRovers} from './SmallDutyRovers';
 import {SolarPanelFoundry} from './SolarPanelFoundry';
 import {SphereHabitats} from './SphereHabitats';
@@ -123,7 +123,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.THE_WOMB]: {Factory: TheWomb},
     [CardName.TYCHO_ROAD_NETWORK]: {Factory: TychoRoadNetwork},
     [CardName.ARISTARCHUS_ROAD_NETWORK]: {Factory: AristarchusRoadNetwork},
-    [CardName.SINUS_IRDIUM_ROAD_NETWORK]: {Factory: SinusIrdiumRoadNetwork},
+    [CardName.SINUS_IRIDUM_ROAD_NETWORK]: {Factory: SinusIridumRoadNetwork},
     [CardName.MOMENTUM_VIRIUM_HABITAT]: {Factory: MomentumViriumHabitat},
     [CardName.LUNA_TRADE_STATION]: {Factory: LunaTradeStation},
     [CardName.LUNA_MINING_HUB]: {Factory: LunaMiningHub},

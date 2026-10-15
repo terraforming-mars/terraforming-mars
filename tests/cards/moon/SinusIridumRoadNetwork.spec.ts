@@ -1,16 +1,16 @@
 import {TestPlayer} from '../../TestPlayer';
-import {SinusIrdiumRoadNetwork} from '../../../src/server/cards/moon/SinusIrdiumRoadNetwork';
+import {SinusIridumRoadNetwork} from '../../../src/server/cards/moon/SinusIridumRoadNetwork';
 import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {testGame} from '../../TestingUtils';
 
-describe('SinusIrdiumRoadNetwork', () => {
+describe('SinusIridumRoadNetwork', () => {
   let player: TestPlayer;
-  let card: SinusIrdiumRoadNetwork;
+  let card: SinusIridumRoadNetwork;
 
   beforeEach(() => {
     [/* game */, player] = testGame(1, {moonExpansion: true});
-    card = new SinusIrdiumRoadNetwork();
+    card = new SinusIridumRoadNetwork();
   });
 
   it('can play', () => {

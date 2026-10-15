@@ -10,6 +10,7 @@ describe('CardRenames', () => {
     expect(resolveCardName('Astrodrill' as CardName)).to.equal(CardName.ASTRODRILL);
     expect(resolveCardName('EcoLine' as CardName)).to.equal(CardName.ECOLINE);
     expect(resolveCardName('Colony' as CardName)).to.equal(CardName.BUILD_COLONY_STANDARD_PROJECT);
+    expect(resolveCardName('Sinus Irdium Road Network' as CardName)).to.equal(CardName.SINUS_IRIDUM_ROAD_NETWORK);
   });
 
   it('resolveCardName returns the input unchanged for a canonical name', () => {

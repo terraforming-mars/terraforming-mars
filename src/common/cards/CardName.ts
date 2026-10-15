@@ -664,7 +664,7 @@ export enum CardName {
   THE_WOMB = 'The Womb',
   TYCHO_ROAD_NETWORK = 'Tycho Road Network',
   ARISTARCHUS_ROAD_NETWORK = 'Aristarchus Road Network',
-  SINUS_IRDIUM_ROAD_NETWORK = 'Sinus Irdium Road Network',
+  SINUS_IRIDUM_ROAD_NETWORK = 'Sinus Iridum Road Network',
   MOMENTUM_VIRIUM_HABITAT = 'Momentum Virium Habitat',
   LUNA_TRADE_STATION = 'Luna Trade Station',
   LUNA_MINING_HUB = 'Luna Mining Hub',

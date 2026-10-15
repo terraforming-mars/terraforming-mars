@@ -220,7 +220,7 @@ describe('Board', () => {
 
   // This happens with the Ares expansion and cards come out mid-game
   // after the board is already populated. Though, here, the high
-  // card costs substitite for a heavily-populated board.
+  // card costs substitute for a heavily-populated board.
   it('getNthAvailableLandSpace with a large card', () => {
     expect(board.getNthAvailableLandSpace(46, 'top').id).eq('61');
     expect(board.getNthAvailableLandSpace(47, 'top').id).eq('62');

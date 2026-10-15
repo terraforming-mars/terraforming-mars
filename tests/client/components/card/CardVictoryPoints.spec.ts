@@ -38,13 +38,13 @@ describe('CardVictoryPoints', () => {
     expect(wrapper.text()).to.eq('5');
     expect(wrapper.find('[data-test=item]').exists()).is.false;
   });
-  it('renders points with item - points = targed 10/', async () => {
+  it('renders points with item - points = target 10/', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.CAMP}, points: 10, target: 10}));
     expect(wrapper.text()).to.equal('10/');
     expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.type).eq('resource');
     expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.resource).eq('Camp');
   });
-  it('renders points with item - points = targed 5/10', async () => {
+  it('renders points with item - points = target 5/10', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.ASTEROID}, points: 5, target: 10}));
     expect(wrapper.text()).to.equal('5/10');
     expect((wrapper.findComponent('[data-test=item]') as VueWrapper<any>).props().item.type).eq('resource');

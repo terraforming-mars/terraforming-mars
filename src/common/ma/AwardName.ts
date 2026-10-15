@@ -31,7 +31,7 @@ export const awardNames = [
   'Lunar Magnate',
 
   // Amazonis Planitia
-  // NB: the fifth award for Amazonis Plantia is Promoter, also part of Arabia Terra.
+  // NB: the fifth award for Amazonis Planitia is Promoter, also part of Arabia Terra.
   'Curator',
   'A. Engineer',
   'Tourist',

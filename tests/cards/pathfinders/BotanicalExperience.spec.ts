@@ -98,7 +98,7 @@ describe('BotanicalExperience', () => {
     expect(otherPlayer.plants).eq(3);
   });
 
-  it('does not imapct other resource types', () => {
+  it('does not impact other resource types', () => {
     player.megaCredits = 7;
     player.playedCards.push(card);
     game.defer(new StealResources(otherPlayer, Resource.MEGACREDITS, 5));

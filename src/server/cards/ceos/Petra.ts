@@ -74,7 +74,7 @@ export class Petra extends CeoCard {
       turmoil.delegateReserve.remove(player);
       count += 1;
     }
-    // If we dont do this player will not get the bonus for POLITICIAN Awards
+    // If we don't do this player will not get the bonus for POLITICIAN Awards
     player.totalDelegatesPlaced += count;
     player.stock.add(Resource.MEGACREDITS, count * 3, {log: true});
 

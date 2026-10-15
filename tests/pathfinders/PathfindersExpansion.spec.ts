@@ -73,7 +73,7 @@ describe('PathfindersExpansion', () => {
 
     PathfindersExpansion.raiseTrack(Tag.VENUS, player2, 1);
 
-    // Player 2 gets the terraformiing bump
+    // Player 2 gets the terraforming bump
     expect(player1.terraformRating).eq(20);
     expect(player2.terraformRating).eq(21);
 

@@ -16,7 +16,7 @@ export type LogMessageDataAttrs = {
   tags?: boolean,
   /** When true for a card, also show the card's cost */
   cost?: boolean,
-  /** When true, don't show the whole list of cards. Show a clickable toolip. */
+  /** When true, don't show the whole list of cards. Show a clickable tooltip. */
   ellipsis?: boolean,
 }
 

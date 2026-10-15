@@ -20,7 +20,7 @@ describe('MilestoneAwardSelector', () => {
     // Both pairs Polar Explorer / Cultivator and Rim Settler / Space Baron
     // have synergy 3.
     {mas: [...milestoneManifest.boards[BoardName.HELLAS], ...awardManifest.boards[BoardName.HELLAS]], expected: 3},
-    // Hoverlord / Venuphine have synergy 5.
+    // Hoverlord / Venuphile have synergy 5.
     {mas: [...milestoneManifest.expansions['venus'], ...awardManifest.expansions['venus']], expected: 5},
   ] as const;
   // These aren't particularly excellent tests as much as they help demonstrate

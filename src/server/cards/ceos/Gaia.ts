@@ -30,7 +30,7 @@ export class Gaia extends CeoCard {
       // For every tile placed on the board, grant all the adjacency bonuses for that tile.
       // We do not exclude Ocean tiles because of things like Ocean Cities.
       // We exclude all tiles that _do not_ have owners
-      // We exlcude all hazard tiles. (Spaces with Hazard tiles can have players in weird edge cases, like with Land Claim)
+      // We exclude all hazard tiles. (Spaces with Hazard tiles can have players in weird edge cases, like with Land Claim)
       const tilesOnMars = board.spaces
         .filter(Board.hasRealTile)
         .filter((space) => space.player !== undefined && space.spaceType !== SpaceType.COLONY);

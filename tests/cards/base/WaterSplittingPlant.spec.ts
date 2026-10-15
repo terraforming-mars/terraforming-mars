@@ -44,7 +44,7 @@ describe('WaterSplittingPlant', () => {
     {oxygen: 14, expected: 0},
   ] as const;
 
-  // canAct needs bespoke behavior, or better behavior in the execu
+  // canAct needs bespoke behavior, or better behavior in the executor.
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});

@@ -501,7 +501,7 @@ describe('Counter for Turmoil', () => {
     turmoil.parties[1].partyLeader = player;
     expect(counter.count({turmoil: {partyLeaders: {}}})).eq(2);
 
-    // Chariman is not a party leader.
+    // Chairman is not a party leader.
     turmoil.chairman = player;
     expect(counter.count({turmoil: {partyLeaders: {}}})).eq(2);
   });

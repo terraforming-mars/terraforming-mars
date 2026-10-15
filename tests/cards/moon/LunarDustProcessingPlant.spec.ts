@@ -44,7 +44,7 @@ describe('LunarDustProcessingPlant', () => {
   });
 
   it('effect', () => {
-    // This test and the next show that Mare Sernaitatis needs a steel and titanium.
+    // This test and the next show that Mare Serenitatis needs a steel and titanium.
     player.titanium = 2;
     player.steel = 1;
     player.megaCredits = 1000;

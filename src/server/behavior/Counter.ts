@@ -43,7 +43,7 @@ export class Counter implements ICounter {
    * The other part of why includeCard is interesting is sometimes this counting is related to a card
    * being replayed via Robotic Workforce. In that case, the card is already played.
    *
-   * Counter is not meant to be kept between game states, so dispose of this after making calcuations.
+   * Counter is not meant to be kept between game states, so dispose of this after making calculations.
    */
   private cardIsUnplayed: boolean;
 

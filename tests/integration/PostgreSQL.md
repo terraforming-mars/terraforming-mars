@@ -20,7 +20,7 @@ sudo -u postgres psql -U postgres
 
 ### Make it possible to use a password to authenticate psql with this user
 
-Edit the authoriation rules configuration file
+Edit the authorization rules configuration file
 
 ```
 sudo nano /etc/postgresql/16/main/pg_hba.conf

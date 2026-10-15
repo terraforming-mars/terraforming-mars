@@ -9,8 +9,8 @@ export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>
 /**
  * A game store. Load, save, you know the drill.
  *
- * Each game has a unique ID represented belowe as `gameId`. As games proceed,
- * the game is saved at later states. Inidividual saves of a game's state have a
+ * Each game has a unique ID represented below as `gameId`. As games proceed,
+ * the game is saved at later states. Individual saves of a game's state have a
  * unique and growing `saveId`. A game's initial _save point_ is always 0.
  *
  * Game state is stored as a single JSON string, which is why the `game` parameter is
@@ -36,12 +36,12 @@ export interface IDatabase {
      *
      * This is not yet written efficiently in Postgres, so use sparingly.
      *
-     * @param id the `PlayerId` or `SpectatorId` assocaited with a game
+     * @param id the `PlayerId` or `SpectatorId` associated with a game
      */
     getGameId(id: ParticipantId): Promise<GameId>;
 
     /**
-     * Get all the save ids assocaited with a game.
+     * Get all the save ids associated with a game.
      */
     getSaveIds(gameId: GameId): Promise<Array<number>>;
 
@@ -53,7 +53,7 @@ export interface IDatabase {
     /**
      * Return a list of all game IDs.
      *
-     * When the server starts games will be loaded from first to last. The postgres implmentation
+     * When the server starts games will be loaded from first to last. The postgres implementation
      * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
      * being available sooner than other games.
      */
@@ -78,7 +78,7 @@ export interface IDatabase {
      * Stores the results of a game in perpetuity in a separate table from normal
      * games. Called at a game's conclusion along with {@link markFinished}.
      *
-     * This is not impliemented in {@link SQLite}.
+     * This is not implemented in {@link SQLite}.
      *
      * @param generations the generation number at the end of the game
      * @param gameOptions the options used for this game.

@@ -69,7 +69,7 @@ describe('Landshaper', () => {
     expect(milestone.canClaim(player)).is.false;
   });
 
-  it('Can claim with moon special tilee', () => {
+  it('Can claim with moon special tile', () => {
     const moonSpaces = MoonExpansion.moonData(game).moon.getAvailableSpacesOnLand(player);
     game.simpleAddTile(player, spaces[0], {tileType: TileType.CITY});
     game.simpleAddTile(player, spaces[1], {tileType: TileType.GREENERY});

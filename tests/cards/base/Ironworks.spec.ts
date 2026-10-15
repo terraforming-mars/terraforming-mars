@@ -31,7 +31,7 @@ describe('Ironworks', () => {
     expect(game.getOxygenLevel()).to.eq(1);
   });
 
-  it('acts approprite when reds are in power and player has no money', () => {
+  it('acts appropriately when reds are in power and player has no money', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
     setRulingParty(game, PartyName.REDS);
     player.energy = 4;

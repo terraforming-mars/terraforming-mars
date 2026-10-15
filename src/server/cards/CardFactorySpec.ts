@@ -14,7 +14,7 @@ export type CardFactorySpec<T> = {
   compatibility?: OneOrArray<Expansion>;
   // False when the card should not be instantiated. It's reserved for fake and proxy cards.
   instantiate?: boolean;
-  // Used for Turmoil's global events. When true, classifeid as a "negative" global event.
+  // Used for Turmoil's global events. When true, classified as a "negative" global event.
   negative?: boolean;
 }
 

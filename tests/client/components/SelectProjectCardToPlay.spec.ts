@@ -254,7 +254,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({megacredits: 6}));
   });
 
-  it('Paying for Soil Enrichment with Psychophriles', async () => {
+  it('Paying for Soil Enrichment with Psychrophiles', async () => {
     // Soil Enrichment reserves 1 microbe for itself, so only 2 microbes available.
     // Greedy: uses both available microbes (=4 MC), MC fills remaining 2.
     const wrapper = setupCardForPurchase(
@@ -276,7 +276,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({microbes: 2, megacredits: 2}));
   });
 
-  it('Paying for Soil Enrichment with Psychophriles while another card has microbes', async () => {
+  it('Paying for Soil Enrichment with Psychrophiles while another card has microbes', async () => {
     // Tardigrades provides a spare microbe, so all 3 microbes from Psychrophiles are available.
     // Greedy: uses all 3 microbes (=6 MC), MC=0.
     const tableau: Array<Partial<CardModel>> = [
@@ -300,7 +300,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({microbes: 3, megacredits: 0}));
   });
 
-  it('Paying for other card with Psychophriles uses all microbes', async () => {
+  it('Paying for other card with Psychrophiles uses all microbes', async () => {
     // Greedy: uses all 3 microbes (=6 MC), MC fills remaining 4.
     const wrapper = setupCardForPurchase(
       CardName.BUSHES, 10,
@@ -517,7 +517,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({graphene: 7, megacredits: 2}));
   });
 
-  it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {
+  it('initial setup allows for steel and titanium when using Last Resort Ingenuity', async () => {
     // Earth Office costs 1, but has no building tag or space tag.
     const wrapper = setupCardForPurchase(
       CardName.EARTH_OFFICE, 0,

@@ -45,7 +45,7 @@ export class SessionManager implements ISessionManager {
   public async initialize(): Promise<void> {
     if (this.initialized) {
       // It's probably safe to have something more sophisticated, like
-      // empty the map first. But then it's not 'initlalize', it's
+      // empty the map first. But then it's not 'initialize', it's
       // 'reload'.
       throw new Error('Session manager already initialized');
     }

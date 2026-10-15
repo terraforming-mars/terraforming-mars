@@ -92,7 +92,7 @@ export const LANGUAGES: Record<LANGUAGE, [string, string]> = {
   cn: ['华语', 'Chinese'],
   pl: ['Polski', 'Polish'],
   es: ['Español', 'Spanish'],
-  br: ['Português Brasileiro', 'Brazilian Portugese'],
+  br: ['Português Brasileiro', 'Brazilian Portuguese'],
   it: ['Italiano', 'Italian'],
   ko: ['한국어', 'Korean'],
   nl: ['Nederlands', 'Dutch'],

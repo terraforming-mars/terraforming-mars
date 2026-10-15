@@ -39,7 +39,7 @@ describe('DrawCeoCardFromDeck', () => {
     expect(game.ceoDeck.discardPile).has.length(2);
   });
 
-  it('one unplauable CEO', () => {
+  it('one unplayable CEO', () => {
     const [game, player] = testGame(1, {ceoExtension: true});
     game.ceoDeck.drawPile.push(new UnPlayableCeo());
     let card: ICeoCard | undefined;

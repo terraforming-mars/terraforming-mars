@@ -1,4 +1,4 @@
-// An oddly-named source file, this is just for venus board resourcees,
+// An oddly-named source file, this is just for venus board resources,
 // including the altVenusBoard
 
 import {expect} from 'chai';

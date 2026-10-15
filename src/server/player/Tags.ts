@@ -10,7 +10,7 @@ import {intersection} from '../../common/utils/utils';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
-  'default' | // Like raw, but include the wild tags and other deafult substitutions. Typical when performing an action.
+  'default' | // Like raw, but include the wild tags and other default substitutions. Typical when performing an action.
   'milestone' | // Like raw with special conditions for milestones (Chimera)
   'award' | // Like raw with special conditions for awards (Chimera)
   'raw-pf' | // Like raw, but includes Mars Tags when tag is Science (Habitat Marte)

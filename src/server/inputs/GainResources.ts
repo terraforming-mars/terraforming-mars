@@ -44,7 +44,7 @@ export class GainResources extends AndOptions {
     public player: IPlayer,
     public count: number,
     public override title: string | Message,
-    // this isn't actually used as a paramteter, but  this class
+    // this isn't actually used as a parameter, but this class
     // is kind of strangely structured. If you can refactor this,
     // please do.
     private units = Units.of({})) {

@@ -128,12 +128,12 @@ export abstract class BaseStock {
     // 1. Peter gained 5 MC
     // 2. Peter gained 5 MC from Robotic Workforce
     // 3. Peter gained 5 MC production
-    // 4. Peter gained 5 MC production beacuse of Robotic Workforce
+    // 4. Peter gained 5 MC production because of Robotic Workforce
 
     // 5. Peter lost 5 MC
     // 6. Peter lost 5 MC from Robotic Workforce
     // 7. Peter lost 5 MC production
-    // 8. Peter lost 5 MC production beacuse of Robotic Workforce
+    // 8. Peter lost 5 MC production because of Robotic Workforce
 
     // 9. Peter lost 1 MC production, stolen by Alan
 

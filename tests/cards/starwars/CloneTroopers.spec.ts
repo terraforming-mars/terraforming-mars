@@ -89,7 +89,7 @@ describe('CloneTroopers', () => {
     expect(card.resourceCount).eq(1);
   });
 
-  it('respects proteceted resources', () => {
+  it('respects protected resources', () => {
     const card = new CloneTroopers();
     const [/* game */, player, player2, player3] = testGame(3, {starWarsExpansion: true});
 

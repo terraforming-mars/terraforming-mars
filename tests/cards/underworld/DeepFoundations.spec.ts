@@ -73,7 +73,7 @@ describe('DeepFoundations', () => {
     expect(player.cardsInHand).to.have.lengthOf(1);
   });
 
-  it('Will not excavate on a spacce with a tile', () => {
+  it('Will not excavate on a space with a tile', () => {
     const card = new DeepFoundations();
     const [game, player] = testGame(1, {underworldExpansion: true, aresExtension: true});
     player.playedCards.push(card);

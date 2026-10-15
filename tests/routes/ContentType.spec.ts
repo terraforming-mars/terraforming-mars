@@ -14,7 +14,7 @@ describe('ContentType', () => {
     ['/path/to/foo.txt', undefined],
 
     // These aren't reasonable inputs but it shows the
-    // that this has some resiliance to bad inputs.
+    // that this has some resilience to bad inputs.
     ['', undefined],
     ['ico', 'image/x-icon'],
   ];

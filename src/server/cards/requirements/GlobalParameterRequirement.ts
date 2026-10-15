@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 
 /**
  * Defines the class of requirements that compare against global parameters. Subclasses define
- * important attributes of how each global paramter functions (e.g. `OxygenRequirement`.)
+ * important attributes of how each global parameter functions (e.g. `OxygenRequirement`.)
  *
  * For the most part, this is not much different than `InequalityRequirement` but the
  * Pathfinders card Think Tank adds most of the complexity.

@@ -9,7 +9,7 @@ export enum CardResource {
   FLOATER = 'Floater',
   ASTEROID = 'Asteroid',
 
-  // Colonines
+  // Colonies
   CAMP = 'Camp',
 
   // Turmoil

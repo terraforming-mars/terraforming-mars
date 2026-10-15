@@ -43,7 +43,7 @@ export class Oscar extends CeoCard {
     turmoil.setNewChairman(player, player.game, /* setAgenda*/false, /* gainTR*/false);
     turmoil.delegateReserve.remove(player);
     // Increase totalDelegatesPlaced manually since we're not using SendDelegateToArea()
-    // If we dont do this player will not get the bonus for POLITICIAN Awards
+    // If we don't do this player will not get the bonus for POLITICIAN Awards
     player.totalDelegatesPlaced += 1;
     this.isDisabled = true;
     return undefined;

@@ -90,7 +90,7 @@ describe('Maria', () => {
     expect(venus.colonies).is.not.empty;
   });
 
-  it('Takes action - chooses Ieptus II, which is not activated', () => {
+  it('Takes action - chooses Iapetus II, which is not activated', () => {
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
@@ -104,7 +104,7 @@ describe('Maria', () => {
     expect(iapetusii.colonies).is.empty;
   });
 
-  it('Takes action - chooses Ieptus II, which is activated', () => {
+  it('Takes action - chooses Iapetus II, which is activated', () => {
     player2.playedCards.push(new CollegiumCopernicus());
     const iapetusii = new IapetusII();
     game.discardedColonies = [];

@@ -69,7 +69,7 @@ export class Merger extends PreludeCard {
     return cards;
   }
 
-  // Returns the delta of spendable MC made avialable by a merged corporation.
+  // Returns the delta of spendable MC made available by a merged corporation.
   // Much of this code is similar to Player.spendableMegaCredits, but that can't
   // be used since corp is not yet part of player's tableau.
   //
@@ -94,7 +94,7 @@ export class Merger extends PreludeCard {
     const asNumber = (x: Countable | undefined) => typeof(x) === 'number' ? x : 0;
 
     let incomingTitanium = asNumber(stock?.titanium);
-    // const titaniumValue = player.getTitaniumValue() + (behavior?.titanumValue ?? 0);
+    // const titaniumValue = player.getTitaniumValue() + (behavior?.titaniumValue ?? 0);
     const titaniumValue = player.getTitaniumValue();
 
     if (player.tableau.has(CardName.MANUTECH)) {

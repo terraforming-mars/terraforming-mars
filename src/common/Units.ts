@@ -81,7 +81,7 @@ export namespace Units {
    */
   export function negative(units: Units): Units {
     // "-0" is a different value than "0" in Javascript.
-    // This prefvents -0.
+    // This prevents -0.
     const neg = (n: number) => n === 0 ? 0 : -n;
 
     return {

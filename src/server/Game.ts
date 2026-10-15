@@ -413,7 +413,7 @@ export class Game implements IGame, Logger {
       }
 
       if (!player.beginner ||
-        // Bypass beginner choice if any extension is choosen
+        // Bypass beginner choice if any extension is chosen
         gameOptions.ceoExtension ||
         gameOptions.preludeExtension ||
         gameOptions.prelude2Expansion ||
@@ -625,7 +625,7 @@ export class Game implements IGame, Logger {
       return this.players[0].terraformRating >= 63;
     }
 
-    // Complete terraforing victory condition.
+    // Complete terraforming victory condition.
     if (!this.marsIsTerraformed()) {
       return false;
     }
@@ -693,7 +693,7 @@ export class Game implements IGame, Logger {
     const players = this.playersInGenerationOrder;
     if (players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const p of players) {
-        // This if cluase is necessary because `every` above doesn't help.
+        // This if clause is necessary because `every` above doesn't help.
         if (p.pickedCorporationCard) {
           p.playCorporationCard(p.pickedCorporationCard);
         }

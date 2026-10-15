@@ -30,7 +30,7 @@ export class Xu extends CeoCard {
     this.isDisabled = true;
     const players = player.game.players;
 
-    // If the player being counted is Me, include Wild tags. Dont include opponent wild tags
+    // If the player being counted is Me, include Wild tags. Don't include opponent wild tags
     const counts = players.map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
 
     const total = sum(counts);

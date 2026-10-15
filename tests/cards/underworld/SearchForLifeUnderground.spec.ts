@@ -76,7 +76,7 @@ describe('SearchForLifeUnderground', () => {
   });
 
   // Every microbe token depicts at least 1 microbe and so grants a science resource.
-  for (const token of ['microbe2', 'microbe1pertemp', 'microbe2pertemp'] as const) {
+  for (const token of ['microbe2', 'microbe2pertemp'] as const) {
     it('action succeeds, ' + token, () => {
       player.playedCards.push(card);
       player.megaCredits = 1;

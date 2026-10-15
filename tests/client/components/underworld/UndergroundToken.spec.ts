@@ -9,7 +9,7 @@ describe('UndergroundToken', () => {
       ...globalConfig,
       props: {
         token: {
-          token: 'data1pertemp',
+          token: 'microbe2pertemp',
           shelter: false,
           active: false,
         },

@@ -18,6 +18,7 @@ const NO_ERRORS: ValidationErrors = {
   ceosMissingExpansions: [],
   soloWithoutCorporateEra: false,
   infiniteEnergyBug: false,
+  altVenusBoardOnAmazonis: false,
   notEnoughCorporations: 0,
 };
 

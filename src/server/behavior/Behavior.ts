@@ -132,7 +132,7 @@ export type Behavior = {
   // removeAnyResource: {type: CardResource, count: number},
 
   /** Raise or lower the titanium and steel value. On discard, reverse it. */
-  titanumValue?: 1 | -1;
+  titaniumValue?: 1 | -1;
   steelValue?: 1;
 
   /** Draw this many cards from the deck. */

@@ -18,7 +18,7 @@ describe('ValuableGases', () => {
   let player: TestPlayer;
 
   let floatingHabs: FloatingHabs;
-  let jovianLanters: JovianLanterns;
+  let jovianLanterns: JovianLanterns;
   let localShading: LocalShading;
   let airRaid: AirRaid;
 
@@ -29,7 +29,7 @@ describe('ValuableGases', () => {
     // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
     // Jovian Lanterns is active, has floaters, requires a jovian tag, but costs 20
-    jovianLanters = new JovianLanterns();
+    jovianLanterns = new JovianLanterns();
     // Local Shading has floaters and no requirements. Costs 4.
     localShading = new LocalShading();
     // Air Raid is not a floater card
@@ -45,7 +45,7 @@ describe('ValuableGases', () => {
   });
 
   it('Should play', () => {
-    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
+    player.cardsInHand = [floatingHabs, jovianLanterns, localShading, airRaid];
     expect(player.getPlayableCards()).is.empty;
 
     card.play(player);
@@ -63,7 +63,7 @@ describe('ValuableGases', () => {
 
     expect(localShading.resourceCount).eq(5);
 
-    player.playCard(jovianLanters);
+    player.playCard(jovianLanterns);
     expect(airRaid.resourceCount).eq(0);
   });
 });

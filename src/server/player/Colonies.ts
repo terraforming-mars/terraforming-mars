@@ -16,7 +16,7 @@ import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopern
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
-import {TradeWithHectateSpeditions} from '../cards/underworld/HecateSpeditions';
+import {TradeWithHecateSpeditions} from '../cards/underworld/HecateSpeditions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 export class Colonies {
@@ -62,7 +62,7 @@ export class Colonies {
       new TradeWithDarksideSmugglersUnion(player),
       new TradeWithTitanFloatingLaunchPad(player),
       new TradeWithCollegiumCopernicus(player),
-      new TradeWithHectateSpeditions(player),
+      new TradeWithHecateSpeditions(player),
       new TradeWithEnergy(player),
       new TradeWithTitanium(player),
       new TradeWithMegacredits(player),

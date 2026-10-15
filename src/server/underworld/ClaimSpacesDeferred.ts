@@ -41,7 +41,7 @@ export class ClaimSpacesDeferred extends RunNTimes<void> {
       if (this.spaces) {
         inplaceRemove(this.spaces, token.token);
       }
-      UnderworldExpansion.claimToken(this.player, token.token, /* isExavate= */ true, /* space= */ undefined);
+      UnderworldExpansion.claimToken(this.player, token.token, /* isExcavate= */ true, /* space= */ undefined);
       return this.next();
     }).setTitle('Select underground token to claim');
   }

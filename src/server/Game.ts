@@ -1,5 +1,5 @@
 import * as constants from '../common/constants';
-import {venusScaleLevelForDisplay} from './venusNext/venusScale';
+import {venusLevelAfterSteps, venusStepsBetween} from './venusNext/venusScale';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {CardName} from '../common/cards/CardName';
@@ -877,7 +877,7 @@ export class Game implements IGame, Logger {
     entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
     entry[GlobalParameter.OCEANS] = this.board.getOceanSpaces().length;
     if (this.gameOptions.venusNextExtension) {
-      entry[GlobalParameter.VENUS] = venusScaleLevelForDisplay(this.venusScaleLevel);
+      entry[GlobalParameter.VENUS] = this.venusScaleLevel;
     }
     if (this.moonData) {
       entry[GlobalParameter.MOON_HABITAT_RATE] = this.moonData.habitatRate;
@@ -1226,30 +1226,30 @@ export class Game implements IGame, Logger {
 
     // PoliticalAgendas Reds P3 hook
     if (increments === -1) {
-      this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
+      this.venusScaleLevel = venusLevelAfterSteps(this.venusScaleLevel, increments);
       return -1;
     }
 
     // Literal typing makes |increments| a const
-    const steps = Math.min(increments, (this.max.venus - this.venusScaleLevel) / 2);
+    const steps = Math.min(increments, venusStepsBetween(this.venusScaleLevel, this.max.venus));
+    const newValue = venusLevelAfterSteps(this.venusScaleLevel, steps);
 
     if (this.phase !== Phase.SOLAR) {
       if (this.venusScaleLevel < constants.VENUS_LEVEL_FOR_CARD_BONUS &&
-        this.venusScaleLevel + steps * 2 >= constants.VENUS_LEVEL_FOR_CARD_BONUS) {
+        newValue >= constants.VENUS_LEVEL_FOR_CARD_BONUS) {
         player.drawCard();
       }
       if (this.venusScaleLevel < constants.VENUS_LEVEL_FOR_TR_BONUS &&
-        this.venusScaleLevel + steps * 2 >= constants.VENUS_LEVEL_FOR_TR_BONUS) {
+        newValue >= constants.VENUS_LEVEL_FOR_TR_BONUS) {
         player.increaseTerraformRating();
       }
       if (this.gameOptions.altVenusBoard) {
-        const newValue = this.venusScaleLevel + steps * 2;
         const minimalBaseline = Math.max(this.venusScaleLevel, constants.ALT_VENUS_MINIMUM_BONUS);
         const maximumBaseline = Math.min(newValue, this.max.venus);
-        const standardResourcesGranted = Math.max((maximumBaseline - minimalBaseline) / 2, 0);
+        const standardResourcesGranted = Math.max(venusStepsBetween(minimalBaseline, maximumBaseline), 0);
 
-        const grantWildResource = this.venusScaleLevel + (steps * 2) >= this.max.venus;
-        // The second half of this expression removes any increases earler than 16-to-18.
+        const grantWildResource = newValue >= this.max.venus;
+        // The second half of this expression removes any increases earlier than 16-to-18.
         if (grantWildResource || standardResourcesGranted > 0) {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
@@ -1271,7 +1271,7 @@ export class Game implements IGame, Logger {
       aphrodite.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true, from: {card: CardName.APHRODITE}});
     }
 
-    this.venusScaleLevel += steps * 2;
+    this.venusScaleLevel = newValue;
 
     return steps;
   }

@@ -7,7 +7,7 @@ import {Thermalist} from '../src/server/awards/Thermalist';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {addCity, addGreenery, addOcean, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from './TestingUtils';
+import {addCity, addGreenery, addOcean, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGame} from './TestingUtils';
 import {cast, toName} from '../src/common/utils/utils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
@@ -155,6 +155,31 @@ describe('Game', () => {
 
     expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
     expect(player.terraformRating).to.eq(initialTR + 1);
+  });
+
+  it('Venus moves 1% per step above 30% on Amazonis Planitia', () => {
+    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    setVenusScaleLevel(game, 28);
+
+    expect(game.increaseVenusScaleLevel(player, 2)).eq(2);
+    expect(game.getVenusScaleLevel()).eq(31);
+
+    expect(game.increaseVenusScaleLevel(player, 3)).eq(2);
+    expect(game.getVenusScaleLevel()).eq(33);
+
+    expect(game.increaseVenusScaleLevel(player, 1)).eq(0);
+    expect(game.getVenusScaleLevel()).eq(33);
+  });
+
+  it('Venus decreases 1% per step above 30% on Amazonis Planitia', () => {
+    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    setVenusScaleLevel(game, 31);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(game.getVenusScaleLevel()).eq(30);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(game.getVenusScaleLevel()).eq(28);
   });
 
   it('Draft round for 2 players', () => {

@@ -52,7 +52,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
     return player.canAfford(1) && player.game.underworldData.tokens.length > 0;
   }
 
-  private static MICROBE_TOKENS: UndergroundResourceToken[] = ['microbe2', 'microbe1pertemp', 'microbe2pertemp'];
+  private static MICROBE_TOKENS: UndergroundResourceToken[] = ['microbe2', 'microbe2pertemp'];
 
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))

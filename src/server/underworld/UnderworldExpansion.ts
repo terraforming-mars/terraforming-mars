@@ -403,9 +403,7 @@ export class UnderworldExpansion {
         player.game.log('There is no room to place an ocean');
       }
       break;
-    case 'data1pertemp':
     case 'mcprod1pertemp':
-    case 'microbe1pertemp':
     case 'microbe2pertemp':
     case 'plant2pertemp':
     case 'steel2pertemp':
@@ -574,12 +572,6 @@ export class UnderworldExpansion {
   static onTemperatureChange(game: IGame, steps: number) {
     game.playersInGenerationOrder.forEach((player) => {
       switch (player.underworldData.activeBonus) {
-      case 'data1pertemp':
-        this.gainCardResource(player, CardResource.DATA, steps, 1);
-        break;
-      case 'microbe1pertemp':
-        this.gainCardResource(player, CardResource.MICROBE, steps, 1);
-        break;
       case 'microbe2pertemp':
         this.gainCardResource(player, CardResource.MICROBE, steps, 2);
         break;

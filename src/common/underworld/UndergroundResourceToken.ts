@@ -1,7 +1,5 @@
 export type TemporaryBonusToken =
-  'data1pertemp' |
   'mcprod1pertemp' |
-  'microbe1pertemp' |
   'microbe2pertemp' |
   'plant2pertemp' |
   'steel2pertemp' |
@@ -51,8 +49,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   microbe2: '2 microbes',
   tr: '1 TR',
   ocean: 'place an ocean',
-  data1pertemp: '1 data / 2 °C',
-  microbe1pertemp: '1 microbe / 2 °C',
   plant2pertemp: '2 plants / 2 °C',
   steel2pertemp: '2 steel / 2 °C',
   titanium1pertemp: '1 titanium / 2 °C',

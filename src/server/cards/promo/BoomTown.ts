@@ -15,7 +15,7 @@ export class BoomTown extends PreludeCard {
 
       behavior: {
         production: {titanium: 2},
-        titanumValue: -1,
+        titaniumValue: -1,
       },
 
       metadata: {

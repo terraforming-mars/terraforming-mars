@@ -480,10 +480,10 @@ export class Executor implements BehaviorExecutor {
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();
     }
-    if (behavior.titanumValue === 1) {
+    if (behavior.titaniumValue === 1) {
       player.increaseTitaniumValue();
     }
-    if (behavior.titanumValue === -1) {
+    if (behavior.titaniumValue === -1) {
       player.decreaseTitaniumValue();
     }
 
@@ -728,10 +728,10 @@ export class Executor implements BehaviorExecutor {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }
-    if (behavior.titanumValue === 1) {
+    if (behavior.titaniumValue === 1) {
       player.decreaseTitaniumValue();
     }
-    if (behavior.titanumValue === -1) {
+    if (behavior.titaniumValue === -1) {
       player.increaseTitaniumValue();
     }
 

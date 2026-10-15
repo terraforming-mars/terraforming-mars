@@ -16,7 +16,7 @@ export class AdvancedAlloys extends Card implements IProjectCard {
 
       behavior: {
         steelValue: 1,
-        titanumValue: 1,
+        titaniumValue: 1,
       },
 
       metadata: {

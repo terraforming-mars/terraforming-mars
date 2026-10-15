@@ -15,7 +15,7 @@ export class MercurianAlloys extends Card implements IProjectCard {
       cost: 3,
 
       behavior: {
-        titanumValue: 1,
+        titaniumValue: 1,
       },
 
       requirements: {tag: Tag.SCIENCE, count: 2},

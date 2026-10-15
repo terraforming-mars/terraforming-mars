@@ -124,7 +124,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.TYCHO_ROAD_NETWORK]: {Factory: TychoRoadNetwork},
     [CardName.ARISTARCHUS_ROAD_NETWORK]: {Factory: AristarchusRoadNetwork},
     [CardName.SINUS_IRDIUM_ROAD_NETWORK]: {Factory: SinusIrdiumRoadNetwork},
-    [CardName.MOMENTUM_VIRUM_HABITAT]: {Factory: MomentumViriumHabitat},
+    [CardName.MOMENTUM_VIRIUM_HABITAT]: {Factory: MomentumViriumHabitat},
     [CardName.LUNA_TRADE_STATION]: {Factory: LunaTradeStation},
     [CardName.LUNA_MINING_HUB]: {Factory: LunaMiningHub},
     [CardName.LUNA_TRAIN_STATION]: {Factory: LunaTrainStation},

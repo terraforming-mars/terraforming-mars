@@ -129,7 +129,7 @@ describe('AmazonisPlanitiaBoard', () => {
     expect(board.max.oceans).to.eq(11);
     expect(board.max.temperature).to.eq(14);
     expect(board.max.oxygen).to.eq(18);
-    expect(board.max.venus).to.eq(36);
+    expect(board.max.venus).to.eq(33);
   });
 
   it('serialize/deserialize round-trip', () => {

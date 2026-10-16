@@ -12,7 +12,8 @@ import {testGame} from '../TestGame';
 import {IGame} from '@/server/IGame';
 import {TestPlayer} from '@tests/TestPlayer';
 import {cast, toID} from '@/common/utils/utils';
-import {setTemperature, setOxygenLevel, maxOutOceans} from '@tests/TestingUtils';
+import {setTemperature, setOxygenLevel, maxOutOceans, addGreenery, runAllActions} from '@tests/TestingUtils';
+import {assertAddDelegateAction} from '@tests/turmoil/turmoilAssertions';
 
 describe('AmazonisPlanitiaBoard', () => {
   it('sanity test', () => {
@@ -257,6 +258,15 @@ describe('AmazonisPlanitiaBoard', () => {
       const actual = board.getAdjacentSpaces(space).map(toID);
       expect(expected, `space ${space.id}`).to.eql(actual);
     });
+  });
+
+  it('double delegate bonus sends two delegates', () => {
+    const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
+
+    addGreenery(player, '70');
+    runAllActions(game);
+
+    assertAddDelegateAction(player, player.popWaitingFor(), 2);
   });
 
   it('colony spaces have no adjacency', () => {

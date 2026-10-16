@@ -1531,7 +1531,7 @@ export class Game implements IGame, Logger {
       break;
     case SpaceBonus.DELEGATE:
       if (this.turmoil) {
-        this.defer(new SendDelegateToArea(player));
+        this.defer(new SendDelegateToArea(player, undefined, {count}));
       }
       break;
     case SpaceBonus.COLONY:

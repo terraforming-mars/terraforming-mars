@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {EventEmitter} from 'events';
 import pg from 'pg';
 import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {testGame} from '../TestGame';
@@ -16,9 +17,23 @@ class FakePool {
   public failConnect = false;
   private connections = 0;
 
-  private run(connection: string, sql: string) {
+  // Statements that start with any of these kill the socket: like pg, the client emits 'error'.
+  public dropSocket: Array<string> = [];
+  public clients: Array<EventEmitter> = [];
+
+  private run(connection: string, sql: string, client?: EventEmitter) {
     this.statements.push({connection, sql: sql.trim().split(/\s+/).slice(0, 3).join(' ')});
     const text = sql.trim().replace(/\s+/g, ' ');
+    if (client !== undefined && this.dropSocket.some((prefix) => text.startsWith(prefix))) {
+      // pg fails the pending query, then emits from the socket handler, outside any caller's try.
+      return new Promise((_resolve, reject) => {
+        setImmediate(() => {
+          const err = new Error('socket closed');
+          reject(err);
+          client.emit('error', err);
+        });
+      });
+    }
     if (this.failing.some((prefix) => text.startsWith(prefix))) {
       return Promise.reject(new Error('failed: ' + text));
     }
@@ -34,12 +49,14 @@ class FakePool {
       return Promise.reject(new Error('no connection'));
     }
     const connection = 'conn' + (++this.connections);
-    return Promise.resolve({
-      query: (sql: string) => this.run(connection, sql),
+    const client = Object.assign(new EventEmitter(), {
+      query: (sql: string) => this.run(connection, sql, client),
       release: (err?: Error | boolean) => {
         this.released.push({connection, err});
       },
     });
+    this.clients.push(client);
+    return Promise.resolve(client);
   }
 }
 
@@ -127,6 +144,23 @@ describe('PostgreSQL', () => {
     expect(pool.released).has.length(1);
     expect(pool.released[0].err).is.not.undefined;
     expect(game.lastSaveId).eq(0);
+  });
+
+  it('handles the connection dying mid-save', async () => {
+    pool.dropSocket = ['INSERT INTO games', 'ROLLBACK'];
+
+    // Without an 'error' listener, EventEmitter.emit('error') throws.
+    await db.saveGame(game);
+
+    expect(pool.released).has.length(1);
+    expect(pool.released[0].err).is.not.undefined;
+    expect(game.lastSaveId).eq(0);
+  });
+
+  it('does not leave error listeners behind on the client', async () => {
+    await db.saveGame(game);
+
+    expect(pool.clients[0].listenerCount('error')).eq(0);
   });
 
   it('survives failing to get a connection', async () => {

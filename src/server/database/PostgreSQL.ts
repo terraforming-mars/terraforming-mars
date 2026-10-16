@@ -381,8 +381,12 @@ export class PostgreSQL implements IDatabase {
     // so BEGIN, the inserts and COMMIT could each land on a different one.
     let client: pg.PoolClient | undefined;
     let releaseError: Error | undefined;
+    // pool.connect() drops the pool's own 'error' listener until release. A dead socket fails the
+    // pending query, which the catch below handles, and also emits 'error', which must not go unheard.
+    const onError = (err: Error) => console.error('PostgreSQL:saveGame connection', err);
     try {
       client = await this.client.connect();
+      client.on('error', onError);
       await client.query('BEGIN');
 
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
@@ -427,7 +431,7 @@ export class PostgreSQL implements IDatabase {
         if (game.spectatorId) {
           participantIds.push(game.spectatorId);
         }
-        await this.storeParticipants({gameId: game.id, participantIds: participantIds}, client);
+        await this.insertParticipants(client, {gameId: game.id, participantIds: participantIds});
       }
 
       await client.query('COMMIT');
@@ -449,6 +453,7 @@ export class PostgreSQL implements IDatabase {
       databaseMetrics.operationErrors.inc({operation: 'saveGame'});
       console.error('PostgreSQL:saveGame', err);
     } finally {
+      client?.removeListener('error', onError);
       client?.release(releaseError);
     }
     this.trim(game);
@@ -476,7 +481,11 @@ export class PostgreSQL implements IDatabase {
     await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
   }
 
-  public async storeParticipants(entry: GameIdLedger, client: pg.ClientBase | pg.Pool = this.client): Promise<void> {
+  public storeParticipants(entry: GameIdLedger): Promise<void> {
+    return this.insertParticipants(this.client, entry);
+  }
+
+  private async insertParticipants(client: pg.ClientBase | pg.Pool, entry: GameIdLedger): Promise<void> {
     await client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2) ON CONFLICT (game_id) DO NOTHING', [entry.gameId, entry.participantIds]);
   }
 

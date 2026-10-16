@@ -28,4 +28,12 @@ describe('OreProcessor', () => {
     expect(player.titanium).to.eq(1);
     expect(game.getOxygenLevel()).to.eq(1);
   });
+
+  it('Logs the energy it spends', () => {
+    player.energy = 4;
+    card.action(player);
+
+    const spent = game.gameLog.find((m) => m.message === '${0} lost ${1} ${2}');
+    expect(spent?.data.slice(1).map((d) => d.value)).deep.eq(['4', 'energy']);
+  });
 });

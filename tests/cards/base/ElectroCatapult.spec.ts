@@ -56,4 +56,29 @@ describe('ElectroCatapult', () => {
     expect(player.steel).to.eq(0);
     expect(player.megaCredits).to.eq(14);
   });
+
+  function spentLog() {
+    return game.gameLog
+      .filter((m) => m.message === '${0} lost ${1} ${2}')
+      .map((m) => m.data.slice(1).map((d) => d.value).join(' '));
+  }
+
+  it('Logs the plant it spends when there is no steel to choose', () => {
+    player.plants = 1;
+
+    churn(card.action(player), player);
+
+    expect(player.plants).to.eq(0);
+    expect(spentLog()).deep.eq(['1 plant']);
+  });
+
+  it('Logs the steel it spends', () => {
+    player.plants = 1;
+    player.steel = 1;
+
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
+    orOptions.options[1].cb();
+
+    expect(spentLog()).deep.eq(['1 steel']);
+  });
 });

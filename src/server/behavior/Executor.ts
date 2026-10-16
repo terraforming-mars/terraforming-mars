@@ -368,16 +368,21 @@ export class Executor implements BehaviorExecutor {
         // Exit early as the rest of handled by the deferred action.
         return;
       }
-      // player.pay triggers Sol Bank.
+      // player.pay triggers Sol Bank. It doesn't log, so log what was spent the way the stock does.
       player.pay(Payment.of({
         steel: spend.steel ?? 0,
         titanium: spend.titanium ?? 0,
       }));
+      for (const [amount, resource] of [[spend.steel, 'steel'], [spend.titanium, 'titanium']] as const) {
+        if (amount) {
+          player.game.log('${0} lost ${1} ${2}', (b) => b.player(player).number(amount).string(resource));
+        }
+      }
       if (spend.plants) {
-        player.stock.deduct(Resource.PLANTS, spend.plants);
+        player.stock.deduct(Resource.PLANTS, spend.plants, {log: true});
       }
       if (spend.energy) {
-        player.stock.deduct(Resource.ENERGY, spend.energy);
+        player.stock.deduct(Resource.ENERGY, spend.energy, {log: true});
       }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat, () => {

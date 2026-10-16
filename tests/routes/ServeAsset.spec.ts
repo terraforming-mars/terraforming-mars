@@ -200,27 +200,19 @@ describe('ServeAsset', () => {
     }
   });
 
-  it('main.js is served with a cache directive so the runtime is never heuristically cached', async () => {
-    instance = new ServeAsset(undefined, false, fileApi);
+  it('main.js is never cached, even with a max age set', async () => {
+    instance = new ServeAsset(86400, false, fileApi);
     scaffolding.url = '/main.js';
     scaffolding.req.headers['accept-encoding'] = '';
     await scaffolding.get(instance, res);
-    expect(res.headers.get('Cache-Control')).eq('max-age=0');
+    expect(res.headers.get('Cache-Control')).eq('no-cache');
   });
 
-  it('vendors.js and main.js share the same cache directive', async () => {
-    instance = new ServeAsset(undefined, false, fileApi);
+  it('other assets keep the configured max age', async () => {
+    instance = new ServeAsset(86400, false, fileApi);
     scaffolding.url = '/vendors.js';
     scaffolding.req.headers['accept-encoding'] = '';
     await scaffolding.get(instance, res);
-    const vendorsCacheControl = res.headers.get('Cache-Control');
-
-    const mainRes = new MockResponse();
-    const mainScaffolding = new RouteTestScaffolding();
-    mainScaffolding.url = '/main.js';
-    mainScaffolding.req.headers['accept-encoding'] = '';
-    await mainScaffolding.get(new ServeAsset(undefined, false, fileApi), mainRes);
-
-    expect(mainRes.headers.get('Cache-Control')).eq(vendorsCacheControl);
+    expect(res.headers.get('Cache-Control')).eq('max-age=86400');
   });
 });

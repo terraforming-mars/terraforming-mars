@@ -53,6 +53,12 @@ All the multiplayer rules apply, plus those of any chosen expansions, except as 
   - 63 TR Mode (:icon:tr:): no changes.
 - :expansion:ares: Ares Extreme: Standard Mode (:tag:mars:) also requires you to remove all unprotected hazards to win. With World Government Terraforming, you may remove an unprotected hazard instead of raising a global parameter.
 
+### Changes by board
+
+- Amazonis Planitia:
+  - Standard Mode (:tag:mars:): play 1 more generation.
+  - 63 TR Mode (:icon:tr:): no changes.
+
 Adapted from [Terraforming Mars: solo rules summary](https://github.com/MartianZoo/player-resources/blob/main/solo-rules-summary.md)
 `;
 

@@ -289,6 +289,21 @@ describe('Game', () => {
     expect(game.isSoloModeWin()).is.not.true;
   });
 
+  it('Amazonis Planitia solo games take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    expect(game.lastSoloGeneration()).eq(15);
+  });
+
+  it('Amazonis Planitia solo games with prelude take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, preludeExtension: true});
+    expect(game.lastSoloGeneration()).eq(13);
+  });
+
+  it('Amazonis Planitia solo games in TR63 mode do not take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, soloTR: true});
+    expect(game.lastSoloGeneration()).eq(14);
+  });
+
   it('Should not finish solo game before last generation if Mars is already terraformed', () => {
     const player = TestPlayer.BLUE.newPlayer();
 

@@ -377,8 +377,13 @@ export class PostgreSQL implements IDatabase {
     const gameCompressed = this.compressOnWrite ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
+    // A transaction must stay on one connection. pool.query() checks out a connection per statement,
+    // so BEGIN, the inserts and COMMIT could each land on a different one.
+    let client: pg.PoolClient | undefined;
+    let releaseError: Error | undefined;
     try {
-      await this.client.query('BEGIN');
+      client = await this.client.connect();
+      await client.query('BEGIN');
 
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
@@ -386,21 +391,19 @@ export class PostgreSQL implements IDatabase {
       //
       // When compressOnWrite is true, the game state is written to game_compressed; when it's
       // false, it's written to game. The other column is set to null so a row never carries both.
-      const res = await this.client.query(
+      const res = await client.query(
         `INSERT INTO games (game_id, save_id, game, game_compressed, players)
         VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3, game_compressed = $4
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
 
-      await this.client.query(
+      await client.query(
         `INSERT INTO game (game_id, log, options)
         VALUES ($1, $2, $3)
         ON CONFLICT (game_id)
         DO UPDATE SET log = $2`,
         [game.id, log, options]);
-
-      game.lastSaveId = thisSaveId + 1;
 
       let inserted = true;
       try {
@@ -424,17 +427,29 @@ export class PostgreSQL implements IDatabase {
         if (game.spectatorId) {
           participantIds.push(game.spectatorId);
         }
-        await this.storeParticipants({gameId: game.id, participantIds: participantIds});
+        await this.storeParticipants({gameId: game.id, participantIds: participantIds}, client);
       }
 
-      await this.client.query('COMMIT');
+      await client.query('COMMIT');
+      // Only advance once the save is durable, so a failed save never leaves a gap in save ids.
+      game.lastSaveId = thisSaveId + 1;
     } catch (err) {
-      await this.client.query('ROLLBACK');
+      if (client !== undefined) {
+        try {
+          await client.query('ROLLBACK');
+        } catch (rollbackErr) {
+          // The connection is in an unknown state. Release it with an error so the pool discards it.
+          releaseError = rollbackErr instanceof Error ? rollbackErr : new Error(String(rollbackErr));
+          console.error('PostgreSQL:saveGame rollback', rollbackErr);
+        }
+      }
       this.statistics.saveErrorCount++;
       // saveGame deliberately never rejects (see below), so MetricsDelegate's generic wrapper never
       // sees this error. It's the only way this operation's error count gets recorded.
       databaseMetrics.operationErrors.inc({operation: 'saveGame'});
       console.error('PostgreSQL:saveGame', err);
+    } finally {
+      client?.release(releaseError);
     }
     this.trim(game);
   }
@@ -461,8 +476,8 @@ export class PostgreSQL implements IDatabase {
     await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
   }
 
-  public async storeParticipants(entry: GameIdLedger): Promise<void> {
-    await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2) ON CONFLICT (game_id) DO NOTHING', [entry.gameId, entry.participantIds]);
+  public async storeParticipants(entry: GameIdLedger, client: pg.ClientBase | pg.Pool = this.client): Promise<void> {
+    await client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2) ON CONFLICT (game_id) DO NOTHING', [entry.gameId, entry.participantIds]);
   }
 
   public async getParticipants(): Promise<Array<{gameId: GameId, participantIds: Array<ParticipantId>}>> {

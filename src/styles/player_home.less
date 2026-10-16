@@ -1,8 +1,18 @@
 #player-home, #spectator-home {
   padding-left: 20px;
   padding-top: 20px;
-  background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
-  background-attachment: fixed;
+
+  // The star field is a fixed element behind the page rather than a
+  // background-attachment: fixed background: that attachment makes the
+  // browser repaint the whole page on every scroll frame, which crawls on
+  // phones once the page holds a few dozen cards.
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
+  }
 
   > div:not([class]), > div:not([class]) > div.player_home_block:first-child {
     > a:after {

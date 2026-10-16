@@ -15,6 +15,8 @@ class FakePool {
   // Statements that start with any of these fail.
   public failing: Array<string> = [];
   public failConnect = false;
+  // Statements that start with a key fail with a deadlock error, as many times as its value.
+  public deadlocks = new Map<string, number>();
   private connections = 0;
 
   // Statements that start with any of these kill the socket: like pg, the client emits 'error'.
@@ -33,6 +35,12 @@ class FakePool {
           client.emit('error', err);
         });
       });
+    }
+    for (const [prefix, remaining] of this.deadlocks) {
+      if (remaining > 0 && text.startsWith(prefix)) {
+        this.deadlocks.set(prefix, remaining - 1);
+        return Promise.reject(Object.assign(new Error('deadlock detected'), {code: '40P01'}));
+      }
     }
     if (this.failing.some((prefix) => text.startsWith(prefix))) {
       return Promise.reject(new Error('failed: ' + text));
@@ -171,5 +179,71 @@ describe('PostgreSQL', () => {
     expect(pool.statements).is.empty;
     expect(pool.released).is.empty;
     expect(game.lastSaveId).eq(0);
+  });
+  async function markFinishedError(): Promise<unknown> {
+    try {
+      await db.markFinished(game.id);
+    } catch (err) {
+      return err;
+    }
+    return undefined;
+  }
+
+  it('marks a game finished in one transaction', async () => {
+    await db.markFinished(game.id);
+
+    expect(pool.statements.map((s) => s.connection + ' ' + s.sql)).deep.eq([
+      'conn1 BEGIN',
+      'conn1 UPDATE games SET',
+      'conn1 UPDATE game SET',
+      'conn1 INSERT INTO completed_game(game_id)',
+      'conn1 COMMIT',
+    ]);
+    expect(pool.released).deep.eq([{connection: 'conn1', err: undefined}]);
+  });
+
+  it('retries marking a game finished after a deadlock', async () => {
+    pool.deadlocks.set('UPDATE games SET', 1);
+
+    await db.markFinished(game.id);
+
+    expect(pool.statements.map((s) => s.connection + ' ' + s.sql)).deep.eq([
+      'conn1 BEGIN',
+      'conn1 UPDATE games SET',
+      'conn1 ROLLBACK',
+      'conn2 BEGIN',
+      'conn2 UPDATE games SET',
+      'conn2 UPDATE game SET',
+      'conn2 INSERT INTO completed_game(game_id)',
+      'conn2 COMMIT',
+    ]);
+    expect(pool.released.map((r) => r.connection)).deep.eq(['conn1', 'conn2']);
+  });
+
+  it('stops retrying after repeated deadlocks', async () => {
+    pool.deadlocks.set('UPDATE games SET', 5);
+
+    const err = await markFinishedError();
+
+    expect((err as {code?: string}).code).eq('40P01');
+    expect(pool.statements.filter((s) => s.sql === 'BEGIN')).has.length(3);
+    expect(pool.statements.filter((s) => s.sql === 'COMMIT')).is.empty;
+    expect(pool.released).has.length(3);
+  });
+
+  it('does not retry other errors when marking a game finished', async () => {
+    pool.failing = ['INSERT INTO completed_game'];
+
+    const err = await markFinishedError();
+
+    expect(err).is.instanceOf(Error);
+    expect(pool.statements.map((s) => s.sql)).deep.eq([
+      'BEGIN',
+      'UPDATE games SET',
+      'UPDATE game SET',
+      'INSERT INTO completed_game(game_id)',
+      'ROLLBACK',
+    ]);
+    expect(pool.released).deep.eq([{connection: 'conn1', err: undefined}]);
   });
 });

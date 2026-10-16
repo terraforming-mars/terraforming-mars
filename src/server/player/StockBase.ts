@@ -104,13 +104,13 @@ export abstract class BaseStock {
     }
   }
 
-  public deductUnits(units: Units) {
-    this.deduct(Resource.MEGACREDITS, units.megacredits);
-    this.deduct(Resource.STEEL, units.steel);
-    this.deduct(Resource.TITANIUM, units.titanium);
-    this.deduct(Resource.PLANTS, units.plants);
-    this.deduct(Resource.ENERGY, units.energy);
-    this.deduct(Resource.HEAT, units.heat);
+  public deductUnits(units: Units, options?: {log?: boolean}) {
+    this.deduct(Resource.MEGACREDITS, units.megacredits, options);
+    this.deduct(Resource.STEEL, units.steel, options);
+    this.deduct(Resource.TITANIUM, units.titanium, options);
+    this.deduct(Resource.PLANTS, units.plants, options);
+    this.deduct(Resource.ENERGY, units.energy, options);
+    this.deduct(Resource.HEAT, units.heat, options);
   }
 
   protected logUnitDelta(

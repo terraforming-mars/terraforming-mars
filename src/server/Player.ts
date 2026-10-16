@@ -808,7 +808,7 @@ export class Player implements IPlayer {
     return this.resourcesOnCard(CARD_FOR_SPENDABLE_RESOURCE[SpendableResource]);
   }
 
-  public pay(payment: Payment) {
+  public pay(payment: Payment, options?: {log?: boolean}) {
     const standardUnits = Units.of({
       megacredits: payment.megacredits,
       steel: payment.steel,
@@ -816,7 +816,7 @@ export class Player implements IPlayer {
       plants: payment.plants,
     });
 
-    this.stock.deductUnits(standardUnits);
+    this.stock.deductUnits(standardUnits, options);
 
     if (payment.heat > 0) {
       this.defer(this.spendHeat(payment.heat));

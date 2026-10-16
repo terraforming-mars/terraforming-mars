@@ -81,7 +81,13 @@ export class ServeAsset extends Handler {
       }
       res.setHeader('Cache-Control', 'must-revalidate');
       res.setHeader('ETag', buffer.hash);
-    } else if (this.cacheAssets === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
+    } else if (this.cacheAssets === false) {
+      // main.js holds the webpack runtime, which pins every other chunk to a
+      // build-specific id. If the browser keeps a stale main.js while refetching
+      // a newer vendors.js after a redeploy, the runtime asks for a chunk id that
+      // no longer resolves and the lazy-loaded screen fails to render. Serving it
+      // like the other assets (revalidate every load) keeps the runtime and the
+      // chunks it names from ever coming from different builds.
       res.setHeader('Cache-Control', 'max-age=' + this.cacheAgeSeconds);
     }
 

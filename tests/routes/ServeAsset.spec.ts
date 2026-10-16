@@ -199,4 +199,28 @@ describe('ServeAsset', () => {
       expect(perRes.statusCode, `${src} should return 200`).eq(statusCode.ok);
     }
   });
+
+  it('main.js is served with a cache directive so the runtime is never heuristically cached', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/main.js';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.headers.get('Cache-Control')).eq('max-age=0');
+  });
+
+  it('vendors.js and main.js share the same cache directive', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/vendors.js';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    const vendorsCacheControl = res.headers.get('Cache-Control');
+
+    const mainRes = new MockResponse();
+    const mainScaffolding = new RouteTestScaffolding();
+    mainScaffolding.url = '/main.js';
+    mainScaffolding.req.headers['accept-encoding'] = '';
+    await mainScaffolding.get(new ServeAsset(undefined, false, fileApi), mainRes);
+
+    expect(mainRes.headers.get('Cache-Control')).eq(vendorsCacheControl);
+  });
 });

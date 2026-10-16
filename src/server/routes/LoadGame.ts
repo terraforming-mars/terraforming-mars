@@ -13,7 +13,8 @@ import {readBody} from './readBody';
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
   private constructor() {
-    super();
+    // Rolling back deletes saves, and the game id may be a spectator id, so only the operator may call this.
+    super({validateServerId: true});
   }
 
   private async getGameId(id: string): Promise<GameId | undefined> {
@@ -35,12 +36,10 @@ export class LoadGame extends Handler {
     if (gameId === undefined) {
       throw RouteError.notFound('Invalid game id');
     }
-    // This should probably be behind some kind of verification that prevents just
-    // anyone from rolling back a large number of steps.
     const rollbackCount = gameReq.rollbackCount;
     if (rollbackCount > 0) {
       try {
-        Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
+        await Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
       } catch (error) {
         console.error(error);
         throw RouteError.internalServerError();

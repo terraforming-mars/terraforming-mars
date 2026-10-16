@@ -104,6 +104,10 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     await this.client.query('DELETE FROM games WHERE game_id = $1', [gameId]);
   }
 
+  public async dropGameTable(): Promise<void> {
+    await this.client.query('DROP TABLE game');
+  }
+
   // Reads the two raw storage columns for a single save so tests can assert which
   // representation (plain-text `game` vs. compressed `game_compressed`) is populated.
   public async getRawGame(gameId: GameId, saveId: number): Promise<{game: string | null, gameCompressed: Buffer | null}> {
@@ -117,7 +121,6 @@ describeDatabaseSuite({
   constructor: () => new TestPostgreSQL(),
   omit: {
     purgeUnfinishedGames: true,
-    markFinished: true,
   },
   stats: {
     'type': 'POSTGRESQL',
@@ -642,6 +645,22 @@ describeDatabaseSuite({
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members(range(20));
+    });
+
+    it('a failed save leaves no rows behind and keeps its save id', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-failed-save', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const saveId = game.lastSaveId;
+
+      // The second insert of the save now fails, after the first one has run.
+      await db.dropGameTable();
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).deep.eq([0]);
+      expect(game.lastSaveId).eq(saveId);
+      expect(db.getStatistics().saveErrorCount).eq(1);
     });
 
     it('stats - orphaned rows', async () => {

@@ -113,15 +113,17 @@ export class TurmoilHandler {
 
     let total = 0;
     const game = player.game;
+    const globalParameterTracks = game.globalParameterTracks;
 
     if (tr.oxygen !== undefined) {
       const oxygenLevel = game.getOxygenLevel();
       const availableSteps = game.max.oxygen - oxygenLevel;
       const steps = Math.min(availableSteps, tr.oxygen);
       total = total + steps;
-      if (oxygenLevel < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
-          oxygenLevel + steps >= constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS) {
-        tr.temperature = (tr.temperature ?? 0) + 1;
+      for (const {value, bonus} of globalParameterTracks.oxygen) {
+        if (bonus === 'temperature' && oxygenLevel < value && oxygenLevel + steps >= value) {
+          tr.temperature = (tr.temperature ?? 0) + 1;
+        }
       }
     }
 
@@ -130,9 +132,10 @@ export class TurmoilHandler {
       const availableSteps = Math.floor((game.max.temperature - temperature) / 2);
       const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
-      if (temperature < constants.TEMPERATURE_FOR_OCEAN_BONUS &&
-        temperature + (steps * 2) >= constants.TEMPERATURE_FOR_OCEAN_BONUS) {
-        tr.oceans = (tr.oceans ?? 0) + 1;
+      for (const {value, bonus} of globalParameterTracks.temperature) {
+        if (bonus === 'ocean' && temperature < value && temperature + (steps * 2) >= value) {
+          tr.oceans = (tr.oceans ?? 0) + 1;
+        }
       }
     }
 
@@ -147,10 +150,11 @@ export class TurmoilHandler {
       const availableSteps = venusStepsBetween(venusLevel, game.max.venus);
       const steps = Math.min(availableSteps, tr.venus);
       total = total + steps;
-      const isBelowTrBonus = venusLevel < constants.VENUS_LEVEL_FOR_TR_BONUS;
-      const willBeAboveTrBonus = venusLevelAfterSteps(venusLevel, steps) >= constants.VENUS_LEVEL_FOR_TR_BONUS;
-      if (isBelowTrBonus && willBeAboveTrBonus) {
-        tr.tr = (tr.tr ?? 0) + 1;
+      const newVenusLevel = venusLevelAfterSteps(venusLevel, steps);
+      for (const {value, bonus} of globalParameterTracks.venus) {
+        if (bonus === 'tr' && venusLevel < value && newVenusLevel >= value) {
+          tr.tr = (tr.tr ?? 0) + 1;
+        }
       }
     }
 

@@ -5,6 +5,10 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {statusCode} from '@/common/http/statusCode';
 import {testGame} from '@tests/TestGame';
+import {Database} from '../../src/server/database/Database';
+import {IDatabase} from '../../src/server/database/IDatabase';
+import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
+import {GameId} from '../../src/common/Types';
 
 describe('LoadGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -15,6 +19,12 @@ describe('LoadGame', () => {
     req = new MockRequest();
     res = new MockResponse();
     scaffolding = new RouteTestScaffolding(req);
+    // scaffolding sets serverId to '1'
+    scaffolding.url = '/load_game?serverId=1';
+  });
+
+  afterEach(() => {
+    restoreTestDatabase();
   });
 
   // gameId is a raw string here: the wire carries whatever the client sent, which is
@@ -70,5 +80,84 @@ describe('LoadGame', () => {
     expect(res.headers.get('Content-Type')).eq('application/json');
     const model = JSON.parse(res.content) as SimpleGameModel;
     expect(model.id).eq(game.id);
+  });
+
+  describe('rollback', () => {
+    let events: Array<string>;
+    let finishDelete: () => void;
+    let failDelete: (err: Error) => void;
+
+    beforeEach(() => {
+      events = [];
+      const db: IDatabase = {
+        ...Database.getInstance(),
+        deleteGameNbrSaves: (gameId: GameId, rollbackCount: number) => {
+          events.push(`delete ${gameId} ${rollbackCount}`);
+          return new Promise<void>((resolve, reject) => {
+            finishDelete = () => {
+              events.push('delete done');
+              resolve();
+            };
+            failDelete = reject;
+          });
+        },
+      };
+      setTestDatabase(db);
+    });
+
+    it('is forbidden without the server id', async () => {
+      const [game] = testGame(2);
+      await scaffolding.ctx.gameLoader.add(game);
+      scaffolding.url = '/load_game';
+
+      await put({gameId: game.id, rollbackCount: 5});
+
+      expect(res.statusCode).eq(statusCode.forbidden);
+      expect(events).is.empty;
+    });
+
+    it('is forbidden with a wrong server id', async () => {
+      const [game] = testGame(2);
+      await scaffolding.ctx.gameLoader.add(game);
+      scaffolding.url = '/load_game?serverId=2';
+
+      await put({gameId: game.spectatorId!, rollbackCount: 5});
+
+      expect(res.statusCode).eq(statusCode.forbidden);
+      expect(events).is.empty;
+    });
+
+    it('waits for the saves to be deleted before loading', async () => {
+      const [game] = testGame(2);
+      await scaffolding.ctx.gameLoader.add(game);
+      const loader = scaffolding.ctx.gameLoader;
+      const getGame = loader.getGame.bind(loader);
+      loader.getGame = (gameId, bypassCache) => {
+        events.push('load');
+        return getGame(gameId, bypassCache);
+      };
+
+      const response = put({gameId: game.id, rollbackCount: 2});
+      // Let the route read the body and start the delete.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(events).deep.eq([`delete ${game.id} 2`]);
+      finishDelete();
+      await response;
+
+      expect(events).deep.eq([`delete ${game.id} 2`, 'delete done', 'load']);
+      expect(res.statusCode).eq(statusCode.ok);
+    });
+
+    it('reports a failed delete', async () => {
+      const [game] = testGame(2);
+      await scaffolding.ctx.gameLoader.add(game);
+
+      const response = put({gameId: game.id, rollbackCount: 1});
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      failDelete(new Error('database is down'));
+      await response;
+
+      expect(res.statusCode).eq(statusCode.internalServerError);
+    });
   });
 });

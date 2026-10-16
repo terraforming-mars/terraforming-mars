@@ -26,7 +26,7 @@ const MARK_FINISHED_ATTEMPTS = 3;
 
 // SQLSTATE 40P01: Postgres broke a lock cycle by cancelling this statement.
 function isDeadlock(err: unknown): boolean {
-  return err instanceof Error && (err as Error & {code?: string}).code === '40P01';
+  return (err as any).code === '40P01';
 }
 
 // How often the (expensive) table/database size stats are actually recomputed. Scrapes that land
@@ -330,7 +330,7 @@ export class PostgreSQL implements IDatabase {
   // One transaction, so the three tables agree on whether the game is finished.
   private async markFinishedOnce(gameId: GameId): Promise<void> {
     let releaseError: Error | undefined;
-    const onError = (err: Error) => console.error('PostgreSQL:markFinished connection', err);
+    const onError = () => databaseMetrics.operationErrors.inc({operation: 'markFinished:connection'});
     const client = await this.client.connect();
     client.on('error', onError);
     try {
@@ -418,20 +418,20 @@ export class PostgreSQL implements IDatabase {
     const gameCompressed = this.compressOnWrite ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
-    // A transaction must stay on one connection. pool.query() checks out a connection per statement,
-    // so BEGIN, the inserts and COMMIT could each land on a different one.
+    // Take the save id together with the snapshot above, so a save that starts before this one
+    // finishes gets the next id.
+    const thisSaveId = game.lastSaveId;
+    game.lastSaveId = thisSaveId + 1;
+    // BEGIN through COMMIT all run on this one client.
     let client: pg.PoolClient | undefined;
     let releaseError: Error | undefined;
-    // pool.connect() drops the pool's own 'error' listener until release. A dead socket fails the
-    // pending query, which the catch below handles, and also emits 'error', which must not go unheard.
-    const onError = (err: Error) => console.error('PostgreSQL:saveGame connection', err);
+    // While the client is checked out the pool doesn't listen for its 'error' events, so this does.
+    const onError = () => databaseMetrics.operationErrors.inc({operation: 'saveGame:connection'});
     try {
       client = await this.client.connect();
       client.on('error', onError);
       await client.query('BEGIN');
 
-      // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
-      const thisSaveId = game.lastSaveId;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       //
       // When compressOnWrite is true, the game state is written to game_compressed; when it's
@@ -441,7 +441,7 @@ export class PostgreSQL implements IDatabase {
         VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3, game_compressed = $4
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
+        [game.id, thisSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
 
       await client.query(
         `INSERT INTO game (game_id, log, options)
@@ -472,13 +472,15 @@ export class PostgreSQL implements IDatabase {
         if (game.spectatorId) {
           participantIds.push(game.spectatorId);
         }
-        await this.insertParticipants(client, {gameId: game.id, participantIds: participantIds});
+        await this._storeParticipants(client, {gameId: game.id, participantIds: participantIds});
       }
 
       await client.query('COMMIT');
-      // Only advance once the save is durable, so a failed save never leaves a gap in save ids.
-      game.lastSaveId = thisSaveId + 1;
     } catch (err) {
+      // Hand the id back unless a later save already took the next one.
+      if (game.lastSaveId === thisSaveId + 1) {
+        game.lastSaveId = thisSaveId;
+      }
       if (client !== undefined) {
         try {
           await client.query('ROLLBACK');
@@ -523,10 +525,10 @@ export class PostgreSQL implements IDatabase {
   }
 
   public storeParticipants(entry: GameIdLedger): Promise<void> {
-    return this.insertParticipants(this.client, entry);
+    return this._storeParticipants(this.client, entry);
   }
 
-  private async insertParticipants(client: pg.ClientBase | pg.Pool, entry: GameIdLedger): Promise<void> {
+  private async _storeParticipants(client: pg.ClientBase | pg.Pool, entry: GameIdLedger): Promise<void> {
     await client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2) ON CONFLICT (game_id) DO NOTHING', [entry.gameId, entry.participantIds]);
   }
 

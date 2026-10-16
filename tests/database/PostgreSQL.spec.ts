@@ -119,6 +119,12 @@ describe('PostgreSQL', () => {
     expect(pool.released.map((r) => r.connection)).has.members(['conn1', 'conn2']);
   });
 
+  it('gives overlapping saves of one game consecutive save ids', async () => {
+    await Promise.all([db.saveGame(game), db.saveGame(game)]);
+
+    expect(game.lastSaveId).eq(2);
+  });
+
   it('rolls back on the same connection when an insert fails', async () => {
     pool.failing = ['INSERT INTO game (game_id, log'];
 

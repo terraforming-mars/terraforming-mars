@@ -455,6 +455,24 @@
   vertical-align: middle;
 }
 
+// The error/warning icon replaces the bullet.
+.create-game-validation-problems {
+  list-style: none;
+  padding-left: 0;
+
+  > li {
+    margin-bottom: 0.5em;
+  }
+
+  ul {
+    list-style: disc;
+  }
+}
+
+.create-game-validation-icon {
+  margin-right: 0.4em;
+}
+
 // Size the popup to its content rather than PopupPanel's fixed 90vw x 90vh.
 .popup-outer.create-game-validation-popup .popup-inner {
   width: min(90vw, 800px);

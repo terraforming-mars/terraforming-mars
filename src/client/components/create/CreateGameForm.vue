@@ -662,6 +662,12 @@ export default defineComponent({
         this.preludeToggled = true;
       }
     },
+    'expansions.deltaProject': function(value: boolean) {
+      if (value === true && this.preludeToggled === false && this.uploading === false) {
+        this.expansions.prelude = true;
+        this.preludeToggled = true;
+      }
+    },
     playersCount(value: number) {
       if (value === 1) {
         this.expansions.corpera = true;

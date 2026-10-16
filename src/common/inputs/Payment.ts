@@ -19,7 +19,7 @@ export function isPayment(obj: unknown): obj is Payment {
   if (!obj) {
     return false;
   }
-  const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
+  const h = obj as Payment; // Still might not be Payment, but h as is does not escape this method.
   if (Object.keys(h).length !== SPENDABLE_RESOURCES.length) {
     return false;
   }

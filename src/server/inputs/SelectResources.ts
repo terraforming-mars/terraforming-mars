@@ -1,6 +1,6 @@
 import {Message} from '../../common/logs/Message';
 import {Units} from '../../common/Units';
-import {BasePlayerInput} from '../PlayerInput';
+import {BasePlayerInput, isNonNegativeInteger} from '../PlayerInput';
 import {SelectResourcesModel} from '../../common/models/PlayerInputModel';
 import {InputResponse, isSelectResourcesResponse} from '../../common/inputs/InputResponse';
 import {InputError} from './InputError';
@@ -32,8 +32,8 @@ export class SelectResources extends BasePlayerInput<Units> {
       throw new InputError('not a units object');
     }
     const array = Units.values(input.units);
-    if (array.some((count) => count < 0)) {
-      throw new InputError('All units must be positive');
+    if (!array.every(isNonNegativeInteger)) {
+      throw new InputError('All units must be zero or positive integers');
     }
     if (sum(array) !== this.count) {
       throw new InputError(`Select ${this.count} resource(s)`);

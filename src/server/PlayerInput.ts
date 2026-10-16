@@ -104,3 +104,7 @@ export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>,
   const card = cards[idx];
   return {card, idx};
 }
+
+export function isNonNegativeInteger(val: number) {
+  return val !== undefined && val >= 0 && Math.floor(val) === val;
+}

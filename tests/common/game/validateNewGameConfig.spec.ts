@@ -92,6 +92,8 @@ const NO_ERRORS: ValidationErrors = {
   soloWithoutCorporateEra: false,
   infiniteEnergyBug: false,
   altVenusBoardOnAmazonis: false,
+  prelude2WithoutPrelude: false,
+  deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
 };
 
@@ -181,6 +183,20 @@ describe('validateNewGameConfig', () => {
     expect(validate({expansions, altVenusBoard: true, board: BoardName.THARSIS}).altVenusBoardOnAmazonis).is.false;
     expect(validate({expansions, altVenusBoard: false, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
     expect(validate({altVenusBoard: true, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
+  });
+
+  it('prelude 2 without prelude', () => {
+    const expansions = newGameConfig().expansions;
+    expect(validate({expansions: {...expansions, prelude2: true}}).prelude2WithoutPrelude).is.true;
+    expect(validate({expansions: {...expansions, prelude2: true, prelude: true}}).prelude2WithoutPrelude).is.false;
+    expect(validate({expansions: {...expansions, prelude: true}}).prelude2WithoutPrelude).is.false;
+  });
+
+  it('delta project without prelude', () => {
+    const expansions = newGameConfig().expansions;
+    expect(validate({expansions: {...expansions, deltaProject: true}}).deltaProjectWithoutPrelude).is.true;
+    expect(validate({expansions: {...expansions, deltaProject: true, prelude: true}}).deltaProjectWithoutPrelude).is.false;
+    expect(validate({expansions: {...expansions, prelude: true}}).deltaProjectWithoutPrelude).is.false;
   });
 
   it('not enough corporations', () => {

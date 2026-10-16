@@ -87,6 +87,12 @@ export interface ICard {
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   /**
+   * Called when `activePlayer` places a tile on `space` which rewards a standard resource bonus.
+   *
+   * In this case the player has chosen `resource`. Cards that implement this react as if this space had that resource bonus.
+   */
+  onStandardResourcePlacementBonus?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, resource: Resource): void;
+  /**
    * Estimates what `onTilePlaced` will give `player` when they place a tile of `tileType` on `space`.
    *
    * Used by cards that let a placement pay for their own cost. Manutech is applied by the caller.

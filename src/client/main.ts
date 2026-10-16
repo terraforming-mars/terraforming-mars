@@ -6,6 +6,7 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
+import {installChunkReloadHandler} from '@/client/utils/chunkReload';
 const PlayerInputFactory = defineAsyncComponent(() => import(/* webpackChunkName: "player-input" */ '@/client/components/PlayerInputFactory.vue'));
 
 declare global {
@@ -15,6 +16,8 @@ declare global {
 }
 
 async function bootstrap() {
+  installChunkReloadHandler();
+
   const lang = getPreferences().lang;
 
   if (lang !== 'en') {

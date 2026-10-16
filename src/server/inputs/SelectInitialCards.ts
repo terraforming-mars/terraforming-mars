@@ -144,8 +144,8 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     if (input.responses.length !== this.options.length) {
       throw new InputError('Incorrect options provided');
     }
-    // The sub-selections add cards to the hands one by one. If a later one fails, the earlier ones must be
-    // undone: otherwise a second attempt would add two more preludes and another CEO on top.
+    // Each response is processed individually. This provides a rollback on failure,
+    // preventing a bad state with extra cards in hand, good for cheating.
     const saved = {
       cards: [...player.cardsInHand],
       preludeCards: [...player.preludeCardsInHand],

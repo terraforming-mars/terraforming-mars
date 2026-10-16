@@ -13,7 +13,7 @@ import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
 import {statusCode} from '@/common/http/statusCode';
 import {FakeClock} from '../common/FakeClock';
-import {RESPONDING_TOO_QUICKLY} from '@/common/app/AppErrorId';
+import {AppErrorResponse, RESPONDING_TOO_QUICKLY, STALE_VIEW} from '@/common/app/AppErrorId';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -219,5 +219,51 @@ describe('PlayerInput', () => {
       expect(values.find((v) => v.metricName === 'player_input_response_interval_count')?.value).eq(1);
       expect(values.find((v) => v.metricName === 'player_input_response_interval_sum')?.value).eq(300);
     });
+  });
+
+  it('rejects a response that does not match the current prompt', async () => {
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
+    scaffolding.url = `/player/input?id=${player.id}`;
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    await scaffolding.ctx.gameLoader.add(game);
+
+    const options = cast(player.getWaitingFor(), OrOptions);
+    const index = options.options.findIndex((option) => option.type === 'projectCard');
+    expect(index).not.eq(-1);
+    const gameAge = game.gameAge;
+
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      // What a page still showing an earlier OrOptions of plain options would send.
+      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: index, response: {type: 'option'}};
+      scaffolding.req.emitString(JSON.stringify(orOptionsResponse));
+      scaffolding.req.emitter.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
+    expect(res.statusCode).eq(statusCode.badRequest);
+    const response: AppErrorResponse = JSON.parse(res.content);
+    expect(response.id).eq(STALE_VIEW);
+    expect(player.getWaitingFor()).eq(options);
+    expect(game.gameAge).eq(gameAge);
+  });
+
+  it('rejects a response when the player is not waiting for anything', async () => {
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
+    scaffolding.url = `/player/input?id=${player.id}`;
+    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    await scaffolding.ctx.gameLoader.add(game);
+    player.popWaitingFor();
+
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      scaffolding.req.emitString(JSON.stringify({type: 'option'}));
+      scaffolding.req.emitter.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
+    expect(res.statusCode).eq(statusCode.badRequest);
+    const response: AppErrorResponse = JSON.parse(res.content);
+    expect(response.id).eq(STALE_VIEW);
   });
 });

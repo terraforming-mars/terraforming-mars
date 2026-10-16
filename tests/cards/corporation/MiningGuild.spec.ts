@@ -12,6 +12,7 @@ import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;
@@ -124,4 +125,24 @@ describe('MiningGuild', () => {
     expect(player.stock.steel).to.eq(1);
     expect(player.production.steel).to.eq(1);
   });
+
+  for (const run of [
+    {bonus: [SpaceBonus.STANDARD_RESOURCE], choice: 'steel', expected: 1},
+    {bonus: [SpaceBonus.STANDARD_RESOURCE], choice: 'titanium', expected: 1},
+    {bonus: [SpaceBonus.STANDARD_RESOURCE], choice: 'plants', expected: 0},
+    // The steel bonus already triggers it; the choice does not trigger it again.
+    {bonus: [SpaceBonus.STEEL, SpaceBonus.STANDARD_RESOURCE], choice: 'titanium', expected: 1},
+  ] as const) {
+    it('Standard resource ' + JSON.stringify(run), () => {
+      const space = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
+      space.bonus = [...run.bonus];
+
+      game.addTile(player, space, {tileType: TileType.CITY});
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: run.choice});
+      runAllActions(game);
+
+      expect(player.production.steel).to.eq(run.expected);
+    });
+  }
 });

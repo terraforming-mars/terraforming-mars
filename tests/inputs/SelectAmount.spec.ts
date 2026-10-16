@@ -33,4 +33,12 @@ describe('', () => {
     expect(() => selectAmount.process({type: 'amount', amount: 101}))
       .to.throw(Error, /too high/);
   });
+
+  it('Rejects amounts that are not whole numbers', () => {
+    const selectAmount = new SelectAmount('', '', 0, 100, true).andThen(cb);
+    expect(() => selectAmount.process({type: 'amount', amount: '5' as unknown as number}))
+      .to.throw(Error, /not a number/);
+    expect(() => selectAmount.process({type: 'amount', amount: 2.5}))
+      .to.throw(Error, /not a number/);
+  });
 });

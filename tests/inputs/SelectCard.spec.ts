@@ -85,4 +85,11 @@ describe('SelectCard', () => {
     expect(() => selectCards.process({type: 'card', cards: [CardName.ROBOTIC_WORKFORCE]}))
       .to.throw(Error, /Robotic Workforce is not available/);
   });
+
+  it('Rejects the same card twice', () => {
+    const selectCards = new SelectCard('Select card', 'Save', [aquiferPumping, ioMiningIndustries], {max: 2})
+      .andThen(cb);
+    expect(() => selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING, CardName.AQUIFER_PUMPING]}))
+      .to.throw(Error, /only be selected once/);
+  });
 });

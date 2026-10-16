@@ -83,4 +83,16 @@ describe('SelectPayment', () => {
       }
     });
   }
+
+  it('Rejects fractions and extra fields', () => {
+    player.megaCredits = 0;
+    player.titanium = 4;
+    player.canUseTitaniumAsMegacredits = true;
+    const selectPayment = new SelectPayment('', 10, {titanium: true}).andThen(cb);
+    // 3.3334 titanium would pay exactly 10 instead of overpaying with 4
+    expect(() => selectPayment.process({type: 'payment', payment: Payment.of({titanium: 3.3334})}, player))
+      .to.throw(/payment is not a valid type/);
+    expect(() => selectPayment.process({type: 'payment', payment: {...Payment.of({titanium: 4}), junk: 1} as unknown as Payment}, player))
+      .to.throw(/payment is not a valid type/);
+  });
 });

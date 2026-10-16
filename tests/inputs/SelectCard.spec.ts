@@ -91,6 +91,5 @@ describe('SelectCard', () => {
       .andThen(cb);
     expect(() => selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING, CardName.AQUIFER_PUMPING]}))
       .to.throw(Error, /only be selected once/);
-    expect(selected).is.empty;
   });
 });

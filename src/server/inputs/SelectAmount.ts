@@ -33,7 +33,6 @@ export class SelectAmount extends BasePlayerInput<number> {
     if (!isSelectAmountResponse(input)) {
       throw new InputError('Not a valid SelectAmountResponse');
     }
-    // A string like "5" passes isNaN and the range checks, then turns `megacredits += amount` into text
     if (typeof input.amount !== 'number' || !Number.isInteger(input.amount)) {
       throw new InputError('Amount is not a number');
     }

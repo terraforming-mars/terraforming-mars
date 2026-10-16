@@ -55,9 +55,10 @@ export namespace Units {
     if (!isUnits(arg)) {
       return false;
     }
-    const knownKeys: ReadonlyArray<string> = keys;
-    return Object.keys(arg).every((key) => knownKeys.includes(key)) &&
-      keys.every((key) => Number.isInteger(arg[key]) && arg[key] >= 0);
+    if (Object.keys(arg).length !== keys.length) {
+      return false;
+    }
+    return keys.every((key) => Number.isInteger(arg[key]) && arg[key] >= 0);
   }
 
   /**

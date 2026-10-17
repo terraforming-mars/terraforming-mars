@@ -18,6 +18,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MAX_TEMPERATURE, MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
@@ -222,4 +223,22 @@ describe('GeologicalSurvey', () => {
     expect(player.plants).eq(1);
     expect(player.steel).eq(2);
   });
+
+  for (const run of [
+    {resource: 'titanium', expected: {titanium: 2, plants: 0}},
+    {resource: 'plants', expected: {titanium: 0, plants: 1}},
+  ] as const) {
+    it('Works with a standard resource space bonus ' + JSON.stringify(run), () => {
+      const space = game.board.getAvailableSpacesOnLand(player)[0];
+      space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+      player.playedCards.set(card);
+      game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: run.resource});
+      runAllActions(game);
+
+      expect(player.titanium).eq(run.expected.titanium);
+      expect(player.plants).eq(run.expected.plants);
+    });
+  }
 });

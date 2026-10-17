@@ -34,6 +34,10 @@ export abstract class SurveyCard extends Card implements IProjectCard {
     if (cardOwner.id !== activePlayer.id) {
       return false;
     }
+    // Space colonies are not on Mars.
+    if (space.spaceType === SpaceType.COLONY) {
+      return false;
+    }
     // Does not work on The Moon.
     if (space.id.startsWith('m')) {
       return false;
@@ -91,11 +95,14 @@ export abstract class SurveyCard extends Card implements IProjectCard {
     }
     switch (resource) {
     case Resource.STEEL:
-      return space.spaceType !== SpaceType.COLONY &&
-          PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mp01');
+      return PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mp01');
     case Resource.PLANTS:
-      return Board.isUncoveredOceanSpace(space) &&
-          cardOwner.tableau.has(CardName.ARCTIC_ALGAE);
+      if (Board.isUncoveredOceanSpace(space) && cardOwner.tableau.has(CardName.ARCTIC_ALGAE)) {
+        return true;
+      }
+      return PartyHooks.shouldApplyPolicy(cardOwner, PartyName.GREENS, 'gp02');
+    case Resource.HEAT:
+      return PartyHooks.shouldApplyPolicy(cardOwner, PartyName.KELVINISTS, 'kp04');
     }
     return false;
   }

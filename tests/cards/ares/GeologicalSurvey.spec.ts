@@ -241,4 +241,20 @@ describe('GeologicalSurvey', () => {
       expect(player.plants).eq(run.expected.plants);
     });
   }
+
+  it('Works with Kelvinists policy', () => {
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    game.board = EmptyBoard.newInstance();
+    player.playedCards.push(card);
+    const [space1, space2] = game.board.getAvailableSpacesOnLand(player);
+
+    game.addTile(player, space1, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.heat).eq(0);
+
+    setRulingParty(game, PartyName.KELVINISTS, 'kp04');
+    game.addTile(player, space2, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.heat).eq(3);
+  });
 });

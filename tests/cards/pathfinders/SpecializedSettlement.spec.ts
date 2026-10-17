@@ -14,6 +14,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {OneOrArray} from '../../../src/common/utils/types';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
 
 describe('SpecializedSettlement', () => {
   let card: SpecializedSettlement;
@@ -181,6 +182,44 @@ describe('SpecializedSettlement', () => {
       expect(player.production.energy).eq(0);
       expect(player.production.megacredits).eq(3);
     });
+  });
+
+  it('play - standard resource', () => {
+    // As Player.playCard does before the space is chosen, so the card learns the player's choice.
+    player.playedCards.push(card);
+    player.production.override({energy: 1});
+    const selectSpace = cast(card.play(player), SelectSpace);
+    runAllActions(game);
+
+    const space = selectSpace.spaces[0];
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    selectSpace.cb(space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: 'titanium'});
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3, titanium: 1}));
+    cast(player.popWaitingFor(), undefined);
+  });
+
+  it('play - later standard resource placement does not gain production', () => {
+    player.playedCards.push(card);
+    player.production.override({energy: 1});
+    const selectSpace = cast(card.play(player), SelectSpace);
+    runAllActions(game);
+
+    const [citySpace, laterSpace] = selectSpace.spaces;
+    citySpace.bonus = [];
+    selectSpace.cb(citySpace);
+    runAllActions(game);
+
+    laterSpace.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    game.addGreenery(player, laterSpace);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: 'titanium'});
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
   });
 
   function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {

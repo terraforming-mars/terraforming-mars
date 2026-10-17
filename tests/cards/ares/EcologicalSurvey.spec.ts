@@ -9,7 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {addGreenery, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addGreenery, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setRulingParty, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -18,6 +18,7 @@ import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../../src/common/utils/utils';
 import {SelectResource} from '@/server/inputs/SelectResource';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('EcologicalSurvey', () => {
   let card: EcologicalSurvey;
@@ -236,4 +237,20 @@ describe('EcologicalSurvey', () => {
       expect(player.titanium).eq(run.expected.titanium);
     });
   }
+
+  it('Works with Greens policy', () => {
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    game.board = EmptyBoard.newInstance();
+    player.playedCards.push(card);
+    const [space1, space2] = game.board.getAvailableSpacesOnLand(player);
+
+    game.addTile(player, space1, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.plants).eq(0);
+
+    setRulingParty(game, PartyName.GREENS, 'gp02');
+    game.addTile(player, space2, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.plants).eq(2);
+  });
 });

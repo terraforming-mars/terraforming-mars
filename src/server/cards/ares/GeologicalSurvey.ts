@@ -1,7 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
@@ -31,9 +29,10 @@ export class GeologicalSurvey extends SurveyCard {
     });
   }
 
-  protected checkForBonuses(cardOwner: IPlayer, space: Space) {
-    super.maybeRewardStandardResource(cardOwner, space, Resource.STEEL, SpaceBonus.STEEL);
-    super.maybeRewardStandardResource(cardOwner, space, Resource.TITANIUM, SpaceBonus.TITANIUM);
-    super.maybeRewardStandardResource(cardOwner, space, Resource.HEAT, SpaceBonus.HEAT);
-  }
+  protected readonly STANDARD_RESOURCES = [
+    [SpaceBonus.STEEL, Resource.STEEL],
+    [SpaceBonus.TITANIUM, Resource.TITANIUM],
+    [SpaceBonus.HEAT, Resource.HEAT],
+  ] as const;
+  protected readonly CARD_RESOURCES = [];
 }

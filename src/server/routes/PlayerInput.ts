@@ -1,5 +1,5 @@
 import * as responses from '../server/responses';
-import prometheus from 'prom-client';
+import prometheus from '@prometheus-io/client';
 import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';

@@ -13,7 +13,7 @@ export class SellSteel extends DeferredAction {
   }
 
   private logSale(unitsSold: number) {
-    this.player.game.log('${0} sold ${1} steel', (b) => b.player(this.player).number(unitsSold));
+    this.player.game.log('${0} sold ${1}:r:steel:', (b) => b.player(this.player).number(unitsSold));
   }
   public execute() {
     const unitsAvailable = this.player.steel;

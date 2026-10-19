@@ -1,0 +1,7 @@
+{
+  "${0} added ${1} ${2} to ${3}": "${0} adicionou ${1} ${2} a ${3}",
+  "${0} spent ${1} energy to trade with ${2}": "${0} gastou ${1} energia para negociar com ${2}",
+  "${0} spent ${1} titanium to trade with ${2}": "${0} gastou ${1} titânio para negociar com ${2}",
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} removeu ${1} ${2} de ${3} para ${4}",
+  "${0} gained ${1} ${2}": "${0} ganhou ${1} ${2}"
+}

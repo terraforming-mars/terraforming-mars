@@ -144,7 +144,7 @@ export class DeltaProjectExpansion {
 
     DeltaProjectExpansion.resolveReward(player, newPos);
 
-    player.game.log('${0} spend ${1} energy to advance on the Delta Project track', (b) => b.player(player).number(steps));
+    player.game.log('${0} spent ${1}:r:energy: to advance on the Delta Project track', (b) => b.player(player).number(steps));
   }
 
   private static resolveReward(player: IPlayer, position: number): void {
@@ -220,7 +220,7 @@ export class DeltaProjectExpansion {
             card.onNonCardTagAddedByAnyPlayer?.(p, Tag.JOVIAN);
           }
         }
-        player.game.log('${0} gained a Jovian tag from the Delta Project', (b) => b.player(player));
+        player.game.log('${0} gained a :tag:jovian: Jovian tag from the Delta Project', (b) => b.player(player));
       }
       break;
     }

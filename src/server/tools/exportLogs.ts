@@ -23,6 +23,10 @@ export async function exportLogs(db: IDatabase, gameId: GameId): Promise<Array<s
             return a9[datum.value] ?? 'n/a';
           case LogMessageDataType.TILE_TYPE:
             return tileTypeToString[datum.value];
+          case LogMessageDataType.RESOURCE:
+          case LogMessageDataType.PRODUCTION:
+          case LogMessageDataType.CARD_RESOURCE:
+            return Log.shortcode(datum) ?? datum.value.toString();
           default:
             return datum.value.toString();
           }

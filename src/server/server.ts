@@ -13,7 +13,7 @@ import fs from 'fs';
 import * as v8 from 'node:v8';
 import {performance} from 'node:perf_hooks';
 import raw_settings from '../genfiles/settings.json';
-import prometheus from 'prom-client';
+import prometheus from '@prometheus-io/client';
 import * as responses from './server/responses';
 import ansi from 'ansi-escape-sequences';
 
@@ -50,7 +50,7 @@ const metrics = {
     registers: [prometheus.register],
   }),
   // The V8 old-space ceiling. Compare against heap usage to see OOM headroom.
-  // Not included in prom-client's default metrics.
+  // Not included in @prometheus-io/client's default metrics.
   heapSizeLimit: new prometheus.Gauge({
     name: 'nodejs_heap_size_limit_bytes',
     help: 'V8 heap size limit in bytes',
@@ -70,7 +70,7 @@ const metrics = {
   }),
   // Fraction of time the event loop was busy (0 to 1) since the previous scrape.
   // Idle time is 1 minus this value.
-  // Not included in prom-client's default metrics.
+  // Not included in @prometheus-io/client's default metrics.
   eventLoopUtilization: new prometheus.Gauge({
     name: 'nodejs_eventloop_utilization',
     help: 'Fraction of time the event loop was busy since the last scrape',

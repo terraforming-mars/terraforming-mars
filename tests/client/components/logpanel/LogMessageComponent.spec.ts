@@ -8,6 +8,8 @@ import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardName} from '@/common/cards/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Resource} from '@/common/Resource';
+import {CardResource} from '@/common/CardResource';
 
 describe('LogMessageComponent', () => {
   it('mounts without errors', () => {
@@ -130,5 +132,38 @@ describe('LogMessageComponent', () => {
     } finally {
       PreferencesManager.resetForTest();
     }
+  });
+
+  it('renders icons in plain text and STRING data', () => {
+    const message = new LogMessage(LogMessageType.DEFAULT, 'spent :r:energy: for ${0}', [
+      {type: LogMessageDataType.STRING, value: ':p:megacredits:'},
+    ]);
+    const wrapper = shallowMount(LogMessageComponent, {
+      ...globalConfig,
+      props: {message, viewModel: fakeViewModel()},
+    });
+
+    const html = wrapper.html();
+    expect(html).includes('<span class="markdown-resource resource_icon--energy"></span>');
+    expect(html).includes(
+      '<span class="markdown-production"><span class="markdown-resource resource_icon--megacredits"></span></span>');
+  });
+
+  it('renders RESOURCE, PRODUCTION, and CARD_RESOURCE data as icons', () => {
+    const message = new LogMessage(LogMessageType.DEFAULT, '${0} ${1} ${2}', [
+      {type: LogMessageDataType.RESOURCE, value: Resource.STEEL},
+      {type: LogMessageDataType.PRODUCTION, value: Resource.HEAT},
+      {type: LogMessageDataType.CARD_RESOURCE, value: CardResource.SYNDICATE_FLEET},
+    ]);
+    const wrapper = shallowMount(LogMessageComponent, {
+      ...globalConfig,
+      props: {message, viewModel: fakeViewModel()},
+    });
+
+    const html = wrapper.html();
+    expect(html).includes('<span class="markdown-resource resource_icon--steel"></span>');
+    expect(html).includes(
+      '<span class="markdown-production"><span class="markdown-resource resource_icon--heat"></span></span>');
+    expect(html).includes('<span class="markdown-resource card-resource-syndicate-fleet"></span>');
   });
 });

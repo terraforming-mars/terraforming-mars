@@ -8,29 +8,20 @@ import {CardResource} from '../common/CardResource';
 import {From} from './logs/From';
 import {SpaceType} from '@/common/boards/SpaceType';
 
-function resourceString(resource: CardResource | undefined, qty: number): string {
-  const result = resource ?? 'resource';
-  if (qty === 1) {
-    return result;
-  } else {
-    return result + '(s)';
-  }
-}
-
 export class LogHelper {
   static logAddResource(player: IPlayer, card: ICard, qty: number = 1, from?: From): void {
     if (from === undefined) {
-      player.game.log('${0} added ${1} ${2} to ${3}', (b) =>
-        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card));
+      player.game.log('${0} added ${1}${2} to ${3}', (b) =>
+        b.player(player).number(qty).cardResource(card.resourceType).card(card));
     } else {
-      player.game.log('${0} added ${1} ${2} to ${3} from ${4}', (b) =>
-        b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).from(from));
+      player.game.log('${0} added ${1}${2} to ${3} from ${4}', (b) =>
+        b.player(player).number(qty).cardResource(card.resourceType).card(card).from(from));
     }
   }
 
   static logRemoveResource(player: IPlayer, card: ICard, qty: number = 1, effect: string): void {
-    player.game.log('${0} removed ${1} ${2} from ${3} to ${4}', (b) =>
-      b.player(player).number(qty).string(resourceString(card.resourceType, qty)).card(card).string(effect));
+    player.game.log('${0} removed ${1}${2} from ${3} to ${4}', (b) =>
+      b.player(player).number(qty).cardResource(card.resourceType).card(card).string(effect));
   }
 
   static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
@@ -97,10 +88,10 @@ export class LogHelper {
   }
 
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
-    player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
+    player.game.log('${0} stole ${1}${2} from the neutral player', (b) => b.player(player).number(amount).resource(resource));
   }
 
   public static logMoveResource(player: IPlayer, resource: CardResource, from: ICard, to: ICard) {
-    player.game.log('${0} moved 1 ${1} from ${2} to ${3}.', (b) => b.player(player).string(resource).card(from).card(to));
+    player.game.log('${0} moved 1 ${1} from ${2} to ${3}.', (b) => b.player(player).cardResource(resource).card(from).card(to));
   }
 }

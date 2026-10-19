@@ -16,4 +16,7 @@ export enum LogMessageDataType {
   UNDERGROUND_TOKEN, // 12
   SPACE, // 13
   CARDS, // 14
+  RESOURCE, // 15
+  PRODUCTION, // 16
+  CARD_RESOURCE, // 17
 }

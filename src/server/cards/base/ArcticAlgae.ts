@@ -40,8 +40,8 @@ export class ArcticAlgae extends Card implements IProjectCard {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
         new GainResourcesDeferred(cardOwner, Resource.PLANTS, {count: 2}).andThen(() => activePlayer.game.log(
-          '${0} gained 2 ${1} from ${2}',
-          (b) => b.player(cardOwner).string(Resource.PLANTS).cardName(this.name))),
+          '${0} gained 2:r:plants: from ${1}',
+          (b) => b.player(cardOwner).cardName(this.name))),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined);
     }
   }

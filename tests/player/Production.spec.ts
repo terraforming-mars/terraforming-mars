@@ -98,7 +98,7 @@ describe('Production', () => {
 
     player.production.add(Resource.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];
-    expect(formatMessage(logEntry)).eq('blue gained 12 M€ production');
+    expect(formatMessage(logEntry)).eq('blue gained 12:p:megacredits:');
   });
 
   it('add logging from player', () => {
@@ -109,7 +109,7 @@ describe('Production', () => {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatMessage(logEntry)).eq('blue lost 5 M€ production because of red');
+    expect(formatMessage(logEntry)).eq('blue lost 5:p:megacredits: because of red');
   });
 
   it('add logging from global event', () => {
@@ -119,7 +119,7 @@ describe('Production', () => {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatMessage(logEntry)).eq('blue gained 12 M€ production because of Asteroid Mining');
+    expect(formatMessage(logEntry)).eq('blue gained 12:p:megacredits: because of Asteroid Mining');
   });
 
   it('add logging, stolen', () => {
@@ -129,6 +129,6 @@ describe('Production', () => {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatMessage(logEntry)).eq('red stole 5 M€ production from blue');
+    expect(formatMessage(logEntry)).eq('red stole 5 :p:megacredits: from blue');
   });
 });

@@ -256,8 +256,8 @@ describe('Turmoil', () => {
 
     const messages = game.gameLog.map(formatMessage).filter((m) => m.includes('because of'));
     expect(messages).to.include.members([
-      `${player.color} gained 1 steel because of Aquifer Released by Public Council`,
-      `${player.color} gained 1 plant because of Aquifer Released by Public Council`,
+      `${player.color} gained 1:r:steel: because of Aquifer Released by Public Council`,
+      `${player.color} gained 1:r:plants: because of Aquifer Released by Public Council`,
     ]);
     expect(messages.filter((m) => m.includes('Corrosive Rain'))).is.empty;
   });

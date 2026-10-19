@@ -119,7 +119,7 @@ export function formatMessage(message: Message | string): string {
   if (typeof message === 'string') {
     return message;
   }
-  const text = Log.applyData(message, (datum) => datum.value.toString());
+  const text = Log.applyData(message, (datum) => Log.shortcode(datum) ?? datum.value.toString());
   const prefix = (message instanceof LogMessage && message.playerId) ?
     `(${message.playerId}): ` : '';
   return prefix + text;

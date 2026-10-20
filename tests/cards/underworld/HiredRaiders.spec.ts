@@ -4,6 +4,9 @@ import {HiredRaiders} from '../../../src/server/cards/underworld/HiredRaiders';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {formatMessage} from '../../TestingUtils';
+import {LogHelper} from '../../../src/server/LogHelper';
+import {Resource} from '../../../src/common/Resource';
 
 describe('HiredRaiders', () => {
   let card: HiredRaiders;
@@ -44,5 +47,18 @@ describe('HiredRaiders', () => {
     cast(card.play(player), undefined);
 
     expect(player.megaCredits).to.eq(4);
+  });
+
+  it('Solo logs the shared neutral player steal message', () => {
+    const [game, player] = testGame(1);
+    player.underworldData.corruption = 2;
+
+    cast(card.play(player), undefined);
+    const actual = formatMessage(game.gameLog.pop()!);
+
+    expect(player.megaCredits).to.eq(6);
+    LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 6);
+    const expected = formatMessage(game.gameLog.pop()!);
+    expect(actual).to.eq(expected);
   });
 });

@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all, uppercase} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 import {Tag} from '../../../common/cards/Tag';
+import {LogHelper} from '../../LogHelper';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -34,9 +35,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     const amount = 4 + (1 * player.underworldData.corruption);
     if (player.game.isSoloMode()) {
       player.megaCredits += amount;
-      player.game.log('${0} stole ${1} M€ from the neutral player', (b) =>
-        b.player(player).number(amount),
-      );
+      LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, amount);
     }
 
     const availableActions = new OrOptions();

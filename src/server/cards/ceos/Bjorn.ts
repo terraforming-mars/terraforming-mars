@@ -4,6 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Resource} from '../../../common/Resource';
+import {LogHelper} from '../../LogHelper';
 
 export class Bjorn extends CeoCard {
   constructor() {
@@ -42,9 +43,7 @@ export class Bjorn extends CeoCard {
 
     if (game.isSoloMode()) {
       player.megaCredits += amount;
-      game.log('${0} stole ${1} M€ from the neutral player', (b) =>
-        b.player(player).number(amount),
-      );
+      LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, amount);
       return undefined;
     }
 

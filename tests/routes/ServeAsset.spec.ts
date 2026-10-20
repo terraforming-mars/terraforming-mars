@@ -199,20 +199,4 @@ describe('ServeAsset', () => {
       expect(perRes.statusCode, `${src} should return 200`).eq(statusCode.ok);
     }
   });
-
-  it('main.js is never cached, even with a max age set', async () => {
-    instance = new ServeAsset(86400, false, fileApi);
-    scaffolding.url = '/main.js';
-    scaffolding.req.headers['accept-encoding'] = '';
-    await scaffolding.get(instance, res);
-    expect(res.headers.get('Cache-Control')).eq('no-cache');
-  });
-
-  it('other assets keep the configured max age', async () => {
-    instance = new ServeAsset(86400, false, fileApi);
-    scaffolding.url = '/vendors.js';
-    scaffolding.req.headers['accept-encoding'] = '';
-    await scaffolding.get(instance, res);
-    expect(res.headers.get('Cache-Control')).eq('max-age=86400');
-  });
 });

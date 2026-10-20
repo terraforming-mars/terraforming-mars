@@ -301,5 +301,12 @@ export default defineComponent({
       app.screen = 'start-screen';
     }
   },
+  // After a redeploy this page can still be running the previous build, whose lazy-loaded
+  // screens are gone from the server. Only a fresh page load fixes that.
+  errorCaptured(err: unknown) {
+    if (err instanceof Error && err.name === 'ChunkLoadError') {
+      this.showAlert('Page out of date', 'This page is out of date. Click OK to refresh it.', () => setTimeout(() => window.location.reload(), 100));
+    }
+  },
 });
 </script>

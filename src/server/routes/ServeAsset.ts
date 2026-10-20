@@ -81,14 +81,8 @@ export class ServeAsset extends Handler {
       }
       res.setHeader('Cache-Control', 'must-revalidate');
       res.setHeader('ETag', buffer.hash);
-    } else if (this.cacheAssets === false) {
-      // main.js holds the webpack runtime, which pins every other chunk to a
-      // build-specific id. If the browser keeps a stale main.js while refetching
-      // a newer vendors.js after a redeploy, the runtime asks for a chunk id that
-      // no longer resolves and the lazy-loaded screen fails to render. So it is
-      // refetched on every load, whatever max age the other assets get.
-      const isRuntime = req.url === '/main.js' || req.url === '/main.js.map';
-      res.setHeader('Cache-Control', isRuntime ? 'no-cache' : 'max-age=' + this.cacheAgeSeconds);
+    } else if (this.cacheAssets === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
+      res.setHeader('Cache-Control', 'max-age=' + this.cacheAgeSeconds);
     }
 
     const contentType = ContentType.getContentType(file);

@@ -70,7 +70,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
 
             player.game.log('${0} revealed ${1}', (b) => b.player(player).undergroundToken(undergroundResources));
             if (SearchforLifeUnderground.MICROBE_TOKENS.includes(undergroundResources)) {
-              player.addResourceTo(this, 1);
+              player.addResourceTo(this, {log: false});
               player.game.log('${0} found life!', (b) => b.player(player));
             }
           });

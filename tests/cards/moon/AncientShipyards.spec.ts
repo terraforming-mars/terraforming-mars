@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {churn} from '../../TestingUtils';
+import {churn, formatMessage} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 
@@ -54,6 +54,18 @@ describe('AncientShipyards', () => {
     expect(player2.megaCredits).eq(8);
     expect(player3.megaCredits).eq(5);
     expect(card.resourceCount).eq(1);
+  });
+
+  it('act logs the added resource', () => {
+    const [game, player, player2] = testGame(2, {moonExpansion: true});
+    player2.megaCredits = 10;
+    game.gameLog.length = 0;
+
+    churn(card.action(player), player);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Resource cube to Ancient Shipyards',
+    ]);
   });
 
   it('act solo', () => {

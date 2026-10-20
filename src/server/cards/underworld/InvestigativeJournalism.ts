@@ -50,7 +50,7 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
         player.defer(new SelectPlayer(moreCorruptPlayers, 'Select player to lose 1 corruption', 'Select player')
           .andThen((target) => {
             UnderworldExpansion.loseCorruption(target, 1, {log: true});
-            player.addResourceTo(this, 1);
+            player.addResourceTo(this, {log: true});
             return undefined;
           }));
       });

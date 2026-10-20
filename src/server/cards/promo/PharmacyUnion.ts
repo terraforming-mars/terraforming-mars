@@ -68,7 +68,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
 
   private addDisease(player: IPlayer, count: number) {
     const megaCreditsLost = Math.min(player.megaCredits, count * 4);
-    player.addResourceTo(this, count);
+    player.addResourceTo(this, {qty: count, log: false});
     player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
     this.logAddingDisease(player, count, megaCreditsLost);
   }

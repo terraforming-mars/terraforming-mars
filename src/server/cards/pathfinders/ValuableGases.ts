@@ -48,7 +48,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     if (playableCards.length !== 0) {
       player.defer(new SelectProjectCardToPlay(player, playableCards)
         .andThen((card) => {
-          player.addResourceTo(card, 5);
+          player.addResourceTo(card, {qty: 5, log: true});
           return undefined;
         }));
     }

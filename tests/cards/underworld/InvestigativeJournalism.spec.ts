@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {InvestigativeJournalism} from '../../../src/server/cards/underworld/InvestigativeJournalism';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {cast} from '../../../src/common/utils/utils';
 
@@ -76,6 +76,9 @@ describe('InvestigativeJournalism', () => {
       expect(selectPlayer.players.map((p) => p.id)).to.have.members(run.candidates);
       selectPlayer.cb(game.getPlayerById(run.selected));
       expect(card.resourceCount).eq(1);
+      expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+        'blue added 1 Journalism to Investigative Journalism',
+      ]);
 
       expect(player.underworldData.corruption).eq(run.expected.corruptions[0]);
       expect(player2.underworldData.corruption).eq(run.expected.corruptions[1]);

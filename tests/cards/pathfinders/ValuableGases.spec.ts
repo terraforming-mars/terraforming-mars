@@ -6,7 +6,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
-import {runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -56,12 +56,16 @@ describe('ValuableGases', () => {
     expect(selectProjectCardToPlay.cards.map(toName)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
+    player.game.gameLog.length = 0;
     selectProjectCardToPlay.payAndPlay(localShading, {
       ...Payment.EMPTY,
       megacredits: localShading.cost,
     });
 
     expect(localShading.resourceCount).eq(5);
+    expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 5 Floater(s) to Local Shading',
+    ]);
 
     player.playCard(jovianLanters);
     expect(airRaid.resourceCount).eq(0);

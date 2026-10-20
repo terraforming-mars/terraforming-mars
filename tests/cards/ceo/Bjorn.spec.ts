@@ -5,8 +5,6 @@ import {forceGenerationEnd, formatMessage} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Bjorn} from '../../../src/server/cards/ceos/Bjorn';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
-import {LogHelper} from '../../../src/server/LogHelper';
-import {Resource} from '../../../src/common/Resource';
 
 describe('Bjorn', () => {
   let card: Bjorn;
@@ -114,11 +112,7 @@ describe('Bjorn', () => {
     game.generation = 10;
 
     card.action(player);
-    const actual = formatMessage(game.gameLog.pop()!);
-
-    LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 12);
-    const expected = formatMessage(game.gameLog.pop()!);
-    expect(actual).to.eq(expected);
+    expect(formatMessage(game.gameLog.pop()!)).to.eq('blue stole 12:r:megacredits: from the neutral player');
   });
 
   it('Takes OPG action, players that lost money can play Law Suit', () => {

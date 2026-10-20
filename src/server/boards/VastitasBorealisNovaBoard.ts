@@ -1,5 +1,4 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
@@ -43,16 +42,6 @@ export class VastitasBorealisNovaBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new VastitasBorealisNovaBoard(spaces);
-  }
-
-  public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {
-    return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => {
-      if (space.bonus.includes(SpaceBonus.DELEGATE)) {
-        const turmoil = player.game.turmoil;
-        return !turmoil || turmoil.hasDelegatesInReserve(player);
-      }
-      return true;
-    });
   }
 
   public override spaceCosts(space: Space): SpaceCosts {

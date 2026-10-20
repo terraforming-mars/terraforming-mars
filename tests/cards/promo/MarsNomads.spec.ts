@@ -21,6 +21,9 @@ import {CuriosityII} from '../../../src/server/cards/community/CuriosityII';
 import {ExpeditionVehicles} from '../../../src/server/cards/underworld/ExpeditionVehicles';
 import {intersection} from '../../../src/common/utils/utils';
 import {cast} from '../../../src/common/utils/utils';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;
@@ -457,6 +460,46 @@ describe('MarsNomads', () => {
 
       // The nomads move a token; no tile is placed, so Greens policy 2 does not pay out.
       expect(player.plants).eq(0);
+    });
+  });
+
+  describe('delegate bonus spaces', () => {
+    // On Amazonis Planitia, H8 (71) is next to H7 (70, two delegates) and H9 (72, one delegate).
+    function destinations(reserve: number) {
+      const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
+      const turmoil = Turmoil.getTurmoil(game);
+      while (turmoil.getAvailableDelegateCount(player) > reserve) {
+        turmoil.delegateReserve.remove(player);
+      }
+      game.nomadSpace = '71';
+      return {game, player, spaces: cast(card.action(player), SelectSpace).spaces.map((s) => s.id)};
+    }
+
+    it('without delegates, cannot move onto a delegate space', () => {
+      const {spaces} = destinations(0);
+      expect(spaces).does.not.include('70');
+      expect(spaces).does.not.include('72');
+    });
+
+    it('with one delegate, can move onto a single delegate space only', () => {
+      const {spaces} = destinations(1);
+      expect(spaces).includes('72');
+      expect(spaces).does.not.include('70');
+    });
+
+    it('with two delegates, can move onto the double delegate space', () => {
+      const {spaces} = destinations(2);
+      expect(spaces).includes('72');
+      expect(spaces).includes('70');
+    });
+
+    it('moving onto a delegate space sends the delegates', () => {
+      const {game, player} = destinations(2);
+      cast(card.action(player), SelectSpace).cb(game.board.getSpaceOrThrow('70'));
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectParty).cb(PartyName.MARS);
+      expect(player.totalDelegatesPlaced).eq(2);
+      expect(Turmoil.getTurmoil(game).getAvailableDelegateCount(player)).eq(0);
     });
   });
 });

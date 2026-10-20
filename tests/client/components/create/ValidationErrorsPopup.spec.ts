@@ -18,6 +18,9 @@ const NO_ERRORS: ValidationErrors = {
   ceosMissingExpansions: [],
   soloWithoutCorporateEra: false,
   infiniteEnergyBug: false,
+  altVenusBoardOnAmazonis: false,
+  prelude2WithoutPrelude: false,
+  deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
 };
 
@@ -33,6 +36,17 @@ describe('ValidationErrorsPopup', () => {
     expect(text).to.include(CardName.ECOLINE);
     expect(text).to.not.include('Escape Velocity');
     expect(wrapper.find('a').exists()).is.false;
+  });
+
+  it('marks errors and warnings with icons, errors first', () => {
+    const wrapper = mount(ValidationErrorsPopup, {
+      ...globalConfig,
+      props: {errors: {...NO_ERRORS, soloWithoutCorporateEra: true, notEnoughCorporations: 4}},
+    });
+    const icons = wrapper.findAll('.create-game-validation-icon');
+    expect(icons).has.length(2);
+    expect(icons[0].attributes('title')).eq('Error');
+    expect(icons[1].attributes('title')).eq('Warning');
   });
 
   it('links to the wiki for more details', () => {

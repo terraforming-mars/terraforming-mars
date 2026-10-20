@@ -83,6 +83,10 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T
     if (input.cards.length > this.config.max) {
       throw new InputError('Too many cards selected');
     }
+    // The same card twice would count twice (e.g. selling patents) while it is removed only once
+    if (new Set(input.cards).size !== input.cards.length) {
+      throw new InputError('Each card can only be selected once');
+    }
     const cards = [];
     for (const cardName of input.cards) {
       const {card, idx} = getCardFromPlayerInput(this.cards, cardName);

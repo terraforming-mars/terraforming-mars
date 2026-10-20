@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -57,8 +56,8 @@ export class Steelaris extends CorporationCard implements ICorporationCard {
     game.defer(
       new GainStock(cardOwner, Units.of({steel: 1, plants: 1}), {
         cb: () => game.log(
-          '${0} gained 1 ${1} and 1 ${2} from ${3}',
-          (b) => b.player(cardOwner).string(Resource.STEEL).string(Resource.PLANTS).cardName(this.name)),
+          '${0} gained 1:r:steel: and 1:r:plants: from ${1}',
+          (b) => b.player(cardOwner).cardName(this.name)),
       }),
       cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
     );

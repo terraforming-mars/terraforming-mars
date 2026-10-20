@@ -66,7 +66,7 @@ describe('EcologyExperts', () => {
     expect(player.canPlay(ants)).is.true;
   });
 
-  it('canplay Livestock, which requres global parameter and production', () => {
+  it('canplay Livestock, which requires global parameter and production', () => {
     // Livestock needs 9% oxygen, and 1 plant production.
     const livestock = new Livestock();
     player.cardsInHand.push(livestock);

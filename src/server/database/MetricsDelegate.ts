@@ -1,4 +1,4 @@
-import prometheus from 'prom-client';
+import prometheus from '@prometheus-io/client';
 import {IDatabase, GameIdLedger} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';

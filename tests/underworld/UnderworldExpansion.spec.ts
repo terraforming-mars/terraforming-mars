@@ -64,6 +64,11 @@ describe('UnderworldExpansion', () => {
     expect(underworldData.tokens).has.length(91);
   });
 
+  it('sanity, Amazonis Planitia', () => {
+    const [game] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    expect(game.underworldData.tokens).has.length(136);
+  });
+
   it('identify', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
@@ -262,18 +267,6 @@ describe('UnderworldExpansion', () => {
   //   UnderworldExpansion.grant(player1, 'ocean');
   // });
 
-  it('grant bonus - data1pertemp', () => {
-    expect(player1.underworldData.activeBonus).is.undefined;
-    UnderworldExpansion.grant(player1, 'data1pertemp');
-    expect(player1.underworldData.activeBonus).eq('data1pertemp');
-  });
-
-  it('grant bonus - microbe1pertemp', () => {
-    expect(player1.underworldData.activeBonus).is.undefined;
-    UnderworldExpansion.grant(player1, 'microbe1pertemp');
-    expect(player1.underworldData.activeBonus).eq('microbe1pertemp');
-  });
-
   it('grant bonus - plant2pertemp', () => {
     expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'plant2pertemp');
@@ -445,56 +438,6 @@ describe('UnderworldExpansion', () => {
     expect(responses).deep.eq([
       'from player1: p-player1-id',
     ]);
-  });
-
-  it('on temperature change - data1pertemp', () => {
-    player1.underworldData.activeBonus = 'data1pertemp';
-
-    expect(player1.getCardsWithResources()).is.empty;
-
-    game.increaseTemperature(player2, 2);
-    runAllActions(game);
-    const selectCard1 = cast(player1.popWaitingFor(), SelectCard);
-    selectCard1.cb([dataCard1]);
-
-    expect(player1.getCardsWithResources()).deep.eq([dataCard1]);
-    expect(dataCard1.resourceCount).eq(1);
-
-    runAllActions(game);
-
-    const selectCard2 = cast(player1.popWaitingFor(), SelectCard);
-    selectCard2.cb([dataCard2]);
-    expect(player1.getCardsWithResources()).deep.eq([dataCard1, dataCard2]);
-    expect(dataCard2.resourceCount).eq(1);
-
-    runAllActions(game);
-    expect(player1.popWaitingFor()).is.undefined;
-  });
-
-  it('on temperature change - microbe1pertemp', () => {
-    player1.underworldData.activeBonus = 'microbe1pertemp';
-
-    expect(player1.getCardsWithResources()).is.empty;
-
-    game.increaseTemperature(player2, 2);
-    runAllActions(game);
-    const selectCard1 = cast(player1.popWaitingFor(), SelectCard);
-    expect(selectCard1.cards).deep.eq([microbeCard1, microbeCard2]);
-    selectCard1.cb([microbeCard1]);
-
-    expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
-    expect(microbeCard1.resourceCount).eq(1);
-
-    runAllActions(game);
-
-    const selectCard2 = cast(player1.popWaitingFor(), SelectCard);
-    expect(selectCard2.cards).deep.eq([microbeCard1, microbeCard2]);
-    selectCard2.cb([microbeCard2]);
-    expect(player1.getCardsWithResources()).deep.eq([microbeCard1, microbeCard2]);
-    expect(microbeCard2.resourceCount).eq(1);
-
-    runAllActions(game);
-    expect(player1.popWaitingFor()).is.undefined;
   });
 
   it('on temperature change - plant2pertemp', () => {

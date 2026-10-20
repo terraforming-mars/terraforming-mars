@@ -52,7 +52,7 @@ export type Behavior = {
   /**
    * Lose one of the resources here, or as much of it as the player has.
    *
-   * This is forgiving, compred to `spend`: it never blocks the behavior, never asks
+   * This is forgiving, compared to `spend`: it never blocks the behavior, never asks
    * the player to choose how to pay, and takes what it can when the player comes up short.
    * Values can't go negative, and the player can't lose more than they have.)
    */
@@ -132,7 +132,7 @@ export type Behavior = {
   // removeAnyResource: {type: CardResource, count: number},
 
   /** Raise or lower the titanium and steel value. On discard, reverse it. */
-  titanumValue?: 1 | -1;
+  titaniumValue?: 1 | -1;
   steelValue?: 1;
 
   /** Draw this many cards from the deck. */

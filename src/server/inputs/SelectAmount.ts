@@ -33,7 +33,7 @@ export class SelectAmount extends BasePlayerInput<number> {
     if (!isSelectAmountResponse(input)) {
       throw new InputError('Not a valid SelectAmountResponse');
     }
-    if (isNaN(input.amount)) {
+    if (typeof input.amount !== 'number' || !Number.isInteger(input.amount)) {
       throw new InputError('Amount is not a number');
     }
     if (input.amount > this.max) {

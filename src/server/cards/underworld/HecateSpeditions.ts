@@ -48,16 +48,16 @@ export class HecateSpeditions extends CorporationCard implements ICorporationCar
   }
 }
 
-export class TradeWithHectateSpeditions implements IColonyTrader {
-  private hectateSpeditions: ICard | undefined;
+export class TradeWithHecateSpeditions implements IColonyTrader {
+  private hecateSpeditions: ICard | undefined;
   private readonly tradeCost: number = 2;
 
   constructor(private player: IPlayer) {
-    this.hectateSpeditions = player.tableau.get(CardName.HECATE_SPEDITIONS);
+    this.hecateSpeditions = player.tableau.get(CardName.HECATE_SPEDITIONS);
   }
 
   public canUse() {
-    return (this.hectateSpeditions?.resourceCount ?? 0) >= this.tradeCost;
+    return (this.hecateSpeditions?.resourceCount ?? 0) >= this.tradeCost;
   }
 
   public optionText() {
@@ -72,8 +72,8 @@ export class TradeWithHectateSpeditions implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    if (this.hectateSpeditions !== undefined) {
-      this.tradeWithColony(this.hectateSpeditions, this.player, colony);
+    if (this.hecateSpeditions !== undefined) {
+      this.tradeWithColony(this.hecateSpeditions, this.player, colony);
     }
   }
 }

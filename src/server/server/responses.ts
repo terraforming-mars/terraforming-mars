@@ -94,7 +94,7 @@ export function unprocessableEntity(req: Request, res: Response, msg: string = '
 }
 
 export function downgradeRedirect(_req: Request, res: Response, ctx: Context): void {
-  const url = new URL(ctx.url); // defensive copty
+  const url = new URL(ctx.url); // defensive copy
   url.searchParams.set('serverId', ctx.ids.statsId);
   res.writeHead(statusCode.movedPermanently, {Location: url.pathname + url.search});
   res.end();

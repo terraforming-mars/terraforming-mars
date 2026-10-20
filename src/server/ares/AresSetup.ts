@@ -13,7 +13,7 @@ export class AresSetup {
       hazardData: {
         erosionOceanCount: {threshold: 3, available: true}, // oceans: add erosion tiles
         removeDustStormsOceanCount: {threshold: 6, available: true}, // oceans: remove dust storms
-        severeErosionTemperature: {threshold: -4, available: true}, // temperatore: severe erosion
+        severeErosionTemperature: {threshold: -4, available: true}, // temperature: severe erosion
         severeDustStormOxygen: {threshold: 5, available: true}, // oxygen: severe dust storms
       },
       milestoneResults: players.map((p) => {

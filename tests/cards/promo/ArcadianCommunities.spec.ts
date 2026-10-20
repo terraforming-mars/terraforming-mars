@@ -90,7 +90,7 @@ describe('ArcadianCommunities', () => {
     expect(cast(card.action(player), SelectSpace).spaces).does.contain(second);
   });
 
-  // Verifies that a regression does not recoccur.
+  // Verifies that a regression does not reoccur.
   it('Not granting when it should not', () => {
     const oceanSpace = board.getAvailableSpacesForOcean(player)[0];
     oceanSpace.bonus = []; // Just to make sure.

@@ -7,7 +7,7 @@ import {Thermalist} from '../src/server/awards/Thermalist';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {addCity, addGreenery, addOcean, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from './TestingUtils';
+import {addCity, addGreenery, addOcean, fakeCard, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGame} from './TestingUtils';
 import {cast, toName} from '../src/common/utils/utils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
@@ -31,11 +31,13 @@ import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
+import {assertBuildColony} from './colonies/coloniesAssertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Tag} from '../src/common/cards/Tag';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
 import {Spacefarer} from '../src/server/milestones/terraCimmeria/Spacefarer';
+import {Suburbian} from '../src/server/awards/modular/Suburbian';
 import {SpaceName} from '../src/common/boards/SpaceName';
 import {SpaceType} from '../src/common/boards/SpaceType';
 
@@ -156,6 +158,31 @@ describe('Game', () => {
     expect(player.terraformRating).to.eq(initialTR + 1);
   });
 
+  it('Venus moves 1% per step above 30% on Amazonis Planitia', () => {
+    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    setVenusScaleLevel(game, 28);
+
+    expect(game.increaseVenusScaleLevel(player, 2)).eq(2);
+    expect(game.getVenusScaleLevel()).eq(31);
+
+    expect(game.increaseVenusScaleLevel(player, 3)).eq(2);
+    expect(game.getVenusScaleLevel()).eq(33);
+
+    expect(game.increaseVenusScaleLevel(player, 1)).eq(0);
+    expect(game.getVenusScaleLevel()).eq(33);
+  });
+
+  it('Venus decreases 1% per step above 30% on Amazonis Planitia', () => {
+    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    setVenusScaleLevel(game, 31);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(game.getVenusScaleLevel()).eq(30);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(game.getVenusScaleLevel()).eq(28);
+  });
+
   it('Draft round for 2 players', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
@@ -261,6 +288,21 @@ describe('Game', () => {
     expect(game.phase).to.eq(Phase.END);
 
     expect(game.isSoloModeWin()).is.not.true;
+  });
+
+  it('Amazonis Planitia solo games take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    expect(game.lastSoloGeneration()).eq(15);
+  });
+
+  it('Amazonis Planitia solo games with prelude take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, preludeExtension: true});
+    expect(game.lastSoloGeneration()).eq(13);
+  });
+
+  it('Amazonis Planitia solo games in TR63 mode do not take one more generation', () => {
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, soloTR: true});
+    expect(game.lastSoloGeneration()).eq(14);
   });
 
   it('Should not finish solo game before last generation if Mars is already terraformed', () => {
@@ -811,6 +853,7 @@ describe('Game', () => {
       'underworldDraftEnabled',
       'doubleDownPrelude',
       'max',
+      'globalParameterTracks',
     ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',
@@ -1025,6 +1068,33 @@ describe('Game', () => {
     expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
   });
 
+  it('deserializing a game with renamed awards', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    const suburbian = new Suburbian();
+
+    game.awards.unshift(suburbian);
+
+    game.fundedAwards.push({
+      award: suburbian,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    expect(serialized.awards[0]).eq('Suburbian');
+    expect(serialized.fundedAwards[0].name).eq('Suburbian');
+
+    serialized.awards[0] = 'Edgedancer' as any;
+    serialized.fundedAwards[0].name = 'Edgedancer' as any;
+
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.awards[0]).deep.eq(suburbian);
+    expect(deserialized.fundedAwards).has.length(1);
+    expect(deserialized.fundedAwards[0].award.name).eq('Suburbian');
+    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
+  });
+
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572
   it('dealing with milestones accidentally claimed twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
@@ -1214,6 +1284,130 @@ describe('Game', () => {
     expect(game2.gameOptions.pathfindersExpansion).is.true;
     expect(game2.gameOptions.expansions.pathfinders).is.true;
   });
+
+  it('queues the 0C ocean after card effects and the TR increase', () => {
+    const [game, player] = testGame(1);
+    game.phase = Phase.ACTION;
+    setTemperature(game, -2);
+    const tr = player.terraformRating;
+    let queuedWhenCardFires = -1;
+    player.playedCards.push(fakeCard({
+      onGlobalParameterIncrease: () => {
+        queuedWhenCardFires = game.deferredActions.length;
+      },
+    }));
+
+    game.increaseTemperature(player, 1);
+
+    expect(queuedWhenCardFires).eq(0);
+    expect(player.terraformRating).eq(tr + 1);
+    expect(game.deferredActions.length).eq(1);
+  });
+
+  it('Amazonis Planitia grants plant production at -12C', () => {
+    const [game, player] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    game.phase = Phase.ACTION;
+    setTemperature(game, -14);
+
+    const before = player.production.plants;
+    game.increaseTemperature(player, 1);
+    expect(game.getTemperature()).eq(-12);
+    expect(player.production.plants).eq(before + 1);
+  });
+
+  it('standard maps grant no production at -12C', () => {
+    const [game, player] = testGame(1);
+    game.phase = Phase.ACTION;
+    setTemperature(game, -14);
+
+    const before = player.production.plants;
+    game.increaseTemperature(player, 1);
+    expect(player.production.plants).eq(before);
+  });
+
+  it('Amazonis Planitia draws a card at 7% oxygen', () => {
+    const [game, player] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    game.phase = Phase.ACTION;
+    setOxygenLevel(game, 6);
+
+    const before = player.cardsInHand.length;
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getOxygenLevel()).eq(7);
+    expect(player.cardsInHand.length).eq(before + 1);
+  });
+
+  it('Amazonis Planitia raises temperature at 11% oxygen, not 8%', () => {
+    const [game, player] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    game.phase = Phase.ACTION;
+    setTemperature(game, -10);
+
+    // Crossing 8% does not raise temperature on this map.
+    setOxygenLevel(game, 7);
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getOxygenLevel()).eq(8);
+    expect(game.getTemperature()).eq(-10);
+
+    // Crossing 11% raises temperature one step.
+    setOxygenLevel(game, 10);
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getOxygenLevel()).eq(11);
+    expect(game.getTemperature()).eq(-8);
+
+    // Going on to 12% does not raise it again.
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getOxygenLevel()).eq(12);
+    expect(game.getTemperature()).eq(-8);
+  });
+
+  it('standard maps still raise temperature at 8% oxygen', () => {
+    const [game, player] = testGame(1);
+    game.phase = Phase.ACTION;
+    setTemperature(game, -10);
+    setOxygenLevel(game, 7);
+
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getOxygenLevel()).eq(8);
+    expect(game.getTemperature()).eq(-8);
+  });
+
+  it('player-benefit bonuses are skipped in the solar phase, but cascades still apply', () => {
+    const [game, player] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA});
+    game.phase = Phase.SOLAR;
+
+    // The 7% oxygen card draw is a player benefit and is skipped during World Government terraforming.
+    setOxygenLevel(game, 6);
+    const cardsBefore = player.cardsInHand.length;
+    game.increaseOxygenLevel(player, 1);
+    expect(player.cardsInHand.length).eq(cardsBefore);
+
+    // The 11% oxygen -> temperature cascade is a global effect and applies regardless.
+    setTemperature(game, -10);
+    setOxygenLevel(game, 10);
+    game.increaseOxygenLevel(player, 1);
+    expect(game.getTemperature()).eq(-8);
+  });
+
+  for (const run of [
+    {colonies: true, phase: Phase.ACTION, expected: true},
+    {colonies: false, phase: Phase.ACTION, expected: false},
+    {colonies: true, phase: Phase.SOLAR, expected: false},
+  ] as const) {
+    it('Amazonis Planitia at 16% Venus ' + JSON.stringify(run), () => {
+      // 2 players to remove an early-game solo action in the deferred actions queue.
+      const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, venusNextExtension: true, coloniesExtension: run.colonies});
+      game.phase = run.phase;
+      setVenusScaleLevel(game, 14);
+
+      game.increaseVenusScaleLevel(player, 1);
+      runAllActions(game);
+
+      if (run.expected) {
+        assertBuildColony(player, player.popWaitingFor());
+      } else {
+        cast(player.popWaitingFor(), undefined);
+      }
+    });
+  }
 });
 
 function assertIsJSON(serialized: any) {

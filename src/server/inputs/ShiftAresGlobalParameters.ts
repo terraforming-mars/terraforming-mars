@@ -29,17 +29,21 @@ export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParamet
       throw new InputError('Not a valid ShiftAresGlobalParametersResponse');
     }
 
-    if (!this.inRange(input.response.lowOceanDelta) ||
-      !this.inRange(input.response.highOceanDelta) ||
-      !this.inRange(input.response.temperatureDelta) ||
-      !this.inRange(input.response.oxygenDelta)) {
-      throw new InputError('values out of range');
-    }
+    this.validateNumber(input.response.lowOceanDelta);
+    this.validateNumber(input.response.highOceanDelta);
+    this.validateNumber(input.response.temperatureDelta);
+    this.validateNumber(input.response.oxygenDelta);
+
     this.cb(input.response);
     return undefined;
   }
 
-  private inRange(val: number) {
-    return (val >= -1 && val <= 1);
+  private validateNumber(val: number) {
+    if (!Number.isInteger(val)) {
+      throw new Error('value is not a number');
+    }
+    if (val < -1 || val > 1) {
+      throw new Error('value is out of range');
+    }
   }
 }

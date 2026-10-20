@@ -16,7 +16,7 @@ describe('LTFPrivileges', () => {
 
 
   it('effect', () => {
-    // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
+    // This test and the next show that Mare Serenitatis needs a steel and 2 titanium.
     player.titanium = 2;
     player.steel = 2;
     player.megaCredits = 1000;

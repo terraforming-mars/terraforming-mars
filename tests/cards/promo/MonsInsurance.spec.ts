@@ -173,7 +173,7 @@ describe('MonsInsurance - Solo', () => {
   it('Triggers on RemoveAnyPlants', () => {
     player.megaCredits = 10;
 
-    // DeimosDown removes 8 plants from any palyer
+    // DeimosDown removes 8 plants from any player
     const comet = new DeimosDown();
 
     comet.play(player);

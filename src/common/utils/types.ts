@@ -4,7 +4,7 @@
  * With these types
  *
  *   type Profile = {firstname: string, lastname: string, company: string};
- *   type InputOuptut = {input: Profile, output: Profile};
+ *   type InputOutput = {input: Profile, output: Profile};
  *
  *   InputOutput is
  *
@@ -13,7 +13,7 @@
  *     output: {firstname: string, lastname: string, company: string},
  *   }
  *
- * Partial<InputOuptut, 'input'>;
+ * Partial<InputOutput, 'input'>;
  *
  * yields {input: Partial<Profile>, output: Profile}
  *

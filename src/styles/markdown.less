@@ -1,16 +1,38 @@
 // Icons rendered from markdown shortcodes. See src/client/markdown/markdown.ts.
 .markdown-tag,
-.markdown-icon {
+.markdown-resource,
+.markdown-icon,
+.markdown-production {
   display: inline-block;
   vertical-align: middle;
-  height: 24px;
   margin: 0 2px;
+}
+
+.markdown-tag,
+.markdown-resource,
+.markdown-icon {
+  height: 24px;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.markdown-tag {
+.markdown-tag,
+.markdown-resource {
   width: 24px;
+}
+
+// Wraps a .markdown-resource, like a card's production box.
+.markdown-production {
+  line-height: 0;
+  padding: 2px;
+  background-image: url(./assets/misc/production.png);
+  background-size: cover;
+
+  .markdown-resource {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .markdown-icon-tr {

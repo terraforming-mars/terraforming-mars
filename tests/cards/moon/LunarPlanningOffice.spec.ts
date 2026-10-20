@@ -26,7 +26,7 @@ describe('LunarPlanningOffice', () => {
     player.steel = 0;
     player.cardsInHand = [];
 
-    // Prime the deck for a determinstic outcome.
+    // Prime the deck for a deterministic outcome.
     // Mare Imbrium is expected out first.
     game.projectDeck.drawPile.push(new RoboticWorkforce());
     game.projectDeck.drawPile.push(new MareNectarisMine());

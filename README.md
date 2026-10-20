@@ -134,6 +134,10 @@ Thanks goes to these wonderful people:
       <td><img src="https://avatars.githubusercontent.com/u/2050250?s=460&v=4" width="50px;" alt=""/><br />
       <td><a href="https://github.com/d-little"><b>d-little</b></a>: CEOs</a> </td>
     </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/287060?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/"><nicolasgramlichb>nicolasgramlich</b></a>: Amazonis Planitia</a> </td>
+    </tr>
   </tdata>
 </table>
 

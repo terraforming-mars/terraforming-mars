@@ -33,7 +33,7 @@ describe('CEOsFavoriteProject', () => {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can not play - no cards that have r esources', () => {
+  it('Can not play - no cards that have resources', () => {
     player.playedCards.push(new MicroMills(), new SecurityFleet());
     expect(card.canPlay(player)).is.false;
   });

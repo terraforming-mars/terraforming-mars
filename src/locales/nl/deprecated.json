@@ -1,0 +1,10 @@
+{
+  "${0} added ${1} ${2} to ${3}": "${0} heeft ${1} ${2} toegevoegd aan ${3}",
+  "${0} gained ${1} ${2}": "${0} ontving ${1} ${2}",
+  "${0} increased heat and energy production 1 step": "${0} verhoogde de productie van warmte en energie met 1",
+  "${0} spent 6 heat to raise temperature 1 step": "${0} betaalde 6 warmte om de temperatuur 1 stap te verhogen",
+  "${0} spent ${1} energy to trade with ${2}": "${0} betaalde ${1} energie om te handelen met ${2}",
+  "${0} spent ${1} titanium to trade with ${2}": "${0} betaalde ${1} titanium om te handelen met ${2}",
+  "${0} sold ${1} steel": "${0} verkocht ${1} staal",
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} verwijderde ${1} ${2} van ${3} voor effect ${4}"
+}

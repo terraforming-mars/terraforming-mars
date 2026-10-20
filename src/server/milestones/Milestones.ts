@@ -21,7 +21,6 @@ import {OneGiantStep} from '../moon/OneGiantStep';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {Economizer} from './arabiaTerra/Economizer';
 import {Pioneer} from './arabiaTerra/Pioneer';
-import {Pioneer4} from './arabiaTerra/Pioneer4';
 import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
 import {Capitalist} from './Capitalist';
@@ -29,7 +28,6 @@ import {VElectrician} from './VElectrician';
 import {Coastguard, Irrigator} from './Irrigator';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
-import {Colonizer} from './amazonisPlanitia/Colonizer';
 import {Minimalist} from './amazonisPlanitia/Minimalist';
 import {Terran} from './amazonisPlanitia/Terran';
 import {Tropicalist} from './amazonisPlanitia/Tropicalist';
@@ -83,7 +81,6 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'C. Forester': {Factory: CForester},
     'Capitalist': {Factory: Capitalist},
     'Coastguard': {Factory: Coastguard, random: 'modular'},
-    'Colonizer': {Factory: Colonizer, compatibility: 'colonies'},
     'Diversifier': {Factory: Diversifier, random: 'modular'},
     'Ecologist': {Factory: Ecologist, random: 'both'},
     'Economizer': {Factory: Economizer},
@@ -115,8 +112,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Networker': {Factory: Networker, compatibility: 'ares'},
     'One Giant Step': {Factory: OneGiantStep, compatibility: 'moon'},
     'Philantropist': {Factory: Philantropist, random: 'modular'},
-    'Pioneer': {Factory: Pioneer, compatibility: 'colonies'},
-    'Pioneer4': {Factory: Pioneer4, compatibility: 'colonies', random: 'modular'},
+    'Pioneer': {Factory: Pioneer, compatibility: 'colonies', random: 'both'},
     'Planetologist': {Factory: Planetologist, compatibility: 'venus', random: 'modular'},
     'Planner': {Factory: Planner, random: 'both'},
     'Polar Explorer': {Factory: PolarExplorer},
@@ -136,8 +132,8 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Terra Pioneer': {Factory: TerraPioneer},
     'Terraformer': {Factory: Terraformer},
     'Terraformer29': {Factory: Terraformer29, random: 'modular'},
-    'Terran': {Factory: Terran},
-    'Terran5': {Factory: Terran5, random: 'both'},
+    'Terran': {Factory: Terran, random: 'both'},
+    'Terran5': {Factory: Terran5, deprecated: true},
     'Thawer': {Factory: Thawer, random: 'modular'},
     'Trader': {Factory: Trader, random: 'modular'},
     'Tradesman': {Factory: Tradesman},
@@ -152,7 +148,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
     [BoardName.HELLAS]: ['Diversifier', 'Tactician', 'Polar Explorer', 'Energizer', 'Rim Settler'],
     [BoardName.ELYSIUM]: ['Generalist', 'Specialist', 'Ecologist', 'Tycoon', 'Legend'],
-    [BoardName.AMAZONIS]: ['Colonizer', 'Forester', 'Minimalist', 'Terran', 'Tropicalist'],
+    [BoardName.AMAZONIS]: ['Pioneer', 'Forester', 'Minimalist', 'Terran', 'Tropicalist'],
     [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Land Specialist', 'Martian', 'Terran'],
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'T. Spacefarer', 'Gambler'],
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
@@ -160,7 +156,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.VASTITAS_BOREALIS_NOVA]: ['Agronomist', 'V. Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
     [BoardName.TERRA_CIMMERIA_NOVA]: ['Planetologist', 'Architect', 'Coastguard', 'C. Forester', 'Fundraiser'],
     [BoardName.HOLLANDIA]: [],
-    [BoardName.AMAZONIS_PLANITIA]: ['Terran5', 'Landshaper', 'Merchant3', 'Sponsor', 'Lobbyist'],
+    [BoardName.AMAZONIS_PLANITIA]: ['Terran', 'Landshaper', 'Merchant3', 'Sponsor', 'Lobbyist'],
   },
   expansions: {
     venus: ['Hoverlord'],

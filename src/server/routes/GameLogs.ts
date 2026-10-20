@@ -68,6 +68,11 @@ export class GameLogs {
         // Fall-back, show the player color.
         return datum.value;
 
+      case LogMessageDataType.RESOURCE:
+      case LogMessageDataType.PRODUCTION:
+      case LogMessageDataType.CARD_RESOURCE:
+        return Log.shortcode(datum) ?? datum.value.toString();
+
       case LogMessageDataType.CARD:
       case LogMessageDataType.GLOBAL_EVENT:
       case LogMessageDataType.TILE_TYPE:

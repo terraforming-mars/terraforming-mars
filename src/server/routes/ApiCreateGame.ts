@@ -19,7 +19,6 @@ import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
 import {RouteError} from './RouteError';
-import {isProduction} from '@/server/utils/server';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
 import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
 
@@ -58,7 +57,7 @@ function getQuotaConfigs(): Array<QuotaConfig> {
       }
       return structs.map(parseQuotaConfig);
     } catch (e) {
-      console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
+      console.warn('While initializing quota:', (e instanceof Error ? e.message : e));
     }
   }
   return [defaultQuota];
@@ -74,9 +73,7 @@ export class ApiCreateGame extends Handler {
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
-    const allBoards = Object.values(BoardName)
-      // TODO(kberg): Re-enable Amazonis Planitia once it's offered in the create-game form.
-      .filter((name) => name !== BoardName.AMAZONIS_PLANITIA);
+    const allBoards = Object.values(BoardName);
 
     if (board === RandomBoardOption.ALL) {
       return allBoards;
@@ -132,10 +129,6 @@ export class ApiCreateGame extends Handler {
       this.validateCustomLists(gameReq);
       if (gameReq.escapeVelocity !== undefined && hasNegativeEscapeVelocityOption(gameReq.escapeVelocity)) {
         throw RouteError.badRequest('Escape Velocity values cannot be negative.');
-      }
-      // TODO(kberg): Remove once Amazonis Planitia is ready to play. Until then, only development servers create it.
-      if (gameReq.board === BoardName.AMAZONIS_PLANITIA && isProduction()) {
-        throw RouteError.badRequest('Amazonis Planitia is not available yet.');
       }
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);

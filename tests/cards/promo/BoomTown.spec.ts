@@ -9,6 +9,7 @@ import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {cast} from '../../../src/common/utils/utils';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 describe('BoomTown', () => {
   let card: BoomTown;
@@ -60,5 +61,16 @@ describe('BoomTown', () => {
 
     expect(game.board.getAvailableSpacesForType(player, 'city')).is.not.empty;
     expect(card.canPlay(player)).is.false;
+  });
+
+  it('play, offers spaces with a standard resource bonus', () => {
+    const space = game.board.getAvailableSpacesForType(player, 'city').find((space) => space.bonus.length === 0)!;
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+
+    card.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace.spaces).includes(space);
   });
 });

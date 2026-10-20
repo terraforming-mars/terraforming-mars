@@ -1,4 +1,6 @@
+import {CardResource} from '../CardResource';
 import {Color} from '../Color';
+import {Resource} from '../Resource';
 import {TileType} from '../TileType';
 import {SpaceId} from '../Types';
 import {SpaceBonus} from '../boards/SpaceBonus';
@@ -16,7 +18,7 @@ export type LogMessageDataAttrs = {
   tags?: boolean,
   /** When true for a card, also show the card's cost */
   cost?: boolean,
-  /** When true, don't show the whole list of cards. Show a clickable toolip. */
+  /** When true, don't show the whole list of cards. Show a clickable tooltip. */
   ellipsis?: boolean,
 }
 
@@ -62,6 +64,15 @@ type Types = {
 } | {
   type: LogMessageDataType.CARDS;
   value: ReadonlyArray<CardName>;
+} | {
+  type: LogMessageDataType.RESOURCE;
+  value: Resource;
+} | {
+  type: LogMessageDataType.PRODUCTION;
+  value: Resource;
+} | {
+  type: LogMessageDataType.CARD_RESOURCE;
+  value: CardResource;
 };
 
 export type LogMessageData = Types & {

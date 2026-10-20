@@ -49,7 +49,35 @@ describe('ShiftAresGlobalParameters', () => {
           temperatureDelta: 1,
         },
       } as unknown as InputResponse, player))
-      .to.throw(/values out of range/);
+      .to.throw(/value is out of range/);
+  });
+
+  it('fail, string value', () => {
+    expect(() =>
+      shiftAresGlobalParameters.process({
+        type: 'aresGlobalParameters',
+        response: {
+          lowOceanDelta: '1',
+          highOceanDelta: 0,
+          oxygenDelta: 0,
+          temperatureDelta: 0,
+        },
+      } as unknown as InputResponse, player))
+      .to.throw(/value is not a number/);
+  });
+
+  it('fail, fractional value', () => {
+    expect(() =>
+      shiftAresGlobalParameters.process({
+        type: 'aresGlobalParameters',
+        response: {
+          lowOceanDelta: 0.5,
+          highOceanDelta: 0,
+          oxygenDelta: 0,
+          temperatureDelta: 0,
+        },
+      } as unknown as InputResponse, player))
+      .to.throw(/value is not a number/);
   });
 
   it('success', () => {

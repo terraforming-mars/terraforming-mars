@@ -36,7 +36,7 @@ export interface PlayerInput {
     /**
      * Processes and validates `response` for this PlayerInput which is meant for the given `player`.
      *
-     * This is another mechainsm for calling cb() with a client-side response.
+     * This is another mechanism for calling cb() with a client-side response.
      */
     process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 }
@@ -103,4 +103,8 @@ export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>,
   }
   const card = cards[idx];
   return {card, idx};
+}
+
+export function isNonNegativeInteger(val: number) {
+  return val !== undefined && val >= 0 && Math.floor(val) === val;
 }

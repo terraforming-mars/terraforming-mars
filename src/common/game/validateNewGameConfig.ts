@@ -7,6 +7,8 @@ import {NewGameConfig} from './NewGameConfig';
 import {Expansion} from '../cards/GameModule';
 import {Message} from '../logs/Message';
 import {LogMessageDataType} from '../logs/LogMessageDataType';
+import {BoardName} from '../boards/BoardName';
+import {RandomBoardOption} from '../boards/RandomBoardOption';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -23,6 +25,9 @@ export type ValidationErrors = {
   ceosMissingExpansions: Array<CardName>;
   soloWithoutCorporateEra: boolean;
   infiniteEnergyBug: boolean;
+  altVenusBoardOnAmazonis: boolean;
+  prelude2WithoutPrelude: boolean;
+  deltaProjectWithoutPrelude: boolean;
   notEnoughCorporations: number;
 };
 
@@ -78,6 +83,18 @@ export const validationDetails: Record<keyof ValidationErrors, {blocking: boolea
     blocking: false,
     message: 'It is possible with ThorGate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production.',
   },
+  altVenusBoardOnAmazonis: {
+    blocking: false,
+    message: 'The Alt. Venus Board does not extend to the end of the Venus track on Amazonis Planitia.',
+  },
+  prelude2WithoutPrelude: {
+    blocking: false,
+    message: 'Prelude 2 without Prelude will only include its project cards, not its preludes.',
+  },
+  deltaProjectWithoutPrelude: {
+    blocking: true,
+    message: 'Delta Project requires the Prelude expansion.',
+  },
   notEnoughCorporations: {
     blocking: true,
     message: (errors) => mustSelectAtLeast('Must select at least ${0} corporations', errors.notEnoughCorporations),
@@ -103,6 +120,9 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     maybeNotEnoughPreludes: [],
     soloWithoutCorporateEra: false,
     infiniteEnergyBug: false,
+    altVenusBoardOnAmazonis: false,
+    prelude2WithoutPrelude: false,
+    deltaProjectWithoutPrelude: false,
     notEnoughCorporations: 0,
   };
 
@@ -134,6 +154,20 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
 
   if (isInfiniteEnergyBug(config)) {
     errors.infiniteEnergyBug = true;
+  }
+
+  // RandomBoardOption.OFFICIAL never picks Amazonis Planitia.
+  if (config.expansions.venus && config.altVenusBoard &&
+    (config.board === BoardName.AMAZONIS_PLANITIA || config.board === RandomBoardOption.ALL)) {
+    errors.altVenusBoardOnAmazonis = true;
+  }
+
+  if (config.expansions.prelude2 && !config.expansions.prelude) {
+    errors.prelude2WithoutPrelude = true;
+  }
+
+  if (config.expansions.deltaProject && !config.expansions.prelude) {
+    errors.deltaProjectWithoutPrelude = true;
   }
 
   function isMissingExpansion(name: CardName): boolean {

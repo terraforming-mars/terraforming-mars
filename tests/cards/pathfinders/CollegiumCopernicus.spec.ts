@@ -55,7 +55,7 @@ describe('CollegiumCopernicus', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('action with multiple coloniess available', () => {
+  it('action with multiple colonies available', () => {
     game.colonies = [new Luna(), new Triton()];
     card.resourceCount = 10;
 

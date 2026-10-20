@@ -276,9 +276,9 @@ export class MoonExpansion {
       switch (tileBuilt) {
       case TileType.MOON_HABITAT:
         if (player.tableau.has(CardName.SUBTERRANEAN_HABITATS)) {
-          // Edge case: Momentum Virum is a space habitat, not a habitat
+          // Edge case: Momentum Virium is a space habitat, not a habitat
           // ON the moon.
-          if (card.name !== CardName.MOMENTUM_VIRUM_HABITAT) {
+          if (card.name !== CardName.MOMENTUM_VIRIUM_HABITAT) {
             titanium -= 1;
           }
         }

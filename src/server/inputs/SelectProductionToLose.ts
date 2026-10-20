@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
+import {BasePlayerInput, isNonNegativeInteger} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
@@ -38,9 +38,9 @@ export class SelectProductionToLose extends BasePlayerInput<Units> {
     if (!Units.isUnits(input.units)) {
       throw new InputError('not a units object');
     }
-    const array = Object.values(input.units);
-    if (array.some((count) => count < 0)) {
-      throw new InputError('All units must be positive');
+    const array = Units.values(input.units);
+    if (!array.every(isNonNegativeInteger)) {
+      throw new InputError('All units must be zero or positive integers');
     }
     if (!player.production.canAdjust(Units.negative(input.units))) {
       throw new InputError('You do not have those units');

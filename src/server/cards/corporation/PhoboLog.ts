@@ -15,7 +15,7 @@ export class PhoboLog extends CorporationCard implements ICorporationCard {
 
       behavior: {
         stock: {titanium: 10},
-        titanumValue: 1,
+        titaniumValue: 1,
       },
 
       metadata: {

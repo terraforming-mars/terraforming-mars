@@ -48,9 +48,9 @@ describe('SubterraneanHabitats', () => {
     {card: CardName.THE_WOMB, titanium: 2, played: false, expected: true},
     {card: CardName.THE_WOMB, titanium: 1, played: false, expected: false},
     {card: CardName.THE_WOMB, titanium: 1, played: true, expected: true},
-    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 1, played: false, expected: true},
-    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 0, played: false, expected: false},
-    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 0, played: true, expected: false},
+    {card: CardName.MOMENTUM_VIRIUM_HABITAT, titanium: 1, played: false, expected: true},
+    {card: CardName.MOMENTUM_VIRIUM_HABITAT, titanium: 0, played: false, expected: false},
+    {card: CardName.MOMENTUM_VIRIUM_HABITAT, titanium: 0, played: true, expected: false},
   ];
   for (const run of effectRuns) {
     it('effect ' + JSON.stringify(run), () => {

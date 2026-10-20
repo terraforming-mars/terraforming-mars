@@ -9,7 +9,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 export class MomentumViriumHabitat extends Card {
   constructor() {
     super({
-      name: CardName.MOMENTUM_VIRUM_HABITAT,
+      name: CardName.MOMENTUM_VIRIUM_HABITAT,
       type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 23,

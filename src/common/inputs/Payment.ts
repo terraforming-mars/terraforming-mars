@@ -19,9 +19,12 @@ export function isPayment(obj: unknown): obj is Payment {
   if (!obj) {
     return false;
   }
-  const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
+  const h = obj as Payment; // Still might not be Payment, but h as is does not escape this method.
+  if (Object.keys(h).length !== SPENDABLE_RESOURCES.length) {
+    return false;
+  }
   return SPENDABLE_RESOURCES.every((key) =>
-    h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
+    h.hasOwnProperty(key) && Number.isInteger(h[key]) && h[key] >= 0);
 }
 
 export const DEFAULT_PAYMENT_VALUES = {

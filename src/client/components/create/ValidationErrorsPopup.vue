@@ -3,20 +3,17 @@
     <template #header>
       <h2 v-i18n>Game Settings Validation</h2>
     </template>
-    <template v-for="group in groups" :key="group.title">
-      <template v-if="group.problems.length > 0">
-        <h3 v-i18n>{{ group.title }}</h3>
-        <ul class="create-game-validation-problems">
-          <li v-for="problem in group.problems" :key="problem.key">
-            <span>{{ problem.text }}</span>
-            <template v-if="problem.learnMore">&nbsp;<a :href="problem.learnMore" target="_blank" v-i18n>Learn more</a></template>
-            <ul v-if="problem.items.length > 0">
-              <li v-for="item in problem.items" :key="item" v-i18n>{{ item }}</li>
-            </ul>
-          </li>
+    <ul class="create-game-validation-problems">
+      <li v-for="problem in sortedProblems" :key="problem.key">
+        <span v-if="problem.blocking" class="create-game-validation-icon" title="Error">&#x1F6D1;</span>
+        <span v-else class="create-game-validation-icon" title="Warning">&#9888;&#xFE0F;</span>
+        <span>{{ problem.text }}</span>
+        <template v-if="problem.learnMore">&nbsp;<a :href="problem.learnMore" target="_blank" v-i18n>Learn more</a></template>
+        <ul v-if="problem.items.length > 0">
+          <li v-for="item in problem.items" :key="item" v-i18n>{{ item }}</li>
         </ul>
-      </template>
-    </template>
+      </li>
+    </ul>
   </PopupPanel>
 </template>
 
@@ -33,6 +30,7 @@ type Problem = {
   text: string,
   items: ReadonlyArray<string>,
   learnMore: string | undefined,
+  blocking: boolean,
 };
 
 // Wiki pages that explain a validation problem in more detail.
@@ -67,17 +65,14 @@ const problems = computed((): Array<Problem> => {
     const {message} = validationDetails[key];
     const text = typeof message === 'string' ? translateText(message) : translateMessage(message(props.errors));
     const items = Array.isArray(value) ? value : [];
-    result.push({key, text, items, learnMore: learnMoreUrls[key]});
+    result.push({key, text, items, learnMore: learnMoreUrls[key], blocking: validationDetails[key].blocking});
   }
   return result;
 });
 
-/** Groups the validation results by warning or error. */
-const groups = computed(() => {
-  const [errors, warnings] = partition(problems.value, (problem) => validationDetails[problem.key].blocking);
-  return [
-    {title: 'Errors', problems: errors},
-    {title: 'Warnings', problems: warnings},
-  ];
+/** Errors first, then warnings. */
+const sortedProblems = computed((): Array<Problem> => {
+  const [errors, warnings] = partition(problems.value, (problem) => problem.blocking);
+  return [...errors, ...warnings];
 });
 </script>

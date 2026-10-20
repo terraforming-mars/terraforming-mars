@@ -56,7 +56,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
 
   // The only reason Archaic Foundation Institute has an action is if Reds is
   // in effect when the player gains the Moon tag. Ideally, this is always
-  // automatically resolved, even at strange times, even produciton.
+  // automatically resolved, even at strange times, even production.
   //
   public action(player: IPlayer) {
     // How should this interact in a Merger with UNMO?

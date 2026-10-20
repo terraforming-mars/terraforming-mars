@@ -18,6 +18,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {MAX_TEMPERATURE, MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
@@ -221,5 +222,39 @@ describe('GeologicalSurvey', () => {
 
     expect(player.plants).eq(1);
     expect(player.steel).eq(2);
+  });
+
+  for (const run of [
+    {resource: 'titanium', expected: {titanium: 2, plants: 0}},
+    {resource: 'plants', expected: {titanium: 0, plants: 1}},
+  ] as const) {
+    it('Works with a standard resource space bonus ' + JSON.stringify(run), () => {
+      const space = game.board.getAvailableSpacesOnLand(player)[0];
+      space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+      player.playedCards.set(card);
+      game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: run.resource});
+      runAllActions(game);
+
+      expect(player.titanium).eq(run.expected.titanium);
+      expect(player.plants).eq(run.expected.plants);
+    });
+  }
+
+  it('Works with Kelvinists policy', () => {
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    game.board = EmptyBoard.newInstance();
+    player.playedCards.push(card);
+    const [space1, space2] = game.board.getAvailableSpacesOnLand(player);
+
+    game.addTile(player, space1, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.heat).eq(0);
+
+    setRulingParty(game, PartyName.KELVINISTS, 'kp04');
+    game.addTile(player, space2, {tileType: TileType.RESTRICTED_AREA});
+    runAllActions(game);
+    expect(player.heat).eq(3);
   });
 });

@@ -259,7 +259,7 @@ export class Player implements IPlayer {
     this.id = id;
     // This seems pretty bad. The game will be set before the Player is actually
     // used, and if that doesn't happen, well, it's a worthy error.
-    // The alterantive, to make game type Game | undefined, will cause compilation
+    // The alternative, to make game type Game | undefined, will cause compilation
     // issues throughout the app.
     // Ideally the right thing is to invert how players and games get created.
     // But one thing at a time.
@@ -509,7 +509,7 @@ export class Player implements IPlayer {
   }
 
   public onGlobalParameterIncrease(parameter: GlobalParameter, steps: number): void {
-    // Tracks this player's contributition to global parmeters for end-of-game reporting.
+    // Tracks this player's contribution to global parameters for end-of-game reporting.
     this.globalParameterSteps[parameter] += steps;
   }
 
@@ -644,7 +644,7 @@ export class Player implements IPlayer {
   }
 
   /**
-   * ../..return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
+   * ../..return {number} the number of available megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
@@ -881,7 +881,7 @@ export class Player implements IPlayer {
     // This issue is evident when playing New Partner, and drawing Double Down.
     // The issue is fixed in Double Down for the time being. But the right fix is to move this block
     // down. As I say, that's going to break a lot of things, many of which are not evident
-    // in tests (because they use card.play instad of player.playCard).
+    // in tests (because they use card.play instead of player.playCard).
     const action = selectedCard.play(this);
     this.defer(action, Priority.DEFAULT);
 
@@ -1315,7 +1315,7 @@ export class Player implements IPlayer {
   }
 
   /**
-   * Returns the value of the suppled payment given the payment options.
+   * Returns the value of the supplied payment given the payment options.
    *
    * For example, if the payment is 3M€ and 2 steel, given that steel by default is
    * worth 2M€, this will return 7.
@@ -1438,7 +1438,7 @@ export class Player implements IPlayer {
   /**
    * Set up a player taking their next action.
    *
-   * This method indicates the avalilable actions by setting the `waitingFor` attribute of this player.
+   * This method indicates the available actions by setting the `waitingFor` attribute of this player.
    *
    * saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
    * should only be false in testing and when this method is called during game deserialization. In other

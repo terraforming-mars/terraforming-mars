@@ -39,7 +39,7 @@ export class Sabotage extends Card implements IProjectCard {
 
     if (player.game.isSoloMode() && player.playedCards.has(CardName.MONS_INSURANCE)) {
       availableActions.options.push(new SelectOption(
-        'Remove resources from the neutral oppponent',
+        'Remove resources from the neutral opponent',
         'Remove plants')
         .andThen(() => {
           player.resolveInsuranceInSoloGame();

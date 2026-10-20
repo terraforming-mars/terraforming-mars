@@ -16,7 +16,7 @@ export interface IGameLoader {
    * one of its player ids, or its spectator id.
    * @param {boolean} forceLoad (default is false.) When true always load from the database,
    * which refreshes the cache. This should never be true during an active game except when
-   * doing an adminstrative rollback. Don't even make this true for normal game undos.
+   * doing an administrative rollback. Don't even make this true for normal game undos.
    * That's what `restoreGameAt` is for.
    */
   getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<IGame | undefined>;

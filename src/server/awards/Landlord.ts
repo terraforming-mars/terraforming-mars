@@ -11,7 +11,7 @@ export class Landlord implements IAward {
       .filter(Board.hasRealTile)
       .filter(Board.ownedBy(player))
       .filter((space) =>
-        // Don't simplifiy this to "space.tile?.tileType !== TileType.OCEAN" because that will make
+        // Don't simplify this to "space.tile?.tileType !== TileType.OCEAN" because that will make
         // Land Claim a valid space for Landlord.
         space.tile?.tileType !== TileType.OCEAN && space.player === player).length;
 

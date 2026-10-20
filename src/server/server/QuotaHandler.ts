@@ -14,7 +14,7 @@ export class QuotaHandler {
   constructor(config: QuotaConfig) {
     this.limit = config.limit;
     this.perMs = config.perMs;
-    console.log(`Initialzing quota handler with {limit: ${this.limit}, perMs: ${this.perMs}}`);
+    console.log(`Initializing quota handler with {limit: ${this.limit}, perMs: ${this.perMs}}`);
   }
 
   measure(ctx: Context): boolean {

@@ -173,23 +173,8 @@
                         </div>
 
                         <div class="create-game-page-column">
-                            <h4 v-i18n>Board</h4>
-
-                            <div v-for="boardName in boards" :key="boardName">
-                              <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
-                              <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
-                              <label :for="boardName+'-checkbox'" class="expansion-button">
-                                  <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
-                                  <span class="capitalized" v-i18n>{{ boardName }}</span>
-                                  <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
-                                    &nbsp;<a :href="boardHref(boardName)" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                                  </template>
-                              </label>
-                            </div>
-                        </div>
-
-                        <div class="create-game-page-column">
                             <h4 v-i18n>Options</h4>
+                            <BoardSelector v-model:board="board" v-model:shuffleMap="shuffleMapOption" />
 
                             <label for="startingCorpNum-checkbox">
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
@@ -229,16 +214,6 @@
                                 <span v-i18n>Beginner Options</span>
                             </label> -->
 
-                            <input type="checkbox" v-model="undoOption" id="undo-checkbox">
-                            <label for="undo-checkbox">
-                                <span v-i18n>Allow undo</span>&nbsp;<a :href="wikiUrls.allowUndo" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
-                            <div v-if="undoOption">
-                              <span v-i18n>Undo is now in best effort support.</span>
-                              <a href="https://github.com/terraforming-mars/terraforming-mars/discussions/7647" target="_blank">&#9432;</a>
-                              <br>
-                              <span v-i18n>No effort will be spent to fix it.</span>
-                            </div>
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
                             <label for="timer-checkbox">
                                 <span v-i18n>Show timers</span>
@@ -277,11 +252,16 @@
                                     <span v-i18n>Merger</span>&nbsp;<a :href="wikiUrls.merger" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                               </label>
                             </template>
-
-                            <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
-                            <label for="shuffleMap-checkbox">
-                                    <span v-i18n>Randomize board tiles</span>&nbsp;<a :href="wikiUrls.randomizeBoardTiles" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
+                                                        <input type="checkbox" v-model="undoOption" id="undo-checkbox">
+                            <label for="undo-checkbox">
+                                <span v-i18n>Allow undo</span>&nbsp;<a :href="wikiUrls.allowUndo" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
+                            <div v-if="undoOption">
+                              <span v-i18n>Undo is now in best effort support.</span>
+                              <a href="https://github.com/terraforming-mars/terraforming-mars/discussions/7647" target="_blank">&#9432;</a>
+                              <br>
+                              <span v-i18n>No effort will be spent to fix it.</span>
+                            </div>
 
                             <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
                             <label for="seeded-checkbox">
@@ -579,10 +559,9 @@ import * as constants from '@/common/constants';
 
 import {defineComponent, nextTick} from 'vue';
 import {Color, PLAYER_COLORS} from '@/common/Color';
-import {BoardName} from '@/common/boards/BoardName';
-import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CeosFilter from '@/client/components/create/CeosFilter.vue';
+import BoardSelector from '@/client/components/create/BoardSelector.vue';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
@@ -596,7 +575,7 @@ import {GameId, JSONObject} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
@@ -604,7 +583,7 @@ import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
 import {createGameSettingsStorage} from './createGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
-import {RULEBOOK_URLS, WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
+import {RULEBOOK_URLS, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 import {validateNewGameConfig, validationDetails, ValidationErrors} from '@/common/game/validateNewGameConfig';
@@ -639,6 +618,7 @@ export default defineComponent({
     CardsFilter,
     CeosFilter,
     ColoniesFilter,
+    BoardSelector,
     CorporationsFilter,
     PreludesFilter,
     PreferencesIcon,
@@ -677,6 +657,12 @@ export default defineComponent({
       }
     },
     'expansions.prelude2': function(value: boolean) {
+      if (value === true && this.preludeToggled === false && this.uploading === false) {
+        this.expansions.prelude = true;
+        this.preludeToggled = true;
+      }
+    },
+    'expansions.deltaProject': function(value: boolean) {
       if (value === true && this.preludeToggled === false && this.uploading === false) {
         this.expansions.prelude = true;
         this.preludeToggled = true;
@@ -788,9 +774,6 @@ export default defineComponent({
     typedRefs(): Refs {
       return this.$refs as Refs;
     },
-    RandomBoardOption(): typeof RandomBoardOption {
-      return RandomBoardOption;
-    },
     RandomMAOptionType(): typeof RandomMAOptionType {
       return RandomMAOptionType;
     },
@@ -799,28 +782,6 @@ export default defineComponent({
     },
     PLAYER_COLORS(): typeof PLAYER_COLORS {
       return PLAYER_COLORS;
-    },
-    boards() {
-      return [
-        BoardName.THARSIS,
-        BoardName.HELLAS,
-        BoardName.ELYSIUM,
-        BoardName.UTOPIA_PLANITIA,
-        BoardName.VASTITAS_BOREALIS_NOVA,
-        BoardName.TERRA_CIMMERIA_NOVA,
-
-        RandomBoardOption.OFFICIAL,
-
-        // TODO(kberg): Offer Amazonis Planitia in every build once it's ready to play.
-        ...(process.env.NODE_ENV === 'development' ? [BoardName.AMAZONIS_PLANITIA] : []),
-
-        BoardName.ARABIA_TERRA,
-        BoardName.AMAZONIS,
-        BoardName.TERRA_CIMMERIA,
-        BoardName.VASTITAS_BOREALIS,
-        BoardName.HOLLANDIA,
-        RandomBoardOption.ALL,
-      ];
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
@@ -1010,56 +971,11 @@ export default defineComponent({
         this.moonStandardProjectVariant1 = false;
       }
     },
-    getBoardColorClass(boardName: BoardName | BoardNameType): string {
-      switch (boardName) {
-      case BoardName.THARSIS:
-        return 'create-game-board-hexagon create-game-tharsis';
-      case BoardName.HELLAS:
-        return 'create-game-board-hexagon create-game-hellas';
-      case BoardName.ELYSIUM:
-        return 'create-game-board-hexagon create-game-elysium';
-      case BoardName.UTOPIA_PLANITIA:
-        return 'create-game-board-hexagon create-game-utopia-planitia';
-      case BoardName.VASTITAS_BOREALIS_NOVA:
-        return 'create-game-board-hexagon create-game-vastitas-borealis-nova';
-      case BoardName.AMAZONIS:
-        return 'create-game-board-hexagon create-game-amazonis';
-      case BoardName.ARABIA_TERRA:
-        return 'create-game-board-hexagon create-game-arabia-terra';
-      case BoardName.TERRA_CIMMERIA:
-        return 'create-game-board-hexagon create-game-terra-cimmeria';
-      case BoardName.VASTITAS_BOREALIS:
-        return 'create-game-board-hexagon create-game-vastitas-borealis';
-      case BoardName.HOLLANDIA:
-        return 'create-game-board-hexagon create-game-hollandia';
-      default:
-        return 'create-game-board-hexagon create-game-random';
-      }
-    },
     getPlayerCubeColorClass(color: Color): string {
       return playerColorClass(color, 'bg');
     },
     getPlayerContainerColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');
-    },
-    boardHref(boardName: BoardName | RandomBoardOption) {
-      const options: Record<BoardName | RandomBoardOption, string> = {
-        [BoardName.THARSIS]: 'tharsis',
-        [BoardName.HELLAS]: 'hellas',
-        [BoardName.ELYSIUM]: 'elysium',
-        [BoardName.ARABIA_TERRA]: 'arabia-terra',
-        [BoardName.UTOPIA_PLANITIA]: 'utopia-planitia',
-        [BoardName.VASTITAS_BOREALIS_NOVA]: 'vastitas-borealis-nova',
-        [BoardName.VASTITAS_BOREALIS]: 'vastitas-borealis',
-        [BoardName.AMAZONIS]: 'amazonis-planatia',
-        [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',
-        [BoardName.TERRA_CIMMERIA_NOVA]: 'terra-cimmeria-nova',
-        [BoardName.HOLLANDIA]: 'hollandia',
-        [BoardName.AMAZONIS_PLANITIA]: 'amazonis-planitia',
-        [RandomBoardOption.OFFICIAL]: '',
-        [RandomBoardOption.ALL]: '',
-      };
-      return `${WIKI}/Maps#${options[boardName]}`;
     },
     async serializeSettings(): Promise<NewGameConfig | undefined> {
       let players = this.players.slice(0, this.playersCount);

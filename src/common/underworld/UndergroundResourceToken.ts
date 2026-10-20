@@ -1,14 +1,31 @@
-export type TemporaryBonusToken =
-  'data1pertemp' |
-  'mcprod1pertemp' |
-  'microbe1pertemp' |
-  'microbe2pertemp' |
-  'plant2pertemp' |
-  'steel2pertemp' |
-  'titanium1pertemp' |
-  'oceanrequirementmod' |
-  'oxygenrequirementmod' |
-  'temprequirementmod';
+export const TEMPORARY_BONUS_TOKENS = [
+  'mcprod1pertemp',
+  'microbe2pertemp',
+  'plant2pertemp',
+  'steel2pertemp',
+  'titanium1pertemp',
+  'oceanrequirementmod',
+  'oxygenrequirementmod',
+  'temprequirementmod',
+] as const;
+
+export type TemporaryBonusToken = typeof TEMPORARY_BONUS_TOKENS[number];
+
+const REGULAR_BONUS_TOKENS = [
+  'nothing',
+  'card1', 'card2',
+  'corruption1', 'corruption2',
+  'steel2plant', 'steel1production',
+  'titanium2', 'titanium1production',
+  'plant2', 'plant3', 'plant1production',
+  'titaniumandplant',
+  'energy2', 'energy1production', 'heat2production',
+  'microbe2', 'tr', 'ocean',
+  'sciencetag', 'planttag', 'place6mc',
+  'anyresource1',
+] as const;
+
+export const UNDERGROUND_RESOURCE_TOKENS = [...REGULAR_BONUS_TOKENS, ...TEMPORARY_BONUS_TOKENS] as const;
 
 /**
  * The different types of resources players may excavate using the Underworld expansion.
@@ -17,18 +34,7 @@ export type TemporaryBonusToken =
  * Space bonuses show an array of individual bonus items; this groups them as a single
  * token. This is just easier to work with and easier to render.
  */
-export type UndergroundResourceToken = TemporaryBonusToken |
-  'nothing' |
-  'card1' | 'card2' |
-  'corruption1' | 'corruption2' |
-  'steel2plant' | 'steel1production' |
-  'titanium2' | 'titanium1production' |
-  'plant2' | 'plant3' | 'plant1production' |
-  'titaniumandplant' |
-  'energy2' | 'energy1production' | 'heat2production' |
-  'microbe2' | 'tr' | 'ocean' |
-  'sciencetag' | 'planttag' | 'place6mc' |
-  'anyresource1';
+export type UndergroundResourceToken = typeof UNDERGROUND_RESOURCE_TOKENS[number];
 
 /**
  * Text descriptions of each Underground resource token.
@@ -51,8 +57,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   microbe2: '2 microbes',
   tr: '1 TR',
   ocean: 'place an ocean',
-  data1pertemp: '1 data / 2 °C',
-  microbe1pertemp: '1 microbe / 2 °C',
   plant2pertemp: '2 plants / 2 °C',
   steel2pertemp: '2 steel / 2 °C',
   titanium1pertemp: '1 titanium / 2 °C',

@@ -106,7 +106,7 @@ export abstract class Draft {
     return this.passDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
-  /** The player this player is givign their cards to when everybody passes their draft hands */
+  /** The player this player is giving their cards to when everybody passes their draft hands */
   private givingTo(player: IPlayer): IPlayer {
     return this.passDirection() === 'after' ? this.game.getPlayerAfter(player) : this.game.getPlayerBefore(player);
   }

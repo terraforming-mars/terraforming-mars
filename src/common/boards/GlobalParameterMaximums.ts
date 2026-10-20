@@ -1,14 +1,5 @@
 import {BoardName} from './BoardName';
-import {
-  MAX_OCEAN_TILES,
-  MAX_OCEAN_TILES_AMAZONIS,
-  MAX_OXYGEN_LEVEL,
-  MAX_OXYGEN_LEVEL_AMAZONIS,
-  MAX_TEMPERATURE,
-  MAX_TEMPERATURE_AMAZONIS,
-  MAX_VENUS_SCALE,
-  MAX_VENUS_SCALE_AMAZONIS,
-} from '../constants';
+import * as constants from '@/common/constants';
 
 /**
  * The maximum values of the four Mars global parameters.
@@ -20,19 +11,23 @@ export type GlobalParameterMaximums = {
   venus: number;
 };
 
-export function getGlobalParameterMaximums(boardName: BoardName): GlobalParameterMaximums {
+const STANDARD_MAXIMUMS: GlobalParameterMaximums = {
+  oceans: constants.MAX_OCEAN_TILES,
+  temperature: constants.MAX_TEMPERATURE,
+  oxygen: constants.MAX_OXYGEN_LEVEL,
+  venus: constants.MAX_VENUS_SCALE,
+};
+
+const AMAZONIS_PLANITIA_MAXIMUMS: GlobalParameterMaximums = {
+  oceans: constants.MAX_OCEAN_TILES_AMAZONIS,
+  temperature: constants.MAX_TEMPERATURE_AMAZONIS,
+  oxygen: constants.MAX_OXYGEN_LEVEL_AMAZONIS,
+  venus: constants.MAX_VENUS_SCALE_AMAZONIS,
+};
+
+export function getGlobalParameterMaximums(boardName: BoardName): Readonly<GlobalParameterMaximums> {
   if (boardName === BoardName.AMAZONIS_PLANITIA) {
-    return {
-      oceans: MAX_OCEAN_TILES_AMAZONIS,
-      temperature: MAX_TEMPERATURE_AMAZONIS,
-      oxygen: MAX_OXYGEN_LEVEL_AMAZONIS,
-      venus: MAX_VENUS_SCALE_AMAZONIS,
-    };
+    return AMAZONIS_PLANITIA_MAXIMUMS;
   }
-  return {
-    oceans: MAX_OCEAN_TILES,
-    temperature: MAX_TEMPERATURE,
-    oxygen: MAX_OXYGEN_LEVEL,
-    venus: MAX_VENUS_SCALE,
-  };
+  return STANDARD_MAXIMUMS;
 }

@@ -51,7 +51,7 @@ export const CardRenderItemType = {
   MOON_LOGISTIC_RATE: 'moon-logistic-rate',
   MOON_MINE: 'moon-mine',
   MOON_MINING_RATE: 'moon-mine-rate',
-  PLANETARY_TRACK: 'plantary-track',
+  PLANETARY_TRACK: 'planetary-track',
   GLOBAL_EVENT: 'global-event',
   FIRST_PLAYER: '1p',
   RULING_PARTY: 'ruling-party',

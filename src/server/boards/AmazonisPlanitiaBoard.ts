@@ -1,3 +1,5 @@
+import {getGlobalParameterMaximums} from '@/common/boards/GlobalParameterMaximums';
+import {BoardName} from '@/common/boards/BoardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
@@ -6,10 +8,6 @@ import {MarsBoard} from './MarsBoard';
 import {Space} from './Space';
 
 const TILES_PER_ROW = [6, 7, 8, 9, 10, 11, 10, 9, 8, 7, 6];
-const MAX_OCEANS = 11;
-const MAX_TEMPERATURE = 14;
-const MAX_OXYGEN = 18;
-const MAX_VENUS = 36; // Displayed as 33%; see venusScaleLevelForDisplay.
 
 // Coordinate labels for the eleven-row map. Rows run A to L, skipping I.
 const AMAZONIS_PLANITIA_A9 = {
@@ -147,11 +145,6 @@ export class AmazonisPlanitiaBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, {
-      oceans: MAX_OCEANS,
-      temperature: MAX_TEMPERATURE,
-      oxygen: MAX_OXYGEN,
-      venus: MAX_VENUS,
-    });
+    super(spaces, undefined, getGlobalParameterMaximums(BoardName.AMAZONIS_PLANITIA));
   }
 }

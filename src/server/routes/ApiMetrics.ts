@@ -1,4 +1,4 @@
-import prometheus from 'prom-client';
+import prometheus from '@prometheus-io/client';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Request} from '../Request';

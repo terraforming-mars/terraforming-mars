@@ -16,7 +16,7 @@ import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopern
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
-import {TradeWithHectateSpeditions} from '../cards/underworld/HecateSpeditions';
+import {TradeWithHecateSpeditions} from '../cards/underworld/HecateSpeditions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 export class Colonies {
@@ -62,7 +62,7 @@ export class Colonies {
       new TradeWithDarksideSmugglersUnion(player),
       new TradeWithTitanFloatingLaunchPad(player),
       new TradeWithCollegiumCopernicus(player),
-      new TradeWithHectateSpeditions(player),
+      new TradeWithHecateSpeditions(player),
       new TradeWithEnergy(player),
       new TradeWithTitanium(player),
       new TradeWithMegacredits(player),
@@ -194,7 +194,7 @@ export class TradeWithEnergy implements IColonyTrader {
 
   public trade(colony: IColony) {
     this.player.stock.deduct(Resource.ENERGY, this.tradeCost);
-    this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
+    this.player.game.log('${0} spent ${1}:r:energy: to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }
 }
@@ -215,7 +215,7 @@ export class TradeWithTitanium implements IColonyTrader {
 
   public trade(colony: IColony) {
     this.player.pay(Payment.of({titanium: this.tradeCost}));
-    this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
+    this.player.game.log('${0} spent ${1}:r:titanium: to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }
 }

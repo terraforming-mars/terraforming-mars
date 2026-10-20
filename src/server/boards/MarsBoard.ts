@@ -11,7 +11,8 @@ import {oneWayDifference} from '../../common/utils/utils';
 import {Tile} from '../Tile';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import * as constants from '../../common/constants';
-import {GlobalParameterMaximums} from '../IGame';
+import {GlobalParameterMaximums, getGlobalParameterMaximums} from '../../common/boards/GlobalParameterMaximums';
+import {BoardName} from '../../common/boards/BoardName';
 
 // Coordinate labels for the standard nine-row maps.
 const MARS_A9 = {
@@ -80,19 +81,14 @@ const MARS_A9 = {
 
 export class MarsBoard extends Board {
   public readonly A9: Readonly<Partial<Record<SpaceId, string>>> = MARS_A9;
-  public readonly max: GlobalParameterMaximums;
+  public readonly max: Readonly<GlobalParameterMaximums>;
 
   public constructor(
     spaces: ReadonlyArray<Space>,
     noctisCitySpaceId?: SpaceId | undefined,
-    max?: Partial<GlobalParameterMaximums>) {
+    max: Readonly<GlobalParameterMaximums> = getGlobalParameterMaximums(BoardName.THARSIS)) {
     super(spaces, noctisCitySpaceId);
-    this.max = {
-      temperature: max?.temperature ?? constants.MAX_TEMPERATURE,
-      oxygen: max?.oxygen ?? constants.MAX_OXYGEN_LEVEL,
-      oceans: max?.oceans ?? constants.MAX_OCEAN_TILES,
-      venus: max?.venus ?? constants.MAX_VENUS_SCALE,
-    };
+    this.max = max;
   }
 
   public getCitiesOffMars(player?: IPlayer): Array<Space> {
@@ -234,7 +230,7 @@ export class MarsBoard extends Board {
     if (player.tableau.has(CardName.GORDON)) {
       return availableLandSpaces;
     }
-    // Spaces next to Red City are always unavialable for Greeneries.
+    // Spaces next to Red City are always unavailable for Greeneries.
     availableLandSpaces = this.filterSpacesAroundRedCity(availableLandSpaces);
 
     // player can place a greenery in an available land space that is next

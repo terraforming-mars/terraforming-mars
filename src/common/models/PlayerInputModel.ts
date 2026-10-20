@@ -17,6 +17,8 @@ export type BaseInputModel = {
   warning?: string | Message;
   buttonLabel: string;
   optional?: boolean;
+  // Only set on the top-level input.
+  requestId?: string;
 }
 
 export type AndOptionsModel = BaseInputModel & {

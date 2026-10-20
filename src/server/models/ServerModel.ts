@@ -215,10 +215,11 @@ export class Server {
     if (waitingFor === undefined) {
       return undefined;
     }
-    // Only the top-level input's warning reaches the client. Warnings on inputs
+    // Only the top-level input's warning and request id reach the client. Those of inputs
     // nested in OrOptions, AndOptions, or SelectInitialCards are not sent.
     const model = waitingFor.toModel(player);
     model.warning = waitingFor.warning;
+    model.requestId = waitingFor.requestId;
     return model;
     // showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
   }

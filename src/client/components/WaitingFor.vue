@@ -41,7 +41,7 @@ import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {INVALID_RUN_ID, STALE_VIEW, AppErrorResponse} from '@/common/app/AppErrorId';
+import {INVALID_REQUEST_ID, INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 import {gameDocumentTitle} from '../utils/documentTitle';
 import {setFaviconStatus, setFaviconTurnFrame} from '@/client/utils/favicon';
@@ -151,7 +151,7 @@ export default defineComponent({
         {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({runId: this.playerView.runId, ...out}),
+          body: JSON.stringify({runId: this.playerView.runId, requestId: this.waitingfor?.requestId, ...out}),
         });
     },
     reset() {
@@ -174,25 +174,21 @@ export default defineComponent({
             return;
           }
 
-          const showAlert = root.showAlert;
+          const showAlert = vueRoot(this).showAlert;
           if (response.status === statusCode.badRequest) {
             const resp = await response.json() as AppErrorResponse;
             let cb = () => {};
-            if (resp.id === INVALID_RUN_ID) {
+            if (resp.id === INVALID_RUN_ID || resp.id === INVALID_REQUEST_ID) {
               cb = () => setTimeout(() => window.location.reload(), 100);
-            } else if (resp.id === STALE_VIEW) {
-              cb = () => root.updatePlayer();
             }
             showAlert('Error with input', resp.message, cb);
           } else {
-            // The server may have applied the input before the answer was lost, so
-            // the page refreshes once the alert is dismissed instead of staying stale.
-            showAlert('Error processing response', 'Unexpected response from server. Please try again.', () => root.updatePlayer());
+            showAlert('Error processing response', 'Unexpected response from server. Please try again.');
             console.error(response.statusText);
           }
         })
         .catch((e) => {
-          root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER, () => root.updatePlayer());
+          root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
           console.error(e);
         })
         .finally(() => {

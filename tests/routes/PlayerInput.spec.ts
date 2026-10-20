@@ -13,7 +13,7 @@ import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
 import {statusCode} from '@/common/http/statusCode';
 import {FakeClock} from '../common/FakeClock';
-import {AppErrorResponse, RESPONDING_TOO_QUICKLY, STALE_VIEW} from '@/common/app/AppErrorId';
+import {INVALID_REQUEST_ID, RESPONDING_TOO_QUICKLY} from '@/common/app/AppErrorId';
 
 describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
@@ -25,6 +25,24 @@ describe('PlayerInput', () => {
     res = new MockResponse();
     scaffolding = new RouteTestScaffolding(req);
   });
+
+  /**
+   * POSTs `body` to `handler` as input from `playerId`, and waits for the response.
+   *
+   * Replaces `req` and `res` with fresh mocks, so after this returns, `res` holds this request's response.
+   */
+  async function send(handler: PlayerInput, playerId: string, body: string): Promise<void> {
+    req = new MockRequest();
+    res = new MockResponse();
+    scaffolding.req = req;
+    scaffolding.url = `/player/input?id=${playerId}`;
+    const post = scaffolding.post(handler, res);
+    const emit = Promise.resolve().then(() => {
+      req.emitString(body);
+      req.emitter.emit('end');
+    });
+    await Promise.all([emit, post]);
+  }
 
   it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
@@ -142,24 +160,6 @@ describe('PlayerInput', () => {
       playerInputMetrics.responseInterval.reset();
     });
 
-    /**
-     * POSTs `body` to `handler` as input from `playerId`, and waits for the response.
-     *
-     * Replaces `req` and `res` with fresh mocks, so after this returns, `res` holds this request's response.
-     */
-    async function send(handler: PlayerInput, playerId: string, body: string): Promise<void> {
-      req = new MockRequest();
-      res = new MockResponse();
-      scaffolding.req = req;
-      scaffolding.url = `/player/input?id=${playerId}`;
-      const post = scaffolding.post(handler, res);
-      const emit = Promise.resolve().then(() => {
-        req.emitString(body);
-        req.emitter.emit('end');
-      });
-      await Promise.all([emit, post]);
-    }
-
     it('rejects input sent before the interval elapses', async () => {
       const handler = new PlayerInput(1000);
       player.inputRequestedAt = 5000;
@@ -221,49 +221,49 @@ describe('PlayerInput', () => {
     });
   });
 
-  it('rejects a response that does not match the current prompt', async () => {
-    const player = TestPlayer.BLUE.newPlayer({beginner: true});
-    scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
-    await scaffolding.ctx.gameLoader.add(game);
+  describe('request id', () => {
+    let player: TestPlayer;
+    const powerPlant: OrOptionsResponse = {type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}};
 
-    const options = cast(player.getWaitingFor(), OrOptions);
-    const index = options.options.findIndex((option) => option.type === 'projectCard');
-    expect(index).not.eq(-1);
-    const gameAge = game.gameAge;
-
-    const post = scaffolding.post(PlayerInput.INSTANCE, res);
-    const emit = Promise.resolve().then(() => {
-      // What a page still showing an earlier OrOptions of plain options would send.
-      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: index, response: {type: 'option'}};
-      scaffolding.req.emitString(JSON.stringify(orOptionsResponse));
-      scaffolding.req.emitter.emit('end');
+    beforeEach(async () => {
+      player = TestPlayer.BLUE.newPlayer({beginner: true});
+      const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+      await scaffolding.ctx.gameLoader.add(game);
     });
-    await Promise.all(([emit, post]));
 
-    expect(res.statusCode).eq(statusCode.badRequest);
-    const response: AppErrorResponse = JSON.parse(res.content);
-    expect(response.id).eq(STALE_VIEW);
-    expect(player.getWaitingFor()).eq(options);
-    expect(game.gameAge).eq(gameAge);
-  });
+    it('rejects a response to an earlier input', async () => {
+      const waitingFor = player.getWaitingFor();
+      const gameAge = player.game.gameAge;
 
-  it('rejects a response when the player is not waiting for anything', async () => {
-    const player = TestPlayer.BLUE.newPlayer({beginner: true});
-    scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
-    await scaffolding.ctx.gameLoader.add(game);
-    player.popWaitingFor();
+      await send(PlayerInput.INSTANCE, player.id, JSON.stringify({requestId: 'earlier', ...powerPlant}));
 
-    const post = scaffolding.post(PlayerInput.INSTANCE, res);
-    const emit = Promise.resolve().then(() => {
-      scaffolding.req.emitString(JSON.stringify({type: 'option'}));
-      scaffolding.req.emitter.emit('end');
+      expect(res.statusCode).eq(statusCode.badRequest);
+      expect(JSON.parse(res.content).id).eq(INVALID_REQUEST_ID);
+      expect(player.getWaitingFor()).eq(waitingFor);
+      expect(player.game.gameAge).eq(gameAge);
     });
-    await Promise.all(([emit, post]));
 
-    expect(res.statusCode).eq(statusCode.badRequest);
-    const response: AppErrorResponse = JSON.parse(res.content);
-    expect(response.id).eq(STALE_VIEW);
+    it('sends the next input with a new request id', async () => {
+      const requestId = player.getWaitingFor()?.requestId;
+
+      await send(PlayerInput.INSTANCE, player.id, JSON.stringify({requestId, ...powerPlant}));
+
+      expect(res.statusCode).eq(statusCode.ok);
+      const next = JSON.parse(res.content).waitingFor.requestId;
+      expect(next).eq(player.getWaitingFor()?.requestId);
+      expect(next).not.eq(requestId);
+    });
+
+    it('keeps the request id when a response is rejected', async () => {
+      const requestId = player.getWaitingFor()?.requestId;
+
+      await send(PlayerInput.INSTANCE, player.id, JSON.stringify({requestId, type: 'or', index: 1, response: {type: 'option'}}));
+      expect(res.statusCode).eq(statusCode.badRequest);
+      expect(JSON.parse(res.content).id).is.undefined;
+
+      // The player fixes their choice on the same page.
+      await send(PlayerInput.INSTANCE, player.id, JSON.stringify({requestId, ...powerPlant}));
+      expect(res.statusCode).eq(statusCode.ok);
+    });
   });
 });

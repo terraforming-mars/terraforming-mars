@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {FloatingHabs} from '../../src/server/cards/venusNext/FloatingHabs';
 import {CloudSocieties} from '../../src/server/turmoil/globalEvents/CloudSocieties';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {testGame} from '../TestingUtils';
+import {formatMessage, testGame} from '../TestingUtils';
 
 describe('CloudSocieties', () => {
   it('resolve play', () => {
@@ -19,5 +19,18 @@ describe('CloudSocieties', () => {
     game.deferredActions.runNext();
 
     expect(floatingHabs.resourceCount).to.eq(3);
+  });
+
+  it('logs the added floaters', () => {
+    const card = new CloudSocieties();
+    const [game, player] = testGame(1, {turmoilExtension: true});
+    player.playedCards.push(new FloatingHabs());
+
+    game.gameLog.length = 0;
+    card.resolve(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Floater to Floating Habs from Cloud Societies',
+    ]);
   });
 });

@@ -39,7 +39,7 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
 
   public onIdentificationByAnyPlayer(cardOwner: IPlayer) {
     this.oncePerAction.oncePerAction(cardOwner.game, () => {
-      cardOwner.addResourceTo(this);
+      cardOwner.addResourceTo(this, {log: true});
     });
   }
 }

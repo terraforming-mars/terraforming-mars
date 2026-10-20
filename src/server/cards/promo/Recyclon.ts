@@ -45,18 +45,18 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
       return undefined;
     }
     if (this.resourceCount < 2) {
-      player.addResourceTo(this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
 
     const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
-      player.addResourceTo(this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     });
 
     const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes').andThen(() => {
       player.removeResourceFrom(this, 2);
-      player.production.add(Resource.PLANTS, 1);
+      player.production.add(Resource.PLANTS, 1, {log: true, from: {card: this}});
       return undefined;
     });
     return new OrOptions(spendResource, addResource);

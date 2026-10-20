@@ -51,7 +51,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
 
   public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space)) {
-      cardOwner.addResourceTo(this, 1);
+      cardOwner.addResourceTo(this, {log: true});
     }
   }
 

@@ -4,6 +4,7 @@ import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '@/common/utils/utils';
+import {formatMessage} from '../../TestingUtils';
 
 describe('MartianZoo', () => {
   let card: MartianZoo;
@@ -39,5 +40,14 @@ describe('MartianZoo', () => {
     card.action(player);
     expect(player.megaCredits).to.eq(2);
     expect(card.resourceCount).to.eq(2);
+  });
+
+  it('logs the added animals', () => {
+    player.game.gameLog.length = 0;
+    card.onCardPlayed(player, new LunaGovernor());
+
+    expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 2 Animal(s) to Martian Zoo',
+    ]);
   });
 });

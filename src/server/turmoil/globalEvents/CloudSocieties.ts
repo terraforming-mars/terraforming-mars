@@ -27,7 +27,7 @@ export class CloudSocieties extends GlobalEvent implements IGlobalEvent {
     const turmoil = Turmoil.getTurmoil(player.game);
     const resourceCards = player.getResourceCards(CardResource.FLOATER);
     resourceCards.forEach((card) => {
-      player.addResourceTo(card, 1);
+      player.addResourceTo(card, {log: true, from: {globalEvent: this}});
     });
     const amount = turmoil.getInfluence(player);
     if (amount > 0) {

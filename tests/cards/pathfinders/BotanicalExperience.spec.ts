@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
@@ -58,6 +58,18 @@ describe('BotanicalExperience', () => {
     card.onTilePlaced(player, player, space);
     expect(card.resourceCount).eq(0);
     expect(player.production.plants).eq(1);
+  });
+
+  it('onTilePlaced logs the added data', () => {
+    player.playedCards.push(card);
+    space.tile = {tileType: TileType.GREENERY};
+
+    game.gameLog.length = 0;
+    card.onTilePlaced(player, player, space);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Data to Botanical Experience',
+    ]);
   });
 
   it('card.addResourceTo', () => {

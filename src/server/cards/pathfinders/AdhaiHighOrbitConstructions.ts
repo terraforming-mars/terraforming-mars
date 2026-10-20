@@ -53,7 +53,7 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
 
   public onCardPlayed(player: IPlayer, card: ICard) {
     if (this.matchingTags(card.tags)) {
-      player.addResourceTo(this, 1);
+      player.addResourceTo(this, {log: true});
     }
   }
 

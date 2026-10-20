@@ -40,6 +40,15 @@ describe('AdhaiHighOrbitConstructions', () => {
     expect(card.resourceCount).eq(3);
   });
 
+  it('onCardPlayed logs the added resource', () => {
+    player.game.gameLog.length = 0;
+    card.onCardPlayed(player, new Soletta());
+
+    expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Orbital to Adhai High Orbit Constructions',
+    ]);
+  });
+
   it('project card discount', () => {
     card.resourceCount = 4;
     expect(card.getCardDiscount(player, new SearchForLife())).eq(0); // Science

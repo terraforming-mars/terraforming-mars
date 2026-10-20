@@ -3,7 +3,7 @@ import {MiningMarketInsider} from '../../../src/server/cards/underworld/MiningMa
 import {testGame} from '../../TestGame';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 import {IPlayer} from '../../../src/server/IPlayer';
-import {simulateFinishingAction} from '../../TestingUtils';
+import {formatMessage, simulateFinishingAction} from '../../TestingUtils';
 
 describe('MiningMarketInsider', () => {
   it('effect', () => {
@@ -48,5 +48,18 @@ describe('MiningMarketInsider', () => {
     expect(card.resourceCount).eq(0);
 
     expect(player.cardsInHand).has.length(1);
+  });
+
+  it('logs the added data', () => {
+    const card = new MiningMarketInsider();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card);
+
+    game.gameLog.length = 0;
+    UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(player)[0], player);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Data to Mining Market Insider',
+    ]);
   });
 });

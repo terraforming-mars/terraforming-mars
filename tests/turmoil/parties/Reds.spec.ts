@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {runAllActions, setRulingParty, addGreenery} from '../../TestingUtils';
+import {runAllActions, setRulingParty, addGreenery, formatMessage} from '../../TestingUtils';
 import {REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -63,6 +63,52 @@ describe('Reds', () => {
 
     REDS_BONUS_1.grant(game);
     expect(player.terraformRating).to.eq(21);
+  });
+
+  it('Ruling bonus 1 logs the TR gained', () => {
+    player.increaseTerraformRating();
+
+    game.gameLog.length = 0;
+    REDS_BONUS_1.grant(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('TR'))).deep.eq([
+      'red gained 1 TR from Reds',
+    ]);
+  });
+
+  it('Ruling bonus 2 logs the TR lost', () => {
+    player.increaseTerraformRating();
+
+    game.gameLog.length = 0;
+    REDS_BONUS_2.grant(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('TR'))).deep.eq([
+      'blue lost 1 TR',
+    ]);
+  });
+
+  it('Ruling bonus 1 logs the TR gained: Solo', () => {
+    const [game, player] = testGame(1, {turmoilExtension: true});
+    player.setTerraformRating(20);
+
+    game.gameLog.length = 0;
+    REDS_BONUS_1.grant(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('TR'))).deep.eq([
+      'blue gained 1 TR from Reds',
+    ]);
+  });
+
+  it('Ruling bonus 2 logs the TR lost: Solo', () => {
+    const [game, player] = testGame(1, {turmoilExtension: true});
+    player.setTerraformRating(21);
+
+    game.gameLog.length = 0;
+    REDS_BONUS_2.grant(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('TR'))).deep.eq([
+      'blue lost 1 TR',
+    ]);
   });
 
   it('Ruling bonus 2: Solo', () => {

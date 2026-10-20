@@ -33,7 +33,7 @@ class RedsBonus01 implements IBonus {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating <= 20) {
-        player.increaseTerraformRating();
+        player.increaseTerraformRating(1, {log: true, from: {partyName: PartyName.REDS}});
       }
       return;
     }
@@ -41,7 +41,7 @@ class RedsBonus01 implements IBonus {
 
     game.players.forEach((player) => {
       if (player.terraformRating === min) {
-        player.increaseTerraformRating();
+        player.increaseTerraformRating(1, {log: true, from: {partyName: PartyName.REDS}});
       }
     });
   }
@@ -59,7 +59,7 @@ class RedsBonus02 implements IBonus {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating > 20) {
-        player.decreaseTerraformRating();
+        player.decreaseTerraformRating(1, {log: true});
       }
       return;
     }
@@ -67,7 +67,7 @@ class RedsBonus02 implements IBonus {
 
     game.players.forEach((player) => {
       if (player.terraformRating === max) {
-        player.decreaseTerraformRating();
+        player.decreaseTerraformRating(1, {log: true});
       }
     });
   }

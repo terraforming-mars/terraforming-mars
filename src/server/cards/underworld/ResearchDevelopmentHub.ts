@@ -36,7 +36,7 @@ export class ResearchDevelopmentHub extends Card implements IProjectCard {
   public onProductionPhase(player: IPlayer) {
     for (const p of player.game.playersInGenerationOrder) {
       if (p !== player && p.cardsInHand.length >= 7) {
-        player.addResourceTo(this);
+        player.addResourceTo(this, {log: true});
       }
     }
     return undefined;

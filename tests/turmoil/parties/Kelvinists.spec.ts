@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
-import {setRulingParty, setTemperature} from '../../TestingUtils';
+import {formatMessage, setRulingParty, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resource} from '../../../src/common/Resource';
@@ -55,6 +55,17 @@ describe('Kelvinists', () => {
 
     game.increaseTemperature(player, 1);
     expect(player.megaCredits).to.eq(3);
+  });
+
+  it('Ruling policy 2 logs the M€ gained', () => {
+    setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_2.id);
+
+    game.gameLog.length = 0;
+    game.increaseTemperature(player, 2);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('M€'))).deep.eq([
+      'blue gained 6 M€ because of Kelvinists',
+    ]);
   });
 
   it('Ruling policy 3: Convert 6 heat into temperature', () => {

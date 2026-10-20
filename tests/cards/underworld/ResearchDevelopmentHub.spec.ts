@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ResearchDevelopmentHub} from '../../../src/server/cards/underworld/ResearchDevelopmentHub';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {formatMessage, runAllActions} from '../../TestingUtils';
 import {cast} from '../../../src/common/utils/utils';
 
 describe('ResearchDevelopmentHub', () => {
@@ -36,4 +36,17 @@ describe('ResearchDevelopmentHub', () => {
       expect(card.resourceCount).eq(run.expected);
     });
   }
+
+  it('logs the added data', () => {
+    const card = new ResearchDevelopmentHub();
+    const [game, player, player2] = testGame(2);
+    player2.drawCard(7);
+
+    game.gameLog.length = 0;
+    card.onProductionPhase(player);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Data to Research & Development Hub',
+    ]);
+  });
 });

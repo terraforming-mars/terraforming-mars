@@ -13,6 +13,8 @@ import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '../../../src/server/inputs/SelectResource';
+import {Resource} from '../../../src/common/Resource';
 
 function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);
@@ -115,6 +117,22 @@ describe('SurveyMission', () => {
     expect(player.plants).eq(1);
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
+
+  it('Compatible with Mining Guild and a standard resource bonus', () => {
+    player.playedCards.push(new MiningGuild());
+    const selectSpace = cast(card.play(player), SelectSpace);
+
+    const space = board.getSpaceOrThrow('04');
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    selectSpace.cb(space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).cb(Resource.STEEL);
+    runAllActions(game);
+
+    expect(player.steel).eq(6);
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
+  });
+
   it('Protected hazard spaces are included in valid triplets', () => {
     const space10 = board.getSpaceOrThrow('10');
     space10.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];

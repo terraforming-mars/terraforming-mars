@@ -1,18 +1,8 @@
 #player-home, #spectator-home {
   padding-left: 20px;
   padding-top: 20px;
-
-  // The star field is a fixed element behind the page rather than a
-  // background-attachment: fixed background: that attachment makes the
-  // browser repaint the whole page on every scroll frame, which crawls on
-  // phones once the page holds a few dozen cards.
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
-  }
+  background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
+  background-attachment: fixed;
 
   > div:not([class]), > div:not([class]) > div.player_home_block:first-child {
     > a:after {
@@ -28,6 +18,24 @@
   }
   .accordion-body {
     max-height: none;
+  }
+}
+
+// On phones and tablets a background-attachment: fixed background repaints the whole page
+// on every scroll frame, which crawls once the page holds a few dozen cards.
+// A fixed element behind the page doesn't. Width can't tell phones apart here
+// because the game page sets a 1260px viewport.
+@media (hover: none) and (pointer: coarse) {
+  #player-home, #spectator-home {
+    background: none;
+
+    &::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
+    }
   }
 }
 

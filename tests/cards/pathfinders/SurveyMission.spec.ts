@@ -15,6 +15,7 @@ import {Units} from '../../../src/common/Units';
 import {cast} from '../../../src/common/utils/utils';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {Resource} from '../../../src/common/Resource';
+import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey';
 
 function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);
@@ -120,6 +121,23 @@ describe('SurveyMission', () => {
 
   it('Compatible with Mining Guild and a standard resource bonus', () => {
     player.playedCards.push(new MiningGuild());
+    const selectSpace = cast(card.play(player), SelectSpace);
+
+    const space = board.getSpaceOrThrow('04');
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    selectSpace.cb(space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).cb(Resource.STEEL);
+    runAllActions(game);
+
+    expect(player.steel).eq(6);
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
+  });
+
+  it('Ares survey cards ignore a standard resource bonus from a claim', () => {
+    [game, player] = testGame(1, {pathfindersExpansion: true, aresExtension: true, aresHazards: false});
+    game.board = board;
+    player.playedCards.push(new MiningGuild(), new GeologicalSurvey());
     const selectSpace = cast(card.play(player), SelectSpace);
 
     const space = board.getSpaceOrThrow('04');

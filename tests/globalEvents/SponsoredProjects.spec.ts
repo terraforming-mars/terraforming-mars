@@ -4,7 +4,7 @@ import {Fish} from '../../src/server/cards/base/Fish';
 import {SecurityFleet} from '../../src/server/cards/base/SecurityFleet';
 import {SponsoredProjects} from '../../src/server/turmoil/globalEvents/SponsoredProjects';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {testGame} from '../TestingUtils';
+import {formatMessage, testGame} from '../TestingUtils';
 
 describe('SponsoredProjects', () => {
   it('resolve play', () => {
@@ -34,5 +34,28 @@ describe('SponsoredProjects', () => {
     expect(securityFleet.resourceCount).to.eq(2);
     expect(fish.resourceCount).to.eq(0);
     expect(player2.cardsInHand).has.lengthOf(3);
+  });
+
+  it('logs the added resources', () => {
+    const card = new SponsoredProjects();
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+    const ants = new Ants();
+    ants.resourceCount = 1;
+    player.playedCards.push(ants);
+
+    const securityFleet = new SecurityFleet();
+    securityFleet.resourceCount = 1;
+    player2.playedCards.push(securityFleet);
+
+    player2.playedCards.push(new Fish());
+
+    game.gameLog.length = 0;
+    card.resolve(game);
+
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
+      'blue added 1 Microbe to Ants from Sponsored Projects',
+      'red added 1 Fighter to Security Fleet from Sponsored Projects',
+    ]);
   });
 });

@@ -26,7 +26,7 @@ describe('Recyclon', () => {
     card.onCardPlayed(player, new Mine());
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Microbe to Recyclon',
+      'blue added 1:cr:microbe: to Recyclon',
     ]);
   });
 
@@ -41,7 +41,7 @@ describe('Recyclon', () => {
     orOptions.options[1].cb();
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Microbe to Recyclon',
+      'blue added 1:cr:microbe: to Recyclon',
     ]);
   });
 
@@ -56,8 +56,8 @@ describe('Recyclon', () => {
     orOptions.options[0].cb();
 
     expect(player.production.plants).eq(1);
-    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('production'))).deep.eq([
-      'blue gained 1 plant production because of Recyclon',
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(':p:'))).deep.eq([
+      'blue gained 1:p:plants: because of Recyclon',
     ]);
   });
 });

@@ -27,7 +27,7 @@ describe('Pristar', () => {
     card.onProductionPhase(player);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Preservation to Pristar',
+      'blue added 1:cr:preservation: to Pristar',
     ]);
   });
 });

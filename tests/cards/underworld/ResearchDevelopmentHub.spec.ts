@@ -46,7 +46,7 @@ describe('ResearchDevelopmentHub', () => {
     card.onProductionPhase(player);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Data to Research & Development Hub',
+      'blue added 1:cr:data: to Research & Development Hub',
     ]);
   });
 });

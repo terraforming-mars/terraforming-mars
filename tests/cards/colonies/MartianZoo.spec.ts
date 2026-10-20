@@ -47,7 +47,7 @@ describe('MartianZoo', () => {
     card.onCardPlayed(player, new LunaGovernor());
 
     expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 2 Animal(s) to Martian Zoo',
+      'blue added 2:cr:animal: to Martian Zoo',
     ]);
   });
 });

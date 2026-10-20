@@ -68,7 +68,7 @@ describe('BotanicalExperience', () => {
     card.onTilePlaced(player, player, space);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Data to Botanical Experience',
+      'blue added 1:cr:data: to Botanical Experience',
     ]);
   });
 

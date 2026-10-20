@@ -45,7 +45,7 @@ describe('AdhaiHighOrbitConstructions', () => {
     card.onCardPlayed(player, new Soletta());
 
     expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Orbital to Adhai High Orbit Constructions',
+      'blue added 1:cr:orbital: to Adhai High Orbit Constructions',
     ]);
   });
 

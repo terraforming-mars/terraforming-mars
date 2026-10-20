@@ -30,7 +30,7 @@ describe('CloudSocieties', () => {
     card.resolve(game);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Floater to Floating Habs from Cloud Societies',
+      'blue added 1:cr:floater: to Floating Habs from Cloud Societies',
     ]);
   });
 });

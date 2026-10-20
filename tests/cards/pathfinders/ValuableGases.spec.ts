@@ -64,7 +64,7 @@ describe('ValuableGases', () => {
 
     expect(localShading.resourceCount).eq(5);
     expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 5 Floater(s) to Local Shading',
+      'blue added 5:cr:floater: to Local Shading',
     ]);
 
     player.playCard(jovianLanterns);

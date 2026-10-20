@@ -59,7 +59,7 @@ describe('MiningMarketInsider', () => {
     UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(player)[0], player);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Data to Mining Market Insider',
+      'blue added 1:cr:data: to Mining Market Insider',
     ]);
   });
 });

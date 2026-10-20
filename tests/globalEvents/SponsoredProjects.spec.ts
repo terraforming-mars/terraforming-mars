@@ -54,8 +54,8 @@ describe('SponsoredProjects', () => {
     card.resolve(game);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Microbe to Ants from Sponsored Projects',
-      'red added 1 Fighter to Security Fleet from Sponsored Projects',
+      'blue added 1:cr:microbe: to Ants from Sponsored Projects',
+      'red added 1:cr:fighter: to Security Fleet from Sponsored Projects',
     ]);
   });
 });

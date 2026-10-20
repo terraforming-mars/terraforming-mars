@@ -64,7 +64,7 @@ describe('AncientShipyards', () => {
     churn(card.action(player), player);
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 1 Resource cube to Ancient Shipyards',
+      'blue added 1:cr:resource-cube: to Ancient Shipyards',
     ]);
   });
 

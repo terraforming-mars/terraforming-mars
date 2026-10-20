@@ -33,7 +33,7 @@ describe('ValuableGases', () => {
 
     expect(localShading.resourceCount).eq(4);
     expect(player.game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-      'blue added 4 Floater(s) to Local Shading',
+      'blue added 4:cr:floater: to Local Shading',
     ]);
   });
 });

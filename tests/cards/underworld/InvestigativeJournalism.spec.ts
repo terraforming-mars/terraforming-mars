@@ -77,7 +77,7 @@ describe('InvestigativeJournalism', () => {
       selectPlayer.cb(game.getPlayerById(run.selected));
       expect(card.resourceCount).eq(1);
       expect(game.gameLog.map(formatMessage).filter((message) => message.includes(' added '))).deep.eq([
-        'blue added 1 Journalism to Investigative Journalism',
+        'blue added 1:cr:journalism: to Investigative Journalism',
       ]);
 
       expect(player.underworldData.corruption).eq(run.expected.corruptions[0]);

@@ -63,8 +63,8 @@ describe('Kelvinists', () => {
     game.gameLog.length = 0;
     game.increaseTemperature(player, 2);
 
-    expect(game.gameLog.map(formatMessage).filter((message) => message.includes('M€'))).deep.eq([
-      'blue gained 6 M€ because of Kelvinists',
+    expect(game.gameLog.map(formatMessage).filter((message) => message.includes(':r:megacredits:'))).deep.eq([
+      'blue gained 6:r:megacredits: because of Kelvinists',
     ]);
   });
 

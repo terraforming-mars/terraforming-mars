@@ -46,7 +46,7 @@ describe('MarsFirst', () => {
     addGreenery(player, '11');
 
     expect(game.gameLog.map(formatMessage).filter((message) => message.includes('steel'))).deep.eq([
-      'blue gained 1 steel because of Mars First',
+      'blue gained 1:r:steel: because of Mars First',
     ]);
   });
 

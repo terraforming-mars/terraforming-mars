@@ -66,7 +66,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
     }
     player.removeResourceFrom(this, tr * 3, {log: false});
     player.increaseTerraformRating(tr);
-    LogHelper.logRemoveResource(player, this, tr * 3, `Gain ${tr} TR`);
+    LogHelper.logRemoveResource(player, this, tr * 3, `gain ${tr}:icon:tr:`);
   }
 
   public onResourceAdded(player: IPlayer, playedCard: ICard): void {

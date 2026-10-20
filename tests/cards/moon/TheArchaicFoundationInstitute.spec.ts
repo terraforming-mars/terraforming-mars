@@ -142,6 +142,6 @@ describe('TheArchaicFoundationInstitute', () => {
 
     const removals = game.gameLog.map(formatMessage).filter((m) => m.includes(' removed '));
     expect(removals).has.length(1);
-    expect(removals[0]).contains('to Gain 1 TR');
+    expect(removals[0]).contains('to gain 1:icon:tr:');
   });
 });

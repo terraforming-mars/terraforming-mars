@@ -6,6 +6,7 @@ import {Resource} from '../../src/common/Resource';
 import {BotanicalExperience} from '../../src/server/cards/pathfinders/BotanicalExperience';
 import {ProtectedHabitats} from '../../src/server/cards/base/ProtectedHabitats';
 import {LunarSecurityStations} from '../../src/server/cards/moon/LunarSecurityStations';
+import {formatMessage} from '../TestingUtils';
 
 describe('StealResources.getViableCandidates', () => {
   let player: TestPlayer;
@@ -55,5 +56,19 @@ describe('StealResources.getViableCandidates', () => {
     player2.playedCards.push(new BotanicalExperience());
     player2.megaCredits = 4;
     expect(StealResources.getCandidates(player, Resource.MEGACREDITS, 4)).deep.equals([player2]);
+  });
+});
+
+describe('StealResources.execute', () => {
+  it('logs the resources stolen from the neutral player in a solo game', () => {
+    const [game, player] = testGame(1);
+    game.gameLog.length = 0;
+
+    new StealResources(player, Resource.MEGACREDITS, 5).execute();
+
+    expect(player.megaCredits).eq(5);
+    expect(game.gameLog.map(formatMessage)).deep.eq([
+      'blue stole 5:r:megacredits: from the neutral player',
+    ]);
   });
 });

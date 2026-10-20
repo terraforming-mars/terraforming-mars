@@ -362,21 +362,18 @@ describe('Player', () => {
 
     player.addResourceTo(card);
     expect(card.resourceCount).eq(1);
-    expect(log).is.empty;
-
-    player.addResourceTo(card, 1);
-    expect(card.resourceCount).eq(2);
-    expect(log).is.empty;
+    expect(log).has.length(1);
 
     player.addResourceTo(card, 3);
-    expect(card.resourceCount).eq(5);
-    expect(log).is.empty;
-
-    player.addResourceTo(card, {qty: 3, log: true});
-    expect(log).has.length(1);
-    const logEntry = log[0];
+    expect(card.resourceCount).eq(4);
+    expect(log).has.length(2);
+    const logEntry = log[1];
     expect(logEntry.data[1].value).eq('3');
     expect(logEntry.data[3].value).eq('Pets');
+
+    player.addResourceTo(card, {qty: 2, log: false});
+    expect(card.resourceCount).eq(6);
+    expect(log).has.length(2);
   });
 
   it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {

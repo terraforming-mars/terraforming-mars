@@ -3,6 +3,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Farmer} from '../../../src/server/milestones/modular/Farmer';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Farmer', () => {
   let milestone: Farmer;
@@ -10,7 +11,7 @@ describe('Farmer', () => {
 
   beforeEach(() => {
     milestone = new Farmer();
-    player = TestPlayer.BLUE.newPlayer();
+    [/* game */, player] = testGame(1);
   });
 
   it('Can claim with 5 animals or microbes', () => {

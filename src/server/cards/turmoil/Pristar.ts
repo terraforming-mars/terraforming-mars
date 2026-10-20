@@ -40,7 +40,7 @@ export class Pristar extends CorporationCard implements ICorporationCard {
   public onProductionPhase(player: IPlayer) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
       player.stock.add(Resource.MEGACREDITS, 6, {log: true, from: {card: this}});
-      player.addResourceTo(this, {log: true});
+      player.addResourceTo(this, 1);
     }
     return undefined;
   }

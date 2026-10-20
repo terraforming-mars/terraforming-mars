@@ -45,12 +45,12 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
       return undefined;
     }
     if (this.resourceCount < 2) {
-      player.addResourceTo(this, {log: true});
+      player.addResourceTo(this);
       return undefined;
     }
 
     const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
-      player.addResourceTo(this, {log: true});
+      player.addResourceTo(this);
       return undefined;
     });
 

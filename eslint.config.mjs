@@ -139,12 +139,6 @@ const sharedConfig = {
   },
 };
 
-// addResourceTo() is silent unless asked to log, so every server call has to choose.
-const addResourceToMustChooseLogging = {
-  selector: 'CallExpression[callee.property.name="addResourceTo"]:not(:has(ObjectExpression > Property[key.name="log"]))',
-  message: 'Pass log: true to addResourceTo(), or log: false when the caller writes its own log line.',
-};
-
 export default [
   // TypeScript files
   {
@@ -182,19 +176,11 @@ export default [
     },
   },
 
-  // Server rules
-  {
-    files: ['src/server/**/*.ts'],
-    rules: {
-      'no-restricted-syntax': ['error', addResourceToMustChooseLogging],
-    },
-  },
-
   // Card implementation rules
   {
     files: ['src/server/cards/**/*.ts'],
     rules: {
-      'no-restricted-syntax': ['error', addResourceToMustChooseLogging, {
+      'no-restricted-syntax': ['error', {
         selector: 'MethodDefinition[key.name="bespokePlay"] CallExpression[callee.property.name="getCardCost"]',
         message: 'Do not call getCardCost() inside bespokePlay() — card payment is already deducted before bespokePlay runs. Pass cost: 0 to space-availability helpers instead.',
       }],

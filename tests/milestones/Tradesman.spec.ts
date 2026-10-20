@@ -4,6 +4,7 @@ import {CometAiming} from '../../src/server/cards/promo/CometAiming';
 import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {Tradesman} from '../../src/server/milestones/Tradesman';
 import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestGame';
 
 describe('Tradesman', () => {
   let milestone: Tradesman;
@@ -11,7 +12,7 @@ describe('Tradesman', () => {
 
   beforeEach(() => {
     milestone = new Tradesman();
-    player = TestPlayer.BLUE.newPlayer();
+    [/* game */, player] = testGame(1);
   });
 
   it('Can claim with 3 types of non-standard resources', () => {

@@ -48,7 +48,7 @@ export class AncientShipyards extends Card {
     if (game.isSoloMode()) {
       player.stock.add(Resource.MEGACREDITS, 2);
     }
-    player.addResourceTo(this, {log: true});
+    player.addResourceTo(this, 1);
     return undefined;
   }
 }

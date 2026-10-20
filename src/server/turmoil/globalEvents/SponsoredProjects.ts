@@ -25,6 +25,6 @@ export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {
     });
   }
   public override bespokeResolvePlayer(player: IPlayer) {
-    player.getCardsWithResources().forEach((card) => card.resourceCount && player.addResourceTo(card, {log: true, from: {globalEvent: this}}));
+    player.getCardsWithResources().forEach((card) => card.resourceCount && player.addResourceTo(card, {from: {globalEvent: this}}));
   }
 }

@@ -545,16 +545,17 @@ export class Player implements IPlayer {
     }
   }
 
-  public addResourceTo(card: ICard, options: number | {qty?: number, log: boolean, logZero?: boolean, from?: From} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean, logZero?: boolean, from?: From} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
+    const opts = typeof(options) === 'number' ? undefined : options;
 
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }
 
-    if (typeof(options) !== 'number' && options.log === true) {
-      if (options.logZero === true || count !== 0) {
-        LogHelper.logAddResource(this, card, count, options.from);
+    if (opts?.log ?? true) {
+      if (opts?.logZero === true || count !== 0) {
+        LogHelper.logAddResource(this, card, count, opts?.from);
       }
     }
 

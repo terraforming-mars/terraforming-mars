@@ -22,12 +22,6 @@ export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants
 
 const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
 const DB_COMPRESS_ON_WRITE = stringToBoolean(process.env.DB_COMPRESS_ON_WRITE, false);
-const MARK_FINISHED_ATTEMPTS = 3;
-
-// SQLSTATE 40P01: Postgres broke a lock cycle by cancelling this statement.
-function isDeadlock(err: unknown): boolean {
-  return (err as any).code === '40P01';
-}
 
 // How often the (expensive) table/database size stats are actually recomputed. Scrapes that land
 // between refreshes just get the cached values.
@@ -311,46 +305,11 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  // The final save can start trim() (not awaited) on the same rows, and the two can deadlock.
-  // Postgres then cancels one of them, so retry instead of leaving the game half finished.
   async markFinished(gameId: GameId): Promise<void> {
-    for (let attempt = 1; ; attempt++) {
-      try {
-        await this.markFinishedOnce(gameId);
-        return;
-      } catch (err) {
-        if (!isDeadlock(err) || attempt >= MARK_FINISHED_ATTEMPTS) {
-          throw err;
-        }
-        console.warn(`PostgreSQL:markFinished deadlock on ${gameId}, retrying`);
-      }
-    }
-  }
-
-  // One transaction, so the three tables agree on whether the game is finished.
-  private async markFinishedOnce(gameId: GameId): Promise<void> {
-    let releaseError: Error | undefined;
-    const onError = () => databaseMetrics.operationErrors.inc({operation: 'markFinished:connection'});
-    const client = await this.client.connect();
-    client.on('error', onError);
-    try {
-      await client.query('BEGIN');
-      await client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
-      await client.query('UPDATE game SET status = \'finished\' WHERE game_id = $1', [gameId]);
-      await client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
-      await client.query('COMMIT');
-    } catch (err) {
-      try {
-        await client.query('ROLLBACK');
-      } catch (rollbackErr) {
-        // The connection is in an unknown state. Release it with an error so the pool discards it.
-        releaseError = rollbackErr instanceof Error ? rollbackErr : new Error(String(rollbackErr));
-      }
-      throw err;
-    } finally {
-      client.removeListener('error', onError);
-      client.release(releaseError);
-    }
+    const promise1 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
+    const promise2 = this.client.query('UPDATE game SET status = \'finished\' WHERE game_id = $1', [gameId]);
+    const promise3 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
+    await Promise.all([promise1, promise2, promise3]);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
@@ -499,11 +458,11 @@ export class PostgreSQL implements IDatabase {
       client?.removeListener('error', onError);
       client?.release(releaseError);
     }
-    this.trim(game);
+    // Awaited, so the markFinished that follows the last save never runs alongside this delete.
+    await this.trim(game).catch(() => databaseMetrics.operationErrors.inc({operation: 'trim'}));
   }
 
-  // Not part of IDatabase, invisible to MetricsDelegate, and invoked fire-and-forget (not awaited) by
-  // saveGame above. Instrumented directly here instead.
+  // Not part of IDatabase, so invisible to MetricsDelegate.
   private async trim(game: IGame) {
     if (this.trimCount <= 0) {
       return;

@@ -490,7 +490,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
 
       await db.saveGame(game);
 
@@ -509,7 +509,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
 
       await db.saveGame(game);
 
@@ -541,7 +541,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 5, 6, 7, 8, 9]);
 
       await db.saveGame(game);
 
@@ -566,13 +566,13 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).has.members(range(3));
 
       await db.saveGame(game);
-      expect(await db.getSaveIds(game.id)).has.members(range(4));
+      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3]);
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4]);
 
       await db.saveGame(game);
-      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4, 5]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 4, 5]);
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members([0, 4, 5, 6]);

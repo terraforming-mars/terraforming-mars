@@ -238,6 +238,7 @@ import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GlobalParameter} from '@/common/GlobalParameter';
+import {getGlobalParameterMaximums} from '@/common/boards/GlobalParameterMaximums';
 import {$t, translateTextWithParams, translateMessage} from '@/client/directives/i18n';
 import {Message} from '@/common/logs/Message';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
@@ -312,11 +313,12 @@ export default defineComponent({
         });
       }
 
-      dataset.push({label: $t('Temperature'), color: 'red', data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
-      dataset.push({label: $t('Oxygen'), color: 'green', data: getValues(GlobalParameter.OXYGEN, 0, 14)});
-      dataset.push({label: $t('Oceans'), color: 'blue', data: getValues(GlobalParameter.OCEANS, 0, 9)});
+      const max = getGlobalParameterMaximums(this.game.gameOptions.boardName);
+      dataset.push({label: $t('Temperature'), color: 'red', data: getValues(GlobalParameter.TEMPERATURE, constants.MIN_TEMPERATURE, max.temperature)});
+      dataset.push({label: $t('Oxygen'), color: 'green', data: getValues(GlobalParameter.OXYGEN, constants.MIN_OXYGEN_LEVEL, max.oxygen)});
+      dataset.push({label: $t('Oceans'), color: 'blue', data: getValues(GlobalParameter.OCEANS, 0, max.oceans)});
       if (this.game.gameOptions.expansions.venus === true) {
-        dataset.push({label: $t('Venus'), color: 'yellow', data: getValues(GlobalParameter.VENUS, 0, 30)});
+        dataset.push({label: $t('Venus'), color: 'yellow', data: getValues(GlobalParameter.VENUS, constants.MIN_VENUS_SCALE, max.venus)});
       }
       if (this.game.gameOptions.expansions.moon === true) {
         dataset.push({label: $t('L. Habitat'), color: 'orange', data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});

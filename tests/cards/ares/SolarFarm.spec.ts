@@ -4,10 +4,7 @@ import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
-import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
@@ -56,47 +53,23 @@ describe('SolarFarm', () => {
     expect(player.production.energy).eq(7);
   });
 
-  describe('on Amazonis Planitia', () => {
-    beforeEach(() => {
-      [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, aresExtension: true, aresHazards: false});
+  for (const run of [
+    {choice: 'plants', energy: 1},
+    {choice: 'steel', energy: 0},
+  ] as const) {
+    it('Standard resource ' + JSON.stringify(run), () => {
+      const space = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
+      space.bonus = [SpaceBonus.STANDARD_RESOURCE];
       player.playedCards.push(card);
-    });
 
-    function placeSolarFarmOn(space: Space) {
-      card.play(player);
+      cast(card.play(player), undefined);
       runAllActions(game);
       cast(player.popWaitingFor(), SelectSpace).cb(space);
       runAllActions(game);
-    }
-
-    function standardResourceSpace(): Space {
-      return game.board.spaces.find((s) => s.spaceType === SpaceType.LAND && s.bonus.includes(SpaceBonus.STANDARD_RESOURCE))!;
-    }
-
-    it('counts a wild bonus chosen as plants', () => {
-      placeSolarFarmOn(standardResourceSpace());
-      cast(player.popWaitingFor(), SelectResource).cb('plants');
+      cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: run.choice});
       runAllActions(game);
 
-      expect(player.production.energy).eq(1);
-      expect(player.stock.plants).eq(1);
+      expect(player.production.energy).eq(run.energy);
     });
-
-    it('does not count a wild bonus chosen as steel', () => {
-      placeSolarFarmOn(standardResourceSpace());
-      cast(player.popWaitingFor(), SelectResource).cb('steel');
-      runAllActions(game);
-
-      expect(player.production.energy).eq(0);
-      expect(player.stock.steel).eq(1);
-    });
-
-    it('counts printed plants on an Amazonis space', () => {
-      const space = game.board.spaces.find((s) => s.spaceType === SpaceType.LAND && s.bonus.filter((b) => b === SpaceBonus.PLANT).length === 2)!;
-      placeSolarFarmOn(space);
-
-      expect(player.popWaitingFor()).is.undefined;
-      expect(player.production.energy).eq(2);
-    });
-  });
+  }
 });

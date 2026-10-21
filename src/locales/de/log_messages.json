@@ -202,6 +202,7 @@
   "Ocean requirements are ±3": "die Ozeananforderungen sind ±3",
 
   "${0} played ${1}": "${0} hat ${1} gespielt",
+  "${0} played ${1} [ ${2} ]": "${0} hat ${1} gespielt [ ${2} ]",
   "${0} used ${1} action": "${0} hat eine Aktion von ${1} genutzt",
   "${0} funded ${1} award": "${0} hat die Auszeichnung ${1} finanziert",
   "${0} claimed ${1} milestone": "${0} hat den Meilenstein ${1} beansprucht",

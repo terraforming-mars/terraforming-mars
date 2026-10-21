@@ -177,6 +177,7 @@
   "Ocean requirements are ±3": "valtamerivaatimukset ovat ±3",
 
   "${0} played ${1}": "${0} pelasi kortin ${1}",
+  "${0} played ${1} [ ${2} ]": "${0} pelasi kortin ${1} [ ${2} ]",
   "${0} used ${1} action": "${0} käytti toimintoa ${1}",
   "${0} funded ${1} award": "${0} rahoitti ${1} palkinnon",
   "${0} claimed ${1} milestone": "${0} julisti saavutuksen ${1}",

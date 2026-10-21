@@ -135,6 +135,7 @@
 	"Final greenery phase is skipped since you did not complete the win condition.": "Fasen for å plassere et siste skogområde hoppes over siden du ikke fullførte betingelsene for å vinne.",
 
 	"${0} played ${1}": "${0} spilte ${1}",
+	"${0} played ${1} [ ${2} ]": "${0} spilte ${1} [ ${2} ]",
 	"${0} used ${1} action": "${0} brukte handlingen ${1}",
 	"${0} funded ${1} award": "${0} finansierte utmerkelsen ${1}",
 	"${0} claimed ${1} milestone": "${0} gjorde krav på milepælen ${1}",

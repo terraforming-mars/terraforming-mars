@@ -864,7 +864,15 @@ export class Player implements IPlayer {
 
     if (selectedCard.type !== CardType.PROXY) {
       this.lastCardPlayed = selectedCard.name;
-      this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
+      if (!selectedCard.cost) {
+        this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
+      } else {
+        this.game.log('${0} played ${1} [ ${2} ]',
+          (b) => b
+            .player(this)
+            .card(selectedCard)
+            .string(Payment.toLogString(payment)));
+      }
     }
 
     // Play the card

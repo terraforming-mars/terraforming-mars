@@ -1,6 +1,7 @@
 {
     "Generation ${0}": "Generazione ${0}",
     "${0} played ${1}": "${0} ha giocato ${1}",
+    "${0} played ${1} [ ${2} ]": "${0} ha giocato ${1} [ ${2} ]",
     "${0} used ${1} action": "${0} ha usato l'azione ${1}",
     "${0} funded ${1} award": "${0} ha finanziato il Riconoscimento ${1}",
     "${0} claimed ${1} milestone": "${0} ha rivendicato la Milestone ${1}",

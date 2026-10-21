@@ -10,6 +10,8 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
 import {Units} from '../../../common/Units';
+import {Resource} from '../../../common/Resource';
+import {Space} from '../../boards/Space';
 
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {
@@ -42,6 +44,14 @@ export class SolarFarm extends Card implements IProjectCard {
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
     return Units.of({energy: plantsOnSpace});
+  }
+
+  // A wild standard resource bonus is chosen after the tile is placed, so the
+  // choice is counted here instead of in productionBox.
+  public onStandardResourcePlacementBonus(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, resource: Resource) {
+    if (cardOwner === activePlayer && resource === Resource.PLANTS && space.tile?.card === this.name) {
+      cardOwner.production.add(Resource.ENERGY, 1, {log: true});
+    }
   }
 
   public override bespokePlay(player: IPlayer) {

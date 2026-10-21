@@ -3,6 +3,7 @@ import {AresHandler} from '../../../src/server/ares/AresHandler';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -51,4 +52,24 @@ describe('SolarFarm', () => {
     });
     expect(player.production.energy).eq(7);
   });
+
+  for (const run of [
+    {choice: 'plants', energy: 1},
+    {choice: 'steel', energy: 0},
+  ] as const) {
+    it('Standard resource ' + JSON.stringify(run), () => {
+      const space = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
+      space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+      player.playedCards.push(card);
+
+      cast(card.play(player), undefined);
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectSpace).cb(space);
+      runAllActions(game);
+      cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: run.choice});
+      runAllActions(game);
+
+      expect(player.production.energy).eq(run.energy);
+    });
+  }
 });

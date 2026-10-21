@@ -144,34 +144,28 @@ export class GameCards {
    * Excludes cards that are incompatible with the game options, banned, or replaced by another module.
    */
   private getCards<T extends ICard>(cardManifestName: keyof ModuleManifest) : Array<T> {
-    let cards: Array<T> = [];
+    const cards: Array<T> = [];
     for (const moduleManifest of this.moduleManifests) {
       // a bit of a hack, but since this is a private API, this is reasonable.
       const cardManifest: CardManifest<T> = moduleManifest[cardManifestName] as CardManifest<T>;
       cards.push(...this.instantiate(cardManifest));
     }
 
-    cards = this.filterBannedCards(cards);
-    cards = this.filterReplacedCards(cards);
-    return cards;
-  }
+    const filtered = cards.filter((card) => {
+      // Remove banned cards
+      if (this.gameOptions.bannedCards.includes(card.name)) {
+        return false;
+      }
 
-  /* Remove cards excluded by choice in game options */
-  private filterBannedCards<T extends ICard>(cards: Array<T>): Array<T> {
-    return cards.filter((card) => {
-      return this.gameOptions.bannedCards.includes(card.name) !== true;
-    });
-  }
-
-  /* Remove cards that are replaced by new versions in other manifests */
-  private filterReplacedCards<T extends ICard>(cards: Array<T>): Array<T> {
-    return cards.filter((card) => {
+      // Remove cards that are replaced by new versions in other manifests
       for (const manifest of this.moduleManifests) {
         if (manifest.cardsToRemove.has(card.name)) {
           return false;
         }
       }
+
       return true;
     });
+    return filtered;
   }
 }

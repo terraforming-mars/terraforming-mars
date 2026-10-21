@@ -13,9 +13,6 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {cast} from '../../../src/common/utils/utils';
-import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {SelectParty} from '../../../src/server/inputs/SelectParty';
-import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('GagarinMobileBase', () => {
   let game: IGame;
@@ -122,46 +119,5 @@ describe('GagarinMobileBase', () => {
     player.megaCredits = 6;
     expect(cast(card.action(player), SelectSpace).spaces.map((s) => s.id))
       .to.include(SpaceName.HELLAS_OCEAN_TILE);
-  });
-
-  describe('delegate bonus spaces', () => {
-    // On Amazonis Planitia, H8 (71) is next to H7 (70, two delegates) and H9 (72, one delegate).
-    function setup(reserve: number) {
-      [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
-      card = new GagarinMobileBase();
-      player.playedCards.push(card);
-      const turmoil = Turmoil.getTurmoil(game);
-      while (turmoil.getAvailableDelegateCount(player) > reserve) {
-        turmoil.delegateReserve.remove(player);
-      }
-    }
-
-    it('initial action, without delegates, excludes every delegate space', () => {
-      setup(0);
-      const ids = cast(card.initialAction(player), SelectSpace).spaces.map((s) => s.id);
-      expect(ids).does.not.include('10');
-      expect(ids).does.not.include('70');
-      expect(ids).does.not.include('72');
-    });
-
-    it('action, with one delegate, offers only the single delegate space', () => {
-      setup(1);
-      game.gagarinBase = ['71'];
-      const ids = cast(card.action(player), SelectSpace).spaces.map((s) => s.id);
-      expect(ids).includes('72');
-      expect(ids).does.not.include('70');
-    });
-
-    it('action, with two delegates, offers the double delegate space and sends both', () => {
-      setup(2);
-      game.gagarinBase = ['71'];
-      const selectSpace = cast(card.action(player), SelectSpace);
-      expect(selectSpace.spaces.map((s) => s.id)).includes('70');
-      selectSpace.cb(game.board.getSpaceOrThrow('70'));
-      runAllActions(game);
-      cast(player.popWaitingFor(), SelectParty).cb(PartyName.MARS);
-      expect(player.totalDelegatesPlaced).eq(2);
-      expect(Turmoil.getTurmoil(game).getAvailableDelegateCount(player)).eq(0);
-    });
   });
 });

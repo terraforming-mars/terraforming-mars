@@ -200,6 +200,7 @@ export abstract class Board {
   }
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions, subjectToHazardAdjacency: boolean = true): ReadonlyArray<Space> {
+    const availableDelegates = player.game.turmoil?.getAvailableDelegateCount(player);
     // Does this also apply to cove spaces?
     const landSpaces = this.getSpaces(SpaceType.LAND).filter((space) => {
       // A space is available if it doesn't have a player marker on it, or it belongs to |player|
@@ -222,6 +223,11 @@ export abstract class Board {
       }
 
       if (space.id === player.game.nomadSpace) {
+        return false;
+      }
+
+      // A delegate bonus can't be skipped, so the player needs a delegate for each one.
+      if (availableDelegates !== undefined && space.bonus.filter((bonus) => bonus === SpaceBonus.DELEGATE).length > availableDelegates) {
         return false;
       }
 

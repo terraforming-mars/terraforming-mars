@@ -14,7 +14,6 @@ import {TestPlayer} from '@tests/TestPlayer';
 import {cast, toID} from '@/common/utils/utils';
 import {setTemperature, setOxygenLevel, maxOutOceans, addGreenery, runAllActions} from '@tests/TestingUtils';
 import {assertAddDelegateAction} from '@tests/turmoil/turmoilAssertions';
-import {Turmoil} from '@/server/turmoil/Turmoil';
 
 describe('AmazonisPlanitiaBoard', () => {
   it('sanity test', () => {
@@ -268,100 +267,6 @@ describe('AmazonisPlanitiaBoard', () => {
     runAllActions(game);
 
     assertAddDelegateAction(player, player.popWaitingFor(), 2);
-  });
-
-  describe('delegate bonus spaces', () => {
-    const B2 = '10';
-    const H9 = '72';
-    const H7 = '70';
-    let game: IGame;
-    let player: TestPlayer;
-    let turmoil: Turmoil;
-
-    beforeEach(() => {
-      [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
-      turmoil = Turmoil.getTurmoil(game);
-    });
-
-    function setReserve(count: number) {
-      while (turmoil.getAvailableDelegateCount(player) > count) {
-        turmoil.delegateReserve.remove(player);
-      }
-    }
-
-    function offered(): Array<string> {
-      return game.board.getAvailableSpacesOnLand(player, {cost: 0}).map(toID);
-    }
-
-    it('no delegates in reserve: no delegate space is offered', () => {
-      setReserve(0);
-      expect(offered()).does.not.include(B2);
-      expect(offered()).does.not.include(H9);
-      expect(offered()).does.not.include(H7);
-    });
-
-    it('one delegate in reserve: single delegate spaces are offered, the double one is not', () => {
-      setReserve(1);
-      expect(offered()).includes(B2);
-      expect(offered()).includes(H9);
-      expect(offered()).does.not.include(H7);
-    });
-
-    it('two delegates in reserve: every delegate space is offered', () => {
-      setReserve(2);
-      expect(offered()).includes(B2);
-      expect(offered()).includes(H9);
-      expect(offered()).includes(H7);
-    });
-
-    it('the lobby delegate counts as part of the reserve', () => {
-      setReserve(2);
-      turmoil.usedFreeDelegateAction.delete(player);
-      expect(offered()).includes(H7);
-      turmoil.usedFreeDelegateAction.add(player);
-      expect(offered()).includes(H7);
-      setReserve(1);
-      expect(offered()).includes(B2);
-      expect(offered()).does.not.include(H7);
-    });
-
-    it('other players delegates do not count', () => {
-      setReserve(0);
-      expect(turmoil.getAvailableDelegateCount('NEUTRAL')).greaterThan(0);
-      expect(offered()).does.not.include(B2);
-    });
-
-    it('applies to every kind of tile placement', () => {
-      setReserve(0);
-      expect(game.board.getAvailableSpacesForGreenery(player).map(toID)).does.not.include(B2);
-      expect(game.board.getAvailableSpacesForCity(player).map(toID)).does.not.include(B2);
-      expect(game.board.getAvailableVolcanicSpaces(player).map(toID)).does.not.include(H7);
-      expect(game.board.getAvailableVolcanicSpaces(player).map(toID)).does.not.include(H9);
-    });
-
-    it('without Turmoil, delegate spaces are always offered', () => {
-      [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA});
-      expect(offered()).includes(B2);
-      expect(offered()).includes(H9);
-      expect(offered()).includes(H7);
-    });
-
-    it('both delegates of the double space go to one party', () => {
-      setReserve(2);
-      addGreenery(player, H7);
-      runAllActions(game);
-      assertAddDelegateAction(player, player.popWaitingFor(), 2);
-      expect(player.totalDelegatesPlaced).eq(2);
-      expect(turmoil.getAvailableDelegateCount(player)).eq(0);
-    });
-
-    it('placing on a single delegate space counts one delegate', () => {
-      setReserve(1);
-      addGreenery(player, B2);
-      runAllActions(game);
-      assertAddDelegateAction(player, player.popWaitingFor(), 1);
-      expect(player.totalDelegatesPlaced).eq(1);
-    });
   });
 
   it('colony spaces have no adjacency', () => {

@@ -765,17 +765,25 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
-    // TODO(kberg): Use undefined instead of 0.
+    // Counts the steps from `rate` plus one for `tile`, or undefined when there are none.
+    const steps = (rate: number | undefined, tile: unknown): number | undefined => {
+      let total = rate ?? 0;
+      if (tile !== undefined) {
+        total++;
+      }
+      return total === 0 ? undefined : total;
+    };
+
     const trSource: TRSource = {
       tr: tr,
       temperature: behavior.global?.temperature,
-      oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
+      oxygen: steps(behavior.global?.oxygen, behavior.greenery),
       venus: behavior.global?.venus,
       oceans: behavior.ocean !== undefined ? (behavior.ocean.count ?? 1) : undefined,
 
-      moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
-      moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
-      moonLogistic: (behavior.moon?.logisticRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
+      moonHabitat: steps(behavior.moon?.habitatRate, behavior.moon?.habitatTile),
+      moonMining: steps(behavior.moon?.miningRate, behavior.moon?.mineTile),
+      moonLogistic: steps(behavior.moon?.logisticRate, behavior.moon?.roadTile),
     };
     return trSource;
   }

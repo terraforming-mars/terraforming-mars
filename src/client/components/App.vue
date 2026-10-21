@@ -301,5 +301,13 @@ export default defineComponent({
       app.screen = 'start-screen';
     }
   },
+  errorCaptured(err: unknown) {
+    // Chunk errors occur when the server is redeployed with new chunk names
+    // and the client doesn't know about them. In that case, reload the page.
+    if (err instanceof Error && err.name === 'ChunkLoadError') {
+      console.error(err);
+      this.showAlert('Page out of date', 'This page is out of date. Click OK to refresh it.', () => setTimeout(() => window.location.reload(), 100));
+    }
+  },
 });
 </script>

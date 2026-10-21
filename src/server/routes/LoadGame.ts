@@ -21,7 +21,6 @@ export class LoadGame extends Handler {
       return id;
     }
     if (isPlayerId(id) || isSpectatorId(id)) {
-      console.log(`Finding game for player/spectator ${id}`);
       return await Database.getInstance().getGameId(id);
     }
     return undefined;

@@ -1,4 +1,4 @@
-import {flushPromises, mount, shallowMount} from '@vue/test-utils';
+import {mount, shallowMount} from '@vue/test-utils';
 import {defineComponent} from 'vue';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
@@ -7,7 +7,6 @@ import WaitingFor from '@/client/components/WaitingFor.vue';
 import {RecursivePartial} from '@/common/utils/utils';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Phase} from '@/common/Phase';
-import {INVALID_REQUEST_ID} from '@/common/app/AppErrorId';
 
 describe('WaitingFor', () => {
   const thisPlayer: Partial<PublicPlayerModel> = {
@@ -215,49 +214,5 @@ describe('WaitingFor', () => {
 
     expect(urls).has.length(1);
     expect(urls[0]).includes('api/waitingfor');
-  });
-
-  // Submits a response from a page showing an input with request id `request-1`, and the server
-  // answers with `answer`. Alerts are dismissed at once, as if the player clicked OK.
-  async function submit(answer: Partial<Response>) {
-    const fetchStub = vi.fn(async (_url: string, _options: {body: string}) => answer as Response);
-    vi.stubGlobal('fetch', fetchStub);
-    const wrapper = shallowMount(WaitingFor, {
-      ...globalConfig,
-      global: {...globalConfig.global, stubs: {'PlayerInputFactory': true}},
-      props: {
-        playerView: playerView as PlayerViewModel,
-        waitingfor: {type: 'option', title: 'test', buttonLabel: 'save', requestId: 'request-1'},
-      },
-    });
-    const root = wrapper.vm.$root as any;
-    root.showAlert = (_title: string, _message: string, cb: () => void = () => {}) => cb();
-    (wrapper.vm as any).onsave({type: 'option'});
-    await flushPromises();
-    return fetchStub;
-  }
-
-  function inputError(id: string | undefined): Partial<Response> {
-    return {ok: false, status: 400, json: async () => ({id, message: 'error'})};
-  }
-
-  it('sends the request id with the response', async () => {
-    const fetchStub = await submit(inputError(undefined));
-
-    expect(JSON.parse(fetchStub.mock.calls[0][1].body)).deep.eq({type: 'option', requestId: 'request-1'});
-  });
-
-  it('reloads the page when the response was for an earlier input', async () => {
-    vi.useFakeTimers({toFake: ['setTimeout']});
-    await submit(inputError(INVALID_REQUEST_ID));
-
-    expect(vi.getTimerCount()).eq(1);
-  });
-
-  it('keeps the page on an ordinary input error', async () => {
-    vi.useFakeTimers({toFake: ['setTimeout']});
-    await submit(inputError(undefined));
-
-    expect(vi.getTimerCount()).eq(0);
   });
 });

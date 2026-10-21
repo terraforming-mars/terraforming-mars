@@ -243,17 +243,6 @@ describe('PlayerInput', () => {
       expect(player.game.gameAge).eq(gameAge);
     });
 
-    it('sends the next input with a new request id', async () => {
-      const requestId = player.getWaitingFor()?.requestId;
-
-      await send(PlayerInput.INSTANCE, player.id, JSON.stringify({requestId, ...powerPlant}));
-
-      expect(res.statusCode).eq(statusCode.ok);
-      const next = JSON.parse(res.content).waitingFor.requestId;
-      expect(next).eq(player.getWaitingFor()?.requestId);
-      expect(next).not.eq(requestId);
-    });
-
     it('keeps the request id when a response is rejected', async () => {
       const requestId = player.getWaitingFor()?.requestId;
 

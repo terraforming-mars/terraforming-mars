@@ -14,6 +14,7 @@ import {TestPlayer} from '@tests/TestPlayer';
 import {cast, toID} from '@/common/utils/utils';
 import {setTemperature, setOxygenLevel, maxOutOceans, addGreenery, runAllActions} from '@tests/TestingUtils';
 import {assertAddDelegateAction} from '@tests/turmoil/turmoilAssertions';
+import {Turmoil} from '@/server/turmoil/Turmoil';
 
 describe('AmazonisPlanitiaBoard', () => {
   it('sanity test', () => {
@@ -268,6 +269,25 @@ describe('AmazonisPlanitiaBoard', () => {
 
     assertAddDelegateAction(player, player.popWaitingFor(), 2);
   });
+
+  // 10 and 72 give one delegate, 70 gives two.
+  for (const run of [
+    {reserve: 0, offered: []},
+    {reserve: 1, offered: ['10', '72']},
+    {reserve: 2, offered: ['10', '72', '70']},
+  ]) {
+    it('delegate bonus spaces need the delegates in reserve ' + JSON.stringify(run), () => {
+      const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
+      const turmoil = Turmoil.getTurmoil(game);
+      while (turmoil.getAvailableDelegateCount(player) > run.reserve) {
+        turmoil.delegateReserve.remove(player);
+      }
+
+      const available = game.board.getAvailableSpacesOnLand(player).map(toID);
+
+      expect(['10', '72', '70'].filter((id) => available.includes(id))).deep.eq(run.offered);
+    });
+  }
 
   it('colony spaces have no adjacency', () => {
     const board = AmazonisPlanitiaBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));

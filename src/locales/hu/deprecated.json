@@ -6,5 +6,6 @@
   "${0} spent ${1} energy to trade with ${2}": "${0} ${1} energiát költött ${2} gyarmattal való kereskedelemre.",
   "${0} spent ${1} titanium to trade with ${2}": "${0} ${1} titánt költött ${2} gyarmattal való kereskedelemre.",
   "${0} sold ${1} steel": "${0} eladott ${1} acélt.",
-  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} eltávolított ${1} ${2} a(z) ${3} kártyáról ${4}."
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} eltávolított ${1} ${2} a(z) ${3} kártyáról ${4}.",
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} eltávolított ${1} erőforrást a(z) ${3} kártyáról."
 }

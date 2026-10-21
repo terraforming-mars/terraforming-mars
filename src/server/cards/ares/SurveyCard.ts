@@ -53,7 +53,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
     for (const [bonus, resource] of this.STANDARD_RESOURCES) {
       if (this.spaceRewardsStandardResource(cardOwner, space, resource, bonus)) {
         cardOwner.stock.add(resource, 1);
-        this.log(cardOwner, resource);
+        this.logResource(cardOwner, resource);
       }
     }
     for (const [bonus, resource] of this.CARD_RESOURCES) {
@@ -70,15 +70,21 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       // The card grants one additional per resource, so skip it when placing the tile already did.
       if (chosen === resource && !this.spaceRewardsStandardResource(cardOwner, space, resource, bonus)) {
         cardOwner.stock.add(resource, 1);
-        this.log(cardOwner, resource);
+        this.logResource(cardOwner, resource);
       }
     }
   }
 
-  private log(cardOwner: IPlayer, resource: Resource | CardResource): void {
+  private logResource(cardOwner: IPlayer, resource: Resource): void {
     cardOwner.game.log(
       '${0} gained a bonus ${1} because of ${2}',
-      (b) => b.player(cardOwner).string(resource).cardName(this.name));
+      (b) => b.player(cardOwner).resource(resource).cardName(this.name));
+  }
+
+  private logCardResource(cardOwner: IPlayer, resource: CardResource): void {
+    cardOwner.game.log(
+      '${0} gained a bonus ${1} because of ${2}',
+      (b) => b.player(cardOwner).cardResource(resource).cardName(this.name));
   }
 
   /**
@@ -118,7 +124,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
         cardOwner,
         resource,
         {log: true}))
-        .andThen(() => this.log(cardOwner, resource));
+        .andThen(() => this.logCardResource(cardOwner, resource));
     }
   }
 

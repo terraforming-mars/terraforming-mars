@@ -381,7 +381,7 @@
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} a gagné 1 M€ pour avoir joué ${1}, qui a exactement 1 badge.",
   "${0} gained ${1} TR": "${0} a gagné ${1} NT",
   "${0} lost ${1} TR": "${0} a perdu ${1} NT",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} a retiré ${1} ressource(s) de ${3} de ${2}",
+  "${0} removed ${1}${2} from ${3}'s ${4}": "${0} a retiré ${1}${2} de ${4} de ${3}",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} a dépensé 1 corruption pour bloquer une attaque de ${1}",
   "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} a dépensé 1 combattant sur ${1} pour bloquer une attaque de ${2}",
   "For the rest of this generation, ${0} will gain ${1}": "Pour le reste de cette génération, ${0} gagnera ${1}",

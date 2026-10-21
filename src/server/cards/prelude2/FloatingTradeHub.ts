@@ -49,9 +49,9 @@ export class FloatingTradeHub extends PreludeCard implements IActionCard {
       .andThen(() => {
         player.removeResourceFrom(this, selectAmount.selected, {log: false});
         player.stock.add(selectResource.selected, selectAmount.selected);
-        player.game.log('${0} removed ${1} floaters from ${2} to gain ${3} ${4}', (b) =>
+        player.game.log('${0} removed ${1}:cr:floater: from ${2} to gain ${3}${4}', (b) =>
           b.player(player).number(selectAmount.selected).card(this).
-            number(selectAmount.selected).string(selectResource.selected));
+            number(selectAmount.selected).resource(selectResource.selected));
         return undefined;
       });
     if (this.resourceCount === 0) {

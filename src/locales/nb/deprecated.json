@@ -15,5 +15,6 @@
   "${0} spent ${1} energy to trade with ${2}": "${0} brukte ${1} energi for å handle med ${2}",
   "${0} spent ${1} titanium to trade with ${2}": "${0} brukte ${1} titan for å handle med ${2}",
   "${0} sold ${1} steel": "${0} solgte ${1} stål",
-  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} fjernet ${1} ${2} fra ${3} til ${4}"
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} fjernet ${1} ${2} fra ${3} til ${4}",
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} fjernet ${1} ressurs(er) fra ${2}s ${3}"
 }

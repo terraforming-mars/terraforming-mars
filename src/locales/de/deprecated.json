@@ -16,5 +16,6 @@
   "${0} spent ${1} titanium to trade with ${2}": "${0} bezahlte ${1} Titan, um mit ${2} zu handeln",
   "${0} removed a resource from ${1} to draw a card": "${0} hat eine Ressource von ${1} entfernt, um eine Karte zu ziehen.",
   "${0} sold ${1} steel": "${0} verkaufte ${1} Stahl",
-  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} entfernte ${1} ${2} von ${3}, um ${4}"
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} entfernte ${1} ${2} von ${3}, um ${4}",
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}'s ${3}"
 }

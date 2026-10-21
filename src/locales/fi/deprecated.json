@@ -16,5 +16,6 @@
   "${0} spent ${1} titanium to trade with ${2}": "${0} käytti ${1} titaania käydäkseen kauppaa ${2} kanssa",
   "${0} removed a resource from ${1} to draw a card": "${0} poisti resurssin kortilta ${1} nostaakseen kortin.",
   "${0} sold ${1} steel": "${0} myi ${1} terästä",
-  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} poisti ${1} ${2} kortilta ${3} ${4}"
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} poisti ${1} ${2} kortilta ${3} ${4}",
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} poisti ${1} resurssia pelaajan ${2} kortilta ${3}"
 }

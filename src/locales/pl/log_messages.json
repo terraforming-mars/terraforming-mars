@@ -205,7 +205,7 @@
 
   "${0} gained ${1} TR": "${0} podnosi swój WT o ${1}",
   "${0} lost ${1} TR": "${0} traci ${1} WT",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} usuwa ${2} jednostek z karty ${3} gracza ${2}",
+  "${0} removed ${1}${2} from ${3}'s ${4}": "${0} usuwa ${1}${2} z karty ${4} gracza ${3}",
 
   "${0} turned the clone tag on ${1} into a ${2} tag": "${0} przekształca uniwersalny symbol na ${1} w symbol ${2}",
   "${0} raised the ${1} planetary track ${2} step(s)": "${0} podnosi znacznik na torze planetarnym ${2} o 2 poziom/y.",

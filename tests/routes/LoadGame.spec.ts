@@ -5,6 +5,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {statusCode} from '@/common/http/statusCode';
 import {testGame} from '@tests/TestGame';
+import {restoreTestDatabase} from '../testing/setup';
 
 describe('LoadGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -15,6 +16,12 @@ describe('LoadGame', () => {
     req = new MockRequest();
     res = new MockResponse();
     scaffolding = new RouteTestScaffolding(req);
+    // scaffolding sets serverId to '1'
+    scaffolding.url = '/load_game?serverId=1';
+  });
+
+  afterEach(() => {
+    restoreTestDatabase();
   });
 
   // gameId is a raw string here: the wire carries whatever the client sent, which is

@@ -13,7 +13,6 @@ import {readBody} from './readBody';
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
   private constructor() {
-    // Rolling back deletes saves, and the game id may be a spectator id, so only the operator may call this.
     super({validateServerId: true});
   }
 

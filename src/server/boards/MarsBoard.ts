@@ -182,10 +182,6 @@ export class MarsBoard extends Board {
     );
   }
 
-  public hasAvailableCitySpaceWithBonus(player: IPlayer, bonus: SpaceBonus): boolean {
-    return this.getAvailableSpacesForCity(player).some((s) => s.bonus.includes(bonus));
-  }
-
   /**
    * Returns true when the player can cover -1 energy production cost via
    * an available city space that carries an ENERGY_PRODUCTION bonus.

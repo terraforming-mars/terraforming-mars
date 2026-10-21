@@ -135,7 +135,8 @@ export class Turmoil {
     if (this.delegateReserve.has(delegate)) {
       this.delegateReserve.remove(delegate);
     } else {
-      console.log(`${delegate}/${game.id} tried to get a delegate from an empty reserve.`);
+      const name = delegate === 'NEUTRAL' ? delegate : delegate.name;
+      console.log(`${name}/${game.id} tried to get a delegate from an empty reserve.`);
       if (throwIfError) {
         throw new Error('No available delegate');
       }

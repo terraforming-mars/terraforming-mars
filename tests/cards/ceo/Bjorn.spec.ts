@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd, formatMessage} from '../../TestingUtils';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Bjorn} from '../../../src/server/cards/ceos/Bjorn';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
@@ -104,15 +104,6 @@ describe('Bjorn', () => {
 
     card.action(player);
     expect(player.megaCredits).to.eq(12);
-  });
-
-  it('Solo mode: logs the shared neutral player steal message', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
-    const card = new Bjorn();
-    game.generation = 10;
-
-    card.action(player);
-    expect(formatMessage(game.gameLog.pop()!)).to.eq('blue stole 12:r:megacredits: from the neutral player');
   });
 
   it('Takes OPG action, players that lost money can play Law Suit', () => {

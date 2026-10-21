@@ -5,10 +5,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {statusCode} from '@/common/http/statusCode';
 import {testGame} from '@tests/TestGame';
-import {Database} from '../../src/server/database/Database';
-import {IDatabase} from '../../src/server/database/IDatabase';
-import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
-import {GameId} from '../../src/common/Types';
+import {restoreTestDatabase} from '../testing/setup';
 
 describe('LoadGame', () => {
   let scaffolding: RouteTestScaffolding;

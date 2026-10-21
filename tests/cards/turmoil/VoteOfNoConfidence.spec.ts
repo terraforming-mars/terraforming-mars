@@ -28,13 +28,13 @@ describe('VoteOfNoConfidence', () => {
     const card = new VoteOfNoConfidence();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    const neutralReserve = turmoil.getAvailableDelegateCount('NEUTRAL');
+    const neutralReserve = turmoil.delegateReserve.get('NEUTRAL');
     turmoil.chairman = 'NEUTRAL';
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player;
     card.play(player);
     runAllActions(game);
-    expect(turmoil.getAvailableDelegateCount('NEUTRAL')).to.eq(neutralReserve+1);
+    expect(turmoil.delegateReserve.get('NEUTRAL')).to.eq(neutralReserve+1);
   });
 
   it('canPlay when Reds are in power', () => {

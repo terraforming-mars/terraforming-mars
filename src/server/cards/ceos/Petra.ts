@@ -38,8 +38,8 @@ export class Petra extends CeoCard {
     if (turmoil === undefined || this.isDisabled === true) {
       return false;
     }
-    const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
-    const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player);
+    const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.delegateReserve.get('NEUTRAL');
+    const playerTotalDelegateCount = turmoil.delegateReserve.get(player);
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
 

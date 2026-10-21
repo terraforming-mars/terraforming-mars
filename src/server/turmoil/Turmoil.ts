@@ -488,21 +488,6 @@ export class Turmoil {
     }
   }
 
-  /** Return the number of delegates for `delegate` in the reserve. */
-  public getAvailableDelegateCount(delegate: Delegate): number {
-    return this.delegateReserve.get(delegate);
-  }
-
-  /** List the delegates present in the reserve */
-  public getPresentPlayersInReserve(): Array<Delegate> {
-    return Array.from(new Set(this.delegateReserve));
-  }
-
-  /** Return true if `player` has delegates in reserve. */
-  public hasDelegatesInReserve(player: Delegate): boolean {
-    return this.getAvailableDelegateCount(player) > 0;
-  }
-
   /**
    * End-game victory points for `player`.
    *
@@ -522,7 +507,7 @@ export class Turmoil {
   }
 
   public getSendDelegateInput(player: IPlayer): SelectParty | undefined {
-    if (this.hasDelegatesInReserve(player)) {
+    if (this.delegateReserve.has(player)) {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});

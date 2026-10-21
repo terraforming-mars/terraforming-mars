@@ -74,7 +74,7 @@ export class AnOfferYouCantRefuse extends Card {
   // You can play this if you have an available delegate, and if you can swap with a non-neutral delegate without changing the party leader
   public override bespokeCanPlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (!turmoil.hasDelegatesInReserve(player)) {
+    if (!turmoil.delegateReserve.has(player)) {
       return false;
     }
 

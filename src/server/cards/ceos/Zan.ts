@@ -28,8 +28,8 @@ export class Zan extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    const totalAvailableDelegates = turmoil.getAvailableDelegateCount(player);
-    while (turmoil.getAvailableDelegateCount(player) > 0) {
+    const totalAvailableDelegates = turmoil.delegateReserve.get(player);
+    while (turmoil.delegateReserve.get(player) > 0) {
       turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     }
     // If we don't do this player will not get the bonus for POLITICIAN Awards

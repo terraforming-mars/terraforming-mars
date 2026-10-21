@@ -286,7 +286,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.PLACE_DELEGATES:
       if (game.turmoil) {
-        const availablePlayerDelegates = game.turmoil.getAvailableDelegateCount(player);
+        const availablePlayerDelegates = game.turmoil.delegateReserve.get(player);
         const qty = Math.min(quantity, availablePlayerDelegates);
         for (let i = 0; i < qty; i++) {
           game.defer(new SendDelegateToArea(player));

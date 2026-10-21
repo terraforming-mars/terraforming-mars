@@ -254,7 +254,7 @@ export class Executor implements BehaviorExecutor {
       const turmoil = Turmoil.getTurmoil(game);
       if (behavior.turmoil.sendDelegates) {
         const count = ctx.count(behavior.turmoil.sendDelegates.count);
-        if (turmoil.getAvailableDelegateCount(player) < count) {
+        if (turmoil.delegateReserve.get(player) < count) {
           return false;
         }
       }

@@ -3,6 +3,7 @@ import {validationDetails, Helpers, validateNewGameConfig, ValidationErrors} fro
 import {NewGameConfig, NewPlayerModel} from '../../../src/common/game/NewGameConfig';
 import {RandomBoardOption} from '../../../src/common/boards/RandomBoardOption';
 import {BoardName} from '../../../src/common/boards/BoardName';
+import {boardOptions} from '@/common/boards/randomBoardOptions';
 import {RandomMAOptionType} from '../../../src/common/ma/RandomMAOptionType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
@@ -38,7 +39,7 @@ function newGameConfig(overrides: Partial<NewGameConfig> = {}): NewGameConfig {
       underworld: false,
       deltaProject: false,
     },
-    board: RandomBoardOption.OFFICIAL,
+    boards: boardOptions(RandomBoardOption.OFFICIAL),
     seed: 0,
     randomFirstPlayer: false,
     clonedGamedId: undefined,
@@ -177,12 +178,12 @@ describe('validateNewGameConfig', () => {
 
   it('alt venus board on amazonis', () => {
     const expansions = {...newGameConfig().expansions, venus: true};
-    expect(validate({expansions, altVenusBoard: true, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.true;
-    expect(validate({expansions, altVenusBoard: true, board: RandomBoardOption.ALL}).altVenusBoardOnAmazonis).is.true;
-    expect(validate({expansions, altVenusBoard: true, board: RandomBoardOption.OFFICIAL}).altVenusBoardOnAmazonis).is.false;
-    expect(validate({expansions, altVenusBoard: true, board: BoardName.THARSIS}).altVenusBoardOnAmazonis).is.false;
-    expect(validate({expansions, altVenusBoard: false, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
-    expect(validate({altVenusBoard: true, board: BoardName.AMAZONIS_PLANITIA}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({expansions, altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.ALL)}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.OFFICIAL)}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, boards: [BoardName.THARSIS]}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({expansions, altVenusBoard: false, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;
+    expect(validate({altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;
   });
 
   it('prelude 2 without prelude', () => {

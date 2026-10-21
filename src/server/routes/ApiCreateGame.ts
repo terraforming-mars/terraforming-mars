@@ -2,8 +2,6 @@ import * as responses from '../server/responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
-import {BoardName} from '../../common/boards/BoardName';
-import {RandomBoardOption} from '../../common/boards/RandomBoardOption';
 import {Cloner} from '../database/Cloner';
 import {Game} from '../Game';
 import {GameOptions} from '../game/GameOptions';
@@ -72,25 +70,6 @@ export class ApiCreateGame extends Handler {
     this.quotaHandlers = quotaConfigs.map((config) => new QuotaHandler(config));
   }
 
-  public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
-    const allBoards = Object.values(BoardName);
-
-    if (board === RandomBoardOption.ALL) {
-      return allBoards;
-    }
-    if (board === RandomBoardOption.OFFICIAL) {
-      return allBoards.filter((name) => {
-        return name === BoardName.THARSIS ||
-          name === BoardName.HELLAS ||
-          name === BoardName.ELYSIUM ||
-          name === BoardName.UTOPIA_PLANITIA ||
-          name === BoardName.VASTITAS_BOREALIS_NOVA ||
-          name === BoardName.TERRA_CIMMERIA_NOVA;
-      });
-    }
-    return [board];
-  }
-
   /**
    * Validates that each custom list can deal every player their starting cards.
    *
@@ -149,8 +128,7 @@ export class ApiCreateGame extends Handler {
         }
       }
 
-      const boards = ApiCreateGame.boardOptions(gameReq.board);
-      gameReq.board = boards[Math.floor(Math.random() * boards.length)];
+      const boardName = gameReq.boards[Math.floor(Math.random() * gameReq.boards.length)];
 
       const gameOptions: GameOptions = {
         altVenusBoard: gameReq.altVenusBoard,
@@ -158,7 +136,7 @@ export class ApiCreateGame extends Handler {
         aresHazards: true, // Not a runtime option.
         aresExtremeVariant: gameReq.aresExtremeVariant,
         bannedCards: gameReq.bannedCards,
-        boardName: gameReq.board,
+        boardName: boardName,
         ceoExtension: gameReq.expansions.ceo,
         clonedGamedId: gameReq.clonedGamedId,
         coloniesExtension: gameReq.expansions.colonies,

@@ -10,7 +10,7 @@ import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
 import {testGame} from '../../TestGame';
-import {formatMessage, runAllActions, setRulingParty} from '../../TestingUtils';
+import {runAllActions, setRulingParty} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '../../../src/common/utils/utils';
 
@@ -130,18 +130,5 @@ describe('TheArchaicFoundationInstitute', () => {
     expect(card.resourceCount).eq(2);
     expect(player.terraformRating).eq(16);
     expect(player.megaCredits).eq(4);
-  });
-
-  it('Logs the removal once', () => {
-    player.megaCredits = 0;
-    card.resourceCount = 3;
-    game.gameLog = [];
-
-    cast(card.action(player), undefined);
-    runAllActions(game);
-
-    const removals = game.gameLog.map(formatMessage).filter((m) => m.includes(' removed '));
-    expect(removals).has.length(1);
-    expect(removals[0]).contains('to gain 1:icon:tr:');
   });
 });

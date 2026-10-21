@@ -509,9 +509,9 @@ class SynergyMap {
   }
 
   public setIfMissing(a: string, b: string, weight: number): void {
-    const key = a + '|' + b;
-    if (!this.map.has(key)) {
-      this._set(key, weight);
+    if (!this.map.has(a + '|' + b)) {
+      this._set(a + '|' + b, weight);
+      this._set(b + '|' + a, weight);
     }
   }
 

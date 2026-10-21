@@ -4,12 +4,11 @@ import {globalConfig} from '../getLocalVue';
 import BoardSelector from '@/client/components/create/BoardSelector.vue';
 import BoardPopup from '@/client/components/create/BoardPopup.vue';
 import {BoardName} from '@/common/boards/BoardName';
-import {BoardNameType} from '@/common/game/NewGameConfig';
 
-function mountSelector(board: BoardNameType = BoardName.HELLAS, shuffleMap: boolean = false) {
+function mountSelector(boards = [BoardName.HELLAS], shuffleMap: boolean = false) {
   return mount(BoardSelector, {
     ...globalConfig,
-    props: {board, shuffleMap},
+    props: {boards, shuffleMap},
   });
 }
 
@@ -35,7 +34,7 @@ describe('BoardSelector', () => {
     {shuffleMap: true},
   ] as const) {
     it(`shows a die only when board tiles are randomized ${JSON.stringify(run)}`, () => {
-      const wrapper = mountSelector(BoardName.HELLAS, run.shuffleMap);
+      const wrapper = mountSelector([BoardName.HELLAS], run.shuffleMap);
       expect(wrapper.find('label[for="boardSelector-checkbox"] .create-game-board-shuffled').exists()).eq(run.shuffleMap);
     });
   }
@@ -46,15 +45,15 @@ describe('BoardSelector', () => {
     await openPopup(wrapper);
     const popup = wrapper.findComponent(BoardPopup);
     expect(popup.exists()).is.true;
-    expect(popup.props('board')).eq(BoardName.HELLAS);
+    expect(popup.props('boards')).deep.eq([BoardName.HELLAS]);
   });
 
-  it('emits the board chosen in the popup and hides the popup', async () => {
+  it('emits the boards chosen in the popup and keeps the popup open', async () => {
     const wrapper = mountSelector();
     await openPopup(wrapper);
-    await wrapper.find(`input[type="radio"][value="${BoardName.ELYSIUM}"]`).setValue();
-    expect(wrapper.emitted('update:board')).to.deep.eq([[BoardName.ELYSIUM]]);
-    expect(wrapper.findComponent(BoardPopup).exists()).is.false;
+    await wrapper.find(`input[type="checkbox"][value="${BoardName.ELYSIUM}"]`).setValue();
+    expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.HELLAS, BoardName.ELYSIUM]]]);
+    expect(wrapper.findComponent(BoardPopup).exists()).is.true;
   });
 
   it('passes the randomize board tiles choice through the popup', async () => {
@@ -72,6 +71,6 @@ describe('BoardSelector', () => {
     await openPopup(wrapper);
     await wrapper.findComponent(BoardPopup).vm.$emit('close');
     expect(wrapper.findComponent(BoardPopup).exists()).is.false;
-    expect(wrapper.emitted('update:board')).is.undefined;
+    expect(wrapper.emitted('update:boards')).is.undefined;
   });
 });

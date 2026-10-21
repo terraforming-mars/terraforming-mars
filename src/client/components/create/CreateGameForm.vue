@@ -174,7 +174,7 @@
 
                         <div class="create-game-page-column">
                             <h4 v-i18n>Options</h4>
-                            <BoardSelector v-model:board="board" v-model:shuffleMap="shuffleMapOption" />
+                            <BoardSelector v-model:boards="boards" v-model:shuffleMap="shuffleMapOption" />
 
                             <label for="startingCorpNum-checkbox">
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
@@ -717,7 +717,7 @@ export default defineComponent({
         customPreludes: this.customPreludes,
         bannedCards: this.bannedCards,
         includedCards: this.includedCards,
-        board: this.board,
+        boards: this.boards,
         seed: this.seed,
         solarPhaseOption: this.solarPhaseOption,
         aresExtremeVariant: this.aresExtremeVariant,

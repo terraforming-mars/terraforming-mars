@@ -1,5 +1,4 @@
 import {BoardName} from '../boards/BoardName';
-import {RandomBoardOption} from '../boards/RandomBoardOption';
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
 import {Color} from '../Color';
@@ -7,8 +6,6 @@ import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {GameId} from '../Types';
 import {Expansion} from '../cards/GameModule';
-
-export type BoardNameType = BoardName | RandomBoardOption;
 
 export interface NewPlayerModel {
   name: string;
@@ -35,7 +32,7 @@ export type EscapeVelocityOptions = {
 export type NewGameConfig = {
   players: Array<NewPlayerModel>;
   expansions: Record<Expansion, boolean>,
-  board: BoardNameType;
+  boards: Array<BoardName>;
   seed: number;
   randomFirstPlayer: boolean;
 

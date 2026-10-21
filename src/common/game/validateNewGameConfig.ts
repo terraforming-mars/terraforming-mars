@@ -8,7 +8,6 @@ import {Expansion} from '../cards/GameModule';
 import {Message} from '../logs/Message';
 import {LogMessageDataType} from '../logs/LogMessageDataType';
 import {BoardName} from '../boards/BoardName';
-import {RandomBoardOption} from '../boards/RandomBoardOption';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -156,9 +155,8 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     errors.infiniteEnergyBug = true;
   }
 
-  // RandomBoardOption.OFFICIAL never picks Amazonis Planitia.
   if (config.expansions.venus && config.altVenusBoard &&
-    (config.board === BoardName.AMAZONIS_PLANITIA || config.board === RandomBoardOption.ALL)) {
+    config.boards.includes(BoardName.AMAZONIS_PLANITIA)) {
     errors.altVenusBoardOnAmazonis = true;
   }
 

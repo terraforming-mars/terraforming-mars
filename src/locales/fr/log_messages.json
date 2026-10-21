@@ -161,6 +161,7 @@
   "1 corruption": "",
   "2 corruption": "2 corruptions",
   "${0} played ${1}": "${0} a joué ${1}",
+  "${0} played ${1} [ ${2} ]": "${0} a joué ${1} [ ${2} ]",
   "${0} used ${1} action": "${0} a utilisé l'action de ${1}",
   "${0} funded ${1} award": "${0} a financé la récompense ${1}",
   "${0} claimed ${1} milestone": "${0} a acquis l'objectif ${1}",

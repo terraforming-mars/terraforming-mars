@@ -65,6 +65,7 @@
   "floater(s)": "dryfowce",
 
   "${0} played ${1}": "${0} zagrywa ${1}",
+  "${0} played ${1} [ ${2} ]": "${0} zagrywa ${1} [ ${2} ]",
   "${0} used ${1} action": "${0} wykorzystuje akcję ${1}",
   "${0} funded ${1} award": "${0} funduje nagrodę ${1}",
   "${0} claimed ${1} milestone": "${0} zdobywa tytuł ${1}",

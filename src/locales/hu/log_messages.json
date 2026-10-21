@@ -164,6 +164,7 @@
   "1 corruption": "1 korrupció",
   "2 corruption": "2 korrupció",
   "${0} played ${1}": "${0} kijátszotta a(z) ${1} kártyát.",
+  "${0} played ${1} [ ${2} ]": "${0} kijátszotta a(z) ${1} kártyát. [ ${2} ]",
   "${0} used ${1} action": "${0} használta a(z) ${1} akciót.",
   "${0} funded ${1} award": "${0} megalapította a(z) ${1} díjat.",
   "${0} claimed ${1} milestone": "${0} elérte a(z) ${1} mérföldkövet.",

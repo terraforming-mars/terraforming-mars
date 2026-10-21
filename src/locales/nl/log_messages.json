@@ -109,6 +109,7 @@
     "specialized robot(s)": "gespecialiseerde robot(s)",
 
     "${0} played ${1}": "${0} heeft ${1} gespeeld",
+    "${0} played ${1} [ ${2} ]": "${0} heeft ${1} gespeeld [ ${2} ]",
     "${0} used ${1} action": "${0} heeft actie ${1} gebruikt",
     "${0} funded ${1} award": "${0} heeft de onderscheiding ${1} gefinancierd",
     "${0} claimed ${1} milestone": "${0} heeft mijlpaal ${1} geclaimd",

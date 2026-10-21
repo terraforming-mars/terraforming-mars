@@ -1,5 +1,6 @@
 import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
 import {SpendableResource, SPENDABLE_RESOURCES} from './Spendable';
+import {comparing, reversed} from '@/common/utils/Ordering';
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth
@@ -77,6 +78,35 @@ export namespace Payment {
       kuiperAsteroids: payment.kuiperAsteroids ?? 0,
       plants: payment.plants ?? 0,
     };
+  }
+
+  const ICONS = {
+    megacredits: ':r:megacredits:',
+    steel: ':r:steel:',
+    titanium: ':r:titanium:',
+    heat: ':r:heat:',
+    plants: ':r:plants:',
+    microbes: ':cr:microbe:',
+    floaters: ':cr:floater:',
+    lunaArchivesScience: ':cr:science:',
+    spireScience: ':cr:science:',
+    seeds: ':cr:seed:',
+    auroraiData: ':cr:data:',
+    graphene: ':cr:graphene:',
+    kuiperAsteroids: ':cr:asteroid:',
+  } satisfies Record<SpendableResource, string>;
+
+  const SORTED_FOR_LOG = SPENDABLE_RESOURCES.toSorted(reversed(comparing((key) => DEFAULT_PAYMENT_VALUES[key])));
+  /** Describes a payment as markdown icon shortcodes for the log, e.g. `-3:r:megacredits: -1:r:steel:`. */
+  export function toLogString(payment: Payment | undefined): string {
+    if (payment !== undefined) {
+      const filtered = SORTED_FOR_LOG.filter((key) => payment[key] > 0);
+      if (filtered.length > 0) {
+        const parts = filtered.map((key) => `-${payment[key]}${ICONS[key]}`);
+        return parts.join(' ');
+      }
+    }
+    return '0';
   }
 }
 

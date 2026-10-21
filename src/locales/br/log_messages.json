@@ -51,6 +51,7 @@
   "Good luck ${0}!": "Boa sorte, ${0}!",
 
   "${0} played ${1}": "${0} jogou ${1}",
+  "${0} played ${1} [ ${2} ]": "${0} jogou ${1} [ ${2} ]",
   "${0} used ${1} action": "${0} fez a ação ${1}",
   "${0} funded ${1} award": "${0} financiou o prêmio ${1}",
   "${0} claimed ${1} milestone": "${0} reinvindicou o marco ${1} ",

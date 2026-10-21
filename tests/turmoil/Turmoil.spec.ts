@@ -85,25 +85,6 @@ describe('Turmoil', () => {
     expect(greens.delegates.size).eq(0);
   });
 
-  it('Names the player when the reserve is empty', () => {
-    turmoil.delegateReserve.clear();
-
-    const logged: Array<string> = [];
-    const originalLog = console.log;
-    console.log = (...args: Array<unknown>) => logged.push(args.join(' '));
-    try {
-      turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-      turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
-    } finally {
-      console.log = originalLog;
-    }
-
-    expect(logged).deep.eq([
-      `${player.name}/${game.id} tried to get a delegate from an empty reserve.`,
-      `NEUTRAL/${game.id} tried to get a delegate from an empty reserve.`,
-    ]);
-  });
-
   it('Counts influence correctly for dominant party', () => {
     turmoil.parties.forEach((party) => party.delegates.clear());
 

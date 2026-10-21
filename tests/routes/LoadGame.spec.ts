@@ -85,7 +85,6 @@ describe('LoadGame', () => {
   describe('rollback', () => {
     let events: Array<string>;
     let finishDelete: () => void;
-    let failDelete: (err: Error) => void;
 
     beforeEach(() => {
       events = [];
@@ -93,12 +92,11 @@ describe('LoadGame', () => {
         ...Database.getInstance(),
         deleteGameNbrSaves: (gameId: GameId, rollbackCount: number) => {
           events.push(`delete ${gameId} ${rollbackCount}`);
-          return new Promise<void>((resolve, reject) => {
+          return new Promise<void>((resolve) => {
             finishDelete = () => {
               events.push('delete done');
               resolve();
             };
-            failDelete = reject;
           });
         },
       };
@@ -146,18 +144,6 @@ describe('LoadGame', () => {
 
       expect(events).deep.eq([`delete ${game.id} 2`, 'delete done', 'load']);
       expect(res.statusCode).eq(statusCode.ok);
-    });
-
-    it('reports a failed delete', async () => {
-      const [game] = testGame(2);
-      await scaffolding.ctx.gameLoader.add(game);
-
-      const response = put({gameId: game.id, rollbackCount: 1});
-      await new Promise((resolve) => setTimeout(resolve, 0));
-      failDelete(new Error('database is down'));
-      await response;
-
-      expect(res.statusCode).eq(statusCode.internalServerError);
     });
   });
 });

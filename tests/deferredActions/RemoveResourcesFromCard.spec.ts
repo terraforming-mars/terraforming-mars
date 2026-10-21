@@ -9,13 +9,13 @@ import {formatMessage, runAllActions} from '../TestingUtils';
 
 // This requires a lot more tests
 describe('RemoveResourcesFromCard', () => {
-  let response: Response;
+  let response: Response | undefined;
   const andThen = (c: Response) => {
     response = c;
   };
 
   beforeEach(() => {
-    response = undefined as unknown as Response;
+    response = undefined;
   });
 
   it('simple', () => {
@@ -60,7 +60,7 @@ describe('RemoveResourcesFromCard', () => {
     cast(action.execute(), undefined);
 
     expect(atmoCollectors.resourceCount).eq(1);
-    expect(game.gameLog.map(formatMessage)).deep.eq([`${player.color} removed 1 resource(s) from ${player.color}'s Atmo Collectors`]);
+    expect(game.gameLog.map(formatMessage)).deep.eq(['blue removed 1:cr:floater: from blue\'s Atmo Collectors']);
   });
 
   it('unblockable removal from opponent cannot be blocked', () => {
@@ -112,6 +112,6 @@ describe('RemoveResourcesFromCard', () => {
 
     expect(response).deep.eq({card: atmoCollectors, owner: opponent, proceed: true});
     expect(atmoCollectors.resourceCount).eq(1);
-    expect(game.gameLog.map(formatMessage)).deep.eq([`${player.color} removed 1 resource(s) from ${opponent.color}'s Atmo Collectors`]);
+    expect(game.gameLog.map(formatMessage)).deep.eq([`${player.color} removed 1:cr:floater: from ${opponent.color}'s Atmo Collectors`]);
   });
 });

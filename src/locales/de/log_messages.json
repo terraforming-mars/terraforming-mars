@@ -442,7 +442,7 @@
   "${0} gained ${1} TR from ${2}": "${0} erhielt ${1} TW von ${2}",
   "${0} gained ${1} TR": "${0} erhielt ${1} TW",
   "${0} lost ${1} TR": "${0} verlor ${1} TW",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}'s ${3}",
+  "${0} removed ${1}${2} from ${3}'s ${4}": "${0} entfernte ${1}${2} von ${3}'s ${4}",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} gab 1 Korruption aus, um den Angriff von ${1} zu blocken",
   "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} hat 1 Jäger für ${1} ausgegeben, um einen Angriff von ${2} zu blockieren",
   "For the rest of this generation, ${0} will gain ${1}": "Für den Rest dieser Generation wird ${0} ${1} erhalten",

@@ -409,7 +409,7 @@
   "${0} gained ${1} TR from ${2}": "${0} nosti MKL:äänsä ${1} askelta lähteestä ${2}",
   "${0} gained ${1} TR": "${0} nosti MKL:äänsä ${1} askelta",
   "${0} lost ${1} TR": "${0} laski MKL:äänsä ${1} askelta",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} poisti ${1} resurssia pelaajan ${2} kortilta ${3}",
+  "${0} removed ${1}${2} from ${3}'s ${4}": "${0} poisti ${1}${2} pelaajan ${3} kortilta ${4}",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} käytti 1 korruption estääkseen ${1}:n hyökkäyksen",
   "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} käytti 1 hävittäjän kortilta ${1} estääkseen ${2}:n hyökkäyksen",
   "For the rest of this generation, ${0} will gain ${1}": "Tämän sukupolven loppuajan ${0} saa ${1}",

@@ -42,7 +42,7 @@
 	"${0}'s ${1} production ${2} by ${3} stolen by ${4}": "${0}s ${1}-produksjon ${2} med ${3} stjålet av ${4}",
 	"${0}'s ${1} amount ${2} by ${3} by ${4}": "${0}s ${1}-mengde ${2} med ${3} av ${4}",
 	"${0}'s ${1} production ${2} by ${3} by ${4}": "${0}s ${1}-produksjon ${2} med ${3} av ${4}",
-	"${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} fjernet ${1} ressurs(er) fra ${2}s ${3}",
+	"${0} removed ${1}${2} from ${3}'s ${4}": "${0} fjernet ${1}${2} fra ${3}s ${4}",
 
 	"Card not found": "Kort ikke funnet",
 	"The project discard pile has been shuffled to form a new deck.": "Bunken med kastede kort har blitt stokket for å danne en ny bunke.",

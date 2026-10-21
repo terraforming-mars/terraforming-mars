@@ -24,7 +24,7 @@
   "increased": "aumentou",
   "decreased": "diminuiu",
   "${0}'s ${1} production ${2} by ${3} by ${4}": "${4} ${2} em ${3} a produção de ${1} de ${0}",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} removeu ${1} recurso(s) de ${3} de ${2}",
+  "${0} removed ${1}${2} from ${3}'s ${4}": "${0} removeu ${1}${2} de ${4} de ${3}",
   "Card not found": "Carta não encontrada",
   "Incorrect options provided": "Opções incorretas inseridas",
   "Amount provided too high (max": "A quantidade introduzida é muito alta (máximo ",

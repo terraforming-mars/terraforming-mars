@@ -283,7 +283,7 @@
 
     "${0} gained ${1} TR": "${0} kreeg ${1} TN",
     "${0} lost ${1} TR": "${0} verloor ${1} TN",
-    "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} verwijderde ${1} grondstof(fen) van ${2} (${3})",
+    "${0} removed ${1}${2} from ${3}'s ${4}": "${0} verwijderde ${1}${2} van ${3} (${4})",
 
     "earth": "aarde",
     "venus": "",

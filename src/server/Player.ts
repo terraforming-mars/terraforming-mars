@@ -527,9 +527,10 @@ export class Player implements IPlayer {
       }
 
       if (options?.log ?? true) {
-        this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
+        this.game.log('${0} removed ${1}${2} from ${3}\'s ${4}', (b) =>
           b.player(options?.removingPlayer ?? this)
             .number(amountRemoved)
+            .cardResource(card.resourceType)
             .player(this)
             .card(card));
       }

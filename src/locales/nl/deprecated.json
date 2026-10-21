@@ -6,5 +6,6 @@
   "${0} spent ${1} energy to trade with ${2}": "${0} betaalde ${1} energie om te handelen met ${2}",
   "${0} spent ${1} titanium to trade with ${2}": "${0} betaalde ${1} titanium om te handelen met ${2}",
   "${0} sold ${1} steel": "${0} verkocht ${1} staal",
-  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} verwijderde ${1} ${2} van ${3} voor effect ${4}"
+  "${0} removed ${1} ${2} from ${3} to ${4}": "${0} verwijderde ${1} ${2} van ${3} voor effect ${4}",
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} verwijderde ${1} grondstof(fen) van ${2} (${3})"
 }

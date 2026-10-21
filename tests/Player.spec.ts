@@ -434,7 +434,8 @@ describe('Player', () => {
     expect(card.resourceCount).eq(5);
     expect(log).has.length(1);
     expect(log[0].data[1].value).eq('1');
-    expect(log[0].data[3].value).eq('Pets');
+    expect(log[0].data[2].value).eq('Animal');
+    expect(log[0].data[4].value).eq('Pets');
 
     log.length = 0;
     player.removeResourceFrom(card, 1);

@@ -31,10 +31,6 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
     });
   }
 
-  private draw2Cards(player: IPlayer, tag: Tag) {
-    player.drawCard(2, {tag: tag});
-  }
-
   public override bespokePlay(player: IPlayer) {
     player.game.players.forEach((target) => {
       target.attack(player, Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true});
@@ -53,7 +49,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
 
     const options = tags.map((tag) => {
       return new SelectOption(tag).andThen(() => {
-        this.draw2Cards(player, tag);
+        player.drawCard(2, {tag: tag});
         return undefined;
       });
     });

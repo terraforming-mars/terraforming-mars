@@ -285,7 +285,7 @@ describe('AmazonisPlanitiaBoard', () => {
 
       const available = game.board.getAvailableSpacesOnLand(player).map(toID);
 
-      expect(['10', '72', '70'].filter((id) => available.includes(id))).deep.eq(run.offered);
+      expect(available.filter((id) => ['10', '72', '70'].includes(id))).has.members(run.offered);
     });
   }
 

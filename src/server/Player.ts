@@ -78,6 +78,7 @@ import {AlliedParty} from '../common/turmoil/Types';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
 import {SelectStandardProjectToPlay} from './inputs/SelectStandardProjectToPlay';
+import {Turmoil} from './turmoil/Turmoil';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -245,8 +246,7 @@ export class Player implements IPlayer {
         policyId: p.policies[0].id,
       },
     };
-    const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
-
+    const alliedPolicy = Turmoil.getTurmoil(this.game).getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
     alliedPolicy?.onPolicyStartForPlayer?.(this);
   }
 

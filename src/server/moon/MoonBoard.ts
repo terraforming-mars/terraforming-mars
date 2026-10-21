@@ -99,7 +99,6 @@ class Builder {
   spaceTypes: Array<SpaceType> = [];
   bonuses: Array<Array<SpaceBonus>> = [];
   spaces: Array<Space> = [];
-  private idx: number = 0;
 
   public row(startX: number): Row {
     this.y++;
@@ -109,11 +108,6 @@ class Builder {
   public colony() {
     this.spaceTypes.push(SpaceType.COLONY);
     this.bonuses.push([]);
-  }
-  public nextId(): SpaceId {
-    this.idx++;
-    const strId = this.idx.toString().padStart(2, '0');
-    return safeCast('m' + strId, isSpaceId);
   }
   public build(): Array<Space> {
     this.spaces.push(colonySpace(NamedMoonSpaces.LUNA_TRADE_STATION));

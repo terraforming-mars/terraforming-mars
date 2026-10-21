@@ -55,7 +55,7 @@ describe('ColonialEnvoys', () => {
     luna.colonies.push(player.id);
     ganymede.colonies.push(player.id);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(turmoil.delegateReserve.get(player)).eq(7);
 
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     const greens = turmoil.getPartyByName(PartyName.GREENS);
@@ -65,14 +65,14 @@ describe('ColonialEnvoys', () => {
     let selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(marsFirst.name);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+    expect(turmoil.delegateReserve.get(player)).eq(6);
 
     runAllActions(game);
     selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(greens.name);
     runAllActions(game);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+    expect(turmoil.delegateReserve.get(player)).eq(5);
     expect(marsFirst.delegates.get(player)).eq(1);
     expect(greens.delegates.get(player)).eq(1);
 

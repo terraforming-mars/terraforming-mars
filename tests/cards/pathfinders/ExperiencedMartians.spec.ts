@@ -37,20 +37,20 @@ describe('ExperiencedMartians', () => {
     expect(player.cardsInHand).has.members([a, c]);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(turmoil.delegateReserve.get(player)).eq(7);
 
     expect(game.deferredActions).has.length(1);
 
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(turmoil.delegateReserve.get(player)).eq(7);
     expect(marsFirst.delegates.get(player)).eq(0);
 
     const action = cast(game.deferredActions.pop(), SendDelegateToArea);
     const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+    expect(turmoil.delegateReserve.get(player)).eq(6);
     expect(marsFirst.delegates.get(player)).eq(1);
   });
 });

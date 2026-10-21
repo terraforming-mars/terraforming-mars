@@ -138,7 +138,7 @@ describe('CollusionStandardProject', () => {
   it('action - error: player has 1 delegate in reserve but 2 requested', () => {
     player.underworldData.corruption = 1;
     // Send enough delegates to leave only 1 in reserve.
-    while (turmoil.getAvailableDelegateCount(player) > 1) {
+    while (turmoil.delegateReserve.get(player) > 1) {
       turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     }
     // Add 2 neutrals so both parties and count are satisfied.

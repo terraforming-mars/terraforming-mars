@@ -35,7 +35,7 @@ export class Oscar extends CeoCard {
       return false;
     }
     const turmoil = Turmoil.getTurmoil(player.game);
-    return turmoil.hasDelegatesInReserve(player) && turmoil.chairman !== player;
+    return turmoil.delegateReserve.has(player) && turmoil.chairman !== player;
   }
 
   public action(player: IPlayer): PlayerInput | undefined {

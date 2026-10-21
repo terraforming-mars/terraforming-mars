@@ -38,10 +38,10 @@ describe('Cultural Metropolis', () => {
     player.production.add(Resource.ENERGY, 1);
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
-    while (turmoil.getAvailableDelegateCount(player) > 2) {
+    while (turmoil.delegateReserve.get(player) > 2) {
       turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     }
-    expect(turmoil.getAvailableDelegateCount(player)).to.equal(2);
+    expect(turmoil.delegateReserve.get(player)).to.equal(2);
     expect(card.canPlay(player)).is.true;
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     expect(card.canPlay(player)).is.not.true;
@@ -74,7 +74,7 @@ describe('Cultural Metropolis', () => {
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
 
     expect(unity.delegates.size).eq(startingUnityDelegateCount + 2);
-    expect(turmoil.getAvailableDelegateCount(player)).to.equal(5);
+    expect(turmoil.delegateReserve.get(player)).to.equal(5);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

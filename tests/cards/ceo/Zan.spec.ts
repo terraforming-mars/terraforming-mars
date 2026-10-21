@@ -39,13 +39,13 @@ describe('Zan', () => {
   it('Takes OPG action', () => {
     const turmoil = game.turmoil!;
     player.megaCredits = 0;
-    const expectedMegagredits = turmoil.getAvailableDelegateCount(player);
+    const expectedMegagredits = turmoil.delegateReserve.get(player);
     card.action(player);
     while (game.deferredActions.length) {
       game.deferredActions.pop()!.execute();
     }
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
+    expect(turmoil.delegateReserve.get(player)).eq(0);
     expect(player.megaCredits).eq(expectedMegagredits);
 
     expect(turmoil.dominantParty.name).eq(PartyName.REDS);

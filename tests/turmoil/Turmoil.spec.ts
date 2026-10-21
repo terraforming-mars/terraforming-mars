@@ -153,8 +153,8 @@ describe('Turmoil', () => {
     turmoil.usedFreeDelegateAction.add(player);
     turmoil.usedFreeDelegateAction.add(player2);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
-    expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
+    expect(turmoil.delegateReserve.get(player)).eq(0);
+    expect(turmoil.delegateReserve.get(player2)).eq(6);
 
     game.phase = Phase.SOLAR;
     turmoil.runTurmoilPhase(game);
@@ -165,8 +165,8 @@ describe('Turmoil', () => {
     expect(player.terraformRating).to.eq(21);
     expect(player2.terraformRating).to.eq(20);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(4);
-    expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
+    expect(turmoil.delegateReserve.get(player)).eq(4);
+    expect(turmoil.delegateReserve.get(player2)).eq(6);
 
     expect(turmoil.usedFreeDelegateAction).is.empty;
     expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
@@ -177,14 +177,14 @@ describe('Turmoil', () => {
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+    expect(turmoil.delegateReserve.get(player)).eq(5);
 
     game.phase = Phase.SOLAR;
     turmoil.runTurmoilPhase(game);
     runAllActions(game);
 
     expect(turmoil.chairman).to.eq(player);
-    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+    expect(turmoil.delegateReserve.get(player)).eq(6);
   });
 
   it('inTurmoil is cleared when the new government adds actions', () => {

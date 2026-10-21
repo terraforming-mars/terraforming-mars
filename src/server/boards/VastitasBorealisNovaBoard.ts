@@ -49,7 +49,7 @@ export class VastitasBorealisNovaBoard extends MarsBoard {
     return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => {
       if (space.bonus.includes(SpaceBonus.DELEGATE)) {
         const turmoil = player.game.turmoil;
-        return !turmoil || turmoil.hasDelegatesInReserve(player);
+        return !turmoil || turmoil.delegateReserve.has(player);
       }
       return true;
     });

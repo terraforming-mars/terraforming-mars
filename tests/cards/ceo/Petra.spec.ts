@@ -89,7 +89,7 @@ describe('Petra', () => {
     expect(player.megaCredits).to.eq(15);
 
     // Make sure that the player has the correct amount of spare delegates
-    expect(turmoil.getAvailableDelegateCount(player)).eq(2); // 1 Reserve + 1 Lobby
+    expect(turmoil.delegateReserve.get(player)).eq(2); // 1 Reserve + 1 Lobby
     expect(turmoil.delegateReserve.has(player)).is.true;
     expect(turmoil.chairman).eq(player);
 
@@ -115,7 +115,7 @@ describe('Petra', () => {
 
     // Replace 6 delegates + chairman
     card.action(player);
-    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
+    expect(turmoil.delegateReserve.get(player)).eq(0);
     expect(turmoil.delegateReserve.has(player)).is.false;
     expect(turmoil.chairman).eq(player);
 

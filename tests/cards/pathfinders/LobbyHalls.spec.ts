@@ -36,7 +36,7 @@ describe('LobbyHalls', () => {
   });
 
   it('play, has a delegate', () => {
-    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(turmoil.delegateReserve.get(player)).eq(7);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
     card.play(player);

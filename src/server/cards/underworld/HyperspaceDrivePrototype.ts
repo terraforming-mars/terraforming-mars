@@ -37,14 +37,14 @@ export class HyperspaceDrivePrototype extends Card implements IProjectCard {
     if (fighterCards.length > 0) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FIGHTER));
     } else {
-      player.game.log('${0} has no fighter resource cards and gained 1:r:titanium:.', (b) => b.player(player));
+      player.game.log('${0} has no :cr:fighter: cards and gained 1:r:titanium:.', (b) => b.player(player));
       player.stock.titanium += 1;
     }
     const scienceCards = player.getResourceCards(CardResource.SCIENCE);
     if (scienceCards.length > 0) {
       player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE), Priority.HYPERSPACE_DRIVE_PROTOTYPE);
     } else {
-      player.game.log('${0} has no science cards and gained 1 TR.', (b) => b.player(player));
+      player.game.log('${0} has no :cr:science: cards and gained 1 TR.', (b) => b.player(player));
       player.increaseTerraformRating();
     }
     return undefined;

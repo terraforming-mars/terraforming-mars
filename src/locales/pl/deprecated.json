@@ -18,5 +18,15 @@
   "Neutral player received ${0} M€ from ${1} owner (${2})": "Neutralny gracz otrzymuje ${0} M€ od gracza ${1} (${2})",
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} wydaje po 1 jednostce stali i energii, za co otrzymuje 3 jednostki roślinności.",
   "${0} spent ${1} energy": "${0} wydaje ${1} jednostek energii.",
-  "${0} decreased energy production 1 step to gain 8 M€": "${0} obniża swoją produkcję energii o 1 poziom i otrzymuje 8 M€."
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} obniża swoją produkcję energii o 1 poziom i otrzymuje 8 M€.",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} usuwa ${1} jednostek dryfowców aby zdobyć ${2} jednostek/ki tytanu.",
+  "${0} spent 1 floater to trade with ${1}": "${0} wydaje 1 jednostkę dryfowców aby wykonać akcję handlu z ${1}",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0} automatycznie usuwa 3 jednostki danych z ${1} aby dobrać kartę.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0} usuwa ${1} jednostek danych z ${2},żeby przeprowadzić handel z ${3}.",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} usuwa ${1} jednostek danych z ${2} i podnosi swoją produkcję roślinności o ${3} poziom/y.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} odwraca kartę ${1} podnosi swój WT o 3 poziomy i traci ${2} M€.",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0} umieszcza jednostkę chorób na ${1} oraz traci ${2} M€.",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} umieszcza ${3} jednostek chorób na ${1} oraz traci ${2} M€.",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} usuwa jednostkę chorób z ${1}, i podnosi swój WT o 1 poziom.",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} nie może usunąć jednostki choroby z ${1} ze względu na niemożliwość pokrycia dodatkowego kosztu polityki czerwonych."
 }

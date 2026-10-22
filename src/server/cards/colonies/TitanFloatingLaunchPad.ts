@@ -59,7 +59,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
           new SelectColony('Select colony tile to trade with for free', 'Select', ColoniesHandler.tradeableColonies(player.game))
             .andThen((colony) => {
               this.resourceCount--;
-              player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
+              player.game.log('${0} spent 1:cr:floater: to trade with ${1}', (b) => b.player(player).colony(colony));
               colony.trade(player);
               return undefined;
             }));
@@ -100,7 +100,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
       this.titanFloatingLaunchPad.resourceCount--;
     }
     this.player.actionsThisGeneration.add(CardName.TITAN_FLOATING_LAUNCHPAD);
-    this.player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(this.player).colony(colony));
+    this.player.game.log('${0} spent 1:cr:floater: to trade with ${1}', (b) => b.player(this.player).colony(colony));
     colony.trade(this.player);
   }
 }

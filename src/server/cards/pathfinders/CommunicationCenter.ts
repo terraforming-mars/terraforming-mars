@@ -63,7 +63,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
       while (this.resourceCount >= 3) {
         this.resourceCount -= 3;
         player.drawCard(1);
-        player.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
+        player.game.log('${0} automatically removed 3:cr:data: from ${1} to draw a card.', (b) => {
           b.player(player).card(this);
         });
       }

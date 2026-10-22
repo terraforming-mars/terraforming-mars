@@ -39,5 +39,21 @@
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} n'a pas de carte à ressource combattant et gagne 1 titane.",
   "Player spent ${0} steel and gained ${1} heat": "Le joueur a dépensé ${0} acier(s) et a gagné ${1} chaleur(s)",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} a diminué sa production d'énergie de 1 pour gagner 8 M€",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} a gagné une production de M€ de 1 grâce à ${1} pour le badge ${2}"
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} a gagné une production de M€ de 1 grâce à ${1} pour le badge ${2}",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} a retiré ${1} flotteurs pour gagner ${2} titane(s)",
+  "${0} removed 1 microbe from ${1} to gain 5 plants": "${0} a retiré 1 microbe de ${1} pour gagner 5 plantes",
+  "${0} spent 1 floater to trade with ${1}": "${0} a commercé avec ${1}",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0} a retiré automatiquement 3 data de ${1} pour piocher une carte.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0} a dépensé ${1} data de ${2} pour commercer avec ${3}",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} a retiré ${1} data de ${2} pour augmenter sa production de plante de ${3}.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} a retourné ${1} face cachée pour gagner 3 NT et perdre ${2} M€",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0} a ajouté une maladie à ${1} et a perdu ${2} M€",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} a ajouté ${3} maladie(s) à ${1} pour gagner 1 NT",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} a retiré une maladie de ${1} pour gagner 1 NT",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} ne peut pas retirer une maladie de ${1} pour gagner 1 NT car aucune politique des Rouges n'est abordable",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0} n'a pas de carte à ressource combattant et gagne 1:r:titanium:.",
+  "${0} has no science cards and gained 1 TR.": "${0} n'a pas de carte Science et gagne 1 NT.",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} a utilisé l'action de ${1} pour convertir ${2} article(s) en ${2} M€",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} a dépensé 1 combattant sur ${1} pour bloquer une attaque de ${2}",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} a retiré ${1} microbe(s) de ${2} pour gagner ${3} M€"
 }

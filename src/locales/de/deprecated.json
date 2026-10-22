@@ -41,5 +41,21 @@
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} hat keine Jäger-Ressourcen Karten und erhielt 1 Titan.",
   "Player spent ${0} steel and gained ${1} heat": "Spieler hat ${0} Stahl ausgegeben und ${1} Wärme erhalten",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} senkte Energie-Produktion um 1, um 8 M€ zu erhalten",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} erhielt 1 M€ Produktion von ${1} für ${2}"
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} erhielt 1 M€ Produktion von ${1} für ${2}",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} entfernte ${1} Schweber, um ${2} Titan zu erhalten",
+  "${0} removed 1 microbe from ${1} to gain 5 plants": "${0} entfernte 1 Mikrobe von ${1}, um 5 Pflanzen zu erhalten",
+  "${0} spent 1 floater to trade with ${1}": "${0} bezahlte 1 Schweber, um mit ${1} zu handeln",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0} entfernte automatisch 3 Daten von ${1}, um eine Karte zu ziehen.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0} bezahlte ${1} Daten von ${2}, um mit ${3} zu handeln",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} entfernte ${1} Daten von ${2}, um die Pflanzen-Produktion um ${3} zu erhöhen.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} drehte ${1} um, um 3 TW zu erhalten und ${2} M€ zu verlieren",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0} fügte ${1} eine Krankheit hinzu und verlor ${2} M€",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} fügte ${3} Krankheiten zu ${1} hinzu und verlor ${2} M€",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} entfernte eine Krankheit von ${1}, um 1 TW zu erhalten",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kann keine Krankheit von ${1} entfernen, um 1 TW zu erhalten aufgrund zu hoher Kosten für DIE-ROTEN-Politik",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0} hat keine Jäger-Ressourcen Karten und erhielt 1:r:titanium:.",
+  "${0} has no science cards and gained 1 TR.": "${0} hat keine Wissenschafts-Ressourcen Karten und erhielt 1 TW.",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} hat die ${1} Aktion benutzt, um ${2} Waren in ${2} M€ umzuwandeln",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} hat 1 Jäger für ${1} ausgegeben, um einen Angriff von ${2} zu blockieren",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} entfernte ${1} Mikroben aus ${2}, um ${3} M€ zu erhalten"
 }

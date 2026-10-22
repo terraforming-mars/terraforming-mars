@@ -26,5 +26,20 @@
   "${0} spent ${1} energy": "${0}が${1}電力支払った",
   "${0} has no fighter resource cards and gained 1 titanium.": "${0}は戦闘機を配置できるカードがないため、1チタン獲得",
   "${0} decreased energy production 1 step to gain 8 M€": "${0}が電力産出-1し、8MC獲得",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0}は${2}タグをプレイし、MC産出+1(${1}の効果)."
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0}は${2}タグをプレイし、MC産出+1(${1}の効果).",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0}が${1}浮遊体を除去し、${2}チタンを獲得",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0}が${2}から${1}微生物を除去し、${3}MCを獲得",
+  "${0} spent 1 floater to trade with ${1}": "${0}が1浮遊体を支払い、${1}と交易",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0}は${1}から3データを自動で除去し、1ドロー.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0}は${2}から${1}データ支払い、${3}と交易",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0}は${2}から${1}データ除去し、植物産出+${3}.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0}が${1}を裏返し、TR+3段階し、${2}MCを支払った",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0}が${1}上に病原獲得し、${2}MCを支払った",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0}が${1}上に${3}病原獲得し、${2}MCを支払った",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0}が${1}上から病原を除去し,TR+1段階",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0}は戦闘機を配置できるカードがないため、1:r:titanium:獲得",
+  "${0} has no science cards and gained 1 TR.": "${0}は科学リソースを配置できるカードがないため、TR+1段階.",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0}は${1}のアクションで${2}品物支払い、${2}MC獲得",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0}が${1}に1戦闘機を支払い、${2}の攻撃を防いだ."
 }

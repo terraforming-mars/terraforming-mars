@@ -71,7 +71,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
 export function tradeWithColony(card: ICard, player: IPlayer, colony: IColony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
-  player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
+  player.game.log('${0} spent ${1}:cr:data: from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
   colony.trade(player);
 }
 export class TradeWithCollegiumCopernicus implements IColonyTrader {

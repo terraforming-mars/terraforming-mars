@@ -64,7 +64,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
       const deducted = delta * 3;
       this.resourceCount -= deducted;
       player.production.add(Resource.PLANTS, delta, {log: false});
-      player.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
+      player.game.log('${0} removed ${1}:cr:data: from ${2} to increase :p:plants: ${3} steps.',
         (b) => b.player(player).number(deducted).card(this).number(delta));
     }
   }

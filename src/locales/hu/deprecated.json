@@ -29,5 +29,21 @@
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} nem rendelkezik vadászgép erőforrással és kapott 1 titánt.",
   "Player spent ${0} steel and gained ${1} heat": "A játékos elköltött ${0} acélt és szerzett ${1} hőt.",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} csökkentette az energiatermelését 1 értékkel és kapott 8 M€-tet.",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": "A(z) ${1} kártya hatása miatt ${0} növelte a M€-termelését 1 értékkel, mert ${2} ikont játszott ki."
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "A(z) ${1} kártya hatása miatt ${0} növelte a M€-termelését 1 értékkel, mert ${2} ikont játszott ki.",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} elválotított ${1} lebegőt és kapott ${2} titánt.",
+  "${0} removed 1 microbe from ${1} to gain 5 plants": "${0} eltávolított 1 mikrobát a(z) ${1} kártyáról és kapott 5 palántát.",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} eltávolított ${1} mikrobát a(z) ${2} kártyáról és kapott ${3} M€-tet.",
+  "${0} spent 1 floater to trade with ${1}": "${0} 1 lebegőt költött a(z) ${1} gyarmattal való kereskedelemre.",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0} automatikusan eltávolított 3 adatot ${1} kártyáról és húzott egy kártyát.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0} elköltött ${1} adatot a(z) ${2} kártyáról és kereskedett a(z) ${3} gyarmattal.",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} eltávolított ${1} adatot a(z) ${2} kártyáról és növelte a palántatermelését ${3} értékkel.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} lefordította a(z) ${1} kártyát, kapott 3 TR-t és elveszített ${2} M€-tet.",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0} hozzáadott 1 betegséget a(z) ${1} kártyára és elveszített ${2} M€-tet.",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} hozzáadott ${3} betegséget a(z) ${1} kártyára és elveszített ${2} M€-tet.",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} eltávolított egy betegséget a(z) ${1} kártyáról, és kapott 1 TR-t.",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} nem tudja eltávolítani a betegséget a(z) ${1} kártyáról és kapni 1 TR-t, mert nem tudja kifizetni a Vörösök politikáját.",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0} nem rendelkezik vadászgép erőforrással és kapott 1:r:titanium:-t.",
+  "${0} has no science cards and gained 1 TR.": "${0} nem rendelkezik tudomány ikonos kártyával és kapott 1 TR-t.",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} használta a(z) ${1} akciót és átkonvertált ${2} árut ${2} M€-re.",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} elköltött 1 vadászgépet ${1} támadásának kivédéséhez."
 }

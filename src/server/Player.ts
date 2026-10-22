@@ -9,7 +9,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
 import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
-import {SpendableResource, SPENDABLE_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE} from '../common/inputs/Spendable';
+import {SpendableResource, SPENDABLE_RESOURCES, SPENDABLE_CARD_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE} from '../common/inputs/Spendable';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
@@ -823,26 +823,19 @@ export class Player implements IPlayer {
       this.defer(this.spendHeat(payment.heat));
     }
 
-    const removeResourcesOnCard = (name: CardName, count: number) => {
+    for (const resource of SPENDABLE_CARD_RESOURCES) {
+      const count = payment[resource];
       if (count === 0) {
-        return;
+        continue;
       }
+      const name = CARD_FOR_SPENDABLE_RESOURCE[resource];
       const card = this.playedCards.get(name);
       if (card === undefined) {
         throw new Error('Card ' + name + ' not found');
       }
       // TODO(kberg): I suggest not logging this. Or do something fuller.
       this.removeResourceFrom(card, count, {log: true});
-    };
-
-    removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
-    removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
-    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.lunaArchivesScience);
-    removeResourcesOnCard(CardName.SPIRE, payment.spireScience);
-    removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
-    removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
-    removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
-    removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
+    }
 
     if (payment.megacredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1291,21 +1284,18 @@ export class Player implements IPlayer {
    * Returns the most you can spend if the given reserved units are excluded.
    */
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
-    return {
+    const payment: Payment = {
+      ...Payment.EMPTY,
       megacredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
       plants: this.plants - reserveUnits.plants,
       heat: this.availableHeat() - reserveUnits.heat,
-      floaters: this.getSpendable('floaters'),
-      microbes: this.getSpendable('microbes'),
-      lunaArchivesScience: this.getSpendable('lunaArchivesScience'),
-      spireScience: this.getSpendable('spireScience'),
-      seeds: this.getSpendable('seeds'),
-      auroraiData: this.getSpendable('auroraiData'),
-      graphene: this.getSpendable('graphene'),
-      kuiperAsteroids: this.getSpendable('kuiperAsteroids'),
     };
+    for (const resource of SPENDABLE_CARD_RESOURCES) {
+      payment[resource] = this.getSpendable(resource);
+    }
+    return payment;
   }
 
   public canSpend(payment: Payment, reserveUnits?: Units): boolean {

@@ -18,7 +18,7 @@ export type PlayCardMetadata = {
 };
 
 export abstract class SelectCardToPlay<T extends IProjectCard | IStandardProjectCard> extends BasePlayerInput<T> {
-  public cards: Array<T> = [];
+  public cards: ReadonlyArray<T> = [];
   public extras: Map<CardName, PlayCardMetadata>;
 
   public get enabled(): ReadonlyArray<boolean> | undefined {
@@ -27,7 +27,7 @@ export abstract class SelectCardToPlay<T extends IProjectCard | IStandardProject
 
   constructor(
     protected player: IPlayer,
-    cards: Array<T>, // = player.getPlayableCards(),
+    cards: ReadonlyArray<T>,
     public config?: {
       action?: CardAction,
       enabled?: ReadonlyArray<boolean>,

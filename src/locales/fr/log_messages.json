@@ -398,7 +398,7 @@
   "jovian": "jovien",
   "mars": "",
   "moon": "lune",
-  "Player spent ${0}:r:steel: and gained ${1}:r:heat:": "Le joueur a dépensé ${0}:r:steel: et a gagné ${1}:r:heat:",
+  "${0} spent ${1}:r:steel: and gained ${2}:r:heat:": "${0} a dépensé ${1}:r:steel: et a gagné ${2}:r:heat:",
   "${0} turned the clone tag on ${1} into a ${2} tag": "${0} a changé le badge Clone sur ${1} en un badge ${2}",
   "${0} raised the ${1} planetary track ${2} step(s)": "${0} a augmenté la piste planétaire de ${1} de ${2}",
   "Global Event ${0} raised the ${1} planetary track ${2} step(s)": "L'Évènement Global ${0} a augmenté la piste planétaire de ${1} de ${2}",
@@ -465,6 +465,6 @@
   "${0} claimed ${1}": "${0} a revendiqué ${1}",
   "${0} gained ${1}:i:tr: from ${2}": "${0} a gagné ${1}:i:tr: de ${2}",
   "For the rest of this generation, ${0} will gain ${1}, replacing ${2}": "Pour le reste de cette génération, ${0} gagnera ${1} au lieu de ${2}",
-  "${0} blackmailed ${1} and took 2:r:corruption:.": "${0} a fait chanté ${1} et récupère 2:r:corruption:",
+  "${0} blackmailed ${1} and was paid 2:r:corruption:.": "${0} a fait chanté ${1} et a été payé 2:r:corruption:.",
   "${0} sent 1 Neutral delegate in ${1} area": "${0} a envoyé 1 Délégué Neutre sur la zone ${1}"
 }

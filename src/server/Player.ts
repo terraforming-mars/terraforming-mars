@@ -1241,7 +1241,7 @@ export class Player implements IPlayer {
     }
 
     const pharmacyUnion = this.tableau.get(CardName.PHARMACY_UNION);
-    if ((pharmacyUnion?.resourceCount ?? 0 > 0) && this.tags.cardHasTag(card, Tag.SCIENCE)) {
+    if ((pharmacyUnion?.resourceCount ?? 0) > 0 && this.tags.cardHasTag(card, Tag.SCIENCE)) {
       trSource.tr = (trSource.tr ?? 0) + 1;
     }
 

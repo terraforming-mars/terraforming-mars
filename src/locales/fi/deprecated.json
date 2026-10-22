@@ -37,5 +37,7 @@
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} käytti 1 terästä ja 1 energiaa saadakseen 3 kasvia.",
   "${0} spent ${1} energy": "${0} käytti ${1} energiaa",
   "${0} has no fighter resource cards and gained 1 titanium.": "${0}:lla ei ole hävittäjäresurssikortteja ja sai 1 titaanin.",
-  "Player spent ${0} steel and gained ${1} heat": "Pelaaja käytti ${0} terästä ja sai ${1} lämpöä"
+  "Player spent ${0} steel and gained ${1} heat": "Pelaaja käytti ${0} terästä ja sai ${1} lämpöä",
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} vähensi energiatuotantoa 1 askel saadakseen 8 M€",
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} sai 1 M€ tuotantoa kortilta ${1} ympyrästä ${2}"
 }

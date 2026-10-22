@@ -17,5 +17,6 @@
   "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} wydaje ${1} M€ za ${2} posiadanych kopalni.",
   "Neutral player received ${0} M€ from ${1} owner (${2})": "Neutralny gracz otrzymuje ${0} M€ od gracza ${1} (${2})",
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} wydaje po 1 jednostce stali i energii, za co otrzymuje 3 jednostki roślinności.",
-  "${0} spent ${1} energy": "${0} wydaje ${1} jednostek energii."
+  "${0} spent ${1} energy": "${0} wydaje ${1} jednostek energii.",
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} obniża swoją produkcję energii o 1 poziom i otrzymuje 8 M€."
 }

@@ -27,5 +27,7 @@
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} elköltött 1 acélt és 1 energiát, és kapott 3 palántát.",
   "${0} spent ${1} energy": "${0} ${1} energiát költött.",
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} nem rendelkezik vadászgép erőforrással és kapott 1 titánt.",
-  "Player spent ${0} steel and gained ${1} heat": "A játékos elköltött ${0} acélt és szerzett ${1} hőt."
+  "Player spent ${0} steel and gained ${1} heat": "A játékos elköltött ${0} acélt és szerzett ${1} hőt.",
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} csökkentette az energiatermelését 1 értékkel és kapott 8 M€-tet.",
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "A(z) ${1} kártya hatása miatt ${0} növelte a M€-termelését 1 értékkel, mert ${2} ikont játszott ki."
 }

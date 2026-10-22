@@ -15,5 +15,6 @@
   "${0} placing a tile here costs ${1} M€": "${0} het kost ${1} M€ om hier een tegel te plaatsen",
   "Neutral player received ${0} M€ from ${1} owner (${2})": "De neutrale speler ontving ${0}M€ van de eigenaar van ${1} (${2})",
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} heeft 1 staal en 1 energie uitgegeven om 3 planten te krijgen.",
-  "${0} spent ${1} energy": "${0} betaalde ${1} energie"
+  "${0} spent ${1} energy": "${0} betaalde ${1} energie",
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} verminderde energieproductie 1 stap om 8 M€ te verdienen"
 }

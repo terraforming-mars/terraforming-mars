@@ -333,7 +333,7 @@
 
     "${0} found life!": "",
     "${0} gained ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 획득",
-    "${0} decreased energy production 1 step to gain 8 M€": "",
+    "${0} decreased :p:energy: 1 step to gain 8:r:mc:": "",
     "Neutral player received ${0}:r:mc: from ${1} owner (${2})": "",
     "${0} placed a Community (player marker)": "",
     "${0} doubled resources on ${1} from ${2} to ${3}": "${0} 플레이어는 ${1} 카드 위의 자원을 ${2}개에서 ${3}개로 두 배 증가시킴",
@@ -378,7 +378,7 @@
     "${0} discarded ${1} corruption and gained ${2} M€": "",
     "${0} used the ${1} action to convert ${2} wares into ${2} M€": "",
     "${1} gained ${2} M€ from the ${3} corp effect.": "",
-    "${0} gained 1 M€ production from ${1} for the ${2} tag": "",
+    "${0} gained 1:p:mc: from ${1} for the ${2} tag": "",
     "${0} gained ${1} from ${2}": "",
     "${0} gained 2 ${1} from ${2}": "${0} 플레이어는 ${2} 카드로 ${1} 2 획득",
     "${0} gained 4:r:mc: for playing ${1}, which has no tags.": "",

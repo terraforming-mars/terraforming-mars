@@ -290,7 +290,7 @@
 	"${0} gained 2 ${1} from ${2}": "${0} fikk 2 ${1} fra ${2}",
 	"${0} found life!": "${0} fant liv!",
 	"${0} gained ${1} energy": "${0} fikk ${1} energi",
-	"${0} decreased energy production 1 step to gain 8 M€": "${0} senket energiproduksjonen med 1 trinn for å få 8 M€",
+	"${0} decreased :p:energy: 1 step to gain 8:r:mc:": "${0} senket :p:energy: med 1 trinn for å få 8:r:mc:",
 	"Neutral player received ${0}:r:mc: from ${1} owner (${2})": "Nøytral spiller fikk ${0}:r:mc: fra ${1} eier (${2})",
 	"${0} placed a Community (player marker)": "${0} plasserte et fellesskap (spillermerke)",
 	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} doblet ressursene på ${1} fra ${2} til ${3}",

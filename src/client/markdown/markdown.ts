@@ -18,7 +18,7 @@ function resourceName(name: string): string {
 const MARKDOWN_ICON_KINDS: Record<string, (name: string) => ReadonlyArray<string>> = {
   expansion: (name) => [`expansion-icon expansion-icon-${name}`],
   tag: (name) => [`markdown-tag tag-${name}`],
-  icon: (name) => [`markdown-icon markdown-icon-${name}`],
+  i: (name) => [`markdown-icon markdown-icon-${name}`],
   r: (name) => [`markdown-resource resource_icon--${resourceName(name)}`],
   p: (name) => ['markdown-production', `markdown-resource resource_icon--${resourceName(name)}`],
   cr: (name) => [`markdown-resource card-resource-${name}`],
@@ -89,7 +89,7 @@ export type MarkdownOptions = {
 };
 
 /**
- * Renders translated markdown with `:icon:` shortcodes as HTML.
+ * Renders translated markdown with `:kind:name:` icon shortcodes as HTML.
  *
  * `:expansion:<name>:`, e.g. :expansion:venus: :expansion:themoon: :expansion:CE:
  *
@@ -99,7 +99,7 @@ export type MarkdownOptions = {
  * `:p:<name>:` e.g. :p:steel:, :p:plants:, :p:mc:
  * `:cr:<name>:` e.g. :cr:ware:, :cr:syndicate-fleet:
  * Other special icons:
- *  :icon:tr:
+ *  :i:tr:
  */
 export function renderMarkdown(source: string, options: MarkdownOptions = {}): string {
   // Copied because markdown-it stores parse state (e.g. references) on env.
@@ -111,7 +111,7 @@ const ICONS = /:([a-z]+):([a-zA-Z0-9-]+):/g;
 
 /**
  * Lighter alternative to renderMarkdown for text that is only icons: escapes `text` and
- * renders its `:icon:` shortcodes, but no other markdown and no translation.
+ * renders its `:kind:name:` icon shortcodes, but no other markdown and no translation.
  */
 export function renderIcons(text: string): string {
   // Escaping leaves shortcodes intact, since it never touches `:` or name characters.

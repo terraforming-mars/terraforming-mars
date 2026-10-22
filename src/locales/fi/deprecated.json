@@ -31,5 +31,11 @@
   "${0} gained 0 M€ from ${1} action.": "${0} sai 0 M€ ${1} toiminnosta.",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} sai 4 M€ pelaaessaan ${1}, jossa ei ole ympyröitä.",
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} sai 1 M€ pelaaessaan ${1}, jossa on tasan 1 ympyrä.",
-  "${0} blackmailed ${1} and was paid 10 M€.": "${0} kiristiti ${1} ja sai 10 M€."
+  "${0} blackmailed ${1} and was paid 10 M€.": "${0} kiristiti ${1} ja sai 10 M€.",
+  "${0} converted ${1} units of energy to heat": "${0} muunsi ${1} energiaresurssia lämmöksi",
+  "${0} converted ${1} units of steel to titanium.": "${0} muunsi ${1} teräsresurssia titaaniksi.",
+  "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} käytti 1 terästä ja 1 energiaa saadakseen 3 kasvia.",
+  "${0} spent ${1} energy": "${0} käytti ${1} energiaa",
+  "${0} has no fighter resource cards and gained 1 titanium.": "${0}:lla ei ole hävittäjäresurssikortteja ja sai 1 titaanin.",
+  "Player spent ${0} steel and gained ${1} heat": "Pelaaja käytti ${0} terästä ja sai ${1} lämpöä"
 }

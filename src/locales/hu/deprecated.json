@@ -21,5 +21,11 @@
   "${0} gained 0 M€ from ${1} action.": "${0} 0 M€-et kapott a(z) ${1} akció miatt.",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} kapott 4 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami ikon nélküli.",
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} kapott 1 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami csak 1 ikonnal rendelkezik.",
-  "${0} blackmailed ${1} and was paid 10 M€.": "${0} megzsarolta ${1} játékost, és kapott 10 M€-tet."
+  "${0} blackmailed ${1} and was paid 10 M€.": "${0} megzsarolta ${1} játékost, és kapott 10 M€-tet.",
+  "${0} converted ${1} units of energy to heat": "${0} átalakított ${1} energiát hővé.",
+  "${0} converted ${1} units of steel to titanium.": "${0} átalakított ${1} acélt titánná.",
+  "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} elköltött 1 acélt és 1 energiát, és kapott 3 palántát.",
+  "${0} spent ${1} energy": "${0} ${1} energiát költött.",
+  "${0} has no fighter resource cards and gained 1 titanium.": "${0} nem rendelkezik vadászgép erőforrással és kapott 1 titánt.",
+  "Player spent ${0} steel and gained ${1} heat": "A játékos elköltött ${0} acélt és szerzett ${1} hőt."
 }

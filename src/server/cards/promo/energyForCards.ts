@@ -11,7 +11,8 @@ export function spendEnergyForCards(player: IPlayer) {
   return new SelectAmount('Select amount of energy to spend', 'OK', 1, max)
     .andThen((amount) => {
       player.stock.deduct(Resource.ENERGY, amount);
-      player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
+      // TODO(kberg): Move to "${0}: -${1}:r:energy:"?
+      player.game.log('${0} spent ${1}:r:energy:', (b) => b.player(player).number(amount));
       if (amount === 1) {
         player.drawCard();
         return undefined;

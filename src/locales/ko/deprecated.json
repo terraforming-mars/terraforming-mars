@@ -21,5 +21,10 @@
   "${0} gained 0 M€ from ${1} action.": "",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "",
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "",
-  "${0} blackmailed ${1} and was paid 10 M€.": ""
+  "${0} blackmailed ${1} and was paid 10 M€.": "",
+  "${0} converted ${1} units of energy to heat": "${0} 플레이어는 에너지 자원을 열 자원으로 ${1}개만큼 변환",
+  "${0} converted ${1} units of steel to titanium.": "${0} 플레이어는 강철 자원을 티타늄 자원으로 ${1}개만큼 변환",
+  "${0} spent 1 steel and 1 energy to gain 3 plants.": "",
+  "${0} spent ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 소비",
+  "${0} has no fighter resource cards and gained 1 titanium.": ""
 }

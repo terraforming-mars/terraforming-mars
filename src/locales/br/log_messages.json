@@ -158,7 +158,7 @@
   "Spend plant": "Gastar planta",
   "Spend 1 steel to gain 7 M€": "Gastar 1 aço para ganhar 7 megacréditos",
   "Spend steel": "Gastar aço",
-  "${0} spent ${1} energy": "${0} gastou ${1} energia",
+  "${0} spent ${1}:r:energy:": "${0} gastou ${1}:r:energy:",
   "${0} gained ${1} energy": "${0} ganhou ${1} energia",
   "raise temperature 1 step": "aumentar temperatura 1 nível",
 

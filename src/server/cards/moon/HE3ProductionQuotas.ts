@@ -52,7 +52,8 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
     const heatGained = moonTiles.length * 4;
     player.stock.deduct(Resource.STEEL, steelSpent);
     player.heat += heatGained;
-    player.game.log('Player spent ${0} steel and gained ${1} heat', (b) => b.number(steelSpent).number(heatGained));
+    // TODO(kberg): Update this log. Use ${} instead of 'Player'.
+    player.game.log('Player spent ${0}:r:steel: and gained ${1}:r:heat:', (b) => b.number(steelSpent).number(heatGained));
     return undefined;
   }
 }

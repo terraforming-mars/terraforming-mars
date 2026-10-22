@@ -13,6 +13,9 @@ import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
 import {cast} from '../../../src/common/utils/utils';
+import {SelectResource} from '@/server/inputs/SelectResource';
+import {Resource} from '@/common/Resource';
+import {GeologicalSurvey} from '@/server/cards/ares/GeologicalSurvey';
 
 function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);
@@ -35,7 +38,7 @@ describe('SurveyMission', () => {
 
   beforeEach(() => {
     card = new SurveyMission();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1);
     board = EmptyBoard.newInstance();
     const availableSpaces = [
       '03', '04', '05',
@@ -155,5 +158,37 @@ describe('SurveyMission', () => {
 
     player.megaCredits = 6;
     expect(cast(card.play(player), SelectSpace).spaces).to.include(space04);
+  });
+
+  it('Compatible with Mining Guild and a standard resource bonus', () => {
+    player.playedCards.push(new MiningGuild());
+    const selectSpace = cast(card.play(player), SelectSpace);
+
+    const space = board.getSpaceOrThrow('04');
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    selectSpace.cb(space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).cb(Resource.STEEL);
+    runAllActions(game);
+
+    expect(player.steel).eq(6);
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
+  });
+
+  it('Does not trigger Geological Survey when gaining a standard resource bonus', () => {
+    [game, player] = testGame(1, {aresExtension: true});
+    game.board = board;
+    player.playedCards.push(new MiningGuild(), new GeologicalSurvey());
+    const selectSpace = cast(card.play(player), SelectSpace);
+
+    const space = board.getSpaceOrThrow('04');
+    space.bonus = [SpaceBonus.STANDARD_RESOURCE];
+    selectSpace.cb(space);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectResource).cb(Resource.STEEL);
+    runAllActions(game);
+
+    expect(player.steel).eq(6);
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
 });

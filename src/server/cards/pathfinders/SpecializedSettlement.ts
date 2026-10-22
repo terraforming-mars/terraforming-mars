@@ -38,7 +38,6 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   public bonusResource: Array<Resource> | undefined;
-  private inSpecializedSettlement: boolean = false;
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) {
@@ -78,15 +77,12 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       .andThen((space) => {
         const coveringExistingTile = space.tile !== undefined;
 
-        player.game.addCity(player, space);
+        player.game.addCity(player, space, this.name);
 
         if (coveringExistingTile) {
           return;
         }
 
-        // When selecting a standard resource, keep track of that we're resolving
-        // actions for this card.
-        this.inSpecializedSettlement = space.bonus.includes(SpaceBonus.STANDARD_RESOURCE);
         this.produceForTile(player, this.bonusResources(space));
         return undefined;
       },
@@ -94,13 +90,14 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   private gainProduction(player: IPlayer, resource: Resource) {
-    this.inSpecializedSettlement = false;
     player.production.add(resource, 1, {log: true});
     this.bonusResource = [resource];
   }
 
-  public onStandardResourcePlacementBonus(cardOwner: IPlayer, _activePlayer: IPlayer, _space: Space, resource: Resource) {
-    if (this.inSpecializedSettlement) {
+  public onStandardResourcePlacementBonus(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, resource: Resource) {
+    // A wild standard resource bonus is chosen after the city is placed, so produceForTile can't see it.
+    // The city tile carries this card's name, which limits this to its own space.
+    if (cardOwner === activePlayer && space.tile?.card === this.name) {
       this.gainProduction(cardOwner, resource);
     }
   }

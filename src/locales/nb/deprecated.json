@@ -43,5 +43,6 @@
   "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} la til ${3} sykdommer på ${1} og mistet ${2} M€",
   "${0} removed a disease from ${1} to gain 1 TR": "${0} fjernet en sykdom fra ${1} for å få 1 TR",
   "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan ikke fjerne en sykdom fra ${1} for å få 1 TR fordi de kan ikke betale for De Rødes politikk",
-  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} fjernet ${1} mikrober fra ${2} for å få ${3} M€"
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} fjernet ${1} mikrober fra ${2} for å få ${3} M€",
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} brukte 1 korrupsjon for å blokkere et angrep fra ${1}"
 }

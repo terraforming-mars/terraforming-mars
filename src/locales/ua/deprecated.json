@@ -57,5 +57,10 @@
   "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0} не має карт ресурсів бійця і отримав 1:r:titanium:.",
   "${0} has no science cards and gained 1 TR.": "${0} не має карт науки і отримав 1 РТ.",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} використав дію ${1}, щоб перетворити ${2} товари в ${2} M€",
-  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} витратив 1 бійця на ${1}, щоб заблокувати атаку від ${2}"
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} витратив 1 бійця на ${1}, щоб заблокувати атаку від ${2}",
+  "${0} gained ${1} corruption": "${0} отримав(ла) ${1} корупції",
+  "${0} spent ${1} corruption": "${0} витратив(ла) ${1} корупції",
+  "${0} discarded ${1} corruption and gained ${2} M€": "${0} викинув ${1} корупцію і отримав ${2} M€",
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} витратив 1 корупцію, щоб заблокувати атаку від ${1}",
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} шантажував(ла) ${1} та взяв(ла) 2 корупції."
 }

@@ -44,5 +44,9 @@
   "${0} has no fighter resource cards and gained 1:r:titanium:.": "",
   "${0} has no science cards and gained 1 TR.": "",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "",
-  "${0} spent 1 fighter on ${1} to block an attack by ${2}": ""
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "",
+  "${0} gained ${1} corruption": "${0} 플레이어는 corruption 자원 ${1}개 획득",
+  "${0} spent ${1} corruption": "${0} 플레이어는 corruption 자원 ${1}개 소비",
+  "${0} discarded ${1} corruption and gained ${2} M€": "",
+  "${0} spent 1 corruption to block an attack by ${1}": ""
 }

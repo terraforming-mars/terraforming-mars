@@ -68,7 +68,7 @@ export class AnubisSecurities extends CorporationCard implements ICorporationCar
     const money = corruption * 6;
     player.stock.add(Resource.MEGACREDITS, money);
     player.underworldData.corruption = 0;
-    player.game.log('${0} discarded ${1} corruption and gained ${2} M€', (b) => {
+    player.game.log('${0} discarded ${1}:r:corruption: and gained ${2}:r:mc:', (b) => {
       b.player(player).number(corruption).number(money);
     });
   }

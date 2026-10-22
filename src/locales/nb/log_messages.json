@@ -335,7 +335,7 @@
 	"jovian": "Jupiter",
 	"mars": "",
 	"moon": "Månen",
-	"${0} spent 1 corruption to block an attack by ${1}": "${0} brukte 1 korrupsjon for å blokkere et angrep fra ${1}",
+	"${0} spent 1:r:corruption: to block an attack by ${1}": "${0} brukte 1:r:corruption: for å blokkere et angrep fra ${1}",
 	"${0} turned the clone tag on ${1} into a ${2} tag": "${0} endret klone-merket på ${1} til et ${2}-merke",
 	"${0} raised the ${1} planetary track ${2} step(s)": "${0} økte ${1}-planetsporet med ${2} trinn",
 	"Global Event ${0} raised the ${1} planetary track ${2} step(s)": "Global hendelse ${0} økte ${1}-planetsporet med ${2} trinn",

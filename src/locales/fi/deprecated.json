@@ -55,5 +55,10 @@
   "${0} has no science cards and gained 1 TR.": "${0}:lla ei ole tiedekortteja ja hän nosti MKL:äänsä 1 askeleen.",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} käytti toimintoa ${1} muuntaakseen ${2} tavaraa ${2} M€:ksi",
   "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} käytti 1 hävittäjän kortilta ${1} estääkseen ${2}:n hyökkäyksen",
-  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} poisti ${1} mikrobia kortilta ${2} saadakseen ${3} M€"
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} poisti ${1} mikrobia kortilta ${2} saadakseen ${3} M€",
+  "${0} gained ${1} corruption": "${0} sai ${1} korruptiota",
+  "${0} spent ${1} corruption": "${0} käytti ${1} korruptiota",
+  "${0} discarded ${1} corruption and gained ${2} M€": "${0} heitti pois ${1} korruption ja sai ${2} M€",
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} käytti 1 korruption estääkseen ${1}:n hyökkäyksen",
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} kiristiti ${1} ja otti 2 korruptiota."
 }

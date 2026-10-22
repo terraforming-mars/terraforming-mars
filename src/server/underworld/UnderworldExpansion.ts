@@ -481,7 +481,7 @@ export class UnderworldExpansion {
           .andThen(() => {
             target.underworldData.corruption--;
             target.game.log(
-              '${0} spent 1 corruption to block an attack by ${1}',
+              '${0} spent 1:r:corruption: to block an attack by ${1}',
               (b) => b.player(target).player(perpetrator));
             return cb(false);
           }),
@@ -499,14 +499,14 @@ export class UnderworldExpansion {
   public static gainCorruption(player: IPlayer, count: number, options?: {log: boolean}) {
     player.underworldData.corruption += count;
     if (options?.log === true) {
-      player.game.log('${0} gained ${1} corruption', (b) => b.player(player).number(count));
+      player.game.log('${0} gained ${1}:r:corruption:', (b) => b.player(player).number(count));
     }
   }
 
   public static loseCorruption(player: IPlayer, count: number, options?: {log: boolean}) {
     player.underworldData.corruption -= count;
     if (options?.log === true) {
-      player.game.log('${0} spent ${1} corruption', (b) => b.player(player).number(count));
+      player.game.log('${0} spent ${1}:r:corruption:', (b) => b.player(player).number(count));
     }
   }
 

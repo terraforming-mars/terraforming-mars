@@ -45,5 +45,9 @@
   "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0} nem rendelkezik vadászgép erőforrással és kapott 1:r:titanium:-t.",
   "${0} has no science cards and gained 1 TR.": "${0} nem rendelkezik tudomány ikonos kártyával és kapott 1 TR-t.",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} használta a(z) ${1} akciót és átkonvertált ${2} árut ${2} M€-re.",
-  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} elköltött 1 vadászgépet ${1} támadásának kivédéséhez."
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} elköltött 1 vadászgépet ${1} támadásának kivédéséhez.",
+  "${0} gained ${1} corruption": "${0} kapott ${1} korrupciót.",
+  "${0} spent ${1} corruption": "${0} elköltött ${1} korrupciót.",
+  "${0} discarded ${1} corruption and gained ${2} M€": "${0} elhajított ${1} korrupciót és kapott ${2} M€-tet.",
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} elköltött 1 korrupciót ${1} támadásának kivédéséhez."
 }

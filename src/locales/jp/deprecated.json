@@ -41,5 +41,9 @@
   "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0}は戦闘機を配置できるカードがないため、1:r:titanium:獲得",
   "${0} has no science cards and gained 1 TR.": "${0}は科学リソースを配置できるカードがないため、TR+1段階.",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0}は${1}のアクションで${2}品物支払い、${2}MC獲得",
-  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0}が${1}に1戦闘機を支払い、${2}の攻撃を防いだ."
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0}が${1}に1戦闘機を支払い、${2}の攻撃を防いだ.",
+  "${0} gained ${1} corruption": "${0}が${1}汚職獲得",
+  "${0} spent ${1} corruption": "${0}が${1}汚職支払った",
+  "${0} discarded ${1} corruption and gained ${2} M€": "${0}は${1}汚職支払い、${2}MC獲得",
+  "${0} spent 1 corruption to block an attack by ${1}": "${0}が1汚職を支払い、${1}の攻撃を防いだ."
 }

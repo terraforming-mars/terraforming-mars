@@ -175,7 +175,7 @@
   "${0} gained 2 ${1} from ${2}": "${0} otrzymuje 2 ${1} dzięki ${2}",
   "${0} found life!": "${0} odnajduje życie na Marsie!",
   "${0} gained ${1} energy": "${0} otrzymuje ${1} jednostek energii.",
-  "${0} decreased energy production 1 step to gain 8 M€": "${0} obniża swoją produkcję energii o 1 poziom i otrzymuje 8 M€.",
+  "${0} decreased :p:energy: 1 step to gain 8:r:mc:": "${0} obniża :p:energy: o 1 poziom i otrzymuje 8:r:mc:.",
   "Neutral player received ${0}:r:mc: from ${1} owner (${2})": "Neutralny gracz otrzymuje ${0}:r:mc: od gracza ${1} (${2})",
   "${0} placed a Community (player marker)": "${0} umieszcza na planszy znacznik społeczności (znacznik gracza)",
   "${0} doubled resources on ${1} from ${2} to ${3}": "${0} podwaja liczbę zasobów na karcie ${1} (z ${2} na ${3})",

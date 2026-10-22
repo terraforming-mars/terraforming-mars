@@ -37,5 +37,7 @@
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} a dépensé 1 acier et 1 énergie pour gagner 3 plantes.",
   "${0} spent ${1} energy": "${0} a depensé ${1} énergie(s)",
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} n'a pas de carte à ressource combattant et gagne 1 titane.",
-  "Player spent ${0} steel and gained ${1} heat": "Le joueur a dépensé ${0} acier(s) et a gagné ${1} chaleur(s)"
+  "Player spent ${0} steel and gained ${1} heat": "Le joueur a dépensé ${0} acier(s) et a gagné ${1} chaleur(s)",
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} a diminué sa production d'énergie de 1 pour gagner 8 M€",
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} a gagné une production de M€ de 1 grâce à ${1} pour le badge ${2}"
 }

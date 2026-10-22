@@ -250,7 +250,7 @@
     "${0} gained 2 ${1} from ${2}": "${0} kreeg 2 ${1} van ${2}",
     "${0} found life!": "${0} heeft leven gevonden!",
     "${0} gained ${1} energy": "${0} kreeg ${1} energie",
-    "${0} decreased energy production 1 step to gain 8 M€": "${0} verminderde energieproductie 1 stap om 8 M€ te verdienen",
+    "${0} decreased :p:energy: 1 step to gain 8:r:mc:": "${0} verminderde :p:energy: 1 stap om 8:r:mc: te verdienen",
     "Neutral player received ${0}:r:mc: from ${1} owner (${2})": "De neutrale speler ontving ${0}:r:mc: van de eigenaar van ${1} (${2})",
     "${0} placed a Community (player marker)": "${0} heeft een community geplaatst (speler-marker)",
     "${0} doubled resources on ${1} from ${2} to ${3}": "${0} verdubbelde grondstoffen op ${1} van ${2} naar ${3}",

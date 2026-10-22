@@ -48,7 +48,7 @@ export class EnergyMarket extends Card implements IProjectCard {
   private getMegacreditsOption(player: IPlayer) {
     player.production.add(Resource.ENERGY, -1);
     player.stock.add(Resource.MEGACREDITS, 8);
-    player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
+    player.game.log('${0} decreased :p:energy: 1 step to gain 8:r:mc:', (b) => b.player(player));
     return undefined;
   }
 

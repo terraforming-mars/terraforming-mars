@@ -346,7 +346,7 @@
   "Commercial District tile": "tile",
   "Gain 2 titanium": "Ganhar 2 titânios",
   "Increase M€ production 1 step": "Aumentar produção de megacréditos 1 nível",
-  "${0} decreased energy production 1 step to gain 8 M€": "${0} diminuir produção de energia 1 nível para ganhar 8 M€",
+  "${0} decreased :p:energy: 1 step to gain 8:r:mc:": "${0} diminuir :p:energy: 1 nível para ganhar 8:r:mc:",
   "${0} flipped and discarded ${1}": "${0} virou e descartou ${1}",
   "Remove resource": "Remover recurso",
   "Remove a science resource from this card to draw a card": "Remover um recurso de ciência desta carta para comprar uma carta",

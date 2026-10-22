@@ -26,5 +26,7 @@
   "${0} converted ${1} units of steel to titanium.": "${0} 플레이어는 강철 자원을 티타늄 자원으로 ${1}개만큼 변환",
   "${0} spent 1 steel and 1 energy to gain 3 plants.": "",
   "${0} spent ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 소비",
-  "${0} has no fighter resource cards and gained 1 titanium.": ""
+  "${0} has no fighter resource cards and gained 1 titanium.": "",
+  "${0} decreased energy production 1 step to gain 8 M€": "",
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": ""
 }

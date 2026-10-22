@@ -49,13 +49,13 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
     if (count === 0) {
       player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 4}))
         .andThen(() => {
-          player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
+          player.game.log('${0} gained 4:r:mc: for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
         });
     }
     if (count === 1) {
       player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 1}))
         .andThen(() => {
-          player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
+          player.game.log('${0} gained 1:r:mc: for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
         });
     }
   }

@@ -7,5 +7,19 @@
   "${0} spent ${1} titanium to trade with ${2}": "${0} ${1} titánt költött ${2} gyarmattal való kereskedelemre.",
   "${0} sold ${1} steel": "${0} eladott ${1} acélt.",
   "${0} removed ${1} ${2} from ${3} to ${4}": "${0} eltávolított ${1} ${2} a(z) ${3} kártyáról ${4}.",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} eltávolított ${1} erőforrást a(z) ${3} kártyáról."
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} eltávolított ${1} erőforrást a(z) ${3} kártyáról.",
+  "${0} fizzled. ${1} gains 15 M€.": "${0} elfogyott. ${1} kap 15 M€-et.",
+  "${0} gained ${1} M€ by discarding ${2} cards": "${0} eldobott ${2} kártyát, ezért kapott ${1} M€-tet.",
+  "${0} received ${1} M€ from ${2} owner (${3})": "${0} ${1} M€-tet kapott ${2} tulajdonostól (${3}).",
+  "${0} spent ${1} M€ to trade with ${2}": "${0} ${1} M€-tet költött ${2} gyarmattal való kereskedelemre.",
+  "Cards played by ${0} cost 1 M€ less this generation": "Ebben a generációban a ${0} kártyái 1 M€-tel kevesebb kerülnek.",
+  "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} szerzett ${1} M€-tet, mert lehelyezett ${2} mellé egy lapkát.",
+  "${0} placing a tile here costs ${1} M€": "${0} a lapka lehelyezése ide ${1} M€-be kerül.",
+  "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} elköltött ${1} M€-tet a(z) ${2} élőhely lapkái után.",
+  "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} elköltött ${1} M€-tet a(z) ${2} bányászlapkái után.",
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "Semleges játékos szerzett ${0} M€-tet ${1}-tól, tulajdonos (${2}).",
+  "${0} gained 0 M€ from ${1} action.": "${0} 0 M€-et kapott a(z) ${1} akció miatt.",
+  "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} kapott 4 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami ikon nélküli.",
+  "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} kapott 1 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami csak 1 ikonnal rendelkezik.",
+  "${0} blackmailed ${1} and was paid 10 M€.": "${0} megzsarolta ${1} játékost, és kapott 10 M€-tet."
 }

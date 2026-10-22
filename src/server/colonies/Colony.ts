@@ -248,7 +248,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.GAIN_CARD_DISCOUNT:
       player.colonies.cardDiscount += 1;
-      game.log('Cards played by ${0} cost 1 M€ less this generation', (b) => b.player(player));
+      game.log('Cards played by ${0} cost 1:r:mc: less this generation', (b) => b.player(player));
       return undefined;
 
     case ColonyBenefit.GAIN_PRODUCTION:

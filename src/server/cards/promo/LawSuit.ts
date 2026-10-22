@@ -44,7 +44,7 @@ export class LawSuit extends Card implements IProjectCard {
       .andThen((suedPlayer: IPlayer) => {
         const amount = Math.min(3, suedPlayer.megaCredits);
         if (amount === 0) {
-          player.game.log('${0} sued ${1} who had 0 MC.', (b) => b.player(player).player(suedPlayer));
+          player.game.log('${0} sued ${1} who had 0:r:mc:.', (b) => b.player(player).player(suedPlayer));
         }
         suedPlayer.playedCards.push(this);
         player.warmongerCards++;

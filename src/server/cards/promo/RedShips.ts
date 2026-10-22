@@ -42,7 +42,7 @@ export class RedShips extends Card implements IActionCard {
 
     const megacredits = included.length;
     if (megacredits === 0) {
-      player.game.log('${0} gained 0 M€ from ${1} action.', (b) => b.player(player).card(this));
+      player.game.log('${0} gained 0:r:mc: from ${1} action.', (b) => b.player(player).card(this));
     }
     player.stock.add(Resource.MEGACREDITS, megacredits, {log: true});
 

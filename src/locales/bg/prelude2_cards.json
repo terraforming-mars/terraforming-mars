@@ -42,7 +42,7 @@
   "${0} cannot afford to use the ${1} effect": "${0} няма достатъчно средства, за да използва ефекта на ${1}",
   "Red Ships": "Червени кораби",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Действие: Получете 1 M€ за всеки ГРАД И СПЕЦИАЛЕН ТАЙЛ до океана.",
-  "${0} gained 0 M€ from ${1} action.": "${0} спечели 0 M€ от действието на ${1}.",
+  "${0} gained 0:r:mc: from ${1} action.": "${0} спечели 0:r:mc: от действието на ${1}.",
   "Directed Heat Usage": "Насочено използване на топлина",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Действие: Потребете 3 топлина, за да спечелите или 4 M€, или 2 растения.",
   "Solar Logistics": "Слънчева логистика",

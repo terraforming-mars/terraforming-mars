@@ -7,5 +7,11 @@
   "${0} spent ${1} titanium to trade with ${2}": "${0} betaalde ${1} titanium om te handelen met ${2}",
   "${0} sold ${1} steel": "${0} verkocht ${1} staal",
   "${0} removed ${1} ${2} from ${3} to ${4}": "${0} verwijderde ${1} ${2} van ${3} voor effect ${4}",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} verwijderde ${1} grondstof(fen) van ${2} (${3})"
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} verwijderde ${1} grondstof(fen) van ${2} (${3})",
+  "${0} received ${1} M€ from ${2} owner (${3})": "${0} ontving ${1} M€ van ${2} (${3})",
+  "${0} spent ${1} M€ to trade with ${2}": "${0} betaalde ${1} M€ om te handelen met ${2}",
+  "Cards played by ${0} cost 1 M€ less this generation": "Kaarten gespeeld door ${0} kosten deze generatie 1 M€ minder",
+  "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} ontving ${1} M€ door een tegel naast ${2} te plaatsen",
+  "${0} placing a tile here costs ${1} M€": "${0} het kost ${1} M€ om hier een tegel te plaatsen",
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "De neutrale speler ontving ${0}M€ van de eigenaar van ${1} (${2})"
 }

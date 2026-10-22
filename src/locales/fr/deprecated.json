@@ -17,5 +17,19 @@
   "${0} lost ${1} ${2} because of ${3}": "${0} a perdu ${1} ${2} à cause de ${3}",
   "${3} stole ${1} ${2} production from ${0}": "${3} a volé ${1} de production de ${2} à ${0}",
   "${0} removed a resource from ${1} to draw a card": "${0} a retiré une ressource de ${1} pour pioché une carte",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} a retiré ${1} ressource(s) de ${3} de ${2}"
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} a retiré ${1} ressource(s) de ${3} de ${2}",
+  "${0} fizzled. ${1} gains 15 M€.": "",
+  "${0} gained ${1} M€ by discarding ${2} cards": "${0} a gagné ${1} M€ en défaussant ${2} cartes",
+  "${0} received ${1} M€ from ${2} owner (${3})": "${0} a reçu ${1} M€ de ${2} (appartenant à ${3})",
+  "${0} spent ${1} M€ to trade with ${2}": "${0} a commercé avec ${2}",
+  "Cards played by ${0} cost 1 M€ less this generation": "Les cartes jouées par ${0} coûtent 1 M€ de moins à cette génération",
+  "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} gagne ${1} M€ pour s'être placé à côté de ${2}",
+  "${0} placing a tile here costs ${1} M€": "${0} placer une tuile ici coûte ${1} M€",
+  "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} a depensé ${1} M€ pour les ${2} tuiles habitats qu'il/elle possède",
+  "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} a depensé ${1} M€ pour les ${2} tuiles extraction qu'il/elle possède",
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "Le joueur neutre a reçu ${0} M€ du propriétaire ${1} (${2})",
+  "${0} gained 0 M€ from ${1} action.": "${0} a gagné 0 M€ de l'action ${1}.",
+  "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} a gagné 4 M€ pour avoir joué ${1}, qui n'a pas de badge.",
+  "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} a gagné 1 M€ pour avoir joué ${1}, qui a exactement 1 badge.",
+  "${0} blackmailed ${1} and was paid 10 M€.": "${0} a fait chanté ${1} et a été payé 10 M€."
 }

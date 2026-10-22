@@ -125,7 +125,7 @@ export class AresHandler {
       }
 
       adjacentPlayer.megaCredits += ownerBonus;
-      player.game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
+      player.game.log('${0} gains ${1}:r:mc: for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
     }
   }
 
@@ -252,7 +252,7 @@ export class AresHandler {
       player.game.defer(new SelectProductionToLoseDeferred(player, steps, title, cost.production.severe, warning));
     }
     if (cost.megacredits > 0) {
-      player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
+      player.game.log('${0} placing a tile here costs ${1}:r:mc:', (b) => b.player(player).number(cost.megacredits));
       player.game.defer(new SelectPaymentDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }

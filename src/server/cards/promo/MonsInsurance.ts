@@ -54,13 +54,13 @@ export class MonsInsurance extends CorporationCard implements ICorporationCard {
       player.stock.deduct(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {
-          player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
+          player.game.log('${0} received ${1}:r:mc: from ${2} owner (${3})', (b) =>
             b.player(claimant)
               .number(retribution)
               .cardName(CardName.MONS_INSURANCE)
               .player(player));
         } else {
-          player.game.log('Neutral player received ${0} M€ from ${1} owner (${2})', (b) =>
+          player.game.log('Neutral player received ${0}:r:mc: from ${1} owner (${2})', (b) =>
             b.number(retribution)
               .cardName(CardName.MONS_INSURANCE)
               .player(player));

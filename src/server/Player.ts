@@ -963,18 +963,7 @@ export class Player implements IPlayer {
   }
 
   public playActionCard(): PlayerInput {
-    return new SelectCard<ICard & IActionCard>(
-      'Perform an action from a played card',
-      'Take action',
-      this.getPlayableActionCards(),
-      {selectBlueCardAction: true})
-      .andThen(([card]) => {
-        this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
-        const action = card.action(this);
-        this.defer(action);
-        this.actionsThisGeneration.add(card.name);
-        return undefined;
-      });
+    return this.selectCardAction('Perform an action from a played card', this.getPlayableActionCards());
   }
 
   private getPlayCeoOPGAction(): PlayerInput | undefined {
@@ -982,8 +971,12 @@ export class Player implements IPlayer {
     if (cards.length === 0) {
       return undefined;
     }
-    return new SelectCard<ICeoCard & IActionCard>(
-      'Use CEO once per game action',
+    return this.selectCardAction('Use CEO once per game action', cards);
+  }
+
+  private selectCardAction(title: string, cards: Array<ICard & IActionCard>): PlayerInput {
+    return new SelectCard<ICard & IActionCard>(
+      title,
       'Take action',
       cards,
       {selectBlueCardAction: true})

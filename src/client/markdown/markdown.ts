@@ -1,6 +1,15 @@
 import MarkdownIt from 'markdown-it';
 import {translateText} from '@/client/directives/i18n';
 
+/** Shorthand names for standard resources, e.g. `:r:mc:`. */
+const RESOURCE_ALIASES: Record<string, string> = {
+  mc: 'megacredits',
+};
+
+function resourceName(name: string): string {
+  return Object.hasOwn(RESOURCE_ALIASES, name) ? RESOURCE_ALIASES[name] : name;
+}
+
 /**
  * Icon kinds available to markdown as `:kind:name:` shortcodes, e.g. `:expansion:venus:`.
  * Each kind maps a name to the CSS classes of nested spans, outermost first. Unknown kinds
@@ -10,8 +19,8 @@ const MARKDOWN_ICON_KINDS: Record<string, (name: string) => ReadonlyArray<string
   expansion: (name) => [`expansion-icon expansion-icon-${name}`],
   tag: (name) => [`markdown-tag tag-${name}`],
   icon: (name) => [`markdown-icon markdown-icon-${name}`],
-  r: (name) => [`markdown-resource resource_icon--${name}`],
-  p: (name) => ['markdown-production', `markdown-resource resource_icon--${name}`],
+  r: (name) => [`markdown-resource resource_icon--${resourceName(name)}`],
+  p: (name) => ['markdown-production', `markdown-resource resource_icon--${resourceName(name)}`],
   cr: (name) => [`markdown-resource card-resource-${name}`],
 };
 
@@ -86,8 +95,8 @@ export type MarkdownOptions = {
  *
  * `:tag:<name>:`, e.g. :tag:building:  :tag:space:  :tag:mars:
  *
- * `:r:<name>:` e.g. :r:steel:, :r:megacredits:
- * `:p:<name>:` e.g. :p:steel:, :p:plants:
+ * `:r:<name>:` e.g. :r:steel:, :r:mc: (short for :r:megacredits:)
+ * `:p:<name>:` e.g. :p:steel:, :p:plants:, :p:mc:
  * `:cr:<name>:` e.g. :cr:ware:, :cr:syndicate-fleet:
  * Other special icons:
  *  :icon:tr:

@@ -1183,7 +1183,7 @@ describe('Executor', () => {
     // 8 was asked for but only 2 was there, and the energy production line is absent
     // entirely because nothing changed.
     expect(game.gameLog.map(formatMessage)).deep.eq([
-      'blue lost 2:r:megacredits: because of Asteroid Mining',
+      'blue lost 2:r:mc: because of Asteroid Mining',
     ]);
   });
 
@@ -1194,7 +1194,7 @@ describe('Executor', () => {
     executor.execute({stock: {steel: 2}, production: {megacredits: 1}}, player, globalEvent);
 
     expect(game.gameLog.map(formatMessage)).deep.eq([
-      'blue gained 1:p:megacredits: because of Asteroid Mining',
+      'blue gained 1:p:mc: because of Asteroid Mining',
       'blue gained 2:r:steel: because of Asteroid Mining',
     ]);
   });
@@ -1204,7 +1204,7 @@ describe('Executor', () => {
     executor.execute({stock: {steel: 2}, production: {megacredits: 1}}, player, fake);
 
     expect(game.gameLog.map(formatMessage)).deep.eq([
-      'blue gained 1:p:megacredits:',
+      'blue gained 1:p:mc:',
       'blue gained 2:r:steel:',
     ]);
   });

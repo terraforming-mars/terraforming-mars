@@ -244,7 +244,7 @@ export class TradeWithMegacredits implements IColonyTrader {
     this.player.game.defer(new SelectPaymentDeferred(this.player, this.tradeCost,
       {title: message('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost))}))
       .andThen(() => {
-        this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
+        this.player.game.log('${0} spent ${1}:r:mc: to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
         colony.trade(this.player);
       });
   }

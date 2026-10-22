@@ -17,5 +17,19 @@
   "${0} removed a resource from ${1} to draw a card": "${0} poisti resurssin kortilta ${1} nostaakseen kortin.",
   "${0} sold ${1} steel": "${0} myi ${1} terästä",
   "${0} removed ${1} ${2} from ${3} to ${4}": "${0} poisti ${1} ${2} kortilta ${3} ${4}",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} poisti ${1} resurssia pelaajan ${2} kortilta ${3}"
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} poisti ${1} resurssia pelaajan ${2} kortilta ${3}",
+  "${0} fizzled. ${1} gains 15 M€.": "${0} epäonnistui. ${1} saa 15 M€.",
+  "${0} gained ${1} M€ by discarding ${2} cards": "${0} sai ${1} M€ heittämällä pois ${2} korttia",
+  "${0} received ${1} M€ from ${2} owner (${3})": "${0} sai ${1} M€ kohteen ${2} omistajalta (${3})",
+  "${0} spent ${1} M€ to trade with ${2}": "${0} käytti ${1} M€ käydäkseen kauppaa ${2} kanssa",
+  "Cards played by ${0} cost 1 M€ less this generation": "Pelaajan ${0} pelamat kortit maksavat 1 M€ vähemmän tässä sukupolvessa",
+  "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} saa ${1} M€ laatan asettamisesta ${2} viereen",
+  "${0} placing a tile here costs ${1} M€": "${0} laatan asettaminen tähän maksaa ${1} M€",
+  "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} maksaa ${1} M€ omistamiensa ${2} habitaattilaatojen vuoksi.",
+  "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} maksaa ${1} M€ omistamiensa ${2} kaivoslaatojen vuoksi.",
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "Neutraali pelaaja sai ${0} M€ kohteen ${1} omistajalta (${2})",
+  "${0} gained 0 M€ from ${1} action.": "${0} sai 0 M€ ${1} toiminnosta.",
+  "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} sai 4 M€ pelaaessaan ${1}, jossa ei ole ympyröitä.",
+  "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} sai 1 M€ pelaaessaan ${1}, jossa on tasan 1 ympyrä.",
+  "${0} blackmailed ${1} and was paid 10 M€.": "${0} kiristiti ${1} ja sai 10 M€."
 }

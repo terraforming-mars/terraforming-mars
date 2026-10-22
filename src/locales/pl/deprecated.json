@@ -7,5 +7,13 @@
   "${0} gained ${1} ${2}": "${0} otrzymuje ${1} ${2}",
   "${0} sold ${1} steel": "${0} sprzedaje ${1} jednostek stali",
   "${0} removed ${1} ${2} from ${3} to ${4}": "${0} usuwa ${1} jednostek ${2} z ${3} ze względu na efekt ${4}",
-  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} usuwa ${2} jednostek z karty ${3} gracza ${2}"
+  "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} usuwa ${2} jednostek z karty ${3} gracza ${2}",
+  "${0} received ${1} M€ from ${2} owner (${3})": "${0} otrzymuje ${1} M€ od ${2} właściciela (${3})",
+  "${0} spent ${1} M€ to trade with ${2}": "${0} wydaje ${1} M€ aby wykonać akcję handlu z ${2}",
+  "Cards played by ${0} cost 1 M€ less this generation": "Karty zagrywane przez ${0} kosztują o 1 M€ mniej w tym pokoleniu.",
+  "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} otrzymuje ${1} M€ za umieszczenie obszaru w sąsiedztwie ${2}",
+  "${0} placing a tile here costs ${1} M€": "${0} umieszczenie obszaru na tym polu kosztuje dodatkowe ${1} M€.",
+  "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} wydaje ${1} M€ za ${2} posiadanych kolonii.",
+  "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} wydaje ${1} M€ za ${2} posiadanych kopalni.",
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "Neutralny gracz otrzymuje ${0} M€ od gracza ${1} (${2})"
 }

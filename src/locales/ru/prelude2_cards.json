@@ -45,7 +45,7 @@
     "${0} cannot afford to use the ${1} effect": "${0} нечем платить за использование эффекта карты ${1}",
     "Red Ships": "Красные корабли",
     "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Действие: Получите 1 M€ за каждый город и специальный тайл по соседству с океаном",
-    "${0} gained 0 M€ from ${1} action.": "${0} НЕ получил M€ с действия на ${1}",
+    "${0} gained 0:r:mc: from ${1} action.": "${0} НЕ получил :r:mc: с действия на ${1}",
     "Directed Heat Usage": "Управление теплом",
     "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Действие: Потратьте 3 единицы тепла, чтобы получить 4 M€ или 2 растения",
     "Solar Logistics": "Солнечная логистика",

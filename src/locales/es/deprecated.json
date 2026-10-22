@@ -1,3 +1,4 @@
 {
-  "${0} added ${1} ${2} to ${3}":"${0} ha añadido ${1} ${2} a ${3}"
+  "${0} added ${1} ${2} to ${3}":"${0} ha añadido ${1} ${2} a ${3}",
+  "${0} received ${1} M€ from ${2} owner (${3})":"${0} ha recibido ${1} М€ de ${2} (${3})"
 }

@@ -55,7 +55,7 @@ export class CeresTechMarket extends Card implements IActionCard {
         cards.forEach((card) => player.discardCardFromHand(card));
         const megacredits = cards.length * 2;
         player.megaCredits += megacredits;
-        player.game.log('${0} gained ${1} M€ by discarding ${2} cards', (b) => b.player(player).number(megacredits).number(cards.length));
+        player.game.log('${0} gained ${1}:r:mc: by discarding ${2} cards', (b) => b.player(player).number(megacredits).number(cards.length));
         return undefined;
       });
   }

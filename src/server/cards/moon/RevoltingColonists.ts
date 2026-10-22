@@ -49,7 +49,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
                 title: message('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))}))
                 .andThen(() =>
                   game.log(
-                    '${0} spends ${1} M€ for the ${2} habitat tiles they own.',
+                    '${0} spends ${1}:r:mc: for the ${2} habitat tiles they own.',
                     (b) => b.player(target).number(owes).number(owned)));
             }
             return undefined;

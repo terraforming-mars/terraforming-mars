@@ -854,6 +854,7 @@ describe('Game', () => {
       'doubleDownPrelude',
       'max',
       'globalParameterTracks',
+      'standardProjects',
     ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',

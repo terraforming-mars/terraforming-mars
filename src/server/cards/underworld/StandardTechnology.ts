@@ -40,7 +40,7 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
   private getStandardProjects(player: IPlayer) {
     this.discount = true;
     try {
-      return player.game.getStandardProjects()
+      return player.game.standardProjects
         .filter((card) => this.includeThisStandardProject(player, card.name))
         .filter((card) => card.canAct(player));
     } finally {

@@ -251,10 +251,7 @@ export interface IGame extends Logger {
    * Returns the Player holding this card, or returns undefined.
    */
   getCardPlayerOrUndefined(name: CardName): IPlayer | undefined;
-  /**
-   * Returns the list of standard project cards used in this game, sorted by cost.
-   */
-  getStandardProjects(): ReadonlyArray<IStandardProjectCard>;
+  standardProjects: ReadonlyArray<IStandardProjectCard>;
 
   log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;

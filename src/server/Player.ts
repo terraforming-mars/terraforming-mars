@@ -1403,13 +1403,11 @@ export class Player implements IPlayer {
   }
 
   public getStandardProjectOption(): SelectStandardProjectToPlay {
-    const standardProjects = this.game.getStandardProjects();
-
     return new SelectStandardProjectToPlay(
       this,
-      standardProjects,
+      this.game.standardProjects,
       {
-        enabled: standardProjects.map((card) => card.canAct(this)),
+        enabled: this.game.standardProjects.map((card) => card.canAct(this)),
         title: 'Standard projects',
         buttonLabel: 'Confirm',
       });

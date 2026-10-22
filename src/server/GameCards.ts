@@ -35,8 +35,7 @@ import {UNDERWORLD_CARD_MANIFEST} from './cards/underworld/UnderworldCardManifes
  * Therefore, this is only used when constructing a brand new instance.
  *
  * ... and one other place. When trying to determine the available standard
- * projects for a game. This is just done on the fly all the time, rather
- * that store them. (We should fix that.)
+ * projects for a game.
  */
 export class GameCards {
   private readonly gameOptions: GameOptions;

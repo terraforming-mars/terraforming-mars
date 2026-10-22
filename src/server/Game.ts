@@ -194,6 +194,7 @@ export class Game implements IGame, Logger {
 
   public underworldDraftEnabled = true;
   public readonly globalParameterTracks: GlobalParameterTracks;
+  public readonly standardProjects: ReadonlyArray<IStandardProjectCard>;
 
   private constructor(
     id: GameId,
@@ -250,6 +251,7 @@ export class Game implements IGame, Logger {
 
     this.tags = tags;
     this.globalParameterTracks = getGlobalParameterTracks(gameOptions.boardName);
+    this.standardProjects = this.computeStandardProjects();
   }
 
   private setFirstPlayer(first: IPlayer) {
@@ -1630,7 +1632,7 @@ export class Game implements IGame, Logger {
     }
   }
 
-  public getStandardProjects(): ReadonlyArray<IStandardProjectCard> {
+  private computeStandardProjects(): Array<IStandardProjectCard> {
     const gameOptions = this.gameOptions;
     return new GameCards(gameOptions)
       .getStandardProjects()

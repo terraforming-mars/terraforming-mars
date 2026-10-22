@@ -11,7 +11,7 @@ import {PlayCardMetadata, SelectCardToPlay} from './SelectCardToPlay';
 export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProjectCard> {
   constructor(
     player: IPlayer,
-    cards: Array<IStandardProjectCard>,
+    cards: ReadonlyArray<IStandardProjectCard>,
     config?: {
       action?: CardAction,
       enabled?: ReadonlyArray<boolean>,

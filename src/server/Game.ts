@@ -1813,8 +1813,6 @@ export class Game implements IGame, Logger {
       if (game.phase === Phase.INITIALDRAFTING) {
         switch (game.initialDraftIteration) {
         case 1:
-          newInitialDraft(game).restoreDraft();
-          break;
         case 2:
           newInitialDraft(game).restoreDraft();
           break;

@@ -66,7 +66,16 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.canAfford(this.canPlayOptions(player));
+    // Warnings reflect the current game state, so recompute them every time.
+    this.clearWarnings();
+    return this.bespokeCanAct(player) && player.canAfford(this.canPlayOptions(player));
+  }
+
+  /**
+   * Override to add card-specific checks or warnings. Affordability is handled by `canAct`.
+   */
+  protected bespokeCanAct(_player: IPlayer): boolean {
+    return true;
   }
 
   public canPayWith(_player: IPlayer): StandardProjectCanPayWith {

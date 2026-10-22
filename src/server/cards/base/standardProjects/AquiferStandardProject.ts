@@ -28,11 +28,11 @@ export class AquiferStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     if (!player.game.canAddOcean()) {
       this.addWarning('maxoceans');
     }
-    return super.canAct(player);
+    return true;
   }
 
   actionEssence(player: IPlayer): void {

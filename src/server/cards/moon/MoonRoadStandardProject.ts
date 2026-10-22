@@ -27,7 +27,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
@@ -35,7 +35,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return super.canAct(player);
+    return true;
   }
 
   actionEssence(player: IPlayer): void {

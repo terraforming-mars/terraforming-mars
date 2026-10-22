@@ -60,4 +60,14 @@ describe('AsteroidStandardProject', () => {
     setTemperature(game, 8);
     testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
+
+  it('maxtemp warning is recomputed on each canAct', () => {
+    setTemperature(game, MAX_TEMPERATURE);
+    card.canAct(player);
+    expect(card.warnings).includes('maxtemp');
+
+    setTemperature(game, MAX_TEMPERATURE - 2);
+    card.canAct(player);
+    expect(card.warnings).is.empty;
+  });
 });

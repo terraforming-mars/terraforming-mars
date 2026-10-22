@@ -81,7 +81,7 @@ export namespace Payment {
   }
 
   const ICONS = {
-    megacredits: ':r:megacredits:',
+    megacredits: ':r:mc:',
     steel: ':r:steel:',
     titanium: ':r:titanium:',
     heat: ':r:heat:',
@@ -97,7 +97,7 @@ export namespace Payment {
   } satisfies Record<SpendableResource, string>;
 
   const SORTED_FOR_LOG = SPENDABLE_RESOURCES.toSorted(reversed(comparing((key) => DEFAULT_PAYMENT_VALUES[key])));
-  /** Describes a payment as markdown icon shortcodes for the log, e.g. `-3:r:megacredits: -1:r:steel:`. */
+  /** Describes a payment as markdown icon shortcodes for the log, e.g. `-3:r:mc: -1:r:steel:`. */
   export function toLogString(payment: Payment | undefined): string {
     if (payment !== undefined) {
       const filtered = SORTED_FOR_LOG.filter((key) => payment[key] > 0);

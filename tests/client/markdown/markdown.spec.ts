@@ -84,4 +84,10 @@ describe('markdown', () => {
       '<h3>Ziel</h3>\n' +
       '<ul>\n<li><span class="markdown-tag tag-mars"></span> Standardmodus: du gewinnst.</li>\n</ul>\n');
   });
+
+  it('renders mc as megacredits', () => {
+    expect(renderMarkdown(':r:mc: :p:mc:')).eq(
+      '<p><span class="markdown-resource resource_icon--megacredits"></span> ' +
+      '<span class="markdown-production"><span class="markdown-resource resource_icon--megacredits"></span></span></p>\n');
+  });
 });

@@ -136,7 +136,7 @@ describe('LogMessageComponent', () => {
 
   it('renders icons in plain text and STRING data', () => {
     const message = new LogMessage(LogMessageType.DEFAULT, 'spent :r:energy: for ${0}', [
-      {type: LogMessageDataType.STRING, value: ':p:megacredits:'},
+      {type: LogMessageDataType.STRING, value: ':p:mc:'},
     ]);
     const wrapper = shallowMount(LogMessageComponent, {
       ...globalConfig,

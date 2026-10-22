@@ -330,7 +330,7 @@ export class Player implements IPlayer {
     }
     if (this.preservationProgram === true && inActionPhase && isFirstTrThisGeneration) {
       steps--;
-      this.game.log('${0} for ${1} is blocking 1 TR', (b) => b.cardName(CardName.PRESERVATION_PROGRAM).player(this));
+      this.game.log('${0} for ${1} is blocking 1:i:tr:', (b) => b.cardName(CardName.PRESERVATION_PROGRAM).player(this));
       this.preservationProgram = false;
       if (steps === 0) {
         return;
@@ -343,9 +343,9 @@ export class Player implements IPlayer {
       if (opts.log === true) {
         if (opts.from !== undefined) {
           const from = opts.from;
-          this.game.log('${0} gained ${1} TR from ${2}', (b) => b.player(this).number(steps).from(from));
+          this.game.log('${0} gained ${1}:i:tr: from ${2}', (b) => b.player(this).number(steps).from(from));
         } else {
-          this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+          this.game.log('${0} gained ${1}:i:tr:', (b) => b.player(this).number(steps));
         }
       }
       for (const cardOwner of this.game.playersInGenerationOrder) {
@@ -372,7 +372,7 @@ export class Player implements IPlayer {
   public decreaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     this.terraformRating -= steps;
     if (opts.log === true) {
-      this.game.log('${0} lost ${1} TR', (b) => b.player(this).number(steps));
+      this.game.log('${0} lost ${1}:i:tr:', (b) => b.player(this).number(steps));
     }
   }
 

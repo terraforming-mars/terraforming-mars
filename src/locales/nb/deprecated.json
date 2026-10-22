@@ -44,5 +44,13 @@
   "${0} removed a disease from ${1} to gain 1 TR": "${0} fjernet en sykdom fra ${1} for å få 1 TR",
   "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan ikke fjerne en sykdom fra ${1} for å få 1 TR fordi de kan ikke betale for De Rødes politikk",
   "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} fjernet ${1} mikrober fra ${2} for å få ${3} M€",
-  "${0} spent 1 corruption to block an attack by ${1}": "${0} brukte 1 korrupsjon for å blokkere et angrep fra ${1}"
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} brukte 1 korrupsjon for å blokkere et angrep fra ${1}",
+  "${0} is the new chairman and gains ${1} TR": "${0} er ny Styreleder og får ${1} TR",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} snudde ${1} for å få 3 TR og mistet ${2}:r:mc:",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} fjernet 1:cr:disease: fra ${1} for å få 1 TR",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan ikke fjerne :cr:disease: fra ${1} for å få 1 TR fordi de kan ikke betale for De Rødes politikk",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} kan ikke snu ${1} for å få 3 TR fordi de kan ikke betale for De Rødes politikk",
+  "${0} turned ${1} face down to gain 3 TR": "${0} snudde ${1} for å få 3 TR",
+  "${0} gained ${1} TR": "${0} fikk ${1} TR",
+  "${0} lost ${1} TR": "${0} mistet ${1} TR"
 }

@@ -60,5 +60,17 @@
   "${0} spent ${1} corruption": "${0} käytti ${1} korruptiota",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} heitti pois ${1} korruption ja sai ${2} M€",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} käytti 1 korruption estääkseen ${1}:n hyökkäyksen",
-  "${0} blackmailed ${1} and took 2 corruption.": "${0} kiristiti ${1} ja otti 2 korruptiota."
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} kiristiti ${1} ja otti 2 korruptiota.",
+  "All players lose 1 TR.": "Kaikki pelaajat laskevat MKL:äänsä 1 askeleen.",
+  "${0} is the new chairman and gains ${1} TR": "${0} on uusi puheenjohtaja ja nostaa MKL:äänsä ${1} askelta",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} käänsi ${1} kuvapuoli alaspäin nostaakseen MKL:äänsä 3 askelta ja menetti ${2}:r:mc:",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} poisti 1:cr:disease: kohteesta ${1} nostaakseen MKL:äänsä 1 askeleen",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} ei voi poistaa :cr:disease: kohteesta ${1} nostaakseen MKL:äänsä 1 askeleen liian korkeiden Punaisten politiikkakustannusten vuoksi",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} ei voi kääntää ${1} kuvapuoli alaspäin nostaakseen MKL:äänsä 3 askelta liian korkeiden Punaisten politiikkakustannusten vuoksi",
+  "${0} turned ${1} face down to gain 3 TR": "${0} käänsi ${1} kuvapuoli alaspäin nostaakseen MKL:äänsä 3 askelta",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0}:lla ei ole :cr:science:-kortteja ja hän nosti MKL:äänsä 1 askeleen.",
+  "${0} for ${1} is blocking 1 TR": "${0} ${1}:lle estää 1 MKL-askeleen",
+  "${0} gained ${1} TR from ${2}": "${0} nosti MKL:äänsä ${1} askelta lähteestä ${2}",
+  "${0} gained ${1} TR": "${0} nosti MKL:äänsä ${1} askelta",
+  "${0} lost ${1} TR": "${0} laski MKL:äänsä ${1} askelta"
 }

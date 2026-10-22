@@ -26,5 +26,13 @@
   "${0} added a disease to ${1} and lost ${2} M€": "${0} voegde een ziekte toe aan ${1} en verloor ${2} M€",
   "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} voegde ${3} ziekten toe aan ${1} en verloor ${2} M€",
   "${0} removed a disease from ${1} to gain 1 TR": "${0} verwijderde een ziekte van ${1} om 1 TN te verdienen",
-  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan ziekte niet verwijderen van ${1} om 1 TN te krijgen vanwege de hoge kosten van het DE RODEN-beleid"
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan ziekte niet verwijderen van ${1} om 1 TN te krijgen vanwege de hoge kosten van het DE RODEN-beleid",
+  "${0} is the new chairman and gains ${1} TR": "${0} is de nieuwe voorzitter en krijgt ${1} TN",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} draaide ${1} om om 3 TN te krijgen en verloor ${2}:r:mc:",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} verwijderde 1:cr:disease: van ${1} om 1 TN te verdienen",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kan :cr:disease: niet verwijderen van ${1} om 1 TN te krijgen vanwege de hoge kosten van het DE RODEN-beleid",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} kan ${1} niet omdraaien om 3 TN te krijgen vanwege de hoge kosten van het DE RODEN-beleid",
+  "${0} turned ${1} face down to gain 3 TR": "${0} heeft ${1} omgedraaid om 3 TN te krijgen",
+  "${0} gained ${1} TR": "${0} kreeg ${1} TN",
+  "${0} lost ${1} TR": "${0} verloor ${1} TN"
 }

@@ -186,6 +186,7 @@ export class PlayedCards {
     this.array = [];
     this._eventCount = 0;
     this._tags = {...NO_TAGS};
+    this._eventTags = {...NO_TAGS};
 
     this.push(...cards);
   }

@@ -28,11 +28,11 @@ export class AsteroidStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     if (player.game.getTemperature() >= player.game.max.temperature) {
       this.addWarning('maxtemp');
     }
-    return super.canAct(player);
+    return true;
   }
 
   actionEssence(player: IPlayer): void {

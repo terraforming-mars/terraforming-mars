@@ -20,11 +20,11 @@ export class AirScrappingStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     if (player.game.getVenusScaleLevel() >= player.game.max.venus) {
       this.addWarning('maxvenus');
     }
-    return super.canAct(player);
+    return true;
   }
 
   actionEssence(player: IPlayer): void {

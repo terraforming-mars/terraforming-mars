@@ -21,7 +21,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     return player.cardsInHand.length > 0;
   }
 

@@ -28,7 +28,7 @@ export class CollusionStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     if (player.underworldData.corruption <= 0) {
       return false;
     }
@@ -40,7 +40,6 @@ export class CollusionStandardProject extends StandardProjectCard {
     if (this.getParties(turmoil).length === 0) {
       return false;
     }
-    // return super.canAct(player); // Not necessary this time.
     return true;
   }
 

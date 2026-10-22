@@ -31,12 +31,12 @@ export class CityStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: IPlayer): boolean {
+  protected override bespokeCanAct(player: IPlayer): boolean {
     // This is pricey because it forces calling canPlayOptions twice.
     if (player.game.board.getAvailableSpacesForCity(player, this.canPlayOptions(player)).length === 0) {
       return false;
     }
-    return super.canAct(player);
+    return true;
   }
 
   actionEssence(player: IPlayer): void {

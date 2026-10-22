@@ -27,8 +27,8 @@ export class MoonHabitatStandardProjectVariant1 extends MoonHabitatStandardProje
     });
   }
 
-  public override canAct(player: IPlayer) {
-    return player.game.gameOptions.moonStandardProjectVariant1 && super.canAct(player);
+  protected override bespokeCanAct(player: IPlayer) {
+    return player.game.gameOptions.moonStandardProjectVariant1 && super.bespokeCanAct(player);
   }
 
   public override canPayWith() {
@@ -56,8 +56,8 @@ export class MoonMineStandardProjectVariant1 extends MoonMineStandardProject {
     });
   }
 
-  public override canAct(player: IPlayer) {
-    return player.game.gameOptions.moonStandardProjectVariant1 && super.canAct(player);
+  protected override bespokeCanAct(player: IPlayer) {
+    return player.game.gameOptions.moonStandardProjectVariant1 && super.bespokeCanAct(player);
   }
 
   public override canPayWith() {
@@ -85,8 +85,8 @@ export class MoonRoadStandardProjectVariant1 extends MoonRoadStandardProject {
     });
   }
 
-  public override canAct(player: IPlayer) {
-    return player.game.gameOptions.moonStandardProjectVariant1 && super.canAct(player);
+  protected override bespokeCanAct(player: IPlayer) {
+    return player.game.gameOptions.moonStandardProjectVariant1 && super.bespokeCanAct(player);
   }
 
   public override canPayWith() {

@@ -32,8 +32,7 @@ export class EstablishedMethods extends PreludeCard {
 
   private askForStandardProject(player: IPlayer, first: boolean): void {
     const game = player.game;
-    const standardProjects = game.getStandardProjects();
-    const enabled = standardProjects.map((card) => card.canAct(player));
+    const enabled = game.standardProjects.map((card) => card.canAct(player));
 
     if (first === false && !enabled.some(Boolean)) {
       const penalty = Math.min(10, player.spendableMegacredits());
@@ -44,7 +43,7 @@ export class EstablishedMethods extends PreludeCard {
     }
 
     const title = first ? 'Select your first standard project' : 'Select your second standard project';
-    player.defer(new SelectStandardProjectToPlay(player, standardProjects, {enabled, title, buttonLabel: 'Confirm'})
+    player.defer(new SelectStandardProjectToPlay(player, game.standardProjects, {enabled, title, buttonLabel: 'Confirm'})
       .andThen(() => {
         if (first) {
           this.prepareForSecondStandardProject(player);

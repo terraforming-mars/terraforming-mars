@@ -39,5 +39,21 @@
   "${0} has no fighter resource cards and gained 1 titanium.": "${0}:lla ei ole hävittäjäresurssikortteja ja sai 1 titaanin.",
   "Player spent ${0} steel and gained ${1} heat": "Pelaaja käytti ${0} terästä ja sai ${1} lämpöä",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} vähensi energiatuotantoa 1 askel saadakseen 8 M€",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} sai 1 M€ tuotantoa kortilta ${1} ympyrästä ${2}"
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "${0} sai 1 M€ tuotantoa kortilta ${1} ympyrästä ${2}",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} poisti ${1} kelluketta saadakseen ${2} titaania",
+  "${0} removed 1 microbe from ${1} to gain 5 plants": "${0} poisti 1 mikrobin kortilta ${1} saadakseen 5 kasvia",
+  "${0} spent 1 floater to trade with ${1}": "${0} käytti 1 kellukkeen käydäkseen kauppaa ${1} kanssa",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "${0} poisti automaattisesti 3 dataa kortilta ${1} nostaakseen kortin.",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "${0} käytti ${1} dataa kortilta ${2} käydäkseen kauppaa ${3} kanssa",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} poisti ${1} dataa kortilta ${2} lisätäkseen kasvituotantoa ${3} askelta.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} käänsi ${1} kuvapuoli alaspäin nostaakseen MKL:äänsä 3 askelta ja menetti ${2} M€",
+  "${0} added a disease to ${1} and lost ${2} M€": "${0} lisäsi taudin kohteeseen ${1} ja menetti ${2} M€",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} lisäsi ${3} tautia kohteeseen ${1} ja menetti ${2} M€",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} poisti taudin kohteesta ${1} nostaakseen MKL:äänsä 1 askeleen",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} ei voi poistaa tautia kohteesta ${1} nostaakseen MKL:äänsä 1 askeleen liian korkeiden Punaisten politiikkakustannusten vuoksi",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "${0}:lla ei ole hävittäjäresurssikortteja ja sai 1:r:titanium:.",
+  "${0} has no science cards and gained 1 TR.": "${0}:lla ei ole tiedekortteja ja hän nosti MKL:äänsä 1 askeleen.",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} käytti toimintoa ${1} muuntaakseen ${2} tavaraa ${2} M€:ksi",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} käytti 1 hävittäjän kortilta ${1} estääkseen ${2}:n hyökkäyksen",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "${0} poisti ${1} mikrobia kortilta ${2} saadakseen ${3} M€"
 }

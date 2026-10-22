@@ -58,10 +58,10 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
 
   private logAddingDisease(player: IPlayer, count: number, megaCreditsLost: number) {
     if (count === 1) {
-      player.game.log('${0} added a disease to ${1} and lost ${2} M€',
+      player.game.log('${0} added a:cr:disease: to ${1} and lost ${2}:r:mc:',
         (b) => b.player(player).card(this).number(megaCreditsLost));
     } else {
-      player.game.log('${0} added ${3} diseases to ${1} and lost ${2} M€',
+      player.game.log('${0} added ${3}:cr:disease: to ${1} and lost ${2}:r:mc:',
         (b) => b.player(player).card(this).number(megaCreditsLost).number(count));
     }
   }
@@ -94,7 +94,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
                 this.disable(player);
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-                game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+                game.log('${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
               }),
               new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
@@ -102,7 +102,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
                 player.increaseTerraformRating();
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
                 this.logAddingDisease(player, 1, megaCreditsLost);
-                game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+                game.log('${0} removed a:cr:disease: from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                 return undefined;
               }),
             ).setTitle('Choose the order of tag resolution for Pharmacy Union');
@@ -140,11 +140,11 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
         if (this.resourceCount > 0) {
           if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
             // TODO (Lynesth): Remove this when #1670 is fixed
-            game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
+            game.log('${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
           } else {
             player.removeResourceFrom(this, 1);
             player.increaseTerraformRating();
-            game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+            game.log('${0} removed a:cr:disease: from ${1} to gain 1 TR', (b) => b.player(player).card(this));
           }
           return undefined;
         }

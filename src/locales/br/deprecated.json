@@ -8,5 +8,7 @@
   "${0} spent ${1} M€ to trade with ${2}": "${0} gastou ${1} M€ para negociar com ${2}",
   "${0} received ${1} M€ from ${2} owner (${3})": "${0} recebeu ${1} M€ de ${2} (${3})",
   "${0} spent ${1} energy": "${0} gastou ${1} energia",
-  "${0} decreased energy production 1 step to gain 8 M€": "${0} diminuir produção de energia 1 nível para ganhar 8 M€"
+  "${0} decreased energy production 1 step to gain 8 M€": "${0} diminuir produção de energia 1 nível para ganhar 8 M€",
+  "${0} spent 1 floater to trade with ${1}": "${0} gastou 1 flutuador para negociar com ${1}",
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} removeu uma doença de ${1} para ganhar 1 IT"
 }

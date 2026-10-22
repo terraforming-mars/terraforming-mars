@@ -469,7 +469,7 @@ export class UnderworldExpansion {
           .andThen(() => {
             target.removeResourceFrom(privateMilitaryContractor, 1);
             target.game.log(
-              '${0} spent 1 fighter on ${1} to block an attack by ${2}',
+              '${0} spent 1:cr:fighter: on ${1} to block an attack by ${2}',
               (b) => b.player(target).cardName(CardName.PRIVATE_MILITARY_CONTRACTOR).player(perpetrator));
             return cb(false);
           }),

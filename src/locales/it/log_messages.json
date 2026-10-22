@@ -12,7 +12,7 @@
     "${0} spent ${1}:r:mc: to trade with ${2}": "${0} ha speso ${1}:r:mc: per commerciare con ${2}",
     "${0} spent ${1}:r:energy: to trade with ${2}": "${0} ha speso ${1}:r:energy: per commerciare con ${2}",
     "${0} spent ${1}:r:titanium: to trade with ${2}": "${0} ha speso ${1}:r:titanium: per commerciare con ${2}",
-    "${0} spent 1 floater to trade with ${1}": "${0} ha speso 1 Galleggiante per commerciare con ${1}",
+    "${0} spent 1:cr:floater: to trade with ${1}": "${0} ha speso 1:cr:floater: per commerciare con ${1}",
     "${0} used ${1} standard project": "${0} ha usato il Progetto Standard ${1} ",
     "${0} built a colony on ${1}": "${0} ha costruito una Colonia su ${1}",
     "${0} bought ${1} card(s)": "${0} ha comprato ${1} carta/e",

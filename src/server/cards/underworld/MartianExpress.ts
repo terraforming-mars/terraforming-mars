@@ -38,7 +38,7 @@ export class MartianExpress extends Card implements IActionCard {
     const count = this.resourceCount;
     player.stock.add(Resource.MEGACREDITS, count);
     this.resourceCount = 0;
-    player.game.log('${0} used the ${1} action to convert ${2} wares into ${2} M€',
+    player.game.log('${0} used the ${1} action to convert ${2}:cr:ware: into ${2}:r:mc:',
       (b) => b.player(player).card(this).number(count));
     return undefined;
   }

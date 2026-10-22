@@ -28,5 +28,21 @@
   "${0} spent ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 소비",
   "${0} has no fighter resource cards and gained 1 titanium.": "",
   "${0} decreased energy production 1 step to gain 8 M€": "",
-  "${0} gained 1 M€ production from ${1} for the ${2} tag": ""
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "",
+  "${0} removed ${1} floaters to gain ${2} titanium": "${0} 플레이어는 ${1} 부양체를 소비하고 ${2} 만큼의 티타늄 자원을 획득했습니다.",
+  "${0} removed 1 microbe from ${1} to gain 5 plants": "",
+  "${0} removed ${1} microbes from ${2} to gain ${3} M€": "",
+  "${0} spent 1 floater to trade with ${1}": "${0} 플레이어가 부양체 자원을 하나 소비하여 ${2} 위성에서 무역사업 수행",
+  "${0} automatically removed 3 data from ${1} to draw a card.": "",
+  "${0} spent ${1} data from ${2} to trade with ${3}": "",
+  "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "",
+  "${0} added a disease to ${1} and lost ${2} M€": "",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "",
+  "${0} removed a disease from ${1} to gain 1 TR": "",
+  "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "",
+  "${0} has no fighter resource cards and gained 1:r:titanium:.": "",
+  "${0} has no science cards and gained 1 TR.": "",
+  "${0} used the ${1} action to convert ${2} wares into ${2} M€": "",
+  "${0} spent 1 fighter on ${1} to block an attack by ${2}": ""
 }

@@ -13,5 +13,7 @@
   "Cards played by ${0} cost 1 M€ less this generation": "Kaarten gespeeld door ${0} kosten deze generatie 1 M€ minder",
   "${0} gains ${1} M€ for a tile placed next to ${2}": "${0} ontving ${1} M€ door een tegel naast ${2} te plaatsen",
   "${0} placing a tile here costs ${1} M€": "${0} het kost ${1} M€ om hier een tegel te plaatsen",
-  "Neutral player received ${0} M€ from ${1} owner (${2})": "De neutrale speler ontving ${0}M€ van de eigenaar van ${1} (${2})"
+  "Neutral player received ${0} M€ from ${1} owner (${2})": "De neutrale speler ontving ${0}M€ van de eigenaar van ${1} (${2})",
+  "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0} heeft 1 staal en 1 energie uitgegeven om 3 planten te krijgen.",
+  "${0} spent ${1} energy": "${0} betaalde ${1} energie"
 }

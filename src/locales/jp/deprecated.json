@@ -20,5 +20,9 @@
   "Neutral player received ${0} M€ from ${1} owner (${2})": "",
   "${0} gained 0 M€ from ${1} action.": "${0}が${1}のアクションによって、0MC獲得.",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0}はタグ無しカード(${1})をプレイし、4MC獲得.",
-  "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0}は1タグのみついたカード(${1})をプレイし、1MC獲得."
+  "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0}は1タグのみついたカード(${1})をプレイし、1MC獲得.",
+  "${0} converted ${1} units of energy to heat": "${0}が${1}電力を熱に変換",
+  "${0} spent 1 steel and 1 energy to gain 3 plants.": "${0}が1建材と1電力を支払い、3植物獲得.",
+  "${0} spent ${1} energy": "${0}が${1}電力支払った",
+  "${0} has no fighter resource cards and gained 1 titanium.": "${0}は戦闘機を配置できるカードがないため、1チタン獲得"
 }

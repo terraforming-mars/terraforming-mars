@@ -42,7 +42,7 @@ export class GlobalAudit extends Card implements IProjectCard {
         tr--;
       }
       if (tr < expectedTr) {
-        p.game.log('${0} gains ${1} TR instead of ${2} due to the Reds ruling policy',
+        p.game.log('${0} gains ${1}:i:tr: instead of ${2} due to the Reds ruling policy',
           (b) => b.player(p).number(tr).number(expectedTr));
       }
     }

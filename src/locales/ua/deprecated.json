@@ -62,5 +62,17 @@
   "${0} spent ${1} corruption": "${0} витратив(ла) ${1} корупції",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} викинув ${1} корупцію і отримав ${2} M€",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} витратив 1 корупцію, щоб заблокувати атаку від ${1}",
-  "${0} blackmailed ${1} and took 2 corruption.": "${0} шантажував(ла) ${1} та взяв(ла) 2 корупції."
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} шантажував(ла) ${1} та взяв(ла) 2 корупції.",
+  "${0} is the new chairman and gains ${1} TR": "${0} став(ла) новим головою і отримав(ла) ${1} РТ",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} перевернув ${1}, щоб отримати 3 РТ і втратив ${2}:r:mc:",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} видалив 1:cr:disease: з ${1}, щоб отримати 1 РТ",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} не може видалити :cr:disease: з ${1}, щоб отримати 1 РТ через нездійсненність вартості політики ЧЕРВОНІ",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} не може перевернути ${1}, щоб отримати 3 РТ через нездійсненність вартості політики ЧЕРВОНІ",
+  "${0} turned ${1} face down to gain 3 TR": "${0} перевернув ${1}, щоб отримати 3 РТ",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0} не має карт :cr:science: і отримав 1 РТ.",
+  "${0} gained ${1} TR": "${0} отримав ${1} РТ",
+  "${0} lost ${1} TR": "${0} втратив ${1} РТ",
+  "All players lose 1 TR.": "Усі гравці втрачають 1 РТ.",
+  "${0} for ${1} is blocking 1 TR": "${0} для ${1} блокує 1 РТ",
+  "${0} gained ${1} TR from ${2}": "${0} отримав(ла) ${1} РТ від ${2}"
 }

@@ -49,5 +49,16 @@
   "${0} gained ${1} corruption": "${0} kapott ${1} korrupciót.",
   "${0} spent ${1} corruption": "${0} elköltött ${1} korrupciót.",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} elhajított ${1} korrupciót és kapott ${2} M€-tet.",
-  "${0} spent 1 corruption to block an attack by ${1}": "${0} elköltött 1 korrupciót ${1} támadásának kivédéséhez."
+  "${0} spent 1 corruption to block an attack by ${1}": "${0} elköltött 1 korrupciót ${1} támadásának kivédéséhez.",
+  "All players lose 1 TR.": "Minden játékos elveszített 1 TR-t.",
+  "${0} is the new chairman and gains ${1} TR": "${0} az új elnök és ${1} TR-t kapott.",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} lefordította a(z) ${1} kártyát, kapott 3 TR-t és elveszített ${2}:r:mc:-tet.",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} eltávolított 1:cr:disease:-t a(z) ${1} kártyáról, és kapott 1 TR-t.",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} nem tudja eltávolítani a :cr:disease:-t a(z) ${1} kártyáról és kapni 1 TR-t, mert nem tudja kifizetni a Vörösök politikáját.",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} nem tudja lefordítani a(z) ${1} kártyát és kapni 3 TR-t, mert nem tudja kifizetni a Vörösök politikáját.",
+  "${0} turned ${1} face down to gain 3 TR": "${0} lefordította a(z) ${1} kártyát és kapott 3 TR-t.",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0} nem rendelkezik :cr:science: kártyával és kapott 1 TR-t.",
+  "${0} for ${1} is blocking 1 TR": "${0} kapott ${1}-t, mert blokkolt 1 TR-t.",
+  "${0} gained ${1} TR": "${0} szerzett ${1} TR-t.",
+  "${0} lost ${1} TR": "${0} elveszített ${1} TR-t."
 }

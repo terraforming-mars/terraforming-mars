@@ -62,5 +62,17 @@
   "${0} spent ${1} corruption": "${0} bezahlte ${1} Korruption",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} warf ${1} Korruption ab und erhielt ${2} M€",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} gab 1 Korruption aus, um den Angriff von ${1} zu blocken",
-  "${0} blackmailed ${1} and took 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption genommen hat."
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption genommen hat.",
+  "All players lose 1 TR.": "Alle Spieler verlieren 1 TW.",
+  "${0} is the new chairman and gains ${1} TR": "${0} ist der neue Vorsitzende und erhält ${1} TW",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} drehte ${1} um, um 3 TW zu erhalten und ${2}:r:mc: zu verlieren",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} entfernte 1:cr:disease: von ${1}, um 1 TW zu erhalten",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kann keine :cr:disease: von ${1} entfernen, um 1 TW zu erhalten aufgrund zu hoher Kosten für DIE-ROTEN-Politik",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} kann ${1} nicht umdrehen, um 3 TW zu erhalten aufgrund zu hoher Kosten für DIE-ROTEN-Politik",
+  "${0} turned ${1} face down to gain 3 TR": "${0} drehte ${1} um, um 3 TW zu erhalten",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0} hat keine :cr:science: Karten und erhielt 1 TW.",
+  "${0} for ${1} is blocking 1 TR": "Das ${0} ist die Blockierung von 1 TW für ${1}",
+  "${0} gained ${1} TR from ${2}": "${0} erhielt ${1} TW von ${2}",
+  "${0} gained ${1} TR": "${0} erhielt ${1} TW",
+  "${0} lost ${1} TR": "${0} verlor ${1} TW"
 }

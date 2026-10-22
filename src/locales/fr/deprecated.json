@@ -60,5 +60,17 @@
   "${0} spent ${1} corruption": "${0} a dépensé ${1} corruption(s)",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} a défaussé ${1} corruption(s) et gagne ${2} M€",
   "${0} spent 1 corruption to block an attack by ${1}": "${0} a dépensé 1 corruption pour bloquer une attaque de ${1}",
-  "${0} blackmailed ${1} and took 2 corruption.": "${0} a fait chanté ${1} et récupère 2 corruptions"
+  "${0} blackmailed ${1} and took 2 corruption.": "${0} a fait chanté ${1} et récupère 2 corruptions",
+  "All players lose 1 TR.": "Tous les joueurs perdent 1 NT.",
+  "${0} is the new chairman and gains ${1} TR": "${0} est le nouveau président et gagne ${1} NT",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0} a retourné ${1} face cachée pour gagner 3 NT et perdre ${2}:r:mc:",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} a retiré 1:cr:disease: de ${1} pour gagner 1 NT",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} ne peut pas retirer 1:cr:disease: de ${1} pour gagner 1 NT car aucune politique des Rouges n'est abordable",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} ne peut pas retourner ${1} face cachée pour gagner 3 NT car aucune politique des Rouges n'est abordable",
+  "${0} turned ${1} face down to gain 3 TR": "${0} a retourné ${1} face cachée pour gagner 3 NT",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0} n'a pas de carte à :cr:science: et gagne 1 NT.",
+  "${0} for ${1} is blocking 1 TR": "${0} pour ${1} bloque 1 NT",
+  "${0} gained ${1} TR": "${0} a gagné ${1} NT",
+  "${0} lost ${1} TR": "${0} a perdu ${1} NT",
+  "${0} gained ${1} TR from ${2}": "${0} a gagné ${1} NT de ${2}"
 }

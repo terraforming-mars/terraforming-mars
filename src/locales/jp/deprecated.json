@@ -45,5 +45,14 @@
   "${0} gained ${1} corruption": "${0}が${1}汚職獲得",
   "${0} spent ${1} corruption": "${0}が${1}汚職支払った",
   "${0} discarded ${1} corruption and gained ${2} M€": "${0}は${1}汚職支払い、${2}MC獲得",
-  "${0} spent 1 corruption to block an attack by ${1}": "${0}が1汚職を支払い、${1}の攻撃を防いだ."
+  "${0} spent 1 corruption to block an attack by ${1}": "${0}が1汚職を支払い、${1}の攻撃を防いだ.",
+  "${0} is the new chairman and gains ${1} TR": "${0}が議長となり、TR+${1}段階",
+  "${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:": "${0}が${1}を裏返し、TR+3段階し、${2}:r:mc:を支払った",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0}が${1}上から:cr:disease:を除去し,TR+1段階",
+  "${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost": "",
+  "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "",
+  "${0} turned ${1} face down to gain 3 TR": "${0}が${1}を裏返し、TR+3段階",
+  "${0} has no :cr:science: cards and gained 1 TR.": "${0}は:cr:science:を配置できるカードがないため、TR+1段階.",
+  "${0} gained ${1} TR": "${0}のTR+${1}段階",
+  "${0} lost ${1} TR": "${0}のTR-${1}段階"
 }

@@ -10,5 +10,9 @@
   "${0} spent ${1} energy": "${0} gastou ${1} energia",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} diminuir produção de energia 1 nível para ganhar 8 M€",
   "${0} spent 1 floater to trade with ${1}": "${0} gastou 1 flutuador para negociar com ${1}",
-  "${0} removed a disease from ${1} to gain 1 TR": "${0} removeu uma doença de ${1} para ganhar 1 IT"
+  "${0} removed a disease from ${1} to gain 1 TR": "${0} removeu uma doença de ${1} para ganhar 1 IT",
+  "${0} is the new chairman and gains ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
+  "${0} removed a:cr:disease: from ${1} to gain 1 TR": "${0} removeu 1:cr:disease: de ${1} para ganhar 1 IT",
+  "${0} turned ${1} face down to gain 3 TR": "${0} virou ${1} face para baixo para ganhar 3 IT",
+  "${0} gained ${1} TR": "${0} ganhou ${1} IT"
 }

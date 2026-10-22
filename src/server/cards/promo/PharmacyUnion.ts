@@ -94,7 +94,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
                 this.disable(player);
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-                game.log('${0} turned ${1} face down to gain 3 TR and lost ${2}:r:mc:', (b) => b.player(player).card(this).number(megaCreditsLost));
+                game.log('${0} turned ${1} face down to gain 3:i:tr: and lost ${2}:r:mc:', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
               }),
               new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
@@ -102,7 +102,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
                 player.increaseTerraformRating();
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
                 this.logAddingDisease(player, 1, megaCreditsLost);
-                game.log('${0} removed a:cr:disease: from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+                game.log('${0} removed a:cr:disease: from ${1} to gain 1:i:tr:', (b) => b.player(player).card(this));
                 return undefined;
               }),
             ).setTitle('Choose the order of tag resolution for Pharmacy Union');
@@ -140,25 +140,25 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
         if (this.resourceCount > 0) {
           if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
             // TODO (Lynesth): Remove this when #1670 is fixed
-            game.log('${0} cannot remove a:cr:disease: from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
+            game.log('${0} cannot remove a:cr:disease: from ${1} to gain 1:i:tr: because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
           } else {
             player.removeResourceFrom(this, 1);
             player.increaseTerraformRating();
-            game.log('${0} removed a:cr:disease: from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+            game.log('${0} removed a:cr:disease: from ${1} to gain 1:i:tr:', (b) => b.player(player).card(this));
           }
           return undefined;
         }
 
         if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
           // TODO (Lynesth): Remove this when #1670 is fixed
-          game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
+          game.log('${0} cannot turn ${1} face down to gain 3:i:tr: because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
           return;
         }
 
         return new OrOptions(
           new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
             this.disable(player);
-            game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
+            game.log('${0} turned ${1} face down to gain 3:i:tr:', (b) => b.player(player).card(this));
             return undefined;
           }),
           new SelectOption('Do nothing', 'Do nothing'),

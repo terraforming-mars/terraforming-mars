@@ -44,7 +44,7 @@ export class HyperspaceDrivePrototype extends Card implements IProjectCard {
     if (scienceCards.length > 0) {
       player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE), Priority.HYPERSPACE_DRIVE_PROTOTYPE);
     } else {
-      player.game.log('${0} has no :cr:science: cards and gained 1 TR.', (b) => b.player(player));
+      player.game.log('${0} has no :cr:science: cards and gained 1:i:tr:.', (b) => b.player(player));
       player.increaseTerraformRating();
     }
     return undefined;

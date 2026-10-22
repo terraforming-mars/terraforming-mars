@@ -1477,7 +1477,7 @@ export class Player implements IPlayer {
 
           const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
-          this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
+          this.setWaitingFor(selectPrelude, () => game.drainQueue(() => {
             this.incrementActionsTaken();
             if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
               game.playerIsFinishedTakingActions();
@@ -1546,7 +1546,7 @@ export class Player implements IPlayer {
           orOptions.options.push(this.passOption());
         }
 
-        this.setWaitingFor(orOptions, this.runWhenEmpty(() => {
+        this.setWaitingFor(orOptions, () => game.drainQueue(() => {
           if (this.pendingInitialActions.length === 0) {
             this.incrementActionsTaken();
           }
@@ -1556,7 +1556,7 @@ export class Player implements IPlayer {
         return;
       }
 
-      this.setWaitingFor(this.getActions(), this.runWhenEmpty(() => {
+      this.setWaitingFor(this.getActions(), () => game.drainQueue(() => {
         this.incrementActionsTaken();
         this.takeAction();
       }));
@@ -1971,16 +1971,5 @@ export class Player implements IPlayer {
     const cb = typeof(input) === 'function' ? input : () => input;
     const action = new SimpleDeferredAction(this, cb, priority);
     this.game.defer(action);
-  }
-
-  public runWhenEmpty(cb: () => void): () => void {
-    const f = () => {
-      if (this.game.deferredActions.length === 0) {
-        cb();
-        return;
-      }
-      this.game.deferredActions.runAll(() => f());
-    };
-    return f;
   }
 }

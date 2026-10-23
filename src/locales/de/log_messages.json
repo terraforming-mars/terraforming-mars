@@ -35,6 +35,10 @@
   "${0}'s ${1} production ${2} by ${3} by ${4}": "${0}\u2019s ${1} Produktion wurde um ${3} ${2} von ${4}",
   "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}\u2019s ${3}",
 
+  "${0} gained a Jovian tag from the Delta Project": "${0} hat vom Delta-Projekt das Jupiter-Symbol erhalten",
+  "${0} spend ${1} energy to advance on the Delta Project track": "${0} gibt ${1} Energie aus, um auf der Delta-Projekt-Leiste voranzukommen",
+  "${0} reused ${1} action via Delta Project": "${0} hat die Aktion ${1} über das Delta-Projekt wiederverwendet",
+
   "${0} gained ${1}${2}": "${0} erhielt ${1}${2}",
   "${0} gained ${1}${2} because of ${3}": "${0} erhielt ${1}${2} wegen ${3}",
   "${0} gained ${1} ${2} from ${3}": "${0} erhielt ${1} ${2} von ${3}",

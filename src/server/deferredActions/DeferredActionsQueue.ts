@@ -1,109 +1,77 @@
 import {IDeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
 import {IPlayer} from '../IPlayer';
+import {PlayerId} from '../../common/Types';
+import {PriorityQueue} from './PriorityQueue';
 
 export class DeferredActionsQueue {
-  private insertId: number = 0;
-  private queue: Array<IDeferredAction<any>> = [];
+  private queue = new PriorityQueue<IDeferredAction<any>, PlayerId>();
 
   get length(): number {
     return this.queue.length;
   }
 
   public push(action: IDeferredAction<any>): void {
-    action.queueId = this.insertId++;
-    this.queue.push(action);
+    this.queue.push(action, action.priority, action.player.id);
   }
 
-  public runAllFor(player: IPlayer, cb: () => void): void {
-    let b: IDeferredAction | undefined;
-    let j = -1;
-    for (let i = this.queue.length - 1; i >= 0; i--) {
-      const a = this.queue[i];
-      if (a.player.id === player.id && (b === undefined || this.hasHigherPriority(a, b))) {
-        b = a;
-        j = i;
-      }
-    }
-    if (b === undefined) {
-      cb();
-      return;
-    }
-    this.queue.splice(j, 1);
-    this.run(b, () => this.runAllFor(player, cb));
+  // Public for tests
+  public peek(): IDeferredAction<any> | undefined {
+    return this.queue.peek();
   }
 
-  private hasHigherPriority(a: IDeferredAction, b: IDeferredAction) {
-    return a.priority < b.priority || (a.priority === b.priority && a.queueId < b.queueId);
+  // Public for tests
+  public pop(): IDeferredAction<any> | undefined {
+    return this.queue.pop();
   }
 
-  private nextItemIndex(): number {
-    if (this.queue.length === 0) {
-      return -1;
-    }
-    let b = this.queue[0];
-    let j = 0;
-    for (let i = this.queue.length - 1; i >= 1; i--) {
-      const a = this.queue[i];
-      if (this.hasHigherPriority(a, b)) {
-        b = a;
-        j = i;
-      }
-    }
-    return j;
-  }
-
-  private popNextItem(): IDeferredAction<any> | undefined {
-    const next = this.nextItemIndex();
-    const action = this.queue[next];
+  // Public for tests
+  public runNext(): void {
+    const action = this.queue.pop();
     if (action !== undefined) {
-      this.queue.splice(next, 1);
+      this.runInline(action, () => {});
     }
-    return action;
   }
 
   public runAll(cb: () => void): void {
-    const action = this.popNextItem();
-    if (action !== undefined) {
-      this.run(action, () => {
-        this.runAll(cb);
-      });
-    } else {
-      cb();
-      return;
+    this.drain(undefined, cb);
+  }
+
+
+  public runAllFor(player: IPlayer, cb: () => void): void {
+    this.drain(player.id, cb);
+  }
+
+  /** Runs queued actions, limited to `playerId` when given, then calls `cb`. */
+  private drain(playerId: PlayerId | undefined, cb: () => void): void {
+    let action = this.queue.pop(playerId);
+    while (action !== undefined) {
+      if (!this.runInline(action, () => this.drain(playerId, cb))) {
+        return;
+      }
+      action = this.queue.pop(playerId);
     }
+    cb();
   }
 
-  // The following methods are used in tests
-  public peek(): IDeferredAction<any> | undefined {
-    return this.queue[this.nextItemIndex()];
-  }
-
-  public pop(): IDeferredAction<any> | undefined {
-    return this.queue.splice(this.nextItemIndex(), 1)[0];
-  }
-
-  public run(action: IDeferredAction, cb: () => void): void {
+  /**
+   * Runs `action`. Returns true when it finished immediately, in which case `cb` is not called.
+   * Otherwise `cb` is called once the action finishes.
+   */
+  private runInline(action: IDeferredAction, cb: () => void): boolean {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
       action.andThen(cb);
       action.execute();
-      return;
+      return false;
     }
 
     const input = action.execute();
     if (input !== undefined) {
       action.player.setWaitingFor(input, cb);
-    } else {
-      cb();
+      return false;
     }
-  }
-
-  public runNext(): void {
-    const action = this.pop();
-    if (action !== undefined) {
-      this.run(action, () => {});
-    }
+    return true;
   }
 }

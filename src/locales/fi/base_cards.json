@@ -494,8 +494,8 @@
   "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "Vähennä lämpötuotantoasi minkä tahansa määrän askelia ja lisää M€-tuotantoasi saman määrän askelia.",
 
   "Adaptation Technology": "Sopeutumisteknologia",
-  "Global requirements": "globaalit vaatimukset",
-  "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "VAIKUTUS: Kun pelaat kortin, globaalit vaatimukset ovat valintasi mukaan +2 tai -2 askelta.",
+  "Global requirements": "Yleiset vaatimukset",
+  "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "VAIKUTUS: Kun pelaat kortin, yleiset vaatimukset ovat valintasi mukaan +2 tai -2 askelta.",
 
   "Caretaker Contract": "Huoltosopimus",
   "Action: Spend 8 heat to increase your terraform rating 1 step.": "TOIMINTO: Käytä 8 lämpöä lisätäksesi MKL:ääsi 1 askel.",
@@ -667,7 +667,7 @@
   "Decrease your energy production 1 step. Raise your TR 2 steps.": "Vähennä energiatuotantoasi 1 askel. Nosta MKL:ääsi 2 askelta.",
 
   "Special Design": "Erikoissuunnittelu",
-  "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "Seuraavan kortin, jonka pelaat tämän sukupolven aikana, globaalit vaatimukset ovat valintasi mukaan +2 tai -2 askelta.",
+  "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "Seuraavan kortin, jonka pelaat tämän sukupolven aikana, yleiset vaatimukset ovat valintasi mukaan +2 tai −2 askelta.",
 
   "Medical Lab": "Lääketieteellinen laboratorio",
   "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Lisää M€-tuotantoasi 1 askel per 2 rakennusympyrää, joka sinulla on, tämä mukaan lukien.",

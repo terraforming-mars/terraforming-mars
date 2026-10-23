@@ -953,10 +953,6 @@ export class Player implements IPlayer {
     PathfindersExpansion.onCardPlayed(this, card);
   }
 
-  public playActionCard(): PlayerInput {
-    return this.selectCardAction('Perform an action from a played card', this.getPlayableActionCards());
-  }
-
   private getPlayCeoOPGAction(): PlayerInput | undefined {
     const cards = CeoExtension.getUsableOPGCeoCards(this);
     if (cards.length === 0) {
@@ -1586,8 +1582,9 @@ export class Player implements IPlayer {
     }
 
     // Action cards
-    if (this.getPlayableActionCards().length > 0) {
-      action.options.push(this.playActionCard());
+    const playableActionCards = this.getPlayableActionCards();
+    if (playableActionCards.length > 0) {
+      action.options.push(this.selectCardAction('Perform an action from a played card', playableActionCards));
     }
 
     // CEO cards

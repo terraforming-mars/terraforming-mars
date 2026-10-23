@@ -184,12 +184,7 @@ describe('SolBank', () => {
     player.steel = 1;
     player.megaCredits = 0;
     const spaceElevator = new SpaceElevator();
-    player.playedCards.push(spaceElevator);
-    const selectCard = player.playActionCard();
-    selectCard.process({
-      type: 'card',
-      cards: [CardName.SPACE_ELEVATOR],
-    }, player);
+    spaceElevator.action(player);
     runAllActions(game);
 
     expect(player.steel).eq(0);

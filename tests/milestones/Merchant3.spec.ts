@@ -1,14 +1,22 @@
 import {expect} from 'chai';
+import {IGame} from '@/server/IGame';
 import {testGame} from '../TestGame';
 import {Merchant3} from '@/server/milestones/Merchant3';
 import {TestPlayer} from '@tests/TestPlayer';
+import {runAllActions} from '@tests/TestingUtils';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPayment} from '@/server/inputs/SelectPayment';
+import {Payment} from '@/common/inputs/Payment';
+import {cast} from '@/common/utils/utils';
 
 describe('Merchant3', () => {
+  let game: IGame;
   let player: TestPlayer;
   let merchant3: Merchant3;
 
   beforeEach(() => {
-    [/* game */, player] = testGame(1);
+    [game, player] = testGame(2);
     merchant3 = new Merchant3();
   });
 
@@ -41,5 +49,25 @@ describe('Merchant3', () => {
     player.stock.override({megacredits: 3, steel: 3, titanium: 3, plants: 3, energy: 3, heat: 3});
     expect(merchant3.getScore(player)).eq(0);
     expect(merchant3.canClaim(player)).is.false;
+  });
+
+  it('claiming reserves 3 of each when paying with heat as M€', () => {
+    game.milestones.length = 0;
+    game.milestones.push(merchant3);
+    player.canUseHeatAsMegaCredits = true;
+    player.stock.override({megacredits: 3, heat: 11, steel: 3, titanium: 3, plants: 3, energy: 3});
+    expect(merchant3.canClaim(player)).is.true;
+
+    const claim = cast(player.getActions().options.find((o) => o.title === 'Claim a milestone'), OrOptions);
+    cast(claim.options[0], SelectOption).cb(undefined);
+    runAllActions(game);
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+
+    // 3 M€ + 5 heat covers the cost of 8 but spends the 3 M€ that must stay.
+    expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 3, heat: 5})}, player)).to.throw();
+    // The 3 heat reserve stays in place: 8 heat alone pays the cost.
+    selectPayment.process({type: 'payment', payment: Payment.of({heat: 8})}, player);
+    expect(player.heat).eq(3);
+    expect(game.milestoneClaimed(merchant3)).is.true;
   });
 });

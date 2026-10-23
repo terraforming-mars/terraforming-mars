@@ -4,12 +4,15 @@ import {PlayerInputType} from '../common/input/PlayerInputType';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {IPlayer} from './IPlayer';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
+import {generateRandomId} from './utils/server-ids';
 
 export interface PlayerInput {
     type: PlayerInputType;
     buttonLabel: string;
     title: string | Message;
     warning?: string | Message;
+    // The client sends this back with its response, so a response to an earlier input is rejected.
+    readonly requestId: string;
 
     // Contextual annotation identifying this PlayerInput.
     annotation: string | undefined;
@@ -48,6 +51,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public warning?: string | Message;
+  public readonly requestId = generateRandomId('');
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
   public annotation: string | undefined;

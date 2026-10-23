@@ -41,7 +41,7 @@ import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
+import {INVALID_REQUEST_ID, INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 import {gameDocumentTitle} from '../utils/documentTitle';
 import {setFaviconStatus, setFaviconTurnFrame} from '@/client/utils/favicon';
@@ -151,7 +151,7 @@ export default defineComponent({
         {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({runId: this.playerView.runId, ...out}),
+          body: JSON.stringify({runId: this.playerView.runId, requestId: this.waitingfor?.requestId, ...out}),
         });
     },
     reset() {
@@ -178,7 +178,7 @@ export default defineComponent({
           if (response.status === statusCode.badRequest) {
             const resp = await response.json() as AppErrorResponse;
             let cb = () => {};
-            if (resp.id === INVALID_RUN_ID) {
+            if (resp.id === INVALID_RUN_ID || resp.id === INVALID_REQUEST_ID) {
               cb = () => setTimeout(() => window.location.reload(), 100);
             }
             showAlert('Error with input', resp.message, cb);

@@ -44,7 +44,7 @@ export class GiveColonyBonus extends DeferredAction {
   }
 
   private giveColonyBonus(player: IPlayer): void {
-    if (this.waitingFor.get(player.id) ?? 0 > 0) {
+    if ((this.waitingFor.get(player.id) ?? 0) > 0) {
       this.waitingFor.remove(player.id);
       const input = this.colony.giveColonyBonus(player, true);
       if (input !== undefined) {

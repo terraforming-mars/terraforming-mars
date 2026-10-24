@@ -565,11 +565,7 @@ export class Game implements IGame, Logger {
    * Run every deferred action, including any added while running them, and then call `cb`.
    */
   public drainQueue(cb: () => void): void {
-    if (this.deferredActions.length === 0) {
-      cb();
-      return;
-    }
-    this.deferredActions.runAll(() => this.drainQueue(cb));
+    this.deferredActions.runAll(cb);
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {

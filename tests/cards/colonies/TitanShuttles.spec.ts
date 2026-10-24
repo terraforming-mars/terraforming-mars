@@ -75,4 +75,19 @@ describe('TitanShuttles', () => {
     selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(2);
   });
+
+  it('Spending floaters logs a single message', () => {
+    const card2 = new TitanFloatingLaunchPad();
+    player.playedCards.push(card2);
+    player.addResourceTo(card, 5);
+    game.gameLog.length = 0;
+
+    const orOptions = cast(card.action(player), OrOptions);
+    orOptions.options[1].cb(3);
+
+    expect(card.resourceCount).to.eq(2);
+    expect(player.titanium).to.eq(3);
+    expect(game.gameLog).has.length(1);
+    expect(game.gameLog[0].message).to.eq('${0} removed ${1}:cr:floater: to gain ${2}:r:titanium:');
+  });
 });

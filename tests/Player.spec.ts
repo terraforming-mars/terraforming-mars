@@ -88,6 +88,19 @@ describe('Player', () => {
     expect(player.inputRequestedAt).eq(5000);
   });
 
+  it('keeps the request id when a response is rejected', () => {
+    const [/* game */, player] = testGame(1);
+    player.clearWaitingFor();
+    player.setWaitingFor(new SelectOption('Input'));
+    const requestId = player.requestId;
+
+    expect(() => player.process({type: 'amount', amount: 1})).to.throw(/Not a valid SelectOptionResponse/);
+    expect(player.requestId).eq(requestId);
+
+    player.process({type: 'option'});
+    expect(player.requestId).is.undefined;
+  });
+
   it('does not stop the timer when processing optional input', () => {
     const [player, clock] = playerWithRunningTimer();
     const elapsed = player.timer.getElapsed();

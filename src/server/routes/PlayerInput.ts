@@ -159,7 +159,7 @@ function validateRunId(entity: any) {
 // Rejects a response sent for an input the player has since moved past, e.g. from a page
 // that never got the reply to its previous response.
 function validateRequestId(player: IPlayer, entity: any) {
-  if (entity.requestId !== undefined && entity.requestId !== player.getWaitingFor()?.requestId) {
+  if (entity.requestId !== undefined && entity.requestId !== player.requestId) {
     throw new AppError(INVALID_REQUEST_ID, 'This page is out of date. Click OK to refresh it.');
   }
   // Clearing this out to be compatible with the input response processors.

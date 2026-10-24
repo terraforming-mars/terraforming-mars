@@ -5,7 +5,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '@/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
-import {testGame} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 
 describe('AerialLenses', () => {
   let card: AerialLenses;
@@ -29,8 +29,8 @@ describe('AerialLenses', () => {
   it('Should play without plants', () => {
     card.play(player);
     expect(player.production.heat).to.eq(2);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Should play with plants', () => {

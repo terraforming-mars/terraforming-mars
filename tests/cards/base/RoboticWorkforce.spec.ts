@@ -14,7 +14,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {runNextAction, runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
+import {runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -427,8 +427,8 @@ describe('RoboticWorkforce', () => {
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)
         while (game.deferredActions.length) {
-          // Some actions (e.g. PlaceCityTile) return their input rather than setting waitingFor.
-          const waitingFor = runNextAction(game) ?? player.popWaitingFor();
+          runAllActions(game);
+          const waitingFor = player.popWaitingFor();
           if (waitingFor instanceof SelectSpace) {
             waitingFor.cb(waitingFor.spaces[0]);
           }

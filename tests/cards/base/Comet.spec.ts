@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/server/cards/base/Comet';
 import {IGame} from '../../../src/server/IGame';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
@@ -42,8 +42,8 @@ describe('Comet', () => {
     player.plants = 8;
 
     card.play(player);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.plants).to.eq(8); // self plants are not removed
     expect(game.getTemperature()).to.eq(-28);

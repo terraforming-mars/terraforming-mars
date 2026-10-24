@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {cast} from '@/common/utils/utils';
 import {testGame} from '../../TestGame';
+import {runAllActions} from '@tests/TestingUtils';
 
 describe('HeatTrappers', () => {
   let card: HeatTrappers;
@@ -36,8 +37,8 @@ describe('HeatTrappers', () => {
     card.play(player);
     expect(player.production.energy).to.eq(1);
 
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(player2.production.heat).to.eq(5);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsFrontierAlliance} from '../../../src/server/cards/pathfinders/MarsFrontierAlliance';
-import {addGreenery, runAllActions, runNextAction} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -106,14 +106,15 @@ describe('MarsFrontierAlliance', () => {
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     player.setAlliedParty(reds);
     player.megaCredits = 3;
-    const tr = player.terraformRating;
+    player.terraformRating = 14;
     addOcean(player);
-    runNextAction(game);
-    expect(player.terraformRating).to.equal(tr + 1);
+    runAllActions(game);
+
+    expect(player.terraformRating).to.equal(15);
     expect(player.megaCredits).to.equal(3);
     player.megaCredits = 0;
     addOcean(player);
-    expect(player.terraformRating).to.equal(tr + 2);
+    expect(player.terraformRating).to.equal(16);
   });
 
   it('Passive effect from Greens party should be applied', () => {

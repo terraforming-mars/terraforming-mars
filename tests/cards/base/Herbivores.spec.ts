@@ -3,7 +3,7 @@ import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {addGreenery, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
+import {addGreenery, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast} from '../../../src/common/utils/utils';
@@ -39,8 +39,8 @@ describe('Herbivores', () => {
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
-    const input = runNextAction(game);
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(player2.production.plants).to.eq(0);
   });
 
@@ -64,12 +64,15 @@ describe('Herbivores', () => {
     addGreenery(player);
     addGreenery(player);
     runAllActions(game);
+
     expect(card.resourceCount).to.eq(2);
 
     addGreenery(player2);
-    runNextAction(game);
+    runAllActions(game);
+
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 
+    // TODO(kberg): assert victory points in its own t est.
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 

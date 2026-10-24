@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {IGame} from '../../../src/server/IGame';
-import {addOcean, runNextAction, setTemperature} from '../../TestingUtils';
+import {addOcean, runAllActions, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ArcticAlgae', () => {
@@ -27,7 +27,7 @@ describe('ArcticAlgae', () => {
     player.playedCards.push(card);
 
     addOcean(player2);
-    runNextAction(game);
+    runAllActions(game);
     expect(player.plants).to.eq(3);
   });
 });

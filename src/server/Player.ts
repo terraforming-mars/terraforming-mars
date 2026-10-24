@@ -1095,7 +1095,12 @@ export class Player implements IPlayer {
     } else {
       const baseCost = this.milestoneCost();
       const cost = baseCost + ((milestone.name === 'Briber') ? 12 : 0);
-      const reserveUnits = milestone.name === 'Merchant' ? Units.every(2) : Units.EMPTY;
+      let reserveUnits = Units.EMPTY;
+      if (milestone.name === 'Merchant') {
+        reserveUnits = Units.every(2);
+      } else if (milestone.name === 'Merchant3') {
+        reserveUnits = Units.every(3);
+      }
       this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone', reserveUnits: reserveUnits})).andThen(() => {
         recordClaim();
       });

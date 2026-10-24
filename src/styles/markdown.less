@@ -21,12 +21,16 @@
   width: 24px;
 }
 
-// Wraps a .markdown-resource, like a card's production box.
+// Wraps a .markdown-resource, like a card's production box. The bevel and
+// outline match the card box so a production icon in a log line reads as
+// production, not as a plain resource icon.
 .markdown-production {
   line-height: 0;
   padding: 2px;
   background-image: url(./assets/misc/production.png);
   background-size: cover;
+  .raised-bevel();
+  box-shadow: @outline-shadow;
 
   .markdown-resource {
     margin: 0;

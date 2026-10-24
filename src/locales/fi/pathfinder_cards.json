@@ -240,8 +240,8 @@
 
   "Think Tank": "Ajatushautomo",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(TOIMINTO: Käytä 2 M€ asettaaksesi 1 datan mille kortille tahansa.)",
-  "+/-1 global parameter": "+/-1 globaali parametri",
-  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(VAIKUTUS: Kun pelaat kortin, voit poistaa dataa tältä kortilta muuttaaksesi kortin globaaleja vaatimuksia 1 askel jokaista poistettua dataa kohti.)",
+  "+/-1 global parameter": "+/-1 yhteinen muuttuja",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(VAIKUTUS: Kun pelaat kortin, voit poistaa dataa tältä kortilta muuttaaksesi kortin yleisiä vaatimuksia 1 askel jokaista poistettua dataa kohti.)",
 
   "Venera Base": "Tukikohta Venera",
   "(Action: Add 1 floater to ANY Venus card)": "(TOIMINTO: Lisää 1 kelluke MILLE TAHANSA Venus-kortille)",

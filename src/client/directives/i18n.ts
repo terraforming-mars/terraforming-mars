@@ -52,17 +52,16 @@ export function translateText(englishText: string): string {
 
   englishText = normalizeText(englishText);
 
-  // Don't translate non-word strings
-  if (/^(\W|\d)*$/.test(englishText)) {
+  // Don't translate non-word strings, ignoring icon shortcodes such as :r:megacredits:
+  if (/^(\W|\d)*$/.test(englishText.replace(/:[a-z]+:[\w-]+:/g, ''))) {
     return englishText;
   }
 
   let translatedText = translations[englishText];
+  const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
 
   // Check if translated word is in brackets
   if (translatedText === undefined) {
-    const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
-
     if (isTextInBrackets) {
       const translationAttempt = translations[englishText.slice(1, -1)];
       if (translationAttempt) {
@@ -81,11 +80,12 @@ export function translateText(englishText: string): string {
       translated = new Set();
       for (const k in translations) {
         if (Object.hasOwn(translations, k)) {
-          translated.add(translations[k]);
+          translated.add(normalizeText(translations[k]));
         }
       }
     }
-    if (!translated.has(englishText)) {
+    const alreadyTranslated = translated.has(englishText) || (isTextInBrackets && translated.has(englishText.slice(1, -1)));
+    if (!alreadyTranslated) {
       console.log(`${lang} - please translate: "${englishText}"`);
     }
   }

@@ -1,9 +1,12 @@
-import {shallowMount} from '@vue/test-utils';
+import {mount, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
+import {defineComponent, h, PropType, withDirectives} from 'vue';
 import {globalConfig} from '../getLocalVue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
+import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {fakeGameModel, fakePublicPlayerModel, fakeViewModel} from '../testHelpers';
 import {Phase} from '@/common/Phase';
+import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 
 describe('PlayersOverview', () => {
   it('mounts without errors', () => {
@@ -72,5 +75,32 @@ describe('PlayersOverview', () => {
     const vm = wrapper.vm as any;
     expect(vm.getActionLabel(blue)).eq('active');
     expect(vm.getActionLabel(red)).eq('passed');
+  });
+
+  it('reorders players under v-trim-whitespace', async () => {
+    // A spectator's players start with the first player, so they rotate every generation.
+    const spectator = (players: Array<PublicPlayerModel>) => fakeViewModel({players, thisPlayer: undefined, color: 'neutral'});
+    const blue = fakePublicPlayerModel({color: 'blue'});
+    const red = fakePublicPlayerModel({color: 'red'});
+    const Host = defineComponent({
+      props: {playerView: {type: Object as PropType<ViewModel>, required: true}},
+      render() {
+        const directive = {mounted: trimEmptyTextNodes, updated: trimEmptyTextNodes};
+        return withDirectives(h(PlayersOverview, {playerView: this.playerView}), [[directive]]);
+      },
+    });
+    const errors: Array<unknown> = [];
+    const wrapper = mount(Host, {
+      global: {
+        ...globalConfig.global,
+        stubs: {PlayerInfo: true, OtherPlayer: true, OverviewSettings: true},
+        config: {...globalConfig.global.config, errorHandler: (err) => errors.push(err)},
+      },
+      props: {playerView: spectator([blue, red])},
+    });
+
+    await wrapper.setProps({playerView: spectator([red, blue])});
+
+    expect(errors).deep.eq([]);
   });
 });

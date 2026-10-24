@@ -28,4 +28,13 @@ describe('SoilBacteria', () => {
     game.deferredActions.runNext();
     expect(player.stock.plants).to.eq(4);
   });
+  it('Logs Soil Bacteria as the source of the plants gained', () => {
+    card.play(player);
+    game.gameLog.length = 0;
+    card.onCardPlayed(player, new Ants());
+    game.deferredActions.runNext();
+    expect(game.gameLog).has.length(1);
+    expect(game.gameLog[0].message).to.eq('${0} gained ${1}${2} because of ${3}');
+    expect(game.gameLog[0].data[3].value).to.eq('Soil Bacteria');
+  });
 });

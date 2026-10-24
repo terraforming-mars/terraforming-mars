@@ -207,6 +207,12 @@ export default defineComponent({
       const vueApp = this;
       const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
+      // Only a new view restarts polling, through the playerView watcher.
+      const pollAgainUnlessUpdated = (updated: boolean) => {
+        if (!updated) {
+          vueApp.waitForUpdate();
+        }
+      };
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
@@ -219,16 +225,16 @@ export default defineComponent({
             this.playersWaitingFor = result.waitingFor;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
-              root.updatePlayer();
+              root.updatePlayer().then(pollAgainUnlessUpdated);
               this.notify();
               // We don't need to wait anymore - it's our turn
               return;
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               if (isPlayerId(this.playerView.id)) {
-                root.updatePlayer();
+                root.updatePlayer().then(pollAgainUnlessUpdated);
               } else {
-                root.updateSpectator();
+                root.updateSpectator().then(pollAgainUnlessUpdated);
               }
 
               return;

@@ -207,34 +207,34 @@ export default defineComponent({
       const vueApp = this;
       const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
-      // Only a new view restarts polling, through the playerView watcher.
-      const pollAgainUnlessUpdated = (updated: boolean) => {
-        if (!updated) {
-          vueApp.waitForUpdate();
-        }
-      };
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
           root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
         };
-        xhr.onload = () => {
+        xhr.onload = async () => {
           if (xhr.status === statusCode.ok) {
             const result = xhr.response as WaitingForModel;
             this.playersWaitingFor = result.waitingFor;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
-              root.updatePlayer().then(pollAgainUnlessUpdated);
+              const updated = root.updatePlayer();
               this.notify();
+              // A new view restarts polling through the playerView watcher.
+              if (!await updated) {
+                vueApp.waitForUpdate();
+              }
               // We don't need to wait anymore - it's our turn
               return;
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               if (isPlayerId(this.playerView.id)) {
-                root.updatePlayer().then(pollAgainUnlessUpdated);
-              } else {
-                root.updateSpectator().then(pollAgainUnlessUpdated);
+                if (!await root.updatePlayer()) {
+                  vueApp.waitForUpdate();
+                }
+              } else if (!await root.updateSpectator()) {
+                vueApp.waitForUpdate();
               }
 
               return;

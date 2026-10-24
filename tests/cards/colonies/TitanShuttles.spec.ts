@@ -8,6 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {runAllActions} from '@tests/TestingUtils';
 
 describe('TitanShuttles', () => {
   let card: TitanShuttles;
@@ -36,8 +37,8 @@ describe('TitanShuttles', () => {
   it('Auto add floaters if only 1 option and 1 target available', () => {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(2);
   });
 

@@ -3,7 +3,7 @@ import {MainBeltAsteroids} from '../../../src/server/cards/prelude2/MainBeltAste
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {testGame} from '../../TestGame';
-import {churn, runNextAction} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -30,8 +30,7 @@ describe('MainBeltAsteroids', () => {
     expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
-    // SelectPaymentDeferred
-    runNextAction(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);
 
@@ -46,18 +45,18 @@ describe('MainBeltAsteroids', () => {
     player.megaCredits = 5;
 
     player.playCard(card);
-    // SelectPaymentDeferred
-    runNextAction(game);
+    runAllActions(game);
 
     expect(card.canAct(player)).is.true;
     expect(card.action(player)).is.undefined;
 
-    runNextAction(game);
+    runAllActions(game);
 
     expect(game.deferredActions).has.lengthOf(0);
     expect(card.resourceCount).to.eq(1);
     expect(player.titanium).to.eq(1);
 
+    // TODO(kberg): victory points should be its own test
     expect(card.getVictoryPoints(player)).to.eq(0);
   });
 
@@ -65,8 +64,7 @@ describe('MainBeltAsteroids', () => {
     player.megaCredits = 5;
 
     player.playCard(card);
-    // SelectPaymentDeferred
-    runNextAction(game);
+    runAllActions(game);
 
     const cometAiming = new CometAiming();
     player.playCard(cometAiming);
@@ -82,12 +80,13 @@ describe('MainBeltAsteroids', () => {
 
     expect(ceosFavoriteProject.canPlay(player));
     player.playCard(ceosFavoriteProject);
-    runNextAction(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).to.eq(2);
     expect(player.titanium).to.eq(2);
 
+    // TODO(kberg): Victory points should be its own test
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
@@ -95,8 +94,7 @@ describe('MainBeltAsteroids', () => {
     player.megaCredits = 5;
 
     player.playCard(card);
-    // SelectPaymentDeferred
-    runNextAction(game);
+    runAllActions(game);
 
     const cometAiming = new CometAiming();
     player.playCard(cometAiming);

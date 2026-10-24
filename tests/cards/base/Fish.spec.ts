@@ -36,8 +36,8 @@ describe('Fish', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(player2.production.plants).to.eq(0);
   });
 

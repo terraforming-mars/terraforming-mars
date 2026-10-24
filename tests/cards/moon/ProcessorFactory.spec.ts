@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {runNextAction} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/server/cards/moon/ProcessorFactory';
 
@@ -22,13 +22,14 @@ describe('ProcessorFactory', () => {
   });
 
   it('act', () => {
+    player.playedCards.push(card);
     player.steel = 1;
     card.resourceCount = 0;
-    card.action(player);
-    player.playedCards.push(card);
-    expect(player.steel).eq(0);
-    runNextAction(player.game);
 
+    card.action(player);
+    runAllActions(player.game);
+
+    expect(player.steel).eq(0);
     expect(card.resourceCount).eq(2);
   });
 });

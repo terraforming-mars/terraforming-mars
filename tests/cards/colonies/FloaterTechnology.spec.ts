@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churn} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -36,8 +36,8 @@ describe('FloaterTechnology', () => {
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(dirigibles.resourceCount).to.eq(1);
   });
 

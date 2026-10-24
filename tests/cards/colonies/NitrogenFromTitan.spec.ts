@@ -8,6 +8,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {runAllActions} from '@tests/TestingUtils';
 
 describe('NitrogenFromTitan', () => {
   let card: NitrogenFromTitan;
@@ -23,8 +24,8 @@ describe('NitrogenFromTitan', () => {
     const tr = player.terraformRating;
     card.play(player);
     expect(player.terraformRating).to.eq(tr + 2);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Can play with single Jovian floater card', () => {

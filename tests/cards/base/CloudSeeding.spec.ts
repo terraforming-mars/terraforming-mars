@@ -3,7 +3,7 @@ import {CloudSeeding} from '../../../src/server/cards/base/CloudSeeding';
 import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast} from '../../../src/common/utils/utils';
@@ -53,8 +53,8 @@ describe('CloudSeeding', () => {
     expect(player.production.megacredits).to.eq(-1);
     expect(player.production.plants).to.eq(2);
 
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(player2.production.heat).to.eq(0);
   });
 

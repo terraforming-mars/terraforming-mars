@@ -3,7 +3,7 @@ import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
 import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {churn, runAllActions, runNextAction} from '../../TestingUtils';
+import {churn, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
@@ -36,7 +36,7 @@ describe('ImmigrantCity', () => {
     player.playedCards.push(card);
 
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
-    runNextAction(game);
+    runAllActions(game);
     expect(player.production.megacredits).to.eq(-1);
   });
 
@@ -55,7 +55,7 @@ describe('ImmigrantCity', () => {
 
     // add another city tile
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
-    runNextAction(game);
+    runAllActions(game);
     expect(player.production.megacredits).to.eq(-4);
   });
 

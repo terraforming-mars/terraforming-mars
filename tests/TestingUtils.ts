@@ -99,16 +99,11 @@ export function setRulingParty(game: IGame, partyName: PartyName, policyId?: Pol
 
 // Just shortcuts to some often called methods
 // related to the deferred actions queue
-export function runAllActions(game: IGame) {
-  game.deferredActions.runAll(() => {});
+export function runAllActions(game: IGame): void {
+  game.drainQueue(() => {});
 }
 
-export function runNextAction(game: IGame) {
-  const action = game.deferredActions.pop();
-  return action?.execute();
-}
-
-export function forceGenerationEnd(game: IGame) {
+export function forceGenerationEnd(game: IGame): void {
   while (game.deferredActions.pop() !== undefined) { /* empty */ }
   game.playersInGenerationOrder.forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();

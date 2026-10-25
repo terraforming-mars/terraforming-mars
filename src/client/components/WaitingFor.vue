@@ -221,7 +221,9 @@ export default defineComponent({
               // Will only apply to player, not spectator.
               const updated = root.updatePlayer();
               this.notify();
-              // A new view restarts polling through the playerView watcher.
+              // When the fetch works, root.playerView changes and the playerView watcher
+              // calls start(), which decides whether to keep polling. When it fails
+              // nothing changes, so poll again here.
               if (!await updated) {
                 vueApp.waitForUpdate();
               }

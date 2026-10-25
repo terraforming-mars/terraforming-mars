@@ -23,6 +23,7 @@ describe('AutomaGameSetup', () => {
     const city = addCity(marsBot);
     Turmoil.getTurmoil(game).sendDelegateToParty(marsBot, PartyName.GREENS, game);
     game.claimedMilestones.push({milestone: game.milestones[0], player: marsBot});
+    game.fundedAwards.push({award: game.awards[0], player: marsBot});
 
     const loaded = Game.deserialize(game.serialize());
 
@@ -33,5 +34,6 @@ describe('AutomaGameSetup', () => {
     expect(turmoil.getPartyByName(PartyName.GREENS).delegates.get(loadedBot)).eq(1);
     expect(turmoil.delegateReserve.get(loadedBot)).eq(DELEGATES_PER_PLAYER - 1);
     expect(loaded.claimedMilestones[0].player).eq(loadedBot);
+    expect(loaded.fundedAwards[0].player).eq(loadedBot);
   });
 });

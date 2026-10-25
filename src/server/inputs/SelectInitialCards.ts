@@ -97,7 +97,12 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     const game = player.game;
     // Check for negative M€
     const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
-    if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
+    let budget = corporation.startingMegaCredits;
+    if (corporation.name === CardName.LUNA_TRADE_FEDERATION) {
+      // Its 10 starting titanium is worth 2 M€ each.
+      budget += 20;
+    }
+    if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > budget) {
       player.cardsInHand = [];
       player.preludeCardsInHand = [];
       throw new InputError('Too many cards selected');

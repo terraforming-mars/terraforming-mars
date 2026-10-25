@@ -8,6 +8,9 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 // import {fakeCard, runAllActions} from '../../TestingUtils';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
+import {cast} from '@/common/utils/utils';
+import {SelectPayment} from '@/server/inputs/SelectPayment';
+import {Payment} from '@/common/inputs/Payment';
 // import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Tag} from '../../../src/common/cards/Tag';
 
@@ -111,5 +114,47 @@ describe('LunaTradeFederation', () => {
 
   it('can use titanium for other purchases', () => {
 
+  });
+
+  it('pays for initial cards with titanium', () => {
+    for (let i = 0; i < 8; i++) {
+      player.cardsInHand.push(fakeCard());
+    }
+    player.playCorporationCard(lunaTradeFederation);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(15);
+    expect(player.titanium).eq(10);
+
+    // 8 cards cost 24 M€.
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    expect(selectPayment.amount).eq(24);
+    expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 13, titanium: 5})}, player)).to.throw(/Did not spend enough/);
+    selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 14, titanium: 5})}, player);
+
+    expect(player.megaCredits).eq(1);
+    expect(player.titanium).eq(5);
+  });
+
+  it('may pay for initial cards with only M€', () => {
+    for (let i = 0; i < 5; i++) {
+      player.cardsInHand.push(fakeCard());
+    }
+    player.playCorporationCard(lunaTradeFederation);
+    runAllActions(game);
+
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 15})}, player);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.titanium).eq(10);
+  });
+
+  it('no payment prompt when keeping no initial cards', () => {
+    player.playCorporationCard(lunaTradeFederation);
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(player.megaCredits).eq(15);
   });
 });

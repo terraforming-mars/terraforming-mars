@@ -121,6 +121,7 @@ export class Server {
       runId: runId,
       pickedCorporationCard: player.pickedCorporationCard ? cardsToModel(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: cardsToModel(player, player.preludeCardsInHand),
+      requestId: player.requestId,
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
       players: players,

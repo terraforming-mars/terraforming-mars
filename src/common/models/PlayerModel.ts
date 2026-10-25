@@ -98,6 +98,8 @@ export interface PlayerViewModel extends ViewModel {
   ceoCardsInHand: ReadonlyArray<CardModel>;
   pickedCorporationCard: ReadonlyArray<CardModel>; // Why Array?
   preludeCardsInHand: ReadonlyArray<CardModel>;
+  /** The id of `waitingFor`, sent back with the response to it. */
+  requestId: string | undefined;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

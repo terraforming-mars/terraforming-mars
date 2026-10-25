@@ -202,6 +202,14 @@ export interface IPlayer {
    */
   inputRequestedAt?: number;
 
+  /**
+   * The id of the current input request.
+   *
+   * The client sends it back with its response. Not serialized: reloading the game asks for
+   * input again, which sets a new one.
+   */
+  requestId?: string;
+
   setup(game: IGame): void;
 
   getTitaniumValue(): number;

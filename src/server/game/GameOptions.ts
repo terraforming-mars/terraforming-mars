@@ -39,7 +39,6 @@ export type GameOptions = {
   starWarsExpansion: boolean;
   underworldExpansion: boolean;
   deltaProjectExpansion: boolean;
-  automa: boolean;
 
   expansions: Record<Expansion, boolean>,
 
@@ -56,6 +55,8 @@ export type GameOptions = {
   modularMA: boolean;
   /** Solo victory by getting TR 63 by game end */
   soloTR: boolean;
+  /** A 1 player game played against MarsBot */
+  automa: boolean;
   customCorporationsList: ReadonlyArray<CardName>;
   bannedCards: ReadonlyArray<CardName>;
   includedCards: ReadonlyArray<CardName>;

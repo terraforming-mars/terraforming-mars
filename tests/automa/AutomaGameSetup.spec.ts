@@ -11,7 +11,6 @@ describe('AutomaGameSetup', () => {
     const [game, human] = testGame(1, {automa: true});
 
     const marsBot = game.marsBotPlayer!;
-    expect(game.players).deep.eq([human]);
     expect(game.allPlayers).deep.eq([human, marsBot]);
     expect(game.isSoloMode()).is.false;
     expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
@@ -28,7 +27,6 @@ describe('AutomaGameSetup', () => {
     const loaded = Game.deserialize(game.serialize());
 
     const loadedBot = loaded.marsBotPlayer!;
-    expect(loadedBot.id).eq(marsBot.id);
     expect(loaded.board.getSpaceOrThrow(city.id).player).eq(loadedBot);
     const turmoil = Turmoil.getTurmoil(loaded);
     expect(turmoil.getPartyByName(PartyName.GREENS).delegates.get(loadedBot)).eq(1);

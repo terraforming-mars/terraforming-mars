@@ -375,7 +375,6 @@ export class Game implements IGame, Logger {
       game.underworldData = UnderworldExpansion.initialize(rng, gameOptions.boardName === BoardName.AMAZONIS_PLANITIA);
     }
 
-    // and 2 neutral cities and forests on board
     if (players.length === 1 && gameOptions.automa) {
       AutomaGameSetup.setup(game);
     } else if (players.length === 1) {

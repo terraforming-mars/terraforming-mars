@@ -58,11 +58,10 @@ export function translateText(englishText: string): string {
   }
 
   let translatedText = translations[englishText];
+  const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
 
   // Check if translated word is in brackets
   if (translatedText === undefined) {
-    const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
-
     if (isTextInBrackets) {
       const translationAttempt = translations[englishText.slice(1, -1)];
       if (translationAttempt) {
@@ -85,7 +84,8 @@ export function translateText(englishText: string): string {
         }
       }
     }
-    if (!translated.has(englishText)) {
+    const alreadyTranslated = translated.has(englishText) || (isTextInBrackets && translated.has(englishText.slice(1, -1)));
+    if (!alreadyTranslated) {
       console.log(`${lang} - please translate: "${englishText}"`);
     }
   }

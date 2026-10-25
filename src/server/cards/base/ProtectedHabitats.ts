@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardResource} from '../../../common/CardResource';
 import {uppercase} from '../Options';
+import {Resource} from '@/common/Resource';
 
 export class ProtectedHabitats extends Card implements IProjectCard {
   constructor() {
@@ -13,6 +14,10 @@ export class ProtectedHabitats extends Card implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.PROTECTED_HABITATS,
       cost: 5,
+      protects: {
+        resources: [Resource.PLANTS],
+        cardResources: [CardResource.ANIMAL, CardResource.MICROBE],
+      },
 
       metadata: {
         cardNumber: '173',

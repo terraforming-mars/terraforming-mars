@@ -231,6 +231,14 @@ export interface IPlayer {
    * isn't protected.
    */
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean;
+  /** Return true when opponents remove only half of `resource`, rounded up (Botanical Experience.) */
+  isHalfProtected(resource: Resource): boolean;
+  /** Return true when opponents cannot reduce `resource` production. */
+  isProductionProtected(resource: Resource): boolean;
+  /** Return true when opponents cannot remove `cardResource` from this player's cards. */
+  cardResourcesAreProtected(cardResource: CardResource): boolean;
+  /** How much of `amount` of `resource` an opponent can actually remove from this player. */
+  lossAfterProtection(resource: Resource, amount: number): number;
   /**
    * Give this player a chance to block an attack made by `perpetrator`. Call `cb` with true if the attack
    * is not blocked.

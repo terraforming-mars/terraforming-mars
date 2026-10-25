@@ -134,7 +134,6 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          const hasProtetedHabitats = p.tableau.has(CardName.PROTECTED_HABITATS);
           for (const card of p.getCardsWithResources(resourceType)) {
             if (card.resourceCount < min) {
               continue;
@@ -142,10 +141,8 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
             if (card.protectedResources === true) {
               continue;
             }
-            if (hasProtetedHabitats) {
-              if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
-                continue;
-              }
+            if (card.resourceType !== undefined && p.cardResourcesAreProtected(card.resourceType)) {
+              continue;
             }
             resourceCards.push(card);
           }

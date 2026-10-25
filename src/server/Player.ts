@@ -385,42 +385,48 @@ export class Player implements IPlayer {
   }
 
   public plantsAreProtected(): boolean {
-    return this.withinDeflectionZone ||
-      this.playedCards.has(CardName.PROTECTED_HABITATS) ||
-      this.playedCards.has(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    return this.isProtected(Resource.PLANTS);
   }
 
   public alloysAreProtected(): boolean {
-    return this.playedCards.has(CardName.LUNAR_SECURITY_STATIONS);
+    return this.isProtected(Resource.STEEL) && this.isProtected(Resource.TITANIUM);
   }
 
-  public isProtected(resource: Resource) {
-    switch (resource) {
-    case Resource.PLANTS:
-      return this.plantsAreProtected();
-    case Resource.STEEL:
-    case Resource.TITANIUM:
-      return this.alloysAreProtected();
+  public isProtected(resource: Resource): boolean {
+    if (resource === Resource.PLANTS && this.withinDeflectionZone) {
+      return true;
     }
-    return false;
+    return this.playedCards.protections.forResource(resource);
   }
 
-  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
+  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean {
     const reducable = this.production[resource] - PRODUCTION_MINIMUMS[resource];
     if (reducable < minQuantity) {
       return false;
     }
+    return attacker === this || !this.isProductionProtected(resource);
+  }
 
-    if (resource === Resource.STEEL || resource === Resource.TITANIUM) {
-      if (this.alloysAreProtected()) {
-        return false;
-      }
-    }
+  public isHalfProtected(resource: Resource): boolean {
+    return resource === Resource.PLANTS && this.playedCards.has(CardName.BOTANICAL_EXPERIENCE);
+  }
 
-    if (attacker !== this && this.playedCards.has(CardName.PRIVATE_SECURITY)) {
-      return false;
+  public isProductionProtected(resource: Resource): boolean {
+    return this.playedCards.protections.forProduction(resource);
+  }
+
+  public cardResourcesAreProtected(cardResource: CardResource): boolean {
+    return this.playedCards.protections.forCardResource(cardResource);
+  }
+
+  public lossAfterProtection(resource: Resource, amount: number): number {
+    if (this.isProtected(resource)) {
+      return 0;
     }
-    return true;
+    if (this.isHalfProtected(resource)) {
+      return Math.ceil(amount / 2);
+    }
+    return amount;
   }
 
   public maybeBlockAttack(perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void {

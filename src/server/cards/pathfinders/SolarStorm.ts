@@ -37,12 +37,7 @@ export class SolarStorm extends Card implements IProjectCard {
   }
 
   private removePlants(player: IPlayer, target: IPlayer) {
-    if (target.plantsAreProtected()) {
-      return;
-    }
-    // Botanical Experience reduces the impact in half.
-    const qty = target.tableau.has(CardName.BOTANICAL_EXPERIENCE) ? 1 : 2;
-    const realAmount = Math.min(qty, target.plants);
+    const realAmount = target.lossAfterProtection(Resource.PLANTS, Math.min(2, target.plants));
     if (realAmount > 0) {
       const msg = message('${0} plants', (b) => b.number(realAmount));
       target.maybeBlockAttack(player, msg, (proceed: boolean) => {

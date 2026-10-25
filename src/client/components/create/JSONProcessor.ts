@@ -113,6 +113,9 @@ export class JSONProcessor {
         boardOptions(board) :
         [board];
     }
+    if (Array.isArray(json.boards) && json.boards.length === 0) {
+      json.boards = [BoardName.THARSIS];
+    }
 
     const ignoredFields = [
       // Instead of ignoring these fields, let them pass through to the model.

@@ -235,6 +235,17 @@ const cases: Array<Case> = [
       escapeVelocityThreshold: 35,
     },
   },
+  {
+    description: 'empty boards loads as Tharsis',
+    input: {
+      ...TEMPLATE_INPUT,
+      boards: [],
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      boards: [BoardName.THARSIS],
+    },
+  },
 ];
 
 

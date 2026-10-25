@@ -1,6 +1,6 @@
 <!-- Popup listing every board, from which the player picks one. -->
 <template>
-  <PopupPanel class="create-game-board-popup" @close="$emit('close')">
+  <PopupPanel class="create-game-board-popup" @close="close">
     <template #header>
       <h2 v-i18n>Select boards to be randomly chosen</h2>
     </template>
@@ -73,6 +73,9 @@ const props = defineProps<{
 /** Boards currently checked in the popup. */
 const selectedBoards = ref<Array<BoardName>>([...props.boards]);
 
+/** Boards checked when the popup opened, restored if it closes with none checked. */
+const originalBoards: ReadonlyArray<BoardName> = [...props.boards];
+
 const emit = defineEmits<{
   'update:boards': [value: Array<BoardName>];
   'update:shuffleMap': [value: boolean];
@@ -134,6 +137,15 @@ function randomSelection(boards: ReadonlyArray<BoardName>) {
 function clear() {
   selectedBoards.value = [BoardName.THARSIS];
   emit('update:boards', [...selectedBoards.value]);
+}
+
+/** Closes the popup, falling back to the original boards, then Tharsis, when none are checked. */
+function close() {
+  if (selectedBoards.value.length === 0) {
+    const boards = originalBoards.length > 0 ? originalBoards : [BoardName.THARSIS];
+    emit('update:boards', [...boards]);
+  }
+  emit('close');
 }
 </script>
 

@@ -110,4 +110,24 @@ describe('BoardPopup', () => {
     expect(checkbox(wrapper, BoardName.ELYSIUM).element.checked).is.false;
     expect(wrapper.emitted('close')).is.undefined;
   });
+
+  it('closing with no boards restores the original boards', async () => {
+    const wrapper = mountPopup([BoardName.HELLAS, BoardName.ELYSIUM]);
+    await checkbox(wrapper, BoardName.HELLAS).setValue(false);
+    await checkbox(wrapper, BoardName.ELYSIUM).setValue(false);
+    await wrapper.find('.close-button').trigger('click');
+    expect(wrapper.emitted('update:boards')).to.deep.eq([
+      [[BoardName.ELYSIUM]],
+      [[]],
+      [[BoardName.HELLAS, BoardName.ELYSIUM]],
+    ]);
+    expect(wrapper.emitted('close')).to.have.length(1);
+  });
+
+  it('closing with no boards and no original boards selects Tharsis', async () => {
+    const wrapper = mountPopup([]);
+    await wrapper.find('.close-button').trigger('click');
+    expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.THARSIS]]]);
+    expect(wrapper.emitted('close')).to.have.length(1);
+  });
 });

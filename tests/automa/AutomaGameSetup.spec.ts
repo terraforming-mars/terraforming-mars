@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {testGame} from '../TestGame';
 import {addCity} from '../TestingUtils';
-import {Game} from '../../src/server/Game';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {PartyName} from '../../src/common/turmoil/PartyName';
-import {DELEGATES_PER_PLAYER} from '../../src/common/constants';
+import {Game} from '@/server/Game';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {DELEGATES_PER_PLAYER} from '@/common/constants';
 
 describe('AutomaGameSetup', () => {
   it('plays a one player automa game against MarsBot instead of the solo rules', () => {

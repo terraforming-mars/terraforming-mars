@@ -1722,7 +1722,7 @@ export class Game implements IGame, Logger {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    // MarsBot isn't in d.players. Its id comes from the game id, so it is recreated here.
+    // MarsBot isn't serialized with the players, so it is recreated from the game id.
     const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(d.id) : undefined;
     const board = GameSetup.deserializeBoard(marsBotPlayer === undefined ? players : [...players, marsBotPlayer], gameOptions, d);
 

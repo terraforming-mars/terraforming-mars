@@ -321,4 +321,10 @@ describe('ApiCreateGame', () => {
     await postGame(apiCreateGame, req3, res3);
     expect(res3.statusCode).not.eq(statusCode.tooManyRequests);
   });
+
+  it('rejects an empty board list', async () => {
+    await postConfig({...newGameConfigForTest(), boards: []});
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('Must select at least one board');
+  });
 });

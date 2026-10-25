@@ -109,6 +109,9 @@ export class ApiCreateGame extends Handler {
       if (gameReq.escapeVelocity !== undefined && hasNegativeEscapeVelocityOption(gameReq.escapeVelocity)) {
         throw RouteError.badRequest('Escape Velocity values cannot be negative.');
       }
+      if (gameReq.boards.length === 0) {
+        throw RouteError.badRequest('Must select at least one board');
+      }
       const gameId = safeCast(generateRandomId('g'), isGameId);
       const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
       const players = gameReq.players.map((p) => {

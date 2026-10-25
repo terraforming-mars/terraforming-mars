@@ -76,7 +76,7 @@ describe('PlayersOverview', () => {
     expect(vm.getActionLabel(red)).eq('passed');
   });
 
-  it('reorders players under v-trim-whitespace', async () => {
+  it('shows the new first player on top when the generation changes', async () => {
     // A spectator's players start with the first player, so they rotate every generation.
     const blue = fakePublicPlayerModel({color: 'blue'});
     const red = fakePublicPlayerModel({color: 'red'});

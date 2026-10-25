@@ -52,8 +52,8 @@ export function translateText(englishText: string): string {
 
   englishText = normalizeText(englishText);
 
-  // Don't translate non-word strings
-  if (/^(\W|\d)*$/.test(englishText)) {
+  // Don't translate non-word strings, ignoring icon shortcodes such as :r:megacredits:
+  if (/^(\W|\d)*$/.test(englishText.replace(/:[a-z]+:[\w-]+:/g, ''))) {
     return englishText;
   }
 

@@ -137,6 +137,7 @@ export class ApiCreateGame extends Handler {
         altVenusBoard: gameReq.altVenusBoard,
         aresExtension: gameReq.expansions.ares,
         aresHazards: true, // Not a runtime option.
+        automa: false, // No create-game UI yet.
         aresExtremeVariant: gameReq.aresExtremeVariant,
         bannedCards: gameReq.bannedCards,
         boardName: boardName,

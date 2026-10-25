@@ -81,7 +81,7 @@ export function translateText(englishText: string): string {
       translated = new Set();
       for (const k in translations) {
         if (Object.hasOwn(translations, k)) {
-          translated.add(translations[k]);
+          translated.add(normalizeText(translations[k]));
         }
       }
     }

@@ -365,7 +365,6 @@
   "You drew ${0}, ${1}, ${2} and ${3}": "Nostit ${0}, ${1}, ${2} ja ${3}",
   "You bought ${0}": "Ostit ${0}",
   "${0} spent ${1}:r:energy:": "${0} käytti ${1}:r:energy:",
-  "${0} spent ${1} energy": "${0} käytti ${1} energiaa",
   "${0} placed a Greenery tile": "${0} asetti viherlaatan",
   "${0} must select ${1} bonus resource(s) from ${2}' ability": "${0} täytyy valita ${1} bonusresurssi(a) ${2}:n kyvystä",
   "${0} placed a ${1} tile at $2": "${0} asetti ${1}-laatan kohtaan ${2}",

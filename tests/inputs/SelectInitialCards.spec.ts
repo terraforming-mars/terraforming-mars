@@ -117,4 +117,22 @@ describe('SelectInitialCards', () => {
     expect(player.ceoCardsInHand.size).eq(0);
     expect(player.cardsInHand).is.empty;
   });
+
+  it('Luna Trade Federation may use its starting titanium to keep cards', () => {
+    const projectCards = [
+      CardName.ANTS, CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES, CardName.ALGAE,
+      CardName.ARCHAEBACTERIA, CardName.ASTEROID, CardName.BIRDS, CardName.FISH, CardName.PETS,
+    ];
+    player.dealtCorporationCards = corporationCardsFromJSON([CardName.LUNA_TRADE_FEDERATION, CardName.HELION]);
+    player.dealtProjectCards = cardsFromJSON(projectCards);
+    selectInitialCards = new SelectInitialCards(player, cb);
+
+    selectInitialCards.process({type: 'initialCards', responses: [
+      {type: 'card', cards: [CardName.LUNA_TRADE_FEDERATION]},
+      {type: 'card', cards: projectCards},
+    ]}, player);
+
+    expect(corp!.name).eq(CardName.LUNA_TRADE_FEDERATION);
+    expect(player.cardsInHand.map(toName)).to.have.members(projectCards);
+  });
 });

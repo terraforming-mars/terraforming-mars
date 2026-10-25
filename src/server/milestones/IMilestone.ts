@@ -8,8 +8,9 @@ export interface IMilestone {
   canClaim(player: IPlayer): boolean;
   getScore(player: IPlayer): number;
   /**
-   * Returns whether MarsBot meets the criteria. Defined only where the automa rules differ from
-   * `canClaim` for MarsBot's player.
+   * Whether MarsBot meets the criteria.
+   *
+   * Only for milestones where the automa rules differ from `canClaim` for MarsBot's player.
    */
   marsBotCanClaim?(bot: IMarsBot): boolean;
 }

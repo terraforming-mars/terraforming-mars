@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Tag} from '@/common/cards/Tag';
-import {marsBotAwardScore} from '@/server/automa/MarsBotMilestoneAwardEval';
 import {Thermalist} from '@/server/awards/Thermalist';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
 
@@ -9,6 +8,6 @@ describe('Thermalist', () => {
     const bot = fakeMarsBot();
     setTrack(bot, Tag.POWER, 3);
 
-    expect(marsBotAwardScore(new Thermalist(), bot)).eq(8);
+    expect(new Thermalist().marsBotScore(bot)).eq(8);
   });
 });

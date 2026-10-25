@@ -16,11 +16,7 @@ export class MarsBotTags extends Tags {
   }
 
   protected override rawCount(tag: Tag, _includeEventsTags: boolean): number {
-    const trackIndex = this.marsBotBoard.tagToTrack[tag];
-    if (trackIndex !== undefined) {
-      return this.marsBotBoard.tracks[trackIndex].position;
-    }
-    return 0;
+    return this.marsBotBoard.trackPosition(tag);
   }
 
   // countAllTags skips Event and calls getPlayedEventsCount separately,

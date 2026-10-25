@@ -7,8 +7,9 @@ export interface IAward {
     description: string;
     getScore(player: IPlayer): number;
     /**
-     * Returns MarsBot's score. Defined only where the automa rules differ from `getScore` for
-     * MarsBot's player.
+     * MarsBot's score.
+     *
+     * Only for awards where the automa rules differ from `getScore` for MarsBot's player.
      */
     marsBotScore?(bot: IMarsBot): number;
 }

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Tag} from '@/common/cards/Tag';
-import {marsBotAwardScore} from '@/server/automa/MarsBotMilestoneAwardEval';
 import {Banker} from '@/server/awards/Banker';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
 
@@ -10,6 +9,6 @@ describe('Banker', () => {
     setTrack(bot, Tag.BUILDING, 3);
     setTrack(bot, Tag.EVENT, 2);
 
-    expect(marsBotAwardScore(new Banker(), bot)).eq(5);
+    expect(new Banker().marsBotScore(bot)).eq(5);
   });
 });

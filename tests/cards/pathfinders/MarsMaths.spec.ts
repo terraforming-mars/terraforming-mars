@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
-import {finishGeneration, runAllActions} from '../../TestingUtils';
+import {doWait, finishGeneration, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectStandardProjectToPlay} from '../../../src/server/inputs/SelectStandardProjectToPlay';
@@ -20,13 +20,12 @@ import {assertSelectStandardProject} from '../../assertions';
 // `actionsTakenThisRound` (and the turn, if the round is over) exactly like the server does.
 function takeStandardProjectAction(player: TestPlayer, standardProject: CardName) {
   player.takeAction();
-  const [waitingFor, cb] = player.popWaitingFor2();
-  const orOptions = cast(waitingFor, OrOptions);
-  const standardProjectOption = cast(
-    orOptions.options.find((option) => option instanceof SelectStandardProjectToPlay),
-    SelectStandardProjectToPlay);
-  assertSelectStandardProject(standardProjectOption, player, standardProject);
-  cb?.();
+  doWait(player, OrOptions, (orOptions) => {
+    const standardProjectOption = cast(
+      orOptions.options.find((option) => option instanceof SelectStandardProjectToPlay),
+      SelectStandardProjectToPlay);
+    assertSelectStandardProject(standardProjectOption, player, standardProject);
+  });
 }
 
 describe('MarsMaths', () => {

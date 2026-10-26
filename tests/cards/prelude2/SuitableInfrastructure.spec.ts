@@ -3,7 +3,7 @@ import {SuitableInfrastructure} from '../../../src/server/cards/prelude2/Suitabl
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
-import {runAllActions, simulateFinishingAction} from '../../TestingUtils';
+import {doWait, runAllActions, simulateFinishingAction} from '../../TestingUtils';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -137,19 +137,13 @@ describe('SuitableInfrastructure', () => {
 
     player.takeAction();
     runAllActions(game);
-    const [action, cb] = player.popWaitingFor2();
-    const selectCard = cast(action, SelectCard);
-    selectCard.cb([suitableInfrastructure]);
-    cb!();
+    doWait(player, SelectCard, (selectCard) => selectCard.cb([suitableInfrastructure]));
     runAllActions(game);
 
     expect(player.production.megacredits).eq(-1);
     expect(player.megaCredits).eq(2);
 
-    const [action2, cb2] = player.popWaitingFor2();
-    const selectCard2 = cast(action2, SelectCard);
-    selectCard2.cb([spaceLanes]);
-    cb2!();
+    doWait(player, SelectCard, (selectCard) => selectCard.cb([spaceLanes]));
     runAllActions(game);
 
     expect(player.production.megacredits).eq(0);
@@ -167,18 +161,17 @@ describe('SuitableInfrastructure', () => {
     // Start the player's turn via the real takeAction flow.
     player.takeAction();
 
-    const [action1, cb1] = player.popWaitingFor2();
-    assertIsTakeAction(action1);
+    doWait(player, OrOptions, (orOptions) => {
+      assertIsTakeAction(orOptions);
 
-    // Simulate action that would defer a steel production.
-    player.defer(() => {
-      player.production.add(Resource.STEEL, 1);
-      return undefined;
+      // Simulate action that would defer a steel production.
+      player.defer(() => {
+        player.production.add(Resource.STEEL, 1);
+        return undefined;
+      });
+
+      expect(player.megaCredits).eq(0);
     });
-
-    expect(player.megaCredits).eq(0);
-
-    cb1!();
 
     expect(player.megaCredits).eq(2);
 

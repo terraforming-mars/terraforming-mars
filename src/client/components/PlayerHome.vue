@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <Sidebar v-trim-whitespace
+    <Sidebar
       :actingPlayer="isPlayerActing(playerView)"
       :playerColor="thisPlayer.color"
       :generation="game.generation"
@@ -39,7 +39,7 @@
       </div>
 
     <a class="hotkey-target"></a>
-    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="playerView" id="shortkey-playersoverview"/>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">

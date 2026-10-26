@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {fakeGameModel, fakePublicPlayerModel, fakeViewModel} from '../testHelpers';
 import {Phase} from '@/common/Phase';
 
@@ -84,7 +83,6 @@ describe('PlayersOverview', () => {
       ...globalConfig,
       props: {playerView: fakeViewModel({players: [blue, red], thisPlayer: undefined})},
     });
-    trimEmptyTextNodes(wrapper.element);
 
     await wrapper.setProps({playerView: fakeViewModel({players: [red, blue], thisPlayer: undefined})});
 

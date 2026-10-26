@@ -1,6 +1,6 @@
 <template>
 <div class="payments_cont">
-  <section v-trim-whitespace>
+  <section>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
     <PaymentForm
       ref="paymentForm"

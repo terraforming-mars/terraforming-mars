@@ -4,11 +4,16 @@ import {setTranslationsForTest, translateText} from '@/client/directives/i18n';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('i18n', () => {
-  afterEach(() => {
+  function reset() {
     localStorage.removeItem('lang');
     PreferencesManager.resetForTest();
     setTranslationsForTest(undefined);
-  });
+  }
+
+  // Client tests share module state across files (isolate: false), so don't
+  // assume earlier files left the language at its default.
+  beforeEach(reset);
+  afterEach(reset);
 
   it('returns English text unchanged when lang is en', () => {
     setTranslationsForTest({'Goal': 'Ziel'});

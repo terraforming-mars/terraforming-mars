@@ -29,9 +29,44 @@ describe('BoardPopup', () => {
 
   it('adds the selected board and stays open', async () => {
     const wrapper = mountPopup();
+    await wrapper.find('#boardMode-many-radio').setValue();
     await checkbox(wrapper, BoardName.ELYSIUM).setValue();
     expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.THARSIS, BoardName.ELYSIUM]]]);
     expect(wrapper.emitted('close')).is.undefined;
+  });
+
+  for (const run of [
+    {boards: [BoardName.THARSIS], multiple: false},
+    {boards: [BoardName.THARSIS, BoardName.HELLAS], multiple: true},
+  ] as const) {
+    it(`starts in one or many mode based on the boards ${JSON.stringify(run)}`, () => {
+      const wrapper = mountPopup([...run.boards]);
+      expect(wrapper.find<HTMLInputElement>('#boardMode-one-radio').element.checked).eq(!run.multiple);
+      expect(wrapper.find<HTMLInputElement>('#boardMode-many-radio').element.checked).eq(run.multiple);
+    });
+  }
+
+  it('in one mode, selecting a board replaces the selection', async () => {
+    const wrapper = mountPopup();
+    await checkbox(wrapper, BoardName.ELYSIUM).setValue();
+    expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.ELYSIUM]]]);
+    expect(checkbox(wrapper, BoardName.ELYSIUM).element.checked).is.true;
+    expect(checkbox(wrapper, BoardName.THARSIS).element.checked).is.false;
+  });
+
+  it('in one mode, selecting the selected board keeps it', async () => {
+    const wrapper = mountPopup();
+    await checkbox(wrapper, BoardName.THARSIS).setValue(false);
+    expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.THARSIS]]]);
+    expect(checkbox(wrapper, BoardName.THARSIS).element.checked).is.true;
+  });
+
+  it('one mode is disabled while several boards are selected', async () => {
+    const wrapper = mountPopup([BoardName.THARSIS, BoardName.HELLAS]);
+    const one = wrapper.find<HTMLInputElement>('#boardMode-one-radio');
+    expect(one.element.disabled).is.true;
+    await checkbox(wrapper, BoardName.THARSIS).setValue(false);
+    expect(one.element.disabled).is.false;
   });
 
   it('closes without a selection', async () => {
@@ -98,6 +133,7 @@ describe('BoardPopup', () => {
         expect(checkbox(wrapper, board).element.checked).is.true;
       }
       expect(wrapper.emitted('close')).is.undefined;
+      expect(wrapper.find<HTMLInputElement>('#boardMode-many-radio').element.checked).is.true;
     });
   }
 
@@ -109,6 +145,7 @@ describe('BoardPopup', () => {
     expect(checkbox(wrapper, BoardName.HELLAS).element.checked).is.false;
     expect(checkbox(wrapper, BoardName.ELYSIUM).element.checked).is.false;
     expect(wrapper.emitted('close')).is.undefined;
+    expect(wrapper.find<HTMLInputElement>('#boardMode-one-radio').element.checked).is.true;
   });
 
   it('closing with no boards restores the original boards', async () => {

@@ -36,6 +36,8 @@ export function translateMessage(message: Message): string {
       return context.players.get(datum.value) ?? datum.value;
     case LogMessageDataType.TILE_TYPE:
       return tileTypeToString[datum.value];
+    case LogMessageDataType.MARKDOWN:
+      return datum.value;
     default:
       return translateText(String(datum.value));
     }

@@ -166,4 +166,17 @@ describe('LogMessageComponent', () => {
       '<span class="markdown-production"><span class="markdown-resource resource_icon--heat"></span></span>');
     expect(html).includes('<span class="markdown-resource card-resource-syndicate-fleet"></span>');
   });
+
+  it('renders MARKDOWN data as icons only', () => {
+    const message = new LogMessage(LogMessageType.DEFAULT, '[ ${0} ]', [
+      {type: LogMessageDataType.MARKDOWN, value: '-3:r:mc: *x*'},
+    ]);
+    const wrapper = shallowMount(LogMessageComponent, {
+      ...globalConfig,
+      props: {message, viewModel: fakeViewModel()},
+    });
+
+    const html = wrapper.html();
+    expect(html).includes('-3<span class="markdown-resource resource_icon--megacredits"></span> *x*');
+  });
 });

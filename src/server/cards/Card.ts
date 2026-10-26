@@ -8,7 +8,7 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {GetVictoryPointsContext, ICard} from './ICard';
+import {GetVictoryPointsContext, ICard, Protection} from './ICard';
 import * as DynamicVictoryPoints from './render/DynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
@@ -59,6 +59,7 @@ type SharedProperties = {
   name: CardName;
   resourceType?: CardResource;
   protectedResources?: boolean;
+  protects?: Protection;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
   /**
@@ -217,6 +218,9 @@ export abstract class Card implements ICard {
   }
   public get protectedResources() {
     return this.properties.protectedResources;
+  }
+  public get protects() {
+    return this.properties.protects;
   }
   public get startingMegaCredits() {
     return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;

@@ -2,7 +2,6 @@ import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
-import {CardName} from '../../common/cards/CardName';
 import {message} from '../logs/MessageBuilder';
 
 export class RemoveResources extends DeferredAction<number> {
@@ -16,25 +15,13 @@ export class RemoveResources extends DeferredAction<number> {
   }
 
   public execute() {
-    if (this.resource === Resource.PLANTS) {
-      if (this.target.plantsAreProtected()) {
-        this.cb(0);
-        return undefined;
-      }
-    }
-    if (this.resource === Resource.STEEL || this.resource === Resource.TITANIUM) {
-      if (this.target.alloysAreProtected()) {
-        this.cb(0);
-        return undefined;
-      }
+    if (this.target.isProtected(this.resource)) {
+      this.cb(0);
+      return undefined;
     }
 
-    let qtyLost = Math.min(this.target.stock.get(this.resource), this.count);
-
-    // Botanical Experience hook.
-    if (this.resource === Resource.PLANTS && this.target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-      qtyLost = Math.ceil(qtyLost / 2);
-    }
+    const unprotectedQty = Math.min(this.target.stock.get(this.resource), this.count);
+    const qtyLost = this.target.lossAfterProtection(this.resource, unprotectedQty);
 
     if (qtyLost === 0) {
       return undefined;

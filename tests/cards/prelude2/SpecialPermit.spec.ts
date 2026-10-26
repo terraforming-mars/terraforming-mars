@@ -7,6 +7,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Message} from '../../../src/common/logs/Message';
 import {IGame} from '../../../src/server/IGame';
 import {cast} from '../../../src/common/utils/utils';
+import {ProtectedHabitats} from '@/server/cards/base/ProtectedHabitats';
 
 describe('SpecialPermit', () => {
   let card: SpecialPermit;
@@ -31,7 +32,7 @@ describe('SpecialPermit', () => {
 
   it('canPlay: false when opponent plants are protected', () => {
     player2.plants = 4;
-    player2.plantsAreProtected = () => true;
+    player2.playedCards.push(new ProtectedHabitats());
     expect(card.bespokeCanPlay(player)).is.false;
   });
 

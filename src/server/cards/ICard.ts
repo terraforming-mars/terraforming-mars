@@ -43,6 +43,15 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
 /** Defines how ICard.getVictoryPoints works. */
 export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
 
+/** What a card stops opponents from removing from its owner. */
+export type Protection = {
+  /** Resources in stock. */
+  resources?: ReadonlyArray<Resource>;
+  production?: ReadonlyArray<Resource>;
+  /** Resources on any of the owner's cards. */
+  cardResources?: ReadonlyArray<CardResource>;
+};
+
 export interface ICard {
   readonly name: CardName;
   readonly tags: ReadonlyArray<Tag>;
@@ -210,25 +219,22 @@ export interface ICard {
 
   resourceCount: number;
   resourceType?: CardResource;
+  /** When true, resources on this card cannot be taken */
   protectedResources?: boolean;
-  /** Indicates the tile built, which can be used in a variety of useful ways. */
+  /** What resources or production this card protects, and how */
+  protects?: Protection;
+  /** Indicates the tiles this card can build, which can be used in a variety of useful ways */
   tilesBuilt: ReadonlyArray<TileType>;
-  /** For Pharmacy Union, the card is effectively out of the game.. CEO uses it to ensure it can't be retriggered.  */
+  /** For Pharmacy Union, the card is effectively out of the game. CEO uses it to ensure it can't be retriggered.  */
   isDisabled?: boolean;
   /**
    * Extra data that the game will serialize and deserialize along with the card.
-   *
-   * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
    */
   data?: JSONValue;
 
-  /**
-   * Additional custom serialization for this card.
-   */
+  /** Additional custom serialization for this card. */
   serialize?(serialized: SerializedCard): void;
-  /**
-   * Additional custom deserialization for this card.
-   */
+  /** Additional custom deserialization for this card. */
   deserialize?(serialized: SerializedCard): void;
 
   /** The generation the card was activated. Used for Duncan and Underworld cards. */

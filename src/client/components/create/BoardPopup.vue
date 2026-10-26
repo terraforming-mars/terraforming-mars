@@ -2,15 +2,21 @@
 <template>
   <PopupPanel class="create-game-board-popup" @close="close">
     <template #header>
-      <h2 v-i18n>Select boards to be randomly chosen</h2>
+      <h2 v-i18n>{{ multiple ? 'Select boards to be randomly chosen' : 'Select a board' }}</h2>
     </template>
+    <div class="create-game-board-mode">
+      <template v-for="mode in MODES" :key="mode.id">
+        <input type="radio" name="boardMode" :value="mode.value" v-model="multiple" :id="mode.id" :disabled="!mode.value && selectedBoards.length > 1">
+        <label :for="mode.id" v-i18n>{{ mode.label }}</label>
+      </template>
+    </div>
     <div class="create-game-board-groups">
       <!-- separate groups for official and fan content -->
       <div v-for="group in groups" :key="group.label" class="create-game-board-group">
         <h3 v-i18n>{{ group.label }}</h3>
         <div class="create-game-board-list">
           <div v-for="boardName in group.boards" :key="boardName">
-            <input type="checkbox" :value="boardName" :checked="selectedBoards.includes(boardName)" @change="select(boardName)" :id="boardName+'-checkbox'">
+            <input type="checkbox" :value="boardName" :checked="selectedBoards.includes(boardName)" @change="select(boardName, $event)" :id="boardName+'-checkbox'">
             <label :for="boardName+'-checkbox'" class="expansion-button">
               <span class="create-game-board-hexagon" :class="boardColorClass(boardName)">&#x2B22;</span>
               <span class="capitalized" v-i18n>{{ boardName }}</span>
@@ -73,6 +79,14 @@ const props = defineProps<{
 /** Boards currently checked in the popup. */
 const selectedBoards = ref<Array<BoardName>>([...props.boards]);
 
+/** True when several boards may be checked, false when checking a board replaces the selection. */
+const multiple = ref(props.boards.length > 1);
+
+const MODES = [
+  {value: false, label: 'One', id: 'boardMode-one-radio'},
+  {value: true, label: 'Many', id: 'boardMode-many-radio'},
+] as const;
+
 /** Boards checked when the popup opened, restored if it closes with none checked. */
 const originalBoards: ReadonlyArray<BoardName> = [...props.boards];
 
@@ -120,8 +134,12 @@ function boardHref(boardName: BoardName): string {
   return `${WIKI}/Maps#${WIKI_ANCHORS[boardName]}`;
 }
 
-function select(boardName: BoardName) {
-  if (!inplaceRemove(selectedBoards.value, boardName)) {
+function select(boardName: BoardName, event: Event) {
+  if (!multiple.value) {
+    // The checkbox toggled itself, so keep it checked when it was already the only board.
+    (event.target as HTMLInputElement).checked = true;
+    selectedBoards.value = [boardName];
+  } else if (!inplaceRemove(selectedBoards.value, boardName)) {
     selectedBoards.value.push(boardName);
   }
   emit('update:boards', [...selectedBoards.value]);
@@ -130,12 +148,14 @@ function select(boardName: BoardName) {
 /** Selects every board in a section, so one of them is picked at random. */
 function randomSelection(boards: ReadonlyArray<BoardName>) {
   selectedBoards.value = [...boards];
+  multiple.value = true;
   emit('update:boards', [...selectedBoards.value]);
 }
 
 /** Resets the selection to Tharsis. */
 function clear() {
   selectedBoards.value = [BoardName.THARSIS];
+  multiple.value = false;
   emit('update:boards', [...selectedBoards.value]);
 }
 
@@ -158,6 +178,19 @@ function close() {
   max-width: 90vw;
   height: auto;
   max-height: 90vh;
+}
+
+.create-game-board-mode {
+  display: flex;
+  margin-bottom: 12px;
+
+  // Dimmed, and without the hover highlight, so it reads as unclickable.
+  input:disabled + label,
+  input:disabled + label:hover {
+    background-color: @grey_850;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .create-game-board-groups {

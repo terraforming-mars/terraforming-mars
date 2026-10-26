@@ -217,22 +217,30 @@ export default defineComponent({
         xhr.onerror = function() {
           root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
         };
-        xhr.onload = () => {
+        xhr.onload = async () => {
           if (xhr.status === statusCode.ok) {
             const result = xhr.response as WaitingForModel;
             this.playersWaitingFor = result.waitingFor;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
-              root.updatePlayer();
+              const updated = root.updatePlayer();
               this.notify();
+              // When the fetch works, root.playerView changes and the playerView watcher
+              // calls start(), which decides whether to keep polling. When it fails
+              // nothing changes, so poll again here.
+              if (!await updated) {
+                vueApp.waitForUpdate();
+              }
               // We don't need to wait anymore - it's our turn
               return;
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               if (isPlayerId(this.playerView.id)) {
-                root.updatePlayer();
-              } else {
-                root.updateSpectator();
+                if (!await root.updatePlayer()) {
+                  vueApp.waitForUpdate();
+                }
+              } else if (!await root.updateSpectator()) {
+                vueApp.waitForUpdate();
               }
 
               return;

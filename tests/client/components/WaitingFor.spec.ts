@@ -215,4 +215,34 @@ describe('WaitingFor', () => {
     expect(urls).has.length(1);
     expect(urls[0]).includes('api/waitingfor');
   });
+
+  it('keeps polling after a failed refresh', async () => {
+    vi.useFakeTimers();
+    let polls = 0;
+    vi.stubGlobal('XMLHttpRequest', class {
+      status = 200;
+      response = {result: 'REFRESH', waitingFor: []};
+      onload = () => {};
+      open() {}
+      send() {
+        polls++;
+        this.onload();
+      }
+    });
+    const spectator = {id: 's-spectator-id', players: [], game: {phase: Phase.ACTION, gameAge: 1, undoCount: 0}};
+    mount(WaitingFor, {
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        stubs: {'PlayerInputFactory': true},
+        // The spectator fetch fails, so the view never changes.
+        mocks: {updateSpectator: async () => false},
+      },
+      props: {playerView: spectator as unknown as PlayerViewModel},
+    });
+
+    await vi.advanceTimersByTimeAsync(2500);
+
+    expect(polls).eq(2);
+  });
 });

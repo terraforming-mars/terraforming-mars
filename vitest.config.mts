@@ -14,6 +14,11 @@ export default defineConfig({
       '@tests/': `${path.resolve(import.meta.dirname, 'tests')}/`,
     },
   },
+  server: {
+    watch: {
+      ignored: ['**/build/**', '**/local/**', '**/logs/**', '**/db/**'],
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',

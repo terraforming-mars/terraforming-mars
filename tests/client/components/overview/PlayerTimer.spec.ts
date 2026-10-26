@@ -26,7 +26,7 @@ describe('PlayerTimer', () => {
     const wrapper = shallowMount(PlayerTimer, {
       ...globalConfig,
       props: {
-        timer: {...fakeTimerModel(), running: true, startedAt: 0},
+        timer: {...fakeTimerModel(), running: true, startedAt: 0, afterFirstAction: true},
         live: true,
       },
     });
@@ -50,7 +50,7 @@ describe('PlayerTimer', () => {
     await vi.advanceTimersByTimeAsync(5000);
     expect(wrapper.find('.player-timer-seconds').text()).eq('00');
 
-    await wrapper.setProps({timer: {...fakeTimerModel(), running: true, startedAt: 5000}});
+    await wrapper.setProps({timer: {...fakeTimerModel(), running: true, startedAt: 5000, afterFirstAction: true}});
     await vi.advanceTimersByTimeAsync(3000);
 
     expect(wrapper.find('.player-timer-seconds').text()).eq('03');

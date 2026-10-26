@@ -1,10 +1,10 @@
 <template>
-<section v-trim-whitespace>
+<section>
   <table class="payments_table">
     <tbody>
       <tr>
         <td></td>
-        <td v-trim-whitespace><i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
+        <td><i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
       </tr>
       <template v-for="unit of order" :key="unit">
         <template v-if="ledger[unit]?.available > 0">
@@ -21,7 +21,7 @@
               <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
               Some ${0} are reserved and unavailable here.</div>
             </td>
-            <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0" v-trim-whitespace>
+            <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
               {{ ledger[unit].rate * payment[unit] }}
             </td>
           </tr>
@@ -29,7 +29,7 @@
       </template>
     <tr :class="totalSpentClass">
       <td class="payments_total_heading"></td>
-      <td class="payments_total_value" :title="$t(totalSpentTitle)" :aria-label="$t(totalSpentTitle)" v-trim-whitespace>
+      <td class="payments_total_value" :title="$t(totalSpentTitle)" :aria-label="$t(totalSpentTitle)">
         {{ totalSpent }}
       </td>
     </tr>

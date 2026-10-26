@@ -1,5 +1,5 @@
 <template>
-    <div class="turmoil" v-trim-whitespace>
+    <div class="turmoil">
       <div class="events-board">
         <GlobalEvent v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant" :showDistance="true"/>
         <GlobalEvent v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming" :showDistance="true"/>

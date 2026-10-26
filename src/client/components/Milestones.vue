@@ -1,5 +1,5 @@
 <template>
-    <div class="milestones_cont" v-trim-whitespace>
+    <div class="milestones_cont">
         <div class="milestones">
             <div class="ma-title">
                 <a class="ma-clickable" href="#" @click.prevent="toggleList()" v-i18n>Milestones</a>

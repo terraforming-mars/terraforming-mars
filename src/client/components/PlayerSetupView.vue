@@ -60,7 +60,7 @@
 
     <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">
       <DynamicTitle title="Turn order" :color="thisPlayer.color"/>
-      <div class="player_item" v-for="(p, idx) in playerView.players" :key="idx" v-trim-whitespace>
+      <div class="player_item" v-for="(p, idx) in playerView.players" :key="idx">
         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
           <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
         </div>

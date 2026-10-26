@@ -61,6 +61,8 @@ const metrics = {
 export class PostgreSQL implements IDatabase {
   protected trimCount = POSTGRES_TRIM_COUNT;
   protected compressOnWrite = DB_COMPRESS_ON_WRITE;
+  // The last save of each game that hasn't finished writing.
+  private savesInProgress = new Map<GameId, Promise<void>>();
 
   protected statistics = {
     saveCount: 0,
@@ -202,8 +204,10 @@ export class PostgreSQL implements IDatabase {
 
     const gameLog: Array<LogMessage> = parseInterned(log);
     // If this is part of an undo operation, delete the end
-    // of the array so the log matches the length.
-    gameLog.length = logLength;
+    // of the array so the log matches the length. Never lengthen it: that fills the log with holes.
+    if (gameLog.length > logLength) {
+      gameLog.length = logLength;
+    }
     const gameOptions: GameOptions = parseInterned(options);
     return {...remainder, gameOptions, gameLog};
   }
@@ -381,6 +385,24 @@ export class PostgreSQL implements IDatabase {
     // finishes gets the next id.
     const thisSaveId = game.lastSaveId;
     game.lastSaveId = thisSaveId + 1;
+
+    // Every save rewrites the game's single log row, so one game's saves write in the order they
+    // were taken. Otherwise an older save can write last and leave the log shorter than the newest
+    // save says it is.
+    const previous = this.savesInProgress.get(game.id) ?? Promise.resolve();
+    const write = () => this.write(game, thisSaveId, gameJSON, gameCompressed, log, options);
+    const thisSave = previous.then(write, write);
+    this.savesInProgress.set(game.id, thisSave);
+    try {
+      await thisSave;
+    } finally {
+      if (this.savesInProgress.get(game.id) === thisSave) {
+        this.savesInProgress.delete(game.id);
+      }
+    }
+  }
+
+  private async write(game: IGame, thisSaveId: number, gameJSON: string, gameCompressed: Buffer | null, log: string, options: string): Promise<void> {
     // BEGIN through COMMIT all run on this one client.
     let client: pg.PoolClient | undefined;
     let releaseError: Error | undefined;

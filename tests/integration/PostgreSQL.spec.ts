@@ -104,6 +104,10 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     await this.client.query('DELETE FROM games WHERE game_id = $1', [gameId]);
   }
 
+  public async setLog(gameId: GameId, log: string): Promise<void> {
+    await this.client.query('UPDATE game SET log = $1 WHERE game_id = $2', [log, gameId]);
+  }
+
   public async dropGameTable(): Promise<void> {
     await this.client.query('DROP TABLE game');
   }
@@ -661,6 +665,22 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).deep.eq([0]);
       expect(game.lastSaveId).eq(saveId);
       expect(db.getStatistics().saveErrorCount).eq(1);
+    });
+
+    it('loads a log shorter than the save without holes', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-short-log', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const shortLog = JSON.stringify(game.gameLog.slice(0, 2));
+      game.log('one more');
+      await db.saveGame(game);
+
+      // The newest save counts more messages than the log row holds.
+      await db.setLog(game.id, shortLog);
+      const loaded = await db.getGame(game.id);
+
+      expect(loaded.gameLog).has.length(2);
     });
 
     it('stats - orphaned rows', async () => {

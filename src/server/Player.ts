@@ -865,7 +865,7 @@ export class Player implements IPlayer {
           (b) => b
             .player(this)
             .card(selectedCard)
-            .string(Payment.toLogString(payment)));
+            .markdown(Payment.toLogString(payment)));
       }
     }
 

@@ -40,6 +40,15 @@ describe('Timer', () => {
     expect(Timer.toString(timer.serialize(), clock)).eq('00:01');
   });
 
+  it('does not count the first action, also while it runs', () => {
+    // Another game's timer stopped a day ago.
+    (Timer as any).lastStoppedAt = clock.millis - 24 * 3_600_000;
+    timer.start();
+    clock.millis += 1000;
+    expect(timer.getElapsed()).eq(0);
+    expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
+  });
+
   it('shows 1:00:01 after 3601 sec', () => {
     timer.start(); // Skipping first action
     timer.stop();

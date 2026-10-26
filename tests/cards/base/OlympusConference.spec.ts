@@ -3,7 +3,7 @@ import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
 import {Research} from '../../../src/server/cards/base/Research';
-import {AdaptationTechnology} from '../../../src/server//cards/base/AdaptationTechnology';
+import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
 import {DeferredActionsQueue} from '../../../src/server/deferredActions/DeferredActionsQueue';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

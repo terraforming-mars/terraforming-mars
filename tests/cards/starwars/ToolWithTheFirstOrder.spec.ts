@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {Phase} from '`.`./../../src/common/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';

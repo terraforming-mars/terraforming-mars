@@ -7,7 +7,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
-import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
+import {IDeferredAction} from '../../../src/server/deferredActions/DeferredAction';
 import {cast} from '@/common/utils/utils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 

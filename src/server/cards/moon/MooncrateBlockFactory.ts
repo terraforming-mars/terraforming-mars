@@ -4,7 +4,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../..//IPlayer';
+import {IPlayer} from '../../IPlayer';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class MooncrateBlockFactory extends Card implements IProjectCard {

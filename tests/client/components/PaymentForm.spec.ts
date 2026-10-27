@@ -200,6 +200,37 @@ describe('PaymentForm', () => {
     expect(lp.megacredits).eq(4);
   });
 
+  it('nonGreedy resources are not used when megacredits cover the cost', async () => {
+    const wrapper = mountPaymentForm({
+      cost: 10,
+      order: ['titanium', 'megacredits'],
+      ledger: {
+        'titanium': {available: 3, rate: 2, nonGreedy: true},
+        'megacredits': {available: 10, rate: 1},
+      },
+    });
+
+    const lp = wrapper.vm.payment;
+    expect(lp.titanium).eq(0);
+    expect(lp.megacredits).eq(10);
+  });
+
+  it('nonGreedy resources cover only what megacredits cannot', async () => {
+    // cost=10, 7 MC available: ceil(3/2)=2 titanium (4 MC), MC fills 6.
+    const wrapper = mountPaymentForm({
+      cost: 10,
+      order: ['titanium', 'megacredits'],
+      ledger: {
+        'titanium': {available: 3, rate: 2, nonGreedy: true},
+        'megacredits': {available: 7, rate: 1},
+      },
+    });
+
+    const lp = wrapper.vm.payment;
+    expect(lp.titanium).eq(2);
+    expect(lp.megacredits).eq(6);
+  });
+
   it('megacredits max caps at cost', async () => {
     const wrapper = mountPaymentForm({
       cost: 10,

@@ -594,8 +594,8 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megacredits: 6}));
   });
 
-  it('Luna Trade Federation: Can use titanium by default', async () => {
-    // Luna Trade Federation rate is titaniumValue-1=3. Greedy: uses both Ti (=6 MC), MC fills 4.
+  it('Luna Trade Federation: Does not use titanium by default when megacredits cover the cost', async () => {
+    // Luna Trade Federation rate is titaniumValue-1=3, worse than MC, so MC pays it all.
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {megacredits: 10, titanium: 2, titaniumValue: 4},
@@ -603,13 +603,25 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megacredits: 4, titanium: 2});
+    tester.expectPayment({megacredits: 10, titanium: 0});
 
     await tester.clickMax('titanium');
     tester.expectPayment({megacredits: 4, titanium: 2});
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 2, megacredits: 4}));
+  });
+
+  it('Luna Trade Federation: Uses titanium by default only to cover a megacredit shortfall', async () => {
+    // Luna Trade Federation rate is 3. 5 MC short, so ceil(5/3)=2 Ti (=6 MC), MC fills 4.
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {megacredits: 5, titanium: 3, titaniumValue: 4},
+      {paymentOptions: {lunaTradeFederationTitanium: true, titanium: false}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({megacredits: 4, titanium: 2});
   });
 
   it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {

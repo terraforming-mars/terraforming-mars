@@ -54,7 +54,8 @@ function walk(value: unknown, swap: Swap, key: string | undefined): unknown {
 
 /** Swaps a player view, and remembers the swap for the models that follow it. */
 export function localPlayerView(model: PlayerViewModel): PlayerViewModel {
-  current = colorSwap(model.thisPlayer.color, getPreferences().my_color);
+  const preferred = getPreferences().my_color;
+  current = preferred === '' ? undefined : colorSwap(model.thisPlayer.color, preferred);
   return swapColors(model, current);
 }
 

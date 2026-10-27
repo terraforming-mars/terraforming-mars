@@ -45,6 +45,8 @@ import {BoardName} from '@/common/boards/BoardName';
 import {boardColorClass} from '@/client/components/create/boardOptions';
 import {WIKI, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {inplaceRemove} from '@/common/utils/utils';
+import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
+import {boardOptions} from '@/common/boards/randomBoardOptions';
 
 type BoardGroup = {
   label: string;
@@ -119,7 +121,7 @@ const groups: ReadonlyArray<BoardGroup> = [
     label: 'Official',
     boards: OFFICIAL_GROUP_BOARDS,
     randomTitle: 'Random Official',
-    randomBoards: OFFICIAL_GROUP_BOARDS,
+    randomBoards: boardOptions(RandomBoardOption.OFFICIAL),
   },
   {
     label: 'Fan-made',

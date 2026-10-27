@@ -8,7 +8,6 @@ const OFFICIAL_BOARDS = [
   BoardName.UTOPIA_PLANITIA,
   BoardName.VASTITAS_BOREALIS_NOVA,
   BoardName.TERRA_CIMMERIA_NOVA,
-  BoardName.AMAZONIS_PLANITIA,
 ];
 
 export function boardOptions(board: RandomBoardOption): Array<BoardName> {

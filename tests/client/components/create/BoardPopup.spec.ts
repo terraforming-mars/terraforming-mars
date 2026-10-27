@@ -107,7 +107,6 @@ describe('BoardPopup', () => {
       BoardName.UTOPIA_PLANITIA,
       BoardName.VASTITAS_BOREALIS_NOVA,
       BoardName.TERRA_CIMMERIA_NOVA,
-      BoardName.AMAZONIS_PLANITIA,
     ]},
     {button: 1, expected: [
       BoardName.THARSIS,

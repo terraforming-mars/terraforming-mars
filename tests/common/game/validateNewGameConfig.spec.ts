@@ -180,7 +180,7 @@ describe('validateNewGameConfig', () => {
     const expansions = {...newGameConfig().expansions, venus: true};
     expect(validate({expansions, altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.true;
     expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.ALL)}).altVenusBoardOnAmazonis).is.true;
-    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.OFFICIAL)}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.OFFICIAL)}).altVenusBoardOnAmazonis).is.false;
     expect(validate({expansions, altVenusBoard: true, boards: [BoardName.THARSIS]}).altVenusBoardOnAmazonis).is.false;
     expect(validate({expansions, altVenusBoard: false, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;
     expect(validate({altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;

@@ -216,7 +216,7 @@ describe('SelectPayment', () => {
     tester.expectPayment({heat: 5, megacredits: 5});
   });
 
-  it('Luna Trade Federation: Can use titanium by default', async () => {
+  it('Luna Trade Federation: Does not use titanium by default when megacredits cover the cost', async () => {
     const wrapper = setupBill(
       10,
       // Note here that titanium is valued at 4, so LTF titanium will be valued at 3.
@@ -225,10 +225,25 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, megacredits: 4});
+    tester.expectPayment({titanium: 0, megacredits: 10});
 
-    await tester.clickMinus('titanium');
+    await tester.clickPlus('titanium');
     tester.expectPayment({titanium: 1, megacredits: 7});
+
+    await tester.clickMax('titanium');
+    tester.expectPayment({titanium: 2, megacredits: 4});
+  });
+
+  it('Luna Trade Federation: Uses titanium by default only to cover a megacredit shortfall', async () => {
+    const wrapper = setupBill(
+      10,
+      // LTF titanium is valued at 3. 5 MC short, so ceil(5/3)=2 titanium, MC fills 4.
+      {megacredits: 5, titanium: 3, titaniumValue: 4},
+      {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({titanium: 2, megacredits: 4});
   });
 
   it('Pay with titanium', async () => {

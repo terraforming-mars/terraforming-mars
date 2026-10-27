@@ -58,13 +58,34 @@ export const PaymentWidgetMixin = defineComponent({
 
       const available = this.getAvailableUnits();
       for (const unit of order) {
+        const rate = this.getResourceRate(unit);
         ledger[unit] = {
           available: available[unit],
-          rate: this.getResourceRate(unit),
+          rate: rate,
           reserved: isStandardResource(unit) ? reserveUnits[unit] > 0 : false,
+          nonGreedy: !this.isGreedy(unit, rate),
         };
       }
       return ledger;
+    },
+
+    isGreedy(unit: SpendableResource, rate: number): boolean {
+      if (unit === 'heat') {
+        return false;
+      }
+
+      if (unit === 'titanium') {
+        // Luna Trade Federation titanium has a reduced rate that makes it
+        // a worse deal than M€, so only use it when M€ can't cover the cost.
+        if (this.playerinput.paymentOptions?.lunaTradeFederationTitanium !== true) {
+          return true;
+        }
+        if (rate < this.playerView.thisPlayer.titaniumValue) {
+          return false;
+        }
+      }
+
+      return true;
     },
 
     getResourceRate(unit: SpendableResource): number {

@@ -1,6 +1,7 @@
 import {paths} from '@/common/app/paths';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {ParticipantId} from '@/common/Types';
+import {localColors} from '@/client/utils/localColors';
 
 let abortController: AbortController | undefined;
 
@@ -18,7 +19,7 @@ export async function fetchLogs(id: ParticipantId, generation: number): Promise<
       console.error(`error updating messages, response code ${resp.status}`);
       return undefined;
     }
-    return await resp.json();
+    return localColors(await resp.json());
   } catch (err: any) {
     if (err.name === 'AbortError') {
       // ignore aborted requests

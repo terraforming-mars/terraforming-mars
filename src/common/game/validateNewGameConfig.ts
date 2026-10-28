@@ -8,6 +8,7 @@ import {Expansion} from '../cards/GameModule';
 import {Message} from '../logs/Message';
 import {LogMessageDataType} from '../logs/LogMessageDataType';
 import {BoardName} from '../boards/BoardName';
+import {validateCustomMA} from '../ma/CustomMA';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -29,6 +30,8 @@ export type ValidationErrors = {
   deltaProjectWithoutPrelude: boolean;
   notEnoughCorporations: number;
   modularMAInDevelopment: boolean;
+  /** Why customMA is invalid, or empty when it's valid. */
+  invalidCustomMA: string;
 };
 
 function mustSelectAtLeast(message: string, required: number): Message {
@@ -103,6 +106,13 @@ export const validationDetails: Record<keyof ValidationErrors, {blocking: boolea
     blocking: false,
     message: 'The Official Random Milestones and Awards are still in active development. Please don\'t report anything unless it breaks the game. These are always fully random.',
   },
+  invalidCustomMA: {
+    blocking: true,
+    message: (errors) => ({
+      message: 'Manual milestones and awards are invalid: ${0}',
+      data: [{type: LogMessageDataType.RAW_STRING, value: errors.invalidCustomMA}],
+    }),
+  },
 };
 
 export type Helpers = {
@@ -129,6 +139,7 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     deltaProjectWithoutPrelude: false,
     notEnoughCorporations: 0,
     modularMAInDevelopment: false,
+    invalidCustomMA: '',
   };
 
   if (config.escapeVelocity && hasNegativeEscapeVelocityOption(config.escapeVelocity)) {
@@ -227,6 +238,12 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
       errors.notEnoughCeos = required;
     }
     errors.ceosMissingExpansions = config.customCeos.filter(isMissingExpansion);
+  }
+
+  try {
+    validateCustomMA(config.customMA, config.randomMA, config.expansions.venus);
+  } catch (e) {
+    errors.invalidCustomMA = e instanceof Error ? e.message : String(e);
   }
   return errors;
 }

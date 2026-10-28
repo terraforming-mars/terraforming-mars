@@ -97,6 +97,7 @@ const NO_ERRORS: ValidationErrors = {
   deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
   modularMAInDevelopment: false,
+  invalidCustomMA: '',
 };
 
 function helpers(
@@ -279,6 +280,17 @@ describe('validateNewGameConfig', () => {
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 0}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 1}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 4}).notEnoughCeos).eq(2 * 4);
+  });
+
+  it('invalid custom milestones and awards', () => {
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+    } as const;
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA}).invalidCustomMA).eq('');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('randomMA Manual requires customMA');
+    expect(validate({randomMA: RandomMAOptionType.LIMITED, customMA}).invalidCustomMA).eq('customMA requires randomMA to be Manual');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('customMA must have 5 awards');
   });
 
   it('messages', () => {

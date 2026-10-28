@@ -17,6 +17,7 @@ import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'PopupPanel',
+  emits: ['close'],
   props: {
     /** True when clicking outside the panel closes it. */
     closeOnOutsideClick: {

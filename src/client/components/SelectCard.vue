@@ -57,6 +57,7 @@ type WidgetDataModel = {
 
 export default defineComponent({
   name: 'SelectCard',
+  emits: ['cardschanged'],
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,

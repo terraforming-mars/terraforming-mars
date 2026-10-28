@@ -373,6 +373,7 @@ class GlobalParamLevel {
 
 export default defineComponent({
   name: 'Board',
+  emits: ['toggleTileView'],
   props: {
     spaces: {
       type: Array as () => ReadonlyArray<SpaceModel>,

@@ -76,6 +76,7 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
 
 export default defineComponent({
   name: 'LogMessageComponent',
+  emits: ['click', 'spaceClicked'],
   props: {
     message: {
       type: Object as () => LogMessage,

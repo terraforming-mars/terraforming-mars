@@ -30,6 +30,7 @@ import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
 export default defineComponent({
   name: 'LogPanel',
+  emits: ['hide'],
   props: {
     message: {
       type: Object as () => LogMessage,

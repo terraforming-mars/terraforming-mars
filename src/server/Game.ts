@@ -333,6 +333,7 @@ export class Game implements IGame, Logger {
       gameOptions.initialDraftVariant = false;
       gameOptions.preludeDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
+      gameOptions.customMA = undefined;
 
       // Single player game player starts with 14TR
       players[0].setTerraformRating(14);

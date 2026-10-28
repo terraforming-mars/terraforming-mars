@@ -28,6 +28,7 @@ export type ValidationErrors = {
   prelude2WithoutPrelude: boolean;
   deltaProjectWithoutPrelude: boolean;
   notEnoughCorporations: number;
+  modularMAInDevelopment: boolean;
 };
 
 function mustSelectAtLeast(message: string, required: number): Message {
@@ -98,6 +99,10 @@ export const validationDetails: Record<keyof ValidationErrors, {blocking: boolea
     blocking: true,
     message: (errors) => mustSelectAtLeast('Must select at least ${0} corporations', errors.notEnoughCorporations),
   },
+  modularMAInDevelopment: {
+    blocking: false,
+    message: 'The Official Random Milestones and Awards are still in active development. Please don\'t report anything unless it breaks the game. These are always fully random.',
+  },
 };
 
 export type Helpers = {
@@ -123,6 +128,7 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     prelude2WithoutPrelude: false,
     deltaProjectWithoutPrelude: false,
     notEnoughCorporations: 0,
+    modularMAInDevelopment: false,
   };
 
   if (config.escapeVelocity && hasNegativeEscapeVelocityOption(config.escapeVelocity)) {
@@ -166,6 +172,10 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
 
   if (config.expansions.deltaProject && !config.expansions.prelude) {
     errors.deltaProjectWithoutPrelude = true;
+  }
+
+  if (config.modularMA) {
+    errors.modularMAInDevelopment = true;
   }
 
   function isMissingExpansion(name: CardName): boolean {

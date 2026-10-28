@@ -1,7 +1,7 @@
 <template>
   <div v-if="typeof victoryPoints !== 'number'" :class="classes">
     <template v-if="victoryPoints.targetOneOrMore">
-       <!-- This is the Search for Life special case. -->
+      <!-- This is the Search for Life special case. -->
       <div class="card-points-item-first">
         <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
         *:3

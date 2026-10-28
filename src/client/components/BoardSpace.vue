@@ -28,7 +28,7 @@
       <div v-if="space.spaceType === SpaceType.DEFLECTION_ZONE" class="board-space-type-deflection-zone"></div>
     </template>
     <div class="board-log-highlight" :data_log_highlight_id="space.id"></div>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">

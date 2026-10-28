@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-  <div class="agenda-title"><CardParty :party="party" /><span>{{ agendaType }} {{ agenda.num }} <span class="small">{{ $t(agenda.name) }} {{ $t(agenda.type) }}</span></span></div>
-  <TurmoilAgenda class="agenda" :id="agendaId" />
-  <div class="description" v-i18n>{{ description }}</div>
+    <div class="agenda-title"><CardParty :party="party" /><span>{{ agendaType }} {{ agenda.num }} <span class="small">{{ $t(agenda.name) }} {{ $t(agenda.type) }}</span></span></div>
+    <TurmoilAgenda class="agenda" :id="agendaId" />
+    <div class="description" v-i18n>{{ description }}</div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="terraformed-banner" :class="{'terraformed-banner--animated': animate}">
-      <span v-i18n>Mars is Terraformed!</span>
-    </div>
+  <div class="terraformed-banner" :class="{'terraformed-banner--animated': animate}">
+    <span v-i18n>Mars is Terraformed!</span>
+  </div>
 </template>
 
 <script lang="ts">

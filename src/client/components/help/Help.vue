@@ -1,51 +1,51 @@
 <template>
-    <div class="help-container">
+  <div class="help-container">
 
-        <div class="help-tabs">
+    <div class="help-tabs">
 
-            <input type="radio" name="help-tab" id="radio-symbols" value="iconology" v-model="currentPage">
-            <label for="radio-symbols">
-                <span v-i18n>Game Iconology</span>
-            </label>
-            <input type="radio" name="help-tab" id="radio-standard-projects" value="standard-projects" v-model="currentPage">
-            <label for="radio-standard-projects">
-                <span v-i18n>Standard Projects</span>
-            </label>
+      <input type="radio" name="help-tab" id="radio-symbols" value="iconology" v-model="currentPage">
+      <label for="radio-symbols">
+        <span v-i18n>Game Iconology</span>
+      </label>
+      <input type="radio" name="help-tab" id="radio-standard-projects" value="standard-projects" v-model="currentPage">
+      <label for="radio-standard-projects">
+        <span v-i18n>Standard Projects</span>
+      </label>
 
-            <input type="radio" name="help-tab" id="radio-phases" value="phases" v-model="currentPage">
-            <label for="radio-phases">
-                <span v-i18n>Game Phases</span>
-            </label>
+      <input type="radio" name="help-tab" id="radio-phases" value="phases" v-model="currentPage">
+      <label for="radio-phases">
+        <span v-i18n>Game Phases</span>
+      </label>
 
-            <input type="radio" name="help-tab" id="radio-turmoil-parties" value="turmoil-parties" v-model="currentPage">
-            <label for="radio-turmoil-parties">
-                <span v-i18n>Political Parties</span>
-            </label>
+      <input type="radio" name="help-tab" id="radio-turmoil-parties" value="turmoil-parties" v-model="currentPage">
+      <label for="radio-turmoil-parties">
+        <span v-i18n>Political Parties</span>
+      </label>
 
-            <input type="radio" name="help-tab" id="radio-hotkeys" value="hotkeys" v-model="currentPage">
-            <label for="radio-hotkeys">
-                <span v-i18n>Hot Keys</span>
-            </label>
+      <input type="radio" name="help-tab" id="radio-hotkeys" value="hotkeys" v-model="currentPage">
+      <label for="radio-hotkeys">
+        <span v-i18n>Hot Keys</span>
+      </label>
 
-            <input type="radio" name="help-tab" id="radio-rulebooks" value="rulebooks" v-model="currentPage">
-            <label for="radio-rulebooks">
-                <span v-i18n>Rules</span>
-            </label>
+      <input type="radio" name="help-tab" id="radio-rulebooks" value="rulebooks" v-model="currentPage">
+      <label for="radio-rulebooks">
+        <span v-i18n>Rules</span>
+      </label>
 
-            <input type="radio" name="help-tab" id="radio-solo-rules" value="solo-rules" v-model="currentPage">
-            <label for="radio-solo-rules">
-                <span v-i18n>Solo Rules</span>
-            </label>
-        </div>
-
-        <HelpIconology v-if="isOpen('iconology')"/>
-        <HelpStandardProjects v-if="isOpen('standard-projects')"/>
-        <HelpPhases v-if="isOpen('phases')"/>
-        <HelpTurmoilParties v-if="isOpen('turmoil-parties')"/>
-        <HelpRulebooks v-if="isOpen('rulebooks')"/>
-        <HelpHotkeys v-if="isOpen('hotkeys')"/>
-        <HelpSoloRules v-if="isOpen('solo-rules')"/>
+      <input type="radio" name="help-tab" id="radio-solo-rules" value="solo-rules" v-model="currentPage">
+      <label for="radio-solo-rules">
+        <span v-i18n>Solo Rules</span>
+      </label>
     </div>
+
+    <HelpIconology v-if="isOpen('iconology')"/>
+    <HelpStandardProjects v-if="isOpen('standard-projects')"/>
+    <HelpPhases v-if="isOpen('phases')"/>
+    <HelpTurmoilParties v-if="isOpen('turmoil-parties')"/>
+    <HelpRulebooks v-if="isOpen('rulebooks')"/>
+    <HelpHotkeys v-if="isOpen('hotkeys')"/>
+    <HelpSoloRules v-if="isOpen('solo-rules')"/>
+  </div>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue';

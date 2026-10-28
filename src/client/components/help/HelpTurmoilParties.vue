@@ -1,33 +1,33 @@
 <template>
-    <div class="help-turmoil-parties-container">
-      <h2 v-i18n>Political Parties</h2>
-      <p v-i18n>A party bonus is granted once, during the Turmoil phase. Its policy applies ONLY DURING THE ACTION PHASE of the following generation.</p>
+  <div class="help-turmoil-parties-container">
+    <h2 v-i18n>Political Parties</h2>
+    <p v-i18n>A party bonus is granted once, during the Turmoil phase. Its policy applies ONLY DURING THE ACTION PHASE of the following generation.</p>
 
-      <div class="help-parties-grid">
-        <div class="help-party-card" v-for="party in parties" :key="party.name">
-          <div class="help-party-label">
-            <div :class="'card-party card-party--'+partyLogoSlug(party.name)"></div>
-            <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+    <div class="help-parties-grid">
+      <div class="help-party-card" v-for="party in parties" :key="party.name">
+        <div class="help-party-label">
+          <div :class="'card-party card-party--'+partyLogoSlug(party.name)"></div>
+          <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+        </div>
+
+        <div class="help-agenda-section">
+          <div class="help-agenda-card" v-for="id in party.bonusIds" :key="id">
+            <TurmoilAgenda :id="id" />
+            <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
           </div>
+        </div>
 
-          <div class="help-agenda-section">
-            <div class="help-agenda-card" v-for="id in party.bonusIds" :key="id">
-              <TurmoilAgenda :id="id" />
-              <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
-            </div>
-          </div>
+        <div class="help-agenda-divider"></div>
 
-          <div class="help-agenda-divider"></div>
-
-          <div class="help-agenda-section">
-            <div class="help-agenda-card" v-for="id in party.policyIds" :key="id">
-              <TurmoilAgenda :id="id" />
-              <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
-            </div>
+        <div class="help-agenda-section">
+          <div class="help-agenda-card" v-for="id in party.policyIds" :key="id">
+            <TurmoilAgenda :id="id" />
+            <div class="help-agenda-description" v-i18n>{{ agendaDescription(id) }}</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script setup lang="ts">
 import {computed} from 'vue';

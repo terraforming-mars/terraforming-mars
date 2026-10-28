@@ -1,28 +1,28 @@
 <template>
-        <div class="players-overview" v-if="hasPlayers">
-            <OverviewSettings />
-            <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
-                <div v-for="(otherPlayer, index) in playersInOrder" :key="otherPlayer.color">
-                    <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
-                </div>
-            </div>
-            <PlayerInfo v-for="(p, index) in playersInOrder"
-              :player="p"
-              :key="p.color"
-              :playerView="playerView"
-              :firstForGen="getIsFirstForGen(p)"
-              :actionLabel="getActionLabel(p)"
-              :playerIndex="index"/>
-            <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" ></div>
-            <PlayerInfo
-              v-if="thisPlayer !== undefined"
-              :player="thisPlayer"
-              :key="thisPlayer.color"
-              :playerView="playerView"
-              :firstForGen="getIsFirstForGen(thisPlayer)"
-              :actionLabel="getActionLabel(thisPlayer)"
-              :playerIndex="-1"/>
-        </div>
+  <div class="players-overview" v-if="hasPlayers">
+    <OverviewSettings />
+    <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
+      <div v-for="(otherPlayer, index) in playersInOrder" :key="otherPlayer.color">
+        <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
+      </div>
+    </div>
+    <PlayerInfo v-for="(p, index) in playersInOrder"
+      :player="p"
+      :key="p.color"
+      :playerView="playerView"
+      :firstForGen="getIsFirstForGen(p)"
+      :actionLabel="getActionLabel(p)"
+      :playerIndex="index"/>
+    <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" ></div>
+    <PlayerInfo
+      v-if="thisPlayer !== undefined"
+      :player="thisPlayer"
+      :key="thisPlayer.color"
+      :playerView="playerView"
+      :firstForGen="getIsFirstForGen(thisPlayer)"
+      :actionLabel="getActionLabel(thisPlayer)"
+      :playerIndex="-1"/>
+  </div>
 </template>
 
 <script lang="ts">

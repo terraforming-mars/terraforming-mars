@@ -1,22 +1,22 @@
 <template>
-<div>
-  <div v-if="experimentalUI" v-i18n>
-    <label>
-      <input type="checkbox" v-model="showReorder" > Reorder Cards
-    </label>
-  </div>
-  <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" @dragend="onDragEnd()" @dragstart="onDragStart(card.name)" @dragover.prevent="onDragOver(card.name, $event)">
-      <div ref="cardbox" class="cardbox" @click="clickMethod">
-        <Card :card="card"/>
-        <div v-if="showReorder" class="reorder-banners-container">
-          <div class="reorder-banners-left" v-if="index > 0"></div>
-          <div class="reorder-banners-right" v-if="index < cards.length - 1"></div>
+  <div>
+    <div v-if="experimentalUI" v-i18n>
+      <label>
+        <input type="checkbox" v-model="showReorder" > Reorder Cards
+      </label>
+    </div>
+    <div class="sortable-cards">
+      <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" @dragend="onDragEnd()" @dragstart="onDragStart(card.name)" @dragover.prevent="onDragOver(card.name, $event)">
+        <div ref="cardbox" class="cardbox" @click="clickMethod">
+          <Card :card="card"/>
+          <div v-if="showReorder" class="reorder-banners-container">
+            <div class="reorder-banners-left" v-if="index > 0"></div>
+            <div class="reorder-banners-right" v-if="index < cards.length - 1"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">

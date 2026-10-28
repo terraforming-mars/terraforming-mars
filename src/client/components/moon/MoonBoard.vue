@@ -13,8 +13,8 @@
 
       <g id="mare_serenitatis" transform="translate(485, 140)">
         <text class="board-caption">
-            <tspan dy="15">Mare</tspan>
-            <tspan x="4" dy="12">Serenitatis</tspan>
+          <tspan dy="15">Mare</tspan>
+          <tspan x="4" dy="12">Serenitatis</tspan>
         </text>
         <line x1="0" y1="25" x2="-120" y2="50" class="board-line"/>
         <text x="-122" y="53" class="board-caption board_caption--black">●</text>

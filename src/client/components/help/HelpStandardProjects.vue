@@ -1,22 +1,22 @@
 <template>
-    <div class="help-standard-projects-container">
+  <div class="help-standard-projects-container">
 
-      <h2 v-i18n>Standard Projects</h2>
-      <div class="cardbox" v-for="card in getBasicStandardProjects()" :key="card">
-        <Card :card="{'name': card}" />
-      </div>
-
-      <h2 v-i18n>Standard Projects from Expansions and Solo Mode</h2>
-      <div class="cardbox" v-for="card in getExpansionStandardProjects()" :key="card">
-        <Card :card="{'name': card}" />
-      </div>
-
-      <h2 v-i18n>Standard Project from Fan-made Expansions</h2>
-      <div class="cardbox" v-for="card in getFanMadeStandardProjects()" :key="card">
-        <Card :card="{'name': card}" />
-      </div>
-
+    <h2 v-i18n>Standard Projects</h2>
+    <div class="cardbox" v-for="card in getBasicStandardProjects()" :key="card">
+      <Card :card="{'name': card}" />
     </div>
+
+    <h2 v-i18n>Standard Projects from Expansions and Solo Mode</h2>
+    <div class="cardbox" v-for="card in getExpansionStandardProjects()" :key="card">
+      <Card :card="{'name': card}" />
+    </div>
+
+    <h2 v-i18n>Standard Project from Fan-made Expansions</h2>
+    <div class="cardbox" v-for="card in getFanMadeStandardProjects()" :key="card">
+      <Card :card="{'name': card}" />
+    </div>
+
+  </div>
 </template>
 <script lang="ts">
 

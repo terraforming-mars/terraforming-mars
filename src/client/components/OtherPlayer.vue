@@ -5,30 +5,30 @@
       <AppButton size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
     </div>
     <div class="other_player_cont menu">
-        <div v-if="player.tableau.length > 0" class="player_home_block">
-            <div>
-                <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
-                    <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
-                </div>
-                <div v-for="card in getCardsByType(player.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
-                    <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
-                </div>
+      <div v-if="player.tableau.length > 0" class="player_home_block">
+        <div>
+          <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+          </div>
+          <div v-for="card in getCardsByType(player.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+          </div>
 
-                <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
-                    <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
-                </div>
-                <StackedCards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"/>
-                <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"/>
-            </div>
+          <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+          </div>
+          <StackedCards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"/>
+          <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"/>
         </div>
-        <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-            <span v-i18n>Self-replicating Robots cards</span>
-            <div>
-                <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
-                    <Card :card="card" />
-                </div>
-            </div>
+      </div>
+      <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
+        <span v-i18n>Self-replicating Robots cards</span>
+        <div>
+          <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
+            <Card :card="card" />
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </template>

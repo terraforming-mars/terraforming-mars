@@ -1,5 +1,5 @@
 <template>
-   <div class="colony-grid-container2"><!--  style="margin-top:55px;"  if VENUS-->
+  <div class="colony-grid-container2"><!--  style="margin-top:55px;"  if VENUS-->
     <template v-if="metadata.name === ColonyName.MERCURY">
       <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
       <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
@@ -28,41 +28,41 @@
       <div><div class="production-box"><div class="production plants"></div></div></div>
     </template>
     <template v-else-if="metadata.name === ColonyName.TERRA">
-     <div>
+      <div>
         <div class="tile temperature-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile temperature-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile temperature-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -18px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile oxygen-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile oxygen-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile ocean-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <div class="tile ocean-tile" style="transform: scale(0.8);">
-            <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
+          <span style="font-size: 24px;line-height: 45px;margin-left: -3px;">WGT</span>
         </div>
-    </div>
+      </div>
 
     </template>
     <template v-else v-for="idx in range(7)" :key="idx">

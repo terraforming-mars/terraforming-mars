@@ -1,8 +1,8 @@
 <template>
   <dialog ref="dialog" class="bug-dialog">
     <p class="center"><span v-i18n>Copy the text below and then paste it in</span><br>
-        <a href="https://github.com/terraforming-mars/terraforming-mars/issues/new?template=from-heroku.md" target="_blank"  v-i18n>a GitHub issue</a>
-        <span v-i18n>or the</span> <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank"  v-i18n>#bug-reports Discord channel</a>
+      <a href="https://github.com/terraforming-mars/terraforming-mars/issues/new?template=from-heroku.md" target="_blank"  v-i18n>a GitHub issue</a>
+      <span v-i18n>or the</span> <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank"  v-i18n>#bug-reports Discord channel</a>
     </p>
     <textarea ref="textarea" readonly rows="6" cols = "50" v-model="message"></textarea>
     <div class="dialog-menu centered-content">

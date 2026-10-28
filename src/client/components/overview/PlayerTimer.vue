@@ -1,8 +1,8 @@
 <template>
   <div class="player-timer">
     <template v-if="hasHours">
-        <div class="player-timer-hours">{{ hours }}</div>
-        <div class="timer-delimiter">:</div>
+      <div class="player-timer-hours">{{ hours }}</div>
+      <div class="timer-delimiter">:</div>
     </template>
     <div class="player-timer-minutes">{{ minutes }}</div>
     <div class="timer-delimiter">:</div>

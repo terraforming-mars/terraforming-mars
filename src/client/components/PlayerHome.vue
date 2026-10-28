@@ -38,8 +38,8 @@
         />
       </div>
 
-    <a class="hotkey-target"></a>
-    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="playerView" id="shortkey-playersoverview"/>
+      <a class="hotkey-target"></a>
+      <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="playerView" id="shortkey-playersoverview"/>
 
       <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
@@ -94,13 +94,13 @@
           <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
         </div>
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
+          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
+          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
         <div v-show="isVisible('ACTIVE')" v-for="card in activeTableauCards" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
+          <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
         <StackedCards v-show="isVisible('AUTOMATED')" :cards="automatedTableauCards" />

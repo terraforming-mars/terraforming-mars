@@ -1,49 +1,49 @@
 <template>
-<section>
-  <table class="payments_table">
-    <tbody>
-      <tr>
-        <td></td>
-        <td><i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
-      </tr>
-      <template v-for="unit of order" :key="unit">
-        <template v-if="ledger[unit]?.available > 0">
-          <tr>
-            <td>
-              <PaymentUnitComponent
-                v-model:count.number="payment[unit]"
-                :unit="unit"
-                :description="descriptions[unit]"
-                :rate="ledger[unit].rate"
-                @plus="addValue(unit)"
-                @minus="reduceValue(unit)"
-                @max="maxValue(unit)"/>
-              <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
-              Some ${0} are reserved and unavailable here.</div>
-            </td>
-            <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
-              {{ ledger[unit].rate * payment[unit] }}
-            </td>
-          </tr>
+  <section>
+    <table class="payments_table">
+      <tbody>
+        <tr>
+          <td></td>
+          <td><i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
+        </tr>
+        <template v-for="unit of order" :key="unit">
+          <template v-if="ledger[unit]?.available > 0">
+            <tr>
+              <td>
+                <PaymentUnitComponent
+                  v-model:count.number="payment[unit]"
+                  :unit="unit"
+                  :description="descriptions[unit]"
+                  :rate="ledger[unit].rate"
+                  @plus="addValue(unit)"
+                  @minus="reduceValue(unit)"
+                  @max="maxValue(unit)"/>
+                <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
+                  Some ${0} are reserved and unavailable here.</div>
+              </td>
+              <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
+                {{ ledger[unit].rate * payment[unit] }}
+              </td>
+            </tr>
+          </template>
         </template>
-      </template>
-    <tr :class="totalSpentClass">
-      <td class="payments_total_heading"></td>
-      <td class="payments_total_value" :title="$t(totalSpentTitle)" :aria-label="$t(totalSpentTitle)">
-        {{ totalSpent }}
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <tr :class="totalSpentClass">
+          <td class="payments_total_heading"></td>
+          <td class="payments_total_value" :title="$t(totalSpentTitle)" :aria-label="$t(totalSpentTitle)">
+            {{ totalSpent }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div v-if="warning !== undefined" class="tm-warning">
-    <label class="label label-error">{{ $t(warning) }}</label>
-  </div>
+    <div v-if="warning !== undefined" class="tm-warning">
+      <label class="label label-error">{{ $t(warning) }}</label>
+    </div>
 
-  <div v-if="showsave" class="payments_save">
-    <AppButton size="big" @click="handleSave()" :title="$t(buttonLabel)" data-test="save"/>
-  </div>
-</section>
+    <div v-if="showsave" class="payments_save">
+      <AppButton size="big" @click="handleSave()" :title="$t(buttonLabel)" data-test="save"/>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

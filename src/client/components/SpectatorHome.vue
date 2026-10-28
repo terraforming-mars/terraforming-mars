@@ -27,7 +27,7 @@
       :otherDeckSizes = "game.otherDeckSizes"/>
 
     <div class="player_home_block nofloat">
-<LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked"/>
+      <LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked"/>
     </div>
 
     <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" id="shortkey-playersoverview"/>
@@ -45,12 +45,12 @@
       <DynamicTitle title="Colonies" :color="spectator.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="player in spectator.players" :key="player.color">
-            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
+          <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
         </div>
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-            <Colony :colony="colony" :active="colony.isActive"/>
+          <Colony :colony="colony" :active="colony.isActive"/>
         </div>
       </div>
     </div>

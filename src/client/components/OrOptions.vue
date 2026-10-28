@@ -10,11 +10,11 @@
       </label>
       <div v-if="selectedIdx === idx" style="margin-left: 30px">
         <PlayerInputFactory ref="inputfactory"
-                              :playerView="playerView"
-                              :playerinput="option"
-                              :onsave="playerFactorySaved(idx)"
-                              :showsave="showsave && showChildSaveButton(option)"
-                              :showtitle="false" />
+          :playerView="playerView"
+          :playerinput="option"
+          :onsave="playerFactorySaved(idx)"
+          :showsave="showsave && showChildSaveButton(option)"
+          :showtitle="false" />
       </div>
     </div>
     <div v-if="showsave && selectedOption && !showChildSaveButton(selectedOption)">

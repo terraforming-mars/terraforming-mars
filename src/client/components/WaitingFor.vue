@@ -1,24 +1,24 @@
 <template>
   <div>
-  <template v-if="waitingfor === undefined || waitingfor.optional">
-    <template v-if="waitingfor === undefined">
-      {{ $t('Not your turn to take any actions') }}
+    <template v-if="waitingfor === undefined || waitingfor.optional">
+      <template v-if="waitingfor === undefined">
+        {{ $t('Not your turn to take any actions') }}
+      </template>
+      <template v-else>
+        {{ $t('Waiting for other players') }}
+      </template>
+      <template v-if="playersWaitingFor.length > 0">
+        (⌛ <span v-for="color in playersWaitingFor" class="log-player" :class="playerColorClass(color, 'bg')" :key="color">{{ getPlayerName(color) }}</span>)
+      </template>
     </template>
-    <template v-else>
-      {{ $t('Waiting for other players') }}
-    </template>
-    <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="color in playersWaitingFor" class="log-player" :class="playerColorClass(color, 'bg')" :key="color">{{ getPlayerName(color) }}</span>)
-    </template>
-  </template>
-  <div v-if="waitingfor !== undefined" class="wf-root">
-    <PlayerInputFactory :players="playerView.players"
-                          :playerView="playerView"
-                          :playerinput="waitingfor"
-                          :onsave="onsave"
-                          :showsave="true"
-                          :showtitle="true"
-                          :key="inputKey" />
+    <div v-if="waitingfor !== undefined" class="wf-root">
+      <PlayerInputFactory :players="playerView.players"
+        :playerView="playerView"
+        :playerinput="waitingfor"
+        :onsave="onsave"
+        :showsave="true"
+        :showtitle="true"
+        :key="inputKey" />
     </div>
   </div>
 </template>

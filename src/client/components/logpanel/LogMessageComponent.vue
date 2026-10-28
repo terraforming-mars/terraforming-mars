@@ -1,5 +1,5 @@
 <template>
-   <li v-if="message !== undefined && message.data !== undefined && message.message !== undefined" @click.prevent="$emit('click')">
+  <li v-if="message !== undefined && message.data !== undefined && message.message !== undefined" @click.prevent="$emit('click')">
     <span v-if="(message.type ?? LogMessageType.DEFAULT) === LogMessageType.DEFAULT" :title="when" v-html="icon"></span>
     <template v-for="(data, idx) of entries" :key="idx">
       <span class="log-plain-text" v-if="typeof(data) === 'string'" v-html="inlineMarkdown(data)"></span>
@@ -20,10 +20,10 @@
           {{undergroundResourceTokenDescription[data.value]}}
         </span>
         <span v-else-if="data.type === LogMessageDataType.SPACE" class="log-space-id" @click.prevent="$emit('spaceClicked', data.value)">
-            <svg width="20" height="14" viewBox="0 0 28 38">
-              <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="data.value.startsWith('m') ? 'gray' : '#b7410e'" />
-            </svg>
-            {{ spaceName(data.value) }}
+          <svg width="20" height="14" viewBox="0 0 28 38">
+            <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="data.value.startsWith('m') ? 'gray' : '#b7410e'" />
+          </svg>
+          {{ spaceName(data.value) }}
         </span>
         <span v-else-if="data.type === LogMessageDataType.CARDS" v-html="cardsToHtml(data)"></span>
 
@@ -36,7 +36,7 @@
         <span v-else v-i18n>{{ data.value }}</span>
       </span>
     </template>
-   </li>
+  </li>
 </template>
 
 <script lang="ts">

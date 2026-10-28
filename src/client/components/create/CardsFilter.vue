@@ -63,6 +63,7 @@ type Refs = {
 
 export default defineComponent({
   name: 'CardsFilter',
+  emits: ['cards-list-changed'],
   props: {
     title: {
       type: String,

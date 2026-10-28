@@ -27,6 +27,7 @@ type Refs = {
 
 export default defineComponent({
   name: 'ConfirmDialog',
+  emits: ['hide', 'accept', 'dismiss'],
   props: {
     message: {
       type: String,

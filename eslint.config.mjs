@@ -128,6 +128,7 @@ const pluginRules = {
   'vue/html-comment-content-spacing': 'error',
   'vue/v-for-delimiter-style': 'error',
   'vue/mustache-interpolation-spacing': 'error',
+  'vue/require-explicit-emits': 'error',
 };
 
 const sharedLanguageOptions = {

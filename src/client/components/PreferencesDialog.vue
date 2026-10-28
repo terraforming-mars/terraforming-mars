@@ -119,6 +119,7 @@ type Refs = {
 
 export default defineComponent({
   name: 'PreferencesDialog',
+  emits: ['okButtonClicked'],
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,

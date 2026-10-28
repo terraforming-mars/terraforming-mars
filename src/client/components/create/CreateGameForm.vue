@@ -389,11 +389,6 @@
                                 </div>
                             </div>
 
-                            <div v-if="modularMA">
-                              The new Milestones and Awards are still in active development.<br>
-                              Please don't report anything unless it breaks the game.<br>
-                              These are <b>always fully random</b>.
-                            </div>
                             <template v-if="expansions.venus">
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">

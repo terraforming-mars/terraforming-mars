@@ -14,18 +14,18 @@
       :playerColor="thisPlayer.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
-      :temperature = "game.temperature"
-      :oxygen = "game.oxygenLevel"
-      :oceans = "game.oceans"
-      :venus = "game.venusScaleLevel"
-      :turmoil = "game.turmoil"
+      :temperature="game.temperature"
+      :oxygen="game.oxygenLevel"
+      :oceans="game.oceans"
+      :venus="game.venusScaleLevel"
+      :turmoil="game.turmoil"
       :moonData="game.moon"
-      :gameOptions = "game.gameOptions"
-      :playerNumber = "playerView.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration"
-      :deckSize = "game.deckSize"
-      :discardPileSize = "game.discardPileSize"
-      :otherDeckSizes = "game.otherDeckSizes"/>
+      :gameOptions="game.gameOptions"
+      :playerNumber="playerView.players.length"
+      :lastSoloGeneration="game.lastSoloGeneration"
+      :deckSize="game.deckSize"
+      :discardPileSize="game.discardPileSize"
+      :otherDeckSizes="game.otherDeckSizes"/>
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
@@ -65,8 +65,8 @@
         <div class="hiding-card-button-row">
           <DynamicTitle title="Cards In Hand" :color="thisPlayer.color"/>
           <div :class="getHideButtonClass('HAND')" @click.prevent="toggle('HAND')">
-            <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
-            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
+            <div class="played-cards-count">{{ cardsInHandCount.toString() }}</div>
+            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND') }}</div>
           </div>
           <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
           <CardSortButtons v-model:sortOrder="handSortOrder"/>
@@ -80,15 +80,15 @@
           <div class="played-cards-filters">
             <div :class="getHideButtonClass('ACTIVE')" @click.prevent="toggle('ACTIVE')">
               <div class="played-cards-count">{{ activeTableauCount }}</div>
-              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE') }}</div>
             </div>
             <div :class="getHideButtonClass('AUTOMATED')" @click.prevent="toggle('AUTOMATED')">
               <div class="played-cards-count">{{ automatedTableauCount }}</div>
-              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED') }}</div>
             </div>
             <div :class="getHideButtonClass('EVENT')" @click.prevent="toggle('EVENT')">
               <div class="played-cards-count">{{ eventTableauCount }}</div>
-              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
+              <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT') }}</div>
             </div>
           </div>
           <div class="text-overview" v-i18n>[ toggle cards filters ]</div>

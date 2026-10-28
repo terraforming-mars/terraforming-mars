@@ -7,7 +7,7 @@
       <div class="help-party-card" v-for="party in parties" :key="party.name">
         <div class="help-party-label">
           <div :class="'card-party card-party--'+partyLogoSlug(party.name)"></div>
-          <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+          <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{ party.name }}</div>
         </div>
 
         <div class="help-agenda-section">

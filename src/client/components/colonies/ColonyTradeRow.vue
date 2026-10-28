@@ -1,5 +1,5 @@
 <template>
-  <div class="colony-grid-container2"><!--  style="margin-top:55px;"  if VENUS-->
+  <div class="colony-grid-container2"><!--  style="margin-top:55px;"  if VENUS -->
     <template v-if="metadata.name === ColonyName.MERCURY">
       <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
       <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
@@ -66,7 +66,7 @@
 
     </template>
     <template v-else v-for="idx in range(7)" :key="idx">
-      <div>{{metadata.trade.quantity[idx]}}</div>
+      <div>{{ metadata.trade.quantity[idx] }}</div>
     </template>
   </div>
 </template>

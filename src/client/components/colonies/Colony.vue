@@ -10,7 +10,7 @@
 
     <!-- show the large title on top -->
     <div class="colony-card-title-div">
-      <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
+      <span class="colony-card-title-span" :class="colony.name + '-title'">{{ colony.name }}</span>
     </div>
 
     <div class="colony-content">
@@ -20,7 +20,7 @@
           <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="metadata.colony.resource"></div>
         </template>
         <template v-else>
-          <div class="resource" :class="metadata.colony.resource">{{metadata.colony.quantity}}</div>
+          <div class="resource" :class="metadata.colony.resource">{{ metadata.colony.quantity }}</div>
         </template>
       </template>
       <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">

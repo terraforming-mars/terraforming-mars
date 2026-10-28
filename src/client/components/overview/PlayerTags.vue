@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="player-tags-secondary">
-      <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
+      <div class="tag-count-container" v-for="tagDetail in tags" :key="tagDetail.name">
         <template v-if="tagDetail.name === SpecialTags.UNDERGROUND_TOKEN_COUNT">
           <div class="tag-and-discount">
             <TagCount :tag="tagDetail.name" :undergroundToken="player.underworldData.activeBonus" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>

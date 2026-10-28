@@ -6,7 +6,7 @@
         <img src="assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
       </div>
       <div v-else>
-        {{value}}{{suffix}}
+        {{ value }}{{ suffix }}
       </div>
     </div>
   </div>

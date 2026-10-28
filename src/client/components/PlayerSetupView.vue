@@ -80,7 +80,7 @@
           :spaces="game.spaces"
           :expansions="game.gameOptions.expansions"
           :venusScaleLevel="game.venusScaleLevel"
-          :boardName ="game.gameOptions.boardName"
+          :boardName="game.gameOptions.boardName"
           :aresData="game.aresData"
           :altVenusBoard="game.gameOptions.altVenusBoard"
           :tileView="tileView"

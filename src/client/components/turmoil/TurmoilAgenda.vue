@@ -182,7 +182,7 @@
         </div>
       </template>
       <template v-else>
-        <div>Unknown agenda ID {{id}}</div>
+        <div>Unknown agenda ID {{ id }}</div>
       </template>
     </div>
     <Teleport to="body">

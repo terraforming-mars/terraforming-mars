@@ -3,40 +3,40 @@
     <div class="track track-background-venus" v-if="tracks.venus >= 0">
       <div class="track-tag track-tag-venus"></div>
       <table class="track-venus">
-        <PlanetaryTrack type='risingPlayer' :val="tracks.venus" :rewards="PLANETARY_TRACKS.venus" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' :val="tracks.venus" :rewards="PLANETARY_TRACKS.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="risingPlayer" :val="tracks.venus" :rewards="PLANETARY_TRACKS.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="everyone" :val="tracks.venus" :rewards="PLANETARY_TRACKS.venus" :gameOptions="gameOptions" />
       </table>
     </div>
 
     <div class="track track-background-earth">
       <div class="track-tag track-tag-earth"></div>
       <table class="track-earth">
-        <PlanetaryTrack type='risingPlayer' :val="tracks.earth" :rewards="PLANETARY_TRACKS.earth" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' :val="tracks.earth" :rewards="PLANETARY_TRACKS.earth" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="risingPlayer" :val="tracks.earth" :rewards="PLANETARY_TRACKS.earth" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="everyone" :val="tracks.earth" :rewards="PLANETARY_TRACKS.earth" :gameOptions="gameOptions" />
       </table>
     </div>
 
     <div class="track track-background-mars">
       <div class="track-tag track-tag-mars"></div>
       <table class="track-mars">
-        <PlanetaryTrack type='risingPlayer' :val="tracks.mars" :rewards="PLANETARY_TRACKS.mars" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' :val="tracks.mars" :rewards="PLANETARY_TRACKS.mars" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="risingPlayer" :val="tracks.mars" :rewards="PLANETARY_TRACKS.mars" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="everyone" :val="tracks.mars" :rewards="PLANETARY_TRACKS.mars" :gameOptions="gameOptions" />
       </table>
     </div>
 
     <div class="track track-background-jovian">
       <div class="track-tag track-tag-jovian"></div>
       <table class="track-jovian">
-        <PlanetaryTrack type='risingPlayer' :val="tracks.jovian" :rewards="PLANETARY_TRACKS.jovian" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' :val="tracks.jovian" :rewards="PLANETARY_TRACKS.jovian" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="risingPlayer" :val="tracks.jovian" :rewards="PLANETARY_TRACKS.jovian" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="everyone" :val="tracks.jovian" :rewards="PLANETARY_TRACKS.jovian" :gameOptions="gameOptions" />
       </table>
     </div>
 
     <div class="track track-background-moon" v-if="tracks.moon >= 0">
       <div class="track-tag track-tag-moon"></div>
       <table class="track-moon">
-        <PlanetaryTrack type='risingPlayer' :val="tracks.moon" :rewards="PLANETARY_TRACKS.moon" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' :val="tracks.moon" :rewards="PLANETARY_TRACKS.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="risingPlayer" :val="tracks.moon" :rewards="PLANETARY_TRACKS.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type="everyone" :val="tracks.moon" :rewards="PLANETARY_TRACKS.moon" :gameOptions="gameOptions" />
       </table>
     </div>
 

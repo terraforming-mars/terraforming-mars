@@ -13,14 +13,14 @@
     <template v-if="tileView === 'show'">
       <div :class="playerColorCss" v-if="space.color !== undefined"></div>
       <template v-if="space.gagarin !== undefined">
-        <div v-if="space.gagarin === 0" class='gagarin'></div>
-        <div v-else class='gagarin visited'></div>
+        <div v-if="space.gagarin === 0" class="gagarin"></div>
+        <div v-else class="gagarin visited"></div>
       </template>
       <template v-if="space.cathedral === true">
-        <div class='board-cube--cathedral'></div>
+        <div class="board-cube--cathedral"></div>
       </template>
       <template v-if="space.nomads === true">
-        <div class='board-cube--nomad'></div>
+        <div class="board-cube--nomad"></div>
       </template>
       <BoardSpaceCube v-if="space.cube !== undefined" :cube="space.cube"/>
       <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="board"/>

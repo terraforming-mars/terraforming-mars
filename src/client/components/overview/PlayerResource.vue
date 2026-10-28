@@ -6,7 +6,7 @@
     </div>
     <div class="resource_item_prod">
       <span class="resource_item_prod_count tooltip tooltip-bottom" data-test="production" :data-tooltip="productionCountTooltip">{{ productionSign }}{{ production }}</span>
-      <div class="shield_parent" data-test="protection-shield"> <!-- Why is this a child of resource_item_prod?-->
+      <div class="shield_parent" data-test="protection-shield"> <!-- Why is this a child of resource_item_prod? -->
         <div v-if="protectionIcon !== ''" :class="protectionIcon"></div>
         <div v-if="showProductionProtectedIcon" class="shield_production_protection"></div>
         <div v-if="showResourceProtectionIcon" class="shield_resource_protection"></div>

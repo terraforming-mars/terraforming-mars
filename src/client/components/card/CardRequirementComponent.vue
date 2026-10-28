@@ -2,7 +2,7 @@
   <div class="card-requirement">
     <div class="card-item-container" :class="nextTo">
       <template v-if="requirement.max">max&nbsp;</template>
-      <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
+      <span v-if="!isRepeated">{{ amount }}</span>{{ suffix }}
       <template v-if="type === RequirementType.REMOVED_PLANTS">
         <div class="card-special card-minus"></div>
         <div class="card-resource card-resource-plant red-outline"></div>

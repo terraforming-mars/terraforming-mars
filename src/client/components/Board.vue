@@ -38,18 +38,18 @@
           <img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
         </span>
         <span v-else>
-          {{oceans_count}}/{{globalParameterMaximums.oceans}}
+          {{ oceans_count }}/{{ globalParameterMaximums.oceans }}
         </span>
       </div>
 
       <div v-if="expansions.ares && aresData !== undefined">
         <div v-if="aresData.hazardData.erosionOceanCount.available">
           <div class="global-ares-erosions-icon"></div>
-          <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
+          <div class="global-ares-erosions-val">{{ aresData.hazardData.erosionOceanCount.threshold }}</div>
         </div>
         <div v-if="aresData.hazardData.removeDustStormsOceanCount.available">
           <div class="global-ares-remove-dust-storms-icon"></div>
-          <div class="global-ares-remove-dust-storms-val">{{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div>
+          <div class="global-ares-remove-dust-storms-val">{{ aresData.hazardData.removeDustStormsOceanCount.threshold }}</div>
         </div>
         <div v-if="aresData.hazardData.severeErosionTemperature.available">
           <div class="global-ares-severe-erosions"
@@ -84,10 +84,10 @@
       />
 
       <svg id="board_legend" height="550" width="630" class="board-legend">
-        <g v-for="(key, idx) of LEGENDS[boardName]" :key="idx" :transform="`translate(${key.position[0]}, ${key.position[1]})`">
+        <g v-for="(key, idx) in LEGENDS[boardName]" :key="idx" :transform="`translate(${key.position[0]}, ${key.position[1]})`">
           <text class="board-caption">
-            <tspan y="0">{{key.text[0]}}</tspan>
-            <tspan :x="key.secondRowX || 0" y="1.1em">{{key.text[1]}}</tspan>
+            <tspan y="0">{{ key.text[0] }}</tspan>
+            <tspan :x="key.secondRowX || 0" y="1.1em">{{ key.text[1] }}</tspan>
           </text>
           <template v-if="key.line !== undefined">
             <line :x1="key.line.from[0]" :y1="key.line.from[1]" :x2="key.line.to[0]" :y2="key.line.to[1]" class="board-line"/>
@@ -150,7 +150,7 @@
             </text>
           </g>
 
-          <g id="hecates_tholus"  transform="translate(130, 150)">
+          <g id="hecates_tholus" transform="translate(130, 150)">
             <text class="board-caption">
               <tspan dy="15">Hecates</tspan>
               <tspan x="3" dy="12">Tholus</tspan>
@@ -173,7 +173,7 @@
         </template>
 
         <template v-if="boardName === BoardName.VASTITAS_BOREALIS_NOVA">
-          <g id="hecates_tholus_vastitas_borealis_novus"  transform="translate(270, 70)">
+          <g id="hecates_tholus_vastitas_borealis_novus" transform="translate(270, 70)">
             <text class="board-caption">
               <tspan dy="15">Hecates</tspan>
               <tspan x="5" dy="12">Tholus</tspan>
@@ -281,13 +281,13 @@
         </template>
 
         <template v-if="boardName === BoardName.VASTITAS_BOREALIS">
-          <g id="elysium_mons_vastitas_borealis"  transform="translate(410, 70)">
+          <g id="elysium_mons_vastitas_borealis" transform="translate(410, 70)">
             <text class="board-caption">
               <tspan dy="15">Elysium</tspan>
               <tspan x="5" dy="12">Mons</tspan>
             </text>
           </g>
-          <g id="alba_fossae"  transform="translate(350, 70)">
+          <g id="alba_fossae" transform="translate(350, 70)">
             <line x1="20" y1="30" x2="41" y2="82" class="board-line"/>
             <text x="39" y="85" class="board-caption board_caption--black">&#x25cf;</text>
             <text class="board-caption">
@@ -314,7 +314,7 @@
         </template>
 
         <template v-if="boardName === BoardName.TERRA_CIMMERIA">
-          <g id="albor_tholus"  transform="translate(260, 70)">
+          <g id="albor_tholus" transform="translate(260, 70)">
             <text class="board-caption">
               <tspan dy="15">Albor</tspan>
               <tspan x="5" dy="12">Tholus</tspan>

@@ -1,6 +1,6 @@
 <template>
   <div class="player-allied-party">
-    <div v-if="player.alliedParty" class='allied-policy-block'>
+    <div v-if="player.alliedParty" class="allied-policy-block">
       <TurmoilAgenda :id="player.alliedParty.agenda.policyId" :show-party-badge="true"/>
     </div>
   </div>

@@ -22,7 +22,7 @@
             <div class="played-cards-icon hiding-card-button active"></div>
             <div class="played-cards-icon hiding-card-button automated"></div>
             <div class="played-cards-icon hiding-card-button event"></div>
-            <div class="played-cards-count">{{numberOfPlayedCards}}</div>
+            <div class="played-cards-count">{{ numberOfPlayedCards }}</div>
           </div>
         </div>
         <AppButton class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel" />

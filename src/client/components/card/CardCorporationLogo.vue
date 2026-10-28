@@ -149,7 +149,7 @@
       </template>
       <template v-else-if="title === CardName.MANUTECH">
         <span class="card-manutech-logo"><span
-            style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>
+          style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>
       </template>
       <template v-else-if="title === CardName.MARS_MATHS">
         <div class="card-mars-maths-logo" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif">

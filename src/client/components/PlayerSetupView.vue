@@ -20,7 +20,7 @@
     <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
       <DynamicTitle title="Drafted Cards" :color="thisPlayer.color"/>
       <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
-          <Card :card="card"/>
+        <Card :card="card"/>
       </div>
     </div>
 
@@ -37,7 +37,7 @@
         </template>
         <template v-if="game.gameOptions.expansions.ceo">
           <div v-for="card in playerView.ceoCardsInHand" :key="card.name" class="cardbox">
-          <Card :card="card"/>
+            <Card :card="card"/>
           </div>
         </template>
       </div>

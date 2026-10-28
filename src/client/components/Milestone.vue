@@ -19,8 +19,8 @@
             v-text="score.score"
             data-test="player-score"
           ></p>
-      </template>
-    </div>
+        </template>
+      </div>
     </div>
 
     <div v-if="showDescription" class="ma-description">

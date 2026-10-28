@@ -1,5 +1,5 @@
 <template>
-   <div class="colony-grid-container">
+  <div class="colony-grid-container">
     <ColonySpace v-for="idx in [0, 1, 2, 3, 4, 5, 6]"
       :key="idx"
       :idx="idx"

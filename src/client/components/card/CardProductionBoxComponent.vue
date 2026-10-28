@@ -1,13 +1,13 @@
 <template>
-        <div class="card-production-box">
-            <div class="card-production-box-row" v-for="(rowData, index) in rows" :key="index">
-                <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
-                    <CardRenderItemComponent v-if="isICardRenderItem(rowItem)" :item="rowItem"/>
-                    <CardRenderSymbolComponent v-else-if="isICardRenderSymbol(rowItem)" :item="rowItem" />
-                    <div v-else>n/a</div>
-                </div>
-            </div>
-        </div>
+  <div class="card-production-box">
+    <div class="card-production-box-row" v-for="(rowData, index) in rows" :key="index">
+      <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
+        <CardRenderItemComponent v-if="isICardRenderItem(rowItem)" :item="rowItem"/>
+        <CardRenderSymbolComponent v-else-if="isICardRenderSymbol(rowItem)" :item="rowItem" />
+        <div v-else>n/a</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

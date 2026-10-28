@@ -1,10 +1,10 @@
 <template>
-    <tr>
-      <td><div :class="iconClass"></div></td>
-      <td v-for="idx in range" :key="idx" :class="getClass(idx)">
-        <PlanetaryTrackRewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
-      </td>
-    </tr>
+  <tr>
+    <td><div :class="iconClass"></div></td>
+    <td v-for="idx in range" :key="idx" :class="getClass(idx)">
+      <PlanetaryTrackRewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
+    </td>
+  </tr>
 </template>
 
 <script lang="ts">

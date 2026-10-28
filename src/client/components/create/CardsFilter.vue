@@ -1,36 +1,36 @@
 <template>
-    <div class="cards-filter">
-        <h2 v-i18n>{{ title }}</h2>
-        <div class="cards-filter-results-cont" v-if="selected.length">
-            <div class="cards-filter-result" v-for="cardName in selected" :key="cardName">
-                <label>{{ cardName }}
-                  <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
-                  <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                  <template v-for="expansion of expansions(cardName)" :key="expansion">
-                    <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
-                  </template>
-                </label>
-                <AppButton size="small" type="close" @click="removeCard(cardName)" />
-            </div>
-        </div>
-        <div class="cards-filter-input">
-            <div>
-                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" >
-            </div>
-            <div class="cards-filter-suggest" v-if="searchMatches.length">
-                <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" :key="cardName">
-                    <a href="#" @click.prevent="addCard(cardName)">
-                      {{ cardName }}
-                      <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
-                      <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                      <template v-for="expansion of expansions(cardName)" :key="expansion">
-                        <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
-                      </template>
-                    </a>
-                </div>
-            </div>
-        </div>
+  <div class="cards-filter">
+    <h2 v-i18n>{{ title }}</h2>
+    <div class="cards-filter-results-cont" v-if="selected.length">
+      <div class="cards-filter-result" v-for="cardName in selected" :key="cardName">
+        <label>{{ cardName }}
+          <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
+          <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
+          <template v-for="expansion of expansions(cardName)" :key="expansion">
+            <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+          </template>
+        </label>
+        <AppButton size="small" type="close" @click="removeCard(cardName)" />
+      </div>
     </div>
+    <div class="cards-filter-input">
+      <div>
+        <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" >
+      </div>
+      <div class="cards-filter-suggest" v-if="searchMatches.length">
+        <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" :key="cardName">
+          <a href="#" @click.prevent="addCard(cardName)">
+            {{ cardName }}
+            <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
+            <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
+            <template v-for="expansion of expansions(cardName)" :key="expansion">
+              <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+            </template>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

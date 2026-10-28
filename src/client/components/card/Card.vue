@@ -1,24 +1,24 @@
 <template>
   <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
-      <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
-          <div v-if="!isStandardProject" class="card-cost-and-tags">
-              <CardCost :amount="cost" :newCost="reducedCost" />
-              <div v-if="showPlayerCube" :class="playerCubeClass"></div>
-              <CardHelp v-if="helpText !== undefined" :name="card.name" :helpText="helpText" :hovering="hovering" />
-              <CardTags :tags="tags" />
-          </div>
-          <CardTitle :title="card.name" :type="cardType"/>
-          <CardContent
-              :metadata="cardMetadata"
-              :requirements="cardRequirements"
-              :isCorporation="isCorporationCard"
-              :bottomPadding="bottomPadding" />
+    <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
+      <div v-if="!isStandardProject" class="card-cost-and-tags">
+        <CardCost :amount="cost" :newCost="reducedCost" />
+        <div v-if="showPlayerCube" :class="playerCubeClass"></div>
+        <CardHelp v-if="helpText !== undefined" :name="card.name" :helpText="helpText" :hovering="hovering" />
+        <CardTags :tags="tags" />
       </div>
-      <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
-      <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
-      <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
-      <CardExtraContent :card="card" />
-      <slot></slot>
+      <CardTitle :title="card.name" :type="cardType"/>
+      <CardContent
+        :metadata="cardMetadata"
+        :requirements="cardRequirements"
+        :isCorporation="isCorporationCard"
+        :bottomPadding="bottomPadding" />
+    </div>
+    <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
+    <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
+    <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
+    <CardExtraContent :card="card" />
+    <slot></slot>
   </div>
 </template>
 

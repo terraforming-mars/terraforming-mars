@@ -1,6 +1,6 @@
 <template>
   <div class="card-party">
-  <span :class="classes"></span>
+    <span :class="classes"></span>
   </div>
 </template>
 

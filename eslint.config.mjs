@@ -103,6 +103,7 @@ const pluginRules = {
   'vue/v-on-style': ['error', 'shorthand'],
   'vue/v-bind-style': ['error', 'shorthand'],
   'vue/v-slot-style': ['error', 'shorthand'],
+  'vue/html-indent': ['error', 2, {alignAttributesVertically: false}],
   // B6 — components with no content should self-close. HTML elements left alone.
   'vue/html-self-closing': ['error', {
     html: {void: 'never', normal: 'never', component: 'always'},

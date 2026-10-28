@@ -1,7 +1,7 @@
 <template>
   <div>
-  <div v-if="item.isSuperscript === true" :class="classes"><sup>{{ content }}</sup></div>
-  <div v-else :class="classes">{{ content }}</div>
+    <div v-if="item.isSuperscript === true" :class="classes"><sup>{{ content }}</sup></div>
+    <div v-else :class="classes">{{ content }}</div>
   </div>
 </template>
 

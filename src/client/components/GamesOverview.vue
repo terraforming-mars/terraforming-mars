@@ -1,10 +1,10 @@
 <template>
   <div id="games-overview" class="games-overview-container">
     <h1><HomeLink>{{ constants.APP_NAME }} — Games Overview</HomeLink></h1>
-      <p v-i18n>The following games are available on this server:</p>
-      <table>
-        <GameOverview v-for="entry in entries" :key="entry.id" :id="entry.id" :game="entry.game" :status="entry.status"/>
-      </table>
+    <p v-i18n>The following games are available on this server:</p>
+    <table>
+      <GameOverview v-for="entry in entries" :key="entry.id" :id="entry.id" :game="entry.game" :status="entry.status"/>
+    </table>
   </div>
 </template>
 

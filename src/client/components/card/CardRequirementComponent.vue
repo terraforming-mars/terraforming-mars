@@ -1,28 +1,28 @@
 <template>
   <div class="card-requirement">
-      <div class="card-item-container" :class="nextTo">
-        <template v-if="requirement.max">max&nbsp;</template>
-        <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
-        <template v-if="type === RequirementType.REMOVED_PLANTS">
-          <div class="card-special card-minus"></div>
-          <div class="card-resource card-resource-plant red-outline"></div>
-        </template>
-        <template v-if="type === RequirementType.PRODUCTION">
-          <div class="card-production-box card-production-box--req">
-            <div class="card-production-box-row">
-              <div class="card-production-box-row-item">
-                <div class="card-item-container">
-                  <div v-for="num in repeats" :class="productionClass" :key="num"></div>
-                </div>
+    <div class="card-item-container" :class="nextTo">
+      <template v-if="requirement.max">max&nbsp;</template>
+      <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
+      <template v-if="type === RequirementType.REMOVED_PLANTS">
+        <div class="card-special card-minus"></div>
+        <div class="card-resource card-resource-plant red-outline"></div>
+      </template>
+      <template v-if="type === RequirementType.PRODUCTION">
+        <div class="card-production-box card-production-box--req">
+          <div class="card-production-box-row">
+            <div class="card-production-box-row-item">
+              <div class="card-item-container">
+                <div v-for="num in repeats" :class="productionClass" :key="num"></div>
               </div>
             </div>
           </div>
-        </template>
-        <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
-        <template v-else>
-            <div v-for="num in repeats" :key="num" :class="componentClasses"></div>
-        </template>
-      </div>
+        </div>
+      </template>
+      <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
+      <template v-else>
+        <div v-for="num in repeats" :key="num" :class="componentClasses"></div>
+      </template>
+    </div>
   </div>
 </template>
 

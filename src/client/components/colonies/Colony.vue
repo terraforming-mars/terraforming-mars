@@ -1,7 +1,7 @@
 <template>
-    <!-- <div :class="recedeIfInactive"> -->
-    <!-- Show the background, tooltip, and other setup -->
-    <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
+  <!-- <div :class="recedeIfInactive"> -->
+  <!-- Show the background, tooltip, and other setup -->
+  <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
 
     <!-- Show colony ship if somebody is visiting -->
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="colony-content">
-    <!-- Bonus for colony owners when somebody trades -->
+      <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colony.type === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colony.resource !== Resource.MEGACREDITS">
           <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="metadata.colony.resource"></div>
@@ -23,7 +23,7 @@
           <div class="resource" :class="metadata.colony.resource">{{metadata.colony.quantity}}</div>
         </template>
       </template>
-       <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
+      <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
         <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="colonyResourceClass"></div>
       </template>
       <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)" ></div>
@@ -73,7 +73,7 @@
         <div style="margin-left:20px;" class="resource" :class="metadata.trade.resource"></div>
         <div class="white-x"></div>
       </template>
-       <template v-if="metadata.trade.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
+      <template v-if="metadata.trade.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
         <div style="margin-left:20px;" class="resource" :class="colonyResourceClass"></div>
         <div class="white-x"></div>
       </template>
@@ -111,13 +111,13 @@
         v-i18n>Trade Income: WGT raises global parameter</span>
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
-    <!-- Show the spaces for the player cubes and the white cube -->
-    <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker"/>
-    <!-- show the numbers underneath the colony row -->
-    <ColonyTradeRow :metadata="metadata"/>
+      <!-- Show the spaces for the player cubes and the white cube -->
+      <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker"/>
+      <!-- show the numbers underneath the colony row -->
+      <ColonyTradeRow :metadata="metadata"/>
+    </div>
+    <!-- </div> -->
   </div>
-<!-- </div> -->
-</div>
 
 </template>
 

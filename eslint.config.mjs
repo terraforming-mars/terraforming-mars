@@ -116,6 +116,12 @@ const pluginRules = {
   'vue/component-name-in-template-casing': ['error', 'PascalCase', {
     registeredComponentsOnly: false,
   }],
+  'vue/html-end-tags': 'error',
+  'vue/this-in-template': 'error',
+  'vue/no-template-shadow': 'error',
+  'vue/no-useless-mustaches': 'error',
+  'vue/require-prop-types': 'error',
+  'vue/block-order': 'error',
 };
 
 const sharedLanguageOptions = {

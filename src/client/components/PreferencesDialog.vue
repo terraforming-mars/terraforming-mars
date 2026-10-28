@@ -73,17 +73,6 @@
       </div>
 
       <div class="preferences_panel_item">
-        <label>
-          <span v-i18n>My color</span>
-          <span class="tooltip tooltip-left" :data-tooltip="$t('Show yourself in this color. Whoever has it shows in yours. Only you see this.')">&#9432;</span>
-          <select class="form-select form-inline" v-model="prefs.my_color" @change="myColorChanged" data-test="my_color">
-            <option value="" v-i18n>Off</option>
-            <option v-for="color in PLAYER_COLORS" :key="color" :value="color">{{ $t(colorName(color)) }}</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="preferences_panel_item">
         <label class="form-switch">
           <input type="checkbox" @change="updatePreferences" v-model="prefs.animated_title" data-test="animated_title">
           <i class="form-icon"></i>
@@ -122,7 +111,6 @@ import {defineComponent} from 'vue';
 
 import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import BugReportDialog from '@/client/components/BugReportDialog.vue';
-import {Color, PLAYER_COLORS} from '@/common/Color';
 
 
 type Refs = {
@@ -174,7 +162,7 @@ export default defineComponent({
       }
 
       for (const k of Object.keys(this.prefs) as Array<Preference>) {
-        if (k === 'lang' || k === 'my_color') {
+        if (k === 'lang') {
           continue;
         }
         this.setBoolPreferencesCSS(target, this.prefs[k], k);
@@ -183,18 +171,6 @@ export default defineComponent({
       if (!target.classList.contains('language-' + this.prefs.lang)) {
         target.classList.add('language-' + this.prefs.lang);
       }
-    },
-    myColorChanged(): void {
-      this.updatePreferences();
-      // Colors are swapped as the game arrives from the server, so load it again.
-      window.location.reload();
-    },
-    colorName(color: Color): string {
-      // "Clear" is already the label of a button that clears a selection.
-      if (color === 'clear') {
-        return 'Transparent';
-      }
-      return color.charAt(0).toUpperCase() + color.slice(1);
     },
     okClicked(): void {
       this.$emit('okButtonClicked');
@@ -206,9 +182,6 @@ export default defineComponent({
     },
     getPreferences(): typeof getPreferences {
       return getPreferences;
-    },
-    PLAYER_COLORS(): typeof PLAYER_COLORS {
-      return PLAYER_COLORS;
     },
 
   },

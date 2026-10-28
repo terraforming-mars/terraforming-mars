@@ -19,7 +19,6 @@ import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectDelegateResponse} from '@/common/inputs/InputResponse';
-import {serverColor} from '@/client/utils/localColors';
 
 interface DataModel {
   selectedPlayer: ColorWithNeutral | undefined;
@@ -59,7 +58,7 @@ export default defineComponent({
   methods: {
     saveData() {
       if (this.selectedPlayer !== undefined) {
-        this.onsave({type: 'delegate', player: serverColor(this.selectedPlayer)});
+        this.onsave({type: 'delegate', player: this.selectedPlayer});
       }
     },
   },

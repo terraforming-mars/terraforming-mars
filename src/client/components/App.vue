@@ -73,7 +73,6 @@ import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogE
 
 import dialogPolyfill from 'dialog-polyfill';
 import {setDocumentTitle} from '../utils/documentTitle';
-import {localPlayerView} from '@/client/utils/localColors';
 
 type Screen = 'admin' |
             'create-game-form' |
@@ -202,7 +201,7 @@ export default defineComponent({
         })
         .then((model: ViewModel) => {
           if (path === paths.PLAYER) {
-            app.playerView = localPlayerView(model as PlayerViewModel);
+            app.playerView = model as PlayerViewModel;
             setTranslationContext(app.playerView);
           } else if (path === paths.SPECTATOR) {
             app.spectator = model as SpectatorModel;

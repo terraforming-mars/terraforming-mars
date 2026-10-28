@@ -1,6 +1,5 @@
 import {reactive} from 'vue';
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
-import {Color, PLAYER_COLORS} from '@/common/Color';
 
 export type Preferences = {
   learner_mode: boolean,
@@ -25,8 +24,6 @@ export type Preferences = {
   animated_title: boolean,
   experimental_ui: boolean,
   lang: string,
-  // Show yourself in this color, swapping with whoever has it. Empty means off.
-  my_color: Color | '',
 }
 
 export type Preference = keyof Preferences;
@@ -37,7 +34,6 @@ const defaults: Preferences = {
   magnify_cards: true,
   show_alerts: true,
   lang: 'en',
-  my_color: '',
 
   hide_hand: false,
   hide_awards_and_milestones: false,
@@ -82,8 +78,6 @@ export class PreferencesManager {
   private _set(key: Preference, val: string | boolean) {
     if (key === 'lang') {
       this._values.lang = String(val);
-    } else if (key === 'my_color') {
-      this._values.my_color = PLAYER_COLORS.find((c) => c === val) ?? '';
     } else {
       this._values[key] = typeof(val) === 'boolean' ? val : (val === '1');
     }
@@ -101,8 +95,8 @@ export class PreferencesManager {
       return;
     }
     this._set(name, val);
-    if (name === 'lang' || name === 'my_color') {
-      safeLocalStorage.setItem(name, this._values[name]);
+    if (name === 'lang') {
+      safeLocalStorage.setItem(name, this._values.lang);
     } else {
       safeLocalStorage.setItem(name, val ? '1' : '0');
     }

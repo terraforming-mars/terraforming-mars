@@ -19,7 +19,6 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
-import {serverColor} from '@/client/utils/localColors';
 
 type DataModel = {
   selectedPlayer: ColorWithNeutral | undefined;
@@ -61,7 +60,7 @@ export default defineComponent({
       if (this.selectedPlayer === undefined) {
         return;
       }
-      this.onsave({type: 'player', player: serverColor(this.selectedPlayer)});
+      this.onsave({type: 'player', player: this.selectedPlayer});
     },
   },
 });

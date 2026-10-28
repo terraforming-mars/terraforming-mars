@@ -25,7 +25,6 @@ import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
 import {getPreferences} from '../utils/PreferencesManager';
-import {serverColor} from '@/client/utils/localColors';
 
 import dialogPolyfill from 'dialog-polyfill';
 
@@ -97,7 +96,7 @@ export default defineComponent({
         Object.assign(
           content,
           {
-            color: serverColor(playerView.thisPlayer.color),
+            color: playerView.thisPlayer.color,
             expansions: Object.entries(playerView.game.gameOptions.expansions)
               .filter(([_k, v]) => v === true)
               .map(([k, _v]) => k)

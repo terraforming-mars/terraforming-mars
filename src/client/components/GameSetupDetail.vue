@@ -36,9 +36,12 @@
               <div class="setup-item" v-i18n>Milestones and Awards:</div>
 
               <div v-if="gameOptions.randomMA === RandomMAOptionType.NONE" class="game-config generic" v-i18n>Board-defined</div>
-              <div v-if="gameOptions.randomMA === RandomMAOptionType.LIMITED" class="game-config generic" v-i18n>Randomized with limited synergy</div>
-              <div v-if="gameOptions.randomMA === RandomMAOptionType.UNLIMITED" class="game-config generic" v-i18n>Full randomized</div>
-              <div v-if="gameOptions.randomMA !== RandomMAOptionType.NONE && gameOptions.includeFanMA" class="game-config generic" v-i18n>Include fan Milestones/Awards</div>
+              <div v-else-if="gameOptions.randomMA === RandomMAOptionType.MANUAL" class="game-config generic" v-i18n>Manually chosen</div>
+              <template v-else>
+                <div v-if="gameOptions.randomMA === RandomMAOptionType.LIMITED" class="game-config generic" v-i18n>Randomized with limited synergy</div>
+                <div v-else class="game-config generic" v-i18n>Full randomized</div>
+                <div v-if="gameOptions.includeFanMA" class="game-config generic" v-i18n>Include fan Milestones/Awards</div>
+              </template>
             </li>
 
             <li v-if="playerNumber > 1">

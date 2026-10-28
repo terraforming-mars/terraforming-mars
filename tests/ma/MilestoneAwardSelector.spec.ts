@@ -149,6 +149,25 @@ describe('MilestoneAwardSelector', () => {
     expect(mas.awards).to.have.length(8);
   });
 
+  it('manual milestones and awards come from customMA', () => {
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+    } as const;
+    const mas = choose({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.MANUAL, customMA});
+    expect(mas.milestones).deep.eq(customMA.milestones);
+    expect(mas.awards).deep.eq(customMA.awards);
+  });
+
+  it('manual milestones and awards require customMA', () => {
+    expect(() => choose({randomMA: RandomMAOptionType.MANUAL})).to.throw('require customMA');
+  });
+
+  it('manual milestones and awards are validated', () => {
+    const customMA = {milestones: ['Terraformer'], awards: ['Banker']} as const;
+    expect(() => choose({randomMA: RandomMAOptionType.MANUAL, customMA})).to.throw('customMA must have 5 milestones');
+  });
+
   it('Do not select Constructor when Colonies is not selected', () => {
     for (let idx = 0; idx < 1_000; idx++) {
       const mas = chooseMilestonesAndAwards({

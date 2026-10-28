@@ -10,6 +10,7 @@ import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
 import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
+import {validateCustomMA} from '../../common/ma/CustomMA';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -106,6 +107,16 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     break;
   case RandomMAOptionType.UNLIMITED:
     drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, UNLIMITED_SYNERGY);
+    break;
+  case RandomMAOptionType.MANUAL:
+    if (gameOptions.customMA === undefined) {
+      throw new Error('Manual milestones and awards require customMA');
+    }
+    validateCustomMA(gameOptions.customMA, gameOptions.randomMA, gameOptions.venusNextExtension);
+    drawnMilestonesAndAwards = {
+      milestones: [...gameOptions.customMA.milestones],
+      awards: [...gameOptions.customMA.awards],
+    };
     break;
   default:
     throw new Error('Unknown milestone/award type: ' + gameOptions.randomMA);

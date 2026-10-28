@@ -180,6 +180,35 @@ describe('ApiCreateGame', () => {
     expect(res.content).contains('at least 6 CEOs');
   });
 
+  const customMA = {
+    milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+    awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+  };
+
+  it('uses custom milestones and awards', async () => {
+    const config = newGameConfigForTest();
+    // One-player games ignore milestones and awards.
+    const players = [config.players[0], {...config.players[0], name: 'Robot 2', color: 'red', first: false}];
+    await postConfig({...config, players, randomMA: RandomMAOptionType.MANUAL, customMA});
+    expect(res.statusCode).eq(statusCode.ok);
+    const model = JSON.parse(res.content) as SimpleGameModel;
+    const game = await scaffolding.ctx.gameLoader.getGame(model.id);
+    expect(game!.milestones.map((m) => m.name)).deep.eq(customMA.milestones);
+    expect(game!.awards.map((a) => a.name)).deep.eq(customMA.awards);
+  });
+
+  it('rejects custom milestones and awards unless they are manual', async () => {
+    await postConfig({...newGameConfigForTest(), randomMA: RandomMAOptionType.LIMITED, customMA});
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('customMA requires randomMA');
+  });
+
+  it('rejects custom milestones and awards of the wrong size', async () => {
+    await postConfig({...newGameConfigForTest(), randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}});
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('customMA must have 5 awards');
+  });
+
   async function createdEscapeVelocity(escapeVelocity: object) {
     await postConfig({...newGameConfigForTest(), escapeVelocity});
     expect(res.statusCode).eq(statusCode.ok);

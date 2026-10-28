@@ -52,7 +52,7 @@
         <span v-for="p in winners" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
       </div>
       <div class="game_end_victory_points">
-        <h2><span v-i18n>Victory point breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
+        <h2><span v-i18n>Victory point breakdown after</span> {{ game.generation }} <span v-i18n>generations</span></h2>
         <table class="table game_end_table">
           <thead>
             <tr v-i18n>
@@ -90,7 +90,7 @@
               <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonRoads }}</td>
               <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonHabitats }}</td>
               <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
-              <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks}}</td>
+              <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks }}</td>
               <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
               <td v-if="game.gameOptions.escapeVelocity">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
               <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
@@ -113,12 +113,12 @@
         <div class="game-end-flexrow">
           <div v-for="p in playersInPlace" :key="p.color" class="game-end-column">
             <div class="game-end-winner-scorebreak-player-title">
-              <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
+              <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a></div>
             </div>
             <div v-for="v in p.victoryPointsBreakdown.detailsCards" :key="v.cardName">
               <div class="game-end-column-row">
-                <div class="game-end-column-vp">{{v.victoryPoint}}</div>
-                <div class="game-end-column-text" v-i18n>{{v.cardName}}</div>
+                <div class="game-end-column-vp">{{ v.victoryPoint }}</div>
+                <div class="game-end-column-text" v-i18n>{{ v.cardName }}</div>
               </div>
             </div>
             <div class="game-end-column-row">
@@ -127,20 +127,20 @@
             </div>
             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v.message">
               <div class="game-end-column-row">
-                <div class="game-end-column-vp">{{v.victoryPoint}}</div>
-                <div class="game-end-column-text">{{translateMilestoneDetails(v)}}</div>
+                <div class="game-end-column-vp">{{ v.victoryPoint }}</div>
+                <div class="game-end-column-text">{{ translateMilestoneDetails(v) }}</div>
               </div>
             </div>
             <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v.message">
               <div class="game-end-column-row">
-                <div class="game-end-column-vp">{{v.victoryPoint}}</div>
-                <div class="game-end-column-text">{{translateAwardDetails(v)}}</div>
+                <div class="game-end-column-vp">{{ v.victoryPoint }}</div>
+                <div class="game-end-column-text">{{ translateAwardDetails(v) }}</div>
               </div>
             </div>
             <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">
               <div class="game-end-column-row">
-                <div class="game-end-column-vp">{{v.points}}</div>
-                <div class="game-end-column-text" v-i18n>Most tags on the {{v.tag}} track</div>
+                <div class="game-end-column-vp">{{ v.points }}</div>
+                <div class="game-end-column-text" v-i18n>Most tags on the {{ v.tag }} track</div>
               </div>
             </div>
           </div>
@@ -192,7 +192,7 @@
             :expansions="game.gameOptions.expansions"
             :venusScaleLevel="game.venusScaleLevel"
             :altVenusBoard="game.gameOptions.altVenusBoard"
-            :boardName ="game.gameOptions.boardName"
+            :boardName="game.gameOptions.boardName"
             :oceans_count="game.oceans"
             :oxygen_level="game.oxygenLevel"
             :temperature="game.temperature"

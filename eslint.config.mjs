@@ -122,6 +122,12 @@ const pluginRules = {
   'vue/no-useless-mustaches': 'error',
   'vue/require-prop-types': 'error',
   'vue/block-order': 'error',
+  'vue/no-spaces-around-equal-signs-in-attribute': 'error',
+  'vue/html-quotes': 'error',
+  'vue/no-multi-spaces': 'error',
+  'vue/html-comment-content-spacing': 'error',
+  'vue/v-for-delimiter-style': 'error',
+  'vue/mustache-interpolation-spacing': 'error',
 };
 
 const sharedLanguageOptions = {

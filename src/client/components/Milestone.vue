@@ -4,7 +4,7 @@
       <i :title="milestone.playerName" class="board-cube" :class="`board-cube--${milestone.color}`" ></i>
     </div>
     <div class="ma-name--milestones" :class="nameCss">
-      <span ref="name" v-i18n>{{name}}</span>
+      <span ref="name" v-i18n>{{ name }}</span>
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <template v-for="score in sortedScores" :key="score.color">
           <p

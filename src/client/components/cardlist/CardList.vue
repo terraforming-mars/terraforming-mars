@@ -47,7 +47,7 @@
         <span v-for="expansion in allModules" :key="expansion">
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
-            <div class='expansion-icon' :class="expansionIconClass(expansion)"></div>
+            <div class="expansion-icon" :class="expansionIconClass(expansion)"></div>
           </label>
         </span>
       </div>
@@ -63,7 +63,7 @@
           <label :for="`${type}-cardType-checkbox`" class="expansion-button">
             <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
             <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
-            <span v-else v-i18n>{{type}}</span>
+            <span v-else v-i18n>{{ type }}</span>
           </label>
         </span>
       </div>
@@ -77,7 +77,7 @@
           <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
           <input v-else type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="tags[tag]">
           <label :for="`${tag}-tag-checkbox`" class="expansion-button">
-            <!-- a terrible hack, using expansion-icon because card-tag isn't enough to show the tag.-->
+            <!-- a terrible hack, using expansion-icon because card-tag isn't enough to show the tag. -->
             <div :class="`expansion-icon card-tag tag-${tag}`"></div>
           </label>
         </span>
@@ -91,7 +91,7 @@
         <span v-for="resource in allResources" :key="resource">
           <input type="checkbox" :name="`${resource}-cardType`" :id="`${resource}-resource-checkbox`" v-model="resources[resource]">
           <label :for="`${resource}-resource-checkbox`" class="expansion-button">
-            <!-- a terrible hack, using expansion-icon because card-resource isn't enough to show the resource.-->
+            <!-- a terrible hack, using expansion-icon because card-resource isn't enough to show the resource. -->
             <div v-if="resource !== 'none'" class="expansion-icon card-resource" :class="cardResourceCSS[resource]"></div>
             <div v-else class="expansion-icon card-tag tag-none"></div>
           </label>
@@ -156,7 +156,7 @@
       <h2 v-i18n>Milestones</h2>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
-          <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+          <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
             <Milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"/>
           </div>
         </div>
@@ -167,7 +167,7 @@
       <h2 v-i18n>Awards</h2>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
-          <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+          <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
             <Award :award="awardModel(awardName)" :showDescription="true"/>
           </div>
         </div>

@@ -22,7 +22,7 @@
       <div class="influence" style="margin: 4px 0 0 6px"></div>
     </div>
     <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_PRODUCTION">
-      <div class="production-box"><div class="production" :class="resource">{{buildQuantityText}}</div></div>
+      <div class="production-box"><div class="production" :class="resource">{{ buildQuantityText }}</div></div>
     </div>
     <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_RESOURCES">
       <!-- there's only one right now. This can be generalized, of course. -->
@@ -35,7 +35,7 @@
       <div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div>
     </div>
     <div v-else-if="metadata.build.type === ColonyBenefit.GAIN_VP">
-      <div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">{{buildQuantityText}}</div>
+      <div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">{{ buildQuantityText }}</div>
     </div>
     <div v-else-if="metadata.build.type === ColonyBenefit.INCREASE_VENUS_SCALE">
       <div class="tile venus-tile venus-colony-bonus"></div>

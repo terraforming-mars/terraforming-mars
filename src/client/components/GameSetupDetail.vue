@@ -54,7 +54,7 @@
 
       <li v-if="gameOptions.escapeVelocity !== undefined">
         <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
-        <span>{{escapeVelocityDescription}}</span>
+        <span>{{ escapeVelocityDescription }}</span>
       </li>
 
       <li v-if="gameOptions.expansions.venus && gameOptions.removeNegativeGlobalEvents">

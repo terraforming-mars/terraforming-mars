@@ -6,7 +6,7 @@
           <td></td>
           <td><i class="resource_icon payments_type_smallicon resource_icon--megacredits"></i></td>
         </tr>
-        <template v-for="unit of order" :key="unit">
+        <template v-for="unit in order" :key="unit">
           <template v-if="ledger[unit]?.available > 0">
             <tr>
               <td>
@@ -21,7 +21,7 @@
                 <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
                   Some ${0} are reserved and unavailable here.</div>
               </td>
-              <td class='payments_unit_subtotal' v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
+              <td class="payments_unit_subtotal" v-if="ledger[unit].rate !== undefined && payment[unit] !== 0">
                 {{ ledger[unit].rate * payment[unit] }}
               </td>
             </tr>

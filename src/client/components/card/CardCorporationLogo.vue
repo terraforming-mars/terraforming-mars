@@ -288,7 +288,7 @@
       </template>
     </template>
     <template v-else>
-      <div :class="logoClass">{{capsTitle}}</div>
+      <div :class="logoClass">{{ capsTitle }}</div>
     </template>
   </div>
 </template>

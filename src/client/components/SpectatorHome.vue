@@ -13,18 +13,18 @@
       :playerColor="spectator.color"
       :generation="game.generation"
       :coloniesCount="game.colonies.length"
-      :temperature = "game.temperature"
-      :oxygen = "game.oxygenLevel"
-      :oceans = "game.oceans"
-      :venus = "game.venusScaleLevel"
-      :turmoil = "game.turmoil"
+      :temperature="game.temperature"
+      :oxygen="game.oxygenLevel"
+      :oceans="game.oceans"
+      :venus="game.venusScaleLevel"
+      :turmoil="game.turmoil"
       :moonData="game.moon"
-      :gameOptions = "game.gameOptions"
-      :playerNumber = "spectator.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration"
-      :deckSize = "game.deckSize"
-      :discardPileSize = "game.discardPileSize"
-      :otherDeckSizes = "game.otherDeckSizes"/>
+      :gameOptions="game.gameOptions"
+      :playerNumber="spectator.players.length"
+      :lastSoloGeneration="game.lastSoloGeneration"
+      :deckSize="game.deckSize"
+      :discardPileSize="game.discardPileSize"
+      :otherDeckSizes="game.otherDeckSizes"/>
 
     <div class="player_home_block nofloat">
       <LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked"/>

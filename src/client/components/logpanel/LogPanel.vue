@@ -28,7 +28,7 @@
           <path d="M12 5v14M19 12l-7 7-7-7"/>
         </svg>
       </button>
-      <div class='debugid'>(debugid {{step}})</div>
+      <div class="debugid">(debugid {{ step }})</div>
     </div>
     <LogMessageInspector ref="messageInspector" :viewModel="viewModel"/>
   </div>

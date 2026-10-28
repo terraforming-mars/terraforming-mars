@@ -6,7 +6,7 @@
         <label>{{ cardName }}
           <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
           <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-          <template v-for="expansion of expansions(cardName)" :key="expansion">
+          <template v-for="expansion in expansions(cardName)" :key="expansion">
             <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
           </template>
         </label>
@@ -23,7 +23,7 @@
             {{ cardName }}
             <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
             <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-            <template v-for="expansion of expansions(cardName)" :key="expansion">
+            <template v-for="expansion in expansions(cardName)" :key="expansion">
               <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
             </template>
           </a>

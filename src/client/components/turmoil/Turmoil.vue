@@ -22,7 +22,7 @@
         <div class="policy-user-cubes">
           <template v-for="n in turmoil.policyActionUsers" :key="n.color">
             <div v-if="n.turmoilPolicyActionUsed" :class="'policy-use-marker board-cube--'+n.color"></div>
-            <div v-if="n.politicalAgendasActionUsedCount > 0" :class="'policy-use-marker board-cube--'+n.color">{{n.politicalAgendasActionUsedCount}}</div>
+            <div v-if="n.politicalAgendasActionUsedCount > 0" :class="'policy-use-marker board-cube--'+n.color">{{ n.politicalAgendasActionUsedCount }}</div>
           </template>
         </div>
         <div class="chairman-spot"><div v-if="turmoil.chairman" :class="'player-token '+turmoil.chairman"></div></div>
@@ -35,9 +35,9 @@
           <div class="policies-title">
             <a class="policies-clickable" href="#" @click.prevent="toggleMe()" v-i18n>Policies</a>
           </div>
-          <div v-show="isVisible()" class='policies-global'>
-            <div v-for="party in turmoil.parties" :key="party.name" class='policy-block'>
-              <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+          <div v-show="isVisible()" class="policies-global">
+            <div v-for="party in turmoil.parties" :key="party.name" class="policy-block">
+              <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{ party.name }}</div>
 
               <div class="party-bonus">
                 <TurmoilAgenda :id="getPolicy(party.name)"/>
@@ -62,7 +62,7 @@
               <div v-if="party.delegates.length >= n" :class="'player-token '+party.delegates[n-1].color">{{ party.delegates[n-1].number }}</div>
             </div>
           </div>
-          <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+          <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{ party.name }}</div>
           <div class="party-bonus">
             <TurmoilAgenda type="party-bonus" :id="getBonus(party.name)"/>
           </div>

@@ -13,6 +13,7 @@ import {CardName} from '@/common/cards/CardName';
 import {CreateGameModel} from '@/client/components/create/CreateGameModel';
 import {ValidationErrors} from '@/common/game/validateNewGameConfig';
 import {ColonyName} from '@/common/colonies/ColonyName';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 
 // Minimal serialized Create Game payload used by settings restore tests.
 function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
@@ -180,6 +181,20 @@ describe('CreateGameForm', () => {
       global.alert = originalAlert;
     }
   });
+  it('toggling random milestones and awards leaves manual milestones and awards', () => {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    const model = wrapper.vm as unknown as CreateGameModel;
+    model.randomMA = RandomMAOptionType.MANUAL;
+    model.customMA = {milestones: ['Terraformer'], awards: ['Banker']};
+    expect((wrapper.vm as any).isRandomMAEnabled).is.false;
+
+    (wrapper.vm as any).randomMAToggle();
+    expect(model.randomMA).eq(RandomMAOptionType.LIMITED);
+    expect(model.customMA).is.undefined;
+  });
+
   it('validates the form settings', () => {
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(3)).notEnoughCorporations).eq(4);
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(4)).notEnoughCorporations).eq(0);

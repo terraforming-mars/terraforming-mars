@@ -23,6 +23,7 @@ const NO_ERRORS: ValidationErrors = {
   deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
   modularMAInDevelopment: false,
+  invalidCustomMA: '',
 };
 
 describe('ValidationErrorsPopup', () => {

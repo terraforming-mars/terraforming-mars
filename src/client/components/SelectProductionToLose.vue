@@ -6,9 +6,9 @@
 
     <div class="payments_type input-group" v-for="type in deductibleTypes" :key="type">
       <div class="production-box"><div :class="['production', iconClass(type)]" :style="type === 'megacredits' ? 'background-size:contain;' : ''"></div></div>
-      <button class="btn btn-primary" @click="delta(type, -1)"><i class="icon icon-minus" ></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units[type]" >
-      <button class="btn btn-primary" @click="delta(type, 1)"><i class="icon icon-plus" ></i></button>
+      <button class="btn btn-primary" @click="delta(type, -1)"><i class="icon icon-minus"></i></button>
+      <input class="form-input form-inline payments_input" v-model.number="units[type]">
+      <button class="btn btn-primary" @click="delta(type, 1)"><i class="icon icon-plus"></i></button>
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">

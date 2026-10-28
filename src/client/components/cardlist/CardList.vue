@@ -111,14 +111,14 @@
     <section v-show="visibleCorporationCards.length > 0" class="card-list-cards-list">
       <h2 v-i18n>Corporations</h2>
       <div class="cardbox" v-for="card in visibleCorporationCards" :key="card" v-memo="[card, tallCards]">
-        <Card :card="{'name': card}" :autoTall="tallCards"/>
+        <Card :card="{'name': card}" :autoTall="tallCards" />
       </div>
       <br>
     </section>
     <section v-show="visiblePreludeCards.length > 0" class="card-list-cards-list">
       <h2 v-i18n>Preludes</h2>
       <div class="cardbox" v-for="card in visiblePreludeCards" :key="card" v-memo="[card, tallCards]">
-        <Card :card="{'name': card}" :autoTall="tallCards"/>
+        <Card :card="{'name': card}" :autoTall="tallCards" />
       </div>
       <br>
     </section>
@@ -139,7 +139,7 @@
     <section v-show="visibleGlobalEvents.length > 0" class="card-list-cards-list">
       <h2 v-i18n>Global Events</h2>
       <div class="cardbox" v-for="globalEventName in visibleGlobalEvents" :key="globalEventName" v-memo="[globalEventName]">
-        <GlobalEvent :globalEventName="globalEventName" type="distant"/>
+        <GlobalEvent :globalEventName="globalEventName" type="distant" />
       </div>
     </section>
 
@@ -147,7 +147,7 @@
       <h2 v-i18n>Colonies</h2>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
-          <Colony :colony="colonyModel(colonyName)"/>
+          <Colony :colony="colonyModel(colonyName)" />
         </div>
       </div>
     </section>
@@ -157,7 +157,7 @@
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
           <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
-            <Milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"/>
+            <Milestone :milestone="milestoneModel(milestoneName)" :showDescription="true" />
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
           <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
-            <Award :award="awardModel(awardName)" :showDescription="true"/>
+            <Award :award="awardModel(awardName)" :showDescription="true" />
           </div>
         </div>
       </div>
@@ -187,8 +187,8 @@
       <div v-show="scrolled" class="sidebar_item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
         <div class="card-list-scroll-top-arrow">↑</div>
       </div>
-      <LanguageIcon class="corner-language-icon"/>
-      <PreferencesIcon/>
+      <LanguageIcon class="corner-language-icon" />
+      <PreferencesIcon />
     </div>
   </div>
 </template>

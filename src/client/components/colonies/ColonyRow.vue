@@ -6,7 +6,7 @@
       :metadata="metadata"
       :player="colony.colonies[idx]"
       :marker="colony.isActive && colony.trackPosition === idx"
-      :fadeMarker="fadeMarker"/>
+      :fadeMarker="fadeMarker" />
   </div>
 </template>
 <script lang="ts">

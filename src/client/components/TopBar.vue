@@ -1,12 +1,12 @@
 <template>
   <div class="top-bar-container">
     <div class="top-bar" :class="{'top-bar-collapsed': !isExpanded}">
-      <PlayerInfo v-show="isExpanded" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
+      <PlayerInfo v-show="isExpanded" :player="playerView.thisPlayer" :playerView="playerView" :actionLabel="''" :playerIndex="0" :hideZeroTags="true" :isTopBar="true" />
       <div class="top-bar-collapser" @click="toggleBar()">
         <img src="assets/arrows_left.png">
       </div>
     </div>
-    <TerraformedBanner v-if="playerView.game.isTerraformed" :playerId="playerView.id"/>
+    <TerraformedBanner v-if="playerView.game.isTerraformed" :playerId="playerView.id" />
   </div>
 </template>
 

@@ -26,9 +26,9 @@
       <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
         <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="colonyResourceClass"></div>
       </template>
-      <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)" ></div>
+      <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)"></div>
 
-      <template v-if="colony.name === ColonyName.IAPETUS" >
+      <template v-if="colony.name === ColonyName.IAPETUS">
         <div class="resource card card-with-border" style="transform: scale(0.8);"></div>
         <span class="white-char">:</span>
         <div class="resource megacredits">-1</div>
@@ -80,7 +80,7 @@
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === ColonyName.PLUTO" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
-      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" ></div>
+      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;"></div>
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === ColonyName.TITANIA" class="white-x" style="margin-left:42px;"></div>
@@ -112,9 +112,9 @@
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
       <!-- Show the spaces for the player cubes and the white cube -->
-      <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker"/>
+      <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker" />
       <!-- show the numbers underneath the colony row -->
-      <ColonyTradeRow :metadata="metadata"/>
+      <ColonyTradeRow :metadata="metadata" />
     </div>
     <!-- </div> -->
   </div>

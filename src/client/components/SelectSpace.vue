@@ -9,11 +9,11 @@
       @hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">
       {{ $t(playerinput.title) }}
-      <GoToMap :playerinput="playerinput"/>
+      <GoToMap :playerinput="playerinput" />
     </div>
     <div v-if="warning" class="nes-container is-rounded">
       <span class="nes-text is-warning" v-i18n>{{ warning }}</span>
-      <GoToMap :playerinput="playerinput"/>
+      <GoToMap :playerinput="playerinput" />
     </div>
   </div>
 </template>

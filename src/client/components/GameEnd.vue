@@ -7,7 +7,7 @@
           <div class="game_end_success">
             <h2 v-i18n>You win!</h2>
             <div class="game_end_solo_img">
-              <img src="assets/solo_win.png" >
+              <img src="assets/solo_win.png">
             </div>
             <div class="game_end_notice">
               <span v-i18n>But it isn't the reason to stop making Mars better.</span>
@@ -197,15 +197,15 @@
             :oxygen_level="game.oxygenLevel"
             :temperature="game.temperature"
             :tileView="tileView"
-            @toggleTileView="cycleTileView()"/>
-          <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
+            @toggleTileView="cycleTileView()" />
+          <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView" />
           <div v-if="game.gameOptions.expansions.pathfinders">
-            <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+            <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions" />
           </div>
-          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="participant.players"/>
+          <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="participant.players" />
         </div>
         <div class="game_end_block--log game-end-column">
-          <LogPanel :viewModel="participant"/>
+          <LogPanel :viewModel="participant" />
           <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
         </div>
       </div>

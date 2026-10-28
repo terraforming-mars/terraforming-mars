@@ -8,7 +8,7 @@
         :showMax="false"
         description=""
         @plus="addValue(unit)"
-        @minus="reduceValue(unit)"/>
+        @minus="reduceValue(unit)" />
       <!-- @max="onMaxClicked(unit)" -->
     </template>
     <div v-if="showsave === true" class="nofloat">

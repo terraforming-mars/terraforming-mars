@@ -13,7 +13,7 @@
     </LogGenerationList>
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body" @scroll="updateScrollState">
-        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="$emit('spaceClicked', $event)"/>
+        <LogMessageComponent v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" @click="messageClicked(message)" @spaceClicked="$emit('spaceClicked', $event)" />
       </div>
       <button
         v-show="showScrollToBottomButton"
@@ -25,12 +25,12 @@
         @click="showLatestLogs"
       >
         <svg class="log-latest-button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <path d="M12 5v14M19 12l-7 7-7-7"/>
+          <path d="M12 5v14M19 12l-7 7-7-7" />
         </svg>
       </button>
       <div class="debugid">(debugid {{ step }})</div>
     </div>
-    <LogMessageInspector ref="messageInspector" :viewModel="viewModel"/>
+    <LogMessageInspector ref="messageInspector" :viewModel="viewModel" />
   </div>
 </template>
 

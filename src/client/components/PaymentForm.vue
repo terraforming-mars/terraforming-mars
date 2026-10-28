@@ -17,7 +17,7 @@
                   :rate="ledger[unit].rate"
                   @plus="addValue(unit)"
                   @minus="reduceValue(unit)"
-                  @max="maxValue(unit)"/>
+                  @max="maxValue(unit)" />
                 <div v-if="ledger[unit]?.reserved" class="card-warning" v-i18n="$t(unit)">
                   Some ${0} are reserved and unavailable here.</div>
               </td>
@@ -41,7 +41,7 @@
     </div>
 
     <div v-if="showsave" class="payments_save">
-      <AppButton size="big" @click="handleSave()" :title="$t(buttonLabel)" data-test="save"/>
+      <AppButton size="big" @click="handleSave()" :title="$t(buttonLabel)" data-test="save" />
     </div>
   </section>
 </template>

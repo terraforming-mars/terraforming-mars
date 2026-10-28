@@ -8,17 +8,17 @@
       <div v-if="player.tableau.length > 0" class="player_home_block">
         <div>
           <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color" />
           </div>
           <div v-for="card in getCardsByType(player.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color" />
           </div>
 
           <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color" />
           </div>
-          <StackedCards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"/>
-          <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"/>
+          <StackedCards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player" />
+          <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player" />
         </div>
       </div>
       <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">

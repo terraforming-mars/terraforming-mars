@@ -8,11 +8,11 @@
       <div class="party-name party-name-indicator" :class="rulingPartyClass"> <span v-i18n>{{ rulingParty }}</span></div>
     </div>
     <div class="global_params">
-      <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature" :boardName="gameOptions.boardName"/>
-      <GlobalParameterValue :param="globalParameter.OXYGEN" :value="oxygen" :boardName="gameOptions.boardName"/>
-      <GlobalParameterValue :param="globalParameter.OCEANS" :value="oceans" :boardName="gameOptions.boardName"/>
-      <GlobalParameterValue v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus" :boardName="gameOptions.boardName"/>
-      <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"/>
+      <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature" :boardName="gameOptions.boardName" />
+      <GlobalParameterValue :param="globalParameter.OXYGEN" :value="oxygen" :boardName="gameOptions.boardName" />
+      <GlobalParameterValue :param="globalParameter.OCEANS" :value="oceans" :boardName="gameOptions.boardName" />
+      <GlobalParameterValue v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus" :boardName="gameOptions.boardName" />
+      <MoonGlobalParameterValue v-if="moonData" :moonData="moonData" />
     </div>
     <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
       <div class="preferences_player_inner" :class="[`player_bg_color_${playerColor}`, {active: isAnimated}]"></div>
@@ -41,7 +41,7 @@
       </div>
     </a>
 
-    <LanguageIcon/>
+    <LanguageIcon />
 
     <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
       <i class="sidebar_icon sidebar_icon--info"
@@ -57,7 +57,7 @@
       </div>
     </a>
 
-    <PreferencesIcon/>
+    <PreferencesIcon />
   </div>
 </template>
 

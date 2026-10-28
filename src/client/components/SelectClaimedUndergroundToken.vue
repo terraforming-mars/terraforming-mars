@@ -4,7 +4,7 @@
     <div class="underground-tokens">
       <label v-for="(token, idx) in playerinput.tokens" :key="idx">
         <!-- disabled="selected.length >= playerinput.count -->
-        <input type="checkbox" :name="String(idx)" v-model="selected" :value="idx" >
+        <input type="checkbox" :name="String(idx)" v-model="selected" :value="idx">
         <UndergroundToken
           :token="token"
           :key="idx"

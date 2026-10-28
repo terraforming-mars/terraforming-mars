@@ -6,7 +6,7 @@
       :tileView="tileView"
     />
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <Bonus :bonus="space.bonus" v-if="showBonus"/>
+    <Bonus :bonus="space.bonus" v-if="showBonus" />
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">{{ space.a9 ?? 'n/a' }}</div>
     </template>
@@ -22,8 +22,8 @@
       <template v-if="space.nomads === true">
         <div class="board-cube--nomad"></div>
       </template>
-      <BoardSpaceCube v-if="space.cube !== undefined" :cube="space.cube"/>
-      <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="board"/>
+      <BoardSpaceCube v-if="space.cube !== undefined" :cube="space.cube" />
+      <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="board" />
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
       <div v-if="space.spaceType === SpaceType.DEFLECTION_ZONE" class="board-space-type-deflection-zone"></div>
     </template>

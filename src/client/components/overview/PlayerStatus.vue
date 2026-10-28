@@ -3,7 +3,7 @@
     <div class="player-status-bottom">
       <div :class="getLabelAndTimerClasses()">
         <div :class="getActionStatusClasses()"><span v-i18n>{{ actionLabel }}</span></div>
-        <div class="player-status-timer" v-if="showTimer"><PlayerTimer :timer="timer" :live="liveTimer"/></div>
+        <div class="player-status-timer" v-if="showTimer"><PlayerTimer :timer="timer" :live="liveTimer" /></div>
       </div>
     </div>
   </div>

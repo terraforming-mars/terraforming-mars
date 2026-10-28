@@ -2,7 +2,7 @@
   <div class="card-corporation-box">
     <div class="card-corporation-label">{{ label }}</div>
     <div v-for="(rowData, index) in rows[0]" :key="index">
-      <CardRenderItemComponent v-if="isICardRenderItem(rowData)" :item="rowData"/>
+      <CardRenderItemComponent v-if="isICardRenderItem(rowData)" :item="rowData" />
       <CardRenderSymbolComponent v-else-if="isICardRenderSymbol(rowData)" :item="rowData" />
       <CardRenderEffectBoxComponent v-if="isICardRenderEffect(rowData)" :effectData="rowData" />
     </div>

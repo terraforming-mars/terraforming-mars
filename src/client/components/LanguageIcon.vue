@@ -7,7 +7,7 @@
         :title="title"
         @click="languagePanelOpen = !languagePanelOpen"></div>
     </div>
-    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="PreferencesManager.INSTANCE"/>
+    <LanguageSelectionDialog v-show="languagePanelOpen" :preferencesManager="PreferencesManager.INSTANCE" />
   </div>
 </template>
 

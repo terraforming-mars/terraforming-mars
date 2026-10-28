@@ -9,7 +9,7 @@
       <div v-i18n>These are the colony tiles Aridor may choose from:</div>
       <div class="discarded-colonies-for-aridor">
         <div class="player_home_colony small_colony" v-for="colonyName in playerView.game.discardedColonies" :key="colonyName">
-          <Colony :colony="getColony(colonyName)" :active="getColony(colonyName).isActive"/>
+          <Colony :colony="getColony(colonyName)" :active="getColony(colonyName).isActive" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
     <!-- :key=warning is a way of validating that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
-    <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
+    <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />
   </div>
 </template>
 

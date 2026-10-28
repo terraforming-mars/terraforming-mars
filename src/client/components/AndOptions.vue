@@ -10,7 +10,7 @@
       :showsave="false"
       :showtitle="true" />
     <div v-if="showsave" class="wf-action">
-      <AppButton :title="playerinput.buttonLabel" type="submit" size="normal" @click="saveData" :disabled="!canSave()"/>
+      <AppButton :title="playerinput.buttonLabel" type="submit" size="normal" @click="saveData" :disabled="!canSave()" />
     </div>
   </div>
 </template>

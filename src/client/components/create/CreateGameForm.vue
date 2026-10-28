@@ -269,7 +269,7 @@
             </label>
 
             <div v-if="seededGame">
-              <input type="text" name="clonedGamedId" v-model="clonedGameId" >
+              <input type="text" name="clonedGamedId" v-model="clonedGameId">
             </div>
 
             <div class="create-game-subsection-label" v-i18n>Filter</div>
@@ -432,7 +432,7 @@
                   <div>
                     <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                       <div>
-                        <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" >
+                        <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name">
                       </div>
                       <div class="create-game-page-color-row">
                         <template v-for="color in PLAYER_COLORS" :key="color">
@@ -452,7 +452,7 @@
                         </label>
 
                         <label class="form-label">
-                          <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" >
+                          <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap">
                           <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a :href="wikiUrls.trBoost" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                         </label>
                         <!-- </template> -->
@@ -482,8 +482,8 @@
             <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
           </label>
 
-          <AppButton class="create-game-action-gap" title="Reset" size="big" @click="resetSettings"/>
-          <AppButton class="create-game-action-gap" title="Create game" size="big" @click="createGame" :disabled="hasBlockingValidationErrors"/>
+          <AppButton class="create-game-action-gap" title="Reset" size="big" @click="resetSettings" />
+          <AppButton class="create-game-action-gap" title="Create game" size="big" @click="createGame" :disabled="hasBlockingValidationErrors" />
           <span v-if="hasBlockingValidationErrors" class="create-game-custom-preludes-warning create-game-validation-blocker" @click="showValidationErrors = true">&#9888;&#xFE0E;</span>
           <span v-else-if="hasValidationProblems" class="create-game-validation-warning" @click="showValidationErrors = true">&#9888;&#xFE0F;</span>
         </div>
@@ -552,8 +552,8 @@
         :hint="'Start typing the card name to include'"
       />
     </div>
-    <PreferencesIcon/>
-    <ValidationErrorsPopup v-if="showValidationErrors" :errors="validationErrors" @close="showValidationErrors = false"/>
+    <PreferencesIcon />
+    <ValidationErrorsPopup v-if="showValidationErrors" :errors="validationErrors" @close="showValidationErrors = false" />
   </div>
 </template>
 

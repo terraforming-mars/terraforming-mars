@@ -7,7 +7,7 @@
         <span class="turn-order" v-i18n>{{ getTurnOrder(index) }}</span>
         <span :class="'color-square ' + getPlayerCubeColorClass(player.color)">{{ playerSymbol(player.color) }}</span>
         <span class="player-name"><a :href="getHref(player.id)">{{ player.name }}</a></span>
-        <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
+        <AppButton title="copy" size="tiny" @click="copyUrl(player.id)" />
         <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
       </li>
       <li v-if="game !== undefined">
@@ -15,18 +15,18 @@
         <span class="turn-order"></span>
         <span class="color-square"></span>
         <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
-        <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
+        <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)" />
       </li>
     </ul>
 
     <div class="spacing-setup"></div>
 
-    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs" />
 
     <div class="spacing-setup"></div>
     <div v-if="game !== undefined">
       <h1 v-i18n>Game settings</h1>
-      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
+      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration" />
     </div>
   </div>
 </template>

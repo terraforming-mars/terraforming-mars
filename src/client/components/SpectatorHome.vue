@@ -3,7 +3,7 @@
 
     <div v-if="game.phase === 'end'">
       <div class="player_home_block">
-        <DynamicTitle title="This game is over!" :color="spectator.color"/>
+        <DynamicTitle title="This game is over!" :color="spectator.color" />
         <a :href="'the-end?id='+ spectator.id" v-i18n>Go to game results</a>
       </div>
     </div>
@@ -24,13 +24,13 @@
       :lastSoloGeneration="game.lastSoloGeneration"
       :deckSize="game.deckSize"
       :discardPileSize="game.discardPileSize"
-      :otherDeckSizes="game.otherDeckSizes"/>
+      :otherDeckSizes="game.otherDeckSizes" />
 
     <div class="player_home_block nofloat">
-      <LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked"/>
+      <LogPanel :viewModel="spectator" :step="game.step" @spaceClicked="onSpaceClicked" />
     </div>
 
-    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" id="shortkey-playersoverview"/>
+    <PlayersOverview class="player_home_block player_home_block--players nofloat" :playerView="spectator" id="shortkey-playersoverview" />
 
     <GameBoardView
       ref="gameBoardView"
@@ -42,7 +42,7 @@
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
       <a name="colonies" class="player_home_anchor"></a>
-      <DynamicTitle title="Colonies" :color="spectator.color"/>
+      <DynamicTitle title="Colonies" :color="spectator.color" />
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="player in spectator.players" :key="player.color">
           <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(Math.max(0, player.fleetSize - player.tradesThisGeneration))" :key="idx"></div>
@@ -50,16 +50,16 @@
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-          <Colony :colony="colony" :active="colony.isActive"/>
+          <Colony :colony="colony" :active="colony.isActive" />
         </div>
       </div>
     </div>
-    <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined"/>
+    <WaitingFor v-show="false" v-if="game.phase !== 'end'" :playerView="spectator" :waitingfor="undefined" />
     <div>
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
-    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
-    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs" />
+    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false" />
   </div>
 </template>
 

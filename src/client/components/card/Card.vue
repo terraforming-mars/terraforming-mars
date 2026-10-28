@@ -7,7 +7,7 @@
         <CardHelp v-if="helpText !== undefined" :name="card.name" :helpText="helpText" :hovering="hovering" />
         <CardTags :tags="tags" />
       </div>
-      <CardTitle :title="card.name" :type="cardType"/>
+      <CardTitle :title="card.name" :type="cardType" />
       <CardContent
         :metadata="cardMetadata"
         :requirements="cardRequirements"

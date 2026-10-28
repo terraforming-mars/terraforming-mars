@@ -38,13 +38,13 @@
       </label>
     </div>
 
-    <HelpIconology v-if="isOpen('iconology')"/>
-    <HelpStandardProjects v-if="isOpen('standard-projects')"/>
-    <HelpPhases v-if="isOpen('phases')"/>
-    <HelpTurmoilParties v-if="isOpen('turmoil-parties')"/>
-    <HelpRulebooks v-if="isOpen('rulebooks')"/>
-    <HelpHotkeys v-if="isOpen('hotkeys')"/>
-    <HelpSoloRules v-if="isOpen('solo-rules')"/>
+    <HelpIconology v-if="isOpen('iconology')" />
+    <HelpStandardProjects v-if="isOpen('standard-projects')" />
+    <HelpPhases v-if="isOpen('phases')" />
+    <HelpTurmoilParties v-if="isOpen('turmoil-parties')" />
+    <HelpRulebooks v-if="isOpen('rulebooks')" />
+    <HelpHotkeys v-if="isOpen('hotkeys')" />
+    <HelpSoloRules v-if="isOpen('solo-rules')" />
   </div>
 </template>
 <script lang="ts">

@@ -27,8 +27,8 @@
       </div>
     </div>
     <div class="free-floating-preferences-icon">
-      <LanguageIcon class="corner-language-icon"/>
-      <PreferencesIcon/>
+      <LanguageIcon class="corner-language-icon" />
+      <PreferencesIcon />
     </div>
   </div>
 </template>

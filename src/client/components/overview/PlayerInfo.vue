@@ -12,7 +12,7 @@
         </div>
         <div>
           <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1" v-i18n>1st</div>
-          <PlayerStatus :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" :actionLabel="actionLabel"/>
+          <PlayerStatus :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" :actionLabel="actionLabel" />
         </div>
       </div>
       <PlayerResources :player="player" />
@@ -36,7 +36,7 @@
       </div>
     </div>
     <PlayerTags :player="player" :playerView="playerView" :hideZeroTags="hideZeroTags" :isTopBar="isTopBar" />
-    <PlayerAlliedParty :player="player"/>
+    <PlayerAlliedParty :player="player" />
   </div>
 </template>
 

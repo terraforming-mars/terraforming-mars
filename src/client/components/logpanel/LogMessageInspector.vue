@@ -1,5 +1,5 @@
 <template>
-  <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="viewModel.players" @hide="selectedMessage = undefined"/>
+  <CardPanel v-if="selectedMessage !== undefined" :message="selectedMessage" :players="viewModel.players" @hide="selectedMessage = undefined" />
 </template>
 
 <script setup lang="ts">

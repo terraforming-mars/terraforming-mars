@@ -1,7 +1,7 @@
 <template>
   <div class="info_panel">
     <div class="info-panel-title" v-i18n>Game Setup Details</div>
-    <GameSetupDetail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"/>
+    <GameSetupDetail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration" />
 
     <div class="info-panel-title" v-i18n>Decks</div>
     <div class="game-setup-detail-container">

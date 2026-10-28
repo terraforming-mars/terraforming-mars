@@ -18,20 +18,20 @@
 
   <template v-if="game.turmoil">
     <a class="hotkey-target"></a>
-    <Turmoil :turmoil="game.turmoil"/>
+    <Turmoil :turmoil="game.turmoil" />
   </template>
 
   <template v-if="game.moon">
     <a class="hotkey-target"></a>
-    <MoonBoard :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
+    <MoonBoard :model="game.moon" :tileView="tileView" id="shortkey-moonBoard" />
   </template>
 
   <template v-if="game.gameOptions.expansions.pathfinders">
     <a class="hotkey-target"></a>
-    <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+    <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions" />
   </template>
 
-  <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players"/>
+  <DeltaProjectBoard v-if="game.gameOptions.expansions.deltaProject" :players="players" />
 
   <div v-if="players.length > 1" class="player_home_block--milestones-and-awards">
     <a class="hotkey-target"></a>

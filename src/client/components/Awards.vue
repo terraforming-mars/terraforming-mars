@@ -25,7 +25,7 @@
           :key="spotPrice"
           class="milestone-award-inline unpaid"
         >
-          <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" ></div>
+          <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice"></div>
         </span>
       </div>
 

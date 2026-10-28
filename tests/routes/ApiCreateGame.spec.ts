@@ -228,10 +228,11 @@ describe('ApiCreateGame', () => {
 
   // Issues one create-game POST against `handler`, using fresh request/response objects,
   // reusing `scaffolding.ctx` (and therefore its ip and clock) across calls.
-  function postGame(handler: ApiCreateGame, request: MockRequest, response: MockResponse) {
-    const post = handler.post(request, response, scaffolding.ctx);
+  function postGame(handler: ApiCreateGame, request: MockRequest, response: MockResponse, config: object = newGameConfigForTest()) {
+    request.method = 'POST';
+    const post = handler.processRequest(request, response, scaffolding.ctx);
     const emit = Promise.resolve().then(() => {
-      request.emitString(JSON.stringify({players: [{name: 'a player', color: 'red'}]}));
+      request.emitString(JSON.stringify(config));
       request.emitter.emit('end');
     });
     return Promise.all([emit, post]);
@@ -259,6 +260,20 @@ describe('ApiCreateGame', () => {
     await postGame(apiCreateGame, req2, res2);
     expect(res2.statusCode).eq(statusCode.tooManyRequests);
     expect(res2.content).eq('Quota exceeded');
+  });
+
+  it('a rejected game does not count against the quota', async () => {
+    const apiCreateGame = new ApiCreateGame([{limit: 1, perMs: 120_000}]);
+
+    const req1 = new MockRequest();
+    const res1 = new MockResponse();
+    await postGame(apiCreateGame, req1, res1, {...newGameConfigForTest(), boards: []});
+    expect(res1.statusCode).eq(statusCode.badRequest);
+
+    const req2 = new MockRequest();
+    const res2 = new MockResponse();
+    await postGame(apiCreateGame, req2, res2);
+    expect(res2.statusCode).eq(statusCode.ok);
   });
 
   it('two quota handlers do not block while both are under their limits', async () => {

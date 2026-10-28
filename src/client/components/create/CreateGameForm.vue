@@ -367,6 +367,14 @@
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
 
+                            <!-- Only reachable by importing JSON with randomMA set to MANUAL. -->
+                            <template v-if="randomMA === RandomMAOptionType.MANUAL">
+                                <label class="create-game-manual-ma">
+                                    <span v-i18n>Manual Milestones/Awards</span>
+                                </label>
+                                <div v-i18n>&#9888;&#xFE0F; Manual milestones and awards are not configurable in the UI yet.</div>
+                            </template>
+
                             <div class="create-game-page-column-row" v-if="isRandomMAEnabled">
                                 <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">

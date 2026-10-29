@@ -42,10 +42,14 @@ export class MarsBotTilePlacer {
     });
   }
 
-  /** Find the best space for MarsBot to place a city. Returns undefined if none available. */
-  public findCitySpace(): Space | undefined {
+  /**
+   * Find the best space for MarsBot to place a city. Returns undefined if none available.
+   *
+   * `where` limits the choice to the legal city spaces it accepts.
+   */
+  public findCitySpace(where: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot);
+    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(where);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -59,19 +63,15 @@ export class MarsBotTilePlacer {
   /**
    * Find the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
    * This is what the Expedited Construction bonus card (B05) asks for.
+   *
+   * Among those spaces the usual city rule picks, so 2 greeneries beat 3 oceans. The card's
+   * wording wins over the rulebook's "most tiles of these types" (TDaver, BGG 3350125).
    */
   public findExpeditedConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
     const adjacentGreeneryOrOcean = (space: Space) => board.getAdjacentSpaces(space)
       .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s)).length;
-
-    const eligible = board.getAvailableSpacesForCity(this.marsBot)
-      .filter((space) => adjacentGreeneryOrOcean(space) >= 2);
-    if (eligible.length === 0) {
-      return undefined;
-    }
-
-    return this.selectBestSpace(eligible, adjacentGreeneryOrOcean);
+    return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
   /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */

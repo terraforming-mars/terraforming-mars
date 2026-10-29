@@ -126,6 +126,19 @@ describe('MarsBotTilePlacer', () => {
     expect(adjacent).to.include.members([first.id, second.id]);
   });
 
+  it('findExpeditedConstructionCitySpace picks among the eligible spaces by the usual city rule', () => {
+    // 12 is next to three oceans and 47 to two greeneries. Both qualify, and then the city goes where
+    // the most greeneries are.
+    for (const id of ['06', '07', '13'] as const) {
+      game.simpleAddTile(human, game.board.getSpaceOrThrow(id), {tileType: TileType.OCEAN});
+    }
+    for (const id of ['39', '54'] as const) {
+      game.simpleAddTile(human, game.board.getSpaceOrThrow(id), {tileType: TileType.GREENERY});
+    }
+
+    expect(tilePlacer.findExpeditedConstructionCitySpace()?.id).to.eq('47');
+  });
+
   it('findNeuralInstanceSpace avoids the spaces next to the one reserved for Noctis City', () => {
     // 30 and 39 border Noctis City and cover two bonus icons each, more than any space the
     // tile may go on, so the tiebreakers alone would choose one of them.

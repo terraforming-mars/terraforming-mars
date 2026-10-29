@@ -150,11 +150,15 @@ export class MarsBotTilePlacer {
     return this.randomTiebreak(tied.map((t) => t.space));
   }
 
-  /** Break a tie by flipping a project card and counting through spaces. */
+  /**
+   * Break a tie by flipping a project card and counting through spaces: cost 1 is the first space,
+   * and a cost of 0 counts back to the last.
+   */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
     const card = this.game.projectDeck.drawOrThrow(this.game);
     this.game.projectDeck.discard(card);
-    return spaces[card.cost % spaces.length];
+    const n = spaces.length;
+    return spaces[((card.cost - 1) % n + n) % n];
   }
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */

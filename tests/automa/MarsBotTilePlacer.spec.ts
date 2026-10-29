@@ -8,6 +8,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {cast, toID} from '@/common/utils/utils';
+import {fakeCard} from '../TestingUtils';
 
 describe('MarsBotTilePlacer', () => {
   let game: IGame;
@@ -135,6 +136,21 @@ describe('MarsBotTilePlacer', () => {
     tilePlacer.findOceanSpace();
 
     expect(game.projectDeck.discardPile).has.length(1);
+  });
+
+  it('counts through the tied spaces from the first one', () => {
+    // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
+    for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
+      if (space.id !== '04' && space.id !== '28') {
+        game.simpleAddTile(human, space, {tileType: TileType.OCEAN});
+      }
+    }
+
+    for (const run of [{cost: 1, expected: '04'}, {cost: 2, expected: '28'}, {cost: 0, expected: '28'}]) {
+      game.projectDeck.drawPile.push(fakeCard({cost: run.cost}));
+
+      expect(tilePlacer.findOceanSpace()?.id, `cost ${run.cost}`).eq(run.expected);
+    }
   });
 
   it('getPlacementBonusMC pays 1 M€ per bonus icon covered', () => {

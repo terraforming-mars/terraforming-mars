@@ -180,7 +180,7 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingAndSpaceCard);
     });
 
-    // A wild tag is a tag when MarsBot counts them; it only fails to match a named priority tag (Nick, BGG 3429859)
+    // A wild tag is a tag when MarsBot counts them; it only fails to match a named priority tag (Nick, BGG 3781613)
     it('counts wild tags', () => {
       const threeWildCard = fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD]});
 

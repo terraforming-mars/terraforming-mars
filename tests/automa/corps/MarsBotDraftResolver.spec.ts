@@ -143,6 +143,32 @@ describe('MarsBotDraftResolver', () => {
 
       expect(picked).to.eq(buildingCard);
     });
+
+    // Rulebook B p.3 makes Aridor's priority a track, not an ordered tag list. Our reading is that
+    // both tags on a shared track match alike and more matches win.
+    it('scores the tags on a shared track alike', () => {
+      const powerCard = fakeCard({tags: [Tag.POWER]});
+      const jovianCard = fakeCard({tags: [Tag.JOVIAN]});
+      const twoJovianCard = fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN]});
+      const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+      // Leave track 4 (Power and Jovian) behind.
+      marsBotBoard.tracks.forEach((track, i) => {
+        if (i !== 4) {
+          track.advance();
+        }
+      });
+      expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
+
+      for (const run of [
+        {shuffler: keepOrder, hand: [jovianCard, powerCard], picked: jovianCard},
+        {shuffler: reverseOrder, hand: [jovianCard, powerCard], picked: powerCard},
+        {shuffler: keepOrder, hand: [powerCard, twoJovianCard], picked: twoJovianCard},
+      ]) {
+        const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
+
+        expect(picked).to.eq(run.picked);
+      }
+    });
   });
 
   describe('pickCard, mostTags priority', () => {

@@ -110,8 +110,17 @@ export class MarsBotDraftResolver {
     return this.pickBest(hand, (card) => this.scoreByTags(card, priorityTags));
   }
 
+  /**
+   * Aridor drafts for a track, not a tag list: every tag on that track counts alike, the card with
+   * the most of them wins and ties go at random.
+   */
   private pickByLeastAdvancedTrack(hand: Array<IProjectCard>): IProjectCard {
-    return this.pickByTags(hand, this.leastAdvancedTrackTags());
+    return this.pickBest(hand, (card) => this.scoreByTrack(card));
+  }
+
+  private scoreByTrack(card: IProjectCard): ReadonlyArray<number> {
+    const trackTags = this.leastAdvancedTrackTags();
+    return [marsBotCardTags(card).filter((tag) => trackTags.includes(tag)).length];
   }
 
   private leastAdvancedTrackTags(): ReadonlyArray<Tag> {

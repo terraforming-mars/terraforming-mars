@@ -3,6 +3,7 @@ import {MarsBotDraftPriority} from '../MarsBotCorpTypes';
 import {Tag} from '../../../common/cards/Tag';
 import {MarsBotBoard} from '../MarsBotBoard';
 import {hasIntersection} from '@/common/utils/utils';
+import {marsBotCardTags} from '../MarsBotTags';
 
 /** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
 export type Shuffler = <T>(items: Array<T>) => void;
@@ -127,16 +128,17 @@ export class MarsBotDraftResolver {
    * printed tags, so a wild tag matches nothing.
    */
   private scoreByTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): ReadonlyArray<number> {
-    return priorityTags.map((priorityTag) => card.tags.filter((tag) => tag === priorityTag).length);
+    const tags = marsBotCardTags(card);
+    return priorityTags.map((priorityTag) => tags.filter((tag) => tag === priorityTag).length);
   }
 
   private hasAnyTag(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): boolean {
-    return hasIntersection(card.tags, priorityTags);
+    return hasIntersection(marsBotCardTags(card), priorityTags);
   }
 
   /** Counts every tag on the card, wild tags included. */
   private countTags(card: IProjectCard): number {
-    return card.tags.length;
+    return marsBotCardTags(card).length;
   }
 }
 

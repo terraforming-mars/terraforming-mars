@@ -2,6 +2,20 @@ import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {Tags} from '../player/Tags';
 import {IPlayer} from '../IPlayer';
 import {MarsBotBoard} from './MarsBotBoard';
+import {IProjectCard} from '../cards/IProjectCard';
+import {CardType} from '../../common/cards/CardType';
+
+/**
+ * The tags MarsBot reads on a card. An event shows the Event tag in its corner, but the
+ * codebase leaves it out of card.tags, so it is added here.
+ */
+export function marsBotCardTags(card: IProjectCard): Array<Tag> {
+  const tags: Array<Tag> = [...card.tags];
+  if (card.type === CardType.EVENT && !tags.includes(Tag.EVENT)) {
+    tags.push(Tag.EVENT);
+  }
+  return tags;
+}
 
 /**
  * Override tag counting for MarsBot's player.

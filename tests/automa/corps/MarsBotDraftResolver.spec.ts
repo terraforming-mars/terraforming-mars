@@ -85,6 +85,18 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingCard);
     });
 
+    it('counts the Event tag an event card shows', () => {
+      // Asteroid is an event with a Space tag, so it shows two tags and Carbonate Processing shows one.
+      const eventPriority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.EVENT]};
+      for (const run of [
+        {priority: eventPriority, hand: [earthCard, spaceCard]},
+        {priority: {type: 'mostTags'} as const, hand: [buildingCard, spaceCard]},
+      ]) {
+        expect(resolver().pickCard(run.hand, run.priority)).to.eq(spaceCard);
+      }
+      expect(resolver().discardAfterDraft([spaceCard, earthCard], eventPriority).discarded).to.deep.eq([earthCard]);
+    });
+
     it('treats a hand with no match as one tie across every card', () => {
       const hand = [earthCard, plantCard];
 

@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
+import {DELEGATES_PER_PLAYER} from '../../src/common/constants';
 
 describe('Cloner', () => {
   it('solo game preserved', () => {
@@ -67,5 +69,21 @@ describe('Cloner', () => {
     }
     // This test will pass now that space players have been separately verified.
     expect(game.board).to.deep.eq(newGame.board);
+  });
+
+  it('automa game keeps MarsBot\'s delegates', () => {
+    const player = new Player('old-player1', 'yellow', false, 0, 'p-old-player1-id');
+    const game = Game.newInstance(
+      'g-old-game-id', [player], player, 'spectatorid', {
+        automa: true,
+        turmoilExtension: true,
+      });
+
+    const newPlayer = new Player('new-player1', 'red', false, 0, 'p-new-player1-id');
+    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
+
+    const marsBot = newGame.marsBotPlayer!;
+    expect(marsBot.id).eq('p-g-new-id-marsbot');
+    expect(Turmoil.getTurmoil(newGame).delegateReserve.get(marsBot)).eq(DELEGATES_PER_PLAYER);
   });
 });

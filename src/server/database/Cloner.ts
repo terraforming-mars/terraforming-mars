@@ -7,6 +7,7 @@ import {PlayerId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
 import {toID} from '../../common/utils/utils';
+import {AutomaGameSetup} from '../automa/AutomaGameSetup';
 
 export class Cloner {
   public static clone(
@@ -27,6 +28,11 @@ export class Cloner {
         serialized,
         [GameSetup.neutralPlayerFor(serializedGameId).id],
         [GameSetup.neutralPlayerFor(newGameId).id]);
+      // MarsBot's ID is also derived from the game ID, and it isn't serialized either.
+      Cloner.replacePlayerIds(
+        serialized,
+        [AutomaGameSetup.createMarsBotPlayer(serializedGameId).id],
+        [AutomaGameSetup.createMarsBotPlayer(newGameId).id]);
     }
     serialized.id = newGameId;
 

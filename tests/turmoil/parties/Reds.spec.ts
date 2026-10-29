@@ -77,6 +77,38 @@ describe('Reds', () => {
     expect(player.terraformRating).to.eq(20);
   });
 
+  it('Ruling bonus 1: MarsBot\'s TR counts', () => {
+    const [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+    const marsBot = game.marsBotPlayer!;
+
+    human.setTerraformRating(30);
+    marsBot.setTerraformRating(25);
+    REDS_BONUS_1.grant(game);
+    expect(human.terraformRating).to.eq(30);
+    expect(marsBot.terraformRating).to.eq(25);
+
+    human.setTerraformRating(25);
+    REDS_BONUS_1.grant(game);
+    expect(human.terraformRating).to.eq(26);
+    expect(marsBot.terraformRating).to.eq(25);
+  });
+
+  it('Ruling bonus 2: MarsBot\'s TR counts', () => {
+    const [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+    const marsBot = game.marsBotPlayer!;
+
+    human.setTerraformRating(20);
+    marsBot.setTerraformRating(25);
+    REDS_BONUS_2.grant(game);
+    expect(human.terraformRating).to.eq(20);
+    expect(marsBot.terraformRating).to.eq(25);
+
+    human.setTerraformRating(25);
+    REDS_BONUS_2.grant(game);
+    expect(human.terraformRating).to.eq(24);
+    expect(marsBot.terraformRating).to.eq(25);
+  });
+
   it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', () => {
     setRulingParty(game, PartyName.REDS, 'rp01');
 

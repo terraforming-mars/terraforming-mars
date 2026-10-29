@@ -37,7 +37,8 @@ class RedsBonus01 implements IBonus {
       }
       return;
     }
-    const min = Math.min(...game.players.map((p) => p.terraformRating));
+    // MarsBot's TR counts, but MarsBot ignores the ruling bonus.
+    const min = Math.min(...game.allPlayers.map((p) => p.terraformRating));
 
     game.players.forEach((player) => {
       if (player.terraformRating === min) {
@@ -63,7 +64,8 @@ class RedsBonus02 implements IBonus {
       }
       return;
     }
-    const max = Math.max(...game.players.map((p) => p.terraformRating));
+    // MarsBot's TR counts, but MarsBot ignores the ruling bonus.
+    const max = Math.max(...game.allPlayers.map((p) => p.terraformRating));
 
     game.players.forEach((player) => {
       if (player.terraformRating === max) {

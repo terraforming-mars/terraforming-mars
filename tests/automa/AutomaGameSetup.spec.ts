@@ -11,7 +11,8 @@ describe('AutomaGameSetup', () => {
     const [game, human] = testGame(1, {automa: true});
 
     const marsBot = game.marsBotPlayer!;
-    expect(game.allPlayers).deep.eq([human, marsBot]);
+    expect(game.players).deep.eq([human]);
+    expect(marsBot.game).eq(game);
     expect(game.isSoloMode()).is.false;
     expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
   });

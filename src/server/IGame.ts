@@ -66,13 +66,7 @@ export interface IGame extends Logger {
    *
    * It is not in `players` because it never takes a turn.
    */
-  marsBotPlayer: IPlayer | undefined;
-  /**
-   * `players` and MarsBot's player.
-   *
-   * For anything MarsBot can own, like tiles, delegates and milestones.
-   */
-  readonly allPlayers: ReadonlyArray<IPlayer>;
+  readonly marsBotPlayer: IPlayer | undefined;
   readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
 
   /**

@@ -105,13 +105,9 @@ export class Game implements IGame, Logger {
   public readonly name: string;
   public readonly gameOptions: Readonly<GameOptions>;
   public readonly players: ReadonlyArray<IPlayer>;
-  public marsBotPlayer: IPlayer | undefined;
+  public readonly marsBotPlayer: IPlayer | undefined;
   // The API makes this readonly.
   public playersInGenerationOrder: ReadonlyArray<IPlayer> = [];
-
-  public get allPlayers(): ReadonlyArray<IPlayer> {
-    return this.marsBotPlayer === undefined ? this.players : [...this.players, this.marsBotPlayer];
-  }
 
   // Game-level data
   public lastSaveId: number = 0;
@@ -206,6 +202,7 @@ export class Game implements IGame, Logger {
     id: GameId,
     name: string,
     players: Array<IPlayer>,
+    marsBotPlayer: IPlayer | undefined,
     first: IPlayer,
     activePlayer: PlayerId,
     spectatorId: SpectatorId,
@@ -254,6 +251,8 @@ export class Game implements IGame, Logger {
         this.monsInsuranceOwner = player;
       }
     });
+    this.marsBotPlayer = marsBotPlayer;
+    this.marsBotPlayer?.setup(this);
 
     this.tags = tags;
     this.globalParameterTracks = getGlobalParameterTracks(gameOptions.boardName);
@@ -345,7 +344,8 @@ export class Game implements IGame, Logger {
     }
 
     const name = generateGameName(UnseededRandom.INSTANCE);
-    const game = new Game(id, name, players, firstPlayer, activePlayer, spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, Array.from(tags));
+    const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(id) : undefined;
+    const game = new Game(id, name, players, marsBotPlayer, firstPlayer, activePlayer, spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, Array.from(tags));
     // This evaluation of created time doesn't match what's stored in the database, but that's fine.
     game.createdTime = new Date();
     // Initialize Ares data
@@ -375,11 +375,13 @@ export class Game implements IGame, Logger {
       game.underworldData = UnderworldExpansion.initialize(rng, gameOptions.boardName === BoardName.AMAZONIS_PLANITIA);
     }
 
-    if (players.length === 1 && gameOptions.automa) {
-      AutomaGameSetup.setup(game);
-    } else if (players.length === 1) {
-      //  Setup solo player's starting tiles
-      GameSetup.setupNeutralPlayer(game);
+    if (players.length === 1) {
+      if (marsBotPlayer !== undefined) {
+        AutomaGameSetup.setup(game, marsBotPlayer);
+      } else {
+        //  Setup solo player's starting tiles
+        GameSetup.setupNeutralPlayer(game);
+      }
     }
 
     // Setup Ares hazards
@@ -1716,14 +1718,15 @@ export class Game implements IGame, Logger {
       gameOptions.escapeVelocity = sanitizeEscapeVelocityOptions(gameOptions.escapeVelocity);
     }
     const players = d.players.map((element) => Player.deserialize(element));
+    // MarsBot isn't serialized with the players, so it is recreated from the game id.
+    const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(d.id) : undefined;
+    const playersAndMarsBot = marsBotPlayer === undefined ? players : [...players, marsBotPlayer];
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    // MarsBot isn't serialized with the players, so it is recreated from the game id.
-    const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(d.id) : undefined;
-    const board = GameSetup.deserializeBoard(marsBotPlayer === undefined ? players : [...players, marsBotPlayer], gameOptions, d);
+    const board = GameSetup.deserializeBoard(playersAndMarsBot, gameOptions, d);
 
     const rng = new SeededRandom(d.seed, d.currentSeed);
 
@@ -1733,14 +1736,10 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    const game = new Game(d.id, d.name, players, first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
+    const game = new Game(d.id, d.name, players, marsBotPlayer, first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);
-    if (marsBotPlayer !== undefined) {
-      marsBotPlayer.setup(game);
-      game.marsBotPlayer = marsBotPlayer;
-    }
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((milestoneName) => {
@@ -1752,7 +1751,7 @@ export class Game implements IGame, Logger {
     });
 
     game.milestones = milestones;
-    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, game.allPlayers, milestones);
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, playersAndMarsBot, milestones);
 
     const awards: Array<IAward> = [];
     d.awards.forEach((awardName) => {
@@ -1764,7 +1763,7 @@ export class Game implements IGame, Logger {
     });
 
     game.awards = awards;
-    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.allPlayers, awards);
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, playersAndMarsBot, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;
@@ -1779,7 +1778,7 @@ export class Game implements IGame, Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, game.allPlayers);
+      game.turmoil = Turmoil.deserialize(d.turmoil, playersAndMarsBot);
     }
 
     // Reload moon elements if needed

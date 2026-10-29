@@ -7,6 +7,7 @@ import {MarsBotTilePlacer} from '../../src/server/automa/MarsBotTilePlacer';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {cast, toID} from '@/common/utils/utils';
 import {fakeCard} from '../TestingUtils';
 
@@ -109,6 +110,16 @@ describe('MarsBotTilePlacer', () => {
 
     const adjacent = game.board.getAdjacentSpaces(space).map(toID);
     expect(adjacent).to.include.members([first.id, second.id]);
+  });
+
+  it('findNeuralInstanceSpace avoids the spaces next to the one reserved for Noctis City', () => {
+    // 30 and 39 border Noctis City and cover two bonus icons each, more than any space the
+    // tile may go on, so the tiebreakers alone would choose one of them.
+    const noctisCity = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
+
+    const space = tilePlacer.findNeuralInstanceSpace()!;
+
+    expect(game.board.getAdjacentSpaces(noctisCity).map(toID)).to.not.include(space.id);
   });
 
   it('breaks ties on ocean adjacency first, then on bonus icons', () => {

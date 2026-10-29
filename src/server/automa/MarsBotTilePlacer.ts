@@ -97,7 +97,8 @@ export class MarsBotTilePlacer {
         return false;
       }
       // Not adjacent to reserved spaces (ocean-reserved, restricted, specific cities)
-      return !adj.some((s) => s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED);
+      return !adj.some((s) =>
+        s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED || s.id === board.noctisCitySpaceId);
     });
     if (spaces.length === 0) {
       return undefined;

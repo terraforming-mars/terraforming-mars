@@ -134,9 +134,9 @@ export class MarsBotDraftResolver {
     return hasIntersection(card.tags, priorityTags);
   }
 
-  /** Wild tags count for nothing here: MarsBot reads the tags printed on the card. */
+  /** Counts every tag on the card, wild tags included. */
   private countTags(card: IProjectCard): number {
-    return card.tags.filter((tag) => tag !== Tag.WILD).length;
+    return card.tags.length;
   }
 }
 

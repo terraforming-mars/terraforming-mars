@@ -142,12 +142,13 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingAndSpaceCard);
     });
 
-    it('does not count wild tags', () => {
+    // A wild tag is a tag when MarsBot counts them; it only fails to match a named priority tag (Nick, BGG 3429859)
+    it('counts wild tags', () => {
       const threeWildCard = fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD]});
 
-      const picked = resolver().pickCard([threeWildCard, buildingCard], priority);
+      const picked = resolver().pickCard([buildingCard, threeWildCard], priority);
 
-      expect(picked).to.eq(buildingCard);
+      expect(picked).to.eq(threeWildCard);
     });
   });
 

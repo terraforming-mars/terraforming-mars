@@ -8,7 +8,7 @@ import {byKey, Comparator, compound, reversed} from '../../common/utils/Ordering
 /**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
  *
- * Greenery: Adjacent to as many MarsBot cities as possible, minimize adjacency to human cities.
+ * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.
  * Ocean: Any ocean-reserved space.
  *
@@ -36,8 +36,9 @@ export class MarsBotTilePlacer {
       const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
       const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
       const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
-      // Maximize MarsBot cities adjacency, then minimize human cities adjacency
-      return marsBotCities.length * 100 - humanCities.length;
+      // The greatest net gain of points: MarsBot's adjacent cities minus the player's (njshaw2,
+      // BGG 3350125 and 3411375)
+      return marsBotCities.length - humanCities.length;
     });
   }
 

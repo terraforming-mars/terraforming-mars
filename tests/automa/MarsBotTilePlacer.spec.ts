@@ -91,6 +91,20 @@ describe('MarsBotTilePlacer', () => {
     expect(game.board.getAdjacentSpaces(space).some((s) => s.id === '18')).is.false;
   });
 
+  it('findGreenerySpace goes for the greatest net gain of points', () => {
+    // 17 is next to two of MarsBot's cities and two of the human's, so a greenery there gains MarsBot
+    // nothing. One next to a single MarsBot city and no human one gains a point.
+    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('10'), {tileType: TileType.CITY});
+    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('25'), {tileType: TileType.CITY});
+    game.simpleAddTile(human, game.board.getSpaceOrThrow('11'), {tileType: TileType.CITY});
+    game.simpleAddTile(human, game.board.getSpaceOrThrow('24'), {tileType: TileType.CITY});
+
+    const space = tilePlacer.findGreenerySpace()!;
+
+    const cities = game.board.getAdjacentSpaces(space).filter((s) => s.tile?.tileType === TileType.CITY);
+    expect(cities.map((s) => s.player?.id)).deep.eq([marsBot.id]);
+  });
+
   it('findExpeditedConstructionCitySpace returns undefined on an empty board', () => {
     cast(tilePlacer.findExpeditedConstructionCitySpace(), undefined);
   });

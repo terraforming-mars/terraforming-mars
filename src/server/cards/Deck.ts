@@ -42,10 +42,9 @@ export class Deck<T extends Named<CardName>> {
   }
 
   public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T | undefined {
+    // Shuffle only when a draw finds the pile empty, so cards discarded after the last draw join the new deck.
     this.shuffleIfNecessary(logger);
-    const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
-    this.shuffleIfNecessary(logger);
-    return card;
+    return source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
   }
 
   public drawN(logger: Logger, count: number, source: 'top' | 'bottom' = 'top'): Array<T> {

@@ -1,5 +1,7 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 
 export class Miner implements IAward {
   public readonly name = 'Miner';
@@ -10,5 +12,9 @@ export class Miner implements IAward {
     } else {
       return player.steel + player.production.steel + player.titanium + player.production.titanium;
     }
+  }
+
+  public marsBotScore(bot: IMarsBot): number {
+    return bot.marsBotBoard.trackPosition(Tag.SPACE) + 5;
   }
 }

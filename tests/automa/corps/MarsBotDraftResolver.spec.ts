@@ -85,6 +85,18 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingCard);
     });
 
+    it('counts the Event tag an event card shows', () => {
+      // Asteroid is an event with a Space tag, so it shows two tags and Carbonate Processing shows one.
+      const eventPriority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.EVENT]};
+      for (const run of [
+        {priority: eventPriority, hand: [earthCard, spaceCard]},
+        {priority: {type: 'mostTags'} as const, hand: [buildingCard, spaceCard]},
+      ]) {
+        expect(resolver().pickCard(run.hand, run.priority)).to.eq(spaceCard);
+      }
+      expect(resolver().discardAfterDraft([spaceCard, earthCard], eventPriority).discarded).to.deep.eq([earthCard]);
+    });
+
     it('treats a hand with no match as one tie across every card', () => {
       const hand = [earthCard, plantCard];
 
@@ -131,6 +143,32 @@ describe('MarsBotDraftResolver', () => {
 
       expect(picked).to.eq(buildingCard);
     });
+
+    // Rulebook B p.3 makes Aridor's priority a track, not an ordered tag list. Our reading is that
+    // both tags on a shared track match alike and more matches win.
+    it('scores the tags on a shared track alike', () => {
+      const powerCard = fakeCard({tags: [Tag.POWER]});
+      const jovianCard = fakeCard({tags: [Tag.JOVIAN]});
+      const twoJovianCard = fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN]});
+      const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+      // Leave track 4 (Power and Jovian) behind.
+      marsBotBoard.tracks.forEach((track, i) => {
+        if (i !== 4) {
+          track.advance();
+        }
+      });
+      expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
+
+      for (const run of [
+        {shuffler: keepOrder, hand: [jovianCard, powerCard], picked: jovianCard},
+        {shuffler: reverseOrder, hand: [jovianCard, powerCard], picked: powerCard},
+        {shuffler: keepOrder, hand: [powerCard, twoJovianCard], picked: twoJovianCard},
+      ]) {
+        const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
+
+        expect(picked).to.eq(run.picked);
+      }
+    });
   });
 
   describe('pickCard, mostTags priority', () => {
@@ -142,12 +180,13 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingAndSpaceCard);
     });
 
-    it('does not count wild tags', () => {
+    // A wild tag is a tag when MarsBot counts them; it only fails to match a named priority tag (Nick, BGG 3781613)
+    it('counts wild tags', () => {
       const threeWildCard = fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD]});
 
-      const picked = resolver().pickCard([threeWildCard, buildingCard], priority);
+      const picked = resolver().pickCard([buildingCard, threeWildCard], priority);
 
-      expect(picked).to.eq(buildingCard);
+      expect(picked).to.eq(threeWildCard);
     });
   });
 
@@ -181,13 +220,31 @@ describe('MarsBotDraftResolver', () => {
       expect(kept).to.deep.eq([buildingCard, earthCard, plantCard]);
     });
 
-    it('discards nothing when every card carries a priority tag', () => {
-      const drafted = [buildingCard, spaceCard, buildingAndSpaceCard];
+    // Nick, BGG 3398289: "it will always end up discarding one card from those drafted", which
+    // overrides rulebook B p.2's 5-card deck
+    it('discards the card with the fewest matches when every card carries a priority tag', () => {
+      const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+      // Leave track 0 (Building and Microbe) behind, so its tags are Aridor's priority.
+      for (let i = 1; i < marsBotBoard.tracks.length; i++) {
+        marsBotBoard.tracks[i].advance();
+      }
 
-      const {kept, discarded} = resolver(keepOrder).discardAfterDraft(drafted, priority);
+      for (const run of [
+        {resolver: resolver(keepOrder), priority, drafted: [buildingCard, spaceCard, buildingAndSpaceCard], discarded: spaceCard},
+        // A tie goes to the first of the tied cards in the shuffled order.
+        {resolver: resolver(keepOrder), priority, drafted: [spaceCard, buildingCard, expensiveSpaceCard], discarded: spaceCard},
+        {resolver: resolver(reverseOrder), priority, drafted: [spaceCard, buildingCard, expensiveSpaceCard], discarded: expensiveSpaceCard},
+        {
+          resolver: new MarsBotDraftResolver(marsBotBoard, keepOrder),
+          priority: {type: 'leastAdvancedTrack'} as const,
+          drafted: [fakeCard({tags: [Tag.BUILDING, Tag.BUILDING]}), buildingCard],
+          discarded: buildingCard,
+        },
+      ]) {
+        const {discarded} = run.resolver.discardAfterDraft(run.drafted, run.priority);
 
-      expect(discarded).is.empty;
-      expect(kept).to.deep.eq(drafted);
+        expect(discarded).to.deep.eq([run.discarded]);
+      }
     });
 
     it('discards only the first card when none of them match', () => {

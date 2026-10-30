@@ -9,11 +9,11 @@ import awardjson from '@/genfiles/awards.json';
 const milestones = {} as Record<MilestoneName, ClientMilestone>;
 const awards = {} as Record<AwardName, ClientAward>;
 
-(milestonejson as any as Array<ClientMilestone>).forEach((e) => {
+(milestonejson as Array<ClientMilestone>).forEach((e) => {
   milestones[e.name] = e;
 });
 
-(awardjson as any as Array<ClientAward>).forEach((e) => {
+(awardjson as Array<ClientAward>).forEach((e) => {
   awards[e.name] = e;
 });
 

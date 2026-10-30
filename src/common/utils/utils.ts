@@ -204,7 +204,7 @@ export function toID<T>(item: {id: T}): T {
  *
  * this returns ['M', 'T'].
  */
-export function getEnumKeys<T extends Record<string, any>>(enumObject: T): Array<string> {
+export function getEnumKeys<T extends Record<string, unknown>>(enumObject: T): Array<string> {
   return Object.keys(enumObject) as Array<string>;
 }
 
@@ -236,19 +236,20 @@ export function getEnumStringEntries<T extends Record<string, string>>(enumObjec
   return Object.entries(enumObject) as Array<[string, T[keyof T]]>;
 }
 
-type ConstructorOf<T> = new (...args: any[]) => T;
+type ConstructorOf<T, A extends unknown[]> = new (...args: A) => T;
 
 /**
  * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
  *
  * Accepts `undefined` as class and fails when obj is not undefined.
  */
-export function cast<T>(obj: any, klass: new (...args: any[]) => T): T;
-export function cast<T>(obj: any, klass: undefined): undefined;
-export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | undefined {
+export function cast<T, A extends unknown[]>(obj: unknown, klass: ConstructorOf<T, A>): T;
+export function cast<T>(obj: unknown, klass: undefined): undefined;
+export function cast<T, A extends unknown[]>(obj: unknown, klass: ConstructorOf<T, A> | undefined): T | undefined {
   if (klass === undefined) {
     if (obj !== undefined) {
-      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
+      const constructorName = typeof obj === 'object' && obj !== null ? (obj as {constructor?: {name?: string}}).constructor?.name : undefined;
+      throw new Error(`Expected undefined, got type ${constructorName ?? typeof obj}`);
     }
     return undefined;
   }

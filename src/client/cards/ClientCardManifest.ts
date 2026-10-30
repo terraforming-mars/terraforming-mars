@@ -33,7 +33,7 @@ export function byModule(module: GameModule): (card: ClientCard) => boolean {
 }
 
 function initialize() {
-  (cardJson as any as Array<ClientCard>).forEach((card) => {
+  (cardJson as Array<ClientCard>).forEach((card) => {
     cards.set(card.name, card);
     cardArray.push(card);
   });

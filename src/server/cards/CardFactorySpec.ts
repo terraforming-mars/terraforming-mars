@@ -18,7 +18,7 @@ export type CardFactorySpec<T> = {
   negative?: boolean;
 }
 
-export function isCompatibleWith(cf: CardFactorySpec<any>, gameOptions: GameOptions): boolean {
+export function isCompatibleWith(cf: CardFactorySpec<unknown>, gameOptions: GameOptions): boolean {
   if (cf.compatibility === undefined) {
     return true;
   }

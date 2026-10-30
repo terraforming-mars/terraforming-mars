@@ -7,7 +7,9 @@ import {MarsBotTilePlacer} from '../../src/server/automa/MarsBotTilePlacer';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {cast, toID} from '@/common/utils/utils';
+import {fakeCard} from '../TestingUtils';
 
 describe('MarsBotTilePlacer', () => {
   let game: IGame;
@@ -89,6 +91,20 @@ describe('MarsBotTilePlacer', () => {
     expect(game.board.getAdjacentSpaces(space).some((s) => s.id === '18')).is.false;
   });
 
+  it('findGreenerySpace goes for the greatest net gain of points', () => {
+    // 17 is next to two of MarsBot's cities and two of the human's, so a greenery there gains MarsBot
+    // nothing. One next to a single MarsBot city and no human one gains a point.
+    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('10'), {tileType: TileType.CITY});
+    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('25'), {tileType: TileType.CITY});
+    game.simpleAddTile(human, game.board.getSpaceOrThrow('11'), {tileType: TileType.CITY});
+    game.simpleAddTile(human, game.board.getSpaceOrThrow('24'), {tileType: TileType.CITY});
+
+    const space = tilePlacer.findGreenerySpace()!;
+
+    const cities = game.board.getAdjacentSpaces(space).filter((s) => s.tile?.tileType === TileType.CITY);
+    expect(cities.map((s) => s.player?.id)).deep.eq([marsBot.id]);
+  });
+
   it('findExpeditedConstructionCitySpace returns undefined on an empty board', () => {
     cast(tilePlacer.findExpeditedConstructionCitySpace(), undefined);
   });
@@ -108,6 +124,29 @@ describe('MarsBotTilePlacer', () => {
 
     const adjacent = game.board.getAdjacentSpaces(space).map(toID);
     expect(adjacent).to.include.members([first.id, second.id]);
+  });
+
+  it('findExpeditedConstructionCitySpace picks among the eligible spaces by the usual city rule', () => {
+    // 12 is next to three oceans and 47 to two greeneries. Both qualify, and then the city goes where
+    // the most greeneries are.
+    for (const id of ['06', '07', '13'] as const) {
+      game.simpleAddTile(human, game.board.getSpaceOrThrow(id), {tileType: TileType.OCEAN});
+    }
+    for (const id of ['39', '54'] as const) {
+      game.simpleAddTile(human, game.board.getSpaceOrThrow(id), {tileType: TileType.GREENERY});
+    }
+
+    expect(tilePlacer.findExpeditedConstructionCitySpace()?.id).to.eq('47');
+  });
+
+  it('findNeuralInstanceSpace avoids the spaces next to the one reserved for Noctis City', () => {
+    // 30 and 39 border Noctis City and cover two bonus icons each, more than any space the
+    // tile may go on, so the tiebreakers alone would choose one of them.
+    const noctisCity = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
+
+    const space = tilePlacer.findNeuralInstanceSpace()!;
+
+    expect(game.board.getAdjacentSpaces(noctisCity).map(toID)).to.not.include(space.id);
   });
 
   it('breaks ties on ocean adjacency first, then on bonus icons', () => {
@@ -135,6 +174,21 @@ describe('MarsBotTilePlacer', () => {
     tilePlacer.findOceanSpace();
 
     expect(game.projectDeck.discardPile).has.length(1);
+  });
+
+  it('counts through the tied spaces from the first one', () => {
+    // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
+    for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
+      if (space.id !== '04' && space.id !== '28') {
+        game.simpleAddTile(human, space, {tileType: TileType.OCEAN});
+      }
+    }
+
+    for (const run of [{cost: 1, expected: '04'}, {cost: 2, expected: '28'}, {cost: 0, expected: '28'}]) {
+      game.projectDeck.drawPile.push(fakeCard({cost: run.cost}));
+
+      expect(tilePlacer.findOceanSpace()?.id, `cost ${run.cost}`).eq(run.expected);
+    }
   });
 
   it('getPlacementBonusMC pays 1 M€ per bonus icon covered', () => {

@@ -8,7 +8,7 @@ import {byKey, Comparator, compound, reversed} from '../../common/utils/Ordering
 /**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
  *
- * Greenery: Adjacent to as many MarsBot cities as possible, minimize adjacency to human cities.
+ * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.
  * Ocean: Any ocean-reserved space.
  *
@@ -36,15 +36,20 @@ export class MarsBotTilePlacer {
       const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
       const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
       const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
-      // Maximize MarsBot cities adjacency, then minimize human cities adjacency
-      return marsBotCities.length * 100 - humanCities.length;
+      // The greatest net gain of points: MarsBot's adjacent cities minus the player's (njshaw2,
+      // BGG 3350125 and 3411375)
+      return marsBotCities.length - humanCities.length;
     });
   }
 
-  /** Find the best space for MarsBot to place a city. Returns undefined if none available. */
-  public findCitySpace(): Space | undefined {
+  /**
+   * Find the best space for MarsBot to place a city. Returns undefined if none available.
+   *
+   * `where` limits the choice to the legal city spaces it accepts.
+   */
+  public findCitySpace(where: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot);
+    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(where);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -58,19 +63,15 @@ export class MarsBotTilePlacer {
   /**
    * Find the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
    * This is what the Expedited Construction bonus card (B05) asks for.
+   *
+   * Among those spaces the usual city rule picks, so 2 greeneries beat 3 oceans. The card's
+   * wording wins over the rulebook's "most tiles of these types" (TDaver, BGG 3350125).
    */
   public findExpeditedConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
     const adjacentGreeneryOrOcean = (space: Space) => board.getAdjacentSpaces(space)
       .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s)).length;
-
-    const eligible = board.getAvailableSpacesForCity(this.marsBot)
-      .filter((space) => adjacentGreeneryOrOcean(space) >= 2);
-    if (eligible.length === 0) {
-      return undefined;
-    }
-
-    return this.selectBestSpace(eligible, adjacentGreeneryOrOcean);
+    return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
   /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
@@ -97,7 +98,8 @@ export class MarsBotTilePlacer {
         return false;
       }
       // Not adjacent to reserved spaces (ocean-reserved, restricted, specific cities)
-      return !adj.some((s) => s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED);
+      return !adj.some((s) =>
+        s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED || s.id === board.noctisCitySpaceId);
     });
     if (spaces.length === 0) {
       return undefined;
@@ -150,11 +152,15 @@ export class MarsBotTilePlacer {
     return this.randomTiebreak(tied.map((t) => t.space));
   }
 
-  /** Break a tie by flipping a project card and counting through spaces. */
+  /**
+   * Break a tie by flipping a project card and counting through spaces: cost 1 is the first space,
+   * and a cost of 0 counts back to the last.
+   */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
     const card = this.game.projectDeck.drawOrThrow(this.game);
     this.game.projectDeck.discard(card);
-    return spaces[card.cost % spaces.length];
+    const n = spaces.length;
+    return spaces[((card.cost - 1) % n + n) % n];
   }
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */

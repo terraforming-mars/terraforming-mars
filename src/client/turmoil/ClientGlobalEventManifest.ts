@@ -4,7 +4,7 @@ import {ClientGlobalEvent} from '@/common/turmoil/ClientGlobalEvent';
 import eventJson from '@/genfiles/events.json';
 
 const events: Map<GlobalEventName, ClientGlobalEvent> = new Map();
-(eventJson as any as Array<ClientGlobalEvent>).forEach((card) => {
+(eventJson as Array<ClientGlobalEvent>).forEach((card) => {
   events.set(card.name, card);
 });
 

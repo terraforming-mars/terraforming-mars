@@ -4,7 +4,7 @@ import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import coloniesJson from '@/genfiles/colonies.json';
 
 const colonies: Map<ColonyName, ColonyMetadata> = new Map();
-(coloniesJson as any as Array<ColonyMetadata>).forEach((colony) => {
+(coloniesJson as Array<ColonyMetadata>).forEach((colony) => {
   colonies.set(colony.name, colony);
 });
 

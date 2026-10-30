@@ -177,9 +177,21 @@ describe('draw()', () => {
       expect(drawnCard).to.equal(bottomCard);
     });
 
-    it('should shuffle the discard pile back into the draw pile', () => {
-      expect(deck.drawPile).has.length(originalLength - 1);
-      expect(deck.discardPile).has.length(0);
+    it('should not shuffle until the next draw', () => {
+      expect(deck.drawPile).has.length(0);
+      expect(deck.discardPile).has.length(originalLength - 1);
+    });
+
+    describe('the drawn card is discarded before drawing again', () => {
+      beforeEach(() => {
+        deck.discard(drawnCard!);
+        drawnCard = deck.draw(game);
+      });
+
+      it('should shuffle the drawn card back in with the rest', () => {
+        expect(deck.drawPile).has.length(originalLength - 1);
+        expect(deck.discardPile).has.length(0);
+      });
     });
   });
 

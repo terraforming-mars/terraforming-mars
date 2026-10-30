@@ -14,6 +14,7 @@ import {CreateGameModel} from '@/client/components/create/CreateGameModel';
 import {ValidationErrors} from '@/common/game/validateNewGameConfig';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 // Minimal serialized Create Game payload used by settings restore tests.
 function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
@@ -60,6 +61,7 @@ describe('CreateGameForm', () => {
   beforeEach(() => {
     localStorage = new FakeLocalStorage();
     FakeLocalStorage.register(localStorage);
+    PreferencesManager.resetForTest();
   });
 
   afterEach(() => {
@@ -75,6 +77,7 @@ describe('CreateGameForm', () => {
 
 
   it('restores the last saved game settings on load', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     createGameSettingsStorage.save(createNewGameConfig({
       expansions: {...DEFAULT_EXPANSIONS, venus: true},
     }));
@@ -94,6 +97,7 @@ describe('CreateGameForm', () => {
   });
 
   it('shows warnings when restoring saved settings', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     const alerts: Array<{title: string, message: string}> = [];
     const Root = defineComponent({
       components: {
@@ -123,6 +127,7 @@ describe('CreateGameForm', () => {
   });
 
   it('resets the form and clears saved settings', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     createGameSettingsStorage.save(createNewGameConfig());
 
     const wrapper = shallowMount(CreateGameForm, {
@@ -156,6 +161,7 @@ describe('CreateGameForm', () => {
   });
 
   it('saves current settings before creating a game', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     const originalFetch = global.fetch;
     const originalAlert = global.alert;
     global.fetch = (() => Promise.reject(new Error('stop after saving'))) as typeof fetch;
@@ -181,6 +187,17 @@ describe('CreateGameForm', () => {
       global.alert = originalAlert;
     }
   });
+  it('does not restore saved settings when remember is off', async () => {
+    createGameSettingsStorage.save(createNewGameConfig());
+
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    await wrapper.vm.$nextTick();
+
+    expect((wrapper.vm as any).boards).deep.eq([BoardName.THARSIS]);
+  });
+
   it('toggling random milestones and awards leaves manual milestones and awards', () => {
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,

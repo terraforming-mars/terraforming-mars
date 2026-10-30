@@ -23,6 +23,7 @@ export type Preferences = {
   symbol_overlay: boolean,
   animated_title: boolean,
   experimental_ui: boolean,
+  remember_create_game_settings: boolean,
   lang: string,
 }
 
@@ -54,6 +55,8 @@ const defaults: Preferences = {
 
   experimental_ui: false,
   debug_view: false,
+
+  remember_create_game_settings: false,
 };
 
 export class PreferencesManager {

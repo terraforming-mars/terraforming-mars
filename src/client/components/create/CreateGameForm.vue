@@ -474,18 +474,23 @@
       <div class="create-game-action-row">
         <div class="create-game-action">
           <label>
-            <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
+            <div class="btn btn-primary btn-action btn-lg btn-rounded"><i class="icon icon-upload"></i></div>
             <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" @change="uploadSettings()">
           </label>
 
           <label>
-            <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+            <div @click="downloadSettings()" class="btn btn-primary btn-action btn-lg btn-rounded"><i class="icon icon-download"></i></div>
           </label>
 
           <AppButton class="create-game-action-gap" title="Reset" size="big" @click="resetSettings" />
           <AppButton class="create-game-action-gap" title="Create game" size="big" @click="createGame" :disabled="hasBlockingValidationErrors" />
           <span v-if="hasBlockingValidationErrors" class="create-game-custom-preludes-warning create-game-validation-blocker" @click="showValidationErrors = true">&#9888;&#xFE0E;</span>
           <span v-else-if="hasValidationProblems" class="create-game-validation-warning" @click="showValidationErrors = true">&#9888;&#xFE0F;</span>
+
+          <label class="form-checkbox form-inline create-game-action-gap">
+            <input type="checkbox" v-model="rememberSettings" data-test="remember-settings">
+            <i class="form-icon"></i> <span v-i18n>Remember</span>
+          </label>
         </div>
       </div>
     </div>
@@ -591,6 +596,7 @@ import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 import {validateNewGameConfig, validationDetails, ValidationErrors} from '@/common/game/validateNewGameConfig';
 import ValidationErrorsPopup from './ValidationErrorsPopup.vue';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 type Refs = {
   file: HTMLInputElement;
@@ -700,6 +706,14 @@ export default defineComponent({
       ?.setAttribute('content', this.previousViewport);
   },
   computed: {
+    rememberSettings: {
+      get(): boolean {
+        return getPreferences().remember_create_game_settings;
+      },
+      set(value: boolean) {
+        PreferencesManager.INSTANCE.set('remember_create_game_settings', value);
+      },
+    },
     wikiUrls(): typeof RULEBOOK_URLS & typeof WIKI_URLS {
       return {...RULEBOOK_URLS, ...WIKI_URLS};
     },
@@ -802,6 +816,9 @@ export default defineComponent({
   },
   methods: {
     restoreLastSettings() {
+      if (!this.rememberSettings) {
+        return;
+      }
       const settings = createGameSettingsStorage.load();
       if (settings === undefined) {
         return;
@@ -1080,7 +1097,9 @@ export default defineComponent({
       if (newGameConfig === undefined) {
         return;
       }
-      createGameSettingsStorage.save(newGameConfig);
+      if (this.rememberSettings) {
+        createGameSettingsStorage.save(newGameConfig);
+      }
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;

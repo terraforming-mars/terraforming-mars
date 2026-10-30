@@ -27,6 +27,7 @@ export type TrackDefinition = {
 };
 
 
+/** A corp cube's colour. `credit` is a silver resource cube, worth 5 M€. */
 export type CubeType = 'white' | 'black' | 'credit';
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';

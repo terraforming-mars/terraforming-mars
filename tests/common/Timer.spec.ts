@@ -9,6 +9,7 @@ describe('Timer', () => {
   beforeEach(() => {
     clock = new FakeClock();
     timer = Timer.newInstance(clock);
+    timer.enable();
     // this lastStoppedAt is a bit of a gross mess.
     (Timer as any).lastStoppedAt = 0;
   });
@@ -28,10 +29,6 @@ describe('Timer', () => {
   });
 
   it('shows 00:01 after 1 sec', () => {
-    timer.start(); // Skipping first action.
-    timer.stop();
-    expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
-
     timer.start();
     expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
     clock.millis += 1000;
@@ -40,19 +37,46 @@ describe('Timer', () => {
     expect(Timer.toString(timer.serialize(), clock)).eq('00:01');
   });
 
-  it('does not count the first action, also while it runs', () => {
+  it('does not run until enabled', () => {
+    const disabled = Timer.newInstance(clock);
     // Another game's timer stopped a day ago.
     (Timer as any).lastStoppedAt = clock.millis - 24 * 3_600_000;
+    disabled.start();
+    expect(disabled.serialize().running).eq(false);
+    clock.millis += 1000;
+    expect(disabled.getElapsed()).eq(0);
+    expect(Timer.toString(disabled.serialize(), clock)).eq('00:00');
+    disabled.stop();
+    expect(disabled.getElapsed()).eq(0);
+
+    disabled.enable();
+    disabled.start();
+    clock.millis += 1000;
+    disabled.stop();
+    expect(disabled.getElapsed()).eq(1000);
+  });
+
+  it('stop on a stopped timer adds nothing', () => {
     timer.start();
     clock.millis += 1000;
-    expect(timer.getElapsed()).eq(0);
-    expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
+    timer.stop();
+    clock.millis += 1000;
+    timer.stop();
+    expect(timer.getElapsed()).eq(1000);
+  });
+
+  it('deserializes legacy afterFirstAction as enabled', () => {
+    const legacy = (afterFirstAction: boolean) => Timer.deserialize({
+      sumElapsed: 0,
+      startedAt: 0,
+      running: false,
+      afterFirstAction,
+    } as any);
+    expect(legacy(true).serialize().enabled).eq(true);
+    expect(legacy(false).serialize().enabled).eq(false);
   });
 
   it('shows 1:00:01 after 3601 sec', () => {
-    timer.start(); // Skipping first action
-    timer.stop();
-
     timer.start();
     clock.millis += 3601 * 1000;
     expect(Timer.toString(timer.serialize(), clock)).eq('1:00:01');
@@ -64,8 +88,6 @@ describe('Timer', () => {
     sumElapsed,
     startedAt: 0,
     running: false,
-    afterFirstAction: true,
-    lastStoppedAt: 0,
   });
 
   it('shows 3-digit hours', () => {
@@ -84,7 +106,7 @@ describe('Timer', () => {
       sumElapsed: 0,
       startedAt: 0,
       running: false,
-      afterFirstAction: true,
+      enabled: true,
       lastStoppedAt: 5000,
     });
 
@@ -92,7 +114,7 @@ describe('Timer', () => {
       sumElapsed: 0,
       startedAt: 0,
       running: false,
-      afterFirstAction: true,
+      enabled: true,
       lastStoppedAt: 1000,
     });
 
@@ -101,9 +123,6 @@ describe('Timer', () => {
   });
 
   it('rebate', () => {
-    timer.start(); // Skipping first action
-    timer.stop();
-
     timer.start();
     clock.millis += 3601 * 1000;
     timer.stop();

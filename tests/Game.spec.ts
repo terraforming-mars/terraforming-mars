@@ -28,6 +28,7 @@ import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
+import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
@@ -1409,6 +1410,21 @@ describe('Game', () => {
       }
     });
   }
+
+  it('timer is disabled until the player picks their corporation', () => {
+    const [/* game */, player, player2] = testGame(2, {skipInitialCardSelection: false});
+    const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
+    expect(player.timer.serialize().enabled).is.false;
+    expect(player.timer.serialize().running).is.false;
+
+    player.process({type: 'initialCards', responses: [
+      {type: 'card', cards: [cast(selectInitialCards.options[0], SelectCard).cards[0].name]},
+      {type: 'card', cards: []},
+    ]});
+    expect(player.timer.serialize().enabled).is.true;
+    expect(player.timer.getElapsed()).eq(0);
+    expect(player2.timer.serialize().enabled).is.false;
+  });
 });
 
 function assertIsJSON(serialized: any) {

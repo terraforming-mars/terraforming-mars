@@ -47,15 +47,10 @@ function playerWithRunningTimer(): [Player, FakeClock] {
   const clock = new FakeClock();
   (Timer as any).lastStoppedAt = 0;
   player.timer = Timer.newInstance(clock);
+  player.timer.enable();
 
-  const firstInput = new SelectOption('First input');
-  player.setWaitingFor(firstInput);
+  player.setWaitingFor(new SelectOption('First input'));
   clock.millis = 1_000;
-  player.process({type: 'option'});
-
-  const secondInput = new SelectOption('Second input');
-  player.setWaitingFor(secondInput);
-  clock.millis = 2_000;
   player.process({type: 'option'});
 
   expect(player.timer.getElapsed()).eq(1_000);
@@ -243,6 +238,19 @@ describe('Player', () => {
     const json = player.serialize();
     expect(json.pickedCorporationCard).eq('Saturn Systems');
   });
+  it('enables the timer when loading an older saved player who has a corporation', () => {
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
+    player.pickedCorporationCard = new SaturnSystems();
+    const json = player.serialize();
+    json.timer = {...json.timer, enabled: undefined, afterFirstAction: false} as any;
+    expect(Player.deserialize(json).timer.serialize().enabled).is.true;
+
+    player.pickedCorporationCard = undefined;
+    const json2 = player.serialize();
+    json2.timer = {...json2.timer, enabled: undefined, afterFirstAction: false} as any;
+    expect(Player.deserialize(json2).timer.serialize().enabled).is.false;
+  });
+
   it('serialization test', () => {
     const json: SerializedPlayer = {
       id: 'p-blue',
@@ -307,7 +315,7 @@ describe('Player', () => {
         sumElapsed: 0,
         startedAt: 0,
         running: false,
-        afterFirstAction: false,
+        enabled: false,
         lastStoppedAt: 0,
       } as SerializedTimer,
       totalDelegatesPlaced: 0,

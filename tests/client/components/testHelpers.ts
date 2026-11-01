@@ -38,8 +38,6 @@ export function fakeTimerModel(): TimerModel {
     sumElapsed: 0,
     startedAt: 0,
     running: false,
-    afterFirstAction: false,
-    lastStoppedAt: 0,
   };
 }
 

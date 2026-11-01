@@ -48,6 +48,8 @@ export interface IGame extends Logger {
   readonly gameOptions: Readonly<GameOptions>;
   // Game-level data
   lastSaveId: number;
+  /** When a player's timer last stopped, in milliseconds. Undefined until the first one stops. */
+  lastTimerStoppedAt: number | undefined;
   readonly rng: SeededRandom;
   readonly spectatorId: SpectatorId;
   deferredActions: DeferredActionsQueue;

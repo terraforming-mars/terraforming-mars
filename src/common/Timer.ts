@@ -17,16 +17,6 @@ const REAL_CLOCK = new Clock();
  */
 export class Timer {
   /**
-   * When was the last time any timer called Timer.stop?
-   *
-   * Time is in milliseconds.
-   *
-   * This applies to all games. Doesn't that render this useless?
-   * Doesn't the deserialization also render this useless?
-   */
-  private static lastStoppedAt: number = 0;
-
-  /**
    *  Sum of elapsed closed time intervals, in milliseconds.
    */
   private sumElapsed: number = 0;
@@ -58,7 +48,6 @@ export class Timer {
       startedAt: this.startedAt,
       running: this.running,
       enabled: this.enabled,
-      lastStoppedAt: Timer.lastStoppedAt,
     };
   }
 
@@ -76,9 +65,6 @@ export class Timer {
     timer.startedAt = d.startedAt;
     timer.running = d.running;
     timer.enabled = d.enabled ?? d.afterFirstAction ?? false;
-
-    // Never move the shared timer backwards.
-    Timer.lastStoppedAt = Math.max(Timer.lastStoppedAt, d.lastStoppedAt);
     return timer;
   }
 
@@ -90,33 +76,32 @@ export class Timer {
   }
 
   /**
-   * Starts this timer, if it is enabled.
+   * Starts this timer at `from`, or now if `from` is undefined, if it is enabled.
    *
    * Called when the game starts waiting for a player's required input.
    */
-  public start() : void {
+  public start(from: number | undefined) : void {
     if (!this.enabled) {
       return;
     }
     this.running = true;
-    // Timer is starting when previous timer was stopped. This way undoing actions does not undo the timers.
-    this.startedAt = Timer.lastStoppedAt === 0 ? this.clock.now() : Timer.lastStoppedAt;
+    this.startedAt = from ?? this.clock.now();
   }
 
   /**
-   * Stops this timer.
+   * Stops this timer, and returns the time it stopped.
    *
    * Adds the interval from `startedAt` to now, if this timer is running.
    *
    * Called when a player's required input is answered or cleared.
    */
-  public stop() : void {
-    Timer.lastStoppedAt = this.clock.now();
-    if (!this.running) {
-      return;
+  public stop() : number {
+    const now = this.clock.now();
+    if (this.running) {
+      this.running = false;
+      this.sumElapsed += now - this.startedAt;
     }
-    this.running = false;
-    this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
+    return now;
   }
 
   /**

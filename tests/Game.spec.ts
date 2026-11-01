@@ -29,6 +29,7 @@ import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {SelectCard} from '../src/server/inputs/SelectCard';
+import {SelectOption} from '../src/server/inputs/SelectOption';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
@@ -1424,6 +1425,37 @@ describe('Game', () => {
     expect(player.timer.serialize().enabled).is.true;
     expect(player.timer.getElapsed()).eq(0);
     expect(player2.timer.serialize().enabled).is.false;
+  });
+
+  it('timer stops in one game do not affect another game', () => {
+    const [game, player] = testGame(1);
+    const [otherGame] = testGame(1);
+    otherGame.lastTimerStoppedAt = 1000;
+
+    player.setWaitingFor(new SelectOption('Input'));
+    player.process({type: 'option'});
+
+    expect(game.lastTimerStoppedAt).is.not.undefined;
+    expect(otherGame.lastTimerStoppedAt).eq(1000);
+  });
+
+  it('deserializing a game keeps when its timers last stopped', () => {
+    const [game] = testGame(1);
+    game.lastTimerStoppedAt = 1000;
+    expect(Game.deserialize(game.serialize()).lastTimerStoppedAt).eq(1000);
+  });
+
+  it('deserializing an older game uses its timers\' stop time', () => {
+    const [game] = testGame(2);
+    const serialized = game.serialize();
+    delete (serialized as any).lastTimerStoppedAt;
+    serialized.players[0].timer.lastStoppedAt = 3000;
+    serialized.players[1].timer.lastStoppedAt = 5000;
+    expect(Game.deserialize(serialized).lastTimerStoppedAt).eq(5000);
+
+    serialized.players[0].timer.lastStoppedAt = 0;
+    serialized.players[1].timer.lastStoppedAt = 0;
+    expect(Game.deserialize(serialized).lastTimerStoppedAt).is.undefined;
   });
 });
 

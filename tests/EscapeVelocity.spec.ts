@@ -18,7 +18,6 @@ describe('EscapeVelocity', () => {
         penaltyPeriodMinutes: 4,
       },
     });
-    (Timer as any).lastStoppedAt = 0;
     clock = new FakeClock();
     timer = Timer.newInstance(clock);
     player.timer = timer;
@@ -26,7 +25,7 @@ describe('EscapeVelocity', () => {
   });
 
   it('sanity test', () => {
-    timer.start();
+    timer.start(undefined);
 
     expect(player.getVictoryPoints().total).eq(14);
 
@@ -47,7 +46,7 @@ describe('EscapeVelocity', () => {
   });
 
   it('too many points', () => {
-    timer.start();
+    timer.start(undefined);
 
     expect(player.getVictoryPoints().total).eq(14);
 
@@ -89,7 +88,7 @@ describe('EscapeVelocity', () => {
   });
 
   it('bonus seconds', () => {
-    timer.start();
+    timer.start(undefined);
 
     expect(player.getVictoryPoints().total).eq(14);
 

@@ -47,6 +47,7 @@ export type SerializedGame = {
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
+    lastTimerStoppedAt: number | undefined;
     milestones: Array<MilestoneName>;
     moonData: SerializedMoonData | undefined;
     name: string;

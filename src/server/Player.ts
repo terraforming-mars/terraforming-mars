@@ -1691,7 +1691,7 @@ export class Player implements IPlayer {
     this.requestId = undefined;
     try {
       if (!waitingFor.optional) {
-        this.timer.stop();
+        this.game.lastTimerStoppedAt = this.timer.stop();
       }
       this.defer(waitingFor.process(input, this));
       waitingForCb();
@@ -1717,7 +1717,8 @@ export class Player implements IPlayer {
       }
     }
     if (!input.optional) {
-      this.timer.start();
+      // Start when the game's previous timer stopped. This way undoing actions does not undo the timers.
+      this.timer.start(this.game.lastTimerStoppedAt);
     }
     this.waitingFor = input;
     this.waitingForCb = cb;
@@ -1756,7 +1757,7 @@ export class Player implements IPlayer {
     this.waitingForCb = undefined;
     this.requestId = undefined;
     if (waitingFor !== undefined && !waitingFor.optional) {
-      this.timer.stop();
+      this.game.lastTimerStoppedAt = this.timer.stop();
     }
   }
 

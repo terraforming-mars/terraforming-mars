@@ -109,6 +109,7 @@ export class Game implements IGame, Logger {
 
   // Game-level data
   public lastSaveId: number = 0;
+  public lastTimerStoppedAt: number | undefined = undefined;
   private clonedGamedId: string | undefined;
   public rng: SeededRandom;
   public spectatorId: SpectatorId;
@@ -508,6 +509,7 @@ export class Game implements IGame, Logger {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
+      lastTimerStoppedAt: this.lastTimerStoppedAt,
       milestones: this.milestones.map(toName),
       moonData: MoonData.serialize(this.moonData),
       name: this.name,
@@ -1788,6 +1790,9 @@ export class Game implements IGame, Logger {
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
 
     game.lastSaveId = d.lastSaveId;
+    // Older saved games only have each timer's copy of the server-wide stop time.
+    const legacyLastStoppedAt = Math.max(0, ...d.players.map((p) => p.timer.lastStoppedAt ?? 0));
+    game.lastTimerStoppedAt = d.lastTimerStoppedAt ?? (legacyLastStoppedAt > 0 ? legacyLastStoppedAt : undefined);
     game.clonedGamedId = d.clonedGamedId;
     game.gameAge = d.gameAge;
     game.gameLog = d.gameLog;

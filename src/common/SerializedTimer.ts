@@ -8,5 +8,6 @@ export type SerializedTimer = {
   enabled: boolean;
   // TODO(kberg): Remove by 2027-01-01
   afterFirstAction?: boolean;
-  lastStoppedAt: number;
+  // TODO(kberg): Remove by 2027-01-01
+  lastStoppedAt?: number;
 }

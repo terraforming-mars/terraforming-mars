@@ -45,9 +45,10 @@ function playerWithRunningTimer(): [Player, FakeClock] {
   Game.newInstance('gameid', [player], player, 'spectatorid');
   player.clearWaitingFor();
   const clock = new FakeClock();
-  (Timer as any).lastStoppedAt = 0;
   player.timer = Timer.newInstance(clock);
   player.timer.enable();
+  // clearWaitingFor stopped the real-clock timer.
+  player.game.lastTimerStoppedAt = undefined;
 
   player.setWaitingFor(new SelectOption('First input'));
   clock.millis = 1_000;
@@ -316,7 +317,6 @@ describe('Player', () => {
         startedAt: 0,
         running: false,
         enabled: false,
-        lastStoppedAt: 0,
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
       trThisGeneration: 1,

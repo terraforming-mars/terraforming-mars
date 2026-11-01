@@ -144,7 +144,7 @@ describe('MarsBotTilePlacer', () => {
     // tile may go on, so the tiebreakers alone would choose one of them.
     const noctisCity = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
     const bordering = game.board.getAdjacentSpaces(noctisCity);
-    for (const id of ['30', '39']) {
+    for (const id of ['30', '39'] as const) {
       expect(bordering.map(toID), id).to.include(id);
       expect(game.board.getSpaceOrThrow(id).bonus, id).has.length(2);
     }

@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Tradesman extends BaseMilestone {
+  public readonly automaDescription = 'Energy, Earth and Venus tracks ≥ 2';
   constructor() {
     super(
       'Tradesman',

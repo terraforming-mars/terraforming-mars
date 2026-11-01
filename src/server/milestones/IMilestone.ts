@@ -1,4 +1,5 @@
 import {MilestoneName} from '../../common/ma/MilestoneName';
+import {BoardName} from '../../common/boards/BoardName';
 import {IPlayer} from '../IPlayer';
 import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 
@@ -7,6 +8,17 @@ export interface IMilestone {
   description: string;
   canClaim(player: IPlayer): boolean;
   getScore(player: IPlayer): number;
+  /**
+   * How MarsBot meets the criteria, in terms of its board's tracks.
+   *
+   * Only for milestones MarsBot plays against.
+   */
+  automaDescription?: string;
+  /**
+   * Where a game that plays a map's own milestone set words the rule differently from
+   * `automaDescription`, the wording for that map.
+   */
+  automaMapDescriptions?: Partial<Record<BoardName, string>>;
   /**
    * Whether MarsBot meets the criteria.
    *

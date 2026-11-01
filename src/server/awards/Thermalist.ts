@@ -6,6 +6,7 @@ import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 export class Thermalist implements IAward {
   public readonly name = 'Thermalist';
   public readonly description = 'Have the most heat';
+  public readonly automaDescription = 'Energy track + 5';
   public getScore(player: IPlayer): number {
     if (player.game.isDoneWithFinalProduction()) {
       return player.heat;

@@ -1,7 +1,12 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
+import {BoardName} from '../../../common/boards/BoardName';
 
 export class Engineer extends BaseMilestone {
+  public readonly automaDescription = 'Energy + Earth tracks ≥ 10';
+  public readonly automaMapDescriptions = {
+    [BoardName.VASTITAS_BOREALIS_NOVA]: 'Earth/Jovian + Energy/City tracks ≥ 10',
+  };
   constructor() {
     super(
       'Engineer',

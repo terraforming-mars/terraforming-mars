@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {BaseMilestone} from '../IMilestone';
 
 export class Spacefarer4 extends BaseMilestone {
+  public readonly automaDescription = 'Space track ≥ 4';
   constructor() {
     super(
       // TODO(kberg): After completing the T. Spacefarer migration, rename this to Spacefarer.

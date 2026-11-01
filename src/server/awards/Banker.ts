@@ -6,6 +6,7 @@ import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 export class Banker implements IAward {
   public readonly name = 'Banker';
   public readonly description = 'Have the most M€ production';
+  public readonly automaDescription = 'Building + Event track';
   public getScore(player: IPlayer): number {
     return player.production.megacredits;
   }

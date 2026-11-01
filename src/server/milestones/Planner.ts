@@ -4,6 +4,7 @@ import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 import {Tag} from '@/common/cards/Tag';
 
 export class Planner extends BaseMilestone {
+  public readonly automaDescription = 'All tracks ≥ 4 (except Venus)';
   constructor() {
     super(
       'Planner',

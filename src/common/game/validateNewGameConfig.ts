@@ -29,7 +29,6 @@ export type ValidationErrors = {
   prelude2WithoutPrelude: boolean;
   deltaProjectWithoutPrelude: boolean;
   notEnoughCorporations: number;
-  modularMAInDevelopment: boolean;
   /** Why customMA is invalid, or empty when it's valid. */
   invalidCustomMA: string;
 };
@@ -102,10 +101,6 @@ export const validationDetails: Record<keyof ValidationErrors, {blocking: boolea
     blocking: true,
     message: (errors) => mustSelectAtLeast('Must select at least ${0} corporations', errors.notEnoughCorporations),
   },
-  modularMAInDevelopment: {
-    blocking: false,
-    message: 'The Official Random Milestones and Awards are still in active development. Please don\'t report anything unless it breaks the game. These are always fully random.',
-  },
   invalidCustomMA: {
     blocking: true,
     message: (errors) => ({
@@ -138,7 +133,6 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     prelude2WithoutPrelude: false,
     deltaProjectWithoutPrelude: false,
     notEnoughCorporations: 0,
-    modularMAInDevelopment: false,
     invalidCustomMA: '',
   };
 
@@ -183,10 +177,6 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
 
   if (config.expansions.deltaProject && !config.expansions.prelude) {
     errors.deltaProjectWithoutPrelude = true;
-  }
-
-  if (config.modularMA) {
-    errors.modularMAInDevelopment = true;
   }
 
   function isMissingExpansion(name: CardName): boolean {

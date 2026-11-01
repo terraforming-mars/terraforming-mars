@@ -143,10 +143,15 @@ describe('MarsBotTilePlacer', () => {
     // 30 and 39 border Noctis City and cover two bonus icons each, more than any space the
     // tile may go on, so the tiebreakers alone would choose one of them.
     const noctisCity = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
+    const bordering = game.board.getAdjacentSpaces(noctisCity);
+    for (const id of ['30', '39']) {
+      expect(bordering.map(toID), id).to.include(id);
+      expect(game.board.getSpaceOrThrow(id).bonus, id).has.length(2);
+    }
 
     const space = tilePlacer.findNeuralInstanceSpace()!;
 
-    expect(game.board.getAdjacentSpaces(noctisCity).map(toID)).to.not.include(space.id);
+    expect(bordering.map(toID)).to.not.include(space.id);
   });
 
   it('breaks ties on ocean adjacency first, then on bonus icons', () => {
@@ -184,7 +189,13 @@ describe('MarsBotTilePlacer', () => {
       }
     }
 
-    for (const run of [{cost: 1, expected: '04'}, {cost: 2, expected: '28'}, {cost: 0, expected: '28'}]) {
+    const runs = [
+      {cost: 1, expected: '04'},
+      {cost: 2, expected: '28'},
+      {cost: 3, expected: '04'},
+      {cost: 0, expected: '28'},
+    ];
+    for (const run of runs) {
       game.projectDeck.drawPile.push(fakeCard({cost: run.cost}));
 
       expect(tilePlacer.findOceanSpace()?.id, `cost ${run.cost}`).eq(run.expected);

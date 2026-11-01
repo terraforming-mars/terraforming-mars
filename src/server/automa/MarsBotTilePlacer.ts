@@ -36,8 +36,10 @@ export class MarsBotTilePlacer {
       const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
       const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
       const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
-      // The greatest net gain of points: MarsBot's adjacent cities minus the player's (njshaw2,
-      // BGG 3350125 and 3411375)
+      // MarsBot's adjacent cities minus the human's. The greenery gives 1 VP to the owner of each
+      // adjacent city, so the highest score is the space with the best net VP for MarsBot.
+      // https://boardgamegeek.com/thread/3350125/article/44711805#44711805 (njshaw2)
+      // https://boardgamegeek.com/thread/3411375/article/45234897#45234897 (njshaw2, ties are random)
       return marsBotCities.length - humanCities.length;
     });
   }
@@ -45,11 +47,11 @@ export class MarsBotTilePlacer {
   /**
    * Find the best space for MarsBot to place a city. Returns undefined if none available.
    *
-   * `where` limits the choice to the legal city spaces it accepts.
+   * @param filter limits the choice to the legal city spaces it accepts.
    */
-  public findCitySpace(where: (space: Space) => boolean = () => true): Space | undefined {
+  public findCitySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(where);
+    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -65,7 +67,8 @@ export class MarsBotTilePlacer {
    * This is what the Expedited Construction bonus card (B05) asks for.
    *
    * Among those spaces the usual city rule picks, so 2 greeneries beat 3 oceans. The card's
-   * wording wins over the rulebook's "most tiles of these types" (TDaver, BGG 3350125).
+   * wording wins over the rulebook's "most tiles of these types". The card's author (TDaver):
+   * https://boardgamegeek.com/thread/3350125/article/44720677#44720677
    */
   public findExpeditedConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
@@ -153,14 +156,15 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Break a tie by flipping a project card and counting through spaces: cost 1 is the first space,
-   * and a cost of 0 counts back to the last.
+   * Break a tie by flipping a project card and counting its cost through the tied spaces. Counting
+   * starts at 1 on the first space and goes back to the first after passing the last. A cost of 0
+   * picks the last space.
    */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
     const card = this.game.projectDeck.drawOrThrow(this.game);
     this.game.projectDeck.discard(card);
-    const n = spaces.length;
-    return spaces[((card.cost - 1) % n + n) % n];
+    const index = card.cost === 0 ? spaces.length - 1 : (card.cost - 1) % spaces.length;
+    return spaces[index];
   }
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */

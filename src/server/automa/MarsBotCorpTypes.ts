@@ -30,9 +30,6 @@ export type MarsBotTagTrackCube = {
   cubeType: CubeType;
 };
 
-/** Corp state key, set to 1 once the corp's `actionDeckBonusCard` removed itself from the game. */
-export const ACTION_DECK_BONUS_CARD_REMOVED = 'actionDeckBonusCardRemoved';
-
 export type MarsBotCorpEffect = {
   /**
    * The bot's track marker reached one of this corp's cubes.

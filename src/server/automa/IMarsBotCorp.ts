@@ -41,3 +41,6 @@ export type IMarsBotCorp = {
   /** M€ the bot gains per ocean next to a tile it places, when not the usual 2 (Lakefront). */
   readonly oceanAdjacencyMc?: number;
 };
+
+/** Corp state key, set to 1 once the corp's `actionDeckBonusCard` removed itself from the game. */
+export const ACTION_DECK_BONUS_CARD_REMOVED = 'actionDeckBonusCardRemoved';

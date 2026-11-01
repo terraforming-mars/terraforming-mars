@@ -96,7 +96,6 @@ const NO_ERRORS: ValidationErrors = {
   prelude2WithoutPrelude: false,
   deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
-  modularMAInDevelopment: false,
   invalidCustomMA: '',
 };
 
@@ -200,11 +199,6 @@ describe('validateNewGameConfig', () => {
     expect(validate({expansions: {...expansions, deltaProject: true}}).deltaProjectWithoutPrelude).is.true;
     expect(validate({expansions: {...expansions, deltaProject: true, prelude: true}}).deltaProjectWithoutPrelude).is.false;
     expect(validate({expansions: {...expansions, prelude: true}}).deltaProjectWithoutPrelude).is.false;
-  });
-
-  it('warns that the official random milestones and awards are in development', () => {
-    expect(validate({modularMA: true}).modularMAInDevelopment).is.true;
-    expect(validate({modularMA: false}).modularMAInDevelopment).is.false;
   });
 
   it('not enough corporations', () => {

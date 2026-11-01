@@ -8,7 +8,7 @@ export interface IAward {
     description: string;
     getScore(player: IPlayer): number;
     /**
-     * How MarsBot scores the award, in terms of its board's tracks.
+     * How MarsBot scores the award.
      *
      * Only for awards MarsBot plays against.
      */

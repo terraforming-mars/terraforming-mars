@@ -9,7 +9,7 @@ export interface IMilestone {
   canClaim(player: IPlayer): boolean;
   getScore(player: IPlayer): number;
   /**
-   * How MarsBot meets the criteria, in terms of its board's tracks.
+   * How MarsBot meets the criteria.
    *
    * Only for milestones MarsBot plays against.
    */

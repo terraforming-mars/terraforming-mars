@@ -2,7 +2,7 @@ import {IProjectCard} from '../../cards/IProjectCard';
 import {MarsBotDraftPriority} from '../MarsBotCorpTypes';
 import {Tag} from '../../../common/cards/Tag';
 import {MarsBotBoard} from '../MarsBotBoard';
-import {hasIntersection} from '@/common/utils/utils';
+import {hasIntersection, intersection} from '@/common/utils/utils';
 import {cardTagsIncludingEvent} from '../MarsBotTags';
 
 /** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
@@ -128,7 +128,7 @@ export class MarsBotDraftResolver {
 
   private scoreByTrack(card: IProjectCard): ReadonlyArray<number> {
     const trackTags = this.leastAdvancedTrackTags();
-    return [cardTagsIncludingEvent(card).filter((tag) => trackTags.includes(tag)).length];
+    return [intersection(cardTagsIncludingEvent(card), trackTags).length];
   }
 
   private leastAdvancedTrackTags(): ReadonlyArray<Tag> {

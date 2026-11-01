@@ -4,14 +4,13 @@ import http from 'http';
 import fs from 'fs';
 import * as responses from '@/server/server/responses';
 
-import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {comparing, reversed} from '../../common/utils/Ordering';
+import {MA_EXPANSIONS, MAScenario, drawMAs, noExpansions} from './ma_simulation';
 
 function processRequest(req: Request, res: Response): void {
   try {
@@ -49,49 +48,36 @@ const server = http.createServer(processRequest);
 console.log('Starting server on port ' + (process.env.PORT || 8081));
 server.listen(process.env.PORT || 8081);
 
+// Draws milestones and awards `runs` times and returns how often each was picked, as CSV. Draws that
+// break (the selector gives up) are counted as "ERROR".
 function calc(params: URLSearchParams): string {
   const runs = Number(params.get('runs') || 100);
-  const options = simpleGameOptions();
+  const flag = (name: string) => params.get(name) === 'true';
 
-  if (params.get('venus') === 'true') {
-    options.venusNextExtension = true;
+  const expansions = noExpansions();
+  for (const expansion of MA_EXPANSIONS) {
+    expansions[expansion] = flag(expansion);
   }
+  const board = params.get('board') as BoardName | null;
+  const scenario: MAScenario = {
+    board: board !== null && Object.values(BoardName).includes(board) ? board : BoardName.THARSIS,
+    randomMA: randomMAType(params.get('type')),
+    modularMA: flag('modular'),
+    includeFanMA: flag('fan-maps'),
+    expansions,
+  };
 
-  if (params.get('ares') === 'true') {
-    options.aresExtension = true;
-  }
-
-  if (params.get('moon') === 'true') {
-    options.moonExpansion = true;
-  }
-  if (params.get('fan-maps') === 'true') {
-    options.includeFanMA = true;
-  }
-
-  const type = params.get('type');
-  switch (type) {
-  case 'NONE':
-    options.randomMA = RandomMAOptionType.NONE;
-    break;
-  case 'LIMITED':
-    options.randomMA = RandomMAOptionType.LIMITED;
-    break;
-  case 'FULL':
-    options.randomMA = RandomMAOptionType.UNLIMITED;
-    break;
-  }
   const results = new MultiSet<string>();
   for (let nth = 1; nth <= runs; nth++) {
-    if (nth % 100 === 0) {
+    if (nth % 1000 === 0) {
       console.log(`#${nth}`);
     }
-    try {
-      const mas = chooseMilestonesAndAwards(options);
-      for (const ma of (mas.milestones as Array<string>).concat(mas.awards)) {
+    const drawn = drawMAs(scenario);
+    if (drawn.ok) {
+      for (const ma of [...drawn.milestones, ...drawn.awards]) {
         results.add(ma);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
       results.add('ERROR');
     }
   }
@@ -101,23 +87,13 @@ function calc(params: URLSearchParams): string {
   return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }
 
-function simpleGameOptions(): GameOptions {
-  return {
-    ...DEFAULT_GAME_OPTIONS,
-    aresHazards: false,
-    corporateEra: false,
-    initialDraftVariant: false,
-    preludeDraftVariant: false,
-    showTimers: false,
-    startingCorporations: 0,
-
-    // The options that can change, should be parameters.
-    boardName: BoardName.THARSIS,
-    venusNextExtension: false,
-    aresExtension: false,
-    moonExpansion: false,
-    pathfindersExpansion: false,
-    includeFanMA: false,
-    randomMA: RandomMAOptionType.NONE,
-  };
+function randomMAType(type: string | null): RandomMAOptionType {
+  switch (type) {
+  case 'NONE':
+    return RandomMAOptionType.NONE;
+  case 'FULL':
+    return RandomMAOptionType.UNLIMITED;
+  default:
+    return RandomMAOptionType.LIMITED;
+  }
 }

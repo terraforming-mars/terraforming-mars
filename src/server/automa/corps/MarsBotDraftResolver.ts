@@ -3,7 +3,7 @@ import {MarsBotDraftPriority} from '../MarsBotCorpTypes';
 import {Tag} from '../../../common/cards/Tag';
 import {MarsBotBoard} from '../MarsBotBoard';
 import {hasIntersection} from '@/common/utils/utils';
-import {marsBotCardTags} from '../MarsBotTags';
+import {cardTagsIncludingEvent} from '../MarsBotTags';
 
 /** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
 export type Shuffler = <T>(items: Array<T>) => void;
@@ -50,8 +50,12 @@ export class MarsBotDraftResolver {
 
     const saved = this.savedFromDiscard(cards, priority);
     let discardable = cards.findIndex((card) => !saved.has(card));
-    if (discardable === -1 && (priority.type === 'tags' || priority.type === 'leastAdvancedTrack')) {
-      discardable = this.fewestMatches(cards, priority);
+    if (discardable === -1) {
+      if (priority.type === 'tags') {
+        discardable = fewestMatches(cards, (card) => this.scoreByTags(card, priority.tags));
+      } else if (priority.type === 'leastAdvancedTrack') {
+        discardable = fewestMatches(cards, (card) => this.scoreByTrack(card));
+      }
     }
     if (discardable === -1) {
       return {kept: cards, discarded: []};
@@ -124,23 +128,7 @@ export class MarsBotDraftResolver {
 
   private scoreByTrack(card: IProjectCard): ReadonlyArray<number> {
     const trackTags = this.leastAdvancedTrackTags();
-    return [marsBotCardTags(card).filter((tag) => trackTags.includes(tag)).length];
-  }
-
-  /** Returns the index of the first card, in `cards`' order, that scores lowest on a tag priority, or -1 with no cards. */
-  private fewestMatches(
-    cards: ReadonlyArray<IProjectCard>,
-    priority: Extract<MarsBotDraftPriority, {type: 'tags' | 'leastAdvancedTrack'}>,
-  ): number {
-    const score = (card: IProjectCard) =>
-      priority.type === 'tags' ? this.scoreByTags(card, priority.tags) : this.scoreByTrack(card);
-    let worst = cards.length === 0 ? -1 : 0;
-    for (let i = 1; i < cards.length; i++) {
-      if (compareScores(score(cards[i]), score(cards[worst])) < 0) {
-        worst = i;
-      }
-    }
-    return worst;
+    return [cardTagsIncludingEvent(card).filter((tag) => trackTags.includes(tag)).length];
   }
 
   private leastAdvancedTrackTags(): ReadonlyArray<Tag> {
@@ -157,17 +145,17 @@ export class MarsBotDraftResolver {
    * printed tags, so a wild tag matches nothing.
    */
   private scoreByTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): ReadonlyArray<number> {
-    const tags = marsBotCardTags(card);
+    const tags = cardTagsIncludingEvent(card);
     return priorityTags.map((priorityTag) => tags.filter((tag) => tag === priorityTag).length);
   }
 
   private hasAnyTag(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): boolean {
-    return hasIntersection(marsBotCardTags(card), priorityTags);
+    return hasIntersection(cardTagsIncludingEvent(card), priorityTags);
   }
 
   /** Counts every tag on the card, wild tags included. */
   private countTags(card: IProjectCard): number {
-    return marsBotCardTags(card).length;
+    return cardTagsIncludingEvent(card).length;
   }
 }
 
@@ -175,6 +163,17 @@ export class MarsBotDraftResolver {
 function topScoring<T>(items: ReadonlyArray<T>, scorer: (item: T) => number): ReadonlySet<T> {
   const best = Math.max(...items.map(scorer));
   return new Set(items.filter((item) => scorer(item) === best));
+}
+
+/** Returns the index of the first item, in `items`' order, that scores lowest, or -1 with no items. */
+function fewestMatches<T>(items: ReadonlyArray<T>, scorer: (item: T) => ReadonlyArray<number>): number {
+  let worst = items.length === 0 ? -1 : 0;
+  for (let i = 1; i < items.length; i++) {
+    if (compareScores(scorer(items[i]), scorer(items[worst])) < 0) {
+      worst = i;
+    }
+  }
+  return worst;
 }
 
 /** Compares two scores entry by entry. Positive when `a` outranks `b`, negative when it loses. */

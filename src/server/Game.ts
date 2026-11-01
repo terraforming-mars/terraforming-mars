@@ -106,7 +106,7 @@ export class Game implements IGame, Logger {
   public readonly gameOptions: Readonly<GameOptions>;
   public readonly players: ReadonlyArray<IPlayer>;
   public readonly marsBotPlayer: IPlayer | undefined;
-  public readonly allPlayers: ReadonlyArray<IPlayer>;
+  public readonly playersAndAutoma: ReadonlyArray<IPlayer>;
   // The API makes this readonly.
   public playersInGenerationOrder: ReadonlyArray<IPlayer> = [];
 
@@ -253,7 +253,7 @@ export class Game implements IGame, Logger {
       }
     });
     this.marsBotPlayer = marsBotPlayer;
-    this.allPlayers = marsBotPlayer === undefined ? players : [...players, marsBotPlayer];
+    this.playersAndAutoma = marsBotPlayer === undefined ? players : [...players, marsBotPlayer];
     this.marsBotPlayer?.setup(this);
 
     this.tags = tags;
@@ -1752,7 +1752,7 @@ export class Game implements IGame, Logger {
     });
 
     game.milestones = milestones;
-    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, game.allPlayers, milestones);
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, game.playersAndAutoma, milestones);
 
     const awards: Array<IAward> = [];
     d.awards.forEach((awardName) => {
@@ -1764,7 +1764,7 @@ export class Game implements IGame, Logger {
     });
 
     game.awards = awards;
-    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.allPlayers, awards);
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.playersAndAutoma, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;
@@ -1779,7 +1779,7 @@ export class Game implements IGame, Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, game.allPlayers);
+      game.turmoil = Turmoil.deserialize(d.turmoil, game.playersAndAutoma);
     }
 
     // Reload moon elements if needed

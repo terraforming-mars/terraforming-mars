@@ -72,7 +72,7 @@ export interface IGame extends Logger {
    *
    * For anything MarsBot can own, like tiles, delegates and milestones.
    */
-  readonly allPlayers: ReadonlyArray<IPlayer>;
+  readonly playersAndAutoma: ReadonlyArray<IPlayer>;
   readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
 
   /**

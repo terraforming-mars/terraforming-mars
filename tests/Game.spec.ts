@@ -847,7 +847,7 @@ describe('Game', () => {
       'inputsThisRound',
       'inTurmoil',
       'marsBotPlayer',
-      'allPlayers',
+      'playersAndAutoma',
       'playersInGenerationOrder',
       'monsInsuranceOwner',
       'resettable',

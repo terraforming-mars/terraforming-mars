@@ -1,6 +1,6 @@
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {IPlayer} from '../IPlayer';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 
 export interface IMilestone {
   name: MilestoneName;

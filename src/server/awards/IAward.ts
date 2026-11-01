@@ -1,6 +1,6 @@
 import {AwardName} from '../../common/ma/AwardName';
 import {IPlayer} from '../IPlayer';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 
 export interface IAward {
     name: AwardName;

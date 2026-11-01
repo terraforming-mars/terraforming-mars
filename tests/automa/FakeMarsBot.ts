@@ -1,6 +1,6 @@
 import {Tag} from '@/common/cards/Tag';
 import {TrackDefinition} from '@/common/automa/AutomaTypes';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 

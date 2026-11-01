@@ -34,7 +34,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.5.0",
     "@types/pg": "^7.14.7",
-    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.60.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.0.0",

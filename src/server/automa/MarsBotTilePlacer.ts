@@ -7,6 +7,8 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardName} from '../../common/boards/BoardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
+import {HELLAS_BONUS_OCEAN_COST, TERRA_CIMMERIA_COLONY_COST, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST} from '../../common/constants';
+import {IMarsBot} from './MarsBotCorpTypes';
 import {Comparator, comparing, compound, reversed} from '../../common/utils/Ordering';
 
 /**
@@ -68,6 +70,19 @@ const AWARD_EXTRA_ICON: Partial<Record<AwardName, ExtraIcon>> = {
 };
 
 /**
+ * The placement bonuses that cost a player M€, with that cost. MarsBot doesn't get the bonus the
+ * usual way, see `resolveSpecialHex` (rulebook C, p.11).
+ */
+const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
+  [SpaceBonus.OCEAN, HELLAS_BONUS_OCEAN_COST],
+  [SpaceBonus.TEMPERATURE_4MC, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST],
+  [SpaceBonus.COLONY, TERRA_CIMMERIA_COLONY_COST],
+]);
+
+/** Higher than the other hexes with two icons, lower than the ones with three. */
+const SPECIAL_HEX_ICONS = 2.5;
+
+/**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
  *
  * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
@@ -86,6 +101,8 @@ export class MarsBotTilePlacer {
     private readonly game: IGame,
     private readonly marsBot: IPlayer,
     private readonly humanPlayer: IPlayer,
+    /** The bot that pays for the special hexes and gets their effects. Without one they are empty hexes. */
+    private readonly bot?: IMarsBot,
   ) {}
 
   /**
@@ -291,7 +308,11 @@ export class MarsBotTilePlacer {
 
   /** The reward icons MarsBot tiebreaks on: those on the space plus the extra ones the map, milestones and awards add. */
   private tiebreakIcons(space: Space, extraIcons: ReadonlySet<ExtraIcon>): number {
+    const special = this.specialBonus(space);
     let icons = space.bonus.filter((bonus) => this.countsAsIcon(bonus)).length;
+    if (special !== undefined) {
+      icons = this.canGetSpecialBonus(special) ? SPECIAL_HEX_ICONS : 0;
+    }
     for (const extra of extraIcons) {
       if (EXTRA_ICON_SPACES[extra](this.game.board, space)) {
         icons++;
@@ -310,6 +331,84 @@ export class MarsBotTilePlacer {
   }
 
   /**
+   * The icons on `space` that give MarsBot 1 M€ each. The hexes that cost M€ give nothing here, and
+   * the Turmoil delegate gives nothing without Turmoil.
+   */
+  private placementIcons(space: Space): number {
+    return space.bonus.filter((bonus) => this.countsAsIcon(bonus) && !SPECIAL_HEX_COSTS.has(bonus)).length;
+  }
+
+  private specialBonus(space: Space): SpaceBonus | undefined {
+    return [...SPECIAL_HEX_COSTS.keys()].find((bonus) => space.bonus.includes(bonus));
+  }
+
+  private specialHexCost(bonus: SpaceBonus): number {
+    return SPECIAL_HEX_COSTS.get(bonus) ?? 0;
+  }
+
+  /**
+   * True when MarsBot has the M€ for `bonus` and there is still something to get for it. Never once
+   * the game is decided: the final greeneries don't trigger the hex.
+   */
+  private canGetSpecialBonus(bonus: SpaceBonus): boolean {
+    const game = this.game;
+    if (game.isDoneWithFinalProduction()) {
+      return false;
+    }
+    const bot = this.bot;
+    // The M€ supply only: megaCredits also counts the Luna storage area
+    if (bot === undefined || bot.megacredits < this.specialHexCost(bonus)) {
+      return false;
+    }
+    switch (bonus) {
+    case SpaceBonus.OCEAN:
+      return game.canAddOcean() && game.board.getAvailableSpacesForOcean(this.marsBot).length > 0;
+    case SpaceBonus.TEMPERATURE_4MC:
+      return game.getTemperature() < game.max.temperature;
+    case SpaceBonus.COLONY:
+      return bot.canPlaceColony();
+    default:
+      return false;
+    }
+  }
+
+  /**
+   * Called once MarsBot has placed a tile on `space`. On the hexes that cost M€, MarsBot pays for
+   * the bonus and gets it when it can. Otherwise it neither pays nor gets anything, which includes
+   * a bonus its corporation swallows (Pristar) or one that finds no colony to build.
+   */
+  public resolveSpecialHex(space: Space): void {
+    const bonus = this.specialBonus(space);
+    const bot = this.bot;
+    if (bonus === undefined || bot === undefined || !this.canGetSpecialBonus(bonus)) {
+      return;
+    }
+    const game = this.game;
+    let resolved = false;
+    switch (bonus) {
+    case SpaceBonus.OCEAN: {
+      const oceans = game.board.getOceanSpaces().length;
+      bot.placeOcean();
+      resolved = game.board.getOceanSpaces().length > oceans;
+      break;
+    }
+    case SpaceBonus.TEMPERATURE_4MC: {
+      const temperature = game.getTemperature();
+      bot.raiseTemperature(1);
+      resolved = game.getTemperature() > temperature;
+      break;
+    }
+    case SpaceBonus.COLONY:
+      // The way Expedited Construction picks and builds one.
+      resolved = bot.maybePlaceRandomColony();
+      break;
+    }
+    if (resolved) {
+      bot.megacredits -= this.specialHexCost(bonus);
+    }
+  }
+
+  /**
    * Break a tie by flipping a project card and counting its cost through the tied spaces. Counting
    * starts at 1 on the first space and goes back to the first after passing the last. A cost of 0
    * picks the last space.
@@ -323,7 +422,7 @@ export class MarsBotTilePlacer {
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */
   public getPlacementBonusMC(space: Space): number {
-    return space.bonus.length; // 1 MC per icon
+    return this.placementIcons(space);
   }
 
   /** Calculate MC MarsBot gains from ocean adjacency (2 MC per adjacent ocean). */

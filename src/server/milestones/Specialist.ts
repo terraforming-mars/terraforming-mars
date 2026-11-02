@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Specialist extends BaseMilestone {
+  public readonly automaDescription = 'Any track ≥ 10';
   constructor() {
     super(
       'Specialist',

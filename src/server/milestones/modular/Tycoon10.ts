@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 
 export class Tycoon10 extends BaseMilestone {
+  public readonly automaDescription = '10+ blue/green cards in played pile';
   constructor() {
     super(
       'Tycoon10',

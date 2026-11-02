@@ -2,6 +2,7 @@ import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 
 export class Trader extends BaseMilestone {
+  public readonly automaDescription = 'Bio, Earth and Venus tracks ≥ 2';
   constructor() {
     super(
       'Trader',

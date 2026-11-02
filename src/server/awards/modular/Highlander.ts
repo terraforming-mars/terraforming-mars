@@ -5,6 +5,7 @@ import {Board} from '../../boards/Board';
 export class Highlander implements IAward {
   public readonly name = 'Highlander';
   public readonly description = 'Own the most tiles that are NOT adjacent to ocean tiles';
+  public readonly automaDescription = 'Tiles not next to ocean (unchanged)';
   public getScore(player: IPlayer): number {
     const board = player.game.board;
 

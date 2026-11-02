@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 
 export class Hoverlord extends BaseMilestone {
+  public readonly automaDescription = '7+ floaters on its Venus board';
   constructor() {
     super(
       'Hoverlord',

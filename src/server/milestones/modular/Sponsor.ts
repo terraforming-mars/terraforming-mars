@@ -4,6 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 
 
 export class Sponsor extends BaseMilestone {
+  public readonly automaDescription = '3+ cards costing 20+ M€ in played pile (including events)';
   constructor() {
     super(
       'Sponsor',

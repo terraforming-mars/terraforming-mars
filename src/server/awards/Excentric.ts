@@ -4,6 +4,7 @@ import {IPlayer} from '../IPlayer';
 export class Excentric implements IAward {
   public readonly name = 'Excentric';
   public readonly description = 'Have the most resources on cards in play';
+  public readonly automaDescription = 'Every 5 M€ = 1 resource';
   public getScore(player: IPlayer): number {
     let score = 0;
 

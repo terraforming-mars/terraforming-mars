@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {CardType} from '../../common/cards/CardType';
 
 export class Tactician extends BaseMilestone {
+  public readonly automaDescription = '35+ M€';
   constructor() {
     super(
       'Tactician',

@@ -476,6 +476,31 @@ describe('MarsBotTilePlacer', () => {
     }
   });
 
+  it('offers MarsBot the hexes that cost M€ even when it cannot pay, but not the human', () => {
+    const runs: Array<{rule: string, options: Partial<GameOptions>, hex: SpaceId}> = [
+      {rule: 'South Pole', options: {boardName: BoardName.HELLAS}, hex: '61'},
+      {rule: 'North Pole', options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA}, hex: '33'},
+      {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true}, hex: '16'},
+    ];
+
+    for (const run of runs) {
+      const [soloGame, soloHuman] = testGame(1, {...run.options, automa: true});
+      const bot = soloGame.marsBotPlayer!;
+      soloHuman.megaCredits = 0;
+      bot.megaCredits = 0;
+      // No colony tile has room, so nobody could settle for MSL Curiosity.
+      for (const colony of soloGame.colonies) {
+        colony.isActive = false;
+      }
+
+      const botSpaces = soloGame.board.getAvailableSpacesOnLand(bot).map((space) => space.id);
+      const humanSpaces = soloGame.board.getAvailableSpacesOnLand(soloHuman).map((space) => space.id);
+
+      expect(botSpaces, run.rule).includes(run.hex);
+      expect(humanSpaces, run.rule).does.not.include(run.hex);
+    }
+  });
+
   it('tiebreaks on a hex that costs M€ by what MarsBot can get from it', () => {
     const runs: Array<Run> = [
       {

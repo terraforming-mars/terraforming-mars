@@ -152,6 +152,11 @@ export abstract class Board {
 
   private computeAdditionalCosts(player: IPlayer, space: Space, multiplier: number | undefined, subjectToHazardAdjacency: boolean): SpaceCosts {
     const costs: SpaceCosts = this.spaceCosts(space);
+    if (player === player.game.marsBotPlayer) {
+      // MarsBot never collects placement bonuses, so it never pays what they cost either.
+      costs.megacredits = 0;
+      costs.tr = {};
+    }
     if (multiplier !== undefined) {
       costs.megacredits *= multiplier;
       for (const key of TR_SOURCES) {

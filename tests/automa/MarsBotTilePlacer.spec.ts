@@ -346,12 +346,12 @@ describe('MarsBotTilePlacer', () => {
         loser: '24',
       },
       {
-        // The ocean is on 16. 24 is next to it, 18 is not. Both are inland and have one icon.
-        rule: 'Vastitas Borealis: ocean adjacency decides when neither space is on the edge',
+        // The ocean is on 15. 08 is next to it, 37 is not. Both are on the edge and have two icons.
+        rule: 'Vastitas Borealis: ocean adjacency breaks a tie between edge spaces',
         options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-        oceans: ['16'],
-        winner: '24',
-        loser: '18',
+        oceans: ['15'],
+        winner: '08',
+        loser: '37',
       },
       {
         // 03 has one icon. 28 has only the delegate icon. Both are on the edge.
@@ -380,20 +380,6 @@ describe('MarsBotTilePlacer', () => {
     for (const run of runs) {
       expectWinner(run);
     }
-  });
-
-  it('does not tell two edge spaces apart by their oceans on Vastitas Borealis', () => {
-    [game, human, marsBot] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA});
-    tilePlacer = new MarsBotTilePlacer(game, marsBot, human);
-    game.milestones = [];
-    game.awards = [];
-    // 08 is next to the ocean and 37 is not. Both are on the edge and cover two reward icons.
-    game.simpleAddTile(human, game.board.getSpaceOrThrow('15'), {tileType: TileType.OCEAN});
-    game.projectDeck.discardPile.length = 0;
-
-    tilePlacer.findCitySpace((s) => s.id === '08' || s.id === '37');
-
-    expect(game.projectDeck.discardPile).has.length(1);
   });
 
   it('counts what the milestones and awards in play add as one more reward icon', () => {
@@ -429,6 +415,15 @@ describe('MarsBotTilePlacer', () => {
         oceans: ['24'],
         winner: '16',
         loser: '39',
+      },
+      {
+        // The ocean is on 16. 03 is on the edge with no ocean next to it, 24 is inland and next to the ocean. Both have one icon.
+        rule: 'Vastitas Borealis: ocean adjacency stays after the edge',
+        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+        awards: [new Highlander()],
+        oceans: ['16'],
+        winner: '03',
+        loser: '24',
       },
     ];
 

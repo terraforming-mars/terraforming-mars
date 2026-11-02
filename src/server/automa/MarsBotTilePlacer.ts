@@ -16,7 +16,7 @@ import {Comparator, comparing, compound, reversed} from '../../common/utils/Orde
  */
 type Score = (space: Space) => number;
 type Scored = {space: Space, scores: ReadonlyArray<number>};
-type TiebreakerName = 'oceans' | 'icons' | 'polarRegion' | 'southernRegion' | 'specialTiles' | 'edgeElseOceans';
+type TiebreakerName = 'oceans' | 'icons' | 'polarRegion' | 'southernRegion' | 'specialTiles' | 'edge';
 
 /** The tiebreakers of Tharsis, and of any map `MAP_TIEBREAKERS` doesn't list. */
 const DEFAULT_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['oceans', 'icons'];
@@ -31,7 +31,9 @@ const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>>
   [BoardName.ELYSIUM]: ['oceans', 'icons', 'southernRegion'],
   [BoardName.TERRA_CIMMERIA_NOVA]: ['oceans', 'specialTiles', 'icons'],
   [BoardName.UTOPIA_PLANITIA]: ['oceans', 'icons'],
-  [BoardName.VASTITAS_BOREALIS_NOVA]: ['icons', 'edgeElseOceans'],
+  // The aid reads "edge spaces, if possible, otherwise adjacent to as many oceans as possible".
+  // The oceans are the next tiebreaker, so they also decide between edge spaces.
+  [BoardName.VASTITAS_BOREALIS_NOVA]: ['icons', 'edge', 'oceans'],
 };
 
 /**
@@ -130,10 +132,10 @@ export class MarsBotTilePlacer {
     if (!this.game.awards.some((award) => award.name === 'Highlander')) {
       return names;
     }
-    const reordered: Array<TiebreakerName> = names.filter((name) => name !== 'oceans');
-    if (reordered.length === names.length) {
+    if (names.indexOf('oceans') > names.indexOf('icons')) {
       return names;
     }
+    const reordered: Array<TiebreakerName> = names.filter((name) => name !== 'oceans');
     reordered.splice(reordered.indexOf('icons') + 1, 0, 'oceans');
     return reordered;
   }
@@ -244,7 +246,7 @@ export class MarsBotTilePlacer {
     const extraIcons = this.extraIcons();
     const keys: ReadonlyArray<Score> = [
       primaryScore,
-      ...this.tiebreakerNames().flatMap((name) => this.tiebreaker(name, extraIcons)),
+      ...this.tiebreakerNames().map((name) => this.tiebreaker(name, extraIcons)),
     ];
     const scored: Array<Scored> = spaces.map((space) => ({space, scores: keys.map((key) => key(space))}));
 
@@ -264,23 +266,22 @@ export class MarsBotTilePlacer {
     return this.randomTiebreak(tied.map((t) => t.space));
   }
 
-  /** The scores a map's tiebreaker compares, in order. */
-  private tiebreaker(name: TiebreakerName, extraIcons: ReadonlySet<ExtraIcon>): ReadonlyArray<Score> {
+  /** The score a map's tiebreaker compares. */
+  private tiebreaker(name: TiebreakerName, extraIcons: ReadonlySet<ExtraIcon>): Score {
     const board = this.game.board;
     switch (name) {
     case 'oceans':
-      return [(space) => this.adjacentOceans(space)];
+      return (space) => this.adjacentOceans(space);
     case 'icons':
-      return [(space) => this.tiebreakIcons(space, extraIcons)];
+      return (space) => this.tiebreakIcons(space, extraIcons);
     case 'polarRegion':
-      return [preferring((space) => space.y >= board.bottomRow - 1)];
+      return preferring((space) => space.y >= board.bottomRow - 1);
     case 'southernRegion':
-      return [preferring((space) => space.y >= board.bottomRow - 3)];
+      return preferring((space) => space.y >= board.bottomRow - 3);
     case 'specialTiles':
-      return [preferring((space) => board.getAdjacentSpaces(space).some(isSpecialTileSpace))];
-    case 'edgeElseOceans':
-      // Any edge space beats the rest. Only when none is left do the oceans count.
-      return [preferring((space) => space.edge), (space) => space.edge ? 0 : this.adjacentOceans(space)];
+      return preferring((space) => board.getAdjacentSpaces(space).some(isSpecialTileSpace));
+    case 'edge':
+      return preferring((space) => space.edge);
     }
   }
 

@@ -99,6 +99,8 @@ export interface IPlayer {
 
   // This generation / this round
   actionsTakenThisRound: number;
+  /** Extra actions Head Start still owes this player. They do not count toward actionsTakenThisRound. */
+  headStartActionsRemaining: number;
   lastCardPlayed: CardName | undefined;
   pendingInitialActions: Array<ICorporationCard>;
 

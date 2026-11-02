@@ -38,6 +38,8 @@ export class HeadStart extends PreludeCard {
     const projectCardsInHand = player.cardsInHand.filter((card) => HeadStart.PROJECT_CARD_TYPES.includes(card.type));
     const megacredits = projectCardsInHand.length * 2;
     player.stock.add(Resource.MEGACREDITS, megacredits, {log: true});
+    // Player.takeAction offers these before anything else, including the player's remaining preludes.
+    player.headStartActionsRemaining += 2;
 
     return undefined;
   }

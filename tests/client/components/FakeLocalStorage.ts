@@ -4,15 +4,16 @@ export class FakeLocalStorage implements Storage {
   private saved: Storage | undefined;
   private data: {[x: string]: string} = {};
 
-  public static register(localStorage: FakeLocalStorage) {
+  private static assign(value: any) {
+    Object.defineProperty(global, 'localStorage', {value: value, configurable: true, writable: true});
+  }
+  public static register(localStorage: FakeLocalStorage): void {
     localStorage.saved = (global as any).localStorage;
-    (global as any).localStorage = localStorage;
-
-    return this;
+    this.assign(localStorage);
   }
 
   public static deregister(localStorage: FakeLocalStorage) {
-    (global as any).localStorage = localStorage.saved;
+    this.assign(localStorage.saved);
   }
 
   public getItem(key: string) {

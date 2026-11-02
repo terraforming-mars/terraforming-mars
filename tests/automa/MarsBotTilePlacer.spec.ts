@@ -345,6 +345,18 @@ describe('MarsBotTilePlacer', () => {
         loser: '18',
       },
       {
+        rule: 'Vastitas Borealis: without Turmoil the delegate hex counts no reward icon',
+        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+        winner: '03',
+        loser: '28',
+      },
+      {
+        rule: 'Vastitas Borealis: with Turmoil the delegate hex counts a reward icon',
+        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
+        winner: '28',
+        loser: '60',
+      },
+      {
         rule: 'Milestones & Awards: any map plays by the Tharsis tiebreakers',
         options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, modularMA: true},
         oceans: ['16'],

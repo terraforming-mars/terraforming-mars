@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Space} from '../boards/Space';
 import {Board, isSpecialTileSpace} from '../boards/Board';
 import {SpaceType} from '../../common/boards/SpaceType';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardName} from '../../common/boards/BoardName';
 import {Comparator, comparing, compound, reversed} from '../../common/utils/Ordering';
 
@@ -272,13 +273,22 @@ export class MarsBotTilePlacer {
 
   /** The reward icons MarsBot tiebreaks on: what the space gives it, plus whatever the map adds. */
   private tiebreakIcons(space: Space, extraIcons: ReadonlySet<ExtraIcon>): number {
-    let icons = space.bonus.length;
+    let icons = space.bonus.filter((bonus) => this.countsAsIcon(bonus)).length;
     for (const extra of extraIcons) {
       if (EXTRA_ICON_SPACES[extra](this.game.board, space)) {
         icons++;
       }
     }
     return icons;
+  }
+
+  /**
+   * Whether `bonus` counts as a reward icon when tiebreaking.
+   *
+   * Without Turmoil the delegate hex is considered empty (rulebook C, p.11).
+   */
+  private countsAsIcon(bonus: SpaceBonus): boolean {
+    return bonus !== SpaceBonus.DELEGATE || this.game.turmoil !== undefined;
   }
 
   /**

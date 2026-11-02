@@ -3,19 +3,10 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('LanguageSelectionDialog', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(LanguageSelectionDialog, {

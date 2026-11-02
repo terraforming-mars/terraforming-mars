@@ -1,19 +1,16 @@
 import {expect} from 'chai';
-import {FakeLocalStorage} from './components/FakeLocalStorage';
+import {useFakeLocalStorage} from './components/FakeLocalStorage';
 import {PreferencesManager} from '../../src/client/utils/PreferencesManager';
 
 describe('PreferencesManager', () => {
-  let localStorage: FakeLocalStorage;
+  useFakeLocalStorage();
   let instance: PreferencesManager;
 
   beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
     PreferencesManager.resetForTest();
     instance = PreferencesManager.INSTANCE;
   });
   afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
     PreferencesManager.resetForTest();
   });
 
@@ -29,18 +26,18 @@ describe('PreferencesManager', () => {
     const values = instance.values();
 
     expect(values.hide_active_cards).eq(false);
-    expect(localStorage.hasItem('hide_active_cards')).is.false;
-    expect(localStorage.getItem('hide_active_cards')).is.null;
+    expect(global.localStorage.hasItem('hide_active_cards')).is.false;
+    expect(global.localStorage.getItem('hide_active_cards')).is.null;
 
     instance.set('hide_active_cards', true);
 
-    expect(localStorage.getItem('hide_active_cards')).eq('1');
-    expect(localStorage.hasItem('hide_active_cards')).is.true;
+    expect(global.localStorage.getItem('hide_active_cards')).eq('1');
+    expect(global.localStorage.hasItem('hide_active_cards')).is.true;
     expect(values.hide_active_cards).eq(true);
 
     instance.set('hide_active_cards', false);
 
-    expect(localStorage.getItem('hide_active_cards')).eq('0');
+    expect(global.localStorage.getItem('hide_active_cards')).eq('0');
     expect(values.hide_active_cards).eq(false);
   });
 
@@ -48,17 +45,17 @@ describe('PreferencesManager', () => {
     const values = instance.values();
 
     expect(values.hide_active_cards).eq(false);
-    expect(localStorage.hasItem('hide_active_cards')).is.false;
-    expect(localStorage.getItem('hide_active_cards')).is.null;
+    expect(global.localStorage.hasItem('hide_active_cards')).is.false;
+    expect(global.localStorage.getItem('hide_active_cards')).is.null;
 
     instance.set('hide_active_cards', false, /* setOnChange */ true);
 
-    expect(localStorage.hasItem('hide_active_cards')).is.false;
+    expect(global.localStorage.hasItem('hide_active_cards')).is.false;
     expect(values.hide_active_cards).eq(false);
   });
 
   it('initially stored values override defaults', () => {
-    localStorage.setItem('lang', 'fr');
+    global.localStorage.setItem('lang', 'fr');
     PreferencesManager.resetForTest();
 
     const values = PreferencesManager.INSTANCE.values();

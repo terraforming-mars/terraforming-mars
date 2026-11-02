@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SortableCards from '@/client/components/SortableCards.vue';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 type DropSide = 'left' | 'right';
 
@@ -39,15 +39,7 @@ function cardsInOrder(sortable: VueWrapper<InstanceType<typeof SortableCards>>):
 
 
 describe('SortableCards', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('allows sorting after initial loading with no local storage', async () => {
     const sortable = mount(SortableCards, {

@@ -1,18 +1,9 @@
 import {expect} from 'chai';
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('SafeLocalStorage', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('round-trips values', () => {
     safeLocalStorage.setItem('a', '1');

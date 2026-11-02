@@ -6,7 +6,7 @@ import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay
 import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
@@ -16,16 +16,11 @@ import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 import {asComplete} from './utils/models';
 
 describe('SelectProjectCardToPlay', () => {
-  let localStorage: FakeLocalStorage;
   let saveResponse: SelectProjectCardToPlayResponse;
 
+  useFakeLocalStorage();
   beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
     PreferencesManager.INSTANCE.set('show_alerts', false);
-  });
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
   });
 
   it('using sort order for cards', async () => {

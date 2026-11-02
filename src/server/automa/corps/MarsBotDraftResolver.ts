@@ -2,7 +2,8 @@ import {IProjectCard} from '../../cards/IProjectCard';
 import {MarsBotDraftPriority} from '../MarsBotCorpTypes';
 import {Tag} from '../../../common/cards/Tag';
 import {MarsBotBoard} from '../MarsBotBoard';
-import {hasIntersection} from '@/common/utils/utils';
+import {hasIntersection, intersection} from '@/common/utils/utils';
+import {cardTagsIncludingEvent} from '../MarsBotTags';
 
 /** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
 export type Shuffler = <T>(items: Array<T>) => void;
@@ -36,8 +37,9 @@ export class MarsBotDraftResolver {
    * Splits the drafted cards into the ones MarsBot keeps and the one it discards.
    *
    * The corp's draft priority protects its best cards, and the first card it does not protect,
-   * in shuffled order, is the one discarded. At most one card leaves, and a draft where the
-   * priority protects everything loses nothing.
+   * in shuffled order, is the one discarded. At most one card leaves. When a tag priority
+   * protects every card, the one with the fewest matches goes anyway (Nick, BGG 3398289, over
+   * rulebook B p.2); Credicor and Spire then discard nothing, as their cards print.
    */
   public discardAfterDraft(
     drafted: Array<IProjectCard>,
@@ -47,7 +49,14 @@ export class MarsBotDraftResolver {
     this.shuffler(cards);
 
     const saved = this.savedFromDiscard(cards, priority);
-    const discardable = cards.findIndex((card) => !saved.has(card));
+    let discardable = cards.findIndex((card) => !saved.has(card));
+    if (discardable === -1) {
+      if (priority.type === 'tags') {
+        discardable = fewestMatches(cards, (card) => this.scoreByTags(card, priority.tags));
+      } else if (priority.type === 'leastAdvancedTrack') {
+        discardable = fewestMatches(cards, (card) => this.scoreByTrack(card));
+      }
+    }
     if (discardable === -1) {
       return {kept: cards, discarded: []};
     }
@@ -109,8 +118,17 @@ export class MarsBotDraftResolver {
     return this.pickBest(hand, (card) => this.scoreByTags(card, priorityTags));
   }
 
+  /**
+   * Aridor drafts for a track, not a tag list: every tag on that track counts alike, the card with
+   * the most of them wins and ties go at random.
+   */
   private pickByLeastAdvancedTrack(hand: Array<IProjectCard>): IProjectCard {
-    return this.pickByTags(hand, this.leastAdvancedTrackTags());
+    return this.pickBest(hand, (card) => this.scoreByTrack(card));
+  }
+
+  private scoreByTrack(card: IProjectCard): ReadonlyArray<number> {
+    const trackTags = this.leastAdvancedTrackTags();
+    return [intersection(cardTagsIncludingEvent(card), trackTags).length];
   }
 
   private leastAdvancedTrackTags(): ReadonlyArray<Tag> {
@@ -127,16 +145,17 @@ export class MarsBotDraftResolver {
    * printed tags, so a wild tag matches nothing.
    */
   private scoreByTags(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): ReadonlyArray<number> {
-    return priorityTags.map((priorityTag) => card.tags.filter((tag) => tag === priorityTag).length);
+    const tags = cardTagsIncludingEvent(card);
+    return priorityTags.map((priorityTag) => tags.filter((tag) => tag === priorityTag).length);
   }
 
   private hasAnyTag(card: IProjectCard, priorityTags: ReadonlyArray<Tag>): boolean {
-    return hasIntersection(card.tags, priorityTags);
+    return hasIntersection(cardTagsIncludingEvent(card), priorityTags);
   }
 
-  /** Wild tags count for nothing here: MarsBot reads the tags printed on the card. */
+  /** Counts every tag on the card, wild tags included. */
   private countTags(card: IProjectCard): number {
-    return card.tags.filter((tag) => tag !== Tag.WILD).length;
+    return cardTagsIncludingEvent(card).length;
   }
 }
 
@@ -144,6 +163,17 @@ export class MarsBotDraftResolver {
 function topScoring<T>(items: ReadonlyArray<T>, scorer: (item: T) => number): ReadonlySet<T> {
   const best = Math.max(...items.map(scorer));
   return new Set(items.filter((item) => scorer(item) === best));
+}
+
+/** Returns the index of the first item, in `items`' order, that scores lowest, or -1 with no items. */
+function fewestMatches<T>(items: ReadonlyArray<T>, scorer: (item: T) => ReadonlyArray<number>): number {
+  let worst = items.length === 0 ? -1 : 0;
+  for (let i = 1; i < items.length; i++) {
+    if (compareScores(scorer(items[i]), scorer(items[worst])) < 0) {
+      worst = i;
+    }
+  }
+  return worst;
 }
 
 /** Compares two scores entry by entry. Positive when `a` outranks `b`, negative when it loses. */

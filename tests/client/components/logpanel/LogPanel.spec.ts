@@ -49,20 +49,20 @@ describe('LogPanel', () => {
   }
 
   beforeEach(() => {
-    originalFetch = (global as any).fetch;
+    originalFetch = global.fetch;
     originalGetElementById = document.getElementById.bind(document);
     fetchCalls = [];
-    (global as any).fetch = (url: string) => {
-      fetchCalls.push(url);
+    global.fetch = (url: string | URL | Request) => {
+      fetchCalls.push(url as unknown as string);
       return Promise.resolve({
         ok: true,
         json: () => Promise.resolve([]),
-      });
+      } as Response);
     };
   });
 
   afterEach(() => {
-    (global as any).fetch = originalFetch;
+    global.fetch = originalFetch;
     document.getElementById = originalGetElementById;
   });
 

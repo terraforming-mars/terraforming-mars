@@ -20,7 +20,7 @@ export class Engineer extends BaseMilestone {
     return player.production.energy + player.production.heat;
   }
 
-  /** MarsBot needs its power and earth tracks to add up to 10. Vastitas Borealis words it the same way. */
+  /** Rulebook C p.10 and p.13. */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     return bot.marsBotBoard.trackPosition(Tag.POWER) + bot.marsBotBoard.trackPosition(Tag.EARTH) >= 10;
   }

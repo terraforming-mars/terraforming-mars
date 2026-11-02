@@ -15,7 +15,7 @@ export class Traveller implements IAward {
     return player.tags.multipleCount([Tag.JOVIAN, Tag.EARTH], 'award');
   }
 
-  /** The automa rules score the higher of MarsBot's Jovian and earth tracks, plus 5. */
+  /** Rulebook C p.10 and p.15. */
   public marsBotScore(bot: IMarsBot): number {
     return Math.max(bot.marsBotBoard.trackPosition(Tag.JOVIAN), bot.marsBotBoard.trackPosition(Tag.EARTH)) + 5;
   }

@@ -12,7 +12,7 @@ export class Blacksmith implements IAward {
     return player.production.steel + player.production.titanium;
   }
 
-  /** The automa rules score the higher of MarsBot's building and space tracks. */
+  /** Rulebook C p.10. */
   public marsBotScore(bot: IMarsBot): number {
     return Math.max(bot.marsBotBoard.trackPosition(Tag.BUILDING), bot.marsBotBoard.trackPosition(Tag.SPACE));
   }

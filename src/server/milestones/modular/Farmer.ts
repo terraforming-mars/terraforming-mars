@@ -22,13 +22,15 @@ export class Farmer extends BaseMilestone {
   }
 
   /**
-   * MarsBot has no card resources. On Vastitas Borealis it farms by reaching space 6 of its
-   * Science track (shared with Microbe) or of its bio track. The Milestones & Awards
-   * expansion asks for space 7 of the bio track.
+   * MarsBot has no card resources.
+   *
+   * On Vastitas Borealis it farms by reaching space 6 of its Science track (shared with
+   * Microbe) or of its bio track (rulebook C p.10). The Milestones & Awards expansion asks for
+   * space 7 of the bio track (rulebook C p.13).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     if (marsBotUsesMapSet(bot, BoardName.VASTITAS_BOREALIS_NOVA)) {
-      return bot.marsBotBoard.trackPosition(Tag.MICROBE) >= 6 || bot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
+      return bot.marsBotBoard.trackPosition(Tag.SCIENCE) >= 6 || bot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
     }
     return bot.marsBotBoard.trackPosition(Tag.PLANT) >= 7;
   }

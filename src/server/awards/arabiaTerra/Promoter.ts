@@ -12,7 +12,7 @@ export class Promoter implements IAward {
     return player.getPlayedEventsCount();
   }
 
-  /** The automa rules score MarsBot's Promoter as its event track. */
+  /** Rulebook C p.10 and p.15. */
   public marsBotScore(bot: IMarsBot): number {
     return bot.marsBotBoard.trackPosition(Tag.EVENT);
   }

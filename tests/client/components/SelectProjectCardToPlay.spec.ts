@@ -670,7 +670,7 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    (wrapper.vm as any).saveData();
+    wrapper.vm.saveData();
 
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megacredits: 7}));
   });
@@ -692,7 +692,7 @@ describe('SelectProjectCardToPlay', () => {
     tester.expectPayment({steel: 6});
 
     saveResponse = undefined as any;
-    (wrapper.vm as any).saveData();
+    wrapper.vm.saveData();
 
     expect(saveResponse).to.be.undefined;
   });
@@ -752,7 +752,7 @@ describe('SelectProjectCardToPlay', () => {
 
     await wrapper.vm.$nextTick();
 
-    const vm = wrapper.vm as any;
+    const vm = wrapper.vm;
     const tester = new PaymentTester(wrapper);
     expect(vm.cardName).to.eq(CardName.BIRDS);
     tester.expectValue('megacredits', 10);

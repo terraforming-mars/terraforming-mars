@@ -47,7 +47,7 @@ describe('LanguageSwitcher', () => {
       },
     });
     let called = false;
-    (wrapper.vm as any).reloadWindow = () => {
+    wrapper.vm.reloadWindow = () => {
       called = true;
     };
     await wrapper.find('.language-icon--en').trigger('click');

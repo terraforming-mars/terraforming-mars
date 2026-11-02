@@ -52,7 +52,7 @@ function validateTwoPlayerGame(setup: (model: CreateGameModel) => void): Validat
   const model = wrapper.vm as unknown as CreateGameModel;
   model.playersCount = 2;
   setup(model);
-  return (wrapper.vm as any).validationErrors;
+  return wrapper.vm.validationErrors;
 }
 
 describe('CreateGameForm', () => {
@@ -80,13 +80,13 @@ describe('CreateGameForm', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).playersCount).eq(2);
-    expect((wrapper.vm as any).players[0].name).eq('Alice');
-    expect((wrapper.vm as any).players[1].name).eq('Bob');
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.HELLAS]);
-    expect((wrapper.vm as any).draftVariant).eq(false);
-    expect((wrapper.vm as any).expansions.venus).eq(true);
-    expect((wrapper.vm as any).solarPhaseOption).eq(true);
+    expect(wrapper.vm.playersCount).eq(2);
+    expect(wrapper.vm.players[0].name).eq('Alice');
+    expect(wrapper.vm.players[1].name).eq('Bob');
+    expect(wrapper.vm.boards).deep.eq([BoardName.HELLAS]);
+    expect(wrapper.vm.draftVariant).eq(false);
+    expect(wrapper.vm.expansions.venus).eq(true);
+    expect(wrapper.vm.solarPhaseOption).eq(true);
   });
 
   it('shows warnings when restoring saved settings', async () => {
@@ -110,7 +110,7 @@ describe('CreateGameForm', () => {
       customPreludes: ['Bad Prelude Name'],
     }));
 
-    (form.vm as any).restoreLastSettings();
+    form.vm.restoreLastSettings();
     await form.vm.$nextTick();
 
     expect(alerts).deep.eq([{
@@ -128,13 +128,13 @@ describe('CreateGameForm', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.HELLAS]);
+    expect(wrapper.vm.boards).deep.eq([BoardName.HELLAS]);
 
-    (wrapper.vm as any).resetSettings();
+    wrapper.vm.resetSettings();
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.THARSIS]);
-    expect((wrapper.vm as any).draftVariant).eq(true);
+    expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
+    expect(wrapper.vm.draftVariant).eq(true);
     expect(createGameSettingsStorage.load()).eq(undefined);
     expect(wrapper.findAllComponents({name: 'AppButton'}).map((button) => button.props('title'))).includes('Reset');
   });
@@ -150,7 +150,7 @@ describe('CreateGameForm', () => {
         {name: 'Bob', color: 'red', beginner: false, handicap: 0},
       ],
     }))).throws('Colors are duplicated');
-    expect((wrapper.vm as any).uploading).eq(false);
+    expect(wrapper.vm.uploading).eq(false);
   });
 
   it('saves current settings before creating a game', async () => {
@@ -164,13 +164,13 @@ describe('CreateGameForm', () => {
       const wrapper = shallowMount(CreateGameForm, {
         ...globalConfig,
       });
-      (wrapper.vm as any).playersCount = 2;
-      (wrapper.vm as any).randomFirstPlayer = false;
-      (wrapper.vm as any).players[0].name = 'Alice';
-      (wrapper.vm as any).players[1].name = 'Bob';
-      (wrapper.vm as any).boards = [BoardName.ELYSIUM];
+      wrapper.vm.playersCount = 2;
+      wrapper.vm.randomFirstPlayer = false;
+      wrapper.vm.players[0].name = 'Alice';
+      wrapper.vm.players[1].name = 'Bob';
+      wrapper.vm.boards = [BoardName.ELYSIUM];
 
-      await (wrapper.vm as any).createGame();
+      await wrapper.vm.createGame();
 
       const savedSettings = createGameSettingsStorage.load();
       expect(savedSettings?.boards).deep.eq([BoardName.ELYSIUM]);
@@ -188,7 +188,7 @@ describe('CreateGameForm', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.THARSIS]);
+    expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
   });
 
   it('toggling random milestones and awards leaves manual milestones and awards', () => {
@@ -198,9 +198,9 @@ describe('CreateGameForm', () => {
     const model = wrapper.vm as unknown as CreateGameModel;
     model.randomMA = RandomMAOptionType.MANUAL;
     model.customMA = {milestones: ['Terraformer'], awards: ['Banker']};
-    expect((wrapper.vm as any).isRandomMAEnabled).is.false;
+    expect(wrapper.vm.isRandomMAEnabled).is.false;
 
-    (wrapper.vm as any).randomMAToggle();
+    wrapper.vm.randomMAToggle();
     expect(model.randomMA).eq(RandomMAOptionType.LIMITED);
     expect(model.customMA).is.undefined;
   });
@@ -223,8 +223,8 @@ describe('CreateGameForm', () => {
     expect(createGameButton()?.props('disabled')).is.false;
     expect(wrapper.find('.create-game-custom-preludes-warning').exists()).is.false;
 
-    (wrapper.vm as any).playersCount = 2;
-    (wrapper.vm as any).customCorporations = cardNames(3);
+    wrapper.vm.playersCount = 2;
+    wrapper.vm.customCorporations = cardNames(3);
     await wrapper.vm.$nextTick();
 
     expect(createGameButton()?.props('disabled')).is.true;
@@ -241,7 +241,7 @@ describe('CreateGameForm', () => {
     model.escapeVelocityThreshold = 35;
     // A cleared number input binds as an empty string.
     model.escapeVelocityPeriod = '' as unknown as number;
-    const config: NewGameConfig | undefined = await (wrapper.vm as any).serializeSettings();
+    const config: NewGameConfig | undefined = await wrapper.vm.serializeSettings();
     expect(config?.escapeVelocity).deep.eq({
       thresholdMinutes: 35,
       bonusSectionsPerAction: 2,

@@ -37,7 +37,9 @@ class RedsBonus01 implements IBonus {
       }
       return;
     }
-    const min = Math.min(...game.players.map((p) => p.terraformRating));
+    // MarsBot's TR counts towards the lowest. MarsBot itself never gains the TR, so when it alone
+    // has the lowest, nobody does.
+    const min = Math.min(...game.playersPlusMarsBot.map((p) => p.terraformRating));
 
     game.players.forEach((player) => {
       if (player.terraformRating === min) {
@@ -63,7 +65,9 @@ class RedsBonus02 implements IBonus {
       }
       return;
     }
-    const max = Math.max(...game.players.map((p) => p.terraformRating));
+    // MarsBot's TR counts towards the highest. MarsBot itself never loses the TR, so when it alone
+    // has the highest, nobody does.
+    const max = Math.max(...game.playersPlusMarsBot.map((p) => p.terraformRating));
 
     game.players.forEach((player) => {
       if (player.terraformRating === max) {

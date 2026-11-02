@@ -64,15 +64,15 @@ export interface IGame extends Logger {
   /**
    * MarsBot's player in an automa game, otherwise undefined.
    *
-   * It is not in `players` because it never takes a turn.
+   * It is not in `players` because its turns don't go through the players' turn order.
    */
-  marsBotPlayer: IPlayer | undefined;
+  readonly marsBotPlayer: IPlayer | undefined;
   /**
    * `players` and MarsBot's player.
    *
    * For anything MarsBot can own, like tiles, delegates and milestones.
    */
-  readonly allPlayers: ReadonlyArray<IPlayer>;
+  readonly playersPlusMarsBot: ReadonlyArray<IPlayer>;
   readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
 
   /**

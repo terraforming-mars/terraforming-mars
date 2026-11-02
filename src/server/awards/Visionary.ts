@@ -1,5 +1,6 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
+import {numeric} from '@/common/utils/Ordering';
 import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
 import {marsBotAllTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 
@@ -12,9 +13,9 @@ export class Visionary implements IAward {
     return player.cardsInHand.length;
   }
 
-  /** The automa rules double MarsBot's least advanced track, second least with Venus. */
+  /** Rulebook C p.15. */
   public marsBotScore(bot: IMarsBot): number {
-    const positions = marsBotAllTrackPositions(bot).sort((a, b) => a - b);
+    const positions = marsBotAllTrackPositions(bot).sort(numeric);
     const index = bot.game.gameOptions.venusNextExtension ? 1 : 0;
     return positions[index] * 2;
   }

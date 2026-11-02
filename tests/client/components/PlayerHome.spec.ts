@@ -20,7 +20,7 @@ describe('PlayerHome', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView: fakePlayerViewModel(),
         settings: raw_settings,
@@ -40,7 +40,7 @@ describe('PlayerHome', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView,
         settings: raw_settings,

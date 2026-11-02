@@ -17,7 +17,7 @@ describe('TopBar', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView: fakePlayerViewModel(),
       },

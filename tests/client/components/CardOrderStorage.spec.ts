@@ -2,19 +2,10 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('CardOrderStorage', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('round-trips an order', () => {
     CardOrderStorage.updateCardOrder('p-foo', {[CardName.ANTS]: 1});

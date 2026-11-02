@@ -3,7 +3,7 @@ import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
 import {createGameSettingsStorage} from '@/client/components/create/createGameSettingsStorage';
-import {FakeLocalStorage} from '../FakeLocalStorage';
+import {useFakeLocalStorage} from '../FakeLocalStorage';
 import {BoardName} from '@/common/boards/BoardName';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {JSONObject} from '@/common/Types';
@@ -56,16 +56,9 @@ function validateTwoPlayerGame(setup: (model: CreateGameModel) => void): Validat
 }
 
 describe('CreateGameForm', () => {
-  let localStorage: FakeLocalStorage;
-
+  useFakeLocalStorage();
   beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
     PreferencesManager.resetForTest();
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
   });
 
   it('mounts without errors', () => {

@@ -1,19 +1,10 @@
 import {expect} from 'chai';
 import {LocalStorageStore} from '@/client/utils/LocalStorageStore';
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('LocalStorageStore', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('round-trips typed values under a prefix', () => {
     const store = new LocalStorageStore<{n: number}>({prefix: 'thing:'});

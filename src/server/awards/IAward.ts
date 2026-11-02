@@ -7,16 +7,9 @@ export interface IAward {
     name: AwardName;
     description: string;
     getScore(player: IPlayer): number;
-    /**
-     * How MarsBot scores the award.
-     *
-     * Only for awards MarsBot plays against.
-     */
+    /** How MarsBot scores the award. */
     automaDescription?: string;
-    /**
-     * Where a game that plays a map's own award set words the rule differently from
-     * `automaDescription`, the wording for that map.
-     */
+    /** The automa description for this award, when played on certain maps. */
     automaMapDescriptions?: Partial<Record<BoardName, string>>;
     /**
      * MarsBot's score.

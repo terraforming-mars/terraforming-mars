@@ -2,7 +2,7 @@ import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 
 export class Legend4 extends BaseMilestone {
-  public readonly automaDescription = '4 red cards in played pile';
+  public readonly automaDescription = '4+ red cards in played pile';
   constructor() {
     super(
       'Legend4',

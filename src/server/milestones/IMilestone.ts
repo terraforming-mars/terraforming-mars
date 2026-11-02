@@ -8,16 +8,9 @@ export interface IMilestone {
   description: string;
   canClaim(player: IPlayer): boolean;
   getScore(player: IPlayer): number;
-  /**
-   * How MarsBot meets the criteria.
-   *
-   * Only for milestones MarsBot plays against.
-   */
+  /** How MarsBot meets the criteria. */
   automaDescription?: string;
-  /**
-   * Where a game that plays a map's own milestone set words the rule differently from
-   * `automaDescription`, the wording for that map.
-   */
+  /** The automa description for this milestone, when played on certain maps. */
   automaMapDescriptions?: Partial<Record<BoardName, string>>;
   /**
    * Whether MarsBot meets the criteria.

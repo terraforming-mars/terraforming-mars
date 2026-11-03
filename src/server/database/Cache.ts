@@ -139,6 +139,7 @@ export class Cache extends EventEmitter {
       return;
     }
     game.players.forEach((p) => p.tearDown());
+    game.marsBotPlayer?.tearDown();
     this.games.set(gameId, undefined); // Setting to undefined is the same as "not yet loaded."
     this.lastAccess.delete(gameId);
   }

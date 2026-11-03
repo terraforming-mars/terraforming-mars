@@ -19,6 +19,7 @@ import {SpendableResource} from '@/common/inputs/Spendable';
 
 export default defineComponent({
   name: 'PaymentUnitComponent',
+  emits: ['plus', 'minus', 'max', 'update:count'],
   props: {
     count: {
       type: Number,

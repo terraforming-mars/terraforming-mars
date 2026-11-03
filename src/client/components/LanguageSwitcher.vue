@@ -1,11 +1,11 @@
 <template>
   <div class="language-switcher">
     <template v-for="lang in ALL_LANGUAGES" :key="lang">
-    <div
-      :class="[`language-icon language-icon--${lang} language-icon-for-switcher`, {'language-icon--selected': lang === currentLang}]"
-      :data-title="title(lang)"
-      @click="switchLanguageTo(lang)"
-    ></div>
+      <div
+        :class="[`language-icon language-icon--${lang} language-icon-for-switcher`, {'language-icon--selected': lang === currentLang}]"
+        :data-title="title(lang)"
+        @click="switchLanguageTo(lang)"
+      ></div>
     </template>
   </div>
 </template>

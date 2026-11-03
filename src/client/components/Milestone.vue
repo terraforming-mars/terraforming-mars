@@ -1,10 +1,10 @@
 <template>
   <div class="ma-block">
     <div class="ma-player" v-if="milestone.playerName">
-      <i :title="milestone.playerName" class="board-cube" :class="`board-cube--${milestone.color}`" ></i>
+      <i :title="milestone.playerName" class="board-cube" :class="`board-cube--${milestone.color}`"></i>
     </div>
     <div class="ma-name--milestones" :class="nameCss">
-      <span ref="name" v-i18n>{{name}}</span>
+      <span ref="name" v-i18n>{{ name }}</span>
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <template v-for="score in sortedScores" :key="score.color">
           <p
@@ -19,8 +19,8 @@
             v-text="score.score"
             data-test="player-score"
           ></p>
-      </template>
-    </div>
+        </template>
+      </div>
     </div>
 
     <div v-if="showDescription" class="ma-description">

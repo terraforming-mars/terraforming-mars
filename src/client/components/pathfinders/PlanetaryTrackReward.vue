@@ -1,9 +1,9 @@
 <template>
-<div class="reward">
-  <div :class="outerClass">
-    <div :class="getClass" ></div>
+  <div class="reward">
+    <div :class="outerClass">
+      <div :class="getClass"></div>
+    </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">

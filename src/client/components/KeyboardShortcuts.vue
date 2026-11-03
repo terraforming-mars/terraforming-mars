@@ -27,6 +27,7 @@ export default defineComponent({
   components: {
     PopupPanel,
   },
+  emits: ['close'],
   computed: {
     preferences(): typeof getPreferences {
       return getPreferences;

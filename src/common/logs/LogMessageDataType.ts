@@ -19,4 +19,5 @@ export enum LogMessageDataType {
   RESOURCE, // 15
   PRODUCTION, // 16
   CARD_RESOURCE, // 17
+  MARKDOWN, // 18 -- currently the icon-only markdown
 }

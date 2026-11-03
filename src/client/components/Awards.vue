@@ -1,5 +1,5 @@
 <template>
-  <div class="awards_cont" v-trim-whitespace>
+  <div class="awards_cont">
     <div class="awards">
       <div class="ma-title">
         <a @click.prevent="toggleList" class="ma-clickable awards-padding" href="#" data-test="toggle-awards" v-i18n>Awards</a>
@@ -25,7 +25,7 @@
           :key="spotPrice"
           class="milestone-award-inline unpaid"
         >
-          <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice" ></div>
+          <div class="milestone-award-price" data-test="spot-price" v-text="spotPrice"></div>
         </span>
       </div>
 

@@ -125,6 +125,7 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showIncludedCards: false,
   customColonies: [],
   customCorporations: [],
+  customMA: undefined,
   customPreludes: [],
   bannedCards: [],
   includedCards: [],

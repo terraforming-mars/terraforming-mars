@@ -3,19 +3,10 @@ import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import {fakeGameOptionsModel} from './testHelpers';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('Sidebar', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(Sidebar, {

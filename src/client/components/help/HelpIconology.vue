@@ -1,93 +1,93 @@
 <template>
-    <div class="help-iconology-container">
-        <div class="help-icons-column">
-            <div>
-                <div class="help-icons-section-heading" v-i18n>Card Tags</div>
-            </div>
-            <div v-for="entry in officialCardTags" :key="entry.label">
-                <div :class="`resource-tag ${entry.iconClass}`"></div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-                <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
-            </div>
-            <template v-if="fanCardTags.length > 0">
-                <br>
-                <div>
-                    <div class="help-icon-sublabel" v-i18n>Fan Expansion Tags</div>
-                </div>
-                <div v-for="entry in fanCardTags" :key="entry.label">
-                    <div :class="`resource-tag ${entry.iconClass}`"></div>
-                    <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-                    <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
-                </div>
-            </template>
+  <div class="help-iconology-container">
+    <div class="help-icons-column">
+      <div>
+        <div class="help-icons-section-heading" v-i18n>Card Tags</div>
+      </div>
+      <div v-for="entry in officialCardTags" :key="entry.label">
+        <div :class="`resource-tag ${entry.iconClass}`"></div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+        <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
+      </div>
+      <template v-if="fanCardTags.length > 0">
+        <br>
+        <div>
+          <div class="help-icon-sublabel" v-i18n>Fan Expansion Tags</div>
         </div>
-
-        <div class="help-icons-column">
-            <div>
-                <div class="help-icons-section-heading" v-i18n>Resources</div>
-            </div>
-            <div>
-                <div class="help-icon-sublabel" v-i18n>Standard Resources</div>
-            </div>
-            <div v-for="entry in standardResources" :key="entry.label">
-                <div class="help-icon-resource" :class="entry.iconClass">
-                    <div v-if="entry.innerText" class="help-icon-mc-font">{{ entry.innerText }}</div>
-                </div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-            </div>
-            <br>
-            <div>
-                <div class="help-icon-sublabel" v-i18n>Resources on Cards</div>
-            </div>
-            <div v-for="entry in officialCardResources" :key="entry.label">
-                <div class="help-icon-resource" :class="entry.iconClass"></div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-                <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
-            </div>
-            <template v-if="fanCardResources.length > 0">
-                <br>
-                <div>
-                    <div class="help-icon-sublabel" v-i18n>
-                        Fan Expansion Card Resources
-                    </div>
-                </div>
-                <div v-for="entry in fanCardResources" :key="entry.label">
-                    <div class="help-icon-resource" :class="entry.iconClass"></div>
-                    <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-                    <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
-                </div>
-            </template>
+        <div v-for="entry in fanCardTags" :key="entry.label">
+          <div :class="`resource-tag ${entry.iconClass}`"></div>
+          <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+          <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
         </div>
-
-        <div class="help-icons-column">
-            <div>
-                <div class="help-icons-section-heading" v-i18n>Tiles</div>
-            </div>
-            <div v-for="entry in tiles" :key="entry.label">
-                <div class="tile" :class="entry.iconClass"></div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-            </div>
-        </div>
-
-        <div class="help-icons-column">
-            <div>
-                <div class="help-icons-section-heading" v-i18n>Global Parameters</div>
-            </div>
-            <div v-for="entry in globalParameters" :key="entry.label">
-                <div class="tile" :class="entry.iconClass"></div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-            </div>
-        </div>
-        <div class="help-icons-column">
-            <div>
-                <div class="help-icons-section-heading" v-i18n>Others</div>
-            </div>
-            <div v-for="entry in others" :key="entry.label">
-                <div class="help-other-symbols"><div :class="entry.iconClass">{{ entry.innerText }}</div></div>
-                <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
-            </div>
-        </div>
+      </template>
     </div>
+
+    <div class="help-icons-column">
+      <div>
+        <div class="help-icons-section-heading" v-i18n>Resources</div>
+      </div>
+      <div>
+        <div class="help-icon-sublabel" v-i18n>Standard Resources</div>
+      </div>
+      <div v-for="entry in standardResources" :key="entry.label">
+        <div class="help-icon-resource" :class="entry.iconClass">
+          <div v-if="entry.innerText" class="help-icon-mc-font">{{ entry.innerText }}</div>
+        </div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+      </div>
+      <br>
+      <div>
+        <div class="help-icon-sublabel" v-i18n>Resources on Cards</div>
+      </div>
+      <div v-for="entry in officialCardResources" :key="entry.label">
+        <div class="help-icon-resource" :class="entry.iconClass"></div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+        <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
+      </div>
+      <template v-if="fanCardResources.length > 0">
+        <br>
+        <div>
+          <div class="help-icon-sublabel" v-i18n>
+            Fan Expansion Card Resources
+          </div>
+        </div>
+        <div v-for="entry in fanCardResources" :key="entry.label">
+          <div class="help-icon-resource" :class="entry.iconClass"></div>
+          <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+          <div v-for="expansion in entry.expansions" :key="expansion" class="expansion-icon" :class="expansionIconClass(expansion)"></div>
+        </div>
+      </template>
+    </div>
+
+    <div class="help-icons-column">
+      <div>
+        <div class="help-icons-section-heading" v-i18n>Tiles</div>
+      </div>
+      <div v-for="entry in tiles" :key="entry.label">
+        <div class="tile" :class="entry.iconClass"></div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+      </div>
+    </div>
+
+    <div class="help-icons-column">
+      <div>
+        <div class="help-icons-section-heading" v-i18n>Global Parameters</div>
+      </div>
+      <div v-for="entry in globalParameters" :key="entry.label">
+        <div class="tile" :class="entry.iconClass"></div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+      </div>
+    </div>
+    <div class="help-icons-column">
+      <div>
+        <div class="help-icons-section-heading" v-i18n>Others</div>
+      </div>
+      <div v-for="entry in others" :key="entry.label">
+        <div class="help-other-symbols"><div :class="entry.iconClass">{{ entry.innerText }}</div></div>
+        <div class="help-icon-label" v-i18n>{{ entry.label }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue';

@@ -1,5 +1,5 @@
 <template>
-  <div class="tag-count tooltip tooltip-bottom" :class="classes" :data-tooltip="$t(tag)" ></div>
+  <div class="tag-count tooltip tooltip-bottom" :class="classes" :data-tooltip="$t(tag)"></div>
 </template>
 
 <script lang="ts">

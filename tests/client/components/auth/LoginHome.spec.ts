@@ -31,12 +31,12 @@ describe('LoginHome', () => {
 
   it('loginUrl is empty when discordClientId is not set', () => {
     const wrapper = mount('');
-    expect((wrapper.vm as any).loginUrl).to.equal('');
+    expect(wrapper.vm.loginUrl).to.equal('');
   });
 
   it('loginUrl is a well-formed Discord OAuth URL when discordClientId is set', () => {
     const wrapper = mount('test-client-id');
-    expect((wrapper.vm as any).loginUrl).to.equal(
+    expect(wrapper.vm.loginUrl).to.equal(
       'https://discord.com/oauth2/authorize?client_id=test-client-id&response_type=code&scope=identify&redirect_uri=/auth/discord/callback',
     );
   });

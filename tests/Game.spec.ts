@@ -7,7 +7,7 @@ import {Thermalist} from '../src/server/awards/Thermalist';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {addCity, addGreenery, addOcean, fakeCard, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGame} from './TestingUtils';
+import {addCity, addGreenery, addOcean, doWait, fakeCard, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGame} from './TestingUtils';
 import {cast, toName} from '../src/common/utils/utils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
@@ -28,6 +28,7 @@ import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
+import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
@@ -1247,11 +1248,11 @@ describe('Game', () => {
   player.tagsForTest = {earth: 1};
 
   game.worldGovernmentTerraforming();
-  const [input, cb] = player2.popWaitingFor2();
-  const orOptions = cast(input, OrOptions);
-  const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
-  assertPlaceOcean(player2, oceanAction);
-  cb?.(); // Will gain 2 plants and lose 1 plant.
+  // The callback will gain 2 plants and lose 1 plant.
+  doWait(player2, OrOptions, (orOptions) => {
+    const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
+    assertPlaceOcean(player2, oceanAction);
+  });
 
   expect(player.plants).to.eq(1);
   });
@@ -1411,6 +1412,21 @@ describe('Game', () => {
       }
     });
   }
+
+  it('timer is disabled until the player picks their corporation', () => {
+    const [/* game */, player, player2] = testGame(2, {skipInitialCardSelection: false});
+    const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
+    expect(player.timer.serialize().enabled).is.false;
+    expect(player.timer.serialize().running).is.false;
+
+    player.process({type: 'initialCards', responses: [
+      {type: 'card', cards: [cast(selectInitialCards.options[0], SelectCard).cards[0].name]},
+      {type: 'card', cards: []},
+    ]});
+    expect(player.timer.serialize().enabled).is.true;
+    expect(player.timer.getElapsed()).eq(0);
+    expect(player2.timer.serialize().enabled).is.false;
+  });
 });
 
 function assertIsJSON(serialized: any) {

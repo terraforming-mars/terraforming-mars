@@ -49,20 +49,20 @@ describe('LogPanel', () => {
   }
 
   beforeEach(() => {
-    originalFetch = (global as any).fetch;
+    originalFetch = global.fetch;
     originalGetElementById = document.getElementById.bind(document);
     fetchCalls = [];
-    (global as any).fetch = (url: string) => {
-      fetchCalls.push(url);
+    global.fetch = (url: string | URL | Request) => {
+      fetchCalls.push(url as unknown as string);
       return Promise.resolve({
         ok: true,
         json: () => Promise.resolve([]),
-      });
+      } as Response);
     };
   });
 
   afterEach(() => {
-    (global as any).fetch = originalFetch;
+    global.fetch = originalFetch;
     document.getElementById = originalGetElementById;
   });
 
@@ -86,7 +86,7 @@ describe('LogPanel', () => {
     const message = new LogMessage(LogMessageType.DEFAULT, '${0}', [
       {type: LogMessageDataType.SPACE, value: '05' as SpaceId},
     ]);
-    (wrapper.vm as any).messages.push(message);
+    wrapper.vm.messages.push(message);
     await wrapper.vm.$nextTick();
 
     await wrapper.findComponent(LogMessageComponent).vm.$emit('spaceClicked', '05');
@@ -102,20 +102,20 @@ describe('LogPanel', () => {
     });
     await flushLogs(wrapper);
 
-    expect((wrapper.vm as any).showScrollToBottomButton).is.false;
+    expect(wrapper.vm.showScrollToBottomButton).is.false;
 
     panel.setScrollTop(100);
     await wrapper.find('#logpanel-scrollable').trigger('scroll');
-    expect((wrapper.vm as any).showScrollToBottomButton).is.true;
+    expect(wrapper.vm.showScrollToBottomButton).is.true;
 
     panel.setScrollTop(320);
     await wrapper.find('#logpanel-scrollable').trigger('scroll');
-    expect((wrapper.vm as any).showScrollToBottomButton).is.false;
+    expect(wrapper.vm.showScrollToBottomButton).is.false;
   });
 
   it('returns to the current generation and the end of the log', async () => {
     const panel = installScrollablePanel();
-    const baseViewModel = fakeViewModel({id: 'p-latest-reader' as any});
+    const baseViewModel = fakeViewModel({id: 'p-latest-reader'});
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
@@ -123,26 +123,26 @@ describe('LogPanel', () => {
     });
     await flushLogs(wrapper);
 
-    (wrapper.vm as any).selectedGeneration = 1;
+    wrapper.vm.selectedGeneration = 1;
     panel.setScrollTop(80);
     await wrapper.find('[data-test="log-latest"]').trigger('click');
     await flushLogs(wrapper);
 
-    expect((wrapper.vm as any).selectedGeneration).eq(3);
+    expect(wrapper.vm.selectedGeneration).eq(3);
     expect(fetchCalls[fetchCalls.length - 1]).includes('generation=3');
     expect(panel.getScrollTop()).eq(520);
   });
 
   it('follows the newest generation when the view model updates while following', async () => {
     const panel = installScrollablePanel();
-    const baseViewModel = fakeViewModel({id: 'p-in-place-follower' as any});
+    const baseViewModel = fakeViewModel({id: 'p-in-place-follower'});
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
       props: {viewModel},
     });
     await flushLogs(wrapper);
-    (wrapper.vm as any).showLatestLogs();
+    wrapper.vm.showLatestLogs();
     await flushLogs(wrapper);
     fetchCalls.length = 0;
     panel.setScrollHeight(640);
@@ -150,21 +150,21 @@ describe('LogPanel', () => {
     await wrapper.setProps({viewModel: {...viewModel, game: {...viewModel.game, generation: 3}}});
     await flushLogs(wrapper);
 
-    expect((wrapper.vm as any).selectedGeneration).eq(3);
+    expect(wrapper.vm.selectedGeneration).eq(3);
     expect(fetchCalls).has.length(1);
     expect(fetchCalls[0]).includes('generation=3');
     expect(panel.getScrollTop()).eq(640);
   });
 
   it('refetches the current generation when the view model updates within a generation', async () => {
-    const baseViewModel = fakeViewModel({id: 'p-in-place-same-gen' as any});
+    const baseViewModel = fakeViewModel({id: 'p-in-place-same-gen'});
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 2}};
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
       props: {viewModel},
     });
     await flushLogs(wrapper);
-    (wrapper.vm as any).showLatestLogs();
+    wrapper.vm.showLatestLogs();
     await flushLogs(wrapper);
     fetchCalls.length = 0;
 
@@ -176,21 +176,21 @@ describe('LogPanel', () => {
   });
 
   it('stays on an earlier generation when the view model updates after the player navigates away', async () => {
-    const baseViewModel = fakeViewModel({id: 'p-in-place-history' as any});
+    const baseViewModel = fakeViewModel({id: 'p-in-place-history'});
     const viewModel = {...baseViewModel, game: {...baseViewModel.game, generation: 3}};
     const wrapper = shallowMount(LogPanel, {
       ...globalConfig,
       props: {viewModel},
     });
     await flushLogs(wrapper);
-    (wrapper.vm as any).selectGeneration(1);
+    wrapper.vm.selectGeneration(1);
     await flushLogs(wrapper);
     fetchCalls.length = 0;
 
     await wrapper.setProps({viewModel: {...viewModel, game: {...viewModel.game, generation: 4}}});
     await flushLogs(wrapper);
 
-    expect((wrapper.vm as any).selectedGeneration).eq(1);
+    expect(wrapper.vm.selectedGeneration).eq(1);
     expect(fetchCalls).is.empty;
   });
 });

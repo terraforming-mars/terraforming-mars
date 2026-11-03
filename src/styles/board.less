@@ -336,6 +336,14 @@
   background: url(./assets/board_icons.png) -24px -117px no-repeat;
 }
 
+.board-cube--turquoise {
+  background: url(./assets/player_colors_extra.png) 0 -129px no-repeat;
+}
+
+.board-cube--clear {
+  background: url(./assets/player_colors_extra.png) -21px -129px no-repeat;
+}
+
 .board-cube--bronze {
   background: url(./assets/board_icons.png) -142px -91px no-repeat;
 }
@@ -409,6 +417,21 @@
   content: "◈";
   margin-left: 5px;
   margin-top: -2px;
+}
+
+.board-cube--turquoise.overlay::after {
+  .overlay_base();
+  content: "✕";
+  margin-left: 5px;
+  margin-top: -1px;
+}
+
+.board-cube--clear.overlay::after {
+  .overlay_base();
+  content: "○";
+  margin-left: 5px;
+  margin-top: -1px;
+  color: #333;
 }
 
 .board-cube--bronze.overlay::after {
@@ -673,4 +696,12 @@ each(@token_types, {
 
 .underground-excavator--pink {
   background-color: @player_pink;
+}
+
+.underground-excavator--turquoise {
+  background-color: @player_turquoise;
+}
+
+.underground-excavator--clear {
+  background-color: @player_clear;
 }

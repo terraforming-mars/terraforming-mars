@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DryDeserts} from '../../src/server/turmoil/globalEvents/DryDeserts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {addOcean, maxOutOceans, runAllActions, testGame} from '../TestingUtils';
+import {addOcean, doWait, maxOutOceans, runAllActions, testGame} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {GainResources} from '../../src/server/inputs/GainResources';
 import {IGame} from '../../src/server/IGame';
@@ -73,9 +73,7 @@ describe('DryDeserts', () => {
     runAllActions(game);
 
     // Player has no influence, so is only asked to remove the ocean.
-    const [selectSpace, cb] = player.popWaitingFor2();
-    cast(selectSpace, SelectSpace).cb(space);
-    cb?.();
+    doWait(player, SelectSpace, (selectSpace) => selectSpace.cb(space));
 
     const gainResources = cast(player2.popWaitingFor(), GainResources);
     gainResources.options[0].cb(3);

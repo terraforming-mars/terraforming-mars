@@ -23,7 +23,13 @@ export type LogMessageDataAttrs = {
 }
 
 type Types = {
-  type: LogMessageDataType.STRING | LogMessageDataType.RAW_STRING,
+  type: LogMessageDataType.STRING,
+  value: string,
+} | {
+  type: LogMessageDataType.RAW_STRING,
+  value: string,
+} | {
+  type: LogMessageDataType.MARKDOWN,
   value: string,
 } | {
   type: LogMessageDataType.PLAYER,

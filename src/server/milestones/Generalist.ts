@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Generalist extends BaseMilestone {
+  public readonly automaDescription = 'All tracks ≥ 2 (except Venus)';
   constructor() {
     super(
       'Generalist',

@@ -23,6 +23,22 @@ describe('LogMessageComponent', () => {
     expect(wrapper.exists()).to.be.true;
   });
 
+  it('calls the parent click listener once per click', async () => {
+    let clicks = 0;
+    const wrapper = shallowMount(LogMessageComponent, {
+      ...globalConfig,
+      props: {
+        message: new LogMessage(LogMessageType.DEFAULT, 'Test message', []),
+        viewModel: fakeViewModel(),
+      },
+      attrs: {onClick: () => clicks++},
+    });
+
+    await wrapper.find('li').trigger('click');
+
+    expect(clicks).to.eq(1);
+  });
+
   it('renders CARD type as a single card span', () => {
     const message = new LogMessage(LogMessageType.DEFAULT, '${0}', [
       {type: LogMessageDataType.CARD, value: CardName.ANTS},
@@ -165,5 +181,18 @@ describe('LogMessageComponent', () => {
     expect(html).includes(
       '<span class="markdown-production"><span class="markdown-resource resource_icon--heat"></span></span>');
     expect(html).includes('<span class="markdown-resource card-resource-syndicate-fleet"></span>');
+  });
+
+  it('renders MARKDOWN data as icons only', () => {
+    const message = new LogMessage(LogMessageType.DEFAULT, '[ ${0} ]', [
+      {type: LogMessageDataType.MARKDOWN, value: '-3:r:mc: *x*'},
+    ]);
+    const wrapper = shallowMount(LogMessageComponent, {
+      ...globalConfig,
+      props: {message, viewModel: fakeViewModel()},
+    });
+
+    const html = wrapper.html();
+    expect(html).includes('-3<span class="markdown-resource resource_icon--megacredits"></span> *x*');
   });
 });

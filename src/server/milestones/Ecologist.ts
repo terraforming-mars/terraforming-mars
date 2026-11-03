@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
 export class Ecologist extends BaseMilestone {
+  public readonly automaDescription = 'Bio track ≥ 4';
   constructor() {
     super(
       'Ecologist',

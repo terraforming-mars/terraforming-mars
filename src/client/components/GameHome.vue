@@ -1,13 +1,13 @@
 <template>
   <div id="game-home" class="game-home-container">
-    <h1><HomeLink>Terraforming Mars</HomeLink> [<span v-i18n>game id:</span> <span>{{gameId}}</span>]</h1>
+    <h1><HomeLink>Terraforming Mars</HomeLink> [<span v-i18n>game id:</span> <span>{{ gameId }}</span>]</h1>
     <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
     <ul>
       <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
-        <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
-        <span :class="'color-square ' + getPlayerCubeColorClass(player.color)">{{playerSymbol(player.color)}}</span>
-        <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-        <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
+        <span class="turn-order" v-i18n>{{ getTurnOrder(index) }}</span>
+        <span :class="'color-square ' + getPlayerCubeColorClass(player.color)">{{ playerSymbol(player.color) }}</span>
+        <span class="player-name"><a :href="getHref(player.id)">{{ player.name }}</a></span>
+        <AppButton title="copy" size="tiny" @click="copyUrl(player.id)" />
         <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
       </li>
       <li v-if="game !== undefined">
@@ -15,18 +15,18 @@
         <span class="turn-order"></span>
         <span class="color-square"></span>
         <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
-        <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
+        <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)" />
       </li>
     </ul>
 
     <div class="spacing-setup"></div>
 
-    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"/>
+    <PurgeWarning :expectedPurgeTimeMs="game.expectedPurgeTimeMs" />
 
     <div class="spacing-setup"></div>
     <div v-if="game !== undefined">
       <h1 v-i18n>Game settings</h1>
-      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"/>
+      <GameSetupDetail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration" />
     </div>
   </div>
 </template>

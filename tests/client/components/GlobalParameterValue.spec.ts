@@ -32,7 +32,7 @@ describe('GlobalParameterValue', () => {
           boardName: run.boardName,
         },
       });
-      expect((wrapper.vm as any).isMax).eq(run.isMax);
+      expect(wrapper.vm.isMax).eq(run.isMax);
     });
   }
 });

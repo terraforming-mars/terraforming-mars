@@ -22,10 +22,7 @@ describe('EscapeVelocity', () => {
     clock = new FakeClock();
     timer = Timer.newInstance(clock);
     player.timer = timer;
-
-    // Trigger a vestigial start/stop pair to actually start/stop.
-    timer.start();
-    timer.stop();
+    timer.enable();
   });
 
   it('sanity test', () => {

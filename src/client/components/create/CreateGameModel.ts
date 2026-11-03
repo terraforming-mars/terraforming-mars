@@ -4,6 +4,7 @@ import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import {NewPlayerModel} from '@/common/game/NewGameConfig';
+import {CustomMA} from '@/common/ma/CustomMA';
 import {Expansion} from '@/common/cards/GameModule';
 import {BoardName} from '@/common/boards/BoardName';
 
@@ -19,6 +20,7 @@ export type CreateGameModel = {
   customCeos: Array<CardName>;
   customColonies: Array<ColonyName>;
   customCorporations: Array<CardName>;
+  customMA: CustomMA | undefined;
   customPreludes: Array<CardName>;
   draftVariant: boolean;
   escapeVelocityBonusSeconds: number;

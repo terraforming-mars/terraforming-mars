@@ -103,6 +103,7 @@ const pluginRules = {
   'vue/v-on-style': ['error', 'shorthand'],
   'vue/v-bind-style': ['error', 'shorthand'],
   'vue/v-slot-style': ['error', 'shorthand'],
+  'vue/html-indent': ['error', 2, {alignAttributesVertically: false}],
   // B6 — components with no content should self-close. HTML elements left alone.
   'vue/html-self-closing': ['error', {
     html: {void: 'never', normal: 'never', component: 'always'},
@@ -115,6 +116,20 @@ const pluginRules = {
   'vue/component-name-in-template-casing': ['error', 'PascalCase', {
     registeredComponentsOnly: false,
   }],
+  'vue/html-end-tags': 'error',
+  'vue/this-in-template': 'error',
+  'vue/no-template-shadow': 'error',
+  'vue/no-useless-mustaches': 'error',
+  'vue/require-prop-types': 'error',
+  'vue/block-order': 'error',
+  'vue/no-spaces-around-equal-signs-in-attribute': 'error',
+  'vue/html-quotes': 'error',
+  'vue/no-multi-spaces': 'error',
+  'vue/html-comment-content-spacing': 'error',
+  'vue/v-for-delimiter-style': 'error',
+  'vue/mustache-interpolation-spacing': 'error',
+  'vue/require-explicit-emits': 'error',
+  'vue/html-closing-bracket-spacing': 'error',
 };
 
 const sharedLanguageOptions = {

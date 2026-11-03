@@ -1,7 +1,7 @@
 <template>
   <div class="card-requirements" :class="{'card-requirements-max': hasMax}">
     <div v-for="(req, idx) in requirements" :key="idx">
-      <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]"/>
+      <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]" />
     </div>
   </div>
 </template>

@@ -4,6 +4,7 @@ import {IPlayer} from '../IPlayer';
 export class Briber implements IMilestone {
   public readonly name = 'Briber';
   public readonly description = 'Pay 12 M€ to receive this milestone, in addition to the normal claim cost';
+  public readonly automaDescription = '20+ M€ (loses 12 M€ on claim)';
   public getScore(player: IPlayer): number {
     return player.spendableMegacredits();
   }

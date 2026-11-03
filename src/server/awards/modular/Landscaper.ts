@@ -6,6 +6,7 @@ import {Board} from '../../boards/Board';
 export class Landscaper implements IAward {
   public readonly name = 'Landscaper';
   public readonly description = 'Most tiles connected together (each player counts largest group of tiles)';
+  public readonly automaDescription = 'Largest group of connected tiles (unchanged)';
   public getScore(player: IPlayer): number {
     const board = player.game.board;
     const marsCount = new SpaceCounter(board, this.getSpaces(board, player)).compute();

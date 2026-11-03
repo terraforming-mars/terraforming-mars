@@ -1,18 +1,9 @@
 import {expect} from 'chai';
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {FakeLocalStorage, useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('SafeLocalStorage', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('round-trips values', () => {
     safeLocalStorage.setItem('a', '1');
@@ -31,25 +22,26 @@ describe('SafeLocalStorage', () => {
     expect(safeLocalStorage.keys().sort()).to.deep.eq(['a', 'b']);
   });
 
+  class ThrowingLocalStorage extends FakeLocalStorage {
+    public override getItem(): string | null {
+      throw new Error('denied');
+    }
+    public override setItem() {
+      throw new Error('denied');
+    }
+    public override removeItem() {
+      throw new Error('denied');
+    }
+    public override get length(): number {
+      throw new Error('denied');
+    }
+    public override key(): string | null {
+      throw new Error('denied');
+    }
+  }
+
   it('fails soft when storage throws', () => {
-    const throwing = {
-      getItem() {
-        throw new Error('denied');
-      },
-      setItem() {
-        throw new Error('denied');
-      },
-      removeItem() {
-        throw new Error('denied');
-      },
-      get length(): number {
-        throw new Error('denied');
-      },
-      key() {
-        throw new Error('denied');
-      },
-    };
-    (global as any).localStorage = throwing;
+    global.localStorage = new ThrowingLocalStorage();
 
     // None of these should throw.
     expect(() => safeLocalStorage.setItem('a', '1')).to.not.throw();

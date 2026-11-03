@@ -5,6 +5,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class Politician implements IAward {
   public readonly name = 'Politician';
   public readonly description = 'Have the most party leaders and influence combined.';
+  public readonly automaDescription = 'Always 5';
 
   public getScore(player: IPlayer): number {
     Turmoil;

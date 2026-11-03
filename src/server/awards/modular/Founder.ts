@@ -5,6 +5,7 @@ import {Board, isSpecialTileSpace} from '../../boards/Board';
 export class Founder implements IAward {
   public readonly name = 'Founder';
   public readonly description = 'Have the most tiles adjacent to special tiles.';
+  public readonly automaDescription = 'Tiles next to special tiles (Neural Instance counts for MarsBot)';
 
   public getScore(player: IPlayer): number {
     const board = player.game.board;

@@ -1,7 +1,7 @@
 <template>
-        <div class="card-row">
-            <CardRowComponent v-for="(componentData, i) in rowData" :componentData="componentData" :key="i" />
-        </div>
+  <div class="card-row">
+    <CardRowComponent v-for="(componentData, i) in rowData" :componentData="componentData" :key="i" />
+  </div>
 </template>
 
 <script lang="ts">

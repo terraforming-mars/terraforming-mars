@@ -47,6 +47,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
+import {HeadStart} from './cards/promo/HeadStart';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
@@ -123,7 +124,6 @@ export class Player implements IPlayer {
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
-  public headStartActionsRemaining: number = 0;
   public actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: CardName | undefined;
   public pendingInitialActions: Array<ICorporationCard> = [];
@@ -1429,7 +1429,7 @@ export class Player implements IPlayer {
   }
 
   private headStartIsInEffect() {
-    return this.headStartActionsRemaining > 0;
+    return HeadStart.actionsRemaining(this) > 0;
   }
 
   /**
@@ -1504,8 +1504,7 @@ export class Player implements IPlayer {
         this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
       }
 
-      // Head Start's actions come before the first action phase turn, which is where the corporation's first action belongs.
-      if (this.pendingInitialActions.length > 0 && !headStartIsInEffect) {
+      if (this.pendingInitialActions.length > 0) {
         const orOptions = new OrOptions();
 
         this.pendingInitialActions.forEach((corp) => {
@@ -1521,34 +1520,54 @@ export class Player implements IPlayer {
           orOptions.options.push(option);
         });
 
-        orOptions.options.push(this.passOption());
+        if (!headStartIsInEffect) {
+          orOptions.options.push(this.passOption());
+        }
 
         this.setWaitingFor(orOptions, () => game.drainQueue(() => {
-          if (this.pendingInitialActions.length === 0) {
-            this.incrementActionsTaken();
-          }
           this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
-          this.takeAction();
+          // All of the corporations' first actions together make one action.
+          if (this.pendingInitialActions.length > 0) {
+            this.takeAction();
+          } else {
+            this.finishAction(headStartIsInEffect);
+          }
         }));
         return;
       }
 
-      this.setWaitingFor(this.getActions(), () => game.drainQueue(() => {
-        if (!headStartIsInEffect) {
-          this.incrementActionsTaken();
-          this.takeAction();
-          return;
-        }
-        this.headStartActionsRemaining--;
-        this.actionsTakenThisGame++;
-        // Head Start was the last prelude: hand the turn on rather than falling into the action phase.
-        if (game.phase === Phase.PRELUDES && !this.headStartIsInEffect() && this.preludeCardsInHand.length === 0) {
-          game.playerIsFinishedTakingActions();
-          return;
-        }
-        this.takeAction();
-      }));
+      const actions = this.getActions();
+      // Head Start's actions are not optional, so one is only lost when there is nothing to do.
+      if (headStartIsInEffect && actions.options.length === 0) {
+        game.log('${0} had no action to take for Head Start', (b) => b.player(this));
+        this.finishHeadStartAction();
+        return;
+      }
+
+      this.setWaitingFor(actions, () => game.drainQueue(() => this.finishAction(headStartIsInEffect)));
     });
+  }
+
+  /** Counts the action the player just took and moves on to their next one. */
+  private finishAction(headStartAction: boolean): void {
+    if (headStartAction) {
+      this.actionsTakenThisGame++;
+      this.finishHeadStartAction();
+    } else {
+      this.incrementActionsTaken();
+      this.takeAction();
+    }
+  }
+
+  /** Uses up one Head Start action and moves on to the player's next action. */
+  private finishHeadStartAction(): void {
+    HeadStart.useAction(this);
+    // Head Start was the last prelude: hand the turn on rather than falling into the action phase.
+    if (this.game.phase === Phase.PRELUDES && !this.headStartIsInEffect() && this.preludeCardsInHand.length === 0) {
+      this.game.playerIsFinishedTakingActions();
+      return;
+    }
+    this.takeAction();
   }
 
   private incrementActionsTaken(): void {
@@ -1557,8 +1576,8 @@ export class Player implements IPlayer {
   }
 
   public /* for testing */ getActions() {
-    const headStart = this.headStartIsInEffect();
-    const firstAction = headStart ? this.headStartActionsRemaining >= 2 : this.actionsTakenThisRound === 0;
+    const headStartInEffect = this.headStartIsInEffect();
+    const firstAction = headStartInEffect ? HeadStart.actionsRemaining(this) >= 2 : this.actionsTakenThisRound === 0;
     const action = new OrOptions()
       .setTitle(firstAction ? 'Take your first action' : 'Take your next action')
       .setButtonLabel('Take action');
@@ -1638,11 +1657,11 @@ export class Player implements IPlayer {
     }
 
     // End turn
-    if (!headStart &&
-      this.game.players.length > 1 &&
+    if (this.game.players.length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
-      this.allOtherPlayersHavePassed() === false) {
+      this.allOtherPlayersHavePassed() === false &&
+      !headStartInEffect) {
       action.options.push(this.endTurnOption());
     }
 
@@ -1658,16 +1677,14 @@ export class Player implements IPlayer {
       action.options.push(remainingAwards);
     }
 
-    // Standard Projects
-    action.options.push(this.getStandardProjectOption());
+    // Standard Projects. During Head Start, only options the player can take are offered.
+    const standardProjects = this.getStandardProjectOption();
+    if (standardProjects.enabled?.includes(true) || !headStartInEffect) {
+      action.options.push(standardProjects);
+    }
 
-    // Pass. Passing during Head Start would end the player's generation, so they may only skip its actions.
-    if (headStart) {
-      action.options.push(new SelectOption('Skip this action').andThen(() => {
-        this.game.log('${0} skipped a Head Start action', (b) => b.player(this));
-        return undefined;
-      }));
-    } else {
+    // Pass. Head Start's actions can't be passed.
+    if (!headStartInEffect) {
       action.options.push(this.passOption());
     }
 
@@ -1678,7 +1695,7 @@ export class Player implements IPlayer {
     }
 
     // Propose undo action only if you have done one action this turn
-    if (!headStart && this.actionsTakenThisRound > 0 && this.game.gameOptions.undoOption) {
+    if (this.actionsTakenThisRound > 0 && this.game.gameOptions.undoOption && !headStartInEffect) {
       action.options.push(new UndoActionOption());
     }
 
@@ -1812,7 +1829,6 @@ export class Player implements IPlayer {
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       availableActionsThisRound: this.availableActionsThisRound,
-      headStartActionsRemaining: this.headStartActionsRemaining,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       pendingInitialActions: this.pendingInitialActions.map(toName),
       // Cards
@@ -1885,7 +1901,6 @@ export class Player implements IPlayer {
     player.actionsThisGeneration = new Set(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.availableActionsThisRound = d.availableActionsThisRound ?? 2;
-    player.headStartActionsRemaining = d.headStartActionsRemaining ?? 0;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
     player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;

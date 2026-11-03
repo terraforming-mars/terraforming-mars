@@ -34,13 +34,29 @@ export class HeadStart extends PreludeCard {
 
   private static PROJECT_CARD_TYPES = [CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT];
 
+  public data: {actionsRemaining: number} = {actionsRemaining: 0};
+
   public override bespokePlay(player: IPlayer) {
     const projectCardsInHand = player.cardsInHand.filter((card) => HeadStart.PROJECT_CARD_TYPES.includes(card.type));
     const megacredits = projectCardsInHand.length * 2;
     player.stock.add(Resource.MEGACREDITS, megacredits, {log: true});
     // Player.takeAction offers these before anything else, including the player's remaining preludes.
-    player.headStartActionsRemaining += 2;
+    this.data.actionsRemaining += 2;
 
     return undefined;
+  }
+
+  /** The number of Head Start actions `player` still has to take. */
+  public static actionsRemaining(player: IPlayer): number {
+    const card = player.tableau.get(CardName.HEAD_START) as HeadStart | undefined;
+    return card?.data.actionsRemaining ?? 0;
+  }
+
+  /** Uses up one of `player`'s remaining Head Start actions. */
+  public static useAction(player: IPlayer): void {
+    const card = player.tableau.get(CardName.HEAD_START) as HeadStart | undefined;
+    if (card !== undefined && card.data.actionsRemaining > 0) {
+      card.data.actionsRemaining--;
+    }
   }
 }

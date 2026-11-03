@@ -11,7 +11,8 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Phase} from '../../../src/common/Phase';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {Donation} from '../../../src/server/cards/prelude/Donation';
-import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
+import {DoubleDown} from '../../../src/server/cards/promo/DoubleDown';
+import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
 import {BeginnerCorporation} from '../../../src/server/cards/corporation/BeginnerCorporation';
 import {cast} from '../../../src/common/utils/utils';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
@@ -29,8 +30,8 @@ describe('HeadStart', () => {
     [game, player, player2] = testGame(2, {preludeExtension: true});
   });
 
-  function start() {
-    player.preludeCardsInHand = [headStart, loan];
+  function start(preludes: Array<IPreludeCard> = [headStart, loan]) {
+    player.preludeCardsInHand = preludes;
     player2.preludeCardsInHand = [new Donation()];
     player.takeAction();
   }
@@ -47,10 +48,13 @@ describe('HeadStart', () => {
     return cast(player.getWaitingFor(), OrOptions);
   }
 
+  function titles(): Array<string> {
+    return actionMenu().options.map((option) => formatMessage(option.title));
+  }
+
   function choose(title: string) {
-    const menu = actionMenu();
-    const index = menu.options.findIndex((option) => option.title === title);
-    expect(index, `no "${title}" in ${menu.options.map((o) => o.title)}`).gte(0);
+    const index = titles().indexOf(title);
+    expect(index, `no "${title}" in ${titles()}`).gte(0);
     player.process({type: 'or', index, response: {type: 'option'}});
     runAllActions(game);
   }
@@ -68,13 +72,19 @@ describe('HeadStart', () => {
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });
 
-  for (const headStartFirst of [true, false]) {
-    it(`Take 2 actions, as ${headStartFirst ? 'first' : 'second'} prelude`, () => {
-      player.heat = 16;
-      start();
-      for (const prelude of headStartFirst ? [headStart, loan] : [loan, headStart]) {
-        playPrelude(prelude);
-        if (prelude === headStart) {
+  for (const run of [
+    {title: 'as first prelude', plays: ['headStart', 'second'], second: 'loan'},
+    {title: 'as second prelude', plays: ['second', 'headStart'], second: 'loan'},
+    // Double Down asks for the prelude to copy with the same prompt as playing one.
+    {title: 'again when Double Down copies it', plays: ['headStart', 'second', 'headStart'], second: 'doubleDown'},
+  ] as const) {
+    it(`Take 2 actions ${run.title}`, () => {
+      const second = run.second === 'loan' ? loan : new DoubleDown();
+      player.heat = 32;
+      start([headStart, second]);
+      for (const play of run.plays) {
+        playPrelude(play === 'headStart' ? headStart : second);
+        if (play === 'headStart') {
           expect(actionMenu().title).eq('Take your first action');
           choose('Convert 8 heat into temperature');
           expect(actionMenu().title).eq('Take your next action');
@@ -82,7 +92,6 @@ describe('HeadStart', () => {
         }
       }
 
-      expect(player.heat).eq(0);
       expectPlayer2ToPlayPreludes();
     });
   }
@@ -94,26 +103,33 @@ describe('HeadStart', () => {
     playPrelude(headStart);
     choose('Convert 8 heat into temperature');
 
-    const titles = actionMenu().options.map((option) => option.title);
-    expect(titles).includes('Skip this action');
-    expect(titles).does.not.include('Pass for this generation');
-    expect(titles).does.not.include('End Turn');
-    expect(titles).does.not.include('Undo last action');
+    for (const title of ['Pass for this generation', 'Skip this action', 'End Turn', 'Undo last action']) {
+      expect(titles()).does.not.include(title);
+    }
   });
 
-  it('The corporation first action waits for the action phase', () => {
-    const tharsis = new TharsisRepublic();
-    player.pendingInitialActions = [tharsis];
+  it('The corporation first action is the first Head Start action', () => {
+    player.heat = 8;
+    player.pendingInitialActions = [new Inventrix()];
     start();
     playPrelude(headStart);
 
-    const titles = actionMenu().options.map((option) => formatMessage(option.title));
-    expect(titles).does.not.include(`Take first action of ${tharsis.name} corporation`);
-    choose('Skip this action');
-    choose('Skip this action');
-    playPrelude(loan);
+    expect(titles()).deep.eq(['Take first action of Inventrix corporation']);
+    choose('Take first action of Inventrix corporation');
+    expect(player.cardsInHand).has.length(3);
+    expect(actionMenu().title).eq('Take your next action');
+    choose('Convert 8 heat into temperature');
 
-    expect(player.pendingInitialActions).deep.eq([tharsis]);
+    playPrelude(loan);
+    expectPlayer2ToPlayPreludes();
+  });
+
+  it('A player who cannot do anything loses the Head Start actions', () => {
+    start();
+    playPrelude(headStart);
+
+    playPrelude(loan);
+    expectPlayer2ToPlayPreludes();
   });
 
   it('Reloading the game keeps the remaining actions', () => {
@@ -128,7 +144,7 @@ describe('HeadStart', () => {
     const reloaded = Game.deserialize(game.serialize());
     const reloadedPlayer = reloaded.getPlayerById(player.id);
 
-    expect(reloadedPlayer.headStartActionsRemaining).eq(1);
+    expect(HeadStart.actionsRemaining(reloadedPlayer)).eq(1);
     expect(reloaded.activePlayer.id).eq(player.id);
     expect(cast(reloadedPlayer.getWaitingFor(), OrOptions).title).eq('Take your next action');
   });

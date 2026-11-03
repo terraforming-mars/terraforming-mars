@@ -16,7 +16,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   actionsTakenThisGame: number;
   actionsTakenThisRound: number;
   availableActionsThisRound?: number;
-  headStartActionsRemaining?: number;
   actionsThisGeneration: Array<CardName>;
   alliedParty: AlliedParty | undefined;
   autoPass: boolean;

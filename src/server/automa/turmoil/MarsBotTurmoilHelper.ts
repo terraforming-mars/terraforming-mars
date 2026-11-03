@@ -4,7 +4,7 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import {IPlayer} from '@/server/IPlayer';
 import {IGame} from '@/server/IGame';
 
-/** MarsBot's delegate placement in an automa game (T-7). */
+/** MarsBot's delegate placement in an automa game (Party Politics, rulebook C p.6). */
 export class MarsBotTurmoilHelper {
   private readonly turmoil: Turmoil;
   private readonly marsBotPlayer: IPlayer;
@@ -20,7 +20,7 @@ export class MarsBotTurmoilHelper {
   }
 
   /**
-   * Chooses the party for MarsBot's next delegate, or undefined when its reserve is empty (T-7).
+   * Chooses the party for MarsBot's next delegate, or undefined when its reserve is empty.
    *
    * Each tier breaks the tie left by the one before it:
    *  1. one more delegate makes MarsBot the party leader and the party dominant
@@ -59,7 +59,7 @@ export class MarsBotTurmoilHelper {
   }
 
   /**
-   * Sends one delegate from MarsBot's reserve to the party it picks (T-7).
+   * Sends one delegate from MarsBot's reserve to the party it picks.
    *
    * Returns the party it went to, or undefined when the reserve is empty.
    */

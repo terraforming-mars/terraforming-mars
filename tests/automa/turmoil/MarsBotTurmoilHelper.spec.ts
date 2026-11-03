@@ -23,7 +23,8 @@ describe('MarsBotTurmoilHelper', () => {
     helper = new MarsBotTurmoilHelper(game);
   });
 
-  it('T-7.1: picks a party where one more delegate makes MarsBot leader and the party dominant', () => {
+  // The numbered priority list on Party Politics, rulebook C p.6.
+  it('priority 1: picks a party where one more delegate makes MarsBot leader and the party dominant', () => {
     for (const name of [PartyName.MARS, PartyName.UNITY, PartyName.REDS, PartyName.GREENS]) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
     }
@@ -32,7 +33,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).eq(PartyName.SCIENTISTS);
   });
 
-  it('T-7.2: picks a party where one more delegate makes MarsBot leader', () => {
+  it('priority 2: picks a party where one more delegate makes MarsBot leader', () => {
     for (let i = 0; i < 5; i++) {
       turmoil.sendDelegateToParty('NEUTRAL', PartyName.KELVINISTS, game);
     }
@@ -44,7 +45,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).eq(PartyName.SCIENTISTS);
   });
 
-  it('T-7.3: picks a party MarsBot leads where one more delegate makes it dominant', () => {
+  it('priority 3: picks a party MarsBot leads where one more delegate makes it dominant', () => {
     for (const name of [PartyName.MARS, PartyName.SCIENTISTS, PartyName.KELVINISTS, PartyName.REDS, PartyName.GREENS]) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
     }
@@ -54,7 +55,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).eq(PartyName.UNITY);
   });
 
-  it('T-7.3: skips a party that is already dominant', () => {
+  it('priority 3: skips a party that is already dominant', () => {
     for (const name of Object.values(PartyName)) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
     }
@@ -65,7 +66,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).not.eq(PartyName.UNITY);
   });
 
-  it('T-7.4: picks the party where the human has the fewest delegates', () => {
+  it('priority 4: picks the party where the human has the fewest delegates', () => {
     for (const name of Object.values(PartyName)) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
     }
@@ -76,7 +77,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).eq(PartyName.GREENS);
   });
 
-  it('T-7.5: picks the party where MarsBot has the fewest delegates', () => {
+  it('priority 5: picks the party where MarsBot has the fewest delegates', () => {
     // Two NEUTRAL delegates where MarsBot has one, so one more MarsBot delegate never takes a lead.
     for (const name of Object.values(PartyName)) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
@@ -89,7 +90,7 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).eq(PartyName.GREENS);
   });
 
-  it('T-7.6: picks the next party clockwise from the dominance marker', () => {
+  it('priority 6: picks the next party clockwise from the dominance marker', () => {
     for (const name of Object.values(PartyName)) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
     }

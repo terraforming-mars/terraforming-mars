@@ -9,6 +9,7 @@ type MAManifestSpec<V> = {
   compatibility?: Expansion;
   /** When true, do not include in any new games when picking randomly. */
   deprecated?: true;
+  /** Drawn in modular games, both types, or (undefined) only non-modular games. */
   random?: 'modular' | 'both';
 }
 type ExpansionsWithMAs = 'venus' | 'ares' | 'moon' | 'underworld';

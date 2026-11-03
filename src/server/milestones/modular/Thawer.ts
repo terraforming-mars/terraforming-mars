@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Thawer extends BaseMilestone {
+  public readonly automaDescription = 'Raised temperature 5+ times';
   constructor() {
     super(
       'Thawer',

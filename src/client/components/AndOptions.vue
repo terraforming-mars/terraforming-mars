@@ -1,5 +1,5 @@
 <template>
-  <div class='wf-options'>
+  <div class="wf-options">
     <div v-if="showtitle" class="wf-title">{{ $t(playerinput.title) }}</div>
     <PlayerInputFactory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
@@ -10,7 +10,7 @@
       :showsave="false"
       :showtitle="true" />
     <div v-if="showsave" class="wf-action">
-      <AppButton :title="playerinput.buttonLabel" type="submit" size="normal" @click="saveData" :disabled="!canSave()"/>
+      <AppButton :title="playerinput.buttonLabel" type="submit" size="normal" @click="saveData" :disabled="!canSave()" />
     </div>
   </div>
 </template>

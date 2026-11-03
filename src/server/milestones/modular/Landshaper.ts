@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, Board} from '../../boards/Board';
 
 export class Landshaper extends BaseMilestone {
+  public readonly automaDescription = '1+ city, 1+ greenery, Building track ≥ 5';
   constructor() {
     super(
       'Landshaper',

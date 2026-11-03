@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Metallurgist extends BaseMilestone {
+  public readonly automaDescription = 'Building + Space tracks ≥ 9';
   constructor() {
     super(
       'Metallurgist',

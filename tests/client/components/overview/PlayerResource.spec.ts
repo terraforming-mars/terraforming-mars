@@ -4,17 +4,12 @@ import {expect} from 'chai';
 import PlayerResource from '@/client/components/overview/PlayerResource.vue';
 import {Resource} from '@/common/Resource';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {FakeLocalStorage} from '../FakeLocalStorage';
+import {useFakeLocalStorage} from '../FakeLocalStorage';
 
 describe('PlayerResource', () => {
-  let localStorage: FakeLocalStorage;
+  useFakeLocalStorage();
   beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
     PreferencesManager.INSTANCE.set('learner_mode', true);
-  });
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
   });
 
   it('Does not show resource value when it is zero', () => {

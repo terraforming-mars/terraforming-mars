@@ -67,7 +67,7 @@ export function computeDefaultPayment(
  * Returns the number of units of a resource to contribute toward a cost.
  *
  * Logic involves a minimum requirement to cover the gap (cost minus MC and
- * other resources), followed by a greedy allocation for non-heat resources
+ * other resources). Unless the resource is nonGreedy, more units are then added
  * to maximize resource usage without exceeding the total cost.
  *
  * @param cost - Total MC cost to cover.
@@ -95,15 +95,17 @@ function unitContribution(
     available,
   );
 
+  // nonGreedy resources only use as little as is needed.
+  if (entry.nonGreedy === true) {
+    return count;
+  }
+
   // Greedy: add more units as long as we don't push the total past the cost.
-  // Heat is non-greedy: only use the minimum needed.
   // The condition includes mcAlreadyCovered so two resources together cannot overspend.
-  if (unit !== 'heat') {
-    let mcValue = count * rate;
-    while (count < available && mcAlreadyCovered + mcValue + rate <= cost) {
-      count++;
-      mcValue += rate;
-    }
+  let mcValue = count * rate;
+  while (count < available && mcAlreadyCovered + mcValue + rate <= cost) {
+    count++;
+    mcValue += rate;
   }
 
   return count;

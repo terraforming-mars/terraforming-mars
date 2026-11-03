@@ -266,7 +266,7 @@ export class Server {
       steelValue: player.getSteelValue(),
       tags: player.tags.countAllTags(),
       terraformRating: player.terraformRating,
-      timer: player.timer.serialize(),
+      timer: player.timer.toModel(),
       titanium: player.titanium,
       titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),

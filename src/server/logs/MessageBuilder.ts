@@ -45,6 +45,12 @@ export class MessageBuilder {
     return this;
   }
 
+  /** Icon shortcodes such as `-3:r:mc:`. Untranslated, and rendered as icons only, not full markdown. */
+  public markdown(value: string): this {
+    this.push({type: LogMessageDataType.MARKDOWN, value});
+    return this;
+  }
+
   public number(value: number): this {
     this.push({type: LogMessageDataType.RAW_STRING, value: value.toString()});
     return this;

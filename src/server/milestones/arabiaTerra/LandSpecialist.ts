@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, Board} from '../../boards/Board';
 
 export class LandSpecialist extends BaseMilestone {
+  public readonly automaDescription = '3+ bonus cards destroyed';
   constructor() {
     super(
       'Land Specialist',

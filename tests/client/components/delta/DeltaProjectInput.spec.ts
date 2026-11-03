@@ -5,7 +5,7 @@ import DeltaProjectInput from '@/client/components/delta/DeltaProjectInput.vue';
 import {DeltaProjectInputModel} from '@/common/models/PlayerInputModel';
 import {DeltaProjectInputResponse, InputResponse} from '@/common/inputs/InputResponse';
 import {fakePlayerViewModel} from '../testHelpers';
-import {FakeLocalStorage} from '../FakeLocalStorage';
+import {useFakeLocalStorage} from '../FakeLocalStorage';
 
 function inputModel(validSteps: ReadonlyArray<number>): DeltaProjectInputModel {
   return {
@@ -17,8 +17,6 @@ function inputModel(validSteps: ReadonlyArray<number>): DeltaProjectInputModel {
 }
 
 describe('DeltaProjectInput', () => {
-  let localStorage: FakeLocalStorage;
-
   let saved: InputResponse | undefined;
 
   const DEFAULT_PROPS = {
@@ -31,14 +29,7 @@ describe('DeltaProjectInput', () => {
     showtitle: true,
   };
 
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('mounts and renders one option per valid step', () => {
     const wrapper = shallowMount(DeltaProjectInput, {

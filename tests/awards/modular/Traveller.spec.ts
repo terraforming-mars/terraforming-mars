@@ -6,6 +6,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {fakeMarsBot, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Traveller', () => {
   let award: Traveller;
@@ -65,5 +66,18 @@ describe('Traveller', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.EARTH]}));
     expect(award.getScore(player)).eq(3);
+  });
+
+  it('MarsBot scores the higher of its Jovian and Earth tracks plus 5', () => {
+    for (const run of [
+      {jovian: 3, earth: 6, expected: 11},
+      {jovian: 7, earth: 2, expected: 12},
+    ]) {
+      const bot = fakeMarsBot();
+      setTrack(bot, Tag.JOVIAN, run.jovian);
+      setTrack(bot, Tag.EARTH, run.earth);
+
+      expect(award.marsBotScore(bot), JSON.stringify(run)).eq(run.expected);
+    }
   });
 });

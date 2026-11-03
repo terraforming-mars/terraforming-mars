@@ -5,7 +5,7 @@ import {TrackDefinition} from '../../../common/automa/AutomaTypes';
 const TRACK_BUILDING: TrackDefinition = {
   tags: [Tag.BUILDING],
   productions: [Resource.STEEL],
-  layout: [undefined, undefined, 'ocean', undefined, undefined, 'tr2', 'temperature', 'milestone', 'greenery', 'award', 'city', 'tag_1', 'ocean', undefined, 'greenery', 'city', 'temperature', undefined, 'tr5'],
+  layout: [undefined, undefined, 'ocean', undefined, undefined, 'tr2', 'temperature', 'milestone', 'greenery', 'award', 'city', 'tag_space', 'ocean', undefined, 'greenery', 'city', 'temperature', undefined, 'tr5'],
 };
 
 const TRACK_SPACE: TrackDefinition = {
@@ -17,7 +17,7 @@ const TRACK_SPACE: TrackDefinition = {
 const TRACK_EVENT: TrackDefinition = {
   tags: [Tag.EVENT],
   productions: [Resource.MEGACREDITS],
-  layout: [undefined, 'advance', undefined, 'ocean', 'greenery', 'advance', 'venus2', 'advance', 'ocean', 'tr3', 'award', undefined, 'tr4', 'temperature', 'greenery', 'advance', 'temperature2', undefined, 'tr5'],
+  layout: [undefined, 'advance', undefined, 'ocean', 'greenery', 'advance', 'floater2', 'advance', 'ocean', 'tr3', 'award', undefined, 'tr4', 'temperature', 'greenery', 'advance', 'temperature2', undefined, 'tr5'],
 };
 
 const TRACK_SCIENCE: TrackDefinition = {
@@ -29,7 +29,7 @@ const TRACK_SCIENCE: TrackDefinition = {
 const TRACK_ENERGY: TrackDefinition = {
   tags: [Tag.POWER, Tag.JOVIAN],
   productions: [Resource.ENERGY],
-  layout: [undefined, 'advance', 'venus', 'tr3', 'venus2', 'temperature', 'advance', 'milestone', undefined, 'temperature', 'greenery', 'advance', 'ocean', undefined, 'city', 'greenery', undefined, 'temperature', 'tr8'],
+  layout: [undefined, 'advance', 'floater', 'tr3', 'floater2', 'temperature', 'advance', 'milestone', undefined, 'temperature', 'greenery', 'advance', 'ocean', undefined, 'city', 'greenery', undefined, 'temperature', 'tr8'],
 };
 
 const TRACK_EARTH: TrackDefinition = {

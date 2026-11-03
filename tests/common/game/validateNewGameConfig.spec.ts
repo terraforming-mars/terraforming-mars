@@ -96,6 +96,7 @@ const NO_ERRORS: ValidationErrors = {
   prelude2WithoutPrelude: false,
   deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
+  invalidCustomMA: '',
 };
 
 function helpers(
@@ -180,7 +181,7 @@ describe('validateNewGameConfig', () => {
     const expansions = {...newGameConfig().expansions, venus: true};
     expect(validate({expansions, altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.true;
     expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.ALL)}).altVenusBoardOnAmazonis).is.true;
-    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.OFFICIAL)}).altVenusBoardOnAmazonis).is.true;
+    expect(validate({expansions, altVenusBoard: true, boards: boardOptions(RandomBoardOption.OFFICIAL)}).altVenusBoardOnAmazonis).is.false;
     expect(validate({expansions, altVenusBoard: true, boards: [BoardName.THARSIS]}).altVenusBoardOnAmazonis).is.false;
     expect(validate({expansions, altVenusBoard: false, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;
     expect(validate({altVenusBoard: true, boards: [BoardName.AMAZONIS_PLANITIA]}).altVenusBoardOnAmazonis).is.false;
@@ -273,6 +274,17 @@ describe('validateNewGameConfig', () => {
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 0}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 1}).notEnoughCeos).eq(2 * CEO_CARDS_DEALT_PER_PLAYER);
     expect(validate({customCeos: [CardName.KAREN], startingCeos: 4}).notEnoughCeos).eq(2 * 4);
+  });
+
+  it('invalid custom milestones and awards', () => {
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+    } as const;
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA}).invalidCustomMA).eq('');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('randomMA Manual requires customMA');
+    expect(validate({randomMA: RandomMAOptionType.LIMITED, customMA}).invalidCustomMA).eq('customMA requires randomMA to be Manual');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('customMA must have 5 awards');
   });
 
   it('messages', () => {

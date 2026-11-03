@@ -18,7 +18,7 @@ describe('LoadGameForm', () => {
           getVisibilityState: () => false,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
     });
     expect(wrapper.exists()).to.be.true;
   });

@@ -1,7 +1,7 @@
 <template>
   <div class="login-home">
     <template v-if="user !== undefined">
-      You are {{  user }}
+      You are {{ user }}
       <a :href="logoutURL">Log out</a>
     </template>
     <template v-else>

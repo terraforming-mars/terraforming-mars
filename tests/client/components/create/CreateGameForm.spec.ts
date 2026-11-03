@@ -3,7 +3,7 @@ import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
 import {createGameSettingsStorage} from '@/client/components/create/createGameSettingsStorage';
-import {FakeLocalStorage} from '../FakeLocalStorage';
+import {useFakeLocalStorage} from '../FakeLocalStorage';
 import {BoardName} from '@/common/boards/BoardName';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 import {JSONObject} from '@/common/Types';
@@ -13,6 +13,8 @@ import {CardName} from '@/common/cards/CardName';
 import {CreateGameModel} from '@/client/components/create/CreateGameModel';
 import {ValidationErrors} from '@/common/game/validateNewGameConfig';
 import {ColonyName} from '@/common/colonies/ColonyName';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 // Minimal serialized Create Game payload used by settings restore tests.
 function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
@@ -50,19 +52,13 @@ function validateTwoPlayerGame(setup: (model: CreateGameModel) => void): Validat
   const model = wrapper.vm as unknown as CreateGameModel;
   model.playersCount = 2;
   setup(model);
-  return (wrapper.vm as any).validationErrors;
+  return wrapper.vm.validationErrors;
 }
 
 describe('CreateGameForm', () => {
-  let localStorage: FakeLocalStorage;
-
+  useFakeLocalStorage();
   beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
+    PreferencesManager.resetForTest();
   });
 
   it('mounts without errors', () => {
@@ -74,6 +70,7 @@ describe('CreateGameForm', () => {
 
 
   it('restores the last saved game settings on load', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     createGameSettingsStorage.save(createNewGameConfig({
       expansions: {...DEFAULT_EXPANSIONS, venus: true},
     }));
@@ -83,16 +80,17 @@ describe('CreateGameForm', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).playersCount).eq(2);
-    expect((wrapper.vm as any).players[0].name).eq('Alice');
-    expect((wrapper.vm as any).players[1].name).eq('Bob');
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.HELLAS]);
-    expect((wrapper.vm as any).draftVariant).eq(false);
-    expect((wrapper.vm as any).expansions.venus).eq(true);
-    expect((wrapper.vm as any).solarPhaseOption).eq(true);
+    expect(wrapper.vm.playersCount).eq(2);
+    expect(wrapper.vm.players[0].name).eq('Alice');
+    expect(wrapper.vm.players[1].name).eq('Bob');
+    expect(wrapper.vm.boards).deep.eq([BoardName.HELLAS]);
+    expect(wrapper.vm.draftVariant).eq(false);
+    expect(wrapper.vm.expansions.venus).eq(true);
+    expect(wrapper.vm.solarPhaseOption).eq(true);
   });
 
   it('shows warnings when restoring saved settings', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     const alerts: Array<{title: string, message: string}> = [];
     const Root = defineComponent({
       components: {
@@ -112,7 +110,7 @@ describe('CreateGameForm', () => {
       customPreludes: ['Bad Prelude Name'],
     }));
 
-    (form.vm as any).restoreLastSettings();
+    form.vm.restoreLastSettings();
     await form.vm.$nextTick();
 
     expect(alerts).deep.eq([{
@@ -122,6 +120,7 @@ describe('CreateGameForm', () => {
   });
 
   it('resets the form and clears saved settings', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     createGameSettingsStorage.save(createNewGameConfig());
 
     const wrapper = shallowMount(CreateGameForm, {
@@ -129,13 +128,13 @@ describe('CreateGameForm', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.HELLAS]);
+    expect(wrapper.vm.boards).deep.eq([BoardName.HELLAS]);
 
-    (wrapper.vm as any).resetSettings();
+    wrapper.vm.resetSettings();
     await wrapper.vm.$nextTick();
 
-    expect((wrapper.vm as any).boards).deep.eq([BoardName.THARSIS]);
-    expect((wrapper.vm as any).draftVariant).eq(true);
+    expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
+    expect(wrapper.vm.draftVariant).eq(true);
     expect(createGameSettingsStorage.load()).eq(undefined);
     expect(wrapper.findAllComponents({name: 'AppButton'}).map((button) => button.props('title'))).includes('Reset');
   });
@@ -151,10 +150,11 @@ describe('CreateGameForm', () => {
         {name: 'Bob', color: 'red', beginner: false, handicap: 0},
       ],
     }))).throws('Colors are duplicated');
-    expect((wrapper.vm as any).uploading).eq(false);
+    expect(wrapper.vm.uploading).eq(false);
   });
 
   it('saves current settings before creating a game', async () => {
+    PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
     const originalFetch = global.fetch;
     const originalAlert = global.alert;
     global.fetch = (() => Promise.reject(new Error('stop after saving'))) as typeof fetch;
@@ -164,13 +164,13 @@ describe('CreateGameForm', () => {
       const wrapper = shallowMount(CreateGameForm, {
         ...globalConfig,
       });
-      (wrapper.vm as any).playersCount = 2;
-      (wrapper.vm as any).randomFirstPlayer = false;
-      (wrapper.vm as any).players[0].name = 'Alice';
-      (wrapper.vm as any).players[1].name = 'Bob';
-      (wrapper.vm as any).boards = [BoardName.ELYSIUM];
+      wrapper.vm.playersCount = 2;
+      wrapper.vm.randomFirstPlayer = false;
+      wrapper.vm.players[0].name = 'Alice';
+      wrapper.vm.players[1].name = 'Bob';
+      wrapper.vm.boards = [BoardName.ELYSIUM];
 
-      await (wrapper.vm as any).createGame();
+      await wrapper.vm.createGame();
 
       const savedSettings = createGameSettingsStorage.load();
       expect(savedSettings?.boards).deep.eq([BoardName.ELYSIUM]);
@@ -180,6 +180,31 @@ describe('CreateGameForm', () => {
       global.alert = originalAlert;
     }
   });
+  it('does not restore saved settings when remember is off', async () => {
+    createGameSettingsStorage.save(createNewGameConfig());
+
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
+  });
+
+  it('toggling random milestones and awards leaves manual milestones and awards', () => {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    const model = wrapper.vm as unknown as CreateGameModel;
+    model.randomMA = RandomMAOptionType.MANUAL;
+    model.customMA = {milestones: ['Terraformer'], awards: ['Banker']};
+    expect(wrapper.vm.isRandomMAEnabled).is.false;
+
+    wrapper.vm.randomMAToggle();
+    expect(model.randomMA).eq(RandomMAOptionType.LIMITED);
+    expect(model.customMA).is.undefined;
+  });
+
   it('validates the form settings', () => {
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(3)).notEnoughCorporations).eq(4);
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(4)).notEnoughCorporations).eq(0);
@@ -198,8 +223,8 @@ describe('CreateGameForm', () => {
     expect(createGameButton()?.props('disabled')).is.false;
     expect(wrapper.find('.create-game-custom-preludes-warning').exists()).is.false;
 
-    (wrapper.vm as any).playersCount = 2;
-    (wrapper.vm as any).customCorporations = cardNames(3);
+    wrapper.vm.playersCount = 2;
+    wrapper.vm.customCorporations = cardNames(3);
     await wrapper.vm.$nextTick();
 
     expect(createGameButton()?.props('disabled')).is.true;
@@ -216,7 +241,7 @@ describe('CreateGameForm', () => {
     model.escapeVelocityThreshold = 35;
     // A cleared number input binds as an empty string.
     model.escapeVelocityPeriod = '' as unknown as number;
-    const config: NewGameConfig | undefined = await (wrapper.vm as any).serializeSettings();
+    const config: NewGameConfig | undefined = await wrapper.vm.serializeSettings();
     expect(config?.escapeVelocity).deep.eq({
       thresholdMinutes: 35,
       bonusSectionsPerAction: 2,

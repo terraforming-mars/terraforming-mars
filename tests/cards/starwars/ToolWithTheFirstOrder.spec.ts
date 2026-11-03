@@ -3,8 +3,8 @@ import {ToolWithTheFirstOrder} from '../../../src/server/cards/starwars/ToolWith
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
-import {Phase} from '`.`./../../src/common/Phase';
+import {doWait, runAllActions} from '../../TestingUtils';
+import {Phase} from '../../../src/common/Phase';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -41,10 +41,10 @@ describe('ToolWithTheFirstOrder', () => {
 
     player.megaCredits = card.cost;
     player.takeAction();
-    const [waitingFor, cb] = player.popWaitingFor2();
-    const playProjectCard = findOption(waitingFor!, 'Play project card');
-    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megacredits: 5}));
-    cb!();
+    doWait(player, OrOptions, (orOptions) => {
+      const playProjectCard = findOption(orOptions, 'Play project card');
+      cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megacredits: 5}));
+    });
     runAllActions(game);
 
     expect(player.terraformRating).eq(21);
@@ -53,18 +53,18 @@ describe('ToolWithTheFirstOrder', () => {
     expect(game.activePlayer.id).eq(player.id);
 
     player.takeAction();
-    const [waitingFor1, cb1] = player.popWaitingFor2();
-    const patents1 = cast(findOption(waitingFor1!, 'Sell patents'), SelectCard);
-    patents1.cb([player.cardsInHand[0]]);
-    cb1!();
+    doWait(player, OrOptions, (orOptions) => {
+      const patents = cast(findOption(orOptions, 'Sell patents'), SelectCard);
+      patents.cb([player.cardsInHand[0]]);
+    });
 
     expect(player.actionsTakenThisRound).eq(2);
     expect(game.activePlayer.id).eq(player.id);
 
-    const [waitingFor2, cb2] = player.popWaitingFor2();
-    const patents2 = cast(findOption(waitingFor2!, 'Sell patents'), SelectCard);
-    patents2.cb([player.cardsInHand[0]]);
-    cb2!();
+    doWait(player, OrOptions, (orOptions) => {
+      const patents = cast(findOption(orOptions, 'Sell patents'), SelectCard);
+      patents.cb([player.cardsInHand[0]]);
+    });
 
     expect(game.activePlayer.id).eq(player2.id);
   });

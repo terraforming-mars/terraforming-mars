@@ -5,7 +5,7 @@
       <div class="megacredits">{{ label }}</div>
     </div>
     <div v-if="conditional.length > 0" class="hand-discount-popover">
-      <DiscountList :discounts="conditional"/>
+      <DiscountList :discounts="conditional" />
     </div>
   </div>
 </template>

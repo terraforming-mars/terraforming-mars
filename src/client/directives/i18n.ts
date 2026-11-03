@@ -36,6 +36,8 @@ export function translateMessage(message: Message): string {
       return context.players.get(datum.value) ?? datum.value;
     case LogMessageDataType.TILE_TYPE:
       return tileTypeToString[datum.value];
+    case LogMessageDataType.MARKDOWN:
+      return datum.value;
     default:
       return translateText(String(datum.value));
     }
@@ -43,6 +45,12 @@ export function translateMessage(message: Message): string {
 }
 
 let translated: Set<string> | undefined;
+
+export function setTranslationsForTest(translations: {[key: string]: string} | undefined) {
+  (window as any)._translations = translations;
+  translated = undefined;
+}
+
 export function translateText(englishText: string): string {
   const lang = getPreferences().lang;
   const translations: {[key: string]: string} | undefined = (window as any)._translations;
@@ -54,6 +62,13 @@ export function translateText(englishText: string): string {
 
   // Don't translate non-word strings
   if (/^(\W|\d)*$/.test(englishText)) {
+    return englishText;
+  }
+
+  // Don't translate strings that are non-word apart from icon shortcodes such as :r:megacredits:
+  // Those should be sent as MARKDOWN data, which isn't translated.
+  // TODO: Remove on 2027-01-01.
+  if (/^(\W|\d)*$/.test(englishText.replace(/:[a-z]+:[\w-]+:/g, ''))) {
     return englishText;
   }
 
@@ -72,11 +87,11 @@ export function translateText(englishText: string): string {
   }
 
   if (translatedText === undefined) {
-  // The i18n plugin sends translated strings back here. That means that sometimes this tries to
-  // Since the phrase it sends is not English, it can't be found, and this reports an error to the
-  // browser.
-  //
-  // This Set reduces that by seeing if the string is of the new language, and ignores reporting the error.
+    // The i18n plugin sends translated strings back here. That means that sometimes this tries to
+    // Since the phrase it sends is not English, it can't be found, and this reports an error to the
+    // browser.
+    //
+    // This Set reduces that by seeing if the string is of the new language, and ignores reporting the error.
     if (translated === undefined) {
       translated = new Set();
       for (const k in translations) {
@@ -109,6 +124,7 @@ export function translateTextWithParams(englishText: string, params: Array<strin
   return translateMessage(message);
 }
 
+// Remove newlines and compress multiple spaces.
 function normalizeText(text: string): string {
   return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ').trim();
 }

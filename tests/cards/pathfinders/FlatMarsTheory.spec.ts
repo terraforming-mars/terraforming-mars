@@ -33,12 +33,12 @@ describe('FlatMarsTheory', () => {
   });
 
   it('play', () => {
-    (game as any).generation = 4;
+    game.generation = 4;
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 4}));
 
     player.production.override(Units.EMPTY);
-    (game as any).generation = 7;
+    game.generation = 7;
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 7}));
   });

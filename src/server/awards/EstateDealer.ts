@@ -5,6 +5,7 @@ import {Board} from '../boards/Board';
 export class EstateDealer implements IAward {
   public readonly name = 'Estate Dealer';
   public readonly description = 'Own the most tiles adjacent to ocean tiles';
+  public readonly automaDescription = 'Tiles next to ocean (unchanged)';
   public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter(Board.ownedBy(player))

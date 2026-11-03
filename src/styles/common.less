@@ -154,6 +154,11 @@ each(@players, {
   }
 })
 
+// light text is unreadable on the clear background
+.player_bg_color_clear {
+  color: @grey_900;
+}
+
 // backgrounds with opacity
 each(@players, {
   @c: ~"player_@{value}";
@@ -161,6 +166,10 @@ each(@players, {
     background: rgba(@@c, 0.7);
   }
 })
+
+.player_translucent_bg_color_clear {
+  background: rgba(@player_clear, 0.6);
+}
 
 .alert-dialog {
   position: fixed;

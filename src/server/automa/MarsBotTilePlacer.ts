@@ -20,9 +20,6 @@ type TiebreakerName = 'oceans' | 'icons' | 'polarRegion' | 'southernRegion' | 's
 /** The tiebreakers of Tharsis, and of any map `MAP_TIEBREAKERS` doesn't list. */
 const DEFAULT_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['oceans', 'icons'];
 
-/** The tiebreakers with the Highlander award in the Milestones & Awards expansion (rulebook C, p.15). */
-const HIGHLANDER_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['icons', 'oceans'];
-
 /**
  * The tiebreakers each map's player aid lists, in order.
  *
@@ -109,17 +106,17 @@ export class MarsBotTilePlacer {
   /**
    * The tiebreakers on the player aid MarsBot uses, in order.
    *
-   * That is the map's own aid. The Milestones & Awards expansion plays against the Tharsis aid on
-   * every map (rulebook C, p.13), except that with the Highlander award "adjacent to ocean" ranks
-   * below the reward icons (rulebook C, p.15).
+   * That is the map's own aid, or the Tharsis aid with the Milestones & Awards expansion (rulebook C,
+   * p.13). With the Highlander award in play, "adjacent to ocean" comes just after the reward icons
+   * (rulebook C, p.15).
    */
   private tiebreakerNames(): ReadonlyArray<TiebreakerName> {
     const options = this.game.gameOptions;
-    if (!options.modularMA) {
-      return MAP_TIEBREAKERS[options.boardName] ?? DEFAULT_TIEBREAKERS;
+    const names = options.modularMA ? DEFAULT_TIEBREAKERS : (MAP_TIEBREAKERS[options.boardName] ?? DEFAULT_TIEBREAKERS);
+    if (this.game.awards.some((award) => award.name === 'Highlander')) {
+      return oceansAfterIcons(names);
     }
-    const highlander = this.game.awards.some((award) => award.name === 'Highlander');
-    return highlander ? HIGHLANDER_TIEBREAKERS : DEFAULT_TIEBREAKERS;
+    return names;
   }
 
   /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
@@ -311,6 +308,20 @@ export class MarsBotTilePlacer {
   public getTotalPlacementMC(space: Space): number {
     return this.getPlacementBonusMC(space) + this.getOceanAdjacencyMC(space);
   }
+}
+
+/**
+ * Lists `oceans` just after `icons`, as the Highlander award has it (rulebook C, p.15).
+ *
+ * A list that already has `oceans` after `icons` stays as it is.
+ */
+function oceansAfterIcons(names: ReadonlyArray<TiebreakerName>): ReadonlyArray<TiebreakerName> {
+  if (names.indexOf('oceans') > names.indexOf('icons')) {
+    return names;
+  }
+  const others = names.filter((name) => name !== 'oceans');
+  const afterIcons = others.indexOf('icons') + 1;
+  return [...others.slice(0, afterIcons), 'oceans', ...others.slice(afterIcons)];
 }
 
 /** Puts the spaces that satisfy `predicate` ahead of the rest. */

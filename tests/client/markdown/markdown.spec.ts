@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {renderIcons, renderMarkdown} from '@/client/markdown/markdown';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {setTranslationsForTest} from '@/client/directives/i18n';
 
 describe('markdown', () => {
   afterEach(() => {
     localStorage.removeItem('lang');
     PreferencesManager.resetForTest();
-    delete (window as any)._translations;
+    setTranslationsForTest(undefined);
   });
 
   it('renders icon shortcodes', () => {
@@ -61,7 +62,7 @@ describe('markdown', () => {
 
   it('translate: false skips translation', () => {
     PreferencesManager.INSTANCE.set('lang', 'de');
-    (window as any)._translations = {'Goal': 'Ziel'};
+    setTranslationsForTest({'Goal': 'Ziel'});
 
     expect(renderMarkdown('Goal', {inline: true, translate: false})).eq('Goal');
     expect(renderMarkdown('Goal', {inline: true})).eq('Ziel');
@@ -75,10 +76,10 @@ describe('markdown', () => {
 
   it('translates each block, icons included', () => {
     PreferencesManager.INSTANCE.set('lang', 'de');
-    (window as any)._translations = {
+    setTranslationsForTest({
       'Goal': 'Ziel',
       'Standard Mode (:tag:mars:): you win.': ':tag:mars: Standardmodus: du gewinnst.',
-    };
+    });
 
     expect(renderMarkdown('### Goal\n\n- Standard Mode (:tag:mars:): you win.\n')).eq(
       '<h3>Ziel</h3>\n' +

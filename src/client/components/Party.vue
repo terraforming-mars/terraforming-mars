@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-      <div :class="'selectable-party-name party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+      <div :class="'selectable-party-name party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{ party.name }}</div>
     </div>
   </div>
 </template>

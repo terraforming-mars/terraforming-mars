@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Lobbyist extends BaseMilestone {
+  public readonly automaDescription = 'Chairman and 2+ Party Leaders';
   constructor() {
     super(
       'Lobbyist',

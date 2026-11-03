@@ -31,20 +31,23 @@ describe('QuotaHandler', () => {
 
   it('sanity', () => {
     const quotaHandler = new QuotaHandler({limit: 5, perMs: 120_000});
-    expect(quotaHandler.measure(ctx)).is.true;
+    for (let i = 0; i < 5; i++) {
+      expect(quotaHandler.isWithinQuota(ctx)).is.true;
+      quotaHandler.record(ctx);
+      fakeClock.millis += 100;
+    }
+    expect(quotaHandler.isWithinQuota(ctx)).is.false;
     fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.true;
-    fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.true;
-    fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.true;
-    fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.true;
-    fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.false;
-    fakeClock.millis += 100;
-    expect(quotaHandler.measure(ctx)).is.false;
+    expect(quotaHandler.isWithinQuota(ctx)).is.false;
     fakeClock.millis += 150_000;
-    expect(quotaHandler.measure(ctx)).is.true;
+    expect(quotaHandler.isWithinQuota(ctx)).is.true;
+  });
+
+  it('only recorded requests count against the quota', () => {
+    const quotaHandler = new QuotaHandler({limit: 1, perMs: 120_000});
+    expect(quotaHandler.isWithinQuota(ctx)).is.true;
+    expect(quotaHandler.isWithinQuota(ctx)).is.true;
+    quotaHandler.record(ctx);
+    expect(quotaHandler.isWithinQuota(ctx)).is.false;
   });
 });

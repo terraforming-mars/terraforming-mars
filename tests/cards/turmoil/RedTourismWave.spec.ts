@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {RedTourismWave} from '../../../src/server/cards/turmoil/RedTourismWave';
-import {IGame} from '../../../src//server/IGame';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';

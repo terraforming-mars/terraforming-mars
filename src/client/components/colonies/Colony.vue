@@ -1,7 +1,7 @@
 <template>
-    <!-- <div :class="recedeIfInactive"> -->
-    <!-- Show the background, tooltip, and other setup -->
-    <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
+  <!-- <div :class="recedeIfInactive"> -->
+  <!-- Show the background, tooltip, and other setup -->
+  <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
 
     <!-- Show colony ship if somebody is visiting -->
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
@@ -10,25 +10,25 @@
 
     <!-- show the large title on top -->
     <div class="colony-card-title-div">
-      <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
+      <span class="colony-card-title-span" :class="colony.name + '-title'">{{ colony.name }}</span>
     </div>
 
     <div class="colony-content">
-    <!-- Bonus for colony owners when somebody trades -->
+      <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colony.type === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colony.resource !== Resource.MEGACREDITS">
           <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="metadata.colony.resource"></div>
         </template>
         <template v-else>
-          <div class="resource" :class="metadata.colony.resource">{{metadata.colony.quantity}}</div>
+          <div class="resource" :class="metadata.colony.resource">{{ metadata.colony.quantity }}</div>
         </template>
       </template>
-       <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
+      <template v-if="metadata.colony.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
         <div v-for="n in metadata.colony.quantity" :key="n" class="resource" :class="colonyResourceClass"></div>
       </template>
-      <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)" ></div>
+      <div v-if="colony.name === ColonyName.MIRANDA" class="resource card card-with-border" style="transform:scale(0.8)"></div>
 
-      <template v-if="colony.name === ColonyName.IAPETUS" >
+      <template v-if="colony.name === ColonyName.IAPETUS">
         <div class="resource card card-with-border" style="transform: scale(0.8);"></div>
         <span class="white-char">:</span>
         <div class="resource megacredits">-1</div>
@@ -73,14 +73,14 @@
         <div style="margin-left:20px;" class="resource" :class="metadata.trade.resource"></div>
         <div class="white-x"></div>
       </template>
-       <template v-if="metadata.trade.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
+      <template v-if="metadata.trade.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
         <div style="margin-left:20px;" class="resource" :class="colonyResourceClass"></div>
         <div class="white-x"></div>
       </template>
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === ColonyName.PLUTO" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
-      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;" ></div>
+      <div v-if="colony.name === ColonyName.EUROPA" style="height: 20px; visibility: hidden;display: block;"></div>
 
       <div v-if="colony.name === ColonyName.IAPETUS" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === ColonyName.TITANIA" class="white-x" style="margin-left:42px;"></div>
@@ -111,13 +111,13 @@
         v-i18n>Trade Income: WGT raises global parameter</span>
       <span v-else class="colony-background-color" v-i18n>Trade Income</span>
 
-    <!-- Show the spaces for the player cubes and the white cube -->
-    <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker"/>
-    <!-- show the numbers underneath the colony row -->
-    <ColonyTradeRow :metadata="metadata"/>
+      <!-- Show the spaces for the player cubes and the white cube -->
+      <ColonyRow :metadata="metadata" :colony="colony" :fadeMarker="fadeMarker" />
+      <!-- show the numbers underneath the colony row -->
+      <ColonyTradeRow :metadata="metadata" />
+    </div>
+    <!-- </div> -->
   </div>
-<!-- </div> -->
-</div>
 
 </template>
 

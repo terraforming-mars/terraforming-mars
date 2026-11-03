@@ -1,7 +1,7 @@
 <template>
   <div :class="outerClass">
-    <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count"/>
-    <Tag v-else :tag="(tag as CardTag)" :size="size" :type="type"/>
+    <UndergroundToken v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count" />
+    <Tag v-else :tag="(tag as CardTag)" :size="size" :type="type" />
     <span :class="innerClass">{{ count }}</span>
   </div>
 </template>

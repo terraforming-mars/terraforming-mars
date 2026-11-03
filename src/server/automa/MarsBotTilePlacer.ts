@@ -8,7 +8,7 @@ import {byKey, Comparator, compound, reversed} from '../../common/utils/Ordering
 /**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
  *
- * Greenery: Adjacent to as many MarsBot cities as possible, minimize adjacency to human cities.
+ * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.
  * Ocean: Any ocean-reserved space.
  *
@@ -36,15 +36,22 @@ export class MarsBotTilePlacer {
       const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
       const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
       const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
-      // Maximize MarsBot cities adjacency, then minimize human cities adjacency
-      return marsBotCities.length * 100 - humanCities.length;
+      // MarsBot's adjacent cities minus the human's. The greenery gives 1 VP to the owner of each
+      // adjacent city, so the highest score is the space with the best net VP for MarsBot.
+      // https://boardgamegeek.com/thread/3350125/article/44711805#44711805 (njshaw2)
+      // https://boardgamegeek.com/thread/3411375/article/45234897#45234897 (njshaw2, ties are random)
+      return marsBotCities.length - humanCities.length;
     });
   }
 
-  /** Find the best space for MarsBot to place a city. Returns undefined if none available. */
-  public findCitySpace(): Space | undefined {
+  /**
+   * Find the best space for MarsBot to place a city. Returns undefined if none available.
+   *
+   * @param filter limits the choice to the legal city spaces it accepts.
+   */
+  public findCitySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot);
+    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -58,19 +65,16 @@ export class MarsBotTilePlacer {
   /**
    * Find the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
    * This is what the Expedited Construction bonus card (B05) asks for.
+   *
+   * Among those spaces the usual city rule picks, so 2 greeneries beat 3 oceans. The card's
+   * wording wins over the rulebook's "most tiles of these types". The card's author (TDaver):
+   * https://boardgamegeek.com/thread/3350125/article/44720677#44720677
    */
   public findExpeditedConstructionCitySpace(): Space | undefined {
     const board = this.game.board;
     const adjacentGreeneryOrOcean = (space: Space) => board.getAdjacentSpaces(space)
       .filter((s) => Board.isGreenerySpace(s) || Board.isOceanSpace(s)).length;
-
-    const eligible = board.getAvailableSpacesForCity(this.marsBot)
-      .filter((space) => adjacentGreeneryOrOcean(space) >= 2);
-    if (eligible.length === 0) {
-      return undefined;
-    }
-
-    return this.selectBestSpace(eligible, adjacentGreeneryOrOcean);
+    return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
   /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
@@ -97,7 +101,8 @@ export class MarsBotTilePlacer {
         return false;
       }
       // Not adjacent to reserved spaces (ocean-reserved, restricted, specific cities)
-      return !adj.some((s) => s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED);
+      return !adj.some((s) =>
+        s.spaceType === SpaceType.OCEAN || s.spaceType === SpaceType.RESTRICTED || s.id === board.noctisCitySpaceId);
     });
     if (spaces.length === 0) {
       return undefined;
@@ -150,11 +155,16 @@ export class MarsBotTilePlacer {
     return this.randomTiebreak(tied.map((t) => t.space));
   }
 
-  /** Break a tie by flipping a project card and counting through spaces. */
+  /**
+   * Break a tie by flipping a project card and counting its cost through the tied spaces. Counting
+   * starts at 1 on the first space and goes back to the first after passing the last. A cost of 0
+   * picks the last space.
+   */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
     const card = this.game.projectDeck.drawOrThrow(this.game);
     this.game.projectDeck.discard(card);
-    return spaces[card.cost % spaces.length];
+    const index = card.cost === 0 ? spaces.length - 1 : (card.cost - 1) % spaces.length;
+    return spaces[index];
   }
 
   /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */

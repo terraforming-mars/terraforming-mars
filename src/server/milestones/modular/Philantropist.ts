@@ -2,6 +2,7 @@ import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 export class Philantropist extends BaseMilestone {
+  public readonly automaDescription = '5+ cards with non-negative VP';
   constructor() {
     super(
       'Philantropist',

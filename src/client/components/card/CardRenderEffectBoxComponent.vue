@@ -1,26 +1,26 @@
 <template>
-      <div class="card-effect-box">
-        <div class="card-effect-box-row">
-            <div v-if="delimiter !== undefined && cause !== undefined" class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in cause" class="card-effect-box-item" :key="rowIndex">
-                  <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem"/>
-                  <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
-                  <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
-                  <CardRenderTileComponent v-if="isTile(rowItem)" :item="rowItem"/>
-                </div>
-            </div>
-            <CardRenderSymbolComponent v-if="isSymbol(delimiter)" :item="delimiter" />
-            <div class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in effect" class="card-effect-box-item" :key="rowIndex">
-                    <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem"/>
-                    <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
-                    <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
-                    <CardRenderTileComponent v-else-if="isTile(rowItem)" :item="rowItem"/>
-                </div>
-            </div>
+  <div class="card-effect-box">
+    <div class="card-effect-box-row">
+      <div v-if="delimiter !== undefined && cause !== undefined" class="card-effect-box-content">
+        <div v-for="(rowItem, rowIndex) in cause" class="card-effect-box-item" :key="rowIndex">
+          <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem" />
+          <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
+          <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
+          <CardRenderTileComponent v-if="isTile(rowItem)" :item="rowItem" />
         </div>
-        <CardDescription v-if="description" :item="description" />
       </div>
+      <CardRenderSymbolComponent v-if="isSymbol(delimiter)" :item="delimiter" />
+      <div class="card-effect-box-content">
+        <div v-for="(rowItem, rowIndex) in effect" class="card-effect-box-item" :key="rowIndex">
+          <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem" />
+          <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
+          <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
+          <CardRenderTileComponent v-else-if="isTile(rowItem)" :item="rowItem" />
+        </div>
+      </div>
+    </div>
+    <CardDescription v-if="description" :item="description" />
+  </div>
 </template>
 
 <script lang="ts">

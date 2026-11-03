@@ -180,6 +180,35 @@ describe('ApiCreateGame', () => {
     expect(res.content).contains('at least 6 CEOs');
   });
 
+  const customMA = {
+    milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+    awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+  };
+
+  it('uses custom milestones and awards', async () => {
+    const config = newGameConfigForTest();
+    // One-player games ignore milestones and awards.
+    const players = [config.players[0], {...config.players[0], name: 'Robot 2', color: 'red', first: false}];
+    await postConfig({...config, players, randomMA: RandomMAOptionType.MANUAL, customMA});
+    expect(res.statusCode).eq(statusCode.ok);
+    const model = JSON.parse(res.content) as SimpleGameModel;
+    const game = await scaffolding.ctx.gameLoader.getGame(model.id);
+    expect(game!.milestones.map((m) => m.name)).deep.eq(customMA.milestones);
+    expect(game!.awards.map((a) => a.name)).deep.eq(customMA.awards);
+  });
+
+  it('rejects custom milestones and awards unless they are manual', async () => {
+    await postConfig({...newGameConfigForTest(), randomMA: RandomMAOptionType.LIMITED, customMA});
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('customMA requires randomMA');
+  });
+
+  it('rejects custom milestones and awards of the wrong size', async () => {
+    await postConfig({...newGameConfigForTest(), randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}});
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(res.content).contains('customMA must have 5 awards');
+  });
+
   async function createdEscapeVelocity(escapeVelocity: object) {
     await postConfig({...newGameConfigForTest(), escapeVelocity});
     expect(res.statusCode).eq(statusCode.ok);
@@ -228,10 +257,11 @@ describe('ApiCreateGame', () => {
 
   // Issues one create-game POST against `handler`, using fresh request/response objects,
   // reusing `scaffolding.ctx` (and therefore its ip and clock) across calls.
-  function postGame(handler: ApiCreateGame, request: MockRequest, response: MockResponse) {
-    const post = handler.post(request, response, scaffolding.ctx);
+  function postGame(handler: ApiCreateGame, request: MockRequest, response: MockResponse, config: object = newGameConfigForTest()) {
+    request.method = 'POST';
+    const post = handler.processRequest(request, response, scaffolding.ctx);
     const emit = Promise.resolve().then(() => {
-      request.emitString(JSON.stringify({players: [{name: 'a player', color: 'red'}]}));
+      request.emitString(JSON.stringify(config));
       request.emitter.emit('end');
     });
     return Promise.all([emit, post]);
@@ -259,6 +289,20 @@ describe('ApiCreateGame', () => {
     await postGame(apiCreateGame, req2, res2);
     expect(res2.statusCode).eq(statusCode.tooManyRequests);
     expect(res2.content).eq('Quota exceeded');
+  });
+
+  it('a rejected game does not count against the quota', async () => {
+    const apiCreateGame = new ApiCreateGame([{limit: 1, perMs: 120_000}]);
+
+    const req1 = new MockRequest();
+    const res1 = new MockResponse();
+    await postGame(apiCreateGame, req1, res1, {...newGameConfigForTest(), boards: []});
+    expect(res1.statusCode).eq(statusCode.badRequest);
+
+    const req2 = new MockRequest();
+    const res2 = new MockResponse();
+    await postGame(apiCreateGame, req2, res2);
+    expect(res2.statusCode).eq(statusCode.ok);
   });
 
   it('two quota handlers do not block while both are under their limits', async () => {

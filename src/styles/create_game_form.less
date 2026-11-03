@@ -140,6 +140,14 @@
   color:black
 }
 
+// Looks like a selected button, but can't be clicked. Only appears from JSON import.
+.create-game-page-column label.create-game-manual-ma,
+.create-game-page-column label.create-game-manual-ma:hover {
+  background-color: rgb(199, 199, 199);
+  color: black;
+  cursor: default;
+}
+
 .create-game-page-column .create-game-board-hexagon {
   font-size: 30px;
   vertical-align: top;
@@ -205,7 +213,7 @@
 
 .create-game-page-color-row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   margin-top: 10px;
 }
 

@@ -51,6 +51,7 @@ describe('BoardSelector', () => {
   it('emits the boards chosen in the popup and keeps the popup open', async () => {
     const wrapper = mountSelector();
     await openPopup(wrapper);
+    await wrapper.find('#boardMode-many-radio').setValue();
     await wrapper.find(`input[type="checkbox"][value="${BoardName.ELYSIUM}"]`).setValue();
     expect(wrapper.emitted('update:boards')).to.deep.eq([[[BoardName.HELLAS, BoardName.ELYSIUM]]]);
     expect(wrapper.findComponent(BoardPopup).exists()).is.true;

@@ -2,8 +2,8 @@
   <div class="admin-home">
     <h1><HomeLink>{{ APP_NAME }}</HomeLink> — Admin</h1>
     <ul>
-      <li v-for="path of paths" :key="path">
-        <a :href="path + '?serverId=' + serverId">{{path}}</a>
+      <li v-for="path in paths" :key="path">
+        <a :href="path + '?serverId=' + serverId">{{ path }}</a>
       </li>
     </ul>
   </div>

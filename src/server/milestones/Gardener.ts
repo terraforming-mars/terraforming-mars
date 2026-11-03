@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Gardener extends BaseMilestone {
+  public readonly automaDescription = '3+ greenery tiles on board';
   constructor() {
     super(
       'Gardener',

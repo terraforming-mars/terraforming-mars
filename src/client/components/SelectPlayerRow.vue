@@ -1,5 +1,5 @@
 <template>
-  <span>{{player === undefined ? "" : player.name}}</span>
+  <span>{{ player === undefined ? "" : player.name }}</span>
 </template>
 
 <script lang="ts">

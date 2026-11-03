@@ -12,11 +12,11 @@
       </dialog>
     </section>
     <div class="main-container">
-      <StartScreen v-if="screen === 'start-screen'"/>
+      <StartScreen v-if="screen === 'start-screen'" />
       <CreateGameForm
         v-else-if="screen === 'create-game-form'"
       />
-      <LoadGameForm v-else-if="screen === 'load'"/>
+      <LoadGameForm v-else-if="screen === 'load'" />
       <GameHome
         v-else-if="screen === 'game-home' && game !== undefined"
         :game="game"
@@ -36,10 +36,10 @@
       <GamesOverview
         v-else-if="screen === 'games-overview'"
       />
-      <CardList v-else-if="screen === 'cards'"/>
-      <AdminHome v-else-if="screen === 'admin'"/>
-      <LoginHome v-else-if="screen === 'login-home'"/>
-      <Help v-else-if="screen === 'help'"/>
+      <CardList v-else-if="screen === 'cards'" />
+      <AdminHome v-else-if="screen === 'admin'" />
+      <LoginHome v-else-if="screen === 'login-home'" />
+      <Help v-else-if="screen === 'help'" />
     </div>
     <div class="notice" v-i18n>
       Not affiliated with FryxGames, Asmodee Digital or Steam in any way.
@@ -181,13 +181,18 @@ export default defineComponent({
     getVisibilityState(targetVar: string): boolean {
       return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
-    update(path: typeof paths.PLAYER | typeof paths.SPECTATOR): void {
+    /**
+     * Fetches and shows the latest player or spectator view.
+     *
+     * Resolves to false when the fetch fails.
+     */
+    update(path: typeof paths.PLAYER | typeof paths.SPECTATOR): Promise<boolean> {
       const currentPathname = getLastPathSegment();
       const app = this as unknown as MainAppData;
 
       const url = 'api/' + path + window.location.search.replace('&noredirect', '');
 
-      fetch(url)
+      return fetch(url)
         .then((resp) => {
           if (!resp.ok) {
             throw new Error(`Error getting game data: ${resp.statusText}`);
@@ -227,17 +232,19 @@ export default defineComponent({
               );
             }
           }
+          return true;
         })
         .catch((err) => {
           alert('Error getting game data');
           console.error(err);
+          return false;
         });
     },
-    updatePlayer() {
-      this.update(paths.PLAYER);
+    updatePlayer(): Promise<boolean> {
+      return this.update(paths.PLAYER);
     },
-    updateSpectator() {
-      this.update(paths.SPECTATOR);
+    updateSpectator(): Promise<boolean> {
+      return this.update(paths.SPECTATOR);
     },
   },
   mounted() {

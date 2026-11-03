@@ -34,7 +34,7 @@ describe('ApiWaitingFor', () => {
     const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('g' + player.id as GameId, [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getPlayerById = () => {
+    game.getPlayerById = () => {
       throw new Error('player does not exist');
     };
 
@@ -60,9 +60,6 @@ describe('ApiWaitingFor', () => {
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getBySpectatorId = () => {
-      throw new Error('spectator does not exist');
-    };
 
     scaffolding.url = '/api/waitingfor?id=' + game.spectatorId + '-invalid' + '&gameAge=50&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);

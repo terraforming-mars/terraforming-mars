@@ -1,6 +1,7 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from '../getLocalVue';
+import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {fakeGameModel, fakePublicPlayerModel, fakeViewModel} from '../testHelpers';
 import {Phase} from '@/common/Phase';
@@ -14,7 +15,7 @@ describe('PlayersOverview', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView: fakeViewModel(),
       },
@@ -34,7 +35,7 @@ describe('PlayersOverview', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView: fakeViewModel({
           game: fakeGameModel({phase: Phase.SOLAR}),
@@ -43,7 +44,7 @@ describe('PlayersOverview', () => {
         }),
       },
     });
-    const vm = wrapper.vm as any;
+    const vm = wrapper.vm;
     expect(vm.getActionLabel(blue)).eq('none');
     expect(vm.getActionLabel(red)).eq('active');
   });
@@ -60,7 +61,7 @@ describe('PlayersOverview', () => {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
-      } as any,
+      },
       props: {
         playerView: fakeViewModel({
           game: fakeGameModel({phase: Phase.SOLAR, passedPlayers: ['red']}),
@@ -69,8 +70,22 @@ describe('PlayersOverview', () => {
         }),
       },
     });
-    const vm = wrapper.vm as any;
+    const vm = wrapper.vm;
     expect(vm.getActionLabel(blue)).eq('active');
     expect(vm.getActionLabel(red)).eq('passed');
+  });
+
+  it('shows the new first player on top when the generation changes', async () => {
+    // A spectator's players start with the first player, so they rotate every generation.
+    const blue = fakePublicPlayerModel({color: 'blue'});
+    const red = fakePublicPlayerModel({color: 'red'});
+    const wrapper = shallowMount(PlayersOverview, {
+      ...globalConfig,
+      props: {playerView: fakeViewModel({players: [blue, red], thisPlayer: undefined})},
+    });
+
+    await wrapper.setProps({playerView: fakeViewModel({players: [red, blue], thisPlayer: undefined})});
+
+    expect(wrapper.findAllComponents(PlayerInfo).map((info) => info.props('player').color)).deep.eq(['red', 'blue']);
   });
 });

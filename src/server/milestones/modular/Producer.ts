@@ -4,6 +4,7 @@ import {sum} from '../../../common/utils/utils';
 import {Units} from '../../../common/Units';
 
 export class Producer extends BaseMilestone {
+  public readonly automaDescription = '3+ tracks (except Venus) ≥ 16';
   constructor() {
     super(
       'Producer',

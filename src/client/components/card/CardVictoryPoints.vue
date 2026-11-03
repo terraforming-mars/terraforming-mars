@@ -1,22 +1,22 @@
 <template>
   <div v-if="typeof victoryPoints !== 'number'" :class="classes">
     <template v-if="victoryPoints.targetOneOrMore">
-       <!-- This is the Search for Life special case. -->
+      <!-- This is the Search for Life special case. -->
       <div class="card-points-item-first">
-        <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+        <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item" />
         *:3
       </div>
     </template>
     <template v-else-if="victoryPoints.vermin">
       10
-      <CardRenderItemComponent :item="animal"/>
+      <CardRenderItemComponent :item="animal" />
       : -1/
-      <CardRenderItemComponent :item="city"/>
+      <CardRenderItemComponent :item="city" />
       *
     </template>
     <template v-else>
       <div>{{ points }}</div>
-      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item" />
     </template>
     <div v-if="victoryPoints.asterisk === true">*</div>
   </div>

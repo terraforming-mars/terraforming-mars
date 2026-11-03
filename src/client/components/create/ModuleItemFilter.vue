@@ -15,7 +15,7 @@
     <div>
       <div class="corporations-filter">
         <template v-for="group in groups">
-          <div class="corporations-filter-group" v-if="showGroup(group.key)" :key="group.key" >
+          <div class="corporations-filter-group" v-if="showGroup(group.key)" :key="group.key">
             <div class="corporations-filter-toolbox-cont">
               <div>
                 <span v-i18n>{{ group.label }}</span>&nbsp;

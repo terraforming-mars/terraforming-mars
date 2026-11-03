@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Hydrologist extends BaseMilestone {
+  public readonly automaDescription = '4+ oceans placed';
   constructor() {
     super(
       'Hydrologist',

@@ -1,7 +1,7 @@
 <template>
   <div class="card-resources-counter">
-      <span class="card-resources-counter-number"> {{ amount }}</span>
-      <span class="card-resource" :class="cssClass"></span>
+    <span class="card-resources-counter-number"> {{ amount }}</span>
+    <span class="card-resource" :class="cssClass"></span>
   </div>
 </template>
 

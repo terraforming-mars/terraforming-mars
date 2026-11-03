@@ -20,6 +20,9 @@ type TiebreakerName = 'oceans' | 'icons' | 'polarRegion' | 'southernRegion' | 's
 /** The tiebreakers of Tharsis, and of any map `MAP_TIEBREAKERS` doesn't list. */
 const DEFAULT_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['oceans', 'icons'];
 
+/** The tiebreakers with the Highlander award in the Milestones & Awards expansion (rulebook C, p.15). */
+const HIGHLANDER_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['icons', 'oceans'];
+
 /**
  * The tiebreakers each map's player aid lists, in order.
  *
@@ -86,7 +89,7 @@ export class MarsBotTilePlacer {
   ) {}
 
   /**
-   * The map whose player aid MarsBot reads its tiebreakers from.
+   * The map whose player aid MarsBot reads its tiebreakers and extra icon from.
    *
    * The Milestones & Awards expansion plays against the Tharsis board and reference card whatever
    * the map (rulebook C, p.13).
@@ -104,22 +107,18 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * The map's tiebreakers, in order.
+   * The tiebreakers on the player aid MarsBot uses, in order.
    *
-   * With the Highlander award in play, "adjacent to ocean" comes after the reward icons (rulebook C,
-   * p.15).
+   * That is the map's own aid. The Milestones & Awards expansion plays against the Tharsis aid on
+   * every map (rulebook C, p.13), except that with the Highlander award "adjacent to ocean" ranks
+   * below the reward icons (rulebook C, p.15).
    */
   private tiebreakerNames(): ReadonlyArray<TiebreakerName> {
-    const names = MAP_TIEBREAKERS[this.mapName()] ?? DEFAULT_TIEBREAKERS;
-    if (!this.game.awards.some((award) => award.name === 'Highlander')) {
-      return names;
+    const highlander = this.game.awards.some((award) => award.name === 'Highlander');
+    if (this.game.gameOptions.modularMA && highlander) {
+      return HIGHLANDER_TIEBREAKERS;
     }
-    if (names.indexOf('oceans') > names.indexOf('icons')) {
-      return names;
-    }
-    const reordered: Array<TiebreakerName> = names.filter((name) => name !== 'oceans');
-    reordered.splice(reordered.indexOf('icons') + 1, 0, 'oceans');
-    return reordered;
+    return MAP_TIEBREAKERS[this.mapName()] ?? DEFAULT_TIEBREAKERS;
   }
 
   /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
@@ -233,7 +232,7 @@ export class MarsBotTilePlacer {
 
     // Highest first, each scorer breaking the ties of the ones before it
     const ranking: Comparator<Space> = reversed(compound(...scorers.map((scorer) => comparing(scorer))));
-    const sorted = [...spaces].sort(ranking);
+    const sorted = spaces.toSorted(ranking);
 
     // Find all tied for best. The sort is stable, so they stay in board order for the random tiebreak.
     const tied = sorted.filter((space) => ranking(space, sorted[0]) === 0);
@@ -313,7 +312,7 @@ export class MarsBotTilePlacer {
   }
 }
 
-/** Puts the spaces that satisfy `wanted` ahead of the rest. */
-function preferring(wanted: (space: Space) => boolean): Scorer {
-  return (space) => wanted(space) ? 1 : 0;
+/** Puts the spaces that satisfy `predicate` ahead of the rest. */
+function preferring(predicate: (space: Space) => boolean): Scorer {
+  return (space) => predicate(space) ? 1 : 0;
 }

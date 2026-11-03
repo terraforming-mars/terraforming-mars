@@ -89,7 +89,7 @@ export class MarsBotTilePlacer {
   ) {}
 
   /**
-   * The map whose player aid MarsBot reads its tiebreakers and extra icon from.
+   * The map whose player aid MarsBot reads its extra icon from.
    *
    * The Milestones & Awards expansion plays against the Tharsis board and reference card whatever
    * the map (rulebook C, p.13).
@@ -114,11 +114,12 @@ export class MarsBotTilePlacer {
    * below the reward icons (rulebook C, p.15).
    */
   private tiebreakerNames(): ReadonlyArray<TiebreakerName> {
-    const highlander = this.game.awards.some((award) => award.name === 'Highlander');
-    if (this.game.gameOptions.modularMA && highlander) {
-      return HIGHLANDER_TIEBREAKERS;
+    const options = this.game.gameOptions;
+    if (!options.modularMA) {
+      return MAP_TIEBREAKERS[options.boardName] ?? DEFAULT_TIEBREAKERS;
     }
-    return MAP_TIEBREAKERS[this.mapName()] ?? DEFAULT_TIEBREAKERS;
+    const highlander = this.game.awards.some((award) => award.name === 'Highlander');
+    return highlander ? HIGHLANDER_TIEBREAKERS : DEFAULT_TIEBREAKERS;
   }
 
   /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */

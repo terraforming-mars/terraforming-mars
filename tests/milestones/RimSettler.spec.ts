@@ -5,8 +5,19 @@ import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 import {RimSettler} from '@/server/milestones/RimSettler';
 import {testGame} from '../TestGame';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
+import {TestPlayer} from '../TestPlayer';
 
 describe('RimSettler', () => {
+  it('Can claim with 3 jovian tags', () => {
+    const milestone = new RimSettler();
+    const player = TestPlayer.BLUE.newPlayer();
+    player.tagsForTest = {jovian: 2};
+    expect(milestone.canClaim(player)).is.false;
+
+    player.tagsForTest = {jovian: 3};
+    expect(milestone.canClaim(player)).is.true;
+  });
+
   it('MarsBot reads its Jovian track on Hellas and its Energy track elsewhere', () => {
     // Hellas and Elysium pair Jovian with Science, where Tharsis pairs it with Energy.
     const scienceJovianTracks = THARSIS_MARSBOT_BOARD.map((track) => ({

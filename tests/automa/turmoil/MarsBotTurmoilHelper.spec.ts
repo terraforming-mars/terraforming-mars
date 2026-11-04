@@ -7,6 +7,7 @@ import {MarsBotTurmoilHelper} from '@/server/automa/turmoil/MarsBotTurmoilHelper
 import {IGame} from '@/server/IGame';
 import {IPlayer} from '@/server/IPlayer';
 import {TestPlayer} from '../../TestPlayer';
+import {IParty} from '@/server/turmoil/parties/IParty';
 
 describe('MarsBotTurmoilHelper', () => {
   let game: IGame;
@@ -116,5 +117,69 @@ describe('MarsBotTurmoilHelper', () => {
     }
 
     expect(helper.maybePlaceDelegate()).is.undefined;
+  });
+
+  it('returns undefined when MarsBot has no delegates in reserve', () => {
+    for (let i = 0; i < DELEGATES_PER_PLAYER; i++) {
+      turmoil.sendDelegateToParty(marsBot, PartyName.MARS, game);
+    }
+
+    expect(helper.selectParty()).is.undefined;
+  });
+
+  it('sends a delegate from the reserve to the chosen party', () => {
+    const before = turmoil.delegateReserve.get(marsBot);
+
+    const partyName = helper.maybePlaceDelegate();
+
+    expect(partyName).is.not.undefined;
+    expect(turmoil.getPartyByName(partyName!).delegates.get(marsBot)).eq(1);
+    expect(turmoil.delegateReserve.get(marsBot)).eq(before - 1);
+  });
+
+  // MarsBot is not in game.players, so these exercise checkPartyLeader's path for delegates
+  // that are not game players.
+  describe('party leadership', () => {
+    let greens: IParty;
+
+    beforeEach(() => {
+      greens = turmoil.getPartyByName(PartyName.GREENS);
+    });
+
+    it('makes MarsBot leader when a sent delegate takes it past the current leader', () => {
+      turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+      turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+
+      for (let i = 0; i < 3; i++) {
+        turmoil.sendDelegateToParty(marsBot, PartyName.GREENS, game);
+      }
+
+      expect(greens.partyLeader).eq(marsBot);
+    });
+
+    it('leaves the leader alone when MarsBot only ties it', () => {
+      for (let i = 0; i < 2; i++) {
+        turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+        turmoil.sendDelegateToParty(marsBot, PartyName.GREENS, game);
+      }
+
+      expect(greens.delegates.get(marsBot)).eq(2);
+      expect(greens.partyLeader).eq('NEUTRAL');
+    });
+
+    it('makes MarsBot leader when a removal leaves it with the most delegates', () => {
+      for (let i = 0; i < 3; i++) {
+        turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+      }
+      turmoil.sendDelegateToParty(marsBot, PartyName.GREENS, game);
+      turmoil.sendDelegateToParty(marsBot, PartyName.GREENS, game);
+      expect(greens.partyLeader).eq('NEUTRAL');
+
+      greens.removeDelegate('NEUTRAL', game);
+      greens.removeDelegate('NEUTRAL', game);
+
+      expect(greens.delegates.get(marsBot)).eq(2);
+      expect(greens.partyLeader).eq(marsBot);
+    });
   });
 });

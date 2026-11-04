@@ -3,6 +3,7 @@ import {IParty} from '@/server/turmoil/parties/IParty';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {IPlayer} from '@/server/IPlayer';
 import {IGame} from '@/server/IGame';
+import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 
 /** MarsBot's delegate placement in an automa game (Party Politics, rulebook C p.6). */
 export class MarsBotTurmoilHelper {
@@ -56,6 +57,22 @@ export class MarsBotTurmoilHelper {
       clockwiseDistance(dominantIndex, parties.indexOf(b), parties.length));
 
     return nearest[0].name;
+  }
+
+  /**
+   * Chooses the party for a Gray Eminence delegate (Septem Tribus): the fewest MarsBot
+   * delegates, then the fewest player delegates, then a random party by flipping a project card.
+   */
+  public selectGrayEminenceParty(): PartyName {
+    let candidates = this.turmoil.parties;
+    const fewestMarsBot = Math.min(...candidates.map((party) => party.delegates.get(this.marsBotPlayer)));
+    candidates = candidates.filter((party) => party.delegates.get(this.marsBotPlayer) === fewestMarsBot);
+    const fewestHuman = Math.min(...candidates.map((party) => party.delegates.get(this.humanPlayer)));
+    candidates = candidates.filter((party) => party.delegates.get(this.humanPlayer) === fewestHuman);
+    if (candidates.length === 1) {
+      return candidates[0].name;
+    }
+    return (pickByFlippedCard(this.game, candidates) ?? candidates[0]).name;
   }
 
   /**

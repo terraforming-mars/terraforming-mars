@@ -8,6 +8,7 @@ import {IGame} from '@/server/IGame';
 import {IPlayer} from '@/server/IPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '@/server/turmoil/parties/IParty';
+import {Capital} from '@/server/cards/base/Capital';
 
 describe('MarsBotTurmoilHelper', () => {
   let game: IGame;
@@ -180,6 +181,54 @@ describe('MarsBotTurmoilHelper', () => {
 
       expect(greens.delegates.get(marsBot)).eq(2);
       expect(greens.partyLeader).eq(marsBot);
+    });
+  });
+
+  // The priority list on Gray Eminence (Septem Tribus): fewest MarsBot delegates, then fewest of the
+  // player's, then a random party picked by flipping a project card.
+  describe('selectGrayEminenceParty', () => {
+    it('picks the party with the fewest MarsBot delegates over the one with the fewest human delegates', () => {
+      for (const name of Object.values(PartyName)) {
+        if (name !== PartyName.GREENS) {
+          turmoil.sendDelegateToParty(marsBot, name, game);
+        }
+      }
+      turmoil.sendDelegateToParty(human, PartyName.GREENS, game);
+      turmoil.sendDelegateToParty(human, PartyName.GREENS, game);
+
+      expect(helper.selectGrayEminenceParty()).eq(PartyName.GREENS);
+    });
+
+    it('breaks a tie on MarsBot delegates with the fewest human delegates, without flipping a card', () => {
+      for (const name of [PartyName.MARS, PartyName.SCIENTISTS]) {
+        turmoil.sendDelegateToParty(marsBot, name, game);
+      }
+      for (const name of [PartyName.UNITY, PartyName.REDS, PartyName.KELVINISTS]) {
+        turmoil.sendDelegateToParty(human, name, game);
+      }
+      const discarded = game.projectDeck.discardPile.length;
+
+      expect(helper.selectGrayEminenceParty()).eq(PartyName.GREENS);
+      expect(game.projectDeck.discardPile.length).eq(discarded);
+    });
+
+    it('breaks a full tie by the cost of a flipped project card', () => {
+      game.projectDeck.drawPile.push(new Capital());
+      const discarded = game.projectDeck.discardPile.length;
+
+      // Capital costs 26, so (26 - 1) % 6 = 1 picks the second party, Scientists.
+      expect(helper.selectGrayEminenceParty()).eq(PartyName.SCIENTISTS);
+      expect(game.projectDeck.discardPile.length).eq(discarded + 1);
+    });
+
+    it('counts the flipped card through only the parties that are still tied', () => {
+      for (const name of [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY]) {
+        turmoil.sendDelegateToParty(marsBot, name, game);
+      }
+      game.projectDeck.drawPile.push(new Capital());
+
+      // Greens, Reds and Kelvinists are tied and (26 - 1) % 3 = 1 picks the second, Reds.
+      expect(helper.selectGrayEminenceParty()).eq(PartyName.REDS);
     });
   });
 });

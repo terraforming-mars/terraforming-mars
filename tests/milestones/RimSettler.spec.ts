@@ -7,21 +7,23 @@ import {testGame} from '../TestGame';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
 
 describe('RimSettler', () => {
-  it('MarsBot follows the Hellas rule, except with the Milestones & Awards expansion', () => {
-    // Hellas pairs Jovian with Science, where Tharsis pairs it with Energy.
-    const hellasTracks = THARSIS_MARSBOT_BOARD.map((track) => ({
+  it('MarsBot reads its Jovian track on Hellas and its Energy track elsewhere', () => {
+    // Hellas and Elysium pair Jovian with Science, where Tharsis pairs it with Energy.
+    const scienceJovianTracks = THARSIS_MARSBOT_BOARD.map((track) => ({
       ...track,
       tags: track.tags.includes(Tag.SCIENCE) ? [...track.tags, Tag.JOVIAN] : track.tags.filter((tag) => tag !== Tag.JOVIAN),
     }));
 
     for (const run of [
-      {modularMA: false, science: 5, power: 6, expected: false},
-      {modularMA: false, science: 6, power: 0, expected: true},
-      {modularMA: true, science: 6, power: 4, expected: false},
-      {modularMA: true, science: 0, power: 5, expected: true},
+      {boardName: BoardName.HELLAS, modularMA: false, science: 5, power: 6, expected: false},
+      {boardName: BoardName.HELLAS, modularMA: false, science: 6, power: 0, expected: true},
+      {boardName: BoardName.HELLAS, modularMA: true, science: 6, power: 4, expected: false},
+      {boardName: BoardName.HELLAS, modularMA: true, science: 0, power: 5, expected: true},
+      {boardName: BoardName.ELYSIUM, modularMA: false, science: 6, power: 4, expected: false},
     ]) {
-      const [game] = testGame(1, {boardName: BoardName.HELLAS, modularMA: run.modularMA});
-      const bot = {...fakeMarsBot(run.modularMA ? THARSIS_MARSBOT_BOARD : hellasTracks), game};
+      const [game] = testGame(1, {boardName: run.boardName, modularMA: run.modularMA});
+      // The Milestones & Awards expansion plays MarsBot's Tharsis board on any map.
+      const bot = {...fakeMarsBot(run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks), game};
       setTrack(bot, Tag.SCIENCE, run.science);
       setTrack(bot, Tag.POWER, run.power);
 

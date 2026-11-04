@@ -13,11 +13,7 @@ export class Briber implements IMilestone {
     return player.canAfford(player.milestoneCost() + 12);
   }
 
-  /**
-   * MarsBot needs 20 M€ on hand (rulebook C p.13).
-   *
-   * Claiming it also costs MarsBot 12 of them, which is paid with the claim, not here.
-   */
+  /** MarsBot needs 20 M€ on hand, and claiming costs it 12 (rulebook C p.13). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     return bot.megacredits >= 20;
   }

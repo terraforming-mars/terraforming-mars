@@ -17,7 +17,7 @@ export class Sponsor extends BaseMilestone {
       .filter((card) => (card.cost >= 20) && (card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED)).length;
   }
 
-  /** MarsBot needs 3 cards costing 20 M€ or more in its own played pile, events included (rulebook C p.14). */
+  /** MarsBot needs 3 cards costing 20 M€ or more in its played pile, events too (rulebook C p.14). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     return bot.playedProjectCards.filter((card) => card.cost >= 20).length >= 3;
   }

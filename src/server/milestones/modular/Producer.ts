@@ -18,7 +18,7 @@ export class Producer extends BaseMilestone {
     return sum(Units.values(player.production.asUnits()));
   }
 
-  /** MarsBot needs its three most advanced tracks other than Venus to add up to 16 (rulebook C p.14). */
+  /** MarsBot needs its top three tracks other than Venus at 16 or more (rulebook C p.14). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     const [first, second, third] = marsBotMarsTrackPositions(bot).sort((a, b) => b - a);
     return first + second + third >= 16;

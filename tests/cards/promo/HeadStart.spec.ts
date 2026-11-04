@@ -1,26 +1,70 @@
 import {expect} from 'chai';
 import {HeadStart} from '../../../src/server/cards/promo/HeadStart';
 import {TestPlayer} from '../../TestPlayer';
-import {fakeCard} from '../../TestingUtils';
+import {fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-// import {IGame} from '../../../src/server/IGame';
-// import {OrOptions} from '../../../src/server/inputs/OrOptions';
-// import {Phase} from '../../../src/common/Phase';
-// import {Ants} from '../../../src/server/cards/base/Ants';
-// import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
-// import {Loan} from '../../../src/server/cards/prelude/Loan';
-// import {SelectCard} from '../../../src/server/inputs/SelectCard';
-// import {Donation} from '../../../src/server/cards/prelude/Donation';
+import {IGame} from '../../../src/server/IGame';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Phase} from '../../../src/common/Phase';
+import {Loan} from '../../../src/server/cards/prelude/Loan';
+import {Donation} from '../../../src/server/cards/prelude/Donation';
+import {DoubleDown} from '../../../src/server/cards/promo/DoubleDown';
+import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
+import {BeginnerCorporation} from '../../../src/server/cards/corporation/BeginnerCorporation';
+import {cast} from '../../../src/common/utils/utils';
+import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 
 describe('HeadStart', () => {
   let headStart: HeadStart;
+  let loan: Loan;
+  let game: IGame;
   let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     headStart = new HeadStart();
-    [/* game */, player/* , player2 */] = testGame(2, {preludeExtension: true});
+    loan = new Loan();
+    [game, player, player2] = testGame(2, {preludeExtension: true});
   });
+
+  function start(preludes: Array<IPreludeCard> = [headStart, loan]) {
+    player.preludeCardsInHand = preludes;
+    player2.preludeCardsInHand = [new Donation()];
+    player.takeAction();
+  }
+
+  function playPrelude(prelude: IPreludeCard) {
+    const selectCard = cast(player.getWaitingFor(), SelectCard<IPreludeCard>);
+    expect(selectCard.title).eq('Select prelude card to play');
+    player.process({type: 'card', cards: [prelude.name]});
+    runAllActions(game);
+  }
+
+  function actionMenu(): OrOptions {
+    expect(game.activePlayer).eq(player);
+    return cast(player.getWaitingFor(), OrOptions);
+  }
+
+  function titles(): Array<string> {
+    return actionMenu().options.map((option) => formatMessage(option.title));
+  }
+
+  function choose(title: string) {
+    const index = titles().indexOf(title);
+    expect(index, `no "${title}" in ${titles()}`).gte(0);
+    player.process({type: 'or', index, response: {type: 'option'}});
+    runAllActions(game);
+  }
+
+  function expectPlayer2ToPlayPreludes() {
+    expect(game.phase).eq(Phase.PRELUDES);
+    expect(game.activePlayer).eq(player2);
+    expect(player.getWaitingFor()).is.undefined;
+    expect(cast(player2.getWaitingFor(), SelectCard).title).eq('Select prelude card to play');
+  }
 
   it('Gain resources', () => {
     player.cardsInHand.push(fakeCard(), fakeCard(), fakeCard());
@@ -28,115 +72,80 @@ describe('HeadStart', () => {
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });
 
-  // function findOption(pi: OrOptions, title: string) {
-  //   return pi.options.find((option) => option.title === title)!;
-  // }
-  //
-  // it('Take 2 actions, as first prelude', () => {
-  //   game.phase = Phase.PRELUDES;
-  //   const ants = new Ants();
-  //   const bactoviralResearch = new BactoviralResearch();
-  //   const loan = new Loan();
-  //   player.preludeCardsInHand = [headStart, loan];
-  //   player.cardsInHand = [ants, bactoviralResearch];
-  //   player2.preludeCardsInHand = [new Donation()];
+  for (const run of [
+    {title: 'as first prelude', plays: ['headStart', 'second'], second: 'loan'},
+    {title: 'as second prelude', plays: ['second', 'headStart'], second: 'loan'},
+    // Double Down asks for the prelude to copy with the same prompt as playing one.
+    {title: 'again when Double Down copies it', plays: ['headStart', 'second', 'headStart'], second: 'doubleDown'},
+  ] as const) {
+    it(`Take 2 actions ${run.title}`, () => {
+      const second = run.second === 'loan' ? loan : new DoubleDown();
+      player.heat = 32;
+      start([headStart, second]);
+      for (const play of run.plays) {
+        playPrelude(play === 'headStart' ? headStart : second);
+        if (play === 'headStart') {
+          expect(actionMenu().title).eq('Take your first action');
+          choose('Convert 8 heat into temperature');
+          expect(actionMenu().title).eq('Take your next action');
+          choose('Convert 8 heat into temperature');
+        }
+      }
 
-  //   expect(player.actionsTakenThisRound).eq(0);
-  //   expect(game.activePlayer).eq(player.id);
+      expectPlayer2ToPlayPreludes();
+    });
+  }
 
-  //   player.takeAction();
+  it('Cannot pass, end turn, or undo during Head Start', () => {
+    [game, player, player2] = testGame(2, {preludeExtension: true, undoOption: true});
+    player.heat = 16;
+    start();
+    playPrelude(headStart);
+    choose('Convert 8 heat into temperature');
 
-  //   doWait(player, SelectCard, (selectCard) => {
-  //     expect(selectCard!.title).eq('Select prelude card to play');
-  //     selectCard.cb([headStart]);
-  //   });
+    for (const title of ['Pass for this generation', 'Skip this action', 'End Turn', 'Undo last action']) {
+      expect(titles()).does.not.include(title);
+    }
+  });
 
-  //   runAllActions(game);
+  it('The corporation first action is the first Head Start action', () => {
+    player.heat = 8;
+    player.pendingInitialActions = [new Inventrix()];
+    start();
+    playPrelude(headStart);
 
-  //   expect(player.actionsTakenThisRound).eq(1);
-  //   expect(game.activePlayer).eq(player.id);
+    expect(titles()).deep.eq(['Take first action of Inventrix corporation']);
+    choose('Take first action of Inventrix corporation');
+    expect(player.cardsInHand).has.length(3);
+    expect(actionMenu().title).eq('Take your next action');
+    choose('Convert 8 heat into temperature');
 
-  //   doWait(player, OrOptions, (waitingFor) => {
-  //     expect(waitingFor.title).eq('Take your first action');
-  //     const patents1 = cast(findOption(waitingFor, 'Sell patents'), SelectCard);
-  //     patents1.cb([player.cardsInHand[0]]);
-  //   });
+    playPrelude(loan);
+    expectPlayer2ToPlayPreludes();
+  });
 
-  //   runAllActions(game);
+  it('A player who cannot do anything loses the Head Start actions', () => {
+    start();
+    playPrelude(headStart);
 
-  //   expect(player.actionsTakenThisRound).eq(1);
-  //   expect(game.activePlayer).eq(player.id);
+    playPrelude(loan);
+    expectPlayer2ToPlayPreludes();
+  });
 
-  //   doWait(player, OrOptions, (waitingFor) => {
-  //     expect(waitingFor.title).eq('Take your next action');
-  //     const patents2 = cast(findOption(waitingFor, 'Sell patents'), SelectCard);
-  //     patents2.cb([player.cardsInHand[0]]);
-  //   });
-  //   runAllActions(game);
+  it('Reloading the game keeps the remaining actions', () => {
+    // Without corporations, loading a generation 1 game restarts the initial card selection.
+    player.playedCards.push(new BeginnerCorporation());
+    player2.playedCards.push(new BeginnerCorporation());
+    player.heat = 16;
+    start();
+    playPrelude(headStart);
+    choose('Convert 8 heat into temperature');
 
-  //   expect(game.activePlayer).eq(player.id);
+    const reloaded = Game.deserialize(game.serialize());
+    const reloadedPlayer = reloaded.getPlayerById(player.id);
 
-  //   doWait(player, SelectCard, (selectCard) => {
-  //     expect(selectCard.title).eq('Select prelude card to play');
-  //     selectCard.cb([loan]);
-  //   });
-
-  //   runAllActions(game);
-
-  //   expect(game.activePlayer).eq(player2.id);
-  // });
-
-  // it('Take 2 actions, as second prelude', () => {
-  //   game.phase = Phase.PRELUDES;
-  //   const ants = new Ants();
-  //   const bactoviralResearch = new BactoviralResearch();
-  //   const loan = new Loan();
-  //   player.preludeCardsInHand = [headStart, loan];
-  //   player.cardsInHand = [ants, bactoviralResearch];
-  //   player2.preludeCardsInHand = [new Donation()];
-
-  //   expect(player.actionsTakenThisRound).eq(0);
-  //   expect(game.activePlayer).eq(player.id);
-
-  //   player.takeAction();
-
-  //   doWait(player, SelectCard, (selectCard) => {
-  //     expect(selectCard!.title).eq('Select prelude card to play');
-  //     selectCard.cb([loan]);
-  //   });
-
-  //   runAllActions(game);
-
-  //   expect(game.activePlayer).eq(player.id);
-
-  //   doWait(player, SelectCard, (selectCard) => {
-  //     expect(selectCard.title).eq('Select prelude card to play');
-  //     selectCard.cb([headStart]);
-  //   });
-
-  //   runAllActions(game);
-
-  //   expect(player.actionsTakenThisRound).eq(2);
-  //   expect(game.activePlayer).eq(player.id);
-
-  //   doWait(player, OrOptions, (waitingFor) => {
-  //     expect(waitingFor.title).eq('Take your first action');
-  //     const patents1 = cast(findOption(waitingFor, 'Sell patents'), SelectCard);
-  //     patents1.cb([player.cardsInHand[0]]);
-  //   });
-
-  //   runAllActions(game);
-
-  //   expect(player.actionsTakenThisRound).eq(1);
-  //   expect(game.activePlayer).eq(player.id);
-
-  //   doWait(player, OrOptions, (waitingFor) => {
-  //     expect(waitingFor.title).eq('Take your next action');
-  //     const patents2 = cast(findOption(waitingFor, 'Sell patents'), SelectCard);
-  //     patents2.cb([player.cardsInHand[0]]);
-  //   });
-  //   runAllActions(game);
-
-  //   expect(game.activePlayer).eq(player2.id);
-  // });
+    expect(HeadStart.actionsRemaining(reloadedPlayer)).eq(1);
+    expect(reloaded.activePlayer.id).eq(player.id);
+    expect(cast(reloadedPlayer.getWaitingFor(), OrOptions).title).eq('Take your next action');
+  });
 });

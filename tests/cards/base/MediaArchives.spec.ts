@@ -6,9 +6,8 @@ import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen'
 import {testGame} from '../../TestingUtils';
 import {cast} from '../../../src/common/utils/utils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
 import {MarsBotTags} from '../../../src/server/automa/MarsBotTags';
-import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
+import {fakeMarsBot, setTrack} from '../../automa/FakeMarsBot';
 
 describe('MediaArchives', () => {
   it('Should play', () => {
@@ -27,13 +26,9 @@ describe('MediaArchives', () => {
   it('counts MarsBot\'s event track', () => {
     const card = new MediaArchives();
     const [game, player] = testGame(1, {automa: true});
-    const marsBot = game.marsBotPlayer!;
-    const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
-    marsBot.tags = new MarsBotTags(marsBot, marsBotBoard);
-    const eventTrack = marsBotBoard.tracks[marsBotBoard.tagToTrack[Tag.EVENT]!];
-    for (let i = 0; i < 4; i++) {
-      eventTrack.advance();
-    }
+    const bot = fakeMarsBot();
+    game.marsBotPlayer!.tags = new MarsBotTags(game.marsBotPlayer!, bot.marsBotBoard);
+    setTrack(bot, Tag.EVENT, 4);
     player.playedCards.push(card, new Virus());
 
     cast(card.play(player), undefined);

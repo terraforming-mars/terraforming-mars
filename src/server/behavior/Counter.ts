@@ -234,8 +234,9 @@ export class Counter implements ICounter {
 
     if (countable.eventsPlayed !== undefined) {
       if (countable.all === true) {
+        sum += utils.sum(game.players.map((p) => p.getPlayedEventsCount()));
         // MarsBot has no played events. The automa rules count its event track instead.
-        sum += utils.sum(game.playersPlusMarsBot.map((p) => p === game.marsBotPlayer ? p.tags.count(Tag.EVENT, 'raw') : p.getPlayedEventsCount()));
+        sum += game.marsBotPlayer?.tags.count(Tag.EVENT, 'raw') ?? 0;
       } else {
         sum += player.getPlayedEventsCount();
       }

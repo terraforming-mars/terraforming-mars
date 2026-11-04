@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Administrator} from '../../../src/server/awards/modular/Administrator';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {fakeMarsBot} from '../../automa/FakeMarsBot';
 
 describe('Administrator', () => {
   let award: Administrator;
@@ -62,5 +63,13 @@ describe('Administrator', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.WILD]}));
     expect(award.getScore(player)).eq(3);
+  });
+
+  it('MarsBot counts the tagless cards in its own played pile, plus 2', () => {
+    // An event always has its event tag, even when `tags` is empty.
+    const pile = [fakeCard({tags: []}), fakeCard({tags: [Tag.EARTH]}), fakeCard({type: CardType.EVENT, tags: []})];
+    const bot = {...fakeMarsBot(), playedProjectCards: pile};
+
+    expect(award.marsBotScore(bot)).eq(3);
   });
 });

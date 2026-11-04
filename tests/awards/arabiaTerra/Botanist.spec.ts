@@ -4,10 +4,10 @@ import {Botanist} from '@/server/awards/arabiaTerra/Botanist';
 import {fakeMarsBot, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Botanist', () => {
-  it('MarsBot scores its Bio track minus 2, but not below 0', () => {
+  it('MarsBot scores its Bio track minus 2, even below 0', () => {
     for (const run of [
       {position: 6, expected: 4},
-      {position: 1, expected: 0},
+      {position: 0, expected: -2},
     ]) {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.PLANT, run.position);

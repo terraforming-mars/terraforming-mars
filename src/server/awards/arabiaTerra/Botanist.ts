@@ -11,13 +11,8 @@ export class Botanist implements IAward {
     return player.production.plants;
   }
 
-  /**
-   * Scores MarsBot's Bio track space minus 2 (rulebook C p.10 and p.14).
-   *
-   * The rulebook doesn't say whether that can go below 0. It stops at 0, so a Bio track below space
-   * 2 ties a player with no plant production.
-   */
+  /** Scores MarsBot's Bio track space minus 2, which can be below 0 (rulebook C p.10 and p.14). */
   public marsBotScore(bot: IMarsBot): number {
-    return Math.max(0, bot.marsBotBoard.trackPosition(Tag.PLANT) - 2);
+    return bot.marsBotBoard.trackPosition(Tag.PLANT) - 2;
   }
 }

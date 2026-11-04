@@ -3,6 +3,9 @@ import {testGame} from '../../TestGame';
 import {Fundraiser} from '../../../src/server/milestones/modular/Fundraiser';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
+import {BoardName} from '@/common/boards/BoardName';
+import {Tag} from '@/common/cards/Tag';
+import {fakeMarsBot, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Fundraiser', () => {
   let milestone: Fundraiser;
@@ -33,5 +36,20 @@ describe('Fundraiser', () => {
     player.production.add(Resource.MEGACREDITS, 15);
 
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot needs space 10 of its Event track on Terra Cimmeria and space 8 with the expansion', () => {
+    for (const run of [
+      {modularMA: false, event: 9, expected: false},
+      {modularMA: false, event: 10, expected: true},
+      {modularMA: true, event: 7, expected: false},
+      {modularMA: true, event: 8, expected: true},
+    ]) {
+      const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
+      const bot = {...fakeMarsBot(), game};
+      setTrack(bot, Tag.EVENT, run.event);
+
+      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
+    }
   });
 });

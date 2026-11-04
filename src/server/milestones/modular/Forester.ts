@@ -26,4 +26,9 @@ export class CForester extends Forester {
   constructor() {
     super('C. Forester', 3);
   }
+
+  /** MarsBot needs space 10 of its Bio track on Terra Cimmeria (rulebook C p.9). */
+  public override marsBotCanClaim(bot: IMarsBot): boolean {
+    return bot.marsBotBoard.trackPosition(Tag.PLANT) >= 10;
+  }
 }

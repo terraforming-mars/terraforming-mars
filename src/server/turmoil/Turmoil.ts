@@ -548,7 +548,7 @@ export class Turmoil {
     return result;
   }
 
-  public static deserialize(d: SerializedTurmoil, players: Array<IPlayer>): Turmoil {
+  public static deserialize(d: SerializedTurmoil, players: ReadonlyArray<IPlayer>): Turmoil {
     const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
     const chairman = deserializeDelegateOrUndefined(d.chairman, players);
     const turmoil = new Turmoil(d.rulingParty, chairman || 'NEUTRAL', d.dominantParty, dealer);
@@ -604,7 +604,7 @@ function serializeDelegateOrUndefined(delegate: Delegate | undefined): Serialize
   return serializeDelegate(delegate);
 }
 
-function deserializePlayerId(playerId: PlayerId, players: Array<IPlayer>): IPlayer {
+function deserializePlayerId(playerId: PlayerId, players: ReadonlyArray<IPlayer>): IPlayer {
   const player = players.find((p) => p.id === playerId);
   if (player === undefined) {
     throw new Error('Delegate not found');
@@ -612,14 +612,14 @@ function deserializePlayerId(playerId: PlayerId, players: Array<IPlayer>): IPlay
   return player;
 }
 
-function deserializeDelegate(serializedDelegate: SerializedDelegate, players: Array<IPlayer>): Delegate {
+function deserializeDelegate(serializedDelegate: SerializedDelegate, players: ReadonlyArray<IPlayer>): Delegate {
   if (serializedDelegate === 'NEUTRAL') {
     return 'NEUTRAL';
   }
   return deserializePlayerId(serializedDelegate, players);
 }
 
-function deserializeDelegateOrUndefined(serializedDelegate: SerializedDelegate | undefined, players: Array<IPlayer>): Delegate | undefined {
+function deserializeDelegateOrUndefined(serializedDelegate: SerializedDelegate | undefined, players: ReadonlyArray<IPlayer>): Delegate | undefined {
   if (serializedDelegate === undefined) {
     return undefined;
   }

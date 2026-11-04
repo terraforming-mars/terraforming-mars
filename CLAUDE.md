@@ -5,9 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Development Commands
 
 ```bash
-npm run build                # Full build: CSS + JSON static files, server (tsc), client (webpack)
+npm run build                # Full build: CSS + JSON static files, server (tsc), client (Vite)
 npm run build:server         # TypeScript compile server only: tsc --build src/tsconfig.json
-npm run build:client         # Webpack production bundle (runs make:cards first)
+npm run build:client         # Vite production bundle (runs make:cards first)
 npm run build:test           # Compile tests: tsc --build tests/tsconfig.json
 npm run lint                 # All lints: eslint + i18n audit + vue-tsc
 npm run lint:client          # Vue type checking: vue-tsc --noEmit
@@ -33,21 +33,21 @@ npx vitest run tests/client/components/Board.spec.ts
 
 ```bash
 npm run dev:server           # Server with hot reload (tsx watch)
-npm run dev:client           # Webpack watch mode
+npm run dev:client           # Vite dev server (proxy to the Node server on :8080)
 npm run watch:less           # CSS rebuild on change
 ```
 
-However `npm run dev` is much easier to run and a little more powerful / flexible.
+However `npm run dev` is much easier to run and a little more powerful / flexible. It starts the Node server on http://localhost:8080 and Vite (the app) on http://localhost:5173.
 
 ## Architecture
 
 ### Three-Layer Structure
 
 - **`src/server/`** - Game engine, card logic, routes, database. Runs on Node.js.
-- **`src/client/`** - Vue 3 frontend (Options API, `defineComponent`). Bundled with Webpack.
+- **`src/client/`** - Vue 3 frontend (Options API, `defineComponent`). Bundled with Vite.
 - **`src/common/`** - Shared types, enums, and models used by both client and server. No runtime logic that depends on either side.
 
-The `@/` import alias maps to `./src/` (configured in tsconfig paths and webpack).
+The `@/` import alias maps to `./src/` (configured in tsconfig paths and Vite).
 
 ### Card System
 

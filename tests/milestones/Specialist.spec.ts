@@ -4,8 +4,19 @@ import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 import {VENUS_MARSBOT_TRACK} from '@/server/automa/boards/VenusMarsBot';
 import {Specialist} from '@/server/milestones/Specialist';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
+import {testGame} from '../TestGame';
 
 describe('Specialist', () => {
+  it('Can claim with 10 production of one resource', () => {
+    const milestone = new Specialist();
+    const [, player] = testGame(2);
+    player.production.override({energy: 9});
+    expect(milestone.canClaim(player)).is.false;
+
+    player.production.override({energy: 10});
+    expect(milestone.canClaim(player)).is.true;
+  });
+
   it('MarsBot needs space 10 on any one track, Venus included', () => {
     for (const run of [
       {tag: Tag.SCIENCE, position: 9, expected: false},

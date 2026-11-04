@@ -4,6 +4,13 @@ import {testGame} from '../TestGame';
 import {fakeMarsBot} from '../automa/FakeMarsBot';
 
 describe('Benefactor', () => {
+  it('scores a player by terraform rating', () => {
+    const [, player] = testGame(2);
+    player.setTerraformRating(25);
+
+    expect(new Benefactor().getScore(player)).to.eq(25);
+  });
+
   it('MarsBot scores its TR minus 15, but not below 0', () => {
     for (const run of [
       {terraformRating: 22, expected: 7},

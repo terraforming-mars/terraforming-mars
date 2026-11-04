@@ -1,7 +1,7 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
 import {numeric} from '@/common/utils/Ordering';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 import {marsBotAllTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class Visionary implements IAward {

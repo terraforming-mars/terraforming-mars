@@ -24,7 +24,7 @@ export class Tactician extends BaseMilestone {
     return validCards.length;
   }
 
-  /** MarsBot's cards carry no requirements. It qualifies with 35 M€ on hand (rulebook C p.9). */
+  /** MarsBot needs 35 M€ on hand, since its cards carry no requirements (rulebook C p.9). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     return bot.megacredits >= 35;
   }

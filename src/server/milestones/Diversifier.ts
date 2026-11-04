@@ -16,9 +16,10 @@ export class Diversifier extends BaseMilestone {
   }
 
   /**
-   * MarsBot diversifies by reaching space 3 on 7 of its tracks. That is every track without
-   * Venus, which is what Hellas asks for (rulebook C p.9), and 7 of 8 with it (rulebook C p.2),
-   * so Hellas and the Milestones & Awards expansion (rulebook C p.13) agree.
+   * MarsBot needs space 3 on 7 of its tracks.
+   *
+   * That is every track without Venus, as Hellas asks (rulebook C p.9), and 7 of 8 with it
+   * (rulebook C p.2), which is also the Milestones & Awards expansion's rule (rulebook C p.13).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     return marsBotAllTrackPositions(bot).filter((position) => position >= 3).length >= 7;

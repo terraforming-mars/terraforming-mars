@@ -21,9 +21,10 @@ export class RimSettler extends BaseMilestone {
   }
 
   /**
-   * On Hellas MarsBot needs space 6 of its Jovian track (rulebook C p.9), which it shares with
-   * Science there (rulebook C p.8). The Milestones & Awards expansion asks for space 5 of the
-   * Energy track (rulebook C p.14).
+   * MarsBot needs space 6 of its Jovian track on Hellas (rulebook C p.9), which it shares with
+   * Science there (rulebook C p.8).
+   *
+   * The Milestones & Awards expansion asks for space 5 of the Energy track (rulebook C p.14).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
     if (marsBotUsesMapSet(bot, BoardName.HELLAS)) {

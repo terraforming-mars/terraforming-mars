@@ -16,7 +16,7 @@ export class Excentric implements IAward {
     return score;
   }
 
-  /** Every 5 of MarsBot's M€ count as one resource (rulebook C p.9 and p.14). */
+  /** Counts every 5 of MarsBot's M€ as one resource (rulebook C p.9 and p.14). */
   public marsBotScore(bot: IMarsBot): number {
     return Math.floor(bot.megacredits / 5);
   }

@@ -3,8 +3,21 @@ import {CardType} from '@/common/cards/CardType';
 import {Legend4} from '@/server/milestones/modular/Legend4';
 import {fakeCard} from '../../TestingUtils';
 import {fakeMarsBot} from '../../automa/FakeMarsBot';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Legend4', () => {
+  it('Can claim with 4 played events', () => {
+    const milestone = new Legend4();
+    const player = TestPlayer.BLUE.newPlayer();
+    for (let i = 0; i < 3; i++) {
+      player.playedCards.push(fakeCard({type: CardType.EVENT}));
+    }
+    expect(milestone.canClaim(player)).is.false;
+
+    player.playedCards.push(fakeCard({type: CardType.EVENT}));
+    expect(milestone.canClaim(player)).is.true;
+  });
+
   it('MarsBot needs 4 events in its played pile', () => {
     for (const run of [
       {events: 3, expected: false},

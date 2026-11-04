@@ -8,6 +8,7 @@ import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {testGame} from '../../TestingUtils';
+import {fakeMarsBot} from '../../automa/FakeMarsBot';
 
 describe('LandSpecialist', () => {
   let milestone: LandSpecialist;
@@ -81,5 +82,16 @@ describe('LandSpecialist', () => {
     game.simpleAddTile(player, moonSpaces[0], {tileType: TileType.LUNA_TRAIN_STATION});
     expect(milestone.getScore(player)).eq(3);
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot needs 3 destroyed bonus cards', () => {
+    for (const run of [
+      {destroyedBonusCards: 2, expected: false},
+      {destroyedBonusCards: 3, expected: true},
+    ]) {
+      const bot = {...fakeMarsBot(), destroyedBonusCards: run.destroyedBonusCards};
+
+      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
+    }
   });
 });

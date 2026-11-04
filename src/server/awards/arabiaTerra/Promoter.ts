@@ -1,7 +1,7 @@
 import {IAward} from '../IAward';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '@/common/cards/Tag';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 
 export class Promoter implements IAward {
   public readonly name = 'Promoter';

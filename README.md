@@ -47,7 +47,7 @@ There are far too many good tutorials online. [Here are the rulebooks, though.](
 ## ⬤ I want to run a copy of the server locally
 Check out our [Local setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup)
 
-Honestly, it's really simple.
+Honestly, it's really simple. For development, `npm run dev` starts the Node server on <http://localhost:8080> and the Vite dev server on <http://localhost:5173>.
 
 ## ⬤ I want to run a copy of the server on Heroku
 Check out our [Heroku setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Heroku-Setup)

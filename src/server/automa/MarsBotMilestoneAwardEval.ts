@@ -1,10 +1,18 @@
 import {BoardName} from '@/common/boards/BoardName';
+import {Tag} from '@/common/cards/Tag';
 import {marsBotMapSet} from '@/common/automa/marsBotMapSet';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 
 /** Every track position, the Venus track included when in play. */
 export function marsBotAllTrackPositions(bot: IMarsBot): Array<number> {
   return bot.marsBotBoard.tracks.map((track) => track.position);
+}
+
+/** The Mars track positions, leaving a Venus track out. */
+export function marsBotMarsTrackPositions(bot: IMarsBot): Array<number> {
+  return bot.marsBotBoard.tracks
+    .filter((track) => !track.definition.tags.includes(Tag.VENUS))
+    .map((track) => track.position);
 }
 
 /**

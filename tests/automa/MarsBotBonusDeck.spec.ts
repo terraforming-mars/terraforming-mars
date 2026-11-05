@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
-import {createBaseBonusCards, createCorpBonusCard} from '../../src/server/automa/MarsBotBonusCard';
+import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/MarsBotBonusCard';
 import {BonusCardId} from '../../src/common/automa/AutomaTypes';
 
 describe('MarsBotBonusDeck', () => {
@@ -9,7 +9,7 @@ describe('MarsBotBonusDeck', () => {
   let deck: MarsBotBonusDeck;
 
   beforeEach(() => {
-    deck = MarsBotBonusDeck.createBase(new SeededRandom(42));
+    deck = MarsBotBonusDeck.create(new SeededRandom(42));
   });
 
   it('starts with the 8 base cards in the draw pile', () => {
@@ -20,19 +20,22 @@ describe('MarsBotBonusDeck', () => {
   for (const run of [
     {
       expansions: 'Venus Next',
-      create: (random: SeededRandom) => MarsBotBonusDeck.createWithVenus(random),
+      venus: true,
+      colonies: false,
       removed: [BonusCardId.B06_LOBBYISTS],
       added: [BonusCardId.B15_LOBBYISTS_VENUS],
     },
     {
       expansions: 'Colonies',
-      create: (random: SeededRandom) => MarsBotBonusDeck.createWithColonies(random),
+      venus: false,
+      colonies: true,
       removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION],
       added: [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD],
     },
     {
       expansions: 'Venus Next and Colonies',
-      create: (random: SeededRandom) => MarsBotBonusDeck.createWithVenusAndColonies(random),
+      venus: true,
+      colonies: true,
       removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION, BonusCardId.B06_LOBBYISTS],
       added: [
         BonusCardId.B15_LOBBYISTS_VENUS,
@@ -47,7 +50,7 @@ describe('MarsBotBonusDeck', () => {
         .filter((id) => !run.removed.includes(id))
         .concat(run.added);
 
-      const expansionDeck = run.create(new SeededRandom(42));
+      const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: run.venus, colonies: run.colonies});
 
       expect(expansionDeck.drawPile.map((card) => card.id)).to.have.members(expected);
       expect(expansionDeck.discardPile).to.be.empty;
@@ -63,7 +66,7 @@ describe('MarsBotBonusDeck', () => {
 
   it('serialization round trip with expansion and corporation bonus cards', () => {
     const ids = Object.values(BonusCardId).filter((id) => id >= BonusCardId.B15_LOBBYISTS_VENUS);
-    const expansionDeck = new MarsBotBonusDeck(ids.map((id) => createCorpBonusCard(id)), [], new SeededRandom(42));
+    const expansionDeck = new MarsBotBonusDeck(ids.map((id) => createBonusCard(id)), [], new SeededRandom(42));
     expansionDeck.discard(expansionDeck.draw(logger)!, expansionDeck.draw(logger)!);
 
     const restored = MarsBotBonusDeck.deserialize(expansionDeck.serialize(), new SeededRandom(42));

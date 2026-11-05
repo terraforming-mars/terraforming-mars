@@ -24,8 +24,8 @@ export function createBaseBonusCards(): Array<MarsBotBonusCard> {
   ];
 }
 
-/** Create a single bonus card by ID. Covers base and corp-specific cards. */
-export function createCorpBonusCard(id: BonusCardId): MarsBotBonusCard {
+/** Create a single bonus card by ID, from any set. */
+export function createBonusCard(id: BonusCardId): MarsBotBonusCard {
   return bonusCard(id, BONUS_CARD_NAMES.get(id) ?? (id as unknown as CardName));
 }
 

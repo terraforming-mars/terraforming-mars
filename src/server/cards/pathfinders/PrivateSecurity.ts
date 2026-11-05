@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {uppercase} from '../Options';
+import {ALL_RESOURCES} from '@/common/Resource';
 
 export class PrivateSecurity extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class PrivateSecurity extends Card implements IProjectCard {
       name: CardName.PRIVATE_SECURITY,
       cost: 8,
       tags: [Tag.EARTH],
+      protects: {production: ALL_RESOURCES},
 
       metadata: {
         cardNumber: 'Pf25',

@@ -21,7 +21,6 @@ import {SpectatorModel} from '../../common/models/SpectatorModel';
 import {GameModel, OtherDeckSizesModel} from '../../common/models/GameModel';
 import {createPathfindersModel} from './PathfindersModel';
 import {MoonModel} from '../../common/models/MoonModel';
-import {CardName} from '../../common/cards/CardName';
 import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
@@ -307,47 +306,33 @@ export class Server {
     return model;
   }
 
-  private static getResourceProtections(player: IPlayer) {
-    const protection: Record<Resource, Protection> = {
-      megacredits: 'off',
-      steel: 'off',
-      titanium: 'off',
-      plants: 'off',
-      energy: 'off',
-      heat: 'off',
+  private static getResourceProtections(player: IPlayer): Record<Resource, Protection> {
+    const protection = (resource: Resource): Protection => {
+      if (player.isProtected(resource)) {
+        return 'on';
+      }
+      return player.isHalfProtected(resource) ? 'half' : 'off';
     };
-
-    if (player.alloysAreProtected()) {
-      protection.steel = 'on';
-      protection.titanium = 'on';
-    }
-
-    if (player.plantsAreProtected()) {
-      protection.plants = 'on';
-    } else if (player.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-      protection.plants = 'half';
-    }
-
-    return protection;
+    return {
+      megacredits: protection(Resource.MEGACREDITS),
+      steel: protection(Resource.STEEL),
+      titanium: protection(Resource.TITANIUM),
+      plants: protection(Resource.PLANTS),
+      energy: protection(Resource.ENERGY),
+      heat: protection(Resource.HEAT),
+    };
   }
 
-  private static getProductionProtections(player: IPlayer) {
-    const defaultProteection = player.tableau.has(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
-    const protection: Record<Resource, Protection> = {
-      megacredits: defaultProteection,
-      steel: defaultProteection,
-      titanium: defaultProteection,
-      plants: defaultProteection,
-      energy: defaultProteection,
-      heat: defaultProteection,
+  private static getProductionProtections(player: IPlayer): Record<Resource, Protection> {
+    const protection = (resource: Resource): Protection => player.isProductionProtected(resource) ? 'on' : 'off';
+    return {
+      megacredits: protection(Resource.MEGACREDITS),
+      steel: protection(Resource.STEEL),
+      titanium: protection(Resource.TITANIUM),
+      plants: protection(Resource.PLANTS),
+      energy: protection(Resource.ENERGY),
+      heat: protection(Resource.HEAT),
     };
-
-    if (player.alloysAreProtected()) {
-      protection.steel = 'on';
-      protection.titanium = 'on';
-    }
-
-    return protection;
   }
 
   // Oceans can't be owned so they shouldn't have a color associated with them

@@ -4,7 +4,6 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
-import {CardName} from '../../common/cards/CardName';
 import {MessageBuilder, message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
 export class RemoveAnyPlants extends DeferredAction {
@@ -18,12 +17,7 @@ export class RemoveAnyPlants extends DeferredAction {
   }
 
   private createOption(target: IPlayer) {
-    let qtyToRemove = Math.min(target.plants, this.count);
-
-    // Botanical Experience hook.
-    if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-      qtyToRemove = Math.ceil(qtyToRemove / 2);
-    }
+    const qtyToRemove = target.lossAfterProtection(Resource.PLANTS, Math.min(target.plants, this.count));
 
     const message =
       new MessageBuilder('Remove ${0} plants from ${1}')
@@ -63,12 +57,7 @@ export class RemoveAnyPlants extends DeferredAction {
 
     const candidates = player.opponents.filter((p) => !p.plantsAreProtected() && p.plants > 0);
     removalOptions.push(...candidates.map((target) => {
-      let qtyToRemove = Math.min(target.plants, this.count);
-
-      // Botanical Experience hook.
-      if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-        qtyToRemove = Math.ceil(qtyToRemove / 2);
-      }
+      const qtyToRemove = target.lossAfterProtection(Resource.PLANTS, Math.min(target.plants, this.count));
 
       const message =
         new MessageBuilder('Remove ${0} plants from ${1}')

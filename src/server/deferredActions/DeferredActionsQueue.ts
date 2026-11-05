@@ -4,9 +4,8 @@ import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {PriorityQueue} from './PriorityQueue';
 
-// The queue only runs actions and reads their priority/player: it never calls andThen, whose
-// callback type differs from action to action.
-type QueuedDeferredAction = Pick<IDeferredAction<never>, 'player' | 'priority' | 'execute'>;
+// The queue only reads player/priority and runs execute; andThen's callback type is irrelevant here.
+type QueuedDeferredAction = Pick<IDeferredAction<unknown>, 'player' | 'priority' | 'execute'>;
 
 export class DeferredActionsQueue {
   private queue = new PriorityQueue<QueuedDeferredAction, PlayerId>();

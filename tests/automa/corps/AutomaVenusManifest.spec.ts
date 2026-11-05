@@ -12,42 +12,25 @@ import {AUTOMA_VENUS_MANIFEST} from '../../../src/server/automa/corps/AutomaVenu
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 
-type RecordingBot = {
-  bot: IMarsBot;
-  /** The corp handlers' calls into the bot, in order, as `name(arguments)`. */
-  calls: Array<string>;
-  corpState: Map<string, number>;
-};
-
-function recordingBot(): RecordingBot {
+/** A bot that records the corp handlers' calls, in order, as `name(arguments)`. */
+function recordingBot(): {bot: IMarsBot, calls: Array<string>} {
   const [game] = testGame(1);
   const calls: Array<string> = [];
   const corpState = new Map<string, number>();
-  const record = (call: string) => {
-    calls.push(call);
-  };
   const bot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
     game,
-    addFloaters: (count) => record(`addFloaters(${count})`),
-    gainMc: (amount) => record(`gainMc(${amount})`),
-    raiseTemperature: (steps) => record(`raiseTemperature(${steps})`),
-    removeBonusCard: (id) => record(`removeBonusCard(${id})`),
-    addBonusCardToBonusDeck: (id) => record(`addBonusCardToBonusDeck(${id})`),
+    addFloaters: (count) => calls.push(`addFloaters(${count})`),
+    gainMc: (amount) => calls.push(`gainMc(${amount})`),
+    raiseTemperature: (steps) => calls.push(`raiseTemperature(${steps})`),
+    removeBonusCard: (id) => calls.push(`removeBonusCard(${id})`),
+    addBonusCardToBonusDeck: (id) => calls.push(`addBonusCardToBonusDeck(${id})`),
     getCorpState: (key) => corpState.get(key) ?? 0,
-    setCorpState: (key, value) => {
-      corpState.set(key, value);
-    },
+    setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot, calls, corpState};
+  return {bot, calls};
 }
 
-function corp(name: CardName): IMarsBotCorp {
-  const found = AUTOMA_VENUS_MANIFEST.corps[name];
-  if (found === undefined) {
-    throw new Error(`${name} is not in the Venus manifest`);
-  }
-  return found;
-}
+const corp = (name: CardName): IMarsBotCorp => AUTOMA_VENUS_MANIFEST.corps[name]!;
 
 describe('AutomaVenusManifest', () => {
   // C25: a blue card with a red arrow is an active card with an action
@@ -62,63 +45,43 @@ describe('AutomaVenusManifest', () => {
     expect(effect.vpBonus!(bot)).eq(1);
   });
 
-  // C26: the Round Start box (rulebook B p.3)
-  it('Celestic adds a floater at setup, at round start and with each Failed Action', () => {
+  // The Setup and Round Start boxes (rulebook B p.1, p.3), then the effect
+  type Hook = (c: IMarsBotCorp) => ((bot: IMarsBot, ...args: Array<number>) => void) | undefined;
+  const runs: Array<{name: CardName, hooks: Array<Hook>, calls: Array<string>}> = [
+    {
+      name: CardName.CELESTIC,
+      hooks: [(c) => c.setup, (c) => c.roundStart, (c) => c.effect!.onFailedAction],
+      calls: ['addFloaters(1)', 'addFloaters(1)', 'addFloaters(1)'],
+    },
+    {
+      name: CardName.STORMCRAFT_INCORPORATED,
+      hooks: [(c) => c.setup, (c) => c.roundStart, (c) => c.effect!.onFloatersSpentForExtraCard],
+      calls: ['addFloaters(1)', 'addFloaters(1)', 'raiseTemperature(1)'],
+    },
+    {name: CardName.APHRODITE, hooks: [(c) => c.effect!.onVenusRaised], calls: ['gainMc(6)']},
+  ];
+  for (const run of runs) {
+    it(`${run.name}: ${run.calls.join(', ')}`, () => {
+      const {bot, calls} = recordingBot();
+
+      // Aphrodite reads the 3 steps Venus is raised, the other hooks ignore them
+      run.hooks.forEach((hook) => hook(corp(run.name))!(bot, 3));
+
+      expect(calls).deep.eq(run.calls);
+    });
+  }
+
+  // With Venus Next the bonus deck's Lobbyists is B15. Its silver resource cubes sit on the Venus track (rulebook B p.3)
+  it('Morning Star swaps Lobbyists for Venusian Lobby, and its silver resource cubes pay 5 M€', () => {
     const {bot, calls} = recordingBot();
-    const celestic = corp(CardName.CELESTIC);
-
-    celestic.setup!(bot);
-    celestic.roundStart!(bot);
-    celestic.effect!.onFailedAction!(bot);
-
-    expect(calls).deep.eq(['addFloaters(1)', 'addFloaters(1)', 'addFloaters(1)']);
-  });
-
-  // C34: the Round Start box (rulebook B p.3)
-  it('Stormcraft adds a floater at setup and at round start, and raises the temperature when floaters keep an extra card', () => {
-    const {bot, calls} = recordingBot();
-    const stormcraft = corp(CardName.STORMCRAFT_INCORPORATED);
-
-    stormcraft.setup!(bot);
-    stormcraft.roundStart!(bot);
-    stormcraft.effect!.onFloatersSpentForExtraCard!(bot);
-
-    expect(calls).deep.eq(['addFloaters(1)', 'addFloaters(1)', 'raiseTemperature(1)']);
-  });
-
-  // C27: with Venus Next the bonus deck's Lobbyists is B15 (rulebook B p.1)
-  it('Morning Star swaps Lobbyists for Venusian Lobby at setup', () => {
-    const {bot, calls} = recordingBot();
-
-    corp(CardName.MORNING_STAR_INC).setup!(bot);
-
-    expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)', 'addBonusCardToBonusDeck(B26)']);
-  });
-
-  // The cubes on the Venus track (rulebook B p.3)
-  it('Morning Star silver resource cubes sit on the Venus track at the spaces its card names', () => {
+    const morningStar = corp(CardName.MORNING_STAR_INC);
     const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
 
-    const placed = corpTrackCubes(corp(CardName.MORNING_STAR_INC), board)
-      .map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`);
+    morningStar.setup!(bot);
+    morningStar.effect!.onTrackCubeTrigger!(bot, 7, 5, 'credit');
 
-    expect(placed).deep.eq([5, 6, 7, 8, 9, 11, 12].map((position) => `venus credit ${position}`));
-  });
-
-  it('Morning Star gains 5 M€ for a silver resource cube', () => {
-    const {bot, calls} = recordingBot();
-
-    corp(CardName.MORNING_STAR_INC).effect!.onTrackCubeTrigger!(bot, 7, 5, 'credit');
-
-    expect(calls).deep.eq(['gainMc(5)']);
-  });
-
-  // C28
-  it('Aphrodite gains 2 M€ for each step Venus is raised', () => {
-    const {bot, calls} = recordingBot();
-
-    corp(CardName.APHRODITE).effect!.onVenusRaised!(bot, 3);
-
-    expect(calls).deep.eq(['gainMc(6)']);
+    expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)', 'addBonusCardToBonusDeck(B26)', 'gainMc(5)']);
+    expect(corpTrackCubes(morningStar, board).map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`))
+      .deep.eq([5, 6, 7, 8, 9, 11, 12].map((position) => `venus credit ${position}`));
   });
 });

@@ -27,7 +27,7 @@ const LAKEFRONT_RESORTS: IMarsBotCorp = {
           bot.setCorpState('whiteCubeOnCard', 0);
           const mcBefore = bot.megacredits;
           bot.advanceTrack(0); // Building track = index 0
-          // FAQ (rulebook B, p.3): this overrides Government Intervention's "no M€", but not its "no TR"
+          // FAQ (rulebook B, p.4): this overrides Government Intervention's "no M€", but not its "no TR"
           if (bot.mcKeptThroughIntervention !== undefined) {
             bot.mcKeptThroughIntervention += Math.max(0, bot.megacredits - mcBefore);
           }

@@ -177,7 +177,7 @@ export abstract class Colony implements IColony {
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    const action: undefined | DeferredAction<any> = this.computeBonus(player, bonusType, quantity, resource);
+    const action: undefined | DeferredAction<never> = this.computeBonus(player, bonusType, quantity, resource);
     if (action === undefined) {
       return undefined;
     }
@@ -197,7 +197,12 @@ export abstract class Colony implements IColony {
     }
   }
 
-  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredAction<any> | undefined {
+  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredAction<never> | undefined {
+    // The queue only reads priority/player/execute; the callback type differs per bonus and is unused here.
+    return this.computeBonusAction(player, bonusType, quantity, resource) as DeferredAction<never> | undefined;
+  }
+
+  private computeBonusAction(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined) {
     const game = player.game;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:

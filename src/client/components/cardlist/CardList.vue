@@ -290,13 +290,7 @@ export default defineComponent({
       ];
     },
     allTags(): Array<TagOption> {
-      const results: Array<TagOption> = [];
-      for (const tag in Tag) {
-        if (Object.hasOwn(Tag, tag)) {
-          results.push((<any>Tag)[tag]);
-        }
-      }
-      return results.concat('none');
+      return [...getEnumStringValues(Tag), 'none'];
     },
     allResources(): Array<ResourceOption> {
       return [...getEnumStringValues(CardResource), 'none'];

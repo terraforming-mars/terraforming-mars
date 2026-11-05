@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const LOCALES_DIR = path.resolve('./src/locales/');
 // Read at runtime rather than imported to save memory at compile time.
-const raw_translations: Record<string, Record<string, string>> =
+const raw_translations: Record<string, Record<string, string | undefined>> =
   JSON.parse(fs.readFileSync(path.resolve('./src/genfiles/translations.json'), 'utf8'));
 const locales: Array<string> = [];
 
@@ -30,7 +30,7 @@ if (args[0] === '--locales') {
 for (const [sourceString, translations] of Object.entries(raw_translations)) {
   const missingLocales: Array<string> = [];
   for (const localeName of localesToWarn) {
-    const trans: string = (translations as any)[localeName];
+    const trans = translations[localeName];
     if (!trans) {
       missingLocales.push(localeName);
     }

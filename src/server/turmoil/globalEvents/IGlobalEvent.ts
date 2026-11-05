@@ -12,10 +12,11 @@ export interface IGlobalEvent {
   resolve: (game: IGame) => void;
 }
 
-export function isIGlobalEvent(object: any): object is IGlobalEvent {
+export function isIGlobalEvent(object: unknown): object is IGlobalEvent {
   // `in` rather than hasOwnProperty: GlobalEvent exposes these as prototype getters.
   return (
-    object !== undefined &&
+    typeof object === 'object' &&
+    object !== null &&
     'revealedDelegate' in object &&
     'currentDelegate' in object
   );

@@ -18,6 +18,11 @@ import {RouteError} from './RouteError';
 import {readBody} from './readBody';
 import {stringToNumber} from '../database/utils';
 
+type PlayerInputRequest = InputResponse & {
+  runId?: string;
+  requestId?: string;
+};
+
 export const playerInputMetrics = {
   responseInterval: new prometheus.Histogram({
     name: 'player_input_response_interval',
@@ -92,7 +97,7 @@ export class PlayerInput extends Handler {
       if (this.isRespondingTooQuickly(responseInterval)) {
         throw new AppError(RESPONDING_TOO_QUICKLY, "You're responding a little too quickly.");
       }
-      const entity = JSON.parse(body);
+      const entity: PlayerInputRequest = JSON.parse(body);
       validateRunId(entity);
       validateRequestId(player, entity);
 
@@ -146,7 +151,7 @@ export class PlayerInput extends Handler {
     return responseInterval < this.minResponseIntervalMs;
   }
 }
-function validateRunId(entity: any) {
+function validateRunId(entity: PlayerInputRequest) {
   if (entity.runId !== undefined && runId !== undefined) {
     if (entity.runId !== runId) {
       throw new AppError(INVALID_RUN_ID, 'The server has restarted. Click OK to refresh this page.');
@@ -158,7 +163,7 @@ function validateRunId(entity: any) {
 
 // Rejects a response sent for an input the player has since moved past, e.g. from a page
 // that never got the reply to its previous response.
-function validateRequestId(player: IPlayer, entity: any) {
+function validateRequestId(player: IPlayer, entity: PlayerInputRequest) {
   if (entity.requestId !== undefined && entity.requestId !== player.requestId) {
     throw new AppError(INVALID_REQUEST_ID, 'This page is out of date. Click OK to refresh it.');
   }

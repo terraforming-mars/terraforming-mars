@@ -11,7 +11,7 @@ describe('Timer', () => {
     timer = Timer.newInstance(clock);
     timer.enable();
     // this lastStoppedAt is a bit of a gross mess.
-    (Timer as any).lastStoppedAt = 0;
+    Reflect.set(Timer, 'lastStoppedAt', 0);
   });
 
   it('starts at 00:00', () => {
@@ -40,7 +40,7 @@ describe('Timer', () => {
   it('does not run until enabled', () => {
     const disabled = Timer.newInstance(clock);
     // Another game's timer stopped a day ago.
-    (Timer as any).lastStoppedAt = clock.millis - 24 * 3_600_000;
+    Reflect.set(Timer, 'lastStoppedAt', clock.millis - 24 * 3_600_000);
     disabled.start();
     expect(disabled.serialize().running).eq(false);
     clock.millis += 1000;
@@ -71,7 +71,7 @@ describe('Timer', () => {
       startedAt: 0,
       running: false,
       afterFirstAction,
-    } as any);
+    });
     expect(legacy(true).serialize().enabled).eq(true);
     expect(legacy(false).serialize().enabled).eq(false);
   });

@@ -42,7 +42,7 @@ function mountFilter(overrides: {selected?: Array<string>} = {}) {
 }
 
 // The script-setup internals are reachable through the test wrapper, but not exposed by its type.
-type ModuleItemFilterVm = {
+type ModuleItemFilterVm = ReturnType<typeof mountFilter>['vm'] & {
   localSelected: Array<string>;
   filterText: string;
   selectAll(key: string): void;

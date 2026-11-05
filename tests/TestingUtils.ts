@@ -48,15 +48,15 @@ export function maxOutOceans(player: IPlayer, toValue: number = constants.MAX_OC
 }
 
 export function setTemperature(game: IGame, temperature: number) {
-  (game as any).temperature = temperature;
+  Reflect.set(game, 'temperature', temperature);
 }
 
 export function setOxygenLevel(game: IGame, oxygenLevel: number) {
-  (game as any).oxygenLevel = oxygenLevel;
+  Reflect.set(game, 'oxygenLevel', oxygenLevel);
 }
 
 export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
-  (game as any).venusScaleLevel = venusScaleLevel;
+  Reflect.set(game, 'venusScaleLevel', venusScaleLevel);
 }
 
 export function addGreenery(player: IPlayer, spaceId?: SpaceId): Space {
@@ -247,7 +247,7 @@ export function churn(pi: PlayerInput | (() => PlayerInput | undefined) | undefi
  * Get the PlayerInput a player is waiting for. Expect it to be of type `klass` and call `f` with it.
  * Afterwards, call any additional callback.
  */
-export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, f: (waitingFor: T) => void) {
+export function doWait<T, A extends unknown[]>(player: TestPlayer, klass: new (...args: A) => T, f: (waitingFor: T) => void) {
   const [waitingFor, cb] = player.popWaitingFor2();
   f(cast(waitingFor, klass));
   cb?.();

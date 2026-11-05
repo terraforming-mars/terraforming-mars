@@ -41,6 +41,22 @@ function mountFilter(overrides: {selected?: Array<string>} = {}) {
   });
 }
 
+// The script-setup internals are reachable through the test wrapper, but not exposed by its type.
+type ModuleItemFilterVm = {
+  localSelected: Array<string>;
+  filterText: string;
+  selectAll(key: string): void;
+  selectNone(key: string): void;
+  invertSelection(key: string): void;
+  watchSelect(key: string, enabled: boolean): void;
+  include(name: string): boolean;
+  icon(module: string | undefined): string | undefined;
+};
+
+function vm(wrapper: ReturnType<typeof mountFilter>): ModuleItemFilterVm {
+  return wrapper.vm as unknown as ModuleItemFilterVm;
+}
+
 describe('ModuleItemFilter', () => {
   it('renders the title in the header', () => {
     const wrapper = mountFilter();
@@ -74,28 +90,28 @@ describe('ModuleItemFilter', () => {
 
   it('initialises localSelected from the selected prop', () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    expect((wrapper.vm as any).localSelected).to.deep.eq(['item-a1']);
+    expect(vm(wrapper).localSelected).to.deep.eq(['item-a1']);
   });
 
   // --- selectAll ---
 
   it('selectAll("All") adds every item across all groups', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('All');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a1', 'item-a2', 'item-b1']);
+    vm(wrapper).selectAll('All');
+    expect(vm(wrapper).localSelected).to.have.members(['item-a1', 'item-a2', 'item-b1']);
   });
 
   it('selectAll(group) adds only items from that group', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('venus');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a1', 'item-a2']);
-    expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
+    vm(wrapper).selectAll('venus');
+    expect(vm(wrapper).localSelected).to.have.members(['item-a1', 'item-a2']);
+    expect(vm(wrapper).localSelected).not.to.include('item-b1');
   });
 
   it('selectAll does not add duplicates', () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    (wrapper.vm as any).selectAll('venus');
-    const selected: Array<string> = (wrapper.vm as any).localSelected;
+    vm(wrapper).selectAll('venus');
+    const selected: Array<string> = vm(wrapper).localSelected;
     expect(selected.filter((x) => x === 'item-a1')).to.have.length(1);
   });
 
@@ -103,74 +119,74 @@ describe('ModuleItemFilter', () => {
 
   it('selectNone("All") removes every item', () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-a2', 'item-b1']});
-    (wrapper.vm as any).selectNone('All');
-    expect((wrapper.vm as any).localSelected).to.be.empty;
+    vm(wrapper).selectNone('All');
+    expect(vm(wrapper).localSelected).to.be.empty;
   });
 
   it('selectNone(group) removes only items from that group', () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-a2', 'item-b1']});
-    (wrapper.vm as any).selectNone('venus');
-    expect((wrapper.vm as any).localSelected).to.deep.eq(['item-b1']);
+    vm(wrapper).selectNone('venus');
+    expect(vm(wrapper).localSelected).to.deep.eq(['item-b1']);
   });
 
   // --- invertSelection ---
 
   it('invertSelection("All") toggles every item', () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    (wrapper.vm as any).invertSelection('All');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a2', 'item-b1']);
+    vm(wrapper).invertSelection('All');
+    expect(vm(wrapper).localSelected).to.have.members(['item-a2', 'item-b1']);
   });
 
   it('invertSelection(group) toggles only items in that group', () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-b1']});
-    (wrapper.vm as any).invertSelection('venus');
+    vm(wrapper).invertSelection('venus');
     // item-a1 removed, item-a2 added; item-b1 untouched
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a2', 'item-b1']);
+    expect(vm(wrapper).localSelected).to.have.members(['item-a2', 'item-b1']);
   });
 
   // --- watchSelect ---
 
   it('watchSelect(key, true) calls selectAll for the group', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).watchSelect('moon', true);
-    expect((wrapper.vm as any).localSelected).to.include('item-b1');
+    vm(wrapper).watchSelect('moon', true);
+    expect(vm(wrapper).localSelected).to.include('item-b1');
   });
 
   it('watchSelect(key, false) calls selectNone for the group', () => {
     const wrapper = mountFilter({selected: ['item-b1']});
-    (wrapper.vm as any).watchSelect('moon', false);
-    expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
+    vm(wrapper).watchSelect('moon', false);
+    expect(vm(wrapper).localSelected).not.to.include('item-b1');
   });
 
   // --- include (text filter) ---
 
   it('include returns true when filterText is empty', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).include('anything')).to.be.true;
+    expect(vm(wrapper).include('anything')).to.be.true;
   });
 
   it('include returns true for a case-insensitive substring match', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).filterText = 'ITEM';
-    expect((wrapper.vm as any).include('item-a1')).to.be.true;
+    vm(wrapper).filterText = 'ITEM';
+    expect(vm(wrapper).include('item-a1')).to.be.true;
   });
 
   it('include returns false when the name does not match', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).filterText = 'zzz';
-    expect((wrapper.vm as any).include('item-a1')).to.be.false;
+    vm(wrapper).filterText = 'zzz';
+    expect(vm(wrapper).include('item-a1')).to.be.false;
   });
 
   // --- icon ---
 
   it('icon returns the correct expansion CSS class', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('base')).to.eq('create-game-expansion-icon expansion-icon-base');
+    expect(vm(wrapper).icon('base')).to.eq('create-game-expansion-icon expansion-icon-base');
   });
 
   it('icon maps "colonies" to "colony" suffix', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('colonies')).to.eq('create-game-expansion-icon expansion-icon-colony');
+    expect(vm(wrapper).icon('colonies')).to.eq('create-game-expansion-icon expansion-icon-colony');
   });
 
   it('icon maps "corpera" to "CE" suffix', () => {
@@ -180,19 +196,19 @@ describe('ModuleItemFilter', () => {
 
   it('icon maps "moon" to "themoon" suffix', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('moon')).to.eq('create-game-expansion-icon expansion-icon-themoon');
+    expect(vm(wrapper).icon('moon')).to.eq('create-game-expansion-icon expansion-icon-themoon');
   });
 
   it('icon returns undefined when module is undefined', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon(undefined)).to.be.undefined;
+    expect(vm(wrapper).icon(undefined)).to.be.undefined;
   });
 
   // --- emit ---
 
   it('emits update:selected when localSelected changes', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('All');
+    vm(wrapper).selectAll('All');
     await wrapper.vm.$nextTick();
     const emitted = wrapper.emitted('update:selected');
     expect(emitted).to.not.be.null;

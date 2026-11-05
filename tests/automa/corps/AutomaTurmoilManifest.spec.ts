@@ -107,7 +107,7 @@ describe('AutomaTurmoilManifest', () => {
     expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
   });
 
-  // FAQ (rulebook B p.3): Lakefront overrides Government Intervention's "no M€"
+  // FAQ (rulebook B p.4): Lakefront overrides Government Intervention's "no M€"
   it('Lakefront Resorts keeps the M€ its building track advance earns during Government Intervention', () => {
     const {bot, corpState} = recordingBot({onAdvance: () => {
       bot.megacredits += 4;

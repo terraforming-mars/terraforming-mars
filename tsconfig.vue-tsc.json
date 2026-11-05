@@ -6,6 +6,7 @@
   "include": [
     "src/client/**/*.ts",
     "src/client/**/*.vue",
+    "src/client/genfiles.d.ts",
     "src/common/**/*.ts",
     "tests/client/**/*.ts",
   ]

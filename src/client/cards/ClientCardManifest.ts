@@ -2,8 +2,7 @@ import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
 import {GameModule} from '@/common/cards/GameModule';
 import {ClientCard} from '@/common/cards/ClientCard';
-// @ts-ignore cards.json doesn't exist during npm run build
-import cardJson from '@/genfiles/cards.json' assert {type: 'json'};
+import cardJson from '@/genfiles/cards.json';
 
 const cards: Map<CardName, ClientCard> = new Map();
 const cardArray: Array<ClientCard> = [];
@@ -33,7 +32,7 @@ export function byModule(module: GameModule): (card: ClientCard) => boolean {
 }
 
 function initialize() {
-  (cardJson as Array<ClientCard>).forEach((card) => {
+  cardJson.forEach((card) => {
     cards.set(card.name, card);
     cardArray.push(card);
   });

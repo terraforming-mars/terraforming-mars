@@ -1,9 +1,8 @@
 import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import {ClientAgenda} from '@/common/turmoil/ClientAgenda';
-// @ts-ignore agendas.json doesn't exist during npm run build
 import agendaJson from '@/genfiles/agendas.json';
 
-const agendas = agendaJson as Partial<Record<BonusId | PolicyId, ClientAgenda>>;
+const agendas = agendaJson;
 
 export function getAgenda(id: BonusId | PolicyId): ClientAgenda | undefined {
   return agendas[id];

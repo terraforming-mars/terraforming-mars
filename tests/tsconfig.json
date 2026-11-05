@@ -7,6 +7,7 @@
     "include": [
         "testing/setup.ts",
         "client/vitest.setup.ts",
+        "../src/client/genfiles.d.ts",
         "**/*.spec.ts"
     ]
 }

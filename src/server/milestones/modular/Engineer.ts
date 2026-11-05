@@ -1,7 +1,7 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '@/common/cards/Tag';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 import {BoardName} from '../../../common/boards/BoardName';
 
 export class Engineer extends BaseMilestone {

@@ -1,6 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {TrackDefinition} from '../../../common/automa/AutomaTypes';
+import {VENUS_MARSBOT_TRACK} from './VenusMarsBot';
 
 const TRACK_BUILDING: TrackDefinition = {
   tags: [Tag.BUILDING],
@@ -52,4 +53,9 @@ export const THARSIS_MARSBOT_BOARD: ReadonlyArray<TrackDefinition> = [
   TRACK_ENERGY,
   TRACK_EARTH,
   TRACK_PLANT,
+];
+
+export const THARSIS_MARSBOT_BOARD_WITH_VENUS: ReadonlyArray<TrackDefinition> = [
+  ...THARSIS_MARSBOT_BOARD,
+  VENUS_MARSBOT_TRACK,
 ];

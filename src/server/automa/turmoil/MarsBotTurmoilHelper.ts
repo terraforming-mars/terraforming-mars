@@ -44,11 +44,8 @@ export class MarsBotTurmoilHelper {
     candidates = narrow(candidates, (party) =>
       party.partyLeader === this.marsBotPlayer && this.wouldBecomeDominant(party));
 
-    const fewestHuman = Math.min(...candidates.map((party) => party.delegates.get(this.humanPlayer)));
-    candidates = narrow(candidates, (party) => party.delegates.get(this.humanPlayer) === fewestHuman);
-
-    const fewestMarsBot = Math.min(...candidates.map((party) => party.delegates.get(this.marsBotPlayer)));
-    candidates = narrow(candidates, (party) => party.delegates.get(this.marsBotPlayer) === fewestMarsBot);
+    candidates = fewestDelegates(candidates, this.humanPlayer);
+    candidates = fewestDelegates(candidates, this.marsBotPlayer);
 
     const parties = this.turmoil.parties;
     const dominantIndex = parties.indexOf(this.turmoil.dominantParty);
@@ -64,11 +61,8 @@ export class MarsBotTurmoilHelper {
    * delegates, then the fewest player delegates, then a random party by flipping a project card.
    */
   public selectGrayEminenceParty(): PartyName {
-    let candidates = this.turmoil.parties;
-    const fewestMarsBot = Math.min(...candidates.map((party) => party.delegates.get(this.marsBotPlayer)));
-    candidates = candidates.filter((party) => party.delegates.get(this.marsBotPlayer) === fewestMarsBot);
-    const fewestHuman = Math.min(...candidates.map((party) => party.delegates.get(this.humanPlayer)));
-    candidates = candidates.filter((party) => party.delegates.get(this.humanPlayer) === fewestHuman);
+    let candidates = fewestDelegates(this.turmoil.parties, this.marsBotPlayer);
+    candidates = fewestDelegates(candidates, this.humanPlayer);
     if (candidates.length === 1) {
       return candidates[0].name;
     }
@@ -116,6 +110,12 @@ function narrow(
 ): ReadonlyArray<IParty> {
   const filtered = candidates.filter(predicate);
   return filtered.length > 0 ? filtered : candidates;
+}
+
+/** Keeps the parties where `player` has the fewest delegates. */
+function fewestDelegates(candidates: ReadonlyArray<IParty>, player: IPlayer): ReadonlyArray<IParty> {
+  const fewest = Math.min(...candidates.map((party) => party.delegates.get(player)));
+  return candidates.filter((party) => party.delegates.get(player) === fewest);
 }
 
 /**

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {DELEGATES_PER_PLAYER} from '@/common/constants';
-import {Turmoil} from '@/server/turmoil/Turmoil';
+import {Delegate, Turmoil} from '@/server/turmoil/Turmoil';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {MarsBotTurmoilHelper} from '@/server/automa/turmoil/MarsBotTurmoilHelper';
 import {IGame} from '@/server/IGame';
@@ -9,6 +9,13 @@ import {IPlayer} from '@/server/IPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '@/server/turmoil/parties/IParty';
 import {Capital} from '@/server/cards/base/Capital';
+
+const ALL_PARTIES = Object.values(PartyName);
+
+/** Every party but the ones named. */
+function partiesExcept(...names: Array<PartyName>): Array<PartyName> {
+  return ALL_PARTIES.filter((name) => !names.includes(name));
+}
 
 describe('MarsBotTurmoilHelper', () => {
   let game: IGame;
@@ -25,11 +32,15 @@ describe('MarsBotTurmoilHelper', () => {
     helper = new MarsBotTurmoilHelper(game);
   });
 
+  function sendDelegates(delegate: Delegate, parties: ReadonlyArray<PartyName>) {
+    for (const name of parties) {
+      turmoil.sendDelegateToParty(delegate, name, game);
+    }
+  }
+
   // The numbered priority list on Party Politics, rulebook C p.6.
   it('priority 1: picks a party where one more delegate makes MarsBot leader and the party dominant', () => {
-    for (const name of [PartyName.MARS, PartyName.UNITY, PartyName.REDS, PartyName.GREENS]) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', partiesExcept(PartyName.SCIENTISTS, PartyName.KELVINISTS));
     turmoil.sendDelegateToParty(marsBot, PartyName.SCIENTISTS, game);
 
     expect(helper.selectParty()).eq(PartyName.SCIENTISTS);
@@ -40,17 +51,13 @@ describe('MarsBotTurmoilHelper', () => {
       turmoil.sendDelegateToParty('NEUTRAL', PartyName.KELVINISTS, game);
     }
     turmoil.sendDelegateToParty(marsBot, PartyName.SCIENTISTS, game);
-    for (const name of [PartyName.MARS, PartyName.UNITY, PartyName.REDS, PartyName.GREENS]) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', partiesExcept(PartyName.SCIENTISTS, PartyName.KELVINISTS));
 
     expect(helper.selectParty()).eq(PartyName.SCIENTISTS);
   });
 
   it('priority 3: picks a party MarsBot leads where one more delegate makes it dominant', () => {
-    for (const name of [PartyName.MARS, PartyName.SCIENTISTS, PartyName.KELVINISTS, PartyName.REDS, PartyName.GREENS]) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', partiesExcept(PartyName.UNITY));
     turmoil.sendDelegateToParty(marsBot, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(marsBot, PartyName.UNITY, game);
 
@@ -58,30 +65,26 @@ describe('MarsBotTurmoilHelper', () => {
   });
 
   it('priority 3: skips a party that is already dominant', () => {
-    for (const name of Object.values(PartyName)) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', ALL_PARTIES);
     for (let i = 0; i < 3; i++) {
       turmoil.sendDelegateToParty(marsBot, PartyName.UNITY, game);
     }
+    expect(turmoil.dominantParty.name).eq(PartyName.UNITY);
 
-    expect(helper.selectParty()).not.eq(PartyName.UNITY);
+    // No other priority applies, so it's the next party clockwise from Unity.
+    expect(helper.selectParty()).eq(PartyName.SCIENTISTS);
   });
 
   it('priority 4: picks the party where the human has the fewest delegates', () => {
-    for (const name of Object.values(PartyName)) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
-    for (const name of [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.KELVINISTS, PartyName.REDS]) {
-      turmoil.sendDelegateToParty(human, name, game);
-    }
+    sendDelegates('NEUTRAL', ALL_PARTIES);
+    sendDelegates(human, partiesExcept(PartyName.GREENS));
 
     expect(helper.selectParty()).eq(PartyName.GREENS);
   });
 
   it('priority 5: picks the party where MarsBot has the fewest delegates', () => {
     // Two NEUTRAL delegates where MarsBot has one, so one more MarsBot delegate never takes a lead.
-    for (const name of Object.values(PartyName)) {
+    for (const name of ALL_PARTIES) {
       turmoil.sendDelegateToParty('NEUTRAL', name, game);
       if (name !== PartyName.GREENS) {
         turmoil.sendDelegateToParty('NEUTRAL', name, game);
@@ -93,17 +96,13 @@ describe('MarsBotTurmoilHelper', () => {
   });
 
   it('priority 6: picks the next party clockwise from the dominance marker', () => {
-    for (const name of Object.values(PartyName)) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', ALL_PARTIES);
 
     expect(helper.selectParty()).eq(PartyName.KELVINISTS);
   });
 
   it('takes the party lead the delegate earns', () => {
-    for (const name of Object.values(PartyName)) {
-      turmoil.sendDelegateToParty('NEUTRAL', name, game);
-    }
+    sendDelegates('NEUTRAL', ALL_PARTIES);
     turmoil.sendDelegateToParty(marsBot, PartyName.GREENS, game);
     const greens = turmoil.getPartyByName(PartyName.GREENS);
 
@@ -128,13 +127,13 @@ describe('MarsBotTurmoilHelper', () => {
     expect(helper.selectParty()).is.undefined;
   });
 
-  it('sends a delegate from the reserve to the chosen party', () => {
+  it('sends a delegate from the reserve to the party it picks', () => {
     const before = turmoil.delegateReserve.get(marsBot);
 
-    const partyName = helper.maybePlaceDelegate();
+    // MarsBot would lead any empty party (priority 2), and Kelvinists is the first of those clockwise from Mars First.
+    expect(helper.maybePlaceDelegate()).eq(PartyName.KELVINISTS);
 
-    expect(partyName).is.not.undefined;
-    expect(turmoil.getPartyByName(partyName!).delegates.get(marsBot)).eq(1);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(marsBot)).eq(1);
     expect(turmoil.delegateReserve.get(marsBot)).eq(before - 1);
   });
 
@@ -188,11 +187,7 @@ describe('MarsBotTurmoilHelper', () => {
   // player's, then a random party picked by flipping a project card.
   describe('selectGrayEminenceParty', () => {
     it('picks the party with the fewest MarsBot delegates over the one with the fewest human delegates', () => {
-      for (const name of Object.values(PartyName)) {
-        if (name !== PartyName.GREENS) {
-          turmoil.sendDelegateToParty(marsBot, name, game);
-        }
-      }
+      sendDelegates(marsBot, partiesExcept(PartyName.GREENS));
       turmoil.sendDelegateToParty(human, PartyName.GREENS, game);
       turmoil.sendDelegateToParty(human, PartyName.GREENS, game);
 

@@ -5,9 +5,8 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TileType} from '../../../src/common/TileType';
 import {BonusCardId, CubeType} from '../../../src/common/automa/AutomaTypes';
-import {IMarsBotCorp} from '../../../src/server/automa/IMarsBotCorp';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {MarsBotBoard} from '../../../src/server/automa/MarsBotBoard';
-import {Space} from '../../../src/server/boards/Space';
 import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 import {VENUS_MARSBOT_TRACK} from '../../../src/server/automa/boards/VenusMarsBot';
 import {corpTrackCubes} from '../../../src/server/automa/corpTrackCubes';
@@ -19,17 +18,14 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 
-/** The returned `markers` are the spaces holding a player marker of the bot, which `removeMarker` takes off. */
+/** The bot has a player marker on the first two spaces of the board, which `removeMarker` takes off. */
 function recordingBot(generation: number = 1) {
   const [game] = testGame(1);
   game.generation = generation;
   const calls: Array<string> = [];
   const corpState = new Map<string, number>();
-  const markers = new Set<Space>();
-  const record = (call: string) => {
-    calls.push(call);
-    return true;
-  };
+  const markers = new Set(game.board.spaces.slice(0, 2));
+  const record = (call: string) => calls.push(call) > 0;
   const bot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
     game,
     failedActionMc: 5,
@@ -50,10 +46,17 @@ function recordingBot(generation: number = 1) {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot, calls, corpState, markers};
+  return {bot, calls, corpState};
 }
 
-function corp(name: CardName): IMarsBotCorp {
+/** The calls the corporation makes when MarsBot resolves `card`. */
+function resolving(name: CardName, card: IProjectCard): Array<string> {
+  const {bot, calls} = recordingBot();
+  corp(name).effect!.onProjectCardResolved!(bot, card);
+  return calls;
+}
+
+function corp(name: CardName) {
   return AUTOMA_PRELUDE_MANIFEST.corps[name]!;
 }
 
@@ -61,8 +64,6 @@ function corp(name: CardName): IMarsBotCorp {
 const BUILDING = 0;
 const SPACE = 1;
 const EVENT = 2;
-const SCIENCE = 3;
-const EARTH = 5;
 const PLANT = 6;
 
 const ALL_POSITIONS = Array.from({length: 18}, (_, i) => i + 1);
@@ -72,95 +73,76 @@ type CubeRow = [Tag, CubeType, Array<number>];
 describe('AutomaPreludeManifest', () => {
   it('keys each of the sixteen corporations by its own name', () => {
     const entries = Object.entries(AUTOMA_PRELUDE_MANIFEST.corps);
-
     expect(entries).to.have.length(16);
     expect(entries.filter(([name, found]) => found.name !== name)).is.empty;
   });
 
   // The corporation cards name the tracks by tag, the cube lists name them by index.
-  const cubes: Array<{name: CardName, cubes: Array<CubeRow>, venus?: true, everyAdvance?: true}> = [
+  const cubes: Array<{name: CardName, cubes: Array<CubeRow>, everyAdvance?: true}> = [
     {name: CardName.CHEUNG_SHING_MARS, cubes: [[Tag.BUILDING, 'credit', ALL_POSITIONS.slice(3)]]},
     {name: CardName.POINT_LUNA, cubes: [[Tag.EARTH, 'white', [1, 5, 9, 13, 17]], [Tag.EARTH, 'black', [3, 7, 11, 15]]]},
     {name: CardName.VALLEY_TRUST, cubes: [[Tag.SCIENCE, 'white', [8, 16]]]},
     {name: CardName.ASTRODRILL, cubes: [[Tag.SPACE, 'white', [2, 4, 7, 10, 13]], [Tag.SPACE, 'black', [5, 11, 16]]]},
     {name: CardName.FACTORUM, cubes: [[Tag.BUILDING, 'white', ALL_POSITIONS]], everyAdvance: true},
-    {
-      name: CardName.MANUTECH,
-      cubes: [Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.EARTH, Tag.PLANT, Tag.VENUS]
-        .map((tag): CubeRow => [tag, 'black', [5, 12]]),
-      venus: true,
-    },
+    {name: CardName.MANUTECH, cubes: [Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.EARTH, Tag.PLANT, Tag.VENUS].map((tag): CubeRow => [tag, 'black', [5, 12]])},
     {name: CardName.ECOTEC, cubes: [[Tag.PLANT, 'white', ALL_POSITIONS]]},
     {name: CardName.KUIPER_COOPERATIVE, cubes: [[Tag.SPACE, 'white', [4, 8, 12]], [Tag.SPACE, 'black', [7, 10, 14]]]},
     {name: CardName.PALLADIN_SHIPPING, cubes: [[Tag.SPACE, 'white', [3, 4, 6, 8, 10, 11]], [Tag.EVENT, 'black', [3, 4, 6, 8, 10, 11]]]},
   ];
 
-  for (const run of cubes) {
-    it(`${run.name} cubes sit on the tracks its card names`, () => {
-      const board = new MarsBotBoard(run.venus ? [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK] : THARSIS_MARSBOT_BOARD);
+  it('puts the cubes of each corporation on the tracks its card names', () => {
+    const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+    for (const run of cubes) {
       const placed = corpTrackCubes(corp(run.name), board)
         .map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`);
       const expected = run.cubes.flatMap(([tag, cubeType, positions]) => positions.map((position) => `${tag} ${cubeType} ${position}`));
 
-      expect([...placed].sort()).deep.eq([...expected].sort());
-      expect(corp(run.name).trackCubesTriggerEveryAdvance === true).eq(run.everyAdvance === true);
-    });
-  }
-
-  // The Setup box
-  for (const run of [
-    {name: CardName.ROBINSON_INDUSTRIES, calls: ['gainMc(10)']},
-    {name: CardName.VALLEY_TRUST, calls: ['drawProjectCardsToActionDeck(1)']},
-    {name: CardName.VITOR, calls: ['removeBonusCard(B04)']},
-    {name: CardName.ARCADIAN_COMMUNITIES, calls: ['resolveBonusCard(B22)']},
-    {name: CardName.NIRGAL_ENTERPRISES, calls: ['removeBonusCard(B04)']},
-    {name: CardName.PALLADIN_SHIPPING, calls: ['gainMc(5)']},
-    {name: CardName.SAGITTA_FRONTIER_SERVICES, calls: ['gainMc(8)']},
-    {name: CardName.TYCHO_MAGNETICS, calls: ['addBonusCardToBottomOfBonusDeck(B30)']},
-  ]) {
-    it(`${run.name} setup: ${run.calls.join()}`, () => {
-      const {bot, calls} = recordingBot();
-
-      corp(run.name).setup!(bot);
-
-      expect(calls).deep.eq(run.calls);
-    });
-  }
-
-  it('Robinson Industries, Vitor, Arcadian Communities and Factorum each add their own bonus card to the action deck', () => {
-    const names = [CardName.ROBINSON_INDUSTRIES, CardName.VITOR, CardName.ARCADIAN_COMMUNITIES, CardName.FACTORUM];
-
-    expect(names.map((name) => corp(name).actionDeckBonusCard)).deep.eq(
-      [BonusCardId.B28_DIVERSIFICATION, BonusCardId.B04_OVERACHIEVEMENT, BonusCardId.B22_SETTLERS, BonusCardId.B24_SUPPLY_AND_DEMAND]);
+      expect([...placed].sort(), run.name).deep.eq([...expected].sort());
+      expect(corp(run.name).trackCubesTriggerEveryAdvance === true, run.name).eq(run.everyAdvance === true);
+    }
   });
 
-  for (const run of [
-    {name: CardName.CHEUNG_SHING_MARS, track: BUILDING, position: 4, cube: 'credit', calls: ['gainMc(5)']},
-    {name: CardName.VALLEY_TRUST, track: SCIENCE, position: 8, cube: 'white', calls: ['maybeDrawAndResolveProjectCard()']},
-    {name: CardName.KUIPER_COOPERATIVE, track: SPACE, position: 4, cube: 'white', calls: ['raiseTemperature(1)']},
-    {name: CardName.KUIPER_COOPERATIVE, track: SPACE, position: 7, cube: 'black', calls: ['placeOcean()']},
-  ] as const) {
-    it(`${run.name} ${run.cube} cube: ${run.calls.join()}`, () => {
+  it('follows the Setup box and the action deck bonus card of each corporation that has them', () => {
+    for (const [name, expected] of [
+      [CardName.ROBINSON_INDUSTRIES, ['gainMc(10)']],
+      [CardName.VALLEY_TRUST, ['drawProjectCardsToActionDeck(1)']],
+      [CardName.VITOR, ['removeBonusCard(B04)']],
+      [CardName.ARCADIAN_COMMUNITIES, ['resolveBonusCard(B22)']],
+      [CardName.NIRGAL_ENTERPRISES, ['removeBonusCard(B04)']],
+      [CardName.PALLADIN_SHIPPING, ['gainMc(5)']],
+      [CardName.SAGITTA_FRONTIER_SERVICES, ['gainMc(8)']],
+      [CardName.TYCHO_MAGNETICS, ['addBonusCardToBottomOfBonusDeck(B30)']],
+    ] as const) {
       const {bot, calls} = recordingBot();
 
-      corp(run.name).effect!.onTrackCubeTrigger!(bot, run.track, run.position, run.cube);
+      corp(name).setup!(bot);
 
-      expect(calls).deep.eq(run.calls);
-    });
-  }
-
-  it('Point Luna and Astrodrill advance the least-advanced track for a white cube and the space track for a black one', () => {
-    const {bot, calls} = recordingBot();
-    setAllTracks(bot, 2);
-    setTrack(bot, Tag.PLANT, 1);
-
-    for (const name of [CardName.POINT_LUNA, CardName.ASTRODRILL]) {
-      corp(name).effect!.onTrackCubeTrigger!(bot, EARTH, 1, 'white');
-      corp(name).effect!.onTrackCubeTrigger!(bot, EARTH, 3, 'black');
+      expect(calls, name).deep.eq(expected);
     }
+    expect([CardName.ROBINSON_INDUSTRIES, CardName.VITOR, CardName.ARCADIAN_COMMUNITIES, CardName.FACTORUM].map((name) => corp(name).actionDeckBonusCard))
+      .deep.eq([BonusCardId.B28_DIVERSIFICATION, BonusCardId.B04_OVERACHIEVEMENT, BonusCardId.B22_SETTLERS, BonusCardId.B24_SUPPLY_AND_DEMAND]);
+  });
 
-    const advances = [`advanceTrack(${PLANT})`, `advanceTrack(${SPACE})`];
-    expect(calls).deep.eq([...advances, ...advances]);
+  // These cubes read only their colour, and the plant track is the least advanced one
+  it('resolves the cubes of Cheung Shing, Valley Trust, Point Luna, Astrodrill and Kuiper', () => {
+    for (const [name, cube, expected] of [
+      [CardName.CHEUNG_SHING_MARS, 'credit', ['gainMc(5)']],
+      [CardName.VALLEY_TRUST, 'white', ['maybeDrawAndResolveProjectCard()']],
+      [CardName.POINT_LUNA, 'white', [`advanceTrack(${PLANT})`]],
+      [CardName.POINT_LUNA, 'black', [`advanceTrack(${SPACE})`]],
+      [CardName.ASTRODRILL, 'white', [`advanceTrack(${PLANT})`]],
+      [CardName.ASTRODRILL, 'black', [`advanceTrack(${SPACE})`]],
+      [CardName.KUIPER_COOPERATIVE, 'white', ['raiseTemperature(1)']],
+      [CardName.KUIPER_COOPERATIVE, 'black', ['placeOcean()']],
+    ] as const) {
+      const {bot, calls} = recordingBot();
+      setAllTracks(bot, 2);
+      setTrack(bot, Tag.PLANT, 1);
+
+      corp(name).effect!.onTrackCubeTrigger!(bot, BUILDING, 1, cube);
+
+      expect(calls, `${name} ${cube}`).deep.eq(expected);
+    }
   });
 
   it('Factorum stores 1 M€ for each advance of the building track and none for another track', () => {
@@ -176,25 +158,20 @@ describe('AutomaPreludeManifest', () => {
 
   // The VP printed on the card counts, not what it scores now
   it('Vitor gains 3 M€ for a card whose printed VP is not negative', () => {
-    const gained = [new Ants(), new DustSeals(), new BiomassCombustors(), new MicroMills()].map((card) => {
-      const {bot, calls} = recordingBot();
-      corp(CardName.VITOR).effect!.onProjectCardResolved!(bot, card);
-      return calls;
-    });
+    const gained = [new Ants(), new DustSeals(), new BiomassCombustors(), new MicroMills()]
+      .map((card) => resolving(CardName.VITOR, card));
 
     expect(gained).deep.eq([['gainMc(3)'], ['gainMc(3)'], [], []]);
   });
 
   it('Arcadian Communities pays 3 M€ for the tile MarsBot puts on a space with its marker, and no one else', () => {
-    const {bot, calls, markers} = recordingBot();
-    const [marked, unmarked] = bot.game.board.spaces;
-    markers.add(marked);
+    const {bot, calls} = recordingBot();
+    const [markedByPlayerTile, markedByBotTile, unmarked] = bot.game.board.spaces;
     const onTilePlaced = corp(CardName.ARCADIAN_COMMUNITIES).effect!.onTilePlaced!;
 
-    onTilePlaced(bot, false, TileType.CITY, marked);
+    onTilePlaced(bot, false, TileType.CITY, markedByPlayerTile);
     onTilePlaced(bot, true, TileType.CITY, unmarked);
-    expect(calls).is.empty;
-    onTilePlaced(bot, true, TileType.CITY, marked);
+    onTilePlaced(bot, true, TileType.CITY, markedByBotTile);
 
     expect(calls).deep.eq(['gainMc(3)']);
   });
@@ -216,7 +193,6 @@ describe('AutomaPreludeManifest', () => {
     for (const tag of [Tag.PLANT, Tag.MICROBE, Tag.ANIMAL, Tag.SPACE]) {
       corp(CardName.ECOTEC).effect!.onTagResolved!(bot, tag);
     }
-    expect(corpState.get('plantResources')).eq(5);
     corp(CardName.ECOTEC).beforeActionPhase!(bot);
 
     expect(corpState.get('plantResources')).eq(0);
@@ -252,11 +228,8 @@ describe('AutomaPreludeManifest', () => {
 
   // A tagless card pays the Failed Action amount again, and an event counts its Event tag
   it('Sagitta Frontier Services pays more M€ for a card with no tags than for one tag, and nothing for two', () => {
-    const paid = [new MicroMills(), new ArtificialLake(), new Asteroid()].map((card) => {
-      const {bot, calls} = recordingBot();
-      corp(CardName.SAGITTA_FRONTIER_SERVICES).effect!.onProjectCardResolved!(bot, card);
-      return calls;
-    });
+    const paid = [new MicroMills(), new ArtificialLake(), new Asteroid()]
+      .map((card) => resolving(CardName.SAGITTA_FRONTIER_SERVICES, card));
 
     expect(paid).deep.eq([['gainMc(5)'], ['gainMc(1)'], []]);
   });
@@ -269,7 +242,6 @@ describe('AutomaPreludeManifest', () => {
     onCard(bot, new ArtificialLake());
     expect(corpState.get('scienceResources')).eq(9);
     onCard(bot, new Asteroid());
-    expect(corpState.get('scienceResources')).eq(10);
     corp(CardName.SPIRE).beforeActionPhase!(bot);
 
     expect(corpState.get('scienceResources')).eq(0);

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {RedShips} from '@/server/cards/promo/RedShips';
 import {TileType} from '@/common/TileType';
+import {SpaceType} from '@/common/boards/SpaceType';
 import {IGame} from '@/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -60,6 +61,18 @@ describe('RedShips', () => {
     player.megaCredits = 0;
     card.action(player);
     expect(player.megaCredits).to.eq(0);
+  });
+
+  // The Neural Instance is a special tile only when that helps MarsBot.
+  it('action does not count MarsBot\'s Neural Instance', () => {
+    const [game, human] = testGame(1, {automa: true});
+    const oceanSpace = addOcean(human);
+    const space = game.board.getAdjacentSpaces(oceanSpace).find((s) => s.spaceType === SpaceType.LAND && s.tile === undefined)!;
+    game.simpleAddTile(game.marsBotPlayer!, space, {tileType: TileType.NEURAL_INSTANCE});
+
+    human.megaCredits = 0;
+    card.action(human);
+    expect(human.megaCredits).to.eq(0);
   });
 
   it('action counts qualifying tiles regardless of owner', () => {

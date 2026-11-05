@@ -7,6 +7,7 @@ import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Board, isSpecialTileSpace} from '../../boards/Board';
 import {IActionCard} from '../ICard';
+import {TileType} from '../../../common/TileType';
 
 export class RedShips extends Card implements IActionCard {
   constructor() {
@@ -34,8 +35,9 @@ export class RedShips extends Card implements IActionCard {
 
   action(player: IPlayer): undefined {
     const board = player.game.board;
+    // The Neural Instance tile is MarsBot's. It is not a special tile for anyone else.
     const candidates = board.spaces.filter((space) => {
-      return Board.isCitySpace(space) || isSpecialTileSpace(space);
+      return Board.isCitySpace(space) || (isSpecialTileSpace(space) && space.tile?.tileType !== TileType.NEURAL_INSTANCE);
     });
     const included = candidates.filter(
       (space) => board.getAdjacentSpaces(space).some((adj) => Board.isOceanSpace(adj)));

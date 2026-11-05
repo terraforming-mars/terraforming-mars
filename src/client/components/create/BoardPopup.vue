@@ -65,7 +65,7 @@ const WIKI_ANCHORS: Record<BoardName, string> = {
   [BoardName.UTOPIA_PLANITIA]: 'utopia-planitia',
   [BoardName.VASTITAS_BOREALIS_NOVA]: 'vastitas-borealis-nova',
   [BoardName.VASTITAS_BOREALIS]: 'vastitas-borealis',
-  [BoardName.AMAZONIS]: 'amazonis',
+  [BoardName.AMAZONIS]: 'amazonis-p',
   [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',
   [BoardName.TERRA_CIMMERIA_NOVA]: 'terra-cimmeria-nova',
   [BoardName.HOLLANDIA]: 'hollandia',

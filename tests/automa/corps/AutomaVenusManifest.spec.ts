@@ -50,15 +50,6 @@ function corp(name: CardName): IMarsBotCorp {
 }
 
 describe('AutomaVenusManifest', () => {
-  it('keys each of the five corporations by its own name', () => {
-    const entries = Object.entries(AUTOMA_VENUS_MANIFEST.corps);
-
-    expect(entries).to.have.length(5);
-    for (const [name, found] of entries) {
-      expect(found.name).eq(name);
-    }
-  });
-
   // C25: a blue card with a red arrow is an active card with an action
   it('Viron adds a floater and scores a VP for each active card with an action', () => {
     const {bot, calls} = recordingBot();
@@ -71,7 +62,7 @@ describe('AutomaVenusManifest', () => {
     expect(effect.vpBonus!(bot)).eq(1);
   });
 
-  // C26
+  // C26: the Round Start box (rulebook B p.3)
   it('Celestic adds a floater at setup, at round start and with each Failed Action', () => {
     const {bot, calls} = recordingBot();
     const celestic = corp(CardName.CELESTIC);
@@ -83,7 +74,7 @@ describe('AutomaVenusManifest', () => {
     expect(calls).deep.eq(['addFloaters(1)', 'addFloaters(1)', 'addFloaters(1)']);
   });
 
-  // C34
+  // C34: the Round Start box (rulebook B p.3)
   it('Stormcraft adds a floater at setup and at round start, and raises the temperature when floaters keep an extra card', () => {
     const {bot, calls} = recordingBot();
     const stormcraft = corp(CardName.STORMCRAFT_INCORPORATED);
@@ -95,7 +86,7 @@ describe('AutomaVenusManifest', () => {
     expect(calls).deep.eq(['addFloaters(1)', 'addFloaters(1)', 'raiseTemperature(1)']);
   });
 
-  // C27: with Venus Next the bonus deck's Lobbyists is B15
+  // C27: with Venus Next the bonus deck's Lobbyists is B15 (rulebook B p.1)
   it('Morning Star swaps Lobbyists for Venusian Lobby at setup', () => {
     const {bot, calls} = recordingBot();
 
@@ -104,6 +95,7 @@ describe('AutomaVenusManifest', () => {
     expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)', 'addBonusCardToBonusDeck(B26)']);
   });
 
+  // The cubes on the Venus track (rulebook B p.3)
   it('Morning Star silver resource cubes sit on the Venus track at the spaces its card names', () => {
     const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
 

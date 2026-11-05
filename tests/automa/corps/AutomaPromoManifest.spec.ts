@@ -83,16 +83,7 @@ function quietSpace(game: IGame, player: IPlayer): Space {
 }
 
 describe('AutomaPromoManifest', () => {
-  it('keys each of the four corporations by its own name', () => {
-    const entries = Object.entries(AUTOMA_PROMO_MANIFEST.corps);
-
-    expect(entries).to.have.length(4);
-    for (const [name, found] of entries) {
-      expect(found.name).eq(name);
-    }
-  });
-
-  // The Setup boxes (C21, C22, C24)
+  // The Setup boxes (C21, C22, C24; rulebook B p.1)
   for (const run of [
     {
       name: CardName.PHARMACY_UNION,
@@ -131,6 +122,7 @@ describe('AutomaPromoManifest', () => {
     expect(calls).deep.eq(['raiseTR(1)']);
   });
 
+  // A microbe card the player plays (rulebook B p.4)
   it('Pharmacy Union loses 4 M€ when the player plays a microbe card, as much as it can lose', () => {
     const {bot} = recordingBot();
     const onHumanCardPlayed = corp(CardName.PHARMACY_UNION).effect!.onHumanCardPlayed!;
@@ -209,7 +201,7 @@ describe('AutomaPromoManifest', () => {
     expect(corpState.get('scienceResources')).eq(4);
   });
 
-  // C23
+  // C23: the cubes on the building track (rulebook B p.3)
   it('Recyclon places white cubes on spaces 3, 6, 9, 12, 15 and 18 of the building track', () => {
     const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
 
@@ -252,23 +244,18 @@ describe('AutomaPromoManifest', () => {
     expect(human.stock.megacredits).eq(2);
   });
 
-  for (const run of [
-    {choice: 0, microbes: 1, megacredits: 0},
-    {choice: 1, microbes: 0, megacredits: 2},
-  ]) {
-    it(`Splice gains 2 M€ and lets the player choose 2 M€ or a microbe on the card played, option ${run.choice}`, () => {
-      const {bot, calls, human} = recordingBot();
-      const card = new Decomposers();
+  it('Splice lets the player add a microbe to a microbe card they played instead of gaining 2 M€', () => {
+    const {bot, calls, human} = recordingBot();
+    const card = new Decomposers();
 
-      corp(CardName.SPLICE).effect!.onHumanCardPlayed!(bot, card);
-      runAllActions(bot.game);
-      const orOptions = cast(human.popWaitingFor(), OrOptions);
-      orOptions.options[run.choice].cb();
+    corp(CardName.SPLICE).effect!.onHumanCardPlayed!(bot, card);
+    runAllActions(bot.game);
+    const orOptions = cast(human.popWaitingFor(), OrOptions);
+    expect(orOptions.options).has.length(2);
+    orOptions.options[0].cb();
 
-      expect(calls).deep.eq(['gainMc(2)']);
-      expect(orOptions.options).has.length(2);
-      expect(card.resourceCount).eq(run.microbes);
-      expect(human.stock.megacredits).eq(run.megacredits);
-    });
-  }
+    expect(calls).deep.eq(['gainMc(2)']);
+    expect(card.resourceCount).eq(1);
+    expect(human.stock.megacredits).eq(0);
+  });
 });

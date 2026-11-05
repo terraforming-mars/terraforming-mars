@@ -5,12 +5,12 @@ import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 
 /**
- * Creates a bot with only a board.
+ * Creates a bot with only a board, and whatever else `overrides` gives it.
  *
  * Upstream has no `IMarsBot` yet, and the milestone and award overrides read only the board.
  */
-export function fakeMarsBot(tracks: ReadonlyArray<TrackDefinition> = THARSIS_MARSBOT_BOARD): IMarsBot {
-  return {marsBotBoard: new MarsBotBoard(tracks)} as unknown as IMarsBot;
+export function fakeMarsBot(tracks: ReadonlyArray<TrackDefinition> = THARSIS_MARSBOT_BOARD, overrides: Partial<IMarsBot> = {}): IMarsBot {
+  return {marsBotBoard: new MarsBotBoard(tracks), ...overrides} as unknown as IMarsBot;
 }
 
 /** Moves the marker of the track that carries `tag` to space `position`. */

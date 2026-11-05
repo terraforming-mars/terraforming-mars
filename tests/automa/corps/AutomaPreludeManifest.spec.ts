@@ -19,7 +19,7 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 
-/** `markers` are the spaces holding a player marker of the bot, which `removeMarker` takes off. */
+/** The returned `markers` are the spaces holding a player marker of the bot, which `removeMarker` takes off. */
 function recordingBot(generation: number = 1) {
   const [game] = testGame(1);
   game.generation = generation;

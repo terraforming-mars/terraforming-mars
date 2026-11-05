@@ -2,6 +2,10 @@ import {expect} from 'chai';
 import {Generalist} from '../../src/server/milestones/Generalist';
 import {ALL_RESOURCES} from '../../src/common/Resource';
 import {testGame} from '../TestingUtils';
+import {Tag} from '@/common/cards/Tag';
+import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
+import {VENUS_MARSBOT_TRACK} from '@/server/automa/boards/VenusMarsBot';
+import {fakeMarsBot, setAllTracks, setTrack} from '../automa/FakeMarsBot';
 
 describe('Generalist', () => {
   let milestone: Generalist;
@@ -30,5 +34,19 @@ describe('Generalist', () => {
 
     ALL_RESOURCES.forEach((resource) => expect(player.production[resource]).to.eq(2));
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot needs space 2 on every track except Venus', () => {
+    for (const run of [
+      {plant: 1, expected: false},
+      {plant: 2, expected: true},
+    ]) {
+      const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+      setAllTracks(bot, 2);
+      setTrack(bot, Tag.VENUS, 0);
+      setTrack(bot, Tag.PLANT, run.plant);
+
+      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
+    }
   });
 });

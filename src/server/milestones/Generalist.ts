@@ -1,5 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
+import {IMarsBot} from '@/server/automa/IMarsBot';
+import {marsBotMarsTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class Generalist extends BaseMilestone {
   public readonly automaDescription = 'All tracks ≥ 2 (except Venus)';
@@ -34,5 +36,15 @@ export class Generalist extends BaseMilestone {
     }
 
     return score;
+  }
+
+  /**
+   * MarsBot needs space 2 on every track except Venus.
+   *
+   * That is every track on Elysium (rulebook C p.9), leaving out Venus when in play (rulebook C p.2),
+   * which is also the Milestones & Awards expansion's rule (rulebook C p.13).
+   */
+  public marsBotCanClaim(bot: IMarsBot): boolean {
+    return marsBotMarsTrackPositions(bot).every((position) => position >= 2);
   }
 }

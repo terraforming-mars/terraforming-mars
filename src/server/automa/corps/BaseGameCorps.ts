@@ -40,9 +40,9 @@ export function floaterAtRoundStart(corpName: string): (bot: IMarsBot) => void {
 export function whiteLeastBlackSpaceHandler(bot: IMarsBot, cubeType: CubeType, corpName: string): void {
   if (cubeType === 'white') {
     bot.advanceTrack(bot.marsBotBoard.getLeastAdvancedTrackIndex());
-    bot.game.log(`MarsBot (${corpName}): white cube — advance least-advanced track`);
+    bot.game.log(`MarsBot (${corpName}): white cube: advance least-advanced track`);
   } else if (cubeType === 'black') {
     bot.advanceTrack(1);
-    bot.game.log(`MarsBot (${corpName}): black cube — advance space track`);
+    bot.game.log(`MarsBot (${corpName}): black cube: advance space track`);
   }
 }

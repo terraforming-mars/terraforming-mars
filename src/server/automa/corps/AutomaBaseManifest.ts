@@ -58,12 +58,12 @@ const HELION: IMarsBotCorp = {
     onTrackCubeTrigger(bot, trackIndex, position, cubeType) {
       if (cubeType === 'white') {
         bot.maybeDrawAndResolveProjectCard();
-        bot.game.log('MarsBot (Helion): white cube — drew and resolved card instead of temp raise');
+        bot.game.log('MarsBot (Helion): white cube: drew and resolved card instead of temp raise');
         return bot.marsBotBoard.tracks[trackIndex].definition.layout[position] === 'temperature';
       }
       if (cubeType === 'black') {
         bot.raiseTemperature(1);
-        bot.game.log('MarsBot (Helion): black cube — temperature +1');
+        bot.game.log('MarsBot (Helion): black cube: temperature +1');
       }
       return false;
     },
@@ -173,7 +173,7 @@ const PHOBOLOG: IMarsBotCorp = {
     onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
       if (cubeType === 'white') {
         bot.maybeDrawAndResolveBonusCard();
-        bot.game.log('MarsBot (Phobolog): white cube — resolved 1 bonus card');
+        bot.game.log('MarsBot (Phobolog): white cube: resolved 1 bonus card');
       }
     },
   },
@@ -276,7 +276,7 @@ const THORGATE: IMarsBotCorp = {
       if (cubeType === 'white') {
         bot.maybeDrawAndResolveProjectCardFirstTagOnly();
         bot.raiseTemperature(1);
-        bot.game.log('MarsBot (Thorgate): white cube — resolved card (first tag only) + temp +1');
+        bot.game.log('MarsBot (Thorgate): white cube: resolved card (first tag only) + temp +1');
       }
     },
   },

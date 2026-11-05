@@ -18,6 +18,16 @@ export function cardTagsIncludingEvent(card: IProjectCard): Array<Tag> {
 }
 
 /**
+ * The VP printed on a card's icon, or undefined when the card shows none.
+ *
+ * A conditional or per-resource icon gives the points it shows per step, not what it scores now.
+ */
+export function printedVictoryPoints(card: IProjectCard): number | undefined {
+  const vp = card.metadata.victoryPoints;
+  return typeof vp === 'object' ? vp.points : vp;
+}
+
+/**
  * Override tag counting for MarsBot's player.
  *
  * Per the automa rules: "If an effect requires you to count the number of something

@@ -233,7 +233,7 @@ class StandardDraft extends Draft {
     return 1;
   }
 
-  /** Return whether passing this round goes to the player after (right, +1) or before (left, -1) */
+  /** Return whether passing this round goes to the player after (next player, +1) or before (previous player, -1) */
   override passDirection() {
     return this.game.generation % 2 === 0 ? 'after' : 'before';
   }

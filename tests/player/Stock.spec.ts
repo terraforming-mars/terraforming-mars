@@ -265,16 +265,16 @@ describe('Stock', () => {
 
     player.megaCredits = 10;
     const warn = console.warn;
-    const consoleLog: Array<Array<any>> = [];
-    console.warn = (message?: any, ...optionalParams: any[]) => {
-      consoleLog.push([message, optionalParams]);
+    const consoleLog: Array<Array<unknown>> = [];
+    console.warn = (message?: unknown, ...optionalParams: Array<unknown>) => {
+      consoleLog.push([message, ...optionalParams]);
     };
     player.stock.add(Resource.MEGACREDITS, -12);
     console.warn = warn;
 
     expect(consoleLog).has.length(1);
     expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
-    expect(JSON.parse(consoleLog[0][1])).deep.eq(
+    expect(JSON.parse(String(consoleLog[0][1]))).deep.eq(
       {
         'gameId': 'game-id',
         'lastSaveId': 0,

@@ -7,7 +7,6 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
-import {IDeferredAction} from '../../../src/server/deferredActions/DeferredAction';
 import {cast} from '@/common/utils/utils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
@@ -50,7 +49,7 @@ describe('LobbyHalls', () => {
     assertAddDelegateAction(player, game.deferredActions.pop()?.execute());
   });
 
-  function assertCloneTagAction(action: IDeferredAction) {
+  function assertCloneTagAction(action: unknown) {
     const options = cast(action, DeclareCloneTag).execute();
     options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);

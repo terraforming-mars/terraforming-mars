@@ -10,7 +10,7 @@ import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {SpaceId} from '@/common/Types';
 
 describe('LogPanel', () => {
-  let originalFetch: any;
+  let originalFetch: typeof global.fetch;
   let originalGetElementById: typeof document.getElementById;
   let fetchCalls: Array<string>;
 

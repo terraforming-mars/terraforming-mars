@@ -4,7 +4,7 @@ import {Payment} from '@/common/inputs/Payment';
 import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
 export class PaymentTester {
-  constructor(private wrapper: VueWrapper<any>) {}
+  constructor(private wrapper: VueWrapper) {}
 
   private static selector(unit: SpendableResource) {
     return `[data-test=${unit}]`;

@@ -22,7 +22,7 @@ class TestSQLite extends SQLite implements ITestDatabase {
   }
 
   public async status(gameId: GameId): Promise<Status> {
-    const rows = await this.asyncAll('SELECT DISTINCT status FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [gameId]);
+    const rows = await this.asyncAll<{status: string}>('SELECT DISTINCT status FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [gameId]);
     const statusText = rows[0].status;
 
     if (statusText === 'running' || statusText === 'finished') {
@@ -32,8 +32,8 @@ class TestSQLite extends SQLite implements ITestDatabase {
   }
 
   async completedTime(gameId: GameId): Promise<number | undefined> {
-    const row = await this.asyncGet('SELECT completed_time FROM completed_game WHERE game_id = $1', [gameId]);
-    return row.completed_time;
+    const row = await this.asyncGet<{completed_time: number}>('SELECT completed_time FROM completed_game WHERE game_id = $1', [gameId]);
+    return row?.completed_time;
   }
 
   setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<RunResult> {

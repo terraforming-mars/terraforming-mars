@@ -7,7 +7,6 @@
     "include": [
         "testing/setup.ts",
         "client/vitest.setup.ts",
-        "**/*.spec.ts",
-        "vue-shims.d.ts"
+        "**/*.spec.ts"
     ]
 }

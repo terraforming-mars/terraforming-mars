@@ -337,6 +337,13 @@ describe('MarsBotTilePlacer', () => {
       loser: '32',
     },
     {
+      // 24 is inland and has two icons, 28 is on the edge and has one.
+      rule: "Milestones & Awards: Utopia Planitia's edge spaces count no extra icon",
+      options: {boardName: BoardName.UTOPIA_PLANITIA, modularMA: true},
+      expected: '24',
+      loser: '28',
+    },
+    {
       // 09 is a volcanic space, 23 is not near one. Both have one icon.
       rule: 'Geologist: volcanic spaces and the spaces next to them count as one more reward icon',
       milestones: [new Geologist()],

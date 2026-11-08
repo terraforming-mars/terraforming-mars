@@ -36,35 +36,6 @@ const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>>
 };
 
 /**
- * True for the spaces that count as one more reward icon when tiebreaking.
- *
- * These icons never give M€, only the ones printed on the space do.
- */
-type ExtraIcon = (board: Board, space: Space) => boolean;
-
-const onEdge: ExtraIcon = (_board, space) => space.edge;
-const onOrNextToVolcanic: ExtraIcon = (board, space) =>
-  space.volcanic === true || board.getAdjacentSpaces(space).some((s) => s.volcanic === true);
-const nextToSpecialTile: ExtraIcon = (board, space) => board.getAdjacentSpaces(space).some(isSpecialTileSpace);
-
-/** The extra icon each map's player aid adds. */
-const MAP_EXTRA_ICON: Partial<Record<BoardName, ExtraIcon>> = {
-  [BoardName.UTOPIA_PLANITIA]: onEdge,
-  [BoardName.VASTITAS_BOREALIS_NOVA]: onOrNextToVolcanic,
-};
-
-/**
- * The extra icon a milestone or award of the Milestones & Awards expansion adds while it is in play.
- *
- * Where the map already adds the same one, it counts once (rulebook C, pp.13-15).
- */
-const MA_EXTRA_ICON: Partial<Record<MilestoneName | AwardName, ExtraIcon>> = {
-  'Geologist': onOrNextToVolcanic,
-  'Founder': nextToSpecialTile,
-  'Suburbian': onEdge,
-};
-
-/**
  * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
  *
  * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
@@ -96,11 +67,8 @@ export class MarsBotTilePlacer {
     return options.modularMA ? BoardName.THARSIS : options.boardName;
   }
 
-  /** The extra icons in play: the map's and those of the milestones and awards. */
-  private extraIcons(): ReadonlySet<ExtraIcon> {
-    const names = [...this.game.milestones, ...this.game.awards].map((ma) => ma.name);
-    const icons = [MAP_EXTRA_ICON[this.mapName()], ...names.map((name) => MA_EXTRA_ICON[name])];
-    return new Set(icons.filter((icon) => icon !== undefined));
+  private inPlay(name: MilestoneName | AwardName): boolean {
+    return [...this.game.milestones, ...this.game.awards].some((ma) => ma.name === name);
   }
 
   /**
@@ -222,10 +190,9 @@ export class MarsBotTilePlacer {
       return spaces[0];
     }
 
-    const extraIcons = this.extraIcons();
     const scorers: ReadonlyArray<Scorer> = [
       primaryScorer,
-      ...this.tiebreakerNames().map((name) => this.tiebreaker(name, extraIcons)),
+      ...this.tiebreakerNames().map((name) => this.tiebreaker(name)),
     ];
 
     // Highest first, each scorer breaking the ties of the ones before it
@@ -243,13 +210,13 @@ export class MarsBotTilePlacer {
   }
 
   /** Scores spaces for one of the map's tiebreakers. */
-  private tiebreaker(name: TiebreakerName, extraIcons: ReadonlySet<ExtraIcon>): Scorer {
+  private tiebreaker(name: TiebreakerName): Scorer {
     const board = this.game.board;
     switch (name) {
     case 'oceans':
       return (space) => this.adjacentOceans(space);
     case 'icons':
-      return (space) => this.iconCount(space, extraIcons);
+      return (space) => this.iconCount(space);
     case 'polarRegion':
       // The two rows at the bottom of the map.
       return preferring((space) => space.y >= board.bottomRow - 1);
@@ -267,16 +234,33 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * How many reward icons `space` counts as when tiebreaking: the ones printed on it, plus one for
-   * each extra icon the space matches. Without Turmoil the delegate hex counts as empty (rulebook C,
-   * p.11).
+   * How many reward icons `space` counts as when tiebreaking: the ones printed on it plus the extra
+   * ones. Without Turmoil the delegate hex counts as empty (rulebook C, p.11).
    */
-  private iconCount(space: Space, extraIcons: ReadonlySet<ExtraIcon>): number {
-    let count = space.bonus.filter((bonus) => bonus !== SpaceBonus.DELEGATE || this.game.turmoil !== undefined).length;
-    for (const extraIcon of extraIcons) {
-      if (extraIcon(this.game.board, space)) {
-        count++;
-      }
+  private iconCount(space: Space): number {
+    const printed = space.bonus.filter((bonus) => bonus !== SpaceBonus.DELEGATE || this.game.turmoil !== undefined).length;
+    return printed + this.extraIconCount(space);
+  }
+
+  /**
+   * The reward icons the map's player aid and the milestones and awards in play add to `space` for the
+   * tiebreak. They never give M€.
+   *
+   * A map and a milestone or award that add the same icon add it once (rulebook C, pp.13-15).
+   */
+  private extraIconCount(space: Space): number {
+    const board = this.game.board;
+    const map = this.mapName();
+    let count = 0;
+    if ((map === BoardName.UTOPIA_PLANITIA || this.inPlay('Suburbian')) && space.edge) {
+      count++;
+    }
+    if ((map === BoardName.VASTITAS_BOREALIS_NOVA || this.inPlay('Geologist')) &&
+      (space.volcanic === true || board.getAdjacentSpaces(space).some((s) => s.volcanic === true))) {
+      count++;
+    }
+    if (this.inPlay('Founder') && board.getAdjacentSpaces(space).some(isSpecialTileSpace)) {
+      count++;
     }
     return count;
   }

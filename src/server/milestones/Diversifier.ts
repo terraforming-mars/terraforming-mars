@@ -1,7 +1,6 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotAllTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class Diversifier extends BaseMilestone {
   public readonly automaDescription = 'Space 3+ on every track (7 of 8 with Venus)';
@@ -22,6 +21,6 @@ export class Diversifier extends BaseMilestone {
    * (rulebook C p.2), which is also the Milestones & Awards expansion's rule (rulebook C p.13).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    return marsBotAllTrackPositions(bot).filter((position) => position >= 3).length >= 7;
+    return bot.marsBotBoard.tracks.filter((track) => track.position >= 3).length >= 7;
   }
 }

@@ -4,13 +4,16 @@ import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 
+type FakeMarsBotOptions = Partial<IMarsBot & {tracks: ReadonlyArray<TrackDefinition>}>;
+
 /**
- * Creates a bot with only a board.
+ * Creates a bot with a board, plus any other field `options` sets, the way testGame() takes options.
  *
- * Upstream has no `IMarsBot` yet, and the milestone and award overrides read only the board.
+ * `tracks` picks the board, Tharsis by default. Most milestone and award overrides read only the board.
  */
-export function fakeMarsBot(tracks: ReadonlyArray<TrackDefinition> = THARSIS_MARSBOT_BOARD): IMarsBot {
-  return {marsBotBoard: new MarsBotBoard(tracks)} as unknown as IMarsBot;
+export function fakeMarsBot(options: FakeMarsBotOptions = {}): IMarsBot {
+  const {tracks = THARSIS_MARSBOT_BOARD, ...fields} = options;
+  return {marsBotBoard: new MarsBotBoard(tracks), ...fields} as unknown as IMarsBot;
 }
 
 /** Moves the marker of the track that carries `tag` to space `position`. */

@@ -34,7 +34,7 @@ describe('RimSettler', () => {
     ]) {
       const [game] = testGame(1, {boardName: run.boardName, modularMA: run.modularMA});
       // The Milestones & Awards expansion plays MarsBot's Tharsis board on any map.
-      const bot = {...fakeMarsBot(run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks), game};
+      const bot = fakeMarsBot({tracks: run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks, game});
       setTrack(bot, Tag.SCIENCE, run.science);
       setTrack(bot, Tag.POWER, run.power);
 

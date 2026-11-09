@@ -70,7 +70,7 @@ describe('Tactician', () => {
       {megacredits: 34, expected: false},
       {megacredits: 35, expected: true},
     ]) {
-      const bot = {...fakeMarsBot(), megacredits: run.megacredits};
+      const bot = fakeMarsBot({megacredits: run.megacredits});
 
       expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
     }

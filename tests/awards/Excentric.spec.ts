@@ -21,7 +21,7 @@ describe('Excentric', () => {
       {megacredits: 5, expected: 1},
       {megacredits: 14, expected: 2},
     ]) {
-      const bot = {...fakeMarsBot(), megacredits: run.megacredits};
+      const bot = fakeMarsBot({megacredits: run.megacredits});
 
       expect(new Excentric().marsBotScore(bot), JSON.stringify(run)).eq(run.expected);
     }

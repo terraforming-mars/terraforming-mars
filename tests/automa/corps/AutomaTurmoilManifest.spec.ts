@@ -66,14 +66,15 @@ function corp(name: CardName): IMarsBotCorp {
 const BUILDING = 0;
 
 describe('AutomaTurmoilManifest', () => {
-  it('keys each of the five corporations by its own name', () => {
-    const entries = Object.entries(AUTOMA_TURMOIL_MANIFEST.corps);
-
-    expect(entries).to.have.length(5);
-    for (const [name, found] of entries) {
-      expect(found.name).eq(name);
-    }
+  it('has five corporations', () => {
+    expect(Object.entries(AUTOMA_TURMOIL_MANIFEST.corps)).to.have.length(5);
   });
+
+  for (const [name, found] of Object.entries(AUTOMA_TURMOIL_MANIFEST.corps)) {
+    it(`keys ${name} by its own name`, () => {
+      expect(found.name).eq(name);
+    });
+  }
 
   it('Septem Tribus needs Turmoil', () => {
     expect(corp(CardName.SEPTUM_TRIBUS).requiredExpansions).deep.eq(['turmoil']);

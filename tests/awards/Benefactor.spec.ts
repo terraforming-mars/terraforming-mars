@@ -15,7 +15,7 @@ describe('Benefactor', () => {
     {terraformRating: 22, expected: 7},
     {terraformRating: 10, expected: 0},
   ] as const) {
-    it(`MarsBot scores its TR minus 15, but not below 0, ${JSON.stringify(run)}`, () => {
+    it('MarsBot scores its TR minus 15, but not below 0: ' + JSON.stringify(run), () => {
       const [, player] = testGame(1);
       player.setTerraformRating(run.terraformRating);
       const bot = {...fakeMarsBot(), player};

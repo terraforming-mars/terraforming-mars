@@ -22,7 +22,7 @@ describe('Specialist', () => {
     {tag: Tag.SCIENCE, position: 10, expected: true},
     {tag: Tag.VENUS, position: 10, expected: true},
   ] as const) {
-    it(`MarsBot needs space 10 on any one track, Venus included, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs space 10 on any one track, Venus included: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       setTrack(bot, run.tag, run.position);
 

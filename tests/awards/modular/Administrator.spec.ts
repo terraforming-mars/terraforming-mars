@@ -68,7 +68,7 @@ describe('Administrator', () => {
   it('MarsBot counts the tagless cards in its own played pile, plus 2', () => {
     // An event always has its event tag, even when `tags` is empty.
     const pile = [fakeCard({tags: []}), fakeCard({tags: [Tag.EARTH]}), fakeCard({type: CardType.EVENT, tags: []})];
-    const bot = {...fakeMarsBot(), playedProjectCards: pile};
+    const bot = fakeMarsBot({playedProjectCards: pile});
 
     expect(award.marsBotScore(bot)).eq(3);
   });

@@ -35,7 +35,7 @@ function recordingBot(onAdvance?: () => void) {
   const record = (name: string) => (...args: Array<unknown>) => {
     calls.push(`${name}(${args.join(', ')})`);
   };
-  const bot: IMarsBot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
+  const bot: IMarsBot = fakeMarsBot({
     game,
     gainMc: record('gainMc'),
     advanceTrack: (trackIndex) => {

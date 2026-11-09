@@ -13,6 +13,18 @@ import {RouteError} from './RouteError';
 
 type Encoding = 'gzip' | 'br';
 
+// Served as they are, under exactly this path
+const FIXED_FILES: ReadonlyArray<string> = [
+  'assets/index.html',
+  'assets/Prototype.ttf',
+  'assets/Prototype-ru.ttf',
+  'assets/Prototype-pl.ttf',
+  'assets/futureforces.ttf',
+];
+
+// Build files, served with their compressed variants
+const MAIN_FILES: ReadonlyArray<string> = ['main.js', 'main.js.map', 'vendors.js', 'vendors.js.map'];
+
 export class FileAPI {
   public static readonly INSTANCE: FileAPI = new FileAPI();
 
@@ -130,21 +142,17 @@ export class ServeAsset extends Handler {
     return {file, encoding: undefined};
   }
 
-  private toServiceWorkerFile(urlPath: string): { file?: string, encoding?: Encoding } {
-    return {
-      file: `build/${urlPath}`,
-    };
-  }
-
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
+    // Fixed files: the path read from disk is the constant from the list, never the request path itself
+    const fixedFile = FIXED_FILES.find((file) => file === urlPath);
+    if (fixedFile !== undefined) {
+      return {file: fixedFile};
+    }
+    const mainFile = MAIN_FILES.find((file) => file === urlPath);
+    if (mainFile !== undefined) {
+      return this.toMainFile(`build/${mainFile}`, encodings);
+    }
     switch (urlPath) {
-    case 'assets/index.html':
-    case 'assets/Prototype.ttf':
-    case 'assets/Prototype-ru.ttf':
-    case 'assets/Prototype-pl.ttf':
-    case 'assets/futureforces.ttf':
-      return {file: urlPath};
-
     case 'styles.css':
       if (encodings.has('br')) {
         return {file: 'build/styles.css.br', encoding: 'br'};
@@ -154,18 +162,12 @@ export class ServeAsset extends Handler {
       }
       return {file: 'build/styles.css'};
 
-    case 'main.js':
-    case 'main.js.map':
-    case 'vendors.js':
-    case 'vendors.js.map':
-      return this.toMainFile(`build/${urlPath}`, encodings);
-
     // sw.js is empty. Although not confirmed, it seems sw.js is necessary
     // for mobile notifications. If confirmed that it is not necessary, this
     // can be removed.
     case 'sw.js':
     case '/sw.js':
-      return this.toServiceWorkerFile(urlPath);
+      return {file: 'build/sw.js'};
 
     case 'favicon.ico':
       return {file: 'assets/favicon.ico'};

@@ -28,7 +28,7 @@ describe('Smith', () => {
     {building: 3, space: 4, expected: true},
     {building: 4, space: 3, expected: true},
   ] as const) {
-    it(`MarsBot needs its Building and Space tracks to add up to 7, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs its Building and Space tracks to add up to 7: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.BUILDING, run.building);
       setTrack(bot, Tag.SPACE, run.space);

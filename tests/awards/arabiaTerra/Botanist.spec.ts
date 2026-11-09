@@ -17,7 +17,7 @@ describe('Botanist', () => {
     {position: 6, expected: 4},
     {position: 0, expected: -2},
   ] as const) {
-    it(`MarsBot scores its Bio track minus 2, even below 0, ${JSON.stringify(run)}`, () => {
+    it('MarsBot scores its Bio track minus 2, even below 0: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.PLANT, run.position);
 

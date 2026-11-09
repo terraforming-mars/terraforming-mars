@@ -26,7 +26,7 @@ function recordingBot(generation: number = 1) {
   const corpState = new Map<string, number>();
   const markers = new Set(game.board.spaces.slice(0, 2));
   const record = (call: string) => calls.push(call) > 0;
-  const bot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
+  const bot = fakeMarsBot({
     game,
     failedActionMc: 5,
     gainMc: (amount) => record(`gainMc(${amount})`),

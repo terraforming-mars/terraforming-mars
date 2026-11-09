@@ -108,14 +108,12 @@ const handlers: Array<[CardName, string, Trigger, Array<string>]> = [
 ];
 
 describe('AutomaBaseManifest', () => {
-  for (const name of new Set(handlers.map(([handled]) => handled))) {
-    it(`${name} calls into MarsBot as its card says`, () => {
+  for (const [name, label, trigger, expected] of handlers) {
+    it(`${name} calls into MarsBot as its card says, ${label}`, () => {
       expect(corp(name).name).eq(name);
-      for (const [, label, trigger, expected] of handlers.filter(([handled]) => handled === name)) {
-        const {bot, calls} = recordingBot();
-        trigger(bot, corp(name));
-        expect(calls, label).deep.eq(expected);
-      }
+      const {bot, calls} = recordingBot();
+      trigger(bot, corp(name));
+      expect(calls).deep.eq(expected);
     });
   }
 
@@ -151,13 +149,13 @@ describe('AutomaBaseManifest', () => {
   });
 
   // The M€ MarsBot earns comes off the card, and MarsBot keeps it
-  it('Mining Guild counts down from 10, and advances the building track each time the card empties', () => {
-    for (const run of [
-      {gain: 5, card: 5, advances: 0},
-      {mcOnCard: 2, gain: 5, card: 7, advances: 1},
-      {mcOnCard: 2, gain: 25, card: 7, advances: 3},
-      {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
-    ]) {
+  for (const run of [
+    {gain: 5, card: 5, advances: 0},
+    {mcOnCard: 2, gain: 5, card: 7, advances: 1},
+    {mcOnCard: 2, gain: 25, card: 7, advances: 3},
+    {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
+  ]) {
+    it(`Mining Guild counts down from 10, and advances the building track each time the card empties, ${JSON.stringify(run)}`, () => {
       const {bot, calls, corpState} = recordingBot();
       corp(CardName.MINING_GUILD).setup!(bot);
       if (run.mcOnCard !== undefined) {
@@ -165,10 +163,10 @@ describe('AutomaBaseManifest', () => {
       }
       bot.marsBotBoard.tracks[BUILDING].position = run.building ?? 3;
       corp(CardName.MINING_GUILD).effect!.onMcGained!(bot, run.gain);
-      expect(corpState.get('mcOnCard'), `gain ${run.gain}`).eq(run.card);
-      expect(calls, `gain ${run.gain}`).deep.eq(Array(run.advances).fill(`advanceTrack(${BUILDING})`));
-    }
-  });
+      expect(corpState.get('mcOnCard')).eq(run.card);
+      expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${BUILDING})`));
+    });
+  }
 
   it('Mining Guild refills the card before the advance, so the M€ the advance earns comes off the new card', () => {
     const effect = corp(CardName.MINING_GUILD).effect!;

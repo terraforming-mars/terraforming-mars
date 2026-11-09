@@ -9,7 +9,6 @@ import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
 import {cast} from '../../../src/common/utils/utils';
 import {TileType} from '@/common/TileType';
-import {fakeMarsBot} from '../../automa/FakeMarsBot';
 
 describe('Founder', () => {
   let founder: Founder;
@@ -63,6 +62,6 @@ describe('Founder', () => {
     addGreenery(marsBotPlayer, adjacentSpaces[1].id);
 
     expect(founder.getScore(human)).eq(0);
-    expect(founder.marsBotScore({...fakeMarsBot(), game, player: marsBotPlayer})).eq(1);
+    expect(founder.getScore(marsBotPlayer)).eq(1);
   });
 });

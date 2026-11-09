@@ -15,15 +15,15 @@ describe('Architect', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs space 6 of its City track', () => {
-    for (const run of [
-      {city: 5, expected: false},
-      {city: 6, expected: true},
-    ]) {
+  for (const run of [
+    {city: 5, expected: false},
+    {city: 6, expected: true},
+  ] as const) {
+    it(`MarsBot needs space 6 of its City track, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.CITY, run.city);
 
-      expect(new Architect().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Architect().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

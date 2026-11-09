@@ -1,7 +1,6 @@
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotAllTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 export class Mogul implements IAward {
   public readonly name = 'Mogul';
   public readonly description = 'Have the highest production (excluding M€) combined';
@@ -13,6 +12,6 @@ export class Mogul implements IAward {
 
   /** Scores MarsBot's most advanced track doubled (rulebook C p.9 and p.15). */
   public marsBotScore(bot: IMarsBot): number {
-    return Math.max(...marsBotAllTrackPositions(bot)) * 2;
+    return Math.max(...bot.marsBotBoard.tracks.map((track) => track.position)) * 2;
   }
 }

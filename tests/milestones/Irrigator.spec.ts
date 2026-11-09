@@ -28,13 +28,13 @@ describe('Irrigator', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Coastguard: MarsBot needs 3 tiles next to oceans on Terra Cimmeria and 4 with the expansion', () => {
-    for (const run of [
-      {modularMA: false, tiles: 2, expected: false},
-      {modularMA: false, tiles: 3, expected: true},
-      {modularMA: true, tiles: 3, expected: false},
-      {modularMA: true, tiles: 4, expected: true},
-    ]) {
+  for (const run of [
+    {modularMA: false, tiles: 2, expected: false},
+    {modularMA: false, tiles: 3, expected: true},
+    {modularMA: true, tiles: 3, expected: false},
+    {modularMA: true, tiles: 4, expected: true},
+  ] as const) {
+    it(`Coastguard: MarsBot needs 3 tiles next to oceans on Terra Cimmeria and 4 with the expansion, ${JSON.stringify(run)}`, () => {
       const [game, player] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
       const bot = {...fakeMarsBot(), game, player};
       maxOutOceans(player);
@@ -44,7 +44,7 @@ describe('Irrigator', () => {
         addGreenery(player, space.id);
       }
 
-      expect(new Coastguard().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Coastguard().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

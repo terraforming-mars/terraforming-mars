@@ -38,18 +38,18 @@ describe('Fundraiser', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs space 10 of its Event track on Terra Cimmeria and space 8 with the expansion', () => {
-    for (const run of [
-      {modularMA: false, event: 9, expected: false},
-      {modularMA: false, event: 10, expected: true},
-      {modularMA: true, event: 7, expected: false},
-      {modularMA: true, event: 8, expected: true},
-    ]) {
+  for (const run of [
+    {modularMA: false, event: 9, expected: false},
+    {modularMA: false, event: 10, expected: true},
+    {modularMA: true, event: 7, expected: false},
+    {modularMA: true, event: 8, expected: true},
+  ] as const) {
+    it(`MarsBot needs space 10 of its Event track on Terra Cimmeria and space 8 with the expansion, ${JSON.stringify(run)}`, () => {
       const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
       const bot = {...fakeMarsBot(), game};
       setTrack(bot, Tag.EVENT, run.event);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

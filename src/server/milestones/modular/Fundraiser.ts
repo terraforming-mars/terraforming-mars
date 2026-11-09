@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {BoardName} from '../../../common/boards/BoardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotUsesMapSet} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class Fundraiser extends BaseMilestone {
   public readonly automaDescription = 'Event track ≥ 8';
@@ -27,7 +27,7 @@ export class Fundraiser extends BaseMilestone {
    * The Milestones & Awards expansion asks for space 8 (rulebook C p.13).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    const threshold = marsBotUsesMapSet(bot, BoardName.TERRA_CIMMERIA_NOVA) ? 10 : 8;
+    const threshold = marsBotUsesBoardGoals(bot, BoardName.TERRA_CIMMERIA_NOVA) ? 10 : 8;
     return bot.marsBotBoard.trackPosition(Tag.EVENT) >= threshold;
   }
 }

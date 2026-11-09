@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {BoardName} from '../../../common/boards/BoardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotUsesMapSet} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class Planetologist extends BaseMilestone {
   public readonly automaDescription = 'Two of Energy, Earth and Venus tracks ≥ 3';
@@ -33,7 +33,7 @@ export class Planetologist extends BaseMilestone {
    * tracks (rulebook C p.14).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    if (marsBotUsesMapSet(bot, BoardName.TERRA_CIMMERIA_NOVA)) {
+    if (marsBotUsesBoardGoals(bot, BoardName.TERRA_CIMMERIA_NOVA)) {
       return bot.marsBotBoard.trackPosition(Tag.EARTH) + bot.marsBotBoard.trackPosition(Tag.VENUS) >= 5;
     }
     const positions = [Tag.POWER, Tag.EARTH, Tag.VENUS].map((tag) => bot.marsBotBoard.trackPosition(tag));

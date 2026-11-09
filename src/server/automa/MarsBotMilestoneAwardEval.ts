@@ -14,6 +14,6 @@ export function marsBotAllTrackPositions(bot: IMarsBot): Array<number> {
  * are written against the Tharsis board whatever map the game is played on. Random milestones
  * and awards keep the map's rules.
  */
-export function marsBotUsesMapSet(bot: IMarsBot, boardName: BoardName): boolean {
+export function marsBotUsesBoardGoals(bot: IMarsBot, boardName: BoardName): boolean {
   return marsBotMapSet(bot.game.gameOptions) === boardName;
 }

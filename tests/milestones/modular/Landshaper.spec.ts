@@ -88,7 +88,7 @@ describe('Landshaper', () => {
   ] as const) {
     it(`MarsBot needs a city, a greenery and space 5 of its Building track, ${JSON.stringify(run)}`, () => {
       const [game, player] = testGame(1);
-      const bot = {...fakeMarsBot(), game, player};
+      const bot = fakeMarsBot({game, player});
       if (run.city) {
         addCity(player);
       }

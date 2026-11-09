@@ -70,7 +70,7 @@ describe('Philantropist', () => {
     {playedProjectCards: [...cards, new SpaceStation()], expected: true},
   ]) {
     it(`MarsBot counts the cards with VP in its played pile, ${run.playedProjectCards.length} cards`, () => {
-      const bot = {...fakeMarsBot(), playedProjectCards: run.playedProjectCards};
+      const bot = fakeMarsBot({playedProjectCards: run.playedProjectCards});
 
       expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
     });

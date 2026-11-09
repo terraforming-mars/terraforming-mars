@@ -32,7 +32,7 @@ describe('Trader', () => {
     {plant: 2, earth: 2, venus: 2, expected: true},
   ] as const) {
     it(`MarsBot needs space 2 on its Bio, Earth and Venus tracks, ${JSON.stringify(run)}`, () => {
-      const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setTrack(bot, Tag.PLANT, run.plant);
       setTrack(bot, Tag.EARTH, run.earth);
       setTrack(bot, Tag.VENUS, run.venus);

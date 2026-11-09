@@ -23,17 +23,17 @@ describe('Smith', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs its Building and Space tracks to add up to 7', () => {
-    for (const run of [
-      {building: 3, space: 3, expected: false},
-      {building: 3, space: 4, expected: true},
-      {building: 4, space: 3, expected: true},
-    ]) {
+  for (const run of [
+    {building: 3, space: 3, expected: false},
+    {building: 3, space: 4, expected: true},
+    {building: 4, space: 3, expected: true},
+  ] as const) {
+    it(`MarsBot needs its Building and Space tracks to add up to 7, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.BUILDING, run.building);
       setTrack(bot, Tag.SPACE, run.space);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

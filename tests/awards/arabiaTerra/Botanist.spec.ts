@@ -13,15 +13,15 @@ describe('Botanist', () => {
     expect(new Botanist().getScore(player)).to.eq(4);
   });
 
-  it('MarsBot scores its Bio track minus 2, even below 0', () => {
-    for (const run of [
-      {position: 6, expected: 4},
-      {position: 0, expected: -2},
-    ]) {
+  for (const run of [
+    {position: 6, expected: 4},
+    {position: 0, expected: -2},
+  ] as const) {
+    it(`MarsBot scores its Bio track minus 2, even below 0, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.PLANT, run.position);
 
-      expect(new Botanist().marsBotScore(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Botanist().marsBotScore(bot)).eq(run.expected);
+    });
+  }
 });

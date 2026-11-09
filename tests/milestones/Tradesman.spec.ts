@@ -45,19 +45,19 @@ describe('Tradesman', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs space 2 on its Energy, Earth and Venus tracks', () => {
-    for (const run of [
-      {power: 2, earth: 2, venus: 2, expected: true},
-      {power: 1, earth: 2, venus: 2, expected: false},
-      {power: 2, earth: 1, venus: 2, expected: false},
-      {power: 2, earth: 2, venus: 1, expected: false},
-    ]) {
+  for (const run of [
+    {power: 2, earth: 2, venus: 2, expected: true},
+    {power: 1, earth: 2, venus: 2, expected: false},
+    {power: 2, earth: 1, venus: 2, expected: false},
+    {power: 2, earth: 2, venus: 1, expected: false},
+  ] as const) {
+    it(`MarsBot needs space 2 on its Energy, Earth and Venus tracks, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       setTrack(bot, Tag.POWER, run.power);
       setTrack(bot, Tag.EARTH, run.earth);
       setTrack(bot, Tag.VENUS, run.venus);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

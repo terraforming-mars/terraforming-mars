@@ -84,14 +84,14 @@ describe('LandSpecialist', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs 3 destroyed bonus cards', () => {
-    for (const run of [
-      {destroyedBonusCards: 2, expected: false},
-      {destroyedBonusCards: 3, expected: true},
-    ]) {
+  for (const run of [
+    {destroyedBonusCards: 2, expected: false},
+    {destroyedBonusCards: 3, expected: true},
+  ] as const) {
+    it(`MarsBot needs 3 destroyed bonus cards, ${JSON.stringify(run)}`, () => {
       const bot = {...fakeMarsBot(), destroyedBonusCards: run.destroyedBonusCards};
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

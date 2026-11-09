@@ -57,7 +57,7 @@ function recordingBot(onAdvance?: () => void) {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot: marsBot, calls, corpState};
+  return {marsBot, calls, corpState};
 }
 
 /** A trigger on a corporation, applied to a fresh bot. */
@@ -111,7 +111,7 @@ describe('AutomaBaseManifest', () => {
   for (const [name, label, trigger, expected] of handlers) {
     it(`${name} calls into MarsBot as its card says, ${label}`, () => {
       expect(corp(name).name).eq(name);
-      const {bot: marsBot, calls} = recordingBot();
+      const {marsBot, calls} = recordingBot();
       trigger(marsBot, corp(name));
       expect(calls).deep.eq(expected);
     });
@@ -143,7 +143,7 @@ describe('AutomaBaseManifest', () => {
 
   // The card replaces the temperature step only
   it('Helion white cube replaces a temperature step, and no other icon', () => {
-    const white = (position: number) => corp(CardName.HELION).effect!.onTrackCubeTrigger!(recordingBot().bot, BUILDING, position, 'white');
+    const white = (position: number) => corp(CardName.HELION).effect!.onTrackCubeTrigger!(recordingBot().marsBot, BUILDING, position, 'white');
     expect(white(6)).is.true;
     expect(white(7)).is.false;
   });
@@ -156,7 +156,7 @@ describe('AutomaBaseManifest', () => {
     {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
   ]) {
     it('Mining Guild counts down from 10, and advances the building track each time the card empties: ' + JSON.stringify(run), () => {
-      const {bot: marsBot, calls, corpState} = recordingBot();
+      const {marsBot, calls, corpState} = recordingBot();
       corp(CardName.MINING_GUILD).setup!(marsBot);
       if (run.mcOnCard !== undefined) {
         corpState.set('mcOnCard', run.mcOnCard);
@@ -170,7 +170,7 @@ describe('AutomaBaseManifest', () => {
 
   it('Mining Guild refills the card before the advance, so the M€ the advance earns comes off the new card', () => {
     const effect = corp(CardName.MINING_GUILD).effect!;
-    const {bot: marsBot, corpState} = recordingBot(() => effect.onMcGained!(marsBot, 2));
+    const {marsBot, corpState} = recordingBot(() => effect.onMcGained!(marsBot, 2));
     corpState.set('mcOnCard', 1);
     effect.onMcGained!(marsBot, 1);
     expect(corpState.get('mcOnCard')).eq(8);
@@ -178,7 +178,7 @@ describe('AutomaBaseManifest', () => {
 
   // Like Philares (BGG 3513998), nothing advances after the game has ended
   it('Mining Guild stops counting down once the game has ended', () => {
-    const {bot: marsBot, calls, corpState} = recordingBot();
+    const {marsBot, calls, corpState} = recordingBot();
     marsBot.game.phase = Phase.END;
     corpState.set('mcOnCard', 2);
     corp(CardName.MINING_GUILD).effect!.onMcGained!(marsBot, 5);

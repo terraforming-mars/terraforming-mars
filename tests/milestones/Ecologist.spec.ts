@@ -19,7 +19,7 @@ describe('Ecologist', () => {
     {plant: 3, expected: false},
     {plant: 4, expected: true},
   ] as const) {
-    it(`MarsBot needs space 4 of its Bio track, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs space 4 of its Bio track: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.PLANT, run.plant);
 

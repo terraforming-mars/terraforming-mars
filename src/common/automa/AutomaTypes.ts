@@ -13,6 +13,7 @@ export type TrackAction =
   | 'city'
   | 'venus' | 'venus2'
   | 'floater' | 'floater2'
+  | 'colony'        // Utopia Planitia: place a colony like Outer System Foothold
   | `tag_${number}`   // Advance track by index
   | `tag_${string}`;  // Advance track by tag name (e.g. 'tag_microbe')
 

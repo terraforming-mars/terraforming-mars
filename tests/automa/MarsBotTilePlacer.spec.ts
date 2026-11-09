@@ -225,6 +225,14 @@ describe('MarsBotTilePlacer', () => {
     expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(2);
   });
 
+  it('getOceanAdjacencyMC pays the ocean bonus of MarsBot\'s player per adjacent ocean', () => {
+    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
+    const neighbour = game.board.getSpaceOrThrow('05');
+    marsBot.oceanBonus = 3;
+
+    expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(3);
+  });
+
   it('getOceanAdjacencyMC pays nothing next to an ocean-reserved space with no tile on it', () => {
     const neighbour = game.board.getSpaceOrThrow('05');
     const reserved = game.board.getAdjacentSpaces(neighbour).filter((s) => s.spaceType === SpaceType.OCEAN);

@@ -299,11 +299,13 @@
             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
             <label for="bannedCards-checkbox">
               <span v-i18n>Exclude some cards</span>
+              <span v-if="bannedCards.length">&nbsp;({{ bannedCards.length }})</span>
             </label>
 
             <input type="checkbox" v-model="showIncludedCards" id="includedCards-checkbox">
             <label for="includedCards-checkbox">
               <span v-i18n>Include some cards</span>
+              <span v-if="includedCards.length">&nbsp;({{ includedCards.length }})</span>
             </label>
 
             <template v-if="expansions.colonies">
@@ -540,23 +542,23 @@
       @close="showCeosList = false"
     />
 
-    <div class="create-game--block" v-if="showBannedCards">
-      <CardsFilter
-        ref="cardsFilter"
-        @cards-list-changed="updateBannedCards"
-        :title="'Cards to exclude from the game'"
-        :hint="'Start typing the card name to exclude'"
-      />
-    </div>
+    <CardsFilter
+      v-if="showBannedCards"
+      @cards-list-changed="updateBannedCards"
+      :title="'Cards to exclude from the game'"
+      :hint="'Start typing the card name to exclude'"
+      :selected="bannedCards"
+      @close="showBannedCards = false"
+    />
 
-    <div class="create-game--block" v-if="showIncludedCards">
-      <CardsFilter
-        ref="cardsFilter2"
-        @cards-list-changed="updateIncludedCards"
-        :title="'Cards to include in the game'"
-        :hint="'Start typing the card name to include'"
-      />
-    </div>
+    <CardsFilter
+      v-if="showIncludedCards"
+      @cards-list-changed="updateIncludedCards"
+      :title="'Cards to include in the game'"
+      :hint="'Start typing the card name to include'"
+      :selected="includedCards"
+      @close="showIncludedCards = false"
+    />
     <PreferencesIcon />
     <ValidationErrorsPopup v-if="showValidationErrors" :errors="validationErrors" @close="showValidationErrors = false" />
   </div>
@@ -600,8 +602,6 @@ import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesMana
 
 type Refs = {
   file: HTMLInputElement;
-  cardsFilter: InstanceType<typeof CardsFilter>;
-  cardsFilter2: InstanceType<typeof CardsFilter>;
 };
 
 type FormModel = {
@@ -835,7 +835,6 @@ export default defineComponent({
     },
     applySettings(json: JSONObject): JSONProcessor {
       const component: CreateGameModel = this;
-      const refs = this.typedRefs;
       const processor = new JSONProcessor(component);
       this.uploading = true;
       try {
@@ -846,12 +845,6 @@ export default defineComponent({
       }
       nextTick(() => {
         try {
-          if (component.showBannedCards && refs.cardsFilter) {
-            refs.cardsFilter.selected = processor.bannedCards;
-          }
-          if (component.showIncludedCards && refs.cardsFilter2) {
-            refs.cardsFilter2.selected = processor.includedCards;
-          }
           if (!component.seededGame) {
             component.seed = Math.random();
           }
@@ -875,15 +868,6 @@ export default defineComponent({
       Object.assign(this, defaultCreateGameModel(), {
         preludeToggled: false,
         uploading: false,
-      });
-      nextTick(() => {
-        const refs = this.typedRefs;
-        if (refs.cardsFilter) {
-          refs.cardsFilter.selected = [];
-        }
-        if (refs.cardsFilter2) {
-          refs.cardsFilter2.selected = [];
-        }
       });
     },
     async downloadSettings() {
@@ -1043,8 +1027,8 @@ export default defineComponent({
         }
       });
 
-      players.map((player: any) => {
-        player.first = (this.firstIndex === player.index);
+      players.map((player, index) => {
+        player.first = (this.firstIndex === index + 1);
         return player;
       });
 

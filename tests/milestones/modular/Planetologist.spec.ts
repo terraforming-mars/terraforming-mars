@@ -49,7 +49,7 @@ describe('Planetologist', () => {
     {modularMA: true, power: 0, earth: 4, venus: 1, expected: false},
     {modularMA: true, power: 3, earth: 0, venus: 3, expected: true},
   ] as const) {
-    it(`MarsBot follows the Terra Cimmeria rule, except with the Milestones & Awards expansion, ${JSON.stringify(run)}`, () => {
+    it('MarsBot follows the Terra Cimmeria rule, except with the Milestones & Awards expansion: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
       const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK], game});
       setTrack(bot, Tag.POWER, run.power);

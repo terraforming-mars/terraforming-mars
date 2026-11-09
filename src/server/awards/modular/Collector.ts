@@ -2,7 +2,6 @@ import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 import {ALL_RESOURCES} from '../../../common/Resource';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotAllTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 
 export class Collector implements IAward {
@@ -18,6 +17,6 @@ export class Collector implements IAward {
 
   /** Counts MarsBot's tracks that reached space 3, Venus included when in play (rulebook C p.14). */
   public marsBotScore(bot: IMarsBot): number {
-    return marsBotAllTrackPositions(bot).filter((position) => position >= 3).length;
+    return bot.marsBotBoard.tracks.filter((track) => track.position >= 3).length;
   }
 }

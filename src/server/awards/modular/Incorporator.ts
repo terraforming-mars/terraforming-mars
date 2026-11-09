@@ -17,7 +17,7 @@ export class Incorporator implements IAward {
    * Counts the cards costing 10 M€ or less in MarsBot's played pile, events included (rulebook C
    * p.10 and p.15).
    */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.playedProjectCards.filter((card) => card.cost <= 10).length;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.playedProjectCards.filter((card) => card.cost <= 10).length;
   }
 }

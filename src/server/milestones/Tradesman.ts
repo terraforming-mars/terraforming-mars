@@ -25,7 +25,7 @@ export class Tradesman extends BaseMilestone {
    * MarsBot needs space 2 on its Energy, Earth and Venus tracks (rulebook C p.10, which calls it
    * Trader).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return [Tag.POWER, Tag.EARTH, Tag.VENUS].every((tag) => bot.marsBotBoard.trackPosition(tag) >= 2);
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return [Tag.POWER, Tag.EARTH, Tag.VENUS].every((tag) => marsBot.marsBotBoard.trackPosition(tag) >= 2);
   }
 }

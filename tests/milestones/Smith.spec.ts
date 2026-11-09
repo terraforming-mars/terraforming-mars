@@ -29,11 +29,11 @@ describe('Smith', () => {
     {building: 4, space: 3, expected: true},
   ] as const) {
     it('MarsBot needs its Building and Space tracks to add up to 7: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.BUILDING, run.building);
-      setTrack(bot, Tag.SPACE, run.space);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.BUILDING, run.building);
+      setTrack(marsBot, Tag.SPACE, run.space);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

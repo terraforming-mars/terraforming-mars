@@ -18,10 +18,10 @@ describe('Botanist', () => {
     {position: 0, expected: -2},
   ] as const) {
     it('MarsBot scores its Bio track minus 2, even below 0: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.PLANT, run.position);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.PLANT, run.position);
 
-      expect(new Botanist().marsBotScore(bot)).eq(run.expected);
+      expect(new Botanist().marsBotScore(marsBot)).eq(run.expected);
     });
   }
 });

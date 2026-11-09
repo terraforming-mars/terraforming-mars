@@ -26,7 +26,7 @@ export class LandSpecialist extends BaseMilestone {
   }
 
   /** MarsBot needs 3 destroyed bonus cards (rulebook C p.10, which calls it Specialist). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.destroyedBonusCards >= 3;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.destroyedBonusCards >= 3;
   }
 }

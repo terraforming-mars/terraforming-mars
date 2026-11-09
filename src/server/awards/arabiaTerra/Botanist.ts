@@ -12,7 +12,7 @@ export class Botanist implements IAward {
   }
 
   /** Scores MarsBot's Bio track space minus 2, which can be below 0 (rulebook C p.10 and p.14). */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.PLANT) - 2;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.PLANT) - 2;
   }
 }

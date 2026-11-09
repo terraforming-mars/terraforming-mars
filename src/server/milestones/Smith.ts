@@ -20,7 +20,7 @@ export class Smith extends BaseMilestone {
    * MarsBot needs its Building and Space tracks to add up to 7 (rulebook C p.10, which calls it
    * Metallurgist).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.BUILDING) + bot.marsBotBoard.trackPosition(Tag.SPACE) >= 7;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.BUILDING) + marsBot.marsBotBoard.trackPosition(Tag.SPACE) >= 7;
   }
 }

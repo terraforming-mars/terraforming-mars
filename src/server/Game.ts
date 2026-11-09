@@ -59,6 +59,7 @@ import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBon
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {DeltaProject} from './cards/delta/DeltaProject';
+import {MiningCard} from './cards/base/MiningCard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
@@ -1543,15 +1544,29 @@ export class Game implements IGame, Logger {
         {title: 'Select how to pay for building a colony'}))
         .andThen(() => this.defer(new BuildColony(player)));
       break;
-    case SpaceBonus.STANDARD_RESOURCE:
+    case SpaceBonus.STANDARD_RESOURCE: {
+      const gainStandardResource = (resource: Resource) => {
+        player.stock.add(resource, 1, {log: true});
+        onStandardResource?.(resource);
+        return undefined;
+      };
+      if (player.lastCardPlayed) {
+        const lastCardPlayed = player.tableau.get(player.lastCardPlayed);
+        // Mining cards treat this bonus as the steel or titanium production the player chose.
+        if (lastCardPlayed instanceof MiningCard) {
+          const miningResource = lastCardPlayed.bonusResource?.[0];
+          if (miningResource !== undefined) {
+            gainStandardResource(miningResource);
+            break;
+          }
+        }
+      }
+
       // A space has this bonus at most once. If one ever has more, use SelectResources (see Philares).
       player.defer(new SelectResource('Select a standard resource to gain')
-        .andThen((resource) => {
-          player.stock.add(resource, 1, {log: true});
-          onStandardResource?.(resource);
-          return undefined;
-        }));
+        .andThen(gainStandardResource));
       break;
+    }
     default:
       throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
     }

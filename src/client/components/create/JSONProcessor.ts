@@ -74,8 +74,6 @@ export class JSONProcessor {
     this.includedCards = set(json_constants.INCLUDED_CARDS);
 
     this.model.playersCount = players.length;
-    this.model.showBannedCards = this.bannedCards.length > 0;
-    this.model.showIncludedCards = this.includedCards.length > 0;
 
     const oldExpansionFields: Record<Expansion, string> = {
       corpera: json_constants.CORPORATEERA,

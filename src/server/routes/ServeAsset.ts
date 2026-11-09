@@ -113,9 +113,8 @@ export class ServeAsset extends Handler {
     }
   }
 
-  private toMainFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
-    const file = `build/${urlPath}`;
-
+  // file: a fixed build file, or a chunk path already resolved and checked to lie inside build/chunks
+  private toMainFile(file: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     // Only serve compressed versions in production. Development mode serves
     // uncompressed versions because they can be hot-swapped.
     if (isProduction()) {
@@ -159,7 +158,7 @@ export class ServeAsset extends Handler {
     case 'main.js.map':
     case 'vendors.js':
     case 'vendors.js.map':
-      return this.toMainFile(urlPath, encodings);
+      return this.toMainFile(`build/${urlPath}`, encodings);
 
     // sw.js is empty. Although not confirmed, it seems sw.js is necessary
     // for mobile notifications. If confirmed that it is not necessary, this
@@ -176,9 +175,11 @@ export class ServeAsset extends Handler {
       if (urlPath.startsWith('chunks/')) {
         const chunksRoot = path.resolve('./build/chunks');
         const resolvedFile = path.resolve(path.normalize('build/' + urlPath));
-        if (resolvedFile.startsWith(chunksRoot)) {
+        // With the separator: a sibling such as build/chunks-other is not inside
+        if (resolvedFile.startsWith(chunksRoot + path.sep)) {
           if (urlPath.endsWith('.js') || urlPath.endsWith('.js.map')) {
-            return this.toMainFile(urlPath, encodings);
+            // The checked, resolved path – not the request path – reaches the file system
+            return this.toMainFile(resolvedFile, encodings);
           }
         }
       }
@@ -188,7 +189,7 @@ export class ServeAsset extends Handler {
         const resolvedFile = path.resolve(path.normalize(urlPath));
 
         // Only allow assets inside of assets directory
-        if (resolvedFile.startsWith(assetsRoot)) {
+        if (resolvedFile.startsWith(assetsRoot + path.sep)) {
           return {file: resolvedFile};
         }
       }

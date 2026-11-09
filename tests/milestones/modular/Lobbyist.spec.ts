@@ -72,7 +72,7 @@ describe('Lobbyist', () => {
     {chairman: true, leaders: 1, expected: false},
     {chairman: true, leaders: 2, expected: true},
   ] as const) {
-    it(`MarsBot needs the Chairman and 2 Party Leaders, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs the Chairman and 2 Party Leaders: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({game, player});
 
       turmoil.chairman = run.chairman ? player : 'NEUTRAL';

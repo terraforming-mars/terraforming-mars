@@ -22,7 +22,7 @@ describe('Tycoon10', () => {
     {cards: 9, expected: false},
     {cards: 10, expected: true},
   ] as const) {
-    it(`MarsBot needs 10 blue and green cards in its played pile, events aside, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs 10 blue and green cards in its played pile, events aside: ' + JSON.stringify(run), () => {
       const types = [CardType.EVENT, CardType.EVENT, ...Array<CardType>(run.cards).fill(CardType.ACTIVE)];
       const bot = fakeMarsBot({playedProjectCards: types.map((type) => fakeCard({type}))});
 

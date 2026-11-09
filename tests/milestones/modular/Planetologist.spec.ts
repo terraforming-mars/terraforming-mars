@@ -51,12 +51,12 @@ describe('Planetologist', () => {
   ] as const) {
     it('MarsBot follows the Terra Cimmeria rule, except with the Milestones & Awards expansion: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
-      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK], game});
-      setTrack(bot, Tag.POWER, run.power);
-      setTrack(bot, Tag.EARTH, run.earth);
-      setTrack(bot, Tag.VENUS, run.venus);
+      const marsBot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK], game});
+      setTrack(marsBot, Tag.POWER, run.power);
+      setTrack(marsBot, Tag.EARTH, run.earth);
+      setTrack(marsBot, Tag.VENUS, run.venus);
 
-      expect(new Planetologist().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new Planetologist().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

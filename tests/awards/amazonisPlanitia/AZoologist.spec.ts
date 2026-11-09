@@ -19,9 +19,9 @@ describe('AZoologist', () => {
   });
 
   it('MarsBot scores its Bio track plus 5', () => {
-    const bot = fakeMarsBot();
-    setTrack(bot, Tag.PLANT, 3);
+    const marsBot = fakeMarsBot();
+    setTrack(marsBot, Tag.PLANT, 3);
 
-    expect(new AZoologist().marsBotScore(bot)).eq(8);
+    expect(new AZoologist().marsBotScore(marsBot)).eq(8);
   });
 });

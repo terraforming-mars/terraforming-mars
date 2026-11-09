@@ -11,7 +11,7 @@ export class Mogul implements IAward {
   }
 
   /** Scores MarsBot's most advanced track doubled (rulebook C p.9 and p.15). */
-  public marsBotScore(bot: IMarsBot): number {
-    return Math.max(...bot.marsBotBoard.tracks.map((track) => track.position)) * 2;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return Math.max(...marsBot.marsBotBoard.tracks.map((track) => track.position)) * 2;
   }
 }

@@ -32,11 +32,11 @@ export class Planetologist extends BaseMilestone {
    * The Milestones & Awards expansion asks for space 3 on two of its Energy, Earth and Venus
    * tracks (rulebook C p.14).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    if (marsBotUsesBoardGoals(bot, BoardName.TERRA_CIMMERIA_NOVA)) {
-      return bot.marsBotBoard.trackPosition(Tag.EARTH) + bot.marsBotBoard.trackPosition(Tag.VENUS) >= 5;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    if (marsBotUsesBoardGoals(marsBot, BoardName.TERRA_CIMMERIA_NOVA)) {
+      return marsBot.marsBotBoard.trackPosition(Tag.EARTH) + marsBot.marsBotBoard.trackPosition(Tag.VENUS) >= 5;
     }
-    const positions = [Tag.POWER, Tag.EARTH, Tag.VENUS].map((tag) => bot.marsBotBoard.trackPosition(tag));
+    const positions = [Tag.POWER, Tag.EARTH, Tag.VENUS].map((tag) => marsBot.marsBotBoard.trackPosition(tag));
     return positions.filter((position) => position >= 3).length >= 2;
   }
 }

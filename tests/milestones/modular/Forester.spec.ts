@@ -21,10 +21,10 @@ describe('Forester', () => {
     {plant: 6, expected: true},
   ] as const) {
     it('MarsBot needs space 6 of its Bio track: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.PLANT, run.plant);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.PLANT, run.plant);
 
-      expect(new Forester().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new Forester().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

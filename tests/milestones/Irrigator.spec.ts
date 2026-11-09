@@ -36,7 +36,7 @@ describe('Irrigator', () => {
   ] as const) {
     it('Coastguard: MarsBot needs 3 tiles next to oceans on Terra Cimmeria and 4 with the expansion: ' + JSON.stringify(run), () => {
       const [game, player] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
-      const bot = fakeMarsBot({game, player});
+      const marsBot = fakeMarsBot({game, player});
       maxOutOceans(player);
       const coastalSpaces = game.board.getAvailableSpacesOnLand(player)
         .filter((space) => game.board.getAdjacentSpaces(space).some(Board.isOceanSpace));
@@ -44,7 +44,7 @@ describe('Irrigator', () => {
         addGreenery(player, space.id);
       }
 
-      expect(new Coastguard().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new Coastguard().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

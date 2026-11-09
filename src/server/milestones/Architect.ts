@@ -9,7 +9,7 @@ export class Architect extends TagBasedMilestone {
   }
 
   /** MarsBot needs space 6 of the track that carries City (rulebook C p.9). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.CITY) >= 6;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.CITY) >= 6;
   }
 }

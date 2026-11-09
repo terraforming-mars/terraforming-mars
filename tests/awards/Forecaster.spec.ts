@@ -19,9 +19,9 @@ describe('Forecaster', () => {
     {megacredits: 20, expected: 2},
   ] as const) {
     it('MarsBot counts every 7 M€ as one card with a requirement: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot({megacredits: run.megacredits});
+      const marsBot = fakeMarsBot({megacredits: run.megacredits});
 
-      expect(new Forecaster().marsBotScore(bot)).eq(run.expected);
+      expect(new Forecaster().marsBotScore(marsBot)).eq(run.expected);
     });
   }
 });

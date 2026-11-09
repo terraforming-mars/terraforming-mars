@@ -26,8 +26,8 @@ export class Fundraiser extends BaseMilestone {
    *
    * The Milestones & Awards expansion asks for space 8 (rulebook C p.13).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    const threshold = marsBotUsesBoardGoals(bot, BoardName.TERRA_CIMMERIA_NOVA) ? 10 : 8;
-    return bot.marsBotBoard.trackPosition(Tag.EVENT) >= threshold;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    const threshold = marsBotUsesBoardGoals(marsBot, BoardName.TERRA_CIMMERIA_NOVA) ? 10 : 8;
+    return marsBot.marsBotBoard.trackPosition(Tag.EVENT) >= threshold;
   }
 }

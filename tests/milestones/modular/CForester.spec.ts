@@ -9,10 +9,10 @@ describe('CForester', () => {
     {plant: 10, expected: true},
   ] as const) {
     it('MarsBot needs space 10 of its Bio track: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.PLANT, run.plant);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.PLANT, run.plant);
 
-      expect(new CForester().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new CForester().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

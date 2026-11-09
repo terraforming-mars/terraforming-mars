@@ -46,10 +46,10 @@ describe('Fundraiser', () => {
   ] as const) {
     it('MarsBot needs space 10 of its Event track on Terra Cimmeria and space 8 with the expansion: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
-      const bot = fakeMarsBot({game});
-      setTrack(bot, Tag.EVENT, run.event);
+      const marsBot = fakeMarsBot({game});
+      setTrack(marsBot, Tag.EVENT, run.event);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

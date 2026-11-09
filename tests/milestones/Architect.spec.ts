@@ -20,10 +20,10 @@ describe('Architect', () => {
     {city: 6, expected: true},
   ] as const) {
     it('MarsBot needs space 6 of its City track: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.CITY, run.city);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.CITY, run.city);
 
-      expect(new Architect().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new Architect().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

@@ -19,7 +19,7 @@ export class Forecaster implements IAward {
   }
 
   /** Counts every 7 of MarsBot's M€ as one card with a requirement (rulebook C p.9 and p.14). */
-  public marsBotScore(bot: IMarsBot): number {
-    return Math.floor(bot.megacredits / 7);
+  public marsBotScore(marsBot: IMarsBot): number {
+    return Math.floor(marsBot.megacredits / 7);
   }
 }

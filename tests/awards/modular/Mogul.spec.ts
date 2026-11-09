@@ -28,10 +28,10 @@ describe('Mogul', () => {
   });
 
   it('MarsBot doubles its most advanced track', () => {
-    const bot = fakeMarsBot();
-    setAllTracks(bot, 2);
-    setTrack(bot, Tag.SCIENCE, 4);
+    const marsBot = fakeMarsBot();
+    setAllTracks(marsBot, 2);
+    setTrack(marsBot, Tag.SCIENCE, 4);
 
-    expect(new Mogul().marsBotScore(bot)).to.eq(8);
+    expect(new Mogul().marsBotScore(marsBot)).to.eq(8);
   });
 });

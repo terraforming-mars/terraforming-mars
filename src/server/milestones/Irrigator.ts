@@ -37,10 +37,10 @@ export class Coastguard extends Irrigator {
    *
    * The Milestones & Awards expansion asks for 4 tiles adjacent to oceans (rulebook C p.13).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    if (marsBotUsesBoardGoals(bot, BoardName.TERRA_CIMMERIA_NOVA)) {
-      return this.canClaim(bot.player);
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    if (marsBotUsesBoardGoals(marsBot, BoardName.TERRA_CIMMERIA_NOVA)) {
+      return this.canClaim(marsBot.player);
     }
-    return this.getScore(bot.player) >= 4;
+    return this.getScore(marsBot.player) >= 4;
   }
 }

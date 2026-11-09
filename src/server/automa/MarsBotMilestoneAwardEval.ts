@@ -2,11 +2,6 @@ import {BoardName} from '@/common/boards/BoardName';
 import {marsBotMapSet} from '@/common/automa/marsBotMapSet';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 
-/** Every track position, the Venus track included when in play. */
-export function marsBotAllTrackPositions(bot: IMarsBot): Array<number> {
-  return bot.marsBotBoard.tracks.map((track) => track.position);
-}
-
 /**
  * Whether MarsBot follows `boardName`'s own milestone and award rules.
  *

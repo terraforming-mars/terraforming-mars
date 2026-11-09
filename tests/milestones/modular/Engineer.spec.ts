@@ -50,7 +50,7 @@ describe('Engineer', () => {
     {power: 4, earth: 5, expected: false},
     {power: 4, earth: 6, expected: true},
   ] as const) {
-    it(`MarsBot needs its Power and Earth tracks to add up to 10, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs its Power and Earth tracks to add up to 10: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.POWER, run.power);
       setTrack(bot, Tag.EARTH, run.earth);

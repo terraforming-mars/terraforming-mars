@@ -31,7 +31,7 @@ describe('RimSettler', () => {
     {boardName: BoardName.HELLAS, modularMA: true, science: 0, power: 5, expected: true},
     {boardName: BoardName.ELYSIUM, modularMA: false, science: 6, power: 4, expected: false},
   ] as const) {
-    it(`MarsBot reads its Jovian track on Hellas and its Energy track elsewhere, ${JSON.stringify(run)}`, () => {
+    it('MarsBot reads its Jovian track on Hellas and its Energy track elsewhere: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: run.boardName, modularMA: run.modularMA});
       // The Milestones & Awards expansion plays MarsBot's Tharsis board on any map.
       const bot = fakeMarsBot({tracks: run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks, game});

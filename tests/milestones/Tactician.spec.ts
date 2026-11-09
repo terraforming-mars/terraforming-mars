@@ -69,7 +69,7 @@ describe('Tactician', () => {
     {megacredits: 34, expected: false},
     {megacredits: 35, expected: true},
   ] as const) {
-    it(`MarsBot needs 35 M€, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs 35 M€: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({megacredits: run.megacredits});
 
       expect(milestone.marsBotCanClaim(bot)).eq(run.expected);

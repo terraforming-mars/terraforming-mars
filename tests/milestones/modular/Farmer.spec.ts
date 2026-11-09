@@ -40,7 +40,7 @@ describe('Farmer', () => {
     {modularMA: true, tag: Tag.PLANT, position: 6, expected: false},
     {modularMA: true, tag: Tag.PLANT, position: 7, expected: true},
   ] as const) {
-    it(`MarsBot follows the Vastitas Borealis rule, except with the Milestones & Awards expansion, ${JSON.stringify(run)}`, () => {
+    it('MarsBot follows the Vastitas Borealis rule, except with the Milestones & Awards expansion: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, modularMA: run.modularMA});
       const bot = fakeMarsBot({game});
       setTrack(bot, run.tag, run.position);

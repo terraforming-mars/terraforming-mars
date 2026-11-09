@@ -7,7 +7,7 @@ describe('Hoverlord', () => {
     {floaters: 6, expected: false},
     {floaters: 7, expected: true},
   ] as const) {
-    it(`MarsBot counts the floaters on its Venus board, ${JSON.stringify(run)}`, () => {
+    it('MarsBot counts the floaters on its Venus board: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({floaters: run.floaters});
 
       expect(new Hoverlord().marsBotCanClaim(bot)).eq(run.expected);

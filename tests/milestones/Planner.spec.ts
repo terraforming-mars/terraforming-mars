@@ -10,7 +10,7 @@ describe('Planner', () => {
     {tag: Tag.PLANT, position: 3, expected: false},
     {tag: Tag.PLANT, position: 4, expected: true},
   ] as const) {
-    it(`MarsBot needs space 4 on every track except Venus, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs space 4 on every track except Venus: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setAllTracks(bot, 4);
       setTrack(bot, Tag.VENUS, 0);

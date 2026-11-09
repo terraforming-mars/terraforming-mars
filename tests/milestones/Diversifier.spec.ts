@@ -52,7 +52,7 @@ describe('Diversifier', () => {
     {plant: 2, expected: false},
     {plant: 3, expected: true},
   ] as const) {
-    it(`MarsBot needs space 3 on 7 tracks, so Venus can stand in for one other track, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs space 3 on 7 tracks, so Venus can stand in for one other track: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setAllTracks(bot, 3);
       setTrack(bot, Tag.VENUS, 2);

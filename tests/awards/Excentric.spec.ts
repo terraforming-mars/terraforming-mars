@@ -20,7 +20,7 @@ describe('Excentric', () => {
     {megacredits: 5, expected: 1},
     {megacredits: 14, expected: 2},
   ] as const) {
-    it(`MarsBot counts every 5 M€ as one resource, ${JSON.stringify(run)}`, () => {
+    it('MarsBot counts every 5 M€ as one resource: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot({megacredits: run.megacredits});
 
       expect(new Excentric().marsBotScore(bot)).eq(run.expected);

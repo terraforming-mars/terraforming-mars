@@ -72,7 +72,7 @@ describe('Traveller', () => {
     {jovian: 3, earth: 6, expected: 11},
     {jovian: 7, earth: 2, expected: 12},
   ] as const) {
-    it(`MarsBot scores the higher of its Jovian and Earth tracks plus 5, ${JSON.stringify(run)}`, () => {
+    it('MarsBot scores the higher of its Jovian and Earth tracks plus 5: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.JOVIAN, run.jovian);
       setTrack(bot, Tag.EARTH, run.earth);

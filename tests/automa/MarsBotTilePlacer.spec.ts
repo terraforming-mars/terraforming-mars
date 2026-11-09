@@ -189,7 +189,7 @@ describe('MarsBotTilePlacer', () => {
     {cost: 3, expected: '04'},
     {cost: 0, expected: '28'},
   ] as const) {
-    it(`counts through the tied spaces from the first one, ${JSON.stringify(run)}`, () => {
+    it('counts through the tied spaces from the first one: ' + JSON.stringify(run), () => {
       // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
       for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
         if (space.id !== '04' && space.id !== '28') {

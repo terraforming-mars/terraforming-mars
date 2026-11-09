@@ -53,7 +53,7 @@ describe('Diversifier', () => {
       {plant: 2, expected: false},
       {plant: 3, expected: true},
     ]) {
-      const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setAllTracks(bot, 3);
       setTrack(bot, Tag.VENUS, 2);
       setTrack(bot, Tag.PLANT, run.plant);

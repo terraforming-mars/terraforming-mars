@@ -17,7 +17,7 @@ describe('Magnate', () => {
 
   it('MarsBot counts the green cards in its played pile', () => {
     const types = [CardType.EVENT, CardType.AUTOMATED, CardType.ACTIVE, CardType.AUTOMATED];
-    const bot = {...fakeMarsBot(), playedProjectCards: types.map((type) => fakeCard({type}))};
+    const bot = fakeMarsBot({playedProjectCards: types.map((type) => fakeCard({type}))});
 
     expect(new Magnate().marsBotScore(bot)).eq(2);
   });

@@ -82,8 +82,8 @@ describe('Cloner', () => {
     const newPlayer = new Player('new-player1', 'red', false, 0, 'p-new-player1-id');
     const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
 
-    const marsBot = newGame.marsBotPlayer!;
-    expect(marsBot.id).eq('p-g-new-id-marsbot');
-    expect(Turmoil.getTurmoil(newGame).delegateReserve.get(marsBot)).eq(DELEGATES_PER_PLAYER);
+    const botPlayer = newGame.marsBotPlayer!;
+    expect(botPlayer.id).eq('p-g-new-id-marsbot');
+    expect(Turmoil.getTurmoil(newGame).delegateReserve.get(botPlayer)).eq(DELEGATES_PER_PLAYER);
   });
 });

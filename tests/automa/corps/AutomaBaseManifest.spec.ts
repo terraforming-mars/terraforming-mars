@@ -35,12 +35,12 @@ function recordingBot(onAdvance?: () => void) {
   const record = (name: string) => (...args: Array<unknown>) => {
     calls.push(`${name}(${args.join(', ')})`);
   };
-  const bot: IMarsBot = fakeMarsBot({
+  const marsBot: IMarsBot = fakeMarsBot({
     game,
     gainMc: record('gainMc'),
     advanceTrack: (trackIndex) => {
       record('advanceTrack')(trackIndex);
-      bot.marsBotBoard.tracks[trackIndex].position++;
+      marsBot.marsBotBoard.tracks[trackIndex].position++;
       onAdvance?.();
     },
     raiseTemperature: record('raiseTemperature'),
@@ -57,21 +57,21 @@ function recordingBot(onAdvance?: () => void) {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot, calls, corpState};
+  return {bot: marsBot, calls, corpState};
 }
 
 /** A trigger on a corporation, applied to a fresh bot. */
-type Trigger = (bot: IMarsBot, c: IMarsBotCorp) => void;
+type Trigger = (marsBot: IMarsBot, c: IMarsBotCorp) => void;
 
-const setup: Trigger = (bot, c) => c.setup!(bot);
-const beforeActionPhase: Trigger = (bot, c) => c.beforeActionPhase!(bot);
-const cube = (track: number, cubeType: CubeType): Trigger => (bot, c) => c.effect!.onTrackCubeTrigger!(bot, track, 1, cubeType);
-const resolves = (card: IProjectCard): Trigger => (bot, c) => c.effect!.onProjectCardResolved!(bot, card);
-const plays = (card: IProjectCard): Trigger => (bot, c) => c.effect!.onHumanCardPlayed!(bot, card);
-const tile = (tileType: TileType, byMarsBot: boolean): Trigger => (bot, c) => c.effect!.onTilePlaced!(bot, byMarsBot, tileType, bot.game.board.spaces[0]);
-const generation2: Trigger = (bot, c) => {
-  bot.game.generation = 2;
-  c.beforeActionPhase!(bot);
+const setup: Trigger = (marsBot, c) => c.setup!(marsBot);
+const beforeActionPhase: Trigger = (marsBot, c) => c.beforeActionPhase!(marsBot);
+const cube = (track: number, cubeType: CubeType): Trigger => (marsBot, c) => c.effect!.onTrackCubeTrigger!(marsBot, track, 1, cubeType);
+const resolves = (card: IProjectCard): Trigger => (marsBot, c) => c.effect!.onProjectCardResolved!(marsBot, card);
+const plays = (card: IProjectCard): Trigger => (marsBot, c) => c.effect!.onHumanCardPlayed!(marsBot, card);
+const tile = (tileType: TileType, byMarsBot: boolean): Trigger => (marsBot, c) => c.effect!.onTilePlaced!(marsBot, byMarsBot, tileType, marsBot.game.board.spaces[0]);
+const generation2: Trigger = (marsBot, c) => {
+  marsBot.game.generation = 2;
+  c.beforeActionPhase!(marsBot);
 };
 
 // The calls each corporation makes into the bot. Rulebook B p.1 for the Setup box and Tharsis Republic,
@@ -111,8 +111,8 @@ describe('AutomaBaseManifest', () => {
   for (const [name, label, trigger, expected] of handlers) {
     it(`${name} calls into MarsBot as its card says, ${label}`, () => {
       expect(corp(name).name).eq(name);
-      const {bot, calls} = recordingBot();
-      trigger(bot, corp(name));
+      const {bot: marsBot, calls} = recordingBot();
+      trigger(marsBot, corp(name));
       expect(calls).deep.eq(expected);
     });
   }
@@ -156,13 +156,13 @@ describe('AutomaBaseManifest', () => {
     {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
   ]) {
     it('Mining Guild counts down from 10, and advances the building track each time the card empties: ' + JSON.stringify(run), () => {
-      const {bot, calls, corpState} = recordingBot();
-      corp(CardName.MINING_GUILD).setup!(bot);
+      const {bot: marsBot, calls, corpState} = recordingBot();
+      corp(CardName.MINING_GUILD).setup!(marsBot);
       if (run.mcOnCard !== undefined) {
         corpState.set('mcOnCard', run.mcOnCard);
       }
-      bot.marsBotBoard.tracks[BUILDING].position = run.building ?? 3;
-      corp(CardName.MINING_GUILD).effect!.onMcGained!(bot, run.gain);
+      marsBot.marsBotBoard.tracks[BUILDING].position = run.building ?? 3;
+      corp(CardName.MINING_GUILD).effect!.onMcGained!(marsBot, run.gain);
       expect(corpState.get('mcOnCard')).eq(run.card);
       expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${BUILDING})`));
     });
@@ -170,18 +170,18 @@ describe('AutomaBaseManifest', () => {
 
   it('Mining Guild refills the card before the advance, so the M€ the advance earns comes off the new card', () => {
     const effect = corp(CardName.MINING_GUILD).effect!;
-    const {bot, corpState} = recordingBot(() => effect.onMcGained!(bot, 2));
+    const {bot: marsBot, corpState} = recordingBot(() => effect.onMcGained!(marsBot, 2));
     corpState.set('mcOnCard', 1);
-    effect.onMcGained!(bot, 1);
+    effect.onMcGained!(marsBot, 1);
     expect(corpState.get('mcOnCard')).eq(8);
   });
 
   // Like Philares (BGG 3513998), nothing advances after the game has ended
   it('Mining Guild stops counting down once the game has ended', () => {
-    const {bot, calls, corpState} = recordingBot();
-    bot.game.phase = Phase.END;
+    const {bot: marsBot, calls, corpState} = recordingBot();
+    marsBot.game.phase = Phase.END;
     corpState.set('mcOnCard', 2);
-    corp(CardName.MINING_GUILD).effect!.onMcGained!(bot, 5);
+    corp(CardName.MINING_GUILD).effect!.onMcGained!(marsBot, 5);
     expect(corpState.get('mcOnCard')).eq(2);
     expect(calls).is.empty;
   });

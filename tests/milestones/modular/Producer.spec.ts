@@ -65,11 +65,11 @@ describe('Producer', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs its three most advanced tracks other than Venus to add up to 16', () => {
-    for (const run of [
-      {science: 4, expected: false},
-      {science: 5, expected: true},
-    ]) {
+  for (const run of [
+    {science: 4, expected: false},
+    {science: 5, expected: true},
+  ] as const) {
+    it(`MarsBot needs its three most advanced tracks other than Venus to add up to 16, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       setAllTracks(bot, 2);
       setTrack(bot, Tag.VENUS, 12);
@@ -77,7 +77,7 @@ describe('Producer', () => {
       setTrack(bot, Tag.EARTH, 5);
       setTrack(bot, Tag.SCIENCE, run.science);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

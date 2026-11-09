@@ -60,19 +60,19 @@ describe('Philantropist', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot counts the cards with VP in its played pile', () => {
-    // Large Convoy is an event and Energy Tapping loses a VP, so neither counts.
-    const cards = [
-      new DustSeals(), new AntiGravityTechnology(), new Ants(), new GanymedeColony(), new LargeConvoy(), new EnergyTapping(),
-    ];
+  // Large Convoy is an event and Energy Tapping loses a VP, so neither counts.
+  const cards = [
+    new DustSeals(), new AntiGravityTechnology(), new Ants(), new GanymedeColony(), new LargeConvoy(), new EnergyTapping(),
+  ];
 
-    for (const run of [
-      {playedProjectCards: cards, expected: false},
-      {playedProjectCards: [...cards, new SpaceStation()], expected: true},
-    ]) {
+  for (const run of [
+    {playedProjectCards: cards, expected: false},
+    {playedProjectCards: [...cards, new SpaceStation()], expected: true},
+  ]) {
+    it(`MarsBot counts the cards with VP in its played pile, ${run.playedProjectCards.length} cards`, () => {
       const bot = {...fakeMarsBot(), playedProjectCards: run.playedProjectCards};
 
-      expect(milestone.marsBotCanClaim(bot), `${run.playedProjectCards.length} cards`).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

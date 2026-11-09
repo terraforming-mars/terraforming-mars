@@ -18,15 +18,15 @@ describe('Tycoon10', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs 10 blue and green cards in its played pile, events aside', () => {
-    for (const run of [
-      {cards: 9, expected: false},
-      {cards: 10, expected: true},
-    ]) {
+  for (const run of [
+    {cards: 9, expected: false},
+    {cards: 10, expected: true},
+  ] as const) {
+    it(`MarsBot needs 10 blue and green cards in its played pile, events aside, ${JSON.stringify(run)}`, () => {
       const types = [CardType.EVENT, CardType.EVENT, ...Array<CardType>(run.cards).fill(CardType.ACTIVE)];
       const bot = {...fakeMarsBot(), playedProjectCards: types.map((type) => fakeCard({type}))};
 
-      expect(new Tycoon10().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Tycoon10().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

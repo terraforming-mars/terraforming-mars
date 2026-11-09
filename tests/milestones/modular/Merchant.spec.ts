@@ -142,17 +142,17 @@ describe('Merchant', () => {
     });
   });
 
-  it('MarsBot needs space 2 on every track except Venus', () => {
-    for (const run of [
-      {plant: 1, expected: false},
-      {plant: 2, expected: true},
-    ]) {
+  for (const run of [
+    {plant: 1, expected: false},
+    {plant: 2, expected: true},
+  ] as const) {
+    it(`MarsBot needs space 2 on every track except Venus, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       setAllTracks(bot, 2);
       setTrack(bot, Tag.VENUS, 0);
       setTrack(bot, Tag.PLANT, run.plant);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

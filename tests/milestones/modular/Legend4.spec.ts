@@ -18,15 +18,15 @@ describe('Legend4', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs 4 events in its played pile', () => {
-    for (const run of [
-      {events: 3, expected: false},
-      {events: 4, expected: true},
-    ]) {
+  for (const run of [
+    {events: 3, expected: false},
+    {events: 4, expected: true},
+  ] as const) {
+    it(`MarsBot needs 4 events in its played pile, ${JSON.stringify(run)}`, () => {
       const types = [CardType.ACTIVE, CardType.AUTOMATED, ...Array<CardType>(run.events).fill(CardType.EVENT)];
       const bot = {...fakeMarsBot(), playedProjectCards: types.map((type) => fakeCard({type}))};
 
-      expect(new Legend4().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Legend4().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

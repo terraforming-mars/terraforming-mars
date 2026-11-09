@@ -80,13 +80,13 @@ describe('Landshaper', () => {
     expect(milestone.canClaim(player)).to.be.true;
   });
 
-  it('MarsBot needs a city, a greenery and space 5 of its Building track', () => {
-    for (const run of [
-      {city: false, greenery: true, building: 5, expected: false},
-      {city: true, greenery: false, building: 5, expected: false},
-      {city: true, greenery: true, building: 4, expected: false},
-      {city: true, greenery: true, building: 5, expected: true},
-    ]) {
+  for (const run of [
+    {city: false, greenery: true, building: 5, expected: false},
+    {city: true, greenery: false, building: 5, expected: false},
+    {city: true, greenery: true, building: 4, expected: false},
+    {city: true, greenery: true, building: 5, expected: true},
+  ] as const) {
+    it(`MarsBot needs a city, a greenery and space 5 of its Building track, ${JSON.stringify(run)}`, () => {
       const [game, player] = testGame(1);
       const bot = {...fakeMarsBot(), game, player};
       if (run.city) {
@@ -97,7 +97,7 @@ describe('Landshaper', () => {
       }
       setTrack(bot, Tag.BUILDING, run.building);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

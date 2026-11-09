@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {sum} from '../../../common/utils/utils';
 import {Units} from '../../../common/Units';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotMarsTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Producer extends BaseMilestone {
   public readonly automaDescription = '3+ tracks (except Venus) ≥ 16';
@@ -20,7 +20,10 @@ export class Producer extends BaseMilestone {
 
   /** MarsBot needs its top three tracks other than Venus at 16 or more (rulebook C p.14). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    const [first, second, third] = marsBotMarsTrackPositions(bot).sort((a, b) => b - a);
+    const [first, second, third] = bot.marsBotBoard.tracks
+      .filter((track) => !track.definition.tags.includes(Tag.VENUS))
+      .map((track) => track.position)
+      .sort((a, b) => b - a);
     return first + second + third >= 16;
   }
 }

@@ -49,18 +49,18 @@ describe('Sponsor', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot counts the cards costing 20 M€ or more in its played pile, events included', () => {
-    const cheap = fakeCard({cost: 19, type: CardType.ACTIVE});
-    const event = fakeCard({cost: 20, type: CardType.EVENT});
-    const automated = fakeCard({cost: 30, type: CardType.AUTOMATED});
+  const cheap = fakeCard({cost: 19, type: CardType.ACTIVE});
+  const event = fakeCard({cost: 20, type: CardType.EVENT});
+  const automated = fakeCard({cost: 30, type: CardType.AUTOMATED});
 
-    for (const run of [
-      {playedProjectCards: [cheap, event, automated], expected: false},
-      {playedProjectCards: [cheap, event, automated, fakeCard({cost: 20, type: CardType.ACTIVE})], expected: true},
-    ]) {
+  for (const run of [
+    {playedProjectCards: [cheap, event, automated], expected: false},
+    {playedProjectCards: [cheap, event, automated, fakeCard({cost: 20, type: CardType.ACTIVE})], expected: true},
+  ]) {
+    it(`MarsBot counts the cards costing 20 M€ or more in its played pile, events included, ${run.playedProjectCards.length} cards`, () => {
       const bot = {...fakeMarsBot(), playedProjectCards: run.playedProjectCards};
 
-      expect(milestone.marsBotCanClaim(bot), `${run.playedProjectCards.length} cards`).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

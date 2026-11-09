@@ -2,7 +2,7 @@ import {IMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {Units} from '../../../common/Units';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotMarsTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {Tag} from '../../../common/cards/Tag';
 
 const TWO_OF_EACH: Units = Units.every(2);
 
@@ -24,6 +24,8 @@ export class Merchant implements IMilestone {
 
   /** MarsBot needs space 2 on every track except Venus (rulebook C p.13). */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    return marsBotMarsTrackPositions(bot).every((position) => position >= 2);
+    return bot.marsBotBoard.tracks
+      .filter((track) => !track.definition.tags.includes(Tag.VENUS))
+      .every((track) => track.position >= 2);
   }
 }

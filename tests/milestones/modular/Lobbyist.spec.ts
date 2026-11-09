@@ -67,18 +67,18 @@ describe('Lobbyist', () => {
     expect(milestone.getScore(player)).to.eq(0);
   });
 
-  it('MarsBot needs the Chairman and 2 Party Leaders', () => {
-    const bot = {...fakeMarsBot(), game, player};
+  for (const run of [
+    {chairman: false, leaders: 2, expected: false},
+    {chairman: true, leaders: 1, expected: false},
+    {chairman: true, leaders: 2, expected: true},
+  ] as const) {
+    it(`MarsBot needs the Chairman and 2 Party Leaders, ${JSON.stringify(run)}`, () => {
+      const bot = {...fakeMarsBot(), game, player};
 
-    for (const run of [
-      {chairman: false, leaders: 2, expected: false},
-      {chairman: true, leaders: 1, expected: false},
-      {chairman: true, leaders: 2, expected: true},
-    ]) {
       turmoil.chairman = run.chairman ? player : 'NEUTRAL';
       turmoil.parties.forEach((party, index) => party.partyLeader = index < run.leaders ? player : undefined);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

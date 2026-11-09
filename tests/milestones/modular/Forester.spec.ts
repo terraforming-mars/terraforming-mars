@@ -16,15 +16,15 @@ describe('Forester', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs space 6 of its Bio track', () => {
-    for (const run of [
-      {plant: 5, expected: false},
-      {plant: 6, expected: true},
-    ]) {
+  for (const run of [
+    {plant: 5, expected: false},
+    {plant: 6, expected: true},
+  ] as const) {
+    it(`MarsBot needs space 6 of its Bio track, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.PLANT, run.plant);
 
-      expect(new Forester().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Forester().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

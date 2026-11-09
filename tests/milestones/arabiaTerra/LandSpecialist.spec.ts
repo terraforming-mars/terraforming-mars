@@ -89,7 +89,7 @@ describe('LandSpecialist', () => {
     {destroyedBonusCards: 3, expected: true},
   ] as const) {
     it(`MarsBot needs 3 destroyed bonus cards, ${JSON.stringify(run)}`, () => {
-      const bot = {...fakeMarsBot(), destroyedBonusCards: run.destroyedBonusCards};
+      const bot = fakeMarsBot({destroyedBonusCards: run.destroyedBonusCards});
 
       expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
     });

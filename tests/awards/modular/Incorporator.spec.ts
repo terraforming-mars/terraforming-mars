@@ -29,7 +29,7 @@ describe('Incorporator', () => {
       fakeCard({cost: 10, type: CardType.ACTIVE}),
       fakeCard({cost: 11, type: CardType.AUTOMATED}),
     ];
-    const bot = {...fakeMarsBot(), playedProjectCards};
+    const bot = fakeMarsBot({playedProjectCards});
 
     expect(new Incorporator().marsBotScore(bot)).eq(2);
   });

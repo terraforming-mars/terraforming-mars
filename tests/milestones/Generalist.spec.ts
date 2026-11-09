@@ -41,7 +41,7 @@ describe('Generalist', () => {
     {plant: 2, expected: true},
   ] as const) {
     it(`MarsBot needs space 2 on every track except Venus, ${JSON.stringify(run)}`, () => {
-      const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setAllTracks(bot, 2);
       setTrack(bot, Tag.VENUS, 0);
       setTrack(bot, Tag.PLANT, run.plant);

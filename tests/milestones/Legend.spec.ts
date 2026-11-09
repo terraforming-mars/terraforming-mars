@@ -24,7 +24,7 @@ describe('Legend', () => {
   ] as const) {
     it(`MarsBot needs 5 events in its played pile, ${JSON.stringify(run)}`, () => {
       const types = [CardType.ACTIVE, CardType.AUTOMATED, ...Array<CardType>(run.events).fill(CardType.EVENT)];
-      const bot = {...fakeMarsBot(), playedProjectCards: types.map((type) => fakeCard({type}))};
+      const bot = fakeMarsBot({playedProjectCards: types.map((type) => fakeCard({type}))});
 
       expect(new Legend().marsBotCanClaim(bot)).eq(run.expected);
     });

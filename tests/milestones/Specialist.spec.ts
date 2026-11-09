@@ -23,7 +23,7 @@ describe('Specialist', () => {
     {tag: Tag.VENUS, position: 10, expected: true},
   ] as const) {
     it(`MarsBot needs space 10 on any one track, Venus included, ${JSON.stringify(run)}`, () => {
-      const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
+      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setTrack(bot, run.tag, run.position);
 
       expect(new Specialist().marsBotCanClaim(bot)).eq(run.expected);

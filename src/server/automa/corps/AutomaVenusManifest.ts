@@ -16,16 +16,16 @@ const VIRON: IMarsBotCorp = {
   tags: [Tag.MICROBE],
   requiredExpansions: ['venus', 'colonies'],
   effect: {
-    onProjectCardResolved(bot, card) {
+    onProjectCardResolved(marsBot, card) {
       if (card.type !== CardType.ACTIVE || !isIActionCard(card)) {
         return;
       }
-      bot.addFloaters(1);
-      bot.setCorpState('actionCardsPlayed', bot.getCorpState('actionCardsPlayed') + 1);
-      bot.game.log('MarsBot (Viron): active card with an action played, +1 floater');
+      marsBot.addFloaters(1);
+      marsBot.setCorpState('actionCardsPlayed', marsBot.getCorpState('actionCardsPlayed') + 1);
+      marsBot.game.log('MarsBot (Viron): active card with an action played, +1 floater');
     },
-    vpBonus(bot) {
-      return bot.getCorpState('actionCardsPlayed');
+    vpBonus(marsBot) {
+      return marsBot.getCorpState('actionCardsPlayed');
     },
   },
 };
@@ -37,14 +37,14 @@ const CELESTIC: IMarsBotCorp = {
   tags: [Tag.VENUS],
   requiredExpansions: ['venus', 'colonies'],
   draftPriority: {type: 'tags', tags: [Tag.VENUS, Tag.JOVIAN]},
-  setup(bot) {
-    bot.addFloaters(1);
-    bot.game.log('MarsBot (Celestic): +1 floater');
+  setup(marsBot) {
+    marsBot.addFloaters(1);
+    marsBot.game.log('MarsBot (Celestic): +1 floater');
   },
   effect: {
-    onFailedAction(bot) {
-      bot.addFloaters(1);
-      bot.game.log('MarsBot (Celestic): Failed Action, +1 floater');
+    onFailedAction(marsBot) {
+      marsBot.addFloaters(1);
+      marsBot.game.log('MarsBot (Celestic): Failed Action, +1 floater');
     },
   },
   roundStart: floaterAtRoundStart('Celestic'),
@@ -56,20 +56,20 @@ const MORNINGSTAR: IMarsBotCorp = {
   description: 'Tags: 2 Venus. Setup: remove Lobbyists, add Venusian Lobby. Silver resource cubes on Venus track earn 5 MC each.',
   tags: [Tag.VENUS, Tag.VENUS],
   requiredExpansions: ['venus'],
-  setup(bot) {
+  setup(marsBot) {
     // With Venus Next the bonus deck's Lobbyists is B15
-    bot.removeBonusCard(BonusCardId.B06_LOBBYISTS);
-    bot.removeBonusCard(BonusCardId.B15_LOBBYISTS_VENUS);
-    bot.addBonusCardToBonusDeck(BonusCardId.B26_VENUSIAN_LOBBY);
-    bot.game.log('MarsBot (Morningstar): Lobbyists removed, Venusian Lobby added');
+    marsBot.removeBonusCard(BonusCardId.B06_LOBBYISTS);
+    marsBot.removeBonusCard(BonusCardId.B15_LOBBYISTS_VENUS);
+    marsBot.addBonusCardToBonusDeck(BonusCardId.B26_VENUSIAN_LOBBY);
+    marsBot.game.log('MarsBot (Morningstar): Lobbyists removed, Venusian Lobby added');
   },
   // Silver resource cubes on the Venus track (index 7, present only on the Venus board) at positions 5-9 and 11-12.
   trackCubes: [5, 6, 7, 8, 9, 11, 12].map((position) => ({trackIndex: 7, position, cubeType: 'credit' as const})),
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
       if (cubeType === 'credit') {
-        bot.gainMc(SILVER_CUBE_MC);
-        bot.game.log('MarsBot (Morningstar): silver resource cube, +5 M€');
+        marsBot.gainMc(SILVER_CUBE_MC);
+        marsBot.game.log('MarsBot (Morningstar): silver resource cube, +5 M€');
       }
     },
   },
@@ -83,10 +83,10 @@ const APHRODITE: IMarsBotCorp = {
   requiredExpansions: ['venus'],
   draftPriority: {type: 'tags', tags: [Tag.PLANT, Tag.ANIMAL, Tag.VENUS]},
   effect: {
-    onVenusRaised(bot, steps) {
+    onVenusRaised(marsBot, steps) {
       const mc = 2 * steps;
-      bot.gainMc(mc);
-      bot.game.log('MarsBot (Aphrodite): Venus raised ${0} step(s), +${1} M€', (b) => b.number(steps).number(mc));
+      marsBot.gainMc(mc);
+      marsBot.game.log('MarsBot (Aphrodite): Venus raised ${0} step(s), +${1} M€', (b) => b.number(steps).number(mc));
     },
   },
 };
@@ -97,14 +97,14 @@ const STORMCRAFT: IMarsBotCorp = {
   description: 'Tag: Jovian. Setup: +1 floater. Each round start: +1 floater. Spending floaters for an extra card also raises temperature +1.',
   tags: [Tag.JOVIAN],
   requiredExpansions: ['venus', 'colonies'],
-  setup(bot) {
-    bot.addFloaters(1);
-    bot.game.log('MarsBot (Stormcraft): +1 floater');
+  setup(marsBot) {
+    marsBot.addFloaters(1);
+    marsBot.game.log('MarsBot (Stormcraft): +1 floater');
   },
   effect: {
-    onFloatersSpentForExtraCard(bot) {
-      bot.raiseTemperature(1);
-      bot.game.log('MarsBot (Stormcraft): floaters spent for an extra card, temperature +1');
+    onFloatersSpentForExtraCard(marsBot) {
+      marsBot.raiseTemperature(1);
+      marsBot.game.log('MarsBot (Stormcraft): floaters spent for an extra card, temperature +1');
     },
   },
   roundStart: floaterAtRoundStart('Stormcraft'),

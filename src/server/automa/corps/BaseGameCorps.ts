@@ -18,31 +18,31 @@ export function whiteTrackCubes(trackIndex: number): MarsBotTrackCube[] {
 export function bonusCardBeforeActionPhase(bonusCardId: BonusCardId, corpName: string): Pick<IMarsBotCorp, 'actionDeckBonusCard' | 'beforeActionPhase'> {
   return {
     actionDeckBonusCard: bonusCardId,
-    beforeActionPhase: (bot) => {
-      if (bot.getCorpState(ACTION_DECK_BONUS_CARD_REMOVED) > 0) {
+    beforeActionPhase: (marsBot) => {
+      if (marsBot.getCorpState(ACTION_DECK_BONUS_CARD_REMOVED) > 0) {
         return;
       }
-      bot.addBonusCardToActionDeck(bonusCardId);
-      bot.game.log(`MarsBot (${corpName}): ${bonusCardId} added to action deck`);
+      marsBot.addBonusCardToActionDeck(bonusCardId);
+      marsBot.game.log(`MarsBot (${corpName}): ${bonusCardId} added to action deck`);
     },
   };
 }
 
 /** Factory for the common "add 1 floater at round start" pattern. */
-export function floaterAtRoundStart(corpName: string): (bot: IMarsBot) => void {
-  return (bot) => {
-    bot.addFloaters(1);
-    bot.game.log(`MarsBot (${corpName}): round start, +1 floater`);
+export function floaterAtRoundStart(corpName: string): (marsBot: IMarsBot) => void {
+  return (marsBot) => {
+    marsBot.addFloaters(1);
+    marsBot.game.log(`MarsBot (${corpName}): round start, +1 floater`);
   };
 }
 
 /** Shared cube handler: white -> advance least-advanced track, black -> advance space track. */
-export function whiteLeastBlackSpaceHandler(bot: IMarsBot, cubeType: CubeType, corpName: string): void {
+export function whiteLeastBlackSpaceHandler(marsBot: IMarsBot, cubeType: CubeType, corpName: string): void {
   if (cubeType === 'white') {
-    bot.advanceTrack(bot.marsBotBoard.getLeastAdvancedTrackIndex());
-    bot.game.log(`MarsBot (${corpName}): white cube: advance least-advanced track`);
+    marsBot.advanceTrack(marsBot.marsBotBoard.getLeastAdvancedTrackIndex());
+    marsBot.game.log(`MarsBot (${corpName}): white cube: advance least-advanced track`);
   } else if (cubeType === 'black') {
-    bot.advanceTrack(1);
-    bot.game.log(`MarsBot (${corpName}): black cube: advance space track`);
+    marsBot.advanceTrack(1);
+    marsBot.game.log(`MarsBot (${corpName}): black cube: advance space track`);
   }
 }

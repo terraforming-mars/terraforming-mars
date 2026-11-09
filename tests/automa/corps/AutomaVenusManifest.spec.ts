@@ -17,7 +17,7 @@ function recordingBot(): {bot: IMarsBot, calls: Array<string>} {
   const [game] = testGame(1);
   const calls: Array<string> = [];
   const corpState = new Map<string, number>();
-  const bot = fakeMarsBot({
+  const marsBot = fakeMarsBot({
     game,
     addFloaters: (count) => calls.push(`addFloaters(${count})`),
     gainMc: (amount) => calls.push(`gainMc(${amount})`),
@@ -27,7 +27,7 @@ function recordingBot(): {bot: IMarsBot, calls: Array<string>} {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot, calls};
+  return {bot: marsBot, calls};
 }
 
 const corp = (name: CardName): IMarsBotCorp => AUTOMA_VENUS_MANIFEST.corps[name]!;
@@ -35,18 +35,18 @@ const corp = (name: CardName): IMarsBotCorp => AUTOMA_VENUS_MANIFEST.corps[name]
 describe('AutomaVenusManifest', () => {
   // C25: a blue card with a red arrow is an active card with an action
   it('Viron adds a floater and scores a VP for each active card with an action', () => {
-    const {bot, calls} = recordingBot();
+    const {bot: marsBot, calls} = recordingBot();
     const effect = corp(CardName.VIRON).effect!;
 
-    effect.onProjectCardResolved!(bot, new Birds());
-    effect.onProjectCardResolved!(bot, new Decomposers());
+    effect.onProjectCardResolved!(marsBot, new Birds());
+    effect.onProjectCardResolved!(marsBot, new Decomposers());
 
     expect(calls).deep.eq(['addFloaters(1)']);
-    expect(effect.vpBonus!(bot)).eq(1);
+    expect(effect.vpBonus!(marsBot)).eq(1);
   });
 
   // The Setup and Round Start boxes (rulebook B p.1, p.3), then the effect
-  type Hook = (c: IMarsBotCorp) => ((bot: IMarsBot, ...args: Array<number>) => void) | undefined;
+  type Hook = (c: IMarsBotCorp) => ((marsBot: IMarsBot, ...args: Array<number>) => void) | undefined;
   const runs: Array<{name: CardName, hooks: Array<Hook>, calls: Array<string>}> = [
     {
       name: CardName.CELESTIC,
@@ -62,10 +62,10 @@ describe('AutomaVenusManifest', () => {
   ];
   for (const run of runs) {
     it(`${run.name}: ${run.calls.join(', ')}`, () => {
-      const {bot, calls} = recordingBot();
+      const {bot: marsBot, calls} = recordingBot();
 
       // Aphrodite reads the 3 steps Venus is raised, the other hooks ignore them
-      run.hooks.forEach((hook) => hook(corp(run.name))!(bot, 3));
+      run.hooks.forEach((hook) => hook(corp(run.name))!(marsBot, 3));
 
       expect(calls).deep.eq(run.calls);
     });
@@ -73,12 +73,12 @@ describe('AutomaVenusManifest', () => {
 
   // With Venus Next the bonus deck's Lobbyists is B15. Its silver resource cubes sit on the Venus track (rulebook B p.3)
   it('Morning Star swaps Lobbyists for Venusian Lobby, and its silver resource cubes pay 5 M€', () => {
-    const {bot, calls} = recordingBot();
+    const {bot: marsBot, calls} = recordingBot();
     const morningStar = corp(CardName.MORNING_STAR_INC);
     const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
 
-    morningStar.setup!(bot);
-    morningStar.effect!.onTrackCubeTrigger!(bot, 7, 5, 'credit');
+    morningStar.setup!(marsBot);
+    morningStar.effect!.onTrackCubeTrigger!(marsBot, 7, 5, 'credit');
 
     expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)', 'addBonusCardToBonusDeck(B26)', 'gainMc(5)']);
     expect(corpTrackCubes(morningStar, board).map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`))

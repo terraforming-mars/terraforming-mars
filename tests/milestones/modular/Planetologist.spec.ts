@@ -51,7 +51,7 @@ describe('Planetologist', () => {
   ] as const) {
     it(`MarsBot follows the Terra Cimmeria rule, except with the Milestones & Awards expansion, ${JSON.stringify(run)}`, () => {
       const [game] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
-      const bot = {...fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]), game};
+      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK], game});
       setTrack(bot, Tag.POWER, run.power);
       setTrack(bot, Tag.EARTH, run.earth);
       setTrack(bot, Tag.VENUS, run.venus);

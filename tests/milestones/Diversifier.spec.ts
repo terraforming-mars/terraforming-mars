@@ -48,17 +48,17 @@ describe('Diversifier', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs space 3 on 7 tracks, so Venus can stand in for one other track', () => {
-    for (const run of [
-      {plant: 2, expected: false},
-      {plant: 3, expected: true},
-    ]) {
+  for (const run of [
+    {plant: 2, expected: false},
+    {plant: 3, expected: true},
+  ] as const) {
+    it(`MarsBot needs space 3 on 7 tracks, so Venus can stand in for one other track, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
       setAllTracks(bot, 3);
       setTrack(bot, Tag.VENUS, 2);
       setTrack(bot, Tag.PLANT, run.plant);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

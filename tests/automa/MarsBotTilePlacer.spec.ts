@@ -183,26 +183,24 @@ describe('MarsBotTilePlacer', () => {
     expect(game.projectDeck.discardPile).has.length(1);
   });
 
-  it('counts through the tied spaces from the first one', () => {
-    // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
-    for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
-      if (space.id !== '04' && space.id !== '28') {
-        game.simpleAddTile(human, space, {tileType: TileType.OCEAN});
+  for (const run of [
+    {cost: 1, expected: '04'},
+    {cost: 2, expected: '28'},
+    {cost: 3, expected: '04'},
+    {cost: 0, expected: '28'},
+  ] as const) {
+    it(`counts through the tied spaces from the first one, ${JSON.stringify(run)}`, () => {
+      // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
+      for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
+        if (space.id !== '04' && space.id !== '28') {
+          game.simpleAddTile(human, space, {tileType: TileType.OCEAN});
+        }
       }
-    }
-
-    const runs = [
-      {cost: 1, expected: '04'},
-      {cost: 2, expected: '28'},
-      {cost: 3, expected: '04'},
-      {cost: 0, expected: '28'},
-    ];
-    for (const run of runs) {
       game.projectDeck.drawPile.push(fakeCard({cost: run.cost}));
 
-      expect(tilePlacer.findOceanSpace()?.id, `cost ${run.cost}`).eq(run.expected);
-    }
-  });
+      expect(tilePlacer.findOceanSpace()?.id).eq(run.expected);
+    });
+  }
 
   it('getPlacementBonusMC pays 1 M€ per bonus icon covered', () => {
     const space = game.board.getSpaceOrThrow('03');

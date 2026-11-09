@@ -18,27 +18,27 @@ describe('RimSettler', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot reads its Jovian track on Hellas and its Energy track elsewhere', () => {
-    // Hellas and Elysium pair Jovian with Science, where Tharsis pairs it with Energy.
-    const scienceJovianTracks = THARSIS_MARSBOT_BOARD.map((track) => ({
-      ...track,
-      tags: track.tags.includes(Tag.SCIENCE) ? [...track.tags, Tag.JOVIAN] : track.tags.filter((tag) => tag !== Tag.JOVIAN),
-    }));
+  // Hellas and Elysium pair Jovian with Science, where Tharsis pairs it with Energy.
+  const scienceJovianTracks = THARSIS_MARSBOT_BOARD.map((track) => ({
+    ...track,
+    tags: track.tags.includes(Tag.SCIENCE) ? [...track.tags, Tag.JOVIAN] : track.tags.filter((tag) => tag !== Tag.JOVIAN),
+  }));
 
-    for (const run of [
-      {boardName: BoardName.HELLAS, modularMA: false, science: 5, power: 6, expected: false},
-      {boardName: BoardName.HELLAS, modularMA: false, science: 6, power: 0, expected: true},
-      {boardName: BoardName.HELLAS, modularMA: true, science: 6, power: 4, expected: false},
-      {boardName: BoardName.HELLAS, modularMA: true, science: 0, power: 5, expected: true},
-      {boardName: BoardName.ELYSIUM, modularMA: false, science: 6, power: 4, expected: false},
-    ]) {
+  for (const run of [
+    {boardName: BoardName.HELLAS, modularMA: false, science: 5, power: 6, expected: false},
+    {boardName: BoardName.HELLAS, modularMA: false, science: 6, power: 0, expected: true},
+    {boardName: BoardName.HELLAS, modularMA: true, science: 6, power: 4, expected: false},
+    {boardName: BoardName.HELLAS, modularMA: true, science: 0, power: 5, expected: true},
+    {boardName: BoardName.ELYSIUM, modularMA: false, science: 6, power: 4, expected: false},
+  ] as const) {
+    it(`MarsBot reads its Jovian track on Hellas and its Energy track elsewhere, ${JSON.stringify(run)}`, () => {
       const [game] = testGame(1, {boardName: run.boardName, modularMA: run.modularMA});
       // The Milestones & Awards expansion plays MarsBot's Tharsis board on any map.
       const bot = fakeMarsBot({tracks: run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks, game});
       setTrack(bot, Tag.SCIENCE, run.science);
       setTrack(bot, Tag.POWER, run.power);
 
-      expect(new RimSettler().marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new RimSettler().marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

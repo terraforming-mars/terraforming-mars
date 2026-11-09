@@ -4,16 +4,16 @@ import {Blacksmith} from '@/server/awards/Blacksmith';
 import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
 
 describe('Blacksmith', () => {
-  it('MarsBot scores the higher of its Building and Space tracks', () => {
-    for (const run of [
-      {building: 3, space: 5, expected: 5},
-      {building: 6, space: 2, expected: 6},
-    ]) {
+  for (const run of [
+    {building: 3, space: 5, expected: 5},
+    {building: 6, space: 2, expected: 6},
+  ] as const) {
+    it(`MarsBot scores the higher of its Building and Space tracks, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.BUILDING, run.building);
       setTrack(bot, Tag.SPACE, run.space);
 
-      expect(new Blacksmith().marsBotScore(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Blacksmith().marsBotScore(bot)).eq(run.expected);
+    });
+  }
 });

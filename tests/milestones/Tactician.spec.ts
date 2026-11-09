@@ -65,14 +65,14 @@ describe('Tactician', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs 35 M€', () => {
-    for (const run of [
-      {megacredits: 34, expected: false},
-      {megacredits: 35, expected: true},
-    ]) {
+  for (const run of [
+    {megacredits: 34, expected: false},
+    {megacredits: 35, expected: true},
+  ] as const) {
+    it(`MarsBot needs 35 M€, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot({megacredits: run.megacredits});
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

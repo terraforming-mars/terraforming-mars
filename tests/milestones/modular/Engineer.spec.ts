@@ -46,16 +46,16 @@ describe('Engineer', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('MarsBot needs its Power and Earth tracks to add up to 10', () => {
-    for (const run of [
-      {power: 4, earth: 5, expected: false},
-      {power: 4, earth: 6, expected: true},
-    ]) {
+  for (const run of [
+    {power: 4, earth: 5, expected: false},
+    {power: 4, earth: 6, expected: true},
+  ] as const) {
+    it(`MarsBot needs its Power and Earth tracks to add up to 10, ${JSON.stringify(run)}`, () => {
       const bot = fakeMarsBot();
       setTrack(bot, Tag.POWER, run.power);
       setTrack(bot, Tag.EARTH, run.earth);
 
-      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+    });
+  }
 });

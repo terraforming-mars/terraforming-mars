@@ -162,11 +162,11 @@ describe('MarsBotBoard', () => {
   });
 
   describe('Tharsis layout', () => {
-    it('gains floaters on the cloud spaces of the Event and Energy tracks', () => {
-      for (const [track, position, action] of [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const) {
-        expect(THARSIS_MARSBOT_BOARD[track].layout[position], `track ${track} space ${position}`).to.eq(action);
-      }
-    });
+    for (const [track, position, action] of [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const) {
+      it(`gains floaters on the cloud spaces of the Event and Energy tracks, track ${track} space ${position}`, () => {
+        expect(THARSIS_MARSBOT_BOARD[track].layout[position]).to.eq(action);
+      });
+    }
   });
 
   describe('with the Venus track', () => {

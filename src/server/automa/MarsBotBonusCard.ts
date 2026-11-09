@@ -64,11 +64,10 @@ export function marsBotBonusCardsFromJSON(names: ReadonlyArray<CardName>): Array
   const cards: Array<MarsBotBonusCard> = [];
   for (const name of names) {
     const id = byName.get(name);
-    if (id !== undefined) {
-      cards.push(bonusCard(id, name));
-    } else {
-      console.warn(`bonus card ${name} not found while loading game.`);
+    if (id === undefined) {
+      throw new Error(`Cannot restore MarsBot bonus deck card ${name}`);
     }
+    cards.push(bonusCard(id, name));
   }
   return cards;
 }

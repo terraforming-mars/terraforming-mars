@@ -28,10 +28,10 @@ describe('Manufacturer', () => {
   });
 
   it('MarsBot scores its Building and Energy tracks combined', () => {
-    const bot = fakeMarsBot();
-    setTrack(bot, Tag.BUILDING, 3);
-    setTrack(bot, Tag.POWER, 2);
+    const marsBot = fakeMarsBot();
+    setTrack(marsBot, Tag.BUILDING, 3);
+    setTrack(marsBot, Tag.POWER, 2);
 
-    expect(new Manufacturer().marsBotScore(bot)).eq(5);
+    expect(new Manufacturer().marsBotScore(marsBot)).eq(5);
   });
 });

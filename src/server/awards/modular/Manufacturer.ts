@@ -12,7 +12,7 @@ export class Manufacturer implements IAward {
   }
 
   /** Scores MarsBot's Building and Energy track spaces combined (rulebook C p.15). */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.BUILDING) + bot.marsBotBoard.trackPosition(Tag.POWER);
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.BUILDING) + marsBot.marsBotBoard.trackPosition(Tag.POWER);
   }
 }

@@ -15,12 +15,12 @@ describe('Collector', () => {
   });
 
   it('MarsBot counts its tracks that reached space 3', () => {
-    const bot = fakeMarsBot();
-    setAllTracks(bot, 2);
-    setTrack(bot, Tag.BUILDING, 3);
-    setTrack(bot, Tag.SPACE, 3);
-    setTrack(bot, Tag.PLANT, 7);
+    const marsBot = fakeMarsBot();
+    setAllTracks(marsBot, 2);
+    setTrack(marsBot, Tag.BUILDING, 3);
+    setTrack(marsBot, Tag.SPACE, 3);
+    setTrack(marsBot, Tag.PLANT, 7);
 
-    expect(new Collector().marsBotScore(bot)).eq(3);
+    expect(new Collector().marsBotScore(marsBot)).eq(3);
   });
 });

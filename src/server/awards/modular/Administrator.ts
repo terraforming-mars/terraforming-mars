@@ -17,7 +17,7 @@ export class Administrator implements IAward {
    *
    * Events don't count, the same as for the human player.
    */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.playedProjectCards.filter((card) => card.type !== CardType.EVENT && card.tags.length === 0).length + 2;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.playedProjectCards.filter((card) => card.type !== CardType.EVENT && card.tags.length === 0).length + 2;
   }
 }

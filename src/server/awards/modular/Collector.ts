@@ -16,7 +16,7 @@ export class Collector implements IAward {
   }
 
   /** Counts MarsBot's tracks that reached space 3, Venus included when in play (rulebook C p.14). */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.tracks.filter((track) => track.position >= 3).length;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.tracks.filter((track) => track.position >= 3).length;
   }
 }

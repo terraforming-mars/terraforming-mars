@@ -13,7 +13,7 @@ export class Biologist implements IAward {
   }
 
   /** Scores MarsBot's Bio track space plus 5 (rulebook C p.14). */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.PLANT) + 5;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.PLANT) + 5;
   }
 }

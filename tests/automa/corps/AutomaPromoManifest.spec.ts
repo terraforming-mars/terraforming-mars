@@ -22,7 +22,7 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 
 /** A bot that records the corp handlers' calls, in order, as `name(arguments)`. `botPlayer` owns MarsBot's tiles. */
-type RecordingBot = {bot: IMarsBot, calls: Array<string>, corpState: Map<string, number>, botPlayer: TestPlayer, human: TestPlayer};
+type RecordingBot = {marsBot: IMarsBot, calls: Array<string>, corpState: Map<string, number>, botPlayer: TestPlayer, human: TestPlayer};
 
 function recordingBot(): RecordingBot {
   const [game, human, botPlayer] = testGame(2);
@@ -47,13 +47,13 @@ function recordingBot(): RecordingBot {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot: marsBot, calls, corpState, botPlayer, human};
+  return {marsBot, calls, corpState, botPlayer, human};
 }
 
 const corp = (name: CardName): IMarsBotCorp => AUTOMA_PROMO_MANIFEST.corps[name]!;
 
 /** Puts `others` tiles of the other side and `own` of the placer's around an empty space, puts a tile on it and runs Philares. */
-function placeTile({bot: marsBot, botPlayer, human}: RecordingBot, byMarsBot: boolean, tileType: TileType, others: number, own: number = 0): void {
+function placeTile({marsBot, botPlayer, human}: RecordingBot, byMarsBot: boolean, tileType: TileType, others: number, own: number = 0): void {
   const [placer, other] = byMarsBot ? [botPlayer, human] : [human, botPlayer];
   const board = marsBot.game.board;
   const space = board.getAvailableSpacesOnLand(placer).find((s) => {
@@ -71,7 +71,7 @@ function placeTile({bot: marsBot, botPlayer, human}: RecordingBot, byMarsBot: bo
 describe('AutomaPromoManifest', () => {
   // C21: the Setup box (rulebook B p.1). A microbe card the player plays costs it 4 M€, a Prelude's too (rulebook B p.4)
   it('Pharmacy Union swaps Meteor Shower for a science card, raises its TR for science cards, and loses 4 M€ for the microbe cards the player plays', () => {
-    const {bot: marsBot, calls} = recordingBot();
+    const {marsBot, calls} = recordingBot();
     const pharmacy = corp(CardName.PHARMACY_UNION);
     marsBot.megacredits = 6;
 
@@ -87,7 +87,7 @@ describe('AutomaPromoManifest', () => {
   });
 
   it('Philares places a greenery, resolves Local Neural Instance and starts with one science resource', () => {
-    const {bot: marsBot, calls, corpState} = recordingBot();
+    const {marsBot, calls, corpState} = recordingBot();
 
     corp(CardName.PHILARES).setup!(marsBot);
 
@@ -108,7 +108,7 @@ describe('AutomaPromoManifest', () => {
 
   it('Philares spends 4 science resources per advance of its most-advanced track that is not maxed, but not for oceans or after the game has ended', () => {
     const rb = recordingBot();
-    const {bot: marsBot, calls, corpState} = rb;
+    const {marsBot, calls, corpState} = rb;
     marsBot.marsBotBoard.tracks[0].position = marsBot.marsBotBoard.tracks[0].definition.layout.length - 1;
     marsBot.marsBotBoard.tracks[1].position = 10;
 
@@ -130,7 +130,7 @@ describe('AutomaPromoManifest', () => {
 
   // C23: the cubes on the building track (rulebook B p.3)
   it('Recyclon advances the plant track for the white cubes on spaces 3, 6, 9, 12, 15 and 18 of the building track', () => {
-    const {bot: marsBot, calls} = recordingBot();
+    const {marsBot, calls} = recordingBot();
     const recyclon = corp(CardName.RECYCLON);
     const board = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
 
@@ -144,7 +144,7 @@ describe('AutomaPromoManifest', () => {
 
   // C24: the Setup box (rulebook B p.1). A microbe card the player plays, a Prelude's too (rulebook B p.4)
   it('Splice gains 8 M€ at setup, 4 M€ for its own microbe cards, and 2 M€ plus 2 M€ for the player for a microbe card that holds no microbes', () => {
-    const {bot: marsBot, calls, human} = recordingBot();
+    const {marsBot, calls, human} = recordingBot();
     const splice = corp(CardName.SPLICE);
 
     splice.setup!(marsBot);
@@ -158,7 +158,7 @@ describe('AutomaPromoManifest', () => {
   });
 
   it('Splice lets the player add a microbe to a microbe card they played instead of gaining 2 M€', () => {
-    const {bot: marsBot, calls, human} = recordingBot();
+    const {marsBot, calls, human} = recordingBot();
     const card = new Decomposers();
 
     corp(CardName.SPLICE).effect!.onHumanCardPlayed!(marsBot, card);

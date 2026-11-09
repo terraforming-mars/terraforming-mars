@@ -13,7 +13,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 
 /** A bot that records the corp handlers' calls, in order, as `name(arguments)`. */
-function recordingBot(): {bot: IMarsBot, calls: Array<string>} {
+function recordingBot(): {marsBot: IMarsBot, calls: Array<string>} {
   const [game] = testGame(1);
   const calls: Array<string> = [];
   const corpState = new Map<string, number>();
@@ -27,7 +27,7 @@ function recordingBot(): {bot: IMarsBot, calls: Array<string>} {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot: marsBot, calls};
+  return {marsBot, calls};
 }
 
 const corp = (name: CardName): IMarsBotCorp => AUTOMA_VENUS_MANIFEST.corps[name]!;
@@ -35,7 +35,7 @@ const corp = (name: CardName): IMarsBotCorp => AUTOMA_VENUS_MANIFEST.corps[name]
 describe('AutomaVenusManifest', () => {
   // C25: a blue card with a red arrow is an active card with an action
   it('Viron adds a floater and scores a VP for each active card with an action', () => {
-    const {bot: marsBot, calls} = recordingBot();
+    const {marsBot, calls} = recordingBot();
     const effect = corp(CardName.VIRON).effect!;
 
     effect.onProjectCardResolved!(marsBot, new Birds());
@@ -62,7 +62,7 @@ describe('AutomaVenusManifest', () => {
   ];
   for (const run of runs) {
     it(`${run.name}: ${run.calls.join(', ')}`, () => {
-      const {bot: marsBot, calls} = recordingBot();
+      const {marsBot, calls} = recordingBot();
 
       // Aphrodite reads the 3 steps Venus is raised, the other hooks ignore them
       run.hooks.forEach((hook) => hook(corp(run.name))!(marsBot, 3));
@@ -73,7 +73,7 @@ describe('AutomaVenusManifest', () => {
 
   // With Venus Next the bonus deck's Lobbyists is B15. Its silver resource cubes sit on the Venus track (rulebook B p.3)
   it('Morning Star swaps Lobbyists for Venusian Lobby, and its silver resource cubes pay 5 M€', () => {
-    const {bot: marsBot, calls} = recordingBot();
+    const {marsBot, calls} = recordingBot();
     const morningStar = corp(CardName.MORNING_STAR_INC);
     const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
 

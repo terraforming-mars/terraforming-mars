@@ -71,6 +71,7 @@ describe('Timer', () => {
       startedAt: 0,
       running: false,
       afterFirstAction,
+      lastStoppedAt: 0,
     });
     expect(legacy(true).serialize().enabled).eq(true);
     expect(legacy(false).serialize().enabled).eq(false);

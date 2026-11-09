@@ -14,7 +14,7 @@ export class Briber implements IMilestone {
   }
 
   /** MarsBot needs 20 M€ on hand, and claiming costs it 12 (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.megacredits >= 20;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.megacredits >= 20;
   }
 }

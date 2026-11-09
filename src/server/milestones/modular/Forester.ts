@@ -15,8 +15,8 @@ export class Forester extends BaseMilestone {
   }
 
   /** MarsBot needs space 6 of its Bio track (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
   }
 }
 

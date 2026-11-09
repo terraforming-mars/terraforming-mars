@@ -58,9 +58,9 @@ describe('Sponsor', () => {
     {playedProjectCards: [cheap, event, automated, fakeCard({cost: 20, type: CardType.ACTIVE})], expected: true},
   ]) {
     it(`MarsBot counts the cards costing 20 M€ or more in its played pile, events included, ${run.playedProjectCards.length} cards`, () => {
-      const bot = fakeMarsBot({playedProjectCards: run.playedProjectCards});
+      const marsBot = fakeMarsBot({playedProjectCards: run.playedProjectCards});
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

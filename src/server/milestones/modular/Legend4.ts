@@ -16,7 +16,7 @@ export class Legend4 extends BaseMilestone {
   }
 
   /** MarsBot needs 4 events in its own played pile (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.playedProjectCards.filter((card) => card.type === CardType.EVENT).length >= 4;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.playedProjectCards.filter((card) => card.type === CardType.EVENT).length >= 4;
   }
 }

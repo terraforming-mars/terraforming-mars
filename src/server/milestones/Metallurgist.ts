@@ -17,7 +17,7 @@ export class Metallurgist extends BaseMilestone {
   }
 
   /** MarsBot needs its Building and Space tracks to add up to 9 (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.BUILDING) + bot.marsBotBoard.trackPosition(Tag.SPACE) >= 9;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.BUILDING) + marsBot.marsBotBoard.trackPosition(Tag.SPACE) >= 9;
   }
 }

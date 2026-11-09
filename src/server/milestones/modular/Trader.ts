@@ -18,7 +18,7 @@ export class Trader extends BaseMilestone {
   }
 
   /** MarsBot needs space 2 on its Bio, Earth and Venus tracks (rulebook C p.14). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return [Tag.PLANT, Tag.EARTH, Tag.VENUS].every((tag) => bot.marsBotBoard.trackPosition(tag) >= 2);
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return [Tag.PLANT, Tag.EARTH, Tag.VENUS].every((tag) => marsBot.marsBotBoard.trackPosition(tag) >= 2);
   }
 }

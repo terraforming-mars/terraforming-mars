@@ -88,16 +88,16 @@ describe('Landshaper', () => {
   ] as const) {
     it('MarsBot needs a city, a greenery and space 5 of its Building track: ' + JSON.stringify(run), () => {
       const [game, player] = testGame(1);
-      const bot = fakeMarsBot({game, player});
+      const marsBot = fakeMarsBot({game, player});
       if (run.city) {
         addCity(player);
       }
       if (run.greenery) {
         addGreenery(player);
       }
-      setTrack(bot, Tag.BUILDING, run.building);
+      setTrack(marsBot, Tag.BUILDING, run.building);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

@@ -40,9 +40,9 @@ export class Landshaper extends BaseMilestone {
   }
 
   /** MarsBot needs a city, a greenery and space 5 of its Building track (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.game.board.getCities(bot.player).length >= 1 &&
-      bot.game.board.getGreeneries(bot.player).length >= 1 &&
-      bot.marsBotBoard.trackPosition(Tag.BUILDING) >= 5;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.game.board.getCities(marsBot.player).length >= 1 &&
+      marsBot.game.board.getGreeneries(marsBot.player).length >= 1 &&
+      marsBot.marsBotBoard.trackPosition(Tag.BUILDING) >= 5;
   }
 }

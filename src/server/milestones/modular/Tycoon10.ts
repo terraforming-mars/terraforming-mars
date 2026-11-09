@@ -17,7 +17,7 @@ export class Tycoon10 extends BaseMilestone {
   }
 
   /** MarsBot needs 10 blue and green cards in its own played pile (rulebook C p.14). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.playedProjectCards.filter((card) => card.type !== CardType.EVENT).length >= 10;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.playedProjectCards.filter((card) => card.type !== CardType.EVENT).length >= 10;
   }
 }

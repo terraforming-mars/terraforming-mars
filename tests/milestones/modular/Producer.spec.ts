@@ -70,14 +70,14 @@ describe('Producer', () => {
     {science: 5, expected: true},
   ] as const) {
     it('MarsBot needs its three most advanced tracks other than Venus to add up to 16: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
-      setAllTracks(bot, 2);
-      setTrack(bot, Tag.VENUS, 12);
-      setTrack(bot, Tag.PLANT, 6);
-      setTrack(bot, Tag.EARTH, 5);
-      setTrack(bot, Tag.SCIENCE, run.science);
+      const marsBot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
+      setAllTracks(marsBot, 2);
+      setTrack(marsBot, Tag.VENUS, 12);
+      setTrack(marsBot, Tag.PLANT, 6);
+      setTrack(marsBot, Tag.EARTH, 5);
+      setTrack(marsBot, Tag.SCIENCE, run.science);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

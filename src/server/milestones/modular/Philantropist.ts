@@ -34,8 +34,8 @@ export class Philantropist extends BaseMilestone {
   }
 
   /** MarsBot needs 5 such cards in its own played pile (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.playedProjectCards.filter((card) => {
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.playedProjectCards.filter((card) => {
       const victoryPoints = card.metadata.victoryPoints;
       if (card.type === CardType.EVENT || victoryPoints === undefined) {
         return false;

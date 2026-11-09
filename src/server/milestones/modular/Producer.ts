@@ -19,8 +19,8 @@ export class Producer extends BaseMilestone {
   }
 
   /** MarsBot needs its top three tracks other than Venus at 16 or more (rulebook C p.14). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    const [first, second, third] = bot.marsBotBoard.tracks
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    const [first, second, third] = marsBot.marsBotBoard.tracks
       .filter((track) => !track.definition.tags.includes(Tag.VENUS))
       .map((track) => track.position)
       .sort((a, b) => b - a);

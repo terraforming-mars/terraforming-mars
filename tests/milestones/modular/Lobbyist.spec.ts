@@ -73,12 +73,12 @@ describe('Lobbyist', () => {
     {chairman: true, leaders: 2, expected: true},
   ] as const) {
     it('MarsBot needs the Chairman and 2 Party Leaders: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot({game, player});
+      const marsBot = fakeMarsBot({game, player});
 
       turmoil.chairman = run.chairman ? player : 'NEUTRAL';
       turmoil.parties.forEach((party, index) => party.partyLeader = index < run.leaders ? player : undefined);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

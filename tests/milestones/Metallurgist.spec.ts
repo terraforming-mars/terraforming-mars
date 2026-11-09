@@ -21,11 +21,11 @@ describe('Metallurgist', () => {
     {building: 5, space: 4, expected: true},
   ] as const) {
     it('MarsBot needs its Building and Space tracks to add up to 9: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.BUILDING, run.building);
-      setTrack(bot, Tag.SPACE, run.space);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.BUILDING, run.building);
+      setTrack(marsBot, Tag.SPACE, run.space);
 
-      expect(new Metallurgist().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new Metallurgist().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

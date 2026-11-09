@@ -23,8 +23,8 @@ export class Merchant implements IMilestone {
   }
 
   /** MarsBot needs space 2 on every track except Venus (rulebook C p.13). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.tracks
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks
       .filter((track) => !track.definition.tags.includes(Tag.VENUS))
       .every((track) => track.position >= 2);
   }

@@ -25,7 +25,7 @@ export class Tactician4 extends BaseMilestone {
   }
 
   /** MarsBot needs 30 M€ on hand, since its cards carry no requirements (rulebook C p.14). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.megacredits >= 30;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.megacredits >= 30;
   }
 }

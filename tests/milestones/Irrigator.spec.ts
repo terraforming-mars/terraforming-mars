@@ -34,7 +34,7 @@ describe('Irrigator', () => {
     {modularMA: true, tiles: 3, expected: false},
     {modularMA: true, tiles: 4, expected: true},
   ] as const) {
-    it(`Coastguard: MarsBot needs 3 tiles next to oceans on Terra Cimmeria and 4 with the expansion, ${JSON.stringify(run)}`, () => {
+    it('Coastguard: MarsBot needs 3 tiles next to oceans on Terra Cimmeria and 4 with the expansion: ' + JSON.stringify(run), () => {
       const [game, player] = testGame(1, {boardName: BoardName.TERRA_CIMMERIA_NOVA, modularMA: run.modularMA});
       const bot = {...fakeMarsBot(), game, player};
       maxOutOceans(player);

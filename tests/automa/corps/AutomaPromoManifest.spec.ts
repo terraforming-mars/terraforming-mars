@@ -28,7 +28,7 @@ function recordingBot(): RecordingBot {
   const [game, human, botPlayer] = testGame(2);
   const calls: Array<string> = [];
   const corpState = new Map<string, number>();
-  const bot: IMarsBot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
+  const bot: IMarsBot = fakeMarsBot({
     game,
     player: botPlayer,
     humanPlayer: human,

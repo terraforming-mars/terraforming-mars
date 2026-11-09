@@ -11,7 +11,7 @@ export class Benefactor implements IAward {
   }
 
   /** Scores MarsBot's TR minus 15, but not below 0 (rulebook C p.9 and p.14). */
-  public marsBotScore(bot: IMarsBot): number {
-    return Math.max(0, bot.player.terraformRating - 15);
+  public marsBotScore(marsBot: IMarsBot): number {
+    return Math.max(0, marsBot.player.terraformRating - 15);
   }
 }

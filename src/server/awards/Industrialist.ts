@@ -16,7 +16,7 @@ export class Industrialist implements IAward {
   }
 
   /** Scores MarsBot's Energy track space plus 5 (rulebook C p.9). */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.POWER) + 5;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.POWER) + 5;
   }
 }

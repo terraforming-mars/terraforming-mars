@@ -18,7 +18,7 @@ export class Celebrity implements IAward {
    *
    * Unlike a player's events, MarsBot's events count.
    */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.playedProjectCards.filter((card) => card.cost >= 20).length;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.playedProjectCards.filter((card) => card.cost >= 20).length;
   }
 }

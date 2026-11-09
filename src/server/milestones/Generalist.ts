@@ -44,8 +44,8 @@ export class Generalist extends BaseMilestone {
    * That is every track on Elysium (rulebook C p.9), leaving out Venus when in play (rulebook C p.2),
    * which is also the Milestones & Awards expansion's rule (rulebook C p.13).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.tracks
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks
       .filter((track) => !track.definition.tags.includes(Tag.VENUS))
       .every((track) => track.position >= 2);
   }

@@ -20,7 +20,7 @@ export class Specialist extends BaseMilestone {
   }
 
   /** MarsBot needs space 10 on any one of its tracks, Venus included (rulebook C p.9). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.tracks.some((track) => track.position >= 10);
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks.some((track) => track.position >= 10);
   }
 }

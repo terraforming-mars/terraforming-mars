@@ -20,7 +20,7 @@ export class Ecologist extends BaseMilestone {
    *
    * Counting bio tags would count that one track once for each of its three tags.
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.PLANT) >= 4;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.PLANT) >= 4;
   }
 }

@@ -21,8 +21,8 @@ describe('Celebrity', () => {
       fakeCard({cost: 25, type: CardType.ACTIVE}),
       fakeCard({cost: 19, type: CardType.AUTOMATED}),
     ];
-    const bot = fakeMarsBot({playedProjectCards});
+    const marsBot = fakeMarsBot({playedProjectCards});
 
-    expect(new Celebrity().marsBotScore(bot)).eq(2);
+    expect(new Celebrity().marsBotScore(marsBot)).eq(2);
   });
 });

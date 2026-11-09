@@ -14,9 +14,9 @@ describe('Industrialist', () => {
   });
 
   it('MarsBot scores its Energy track plus 5', () => {
-    const bot = fakeMarsBot();
-    setTrack(bot, Tag.POWER, 3);
+    const marsBot = fakeMarsBot();
+    setTrack(marsBot, Tag.POWER, 3);
 
-    expect(new Industrialist().marsBotScore(bot)).eq(8);
+    expect(new Industrialist().marsBotScore(marsBot)).eq(8);
   });
 });

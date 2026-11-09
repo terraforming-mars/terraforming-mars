@@ -69,7 +69,7 @@ describe('Producer', () => {
     {science: 4, expected: false},
     {science: 5, expected: true},
   ] as const) {
-    it(`MarsBot needs its three most advanced tracks other than Venus to add up to 16, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs its three most advanced tracks other than Venus to add up to 16: ' + JSON.stringify(run), () => {
       const bot = fakeMarsBot([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       setAllTracks(bot, 2);
       setTrack(bot, Tag.VENUS, 12);

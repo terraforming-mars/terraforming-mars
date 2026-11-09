@@ -18,7 +18,7 @@ describe('Briber', () => {
     {megacredits: 19, expected: false},
     {megacredits: 20, expected: true},
   ] as const) {
-    it(`MarsBot needs 20 M€, ${JSON.stringify(run)}`, () => {
+    it('MarsBot needs 20 M€: ' + JSON.stringify(run), () => {
       const bot = {...fakeMarsBot(), megacredits: run.megacredits};
 
       expect(new Briber().marsBotCanClaim(bot)).eq(run.expected);

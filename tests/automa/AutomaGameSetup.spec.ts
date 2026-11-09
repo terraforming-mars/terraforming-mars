@@ -10,21 +10,21 @@ describe('AutomaGameSetup', () => {
   it('plays a one player automa game against MarsBot instead of the solo rules', () => {
     const [game, human] = testGame(1, {automa: true});
 
-    const marsBot = game.marsBotPlayer!;
+    const botPlayer = game.marsBotPlayer!;
     expect(game.players).deep.eq([human]);
-    expect(game.playersPlusMarsBot).deep.eq([human, marsBot]);
-    expect(marsBot.game).eq(game);
+    expect(game.playersPlusMarsBot).deep.eq([human, botPlayer]);
+    expect(botPlayer.game).eq(game);
     expect(game.isSoloMode()).is.false;
     expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
   });
 
   it('keeps what MarsBot owns when the game is loaded', () => {
     const [game] = testGame(1, {automa: true, turmoilExtension: true});
-    const marsBot = game.marsBotPlayer!;
-    const city = addCity(marsBot);
-    Turmoil.getTurmoil(game).sendDelegateToParty(marsBot, PartyName.GREENS, game);
-    game.claimedMilestones.push({milestone: game.milestones[0], player: marsBot});
-    game.fundedAwards.push({award: game.awards[0], player: marsBot});
+    const botPlayer = game.marsBotPlayer!;
+    const city = addCity(botPlayer);
+    Turmoil.getTurmoil(game).sendDelegateToParty(botPlayer, PartyName.GREENS, game);
+    game.claimedMilestones.push({milestone: game.milestones[0], player: botPlayer});
+    game.fundedAwards.push({award: game.awards[0], player: botPlayer});
 
     const loaded = Game.deserialize(game.serialize());
 

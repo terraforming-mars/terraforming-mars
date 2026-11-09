@@ -5,10 +5,15 @@
     </template>
     <div class="cards-filter-input">
       <div>
-        <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm">
+        <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm"
+          @keydown.down.prevent="moveHighlight(1)"
+          @keydown.up.prevent="moveHighlight(-1)"
+          @keydown.enter.prevent="addHighlighted">
       </div>
       <div class="cards-filter-suggest" v-if="searchMatches.length">
-        <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" :key="cardName">
+        <div class="cards-filter-suggest-item" v-for="(cardName, idx) in searchMatches" :key="cardName"
+          :class="{'cards-filter-suggest-item-highlighted': idx === highlighted}"
+          @mouseenter="highlighted = idx">
           <a href="#" @click.prevent="addCard(cardName)">
             {{ cardName }}
             <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
@@ -58,6 +63,8 @@ const MAX_SEARCH_MATCHES = 10;
 
 type CardsFilterModel = {
   selectedCards: Array<CardName>;
+  /** Index into searchMatches of the suggestion that Enter adds. */
+  highlighted: number;
   searchTerm: string;
 }
 
@@ -86,6 +93,7 @@ export default defineComponent({
   data(): CardsFilterModel {
     return {
       selectedCards: [...this.selected],
+      highlighted: 0,
       searchTerm: '',
     };
   },
@@ -133,6 +141,17 @@ export default defineComponent({
     removeCard(cardName: CardName) {
       inplaceRemove(this.selectedCards, cardName);
     },
+    /** Moves the highlighted suggestion by `delta`, stopping at either end of the list. */
+    moveHighlight(delta: number) {
+      const last = this.searchMatches.length - 1;
+      this.highlighted = Math.max(0, Math.min(last, this.highlighted + delta));
+    },
+    addHighlighted() {
+      const cardName = this.searchMatches[this.highlighted];
+      if (cardName !== undefined) {
+        this.addCard(cardName);
+      }
+    },
     addCard(cardName: CardName) {
       if (this.selectedCards.includes(cardName)) {
         return;
@@ -149,6 +168,9 @@ export default defineComponent({
         this.$emit('cards-list-changed', value);
       },
       deep: true,
+    },
+    searchMatches() {
+      this.highlighted = 0;
     },
     searchTerm(value: string) {
       // Allows multiple simultaneous entries

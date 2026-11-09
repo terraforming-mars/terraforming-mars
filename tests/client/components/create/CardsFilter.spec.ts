@@ -61,4 +61,22 @@ describe('CardsFilter', () => {
     wrapper.vm.removeCard(CardName.ADAPTED_LICHEN);
     expect(wrapper.vm.searchMatches).includes(CardName.ADAPTED_LICHEN);
   });
+
+  it('arrow keys and enter add a suggestion', async () => {
+    const wrapper = mount(CardsFilter, {...globalConfig, props: {title: 'title', hint: 'hint'}, attachTo: document.body});
+    const input = wrapper.find('input');
+    await input.setValue('mars');
+    expect(wrapper.vm.searchMatches.length).to.be.greaterThan(2);
+    const second = wrapper.vm.searchMatches[1];
+
+    // Up at the top stays on the first entry.
+    await input.trigger('keydown', {key: 'ArrowUp'});
+    await input.trigger('keydown', {key: 'ArrowDown'});
+    await input.trigger('keydown', {key: 'ArrowDown'});
+    await input.trigger('keydown', {key: 'ArrowUp'});
+    expect(wrapper.find('.cards-filter-suggest-item-highlighted').text()).eq(second);
+
+    await input.trigger('keydown', {key: 'Enter'});
+    expect(wrapper.vm.selectedCards).deep.eq([second]);
+  });
 });

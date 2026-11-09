@@ -10,7 +10,7 @@ import {IMarsBotCorp} from '../../../src/server/automa/IMarsBotCorp';
 import {AUTOMA_TURMOIL_MANIFEST} from '../../../src/server/automa/corps/AutomaTurmoilManifest';
 
 type RecordingBot = {
-  bot: IMarsBot;
+  marsBot: IMarsBot;
   /** The corp handlers' calls into the bot, in order, as `name(arguments)`. */
   calls: Array<string>;
   corpState: Map<string, number>;
@@ -50,7 +50,7 @@ function recordingBot(options: RecordingBotOptions = {}): RecordingBot {
       corpState.set(key, value);
     },
   });
-  return {bot: marsBot, calls, corpState};
+  return {marsBot, calls, corpState};
 }
 
 function corp(name: CardName): IMarsBotCorp {
@@ -81,7 +81,7 @@ describe('AutomaTurmoilManifest', () => {
 
   // C35 Lakefront Resorts
   it('Lakefront Resorts setup puts a white cube on the card and pays 3 M€ per adjacent ocean', () => {
-    const {bot: marsBot, corpState} = recordingBot();
+    const {marsBot, corpState} = recordingBot();
 
     corp(CardName.LAKEFRONT_RESORTS).setup!(marsBot);
 
@@ -90,7 +90,7 @@ describe('AutomaTurmoilManifest', () => {
   });
 
   it('Lakefront Resorts oceans alternate between taking the cube off to advance the building track and putting it back', () => {
-    const {bot: marsBot, calls, corpState} = recordingBot();
+    const {marsBot, calls, corpState} = recordingBot();
     const effect = corp(CardName.LAKEFRONT_RESORTS).effect!;
     const space = marsBot.game.board.spaces[0];
     corpState.set('whiteCubeOnCard', 1);
@@ -109,7 +109,7 @@ describe('AutomaTurmoilManifest', () => {
 
   // FAQ (rulebook B p.4): Lakefront overrides Government Intervention's "no M€"
   it('Lakefront Resorts keeps the M€ its building track advance earns during Government Intervention', () => {
-    const {bot: marsBot, corpState} = recordingBot({onAdvance: () => {
+    const {marsBot, corpState} = recordingBot({onAdvance: () => {
       marsBot.megacredits += 4;
     }});
     corpState.set('whiteCubeOnCard', 1);
@@ -122,7 +122,7 @@ describe('AutomaTurmoilManifest', () => {
 
   // C36 Pristar
   it('Pristar skips the first raise of a global parameter for 1 TR and 6 M€, and lets the next one through', () => {
-    const {bot: marsBot, calls, corpState} = recordingBot();
+    const {marsBot, calls, corpState} = recordingBot();
     const effect = corp(CardName.PRISTAR).effect!;
     corpState.set('whiteCubeOnCard', 1);
 
@@ -135,7 +135,7 @@ describe('AutomaTurmoilManifest', () => {
   });
 
   it('Pristar puts the cube back before the action phase', () => {
-    const {bot: marsBot, corpState} = recordingBot();
+    const {marsBot, corpState} = recordingBot();
     corpState.set('whiteCubeOnCard', 0);
 
     corp(CardName.PRISTAR).beforeActionPhase!(marsBot);
@@ -145,7 +145,7 @@ describe('AutomaTurmoilManifest', () => {
 
   // C37 Septem Tribus
   it('Septem Tribus setup swaps Party Politics for Gray Eminence and adds the delegates of an unused colour to MarsBot', () => {
-    const {bot: marsBot, calls} = recordingBot({turmoil: true});
+    const {marsBot, calls} = recordingBot({turmoil: true});
 
     corp(CardName.SEPTUM_TRIBUS).setup!(marsBot);
 
@@ -158,7 +158,7 @@ describe('AutomaTurmoilManifest', () => {
     {name: CardName.UTOPIA_INVEST, bonusCard: 'B32'},
   ]) {
     it(`${run.name} adds ${run.bonusCard} to the action deck`, () => {
-      const {bot: marsBot, calls} = recordingBot();
+      const {marsBot, calls} = recordingBot();
 
       corp(run.name).beforeActionPhase!(marsBot);
 
@@ -168,7 +168,7 @@ describe('AutomaTurmoilManifest', () => {
 
   // C38 Terralabs
   it('Terralabs Research setup takes 8 TR off MarsBot', () => {
-    const {bot: marsBot, calls} = recordingBot();
+    const {marsBot, calls} = recordingBot();
 
     corp(CardName.TERRALABS_RESEARCH).setup!(marsBot);
 
@@ -180,7 +180,7 @@ describe('AutomaTurmoilManifest', () => {
     {generation: 9, count: 2},
   ]) {
     it(`Terralabs Research draws ${run.count} card(s) to the action deck in generation ${run.generation}`, () => {
-      const {bot: marsBot, calls} = recordingBot({generation: run.generation});
+      const {marsBot, calls} = recordingBot({generation: run.generation});
 
       corp(CardName.TERRALABS_RESEARCH).beforeActionPhase!(marsBot);
 

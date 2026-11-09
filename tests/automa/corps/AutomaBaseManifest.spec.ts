@@ -155,7 +155,7 @@ describe('AutomaBaseManifest', () => {
     {mcOnCard: 2, gain: 25, card: 7, advances: 3},
     {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
   ]) {
-    it(`Mining Guild counts down from 10, and advances the building track each time the card empties, ${JSON.stringify(run)}`, () => {
+    it('Mining Guild counts down from 10, and advances the building track each time the card empties: ' + JSON.stringify(run), () => {
       const {bot, calls, corpState} = recordingBot();
       corp(CardName.MINING_GUILD).setup!(bot);
       if (run.mcOnCard !== undefined) {

@@ -1,7 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotMarsTrackPositions} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {Tag} from '../../common/cards/Tag';
 
 export class Generalist extends BaseMilestone {
   public readonly automaDescription = 'All tracks ≥ 2 (except Venus)';
@@ -45,6 +45,8 @@ export class Generalist extends BaseMilestone {
    * which is also the Milestones & Awards expansion's rule (rulebook C p.13).
    */
   public marsBotCanClaim(bot: IMarsBot): boolean {
-    return marsBotMarsTrackPositions(bot).every((position) => position >= 2);
+    return bot.marsBotBoard.tracks
+      .filter((track) => !track.definition.tags.includes(Tag.VENUS))
+      .every((track) => track.position >= 2);
   }
 }

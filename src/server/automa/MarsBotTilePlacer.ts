@@ -50,7 +50,7 @@ const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>>
 export class MarsBotTilePlacer {
   constructor(
     private readonly game: IGame,
-    private readonly marsBot: IPlayer,
+    private readonly botPlayer: IPlayer,
     private readonly humanPlayer: IPlayer,
   ) {}
 
@@ -73,14 +73,14 @@ export class MarsBotTilePlacer {
   /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
   public findGreenerySpace(): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForGreenery(this.marsBot);
+    const spaces = board.getAvailableSpacesForGreenery(this.botPlayer);
     if (spaces.length === 0) {
       return undefined;
     }
 
     return this.selectBestSpace(spaces, (space) => {
       const cities = board.getAdjacentSpaces(space).filter(Board.isCitySpace);
-      const marsBotCities = cities.filter(Board.ownedBy(this.marsBot));
+      const marsBotCities = cities.filter(Board.ownedBy(this.botPlayer));
       const humanCities = cities.filter(Board.ownedBy(this.humanPlayer));
       // MarsBot's adjacent cities minus the human's. The greenery gives 1 VP to the owner of each
       // adjacent city, so the highest score is the space with the best net VP for MarsBot.
@@ -97,7 +97,7 @@ export class MarsBotTilePlacer {
    */
   public findCitySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesForCity(this.marsBot).filter(filter);
+    const spaces = board.getAvailableSpacesForCity(this.botPlayer).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -125,7 +125,7 @@ export class MarsBotTilePlacer {
 
   /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
   public findOceanSpace(): Space | undefined {
-    const spaces = this.game.board.getAvailableSpacesForOcean(this.marsBot);
+    const spaces = this.game.board.getAvailableSpacesForOcean(this.botPlayer);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -136,7 +136,7 @@ export class MarsBotTilePlacer {
   /** Find a space for the Neural Instance tile: not adjacent to any tiles, not on edge, not on/adjacent to reserved spaces. */
   public findNeuralInstanceSpace(): Space | undefined {
     const board = this.game.board;
-    const spaces = board.getAvailableSpacesOnLand(this.marsBot).filter((space) => {
+    const spaces = board.getAvailableSpacesOnLand(this.botPlayer).filter((space) => {
       const adj = board.getAdjacentSpaces(space);
       // Adjacent to no tiles
       if (adj.some((s) => s.tile !== undefined)) {
@@ -244,7 +244,7 @@ export class MarsBotTilePlacer {
   /** Calculate MC MarsBot gains from ocean adjacency: its player's `oceanBonus` per adjacent ocean. */
   public getOceanAdjacencyMC(space: Space): number {
     const oceans = this.game.board.getAdjacentSpaces(space).filter(Board.isOceanSpace).length;
-    return oceans * this.marsBot.oceanBonus;
+    return oceans * this.botPlayer.oceanBonus;
   }
 
   /** Total placement MC for MarsBot: 1 MC per bonus icon + M€ per adjacent ocean. */

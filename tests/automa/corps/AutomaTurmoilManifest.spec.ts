@@ -31,7 +31,7 @@ function recordingBot(options: RecordingBotOptions = {}): RecordingBot {
   const record = (call: string) => {
     calls.push(call);
   };
-  const bot: IMarsBot = fakeMarsBot({
+  const marsBot: IMarsBot = fakeMarsBot({
     game,
     player: game.marsBotPlayer,
     megacredits: 0,
@@ -50,7 +50,7 @@ function recordingBot(options: RecordingBotOptions = {}): RecordingBot {
       corpState.set(key, value);
     },
   });
-  return {bot, calls, corpState};
+  return {bot: marsBot, calls, corpState};
 }
 
 function corp(name: CardName): IMarsBotCorp {
@@ -81,76 +81,76 @@ describe('AutomaTurmoilManifest', () => {
 
   // C35 Lakefront Resorts
   it('Lakefront Resorts setup puts a white cube on the card and pays 3 M€ per adjacent ocean', () => {
-    const {bot, corpState} = recordingBot();
+    const {bot: marsBot, corpState} = recordingBot();
 
-    corp(CardName.LAKEFRONT_RESORTS).setup!(bot);
+    corp(CardName.LAKEFRONT_RESORTS).setup!(marsBot);
 
     expect(corpState.get('whiteCubeOnCard')).eq(1);
-    expect(bot.player.oceanBonus).eq(3);
+    expect(marsBot.player.oceanBonus).eq(3);
   });
 
   it('Lakefront Resorts oceans alternate between taking the cube off to advance the building track and putting it back', () => {
-    const {bot, calls, corpState} = recordingBot();
+    const {bot: marsBot, calls, corpState} = recordingBot();
     const effect = corp(CardName.LAKEFRONT_RESORTS).effect!;
-    const space = bot.game.board.spaces[0];
+    const space = marsBot.game.board.spaces[0];
     corpState.set('whiteCubeOnCard', 1);
 
-    effect.onTilePlaced!(bot, false, TileType.OCEAN, space);
+    effect.onTilePlaced!(marsBot, false, TileType.OCEAN, space);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
     expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
 
-    effect.onTilePlaced!(bot, false, TileType.GREENERY, space);
+    effect.onTilePlaced!(marsBot, false, TileType.GREENERY, space);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
 
-    effect.onTilePlaced!(bot, true, TileType.OCEAN, space);
+    effect.onTilePlaced!(marsBot, true, TileType.OCEAN, space);
     expect(corpState.get('whiteCubeOnCard')).eq(1);
     expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
   });
 
   // FAQ (rulebook B p.4): Lakefront overrides Government Intervention's "no M€"
   it('Lakefront Resorts keeps the M€ its building track advance earns during Government Intervention', () => {
-    const {bot, corpState} = recordingBot({onAdvance: () => {
-      bot.megacredits += 4;
+    const {bot: marsBot, corpState} = recordingBot({onAdvance: () => {
+      marsBot.megacredits += 4;
     }});
     corpState.set('whiteCubeOnCard', 1);
-    bot.mcKeptThroughIntervention = 0;
+    marsBot.mcKeptThroughIntervention = 0;
 
-    corp(CardName.LAKEFRONT_RESORTS).effect!.onTilePlaced!(bot, false, TileType.OCEAN, bot.game.board.spaces[0]);
+    corp(CardName.LAKEFRONT_RESORTS).effect!.onTilePlaced!(marsBot, false, TileType.OCEAN, marsBot.game.board.spaces[0]);
 
-    expect(bot.mcKeptThroughIntervention).eq(4);
+    expect(marsBot.mcKeptThroughIntervention).eq(4);
   });
 
   // C36 Pristar
   it('Pristar skips the first raise of a global parameter for 1 TR and 6 M€, and lets the next one through', () => {
-    const {bot, calls, corpState} = recordingBot();
+    const {bot: marsBot, calls, corpState} = recordingBot();
     const effect = corp(CardName.PRISTAR).effect!;
     corpState.set('whiteCubeOnCard', 1);
 
-    expect(effect.interceptGlobalParameterRaise!(bot, GlobalParameter.TEMPERATURE)).is.true;
+    expect(effect.interceptGlobalParameterRaise!(marsBot, GlobalParameter.TEMPERATURE)).is.true;
     expect(corpState.get('whiteCubeOnCard')).eq(0);
     expect(calls).deep.eq(['raiseTR(1)', 'gainMc(6)']);
 
-    expect(effect.interceptGlobalParameterRaise!(bot, GlobalParameter.OXYGEN)).is.false;
+    expect(effect.interceptGlobalParameterRaise!(marsBot, GlobalParameter.OXYGEN)).is.false;
     expect(calls).deep.eq(['raiseTR(1)', 'gainMc(6)']);
   });
 
   it('Pristar puts the cube back before the action phase', () => {
-    const {bot, corpState} = recordingBot();
+    const {bot: marsBot, corpState} = recordingBot();
     corpState.set('whiteCubeOnCard', 0);
 
-    corp(CardName.PRISTAR).beforeActionPhase!(bot);
+    corp(CardName.PRISTAR).beforeActionPhase!(marsBot);
 
     expect(corpState.get('whiteCubeOnCard')).eq(1);
   });
 
   // C37 Septem Tribus
   it('Septem Tribus setup swaps Party Politics for Gray Eminence and adds the delegates of an unused colour to MarsBot', () => {
-    const {bot, calls} = recordingBot({turmoil: true});
+    const {bot: marsBot, calls} = recordingBot({turmoil: true});
 
-    corp(CardName.SEPTUM_TRIBUS).setup!(bot);
+    corp(CardName.SEPTUM_TRIBUS).setup!(marsBot);
 
     expect(calls).deep.eq(['removeBonusCard(B21)', 'addBonusCardToBonusDeck(B29)']);
-    expect(bot.game.turmoil!.delegateReserve.get(bot.player)).eq(2 * DELEGATES_PER_PLAYER);
+    expect(marsBot.game.turmoil!.delegateReserve.get(marsBot.player)).eq(2 * DELEGATES_PER_PLAYER);
   });
 
   for (const run of [
@@ -158,9 +158,9 @@ describe('AutomaTurmoilManifest', () => {
     {name: CardName.UTOPIA_INVEST, bonusCard: 'B32'},
   ]) {
     it(`${run.name} adds ${run.bonusCard} to the action deck`, () => {
-      const {bot, calls} = recordingBot();
+      const {bot: marsBot, calls} = recordingBot();
 
-      corp(run.name).beforeActionPhase!(bot);
+      corp(run.name).beforeActionPhase!(marsBot);
 
       expect(calls).deep.eq([`addBonusCardToActionDeck(${run.bonusCard})`]);
     });
@@ -168,9 +168,9 @@ describe('AutomaTurmoilManifest', () => {
 
   // C38 Terralabs
   it('Terralabs Research setup takes 8 TR off MarsBot', () => {
-    const {bot, calls} = recordingBot();
+    const {bot: marsBot, calls} = recordingBot();
 
-    corp(CardName.TERRALABS_RESEARCH).setup!(bot);
+    corp(CardName.TERRALABS_RESEARCH).setup!(marsBot);
 
     expect(calls).deep.eq(['raiseTR(-8)']);
   });
@@ -180,9 +180,9 @@ describe('AutomaTurmoilManifest', () => {
     {generation: 9, count: 2},
   ]) {
     it(`Terralabs Research draws ${run.count} card(s) to the action deck in generation ${run.generation}`, () => {
-      const {bot, calls} = recordingBot({generation: run.generation});
+      const {bot: marsBot, calls} = recordingBot({generation: run.generation});
 
-      corp(CardName.TERRALABS_RESEARCH).beforeActionPhase!(bot);
+      corp(CardName.TERRALABS_RESEARCH).beforeActionPhase!(marsBot);
 
       expect(calls).deep.eq([`drawProjectCardsToActionDeck(${run.count})`]);
     });

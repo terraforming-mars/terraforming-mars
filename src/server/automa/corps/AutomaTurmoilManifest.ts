@@ -14,27 +14,27 @@ const LAKEFRONT_RESORTS: IMarsBotCorp = {
   name: CardName.LAKEFRONT_RESORTS,
   description: 'Setup: 1 white cube on card. Oceans alternate between removing the cube (advance building track) and placing it back. Ocean adjacency pays 3 MC.',
   tags: [],
-  setup(bot) {
-    bot.player.oceanBonus = LAKEFRONT_OCEAN_BONUS;
-    bot.setCorpState('whiteCubeOnCard', 1);
-    bot.game.log('MarsBot (Lakefront): 1 white cube on card');
+  setup(marsBot) {
+    marsBot.player.oceanBonus = LAKEFRONT_OCEAN_BONUS;
+    marsBot.setCorpState('whiteCubeOnCard', 1);
+    marsBot.game.log('MarsBot (Lakefront): 1 white cube on card');
   },
   effect: {
-    onTilePlaced(bot, _placedByMarsBot, tileType) {
+    onTilePlaced(marsBot, _placedByMarsBot, tileType) {
       if (tileType === TileType.OCEAN) {
-        const cube = bot.getCorpState('whiteCubeOnCard');
+        const cube = marsBot.getCorpState('whiteCubeOnCard');
         if (cube > 0) {
-          bot.setCorpState('whiteCubeOnCard', 0);
-          const mcBefore = bot.megacredits;
-          bot.advanceTrack(0); // Building track = index 0
+          marsBot.setCorpState('whiteCubeOnCard', 0);
+          const mcBefore = marsBot.megacredits;
+          marsBot.advanceTrack(0); // Building track = index 0
           // FAQ (rulebook B, p.4): this overrides Government Intervention's "no M€", but not its "no TR"
-          if (bot.mcKeptThroughIntervention !== undefined) {
-            bot.mcKeptThroughIntervention += Math.max(0, bot.megacredits - mcBefore);
+          if (marsBot.mcKeptThroughIntervention !== undefined) {
+            marsBot.mcKeptThroughIntervention += Math.max(0, marsBot.megacredits - mcBefore);
           }
-          bot.game.log('MarsBot (Lakefront): ocean placed, removed cube, advance building track');
+          marsBot.game.log('MarsBot (Lakefront): ocean placed, removed cube, advance building track');
         } else {
-          bot.setCorpState('whiteCubeOnCard', 1);
-          bot.game.log('MarsBot (Lakefront): ocean placed, placed white cube on card');
+          marsBot.setCorpState('whiteCubeOnCard', 1);
+          marsBot.game.log('MarsBot (Lakefront): ocean placed, placed white cube on card');
         }
       }
     },
@@ -47,22 +47,22 @@ const PRISTAR: IMarsBotCorp = {
   description: 'When a global parameter would be raised and a cube is on card: skip the raise, remove cube, +1 TR, +6 MC. Cube is restored each generation.',
   tags: [],
   effect: {
-    interceptGlobalParameterRaise(bot, _parameter) {
-      const cube = bot.getCorpState('whiteCubeOnCard');
+    interceptGlobalParameterRaise(marsBot, _parameter) {
+      const cube = marsBot.getCorpState('whiteCubeOnCard');
       if (cube > 0) {
-        bot.setCorpState('whiteCubeOnCard', 0);
-        bot.raiseTR(1);
-        bot.gainMc(6);
-        bot.game.log('MarsBot (Pristar): parameter raise intercepted: removed cube, +1 TR, +6 M€, SKIP raise');
+        marsBot.setCorpState('whiteCubeOnCard', 0);
+        marsBot.raiseTR(1);
+        marsBot.gainMc(6);
+        marsBot.game.log('MarsBot (Pristar): parameter raise intercepted: removed cube, +1 TR, +6 M€, SKIP raise');
         return true; // SKIP the parameter raise
       }
       return false;
     },
   },
-  beforeActionPhase(bot) {
-    if (bot.getCorpState('whiteCubeOnCard') === 0) {
-      bot.setCorpState('whiteCubeOnCard', 1);
-      bot.game.log('MarsBot (Pristar): added white cube on card');
+  beforeActionPhase(marsBot) {
+    if (marsBot.getCorpState('whiteCubeOnCard') === 0) {
+      marsBot.setCorpState('whiteCubeOnCard', 1);
+      marsBot.game.log('MarsBot (Pristar): added white cube on card');
     }
   },
 };
@@ -73,15 +73,15 @@ const SEPTEM_TRIBUS: IMarsBotCorp = {
   description: 'Setup: remove Party Politics, add Gray Eminence to bonus deck, and add all delegates of an unused colour to MarsBot\'s reserve. Each generation: add Gray Eminence to action deck.',
   tags: [],
   requiredExpansions: ['turmoil'],
-  setup(bot) {
-    bot.removeBonusCard(BonusCardId.B21_PARTY_POLITICS);
-    bot.addBonusCardToBonusDeck(BonusCardId.B29_GRAY_EMINENCE);
-    bot.game.log('MarsBot (Septem Tribus): Party Politics removed, Gray Eminence added');
+  setup(marsBot) {
+    marsBot.removeBonusCard(BonusCardId.B21_PARTY_POLITICS);
+    marsBot.addBonusCardToBonusDeck(BonusCardId.B29_GRAY_EMINENCE);
+    marsBot.game.log('MarsBot (Septem Tribus): Party Politics removed, Gray Eminence added');
     // The unused colour's delegates count as MarsBot's own.
-    const turmoil = bot.game.turmoil;
+    const turmoil = marsBot.game.turmoil;
     if (turmoil) {
-      turmoil.delegateReserve.add(bot.player, DELEGATES_PER_PLAYER);
-      bot.game.log(`MarsBot (Septem Tribus): ${DELEGATES_PER_PLAYER} more delegates in reserve`);
+      turmoil.delegateReserve.add(marsBot.player, DELEGATES_PER_PLAYER);
+      marsBot.game.log(`MarsBot (Septem Tribus): ${DELEGATES_PER_PLAYER} more delegates in reserve`);
     }
   },
   ...bonusCardBeforeActionPhase(BonusCardId.B29_GRAY_EMINENCE, 'Septem Tribus'),
@@ -92,15 +92,15 @@ const TERRALABS: IMarsBotCorp = {
   name: CardName.TERRALABS_RESEARCH,
   description: 'Tag: Science. Setup: TR -8. Each generation: draw 1 card to action deck (2 cards from generation 9 onward).',
   tags: [Tag.SCIENCE],
-  setup(bot) {
+  setup(marsBot) {
     // Reduce TR by 8
-    bot.raiseTR(-8);
-    bot.game.log('MarsBot (Terralabs): TR -8');
+    marsBot.raiseTR(-8);
+    marsBot.game.log('MarsBot (Terralabs): TR -8');
   },
-  beforeActionPhase(bot) {
-    const count = bot.game.generation <= 8 ? 1 : 2;
-    bot.drawProjectCardsToActionDeck(count);
-    bot.game.log(`MarsBot (Terralabs): drew ${count} card(s) to action deck`);
+  beforeActionPhase(marsBot) {
+    const count = marsBot.game.generation <= 8 ? 1 : 2;
+    marsBot.drawProjectCardsToActionDeck(count);
+    marsBot.game.log(`MarsBot (Terralabs): drew ${count} card(s) to action deck`);
   },
 };
 

@@ -90,60 +90,63 @@ describe('AutomaPreludeManifest', () => {
     {name: CardName.PALLADIN_SHIPPING, cubes: [[Tag.SPACE, 'white', [3, 4, 6, 8, 10, 11]], [Tag.EVENT, 'black', [3, 4, 6, 8, 10, 11]]]},
   ];
 
-  it('puts the cubes of each corporation on the tracks its card names', () => {
-    const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
-    for (const run of cubes) {
+  for (const run of cubes) {
+    it(`puts the cubes of each corporation on the tracks its card names, ${run.name}`, () => {
+      const board = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       const placed = corpTrackCubes(corp(run.name), board)
         .map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`);
       const expected = run.cubes.flatMap(([tag, cubeType, positions]) => positions.map((position) => `${tag} ${cubeType} ${position}`));
 
-      expect([...placed].sort(), run.name).deep.eq([...expected].sort());
-      expect(corp(run.name).trackCubesTriggerEveryAdvance === true, run.name).eq(run.everyAdvance === true);
-    }
-  });
+      expect([...placed].sort()).deep.eq([...expected].sort());
+      expect(corp(run.name).trackCubesTriggerEveryAdvance === true).eq(run.everyAdvance === true);
+    });
+  }
 
-  it('follows the Setup box and the action deck bonus card of each corporation that has them', () => {
-    for (const [name, expected] of [
-      [CardName.ROBINSON_INDUSTRIES, ['gainMc(10)']],
-      [CardName.VALLEY_TRUST, ['drawProjectCardsToActionDeck(1)']],
-      [CardName.VITOR, ['removeBonusCard(B04)']],
-      [CardName.ARCADIAN_COMMUNITIES, ['resolveBonusCard(B22)']],
-      [CardName.NIRGAL_ENTERPRISES, ['removeBonusCard(B04)']],
-      [CardName.PALLADIN_SHIPPING, ['gainMc(5)']],
-      [CardName.SAGITTA_FRONTIER_SERVICES, ['gainMc(8)']],
-      [CardName.TYCHO_MAGNETICS, ['addBonusCardToBottomOfBonusDeck(B30)']],
-    ] as const) {
+  for (const [name, expected] of [
+    [CardName.ROBINSON_INDUSTRIES, ['gainMc(10)']],
+    [CardName.VALLEY_TRUST, ['drawProjectCardsToActionDeck(1)']],
+    [CardName.VITOR, ['removeBonusCard(B04)']],
+    [CardName.ARCADIAN_COMMUNITIES, ['resolveBonusCard(B22)']],
+    [CardName.NIRGAL_ENTERPRISES, ['removeBonusCard(B04)']],
+    [CardName.PALLADIN_SHIPPING, ['gainMc(5)']],
+    [CardName.SAGITTA_FRONTIER_SERVICES, ['gainMc(8)']],
+    [CardName.TYCHO_MAGNETICS, ['addBonusCardToBottomOfBonusDeck(B30)']],
+  ] as const) {
+    it(`follows the Setup box of each corporation that has one, ${name}`, () => {
       const {bot, calls} = recordingBot();
 
       corp(name).setup!(bot);
 
-      expect(calls, name).deep.eq(expected);
-    }
+      expect(calls).deep.eq(expected);
+    });
+  }
+
+  it('follows the action deck bonus card of each corporation that has one', () => {
     expect([CardName.ROBINSON_INDUSTRIES, CardName.VITOR, CardName.ARCADIAN_COMMUNITIES, CardName.FACTORUM].map((name) => corp(name).actionDeckBonusCard))
       .deep.eq([BonusCardId.B28_DIVERSIFICATION, BonusCardId.B04_OVERACHIEVEMENT, BonusCardId.B22_SETTLERS, BonusCardId.B24_SUPPLY_AND_DEMAND]);
   });
 
   // These cubes read only their colour, and the plant track is the least advanced one
-  it('resolves the cubes of Cheung Shing, Valley Trust, Point Luna, Astrodrill and Kuiper', () => {
-    for (const [name, cube, expected] of [
-      [CardName.CHEUNG_SHING_MARS, 'credit', ['gainMc(5)']],
-      [CardName.VALLEY_TRUST, 'white', ['maybeDrawAndResolveProjectCard()']],
-      [CardName.POINT_LUNA, 'white', [`advanceTrack(${PLANT})`]],
-      [CardName.POINT_LUNA, 'black', [`advanceTrack(${SPACE})`]],
-      [CardName.ASTRODRILL, 'white', [`advanceTrack(${PLANT})`]],
-      [CardName.ASTRODRILL, 'black', [`advanceTrack(${SPACE})`]],
-      [CardName.KUIPER_COOPERATIVE, 'white', ['raiseTemperature(1)']],
-      [CardName.KUIPER_COOPERATIVE, 'black', ['placeOcean()']],
-    ] as const) {
+  for (const [name, cube, expected] of [
+    [CardName.CHEUNG_SHING_MARS, 'credit', ['gainMc(5)']],
+    [CardName.VALLEY_TRUST, 'white', ['maybeDrawAndResolveProjectCard()']],
+    [CardName.POINT_LUNA, 'white', [`advanceTrack(${PLANT})`]],
+    [CardName.POINT_LUNA, 'black', [`advanceTrack(${SPACE})`]],
+    [CardName.ASTRODRILL, 'white', [`advanceTrack(${PLANT})`]],
+    [CardName.ASTRODRILL, 'black', [`advanceTrack(${SPACE})`]],
+    [CardName.KUIPER_COOPERATIVE, 'white', ['raiseTemperature(1)']],
+    [CardName.KUIPER_COOPERATIVE, 'black', ['placeOcean()']],
+  ] as const) {
+    it(`resolves the cubes of Cheung Shing, Valley Trust, Point Luna, Astrodrill and Kuiper, ${name} ${cube}`, () => {
       const {bot, calls} = recordingBot();
       setAllTracks(bot, 2);
       setTrack(bot, Tag.PLANT, 1);
 
       corp(name).effect!.onTrackCubeTrigger!(bot, BUILDING, 1, cube);
 
-      expect(calls, `${name} ${cube}`).deep.eq(expected);
-    }
-  });
+      expect(calls).deep.eq(expected);
+    });
+  }
 
   it('Factorum stores 1 M€ for each advance of the building track and none for another track', () => {
     const {bot, corpState} = recordingBot();
@@ -199,18 +202,21 @@ describe('AutomaPreludeManifest', () => {
     expect(calls).deep.eq([`advanceTrack(${PLANT})`]);
   });
 
-  it('Nirgal Enterprises adds 2 to every award, claims a milestone in generations 2 to 5 and from 10, and funds an award in 6 to 9', () => {
+  it('Nirgal Enterprises adds 2 to every award', () => {
     expect(corp(CardName.NIRGAL_ENTERPRISES).effect!.awardScoreBonus!(recordingBot().bot)).eq(2);
-    const milestone = 'maybeClaimMilestone()';
-    const award = 'maybeFundAward()';
-    for (const [generation, expected] of [[1, []], [2, [milestone]], [5, [milestone]], [6, [award]], [9, [award]], [10, [milestone]]] as const) {
+  });
+
+  const milestone = 'maybeClaimMilestone()';
+  const award = 'maybeFundAward()';
+  for (const [generation, expected] of [[1, []], [2, [milestone]], [5, [milestone]], [6, [award]], [9, [award]], [10, [milestone]]] as const) {
+    it(`Nirgal Enterprises claims a milestone in generations 2 to 5 and from 10, and funds an award in 6 to 9, generation ${generation}`, () => {
       const {bot, calls} = recordingBot(generation);
 
       corp(CardName.NIRGAL_ENTERPRISES).beforeActionPhase!(bot);
 
-      expect(calls, `generation ${generation}`).deep.eq(expected);
-    }
-  });
+      expect(calls).deep.eq(expected);
+    });
+  }
 
   // A white and a black cube on the card pay for one temperature step
   it('Palladin Shipping raises the temperature once a white and a black cube are on the card', () => {

@@ -5,7 +5,6 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {TileType} from '../../../src/common/TileType';
 import {DELEGATES_PER_PLAYER} from '../../../src/common/constants';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
-import {THARSIS_MARSBOT_BOARD} from '../../../src/server/automa/boards/TharsisMarsBot';
 import {IMarsBot} from '../../../src/server/automa/IMarsBot';
 import {IMarsBotCorp} from '../../../src/server/automa/IMarsBotCorp';
 import {AUTOMA_TURMOIL_MANIFEST} from '../../../src/server/automa/corps/AutomaTurmoilManifest';
@@ -32,7 +31,7 @@ function recordingBot(options: RecordingBotOptions = {}): RecordingBot {
   const record = (call: string) => {
     calls.push(call);
   };
-  const bot: IMarsBot = fakeMarsBot(THARSIS_MARSBOT_BOARD, {
+  const bot: IMarsBot = fakeMarsBot({
     game,
     player: game.marsBotPlayer,
     megacredits: 0,

@@ -26,7 +26,7 @@ function recordingBot(generation: number = 1) {
   const corpState = new Map<string, number>();
   const markers = new Set(game.board.spaces.slice(0, 2));
   const record = (call: string) => calls.push(call) > 0;
-  const bot = fakeMarsBot({
+  const marsBot = fakeMarsBot({
     game,
     failedActionMc: 5,
     gainMc: (amount) => record(`gainMc(${amount})`),
@@ -46,13 +46,13 @@ function recordingBot(generation: number = 1) {
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
   });
-  return {bot, calls, corpState};
+  return {bot: marsBot, calls, corpState};
 }
 
 /** The calls the corporation makes when MarsBot resolves `card`. */
 function resolving(name: CardName, card: IProjectCard): Array<string> {
-  const {bot, calls} = recordingBot();
-  corp(name).effect!.onProjectCardResolved!(bot, card);
+  const {bot: marsBot, calls} = recordingBot();
+  corp(name).effect!.onProjectCardResolved!(marsBot, card);
   return calls;
 }
 
@@ -113,9 +113,9 @@ describe('AutomaPreludeManifest', () => {
     [CardName.TYCHO_MAGNETICS, ['addBonusCardToBottomOfBonusDeck(B30)']],
   ] as const) {
     it(`follows the Setup box of each corporation that has one, ${name}`, () => {
-      const {bot, calls} = recordingBot();
+      const {bot: marsBot, calls} = recordingBot();
 
-      corp(name).setup!(bot);
+      corp(name).setup!(marsBot);
 
       expect(calls).deep.eq(expected);
     });
@@ -138,23 +138,23 @@ describe('AutomaPreludeManifest', () => {
     [CardName.KUIPER_COOPERATIVE, 'black', ['placeOcean()']],
   ] as const) {
     it(`resolves the cubes of Cheung Shing, Valley Trust, Point Luna, Astrodrill and Kuiper, ${name} ${cube}`, () => {
-      const {bot, calls} = recordingBot();
-      setAllTracks(bot, 2);
-      setTrack(bot, Tag.PLANT, 1);
+      const {bot: marsBot, calls} = recordingBot();
+      setAllTracks(marsBot, 2);
+      setTrack(marsBot, Tag.PLANT, 1);
 
-      corp(name).effect!.onTrackCubeTrigger!(bot, BUILDING, 1, cube);
+      corp(name).effect!.onTrackCubeTrigger!(marsBot, BUILDING, 1, cube);
 
       expect(calls).deep.eq(expected);
     });
   }
 
   it('Factorum stores 1 M€ for each advance of the building track and none for another track', () => {
-    const {bot, corpState} = recordingBot();
+    const {bot: marsBot, corpState} = recordingBot();
     const onCube = corp(CardName.FACTORUM).effect!.onTrackCubeTrigger!;
 
-    onCube(bot, BUILDING, 1, 'white');
-    onCube(bot, BUILDING, 2, 'white');
-    onCube(bot, SPACE, 1, 'white');
+    onCube(marsBot, BUILDING, 1, 'white');
+    onCube(marsBot, BUILDING, 2, 'white');
+    onCube(marsBot, SPACE, 1, 'white');
 
     expect(corpState.get('mcOnCard')).eq(2);
   });
@@ -168,35 +168,35 @@ describe('AutomaPreludeManifest', () => {
   });
 
   it('Arcadian Communities pays 3 M€ for the tile MarsBot puts on a space with its marker, and no one else', () => {
-    const {bot, calls} = recordingBot();
-    const [markedByPlayerTile, markedByBotTile, unmarked] = bot.game.board.spaces;
+    const {bot: marsBot, calls} = recordingBot();
+    const [markedByPlayerTile, markedByBotTile, unmarked] = marsBot.game.board.spaces;
     const onTilePlaced = corp(CardName.ARCADIAN_COMMUNITIES).effect!.onTilePlaced!;
 
-    onTilePlaced(bot, false, TileType.CITY, markedByPlayerTile);
-    onTilePlaced(bot, true, TileType.CITY, unmarked);
-    onTilePlaced(bot, true, TileType.CITY, markedByBotTile);
+    onTilePlaced(marsBot, false, TileType.CITY, markedByPlayerTile);
+    onTilePlaced(marsBot, true, TileType.CITY, unmarked);
+    onTilePlaced(marsBot, true, TileType.CITY, markedByBotTile);
 
     expect(calls).deep.eq(['gainMc(3)']);
   });
 
   it('Manutech advances a track once more after #5 and #12 but not after another space', () => {
-    const {bot, calls} = recordingBot();
+    const {bot: marsBot, calls} = recordingBot();
 
     for (const position of [5, 6, 12]) {
-      corp(CardName.MANUTECH).effect!.afterTrackSpaceResolved!(bot, EVENT, position);
+      corp(CardName.MANUTECH).effect!.afterTrackSpaceResolved!(marsBot, EVENT, position);
     }
 
     expect(calls).deep.eq([`advanceTrack(${EVENT})`, `advanceTrack(${EVENT})`]);
   });
 
   it('Ecotec collects plant resources, 2 from setup and 1 for each Plant, Microbe and Animal tag, and spends 5', () => {
-    const {bot, calls, corpState} = recordingBot();
+    const {bot: marsBot, calls, corpState} = recordingBot();
 
-    corp(CardName.ECOTEC).setup!(bot);
+    corp(CardName.ECOTEC).setup!(marsBot);
     for (const tag of [Tag.PLANT, Tag.MICROBE, Tag.ANIMAL, Tag.SPACE]) {
-      corp(CardName.ECOTEC).effect!.onTagResolved!(bot, tag);
+      corp(CardName.ECOTEC).effect!.onTagResolved!(marsBot, tag);
     }
-    corp(CardName.ECOTEC).beforeActionPhase!(bot);
+    corp(CardName.ECOTEC).beforeActionPhase!(marsBot);
 
     expect(corpState.get('plantResources')).eq(0);
     expect(calls).deep.eq([`advanceTrack(${PLANT})`]);
@@ -210,9 +210,9 @@ describe('AutomaPreludeManifest', () => {
   const award = 'maybeFundAward()';
   for (const [generation, expected] of [[1, []], [2, [milestone]], [5, [milestone]], [6, [award]], [9, [award]], [10, [milestone]]] as const) {
     it(`Nirgal Enterprises claims a milestone in generations 2 to 5 and from 10, and funds an award in 6 to 9, generation ${generation}`, () => {
-      const {bot, calls} = recordingBot(generation);
+      const {bot: marsBot, calls} = recordingBot(generation);
 
-      corp(CardName.NIRGAL_ENTERPRISES).beforeActionPhase!(bot);
+      corp(CardName.NIRGAL_ENTERPRISES).beforeActionPhase!(marsBot);
 
       expect(calls).deep.eq(expected);
     });
@@ -220,12 +220,12 @@ describe('AutomaPreludeManifest', () => {
 
   // A white and a black cube on the card pay for one temperature step
   it('Palladin Shipping raises the temperature once a white and a black cube are on the card', () => {
-    const {bot, calls, corpState} = recordingBot();
+    const {bot: marsBot, calls, corpState} = recordingBot();
     const onCube = corp(CardName.PALLADIN_SHIPPING).effect!.onTrackCubeTrigger!;
 
-    onCube(bot, SPACE, 3, 'white');
-    onCube(bot, SPACE, 4, 'white');
-    onCube(bot, EVENT, 3, 'black');
+    onCube(marsBot, SPACE, 3, 'white');
+    onCube(marsBot, SPACE, 4, 'white');
+    onCube(marsBot, EVENT, 3, 'black');
 
     expect(calls).deep.eq(['raiseTemperature(1)']);
     expect(corpState.get('whiteCubesOnCard')).eq(1);
@@ -241,14 +241,14 @@ describe('AutomaPreludeManifest', () => {
   });
 
   it('Spire collects a science resource for a card with 2 tags, none for 1, and spends 10 on a city and 1 TR', () => {
-    const {bot, calls, corpState} = recordingBot();
+    const {bot: marsBot, calls, corpState} = recordingBot();
     const onCard = corp(CardName.SPIRE).effect!.onProjectCardResolved!;
     corpState.set('scienceResources', 9);
 
-    onCard(bot, new ArtificialLake());
+    onCard(marsBot, new ArtificialLake());
     expect(corpState.get('scienceResources')).eq(9);
-    onCard(bot, new Asteroid());
-    corp(CardName.SPIRE).beforeActionPhase!(bot);
+    onCard(marsBot, new Asteroid());
+    corp(CardName.SPIRE).beforeActionPhase!(marsBot);
 
     expect(corpState.get('scienceResources')).eq(0);
     expect(calls).deep.eq(['placeCity()', 'raiseTR(1)']);

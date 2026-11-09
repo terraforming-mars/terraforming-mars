@@ -17,10 +17,10 @@ const CHEUNG_SHING_MARS: IMarsBotCorp = {
   // Silver resource cubes at positions 4-18 on building track (track 1)
   trackCubes: Array.from({length: 15}, (_, i) => ({trackIndex: 0, position: i + 4, cubeType: 'credit' as const})),
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
       if (cubeType === 'credit') {
-        bot.gainMc(SILVER_CUBE_MC);
-        bot.game.log('MarsBot (Cheung Shing): silver resource cube reached, +5 M€');
+        marsBot.gainMc(SILVER_CUBE_MC);
+        marsBot.game.log('MarsBot (Cheung Shing): silver resource cube reached, +5 M€');
       }
     },
   },
@@ -44,8 +44,8 @@ const POINT_LUNA: IMarsBotCorp = {
     {trackIndex: 5, position: 15, cubeType: 'black'},
   ],
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
-      whiteLeastBlackSpaceHandler(bot, cubeType, 'Point Luna');
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
+      whiteLeastBlackSpaceHandler(marsBot, cubeType, 'Point Luna');
     },
   },
 };
@@ -55,9 +55,9 @@ const ROBINSON_INDUSTRIES: IMarsBotCorp = {
   name: CardName.ROBINSON_INDUSTRIES,
   description: 'Setup: +10 MC. Each generation: add Diversification bonus card to action deck.',
   tags: [],
-  setup(bot) {
-    bot.gainMc(10);
-    bot.game.log('MarsBot (Robinson Industries): +10 M€');
+  setup(marsBot) {
+    marsBot.gainMc(10);
+    marsBot.game.log('MarsBot (Robinson Industries): +10 M€');
   },
   ...bonusCardBeforeActionPhase(BonusCardId.B28_DIVERSIFICATION, 'Robinson Industries'),
 };
@@ -69,19 +69,19 @@ const VALLEY_TRUST: IMarsBotCorp = {
   tags: [],
   requiredExpansions: ['prelude'],
   draftPriority: {type: 'tags', tags: [Tag.SCIENCE]},
-  setup(bot) {
-    bot.drawProjectCardsToActionDeck(1); // "Obtain 1 card"
-    bot.game.log('MarsBot (Valley Trust): drew 1 card');
+  setup(marsBot) {
+    marsBot.drawProjectCardsToActionDeck(1); // "Obtain 1 card"
+    marsBot.game.log('MarsBot (Valley Trust): drew 1 card');
   },
   trackCubes: [
     {trackIndex: 3, position: 8, cubeType: 'white'},
     {trackIndex: 3, position: 16, cubeType: 'white'},
   ],
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
       if (cubeType === 'white') {
-        bot.maybeDrawAndResolveProjectCard();
-        bot.game.log('MarsBot (Valley Trust): white cube: drew and resolved 1 card');
+        marsBot.maybeDrawAndResolveProjectCard();
+        marsBot.game.log('MarsBot (Valley Trust): white cube: drew and resolved 1 card');
       }
     },
   },
@@ -92,17 +92,17 @@ const VITOR: IMarsBotCorp = {
   name: CardName.VITOR,
   description: 'Setup: separate Overachievement from bonus deck. Cards with non-negative VP earn 3 MC. Each generation: add Overachievement to action deck, until it is removed.',
   tags: [],
-  setup(bot) {
-    bot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    bot.game.log('MarsBot (Vitor): Overachievement separated from bonus deck');
+  setup(marsBot) {
+    marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
+    marsBot.game.log('MarsBot (Vitor): Overachievement separated from bonus deck');
   },
   effect: {
-    onProjectCardResolved(bot, card) {
+    onProjectCardResolved(marsBot, card) {
       // The VP printed on the card counts, not what it scores right now
       const printedVp = printedVictoryPoints(card);
       if (printedVp !== undefined && printedVp >= 0) {
-        bot.gainMc(3);
-        bot.game.log('MarsBot (Vitor): non-negative VP card, +3 M€');
+        marsBot.gainMc(3);
+        marsBot.game.log('MarsBot (Vitor): non-negative VP card, +3 M€');
       }
     },
   },
@@ -117,14 +117,14 @@ const ACADIAN_COMMUNITY: IMarsBotCorp = {
   description: 'Tag: Building. Setup: resolve Settlers immediately. Each generation: add Settlers to action deck. ' +
     'Spaces with its player markers are reserved for it. Each tile it places on one of them earns 3 MC.',
   tags: [Tag.BUILDING],
-  setup(bot) {
-    bot.resolveBonusCard(BonusCardId.B22_SETTLERS);
+  setup(marsBot) {
+    marsBot.resolveBonusCard(BonusCardId.B22_SETTLERS);
   },
   effect: {
-    onTilePlaced(bot, placedByMarsBot, _tileType, space) {
-      if (placedByMarsBot && bot.removeMarker(space)) {
-        bot.gainMc(3);
-        bot.game.log('MarsBot (Acadian Community): tile on its player marker, +3 M€');
+    onTilePlaced(marsBot, placedByMarsBot, _tileType, space) {
+      if (placedByMarsBot && marsBot.removeMarker(space)) {
+        marsBot.gainMc(3);
+        marsBot.game.log('MarsBot (Acadian Community): tile on its player marker, +3 M€');
       }
     },
   },
@@ -148,8 +148,8 @@ const ASTRODRILL_ENTERPRISE: IMarsBotCorp = {
     {trackIndex: 1, position: 16, cubeType: 'black'},
   ],
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
-      whiteLeastBlackSpaceHandler(bot, cubeType, 'Astrodrill');
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
+      whiteLeastBlackSpaceHandler(marsBot, cubeType, 'Astrodrill');
     },
   },
 };
@@ -162,11 +162,11 @@ const FACTORUM: IMarsBotCorp = {
   trackCubes: whiteTrackCubes(0),
   trackCubesTriggerEveryAdvance: true,
   effect: {
-    onTrackCubeTrigger(bot, trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, trackIndex, _position, cubeType) {
       if (cubeType === 'white' && trackIndex === 0) {
-        const mc = bot.getCorpState('mcOnCard') + 1;
-        bot.setCorpState('mcOnCard', mc);
-        bot.game.log(`MarsBot (Factorum): building track advance, +1 M€ on card (${mc} total)`);
+        const mc = marsBot.getCorpState('mcOnCard') + 1;
+        marsBot.setCorpState('mcOnCard', mc);
+        marsBot.game.log(`MarsBot (Factorum): building track advance, +1 M€ on card (${mc} total)`);
       }
     },
   },
@@ -184,10 +184,10 @@ const MANUTECH: IMarsBotCorp = {
     {trackIndex: i, position: 12, cubeType: 'black' as const},
   ]).flat(),
   effect: {
-    afterTrackSpaceResolved(bot, trackIndex, position) {
+    afterTrackSpaceResolved(marsBot, trackIndex, position) {
       if (position === 5 || position === 12) {
-        bot.game.log(`MarsBot (Manutech): track ${trackIndex + 1} reached #${position}, advance 1 more`);
-        bot.advanceTrack(trackIndex);
+        marsBot.game.log(`MarsBot (Manutech): track ${trackIndex + 1} reached #${position}, advance 1 more`);
+        marsBot.advanceTrack(trackIndex);
       }
     },
   },
@@ -200,25 +200,25 @@ const ECOTEC: IMarsBotCorp = {
   tags: [Tag.PLANT],
   draftPriority: {type: 'tags', tags: [Tag.PLANT, Tag.MICROBE, Tag.ANIMAL]},
   trackCubes: whiteTrackCubes(6),
-  setup(bot) {
-    bot.setCorpState('plantResources', 2);
-    bot.game.log('MarsBot (Ecotec): 2 plant resources on card');
+  setup(marsBot) {
+    marsBot.setCorpState('plantResources', 2);
+    marsBot.game.log('MarsBot (Ecotec): 2 plant resources on card');
   },
   effect: {
     // Per tag, so a card with two plant tags adds two plants (rulebook B, p.1 card C40)
-    onTagResolved(bot, tag) {
+    onTagResolved(marsBot, tag) {
       if (tag === Tag.PLANT || tag === Tag.MICROBE || tag === Tag.ANIMAL) {
-        bot.setCorpState('plantResources', bot.getCorpState('plantResources') + 1);
-        bot.game.log('MarsBot (Ecotec): Plant/Microbe/Animal tag, +1 plant resource on card');
+        marsBot.setCorpState('plantResources', marsBot.getCorpState('plantResources') + 1);
+        marsBot.game.log('MarsBot (Ecotec): Plant/Microbe/Animal tag, +1 plant resource on card');
       }
     },
   },
-  beforeActionPhase(bot) {
-    const plants = bot.getCorpState('plantResources');
+  beforeActionPhase(marsBot) {
+    const plants = marsBot.getCorpState('plantResources');
     if (plants >= 5) {
-      bot.setCorpState('plantResources', plants - 5);
-      bot.advanceTrack(6); // Plant track = index 6
-      bot.game.log('MarsBot (Ecotec): spent 5 plant resources, advance plant track');
+      marsBot.setCorpState('plantResources', plants - 5);
+      marsBot.advanceTrack(6); // Plant track = index 6
+      marsBot.game.log('MarsBot (Ecotec): spent 5 plant resources, advance plant track');
     }
   },
 };
@@ -238,13 +238,13 @@ const KUIPER_COOPERATIVE: IMarsBotCorp = {
     {trackIndex: 1, position: 14, cubeType: 'black'},
   ],
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
       if (cubeType === 'white') {
-        bot.raiseTemperature(1);
-        bot.game.log('MarsBot (Kuiper): white cube: temperature +1');
+        marsBot.raiseTemperature(1);
+        marsBot.game.log('MarsBot (Kuiper): white cube: temperature +1');
       } else if (cubeType === 'black') {
-        bot.placeOcean();
-        bot.game.log('MarsBot (Kuiper): black cube: place ocean');
+        marsBot.placeOcean();
+        marsBot.game.log('MarsBot (Kuiper): black cube: place ocean');
       }
     },
   },
@@ -255,9 +255,9 @@ const NIRGAL_ENTERPRISES: IMarsBotCorp = {
   name: CardName.NIRGAL_ENTERPRISES,
   description: 'Tags: Building, Power, Plant. Setup: remove Overachievement. +2 in every award. Generations 2-5 and 10+: claim milestone. Generations 6-9: fund award.',
   tags: [Tag.BUILDING, Tag.POWER, Tag.PLANT],
-  setup(bot) {
-    bot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    bot.game.log('MarsBot (Nirgal): Overachievement removed from bonus deck');
+  setup(marsBot) {
+    marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
+    marsBot.game.log('MarsBot (Nirgal): Overachievement removed from bonus deck');
   },
   effect: {
     awardScoreBonus() {
@@ -265,15 +265,15 @@ const NIRGAL_ENTERPRISES: IMarsBotCorp = {
     },
   },
   // Gen 2-5 or 10+: claim milestone. Gen 6-9: fund award. Neither is a Failed Action when it can't.
-  beforeActionPhase(bot) {
-    const generation = bot.game.generation;
+  beforeActionPhase(marsBot) {
+    const generation = marsBot.game.generation;
     if ((generation >= 2 && generation <= 5) || generation >= 10) {
-      if (!bot.maybeClaimMilestone()) {
-        bot.game.log('MarsBot (Nirgal): no milestone to claim');
+      if (!marsBot.maybeClaimMilestone()) {
+        marsBot.game.log('MarsBot (Nirgal): no milestone to claim');
       }
     } else if (generation >= 6 && generation <= 9) {
-      if (!bot.maybeFundAward()) {
-        bot.game.log('MarsBot (Nirgal): no award to fund');
+      if (!marsBot.maybeFundAward()) {
+        marsBot.game.log('MarsBot (Nirgal): no award to fund');
       }
     }
   },
@@ -285,9 +285,9 @@ const PALADIN_SHIPPING: IMarsBotCorp = {
   description: 'Tags: Space, Event. Draft: Space > Event. Setup: +5 MC. Cubes on space and event tracks are collected; when a white and black pair is collected, temperature +1.',
   tags: [Tag.SPACE, Tag.EVENT],
   draftPriority: {type: 'tags', tags: [Tag.SPACE, Tag.EVENT]},
-  setup(bot) {
-    bot.gainMc(5);
-    bot.game.log('MarsBot (Paladin): +5 M€');
+  setup(marsBot) {
+    marsBot.gainMc(5);
+    marsBot.game.log('MarsBot (Paladin): +5 M€');
   },
   trackCubes: [
     {trackIndex: 1, position: 3, cubeType: 'white'},
@@ -304,19 +304,19 @@ const PALADIN_SHIPPING: IMarsBotCorp = {
     {trackIndex: 2, position: 11, cubeType: 'black'},
   ],
   effect: {
-    onTrackCubeTrigger(bot, _trackIndex, _position, cubeType) {
+    onTrackCubeTrigger(marsBot, _trackIndex, _position, cubeType) {
       // Collect cube onto card. If 2 colors present, remove pair + temp +1
       const key = cubeType === 'white' ? 'whiteCubesOnCard' : 'blackCubesOnCard';
-      bot.setCorpState(key, bot.getCorpState(key) + 1);
-      const white = bot.getCorpState('whiteCubesOnCard');
-      const black = bot.getCorpState('blackCubesOnCard');
+      marsBot.setCorpState(key, marsBot.getCorpState(key) + 1);
+      const white = marsBot.getCorpState('whiteCubesOnCard');
+      const black = marsBot.getCorpState('blackCubesOnCard');
       if (white > 0 && black > 0) {
-        bot.setCorpState('whiteCubesOnCard', white - 1);
-        bot.setCorpState('blackCubesOnCard', black - 1);
-        bot.raiseTemperature(1);
-        bot.game.log('MarsBot (Paladin): paired cubes: temperature +1');
+        marsBot.setCorpState('whiteCubesOnCard', white - 1);
+        marsBot.setCorpState('blackCubesOnCard', black - 1);
+        marsBot.raiseTemperature(1);
+        marsBot.game.log('MarsBot (Paladin): paired cubes: temperature +1');
       } else {
-        bot.game.log(`MarsBot (Paladin): ${cubeType} cube collected (W:${bot.getCorpState('whiteCubesOnCard')}, B:${bot.getCorpState('blackCubesOnCard')})`);
+        marsBot.game.log(`MarsBot (Paladin): ${cubeType} cube collected (W:${marsBot.getCorpState('whiteCubesOnCard')}, B:${marsBot.getCorpState('blackCubesOnCard')})`);
       }
     },
   },
@@ -327,21 +327,21 @@ const SAGITTA: IMarsBotCorp = {
   name: CardName.SAGITTA_FRONTIER_SERVICES,
   description: 'Tags: Power, Event. Setup: +8 MC. Tagless cards pay double the Failed Action (10 MC instead of 5). 1-tag cards earn 1 extra MC.',
   tags: [Tag.POWER, Tag.EVENT],
-  setup(bot) {
-    bot.gainMc(8);
-    bot.game.log('MarsBot (Sagitta): +8 M€');
+  setup(marsBot) {
+    marsBot.gainMc(8);
+    marsBot.game.log('MarsBot (Sagitta): +8 M€');
   },
   effect: {
     // Tagless card: double the Failed Action (10 MC instead of 5, 6 instead of 3 on Easy). 1-tag card: +1 MC.
-    onProjectCardResolved(bot, card) {
+    onProjectCardResolved(marsBot, card) {
       const tagCount = cardTagsIncludingEvent(card).length;
       if (tagCount === 0) {
-        const extra = bot.failedActionMc;
-        bot.gainMc(extra);
-        bot.game.log('MarsBot (Sagitta): tagless card, Failed Action pays ${0} M€ more', (b) => b.number(extra));
+        const extra = marsBot.failedActionMc;
+        marsBot.gainMc(extra);
+        marsBot.game.log('MarsBot (Sagitta): tagless card, Failed Action pays ${0} M€ more', (b) => b.number(extra));
       } else if (tagCount === 1) {
-        bot.gainMc(1);
-        bot.game.log('MarsBot (Sagitta): 1-tag card, +1 M€');
+        marsBot.gainMc(1);
+        marsBot.game.log('MarsBot (Sagitta): 1-tag card, +1 M€');
       }
     },
   },
@@ -354,21 +354,21 @@ const SPIRE: IMarsBotCorp = {
   tags: [Tag.EARTH],
   draftPriority: {type: 'mostTags'},
   effect: {
-    onProjectCardResolved(bot, card) {
+    onProjectCardResolved(marsBot, card) {
       const tagCount = cardTagsIncludingEvent(card).length;
       if (tagCount >= 2) {
-        bot.setCorpState('scienceResources', bot.getCorpState('scienceResources') + 1);
-        bot.game.log(`MarsBot (Spire): card with ${tagCount} tags, +1 science resource`);
+        marsBot.setCorpState('scienceResources', marsBot.getCorpState('scienceResources') + 1);
+        marsBot.game.log(`MarsBot (Spire): card with ${tagCount} tags, +1 science resource`);
       }
     },
   },
-  beforeActionPhase(bot) {
-    const science = bot.getCorpState('scienceResources');
+  beforeActionPhase(marsBot) {
+    const science = marsBot.getCorpState('scienceResources');
     if (science >= 10) {
-      bot.setCorpState('scienceResources', science - 10);
-      bot.placeCity();
-      bot.raiseTR(1);
-      bot.game.log('MarsBot (Spire): spent 10 science, placed city + TR +1');
+      marsBot.setCorpState('scienceResources', science - 10);
+      marsBot.placeCity();
+      marsBot.raiseTR(1);
+      marsBot.game.log('MarsBot (Spire): spent 10 science, placed city + TR +1');
     }
   },
 };
@@ -379,9 +379,9 @@ const TYCO_MAGNETICS: IMarsBotCorp = {
   description: 'Draft: Power > Science. Setup: add Interface Hyperlink to the bottom of the bonus deck.',
   tags: [],
   draftPriority: {type: 'tags', tags: [Tag.POWER, Tag.SCIENCE]},
-  setup(bot) {
-    bot.addBonusCardToBottomOfBonusDeck(BonusCardId.B30_INTERFACE_HYPERLINK);
-    bot.game.log('MarsBot (Tyco Magnetics): Interface Hyperlink added to the bottom of the bonus deck');
+  setup(marsBot) {
+    marsBot.addBonusCardToBottomOfBonusDeck(BonusCardId.B30_INTERFACE_HYPERLINK);
+    marsBot.game.log('MarsBot (Tyco Magnetics): Interface Hyperlink added to the bottom of the bonus deck');
   },
 };
 

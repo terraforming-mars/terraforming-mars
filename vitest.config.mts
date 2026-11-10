@@ -5,7 +5,7 @@ import * as path from 'path';
 export default defineConfig({
   plugins: [
     // Leave template asset URLs (e.g. <img src="assets/...">) as plain strings,
-    // matching the webpack build, which has no loader rule for images.
+    // matching the production build, which leaves image URLs untouched.
     vue({template: {transformAssetUrls: false}}),
   ],
   resolve: {

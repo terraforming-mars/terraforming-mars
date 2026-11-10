@@ -10,7 +10,7 @@
 			],
 			"group": "build",
 			"label": "npm: build",
-			"detail": "node make_locales.js && eslint src/*.ts && lessc src/styles/common.less styles.css && tsc --build src/tsconfig.json && webpack --config webpack.config.js"
+			"detail": "node make_locales.js && eslint src/*.ts && lessc src/styles/common.less styles.css && tsc --build src/tsconfig.json && vite build"
 		},
 		{
 			"type": "npm",

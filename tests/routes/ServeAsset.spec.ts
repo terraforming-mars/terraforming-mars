@@ -36,8 +36,8 @@ describe('ServeAsset', () => {
   // used and overridden below. That makes how individual condition changes these calls.
   const primedCache = {
     readFile: 0,
-    readFileSync: 3,
-    existsSync: 0,
+    readFileSync: 6,
+    existsSync: 3,
   };
 
   const storedNodeEnv = process.env.NODE_ENV;
@@ -122,7 +122,6 @@ describe('ServeAsset', () => {
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,
-      existsSync: 0,
     });
   });
 
@@ -136,7 +135,6 @@ describe('ServeAsset', () => {
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,
-      existsSync: 0,
     });
   });
 
@@ -149,16 +147,32 @@ describe('ServeAsset', () => {
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,
-      existsSync: 0,
     });
   });
 
-  it('vendors.js', async () => {
+  it('vendors.js is no longer served (Vite output)', async () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/vendors.js';
     scaffolding.req.headers['accept-encoding'] = '';
     await scaffolding.get(instance, res);
-    expect(res.content).eq('data: build/vendors.js');
+    expect(res.statusCode).eq(statusCode.notFound);
+  });
+
+  it('client.css', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/client.css';
+    scaffolding.req.headers['accept-encoding'] = '';
+    await scaffolding.get(instance, res);
+    expect(res.content).eq('data: build/client.css');
+    expect(res.getHeader('Content-Type')).eq('text/css');
+  });
+
+  it('client.css.gz', async () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    scaffolding.url = '/client.css';
+    scaffolding.req.headers['accept-encoding'] = 'gzip';
+    await scaffolding.get(instance, res);
+    expect(res.content).eq('data: build/client.css.gz');
   });
 
   it('chunk js file', async () => {
@@ -187,7 +201,7 @@ describe('ServeAsset', () => {
 
   it('serves all script sources referenced in index.html', async () => {
     const html = fs.readFileSync('assets/index.html', 'utf8');
-    const srcs = [...html.matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]);
+    const srcs = [...html.matchAll(/<script[^>]* src="([^"]+)"/g)].map((m) => m[1]);
     expect(srcs).to.not.be.empty;
     for (const src of srcs) {
       const perRes = new MockResponse();

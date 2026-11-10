@@ -89,22 +89,22 @@ const positionClass = computed(() => {
   border-radius: 1px;
 
   &--megacredit {
-    background: url(./assets/misc/1mc.png) no-repeat;
+    background: url(/assets/misc/1mc.png) no-repeat;
     background-size: 16px;
   }
 
   &--2mc {
-    background: url(./assets/misc/2mc.png) no-repeat;
+    background: url(/assets/misc/2mc.png) no-repeat;
     background-size: 16px;
   }
 
   &--lose2mc {
-    background: url(./assets/misc/lose2mc.png) no-repeat;
+    background: url(/assets/misc/lose2mc.png) no-repeat;
     background-size: 16px;
   }
 
   &.board-space-bonus--city {
-    background: url(./assets/tiles/city.png) no-repeat;
+    background: url(/assets/tiles/city.png) no-repeat;
     background-size: 16px;
   }
   // A card is portrait, so keep it 16px tall but narrower than it is square.

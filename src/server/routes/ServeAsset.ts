@@ -53,6 +53,12 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css.gz', compressed);
     const brotli = fileApi.readFileSync('build/styles.css.br');
     this.cache.set('build/styles.css.br', brotli);
+    // client.css only exists after a Vite build (and not while Vite serves the app in development)
+    for (const file of ['build/client.css', 'build/client.css.gz', 'build/client.css.br']) {
+      if (fileApi.existsSync(file)) {
+        this.cache.set(file, fileApi.readFileSync(file));
+      }
+    }
   }
 
   public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
@@ -155,10 +161,17 @@ export class ServeAsset extends Handler {
       }
       return {file: 'build/styles.css'};
 
+    case 'client.css':
+      if (encodings.has('br') && this.fileApi.existsSync('build/client.css.br')) {
+        return {file: 'build/client.css.br', encoding: 'br'};
+      }
+      if (encodings.has('gzip') && this.fileApi.existsSync('build/client.css.gz')) {
+        return {file: 'build/client.css.gz', encoding: 'gzip'};
+      }
+      return {file: 'build/client.css'};
+
     case 'main.js':
     case 'main.js.map':
-    case 'vendors.js':
-    case 'vendors.js.map':
       return this.toMainFile(urlPath, encodings);
 
     // sw.js is empty. Although not confirmed, it seems sw.js is necessary
@@ -172,7 +185,7 @@ export class ServeAsset extends Handler {
       return {file: 'assets/favicon.ico'};
 
     default:
-      // Serve JS chunks produced by webpack code splitting.
+      // Serve JS chunks produced by the Vite build.
       if (urlPath.startsWith('chunks/')) {
         const chunksRoot = path.resolve('./build/chunks');
         const resolvedFile = path.resolve(path.normalize('build/' + urlPath));
@@ -184,6 +197,15 @@ export class ServeAsset extends Handler {
       }
 
       if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg') || urlPath.endsWith('.json') || urlPath.endsWith('.svg')) {
+        // Images referenced from component CSS are emitted by Vite (hashed) into build/assets and
+        // take precedence over the original file in the assets directory.
+        if (urlPath.startsWith('assets/')) {
+          const buildAssetsRoot = path.resolve('./build/assets');
+          const buildFile = path.resolve(path.normalize('build/' + urlPath));
+          if (buildFile.startsWith(buildAssetsRoot + path.sep) && this.fileApi.existsSync(buildFile)) {
+            return {file: buildFile};
+          }
+        }
         const assetsRoot = path.resolve('./assets');
         const resolvedFile = path.resolve(path.normalize(urlPath));
 

@@ -22,7 +22,6 @@ export function badInputRequest(_req: Request, res: Response, e: unknown) {
     'Content-Type': 'application/json',
   });
   const id = e instanceof AppError ? e.id : undefined;
-  // Only the message of an Error reaches the player; anything else thrown could carry internals
   const message = e instanceof Error ? e.message : 'Invalid input';
   if (!(e instanceof Error)) {
     console.warn('bad input', e);

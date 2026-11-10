@@ -125,7 +125,6 @@ export class ServeAsset extends Handler {
     }
   }
 
-  // file: a fixed build file, or a chunk path already resolved and checked to lie inside build/chunks
   private toMainFile(file: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     // Only serve compressed versions in production. Development mode serves
     // uncompressed versions because they can be hot-swapped.
@@ -143,7 +142,6 @@ export class ServeAsset extends Handler {
   }
 
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
-    // Fixed files: the path read from disk is the constant from the list, never the request path itself
     const fixedFile = FIXED_FILES.find((file) => file === urlPath);
     if (fixedFile !== undefined) {
       return {file: fixedFile};
@@ -180,8 +178,7 @@ export class ServeAsset extends Handler {
         // With the separator: a sibling such as build/chunks-other is not inside
         if (resolvedFile.startsWith(chunksRoot + path.sep)) {
           if (urlPath.endsWith('.js') || urlPath.endsWith('.js.map')) {
-            // The checked, resolved path – not the request path – reaches the file system
-            return this.toMainFile(resolvedFile, encodings);
+            return this.toMainFile(path.relative('.', resolvedFile), encodings);
           }
         }
       }

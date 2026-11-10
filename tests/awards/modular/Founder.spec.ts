@@ -8,6 +8,7 @@ import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
 import {cast} from '../../../src/common/utils/utils';
+import {TileType} from '@/common/TileType';
 
 describe('Founder', () => {
   let founder: Founder;
@@ -48,5 +49,19 @@ describe('Founder', () => {
     addCity(player3, adjacentSpaces[1].id);
 
     expect(scores()).deep.eq([0, 1, 1]);
+  });
+
+  it('Counts the Neural Instance tile as special only for MarsBot', () => {
+    const [game, human] = testGame(1, {automa: true});
+    game.board = EmptyBoard.newInstance();
+    const marsBotPlayer = game.marsBotPlayer!;
+    const neuralInstance = game.board.getAvailableSpacesOnLand(human)[0];
+    game.simpleAddTile(marsBotPlayer, neuralInstance, {tileType: TileType.NEURAL_INSTANCE});
+    const adjacentSpaces = game.board.getAdjacentSpaces(neuralInstance);
+    addGreenery(human, adjacentSpaces[0].id);
+    addGreenery(marsBotPlayer, adjacentSpaces[1].id);
+
+    expect(founder.getScore(human)).eq(0);
+    expect(founder.getScore(marsBotPlayer)).eq(1);
   });
 });

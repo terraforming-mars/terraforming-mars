@@ -61,7 +61,7 @@ import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {copyAndClear, inplaceRemove, sum, toName} from '../common/utils/utils';
+import {copyAndClear, inplaceRemove, oneWayDifference, sum, toName} from '../common/utils/utils';
 import {generateRandomId} from './utils/server-ids';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
@@ -1221,14 +1221,18 @@ export class Player implements IPlayer {
     });
   }
 
-  public getPlayableCards(): Array<IProjectCard> {
+  private getCandidateCardsToPlay() {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
     if (card instanceof SelfReplicatingRobots) {
       candidateCards.push(...card.targetCards);
     }
+    return candidateCards;
+  }
 
+  public getPlayableCards(): Array<IProjectCard> {
+    const candidateCards = this.getCandidateCardsToPlay();
     const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
       card.clearWarnings();
@@ -1614,7 +1618,12 @@ export class Player implements IPlayer {
     // Playable cards
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(new SelectProjectCardToPlay(this, playableCards));
+      const unplayableCards = oneWayDifference(this.getCandidateCardsToPlay(), playableCards);
+      const cards = [...playableCards, ...unplayableCards];
+      const enabled = [...Array(playableCards.length).fill(true), ...Array(unplayableCards.length).fill(false)];
+      action.options.push(new SelectProjectCardToPlay(this, cards, {
+        enabled: enabled,
+      }));
     }
 
     // Trade with colonies

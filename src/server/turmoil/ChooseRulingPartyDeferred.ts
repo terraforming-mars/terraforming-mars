@@ -1,10 +1,9 @@
 import {IPlayer} from '../IPlayer';
 import {DeferredAction} from '../deferredActions/DeferredAction';
-import {OrOptions} from '../inputs/OrOptions';
+import {SelectParty} from '../inputs/SelectParty';
 import {Turmoil} from './Turmoil';
 import {PoliticalAgendas} from './PoliticalAgendas';
 import {IParty} from './parties/IParty';
-import {SelectOption} from '../inputs/SelectOption';
 
 export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
   private turmoil: Turmoil;
@@ -14,16 +13,16 @@ export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
   }
 
   public execute() {
-    // Interesting that this doesn't use SelectParty. Perhaps that's the right choice.
-    const setRulingParty = new OrOptions().setTitle('Select new ruling party');
-    setRulingParty.options = this.turmoil.parties.map((p: IParty) => new SelectOption(p.name).andThen(() => {
-      this.turmoil.rulingPolicy().onPolicyEnd?.(this.player.game);
-      this.turmoil.rulingParty = p;
-      this.player.game.log('The ruling party is: ${0}', (b) => b.partyName(p.name));
-      PoliticalAgendas.setNextAgenda(this.turmoil, this.player.game);
-      this.cb(p);
-      return undefined;
-    }));
-    return setRulingParty;
+    const partyNames = this.turmoil.parties.map((p) => p.name);
+    return new SelectParty('Select new ruling party', 'Select', partyNames)
+      .andThen((partyName) => {
+        const party = this.turmoil.getPartyByName(partyName);
+        this.turmoil.rulingPolicy().onPolicyEnd?.(this.player.game);
+        this.turmoil.rulingParty = party;
+        this.player.game.log('The ruling party is: ${0}', (b) => b.partyName(party.name));
+        PoliticalAgendas.setNextAgenda(this.turmoil, this.player.game);
+        this.cb(party);
+        return undefined;
+      });
   }
 }

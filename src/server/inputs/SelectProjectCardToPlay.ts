@@ -30,7 +30,10 @@ export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
     this.cb(card);
   }
 
-  protected override validate(): void {
-    // No additional validation
+  protected override validate(card: IProjectCard): void {
+    const cardIndex = this.cards.findIndex((c) => c.name === card.name);
+    if (this.config?.enabled && this.config.enabled[cardIndex] === false) {
+      throw new Error('Unavailable card ' + card.name);
+    }
   }
 }

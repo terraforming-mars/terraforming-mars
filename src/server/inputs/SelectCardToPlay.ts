@@ -29,10 +29,6 @@ export abstract class SelectCardToPlay<T extends IProjectCard | IStandardProject
   public cards: ReadonlyArray<T> = [];
   public extras: Map<CardName, PlayCardMetadata>;
 
-  public get enabled(): ReadonlyArray<boolean> | undefined {
-    return this.config?.enabled;
-  }
-
   constructor(
     protected player: IPlayer,
     cards: ReadonlyArray<T>,

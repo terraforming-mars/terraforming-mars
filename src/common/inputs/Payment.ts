@@ -45,70 +45,74 @@ export const DEFAULT_PAYMENT_VALUES = {
   kuiperAsteroids: 1,
 } satisfies Record<SpendableResource, number>;
 
-export namespace Payment {
-  export const EMPTY: Readonly<Payment> = {
-    heat: 0,
-    megacredits: 0,
-    steel: 0,
-    titanium: 0,
-    plants: 0,
-    microbes: 0,
-    floaters: 0,
-    lunaArchivesScience: 0,
-    spireScience: 0,
-    seeds: 0,
-    auroraiData: 0,
-    graphene: 0,
-    kuiperAsteroids: 0,
-  } as const;
+const EMPTY: Readonly<Payment> = {
+  heat: 0,
+  megacredits: 0,
+  steel: 0,
+  titanium: 0,
+  plants: 0,
+  microbes: 0,
+  floaters: 0,
+  lunaArchivesScience: 0,
+  spireScience: 0,
+  seeds: 0,
+  auroraiData: 0,
+  graphene: 0,
+  kuiperAsteroids: 0,
+} as const;
 
-  export function of(payment: Partial<Payment>) : Payment {
-    return {
-      auroraiData: payment.auroraiData ?? 0,
-      floaters: payment.floaters ?? 0,
-      heat: payment.heat ?? 0,
-      lunaArchivesScience: payment.lunaArchivesScience ?? 0,
-      spireScience: payment.spireScience ?? 0,
-      megacredits: payment.megacredits ?? 0,
-      microbes: payment.microbes ?? 0,
-      seeds: payment.seeds ?? 0,
-      steel: payment.steel ?? 0,
-      titanium: payment.titanium ?? 0,
-      graphene: payment.graphene ?? 0,
-      kuiperAsteroids: payment.kuiperAsteroids ?? 0,
-      plants: payment.plants ?? 0,
-    };
-  }
-
-  const ICONS = {
-    megacredits: ':r:mc:',
-    steel: ':r:steel:',
-    titanium: ':r:titanium:',
-    heat: ':r:heat:',
-    plants: ':r:plants:',
-    microbes: ':cr:microbe:',
-    floaters: ':cr:floater:',
-    lunaArchivesScience: ':cr:science:',
-    spireScience: ':cr:science:',
-    seeds: ':cr:seed:',
-    auroraiData: ':cr:data:',
-    graphene: ':cr:graphene:',
-    kuiperAsteroids: ':cr:asteroid:',
-  } satisfies Record<SpendableResource, string>;
-
-  const SORTED_FOR_LOG = SPENDABLE_RESOURCES.toSorted(reversed(comparing((key) => DEFAULT_PAYMENT_VALUES[key])));
-  /** Describes a payment as markdown icon shortcodes for the log, e.g. `-3:r:mc: -1:r:steel:`. */
-  export function toLogString(payment: Payment | undefined): string {
-    if (payment !== undefined) {
-      const filtered = SORTED_FOR_LOG.filter((key) => payment[key] > 0);
-      if (filtered.length > 0) {
-        const parts = filtered.map((key) => `-${payment[key]}${ICONS[key]}`);
-        return parts.join(' ');
-      }
-    }
-    return '0';
-  }
+function of(payment: Partial<Payment>) : Payment {
+  return {
+    auroraiData: payment.auroraiData ?? 0,
+    floaters: payment.floaters ?? 0,
+    heat: payment.heat ?? 0,
+    lunaArchivesScience: payment.lunaArchivesScience ?? 0,
+    spireScience: payment.spireScience ?? 0,
+    megacredits: payment.megacredits ?? 0,
+    microbes: payment.microbes ?? 0,
+    seeds: payment.seeds ?? 0,
+    steel: payment.steel ?? 0,
+    titanium: payment.titanium ?? 0,
+    graphene: payment.graphene ?? 0,
+    kuiperAsteroids: payment.kuiperAsteroids ?? 0,
+    plants: payment.plants ?? 0,
+  };
 }
+
+const ICONS = {
+  megacredits: ':r:mc:',
+  steel: ':r:steel:',
+  titanium: ':r:titanium:',
+  heat: ':r:heat:',
+  plants: ':r:plants:',
+  microbes: ':cr:microbe:',
+  floaters: ':cr:floater:',
+  lunaArchivesScience: ':cr:science:',
+  spireScience: ':cr:science:',
+  seeds: ':cr:seed:',
+  auroraiData: ':cr:data:',
+  graphene: ':cr:graphene:',
+  kuiperAsteroids: ':cr:asteroid:',
+} satisfies Record<SpendableResource, string>;
+
+const SORTED_FOR_LOG = SPENDABLE_RESOURCES.toSorted(reversed(comparing((key) => DEFAULT_PAYMENT_VALUES[key])));
+/** Describes a payment as markdown icon shortcodes for the log, e.g. `-3:r:mc: -1:r:steel:`. */
+function toLogString(payment: Payment | undefined): string {
+  if (payment !== undefined) {
+    const filtered = SORTED_FOR_LOG.filter((key) => payment[key] > 0);
+    if (filtered.length > 0) {
+      const parts = filtered.map((key) => `-${payment[key]}${ICONS[key]}`);
+      return parts.join(' ');
+    }
+  }
+  return '0';
+}
+
+export const Payment = {
+  EMPTY,
+  of,
+  toLogString,
+} as const;
 
 /**
  * See PaymentOptions.

@@ -218,6 +218,20 @@ describe('CreateGameForm', () => {
     expect(model.customMA).is.undefined;
   });
 
+  it('solo games ignore the milestone and award settings', async () => {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+    const model = wrapper.vm as unknown as CreateGameModel;
+    model.playersCount = 1;
+    model.randomMA = RandomMAOptionType.MANUAL;
+    model.customMA = {milestones: ['Terraformer'], awards: []};
+    expect(wrapper.vm.hasBlockingValidationErrors).is.false;
+    const config: NewGameConfig | undefined = await wrapper.vm.serializeSettings();
+    expect(config?.randomMA).eq(RandomMAOptionType.NONE);
+    expect(config?.customMA).is.undefined;
+  });
+
   it('validates the form settings', () => {
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(3)).notEnoughCorporations).eq(4);
     expect(validateTwoPlayerGame((model) => model.customCorporations = cardNames(4)).notEnoughCorporations).eq(0);

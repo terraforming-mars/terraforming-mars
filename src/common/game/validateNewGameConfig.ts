@@ -230,10 +230,12 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     errors.ceosMissingExpansions = config.customCeos.filter(isMissingExpansion);
   }
 
-  try {
-    validateCustomMA(config.customMA, config.randomMA, config.expansions.venus);
-  } catch (e) {
-    errors.invalidCustomMA = e instanceof Error ? e.message : String(e);
+  if (playerCount > 1) {
+    try {
+      validateCustomMA(config.customMA, config.randomMA, config.expansions.venus);
+    } catch (e) {
+      errors.invalidCustomMA = e instanceof Error ? e.message : String(e);
+    }
   }
   return errors;
 }

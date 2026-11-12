@@ -3,6 +3,7 @@ import {expect} from 'chai';
 import {h} from 'vue';
 import {globalConfig} from '../getLocalVue';
 import ModuleItemFilter from '@/client/components/create/ModuleItemFilter.vue';
+import {GameModule} from '@/common/cards/GameModule';
 
 // Stub that renders both named slots so template content is accessible in tests.
 const PopupPanelStub = {
@@ -11,14 +12,14 @@ const PopupPanelStub = {
   emits: ['close'],
 };
 
-const GROUPS = [
-  {key: 'alpha', label: 'Group Alpha'},
-  {key: 'beta', label: 'Group Beta'},
+const GROUPS: Array<{key: GameModule, label: string}> = [
+  {key: 'venus', label: 'Group Alpha'},
+  {key: 'moon', label: 'Group Beta'},
 ];
 
 const ITEMS_BY_GROUP: Record<string, Array<string>> = {
-  alpha: ['item-a1', 'item-a2'],
-  beta: ['item-b1'],
+  venus: ['item-a1', 'item-a2'],
+  moon: ['item-b1'],
 };
 
 function mountFilter(overrides: {selected?: Array<string>} = {}) {
@@ -63,7 +64,7 @@ describe('ModuleItemFilter', () => {
       props: {
         title: 'Test Filter',
         groups: GROUPS,
-        itemsByGroup: {alpha: ['item-a1'], beta: []},
+        itemsByGroup: {venus: ['item-a1'], moon: []},
         selected: [],
       },
     });
@@ -86,14 +87,14 @@ describe('ModuleItemFilter', () => {
 
   it('selectAll(group) adds only items from that group', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('alpha');
+    (wrapper.vm as any).selectAll('venus');
     expect((wrapper.vm as any).localSelected).to.have.members(['item-a1', 'item-a2']);
     expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
   });
 
   it('selectAll does not add duplicates', () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    (wrapper.vm as any).selectAll('alpha');
+    (wrapper.vm as any).selectAll('venus');
     const selected: Array<string> = (wrapper.vm as any).localSelected;
     expect(selected.filter((x) => x === 'item-a1')).to.have.length(1);
   });
@@ -108,7 +109,7 @@ describe('ModuleItemFilter', () => {
 
   it('selectNone(group) removes only items from that group', () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-a2', 'item-b1']});
-    (wrapper.vm as any).selectNone('alpha');
+    (wrapper.vm as any).selectNone('venus');
     expect((wrapper.vm as any).localSelected).to.deep.eq(['item-b1']);
   });
 
@@ -122,7 +123,7 @@ describe('ModuleItemFilter', () => {
 
   it('invertSelection(group) toggles only items in that group', () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-b1']});
-    (wrapper.vm as any).invertSelection('alpha');
+    (wrapper.vm as any).invertSelection('venus');
     // item-a1 removed, item-a2 added; item-b1 untouched
     expect((wrapper.vm as any).localSelected).to.have.members(['item-a2', 'item-b1']);
   });
@@ -131,13 +132,13 @@ describe('ModuleItemFilter', () => {
 
   it('watchSelect(key, true) calls selectAll for the group', () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).watchSelect('beta', true);
+    (wrapper.vm as any).watchSelect('moon', true);
     expect((wrapper.vm as any).localSelected).to.include('item-b1');
   });
 
   it('watchSelect(key, false) calls selectNone for the group', () => {
     const wrapper = mountFilter({selected: ['item-b1']});
-    (wrapper.vm as any).watchSelect('beta', false);
+    (wrapper.vm as any).watchSelect('moon', false);
     expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
   });
 
@@ -170,6 +171,11 @@ describe('ModuleItemFilter', () => {
   it('icon maps "colonies" to "colony" suffix', () => {
     const wrapper = mountFilter();
     expect((wrapper.vm as any).icon('colonies')).to.eq('create-game-expansion-icon expansion-icon-colony');
+  });
+
+  it('icon maps "corpera" to "CE" suffix', () => {
+    const wrapper = mountFilter();
+    expect((wrapper.vm as any).icon('corpera')).to.eq('create-game-expansion-icon expansion-icon-CE');
   });
 
   it('icon maps "moon" to "themoon" suffix', () => {

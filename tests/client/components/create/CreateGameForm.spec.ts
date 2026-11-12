@@ -204,28 +204,13 @@ describe('CreateGameForm', () => {
     expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
   });
 
-  it('toggling random milestones and awards leaves manual milestones and awards', () => {
-    const wrapper = shallowMount(CreateGameForm, {
-      ...globalConfig,
-    });
-    const model = wrapper.vm as unknown as CreateGameModel;
-    model.randomMA = RandomMAOptionType.MANUAL;
-    model.customMA = {milestones: ['Terraformer'], awards: ['Banker']};
-    expect(wrapper.vm.isRandomMAEnabled).is.false;
-
-    wrapper.vm.randomMAToggle();
-    expect(model.randomMA).eq(RandomMAOptionType.LIMITED);
-    expect(model.customMA).is.undefined;
-  });
-
   it('solo games ignore the milestone and award settings', async () => {
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,
     });
     const model = wrapper.vm as unknown as CreateGameModel;
     model.playersCount = 1;
-    model.randomMA = RandomMAOptionType.MANUAL;
-    model.customMA = {milestones: ['Terraformer'], awards: []};
+    model.goals = {...model.goals, type: 'manual', selected: {milestones: ['Terraformer'], awards: []}};
     expect(wrapper.vm.hasBlockingValidationErrors).is.false;
     const config: NewGameConfig | undefined = await wrapper.vm.serializeSettings();
     expect(config?.randomMA).eq(RandomMAOptionType.NONE);
@@ -244,9 +229,8 @@ describe('CreateGameForm', () => {
 
   it('validates hand-picked milestones and awards against the expansions', () => {
     const errors = validateTwoPlayerGame((model) => {
-      model.randomMA = RandomMAOptionType.MANUAL;
       model.expansions.turmoil = false;
-      model.customMA = {milestones: ['Terraformer'], awards: ['Banker', 'Politician']};
+      model.goals = {...model.goals, type: 'manual', selected: {milestones: ['Terraformer'], awards: ['Banker', 'Politician']}};
     });
     expect(errors.milestonesMissingExpansions).is.false;
     expect(errors.awardsMissingExpansions).is.true;

@@ -9,6 +9,8 @@ import {Message} from '../logs/Message';
 import {LogMessageDataType} from '../logs/LogMessageDataType';
 import {BoardName} from '../boards/BoardName';
 import {validateCustomMA} from '../ma/CustomMA';
+import {MilestoneName} from '../ma/MilestoneName';
+import {AwardName} from '../ma/AwardName';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -31,6 +33,8 @@ export type ValidationErrors = {
   notEnoughCorporations: number;
   /** Why customMA is invalid, or empty when it's valid. */
   invalidCustomMA: string;
+  milestonesMissingExpansions: boolean;
+  awardsMissingExpansions: boolean;
 };
 
 function mustSelectAtLeast(message: string, required: number): Message {
@@ -108,11 +112,22 @@ export const validationDetails: Record<keyof ValidationErrors, {blocking: boolea
       data: [{type: LogMessageDataType.RAW_STRING, value: errors.invalidCustomMA}],
     }),
   },
+  // Blocking, unlike the card lists, because the server rejects these.
+  milestonesMissingExpansions: {
+    blocking: true,
+    message: 'Some of the milestones you selected need expansions you have not enabled.',
+  },
+  awardsMissingExpansions: {
+    blocking: true,
+    message: 'Some of the awards you selected need expansions you have not enabled.',
+  },
 };
 
 export type Helpers = {
   getCardCompatibility: (name: CardName) => ReadonlyArray<Expansion>,
   getColonyExpansion: (name: ColonyName) => Expansion | undefined,
+  getMilestoneExpansion: (name: MilestoneName) => Expansion | undefined,
+  getAwardExpansion: (name: AwardName) => Expansion | undefined,
 };
 
 export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): ValidationErrors {
@@ -134,6 +149,8 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
     deltaProjectWithoutPrelude: false,
     notEnoughCorporations: 0,
     invalidCustomMA: '',
+    milestonesMissingExpansions: false,
+    awardsMissingExpansions: false,
   };
 
   if (config.escapeVelocity && hasNegativeEscapeVelocityOption(config.escapeVelocity)) {
@@ -235,6 +252,12 @@ export function validateNewGameConfig(config: NewGameConfig, helpers: Helpers): 
       validateCustomMA(config.customMA, config.randomMA, config.expansions.venus);
     } catch (e) {
       errors.invalidCustomMA = e instanceof Error ? e.message : String(e);
+    }
+    // customMA comes from untrusted JSON, so it may not have the arrays validateCustomMA requires.
+    if (Array.isArray(config.customMA?.milestones) && Array.isArray(config.customMA?.awards)) {
+      const missing = (expansion: Expansion | undefined) => expansion !== undefined && !config.expansions[expansion];
+      errors.milestonesMissingExpansions = config.customMA.milestones.some((name) => missing(helpers.getMilestoneExpansion(name)));
+      errors.awardsMissingExpansions = config.customMA.awards.some((name) => missing(helpers.getAwardExpansion(name)));
     }
   }
   return errors;

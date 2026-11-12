@@ -242,6 +242,16 @@ describe('CreateGameForm', () => {
     expect(errors.coloniesMissingExpansions).deep.eq([]);
   });
 
+  it('validates hand-picked milestones and awards against the expansions', () => {
+    const errors = validateTwoPlayerGame((model) => {
+      model.randomMA = RandomMAOptionType.MANUAL;
+      model.expansions.turmoil = false;
+      model.customMA = {milestones: ['Terraformer'], awards: ['Banker', 'Politician']};
+    });
+    expect(errors.milestonesMissingExpansions).is.false;
+    expect(errors.awardsMissingExpansions).is.true;
+  });
+
   it('disables Create game when there is a blocking error', async () => {
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,

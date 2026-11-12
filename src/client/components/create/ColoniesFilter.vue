@@ -20,14 +20,14 @@ import ModuleItemFilter from './ModuleItemFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
-import {Expansion} from '@/common/cards/GameModule';
+import {Expansion, GameModule} from '@/common/cards/GameModule';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 const OFFICIAL_COLONIES = OFFICIAL_COLONY_NAMES.toSorted();
 const COMMUNITY_COLONIES = COMMUNITY_COLONY_NAMES.toSorted();
 const PATHFINDERS_COLONIES = PATHFINDERS_COLONY_NAMES.toSorted();
 
-const GROUPS = [
+const GROUPS: Array<{key: GameModule, label: string}> = [
   {key: 'colonies', label: 'Official'},
   {key: 'community', label: 'Community'},
   {key: 'pathfinders', label: 'Pathfinders'},

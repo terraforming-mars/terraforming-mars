@@ -19,6 +19,7 @@ export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
     setRulingParty.options = this.turmoil.parties.map((p: IParty) => new SelectOption(p.name).andThen(() => {
       this.turmoil.rulingPolicy().onPolicyEnd?.(this.player.game);
       this.turmoil.rulingParty = p;
+      this.player.game.log('The ruling party is: ${0}', (b) => b.partyName(p.name));
       PoliticalAgendas.setNextAgenda(this.turmoil, this.player.game);
       this.cb(p);
       return undefined;

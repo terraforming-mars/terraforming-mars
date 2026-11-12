@@ -44,8 +44,10 @@
 <script setup lang="ts" generic="T extends string">
 import {type Ref, ref, watch} from 'vue';
 import PopupPanel from '../common/PopupPanel.vue';
+import {GameModule} from '@/common/cards/GameModule';
+import {expansionIconClass} from '@/client/utils/expansionIcon';
 
-type Group = {key: string; label: string};
+type Group = {key: GameModule; label: string};
 
 const props = defineProps<{
   title: string;
@@ -114,18 +116,11 @@ function include(name: string): boolean {
   return normalized.length === 0 || name.toLocaleUpperCase().includes(normalized);
 }
 
-function icon(module: string | undefined): string | undefined {
+function icon(module: GameModule | undefined): string | undefined {
   if (module === undefined) {
     return undefined;
   }
-  let suffix = module;
-  if (module === 'colonies') {
-    suffix = 'colony';
-  }
-  if (module === 'moon') {
-    suffix = 'themoon';
-  }
-  return `create-game-expansion-icon expansion-icon-${suffix}`;
+  return `create-game-expansion-icon ${expansionIconClass(module)}`;
 }
 
 function showGroup(key: string) {

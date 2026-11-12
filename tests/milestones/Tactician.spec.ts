@@ -9,6 +9,7 @@ import {Algae} from '../../src/server/cards/base/Algae';
 import {TestPlayer} from '../TestPlayer';
 import {fakeCard} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
+import {fakeMarsBot} from '../automa/FakeMarsBot';
 
 describe('Tactician', () => {
   let milestone: Tactician;
@@ -62,5 +63,16 @@ describe('Tactician', () => {
     player.playedCards.push(new Algae());
 
     expect(milestone.canClaim(player)).is.true;
+  });
+
+  it('MarsBot needs 35 M€', () => {
+    for (const run of [
+      {megacredits: 34, expected: false},
+      {megacredits: 35, expected: true},
+    ]) {
+      const bot = fakeMarsBot({megacredits: run.megacredits});
+
+      expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);
+    }
   });
 });

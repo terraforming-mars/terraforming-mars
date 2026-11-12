@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Mogul} from '../../../src/server/awards/modular/Mogul';
 import {TestPlayer} from '../../TestPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {fakeMarsBot, setAllTracks, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Mogul', () => {
   let award: Mogul;
@@ -23,5 +25,13 @@ describe('Mogul', () => {
 
     player.production.override({megacredits: -1, steel: 5, heat: 2});
     expect(award.getScore(player)).to.eq(7);
+  });
+
+  it('MarsBot doubles its most advanced track', () => {
+    const marsBot = fakeMarsBot();
+    setAllTracks(marsBot, 2);
+    setTrack(marsBot, Tag.SCIENCE, 4);
+
+    expect(new Mogul().marsBotScore(marsBot)).to.eq(8);
   });
 });

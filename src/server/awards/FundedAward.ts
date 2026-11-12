@@ -24,7 +24,7 @@ export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<
 
 export function deserializeFundedAwards(
   fundedAwards: Array<SerializedFundedAward>,
-  players: Array<IPlayer>,
+  players: ReadonlyArray<IPlayer>,
   awards: Array<IAward>): Array<FundedAward> {
   // Remove duplicates
   const aw = new Set<AwardName>();

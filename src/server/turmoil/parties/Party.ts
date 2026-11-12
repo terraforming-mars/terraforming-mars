@@ -3,8 +3,10 @@ import {IGame} from '../../IGame';
 import {IPlayer} from '../../IPlayer';
 import {Delegate, NeutralPlayer} from '../Turmoil';
 import {CardName} from '../../../common/cards/CardName';
+import {PartyName} from '../../../common/turmoil/PartyName';
 
 export abstract class Party {
+  public abstract readonly name: PartyName;
   public partyLeader: undefined | Delegate = undefined;
   public delegates = new MultiSet<Delegate>();
 
@@ -22,6 +24,11 @@ export abstract class Party {
 
   private setPartyLeader(delegate: Delegate, game: IGame) {
     this.partyLeader = delegate;
+    if (delegate === 'NEUTRAL') {
+      game.log('A neutral delegate is the new leader of the ${0} party', (b) => b.partyName(this.name));
+    } else {
+      game.log('${0} is the new leader of the ${1} party', (b) => b.player(delegate).partyName(this.name));
+    }
     const cardPlayer = game.getCardPlayerOrUndefined(CardName.CORRIDORS_OF_POWER);
     if (cardPlayer === delegate) {
       cardPlayer.drawCard();
@@ -32,6 +39,9 @@ export abstract class Party {
   public checkPartyLeader(delegate: Delegate, game: IGame): void {
     const players = game.playersInGenerationOrder;
     if (this.delegates.size === 0) {
+      if (this.partyLeader !== undefined) {
+        game.log('The ${0} party has no leader', (b) => b.partyName(this.name));
+      }
       this.partyLeader = undefined;
       return;
     }
@@ -69,6 +79,12 @@ export abstract class Party {
 
       // Add NEUTRAL in the list
       playersToCheck.push('NEUTRAL');
+
+      // MarsBot is not a game player, but its delegates can still lead the party.
+      const marsBotPlayer = game.marsBotPlayer;
+      if (marsBotPlayer !== undefined && this.delegates.has(marsBotPlayer)) {
+        playersToCheck.push(marsBotPlayer);
+      }
 
       playersToCheck.some((nextPlayer) => {
         if (this.delegates.get(nextPlayer) === max) {

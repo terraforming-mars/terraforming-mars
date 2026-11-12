@@ -2,20 +2,14 @@ import {Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {CardAction, IPlayer} from '../IPlayer';
-import {Message} from '../../common/logs/Message';
-import {SelectCardToPlay} from './SelectCardToPlay';
+import {IPlayer} from '../IPlayer';
+import {Config, SelectCardToPlay} from './SelectCardToPlay';
 
 export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
   constructor(
     player: IPlayer,
     cards: Array<IProjectCard> = player.getPlayableCards(),
-    config?: {
-      action?: CardAction,
-      enabled?: ReadonlyArray<boolean>,
-      title?: string | Message,
-      buttonLabel?: string,
-    }) {
+    config?: Config) {
     super(player, cards, config);
     this.extras = new Map(
       cards.map((card) => {
@@ -36,7 +30,10 @@ export class SelectProjectCardToPlay extends SelectCardToPlay<IProjectCard> {
     this.cb(card);
   }
 
-  protected override validate(): void {
-    // No additional validation
+  protected override validate(card: IProjectCard): void {
+    const cardIndex = this.cards.findIndex((c) => c.name === card.name);
+    if (this.config?.enabled && this.config.enabled[cardIndex] === false) {
+      throw new Error('Unavailable card ' + card.name);
+    }
   }
 }

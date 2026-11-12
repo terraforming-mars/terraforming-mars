@@ -1,6 +1,7 @@
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 import {Tag} from '../../../common/cards/Tag';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 import {BoardName} from '../../../common/boards/BoardName';
 
 export class Traveller implements IAward {
@@ -12,5 +13,10 @@ export class Traveller implements IAward {
   };
   public getScore(player: IPlayer): number {
     return player.tags.multipleCount([Tag.JOVIAN, Tag.EARTH], 'award');
+  }
+
+  /** Rulebook C p.10 and p.15. */
+  public marsBotScore(bot: IMarsBot): number {
+    return Math.max(bot.marsBotBoard.trackPosition(Tag.JOVIAN), bot.marsBotBoard.trackPosition(Tag.EARTH)) + 5;
   }
 }

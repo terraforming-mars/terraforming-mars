@@ -1,10 +1,12 @@
 <template>
   <div class="payments_cont">
     <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-    <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-      <input v-if="!availableCard.isDisabled" class="hidden" type="radio" v-model="cardName" :value="availableCard.name">
-      <Card class="cardbox" :card="availableCard" />
-    </label>
+    <template v-for="c in cards" :key="c.name">
+      <label v-if="experimentalUI || !c.isDisabled" class="payments_cards">
+        <input v-if="!c.isDisabled" class="hidden" type="radio" v-model="cardName" :value="c.name">
+        <Card class="cardbox" :card="c" />
+      </label>
+    </template>
     <template v-if="card !== undefined && card.additionalProjectCosts">
       <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
         v-i18n="[$t(card.name), card.additionalProjectCosts.aeronGenomicsResources, 'animals', $t(CardName.AERON_GENOMICS)]"
@@ -52,6 +54,7 @@ import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import PaymentForm from '@/client/components/PaymentForm.vue';
 import {Ledger} from '@/client/components/PaymentLedger';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default defineComponent({
   name: 'SelectProjectCardToPlay',
@@ -112,6 +115,9 @@ export default defineComponent({
     canUseTitaniumRegularly(): boolean {
       return this.tags.includes(Tag.SPACE) ||
           this.playerView.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+    },
+    experimentalUI(): boolean {
+      return getPreferences().experimental_ui;
     },
   },
   watch: {

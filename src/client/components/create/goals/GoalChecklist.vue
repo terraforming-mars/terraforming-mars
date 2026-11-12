@@ -23,6 +23,7 @@ import {Expansion} from '@/common/cards/GameModule';
 import {MilestoneName} from '@/common/ma/MilestoneName';
 import {AwardName} from '@/common/ma/AwardName';
 import {expansionIconClass} from '@/client/utils/expansionIcon';
+import {translateText} from '@/client/directives/i18n';
 
 /**
  * One milestone or award to offer, as the chooser passes it in through `items`. The template draws a checkbox for each,
@@ -70,9 +71,13 @@ function iconClass(expansion: Expansion): string {
   return `create-game-expansion-icon ${expansionIconClass(expansion)}`;
 }
 
+/** True when the filter is empty, or the label or its translation contains it. */
 function matchesFilter(goal: Goal): boolean {
   const filter = props.filterText.toLocaleUpperCase();
-  return filter.length === 0 || label(goal.name).toLocaleUpperCase().includes(filter);
+  const text = label(goal.name);
+  return filter.length === 0 ||
+    text.toLocaleUpperCase().includes(filter) ||
+    translateText(text).toLocaleUpperCase().includes(filter);
 }
 </script>
 

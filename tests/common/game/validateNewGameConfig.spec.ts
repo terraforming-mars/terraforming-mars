@@ -287,6 +287,10 @@ describe('validateNewGameConfig', () => {
     expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('customMA must have 5 awards');
   });
 
+  it('ignores milestones and awards in solo games', () => {
+    expect(validate({players: players(1), randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('');
+  });
+
   it('messages', () => {
     const notEnoughColonies = validationDetails.notEnoughColonies.message;
     expect(typeof notEnoughColonies === 'function' && notEnoughColonies({...NO_ERRORS, notEnoughColonies: 5})).deep.eq({

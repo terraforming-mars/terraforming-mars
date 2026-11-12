@@ -261,4 +261,20 @@ describe('JSONProcessor', () => {
       expect(model).deep.eq(testCase.expected);
     });
   }
+
+  it('rejects a customMA without milestones and awards arrays of names', () => {
+    const malformed = [
+      'x',
+      [],
+      {},
+      {milestones: 'x', awards: []},
+      {milestones: [], awards: {}},
+      {milestones: ['Gardener', 3], awards: []},
+    ];
+    for (const customMA of malformed) {
+      const processor = new JSONProcessor(defaultCreateGameModel());
+      expect(() => processor.applyJSON({...TEMPLATE_INPUT, randomMA: 'Manual', customMA}), JSON.stringify(customMA))
+        .to.throw('customMA must have milestones and awards arrays of names');
+    }
+  });
 });

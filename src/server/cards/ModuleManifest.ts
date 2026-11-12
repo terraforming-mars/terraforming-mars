@@ -14,41 +14,41 @@ import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 export type CardManifest<T extends ICard> = Partial<Record<CardName, CardFactorySpec<T>>>;
 export type GlobalEventManifest = Partial<Record<GlobalEventName, CardFactorySpec<IGlobalEvent>>>;
 
-export namespace CardManifest {
-  export function keys<T extends ICard>(manifest: CardManifest<T>): Array<CardName> {
+export const CardManifest = {
+  keys<T extends ICard>(manifest: CardManifest<T>): Array<CardName> {
     return Object.keys(manifest) as Array<CardName>;
-  }
-  export function values<T extends ICard>(manifest: CardManifest<T>): Array<CardFactorySpec<T>> {
+  },
+  values<T extends ICard>(manifest: CardManifest<T>): Array<CardFactorySpec<T>> {
     return Object.values(manifest) as Array<CardFactorySpec<T>>;
-  }
-  export function entries<T extends ICard>(manifest: CardManifest<T>): Array<[CardName, CardFactorySpec<T>]> {
-    return keys(manifest).map((key) => {
+  },
+  entries<T extends ICard>(manifest: CardManifest<T>): Array<[CardName, CardFactorySpec<T>]> {
+    return CardManifest.keys(manifest).map((key) => {
       const value = manifest[key];
       if (value === undefined) {
         throw new Error(`Manifest has key ${key} but no entry.`);
       }
       return [key, value];
     });
-  }
-}
+  },
+} as const;
 
-export namespace GlobalEventManifest {
-  export function keys(manifest: GlobalEventManifest): Array<GlobalEventName> {
+export const GlobalEventManifest = {
+  keys(manifest: GlobalEventManifest): Array<GlobalEventName> {
     return Object.keys(manifest) as Array<GlobalEventName>;
-  }
-  export function values(manifest: GlobalEventManifest): Array<CardFactorySpec<IGlobalEvent>> {
+  },
+  values(manifest: GlobalEventManifest): Array<CardFactorySpec<IGlobalEvent>> {
     return Object.values(manifest) as Array<CardFactorySpec<IGlobalEvent>>;
-  }
-  export function entries(manifest: GlobalEventManifest): Array<[GlobalEventName, CardFactorySpec<IGlobalEvent>]> {
-    return keys(manifest).map((key) => {
+  },
+  entries(manifest: GlobalEventManifest): Array<[GlobalEventName, CardFactorySpec<IGlobalEvent>]> {
+    return GlobalEventManifest.keys(manifest).map((key) => {
       const value = manifest[key];
       if (value === undefined) {
         throw new Error(`Manifest has key ${key} but no entry.`);
       }
       return [key, value];
     });
-  }
-}
+  },
+} as const;
 
 export class ModuleManifest {
   module: GameModule;

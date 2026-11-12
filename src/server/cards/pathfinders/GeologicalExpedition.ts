@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {SpaceBonus, spaceBonusToString} from '../../../common/boards/SpaceBonus';
 import {IPlayer} from '../../IPlayer';
 import {BoardType} from '../../boards/BoardType';
 import {Space} from '../../boards/Space';
@@ -74,7 +74,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     const options = new OrOptions().setTitle('Select an additional bonus from this space');
     unique.forEach((bonus) => {
       options.options.push(new SelectOption(
-        SpaceBonus.toString(bonus),
+        spaceBonusToString(bonus),
         'Select')
         .andThen(() => {
           activePlayer.game.grantSpaceBonus(activePlayer, bonus, 1);

@@ -1688,7 +1688,7 @@ export class Player implements IPlayer {
 
     // Standard Projects. During Head Start, only options the player can take are offered.
     const standardProjects = this.getStandardProjectOption();
-    if (standardProjects.enabled?.includes(true) || !headStartInEffect) {
+    if (standardProjects.config?.enabled?.includes(true) || !headStartInEffect) {
       action.options.push(standardProjects);
     }
 

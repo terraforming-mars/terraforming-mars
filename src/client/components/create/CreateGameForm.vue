@@ -364,52 +364,15 @@
               <span v-i18n>Random first player</span>
             </label>
 
-            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" :checked="isRandomMAEnabled" @change="randomMAToggle()">
-            <label for="randomMA-checkbox">
-              <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-            </label>
-
-            <!-- Only reachable by importing JSON with randomMA set to MANUAL. -->
-            <template v-if="randomMA === RandomMAOptionType.MANUAL">
-              <label class="create-game-manual-ma">
-                <span v-i18n>Manual Milestones/Awards</span>
-              </label>
-              <div v-i18n>&#9888;&#xFE0F; Manual milestones and awards are not configurable in the UI yet.</div>
-            </template>
-
-            <div class="create-game-page-column-row" v-if="isRandomMAEnabled">
-              <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
-                <label class="label-randomMAOption" for="limitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
-                </label>
-              </div>
-
-              <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
-                <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
-                </label>
-              </div>
-              <div>
-                <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
-                <label for="modularMA-checkbox">
-                  <span v-i18n>Official Random α</span>
-                </label>
-              </div>
-            </div>
+            <GoalButton
+              v-model="goals"
+              :expansions="expansions"
+            />
 
             <template v-if="expansions.venus">
               <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
               <label for="requiresVenusTrackCompletion-checkbox">
                 <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a :href="wikiUrls.venusTerraforming" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-              </label>
-            </template>
-
-            <template v-if="isRandomMAEnabled">
-              <input type="checkbox" v-model="includeFanMA" id="fanMA-checkbox">
-              <label for="fanMA-checkbox">
-                <span v-i18n>Include fan Milestones/Awards</span>
               </label>
             </template>
 
@@ -576,6 +539,8 @@ import CorporationsFilter from '@/client/components/create/CorporationsFilter.vu
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
+import GoalButton from '@/client/components/create/goals/GoalButton.vue';
+import {toGameOptions} from '@/client/components/create/goals/conversions';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
@@ -629,6 +594,7 @@ export default defineComponent({
     CeosFilter,
     ColoniesFilter,
     BoardSelector,
+    GoalButton,
     CorporationsFilter,
     PreludesFilter,
     PreferencesIcon,
@@ -725,6 +691,7 @@ export default defineComponent({
      */
     newGameConfig(): NewGameConfig {
       return {
+        ...toGameOptions(this.goals),
         players: this.players.slice(0, this.playersCount),
         expansions: this.expansions,
         draftVariant: this.draftVariant,
@@ -732,7 +699,6 @@ export default defineComponent({
         customCorporationsList: this.customCorporations,
         customColoniesList: this.customColonies,
         customCeos: this.customCeos,
-        customMA: this.customMA,
         customPreludes: this.customPreludes,
         bannedCards: this.bannedCards,
         includedCards: this.includedCards,
@@ -745,15 +711,12 @@ export default defineComponent({
         showTimers: this.showTimers,
         fastModeOption: this.fastModeOption,
         removeNegativeGlobalEventsOption: this.removeNegativeGlobalEventsOption,
-        includeFanMA: this.includeFanMA,
-        modularMA: this.modularMA,
         startingCorporations: this.startingCorporations,
         soloTR: this.soloTR,
         clonedGamedId: this.seededGame ? this.clonedGameId : undefined,
         initialDraft: this.initialDraft,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
         ceosDraftVariant: this.ceosDraftVariant ?? false,
-        randomMA: this.randomMA,
         shuffleMapOption: this.shuffleMapOption,
         randomFirstPlayer: this.randomFirstPlayer,
         requiresVenusTrackCompletion: this.requiresVenusTrackCompletion,
@@ -795,9 +758,6 @@ export default defineComponent({
     typedRefs(): Refs {
       return this.$refs as Refs;
     },
-    RandomMAOptionType(): typeof RandomMAOptionType {
-      return RandomMAOptionType;
-    },
     constants(): typeof constants {
       return constants;
     },
@@ -806,9 +766,6 @@ export default defineComponent({
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
-    },
-    isRandomMAEnabled(): boolean {
-      return this.randomMA === RandomMAOptionType.LIMITED || this.randomMA === RandomMAOptionType.UNLIMITED;
     },
     isPoliticalAgendasExtensionEnabled(): Boolean {
       return this.politicalAgendasExtension !== 'Standard';
@@ -927,24 +884,6 @@ export default defineComponent({
     },
     updateCustomCeos(customCeos: Array<CardName>) {
       this.customCeos = customCeos;
-    },
-    randomMAToggle() {
-      if (this.isRandomMAEnabled) {
-        this.randomMA = RandomMAOptionType.NONE;
-      } else {
-        this.randomMA = RandomMAOptionType.LIMITED;
-      }
-      // customMA is only valid with MANUAL, which this toggle always leaves.
-      this.customMA = undefined;
-    },
-    getRandomMaOptionType(type: 'limited' | 'full'): RandomMAOptionType {
-      if (type === 'limited') {
-        return RandomMAOptionType.LIMITED;
-      } else if (type === 'full') {
-        return RandomMAOptionType.UNLIMITED;
-      } else {
-        return RandomMAOptionType.NONE;
-      }
     },
     politicalAgendasExtensionToggle() {
       if (this.politicalAgendasExtension === 'Standard') {

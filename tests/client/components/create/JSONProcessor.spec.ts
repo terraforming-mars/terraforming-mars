@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {JSONProcessor} from '@/client/components/create/JSONProcessor';
 import {defaultCreateGameModel} from '@/client/components/create/defaultCreateGameModel';
-import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {BoardName} from '@/common/boards/BoardName';
 import {JSONObject} from '@/common/Types';
 import {CreateGameModel} from '@/client/components/create/CreateGameModel';
@@ -112,8 +111,7 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   },
   draftVariant: true,
   initialDraft: false,
-  randomMA: 'No randomization' as RandomMAOptionType,
-  modularMA: false,
+  goals: {type: 'board', random: {pool: 'maps', randomness: 'limited'}, selected: {milestones: [], awards: []}},
   randomFirstPlayer: true,
   showOtherPlayersVP: false,
   showColoniesList: false,
@@ -125,7 +123,6 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showIncludedCards: false,
   customColonies: [],
   customCorporations: [],
-  customMA: undefined,
   customPreludes: [],
   bannedCards: [],
   includedCards: [],
@@ -140,7 +137,6 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showTimers: true,
   fastModeOption: false,
   removeNegativeGlobalEventsOption: false,
-  includeFanMA: false,
   startingCorporations: 2,
   soloTR: false,
   allOfficialExpansions: false,
@@ -261,6 +257,13 @@ describe('JSONProcessor', () => {
       expect(model).deep.eq(testCase.expected);
     });
   }
+
+  it('rejects a modularMA or includeFanMA that isn\'t a boolean', () => {
+    for (const key of ['modularMA', 'includeFanMA']) {
+      const processor = new JSONProcessor(defaultCreateGameModel());
+      expect(() => processor.applyJSON({...TEMPLATE_INPUT, [key]: 'false'})).to.throw('false is not boolean');
+    }
+  });
 
   it('rejects a customMA without milestones and awards arrays of names', () => {
     const malformed = [

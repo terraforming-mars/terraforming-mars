@@ -12,12 +12,13 @@
       <GoalRadioButton heading="Randomness" name="maRandomness" :choices="RANDOMNESS" :labels="RANDOMNESS_LABELS" :modelValue="goals.random.randomness" @update:modelValue="update({random: {...goals.random, randomness: $event}})" />
     </template>
 
-    <div v-if="goals.type === 'manual'" v-i18n>&#9888;&#xFE0F; Manual milestones and awards are not configurable in the UI yet.</div>
+    <GoalChooser v-if="goals.type === 'manual'" :selected="goals.selected" @update:selected="update({selected: $event})" :limit="limit" />
   </PopupPanel>
 </template>
 
 <script setup lang="ts">
 import PopupPanel from '../../common/PopupPanel.vue';
+import GoalChooser from './GoalChooser.vue';
 import GoalRadioButton from './GoalRadioButton.vue';
 import {WIKI_URLS} from '@/client/utils/WikiLinks';
 import {GoalSettings, POOLS, RANDOM_GOAL_TYPES, RANDOMNESS} from './types';
@@ -37,3 +38,17 @@ function update(part: Partial<GoalSettings>) {
 }
 </script>
 
+<style scoped lang="less">
+// A fixed-size popup whose body fills the space under the header, so the chooser can fill it.
+.create-game-ma-popup :deep(.popup-inner) {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-game-ma-popup :deep(.popup-body) {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+}
+</style>

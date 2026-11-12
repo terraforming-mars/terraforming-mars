@@ -77,6 +77,7 @@ const pluginRules = {
   'no-throw-literal': 'error',
   '@typescript-eslint/prefer-for-of': 'error',
   '@typescript-eslint/no-non-null-assertion': 'error',
+  '@typescript-eslint/no-namespace': 'error',
   ...vueEssentialRules,
   // Buggy under eslint-plugin-vue 10.8 + ESLint 10 — emits spurious "clear" errors.
   // Project doesn't use template-scoped eslint-disable comments.

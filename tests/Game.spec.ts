@@ -51,6 +51,19 @@ describe('Game', () => {
     expect(game.getGeneration()).to.eq(1);
   });
 
+  it('validates hand-picked milestones and awards', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
+    } as const;
+    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
+      .to.throw('customMA must have 5 awards');
+    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
+      .to.throw('Politician needs the Turmoil expansion');
+  });
+
   it('sets starting production if corporate era not selected', () => {
     const player = TestPlayer.BLUE.newPlayer();
 

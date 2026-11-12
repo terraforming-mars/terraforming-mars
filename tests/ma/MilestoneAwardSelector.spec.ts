@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {awardManifest} from '../../src/server/awards/Awards';
 import {milestoneManifest} from '../../src/server/milestones/Milestones';
-import {BOARDS_WITHOUT_VOLCANIC_SPACES, chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {BOARDS_WITHOUT_VOLCANIC_SPACES, chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, validateCustomMAExpansions, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {intersection} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
@@ -163,9 +163,15 @@ describe('MilestoneAwardSelector', () => {
     expect(() => choose({randomMA: RandomMAOptionType.MANUAL})).to.throw('require customMA');
   });
 
-  it('manual milestones and awards are validated', () => {
-    const customMA = {milestones: ['Terraformer'], awards: ['Banker']} as const;
-    expect(() => choose({randomMA: RandomMAOptionType.MANUAL, customMA})).to.throw('customMA must have 5 milestones');
+  it('validateCustomMAExpansions', () => {
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
+    } as const;
+    const expansions = {...DEFAULT_GAME_OPTIONS.expansions, turmoil: false};
+    expect(() => validateCustomMAExpansions(customMA, expansions)).to.throw('Politician needs the Turmoil expansion');
+    expect(() => validateCustomMAExpansions(customMA, {...expansions, turmoil: true})).to.not.throw();
+    expect(() => validateCustomMAExpansions(undefined, expansions)).to.not.throw();
   });
 
   it('Do not select Constructor when Colonies is not selected', () => {

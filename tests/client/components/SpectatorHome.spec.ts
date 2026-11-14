@@ -22,7 +22,6 @@ describe('SpectatorHome', () => {
           players: [player],
           id: 's-spectator-id',
           thisPlayer: player,
-          runId: 'run-id',
           color: 'neutral',
         },
       },

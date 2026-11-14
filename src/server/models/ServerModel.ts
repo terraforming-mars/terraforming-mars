@@ -25,7 +25,6 @@ import {CardName} from '../../common/cards/CardName';
 import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
-import {runId} from '../utils/server-ids';
 import {toName} from '../../common/utils/utils';
 import {MAX_AWARDS, MAX_MILESTONES} from '../../common/constants';
 
@@ -118,7 +117,6 @@ export class Server {
       game: this.getGameModel(player.game),
       id: player.id,
       color: player.color,
-      runId: runId,
       pickedCorporationCard: player.pickedCorporationCard ? cardsToModel(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: cardsToModel(player, player.preludeCardsInHand),
       requestId: player.requestId,
@@ -137,7 +135,6 @@ export class Server {
       game: this.getGameModel(game),
       players: game.playersInGenerationOrder.map((p) => this.getPlayer(p, false)),
       thisPlayer: undefined,
-      runId: runId,
     };
   }
 

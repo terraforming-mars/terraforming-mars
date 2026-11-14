@@ -6,13 +6,13 @@ export interface AndThen<T> {
   andThen(cb: (param: T) => void): this;
 }
 
-export interface IDeferredAction <T = undefined> extends AndThen<T> {
+export interface IDeferredAction <T = unknown> extends AndThen<T> {
   player: IPlayer;
   priority: Priority;
   execute(): PlayerInput | undefined;
 }
 
-export abstract class DeferredAction<T = undefined> implements IDeferredAction<T> {
+export abstract class DeferredAction<T = unknown> implements IDeferredAction<T> {
   constructor(
     public player: IPlayer,
     public priority: Priority = Priority.DEFAULT,

@@ -6,6 +6,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {fakeMarsBot} from '../../automa/FakeMarsBot';
 
 describe('Lobbyist', () => {
   let milestone: Lobbyist;
@@ -65,4 +66,19 @@ describe('Lobbyist', () => {
     const [/* game */, player] = testGame(1, {turmoilExtension: false});
     expect(milestone.getScore(player)).to.eq(0);
   });
+
+  for (const run of [
+    {chairman: false, leaders: 2, expected: false},
+    {chairman: true, leaders: 1, expected: false},
+    {chairman: true, leaders: 2, expected: true},
+  ] as const) {
+    it('MarsBot needs the Chairman and 2 Party Leaders: ' + JSON.stringify(run), () => {
+      const marsBot = fakeMarsBot({game, player});
+
+      turmoil.chairman = run.chairman ? player : 'NEUTRAL';
+      turmoil.parties.forEach((party, index) => party.partyLeader = index < run.leaders ? player : undefined);
+
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
+    });
+  }
 });

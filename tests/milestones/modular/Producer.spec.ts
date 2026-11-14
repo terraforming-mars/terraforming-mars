@@ -3,6 +3,10 @@ import {testGame} from '../../TestGame';
 import {Producer} from '../../../src/server/milestones/modular/Producer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
+import {Tag} from '@/common/cards/Tag';
+import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
+import {VENUS_MARSBOT_TRACK} from '@/server/automa/boards/VenusMarsBot';
+import {fakeMarsBot, setAllTracks, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Producer', () => {
   let milestone: Producer;
@@ -60,4 +64,20 @@ describe('Producer', () => {
 
     expect(milestone.canClaim(player)).is.true;
   });
+
+  for (const run of [
+    {science: 4, expected: false},
+    {science: 5, expected: true},
+  ] as const) {
+    it('MarsBot needs its three most advanced tracks other than Venus to add up to 16: ' + JSON.stringify(run), () => {
+      const marsBot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
+      setAllTracks(marsBot, 2);
+      setTrack(marsBot, Tag.VENUS, 12);
+      setTrack(marsBot, Tag.PLANT, 6);
+      setTrack(marsBot, Tag.EARTH, 5);
+      setTrack(marsBot, Tag.SCIENCE, run.science);
+
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
+    });
+  }
 });

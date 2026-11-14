@@ -178,7 +178,7 @@ export class ServeAsset extends Handler {
         // With the separator: a sibling such as build/chunks-other is not inside
         if (resolvedFile.startsWith(chunksRoot + path.sep)) {
           if (urlPath.endsWith('.js') || urlPath.endsWith('.js.map')) {
-            return this.toMainFile(path.relative('.', resolvedFile), encodings);
+            return this.toMainFile(resolvedFile, encodings);
           }
         }
       }

@@ -7,7 +7,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectPlayer', () => {
-  let wrapper: VueWrapper<any>;
+  let wrapper: VueWrapper<InstanceType<typeof SelectPlayer>>;
   let response: InputResponse | undefined = undefined;
 
   const players: Array<Partial<PublicPlayerModel>> = [

@@ -91,7 +91,7 @@ export class PlayerInput extends Handler {
       if (this.isRespondingTooQuickly(responseInterval)) {
         throw new AppError(RESPONDING_TOO_QUICKLY, "You're responding a little too quickly.");
       }
-      const entity = JSON.parse(body);
+      const entity = JSON.parse(body) as InputResponse;
       validateRequestId(player, entity);
 
       // Placed here because it fits in a temporally cohesive sense.
@@ -144,13 +144,15 @@ export class PlayerInput extends Handler {
     return responseInterval < this.minResponseIntervalMs;
   }
 }
+
 // Rejects a response sent for an input the player has since moved past, e.g. from a page
 // that never got the reply to its previous response.
-function validateRequestId(player: IPlayer, entity: any) {
-  if (entity.requestId !== undefined && entity.requestId !== player.requestId) {
+function validateRequestId(player: IPlayer, entity: InputResponse) {
+  const sidechannel = entity as unknown as {requestId?: string};
+  if (sidechannel.requestId !== undefined && sidechannel.requestId !== player.requestId) {
     throw new AppError(INVALID_REQUEST_ID, 'This page is out of date. Click OK to refresh it.');
   }
   // Clearing this out to be compatible with the input response processors.
-  delete entity.requestId;
+  delete sidechannel.requestId;
 }
 

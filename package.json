@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Terraforming Mars Game",
   "engines": {
-    "node": "22.x"
+    "node": "26.x"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +32,7 @@
     "@types/html-escaper": "^3.0.0",
     "@types/markdown-it": "^14.1.2",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^25.5.0",
+    "@types/node": "26.6.6",
     "@types/pg": "^7.14.7",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.60.1",

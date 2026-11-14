@@ -9,6 +9,7 @@ import {ICorporationCard, isICorporationCard} from './corporation/ICorporationCa
 import {IPreludeCard} from './prelude/IPreludeCard';
 import {IProjectCard, isIProjectCard} from './IProjectCard';
 import {ICeoCard, isCeoCard} from './ceos/ICeoCard';
+import {Protections} from './Protections';
 
 const NO_TAGS = {
   [Tag.BUILDING]: 0,
@@ -49,6 +50,7 @@ export class PlayedCards {
   private _eventCount: number = 0;
   private _tags: Record<Tag, number> = {...NO_TAGS};
   private _eventTags: Record<Tag, number> = {...NO_TAGS};
+  private _protections: Protections = new Protections();
 
   /**
    * Return the number of played cards.
@@ -98,6 +100,10 @@ export class PlayedCards {
 
   public get eventTags(): Readonly<Record<Tag, number>> {
     return this._eventTags;
+  }
+
+  public get protections(): Protections {
+    return this._protections;
   }
 
   /**
@@ -158,6 +164,7 @@ export class PlayedCards {
     } else {
       this.addTags(card, this._tags);
     }
+    this._protections.add(card);
   }
 
   /**
@@ -174,6 +181,9 @@ export class PlayedCards {
       } else {
         this.removeTags(card, this._tags);
       }
+      if (card.protects !== undefined) {
+        this._protections = Protections.of(this.array);
+      }
     }
     return found;
   }
@@ -187,6 +197,7 @@ export class PlayedCards {
     this._eventCount = 0;
     this._tags = {...NO_TAGS};
     this._eventTags = {...NO_TAGS};
+    this._protections = new Protections();
 
     this.push(...cards);
   }

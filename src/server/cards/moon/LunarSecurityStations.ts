@@ -6,6 +6,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {all, uppercase} from '../Options';
+import {Resource} from '@/common/Resource';
 
 export class LunarSecurityStations extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,10 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       tags: [Tag.MOON],
       cost: 9,
       requirements: {roadTiles: 3, all},
+      protects: {
+        resources: [Resource.STEEL, Resource.TITANIUM],
+        production: [Resource.STEEL, Resource.TITANIUM],
+      },
 
       behavior: {
         moon: {logisticRate: 1},

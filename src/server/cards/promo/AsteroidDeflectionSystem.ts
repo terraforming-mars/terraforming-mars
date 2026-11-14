@@ -9,6 +9,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {uppercase} from '../Options';
+import {Resource} from '@/common/Resource';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -20,6 +21,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
 
       resourceType: CardResource.ASTEROID,
       victoryPoints: {resourcesHere: {}},
+      protects: {resources: [Resource.PLANTS]},
 
       behavior: {
         production: {energy: -1},

@@ -12,7 +12,7 @@ import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
-import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
+import {AndThen, IDeferredAction} from './deferredActions/DeferredAction';
 import {Priority} from './deferredActions/Priority';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
@@ -156,7 +156,7 @@ export interface IGame extends Logger {
   isSoloMode() :boolean;
   // Retrieve a player by its id
   getPlayerById(id: PlayerId): IPlayer;
-  defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
+  defer<T>(action: IDeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   /** Returns true if Mars is fully terraformed, meaning the game should end with this generation. */
   marsIsTerraformed(): boolean;

@@ -18,7 +18,7 @@ import * as responses from './server/responses';
 import ansi from 'ansi-escape-sequences';
 
 import {Database} from '@/server/database/Database';
-import {runId, serverId} from '@/server/utils/server-ids';
+import {serverId} from '@/server/utils/server-ids';
 import {processRequest} from '@/server/server/requestProcessor';
 import {timeAsync} from '@/server/utils/timer';
 import {GameLoader} from '@/server/database/GameLoader';
@@ -152,7 +152,6 @@ async function start() {
     console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);
     console.log(`Administrative routes can be found at admin?serverId=${serverId}`);
   }
-  console.log(`The public run ID is ${runId}`);
   console.log('Server is ready.');
 }
 

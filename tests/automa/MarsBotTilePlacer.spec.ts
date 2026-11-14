@@ -11,7 +11,10 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 import {cast, toID} from '@/common/utils/utils';
 import {fakeCard} from '../TestingUtils';
 import {BoardName} from '@/common/boards/BoardName';
+import {Founder} from '@/server/awards/modular/Founder';
 import {Highlander} from '@/server/awards/modular/Highlander';
+import {Suburbian} from '@/server/awards/modular/Suburbian';
+import {Geologist} from '@/server/milestones/modular/Geologist';
 
 describe('MarsBotTilePlacer', () => {
   let game: IGame;
@@ -282,6 +285,20 @@ describe('MarsBotTilePlacer', () => {
       loser: '12',
     },
     {
+      // 28 is on the edge, 16 is not. Both have one icon.
+      rule: 'Utopia Planitia: an edge space counts as one more reward icon',
+      options: {boardName: BoardName.UTOPIA_PLANITIA},
+      expected: '28',
+      loser: '16',
+    },
+    {
+      // 12 is next to the volcano on 13, 18 is not near one. Both are inland and have one icon.
+      rule: 'Vastitas Borealis: a volcanic space and the spaces next to it count as one more reward icon',
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+      expected: '12',
+      loser: '18',
+    },
+    {
       // The ocean is on 16. 32 has two icons and no ocean next to it, 24 has one icon and is next to the ocean.
       rule: 'Vastitas Borealis: reward icons come before ocean adjacency',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
@@ -328,6 +345,35 @@ describe('MarsBotTilePlacer', () => {
       loser: '32',
     },
     {
+      // 24 is inland and has two icons, 28 is on the edge and has one.
+      rule: "Milestones & Awards: Utopia Planitia's edge spaces count no extra icon",
+      options: {boardName: BoardName.UTOPIA_PLANITIA, modularMA: true},
+      expected: '24',
+      loser: '28',
+    },
+    {
+      // 09 is a volcanic space, 23 is not near one. Both have one icon.
+      rule: 'Geologist: volcanic spaces and the spaces next to them count as one more reward icon',
+      milestones: [new Geologist()],
+      expected: '09',
+      loser: '23',
+    },
+    {
+      // The tile is on 17. 24 is next to it, 23 is not. Both have one icon.
+      rule: 'Founder: spaces next to a special tile count as one more reward icon',
+      awards: [new Founder()],
+      specialTile: '17',
+      expected: '24',
+      loser: '23',
+    },
+    {
+      // 20 is on the edge, 23 is not. Both have one icon.
+      rule: 'Suburbian: edge spaces count as one more reward icon',
+      awards: [new Suburbian()],
+      expected: '20',
+      loser: '23',
+    },
+    {
       // The ocean is on 04. 25 has two icons and no ocean next to it, 09 has one icon and is next to the ocean.
       rule: 'Milestones & Awards with Highlander: reward icons come before ocean adjacency',
       options: {modularMA: true},
@@ -368,7 +414,7 @@ describe('MarsBotTilePlacer', () => {
       [game, human, botPlayer] = testGame(2, run.options);
       tilePlacer = new MarsBotTilePlacer(game, botPlayer, human);
       // Keep the game's own milestones and awards out of the comparison.
-      game.milestones = [];
+      game.milestones = [...(run.milestones ?? [])];
       game.awards = [...(run.awards ?? [])];
       for (const id of run.oceans ?? []) {
         game.simpleAddTile(human, game.board.getSpaceOrThrow(id), {tileType: TileType.OCEAN});

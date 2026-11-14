@@ -241,5 +241,5 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     },
   });
   expect(component).not.is.undefined;
-  expect((component.vm as any).$refs.childInput.saveData).not.is.undefined;
+  expect(component.vm.typedRefs.childInput.saveData).not.is.undefined;
 }

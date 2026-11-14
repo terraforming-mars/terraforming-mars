@@ -7,9 +7,10 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
-import {IDeferredAction} from '../../../src/server/deferredActions/DeferredAction';
 import {cast} from '@/common/utils/utils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
+
+type DeferredActionForQueue = Parameters<IGame['deferredActions']['push']>[0];
 
 describe('LobbyHalls', () => {
   let card: LobbyHalls;
@@ -44,13 +45,13 @@ describe('LobbyHalls', () => {
     expect(game.deferredActions).has.length(2);
 
     // First action is define a clone tag
-    assertCloneTagAction(game.deferredActions.pop()!);
+    assertCloneTagAction(game.deferredActions.pop());
 
     // Next test adds a delegate.
     assertAddDelegateAction(player, game.deferredActions.pop()?.execute());
   });
 
-  function assertCloneTagAction(action: IDeferredAction) {
+  function assertCloneTagAction(action: DeferredActionForQueue | undefined) {
     const options = cast(action, DeclareCloneTag).execute();
     options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);

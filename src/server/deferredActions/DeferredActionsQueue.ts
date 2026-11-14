@@ -4,24 +4,27 @@ import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {PriorityQueue} from './PriorityQueue';
 
+// The queue only reads player/priority and runs execute; andThen's callback type is irrelevant here.
+type QueuedDeferredAction = Pick<IDeferredAction<unknown>, 'player' | 'priority' | 'execute'>;
+
 export class DeferredActionsQueue {
-  private queue = new PriorityQueue<IDeferredAction<any>, PlayerId>();
+  private queue = new PriorityQueue<QueuedDeferredAction, PlayerId>();
 
   get length(): number {
     return this.queue.length;
   }
 
-  public push(action: IDeferredAction<any>): void {
+  public push(action: QueuedDeferredAction): void {
     this.queue.push(action, action.priority, action.player.id);
   }
 
   // Public for tests
-  public peek(): IDeferredAction<any> | undefined {
+  public peek(): QueuedDeferredAction | undefined {
     return this.queue.peek();
   }
 
   // Public for tests
-  public pop(): IDeferredAction<any> | undefined {
+  public pop(): QueuedDeferredAction | undefined {
     return this.queue.pop();
   }
 
@@ -58,7 +61,7 @@ export class DeferredActionsQueue {
    * Runs `action`. Returns true when it finished immediately, in which case `cb` is not called.
    * Otherwise `cb` is called once the action finishes.
    */
-  private runInline(action: IDeferredAction, cb: () => void): boolean {
+  private runInline(action: QueuedDeferredAction, cb: () => void): boolean {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {

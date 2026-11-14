@@ -89,7 +89,7 @@ export default defineComponent({
     },
     setMessage() {
       const playerView = vueRoot(this).playerView;
-      const content: Record<string, any> = {
+      const content: Record<string, unknown> = {
         url: this.url(playerView),
       };
       if (playerView !== undefined) {

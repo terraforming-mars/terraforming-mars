@@ -1,6 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {DeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
@@ -31,6 +31,8 @@ import {TileType} from '../../../src/common/TileType';
 import {ErodeSpacesDeferred} from '../underworld/ErodeSpacesDeferred';
 import {CardName} from '../../common/cards/CardName';
 import {GlobalParameter} from '@/common/GlobalParameter';
+
+type DeferredActionForQueue = Parameters<IGame['deferredActions']['push']>[0];
 
 export abstract class Colony implements IColony {
   // Players can't build colonies on Miranda until someone has played an Animal card.
@@ -177,7 +179,7 @@ export abstract class Colony implements IColony {
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    const action: undefined | DeferredAction<any> = this.computeBonus(player, bonusType, quantity, resource);
+    const action: undefined | DeferredActionForQueue = this.computeBonus(player, bonusType, quantity, resource);
     if (action === undefined) {
       return undefined;
     }
@@ -192,12 +194,12 @@ export abstract class Colony implements IColony {
         */
       return action.execute();
     } else {
-      player.game.defer(action);
+      player.game.deferredActions.push(action);
       return undefined;
     }
   }
 
-  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredAction<any> | undefined {
+  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredActionForQueue | undefined {
     const game = player.game;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:

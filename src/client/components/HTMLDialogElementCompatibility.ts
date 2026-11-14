@@ -3,14 +3,13 @@
 //
 
 export function windowHasHTMLDialogElement(): boolean {
-  return (window as any).HTMLDialogElement !== undefined;
+  return 'HTMLDialogElement' in window;
 }
 
-export function hasShowModal(dialogElement: HTMLElement) {
-  const de = dialogElement as any;
-  return de.showModal !== undefined && typeof(de.showModal) === 'function';
+export function hasShowModal(dialogElement: HTMLElement): dialogElement is HTMLDialogElement {
+  return 'showModal' in dialogElement && dialogElement.showModal !== undefined && typeof(dialogElement.showModal) === 'function';
 }
 
-export function showModal(dialogElement: HTMLElement) {
-  (dialogElement as any).showModal?.();
+export function showModal(dialogElement: HTMLDialogElement) {
+  dialogElement.showModal?.();
 }

@@ -1,4 +1,4 @@
-import {mount, VueWrapper, DOMWrapper} from '@vue/test-utils';
+import {mount, DOMWrapper, type VueWrapper} from '@vue/test-utils';
 import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
@@ -61,30 +61,30 @@ describe('SelectPlayer', () => {
   it('input selection', async () => {
     await wrapper.vm.$nextTick();
 
-    const inputs = wrapper.findAll('input');
+    const inputs = wrapper.findAll<HTMLInputElement>('input');
     clickInput(inputs[0]);
-    expect(wrapper.vm.$data.selectedPlayer).eq('red');
+    expect((inputs[0].element).checked).is.true;
     clickButton();
     expect(response).deep.eq({type: 'player', player: 'red'});
 
     clickInput(inputs[1]);
-    expect(wrapper.vm.$data.selectedPlayer).eq('yellow');
+    expect((inputs[1].element).checked).is.true;
     clickButton();
     expect(response).deep.eq({type: 'player', player: 'yellow'});
 
     clickInput(inputs[2]);
-    expect(wrapper.vm.$data.selectedPlayer).eq('green');
+    expect((inputs[2].element).checked).is.true;
     clickButton();
     expect(response).deep.eq({type: 'player', player: 'green'});
 
     clickInput(inputs[3]);
-    expect(wrapper.vm.$data.selectedPlayer).eq('blue');
+    expect((inputs[3].element).checked).is.true;
     clickButton();
     expect(response).deep.eq({type: 'player', player: 'blue'});
   });
 
-  async function clickInput(input: DOMWrapper<Element>) {
-    const radio = input.element as HTMLInputElement;
+  async function clickInput(input: DOMWrapper<HTMLInputElement>) {
+    const radio = input.element;
     radio.checked = true;
     input.trigger('change');
     await wrapper.vm.$nextTick();

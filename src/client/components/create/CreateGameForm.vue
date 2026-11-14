@@ -551,6 +551,7 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
@@ -1030,7 +1031,7 @@ export default defineComponent({
       if (this.rememberSettings) {
         createGameSettingsStorage.save(newGameConfig);
       }
-      const onSuccess = (json: any) => {
+      const onSuccess = (json: SimpleGameModel) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;
           return;

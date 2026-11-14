@@ -10,7 +10,10 @@ import {twoWayDifference} from '../utils/utils';
 import {AresGlobalParametersResponse} from './AresGlobalParametersResponse';
 import {Payment} from './Payment';
 
-function matches(response: any, fields: Array<string>) {
+function matches(response: unknown, fields: Array<string>) {
+  if (typeof response !== 'object' || response === null) {
+    return false;
+  }
   return twoWayDifference(Object.keys(response), fields).length === 0;
 }
 export interface SelectOptionResponse {
@@ -151,7 +154,7 @@ export function isShiftAresGlobalParametersResponse(response: InputResponse): re
 
 // This applies to the input in AresGlobalParametersResponse.ts, which should
 // probably move here.
-export function isAresGlobalParametersResponse(obj: any): obj is AresGlobalParametersResponse {
+export function isAresGlobalParametersResponse(obj: unknown): obj is AresGlobalParametersResponse {
   return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 

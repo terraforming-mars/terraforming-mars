@@ -5,7 +5,8 @@ export type SerializedTimer = {
   sumElapsed: number;
   startedAt: number;
   running: boolean;
-  enabled: boolean;
+  // TODO: make required once saves from before 2026-11-01 have aged out.
+  enabled?: boolean;
   // TODO(kberg): Remove by 2027-01-01
   afterFirstAction?: boolean;
   lastStoppedAt: number;

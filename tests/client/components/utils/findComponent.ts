@@ -7,9 +7,6 @@
 import type {VueWrapper} from '@vue/test-utils';
 import ModuleItemFilter from '@/client/components/create/ModuleItemFilter.vue';
 
-// Matches @vue/test-utils' own (unexported) `DefinedComponent` selector type.
-type ComponentConstructor = new (...args: any[]) => any;
-
 interface ModuleItemFilterProps {
   title: string;
   groups: Array<{key: string; label: string}>;
@@ -22,18 +19,17 @@ interface ModuleItemFilterEmits {
   'close': [];
 }
 
-interface ModuleItemFilterWrapper {
-  exists(): boolean;
+type ModuleItemFilterWrapper = VueWrapper & {
   props(): ModuleItemFilterProps;
   props<K extends keyof ModuleItemFilterProps>(key: K): ModuleItemFilterProps[K];
   vm: {
     $emit<K extends keyof ModuleItemFilterEmits>(event: K, ...args: ModuleItemFilterEmits[K]): void;
   };
-}
+};
 
 /**
  * Finds the ModuleItemFilter component in a wrapper.
  */
-export function findModuleItemFilter(wrapper: VueWrapper<any>): ModuleItemFilterWrapper {
-  return wrapper.findComponent(ModuleItemFilter as unknown as ComponentConstructor) as ModuleItemFilterWrapper;
+export function findModuleItemFilter(wrapper: VueWrapper): ModuleItemFilterWrapper {
+  return wrapper.findComponent(ModuleItemFilter) as ModuleItemFilterWrapper;
 }

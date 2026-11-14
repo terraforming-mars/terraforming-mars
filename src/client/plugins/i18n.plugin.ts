@@ -1,4 +1,4 @@
-import {App} from 'vue';
+import {App, DirectiveBinding} from 'vue';
 import {translateTextNode, $t} from '@/client/directives/i18n';
 
 declare module 'vue' {
@@ -12,7 +12,7 @@ export default {
     app.config.globalProperties.$t = $t;
 
     app.directive('i18n', {
-      mounted: (el: HTMLElement, binding: any) => {
+      mounted: (el: HTMLElement, binding: DirectiveBinding) => {
         el.setAttribute('tm-has-i18n', 'true');
         translateTextNode(el, binding);
       },

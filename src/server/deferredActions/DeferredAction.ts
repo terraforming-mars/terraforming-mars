@@ -6,7 +6,7 @@ export interface AndThen<T> {
   andThen(cb: (param: T) => void): this;
 }
 
-export interface IDeferredAction <T = undefined> extends AndThen<T> {
+export interface IDeferredAction<T = undefined> extends AndThen<T> {
   player: IPlayer;
   priority: Priority;
   execute(): PlayerInput | undefined;

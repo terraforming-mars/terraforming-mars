@@ -45,7 +45,7 @@ function playerWithRunningTimer(): [Player, FakeClock] {
   Game.newInstance('gameid', [player], player, 'spectatorid');
   player.clearWaitingFor();
   const clock = new FakeClock();
-  (Timer as any).lastStoppedAt = 0;
+  Reflect.set(Timer, 'lastStoppedAt', 0);
   player.timer = Timer.newInstance(clock);
   player.timer.enable();
 
@@ -242,12 +242,12 @@ describe('Player', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     player.pickedCorporationCard = new SaturnSystems();
     const json = player.serialize();
-    json.timer = {...json.timer, enabled: undefined, afterFirstAction: false} as any;
+    json.timer = {...json.timer, enabled: undefined, afterFirstAction: false};
     expect(Player.deserialize(json).timer.serialize().enabled).is.true;
 
     player.pickedCorporationCard = undefined;
     const json2 = player.serialize();
-    json2.timer = {...json2.timer, enabled: undefined, afterFirstAction: false} as any;
+    json2.timer = {...json2.timer, enabled: undefined, afterFirstAction: false};
     expect(Player.deserialize(json2).timer.serialize().enabled).is.false;
   });
 

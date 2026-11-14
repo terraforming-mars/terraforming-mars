@@ -22,7 +22,10 @@ export function badInputRequest(_req: Request, res: Response, e: unknown) {
     'Content-Type': 'application/json',
   });
   const id = e instanceof AppError ? e.id : undefined;
-  const message = e instanceof Error ? e.message : String(e);
+  const message = e instanceof Error ? e.message : 'Invalid input';
+  if (!(e instanceof Error)) {
+    console.warn('bad input', e);
+  }
   const response: AppErrorResponse = {id, message};
   res.write(JSON.stringify(response));
   res.end();

@@ -149,7 +149,7 @@ export class PlayerInput extends Handler {
 // that never got the reply to its previous response.
 function validateRequestId(player: IPlayer, entity: InputResponse) {
   const sidechannel = entity as unknown as {requestId?: string};
-  if (sidechannel.requestId !== undefined && sidechannel.requestId !== player.requestId) {
+  if (sidechannel.requestId !== player.requestId) {
     throw new AppError(INVALID_REQUEST_ID, 'This page is out of date. Click OK to refresh it.');
   }
   // Clearing this out to be compatible with the input response processors.

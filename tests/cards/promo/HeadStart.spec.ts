@@ -16,6 +16,9 @@ import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
 import {BeginnerCorporation} from '../../../src/server/cards/corporation/BeginnerCorporation';
 import {cast} from '../../../src/common/utils/utils';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
+import {BoardOfDirectors} from '@/server/cards/prelude2/BoardOfDirectors';
+import {Asimov} from '@/server/cards/ceos/Asimov';
+import {CardName} from '@/common/cards/CardName';
 
 describe('HeadStart', () => {
   let headStart: HeadStart;
@@ -147,5 +150,55 @@ describe('HeadStart', () => {
     expect(HeadStart.actionsRemaining(reloadedPlayer)).eq(1);
     expect(reloaded.activePlayer.id).eq(player.id);
     expect(cast(reloadedPlayer.getWaitingFor(), OrOptions).title).eq('Take your next action');
+  });
+
+  it('A CEO waits until Head Start is done', () => {
+    const asimov = new Asimov();
+    player.ceoCardsInHand.add(asimov);
+    player.heat = 16;
+    start([loan, headStart]);
+    playPrelude(loan);
+    playPrelude(headStart);
+    choose('Convert 8 heat into temperature');
+    choose('Convert 8 heat into temperature');
+
+    expectPlayer2ToPlayPreludes();
+    expect(player.ceoCardsInHand).has.length(1);
+    expect(player.playedCards.get(CardName.ASIMOV)).is.undefined;
+  });
+
+  it('Head Start played from Board of Directors in the action phase', () => {
+    const boardOfDirectors = new BoardOfDirectors();
+    boardOfDirectors.resourceCount = 1;
+    player.playedCards.push(boardOfDirectors);
+    game.preludeDeck.drawPile.push(headStart);
+    player.megaCredits = 12;
+    player.heat = 24;
+    player.takeAction();
+
+    expect(game.phase).eq(Phase.ACTION);
+    const index = titles().indexOf('Perform an action from a played card');
+    player.process({type: 'or', index, response: {type: 'card', cards: [CardName.BOARD_OF_DIRECTORS]}});
+    runAllActions(game);
+    player.process({type: 'card', cards: [CardName.HEAD_START]});
+    runAllActions(game);
+
+    expect(game.phase).eq(Phase.ACTION);
+    expect(player.actionsTakenThisRound).eq(1);
+    expect(HeadStart.actionsRemaining(player)).eq(2);
+    expect(titles()).does.not.include('End Turn');
+    choose('Convert 8 heat into temperature');
+    expect(HeadStart.actionsRemaining(player)).eq(1);
+    choose('Convert 8 heat into temperature');
+    expect(HeadStart.actionsRemaining(player)).eq(0);
+
+    // Board of Directors was the player's first action, so they still have one more.
+    expect(game.activePlayer).eq(player);
+    expect(player.actionsTakenThisRound).eq(1);
+    expect(titles()).includes('End Turn');
+    choose('Convert 8 heat into temperature');
+
+    expect(game.activePlayer).eq(player2);
+    expect(player.getWaitingFor()).is.undefined;
   });
 });

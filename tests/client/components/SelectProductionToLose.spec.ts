@@ -6,7 +6,7 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 
-function mountComponent(units: Units, cost: number = 2, onsave: (out: SelectProductionToLoseResponse) => void = () => {}) {
+function mountComponent(units: Units, cost: number = 2, onsave: (out: SelectProductionToLoseResponse) => void = () => {}, pairs?: number) {
   return shallowMount(SelectProductionToLose, {
     ...globalConfig,
     props: {
@@ -15,6 +15,7 @@ function mountComponent(units: Units, cost: number = 2, onsave: (out: SelectProd
         title: 'Select production to lose',
         buttonLabel: 'Save',
         type: 'productionToLose',
+        pairs,
         payProduction: {
           cost,
           units,
@@ -91,5 +92,29 @@ describe('SelectProductionToLose', () => {
     await wrapper.find('.btn-submit').trigger('click');
     expect(wrapper.find('.tm-warning').exists()).is.false;
     expect(saved).deep.eq({type: 'productionToLose', units: Units.of({steel: 1, heat: 1})});
+  });
+
+  it('refuses a split that does not pair two steps from one production', async () => {
+    let saved: SelectProductionToLoseResponse | undefined;
+    const wrapper = mountComponent(Units.of({megacredits: -3, steel: 1, heat: 1}), 2, (out) => saved = out, 1);
+    for (const row of wrapper.findAll('.payments_type').slice(1)) {
+      await row.findAll('button')[1].trigger('click');
+    }
+    await wrapper.find('.btn-submit').trigger('click');
+
+    expect(saved).is.undefined;
+    expect(wrapper.find('.tm-warning').text()).contains('1 of these losses must be 2 steps from a single production.');
+  });
+
+  it('saves two steps from a single production when a pair is required', async () => {
+    let saved: SelectProductionToLoseResponse | undefined;
+    const wrapper = mountComponent(Units.of({megacredits: -3, steel: 1}), 2, (out) => saved = out, 1);
+    const mcRow = wrapper.findAll('.payments_type')[0];
+    await mcRow.findAll('button')[1].trigger('click');
+    await mcRow.findAll('button')[1].trigger('click');
+    await wrapper.find('.btn-submit').trigger('click');
+
+    expect(wrapper.find('.tm-warning').exists()).is.false;
+    expect(saved).deep.eq({type: 'productionToLose', units: Units.of({megacredits: 2})});
   });
 });

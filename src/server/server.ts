@@ -25,7 +25,7 @@ import {GameLoader} from '@/server/database/GameLoader';
 import {globalInitialize} from '@/server/globalInitialize';
 import {SessionManager} from '@/server/server/auth/SessionManager';
 
-process.on('uncaughtException', (err: any) => {
+process.on('uncaughtException', (err: unknown) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
 

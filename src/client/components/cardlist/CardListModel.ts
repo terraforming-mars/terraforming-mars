@@ -250,7 +250,7 @@ function encodeMetadata(model: CardListModel) {
 }
 
 export function modelToHash(model: CardListModel) {
-  const parts: any = {};
+  const parts: Record<string, string | undefined> = {};
 
   parts.m = encode(model.expansions, MODULE_ABBREVIATIONS);
   parts.t = encode(model.types, TYPE_ABBREVIATIONS);

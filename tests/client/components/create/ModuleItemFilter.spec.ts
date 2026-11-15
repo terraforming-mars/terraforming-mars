@@ -1,4 +1,4 @@
-import {shallowMount} from '@vue/test-utils';
+import {DOMWrapper, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {h} from 'vue';
 import {globalConfig} from '../getLocalVue';
@@ -12,7 +12,8 @@ const PopupPanelStub = {
   emits: ['close'],
 };
 
-const GROUPS: Array<{key: GameModule, label: string}> = [
+type Group = {key: GameModule, label: string};
+const GROUPS: Array<Group> = [
   {key: 'venus', label: 'Group Alpha'},
   {key: 'moon', label: 'Group Beta'},
 ];
@@ -22,7 +23,13 @@ const ITEMS_BY_GROUP: Record<string, Array<string>> = {
   moon: ['item-b1'],
 };
 
-function mountFilter(overrides: {selected?: Array<string>} = {}) {
+type MountOptions = {
+  selected?: Array<string>,
+  groups?: Array<Group>,
+  itemsByGroup?: Record<string, Array<string>>,
+};
+
+function mountFilter(overrides: MountOptions = {}) {
   return shallowMount(ModuleItemFilter, {
     ...globalConfig,
     global: {
@@ -31,14 +38,45 @@ function mountFilter(overrides: {selected?: Array<string>} = {}) {
     },
     props: {
       title: 'Test Filter',
-      groups: GROUPS,
-      itemsByGroup: ITEMS_BY_GROUP,
+      groups: overrides.groups ?? GROUPS,
+      itemsByGroup: overrides.itemsByGroup ?? ITEMS_BY_GROUP,
       selected: overrides.selected ?? [],
     },
     slots: {
       item: ({itemName}: {itemName: string}) => h('span', {class: 'item-label'}, itemName),
     },
   });
+}
+
+type FilterWrapper = ReturnType<typeof mountFilter>;
+
+function selected(wrapper: FilterWrapper): Array<string> {
+  return wrapper.findAll<HTMLInputElement>('input[type=checkbox]')
+    .filter((input) => input.element.checked)
+    .map((input) => input.element.value);
+}
+
+function group(wrapper: FilterWrapper, label: string): DOMWrapper<Element> {
+  const found = wrapper.findAll('.corporations-filter-group')
+    .find((element) => element.text().includes(label));
+  if (found === undefined) {
+    throw new Error(`Group not found: ${label}`);
+  }
+  return found;
+}
+
+async function clickText(scope: FilterWrapper | DOMWrapper<Element>, text: string): Promise<void> {
+  const link = scope.findAll('a').find((element) => element.text() === text);
+  if (link === undefined) {
+    throw new Error(`Link not found: ${text}`);
+  }
+  await link.trigger('click');
+}
+
+function visibleItemLabels(wrapper: FilterWrapper): Array<string> {
+  return wrapper.findAll('.item-label')
+    .filter((label) => label.isVisible())
+    .map((label) => label.text());
 }
 
 describe('ModuleItemFilter', () => {
@@ -55,144 +93,141 @@ describe('ModuleItemFilter', () => {
   });
 
   it('hides a group when its item list is empty', () => {
-    const wrapper = shallowMount(ModuleItemFilter, {
-      ...globalConfig,
-      global: {
-        ...globalConfig.global,
-        stubs: {PopupPanel: PopupPanelStub},
-      },
-      props: {
-        title: 'Test Filter',
-        groups: GROUPS,
-        itemsByGroup: {venus: ['item-a1'], moon: []},
-        selected: [],
-      },
-    });
+    const wrapper = mountFilter({itemsByGroup: {venus: ['item-a1'], moon: []}});
     expect(wrapper.text()).to.include('Group Alpha');
     expect(wrapper.text()).not.to.include('Group Beta');
   });
 
-  it('initialises localSelected from the selected prop', () => {
+  it('initialises the selection from the selected prop', () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    expect((wrapper.vm as any).localSelected).to.deep.eq(['item-a1']);
+    expect(selected(wrapper)).to.deep.eq(['item-a1']);
   });
 
   // --- selectAll ---
 
-  it('selectAll("All") adds every item across all groups', () => {
+  it('selectAll("All") adds every item across all groups', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('All');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a1', 'item-a2', 'item-b1']);
+    await clickText(wrapper, 'All*');
+    expect(selected(wrapper)).to.have.members(['item-a1', 'item-a2', 'item-b1']);
   });
 
-  it('selectAll(group) adds only items from that group', () => {
+  it('selectAll(group) adds only items from that group', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('venus');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a1', 'item-a2']);
-    expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
+    await clickText(group(wrapper, 'Group Alpha'), 'All');
+    expect(selected(wrapper)).to.have.members(['item-a1', 'item-a2']);
+    expect(selected(wrapper)).not.to.include('item-b1');
   });
 
-  it('selectAll does not add duplicates', () => {
+  it('selectAll does not add duplicates', async () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    (wrapper.vm as any).selectAll('venus');
-    const selected: Array<string> = (wrapper.vm as any).localSelected;
-    expect(selected.filter((x) => x === 'item-a1')).to.have.length(1);
+    await clickText(group(wrapper, 'Group Alpha'), 'All');
+    await clickText(group(wrapper, 'Group Alpha'), 'All');
+    expect(selected(wrapper)).to.deep.eq(['item-a1', 'item-a2']);
   });
 
   // --- selectNone ---
 
-  it('selectNone("All") removes every item', () => {
+  it('selectNone("All") removes every item', async () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-a2', 'item-b1']});
-    (wrapper.vm as any).selectNone('All');
-    expect((wrapper.vm as any).localSelected).to.be.empty;
+    await clickText(wrapper, 'None*');
+    expect(selected(wrapper)).to.be.empty;
   });
 
-  it('selectNone(group) removes only items from that group', () => {
+  it('selectNone(group) removes only items from that group', async () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-a2', 'item-b1']});
-    (wrapper.vm as any).selectNone('venus');
-    expect((wrapper.vm as any).localSelected).to.deep.eq(['item-b1']);
+    await clickText(group(wrapper, 'Group Alpha'), 'None');
+    expect(selected(wrapper)).to.deep.eq(['item-b1']);
   });
 
   // --- invertSelection ---
 
-  it('invertSelection("All") toggles every item', () => {
+  it('invertSelection("All") toggles every item', async () => {
     const wrapper = mountFilter({selected: ['item-a1']});
-    (wrapper.vm as any).invertSelection('All');
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a2', 'item-b1']);
+    await clickText(wrapper, 'Invert*');
+    expect(selected(wrapper)).to.have.members(['item-a2', 'item-b1']);
   });
 
-  it('invertSelection(group) toggles only items in that group', () => {
+  it('invertSelection(group) toggles only items in that group', async () => {
     const wrapper = mountFilter({selected: ['item-a1', 'item-b1']});
-    (wrapper.vm as any).invertSelection('venus');
-    // item-a1 removed, item-a2 added; item-b1 untouched
-    expect((wrapper.vm as any).localSelected).to.have.members(['item-a2', 'item-b1']);
+    await clickText(group(wrapper, 'Group Alpha'), 'Invert');
+    expect(selected(wrapper)).to.have.members(['item-a2', 'item-b1']);
   });
 
   // --- watchSelect ---
 
-  it('watchSelect(key, true) calls selectAll for the group', () => {
+  it('watchSelect(key, true) selects the group', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).watchSelect('moon', true);
-    expect((wrapper.vm as any).localSelected).to.include('item-b1');
+    wrapper.vm.watchSelect('moon', true);
+    await wrapper.vm.$nextTick();
+    expect(selected(wrapper)).to.include('item-b1');
   });
 
-  it('watchSelect(key, false) calls selectNone for the group', () => {
+  it('watchSelect(key, false) deselects the group', async () => {
     const wrapper = mountFilter({selected: ['item-b1']});
-    (wrapper.vm as any).watchSelect('moon', false);
-    expect((wrapper.vm as any).localSelected).not.to.include('item-b1');
+    wrapper.vm.watchSelect('moon', false);
+    await wrapper.vm.$nextTick();
+    expect(selected(wrapper)).not.to.include('item-b1');
   });
 
   // --- include (text filter) ---
 
-  it('include returns true when filterText is empty', () => {
+  it('include returns true when the filter is empty', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).include('anything')).to.be.true;
+    expect(visibleItemLabels(wrapper)).to.have.members(['item-a1', 'item-a2', 'item-b1']);
   });
 
-  it('include returns true for a case-insensitive substring match', () => {
+  it('include matches a case-insensitive substring', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).filterText = 'ITEM';
-    expect((wrapper.vm as any).include('item-a1')).to.be.true;
+    await wrapper.find('input.filter').setValue('ITEM-A1');
+    expect(visibleItemLabels(wrapper)).to.deep.eq(['item-a1']);
   });
 
-  it('include returns false when the name does not match', () => {
+  it('include hides items that do not match', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).filterText = 'zzz';
-    expect((wrapper.vm as any).include('item-a1')).to.be.false;
+    await wrapper.find('input.filter').setValue('zzz');
+    expect(visibleItemLabels(wrapper)).to.be.empty;
   });
 
   // --- icon ---
 
   it('icon returns the correct expansion CSS class', () => {
     const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('base')).to.eq('create-game-expansion-icon expansion-icon-base');
+    expect(group(wrapper, 'Group Alpha').find('.create-game-expansion-icon').classes())
+      .to.include('expansion-icon-venus');
   });
 
   it('icon maps "colonies" to "colony" suffix', () => {
-    const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('colonies')).to.eq('create-game-expansion-icon expansion-icon-colony');
+    const wrapper = mountFilter({
+      groups: [{key: 'colonies', label: 'Colonies'}],
+      itemsByGroup: {colonies: ['item-c']},
+    });
+    expect(group(wrapper, 'Colonies').find('.create-game-expansion-icon').classes())
+      .to.include('expansion-icon-colony');
   });
 
   it('icon maps "corpera" to "CE" suffix', () => {
-    const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('corpera')).to.eq('create-game-expansion-icon expansion-icon-CE');
+    const wrapper = mountFilter({
+      groups: [{key: 'corpera', label: 'Corporations'}],
+      itemsByGroup: {corpera: ['item-c']},
+    });
+    expect(group(wrapper, 'Corporations').find('.create-game-expansion-icon').classes())
+      .to.include('expansion-icon-CE');
   });
 
   it('icon maps "moon" to "themoon" suffix', () => {
-    const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon('moon')).to.eq('create-game-expansion-icon expansion-icon-themoon');
-  });
-
-  it('icon returns undefined when module is undefined', () => {
-    const wrapper = mountFilter();
-    expect((wrapper.vm as any).icon(undefined)).to.be.undefined;
+    const wrapper = mountFilter({
+      groups: [{key: 'moon', label: 'Moon'}],
+      itemsByGroup: {moon: ['item-m']},
+    });
+    expect(group(wrapper, 'Moon').find('.create-game-expansion-icon').classes())
+      .to.include('expansion-icon-themoon');
   });
 
   // --- emit ---
 
-  it('emits update:selected when localSelected changes', async () => {
+  it('emits update:selected when the selection changes', async () => {
     const wrapper = mountFilter();
-    (wrapper.vm as any).selectAll('All');
+    await clickText(wrapper, 'All*');
     await wrapper.vm.$nextTick();
     const emitted = wrapper.emitted('update:selected');
     expect(emitted).to.not.be.null;

@@ -204,7 +204,7 @@ export default defineComponent({
       root.playerView = playerView;
       root.screen = 'player-home';
       if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-        window.location = window.location as any as (string & Location);
+        window.location.reload();
       }
     },
     waitForUpdate() {

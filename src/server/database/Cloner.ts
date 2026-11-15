@@ -46,21 +46,20 @@ export class Cloner {
     return game;
   }
 
-  private static replacePlayerIds(obj: any, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
-    if (obj === undefined || obj === null) {
+  private static replacePlayerIds(obj: unknown, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
+    if (typeof obj !== 'object' || obj === null) {
       return;
     }
-    const keys = Object.entries(obj);
-    keys.forEach(([key, val]) => {
+    for (const [key, val] of Object.entries(obj)) {
       if (isPlayerId(val)) {
         const idx = oldPlayerIds.indexOf(val);
         if (idx > -1) {
-          obj[key] = newPlayerIds[idx];
+          Reflect.set(obj, key, newPlayerIds[idx]);
         }
       } else if (typeof val === 'object') {
         Cloner.replacePlayerIds(val, oldPlayerIds, newPlayerIds);
       }
-    });
+    }
   }
 
   private static updatePlayer(from: IPlayer, to: SerializedPlayer) {

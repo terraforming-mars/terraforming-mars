@@ -30,8 +30,8 @@ describe('Board', () => {
 
     // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
     const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
-    (player as any).game = {gameOptions};
-    (player2 as any).game = {gameOptions};
+    Reflect.set(player, 'game', {gameOptions});
+    Reflect.set(player2, 'game', {gameOptions});
   });
 
   it('getSpace', () => {

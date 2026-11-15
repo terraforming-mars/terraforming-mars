@@ -301,6 +301,9 @@ export interface IGame extends Logger {
   getActionCount(): number;
 }
 
-export function isIGame(object: any): object is IGame {
-  return object !== undefined && object.hasOwnProperty('id') && isGameId(object.id);
+export function isIGame(object: unknown): object is IGame {
+  if (typeof object !== 'object' || object === null) {
+    return false;
+  }
+  return Object.hasOwn(object, 'id') && isGameId((object as {id?: unknown}).id);
 }

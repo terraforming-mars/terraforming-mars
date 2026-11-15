@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {SelectResource} from '../../src/server/inputs/SelectResource';
+import type {Units} from '@/common/Units';
 
 describe('SelectResource', () => {
   let selected: string | undefined;
@@ -31,7 +32,7 @@ describe('SelectResource', () => {
 
   it('Not a resource', () => {
     const selectResource = new SelectResource('').andThen(cb);
-    expect(() => selectResource.process({type: 'resource', resource: 'eggs' as any})).to.throw(/Not a valid unit/);
+    expect(() => selectResource.process({type: 'resource', resource: 'eggs' as keyof Units})).to.throw(/Not a valid unit/);
     expect(selected).is.undefined;
   });
 

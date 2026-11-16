@@ -26,7 +26,7 @@ describe('MarsBotTilePlacer', () => {
 
   beforeEach(() => {
     [game, human, botPlayer] = testGame(2);
-    tilePlacer = new MarsBotTilePlacer(game, botPlayer, human);
+    tilePlacer = new MarsBotTilePlacer(fakeMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0}));
   });
 
   // TODO(kberg): Move to TestingUtils.
@@ -271,6 +271,9 @@ describe('MarsBotTilePlacer', () => {
     // botPlayer is not the game's MarsBot here, so the board charges it like a human.
     botPlayer.megaCredits = 20;
     const fake = fakeMarsBot({
+      game,
+      player: botPlayer,
+      humanPlayer: human,
       megacredits: bot.megacredits ?? 0,
       placeOcean: () => {
         calls.push('ocean');
@@ -290,7 +293,7 @@ describe('MarsBotTilePlacer', () => {
       },
       canPlaceColony: () => bot.noColonyLeft !== true,
     });
-    tilePlacer = new MarsBotTilePlacer(game, botPlayer, human, fake);
+    tilePlacer = new MarsBotTilePlacer(fake);
     return fake;
   }
 

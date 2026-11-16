@@ -1,4 +1,4 @@
-// Pre-compresses the Vite client output (main.js, chunks, client.css, sw.js) with gzip and brotli.
+// Pre-compresses the Vite client output (main, chunks, styles and sw) with gzip and brotli.
 // ServeAsset serves build/<file>.br / .gz when the browser accepts them.
 import fs from 'node:fs';
 import path from 'node:path';

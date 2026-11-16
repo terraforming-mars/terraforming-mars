@@ -114,8 +114,6 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.LOAD_GAME, LoadGame.INSTANCE],
     [paths.LOGIN, Login.INSTANCE],
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
-    ['main.js', ServeAsset.INSTANCE],
-    ['main.js.map', ServeAsset.INSTANCE],
     [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
@@ -123,8 +121,6 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_PROFILE, ApiProfile.INSTANCE],
     [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
-    ['styles.css', ServeAsset.INSTANCE],
-    ['client.css', ServeAsset.INSTANCE],
     ['sw.js', ServeAsset.INSTANCE],
     [paths.THE_END, ServeApp.INSTANCE],
   ],
@@ -156,7 +152,7 @@ function getHandler(pathname: string): IHandler | undefined {
   if (pathname.startsWith('chunks/')) {
     return ServeAsset.INSTANCE;
   }
-  // Hashed Vite entry and component stylesheet (assets/index.html points at them).
+  // Hashed Vite entry and component stylesheet (build/index.html points at them).
   if (/^main-[A-Za-z0-9_-]+\.js(\.map)?$/.test(pathname)) {
     return ServeAsset.INSTANCE;
   }

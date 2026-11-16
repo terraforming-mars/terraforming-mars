@@ -34,7 +34,6 @@ npx vitest run tests/client/components/Board.spec.ts
 ```bash
 npm run dev:server           # Server with hot reload (tsx watch)
 npm run dev:client           # Vite dev server (proxy to the Node server on :8080)
-npm run watch:less           # CSS rebuild on change
 ```
 
 However `npm run dev` is much easier to run and a little more powerful / flexible. It starts the Node server on http://localhost:8080 and Vite (the app) on http://localhost:5173.

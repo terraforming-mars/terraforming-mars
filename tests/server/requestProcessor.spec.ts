@@ -10,7 +10,7 @@ describe('requestProcessor', () => {
     req.url = '/';
     await processRequest(req, res);
 
-    expect(req.url).eq('/assets/index.html');
+    expect(req.url).eq('/build/index.html');
   });
 
   it('keeps metrics labels stable across Vite builds', () => {

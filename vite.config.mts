@@ -24,7 +24,6 @@ function serviceWorker(): Plugin {
 const SERVER_PATHS = [
   '/api',
   '/assets',
-  '/styles.css',
   '/favicon.ico',
   '/auth',
   '/reset',
@@ -83,18 +82,16 @@ export default defineConfig({
     emptyOutDir: false,
     target: 'es2021',
     sourcemap: 'hidden',
-    // Lets ServeAsset put the hashed entry file into assets/index.html
-    manifest: 'main-manifest.json',
-    // One stylesheet for all components, loaded by assets/index.html after styles.css.
+    // One stylesheet for the whole app, generated from the Less link in index.html.
     cssCodeSplit: false,
     rollupOptions: {
-      input: {main: path.resolve(import.meta.dirname, 'src/client/main.ts')},
+      input: path.resolve(import.meta.dirname, 'index.html'),
       output: {
         entryFileNames: 'main-[hash].js',
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: (asset) => {
           const name = asset.names?.[0] ?? asset.name ?? '';
-          // Component CSS in one file at the build root; images referenced from it keep the /assets namespace
+          // One stylesheet at the build root; images referenced from it keep the /assets namespace
           return name.endsWith('.css') ? 'client-[hash].css' : 'assets/[name]-[hash][extname]';
         },
       },

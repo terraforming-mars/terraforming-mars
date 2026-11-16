@@ -1,5 +1,7 @@
 import {createApp, defineAsyncComponent} from 'vue';
 
+// One stylesheet: Vite handles the global Less and the component styles together.
+import '@/styles/common.less';
 import App from '@/client/components/App.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 

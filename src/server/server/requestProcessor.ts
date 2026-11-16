@@ -166,6 +166,15 @@ function getHandler(pathname: string): IHandler | undefined {
   return undefined;
 }
 
+// Metrics labels must survive a deploy: strip the Vite content hash from build files.
+// assets/ stays aggregated as before; chunks keep their logical name.
+export function metricsPathOf(pathname: string): string {
+  if (pathname.startsWith('assets/')) {
+    return 'assets/';
+  }
+  return pathname.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:js|css)(?:\.map)?$)/, '');
+}
+
 function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; sessionid: SessionId | undefined } {
   const sessionManager = SessionManager.getInstance();
   let user: DiscordUser | undefined = undefined;
@@ -206,8 +215,7 @@ export async function processRequest(req: Request, res: Response): Promise<void>
     const pathname = url.pathname.substring(1); // Remove leading '/'
     const handler = getHandler(pathname);
     if (handler !== undefined) {
-      // No need to report every asset. Summarize.
-      metricsPathname = pathname.startsWith('assets/') ? 'assets/' : pathname;
+      metricsPathname = metricsPathOf(pathname);
       const {user, sessionid} = getAuthenticatedUser(req);
       const ctx: Context = {
         url: url,

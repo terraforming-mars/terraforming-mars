@@ -12,7 +12,6 @@ import {cast, toID} from '@/common/utils/utils';
 import {fakeCard, maxOutOceans, setTemperature} from '../TestingUtils';
 import {fakeMarsBot} from './FakeMarsBot';
 import {BoardName} from '@/common/boards/BoardName';
-import {SpaceId} from '@/common/Types';
 import {GameOptions} from '@/server/game/GameOptions';
 import {Founder} from '@/server/awards/modular/Founder';
 import {Highlander} from '@/server/awards/modular/Highlander';
@@ -549,14 +548,12 @@ describe('MarsBotTilePlacer', () => {
     });
   }
 
-  it('offers MarsBot the hexes that cost M€ even when it cannot pay, but not the human', () => {
-    const runs: Array<{rule: string, options: Partial<GameOptions>, hex: SpaceId}> = [
-      {rule: 'South Pole', options: {boardName: BoardName.HELLAS}, hex: '61'},
-      {rule: 'North Pole', options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA}, hex: '33'},
-      {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true}, hex: '16'},
-    ];
-
-    for (const run of runs) {
+  for (const run of [
+    {rule: 'South Pole', options: {boardName: BoardName.HELLAS}, hex: '61'},
+    {rule: 'North Pole', options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA}, hex: '33'},
+    {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true}, hex: '16'},
+  ] as const) {
+    it('offers MarsBot the hex that costs M€ even when it cannot pay, but not the human: ' + run.rule, () => {
       const [soloGame, soloHuman] = testGame(1, {...run.options, automa: true});
       const soloBotPlayer = soloGame.marsBotPlayer!;
       soloHuman.megaCredits = 0;
@@ -569,109 +566,98 @@ describe('MarsBotTilePlacer', () => {
       const botSpaces = soloGame.board.getAvailableSpacesOnLand(soloBotPlayer).map((space) => space.id);
       const humanSpaces = soloGame.board.getAvailableSpacesOnLand(soloHuman).map((space) => space.id);
 
-      expect(botSpaces, run.rule).includes(run.hex);
-      expect(humanSpaces, run.rule).does.not.include(run.hex);
-    }
-  });
+      expect(botSpaces).includes(run.hex);
+      expect(humanSpaces).does.not.include(run.hex);
+    });
+  }
 
-  it('resolves a hex that costs M€ and pays only for what happened', () => {
-    type HexRun = {
-      rule: string,
-      options: Partial<GameOptions>,
-      hex: SpaceId,
-      bot: BotOptions,
-      calls: Array<string>,
-      /** The bot's M€ afterwards. */
-      left: number,
-      /** The M€ MarsBot gets for the icons on the hex. */
-      pays?: number,
-    };
-    const runs: Array<HexRun> = [
-      {
-        rule: 'South Pole: places an ocean and costs 6 M€',
-        options: {boardName: BoardName.HELLAS},
-        hex: '61',
-        bot: {megacredits: 10},
-        calls: ['ocean'],
-        left: 4,
-      },
-      {
-        rule: 'South Pole: does nothing with 5 M€',
-        options: {boardName: BoardName.HELLAS},
-        hex: '61',
-        bot: {megacredits: 5},
-        calls: [],
-        left: 5,
-      },
-      {
-        rule: 'South Pole: costs nothing when no ocean is placed',
-        options: {boardName: BoardName.HELLAS},
-        hex: '61',
-        bot: {megacredits: 10, swallows: true},
-        calls: ['ocean'],
-        left: 10,
-      },
-      {
-        rule: 'North Pole: raises the temperature and costs 4 M€',
-        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-        hex: '33',
-        bot: {megacredits: 6},
-        calls: ['temperature'],
-        left: 2,
-      },
-      {
-        rule: 'North Pole: costs nothing when the temperature does not rise',
-        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-        hex: '33',
-        bot: {megacredits: 6, swallows: true},
-        calls: ['temperature'],
-        left: 6,
-      },
-      {
-        rule: 'MSL Curiosity: places a colony and costs 5 M€',
-        options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
-        hex: '16',
-        bot: {megacredits: 7},
-        calls: ['colony'],
-        left: 2,
-      },
-      {
-        rule: 'MSL Curiosity: costs nothing when no colony is placed',
-        options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
-        hex: '16',
-        bot: {megacredits: 7, swallows: true},
-        calls: ['colony'],
-        left: 7,
-      },
-      {
-        rule: 'Viking: gives 1 M€ for its delegate icon with Turmoil',
-        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
-        hex: '28',
-        bot: {megacredits: 3},
-        calls: [],
-        left: 3,
-        pays: 1,
-      },
-      {
-        rule: 'Viking: gives nothing without Turmoil',
-        options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-        hex: '28',
-        bot: {megacredits: 3},
-        calls: [],
-        left: 3,
-      },
-    ];
-
-    for (const run of runs) {
+  // Each run puts MarsBot's tile on `hex`. `calls` are the effects asked of the bot, `left` is its M€ afterwards
+  // and `pays` the M€ it gets for the icons on the hex.
+  for (const run of [
+    {
+      rule: 'South Pole: places an ocean and costs 6 M€',
+      options: {boardName: BoardName.HELLAS},
+      hex: '61',
+      bot: {megacredits: 10},
+      calls: ['ocean'],
+      left: 4,
+    },
+    {
+      rule: 'South Pole: does nothing with 5 M€',
+      options: {boardName: BoardName.HELLAS},
+      hex: '61',
+      bot: {megacredits: 5},
+      calls: [],
+      left: 5,
+    },
+    {
+      rule: 'South Pole: costs nothing when no ocean is placed',
+      options: {boardName: BoardName.HELLAS},
+      hex: '61',
+      bot: {megacredits: 10, swallows: true},
+      calls: ['ocean'],
+      left: 10,
+    },
+    {
+      rule: 'North Pole: raises the temperature and costs 4 M€',
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+      hex: '33',
+      bot: {megacredits: 6},
+      calls: ['temperature'],
+      left: 2,
+    },
+    {
+      rule: 'North Pole: costs nothing when the temperature does not rise',
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+      hex: '33',
+      bot: {megacredits: 6, swallows: true},
+      calls: ['temperature'],
+      left: 6,
+    },
+    {
+      rule: 'MSL Curiosity: places a colony and costs 5 M€',
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      hex: '16',
+      bot: {megacredits: 7},
+      calls: ['colony'],
+      left: 2,
+    },
+    {
+      rule: 'MSL Curiosity: costs nothing when no colony is placed',
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      hex: '16',
+      bot: {megacredits: 7, swallows: true},
+      calls: ['colony'],
+      left: 7,
+    },
+    {
+      rule: 'Viking: gives 1 M€ for its delegate icon with Turmoil',
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
+      hex: '28',
+      bot: {megacredits: 3},
+      calls: [],
+      left: 3,
+      pays: 1,
+    },
+    {
+      rule: 'Viking: gives nothing without Turmoil',
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
+      hex: '28',
+      bot: {megacredits: 3},
+      calls: [],
+      left: 3,
+    },
+  ] as const) {
+    it('resolves a hex that costs M€ and pays only for what happened, ' + run.rule, () => {
       const calls: Array<string> = [];
       const marsBot = startGame(run.options, run.bot, calls);
       const space = game.board.getSpaceOrThrow(run.hex);
 
       tilePlacer.resolveSpecialHex(space);
 
-      expect(calls, run.rule).deep.eq(run.calls);
-      expect(marsBot.megacredits, run.rule).eq(run.left);
-      expect(tilePlacer.getPlacementBonusMC(space), run.rule).eq(run.pays ?? 0);
-    }
-  });
+      expect(calls).deep.eq(run.calls);
+      expect(marsBot.megacredits).eq(run.left);
+      expect(tilePlacer.getPlacementBonusMC(space)).eq(run.pays ?? 0);
+    });
+  }
 });

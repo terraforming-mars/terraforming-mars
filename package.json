@@ -94,7 +94,7 @@
     "test:client:watch": "vitest",
     "dev:client": "vite",
     "dev:server": "cross-env NODE_ENV=development tsx watch --clear-screen=false src/server/server.ts",
-    "clean:client": "rimraf --glob \"build/main.js*\" \"build/vendors.js*\" build/chunks \"build/client.css*\" build/sw.js build/assets build/static"
+    "clean:client": "node scripts/clean-client.mjs"
   },
   "repository": {
     "type": "git",

@@ -51,6 +51,9 @@ export class FileAPI {
 export class ServeAsset extends Handler {
   public static readonly INSTANCE: ServeAsset = new ServeAsset();
   private readonly cache = new BufferCache();
+  private mainEntryFile: string | undefined;
+  private mainCssFile: string | undefined;
+  private mainEntryLoaded = false;
 
   // Public for tests
   public constructor(private cacheAgeSeconds: string | number = process.env.ASSET_CACHE_MAX_AGE || 0,
@@ -113,37 +116,83 @@ export class ServeAsset extends Handler {
     }
 
     if (buffer !== undefined) {
-      res.setHeader('Content-Length', buffer.buffer.length);
-      res.end(buffer.buffer);
+      const data = this.withIdentity(file, buffer.buffer);
+      res.setHeader('Content-Length', data.length);
+      res.end(data);
       return;
     }
 
     try {
-      const data = await this.fileApi.readFile(file);
+      const raw = await this.fileApi.readFile(file);
       if (this.cacheAssets === true) {
-        this.cache.set(file, data);
+        this.cache.set(file, raw);
       }
+      const data = this.withIdentity(file, raw);
       res.setHeader('Content-Length', data.length);
       res.end(data);
     } catch (err) {
+      if ((err as {code?: string}).code === 'ENOENT') {
+        throw RouteError.notFound();
+      }
       console.log(err);
       throw RouteError.internalServerError('Cannot serve ' + path);
     }
+  }
+
+  // The Vite build emits a hashed entry file; assets/index.html keeps main.js as the development fallback.
+  private mainEntry(): string | undefined {
+    if (this.mainEntryLoaded === false) {
+      this.mainEntryLoaded = true;
+      try {
+        if (this.fileApi.existsSync('build/main-manifest.json')) {
+          const manifest = JSON.parse(this.fileApi.readFileSync('build/main-manifest.json').toString('utf8')) as
+            Record<string, {isEntry?: boolean, file?: string}>;
+          const entry = manifest['src/client/main.ts'] ?? Object.values(manifest).find((item) => item.isEntry === true);
+          if (entry !== undefined && typeof entry.file === 'string') {
+            this.mainEntryFile = entry.file;
+          }
+          const style = manifest['style.css'] ??
+            Object.values(manifest).find((item) => item.file?.endsWith('.css') === true);
+          if (style !== undefined && typeof style.file === 'string') {
+            this.mainCssFile = style.file;
+          }
+        }
+      } catch (err) {
+        // No manifest (development) or unreadable manifest: keep main.js, which Vite serves in dev.
+        console.log('Cannot read build/main-manifest.json', err);
+      }
+    }
+    return this.mainEntryFile;
+  }
+
+  private withIdentity(file: string, raw: Buffer): Buffer {
+    if (file !== 'assets/index.html') {
+      return raw;
+    }
+    let html = raw.toString('utf8');
+    const entry = this.mainEntry();
+    if (entry !== undefined) {
+      html = html.replace('src="main.js"', `src="${entry}"`);
+    }
+    if (this.mainCssFile !== undefined) {
+      html = html.replace('href="client.css"', `href="${this.mainCssFile}"`);
+    }
+    return Buffer.from(html);
   }
 
   private toMainFile(file: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     // Only serve compressed versions in production. Development mode serves
     // uncompressed versions because they can be hot-swapped.
     if (isProduction()) {
-      if (encodings.has('br')) {
+      if (encodings.has('br') && this.fileApi.existsSync(file + '.br')) {
         return {file: file + '.br', encoding: 'br'};
-      } else if (encodings.has('gzip')) {
+      } else if (encodings.has('gzip') && this.fileApi.existsSync(file + '.gz')) {
         return {file: file + '.gz', encoding: 'gzip'};
       }
     }
 
-    // Fallback on uncompressed file if in development or no compressed
-    // file exists.
+    // Fallback on uncompressed file in development or when the compression
+    // step skipped this file (source maps, for example).
     return {file, encoding: undefined};
   }
 
@@ -186,6 +235,13 @@ export class ServeAsset extends Handler {
       return {file: 'assets/favicon.ico'};
 
     default:
+      // The hashed entry file emitted by Vite (named in assets/index.html at serve time).
+      if (/^main-[A-Za-z0-9_-]+\.js(\.map)?$/.test(urlPath)) {
+        return this.toMainFile(`build/${urlPath}`, encodings);
+      }
+      if (/^client-[A-Za-z0-9_-]+\.css(\.map)?$/.test(urlPath)) {
+        return this.toMainFile(`build/${urlPath}`, encodings);
+      }
       // Serve JS chunks produced by the Vite build.
       if (urlPath.startsWith('chunks/')) {
         const chunksRoot = path.resolve('./build/chunks');

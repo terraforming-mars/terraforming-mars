@@ -156,6 +156,13 @@ function getHandler(pathname: string): IHandler | undefined {
   if (pathname.startsWith('chunks/')) {
     return ServeAsset.INSTANCE;
   }
+  // Hashed Vite entry and component stylesheet (assets/index.html points at them).
+  if (/^main-[A-Za-z0-9_-]+\.js(\.map)?$/.test(pathname)) {
+    return ServeAsset.INSTANCE;
+  }
+  if (/^client-[A-Za-z0-9_-]+\.css(\.map)?$/.test(pathname)) {
+    return ServeAsset.INSTANCE;
+  }
   return undefined;
 }
 

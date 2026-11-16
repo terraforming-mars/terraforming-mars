@@ -81,17 +81,19 @@ export default defineConfig({
     emptyOutDir: false,
     target: 'es2021',
     sourcemap: 'hidden',
+    // Lets ServeAsset put the hashed entry file into assets/index.html
+    manifest: 'main-manifest.json',
     // One stylesheet for all components, loaded by assets/index.html after styles.css.
     cssCodeSplit: false,
     rollupOptions: {
       input: {main: path.resolve(import.meta.dirname, 'src/client/main.ts')},
       output: {
-        entryFileNames: 'main.js',
+        entryFileNames: 'main-[hash].js',
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: (asset) => {
           const name = asset.names?.[0] ?? asset.name ?? '';
           // Component CSS in one file at the build root; images referenced from it keep the /assets namespace
-          return name.endsWith('.css') ? 'client.css' : 'assets/[name]-[hash][extname]';
+          return name.endsWith('.css') ? 'client-[hash].css' : 'assets/[name]-[hash][extname]';
         },
       },
     },

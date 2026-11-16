@@ -49,10 +49,10 @@ export default defineConfig({
   ],
   publicDir: false,
   resolve: {
-    alias: {
-      '@': path.resolve(import.meta.dirname, 'src'),
-      'vue': 'vue/dist/vue.esm-bundler.js',
-    },
+    alias: [
+      {find: '@', replacement: path.resolve(import.meta.dirname, 'src')},
+      {find: /^vue$/, replacement: 'vue/dist/vue.esm-bundler.js'},
+    ],
   },
   define: {
     __VUE_OPTIONS_API__: 'true',

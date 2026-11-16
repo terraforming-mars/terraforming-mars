@@ -25,6 +25,11 @@ const SERVER_PATHS = [
   '/end_game_log',
   '/load_game',
   '/player/input',
+  // Server-checked pages: their redirects and validations must also run in dev.
+  '/game',
+  '/load',
+  '/login',
+  '/games-overview',
 ];
 
 const proxy = Object.fromEntries(SERVER_PATHS.map((prefix) => [

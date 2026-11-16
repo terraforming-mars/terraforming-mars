@@ -288,7 +288,7 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * How many icons on `space` give MarsBot 1 M€ each. Not the hexes that cost M€, and not the
+   * How many icons on `space` give MarsBot 1 M€ each. Not the icons that cost M€, and not the
    * Turmoil delegate without Turmoil, which counts as empty (rulebook C, p.11).
    */
   private paidIconCount(space: Space): number {
@@ -318,7 +318,6 @@ export class MarsBotTilePlacer {
       return false;
     }
     const marsBot = this.marsBot;
-    // The M€ supply only: megaCredits also counts the Luna storage area
     if (marsBot === undefined || marsBot.megacredits < this.specialHexCost(bonus)) {
       return false;
     }
@@ -337,7 +336,7 @@ export class MarsBotTilePlacer {
   /**
    * Called once MarsBot has placed a tile on `space`. On the hexes that cost M€, MarsBot pays for
    * the bonus and gets it when it can. Otherwise it neither pays nor gets anything, which includes
-   * a bonus its corporation swallows (Pristar) or one that finds no colony to build.
+   * a bonus its corporation swallows or one that finds no colony to build.
    */
   public resolveSpecialHex(space: Space): void {
     const bonus = this.specialBonus(space);
@@ -361,7 +360,6 @@ export class MarsBotTilePlacer {
       break;
     }
     case SpaceBonus.COLONY:
-      // The way Expedited Construction picks and builds one.
       resolved = marsBot.maybePlaceRandomColony();
       break;
     }

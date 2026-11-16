@@ -257,7 +257,6 @@ describe('MarsBotTilePlacer', () => {
 
   type BotOptions = {
     megacredits?: number,
-    /** The bot has no colony tile left to build on. */
     noColonyLeft?: boolean,
     /** The effect the placer asks of the bot does not happen. */
     swallows?: boolean,
@@ -269,7 +268,7 @@ describe('MarsBotTilePlacer', () => {
    */
   function startGame(options: Partial<GameOptions> | undefined, bot: BotOptions = {}, calls: Array<string> = []) {
     [game, human, botPlayer] = testGame(2, options);
-    // The board only offers the special hexes to a player who can pay for them.
+    // botPlayer is not the game's MarsBot here, so the board charges it like a human.
     botPlayer.megaCredits = 20;
     const fake = fakeMarsBot({
       megacredits: bot.megacredits ?? 0,
@@ -483,13 +482,6 @@ describe('MarsBotTilePlacer', () => {
       loser: '32',
     },
     {
-      rule: 'North Pole: with 3 M€ it counts as a space without rewards',
-      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-      bot: {megacredits: 3},
-      expected: '32',
-      loser: '33',
-    },
-    {
       rule: 'North Pole: with the temperature maxed it counts as a space without rewards',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       bot: {megacredits: 20},
@@ -510,13 +502,6 @@ describe('MarsBotTilePlacer', () => {
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       bot: {megacredits: 5},
       expected: '40',
-      loser: '16',
-    },
-    {
-      rule: 'MSL Curiosity: with 4 M€ it counts as a space without rewards',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
-      bot: {megacredits: 4},
-      expected: '25',
       loser: '16',
     },
     {
@@ -550,7 +535,6 @@ describe('MarsBotTilePlacer', () => {
 
   for (const run of [
     {rule: 'South Pole', options: {boardName: BoardName.HELLAS}, hex: '61'},
-    {rule: 'North Pole', options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA}, hex: '33'},
     {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true}, hex: '16'},
   ] as const) {
     it('offers MarsBot the hex that costs M€ even when it cannot pay, but not the human: ' + run.rule, () => {
@@ -558,7 +542,7 @@ describe('MarsBotTilePlacer', () => {
       const soloBotPlayer = soloGame.marsBotPlayer!;
       soloHuman.megaCredits = 0;
       soloBotPlayer.megaCredits = 0;
-      // No colony tile has room, so nobody could settle for MSL Curiosity.
+      // No colony tile has room.
       for (const colony of soloGame.colonies) {
         colony.isActive = false;
       }

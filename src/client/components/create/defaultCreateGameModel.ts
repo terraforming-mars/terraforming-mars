@@ -1,7 +1,6 @@
 import * as constants from '@/common/constants';
 import {BoardName} from '@/common/boards/BoardName';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
-import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {CreateGameModel} from './CreateGameModel';
 
 export function defaultCreateGameModel(): CreateGameModel {
@@ -21,8 +20,6 @@ export function defaultCreateGameModel(): CreateGameModel {
     expansions: {...DEFAULT_EXPANSIONS},
     draftVariant: true,
     initialDraft: false,
-    randomMA: RandomMAOptionType.NONE,
-    modularMA: false,
     randomFirstPlayer: true,
     showOtherPlayersVP: false,
     // beginnerOption: false,
@@ -35,7 +32,6 @@ export function defaultCreateGameModel(): CreateGameModel {
     customCeos: [],
     customColonies: [],
     customCorporations: [],
-    customMA: undefined,
     customPreludes: [],
     bannedCards: [],
     includedCards: [],
@@ -50,7 +46,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     showTimers: true,
     fastModeOption: false,
     removeNegativeGlobalEventsOption: false,
-    includeFanMA: false,
+    goals: {type: 'board', random: {pool: 'maps', randomness: 'limited'}, selected: {milestones: [], awards: []}},
     startingCorporations: 2,
     soloTR: false,
     clonedGameId: undefined,

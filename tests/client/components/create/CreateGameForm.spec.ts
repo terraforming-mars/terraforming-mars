@@ -17,7 +17,7 @@ import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 // Minimal serialized Create Game payload used by settings restore tests.
-function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
+function createNewGameConfig(overrides: JSONObject = {}): NewGameConfig & JSONObject {
   // Not ideal but is fine for the tests.
   const config: Partial<NewGameConfig> = {
     players: [
@@ -30,7 +30,7 @@ function createNewGameConfig(overrides: JSONObject = {}):  NewGameConfig {
     solarPhaseOption: true,
     ...overrides,
   };
-  return config as NewGameConfig;
+  return config as NewGameConfig & JSONObject;
 }
 
 /*
@@ -68,6 +68,19 @@ describe('CreateGameForm', () => {
     expect(wrapper.exists()).to.be.true;
   });
 
+  it('sends the selected player as first player', async () => {
+    const wrapper = shallowMount(CreateGameForm, {
+      ...globalConfig,
+    });
+
+    wrapper.vm.playersCount = 3;
+    wrapper.vm.randomFirstPlayer = false;
+    wrapper.vm.firstIndex = 2;
+
+    const config = await wrapper.vm.serializeSettings();
+
+    expect(config?.players.map((player) => player.first)).deep.eq([false, true, false]);
+  });
 
   it('restores the last saved game settings on load', async () => {
     PreferencesManager.INSTANCE.set('remember_create_game_settings', true);
@@ -100,11 +113,16 @@ describe('CreateGameForm', () => {
     });
     const wrapper = mount(Root, {
       ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        mocks: {
+          showAlert(title: string, message: string) {
+            alerts.push({title, message});
+          },
+        },
+      },
     });
     const form = wrapper.findComponent(CreateGameForm);
-    (form.vm.$root as any).showAlert = (title: string, message: string) => {
-      alerts.push({title, message});
-    };
 
     createGameSettingsStorage.save(createNewGameConfig({
       customPreludes: ['Bad Prelude Name'],
@@ -144,7 +162,7 @@ describe('CreateGameForm', () => {
       ...globalConfig,
     });
 
-    expect(() => (wrapper.vm as any).applySettings(createNewGameConfig({
+    expect(() => wrapper.vm.applySettings(createNewGameConfig({
       players: [
         {name: 'Alice', color: 'red', beginner: false, handicap: 0},
         {name: 'Bob', color: 'red', beginner: false, handicap: 0},
@@ -191,18 +209,17 @@ describe('CreateGameForm', () => {
     expect(wrapper.vm.boards).deep.eq([BoardName.THARSIS]);
   });
 
-  it('toggling random milestones and awards leaves manual milestones and awards', () => {
+  it('solo games ignore the milestone and award settings', async () => {
     const wrapper = shallowMount(CreateGameForm, {
       ...globalConfig,
     });
     const model = wrapper.vm as unknown as CreateGameModel;
-    model.randomMA = RandomMAOptionType.MANUAL;
-    model.customMA = {milestones: ['Terraformer'], awards: ['Banker']};
-    expect(wrapper.vm.isRandomMAEnabled).is.false;
-
-    wrapper.vm.randomMAToggle();
-    expect(model.randomMA).eq(RandomMAOptionType.LIMITED);
-    expect(model.customMA).is.undefined;
+    model.playersCount = 1;
+    model.goals = {...model.goals, type: 'manual', selected: {milestones: ['Terraformer'], awards: []}};
+    expect(wrapper.vm.hasBlockingValidationErrors).is.false;
+    const config: NewGameConfig | undefined = await wrapper.vm.serializeSettings();
+    expect(config?.randomMA).eq(RandomMAOptionType.NONE);
+    expect(config?.customMA).is.undefined;
   });
 
   it('validates the form settings', () => {
@@ -213,6 +230,15 @@ describe('CreateGameForm', () => {
   it('ignores unknown colony names when validating', () => {
     const errors = validateTwoPlayerGame((model) => model.customColonies = ['Unknown Colony' as ColonyName]);
     expect(errors.coloniesMissingExpansions).deep.eq([]);
+  });
+
+  it('validates hand-picked milestones and awards against the expansions', () => {
+    const errors = validateTwoPlayerGame((model) => {
+      model.expansions.turmoil = false;
+      model.goals = {...model.goals, type: 'manual', selected: {milestones: ['Terraformer'], awards: ['Banker', 'Politician']}};
+    });
+    expect(errors.milestonesMissingExpansions).is.false;
+    expect(errors.awardsMissingExpansions).is.true;
   });
 
   it('disables Create game when there is a blocking error', async () => {

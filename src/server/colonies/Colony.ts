@@ -1,6 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {DeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {IDeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
@@ -177,7 +177,7 @@ export abstract class Colony implements IColony {
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    const action: undefined | DeferredAction<any> = this.computeBonus(player, bonusType, quantity, resource);
+    const action = this.computeBonus(player, bonusType, quantity, resource);
     if (action === undefined) {
       return undefined;
     }
@@ -197,7 +197,7 @@ export abstract class Colony implements IColony {
     }
   }
 
-  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredAction<any> | undefined {
+  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): IDeferredAction | undefined {
     const game = player.game;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:

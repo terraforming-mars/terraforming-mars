@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpaceRace';
 import {IGame} from '../../../src/server/IGame';
-import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {doWait, runAllActions, setRulingParty} from '../../TestingUtils';
 import {toName} from '../../../src/common/utils/utils';
@@ -81,9 +81,9 @@ describe('TheNewSpaceRace', () => {
 
     cast(player1.getWaitingFor(), undefined);
     cast(player3.getWaitingFor(), undefined);
-    doWait(player2, OrOptions, (selectParty) => {
+    doWait(player2, SelectParty, (selectParty) => {
       expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
-      selectParty.options[2].cb(); // 2 is Unity.
+      selectParty.cb(PartyName.UNITY);
       expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
     });
 
@@ -108,8 +108,8 @@ describe('TheNewSpaceRace', () => {
     runAllActions(game);
 
     expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
-    const selectParty = cast(player2.popWaitingFor(), OrOptions);
-    selectParty.options[3].cb(); // 3 is Greens
+    const selectParty = cast(player2.popWaitingFor(), SelectParty);
+    selectParty.cb(PartyName.GREENS);
     expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
 
     expect(player1.getTitaniumValue()).eq(3);

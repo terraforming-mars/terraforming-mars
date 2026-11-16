@@ -51,6 +51,19 @@ describe('Game', () => {
     expect(game.getGeneration()).to.eq(1);
   });
 
+  it('validates hand-picked milestones and awards', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
+    } as const;
+    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
+      .to.throw('customMA must have 5 awards');
+    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
+      .to.throw('Politician needs the Turmoil expansion');
+  });
+
   it('sets starting production if corporate era not selected', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
@@ -892,7 +905,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, 'spectatorid', {pathfindersExpansion: false});
     const serialized = game.serialize();
-    (serialized.gameOptions as any).pathfindersData = undefined;
+    Reflect.set(serialized.gameOptions, 'pathfindersData', undefined);
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.pathfindersData).is.undefined;
   });
@@ -982,9 +995,6 @@ describe('Game', () => {
   //   expect(serialized.awards[0]).eq('A. Engineer');
   //   expect(serialized.fundedAwards[0].name).eq('A. Engineer');
 
-  //   serialized.awards[0] = 'Engineer' as any;
-  //   serialized.fundedAwards[0].name = 'Engineer' as any;
-
   //   const deserialized = Game.deserialize(serialized);
   //   expect(deserialized.awards[0]).deep.eq(engineer);
   //   expect(deserialized.fundedAwards).has.length(1);
@@ -1062,8 +1072,8 @@ describe('Game', () => {
     expect(serialized.milestones[0]).eq('T. Spacefarer');
     expect(serialized.claimedMilestones[0].name).eq('T. Spacefarer');
 
-    serialized.milestones[0] = 'Spacefarer' as any;
-    serialized.claimedMilestones[0].name = 'Spacefarer' as any;
+    Reflect.set(serialized.milestones, 0, 'Spacefarer');
+    Reflect.set(serialized.claimedMilestones[0], 'name', 'Spacefarer');
 
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones[0]).deep.eq(spacefarer);
@@ -1089,8 +1099,8 @@ describe('Game', () => {
     expect(serialized.awards[0]).eq('Suburbian');
     expect(serialized.fundedAwards[0].name).eq('Suburbian');
 
-    serialized.awards[0] = 'Edgedancer' as any;
-    serialized.fundedAwards[0].name = 'Edgedancer' as any;
+    Reflect.set(serialized.awards, 0, 'Edgedancer');
+    Reflect.set(serialized.fundedAwards[0], 'name', 'Edgedancer');
 
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards[0]).deep.eq(suburbian);
@@ -1429,16 +1439,16 @@ describe('Game', () => {
   });
 });
 
-function assertIsJSON(serialized: any) {
-  for (const field in serialized) {
-    if (serialized.hasOwnProperty(field)) {
-      const val = serialized[field];
-      const type = typeof(val);
-      if (type === 'object') {
-        assertIsJSON(val);
-      } else if (type === 'function') {
-        throw new Error(field + ' is invalid');
-      }
+function assertIsJSON(serialized: unknown) {
+  if (typeof serialized !== 'object' || serialized === null) {
+    return;
+  }
+  for (const [field, val] of Object.entries(serialized)) {
+    const type = typeof(val);
+    if (type === 'object') {
+      assertIsJSON(val);
+    } else if (type === 'function') {
+      throw new Error(field + ' is invalid');
     }
   }
 }

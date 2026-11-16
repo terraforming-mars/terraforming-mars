@@ -41,4 +41,14 @@ describe('Route', () => {
     expect(res.getHeader('Content-Length')).eq(Buffer.byteLength(res.content));
     expect(res.getHeader('Content-Length')).not.eq(res.content.length);
   });
+
+  it('badInputRequest shows the message of an Error, nothing of other thrown values', () => {
+    responses.badInputRequest(scaffolding.req, res, new Error('You cannot overspend heat'));
+    expect(res.statusCode).eq(statusCode.badRequest);
+    expect(JSON.parse(res.content).message).eq('You cannot overspend heat');
+
+    const other = new MockResponse();
+    responses.badInputRequest(scaffolding.req, other, {internal: 'details'});
+    expect(JSON.parse(other.content).message).eq('Invalid input');
+  });
 });

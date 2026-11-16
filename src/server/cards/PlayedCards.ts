@@ -105,7 +105,7 @@ export class PlayedCards {
    * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array.
    * @param thisArg An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value.
    */
-  filter(predicate: (value: ICard, index: number, array: ReadonlyArray<ICard>) => unknown, thisArg?: any): Array<ICard> {
+  filter(predicate: (value: ICard, index: number, array: ReadonlyArray<ICard>) => unknown, thisArg?: unknown): Array<ICard> {
     return this.array.filter(predicate, thisArg);
   }
 
@@ -133,7 +133,7 @@ export class PlayedCards {
    * @param thisArg An object to which the this keyword can refer in the predicate function.
    * If thisArg is omitted, undefined is used as the this value.
    */
-  some(predicate: (value: ICard, index: number, array: Array<ICard>) => unknown, thisArg?: any): boolean {
+  some(predicate: (value: ICard, index: number, array: Array<ICard>) => unknown, thisArg?: unknown): boolean {
     return this.array.some(predicate, thisArg);
   }
 

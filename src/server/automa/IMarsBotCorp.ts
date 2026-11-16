@@ -38,8 +38,6 @@ export type IMarsBotCorp = {
    * regression the space's icon still stays unresolved.
    */
   readonly trackCubesTriggerEveryAdvance?: boolean;
-  /** M€ the bot gains per ocean next to a tile it places, when not the usual 2 (Lakefront). */
-  readonly oceanAdjacencyMc?: number;
 };
 
 /** Corp state key, set to 1 once the corp's `actionDeckBonusCard` removed itself from the game. */

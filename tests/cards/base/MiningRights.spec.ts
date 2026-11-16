@@ -13,7 +13,6 @@ import {Units} from '../../../src/common/Units';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 import {cast} from '../../../src/common/utils/utils';
-import {SelectResource} from '@/server/inputs/SelectResource';
 
 describe('MiningRights', () => {
   let card: MiningRights;
@@ -112,11 +111,13 @@ describe('MiningRights', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
   });
 
-  it('Should play on a standard resource space, choosing steel or titanium production', () => {
+  it('Compatible with ? space on Amazonis Planitia', () => {
     const space = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
     space.bonus = [SpaceBonus.STANDARD_RESOURCE];
 
-    const action = cast(card.play(player), SelectSpace);
+    player.playCard(card);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     expect(action.spaces).includes(space);
 
     action.cb(space);
@@ -126,11 +127,11 @@ describe('MiningRights', () => {
     orOptions.options[1].cb();
     runAllActions(game);
 
-    // The tile's own placement bonus.
-    cast(player.popWaitingFor(), SelectResource).process({type: 'resource', resource: 'plants'});
+    // The standard resource placement bonus is the chosen resource, with no further choice.
+    cast(player.popWaitingFor(), undefined);
 
     expect(space.tile?.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.production.asUnits()).deep.eq(Units.of({titanium: 1}));
-    expect(player.plants).eq(1);
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 1}));
   });
 });

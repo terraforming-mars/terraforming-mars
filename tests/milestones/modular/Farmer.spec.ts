@@ -42,7 +42,7 @@ describe('Farmer', () => {
       {modularMA: true, tag: Tag.PLANT, position: 7, expected: true},
     ]) {
       const [game] = testGame(1, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, modularMA: run.modularMA});
-      const bot = {...fakeMarsBot(), game};
+      const bot = fakeMarsBot({game});
       setTrack(bot, run.tag, run.position);
 
       expect(milestone.marsBotCanClaim(bot), JSON.stringify(run)).eq(run.expected);

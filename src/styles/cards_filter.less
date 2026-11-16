@@ -1,11 +1,20 @@
+// Floats over the selected cards rather than pushing them down.
 .cards-filter-suggest {
   background: #202020;
-  display: inline-block;
   padding: 10px 20px 20px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+
+.cards-filter-suggest-item-highlighted {
+  background: #404040;
 }
 
 .cards-filter-input {
-  min-height: 250px;
+  position: relative;
+  margin-bottom: 10px;
   .form-input {
     max-width: 445px
   }
@@ -17,6 +26,32 @@
 
 .cards-filter-result {
   .btn {
-    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+// Keeps the popup at full size and scrolls only the selected cards, so the search box stays under the header.
+.popup-outer.cards-filter {
+  .popup-inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .popup-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .cards-filter-results-cont {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .cards-filter-input {
+    flex-shrink: 0;
   }
 }

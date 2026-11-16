@@ -19,7 +19,7 @@ export type DiscordUser = {
   flags?: number // the flags on a user's account identify
   premium_type?: number // the type of Nitro subscription on a user's account identify
   public_flags?: number // the public flags on a user's account identify
-  avatar_decoration_data?: any // data for the user's avatar decoration
+  avatar_decoration_data?: Record<string, unknown> // data for the user's avatar decoration
 };
 
 const URL_ROOT = process.env.URL_ROOT || DEFAULT_URL_ROOT;

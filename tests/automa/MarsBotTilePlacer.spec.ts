@@ -22,18 +22,18 @@ import {Geologist} from '@/server/milestones/modular/Geologist';
 describe('MarsBotTilePlacer', () => {
   let game: IGame;
   let human: TestPlayer;
-  let marsBot: TestPlayer;
+  let botPlayer: TestPlayer;
   let tilePlacer: MarsBotTilePlacer;
 
   beforeEach(() => {
-    [game, human, marsBot] = testGame(2);
-    tilePlacer = new MarsBotTilePlacer(game, marsBot, human);
+    [game, human, botPlayer] = testGame(2);
+    tilePlacer = new MarsBotTilePlacer(game, botPlayer, human);
   });
 
   // TODO(kberg): Move to TestingUtils.
   /** An empty land space whose six neighbours are all empty land, so tiles can be arranged around it. */
   function inlandSpace(): Space {
-    return game.board.getAvailableSpacesOnLand(marsBot).find((space) => {
+    return game.board.getAvailableSpacesOnLand(botPlayer).find((space) => {
       const adj = game.board.getAdjacentSpaces(space);
       return adj.length === 6 && adj.every((s) => s.spaceType === SpaceType.LAND && s.tile === undefined);
     })!;
@@ -46,8 +46,8 @@ describe('MarsBotTilePlacer', () => {
   });
 
   it('findOceanSpace returns undefined once every ocean space is taken', () => {
-    for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
-      game.simpleAddTile(marsBot, space, {tileType: TileType.OCEAN});
+    for (const space of game.board.getAvailableSpacesForOcean(botPlayer)) {
+      game.simpleAddTile(botPlayer, space, {tileType: TileType.OCEAN});
     }
 
     cast(tilePlacer.findOceanSpace(), undefined);
@@ -68,7 +68,7 @@ describe('MarsBotTilePlacer', () => {
 
   it('findGreenerySpace finds a space next to one of MarsBot\'s tiles', () => {
     const city = inlandSpace();
-    game.simpleAddTile(marsBot, city, {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, city, {tileType: TileType.CITY});
 
     const space = tilePlacer.findGreenerySpace()!;
 
@@ -78,8 +78,8 @@ describe('MarsBotTilePlacer', () => {
   it('findGreenerySpace prefers a space next to two of MarsBot\'s cities', () => {
     const first = inlandSpace();
     const second = game.board.getAdjacentSpaces(first)[0];
-    game.simpleAddTile(marsBot, first, {tileType: TileType.CITY});
-    game.simpleAddTile(marsBot, second, {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, first, {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, second, {tileType: TileType.CITY});
 
     const space = tilePlacer.findGreenerySpace()!;
 
@@ -90,7 +90,7 @@ describe('MarsBotTilePlacer', () => {
   it('findGreenerySpace avoids the human\'s cities', () => {
     // Of the spaces next to MarsBot's city at 17, only 25 covers two bonus icons, so the
     // tiebreakers alone would choose it. The human city at 18 next door is what rules it out.
-    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('17'), {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('17'), {tileType: TileType.CITY});
     game.simpleAddTile(human, game.board.getSpaceOrThrow('18'), {tileType: TileType.CITY});
 
     const space = tilePlacer.findGreenerySpace()!;
@@ -102,15 +102,15 @@ describe('MarsBotTilePlacer', () => {
   it('findGreenerySpace goes for the greatest net gain of points', () => {
     // 17 is next to two of MarsBot's cities and two of the human's, so a greenery there gains MarsBot
     // nothing. One next to a single MarsBot city and no human one gains a point.
-    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('10'), {tileType: TileType.CITY});
-    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('25'), {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('10'), {tileType: TileType.CITY});
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('25'), {tileType: TileType.CITY});
     game.simpleAddTile(human, game.board.getSpaceOrThrow('11'), {tileType: TileType.CITY});
     game.simpleAddTile(human, game.board.getSpaceOrThrow('24'), {tileType: TileType.CITY});
 
     const space = tilePlacer.findGreenerySpace()!;
 
     const cities = game.board.getAdjacentSpaces(space).filter((s) => s.tile?.tileType === TileType.CITY);
-    expect(cities.map((s) => s.player?.id)).deep.eq([marsBot.id]);
+    expect(cities.map((s) => s.player?.id)).deep.eq([botPlayer.id]);
   });
 
   it('findExpeditedConstructionCitySpace returns undefined on an empty board', () => {
@@ -174,11 +174,11 @@ describe('MarsBotTilePlacer', () => {
     expect(space.id).to.eq('09');
     expect(space.bonus).deep.eq([SpaceBonus.STEEL]);
     // 09 is the only one of the three spaces still free next to the ocean that has a bonus at all.
-    const adjacentOceans = game.board.getAvailableSpacesOnLand(marsBot)
+    const adjacentOceans = game.board.getAvailableSpacesOnLand(botPlayer)
       .filter((s) => game.board.getAdjacentSpaces(s).some((a) => a.tile?.tileType === TileType.OCEAN));
     expect(adjacentOceans.map(toID)).deep.eq(['05', '09', '10']);
     // Spaces covering two bonus icons are available, they just aren't next to an ocean.
-    expect(Math.max(...game.board.getAvailableSpacesOnLand(marsBot).map((s) => s.bonus.length))).to.eq(2);
+    expect(Math.max(...game.board.getAvailableSpacesOnLand(botPlayer).map((s) => s.bonus.length))).to.eq(2);
   });
 
   it('draws and discards one project card when spaces are still tied', () => {
@@ -191,7 +191,7 @@ describe('MarsBotTilePlacer', () => {
 
   it('counts through the tied spaces from the first one', () => {
     // With every other ocean space covered, 04 and 28 tie: no ocean next to either and two bonus icons each.
-    for (const space of game.board.getAvailableSpacesForOcean(marsBot)) {
+    for (const space of game.board.getAvailableSpacesForOcean(botPlayer)) {
       if (space.id !== '04' && space.id !== '28') {
         game.simpleAddTile(human, space, {tileType: TileType.OCEAN});
       }
@@ -225,10 +225,18 @@ describe('MarsBotTilePlacer', () => {
   });
 
   it('getOceanAdjacencyMC pays 2 M€ per adjacent ocean', () => {
-    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
     const neighbour = game.board.getSpaceOrThrow('05');
 
     expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(2);
+  });
+
+  it('getOceanAdjacencyMC pays the ocean bonus of MarsBot\'s player per adjacent ocean', () => {
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
+    const neighbour = game.board.getSpaceOrThrow('05');
+    botPlayer.oceanBonus = 3;
+
+    expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(3);
   });
 
   it('getOceanAdjacencyMC pays nothing next to an ocean-reserved space with no tile on it', () => {
@@ -240,7 +248,7 @@ describe('MarsBotTilePlacer', () => {
   });
 
   it('getTotalPlacementMC adds both parts together', () => {
-    game.simpleAddTile(marsBot, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
+    game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
     const neighbour = game.board.getSpaceOrThrow('03');
     expect(neighbour.bonus).deep.eq([SpaceBonus.STEEL, SpaceBonus.STEEL]);
 
@@ -261,21 +269,21 @@ describe('MarsBotTilePlacer', () => {
    * it is asked for. The bot carries them out on the game.
    */
   function startGame(options: Partial<GameOptions> | undefined, bot: BotOptions = {}, calls: Array<string> = []) {
-    [game, human, marsBot] = testGame(2, options);
+    [game, human, botPlayer] = testGame(2, options);
     // The board only offers the special hexes to a player who can pay for them.
-    marsBot.megaCredits = 20;
-    const fake = fakeMarsBot(undefined, {
+    botPlayer.megaCredits = 20;
+    const fake = fakeMarsBot({
       megacredits: bot.megacredits ?? 0,
       placeOcean: () => {
         calls.push('ocean');
         if (bot.swallows !== true) {
-          game.addOcean(marsBot, game.board.getAvailableSpacesForOcean(marsBot)[0]);
+          game.addOcean(botPlayer, game.board.getAvailableSpacesForOcean(botPlayer)[0]);
         }
       },
       raiseTemperature: () => {
         calls.push('temperature');
         if (bot.swallows !== true) {
-          game.increaseTemperature(marsBot, 1);
+          game.increaseTemperature(botPlayer, 1);
         }
       },
       maybePlaceRandomColony: () => {
@@ -284,7 +292,7 @@ describe('MarsBotTilePlacer', () => {
       },
       canPlaceColony: () => bot.noColonyLeft !== true,
     });
-    tilePlacer = new MarsBotTilePlacer(game, marsBot, human, fake);
+    tilePlacer = new MarsBotTilePlacer(game, botPlayer, human, fake);
     return fake;
   }
 
@@ -550,15 +558,15 @@ describe('MarsBotTilePlacer', () => {
 
     for (const run of runs) {
       const [soloGame, soloHuman] = testGame(1, {...run.options, automa: true});
-      const bot = soloGame.marsBotPlayer!;
+      const soloBotPlayer = soloGame.marsBotPlayer!;
       soloHuman.megaCredits = 0;
-      bot.megaCredits = 0;
+      soloBotPlayer.megaCredits = 0;
       // No colony tile has room, so nobody could settle for MSL Curiosity.
       for (const colony of soloGame.colonies) {
         colony.isActive = false;
       }
 
-      const botSpaces = soloGame.board.getAvailableSpacesOnLand(bot).map((space) => space.id);
+      const botSpaces = soloGame.board.getAvailableSpacesOnLand(soloBotPlayer).map((space) => space.id);
       const humanSpaces = soloGame.board.getAvailableSpacesOnLand(soloHuman).map((space) => space.id);
 
       expect(botSpaces, run.rule).includes(run.hex);
@@ -656,13 +664,13 @@ describe('MarsBotTilePlacer', () => {
 
     for (const run of runs) {
       const calls: Array<string> = [];
-      const bot = startGame(run.options, run.bot, calls);
+      const marsBot = startGame(run.options, run.bot, calls);
       const space = game.board.getSpaceOrThrow(run.hex);
 
       tilePlacer.resolveSpecialHex(space);
 
       expect(calls, run.rule).deep.eq(run.calls);
-      expect(bot.megacredits, run.rule).eq(run.left);
+      expect(marsBot.megacredits, run.rule).eq(run.left);
       expect(tilePlacer.getPlacementBonusMC(space), run.rule).eq(run.pays ?? 0);
     }
   });

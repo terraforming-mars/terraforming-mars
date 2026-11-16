@@ -51,6 +51,7 @@ export class FileAPI {
 export class ServeAsset extends Handler {
   public static readonly INSTANCE: ServeAsset = new ServeAsset();
   private readonly cache = new BufferCache();
+  private readonly existsCache = new Map<string, boolean>();
   private mainEntryFile: string | undefined;
   private mainCssFile: string | undefined;
   private mainEntryLoaded = false;
@@ -180,13 +181,23 @@ export class ServeAsset extends Handler {
     return Buffer.from(html);
   }
 
+  private exists(file: string): boolean {
+    const cached = this.existsCache.get(file);
+    if (cached !== undefined) {
+      return cached;
+    }
+    const exists = this.fileApi.existsSync(file);
+    this.existsCache.set(file, exists);
+    return exists;
+  }
+
   private toMainFile(file: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     // Only serve compressed versions in production. Development mode serves
     // uncompressed versions because they can be hot-swapped.
     if (isProduction()) {
-      if (encodings.has('br') && this.fileApi.existsSync(file + '.br')) {
+      if (encodings.has('br') && this.exists(file + '.br')) {
         return {file: file + '.br', encoding: 'br'};
-      } else if (encodings.has('gzip') && this.fileApi.existsSync(file + '.gz')) {
+      } else if (encodings.has('gzip') && this.exists(file + '.gz')) {
         return {file: file + '.gz', encoding: 'gzip'};
       }
     }
@@ -216,10 +227,10 @@ export class ServeAsset extends Handler {
       return {file: 'build/styles.css'};
 
     case 'client.css':
-      if (encodings.has('br') && this.fileApi.existsSync('build/client.css.br')) {
+      if (encodings.has('br') && this.exists('build/client.css.br')) {
         return {file: 'build/client.css.br', encoding: 'br'};
       }
-      if (encodings.has('gzip') && this.fileApi.existsSync('build/client.css.gz')) {
+      if (encodings.has('gzip') && this.exists('build/client.css.gz')) {
         return {file: 'build/client.css.gz', encoding: 'gzip'};
       }
       return {file: 'build/client.css'};
@@ -260,7 +271,7 @@ export class ServeAsset extends Handler {
         if (urlPath.startsWith('assets/')) {
           const buildAssetsRoot = path.resolve('./build/assets');
           const buildFile = path.resolve(path.normalize('build/' + urlPath));
-          if (buildFile.startsWith(buildAssetsRoot + path.sep) && this.fileApi.existsSync(buildFile)) {
+          if (buildFile.startsWith(buildAssetsRoot + path.sep) && this.exists(buildFile)) {
             return {file: buildFile};
           }
         }

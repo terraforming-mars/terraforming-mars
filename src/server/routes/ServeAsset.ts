@@ -62,13 +62,15 @@ export class ServeAsset extends Handler {
     private cacheAssets: boolean = isProduction(),
     private fileApi: FileAPI = FileAPI.INSTANCE) {
     super();
-    // prime the cache with styles.css and a compressed copy of it styles.css
-    const styles = fileApi.readFileSync('build/styles.css');
-    this.cache.set('build/styles.css', styles);
-    const compressed = fileApi.readFileSync('build/styles.css.gz');
-    this.cache.set('build/styles.css.gz', compressed);
-    const brotli = fileApi.readFileSync('build/styles.css.br');
-    this.cache.set('build/styles.css.br', brotli);
+    // Prime the cache. Compressed styles are optional: development compiles only the raw file.
+    this.cache.set('build/styles.css', fileApi.readFileSync('build/styles.css'));
+    for (const file of ['build/styles.css.gz', 'build/styles.css.br']) {
+      try {
+        this.cache.set(file, fileApi.readFileSync(file));
+      } catch {
+        // Not compressed yet.
+      }
+    }
     // client.css only exists after a Vite build (and not while Vite serves the app in development)
     for (const file of ['build/client.css', 'build/client.css.gz', 'build/client.css.br']) {
       if (fileApi.existsSync(file)) {
@@ -218,10 +220,10 @@ export class ServeAsset extends Handler {
     }
     switch (urlPath) {
     case 'styles.css':
-      if (encodings.has('br')) {
+      if (encodings.has('br') && this.cache.get('build/styles.css.br') !== undefined) {
         return {file: 'build/styles.css.br', encoding: 'br'};
       }
-      if (encodings.has('gzip')) {
+      if (encodings.has('gzip') && this.cache.get('build/styles.css.gz') !== undefined) {
         return {file: 'build/styles.css.gz', encoding: 'gzip'};
       }
       return {file: 'build/styles.css'};

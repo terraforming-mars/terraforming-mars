@@ -2,12 +2,19 @@ import path from 'node:path';
 import {defineConfig, type Plugin} from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-// The service worker is empty (see src/client/sw.ts) but must exist at /sw.js.
-function serviceWorkerFile(): Plugin {
+// The service worker is empty, but must exist at /sw.js for the notification fallback
+// (WaitingFor.vue uses navigator.serviceWorker.ready). Emit it in builds and serve it in dev.
+function serviceWorker(): Plugin {
   return {
     name: 'terraforming-mars-service-worker',
     generateBundle() {
       this.emitFile({type: 'asset', fileName: 'sw.js', source: ''});
+    },
+    configureServer(server) {
+      server.middlewares.use('/sw.js', (_req, res) => {
+        res.setHeader('Content-Type', 'text/javascript');
+        res.end('');
+      });
     },
   };
 }
@@ -40,17 +47,7 @@ const proxy = Object.fromEntries(SERVER_PATHS.map((prefix) => [
 export default defineConfig({
   plugins: [
     vue({template: {transformAssetUrls: false}}),
-    serviceWorkerFile(),
-    {
-      // The real file is emitted by the production build; development serves an empty one
-      name: 'terraforming-mars-dev-service-worker',
-      configureServer(server) {
-        server.middlewares.use('/sw.js', (_req, res) => {
-          res.setHeader('Content-Type', 'text/javascript');
-          res.end('');
-        });
-      },
-    },
+    serviceWorker(),
   ],
   publicDir: false,
   resolve: {

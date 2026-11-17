@@ -376,10 +376,29 @@
               </label>
             </template>
 
-            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
-            <label for="realTimeVP-checkbox">
+            <div class="create-game-subsection-label">
               <span v-i18n>Show real-time VP</span>&nbsp;<a :href="wikiUrls.showRealtimeVP" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-            </label>
+            </div>
+            <div class="create-game-page-column-row create-game-showVP-options">
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="none" id="showVP-none-radio">
+                <label class="label-showVP" for="showVP-none-radio">
+                  <span v-i18n>None</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="yours" id="showVP-yours-radio">
+                <label class="label-showVP" for="showVP-yours-radio">
+                  <span v-i18n>Yours</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="all" id="showVP-all-radio">
+                <label class="label-showVP" for="showVP-all-radio">
+                  <span v-i18n>All</span>
+                </label>
+              </div>
+            </div>
 
             <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
             <label for="fastMode-checkbox">
@@ -696,7 +715,7 @@ export default defineComponent({
         players: this.players.slice(0, this.playersCount),
         expansions: this.expansions,
         draftVariant: this.draftVariant,
-        showOtherPlayersVP: this.showOtherPlayersVP,
+        showVP: this.showVP,
         customCorporationsList: this.customCorporations,
         customColoniesList: this.customColonies,
         customCeos: this.customCeos,

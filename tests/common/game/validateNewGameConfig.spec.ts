@@ -46,7 +46,7 @@ function newGameConfig(overrides: Partial<NewGameConfig> = {}): NewGameConfig {
     undoOption: false,
     showTimers: false,
     fastModeOption: false,
-    showOtherPlayersVP: false,
+    showVP: 'yours',
     aresExtremeVariant: false,
     politicalAgendasExtension: 'Standard',
     solarPhaseOption: false,

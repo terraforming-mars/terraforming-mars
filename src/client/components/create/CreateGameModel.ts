@@ -6,6 +6,7 @@ import {NewPlayerModel} from '@/common/game/NewGameConfig';
 import {GoalSettings} from './goals/types';
 import {Expansion} from '@/common/cards/GameModule';
 import {BoardName} from '@/common/boards/BoardName';
+import {ShowVP} from '@/common/game/ShowVP';
 
 export type CreateGameModel = {
   /* A checkbox when selected selects all official expansions */
@@ -50,7 +51,7 @@ export type CreateGameModel = {
   showColoniesList: boolean;
   showCorporationList: boolean;
   showIncludedCards: boolean;
-  showOtherPlayersVP: boolean;
+  showVP: ShowVP;
   showPreludesList: boolean;
   showTimers: boolean;
   shuffleMapOption: boolean;

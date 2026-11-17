@@ -175,7 +175,7 @@ export class ApiCreateGame extends Handler {
         removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,
         requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
-        showOtherPlayersVP: gameReq.showOtherPlayersVP,
+        showVP: gameReq.showVP,
         showTimers: gameReq.showTimers,
         shuffleMapOption: gameReq.shuffleMapOption,
         solarPhaseOption: gameReq.solarPhaseOption,

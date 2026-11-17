@@ -9,14 +9,15 @@ import {testGame} from '../TestGame';
 import {Server} from '../../src/server/models/ServerModel';
 import {GlobalParameter} from '../../src/common/GlobalParameter';
 import {Phase} from '../../src/common/Phase';
+import {ShowVP} from '../../src/common/game/ShowVP';
 
 describe('ServerModel', () => {
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  function createTestGame(showOtherPlayersVP: boolean) {
-    [game, player, player2] = testGame(2, {showOtherPlayersVP});
+  function createTestGame(showVP: ShowVP) {
+    [game, player, player2] = testGame(2, {showVP});
     // Claim milestone
     const milestone = new Mayor();
 
@@ -37,7 +38,7 @@ describe('ServerModel', () => {
   }
 
   it('Should always return current player\'s VP', () => {
-    createTestGame(false);
+    createTestGame('yours');
     const response = Server.getPlayerModel(player);
     expect(response.thisPlayer.victoryPointsBreakdown.total).eq(25);
     expect(response.thisPlayer.victoryPointsBreakdown.milestones).eq(5);
@@ -46,7 +47,7 @@ describe('ServerModel', () => {
   });
 
   it('Should return all players\' VP', () => {
-    createTestGame(true);
+    createTestGame('all');
     const response = Server.getPlayerModel(player);
     expect(response.thisPlayer.victoryPointsBreakdown.total).eq(25);
     expect(response.players[0].victoryPointsBreakdown.total).eq(25);
@@ -55,15 +56,31 @@ describe('ServerModel', () => {
     expect(response.players[1].victoryPointsBreakdown.awards).eq(5);
   });
 
+  it('Should hide VP for every player, including the current one, when showVP is none', () => {
+    createTestGame('none');
+    const response = Server.getPlayerModel(player);
+    expect(response.thisPlayer.victoryPointsBreakdown.total).eq(0);
+    expect(response.players[0].victoryPointsBreakdown.total).eq(0);
+    expect(response.players[1].victoryPointsBreakdown.total).eq(0);
+  });
+
+  it('Should return VP for every player at game end when showVP is none', () => {
+    createTestGame('none');
+    game.phase = Phase.END;
+    const response = Server.getPlayerModel(player);
+    expect(response.thisPlayer.victoryPointsBreakdown.total).eq(25);
+    expect(response.players[1].victoryPointsBreakdown.total).eq(25);
+  });
+
   it('Should hide all players\' VP when spectator', () => {
-    createTestGame(false);
+    createTestGame('yours');
     const response = Server.getSpectatorModel(game);
     expect(response.players[0].victoryPointsBreakdown.total).eq(0);
     expect(response.players[1].victoryPointsBreakdown.total).eq(0);
   });
 
   it('Should include globalParameterSteps at game end', () => {
-    createTestGame(false);
+    createTestGame('yours');
     // Simulate players contributing to global parameters
     player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 5;
     player.globalParameterSteps[GlobalParameter.OXYGEN] = 3;
@@ -89,7 +106,7 @@ describe('ServerModel', () => {
   });
 
   it('Should not include globalParameterSteps during game', () => {
-    createTestGame(false);
+    createTestGame('yours');
     player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 5;
     player2.globalParameterSteps[GlobalParameter.OXYGEN] = 3;
 
@@ -106,8 +123,8 @@ describe('ServerModel', () => {
     expect(Object.keys(otherPlayer!.globalParameterSteps).length).eq(0);
   });
 
-  it('Should include globalParameterSteps when showOtherPlayersVP is true', () => {
-    createTestGame(true);
+  it('Should include globalParameterSteps when showVP is all', () => {
+    createTestGame('all');
     player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 4;
     player2.globalParameterSteps[GlobalParameter.OXYGEN] = 7;
 
@@ -115,7 +132,7 @@ describe('ServerModel', () => {
 
     const response = Server.getPlayerModel(player);
 
-    // With showOtherPlayersVP, all players' steps should be visible
+    // With showVP all, all players' steps should be visible
     expect(response.thisPlayer.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(4);
 
     const otherPlayer = response.players.find((p) => p.color === player2.color && p.name === player2.name);

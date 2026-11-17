@@ -14,6 +14,7 @@ import {boardOptions} from '@/common/boards/randomBoardOptions';
 import {fromGameOptions, toGameOptions} from './goals/conversions';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {CustomMA} from '@/common/ma/CustomMA';
+import {isShowVP, showVPFromLegacy} from '@/common/game/ShowVP';
 
 function safeBoolean(val: JSONValue): boolean {
   if (typeof val === 'boolean') {
@@ -57,6 +58,15 @@ export class JSONProcessor {
 
     if (json.randomMA !== undefined && !Object.values(RandomMAOptionType).includes(json.randomMA as RandomMAOptionType)) {
       throw new Error('Unknown milestone/award type: ' + json.randomMA);
+    }
+
+    // Older settings have the boolean showOtherPlayersVP instead of showVP.
+    if (json.showVP !== undefined) {
+      if (!isShowVP(json.showVP)) {
+        throw new Error('Unknown showVP value: ' + json.showVP);
+      }
+    } else if (json.showOtherPlayersVP !== undefined) {
+      json.showVP = showVPFromLegacy(safeBoolean(json.showOtherPlayersVP));
     }
 
     if (json.corporationsDraft !== undefined) {
@@ -148,6 +158,7 @@ export class JSONProcessor {
       'board',
       'escapeVelocity',
       'players',
+      'showOtherPlayersVP',
       'solarPhaseOption',
       'constants',
       // Converted to goals, below.

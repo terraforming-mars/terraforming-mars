@@ -292,8 +292,7 @@ export class Server {
       globalParameterSteps: {},
     };
 
-    if (game.phase === Phase.END || game.isSoloMode() ||
-        game.gameOptions.showOtherPlayersVP === true || modelIsForThisPlayer) {
+    if (Server.isVictoryPointsVisible(game, modelIsForThisPlayer)) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
       model.globalParameterSteps = player.globalParameterSteps;
@@ -302,6 +301,21 @@ export class Server {
     model.deltaProject = player.deltaProjectData;
 
     return model;
+  }
+
+  /** Returns true when the player's victory points may be sent in this model. */
+  private static isVictoryPointsVisible(game: IGame, modelIsForThisPlayer: boolean): boolean {
+    if (game.phase === Phase.END) {
+      return true;
+    }
+    switch (game.gameOptions.showVP) {
+    case 'all':
+      return true;
+    case 'yours':
+      return modelIsForThisPlayer || game.isSoloMode();
+    case 'none':
+      return false;
+    }
   }
 
   private static getResourceProtections(player: IPlayer) {
@@ -460,7 +474,7 @@ export class Server {
       ceosDraftVariant: options.ceosDraftVariant,
       politicalAgendasExtension: options.politicalAgendasExtension,
       removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
-      showOtherPlayersVP: options.showOtherPlayersVP,
+      showVP: options.showVP,
       showTimers: options.showTimers,
       shuffleMapOption: options.shuffleMapOption,
       solarPhaseOption: options.solarPhaseOption,

@@ -6,6 +6,7 @@ import {Expansion} from '../cards/GameModule';
 import {EscapeVelocityOptions} from '../game/NewGameConfig';
 import {ColonyName} from '../colonies/ColonyName';
 import {GameId} from '../Types';
+import {ShowVP} from '../game/ShowVP';
 
 export type GameOptionsModel = {
   aresExtremeVariant: boolean,
@@ -23,7 +24,7 @@ export type GameOptionsModel = {
   ceosDraftVariant: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,
-  showOtherPlayersVP: boolean,
+  showVP: ShowVP,
   showTimers: boolean,
   shuffleMapOption: boolean,
   solarPhaseOption: boolean,

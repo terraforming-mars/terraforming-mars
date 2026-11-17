@@ -303,119 +303,119 @@ describe('MarsBotTilePlacer', () => {
       // 63 is polar and has no icons, 24 is not polar and has two.
       rule: 'Hellas: the polar region comes before reward icons',
       options: {boardName: BoardName.HELLAS},
-      expected: '63',
       loser: '24',
+      expected: '63',
     },
     {
       // 54 is on the second row from the bottom, 49 on the third. Both have one icon.
       rule: 'Hellas: the polar region starts on the second row from the bottom',
       options: {boardName: BoardName.HELLAS},
-      expected: '54',
       loser: '49',
+      expected: '54',
     },
     {
       // 39 is on the fourth row from the bottom, which is southern, and 22 is not. Both have one icon.
       rule: 'Elysium: the southern region breaks a tie on reward icons',
       options: {boardName: BoardName.ELYSIUM},
-      expected: '39',
       loser: '22',
+      expected: '39',
     },
     {
       // The tile is on 17. 10 is next to it and has no icons, 12 is not and has two.
       rule: 'Terra Cimmeria: a space next to a special tile comes before reward icons',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA},
       specialTile: '17',
-      expected: '10',
       loser: '12',
+      expected: '10',
     },
     {
       // 28 is on the edge, 16 is not. Both have one icon.
       rule: 'Utopia Planitia: an edge space counts as one more reward icon',
       options: {boardName: BoardName.UTOPIA_PLANITIA},
-      expected: '28',
       loser: '16',
+      expected: '28',
     },
     {
       // 12 is next to the volcano on 13, 18 is not near one. Both are inland and have one icon.
       rule: 'Vastitas Borealis: a volcanic space and the spaces next to it count as one more reward icon',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-      expected: '12',
       loser: '18',
+      expected: '12',
     },
     {
       // The ocean is on 16. 32 has two icons and no ocean next to it, 24 has one icon and is next to the ocean.
       rule: 'Vastitas Borealis: reward icons come before ocean adjacency',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       oceans: ['16'],
-      expected: '32',
       loser: '24',
+      expected: '32',
     },
     {
       // The ocean is on 16. 03 is on the edge with no ocean next to it, 24 is inland and next to the ocean. Both have one icon.
       rule: 'Vastitas Borealis: an edge space comes before ocean adjacency',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       oceans: ['16'],
-      expected: '03',
       loser: '24',
+      expected: '03',
     },
     {
       // The ocean is on 15. 08 is next to it, 37 is not. Both are on the edge and have two icons.
       rule: 'Vastitas Borealis: ocean adjacency breaks a tie between edge spaces',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       oceans: ['15'],
-      expected: '08',
       loser: '37',
+      expected: '08',
     },
     {
       // 03 has one icon. 28 has only the delegate icon. Both are on the edge.
       rule: 'Vastitas Borealis: without Turmoil the delegate hex counts no reward icon',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
-      expected: '03',
       loser: '28',
+      expected: '03',
     },
     {
       // 28 has the delegate icon, 60 has no icons. Both are on the edge.
       rule: 'Vastitas Borealis: with Turmoil the delegate hex counts a reward icon',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
-      expected: '28',
       loser: '60',
+      expected: '28',
     },
     {
       // The ocean is on 16. 24 has one icon and is next to it, 32 has two icons and is not.
       rule: 'Milestones & Awards: any map plays by the Tharsis tiebreakers',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, modularMA: true},
       oceans: ['16'],
-      expected: '24',
       loser: '32',
+      expected: '24',
     },
     {
       // 24 is inland and has two icons, 28 is on the edge and has one.
       rule: "Milestones & Awards: Utopia Planitia's edge spaces count no extra icon",
       options: {boardName: BoardName.UTOPIA_PLANITIA, modularMA: true},
-      expected: '24',
       loser: '28',
+      expected: '24',
     },
     {
       // 09 is a volcanic space, 23 is not near one. Both have one icon.
       rule: 'Geologist: volcanic spaces and the spaces next to them count as one more reward icon',
       milestones: [new Geologist()],
-      expected: '09',
       loser: '23',
+      expected: '09',
     },
     {
       // The tile is on 17. 24 is next to it, 23 is not. Both have one icon.
       rule: 'Founder: spaces next to a special tile count as one more reward icon',
       awards: [new Founder()],
       specialTile: '17',
-      expected: '24',
       loser: '23',
+      expected: '24',
     },
     {
       // 20 is on the edge, 23 is not. Both have one icon.
       rule: 'Suburbian: edge spaces count as one more reward icon',
       awards: [new Suburbian()],
-      expected: '20',
       loser: '23',
+      expected: '20',
     },
     {
       // The ocean is on 04. 25 has two icons and no ocean next to it, 09 has one icon and is next to the ocean.
@@ -423,8 +423,8 @@ describe('MarsBotTilePlacer', () => {
       options: {modularMA: true},
       awards: [new Highlander()],
       oceans: ['04'],
-      expected: '25',
       loser: '09',
+      expected: '25',
     },
     {
       // The ocean is on 24. 13 has two icons and no ocean next to it, 16 has one icon and is next to the ocean.
@@ -432,8 +432,8 @@ describe('MarsBotTilePlacer', () => {
       options: {boardName: BoardName.ELYSIUM},
       awards: [new Highlander()],
       oceans: ['24'],
-      expected: '13',
       loser: '16',
+      expected: '13',
     },
     {
       // The ocean is on 24. 16 is next to it, 39 is not but is southern. Both have one icon.
@@ -441,8 +441,8 @@ describe('MarsBotTilePlacer', () => {
       options: {boardName: BoardName.ELYSIUM},
       awards: [new Highlander()],
       oceans: ['24'],
-      expected: '16',
       loser: '39',
+      expected: '16',
     },
     {
       // The ocean is on 16. 03 is on the edge with no ocean next to it, 24 is inland and next to the ocean. Both have one icon.
@@ -450,69 +450,69 @@ describe('MarsBotTilePlacer', () => {
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       awards: [new Highlander()],
       oceans: ['16'],
-      expected: '03',
       loser: '24',
+      expected: '03',
     },
     {
       // 61 is the South Pole. 55 is polar too and has two icons.
       rule: 'South Pole: with 6 M€ and an ocean to place it beats a space with two icons',
       options: {boardName: BoardName.HELLAS},
       bot: {megacredits: 6},
-      expected: '61',
       loser: '55',
+      expected: '61',
     },
     {
       rule: 'South Pole: with 5 M€ it counts as a space without rewards',
       options: {boardName: BoardName.HELLAS},
       bot: {megacredits: 5},
-      expected: '55',
       loser: '61',
+      expected: '55',
     },
     {
       rule: 'South Pole: with every ocean placed it counts as a space without rewards',
       options: {boardName: BoardName.HELLAS},
       bot: {megacredits: 20},
       before: () => maxOutOceans(human),
-      expected: '55',
       loser: '61',
+      expected: '55',
     },
     {
       // 33 is the North Pole. 32 is inland too and has two icons.
       rule: 'North Pole: with 4 M€ and a temperature to raise it beats a space with two icons',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       bot: {megacredits: 4},
-      expected: '33',
       loser: '32',
+      expected: '33',
     },
     {
       rule: 'North Pole: with the temperature maxed it counts as a space without rewards',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       bot: {megacredits: 20},
       before: () => setTemperature(game, game.max.temperature),
-      expected: '32',
       loser: '33',
+      expected: '32',
     },
     {
       // 16 is MSL Curiosity. 25 has two icons and 40 has three.
       rule: 'MSL Curiosity: with 5 M€ and a colony to place it beats a space with two icons',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       bot: {megacredits: 5},
-      expected: '16',
       loser: '25',
+      expected: '16',
     },
     {
       rule: 'MSL Curiosity: it does not beat a space with three icons',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       bot: {megacredits: 5},
-      expected: '40',
       loser: '16',
+      expected: '40',
     },
     {
       rule: 'MSL Curiosity: with no colony left it counts as a space without rewards',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       bot: {megacredits: 20, noColonyLeft: true},
-      expected: '25',
       loser: '16',
+      expected: '25',
     },
   ] as const) {
     it(run.rule, () => {
@@ -558,81 +558,99 @@ describe('MarsBotTilePlacer', () => {
     });
   }
 
-  // Each run puts MarsBot's tile on `hex`. `calls` are the effects asked of the bot, `left` is its M€ afterwards
-  // and `pays` the M€ it gets for the icons on the hex.
+  // Each run puts MarsBot's tile on `hex`. `expected` holds the effects asked of the bot (`calls`), its M€
+  // afterwards (`remainingMC`) and the M€ it gets for the icons on the hex (`pays`, 0 when left out).
   for (const run of [
     {
       rule: 'South Pole: places an ocean and costs 6 M€',
       options: {boardName: BoardName.HELLAS},
       hex: '61',
       bot: {megacredits: 10},
-      calls: ['ocean'],
-      left: 4,
+      expected: {
+        calls: ['ocean'],
+        remainingMC: 4,
+      },
     },
     {
       rule: 'South Pole: does nothing with 5 M€',
       options: {boardName: BoardName.HELLAS},
       hex: '61',
       bot: {megacredits: 5},
-      calls: [],
-      left: 5,
+      expected: {
+        calls: [],
+        remainingMC: 5,
+      },
     },
     {
       rule: 'South Pole: costs nothing when no ocean is placed',
       options: {boardName: BoardName.HELLAS},
       hex: '61',
       bot: {megacredits: 10, swallows: true},
-      calls: ['ocean'],
-      left: 10,
+      expected: {
+        calls: ['ocean'],
+        remainingMC: 10,
+      },
     },
     {
       rule: 'North Pole: raises the temperature and costs 4 M€',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       hex: '33',
       bot: {megacredits: 6},
-      calls: ['temperature'],
-      left: 2,
+      expected: {
+        calls: ['temperature'],
+        remainingMC: 2,
+      },
     },
     {
       rule: 'North Pole: costs nothing when the temperature does not rise',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       hex: '33',
       bot: {megacredits: 6, swallows: true},
-      calls: ['temperature'],
-      left: 6,
+      expected: {
+        calls: ['temperature'],
+        remainingMC: 6,
+      },
     },
     {
       rule: 'MSL Curiosity: places a colony and costs 5 M€',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       hex: '16',
       bot: {megacredits: 7},
-      calls: ['colony'],
-      left: 2,
+      expected: {
+        calls: ['colony'],
+        remainingMC: 2,
+      },
     },
     {
       rule: 'MSL Curiosity: costs nothing when no colony is placed',
       options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
       hex: '16',
       bot: {megacredits: 7, swallows: true},
-      calls: ['colony'],
-      left: 7,
+      expected: {
+        calls: ['colony'],
+        remainingMC: 7,
+      },
     },
     {
       rule: 'Viking: gives 1 M€ for its delegate icon with Turmoil',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
       hex: '28',
       bot: {megacredits: 3},
-      calls: [],
-      left: 3,
-      pays: 1,
+      expected: {
+        calls: [],
+        remainingMC: 3,
+        pays: 1,
+      },
     },
     {
       rule: 'Viking: gives nothing without Turmoil',
       options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA},
       hex: '28',
       bot: {megacredits: 3},
-      calls: [],
-      left: 3,
+      expected: {
+        calls: [],
+        remainingMC: 3,
+      },
     },
   ] as const) {
     it('resolves a hex that costs M€ and pays only for what happened, ' + run.rule, () => {
@@ -642,9 +660,9 @@ describe('MarsBotTilePlacer', () => {
 
       tilePlacer.resolveSpecialHex(space);
 
-      expect(calls).deep.eq(run.calls);
-      expect(marsBot.megacredits).eq(run.left);
-      expect(tilePlacer.getPlacementBonusMC(space)).eq(run.pays ?? 0);
+      expect(calls).deep.eq(run.expected.calls);
+      expect(marsBot.megacredits).eq(run.expected.remainingMC);
+      expect(tilePlacer.getPlacementBonusMC(space)).eq(run.expected.pays ?? 0);
     });
   }
 });

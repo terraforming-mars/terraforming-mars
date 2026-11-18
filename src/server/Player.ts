@@ -189,6 +189,10 @@ export class Player implements IPlayer {
   public requestId?: string;
   public clock: Clock = new Clock();
 
+  public get isMarsBot(): boolean {
+    return this === this.game.marsBotPlayer;
+  }
+
   public get megaCredits(): number {
     return this.stock.megacredits;
   }

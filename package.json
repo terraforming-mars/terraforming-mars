@@ -71,6 +71,7 @@
     "build:test": "vue-tsc --build tests/tsconfig.json",
     "build:tests": "vue-tsc --build tests/tsconfig.json",
     "clean": "rimraf ./build/ ./src/genfiles/",
+    "clean:client": "rimraf --glob \"build/chunks\" \"build/assets\" \"build/{main,client,sw,styles}*.{js,css}{,.map,.gz,.br}\"",
     "lint": "npm run lint:server && npm run lint:i18n && npm run lint:client && npm run lint:css",
     "lint:client": "vue-tsc --noEmit -p tsconfig.vue-tsc.json",
     "lint:server": "eslint --cache src tests",
@@ -91,8 +92,7 @@
     "test:client": "vitest run",
     "test:client:watch": "vitest",
     "dev:client": "vite",
-    "dev:server": "cross-env NODE_ENV=development tsx watch --clear-screen=false src/server/server.ts",
-    "clean:client": "node scripts/clean-client.mjs"
+    "dev:server": "cross-env NODE_ENV=development tsx watch --clear-screen=false src/server/server.ts"
   },
   "repository": {
     "type": "git",

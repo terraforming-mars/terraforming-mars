@@ -1,15 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
 import {AutomaManifest} from './AutomaManifest';
-import {PHARMACY_UNION_MARSBOT_CORP} from './promo/PharmacyUnionMarsBot';
-import {PHILARES_MARSBOT_CORP} from './promo/PhilaresMarsBot';
-import {RECYCLON_MARSBOT_CORP} from './promo/RecyclonMarsBot';
-import {SPLICE_MARSBOT_CORP} from './promo/SpliceMarsBot';
+import {PharmacyUnionMarsBot} from './promo/PharmacyUnionMarsBot';
+import {PhilaresMarsBot} from './promo/PhilaresMarsBot';
+import {RecyclonMarsBot} from './promo/RecyclonMarsBot';
+import {SpliceMarsBot} from './promo/SpliceMarsBot';
 
 export const AUTOMA_PROMO_MANIFEST: AutomaManifest = {
   corps: {
-    [CardName.PHARMACY_UNION]: PHARMACY_UNION_MARSBOT_CORP,
-    [CardName.PHILARES]: PHILARES_MARSBOT_CORP,
-    [CardName.RECYCLON]: RECYCLON_MARSBOT_CORP,
-    [CardName.SPLICE]: SPLICE_MARSBOT_CORP,
+    [CardName.PHARMACY_UNION]: new PharmacyUnionMarsBot(),
+    [CardName.PHILARES]: new PhilaresMarsBot(),
+    [CardName.RECYCLON]: new RecyclonMarsBot(),
+    [CardName.SPLICE]: new SpliceMarsBot(),
   },
 };

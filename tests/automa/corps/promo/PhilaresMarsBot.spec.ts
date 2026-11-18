@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Phase} from '@/common/Phase';
 import {TileType} from '@/common/TileType';
 import {SpaceType} from '@/common/boards/SpaceType';
-import {PHILARES_MARSBOT_CORP} from '@/server/automa/corps/promo/PhilaresMarsBot';
+import {PhilaresMarsBot} from '@/server/automa/corps/promo/PhilaresMarsBot';
 import {testGame} from '../../../TestGame';
 import {TestPlayer} from '../../../TestPlayer';
 import {RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
@@ -28,20 +28,20 @@ function placeTile({marsBot, botPlayer, human}: Sides, byMarsBot: boolean, tileT
   });
   marsBot.game.simpleAddTile(placer, space, {tileType});
 
-  PHILARES_MARSBOT_CORP.effect!.onTilePlaced!(marsBot, byMarsBot, tileType, space);
+  new PhilaresMarsBot().onTilePlaced(marsBot, byMarsBot, tileType, space);
 }
 
 describe('PhilaresMarsBot', () => {
   it('places a greenery, resolves Local Neural Instance and starts with one science resource', () => {
     const {marsBot, calls, corpState} = sides();
 
-    PHILARES_MARSBOT_CORP.setup!(marsBot);
+    new PhilaresMarsBot().setup(marsBot);
 
     expect(calls).deep.eq(['placeGreenery()', 'removeBonusCard(B07)', 'resolveBonusCard(B07)', 'addBonusCardToBonusDeck(B27)']);
     expect(corpState.get('scienceResources')).eq(1);
   });
 
-  // C22: each adjacency between the two sides' tiles, whoever just placed the tile
+  // Each adjacency between the two sides' tiles, whoever just placed the tile
   for (const byMarsBot of [true, false]) {
     it(`gains a science resource for each of the other side's tiles that a tile placed by ${byMarsBot ? 'MarsBot' : 'the player'} touches`, () => {
       const bot = sides();

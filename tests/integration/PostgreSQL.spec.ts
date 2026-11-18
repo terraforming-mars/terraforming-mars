@@ -12,7 +12,7 @@ import {runAllActions} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
-import {QueryResult} from 'pg';
+import {Pool, QueryResult} from 'pg';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {cast, range} from '../../src/common/utils/utils';
 
@@ -114,6 +114,10 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   public async getRawGame(gameId: GameId, saveId: number): Promise<{game: string | null, gameCompressed: Buffer | null}> {
     const res = await this.pool.query('SELECT game, game_compressed FROM games WHERE game_id = $1 AND save_id = $2', [gameId, saveId]);
     return {game: res.rows[0].game, gameCompressed: res.rows[0].game_compressed};
+  }
+
+  public getPool(): Pool {
+    return this.pool;
   }
 }
 
@@ -771,6 +775,22 @@ describeDatabaseSuite({
       db.setCompressOnWrite(false);
       const serialized = await db.getGameVersion(game.id, saveId);
       expect(serialized.players[0].megaCredits).eq(91);
+    });
+
+    it('saveGame rolls back every write when one fails', async () => {
+      const db = dbFactory();
+
+      // saveGame writes games, then game. Without the game table the second write fails.
+      await db.getPool().query('DROP TABLE game');
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const gameId = 'game-id-transaction';
+      Game.newInstance(gameId, [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+
+      // stats() queries the game table, so read the counter directly.
+      expect(db.getStatistics().saveErrorCount).eq(1);
+      expect(await db.getSaveIds('game-id-transaction')).is.empty;
     });
   },
 });

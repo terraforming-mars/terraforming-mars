@@ -59,7 +59,7 @@ describe('Game', () => {
       awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
     } as const;
     expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
-      .to.throw('customMA must have 5 awards');
+      .to.throw('You must have between 3 and 8 custom awards');
     expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
       .to.throw('Politician needs the Turmoil expansion');
   });

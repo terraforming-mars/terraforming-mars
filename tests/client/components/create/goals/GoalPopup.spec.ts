@@ -13,8 +13,7 @@ describe('GoalPopup', () => {
             pool: 'maps',
             randomness: 'limited',
           },
-          selected: {milestones: [], awards: []}},
-        limit: 5},
+          selected: {milestones: [], awards: []}}},
     });
     expect(wrapper.exists()).is.true;
   });

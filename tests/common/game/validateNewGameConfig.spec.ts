@@ -288,7 +288,7 @@ describe('validateNewGameConfig', () => {
     expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA}).invalidCustomMA).eq('');
     expect(validate({randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('randomMA Manual requires customMA');
     expect(validate({randomMA: RandomMAOptionType.LIMITED, customMA}).invalidCustomMA).eq('customMA requires randomMA to be Manual');
-    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('customMA must have 5 awards');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('You must have between 3 and 8 custom awards');
   });
 
   it('milestones and awards missing expansions', () => {

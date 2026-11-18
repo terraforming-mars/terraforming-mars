@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {JSONProcessor} from '@/client/components/create/JSONProcessor';
 import {defaultCreateGameModel} from '@/client/components/create/defaultCreateGameModel';
-import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {BoardName} from '@/common/boards/BoardName';
 import {JSONObject} from '@/common/Types';
 import {CreateGameModel} from '@/client/components/create/CreateGameModel';
@@ -42,7 +41,7 @@ const TEMPLATE_INPUT = {
     deltaProject: false,
   },
   draftVariant: true,
-  showOtherPlayersVP: false,
+  showVP: 'yours',
   customCorporationsList: [],
   customColoniesList: [],
   customPreludes: [],
@@ -112,10 +111,9 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   },
   draftVariant: true,
   initialDraft: false,
-  randomMA: 'No randomization' as RandomMAOptionType,
-  modularMA: false,
+  goals: {type: 'board', random: {pool: 'maps', randomness: 'limited'}, selected: {milestones: [], awards: []}},
   randomFirstPlayer: true,
-  showOtherPlayersVP: false,
+  showVP: 'yours',
   showColoniesList: false,
   showCorporationList: false,
   showPreludesList: false,
@@ -125,7 +123,6 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showIncludedCards: false,
   customColonies: [],
   customCorporations: [],
-  customMA: undefined,
   customPreludes: [],
   bannedCards: [],
   includedCards: [],
@@ -140,7 +137,6 @@ const TEMPLATE_EXPECTED: CreateGameModel = {
   showTimers: true,
   fastModeOption: false,
   removeNegativeGlobalEventsOption: false,
-  includeFanMA: false,
   startingCorporations: 2,
   soloTR: false,
   allOfficialExpansions: false,
@@ -237,6 +233,29 @@ const cases: Array<Case> = [
     },
   },
   {
+    description: 'showVP',
+    input: {
+      ...TEMPLATE_INPUT,
+      showVP: 'none',
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      showVP: 'none',
+    },
+  },
+  {
+    description: 'showVP wins over legacy showOtherPlayersVP',
+    input: {
+      ...TEMPLATE_INPUT,
+      showVP: 'none',
+      showOtherPlayersVP: true,
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      showVP: 'none',
+    },
+  },
+  {
     description: 'empty boards loads as Tharsis',
     input: {
       ...TEMPLATE_INPUT,
@@ -261,4 +280,44 @@ describe('JSONProcessor', () => {
       expect(model).deep.eq(testCase.expected);
     });
   }
+
+  it('converts legacy showOtherPlayersVP', () => {
+    // Settings saved before showVP replaced showOtherPlayersVP.
+    const input: JSONObject = {...TEMPLATE_INPUT, showOtherPlayersVP: true};
+    delete input.showVP;
+    const model = defaultCreateGameModel();
+    const processor = new JSONProcessor(model);
+    processor.applyJSON(input);
+
+    expect(processor.warnings).is.empty;
+    expect(model).deep.eq({...TEMPLATE_EXPECTED, showVP: 'all'});
+  });
+
+  it('rejects an unknown showVP', () => {
+    const processor = new JSONProcessor(defaultCreateGameModel());
+    expect(() => processor.applyJSON({...TEMPLATE_INPUT, showVP: 'some'})).to.throw('Unknown showVP value: some');
+  });
+
+  it('rejects a modularMA or includeFanMA that isn\'t a boolean', () => {
+    for (const key of ['modularMA', 'includeFanMA']) {
+      const processor = new JSONProcessor(defaultCreateGameModel());
+      expect(() => processor.applyJSON({...TEMPLATE_INPUT, [key]: 'false'})).to.throw('false is not boolean');
+    }
+  });
+
+  it('rejects a customMA without milestones and awards arrays of names', () => {
+    const malformed = [
+      'x',
+      [],
+      {},
+      {milestones: 'x', awards: []},
+      {milestones: [], awards: {}},
+      {milestones: ['Gardener', 3], awards: []},
+    ];
+    for (const customMA of malformed) {
+      const processor = new JSONProcessor(defaultCreateGameModel());
+      expect(() => processor.applyJSON({...TEMPLATE_INPUT, randomMA: 'Manual', customMA}), JSON.stringify(customMA))
+        .to.throw('customMA must have milestones and awards arrays of names');
+    }
+  });
 });

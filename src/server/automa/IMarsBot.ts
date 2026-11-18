@@ -119,6 +119,8 @@ export interface IMarsBot {
   placeGreenery(): void;
   /** Places a colony on a randomly selected eligible tile (Colonies rule C-15b). Returns true if placed. */
   maybePlaceRandomColony(): boolean;
+  /** True when a colony tile has room for MarsBot. */
+  canPlaceColony(): boolean;
   /** Takes the bot's player marker off `space`. True when the space had one. */
   removeMarker(space: Space): boolean;
 

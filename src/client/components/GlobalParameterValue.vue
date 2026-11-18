@@ -1,7 +1,7 @@
 <template>
   <div :title="$t(title)">
     <div :class="iconClass"></div>
-    <div class="global_params_value">
+    <div class="global-params-value">
       <div v-if="isMax">
         <img src="assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
       </div>

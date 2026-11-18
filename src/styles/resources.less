@@ -1,11 +1,11 @@
-.resource_items_cont {
+.resource-items-cont {
   display: flex;
   flex-flow: row;
   white-space: nowrap;
   filter: grayscale(0.3);
 }
 
-.resource_item {
+.resource-item {
   display: flex;
   border-radius: 5px;
   vertical-align: top;
@@ -17,7 +17,7 @@
   padding: 8px 0px 4px 8px;
   box-sizing: border-box;
 
-  &.resource_item--energy:after {
+  &.resource-item--energy:after {
     content: " ";
     background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
     clip-path: polygon(0% 50%, 100% 75%, 100% 75%, -5% 100%);
@@ -31,18 +31,18 @@
   }
 }
 
-.resource_item_stock {
+.resource-item-stock {
   white-space: nowrap;
 }
 
-.resource_item_stock_count {
+.resource-item-stock-count {
   font-size: 30px;
   text-align: center;
   line-height: 1;
   text-shadow: 0 2px 2px black;
 }
 
-.resource_item_prod {
+.resource-item-prod {
   border-radius: 10px 10px 0 0;
   color: #bb8760;
   text-shadow: 0 0 1px black;
@@ -50,26 +50,26 @@
   text-align: center;
 }
 
-.resource_item_prod_count {
+.resource-item-prod-count {
   display: inline-block;
 }
 
-.resource_icon {
+.resource-icon {
   width: 36px;
   height: 36px;
   display: inline-block;
   background-size: contain;
 }
 
-.resource_icon--rating {
+.resource-icon--rating {
   background-image: url(./assets/resources/tr.png);
 }
 
-.resource_icon--megacredits {
+.resource-icon--megacredits {
   background-image: url(./assets/resources/megacredit.png);
 }
 
-.resource_icon--megacredit-value {
+.resource-icon--megacredit-value {
   background-image: url(./assets/resources/megacredit.png);
   background-size: 20px 20px;
   width: 20px;
@@ -87,36 +87,36 @@
 
 @resource_types: titanium, steel, heat, data, science, seed, graphene, asteroid, hydroelectric-resource;
 each(@resource_types, {
-  .resource_icon--@{value} {
+  .resource-icon--@{value} {
     background-image: url("assets/resources/@{value}.png");
   }
 })
-.resource_icon--floaters {
+.resource-icon--floaters {
   background-image: url(./assets/resources/floater.png);
 }
-.resource_icon--microbes {
+.resource-icon--microbes {
   background-image: url(./assets/resources/microbe.png);
 }
-.resource_icon--plants {
+.resource-icon--plants {
   background-image: url(./assets/resources/plant.png);
 }
-.resource_icon--energy {
+.resource-icon--energy {
   background-image: url(./assets/resources/power.png);
 }
-.resource_icon--corruption {
+.resource-icon--corruption {
   background-image: url(./assets/underworld/corruption.png);
 }
-.resource_icon--auroraidata {
+.resource-icon--auroraidata {
   background-image: url("assets/resources/data.png");
 }
 
-.shield_parent {
+.shield-parent {
   position: relative;
   top: 12px;
   left: 0;
 }
 
-.shield_icon {
+.shield-icon {
   background-image: url(./assets/misc/shield-icon.png);
   filter: invert(1);
   background-size: 25px;
@@ -127,12 +127,12 @@ each(@resource_types, {
   right: -20%;
 }
 
-.shield_icon_half {
-  &:extend(.shield_icon);
+.shield-icon-half {
+  &:extend(.shield-icon);
   background-image: url(./assets/misc/half-shield-icon.png);
 }
 
-.shield_resource_protection {
+.shield-resource-protection {
   background-image: url(./assets/resources/wild.png);
   background-size: 10px 10px;
   width: 10px;
@@ -142,7 +142,7 @@ each(@resource_types, {
   left: 6px;
 }
 
-.shield_production_protection {
+.shield-production-protection {
   background-image: url(./assets/misc/production.png);
   background-size: 10px 10px;
   width: 10px;

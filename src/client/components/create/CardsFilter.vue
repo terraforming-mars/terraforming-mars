@@ -19,7 +19,7 @@
             <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
             <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
             <template v-for="expansion in expansions(cardName)" :key="expansion">
-              <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+              <i class="create-game-expansion-icon" :class="expansionIconClass(expansion)" :title="expansion"></i>
             </template>
           </a>
         </div>
@@ -32,7 +32,7 @@
           <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
           <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
           <template v-for="expansion in expansions(cardName)" :key="expansion">
-            <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+            <i class="create-game-expansion-icon" :class="expansionIconClass(expansion)" :title="expansion"></i>
           </template>
         </label>
       </div>
@@ -49,6 +49,7 @@ import {byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
 import {inplaceRemove, toName} from '@/common/utils/utils';
 import {Expansion} from '@/common/cards/GameModule';
+import {expansionIconClass} from '@/client/utils/expansionIcon';
 
 const ALL_CARDS: Array<CardName> = [
   ...getCards(byType(CardType.AUTOMATED)),
@@ -129,6 +130,7 @@ export default defineComponent({
     },
   },
   methods: {
+    expansionIconClass,
     isPrelude(cardName: CardName) {
       return getCard(cardName)?.type === CardType.PRELUDE;
     },

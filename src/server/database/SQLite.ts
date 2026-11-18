@@ -61,7 +61,7 @@ export class SQLite implements IDatabase {
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
-    const row = await this.asyncGet(sql, [gameId]);
+    const row = await this.asyncGet<{players: number}>(sql, [gameId]);
     if (row === undefined) {
       throw new Error(`bad game id ${gameId}`);
     }
@@ -70,7 +70,7 @@ export class SQLite implements IDatabase {
 
   public async getGameIds(): Promise<Array<GameId>> {
     const sql = 'SELECT distinct game_id game_id FROM games';
-    const rows = await this.asyncAll(sql, []);
+    const rows = await this.asyncAll<{game_id: GameId}>(sql, []);
     return rows.map((row) => row.game_id);
   }
 
@@ -87,7 +87,7 @@ export class SQLite implements IDatabase {
 
   public async getGame(gameId: GameId): Promise<SerializedGame> {
     // Retrieve last save from database
-    const row: { game: any; } = await this.asyncGet('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [gameId]);
+    const row = await this.asyncGet<{game: string}>('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [gameId]);
     if (row === undefined) {
       throw new Error(`bad game id ${gameId}`);
     }
@@ -103,7 +103,7 @@ export class SQLite implements IDatabase {
       throw new Error(`id ${participantId} is neither a player id or spectator id`);
     }
 
-    const row: { game_id: any; } = await this.asyncGet(sql, [participantId]);
+    const row = await this.asyncGet<{game_id: GameId}>(sql, [participantId]);
     if (row === undefined) {
       throw new Error(`No game id found for participant id ${participantId}`);
     }
@@ -111,13 +111,13 @@ export class SQLite implements IDatabase {
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
-    const rows = await this.asyncAll('SELECT distinct save_id FROM games WHERE game_id = ?', [gameId]);
+    const rows = await this.asyncAll<{save_id: number}>('SELECT distinct save_id FROM games WHERE game_id = ?', [gameId]);
     return rows.map((row) => row.save_id);
   }
 
   public async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     const sql = 'SELECT game_id, game FROM games WHERE game_id = ? and save_id = ?';
-    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [gameId, saveId]);
+    const row = await this.asyncGet<{game_id: GameId, game: string}>(sql, [gameId, saveId]);
     if (row === undefined || row.game_id === undefined || row.game === undefined) {
       throw new Error(`Game ${gameId} not found`);
     }
@@ -125,7 +125,7 @@ export class SQLite implements IDatabase {
   }
 
   async getMaxSaveId(gameId: GameId): Promise<number> {
-    const row: { save_id: any; } = await this.asyncGet('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [gameId]);
+    const row = await this.asyncGet<{save_id: number}>('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [gameId]);
     if (row === undefined) {
       throw new Error(`bad game id ${gameId}`);
     }
@@ -143,7 +143,7 @@ export class SQLite implements IDatabase {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
-      const selectResult = await this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
+      const selectResult = await this.asyncAll<{game_id: GameId}>('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
       let gameIds = selectResult.map((row) => row.game_id);
       if (gameIds.length > 1000) {
         console.log('Truncated purge to 1000 games.');
@@ -171,7 +171,7 @@ export class SQLite implements IDatabase {
       return;
     }
     const dateToSeconds = daysAgoToSeconds(compressCompletedGamesDays, 0);
-    const selectResult = await this.asyncAll('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < ?', [dateToSeconds]);
+    const selectResult = await this.asyncAll<{game_id: GameId}>('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < ?', [dateToSeconds]);
     const gameIds = selectResult.map((row) => row.game_id);
     console.log(`${gameIds.length} completed games to be compressed.`);
     if (gameIds.length > 1000) {
@@ -199,7 +199,7 @@ export class SQLite implements IDatabase {
     // If this is the first time we're saving the game, then store the participants. No need
     // to store them again.
     const isFirstSave = game.lastSaveId === 0 &&
-      await this.asyncGet('SELECT 1 FROM games WHERE game_id = ? AND save_id = 0', [game.id]) === undefined;
+      await this.asyncGet<unknown>('SELECT 1 FROM games WHERE game_id = ? AND save_id = 0', [game.id]) === undefined;
 
     // Insert
     await this.runQuietly(
@@ -251,7 +251,7 @@ export class SQLite implements IDatabase {
   }
 
   public async getParticipants(): Promise<Array<GameIdLedger>> {
-    const rows = await this.asyncAll('SELECT game_id, participant FROM participants');
+    const rows = await this.asyncAll<{game_id: GameId, participant: ParticipantId}>('SELECT game_id, participant FROM participants');
     const multimap = new MultiMap<GameId, ParticipantId>();
     rows.forEach((row) => multimap.set(row.game_id, row.participant));
     const result: Array<GameIdLedger> = [];
@@ -270,13 +270,13 @@ export class SQLite implements IDatabase {
   }
 
   public async deleteExpiredSessions(): Promise<number> {
-    const expired = await this.asyncAll('SELECT session_id FROM session where expiration_time <= ?', [Date.now() / 1000]);
+    const expired = await this.asyncAll<{session_id: SessionId}>('SELECT session_id FROM session where expiration_time <= ?', [Date.now() / 1000]);
     await this.asyncRun('DELETE FROM session where expiration_time <= ?', [Date.now() / 1000]);
     return expired.length;
   }
 
   async getSessions(): Promise<Array<Session>> {
-    const selectResult = await this.asyncAll('SELECT session_id, data, expiration_time FROM session where expiration_time > ?', [Date.now() / 1000]);
+    const selectResult = await this.asyncAll<{session_id: SessionId, data: string, expiration_time: number}>('SELECT session_id, data, expiration_time FROM session where expiration_time > ?', [Date.now() / 1000]);
     return selectResult.map((row) => {
       return {
         id: row.session_id,
@@ -286,9 +286,9 @@ export class SQLite implements IDatabase {
     });
   }
 
-  protected asyncRun(sql: string, params?: any): Promise<BetterSqlite3.RunResult> {
+  protected asyncRun(sql: string, params?: ReadonlyArray<unknown>): Promise<BetterSqlite3.RunResult> {
     try {
-      const stmt = this.db.prepare(sql);
+      const stmt = this.db.prepare<unknown[], BetterSqlite3.RunResult>(sql);
       const result = params !== undefined ? stmt.run(params) : stmt.run();
       return Promise.resolve(result);
     } catch (err) {
@@ -296,9 +296,9 @@ export class SQLite implements IDatabase {
     }
   }
 
-  protected asyncGet(sql: string, params?: any): Promise<any> {
+  protected asyncGet<T>(sql: string, params?: ReadonlyArray<unknown>): Promise<T | undefined> {
     try {
-      const stmt = this.db.prepare(sql);
+      const stmt = this.db.prepare<unknown[], T>(sql);
       const row = params !== undefined ? stmt.get(params) : stmt.get();
       return Promise.resolve(row);
     } catch (err) {
@@ -306,18 +306,18 @@ export class SQLite implements IDatabase {
     }
   }
 
-  protected asyncAll(sql: string, params?: any): Promise<Array<any>> {
+  protected asyncAll<T>(sql: string, params?: ReadonlyArray<unknown>): Promise<Array<T>> {
     try {
-      const stmt = this.db.prepare(sql);
+      const stmt = this.db.prepare<unknown[], T>(sql);
       const rows = params !== undefined ? stmt.all(params) : stmt.all();
-      return Promise.resolve(rows as Array<any>);
+      return Promise.resolve(rows);
     } catch (err) {
       return Promise.reject(err);
     }
   }
 
   // Run the given SQL but do not return errors.
-  protected async runQuietly(sql: string, params: any): Promise<void> {
+  protected async runQuietly(sql: string, params: ReadonlyArray<unknown> = []): Promise<void> {
     try {
       await this.asyncRun(sql, params);
     } catch (err) {

@@ -2,7 +2,7 @@
   <div v-i18n title="Moon habitat, logistic, and mining rates">
     <div class="moon-tile"></div>
     <div>
-      <div v-if="isMax" class="global_params_value">
+      <div v-if="isMax" class="global-params-value">
         <img
           src="assets/misc/checkmark.png"
           class="checkmark"
@@ -11,7 +11,7 @@
           data-test="completed-checkmark"
         >
       </div>
-      <div v-else class="moon_params_value">
+      <div v-else class="moon-params-value">
         <span class="habitat">{{ moonData.habitatRate }}</span>
         <span class="logistic">{{ moonData.logisticRate }}</span>
         <span class="mining">{{ moonData.miningRate }}</span>

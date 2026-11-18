@@ -28,7 +28,7 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {AndThen, DeferredAction, SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {AndThen, IDeferredAction, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {Priority} from './deferredActions/Priority';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
@@ -64,6 +64,7 @@ import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
+import {isShowVP, showVPFromLegacy} from '../common/game/ShowVP';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
@@ -568,7 +569,7 @@ export class Game implements IGame, Logger {
     return player;
   }
 
-  public defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T> {
+  public defer<T>(action: IDeferredAction<T>, priority?: Priority): AndThen<T> {
     if (priority !== undefined) {
       action.priority = priority;
     }
@@ -1736,6 +1737,13 @@ export class Game implements IGame, Logger {
     if (gameOptions.escapeVelocity !== undefined) {
       gameOptions.escapeVelocity = sanitizeEscapeVelocityOptions(gameOptions.escapeVelocity);
     }
+    // TODO(kberg): Remove after 2027-02-01
+    // Older games store the boolean showOtherPlayersVP instead of showVP.
+    const legacyOptions: GameOptions & {showOtherPlayersVP?: boolean} = gameOptions;
+    if (!isShowVP(legacyOptions.showVP)) {
+      gameOptions.showVP = showVPFromLegacy(legacyOptions.showOtherPlayersVP);
+    }
+    delete legacyOptions.showOtherPlayersVP;
     const players = d.players.map((element) => Player.deserialize(element));
     // MarsBot isn't serialized with the players, so it is recreated from the game id.
     const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(d.id) : undefined;

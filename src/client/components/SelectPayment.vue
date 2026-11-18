@@ -1,7 +1,7 @@
 <template>
-  <div class="payments_cont">
+  <div class="payments-cont">
     <section>
-      <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
+      <h3 class="payments-title">{{ $t(playerinput.title) }}</h3>
       <PaymentForm
         ref="paymentForm"
         :cost="cost"

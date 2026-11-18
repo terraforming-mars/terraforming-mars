@@ -1,5 +1,5 @@
 <template>
-  <span class="gotomap_cont">
+  <span class="gotomap-cont">
     &nbsp;&nbsp;<span @click="onclick" v-i18n>go to map</span>
   </span>
 </template>

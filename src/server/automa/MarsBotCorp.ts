@@ -102,6 +102,3 @@ export abstract class MarsBotCorp {
   /** Points added to the bot's score in every award, when funding one and at final scoring. */
   public awardScoreBonus?(marsBot: IMarsBot): number;
 }
-
-/** Corp state key, set to 1 once the corp's `actionDeckBonusCard` removed itself from the game. */
-export const ACTION_DECK_BONUS_CARD_REMOVED = 'actionDeckBonusCardRemoved';

@@ -25,7 +25,7 @@ describe('TharsisRepublicMarsBot', () => {
     it(`advances the event track for its own city and gains 2 M€ for a city of the player, ${run.tile}`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
-      new TharsisRepublicMarsBot().onTilePlaced(marsBot, run.byMarsBot, run.tileType, marsBot.game.board.spaces[0]);
+      new TharsisRepublicMarsBot().onTilePlaced(marsBot, run.byMarsBot, run.tileType);
 
       expect(calls).deep.eq(run.calls);
     });

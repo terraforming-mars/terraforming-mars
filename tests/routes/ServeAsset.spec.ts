@@ -90,18 +90,25 @@ describe('ServeAsset', () => {
     expect(res.statusCode).eq(statusCode.notFound);
   });
 
-  it('serves all script sources referenced in index.html', async () => {
+  it('serves all local assets referenced in index.html', async () => {
     const html = fs.readFileSync('build/index.html', 'utf8');
-    const srcs = [...html.matchAll(/<script[^>]* src="([^"]+)"/g)].map((m) => m[1]);
-    expect(srcs).to.not.be.empty;
-    for (const src of srcs) {
+    const references = [
+      ...[...html.matchAll(/<script[^>]* src="([^"]+)"/g)].map((m) => ({url: m[1], contentType: 'text/javascript'})),
+      // Google Fonts is an external stylesheet; only same-origin assets are served by ServeAsset.
+      ...[...html.matchAll(/<link[^>]* rel="stylesheet"[^>]* href="([^"]+)"/g)]
+        .map((m) => ({url: m[1], contentType: 'text/css'}))
+        .filter((ref) => ref.url.startsWith('/')),
+    ];
+    expect(references).to.not.be.empty;
+    for (const ref of references) {
       const perRes = new MockResponse();
       const perScaffolding = new RouteTestScaffolding();
       instance = new ServeAsset(undefined, false, fileApi);
-      perScaffolding.url = src.startsWith('/') ? src : '/' + src;
+      perScaffolding.url = ref.url;
       perScaffolding.req.headers['accept-encoding'] = '';
       await perScaffolding.get(instance, perRes);
-      expect(perRes.statusCode, `${src} should return 200`).eq(statusCode.ok);
+      expect(perRes.statusCode, `${ref.url} should return 200`).eq(statusCode.ok);
+      expect(perRes.getHeader('Content-Type'), `${ref.url} content type`).eq(ref.contentType);
     }
   });
 });

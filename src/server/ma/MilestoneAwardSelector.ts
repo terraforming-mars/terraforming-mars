@@ -10,7 +10,8 @@ import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
 import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
-import {validateCustomMA} from '../../common/ma/CustomMA';
+import {CustomMA, validateCustomMA} from '../../common/ma/CustomMA';
+import {Expansion, MODULE_NAMES} from '../../common/cards/GameModule';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -112,7 +113,8 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     if (gameOptions.customMA === undefined) {
       throw new Error('Manual milestones and awards require customMA');
     }
-    validateCustomMA(gameOptions.customMA, gameOptions.randomMA, gameOptions.venusNextExtension);
+    validateCustomMA(gameOptions.customMA, gameOptions.randomMA);
+    validateCustomMAExpansions(gameOptions.customMA, gameOptions.expansions);
     drawnMilestonesAndAwards = {
       milestones: [...gameOptions.customMA.milestones],
       awards: [...gameOptions.customMA.awards],
@@ -123,6 +125,31 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   }
 
   return drawnMilestonesAndAwards;
+}
+
+/**
+ * Throws an Error when a hand-picked milestone or award needs an expansion that isn't in the game.
+ *
+ * Without it, the game can't be shown, such as the Politician award without Turmoil. `validateCustomMA` does the
+ * other checks.
+ */
+export function validateCustomMAExpansions(customMA: CustomMA | undefined, expansions: Readonly<Record<Expansion, boolean>>): void {
+  if (customMA === undefined) {
+    return;
+  }
+  for (const name of customMA.milestones) {
+    maybeThrowMissingExpansion(name, milestoneManifest, expansions);
+  }
+  for (const name of customMA.awards) {
+    maybeThrowMissingExpansion(name, awardManifest, expansions);
+  }
+}
+
+function maybeThrowMissingExpansion<T extends string>(name: T, manifest: MAManifest<T, unknown>, expansions: Readonly<Record<Expansion, boolean>>): void {
+  const expansion = manifest.all[name].compatibility;
+  if (expansion !== undefined && expansions[expansion] !== true) {
+    throw new Error(`${name} needs the ${MODULE_NAMES[expansion]} expansion`);
+  }
 }
 
 /** Boards with no volcanic spaces. Exported for tests. */
@@ -140,7 +167,7 @@ export const BOARDS_WITHOUT_VOLCANIC_SPACES: ReadonlyArray<BoardName> = [
  * exported for tests
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
-  function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
+  function include<T extends string>(name: T, manifest: MAManifest<T, unknown>): boolean {
     // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
     // considered for inclusion.
     if (manifest.all[name].deprecated) {

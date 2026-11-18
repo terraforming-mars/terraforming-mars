@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
+  <div class="card-container filter-div hover-hide-res" :class="cardClasses">
     <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
       <div v-if="!isStandardProject" class="card-cost-and-tags">
         <CardCost :amount="cost" :newCost="reducedCost" />

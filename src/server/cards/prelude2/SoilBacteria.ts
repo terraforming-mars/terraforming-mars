@@ -33,14 +33,14 @@ export class SoilBacteria extends PreludeCard {
 
   public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
     if (tag === Tag.PLANT) {
-      player.defer(() => player.stock.add(Resource.PLANTS, 1, {log: true}));
+      player.defer(() => player.stock.add(Resource.PLANTS, 1, {log: true, from: {card: this}}));
     }
   }
 
   public onCardPlayed(player: IPlayer, card: ICard): void {
     const amount = player.tags.cardTagCount(card, [Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {
-      player.defer(() => player.stock.add(Resource.PLANTS, amount, {log: true}));
+      player.defer(() => player.stock.add(Resource.PLANTS, amount, {log: true, from: {card: this}}));
     }
   }
 }

@@ -22,7 +22,7 @@ export type MAManifest<K extends string, V> = {
   createOrThrow(name: string): V;
 }
 
-export function isCompatible<T extends string>(name: T, manifest: MAManifest<T, any>, gameOptions: GameOptions) {
+export function isCompatible<T extends string>(name: T, manifest: MAManifest<T, unknown>, gameOptions: GameOptions) {
   for (const expansion of EXPANSIONS) {
     if (manifest.all[name].compatibility === expansion) {
       if (gameOptions.expansions[expansion] !== true) {

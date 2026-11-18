@@ -52,8 +52,8 @@ export const PaymentWidgetMixin = defineComponent({
     ): Ledger {
       const ledger = newDefaultLedger();
 
-      function isStandardResource(x: any): x is keyof Units {
-        return ALL_RESOURCES.includes(x);
+      function isStandardResource(x: unknown): x is keyof Units {
+        return typeof x === 'string' && (ALL_RESOURCES as ReadonlyArray<string>).includes(x);
       }
 
       const available = this.getAvailableUnits();

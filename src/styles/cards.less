@@ -1,11 +1,11 @@
-.filterDiv,
-.filterDiv::after,
-.filterDiv::before,
-.filterDiv *::after,
-.filterDiv *::before,
-.filterDiv *,
-.filterDiv ::before,
-.filterDiv ::after {
+.filter-div,
+.filter-div::after,
+.filter-div::before,
+.filter-div *::after,
+.filter-div *::before,
+.filter-div *,
+.filter-div ::before,
+.filter-div ::after {
   box-sizing: content-box;
 }
 
@@ -74,7 +74,7 @@
   padding: 10px 0;
 }
 
-.filterDiv {
+.filter-div {
   cursor: pointer;
   position: relative;
   background: #333333;
@@ -94,18 +94,18 @@
   box-shadow: 0 0 2px 1px black;
 }
 
-input[type="checkbox"]+.filterDiv.card-container,
-input[type="radio"]+.filterDiv.card-container {
+input[type="checkbox"]+.filter-div.card-container,
+input[type="radio"]+.filter-div.card-container {
   margin-top: 22px;
 }
 
-input[type="checkbox"]:checked+.filterDiv,
-input[type="radio"]:checked+.filterDiv {
+input[type="checkbox"]:checked+.filter-div,
+input[type="radio"]:checked+.filter-div {
   box-shadow: 0 0 0 1px @grey_850, 0 0 7px 10px #c97e23;
 }
 
-input[type="checkbox"]:checked+.filterDiv::after,
-input[type="radio"]:checked+.filterDiv::after {
+input[type="checkbox"]:checked+.filter-div::after,
+input[type="radio"]:checked+.filter-div::after {
   content: "✓";
   position: absolute;
   width: 90px;
@@ -232,10 +232,6 @@ input[type="radio"]:checked+.filterDiv::after {
 }
 
 /*********** Expansion badge icons ************/
-/* Applied dynamically by CardExpansion.vue as `module + '-icon'`; the class
-   names never appear as literals, so static "unused CSS" passes WILL flag
-   these as dead. They are not. Do not auto-remove. */
-
 .corpera-icon:after {
   .expansion-icon-base();
   background-color: #cc3333;
@@ -397,7 +393,7 @@ input[type="radio"]:checked+.filterDiv::after {
   content: "";
 }
 
-.deltaProject-icon:after {
+.deltaproject-icon:after {
   .expansion-icon-base();
   background-image: url(./assets/expansion_icons/expansion_icon_deltaProject.png);
   background-size: 16px;
@@ -586,7 +582,7 @@ input[type="radio"]:checked+.filterDiv::after {
   }
 
   .resource-tag {
-    margin-bottom: 2px !important;
+    margin-bottom: 2px;
   }
 }
 
@@ -1065,7 +1061,7 @@ input[type="radio"]:checked+.filterDiv::after {
   background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
 }
 
-.expansion-icon-deltaProject {
+.expansion-icon-deltaproject {
   background-image: url(./assets/expansion_icons/expansion_icon_deltaProject.png);
 }
 
@@ -1108,12 +1104,12 @@ input[type="radio"]:checked+.filterDiv::after {
     inset: 0;
     pointer-events: none;
     opacity: 0.5;
-    // filterDiv:hover has z-index 100
+    // filter-div:hover has z-index 100
     // and we need this to be on top when visible
     z-index: 101;
     // ideally, this would exist in CardContainer with width: 100%
     // but that would be a bigger change to pipe through SortableCards.vue
-    // for now, hard code to filterDiv's width + border
+    // for now, hard code to filter-div's width + border
     width: 248px;
   }
 

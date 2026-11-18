@@ -54,7 +54,12 @@ export class TerraCimmeriaNovaBoard extends MarsBoard {
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {
-    return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => {
+    const spaces = super.getAvailableSpacesOnLand(player, canAffordOptions);
+    if (player.isMarsBot) {
+      // MarsBot can always place on the colony hexes, it just gets nothing when no colony is left.
+      return spaces;
+    }
+    return spaces.filter((space) => {
       if (space.bonus.includes(SpaceBonus.COLONY)) {
         if (player.colonies.getPlayableColonies().length === 0) {
           return false;

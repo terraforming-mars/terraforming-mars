@@ -61,8 +61,6 @@ const TO_STRING_MAP = {
   [SpaceBonus.STANDARD_RESOURCE]: 'Standard resource',
 } satisfies Record<SpaceBonus, string>;
 
-export namespace SpaceBonus {
-  export function toString(spaceBonus: SpaceBonus): string {
-    return TO_STRING_MAP[spaceBonus];
-  }
+export function spaceBonusToString(spaceBonus: SpaceBonus): string {
+  return TO_STRING_MAP[spaceBonus];
 }

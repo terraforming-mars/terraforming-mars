@@ -1,7 +1,7 @@
 <template>
   <div class="player-tags">
     <div class="player-tags-main">
-      <TagCount tag="vp" :count="hideVpCount ? '?' : player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" />
+      <TagCount tag="vp" :count="showVpCount ? player.victoryPointsBreakdown.total : '?'" :size="'big'" :type="'main'" />
       <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
         <TagCount tag="escape" :count="escapeVelocityPenalty" :size="'big'" :type="'main'" :showWhenZero="true" />
       </div>
@@ -256,8 +256,9 @@ export default defineComponent({
     cardsInHandCount(): number {
       return this.player.cardsInHandNbr ?? 0;
     },
-    hideVpCount(): boolean {
-      return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
+    showVpCount(): boolean {
+      const showVP = this.playerView.game.gameOptions.showVP;
+      return showVP === 'all' || (showVP === 'yours' && this.isThisPlayer);
     },
     isEscapeVelocityOn(): boolean {
       return this.playerView.game.gameOptions.escapeVelocity !== undefined;

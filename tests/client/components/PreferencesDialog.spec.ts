@@ -7,11 +7,11 @@ import {globalConfig} from './getLocalVue';
 describe('PreferencesDialog', () => {
   const preferencesManager = PreferencesManager.INSTANCE;
 
-  function getDataTest(wrapper: VueWrapper<any>, field: Preference): DOMWrapper<Element> {
+  function getDataTest(wrapper: VueWrapper, field: Preference): DOMWrapper<Element> {
     return wrapper.find(`[data-test=${field}]`);
   }
 
-  function getCheckbox(wrapper: VueWrapper<any>, field: Preference): HTMLInputElement {
+  function getCheckbox(wrapper: VueWrapper, field: Preference): HTMLInputElement {
     return getDataTest(wrapper, field).element as HTMLInputElement;
   }
 

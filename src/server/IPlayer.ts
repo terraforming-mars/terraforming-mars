@@ -69,6 +69,8 @@ export interface IPlayer {
   handicap: number;
 
   readonly game: IGame;
+  /** True for the player MarsBot plays as. */
+  readonly isMarsBot: boolean;
   tags: Tags;
   colonies: Colonies;
   readonly production: Production;
@@ -386,6 +388,10 @@ export interface IPlayer {
   setAlliedParty(party: IParty): void;
 }
 
-export function isIPlayer(object: any): object is IPlayer {
-  return object !== undefined && object.hasOwnProperty('id') && isPlayerId(object.id) && isIGame(object.game);
+export function isIPlayer(object: unknown): object is IPlayer {
+  if (typeof object !== 'object' || object === null) {
+    return false;
+  }
+  const candidate = object as {id?: unknown, game?: unknown};
+  return Object.hasOwn(object, 'id') && isPlayerId(candidate.id) && isIGame(candidate.game);
 }

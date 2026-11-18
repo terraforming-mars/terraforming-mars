@@ -3,6 +3,6 @@ export type CardRenderDescription = {
   align: 'left' | 'center' | 'right',
 }
 
-export function isDescription(item: any): item is CardRenderDescription {
-  return item && item.text && typeof(item.text) === 'string';
+export function isDescription(item: unknown): item is CardRenderDescription {
+  return typeof item === 'object' && item !== null && 'text' in item && typeof item.text === 'string';
 }

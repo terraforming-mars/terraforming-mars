@@ -299,7 +299,7 @@ export default defineComponent({
           }
 
           if (this.item.clone) {
-            result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+            result += '<div style="filter: grayscale(100%)">🪐</div>';
           }
         }
       }

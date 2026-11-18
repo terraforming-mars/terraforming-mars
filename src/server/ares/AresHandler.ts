@@ -4,7 +4,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {SpaceBonus, spaceBonusToString} from '../../common/boards/SpaceBonus';
 import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TileType, tileTypeToString} from '../../common/TileType';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
@@ -113,7 +113,7 @@ export class AresHandler {
     }
 
     const bonusText = Array.from(bonuses.multiplicities())
-      .map(([bonus, count]) => `${count} ${SpaceBonus.toString(bonus)}`)
+      .map(([bonus, count]) => `${count} ${spaceBonusToString(bonus)}`)
       .join(', ');
     const tileText = adjacentSpace.tile !== undefined ? tileTypeToString[adjacentSpace.tile.tileType] : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));

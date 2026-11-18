@@ -91,6 +91,14 @@
     </div>
     <div class="preferences_panel_item">
       <label class="form-switch">
+        <input type="checkbox" @change="updatePreferences" v-model="prefs.experimental_layout" data-test="experimental_layout">
+        <i class="form-icon"></i>
+        <span v-i18n>Experimental layout</span>
+        <span class="tooltip tooltip-left" :data-tooltip="$t('Use a two-column desktop layout and mobile navigation.')">&#9432;</span>
+      </label>
+    </div>
+    <div class="preferences_panel_item">
+      <label class="form-switch">
         <input type="checkbox" @change="updatePreferences" v-model="prefs.debug_view" data-test="debug_view">
         <i class="form-icon"></i>
         <span v-i18n>Debug View</span>
@@ -133,6 +141,11 @@ export default defineComponent({
     return {
       prefs: {...this.preferencesManager.values()},
     };
+  },
+  watch: {
+    experimentalLayout(enabled: boolean) {
+      this.prefs.experimental_layout = enabled;
+    },
   },
   methods: {
     showBugDialog() {
@@ -178,6 +191,9 @@ export default defineComponent({
     },
   },
   computed: {
+    experimentalLayout(): boolean {
+      return this.preferencesManager.values().experimental_layout;
+    },
     typedRefs(): Refs {
       return this.$refs as unknown as Refs;
     },

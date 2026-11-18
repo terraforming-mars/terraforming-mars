@@ -47,4 +47,15 @@ describe('PreferencesDialog', () => {
 
     expect(preferencesManager.values().hide_awards_and_milestones).is.true;
   });
+
+  it('keeps the copied layout setting in sync after returning to classic', async () => {
+    preferencesManager.set('experimental_layout', true);
+    const wrapper = mount(PreferencesDialog, {...globalConfig, props: {preferencesManager}});
+    expect(getCheckbox(wrapper, 'experimental_layout').checked).is.true;
+    preferencesManager.set('experimental_layout', false);
+    await wrapper.vm.$nextTick();
+    expect(getCheckbox(wrapper, 'experimental_layout').checked).is.false;
+    await getDataTest(wrapper, 'enable_sounds').trigger('change');
+    expect(preferencesManager.values().experimental_layout).is.false;
+  });
 });

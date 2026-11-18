@@ -24,6 +24,7 @@ export type Preferences = {
   animated_title: boolean,
   experimental_ui: boolean,
   remember_create_game_settings: boolean,
+  experimental_layout: boolean,
   lang: string,
 }
 
@@ -54,6 +55,7 @@ const defaults: Preferences = {
   animated_title: true,
 
   experimental_ui: false,
+  experimental_layout: false,
   debug_view: false,
 
   remember_create_game_settings: false,

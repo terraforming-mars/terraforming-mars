@@ -1,24 +1,29 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
-import {IMarsBotCorp} from '@/server/automa/IMarsBotCorp';
+import {IMarsBot} from '@/server/automa/IMarsBot';
+import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
-// C42 Nirgal Enterprises
-export const NIRGAL_ENTERPRISES_MARSBOT_CORP: IMarsBotCorp = {
-  name: CardName.NIRGAL_ENTERPRISES,
-  description: 'Tags: Building, Power, Plant. Setup: remove Overachievement. +2 in every award. Generations 2-5 and 10+: claim milestone. Generations 6-9: fund award.',
-  tags: [Tag.BUILDING, Tag.POWER, Tag.PLANT],
-  setup(marsBot) {
+export class NirgalEnterprisesMarsBot extends MarsBotCorp {
+  constructor() {
+    super({
+      name: CardName.NIRGAL_ENTERPRISES,
+      description: 'Tags: Building, Power, Plant. Setup: remove Overachievement. +2 in every award. Generations 2-5 and 10+: claim milestone. Generations 6-9: fund award.',
+      tags: [Tag.BUILDING, Tag.POWER, Tag.PLANT],
+    });
+  }
+
+  public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
     marsBot.game.log('MarsBot (Nirgal): Overachievement removed from bonus deck');
-  },
-  effect: {
-    awardScoreBonus() {
-      return 2;
-    },
-  },
+  }
+
+  public override awardScoreBonus(): number {
+    return 2;
+  }
+
   // Gen 2-5 or 10+: claim milestone. Gen 6-9: fund award. Neither is a Failed Action when it can't.
-  beforeActionPhase(marsBot) {
+  public override beforeActionPhase(marsBot: IMarsBot): void {
     const generation = marsBot.game.generation;
     if ((generation >= 2 && generation <= 5) || generation >= 10) {
       if (!marsBot.maybeClaimMilestone()) {
@@ -29,5 +34,5 @@ export const NIRGAL_ENTERPRISES_MARSBOT_CORP: IMarsBotCorp = {
         marsBot.game.log('MarsBot (Nirgal): no award to fund');
       }
     }
-  },
-};
+  }
+}

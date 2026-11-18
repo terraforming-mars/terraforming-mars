@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {NIRGAL_ENTERPRISES_MARSBOT_CORP} from '@/server/automa/corps/prelude2/NirgalEnterprisesMarsBot';
+import {NirgalEnterprisesMarsBot} from '@/server/automa/corps/prelude2/NirgalEnterprisesMarsBot';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
 describe('NirgalEnterprisesMarsBot', () => {
   it('removes Overachievement at setup', () => {
     const {marsBot, calls} = recordingMarsBot();
 
-    NIRGAL_ENTERPRISES_MARSBOT_CORP.setup!(marsBot);
+    new NirgalEnterprisesMarsBot().setup(marsBot);
 
     expect(calls).deep.eq(['removeBonusCard(B04)']);
   });
 
   it('adds 2 to every award', () => {
-    expect(NIRGAL_ENTERPRISES_MARSBOT_CORP.effect!.awardScoreBonus!(recordingMarsBot().marsBot)).eq(2);
+    expect(new NirgalEnterprisesMarsBot().awardScoreBonus()).eq(2);
   });
 
   const milestone = 'maybeClaimMilestone()';
@@ -22,7 +22,7 @@ describe('NirgalEnterprisesMarsBot', () => {
       const {marsBot, calls} = recordingMarsBot();
       marsBot.game.generation = generation;
 
-      NIRGAL_ENTERPRISES_MARSBOT_CORP.beforeActionPhase!(marsBot);
+      new NirgalEnterprisesMarsBot().beforeActionPhase(marsBot);
 
       expect(calls).deep.eq(expected);
     });

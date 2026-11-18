@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Tag} from '@/common/cards/Tag';
-import {ASTRODRILL_MARSBOT_CORP} from '@/server/automa/corps/promo/AstrodrillMarsBot';
+import {AstrodrillMarsBot} from '@/server/automa/corps/promo/AstrodrillMarsBot';
 import {setAllTracks, setTrack} from '../../FakeMarsBot';
 import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
@@ -18,14 +18,14 @@ describe('AstrodrillMarsBot', () => {
       setAllTracks(marsBot, 2);
       setTrack(marsBot, Tag.PLANT, 1);
 
-      ASTRODRILL_MARSBOT_CORP.effect!.onTrackCubeTrigger!(marsBot, SPACE, 2, run.cube);
+      new AstrodrillMarsBot().onTrackCubeTrigger(marsBot, SPACE, 2, run.cube);
 
       expect(calls).deep.eq(run.calls);
     });
   }
 
   it('puts its cubes on the space track', () => {
-    expect(trackCubes(ASTRODRILL_MARSBOT_CORP)).to.have.members([
+    expect(trackCubes(new AstrodrillMarsBot())).to.have.members([
       ...[2, 4, 7, 10, 13].map((position) => `space white ${position}`),
       ...[5, 11, 16].map((position) => `space black ${position}`),
     ]);

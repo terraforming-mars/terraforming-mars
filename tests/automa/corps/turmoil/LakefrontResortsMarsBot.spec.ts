@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TileType} from '@/common/TileType';
-import {LAKEFRONT_RESORTS_MARSBOT_CORP} from '@/server/automa/corps/turmoil/LakefrontResortsMarsBot';
+import {LakefrontResortsMarsBot} from '@/server/automa/corps/turmoil/LakefrontResortsMarsBot';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {testGame} from '../../../TestGame';
 import {RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
@@ -14,14 +14,13 @@ function lakefrontBot(fields: Partial<IMarsBot> = {}): RecordingMarsBot {
   return recordingMarsBot({game, player: game.marsBotPlayer, megacredits: 0, ...fields});
 }
 
-// C35
 describe('LakefrontResortsMarsBot', () => {
-  const effect = LAKEFRONT_RESORTS_MARSBOT_CORP.effect!;
+  const corp = new LakefrontResortsMarsBot();
 
   it('setup puts a white cube on the card and pays 3 M€ per adjacent ocean', () => {
     const {marsBot, corpState} = lakefrontBot();
 
-    LAKEFRONT_RESORTS_MARSBOT_CORP.setup!(marsBot);
+    new LakefrontResortsMarsBot().setup(marsBot);
 
     expect(corpState.get('whiteCubeOnCard')).eq(1);
     expect(marsBot.player.oceanBonus).eq(3);
@@ -29,17 +28,16 @@ describe('LakefrontResortsMarsBot', () => {
 
   it('oceans alternate between taking the cube off to advance the building track and putting it back', () => {
     const {marsBot, calls, corpState} = lakefrontBot();
-    const space = marsBot.game.board.spaces[0];
     corpState.set('whiteCubeOnCard', 1);
 
-    effect.onTilePlaced!(marsBot, false, TileType.OCEAN, space);
+    corp.onTilePlaced(marsBot, false, TileType.OCEAN);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
     expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
 
-    effect.onTilePlaced!(marsBot, false, TileType.GREENERY, space);
+    corp.onTilePlaced(marsBot, false, TileType.GREENERY);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
 
-    effect.onTilePlaced!(marsBot, true, TileType.OCEAN, space);
+    corp.onTilePlaced(marsBot, true, TileType.OCEAN);
     expect(corpState.get('whiteCubeOnCard')).eq(1);
     expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
   });
@@ -54,7 +52,7 @@ describe('LakefrontResortsMarsBot', () => {
     corpState.set('whiteCubeOnCard', 1);
     marsBot.mcKeptThroughIntervention = 0;
 
-    effect.onTilePlaced!(marsBot, false, TileType.OCEAN, marsBot.game.board.spaces[0]);
+    corp.onTilePlaced(marsBot, false, TileType.OCEAN);
 
     expect(marsBot.mcKeptThroughIntervention).eq(4);
   });

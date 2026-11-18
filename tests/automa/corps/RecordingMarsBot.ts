@@ -1,6 +1,6 @@
 import {TrackDefinition} from '@/common/automa/AutomaTypes';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {IMarsBotCorp} from '@/server/automa/IMarsBotCorp';
+import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 import {corpTrackCubes} from '@/server/automa/corpTrackCubes';
@@ -63,7 +63,7 @@ export function recordingMarsBot(fields: Partial<IMarsBot> = {}): RecordingMarsB
 }
 
 /** The cubes `corp` puts on a board of `tracks`, each as `tag cubeType position`, with the first tag of its track. */
-export function trackCubes(corp: IMarsBotCorp, tracks: ReadonlyArray<TrackDefinition> = THARSIS_MARSBOT_BOARD): Array<string> {
+export function trackCubes(corp: MarsBotCorp, tracks: ReadonlyArray<TrackDefinition> = THARSIS_MARSBOT_BOARD): Array<string> {
   const board = new MarsBotBoard(tracks);
   return corpTrackCubes(corp, board).map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`);
 }

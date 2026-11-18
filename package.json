@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Terraforming Mars Game",
   "engines": {
-    "node": "22.x"
+    "node": "26.x"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +32,7 @@
     "@types/html-escaper": "^3.0.0",
     "@types/markdown-it": "^14.1.2",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^25.5.0",
+    "@types/node": "26.6.6",
     "@types/pg": "^7.14.7",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.60.1",
@@ -75,8 +75,8 @@
     "build": "npm run make:static && npm run build:server && npm run build:client",
     "build:client": "npm run make:cards && cross-env NODE_ENV=production webpack",
     "build:server": "tsc --build src/tsconfig.json && tsc-alias -p src/tsconfig.json",
-    "build:test": "tsc --build tests/tsconfig.json",
-    "build:tests": "tsc --build tests/tsconfig.json",
+    "build:test": "vue-tsc --build tests/tsconfig.json",
+    "build:tests": "vue-tsc --build tests/tsconfig.json",
     "clean": "rimraf ./build/ ./src/genfiles/",
     "lint": "npm run lint:server && npm run lint:i18n && npm run lint:client && npm run lint:css",
     "lint:client": "vue-tsc --noEmit -p tsconfig.vue-tsc.json",

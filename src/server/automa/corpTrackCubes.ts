@@ -1,4 +1,4 @@
-import {IMarsBotCorp} from './IMarsBotCorp';
+import {MarsBotCorp} from './MarsBotCorp';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotTrackCube} from './MarsBotCorpTypes';
 
@@ -6,7 +6,7 @@ import {MarsBotTrackCube} from './MarsBotCorpTypes';
  * The corp's cubes on this board: tag-named cubes go to the track that carries the tag, and cubes
  * on a track the board lacks (Venus without Venus Next) are left out.
  */
-export function corpTrackCubes(corp: IMarsBotCorp, marsBotBoard: MarsBotBoard): Array<MarsBotTrackCube> {
+export function corpTrackCubes(corp: MarsBotCorp, marsBotBoard: MarsBotBoard): Array<MarsBotTrackCube> {
   if (corp.trackCubes === undefined) {
     return [];
   }

@@ -17,24 +17,22 @@ export type PlayCardMetadata = {
   overriddenCost?: number;
 };
 
+export type Config = {
+  action?: CardAction,
+  enabled?: ReadonlyArray<boolean>,
+  title?: string | Message,
+  buttonLabel?: string,
+  adjustedCost?: (card: IStandardProjectCard) => number,
+};
+
 export abstract class SelectCardToPlay<T extends IProjectCard | IStandardProjectCard> extends BasePlayerInput<T> {
   public cards: ReadonlyArray<T> = [];
   public extras: Map<CardName, PlayCardMetadata>;
 
-  public get enabled(): ReadonlyArray<boolean> | undefined {
-    return this.config?.enabled;
-  }
-
   constructor(
     protected player: IPlayer,
     cards: ReadonlyArray<T>,
-    public config?: {
-      action?: CardAction,
-      enabled?: ReadonlyArray<boolean>,
-      title?: string | Message,
-      buttonLabel?: string,
-      adjustedCost?: (card: IStandardProjectCard) => number,
-    }) {
+    public config?: Config) {
     super('projectCard', config?.title ?? 'Play project card');
     this.buttonLabel = config?.buttonLabel ?? 'Play card';
     this.cards = cards;

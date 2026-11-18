@@ -18,7 +18,7 @@ describe('EscapeVelocity', () => {
         penaltyPeriodMinutes: 4,
       },
     });
-    (Timer as any).lastStoppedAt = 0;
+    Reflect.set(Timer, 'lastStoppedAt', 0);
     clock = new FakeClock();
     timer = Timer.newInstance(clock);
     player.timer = timer;

@@ -230,6 +230,7 @@ import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {textFitMetrics} from '@/client/utils/textFit';
+import {expansionIconClass} from '@/client/utils/expansionIcon';
 
 
 type Refs = {
@@ -289,13 +290,7 @@ export default defineComponent({
       ];
     },
     allTags(): Array<TagOption> {
-      const results: Array<TagOption> = [];
-      for (const tag in Tag) {
-        if (Object.hasOwn(Tag, tag)) {
-          results.push((<any>Tag)[tag]);
-        }
-      }
-      return results.concat('none');
+      return [...getEnumStringValues(Tag), 'none'];
     },
     allResources(): Array<ResourceOption> {
       return [...getEnumStringValues(CardResource), 'none'];
@@ -448,15 +443,7 @@ export default defineComponent({
         return this.searchIndex.matches(this.filterText, type, name);
       }
     },
-    expansionIconClass(expansion: GameModule): string {
-      switch (expansion) {
-      case 'base': return 'expansion-icon-base';
-      case 'corpera': return 'expansion-icon-CE';
-      case 'colonies': return 'expansion-icon-colony';
-      case 'moon': return 'expansion-icon-themoon';
-      default: return `expansion-icon-${expansion}`;
-      }
-    },
+    expansionIconClass,
     filterByTags(card: ClientCard): boolean {
       if (card.tags.length === 0) {
         return this.tags['none'] === true;

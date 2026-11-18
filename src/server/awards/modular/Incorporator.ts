@@ -1,6 +1,7 @@
 import {IAward} from '../IAward';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 
 export class Incorporator implements IAward {
   public readonly name = 'Incorporator';
@@ -10,5 +11,13 @@ export class Incorporator implements IAward {
     return player.playedCards.projects().filter((card) => {
       return (card.cost <= 10) && (card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED);
     }).length;
+  }
+
+  /**
+   * Counts the cards costing 10 M€ or less in MarsBot's played pile, events included (rulebook C
+   * p.10 and p.15).
+   */
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.playedProjectCards.filter((card) => card.cost <= 10).length;
   }
 }

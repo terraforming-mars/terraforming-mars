@@ -101,6 +101,13 @@ export default defineComponent({
         return;
       }
 
+      const requiredPairs = this.playerinput.pairs ?? 0;
+      const pairs = sum(Units.values(this.units).map((count) => Math.floor(count / 2)));
+      if (pairs < requiredPairs) {
+        this.warning = `${requiredPairs} of these losses must be 2 steps from a single production.`;
+        return;
+      }
+
       this.onsave({type: 'productionToLose', units: this.units});
     },
   },

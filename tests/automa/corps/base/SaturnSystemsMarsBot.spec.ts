@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SATURN_SYSTEMS_MARSBOT_CORP} from '@/server/automa/corps/base/SaturnSystemsMarsBot';
+import {SaturnSystemsMarsBot} from '@/server/automa/corps/base/SaturnSystemsMarsBot';
 import {Asteroid} from '@/server/cards/base/Asteroid';
 import {AsteroidMining} from '@/server/cards/base/AsteroidMining';
 import {recordingMarsBot} from '../RecordingMarsBot';
@@ -16,7 +16,7 @@ describe('SaturnSystemsMarsBot', () => {
     it(`advances the event track for a Jovian card MarsBot resolves, ${run.tag} card`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
-      SATURN_SYSTEMS_MARSBOT_CORP.effect!.onProjectCardResolved!(marsBot, run.card);
+      new SaturnSystemsMarsBot().onProjectCardResolved(marsBot, run.card);
 
       expect(calls).deep.eq(run.calls);
     });
@@ -24,7 +24,7 @@ describe('SaturnSystemsMarsBot', () => {
     it(`advances the event track for a Jovian card the player plays, ${run.tag} card`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
-      SATURN_SYSTEMS_MARSBOT_CORP.effect!.onHumanCardPlayed!(marsBot, run.card);
+      new SaturnSystemsMarsBot().onHumanCardPlayed(marsBot, run.card);
 
       expect(calls).deep.eq(run.calls);
     });

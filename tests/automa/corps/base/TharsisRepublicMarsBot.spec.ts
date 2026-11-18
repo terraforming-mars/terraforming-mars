@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TileType} from '@/common/TileType';
-import {THARSIS_REPUBLIC_MARSBOT_CORP} from '@/server/automa/corps/base/TharsisRepublicMarsBot';
+import {TharsisRepublicMarsBot} from '@/server/automa/corps/base/TharsisRepublicMarsBot';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
 // Track index on the Tharsis board
@@ -11,7 +11,7 @@ describe('TharsisRepublicMarsBot', () => {
   it('places a city at setup', () => {
     const {marsBot, calls} = recordingMarsBot();
 
-    THARSIS_REPUBLIC_MARSBOT_CORP.setup!(marsBot);
+    new TharsisRepublicMarsBot().setup(marsBot);
 
     expect(calls).deep.eq(['placeCity()']);
   });
@@ -25,7 +25,7 @@ describe('TharsisRepublicMarsBot', () => {
     it(`advances the event track for its own city and gains 2 M€ for a city of the player, ${run.tile}`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
-      THARSIS_REPUBLIC_MARSBOT_CORP.effect!.onTilePlaced!(marsBot, run.byMarsBot, run.tileType, marsBot.game.board.spaces[0]);
+      new TharsisRepublicMarsBot().onTilePlaced(marsBot, run.byMarsBot, run.tileType, marsBot.game.board.spaces[0]);
 
       expect(calls).deep.eq(run.calls);
     });

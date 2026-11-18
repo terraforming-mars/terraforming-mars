@@ -1,31 +1,31 @@
 import {CardName} from '../../../common/cards/CardName';
 import {AutomaManifest} from './AutomaManifest';
-import {CREDICOR_MARSBOT_CORP} from './base/CrediCorMarsBot';
-import {ECOLINE_MARSBOT_CORP} from './base/EcoLineMarsBot';
-import {HELION_MARSBOT_CORP} from './base/HelionMarsBot';
-import {INTERPLANETARY_CINEMATICS_MARSBOT_CORP} from './base/InterplanetaryCinematicsMarsBot';
-import {INVENTRIX_MARSBOT_CORP} from './base/InventrixMarsBot';
-import {MINING_GUILD_MARSBOT_CORP} from './base/MiningGuildMarsBot';
-import {PHOBOLOG_MARSBOT_CORP} from './base/PhoboLogMarsBot';
-import {SATURN_SYSTEMS_MARSBOT_CORP} from './base/SaturnSystemsMarsBot';
-import {TERACTOR_MARSBOT_CORP} from './base/TeractorMarsBot';
-import {THARSIS_REPUBLIC_MARSBOT_CORP} from './base/TharsisRepublicMarsBot';
-import {THORGATE_MARSBOT_CORP} from './base/ThorgateMarsBot';
-import {UNITED_NATIONS_MARS_INITIATIVE_MARSBOT_CORP} from './base/UnitedNationsMarsInitiativeMarsBot';
+import {CrediCorMarsBot} from './base/CrediCorMarsBot';
+import {EcoLineMarsBot} from './base/EcoLineMarsBot';
+import {HelionMarsBot} from './base/HelionMarsBot';
+import {InterplanetaryCinematicsMarsBot} from './base/InterplanetaryCinematicsMarsBot';
+import {InventrixMarsBot} from './base/InventrixMarsBot';
+import {MiningGuildMarsBot} from './base/MiningGuildMarsBot';
+import {PhoboLogMarsBot} from './base/PhoboLogMarsBot';
+import {SaturnSystemsMarsBot} from './base/SaturnSystemsMarsBot';
+import {TeractorMarsBot} from './base/TeractorMarsBot';
+import {TharsisRepublicMarsBot} from './base/TharsisRepublicMarsBot';
+import {ThorgateMarsBot} from './base/ThorgateMarsBot';
+import {UnitedNationsMarsInitiativeMarsBot} from './base/UnitedNationsMarsInitiativeMarsBot';
 
 export const AUTOMA_BASE_MANIFEST: AutomaManifest = {
   corps: {
-    [CardName.CREDICOR]: CREDICOR_MARSBOT_CORP,
-    [CardName.ECOLINE]: ECOLINE_MARSBOT_CORP,
-    [CardName.HELION]: HELION_MARSBOT_CORP,
-    [CardName.INTERPLANETARY_CINEMATICS]: INTERPLANETARY_CINEMATICS_MARSBOT_CORP,
-    [CardName.INVENTRIX]: INVENTRIX_MARSBOT_CORP,
-    [CardName.MINING_GUILD]: MINING_GUILD_MARSBOT_CORP,
-    [CardName.PHOBOLOG]: PHOBOLOG_MARSBOT_CORP,
-    [CardName.SATURN_SYSTEMS]: SATURN_SYSTEMS_MARSBOT_CORP,
-    [CardName.TERACTOR]: TERACTOR_MARSBOT_CORP,
-    [CardName.THARSIS_REPUBLIC]: THARSIS_REPUBLIC_MARSBOT_CORP,
-    [CardName.THORGATE]: THORGATE_MARSBOT_CORP,
-    [CardName.UNITED_NATIONS_MARS_INITIATIVE]: UNITED_NATIONS_MARS_INITIATIVE_MARSBOT_CORP,
+    [CardName.CREDICOR]: new CrediCorMarsBot(),
+    [CardName.ECOLINE]: new EcoLineMarsBot(),
+    [CardName.HELION]: new HelionMarsBot(),
+    [CardName.INTERPLANETARY_CINEMATICS]: new InterplanetaryCinematicsMarsBot(),
+    [CardName.INVENTRIX]: new InventrixMarsBot(),
+    [CardName.MINING_GUILD]: new MiningGuildMarsBot(),
+    [CardName.PHOBOLOG]: new PhoboLogMarsBot(),
+    [CardName.SATURN_SYSTEMS]: new SaturnSystemsMarsBot(),
+    [CardName.TERACTOR]: new TeractorMarsBot(),
+    [CardName.THARSIS_REPUBLIC]: new TharsisRepublicMarsBot(),
+    [CardName.THORGATE]: new ThorgateMarsBot(),
+    [CardName.UNITED_NATIONS_MARS_INITIATIVE]: new UnitedNationsMarsInitiativeMarsBot(),
   },
 };

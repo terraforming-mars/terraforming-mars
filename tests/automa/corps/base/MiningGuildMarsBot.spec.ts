@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Phase} from '@/common/Phase';
-import {MINING_GUILD_MARSBOT_CORP} from '@/server/automa/corps/base/MiningGuildMarsBot';
+import {MiningGuildMarsBot} from '@/server/automa/corps/base/MiningGuildMarsBot';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
 // Track index on the Tharsis board
 const BUILDING = 0;
 
 describe('MiningGuildMarsBot', () => {
-  const effect = MINING_GUILD_MARSBOT_CORP.effect!;
+  const corp = new MiningGuildMarsBot();
 
   // The M€ MarsBot earns comes off the card, and MarsBot keeps it
   for (const run of [
@@ -18,13 +18,13 @@ describe('MiningGuildMarsBot', () => {
   ]) {
     it('counts down from 10, and advances the building track each time the card empties: ' + JSON.stringify(run), () => {
       const {marsBot, calls, corpState} = recordingMarsBot();
-      MINING_GUILD_MARSBOT_CORP.setup!(marsBot);
+      new MiningGuildMarsBot().setup(marsBot);
       if (run.mcOnCard !== undefined) {
         corpState.set('mcOnCard', run.mcOnCard);
       }
       marsBot.marsBotBoard.tracks[BUILDING].position = run.building ?? 3;
 
-      effect.onMcGained!(marsBot, run.gain);
+      corp.onMcGained(marsBot, run.gain);
 
       expect(corpState.get('mcOnCard')).eq(run.card);
       expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${BUILDING})`));
@@ -32,10 +32,10 @@ describe('MiningGuildMarsBot', () => {
   }
 
   it('refills the card before the advance, so the M€ the advance earns comes off the new card', () => {
-    const {marsBot, corpState} = recordingMarsBot({advanceTrack: () => effect.onMcGained!(marsBot, 2)});
+    const {marsBot, corpState} = recordingMarsBot({advanceTrack: () => corp.onMcGained(marsBot, 2)});
     corpState.set('mcOnCard', 1);
 
-    effect.onMcGained!(marsBot, 1);
+    corp.onMcGained(marsBot, 1);
 
     expect(corpState.get('mcOnCard')).eq(8);
   });
@@ -46,7 +46,7 @@ describe('MiningGuildMarsBot', () => {
     marsBot.game.phase = Phase.END;
     corpState.set('mcOnCard', 2);
 
-    effect.onMcGained!(marsBot, 5);
+    corp.onMcGained(marsBot, 5);
 
     expect(corpState.get('mcOnCard')).eq(2);
     expect(calls).is.empty;

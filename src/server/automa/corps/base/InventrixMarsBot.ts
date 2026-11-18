@@ -1,28 +1,34 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
-import {IMarsBotCorp} from '@/server/automa/IMarsBotCorp';
-import {bonusCardBeforeActionPhase} from '@/server/automa/corps/BaseGameCorps';
+import {IMarsBot} from '@/server/automa/IMarsBot';
+import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
+import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/BaseGameCorps';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
-// ---- C05 Inventrix ----
-// Setup: remove Lobbyists (B06). Effect: card with requirements gives 2 MC.
-// Gen: before action phase, add Do It Right (B25) to action deck.
-export const INVENTRIX_MARSBOT_CORP: IMarsBotCorp = {
-  name: CardName.INVENTRIX,
-  description: 'Setup: remove Lobbyists. Effect: card with requirements gives 2 MC. Each generation: add Do It Right to action deck.',
-  tags: [],
-  setup(marsBot) {
+export class InventrixMarsBot extends MarsBotCorp {
+  constructor() {
+    super({
+      name: CardName.INVENTRIX,
+      description: 'Setup: remove Lobbyists. Effect: card with requirements gives 2 M€. Each generation: add Do It Right to action deck.',
+      actionDeckBonusCard: BonusCardId.B25_DO_IT_RIGHT,
+    });
+  }
+
+  public override setup(marsBot: IMarsBot): void {
     // With Venus Next the bonus deck's Lobbyists is B15
     marsBot.removeBonusCard(BonusCardId.B06_LOBBYISTS);
     marsBot.removeBonusCard(BonusCardId.B15_LOBBYISTS_VENUS);
     marsBot.game.log('MarsBot (Inventrix): Lobbyists removed from bonus deck');
-  },
-  effect: {
-    onProjectCardResolved(marsBot, card) {
-      if (card.requirements.length > 0) {
-        marsBot.gainMc(2);
-        marsBot.game.log('MarsBot (Inventrix): card with requirements, +2 M€');
-      }
-    },
-  },
-  ...bonusCardBeforeActionPhase(BonusCardId.B25_DO_IT_RIGHT, 'Inventrix'),
-};
+  }
+
+  public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
+    if (card.requirements.length > 0) {
+      marsBot.gainMc(2);
+      marsBot.game.log('MarsBot (Inventrix): card with requirements, +2 M€');
+    }
+  }
+
+  public override beforeActionPhase(marsBot: IMarsBot): void {
+    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B25_DO_IT_RIGHT, 'Inventrix');
+  }
+}

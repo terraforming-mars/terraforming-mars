@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {UNITED_NATIONS_MARS_INITIATIVE_MARSBOT_CORP} from '@/server/automa/corps/base/UnitedNationsMarsInitiativeMarsBot';
+import {UnitedNationsMarsInitiativeMarsBot} from '@/server/automa/corps/base/UnitedNationsMarsInitiativeMarsBot';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
 describe('UnitedNationsMarsInitiativeMarsBot', () => {
@@ -7,7 +7,7 @@ describe('UnitedNationsMarsInitiativeMarsBot', () => {
   it('returns the setup bonus card and adds Government Subsidy to the bonus deck at setup', () => {
     const {marsBot, calls} = recordingMarsBot();
 
-    UNITED_NATIONS_MARS_INITIATIVE_MARSBOT_CORP.setup!(marsBot);
+    new UnitedNationsMarsInitiativeMarsBot().setup(marsBot);
 
     expect(calls).deep.eq(['returnSetupBonusCardToBonusDeck()', 'addBonusCardToBonusDeck(B31)']);
   });
@@ -21,7 +21,7 @@ describe('UnitedNationsMarsInitiativeMarsBot', () => {
       const {marsBot, calls} = recordingMarsBot();
       marsBot.game.generation = run.generation;
 
-      UNITED_NATIONS_MARS_INITIATIVE_MARSBOT_CORP.beforeActionPhase!(marsBot);
+      new UnitedNationsMarsInitiativeMarsBot().beforeActionPhase(marsBot);
 
       expect(calls).deep.eq(run.calls);
     });

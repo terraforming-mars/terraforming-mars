@@ -9,11 +9,10 @@ import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Request} from '../Request';
 import {Response} from '../Response';
-import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
 import {InputError} from '../inputs/InputError';
 import {isIProjectCard} from '../cards/IProjectCard';
-import {INVALID_REQUEST_ID, INVALID_RUN_ID, RESPONDING_TOO_QUICKLY} from '../../common/app/AppErrorId';
+import {INVALID_REQUEST_ID, RESPONDING_TOO_QUICKLY} from '../../common/app/AppErrorId';
 import {RouteError} from './RouteError';
 import {readBody} from './readBody';
 import {stringToNumber} from '../database/utils';
@@ -92,8 +91,7 @@ export class PlayerInput extends Handler {
       if (this.isRespondingTooQuickly(responseInterval)) {
         throw new AppError(RESPONDING_TOO_QUICKLY, "You're responding a little too quickly.");
       }
-      const entity = JSON.parse(body);
-      validateRunId(entity);
+      const entity = JSON.parse(body) as InputResponse;
       validateRequestId(player, entity);
 
       // Placed here because it fits in a temporally cohesive sense.
@@ -146,23 +144,15 @@ export class PlayerInput extends Handler {
     return responseInterval < this.minResponseIntervalMs;
   }
 }
-function validateRunId(entity: any) {
-  if (entity.runId !== undefined && runId !== undefined) {
-    if (entity.runId !== runId) {
-      throw new AppError(INVALID_RUN_ID, 'The server has restarted. Click OK to refresh this page.');
-    }
-  }
-  // Clearing this out to be compatible with the input response processors.
-  delete entity.runId;
-}
 
 // Rejects a response sent for an input the player has since moved past, e.g. from a page
 // that never got the reply to its previous response.
-function validateRequestId(player: IPlayer, entity: any) {
-  if (entity.requestId !== undefined && entity.requestId !== player.requestId) {
+function validateRequestId(player: IPlayer, entity: InputResponse) {
+  const sidechannel = entity as unknown as {requestId?: string};
+  if (sidechannel.requestId !== player.requestId) {
     throw new AppError(INVALID_REQUEST_ID, 'This page is out of date. Click OK to refresh it.');
   }
   // Clearing this out to be compatible with the input response processors.
-  delete entity.requestId;
+  delete sidechannel.requestId;
 }
 

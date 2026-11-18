@@ -313,6 +313,7 @@ export class Turmoil {
     if (game.beholdTheEmperor !== true) {
       this.rulingParty = this.dominantParty;
     }
+    game.log('The ruling party is: ${0}', (b) => b.partyName(this.rulingParty.name));
 
     let newChairman = this.rulingParty.partyLeader || 'NEUTRAL';
     if (game.beholdTheEmperor === true && this.chairman !== undefined) {

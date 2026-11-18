@@ -7,7 +7,7 @@ describe('GoalChooser', () => {
   it('mounts without errors', () => {
     const wrapper = mount(GoalChooser, {
       ...globalConfig,
-      props: {selected: {milestones: [], awards: []}, limit: 5},
+      props: {selected: {milestones: [], awards: []}},
     });
     expect(wrapper.exists()).is.true;
   });

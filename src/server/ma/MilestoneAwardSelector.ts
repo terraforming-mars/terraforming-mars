@@ -113,7 +113,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     if (gameOptions.customMA === undefined) {
       throw new Error('Manual milestones and awards require customMA');
     }
-    validateCustomMA(gameOptions.customMA, gameOptions.randomMA, gameOptions.venusNextExtension);
+    validateCustomMA(gameOptions.customMA, gameOptions.randomMA);
     validateCustomMAExpansions(gameOptions.customMA, gameOptions.expansions);
     drawnMilestonesAndAwards = {
       milestones: [...gameOptions.customMA.milestones],

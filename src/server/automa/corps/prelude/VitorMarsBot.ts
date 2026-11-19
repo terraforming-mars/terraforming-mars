@@ -1,9 +1,9 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
+import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {printedVictoryPoints} from '@/server/automa/MarsBotTags';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class VitorMarsBot extends MarsBotCorp {
@@ -17,7 +17,7 @@ export class VitorMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    marsBot.game.log('MarsBot (${0}): Overachievement separated from bonus deck', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): ${1} separated from bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B04_OVERACHIEVEMENT).name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
@@ -30,6 +30,6 @@ export class VitorMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B04_OVERACHIEVEMENT, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B04_OVERACHIEVEMENT);
   }
 }

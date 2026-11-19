@@ -2,7 +2,6 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
 export class EcoLineMarsBot extends MarsBotCorp {
   constructor() {
@@ -14,6 +13,6 @@ export class EcoLineMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B23_RAPID_SPROUTING, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B23_RAPID_SPROUTING);
   }
 }

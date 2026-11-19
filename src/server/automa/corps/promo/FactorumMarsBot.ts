@@ -3,7 +3,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {whiteTrackCubes, addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
+import {whiteTrackCubes} from '@/server/automa/corps/corpHelpers';
 
 export class FactorumMarsBot extends MarsBotCorp {
   constructor() {
@@ -26,6 +26,6 @@ export class FactorumMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B24_SUPPLY_AND_DEMAND, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B24_SUPPLY_AND_DEMAND);
   }
 }

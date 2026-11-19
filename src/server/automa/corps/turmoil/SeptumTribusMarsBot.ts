@@ -4,7 +4,6 @@ import {DELEGATES_PER_PLAYER} from '@/common/constants';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
 export class SeptumTribusMarsBot extends MarsBotCorp {
   constructor() {
@@ -30,6 +29,6 @@ export class SeptumTribusMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B29_GRAY_EMINENCE, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B29_GRAY_EMINENCE);
   }
 }

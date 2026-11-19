@@ -4,7 +4,6 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 import {Space} from '@/server/boards/Space';
 
 export class ArcadianCommunitiesMarsBot extends MarsBotCorp {
@@ -30,6 +29,6 @@ export class ArcadianCommunitiesMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B22_SETTLERS, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B22_SETTLERS);
   }
 }

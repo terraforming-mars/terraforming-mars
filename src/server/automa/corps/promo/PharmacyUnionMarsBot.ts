@@ -18,20 +18,20 @@ export class PharmacyUnionMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B01_METEOR_SHOWER);
     marsBot.addProjectCardsToBonusDeck(Tag.SCIENCE, 1);
-    marsBot.game.log('MarsBot (Pharmacy Union): Meteor Shower removed, science card added to bonus deck');
+    marsBot.game.log('MarsBot (${0}): Meteor Shower removed, science card added to bonus deck', (b) => b.cardName(this.name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.tags.includes(Tag.SCIENCE)) {
       marsBot.raiseTR(1);
-      marsBot.game.log('MarsBot (Pharmacy Union): science card, TR +1');
+      marsBot.game.log('MarsBot (${0}): science card, TR +1', (b) => b.cardName(this.name));
     }
   }
 
   public override onHumanCardPlayed(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.tags.includes(Tag.MICROBE)) {
       marsBot.megacredits = Math.max(0, marsBot.megacredits - 4);
-      marsBot.game.log('MarsBot (Pharmacy Union): human played microbe, -4 M€');
+      marsBot.game.log('MarsBot (${0}): human played microbe, -4:r:mc:', (b) => b.cardName(this.name));
     }
   }
 }

@@ -24,13 +24,13 @@ export class SpliceMarsBot extends MarsBotCorp {
     marsBot.gainMc(8);
     marsBot.removeBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT);
     marsBot.addProjectCardsToBonusDeck(Tag.MICROBE, 1);
-    marsBot.game.log('MarsBot (Splice): +8 M€, R&D removed, microbe card added to bonus deck');
+    marsBot.game.log('MarsBot (${0}): +8:r:mc:, R&D removed, microbe card added to bonus deck', (b) => b.cardName(this.name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.tags.includes(Tag.MICROBE)) {
       marsBot.gainMc(4);
-      marsBot.game.log('MarsBot (Splice): microbe card, +4 M€');
+      marsBot.game.log('MarsBot (${0}): microbe card, +4:r:mc:', (b) => b.cardName(this.name));
     }
   }
 
@@ -39,7 +39,7 @@ export class SpliceMarsBot extends MarsBotCorp {
       return;
     }
     marsBot.gainMc(2);
-    marsBot.game.log('MarsBot (Splice): human played microbe, +2 M€');
+    marsBot.game.log('MarsBot (${0}): human played microbe, +2:r:mc:', (b) => b.cardName(this.name));
 
     // The player gains 2 M€, or adds a microbe to the card they played
     const human = marsBot.humanPlayer;

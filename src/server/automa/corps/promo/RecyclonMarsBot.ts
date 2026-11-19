@@ -25,7 +25,7 @@ export class RecyclonMarsBot extends MarsBotCorp {
   public override onTrackCubeTrigger(marsBot: IMarsBot, trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'white' && trackIndex === 0) {
       marsBot.advanceTrack(6); // Plant track = index 6
-      marsBot.game.log('MarsBot (Recyclon): white cube on building track: advance plant track');
+      marsBot.game.log('MarsBot (${0}): white cube on building track: advance plant track', (b) => b.cardName(this.name));
     }
   }
 }

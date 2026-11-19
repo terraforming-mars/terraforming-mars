@@ -17,6 +17,6 @@ export class AphroditeMarsBot extends MarsBotCorp {
   public override onVenusRaised(marsBot: IMarsBot, steps: number): void {
     const mc = 2 * steps;
     marsBot.gainMc(mc);
-    marsBot.game.log('MarsBot (Aphrodite): Venus raised ${0} step(s), +${1} M€', (b) => b.number(steps).number(mc));
+    marsBot.game.log('MarsBot (${0}): Venus raised ${1} step(s), +${2}:r:mc:', (b) => b.cardName(this.name).number(steps).number(mc));
   }
 }

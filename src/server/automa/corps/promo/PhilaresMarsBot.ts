@@ -21,7 +21,7 @@ export class PhilaresMarsBot extends MarsBotCorp {
     marsBot.removeBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
     marsBot.resolveBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
     marsBot.addBonusCardToBonusDeck(BonusCardId.B27_BUILD_BUILD_BUILD);
-    marsBot.game.log('MarsBot (Philares): placed greenery, +1 science resource, Local Neural Instance removed, B27 added');
+    marsBot.game.log('MarsBot (${0}): placed greenery, +1 science resource, Local Neural Instance removed, B27 added', (b) => b.cardName(this.name));
   }
 
   // Oceans belong to no one, so they never make an adjacency
@@ -36,7 +36,7 @@ export class PhilaresMarsBot extends MarsBotCorp {
       return;
     }
     marsBot.setCorpState('scienceResources', marsBot.getCorpState('scienceResources') + adjacencies);
-    marsBot.game.log('MarsBot (Philares): +${0} science resource(s) from new adjacencies with the player', (b) => b.number(adjacencies));
+    marsBot.game.log('MarsBot (${0}): +${1} science resource(s) from new adjacencies with the player', (b) => b.cardName(this.name).number(adjacencies));
     // No track advances once the game has ended (TDaver, BGG 3513998), so the science
     // resources stay unspent rather than paying for an advance that doesn't happen
     if (marsBot.game.isDoneWithFinalProduction()) {
@@ -48,7 +48,7 @@ export class PhilaresMarsBot extends MarsBotCorp {
         return;
       }
       marsBot.setCorpState('scienceResources', marsBot.getCorpState('scienceResources') - 4);
-      marsBot.game.log('MarsBot (Philares): spends 4 science resources to advance its most-advanced track');
+      marsBot.game.log('MarsBot (${0}): spends 4 science resources to advance its most-advanced track', (b) => b.cardName(this.name));
       marsBot.advanceTrack(trackIndex);
     }
   }

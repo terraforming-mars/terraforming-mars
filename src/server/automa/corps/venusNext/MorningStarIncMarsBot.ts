@@ -3,7 +3,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {SILVER_CUBE_MC} from '@/server/automa/corps/BaseGameCorps';
+import {SILVER_CUBE_MC} from '@/server/automa/corps/corpHelpers';
 
 export class MorningStarIncMarsBot extends MarsBotCorp {
   constructor() {
@@ -22,13 +22,13 @@ export class MorningStarIncMarsBot extends MarsBotCorp {
     marsBot.removeBonusCard(BonusCardId.B06_LOBBYISTS);
     marsBot.removeBonusCard(BonusCardId.B15_LOBBYISTS_VENUS);
     marsBot.addBonusCardToBonusDeck(BonusCardId.B26_VENUSIAN_LOBBY);
-    marsBot.game.log('MarsBot (Morning Star): Lobbyists removed, Venusian Lobby added');
+    marsBot.game.log('MarsBot (${0}): Lobbyists removed, Venusian Lobby added', (b) => b.cardName(this.name));
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'credit') {
       marsBot.gainMc(SILVER_CUBE_MC);
-      marsBot.game.log('MarsBot (Morning Star): silver resource cube, +5 M€');
+      marsBot.game.log('MarsBot (${0}): silver resource cube, +5:r:mc:', (b) => b.cardName(this.name));
     }
   }
 }

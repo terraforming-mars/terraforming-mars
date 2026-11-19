@@ -22,7 +22,7 @@ export class VironMarsBot extends MarsBotCorp {
     }
     marsBot.addFloaters(1);
     marsBot.setCorpState('actionCardsPlayed', marsBot.getCorpState('actionCardsPlayed') + 1);
-    marsBot.game.log('MarsBot (Viron): active card with an action played, +1 floater');
+    marsBot.game.log('MarsBot (${0}): active card with an action played, +1 floater', (b) => b.cardName(this.name));
   }
 
   public override vpBonus(marsBot: IMarsBot): number {

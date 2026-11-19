@@ -2,7 +2,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addFloaterAtRoundStart} from '@/server/automa/corps/BaseGameCorps';
+import {addFloaterAtRoundStart} from '@/server/automa/corps/corpHelpers';
 
 export class CelesticMarsBot extends MarsBotCorp {
   constructor() {
@@ -17,15 +17,15 @@ export class CelesticMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.addFloaters(1);
-    marsBot.game.log('MarsBot (Celestic): +1 floater');
+    marsBot.game.log('MarsBot (${0}): +1 floater', (b) => b.cardName(this.name));
   }
 
   public override onFailedAction(marsBot: IMarsBot): void {
     marsBot.addFloaters(1);
-    marsBot.game.log('MarsBot (Celestic): Failed Action, +1 floater');
+    marsBot.game.log('MarsBot (${0}): Failed Action, +1 floater', (b) => b.cardName(this.name));
   }
 
   public override roundStart(marsBot: IMarsBot): void {
-    addFloaterAtRoundStart(marsBot, 'Celestic');
+    addFloaterAtRoundStart(marsBot, this.name);
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="info_panel">
+  <div class="info-panel">
     <div class="info-panel-title" v-i18n>Game Setup Details</div>
     <GameSetupDetail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration" />
 
@@ -13,7 +13,7 @@
       </ul>
     </div>
 
-    <div class="info_panel_actions">
+    <div class="info-panel-actions">
       <button class="btn btn-lg btn-primary" @click="emit('close')" v-i18n>Ok</button>
       <button class="btn btn-lg" @click="gameOptionsPopupOpen = true" v-i18n>More...</button>
     </div>

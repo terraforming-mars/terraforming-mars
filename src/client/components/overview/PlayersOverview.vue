@@ -1,7 +1,7 @@
 <template>
   <div class="players-overview" v-if="hasPlayers">
     <OverviewSettings />
-    <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
+    <div class="other-player" v-if="thisPlayer === undefined || players.length > 1">
       <div v-for="(otherPlayer, index) in playersInOrder" :key="otherPlayer.color">
         <OtherPlayer v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index" />
       </div>

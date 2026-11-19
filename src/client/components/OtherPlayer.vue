@@ -1,11 +1,11 @@
 <template>
   <div v-show="isVisible()">
-    <div :class="'player_translucent_bg_color_' + player.color" class="other_player_header">
-      <div class="player_name">{{ player.name }} <span v-i18n>played cards</span></div>
+    <div :class="'player-translucent-bg-color-' + player.color" class="other-player-header">
+      <div class="player-name">{{ player.name }} <span v-i18n>played cards</span></div>
       <AppButton size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
     </div>
-    <div class="other_player_cont menu">
-      <div v-if="player.tableau.length > 0" class="player_home_block">
+    <div class="other-player-cont menu">
+      <div v-if="player.tableau.length > 0" class="player-home-block">
         <div>
           <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
             <Card :card="card" :actionUsed="isCardActivated(card, player)" :cubeColor="player.color" />
@@ -21,7 +21,7 @@
           <StackedCards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player" />
         </div>
       </div>
-      <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
+      <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player-home-block">
         <span v-i18n>Self-replicating Robots cards</span>
         <div>
           <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">

@@ -1,5 +1,5 @@
 <template>
-  <div class="rewards_cont">
+  <div class="rewards-cont">
     <span v-if="mostTags" class="track-icon track-icon--most-tags"></span>
     <PlanetaryTrackReward v-for="(reward, idx) in myReward" :reward="reward" :key="idx" :gameOptions="gameOptions" />
   </div>

@@ -4,7 +4,6 @@ import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
 import {maybeAdvanceTrack} from '@/server/automa/bonusCards/bonusCardHelpers';
 
-// Factorum: take up to 3 M€ from the corp card; with none taken, advance the energy track
 export class SupplyAndDemandMarsBot extends MarsBotBonusCardEffect {
   constructor() {
     super({id: BonusCardId.B24_SUPPLY_AND_DEMAND});

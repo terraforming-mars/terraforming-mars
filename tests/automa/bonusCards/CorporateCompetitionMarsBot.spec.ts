@@ -60,10 +60,9 @@ function maxTrack(marsBot: IMarsBot, tag: Tag): void {
 
 describe('CorporateCompetitionMarsBot', () => {
   for (const run of [
-    {megacredits: 4, funded: ['Thermalist'], calls: ['maybeDrawAndResolveBonusCard()'], megacreditsAfter: 4},
-    {megacredits: 5, funded: [], calls: ['maybeDrawAndResolveBonusCard()'], megacreditsAfter: 5},
-    {megacredits: 5, funded: ['Thermalist'], calls: ['advanceTrackOfTag(power)'], megacreditsAfter: 0},
-    {megacredits: 7, funded: ['Thermalist'], calls: ['advanceTrackOfTag(power)'], megacreditsAfter: 2},
+    {megacredits: 4, funded: ['Thermalist'], calls: ['maybeDrawAndResolveBonusCard()']},
+    {megacredits: 5, funded: [], calls: ['maybeDrawAndResolveBonusCard()']},
+    {megacredits: 5, funded: ['Thermalist'], calls: ['advanceTrackOfTag(power)', 'loseMc(5)']},
   ] as const) {
     it('helps with a funded award for 5 M€, else draws another bonus card: ' + JSON.stringify(run), () => {
       const bot = competitionBot();
@@ -73,23 +72,8 @@ describe('CorporateCompetitionMarsBot', () => {
       new CorporateCompetitionMarsBot().resolve(bot.marsBot);
 
       expect(bot.calls).deep.eq(run.calls);
-      expect(bot.marsBot.megacredits).eq(run.megacreditsAfter);
     });
   }
-
-  it('loses only the M€ left after a helper that cost M€', () => {
-    const bot = competitionBot({}, {
-      advanceTrackOfTag: () => {
-        bot.marsBot.megacredits -= 3;
-        return true;
-      },
-    });
-    fund(bot, 'Thermalist');
-
-    new CorporateCompetitionMarsBot().resolve(bot.marsBot);
-
-    expect(bot.marsBot.megacredits).eq(0);
-  });
 
   it('helps with Forecaster for free', () => {
     const bot = competitionBot({boardName: BoardName.TERRA_CIMMERIA_NOVA});
@@ -99,15 +83,14 @@ describe('CorporateCompetitionMarsBot', () => {
     new CorporateCompetitionMarsBot().resolve(bot.marsBot);
 
     expect(bot.calls).deep.eq(['resolveProjectCard(Algae)', 'gainMc(0)']);
-    expect(bot.marsBot.megacredits).eq(5);
   });
 
   // MarsBot scores 5 in both awards
   for (const run of [
-    {heat: 7, steel: 4, calls: ['advanceTrackOfTag(power)']},
-    {heat: 7, steel: 6, calls: ['advanceTrackOfTag(space)']},
-    {heat: 4, steel: 2, calls: ['advanceTrackOfTag(power)']},
-    {heat: 5, steel: 6, calls: ['advanceTrackOfTag(power)']},
+    {heat: 7, steel: 4, calls: ['advanceTrackOfTag(power)', 'loseMc(5)']},
+    {heat: 7, steel: 6, calls: ['advanceTrackOfTag(space)', 'loseMc(5)']},
+    {heat: 4, steel: 2, calls: ['advanceTrackOfTag(power)', 'loseMc(5)']},
+    {heat: 5, steel: 6, calls: ['advanceTrackOfTag(power)', 'loseMc(5)']},
   ] as const) {
     it('helps with the award the player leads by the least, else the one MarsBot leads by the least: ' + JSON.stringify(run), () => {
       const bot = competitionBot();
@@ -122,8 +105,8 @@ describe('CorporateCompetitionMarsBot', () => {
   }
 
   for (const run of [
-    {maxed: [Tag.POWER], calls: ['advanceTrackOfTag(space)'], megacreditsAfter: 0},
-    {maxed: [Tag.POWER, Tag.SPACE], calls: ['maybeDrawAndResolveBonusCard()'], megacreditsAfter: 5},
+    {maxed: [Tag.POWER], calls: ['advanceTrackOfTag(space)', 'loseMc(5)']},
+    {maxed: [Tag.POWER, Tag.SPACE], calls: ['maybeDrawAndResolveBonusCard()']},
   ] as const) {
     it('skips an award whose helper it cannot take: ' + JSON.stringify(run), () => {
       const bot = competitionBot();
@@ -137,7 +120,6 @@ describe('CorporateCompetitionMarsBot', () => {
       new CorporateCompetitionMarsBot().resolve(bot.marsBot);
 
       expect(bot.calls).deep.eq(run.calls);
-      expect(bot.marsBot.megacredits).eq(run.megacreditsAfter);
     });
   }
 

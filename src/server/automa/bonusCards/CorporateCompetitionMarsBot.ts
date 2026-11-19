@@ -49,8 +49,7 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
           marsBot.game.log('MarsBot (${0}): helps with ${1}', (b) => b.cardName(this.name).award(award));
         } else {
           // A helper can itself cost M€ (a colony cube), so MarsBot may have less than 5 left
-          const lost = Math.min(5, marsBot.megacredits);
-          marsBot.megacredits -= lost;
+          const lost = marsBot.loseMc(5);
           marsBot.game.log('MarsBot (${0}): helps with ${1}, loses ${2}:r:mc:', (b) => b.cardName(this.name).award(award).number(lost));
         }
         resolved = true;

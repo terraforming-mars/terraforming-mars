@@ -2,6 +2,7 @@ import {TileType} from '@/common/TileType';
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
+import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {Space} from '@/server/boards/Space';
 
@@ -21,11 +22,12 @@ export class PhilaresMarsBot extends MarsBotCorp {
     marsBot.removeBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
     marsBot.resolveBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
     marsBot.addBonusCardToBonusDeck(BonusCardId.B27_BUILD_BUILD_BUILD);
-    marsBot.game.log('MarsBot (${0}): placed greenery, +1 science resource, Local Neural Instance removed, B27 added', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): placed greenery, +1 science resource, ${1} removed, ${2} added',
+      (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE).name).cardName(createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD).name));
   }
 
-  // Oceans belong to no one, so they never make an adjacency
   public override onTilePlaced(marsBot: IMarsBot, placedByMarsBot: boolean, _tileType: TileType, space: Space): void {
+    // Oceans belong to no one, so they never make an adjacency
     if (space.player === undefined) {
       return;
     }

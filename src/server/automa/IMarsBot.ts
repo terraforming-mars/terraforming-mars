@@ -146,13 +146,6 @@ export interface IMarsBot {
   /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
   withoutTRGain(action: () => void): void;
   /**
-   * Runs `action` and caps the bot's M€ at what it was before, so the action pays the bot no M€
-   * (Government Intervention). M€ the action costs the bot stays spent.
-   *
-   * M€ that Lakefront Resorts' advance brings in stays (rulebook B, p.4).
-   */
-  withoutMcGain(action: () => void): void;
-  /**
    * Runs `action` and takes back any TR or M€ it gave the bot (Government Intervention).
    *
    * M€ that Lakefront Resorts' advance brings in stays (rulebook B, p.4).

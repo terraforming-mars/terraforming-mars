@@ -96,10 +96,14 @@ export class MarsBotTilePlacer {
     return names;
   }
 
-  /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
-  public findGreenerySpace(): Space | undefined {
+  /**
+   * Find the best space for MarsBot to place a greenery. Returns undefined if none available.
+   *
+   * @param filter limits the choice to the legal greenery spaces it accepts.
+   */
+  public findGreenerySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.marsBot.game.board;
-    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player);
+    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -149,9 +153,13 @@ export class MarsBotTilePlacer {
     return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
-  /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
-  public findOceanSpace(): Space | undefined {
-    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player);
+  /**
+   * Find the best space for MarsBot to place an ocean. Returns undefined if none available.
+   *
+   * @param filter limits the choice to the ocean spaces it accepts.
+   */
+  public findOceanSpace(filter: (space: Space) => boolean = () => true): Space | undefined {
+    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }

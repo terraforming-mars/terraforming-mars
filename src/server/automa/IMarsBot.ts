@@ -1,4 +1,5 @@
 import {BonusCardId} from '../../common/automa/AutomaTypes';
+import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
@@ -114,6 +115,10 @@ export interface IMarsBot {
    * `temperatureRaises`. Unlike a track icon, a maxed temperature does nothing, with no Failed Action.
    */
   raiseTemperature(steps: 1 | 2): void;
+  /** Asks the bot's corp whether it cancels this raise of `parameter` (Pristar). True means the parameter stays put. */
+  interceptsParameterRaise(parameter: GlobalParameter): boolean;
+  /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
+  bonusMcBlocked: boolean;
   placeOcean(): void;
   placeCity(): void;
   placeGreenery(): void;

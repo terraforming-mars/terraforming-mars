@@ -41,6 +41,6 @@ export class CityStandardProject extends StandardProjectCard {
 
   actionEssence(player: IPlayer): void {
     player.game.defer(new PlaceCityTile(player));
-    player.production.add(Resource.MEGACREDITS, 1);
+    player.production.add(Resource.MEGACREDITS, 1, {log: true});
   }
 }

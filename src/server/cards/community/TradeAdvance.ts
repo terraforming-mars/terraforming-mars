@@ -4,6 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
 
 export class TradeAdvance extends PreludeCard implements IProjectCard {
   constructor() {
@@ -39,11 +40,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
       return undefined;
     });
 
-    if (player.game.isSoloMode()) {
-      player.megaCredits += 10;
-    } else {
-      player.megaCredits += 2;
-    }
+    player.stock.add(Resource.MEGACREDITS, player.game.isSoloMode() ? 10 : 2, {log: true});
 
     return undefined;
   }

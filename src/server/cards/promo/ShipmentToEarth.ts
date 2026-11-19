@@ -38,7 +38,7 @@ export class ShipmentToEarth extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.stock.adjust(Units.of({steel: -3, plants: -3}));
+    player.stock.adjust(Units.of({steel: -3, plants: -3}), {log: true});
     return undefined;
   }
 }

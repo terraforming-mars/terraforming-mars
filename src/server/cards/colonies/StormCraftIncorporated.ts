@@ -45,7 +45,8 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
   }
 
   public spendHeat(player: IPlayer, targetAmount: number,
-    cb: () => (undefined | PlayerInput) = () => undefined): AndOptions {
+    cb: () => (undefined | PlayerInput) = () => undefined,
+    options?: {log?: boolean}): AndOptions {
     let heatAmount: number;
     let floaterAmount: number;
 
@@ -70,8 +71,8 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
       if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
         throw new Error('You cannot overspend floaters');
       }
-      player.removeResourceFrom(this, floaterAmount);
-      player.stock.deduct(Resource.HEAT, heatAmount);
+      player.removeResourceFrom(this, floaterAmount, {log: options?.log});
+      player.stock.deduct(Resource.HEAT, heatAmount, options);
       return cb();
     }).setTitle(message('Select how to spend ${0} heat', (b) => b.number(targetAmount)));
   }

@@ -145,7 +145,7 @@
 	"${0} converted heat into temperature": "${0} konverterte varme til temperatur",
 	"${0} converted plants into a greenery": "${0} konverterte planter til et skogområde",
 	"${0} traded with ${1}": "${0} handlet med ${1}",
-	"${0} used ${1} standard project": "${0} brukte standardprosjektet ${1}",
+	"${0} used ${1} standard project [ ${2} ]": "${0} brukte standardprosjektet ${1} [ ${2} ]",
 	"${0} used ${1} standard project,sold ${2} card(s)": "${0} brukte standardprosjektet ${1}, solgte ${2} kort",
 	"${0} built a colony on ${1}": "${0} bygde en koloni på ${1}",
 	"${0} bought ${1} card(s)": "${0} kjøpte ${1} kort",
@@ -171,7 +171,7 @@
 	"${0} gained +1:p:heat::p:energy:": "${0} fikk +1:p:heat::p:energy:",
 	"${0} spent 6:r:heat: to raise temperature 1 step": "${0} brukte 6:r:heat: for å øke temperaturen 1 trinn",
 	"${0} gained 2 titanium": "${0} fikk 2 titan",
-	"${0} decreased temperature 1 step": "${0} senket temperaturen 1 trinn",
+	"${0} decreased temperature ${1} step(s)": "${0} senket temperaturen ${1} trinn",
 	"${0} decreased oxygen level 1 step": "${0} senket oksygennivået 1 trinn",
 	"${0} decreased Venus scale level 1 step": "${0} senket Venus-skalaen 1 trinn",
 

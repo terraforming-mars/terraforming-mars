@@ -118,7 +118,7 @@
     "${0} converted heat into temperature": "${0} heeft warmte omgezet in temperatuur",
     "${0} converted plants into a greenery": "${0} heeft van planten een groentegel gemaakt",
     "${0} traded with ${1}": "${0} heeft met ${1} gehandeld",
-    "${0} used ${1} standard project": "${0} heeft standaardproject ${1} gebruikt",
+    "${0} used ${1} standard project [ ${2} ]": "${0} heeft standaardproject ${1} gebruikt [ ${2} ]",
     "${0} built a colony on ${1}": "${0} heeft een kolonie gesticht op ${1}",
     "${0} bought ${1} card(s)": "${0} heeft ${1} kaart(en) gekocht",
     "${0} acted as World Government and increased Venus scale": "${0} trad op als wereldregering en verhoogde de Venus-waarde",
@@ -139,7 +139,7 @@
     "${0} used Turmoil ${1} action": "${0} heeft de ${1}-actie uitgevoerd",
     "${0} gained +1:p:heat::p:energy:": "${0} ontving +1:p:heat::p:energy:",
     "${0} spent 6:r:heat: to raise temperature 1 step": "${0} betaalde 6:r:heat: om de temperatuur 1 stap te verhogen",
-    "${0} decreased temperature 1 step": "${0} heeft de temperatuur verlaagd met 1 stap",
+    "${0} decreased temperature ${1} step(s)": "${0} heeft de temperatuur met ${1} verlaagd",
     "${0} decreased oxygen level 1 step": "${0} heeft het zuurstofgehalte verminderd met 1%",
     "${0} decreased Venus scale level 1 step": "${0} verlaagde de Venus-waarde met 1",
 

@@ -240,7 +240,7 @@ export class PathfindersExpansion {
       player.production.add(Resource.TITANIUM, 1, {log: true});
       break;
     case 'tr':
-      player.increaseTerraformRating();
+      player.increaseTerraformRating(1, {log: true});
       break;
     case 'venus_scale':
       if (game.gameOptions.venusNextExtension) {

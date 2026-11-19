@@ -188,7 +188,7 @@
   "${0} converted heat into temperature": "${0} muunsi lämmön lämpötilan nostoksi",
   "${0} converted plants into a greenery": "${0} muunsi kasvit viheralueeksi",
   "${0} traded with ${1}": "${0} kauppasi ${1} kanssa",
-  "${0} used ${1} standard project": "${0} käytti standardiprojektin ${1}",
+  "${0} used ${1} standard project [ ${2} ]": "${0} käytti standardiprojektin ${1} [ ${2} ]",
   "${0} built a colony on ${1}": "${0} rakensi siirtokunnan kohteeseen ${1}",
   "${0} bought ${1} card(s)": "${0} osti ${1} korttia",
   "${0} acted as World Government and increased Venus scale": "${0} toimi maailmanhallituksena ja nosti Venus-rataa",
@@ -220,7 +220,7 @@
   "${0} spent ${1} ${2} to gain 20 M€ and 1 corruption": "${0} käytti ${1} ${2} saadakseen 20 M€ ja 1 korruption",
   "${0} spent 8 energy to raise oxygen 1 step.": "${0} käytti 8 energiaa nostaakseen happea 1 askel.",
   "${0} spent 8 energy to raise Venus 1 step.": "${0} käytti 8 energiaa nostaakseen Venusta 1 askel.",
-  "${0} decreased temperature 1 step": "${0} laski lämpötilaa 1 askel",
+  "${0} decreased temperature ${1} step(s)": "${0} laski lämpötilaa ${1} askeleen verran",
   "${0} decreased oxygen level 1 step": "${0} laski happitasoa 1 askel",
   "${0} decreased Venus scale level 1 step": "${0} laski Venus-rataa 1 askel",
 

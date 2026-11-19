@@ -342,9 +342,9 @@ export interface IPlayer {
   /** Return then amount of spendable units of a given card resource */
   getSpendable(resource: SpendableCardResource): number;
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
-  pay(payment: Payment): void;
+  pay(payment: Payment, options?: {log?: boolean}): void;
   availableHeat(): number;
-  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+  spendHeat(amount: number, cb?: () => (undefined | PlayerInput), options?: {log?: boolean}) : PlayerInput | undefined;
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: ICard): void;

@@ -125,7 +125,7 @@ export function grantGlobalParameterTrackBonuses(
       break;
     case 'tr':
       if (!solar) {
-        player.increaseTerraformRating(1);
+        player.increaseTerraformRating(1, {log: true});
       }
       break;
     default:

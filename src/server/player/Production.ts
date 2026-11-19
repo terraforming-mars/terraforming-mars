@@ -19,7 +19,7 @@ export class Production extends BaseStock {
     this[resource] += delta;
 
     if (options?.log === true) {
-      this.logUnitDelta(resource, amount, /* production*/ true, options.from, options.stealing);
+      this.logUnitDelta(resource, delta, /* production*/ true, options.from, options.stealing);
     }
 
     const from = options?.from;

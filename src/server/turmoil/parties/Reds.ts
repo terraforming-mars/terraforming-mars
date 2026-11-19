@@ -33,7 +33,7 @@ class RedsBonus01 implements IBonus {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating <= 20) {
-        player.increaseTerraformRating();
+        player.increaseTerraformRating(1, {log: true});
       }
       return;
     }
@@ -43,7 +43,7 @@ class RedsBonus01 implements IBonus {
 
     game.players.forEach((player) => {
       if (player.terraformRating === min) {
-        player.increaseTerraformRating();
+        player.increaseTerraformRating(1, {log: true});
       }
     });
   }
@@ -61,7 +61,7 @@ class RedsBonus02 implements IBonus {
     if (game.isSoloMode()) {
       const player = game.players[0];
       if (player.terraformRating > 20) {
-        player.decreaseTerraformRating();
+        player.decreaseTerraformRating(1, {log: true});
       }
       return;
     }
@@ -71,7 +71,7 @@ class RedsBonus02 implements IBonus {
 
     game.players.forEach((player) => {
       if (player.terraformRating === max) {
-        player.decreaseTerraformRating();
+        player.decreaseTerraformRating(1, {log: true});
       }
     });
   }
@@ -94,7 +94,7 @@ class RedsPolicy02 implements IPolicy {
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
-      player.game.defer(new SelectPaymentDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
+      player.game.defer(new SelectPaymentDeferred(player, amountToPay, {title: 'Select how to pay for tile placement', log: true}));
     }
   }
 }
@@ -177,7 +177,7 @@ class RedsPolicy03 implements IPolicy {
         if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
           orOptions.options.push(new SelectOption('Decrease temperature').andThen(() => {
             game.increaseTemperature(player, -1);
-            game.log('${0} decreased temperature 1 step', (b) => b.player(player));
+            game.log('${0} decreased temperature ${1} step(s)', (b) => b.player(player).number(1));
             return undefined;
           }));
         }

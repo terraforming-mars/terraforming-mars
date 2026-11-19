@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Midas} from '../../../src/server/cards/community/Midas';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Midas', () => {
   let card: Midas;
@@ -8,7 +9,7 @@ describe('Midas', () => {
 
   beforeEach(() => {
     card = new Midas();
-    player = TestPlayer.BLUE.newPlayer();
+    [/* game */, player] = testGame(1);
   });
 
   it('Starts with correct TR', () => {

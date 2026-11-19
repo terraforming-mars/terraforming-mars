@@ -367,7 +367,7 @@ export class Player implements IPlayer {
         return;
       }
       this.game.defer(
-        new SelectPaymentDeferred(this, REDS_RULING_POLICY_COST * steps, {title: 'Select how to pay for TR increase'}),
+        new SelectPaymentDeferred(this, REDS_RULING_POLICY_COST * steps, {title: 'Select how to pay for TR increase', log: true}),
         Priority.COST)
         .andThen(raiseRating);
     } else {
@@ -814,7 +814,7 @@ export class Player implements IPlayer {
     return this.resourcesOnCard(CARD_FOR_SPENDABLE_RESOURCE[SpendableResource]);
   }
 
-  public pay(payment: Payment) {
+  public pay(payment: Payment, options?: {log?: boolean}) {
     const standardUnits = Units.of({
       megacredits: payment.megacredits,
       steel: payment.steel,
@@ -822,10 +822,10 @@ export class Player implements IPlayer {
       plants: payment.plants,
     });
 
-    this.stock.deductUnits(standardUnits);
+    this.stock.deductUnits(standardUnits, options);
 
     if (payment.heat > 0) {
-      this.defer(this.spendHeat(payment.heat));
+      this.defer(this.spendHeat(payment.heat, undefined, options));
     }
 
     for (const resource of SPENDABLE_CARD_RESOURCES) {
@@ -989,7 +989,7 @@ export class Player implements IPlayer {
     this.playedCards.push(corporationCard);
 
     // Update starting MC
-    this.megaCredits += corporationCard.startingMegaCredits;
+    this.stock.add(Resource.MEGACREDITS, corporationCard.startingMegaCredits, {log: true, from: {card: corporationCard}});
     // Update card cost.
     if (corporationCard.cardCost !== undefined) {
       this.cardCost += corporationCard.cardCost - constants.CARD_COST;
@@ -1004,7 +1004,7 @@ export class Player implements IPlayer {
       if (corporationCard.name === CardName.LUNA_TRADE_FEDERATION) {
         deferredCardCost = diff;
       } else {
-        this.stock.deduct(Resource.MEGACREDITS, diff);
+        this.stock.deduct(Resource.MEGACREDITS, diff, {log: true});
       }
       if (diff > 0) {
         PathfindersExpansion.addToSolBank(this);
@@ -1016,7 +1016,7 @@ export class Player implements IPlayer {
     ColoniesHandler.maybeActivateColonies(this.game, corporationCard);
     this.defer(corporationCard.play(this));
     if (deferredCardCost > 0) {
-      this.game.defer(new SelectPaymentDeferred(this, deferredCardCost, {title: 'Select how to pay for your project cards'}));
+      this.game.defer(new SelectPaymentDeferred(this, deferredCardCost, {title: 'Select how to pay for your project cards', log: true}));
     }
     if (corporationCard.initialAction !== undefined && corporationCard.initialActionText !== undefined) {
       this.pendingInitialActions.push(corporationCard);
@@ -1069,12 +1069,16 @@ export class Player implements IPlayer {
     return this.heat + (floaters * 2);
   }
 
-  public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
+  public spendHeat(
+    amount: number,
+    cb: () => (undefined | PlayerInput) = () => undefined,
+    options?: {log?: boolean},
+  ) : PlayerInput | undefined {
     const stormcraft = <StormCraftIncorporated> this.tableau.get(CardName.STORMCRAFT_INCORPORATED);
     if (stormcraft?.resourceCount > 0) {
-      return stormcraft.spendHeat(this, amount, cb);
+      return stormcraft.spendHeat(this, amount, cb, options);
     }
-    this.stock.deduct(Resource.HEAT, amount);
+    this.stock.deduct(Resource.HEAT, amount, options);
     return cb();
   }
 
@@ -1202,7 +1206,7 @@ export class Player implements IPlayer {
             .andThen((space) => {
               // Do not raise oxygen or award TR for final greenery placements
               this.game.addGreenery(this, space, false);
-              this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery);
+              this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery, {log: true});
 
               // Resolve Philares deferred actions and maybe place another greenery
               resolveFinalGreeneryDeferredActions();

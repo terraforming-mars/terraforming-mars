@@ -43,6 +43,6 @@ export class ConvertHeat extends StandardActionCard {
       this.actionUsed(player);
       player.game.increaseTemperature(player, 1);
       return undefined;
-    });
+    }, {log: true});
   }
 }

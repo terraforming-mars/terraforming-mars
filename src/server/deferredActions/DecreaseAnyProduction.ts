@@ -38,6 +38,10 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
+      if (this.options.stealing === true) {
+        this.player.game.log('${0} gained ${1}${2}', (b) =>
+          b.player(this.player).number(this.options.count).production(this.resource));
+      }
       this.cb(true);
     } else {
       const targets = this.player.game.players.filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));

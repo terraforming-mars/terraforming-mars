@@ -56,7 +56,7 @@ export class Ambient extends CorporationCard implements ICorporationCard {
       player.defer(() => {
         player.actionsThisGeneration.delete(this.name);
       });
-      player.increaseTerraformRating();
+      player.increaseTerraformRating(1, {log: true});
       return undefined;
     });
   }

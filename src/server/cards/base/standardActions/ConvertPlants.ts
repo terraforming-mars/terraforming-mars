@@ -5,6 +5,7 @@ import {IPlayer} from '../../../IPlayer';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {Units} from '../../../../common/Units';
 import {message} from '../../../logs/MessageBuilder';
+import {Resource} from '../../../../common/Resource';
 
 
 export class ConvertPlants extends StandardActionCard {
@@ -48,7 +49,7 @@ export class ConvertPlants extends StandardActionCard {
       .andThen((space) => {
         this.actionUsed(player);
         player.game.addGreenery(player, space);
-        player.plants -= player.plantsNeededForGreenery;
+        player.stock.deduct(Resource.PLANTS, player.plantsNeededForGreenery, {log: true});
         return undefined;
       });
   }

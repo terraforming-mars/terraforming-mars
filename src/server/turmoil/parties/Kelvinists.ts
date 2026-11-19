@@ -61,7 +61,7 @@ class KelvinistsPolicy01 implements IPolicy {
   action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.KELVINISTS));
-    game.defer(new SelectPaymentDeferred(player, this.cost(player), {title: TITLES.payForPartyAction(PartyName.KELVINISTS)}))
+    game.defer(new SelectPaymentDeferred(player, this.cost(player), {title: TITLES.payForPartyAction(PartyName.KELVINISTS), log: true}))
       .andThen(() => {
         player.production.add(Resource.ENERGY, 1);
         player.production.add(Resource.HEAT, 1);

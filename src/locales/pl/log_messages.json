@@ -74,7 +74,7 @@
   "${0} converted heat into temperature": "${0} wykorzystuje ciepło, aby podnieść temperaturę",
   "${0} converted plants into a greenery": "${0} wykorzystuje jednostki roślinności, aby umieścić na planszy obszar zieleni",
   "${0} traded with ${1}": "${0} wykonuje akcję handlu z ${1}",
-  "${0} used ${1} standard project": "${0} wykorzystuje projekt standardowy ${1}",
+  "${0} used ${1} standard project [ ${2} ]": "${0} wykorzystuje projekt standardowy ${1} [ ${2} ]",
   "${0} built a colony on ${1}": "${0} umieszcza kolonię na ${1}.",
   "${0} bought ${1} card(s)": "${0} kupuje karty w ilości: ${1}.",
   "${0} acted as World Government and increased Venus scale": "${0} wykorzystuje akcję Działań Rządu Światowego i podnosi Współczynnik Terraformacji Wenus",
@@ -95,7 +95,7 @@
   "${0} used Turmoil ${1} action": "${0} korzysta z akcji ${1}.",
   "${0} gained +1:p:heat::p:energy:": "${0} otrzymuje +1:p:heat::p:energy:.",
   "${0} spent 6:r:heat: to raise temperature 1 step": "${0} wydaje 6:r:heat:, i podnosi temperaturę o 1 poziom.",
-  "${0} decreased temperature 1 step": "${0} obniża temperaturę o 1 poziom",
+  "${0} decreased temperature ${1} step(s)": "${0} obniża poziom temperatury o ${1}",
   "${0} decreased oxygen level 1 step": "${0} obniża poziom tlenu o 1 poziom",
   "${0} decreased Venus scale level 1 step": "${0} obniża Współczynnik Terraformacji Wenus o 1 poziom",
 

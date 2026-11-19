@@ -213,7 +213,7 @@
   "${0} converted heat into temperature": "${0} hat Wärme in einen Temperaturanstieg investiert",
   "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
   "${0} traded with ${1}": "${0} hat mit ${1} gehandelt",
-  "${0} used ${1} standard project": "${0} hat Standardprojekt ${1} genutzt",
+  "${0} used ${1} standard project [ ${2} ]": "${0} hat Standardprojekt ${1} genutzt [ ${2} ]",
   "${0} built a colony on ${1}": "${0} hat eine Kolonie auf ${1} errichtet",
   "${0} bought ${1} card(s)": "${0} hat ${1} Karte(n) gekauft",
   "${0} bought ${1}": "${0} hat ${1} gekauft",
@@ -249,7 +249,7 @@
   "${0} spent ${1} ${2} to gain 20 M€ and 1 corruption": "${0} gab ${1} ${2} aus, um 20 M€ und 1 Korruption zu erhalten",
   "${0} spent 8 energy to raise oxygen 1 step.": "${0} hat 8 Energie ausgegeben, um den Sauerstoffgehalt um 1% zu erhöhen.",
   "${0} spent 8 energy to raise Venus 1 step.": "${0} hat 8 Energie ausgegeben, um die Venuswertung um 2% zu erhöhen.",
-  "${0} decreased temperature 1 step": "${0} senkte die Temperatur um 2 °C",
+  "${0} decreased temperature ${1} step(s)": "${0} senkte die Temperatur um ${1} Temperaturschritt(e)",
   "${0} decreased oxygen level 1 step": "${0} senkte den Sauerstoffgehalt um 1%",
   "${0} decreased Venus scale level 1 step": "${0} senkte die Venuswertung um 2%",
 

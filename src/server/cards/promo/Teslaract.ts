@@ -37,7 +37,7 @@ export class Teslaract extends Card implements IActionCard {
   }
 
   action(player: IPlayer): undefined {
-    player.production.adjust(Units.of({energy: -1, plants: 1}));
+    player.production.adjust(Units.of({energy: -1, plants: 1}), {log: true});
     return undefined;
   }
 }

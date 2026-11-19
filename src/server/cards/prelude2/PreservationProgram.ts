@@ -32,7 +32,7 @@ export class PreservationProgram extends PreludeCard {
     player.preservationProgram = player.trThisGeneration === 0;
     // This is executed now because if it were in `behavior` it would be
     // rewarded before the effect was put in place.
-    player.increaseTerraformRating(5);
+    player.increaseTerraformRating(5, {log: true});
     return undefined;
   }
 }

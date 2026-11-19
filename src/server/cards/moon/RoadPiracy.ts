@@ -86,11 +86,11 @@ export class RoadPiracy extends Card implements IProjectCard {
     if (game.isSoloMode()) {
       return new OrOptions(
         new SelectOption(stealSteel, 'Steal steel').andThen(() => {
-          player.steel += 6;
+          player.stock.add(Resource.STEEL, 6, {log: true});
           return undefined;
         }),
         new SelectOption(stealTitanium, 'Steal titanium').andThen(() => {
-          player.titanium += 4;
+          player.stock.add(Resource.TITANIUM, 4, {log: true});
           return undefined;
         }),
       );

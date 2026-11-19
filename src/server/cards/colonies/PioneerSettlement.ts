@@ -73,7 +73,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;
     player.game.defer(new BuildColony(player, {title: 'Select colony for Pioneer Settlement', colonies: openColonies}));
-    player.production.add(Resource.MEGACREDITS, -2);
+    player.production.add(Resource.MEGACREDITS, -2, {log: true});
     return undefined;
   }
 }

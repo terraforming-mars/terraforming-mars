@@ -55,7 +55,7 @@ export class IndustrialComplex extends PreludeCard {
     }
     player.production.adjust(production, {log: true});
 
-    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits, {log: true}));
     return undefined;
   }
 }

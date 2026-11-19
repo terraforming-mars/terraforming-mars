@@ -24,6 +24,16 @@ describe('Potatoes', () => {
     expect(card.canPlay(player)).is.true;
   });
 
+  it('spends two plants before Viral Enhancers replaces one', () => {
+    player.plants = 1;
+    player.playedCards.push(new ViralEnhancers());
+
+    player.playCard(card);
+
+    expect(player.plants).eq(0);
+    expect(player.production.megacredits).eq(2);
+  });
+
   it('Should play', () => {
     player.plants = 2;
     expect(card.canPlay(player)).is.true;

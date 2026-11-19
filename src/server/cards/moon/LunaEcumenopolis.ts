@@ -110,7 +110,7 @@ export class LunaEcumenopolis extends Card {
     player.game.defer(new CustomPlaceMoonTile(player));
     player.defer(() => {
       const habitatRate = MoonExpansion.moonData(player.game).habitatRate;
-      player.increaseTerraformRating(Math.floor(habitatRate / 2));
+      player.increaseTerraformRating(Math.floor(habitatRate / 2), {log: true});
     });
     return undefined;
   }

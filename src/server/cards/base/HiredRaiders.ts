@@ -33,11 +33,11 @@ export class HiredRaiders extends Card implements IProjectCard {
     if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel').andThen(() => {
-          player.steel += 2;
+          player.stock.add(Resource.STEEL, 2, {log: true});
           return undefined;
         }),
         new SelectOption('Steal 3 M€', 'Steal M€').andThen(() => {
-          player.megaCredits += 3;
+          player.stock.add(Resource.MEGACREDITS, 3, {log: true});
           return undefined;
         }),
       );

@@ -773,7 +773,7 @@ export class Game implements IGame, Logger {
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
-      this.players[0].production.add(Resource.MEGACREDITS, -2);
+      this.players[0].production.add(Resource.MEGACREDITS, -2, {log: true});
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
@@ -1498,6 +1498,7 @@ export class Game implements IGame, Logger {
       if (this.canAddOcean()) {
         this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}))
           .andThen(() => {
+            this.log('${0} lost ${1}${2}', (b) => b.player(player).number(constants.HELLAS_BONUS_OCEAN_COST).resource(Resource.MEGACREDITS));
             this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
             return undefined;
           });
@@ -1523,7 +1524,7 @@ export class Game implements IGame, Logger {
         this.defer(new SelectPaymentDeferred(
           player,
           constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST,
-          {title: 'Select how to pay for placement bonus temperature'}))
+          {title: 'Select how to pay for placement bonus temperature', log: true}))
           .andThen(() => this.increaseTemperature(player, 1));
       }
       break;

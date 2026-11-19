@@ -364,6 +364,7 @@ export class Executor implements BehaviorExecutor {
           title: TITLES.payForCardAction(card.name),
           canUseSteel: spend.canUseSteel,
           canUseTitanium: spend.canUseTitanium,
+          log: true,
         })).andThen(() => this.execute(remainder, player, inputCard));
         // Exit early as the rest of handled by the deferred action.
         return;
@@ -372,18 +373,18 @@ export class Executor implements BehaviorExecutor {
       player.pay(Payment.of({
         steel: spend.steel ?? 0,
         titanium: spend.titanium ?? 0,
-      }));
+      }), {log: true});
       if (spend.plants) {
-        player.stock.deduct(Resource.PLANTS, spend.plants);
+        player.stock.deduct(Resource.PLANTS, spend.plants, {log: true});
       }
       if (spend.energy) {
-        player.stock.deduct(Resource.ENERGY, spend.energy);
+        player.stock.deduct(Resource.ENERGY, spend.energy, {log: true});
       }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat, () => {
           this.execute(remainder, player, card);
           return undefined;
-        }));
+        }, {log: true}));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -525,7 +526,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.tr !== undefined) {
       const count = ctx.count(behavior.tr);
-      const log = typeof(behavior.tr) === 'object';
+      const log = count !== 0;
       if (count >= 0) {
         player.increaseTerraformRating(count, {log: log});
       } else {

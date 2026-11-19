@@ -250,6 +250,7 @@ describe('Executor', () => {
 
   it('tr', () => {
     expect(player.terraformRating).eq(20);
+    game.gameLog.length = 0;
 
     executor.execute({tr: 2}, player, fake);
 
@@ -258,6 +259,12 @@ describe('Executor', () => {
     executor.execute({tr: -1}, player, fake);
 
     expect(player.terraformRating).eq(21);
+    executor.execute({tr: {underworld: {undergroundTokens: {}}, per: 4}}, player, fake);
+    expect(player.terraformRating).eq(21);
+    expect(game.gameLog.map(formatMessage)).deep.eq([
+      'blue gained 2:i:tr:',
+      'blue lost 1:i:tr:',
+    ]);
   });
 
   it('ocean - first player places, acting player is credited (Icy Impactors)', () => {

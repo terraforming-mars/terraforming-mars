@@ -14,7 +14,7 @@
   "${0} spent ${1}:r:energy: to trade with ${2}": "${0} похарчи ${1}:r:energy: за търговия с ${2}",
   "${0} spent ${1}:r:titanium: to trade with ${2}": "${0} похарчи ${1}:r:titanium: за търговия с ${2}",
   "${0} spent 1:cr:floater: to trade with ${1}": "${0} похарчи 1:cr:floater: за търговия с ${1}",
-  "${0} used ${1} standard project": "${0} използва стандартен проект ${1}",
+  "${0} used ${1} standard project [ ${2} ]": "${0} използва стандартен проект ${1} [ ${2} ]",
   "${0} used ${1} standard action": "${0} използва стандартно действие ${1}",
   "${0} built a colony on ${1}": "${0} изгражда колония на ${1}",
   "${0} bought ${1} card(s)": "${0} закупи ${1} карта(и)",

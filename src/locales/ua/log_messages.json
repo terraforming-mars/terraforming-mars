@@ -160,7 +160,7 @@
   "${0} converted heat into temperature": "${0} перетворив(ла) тепло на температуру",
   "${0} converted plants into a greenery": "${0} перетворив(ла) рослини на ліс",
   "${0} traded with ${1}": "${0} торгував(ла) з ${1}",
-  "${0} used ${1} standard project": "${0} використав(ла) стандартний проект ${1}",
+  "${0} used ${1} standard project [ ${2} ]": "${0} використав(ла) стандартний проект ${1} [ ${2} ]",
   "${0} built a colony on ${1}": "${0} побудував(ла) колонію на ${1}",
   "${0} bought ${1} card(s)": "${0} придбав(ла) ${1} карт(и)",
   "${0} acted as World Government and increased Venus scale": "${0} діяв(ла) як Всесвітній уряд і збільшив(ла) шкалу Венери",
@@ -191,7 +191,7 @@
   "${0} spent ${1}:r:corruption:": "${0} витратив(ла) ${1}:r:corruption:",
   "${0} spent 8 energy to raise oxygen 1 step.": "${0} витратив(ла) 8 одиниць енергії, щоб збільшити рівень кисню на 1.",
   "${0} spent 8 energy to raise Venus 1 step.": "${0} витратив(ла) 8 одиниць енергії, щоб збільшити шкалу Венери на 1.",
-  "${0} decreased temperature 1 step": "${0} знизив(ла) температуру на 1",
+  "${0} decreased temperature ${1} step(s)": "${0} знизив(ла) температуру на ${1}",
   "${0} decreased oxygen level 1 step": "${0} знизив(ла) рівень кисню на 1",
   "${0} decreased Venus scale level 1 step": "${0} знизив(ла) шкалу Венери на 1",
 

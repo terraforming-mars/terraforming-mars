@@ -23,6 +23,6 @@ export class PowerPlantStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: IPlayer): void {
-    player.production.add(Resource.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1, {log: true});
   }
 }

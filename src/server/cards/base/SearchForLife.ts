@@ -49,12 +49,12 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name), log: true}))
       .andThen(() => {
         const card = player.game.projectDeck.drawOrThrow(player.game);
         player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, {tags: true}));
         if (card.tags.includes(Tag.MICROBE)) {
-          player.addResourceTo(this, 1);
+          player.addResourceTo(this, {log: true});
           player.game.log('${0} found life!', (b) => b.player(player));
         }
 

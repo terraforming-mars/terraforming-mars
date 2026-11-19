@@ -5,6 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
 
 export class Moss extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +37,10 @@ export class Moss extends Card implements IProjectCard {
     return hasEnoughPlants;
   }
   public override bespokePlay(player: IPlayer) {
+    // Viral Enhancers gives the replacement plant after this cost is applied.
+    // Keep the temporary deficit so that existing card interactions continue to work.
     player.plants--;
+    player.game.log('${0} lost ${1}${2}', (b) => b.player(player).number(1).resource(Resource.PLANTS));
     return undefined;
   }
 }

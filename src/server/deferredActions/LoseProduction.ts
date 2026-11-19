@@ -5,6 +5,7 @@ import {Priority} from './Priority';
 
 export type Options = {
   count?: number;
+  log?: boolean;
 }
 
 export class LoseProduction extends DeferredAction {
@@ -24,7 +25,7 @@ export class LoseProduction extends DeferredAction {
     } else if (this.options.count === 0) {
       return undefined;
     }
-    this.player.production.add(this.resource, -this.options.count);
+    this.player.production.add(this.resource, -this.options.count, {log: this.options.log ?? true});
     return undefined;
   }
 }

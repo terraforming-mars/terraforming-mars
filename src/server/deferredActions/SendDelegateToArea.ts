@@ -62,7 +62,7 @@ export class SendDelegateToArea extends DeferredAction {
     const sendDelegate = new SelectParty(this.title, 'Send delegate', availableParties)
       .andThen((partyName) => {
         if (this.options.cost) {
-          this.player.game.defer(new SelectPaymentDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
+          this.player.game.defer(new SelectPaymentDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action', log: true}));
         }
 
         for (let i = 0; i < numDelegateToSend; i++) {

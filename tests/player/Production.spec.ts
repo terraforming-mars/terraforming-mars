@@ -99,6 +99,14 @@ describe('Production', () => {
     player.production.add(Resource.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];
     expect(formatMessage(logEntry)).eq('blue gained 12:p:mc:');
+
+    player.production.megacredits = -4;
+    log.length = 0;
+
+    player.production.add(Resource.MEGACREDITS, -2, {log: true});
+
+    expect(player.production.megacredits).eq(-5);
+    expect(log.map(formatMessage)).deep.eq(['blue lost 1:p:mc:']);
   });
 
   it('add logging from player', () => {

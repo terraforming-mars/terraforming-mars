@@ -389,7 +389,7 @@ export class UnderworldExpansion {
       player.game.defer(new GainAnyResourceButScienceDeferred(player));
       break;
     case 'tr':
-      player.increaseTerraformRating();
+      player.increaseTerraformRating(1, {log: true});
       break;
     case 'ocean':
       const canAddOcean = player.game.canAddOcean();

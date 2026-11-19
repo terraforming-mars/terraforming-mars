@@ -8,6 +8,7 @@ import {digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {Resource} from '../../../common/Resource';
 
 export class GuerillaEcologists extends Card implements IProjectCard {
   constructor() {
@@ -47,7 +48,10 @@ export class GuerillaEcologists extends Card implements IProjectCard {
       return undefined;
     }
 
-    player.plants -= 4; // This temporarily breaks things if the player only has 3, but Viral Enhancers makes up for it.
+    // Viral Enhancers gives the replacement plant after this cost is applied.
+    // Keep the temporary deficit so that existing card interactions continue to work.
+    player.plants -= 4;
+    player.game.log('${0} lost ${1}${2}', (b) => b.player(player).number(4).resource(Resource.PLANTS));
     return new SelectSpace('Select space for greenery tile', availableSpaces)
       .andThen((space) => {
         player.game.addGreenery(player, space);

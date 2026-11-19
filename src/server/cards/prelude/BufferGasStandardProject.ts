@@ -21,6 +21,6 @@ export class BufferGasStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: IPlayer): void {
-    player.increaseTerraformRating();
+    player.increaseTerraformRating(1, {log: true});
   }
 }

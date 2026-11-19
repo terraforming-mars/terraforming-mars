@@ -16,6 +16,7 @@ export type Options = {
   canUseGraphene?: boolean;
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
+  log?: boolean;
   reserveUnits?: Units | undefined;
   title?: string | Message;
 }
@@ -69,7 +70,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
       const payment = Payment.of({megacredits: this.amount});
-      this.player.pay(payment);
+      this.player.pay(payment, {log: this.options.log});
       this.cb(payment);
       return undefined;
     }
@@ -89,7 +90,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         graphene: this.options.canUseGraphene || false,
       }, this.options.reserveUnits)
       .andThen((payment) => {
-        this.player.pay(payment);
+        this.player.pay(payment, {log: this.options.log});
         this.cb(payment);
         return undefined;
       });

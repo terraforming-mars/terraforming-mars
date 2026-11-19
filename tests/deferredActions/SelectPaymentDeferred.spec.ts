@@ -4,6 +4,7 @@ import {SelectPaymentDeferred} from '../../src/server/deferredActions/SelectPaym
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {Payment} from '../../src/common/inputs/Payment';
 import {testGame} from '../TestGame';
+import {formatMessage} from '../TestingUtils';
 import {cast} from '@/common/utils/utils';
 
 console.log('hello');
@@ -23,16 +24,18 @@ describe('SelectPaymentDeferred', () => {
   });
 
   it('spends megacredits without asking when there is nothing else to spend', () => {
-    const [/* game */, player] = testGame(1);
+    const [game, player] = testGame(1);
     player.megaCredits = 10;
     player.steel = 5;
 
-    const action = new SelectPaymentDeferred(player, 4).andThen(cb);
+    game.gameLog.length = 0;
+    const action = new SelectPaymentDeferred(player, 4, {log: true}).andThen(cb);
 
     expect(action.execute()).is.undefined;
     expect(paid).deep.eq(Payment.of({megacredits: 4}));
     expect(player.megaCredits).eq(6);
     expect(player.steel).eq(5);
+    expect(game.gameLog.map(formatMessage)).deep.eq(['blue lost 4:r:mc:']);
   });
 
   it('asks how to pay when a resource other than megacredits can be spent', () => {

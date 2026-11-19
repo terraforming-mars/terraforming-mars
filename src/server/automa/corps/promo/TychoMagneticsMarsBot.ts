@@ -15,6 +15,6 @@ export class TychoMagneticsMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.addBonusCardToBottomOfBonusDeck(BonusCardId.B30_INTERFACE_HYPERLINK);
-    marsBot.game.log('MarsBot (Tycho Magnetics): Interface Hyperlink added to the bottom of the bonus deck');
+    marsBot.game.log('MarsBot (${0}): Interface Hyperlink added to the bottom of the bonus deck', (b) => b.cardName(this.name));
   }
 }

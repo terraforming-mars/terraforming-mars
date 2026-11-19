@@ -19,7 +19,7 @@ export class SpireMarsBot extends MarsBotCorp {
     const tagCount = cardTagsIncludingEvent(card).length;
     if (tagCount >= 2) {
       marsBot.setCorpState('scienceResources', marsBot.getCorpState('scienceResources') + 1);
-      marsBot.game.log(`MarsBot (Spire): card with ${tagCount} tags, +1 science resource`);
+      marsBot.game.log('MarsBot (${0}): card with ${1} tags, +1 science resource', (b) => b.cardName(this.name).number(tagCount));
     }
   }
 
@@ -29,7 +29,7 @@ export class SpireMarsBot extends MarsBotCorp {
       marsBot.setCorpState('scienceResources', science - 10);
       marsBot.placeCity();
       marsBot.raiseTR(1);
-      marsBot.game.log('MarsBot (Spire): spent 10 science, placed city + TR +1');
+      marsBot.game.log('MarsBot (${0}): spent 10 science, placed city + TR +1', (b) => b.cardName(this.name));
     }
   }
 }

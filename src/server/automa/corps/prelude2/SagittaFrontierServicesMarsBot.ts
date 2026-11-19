@@ -16,7 +16,7 @@ export class SagittaFrontierServicesMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.gainMc(8);
-    marsBot.game.log('MarsBot (Sagitta): +8 M€');
+    marsBot.game.log('MarsBot (${0}): +8:r:mc:', (b) => b.cardName(this.name));
   }
 
   // Tagless card: double the Failed Action (10 M€ instead of 5, 6 instead of 3 on Easy). 1-tag card: +1 M€.
@@ -25,10 +25,10 @@ export class SagittaFrontierServicesMarsBot extends MarsBotCorp {
     if (tagCount === 0) {
       const extra = marsBot.failedActionMc;
       marsBot.gainMc(extra);
-      marsBot.game.log('MarsBot (Sagitta): tagless card, Failed Action pays ${0} M€ more', (b) => b.number(extra));
+      marsBot.game.log('MarsBot (${0}): tagless card, Failed Action pays ${1}:r:mc: more', (b) => b.cardName(this.name).number(extra));
     } else if (tagCount === 1) {
       marsBot.gainMc(1);
-      marsBot.game.log('MarsBot (Sagitta): 1-tag card, +1 M€');
+      marsBot.game.log('MarsBot (${0}): 1-tag card, +1:r:mc:', (b) => b.cardName(this.name));
     }
   }
 }

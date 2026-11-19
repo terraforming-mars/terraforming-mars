@@ -2,7 +2,7 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/BaseGameCorps';
+import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
 export class RobinsonIndustriesMarsBot extends MarsBotCorp {
   constructor() {
@@ -15,10 +15,10 @@ export class RobinsonIndustriesMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.gainMc(10);
-    marsBot.game.log('MarsBot (Robinson Industries): +10 M€');
+    marsBot.game.log('MarsBot (${0}): +10:r:mc:', (b) => b.cardName(this.name));
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B28_DIVERSIFICATION, 'Robinson Industries');
+    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B28_DIVERSIFICATION, this.name);
   }
 }

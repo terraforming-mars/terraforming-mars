@@ -30,7 +30,7 @@ export class PalladinShippingMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.gainMc(5);
-    marsBot.game.log('MarsBot (Palladin): +5 M€');
+    marsBot.game.log('MarsBot (${0}): +5:r:mc:', (b) => b.cardName(this.name));
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
@@ -43,9 +43,9 @@ export class PalladinShippingMarsBot extends MarsBotCorp {
       marsBot.setCorpState('whiteCubesOnCard', white - 1);
       marsBot.setCorpState('blackCubesOnCard', black - 1);
       marsBot.raiseTemperature(1);
-      marsBot.game.log('MarsBot (Palladin): paired cubes: temperature +1');
+      marsBot.game.log('MarsBot (${0}): paired cubes: temperature +1', (b) => b.cardName(this.name));
     } else {
-      marsBot.game.log(`MarsBot (Palladin): ${cubeType} cube collected (W:${marsBot.getCorpState('whiteCubesOnCard')}, B:${marsBot.getCorpState('blackCubesOnCard')})`);
+      marsBot.game.log('MarsBot (${0}): ${1} cube collected (W:${2}, B:${3})', (b) => b.cardName(this.name).rawString(cubeType).number(marsBot.getCorpState('whiteCubesOnCard')).number(marsBot.getCorpState('blackCubesOnCard')));
     }
   }
 }

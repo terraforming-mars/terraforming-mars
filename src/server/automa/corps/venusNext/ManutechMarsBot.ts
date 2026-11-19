@@ -19,7 +19,7 @@ export class ManutechMarsBot extends MarsBotCorp {
 
   public override afterTrackSpaceResolved(marsBot: IMarsBot, trackIndex: number, position: number): void {
     if (position === 5 || position === 12) {
-      marsBot.game.log(`MarsBot (Manutech): track ${trackIndex + 1} reached #${position}, advance 1 more`);
+      marsBot.game.log('MarsBot (${0}): track ${1} reached #${2}, advance 1 more', (b) => b.cardName(this.name).number(trackIndex + 1).number(position));
       marsBot.advanceTrack(trackIndex);
     }
   }

@@ -20,13 +20,13 @@ export class ValleyTrustMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.drawProjectCardsToActionDeck(1); // "Obtain 1 card"
-    marsBot.game.log('MarsBot (Valley Trust): drew 1 card');
+    marsBot.game.log('MarsBot (${0}): drew 1 card', (b) => b.cardName(this.name));
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'white') {
       marsBot.maybeDrawAndResolveProjectCard();
-      marsBot.game.log('MarsBot (Valley Trust): white cube: drew and resolved 1 card');
+      marsBot.game.log('MarsBot (${0}): white cube: drew and resolved 1 card', (b) => b.cardName(this.name));
     }
   }
 }

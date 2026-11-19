@@ -3,7 +3,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {SILVER_CUBE_MC} from '@/server/automa/corps/BaseGameCorps';
+import {SILVER_CUBE_MC} from '@/server/automa/corps/corpHelpers';
 
 export class CheungShingMARSMarsBot extends MarsBotCorp {
   constructor() {
@@ -20,7 +20,7 @@ export class CheungShingMARSMarsBot extends MarsBotCorp {
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'credit') {
       marsBot.gainMc(SILVER_CUBE_MC);
-      marsBot.game.log('MarsBot (Cheung Shing): silver resource cube reached, +5 M€');
+      marsBot.game.log('MarsBot (${0}): silver resource cube reached, +5:r:mc:', (b) => b.cardName(this.name));
     }
   }
 }

@@ -25,10 +25,10 @@ export class KuiperCooperativeMarsBot extends MarsBotCorp {
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'white') {
       marsBot.raiseTemperature(1);
-      marsBot.game.log('MarsBot (Kuiper): white cube: temperature +1');
+      marsBot.game.log('MarsBot (${0}): white cube: temperature +1', (b) => b.cardName(this.name));
     } else if (cubeType === 'black') {
       marsBot.placeOcean();
-      marsBot.game.log('MarsBot (Kuiper): black cube: place ocean');
+      marsBot.game.log('MarsBot (${0}): black cube: place ocean', (b) => b.cardName(this.name));
     }
   }
 }

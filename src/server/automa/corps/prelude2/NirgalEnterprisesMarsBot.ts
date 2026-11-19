@@ -15,7 +15,7 @@ export class NirgalEnterprisesMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    marsBot.game.log('MarsBot (Nirgal): Overachievement removed from bonus deck');
+    marsBot.game.log('MarsBot (${0}): Overachievement removed from bonus deck', (b) => b.cardName(this.name));
   }
 
   public override awardScoreBonus(): number {
@@ -27,11 +27,11 @@ export class NirgalEnterprisesMarsBot extends MarsBotCorp {
     const generation = marsBot.game.generation;
     if ((generation >= 2 && generation <= 5) || generation >= 10) {
       if (!marsBot.maybeClaimMilestone()) {
-        marsBot.game.log('MarsBot (Nirgal): no milestone to claim');
+        marsBot.game.log('MarsBot (${0}): no milestone to claim', (b) => b.cardName(this.name));
       }
     } else if (generation >= 6 && generation <= 9) {
       if (!marsBot.maybeFundAward()) {
-        marsBot.game.log('MarsBot (Nirgal): no award to fund');
+        marsBot.game.log('MarsBot (${0}): no award to fund', (b) => b.cardName(this.name));
       }
     }
   }

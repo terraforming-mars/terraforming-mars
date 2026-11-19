@@ -2,7 +2,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {whiteTrackCubes} from '@/server/automa/corps/BaseGameCorps';
+import {whiteTrackCubes} from '@/server/automa/corps/corpHelpers';
 
 export class EcotecMarsBot extends MarsBotCorp {
   constructor() {
@@ -17,14 +17,14 @@ export class EcotecMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.setCorpState('plantResources', 2);
-    marsBot.game.log('MarsBot (Ecotec): 2 plant resources on card');
+    marsBot.game.log('MarsBot (${0}): 2 plant resources on card', (b) => b.cardName(this.name));
   }
 
   // Per tag, so a card with two plant tags adds two plants (rulebook B, p.1 card C40)
   public override onTagResolved(marsBot: IMarsBot, tag: Tag): void {
     if (tag === Tag.PLANT || tag === Tag.MICROBE || tag === Tag.ANIMAL) {
       marsBot.setCorpState('plantResources', marsBot.getCorpState('plantResources') + 1);
-      marsBot.game.log('MarsBot (Ecotec): Plant/Microbe/Animal tag, +1 plant resource on card');
+      marsBot.game.log('MarsBot (${0}): Plant/Microbe/Animal tag, +1 plant resource on card', (b) => b.cardName(this.name));
     }
   }
 
@@ -33,7 +33,7 @@ export class EcotecMarsBot extends MarsBotCorp {
     if (plants >= 5) {
       marsBot.setCorpState('plantResources', plants - 5);
       marsBot.advanceTrack(6); // Plant track = index 6
-      marsBot.game.log('MarsBot (Ecotec): spent 5 plant resources, advance plant track');
+      marsBot.game.log('MarsBot (${0}): spent 5 plant resources, advance plant track', (b) => b.cardName(this.name));
     }
   }
 }

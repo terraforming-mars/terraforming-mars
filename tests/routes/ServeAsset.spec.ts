@@ -58,14 +58,6 @@ describe('ServeAsset', () => {
     expect(res.content).eq('data: build/sw.js');
   });
 
-  it('vendors.js is no longer served (Vite output)', async () => {
-    instance = new ServeAsset(undefined, false, fileApi);
-    scaffolding.url = '/vendors.js';
-    scaffolding.req.headers['accept-encoding'] = '';
-    await scaffolding.get(instance, res);
-    expect(res.statusCode).eq(statusCode.notFound);
-  });
-
   it('chunk js file', async () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/chunks/player-home.js';

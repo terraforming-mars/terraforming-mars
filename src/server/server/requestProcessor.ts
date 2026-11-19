@@ -168,6 +168,7 @@ export function metricsPathOf(pathname: string): string {
   if (pathname.startsWith('assets/')) {
     return 'assets/';
   }
+  // Remove the hash part from the name, eg: main-A1b2C3d4.js => main.js
   return pathname.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:js|css)(?:\.map)?$)/, '');
 }
 

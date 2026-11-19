@@ -1,5 +1,5 @@
 <template>
-  <div class="player_home_block--underground-tokens">
+  <div class="player-home-block--underground-tokens">
     <div class="underground-tokens">
       <UndergroundToken
         v-for="(token, idx) in underworldData.tokens"

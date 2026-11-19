@@ -12,7 +12,7 @@
       <GoalRadioButton heading="Randomness" name="maRandomness" :choices="RANDOMNESS" :labels="RANDOMNESS_LABELS" :modelValue="goals.random.randomness" @update:modelValue="update({random: {...goals.random, randomness: $event}})" />
     </template>
 
-    <GoalChooser v-if="goals.type === 'manual'" :selected="goals.selected" @update:selected="update({selected: $event})" :limit="limit" />
+    <GoalChooser v-if="goals.type === 'manual'" :selected="goals.selected" @update:selected="update({selected: $event})" />
   </PopupPanel>
 </template>
 
@@ -23,11 +23,6 @@ import GoalRadioButton from './GoalRadioButton.vue';
 import {WIKI_URLS} from '@/client/utils/WikiLinks';
 import {GoalSettings, POOLS, RANDOM_GOAL_TYPES, RANDOMNESS} from './types';
 import {POOL_LABELS, RANDOM_GOAL_TYPE_LABELS, RANDOMNESS_LABELS} from './labels';
-
-defineProps<{
-  /** How many milestones, and how many awards, a hand-picked selection needs. */
-  limit: number,
-}>();
 
 defineEmits<{'close': []}>();
 

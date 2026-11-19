@@ -67,7 +67,7 @@ describe('Award', () => {
     });
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
-    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].color}`);
+    expect(scoreWrapper.classes()).to.includes(`player-bg-color-${award.scores[0].color}`);
   });
 
   it('shows sorted players scores', () => {

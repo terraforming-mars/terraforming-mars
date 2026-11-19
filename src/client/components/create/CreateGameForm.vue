@@ -120,14 +120,14 @@
               <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-random" for="randomAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('random') }}</span>
                   </label>
                 </div>
 
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('chairman')" id="chairmanAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-chairman" for="chairmanAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-chairman" for="chairmanAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('chairman') }}</span>
                   </label>
                 </div>
@@ -167,7 +167,7 @@
 
             <input type="checkbox" name="deltaProject" id="deltaProject-checkbox" v-model="expansions.deltaProject">
             <label for="deltaProject-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-deltaProject"></div>
+              <div class="create-game-expansion-icon expansion-icon-deltaproject"></div>
               <span v-i18n>Delta Project</span>&nbsp;<span title="Alpha — work in progress">(&#945;)</span><span></span>&nbsp;<a :href="wikiUrls.deltaProject" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
             </label>
           </div>
@@ -364,10 +364,7 @@
               <span v-i18n>Random first player</span>
             </label>
 
-            <GoalButton
-              v-model="goals"
-              :expansions="expansions"
-            />
+            <GoalButton v-model="goals" />
 
             <template v-if="expansions.venus">
               <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
@@ -376,10 +373,29 @@
               </label>
             </template>
 
-            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
-            <label for="realTimeVP-checkbox">
+            <div class="create-game-subsection-label">
               <span v-i18n>Show real-time VP</span>&nbsp;<a :href="wikiUrls.showRealtimeVP" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-            </label>
+            </div>
+            <div class="create-game-page-column-row create-game-showVP-options">
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="none" id="showVP-none-radio">
+                <label class="label-showVP" for="showVP-none-radio">
+                  <span v-i18n>None</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="yours" id="showVP-yours-radio">
+                <label class="label-showVP" for="showVP-yours-radio">
+                  <span v-i18n>Yours</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="all" id="showVP-all-radio">
+                <label class="label-showVP" for="showVP-all-radio">
+                  <span v-i18n>All</span>
+                </label>
+              </div>
+            </div>
 
             <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
             <label for="fastMode-checkbox">
@@ -696,7 +712,7 @@ export default defineComponent({
         players: this.players.slice(0, this.playersCount),
         expansions: this.expansions,
         draftVariant: this.draftVariant,
-        showOtherPlayersVP: this.showOtherPlayersVP,
+        showVP: this.showVP,
         customCorporationsList: this.customCorporations,
         customColoniesList: this.customColonies,
         customCeos: this.customCeos,

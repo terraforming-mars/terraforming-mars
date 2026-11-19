@@ -59,7 +59,7 @@ describe('Game', () => {
       awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
     } as const;
     expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
-      .to.throw('customMA must have 5 awards');
+      .to.throw('You must have between 3 and 8 custom awards');
     expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
       .to.throw('Politician needs the Turmoil expansion');
   });
@@ -929,6 +929,24 @@ describe('Game', () => {
       penaltyVPPerPeriod: 1,
     });
   });
+
+  const legacyShowVPCases = [
+    {showOtherPlayersVP: true, expected: 'all'},
+    {showOtherPlayersVP: false, expected: 'yours'},
+    {showOtherPlayersVP: undefined, expected: 'yours'},
+  ] as const;
+  for (const {showOtherPlayersVP, expected} of legacyShowVPCases) {
+    it(`deserializing a game converts legacy showOtherPlayersVP ${showOtherPlayersVP} to showVP ${expected}`, () => {
+      const player = TestPlayer.BLUE.newPlayer();
+      const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+      const serialized = game.serialize();
+      Reflect.deleteProperty(serialized.gameOptions, 'showVP');
+      Reflect.set(serialized.gameOptions, 'showOtherPlayersVP', showOtherPlayersVP);
+      const deserialized = Game.deserialize(serialized);
+      expect(deserialized.gameOptions.showVP).eq(expected);
+      expect(deserialized.gameOptions).does.not.have.property('showOtherPlayersVP');
+    });
+  }
 
   it('deserializing a game with legacy colony space ids', () => {
     const player = TestPlayer.BLUE.newPlayer();

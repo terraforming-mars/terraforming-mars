@@ -5,6 +5,7 @@ const ICON_SUFFIXES: Partial<Record<GameModule, string>> = {
   corpera: 'CE',
   colonies: 'colony',
   moon: 'themoon',
+  deltaProject: 'deltaproject',
 };
 
 /**

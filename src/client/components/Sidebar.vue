@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar_cont sidebar" :class="sideBarClass">
+  <div class="sidebar-cont sidebar" :class="sideBarClass">
     <div class="tm" :title="$t('Generation Marker')">
       <div class="gen-text" v-i18n>GEN</div>
       <div class="gen-marker">{{ genMarker }}</div>
@@ -7,53 +7,53 @@
     <div v-if="gameOptions.expansions.turmoil" :title="$t('Ruling Party')">
       <div class="party-name party-name-indicator" :class="rulingPartyClass"> <span v-i18n>{{ rulingParty }}</span></div>
     </div>
-    <div class="global_params">
+    <div class="global-params">
       <GlobalParameterValue :param="globalParameter.TEMPERATURE" :value="temperature" :boardName="gameOptions.boardName" />
       <GlobalParameterValue :param="globalParameter.OXYGEN" :value="oxygen" :boardName="gameOptions.boardName" />
       <GlobalParameterValue :param="globalParameter.OCEANS" :value="oceans" :boardName="gameOptions.boardName" />
       <GlobalParameterValue v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus" :boardName="gameOptions.boardName" />
       <MoonGlobalParameterValue v-if="moonData" :moonData="moonData" />
     </div>
-    <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
-      <div class="preferences_player_inner" :class="[`player_bg_color_${playerColor}`, {active: isAnimated}]"></div>
+    <div class="sidebar-item preferences-player" :title="$t('Player Color Cube')">
+      <div class="preferences-player-inner" :class="[`player-bg-color-${playerColor}`, {active: isAnimated}]"></div>
     </div>
 
     <a href="#board" :title="$t('Jump to board')">
-      <div class="sidebar_item sidebar_item_shortcut">
-        <i class="sidebar_icon sidebar_icon--board"></i>
+      <div class="sidebar-item sidebar-item-shortcut">
+        <i class="sidebar-icon sidebar-icon--board"></i>
       </div>
     </a>
     <a href="#actions" :title="$t('Jump to actions')">
-      <div class="sidebar_item sidebar_item_shortcut">
-        <i class="sidebar_icon sidebar_icon--actions"></i>
+      <div class="sidebar-item sidebar-item-shortcut">
+        <i class="sidebar-icon sidebar-icon--actions"></i>
       </div>
     </a>
     <a href="#cards" :title="$t('Jump to cards')">
-      <div class="sidebar_item goto-cards sidebar_item_shortcut-long">
-        <i class="sidebar_icon sidebar_icon--cards">
+      <div class="sidebar-item goto-cards sidebar-item-shortcut-long">
+        <i class="sidebar-icon sidebar-icon--cards">
           <div class="deck-size">🂠{{ deckSize }}<br>🗑{{ discardPileSize }}</div>
         </i>
       </div>
     </a>
     <a v-if="coloniesCount > 0" href="#colonies" :title="$t('Jump to colonies')">
-      <div class="sidebar_item sidebar_item_shortcut">
-        <i class="sidebar_icon sidebar_icon--colonies"></i>
+      <div class="sidebar-item sidebar-item-shortcut">
+        <i class="sidebar-icon sidebar-icon--colonies"></i>
       </div>
     </a>
 
     <LanguageIcon />
 
-    <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
-      <i class="sidebar_icon sidebar_icon--info"
-        :class="{'sidebar_item--is-active': ui.gamesetup_detail_open}"
+    <div class="sidebar-item sidebar-item--info" :title="$t('Information panel')">
+      <i class="sidebar-icon sidebar-icon--info"
+        :class="{'sidebar-item--is-active': ui.gamesetup_detail_open}"
         @click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
         :title="$t('game setup details')"></i>
       <InfoPanel v-if="ui.gamesetup_detail_open" :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration" :deckSize="deckSize" :discardPileSize="discardPileSize" :otherDeckSizes="otherDeckSizes" @close="ui.gamesetup_detail_open=false" />
     </div>
 
     <a href="help" target="_blank">
-      <div class="sidebar_item sidebar_item--help">
-        <i class="sidebar_icon sidebar_icon--help" :title="$t('player aid')"></i>
+      <div class="sidebar-item sidebar-item--help">
+        <i class="sidebar-icon sidebar-icon--help" :title="$t('player aid')"></i>
       </div>
     </a>
 
@@ -163,7 +163,7 @@ export default defineComponent({
       return this.actingPlayer && getPreferences().hide_animated_sidebar === false;
     },
     sideBarClass(): string {
-      return this.isAnimated ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.isAnimated ? 'preferences-acting-player' : 'preferences-nonacting-player';
     },
     genMarker(): string {
       return `${this.generation}`;

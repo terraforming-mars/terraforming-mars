@@ -8,6 +8,7 @@ import {AgendaStyle} from '../../common/turmoil/Types';
 import {Expansion} from '../../common/cards/GameModule';
 import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
+import {ShowVP} from '../../common/game/ShowVP';
 
 export type GameOptions = {
   boardName: BoardName;
@@ -17,7 +18,7 @@ export type GameOptions = {
   undoOption: boolean;
   showTimers: boolean;
   fastModeOption: boolean;
-  showOtherPlayersVP: boolean;
+  showVP: ShowVP;
 
   // Extensions -- Deprecated, except when importing JSON
   corporateEra: boolean;
@@ -136,7 +137,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   requiresMoonTrackCompletion: false,
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
-  showOtherPlayersVP: false,
+  showVP: 'yours',
   showTimers: true,
   shuffleMapOption: false,
   solarPhaseOption: false,

@@ -43,11 +43,6 @@
   opacity: 1; /* Firefox */
 }
 
-.form-input::-ms-input-placeholder {
-  /* Internet Explorer 10-11, Microsoft Edge */
-  color: #888888;
-}
-
 .tooltip:hover {
   text-decoration: none;
 }
@@ -236,10 +231,10 @@
   background-color: rgba(0,0,0,.3);
 }
 
-.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle {
+.create-game-page-column input[type="radio"]:checked + label.label-agenda-style {
   position: relative;
 }
-.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle::after {
+.create-game-page-column input[type="radio"]:checked + label.label-agenda-style::after {
   position: absolute;
   width: 40px;
   height: 12px;
@@ -250,12 +245,21 @@
   background-color: rgb(199, 199, 199);
 }
 
-.agendaStyle-random {
+.create-game-showVP-options {
+  margin-bottom: 10px;
+}
+
+.create-game-page-column label.label-showVP {
+  min-width: 0;
+  padding: 10px;
+}
+
+.agenda-style-random {
   width: 105px;
   min-width: 105px !important;
 }
 
-.agendaStyle-chairman {
+.agenda-style-chairman {
   width: 115px;
   min-width: 115px !important;
 }

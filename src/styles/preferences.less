@@ -1,4 +1,4 @@
-.sidebar_cont {
+.sidebar-cont {
   white-space: nowrap;
   position: fixed;
   left: 0px;
@@ -14,11 +14,11 @@
 /* On touch screens the page is scaled down to fit the 1260px viewport, which makes the sidebar and corner icons too small to tap.
    Portrait only: in landscape there is not enough height for a larger sidebar. */
 @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
-  .sidebar_cont,
+  .sidebar-cont,
   .card-list-container .free-floating-preferences-icon {
     zoom: 2;
   }
-  .main-container:has(.sidebar_cont) {
+  .main-container:has(.sidebar-cont) {
     margin-left: 120px;
   }
 }
@@ -46,7 +46,7 @@
     font-size: 34px;
   }
 
-  .global_params {
+  .global-params {
     width: 60px;
     margin-bottom: 5px;
   }
@@ -87,7 +87,7 @@
     margin-top: 10px;
   }
 
-  .global_params_value {
+  .global-params-value {
     text-align: center;
     font-family: "Prototype", sans-serif;
     margin-top: -5px;
@@ -111,7 +111,7 @@
     margin-bottom: 5px;
   }
 
-  .moon_params_value {
+  .moon-params-value {
     text-align: center;
     font-family: "Prototype", sans-serif;
     font-size: 15px;
@@ -134,7 +134,7 @@
   }
 }
 
-.preferences_acting_player {
+.preferences-acting-player {
   background: linear-gradient(
     180deg,
     @grey_850 0%,
@@ -143,7 +143,7 @@
     #745b54 100%
   );
 }
-.preferences_nonacting_player {
+.preferences-nonacting-player {
   background: @grey_850;
 }
 .preferences-divider {
@@ -152,27 +152,27 @@
   width: 80%;
   margin-bottom: 8px;
 }
-.sidebar_item {
+.sidebar-item {
   width: 46px;
   background: black;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 8px;
 }
-.sidebar_item_shortcut {
+.sidebar-item-shortcut {
   height: 60px;
 }
-.sidebar_item_shortcut-long {
+.sidebar-item-shortcut-long {
   height: 74px;
 }
 
-.sidebar_item--language {
+.sidebar-item--language {
   position: absolute;
   bottom: 162px;
   height: 46px;
 }
 
-.sidebar_item--info {
+.sidebar-item--info {
   position: absolute;
   bottom: 111px;
   left: 0px;
@@ -180,7 +180,7 @@
   height: 46px;
 }
 
-.sidebar_item--help {
+.sidebar-item--help {
   position: absolute;
   bottom: 60px;
   left: 0px;
@@ -188,14 +188,14 @@
   height: 46px;
 }
 
-.sidebar_item--settings {
+.sidebar-item--settings {
   position: fixed;
   bottom: 4px;
   height: 46px;
   z-index: 110;
 }
 
-.preferences_player {
+.preferences-player {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   padding: 10px;
@@ -204,12 +204,11 @@
   overflow: hidden;
 }
 
-.preferences_player_inner {
+.preferences-player-inner {
   width: 26px;
   height: 26px;
   border-radius: 3px;
   &.active {
-    -webkit-animation: rotation 8s infinite linear;
     animation: rotation 8s infinite linear;
     box-shadow: 0 0 5px 2px #fff;
   }
@@ -224,46 +223,46 @@
   }
 }
 
-.sidebar_icon {
+.sidebar-icon {
   width: 36px;
   height: 36px;
   cursor: pointer;
   display: inline-block;
 }
 
-.sidebar_icon.sidebar_icon--actions {
+.sidebar-icon.sidebar-icon--actions {
   margin-top: 7px;
   background-image: url(./assets/sidebar/preferences_actions.png);
 }
 
-.sidebar_icon.sidebar_icon--cards {
+.sidebar-icon.sidebar-icon--cards {
   background-image: url(./assets/sidebar/preferences_cards.png);
 }
 
-.sidebar_icon.sidebar_icon--board {
+.sidebar-icon.sidebar-icon--board {
   margin-top: 7px;
   background-image: url(./assets/sidebar/preferences_board.png);
 }
 
-.sidebar_icon.sidebar_icon--language {
+.sidebar-icon.sidebar-icon--language {
   font-size: 15px;
 }
 
-.sidebar_icon.sidebar_icon--info {
+.sidebar-icon.sidebar-icon--info {
   background-image: url(./assets/sidebar/preferences_info.png);
   background-size: 36px 36px;
 }
 
-.sidebar_icon.sidebar_icon--help {
+.sidebar-icon.sidebar-icon--help {
   background-image: url(./assets/sidebar/preferences_help.png);
   background-size: 36px 36px;
 }
 
-.sidebar_icon.sidebar_icon--settings {
+.sidebar-icon.sidebar-icon--settings {
   background-image: url(./assets/sidebar/preferences_settings.png);
 }
 
-.sidebar_icon.sidebar_icon--colonies {
+.sidebar-icon.sidebar-icon--colonies {
   background-image: url(./assets/sidebar/preferences_colony.png);
   background-size: 25px;
   width: 25px;
@@ -271,11 +270,11 @@
   margin-left: 5px;
 }
 
-.preferences_panel_actions {
+.preferences-panel-actions {
   text-align: center;
 }
 
-.preferences_panel {
+.preferences-panel {
   padding: 15px 15px 15px 20px;
   display: inline-block;
   position: absolute;
@@ -287,13 +286,13 @@
   overflow-y: auto;
   white-space: nowrap;
 
-  &.preferences_panel--language-switcher {
+  &.preferences-panel--language-switcher {
     bottom: -140px;
     left: 52px;
   }
 }
 
-.sidebar_item--is-active::after {
+.sidebar-item--is-active::after {
   content: " ";
   width: 10px;
   height: 46px;
@@ -302,12 +301,12 @@
   margin: -5px 0 0 38px;
 }
 
-.sidebar_icon--language.sidebar_item--is-active::after {
+.sidebar-icon--language.sidebar-item--is-active::after {
   height: 46px;
   margin: -38px 0 0 38px;
 }
 
-.preferences_panel .tooltip::after {
+.preferences-panel .tooltip::after {
   right: auto;
   white-space: normal;
 }
@@ -315,63 +314,63 @@
 /* Visual effects of changing settings */
 
 /* Reduce all cards size */
-.preferences_small_cards .filterDiv,
-.preferences_small_cards .filterDiv:hover {
+.preferences-small-cards .filter-div,
+.preferences-small-cards .filter-div:hover {
   transform: scale(0.8);
   margin: -22px -15px -15px -15px;
 }
-.preferences_small_cards .filterDiv.card-standard-project,
-.preferences_small_cards .filterDiv:hover.card-standard-project {
+.preferences-small-cards .filter-div.card-standard-project,
+.preferences-small-cards .filter-div:hover.card-standard-project {
   margin: -0px -10px -15px -10px;
 }
 
 /*Selection check box room for smaller cards */
-.preferences_small_cards input[type="checkbox"] + .filterDiv.card-container,
-.preferences_small_cards input[type="radio"] + .filterDiv.card-container {
+.preferences-small-cards input[type="checkbox"] + .filter-div.card-container,
+.preferences-small-cards input[type="radio"] + .filter-div.card-container {
   margin-top: -8px;
 }
 
-.preferences_small_cards input[type="checkbox"] + .filterDiv.card-standard-project,
-.preferences_small_cards input[type="radio"] + .filterDiv.card-standard-project {
+.preferences-small-cards input[type="checkbox"] + .filter-div.card-standard-project,
+.preferences-small-cards input[type="radio"] + .filter-div.card-standard-project {
   margin-top: 0px;
 }
 
-.preferences_small_cards input[type="checkbox"]:checked + .filterDiv,
-.preferences_small_cards input[type="radio"]:checked + .filterDiv {
+.preferences-small-cards input[type="checkbox"]:checked + .filter-div,
+.preferences-small-cards input[type="radio"]:checked + .filter-div {
   transform: scale(0.8);
 }
 
 /* Hide blocks */
-.preferences_hide_awards_and_milestones .player_home_block--milestones-and-awards {
+.preferences-hide-awards-and-milestones .player-home-block--milestones-and-awards {
   display: none;
 }
 
 /* Remove background */
-.preferences_remove_background #player-home {
+.preferences-remove-background #player-home {
   background: @grey_900;
 }
 
-.preferences_remove_background #spectator-home {
+.preferences-remove-background #spectator-home {
   background: @grey_900;
 }
 
 /* Card Magnification */
 /* Only on devices with a real pointer; on touch screens :hover sticks after a tap. */
 @media (hover: hover) and (pointer: fine) {
-  .preferences_magnify_cards {
-    .filterDiv {
+  .preferences-magnify-cards {
+    .filter-div {
       transition: transform 0.15s;
     }
-    .filterDiv:hover {
+    .filter-div:hover {
       transform: scale(1.2);
       z-index: 100;
     }
 
-    .dragging .filterDiv:hover {
+    .dragging .filter-div:hover {
       transform: none;
     }
 
-    .sortable-cards > div:active .filterDiv {
+    .sortable-cards > div:active .filter-div {
       transition: none;
       transform: none;
     }
@@ -388,7 +387,7 @@
     }
   }
   /* Magnify the wee little cards in a special way, if requested */
-  .preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
+  .preferences-small-cards.preferences-magnify-cards .filter-div:hover {
     transform: scale(0.95);
   }
 }
@@ -402,7 +401,7 @@
   padding-top: 15px;
 }
 
-.info_panel {
+.info-panel {
   padding: 15px 50px 15px 20px;
   display: inline-block;
   position: absolute;
@@ -415,11 +414,11 @@
 }
 
 // Outranks .game-setup-detail-container .game-config, which sets the margin.
-.info_panel .game-config.info-panel-deck-size {
+.info-panel .game-config.info-panel-deck-size {
   margin-left: auto;
 }
 
-.info_panel_actions {
+.info-panel-actions {
   text-align: center;
 }
 
@@ -439,23 +438,23 @@
 // positioned (bottom: 162px) and its popup opens at bottom: -140px. On the
 // non-game pages (the cards list and the start screen) we want it in the
 // bottom-left corner, just above the preferences gear. That gear
-// (.sidebar_item--settings) is position: fixed; bottom: 4px and ~46px tall, so
+// (.sidebar-item--settings) is position: fixed; bottom: 4px and ~46px tall, so
 // it ignores normal flow and pins itself to the viewport bottom. To sit above
 // it we likewise pin the flag, clearing the gear, and align it flush with the
 // gear's left edge (the free-floating container sits flush in the corner).
-.corner-language-icon.sidebar_item--language {
+.corner-language-icon.sidebar-item--language {
   position: fixed;
   bottom: 58px;
   left: 0;
 
   // The little black connector tab that points back at the sidebar makes no
   // sense in the corner.
-  .sidebar_icon--language.sidebar_item--is-active::after {
+  .sidebar-icon--language.sidebar-item--is-active::after {
     display: none;
   }
 
   // Open the language popup up-and-to-the-right of the flag so it stays on screen.
-  .preferences_panel.preferences_panel--language-switcher {
+  .preferences-panel.preferences-panel--language-switcher {
     bottom: 0;
     left: 100%;
   }
@@ -474,8 +473,8 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .preferences_panel:not(.preferences_panel--language-switcher),
-  .preferences_panel.preferences_panel--language-switcher {
+  .preferences-panel:not(.preferences-panel--language-switcher),
+  .preferences-panel.preferences-panel--language-switcher {
     box-sizing: border-box;
     position: fixed;
     left: 8px;
@@ -488,18 +487,18 @@
     white-space: normal;
   }
 
-  .corner-language-icon.sidebar_item--language
-  .preferences_panel.preferences_panel--language-switcher {
+  .corner-language-icon.sidebar-item--language
+  .preferences-panel.preferences-panel--language-switcher {
     left: 8px;
     bottom: 8px;
   }
 
-  .preferences_panel_item label {
+  .preferences-panel-item label {
     white-space: normal;
     line-height: 1.35;
   }
 
-  .preferences_panel_actions {
+  .preferences-panel-actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

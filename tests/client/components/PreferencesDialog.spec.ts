@@ -47,4 +47,22 @@ describe('PreferencesDialog', () => {
 
     expect(preferencesManager.values().hide_awards_and_milestones).is.true;
   });
+
+  it('marks the page with the class the stylesheet uses for a preference that is on', () => {
+    const target = document.createElement('div');
+    target.id = 'ts-preferences-target';
+    document.body.appendChild(target);
+    preferencesManager.set('small_cards', true);
+    try {
+      mount(PreferencesDialog, {
+        ...globalConfig,
+        props: {preferencesManager},
+      });
+
+      expect(target.classList.contains('preferences-small-cards')).is.true;
+    } finally {
+      target.remove();
+      preferencesManager.set('small_cards', false);
+    }
+  });
 });

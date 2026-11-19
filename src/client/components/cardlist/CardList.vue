@@ -145,8 +145,8 @@
 
     <section v-show="visibleColonyNames.length > 0">
       <h2 v-i18n>Colonies</h2>
-      <div class="player_home_colony_cont">
-        <div class="player_home_colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
+      <div class="player-home-colony-cont">
+        <div class="player-home-colony" v-for="colonyName in visibleColonyNames" :key="colonyName" v-memo="[colonyName, showMetadata]">
           <Colony :colony="colonyModel(colonyName)" />
         </div>
       </div>
@@ -154,8 +154,8 @@
 
     <section v-show="visibleMilestoneNames.length > 0">
       <h2 v-i18n>Milestones</h2>
-      <div class="player_home_colony_cont">
-        <div class="player_home_colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
+      <div class="player-home-colony-cont">
+        <div class="player-home-colony" v-for="milestoneName in visibleMilestoneNames" :key="milestoneName" v-memo="[milestoneName]">
           <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
             <Milestone :milestone="milestoneModel(milestoneName)" :showDescription="true" />
           </div>
@@ -165,8 +165,8 @@
 
     <section v-show="visibleAwardNames.length > 0">
       <h2 v-i18n>Awards</h2>
-      <div class="player_home_colony_cont">
-        <div class="player_home_colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
+      <div class="player-home-colony-cont">
+        <div class="player-home-colony" v-for="awardName in visibleAwardNames" :key="awardName" v-memo="[awardName]">
           <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that? -->
             <Award :award="awardModel(awardName)" :showDescription="true" />
           </div>
@@ -176,15 +176,15 @@
 
     <section v-show="visibleAgendaIds.length > 0">
       <h2 v-i18n>Agendas</h2>
-      <div class="player_home_colony_cont">
-        <div class="player_home_colony" v-for="id in visibleAgendaIds" :key="id" v-memo="[id]">
+      <div class="player-home-colony-cont">
+        <div class="player-home-colony" v-for="id in visibleAgendaIds" :key="id" v-memo="[id]">
           <TurmoilAgendaContainer :agendaId="id" />
         </div>
       </div>
     </section>
 
     <div class="free-floating-preferences-icon">
-      <div v-show="scrolled" class="sidebar_item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
+      <div v-show="scrolled" class="sidebar-item card-list-scroll-top" title="Scroll to top" @click="scrollToTop()">
         <div class="card-list-scroll-top-arrow">↑</div>
       </div>
       <LanguageIcon class="corner-language-icon" />
@@ -230,6 +230,7 @@ import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {textFitMetrics} from '@/client/utils/textFit';
+import {expansionIconClass} from '@/client/utils/expansionIcon';
 
 
 type Refs = {
@@ -289,13 +290,7 @@ export default defineComponent({
       ];
     },
     allTags(): Array<TagOption> {
-      const results: Array<TagOption> = [];
-      for (const tag in Tag) {
-        if (Object.hasOwn(Tag, tag)) {
-          results.push((<any>Tag)[tag]);
-        }
-      }
-      return results.concat('none');
+      return [...getEnumStringValues(Tag), 'none'];
     },
     allResources(): Array<ResourceOption> {
       return [...getEnumStringValues(CardResource), 'none'];
@@ -448,15 +443,7 @@ export default defineComponent({
         return this.searchIndex.matches(this.filterText, type, name);
       }
     },
-    expansionIconClass(expansion: GameModule): string {
-      switch (expansion) {
-      case 'base': return 'expansion-icon-base';
-      case 'corpera': return 'expansion-icon-CE';
-      case 'colonies': return 'expansion-icon-colony';
-      case 'moon': return 'expansion-icon-themoon';
-      default: return `expansion-icon-${expansion}`;
-      }
-    },
+    expansionIconClass,
     filterByTags(card: ClientCard): boolean {
       if (card.tags.length === 0) {
         return this.tags['none'] === true;

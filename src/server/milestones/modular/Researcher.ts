@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 
 export class Researcher extends BaseMilestone {
+  public readonly automaDescription = 'Science track ≥ 4';
   constructor() {
     super(
       'Researcher',

@@ -1,17 +1,17 @@
 <template>
-  <div class="resource_item" :class="mainCSS">
-    <div class="resource_item_stock">
-      <span class="resource_icon tooltip tooltip-bottom" :class="iconCSS" :data-tooltip="resourceTypeTooltip"></span>
-      <div class="resource_item_stock_count" data-test="stock-count">{{ count }}</div>
+  <div class="resource-item" :class="mainCSS">
+    <div class="resource-item-stock">
+      <span class="resource-icon tooltip tooltip-bottom" :class="iconCSS" :data-tooltip="resourceTypeTooltip"></span>
+      <div class="resource-item-stock-count" data-test="stock-count">{{ count }}</div>
     </div>
-    <div class="resource_item_prod">
-      <span class="resource_item_prod_count tooltip tooltip-bottom" data-test="production" :data-tooltip="productionCountTooltip">{{ productionSign }}{{ production }}</span>
-      <div class="shield_parent" data-test="protection-shield"> <!-- Why is this a child of resource_item_prod? -->
+    <div class="resource-item-prod">
+      <span class="resource-item-prod-count tooltip tooltip-bottom" data-test="production" :data-tooltip="productionCountTooltip">{{ productionSign }}{{ production }}</span>
+      <div class="shield-parent" data-test="protection-shield"> <!-- Why is this a child of resource-item-prod? -->
         <div v-if="protectionIcon !== ''" :class="protectionIcon"></div>
-        <div v-if="showProductionProtectedIcon" class="shield_production_protection"></div>
-        <div v-if="showResourceProtectionIcon" class="shield_resource_protection"></div>
+        <div v-if="showProductionProtectedIcon" class="shield-production-protection"></div>
+        <div v-if="showResourceProtectionIcon" class="shield-resource-protection"></div>
       </div>
-      <div v-if="showResourceValue" class="resource_icon--megacredit-value" data-test="resource-value">{{ value }}</div>
+      <div v-if="showResourceValue" class="resource-icon--megacredit-value" data-test="resource-value">{{ value }}</div>
     </div>
   </div>
 </template>
@@ -69,10 +69,10 @@ export default defineComponent({
       }
     },
     mainCSS(): string {
-      return 'resource_item--' + this.type;
+      return 'resource-item--' + this.type;
     },
     iconCSS(): string {
-      return 'resource_icon--' + this.type;
+      return 'resource-icon--' + this.type;
     },
     productionSign(): string {
       if (this.production > 0) {
@@ -82,13 +82,13 @@ export default defineComponent({
     },
     protectionIcon(): string {
       if (this.resourceProtection === 'on') {
-        return 'shield_icon';
+        return 'shield-icon';
       }
       if (this.resourceProtection === 'half') {
-        return 'shield_icon_half';
+        return 'shield-icon-half';
       }
       if (this.productionProtection === 'on') {
-        return 'shield_icon';
+        return 'shield-icon';
       }
       return '';
     },

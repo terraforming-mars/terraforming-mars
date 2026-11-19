@@ -195,10 +195,13 @@ class MilestoneProcessor {
   public static json: Array<ClientMilestone> = [];
   public static makeJson() {
     milestoneNames.forEach((name) => {
+      const milestone = milestoneManifest.createOrThrow(name);
       MilestoneProcessor.json.push({
         name,
-        description: milestoneManifest.createOrThrow(name).description,
+        description: milestone.description,
         requirements: milestoneManifest.all[name].compatibility,
+        automaDescription: milestone.automaDescription,
+        automaMapDescriptions: milestone.automaMapDescriptions,
       });
     });
   }
@@ -208,10 +211,13 @@ class AwardProcessor {
   public static json: Array<ClientAward> = [];
   public static makeJson() {
     awardNames.forEach((name) => {
+      const award = awardManifest.createOrThrow(name);
       AwardProcessor.json.push({
         name,
-        description: awardManifest.createOrThrow(name).description,
+        description: award.description,
         requirements: awardManifest.all[name].compatibility,
+        automaDescription: award.automaDescription,
+        automaMapDescriptions: award.automaMapDescriptions,
       });
     });
   }

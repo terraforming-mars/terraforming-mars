@@ -46,7 +46,7 @@ function newGameConfig(overrides: Partial<NewGameConfig> = {}): NewGameConfig {
     undoOption: false,
     showTimers: false,
     fastModeOption: false,
-    showOtherPlayersVP: false,
+    showVP: 'yours',
     aresExtremeVariant: false,
     politicalAgendasExtension: 'Standard',
     solarPhaseOption: false,
@@ -96,8 +96,9 @@ const NO_ERRORS: ValidationErrors = {
   prelude2WithoutPrelude: false,
   deltaProjectWithoutPrelude: false,
   notEnoughCorporations: 0,
-  modularMAInDevelopment: false,
   invalidCustomMA: '',
+  milestonesMissingExpansions: false,
+  awardsMissingExpansions: false,
 };
 
 function helpers(
@@ -106,6 +107,8 @@ function helpers(
   return {
     getCardCompatibility: (name) => cards[name] ?? [],
     getColonyExpansion: (name) => colonies[name],
+    getMilestoneExpansion: (name) => name === 'Terraformer' ? 'moon' : undefined,
+    getAwardExpansion: (name) => name === 'Politician' ? 'turmoil' : undefined,
   };
 }
 
@@ -202,11 +205,6 @@ describe('validateNewGameConfig', () => {
     expect(validate({expansions: {...expansions, prelude: true}}).deltaProjectWithoutPrelude).is.false;
   });
 
-  it('warns that the official random milestones and awards are in development', () => {
-    expect(validate({modularMA: true}).modularMAInDevelopment).is.true;
-    expect(validate({modularMA: false}).modularMAInDevelopment).is.false;
-  });
-
   it('not enough corporations', () => {
     const corps = [CardName.ECOLINE, CardName.HELION, CardName.THORGATE];
     expect(validate({customCorporationsList: corps}).notEnoughCorporations).eq(4);
@@ -290,7 +288,36 @@ describe('validateNewGameConfig', () => {
     expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA}).invalidCustomMA).eq('');
     expect(validate({randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('randomMA Manual requires customMA');
     expect(validate({randomMA: RandomMAOptionType.LIMITED, customMA}).invalidCustomMA).eq('customMA requires randomMA to be Manual');
-    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('customMA must have 5 awards');
+    expect(validate({randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}).invalidCustomMA).eq('You must have between 3 and 8 custom awards');
+  });
+
+  it('milestones and awards missing expansions', () => {
+    const customMA = {
+      milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
+      awards: ['Politician', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
+    } as const;
+    const errors = validate({randomMA: RandomMAOptionType.MANUAL, customMA});
+    expect(errors.milestonesMissingExpansions).is.true;
+    expect(errors.awardsMissingExpansions).is.true;
+
+    const expansions = {...newGameConfig().expansions, moon: true, turmoil: true};
+    const enabled = validate({randomMA: RandomMAOptionType.MANUAL, customMA, expansions});
+    expect(enabled.milestonesMissingExpansions).is.false;
+    expect(enabled.awardsMissingExpansions).is.false;
+  });
+
+  it('malformed custom milestones and awards are invalid, not a crash', () => {
+    const malformed = [null, {milestones: ['Terraformer']}, {milestones: ['Terraformer'], awards: 'Politician'}] as unknown as Array<NewGameConfig['customMA']>;
+    for (const customMA of malformed) {
+      const errors = validate({randomMA: RandomMAOptionType.MANUAL, customMA});
+      expect(errors.invalidCustomMA).not.eq('');
+      expect(errors.milestonesMissingExpansions).is.false;
+      expect(errors.awardsMissingExpansions).is.false;
+    }
+  });
+
+  it('ignores milestones and awards in solo games', () => {
+    expect(validate({players: players(1), randomMA: RandomMAOptionType.MANUAL}).invalidCustomMA).eq('');
   });
 
   it('messages', () => {

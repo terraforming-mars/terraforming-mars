@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
 export class Builder7 extends BaseMilestone {
+  public readonly automaDescription = 'Building track ≥ 7';
   constructor() {
     super(
       'Builder7',

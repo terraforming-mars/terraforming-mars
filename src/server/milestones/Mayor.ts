@@ -2,6 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 
 export class Mayor extends BaseMilestone {
+  public readonly automaDescription = '3+ city tiles on board';
   constructor() {
     super(
       'Mayor',

@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Manufacturer} from '../../../src/server/awards/modular/Manufacturer';
 import {TestPlayer} from '../../TestPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {fakeMarsBot, setTrack} from '../../automa/FakeMarsBot';
 
 describe('Manufacturer', () => {
   let award: Manufacturer;
@@ -23,5 +25,13 @@ describe('Manufacturer', () => {
 
     player.production.override({megacredits: -1, steel: 5, heat: 2});
     expect(award.getScore(player)).to.eq(7);
+  });
+
+  it('MarsBot scores its Building and Energy tracks combined', () => {
+    const marsBot = fakeMarsBot();
+    setTrack(marsBot, Tag.BUILDING, 3);
+    setTrack(marsBot, Tag.POWER, 2);
+
+    expect(new Manufacturer().marsBotScore(marsBot)).eq(5);
   });
 });

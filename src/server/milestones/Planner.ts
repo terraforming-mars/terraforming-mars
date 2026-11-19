@@ -1,9 +1,10 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
-import {IMarsBot} from '@/server/automa/MarsBotCorpTypes';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 import {Tag} from '@/common/cards/Tag';
 
 export class Planner extends BaseMilestone {
+  public readonly automaDescription = 'All tracks ≥ 4 (except Venus)';
   constructor() {
     super(
       'Planner',

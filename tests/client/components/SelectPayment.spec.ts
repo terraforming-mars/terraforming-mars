@@ -318,7 +318,7 @@ describe('SelectPayment', () => {
     await tester.clickPlus('steel');
     tester.expectPayment({steel: 6});
 
-    (wrapper.vm as any).saveData();
+    wrapper.vm.saveData();
 
     expect(onsaveCalled).is.false;
   });

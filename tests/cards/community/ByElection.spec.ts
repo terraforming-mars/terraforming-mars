@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {ByElection} from '../../../src/server/cards/community/ByElection';
 import {IGame} from '../../../src/server/IGame';
-import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {cast} from '../../../src/common/utils/utils';
 
 describe('ByElection', () => {
@@ -22,9 +21,8 @@ describe('ByElection', () => {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
-    const subOptions = cast(orOptions.options[0], SelectOption);
-    subOptions.cb(undefined);
+    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectParty);
+    selectParty.cb(PartyName.MARS);
 
     const turmoil = game.turmoil!;
     expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);

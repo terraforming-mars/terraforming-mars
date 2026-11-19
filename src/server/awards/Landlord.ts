@@ -6,6 +6,7 @@ import {Board} from '../boards/Board';
 export class Landlord implements IAward {
   public readonly name = 'Landlord';
   public readonly description = 'Own the most tiles';
+  public readonly automaDescription = 'Tiles owned (unchanged)';
   public getScore(player: IPlayer): number {
     const marsSpaceCount = player.game.board.spaces
       .filter(Board.hasRealTile)

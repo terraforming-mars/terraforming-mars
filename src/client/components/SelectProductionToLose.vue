@@ -2,12 +2,12 @@
   <div class="wf-component wf-component--select-production-to-lose">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 
-    <h3 v-if="playerinput.warning !== undefined" class="payments_title">{{ $t(playerinput.warning) }}</h3>
+    <h3 v-if="playerinput.warning !== undefined" class="payments-title">{{ $t(playerinput.warning) }}</h3>
 
-    <div class="payments_type input-group" v-for="type in deductibleTypes" :key="type">
+    <div class="payments-type input-group" v-for="type in deductibleTypes" :key="type">
       <div class="production-box"><div :class="['production', iconClass(type)]" :style="type === 'megacredits' ? 'background-size:contain;' : ''"></div></div>
       <button class="btn btn-primary" @click="delta(type, -1)"><i class="icon icon-minus"></i></button>
-      <input class="form-input form-inline payments_input" v-model.number="units[type]">
+      <input class="form-input form-inline payments-input" v-model.number="units[type]">
       <button class="btn btn-primary" @click="delta(type, 1)"><i class="icon icon-plus"></i></button>
     </div>
 
@@ -31,7 +31,7 @@ import {sum} from '@/common/utils/utils';
 import {PRODUCTION_MINIMUMS} from '@/common/constants';
 
 const iconClasses: Record<keyof Units, string> = {
-  megacredits: 'resource_icon--megacredits',
+  megacredits: 'resource-icon--megacredits',
   steel: 'steel',
   titanium: 'titanium',
   plants: 'plants',

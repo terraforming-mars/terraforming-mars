@@ -13,6 +13,7 @@ export type TrackAction =
   | 'city'
   | 'venus' | 'venus2'
   | 'floater' | 'floater2'
+  | 'colony'        // Utopia Planitia: place a colony like Outer System Foothold
   | `tag_${number}`   // Advance track by index
   | `tag_${string}`;  // Advance track by tag name (e.g. 'tag_microbe')
 
@@ -27,6 +28,7 @@ export type TrackDefinition = {
 };
 
 
+/** A corp cube's colour. `credit` is a silver resource cube, worth 5 M€. */
 export type CubeType = 'white' | 'black' | 'credit';
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
@@ -92,6 +94,9 @@ export const MARSBOT_MAX_TRACK_POSITION = 18;
 export const MARSBOT_STARTING_TR = 20;
 export const MARSBOT_MAX_GENERATION = 20;
 export const MARSBOT_MAX_GENERATION_PRELUDE = 18;
+
+/** M€ MarsBot gets per adjacent ocean when its corporation is Lakefront Resorts. */
+export const LAKEFRONT_OCEAN_BONUS = 3;
 
 /** Get the max generation for an automa game. */
 export function getAutomaMaxGeneration(preludeExtension: boolean): number {

@@ -15,14 +15,13 @@ describe('SpectatorHome', () => {
           setVisibilityState: () => {},
           updateSpectator: () => {},
         },
-      } as any,
+      },
       props: {
         spectator: {
           game: fakeGameModel(),
           players: [player],
           id: 's-spectator-id',
           thisPlayer: player,
-          runId: 'run-id',
           color: 'neutral',
         },
       },

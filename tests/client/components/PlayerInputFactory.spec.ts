@@ -145,7 +145,7 @@ describe('PlayerInputFactory', () => {
         showtitle: true,
       },
     });
-    (wrapper.vm as any).saveData();
+    wrapper.vm.saveData();
     expect(saved).to.be.true;
   });
 
@@ -179,7 +179,7 @@ describe('PlayerInputFactory', () => {
         showtitle: true,
       },
     });
-    expect((wrapper.vm as any).canSave()).to.be.true;
+    expect(wrapper.vm.canSave()).to.be.true;
   });
 
   it('ShiftAresGlobalParameters', async () => {
@@ -241,5 +241,5 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     },
   });
   expect(component).not.is.undefined;
-  expect((component.vm as any).$refs.childInput.saveData).not.is.undefined;
+  expect(component.vm.typedRefs.childInput.saveData).not.is.undefined;
 }

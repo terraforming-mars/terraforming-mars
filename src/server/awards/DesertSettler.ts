@@ -5,6 +5,7 @@ import {Board} from '../boards/Board';
 export class DesertSettler implements IAward {
   public readonly name = 'Desert Settler';
   public readonly description = 'Own the most tiles south of the equator (the rows below the middle row)';
+  public readonly automaDescription = 'Tiles south of the equator (unchanged)';
   public getScore(player: IPlayer): number {
     const board = player.game.board;
     return board.spaces

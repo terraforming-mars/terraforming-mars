@@ -1,19 +1,7 @@
-// A fake version of global.localStorage that also registers as
-// the global instance. Used for testing.
+// A fake version of global.localStorage. Used for testing.
+// Install it with useFakeLocalStorage().
 export class FakeLocalStorage implements Storage {
-  private saved: Storage | undefined;
   private data: {[x: string]: string} = {};
-
-  public static register(localStorage: FakeLocalStorage) {
-    localStorage.saved = (global as any).localStorage;
-    (global as any).localStorage = localStorage;
-
-    return this;
-  }
-
-  public static deregister(localStorage: FakeLocalStorage) {
-    (global as any).localStorage = localStorage.saved;
-  }
 
   public getItem(key: string) {
     if (this.data[key] === undefined) {
@@ -45,4 +33,25 @@ export class FakeLocalStorage implements Storage {
   public hasItem(key: string): boolean {
     return typeof this.data[key] !== 'undefined';
   }
+}
+
+function assignGlobal(value: Storage | undefined) {
+  Object.defineProperty(global, 'localStorage', {value: value, configurable: true, writable: true});
+}
+
+// Installs a fresh FakeLocalStorage as global.localStorage before each test
+// and restores the original after. Call inside a describe block. The returned
+// function gives access to the current test's instance.
+export function useFakeLocalStorage(): () => FakeLocalStorage {
+  let localStorage: FakeLocalStorage;
+  let saved: Storage | undefined;
+  beforeEach(() => {
+    saved = global.localStorage;
+    localStorage = new FakeLocalStorage();
+    assignGlobal(localStorage);
+  });
+  afterEach(() => {
+    assignGlobal(saved);
+  });
+  return () => localStorage;
 }

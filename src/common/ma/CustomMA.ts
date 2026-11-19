@@ -8,13 +8,18 @@ export type CustomMA = {
   awards: ReadonlyArray<AwardName>;
 };
 
+/** The fewest milestones, and the fewest awards, a hand-picked selection may have. */
+export const MIN_CUSTOM_GOALS = 3;
+/** The most milestones, and the most awards, a hand-picked selection may have. */
+export const MAX_CUSTOM_GOALS = 8;
+
 /**
  * Throws an Error describing what's wrong with `customMA`, if anything.
  *
- * customMA is required when randomMA is MANUAL, and not allowed otherwise. It must have 5 milestones and 5 awards,
- * or 6 of each when Venus is in the game.
+ * customMA is required when randomMA is MANUAL, and not allowed otherwise. It must have between MIN_CUSTOM_GOALS and
+ * MAX_CUSTOM_GOALS milestones, and between MIN_CUSTOM_GOALS and MAX_CUSTOM_GOALS awards.
  */
-export function validateCustomMA(customMA: CustomMA | undefined, randomMA: RandomMAOptionType, venus: boolean): void {
+export function validateCustomMA(customMA: CustomMA | undefined, randomMA: RandomMAOptionType): void {
   if (randomMA !== RandomMAOptionType.MANUAL) {
     if (customMA !== undefined) {
       throw new Error('customMA requires randomMA to be ' + RandomMAOptionType.MANUAL);
@@ -44,11 +49,11 @@ export function validateCustomMA(customMA: CustomMA | undefined, randomMA: Rando
   if (new Set(customMA.awards).size !== customMA.awards.length) {
     throw new Error('customMA has duplicate awards');
   }
-  const expected = venus ? 6 : 5;
-  if (customMA.milestones.length !== expected) {
-    throw new Error(`customMA must have ${expected} milestones`);
+  const inRange = (count: number) => count >= MIN_CUSTOM_GOALS && count <= MAX_CUSTOM_GOALS;
+  if (!inRange(customMA.milestones.length)) {
+    throw new Error(`You must have between ${MIN_CUSTOM_GOALS} and ${MAX_CUSTOM_GOALS} custom milestones`);
   }
-  if (customMA.awards.length !== expected) {
-    throw new Error(`customMA must have ${expected} awards`);
+  if (!inRange(customMA.awards.length)) {
+    throw new Error(`You must have between ${MIN_CUSTOM_GOALS} and ${MAX_CUSTOM_GOALS} custom awards`);
   }
 }

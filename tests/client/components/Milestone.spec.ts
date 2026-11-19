@@ -64,7 +64,7 @@ describe('Milestone', () => {
     const wrapper = mount(Milestone, {...globalConfig, props: {milestone, showScores: true}});
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
-    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${milestone.scores[0].color}`);
+    expect(scoreWrapper.classes()).to.includes(`player-bg-color-${milestone.scores[0].color}`);
   });
 
   it('shows sorted players scores', () => {

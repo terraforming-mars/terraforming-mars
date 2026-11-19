@@ -130,7 +130,7 @@ h2 {
   text-shadow: -1px -1px 6px #aaa4;
 }
 
-.filterDiv {
+.filter-div {
   font-size: 17px !important;
 }
 
@@ -149,7 +149,7 @@ h2 {
 // normal backgrounds
 each(@players, {
   @c: ~"player_@{value}";
-  .player_bg_color_@{value} {
+  .player-bg-color-@{value} {
     background-color: @@c;
   }
 })
@@ -162,7 +162,7 @@ each(@players, {
 // backgrounds with opacity
 each(@players, {
   @c: ~"player_@{value}";
-  .player_translucent_bg_color_@{value} {
+  .player-translucent-bg-color-@{value} {
     background: rgba(@@c, 0.7);
   }
 })

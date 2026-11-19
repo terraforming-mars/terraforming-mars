@@ -1,8 +1,10 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, Board} from '../../boards/Board';
+import {IMarsBot} from '@/server/automa/IMarsBot';
 
 export class LandSpecialist extends BaseMilestone {
+  public readonly automaDescription = '3+ bonus cards destroyed';
   constructor() {
     super(
       'Land Specialist',
@@ -21,5 +23,10 @@ export class LandSpecialist extends BaseMilestone {
       .length;
 
     return marsCount + moonCount;
+  }
+
+  /** MarsBot needs 3 destroyed bonus cards (rulebook C p.10, which calls it Specialist). */
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.destroyedBonusCards >= 3;
   }
 }

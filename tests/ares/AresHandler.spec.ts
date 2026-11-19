@@ -143,7 +143,7 @@ describe('AresHandler', () => {
     try {
       game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     } catch (err) {
-      expect((err as any).toString()).includes('Placing here costs 2 units of production');
+      expect(String(err)).includes('Placing here costs 2 units of production');
     }
 
     player.production.add(Resource.PLANTS, 7);

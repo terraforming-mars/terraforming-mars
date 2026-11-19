@@ -18,27 +18,32 @@ import {durationToMilliseconds} from '../utils/durations';
 import {readBody} from './readBody';
 import {RouteError} from './RouteError';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
-import {validateCustomMA} from '../../common/ma/CustomMA';
 import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
+import {isObject} from '@/common/utils/utils';
 
-function parseQuotaConfig(struct: any): QuotaConfig {
-  let {limit} = struct;
-  const {per} = struct;
-  if (limit === undefined) {
+function parseQuotaConfig(struct: unknown): QuotaConfig {
+  if (!isObject(struct)) {
+    throw new Error('quota config is not an object');
+  }
+  if (!('limit' in struct)) {
     throw new Error('limit is absent');
   }
-  limit = Number.parseInt(limit);
-  if (isNaN(limit)) {
+  if (!('per' in struct)) {
+    throw new Error('per is absent');
+  }
+  const {limit, per} = struct;
+  const parsedLimit = Number.parseInt(String(limit));
+  if (isNaN(parsedLimit)) {
     throw new Error('limit is invalid');
   }
-  if (per === undefined) {
-    throw new Error('per is absent');
+  if (typeof per !== 'string') {
+    throw new Error('per is invalid');
   }
   const perMs = durationToMilliseconds(per);
   if (isNaN(perMs)) {
     throw new Error('per is invalid');
   }
-  return {limit, perMs};
+  return {limit: parsedLimit, perMs};
 }
 
 // GAME_QUOTA accepts either a single {limit, per} object, or a JSON array of
@@ -139,6 +144,7 @@ export class ApiCreateGame extends Handler {
         aresExtension: gameReq.expansions.ares,
         aresHazards: true, // Not a runtime option.
         aresExtremeVariant: gameReq.aresExtremeVariant,
+        automa: false, // No create-game UI yet.
         bannedCards: gameReq.bannedCards,
         boardName: boardName,
         ceoExtension: gameReq.expansions.ceo,
@@ -173,7 +179,7 @@ export class ApiCreateGame extends Handler {
         removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,
         requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
-        showOtherPlayersVP: gameReq.showOtherPlayersVP,
+        showVP: gameReq.showVP,
         showTimers: gameReq.showTimers,
         shuffleMapOption: gameReq.shuffleMapOption,
         solarPhaseOption: gameReq.solarPhaseOption,
@@ -189,12 +195,6 @@ export class ApiCreateGame extends Handler {
         undoOption: gameReq.undoOption,
         venusNextExtension: gameReq.expansions.venus,
       };
-
-      try {
-        validateCustomMA(gameOptions.customMA, gameOptions.randomMA, gameOptions.venusNextExtension);
-      } catch (e) {
-        throw RouteError.badRequest(e instanceof Error ? e.message : String(e));
-      }
 
       let game: IGame;
       if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {

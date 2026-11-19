@@ -7,11 +7,11 @@ import {globalConfig} from './getLocalVue';
 describe('PreferencesDialog', () => {
   const preferencesManager = PreferencesManager.INSTANCE;
 
-  function getDataTest(wrapper: VueWrapper<any>, field: Preference): DOMWrapper<Element> {
+  function getDataTest(wrapper: VueWrapper, field: Preference): DOMWrapper<Element> {
     return wrapper.find(`[data-test=${field}]`);
   }
 
-  function getCheckbox(wrapper: VueWrapper<any>, field: Preference): HTMLInputElement {
+  function getCheckbox(wrapper: VueWrapper, field: Preference): HTMLInputElement {
     return getDataTest(wrapper, field).element as HTMLInputElement;
   }
 
@@ -46,5 +46,23 @@ describe('PreferencesDialog', () => {
     await wrapper.vm.$nextTick();
 
     expect(preferencesManager.values().hide_awards_and_milestones).is.true;
+  });
+
+  it('marks the page with the class the stylesheet uses for a preference that is on', () => {
+    const target = document.createElement('div');
+    target.id = 'ts-preferences-target';
+    document.body.appendChild(target);
+    preferencesManager.set('small_cards', true);
+    try {
+      mount(PreferencesDialog, {
+        ...globalConfig,
+        props: {preferencesManager},
+      });
+
+      expect(target.classList.contains('preferences-small-cards')).is.true;
+    } finally {
+      target.remove();
+      preferencesManager.set('small_cards', false);
+    }
   });
 });

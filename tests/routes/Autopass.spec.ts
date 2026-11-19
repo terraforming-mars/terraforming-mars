@@ -27,7 +27,7 @@ describe('Autopass', () => {
     const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('g' + player.id as GameId, [player], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getPlayerById = () => {
+    game.getPlayerById = () => {
       throw new Error('player does not exist');
     };
 
@@ -62,14 +62,11 @@ describe('Autopass', () => {
     expect(player.autopass).eq(false);
   });
 
-  it('fails when spectator not found', async () => {
+  it('rejects a spectator id', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getBySpectatorId = () => {
-      throw new Error('spectator does not exist');
-    };
 
     scaffolding.url = '/autopass?id=' + game.spectatorId + '&autopass=true';
     await scaffolding.get(Autopass.INSTANCE, res);

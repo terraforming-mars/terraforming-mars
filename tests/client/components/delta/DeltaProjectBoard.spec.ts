@@ -4,7 +4,7 @@ import {globalConfig} from '../getLocalVue';
 import DeltaProjectBoard from '@/client/components/delta/DeltaProjectBoard.vue';
 import {DeltaBoardStep} from '@/client/components/delta/DeltaBoardStep';
 import {fakePublicPlayerModel} from '../testHelpers';
-import {FakeLocalStorage} from '../FakeLocalStorage';
+import {useFakeLocalStorage} from '../FakeLocalStorage';
 
 function fakeEmptySlot(dynamicSlots: boolean): DeltaBoardStep {
   return {
@@ -13,16 +13,7 @@ function fakeEmptySlot(dynamicSlots: boolean): DeltaBoardStep {
   };
 }
 describe('DeltaProjectBoard', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('mounts with no players', () => {
     const wrapper = shallowMount(DeltaProjectBoard, {

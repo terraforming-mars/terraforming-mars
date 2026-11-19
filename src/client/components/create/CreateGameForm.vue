@@ -120,14 +120,14 @@
               <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-random" for="randomAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('random') }}</span>
                   </label>
                 </div>
 
                 <div>
                   <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('chairman')" id="chairmanAgendaStyle-radio">
-                  <label class="label-agendaStyle agendaStyle-chairman" for="chairmanAgendaStyle-radio">
+                  <label class="label-agenda-style agenda-style-chairman" for="chairmanAgendaStyle-radio">
                     <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('chairman') }}</span>
                   </label>
                 </div>
@@ -167,7 +167,7 @@
 
             <input type="checkbox" name="deltaProject" id="deltaProject-checkbox" v-model="expansions.deltaProject">
             <label for="deltaProject-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-deltaProject"></div>
+              <div class="create-game-expansion-icon expansion-icon-deltaproject"></div>
               <span v-i18n>Delta Project</span>&nbsp;<span title="Alpha — work in progress">(&#945;)</span><span></span>&nbsp;<a :href="wikiUrls.deltaProject" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
             </label>
           </div>
@@ -299,11 +299,13 @@
             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
             <label for="bannedCards-checkbox">
               <span v-i18n>Exclude some cards</span>
+              <span v-if="bannedCards.length">&nbsp;({{ bannedCards.length }})</span>
             </label>
 
             <input type="checkbox" v-model="showIncludedCards" id="includedCards-checkbox">
             <label for="includedCards-checkbox">
               <span v-i18n>Include some cards</span>
+              <span v-if="includedCards.length">&nbsp;({{ includedCards.length }})</span>
             </label>
 
             <template v-if="expansions.colonies">
@@ -362,40 +364,7 @@
               <span v-i18n>Random first player</span>
             </label>
 
-            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" :checked="isRandomMAEnabled" @change="randomMAToggle()">
-            <label for="randomMA-checkbox">
-              <span v-i18n>Random Milestones/Awards</span>&nbsp;<a :href="wikiUrls.randomMilestonesAndAwards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-            </label>
-
-            <!-- Only reachable by importing JSON with randomMA set to MANUAL. -->
-            <template v-if="randomMA === RandomMAOptionType.MANUAL">
-              <label class="create-game-manual-ma">
-                <span v-i18n>Manual Milestones/Awards</span>
-              </label>
-              <div v-i18n>&#9888;&#xFE0F; Manual milestones and awards are not configurable in the UI yet.</div>
-            </template>
-
-            <div class="create-game-page-column-row" v-if="isRandomMAEnabled">
-              <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
-                <label class="label-randomMAOption" for="limitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
-                </label>
-              </div>
-
-              <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
-                <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
-                </label>
-              </div>
-              <div>
-                <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
-                <label for="modularMA-checkbox">
-                  <span v-i18n>Official Random α</span>
-                </label>
-              </div>
-            </div>
+            <GoalButton v-model="goals" />
 
             <template v-if="expansions.venus">
               <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
@@ -404,17 +373,29 @@
               </label>
             </template>
 
-            <template v-if="isRandomMAEnabled">
-              <input type="checkbox" v-model="includeFanMA" id="fanMA-checkbox">
-              <label for="fanMA-checkbox">
-                <span v-i18n>Include fan Milestones/Awards</span>
-              </label>
-            </template>
-
-            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
-            <label for="realTimeVP-checkbox">
+            <div class="create-game-subsection-label">
               <span v-i18n>Show real-time VP</span>&nbsp;<a :href="wikiUrls.showRealtimeVP" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-            </label>
+            </div>
+            <div class="create-game-page-column-row create-game-showVP-options">
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="none" id="showVP-none-radio">
+                <label class="label-showVP" for="showVP-none-radio">
+                  <span v-i18n>None</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="yours" id="showVP-yours-radio">
+                <label class="label-showVP" for="showVP-yours-radio">
+                  <span v-i18n>Yours</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="showVP" v-model="showVP" value="all" id="showVP-all-radio">
+                <label class="label-showVP" for="showVP-all-radio">
+                  <span v-i18n>All</span>
+                </label>
+              </div>
+            </div>
 
             <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
             <label for="fastMode-checkbox">
@@ -540,23 +521,23 @@
       @close="showCeosList = false"
     />
 
-    <div class="create-game--block" v-if="showBannedCards">
-      <CardsFilter
-        ref="cardsFilter"
-        @cards-list-changed="updateBannedCards"
-        :title="'Cards to exclude from the game'"
-        :hint="'Start typing the card name to exclude'"
-      />
-    </div>
+    <CardsFilter
+      v-if="showBannedCards"
+      @cards-list-changed="updateBannedCards"
+      :title="'Cards to exclude from the game'"
+      :hint="'Start typing the card name to exclude'"
+      :selected="bannedCards"
+      @close="showBannedCards = false"
+    />
 
-    <div class="create-game--block" v-if="showIncludedCards">
-      <CardsFilter
-        ref="cardsFilter2"
-        @cards-list-changed="updateIncludedCards"
-        :title="'Cards to include in the game'"
-        :hint="'Start typing the card name to include'"
-      />
-    </div>
+    <CardsFilter
+      v-if="showIncludedCards"
+      @cards-list-changed="updateIncludedCards"
+      :title="'Cards to include in the game'"
+      :hint="'Start typing the card name to include'"
+      :selected="includedCards"
+      @close="showIncludedCards = false"
+    />
     <PreferencesIcon />
     <ValidationErrorsPopup v-if="showValidationErrors" :errors="validationErrors" @close="showValidationErrors = false" />
   </div>
@@ -574,6 +555,8 @@ import CorporationsFilter from '@/client/components/create/CorporationsFilter.vu
 import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
+import GoalButton from '@/client/components/create/goals/GoalButton.vue';
+import {toGameOptions} from '@/client/components/create/goals/conversions';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
@@ -584,6 +567,7 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
@@ -591,6 +575,7 @@ import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
 import {createGameSettingsStorage} from './createGameSettingsStorage';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
 import {RULEBOOK_URLS, WIKI_URLS} from '@/client/utils/WikiLinks';
 import {setDocumentTitle} from '@/client/utils/documentTitle';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
@@ -600,8 +585,6 @@ import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesMana
 
 type Refs = {
   file: HTMLInputElement;
-  cardsFilter: InstanceType<typeof CardsFilter>;
-  cardsFilter2: InstanceType<typeof CardsFilter>;
 };
 
 type FormModel = {
@@ -628,6 +611,7 @@ export default defineComponent({
     CeosFilter,
     ColoniesFilter,
     BoardSelector,
+    GoalButton,
     CorporationsFilter,
     PreludesFilter,
     PreferencesIcon,
@@ -724,14 +708,14 @@ export default defineComponent({
      */
     newGameConfig(): NewGameConfig {
       return {
+        ...toGameOptions(this.goals),
         players: this.players.slice(0, this.playersCount),
         expansions: this.expansions,
         draftVariant: this.draftVariant,
-        showOtherPlayersVP: this.showOtherPlayersVP,
+        showVP: this.showVP,
         customCorporationsList: this.customCorporations,
         customColoniesList: this.customColonies,
         customCeos: this.customCeos,
-        customMA: this.customMA,
         customPreludes: this.customPreludes,
         bannedCards: this.bannedCards,
         includedCards: this.includedCards,
@@ -744,15 +728,12 @@ export default defineComponent({
         showTimers: this.showTimers,
         fastModeOption: this.fastModeOption,
         removeNegativeGlobalEventsOption: this.removeNegativeGlobalEventsOption,
-        includeFanMA: this.includeFanMA,
-        modularMA: this.modularMA,
         startingCorporations: this.startingCorporations,
         soloTR: this.soloTR,
         clonedGamedId: this.seededGame ? this.clonedGameId : undefined,
         initialDraft: this.initialDraft,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
         ceosDraftVariant: this.ceosDraftVariant ?? false,
-        randomMA: this.randomMA,
         shuffleMapOption: this.shuffleMapOption,
         randomFirstPlayer: this.randomFirstPlayer,
         requiresVenusTrackCompletion: this.requiresVenusTrackCompletion,
@@ -778,6 +759,8 @@ export default defineComponent({
         getColonyExpansion: (name) => {
           return getColony(name)?.expansion;
         },
+        getMilestoneExpansion: (name) => getMilestone(name)?.requirements,
+        getAwardExpansion: (name) => getAward(name)?.requirements,
       });
     },
     hasValidationProblems(): boolean {
@@ -792,9 +775,6 @@ export default defineComponent({
     typedRefs(): Refs {
       return this.$refs as Refs;
     },
-    RandomMAOptionType(): typeof RandomMAOptionType {
-      return RandomMAOptionType;
-    },
     constants(): typeof constants {
       return constants;
     },
@@ -803,9 +783,6 @@ export default defineComponent({
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
-    },
-    isRandomMAEnabled(): boolean {
-      return this.randomMA === RandomMAOptionType.LIMITED || this.randomMA === RandomMAOptionType.UNLIMITED;
     },
     isPoliticalAgendasExtensionEnabled(): Boolean {
       return this.politicalAgendasExtension !== 'Standard';
@@ -835,7 +812,6 @@ export default defineComponent({
     },
     applySettings(json: JSONObject): JSONProcessor {
       const component: CreateGameModel = this;
-      const refs = this.typedRefs;
       const processor = new JSONProcessor(component);
       this.uploading = true;
       try {
@@ -846,12 +822,6 @@ export default defineComponent({
       }
       nextTick(() => {
         try {
-          if (component.showBannedCards && refs.cardsFilter) {
-            refs.cardsFilter.selected = processor.bannedCards;
-          }
-          if (component.showIncludedCards && refs.cardsFilter2) {
-            refs.cardsFilter2.selected = processor.includedCards;
-          }
           if (!component.seededGame) {
             component.seed = Math.random();
           }
@@ -875,15 +845,6 @@ export default defineComponent({
       Object.assign(this, defaultCreateGameModel(), {
         preludeToggled: false,
         uploading: false,
-      });
-      nextTick(() => {
-        const refs = this.typedRefs;
-        if (refs.cardsFilter) {
-          refs.cardsFilter.selected = [];
-        }
-        if (refs.cardsFilter2) {
-          refs.cardsFilter2.selected = [];
-        }
       });
     },
     async downloadSettings() {
@@ -940,24 +901,6 @@ export default defineComponent({
     },
     updateCustomCeos(customCeos: Array<CardName>) {
       this.customCeos = customCeos;
-    },
-    randomMAToggle() {
-      if (this.isRandomMAEnabled) {
-        this.randomMA = RandomMAOptionType.NONE;
-      } else {
-        this.randomMA = RandomMAOptionType.LIMITED;
-      }
-      // customMA is only valid with MANUAL, which this toggle always leaves.
-      this.customMA = undefined;
-    },
-    getRandomMaOptionType(type: 'limited' | 'full'): RandomMAOptionType {
-      if (type === 'limited') {
-        return RandomMAOptionType.LIMITED;
-      } else if (type === 'full') {
-        return RandomMAOptionType.UNLIMITED;
-      } else {
-        return RandomMAOptionType.NONE;
-      }
     },
     politicalAgendasExtensionToggle() {
       if (this.politicalAgendasExtension === 'Standard') {
@@ -1043,8 +986,8 @@ export default defineComponent({
         }
       });
 
-      players.map((player: any) => {
-        player.first = (this.firstIndex === player.index);
+      players.map((player, index) => {
+        player.first = (this.firstIndex === index + 1);
         return player;
       });
 
@@ -1081,8 +1024,12 @@ export default defineComponent({
       }
 
       const config = this.newGameConfig;
+      const isSolo = players.length === 1;
       return {
         ...config,
+        // Solo games have no milestones and awards, and the form hides their settings.
+        randomMA: isSolo ? RandomMAOptionType.NONE : config.randomMA,
+        customMA: isSolo ? undefined : config.customMA,
         players,
         clonedGamedId,
         escapeVelocity: config.escapeVelocity === undefined ? undefined : sanitizeEscapeVelocityOptions(config.escapeVelocity),
@@ -1100,7 +1047,7 @@ export default defineComponent({
       if (this.rememberSettings) {
         createGameSettingsStorage.save(newGameConfig);
       }
-      const onSuccess = (json: any) => {
+      const onSuccess = (json: SimpleGameModel) => {
         if (json.players.length === 1) {
           window.location.href = 'player?id=' + json.players[0].id;
           return;

@@ -12,6 +12,7 @@
 // string and may recover a value. Recovered entries are rewritten in the current
 // format (with a fresh ttl) rather than dropped.
 import {safeLocalStorage} from '@/client/utils/SafeLocalStorage';
+import {isObject} from '@/common/utils/utils';
 
 // The on-disk shape of every entry: the value (v) plus an optional expiry
 // timestamp (e, epoch ms), present only when the store has a ttl. Wrapping the
@@ -40,7 +41,7 @@ export type LocalStorageStoreOptions<T> = {
 // True when value is one of our envelopes (an object carrying a `v` field),
 // distinguishing our entries from foreign or pre-envelope data.
 function isEnvelope(value: unknown): value is Envelope<unknown> {
-  return typeof value === 'object' && value !== null && 'v' in value;
+  return isObject(value) && 'v' in value;
 }
 
 // A namespaced, typed store over localStorage. Ids are the caller-facing keys;

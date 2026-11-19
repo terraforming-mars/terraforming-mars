@@ -5,11 +5,17 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class Politician implements IAward {
   public readonly name = 'Politician';
   public readonly description = 'Have the most party leaders and influence combined.';
+  public readonly automaDescription = 'Always 5';
 
   public getScore(player: IPlayer): number {
     Turmoil;
     const turmoil = Turmoil.getTurmoil(player.game);
     const partyLeaderCount = turmoil.parties.filter((party) => party.partyLeader === player).length;
     return partyLeaderCount + turmoil.getInfluence(player);
+  }
+
+  /** Scores MarsBot a flat 5 (rulebook C p.15). */
+  public marsBotScore(): number {
+    return 5;
   }
 }

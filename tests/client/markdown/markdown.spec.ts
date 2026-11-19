@@ -16,13 +16,13 @@ describe('markdown', () => {
   });
 
   it('allows uppercase names', () => {
-    expect(renderMarkdown(':expansion:deltaProject:')).eq(
-      '<p><span class="expansion-icon expansion-icon-deltaProject"></span></p>\n');
+    expect(renderMarkdown(':expansion:CE:')).eq(
+      '<p><span class="expansion-icon expansion-icon-CE"></span></p>\n');
   });
 
   it('renders standard resources', () => {
     expect(renderMarkdown(':r:steel:')).eq(
-      '<p><span class="markdown-resource resource_icon--steel"></span></p>\n');
+      '<p><span class="markdown-resource resource-icon--steel"></span></p>\n');
   });
 
   it('renders card resources', () => {
@@ -32,8 +32,8 @@ describe('markdown', () => {
 
   it('renders production', () => {
     expect(renderMarkdown(':p:plants: :p:heat:')).eq(
-      '<p><span class="markdown-production"><span class="markdown-resource resource_icon--plants"></span></span> ' +
-      '<span class="markdown-production"><span class="markdown-resource resource_icon--heat"></span></span></p>\n');
+      '<p><span class="markdown-production"><span class="markdown-resource resource-icon--plants"></span></span> ' +
+      '<span class="markdown-production"><span class="markdown-resource resource-icon--heat"></span></span></p>\n');
   });
 
   it('leaves unknown kinds as text', () => {
@@ -51,13 +51,13 @@ describe('markdown', () => {
 
   it('inline keeps surrounding whitespace and has no block wrapping', () => {
     expect(renderMarkdown(' spent :r:energy: and :cr:ware: <b>:unknown:x:</b> ', {inline: true})).eq(
-      ' spent <span class="markdown-resource resource_icon--energy"></span> and ' +
+      ' spent <span class="markdown-resource resource-icon--energy"></span> and ' +
       '<span class="markdown-resource card-resource-ware"></span> &lt;b&gt;:unknown:x:&lt;/b&gt; ');
   });
 
   it('inline renders production', () => {
     expect(renderMarkdown('Gain 1:p:steel:', {inline: true})).eq(
-      'Gain 1<span class="markdown-production"><span class="markdown-resource resource_icon--steel"></span></span>');
+      'Gain 1<span class="markdown-production"><span class="markdown-resource resource-icon--steel"></span></span>');
   });
 
   it('translate: false skips translation', () => {
@@ -70,7 +70,7 @@ describe('markdown', () => {
 
   it('renderIcons renders icons, escapes HTML, and ignores other markdown', () => {
     expect(renderIcons(' spent 3:p:heat: *and* <b>:unknown:x:</b> 10:30: ')).eq(
-      ' spent 3<span class="markdown-production"><span class="markdown-resource resource_icon--heat"></span></span> ' +
+      ' spent 3<span class="markdown-production"><span class="markdown-resource resource-icon--heat"></span></span> ' +
       '*and* &lt;b&gt;:unknown:x:&lt;/b&gt; 10:30: ');
   });
 
@@ -88,7 +88,7 @@ describe('markdown', () => {
 
   it('renders mc as megacredits', () => {
     expect(renderMarkdown(':r:mc: :p:mc:')).eq(
-      '<p><span class="markdown-resource resource_icon--megacredits"></span> ' +
-      '<span class="markdown-production"><span class="markdown-resource resource_icon--megacredits"></span></span></p>\n');
+      '<p><span class="markdown-resource resource-icon--megacredits"></span> ' +
+      '<span class="markdown-production"><span class="markdown-resource resource-icon--megacredits"></span></span></p>\n');
   });
 });

@@ -3,6 +3,7 @@ import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 
 export class Terran5 extends BaseMilestone {
+  public readonly automaDescription = 'Earth track ≥ 5';
   constructor() {
     super(
       'Terran5',

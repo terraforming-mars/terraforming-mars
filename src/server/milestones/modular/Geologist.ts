@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {Board} from '../../boards/Board';
 
 export class Geologist extends BaseMilestone {
+  public readonly automaDescription = '3+ tiles on or next to volcanic areas';
   constructor() {
     super(
       'Geologist',

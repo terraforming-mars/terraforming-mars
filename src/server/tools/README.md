@@ -65,10 +65,23 @@ to get advice on setting up your `POSTGRES_HOST` environment variable.)
 Starts a local web server that you can use to get results of MA synergy. To run,
 
 ```sh
-npm run build:server
-node build/src/server/tools/analyze_ma.js
+npx tsx src/server/tools/analyze_ma.ts
 ```
 
 And then point your browser to http://localhost:8081
 
 Warning: this is a fragile tool, and it might fail or hide errors.
+
+## MA stress test
+
+Draws milestones and awards many times with random game options (board, modular MAs, fan MAs, and
+each expansion that affects MAs), and reports how often the draw breaks: overall, by option, and for
+the settings that broke most.
+
+```sh
+npx tsx src/server/tools/ma_stress.ts --runs 500
+```
+
+`--runs` counts thousands of draws, so `--runs 500` draws 500,000 regular games and then 500,000
+modular games (default 100).
+`--type unlimited` stress-tests full random instead of limited synergy.

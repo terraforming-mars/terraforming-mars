@@ -5,6 +5,7 @@ import {hazardSeverity} from '../../../common/AresTileType';
 export class Suburbian implements IAward {
   public readonly name = 'Suburbian';
   public readonly description = 'Most tiles on areas along the edges of the map';
+  public readonly automaDescription = 'Tiles on the edge of the board (unchanged)';
   public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter((s) => s.edge === true)

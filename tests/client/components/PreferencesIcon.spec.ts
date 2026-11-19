@@ -2,19 +2,10 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {globalConfig} from './getLocalVue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
-import {FakeLocalStorage} from './FakeLocalStorage';
+import {useFakeLocalStorage} from './FakeLocalStorage';
 
 describe('PreferencesIcon', () => {
-  let localStorage: FakeLocalStorage;
-
-  beforeEach(() => {
-    localStorage = new FakeLocalStorage();
-    FakeLocalStorage.register(localStorage);
-  });
-
-  afterEach(() => {
-    FakeLocalStorage.deregister(localStorage);
-  });
+  useFakeLocalStorage();
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(PreferencesIcon, {

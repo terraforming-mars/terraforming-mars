@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
 
 export class PolarExplorer extends BaseMilestone {
+  public readonly automaDescription = '3+ tiles in the two bottom rows';
   constructor() {
     super(
       'Polar Explorer',

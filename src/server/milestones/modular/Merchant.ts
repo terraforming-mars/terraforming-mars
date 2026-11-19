@@ -1,12 +1,15 @@
 import {IMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {Units} from '../../../common/Units';
+import {IMarsBot} from '@/server/automa/IMarsBot';
+import {Tag} from '../../../common/cards/Tag';
 
 const TWO_OF_EACH: Units = Units.every(2);
 
 export class Merchant implements IMilestone {
   public readonly name = 'Merchant';
   public readonly description = '2 of each standard resource (after paying the claim cost)';
+  public readonly automaDescription = 'All tracks ≥ 2 (except Venus)';
 
   public getScore(player: IPlayer): number {
     if (this.canClaim(player)) {
@@ -17,5 +20,12 @@ export class Merchant implements IMilestone {
 
   public canClaim(player: IPlayer): boolean {
     return player.canAfford({cost: player.milestoneCost(), reserveUnits: TWO_OF_EACH});
+  }
+
+  /** MarsBot needs space 2 on every track except Venus (rulebook C p.13). */
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks
+      .filter((track) => !track.definition.tags.includes(Tag.VENUS))
+      .every((track) => track.position >= 2);
   }
 }

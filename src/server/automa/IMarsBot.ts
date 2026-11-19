@@ -4,6 +4,7 @@ import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
+import {IAward} from '../awards/IAward';
 import {MarsBotBoard} from './MarsBotBoard';
 import {Space} from '../boards/Space';
 
@@ -44,6 +45,14 @@ export interface IMarsBot {
   raiseTR(steps: number): void;
   /** Advances a track and resolves the space it reaches. Does nothing once the game has ended. */
   advanceTrack(trackIndex: number): void;
+  /**
+   * Advances the track that carries `tag` and tells the player's cards about the tag.
+   *
+   * Returns false when no track carries `tag`.
+   */
+  advanceTrackOfTag(tag: Tag): boolean;
+  /** Tells the player's cards about an advance that names `tag`, as if the bot played a card with that tag. */
+  notifyTagAdvance(tag: Tag): void;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its
@@ -57,6 +66,8 @@ export interface IMarsBot {
   resolveProjectCard(card: IProjectCard): void;
   /** Places the bot's Neural Instance tile on `space` and pays the bot its placement M€. */
   placeNeuralInstance(space: Space): void;
+  /** The bot's score in `award` as it compares itself with the player, its difficulty's handicap and its corp's bonus included. */
+  awardValue(award: IAward): number;
   /**
    * Draws the top bonus card and resolves it. Does nothing when both bonus piles are empty, or
    * once the game has ended.

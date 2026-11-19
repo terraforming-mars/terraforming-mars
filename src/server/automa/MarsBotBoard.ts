@@ -85,10 +85,11 @@ export class MarsBotBoard {
   }
 
   /** Index of the least-advanced track (first index if tied). */
-  public getLeastAdvancedTrackIndex(): number {
+  public getLeastAdvancedTrackIndex(excludeVenus: boolean = false): number {
+    const limit = excludeVenus ? Math.min(this.tracks.length, 7) : this.tracks.length;
     let minPos = this.tracks[0].position;
     let minIndex = 0;
-    for (let i = 1; i < this.tracks.length; i++) {
+    for (let i = 1; i < limit; i++) {
       if (this.tracks[i].position < minPos) {
         minPos = this.tracks[i].position;
         minIndex = i;

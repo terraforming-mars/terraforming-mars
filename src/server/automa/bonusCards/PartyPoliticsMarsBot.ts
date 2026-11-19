@@ -24,7 +24,7 @@ export class PartyPoliticsMarsBot extends MarsBotBonusCardEffect {
     if (turmoil.delegateReserve.has(marsBot.player) && marsBot.megacredits >= 5) {
       const revealedCard = marsBot.game.projectDeck.draw(marsBot.game);
       if (revealedCard !== undefined) {
-        marsBot.game.log('MarsBot (${0}): flips ${1} (cost ${2})', (b) => b.cardName(this.name).card(revealedCard).number(revealedCard.cost));
+        marsBot.game.log('MarsBot (${0}): reveals ${1} (cost ${2})', (b) => b.cardName(this.name).card(revealedCard).number(revealedCard.cost));
         marsBot.game.projectDeck.discardPile.push(revealedCard);
         if (revealedCard.cost % 3 === 0) {
           marsBot.megacredits -= 5;

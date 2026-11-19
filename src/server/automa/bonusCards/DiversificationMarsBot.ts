@@ -11,8 +11,7 @@ export class DiversificationMarsBot extends MarsBotBonusCardEffect {
     const marsBotBoard = marsBot.marsBotBoard;
     const leastIndex = marsBotBoard.getLeastAdvancedTrackIndex();
     marsBot.maybeAdvanceTrack(leastIndex);
-    const lost = Math.min(4, marsBot.megacredits);
-    marsBot.megacredits -= lost;
+    const lost = marsBot.loseMc(4);
     marsBot.game.log('MarsBot (${0}): advance least-advanced track, lose ${1}:r:mc:', (b) => b.cardName(this.name).number(lost));
     return false;
   }

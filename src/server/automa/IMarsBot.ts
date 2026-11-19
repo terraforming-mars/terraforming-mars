@@ -53,6 +53,8 @@ export interface IMarsBot {
    * no effect (rulebook A p.5; BGG 3599965, 3623553).
    */
   maybeAdvanceTrack(trackIndex: number): void;
+  /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
+  loseMc(amount: number): number;
   /**
    * Advances the track that carries `tag` and tells the player's cards about the tag.
    *
@@ -158,13 +160,6 @@ export interface IMarsBot {
   maybePlaceGreenery(filter?: (space: Space) => boolean): boolean;
   /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
   withoutTRGain(action: () => void): void;
-  /**
-   * Runs `action` and caps the bot's M€ at what it was before, so the action pays the bot no M€
-   * (Government Intervention). M€ the action costs the bot stays spent.
-   *
-   * M€ that Lakefront Resorts' advance brings in stays (rulebook B, p.4).
-   */
-  withoutMcGain(action: () => void): void;
   /**
    * Runs `action` and takes back any TR or M€ it gave the bot (Government Intervention).
    *

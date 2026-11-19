@@ -16,7 +16,7 @@ export class PristarMarsBot extends MarsBotCorp {
       marsBot.setCorpState('whiteCubeOnCard', 0);
       marsBot.raiseTR(1);
       marsBot.gainMc(6);
-      marsBot.game.log('MarsBot (Pristar): parameter raise intercepted: removed cube, +1 TR, +6 M€, SKIP raise');
+      marsBot.game.log('MarsBot (${0}): parameter raise intercepted: removed cube, +1 TR, +6:r:mc:, SKIP raise', (b) => b.cardName(this.name));
       return true; // SKIP the parameter raise
     }
     return false;
@@ -25,7 +25,7 @@ export class PristarMarsBot extends MarsBotCorp {
   public override beforeActionPhase(marsBot: IMarsBot): void {
     if (marsBot.getCorpState('whiteCubeOnCard') === 0) {
       marsBot.setCorpState('whiteCubeOnCard', 1);
-      marsBot.game.log('MarsBot (Pristar): added white cube on card');
+      marsBot.game.log('MarsBot (${0}): added white cube on card', (b) => b.cardName(this.name));
     }
   }
 }

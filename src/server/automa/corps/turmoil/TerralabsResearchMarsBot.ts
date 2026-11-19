@@ -15,12 +15,12 @@ export class TerralabsResearchMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     // Reduce TR by 8
     marsBot.raiseTR(-8);
-    marsBot.game.log('MarsBot (Terralabs): TR -8');
+    marsBot.game.log('MarsBot (${0}): TR -8', (b) => b.cardName(this.name));
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
     const count = marsBot.game.generation <= 8 ? 1 : 2;
     marsBot.drawProjectCardsToActionDeck(count);
-    marsBot.game.log(`MarsBot (Terralabs): drew ${count} card(s) to action deck`);
+    marsBot.game.log('MarsBot (${0}): drew ${1} card(s) to action deck', (b) => b.cardName(this.name).number(count));
   }
 }

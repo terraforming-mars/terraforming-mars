@@ -15,7 +15,7 @@ export class LakefrontResortsMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     marsBot.player.oceanBonus = LAKEFRONT_OCEAN_BONUS;
     marsBot.setCorpState('whiteCubeOnCard', 1);
-    marsBot.game.log('MarsBot (Lakefront): 1 white cube on card');
+    marsBot.game.log('MarsBot (${0}): 1 white cube on card', (b) => b.cardName(this.name));
   }
 
   public override onTilePlaced(marsBot: IMarsBot, _placedByMarsBot: boolean, tileType: TileType): void {
@@ -29,10 +29,10 @@ export class LakefrontResortsMarsBot extends MarsBotCorp {
         if (marsBot.mcKeptThroughIntervention !== undefined) {
           marsBot.mcKeptThroughIntervention += Math.max(0, marsBot.megacredits - mcBefore);
         }
-        marsBot.game.log('MarsBot (Lakefront): ocean placed, removed cube, advance building track');
+        marsBot.game.log('MarsBot (${0}): ocean placed, removed cube, advance building track', (b) => b.cardName(this.name));
       } else {
         marsBot.setCorpState('whiteCubeOnCard', 1);
-        marsBot.game.log('MarsBot (Lakefront): ocean placed, placed white cube on card');
+        marsBot.game.log('MarsBot (${0}): ocean placed, placed white cube on card', (b) => b.cardName(this.name));
       }
     }
   }

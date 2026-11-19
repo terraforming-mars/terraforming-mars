@@ -3,7 +3,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/BaseGameCorps';
+import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
 export class UtopiaInvestMarsBot extends MarsBotCorp {
   constructor() {
@@ -16,6 +16,6 @@ export class UtopiaInvestMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B32_INVESTORS, 'Utopia Invest');
+    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B32_INVESTORS, this.name);
   }
 }

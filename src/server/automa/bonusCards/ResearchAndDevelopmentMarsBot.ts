@@ -1,6 +1,5 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
 
 export class ResearchAndDevelopmentMarsBot extends MarsBotBonusCardEffect {
@@ -11,7 +10,7 @@ export class ResearchAndDevelopmentMarsBot extends MarsBotBonusCardEffect {
   public override resolve(marsBot: IMarsBot): boolean {
     const drawnCard = marsBot.game.projectDeck.draw(marsBot.game);
     if (drawnCard !== undefined) {
-      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(createBonusCard(this.id).name).card(drawnCard));
+      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(this.name).card(drawnCard));
       marsBot.resolveProjectCard(drawnCard);
     }
     return false;

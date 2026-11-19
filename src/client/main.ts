@@ -1,11 +1,42 @@
 import {createApp, defineAsyncComponent} from 'vue';
 
+// One stylesheet: Vite handles the global Less and the component styles together.
+import '@/styles/common.less';
 import App from '@/client/components/App.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
-const PlayerInputFactory = defineAsyncComponent(() => import(/* webpackChunkName: "player-input" */ '@/client/components/PlayerInputFactory.vue'));
+const PlayerInputFactory = defineAsyncComponent(() => import('@/client/components/PlayerInputFactory.vue'));
+
+// A deploy replaces the hashed chunks. An already open tab still runs the old entry and cannot
+// load them any more: reload once to pick up the new entry instead of leaving a broken page.
+const PRELOAD_RELOAD_KEY = 'vite-preload-reload';
+let preloadReloadTriggered = false;
+window.addEventListener('vite:preloadError', (event) => {
+  event.preventDefault();
+  if (preloadReloadTriggered) {
+    return;
+  }
+  preloadReloadTriggered = true;
+  try {
+    if (sessionStorage.getItem(PRELOAD_RELOAD_KEY) === '1') {
+      return;
+    }
+    sessionStorage.setItem(PRELOAD_RELOAD_KEY, '1');
+  } catch {
+    // Storage unavailable: the in-memory guard still prevents a loop on this page.
+  }
+  window.location.reload();
+});
+// A successful load clears the guard, so the next deploy can recover as well.
+window.setTimeout(() => {
+  try {
+    sessionStorage.removeItem(PRELOAD_RELOAD_KEY);
+  } catch {
+    // Nothing to clear.
+  }
+}, 10_000);
 
 declare global {
   interface Window {

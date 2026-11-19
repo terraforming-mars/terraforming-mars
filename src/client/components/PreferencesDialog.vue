@@ -146,9 +146,9 @@ export default defineComponent({
       // Preference keys are snake_case; CSS classes are kebab-case.
       const cssClassSuffix = name.replace(/_/g, '-');
       if (val) {
-        target.classList.add('preferences_' + cssClassSuffix);
+        target.classList.add('preferences-' + cssClassSuffix);
       } else {
-        target.classList.remove('preferences_' + cssClassSuffix);
+        target.classList.remove('preferences-' + cssClassSuffix);
       }
     },
     updatePreferences(): void {

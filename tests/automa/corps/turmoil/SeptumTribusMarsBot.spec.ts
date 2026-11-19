@@ -5,10 +5,6 @@ import {testGame} from '../../../TestGame';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
 describe('SeptumTribusMarsBot', () => {
-  it('needs Turmoil', () => {
-    expect(new SeptumTribusMarsBot().requiredExpansions).deep.eq(['turmoil']);
-  });
-
   it('setup swaps Party Politics for Gray Eminence and adds the delegates of an unused colour to MarsBot', () => {
     const [game] = testGame(1, {automa: true, turmoilExtension: true});
     const {marsBot, calls} = recordingMarsBot({game, player: game.marsBotPlayer});

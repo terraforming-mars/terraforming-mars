@@ -2,6 +2,7 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {DELEGATES_PER_PLAYER} from '@/common/constants';
 import {IMarsBot} from '@/server/automa/IMarsBot';
+import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
@@ -18,7 +19,8 @@ export class SeptumTribusMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B21_PARTY_POLITICS);
     marsBot.addBonusCardToBonusDeck(BonusCardId.B29_GRAY_EMINENCE);
-    marsBot.game.log('MarsBot (${0}): Party Politics removed, Gray Eminence added', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): ${1} removed, ${2} added',
+      (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B21_PARTY_POLITICS).name).cardName(createBonusCard(BonusCardId.B29_GRAY_EMINENCE).name));
     // The unused colour's delegates count as MarsBot's own.
     const turmoil = marsBot.game.turmoil;
     if (turmoil) {

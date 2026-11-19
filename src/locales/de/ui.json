@@ -41,8 +41,10 @@
   "amazonis planitia": "Amazonis Planitia",
   "Random Official": "Zufällig (offiziell)",
   "Random All": "Zufällig (alle)",
+  "Choose between ${0} to ${1} for each": "Wähle für jeden Meilenstein/Auszeichnung einen Betrag zwischen ${0} und ${1} aus",
   "random": "Zufällig",
   "Official": "Offiziell",
+  "Manual": "händisch",
   "Clear": "Löschen",
 
   "GEN": "",

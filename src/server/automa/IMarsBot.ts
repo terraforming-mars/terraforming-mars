@@ -139,8 +139,6 @@ export interface IMarsBot {
   placeMarker(space: Space): void;
   /** Takes `card` off the bot's played pile. */
   removePlayedProjectCard(card: IProjectCard): void;
-  /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
-  loseMc(amount: number): number;
 
   /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
   getCorpState(key: string): number;

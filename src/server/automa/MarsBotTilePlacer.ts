@@ -96,41 +96,6 @@ export class MarsBotTilePlacer {
     return names;
   }
 
-  /**
-   * Finds the space for one of MarsBot's player markers (Settlers): a land space that is not
-   * reserved and has neither a tile nor a marker.
-   *
-   * After the usual tiebreakers and before the random one, it prefers the space next to the most
-   * ocean-reserved spaces.
-   */
-  public findMarkerSpace(): Space | undefined {
-    const board = this.marsBot.game.board;
-    const spaces = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) => space.player === undefined);
-    return this.selectBestSpace(spaces, () => 0,
-      (space) => board.getAdjacentSpaces(space).filter((s) => s.spaceType === SpaceType.OCEAN).length);
-  }
-
-  /**
-   * Finds the best space for a MarsBot city next to at least one of the human's greeneries.
-   * This is what the Build, Build, Build bonus card asks for first.
-   */
-  public findCitySpaceNextToHumanGreenery(): Space | undefined {
-    const board = this.marsBot.game.board;
-    return this.findCitySpace((space) =>
-      board.getAdjacentSpaces(space).some((s) => Board.isGreenerySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
-  }
-
-  /**
-   * Finds the best land space for a MarsBot special tile next to at least one of the human's cities.
-   * This is what the Build, Build, Build bonus card asks for second.
-   */
-  public findSpecialTileSpaceNextToHumanCity(): Space | undefined {
-    const board = this.marsBot.game.board;
-    const eligible = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) =>
-      board.getAdjacentSpaces(space).some((s) => Board.isCitySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
-    return this.selectBestSpace(eligible, () => 0);
-  }
-
   /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
   public findGreenerySpace(): Space | undefined {
     const board = this.marsBot.game.board;
@@ -215,6 +180,41 @@ export class MarsBotTilePlacer {
       return undefined;
     }
     return this.selectBestSpace(spaces, () => 0);
+  }
+
+  /**
+   * Finds the space for one of MarsBot's player markers (Settlers): a land space that is not
+   * reserved and has neither a tile nor a marker.
+   *
+   * After the usual tiebreakers and before the random one, it prefers the space next to the most
+   * ocean-reserved spaces.
+   */
+  public findMarkerSpace(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const spaces = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) => space.player === undefined);
+    return this.selectBestSpace(spaces, () => 0,
+      (space) => board.getAdjacentSpaces(space).filter((s) => s.spaceType === SpaceType.OCEAN).length);
+  }
+
+  /**
+   * Finds the best space for a MarsBot city next to at least one of the human's greeneries.
+   * This is what the Build, Build, Build bonus card asks for first.
+   */
+  public findCitySpaceNextToHumanGreenery(): Space | undefined {
+    const board = this.marsBot.game.board;
+    return this.findCitySpace((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isGreenerySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+  }
+
+  /**
+   * Finds the best land space for a MarsBot special tile next to at least one of the human's cities.
+   * This is what the Build, Build, Build bonus card asks for second.
+   */
+  public findSpecialTileSpaceNextToHumanCity(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const eligible = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isCitySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+    return this.selectBestSpace(eligible, () => 0);
   }
 
   /**

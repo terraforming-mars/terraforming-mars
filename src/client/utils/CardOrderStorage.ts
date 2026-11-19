@@ -1,5 +1,5 @@
 import {CardModel} from '@/common/models/CardModel';
-import {partition} from '@/common/utils/utils';
+import {isObject, partition} from '@/common/utils/utils';
 import {LocalStorageStore} from '@/client/utils/LocalStorageStore';
 
 // Stored as cardName: position
@@ -17,8 +17,7 @@ const store = new LocalStorageStore<CardOrder>({
   migrate: (raw) => {
     try {
       const parsed = JSON.parse(raw);
-      // null check is necessary because typeof null is object.
-      return (parsed !== null && typeof parsed === 'object') ? parsed as CardOrder : undefined;
+      return (isObject(parsed)) ? parsed as CardOrder : undefined;
     } catch {
       return undefined;
     }

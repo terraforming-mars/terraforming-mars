@@ -42,6 +42,7 @@ import {getHerokuIpAddress} from './heroku';
 import * as responses from './responses';
 import {EndGameLog} from '../routes/EndGameLog';
 import {UrlParams} from '../routes/UrlParams';
+import {isObject} from '@/common/utils/utils';
 
 const metrics = {
   request_count: new prometheus.Counter({
@@ -137,7 +138,7 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
+  if (isObject(socketIpAddress) && 'address' in socketIpAddress) {
     return '!' + socketIpAddress.address + '!';
   }
   if (typeof socketIpAddress === 'string') {

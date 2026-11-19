@@ -23,6 +23,7 @@ import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {SerializedCard} from '../SerializedCard';
 import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {isObject} from '@/common/utils/utils';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -37,7 +38,7 @@ export interface IHasCheckLoops {
 }
 
 export function isIHasCheckLoops(object: unknown): object is IHasCheckLoops {
-  return typeof object === 'object' && object !== null && 'getCheckLoops' in object && typeof object.getCheckLoops === 'function';
+  return isObject(object) && 'getCheckLoops' in object && typeof object.getCheckLoops === 'function';
 }
 
 /** Defines how ICard.getVictoryPoints works. */
@@ -241,7 +242,5 @@ export interface IActionCard {
 }
 
 export function isIActionCard(object: unknown): object is IActionCard {
-  return typeof object === 'object' && object !== null &&
-    'canAct' in object && typeof object.canAct === 'function' &&
-    'action' in object && typeof object.action === 'function';
+  return isObject(object) && 'canAct' in object && 'action' in object;
 }

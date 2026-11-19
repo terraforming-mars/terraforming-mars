@@ -5,7 +5,7 @@ import {CreateGameModel} from './CreateGameModel';
 import {PLAYER_COLORS} from '@/common/Color';
 import {NewPlayerModel} from '@/common/game/NewGameConfig';
 import {CardName} from '@/common/cards/CardName';
-import {cast} from '@/common/utils/utils';
+import {cast, isObject} from '@/common/utils/utils';
 import {CARD_RENAMES} from '@/common/cards/CardRenames';
 import {sanitizeEscapeVelocityOptions} from '@/common/game/escapeVelocity';
 import {BoardName} from '@/common/boards/BoardName';
@@ -86,7 +86,7 @@ export class JSONProcessor {
     initializeArrayFieldWithBackup(json_constants.OLD_CUSTOM_COLONIES, json_constants.CUSTOM_COLONIES);
     initializeArrayFieldWithBackup(json_constants.OLD_BANNED_CARDS, json_constants.BANNED_CARDS);
     const ev = json.escapeVelocity as JSONObject;
-    if (ev !== undefined && typeof ev === 'object') {
+    if (isObject(ev)) {
       const options = sanitizeEscapeVelocityOptions(ev);
       json.escapeVelocityMode = true;
       json.escapeVelocityBonusSeconds = options.bonusSectionsPerAction;

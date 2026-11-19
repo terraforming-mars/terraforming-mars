@@ -1,6 +1,8 @@
 // A representation of a value associated with each standard resource type.
 // Could be a player's inventory, or their production, or just a way to pass several resource-related values
 
+import {isObject} from '@/common/utils/utils';
+
 // Units represents any value of each standard unit.
 // Could be positive or negative, depending on how it's used.
 export type Units = {
@@ -39,7 +41,7 @@ const keys: ReadonlyArray<keyof Units> = Object.keys(EMPTY) as (keyof Units)[];
  * Returns true when all six units fields exist in `arg` and each represents a valid number.
  */
 function isUnits(arg: unknown): arg is Units {
-  if (typeof arg !== 'object' || arg === null) {
+  if (!isObject(arg)) {
     return false;
   }
   const record = arg as Record<string, unknown>;

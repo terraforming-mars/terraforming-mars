@@ -7,13 +7,6 @@ import {IMarsBot} from '@/server/automa/IMarsBot';
 import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 import {ICard} from '@/server/cards/ICard';
 
-/** Takes up to `amount` M€ from MarsBot and returns how much it lost. */
-export function loseMc(marsBot: IMarsBot, amount: number): number {
-  const lost = Math.min(amount, marsBot.megacredits);
-  marsBot.megacredits -= lost;
-  return lost;
-}
-
 /**
  * Removes the player's animal or microbe worth the most VP, for the bonus card `source`.
  *

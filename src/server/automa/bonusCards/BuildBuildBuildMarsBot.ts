@@ -2,9 +2,8 @@ import {TileType} from '@/common/TileType';
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCard, createBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
-import {loseMc} from '@/server/automa/bonusCards/bonusCardHelpers';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {inplaceShuffle} from '@/server/utils/shuffle';
 
@@ -36,18 +35,17 @@ export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
   }
 
   public override resolve(marsBot: IMarsBot, card: MarsBotBonusCard): boolean {
-    // Philares: a. a city next to the player's greenery, then lose 5 M€; b. the special tile of a
-    // card MarsBot played next to the player's city, then lose that card and 3 M€; c. gain 3 M€
-    // and shuffle this card back into the bonus deck
-    const name = createBonusCard(this.id).name;
+    // a. A city next to the player's greenery, then lose 5 M€; b. the special tile of a card MarsBot
+    // played next to the player's city, then lose that card and 3 M€; c. gain 3 M€ and shuffle this
+    // card back into the bonus deck
     const tilePlacer = new MarsBotTilePlacer(marsBot);
     const citySpace = tilePlacer.findCitySpaceNextToHumanGreenery();
     if (citySpace !== undefined) {
       marsBot.game.addCity(marsBot.player, citySpace);
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(citySpace));
-      const lost = loseMc(marsBot, 5);
+      const lost = marsBot.loseMc(5);
       marsBot.game.log('MarsBot (${0}): places a city next to a greenery of ${1}, loses ${2}:r:mc:',
-        (b) => b.cardName(name).player(marsBot.humanPlayer).number(lost));
+        (b) => b.cardName(this.name).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
@@ -58,16 +56,16 @@ export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
       marsBot.game.addTile(marsBot.player, specialSpace, {tileType, card: played.name});
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(specialSpace));
       marsBot.removePlayedProjectCard(played);
-      const lost = loseMc(marsBot, 3);
+      const lost = marsBot.loseMc(3);
       marsBot.game.log('MarsBot (${0}): places the tile of ${1} next to a city of ${2}, removes the card and loses ${3}:r:mc:',
-        (b) => b.cardName(name).card(played).player(marsBot.humanPlayer).number(lost));
+        (b) => b.cardName(this.name).card(played).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
     marsBot.gainMc(3);
     marsBot.bonusDeck.drawPile.push(card);
     inplaceShuffle(marsBot.bonusDeck.drawPile, marsBot.game.rng);
-    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.cardName(name));
+    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.cardName(this.name));
     return true;
   }
 }

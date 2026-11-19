@@ -30,14 +30,14 @@ function quietSpace(game: IGame, player: IPlayer): Space {
   return space;
 }
 
-function setup(megacredits: number, playedProjectCards: Array<IProjectCard> = []) {
+function setup(playedProjectCards: Array<IProjectCard> = []) {
   const [game, human, botPlayer] = testGame(2);
   const removed: Array<IProjectCard> = [];
   const {marsBot, calls} = recordingMarsBot({
     game,
     player: botPlayer,
     humanPlayer: human,
-    megacredits,
+    megacredits: 0,
     playedProjectCards,
     bonusDeck: new MarsBotBonusDeck([], [], game.rng),
     removePlayedProjectCard: (card) => removed.push(card),
@@ -46,30 +46,24 @@ function setup(megacredits: number, playedProjectCards: Array<IProjectCard> = []
 }
 
 describe('BuildBuildBuildMarsBot', () => {
-  for (const run of [
-    {megacredits: 20, after: 15},
-    {megacredits: 2, after: 0},
-  ] as const) {
-    it('places a city next to the greenery of the player and loses 5 M€: ' + JSON.stringify(run), () => {
-      const {game, human, marsBot, calls} = setup(run.megacredits);
-      const greenery = quietSpace(game, human);
-      game.simpleAddTile(human, greenery, {tileType: TileType.GREENERY});
-      const card = createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD);
+  it('places a city next to the greenery of the player and loses 5 M€', () => {
+    const {game, human, marsBot, calls} = setup();
+    const greenery = quietSpace(game, human);
+    game.simpleAddTile(human, greenery, {tileType: TileType.GREENERY});
+    const card = createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD);
 
-      const kept = new BuildBuildBuildMarsBot().resolve(marsBot, card);
+    const kept = new BuildBuildBuildMarsBot().resolve(marsBot, card);
 
-      const cities = game.board.getCities(marsBot.player);
-      expect(cities).has.length(1);
-      expect(game.board.getAdjacentSpaces(cities[0])).includes(greenery);
-      expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(cities[0])})`]);
-      expect(marsBot.megacredits).eq(run.after);
-      expect(kept).is.false;
-    });
-  }
+    const cities = game.board.getCities(marsBot.player);
+    expect(cities).has.length(1);
+    expect(game.board.getAdjacentSpaces(cities[0])).includes(greenery);
+    expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(cities[0])})`, 'loseMc(5)']);
+    expect(kept).is.false;
+  });
 
   it('places the tile of a card it played next to the city of the player, then loses the card and 3 M€', () => {
     const nuclearZone = new NuclearZone();
-    const {game, human, marsBot, calls, removed} = setup(10, [nuclearZone]);
+    const {game, human, marsBot, calls, removed} = setup([nuclearZone]);
     const city = quietSpace(game, human);
     game.simpleAddTile(human, city, {tileType: TileType.CITY});
 
@@ -80,8 +74,7 @@ describe('BuildBuildBuildMarsBot', () => {
     expect(space?.player).eq(marsBot.player);
     expect(game.board.getAdjacentSpaces(city)).includes(space);
     expect(removed).deep.eq([nuclearZone]);
-    expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(space!)})`]);
-    expect(marsBot.megacredits).eq(7);
+    expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(space!)})`, 'loseMc(3)']);
     expect(kept).is.false;
   });
 
@@ -93,7 +86,7 @@ describe('BuildBuildBuildMarsBot', () => {
   ] as const) {
     it('with nothing to build, gains 3 M€ and goes back into the bonus deck: ' + JSON.stringify(run), () => {
       const played = run.played === undefined ? undefined : newProjectCard(run.played);
-      const {game, human, marsBot, calls, removed} = setup(0, played === undefined ? [] : [played]);
+      const {game, human, marsBot, calls, removed} = setup(played === undefined ? [] : [played]);
       if (run.humanCity) {
         game.simpleAddTile(human, quietSpace(game, human), {tileType: TileType.CITY});
       }

@@ -112,7 +112,7 @@ export class MarsBotTilePlacer {
 
   /**
    * Finds the best space for a MarsBot city next to at least one of the human's greeneries.
-   * This is what the Build, Build, Build bonus card (B27) asks for first.
+   * This is what the Build, Build, Build bonus card asks for first.
    */
   public findCitySpaceNextToHumanGreenery(): Space | undefined {
     const board = this.marsBot.game.board;
@@ -122,7 +122,7 @@ export class MarsBotTilePlacer {
 
   /**
    * Finds the best land space for a MarsBot special tile next to at least one of the human's cities.
-   * This is what the Build, Build, Build bonus card (B27) asks for second.
+   * This is what the Build, Build, Build bonus card asks for second.
    */
   public findSpecialTileSpaceNextToHumanCity(): Space | undefined {
     const board = this.marsBot.game.board;

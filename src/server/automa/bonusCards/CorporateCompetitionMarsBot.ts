@@ -5,12 +5,11 @@ import {CardType} from '@/common/cards/CardType';
 import {Tag} from '@/common/cards/Tag';
 import {AwardName} from '@/common/ma/AwardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
 import {cardTagsIncludingEvent} from '@/server/automa/MarsBotTags';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
-import {maybePlaceGreenery, maybeRemoveAnimalOrMicrobe} from '@/server/automa/bonusCards/bonusCardHelpers';
+import {maybeRemoveAnimalOrMicrobe} from '@/server/automa/bonusCards/bonusCardHelpers';
 import {Board, isSpecialTileSpace} from '@/server/boards/Board';
 import {Space} from '@/server/boards/Space';
 import {IProjectCard} from '@/server/cards/IProjectCard';
@@ -24,7 +23,6 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
-    const name = createBonusCard(this.id).name;
     if (marsBot.megacredits < 5) {
       marsBot.maybeDrawAndResolveBonusCard();
       return false;
@@ -48,12 +46,12 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
     for (const {award} of sorted) {
       if (this.tryHelperAction(marsBot, award.name)) {
         if (FREE_HELPER_AWARDS.includes(award.name)) {
-          marsBot.game.log('MarsBot (${0}): helps with ${1}', (b) => b.cardName(name).award(award));
+          marsBot.game.log('MarsBot (${0}): helps with ${1}', (b) => b.cardName(this.name).award(award));
         } else {
           // A helper can itself cost M€ (a colony cube), so MarsBot may have less than 5 left
           const lost = Math.min(5, marsBot.megacredits);
           marsBot.megacredits -= lost;
-          marsBot.game.log('MarsBot (${0}): helps with ${1}, loses ${2}:r:mc:', (b) => b.cardName(name).award(award).number(lost));
+          marsBot.game.log('MarsBot (${0}): helps with ${1}, loses ${2}:r:mc:', (b) => b.cardName(this.name).award(award).number(lost));
         }
         resolved = true;
         break;
@@ -76,7 +74,6 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
     const marsBotBoard = marsBot.marsBotBoard;
     const board = game.board;
     const tilePlacer = new MarsBotTilePlacer(marsBot);
-    const name = createBonusCard(this.id).name;
     // A helper that would advance a maxed track is impossible, so MarsBot skips its award
     // instead of taking a Failed Action (rulebook A, p.7).
     const advance = (trackIndex: number) => {
@@ -132,7 +129,7 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
       if (card === undefined) {
         return false;
       }
-      game.log('MarsBot (${0}): reveals and resolves ${1}', (b) => b.cardName(name).card(card));
+      game.log('MarsBot (${0}): reveals and resolves ${1}', (b) => b.cardName(this.name).card(card));
       marsBot.resolveProjectCard(card);
       marsBot.gainMc(mc);
       return true;
@@ -149,25 +146,25 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
 
     switch (awardName) {
     // Tharsis (B08)
-    case 'Landlord': return maybePlaceGreenery(marsBot);
+    case 'Landlord': return marsBot.maybePlaceGreenery();
     case 'Banker': return advanceTrackOfEither([Tag.BUILDING, Tag.EVENT], 'less');
     case 'Scientist': return advanceTrackOf(Tag.SCIENCE);
     case 'Thermalist': return advanceTrackOf(Tag.POWER);
     case 'Miner': return advanceTrackOf(Tag.SPACE);
     // Hellas (B09)
-    case 'Cultivator': return maybePlaceGreenery(marsBot);
+    case 'Cultivator': return marsBot.maybePlaceGreenery();
     case 'Magnate': return revealAndResolveCard((c) => c.type === CardType.AUTOMATED);
     case 'Space Baron': return advanceTrackOf(Tag.SPACE);
-    case 'Excentric': return maybeRemoveAnimalOrMicrobe(marsBot, name);
+    case 'Excentric': return maybeRemoveAnimalOrMicrobe(marsBot, this.name);
     case 'Contractor': return advanceTrackOf(Tag.BUILDING);
     // Elysium (B10)
     case 'Celebrity': return revealAndResolveCard((c) => c.cost >= 20);
     case 'Industrialist': return advanceTrackOf(Tag.POWER);
-    case 'Desert Settler': return maybePlaceGreenery(marsBot, southOfEquator);
-    case 'Estate Dealer': return maybePlaceGreenery(marsBot, nextToOcean);
+    case 'Desert Settler': return marsBot.maybePlaceGreenery(southOfEquator);
+    case 'Estate Dealer': return marsBot.maybePlaceGreenery(nextToOcean);
     case 'Benefactor': { marsBot.player.increaseTerraformRating(2); return true; }
     // Utopia Planitia (B11)
-    case 'Suburbian': return maybePlaceGreenery(marsBot, onEdge);
+    case 'Suburbian': return marsBot.maybePlaceGreenery(onEdge);
     case 'Investor': return advanceTrackOf(Tag.EARTH);
     case 'Botanist': return advanceTrackOf(Tag.PLANT);
     case 'Incorporator': return revealAndResolveCard((c) => c.cost <= 10);
@@ -181,8 +178,8 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
     case 'Forecaster': return revealAndResolveCard((c) => c.requirements.length > 0);
     // Vastitas Borealis (B13). Traveller follows B14, the card for random awards.
     case 'Traveller': return advanceTrackOfEither([Tag.EARTH, Tag.JOVIAN], 'more');
-    case 'Landscaper': return maybePlaceGreenery(marsBot);
-    case 'Highlander': return maybePlaceGreenery(marsBot, (space) => !nextToOcean(space) && !(vastitasRules && nextToReservedOcean(space)));
+    case 'Landscaper': return marsBot.maybePlaceGreenery();
+    case 'Highlander': return marsBot.maybePlaceGreenery((space) => !nextToOcean(space) && !(vastitasRules && nextToReservedOcean(space)));
     case 'Promoter': return advanceTrackOf(Tag.EVENT);
     case 'Blacksmith': return advanceTrackOfEither([Tag.BUILDING, Tag.SPACE], 'more');
     // Milestones and awards (B14)

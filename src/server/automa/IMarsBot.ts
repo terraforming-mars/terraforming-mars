@@ -151,11 +151,11 @@ export interface IMarsBot {
    */
   advanceFurthestParameter(source: CardName, allowCorpIntercept?: boolean): boolean;
   /**
-   * Places a greenery for the bot, raising the oxygen.
+   * Places a greenery for the bot on a space that `filter` accepts, raising the oxygen.
    *
-   * Returns false, with no Failed Action, when no greenery space is left.
+   * Returns false, with no Failed Action, when no such space is left.
    */
-  maybePlaceGreenery(): boolean;
+  maybePlaceGreenery(filter?: (space: Space) => boolean): boolean;
   /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
   withoutTRGain(action: () => void): void;
   /**

@@ -22,10 +22,12 @@ import {TRACK, recordingMarsBot} from '../corps/RecordingMarsBot';
 /**
  * A bot with 5 M€ and a score of 5 in every award, in a 2-player game built with `gameOptions`.
  *
- * `calls` also records the track advances by tag and the project cards it plays.
+ * `calls` also records the track advances by tag and the project cards it plays. `greenerySpaces` holds the
+ * spaces a greenery it places may go on, and it places one when there is any.
  */
 function competitionBot(gameOptions: Partial<TestGameOptions> = {}, fields: Partial<IMarsBot> = {}) {
   const [game, human, botPlayer] = testGame(2, gameOptions);
+  const greenerySpaces: Array<Space> = [];
   const {marsBot, calls} = recordingMarsBot({
     game, player: botPlayer, humanPlayer: human, megacredits: 5, interceptsParameterRaise: () => false,
     awardValue: () => 5,
@@ -36,9 +38,13 @@ function competitionBot(gameOptions: Partial<TestGameOptions> = {}, fields: Part
     resolveProjectCard: (card) => {
       calls.push(`resolveProjectCard(${card.name})`);
     },
+    maybePlaceGreenery: (filter = () => true) => {
+      greenerySpaces.push(...game.board.getAvailableSpacesForGreenery(botPlayer).filter(filter));
+      return greenerySpaces.length > 0;
+    },
     ...fields,
   });
-  return {game, human, botPlayer, marsBot, calls};
+  return {game, human, botPlayer, marsBot, calls, greenerySpaces};
 }
 
 function fund(bot: ReturnType<typeof competitionBot>, ...awards: ReadonlyArray<AwardName>): void {
@@ -199,7 +205,6 @@ describe('CorporateCompetitionMarsBot', () => {
     expect(helped).is.false;
   });
 
-  // Unrestricted, the greenery goes on 29, on the equator and the edge, or with an ocean on 32, on 23, inland next to it
   for (const run of [
     {award: 'Landlord', ocean: false, placed: true},
     {award: 'Desert Settler', ocean: false, placed: true},
@@ -224,9 +229,8 @@ describe('CorporateCompetitionMarsBot', () => {
 
       const helped = new CorporateCompetitionMarsBot().tryHelperAction(bot.marsBot, run.award);
 
-      const greeneries = board.getGreeneries(bot.botPlayer);
-      expect(greeneries).has.length(run.placed ? 1 : 0);
-      expect(greeneries.every(where[run.award])).is.true;
+      const expected = board.getAvailableSpacesForGreenery(bot.botPlayer).filter(where[run.award]);
+      expect(bot.greenerySpaces.map((space) => space.id)).deep.eq(expected.map((space) => space.id));
       expect(helped).eq(run.placed);
     });
   }
@@ -247,7 +251,6 @@ describe('CorporateCompetitionMarsBot', () => {
 
       const helped = new CorporateCompetitionMarsBot().tryHelperAction(bot.marsBot, 'Highlander');
 
-      expect(board.getGreeneries(bot.botPlayer)).has.length(run.placed ? 1 : 0);
       expect(helped).eq(run.placed);
     });
   }

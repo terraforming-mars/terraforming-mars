@@ -2,7 +2,6 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
-import {addBonusCardBeforeActionPhase} from '@/server/automa/corps/corpHelpers';
 
 export class RobinsonIndustriesMarsBot extends MarsBotCorp {
   constructor() {
@@ -19,6 +18,6 @@ export class RobinsonIndustriesMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    addBonusCardBeforeActionPhase(marsBot, BonusCardId.B28_DIVERSIFICATION, this.name);
+    marsBot.addBonusCardToActionDeck(BonusCardId.B28_DIVERSIFICATION);
   }
 }

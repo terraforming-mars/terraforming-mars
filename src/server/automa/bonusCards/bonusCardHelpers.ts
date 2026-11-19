@@ -15,20 +15,6 @@ export function loseMc(marsBot: IMarsBot, amount: number): number {
 }
 
 /**
- * Advances a track for a bonus card.
- *
- * A maxed track stays put: a bonus card that can't resolve takes no Failed Action (rulebook A p.5;
- * BGG 3599965, 3623553).
- */
-export function maybeAdvanceTrack(marsBot: IMarsBot, trackIndex: number): void {
-  if (!marsBot.marsBotBoard.tracks[trackIndex].canAdvance()) {
-    marsBot.game.log('MarsBot: track ${0} at max, no effect', (b) => b.number(trackIndex + 1));
-    return;
-  }
-  marsBot.advanceTrack(trackIndex);
-}
-
-/**
  * Removes the player's animal or microbe worth the most VP, for the bonus card `source`.
  *
  * False when no card has one MarsBot may remove. Cards that score their resources come first, then

@@ -10,7 +10,6 @@ import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {Board} from '@/server/boards/Board';
 import {GlobalParameterTracks} from '@/server/boards/GlobalParameterTracks';
-import {Space} from '@/server/boards/Space';
 import {ICard} from '@/server/cards/ICard';
 import {venusStepsBetween} from '@/server/venusNext/venusScale';
 
@@ -174,14 +173,14 @@ export function lobbyistsOxygenBranch(marsBot: IMarsBot, source: CardName): bool
 }
 
 /**
- * Places a MarsBot greenery on a space that passes `filter` and raises oxygen.
+ * Places a MarsBot greenery and raises oxygen.
  *
- * Returns false, with no Failed Action, when no such space is left.
+ * Returns false, with no Failed Action, when no greenery space is left.
  */
-export function maybePlaceGreenery(marsBot: IMarsBot, filter?: (space: Space) => boolean): boolean {
+export function maybePlaceGreenery(marsBot: IMarsBot): boolean {
   const game = marsBot.game;
   const tilePlacer = new MarsBotTilePlacer(marsBot);
-  const space = tilePlacer.findGreenerySpace(filter);
+  const space = tilePlacer.findGreenerySpace();
   if (space === undefined) {
     return false;
   }

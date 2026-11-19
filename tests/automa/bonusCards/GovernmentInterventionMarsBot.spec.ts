@@ -48,4 +48,14 @@ describe('GovernmentInterventionMarsBot', () => {
     expect(game.board.getOceanSpaces()).has.length(1);
     expect(marsBot.megacredits).eq(0);
   });
+
+  it('raises the parameter even when a corp would cancel the raise', () => {
+    const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+    const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => true});
+    game.generation = 2;
+
+    new GovernmentInterventionMarsBot().resolve(marsBot);
+
+    expect(game.getTemperature()).eq(-28);
+  });
 });

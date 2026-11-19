@@ -20,11 +20,11 @@ describe('ArcadianCommunitiesMarsBot', () => {
     const [markedByPlayerTile, markedByBotTile, unmarked] = game.board.spaces;
     const markers = new Set([markedByPlayerTile, markedByBotTile]);
     const {marsBot, calls} = recordingMarsBot({game, removeMarker: (space) => markers.delete(space)});
-    const onTilePlaced = new ArcadianCommunitiesMarsBot().onTilePlaced!;
+    const corp = new ArcadianCommunitiesMarsBot();
 
-    onTilePlaced(marsBot, false, TileType.CITY, markedByPlayerTile);
-    onTilePlaced(marsBot, true, TileType.CITY, unmarked);
-    onTilePlaced(marsBot, true, TileType.CITY, markedByBotTile);
+    corp.onTilePlaced(marsBot, false, TileType.CITY, markedByPlayerTile);
+    corp.onTilePlaced(marsBot, true, TileType.CITY, unmarked);
+    corp.onTilePlaced(marsBot, true, TileType.CITY, markedByBotTile);
 
     expect(calls).deep.eq(['gainMc(3)']);
   });

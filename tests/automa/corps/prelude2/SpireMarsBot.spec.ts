@@ -7,12 +7,12 @@ import {recordingMarsBot} from '../RecordingMarsBot';
 describe('SpireMarsBot', () => {
   it('collects a science resource for a card with 2 tags, none for 1, and spends 10 on a city and 1 TR', () => {
     const {marsBot, calls, corpState} = recordingMarsBot();
-    const onCard = new SpireMarsBot().onProjectCardResolved!;
+    const corp = new SpireMarsBot();
     corpState.set('scienceResources', 9);
 
-    onCard(marsBot, new ArtificialLake());
+    corp.onProjectCardResolved(marsBot, new ArtificialLake());
     expect(corpState.get('scienceResources')).eq(9);
-    onCard(marsBot, new Asteroid());
+    corp.onProjectCardResolved(marsBot, new Asteroid());
     new SpireMarsBot().beforeActionPhase(marsBot);
 
     expect(corpState.get('scienceResources')).eq(0);

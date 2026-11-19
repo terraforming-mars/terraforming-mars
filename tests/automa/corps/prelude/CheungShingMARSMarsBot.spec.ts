@@ -2,14 +2,11 @@ import {expect} from 'chai';
 import {CheungShingMARSMarsBot} from '@/server/automa/corps/prelude/CheungShingMARSMarsBot';
 import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
-// Track index on the Tharsis board
-const BUILDING = 0;
-
 describe('CheungShingMARSMarsBot', () => {
   it('gains 5 M€ for the silver resource cubes on spaces 4 to 18 of the building track', () => {
     const {marsBot, calls} = recordingMarsBot();
 
-    new CheungShingMARSMarsBot().onTrackCubeTrigger(marsBot, BUILDING, 4, 'credit');
+    new CheungShingMARSMarsBot().onTrackCubeTrigger(marsBot, 0, 4, 'credit');
 
     expect(calls).deep.eq(['gainMc(5)']);
     expect(trackCubes(new CheungShingMARSMarsBot())).deep.eq(Array.from({length: 15}, (_, i) => `building credit ${i + 4}`));

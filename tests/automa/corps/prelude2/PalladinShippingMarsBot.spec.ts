@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {PalladinShippingMarsBot} from '@/server/automa/corps/prelude2/PalladinShippingMarsBot';
 import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
-// Track indexes on the Tharsis board
+// Track index on the Tharsis board
 const SPACE = 1;
-const EVENT = 2;
 
 describe('PalladinShippingMarsBot', () => {
   it('gains 5 M€ at setup', () => {
@@ -18,11 +17,11 @@ describe('PalladinShippingMarsBot', () => {
   // A white and a black cube on the card pay for one temperature step
   it('raises the temperature once a white and a black cube are on the card', () => {
     const {marsBot, calls, corpState} = recordingMarsBot();
-    const onCube = new PalladinShippingMarsBot().onTrackCubeTrigger!;
+    const corp = new PalladinShippingMarsBot();
 
-    onCube(marsBot, SPACE, 3, 'white');
-    onCube(marsBot, SPACE, 4, 'white');
-    onCube(marsBot, EVENT, 3, 'black');
+    corp.onTrackCubeTrigger(marsBot, SPACE, 3, 'white');
+    corp.onTrackCubeTrigger(marsBot, SPACE, 4, 'white');
+    corp.onTrackCubeTrigger(marsBot, 2, 3, 'black');
 
     expect(calls).deep.eq(['raiseTemperature(1)']);
     expect(corpState.get('whiteCubesOnCard')).eq(1);

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {processRequest} from '../../src/server/server/requestProcessor';
+import {metricsPathOf, processRequest} from '../../src/server/server/requestProcessor';
 import {MockRequest, MockResponse} from '../routes/HttpMocks';
 
 describe('requestProcessor', () => {
@@ -10,7 +10,16 @@ describe('requestProcessor', () => {
     req.url = '/';
     await processRequest(req, res);
 
-    expect(req.url).eq('/assets/index.html');
+    expect(req.url).eq('/build/index.html');
+  });
+
+  it('keeps metrics labels stable across Vite builds', () => {
+    expect(metricsPathOf('main-AbCd1234.js')).eq('main.js');
+    expect(metricsPathOf('client-AbCd1234.css')).eq('client.css');
+    expect(metricsPathOf('chunks/PlayerHome-AbCd1234.js')).eq('chunks/PlayerHome.js');
+    expect(metricsPathOf('chunks/player-home-AbCd1234.js.map')).eq('chunks/player-home.js.map');
+    expect(metricsPathOf('assets/PlayerHome-AbCd1234.png')).eq('assets/');
+    expect(metricsPathOf('api/player')).eq('api/player');
   });
 
   it('waits for the routed handler to finish writing the response before returning', async () => {

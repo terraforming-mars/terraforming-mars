@@ -10,7 +10,7 @@ export class GameHandler extends Handler {
   public static readonly INSTANCE = new GameHandler();
 
   public override get(req: Request, res: Response, ctx: Context): Promise<void> {
-    req.url = '/assets/index.html';
+    req.url = '/build/index.html';
     return ServeAsset.INSTANCE.get(req, res, ctx);
   }
 }

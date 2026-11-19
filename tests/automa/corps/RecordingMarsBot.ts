@@ -29,6 +29,8 @@ const RECORDED = [
   'maybeDrawAndResolveBonusCard',
   'maybeClaimMilestone',
   'maybeFundAward',
+  'maybeDiscardProjectCardWithFewestTags',
+  'maybePlaceRandomColony',
 ] as const satisfies ReadonlyArray<keyof IMarsBot>;
 
 export type RecordingMarsBot = {

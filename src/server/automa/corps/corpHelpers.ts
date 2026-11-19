@@ -14,12 +14,6 @@ export function whiteTrackCubes(trackIndex: number): MarsBotTrackCube[] {
   return Array.from({length: 18}, (_, i) => ({trackIndex, position: i + 1, cubeType: 'white' as const}));
 }
 
-/** The common "add 1 floater at round start" pattern. */
-export function addFloaterAtRoundStart(marsBot: IMarsBot, corpName: CardName): void {
-  marsBot.addFloaters(1);
-  marsBot.game.log('MarsBot (${0}): round start, +1 floater', (b) => b.cardName(corpName));
-}
-
 /**
  * The track cube rule Point Luna and Astrodrill share: reaching a white cube advances MarsBot's
  * least-advanced track, reaching a black cube advances its space track.

@@ -6,7 +6,7 @@ describe('SupplyAndDemandMarsBot', () => {
   for (const run of [
     {mcOnCard: 5, calls: ['gainMc(3)'], mcOnCardLeft: 2},
     {mcOnCard: 2, calls: ['gainMc(2)'], mcOnCardLeft: 0},
-    {mcOnCard: 0, calls: [`advanceTrack(${TRACK.power})`], mcOnCardLeft: 0},
+    {mcOnCard: 0, calls: [`maybeAdvanceTrack(${TRACK.power})`], mcOnCardLeft: 0},
   ] as const) {
     it('takes up to 3 M€ from the corporation card, or advances the power track: ' + JSON.stringify(run), () => {
       const {marsBot, calls, corpState} = recordingMarsBot();
@@ -18,14 +18,4 @@ describe('SupplyAndDemandMarsBot', () => {
       expect(corpState.get('mcOnCard')).eq(run.mcOnCardLeft);
     });
   }
-
-  it('leaves a maxed track where it is', () => {
-    const {marsBot, calls} = recordingMarsBot();
-    const power = marsBot.marsBotBoard.tracks[TRACK.power];
-    power.position = power.definition.layout.length - 1;
-
-    new SupplyAndDemandMarsBot().resolve(marsBot);
-
-    expect(calls).is.empty;
-  });
 });

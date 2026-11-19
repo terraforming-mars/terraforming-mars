@@ -1,8 +1,7 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
-import {advanceFurthestParameter, lobbyistsOceanBranch, lobbyistsOxygenBranch, lobbyistsTempBranch} from '@/server/automa/bonusCards/bonusCardHelpers';
+import {lobbyistsOceanBranch, lobbyistsOxygenBranch, lobbyistsTempBranch} from '@/server/automa/bonusCards/bonusCardHelpers';
 
 export class LobbyistsMarsBot extends MarsBotBonusCardEffect {
   constructor() {
@@ -10,14 +9,13 @@ export class LobbyistsMarsBot extends MarsBotBonusCardEffect {
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
-    const name = createBonusCard(this.id).name;
     // The first three branches destroy the card, the last one keeps it
-    if (lobbyistsTempBranch(marsBot, name) ||
-      lobbyistsOxygenBranch(marsBot, name) ||
-      lobbyistsOceanBranch(marsBot, name)) {
+    if (lobbyistsTempBranch(marsBot, this.name) ||
+      lobbyistsOxygenBranch(marsBot, this.name) ||
+      lobbyistsOceanBranch(marsBot, this.name)) {
       return true;
     }
-    advanceFurthestParameter(marsBot, name);
+    marsBot.advanceFurthestParameter(this.name);
     return false;
   }
 }

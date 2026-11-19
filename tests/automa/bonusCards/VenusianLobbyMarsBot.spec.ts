@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {GlobalParameter} from '@/common/GlobalParameter';
+import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
@@ -24,9 +25,10 @@ describe('VenusianLobbyMarsBot', () => {
       new VenusianLobbyMarsBot().resolve(marsBot);
 
       expect(game.getVenusScaleLevel()).eq(run.venus);
-      expect(calls).deep.eq([`advanceTrack(${marsBotBoard.tagToTrack[Tag.VENUS]})`]);
-      // Temperature has the most steps left
-      expect(game.getTemperature()).eq(-28);
+      expect(calls).deep.eq([
+        `maybeAdvanceTrack(${marsBotBoard.tagToTrack[Tag.VENUS]})`,
+        `advanceFurthestParameter(${CardName.AUTOMA_VENUSIAN_LOBBY})`,
+      ]);
     });
   }
 
@@ -40,7 +42,6 @@ describe('VenusianLobbyMarsBot', () => {
 
     new VenusianLobbyMarsBot().resolve(marsBot);
 
-    expect(calls).deep.eq([`advanceTrack(${TRACK.science})`]);
-    expect(game.getTemperature()).eq(-30);
+    expect(calls).deep.eq([`maybeAdvanceTrack(${TRACK.science})`]);
   });
 });

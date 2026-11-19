@@ -1,61 +1,36 @@
 import {expect} from 'chai';
+import {CardName} from '@/common/cards/CardName';
 import {GovernmentInterventionMarsBot} from '@/server/automa/bonusCards/GovernmentInterventionMarsBot';
 import {testGame} from '../../TestGame';
-import {maxOutOceans, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
+const ADVANCE_FURTHEST = `advanceFurthestParameter(${CardName.AUTOMA_GOVERNMENT_INTERVENTION}, false)`;
+
 describe('GovernmentInterventionMarsBot', () => {
+  // `advanced` is what raising the parameter furthest from completion returns: false once Mars is complete
   for (const run of [
-    {generation: 2, venus: 0, marsComplete: false, after: {temperature: -28, venus: 0}},
-    {generation: 3, venus: 0, marsComplete: false, after: {temperature: -30, venus: 2}},
-    {generation: 3, venus: 30, marsComplete: false, after: {temperature: -28, venus: 30}},
-    {generation: 2, venus: 0, marsComplete: true, after: {temperature: 8, venus: 2}},
+    {generation: 2, venus: 0, advanced: true, calls: ['withoutTRorMcGain()', ADVANCE_FURTHEST], venusAfter: 0},
+    {generation: 3, venus: 0, advanced: true, calls: ['withoutTRGain()'], venusAfter: 2},
+    {generation: 3, venus: 30, advanced: true, calls: ['withoutTRorMcGain()', ADVANCE_FURTHEST], venusAfter: 30},
+    {generation: 2, venus: 0, advanced: false, calls: ['withoutTRorMcGain()', ADVANCE_FURTHEST, 'withoutTRGain()'], venusAfter: 2},
   ] as const) {
-    it('raises a Martian parameter on an even generation or with Venus complete, else Venus, for no TR: ' + JSON.stringify(run), () => {
+    it('raises a Martian parameter on an even generation or with Venus complete, else Venus, for no TR or M€: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
-      const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false});
+      const {marsBot, calls} = recordingMarsBot({
+        game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false,
+        advanceFurthestParameter: (source, allowCorpIntercept) => {
+          calls.push(`advanceFurthestParameter(${source}, ${allowCorpIntercept})`);
+          return run.advanced;
+        },
+      });
       game.generation = run.generation;
       setVenusScaleLevel(game, run.venus);
-      if (run.marsComplete) {
-        setTemperature(game, 8);
-        setOxygenLevel(game, 14);
-        maxOutOceans(human);
-      }
-      const tr = botPlayer.terraformRating;
 
       new GovernmentInterventionMarsBot().resolve(marsBot);
 
-      expect({temperature: game.getTemperature(), venus: game.getVenusScaleLevel()}).deep.eq(run.after);
-      expect(botPlayer.terraformRating).eq(tr);
+      expect(calls).deep.eq(run.calls);
+      expect(game.getVenusScaleLevel()).eq(run.venusAfter);
     });
   }
-
-  it('keeps no M€ from the ocean it places', () => {
-    const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
-    const {marsBot} = recordingMarsBot({
-      game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false,
-      gainMc: (amount) => {
-        marsBot.megacredits += amount;
-      },
-    });
-    game.generation = 2;
-    // Oceans have the most steps left
-    setTemperature(game, 0);
-    setOxygenLevel(game, 9);
-
-    new GovernmentInterventionMarsBot().resolve(marsBot);
-
-    expect(game.board.getOceanSpaces()).has.length(1);
-    expect(marsBot.megacredits).eq(0);
-  });
-
-  it('raises the parameter even when a corp would cancel the raise', () => {
-    const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
-    const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => true});
-    game.generation = 2;
-
-    new GovernmentInterventionMarsBot().resolve(marsBot);
-
-    expect(game.getTemperature()).eq(-28);
-  });
 });

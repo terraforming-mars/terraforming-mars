@@ -3,9 +3,6 @@ import {TileType} from '@/common/TileType';
 import {TharsisRepublicMarsBot} from '@/server/automa/corps/base/TharsisRepublicMarsBot';
 import {recordingMarsBot} from '../RecordingMarsBot';
 
-// Track index on the Tharsis board
-const EVENT = 2;
-
 describe('TharsisRepublicMarsBot', () => {
   // The Setup box (rulebook B p.1)
   it('places a city at setup', () => {
@@ -17,7 +14,7 @@ describe('TharsisRepublicMarsBot', () => {
   });
 
   for (const run of [
-    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', calls: [`advanceTrack(${EVENT})`]},
+    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', calls: ['advanceTrack(2)']},
     {tileType: TileType.CITY, byMarsBot: false, tile: 'player city', calls: ['gainMc(2)']},
     {tileType: TileType.CAPITAL, byMarsBot: false, tile: 'player capital', calls: ['gainMc(2)']},
     {tileType: TileType.GREENERY, byMarsBot: false, tile: 'player greenery', calls: []},

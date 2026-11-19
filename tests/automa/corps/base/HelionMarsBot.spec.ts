@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {HelionMarsBot} from '@/server/automa/corps/base/HelionMarsBot';
 import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
-// Track indexes on the Tharsis board
+// Track index on the Tharsis board
 const BUILDING = 0;
-const EARTH = 5;
 
 describe('HelionMarsBot', () => {
   for (const run of [
     {track: BUILDING, cube: 'white', calls: ['maybeDrawAndResolveProjectCard()']},
-    {track: EARTH, cube: 'black', calls: ['raiseTemperature(1)']},
+    {track: 5, cube: 'black', calls: ['raiseTemperature(1)']},
   ] as const) {
     it(`draws a project card for a white cube and raises the temperature for a black one, ${run.cube} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();

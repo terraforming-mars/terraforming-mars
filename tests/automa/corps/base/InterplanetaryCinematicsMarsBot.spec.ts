@@ -2,12 +2,8 @@ import {expect} from 'chai';
 import {InterplanetaryCinematicsMarsBot} from '@/server/automa/corps/base/InterplanetaryCinematicsMarsBot';
 import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
-// Track indexes on the Tharsis board
-const BUILDING = 0;
-const EVENT = 2;
-
 describe('InterplanetaryCinematicsMarsBot', () => {
-  for (const run of [{track: BUILDING, tag: 'building'}, {track: EVENT, tag: 'event'}]) {
+  for (const run of [{track: 0, tag: 'building'}, {track: 2, tag: 'event'}]) {
     it(`gains 2 M€ for each advance of the building and event tracks, ${run.tag} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
 

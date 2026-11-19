@@ -3,10 +3,8 @@ import {TileType} from '@/common/TileType';
 import {LakefrontResortsMarsBot} from '@/server/automa/corps/turmoil/LakefrontResortsMarsBot';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {testGame} from '../../../TestGame';
-import {RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
+import {TRACK, RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
 
-// Track index on the Tharsis board
-const BUILDING = 0;
 
 /** A recording bot whose player is MarsBot's player in an automa game. */
 function lakefrontBot(fields: Partial<IMarsBot> = {}): RecordingMarsBot {
@@ -32,14 +30,14 @@ describe('LakefrontResortsMarsBot', () => {
 
     corp.onTilePlaced(marsBot, false, TileType.OCEAN);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
-    expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
+    expect(calls).deep.eq([`advanceTrack(${TRACK.building})`]);
 
     corp.onTilePlaced(marsBot, false, TileType.GREENERY);
     expect(corpState.get('whiteCubeOnCard')).eq(0);
 
     corp.onTilePlaced(marsBot, true, TileType.OCEAN);
     expect(corpState.get('whiteCubeOnCard')).eq(1);
-    expect(calls).deep.eq([`advanceTrack(${BUILDING})`]);
+    expect(calls).deep.eq([`advanceTrack(${TRACK.building})`]);
   });
 
   // FAQ (rulebook B p.4): Lakefront overrides Government Intervention's "no M€"

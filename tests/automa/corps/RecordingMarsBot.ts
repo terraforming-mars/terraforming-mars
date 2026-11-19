@@ -67,3 +67,6 @@ export function trackCubes(corp: MarsBotCorp, tracks: ReadonlyArray<TrackDefinit
   const board = new MarsBotBoard(tracks);
   return corpTrackCubes(corp, board).map((cube) => `${board.definitions[cube.trackIndex].tags[0]} ${cube.cubeType} ${cube.position}`);
 }
+
+/** Track indexes on the Tharsis board. */
+export const TRACK = {building: 0, space: 1, event: 2, science: 3, power: 4, earth: 5, plant: 6} as const;

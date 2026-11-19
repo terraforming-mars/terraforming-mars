@@ -1,10 +1,7 @@
 import {expect} from 'chai';
 import {Tag} from '@/common/cards/Tag';
 import {EcotecMarsBot} from '@/server/automa/corps/prelude2/EcotecMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
-
-// Track index on the Tharsis board
-const PLANT = 6;
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('EcotecMarsBot', () => {
   it('collects plant resources, 2 from setup and 1 for each Plant, Microbe and Animal tag, and spends 5', () => {
@@ -17,7 +14,7 @@ describe('EcotecMarsBot', () => {
     new EcotecMarsBot().beforeActionPhase(marsBot);
 
     expect(corpState.get('plantResources')).eq(0);
-    expect(calls).deep.eq([`advanceTrack(${PLANT})`]);
+    expect(calls).deep.eq([`advanceTrack(${TRACK.plant})`]);
   });
 
   it('has a white cube on every space of the plant track', () => {

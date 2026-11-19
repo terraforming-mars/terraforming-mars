@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {KuiperCooperativeMarsBot} from '@/server/automa/corps/promo/KuiperCooperativeMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('KuiperCooperativeMarsBot', () => {
   for (const run of [
@@ -10,7 +10,7 @@ describe('KuiperCooperativeMarsBot', () => {
     it(`raises the temperature for a white cube and places an ocean for a black one, ${run.cube} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
-      new KuiperCooperativeMarsBot().onTrackCubeTrigger(marsBot, 1, 4, run.cube);
+      new KuiperCooperativeMarsBot().onTrackCubeTrigger(marsBot, TRACK.space, 4, run.cube);
 
       expect(calls).deep.eq(run.calls);
     });

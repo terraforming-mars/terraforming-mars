@@ -1,9 +1,6 @@
 import {expect} from 'chai';
 import {PalladinShippingMarsBot} from '@/server/automa/corps/prelude2/PalladinShippingMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
-
-// Track index on the Tharsis board
-const SPACE = 1;
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('PalladinShippingMarsBot', () => {
   it('gains 5 M€ at setup', () => {
@@ -19,9 +16,9 @@ describe('PalladinShippingMarsBot', () => {
     const {marsBot, calls, corpState} = recordingMarsBot();
     const corp = new PalladinShippingMarsBot();
 
-    corp.onTrackCubeTrigger(marsBot, SPACE, 3, 'white');
-    corp.onTrackCubeTrigger(marsBot, SPACE, 4, 'white');
-    corp.onTrackCubeTrigger(marsBot, 2, 3, 'black');
+    corp.onTrackCubeTrigger(marsBot, TRACK.space, 3, 'white');
+    corp.onTrackCubeTrigger(marsBot, TRACK.space, 4, 'white');
+    corp.onTrackCubeTrigger(marsBot, TRACK.event, 3, 'black');
 
     expect(calls).deep.eq(['raiseTemperature(1)']);
     expect(corpState.get('whiteCubesOnCard')).eq(1);

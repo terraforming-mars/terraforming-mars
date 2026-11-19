@@ -1,19 +1,16 @@
 import {expect} from 'chai';
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {FactorumMarsBot} from '@/server/automa/corps/promo/FactorumMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
-
-// Track index on the Tharsis board
-const BUILDING = 0;
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('FactorumMarsBot', () => {
   it('stores 1 M€ for each advance of the building track and none for another track', () => {
     const {marsBot, corpState} = recordingMarsBot();
     const corp = new FactorumMarsBot();
 
-    corp.onTrackCubeTrigger(marsBot, BUILDING, 1, 'white');
-    corp.onTrackCubeTrigger(marsBot, BUILDING, 2, 'white');
-    corp.onTrackCubeTrigger(marsBot, 1, 1, 'white');
+    corp.onTrackCubeTrigger(marsBot, TRACK.building, 1, 'white');
+    corp.onTrackCubeTrigger(marsBot, TRACK.building, 2, 'white');
+    corp.onTrackCubeTrigger(marsBot, TRACK.space, 1, 'white');
 
     expect(corpState.get('mcOnCard')).eq(2);
   });

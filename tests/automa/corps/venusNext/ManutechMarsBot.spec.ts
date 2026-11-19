@@ -2,20 +2,17 @@ import {expect} from 'chai';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 import {VENUS_MARSBOT_TRACK} from '@/server/automa/boards/VenusMarsBot';
 import {ManutechMarsBot} from '@/server/automa/corps/venusNext/ManutechMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
-
-// Track index on the Tharsis board
-const EVENT = 2;
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('ManutechMarsBot', () => {
   it('advances a track once more after #5 and #12 but not after another space', () => {
     const {marsBot, calls} = recordingMarsBot();
 
     for (const position of [5, 6, 12]) {
-      new ManutechMarsBot().afterTrackSpaceResolved(marsBot, EVENT, position);
+      new ManutechMarsBot().afterTrackSpaceResolved(marsBot, TRACK.event, position);
     }
 
-    expect(calls).deep.eq([`advanceTrack(${EVENT})`, `advanceTrack(${EVENT})`]);
+    expect(calls).deep.eq([`advanceTrack(${TRACK.event})`, `advanceTrack(${TRACK.event})`]);
   });
 
   it('puts a black cube on #5 and #12 of every track, Venus included', () => {

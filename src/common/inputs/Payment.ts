@@ -1,6 +1,7 @@
 import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
 import {SpendableResource, SPENDABLE_RESOURCES} from './Spendable';
 import {comparing, reversed} from '@/common/utils/Ordering';
+import {isObject} from '@/common/utils/utils';
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth
@@ -14,10 +15,7 @@ import {comparing, reversed} from '@/common/utils/Ordering';
 export type Payment = {[k in SpendableResource]: number};
 
 export function isPayment(obj: unknown): obj is Payment {
-  if (typeof obj !== 'object') {
-    return false;
-  }
-  if (!obj) {
+  if (!isObject(obj)) {
     return false;
   }
   const h = obj as Payment; // Still might not be Payment, but h as is does not escape this method.

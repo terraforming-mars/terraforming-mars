@@ -36,6 +36,7 @@ import {OrOptions} from './inputs/OrOptions';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameterTracks} from '@/server/boards/GlobalParameterTracks';
 import {Resource} from '@/common/Resource';
+import {isObject} from '@/common/utils/utils';
 
 export interface Score {
   corporation: String;
@@ -302,8 +303,5 @@ export interface IGame extends Logger {
 }
 
 export function isIGame(object: unknown): object is IGame {
-  if (typeof object !== 'object' || object === null) {
-    return false;
-  }
-  return Object.hasOwn(object, 'id') && isGameId((object as {id?: unknown}).id);
+  return isObject(object) && 'id' in object && isGameId(object.id);
 }

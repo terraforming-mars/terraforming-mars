@@ -8,7 +8,7 @@ import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
 import {addCity, addGreenery, addOcean, doWait, fakeCard, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGame} from './TestingUtils';
-import {cast, toName} from '../src/common/utils/utils';
+import {cast, isObject, toName} from '../src/common/utils/utils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
@@ -1458,7 +1458,7 @@ describe('Game', () => {
 });
 
 function assertIsJSON(serialized: unknown) {
-  if (typeof serialized !== 'object' || serialized === null) {
+  if (!isObject(serialized)) {
     return;
   }
   for (const [field, val] of Object.entries(serialized)) {

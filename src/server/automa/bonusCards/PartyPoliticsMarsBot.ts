@@ -27,7 +27,7 @@ export class PartyPoliticsMarsBot extends MarsBotBonusCardEffect {
         marsBot.game.log('MarsBot (${0}): reveals ${1} (cost ${2})', (b) => b.cardName(this.name).card(revealedCard).number(revealedCard.cost));
         marsBot.game.projectDeck.discardPile.push(revealedCard);
         if (revealedCard.cost % 3 === 0) {
-          marsBot.megacredits -= 5;
+          marsBot.loseMc(5);
           marsBot.game.log('MarsBot (${0}): spends 5:r:mc: to place a second delegate', (b) => b.cardName(this.name));
           new MarsBotTurmoilHelper(marsBot.game).maybePlaceDelegate();
         }

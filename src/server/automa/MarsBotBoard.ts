@@ -84,13 +84,17 @@ export class MarsBotBoard {
     return index === undefined ? 0 : this.tracks[index].position;
   }
 
-  /** Index of the least-advanced track (first index if tied). */
+  /**
+   * Index of the least-advanced track (first index if tied).
+   *
+   * @param excludeVenus leaves the Venus track out.
+   */
   public getLeastAdvancedTrackIndex(excludeVenus: boolean = false): number {
-    const limit = excludeVenus ? Math.min(this.tracks.length, 7) : this.tracks.length;
+    const venusTrack = excludeVenus ? this.tagToTrack[Tag.VENUS] : undefined;
     let minPos = this.tracks[0].position;
     let minIndex = 0;
-    for (let i = 1; i < limit; i++) {
-      if (this.tracks[i].position < minPos) {
+    for (let i = 1; i < this.tracks.length; i++) {
+      if (i !== venusTrack && this.tracks[i].position < minPos) {
         minPos = this.tracks[i].position;
         minIndex = i;
       }

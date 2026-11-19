@@ -6,7 +6,7 @@ import {Tag} from '@/common/cards/Tag';
 import {AwardName} from '@/common/ma/AwardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
-import {humanAwardScore, marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
 import {cardTagsIncludingEvent} from '@/server/automa/MarsBotTags';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
@@ -35,7 +35,7 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
     // leads every funded award, it is the one with the smallest gap.
     let resolved = false;
     const sorted = funded.map((a) => {
-      const humanVal = humanAwardScore(a, marsBot.humanPlayer);
+      const humanVal = a.getScore(marsBot.humanPlayer);
       const marsBotVal = marsBot.awardValue(a);
       return {award: a, margin: humanVal - marsBotVal};
     }).sort((a, b) => {

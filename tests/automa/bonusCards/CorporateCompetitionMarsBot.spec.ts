@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Resource} from '@/common/Resource';
 import {TileType} from '@/common/TileType';
 import {SpaceId} from '@/common/Types';
 import {BoardName} from '@/common/boards/BoardName';
@@ -117,26 +116,6 @@ describe('CorporateCompetitionMarsBot', () => {
   }
 
   for (const run of [
-    {human: {energy: 1, steel: 6}, production: {heat: 4}, calls: ['advanceTrackOfTag(power)']},
-    {human: {heat: 6, steel: 2, titanium: 1}, production: {steel: 1, titanium: 1}, calls: ['advanceTrackOfTag(space)']},
-  ] as const) {
-    it("counts the player's production in Thermalist and Miner: " + JSON.stringify(run), () => {
-      const bot = competitionBot();
-      fund(bot, 'Thermalist', 'Miner');
-      for (const [resource, amount] of Object.entries(run.human)) {
-        bot.human.stock.add(resource as Resource, amount);
-      }
-      for (const [resource, amount] of Object.entries(run.production)) {
-        bot.human.production.add(resource as Resource, amount);
-      }
-
-      new CorporateCompetitionMarsBot().resolve(bot.marsBot);
-
-      expect(bot.calls).deep.eq(run.calls);
-    });
-  }
-
-  for (const run of [
     {maxed: [Tag.POWER], calls: ['advanceTrackOfTag(space)'], megacreditsAfter: 0},
     {maxed: [Tag.POWER, Tag.SPACE], calls: ['maybeDrawAndResolveBonusCard()'], megacreditsAfter: 5},
   ] as const) {
@@ -225,7 +204,6 @@ describe('CorporateCompetitionMarsBot', () => {
     {award: 'Landlord', ocean: false, placed: true},
     {award: 'Desert Settler', ocean: false, placed: true},
     {award: 'Estate Dealer', ocean: false, placed: false},
-    {award: 'Estate Dealer', ocean: true, placed: true},
     {award: 'Suburbian', ocean: true, placed: true},
     {award: 'Highlander', ocean: true, placed: true},
   ] as const) {

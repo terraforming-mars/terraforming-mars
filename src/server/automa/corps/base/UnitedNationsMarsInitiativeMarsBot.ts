@@ -15,13 +15,13 @@ export class UnitedNationsMarsInitiativeMarsBot extends MarsBotCorp {
     // The setup bonus card was dealt before the corporation was chosen (rulebook A setup step 3)
     marsBot.returnSetupBonusCardToBonusDeck();
     marsBot.addBonusCardToBonusDeck(BonusCardId.B31_GOVERNMENT_SUBSIDY);
-    marsBot.game.log('MarsBot (UNMI): Government Subsidy added to bonus deck');
+    marsBot.game.log('MarsBot (${0}): Government Subsidy added to bonus deck', (b) => b.cardName(this.name));
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
     if (marsBot.game.generation >= 2) {
       marsBot.maybeMoveBonusCardToActionDeck();
-      marsBot.game.log('MarsBot (UNMI): added 1 bonus card to action deck');
+      marsBot.game.log('MarsBot (${0}): added 1 bonus card to action deck', (b) => b.cardName(this.name));
     }
   }
 }

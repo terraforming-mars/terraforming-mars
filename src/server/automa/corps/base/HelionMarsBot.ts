@@ -28,13 +28,13 @@ export class HelionMarsBot extends MarsBotCorp {
   public override onTrackCubeTrigger(marsBot: IMarsBot, trackIndex: number, position: number, cubeType: CubeType): boolean {
     if (cubeType === 'white') {
       marsBot.maybeDrawAndResolveProjectCard();
-      marsBot.game.log('MarsBot (Helion): white cube: drew and resolved card instead of temp raise');
+      marsBot.game.log('MarsBot (${0}): white cube: drew and resolved card instead of temp raise', (b) => b.cardName(this.name));
       // A white cube on another icon (the Nova boards' cities) replaces nothing, so that icon resolves too.
       return marsBot.marsBotBoard.tracks[trackIndex].definition.layout[position] === 'temperature';
     }
     if (cubeType === 'black') {
       marsBot.raiseTemperature(1);
-      marsBot.game.log('MarsBot (Helion): black cube: temperature +1');
+      marsBot.game.log('MarsBot (${0}): black cube: temperature +1', (b) => b.cardName(this.name));
     }
     return false;
   }

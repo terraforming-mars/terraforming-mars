@@ -17,14 +17,14 @@ export class SaturnSystemsMarsBot extends MarsBotCorp {
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.tags.includes(Tag.JOVIAN)) {
       marsBot.advanceTrack(2);
-      marsBot.game.log('MarsBot (Saturn Systems): Jovian tag played, advance event track');
+      marsBot.game.log('MarsBot (${0}): Jovian tag played, advance event track', (b) => b.cardName(this.name));
     }
   }
 
   public override onHumanCardPlayed(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.tags.includes(Tag.JOVIAN)) {
       marsBot.advanceTrack(2);
-      marsBot.game.log('MarsBot (Saturn Systems): Human played Jovian, advance event track');
+      marsBot.game.log('MarsBot (${0}): Human played Jovian, advance event track', (b) => b.cardName(this.name));
     }
   }
 }

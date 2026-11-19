@@ -15,7 +15,7 @@ export class CrediCorMarsBot extends MarsBotCorp {
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {
     if (card.cost >= 20) {
       marsBot.gainMc(4);
-      marsBot.game.log(`MarsBot (Credicor): card cost ${card.cost} >= 20, gain 4 M€`);
+      marsBot.game.log('MarsBot (${0}): card cost ${1} >= 20, gain 4:r:mc:', (b) => b.cardName(this.name).number(card.cost));
     }
   }
 }

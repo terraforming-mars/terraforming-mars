@@ -15,17 +15,17 @@ export class TharsisRepublicMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.placeCity();
-    marsBot.game.log('MarsBot (Tharsis Republic): placed 1 city tile');
+    marsBot.game.log('MarsBot (${0}): placed 1 city tile', (b) => b.cardName(this.name));
   }
 
   public override onTilePlaced(marsBot: IMarsBot, placedByMarsBot: boolean, tileType: TileType): void {
     if (tileType === TileType.CITY || tileType === TileType.CAPITAL) {
       if (placedByMarsBot) {
         marsBot.advanceTrack(2); // Event track = index 2
-        marsBot.game.log('MarsBot (Tharsis Republic): MarsBot city, advance event track');
+        marsBot.game.log('MarsBot (${0}): MarsBot city, advance event track', (b) => b.cardName(this.name));
       } else {
         marsBot.gainMc(2);
-        marsBot.game.log('MarsBot (Tharsis Republic): player city placed, +2 M€');
+        marsBot.game.log('MarsBot (${0}): player city placed, +2:r:mc:', (b) => b.cardName(this.name));
       }
     }
   }

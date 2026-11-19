@@ -21,13 +21,13 @@ export class PhoboLogMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.addProjectCardsToBonusDeck(Tag.SPACE, 2);
-    marsBot.game.log('MarsBot (Phobolog): 2 space cards drawn and added to bonus deck');
+    marsBot.game.log('MarsBot (${0}): 2 space cards drawn and added to bonus deck', (b) => b.cardName(this.name));
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'white') {
       marsBot.maybeDrawAndResolveBonusCard();
-      marsBot.game.log('MarsBot (Phobolog): white cube: resolved 1 bonus card');
+      marsBot.game.log('MarsBot (${0}): white cube: resolved 1 bonus card', (b) => b.cardName(this.name));
     }
   }
 }

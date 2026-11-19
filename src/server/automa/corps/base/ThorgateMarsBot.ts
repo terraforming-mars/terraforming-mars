@@ -22,14 +22,14 @@ export class ThorgateMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.gainMc(10);
-    marsBot.game.log('MarsBot (Thorgate): +10 M€');
+    marsBot.game.log('MarsBot (${0}): +10:r:mc:', (b) => b.cardName(this.name));
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
     if (cubeType === 'white') {
       marsBot.maybeDrawAndResolveProjectCardFirstTagOnly();
       marsBot.raiseTemperature(1);
-      marsBot.game.log('MarsBot (Thorgate): white cube: resolved card (first tag only) + temp +1');
+      marsBot.game.log('MarsBot (${0}): white cube: resolved card (first tag only) + temp +1', (b) => b.cardName(this.name));
     }
   }
 }

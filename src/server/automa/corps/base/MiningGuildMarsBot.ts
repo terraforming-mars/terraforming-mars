@@ -14,7 +14,7 @@ export class MiningGuildMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.setCorpState('mcOnCard', 10);
-    marsBot.game.log('MarsBot (Mining Guild): 10 M€ placed on card');
+    marsBot.game.log('MarsBot (${0}): 10:r:mc: placed on card', (b) => b.cardName(this.name));
   }
 
   // The card is a countdown: M€ MarsBot earns is removed from the card, but the bot keeps the
@@ -37,7 +37,7 @@ export class MiningGuildMarsBot extends MarsBotCorp {
       }
       // Refill first: M€ the advance earns re-enters here and comes off the refilled card
       marsBot.setCorpState('mcOnCard', 10);
-      marsBot.game.log('MarsBot (Mining Guild): card empty, refill 10 M€ + advance building track');
+      marsBot.game.log('MarsBot (${0}): card empty, refill 10:r:mc: + advance building track', (b) => b.cardName(this.name));
       marsBot.advanceTrack(0); // Building track = index 0
     }
   }

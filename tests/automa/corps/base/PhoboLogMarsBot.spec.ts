@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PhoboLogMarsBot} from '@/server/automa/corps/base/PhoboLogMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('PhoboLogMarsBot', () => {
   // The Setup box (rulebook B p.1)
@@ -15,7 +15,7 @@ describe('PhoboLogMarsBot', () => {
   it('draws a bonus card for the white cubes on spaces 7, 10, 13 and 15 of the space track', () => {
     const {marsBot, calls} = recordingMarsBot();
 
-    new PhoboLogMarsBot().onTrackCubeTrigger(marsBot, 1, 1, 'white');
+    new PhoboLogMarsBot().onTrackCubeTrigger(marsBot, TRACK.space, 1, 'white');
 
     expect(calls).deep.eq(['maybeDrawAndResolveBonusCard()']);
     expect(trackCubes(new PhoboLogMarsBot())).deep.eq([7, 10, 13, 15].map((position) => `space white ${position}`));

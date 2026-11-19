@@ -1,10 +1,7 @@
 import {expect} from 'chai';
 import {Phase} from '@/common/Phase';
 import {MiningGuildMarsBot} from '@/server/automa/corps/base/MiningGuildMarsBot';
-import {recordingMarsBot} from '../RecordingMarsBot';
-
-// Track index on the Tharsis board
-const BUILDING = 0;
+import {TRACK, recordingMarsBot} from '../RecordingMarsBot';
 
 describe('MiningGuildMarsBot', () => {
   const corp = new MiningGuildMarsBot();
@@ -22,12 +19,12 @@ describe('MiningGuildMarsBot', () => {
       if (run.mcOnCard !== undefined) {
         corpState.set('mcOnCard', run.mcOnCard);
       }
-      marsBot.marsBotBoard.tracks[BUILDING].position = run.building ?? 3;
+      marsBot.marsBotBoard.tracks[TRACK.building].position = run.building ?? 3;
 
       corp.onMcGained(marsBot, run.gain);
 
       expect(corpState.get('mcOnCard')).eq(run.card);
-      expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${BUILDING})`));
+      expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${TRACK.building})`));
     });
   }
 

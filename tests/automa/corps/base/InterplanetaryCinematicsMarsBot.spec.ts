@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {InterplanetaryCinematicsMarsBot} from '@/server/automa/corps/base/InterplanetaryCinematicsMarsBot';
-import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
+import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('InterplanetaryCinematicsMarsBot', () => {
-  for (const run of [{track: 0, tag: 'building'}, {track: 2, tag: 'event'}]) {
+  for (const run of [{track: TRACK.building, tag: 'building'}, {track: TRACK.event, tag: 'event'}]) {
     it(`gains 2 M€ for each advance of the building and event tracks, ${run.tag} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
 

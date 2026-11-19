@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TileType} from '@/common/TileType';
 import {TharsisRepublicMarsBot} from '@/server/automa/corps/base/TharsisRepublicMarsBot';
-import {recordingMarsBot} from '../RecordingMarsBot';
+import {TRACK, recordingMarsBot} from '../RecordingMarsBot';
 
 describe('TharsisRepublicMarsBot', () => {
   // The Setup box (rulebook B p.1)
@@ -14,7 +14,7 @@ describe('TharsisRepublicMarsBot', () => {
   });
 
   for (const run of [
-    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', calls: ['advanceTrack(2)']},
+    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', calls: [`advanceTrack(${TRACK.event})`]},
     {tileType: TileType.CITY, byMarsBot: false, tile: 'player city', calls: ['gainMc(2)']},
     {tileType: TileType.CAPITAL, byMarsBot: false, tile: 'player capital', calls: ['gainMc(2)']},
     {tileType: TileType.GREENERY, byMarsBot: false, tile: 'player greenery', calls: []},

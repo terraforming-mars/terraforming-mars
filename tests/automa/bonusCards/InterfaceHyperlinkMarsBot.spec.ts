@@ -23,21 +23,27 @@ describe('InterfaceHyperlinkMarsBot', () => {
     {
       energy: 4,
       deck: [CardName.TARDIGRADES, CardName.ASTEROID, CardName.GIANT_ICE_ASTEROID, CardName.SEARCH_FOR_LIFE],
-      played: [CardName.SEARCH_FOR_LIFE, CardName.GIANT_ICE_ASTEROID],
-      discarded: [CardName.ASTEROID, CardName.TARDIGRADES],
+      expected: {
+        played: [CardName.SEARCH_FOR_LIFE, CardName.GIANT_ICE_ASTEROID],
+        discarded: [CardName.ASTEROID, CardName.TARDIGRADES],
+      },
     },
     // Mine and Power Plant both cost 4 M€
     {
       energy: 3,
       deck: [CardName.MINE, CardName.POWER_PLANT, CardName.SEARCH_FOR_LIFE],
-      played: [CardName.SEARCH_FOR_LIFE, CardName.POWER_PLANT],
-      discarded: [CardName.MINE],
+      expected: {
+        played: [CardName.SEARCH_FOR_LIFE, CardName.POWER_PLANT],
+        discarded: [CardName.MINE],
+      },
     },
     {
       energy: 0,
       deck: [CardName.MINE, CardName.POWER_PLANT, CardName.SEARCH_FOR_LIFE],
-      played: [CardName.POWER_PLANT, CardName.MINE],
-      discarded: [],
+      expected: {
+        played: [CardName.POWER_PLANT, CardName.MINE],
+        discarded: [],
+      },
     },
   ] as const) {
     it('draws 1 card per energy space, at least 2, and plays science, then the most expensive, then the most tags: ' + JSON.stringify(run), () => {
@@ -47,8 +53,8 @@ describe('InterfaceHyperlinkMarsBot', () => {
 
       const destroyed = new InterfaceHyperlinkMarsBot().resolve(marsBot);
 
-      expect(played.map((card) => card.name)).deep.eq(run.played);
-      expect(discardPile.slice(discardsBefore).map((card) => card.name)).deep.eq(run.discarded);
+      expect(played.map((card) => card.name)).deep.eq(run.expected.played);
+      expect(discardPile.slice(discardsBefore).map((card) => card.name)).deep.eq(run.expected.discarded);
       expect(destroyed).is.true;
     });
   }

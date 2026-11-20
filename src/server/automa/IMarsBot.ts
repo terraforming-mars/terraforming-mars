@@ -64,6 +64,10 @@ export interface IMarsBot {
   maybeDrawAndResolveProjectCard(): void;
   /** Same as `maybeDrawAndResolveProjectCard`, but only the card's first tag resolves: the others are ignored. */
   maybeDrawAndResolveProjectCardFirstTagOnly(): void;
+  /** Plays `card` for the bot: it goes to the played pile and its tags advance the bot's tracks. */
+  resolveProjectCard(card: IProjectCard): void;
+  /** Places the bot's Neural Instance tile on `space` and pays the bot its placement M€. */
+  placeNeuralInstance(space: Space): void;
   /**
    * Draws the top bonus card and resolves it. Does nothing when both bonus piles are empty, or
    * once the game has ended.

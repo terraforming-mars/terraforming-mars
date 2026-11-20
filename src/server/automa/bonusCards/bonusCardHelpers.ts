@@ -8,12 +8,12 @@ import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 import {ICard} from '@/server/cards/ICard';
 
 /**
- * Removes the player's animal or microbe worth the most VP, for the bonus card `source`.
+ * Removes the player's animal or microbe worth the most VP, for the bonus card `cardName`.
  *
  * False when no card has one MarsBot may remove. Cards that score their resources come first, then
  * the rest; a tie goes to a flipped project card (BGG 3360797).
  */
-export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, source: CardName): boolean {
+export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, cardName: CardName): boolean {
   const game = marsBot.game;
   const humanPlayer = marsBot.humanPlayer;
   // Protected Habitat blocks animal/microbe removal
@@ -29,13 +29,13 @@ export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, source: CardName):
     const card = tied.length > 1 ? pickByFlippedCard(game, tied) ?? tied[0] : tied[0];
     humanPlayer.removeResourceFrom(card, 1, {removingPlayer: marsBot.player, log: false});
     game.log('MarsBot (${0}): removed 1 ${1} from ${2}',
-      (b) => b.cardName(source).rawString(card.resourceType ?? '').card(card));
+      (b) => b.cardName(cardName).rawString(card.resourceType ?? '').card(card));
     return true;
   }
   if (isProtected) {
-    game.log('MarsBot (${0}): blocked by Protected Habitats', (b) => b.cardName(source));
+    game.log('MarsBot (${0}): blocked by Protected Habitats', (b) => b.cardName(cardName));
   } else {
-    game.log('MarsBot (${0}): no animal/microbe resources to remove', (b) => b.cardName(source));
+    game.log('MarsBot (${0}): no animal/microbe resources to remove', (b) => b.cardName(cardName));
   }
   return false;
 }

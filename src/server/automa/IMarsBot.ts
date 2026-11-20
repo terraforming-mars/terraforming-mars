@@ -171,6 +171,12 @@ export interface IMarsBot {
   placeMarker(space: Space): void;
   /** Takes `card` off the bot's played pile. */
   removePlayedProjectCard(card: IProjectCard): void;
+  /**
+   * Trades with the colony the bot picks, for the bonus card `cardName` (C-17).
+   *
+   * Does nothing, with no Failed Action, when no colony can be traded with or the bot has no M€ to pay.
+   */
+  maybeTrade(cardName: CardName): void;
 
   /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
   getCorpState(key: string): number;

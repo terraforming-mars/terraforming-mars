@@ -1,10 +1,11 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 
-export class InvestorsMarsBot extends MarsBotBonusCardEffect {
+export class InvestorsMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B32_INVESTORS});
+    super({id: BonusCardId.B32_INVESTORS, name: CardName.AUTOMA_INVESTORS});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

@@ -1,8 +1,8 @@
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {IGame} from '@/server/IGame';
 import {IMarsBot} from '@/server/automa/IMarsBot';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
 import {Board} from '@/server/boards/Board';
 import {GlobalParameterTracks} from '@/server/boards/GlobalParameterTracks';
 import {venusStepsBetween} from '@/server/venusNext/venusScale';
@@ -14,7 +14,7 @@ import {venusStepsBetween} from '@/server/venusNext/venusScale';
  * Inventrix adds in place of Lobbyists: the same first three effects, but it is never destroyed and does
  * nothing when none of them happens.
  */
-export abstract class LobbyistsBase extends MarsBotBonusCardEffect {
+export abstract class LobbyistsBase extends MarsBotBonusCard {
   /**
    * Raises the temperature 2 steps when it is 1 or 2 steps from a bonus step or its maximum.
    *

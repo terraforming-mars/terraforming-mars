@@ -2,7 +2,7 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
 export class TychoMagneticsMarsBot extends MarsBotCorp {

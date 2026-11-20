@@ -1,8 +1,11 @@
 import {expect} from 'chai';
 import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
-import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/MarsBotBonusCard';
+import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardId} from '../../src/common/automa/AutomaTypes';
+import {MeteorShowerMarsBot} from '../../src/server/automa/bonusCards/MeteorShowerMarsBot';
+import {testGame} from '../TestGame';
+import {recordingMarsBot} from './corps/RecordingMarsBot';
 
 describe('MarsBotBonusDeck', () => {
   const logger = {log: () => {}};
@@ -63,11 +66,26 @@ describe('MarsBotBonusDeck', () => {
     });
   }
 
+  it('a drawn card resolves through its own class', () => {
+    const [game, human, botPlayer] = testGame(2);
+    const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human});
+    human.plants = 4;
+    const meteorShower = MarsBotBonusDeck.create(new SeededRandom(42)).drawPile.find((card) => card.id === BonusCardId.B01_METEOR_SHOWER);
+
+    const destroyed = meteorShower?.resolve(marsBot);
+
+    expect(meteorShower).instanceOf(MeteorShowerMarsBot);
+    expect(human.plants).eq(0);
+    expect(destroyed).is.true;
+  });
+
   it('serialization round trip', () => {
     deck.discard(deck.draw(logger)!, deck.draw(logger)!);
     const restored = MarsBotBonusDeck.deserialize(deck.serialize(), new SeededRandom(42));
     expect(restored.drawPile).to.deep.eq(deck.drawPile);
     expect(restored.discardPile).to.deep.eq(deck.discardPile);
+    expect(restored.drawPile.map((card) => card.constructor)).deep.eq(deck.drawPile.map((card) => card.constructor));
+    expect(restored.discardPile.map((card) => card.constructor)).deep.eq(deck.discardPile.map((card) => card.constructor));
   });
 
   it('serialization round trip with expansion and corporation bonus cards', () => {

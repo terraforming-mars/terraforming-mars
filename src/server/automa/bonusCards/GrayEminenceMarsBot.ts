@@ -1,12 +1,13 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotTurmoilHelper} from '@/server/automa/turmoil/MarsBotTurmoilHelper';
 import {Turmoil} from '@/server/turmoil/Turmoil';
 
-export class GrayEminenceMarsBot extends MarsBotBonusCardEffect {
+export class GrayEminenceMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B29_GRAY_EMINENCE});
+    super({id: BonusCardId.B29_GRAY_EMINENCE, name: CardName.AUTOMA_GRAY_EMINENCE});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

@@ -1,4 +1,5 @@
-import {MarsBotBonusCard, createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from './MarsBotBonusCard';
+import {MarsBotBonusCard} from './MarsBotBonusCard';
+import {createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from './bonusCards/MarsBotBonusCards';
 import {BonusCardId} from '../../common/automa/AutomaTypes';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';

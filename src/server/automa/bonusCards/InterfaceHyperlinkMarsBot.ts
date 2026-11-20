@@ -1,14 +1,15 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {cardTagsIncludingEvent} from '@/server/automa/MarsBotTags';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 import {inplaceShuffle} from '@/server/utils/shuffle';
 
-export class InterfaceHyperlinkMarsBot extends MarsBotBonusCardEffect {
+export class InterfaceHyperlinkMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B30_INTERFACE_HYPERLINK});
+    super({id: BonusCardId.B30_INTERFACE_HYPERLINK, name: CardName.AUTOMA_INTERFACE_HYPERLINK});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

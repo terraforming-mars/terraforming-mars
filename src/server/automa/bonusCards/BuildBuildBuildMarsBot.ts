@@ -3,7 +3,6 @@ import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {inplaceShuffle} from '@/server/utils/shuffle';
 
@@ -29,12 +28,12 @@ const SPECIAL_TILES: ReadonlyMap<CardName, TileType> = new Map([
   [CardName.MAGNETIC_FIELD_GENERATORS_PROMO, TileType.MAGNETIC_FIELD_GENERATORS],
 ]);
 
-export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
+export class BuildBuildBuildMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B27_BUILD_BUILD_BUILD});
+    super({id: BonusCardId.B27_BUILD_BUILD_BUILD, name: CardName.AUTOMA_BUILD_BUILD_BUILD});
   }
 
-  public override resolve(marsBot: IMarsBot, card: MarsBotBonusCard): boolean {
+  public override resolve(marsBot: IMarsBot): boolean {
     // a. A city next to the player's greenery, then lose 5 M€; b. the special tile of a card MarsBot
     // played next to the player's city, then lose that card and 3 M€; c. gain 3 M€ and shuffle this
     // card back into the bonus deck
@@ -63,7 +62,7 @@ export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
     }
 
     marsBot.gainMc(3);
-    marsBot.bonusDeck.drawPile.push(card);
+    marsBot.bonusDeck.drawPile.push(this);
     inplaceShuffle(marsBot.bonusDeck.drawPile, marsBot.game.rng);
     marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.cardName(this.name));
     return true;

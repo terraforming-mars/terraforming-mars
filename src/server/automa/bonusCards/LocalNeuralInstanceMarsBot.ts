@@ -1,11 +1,12 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 
-export class LocalNeuralInstanceMarsBot extends MarsBotBonusCardEffect {
+export class LocalNeuralInstanceMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B07_LOCAL_NEURAL_INSTANCE});
+    super({id: BonusCardId.B07_LOCAL_NEURAL_INSTANCE, name: CardName.AUTOMA_LOCAL_NEURAL_INSTANCE});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

@@ -1,12 +1,13 @@
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 
-export class VenusianLobbyMarsBot extends MarsBotBonusCardEffect {
+export class VenusianLobbyMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B26_VENUSIAN_LOBBY});
+    super({id: BonusCardId.B26_VENUSIAN_LOBBY, name: CardName.AUTOMA_VENUSIAN_LOBBY});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

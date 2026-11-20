@@ -1,12 +1,13 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {CardName} from '@/common/cards/CardName';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {maybeRemoveAnimalOrMicrobe} from '@/server/automa/bonusCards/bonusCardHelpers';
 
-export class InvasiveSpeciesMarsBot extends MarsBotBonusCardEffect {
+export class InvasiveSpeciesMarsBot extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B02_INVASIVE_SPECIES});
+    super({id: BonusCardId.B02_INVASIVE_SPECIES, name: CardName.AUTOMA_INVASIVE_SPECIES});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

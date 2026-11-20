@@ -1,11 +1,9 @@
 import {expect} from 'chai';
 import {TileType} from '@/common/TileType';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {CardName} from '@/common/cards/CardName';
 import {IGame} from '@/server/IGame';
 import {IPlayer} from '@/server/IPlayer';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotBonusDeck} from '@/server/automa/MarsBotBonusDeck';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {BuildBuildBuildMarsBot} from '@/server/automa/bonusCards/BuildBuildBuildMarsBot';
@@ -50,9 +48,8 @@ describe('BuildBuildBuildMarsBot', () => {
     const {game, human, marsBot, calls} = setup();
     const greenery = quietSpace(game, human);
     game.simpleAddTile(human, greenery, {tileType: TileType.GREENERY});
-    const card = createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD);
 
-    const kept = new BuildBuildBuildMarsBot().resolve(marsBot, card);
+    const kept = new BuildBuildBuildMarsBot().resolve(marsBot);
 
     const cities = game.board.getCities(marsBot.player);
     expect(cities).has.length(1);
@@ -67,7 +64,7 @@ describe('BuildBuildBuildMarsBot', () => {
     const city = quietSpace(game, human);
     game.simpleAddTile(human, city, {tileType: TileType.CITY});
 
-    const kept = new BuildBuildBuildMarsBot().resolve(marsBot, createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD));
+    const kept = new BuildBuildBuildMarsBot().resolve(marsBot);
 
     const space = game.board.getSpaceByTileCard(CardName.NUCLEAR_ZONE);
     expect(space?.tile?.tileType).eq(TileType.NUCLEAR_ZONE);
@@ -90,14 +87,14 @@ describe('BuildBuildBuildMarsBot', () => {
       if (run.humanCity) {
         game.simpleAddTile(human, quietSpace(game, human), {tileType: TileType.CITY});
       }
-      const card = createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD);
+      const card = new BuildBuildBuildMarsBot();
 
-      const kept = new BuildBuildBuildMarsBot().resolve(marsBot, card);
+      const kept = card.resolve(marsBot);
 
       expect(game.board.spaces.filter((s) => s.player === marsBot.player)).is.empty;
       expect(removed).is.empty;
       expect(calls).deep.eq(['gainMc(3)']);
-      expect(marsBot.bonusDeck.drawPile).deep.eq([card]);
+      expect(marsBot.bonusDeck.drawPile).has.members([card]);
       expect(kept).is.true;
     });
   }

@@ -66,9 +66,12 @@ export function tradeWithColony(marsBot: IMarsBot, colony: IColony): void {
     marsBot.player.increaseTerraformRating(1);
   } else {
     const amount = colony.colonies.includes(marsBot.player.id) ? 3 : 2;
-    // C-23: Titan storage is only used without Venus Next; with Venus, gain floaters instead
-    if (colony.name === ColonyName.TITAN && game.gameOptions.expansions.venus) {
-      game.log('MarsBot pays 1:r:mc: to trade with ${0}, gains ${1} floaters', (b) => b.colony(colony).number(amount));
+    if (colony.name === ColonyName.TITAN) {
+      if (game.gameOptions.expansions.venus) {
+        game.log('MarsBot pays 1:r:mc: to trade with ${0}, gains ${1} floaters', (b) => b.colony(colony).number(amount));
+      } else {
+        game.log('MarsBot pays 1:r:mc: to trade with ${0}, gains ${1} floaters in Titan storage', (b) => b.colony(colony).number(amount));
+      }
       marsBot.addFloaters(amount);
     } else {
       game.log('MarsBot pays 1:r:mc: to trade with ${0}, gains ${1} resources in storage', (b) => b.colony(colony).number(amount));

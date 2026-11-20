@@ -1,5 +1,5 @@
 import {randomBytes} from 'crypto';
-import {StrongRandom} from '../../common/utils/Random';
+import {StrongRandom} from '@/common/utils/Random';
 
 /**
  * A fresh {@link StrongRandom} seeded from the operating system's CSPRNG. Lives on the

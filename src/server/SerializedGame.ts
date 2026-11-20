@@ -27,7 +27,7 @@ export type SerializedGame = {
     beholdTheEmperor?: boolean;
     board: SerializedBoard;
     ceoDeck: SerializedDeck;
-    /** @deprecated pre-2026-11 saves only; superseded by `rng`. */
+    /** @deprecated superseded by `rng`; kept to load saves written before `rng` existed. */
     currentSeed?: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
@@ -61,9 +61,9 @@ export type SerializedGame = {
     preludeDeck: SerializedDeck,
     projectDeck: SerializedDeck,
     researchedPlayers: Array<PlayerId>;
-    /** @deprecated pre-2026-11 saves only; superseded by `rng`. */
+    /** @deprecated superseded by `rng`; kept to load saves written before `rng` existed. */
     seed?: number;
-    /** The game's random generator. Absent only in pre-2026-11 saves, which carry `seed`/`currentSeed`. */
+    /** The game's random generator. Absent only in saves written before `rng` existed, which carry `seed`/`currentSeed`. */
     rng?: SerializedRandom;
     someoneHasRemovedOtherPlayersPlants: boolean;
     spectatorId: SpectatorId;

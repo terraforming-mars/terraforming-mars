@@ -848,7 +848,7 @@ describe('Game', () => {
     expect(after).to.deep.eq(before);
   });
 
-  it('loads a pre-2026-11 save that carries seed/currentSeed instead of rng', () => {
+  it('loads an older save that carries seed/currentSeed instead of rng', () => {
     const [game] = testGame(2);
     const d = game.serialize();
     // Rewrite the save in the old shape: a 32-bit mulberry32 seed, no `rng`.

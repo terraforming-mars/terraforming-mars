@@ -1,11 +1,12 @@
 import {expect, use} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import {EventEmitter} from 'events';
 import pg from 'pg';
 import {tx} from '@/server/database/tx';
 
 use(chaiAsPromised);
 
-class FakeClient {
+class FakeClient extends EventEmitter {
   public queries: Array<string> = [];
   public releases: Array<Error | boolean | undefined> = [];
   public failOn: string | undefined = undefined;
@@ -69,6 +70,15 @@ describe('tx', () => {
     })).to.be.rejectedWith(/boom/);
     expect(client.queries).deep.eq(['BEGIN', 'ROLLBACK']);
     expect(client.releases).deep.eq([true]);
+  });
+
+  it('listens for connection errors until it releases the connection', async () => {
+    await tx(pool, async () => {
+      client.emit('error', new Error('connection lost'));
+    });
+
+    expect(client.queries).deep.eq(['BEGIN', 'COMMIT']);
+    expect(client.listenerCount('error')).eq(0);
   });
 
   it('rejects without releasing when connect fails', async () => {

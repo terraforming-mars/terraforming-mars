@@ -23,6 +23,7 @@ export function pickByFlippedCard<T>(game: IGame, options: ReadonlyArray<T>): T 
   const index = ((card.cost - 1) % n + n) % n;
   // Discard the flipped card back to the project deck discard pile
   game.projectDeck.discardPile.push(card);
+  game.log('MarsBot reveals ${0} to break a tie', (b) => b.card(card, {cost: true}));
 
   return options[index];
 }

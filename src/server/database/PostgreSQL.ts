@@ -439,11 +439,11 @@ export class PostgreSQL implements IDatabase {
       databaseMetrics.operationErrors.inc({operation: 'saveGame'});
       console.error('PostgreSQL:saveGame', err);
     }
-    this.trim(game);
+    // Finishes before the save does, so it never overlaps the markFinished that follows the last save.
+    await this.trim(game).catch(() => databaseMetrics.operationErrors.inc({operation: 'trim'}));
   }
 
-  // Not part of IDatabase, invisible to MetricsDelegate, and invoked fire-and-forget (not awaited) by
-  // saveGame above. Instrumented directly here instead.
+  // Not part of IDatabase, so invisible to MetricsDelegate. saveGame counts its errors.
   private async trim(game: IGame) {
     if (this.trimCount <= 0) {
       return;

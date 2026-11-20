@@ -7,8 +7,8 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 describe('SettlersMarsBot', () => {
   // Of the empty Tharsis spaces with two bonus icons, only 35 and 36 touch three ocean-reserved spaces
   for (const run of [
-    {marked: [], marker: '36'},
-    {marked: ['36'], marker: '35'},
+    {marked: [], expected: '36'},
+    {marked: ['36'], expected: '35'},
   ] as const) {
     it('puts a marker on a free space next to the most ocean-reserved spaces: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -22,7 +22,7 @@ describe('SettlersMarsBot', () => {
 
       new SettlersMarsBot().resolve(marsBot);
 
-      expect(placed).deep.eq([run.marker]);
+      expect(placed).deep.eq([run.expected]);
     });
   }
 

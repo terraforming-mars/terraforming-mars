@@ -1,17 +1,16 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
-import {lobbyistsOceanBranch, lobbyistsOxygenBranch, lobbyistsTempBranch} from '@/server/automa/bonusCards/bonusCardHelpers';
+import {LobbyistsBase} from '@/server/automa/bonusCards/LobbyistsBase';
 
-export class DoItRightMarsBot extends MarsBotBonusCardEffect {
+export class DoItRightMarsBot extends LobbyistsBase {
   constructor() {
     super({id: BonusCardId.B25_DO_IT_RIGHT});
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
-    if (lobbyistsTempBranch(marsBot, this.name) ||
-      lobbyistsOxygenBranch(marsBot, this.name) ||
-      lobbyistsOceanBranch(marsBot, this.name)) {
+    if (this.maybeRaiseTemperature(marsBot) ||
+      this.maybePlaceGreeneryAndRaiseOxygen(marsBot) ||
+      this.maybePlaceOcean(marsBot)) {
       return false;
     }
     marsBot.game.log('MarsBot (${0}): no effect', (b) => b.cardName(this.name));

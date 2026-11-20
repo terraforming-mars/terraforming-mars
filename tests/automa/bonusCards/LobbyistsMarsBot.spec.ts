@@ -10,9 +10,9 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('LobbyistsMarsBot', () => {
   for (const run of [
-    {temperature: -28, after: -24},
-    {temperature: -26, after: -22},
-    {temperature: 4, after: 8},
+    {temperature: -28, expected: -24},
+    {temperature: -26, expected: -22},
+    {temperature: 4, expected: 8},
   ] as const) {
     it('raises the temperature 2 steps and is destroyed when 1 or 2 steps from a bonus or the maximum: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -21,7 +21,7 @@ describe('LobbyistsMarsBot', () => {
 
       const destroyed = new LobbyistsMarsBot().resolve(marsBot);
 
-      expect(game.getTemperature()).eq(run.after);
+      expect(game.getTemperature()).eq(run.expected);
       expect(destroyed).is.true;
     });
   }
@@ -40,8 +40,8 @@ describe('LobbyistsMarsBot', () => {
   });
 
   for (const run of [
-    {oxygen: 6, after: 8},
-    {oxygen: 13, after: 14},
+    {oxygen: 6, expected: 8},
+    {oxygen: 13, expected: 14},
   ] as const) {
     it('places a greenery, raises the oxygen once more and is destroyed when 1 or 2 steps from a bonus or the maximum: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -51,7 +51,7 @@ describe('LobbyistsMarsBot', () => {
       const destroyed = new LobbyistsMarsBot().resolve(marsBot);
 
       expect(game.board.getGreeneries(botPlayer)).has.length(1);
-      expect(game.getOxygenLevel()).eq(run.after);
+      expect(game.getOxygenLevel()).eq(run.expected);
       expect(destroyed).is.true;
     });
   }
@@ -59,8 +59,8 @@ describe('LobbyistsMarsBot', () => {
   for (const run of [
     // Spaces 07 (no bonus) and 43 (one plant) each touch two of these, and 43 covers more icons.
     // 43 pays 1 M€ for the plant icon and 2 M€ for each adjacent ocean.
-    {oceans: ['06', '13', '34', '44'], after: ['06', '13', '34', '43', '44'], calls: ['gainMc(5)'], destroyed: true},
-    {oceans: ['34'], after: ['34'], calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS})`], destroyed: false},
+    {oceans: ['06', '13', '34', '44'], expected: {after: ['06', '13', '34', '43', '44'], calls: ['gainMc(5)'], destroyed: true}},
+    {oceans: ['34'], expected: {after: ['34'], calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS})`], destroyed: false}},
   ] as const) {
     it('places an ocean only next to 2 oceans, and is then destroyed: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -71,9 +71,9 @@ describe('LobbyistsMarsBot', () => {
 
       const destroyed = new LobbyistsMarsBot().resolve(marsBot);
 
-      expect(game.board.getOceanSpaces().map((space) => space.id).sort()).deep.eq(run.after);
-      expect(calls).deep.eq(run.calls);
-      expect(destroyed).eq(run.destroyed);
+      expect(game.board.getOceanSpaces().map((space) => space.id).sort()).deep.eq(run.expected.after);
+      expect(calls).deep.eq(run.expected.calls);
+      expect(destroyed).eq(run.expected.destroyed);
     });
   }
 

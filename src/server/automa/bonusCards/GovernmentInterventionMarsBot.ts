@@ -26,11 +26,8 @@ export class GovernmentInterventionMarsBot extends MarsBotBonusCardEffect {
       // Planitia prints at 16%.
       marsBot.withoutTRGain(() => {
         marsBot.bonusMcBlocked = true;
-        try {
-          marsBot.game.increaseVenusScaleLevel(marsBot.player, 1);
-        } finally {
-          marsBot.bonusMcBlocked = false;
-        }
+        marsBot.game.increaseVenusScaleLevel(marsBot.player, 1);
+        marsBot.bonusMcBlocked = false;
       });
     }
     return false;

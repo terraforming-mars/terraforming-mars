@@ -187,14 +187,51 @@ export class MarsBotTilePlacer {
   }
 
   /**
+   * Finds the space for one of MarsBot's player markers (Settlers): a land space that is not
+   * reserved and has neither a tile nor a marker.
+   *
+   * After the usual tiebreakers and before the random one, it prefers the space next to the most
+   * ocean-reserved spaces.
+   */
+  public findMarkerSpace(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const spaces = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) => space.player === undefined);
+    return this.selectBestSpace(spaces, () => 0,
+      (space) => board.getAdjacentSpaces(space).filter((s) => s.spaceType === SpaceType.OCEAN).length);
+  }
+
+  /**
+   * Finds the best space for a MarsBot city next to at least one of the human's greeneries.
+   * This is what the Build, Build, Build bonus card asks for first.
+   */
+  public findCitySpaceNextToHumanGreenery(): Space | undefined {
+    const board = this.marsBot.game.board;
+    return this.findCitySpace((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isGreenerySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+  }
+
+  /**
+   * Finds the best land space for a MarsBot special tile next to at least one of the human's cities.
+   * This is what the Build, Build, Build bonus card asks for second.
+   */
+  public findSpecialTileSpaceNextToHumanCity(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const eligible = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isCitySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+    return this.selectBestSpace(eligible, () => 0);
+  }
+
+  /**
    * Select the best space from candidates using:
    * 1. primaryScorer (type-specific)
    * 2. The map's tiebreakers, in order (see `MAP_TIEBREAKERS`)
-   * 3. Random (using project deck card cost)
+   * 3. beforeRandomScorer, when a card adds its own tiebreaker ahead of the random one
+   * 4. Random (using project deck card cost)
    */
   private selectBestSpace(
     spaces: ReadonlyArray<Space>,
     primaryScorer: Scorer,
+    beforeRandomScorer: Scorer = () => 0,
   ): Space | undefined {
     if (spaces.length === 0) {
       return undefined;
@@ -206,6 +243,7 @@ export class MarsBotTilePlacer {
     const scorers: ReadonlyArray<Scorer> = [
       primaryScorer,
       ...this.tiebreakerNames().map((name) => this.tiebreaker(name)),
+      beforeRandomScorer,
     ];
 
     // Highest first, each scorer breaking the ties of the ones before it

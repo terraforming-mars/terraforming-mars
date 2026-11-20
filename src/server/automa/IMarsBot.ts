@@ -6,6 +6,7 @@ import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
 import {MarsBotBoard} from './MarsBotBoard';
+import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {Space} from '../boards/Space';
 
 /** The bot as corp handlers see it, implemented by the bot manager. */
@@ -160,6 +161,12 @@ export interface IMarsBot {
   canPlaceColony(): boolean;
   /** Takes the bot's player marker off `space`. True when the space had one. */
   removeMarker(space: Space): boolean;
+  /** The bot's bonus deck. */
+  readonly bonusDeck: MarsBotBonusDeck;
+  /** Puts one of the bot's player markers on `space`, which reserves the space for the bot. */
+  placeMarker(space: Space): void;
+  /** Takes `card` off the bot's played pile. */
+  removePlayedProjectCard(card: IProjectCard): void;
 
   /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
   getCorpState(key: string): number;

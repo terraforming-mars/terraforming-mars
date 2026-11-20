@@ -10,10 +10,10 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('LobbyistsVenusMarsBot', () => {
   for (const run of [
-    {temperature: -26, venus: 6, after: {temperature: -22, venus: 6, destroyed: true, calls: []}},
-    {temperature: -30, venus: 6, after: {temperature: -30, venus: 10, destroyed: false, calls: []}},
-    {temperature: -30, venus: 12, after: {temperature: -30, venus: 16, destroyed: false, calls: []}},
-    {temperature: -30, venus: 2, after: {temperature: -30, venus: 2, destroyed: false, calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS_VENUS})`]}},
+    {temperature: -26, venus: 6, expected: {temperature: -22, venus: 6, destroyed: true, calls: []}},
+    {temperature: -30, venus: 6, expected: {temperature: -30, venus: 10, destroyed: false, calls: []}},
+    {temperature: -30, venus: 12, expected: {temperature: -30, venus: 16, destroyed: false, calls: []}},
+    {temperature: -30, venus: 2, expected: {temperature: -30, venus: 2, destroyed: false, calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS_VENUS})`]}},
   ] as const) {
     it('raises Venus 2 steps and is kept when 1 or 2 steps from a bonus, after the temperature branch: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
@@ -23,7 +23,7 @@ describe('LobbyistsVenusMarsBot', () => {
 
       const destroyed = new LobbyistsVenusMarsBot().resolve(marsBot);
 
-      expect({temperature: game.getTemperature(), venus: game.getVenusScaleLevel(), destroyed, calls}).deep.eq(run.after);
+      expect({temperature: game.getTemperature(), venus: game.getVenusScaleLevel(), destroyed, calls}).deep.eq(run.expected);
     });
   }
 

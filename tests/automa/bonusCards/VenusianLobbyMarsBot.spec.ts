@@ -11,8 +11,8 @@ import {TRACK, recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('VenusianLobbyMarsBot', () => {
   for (const run of [
-    {intercepted: false, venus: 2},
-    {intercepted: true, venus: 0},
+    {intercepted: false, expected: 2},
+    {intercepted: true, expected: 0},
   ] as const) {
     it('raises Venus unless a corp cancels it, advances the Venus track and raises the furthest parameter: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
@@ -24,7 +24,7 @@ describe('VenusianLobbyMarsBot', () => {
 
       new VenusianLobbyMarsBot().resolve(marsBot);
 
-      expect(game.getVenusScaleLevel()).eq(run.venus);
+      expect(game.getVenusScaleLevel()).eq(run.expected);
       expect(calls).deep.eq([
         `maybeAdvanceTrack(${marsBotBoard.tagToTrack[Tag.VENUS]})`,
         `advanceFurthestParameter(${CardName.AUTOMA_VENUSIAN_LOBBY})`,

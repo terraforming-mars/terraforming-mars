@@ -13,10 +13,10 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('InvasiveSpeciesMarsBot', () => {
   for (const run of [
-    {options: {}, titan: false, calls: ['gainMc(5)']},
-    {options: {venusNextExtension: true}, titan: false, calls: ['gainMc(2)', 'addFloaters(1)']},
-    {options: {coloniesExtension: true}, titan: true, calls: ['gainMc(2)', 'addFloaters(1)']},
-    {options: {coloniesExtension: true}, titan: false, calls: ['gainMc(2)']},
+    {options: {}, titan: false, expected: ['gainMc(5)']},
+    {options: {venusNextExtension: true}, titan: false, expected: ['gainMc(2)', 'addFloaters(1)']},
+    {options: {coloniesExtension: true}, titan: true, expected: ['gainMc(2)', 'addFloaters(1)']},
+    {options: {coloniesExtension: true}, titan: false, expected: ['gainMc(2)']},
   ] as const) {
     it('gains 5 M€, or 2 M€ and a floater with Venus Next or Titan: ' + JSON.stringify(run), () => {
       const [game, human] = testGame(1, run.options);
@@ -25,7 +25,7 @@ describe('InvasiveSpeciesMarsBot', () => {
 
       new InvasiveSpeciesMarsBot().resolve(marsBot);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 

@@ -12,8 +12,8 @@ export class LocalNeuralInstanceMarsBot extends MarsBotBonusCardEffect {
     const space = new MarsBotTilePlacer(marsBot).findNeuralInstanceSpace();
     if (space !== undefined) {
       marsBot.placeNeuralInstance(space);
-      marsBot.game.log('MarsBot (${0}): places the Neural Instance tile, card destroyed', (b) => b.cardName(this.name));
-      return true;
+      marsBot.game.log('MarsBot (${0}): places the Neural Instance tile', (b) => b.cardName(this.name));
+      return this.logDestroyed(marsBot);
     }
     // With no space for the tile, MarsBot draws and resolves a project card and keeps this card
     // (designer ruling, BGG 3350125).

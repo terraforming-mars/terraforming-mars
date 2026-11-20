@@ -19,8 +19,8 @@ describe('GovernmentInterventionMarsBot', () => {
       const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
       const {marsBot, calls} = recordingMarsBot({
         game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false,
-        advanceFurthestParameter: (source, allowCorpIntercept) => {
-          calls.push(`advanceFurthestParameter(${source}, ${allowCorpIntercept})`);
+        advanceFurthestParameter: (cardName, allowCorpIntercept) => {
+          calls.push(`advanceFurthestParameter(${cardName}, ${allowCorpIntercept})`);
           return run.advanced;
         },
       });

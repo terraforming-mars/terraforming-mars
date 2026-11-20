@@ -130,13 +130,13 @@ export interface IMarsBot {
   /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
   bonusMcBlocked: boolean;
   /**
-   * Raises the global parameter furthest from completion, for the bonus card `source`.
+   * Raises the global parameter furthest from completion, for the bonus card `cardName`.
    *
    * Distance counts steps remaining (a temperature step is 2 degrees), and a tie goes to oxygen, then
    * oceans, then temperature. With `allowCorpIntercept` false, no corp may cancel the raise. Returns
    * false when every parameter is already complete.
    */
-  advanceFurthestParameter(source: CardName, allowCorpIntercept?: boolean): boolean;
+  advanceFurthestParameter(cardName: CardName, allowCorpIntercept?: boolean): boolean;
   /**
    * Places a greenery for the bot, raising the oxygen.
    *

@@ -5,16 +5,16 @@ import {recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('ArklightMarsBot', () => {
   for (const run of [
-    {tag: Tag.PLANT, calls: ['gainMc(2)']},
-    {tag: Tag.ANIMAL, calls: ['gainMc(2)']},
-    {tag: Tag.MICROBE, calls: []},
+    {tag: Tag.PLANT, expected: ['gainMc(2)']},
+    {tag: Tag.ANIMAL, expected: ['gainMc(2)']},
+    {tag: Tag.MICROBE, expected: []},
   ] as const) {
     it('gains 2 M€ for each Plant or Animal tag: ' + JSON.stringify(run), () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new ArklightMarsBot().onTagResolved(marsBot, run.tag);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 

@@ -160,13 +160,13 @@ describe('MarsBotDraftResolver', () => {
       expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
 
       for (const run of [
-        {shuffler: keepOrder, hand: [jovianCard, powerCard], picked: jovianCard},
-        {shuffler: reverseOrder, hand: [jovianCard, powerCard], picked: powerCard},
-        {shuffler: keepOrder, hand: [powerCard, twoJovianCard], picked: twoJovianCard},
+        {shuffler: keepOrder, hand: [jovianCard, powerCard], expected: jovianCard},
+        {shuffler: reverseOrder, hand: [jovianCard, powerCard], expected: powerCard},
+        {shuffler: keepOrder, hand: [powerCard, twoJovianCard], expected: twoJovianCard},
       ]) {
         const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
 
-        expect(picked).to.eq(run.picked);
+        expect(picked).to.eq(run.expected);
       }
     });
   });

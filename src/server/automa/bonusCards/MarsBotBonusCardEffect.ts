@@ -8,13 +8,11 @@ export type MarsBotBonusCardEffectProperties = Pick<MarsBotBonusCardEffect, 'id'
 /** A bonus card MarsBot resolves. */
 export abstract class MarsBotBonusCardEffect {
   public readonly id: BonusCardId;
+  public readonly name: CardName;
 
   constructor(properties: MarsBotBonusCardEffectProperties) {
     this.id = properties.id;
-  }
-
-  public get name(): CardName {
-    return createBonusCard(this.id).name;
+    this.name = createBonusCard(properties.id).name;
   }
 
   /**
@@ -25,7 +23,7 @@ export abstract class MarsBotBonusCardEffect {
   public abstract resolve(marsBot: IMarsBot, card: MarsBotBonusCard): boolean;
 
   /** Logs that this card is destroyed, and returns true for `resolve` to pass on. */
-  protected destroyed(marsBot: IMarsBot): boolean {
+  protected logDestroyed(marsBot: IMarsBot): boolean {
     marsBot.game.log('MarsBot (${0}): card destroyed', (b) => b.cardName(this.name));
     return true;
   }

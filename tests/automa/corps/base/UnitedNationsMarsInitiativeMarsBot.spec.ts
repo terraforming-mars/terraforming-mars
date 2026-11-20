@@ -14,8 +14,8 @@ describe('UnitedNationsMarsInitiativeMarsBot', () => {
 
   // The start of a generation (rulebook B p.3)
   for (const run of [
-    {generation: 1, calls: []},
-    {generation: 2, calls: ['maybeMoveBonusCardToActionDeck()']},
+    {generation: 1, expected: []},
+    {generation: 2, expected: ['maybeMoveBonusCardToActionDeck()']},
   ]) {
     it(`moves a bonus card to the action deck before the action phase from generation 2, generation ${run.generation}`, () => {
       const {marsBot, calls} = recordingMarsBot();
@@ -23,7 +23,7 @@ describe('UnitedNationsMarsInitiativeMarsBot', () => {
 
       new UnitedNationsMarsInitiativeMarsBot().beforeActionPhase(marsBot);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 });

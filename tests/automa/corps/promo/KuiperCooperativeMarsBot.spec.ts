@@ -4,15 +4,15 @@ import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('KuiperCooperativeMarsBot', () => {
   for (const run of [
-    {cube: 'white', calls: ['raiseTemperature(1)']},
-    {cube: 'black', calls: ['placeOcean()']},
+    {cube: 'white', expected: ['raiseTemperature(1)']},
+    {cube: 'black', expected: ['placeOcean()']},
   ] as const) {
     it(`raises the temperature for a white cube and places an ocean for a black one, ${run.cube} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new KuiperCooperativeMarsBot().onTrackCubeTrigger(marsBot, TRACK.space, 4, run.cube);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 

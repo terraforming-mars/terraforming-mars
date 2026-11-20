@@ -23,9 +23,9 @@ describe('ExpeditedConstructionColoniesMarsBot', () => {
   });
 
   for (const run of [
-    {botColonies: 0, calls: ['maybePlaceRandomColony()']},
-    {botColonies: 1, calls: ['maybePlaceRandomColony()']},
-    {botColonies: 2, calls: []},
+    {botColonies: 0, expected: ['maybePlaceRandomColony()']},
+    {botColonies: 1, expected: ['maybePlaceRandomColony()']},
+    {botColonies: 2, expected: []},
   ] as const) {
     it('without a city space, places a colony while MarsBot has at most 1 and is kept: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2, {coloniesExtension: true});
@@ -37,7 +37,7 @@ describe('ExpeditedConstructionColoniesMarsBot', () => {
 
       const destroyed = new ExpeditedConstructionColoniesMarsBot().resolve(marsBot);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
       expect(destroyed).is.false;
     });
   }

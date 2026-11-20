@@ -12,16 +12,16 @@ describe('TerralabsResearchMarsBot', () => {
   });
 
   for (const run of [
-    {generation: 8, count: 1},
-    {generation: 9, count: 2},
+    {generation: 8, expected: 1},
+    {generation: 9, expected: 2},
   ]) {
-    it(`draws ${run.count} card(s) to the action deck in generation ${run.generation}`, () => {
+    it(`draws ${run.expected} card(s) to the action deck in generation ${run.generation}`, () => {
       const {marsBot, calls} = recordingMarsBot();
       marsBot.game.generation = run.generation;
 
       new TerralabsResearchMarsBot().beforeActionPhase(marsBot);
 
-      expect(calls).deep.eq([`drawProjectCardsToActionDeck(${run.count})`]);
+      expect(calls).deep.eq([`drawProjectCardsToActionDeck(${run.expected})`]);
     });
   }
 });

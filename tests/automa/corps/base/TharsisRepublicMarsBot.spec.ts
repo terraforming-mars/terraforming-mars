@@ -14,17 +14,17 @@ describe('TharsisRepublicMarsBot', () => {
   });
 
   for (const run of [
-    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', calls: [`advanceTrack(${TRACK.event})`]},
-    {tileType: TileType.CITY, byMarsBot: false, tile: 'player city', calls: ['gainMc(2)']},
-    {tileType: TileType.CAPITAL, byMarsBot: false, tile: 'player capital', calls: ['gainMc(2)']},
-    {tileType: TileType.GREENERY, byMarsBot: false, tile: 'player greenery', calls: []},
+    {tileType: TileType.CITY, byMarsBot: true, tile: 'MarsBot city', expected: [`advanceTrack(${TRACK.event})`]},
+    {tileType: TileType.CITY, byMarsBot: false, tile: 'player city', expected: ['gainMc(2)']},
+    {tileType: TileType.CAPITAL, byMarsBot: false, tile: 'player capital', expected: ['gainMc(2)']},
+    {tileType: TileType.GREENERY, byMarsBot: false, tile: 'player greenery', expected: []},
   ]) {
     it(`advances the event track for its own city and gains 2 M€ for a city of the player, ${run.tile}`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new TharsisRepublicMarsBot().onTilePlaced(marsBot, run.byMarsBot, run.tileType);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 });

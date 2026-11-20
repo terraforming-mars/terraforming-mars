@@ -149,9 +149,13 @@ export class MarsBotTilePlacer {
     return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
-  /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
-  public findOceanSpace(): Space | undefined {
-    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player);
+  /**
+   * Find the best space for MarsBot to place an ocean. Returns undefined if none available.
+   *
+   * @param filter limits the choice to the ocean spaces it accepts.
+   */
+  public findOceanSpace(filter: (space: Space) => boolean = () => true): Space | undefined {
+    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -369,6 +373,7 @@ export class MarsBotTilePlacer {
     const game = this.marsBot.game;
     const card = game.projectDeck.drawOrThrow(game);
     game.projectDeck.discard(card);
+    game.log('MarsBot reveals ${0} to break a tie', (b) => b.card(card, {cost: true}));
     const index = card.cost === 0 ? spaces.length - 1 : (card.cost - 1) % spaces.length;
     return spaces[index];
   }

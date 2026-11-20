@@ -1,4 +1,6 @@
 import {BonusCardId} from '../../common/automa/AutomaTypes';
+import {GlobalParameter} from '../../common/GlobalParameter';
+import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
@@ -123,6 +125,32 @@ export interface IMarsBot {
    * `temperatureRaises`. Unlike a track icon, a maxed temperature does nothing, with no Failed Action.
    */
   raiseTemperature(steps: 1 | 2): void;
+  /** Asks the bot's corp whether it cancels this raise of `parameter` (Pristar). True means the parameter stays put. */
+  interceptsParameterRaise(parameter: GlobalParameter): boolean;
+  /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
+  bonusMcBlocked: boolean;
+  /**
+   * Raises the global parameter furthest from completion, for the bonus card `cardName`.
+   *
+   * Distance counts steps remaining (a temperature step is 2 degrees), and a tie goes to oxygen, then
+   * oceans, then temperature. With `allowCorpIntercept` false, no corp may cancel the raise. Returns
+   * false when every parameter is already complete.
+   */
+  advanceFurthestParameter(cardName: CardName, allowCorpIntercept?: boolean): boolean;
+  /**
+   * Places a greenery for the bot, raising the oxygen.
+   *
+   * Returns false, with no Failed Action, when no greenery space is left.
+   */
+  maybePlaceGreenery(): boolean;
+  /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
+  withoutTRGain(action: () => void): void;
+  /**
+   * Runs `action` and takes back any TR or M€ it gave the bot (Government Intervention).
+   *
+   * M€ that Lakefront Resorts' advance brings in stays (rulebook B, p.4).
+   */
+  withoutTRorMcGain(action: () => void): void;
   placeOcean(): void;
   placeCity(): void;
   placeGreenery(): void;

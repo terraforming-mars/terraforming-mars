@@ -15,15 +15,15 @@ describe('InventrixMarsBot', () => {
   });
 
   for (const run of [
-    {card: new ArtificialLake(), requirements: 'with', calls: ['gainMc(2)']},
-    {card: new MagneticFieldGenerators(), requirements: 'without', calls: []},
+    {card: new ArtificialLake(), requirements: 'with', expected: ['gainMc(2)']},
+    {card: new MagneticFieldGenerators(), requirements: 'without', expected: []},
   ]) {
     it(`gains 2 M€ for a card with requirements, card ${run.requirements} requirements`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new InventrixMarsBot().onProjectCardResolved(marsBot, run.card);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 });

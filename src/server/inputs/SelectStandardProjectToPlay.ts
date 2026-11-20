@@ -42,13 +42,19 @@ export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProje
       kuiperAsteroids: canPayWith.kuiperAsteroids ? this.player.tableau.has(CardName.KUIPER_COOPERATIVE) : false,
     };
 
+    const amount = input.amount ?? 1;
+    const maxAmount = details.overriddenCost === undefined ? card.maxRepetitions?.(this.player) ?? 1 : 1;
+    if (!Number.isInteger(amount) || amount < 1 || amount > maxAmount) {
+      throw new InputError('Invalid amount');
+    }
+
     const reserveUnits = details.reserveUnits;
 
     if (!this.player.canSpend(input.payment, reserveUnits)) {
       throw new InputError('You do not have that many resources');
     }
     const amountPaid = this.player.payingAmount(input.payment, paymentOptions);
-    const requiredCost = details.overriddenCost ?? card.getAdjustedCost(this.player);
+    const requiredCost = (details.overriddenCost ?? card.getAdjustedCost(this.player)) * amount;
     if (amountPaid < requiredCost) {
       throw new InputError('Did not spend enough to pay for standard project');
     }
@@ -56,8 +62,8 @@ export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProje
   }
 
   // Public for tests
-  public payAndPlay(card: IStandardProjectCard, payment: Payment) {
-    card.payAndExecute(this.player, payment);
+  public payAndPlay(card: IStandardProjectCard, payment: Payment, amount?: number) {
+    card.payAndExecute(this.player, payment, amount);
     this.cb(card);
   }
 }

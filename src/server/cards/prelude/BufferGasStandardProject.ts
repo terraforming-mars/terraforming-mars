@@ -20,6 +20,15 @@ export class BufferGasStandardProject extends StandardProjectCard {
     });
   }
 
+  public maxRepetitions(player: IPlayer): number {
+    const cost = this.getAdjustedCost(player);
+    let max = 0;
+    while (max < 100 && player.canAfford({cost: cost * (max + 1), tr: {tr: max + 1}})) {
+      max++;
+    }
+    return Math.max(max, 1);
+  }
+
   actionEssence(player: IPlayer): void {
     player.increaseTerraformRating();
   }

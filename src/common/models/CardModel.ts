@@ -18,4 +18,5 @@ export interface CardModel {
     bonusResource?: Array<Resource>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
     standardProjectCanPayWith?: StandardProjectCanPayWith; // Set for standard projects; undefined for regular project cards
+    maxRepetitions?: number; // Used with Buffer Gas
 }

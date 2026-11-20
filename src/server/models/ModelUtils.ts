@@ -53,6 +53,9 @@ export function cardsToModel(
     };
     if (isIStandardProjectCard(card)) {
       model.standardProjectCanPayWith = card.canPayWith(player);
+      if (options.extras?.get(card.name)?.overriddenCost === undefined) {
+        model.maxRepetitions = card.maxRepetitions?.(player);
+      }
     }
     if (card.isDisabled) {
       model.isDisabled = true;

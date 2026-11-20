@@ -106,12 +106,12 @@ export abstract class SelectCardToPlay<T extends IProjectCard | IStandardProject
 
     this.validate(card, input, details);
 
-    this.payAndPlay(card, input.payment);
+    this.payAndPlay(card, input.payment, input.amount);
     return undefined;
   }
 
   protected abstract validate(card: T, input: SelectProjectCardToPlayResponse, details: PlayCardMetadata): void;
 
   // Public for tests
-  public abstract payAndPlay(card: T, payment: Payment): void;
+  public abstract payAndPlay(card: T, payment: Payment, amount?: number): void;
 }

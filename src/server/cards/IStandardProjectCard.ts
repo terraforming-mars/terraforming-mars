@@ -16,8 +16,10 @@ export interface IStandardProjectCard extends ICard {
   canPayWith(player: IPlayer): StandardProjectCanPayWith;
   /** Base cost minus any applicable discounts. */
   getAdjustedCost(player: IPlayer): number;
-  /** Deducts the payment and carries out the standard project's effect. */
-  payAndExecute(player: IPlayer, payment: Payment): void;
+  /** Caps how many times the player may run this project in one go (only Buffer Gas). Undefined means once. */
+  maxRepetitions?(player: IPlayer): number;
+  /** Deducts the payment and carries out the standard project's effect `amount` times. */
+  payAndExecute(player: IPlayer, payment: Payment, amount?: number): void;
 }
 
 export function isIStandardProjectCard(card: ICard): card is IStandardProjectCard {

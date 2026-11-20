@@ -23,11 +23,20 @@
     </template>
     <WarningsComponent v-if="card !== undefined" :warnings="card.warnings" />
 
+    <div v-if="card !== undefined && card.maxRepetitions !== undefined && showPaymentSection" class="repetitions-cont">
+      <span class="payments-title" v-i18n>Number of times to play</span>
+      <div class="flex">
+        <input type="number" class="nes-input" :min="1" :max="card.maxRepetitions" v-model.number="amount">
+        &nbsp;
+        <AppButton size="big" type="max" @click="setMaxAmount" title="MAX" />
+      </div>
+    </div>
+
     <PaymentForm
       v-if="showPaymentSection"
       ref="paymentForm"
-      :key="cardName"
-      :cost="cost"
+      :key="cardName + '-' + amount"
+      :cost="cost * amount"
       :order="order"
       :ledger="ledger"
       :showsave="showsave"
@@ -53,6 +62,7 @@ import {CardName} from '@/common/cards/CardName';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import PaymentForm from '@/client/components/PaymentForm.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {Ledger} from '@/client/components/PaymentLedger';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
@@ -129,6 +139,7 @@ export default defineComponent({
       }
       this.card = this.getCard();
       this.cost = this.card.calculatedCost ?? 0;
+      this.amount = this.card.maxRepetitions ?? 1;
       this.updateAvailableUnits();
     },
   },
@@ -147,10 +158,12 @@ export default defineComponent({
       card: card,
       cards: cards,
       cost: card?.calculatedCost ?? 0,
+      amount: card?.maxRepetitions ?? 1,
       available: Units.of({}),
     };
   },
   components: {
+    AppButton,
     Card,
     PaymentForm,
     WarningsComponent,
@@ -253,6 +266,9 @@ export default defineComponent({
       }
       return titaniumValue - 1;
     },
+    setMaxAmount() {
+      this.amount = this.card?.maxRepetitions ?? 1;
+    },
     saveData() {
       if (this.card === undefined) {
         return;
@@ -268,7 +284,11 @@ export default defineComponent({
       if (this.card === undefined) {
         return;
       }
-      this.onsave({type: 'projectCard', card: this.card.name, payment: this.payment});
+      const response: SelectProjectCardToPlayResponse = {type: 'projectCard', card: this.card.name, payment: this.payment};
+      if (this.card.maxRepetitions !== undefined) {
+        response.amount = this.amount;
+      }
+      this.onsave(response);
     },
   },
 });

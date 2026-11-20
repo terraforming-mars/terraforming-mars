@@ -33,6 +33,6 @@ export class InterfaceHyperlinkMarsBot extends MarsBotBonusCardEffect {
       marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(this.name).card(card));
       marsBot.resolveProjectCard(card);
     }
-    return this.destroyed(marsBot);
+    return this.logDestroyed(marsBot);
   }
 }

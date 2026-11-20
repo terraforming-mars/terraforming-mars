@@ -43,6 +43,15 @@ export interface IMarsBot {
   raiseTR(steps: number): void;
   /** Advances a track and resolves the space it reaches. Does nothing once the game has ended. */
   advanceTrack(trackIndex: number): void;
+  /**
+   * Advances a track for a bonus card, like `advanceTrack`.
+   *
+   * A maxed track stays put, and the bot takes no Failed Action: a bonus card that can't resolve has
+   * no effect (rulebook A p.5; BGG 3599965, 3623553).
+   */
+  maybeAdvanceTrack(trackIndex: number): void;
+  /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
+  loseMc(amount: number): number;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its

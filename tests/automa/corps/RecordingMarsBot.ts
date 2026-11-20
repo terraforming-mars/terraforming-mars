@@ -57,6 +57,14 @@ export function recordingMarsBot(fields: Partial<IMarsBot> = {}): RecordingMarsB
       record('advanceTrack')(trackIndex);
       marsBot.marsBotBoard.tracks[trackIndex].position++;
     },
+    maybeAdvanceTrack: (trackIndex) => {
+      record('maybeAdvanceTrack')(trackIndex);
+      marsBot.marsBotBoard.tracks[trackIndex].position++;
+    },
+    loseMc: (amount) => {
+      record('loseMc')(amount);
+      return amount;
+    },
     getCorpState: (key) => corpState.get(key) ?? 0,
     setCorpState: (key, value) => corpState.set(key, value),
     ...fields,

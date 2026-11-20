@@ -204,8 +204,10 @@ export class PostgreSQL implements IDatabase {
 
     const gameLog: Array<LogMessage> = parseInterned(log);
     // If this is part of an undo operation, delete the end
-    // of the array so the log matches the length.
-    gameLog.length = logLength;
+    // of the array so the log matches the length. Never lengthen it: that fills the log with holes.
+    if (gameLog.length > logLength) {
+      gameLog.length = logLength;
+    }
     const gameOptions: GameOptions = parseInterned(options);
     return {...remainder, gameOptions, gameLog};
   }

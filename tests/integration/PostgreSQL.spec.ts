@@ -653,6 +653,22 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).has.members(range(20));
     });
 
+    it('loads a log shorter than the save without holes', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-short-log', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const shortLog = JSON.stringify(game.gameLog.slice(0, 2));
+      game.log('one more');
+      await db.saveGame(game);
+
+      // The newest save counts more messages than the log row holds.
+      await db.getPool().query('UPDATE game SET log = $1 WHERE game_id = $2', [shortLog, game.id]);
+      const loaded = await db.getGame(game.id);
+
+      expect(loaded.gameLog).has.length(2);
+    });
+
     it('stats - orphaned rows', async () => {
       const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();

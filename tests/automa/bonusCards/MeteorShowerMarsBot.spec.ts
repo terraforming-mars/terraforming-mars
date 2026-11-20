@@ -6,9 +6,9 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('MeteorShowerMarsBot', () => {
   for (const run of [
-    {plants: 2, plantsLeft: 0, destroyed: false},
-    {plants: 3, plantsLeft: 0, destroyed: true},
-    {plants: 7, plantsLeft: 2, destroyed: true},
+    {plants: 2, expected: {plantsLeft: 0, destroyed: false}},
+    {plants: 3, expected: {plantsLeft: 0, destroyed: true}},
+    {plants: 7, expected: {plantsLeft: 2, destroyed: true}},
   ] as const) {
     it('removes up to 5 plants and is destroyed once 3 are lost: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -17,8 +17,8 @@ describe('MeteorShowerMarsBot', () => {
 
       const destroyed = new MeteorShowerMarsBot().resolve(marsBot);
 
-      expect(human.plants).eq(run.plantsLeft);
-      expect(destroyed).eq(run.destroyed);
+      expect(human.plants).eq(run.expected.plantsLeft);
+      expect(destroyed).eq(run.expected.destroyed);
     });
   }
 

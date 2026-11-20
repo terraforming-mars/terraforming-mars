@@ -29,6 +29,9 @@ export class InterfaceHyperlinkMarsBot extends MarsBotBonusCardEffect {
     drawn.sort((a, b) => science(b) - science(a) || b.cost - a.cost || tagCount(b) - tagCount(a));
     const discarded = drawn.splice(2);
     marsBot.game.projectDeck.discard(...discarded);
+    if (discarded.length > 0) {
+      marsBot.game.log('MarsBot (${0}): discards ${1}', (b) => b.cardName(this.name).cards(discarded));
+    }
     for (const card of drawn) {
       marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(this.name).card(card));
       marsBot.resolveProjectCard(card);

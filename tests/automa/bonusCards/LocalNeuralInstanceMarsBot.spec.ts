@@ -19,8 +19,8 @@ function leaveNoNeuralInstanceSpace(marsBot: IMarsBot): void {
 
 describe('LocalNeuralInstanceMarsBot', () => {
   for (const run of [
-    {spaceLeft: true, placed: 1, played: 0, destroyed: true},
-    {spaceLeft: false, placed: 0, played: 1, destroyed: false},
+    {spaceLeft: true, expected: {placed: 1, played: 0, destroyed: true}},
+    {spaceLeft: false, expected: {placed: 0, played: 1, destroyed: false}},
   ] as const) {
     it('places its tile and is destroyed, otherwise resolves a project card and is kept: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -41,9 +41,9 @@ describe('LocalNeuralInstanceMarsBot', () => {
 
       const destroyed = new LocalNeuralInstanceMarsBot().resolve(marsBot);
 
-      expect(placed).has.length(run.placed);
-      expect(played).has.length(run.played);
-      expect(destroyed).eq(run.destroyed);
+      expect(placed).has.length(run.expected.placed);
+      expect(played).has.length(run.expected.played);
+      expect(destroyed).eq(run.expected.destroyed);
     });
   }
 });

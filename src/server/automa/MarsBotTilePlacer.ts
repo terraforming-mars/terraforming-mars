@@ -369,6 +369,7 @@ export class MarsBotTilePlacer {
     const game = this.marsBot.game;
     const card = game.projectDeck.drawOrThrow(game);
     game.projectDeck.discard(card);
+    game.log('MarsBot reveals ${0} to break a tie', (b) => b.card(card, {cost: true}));
     const index = card.cost === 0 ? spaces.length - 1 : (card.cost - 1) % spaces.length;
     return spaces[index];
   }

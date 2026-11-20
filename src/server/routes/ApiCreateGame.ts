@@ -1,4 +1,5 @@
 import * as responses from '../server/responses';
+import {createStrongRandom} from '../utils/createStrongRandom';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
@@ -201,8 +202,7 @@ export class ApiCreateGame extends Handler {
         const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
         game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
       } else {
-        const seed = Math.random();
-        game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, seed);
+        game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, createStrongRandom());
       }
       ctx.gameLoader.add(game);
       // Only games that are actually created count against the quota.

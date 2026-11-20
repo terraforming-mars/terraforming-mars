@@ -40,7 +40,7 @@ describe('Cloner', () => {
     expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 
-    expect(game.rng.seed).eq(newGame.rng.seed);
+    expect(game.rng.serialize()).to.deep.eq(newGame.rng.serialize());
     expect(game.gameAge).eq(newGame.gameAge);
     expect(game.undoCount).eq(newGame.undoCount);
     expect(game.projectDeck.discardPile, 'discardPile').to.deep.eq(newGame.projectDeck.discardPile);

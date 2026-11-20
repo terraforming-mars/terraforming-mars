@@ -12,7 +12,7 @@ export class MeteorShowerMarsBot extends MarsBotBonusCardEffect {
     // Asteroid Deflection System and Protected Habitat block plant removal
     if (marsBot.humanPlayer.plantsAreProtected()) {
       marsBot.game.log('MarsBot (${0}): blocked by plant protection', (b) => b.cardName(this.name));
-      return this.destroyed(marsBot);
+      return this.logDestroyed(marsBot);
     }
     const plantsLost = Math.min(5, marsBot.humanPlayer.plants);
     if (plantsLost > 0) {
@@ -21,7 +21,7 @@ export class MeteorShowerMarsBot extends MarsBotBonusCardEffect {
       marsBot.game.log('MarsBot (${0}): ${1} loses ${2} plants', (b) => b.cardName(this.name).player(marsBot.humanPlayer).number(plantsLost));
     }
     if (plantsLost >= 3) {
-      return this.destroyed(marsBot);
+      return this.logDestroyed(marsBot);
     }
     return false;
   }

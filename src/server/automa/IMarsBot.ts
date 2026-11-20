@@ -8,6 +8,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {Space} from '../boards/Space';
+import {MarsBotShippingBoard} from './colonies/MarsBotShippingBoard';
 
 /** The bot as corp handlers see it, implemented by the bot manager. */
 export interface IMarsBot {
@@ -32,6 +33,8 @@ export interface IMarsBot {
   readonly temperatureRaises: number;
   /** How many bonus cards have been destroyed while the bot resolved them. */
   readonly destroyedBonusCards: number;
+  /** The bot's Shipping Board, where its colonies and trades store their resources (C-18). */
+  readonly shippingBoard: MarsBotShippingBoard;
   /**
    * Adds floaters to the bot's floater pool with Venus Next.
    *
@@ -169,6 +172,8 @@ export interface IMarsBot {
   maybePlaceRandomColony(): boolean;
   /** True when a colony tile has room for MarsBot. */
   canPlaceColony(): boolean;
+  /** Tells the bot's corp that a colony was built, by the bot or by the player (Poseidon). */
+  notifyColonyPlaced(): void;
   /** Takes the bot's player marker off `space`. True when the space had one. */
   removeMarker(space: Space): boolean;
   /** The bot's bonus deck. */

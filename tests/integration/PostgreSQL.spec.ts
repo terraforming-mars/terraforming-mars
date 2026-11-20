@@ -801,12 +801,27 @@ describeDatabaseSuite({
 
       const player = TestPlayer.BLACK.newPlayer();
       const gameId = 'game-id-transaction';
-      Game.newInstance(gameId, [player], player, 'spectatorid');
+      const game = Game.newInstance(gameId, [player], player, 'spectatorid');
       await db.awaitAllSaves();
 
       // stats() queries the game table, so read the counter directly.
       expect(db.getStatistics().saveErrorCount).eq(1);
       expect(await db.getSaveIds('game-id-transaction')).is.empty;
+      expect(game.lastSaveId).eq(0);
+    });
+
+    it('overlapping saves each store the save id they were taken with', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-overlap', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+
+      await Promise.all([db.saveGame(game), db.saveGame(game)]);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2]);
+      expect((await db.getGameVersion(game.id, 1)).lastSaveId).eq(1);
+      expect((await db.getGameVersion(game.id, 2)).lastSaveId).eq(2);
+      expect(game.lastSaveId).eq(3);
     });
   },
 });

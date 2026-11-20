@@ -55,6 +55,12 @@ export interface IMarsBot {
   maybeAdvanceTrack(trackIndex: number): void;
   /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
   loseMc(amount: number): number;
+  /**
+   * Advances the track that carries `tag` and tells the player's cards about the tag.
+   *
+   * Returns false when no track carries `tag`.
+   */
+  advanceTrackOfTag(tag: Tag): boolean;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its

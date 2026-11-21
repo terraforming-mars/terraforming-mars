@@ -5,6 +5,7 @@ import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
+import {IAward} from '../awards/IAward';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {Space} from '../boards/Space';
@@ -61,6 +62,8 @@ export interface IMarsBot {
    * Returns false when no track carries `tag`.
    */
   advanceTrackOfTag(tag: Tag): boolean;
+  /** Tells the player's cards about an advance that names `tag`, as if the bot played a card with that tag. */
+  notifyTagAdvance(tag: Tag): void;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its
@@ -74,6 +77,8 @@ export interface IMarsBot {
   resolveProjectCard(card: IProjectCard): void;
   /** Places the bot's Neural Instance tile on `space` and pays the bot its placement M€. */
   placeNeuralInstance(space: Space): void;
+  /** The bot's score in `award` as it compares itself with the player, its difficulty's handicap and its corp's bonus included. */
+  awardValue(award: IAward): number;
   /**
    * Draws the top bonus card and resolves it. Does nothing when both bonus piles are empty, or
    * once the game has ended.
@@ -149,11 +154,11 @@ export interface IMarsBot {
    */
   advanceFurthestParameter(cardName: CardName, allowCorpIntercept?: boolean): boolean;
   /**
-   * Places a greenery for the bot, raising the oxygen.
+   * Places a greenery for the bot on a space that `filter` accepts, raising the oxygen.
    *
-   * Returns false, with no Failed Action, when no greenery space is left.
+   * Returns false, with no Failed Action, when no such space is left.
    */
-  maybePlaceGreenery(): boolean;
+  maybePlaceGreenery(filter?: (space: Space) => boolean): boolean;
   /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
   withoutTRGain(action: () => void): void;
   /**

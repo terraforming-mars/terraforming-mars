@@ -13,7 +13,6 @@ import {Turmoil} from '../turmoil/Turmoil';
 export class MarsBotScoring {
   constructor(
     private readonly marsBot: IMarsBot,
-    private readonly corpVpBonus: number = 0,
   ) {}
 
   /** Calculate MarsBot's complete VP breakdown. */
@@ -28,6 +27,7 @@ export class MarsBotScoring {
     const mcToVP = this.calculateMCtoVP();
     const vermin = this.calculateVerminPenalty(cities);
     const turmoilVP = this.calculateTurmoilVP();
+    const corpVP = this.marsBot.corpVictoryPoints();
 
     return {
       terraformRating: tr,
@@ -40,8 +40,8 @@ export class MarsBotScoring {
       cardVP: 0,
       vermin,
       turmoilVP,
-      corpVP: this.corpVpBonus,
-      total: tr + milestoneResult.total + awardResult.total + greenery + cityAdjacentGreenery + neuralInstance + mcToVP + vermin + turmoilVP + this.corpVpBonus,
+      corpVP,
+      total: tr + milestoneResult.total + awardResult.total + greenery + cityAdjacentGreenery + neuralInstance + mcToVP + vermin + turmoilVP + corpVP,
       detailsMilestones: milestoneResult.details,
       detailsAwards: awardResult.details,
     };
@@ -131,7 +131,7 @@ function buildMcToVpTable(maxGen: number): ReadonlyArray<{maxGeneration: number,
 }
 
 /** M€ per VP in `generation`, or undefined from the generation limit on. */
-export function getMcPerVP(generation: number, preludeExtension: boolean): number | undefined {
+function getMcPerVP(generation: number, preludeExtension: boolean): number | undefined {
   const table = buildMcToVpTable(getAutomaMaxGeneration(preludeExtension));
   const entry = table.find((e) => generation <= e.maxGeneration);
   return entry?.mcPerVP;

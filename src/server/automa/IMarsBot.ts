@@ -33,6 +33,8 @@ export interface IMarsBot {
   readonly temperatureRaises: number;
   /** The space holding the bot's Neural Instance tile. Undefined until it places one. */
   readonly neuralInstanceSpace: Space | undefined;
+  /** The VP the bot's corp adds to its score at the end of the game. */
+  corpVictoryPoints(): number;
   /** How many bonus cards have been destroyed while the bot resolved them. */
   readonly destroyedBonusCards: number;
   /**

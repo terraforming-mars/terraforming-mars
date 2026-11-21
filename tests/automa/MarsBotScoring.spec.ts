@@ -167,12 +167,12 @@ describe('MarsBotScoring', () => {
   });
 
   it('adds up every part, with the corp VP', () => {
-    const {game, human, botPlayer, marsBot} = setup({megacredits: 16});
+    const {game, human, botPlayer, marsBot} = setup({megacredits: 16, corpVictoryPoints: () => 4});
     game.claimedMilestones.push({player: botPlayer, milestone: new Terraformer()});
     Turmoil.getTurmoil(game).chairman = botPlayer;
     game.fundedAwards.push({player: human, award: new Banker()});
 
-    const vp = new MarsBotScoring(marsBot, 4).calculate();
+    const vp = new MarsBotScoring(marsBot).calculate();
 
     expect({corpVP: vp.corpVP, total: vp.total}).deep.eq({corpVP: 4, total: 20 + 5 + 5 + 2 + 1 + 4});
   });

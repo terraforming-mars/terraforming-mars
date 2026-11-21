@@ -4,14 +4,14 @@
 import {CardResource} from '@/common/CardResource';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
+import {pickByRevealedCard} from '@/server/automa/MarsBotCardReveal';
 import {ICard} from '@/server/cards/ICard';
 
 /**
  * Removes the player's animal or microbe worth the most VP, for the bonus card `cardName`.
  *
  * False when no card has one MarsBot may remove. Cards that score their resources come first, then
- * the rest; a tie goes to a flipped project card (BGG 3360797).
+ * the rest; a tie goes to a revealed project card (BGG 3360797).
  */
 export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, cardName: CardName): boolean {
   const game = marsBot.game;
@@ -26,7 +26,7 @@ export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, cardName: CardName
   if (candidates.length > 0) {
     const best = Math.max(...candidates.map(vpPerResource));
     const tied = candidates.filter((played) => vpPerResource(played) === best);
-    const card = tied.length > 1 ? pickByFlippedCard(game, tied) ?? tied[0] : tied[0];
+    const card = tied.length > 1 ? pickByRevealedCard(game, tied) ?? tied[0] : tied[0];
     humanPlayer.removeResourceFrom(card, 1, {removingPlayer: marsBot.player, log: false});
     game.log('MarsBot (${0}): removed 1 ${1} from ${2}',
       (b) => b.cardName(cardName).rawString(card.resourceType ?? '').card(card));

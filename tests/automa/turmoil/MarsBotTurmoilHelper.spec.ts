@@ -184,7 +184,7 @@ describe('MarsBotTurmoilHelper', () => {
   });
 
   // The priority list on Gray Eminence (Septem Tribus): fewest MarsBot delegates, then fewest of the
-  // player's, then a random party picked by flipping a project card.
+  // player's, then a random party picked by revealing a project card.
   describe('selectGrayEminenceParty', () => {
     it('picks the party with the fewest MarsBot delegates over the one with the fewest human delegates', () => {
       sendDelegates(botPlayer, partiesExcept(PartyName.GREENS));
@@ -194,7 +194,7 @@ describe('MarsBotTurmoilHelper', () => {
       expect(helper.selectGrayEminenceParty()).eq(PartyName.GREENS);
     });
 
-    it('breaks a tie on MarsBot delegates with the fewest human delegates, without flipping a card', () => {
+    it('breaks a tie on MarsBot delegates with the fewest human delegates, without revealing a card', () => {
       for (const name of [PartyName.MARS, PartyName.SCIENTISTS]) {
         turmoil.sendDelegateToParty(botPlayer, name, game);
       }
@@ -207,7 +207,7 @@ describe('MarsBotTurmoilHelper', () => {
       expect(game.projectDeck.discardPile.length).eq(discarded);
     });
 
-    it('breaks a full tie by the cost of a flipped project card', () => {
+    it('breaks a full tie by the cost of a revealed project card', () => {
       game.projectDeck.drawPile.push(new Capital());
       const discarded = game.projectDeck.discardPile.length;
 
@@ -216,7 +216,7 @@ describe('MarsBotTurmoilHelper', () => {
       expect(game.projectDeck.discardPile.length).eq(discarded + 1);
     });
 
-    it('counts the flipped card through only the parties that are still tied', () => {
+    it('counts the revealed card through only the parties that are still tied', () => {
       for (const name of [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY]) {
         turmoil.sendDelegateToParty(botPlayer, name, game);
       }

@@ -16,6 +16,7 @@
 import {computed, onMounted, onUnmounted, ref} from 'vue';
 import PopupPanel from './common/PopupPanel.vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
+import {isObject} from '@/common/utils/utils';
 
 const props = defineProps<{
   gameOptions: GameOptionsModel;
@@ -37,7 +38,7 @@ function toMarkdown(obj: object, indent = ''): string {
     }
     if (Array.isArray(value)) {
       lines.push(`${indent}- ${key}: ${value.length > 0 ? value.join(', ') : 'none'}`);
-    } else if (typeof value === 'object' && value !== null) {
+    } else if (isObject(value)) {
       lines.push(`${indent}- ${key}:`);
       lines.push(toMarkdown(value, indent + '  '));
     } else {

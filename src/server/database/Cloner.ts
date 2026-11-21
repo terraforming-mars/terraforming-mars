@@ -6,7 +6,7 @@ import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
-import {toID} from '../../common/utils/utils';
+import {isObject, toID} from '../../common/utils/utils';
 import {AutomaGameSetup} from '../automa/AutomaGameSetup';
 
 export class Cloner {
@@ -46,21 +46,20 @@ export class Cloner {
     return game;
   }
 
-  private static replacePlayerIds(obj: any, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
-    if (obj === undefined || obj === null) {
+  private static replacePlayerIds(obj: unknown, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
+    if (!isObject(obj)) {
       return;
     }
-    const keys = Object.entries(obj);
-    keys.forEach(([key, val]) => {
+    for (const [key, val] of Object.entries(obj)) {
       if (isPlayerId(val)) {
         const idx = oldPlayerIds.indexOf(val);
         if (idx > -1) {
-          obj[key] = newPlayerIds[idx];
+          Reflect.set(obj, key, newPlayerIds[idx]);
         }
       } else if (typeof val === 'object') {
         Cloner.replacePlayerIds(val, oldPlayerIds, newPlayerIds);
       }
-    });
+    }
   }
 
   private static updatePlayer(from: IPlayer, to: SerializedPlayer) {

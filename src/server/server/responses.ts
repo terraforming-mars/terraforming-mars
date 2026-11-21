@@ -22,7 +22,10 @@ export function badInputRequest(_req: Request, res: Response, e: unknown) {
     'Content-Type': 'application/json',
   });
   const id = e instanceof AppError ? e.id : undefined;
-  const message = e instanceof Error ? e.message : String(e);
+  const message = e instanceof Error ? e.message : 'Invalid input';
+  if (!(e instanceof Error)) {
+    console.warn('bad input', e);
+  }
   const response: AppErrorResponse = {id, message};
   res.write(JSON.stringify(response));
   res.end();
@@ -100,10 +103,10 @@ export function downgradeRedirect(_req: Request, res: Response, ctx: Context): v
   res.end();
 }
 
-export function writeJson(res: Response, ctx: Context, json: any, space?: string | number | undefined) {
+export function writeJson(res: Response, ctx: Context, json: object, space?: string | number | undefined) {
   res.setHeader('Content-Type', 'application/json');
   if (ctx.user) {
-    json._user = {userid: ctx.user.global_name};
+    Object.assign(json, {_user: {userid: ctx.user.global_name}});
   }
   const s = JSON.stringify(json, undefined, space);
   res.setHeader('Content-Length', Buffer.byteLength(s));

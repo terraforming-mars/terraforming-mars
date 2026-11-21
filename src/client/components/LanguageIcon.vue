@@ -1,8 +1,8 @@
 <template>
-  <div ref="root" class="sidebar_item sidebar_item--language" :title="$t('Language')">
+  <div ref="root" class="sidebar-item sidebar-item--language" :title="$t('Language')">
     <div
-      class="sidebar_icon sidebar_icon--language"
-      :class="{'sidebar_item--is-active': languagePanelOpen}">
+      class="sidebar-icon sidebar-icon--language"
+      :class="{'sidebar-item--is-active': languagePanelOpen}">
       <div :class="`language-icon language-icon-for-sidebar language-icon--${lang}`"
         :title="title"
         @click="languagePanelOpen = !languagePanelOpen"></div>

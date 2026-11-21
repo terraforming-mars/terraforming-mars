@@ -50,7 +50,7 @@ describe('LobbyHalls', () => {
     assertAddDelegateAction(player, game.deferredActions.pop()?.execute());
   });
 
-  function assertCloneTagAction(action: IDeferredAction) {
+  function assertCloneTagAction(action: IDeferredAction<unknown>) {
     const options = cast(action, DeclareCloneTag).execute();
     options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);

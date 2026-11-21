@@ -16,7 +16,7 @@
         <a v-if="gameOptions.expansions.ceo" :href="rulebookUrls.ceo" class="tooltip" data-tooltip="CEOs rules" target="_blank"><div class="create-game-expansion-icon expansion-icon-ceo"></div></a>
         <a v-if="gameOptions.expansions.underworld" :href="rulebookUrls.underworld" class="tooltip" data-tooltip="Underworld rules" target="_blank"><div class="create-game-expansion-icon expansion-icon-underworld"></div></a>
         <a v-if="gameOptions.expansions.starwars" :href="rulebookUrls.starwars" class="tooltip" data-tooltip="Star Wars rules" target="_blank"><div class="create-game-expansion-icon expansion-icon-starwars"></div></a>
-        <a v-if="gameOptions.expansions.deltaProject" :href="rulebookUrls.deltaProject" class="tooltip" data-tooltip="Delta Project rules" target="_blank"><div class="create-game-expansion-icon expansion-icon-deltaProject"></div></a>
+        <a v-if="gameOptions.expansions.deltaProject" :href="rulebookUrls.deltaProject" class="tooltip" data-tooltip="Delta Project rules" target="_blank"><div class="create-game-expansion-icon expansion-icon-deltaproject"></div></a>
       </li>
 
       <li><div class="setup-item" v-i18n>Board:</div>
@@ -72,7 +72,8 @@
       <li><div class="setup-item" v-i18n>Game configs:</div>
         <div v-if="gameOptions.fastModeOption" class="game-config fastmode" v-i18n>fast mode</div>
         <div v-if="gameOptions.showTimers" class="game-config timer" v-i18n>timer</div>
-        <div v-if="gameOptions.showOtherPlayersVP" class="game-config realtime-vp" v-i18n>real-time vp</div>
+        <div v-if="gameOptions.showVP === 'all'" class="game-config realtime-vp" v-i18n>real-time vp</div>
+        <div v-if="gameOptions.showVP === 'none'" class="game-config hidden-vp" v-i18n>hidden vp</div>
         <div v-if="gameOptions.undoOption" class="game-config undo" v-i18n>undo</div>
       </li>
       <li v-if="gameOptions.twoCorpsVariant"><div class="setup-item" v-i18n>Merger</div></li>

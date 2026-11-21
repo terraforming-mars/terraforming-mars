@@ -43,11 +43,6 @@
   opacity: 1; /* Firefox */
 }
 
-.form-input::-ms-input-placeholder {
-  /* Internet Explorer 10-11, Microsoft Edge */
-  color: #888888;
-}
-
 .tooltip:hover {
   text-decoration: none;
 }
@@ -138,14 +133,6 @@
 }
 .create-game-page-column input[type="checkbox"]:checked + label a {
   color:black
-}
-
-// Looks like a selected button, but can't be clicked. Only appears from JSON import.
-.create-game-page-column label.create-game-manual-ma,
-.create-game-page-column label.create-game-manual-ma:hover {
-  background-color: rgb(199, 199, 199);
-  color: black;
-  cursor: default;
 }
 
 .create-game-page-column .create-game-board-hexagon {
@@ -244,10 +231,10 @@
   background-color: rgba(0,0,0,.3);
 }
 
-.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption {
+.create-game-page-column input[type="radio"]:checked + label.label-agenda-style {
   position: relative;
 }
-.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption::after {
+.create-game-page-column input[type="radio"]:checked + label.label-agenda-style::after {
   position: absolute;
   width: 40px;
   height: 12px;
@@ -258,26 +245,21 @@
   background-color: rgb(199, 199, 199);
 }
 
-.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle {
-  position: relative;
-}
-.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle::after {
-  position: absolute;
-  width: 40px;
-  height: 12px;
-  top: -10px;
-  left: 50%;
-  margin-left: -20px;
-  content: " ";
-  background-color: rgb(199, 199, 199);
+.create-game-showVP-options {
+  margin-bottom: 10px;
 }
 
-.agendaStyle-random {
+.create-game-page-column label.label-showVP {
+  min-width: 0;
+  padding: 10px;
+}
+
+.agenda-style-random {
   width: 105px;
   min-width: 105px !important;
 }
 
-.agendaStyle-chairman {
+.agenda-style-chairman {
   width: 115px;
   min-width: 115px !important;
 }

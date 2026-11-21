@@ -1,5 +1,5 @@
 <template>
-  <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name) + unavailablePartyClass">
+  <div :class="'filter-div party-container party-background--' + partyNameToCss(party.name) + unavailablePartyClass">
     <div :class="'board-party board-party--' + partyNameToCss(party.name)">
       <div :class="dominantClass">
         <div class="send-delegate-leader-spot">

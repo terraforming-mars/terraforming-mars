@@ -37,7 +37,7 @@ defineProps<{
   font-weight: bold;
 }
 .megacredits {
-  background-image: url(./assets/resources/megacredit.png);
+  background-image: url(/assets/resources/megacredit.png);
   background-size: 20px 20px;
   width: 20px;
   height: 20px;

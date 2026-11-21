@@ -81,20 +81,20 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     tag: Tag.BUILDING,
     dynamicSlots: true,
     rewardIcons: [
-      {cssClass: 'resource_icon resource_icon--steel'},
-      {cssClass: 'resource_icon resource_icon--steel'},
+      {cssClass: 'resource-icon resource-icon--steel'},
+      {cssClass: 'resource-icon resource-icon--steel'},
       {cssClass: '', or: true},
-      {cssClass: 'resource_icon resource_icon--plants'},
-      {cssClass: 'resource_icon resource_icon--plants'},
+      {cssClass: 'resource-icon resource-icon--plants'},
+      {cssClass: 'resource-icon resource-icon--plants'},
     ],
   },
   {
     tag: Tag.POWER,
     dynamicSlots: true,
     rewardIcons: [
-      {cssClass: 'resource_icon resource_icon--energy', production: true},
+      {cssClass: 'resource-icon resource-icon--energy', production: true},
       {cssClass: '', or: true},
-      {cssClass: 'resource_icon resource_icon--heat', production: true},
+      {cssClass: 'resource-icon resource-icon--heat', production: true},
     ],
   },
   {
@@ -107,7 +107,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
   {
     tag: Tag.SPACE,
     dynamicSlots: true,
-    rewardIcons: [{cssClass: 'resource_icon resource_icon--titanium', production: true}],
+    rewardIcons: [{cssClass: 'resource-icon resource-icon--titanium', production: true}],
   },
   {
     tag: Tag.SCIENCE,
@@ -123,7 +123,7 @@ const STEPS: ReadonlyArray<DeltaBoardStep> = [
     tag: Tag.PLANT,
     dynamicSlots: true,
     rewardIcons: [
-      {cssClass: 'resource_icon resource_icon--plants'},
+      {cssClass: 'resource-icon resource-icon--plants'},
       {cssClass: '', separator: true},
       {cssClass: 'resource-tag tag-plant delta-project-board__reward-tag'},
     ],
@@ -390,7 +390,7 @@ export default defineComponent({
   filter: none;
 }
 
-.delta-project-board__reward :deep(.resource_icon) {
+.delta-project-board__reward :deep(.resource-icon) {
   display: block;
 }
 

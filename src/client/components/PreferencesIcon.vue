@@ -1,6 +1,6 @@
 <template>
-  <div ref="root" class="sidebar_item sidebar_item--settings">
-    <i class="sidebar_icon sidebar_icon--settings" :title="$t('Player Settings')" :class="{'sidebar_item--is-active': preferencesPanelOpen}" @click="preferencesPanelOpen = !preferencesPanelOpen"></i>
+  <div ref="root" class="sidebar-item sidebar-item--settings">
+    <i class="sidebar-icon sidebar-icon--settings" :title="$t('Player Settings')" :class="{'sidebar-item--is-active': preferencesPanelOpen}" @click="preferencesPanelOpen = !preferencesPanelOpen"></i>
     <PreferencesDialog v-show="preferencesPanelOpen" @okButtonClicked="preferencesPanelOpen = false" :preferencesManager="PreferencesManager.INSTANCE" />
   </div>
 </template>

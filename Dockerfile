@@ -1,5 +1,5 @@
 # Define the version once at the top
-ARG NODE_VERSION=22-alpine3.21
+ARG NODE_VERSION=26-alpine3.23
 
 # Intermediate image - base for building and installing dependencies
 FROM node:${NODE_VERSION} AS install

@@ -3,7 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 import {BoardName} from '../../common/boards/BoardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {marsBotUsesMapSet} from '@/server/automa/MarsBotMilestoneAwardEval';
+import {marsBotUsesBoardGoals} from '@/server/automa/MarsBotMilestoneAwardEval';
 
 export class RimSettler extends BaseMilestone {
   public readonly automaDescription = 'Energy track ≥ 5';
@@ -27,7 +27,7 @@ export class RimSettler extends BaseMilestone {
    * The Milestones & Awards expansion asks for space 5 of the Energy track (rulebook C p.14).
    */
   public marsBotCanClaim(marsBot: IMarsBot): boolean {
-    if (marsBotUsesMapSet(marsBot, BoardName.HELLAS)) {
+    if (marsBotUsesBoardGoals(marsBot, BoardName.HELLAS)) {
       return marsBot.marsBotBoard.trackPosition(Tag.JOVIAN) >= 6;
     }
     return marsBot.marsBotBoard.trackPosition(Tag.POWER) >= 5;

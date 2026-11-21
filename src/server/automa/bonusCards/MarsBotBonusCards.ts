@@ -6,6 +6,7 @@ import {DiversificationMarsBot} from '@/server/automa/bonusCards/Diversification
 import {DoItRightMarsBot} from '@/server/automa/bonusCards/DoItRightMarsBot';
 import {ExpeditedConstructionColoniesMarsBot} from '@/server/automa/bonusCards/ExpeditedConstructionColoniesMarsBot';
 import {ExpeditedConstructionMarsBot} from '@/server/automa/bonusCards/ExpeditedConstructionMarsBot';
+import {ExtendedShippingLinesMarsBot} from '@/server/automa/bonusCards/ExtendedShippingLinesMarsBot';
 import {GovernmentInterventionMarsBot} from '@/server/automa/bonusCards/GovernmentInterventionMarsBot';
 import {GovernmentSubsidyMarsBot} from '@/server/automa/bonusCards/GovernmentSubsidyMarsBot';
 import {GrayEminenceMarsBot} from '@/server/automa/bonusCards/GrayEminenceMarsBot';
@@ -21,6 +22,7 @@ import {PartyPoliticsMarsBot} from '@/server/automa/bonusCards/PartyPoliticsMars
 import {RapidSproutingMarsBot} from '@/server/automa/bonusCards/RapidSproutingMarsBot';
 import {ResearchAndDevelopmentMarsBot} from '@/server/automa/bonusCards/ResearchAndDevelopmentMarsBot';
 import {SettlersMarsBot} from '@/server/automa/bonusCards/SettlersMarsBot';
+import {ShippingLinesMarsBot} from '@/server/automa/bonusCards/ShippingLinesMarsBot';
 import {SupplyAndDemandMarsBot} from '@/server/automa/bonusCards/SupplyAndDemandMarsBot';
 import {VenusianLobbyMarsBot} from '@/server/automa/bonusCards/VenusianLobbyMarsBot';
 
@@ -36,6 +38,8 @@ const BONUS_CARDS = new Map<BonusCardId, () => MarsBotBonusCard>([
   [BonusCardId.B16_GOVERNMENT_INTERVENTION, () => new GovernmentInterventionMarsBot()],
   [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, () => new ExpeditedConstructionColoniesMarsBot()],
   [BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD, () => new OuterSystemFootholdMarsBot()],
+  [BonusCardId.B19_SHIPPING_LINES, () => new ShippingLinesMarsBot()],
+  [BonusCardId.B20_EXTENDED_SHIPPING_LINES, () => new ExtendedShippingLinesMarsBot()],
   [BonusCardId.B21_PARTY_POLITICS, () => new PartyPoliticsMarsBot()],
   [BonusCardId.B22_SETTLERS, () => new SettlersMarsBot()],
   [BonusCardId.B23_RAPID_SPROUTING, () => new RapidSproutingMarsBot()],
@@ -54,8 +58,6 @@ const BONUS_CARDS = new Map<BonusCardId, () => MarsBotBonusCard>([
 const BLANK_BONUS_CARDS = new Map<BonusCardId, CardName>([
   [BonusCardId.B04_OVERACHIEVEMENT, CardName.AUTOMA_OVERACHIEVEMENT],
   [BonusCardId.B08_CORPORATE_COMPETITION, CardName.AUTOMA_CORPORATE_COMPETITION],
-  [BonusCardId.B19_SHIPPING_LINES, CardName.AUTOMA_SHIPPING_LINES],
-  [BonusCardId.B20_EXTENDED_SHIPPING_LINES, CardName.AUTOMA_EXTENDED_SHIPPING_LINES],
 ]);
 
 /**

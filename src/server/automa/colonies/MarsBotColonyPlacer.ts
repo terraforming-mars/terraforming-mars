@@ -2,7 +2,7 @@ import {IGame} from '../../IGame';
 import {IColony} from '../../colonies/IColony';
 import {comparing} from '../../../common/utils/Ordering';
 import {inplaceRemove, toName} from '../../../common/utils/utils';
-import {pickByFlippedCard} from '../MarsBotCardFlip';
+import {pickByRevealedCard} from '../MarsBotCardReveal';
 
 /**
  * Adds one of the colony tiles left out of the game to it, picked the C-15b way (Aridor's setup).
@@ -10,7 +10,7 @@ import {pickByFlippedCard} from '../MarsBotCardFlip';
  * Returns the added tile, or undefined when every tile is already in play.
  */
 export function addRandomColonyTile(game: IGame): IColony | undefined {
-  const colony = pickByFlippedCard(game, game.discardedColonies);
+  const colony = pickByRevealedCard(game, game.discardedColonies);
   if (colony === undefined) {
     return undefined;
   }

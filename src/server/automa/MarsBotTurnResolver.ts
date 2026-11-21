@@ -94,8 +94,8 @@ export class MarsBotTurnResolver {
    *
    * Returns false when the track was already at its end, which is a Failed Action instead.
    *
-   * Once the game has ended no track advances and nothing fails: only the final greenery moves a
-   * tracker, which MarsBot.placeFinalGreeneries does without this.
+   * Once the game has ended no track advances and nothing fails. A final greenery still moves its
+   * tracker, without coming through here.
    */
   public advanceTrack(trackIndex: number): boolean {
     const track = this.marsBot.marsBotBoard.tracks[trackIndex];
@@ -296,7 +296,7 @@ export class MarsBotTurnResolver {
   public failedAction(): void {
     const mc = this.marsBot.failedActionMc;
     this.marsBot.gainMc(mc);
-    this.marsBot.game.log('MarsBot takes a Failed Action, gains ${0} MC', (b) => b.number(mc));
+    this.marsBot.game.log('MarsBot takes a Failed Action, gains ${0} M€', (b) => b.number(mc));
     this.marsBot.notifyFailedAction();
   }
 }

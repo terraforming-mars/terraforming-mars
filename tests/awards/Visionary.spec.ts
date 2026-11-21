@@ -7,11 +7,11 @@ import {testGame} from '../TestGame';
 import {fakeMarsBot, setAllTracks, setTrack} from '../automa/FakeMarsBot';
 
 describe('Visionary', () => {
-  it('MarsBot scores its least advanced track doubled, the second least with Venus', () => {
-    for (const run of [
-      {venus: false, expected: 2},
-      {venus: true, expected: 4},
-    ]) {
+  for (const run of [
+    {venus: false, expected: 2},
+    {venus: true, expected: 4},
+  ] as const) {
+    it('MarsBot scores its least advanced track doubled, the second least with Venus: ' + JSON.stringify(run), () => {
       const tracks = run.venus ? [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK] : THARSIS_MARSBOT_BOARD;
       const [game] = testGame(1, {venusNextExtension: run.venus});
       const bot = fakeMarsBot({tracks, game});
@@ -22,7 +22,7 @@ describe('Visionary', () => {
         setTrack(bot, Tag.VENUS, 2);
       }
 
-      expect(new Visionary().marsBotScore(bot), JSON.stringify(run)).eq(run.expected);
-    }
-  });
+      expect(new Visionary().marsBotScore(bot)).eq(run.expected);
+    });
+  }
 });

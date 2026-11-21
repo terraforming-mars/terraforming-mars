@@ -1,6 +1,8 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {newProjectCard} from '@/server/createCard';
 import {BuildBuildBuild} from '@/server/automa/bonusCards/BuildBuildBuild';
 import {Diversification} from '@/server/automa/bonusCards/Diversification';
 import {DoItRight} from '@/server/automa/bonusCards/DoItRight';
@@ -83,19 +85,33 @@ export function createBaseBonusCards(): Array<MarsBotBonusCard> {
   ].map(createBonusCard);
 }
 
-/** Restore bonus cards from their serialized names. */
-export function marsBotBonusCardsFromJSON(names: ReadonlyArray<CardName>): Array<MarsBotBonusCard> {
+/**
+ * A card in MarsBot's bonus deck: a bonus card, or a project card a corporation put there.
+ *
+ * Only bonus cards have an `id`. MarsBot plays a project card drawn from the bonus deck like one
+ * from its action deck.
+ */
+export type MarsBotBonusDeckCard = MarsBotBonusCard | (IProjectCard & {readonly id?: undefined});
+
+/** Card name without its ':automa' suffix, for log lines that print the name raw. */
+export function bonusCardDisplayName(card: MarsBotBonusDeckCard): string {
+  return card.name.split(':')[0];
+}
+
+/** Restore bonus deck cards from their serialized names: bonus cards, and project cards a corporation put there. */
+export function marsBotBonusCardsFromJSON(names: ReadonlyArray<CardName>): Array<MarsBotBonusDeckCard> {
   const byName = new Map<CardName, BonusCardId>();
   for (const id of [...BONUS_CARDS.keys(), ...BLANK_BONUS_CARDS.keys()]) {
     byName.set(createBonusCard(id).name, id);
   }
-  const cards: Array<MarsBotBonusCard> = [];
+  const cards: Array<MarsBotBonusDeckCard> = [];
   for (const name of names) {
     const id = byName.get(name);
-    if (id === undefined) {
+    const card = id !== undefined ? createBonusCard(id) : newProjectCard(name);
+    if (card === undefined) {
       throw new Error(`Cannot restore MarsBot bonus deck card ${name}`);
     }
-    cards.push(createBonusCard(id));
+    cards.push(card);
   }
   return cards;
 }

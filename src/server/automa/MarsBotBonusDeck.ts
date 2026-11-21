@@ -1,13 +1,14 @@
 import {MarsBotBonusCard} from './MarsBotBonusCard';
-import {createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from './bonusCards/MarsBotBonusCards';
+import {MarsBotBonusDeckCard, createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from './bonusCards/MarsBotBonusCards';
 import {BonusCardId} from '../../common/automa/AutomaTypes';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';
 import {Random} from '../../common/utils/Random';
+import {inplaceRemove} from '../../common/utils/utils';
 
 /** The MarsBot bonus card deck. */
-export class MarsBotBonusDeck extends Deck<MarsBotBonusCard> {
-  public constructor(deck: Array<MarsBotBonusCard>, discarded: Array<MarsBotBonusCard>, random: Random) {
+export class MarsBotBonusDeck extends Deck<MarsBotBonusDeckCard> {
+  public constructor(deck: Array<MarsBotBonusDeckCard>, discarded: Array<MarsBotBonusDeckCard>, random: Random) {
     super('marsbot', deck, discarded, random);
   }
 
@@ -35,9 +36,27 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard> {
     return deck;
   }
 
-  public static deserialize(d: SerializedDeck, random: Random): Deck<MarsBotBonusCard> {
+  public static deserialize(d: SerializedDeck, random: Random): Deck<MarsBotBonusDeckCard> {
     const deck = marsBotBonusCardsFromJSON(d.drawPile);
     const discarded = marsBotBonusCardsFromJSON(d.discardPile);
     return new MarsBotBonusDeck(deck, discarded, random);
+  }
+
+  /** Find and remove a bonus card by ID from the draw pile. Returns the card or undefined. */
+  public findAndRemove(bonusCardId: BonusCardId): MarsBotBonusCard | undefined {
+    for (const pile of [this.drawPile, this.discardPile]) {
+      const card = pile.find((c): c is MarsBotBonusCard => c.id === bonusCardId);
+      if (card !== undefined) {
+        inplaceRemove(pile, card);
+        return card;
+      }
+    }
+    return undefined;
+  }
+
+  /** Remove a bonus card from the deck entirely by ID (does not return it). */
+  public removeById(bonusCardId: BonusCardId): void {
+    this.drawPile = this.drawPile.filter((c) => c.id !== bonusCardId);
+    this.discardPile = this.discardPile.filter((c) => c.id !== bonusCardId);
   }
 }

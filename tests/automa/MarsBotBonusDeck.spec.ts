@@ -3,9 +3,12 @@ import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardId} from '../../src/common/automa/AutomaTypes';
+import {MarsBotBonusCard} from '../../src/server/automa/MarsBotBonusCard';
 import {MeteorShower} from '../../src/server/automa/bonusCards/MeteorShower';
 import {testGame} from '../TestGame';
 import {recordingMarsBot} from './corps/RecordingMarsBot';
+import {Asteroid} from '../../src/server/cards/base/Asteroid';
+import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 
 describe('MarsBotBonusDeck', () => {
   const logger = {log: () => {}};
@@ -70,7 +73,7 @@ describe('MarsBotBonusDeck', () => {
     const [game, human, botPlayer] = testGame(2);
     const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human});
     human.plants = 4;
-    const meteorShower = MarsBotBonusDeck.create(new SeededRandom(42)).drawPile.find((card) => card.id === BonusCardId.B01_METEOR_SHOWER);
+    const meteorShower = MarsBotBonusDeck.create(new SeededRandom(42)).drawPile.find((card): card is MarsBotBonusCard => card.id === BonusCardId.B01_METEOR_SHOWER);
 
     const destroyed = meteorShower?.resolve(marsBot);
 
@@ -98,5 +101,17 @@ describe('MarsBotBonusDeck', () => {
     expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
     expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
     expect([...restored.drawPile, ...restored.discardPile].map((card) => card.id)).to.have.members(ids);
+  });
+
+  it('serialization round trip with project cards', () => {
+    const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: true, colonies: true});
+    expansionDeck.drawPile.unshift(createBonusCard(BonusCardId.B30_INTERFACE_HYPERLINK));
+    expansionDeck.drawPile.push(new Asteroid());
+    expansionDeck.discard(expansionDeck.draw(logger)!, expansionDeck.draw(logger)!, new Tardigrades());
+
+    const restored = MarsBotBonusDeck.deserialize(expansionDeck.serialize(), new SeededRandom(42));
+
+    expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
+    expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
   });
 });

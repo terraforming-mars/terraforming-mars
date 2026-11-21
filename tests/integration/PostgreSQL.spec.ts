@@ -496,7 +496,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
 
       await db.saveGame(game);
 
@@ -515,7 +515,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
 
       await db.saveGame(game);
 
@@ -547,7 +547,7 @@ describeDatabaseSuite({
       await db.saveGame(game);
       await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 5, 6, 7, 8, 9]);
 
       await db.saveGame(game);
 
@@ -572,13 +572,13 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).has.members(range(3));
 
       await db.saveGame(game);
-      expect(await db.getSaveIds(game.id)).has.members(range(4));
+      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3]);
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4]);
 
       await db.saveGame(game);
-      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4, 5]);
+      expect(await db.getSaveIds(game.id)).has.members([0, 4, 5]);
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members([0, 4, 5, 6]);
@@ -651,6 +651,22 @@ describeDatabaseSuite({
 
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members(range(20));
+    });
+
+    it('loads a log shorter than the save without holes', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-short-log', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+      const shortLog = JSON.stringify(game.gameLog.slice(0, 2));
+      game.log('one more');
+      await db.saveGame(game);
+
+      // The newest save counts more messages than the log row holds.
+      await db.getPool().query('UPDATE game SET log = $1 WHERE game_id = $2', [shortLog, game.id]);
+      const loaded = await db.getGame(game.id);
+
+      expect(loaded.gameLog).has.length(2);
     });
 
     it('stats - orphaned rows', async () => {
@@ -785,12 +801,55 @@ describeDatabaseSuite({
 
       const player = TestPlayer.BLACK.newPlayer();
       const gameId = 'game-id-transaction';
-      Game.newInstance(gameId, [player], player, 'spectatorid');
+      const game = Game.newInstance(gameId, [player], player, 'spectatorid');
       await db.awaitAllSaves();
 
       // stats() queries the game table, so read the counter directly.
       expect(db.getStatistics().saveErrorCount).eq(1);
       expect(await db.getSaveIds('game-id-transaction')).is.empty;
+      expect(game.lastSaveId).eq(0);
+    });
+
+    it('overlapping saves each store the save id they were taken with', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-overlap', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+
+      await Promise.all([db.saveGame(game), db.saveGame(game)]);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2]);
+      expect((await db.getGameVersion(game.id, 1)).lastSaveId).eq(1);
+      expect((await db.getGameVersion(game.id, 2)).lastSaveId).eq(2);
+      expect(game.lastSaveId).eq(3);
+    });
+
+    it('writes overlapping saves of one game in the order they were taken', async () => {
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-in-order', [player], player, 'spectatorid');
+      await db.awaitAllSaves();
+
+      // Holds the first connection back until the second save is written, or 200ms pass.
+      let secondWritten = () => {};
+      const secondDone = new Promise<void>((resolve) => {
+        secondWritten = resolve;
+      });
+      const pool = db.getPool();
+      const connect = pool.connect.bind(pool);
+      pool.connect = async () => {
+        pool.connect = connect;
+        await Promise.race([secondDone, new Promise((resolve) => setTimeout(resolve, 200))]);
+        return connect();
+      };
+
+      const first = db.saveGame(game);
+      game.log('one more');
+      const second = db.saveGame(game).then(secondWritten);
+      await Promise.all([first, second]);
+
+      const loaded = await db.getGame(game.id);
+      expect(loaded.gameLog).has.length(game.gameLog.length);
     });
   },
 });

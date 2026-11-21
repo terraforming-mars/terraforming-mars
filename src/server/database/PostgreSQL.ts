@@ -63,6 +63,8 @@ const metrics = {
 export class PostgreSQL implements IDatabase {
   protected trimCount = POSTGRES_TRIM_COUNT;
   protected compressOnWrite = DB_COMPRESS_ON_WRITE;
+  // The last save of each game that hasn't finished writing.
+  private savesInProgress = new Map<GameId, Promise<void>>();
 
   protected statistics = {
     saveCount: 0,
@@ -204,8 +206,10 @@ export class PostgreSQL implements IDatabase {
 
     const gameLog: Array<LogMessage> = parseInterned(log);
     // If this is part of an undo operation, delete the end
-    // of the array so the log matches the length.
-    gameLog.length = logLength;
+    // of the array so the log matches the length. Never lengthen it: that fills the log with holes.
+    if (gameLog.length > logLength) {
+      gameLog.length = logLength;
+    }
     const gameOptions: GameOptions = parseInterned(options);
     return {...remainder, gameOptions, gameLog};
   }
@@ -383,10 +387,29 @@ export class PostgreSQL implements IDatabase {
     const gameCompressed = this.compressOnWrite ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
+    // Taken with the snapshot above, so the row's save id matches the one inside it, and a save that
+    // starts before this one finishes gets the next id.
+    const thisSaveId = game.lastSaveId;
+    game.lastSaveId = thisSaveId + 1;
+
+    // One game's saves write in the order they were taken, because each one rewrites the game's
+    // single log row.
+    const previous = this.savesInProgress.get(game.id) ?? Promise.resolve();
+    const write = () => this.write(game, thisSaveId, gameJSON, gameCompressed, log, options);
+    const thisSave = previous.then(write, write);
+    this.savesInProgress.set(game.id, thisSave);
+    try {
+      await thisSave;
+    } finally {
+      if (this.savesInProgress.get(game.id) === thisSave) {
+        this.savesInProgress.delete(game.id);
+      }
+    }
+  }
+
+  private async write(game: IGame, thisSaveId: number, gameJSON: string, gameCompressed: Buffer | null, log: string, options: string): Promise<void> {
     try {
       await tx(this.pool, async (client) => {
-        // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
-        const thisSaveId = game.lastSaveId;
         // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
         //
         // When compressOnWrite is true, the game state is written to game_compressed; when it's
@@ -396,7 +419,7 @@ export class PostgreSQL implements IDatabase {
           VALUES ($1, $2, $3, $4, $5)
           ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3, game_compressed = $4
           RETURNING (xmax = 0) AS inserted`,
-          [game.id, game.lastSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
+          [game.id, thisSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
 
         await client.query(
           `INSERT INTO game (game_id, log, options)
@@ -404,8 +427,6 @@ export class PostgreSQL implements IDatabase {
           ON CONFLICT (game_id)
           DO UPDATE SET log = $2`,
           [game.id, log, options]);
-
-        game.lastSaveId = thisSaveId + 1;
 
         let inserted = true;
         try {
@@ -433,17 +454,21 @@ export class PostgreSQL implements IDatabase {
         }
       });
     } catch (err) {
+      // Hand the id back unless a later save already took the next one.
+      if (game.lastSaveId === thisSaveId + 1) {
+        game.lastSaveId = thisSaveId;
+      }
       this.statistics.saveErrorCount++;
       // saveGame deliberately never rejects (see below), so MetricsDelegate's generic wrapper never
       // sees this error. It's the only way this operation's error count gets recorded.
       databaseMetrics.operationErrors.inc({operation: 'saveGame'});
       console.error('PostgreSQL:saveGame', err);
     }
-    this.trim(game);
+    // Finishes before the save does, so it never overlaps the markFinished that follows the last save.
+    await this.trim(game).catch(() => databaseMetrics.operationErrors.inc({operation: 'trim'}));
   }
 
-  // Not part of IDatabase, invisible to MetricsDelegate, and invoked fire-and-forget (not awaited) by
-  // saveGame above. Instrumented directly here instead.
+  // Not part of IDatabase, so invisible to MetricsDelegate. saveGame counts its errors.
   private async trim(game: IGame) {
     if (this.trimCount <= 0) {
       return;

@@ -70,7 +70,7 @@ export function maybeClaimMilestone(marsBot: IMarsBot): boolean {
   // Briber milestone: lose 12 MC on claim
   if (best.name === 'Briber') {
     marsBot.loseMc(12);
-    marsBot.game.log('MarsBot loses 12 MC (Briber)');
+    marsBot.game.log('MarsBot loses 12 M€ (Briber)');
   }
   return true;
 }

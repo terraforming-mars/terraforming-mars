@@ -18,10 +18,10 @@ export function marsBotUsesBoardGoals(marsBot: IMarsBot, boardName: BoardName): 
 }
 
 /**
- * MarsBot claims milestones and scores awards through the ordinary IMilestone and IAward
- * code, called with its player. That works because the bot's player answers tag counts and
- * production from its board tracks. The few milestones and awards where the automa rules
- * say something else override marsBotCanClaim or marsBotScore on their own class.
+ * Whether MarsBot meets `milestone`.
+ *
+ * The milestone's own MarsBot rule decides when it has one (`marsBotCanClaim`). Otherwise the
+ * milestone runs against MarsBot's player, whose tag counts and production come from its tracks.
  */
 export function marsBotCanClaimMilestone(milestone: IMilestone, marsBot: IMarsBot): boolean {
   return milestone.marsBotCanClaim?.(marsBot) ?? milestone.canClaim(marsBot.player);

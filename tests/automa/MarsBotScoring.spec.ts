@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType} from '@/common/TileType';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {currentMcPerVP, getMcPerVP, MarsBotScoring} from '@/server/automa/MarsBotScoring';
+import {currentMcPerVP, MarsBotScoring} from '@/server/automa/MarsBotScoring';
 import {Banker} from '@/server/awards/Banker';
 import {Thermalist} from '@/server/awards/Thermalist';
 import {Space} from '@/server/boards/Space';
@@ -132,7 +132,6 @@ describe('MarsBotScoring', () => {
       const [game] = testGame(2, {preludeExtension: run.preludeExtension});
       game.generation = run.generation;
 
-      expect(getMcPerVP(run.generation, run.preludeExtension)).eq(run.expected);
       expect(currentMcPerVP(game)).eq(run.expected);
     });
   }

@@ -7,7 +7,7 @@ import {inplaceRemove, toName} from '../../../common/utils/utils';
 import {pickByFlippedCard} from '../MarsBotCardFlip';
 
 /** The colony tiles MarsBot can build on: active, not full, and without a colony of its own. */
-export function eligibleColoniesForMarsBot(marsBot: IMarsBot): Array<IColony> {
+export function eligibleColonies(marsBot: IMarsBot): Array<IColony> {
   return marsBot.game.colonies.filter((colony) => {
     if (!colony.isActive) {
       return false;
@@ -23,12 +23,12 @@ export function eligibleColoniesForMarsBot(marsBot: IMarsBot): Array<IColony> {
 }
 
 /**
- * Picks a colony tile for MarsBot to build on by flipping a project card (C-15b, C-16a).
+ * Picks a colony tile for MarsBot to build on by revealing a project card (C-15b, C-16a).
  *
  * Returns undefined when no tile is eligible.
  */
 export function selectRandomColony(marsBot: IMarsBot): IColony | undefined {
-  return pickByFlippedCard(marsBot.game, eligibleColoniesForMarsBot(marsBot));
+  return pickByFlippedCard(marsBot.game, eligibleColonies(marsBot));
 }
 
 /**
@@ -57,7 +57,7 @@ export function addRandomColonyTile(game: IGame): IColony | undefined {
  * (C-19). Europa places an ocean, or takes a Failed Action when none fits (C-24a). Titan gives 2
  * floaters (C-23).
  */
-export function placeColonyForMarsBot(colony: IColony, marsBot: IMarsBot): void {
+export function placeColony(colony: IColony, marsBot: IMarsBot): void {
   const game = marsBot.game;
   const colonyName = colony.name;
 
@@ -65,48 +65,31 @@ export function placeColonyForMarsBot(colony: IColony, marsBot: IMarsBot): void 
   if (colonyName === ColonyName.EUROPA) {
     // The colony is placed either way (no build bonus, the ocean is the reward). Only the ocean
     // gives way to a Failed Action when none fits (rulebook C, p.5).
-    directAddColony(colony, marsBot);
-    game.log('MarsBot builds colony on ${0}', (b) => b.colony(colony));
+    addColony(colony, marsBot);
     marsBot.placeOcean();
     return;
   }
 
   // All other tiles: add colony and give 2 resources to shipping board (C-19)
-  directAddColony(colony, marsBot);
+  addColony(colony, marsBot);
 
   if (colonyName === ColonyName.TITAN) {
     if (game.gameOptions.expansions.venus) {
-      game.log('MarsBot builds colony on ${0}, gains 2 floaters', (b) => b.colony(colony));
+      game.log('MarsBot gains 2 floaters for its colony on ${0}', (b) => b.colony(colony));
     } else {
-      game.log('MarsBot builds colony on ${0}, gains 2 floaters in Titan storage', (b) => b.colony(colony));
+      game.log('MarsBot gains 2 floaters in Titan storage for its colony on ${0}', (b) => b.colony(colony));
     }
     marsBot.addFloaters(2);
     return;
   }
 
   // Standard colony placement: 2 resources to shipping board (C-19)
-  game.log('MarsBot builds colony on ${0}, gains 2 resources in storage', (b) => b.colony(colony));
+  game.log('MarsBot gains 2 resources in storage for its colony on ${0}', (b) => b.colony(colony));
   marsBot.shippingBoard.add(colonyName, 2);
 }
 
-/**
- * Adds MarsBot's colony to `colony` without the printed build bonus.
- *
- * Moves the colony track up to the number of colonies, and tells the player's cards and MarsBot's corp.
- */
-function directAddColony(colony: IColony, marsBot: IMarsBot): void {
-  colony.colonies.push(marsBot.player.id);
-  // Keep track position at least equal to the number of colonies (per Colony.ts addColony)
-  if (colony.trackPosition < colony.colonies.length) {
-    colony.trackPosition = colony.colonies.length;
-  }
-
-  // Fire onColonyAddedByAnyPlayer callbacks for players with relevant cards
-  for (const player of marsBot.game.players) {
-    for (const card of player.tableau) {
-      card.onColonyAddedByAnyPlayer?.(player, marsBot.player);
-    }
-  }
-
+/** Adds MarsBot's colony to `colony` without the printed build bonus, and tells MarsBot's corp. */
+function addColony(colony: IColony, marsBot: IMarsBot): void {
+  colony.addColony(marsBot.player, {skipBonus: true});
   marsBot.notifyColonyPlaced();
 }

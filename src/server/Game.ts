@@ -707,7 +707,9 @@ export class Game implements IGame, Logger {
 
   private playerHasPickedCorporationCard(player: IPlayer, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
-    player.timer.enable();
+    if (!this.gameOptions.initialDraftVariant) {
+      player.timer.enable();
+    }
     const players = this.playersInGenerationOrder;
     if (players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const p of players) {

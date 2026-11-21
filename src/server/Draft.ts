@@ -175,6 +175,12 @@ export abstract class Draft {
       return;
     }
 
+    if (this.type === 'initial' && this.game.initialDraftIteration === 1 && this.game.draftRound === 1) {
+      for (const p of this.game.players) {
+        p.timer.enable();
+      }
+    }
+
     // Clear all pending Repick waitingFor.
     for (const p of this.game.players) {
       if (p.getWaitingFor() !== undefined) {

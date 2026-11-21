@@ -1,7 +1,7 @@
 <template>
   <!-- <div :class="recedeIfInactive"> -->
   <!-- Show the background, tooltip, and other setup -->
-  <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
+  <div class="filter-div colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
 
     <!-- Show colony ship if somebody is visiting -->
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
@@ -164,7 +164,7 @@ export default defineComponent({
       return resource?.toString()?.toLowerCase() ?? '';
     },
     recedeIfInactive(): string {
-      return this.active === false ? 'inactiveColony' : '';
+      return this.active === false ? 'inactive-colony' : '';
     },
     backgroundClass(): string {
       return this.colony.name.replace(' ', '-') + '-background';

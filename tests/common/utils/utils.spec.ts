@@ -150,8 +150,17 @@ describe('utils', () => {
   });
 
   it('cast', () => {
-    expect(utils.cast(undefined, undefined));
-    expect(utils.cast([], Array));
-    expect(() => utils.cast(undefined, Array)).to.throw();
+    expect(utils.cast(undefined, undefined)).is.undefined;
+    const array: Array<unknown> = [];
+    expect(utils.cast(array, Array)).eq(array);
+    expect(() => utils.cast(undefined, Array)).to.throw(/Not an instance of Array: undefined/);
+  });
+
+  it('cast to undefined names the unexpected type', () => {
+    class Foo {}
+    expect(() => utils.cast(new Foo(), undefined)).to.throw(/Expected undefined, got type Foo/);
+    expect(() => utils.cast(3, undefined)).to.throw(/Expected undefined, got type number/);
+    expect(() => utils.cast(null, undefined)).to.throw(/Expected undefined, got type object/);
+    expect(() => utils.cast(Object.create(null), undefined)).to.throw(/Expected undefined, got type object/);
   });
 });

@@ -4,7 +4,7 @@
     <div class="form-group">
       <label v-for="included in playerinput.include" :key="included" class="form-inline d-flex align-items-center mb-2">
         <input type="radio" v-model="unit" :value="included" class="form-radio mr-2">
-        <i :data-tooltip="included" :class="'resource_icon mr-2 tooltip tooltip-bottom resource_icon--' + included"></i>
+        <i :data-tooltip="included" :class="'resource-icon mr-2 tooltip tooltip-bottom resource-icon--' + included"></i>
         {{ $t(included) }}
       </label>
     </div>

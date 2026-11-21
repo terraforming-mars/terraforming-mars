@@ -39,7 +39,7 @@ function stripUndefined(obj: unknown): unknown {
 export type DatabaseTestDescriptor<T extends ITestDatabase> = {
   name: string,
   constructor: () => T,
-  stats: any,
+  stats: unknown,
   omit?: Partial<{
     purgeUnfinishedGames: boolean,
     markFinished: boolean,

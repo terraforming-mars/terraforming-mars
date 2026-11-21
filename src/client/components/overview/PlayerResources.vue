@@ -1,5 +1,5 @@
 <template>
-  <div class="resource_items_cont">
+  <div class="resource-items-cont">
     <PlayerResource
       :type="Resource.MEGACREDITS"
       :count="player.megacredits"

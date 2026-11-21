@@ -1,0 +1,44 @@
+import {CardName} from '@/common/cards/CardName';
+import {Tag} from '@/common/cards/Tag';
+import {IMarsBot} from '@/server/automa/IMarsBot';
+import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
+
+export class MiningGuildMarsBot extends MarsBotCorp {
+  constructor() {
+    super({
+      name: CardName.MINING_GUILD,
+      description: 'Tags: 2 Building. Setup: 10 M€ on card. Until the building track reaches #18, M€ MarsBot earns comes off this card; when empty, refill 10 M€, advance building track, and take the rest of the M€ off the refilled card.',
+      tags: [Tag.BUILDING, Tag.BUILDING],
+    });
+  }
+
+  public override setup(marsBot: IMarsBot): void {
+    marsBot.setCorpState('mcOnCard', 10);
+    marsBot.game.log('MarsBot (${0}): 10:r:mc: placed on card', (b) => b.cardName(this.name));
+  }
+
+  // The card is a countdown: M€ MarsBot earns is removed from the card, but the bot keeps the
+  // earnings. Each time the card empties, refill 10 M€ and advance the building track, and the
+  // rest of the gain comes off the refilled card. Once the game has ended the card stops, like
+  // Philares (BGG 3513998).
+  public override onMcGained(marsBot: IMarsBot, amount: number): void {
+    if (marsBot.game.isDoneWithFinalProduction()) {
+      return;
+    }
+    let remaining = amount;
+    // Building track at #18: the card stops. The advance can reach it mid-gain.
+    while (remaining > 0 && marsBot.marsBotBoard.tracks[0].position < 18) {
+      const mcOnCard = marsBot.getCorpState('mcOnCard');
+      const taken = Math.min(remaining, mcOnCard);
+      remaining -= taken;
+      if (mcOnCard - taken > 0) {
+        marsBot.setCorpState('mcOnCard', mcOnCard - taken);
+        return;
+      }
+      // Refill first: M€ the advance earns re-enters here and comes off the refilled card
+      marsBot.setCorpState('mcOnCard', 10);
+      marsBot.game.log('MarsBot (${0}): card empty, refill 10:r:mc: + advance building track', (b) => b.cardName(this.name));
+      marsBot.advanceTrack(0); // Building track = index 0
+    }
+  }
+}

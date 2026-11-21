@@ -42,6 +42,7 @@ import {getHerokuIpAddress} from './heroku';
 import * as responses from './responses';
 import {EndGameLog} from '../routes/EndGameLog';
 import {UrlParams} from '../routes/UrlParams';
+import {isObject} from '@/common/utils/utils';
 
 const metrics = {
   request_count: new prometheus.Counter({
@@ -114,10 +115,6 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.LOAD_GAME, LoadGame.INSTANCE],
     [paths.LOGIN, Login.INSTANCE],
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
-    ['main.js', ServeAsset.INSTANCE],
-    ['main.js.map', ServeAsset.INSTANCE],
-    ['vendors.js', ServeAsset.INSTANCE],
-    ['vendors.js.map', ServeAsset.INSTANCE],
     [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
@@ -125,7 +122,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_PROFILE, ApiProfile.INSTANCE],
     [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
-    ['styles.css', ServeAsset.INSTANCE],
+    ['sw.js', ServeAsset.INSTANCE],
     [paths.THE_END, ServeApp.INSTANCE],
   ],
 );
@@ -136,7 +133,7 @@ function getIPAddress(req: Request): string {
     return herokuIpAddress;
   }
   const socketIpAddress = req.socket.address();
-  if (typeof socketIpAddress === 'object' && 'address' in socketIpAddress) {
+  if (isObject(socketIpAddress) && 'address' in socketIpAddress) {
     return '!' + socketIpAddress.address + '!';
   }
   if (typeof socketIpAddress === 'string') {
@@ -156,7 +153,24 @@ function getHandler(pathname: string): IHandler | undefined {
   if (pathname.startsWith('chunks/')) {
     return ServeAsset.INSTANCE;
   }
+  // Hashed Vite entry and component stylesheet (build/index.html points at them).
+  if (/^main-[A-Za-z0-9_-]+\.js(\.map)?$/.test(pathname)) {
+    return ServeAsset.INSTANCE;
+  }
+  if (/^client-[A-Za-z0-9_-]+\.css(\.map)?$/.test(pathname)) {
+    return ServeAsset.INSTANCE;
+  }
   return undefined;
+}
+
+// Metrics labels must survive a deploy: strip the Vite content hash from build files.
+// assets/ stays aggregated as before; chunks keep their logical name.
+export function metricsPathOf(pathname: string): string {
+  if (pathname.startsWith('assets/')) {
+    return 'assets/';
+  }
+  // Remove the hash part from the name, eg: main-A1b2C3d4.js => main.js
+  return pathname.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:js|css)(?:\.map)?$)/, '');
 }
 
 function getAuthenticatedUser(req: Request): { user: DiscordUser | undefined; sessionid: SessionId | undefined } {
@@ -199,8 +213,7 @@ export async function processRequest(req: Request, res: Response): Promise<void>
     const pathname = url.pathname.substring(1); // Remove leading '/'
     const handler = getHandler(pathname);
     if (handler !== undefined) {
-      // No need to report every asset. Summarize.
-      metricsPathname = pathname.startsWith('assets/') ? 'assets/' : pathname;
+      metricsPathname = metricsPathOf(pathname);
       const {user, sessionid} = getAuthenticatedUser(req);
       const ctx: Context = {
         url: url,

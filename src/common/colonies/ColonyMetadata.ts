@@ -35,7 +35,7 @@ export type ColonyMetadata = Readonly<{
   shouldIncreaseTrack: 'yes' | 'no' | 'ask'
 }>;
 
-type InputBenefit<T extends Benefit<any, any>> = {
+type InputBenefit<T extends Benefit<unknown, unknown>> = {
   description: string,
   type: ColonyBenefit,
   quantity?: T['quantity'],

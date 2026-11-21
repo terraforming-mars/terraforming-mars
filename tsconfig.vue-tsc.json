@@ -1,11 +1,12 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "mocha", "chai"]
+    "types": ["node", "mocha", "chai", "vite/client"]
   },
   "include": [
     "src/client/**/*.ts",
     "src/client/**/*.vue",
+    "src/client/genfiles.d.ts",
     "src/common/**/*.ts",
     "tests/client/**/*.ts",
   ]

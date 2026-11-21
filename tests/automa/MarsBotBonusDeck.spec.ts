@@ -22,33 +22,39 @@ describe('MarsBotBonusDeck', () => {
       expansions: 'Venus Next',
       venus: true,
       colonies: false,
-      removed: [BonusCardId.B06_LOBBYISTS],
-      added: [BonusCardId.B15_LOBBYISTS_VENUS],
+      expected: {
+        removed: [BonusCardId.B06_LOBBYISTS],
+        added: [BonusCardId.B15_LOBBYISTS_VENUS],
+      },
     },
     {
       expansions: 'Colonies',
       venus: false,
       colonies: true,
-      removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION],
-      added: [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD],
+      expected: {
+        removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION],
+        added: [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD],
+      },
     },
     {
       expansions: 'Venus Next and Colonies',
       venus: true,
       colonies: true,
-      removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION, BonusCardId.B06_LOBBYISTS],
-      added: [
-        BonusCardId.B15_LOBBYISTS_VENUS,
-        BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES,
-        BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD,
-      ],
+      expected: {
+        removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION, BonusCardId.B06_LOBBYISTS],
+        added: [
+          BonusCardId.B15_LOBBYISTS_VENUS,
+          BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES,
+          BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD,
+        ],
+      },
     },
   ]) {
     it('swaps cards in the ' + run.expansions + ' deck', () => {
       const expected = createBaseBonusCards()
         .map((card) => card.id)
-        .filter((id) => !run.removed.includes(id))
-        .concat(run.added);
+        .filter((id) => !run.expected.removed.includes(id))
+        .concat(run.expected.added);
 
       const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: run.venus, colonies: run.colonies});
 

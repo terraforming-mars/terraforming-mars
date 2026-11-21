@@ -8,6 +8,7 @@ import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {testGame} from '../../TestingUtils';
+import {fakeMarsBot} from '../../automa/FakeMarsBot';
 
 describe('LandSpecialist', () => {
   let milestone: LandSpecialist;
@@ -82,4 +83,15 @@ describe('LandSpecialist', () => {
     expect(milestone.getScore(player)).eq(3);
     expect(milestone.canClaim(player)).is.true;
   });
+
+  for (const run of [
+    {destroyedBonusCards: 2, expected: false},
+    {destroyedBonusCards: 3, expected: true},
+  ] as const) {
+    it('MarsBot needs 3 destroyed bonus cards: ' + JSON.stringify(run), () => {
+      const marsBot = fakeMarsBot({destroyedBonusCards: run.destroyedBonusCards});
+
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
+    });
+  }
 });

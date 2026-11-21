@@ -919,7 +919,7 @@
     "Remove negative Global Events": "부정적 행성계 사건 제거",
     "Fast mode": "고속 모드",
     "Beginner Options": "초심자 선택사항",
-    "Random Milestones/Awards": "무작위 업적 및 기업상",
+    "Milestones and Awards": "업적 및 기업상",
     "Limited synergy": "제한된 시너지",
     "Full random": "모든 사항을 무작위로 결정",
     "Mandatory Venus Terraforming": "게임 종료 조건에 금성개척률 달성 추가",
@@ -1202,7 +1202,6 @@
     "Yes": "예",
     "No": "아니오",
     "Don't show this again": "다시 보지 않기",
-    "The server has restarted. Click OK to refresh this page.": "서버가 재시작되었습니다. 확인 버튼을 눌러 이 페이지를 다시 불러오십시오.",
     "OK": "확인",
     "Reorder Cards": "카드 재정렬"
 }

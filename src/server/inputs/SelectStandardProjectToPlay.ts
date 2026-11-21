@@ -1,24 +1,17 @@
 import {Payment} from '../../common/inputs/Payment';
 import {IStandardProjectCard} from '../cards/IStandardProjectCard';
-import {CardAction, IPlayer} from '../IPlayer';
+import {IPlayer} from '../IPlayer';
 import {SelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
 import {InputError} from './InputError';
 import {PaymentOptions} from '../../common/inputs/Payment';
-import {Message} from '../../common/logs/Message';
-import {PlayCardMetadata, SelectCardToPlay} from './SelectCardToPlay';
+import {Config, PlayCardMetadata, SelectCardToPlay} from './SelectCardToPlay';
 
 export class SelectStandardProjectToPlay extends SelectCardToPlay<IStandardProjectCard> {
   constructor(
     player: IPlayer,
     cards: ReadonlyArray<IStandardProjectCard>,
-    config?: {
-      action?: CardAction,
-      enabled?: ReadonlyArray<boolean>,
-      title?: string | Message,
-      buttonLabel?: string,
-      adjustedCost?: (card: IStandardProjectCard) => number,
-    }) {
+    config?: Config) {
     super(player, cards, config);
     this.buttonLabel = config?.buttonLabel ?? 'Play Standard Project';
   }

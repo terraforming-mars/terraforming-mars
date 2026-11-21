@@ -134,9 +134,11 @@ describe('MarsBotActionDeck', () => {
     const {deck, played} = setup();
     deck.cards = [new Mine(), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER)];
 
-    expect(deck.playTopCard()).is.true;
+    deck.playTopCard();
+
     expect(played).deep.eq(['Mine']);
-    expect(deck.cards).has.length(1);
+    expect(projectCardCount(deck.cards)).eq(0);
+    expect(bonusIds(deck.cards)).deep.eq([BonusCardId.B01_METEOR_SHOWER]);
   });
 
   it('plays a bonus card from the top of the action deck', () => {
@@ -151,9 +153,12 @@ describe('MarsBotActionDeck', () => {
   });
 
   it('plays nothing from an empty action deck', () => {
-    const {deck} = setup();
+    const {marsBot, deck, played} = setup();
 
-    expect(deck.playTopCard()).is.false;
+    deck.playTopCard();
+
+    expect(played).is.empty;
+    expect(marsBot.bonusDeck.discardPile).is.empty;
   });
 
   for (const run of [

@@ -151,11 +151,11 @@ export class MarsBotActionDeck {
     game.log('MarsBot builds action deck from draft with ${0} cards', (b) => b.number(this.cards.length));
   }
 
-  /** Plays the top card of the action deck. False when the deck is empty. */
-  public playTopCard(): boolean {
+  /** Plays the top card of the action deck. Does nothing when the deck is empty. */
+  public playTopCard(): void {
     const card = this.cards.shift();
     if (card === undefined) {
-      return false;
+      return;
     }
     if (isProjectCard(card)) {
       this.marsBot.resolveProjectCard(card);
@@ -163,7 +163,6 @@ export class MarsBotActionDeck {
       this.marsBot.game.log('MarsBot plays bonus card: ${0}', (b) => b.rawString(bonusCardDisplayName(card)));
       this.playBonusCard(card);
     }
-    return true;
   }
 
   /**
@@ -180,11 +179,11 @@ export class MarsBotActionDeck {
     }
     const destroyed = card.resolve(marsBot);
     // Only a destroyed card counts for the Land Specialist milestone, not one shuffled back into the deck.
-    // A corporation's setup resolves and removes its cards without this (Philares).
+    // Bonus cards a corp's setup resolves and removes don't come through here, so they don't count.
     if (destroyed && !marsBot.bonusDeck.drawPile.includes(card)) {
       this.destroyedBonusCards++;
     }
-    // A corporation's generation card that removes itself does not come back (Vitor's Overachievement)
+    // The corp's own action deck card stays out of the game once it destroys itself
     if (destroyed && card.id === marsBot.actionDeckBonusCard) {
       marsBot.setCorpState(ACTION_DECK_BONUS_CARD_REMOVED, 1);
     }
@@ -231,7 +230,7 @@ export class MarsBotActionDeck {
    * Shuffles a bonus card into the action deck, pulling it from the bonus deck when present.
    *
    * Returns the card, or undefined when the action deck already holds it, or when it is the corp's
-   * card and removed itself from the game (Vitor's Overachievement).
+   * own action deck card and has destroyed itself.
    */
   public addBonusCard(bonusCardId: BonusCardId): MarsBotBonusCard | undefined {
     if (this.cards.some((c) => !isProjectCard(c) && c.id === bonusCardId)) {

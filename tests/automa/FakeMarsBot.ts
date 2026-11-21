@@ -13,7 +13,7 @@ type FakeMarsBotOptions = Partial<IMarsBot & {tracks: ReadonlyArray<TrackDefinit
  */
 export function fakeMarsBot(options: FakeMarsBotOptions = {}): IMarsBot {
   const {tracks = THARSIS_MARSBOT_BOARD, ...fields} = options;
-  return {marsBotBoard: new MarsBotBoard(tracks), ...fields} as unknown as IMarsBot;
+  return {marsBotBoard: new MarsBotBoard(tracks), corpVictoryPoints: () => 0, ...fields} as unknown as IMarsBot;
 }
 
 /** Moves the marker of the track that carries `tag` to space `position`. */

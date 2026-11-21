@@ -3,7 +3,7 @@ import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardId} from '../../src/common/automa/AutomaTypes';
-import {MeteorShowerMarsBot} from '../../src/server/automa/bonusCards/MeteorShowerMarsBot';
+import {MeteorShower} from '../../src/server/automa/bonusCards/MeteorShower';
 import {testGame} from '../TestGame';
 import {recordingMarsBot} from './corps/RecordingMarsBot';
 
@@ -74,7 +74,7 @@ describe('MarsBotBonusDeck', () => {
 
     const destroyed = meteorShower?.resolve(marsBot);
 
-    expect(meteorShower).instanceOf(MeteorShowerMarsBot);
+    expect(meteorShower).instanceOf(MeteorShower);
     expect(human.plants).eq(0);
     expect(destroyed).is.true;
   });

@@ -1,57 +1,57 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
 import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
-import {BuildBuildBuildMarsBot} from '@/server/automa/bonusCards/BuildBuildBuildMarsBot';
-import {DiversificationMarsBot} from '@/server/automa/bonusCards/DiversificationMarsBot';
-import {DoItRightMarsBot} from '@/server/automa/bonusCards/DoItRightMarsBot';
-import {ExpeditedConstructionColoniesMarsBot} from '@/server/automa/bonusCards/ExpeditedConstructionColoniesMarsBot';
-import {ExpeditedConstructionMarsBot} from '@/server/automa/bonusCards/ExpeditedConstructionMarsBot';
-import {ExtendedShippingLinesMarsBot} from '@/server/automa/bonusCards/ExtendedShippingLinesMarsBot';
-import {GovernmentInterventionMarsBot} from '@/server/automa/bonusCards/GovernmentInterventionMarsBot';
-import {GovernmentSubsidyMarsBot} from '@/server/automa/bonusCards/GovernmentSubsidyMarsBot';
-import {GrayEminenceMarsBot} from '@/server/automa/bonusCards/GrayEminenceMarsBot';
-import {InterfaceHyperlinkMarsBot} from '@/server/automa/bonusCards/InterfaceHyperlinkMarsBot';
-import {InvasiveSpeciesMarsBot} from '@/server/automa/bonusCards/InvasiveSpeciesMarsBot';
-import {InvestorsMarsBot} from '@/server/automa/bonusCards/InvestorsMarsBot';
-import {LobbyistsMarsBot} from '@/server/automa/bonusCards/LobbyistsMarsBot';
-import {LobbyistsVenusMarsBot} from '@/server/automa/bonusCards/LobbyistsVenusMarsBot';
-import {LocalNeuralInstanceMarsBot} from '@/server/automa/bonusCards/LocalNeuralInstanceMarsBot';
-import {MeteorShowerMarsBot} from '@/server/automa/bonusCards/MeteorShowerMarsBot';
-import {OuterSystemFootholdMarsBot} from '@/server/automa/bonusCards/OuterSystemFootholdMarsBot';
-import {PartyPoliticsMarsBot} from '@/server/automa/bonusCards/PartyPoliticsMarsBot';
-import {RapidSproutingMarsBot} from '@/server/automa/bonusCards/RapidSproutingMarsBot';
-import {ResearchAndDevelopmentMarsBot} from '@/server/automa/bonusCards/ResearchAndDevelopmentMarsBot';
-import {SettlersMarsBot} from '@/server/automa/bonusCards/SettlersMarsBot';
-import {ShippingLinesMarsBot} from '@/server/automa/bonusCards/ShippingLinesMarsBot';
-import {SupplyAndDemandMarsBot} from '@/server/automa/bonusCards/SupplyAndDemandMarsBot';
-import {VenusianLobbyMarsBot} from '@/server/automa/bonusCards/VenusianLobbyMarsBot';
+import {BuildBuildBuild} from '@/server/automa/bonusCards/BuildBuildBuild';
+import {Diversification} from '@/server/automa/bonusCards/Diversification';
+import {DoItRight} from '@/server/automa/bonusCards/DoItRight';
+import {ExpeditedConstructionColonies} from '@/server/automa/bonusCards/ExpeditedConstructionColonies';
+import {ExpeditedConstruction} from '@/server/automa/bonusCards/ExpeditedConstruction';
+import {ExtendedShippingLines} from '@/server/automa/bonusCards/ExtendedShippingLines';
+import {GovernmentIntervention} from '@/server/automa/bonusCards/GovernmentIntervention';
+import {GovernmentSubsidy} from '@/server/automa/bonusCards/GovernmentSubsidy';
+import {GrayEminence} from '@/server/automa/bonusCards/GrayEminence';
+import {InterfaceHyperlink} from '@/server/automa/bonusCards/InterfaceHyperlink';
+import {InvasiveSpecies} from '@/server/automa/bonusCards/InvasiveSpecies';
+import {Investors} from '@/server/automa/bonusCards/Investors';
+import {Lobbyists} from '@/server/automa/bonusCards/Lobbyists';
+import {LobbyistsVenus} from '@/server/automa/bonusCards/LobbyistsVenus';
+import {LocalNeuralInstance} from '@/server/automa/bonusCards/LocalNeuralInstance';
+import {MeteorShower} from '@/server/automa/bonusCards/MeteorShower';
+import {OuterSystemFoothold} from '@/server/automa/bonusCards/OuterSystemFoothold';
+import {PartyPolitics} from '@/server/automa/bonusCards/PartyPolitics';
+import {RapidSprouting} from '@/server/automa/bonusCards/RapidSprouting';
+import {ResearchAndDevelopment} from '@/server/automa/bonusCards/ResearchAndDevelopment';
+import {Settlers} from '@/server/automa/bonusCards/Settlers';
+import {ShippingLines} from '@/server/automa/bonusCards/ShippingLines';
+import {SupplyAndDemand} from '@/server/automa/bonusCards/SupplyAndDemand';
+import {VenusianLobby} from '@/server/automa/bonusCards/VenusianLobby';
 
 /** The bonus cards that have a class of their own. */
 const BONUS_CARDS = new Map<BonusCardId, () => MarsBotBonusCard>([
-  [BonusCardId.B01_METEOR_SHOWER, () => new MeteorShowerMarsBot()],
-  [BonusCardId.B02_INVASIVE_SPECIES, () => new InvasiveSpeciesMarsBot()],
-  [BonusCardId.B03_RESEARCH_AND_DEVELOPMENT, () => new ResearchAndDevelopmentMarsBot()],
-  [BonusCardId.B05_EXPEDITED_CONSTRUCTION, () => new ExpeditedConstructionMarsBot()],
-  [BonusCardId.B06_LOBBYISTS, () => new LobbyistsMarsBot()],
-  [BonusCardId.B07_LOCAL_NEURAL_INSTANCE, () => new LocalNeuralInstanceMarsBot()],
-  [BonusCardId.B15_LOBBYISTS_VENUS, () => new LobbyistsVenusMarsBot()],
-  [BonusCardId.B16_GOVERNMENT_INTERVENTION, () => new GovernmentInterventionMarsBot()],
-  [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, () => new ExpeditedConstructionColoniesMarsBot()],
-  [BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD, () => new OuterSystemFootholdMarsBot()],
-  [BonusCardId.B19_SHIPPING_LINES, () => new ShippingLinesMarsBot()],
-  [BonusCardId.B20_EXTENDED_SHIPPING_LINES, () => new ExtendedShippingLinesMarsBot()],
-  [BonusCardId.B21_PARTY_POLITICS, () => new PartyPoliticsMarsBot()],
-  [BonusCardId.B22_SETTLERS, () => new SettlersMarsBot()],
-  [BonusCardId.B23_RAPID_SPROUTING, () => new RapidSproutingMarsBot()],
-  [BonusCardId.B24_SUPPLY_AND_DEMAND, () => new SupplyAndDemandMarsBot()],
-  [BonusCardId.B25_DO_IT_RIGHT, () => new DoItRightMarsBot()],
-  [BonusCardId.B26_VENUSIAN_LOBBY, () => new VenusianLobbyMarsBot()],
-  [BonusCardId.B27_BUILD_BUILD_BUILD, () => new BuildBuildBuildMarsBot()],
-  [BonusCardId.B28_DIVERSIFICATION, () => new DiversificationMarsBot()],
-  [BonusCardId.B29_GRAY_EMINENCE, () => new GrayEminenceMarsBot()],
-  [BonusCardId.B30_INTERFACE_HYPERLINK, () => new InterfaceHyperlinkMarsBot()],
-  [BonusCardId.B31_GOVERNMENT_SUBSIDY, () => new GovernmentSubsidyMarsBot()],
-  [BonusCardId.B32_INVESTORS, () => new InvestorsMarsBot()],
+  [BonusCardId.B01_METEOR_SHOWER, () => new MeteorShower()],
+  [BonusCardId.B02_INVASIVE_SPECIES, () => new InvasiveSpecies()],
+  [BonusCardId.B03_RESEARCH_AND_DEVELOPMENT, () => new ResearchAndDevelopment()],
+  [BonusCardId.B05_EXPEDITED_CONSTRUCTION, () => new ExpeditedConstruction()],
+  [BonusCardId.B06_LOBBYISTS, () => new Lobbyists()],
+  [BonusCardId.B07_LOCAL_NEURAL_INSTANCE, () => new LocalNeuralInstance()],
+  [BonusCardId.B15_LOBBYISTS_VENUS, () => new LobbyistsVenus()],
+  [BonusCardId.B16_GOVERNMENT_INTERVENTION, () => new GovernmentIntervention()],
+  [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, () => new ExpeditedConstructionColonies()],
+  [BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD, () => new OuterSystemFoothold()],
+  [BonusCardId.B19_SHIPPING_LINES, () => new ShippingLines()],
+  [BonusCardId.B20_EXTENDED_SHIPPING_LINES, () => new ExtendedShippingLines()],
+  [BonusCardId.B21_PARTY_POLITICS, () => new PartyPolitics()],
+  [BonusCardId.B22_SETTLERS, () => new Settlers()],
+  [BonusCardId.B23_RAPID_SPROUTING, () => new RapidSprouting()],
+  [BonusCardId.B24_SUPPLY_AND_DEMAND, () => new SupplyAndDemand()],
+  [BonusCardId.B25_DO_IT_RIGHT, () => new DoItRight()],
+  [BonusCardId.B26_VENUSIAN_LOBBY, () => new VenusianLobby()],
+  [BonusCardId.B27_BUILD_BUILD_BUILD, () => new BuildBuildBuild()],
+  [BonusCardId.B28_DIVERSIFICATION, () => new Diversification()],
+  [BonusCardId.B29_GRAY_EMINENCE, () => new GrayEminence()],
+  [BonusCardId.B30_INTERFACE_HYPERLINK, () => new InterfaceHyperlink()],
+  [BonusCardId.B31_GOVERNMENT_SUBSIDY, () => new GovernmentSubsidy()],
+  [BonusCardId.B32_INVESTORS, () => new Investors()],
 ]);
 
 /** The bonus cards that have no class of their own yet. Each one is a blank card. */

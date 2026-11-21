@@ -55,6 +55,12 @@ export interface IMarsBot {
   maybeAdvanceTrack(trackIndex: number): void;
   /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
   loseMc(amount: number): number;
+  /**
+   * Advances the track that carries `tag` and tells the player's cards about the tag.
+   *
+   * Returns false when no track carries `tag`.
+   */
+  advanceTrackOfTag(tag: Tag): boolean;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its
@@ -171,6 +177,12 @@ export interface IMarsBot {
   placeMarker(space: Space): void;
   /** Takes `card` off the bot's played pile. */
   removePlayedProjectCard(card: IProjectCard): void;
+  /**
+   * Trades with the colony the bot picks, for the bonus card `cardName` (C-17).
+   *
+   * Does nothing, with no Failed Action, when no colony can be traded with or the bot has no M€ to pay.
+   */
+  maybeTrade(cardName: CardName): void;
 
   /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
   getCorpState(key: string): number;

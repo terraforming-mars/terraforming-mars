@@ -5,6 +5,7 @@ import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
+import {IAward} from '../awards/IAward';
 import {MarsBotBoard} from './MarsBotBoard';
 import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {Space} from '../boards/Space';
@@ -30,6 +31,8 @@ export interface IMarsBot {
   readonly playedProjectCards: ReadonlyArray<IProjectCard>;
   /** How many times the bot has raised the temperature. */
   readonly temperatureRaises: number;
+  /** The space holding the bot's Neural Instance tile. Undefined until it places one. */
+  readonly neuralInstanceSpace: Space | undefined;
   /** How many bonus cards have been destroyed while the bot resolved them. */
   readonly destroyedBonusCards: number;
   /**
@@ -74,6 +77,8 @@ export interface IMarsBot {
   resolveProjectCard(card: IProjectCard): void;
   /** Places the bot's Neural Instance tile on `space` and pays the bot its placement M€. */
   placeNeuralInstance(space: Space): void;
+  /** The bot's score in `award` as it compares itself with the player, its difficulty's handicap and its corp's bonus included. */
+  awardValue(award: IAward): number;
   /**
    * Draws the top bonus card and resolves it. Does nothing when both bonus piles are empty, or
    * once the game has ended.

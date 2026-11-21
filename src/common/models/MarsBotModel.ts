@@ -1,6 +1,7 @@
 import {DifficultyLevel, TrackAction, CubeType} from '../automa/AutomaTypes';
 import {Tag} from '../cards/Tag';
 import {CardName} from '../cards/CardName';
+import {MADetail} from '../game/VictoryPointsBreakdown';
 import {GlobalParameter} from '../GlobalParameter';
 
 export type MarsBotTrackModel = {
@@ -18,7 +19,12 @@ export type MarsBotVPModel = {
   neuralInstance: number;
   mcToVP: number;
   cardVP: number;
+  vermin: number;
+  turmoilVP: number; // T-13: 1 VP per party leader or chairman position
+  corpVP: number; // VP the corporation adds at the end (Viron)
   total: number;
+  detailsMilestones: ReadonlyArray<MADetail>;
+  detailsAwards: ReadonlyArray<MADetail>;
 };
 
 export type MarsBotModel = {

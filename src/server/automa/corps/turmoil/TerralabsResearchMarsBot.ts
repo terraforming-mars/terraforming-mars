@@ -13,7 +13,6 @@ export class TerralabsResearchMarsBot extends MarsBotCorp {
   }
 
   public override setup(marsBot: IMarsBot): void {
-    // Reduce TR by 8
     marsBot.raiseTR(-8);
     marsBot.game.log('MarsBot (${0}): TR -8', (b) => b.cardName(this.name));
   }

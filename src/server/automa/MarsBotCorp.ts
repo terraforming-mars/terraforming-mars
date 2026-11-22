@@ -24,9 +24,9 @@ export abstract class MarsBotCorp {
   public readonly name: CardName;
   /** Rules summary shown to the human player. */
   public readonly description: string;
-  /** Tags printed on the corp card. They count toward the bot's tag totals for the whole game. */
+  /** Tags printed on the corp card, which count toward the bot's tag totals for the whole game. */
   public readonly tags: ReadonlyArray<Tag>;
-  /** Expansions the corp card is marked with. The bot only draws it when at least one of them is in play. */
+  /** Expansions the corp card is marked with, at least one of which must be in play for the bot to draw it. */
   public readonly requiredExpansions?: ReadonlyArray<Expansion>;
   public readonly draftPriority?: MarsBotDraftPriority;
   /**
@@ -36,7 +36,7 @@ export abstract class MarsBotCorp {
    * Once its removal condition removes it (Vitor's Overachievement), it stays out of the game.
    */
   public readonly actionDeckBonusCard?: BonusCardId;
-  /** Cubes seeded onto the bot's board tracks during setup. Read them through corpTrackCubes. */
+  /** Cubes seeded onto the bot's board tracks during setup, read through `corpTrackCubes`. */
   public readonly trackCubes?: ReadonlyArray<MarsBotTrackCube | MarsBotTagTrackCube>;
   /**
    * True when the corp's cubes trigger on every advance onto their space, not only the first.
@@ -59,12 +59,12 @@ export abstract class MarsBotCorp {
 
   /** Runs once, right after the bot's corporation is chosen. */
   public setup?(marsBot: IMarsBot): void;
-  /** A corp action taken at the start of every generation. */
+  /** Takes a corp action at the start of every generation. */
   public roundStart?(marsBot: IMarsBot): void;
-  /** A corp action taken every generation, right before the action phase. */
+  /** Takes a corp action every generation, right before the action phase. */
   public beforeActionPhase?(marsBot: IMarsBot): void;
   /**
-   * The bot's track marker reached one of this corp's cubes.
+   * Reacts to the bot's track marker reaching one of this corp's cubes.
    *
    * Cube effects come on top of the icon printed on that space unless the corp's card says
    * otherwise: return true when the cube's effect replaces the icon (Helion's white cubes draw
@@ -72,30 +72,34 @@ export abstract class MarsBotCorp {
    */
   public onTrackCubeTrigger?(marsBot: IMarsBot, trackIndex: number, position: number, cubeType: CubeType): boolean | void;
   /**
-   * The bot's track reached `position` and that space finished resolving, its icon included.
+   * Reacts to the bot's track reaching `position`, once that space has finished resolving, its icon included.
    *
    * Not called when the track moves back onto a space it regressed from.
    */
   public afterTrackSpaceResolved?(marsBot: IMarsBot, trackIndex: number, position: number): void;
-  /** The bot resolved a tag, on a project card or as one of its corp's starting tags. */
+  /** Reacts to the bot resolving a tag, on a project card or as one of its corp's starting tags. */
   public onTagResolved?(marsBot: IMarsBot, tag: Tag): void;
-  /** The bot drew and resolved a project card. */
+  /** Reacts to the bot drawing and resolving a project card. */
   public onProjectCardResolved?(marsBot: IMarsBot, card: IProjectCard): void;
-  /** The human player played a card. */
+  /** Reacts to the human player playing a card. */
   public onHumanCardPlayed?(marsBot: IMarsBot, card: IProjectCard): void;
-  /** A tile landed on `space`, placed by either side. */
+  /** Reacts to a tile landing on `space`, placed by either side. */
   public onTilePlaced?(marsBot: IMarsBot, placedByMarsBot: boolean, tileType: TileType, space: Space): void;
-  /** Called after either player raises Venus, with the number of steps it actually moved. */
+  /** Reacts to either player raising Venus, with the number of steps it actually moved. */
   public onVenusRaised?(marsBot: IMarsBot, steps: number): void;
-  /** Called before the bot raises a global parameter. Returning true cancels that raise: the global parameter stays at its current value. */
+  /**
+   * Intercepts the bot raising a global parameter.
+   *
+   * Returns true to cancel the raise: the global parameter stays at its current value.
+   */
   public interceptGlobalParameterRaise?(marsBot: IMarsBot, parameter: GlobalParameter): boolean;
-  /** The bot's M€ supply just grew by this amount. */
+  /** Reacts to the bot's M€ supply growing by `amount`. */
   public onMcGained?(marsBot: IMarsBot, amount: number): void;
-  /** Either player built a colony (Poseidon, C33). */
+  /** Reacts to either player building a colony (Poseidon, C33). */
   public onColonyPlaced?(marsBot: IMarsBot): void;
-  /** The bot took a Failed Action, after gaining its M€ for it. */
+  /** Reacts to the bot taking a Failed Action, after it gains its M€ for it. */
   public onFailedAction?(marsBot: IMarsBot): void;
-  /** The bot spent floaters to keep an extra card in the research phase. */
+  /** Reacts to the bot spending floaters to keep an extra card in the research phase. */
   public onFloatersSpentForExtraCard?(marsBot: IMarsBot): void;
   /** Extra victory points added at final scoring. */
   public vpBonus?(marsBot: IMarsBot): number;

@@ -80,7 +80,8 @@ describe('MarsBotTurnResolver', () => {
     resolver.resolveProjectCard(card);
 
     expect(calls).deep.eq(['gainMc(5)']);
-    expect(notices).deep.eq(['notifyFailedAction()', `notifyProjectCardResolved(${card.name})`]);
+    const expectedNotices = ['notifyFailedAction()', `notifyProjectCardResolved(${card.name})`];
+    expect(notices).deep.eq(expectedNotices);
   });
 
   it("tells MarsBot's corp about the tag, the space it reached and the card", () => {
@@ -89,7 +90,12 @@ describe('MarsBotTurnResolver', () => {
 
     resolver.resolveProjectCard(card);
 
-    expect(notices).deep.eq(['notifyTagResolved(building)', 'notifyTrackSpaceResolved(0, 1)', `notifyProjectCardResolved(${card.name})`]);
+    const expectedNotices = [
+      'notifyTagResolved(building)',
+      'notifyTrackSpaceResolved(0, 1)',
+      `notifyProjectCardResolved(${card.name})`,
+    ];
+    expect(notices).deep.eq(expectedNotices);
   });
 
   it("runs the player's card effects for MarsBot's card, which holds no resources for MarsBot", () => {
@@ -129,7 +135,8 @@ describe('MarsBotTurnResolver', () => {
 
       resolver.advanceTrack(0);
 
-      expect({terraformRating: botPlayer.terraformRating, positions: positions()}).deep.eq(run.expected);
+      const actual = {terraformRating: botPlayer.terraformRating, positions: positions()};
+      expect(actual).deep.eq(run.expected);
     });
   }
 
@@ -143,12 +150,13 @@ describe('MarsBotTurnResolver', () => {
 
       resolver.advanceTrack(0);
 
-      expect({
+      const actual = {
         greeneries: game.board.getGreeneries(botPlayer).length,
         cities: game.board.getCities(botPlayer).length,
         oceans: game.board.getOceanSpaces().length,
         oxygen: game.getOxygenLevel(),
-      }).deep.eq(run.expected);
+      };
+      expect(actual).deep.eq(run.expected);
     });
   }
 

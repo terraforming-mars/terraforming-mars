@@ -8,7 +8,7 @@ import {cardTagsIncludingEvent} from './MarsBotTags';
 import {MarsBotTilePlacer} from './MarsBotTilePlacer';
 import {IMarsBot} from './IMarsBot';
 
-/** Resolves the project cards MarsBot plays: their tags advance its tracks, and the spaces reached resolve their icons. */
+/** A resolver of the project cards MarsBot plays: their tags advance its tracks, and the spaces reached resolve their icons. */
 export class MarsBotTurnResolver {
   constructor(
     private readonly marsBot: IMarsBot,
@@ -17,14 +17,18 @@ export class MarsBotTurnResolver {
 
   // ---- Project Card Resolution ----
 
-  /** Resolve a project card: advance tracks based on tags. With `firstTagOnly` the other tags are ignored (Thorgate). */
+  /**
+   * Resolves a project card, advancing a track for each of its tags.
+   *
+   * With `firstTagOnly` the other tags are ignored (Thorgate).
+   */
   public resolveProjectCard(original: IProjectCard, firstTagOnly: boolean = false): void {
     this.marsBot.game.log('MarsBot plays ${0}', (b) => b.card(original));
 
     const allTags = cardTagsIncludingEvent(original);
     const tags = firstTagOnly ? allTags.slice(0, 1) : allTags;
-    // Effects below see only the resolved tags. Object.create keeps the prototype (methods like
-    // getVictoryPoints).
+    // Effects below see only the resolved tags. `Object.create` keeps the prototype (methods like
+    // `getVictoryPoints`).
     const card = firstTagOnly ? Object.create(original, {tags: {value: tags}}) as IProjectCard : original;
 
     // A card with no tags is still played: its corp and player effects apply below.
@@ -33,7 +37,6 @@ export class MarsBotTurnResolver {
       this.failedAction();
     }
 
-    // Resolve each tag left-to-right
     let advancedAny = false;
     for (const tag of tags) {
       this.marsBot.notifyTagResolved(tag);
@@ -59,10 +62,7 @@ export class MarsBotTurnResolver {
       this.marsBot.game.log('MarsBot: no tracks advanced');
     }
 
-    // Notify corp of card resolution
     this.marsBot.notifyProjectCardResolved(card);
-
-    // Notify human player's effect cards (Solar Logistics, Saturn Systems, etc.)
     this.notifyPlayerCards(card);
   }
 
@@ -90,7 +90,7 @@ export class MarsBotTurnResolver {
   }
 
   /**
-   * Advance a track by index. Handles chain actions.
+   * Advances the track at `trackIndex` and resolves the space it reaches, which can advance further tracks.
    *
    * Returns false when the track was already at its end, which is a Failed Action instead.
    *
@@ -104,7 +104,7 @@ export class MarsBotTurnResolver {
       this.marsBot.game.log('MarsBot: the game has ended, ${0} track does not advance', (b) => b.rawString(name));
       return false;
     }
-    // Moving back up after a regression retriggers nothing (rulebook B, p.3)
+    // Moving back up after a regression retriggers nothing (rulebook B, p.3-4)
     const reAdvance = track.regressedPositions.has(track.position + 1);
 
     const result = track.advance();
@@ -118,7 +118,7 @@ export class MarsBotTurnResolver {
     // A cube's effect can move this track on again, so the log keeps the space reached here.
     const position = track.position;
 
-    // Cube trigger — fires BEFORE track icon resolution (corp cubes, colony cubes, trade fleet cube)
+    // A cube fires before the icon on its space resolves (corp, colony and trade fleet cubes)
     if (this.marsBot.triggerTrackCube(trackIndex, position)) {
       this.marsBot.game.log('MarsBot: ${0} track to ${1}, icon replaced by a corp cube',
         (b) => b.rawString(name).number(position));
@@ -138,7 +138,8 @@ export class MarsBotTurnResolver {
   }
 
   /**
-   * Advance the track for a tag, for a track or bonus effect that names the tag.
+   * Advances the track that carries `tag`, for a track or bonus effect that names the tag.
+   *
    * Returns false when no track takes that tag.
    */
   public advanceTrackOfTag(tag: Tag): boolean {
@@ -166,9 +167,8 @@ export class MarsBotTurnResolver {
     }
   }
 
-  /** Resolve an action icon on a track position. */
+  /** Resolves an action icon on a track position. */
   private resolveTrackAction(action: TrackAction, currentTrackIndex: number): void {
-    // Parse TR value
     const trMatch = action.match(/^tr(\d+)$/);
     if (trMatch) {
       const amount = parseInt(trMatch[1], 10);
@@ -177,7 +177,7 @@ export class MarsBotTurnResolver {
       return;
     }
 
-    // Parse tag_N (advance another track by index or tag name)
+    // `tag_N` advances another track, N being a track index or a tag name
     if (action.startsWith('tag_')) {
       const value = action.substring(4);
       const numericIndex = parseInt(value, 10);
@@ -251,7 +251,6 @@ export class MarsBotTurnResolver {
       !this.marsBot.interceptsParameterRaise(GlobalParameter.OXYGEN);
     this.marsBot.game.addGreenery(this.marsBot.player, space, raiseOxygen);
 
-    // MarsBot placement bonuses: 1 MC per icon, 2 MC per adjacent ocean
     this.marsBot.gainMc(this.tilePlacer.getTotalPlacementMC(space));
     this.marsBot.game.log('MarsBot places greenery');
   }
@@ -272,7 +271,6 @@ export class MarsBotTurnResolver {
     }
     this.marsBot.game.addOcean(this.marsBot.player, space);
 
-    // MarsBot placement bonuses
     this.marsBot.gainMc(this.tilePlacer.getTotalPlacementMC(space));
     this.marsBot.game.log('MarsBot places ocean');
   }
@@ -286,7 +284,6 @@ export class MarsBotTurnResolver {
 
     this.marsBot.game.addCity(this.marsBot.player, space);
 
-    // MarsBot placement bonuses
     this.marsBot.gainMc(this.tilePlacer.getTotalPlacementMC(space));
     this.marsBot.game.log('MarsBot places city');
   }

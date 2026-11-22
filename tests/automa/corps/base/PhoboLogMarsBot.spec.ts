@@ -17,7 +17,8 @@ describe('PhoboLogMarsBot', () => {
 
     new PhoboLogMarsBot().onTrackCubeTrigger(marsBot, TRACK.space, 1, 'white');
 
+    const expectedCubes = [7, 10, 13, 15].map((position) => `space white ${position}`);
     expect(calls).deep.eq(['maybeDrawAndResolveBonusCard()']);
-    expect(trackCubes(new PhoboLogMarsBot())).deep.eq([7, 10, 13, 15].map((position) => `space white ${position}`));
+    expect(trackCubes(new PhoboLogMarsBot())).deep.eq(expectedCubes);
   });
 });

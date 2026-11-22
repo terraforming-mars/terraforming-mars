@@ -17,7 +17,7 @@ export class PristarMarsBot extends MarsBotCorp {
       marsBot.raiseTR(1);
       marsBot.gainMc(6);
       marsBot.game.log('MarsBot (${0}): parameter raise intercepted: removed cube, +1 TR, +6:r:mc:, SKIP raise', (b) => b.cardName(this.name));
-      return true; // SKIP the parameter raise
+      return true;
     }
     return false;
   }

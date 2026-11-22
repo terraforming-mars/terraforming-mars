@@ -3,12 +3,12 @@ import {Tag} from '@/common/cards/Tag';
 import type {IMarsBot} from '@/server/automa/IMarsBot';
 
 /**
- * The tag of the MarsBot track that each colony tile's storage area advances when it fills (C-12).
+ * The tag of the MarsBot track that each colony tile's storage area advances when it fills (rulebook C, p.4).
  *
  * The tags are the ones printed on each storage area of the Shipping Board. The track a tag
  * advances depends on the board (on Vastitas Borealis, microbes advance the Science track).
- * Titan has no entry, its floaters never advance a track (C-23), and neither has Europa, which has
- * no storage area (C-24d).
+ * Titan has no entry, its floaters never advance a track, and neither has Europa, which has
+ * no storage area (rulebook C, p.4-5).
  */
 export const COLONY_STORAGE_TAG: Partial<Record<ColonyName, Tag>> = {
   [ColonyName.CERES]: Tag.BUILDING,   // Steel
@@ -19,13 +19,13 @@ export const COLONY_STORAGE_TAG: Partial<Record<ColonyName, Tag>> = {
   [ColonyName.CALLISTO]: Tag.POWER,   // Energy
   [ColonyName.MIRANDA]: Tag.ANIMAL,
   [ColonyName.TRITON]: Tag.SPACE,     // Titanium
-  [ColonyName.PLUTO]: Tag.SCIENCE,    // Cards (C-26)
+  [ColonyName.PLUTO]: Tag.SCIENCE,    // Cards (rulebook C, p.5)
 };
 
 /**
- * MarsBot's Shipping Board, with a storage area for each colony tile (C-18).
+ * MarsBot's Shipping Board, with a storage area for each colony tile (rulebook C, p.5).
  *
- * A storage area that reaches 5 resources gives back 5 and advances its track (C-12).
+ * A storage area that reaches 5 resources gives back 5 and advances its track (rulebook C, p.4).
  */
 export class MarsBotShippingBoard {
   public storage: Map<ColonyName, number> = new Map();
@@ -34,9 +34,9 @@ export class MarsBotShippingBoard {
 
   /**
    * Adds `amount` resources to a colony tile's storage area, then advances its track once for every
-   * 5 there (C-12).
+   * 5 there.
    *
-   * Europa's resources are dropped (C-24d). Titan keeps any number, and advances no track (C-23).
+   * Europa's resources are dropped. Titan keeps any number, and advances no track (rulebook C, p.4-5).
    */
   public add(colonyName: ColonyName, amount: number): void {
     if (colonyName === ColonyName.EUROPA) {
@@ -53,7 +53,7 @@ export class MarsBotShippingBoard {
     this.checkOverflow(colonyName);
   }
 
-  /** Trades each 5 resources in a storage area for a track advance (C-12), until the game is decided. */
+  /** Trades each 5 resources in a storage area for a track advance, until the game is decided. */
   private checkOverflow(colonyName: ColonyName): void {
     const tag = COLONY_STORAGE_TAG[colonyName];
     if (tag === undefined || this.marsBot.game.isDoneWithFinalProduction()) {

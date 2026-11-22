@@ -33,7 +33,7 @@ export type CubeType = 'white' | 'black' | 'credit';
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
 
-/** MC gained when MarsBot takes a failed action. */
+/** M€ MarsBot gains when it takes a Failed Action. */
 export const FAILED_ACTION_MC = 5;
 export const FAILED_ACTION_MC_EASY = 3;
 
@@ -45,7 +45,7 @@ export const MARSBOT_MAX_GENERATION_PRELUDE = 18;
 /** M€ MarsBot gets per adjacent ocean when its corporation is Lakefront Resorts. */
 export const LAKEFRONT_OCEAN_BONUS = 3;
 
-/** Get the max generation for an automa game. */
+/** Gets the max generation for an automa game. */
 export function getAutomaMaxGeneration(preludeExtension: boolean): number {
   return preludeExtension ? MARSBOT_MAX_GENERATION_PRELUDE : MARSBOT_MAX_GENERATION;
 }

@@ -31,7 +31,8 @@ describe('HelionMarsBot', () => {
 
   // The card replaces the temperature step only
   it('white cube replaces a temperature step, and no other icon', () => {
-    const white = (position: number) => new HelionMarsBot().onTrackCubeTrigger(recordingMarsBot().marsBot, TRACK.building, position, 'white');
+    const white = (position: number) =>
+      new HelionMarsBot().onTrackCubeTrigger(recordingMarsBot().marsBot, TRACK.building, position, 'white');
 
     expect(white(6)).is.true;
     expect(white(7)).is.false;

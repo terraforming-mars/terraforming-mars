@@ -9,7 +9,7 @@ export class ExpeditedConstructionColonies extends MarsBotBonusCard {
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
-    // C-15a: a city next to 2 or more greenery or ocean tiles destroys the card
+    // A city next to 2 or more greenery or ocean tiles destroys the card (rulebook C, p.4)
     const tilePlacer = new MarsBotTilePlacer(marsBot);
     const citySpace = tilePlacer.findExpeditedConstructionCitySpace();
     if (citySpace !== undefined) {
@@ -19,7 +19,7 @@ export class ExpeditedConstructionColonies extends MarsBotBonusCard {
       return true;
     }
 
-    // C-15b: with at most 1 colony, MarsBot places one on a random eligible tile and keeps the card
+    // With at most 1 colony, MarsBot places one on a random eligible tile and keeps the card
     const colonyCount = marsBot.game.colonies.filter((c) => c.colonies.includes(marsBot.player.id)).length;
     if (colonyCount <= 1) {
       if (marsBot.maybePlaceRandomColony()) {
@@ -28,7 +28,7 @@ export class ExpeditedConstructionColonies extends MarsBotBonusCard {
       }
     }
 
-    // C-15c: no effect
+    // Otherwise, no effect
     marsBot.game.log('MarsBot (${0}): no effect', (b) => b.bonusCardName(this.name));
     return false;
   }

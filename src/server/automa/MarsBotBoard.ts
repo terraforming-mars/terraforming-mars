@@ -13,7 +13,7 @@ export type AdvanceResult =
 /** Runtime state for a single MarsBot track. */
 export class MarsBotTrack {
   public position: number = 0;
-  /** Positions that were regressed from and not yet re-advanced to. Actions on these are skipped. */
+  /** Positions the track regressed from and has not advanced back onto yet, whose actions are skipped. */
   public regressedPositions: Set<number> = new Set();
 
   constructor(public readonly definition: TrackDefinition) {}
@@ -22,7 +22,12 @@ export class MarsBotTrack {
     return this.position < this.definition.layout.length - 1;
   }
 
-  /** Advance the track by 1. */
+  /**
+   * Advances the track by 1.
+   *
+   * Returns `maxed` when it is already at its end, and `none` when the space reached has no action
+   * or the track regressed from it.
+   */
   public advance(): AdvanceResult {
     if (!this.canAdvance()) {
       return {type: 'maxed'};
@@ -37,7 +42,7 @@ export class MarsBotTrack {
   }
 
   /**
-   * Regress the track by 1 (from human decreasing MarsBot production).
+   * Regresses the track by 1, for the human decreasing MarsBot's production.
    *
    * Returns true if the track moved, false if it was already at the start.
    */
@@ -51,7 +56,7 @@ export class MarsBotTrack {
   }
 
   /**
-   * Get the action at the next position without advancing.
+   * Gets the action at the next position without advancing.
    *
    * Returns undefined at max, when the space has no action, or when the space was regressed from and
    * advancing onto it skips its action.

@@ -16,8 +16,9 @@ describe('ManutechMarsBot', () => {
   });
 
   it('puts a black cube on #5 and #12 of every track, Venus included', () => {
-    expect(trackCubes(new ManutechMarsBot(), [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK])).to.have.members(
-      ['building', 'space', 'event', 'science', 'power', 'earth', 'plant', 'venus'].flatMap((tag) => [`${tag} black 5`, `${tag} black 12`]),
-    );
+    const tags = ['building', 'space', 'event', 'science', 'power', 'earth', 'plant', 'venus'];
+    const expected = tags.flatMap((tag) => [`${tag} black 5`, `${tag} black 12`]);
+
+    expect(trackCubes(new ManutechMarsBot(), [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK])).to.have.members(expected);
   });
 });

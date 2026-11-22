@@ -2,13 +2,9 @@ import {expect} from 'chai';
 import {PreludeDeck, CeoDeck} from '@/server/cards/Decks';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
-import {ICard} from '../../src/server/cards/ICard';
 import {CardName} from '../../src/common/cards/CardName';
 import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
-
-function name(card: ICard): CardName {
-  return card.name;
-}
+import {toName} from '@/common/utils/utils';
 
 describe('PreludeDeck', () => {
   const random = new UnseededRandom();
@@ -21,7 +17,7 @@ describe('PreludeDeck', () => {
     };
 
     function names(deck: PreludeDeck): Array<CardName> {
-      return deck.drawPile.map(name);
+      return deck.drawPile.map(toName);
     }
 
     const first = new PreludeDeck(new GameCards({...commonGameOptions}).getPreludeCards(), [], random);

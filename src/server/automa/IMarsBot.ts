@@ -61,8 +61,12 @@ export interface IMarsBot {
    * Returns false when no track carries `tag`.
    */
   advanceTrackOfTag(tag: Tag): boolean;
-  /** Tells the player's cards about an advance that names `tag`, as if the bot played a card with that tag. */
-  notifyTagAdvance(tag: Tag): void;
+  /**
+   * Called when a bot track advances for `tag`.
+   *
+   * The player's cards see it as if the bot played a card with that tag.
+   */
+  onTagAdvance(tag: Tag): void;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its

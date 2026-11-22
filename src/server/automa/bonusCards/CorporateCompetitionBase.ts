@@ -171,7 +171,7 @@ function tryAdvanceEitherTrack(marsBot: IMarsBot, tags: [Tag, Tag], pick: 'less'
   }
   for (const tag of tags) {
     if (marsBotBoard.tagToTrack[tag] === chosen) {
-      marsBot.notifyTagAdvance(tag);
+      marsBot.onTagAdvance(tag);
     }
   }
   return true;

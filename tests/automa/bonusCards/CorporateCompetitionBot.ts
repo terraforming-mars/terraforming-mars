@@ -17,8 +17,8 @@ export function competitionBot(gameOptions: Partial<TestGameOptions> = {}, field
     game, player: botPlayer, humanPlayer: human, megacredits: 5, interceptsParameterRaise: () => false,
     awardValue: () => 5,
     advanceTrackOfTag: (tag) => calls.push(`advanceTrackOfTag(${tag})`) > 0,
-    notifyTagAdvance: (tag) => {
-      calls.push(`notifyTagAdvance(${tag})`);
+    onTagAdvance: (tag) => {
+      calls.push(`onTagAdvance(${tag})`);
     },
     resolveProjectCard: (card) => {
       calls.push(`resolveProjectCard(${card.name})`);

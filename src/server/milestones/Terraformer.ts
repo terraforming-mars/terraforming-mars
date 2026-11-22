@@ -19,7 +19,7 @@ export class Terraformer implements IMilestone {
   public canClaim(player: IPlayer): boolean {
     return this.getScore(player) >= this.target(player);
   }
-  public remaining(player: IPlayer): number {
+  public stepsToMeet(player: IPlayer): number {
     return Math.max(0, this.target(player) - this.getScore(player));
   }
 }

@@ -1,15 +1,7 @@
 import {expect} from 'chai';
 import {Phase} from '@/common/Phase';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {
-  getClaimableMilestones,
-  humanAwardScore,
-  marsBotCanClaimMilestone,
-  maybeClaimMilestone,
-  maybeFundAward,
-  milestoneRemaining,
-  selectMilestone,
-} from '@/server/automa/MarsBotMilestoneAwardEval';
+import * as MarsBotMilestoneAwardEval from '@/server/automa/MarsBotMilestoneAwardEval';
 import {Banker} from '@/server/awards/Banker';
 import {Miner} from '@/server/awards/Miner';
 import {Thermalist} from '@/server/awards/Thermalist';
@@ -23,7 +15,12 @@ import {testGame} from '../TestGame';
 import {addCity} from '../TestingUtils';
 import {recordingMarsBot} from './corps/RecordingMarsBot';
 
-/** A bot that records its calls, with the award values in `awardValues`. */
+/*
+ * Builds a 2-player game with a fake MarsBot in the second seat.
+ *
+ * `calls` lists the `IMarsBot` methods the code under test called, and the fake scores each award from
+ * `awardValues`.
+ */
 function setup(fields: Partial<IMarsBot> = {}, awardValues: Record<string, number> = {}) {
   const [game, human, botPlayer] = testGame(2);
   const {marsBot, calls} = recordingMarsBot({
@@ -47,7 +44,7 @@ describe('MarsBotMilestoneAwardEval', () => {
       const {botPlayer, marsBot} = setup({megacredits: run.megacredits});
       botPlayer.megaCredits = 100;
 
-      expect(marsBotCanClaimMilestone(new Briber(), marsBot)).eq(run.expected);
+      expect(MarsBotMilestoneAwardEval.marsBotCanClaimMilestone(new Briber(), marsBot)).eq(run.expected);
     });
   }
 
@@ -59,27 +56,26 @@ describe('MarsBotMilestoneAwardEval', () => {
       const {botPlayer, marsBot} = setup();
       botPlayer.terraformRating = run.terraformRating;
 
-      expect(marsBotCanClaimMilestone(new Terraformer(), marsBot)).eq(run.expected);
+      expect(MarsBotMilestoneAwardEval.marsBotCanClaimMilestone(new Terraformer(), marsBot)).eq(run.expected);
     });
   }
 
   for (const run of [
-    {name: 'Mayor', cities: 1, megaCredits: 0, turmoil: false, expected: 2},
-    {name: 'Mayor', cities: 4, megaCredits: 0, turmoil: false, expected: 0},
-    {name: 'Terraformer', cities: 0, megaCredits: 0, turmoil: false, expected: 15},
-    {name: 'Terraformer', cities: 0, megaCredits: 0, turmoil: true, expected: 6},
-    {name: 'Briber', cities: 0, megaCredits: 0, turmoil: false, expected: Infinity},
-    {name: 'Briber', cities: 0, megaCredits: 20, turmoil: false, expected: 0},
-  ] as const) {
-    it('counts how far the player is from a milestone: ' + JSON.stringify(run), () => {
+    {milestone: new Mayor(), cities: 1, megaCredits: 0, turmoil: false, expected: 2},
+    {milestone: new Mayor(), cities: 4, megaCredits: 0, turmoil: false, expected: 0},
+    {milestone: new Terraformer(), cities: 0, megaCredits: 0, turmoil: false, expected: 15},
+    {milestone: new Terraformer(), cities: 0, megaCredits: 0, turmoil: true, expected: 6},
+    {milestone: new Briber(), cities: 0, megaCredits: 0, turmoil: false, expected: Infinity},
+    {milestone: new Briber(), cities: 0, megaCredits: 20, turmoil: false, expected: 0},
+  ]) {
+    it('counts the steps the player is from meeting a milestone: ' + JSON.stringify({...run, milestone: run.milestone.name}), () => {
       const [/* game */, player] = testGame(2, {turmoilExtension: run.turmoil});
       for (let city = 0; city < run.cities; city++) {
         addCity(player);
       }
       player.megaCredits = run.megaCredits;
-      const milestone = run.name === 'Mayor' ? new Mayor() : run.name === 'Terraformer' ? new Terraformer() : new Briber();
 
-      expect(milestoneRemaining(milestone, player)).eq(run.expected);
+      expect(MarsBotMilestoneAwardEval.stepsToMeetMilestone(run.milestone, player)).eq(run.expected);
     });
   }
 
@@ -93,7 +89,7 @@ describe('MarsBotMilestoneAwardEval', () => {
     addCity(botPlayer);
     game.claimedMilestones.push({player: human, milestone: mayor});
 
-    expect(getClaimableMilestones(marsBot)).deep.eq([terraformer, hoverlord]);
+    expect(MarsBotMilestoneAwardEval.getClaimableMilestones(marsBot)).deep.eq([terraformer, hoverlord]);
   });
 
   it('lists no milestone once all are claimed', () => {
@@ -104,58 +100,63 @@ describe('MarsBotMilestoneAwardEval', () => {
       game.claimedMilestones.push({player: human, milestone});
     }
 
-    expect(getClaimableMilestones(marsBot)).is.empty;
+    expect(MarsBotMilestoneAwardEval.getClaimableMilestones(marsBot)).is.empty;
   });
 
   it('picks a milestone the player also meets first', () => {
     const {human, marsBot} = setup();
     human.terraformRating = 35;
+    const terraformer = new Terraformer();
 
-    expect(selectMilestone(marsBot, [new Mayor(), new Terraformer()])?.name).eq('Terraformer');
+    expect(MarsBotMilestoneAwardEval.selectMilestone(marsBot, [new Mayor(), terraformer])).eq(terraformer);
   });
 
-  it('picks the milestone the player is closest to meeting next', () => {
+  it('picks the milestone the player is fewest steps from next', () => {
     const {human, marsBot} = setup();
     addCity(human);
+    const mayor = new Mayor();
 
-    expect(selectMilestone(marsBot, [new Gardener(), new Mayor()])?.name).eq('Mayor');
+    expect(MarsBotMilestoneAwardEval.selectMilestone(marsBot, [new Gardener(), mayor])).eq(mayor);
   });
 
   it('picks the leftmost milestone on a tie', () => {
     const {marsBot} = setup();
+    const gardener = new Gardener();
 
-    expect(selectMilestone(marsBot, [new Gardener(), new Mayor()])?.name).eq('Gardener');
+    expect(MarsBotMilestoneAwardEval.selectMilestone(marsBot, [gardener, new Mayor()])).eq(gardener);
   });
 
-  it('picks Hoverlord last', () => {
+  it('counts Hoverlord as rightmost', () => {
     const {human, marsBot} = setup();
     human.terraformRating = 35;
     const hoverlord = new Hoverlord();
     hoverlord.canClaim = () => true;
+    const terraformer = new Terraformer();
 
-    expect(selectMilestone(marsBot, [hoverlord, new Terraformer()])?.name).eq('Terraformer');
+    expect(MarsBotMilestoneAwardEval.selectMilestone(marsBot, [hoverlord, terraformer])).eq(terraformer);
   });
 
   it('picks nothing from no milestones', () => {
     const {marsBot} = setup();
 
-    expect(selectMilestone(marsBot, [])).is.undefined;
+    expect(MarsBotMilestoneAwardEval.selectMilestone(marsBot, [])).is.undefined;
   });
 
   it('claims the milestone it picks for MarsBot', () => {
     const {game, botPlayer, marsBot} = setup();
-    game.milestones = [new Terraformer(), new Mayor()];
+    const terraformer = new Terraformer();
+    game.milestones = [terraformer, new Mayor()];
     botPlayer.terraformRating = 35;
 
-    expect(maybeClaimMilestone(marsBot)).is.true;
-    expect(game.claimedMilestones.map((claimed) => [claimed.player.id, claimed.milestone.name])).deep.eq([[botPlayer.id, 'Terraformer']]);
+    expect(MarsBotMilestoneAwardEval.maybeClaimMilestone(marsBot)).is.true;
+    expect(game.claimedMilestones).deep.eq([{player: botPlayer, milestone: terraformer}]);
   });
 
   it('claims nothing when MarsBot meets no milestone', () => {
     const {game, marsBot} = setup();
     game.milestones = [new Terraformer(), new Mayor()];
 
-    expect(maybeClaimMilestone(marsBot)).is.false;
+    expect(MarsBotMilestoneAwardEval.maybeClaimMilestone(marsBot)).is.false;
     expect(game.claimedMilestones).is.empty;
   });
 
@@ -163,7 +164,7 @@ describe('MarsBotMilestoneAwardEval', () => {
     const {game, marsBot, calls} = setup({megacredits: 20});
     game.milestones = [new Briber()];
 
-    maybeClaimMilestone(marsBot);
+    MarsBotMilestoneAwardEval.maybeClaimMilestone(marsBot);
 
     expect(calls).deep.eq(['loseMc(12)']);
   });
@@ -181,8 +182,8 @@ describe('MarsBotMilestoneAwardEval', () => {
       player.production.override({heat: 4, energy: 5, steel: 3, titanium: 4});
       game.phase = run.phase;
 
-      expect({thermalist: humanAwardScore(new Thermalist(), player), miner: humanAwardScore(new Miner(), player)})
-        .deep.eq(run.expected);
+      expect(MarsBotMilestoneAwardEval.humanAwardScore(new Thermalist(), player)).eq(run.expected.thermalist);
+      expect(MarsBotMilestoneAwardEval.humanAwardScore(new Miner(), player)).eq(run.expected.miner);
     });
   }
 
@@ -190,16 +191,17 @@ describe('MarsBotMilestoneAwardEval', () => {
     const [/* game */, player] = testGame(2);
     player.production.override({megacredits: 6});
 
-    expect(humanAwardScore(new Banker(), player)).eq(6);
+    expect(MarsBotMilestoneAwardEval.humanAwardScore(new Banker(), player)).eq(6);
   });
 
   it('funds the award MarsBot leads the player by the most', () => {
     const {game, human, botPlayer, marsBot} = setup({}, {Banker: 4, Thermalist: 6});
-    game.awards = [new Banker(), new Thermalist()];
+    const banker = new Banker();
+    game.awards = [banker, new Thermalist()];
     human.heat = 3;
 
-    expect(maybeFundAward(marsBot)).is.true;
-    expect(game.fundedAwards.map((funded) => [funded.player.id, funded.award.name])).deep.eq([[botPlayer.id, 'Banker']]);
+    expect(MarsBotMilestoneAwardEval.maybeFundAward(marsBot)).is.true;
+    expect(game.fundedAwards).deep.eq([{player: botPlayer, award: banker}]);
   });
 
   it('funds nothing when MarsBot leads no award', () => {
@@ -207,19 +209,19 @@ describe('MarsBotMilestoneAwardEval', () => {
     game.awards = [new Banker()];
     human.production.override({megacredits: 2});
 
-    expect(maybeFundAward(marsBot)).is.false;
+    expect(MarsBotMilestoneAwardEval.maybeFundAward(marsBot)).is.false;
     expect(game.fundedAwards).is.empty;
   });
 
   it('skips a funded award', () => {
-    const {game, human, marsBot} = setup({}, {Banker: 6, Thermalist: 1});
+    const {game, human, botPlayer, marsBot} = setup({}, {Banker: 6, Thermalist: 1});
     const [banker, thermalist] = [new Banker(), new Thermalist()];
     game.awards = [banker, thermalist];
     game.fundedAwards.push({player: human, award: banker});
 
-    maybeFundAward(marsBot);
+    MarsBotMilestoneAwardEval.maybeFundAward(marsBot);
 
-    expect(game.fundedAwards.map((funded) => funded.award.name)).deep.eq(['Banker', 'Thermalist']);
+    expect(game.fundedAwards).deep.eq([{player: human, award: banker}, {player: botPlayer, award: thermalist}]);
   });
 
   it('funds nothing once all awards are funded', () => {
@@ -230,15 +232,16 @@ describe('MarsBotMilestoneAwardEval', () => {
       game.fundedAwards.push({player: human, award});
     }
 
-    expect(maybeFundAward(marsBot)).is.false;
+    expect(MarsBotMilestoneAwardEval.maybeFundAward(marsBot)).is.false;
   });
 
   it('funds Venuphile only when no other award is tied with it', () => {
-    const {game, marsBot} = setup({}, {Venuphile: 3, Banker: 3});
-    game.awards = [new Venuphile(), new Banker()];
+    const {game, botPlayer, marsBot} = setup({}, {Venuphile: 3, Banker: 3});
+    const banker = new Banker();
+    game.awards = [new Venuphile(), banker];
 
-    maybeFundAward(marsBot);
+    MarsBotMilestoneAwardEval.maybeFundAward(marsBot);
 
-    expect(game.fundedAwards.map((funded) => funded.award.name)).deep.eq(['Banker']);
+    expect(game.fundedAwards).deep.eq([{player: botPlayer, award: banker}]);
   });
 });

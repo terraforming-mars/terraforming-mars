@@ -18,8 +18,12 @@ export interface IMilestone {
    * Only for milestones where the automa rules differ from `canClaim` for MarsBot's player.
    */
   marsBotCanClaim?(bot: IMarsBot): boolean;
-  /** How far the player is from claiming this: 0 when they qualify. Left out when it can't be counted. */
-  remaining?(player: IPlayer): number;
+  /**
+   * Counts the steps `player` is from meeting this milestone, 0 when they meet it.
+   *
+   * Left out when the steps can't be counted.
+   */
+  stepsToMeet?(player: IPlayer): number;
 }
 
 export abstract class BaseMilestone implements IMilestone {
@@ -37,7 +41,7 @@ export abstract class BaseMilestone implements IMilestone {
   public canClaim(player: IPlayer): boolean {
     return this.getScore(player) >= this.threshold;
   }
-  public remaining(player: IPlayer): number {
+  public stepsToMeet(player: IPlayer): number {
     return Math.max(0, this.threshold - this.getScore(player));
   }
 }

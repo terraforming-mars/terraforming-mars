@@ -28,13 +28,15 @@ export function marsBotCanClaimMilestone(milestone: IMilestone, marsBot: IMarsBo
 }
 
 /**
- * How far `player` is from meeting a milestone, for MarsBot's "closest to meeting the criteria"
- * tiebreaker. A milestone that can't be counted is 0 away when the player qualifies and
- * infinitely far otherwise.
+ * Counts the steps `player` is from meeting `milestone`, for MarsBot's "closest to meeting the
+ * criteria" tiebreaker.
+ *
+ * A milestone that can't be counted is 0 steps away when the player meets it and infinitely far
+ * otherwise.
  */
-export function milestoneRemaining(milestone: IMilestone, player: IPlayer): number {
-  if (milestone.remaining !== undefined) {
-    return milestone.remaining(player);
+export function stepsToMeetMilestone(milestone: IMilestone, player: IPlayer): number {
+  if (milestone.stepsToMeet !== undefined) {
+    return milestone.stepsToMeet(player);
   }
   return milestone.canClaim(player) ? 0 : Infinity;
 }
@@ -67,7 +69,6 @@ export function maybeClaimMilestone(marsBot: IMarsBot): boolean {
   marsBot.game.claimedMilestones.push({player: marsBot.player, milestone: best});
   marsBot.game.log('MarsBot claims milestone ${0}', (b) => b.rawString(best.name));
 
-  // Briber milestone: lose 12 MC on claim
   if (best.name === 'Briber') {
     marsBot.loseMc(12);
     marsBot.game.log('MarsBot loses 12 M€ (Briber)');
@@ -76,12 +77,14 @@ export function maybeClaimMilestone(marsBot: IMarsBot): boolean {
 }
 
 /**
- * Picks the milestone to claim from those MarsBot meets, by the tiebreakers on page 8:
- * 1) one the human also meets, 2) the one the human is closest to meeting, 3) leftmost
- * (Hoverlord last).
+ * Picks the milestone MarsBot claims out of `claimable`, by the tiebreakers in rulebook A, page 8.
+ *
+ * A milestone the player also meets comes first, then the one the player is fewest steps from, then
+ * the leftmost.
  */
 export function selectMilestone(marsBot: IMarsBot, claimable: ReadonlyArray<IMilestone>): IMilestone | undefined {
-  const sorted = claimable.toSorted((a, b) => {
+  // For "leftmost", Hoverlord counts as last in the list (rulebook C, Venus Next).
+  const leftToRight = claimable.toSorted((a, b) => {
     if (a.name === 'Hoverlord') {
       return 1;
     }
@@ -91,18 +94,18 @@ export function selectMilestone(marsBot: IMarsBot, claimable: ReadonlyArray<IMil
     return 0;
   });
 
-  const humanAlsoQualifies = sorted.filter((m) => m.canClaim(marsBot.humanPlayer));
-  if (humanAlsoQualifies.length > 0) {
-    return humanAlsoQualifies[0];
+  const humanQualifiedMilestone = leftToRight.find((milestone) => milestone.canClaim(marsBot.humanPlayer));
+  if (humanQualifiedMilestone !== undefined) {
+    return humanQualifiedMilestone;
   }
 
   let best: IMilestone | undefined;
-  let bestRemaining = Infinity;
-  for (const m of sorted) {
-    const remaining = milestoneRemaining(m, marsBot.humanPlayer);
-    if (best === undefined || remaining < bestRemaining) {
-      bestRemaining = remaining;
-      best = m;
+  let bestSteps = Infinity;
+  for (const milestone of leftToRight) {
+    const steps = stepsToMeetMilestone(milestone, marsBot.humanPlayer);
+    if (best === undefined || steps < bestSteps) {
+      bestSteps = steps;
+      best = milestone;
     }
   }
   return best;
@@ -114,7 +117,7 @@ export function getClaimableMilestones(marsBot: IMarsBot): Array<IMilestone> {
   if (game.allMilestonesClaimed()) {
     return [];
   }
-  return game.milestones.filter((m) => !game.milestoneClaimed(m) && marsBotCanClaimMilestone(m, marsBot));
+  return game.milestones.filter((milestone) => !game.milestoneClaimed(milestone) && marsBotCanClaimMilestone(milestone, marsBot));
 }
 
 /** Funds the unfunded award MarsBot leads the player by the most. False when it leads none. */
@@ -124,13 +127,11 @@ export function maybeFundAward(marsBot: IMarsBot): boolean {
     return false;
   }
 
-  const unfunded = game.awards.filter((a) => !game.hasBeenFunded(a));
-  // Find the award where MarsBot is most ahead of the human
+  const unfunded = game.awards.filter((award) => !game.hasBeenFunded(award));
   let bestAward: IAward | undefined;
   let bestMargin = -Infinity;
 
   for (const award of unfunded) {
-    // Per rules (page 8): "MarsBot considers your current number of resources plus your production"
     const margin = marsBot.awardValue(award) - humanAwardScore(award, marsBot.humanPlayer);
     if (margin > bestMargin || (margin === bestMargin && bestAward?.name === 'Venuphile')) {
       bestMargin = margin;
@@ -139,11 +140,9 @@ export function maybeFundAward(marsBot: IMarsBot): boolean {
   }
 
   if (bestAward === undefined || bestMargin <= 0) {
-    // MarsBot is not ahead on any award
     return false;
   }
 
   game.fundAward(marsBot.player, bestAward);
-  game.log('MarsBot funds award ${0}', (b) => b.rawString(bestAward.name));
   return true;
 }

@@ -7,7 +7,7 @@ import {fakeCard, runAllActions, setTemperature, testGame} from '../../TestingUt
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
-import {ProjectDeck} from '../../../src/server/cards/Deck';
+import {ProjectDeck} from '@/server/cards/Decks';
 import {SoilEnrichment} from '../../../src/server/cards/promo/SoilEnrichment';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 

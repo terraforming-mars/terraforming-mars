@@ -49,7 +49,7 @@ const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
 const SPECIAL_HEX_ICONS = 2.5;
 
 /**
- * Places MarsBot's tiles by the automa rules and tiebreakers.
+ * Picks the space for each MarsBot tile by the automa rules and tiebreakers.
  *
  * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.

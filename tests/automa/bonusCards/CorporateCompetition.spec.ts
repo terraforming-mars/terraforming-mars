@@ -5,7 +5,6 @@ import {BoardName} from '@/common/boards/BoardName';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
-import {AwardName} from '@/common/ma/AwardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
@@ -15,43 +14,9 @@ import {Board} from '@/server/boards/Board';
 import {Space} from '@/server/boards/Space';
 import {Birds} from '@/server/cards/base/Birds';
 import {cardsFromJSON} from '@/server/createCard';
-import {TestGameOptions, testGame} from '../../TestGame';
 import {setAllTracks, setTrack} from '../FakeMarsBot';
-import {TRACK, recordingMarsBot} from '../corps/RecordingMarsBot';
-
-/**
- * A bot with 5 M€ and a score of 5 in every award, in a 2-player game built with `gameOptions`.
- *
- * `calls` also records the track advances by tag and the project cards it plays. `greenerySpaces` holds the
- * spaces a greenery it places may go on, and it places one when there is any.
- */
-function competitionBot(gameOptions: Partial<TestGameOptions> = {}, fields: Partial<IMarsBot> = {}) {
-  const [game, human, botPlayer] = testGame(2, gameOptions);
-  const greenerySpaces: Array<Space> = [];
-  const {marsBot, calls} = recordingMarsBot({
-    game, player: botPlayer, humanPlayer: human, megacredits: 5, interceptsParameterRaise: () => false,
-    awardValue: () => 5,
-    advanceTrackOfTag: (tag) => calls.push(`advanceTrackOfTag(${tag})`) > 0,
-    notifyTagAdvance: (tag) => {
-      calls.push(`notifyTagAdvance(${tag})`);
-    },
-    resolveProjectCard: (card) => {
-      calls.push(`resolveProjectCard(${card.name})`);
-    },
-    maybePlaceGreenery: (filter = () => true) => {
-      greenerySpaces.push(...game.board.getAvailableSpacesForGreenery(botPlayer).filter(filter));
-      return greenerySpaces.length > 0;
-    },
-    ...fields,
-  });
-  return {game, human, botPlayer, marsBot, calls, greenerySpaces};
-}
-
-function fund(bot: ReturnType<typeof competitionBot>, ...awards: ReadonlyArray<AwardName>): void {
-  for (const name of awards) {
-    bot.game.fundAward(bot.human, bot.game.awards.find((award) => award.name === name)!);
-  }
-}
+import {TRACK} from '../corps/RecordingMarsBot';
+import {competitionBot, fund} from './CorporateCompetitionBot';
 
 function maxTrack(marsBot: IMarsBot, tag: Tag): void {
   const track = marsBot.marsBotBoard.tracks[marsBot.marsBotBoard.tagToTrack[tag]!];
@@ -74,16 +39,6 @@ describe('CorporateCompetition', () => {
       expect(bot.calls).deep.eq(run.expected);
     });
   }
-
-  it('helps with Forecaster for free', () => {
-    const bot = competitionBot({boardName: BoardName.TERRA_CIMMERIA_NOVA});
-    fund(bot, 'Forecaster');
-    bot.game.projectDeck.drawPile.push(...cardsFromJSON([CardName.MINE, CardName.ALGAE]).toReversed());
-
-    new CorporateCompetition().resolve(bot.marsBot);
-
-    expect(bot.calls).deep.eq(['resolveProjectCard(Algae)', 'gainMc(0)']);
-  });
 
   // MarsBot scores 5 in both awards
   for (const run of [
@@ -271,16 +226,6 @@ describe('CorporateCompetition', () => {
     const helped = new CorporateCompetition().tryHelperAction(bot.marsBot, 'Excentric');
 
     expect(birds.resourceCount).eq(1);
-    expect(helped).is.true;
-  });
-
-  it('raises TR by 2 for Benefactor', () => {
-    const bot = competitionBot();
-    const tr = bot.botPlayer.terraformRating;
-
-    const helped = new CorporateCompetition().tryHelperAction(bot.marsBot, 'Benefactor');
-
-    expect(bot.botPlayer.terraformRating).eq(tr + 2);
     expect(helped).is.true;
   });
 });

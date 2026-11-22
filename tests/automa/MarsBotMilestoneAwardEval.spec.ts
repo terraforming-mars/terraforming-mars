@@ -68,14 +68,15 @@ describe('MarsBotMilestoneAwardEval', () => {
     {milestone: new Briber(), cities: 0, megaCredits: 0, turmoil: false, expected: Infinity},
     {milestone: new Briber(), cities: 0, megaCredits: 20, turmoil: false, expected: 0},
   ]) {
-    it('counts the steps the player is from meeting a milestone: ' + JSON.stringify({...run, milestone: run.milestone.name}), () => {
+    const {milestone, ...inputs} = run;
+    it(`counts the steps the player is from meeting ${milestone.name}: ${JSON.stringify(inputs)}`, () => {
       const [/* game */, player] = testGame(2, {turmoilExtension: run.turmoil});
       for (let city = 0; city < run.cities; city++) {
         addCity(player);
       }
       player.megaCredits = run.megaCredits;
 
-      expect(MarsBotMilestoneAwardEval.stepsToMeetMilestone(run.milestone, player)).eq(run.expected);
+      expect(MarsBotMilestoneAwardEval.stepsToMeetMilestone(milestone, player)).eq(run.expected);
     });
   }
 

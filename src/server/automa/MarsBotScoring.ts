@@ -7,15 +7,13 @@ import {MADetail} from '../../common/game/VictoryPointsBreakdown';
 import {MarsBotVPModel} from '../../common/models/MarsBotModel';
 import {Turmoil} from '../turmoil/Turmoil';
 
-/**
- * Calculates MarsBot's final score with automa-specific rules.
- */
+/** The calculation of MarsBot's final score, with its automa-specific rules. */
 export class MarsBotScoring {
   constructor(
     private readonly marsBot: IMarsBot,
   ) {}
 
-  /** Calculate MarsBot's complete VP breakdown. */
+  /** Calculates MarsBot's complete VP breakdown. */
   public calculate(): MarsBotVPModel {
     const tr = this.marsBot.player.terraformRating;
     const milestoneResult = this.calculateMilestoneVP();
@@ -88,12 +86,12 @@ export class MarsBotScoring {
     return vp;
   }
 
+  /** Scores 1 VP for each space next to the Neural Instance that the human doesn't occupy, empty or MarsBot's. */
   private calculateNeuralInstanceVP(): number {
     if (this.marsBot.neuralInstanceSpace === undefined) {
       return 0;
     }
     const adj = this.marsBot.game.board.getAdjacentSpaces(this.marsBot.neuralInstanceSpace);
-    // 1 VP per adjacent space NOT occupied by human (empty or MarsBot-owned)
     return adj.filter((s) => s.player !== this.marsBot.humanPlayer).length;
   }
 
@@ -105,7 +103,7 @@ export class MarsBotScoring {
     return Math.floor(this.marsBot.megacredits / mcPerVP);
   }
 
-  /** Vermin: -1 VP per city when 10+ animals on Vermin card. Applies to ALL players. */
+  /** Scores -1 VP for each of MarsBot's cities while Vermin is in effect, with 10 or more animals on its card. */
   private calculateVerminPenalty(cities: ReadonlyArray<Space>): number {
     if (!this.marsBot.game.verminInEffect) {
       return 0;
@@ -113,7 +111,7 @@ export class MarsBotScoring {
     return -1 * cities.length;
   }
 
-  /** T-13: 1 VP for each Party Leader or Chairman position MarsBot holds. */
+  /** Scores 1 VP for each Party Leader or Chairman position MarsBot holds (T-13). */
   private calculateTurmoilVP(): number {
     if (!this.marsBot.game.gameOptions.turmoilExtension || this.marsBot.game.turmoil === undefined) {
       return 0;
@@ -137,7 +135,7 @@ function getMcPerVP(generation: number, preludeExtension: boolean): number | und
   return entry?.mcPerVP;
 }
 
-/** MC per VP for the generation the game is in, or undefined once the generation limit is reached. */
+/** M€ per VP for the generation the game is in, or undefined once the generation limit is reached. */
 export function currentMcPerVP(game: IGame): number | undefined {
   return getMcPerVP(game.generation, game.gameOptions.preludeExtension);
 }

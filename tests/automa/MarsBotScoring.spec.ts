@@ -12,7 +12,7 @@ import {Turmoil} from '@/server/turmoil/Turmoil';
 import {testGame} from '../TestGame';
 import {fakeMarsBot} from './FakeMarsBot';
 
-/** A bot on a 2-player game, with the award values in `awardValues`. */
+/** Builds a fake MarsBot on a 2-player game, scoring each award from `awardValues`. */
 function setup(fields: Partial<IMarsBot> = {}, awardValues: Record<string, number> = {}) {
   const [game, human, botPlayer] = testGame(2, {turmoilExtension: true});
   const marsBot = fakeMarsBot({
@@ -27,7 +27,7 @@ function setup(fields: Partial<IMarsBot> = {}, awardValues: Record<string, numbe
   return {game, human, botPlayer, marsBot};
 }
 
-/** An empty land space whose six neighbours are all empty land. */
+/** Finds an empty land space whose six neighbours are all empty land. */
 function inlandSpace(marsBot: IMarsBot): Space {
   return marsBot.game.board.getAvailableSpacesOnLand(marsBot.player).find((space) => {
     const adjacent = marsBot.game.board.getAdjacentSpaces(space);
@@ -45,12 +45,16 @@ describe('MarsBotScoring', () => {
 
   it('scores 5 VP for each milestone MarsBot claimed', () => {
     const {game, human, botPlayer, marsBot} = setup();
-    game.claimedMilestones.push({player: botPlayer, milestone: new Terraformer()}, {player: human, milestone: new Mayor()});
+    game.claimedMilestones.push(
+      {player: botPlayer, milestone: new Terraformer()},
+      {player: human, milestone: new Mayor()},
+    );
 
     const vp = new MarsBotScoring(marsBot).calculate();
 
+    const expectedDetails = [{message: 'Claimed ${0} milestone', messageArgs: ['Terraformer'], victoryPoint: 5}];
     expect(vp.milestones).eq(5);
-    expect(vp.detailsMilestones).deep.eq([{message: 'Claimed ${0} milestone', messageArgs: ['Terraformer'], victoryPoint: 5}]);
+    expect(vp.detailsMilestones).deep.eq(expectedDetails);
   });
 
   for (const run of [
@@ -71,8 +75,14 @@ describe('MarsBotScoring', () => {
     const {game, human, marsBot} = setup({}, {Banker: 1});
     game.fundedAwards.push({player: human, award: new Banker()});
 
-    expect(new MarsBotScoring(marsBot).calculate().detailsAwards)
-      .deep.eq([{message: '${0} place for ${1} award (funded by ${2})', messageArgs: ['1st', 'Banker', human.name], victoryPoint: 5}]);
+    const vp = new MarsBotScoring(marsBot).calculate();
+
+    const expectedDetails = [{
+      message: '${0} place for ${1} award (funded by ${2})',
+      messageArgs: ['1st', 'Banker', human.name],
+      victoryPoint: 5,
+    }];
+    expect(vp.detailsAwards).deep.eq(expectedDetails);
   });
 
   it("scores MarsBot's greeneries, and the greeneries next to its cities", () => {
@@ -85,7 +95,8 @@ describe('MarsBotScoring', () => {
 
     const vp = new MarsBotScoring(marsBot).calculate();
 
-    expect({greenery: vp.greenery, cityAdjacentGreenery: vp.cityAdjacentGreenery}).deep.eq({greenery: 1, cityAdjacentGreenery: 2});
+    expect(vp.greenery).eq(1);
+    expect(vp.cityAdjacentGreenery).eq(2);
   });
 
   it("scores 1 VP for each space next to the Neural Instance that the player doesn't hold", () => {
@@ -161,7 +172,9 @@ describe('MarsBotScoring', () => {
 
   it('scores no Turmoil VP without Turmoil', () => {
     const [game, human, botPlayer] = testGame(2);
-    const marsBot = fakeMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, neuralInstanceSpace: undefined});
+    const marsBot = fakeMarsBot({
+      game, player: botPlayer, humanPlayer: human, megacredits: 0, neuralInstanceSpace: undefined,
+    });
 
     expect(new MarsBotScoring(marsBot).calculate().turmoilVP).eq(0);
   });
@@ -174,6 +187,7 @@ describe('MarsBotScoring', () => {
 
     const vp = new MarsBotScoring(marsBot).calculate();
 
-    expect({corpVP: vp.corpVP, total: vp.total}).deep.eq({corpVP: 4, total: 20 + 5 + 5 + 2 + 1 + 4});
+    expect(vp.corpVP).eq(4);
+    expect(vp.total).eq(20 + 5 + 5 + 2 + 1 + 4);
   });
 });

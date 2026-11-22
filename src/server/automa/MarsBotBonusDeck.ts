@@ -1,9 +1,21 @@
 import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
-import {createBaseBonusCards, createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';
 import {Random} from '../../common/utils/Random';
+
+/** The bonus cards in the base game deck (B01-B08), before any expansion swaps some out. */
+export const BASE_BONUS_CARDS: ReadonlyArray<BonusCardName> = [
+  BonusCardName.METEOR_SHOWER,
+  BonusCardName.INVASIVE_SPECIES,
+  BonusCardName.RESEARCH_AND_DEVELOPMENT,
+  BonusCardName.OVERACHIEVEMENT,
+  BonusCardName.EXPEDITED_CONSTRUCTION,
+  BonusCardName.LOBBYISTS,
+  BonusCardName.LOCAL_NEURAL_INSTANCE,
+  BonusCardName.CORPORATE_COMPETITION,
+];
 
 /** The MarsBot bonus card deck. */
 export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
@@ -19,7 +31,7 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
    * Foothold); B19/B20 are set aside and injected into the action deck each generation (C-10/C-11).
    */
   public static create(random: Random, expansions: {venus?: boolean, colonies?: boolean} = {}): MarsBotBonusDeck {
-    const cards = createBaseBonusCards();
+    const cards = BASE_BONUS_CARDS.map(createBonusCard);
     const replace = (name: BonusCardName, withName: BonusCardName) => {
       cards[cards.findIndex((c) => c.name === name)] = createBonusCard(withName);
     };

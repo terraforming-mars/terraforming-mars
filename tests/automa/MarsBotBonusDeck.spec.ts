@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
+import {BASE_BONUS_CARDS, MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
-import {createBaseBonusCards, createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {toName} from '@/common/utils/utils';
 
@@ -52,8 +52,7 @@ describe('MarsBotBonusDeck', () => {
     },
   ]) {
     it('swaps cards in the ' + run.expansions + ' deck', () => {
-      const expected = createBaseBonusCards()
-        .map(toName)
+      const expected = BASE_BONUS_CARDS
         .filter((name) => !run.expected.removed.some((removed) => removed === name))
         .concat(run.expected.added);
 

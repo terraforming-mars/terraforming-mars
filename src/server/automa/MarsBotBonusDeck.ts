@@ -1,5 +1,5 @@
 import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
-import {createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {createBaseBonusCards, createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';
@@ -36,8 +36,8 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
   }
 
   public static deserialize(d: SerializedDeck<BonusCardName>, random: Random): MarsBotBonusDeck {
-    const deck = marsBotBonusCardsFromJSON(d.drawPile);
-    const discarded = marsBotBonusCardsFromJSON(d.discardPile);
+    const deck = d.drawPile.map(createBonusCard);
+    const discarded = d.discardPile.map(createBonusCard);
     return new MarsBotBonusDeck(deck, discarded, random);
   }
 }

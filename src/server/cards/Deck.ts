@@ -10,7 +10,7 @@ import {Named} from '@/common/Types';
  * A deck of cards to draw from, and also its discard pile.
  */
 export class Deck<T extends Named<CardName>> {
-  private readonly type: string;
+  protected readonly type: string;
   public drawPile: Array<T>;
   public discardPile: Array<T>;
   private readonly random: Random;
@@ -83,30 +83,6 @@ export class Deck<T extends Named<CardName>> {
       throw new Error(`Unexpected empty ${this.type} deck`);
     }
     return card;
-  }
-
-  public drawByConditionOrThrow(logger: Logger, total: number, include: (card: T) => boolean) {
-    const result: Array<T> = [];
-    const discardedCards = new Array<CardName>();
-
-    while (result.length < total) {
-      if (discardedCards.length >= this.drawPile.length + this.discardPile.length) {
-        logger.log(`discarded every ${this.type} card without a match`);
-        break;
-      }
-      const projectCard = this.drawOrThrow(logger);
-      if (include(projectCard)) {
-        result.push(projectCard);
-      } else {
-        discardedCards.push(projectCard.name);
-        this.discard(projectCard);
-      }
-    }
-    if (discardedCards.length > 0) {
-      logger.log('Discarded ${0} cards ${1}', (b) => b.number(discardedCards.length).cardNames(discardedCards, {ellipsis: true}));
-    }
-
-    return result;
   }
 
   public discard(...cards: Array<T>): void {

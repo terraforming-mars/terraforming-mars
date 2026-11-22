@@ -10,7 +10,7 @@ export class ResearchAndDevelopmentMarsBot extends MarsBotBonusCardEffect {
   public override resolve(marsBot: IMarsBot): boolean {
     const drawnCard = marsBot.game.projectDeck.draw(marsBot.game);
     if (drawnCard !== undefined) {
-      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(this.name).card(drawnCard));
+      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.bonusCardName(this.name).card(drawnCard));
       marsBot.resolveProjectCard(drawnCard);
     }
     return false;

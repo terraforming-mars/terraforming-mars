@@ -91,6 +91,11 @@ export class MessageBuilder {
     return this;
   }
 
+  public bonusCardName(value: CardName): this {
+    this.push({type: LogMessageDataType.BONUS_CARD, value});
+    return this;
+  }
+
   public award(value: IAward): this {
     this.push({type: LogMessageDataType.AWARD, value: value.name});
     return this;

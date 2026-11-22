@@ -17,11 +17,11 @@ export class InvestorsMarsBot extends MarsBotBonusCardEffect {
       const mostIndex = marsBotBoard.getMostAdvancedTrackIndex();
       marsBot.maybeAdvanceTrack(leastIndex);
       marsBotBoard.tracks[mostIndex].regress();
-      marsBot.game.log('MarsBot (${0}): advance least-advanced track, move most-advanced track back', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): advance least-advanced track, move most-advanced track back', (b) => b.bonusCardName(this.name));
     } else {
       const amount = marsBotBoard.tracks[leastIndex].position;
       marsBot.gainMc(amount);
-      marsBot.game.log('MarsBot (${0}): +${1}:r:mc: from the least-advanced track', (b) => b.cardName(this.name).number(amount));
+      marsBot.game.log('MarsBot (${0}): +${1}:r:mc: from the least-advanced track', (b) => b.bonusCardName(this.name).number(amount));
     }
     return false;
   }

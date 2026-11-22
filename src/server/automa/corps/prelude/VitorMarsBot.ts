@@ -17,7 +17,7 @@ export class VitorMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    marsBot.game.log('MarsBot (${0}): ${1} separated from bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B04_OVERACHIEVEMENT).name));
+    marsBot.game.log('MarsBot (${0}): ${1} separated from bonus deck', (b) => b.cardName(this.name).bonusCardName(createBonusCard(BonusCardId.B04_OVERACHIEVEMENT).name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {

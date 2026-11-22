@@ -15,7 +15,7 @@ export class ExpeditedConstructionColoniesMarsBot extends MarsBotBonusCardEffect
     if (citySpace !== undefined) {
       marsBot.game.addCity(marsBot.player, citySpace);
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(citySpace));
-      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.bonusCardName(this.name));
       return true;
     }
 
@@ -23,13 +23,13 @@ export class ExpeditedConstructionColoniesMarsBot extends MarsBotBonusCardEffect
     const colonyCount = marsBot.game.colonies.filter((c) => c.colonies.includes(marsBot.player.id)).length;
     if (colonyCount <= 1) {
       if (marsBot.maybePlaceRandomColony()) {
-        marsBot.game.log('MarsBot (${0}): places a colony', (b) => b.cardName(this.name));
+        marsBot.game.log('MarsBot (${0}): places a colony', (b) => b.bonusCardName(this.name));
         return false;
       }
     }
 
     // C-15c: no effect
-    marsBot.game.log('MarsBot (${0}): no effect', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): no effect', (b) => b.bonusCardName(this.name));
     return false;
   }
 }

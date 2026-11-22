@@ -16,7 +16,7 @@ export class NirgalEnterprisesMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B04_OVERACHIEVEMENT);
-    marsBot.game.log('MarsBot (${0}): ${1} removed from bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B04_OVERACHIEVEMENT).name));
+    marsBot.game.log('MarsBot (${0}): ${1} removed from bonus deck', (b) => b.cardName(this.name).bonusCardName(createBonusCard(BonusCardId.B04_OVERACHIEVEMENT).name));
   }
 
   public override awardScoreBonus(): number {

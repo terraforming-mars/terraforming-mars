@@ -79,6 +79,9 @@ type Types = {
 } | {
   type: LogMessageDataType.CARD_RESOURCE;
   value: CardResource;
+} | {
+  type: LogMessageDataType.BONUS_CARD;
+  value: CardName;
 };
 
 export type LogMessageData = Types & {

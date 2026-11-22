@@ -13,7 +13,7 @@ export class DoItRightMarsBot extends LobbyistsBase {
       this.maybePlaceOcean(marsBot)) {
       return false;
     }
-    marsBot.game.log('MarsBot (${0}): no effect', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): no effect', (b) => b.bonusCardName(this.name));
     return false;
   }
 }

@@ -16,12 +16,12 @@ export class GrayEminenceMarsBot extends MarsBotBonusCardEffect {
     for (let i = 0; i < 2; i++) {
       if (!turmoil.delegateReserve.has(marsBot.player)) {
         marsBot.gainMc(2);
-        marsBot.game.log('MarsBot (${0}): no delegate in reserve, +2:r:mc:', (b) => b.cardName(this.name));
+        marsBot.game.log('MarsBot (${0}): no delegate in reserve, +2:r:mc:', (b) => b.bonusCardName(this.name));
         continue;
       }
       const partyName = new MarsBotTurmoilHelper(marsBot.game).selectGrayEminenceParty();
       turmoil.sendDelegateToParty(marsBot.player, partyName, marsBot.game);
-      marsBot.game.log('MarsBot (${0}): places a delegate in ${1}', (b) => b.cardName(this.name).partyName(partyName));
+      marsBot.game.log('MarsBot (${0}): places a delegate in ${1}', (b) => b.bonusCardName(this.name).partyName(partyName));
     }
     return false;
   }

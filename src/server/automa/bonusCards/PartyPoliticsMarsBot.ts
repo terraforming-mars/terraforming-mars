@@ -14,7 +14,7 @@ export class PartyPoliticsMarsBot extends MarsBotBonusCardEffect {
     // T-7: Place 1 delegate from reserve using the priority list
     const placed = new MarsBotTurmoilHelper(marsBot.game).maybePlaceDelegate();
     if (placed === undefined) {
-      marsBot.game.log('MarsBot (${0}): no delegates in reserve', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): no delegates in reserve', (b) => b.bonusCardName(this.name));
       return false;
     }
 
@@ -24,11 +24,11 @@ export class PartyPoliticsMarsBot extends MarsBotBonusCardEffect {
     if (turmoil.delegateReserve.has(marsBot.player) && marsBot.megacredits >= 5) {
       const revealedCard = marsBot.game.projectDeck.draw(marsBot.game);
       if (revealedCard !== undefined) {
-        marsBot.game.log('MarsBot (${0}): reveals ${1} (cost ${2})', (b) => b.cardName(this.name).card(revealedCard).number(revealedCard.cost));
+        marsBot.game.log('MarsBot (${0}): reveals ${1} (cost ${2})', (b) => b.bonusCardName(this.name).card(revealedCard).number(revealedCard.cost));
         marsBot.game.projectDeck.discardPile.push(revealedCard);
         if (revealedCard.cost % 3 === 0) {
           marsBot.loseMc(5);
-          marsBot.game.log('MarsBot (${0}): spends 5:r:mc: to place a second delegate', (b) => b.cardName(this.name));
+          marsBot.game.log('MarsBot (${0}): spends 5:r:mc: to place a second delegate', (b) => b.bonusCardName(this.name));
           new MarsBotTurmoilHelper(marsBot.game).maybePlaceDelegate();
         }
       }

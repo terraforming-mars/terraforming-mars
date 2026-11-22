@@ -24,7 +24,7 @@ export abstract class MarsBotBonusCardEffect {
 
   /** Logs that this card is destroyed, and returns true for `resolve` to pass on. */
   protected logDestroyed(marsBot: IMarsBot): boolean {
-    marsBot.game.log('MarsBot (${0}): card destroyed', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): card destroyed', (b) => b.bonusCardName(this.name));
     return true;
   }
 }

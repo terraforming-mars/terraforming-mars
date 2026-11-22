@@ -29,13 +29,13 @@ export function maybeRemoveAnimalOrMicrobe(marsBot: IMarsBot, cardName: CardName
     const card = tied.length > 1 ? pickByFlippedCard(game, tied) ?? tied[0] : tied[0];
     humanPlayer.removeResourceFrom(card, 1, {removingPlayer: marsBot.player, log: false});
     game.log('MarsBot (${0}): removed 1 ${1} from ${2}',
-      (b) => b.cardName(cardName).rawString(card.resourceType ?? '').card(card));
+      (b) => b.bonusCardName(cardName).rawString(card.resourceType ?? '').card(card));
     return true;
   }
   if (isProtected) {
-    game.log('MarsBot (${0}): blocked by Protected Habitats', (b) => b.cardName(cardName));
+    game.log('MarsBot (${0}): blocked by Protected Habitats', (b) => b.bonusCardName(cardName));
   } else {
-    game.log('MarsBot (${0}): no animal/microbe resources to remove', (b) => b.cardName(cardName));
+    game.log('MarsBot (${0}): no animal/microbe resources to remove', (b) => b.bonusCardName(cardName));
   }
   return false;
 }

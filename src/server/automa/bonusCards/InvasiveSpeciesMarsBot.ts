@@ -18,15 +18,15 @@ export class InvasiveSpeciesMarsBot extends MarsBotBonusCardEffect {
       // Without Venus Next the floater goes to Titan's storage area, and nowhere when Titan isn't in play (C-13, C-14)
       if (expansions.venus) {
         marsBot.addFloaters(1);
-        marsBot.game.log('MarsBot (${0}): +1 floater', (b) => b.cardName(this.name));
+        marsBot.game.log('MarsBot (${0}): +1 floater', (b) => b.bonusCardName(this.name));
       } else if (marsBot.game.colonies.some((colony) => colony.name === ColonyName.TITAN)) {
         marsBot.addFloaters(1);
-        marsBot.game.log('MarsBot (${0}): +1 floater in Titan storage', (b) => b.cardName(this.name));
+        marsBot.game.log('MarsBot (${0}): +1 floater in Titan storage', (b) => b.bonusCardName(this.name));
       }
-      marsBot.game.log('MarsBot (${0}): +2:r:mc:', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): +2:r:mc:', (b) => b.bonusCardName(this.name));
     } else {
       marsBot.gainMc(5);
-      marsBot.game.log('MarsBot (${0}): +5:r:mc:', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): +5:r:mc:', (b) => b.bonusCardName(this.name));
     }
     // The card is never destroyed
     return false;

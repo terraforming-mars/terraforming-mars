@@ -10,9 +10,9 @@ export class OuterSystemFootholdMarsBot extends MarsBotBonusCardEffect {
   public override resolve(marsBot: IMarsBot): boolean {
     // A colony on a random eligible tile
     if (marsBot.maybePlaceRandomColony()) {
-      marsBot.game.log('MarsBot (${0}): places a colony', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): places a colony', (b) => b.bonusCardName(this.name));
     } else {
-      marsBot.game.log('MarsBot (${0}): no colony tile has room', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): no colony tile has room', (b) => b.bonusCardName(this.name));
     }
 
     // Then MarsBot draws a bonus card and discards it without resolving it. This card sits out of
@@ -24,7 +24,7 @@ export class OuterSystemFootholdMarsBot extends MarsBotBonusCardEffect {
     bonusDeck.discardPile.push(...self);
     if (drawn !== undefined) {
       bonusDeck.discard(drawn);
-      marsBot.game.log('MarsBot (${0}): draws and discards ${1}', (b) => b.cardName(this.name).cardName(drawn.name));
+      marsBot.game.log('MarsBot (${0}): draws and discards ${1}', (b) => b.bonusCardName(this.name).bonusCardName(drawn.name));
     }
     return false;
   }

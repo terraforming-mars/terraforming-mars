@@ -19,7 +19,7 @@ export class SeptumTribusMarsBot extends MarsBotCorp {
     marsBot.removeBonusCard(BonusCardId.B21_PARTY_POLITICS);
     marsBot.addBonusCardToBonusDeck(BonusCardId.B29_GRAY_EMINENCE);
     marsBot.game.log('MarsBot (${0}): ${1} removed, ${2} added',
-      (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B21_PARTY_POLITICS).name).cardName(createBonusCard(BonusCardId.B29_GRAY_EMINENCE).name));
+      (b) => b.cardName(this.name).bonusCardName(createBonusCard(BonusCardId.B21_PARTY_POLITICS).name).bonusCardName(createBonusCard(BonusCardId.B29_GRAY_EMINENCE).name));
     // The unused colour's delegates count as MarsBot's own.
     const turmoil = marsBot.game.turmoil;
     if (turmoil) {

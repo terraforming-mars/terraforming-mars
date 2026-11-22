@@ -18,7 +18,7 @@ export class LobbyistsVenusMarsBot extends LobbyistsBase {
       // Pristar's cube cancels only the first of the 2 steps
       const steps = marsBot.interceptsParameterRaise(GlobalParameter.VENUS) ? 1 : 2;
       marsBot.game.increaseVenusScaleLevel(marsBot.player, steps);
-      marsBot.game.log('MarsBot (${0}): raises Venus ${1} step(s)', (b) => b.cardName(this.name).number(steps));
+      marsBot.game.log('MarsBot (${0}): raises Venus ${1} step(s)', (b) => b.bonusCardName(this.name).number(steps));
       return false;
     }
 

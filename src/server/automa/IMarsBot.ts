@@ -33,7 +33,7 @@ export interface IMarsBot {
   readonly temperatureRaises: number;
   /** How many bonus cards have been destroyed while the bot resolved them. */
   readonly destroyedBonusCards: number;
-  /** The bot's Shipping Board, where its colonies and trades store their resources (C-18). */
+  /** The bot's Shipping Board, where its colonies and trades store their resources (rulebook C, p.5). */
   readonly shippingBoard: MarsBotShippingBoard;
   /**
    * Adds floaters to the bot's floater pool with Venus Next.

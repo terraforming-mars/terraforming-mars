@@ -6,16 +6,16 @@ import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 
-/** Breaks a tie among candidate tiles by revealing a project card, like C-15b (C-17c). */
+/** Breaks a tie among candidate tiles by revealing a project card (rulebook C, p.5). */
 function selectTiedColony(game: IGame, candidates: Array<IColony>): IColony {
   return pickByFlippedCard(game, candidates) ?? candidates[0];
 }
 
 /**
- * Picks the colony tile MarsBot trades with (C-17).
+ * Picks the colony tile MarsBot trades with (rulebook C, p.5).
  *
- * The tile furthest along its colony track wins (C-17a). A tie goes to a tile with MarsBot's colony
- * (C-17b), then to a revealed project card (C-17c). Returns undefined when no tile can be traded with.
+ * The tile furthest along its colony track wins. A tie goes to a tile with MarsBot's colony,
+ * then to a revealed project card. Returns undefined when no tile can be traded with.
  */
 export function selectTradeColony(marsBot: IMarsBot): IColony | undefined {
   const game = marsBot.game;
@@ -27,14 +27,14 @@ export function selectTradeColony(marsBot: IMarsBot): IColony | undefined {
     return tradeable[0];
   }
 
-  // C-17a: highest track position
+  // Highest track position
   const maxTrack = Math.max(...tradeable.map((c) => c.trackPosition));
   let candidates = tradeable.filter((c) => c.trackPosition === maxTrack);
   if (candidates.length === 1) {
     return candidates[0];
   }
 
-  // C-17b: prefer tiles where MarsBot has a colony
+  // Prefer tiles where MarsBot has a colony
   const withMarsBotColony = candidates.filter((c) => c.colonies.includes(marsBot.player.id));
   if (withMarsBotColony.length === 1) {
     return withMarsBotColony[0];
@@ -43,17 +43,17 @@ export function selectTradeColony(marsBot: IMarsBot): IColony | undefined {
     candidates = withMarsBotColony;
   }
 
-  // C-17c: random among remaining tied candidates
+  // Random among remaining tied candidates
   return selectTiedColony(game, candidates);
 }
 
 /**
  * Trades with `colony` for MarsBot.
  *
- * MarsBot pays 1 M€ (C-17d) and stores 2 resources in the tile's storage area instead of the track's
- * income, 3 when it has a colony there (C-20). Europa raises its TR instead (C-24b), and Titan gives
- * floaters (C-23). The player's colonies on the tile pay their colony bonus, the track drops back to
- * the number of colonies, and the tile is visited until the end of the generation (C-22).
+ * MarsBot pays 1 M€ and stores 2 resources in the tile's storage area instead of the track's
+ * income, 3 when it has a colony there. Europa raises its TR instead, and Titan gives
+ * floaters. The player's colonies on the tile pay their colony bonus, the track drops back to
+ * the number of colonies, and the tile is visited until the end of the generation (rulebook C, p.5).
  */
 export function tradeWithColony(marsBot: IMarsBot, colony: IColony): void {
   const game = marsBot.game;
@@ -94,7 +94,7 @@ export function tradeWithColony(marsBot: IMarsBot, colony: IColony): void {
 }
 
 /**
- * Trades with the colony MarsBot picks, for the bonus card `cardName` (C-17).
+ * Trades with the colony MarsBot picks, for the bonus card `cardName` (rulebook C, p.5).
  *
  * Does nothing, with no Failed Action, when no colony can be traded with or MarsBot has no M€ to pay.
  */

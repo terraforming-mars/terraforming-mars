@@ -14,14 +14,6 @@ import {Space} from '@/server/boards/Space';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 
 /**
- * The Corporate Competition helpers that don't cost MarsBot 5 M€ (rulebook C, p.12).
- *
- * The modular award list on p.16 says Forecaster gains MarsBot 5 M€ instead, which reads like Administrator's
- * line copied over. This follows p.12.
- */
-const FREE_HELPER_AWARDS: ReadonlyArray<AwardName> = ['Forecaster'];
-
-/**
  * Base class for Corporate Competition cards.
  *
  * Every card can help with every award, since random awards bring other boards' awards into play.
@@ -50,7 +42,9 @@ export abstract class CorporateCompetitionBase extends MarsBotBonusCard {
 
     for (const {award} of sorted) {
       if (this.tryHelperAction(marsBot, award.name)) {
-        if (FREE_HELPER_AWARDS.includes(award.name)) {
+        // Forecaster's helper is free (rulebook C, p.12). The modular award list on p.16 says it gains MarsBot
+        // 5 M€ instead, which reads like Administrator's line copied over.
+        if (award.name === 'Forecaster') {
           marsBot.game.log('MarsBot (${0}): helps with ${1}', (b) => b.bonusCardName(this.name).award(award));
         } else {
           // A helper can itself cost M€ (a colony cube), so MarsBot may have less than 5 left

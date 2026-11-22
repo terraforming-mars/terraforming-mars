@@ -92,8 +92,3 @@ export function createBonusCard(name: BonusCardName): MarsBotBonusCard {
   }
   return new Klass();
 }
-
-/** Restore bonus cards from their serialized names. */
-export function marsBotBonusCardsFromJSON(names: ReadonlyArray<BonusCardName>): Array<MarsBotBonusCard> {
-  return names.map(createBonusCard);
-}

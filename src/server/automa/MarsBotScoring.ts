@@ -111,7 +111,7 @@ export class MarsBotScoring {
     return -1 * cities.length;
   }
 
-  /** Scores 1 VP for each Party Leader or Chairman position MarsBot holds (T-13). */
+  /** Scores 1 VP for each Party Leader or Chairman position MarsBot holds (rulebook C, p.7). */
   private calculateTurmoilVP(): number {
     if (!this.marsBot.game.gameOptions.turmoilExtension || this.marsBot.game.turmoil === undefined) {
       return 0;

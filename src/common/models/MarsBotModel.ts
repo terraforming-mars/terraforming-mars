@@ -20,7 +20,7 @@ export type MarsBotVPModel = {
   mcToVP: number;
   cardVP: number;
   vermin: number;
-  turmoilVP: number; // T-13: 1 VP per party leader or chairman position
+  turmoilVP: number; // 1 VP per party leader or chairman position (rulebook C, p.7)
   corpVP: number; // VP the corporation adds at the end (Viron)
   total: number;
   detailsMilestones: ReadonlyArray<MADetail>;

@@ -58,7 +58,7 @@ export class Server {
       corporations: sizes(game.corporationDeck),
       preludes: options.preludeExtension ? sizes(game.preludeDeck) : undefined,
       ceos: options.ceoExtension ? sizes(game.ceoDeck) : undefined,
-      globalEvents: dealer === undefined ? undefined : {drawPile: dealer.deck.length, discardPile: dealer.discards.length},
+      globalEvents: dealer === undefined ? undefined : sizes(dealer.deck),
     };
   }
 

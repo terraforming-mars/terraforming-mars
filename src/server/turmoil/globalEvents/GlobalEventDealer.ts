@@ -1,12 +1,15 @@
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from './IGlobalEvent';
 import {IGame} from '../../IGame';
-import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
+import {LegacySerializedGlobalEventDealer} from './LegacySerializedGlobalEventDealer';
 import {GlobalEventManifest, ModuleManifest} from '../../cards/ModuleManifest';
 import {isCompatibleWith} from '../../cards/CardFactorySpec';
 import {inplaceShuffle} from '../../utils/shuffle';
 import {GameModule} from '../../../common/cards/GameModule';
-import {toName} from '../../../common/utils/utils';
+import {Deck} from '@/server/cards/Deck';
+import {Random} from '@/common/utils/Random';
+import {SerializedDeck} from '@/server/cards/SerializedDeck';
+import {Logger} from '@/server/logs/Logger';
 
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
@@ -46,10 +49,32 @@ export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalE
   return undefined;
 }
 
+function globalEventsFromJSON(names: ReadonlyArray<GlobalEventName>): Array<IGlobalEvent> {
+  const events: Array<IGlobalEvent> = [];
+  for (const name of names) {
+    const globalEvent = getGlobalEventByName(name);
+    if (globalEvent !== undefined) {
+      events.push(globalEvent);
+    }
+  }
+  return events;
+}
+
+export class GlobalEventDeck extends Deck<IGlobalEvent, GlobalEventName> {
+  public constructor(deck: Array<IGlobalEvent>, discarded: Array<IGlobalEvent>, random: Random) {
+    super('global event', deck, discarded, random);
+  }
+
+  public static deserialize(d: SerializedDeck<GlobalEventName> | LegacySerializedGlobalEventDealer, random: Random): GlobalEventDeck {
+    if ('drawPile' in d) {
+      return new GlobalEventDeck(globalEventsFromJSON(d.drawPile), globalEventsFromJSON(d.discardPile), random);
+    }
+    return new GlobalEventDeck(globalEventsFromJSON(d.deck), globalEventsFromJSON(d.discarded), random);
+  }
+}
+
 export class GlobalEventDealer {
-  constructor(
-    public readonly deck: Array<IGlobalEvent>,
-    public readonly discards: Array<IGlobalEvent>) {}
+  private constructor(public readonly deck: GlobalEventDeck) {}
 
   public static newInstance(game: IGame): GlobalEventDealer {
     const events: Array<IGlobalEvent> = [];
@@ -90,39 +115,22 @@ export class GlobalEventDealer {
       }
     }
     inplaceShuffle(events, game.rng);
-    return new GlobalEventDealer(events, []);
+    return new GlobalEventDealer(new GlobalEventDeck(events, [], game.rng));
   }
 
-  public draw(): IGlobalEvent | undefined {
-    return this.deck.pop();
+  public draw(logger: Logger): IGlobalEvent | undefined {
+    return this.deck.draw(logger);
   }
 
   public discard(globalEvent: IGlobalEvent) {
-    this.discards.push(globalEvent);
+    this.deck.discard(globalEvent);
   }
 
-  public serialize(): SerializedGlobalEventDealer {
-    return {
-      deck: this.deck.map(toName),
-      discarded: this.discards.map(toName),
-    };
+  public serialize(): SerializedDeck<GlobalEventName> {
+    return this.deck.serialize();
   }
 
-  public static deserialize(d: SerializedGlobalEventDealer): GlobalEventDealer {
-    const deck: Array<IGlobalEvent> = [];
-    d.deck.forEach((element: GlobalEventName) => {
-      const globalEvent = getGlobalEventByName(element);
-      if (globalEvent !== undefined) {
-        deck.push(globalEvent);
-      }
-    });
-    const discardPile: Array<IGlobalEvent> = [];
-    d.discarded.forEach((element: GlobalEventName) => {
-      const globalEvent = getGlobalEventByName(element);
-      if (globalEvent !== undefined) {
-        discardPile.push(globalEvent);
-      }
-    });
-    return new GlobalEventDealer(deck, discardPile);
+  public static deserialize(d: SerializedDeck<GlobalEventName> | LegacySerializedGlobalEventDealer, random: Random): GlobalEventDealer {
+    return new GlobalEventDealer(GlobalEventDeck.deserialize(d, random));
   }
 }

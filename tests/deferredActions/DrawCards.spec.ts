@@ -5,7 +5,7 @@ import {IGame} from '../../src/server/IGame';
 import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {ProjectDeck} from '../../src/server/cards/Deck';
+import {ProjectDeck} from '@/server/cards/Decks';
 import {formatMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {cast} from '@/common/utils/utils';

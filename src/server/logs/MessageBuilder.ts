@@ -20,6 +20,7 @@ import {SpaceId} from '../../common/Types';
 import {toName} from '../../common/utils/utils';
 import {Resource} from '@/common/Resource';
 import {CardResource} from '@/common/CardResource';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 
 export class MessageBuilder {
   protected message: Message;
@@ -88,6 +89,11 @@ export class MessageBuilder {
       data.attrs = attrs;
     }
     this.push(data);
+    return this;
+  }
+
+  public bonusCardName(value: BonusCardName): this {
+    this.push({type: LogMessageDataType.BONUS_CARD, value});
     return this;
   }
 

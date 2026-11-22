@@ -1,5 +1,6 @@
-import {BonusCardId, CubeType} from '@/common/automa/AutomaTypes';
+import {CubeType} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
@@ -11,7 +12,7 @@ export class FactorumMarsBot extends MarsBotCorp {
       name: CardName.FACTORUM,
       description: 'Tag: Power. White cubes on building track: each advance stores 1 M€ on card. Each generation: add Supply and Demand to action deck.',
       tags: [Tag.POWER],
-      actionDeckBonusCard: BonusCardId.B24_SUPPLY_AND_DEMAND,
+      actionDeckBonusCard: BonusCardName.SUPPLY_AND_DEMAND,
       trackCubes: whiteTrackCubes(0),
       trackCubesTriggerEveryAdvance: true,
     });
@@ -26,6 +27,6 @@ export class FactorumMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    marsBot.addBonusCardToActionDeck(BonusCardId.B24_SUPPLY_AND_DEMAND);
+    marsBot.addBonusCardToActionDeck(BonusCardName.SUPPLY_AND_DEMAND);
   }
 }

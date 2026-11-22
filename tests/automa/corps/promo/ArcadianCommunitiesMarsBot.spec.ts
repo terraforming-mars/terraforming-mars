@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TileType} from '@/common/TileType';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {ArcadianCommunitiesMarsBot} from '@/server/automa/corps/promo/ArcadianCommunitiesMarsBot';
 import {testGame} from '../../../TestGame';
 import {recordingMarsBot} from '../RecordingMarsBot';
@@ -11,8 +11,8 @@ describe('ArcadianCommunitiesMarsBot', () => {
 
     new ArcadianCommunitiesMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['resolveBonusCard(B22)']);
-    expect(new ArcadianCommunitiesMarsBot().actionDeckBonusCard).eq(BonusCardId.B22_SETTLERS);
+    expect(calls).deep.eq(['resolveBonusCard(Settlers)']);
+    expect(new ArcadianCommunitiesMarsBot().actionDeckBonusCard).eq(BonusCardName.SETTLERS);
   });
 
   it('pays 3 M€ for the tile MarsBot puts on a space with its marker, and no one else', () => {

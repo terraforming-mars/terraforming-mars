@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {FactorumMarsBot} from '@/server/automa/corps/promo/FactorumMarsBot';
 import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
@@ -18,6 +18,6 @@ describe('FactorumMarsBot', () => {
   it('has a white cube on every space of the building track, and Supply and Demand as its action deck bonus card', () => {
     expect(trackCubes(new FactorumMarsBot())).deep.eq(Array.from({length: 18}, (_, i) => `building white ${i + 1}`));
     expect(new FactorumMarsBot().trackCubesTriggerEveryAdvance).is.true;
-    expect(new FactorumMarsBot().actionDeckBonusCard).eq(BonusCardId.B24_SUPPLY_AND_DEMAND);
+    expect(new FactorumMarsBot().actionDeckBonusCard).eq(BonusCardName.SUPPLY_AND_DEMAND);
   });
 });

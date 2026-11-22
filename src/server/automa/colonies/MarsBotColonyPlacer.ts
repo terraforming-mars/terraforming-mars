@@ -23,7 +23,7 @@ export function eligibleColonies(marsBot: IMarsBot): Array<IColony> {
 }
 
 /**
- * Picks a colony tile for MarsBot to build on by revealing a project card (C-15b, C-16a).
+ * Picks a colony tile for MarsBot to build on by revealing a project card (rulebook C, p.4-5).
  *
  * Returns undefined when no tile is eligible.
  */
@@ -53,15 +53,15 @@ export function addRandomColonyTile(game: IGame): IColony | undefined {
 /**
  * Builds a colony for MarsBot on `colony`.
  *
- * MarsBot ignores the tile's printed reward and stores 2 resources in the tile's storage area instead
- * (C-19). Europa places an ocean, or takes a Failed Action when none fits (C-24a). Titan gives 2
- * floaters (C-23).
+ * MarsBot ignores the tile's printed reward and stores 2 resources in the tile's storage area instead.
+ * Europa places an ocean, or takes a Failed Action when none fits. Titan gives 2
+ * floaters (rulebook C, p.5).
  */
 export function placeColony(colony: IColony, marsBot: IMarsBot): void {
   const game = marsBot.game;
   const colonyName = colony.name;
 
-  // C-24a: Europa places an ocean instead of storing 2 resources
+  // Europa places an ocean instead of storing 2 resources
   if (colonyName === ColonyName.EUROPA) {
     // The colony is placed either way (no build bonus, the ocean is the reward). Only the ocean
     // gives way to a Failed Action when none fits (rulebook C, p.5).

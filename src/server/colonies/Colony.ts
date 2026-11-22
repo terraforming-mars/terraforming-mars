@@ -87,7 +87,7 @@ export abstract class Colony implements IColony {
   public addColony(player: IPlayer, options?: {giveBonusTwice?: boolean, skipBonus?: boolean}): void {
     player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-    if (options?.skipBonus !== true) { // MarsBot takes its own reward instead (rulebook C-19).
+    if (options?.skipBonus !== true) { // MarsBot takes its own reward instead (rulebook C, p.5).
       this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
       if (options?.giveBonusTwice === true) { // Vital Colony hook.
         this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);

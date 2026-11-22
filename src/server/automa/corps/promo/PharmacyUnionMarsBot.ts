@@ -19,7 +19,7 @@ export class PharmacyUnionMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     marsBot.removeBonusCard(BonusCardId.B01_METEOR_SHOWER);
     marsBot.addProjectCardsToBonusDeck(Tag.SCIENCE, 1);
-    marsBot.game.log('MarsBot (${0}): ${1} removed, science card added to bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B01_METEOR_SHOWER).name));
+    marsBot.game.log('MarsBot (${0}): ${1} removed, science card added to bonus deck', (b) => b.cardName(this.name).bonusCardName(createBonusCard(BonusCardId.B01_METEOR_SHOWER).name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {

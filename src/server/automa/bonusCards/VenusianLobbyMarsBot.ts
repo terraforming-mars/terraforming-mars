@@ -18,11 +18,11 @@ export class VenusianLobbyMarsBot extends MarsBotBonusCardEffect {
       if (venusTrack !== undefined) {
         marsBot.maybeAdvanceTrack(venusTrack);
       }
-      marsBot.game.log('MarsBot (${0}): raises Venus and advances the Venus track', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): raises Venus and advances the Venus track', (b) => b.bonusCardName(this.name));
       marsBot.advanceFurthestParameter(this.name);
     } else {
       marsBot.maybeAdvanceTrack(marsBot.marsBotBoard.getLeastAdvancedTrackIndex());
-      marsBot.game.log('MarsBot (${0}): advances the least-advanced track', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): advances the least-advanced track', (b) => b.bonusCardName(this.name));
     }
     return false;
   }

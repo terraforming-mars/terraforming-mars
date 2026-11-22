@@ -25,7 +25,7 @@ export class SpliceMarsBot extends MarsBotCorp {
     marsBot.gainMc(8);
     marsBot.removeBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT);
     marsBot.addProjectCardsToBonusDeck(Tag.MICROBE, 1);
-    marsBot.game.log('MarsBot (${0}): +8:r:mc:, ${1} removed, microbe card added to bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT).name));
+    marsBot.game.log('MarsBot (${0}): +8:r:mc:, ${1} removed, microbe card added to bonus deck', (b) => b.cardName(this.name).bonusCardName(createBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT).name));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {

@@ -12,10 +12,10 @@ export class SupplyAndDemandMarsBot extends MarsBotBonusCardEffect {
     if (taken > 0) {
       marsBot.setCorpState('mcOnCard', marsBot.getCorpState('mcOnCard') - taken);
       marsBot.gainMc(taken);
-      marsBot.game.log('MarsBot (${0}): takes ${1}:r:mc: from the corporation card', (b) => b.cardName(this.name).number(taken));
+      marsBot.game.log('MarsBot (${0}): takes ${1}:r:mc: from the corporation card', (b) => b.bonusCardName(this.name).number(taken));
     } else {
       marsBot.maybeAdvanceTrack(4);
-      marsBot.game.log('MarsBot (${0}): advance energy track', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): advance energy track', (b) => b.bonusCardName(this.name));
     }
     return false;
   }

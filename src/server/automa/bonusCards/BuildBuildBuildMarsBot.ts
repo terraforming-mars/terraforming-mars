@@ -45,7 +45,7 @@ export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(citySpace));
       const lost = marsBot.loseMc(5);
       marsBot.game.log('MarsBot (${0}): places a city next to a greenery of ${1}, loses ${2}:r:mc:',
-        (b) => b.cardName(this.name).player(marsBot.humanPlayer).number(lost));
+        (b) => b.bonusCardName(this.name).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
@@ -58,14 +58,14 @@ export class BuildBuildBuildMarsBot extends MarsBotBonusCardEffect {
       marsBot.removePlayedProjectCard(played);
       const lost = marsBot.loseMc(3);
       marsBot.game.log('MarsBot (${0}): places the tile of ${1} next to a city of ${2}, removes the card and loses ${3}:r:mc:',
-        (b) => b.cardName(this.name).card(played).player(marsBot.humanPlayer).number(lost));
+        (b) => b.bonusCardName(this.name).card(played).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
     marsBot.gainMc(3);
     marsBot.bonusDeck.drawPile.push(card);
     inplaceShuffle(marsBot.bonusDeck.drawPile, marsBot.game.rng);
-    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.bonusCardName(this.name));
     return true;
   }
 }

@@ -19,7 +19,7 @@ export class InterfaceHyperlinkMarsBot extends MarsBotBonusCardEffect {
     const count = Math.max(2, energyTrack === undefined ? 0 : marsBotBoard.tracks[energyTrack].position);
     const drawn = marsBot.game.projectDeck.drawN(marsBot.game, count);
     if (drawn.length === 0) {
-      marsBot.game.log('MarsBot (${0}): no cards to draw', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): no cards to draw', (b) => b.bonusCardName(this.name));
       return false;
     }
     // Science cards first, then the most expensive, then the most tags, then at random
@@ -30,10 +30,10 @@ export class InterfaceHyperlinkMarsBot extends MarsBotBonusCardEffect {
     const discarded = drawn.splice(2);
     marsBot.game.projectDeck.discard(...discarded);
     if (discarded.length > 0) {
-      marsBot.game.log('MarsBot (${0}): discards ${1}', (b) => b.cardName(this.name).cards(discarded));
+      marsBot.game.log('MarsBot (${0}): discards ${1}', (b) => b.bonusCardName(this.name).cards(discarded));
     }
     for (const card of drawn) {
-      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.cardName(this.name).card(card));
+      marsBot.game.log('MarsBot (${0}): draws and resolves ${1}', (b) => b.bonusCardName(this.name).card(card));
       marsBot.resolveProjectCard(card);
     }
     return this.logDestroyed(marsBot);

@@ -14,7 +14,7 @@ export class ExpeditedConstructionMarsBot extends MarsBotBonusCardEffect {
     if (space !== undefined) {
       marsBot.game.addCity(marsBot.player, space);
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(space));
-      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.bonusCardName(this.name));
       return true;
     }
     // No failed action if can't place

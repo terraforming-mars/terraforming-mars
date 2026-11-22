@@ -212,7 +212,8 @@ describe('CorporateCompetitionMarsBot', () => {
       const helped = new CorporateCompetitionMarsBot().tryHelperAction(bot.marsBot, run.award);
 
       const expected = board.getAvailableSpacesForGreenery(bot.botPlayer).filter(where[run.award]);
-      expect(bot.greenerySpaces.map((space) => space.id)).deep.eq(expected.map((space) => space.id));
+      const placedIds = bot.greenerySpaces.map((space) => space.id);
+      expect(placedIds).deep.eq(expected.map((space) => space.id));
       expect(helped).eq(run.expected);
     });
   }

@@ -97,7 +97,7 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Find the best space for MarsBot to place a greenery. Returns undefined if none available.
+   * Finds the best space for MarsBot to place a greenery, or undefined if none is available.
    *
    * @param filter limits the choice to the legal greenery spaces it accepts.
    */

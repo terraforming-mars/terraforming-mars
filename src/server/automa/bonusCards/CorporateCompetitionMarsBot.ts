@@ -120,9 +120,8 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
       }
       return false;
     };
-    // Reveals cards until one passes `filter`, plays it, then gains `mc`. The discards reshuffle
-    // as usual, and it gives up only once every card in the deck has been seen. It stops before
-    // drawing from an empty deck, so it never throws.
+    // Reveals cards until one passes `filter`, resolves it, then gains `mc` M€. It gives up only
+    // once the whole deck, discards included, has been seen.
     const revealAndResolveCard = (filter: (card: IProjectCard) => boolean, mc: number = 0) => {
       const [card] = game.projectDeck.drawByConditionOrThrow(game, 1, filter);
       if (card === undefined) {
@@ -191,7 +190,7 @@ export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {
     case 'Physicist': return advanceTrackOfEither([Tag.SCIENCE, Tag.SPACE], 'less');
     case 'Politician': return false;
     case 'Visionary': return advance(marsBotBoard.getLeastAdvancedTrackIndex(true));
-    // Venus Next: added to ALL Corporate Competition variants
+    // Venus Next adds this award to every Corporate Competition variant
     case 'Venuphile': return advanceTrackOf(Tag.VENUS);
     default:
       return false;

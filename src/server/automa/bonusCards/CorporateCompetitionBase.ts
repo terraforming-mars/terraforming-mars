@@ -22,10 +22,9 @@ import {IProjectCard} from '@/server/cards/IProjectCard';
 const FREE_HELPER_AWARDS: ReadonlyArray<AwardName> = ['Forecaster'];
 
 /**
- * The Corporate Competition cards, one for each board (B08-B13) and one for the Milestones & Awards expansion (B14).
+ * Base class for Corporate Competition cards.
  *
- * The cards differ only in the awards they print. Every card here can help with every award, since random awards
- * bring other boards' awards into play.
+ * Every card can help with every award, since random awards bring other boards' awards into play.
  */
 export abstract class CorporateCompetitionBase extends MarsBotBonusCard {
   public override resolve(marsBot: IMarsBot): boolean {

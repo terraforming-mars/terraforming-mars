@@ -9,7 +9,7 @@ describe('UnitedNationsMarsInitiativeMarsBot', () => {
 
     new UnitedNationsMarsInitiativeMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['returnSetupBonusCardToBonusDeck()', 'addBonusCardToBonusDeck(B31)']);
+    expect(calls).deep.eq(['returnSetupBonusCardToBonusDeck()', 'addBonusCardToBonusDeck(Government Subsidy)']);
   });
 
   // The start of a generation (rulebook B p.3)

@@ -1,5 +1,5 @@
-import {MarsBotBonusCard, createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from './MarsBotBonusCard';
-import {BonusCardId} from '../../common/automa/AutomaTypes';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
+import {createBaseBonusCards, createBonusCard, marsBotBonusCardsFromJSON} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';
@@ -20,15 +20,15 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
    */
   public static create(random: Random, expansions: {venus?: boolean, colonies?: boolean} = {}): MarsBotBonusDeck {
     const cards = createBaseBonusCards();
-    const replace = (id: BonusCardId, withId: BonusCardId) => {
-      cards[cards.findIndex((c) => c.id === id)] = createBonusCard(withId);
+    const replace = (name: BonusCardName, withName: BonusCardName) => {
+      cards[cards.findIndex((c) => c.name === name)] = createBonusCard(withName);
     };
     if (expansions.venus) {
-      replace(BonusCardId.B06_LOBBYISTS, BonusCardId.B15_LOBBYISTS_VENUS);
+      replace(BonusCardName.LOBBYISTS, BonusCardName.LOBBYISTS_VENUS);
     }
     if (expansions.colonies) {
-      replace(BonusCardId.B05_EXPEDITED_CONSTRUCTION, BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES);
-      cards.push(createBonusCard(BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD));
+      replace(BonusCardName.EXPEDITED_CONSTRUCTION, BonusCardName.EXPEDITED_CONSTRUCTION_COLONIES);
+      cards.push(createBonusCard(BonusCardName.OUTER_SYSTEM_FOOTHOLD));
     }
     const deck = new MarsBotBonusDeck(cards, [], random);
     deck.shuffle();

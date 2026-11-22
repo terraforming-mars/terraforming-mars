@@ -1,6 +1,5 @@
-import {BonusCardId} from '../../common/automa/AutomaTypes';
-import {GlobalParameter} from '../../common/GlobalParameter';
 import {BonusCardName} from '@/common/automa/BonusCardName';
+import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
@@ -95,11 +94,11 @@ export interface IMarsBot {
    *
    * Does nothing when the action deck already holds it.
    */
-  addBonusCardToActionDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToActionDeck(bonusCardName: BonusCardName): void;
   /** Shuffles a bonus card into the bonus deck's draw pile. */
-  addBonusCardToBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBonusDeck(bonusCardName: BonusCardName): void;
   /** Puts a bonus card at the bottom of the bonus deck's draw pile. */
-  addBonusCardToBottomOfBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBottomOfBonusDeck(bonusCardName: BonusCardName): void;
   /**
    * Reveals project cards until `count` of them carry `tag`, and shuffles those into the bonus deck.
    *
@@ -110,9 +109,9 @@ export interface IMarsBot {
    * Removes a bonus card from the bonus deck and from the action deck, for a corp's setup. When it
    * was the bonus card dealt at setup, the bonus deck deals a replacement into the action deck.
    */
-  removeBonusCard(bonusCardId: BonusCardId): void;
+  removeBonusCard(bonusCardName: BonusCardName): void;
   /** Resolves a bonus card's effect right away, outside the action deck. The card is not discarded. */
-  resolveBonusCard(bonusCardId: BonusCardId): void;
+  resolveBonusCard(bonusCardName: BonusCardName): void;
   /**
    * Discards the project card with the fewest tags from the bot's action deck, the first one on a tie.
    *

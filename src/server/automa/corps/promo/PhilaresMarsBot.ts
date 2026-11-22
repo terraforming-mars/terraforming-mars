@@ -1,8 +1,7 @@
 import {TileType} from '@/common/TileType';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {Space} from '@/server/boards/Space';
 
@@ -19,11 +18,11 @@ export class PhilaresMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     marsBot.placeGreenery();
     marsBot.setCorpState('scienceResources', 1);
-    marsBot.removeBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
-    marsBot.resolveBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE);
-    marsBot.addBonusCardToBonusDeck(BonusCardId.B27_BUILD_BUILD_BUILD);
+    marsBot.removeBonusCard(BonusCardName.LOCAL_NEURAL_INSTANCE);
+    marsBot.resolveBonusCard(BonusCardName.LOCAL_NEURAL_INSTANCE);
+    marsBot.addBonusCardToBonusDeck(BonusCardName.BUILD_BUILD_BUILD);
     marsBot.game.log('MarsBot (${0}): placed greenery, +1 science resource, ${1} removed, ${2} added',
-      (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE).name).cardName(createBonusCard(BonusCardId.B27_BUILD_BUILD_BUILD).name));
+      (b) => b.cardName(this.name).bonusCardName(BonusCardName.LOCAL_NEURAL_INSTANCE).bonusCardName(BonusCardName.BUILD_BUILD_BUILD));
   }
 
   public override onTilePlaced(marsBot: IMarsBot, placedByMarsBot: boolean, _tileType: TileType, space: Space): void {

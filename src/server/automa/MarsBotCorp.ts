@@ -1,6 +1,7 @@
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
-import {BonusCardId, CubeType} from '../../common/automa/AutomaTypes';
+import {CubeType} from '../../common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Expansion} from '../../common/cards/GameModule';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {TileType} from '../../common/TileType';
@@ -35,7 +36,7 @@ export abstract class MarsBotCorp {
    * The card lives outside the bonus deck: after it resolves it waits for the next generation.
    * Once its removal condition removes it (Vitor's Overachievement), it stays out of the game.
    */
-  public readonly actionDeckBonusCard?: BonusCardId;
+  public readonly actionDeckBonusCard?: BonusCardName;
   /** Cubes seeded onto the bot's board tracks during setup, read through `corpTrackCubes`. */
   public readonly trackCubes?: ReadonlyArray<MarsBotTrackCube | MarsBotTagTrackCube>;
   /**

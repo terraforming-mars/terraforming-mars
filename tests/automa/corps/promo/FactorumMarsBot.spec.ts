@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {FactorumMarsBot} from '@/server/automa/corps/promo/FactorumMarsBot';
 import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
@@ -20,6 +20,6 @@ describe('FactorumMarsBot', () => {
 
     expect(trackCubes(new FactorumMarsBot())).deep.eq(expectedCubes);
     expect(new FactorumMarsBot().trackCubesTriggerEveryAdvance).is.true;
-    expect(new FactorumMarsBot().actionDeckBonusCard).eq(BonusCardId.B24_SUPPLY_AND_DEMAND);
+    expect(new FactorumMarsBot().actionDeckBonusCard).eq(BonusCardName.SUPPLY_AND_DEMAND);
   });
 });

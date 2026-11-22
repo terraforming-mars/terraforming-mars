@@ -1,6 +1,5 @@
-import {BonusCardId} from '../../common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {GlobalParameter} from '../../common/GlobalParameter';
-import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
@@ -95,11 +94,11 @@ export interface IMarsBot {
    *
    * Does nothing when the action deck already holds it.
    */
-  addBonusCardToActionDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToActionDeck(bonusCardName: BonusCardName): void;
   /** Shuffles a bonus card into the bonus deck's draw pile. */
-  addBonusCardToBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBonusDeck(bonusCardName: BonusCardName): void;
   /** Puts a bonus card at the bottom of the bonus deck's draw pile. */
-  addBonusCardToBottomOfBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBottomOfBonusDeck(bonusCardName: BonusCardName): void;
   /**
    * Reveals project cards until `count` of them carry `tag`, and shuffles those into the bonus deck.
    *
@@ -110,9 +109,9 @@ export interface IMarsBot {
    * Removes a bonus card from the bonus deck and from the action deck, for a corp's setup. When it
    * was the bonus card dealt at setup, the bonus deck deals a replacement into the action deck.
    */
-  removeBonusCard(bonusCardId: BonusCardId): void;
+  removeBonusCard(bonusCardName: BonusCardName): void;
   /** Resolves a bonus card's effect right away, outside the action deck. The card is not discarded. */
-  resolveBonusCard(bonusCardId: BonusCardId): void;
+  resolveBonusCard(bonusCardName: BonusCardName): void;
   /**
    * Discards the project card with the fewest tags from the bot's action deck, the first one on a tie.
    *
@@ -141,13 +140,13 @@ export interface IMarsBot {
   /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
   bonusMcBlocked: boolean;
   /**
-   * Raises the global parameter furthest from completion, for the bonus card `cardName`.
+   * Raises the global parameter furthest from completion, for the bonus card `bonusCardName`.
    *
    * Distance counts steps remaining (a temperature step is 2 degrees), and a tie goes to oxygen, then
    * oceans, then temperature. With `allowCorpIntercept` false, no corp may cancel the raise. Returns
    * false when every parameter is already complete.
    */
-  advanceFurthestParameter(cardName: CardName, allowCorpIntercept?: boolean): boolean;
+  advanceFurthestParameter(bonusCardName: BonusCardName, allowCorpIntercept?: boolean): boolean;
   /**
    * Places a greenery for the bot, raising the oxygen.
    *
@@ -178,11 +177,11 @@ export interface IMarsBot {
   /** Takes `card` off the bot's played pile. */
   removePlayedProjectCard(card: IProjectCard): void;
   /**
-   * Trades with the colony the bot picks, for the bonus card `cardName` (rulebook C, p.5).
+   * Trades with the colony the bot picks, for the bonus card `bonusCardName` (rulebook C, p.5).
    *
    * Does nothing, with no Failed Action, when no colony can be traded with or the bot has no M€ to pay.
    */
-  maybeTrade(cardName: CardName): void;
+  maybeTrade(bonusCardName: BonusCardName): void;
 
   /** Reads a corp-specific counter, which is serialized with the bot. A missing key reads as 0. */
   getCorpState(key: string): number;

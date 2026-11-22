@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {MarsBotShippingBoard} from '@/server/automa/colonies/MarsBotShippingBoard';
 import {maybeTrade, selectTradeColony, tradeWithColony} from '@/server/automa/colonies/MarsBotTrader';
@@ -101,7 +101,7 @@ describe('MarsBotTrader', () => {
       luna.visitor = run.visited ? human.id : undefined;
       game.colonies = [luna];
 
-      maybeTrade(marsBot, CardName.AUTOMA_SHIPPING_LINES);
+      maybeTrade(marsBot, BonusCardName.SHIPPING_LINES);
 
       expect(calls.includes('loseMc(1)')).eq(run.expected);
     });

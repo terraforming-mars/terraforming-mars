@@ -1,4 +1,4 @@
-import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {IGame} from '@/server/IGame';
 import {IColony} from '@/server/colonies/IColony';
@@ -94,20 +94,20 @@ export function tradeWithColony(marsBot: IMarsBot, colony: IColony): void {
 }
 
 /**
- * Trades with the colony MarsBot picks, for the bonus card `cardName` (rulebook C, p.5).
+ * Trades with the colony MarsBot picks, for the bonus card `bonusCardName` (rulebook C, p.5).
  *
  * Does nothing, with no Failed Action, when no colony can be traded with or MarsBot has no M€ to pay.
  */
-export function maybeTrade(marsBot: IMarsBot, cardName: CardName): void {
+export function maybeTrade(marsBot: IMarsBot, bonusCardName: BonusCardName): void {
   const colony = selectTradeColony(marsBot);
   if (colony === undefined) {
     // A bonus card that can't resolve is not a Failed Action (rulebook A, p.5)
-    marsBot.game.log('MarsBot (${0}): no colony to trade with', (b) => b.cardName(cardName));
+    marsBot.game.log('MarsBot (${0}): no colony to trade with', (b) => b.bonusCardName(bonusCardName));
     return;
   }
   // It must lose 1 M€ to trade. With none, the card does nothing (Nick, BGG 3599965).
   if (marsBot.megacredits < 1) {
-    marsBot.game.log('MarsBot (${0}): no M€ to pay for the trade', (b) => b.cardName(cardName));
+    marsBot.game.log('MarsBot (${0}): no M€ to pay for the trade', (b) => b.bonusCardName(bonusCardName));
     return;
   }
 

@@ -3,7 +3,9 @@
 ## General
 - Formatting is ESLint's job. Run `npm run lint:fix`. This guide covers only what lint can't check.
 - Follow the style of the code around the file. If this is a new file, follow the style of the code in the
-  directory.
+  directory. Where the surrounding code already has a consistent pattern, it takes priority over the rules
+  below. That includes style, layout, formatting, comments, testing, both in quality and quantity.
+  - If there's a migration of some sort, then you may be asked to change things in review.
 
 ## Utilities
 - Before hand-rolling a helper, look in `src/common/utils/utils.ts`. It already has `sum`, `range`,
@@ -21,10 +23,6 @@
 - Describe array types as `Array<T>`, not `T[]`.
 - Prefer readonly container types — `ReadonlyArray<T>`, `ReadonlySet<T>`, `ReadonlyMap<K, V>`, etc.
 - Avoid unnecessary spread operators. Be certain any defensive copy of `[...x]` is necessary.
-
-## Enums, namespaces
-- Avoid creating new enums and namespaces. Instead, declare a `const` array of string literals and derive the
-  type from it. `src/common/Color.ts` is a good example.
 
 ## Imports
 - Use `@/` imports in new code. The existing uses of `../` are also fine. Just don't do a wholesale rewrite.
@@ -47,12 +45,14 @@
     - Comments for structural entities must describe what the object represents using a clear noun phrase.
     - Do not start with verbs like "Handles" or "Manages".
     - Rule: Use a singular noun phrase.
+    - Exception: a class or type named for what it does (usually an -er/-or name like `Resolver`, `Placer`,
+      `Scorer`) is documented like a function, e.g. "Scores a space for one tiebreaker."
     - Format: Describe the entity's purpose, followed by any critical operational constraints.
 
   - Verbs: Functions and Methods
     - Comments for functional operations must describe what the action executes using an active, third-person
       singular verb (e.g., "Fetches", "Calculates", "Validates").
-    - Rule: Begin with an active verb. Never use passive phrases like "Is used to...".
+    - Rule: Begin with an active verb. Avoid passive phrases like "Is used to...".
     - Can omit the leading word "Returns", but capitalize the first word.
     - Format: State the action, document non-obvious parameters and non-obvious returns.
 
@@ -61,10 +61,6 @@
       of the variable.
     - Rule: Use short noun or adjective phrases.
     - Format: For booleans, explicitly state what a true value indicates.
-
-  - Enums and Namespaces:
-    - Don't add any new enums or namespaces, but document each one as if it were a noun type.
-    - Document enum members like variables.
 
   - /** for testing */ is an acceptable and complete comment, and can be a leading comment to the fuller description.
 
@@ -107,4 +103,4 @@
 ## Escape hatches
 - Do not use the non-null assertion `!`. It is an ESLint error in `src`, and is only allowed in tests.
   Narrowing with an `if` is usually the best answer.
-- Do not add `eslint-disable` comments. There is exactly one in the codebase; let's keep it that way.
+- Do not add `eslint-disable` comments unless you're working toward tighting eslint.

@@ -10,7 +10,7 @@ import {IMarsBot} from './IMarsBot';
 import {Comparator, comparing, compound, reversed} from '../../common/utils/Ordering';
 
 /**
- * The score of a space in one tiebreaker.
+ * Scores a space for one tiebreaker.
  *
  * The higher score wins.
  */
@@ -49,7 +49,7 @@ const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
 const SPECIAL_HEX_ICONS = 2.5;
 
 /**
- * MarsBot's tile placement, with the automa-specific rules and tiebreakers.
+ * Places MarsBot's tiles by the automa rules and tiebreakers.
  *
  * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.

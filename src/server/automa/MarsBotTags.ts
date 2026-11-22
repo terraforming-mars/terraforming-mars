@@ -28,7 +28,7 @@ export function printedVictoryPoints(card: IProjectCard): number | undefined {
 }
 
 /**
- * The tag counts of MarsBot's player, read from the tracks on its board.
+ * Counts the tags of MarsBot's player from the tracks on its board.
  *
  * Per the automa rules: "If an effect requires you to count the number of something
  * other or all players have, use the respective tracks on MarsBot's board instead

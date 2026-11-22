@@ -5,10 +5,10 @@ import {MarsBotBoard} from '../MarsBotBoard';
 import {hasIntersection, intersection} from '@/common/utils/utils';
 import {cardTagsIncludingEvent} from '../MarsBotTags';
 
-/** A function that shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
+/** Shuffles an array in place. */
 export type Shuffler = <T>(items: Array<T>) => void;
 
-/** MarsBot's draft pick and post-draft discard, both chosen from the corp's draft priority. */
+/** Chooses MarsBot's draft card and its post-draft discard from the corp's draft priority. */
 export class MarsBotDraftResolver {
   constructor(
     private readonly marsBotBoard: MarsBotBoard,

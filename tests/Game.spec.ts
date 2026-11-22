@@ -24,7 +24,6 @@ import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {SelectResource} from '../src/server/inputs/SelectResource';
-import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
@@ -1163,7 +1162,6 @@ describe('Game', () => {
   });
 
   it('deserializing a colonies game includes discarded colonies #4522', () => {
-    const toName = (x: IColony) => x.name;
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {coloniesExtension: false});

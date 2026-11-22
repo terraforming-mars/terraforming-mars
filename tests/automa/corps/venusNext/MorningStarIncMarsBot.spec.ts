@@ -12,7 +12,7 @@ describe('MorningStarIncMarsBot', () => {
     new MorningStarIncMarsBot().setup(marsBot);
     new MorningStarIncMarsBot().onTrackCubeTrigger(marsBot, 7, 5, 'credit');
 
-    expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)', 'addBonusCardToBonusDeck(B26)', 'gainMc(5)']);
+    expect(calls).deep.eq(['removeBonusCard(Lobbyists)', 'removeBonusCard(Lobbyists (Venus))', 'addBonusCardToBonusDeck(Venusian Lobby)', 'gainMc(5)']);
     expect(trackCubes(new MorningStarIncMarsBot(), [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]))
       .deep.eq([5, 6, 7, 8, 9, 11, 12].map((position) => `venus credit ${position}`));
   });

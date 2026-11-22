@@ -1,6 +1,6 @@
 import {expect} from 'chai';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {GlobalParameter} from '@/common/GlobalParameter';
-import {CardName} from '@/common/cards/CardName';
 import {Tag} from '@/common/cards/Tag';
 import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
@@ -27,7 +27,7 @@ describe('VenusianLobbyMarsBot', () => {
       expect(game.getVenusScaleLevel()).eq(run.expected);
       expect(calls).deep.eq([
         `maybeAdvanceTrack(${marsBotBoard.tagToTrack[Tag.VENUS]})`,
-        `advanceFurthestParameter(${CardName.AUTOMA_VENUSIAN_LOBBY})`,
+        `advanceFurthestParameter(${BonusCardName.VENUSIAN_LOBBY})`,
       ]);
     });
   }

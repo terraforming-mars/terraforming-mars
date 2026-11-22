@@ -9,6 +9,7 @@ import {Greens} from './parties/Greens';
 import {IGame} from '../IGame';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
+import {Random} from '@/common/utils/Random';
 import {SerializedDelegate, SerializedTurmoil} from './SerializedTurmoil';
 import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
@@ -106,9 +107,9 @@ export class Turmoil {
 
   public initGlobalEvent(game: IGame) {
     // Draw the first global event to setup the game
-    this.comingGlobalEvent = this.globalEventDealer.draw();
+    this.comingGlobalEvent = this.globalEventDealer.draw(game);
     this.addNeutralDelegate(this.comingGlobalEvent?.revealedDelegate, game);
-    this.distantGlobalEvent = this.globalEventDealer.draw();
+    this.distantGlobalEvent = this.globalEventDealer.draw(game);
     this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
   }
 
@@ -274,7 +275,7 @@ export class Turmoil {
     // 4.b - Distant Event is now Coming Event
     this.comingGlobalEvent = this.distantGlobalEvent;
     // 4.c - Draw the new distant event and add neutral delegate
-    this.distantGlobalEvent = this.globalEventDealer.draw();
+    this.distantGlobalEvent = this.globalEventDealer.draw(game);
     this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
 
     // Behold The Emperor hook
@@ -549,8 +550,8 @@ export class Turmoil {
     return result;
   }
 
-  public static deserialize(d: SerializedTurmoil, players: ReadonlyArray<IPlayer>): Turmoil {
-    const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
+  public static deserialize(d: SerializedTurmoil, players: ReadonlyArray<IPlayer>, random: Random): Turmoil {
+    const dealer = GlobalEventDealer.deserialize(d.globalEventDealer, random);
     const chairman = deserializeDelegateOrUndefined(d.chairman, players);
     const turmoil = new Turmoil(d.rulingParty, chairman || 'NEUTRAL', d.dominantParty, dealer);
 

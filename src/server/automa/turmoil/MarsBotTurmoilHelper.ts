@@ -84,7 +84,7 @@ export class MarsBotTurmoilHelper {
     return partyName;
   }
 
-  /** Whether one more MarsBot delegate makes MarsBot the party leader, when it doesn't lead already. */
+  /** Checks whether one more MarsBot delegate makes MarsBot the party leader, when it doesn't lead already. */
   private wouldBecomePartyLeader(party: IParty): boolean {
     if (party.partyLeader === this.marsBotPlayer) {
       return false;
@@ -93,7 +93,7 @@ export class MarsBotTurmoilHelper {
     return party.delegates.get(this.marsBotPlayer) + 1 > leaderCount;
   }
 
-  /** Whether one more delegate makes `party` the dominant party, when it isn't dominant already. */
+  /** Checks whether one more delegate makes `party` the dominant party, when it isn't dominant already. */
   private wouldBecomeDominant(party: IParty): boolean {
     if (this.turmoil.dominantParty === party) {
       return false;

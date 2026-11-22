@@ -15,9 +15,9 @@ describe('InterplanetaryCinematicsMarsBot', () => {
 
   it('puts a white cube on every space of the building and event tracks', () => {
     const all = Array.from({length: 18}, (_, i) => i + 1);
+    const expected = ['building', 'event'].flatMap((tag) => all.map((position) => `${tag} white ${position}`));
 
-    expect(trackCubes(new InterplanetaryCinematicsMarsBot()))
-      .to.have.members(['building', 'event'].flatMap((tag) => all.map((position) => `${tag} white ${position}`)));
+    expect(trackCubes(new InterplanetaryCinematicsMarsBot())).to.have.members(expected);
     expect(new InterplanetaryCinematicsMarsBot().trackCubesTriggerEveryAdvance).is.true;
   });
 });

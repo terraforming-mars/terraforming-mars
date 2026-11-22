@@ -1,5 +1,5 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
@@ -8,7 +8,7 @@ export class RobinsonIndustriesMarsBot extends MarsBotCorp {
     super({
       name: CardName.ROBINSON_INDUSTRIES,
       description: 'Setup: +10 M€. Each generation: add Diversification bonus card to action deck.',
-      actionDeckBonusCard: BonusCardId.B28_DIVERSIFICATION,
+      actionDeckBonusCard: BonusCardName.DIVERSIFICATION,
     });
   }
 
@@ -18,6 +18,6 @@ export class RobinsonIndustriesMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    marsBot.addBonusCardToActionDeck(BonusCardId.B28_DIVERSIFICATION);
+    marsBot.addBonusCardToActionDeck(BonusCardName.DIVERSIFICATION);
   }
 }

@@ -149,9 +149,6 @@ describe('ServerModel', () => {
     expect(model.corporations).deep.eq({drawPile: game.corporationDeck.drawPile.length, discardPile: 0});
     expect(model.preludes).deep.eq({drawPile: game.preludeDeck.drawPile.length, discardPile: 1});
     expect(model.ceos).is.undefined;
-    expect(model.globalEvents).deep.eq({
-      drawPile: game.turmoil!.globalEventDealer.deck.length,
-      discardPile: game.turmoil!.globalEventDealer.discards.length,
-    });
+    expect(model.globalEvents).deep.eq({drawPile: 29, discardPile: 0});
   });
 });

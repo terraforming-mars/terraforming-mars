@@ -33,60 +33,7 @@ export type CubeType = 'white' | 'black' | 'credit';
 
 export type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'brutal';
 
-export enum BonusCardId {
-  // Base game (B01-B08)
-  B01_METEOR_SHOWER = 'B01',
-  B02_INVASIVE_SPECIES = 'B02',
-  B03_RESEARCH_AND_DEVELOPMENT = 'B03',
-  B04_OVERACHIEVEMENT = 'B04',
-  B05_EXPEDITED_CONSTRUCTION = 'B05',
-  B06_LOBBYISTS = 'B06',
-  B07_LOCAL_NEURAL_INSTANCE = 'B07',
-  B08_CORPORATE_COMPETITION = 'B08',
-  // Map-specific Corporate Competition (B09-B13)
-  B09_CORPORATE_COMPETITION_HELLAS = 'B09',
-  B10_CORPORATE_COMPETITION_ELYSIUM = 'B10',
-  B11_CORPORATE_COMPETITION_UTOPIA = 'B11',
-  B12_CORPORATE_COMPETITION_CIMMERIA = 'B12',
-  B13_CORPORATE_COMPETITION_BOREALIS = 'B13',
-  B14_CORPORATE_COMPETITION_MA = 'B14',
-  // Venus Next (B15-B16)
-  B15_LOBBYISTS_VENUS = 'B15',
-  B16_GOVERNMENT_INTERVENTION = 'B16',
-  // Colonies (B17-B20)
-  B17_EXPEDITED_CONSTRUCTION_COLONIES = 'B17',
-  B18_OUTER_SYSTEM_FOOTHOLD = 'B18',
-  B19_SHIPPING_LINES = 'B19',
-  B20_EXTENDED_SHIPPING_LINES = 'B20',
-  // Turmoil (B21)
-  B21_PARTY_POLITICS = 'B21',
-  // Corp-specific bonus cards (B22-B32)
-  B22_SETTLERS = 'B22',
-  B23_RAPID_SPROUTING = 'B23',
-  B24_SUPPLY_AND_DEMAND = 'B24',
-  B25_DO_IT_RIGHT = 'B25',
-  B26_VENUSIAN_LOBBY = 'B26',
-  B27_BUILD_BUILD_BUILD = 'B27',
-  B28_DIVERSIFICATION = 'B28',
-  B29_GRAY_EMINENCE = 'B29',
-  B30_INTERFACE_HYPERLINK = 'B30',
-  B31_GOVERNMENT_SUBSIDY = 'B31',
-  B32_INVESTORS = 'B32',
-}
-
-/** The set of bonus cards used in the base game (no expansions). */
-export const BASE_BONUS_CARDS: ReadonlyArray<BonusCardId> = [
-  BonusCardId.B01_METEOR_SHOWER,
-  BonusCardId.B02_INVASIVE_SPECIES,
-  BonusCardId.B03_RESEARCH_AND_DEVELOPMENT,
-  BonusCardId.B04_OVERACHIEVEMENT,
-  BonusCardId.B05_EXPEDITED_CONSTRUCTION,
-  BonusCardId.B06_LOBBYISTS,
-  BonusCardId.B07_LOCAL_NEURAL_INSTANCE,
-  BonusCardId.B08_CORPORATE_COMPETITION,
-];
-
-/** MC gained when MarsBot takes a failed action. */
+/** M€ MarsBot gains when it takes a Failed Action. */
 export const FAILED_ACTION_MC = 5;
 export const FAILED_ACTION_MC_EASY = 3;
 
@@ -98,7 +45,7 @@ export const MARSBOT_MAX_GENERATION_PRELUDE = 18;
 /** M€ MarsBot gets per adjacent ocean when its corporation is Lakefront Resorts. */
 export const LAKEFRONT_OCEAN_BONUS = 3;
 
-/** Get the max generation for an automa game. */
+/** Gets the max generation for an automa game. */
 export function getAutomaMaxGeneration(preludeExtension: boolean): number {
   return preludeExtension ? MARSBOT_MAX_GENERATION_PRELUDE : MARSBOT_MAX_GENERATION;
 }

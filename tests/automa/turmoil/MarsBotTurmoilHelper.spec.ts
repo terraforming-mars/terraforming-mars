@@ -130,7 +130,8 @@ describe('MarsBotTurmoilHelper', () => {
   it('sends a delegate from the reserve to the party it picks', () => {
     const before = turmoil.delegateReserve.get(botPlayer);
 
-    // MarsBot would lead any empty party (priority 2), and Kelvinists is the first of those clockwise from Mars First.
+    // MarsBot would lead any empty party (priority 2), and Kelvinists is the first of those clockwise from
+    // Mars First.
     expect(helper.maybePlaceDelegate()).eq(PartyName.KELVINISTS);
 
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(botPlayer)).eq(1);

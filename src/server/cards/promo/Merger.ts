@@ -7,7 +7,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CorporationDeck} from '../Deck';
+import {CorporationDeck} from '@/server/cards/Decks';
 import {Countable} from '../../behavior/Countable';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 

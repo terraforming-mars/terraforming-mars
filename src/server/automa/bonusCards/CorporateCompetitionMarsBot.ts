@@ -14,7 +14,12 @@ import {Board, isSpecialTileSpace} from '@/server/boards/Board';
 import {Space} from '@/server/boards/Space';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 
-/** The Corporate Competition helpers that don't cost MarsBot 5 M€ (rulebook C, p.12). */
+/**
+ * The Corporate Competition helpers that don't cost MarsBot 5 M€ (rulebook C, p.12).
+ *
+ * The modular award list on p.16 says Forecaster gains MarsBot 5 M€ instead, which reads like Administrator's
+ * line copied over. This follows p.12.
+ */
 const FREE_HELPER_AWARDS: ReadonlyArray<AwardName> = ['Forecaster'];
 
 export class CorporateCompetitionMarsBot extends MarsBotBonusCardEffect {

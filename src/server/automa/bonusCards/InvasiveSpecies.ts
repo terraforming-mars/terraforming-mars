@@ -15,7 +15,7 @@ export class InvasiveSpecies extends MarsBotBonusCard {
     const expansions = marsBot.game.gameOptions.expansions;
     if (expansions.venus || expansions.colonies) {
       marsBot.gainMc(2);
-      // Without Venus Next the floater goes to Titan's storage area, and nowhere when Titan isn't in play (C-13, C-14)
+      // Without Venus Next the floater goes to Titan's storage area, and nowhere when Titan isn't in play (rulebook C, p.4)
       if (expansions.venus) {
         marsBot.addFloaters(1);
         marsBot.game.log('MarsBot (${0}): +1 floater', (b) => b.bonusCardName(this.name));
@@ -28,7 +28,6 @@ export class InvasiveSpecies extends MarsBotBonusCard {
       marsBot.gainMc(5);
       marsBot.game.log('MarsBot (${0}): +5:r:mc:', (b) => b.bonusCardName(this.name));
     }
-    // The card is never destroyed
     return false;
   }
 }

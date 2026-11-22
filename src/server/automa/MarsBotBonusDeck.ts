@@ -34,11 +34,11 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
   }
 
   /**
-   * Create the bonus deck for the expansions in play, shuffled.
+   * Creates the bonus deck for the expansions in play, shuffled.
    *
-   * Venus Next replaces B06 (Lobbyists) with B15 (Lobbyists Venus). Colonies (C-2, C-3) replaces B05
+   * Venus Next replaces B06 (Lobbyists) with B15 (Lobbyists Venus). Colonies replaces B05
    * (Expedited Construction) with B17 (Expedited Construction Colonies) and adds B18 (Outer System
-   * Foothold); B19/B20 are set aside and injected into the action deck each generation (C-10/C-11).
+   * Foothold); B19/B20 are set aside and injected into the action deck each generation (rulebook C, p.4).
    *
    * The board's own Corporate Competition (B09-B13) replaces B08, or B14 with the Milestones & Awards
    * expansion whatever the board (rulebook C, p.8 and p.13).

@@ -23,7 +23,8 @@ describe('PartyPolitics', () => {
 
       new PartyPolitics().resolve(marsBot);
 
-      expect(run.reserve - turmoil.delegateReserve.get(botPlayer)).eq(run.expected.placed);
+      const placed = run.reserve - turmoil.delegateReserve.get(botPlayer);
+      expect(placed).eq(run.expected.placed);
       expect(calls).deep.eq(run.expected.calls);
     });
   }

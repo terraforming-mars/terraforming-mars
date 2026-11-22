@@ -19,7 +19,8 @@ describe('GrayEminence', () => {
 
       new GrayEminence().resolve(marsBot);
 
-      expect(run.reserve - turmoil.delegateReserve.get(botPlayer)).eq(run.expected.placed);
+      const placed = run.reserve - turmoil.delegateReserve.get(botPlayer);
+      expect(placed).eq(run.expected.placed);
       expect(calls).deep.eq(run.expected.calls);
     });
   }
@@ -35,6 +36,7 @@ describe('GrayEminence', () => {
 
     new GrayEminence().resolve(marsBot);
 
-    expect(turmoil.parties.map((party) => party.delegates.get(botPlayer))).deep.eq([1, 1, 1, 1, 1, 1]);
+    const delegates = turmoil.parties.map((party) => party.delegates.get(botPlayer));
+    expect(delegates).deep.eq([1, 1, 1, 1, 1, 1]);
   });
 });

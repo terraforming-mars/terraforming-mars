@@ -16,7 +16,8 @@ describe('Investors', () => {
 
       new Investors().resolve(marsBot);
 
-      expect(marsBot.marsBotBoard.tracks.map((track) => track.position)).deep.eq(run.expected.after);
+      const positions = marsBot.marsBotBoard.tracks.map((track) => track.position);
+      expect(positions).deep.eq(run.expected.after);
       expect(calls).deep.eq(run.expected.calls);
     });
   }

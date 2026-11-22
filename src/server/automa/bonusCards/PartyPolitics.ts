@@ -11,14 +11,14 @@ export class PartyPolitics extends MarsBotBonusCard {
 
   public override resolve(marsBot: IMarsBot): boolean {
     const turmoil = Turmoil.getTurmoil(marsBot.game);
-    // T-7: Place 1 delegate from reserve using the priority list
+    // Place 1 delegate from reserve using the priority list (rulebook C, p.6)
     const placed = new MarsBotTurmoilHelper(marsBot.game).maybePlaceDelegate();
     if (placed === undefined) {
       marsBot.game.log('MarsBot (${0}): no delegates in reserve', (b) => b.bonusCardName(this.name));
       return false;
     }
 
-    // T-8: with a delegate still in reserve and at least 5 M€, MarsBot reveals the top card of the
+    // With a delegate still in reserve and at least 5 M€, MarsBot reveals the top card of the
     // project deck to read its cost, then discards it. A cost divisible by 3 spends 5 M€ on a second
     // delegate.
     if (turmoil.delegateReserve.has(marsBot.player) && marsBot.megacredits >= 5) {

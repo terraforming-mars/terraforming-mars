@@ -71,7 +71,8 @@ describe('Lobbyists', () => {
 
       const destroyed = new Lobbyists().resolve(marsBot);
 
-      expect(game.board.getOceanSpaces().map((space) => space.id).sort()).deep.eq(run.expected.after);
+      const oceanIds = game.board.getOceanSpaces().map((space) => space.id).sort();
+      expect(oceanIds).deep.eq(run.expected.after);
       expect(calls).deep.eq(run.expected.calls);
       expect(destroyed).eq(run.expected.destroyed);
     });

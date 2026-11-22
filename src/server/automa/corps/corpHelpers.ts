@@ -15,8 +15,8 @@ export function whiteTrackCubes(trackIndex: number): MarsBotTrackCube[] {
 }
 
 /**
- * The track cube rule Point Luna and Astrodrill share: reaching a white cube advances MarsBot's
- * least-advanced track, reaching a black cube advances its space track.
+ * Resolves the track cube rule Point Luna and Astrodrill share: a white cube advances MarsBot's
+ * least-advanced track, a black cube advances its space track.
  */
 export function whiteLeastBlackSpaceHandler(marsBot: IMarsBot, cubeType: CubeType, corpName: CardName): void {
   if (cubeType === 'white') {

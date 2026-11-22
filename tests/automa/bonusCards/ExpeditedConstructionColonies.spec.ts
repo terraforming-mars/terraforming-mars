@@ -17,7 +17,8 @@ describe('ExpeditedConstructionColonies', () => {
 
     const destroyed = new ExpeditedConstructionColonies().resolve(marsBot);
 
-    expect(game.board.getSpaceOrThrow('12').tile?.tileType).eq(TileType.CITY);
+    const city = game.board.getSpaceOrThrow('12');
+    expect(city.tile?.tileType).eq(TileType.CITY);
     expect(calls).deep.eq(['gainMc(6)']);
     expect(destroyed).is.true;
   });

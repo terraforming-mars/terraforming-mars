@@ -30,7 +30,7 @@ describe('MarsBotTilePlacer', () => {
   });
 
   // TODO(kberg): Move to TestingUtils.
-  /** An empty land space whose six neighbours are all empty land, so tiles can be arranged around it. */
+  /** Finds an empty land space whose six neighbours are all empty land, so tiles can go around it. */
   function inlandSpace(): Space {
     return game.board.getAvailableSpacesOnLand(botPlayer).find((space) => {
       const adj = game.board.getAdjacentSpaces(space);
@@ -62,19 +62,21 @@ describe('MarsBotTilePlacer', () => {
 
     const space = tilePlacer.findCitySpace()!;
 
-    expect(game.board.getAdjacentSpaces(space).some((s) => s.id === greenery.id)).is.true;
+    const adjacent = game.board.getAdjacentSpaces(space).map(toID);
+    expect(adjacent).to.include(greenery.id);
   });
 
-  it('findGreenerySpace finds a space next to one of MarsBot\'s tiles', () => {
+  it("findGreenerySpace finds a space next to one of MarsBot's tiles", () => {
     const city = inlandSpace();
     game.simpleAddTile(botPlayer, city, {tileType: TileType.CITY});
 
     const space = tilePlacer.findGreenerySpace()!;
 
-    expect(game.board.getAdjacentSpaces(space).some((s) => s.id === city.id)).is.true;
+    const adjacent = game.board.getAdjacentSpaces(space).map(toID);
+    expect(adjacent).to.include(city.id);
   });
 
-  it('findGreenerySpace prefers a space next to two of MarsBot\'s cities', () => {
+  it("findGreenerySpace prefers a space next to two of MarsBot's cities", () => {
     const first = inlandSpace();
     const second = game.board.getAdjacentSpaces(first)[0];
     game.simpleAddTile(botPlayer, first, {tileType: TileType.CITY});
@@ -86,7 +88,7 @@ describe('MarsBotTilePlacer', () => {
     expect(adjacent).to.include.members([first.id, second.id]);
   });
 
-  it('findGreenerySpace avoids the human\'s cities', () => {
+  it("findGreenerySpace avoids the human's cities", () => {
     // Of the spaces next to MarsBot's city at 17, only 25 covers two bonus icons, so the
     // tiebreakers alone would choose it. The human city at 18 next door is what rules it out.
     game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('17'), {tileType: TileType.CITY});
@@ -95,7 +97,8 @@ describe('MarsBotTilePlacer', () => {
     const space = tilePlacer.findGreenerySpace()!;
 
     expect(space.id).to.eq('24');
-    expect(game.board.getAdjacentSpaces(space).some((s) => s.id === '18')).is.false;
+    const adjacent = game.board.getAdjacentSpaces(space).map(toID);
+    expect(adjacent).to.not.include('18');
   });
 
   it('findGreenerySpace goes for the greatest net gain of points', () => {
@@ -109,7 +112,8 @@ describe('MarsBotTilePlacer', () => {
     const space = tilePlacer.findGreenerySpace()!;
 
     const cities = game.board.getAdjacentSpaces(space).filter((s) => s.tile?.tileType === TileType.CITY);
-    expect(cities.map((s) => s.player?.id)).deep.eq([botPlayer.id]);
+    const owners = cities.map((s) => s.player?.id);
+    expect(owners).deep.eq([botPlayer.id]);
   });
 
   it('findExpeditedConstructionCitySpace returns undefined on an empty board', () => {
@@ -150,15 +154,15 @@ describe('MarsBotTilePlacer', () => {
     // 30 and 39 border Noctis City and cover two bonus icons each, more than any space the
     // tile may go on, so the tiebreakers alone would choose one of them.
     const noctisCity = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
-    const bordering = game.board.getAdjacentSpaces(noctisCity);
+    const bordering = game.board.getAdjacentSpaces(noctisCity).map(toID);
     for (const id of ['30', '39'] as const) {
-      expect(bordering.map(toID), id).to.include(id);
+      expect(bordering, id).to.include(id);
       expect(game.board.getSpaceOrThrow(id).bonus, id).has.length(2);
     }
 
     const space = tilePlacer.findNeuralInstanceSpace()!;
 
-    expect(bordering.map(toID)).to.not.include(space.id);
+    expect(bordering).to.not.include(space.id);
   });
 
   it('breaks ties on ocean adjacency first, then on bonus icons', () => {
@@ -177,7 +181,8 @@ describe('MarsBotTilePlacer', () => {
       .filter((s) => game.board.getAdjacentSpaces(s).some((a) => a.tile?.tileType === TileType.OCEAN));
     expect(adjacentOceans.map(toID)).deep.eq(['05', '09', '10']);
     // Spaces covering two bonus icons are available, they just aren't next to an ocean.
-    expect(Math.max(...game.board.getAvailableSpacesOnLand(botPlayer).map((s) => s.bonus.length))).to.eq(2);
+    const iconCounts = game.board.getAvailableSpacesOnLand(botPlayer).map((s) => s.bonus.length);
+    expect(Math.max(...iconCounts)).to.eq(2);
   });
 
   it('draws and discards one project card when spaces are still tied', () => {
@@ -230,7 +235,7 @@ describe('MarsBotTilePlacer', () => {
     expect(tilePlacer.getOceanAdjacencyMC(neighbour)).to.eq(2);
   });
 
-  it('getOceanAdjacencyMC pays the ocean bonus of MarsBot\'s player per adjacent ocean', () => {
+  it("getOceanAdjacencyMC pays the ocean bonus of MarsBot's player per adjacent ocean", () => {
     game.simpleAddTile(botPlayer, game.board.getSpaceOrThrow('04'), {tileType: TileType.OCEAN});
     const neighbour = game.board.getSpaceOrThrow('05');
     botPlayer.oceanBonus = 3;
@@ -258,7 +263,7 @@ describe('MarsBotTilePlacer', () => {
   type BotOptions = {
     megacredits?: number,
     noColonyLeft?: boolean,
-    /** The effect the placer asks of the bot does not happen. */
+    /** True when the effect the placer asks of the bot does not happen. */
     swallows?: boolean,
   };
 

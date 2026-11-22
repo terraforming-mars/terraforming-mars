@@ -5,7 +5,7 @@ import {MarsBotBoard} from '../MarsBotBoard';
 import {hasIntersection, intersection} from '@/common/utils/utils';
 import {cardTagsIncludingEvent} from '../MarsBotTags';
 
-/** Shuffles an array in place. The game passes a random shuffle; tests pass an order they control. */
+/** Shuffles an array in place. */
 export type Shuffler = <T>(items: Array<T>) => void;
 
 /** Chooses MarsBot's draft card and its post-draft discard from the corp's draft priority. */
@@ -119,8 +119,9 @@ export class MarsBotDraftResolver {
   }
 
   /**
-   * Aridor drafts for a track, not a tag list: every tag on that track counts alike, the card with
-   * the most of them wins and ties go at random.
+   * Picks the card with the most tags on the least advanced track, ties at random.
+   *
+   * Aridor drafts for a track, not a tag list, so every tag on that track counts alike.
    */
   private pickByLeastAdvancedTrack(hand: Array<IProjectCard>): IProjectCard {
     return this.pickBest(hand, (card) => this.scoreByTrack(card));

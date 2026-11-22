@@ -18,6 +18,8 @@ describe('EcotecMarsBot', () => {
   });
 
   it('has a white cube on every space of the plant track', () => {
-    expect(trackCubes(new EcotecMarsBot())).deep.eq(Array.from({length: 18}, (_, i) => `plant white ${i + 1}`));
+    const expectedCubes = Array.from({length: 18}, (_, i) => `plant white ${i + 1}`);
+
+    expect(trackCubes(new EcotecMarsBot())).deep.eq(expectedCubes);
   });
 });

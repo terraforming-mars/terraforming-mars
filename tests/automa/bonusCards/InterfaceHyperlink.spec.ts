@@ -53,8 +53,10 @@ describe('InterfaceHyperlink', () => {
 
       const destroyed = new InterfaceHyperlink().resolve(marsBot);
 
-      expect(played.map((card) => card.name)).deep.eq(run.expected.played);
-      expect(discardPile.slice(discardsBefore).map((card) => card.name)).deep.eq(run.expected.discarded);
+      const playedNames = played.map((card) => card.name);
+      const discardedNames = discardPile.slice(discardsBefore).map((card) => card.name);
+      expect(playedNames).deep.eq(run.expected.played);
+      expect(discardedNames).deep.eq(run.expected.discarded);
       expect(destroyed).is.true;
     });
   }

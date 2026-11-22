@@ -58,7 +58,8 @@ describe('MarsBotBonusDeck', () => {
 
       const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: run.venus, colonies: run.colonies});
 
-      expect(expansionDeck.drawPile.map(toName)).to.have.members(expected);
+      const drawnNames = expansionDeck.drawPile.map(toName);
+      expect(drawnNames).to.have.members(expected);
       expect(expansionDeck.discardPile).to.be.empty;
     });
   }
@@ -98,6 +99,7 @@ describe('MarsBotBonusDeck', () => {
 
     expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
     expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
-    expect([...restored.drawPile, ...restored.discardPile].map(toName)).to.have.members(names);
+    const restoredNames = [...restored.drawPile, ...restored.discardPile].map(toName);
+    expect(restoredNames).to.have.members(names);
   });
 });

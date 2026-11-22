@@ -24,11 +24,11 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
   }
 
   /**
-   * Create the bonus deck for the expansions in play, shuffled.
+   * Creates the bonus deck for the expansions in play, shuffled.
    *
-   * Venus Next replaces B06 (Lobbyists) with B15 (Lobbyists Venus). Colonies (C-2, C-3) replaces B05
+   * Venus Next replaces B06 (Lobbyists) with B15 (Lobbyists Venus). Colonies replaces B05
    * (Expedited Construction) with B17 (Expedited Construction Colonies) and adds B18 (Outer System
-   * Foothold); B19/B20 are set aside and injected into the action deck each generation (C-10/C-11).
+   * Foothold); B19/B20 are set aside and injected into the action deck each generation (rulebook C, p.4).
    */
   public static create(random: Random, expansions: {venus?: boolean, colonies?: boolean} = {}): MarsBotBonusDeck {
     const cards = BASE_BONUS_CARDS.map(createBonusCard);

@@ -17,7 +17,8 @@ describe('ThorgateMarsBot', () => {
 
     new ThorgateMarsBot().onTrackCubeTrigger(marsBot, TRACK.power, 1, 'white');
 
+    const expectedCubes = [4, 6, 8, 10].map((position) => `power white ${position}`);
     expect(calls).deep.eq(['maybeDrawAndResolveProjectCardFirstTagOnly()', 'raiseTemperature(1)']);
-    expect(trackCubes(new ThorgateMarsBot())).deep.eq([4, 6, 8, 10].map((position) => `power white ${position}`));
+    expect(trackCubes(new ThorgateMarsBot())).deep.eq(expectedCubes);
   });
 });

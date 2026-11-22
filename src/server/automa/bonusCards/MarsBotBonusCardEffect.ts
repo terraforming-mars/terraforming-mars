@@ -1,5 +1,5 @@
 import {BonusCardId} from '@/common/automa/AutomaTypes';
-import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {MarsBotBonusCard, createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 
@@ -8,7 +8,7 @@ export type MarsBotBonusCardEffectProperties = Pick<MarsBotBonusCardEffect, 'id'
 /** A bonus card MarsBot resolves. */
 export abstract class MarsBotBonusCardEffect {
   public readonly id: BonusCardId;
-  public readonly name: CardName;
+  public readonly name: BonusCardName;
 
   constructor(properties: MarsBotBonusCardEffectProperties) {
     this.id = properties.id;

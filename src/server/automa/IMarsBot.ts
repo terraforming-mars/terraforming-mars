@@ -1,6 +1,6 @@
 import {BonusCardId} from '../../common/automa/AutomaTypes';
 import {GlobalParameter} from '../../common/GlobalParameter';
-import {CardName} from '../../common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
@@ -141,13 +141,13 @@ export interface IMarsBot {
   /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
   bonusMcBlocked: boolean;
   /**
-   * Raises the global parameter furthest from completion, for the bonus card `cardName`.
+   * Raises the global parameter furthest from completion, for the bonus card `bonusCardName`.
    *
    * Distance counts steps remaining (a temperature step is 2 degrees), and a tie goes to oxygen, then
    * oceans, then temperature. With `allowCorpIntercept` false, no corp may cancel the raise. Returns
    * false when every parameter is already complete.
    */
-  advanceFurthestParameter(cardName: CardName, allowCorpIntercept?: boolean): boolean;
+  advanceFurthestParameter(bonusCardName: BonusCardName, allowCorpIntercept?: boolean): boolean;
   /**
    * Places a greenery for the bot, raising the oxygen.
    *
@@ -178,11 +178,11 @@ export interface IMarsBot {
   /** Takes `card` off the bot's played pile. */
   removePlayedProjectCard(card: IProjectCard): void;
   /**
-   * Trades with the colony the bot picks, for the bonus card `cardName` (C-17).
+   * Trades with the colony the bot picks, for the bonus card `bonusCardName` (C-17).
    *
    * Does nothing, with no Failed Action, when no colony can be traded with or the bot has no M€ to pay.
    */
-  maybeTrade(cardName: CardName): void;
+  maybeTrade(bonusCardName: BonusCardName): void;
 
   /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
   getCorpState(key: string): number;

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {TileType} from '@/common/TileType';
 import {SpaceId} from '@/common/Types';
-import {CardName} from '@/common/cards/CardName';
 import {LobbyistsMarsBot} from '@/server/automa/bonusCards/LobbyistsMarsBot';
 import {testGame} from '../../TestGame';
 import {setOxygenLevel, setTemperature} from '../../TestingUtils';
@@ -60,7 +60,7 @@ describe('LobbyistsMarsBot', () => {
     // Spaces 07 (no bonus) and 43 (one plant) each touch two of these, and 43 covers more icons.
     // 43 pays 1 M€ for the plant icon and 2 M€ for each adjacent ocean.
     {oceans: ['06', '13', '34', '44'], expected: {after: ['06', '13', '34', '43', '44'], calls: ['gainMc(5)'], destroyed: true}},
-    {oceans: ['34'], expected: {after: ['34'], calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS})`], destroyed: false}},
+    {oceans: ['34'], expected: {after: ['34'], calls: [`advanceFurthestParameter(${BonusCardName.LOBBYISTS})`], destroyed: false}},
   ] as const) {
     it('places an ocean only next to 2 oceans, and is then destroyed: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2);
@@ -83,7 +83,7 @@ describe('LobbyistsMarsBot', () => {
 
     const destroyed = new LobbyistsMarsBot().resolve(marsBot);
 
-    expect(calls).deep.eq([`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS})`]);
+    expect(calls).deep.eq([`advanceFurthestParameter(${BonusCardName.LOBBYISTS})`]);
     expect(destroyed).is.false;
   });
 });

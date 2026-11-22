@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {TileType} from '@/common/TileType';
 import {SpaceId} from '@/common/Types';
-import {CardName} from '@/common/cards/CardName';
 import {LobbyistsVenusMarsBot} from '@/server/automa/bonusCards/LobbyistsVenusMarsBot';
 import {testGame} from '../../TestGame';
 import {setTemperature, setVenusScaleLevel} from '../../TestingUtils';
@@ -13,7 +13,7 @@ describe('LobbyistsVenusMarsBot', () => {
     {temperature: -26, venus: 6, expected: {temperature: -22, venus: 6, destroyed: true, calls: []}},
     {temperature: -30, venus: 6, expected: {temperature: -30, venus: 10, destroyed: false, calls: []}},
     {temperature: -30, venus: 12, expected: {temperature: -30, venus: 16, destroyed: false, calls: []}},
-    {temperature: -30, venus: 2, expected: {temperature: -30, venus: 2, destroyed: false, calls: [`advanceFurthestParameter(${CardName.AUTOMA_LOBBYISTS_VENUS})`]}},
+    {temperature: -30, venus: 2, expected: {temperature: -30, venus: 2, destroyed: false, calls: [`advanceFurthestParameter(${BonusCardName.LOBBYISTS_VENUS})`]}},
   ] as const) {
     it('raises Venus 2 steps and is kept when 1 or 2 steps from a bonus, after the temperature branch: ' + JSON.stringify(run), () => {
       const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});

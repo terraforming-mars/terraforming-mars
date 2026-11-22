@@ -6,7 +6,7 @@ import {comparing} from '../../../common/utils/Ordering';
 import {inplaceRemove, toName} from '../../../common/utils/utils';
 import {pickByFlippedCard} from '../MarsBotCardFlip';
 
-/** The colony tiles MarsBot can build on: active, not full, and without a colony of its own. */
+/** Lists the colony tiles MarsBot can build on: active, not full, and without a colony of its own. */
 export function eligibleColonies(marsBot: IMarsBot): Array<IColony> {
   return marsBot.game.colonies.filter((colony) => {
     if (!colony.isActive) {
@@ -61,7 +61,7 @@ export function placeColony(colony: IColony, marsBot: IMarsBot): void {
   const game = marsBot.game;
   const colonyName = colony.name;
 
-  // C-24a: Europa — place an ocean tile instead of 2 resources
+  // C-24a: Europa places an ocean instead of storing 2 resources
   if (colonyName === ColonyName.EUROPA) {
     // The colony is placed either way (no build bonus, the ocean is the reward). Only the ocean
     // gives way to a Failed Action when none fits (rulebook C, p.5).
@@ -70,7 +70,6 @@ export function placeColony(colony: IColony, marsBot: IMarsBot): void {
     return;
   }
 
-  // All other tiles: add colony and give 2 resources to shipping board (C-19)
   addColony(colony, marsBot);
 
   if (colonyName === ColonyName.TITAN) {
@@ -83,7 +82,6 @@ export function placeColony(colony: IColony, marsBot: IMarsBot): void {
     return;
   }
 
-  // Standard colony placement: 2 resources to shipping board (C-19)
   game.log('MarsBot gains 2 resources in storage for its colony on ${0}', (b) => b.colony(colony));
   marsBot.shippingBoard.add(colonyName, 2);
 }

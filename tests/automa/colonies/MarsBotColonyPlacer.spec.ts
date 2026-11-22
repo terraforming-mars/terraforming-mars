@@ -38,8 +38,9 @@ describe('MarsBotColonyPlacer', () => {
       luna.isActive = run.isActive;
       luna.colonies = run.colonies.map((owner) => owner === 'bot' ? botPlayer.id : human.id);
       game.colonies = [luna];
+      const expected = run.expected ? [luna] : [];
 
-      expect(eligibleColonies(marsBot)).deep.eq(run.expected ? [luna] : []);
+      expect(eligibleColonies(marsBot)).deep.eq(expected);
     });
   }
 

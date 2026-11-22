@@ -9,13 +9,17 @@ import {RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
 
 type Sides = RecordingMarsBot & {botPlayer: TestPlayer, human: TestPlayer};
 
-/** A recording bot on a 2-player game. `botPlayer` owns MarsBot's tiles. */
+/** Creates a recording bot on a 2-player game. `botPlayer` owns MarsBot's tiles. */
 function sides(): Sides {
   const [game, human, botPlayer] = testGame(2);
   return {...recordingMarsBot({game, player: botPlayer, humanPlayer: human}), botPlayer, human};
 }
 
-/** Puts `others` tiles of the other side and `own` of the placer's around an empty space, puts a tile on it and runs Philares. */
+/**
+ * Places a tile on an empty space and runs Philares.
+ *
+ * `others` tiles of the other side and `own` tiles of the placer are put around the space first.
+ */
 function placeTile({marsBot, botPlayer, human}: Sides, byMarsBot: boolean, tileType: TileType, others: number, own: number = 0): void {
   const [placer, other] = byMarsBot ? [botPlayer, human] : [human, botPlayer];
   const board = marsBot.game.board;
@@ -37,7 +41,13 @@ describe('PhilaresMarsBot', () => {
 
     new PhilaresMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['placeGreenery()', 'removeBonusCard(B07)', 'resolveBonusCard(B07)', 'addBonusCardToBonusDeck(B27)']);
+    const expectedCalls = [
+      'placeGreenery()',
+      'removeBonusCard(Local Neural Instance)',
+      'resolveBonusCard(Local Neural Instance)',
+      'addBonusCardToBonusDeck(Build, Build, Build)',
+    ];
+    expect(calls).deep.eq(expectedCalls);
     expect(corpState.get('scienceResources')).eq(1);
   });
 

@@ -1,6 +1,7 @@
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
+import {LegacySerializedGlobalEventDealer} from './globalEvents/LegacySerializedGlobalEventDealer';
+import {SerializedDeck} from '@/server/cards/SerializedDeck';
 import {SerializedPoliticalAgendasData} from './PoliticalAgendas';
 import {PlayerId} from '../../common/Types';
 
@@ -21,7 +22,8 @@ export type SerializedTurmoil = {
     delegateReserve: Array<SerializedDelegate>;
     parties: Array<SerializedParty>;
     playersInfluenceBonus: Array<[PlayerId, number]>;
-    globalEventDealer: SerializedGlobalEventDealer;
+    // TODO(kberg): Remove LegacySerializedGlobalEventDealer by 2027-01-01
+    globalEventDealer: SerializedDeck<GlobalEventName> | LegacySerializedGlobalEventDealer;
     distantGlobalEvent: GlobalEventName | undefined;
     comingGlobalEvent: GlobalEventName | undefined;
     currentGlobalEvent?: GlobalEventName;

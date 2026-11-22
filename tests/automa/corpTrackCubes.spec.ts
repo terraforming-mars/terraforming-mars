@@ -22,7 +22,9 @@ describe('corpTrackCubes', () => {
       ],
     });
 
-    expect(corpTrackCubes(corp, new MarsBotBoard(THARSIS_MARSBOT_BOARD))).deep.eq([
+    const cubes = corpTrackCubes(corp, new MarsBotBoard(THARSIS_MARSBOT_BOARD));
+
+    expect(cubes).deep.eq([
       {trackIndex: 1, position: 3, cubeType: 'white'},
       {trackIndex: 4, position: 6, cubeType: 'white'},
       {trackIndex: 5, position: 6, cubeType: 'black'},

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {VitorMarsBot} from '@/server/automa/corps/prelude/VitorMarsBot';
 import {Ants} from '@/server/cards/base/Ants';
 import {BiomassCombustors} from '@/server/cards/base/BiomassCombustors';
@@ -13,8 +13,8 @@ describe('VitorMarsBot', () => {
 
     new VitorMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['removeBonusCard(B04)']);
-    expect(new VitorMarsBot().actionDeckBonusCard).eq(BonusCardId.B04_OVERACHIEVEMENT);
+    expect(calls).deep.eq(['removeBonusCard(Overachievement)']);
+    expect(new VitorMarsBot().actionDeckBonusCard).eq(BonusCardName.OVERACHIEVEMENT);
   });
 
   // The VP printed on the card counts, not what it scores now

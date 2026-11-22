@@ -23,6 +23,7 @@ import {EarthCatapult} from '../../src/server/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../../src/server/cards/base/QuantumExtractor';
 import * as constants from '../../src/common/constants';
 import {SerializedTurmoil} from '../../src/server/turmoil/SerializedTurmoil';
+import {SeededRandom} from '@/common/utils/Random';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {IParty} from '../../src/server/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../../src/server/cards/base/standardProjects/GreeneryStandardProject';
@@ -812,7 +813,7 @@ describe('Turmoil', () => {
       },
     } as SerializedTurmoil;
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
-    const t = Turmoil.deserialize(s, players);
+    const t = Turmoil.deserialize(s, players, new SeededRandom(1));
 
     expect(t.distantGlobalEvent!.name).eq('Eco Sabotage');
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');

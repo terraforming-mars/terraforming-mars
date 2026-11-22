@@ -8,7 +8,8 @@ describe('CheungShingMARSMarsBot', () => {
 
     new CheungShingMARSMarsBot().onTrackCubeTrigger(marsBot, TRACK.building, 4, 'credit');
 
+    const expectedCubes = Array.from({length: 15}, (_, i) => `building credit ${i + 4}`);
     expect(calls).deep.eq(['gainMc(5)']);
-    expect(trackCubes(new CheungShingMARSMarsBot())).deep.eq(Array.from({length: 15}, (_, i) => `building credit ${i + 4}`));
+    expect(trackCubes(new CheungShingMARSMarsBot())).deep.eq(expectedCubes);
   });
 });

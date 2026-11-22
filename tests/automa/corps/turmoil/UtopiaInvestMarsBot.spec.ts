@@ -8,6 +8,6 @@ describe('UtopiaInvestMarsBot', () => {
 
     new UtopiaInvestMarsBot().beforeActionPhase(marsBot);
 
-    expect(calls).deep.eq(['addBonusCardToActionDeck(B32)']);
+    expect(calls).deep.eq(['addBonusCardToActionDeck(Investors)']);
   });
 });

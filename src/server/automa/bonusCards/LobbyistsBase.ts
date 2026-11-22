@@ -2,7 +2,7 @@ import {GlobalParameter} from '@/common/GlobalParameter';
 import {IGame} from '@/server/IGame';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
-import {MarsBotBonusCardEffect} from '@/server/automa/bonusCards/MarsBotBonusCardEffect';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 import {Board} from '@/server/boards/Board';
 import {GlobalParameterTracks} from '@/server/boards/GlobalParameterTracks';
 import {venusStepsBetween} from '@/server/venusNext/venusScale';
@@ -14,7 +14,7 @@ import {venusStepsBetween} from '@/server/venusNext/venusScale';
  * Inventrix adds in place of Lobbyists: the same first three effects, but it is never destroyed and does
  * nothing when none of them happens.
  */
-export abstract class LobbyistsBase extends MarsBotBonusCardEffect {
+export abstract class LobbyistsBase extends MarsBotBonusCard {
   /**
    * Raises the temperature 2 steps when it is 1 or 2 steps from a bonus step or its maximum.
    *
@@ -26,7 +26,7 @@ export abstract class LobbyistsBase extends MarsBotBonusCardEffect {
       // Pristar's cube cancels only the first of the 2 steps
       const steps = marsBot.interceptsParameterRaise(GlobalParameter.TEMPERATURE) ? 1 : 2;
       game.increaseTemperature(marsBot.player, steps);
-      game.log('MarsBot (${0}): raises the temperature ${1} step(s)', (b) => b.cardName(this.name).number(steps));
+      game.log('MarsBot (${0}): raises the temperature ${1} step(s)', (b) => b.bonusCardName(this.name).number(steps));
       return true;
     }
     return false;
@@ -51,7 +51,7 @@ export abstract class LobbyistsBase extends MarsBotBonusCardEffect {
         if (game.getOxygenLevel() < game.max.oxygen && !marsBot.interceptsParameterRaise(GlobalParameter.OXYGEN)) {
           game.increaseOxygenLevel(marsBot.player, 1);
         }
-        game.log('MarsBot (${0}): places a greenery and raises the oxygen', (b) => b.cardName(this.name));
+        game.log('MarsBot (${0}): places a greenery and raises the oxygen', (b) => b.bonusCardName(this.name));
         return true;
       }
     }
@@ -75,12 +75,12 @@ export abstract class LobbyistsBase extends MarsBotBonusCardEffect {
       return false;
     }
     if (marsBot.interceptsParameterRaise(GlobalParameter.OCEANS)) {
-      game.log('MarsBot (${0}): skips the ocean', (b) => b.cardName(this.name));
+      game.log('MarsBot (${0}): skips the ocean', (b) => b.bonusCardName(this.name));
       return true;
     }
     game.addOcean(marsBot.player, space);
     marsBot.gainMc(tilePlacer.getTotalPlacementMC(space));
-    game.log('MarsBot (${0}): places an ocean', (b) => b.cardName(this.name));
+    game.log('MarsBot (${0}): places an ocean', (b) => b.bonusCardName(this.name));
     return true;
   }
 

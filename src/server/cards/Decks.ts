@@ -4,6 +4,7 @@ import {CardName} from '@/common/cards/CardName';
 import {Random} from '@/common/utils/Random';
 import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Logger} from '@/server/logs/Logger';
 import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
 import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
 import {Deck} from '@/server/cards/Deck';
@@ -25,7 +26,31 @@ export class ProjectDeck extends Deck<IProjectCard> {
     super('project', deck, discarded, random);
   }
 
-  public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
+  public drawByConditionOrThrow(logger: Logger, total: number, include: (card: IProjectCard) => boolean) {
+    const result: Array<IProjectCard> = [];
+    const discardedCards = new Array<CardName>();
+
+    while (result.length < total) {
+      if (discardedCards.length >= this.drawPile.length + this.discardPile.length) {
+        logger.log(`discarded every ${this.type} card without a match`);
+        break;
+      }
+      const projectCard = this.drawOrThrow(logger);
+      if (include(projectCard)) {
+        result.push(projectCard);
+      } else {
+        discardedCards.push(projectCard.name);
+        this.discard(projectCard);
+      }
+    }
+    if (discardedCards.length > 0) {
+      logger.log('Discarded ${0} cards ${1}', (b) => b.number(discardedCards.length).cardNames(discardedCards, {ellipsis: true}));
+    }
+
+    return result;
+  }
+
+  public static deserialize(d: SerializedDeck, random: Random): ProjectDeck {
     const deck = cardsFromJSON(d.drawPile);
     const discarded = cardsFromJSON(d.discardPile);
     return new ProjectDeck(deck, discarded, random);

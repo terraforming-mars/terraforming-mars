@@ -33,60 +33,53 @@ import {ShippingLines} from '@/server/automa/bonusCards/ShippingLines';
 import {SupplyAndDemand} from '@/server/automa/bonusCards/SupplyAndDemand';
 import {VenusianLobby} from '@/server/automa/bonusCards/VenusianLobby';
 
-const FACTORIES: ReadonlyArray<new () => MarsBotBonusCard> = [
-  MeteorShower,
-  InvasiveSpecies,
-  ResearchAndDevelopment,
-  Overachievement,
-  ExpeditedConstruction,
-  Lobbyists,
-  LocalNeuralInstance,
-  CorporateCompetition,
-  CorporateCompetitionHellas,
-  CorporateCompetitionElysium,
-  CorporateCompetitionUtopia,
-  CorporateCompetitionCimmeria,
-  CorporateCompetitionBorealis,
-  CorporateCompetitionMA,
-  LobbyistsVenus,
-  GovernmentIntervention,
-  ExpeditedConstructionColonies,
-  OuterSystemFoothold,
-  ShippingLines,
-  ExtendedShippingLines,
-  PartyPolitics,
-  Settlers,
-  RapidSprouting,
-  SupplyAndDemand,
-  DoItRight,
-  VenusianLobby,
-  BuildBuildBuild,
-  Diversification,
-  GrayEminence,
-  InterfaceHyperlink,
-  GovernmentSubsidy,
-  Investors,
-];
+/**
+ * The class for each bonus card.
+ *
+ * Keyed by every BonusCardName, so a card without a class doesn't compile.
+ */
+const CARD_CLASSES: Record<BonusCardName, new () => MarsBotBonusCard> = {
+  [BonusCardName.METEOR_SHOWER]: MeteorShower,
+  [BonusCardName.INVASIVE_SPECIES]: InvasiveSpecies,
+  [BonusCardName.RESEARCH_AND_DEVELOPMENT]: ResearchAndDevelopment,
+  [BonusCardName.OVERACHIEVEMENT]: Overachievement,
+  [BonusCardName.EXPEDITED_CONSTRUCTION]: ExpeditedConstruction,
+  [BonusCardName.LOBBYISTS]: Lobbyists,
+  [BonusCardName.LOCAL_NEURAL_INSTANCE]: LocalNeuralInstance,
+  [BonusCardName.CORPORATE_COMPETITION]: CorporateCompetition,
+  [BonusCardName.CORPORATE_COMPETITION_HELLAS]: CorporateCompetitionHellas,
+  [BonusCardName.CORPORATE_COMPETITION_ELYSIUM]: CorporateCompetitionElysium,
+  [BonusCardName.CORPORATE_COMPETITION_UTOPIA]: CorporateCompetitionUtopia,
+  [BonusCardName.CORPORATE_COMPETITION_CIMMERIA]: CorporateCompetitionCimmeria,
+  [BonusCardName.CORPORATE_COMPETITION_BOREALIS]: CorporateCompetitionBorealis,
+  [BonusCardName.CORPORATE_COMPETITION_MA]: CorporateCompetitionMA,
+  [BonusCardName.LOBBYISTS_VENUS]: LobbyistsVenus,
+  [BonusCardName.GOVERNMENT_INTERVENTION]: GovernmentIntervention,
+  [BonusCardName.EXPEDITED_CONSTRUCTION_COLONIES]: ExpeditedConstructionColonies,
+  [BonusCardName.OUTER_SYSTEM_FOOTHOLD]: OuterSystemFoothold,
+  [BonusCardName.SHIPPING_LINES]: ShippingLines,
+  [BonusCardName.EXTENDED_SHIPPING_LINES]: ExtendedShippingLines,
+  [BonusCardName.PARTY_POLITICS]: PartyPolitics,
+  [BonusCardName.SETTLERS]: Settlers,
+  [BonusCardName.RAPID_SPROUTING]: RapidSprouting,
+  [BonusCardName.SUPPLY_AND_DEMAND]: SupplyAndDemand,
+  [BonusCardName.DO_IT_RIGHT]: DoItRight,
+  [BonusCardName.VENUSIAN_LOBBY]: VenusianLobby,
+  [BonusCardName.BUILD_BUILD_BUILD]: BuildBuildBuild,
+  [BonusCardName.DIVERSIFICATION]: Diversification,
+  [BonusCardName.GRAY_EMINENCE]: GrayEminence,
+  [BonusCardName.INTERFACE_HYPERLINK]: InterfaceHyperlink,
+  [BonusCardName.GOVERNMENT_SUBSIDY]: GovernmentSubsidy,
+  [BonusCardName.INVESTORS]: Investors,
+};
 
-const BY_NAME: Map<BonusCardName, new () => MarsBotBonusCard> = new Map(FACTORIES.map((Klass) => [new Klass().name, Klass]));
-
-/** Create the base set of bonus cards (B01-B08). */
-export function createBaseBonusCards(): Array<MarsBotBonusCard> {
-  return [
-    BonusCardName.METEOR_SHOWER,
-    BonusCardName.INVASIVE_SPECIES,
-    BonusCardName.RESEARCH_AND_DEVELOPMENT,
-    BonusCardName.OVERACHIEVEMENT,
-    BonusCardName.EXPEDITED_CONSTRUCTION,
-    BonusCardName.LOBBYISTS,
-    BonusCardName.LOCAL_NEURAL_INSTANCE,
-    BonusCardName.CORPORATE_COMPETITION,
-  ].map(createBonusCard);
-}
-
-/** Create a single bonus card by name, from any set. */
+/**
+ * Create a single bonus card by name, from any set.
+ *
+ * Throws for a name with no card, such as one read from a corrupt saved game.
+ */
 export function createBonusCard(name: BonusCardName): MarsBotBonusCard {
-  const Klass = BY_NAME.get(name);
+  const Klass = CARD_CLASSES[name];
   if (Klass === undefined) {
     throw new Error(`No MarsBot bonus card ${name}`);
   }

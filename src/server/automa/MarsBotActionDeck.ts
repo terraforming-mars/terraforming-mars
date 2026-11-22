@@ -47,10 +47,13 @@ export class MarsBotActionDeck {
     private readonly random: Random,
   ) {}
 
-  /** Builds the first action deck: 3 project cards and 1 bonus card, plus 3 project cards with Prelude. */
+  /**
+   * Builds the first action deck: 3 project cards and 1 bonus card.
+   *
+   * With Prelude MarsBot gets 3 more project cards, in place of Prelude cards.
+   */
   public buildInitial(): void {
     const game = this.marsBot.game;
-    // Prelude: MarsBot gets 3 extra project cards instead of Prelude cards
     const numProjectCards = 3 + (game.gameOptions.preludeExtension ? 3 : 0);
     const projectCards = game.projectDeck.drawN(game, numProjectCards);
     const bonusCard = this.marsBot.bonusDeck.draw(game);
@@ -59,20 +62,19 @@ export class MarsBotActionDeck {
       deck.push(bonusCard);
     }
     this.addGovernmentIntervention(deck);
-    // T-3: Shuffle Party Politics into the initial action deck when Turmoil is enabled
     this.addPartyPolitics(deck);
     inplaceShuffle(deck, this.random);
     this.cards = deck;
   }
 
-  /** Add Government Intervention (B16) to action deck if Venus is enabled. */
+  /** Adds Government Intervention (B16) to `deck` when Venus Next is in play. */
   private addGovernmentIntervention(deck: Array<IProjectCard | MarsBotBonusCard>): void {
     if (this.marsBot.game.gameOptions.venusNextExtension) {
       deck.push(createBonusCard(BonusCardName.GOVERNMENT_INTERVENTION));
     }
   }
 
-  /** T-3/T-6: Add Party Politics (B21) to the deck with Turmoil, unless the corp puts its own card in its place. */
+  /** Adds Party Politics (B21) to `deck` with Turmoil, unless the corp puts its own card in its place (rulebook C, p.6). */
   private addPartyPolitics(deck: Array<IProjectCard | MarsBotBonusCard>): void {
     if (!this.marsBot.game.gameOptions.turmoilExtension) {
       return;
@@ -84,8 +86,9 @@ export class MarsBotActionDeck {
   }
 
   /**
-   * C-10: After gen 1, shuffle Shipping Lines (B19) into the action deck.
-   * C-11: If 2nd Trade Fleet is unlocked, also shuffle Extended Shipping Lines (B20).
+   * Adds Shipping Lines (B19) to `deck` with Colonies after generation 1 (rulebook C, p.4).
+   *
+   * Extended Shipping Lines (B20) comes with it once the 2nd Trade Fleet is unlocked (rulebook C, p.4 and p.6).
    */
   private addShippingLines(deck: Array<IProjectCard | MarsBotBonusCard>): void {
     if (!this.marsBot.game.gameOptions.coloniesExtension) {
@@ -111,9 +114,7 @@ export class MarsBotActionDeck {
       deck.push(bonusCard);
     }
     this.addGovernmentIntervention(deck);
-    // T-6: Reshuffle Party Politics into action deck each generation
     this.addPartyPolitics(deck);
-    // C-10/C-11: Inject Shipping Lines (and Extended if 2nd Trade Fleet unlocked)
     this.addShippingLines(deck);
 
     inplaceShuffle(deck, this.random);
@@ -122,12 +123,15 @@ export class MarsBotActionDeck {
     game.log('MarsBot builds action deck with ${0} cards', (b) => b.number(this.cards.length));
   }
 
-  /** Builds the action deck for a new generation from the cards MarsBot drafted. */
+  /**
+   * Builds the action deck for a new generation from the cards MarsBot drafted.
+   *
+   * One drafted card goes to the project discard pile, unless `skipDiscard`.
+   */
   public buildResearchFromDraft(draftedCards: Array<IProjectCard>, skipDiscard: boolean = false): void {
     const game = this.marsBot.game;
     inplaceShuffle(draftedCards, this.random);
     if (!skipDiscard) {
-      // Normally discard 1 drafted card to project discard
       const discarded = draftedCards.pop();
       if (discarded) {
         game.projectDeck.discardPile.push(discarded);
@@ -135,16 +139,13 @@ export class MarsBotActionDeck {
       }
     }
 
-    // Add 1 bonus card
     const bonusCard = this.marsBot.bonusDeck.draw(game);
     const deck: Array<IProjectCard | MarsBotBonusCard> = [...draftedCards];
     if (bonusCard !== undefined) {
       deck.push(bonusCard);
     }
     this.addGovernmentIntervention(deck);
-    // T-6: Reshuffle Party Politics into action deck each generation
     this.addPartyPolitics(deck);
-    // C-10/C-11: Inject Shipping Lines (and Extended if 2nd Trade Fleet unlocked)
     this.addShippingLines(deck);
 
     inplaceShuffle(deck, this.random);
@@ -152,7 +153,11 @@ export class MarsBotActionDeck {
     game.log('MarsBot builds action deck from draft with ${0} cards', (b) => b.number(this.cards.length));
   }
 
-  /** Plays the top card of the action deck. Does nothing when the deck is empty. */
+  /**
+   * Plays the top card of the action deck.
+   *
+   * Does nothing when the deck is empty.
+   */
   public playTopCard(): void {
     const card = this.cards.shift();
     if (card === undefined) {
@@ -195,7 +200,11 @@ export class MarsBotActionDeck {
     return destroyed;
   }
 
-  /** Draws the top bonus card and shuffles it into the action deck. Does nothing when both bonus piles are empty. */
+  /**
+   * Draws the top bonus card and shuffles it into the action deck.
+   *
+   * Does nothing when both bonus piles are empty.
+   */
   public maybeMoveBonusCardToActionDeck(): void {
     const bonusCard = this.marsBot.bonusDeck.draw(this.marsBot.game);
     if (bonusCard === undefined) {
@@ -240,7 +249,6 @@ export class MarsBotActionDeck {
     if (bonusCardName === this.marsBot.actionDeckBonusCard && this.marsBot.getCorpState(ACTION_DECK_BONUS_CARD_REMOVED) > 0) {
       return undefined;
     }
-    // Take the card out of the bonus deck when it is there, otherwise create it
     const card = this.marsBot.bonusDeck.findAndRemove(bonusCardName) ?? createBonusCard(bonusCardName);
     this.shuffleIntoActionDeck(card);
     return card;
@@ -251,7 +259,7 @@ export class MarsBotActionDeck {
     this.cards.splice(this.random.nextInt(this.cards.length + 1), 0, card);
   }
 
-  /** Whether a bonus card goes back into the action deck every generation, so it never belongs in the bonus deck. */
+  /** True when a bonus card goes back into the action deck every generation, so it never belongs in the bonus deck. */
   public returnsToActionDeck(card: MarsBotBonusDeckCard): boolean {
     if (isProjectCard(card)) {
       return false;
@@ -341,7 +349,11 @@ export class MarsBotActionDeck {
     return state;
   }
 
-  /** Restores the action deck. Keys a save lacks leave their part as it is. */
+  /**
+   * Restores the action deck.
+   *
+   * Keys a save lacks leave their part as it is.
+   */
   public restore(state: Partial<SerializedActionDeck>): void {
     if (state.destroyedBonusCards !== undefined) {
       this.destroyedBonusCards = state.destroyedBonusCards;

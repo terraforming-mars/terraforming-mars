@@ -18,7 +18,11 @@ import {recordingMarsBot} from './corps/RecordingMarsBot';
 
 /** A bonus card that runs `effect` when it resolves, and returns `destroyed`. */
 class TestBonusCard extends MarsBotBonusCard {
-  constructor(name: BonusCardName, private readonly destroyed: boolean = false, private readonly effect: (marsBot: IMarsBot) => void = () => {}) {
+  constructor(
+    name: BonusCardName,
+    private readonly destroyed: boolean = false,
+    private readonly effect: (marsBot: IMarsBot) => void = () => {},
+  ) {
     super(name);
   }
 
@@ -28,7 +32,11 @@ class TestBonusCard extends MarsBotBonusCard {
   }
 }
 
-/** An action deck on a bot with an empty bonus deck. A random insert goes on top, at index 0. */
+/**
+ * Builds an action deck on a bot with an empty bonus deck.
+ *
+ * A random insert goes on top, at index 0.
+ */
 function setup(options: Partial<GameOptions> = {}, fields: Partial<IMarsBot> = {}) {
   const [game, human, botPlayer] = testGame(2, options);
   const played: Array<string> = [];
@@ -66,7 +74,8 @@ describe('MarsBotActionDeck', () => {
 
       deck.buildInitial();
 
-      expect({projectCards: projectCardCount(deck.cards), bonusCards: bonusIds(deck.cards)}).deep.eq(run.expected);
+      const actual = {projectCards: projectCardCount(deck.cards), bonusCards: bonusIds(deck.cards)};
+      expect(actual).deep.eq(run.expected);
     });
   }
 
@@ -75,7 +84,7 @@ describe('MarsBotActionDeck', () => {
     {options: {turmoilExtension: true}, replacesPartyPolitics: false, expected: [BonusCardName.PARTY_POLITICS]},
     {options: {turmoilExtension: true}, replacesPartyPolitics: true, expected: []},
   ]) {
-    it('adds the expansions\' cards to the first action deck: ' + JSON.stringify(run), () => {
+    it("adds the expansions' cards to the first action deck: " + JSON.stringify(run), () => {
       const {deck} = setup(run.options, {replacesPartyPolitics: run.replacesPartyPolitics});
 
       deck.buildInitial();
@@ -90,8 +99,8 @@ describe('MarsBotActionDeck', () => {
 
     deck.buildResearch();
 
-    expect({projectCards: projectCardCount(deck.cards), bonusCards: bonusIds(deck.cards)})
-      .deep.eq({projectCards: 3, bonusCards: [BonusCardName.METEOR_SHOWER]});
+    const actual = {projectCards: projectCardCount(deck.cards), bonusCards: bonusIds(deck.cards)};
+    expect(actual).deep.eq({projectCards: 3, bonusCards: [BonusCardName.METEOR_SHOWER]});
   });
 
   for (const run of [
@@ -103,7 +112,7 @@ describe('MarsBotActionDeck', () => {
     {options: {coloniesExtension: true}, generation: 2, fields: {hasSecondTradeFleet: true},
       expected: [BonusCardName.SHIPPING_LINES, BonusCardName.EXTENDED_SHIPPING_LINES]},
   ]) {
-    it('adds the expansions\' cards to the next action deck: ' + JSON.stringify(run), () => {
+    it("adds the expansions' cards to the next action deck: " + JSON.stringify(run), () => {
       const {game, deck} = setup(run.options, run.fields);
       game.generation = run.generation;
 
@@ -123,8 +132,11 @@ describe('MarsBotActionDeck', () => {
 
       deck.buildResearchFromDraft([new Mine(), new Algae(), new Asteroid(), new Mine()], run.skipDiscard);
 
-      expect({projectCards: projectCardCount(deck.cards), discarded: game.projectDeck.discardPile.length - discarded})
-        .deep.eq(run.expected);
+      const actual = {
+        projectCards: projectCardCount(deck.cards),
+        discarded: game.projectDeck.discardPile.length - discarded,
+      };
+      expect(actual).deep.eq(run.expected);
       expect(bonusIds(deck.cards)).deep.eq([BonusCardName.PARTY_POLITICS]);
     });
   }
@@ -183,11 +195,12 @@ describe('MarsBotActionDeck', () => {
       });
 
       expect(deck.playBonusCard(card)).eq(run.destroyed);
-      expect({
+      const actual = {
         discarded: bonusIds(marsBot.bonusDeck.discardPile),
         destroyedBonusCards: deck.destroyedBonusCards,
         removed: corpState.get(ACTION_DECK_BONUS_CARD_REMOVED) ?? 0,
-      }).deep.eq(run.expected);
+      };
+      expect(actual).deep.eq(run.expected);
     });
   }
 
@@ -202,14 +215,18 @@ describe('MarsBotActionDeck', () => {
 
   it('moves the top bonus card into the action deck', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.INVASIVE_SPECIES), new TestBonusCard(BonusCardName.METEOR_SHOWER));
+    marsBot.bonusDeck.drawPile.push(
+      new TestBonusCard(BonusCardName.INVASIVE_SPECIES),
+      new TestBonusCard(BonusCardName.METEOR_SHOWER),
+    );
     deck.cards = [new Mine()];
 
     deck.maybeMoveBonusCardToActionDeck();
     deck.maybeMoveBonusCardToActionDeck();
     deck.maybeMoveBonusCardToActionDeck();
 
-    expect(bonusIds(deck.cards)).deep.eq([BonusCardName.INVASIVE_SPECIES, BonusCardName.METEOR_SHOWER]);
+    const expected = [BonusCardName.INVASIVE_SPECIES, BonusCardName.METEOR_SHOWER];
+    expect(bonusIds(deck.cards)).deep.eq(expected);
     expect(projectCardCount(deck.cards)).eq(1);
   });
 
@@ -224,7 +241,8 @@ describe('MarsBotActionDeck', () => {
 
     deck.returnSetupBonusCardToBonusDeck();
 
-    expect(bonusIds(deck.cards)).deep.eq([BonusCardName.GOVERNMENT_INTERVENTION, BonusCardName.RAPID_SPROUTING]);
+    const expectedKept = [BonusCardName.GOVERNMENT_INTERVENTION, BonusCardName.RAPID_SPROUTING];
+    expect(bonusIds(deck.cards)).deep.eq(expectedKept);
     expect(projectCardCount(deck.cards)).eq(1);
     expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([BonusCardName.METEOR_SHOWER]);
   });
@@ -260,9 +278,13 @@ describe('MarsBotActionDeck', () => {
 
       const added = deck.addBonusCard(BonusCardName.METEOR_SHOWER);
 
-      expect({added: added !== undefined, bonusDeck: marsBot.bonusDeck.drawPile.length + marsBot.bonusDeck.discardPile.length})
-        .deep.eq(run.expected);
-      expect(bonusIds(deck.cards)).deep.eq(run.removed === 0 ? [BonusCardName.METEOR_SHOWER] : []);
+      const actual = {
+        added: added !== undefined,
+        bonusDeck: marsBot.bonusDeck.drawPile.length + marsBot.bonusDeck.discardPile.length,
+      };
+      const expectedInDeck = run.removed === 0 ? [BonusCardName.METEOR_SHOWER] : [];
+      expect(actual).deep.eq(run.expected);
+      expect(bonusIds(deck.cards)).deep.eq(expectedInDeck);
       if (run.where === 'draw' || run.where === 'discard') {
         expect(added).eq(card);
       }
@@ -271,7 +293,10 @@ describe('MarsBotActionDeck', () => {
 
   it('removes a bonus card from the bonus deck', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.INVASIVE_SPECIES), new TestBonusCard(BonusCardName.METEOR_SHOWER));
+    marsBot.bonusDeck.drawPile.push(
+      new TestBonusCard(BonusCardName.INVASIVE_SPECIES),
+      new TestBonusCard(BonusCardName.METEOR_SHOWER),
+    );
     marsBot.bonusDeck.discardPile.push(new TestBonusCard(BonusCardName.METEOR_SHOWER));
 
     deck.removeBonusCard(BonusCardName.METEOR_SHOWER);
@@ -302,8 +327,9 @@ describe('MarsBotActionDeck', () => {
     deck.addProjectCardsToBonusDeck(Tag.SPACE, 2);
 
     const cards = marsBot.bonusDeck.drawPile;
+    const allSpaceProjectCards = cards.every((card) => !(card instanceof MarsBotBonusCard) && cardTagsIncludingEvent(card).includes(Tag.SPACE));
     expect(cards).has.length(2);
-    expect(cards.every((card) => !(card instanceof MarsBotBonusCard) && cardTagsIncludingEvent(card).includes(Tag.SPACE))).is.true;
+    expect(allSpaceProjectCards).is.true;
   });
 
   it('shuffles a bonus card into the bonus deck, or puts it at the bottom', () => {
@@ -325,7 +351,10 @@ describe('MarsBotActionDeck', () => {
 
   it('discards the first project card with the fewest tags from the action deck', () => {
     const {game, deck} = setup();
-    const [asteroid, bonusCard, mine, algae] = [new Asteroid(), new TestBonusCard(BonusCardName.METEOR_SHOWER), new Mine(), new Algae()];
+    const asteroid = new Asteroid();
+    const bonusCard = new TestBonusCard(BonusCardName.METEOR_SHOWER);
+    const mine = new Mine();
+    const algae = new Algae();
     deck.cards = [asteroid, bonusCard, mine, algae];
 
     deck.maybeDiscardProjectCardWithFewestTags();

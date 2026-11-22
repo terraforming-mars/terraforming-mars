@@ -839,11 +839,15 @@ describe('Game', () => {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.NEW_HOLLAND);
   });
 
-  it('round-trips its random generator and continues the same sequence', () => {
-    const [game] = testGame(2);
+  it('round-trips a strong random generator and continues the same sequence', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gnew', [player], player, 'snew', {}, StrongRandom.fromEntropy([1, 2, 3, 4]));
+    range(7).forEach(() => game.rng.next());
     const d = game.serialize();
-    const before = range(10).map(() => game.rng.next());
+    expect(d.rng?.kind).to.eq('sfc32');
     const loaded = Game.deserialize(d);
+    expect(loaded.rng).to.be.instanceOf(StrongRandom);
+    const before = range(10).map(() => game.rng.next());
     const after = range(10).map(() => loaded.rng.next());
     expect(after).to.deep.eq(before);
   });
@@ -860,10 +864,13 @@ describe('Game', () => {
     expect(range(10).map(() => loaded.rng.next())).to.deep.eq(range(10).map(() => legacy.next()));
   });
 
-  it('a game created with a strong generator serializes as sfc32', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gnew', [player], player, 'snew', {}, StrongRandom.fromEntropy([1, 2, 3, 4]));
-    expect(game.serialize().rng?.kind).to.eq('sfc32');
+  it('refuses to load a save that has neither rng nor seed', () => {
+    const [game] = testGame(2);
+    const d = game.serialize();
+    delete d.rng;
+    delete d.seed;
+    delete d.currentSeed;
+    expect(() => Game.deserialize(d)).to.throw(/neither rng nor seed/);
   });
 
   /**

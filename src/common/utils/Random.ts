@@ -79,8 +79,8 @@ export class StrongRandom extends Random {
    * then runs a short warm-up so weak seed words do not show through in early output.
    */
   public static fromEntropy(words: ReadonlyArray<number>): StrongRandom {
-    if (words.length < 4) {
-      throw new Error('StrongRandom needs at least four words of entropy');
+    if (words.length !== 4) {
+      throw new Error(`StrongRandom needs exactly four words of entropy, got ${words.length}`);
     }
     const rng = new StrongRandom(words[0], words[1], words[2], words[3]);
     for (let i = 0; i < 15; i++) {

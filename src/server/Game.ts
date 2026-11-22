@@ -1753,7 +1753,15 @@ export class Game implements IGame, Logger {
 
     const board = GameSetup.deserializeBoard(marsBotPlayer === undefined ? players : [...players, marsBotPlayer], gameOptions, d);
 
-    const rng = d.rng !== undefined ? deserializeRandom(d.rng) : new SeededRandom(d.seed ?? 0, d.currentSeed);
+    let rng: GameRandom;
+    if (d.rng !== undefined) {
+      rng = deserializeRandom(d.rng);
+    } else if (d.seed !== undefined) {
+      // TODO(ignac8): Remove the SeededRandom fallback for old saves after 2027-01-01.
+      rng = new SeededRandom(d.seed, d.currentSeed);
+    } else {
+      throw new Error(`Game ${d.id} has neither rng nor seed`);
+    }
 
     const projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);

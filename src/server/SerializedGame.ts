@@ -27,6 +27,7 @@ export type SerializedGame = {
     beholdTheEmperor?: boolean;
     board: SerializedBoard;
     ceoDeck: SerializedDeck;
+    // TODO(ignac8): Remove after 2027-01-01, along with the SeededRandom fallback in Game.deserialize.
     /** @deprecated superseded by `rng`; kept to load saves written before `rng` existed. */
     currentSeed?: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
@@ -61,6 +62,7 @@ export type SerializedGame = {
     preludeDeck: SerializedDeck,
     projectDeck: SerializedDeck,
     researchedPlayers: Array<PlayerId>;
+    // TODO(ignac8): Remove after 2027-01-01, along with the SeededRandom fallback in Game.deserialize.
     /** @deprecated superseded by `rng`; kept to load saves written before `rng` existed. */
     seed?: number;
     /** The game's random generator. Absent only in saves written before `rng` existed, which carry `seed`/`currentSeed`. */

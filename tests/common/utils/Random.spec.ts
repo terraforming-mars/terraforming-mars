@@ -83,8 +83,9 @@ describe('Random', () => {
       expect(a).to.deep.eq(b);
     });
 
-    it('fromEntropy rejects fewer than four words', () => {
+    it('fromEntropy rejects anything but four words', () => {
       expect(() => StrongRandom.fromEntropy([1, 2, 3])).to.throw();
+      expect(() => StrongRandom.fromEntropy([1, 2, 3, 4, 5])).to.throw();
     });
 
     it('different entropy gives different streams', () => {

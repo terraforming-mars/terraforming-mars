@@ -5,7 +5,8 @@ import {inplaceRemove, toName} from '../../../common/utils/utils';
 import {pickByFlippedCard} from '../MarsBotCardFlip';
 
 /**
- * Adds one of the colony tiles left out of the game to it, picked the way Expedited Construction picks one (rulebook C, p.4; Aridor's setup).
+ * Adds one of the colony tiles left out of the game to it, picked the way Expedited Construction picks one
+ * (rulebook C, p.4; Aridor's setup).
  *
  * Returns the added tile, or undefined when every tile is already in play.
  */

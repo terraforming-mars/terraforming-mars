@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {GovernmentIntervention} from '@/server/automa/bonusCards/GovernmentIntervention';
 import {testGame} from '../../TestGame';
 import {setVenusScaleLevel} from '../../TestingUtils';
 import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
-const ADVANCE_FURTHEST = `advanceFurthestParameter(${CardName.AUTOMA_GOVERNMENT_INTERVENTION}, false)`;
+const ADVANCE_FURTHEST = `advanceFurthestParameter(${BonusCardName.GOVERNMENT_INTERVENTION}, false)`;
 
 describe('GovernmentIntervention', () => {
   // `advanced` is what raising the parameter furthest from completion returns: false once Mars is complete

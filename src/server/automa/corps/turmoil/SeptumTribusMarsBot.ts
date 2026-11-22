@@ -1,8 +1,7 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {DELEGATES_PER_PLAYER} from '@/common/constants';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
 export class SeptumTribusMarsBot extends MarsBotCorp {
@@ -11,15 +10,15 @@ export class SeptumTribusMarsBot extends MarsBotCorp {
       name: CardName.SEPTUM_TRIBUS,
       description: 'Setup: remove Party Politics, add Gray Eminence to bonus deck, and add all delegates of an unused colour to MarsBot\'s reserve. Each generation: add Gray Eminence to action deck.',
       requiredExpansions: ['turmoil'],
-      actionDeckBonusCard: BonusCardId.B29_GRAY_EMINENCE,
+      actionDeckBonusCard: BonusCardName.GRAY_EMINENCE,
     });
   }
 
   public override setup(marsBot: IMarsBot): void {
-    marsBot.removeBonusCard(BonusCardId.B21_PARTY_POLITICS);
-    marsBot.addBonusCardToBonusDeck(BonusCardId.B29_GRAY_EMINENCE);
+    marsBot.removeBonusCard(BonusCardName.PARTY_POLITICS);
+    marsBot.addBonusCardToBonusDeck(BonusCardName.GRAY_EMINENCE);
     marsBot.game.log('MarsBot (${0}): ${1} removed, ${2} added',
-      (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B21_PARTY_POLITICS).name).cardName(createBonusCard(BonusCardId.B29_GRAY_EMINENCE).name));
+      (b) => b.cardName(this.name).bonusCardName(BonusCardName.PARTY_POLITICS).bonusCardName(BonusCardName.GRAY_EMINENCE));
     // The unused colour's delegates count as MarsBot's own.
     const turmoil = marsBot.game.turmoil;
     if (turmoil) {
@@ -29,6 +28,6 @@ export class SeptumTribusMarsBot extends MarsBotCorp {
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {
-    marsBot.addBonusCardToActionDeck(BonusCardId.B29_GRAY_EMINENCE);
+    marsBot.addBonusCardToActionDeck(BonusCardName.GRAY_EMINENCE);
   }
 }

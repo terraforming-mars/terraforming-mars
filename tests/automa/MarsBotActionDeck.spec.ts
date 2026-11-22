@@ -1,13 +1,12 @@
 import {expect} from 'chai';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '@/common/cards/Tag';
 import {ConstRandom, SeededRandom} from '@/common/utils/Random';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {MarsBotActionDeck} from '@/server/automa/MarsBotActionDeck';
-import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 import {MarsBotBonusDeck} from '@/server/automa/MarsBotBonusDeck';
 import {cardTagsIncludingEvent} from '@/server/automa/MarsBotTags';
-import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {ACTION_DECK_BONUS_CARD_REMOVED} from '@/server/automa/corps/corpHelpers';
 import {Algae} from '@/server/cards/base/Algae';
 import {Asteroid} from '@/server/cards/base/Asteroid';
@@ -19,8 +18,8 @@ import {recordingMarsBot} from './corps/RecordingMarsBot';
 
 /** A bonus card that runs `effect` when it resolves, and returns `destroyed`. */
 class TestBonusCard extends MarsBotBonusCard {
-  constructor(id: BonusCardId, private readonly destroyed: boolean = false, private readonly effect: (marsBot: IMarsBot) => void = () => {}) {
-    super({id, name: createBonusCard(id).name});
+  constructor(name: BonusCardName, private readonly destroyed: boolean = false, private readonly effect: (marsBot: IMarsBot) => void = () => {}) {
+    super(name);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
@@ -48,8 +47,8 @@ function setup(options: Partial<GameOptions> = {}, fields: Partial<IMarsBot> = {
   return {game, marsBot, corpState, played, deck};
 }
 
-function bonusIds(cards: ReadonlyArray<IProjectCard | MarsBotBonusCard>): Array<BonusCardId> {
-  return cards.flatMap((card) => card instanceof MarsBotBonusCard ? [card.id] : []);
+function bonusIds(cards: ReadonlyArray<IProjectCard | MarsBotBonusCard>): Array<BonusCardName> {
+  return cards.flatMap((card) => card instanceof MarsBotBonusCard ? [card.name] : []);
 }
 
 function projectCardCount(cards: ReadonlyArray<IProjectCard | MarsBotBonusCard>): number {
@@ -58,12 +57,12 @@ function projectCardCount(cards: ReadonlyArray<IProjectCard | MarsBotBonusCard>)
 
 describe('MarsBotActionDeck', () => {
   for (const run of [
-    {preludeExtension: false, expected: {projectCards: 3, bonusCards: [BonusCardId.B01_METEOR_SHOWER]}},
-    {preludeExtension: true, expected: {projectCards: 6, bonusCards: [BonusCardId.B01_METEOR_SHOWER]}},
+    {preludeExtension: false, expected: {projectCards: 3, bonusCards: [BonusCardName.METEOR_SHOWER]}},
+    {preludeExtension: true, expected: {projectCards: 6, bonusCards: [BonusCardName.METEOR_SHOWER]}},
   ]) {
     it('builds the first action deck from project cards and a bonus card: ' + JSON.stringify(run), () => {
       const {marsBot, deck} = setup({preludeExtension: run.preludeExtension});
-      marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B01_METEOR_SHOWER));
+      marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.METEOR_SHOWER));
 
       deck.buildInitial();
 
@@ -72,8 +71,8 @@ describe('MarsBotActionDeck', () => {
   }
 
   for (const run of [
-    {options: {venusNextExtension: true}, replacesPartyPolitics: false, expected: [BonusCardId.B16_GOVERNMENT_INTERVENTION]},
-    {options: {turmoilExtension: true}, replacesPartyPolitics: false, expected: [BonusCardId.B21_PARTY_POLITICS]},
+    {options: {venusNextExtension: true}, replacesPartyPolitics: false, expected: [BonusCardName.GOVERNMENT_INTERVENTION]},
+    {options: {turmoilExtension: true}, replacesPartyPolitics: false, expected: [BonusCardName.PARTY_POLITICS]},
     {options: {turmoilExtension: true}, replacesPartyPolitics: true, expected: []},
   ]) {
     it('adds the expansions\' cards to the first action deck: ' + JSON.stringify(run), () => {
@@ -87,22 +86,22 @@ describe('MarsBotActionDeck', () => {
 
   it('builds the next action deck from 3 project cards and a bonus card', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B01_METEOR_SHOWER));
+    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.METEOR_SHOWER));
 
     deck.buildResearch();
 
     expect({projectCards: projectCardCount(deck.cards), bonusCards: bonusIds(deck.cards)})
-      .deep.eq({projectCards: 3, bonusCards: [BonusCardId.B01_METEOR_SHOWER]});
+      .deep.eq({projectCards: 3, bonusCards: [BonusCardName.METEOR_SHOWER]});
   });
 
   for (const run of [
-    {options: {venusNextExtension: true}, generation: 2, fields: {}, expected: [BonusCardId.B16_GOVERNMENT_INTERVENTION]},
-    {options: {turmoilExtension: true}, generation: 2, fields: {}, expected: [BonusCardId.B21_PARTY_POLITICS]},
+    {options: {venusNextExtension: true}, generation: 2, fields: {}, expected: [BonusCardName.GOVERNMENT_INTERVENTION]},
+    {options: {turmoilExtension: true}, generation: 2, fields: {}, expected: [BonusCardName.PARTY_POLITICS]},
     {options: {turmoilExtension: true}, generation: 2, fields: {replacesPartyPolitics: true}, expected: []},
     {options: {coloniesExtension: true}, generation: 1, fields: {}, expected: []},
-    {options: {coloniesExtension: true}, generation: 2, fields: {}, expected: [BonusCardId.B19_SHIPPING_LINES]},
+    {options: {coloniesExtension: true}, generation: 2, fields: {}, expected: [BonusCardName.SHIPPING_LINES]},
     {options: {coloniesExtension: true}, generation: 2, fields: {hasSecondTradeFleet: true},
-      expected: [BonusCardId.B19_SHIPPING_LINES, BonusCardId.B20_EXTENDED_SHIPPING_LINES]},
+      expected: [BonusCardName.SHIPPING_LINES, BonusCardName.EXTENDED_SHIPPING_LINES]},
   ]) {
     it('adds the expansions\' cards to the next action deck: ' + JSON.stringify(run), () => {
       const {game, deck} = setup(run.options, run.fields);
@@ -110,7 +109,7 @@ describe('MarsBotActionDeck', () => {
 
       deck.buildResearch();
 
-      expect(bonusIds(deck.cards).toSorted()).deep.eq(run.expected);
+      expect(bonusIds(deck.cards)).to.have.members(run.expected);
     });
   }
 
@@ -126,30 +125,30 @@ describe('MarsBotActionDeck', () => {
 
       expect({projectCards: projectCardCount(deck.cards), discarded: game.projectDeck.discardPile.length - discarded})
         .deep.eq(run.expected);
-      expect(bonusIds(deck.cards)).deep.eq([BonusCardId.B21_PARTY_POLITICS]);
+      expect(bonusIds(deck.cards)).deep.eq([BonusCardName.PARTY_POLITICS]);
     });
   }
 
   it('plays a project card from the top of the action deck', () => {
     const {deck, played} = setup();
-    deck.cards = [new Mine(), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER)];
+    deck.cards = [new Mine(), new TestBonusCard(BonusCardName.METEOR_SHOWER)];
 
     deck.playTopCard();
 
     expect(played).deep.eq(['Mine']);
     expect(projectCardCount(deck.cards)).eq(0);
-    expect(bonusIds(deck.cards)).deep.eq([BonusCardId.B01_METEOR_SHOWER]);
+    expect(bonusIds(deck.cards)).deep.eq([BonusCardName.METEOR_SHOWER]);
   });
 
   it('plays a bonus card from the top of the action deck', () => {
     const {marsBot, deck} = setup();
     let resolved = 0;
-    deck.cards = [new TestBonusCard(BonusCardId.B01_METEOR_SHOWER, false, () => resolved++)];
+    deck.cards = [new TestBonusCard(BonusCardName.METEOR_SHOWER, false, () => resolved++)];
 
     deck.playTopCard();
 
     expect(resolved).eq(1);
-    expect(bonusIds(marsBot.bonusDeck.discardPile)).deep.eq([BonusCardId.B01_METEOR_SHOWER]);
+    expect(bonusIds(marsBot.bonusDeck.discardPile)).deep.eq([BonusCardName.METEOR_SHOWER]);
   });
 
   it('plays nothing from an empty action deck', () => {
@@ -162,21 +161,21 @@ describe('MarsBotActionDeck', () => {
   });
 
   for (const run of [
-    {name: 'kept', card: BonusCardId.B01_METEOR_SHOWER, destroyed: false, backInDeck: false,
-      expected: {discarded: [BonusCardId.B01_METEOR_SHOWER], destroyedBonusCards: 0, removed: 0}},
-    {name: 'destroyed', card: BonusCardId.B01_METEOR_SHOWER, destroyed: true, backInDeck: false,
+    {name: 'kept', card: BonusCardName.METEOR_SHOWER, destroyed: false, backInDeck: false,
+      expected: {discarded: [BonusCardName.METEOR_SHOWER], destroyedBonusCards: 0, removed: 0}},
+    {name: 'destroyed', card: BonusCardName.METEOR_SHOWER, destroyed: true, backInDeck: false,
       expected: {discarded: [], destroyedBonusCards: 1, removed: 0}},
-    {name: 'shuffled back', card: BonusCardId.B01_METEOR_SHOWER, destroyed: true, backInDeck: true,
+    {name: 'shuffled back', card: BonusCardName.METEOR_SHOWER, destroyed: true, backInDeck: true,
       expected: {discarded: [], destroyedBonusCards: 0, removed: 0}},
-    {name: 'set aside', card: BonusCardId.B16_GOVERNMENT_INTERVENTION, destroyed: false, backInDeck: false,
+    {name: 'set aside', card: BonusCardName.GOVERNMENT_INTERVENTION, destroyed: false, backInDeck: false,
       expected: {discarded: [], destroyedBonusCards: 0, removed: 0}},
-    {name: 'corp card kept', card: BonusCardId.B23_RAPID_SPROUTING, destroyed: false, backInDeck: false,
+    {name: 'corp card kept', card: BonusCardName.RAPID_SPROUTING, destroyed: false, backInDeck: false,
       expected: {discarded: [], destroyedBonusCards: 0, removed: 0}},
-    {name: 'corp card destroyed', card: BonusCardId.B23_RAPID_SPROUTING, destroyed: true, backInDeck: false,
+    {name: 'corp card destroyed', card: BonusCardName.RAPID_SPROUTING, destroyed: true, backInDeck: false,
       expected: {discarded: [], destroyedBonusCards: 1, removed: 1}},
   ]) {
     it('puts a resolved bonus card where it goes next: ' + JSON.stringify(run), () => {
-      const {marsBot, corpState, deck} = setup({}, {actionDeckBonusCard: BonusCardId.B23_RAPID_SPROUTING});
+      const {marsBot, corpState, deck} = setup({}, {actionDeckBonusCard: BonusCardName.RAPID_SPROUTING});
       const card = new TestBonusCard(run.card, run.destroyed, (bot) => {
         if (run.backInDeck) {
           bot.bonusDeck.drawPile.push(card);
@@ -203,31 +202,31 @@ describe('MarsBotActionDeck', () => {
 
   it('moves the top bonus card into the action deck', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B02_INVASIVE_SPECIES), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER));
+    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.INVASIVE_SPECIES), new TestBonusCard(BonusCardName.METEOR_SHOWER));
     deck.cards = [new Mine()];
 
     deck.maybeMoveBonusCardToActionDeck();
     deck.maybeMoveBonusCardToActionDeck();
     deck.maybeMoveBonusCardToActionDeck();
 
-    expect(bonusIds(deck.cards)).deep.eq([BonusCardId.B02_INVASIVE_SPECIES, BonusCardId.B01_METEOR_SHOWER]);
+    expect(bonusIds(deck.cards)).deep.eq([BonusCardName.INVASIVE_SPECIES, BonusCardName.METEOR_SHOWER]);
     expect(projectCardCount(deck.cards)).eq(1);
   });
 
   it('returns the setup bonus card to the bonus deck, keeping project cards and the cards that come back every generation', () => {
-    const {marsBot, deck} = setup({}, {actionDeckBonusCard: BonusCardId.B23_RAPID_SPROUTING});
+    const {marsBot, deck} = setup({}, {actionDeckBonusCard: BonusCardName.RAPID_SPROUTING});
     deck.cards = [
       new Mine(),
-      new TestBonusCard(BonusCardId.B01_METEOR_SHOWER),
-      new TestBonusCard(BonusCardId.B16_GOVERNMENT_INTERVENTION),
-      new TestBonusCard(BonusCardId.B23_RAPID_SPROUTING),
+      new TestBonusCard(BonusCardName.METEOR_SHOWER),
+      new TestBonusCard(BonusCardName.GOVERNMENT_INTERVENTION),
+      new TestBonusCard(BonusCardName.RAPID_SPROUTING),
     ];
 
     deck.returnSetupBonusCardToBonusDeck();
 
-    expect(bonusIds(deck.cards)).deep.eq([BonusCardId.B16_GOVERNMENT_INTERVENTION, BonusCardId.B23_RAPID_SPROUTING]);
+    expect(bonusIds(deck.cards)).deep.eq([BonusCardName.GOVERNMENT_INTERVENTION, BonusCardName.RAPID_SPROUTING]);
     expect(projectCardCount(deck.cards)).eq(1);
-    expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([BonusCardId.B01_METEOR_SHOWER]);
+    expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([BonusCardName.METEOR_SHOWER]);
   });
 
   it('draws project cards into the action deck', () => {
@@ -248,8 +247,8 @@ describe('MarsBotActionDeck', () => {
     {name: 'removed from the game', where: 'none', removed: 1, expected: {added: false, bonusDeck: 0}},
   ]) {
     it('shuffles a bonus card into the action deck once: ' + JSON.stringify(run), () => {
-      const {marsBot, corpState, deck} = setup({}, {actionDeckBonusCard: BonusCardId.B01_METEOR_SHOWER});
-      const card = new TestBonusCard(BonusCardId.B01_METEOR_SHOWER);
+      const {marsBot, corpState, deck} = setup({}, {actionDeckBonusCard: BonusCardName.METEOR_SHOWER});
+      const card = new TestBonusCard(BonusCardName.METEOR_SHOWER);
       if (run.where === 'draw') {
         marsBot.bonusDeck.drawPile.push(card);
       } else if (run.where === 'discard') {
@@ -259,11 +258,11 @@ describe('MarsBotActionDeck', () => {
       }
       corpState.set(ACTION_DECK_BONUS_CARD_REMOVED, run.removed);
 
-      const added = deck.addBonusCard(BonusCardId.B01_METEOR_SHOWER);
+      const added = deck.addBonusCard(BonusCardName.METEOR_SHOWER);
 
       expect({added: added !== undefined, bonusDeck: marsBot.bonusDeck.drawPile.length + marsBot.bonusDeck.discardPile.length})
         .deep.eq(run.expected);
-      expect(bonusIds(deck.cards)).deep.eq(run.removed === 0 ? [BonusCardId.B01_METEOR_SHOWER] : []);
+      expect(bonusIds(deck.cards)).deep.eq(run.removed === 0 ? [BonusCardName.METEOR_SHOWER] : []);
       if (run.where === 'draw' || run.where === 'discard') {
         expect(added).eq(card);
       }
@@ -272,23 +271,23 @@ describe('MarsBotActionDeck', () => {
 
   it('removes a bonus card from the bonus deck', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B02_INVASIVE_SPECIES), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER));
-    marsBot.bonusDeck.discardPile.push(new TestBonusCard(BonusCardId.B01_METEOR_SHOWER));
+    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.INVASIVE_SPECIES), new TestBonusCard(BonusCardName.METEOR_SHOWER));
+    marsBot.bonusDeck.discardPile.push(new TestBonusCard(BonusCardName.METEOR_SHOWER));
 
-    deck.removeBonusCard(BonusCardId.B01_METEOR_SHOWER);
+    deck.removeBonusCard(BonusCardName.METEOR_SHOWER);
 
-    expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([BonusCardId.B02_INVASIVE_SPECIES]);
+    expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([BonusCardName.INVASIVE_SPECIES]);
     expect(marsBot.bonusDeck.discardPile).is.empty;
     expect(deck.cards).is.empty;
   });
 
   for (const run of [
-    {dealt: BonusCardId.B01_METEOR_SHOWER, expected: [BonusCardId.B02_INVASIVE_SPECIES]},
-    {dealt: BonusCardId.B21_PARTY_POLITICS, expected: []},
+    {dealt: BonusCardName.METEOR_SHOWER, expected: [BonusCardName.INVASIVE_SPECIES]},
+    {dealt: BonusCardName.PARTY_POLITICS, expected: []},
   ]) {
     it('replaces a removed setup bonus card from the bonus deck, but not a card that comes back every generation: ' + JSON.stringify(run), () => {
       const {marsBot, deck} = setup();
-      marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B02_INVASIVE_SPECIES));
+      marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.INVASIVE_SPECIES));
       deck.cards = [new Mine(), new TestBonusCard(run.dealt)];
 
       deck.removeBonusCard(run.dealt);
@@ -304,29 +303,29 @@ describe('MarsBotActionDeck', () => {
 
     const cards = marsBot.bonusDeck.drawPile;
     expect(cards).has.length(2);
-    expect(cards.every((card) => card.id === undefined && cardTagsIncludingEvent(card).includes(Tag.SPACE))).is.true;
+    expect(cards.every((card) => !(card instanceof MarsBotBonusCard) && cardTagsIncludingEvent(card).includes(Tag.SPACE))).is.true;
   });
 
   it('shuffles a bonus card into the bonus deck, or puts it at the bottom', () => {
     const {marsBot, deck} = setup();
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT));
+    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.RESEARCH_AND_DEVELOPMENT));
 
-    deck.addBonusCardToBonusDeck(BonusCardId.B01_METEOR_SHOWER);
-    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardId.B07_LOCAL_NEURAL_INSTANCE));
-    deck.addBonusCardToBottomOfBonusDeck(BonusCardId.B02_INVASIVE_SPECIES);
+    deck.addBonusCardToBonusDeck(BonusCardName.METEOR_SHOWER);
+    marsBot.bonusDeck.drawPile.push(new TestBonusCard(BonusCardName.LOCAL_NEURAL_INSTANCE));
+    deck.addBonusCardToBottomOfBonusDeck(BonusCardName.INVASIVE_SPECIES);
 
     // The top of the bonus deck is the end of the draw pile
     expect(bonusIds(marsBot.bonusDeck.drawPile)).deep.eq([
-      BonusCardId.B02_INVASIVE_SPECIES,
-      BonusCardId.B01_METEOR_SHOWER,
-      BonusCardId.B03_RESEARCH_AND_DEVELOPMENT,
-      BonusCardId.B07_LOCAL_NEURAL_INSTANCE,
+      BonusCardName.INVASIVE_SPECIES,
+      BonusCardName.METEOR_SHOWER,
+      BonusCardName.RESEARCH_AND_DEVELOPMENT,
+      BonusCardName.LOCAL_NEURAL_INSTANCE,
     ]);
   });
 
   it('discards the first project card with the fewest tags from the action deck', () => {
     const {game, deck} = setup();
-    const [asteroid, bonusCard, mine, algae] = [new Asteroid(), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER), new Mine(), new Algae()];
+    const [asteroid, bonusCard, mine, algae] = [new Asteroid(), new TestBonusCard(BonusCardName.METEOR_SHOWER), new Mine(), new Algae()];
     deck.cards = [asteroid, bonusCard, mine, algae];
 
     deck.maybeDiscardProjectCardWithFewestTags();
@@ -337,7 +336,7 @@ describe('MarsBotActionDeck', () => {
 
   it('discards no bonus card', () => {
     const {deck} = setup();
-    deck.cards = [new TestBonusCard(BonusCardId.B01_METEOR_SHOWER)];
+    deck.cards = [new TestBonusCard(BonusCardName.METEOR_SHOWER)];
 
     deck.maybeDiscardProjectCardWithFewestTags();
 
@@ -345,12 +344,12 @@ describe('MarsBotActionDeck', () => {
   });
 
   for (const run of [
-    {destroyedBonusCards: 0, expected: {actionDeckCardNames: ['Mine', 'B01']}},
-    {destroyedBonusCards: 2, expected: {actionDeckCardNames: ['Mine', 'B01'], destroyedBonusCards: 2}},
+    {destroyedBonusCards: 0, expected: {actionDeckCardNames: ['Mine', 'Meteor Shower']}},
+    {destroyedBonusCards: 2, expected: {actionDeckCardNames: ['Mine', 'Meteor Shower'], destroyedBonusCards: 2}},
   ]) {
     it('saves and restores the action deck and the destroyed bonus card count: ' + JSON.stringify(run), () => {
       const {deck, marsBot} = setup();
-      deck.cards = [new Mine(), new TestBonusCard(BonusCardId.B01_METEOR_SHOWER)];
+      deck.cards = [new Mine(), new TestBonusCard(BonusCardName.METEOR_SHOWER)];
       deck.destroyedBonusCards = run.destroyedBonusCards;
       const restored = new MarsBotActionDeck(marsBot, new ConstRandom(0));
 
@@ -358,7 +357,7 @@ describe('MarsBotActionDeck', () => {
 
       expect(deck.serialize()).deep.eq(run.expected);
       expect(restored.serialize()).deep.eq(run.expected);
-      expect(bonusIds(restored.cards)).deep.eq([BonusCardId.B01_METEOR_SHOWER]);
+      expect(bonusIds(restored.cards)).deep.eq([BonusCardName.METEOR_SHOWER]);
     });
   }
 });

@@ -11,7 +11,7 @@ describe('InventrixMarsBot', () => {
 
     new InventrixMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['removeBonusCard(B06)', 'removeBonusCard(B15)']);
+    expect(calls).deep.eq(['removeBonusCard(Lobbyists)', 'removeBonusCard(Lobbyists (Venus))']);
   });
 
   for (const run of [

@@ -1,10 +1,9 @@
 import {CardResource} from '@/common/CardResource';
 import {Resource} from '@/common/Resource';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 import {OrOptions} from '@/server/inputs/OrOptions';
@@ -23,9 +22,9 @@ export class SpliceMarsBot extends MarsBotCorp {
 
   public override setup(marsBot: IMarsBot): void {
     marsBot.gainMc(8);
-    marsBot.removeBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT);
+    marsBot.removeBonusCard(BonusCardName.RESEARCH_AND_DEVELOPMENT);
     marsBot.addProjectCardsToBonusDeck(Tag.MICROBE, 1);
-    marsBot.game.log('MarsBot (${0}): +8:r:mc:, ${1} removed, microbe card added to bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B03_RESEARCH_AND_DEVELOPMENT).name));
+    marsBot.game.log('MarsBot (${0}): +8:r:mc:, ${1} removed, microbe card added to bonus deck', (b) => b.cardName(this.name).bonusCardName(BonusCardName.RESEARCH_AND_DEVELOPMENT));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {

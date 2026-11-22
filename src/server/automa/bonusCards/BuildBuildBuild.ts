@@ -1,8 +1,8 @@
 import {TileType} from '@/common/TileType';
-import {BonusCardId} from '@/common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 import {inplaceShuffle} from '@/server/utils/shuffle';
 
@@ -30,7 +30,7 @@ const SPECIAL_TILES: ReadonlyMap<CardName, TileType> = new Map([
 
 export class BuildBuildBuild extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B27_BUILD_BUILD_BUILD, name: CardName.AUTOMA_BUILD_BUILD_BUILD});
+    super(BonusCardName.BUILD_BUILD_BUILD);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
@@ -44,7 +44,7 @@ export class BuildBuildBuild extends MarsBotBonusCard {
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(citySpace));
       const lost = marsBot.loseMc(5);
       marsBot.game.log('MarsBot (${0}): places a city next to a greenery of ${1}, loses ${2}:r:mc:',
-        (b) => b.cardName(this.name).player(marsBot.humanPlayer).number(lost));
+        (b) => b.bonusCardName(this.name).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
@@ -57,14 +57,14 @@ export class BuildBuildBuild extends MarsBotBonusCard {
       marsBot.removePlayedProjectCard(played);
       const lost = marsBot.loseMc(3);
       marsBot.game.log('MarsBot (${0}): places the tile of ${1} next to a city of ${2}, removes the card and loses ${3}:r:mc:',
-        (b) => b.cardName(this.name).card(played).player(marsBot.humanPlayer).number(lost));
+        (b) => b.bonusCardName(this.name).card(played).player(marsBot.humanPlayer).number(lost));
       return false;
     }
 
     marsBot.gainMc(3);
     marsBot.bonusDeck.drawPile.push(this);
     inplaceShuffle(marsBot.bonusDeck.drawPile, marsBot.game.rng);
-    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): +3:r:mc:, card shuffled back into the bonus deck', (b) => b.bonusCardName(this.name));
     return true;
   }
 }

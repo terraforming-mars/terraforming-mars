@@ -1,7 +1,6 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
 export class UnitedNationsMarsInitiativeMarsBot extends MarsBotCorp {
@@ -15,8 +14,8 @@ export class UnitedNationsMarsInitiativeMarsBot extends MarsBotCorp {
   public override setup(marsBot: IMarsBot): void {
     // The setup bonus card was dealt before the corporation was chosen (rulebook A setup step 3)
     marsBot.returnSetupBonusCardToBonusDeck();
-    marsBot.addBonusCardToBonusDeck(BonusCardId.B31_GOVERNMENT_SUBSIDY);
-    marsBot.game.log('MarsBot (${0}): ${1} added to bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B31_GOVERNMENT_SUBSIDY).name));
+    marsBot.addBonusCardToBonusDeck(BonusCardName.GOVERNMENT_SUBSIDY);
+    marsBot.game.log('MarsBot (${0}): ${1} added to bonus deck', (b) => b.cardName(this.name).bonusCardName(BonusCardName.GOVERNMENT_SUBSIDY));
   }
 
   public override beforeActionPhase(marsBot: IMarsBot): void {

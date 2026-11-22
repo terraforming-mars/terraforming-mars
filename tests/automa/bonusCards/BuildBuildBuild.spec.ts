@@ -48,8 +48,9 @@ describe('BuildBuildBuild', () => {
     const {game, human, marsBot, calls} = setup();
     const greenery = quietSpace(game, human);
     game.simpleAddTile(human, greenery, {tileType: TileType.GREENERY});
+    const card = new BuildBuildBuild();
 
-    const kept = new BuildBuildBuild().resolve(marsBot);
+    const kept = card.resolve(marsBot);
 
     const cities = game.board.getCities(marsBot.player);
     expect(cities).has.length(1);
@@ -94,7 +95,7 @@ describe('BuildBuildBuild', () => {
       expect(game.board.spaces.filter((s) => s.player === marsBot.player)).is.empty;
       expect(removed).is.empty;
       expect(calls).deep.eq(['gainMc(3)']);
-      expect(marsBot.bonusDeck.drawPile).has.members([card]);
+      expect(marsBot.bonusDeck.drawPile).deep.eq([card]);
       expect(kept).is.true;
     });
   }

@@ -11,7 +11,7 @@ describe('SeptumTribusMarsBot', () => {
 
     new SeptumTribusMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['removeBonusCard(B21)', 'addBonusCardToBonusDeck(B29)']);
+    expect(calls).deep.eq(['removeBonusCard(Party Politics)', 'addBonusCardToBonusDeck(Gray Eminence)']);
     expect(game.turmoil!.delegateReserve.get(marsBot.player)).eq(2 * DELEGATES_PER_PLAYER);
   });
 
@@ -20,6 +20,6 @@ describe('SeptumTribusMarsBot', () => {
 
     new SeptumTribusMarsBot().beforeActionPhase(marsBot);
 
-    expect(calls).deep.eq(['addBonusCardToActionDeck(B29)']);
+    expect(calls).deep.eq(['addBonusCardToActionDeck(Gray Eminence)']);
   });
 });

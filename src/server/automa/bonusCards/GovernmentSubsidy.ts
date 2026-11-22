@@ -1,16 +1,15 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
-import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {BonusCardName} from '@/common/automa/BonusCardName';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 
 export class GovernmentSubsidy extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B31_GOVERNMENT_SUBSIDY, name: CardName.AUTOMA_GOVERNMENT_SUBSIDY});
+    super(BonusCardName.GOVERNMENT_SUBSIDY);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
     marsBot.player.increaseTerraformRating(1);
-    marsBot.game.log('MarsBot (${0}): +1 TR', (b) => b.cardName(this.name));
+    marsBot.game.log('MarsBot (${0}): +1 TR', (b) => b.bonusCardName(this.name));
     return false;
   }
 }

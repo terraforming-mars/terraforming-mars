@@ -1,12 +1,11 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
-import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {BonusCardName} from '@/common/automa/BonusCardName';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 import {MarsBotTilePlacer} from '@/server/automa/MarsBotTilePlacer';
 
 export class ExpeditedConstruction extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B05_EXPEDITED_CONSTRUCTION, name: CardName.AUTOMA_EXPEDITED_CONSTRUCTION});
+    super(BonusCardName.EXPEDITED_CONSTRUCTION);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
@@ -15,7 +14,7 @@ export class ExpeditedConstruction extends MarsBotBonusCard {
     if (space !== undefined) {
       marsBot.game.addCity(marsBot.player, space);
       marsBot.gainMc(tilePlacer.getTotalPlacementMC(space));
-      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): places a city, card destroyed', (b) => b.bonusCardName(this.name));
       return true;
     }
     // No failed action if can't place

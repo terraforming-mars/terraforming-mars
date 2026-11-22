@@ -1,11 +1,10 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
-import {CardName} from '@/common/cards/CardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {MarsBotBonusCard} from '@/server/automa/MarsBotBonusCard';
+import {BonusCardName} from '@/common/automa/BonusCardName';
+import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
 
 export class Investors extends MarsBotBonusCard {
   constructor() {
-    super({id: BonusCardId.B32_INVESTORS, name: CardName.AUTOMA_INVESTORS});
+    super(BonusCardName.INVESTORS);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {
@@ -18,11 +17,11 @@ export class Investors extends MarsBotBonusCard {
       const mostIndex = marsBotBoard.getMostAdvancedTrackIndex();
       marsBot.maybeAdvanceTrack(leastIndex);
       marsBotBoard.tracks[mostIndex].regress();
-      marsBot.game.log('MarsBot (${0}): advance least-advanced track, move most-advanced track back', (b) => b.cardName(this.name));
+      marsBot.game.log('MarsBot (${0}): advance least-advanced track, move most-advanced track back', (b) => b.bonusCardName(this.name));
     } else {
       const amount = marsBotBoard.tracks[leastIndex].position;
       marsBot.gainMc(amount);
-      marsBot.game.log('MarsBot (${0}): +${1}:r:mc: from the least-advanced track', (b) => b.cardName(this.name).number(amount));
+      marsBot.game.log('MarsBot (${0}): +${1}:r:mc: from the least-advanced track', (b) => b.bonusCardName(this.name).number(amount));
     }
     return false;
   }

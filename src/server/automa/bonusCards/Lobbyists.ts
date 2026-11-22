@@ -1,11 +1,10 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
-import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {LobbyistsBase} from '@/server/automa/bonusCards/LobbyistsBase';
 
 export class Lobbyists extends LobbyistsBase {
   constructor() {
-    super({id: BonusCardId.B06_LOBBYISTS, name: CardName.AUTOMA_LOBBYISTS});
+    super(BonusCardName.LOBBYISTS);
   }
 
   public override resolve(marsBot: IMarsBot): boolean {

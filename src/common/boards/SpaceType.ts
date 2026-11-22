@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum SpaceType {
     LAND = 'land',
     OCEAN = 'ocean',

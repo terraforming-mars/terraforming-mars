@@ -841,7 +841,7 @@ describe('Game', () => {
 
   it('round-trips a strong random generator and continues the same sequence', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gnew', [player], player, 'snew', {}, StrongRandom.fromEntropy([1, 2, 3, 4]));
+    const game = Game.newInstance('gnew', [player], player, 'snew', {}, StrongRandom.newInstance([1, 2, 3, 4]));
     range(7).forEach(() => game.rng.next());
     const d = game.serialize();
     expect(d.rng?.kind).to.eq('sfc32');

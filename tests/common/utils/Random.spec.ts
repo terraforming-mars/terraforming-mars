@@ -61,7 +61,7 @@ describe('Random', () => {
     });
 
     it('next stays within [0, 1)', () => {
-      const rnd = StrongRandom.fromEntropy([0xdeadbeef, 0x12345678, 0x9abcdef0, 0x0f1e2d3c]);
+      const rnd = StrongRandom.newInstance([0xdeadbeef, 0x12345678, 0x9abcdef0, 0x0f1e2d3c]);
       range(5_000).forEach(() => {
         const val = rnd.next();
         expect(val).is.gte(0);
@@ -70,7 +70,7 @@ describe('Random', () => {
     });
 
     it('round-trips through serialize, preserving the full 128-bit state', () => {
-      const rnd = StrongRandom.fromEntropy([5, 6, 7, 8]);
+      const rnd = StrongRandom.newInstance([5, 6, 7, 8]);
       range(10).forEach(() => rnd.next());
       const data = rnd.serialize();
       expect(data.kind).to.eq('sfc32');
@@ -83,14 +83,18 @@ describe('Random', () => {
       expect(a).to.deep.eq(b);
     });
 
-    it('fromEntropy rejects anything but four words', () => {
-      expect(() => StrongRandom.fromEntropy([1, 2, 3])).to.throw();
-      expect(() => StrongRandom.fromEntropy([1, 2, 3, 4, 5])).to.throw();
+    it('newInstance rejects anything but four words', () => {
+      expect(() => StrongRandom.newInstance([1, 2, 3])).to.throw();
+      expect(() => StrongRandom.newInstance([1, 2, 3, 4, 5])).to.throw();
+    });
+
+    it('newInstance without words draws different streams', () => {
+      expect(StrongRandom.newInstance().next()).to.not.eq(StrongRandom.newInstance().next());
     });
 
     it('different entropy gives different streams', () => {
-      const a = StrongRandom.fromEntropy([1, 2, 3, 4]);
-      const b = StrongRandom.fromEntropy([1, 2, 3, 5]);
+      const a = StrongRandom.newInstance([1, 2, 3, 4]);
+      const b = StrongRandom.newInstance([1, 2, 3, 5]);
       expect(a.next()).to.not.eq(b.next());
     });
   });

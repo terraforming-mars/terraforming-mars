@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {Player} from '../../src/server/Player';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {DELEGATES_PER_PLAYER} from '../../src/common/constants';
@@ -11,7 +12,7 @@ describe('Cloner', () => {
     const game = Game.newInstance(
       'g-old-game-id', [player], player, 'spectatorid', {
         turmoilExtension: true,
-      }, -5179823149812374);
+      }, new SeededRandom(-5179823149812374));
 
     const newPlayer = new Player('new-player1', 'red', false, 3, 'p-new-player1-id');
     const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());

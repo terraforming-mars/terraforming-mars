@@ -1,7 +1,7 @@
 /**
- * A serialized random generator, tagged by algorithm so an old save
- * (mulberry32, 32-bit state) and a new one (sfc32, 128-bit state) can both
- * be restored. Produced by each generator's `serialize()`, restored by {@link deserializeRandom}.
+ * A serialized random generator, tagged by algorithm so saves from either
+ * {@link SeededRandom} or {@link StrongRandom} can be restored. Produced by each
+ * generator's `serialize()`, restored by {@link deserializeRandom}.
  */
 export type SerializedRandom =
   | {kind: 'mulberry32', seed: number, current: number}
@@ -19,6 +19,12 @@ export abstract class Random {
     return Math.floor(this.next() * range);
   }
 }
+/**
+ * A seedable generator using mulberry32, which keeps its whole state in one 32-bit word.
+ * Deterministic from its seed, which makes it right for tests and for restoring older
+ * saves, but a 32-bit state can be brute-forced from a few observed outputs, so live games
+ * use {@link StrongRandom}.
+ */
 export class SeededRandom extends Random {
   public readonly seed;
   private currentSeed: number;
@@ -48,17 +54,12 @@ export class SeededRandom extends Random {
 }
 
 /**
- * A seedable generator with 128 bits of state (sfc32). Unlike {@link SeededRandom}
- * (mulberry32), whose whole state is a single 32-bit word and so can be recovered
- * by trying all 2^32 possibilities against a handful of observed outputs, sfc32's
- * state is large enough that brute-forcing it from a game's visible cards is
- * infeasible. Used for live games so players cannot reconstruct the shuffle and
- * predict hidden cards. It is still a fast PRNG, not a cryptographic one, but its
- * output is not practically invertible from the little a player sees.
+ * A seedable generator with 128 bits of state, using sfc32 ("small fast counter").
+ * A game's visible cards reveal enough of {@link SeededRandom}'s 32-bit state to recover
+ * it, so a player could predict hidden cards. Brute-forcing 128 bits from the same
+ * observations is infeasible. It is a fast PRNG, not a cryptographic one.
  *
- * The state is seeded from real entropy via {@link StrongRandom.fromEntropy} at game
- * creation, and round-trips through {@link StrongRandom.serialize} so a loaded game
- * continues the same sequence.
+ * Reference: https://github.com/bryc/code/blob/master/jshash/PRNGs.md#sfc32
  */
 export class StrongRandom extends Random {
   private a: number;
@@ -75,12 +76,19 @@ export class StrongRandom extends Random {
   }
 
   /**
-   * Builds a generator from four 32-bit words of entropy (e.g. `crypto.randomBytes(16)`),
-   * then runs a short warm-up so weak seed words do not show through in early output.
+   * Creates a generator from four 32-bit seed words. With no words, draws them from
+   * `crypto.getRandomValues`.
+   *
+   * Like the reference seeding, this discards the first 15 outputs. The state starts as the
+   * raw seed words, and each output mixes them further, so a weak seed (for example small
+   * integers) does not show in the first outputs. The reference seeds three words, sets the
+   * counter to 1 and discards 15 outputs (12 when seeding from one 64-bit value); see the
+   * link on {@link StrongRandom}. Restoring a serialized generator uses the constructor and
+   * does not discard.
    */
-  public static fromEntropy(words: ReadonlyArray<number>): StrongRandom {
+  public static newInstance(words: ArrayLike<number> = crypto.getRandomValues(new Uint32Array(4))): StrongRandom {
     if (words.length !== 4) {
-      throw new Error(`StrongRandom needs exactly four words of entropy, got ${words.length}`);
+      throw new Error(`StrongRandom needs exactly four words, got ${words.length}`);
     }
     const rng = new StrongRandom(words[0], words[1], words[2], words[3]);
     for (let i = 0; i < 15; i++) {
@@ -89,7 +97,7 @@ export class StrongRandom extends Random {
     return rng;
   }
 
-  // sfc32 (Chris Doty-Humphrey's PractRand). 128-bit state, period at least 2^32.
+  // sfc32, from Chris Doty-Humphrey's PractRand. 128-bit state, period at least 2^32.
   public next(): number {
     const t = (this.a + this.b | 0) + this.d | 0;
     this.d = this.d + 1 | 0;

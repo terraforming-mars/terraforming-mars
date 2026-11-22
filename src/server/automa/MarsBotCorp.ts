@@ -60,12 +60,12 @@ export abstract class MarsBotCorp {
 
   /** Runs once, right after the bot's corporation is chosen. */
   public setup?(marsBot: IMarsBot): void;
-  /** Takes a corp action at the start of every generation. */
+  /** Called at the start of every generation. */
   public roundStart?(marsBot: IMarsBot): void;
-  /** Takes a corp action every generation, right before the action phase. */
+  /** Called every generation, right before the action phase. */
   public beforeActionPhase?(marsBot: IMarsBot): void;
   /**
-   * Reacts to the bot's track marker reaching one of this corp's cubes.
+   * Called when the bot's track marker reaches one of this corp's cubes.
    *
    * Cube effects come on top of the icon printed on that space unless the corp's card says
    * otherwise: return true when the cube's effect replaces the icon (Helion's white cubes draw
@@ -73,34 +73,34 @@ export abstract class MarsBotCorp {
    */
   public onTrackCubeTrigger?(marsBot: IMarsBot, trackIndex: number, position: number, cubeType: CubeType): boolean | void;
   /**
-   * Reacts to the bot's track reaching `position`, once that space has finished resolving, its icon included.
+   * Called after the bot's track reaches `position` and that space finishes resolving, its icon included.
    *
    * Not called when the track moves back onto a space it regressed from.
    */
   public afterTrackSpaceResolved?(marsBot: IMarsBot, trackIndex: number, position: number): void;
-  /** Reacts to the bot resolving a tag, on a project card or as one of its corp's starting tags. */
+  /** Called when the bot resolves a tag, on a project card or as one of its corp's starting tags. */
   public onTagResolved?(marsBot: IMarsBot, tag: Tag): void;
-  /** Reacts to the bot drawing and resolving a project card. */
+  /** Called when the bot draws and resolves a project card. */
   public onProjectCardResolved?(marsBot: IMarsBot, card: IProjectCard): void;
-  /** Reacts to the human player playing a card. */
+  /** Called when the human player plays a card. */
   public onHumanCardPlayed?(marsBot: IMarsBot, card: IProjectCard): void;
-  /** Reacts to a tile landing on `space`, placed by either side. */
+  /** Called when either side places a tile on `space`. */
   public onTilePlaced?(marsBot: IMarsBot, placedByMarsBot: boolean, tileType: TileType, space: Space): void;
-  /** Reacts to either player raising Venus, with the number of steps it actually moved. */
+  /** Called after either player raises Venus, with the number of steps it actually moved. */
   public onVenusRaised?(marsBot: IMarsBot, steps: number): void;
   /**
-   * Intercepts the bot raising a global parameter.
+   * Called before the bot raises a global parameter.
    *
-   * Returns true to cancel the raise: the global parameter stays at its current value.
+   * Returning true cancels that raise: the global parameter stays at its current value.
    */
   public interceptGlobalParameterRaise?(marsBot: IMarsBot, parameter: GlobalParameter): boolean;
-  /** Reacts to the bot's M€ supply growing by `amount`. */
+  /** Called after the bot's M€ supply grows by `amount`. */
   public onMcGained?(marsBot: IMarsBot, amount: number): void;
-  /** Reacts to either player building a colony (Poseidon, C33). */
+  /** Called when either player builds a colony (Poseidon, C33). */
   public onColonyPlaced?(marsBot: IMarsBot): void;
-  /** Reacts to the bot taking a Failed Action, after it gains its M€ for it. */
+  /** Called when the bot takes a Failed Action, after it gains its M€ for it. */
   public onFailedAction?(marsBot: IMarsBot): void;
-  /** Reacts to the bot spending floaters to keep an extra card in the research phase. */
+  /** Called when the bot spends floaters to keep an extra card in the research phase. */
   public onFloatersSpentForExtraCard?(marsBot: IMarsBot): void;
   /** Extra victory points added at final scoring. */
   public vpBonus?(marsBot: IMarsBot): number;

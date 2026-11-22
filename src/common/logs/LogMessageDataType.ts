@@ -1,5 +1,6 @@
 // Do not reorder these.
 
+// eslint-disable-next-line no-restricted-syntax
 export enum LogMessageDataType {
   STRING, // 0
   RAW_STRING, // Raw strings are untranslated.  // 1

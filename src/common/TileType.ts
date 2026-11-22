@@ -3,6 +3,7 @@ import {CardName} from './cards/CardName';
 // There might be a temptation to rename or reorder these, but TileType is stored in the database
 // as its number. Would have been better if this was stored as a string, but that ship has sailed,
 // for now.
+// eslint-disable-next-line no-restricted-syntax
 export enum TileType {
     GREENERY, // 0
     OCEAN, // 1

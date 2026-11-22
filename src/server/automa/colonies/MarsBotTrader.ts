@@ -6,16 +6,16 @@ import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
 import {IMarsBot} from '@/server/automa/IMarsBot';
 import {pickByFlippedCard} from '@/server/automa/MarsBotCardFlip';
 
-/** Breaks a tie among candidate tiles by flipping a project card, like C-15b (C-17c). */
+/** Breaks a tie among candidate tiles by revealing a project card, like C-15b (C-17c). */
 function selectTiedColony(game: IGame, candidates: Array<IColony>): IColony {
   return pickByFlippedCard(game, candidates) ?? candidates[0];
 }
 
 /**
- * The colony tile MarsBot trades with (C-17).
+ * Picks the colony tile MarsBot trades with (C-17).
  *
  * The tile furthest along its colony track wins (C-17a). A tie goes to a tile with MarsBot's colony
- * (C-17b), then to a flipped project card (C-17c). Returns undefined when no tile can be traded with.
+ * (C-17b), then to a revealed project card (C-17c). Returns undefined when no tile can be traded with.
  */
 export function selectTradeColony(marsBot: IMarsBot): IColony | undefined {
   const game = marsBot.game;

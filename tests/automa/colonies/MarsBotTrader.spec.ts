@@ -23,11 +23,20 @@ function setup(options: {megacredits?: number} = {}) {
 }
 
 describe('MarsBotTrader', () => {
-  // The flipped card's cost picks among the tied tiles: (cost - 1) % 2, so cost 2 picks the second
+  // The revealed card's cost picks among the tied tiles: (cost - 1) % 2, so cost 2 picks the second
   for (const run of [
-    {tiles: [{colonyName: ColonyName.LUNA, track: 5, botColony: false}, {colonyName: ColonyName.CERES, track: 3, botColony: false}], expected: ColonyName.LUNA},
-    {tiles: [{colonyName: ColonyName.LUNA, track: 4, botColony: true}, {colonyName: ColonyName.CERES, track: 4, botColony: false}], expected: ColonyName.LUNA},
-    {tiles: [{colonyName: ColonyName.LUNA, track: 4, botColony: false}, {colonyName: ColonyName.CERES, track: 4, botColony: false}], expected: ColonyName.CERES},
+    {
+      tiles: [{colonyName: ColonyName.LUNA, track: 5, botColony: false}, {colonyName: ColonyName.CERES, track: 3, botColony: false}],
+      expected: ColonyName.LUNA,
+    },
+    {
+      tiles: [{colonyName: ColonyName.LUNA, track: 4, botColony: true}, {colonyName: ColonyName.CERES, track: 4, botColony: false}],
+      expected: ColonyName.LUNA,
+    },
+    {
+      tiles: [{colonyName: ColonyName.LUNA, track: 4, botColony: false}, {colonyName: ColonyName.CERES, track: 4, botColony: false}],
+      expected: ColonyName.CERES,
+    },
   ] as const) {
     it('trades with the tile furthest along its track, then with its colony, then by a flipped card: ' + JSON.stringify(run), () => {
       const {game, botPlayer, marsBot} = setup();
@@ -47,7 +56,11 @@ describe('MarsBotTrader', () => {
     {colonyName: ColonyName.LUNA, botColony: false, expected: {stored: 2, tr: 0, calls: ['loseMc(1)']}},
     {colonyName: ColonyName.LUNA, botColony: true, expected: {stored: 3, tr: 0, calls: ['loseMc(1)']}},
     {colonyName: ColonyName.EUROPA, botColony: false, expected: {stored: 0, tr: 1, calls: ['loseMc(1)']}},
-    {colonyName: ColonyName.TITAN, botColony: false, expected: {stored: 0, tr: 0, calls: ['loseMc(1)', 'addFloaters(2)']}},
+    {
+      colonyName: ColonyName.TITAN,
+      botColony: false,
+      expected: {stored: 0, tr: 0, calls: ['loseMc(1)', 'addFloaters(2)']},
+    },
   ] as const) {
     it("pays 1 M€ and takes MarsBot's reward instead of the track's income: " + JSON.stringify(run), () => {
       const {botPlayer, marsBot, calls} = setup();

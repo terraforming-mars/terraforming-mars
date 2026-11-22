@@ -9,7 +9,7 @@ import {Named} from '@/common/Types';
 /**
  * A deck of cards to draw from, and also its discard pile.
  */
-export class Deck<T extends Named<CardName>> {
+export class Deck<T extends Named<N>, N extends string = CardName> {
   protected readonly type: string;
   public drawPile: Array<T>;
   public discardPile: Array<T>;
@@ -94,7 +94,7 @@ export class Deck<T extends Named<CardName>> {
     Deck.shuffle(this.discardPile, this.random);
   }
 
-  public serialize(): SerializedDeck {
+  public serialize(): SerializedDeck<N> {
     return {
       drawPile: this.drawPile.map(toName),
       discardPile: this.discardPile.map(toName),

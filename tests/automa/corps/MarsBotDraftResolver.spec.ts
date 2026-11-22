@@ -154,9 +154,24 @@ describe('MarsBotDraftResolver', () => {
     // Rulebook B p.3 makes Aridor's priority a track, not an ordered tag list. Our reading is that
     // both tags on a shared track match alike and more matches win.
     for (const run of [
-      {name: 'Jovian then Power in the kept order', shuffler: keepOrder, hand: [jovianCard, powerCard], expected: jovianCard},
-      {name: 'Jovian then Power in the reversed order', shuffler: reverseOrder, hand: [jovianCard, powerCard], expected: powerCard},
-      {name: 'Power then two Jovian in the kept order', shuffler: keepOrder, hand: [powerCard, twoJovianCard], expected: twoJovianCard},
+      {
+        name: 'Jovian then Power in the kept order',
+        shuffler: keepOrder,
+        hand: [jovianCard, powerCard],
+        expected: jovianCard,
+      },
+      {
+        name: 'Jovian then Power in the reversed order',
+        shuffler: reverseOrder,
+        hand: [jovianCard, powerCard],
+        expected: powerCard,
+      },
+      {
+        name: 'Power then two Jovian in the kept order',
+        shuffler: keepOrder,
+        hand: [powerCard, twoJovianCard],
+        expected: twoJovianCard,
+      },
     ]) {
       it(`scores the tags on a shared track alike, ${run.name}`, () => {
         const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
@@ -166,7 +181,8 @@ describe('MarsBotDraftResolver', () => {
             track.advance();
           }
         });
-        expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
+        const leastAdvanced = marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()];
+        expect(leastAdvanced.tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
 
         const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
 

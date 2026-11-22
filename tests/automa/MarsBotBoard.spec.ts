@@ -162,7 +162,8 @@ describe('MarsBotBoard', () => {
   });
 
   describe('Tharsis layout', () => {
-    for (const [track, position, action] of [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const) {
+    const cloudSpaces = [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const;
+    for (const [track, position, action] of cloudSpaces) {
       it(`gains floaters on the cloud spaces of the Event and Energy tracks, track ${track} space ${position}`, () => {
         expect(THARSIS_MARSBOT_BOARD[track].layout[position]).to.eq(action);
       });

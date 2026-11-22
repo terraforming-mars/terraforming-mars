@@ -21,7 +21,9 @@ describe('RimSettler', () => {
   // Hellas and Elysium pair Jovian with Science, where Tharsis pairs it with Energy.
   const scienceJovianTracks = THARSIS_MARSBOT_BOARD.map((track) => ({
     ...track,
-    tags: track.tags.includes(Tag.SCIENCE) ? [...track.tags, Tag.JOVIAN] : track.tags.filter((tag) => tag !== Tag.JOVIAN),
+    tags: track.tags.includes(Tag.SCIENCE) ?
+      [...track.tags, Tag.JOVIAN] :
+      track.tags.filter((tag) => tag !== Tag.JOVIAN),
   }));
 
   for (const run of [

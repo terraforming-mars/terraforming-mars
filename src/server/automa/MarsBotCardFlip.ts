@@ -19,7 +19,7 @@ export function pickByFlippedCard<T>(game: IGame, options: ReadonlyArray<T>): T 
   }
 
   const card = flipped[0];
-  // A positive modulo: a card with cost 0 (Indentured Workers) would give -1 % N in JS
+  // Use positive modulo: cost=0 cards (e.g. IndenturedWorkers) would give -1 % N in JS
   const n = options.length;
   const index = ((card.cost - 1) % n + n) % n;
   game.projectDeck.discardPile.push(card);

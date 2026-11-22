@@ -37,7 +37,7 @@ describe('PhilaresMarsBot', () => {
 
     new PhilaresMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['placeGreenery()', 'removeBonusCard(B07)', 'resolveBonusCard(B07)', 'addBonusCardToBonusDeck(B27)']);
+    expect(calls).deep.eq(['placeGreenery()', 'removeBonusCard(Local Neural Instance)', 'resolveBonusCard(Local Neural Instance)', 'addBonusCardToBonusDeck(Build, Build, Build)']);
     expect(corpState.get('scienceResources')).eq(1);
   });
 

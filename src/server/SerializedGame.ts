@@ -65,6 +65,7 @@ export type SerializedGame = {
     // TODO(ignac8): Remove after 2027-01-01, along with the SeededRandom fallback in Game.deserialize.
     /** @deprecated superseded by `rng`; kept to load saves written before `rng` existed. */
     seed?: number;
+    // TODO(ignac8): Remove '?' after 2027-01-01
     /** The game's random generator. Absent only in saves written before `rng` existed, which carry `seed`/`currentSeed`. */
     rng?: SerializedRandom;
     someoneHasRemovedOtherPlayersPlants: boolean;

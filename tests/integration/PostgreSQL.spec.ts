@@ -37,6 +37,8 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
       database: 'tfmtest',
       host: 'localhost',
       password: process.env.POSTGRES_INTEGRATION_TEST_PASSWORD,
+      // A server time zone unlike the test machine's, so the session tests catch time zone mixups.
+      options: '-c TimeZone=Pacific/Kiritimati',
     });
     // Overwrite compression.
     this.compressOnWrite = true;

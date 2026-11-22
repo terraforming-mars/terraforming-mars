@@ -19,7 +19,7 @@ export class ValleyTrustMarsBot extends MarsBotCorp {
   }
 
   public override setup(marsBot: IMarsBot): void {
-    marsBot.drawProjectCardsToActionDeck(1); // "Obtain 1 card"
+    marsBot.drawProjectCardsToActionDeck(1);
     marsBot.game.log('MarsBot (${0}): drew 1 card', (b) => b.cardName(this.name));
   }
 

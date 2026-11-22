@@ -8,7 +8,7 @@ describe('NirgalEnterprisesMarsBot', () => {
 
     new NirgalEnterprisesMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['removeBonusCard(B04)']);
+    expect(calls).deep.eq(['removeBonusCard(Overachievement)']);
   });
 
   it('adds 2 to every award', () => {
@@ -17,14 +17,21 @@ describe('NirgalEnterprisesMarsBot', () => {
 
   const milestone = 'maybeClaimMilestone()';
   const award = 'maybeFundAward()';
-  for (const [generation, expected] of [[1, []], [2, [milestone]], [5, [milestone]], [6, [award]], [9, [award]], [10, [milestone]]] as const) {
-    it(`claims a milestone in generations 2 to 5 and from 10, and funds an award in 6 to 9, generation ${generation}`, () => {
+  for (const run of [
+    {generation: 1, expected: []},
+    {generation: 2, expected: [milestone]},
+    {generation: 5, expected: [milestone]},
+    {generation: 6, expected: [award]},
+    {generation: 9, expected: [award]},
+    {generation: 10, expected: [milestone]},
+  ]) {
+    it(`claims a milestone in generations 2 to 5 and from 10, and funds an award in 6 to 9, generation ${run.generation}`, () => {
       const {marsBot, calls} = recordingMarsBot();
-      marsBot.game.generation = generation;
+      marsBot.game.generation = run.generation;
 
       new NirgalEnterprisesMarsBot().beforeActionPhase(marsBot);
 
-      expect(calls).deep.eq(expected);
+      expect(calls).deep.eq(run.expected);
     });
   }
 });

@@ -1,8 +1,7 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 
@@ -17,9 +16,9 @@ export class PharmacyUnionMarsBot extends MarsBotCorp {
   }
 
   public override setup(marsBot: IMarsBot): void {
-    marsBot.removeBonusCard(BonusCardId.B01_METEOR_SHOWER);
+    marsBot.removeBonusCard(BonusCardName.METEOR_SHOWER);
     marsBot.addProjectCardsToBonusDeck(Tag.SCIENCE, 1);
-    marsBot.game.log('MarsBot (${0}): ${1} removed, science card added to bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B01_METEOR_SHOWER).name));
+    marsBot.game.log('MarsBot (${0}): ${1} removed, science card added to bonus deck', (b) => b.cardName(this.name).bonusCardName(BonusCardName.METEOR_SHOWER));
   }
 
   public override onProjectCardResolved(marsBot: IMarsBot, card: IProjectCard): void {

@@ -1,3 +1,4 @@
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {CardResource} from '../CardResource';
 import {Color} from '../Color';
 import {Resource} from '../Resource';
@@ -79,6 +80,9 @@ type Types = {
 } | {
   type: LogMessageDataType.CARD_RESOURCE;
   value: CardResource;
+} | {
+  type: LogMessageDataType.BONUS_CARD;
+  value: BonusCardName;
 };
 
 export type LogMessageData = Types & {

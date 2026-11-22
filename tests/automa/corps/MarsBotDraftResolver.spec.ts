@@ -97,7 +97,9 @@ describe('MarsBotDraftResolver', () => {
     }
 
     it('counts the Event tag an event card shows when discarding after a draft', () => {
-      expect(resolver().discardAfterDraft([spaceCard, earthCard], eventPriority).discarded).to.deep.eq([earthCard]);
+      const {discarded} = resolver().discardAfterDraft([spaceCard, earthCard], eventPriority);
+
+      expect(discarded).to.deep.eq([earthCard]);
     });
 
     it('treats a hand with no match as one tie across every card', () => {
@@ -139,7 +141,8 @@ describe('MarsBotDraftResolver', () => {
       for (let i = 1; i < marsBotBoard.tracks.length; i++) {
         marsBotBoard.tracks[i].advance();
       }
-      expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).to.include(Tag.BUILDING);
+      const leastAdvanced = marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()];
+      expect(leastAdvanced.tags).to.include(Tag.BUILDING);
 
       const picked = new MarsBotDraftResolver(marsBotBoard, keepOrder)
         .pickCard([earthCard, buildingCard, plantCard], priority);
@@ -154,9 +157,24 @@ describe('MarsBotDraftResolver', () => {
     // Rulebook B p.3 makes Aridor's priority a track, not an ordered tag list. Our reading is that
     // both tags on a shared track match alike and more matches win.
     for (const run of [
-      {name: 'Jovian then Power in the kept order', shuffler: keepOrder, hand: [jovianCard, powerCard], expected: jovianCard},
-      {name: 'Jovian then Power in the reversed order', shuffler: reverseOrder, hand: [jovianCard, powerCard], expected: powerCard},
-      {name: 'Power then two Jovian in the kept order', shuffler: keepOrder, hand: [powerCard, twoJovianCard], expected: twoJovianCard},
+      {
+        name: 'Jovian then Power in the kept order',
+        shuffler: keepOrder,
+        hand: [jovianCard, powerCard],
+        expected: jovianCard,
+      },
+      {
+        name: 'Jovian then Power in the reversed order',
+        shuffler: reverseOrder,
+        hand: [jovianCard, powerCard],
+        expected: powerCard,
+      },
+      {
+        name: 'Power then two Jovian in the kept order',
+        shuffler: keepOrder,
+        hand: [powerCard, twoJovianCard],
+        expected: twoJovianCard,
+      },
     ]) {
       it(`scores the tags on a shared track alike, ${run.name}`, () => {
         const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
@@ -166,7 +184,8 @@ describe('MarsBotDraftResolver', () => {
             track.advance();
           }
         });
-        expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
+        const leastAdvanced = marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()];
+        expect(leastAdvanced.tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
 
         const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
 

@@ -1804,7 +1804,7 @@ export class Game implements IGame, Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, game.playersPlusMarsBot);
+      game.turmoil = Turmoil.deserialize(d.turmoil, game.playersPlusMarsBot, game.rng);
     }
 
     // Reload moon elements if needed

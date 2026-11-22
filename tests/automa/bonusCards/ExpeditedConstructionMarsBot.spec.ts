@@ -28,7 +28,8 @@ describe('ExpeditedConstructionMarsBot', () => {
 
     const destroyed = new ExpeditedConstructionMarsBot().resolve(marsBot);
 
-    expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
+    const tiles = game.board.spaces.filter((space) => space.tile !== undefined);
+    expect(tiles).is.empty;
     expect(calls).is.empty;
     expect(destroyed).is.false;
   });

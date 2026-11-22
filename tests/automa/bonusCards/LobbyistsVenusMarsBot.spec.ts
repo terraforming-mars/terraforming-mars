@@ -23,7 +23,10 @@ describe('LobbyistsVenusMarsBot', () => {
 
       const destroyed = new LobbyistsVenusMarsBot().resolve(marsBot);
 
-      expect({temperature: game.getTemperature(), venus: game.getVenusScaleLevel(), destroyed, calls}).deep.eq(run.expected);
+      expect(game.getTemperature()).eq(run.expected.temperature);
+      expect(game.getVenusScaleLevel()).eq(run.expected.venus);
+      expect(destroyed).eq(run.expected.destroyed);
+      expect(calls).deep.eq(run.expected.calls);
     });
   }
 

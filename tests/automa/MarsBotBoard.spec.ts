@@ -74,9 +74,9 @@ describe('MarsBotBoard', () => {
       }
       expect(track.position).to.eq(2);
 
-      expect(track.advance().type).to.eq('none'); // pos 3
-      expect(track.advance().type).to.eq('none'); // pos 4
-      const r5 = track.advance(); // pos 5: tr2
+      expect(track.advance().type).to.eq('none');
+      expect(track.advance().type).to.eq('none');
+      const r5 = track.advance();
       expect(r5.type).to.eq('action');
       if (r5.type === 'action') {
         expect(r5.action).to.eq('tr2');
@@ -97,40 +97,39 @@ describe('MarsBotBoard', () => {
 
     it('regresses track and marks position', () => {
       const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
-      track.advance(); // pos 1
-      track.advance(); // pos 2 (ocean)
-      track.advance(); // pos 3
+      track.advance();
+      track.advance();
+      track.advance();
 
-      track.regress(); // back to pos 2
+      track.regress();
       expect(track.position).to.eq(2);
       expect(track.regressedPositions.has(3)).to.be.true;
 
       // When re-advancing to the regressed position, skip the action
-      const result = track.advance(); // pos 3 (was regressed, skip action)
+      const result = track.advance();
       expect(result.type).to.eq('none');
       expect(track.regressedPositions.has(3)).to.be.false;
     });
 
     it('advance returns action, regress and re-advance skips it', () => {
       const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
-      track.advance(); // pos 1
-      const r = track.advance(); // pos 2: ocean
+      track.advance();
+      const r = track.advance();
       expect(r.type).to.eq('action');
 
-      track.regress(); // back to pos 1
+      track.regress();
       expect(track.position).to.eq(1);
 
-      const r2 = track.advance(); // pos 2 again, but regressed → skipped
+      const r2 = track.advance();
       expect(r2.type).to.eq('none');
     });
 
     it('peek shows next position action without advancing', () => {
       const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
-      // pos 0, next is pos 1 which is undefined
+      // Space 1 has no action, space 2 is the ocean.
       expect(track.peek()).to.be.undefined;
 
-      track.advance(); // pos 1
-      // next is pos 2 which is 'ocean'
+      track.advance();
       expect(track.peek()).to.eq('ocean');
       expect(track.position).to.eq(1);
     });
@@ -145,9 +144,9 @@ describe('MarsBotBoard', () => {
 
     it('peek skips the action on a regressed space', () => {
       const track = new MarsBotTrack(THARSIS_MARSBOT_BOARD[0]);
-      track.advance(); // pos 1
-      track.advance(); // pos 2 (ocean)
-      track.regress(); // back to pos 1, pos 2 is regressed
+      track.advance();
+      track.advance();
+      track.regress();
 
       expect(track.peek()).to.be.undefined;
     });
@@ -162,11 +161,12 @@ describe('MarsBotBoard', () => {
   });
 
   describe('Tharsis layout', () => {
-    it('gains floaters on the cloud spaces of the Event and Energy tracks', () => {
-      for (const [track, position, action] of [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const) {
-        expect(THARSIS_MARSBOT_BOARD[track].layout[position], `track ${track} space ${position}`).to.eq(action);
-      }
-    });
+    const cloudSpaces = [[2, 6, 'floater2'], [4, 2, 'floater'], [4, 4, 'floater2']] as const;
+    for (const [track, position, action] of cloudSpaces) {
+      it(`gains floaters on the cloud spaces of the Event and Energy tracks, track ${track} space ${position}`, () => {
+        expect(THARSIS_MARSBOT_BOARD[track].layout[position]).to.eq(action);
+      });
+    }
   });
 
   describe('with the Venus track', () => {

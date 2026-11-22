@@ -15,7 +15,8 @@ describe('AutomaGameSetup', () => {
     expect(game.playersPlusMarsBot).deep.eq([human, botPlayer]);
     expect(botPlayer.game).eq(game);
     expect(game.isSoloMode()).is.false;
-    expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
+    const tiledSpaces = game.board.spaces.filter((space) => space.tile !== undefined);
+    expect(tiledSpaces).is.empty;
   });
 
   it('keeps what MarsBot owns when the game is loaded', () => {

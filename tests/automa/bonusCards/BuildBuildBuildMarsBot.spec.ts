@@ -57,7 +57,8 @@ describe('BuildBuildBuildMarsBot', () => {
     const cities = game.board.getCities(marsBot.player);
     expect(cities).has.length(1);
     expect(game.board.getAdjacentSpaces(cities[0])).includes(greenery);
-    expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(cities[0])})`, 'loseMc(5)']);
+    const placementMc = new MarsBotTilePlacer(marsBot).getTotalPlacementMC(cities[0]);
+    expect(calls).deep.eq([`gainMc(${placementMc})`, 'loseMc(5)']);
     expect(kept).is.false;
   });
 
@@ -74,7 +75,8 @@ describe('BuildBuildBuildMarsBot', () => {
     expect(space?.player).eq(marsBot.player);
     expect(game.board.getAdjacentSpaces(city)).includes(space);
     expect(removed).deep.eq([nuclearZone]);
-    expect(calls).deep.eq([`gainMc(${new MarsBotTilePlacer(marsBot).getTotalPlacementMC(space!)})`, 'loseMc(3)']);
+    const placementMc = new MarsBotTilePlacer(marsBot).getTotalPlacementMC(space!);
+    expect(calls).deep.eq([`gainMc(${placementMc})`, 'loseMc(3)']);
     expect(kept).is.false;
   });
 
@@ -94,7 +96,8 @@ describe('BuildBuildBuildMarsBot', () => {
 
       const kept = new BuildBuildBuildMarsBot().resolve(marsBot, card);
 
-      expect(game.board.spaces.filter((s) => s.player === marsBot.player)).is.empty;
+      const botSpaces = game.board.spaces.filter((space) => space.player === marsBot.player);
+      expect(botSpaces).is.empty;
       expect(removed).is.empty;
       expect(calls).deep.eq(['gainMc(3)']);
       expect(marsBot.bonusDeck.drawPile).deep.eq([card]);

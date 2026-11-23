@@ -9,6 +9,7 @@ import {Random} from '@/common/utils/Random';
 import {IGame} from '@/server/IGame';
 import {IPlayer} from '@/server/IPlayer';
 import {LogHelper} from '@/server/LogHelper';
+import {IAward} from '@/server/awards/IAward';
 import {Space} from '@/server/boards/Space';
 import {IProjectCard} from '@/server/cards/IProjectCard';
 import {IMarsBot} from '@/server/automa/IMarsBot';
@@ -57,6 +58,8 @@ export class MarsBot implements IMarsBot {
     this.bonusDeck = MarsBotBonusDeck.create(random, {
       venus: game.gameOptions.venusNextExtension,
       colonies: game.gameOptions.coloniesExtension,
+      boardName: game.gameOptions.boardName,
+      modularMA: game.gameOptions.modularMA,
     });
   }
 
@@ -116,6 +119,10 @@ export class MarsBot implements IMarsBot {
 
   public advanceTrackOfTag(): boolean {
     throw new Error('TODO(ignac8): advance the track that carries a tag, in #8754');
+  }
+
+  public onTagAdvance(): void {
+    throw new Error('TODO(ignac8): tell the cards of the player about a tag advance, in #8754');
   }
 
   public resolveProjectCard(): void {
@@ -233,6 +240,10 @@ export class MarsBot implements IMarsBot {
     throw new Error('TODO(ignac8): choose an award to fund, in #8755');
   }
 
+  public awardValue(award: IAward): number {
+    return award.marsBotScore?.(this) ?? award.getScore(this.player);
+  }
+
   /** Raises the temperature `steps` times. Pristar's cube cancels only the first, as the steps resolve one at a time (BGG 3431297, 3432237). */
   public raiseTemperature(steps: 1 | 2): void {
     if (this.game.getTemperature() >= this.game.max.temperature) {
@@ -299,8 +310,8 @@ export class MarsBot implements IMarsBot {
     return false;
   }
 
-  public maybePlaceGreenery(): boolean {
-    const space = this.tilePlacer.findGreenerySpace();
+  public maybePlaceGreenery(filter?: (space: Space) => boolean): boolean {
+    const space = this.tilePlacer.findGreenerySpace(filter);
     if (space === undefined) {
       return false;
     }

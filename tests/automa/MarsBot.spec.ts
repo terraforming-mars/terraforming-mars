@@ -5,6 +5,8 @@ import {SeededRandom} from '@/common/utils/Random';
 import {MarsBot} from '@/server/automa/MarsBot';
 import {THARSIS_MARSBOT_BOARD} from '@/server/automa/boards/TharsisMarsBot';
 import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {Banker} from '@/server/awards/Banker';
+import {Landlord} from '@/server/awards/Landlord';
 import {TestGameOptions, testGame} from '../TestGame';
 import {setTemperature} from '../TestingUtils';
 
@@ -89,6 +91,23 @@ describe('MarsBot', () => {
 
     expect(marsBot.game.board.getGreeneries(marsBot.player)).has.length(1);
     expect(marsBot.game.getOxygenLevel()).eq(1);
+  });
+
+  it('places a greenery only where the filter accepts', () => {
+    const marsBot = newMarsBot();
+
+    expect(marsBot.maybePlaceGreenery(() => false)).is.false;
+
+    expect(marsBot.game.board.getGreeneries(marsBot.player)).is.empty;
+  });
+
+  it('scores an award by its MarsBot rule, else as a player would', () => {
+    const marsBot = newMarsBot();
+    marsBot.marsBotBoard.tracks[0].position = 3;
+    marsBot.maybePlaceGreenery();
+
+    expect(marsBot.awardValue(new Banker())).eq(3);
+    expect(marsBot.awardValue(new Landlord())).eq(1);
   });
 
   it('gives back TR and M€ gained under Government Intervention, keeping what it may keep', () => {

@@ -96,10 +96,14 @@ export class MarsBotTilePlacer {
     return names;
   }
 
-  /** Finds the best space for MarsBot to place a greenery, or undefined if none is available. */
-  public findGreenerySpace(): Space | undefined {
+  /**
+   * Finds the best space for MarsBot to place a greenery, or undefined if none is available.
+   *
+   * @param filter limits the choice to the legal greenery spaces it accepts.
+   */
+  public findGreenerySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.marsBot.game.board;
-    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player);
+    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }

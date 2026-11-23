@@ -20,6 +20,7 @@ import {RouteError} from './RouteError';
 import {CEO_CARDS_DEALT_PER_PLAYER} from '../../common/constants';
 import {hasNegativeEscapeVelocityOption, sanitizeEscapeVelocityOptions} from '../../common/game/escapeVelocity';
 import {isObject} from '@/common/utils/utils';
+import {StrongRandom} from '@/common/utils/Random';
 
 function parseQuotaConfig(struct: unknown): QuotaConfig {
   if (!isObject(struct)) {
@@ -201,8 +202,7 @@ export class ApiCreateGame extends Handler {
         const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
         game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
       } else {
-        const seed = Math.random();
-        game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, seed);
+        game = Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, StrongRandom.newInstance());
       }
       ctx.gameLoader.add(game);
       // Only games that are actually created count against the quota.

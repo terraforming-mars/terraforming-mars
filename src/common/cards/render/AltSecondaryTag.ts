@@ -1,4 +1,5 @@
 /** Tags that belong in `CardRenderItem.secondaryTag` that aren't part of `Tags`. */
+// eslint-disable-next-line no-restricted-syntax
 export enum AltSecondaryTag {
   // 'req' => used for Cutting Edge Technology's discount on cards with requirements
   REQ = 'req',

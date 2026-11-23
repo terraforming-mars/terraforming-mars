@@ -1,14 +1,9 @@
 import {BonusCardName} from '@/common/automa/BonusCardName';
-import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
+import {CorporateCompetitionBase} from '@/server/automa/bonusCards/CorporateCompetitionBase';
 
-/** Vestigial: no effect yet. */
-export class CorporateCompetitionElysium extends MarsBotBonusCard {
+/** Corporate Competition for Elysium (B10). */
+export class CorporateCompetitionElysium extends CorporateCompetitionBase {
   constructor() {
     super(BonusCardName.CORPORATE_COMPETITION_ELYSIUM);
-  }
-
-  public override resolve(): boolean {
-    // TODO(ignac8): Replace with implementation
-    return false;
   }
 }

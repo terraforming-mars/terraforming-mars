@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum ColonyBenefit {
     ADD_RESOURCES_TO_CARD,
     ADD_RESOURCES_TO_VENUS_CARD,

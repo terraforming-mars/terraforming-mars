@@ -4,7 +4,7 @@ import {Tag} from '../../common/cards/Tag';
 import {Random} from '../../common/utils/Random';
 import {inplaceRemove} from '../../common/utils/utils';
 import {IProjectCard} from '../cards/IProjectCard';
-import {newCard} from '../createCard';
+import {newProjectCard} from '../createCard';
 import {inplaceShuffle} from '../utils/shuffle';
 import {IMarsBot} from './IMarsBot';
 import {MarsBotBonusCard} from './bonusCards/MarsBotBonusCard';
@@ -243,7 +243,7 @@ export class MarsBotActionDeck {
    * own action deck card and has destroyed itself.
    */
   public addBonusCard(bonusCardName: BonusCardName): MarsBotBonusCard | undefined {
-    if (this.cards.some((c) => !isProjectCard(c) && c.name === bonusCardName)) {
+    if (this.cards.some((card) => !isProjectCard(card) && card.name === bonusCardName)) {
       return undefined;
     }
     if (bonusCardName === this.marsBot.actionDeckBonusCard && this.marsBot.getCorpState(ACTION_DECK_BONUS_CARD_REMOVED) > 0) {
@@ -276,7 +276,7 @@ export class MarsBotActionDeck {
    */
   public removeBonusCard(bonusCardName: BonusCardName): void {
     this.marsBot.bonusDeck.removeByName(bonusCardName);
-    const dealt = this.cards.find((c): c is MarsBotBonusCard => !isProjectCard(c) && c.name === bonusCardName);
+    const dealt = this.cards.find((card): card is MarsBotBonusCard => !isProjectCard(card) && card.name === bonusCardName);
     if (dealt === undefined) {
       return;
     }
@@ -341,7 +341,7 @@ export class MarsBotActionDeck {
 
   public serialize(): SerializedActionDeck {
     const state: SerializedActionDeck = {
-      actionDeckCardNames: this.cards.map((c) => c.name),
+      actionDeckCardNames: this.cards.map((card) => card.name),
     };
     if (this.destroyedBonusCards > 0) {
       state.destroyedBonusCards = this.destroyedBonusCards;
@@ -364,9 +364,9 @@ export class MarsBotActionDeck {
         if (isBonusCardName(name)) {
           this.cards.push(createBonusCard(name));
         } else {
-          const card = newCard(name);
+          const card = newProjectCard(name);
           if (card !== undefined) {
-            this.cards.push(card as IProjectCard);
+            this.cards.push(card);
           }
         }
       }

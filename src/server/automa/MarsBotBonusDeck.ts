@@ -104,7 +104,7 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusDeckCard, BonusCardName |
    */
   public findAndRemove(bonusCardName: BonusCardName): MarsBotBonusCard | undefined {
     for (const pile of [this.drawPile, this.discardPile]) {
-      const card = pile.find((c): c is MarsBotBonusCard => c instanceof MarsBotBonusCard && c.name === bonusCardName);
+      const card = pile.find((bonusDeckCard): bonusDeckCard is MarsBotBonusCard => bonusDeckCard instanceof MarsBotBonusCard && bonusDeckCard.name === bonusCardName);
       if (card !== undefined) {
         inplaceRemove(pile, card);
         return card;
@@ -115,7 +115,7 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusDeckCard, BonusCardName |
 
   /** Removes the bonus card `bonusCardName` from both piles. */
   public removeByName(bonusCardName: BonusCardName): void {
-    this.drawPile = this.drawPile.filter((c) => c.name !== bonusCardName);
-    this.discardPile = this.discardPile.filter((c) => c.name !== bonusCardName);
+    this.drawPile = this.drawPile.filter((card) => card.name !== bonusCardName);
+    this.discardPile = this.discardPile.filter((card) => card.name !== bonusCardName);
   }
 }

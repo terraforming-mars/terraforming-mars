@@ -79,6 +79,7 @@ import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {range} from '@/common/utils/utils';
 import {HomeMixin} from '@/client/mixins/HomeMixin';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 export default defineComponent({
   name: 'SpectatorHome',
@@ -109,6 +110,9 @@ export default defineComponent({
     range(n: number): Array<number> {
       return range(n);
     },
+  },
+  mounted() {
+    setDocumentTitle(this.game.name);
   },
 });
 </script>

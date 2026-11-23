@@ -1,8 +1,7 @@
-import {BonusCardId} from '@/common/automa/AutomaTypes';
 import {CardName} from '@/common/cards/CardName';
+import {BonusCardName} from '@/common/automa/BonusCardName';
 import {Tag} from '@/common/cards/Tag';
 import {IMarsBot} from '@/server/automa/IMarsBot';
-import {createBonusCard} from '@/server/automa/MarsBotBonusCard';
 import {MarsBotCorp} from '@/server/automa/MarsBotCorp';
 
 export class TychoMagneticsMarsBot extends MarsBotCorp {
@@ -15,7 +14,7 @@ export class TychoMagneticsMarsBot extends MarsBotCorp {
   }
 
   public override setup(marsBot: IMarsBot): void {
-    marsBot.addBonusCardToBottomOfBonusDeck(BonusCardId.B30_INTERFACE_HYPERLINK);
-    marsBot.game.log('MarsBot (${0}): ${1} added to the bottom of the bonus deck', (b) => b.cardName(this.name).cardName(createBonusCard(BonusCardId.B30_INTERFACE_HYPERLINK).name));
+    marsBot.addBonusCardToBottomOfBonusDeck(BonusCardName.INTERFACE_HYPERLINK);
+    marsBot.game.log('MarsBot (${0}): ${1} added to the bottom of the bonus deck', (b) => b.cardName(this.name).bonusCardName(BonusCardName.INTERFACE_HYPERLINK));
   }
 }

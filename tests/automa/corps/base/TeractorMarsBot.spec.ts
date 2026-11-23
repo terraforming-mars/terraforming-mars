@@ -17,8 +17,9 @@ describe('TeractorMarsBot', () => {
 
     new TeractorMarsBot().onTrackCubeTrigger(marsBot, TRACK.earth, 1, 'white');
 
+    const expectedCubes = Array.from({length: 18}, (_, i) => `earth white ${i + 1}`);
     expect(calls).deep.eq(['gainMc(2)']);
-    expect(trackCubes(new TeractorMarsBot())).deep.eq(Array.from({length: 18}, (_, i) => `earth white ${i + 1}`));
+    expect(trackCubes(new TeractorMarsBot())).deep.eq(expectedCubes);
     expect(new TeractorMarsBot().trackCubesTriggerEveryAdvance).is.true;
   });
 });

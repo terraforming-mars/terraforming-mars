@@ -2,6 +2,7 @@
 // as its number. Would have been better if this was stored as a string, but that ship has sailed,
 // for now.
 
+// eslint-disable-next-line no-restricted-syntax
 export enum SpaceBonus {
     TITANIUM, // 0
     STEEL, // 1

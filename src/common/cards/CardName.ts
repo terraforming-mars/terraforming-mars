@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum CardName {
   // Standard projects:
   SELL_PATENTS_STANDARD_PROJECT = 'Sell Patents',
@@ -615,33 +616,6 @@ export enum CardName {
   // Proxy for when Executor is used for Global Events.
   GLOBAL_EVENT_PROXY = 'Global Event Proxy',
 
-  // Automa
-  AUTOMA_METEOR_SHOWER = 'Meteor Shower:automa',
-  AUTOMA_INVASIVE_SPECIES = 'Invasive Species:automa',
-  AUTOMA_RESEARCH_AND_DEVELOPMENT = 'Research and Development:automa',
-  AUTOMA_OVERACHIEVEMENT = 'Overachievement:automa',
-  AUTOMA_EXPEDITED_CONSTRUCTION = 'Expedited Construction:automa',
-  AUTOMA_LOBBYISTS = 'Lobbyists:automa',
-  AUTOMA_LOCAL_NEURAL_INSTANCE = 'Local Neural Instance:automa',
-  AUTOMA_CORPORATE_COMPETITION = 'Corporate Competition:automa',
-  AUTOMA_LOBBYISTS_VENUS = 'Lobbyists (Venus):automa',
-  AUTOMA_GOVERNMENT_INTERVENTION = 'Government Intervention:automa',
-  AUTOMA_EXPEDITED_CONSTRUCTION_COLONIES = 'Expedited Construction (Colonies):automa',
-  AUTOMA_OUTER_SYSTEM_FOOTHOLD = 'Outer System Foothold:automa',
-  AUTOMA_SHIPPING_LINES = 'Shipping Lines:automa',
-  AUTOMA_EXTENDED_SHIPPING_LINES = 'Extended Shipping Lines:automa',
-  AUTOMA_PARTY_POLITICS = 'Party Politics:automa',
-  AUTOMA_SETTLERS = 'Settlers:automa',
-  AUTOMA_RAPID_SPROUTING = 'Rapid Sprouting:automa',
-  AUTOMA_SUPPLY_AND_DEMAND = 'Supply & Demand:automa',
-  AUTOMA_DO_IT_RIGHT = 'Do It Right:automa',
-  AUTOMA_VENUSIAN_LOBBY = 'Venusian Lobby:automa',
-  AUTOMA_BUILD_BUILD_BUILD = 'Build, Build, Build:automa',
-  AUTOMA_DIVERSIFICATION = 'Diversification:automa',
-  AUTOMA_GRAY_EMINENCE = 'Gray Eminence:automa',
-  AUTOMA_INTERFACE_HYPERLINK = 'Interface Hyperlink:automa',
-  AUTOMA_GOVERNMENT_SUBSIDY = 'Government Subsidy:automa',
-  AUTOMA_INVESTORS = 'Investors:automa',
 
   // Ares expansion.
   BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',

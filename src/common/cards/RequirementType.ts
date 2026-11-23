@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum RequirementType {
     OXYGEN = 'O2',
     TEMPERATURE = 'C',

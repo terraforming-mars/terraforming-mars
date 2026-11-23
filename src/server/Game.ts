@@ -51,7 +51,7 @@ import {AresSetup} from './ares/AresSetup';
 import {MoonData} from './moon/MoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {SeededRandom, UnseededRandom} from '../common/utils/Random';
+import {GameRandom, SeededRandom, UnseededRandom, deserializeRandom} from '../common/utils/Random';
 import {chooseMilestonesAndAwards} from './ma/MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {MultiSet} from 'mnemonist';
@@ -65,7 +65,7 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
 import {isShowVP, showVPFromLegacy} from '../common/game/ShowVP';
-import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
+import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from '@/server/cards/Decks';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
 import {Tag} from '../common/cards/Tag';
@@ -115,7 +115,7 @@ export class Game implements IGame, Logger {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
-  public rng: SeededRandom;
+  public rng: GameRandom;
   public spectatorId: SpectatorId;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public createdTime: Date = new Date(0);
@@ -210,7 +210,7 @@ export class Game implements IGame, Logger {
     activePlayer: PlayerId,
     spectatorId: SpectatorId,
     gameOptions: GameOptions,
-    rng: SeededRandom,
+    rng: GameRandom,
     board: MarsBoard,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
@@ -278,7 +278,7 @@ export class Game implements IGame, Logger {
     firstPlayer: IPlayer,
     spectatorId: SpectatorId,
     partialOptions: Partial<GameOptions> = {},
-    seed = 0): Game {
+    rng: GameRandom = new SeededRandom(0)): Game {
     if (partialOptions.expansions === undefined) {
       partialOptions.expansions = {
         corpera: partialOptions.corporateEra ?? false,
@@ -310,7 +310,6 @@ export class Game implements IGame, Logger {
       throw new Error('Delta Project cannot be banned. It is given to all players as part of the Delta Project.');
     }
 
-    const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const gameCards = new GameCards(gameOptions);
 
@@ -503,7 +502,7 @@ export class Game implements IGame, Logger {
       colonies: this.colonies.map((colony) => colony.serialize()),
       corporationDeck: this.corporationDeck.serialize(),
       createdTimeMs: this.createdTime.getTime(),
-      currentSeed: this.rng.current,
+      rng: this.rng.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
       draftRound: this.draftRound,
@@ -532,7 +531,6 @@ export class Game implements IGame, Logger {
       preludeDeck: this.preludeDeck.serialize(),
       projectDeck: this.projectDeck.serialize(),
       researchedPlayers: Array.from(this.researchedPlayers),
-      seed: this.rng.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
@@ -1754,7 +1752,15 @@ export class Game implements IGame, Logger {
 
     const board = GameSetup.deserializeBoard(marsBotPlayer === undefined ? players : [...players, marsBotPlayer], gameOptions, d);
 
-    const rng = new SeededRandom(d.seed, d.currentSeed);
+    let rng: GameRandom;
+    if (d.rng !== undefined) {
+      rng = deserializeRandom(d.rng);
+    } else if (d.seed !== undefined) {
+      // TODO(ignac8): Remove the SeededRandom fallback for old saves after 2027-01-01.
+      rng = new SeededRandom(d.seed, d.currentSeed);
+    } else {
+      throw new Error(`Game ${d.id} has neither rng nor seed`);
+    }
 
     const projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
@@ -1804,7 +1810,7 @@ export class Game implements IGame, Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, game.playersPlusMarsBot);
+      game.turmoil = Turmoil.deserialize(d.turmoil, game.playersPlusMarsBot, game.rng);
     }
 
     // Reload moon elements if needed

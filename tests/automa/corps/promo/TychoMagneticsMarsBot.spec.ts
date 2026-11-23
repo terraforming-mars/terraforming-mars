@@ -8,6 +8,6 @@ describe('TychoMagneticsMarsBot', () => {
 
     new TychoMagneticsMarsBot().setup(marsBot);
 
-    expect(calls).deep.eq(['addBonusCardToBottomOfBonusDeck(B30)']);
+    expect(calls).deep.eq(['addBonusCardToBottomOfBonusDeck(Interface Hyperlink)']);
   });
 });

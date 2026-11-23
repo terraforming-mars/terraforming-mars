@@ -1,8 +1,10 @@
 import {expect} from 'chai';
-import {MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
+import {BASE_BONUS_CARDS, MarsBotBonusDeck} from '../../src/server/automa/MarsBotBonusDeck';
 import {SeededRandom} from '../../src/common/utils/Random';
-import {createBaseBonusCards, createBonusCard} from '../../src/server/automa/MarsBotBonusCard';
-import {BonusCardId} from '../../src/common/automa/AutomaTypes';
+import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {BonusCardName} from '@/common/automa/BonusCardName';
+import {BoardName} from '@/common/boards/BoardName';
+import {toName} from '@/common/utils/utils';
 
 describe('MarsBotBonusDeck', () => {
   const logger = {log: () => {}};
@@ -23,8 +25,8 @@ describe('MarsBotBonusDeck', () => {
       venus: true,
       colonies: false,
       expected: {
-        removed: [BonusCardId.B06_LOBBYISTS],
-        added: [BonusCardId.B15_LOBBYISTS_VENUS],
+        removed: [BonusCardName.LOBBYISTS],
+        added: [BonusCardName.LOBBYISTS_VENUS],
       },
     },
     {
@@ -32,8 +34,8 @@ describe('MarsBotBonusDeck', () => {
       venus: false,
       colonies: true,
       expected: {
-        removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION],
-        added: [BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES, BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD],
+        removed: [BonusCardName.EXPEDITED_CONSTRUCTION],
+        added: [BonusCardName.EXPEDITED_CONSTRUCTION_COLONIES, BonusCardName.OUTER_SYSTEM_FOOTHOLD],
       },
     },
     {
@@ -41,24 +43,86 @@ describe('MarsBotBonusDeck', () => {
       venus: true,
       colonies: true,
       expected: {
-        removed: [BonusCardId.B05_EXPEDITED_CONSTRUCTION, BonusCardId.B06_LOBBYISTS],
+        removed: [BonusCardName.EXPEDITED_CONSTRUCTION, BonusCardName.LOBBYISTS],
         added: [
-          BonusCardId.B15_LOBBYISTS_VENUS,
-          BonusCardId.B17_EXPEDITED_CONSTRUCTION_COLONIES,
-          BonusCardId.B18_OUTER_SYSTEM_FOOTHOLD,
+          BonusCardName.LOBBYISTS_VENUS,
+          BonusCardName.EXPEDITED_CONSTRUCTION_COLONIES,
+          BonusCardName.OUTER_SYSTEM_FOOTHOLD,
         ],
+      },
+    },
+    {
+      expansions: 'Hellas',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.HELLAS,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_HELLAS],
+      },
+    },
+    {
+      expansions: 'Elysium',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.ELYSIUM,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_ELYSIUM],
+      },
+    },
+    {
+      expansions: 'Utopia Planitia',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.UTOPIA_PLANITIA,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_UTOPIA],
+      },
+    },
+    {
+      expansions: 'Terra Cimmeria',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.TERRA_CIMMERIA_NOVA,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_CIMMERIA],
+      },
+    },
+    {
+      expansions: 'Vastitas Borealis',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.VASTITAS_BOREALIS_NOVA,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_BOREALIS],
+      },
+    },
+    {
+      expansions: 'Milestones & Awards on Hellas',
+      venus: false,
+      colonies: false,
+      boardName: BoardName.HELLAS,
+      modularMA: true,
+      expected: {
+        removed: [BonusCardName.CORPORATE_COMPETITION],
+        added: [BonusCardName.CORPORATE_COMPETITION_MA],
       },
     },
   ]) {
     it('swaps cards in the ' + run.expansions + ' deck', () => {
-      const expected = createBaseBonusCards()
-        .map((card) => card.id)
-        .filter((id) => !run.expected.removed.includes(id))
+      const expected = BASE_BONUS_CARDS
+        .filter((name) => !run.expected.removed.some((removed) => removed === name))
         .concat(run.expected.added);
 
-      const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: run.venus, colonies: run.colonies});
+      const expansionDeck = MarsBotBonusDeck.create(
+        new SeededRandom(42), {venus: run.venus, colonies: run.colonies, boardName: run.boardName, modularMA: run.modularMA});
 
-      expect(expansionDeck.drawPile.map((card) => card.id)).to.have.members(expected);
+      const drawnNames = expansionDeck.drawPile.map(toName);
+      expect(drawnNames).to.have.members(expected);
       expect(expansionDeck.discardPile).to.be.empty;
     });
   }
@@ -71,14 +135,34 @@ describe('MarsBotBonusDeck', () => {
   });
 
   it('serialization round trip with expansion and corporation bonus cards', () => {
-    const ids = Object.values(BonusCardId).filter((id) => id >= BonusCardId.B15_LOBBYISTS_VENUS);
-    const expansionDeck = new MarsBotBonusDeck(ids.map((id) => createBonusCard(id)), [], new SeededRandom(42));
+    const names = [
+      BonusCardName.LOBBYISTS_VENUS,
+      BonusCardName.GOVERNMENT_INTERVENTION,
+      BonusCardName.EXPEDITED_CONSTRUCTION_COLONIES,
+      BonusCardName.OUTER_SYSTEM_FOOTHOLD,
+      BonusCardName.SHIPPING_LINES,
+      BonusCardName.EXTENDED_SHIPPING_LINES,
+      BonusCardName.PARTY_POLITICS,
+      BonusCardName.SETTLERS,
+      BonusCardName.RAPID_SPROUTING,
+      BonusCardName.SUPPLY_AND_DEMAND,
+      BonusCardName.DO_IT_RIGHT,
+      BonusCardName.VENUSIAN_LOBBY,
+      BonusCardName.BUILD_BUILD_BUILD,
+      BonusCardName.DIVERSIFICATION,
+      BonusCardName.GRAY_EMINENCE,
+      BonusCardName.INTERFACE_HYPERLINK,
+      BonusCardName.GOVERNMENT_SUBSIDY,
+      BonusCardName.INVESTORS,
+    ];
+    const expansionDeck = new MarsBotBonusDeck(names.map(createBonusCard), [], new SeededRandom(42));
     expansionDeck.discard(expansionDeck.draw(logger)!, expansionDeck.draw(logger)!);
 
     const restored = MarsBotBonusDeck.deserialize(expansionDeck.serialize(), new SeededRandom(42));
 
     expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
     expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
-    expect([...restored.drawPile, ...restored.discardPile].map((card) => card.id)).to.have.members(ids);
+    const restoredNames = [...restored.drawPile, ...restored.discardPile].map(toName);
+    expect(restoredNames).to.have.members(names);
   });
 });

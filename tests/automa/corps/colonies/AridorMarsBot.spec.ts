@@ -21,10 +21,12 @@ describe('AridorMarsBot', () => {
     {boardName: BoardName.TERRA_CIMMERIA_NOVA, expected: {jovianTrack: 'earth', cityTrack: 'science'}},
   ] as const) {
     it('puts a white cube on #6 of the Jovian track and a black one on #6 of the city track: ' + JSON.stringify(run), () => {
-      expect(trackCubes(new AridorMarsBot(), MARSBOT_BOARDS[run.boardName]!)).to.have.members([
+      const expected = [
         'building white 3', 'space white 3', 'science white 3', 'power white 3', `${run.expected.jovianTrack} white 6`,
         'earth black 3', `${run.expected.cityTrack} black 6`, 'plant black 3', 'plant black 6',
-      ]);
+      ];
+
+      expect(trackCubes(new AridorMarsBot(), MARSBOT_BOARDS[run.boardName]!)).to.have.members(expected);
     });
   }
 

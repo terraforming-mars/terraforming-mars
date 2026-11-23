@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {MarsBotShippingBoard} from '@/server/automa/colonies/MarsBotShippingBoard';
-import {eligibleColonies, placeColony} from '@/server/automa/colonies/MarsBotColonyPlacer';
+import {placeColony, selectRandomColony} from '@/server/automa/colonies/MarsBotColonyPlacer';
 import {Poseidon} from '@/server/cards/colonies/Poseidon';
 import {ColonyDeserializer} from '@/server/colonies/ColonyDeserializer';
 import {Europa} from '@/server/colonies/Europa';
@@ -12,8 +12,8 @@ import {setRulingParty} from '../../TestingUtils';
 import {fakeMarsBot} from '../FakeMarsBot';
 import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
-function setup(options: {turmoilExtension?: boolean} = {}) {
-  const [game, human, botPlayer] = testGame(2, {coloniesExtension: true, ...options});
+function setup() {
+  const [game, human, botPlayer] = testGame(2, {coloniesExtension: true});
   const notices: Array<string> = [];
   const {marsBot, calls} = recordingMarsBot({
     game,
@@ -26,31 +26,17 @@ function setup(options: {turmoilExtension?: boolean} = {}) {
 }
 
 describe('MarsBotColonyPlacer', () => {
-  for (const run of [
-    {isActive: true, colonies: [], expected: true},
-    {isActive: false, colonies: [], expected: false},
-    {isActive: true, colonies: ['human', 'human', 'human'], expected: false},
-    {isActive: true, colonies: ['bot'], expected: false},
-  ] as const) {
-    it('lists the tiles MarsBot can build on: ' + JSON.stringify(run), () => {
-      const {game, human, botPlayer, marsBot} = setup();
-      const luna = new Luna();
-      luna.isActive = run.isActive;
-      luna.colonies = run.colonies.map((owner) => owner === 'bot' ? botPlayer.id : human.id);
-      game.colonies = [luna];
-      const expected = run.expected ? [luna] : [];
-
-      expect(eligibleColonies(marsBot)).deep.eq(expected);
-    });
-  }
-
-  it('lists Europa while Reds rule, since MarsBot ignores the ruling policy', () => {
-    const {game, marsBot} = setup({turmoilExtension: true});
+  it('picks a tile MarsBot can build on, and ignores the ruling policy', () => {
+    const [game] = testGame(1, {automa: true, coloniesExtension: true, turmoilExtension: true});
+    const botPlayer = game.marsBotPlayer!;
+    const {marsBot} = recordingMarsBot({game, player: botPlayer});
+    const luna = new Luna();
+    luna.colonies = [botPlayer.id];
     const europa = new Europa();
-    game.colonies = [europa];
+    game.colonies = [luna, europa];
     setRulingParty(game, PartyName.REDS);
 
-    expect(eligibleColonies(marsBot)).deep.eq([europa]);
+    expect(selectRandomColony(marsBot)).eq(europa);
   });
 
   for (const run of [

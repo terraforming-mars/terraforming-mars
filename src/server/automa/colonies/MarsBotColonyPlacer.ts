@@ -6,29 +6,13 @@ import {comparing} from '../../../common/utils/Ordering';
 import {inplaceRemove, toName} from '../../../common/utils/utils';
 import {pickByFlippedCard} from '../MarsBotCardFlip';
 
-/** Lists the colony tiles MarsBot can build on: active, not full, and without a colony of its own. */
-export function eligibleColonies(marsBot: IMarsBot): Array<IColony> {
-  return marsBot.game.colonies.filter((colony) => {
-    if (!colony.isActive) {
-      return false;
-    }
-    if (colony.isFull()) {
-      return false;
-    }
-    if (colony.colonies.includes(marsBot.player.id)) {
-      return false;
-    }
-    return true;
-  });
-}
-
 /**
  * Picks a colony tile for MarsBot to build on by revealing a project card (rulebook C, p.4-5).
  *
  * Returns undefined when no tile is eligible.
  */
 export function selectRandomColony(marsBot: IMarsBot): IColony | undefined {
-  return pickByFlippedCard(marsBot.game, eligibleColonies(marsBot));
+  return pickByFlippedCard(marsBot.game, marsBot.player.colonies.getPlayableColonies());
 }
 
 /**

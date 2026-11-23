@@ -134,7 +134,7 @@ export class MarsBotActionDeck {
     if (!skipDiscard) {
       const discarded = draftedCards.pop();
       if (discarded) {
-        game.projectDeck.discardPile.push(discarded);
+        game.projectDeck.discard(discarded);
         game.log('MarsBot discards ${0} after the draft', (b) => b.card(discarded));
       }
     }
@@ -335,7 +335,7 @@ export class MarsBotActionDeck {
     }
     const discarded = fewest;
     inplaceRemove(this.cards, discarded);
-    this.marsBot.game.projectDeck.discardPile.push(discarded);
+    this.marsBot.game.projectDeck.discard(discarded);
     this.marsBot.game.log('MarsBot (Polyphemos): discarded ${0}, the project card with the fewest tags, from its action deck', (b) => b.card(discarded));
   }
 

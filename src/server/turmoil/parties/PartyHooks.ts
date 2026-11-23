@@ -35,6 +35,10 @@ export class PartyHooks {
     if (player.game.phase !== Phase.ACTION) {
       return false;
     }
+    // MarsBot ignores the ruling party's policy (rulebook C, p.6).
+    if (player.isMarsBot) {
+      return false;
+    }
     const turmoil = player.game.turmoil;
     if (!turmoil) {
       return false;

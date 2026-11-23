@@ -118,6 +118,17 @@ describe('Reds', () => {
     expect(player.megaCredits).to.eq(0);
   });
 
+  it('Ruling policy 1: MarsBot raises its TR without paying', () => {
+    const [game] = testGame(1, {automa: true, turmoilExtension: true});
+    const botPlayer = game.marsBotPlayer!;
+    setRulingParty(game, PartyName.REDS, 'rp01');
+
+    botPlayer.setTerraformRating(20);
+    botPlayer.increaseTerraformRating();
+    runAllActions(game);
+    expect(botPlayer.terraformRating).to.eq(21);
+  });
+
   it('Ruling policy 2: When you place a tile, pay 3 M€ or as much as possible', () => {
     setRulingParty(game, PartyName.REDS, 'rp02');
 

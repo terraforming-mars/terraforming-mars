@@ -198,31 +198,31 @@ export class MarsBot implements IMarsBot {
   }
 
   public addProjectCardsToBonusDeck(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public maybeMoveBonusCardToActionDeck(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public returnSetupBonusCardToBonusDeck(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public drawProjectCardsToActionDeck(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public addBonusCardToActionDeck(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public removeBonusCard(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public maybeDiscardProjectCardWithFewestTags(): void {
-    throw new Error('TODO(ignac8): the action deck, in ignac8/terraforming-mars#94');
+    throw new Error('TODO(ignac8): the action deck, in #8765');
   }
 
   public maybeClaimMilestone(): boolean {

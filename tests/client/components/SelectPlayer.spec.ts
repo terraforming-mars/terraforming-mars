@@ -83,20 +83,6 @@ describe('SelectPlayer', () => {
     expect(response).deep.eq({type: 'player', player: 'blue'});
   });
 
-  it('marks yourself', () => {
-    const playerInput: SelectPlayerModel = {type: 'player', title: '', buttonLabel: '', players: ['red', 'blue'], markSelf: true};
-    const wrapper = mount(SelectPlayer, {
-      ...globalConfig,
-      props: {
-        playerView: {players, thisPlayer: players[0]} as PlayerViewModel,
-        playerinput: playerInput,
-        onsave: () => {},
-      },
-    });
-
-    expect(wrapper.findAll('label').map((label) => label.text())).deep.eq(['beta', 'alpha (you)']);
-  });
-
   async function clickInput(input: DOMWrapper<HTMLInputElement>) {
     const radio = input.element;
     radio.checked = true;

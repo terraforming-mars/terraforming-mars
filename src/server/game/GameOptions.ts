@@ -10,7 +10,41 @@ import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
 import {ShowVP} from '../../common/game/ShowVP';
 
-export type GameOptions = {
+/** Per-expansion flags that predate `GameOptions.expansions`. */
+export type LegacyGameOptions = {
+  /** @deprecated Use `expansions.corpera`. */
+  corporateEra: boolean;
+  /** @deprecated Use `expansions.venus`. */
+  venusNextExtension: boolean;
+  /** @deprecated Use `expansions.colonies`. */
+  coloniesExtension: boolean;
+  /** @deprecated Use `expansions.prelude`. */
+  preludeExtension: boolean;
+  /** @deprecated Use `expansions.prelude2`. */
+  prelude2Expansion: boolean;
+  /** @deprecated Use `expansions.turmoil`. */
+  turmoilExtension: boolean;
+  /** @deprecated Use `expansions.promo`. */
+  promoCardsOption: boolean;
+  /** @deprecated Use `expansions.community`. */
+  communityCardsOption: boolean;
+  /** @deprecated Use `expansions.ares`. */
+  aresExtension: boolean;
+  /** @deprecated Use `expansions.moon`. */
+  moonExpansion: boolean;
+  /** @deprecated Use `expansions.pathfinders`. */
+  pathfindersExpansion: boolean;
+  /** @deprecated Use `expansions.ceo`. */
+  ceoExtension: boolean;
+  /** @deprecated Use `expansions.starwars`. */
+  starWarsExpansion: boolean;
+  /** @deprecated Use `expansions.underworld`. */
+  underworldExpansion: boolean;
+  /** @deprecated Use `expansions.deltaProject`. */
+  deltaProjectExpansion: boolean;
+};
+
+export type GameOptions = LegacyGameOptions & {
   boardName: BoardName;
   clonedGamedId: GameId | undefined;
 
@@ -20,27 +54,12 @@ export type GameOptions = {
   fastModeOption: boolean;
   showVP: ShowVP;
 
-  // Extensions -- Deprecated, except when importing JSON
-  corporateEra: boolean;
-  venusNextExtension: boolean;
-  coloniesExtension: boolean;
-  preludeExtension: boolean;
-  prelude2Expansion: boolean;
-  turmoilExtension: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
+  // Expansion options
   aresHazards: boolean;
   aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-  ceoExtension: boolean;
-  starWarsExpansion: boolean;
-  underworldExpansion: boolean;
-  deltaProjectExpansion: boolean;
 
   expansions: Record<Expansion, boolean>,
 

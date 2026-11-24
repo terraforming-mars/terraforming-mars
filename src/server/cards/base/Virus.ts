@@ -12,7 +12,6 @@ import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
-
 export class Virus extends Card implements IProjectCard {
   constructor() {
     super({
@@ -32,10 +31,14 @@ export class Virus extends Card implements IProjectCard {
     });
   }
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
-    if (player.game.isSoloMode()) {
-      // TODO(kberg): Special case for Mons Insurance owner.
-      player.game.someoneHasRemovedOtherPlayersPlants = true;
-      return undefined;
+    const game = player.game;
+    if (game.isSoloMode()) {
+      const option = player.resolveNeutralPlayerAttack('Remove plants or animals from the neutral opponent', {
+        onAttack: () => {
+          game.someoneHasRemovedOtherPlayersPlants = true;
+        },
+      });
+      return option === undefined ? undefined : new OrOptions(option, new SelectOption('Skip removal'));
     }
 
     const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {mandatory: false}).execute() as OrOptions;
@@ -45,7 +48,7 @@ export class Virus extends Card implements IProjectCard {
 
     const orOptionsPlants = new RemoveAnyPlants(player, 5).execute();
     const removePlants = orOptionsPlants !== undefined ?
-      orOptionsPlants.options.slice(0, -1) :
+      orOptionsPlants.options.filter((option) => option.title !== 'Skip removing plants') :
       undefined;
 
     // If no other player has resources to remove

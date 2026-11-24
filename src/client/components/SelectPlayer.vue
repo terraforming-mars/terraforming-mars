@@ -5,6 +5,7 @@
       <input type="radio" v-model="selectedPlayer" :value="player">
       <i class="form-icon"></i>
       <SelectPlayerRow :player="playerView.players.find((otherPlayer) => otherPlayer.color === player)" />
+      <span v-if="playerinput.markSelf && player === playerView.thisPlayer.color">{{ ' ' + $t('(you)') }}</span>
     </label>
     <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>

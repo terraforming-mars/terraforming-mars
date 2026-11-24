@@ -90,9 +90,7 @@ describe('BoardBuilder', () => {
   it('Venera base spot shows when Pathfinders, Venus & Turmoil are all in play', () => {
     const board = TharsisBoard.newInstance({
       ...DEFAULT_GAME_OPTIONS,
-      pathfindersExpansion: true,
-      venusNextExtension: true,
-      turmoilExtension: true,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, pathfinders: true, venus: true, turmoil: true},
     },
     new SeededRandom(0));
     expect(board.getSpaceOrThrow('c78')).to.not.be.undefined;
@@ -101,9 +99,7 @@ describe('BoardBuilder', () => {
   it('Venera base spot does not show when Turmoil is not in play', () => {
     const board = TharsisBoard.newInstance({
       ...DEFAULT_GAME_OPTIONS,
-      pathfindersExpansion: true,
-      venusNextExtension: true,
-      turmoilExtension: false,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, pathfinders: true, venus: true, turmoil: false},
     },
     new SeededRandom(0));
     expect(() => board.getSpaceOrThrow('c78')).to.throw();
@@ -112,9 +108,7 @@ describe('BoardBuilder', () => {
   it('Venera base spot shows when added to deck, even when Pathfinders is not in play', () => {
     const board = TharsisBoard.newInstance({
       ...DEFAULT_GAME_OPTIONS,
-      pathfindersExpansion: false,
-      venusNextExtension: true,
-      turmoilExtension: true,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, pathfinders: false, venus: true, turmoil: true},
       includedCards: [CardName.VENERA_BASE],
     },
     new SeededRandom(0));

@@ -420,7 +420,7 @@ export class Game implements IGame, Logger {
     // handicaps.
     for (const player of game.playersInGenerationOrder) {
       player.setTerraformRating(player.terraformRating + player.handicap);
-      if (!gameOptions.corporateEra) {
+      if (!gameOptions.expansions.corpera) {
         player.production.override({
           megacredits: 1,
           steel: 1,
@@ -1797,11 +1797,11 @@ export class Game implements IGame, Logger {
     game.awards = awards;
     game.fundedAwards = deserializeFundedAwards(d.fundedAwards, game.playersPlusMarsBot, awards);
 
-    if (gameOptions.aresExtension) {
+    if (gameOptions.expansions.ares) {
       game.aresData = d.aresData;
     }
     // Reload colonies elements if needed
-    if (gameOptions.coloniesExtension) {
+    if (gameOptions.expansions.colonies) {
       game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
       const colonyDealer = new ColonyDealer(rng, gameOptions);
       colonyDealer.restore(game.colonies);
@@ -1809,16 +1809,16 @@ export class Game implements IGame, Logger {
     }
 
     // Reload turmoil elements if needed
-    if (d.turmoil && gameOptions.turmoilExtension) {
+    if (d.turmoil && gameOptions.expansions.turmoil) {
       game.turmoil = Turmoil.deserialize(d.turmoil, game.playersPlusMarsBot, game.rng);
     }
 
     // Reload moon elements if needed
-    if (d.moonData !== undefined && gameOptions.moonExpansion === true) {
+    if (d.moonData !== undefined && gameOptions.expansions.moon === true) {
       game.moonData = MoonData.deserialize(d.moonData, players);
     }
 
-    if (d.pathfindersData !== undefined && gameOptions.pathfindersExpansion === true) {
+    if (d.pathfindersData !== undefined && gameOptions.expansions.pathfinders === true) {
       game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
     }
 

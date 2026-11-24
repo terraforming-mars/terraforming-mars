@@ -167,7 +167,7 @@ export abstract class Board {
       }
     }
 
-    if (player.game.gameOptions.aresExtension === false) {
+    if (player.game.gameOptions.expansions.ares === false) {
       return costs;
     }
 

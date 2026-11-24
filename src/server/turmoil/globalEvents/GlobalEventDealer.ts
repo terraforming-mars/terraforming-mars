@@ -83,7 +83,7 @@ export class GlobalEventDealer {
     // TODO(kberg): Merge with GameCards.
     const includes: Record<GameModule, boolean> = {
       base: true,
-      corpera: gameOptions.corporateEra,
+      corpera: gameOptions.expansions.corpera,
       prelude: gameOptions.expansions.prelude,
       prelude2: gameOptions.expansions.prelude2,
       venus: gameOptions.expansions.venus,

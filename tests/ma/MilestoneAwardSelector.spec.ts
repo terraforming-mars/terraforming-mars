@@ -65,12 +65,12 @@ describe('MilestoneAwardSelector', () => {
     {options: {randomMA: RandomMAOptionType.NONE}},
     {options: {randomMA: RandomMAOptionType.LIMITED}},
     {options: {randomMA: RandomMAOptionType.UNLIMITED}},
-    {options: {randomMA: RandomMAOptionType.NONE, moonExpansion: true}},
-    {options: {randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}},
-    {options: {randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}},
-    {options: {randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}},
-    {options: {randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}},
-    {options: {randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.NONE, expansions: {...DEFAULT_GAME_OPTIONS.expansions, moon: true}}},
+    {options: {randomMA: RandomMAOptionType.LIMITED, expansions: {...DEFAULT_GAME_OPTIONS.expansions, moon: true}}},
+    {options: {randomMA: RandomMAOptionType.UNLIMITED, expansions: {...DEFAULT_GAME_OPTIONS.expansions, moon: true}}},
+    {options: {randomMA: RandomMAOptionType.NONE, expansions: {...DEFAULT_GAME_OPTIONS.expansions, ares: true, moon: true}}},
+    {options: {randomMA: RandomMAOptionType.LIMITED, expansions: {...DEFAULT_GAME_OPTIONS.expansions, ares: true, moon: true}}},
+    {options: {randomMA: RandomMAOptionType.UNLIMITED, expansions: {...DEFAULT_GAME_OPTIONS.expansions, ares: true, moon: true}}},
   ] as const;
   sanityTestRuns.forEach((run, idx) => {
     it('sanity test run ' + idx, () => {
@@ -123,11 +123,7 @@ describe('MilestoneAwardSelector', () => {
     avoidedAwards.push('T. Politician');
     const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
       randomMA: RandomMAOptionType.LIMITED,
-      venusNextExtension: false,
-      aresExtension: false,
-      moonExpansion: false,
-      coloniesExtension: false,
-      turmoilExtension: false,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, venus: false, ares: false, moon: false, colonies: false, turmoil: false},
       includeFanMA: true,
     });
 
@@ -138,12 +134,10 @@ describe('MilestoneAwardSelector', () => {
   it('nova maps with no randomness render correctly', () => {
     const mas = chooseMilestonesAndAwards({
       ...DEFAULT_GAME_OPTIONS,
-      'aresExtension': true,
       'boardName': BoardName.TERRA_CIMMERIA_NOVA,
+      'expansions': {...DEFAULT_GAME_OPTIONS.expansions, ares: true, pathfinders: true, venus: true},
       'includeFanMA': false,
-      'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,
-      'venusNextExtension': true,
     });
     expect(mas.milestones).to.have.length(8);
     expect(mas.awards).to.have.length(8);
@@ -178,7 +172,7 @@ describe('MilestoneAwardSelector', () => {
     for (let idx = 0; idx < 1_000; idx++) {
       const mas = chooseMilestonesAndAwards({
         ...DEFAULT_GAME_OPTIONS,
-        coloniesExtension: false,
+        expansions: {...DEFAULT_GAME_OPTIONS.expansions, colonies: false},
         randomMA: RandomMAOptionType.LIMITED,
       });
       expect(mas.awards).does.not.contain('Constructor');

@@ -65,7 +65,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     drawnMilestonesAndAwards.awards.push(...awards);
   }
 
-  const requiredQty = gameOptions.venusNextExtension ? 6 : 5;
+  const requiredQty = gameOptions.expansions.venus ? 6 : 5;
 
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
@@ -87,13 +87,13 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     default:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
-    if (gameOptions.venusNextExtension) {
+    if (gameOptions.expansions.venus) {
       push(milestoneManifest.expansions['venus'], awardManifest.expansions['venus']);
     }
-    if (gameOptions.aresExtension) {
+    if (gameOptions.expansions.ares) {
       push(milestoneManifest.expansions['ares'], awardManifest.expansions['ares']);
     }
-    if (gameOptions.moonExpansion) {
+    if (gameOptions.expansions.moon) {
       // One MA will reward moon tags, the other will reward moon tiles.
       if (Math.random() > 0.5) {
         push(['One Giant Step'], ['Lunar Magnate']);

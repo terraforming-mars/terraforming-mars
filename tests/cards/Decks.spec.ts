@@ -12,8 +12,7 @@ describe('PreludeDeck', () => {
   it('addresses incompatible fan preludes', () => {
     const commonGameOptions = {
       ...DEFAULT_GAME_OPTIONS,
-      preludeExtension: true,
-      turmoilExtension: true,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, prelude: true, turmoil: true},
     };
 
     function names(deck: PreludeDeck): Array<CardName> {
@@ -24,27 +23,27 @@ describe('PreludeDeck', () => {
     expect(names(first)).does.not.include(CardName.BY_ELECTION);
     expect(names(first)).does.not.include(CardName.THE_NEW_SPACE_RACE);
 
-    const second = new PreludeDeck(new GameCards({...commonGameOptions, communityCardsOption: true}).getPreludeCards(), [], random);
+    const second = new PreludeDeck(new GameCards({...commonGameOptions, expansions: {...commonGameOptions.expansions, community: true}}).getPreludeCards(), [], random);
     expect(names(second)).includes(CardName.BY_ELECTION);
     expect(names(second)).does.not.include(CardName.THE_NEW_SPACE_RACE);
 
-    const third = new PreludeDeck(new GameCards({...commonGameOptions, pathfindersExpansion: true}).getPreludeCards(), [], random);
+    const third = new PreludeDeck(new GameCards({...commonGameOptions, expansions: {...commonGameOptions.expansions, pathfinders: true}}).getPreludeCards(), [], random);
     expect(names(third)).does.not.include(CardName.BY_ELECTION);
     expect(names(third)).includes(CardName.THE_NEW_SPACE_RACE);
 
     const fourth = new PreludeDeck(
-      new GameCards({...commonGameOptions, communityCardsOption: true, pathfindersExpansion: true}).getPreludeCards(), [], new ConstRandom(0));
+      new GameCards({...commonGameOptions, expansions: {...commonGameOptions.expansions, community: true, pathfinders: true}}).getPreludeCards(), [], new ConstRandom(0));
     expect(names(fourth)).does.not.include(CardName.BY_ELECTION);
     expect(names(fourth)).includes(CardName.THE_NEW_SPACE_RACE);
 
     const fifth = new PreludeDeck(
-      new GameCards({...commonGameOptions, communityCardsOption: true, pathfindersExpansion: true}).getPreludeCards(), [], new ConstRandom(0.5));
+      new GameCards({...commonGameOptions, expansions: {...commonGameOptions.expansions, community: true, pathfinders: true}}).getPreludeCards(), [], new ConstRandom(0.5));
     expect(names(fifth)).includes(CardName.BY_ELECTION);
     expect(names(fifth)).does.not.include(CardName.THE_NEW_SPACE_RACE);
   });
 
   it('serialization compatibility', () => {
-    const deck = new PreludeDeck(new GameCards({...DEFAULT_GAME_OPTIONS, venusNextExtension: true, customCorporationsList: [CardName.MERGER]}).getPreludeCards(), [], random);
+    const deck = new PreludeDeck(new GameCards({...DEFAULT_GAME_OPTIONS, expansions: {...DEFAULT_GAME_OPTIONS.expansions, venus: true}, customCorporationsList: [CardName.MERGER]}).getPreludeCards(), [], random);
 
     const logger = {
       log: () => {},
@@ -75,8 +74,7 @@ describe('CeoDeck', () => {
   it('serialization compatibility', () => {
     const deck = new CeoDeck(new GameCards(
       {...DEFAULT_GAME_OPTIONS,
-        ceoExtension: true,
-        preludeExtension: true,
+        expansions: {...DEFAULT_GAME_OPTIONS.expansions, ceo: true, prelude: true},
       }).getCeoCards(), [], random);
 
     const logger = {

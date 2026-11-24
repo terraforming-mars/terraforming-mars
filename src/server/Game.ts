@@ -353,7 +353,7 @@ export class Game implements IGame, Logger {
     // This evaluation of created time doesn't match what's stored in the database, but that's fine.
     game.createdTime = new Date();
     // Initialize Ares data
-    if (gameOptions.aresExtension) {
+    if (gameOptions.expansions.ares) {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
     }
 
@@ -362,7 +362,7 @@ export class Game implements IGame, Logger {
     game.awards = awards.map(awardManifest.createOrThrow);
 
     // Add colonies stuff
-    if (gameOptions.coloniesExtension) {
+    if (gameOptions.expansions.colonies) {
       const colonyDealer = new ColonyDealer(rng, gameOptions);
       colonyDealer.drawColonies(players.length);
       game.colonies = colonyDealer.colonies;
@@ -370,12 +370,12 @@ export class Game implements IGame, Logger {
     }
 
     // Add Turmoil stuff
-    if (gameOptions.turmoilExtension) {
+    if (gameOptions.expansions.turmoil) {
       game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
     }
 
     // Must configure this before solo placement.
-    if (gameOptions.underworldExpansion) {
+    if (gameOptions.expansions.underworld) {
       game.underworldData = UnderworldExpansion.initialize(rng, gameOptions.boardName === BoardName.AMAZONIS_PLANITIA);
     }
 
@@ -389,19 +389,19 @@ export class Game implements IGame, Logger {
     }
 
     // Setup Ares hazards
-    if (gameOptions.aresExtension && gameOptions.aresHazards) {
+    if (gameOptions.expansions.ares && gameOptions.aresHazards) {
       AresSetup.setupHazards(game);
     }
 
-    if (gameOptions.moonExpansion) {
+    if (gameOptions.expansions.moon) {
       game.moonData = MoonExpansion.initialize(gameOptions, rng);
     }
 
-    if (gameOptions.pathfindersExpansion) {
+    if (gameOptions.expansions.pathfinders) {
       game.pathfindersData = PathfindersExpansion.initialize(game);
     }
 
-    if (game.gameOptions.deltaProjectExpansion) {
+    if (game.gameOptions.expansions.deltaProject) {
       for (const player of game.players) {
         player.preludeCardsInHand.push(new DeltaProject());
         player.deltaProjectData = {position: 0, jovianBonus: false};
@@ -433,25 +433,25 @@ export class Game implements IGame, Logger {
 
       if (!player.beginner ||
         // Bypass beginner choice if any extension is chosen
-        gameOptions.ceoExtension ||
-        gameOptions.preludeExtension ||
-        gameOptions.prelude2Expansion ||
-        gameOptions.venusNextExtension ||
-        gameOptions.coloniesExtension ||
-        gameOptions.turmoilExtension ||
+        gameOptions.expansions.ceo ||
+        gameOptions.expansions.prelude ||
+        gameOptions.expansions.prelude2 ||
+        gameOptions.expansions.venus ||
+        gameOptions.expansions.colonies ||
+        gameOptions.expansions.turmoil ||
         gameOptions.initialDraftVariant ||
         gameOptions.preludeDraftVariant ||
-        gameOptions.underworldExpansion ||
-        gameOptions.moonExpansion) {
+        gameOptions.expansions.underworld ||
+        gameOptions.expansions.moon) {
         player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
-        if (gameOptions.preludeExtension) {
+        if (gameOptions.expansions.prelude) {
           gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
         }
-        if (gameOptions.ceoExtension) {
+        if (gameOptions.expansions.ceo) {
           gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
           player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
         }
@@ -604,11 +604,11 @@ export class Game implements IGame, Logger {
 
     const venusMaxed = this.getVenusScaleLevel() === this.max.venus;
     // Solo games with Venus needs Venus maxed to end the game.
-    if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
+    if (this.players.length === 1 && this.gameOptions.expansions.venus) {
       return globalParametersMaxed && venusMaxed;
     }
     // Option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
-    if (this.gameOptions.venusNextExtension && this.gameOptions.requiresVenusTrackCompletion) {
+    if (this.gameOptions.expansions.venus && this.gameOptions.requiresVenusTrackCompletion) {
       return globalParametersMaxed && venusMaxed;
     }
     return globalParametersMaxed;
@@ -617,13 +617,13 @@ export class Game implements IGame, Logger {
   public lastSoloGeneration(): number {
     let lastGeneration = 14;
     const options = this.gameOptions;
-    if (options.preludeExtension) {
+    if (options.expansions.prelude) {
       lastGeneration -= 2;
     }
 
     // Only add 2 more generations when using the track completion option
     // and not the solo TR option.
-    if (options.moonExpansion) {
+    if (options.expansions.moon) {
       if (!options.soloTR && options.requiresMoonTrackCompletion) {
         lastGeneration += 2;
       }
@@ -646,7 +646,7 @@ export class Game implements IGame, Logger {
     }
 
     // Ares Extreme: Solo player must remove all unprotected hazards to win
-    if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant) {
+    if (this.gameOptions.expansions.ares && this.gameOptions.aresExtremeVariant) {
       if (this.board.getUnprotectedHazards().length > 0) {
         return false;
       }
@@ -770,7 +770,7 @@ export class Game implements IGame, Logger {
         player.setWaitingFor(this.selectInitialCards(player));
       }
     }
-    if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
+    if (this.players.length === 1 && this.gameOptions.expansions.colonies) {
       this.players[0].production.add(Resource.MEGACREDITS, -2);
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
@@ -830,7 +830,7 @@ export class Game implements IGame, Logger {
       this.phase = Phase.SOLAR;
 
       // Maybe spawn a new hazard on Mars every 3 generations
-      if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant && this.generation % 3 === 0) {
+      if (this.gameOptions.expansions.ares && this.gameOptions.aresExtremeVariant && this.generation % 3 === 0) {
         const direction = Math.floor(this.rng.nextInt(2)) === 0 ? 'top' : 'bottom';
         const tileType = this.board.getOceanSpaces().length >= 3 ? TileType.EROSION_MILD : TileType.DUST_STORM_MILD;
 
@@ -892,7 +892,7 @@ export class Game implements IGame, Logger {
     entry[GlobalParameter.TEMPERATURE] = this.temperature;
     entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
     entry[GlobalParameter.OCEANS] = this.board.getOceanSpaces().length;
-    if (this.gameOptions.venusNextExtension) {
+    if (this.gameOptions.expansions.venus) {
       entry[GlobalParameter.VENUS] = this.venusScaleLevel;
     }
     if (this.moonData) {
@@ -967,7 +967,7 @@ export class Game implements IGame, Logger {
           }),
       );
     }
-    if (this.getVenusScaleLevel() < this.max.venus && this.gameOptions.venusNextExtension) {
+    if (this.getVenusScaleLevel() < this.max.venus && this.gameOptions.expansions.venus) {
       orOptions.options.push(
         new SelectOption('Increase Venus scale', 'Increase').andThen(() => {
           this.increaseVenusScaleLevel(player, 1);
@@ -977,7 +977,7 @@ export class Game implements IGame, Logger {
       );
     }
 
-    if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant && this.isSoloMode()) {
+    if (this.gameOptions.expansions.ares && this.gameOptions.aresExtremeVariant && this.isSoloMode()) {
       const unprotectedHazardSpaces = this.board.getUnprotectedHazards();
 
       if (unprotectedHazardSpaces.length > 0) {
@@ -1684,9 +1684,9 @@ export class Game implements IGame, Logger {
         case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
           return gameOptions.moonStandardProjectVariant1 === true;
         case CardName.EXCAVATE_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true;
+          return gameOptions.expansions.underworld === true;
         case CardName.COLLUSION_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
+          return gameOptions.expansions.underworld === true && gameOptions.expansions.turmoil === true;
         default:
           return true;
         }

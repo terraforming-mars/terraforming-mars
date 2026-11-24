@@ -50,7 +50,7 @@ export class Colonies {
 
   public coloniesTradeAction(): AndOptions | undefined {
     const game = this.player.game;
-    if (game.gameOptions.coloniesExtension && this.canTrade()) {
+    if (game.gameOptions.expansions.colonies && this.canTrade()) {
       return this.tradeWithColony(ColoniesHandler.tradeableColonies(game));
     }
     return undefined;

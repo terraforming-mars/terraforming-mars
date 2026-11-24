@@ -483,7 +483,7 @@ export class Player implements IPlayer {
   }
 
   public getColoniesCount() {
-    if (!this.game.gameOptions.coloniesExtension) {
+    if (!this.game.gameOptions.expansions.colonies) {
       return 0;
     }
 

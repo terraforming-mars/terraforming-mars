@@ -36,7 +36,7 @@ export class Athena extends CorporationCard implements ICorporationCard {
     const game = player.game;
     const title = 'Select space next to no other tile for hazard';
 
-    if (game.gameOptions.aresExtension) {
+    if (game.gameOptions.expansions.ares) {
       game.defer(new PlaceHazardTile(
         player, TileType.EROSION_MILD, {title, spaces: this.getAvailableSpaces(player)}))
         .andThen(() => {

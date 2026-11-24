@@ -274,9 +274,9 @@ class InitialDraft extends Draft {
         player.dealtProjectCards = player.draftedCards;
         player.draftedCards = [];
       }
-      if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
+      if (this.game.gameOptions.expansions.prelude && this.game.gameOptions.preludeDraftVariant) {
         newPreludeDraft(this.game).startDraft();
-      } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+      } else if (this.game.gameOptions.expansions.ceo && this.game.gameOptions.ceosDraftVariant) {
         this.game.initialDraftIteration++;
         newCEOsDraft(this.game).startDraft();
       } else {
@@ -313,7 +313,7 @@ class PreludeDraft extends Draft {
       player.dealtPreludeCards = player.draftedCards as Array<IPreludeCard>;
       player.draftedCards = [];
     }
-    if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+    if (this.game.gameOptions.expansions.ceo && this.game.gameOptions.ceosDraftVariant) {
       this.game.draftRound = 1;
       newCEOsDraft(this.game).startDraft();
     } else {

@@ -115,7 +115,7 @@ class RedsPolicy03 implements IPolicy {
       return oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== game.max.oxygen;
     case GlobalParameter.VENUS:
       const venusScaleLevel = game.getVenusScaleLevel();
-      return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== game.max.venus;
+      return game.gameOptions.expansions.venus === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== game.max.venus;
     case GlobalParameter.MOON_HABITAT_RATE:
       if (game.moonData) {
         const rate = game.moonData.habitatRate;

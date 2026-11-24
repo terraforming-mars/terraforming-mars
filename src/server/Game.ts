@@ -281,7 +281,7 @@ export class Game implements IGame, Logger {
     rng: GameRandom = new SeededRandom(0)): Game {
     if (partialOptions.expansions === undefined) {
       partialOptions.expansions = {
-        corpera: partialOptions.corporateEra ?? false,
+        corpera: partialOptions.corporateEra ?? true,
         venus: partialOptions.venusNextExtension ?? false,
         colonies: partialOptions.coloniesExtension ?? false,
         prelude: partialOptions.preludeExtension ?? false,

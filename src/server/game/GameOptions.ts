@@ -5,7 +5,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
-import {Expansion} from '../../common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansion} from '../../common/cards/GameModule';
 import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
 import {ShowVP} from '../../common/game/ShowVP';
@@ -121,23 +121,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customPreludes: [],
   draftVariant: false,
   escapeVelocity: undefined,
-  expansions: {
-    corpera: false,
-    promo: false,
-    venus: false,
-    colonies: false,
-    prelude: false,
-    prelude2: false,
-    turmoil: false,
-    community: false,
-    ares: false,
-    moon: false,
-    pathfinders: false,
-    ceo: false,
-    starwars: false,
-    underworld: false,
-    deltaProject: false,
-  },
+  expansions: {...DEFAULT_EXPANSIONS},
   fastModeOption: false,
   includeFanMA: false,
   initialDraftVariant: false,

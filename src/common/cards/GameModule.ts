@@ -59,4 +59,4 @@ export const DEFAULT_EXPANSIONS = {
   starwars: false,
   underworld: false,
   deltaProject: false,
-} satisfies Record<Expansion, boolean>;
+} as const satisfies Record<Expansion, boolean>;

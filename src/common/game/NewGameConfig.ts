@@ -5,7 +5,7 @@ import {Color} from '../Color';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {GameId} from '../Types';
-import {Expansion} from '../cards/GameModule';
+import {Expansions} from '../cards/GameModule';
 import {CustomMA} from '../ma/CustomMA';
 import {ShowVP} from './ShowVP';
 
@@ -33,7 +33,7 @@ export type EscapeVelocityOptions = {
  */
 export type NewGameConfig = {
   players: Array<NewPlayerModel>;
-  expansions: Record<Expansion, boolean>,
+  expansions: Expansions,
   boards: Array<BoardName>;
   seed: number;
   randomFirstPlayer: boolean;

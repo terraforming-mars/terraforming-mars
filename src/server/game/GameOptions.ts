@@ -5,7 +5,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
-import {DEFAULT_EXPANSIONS, Expansion} from '../../common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansions} from '../../common/cards/GameModule';
 import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
 import {ShowVP} from '../../common/game/ShowVP';
@@ -61,7 +61,7 @@ export type GameOptions = LegacyGameOptions & {
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
 
-  expansions: Record<Expansion, boolean>,
+  expansions: Expansions,
 
   // Variants
   draftVariant: boolean;

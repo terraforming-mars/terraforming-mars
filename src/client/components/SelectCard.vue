@@ -6,13 +6,10 @@
         <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card">
         <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false">
       </template>
-      <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
-        <template v-if="playerinput.showOwner">
-          <div :class="'card-owner-label player-translucent-bg-color-'+ getOwner(card).color">
-            {{ getOwner(card).name }}
-          </div>
-        </template>
-      </Card>
+      <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)" />
+      <div v-if="playerinput.showOwner" :class="'card-owner-label player-translucent-bg-color-'+ getOwner(card).color">
+        {{ isOwnCard(card) ? $t('Your card') : getOwner(card).name }}
+      </div>
     </label>
     <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
     <WarningsComponent :warnings="warnings" />
@@ -41,6 +38,7 @@ import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {SelectCardResponse} from '@/common/inputs/InputResponse';
 import {Warning} from '@/common/cards/Warning';
+import {partition} from '@/common/utils/utils';
 
 type Owner = {
   name: string;
@@ -121,6 +119,8 @@ export default defineComponent({
             this.owners.set(card.name, owner);
           }
         });
+        // A player rarely wants to remove resources from their own cards, so those come last.
+        cards = partition(cards, (card) => !this.isOwnCard(card)).flat();
       }
       return cards;
     },
@@ -166,6 +166,9 @@ export default defineComponent({
     },
     getOwner(card: CardModel): Owner {
       return this.owners.get(card.name) ?? {name: 'unknown', color: 'neutral'};
+    },
+    isOwnCard(card: CardModel): boolean {
+      return this.getOwner(card).color === this.playerView.thisPlayer.color;
     },
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.

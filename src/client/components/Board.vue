@@ -363,8 +363,8 @@ import {spacesById} from '@/client/utils/spacesById';
 import {TileView} from '@/client/components/board/TileView';
 import {BoardName} from '@/common/boards/BoardName';
 import {LEGENDS} from '@/client/components/Legends';
-import {Expansion} from '@/common/cards/GameModule';
 import {SpaceName} from '@/common/boards/SpaceName';
+import {Expansions} from '@/common/cards/GameModule';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -403,7 +403,7 @@ export default defineComponent({
       default: constants.MIN_TEMPERATURE,
     },
     expansions: {
-      type: Object as () => Record<Expansion, boolean>,
+      type: Object as () => Expansions,
       required: true,
     },
     aresData: {

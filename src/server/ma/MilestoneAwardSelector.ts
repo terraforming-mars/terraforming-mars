@@ -11,7 +11,7 @@ import {synergies} from './MilestoneAwardSynergies';
 import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
 import {CustomMA, validateCustomMA} from '../../common/ma/CustomMA';
-import {Expansion, MODULE_NAMES} from '../../common/cards/GameModule';
+import {Expansions, MODULE_NAMES} from '../../common/cards/GameModule';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -133,7 +133,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  * Without it, the game can't be shown, such as the Politician award without Turmoil. `validateCustomMA` does the
  * other checks.
  */
-export function validateCustomMAExpansions(customMA: CustomMA | undefined, expansions: Readonly<Record<Expansion, boolean>>): void {
+export function validateCustomMAExpansions(customMA: CustomMA | undefined, expansions: Readonly<Expansions>): void {
   if (customMA === undefined) {
     return;
   }
@@ -145,7 +145,7 @@ export function validateCustomMAExpansions(customMA: CustomMA | undefined, expan
   }
 }
 
-function maybeThrowMissingExpansion<T extends string>(name: T, manifest: MAManifest<T, unknown>, expansions: Readonly<Record<Expansion, boolean>>): void {
+function maybeThrowMissingExpansion<T extends string>(name: T, manifest: MAManifest<T, unknown>, expansions: Readonly<Expansions>): void {
   const expansion = manifest.all[name].compatibility;
   if (expansion !== undefined && expansions[expansion] !== true) {
     throw new Error(`${name} needs the ${MODULE_NAMES[expansion]} expansion`);

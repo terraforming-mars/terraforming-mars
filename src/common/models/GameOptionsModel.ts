@@ -2,18 +2,18 @@ import {BoardName} from '../boards/BoardName';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {CardName} from '../cards/CardName';
-import {Expansion} from '../cards/GameModule';
 import {EscapeVelocityOptions} from '../game/NewGameConfig';
 import {ColonyName} from '../colonies/ColonyName';
 import {GameId} from '../Types';
 import {ShowVP} from '../game/ShowVP';
+import {Expansions} from '@/common/cards/GameModule';
 
 export type GameOptionsModel = {
   aresExtremeVariant: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
   bannedCards: ReadonlyArray<CardName>;
-  expansions: Record<Expansion, boolean>,
+  expansions: Expansions,
   draftVariant: boolean,
   escapeVelocity?: EscapeVelocityOptions,
   fastModeOption: boolean,

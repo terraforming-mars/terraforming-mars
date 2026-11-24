@@ -31,6 +31,7 @@ import {DeltaProjectPlayerModel} from '../common/models/DeltaProjectPlayerModel'
 import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
+import {SelectOption} from '@/server/inputs/SelectOption';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
@@ -273,6 +274,15 @@ export interface IPlayer {
    * disappears.
    */
   resolveInsuranceInSoloGame(): void;
+  /**
+   * An attack on the neutral player in a solo game, offered as an option to a Mons Insurance owner.
+   *
+   * Attacking the neutral player only costs a Mons Insurance owner, so only they get a choice. Anyone else
+   * attacks immediately, and this returns `undefined`. Callers supply their own skip option.
+   */
+  resolveNeutralPlayerAttack(
+    title: string | Message,
+    options?: {buttonLabel?: string, onAttack?: () => void}): SelectOption | undefined;
   /**
    * Returns the number of colonies this player has on all the colony types.
    *

@@ -450,7 +450,7 @@ export class UnderworldExpansion {
   }
 
   public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
-    if (target.game.gameOptions.underworldExpansion === false) {
+    if (target.game.gameOptions.expansions.underworld === false) {
       return cb(true);
     }
     const privateMilitaryContractor = target.tableau.get(CardName.PRIVATE_MILITARY_CONTRACTOR);
@@ -647,7 +647,7 @@ export class UnderworldExpansion {
 }
 
 function validateUnderworldExpansion(game: IGame) {
-  if (game.gameOptions.underworldExpansion !== true) {
+  if (game.gameOptions.expansions.underworld !== true) {
     throw new Error('Underworld expansion not in this game');
   }
 }

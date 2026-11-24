@@ -45,7 +45,7 @@ export class MoonExpansion {
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
   public static moonData(game: IGame): MoonData {
-    if (game.gameOptions.moonExpansion === true && game.moonData !== undefined) {
+    if (game.gameOptions.expansions.moon === true && game.moonData !== undefined) {
       return game.moonData;
     }
     throw new Error('Assertion error: Using a Moon feature when the Moon expansion is undefined.');

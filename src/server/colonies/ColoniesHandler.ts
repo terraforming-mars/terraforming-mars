@@ -29,7 +29,7 @@ export class ColoniesHandler {
   }
 
   public static maybeActivateColonies(game: IGame, card: ICard) {
-    if (!game.gameOptions.coloniesExtension) {
+    if (!game.gameOptions.expansions.colonies) {
       return;
     }
     game.colonies.forEach((colony) => {
@@ -115,7 +115,7 @@ export class ColoniesHandler {
   }
 
   public static endGeneration(game: IGame) {
-    if (game.gameOptions.coloniesExtension) {
+    if (game.gameOptions.expansions.colonies) {
       game.colonies.forEach((colony) => {
         colony.endGeneration(game);
       });

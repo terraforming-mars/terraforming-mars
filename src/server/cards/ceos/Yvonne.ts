@@ -24,7 +24,7 @@ export class Yvonne extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    return player.game.gameOptions.coloniesExtension === true;
+    return player.game.gameOptions.expansions.colonies === true;
   }
 
   public action(player: IPlayer): PlayerInput | undefined {

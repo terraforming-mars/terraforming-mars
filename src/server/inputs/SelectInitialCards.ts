@@ -54,7 +54,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
       player.dealtPreludeCards.push(new Merger());
     }
 
-    if (game.gameOptions.preludeExtension) {
+    if (game.gameOptions.expansions.prelude) {
       this.push('prelude',
         new SelectCard(titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards, {min: 2, max: 2})
           .andThen((preludeCards) => {
@@ -66,7 +66,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
           }));
     }
 
-    if (game.gameOptions.ceoExtension) {
+    if (game.gameOptions.expansions.ceo) {
       this.push('ceo',
         new SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, {min: 1, max: 1}).andThen((ceoCards) => {
           if (ceoCards.length !== 1) {

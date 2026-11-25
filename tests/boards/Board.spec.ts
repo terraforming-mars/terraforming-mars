@@ -1,37 +1,28 @@
 import {expect} from 'chai';
 import * as constants from '@/common/constants';
-import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {Space} from '../../src/server/boards/Space';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/server/boards/Board';
 import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
 import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
-import {SeededRandom} from '../../src/common/utils/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {SpaceId} from '../../src/common/Types';
 import {CardName} from '../../src/common/cards/CardName';
 import {SpaceName} from '../../src/common/boards/SpaceName';
 import {testGame} from '../TestGame';
 import {toID} from '../../src/common/utils/utils';
+import {IGame} from '@/server/IGame';
+import {BoardName} from '@/common/boards/BoardName';
 
 describe('Board', () => {
   let board: Board;
-  let player: TestPlayer;
-  let player2: TestPlayer;
+  let game: IGame;
 
   beforeEach(() => {
-    board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
-    const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
-    Reflect.set(player, 'game', {gameOptions});
-    Reflect.set(player2, 'game', {gameOptions});
+    [game/* , player , player2 */] = testGame(2, {boardName: BoardName.THARSIS});
+    board = game.board;
   });
 
   it('getSpace', () => {

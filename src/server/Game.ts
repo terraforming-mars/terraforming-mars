@@ -279,25 +279,6 @@ export class Game implements IGame, Logger {
     spectatorId: SpectatorId,
     partialOptions: Partial<GameOptions> = {},
     rng: GameRandom = new SeededRandom(0)): Game {
-    if (partialOptions.expansions === undefined) {
-      partialOptions.expansions = {
-        corpera: partialOptions.corporateEra ?? true,
-        venus: partialOptions.venusNextExtension ?? false,
-        colonies: partialOptions.coloniesExtension ?? false,
-        prelude: partialOptions.preludeExtension ?? false,
-        prelude2: partialOptions.prelude2Expansion ?? false,
-        turmoil: partialOptions.turmoilExtension ?? false,
-        promo: partialOptions.promoCardsOption ?? false,
-        community: partialOptions.communityCardsOption ?? false,
-        ares: partialOptions.aresExtension ?? false,
-        moon: partialOptions.moonExpansion ?? false,
-        pathfinders: partialOptions.pathfindersExpansion ?? false,
-        ceo: partialOptions.ceoExtension ?? false,
-        starwars: partialOptions.starWarsExpansion ?? false,
-        underworld: partialOptions.underworldExpansion ?? false,
-        deltaProject: partialOptions.deltaProjectExpansion ?? false,
-      };
-    }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...partialOptions};
 
     if (gameOptions.clonedGamedId !== undefined) {

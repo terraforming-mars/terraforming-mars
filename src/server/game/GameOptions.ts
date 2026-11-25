@@ -10,41 +10,7 @@ import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
 import {ShowVP} from '../../common/game/ShowVP';
 
-/** Per-expansion flags that predate `GameOptions.expansions`. */
-export type LegacyGameOptions = {
-  /** @deprecated Use `expansions.corpera`. */
-  corporateEra: boolean;
-  /** @deprecated Use `expansions.venus`. */
-  venusNextExtension: boolean;
-  /** @deprecated Use `expansions.colonies`. */
-  coloniesExtension: boolean;
-  /** @deprecated Use `expansions.prelude`. */
-  preludeExtension: boolean;
-  /** @deprecated Use `expansions.prelude2`. */
-  prelude2Expansion: boolean;
-  /** @deprecated Use `expansions.turmoil`. */
-  turmoilExtension: boolean;
-  /** @deprecated Use `expansions.promo`. */
-  promoCardsOption: boolean;
-  /** @deprecated Use `expansions.community`. */
-  communityCardsOption: boolean;
-  /** @deprecated Use `expansions.ares`. */
-  aresExtension: boolean;
-  /** @deprecated Use `expansions.moon`. */
-  moonExpansion: boolean;
-  /** @deprecated Use `expansions.pathfinders`. */
-  pathfindersExpansion: boolean;
-  /** @deprecated Use `expansions.ceo`. */
-  ceoExtension: boolean;
-  /** @deprecated Use `expansions.starwars`. */
-  starWarsExpansion: boolean;
-  /** @deprecated Use `expansions.underworld`. */
-  underworldExpansion: boolean;
-  /** @deprecated Use `expansions.deltaProject`. */
-  deltaProjectExpansion: boolean;
-};
-
-export type GameOptions = LegacyGameOptions & {
+export type GameOptions = {
   boardName: BoardName;
   clonedGamedId: GameId | undefined;
 
@@ -103,17 +69,12 @@ export type GameOptions = LegacyGameOptions & {
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
-  aresExtension: false,
   aresHazards: true,
   aresExtremeVariant: false,
   boardName: BoardName.THARSIS,
   bannedCards: [],
   includedCards: [],
-  ceoExtension: false,
   clonedGamedId: undefined,
-  coloniesExtension: false,
-  communityCardsOption: false,
-  corporateEra: true,
   customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],
@@ -126,16 +87,11 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   includeFanMA: false,
   initialDraftVariant: false,
   modularMA: false,
-  moonExpansion: false,
   moonStandardProjectVariant: false,
   moonStandardProjectVariant1: false,
-  pathfindersExpansion: false,
   politicalAgendasExtension: 'Standard',
   preludeDraftVariant: false,
   ceosDraftVariant: false,
-  preludeExtension: false,
-  prelude2Expansion: false,
-  promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
   requiresMoonTrackCompletion: false,
   removeNegativeGlobalEventsOption: false,
@@ -148,12 +104,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   startingCeos: constants.CEO_CARDS_DEALT_PER_PLAYER,
   startingCorporations: constants.CORPORATION_CARDS_DEALT_PER_PLAYER,
   startingPreludes: constants.PRELUDE_CARDS_DEALT_PER_PLAYER,
-  starWarsExpansion: false,
-  turmoilExtension: false,
-  underworldExpansion: false,
-  deltaProjectExpansion: false,
   automa: false,
   undoOption: false,
-  venusNextExtension: false,
   twoCorpsVariant: false,
 };

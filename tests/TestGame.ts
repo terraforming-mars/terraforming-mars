@@ -4,6 +4,7 @@ import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {Deck} from '../src/server/cards/Deck';
+import {Expansions} from '@/common/cards/GameModule';
 
 /** Per-expansion flags that predate `GameOptions.expansions`. */
 export type LegacyGameOptions = {
@@ -39,7 +40,9 @@ export type LegacyGameOptions = {
   deltaProjectExpansion: boolean;
 };
 
-export type TestGameOptions = GameOptions & LegacyGameOptions & {
+export type TestGameOptions = Omit<GameOptions, 'expansions'> & LegacyGameOptions & {
+  /** Expansions to override. The rest come from the legacy flags, or their defaults. */
+  expansions: Partial<Expansions>;
   /* skip initial card selection */
   skipInitialCardSelection: boolean;
   /* skip shuffling when creating the game */
@@ -74,30 +77,32 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
 export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [IGame, ...Array<TestPlayer>] {
   const players = createPlayers(count, idSuffix);
 
-  const copy = {...customOptions};
+  const {expansions, ...rest} = customOptions ?? {};
   // if (copy.aresExtension === true && copy.aresHazards === undefined) {
   //   copy.aresHazards = false;
   // }
 
-  if (copy.expansions === undefined) {
-    copy.expansions = {
-      corpera: copy.corporateEra ?? true,
-      venus: copy.venusNextExtension ?? false,
-      colonies: copy.coloniesExtension ?? false,
-      prelude: copy.preludeExtension ?? false,
-      prelude2: copy.prelude2Expansion ?? false,
-      turmoil: copy.turmoilExtension ?? false,
-      promo: copy.promoCardsOption ?? false,
-      community: copy.communityCardsOption ?? false,
-      ares: copy.aresExtension ?? false,
-      moon: copy.moonExpansion ?? false,
-      pathfinders: copy.pathfindersExpansion ?? false,
-      ceo: copy.ceoExtension ?? false,
-      starwars: copy.starWarsExpansion ?? false,
-      underworld: copy.underworldExpansion ?? false,
-      deltaProject: copy.deltaProjectExpansion ?? false,
-    };
-  }
+  const copy: Partial<GameOptions> = {
+    ...rest,
+    expansions: {
+      corpera: rest.corporateEra ?? true,
+      venus: rest.venusNextExtension ?? false,
+      colonies: rest.coloniesExtension ?? false,
+      prelude: rest.preludeExtension ?? false,
+      prelude2: rest.prelude2Expansion ?? false,
+      turmoil: rest.turmoilExtension ?? false,
+      promo: rest.promoCardsOption ?? false,
+      community: rest.communityCardsOption ?? false,
+      ares: rest.aresExtension ?? false,
+      moon: rest.moonExpansion ?? false,
+      pathfinders: rest.pathfindersExpansion ?? false,
+      ceo: rest.ceoExtension ?? false,
+      starwars: rest.starWarsExpansion ?? false,
+      underworld: rest.underworldExpansion ?? false,
+      deltaProject: rest.deltaProjectExpansion ?? false,
+      ...expansions,
+    },
+  };
 
   const shuffle = Deck.shuffle;
   try {

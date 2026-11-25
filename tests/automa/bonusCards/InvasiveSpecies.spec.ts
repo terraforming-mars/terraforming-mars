@@ -14,7 +14,7 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 describe('InvasiveSpecies', () => {
   for (const run of [
     {options: {}, titan: false, expected: ['gainMc(5)']},
-    {options: {venusNextExtension: true}, titan: false, expected: ['gainMc(2)', 'addFloaters(1)']},
+    {options: {expansions: {venus: true}}, titan: false, expected: ['gainMc(2)', 'addFloaters(1)']},
     {options: {coloniesExtension: true}, titan: true, expected: ['gainMc(2)', 'addFloaters(1)']},
     {options: {coloniesExtension: true}, titan: false, expected: ['gainMc(2)']},
   ] as const) {

@@ -13,7 +13,7 @@ describe('Stratopolis', () => {
 
   beforeEach(() => {
     card = new Stratopolis();
-    [/* game */, player/* , player2 */] = testGame(2, {venusNextExtension: true});
+    [/* game */, player/* , player2 */] = testGame(2, {expansions: {venus: true}});
   });
 
   it('Can not play', () => {

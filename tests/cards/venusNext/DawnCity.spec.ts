@@ -7,7 +7,7 @@ import {cast} from '@/common/utils/utils';
 describe('DawnCity', () => {
   it('Should play', () => {
     const card = new DawnCity();
-    const [/* game */, player] = testGame(2, {venusNextExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {venus: true}});
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
 

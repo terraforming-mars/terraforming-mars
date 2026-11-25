@@ -15,7 +15,7 @@ describe('VenusianLobby', () => {
     {intercepted: true, expected: 0},
   ] as const) {
     it('raises Venus unless a corp cancels it, advances the Venus track and raises the furthest parameter: ' + JSON.stringify(run), () => {
-      const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+      const [game, human, botPlayer] = testGame(2, {expansions: {venus: true}});
       const marsBotBoard = new MarsBotBoard([...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]);
       const {marsBot, calls} = recordingMarsBot({
         game, player: botPlayer, humanPlayer: human, megacredits: 0, marsBotBoard,

@@ -11,7 +11,7 @@ describe('VenusL1Shade', () => {
 
   beforeEach(() => {
     card = new VenusL1Shade();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Should play', () => {

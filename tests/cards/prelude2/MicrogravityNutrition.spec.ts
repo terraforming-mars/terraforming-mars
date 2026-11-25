@@ -14,7 +14,7 @@ describe('MicrogravityNutrition', () => {
 
   beforeEach(() => {
     card = new MicrogravityNutrition();
-    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

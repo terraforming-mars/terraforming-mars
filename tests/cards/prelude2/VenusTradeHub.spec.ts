@@ -14,7 +14,7 @@ describe('VenusTradeHub', () => {
 
   beforeEach(() => {
     card = new VenusTradeHub();
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
   });
 
   it('canPlay', () => {

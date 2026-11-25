@@ -8,7 +8,7 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 
 describe('OuterSystemFoothold', () => {
   it('places a colony, then draws a bonus card and discards it without resolving it', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const investors = createBonusCard(BonusCardName.INVESTORS);
     const meteorShower = createBonusCard(BonusCardName.METEOR_SHOWER);
     const {marsBot, calls} = recordingMarsBot({game, bonusDeck: new MarsBotBonusDeck([meteorShower, investors], [], game.rng)});
@@ -22,7 +22,7 @@ describe('OuterSystemFoothold', () => {
   });
 
   it('keeps itself out of the reshuffle when the draw pile is empty', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const self = createBonusCard(BonusCardName.OUTER_SYSTEM_FOOTHOLD);
     const investors = createBonusCard(BonusCardName.INVESTORS);
     const {marsBot} = recordingMarsBot({game, bonusDeck: new MarsBotBonusDeck([], [self, investors], game.rng)});

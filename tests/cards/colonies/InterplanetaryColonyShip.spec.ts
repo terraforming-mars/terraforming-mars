@@ -17,7 +17,7 @@ describe('InterplanetaryColonyShip', () => {
 
   beforeEach(() => {
     card = new InterplanetaryColonyShip();
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

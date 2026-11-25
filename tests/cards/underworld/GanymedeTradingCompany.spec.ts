@@ -7,7 +7,7 @@ import {Units} from '../../../src/common/Units';
 describe('GanymedeTradingCompany', () => {
   it('play', () => {
     const card = new GanymedeTradingCompany();
-    const [/* game */, player] = testGame(2, {coloniesExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {colonies: true}});
 
     expect(player.colonies.getFleetSize()).eq(1);
 

@@ -19,7 +19,7 @@ describe('Miranda', () => {
   beforeEach(() => {
     miranda = new Miranda();
     pets = new Pets();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(miranda);
   });
 

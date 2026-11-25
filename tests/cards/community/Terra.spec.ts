@@ -18,7 +18,7 @@ describe('Terra', () => {
 
   beforeEach(() => {
     terra = new Terra();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(terra);
   });
 

@@ -18,7 +18,7 @@ describe('L1TradeTerminal', () => {
 
   beforeEach(() => {
     card = new L1TradeTerminal();
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
   });
 
   const playRuns = [

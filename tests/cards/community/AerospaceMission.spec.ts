@@ -20,7 +20,7 @@ describe('AerospaceMission', () => {
 
   beforeEach(() => {
     card = new AerospaceMission();
-    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
     // Ignore randomly generated colonies, and add some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres(), new Io(), new Luna()];
   });

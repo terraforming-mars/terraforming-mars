@@ -5,7 +5,41 @@ import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {Deck} from '../src/server/cards/Deck';
 
-export type TestGameOptions = GameOptions & {
+/** Per-expansion flags that predate `GameOptions.expansions`. */
+export type LegacyGameOptions = {
+  /** @deprecated Use `expansions.corpera`. */
+  corporateEra: boolean;
+  /** @deprecated Use `expansions.venus`. */
+  venusNextExtension: boolean;
+  /** @deprecated Use `expansions.colonies`. */
+  coloniesExtension: boolean;
+  /** @deprecated Use `expansions.prelude`. */
+  preludeExtension: boolean;
+  /** @deprecated Use `expansions.prelude2`. */
+  prelude2Expansion: boolean;
+  /** @deprecated Use `expansions.turmoil`. */
+  turmoilExtension: boolean;
+  /** @deprecated Use `expansions.promo`. */
+  promoCardsOption: boolean;
+  /** @deprecated Use `expansions.community`. */
+  communityCardsOption: boolean;
+  /** @deprecated Use `expansions.ares`. */
+  aresExtension: boolean;
+  /** @deprecated Use `expansions.moon`. */
+  moonExpansion: boolean;
+  /** @deprecated Use `expansions.pathfinders`. */
+  pathfindersExpansion: boolean;
+  /** @deprecated Use `expansions.ceo`. */
+  ceoExtension: boolean;
+  /** @deprecated Use `expansions.starwars`. */
+  starWarsExpansion: boolean;
+  /** @deprecated Use `expansions.underworld`. */
+  underworldExpansion: boolean;
+  /** @deprecated Use `expansions.deltaProject`. */
+  deltaProjectExpansion: boolean;
+};
+
+export type TestGameOptions = GameOptions & LegacyGameOptions & {
   /* skip initial card selection */
   skipInitialCardSelection: boolean;
   /* skip shuffling when creating the game */
@@ -41,8 +75,28 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   const players = createPlayers(count, idSuffix);
 
   const copy = {...customOptions};
-  if (copy.aresExtension === true && copy.aresHazards === undefined) {
-    copy.aresHazards = false;
+  // if (copy.aresExtension === true && copy.aresHazards === undefined) {
+  //   copy.aresHazards = false;
+  // }
+
+  if (copy.expansions === undefined) {
+    copy.expansions = {
+      corpera: copy.corporateEra ?? true,
+      venus: copy.venusNextExtension ?? false,
+      colonies: copy.coloniesExtension ?? false,
+      prelude: copy.preludeExtension ?? false,
+      prelude2: copy.prelude2Expansion ?? false,
+      turmoil: copy.turmoilExtension ?? false,
+      promo: copy.promoCardsOption ?? false,
+      community: copy.communityCardsOption ?? false,
+      ares: copy.aresExtension ?? false,
+      moon: copy.moonExpansion ?? false,
+      pathfinders: copy.pathfindersExpansion ?? false,
+      ceo: copy.ceoExtension ?? false,
+      starwars: copy.starWarsExpansion ?? false,
+      underworld: copy.underworldExpansion ?? false,
+      deltaProject: copy.deltaProjectExpansion ?? false,
+    };
   }
 
   const shuffle = Deck.shuffle;
@@ -50,10 +104,10 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     if (customOptions?.skipInitialShuffling) {
       Deck.shuffle = () => {};
     }
-    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], `spectator-id${idSuffix}`, customOptions);
+    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], `spectator-id${idSuffix}`, copy);
     if (customOptions?.skipInitialCardSelection !== false) {
       for (const player of players) {
-      /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
+        /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
         if (player.getWaitingFor() instanceof SelectInitialCards) {
           player.popWaitingFor();
         }

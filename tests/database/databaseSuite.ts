@@ -12,6 +12,7 @@ import {statusCode} from '../../src/common/http/statusCode';
 import {cast} from '@/common/utils/utils';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {DiscordUser} from '../../src/server/server/auth/discord';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 // Removes any fields that have undefined values, and filters undefined from arrays.
 function stripUndefined(obj: unknown): unknown {
@@ -253,7 +254,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
     it('getGame', async () => {
       const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid', {underworldExpansion: true});
+      const game = Game.newInstance('game-id-1212', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, underworld: true}});
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
@@ -265,7 +266,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
 
       const actual = await db.getGame(game.id);
       expect(actual.gameLog[actual.gameLog.length -1].message).eq('databaseSuite.getGame test');
-      expect(actual.gameOptions.underworldExpansion).eq(true);
+      expect(actual.gameOptions.expansions.underworld).eq(true);
       expect(stripUndefined(actual)).deep.eq(stripUndefined(expected));
     });
 

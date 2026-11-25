@@ -24,7 +24,7 @@ describe('NanotechIndustries', () => {
   const prideoftheEarthArkship = new PrideoftheEarthArkship();
 
   beforeEach(() => {
-    [/* game */, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {moon: true}});
     nanotechIndustries = new NanotechIndustries();
   });
 

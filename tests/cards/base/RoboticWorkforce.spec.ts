@@ -48,7 +48,7 @@ describe('RoboticWorkforce', () => {
 
   beforeEach(() => {
     card = new RoboticWorkforce();
-    [game, player, player2] = testGame(2, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {moon: true}});
   });
 
   it('Cannot play if no building cards to copy', () => {

@@ -13,7 +13,7 @@ describe('AIControlledMineNetwork', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new AIControlledMineNetwork();
     moonData = MoonExpansion.moonData(game);
   });

@@ -16,7 +16,7 @@ describe('OffWorldCityLiving', () => {
 
   beforeEach(() => {
     // Adding a vestigial player to avoid the two starting cities.
-    [game, player] = testGame(2, {moonExpansion: true});
+    [game, player] = testGame(2, {expansions: {moon: true}});
     card = new OffWorldCityLiving();
     moonData = MoonExpansion.moonData(game);
   });

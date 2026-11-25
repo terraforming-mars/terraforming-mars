@@ -18,7 +18,7 @@ describe('RevoltingColonists', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player1, player2, player3] = testGame(3, {moonExpansion: true});
+    [game, player1, player2, player3] = testGame(3, {expansions: {moon: true}});
     card = new RevoltingColonists();
     moonData = MoonExpansion.moonData(game);
   });

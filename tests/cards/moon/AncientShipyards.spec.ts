@@ -11,7 +11,7 @@ describe('AncientShipyards', () => {
   let card: AncientShipyards;
 
   beforeEach(() => {
-    [/* game */, player, player2, player3] = testGame(3, {moonExpansion: true});
+    [/* game */, player, player2, player3] = testGame(3, {expansions: {moon: true}});
     card = new AncientShipyards();
   });
 
@@ -57,7 +57,7 @@ describe('AncientShipyards', () => {
   });
 
   it('act solo', () => {
-    [/* game */, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {moon: true}});
 
     expect(card.resourceCount).eq(0);
     player.megaCredits = 10;

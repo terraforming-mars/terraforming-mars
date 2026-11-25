@@ -18,7 +18,7 @@ describe('LunaTradeFederation', () => {
   let lunaTradeFederation: LunaTradeFederation;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {moon: true}});
     lunaTradeFederation = new LunaTradeFederation();
   });
 

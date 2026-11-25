@@ -56,7 +56,7 @@ describe('Landscaper Award with Board Setup', () => {
 
 
   it('Works on The Moon', () => {
-    const [game, player] = testGame(2, {moonExpansion: true});
+    const [game, player] = testGame(2, {expansions: {moon: true}});
     const moon = game.moonData!.moon;
     const award = new Landscaper();
     const moonSpaces = moon.getAvailableSpacesOnLand(player);

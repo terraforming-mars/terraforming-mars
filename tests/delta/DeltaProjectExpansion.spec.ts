@@ -48,7 +48,7 @@ describe('DeltaProjectExpansion', () => {
   let player2: TestPlayer;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {deltaProjectExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {deltaProject: true}});
   });
 
   it('initializes player positions to 0', () => {
@@ -460,7 +460,7 @@ describe('DeltaProjectExpansion', () => {
     });
 
     it('does not raise the Pathfinders Jovian track', () => {
-      const [game, player] = testGame(2, {deltaProjectExpansion: true, pathfindersExpansion: true});
+      const [game, player] = testGame(2, {expansions: {deltaProject: true, pathfinders: true}});
       prepareAdvanceFrom7To8(player);
 
       expect(game.pathfindersData!.jovian).eq(0);

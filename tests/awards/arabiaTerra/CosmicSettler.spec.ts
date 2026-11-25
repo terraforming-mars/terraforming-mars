@@ -16,7 +16,7 @@ describe('CosmicSettler', () => {
   beforeEach(() => {
     award = new CosmicSettler();
     // Include Stanford Torus
-    [game, player] = testGame(2, {promoCardsOption: true});
+    [game, player] = testGame(2, {expansions: {promo: true}});
     board = game.board;
   });
 

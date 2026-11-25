@@ -11,7 +11,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 describe('BoardOfDirectors', () => {
   it('play', () => {
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {prelude2Expansion: true});
+    const [game, player] = testGame(1, {expansions: {prelude2: true}});
 
     card.play(player);
     runAllActions(game);
@@ -132,7 +132,10 @@ describe('BoardOfDirectors', () => {
       CardName.BIOLAB, CardName.BIOSPHERE_SUPPORT, CardName.BUSINESS_EMPIRE,
     ];
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {preludeExtension: true, prelude2Expansion: true, customPreludes});
+    const [game, player] = testGame(1, {
+      expansions: {prelude: true, prelude2: true},
+      customPreludes: customPreludes,
+    });
 
     // The player keeps two dealt preludes and discards the rest, as in initial card selection.
     game.preludeDeck.discard(...player.dealtPreludeCards.slice(2));

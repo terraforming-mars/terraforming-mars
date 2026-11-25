@@ -12,7 +12,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('CloneTroopers', () => {
   it('Can play', () => {
     const card = new CloneTroopers();
-    const [/* game */, player] = testGame(2, {starWarsExpansion: true});
+    const [/* game */, player] = testGame(2);
 
     addOcean(player);
     addOcean(player);
@@ -29,7 +29,7 @@ describe('CloneTroopers', () => {
 
   it('act solo', () => {
     const card = new CloneTroopers();
-    const [/* game */, player] = testGame(1, {starWarsExpansion: true});
+    const [/* game */, player] = testGame(1);
 
     expect(card.resourceCount).eq(0);
 
@@ -51,7 +51,7 @@ describe('CloneTroopers', () => {
 
   it('act multiplayer', () => {
     const card = new CloneTroopers();
-    const [/* game */, player, player2, player3] = testGame(3, {starWarsExpansion: true});
+    const [/* game */, player, player2, player3] = testGame(3);
 
     expect(card.resourceCount).eq(0);
 
@@ -91,7 +91,7 @@ describe('CloneTroopers', () => {
 
   it('respects protected resources', () => {
     const card = new CloneTroopers();
-    const [/* game */, player, player2, player3] = testGame(3, {starWarsExpansion: true});
+    const [/* game */, player, player2, player3] = testGame(3);
 
 
     card.resourceCount = 1;

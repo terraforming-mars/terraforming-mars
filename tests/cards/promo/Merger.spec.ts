@@ -439,7 +439,7 @@ describe('Merger', () => {
       CardName.CREDICOR, CardName.ECOLINE, CardName.HELION,
       CardName.INVENTRIX, CardName.MINING_GUILD, CardName.PHOBOLOG,
     ];
-    const [game, player, player2] = testGame(2, {preludeExtension: true, promoCardsOption: true, customCorporationsList});
+    const [game, player, player2] = testGame(2, {expansions: {prelude: true, promo: true}, customCorporationsList});
 
     // Each player keeps one dealt corporation and discards the rest, as in initial card selection.
     for (const p of [player, player2]) {

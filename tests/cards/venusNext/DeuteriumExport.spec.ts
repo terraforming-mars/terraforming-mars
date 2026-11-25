@@ -12,7 +12,7 @@ describe('DeuteriumExport', () => {
 
   beforeEach(() => {
     card = new DeuteriumExport();
-    [/* game */, player] = testGame(1, {preludeExtension: true});
+    [/* game */, player] = testGame(1, {expansions: {prelude: true}});
   });
 
   it('Should play', () => {

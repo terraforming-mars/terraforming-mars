@@ -27,7 +27,7 @@ describe('BoardOfDirectors', () => {
   for (const run of canActRuns) {
     it('canAct: ' + JSON.stringify(run), () => {
       const card = new BoardOfDirectors();
-      const [game, player] = testGame(1, {preludeExtension: true});
+      const [game, player] = testGame(1, {expansions: {prelude: true}});
 
       game.preludeDeck.drawPile.length = run.preludeDeck;
       card.resourceCount = run.resources;
@@ -38,7 +38,7 @@ describe('BoardOfDirectors', () => {
 
   it('action, can afford', () => {
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     const loan = new Loan();
     game.preludeDeck.drawPile.push(loan);
@@ -62,7 +62,7 @@ describe('BoardOfDirectors', () => {
 
   it('action, can afford, fizzle', () => {
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     const loan = new Loan();
     game.preludeDeck.drawPile.push(loan);
@@ -88,7 +88,7 @@ describe('BoardOfDirectors', () => {
 
   it('action, cannot afford, discard', () => {
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     const loan = new Loan();
     game.preludeDeck.drawPile.push(loan);
@@ -109,7 +109,7 @@ describe('BoardOfDirectors', () => {
 
   it('action, can afford, decline', () => {
     const card = new BoardOfDirectors();
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     card.resourceCount = 1;
     expect(card.canAct(player)).eq(true);

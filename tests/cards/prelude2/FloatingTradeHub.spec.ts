@@ -20,7 +20,7 @@ describe('FloatingTradeHub', () => {
 
   beforeEach(() => {
     card = new FloatingTradeHub();
-    [/* game */, player] = testGame(2, {preludeExtension: true});
+    [/* game */, player] = testGame(2, {expansions: {prelude: true}});
     player.playedCards.push(card);
   });
 

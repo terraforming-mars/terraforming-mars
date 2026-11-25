@@ -18,7 +18,7 @@ describe('MoonHabitatStandardProject', () => {
   let card: MoonHabitatStandardProject;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
     card = new MoonHabitatStandardProject();
   });

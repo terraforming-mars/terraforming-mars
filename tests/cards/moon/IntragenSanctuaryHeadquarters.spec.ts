@@ -14,7 +14,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
-    [/* game */, player, player2] = testGame(2, {moonExpansion: true});
+    [/* game */, player, player2] = testGame(2, {expansions: {moon: true}});
     card = new IntragenSanctuaryHeadquarters();
   });
 

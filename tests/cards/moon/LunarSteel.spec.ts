@@ -8,7 +8,7 @@ describe('LunarSteel', () => {
   let card: LunarSteel;
 
   beforeEach(() => {
-    [/* game */, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {moon: true}});
     card = new LunarSteel();
   });
 

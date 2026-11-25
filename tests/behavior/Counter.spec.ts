@@ -318,7 +318,7 @@ describe('Counter for Moon', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player] = testGame(3, {moonExpansion: true});
+    [game, player] = testGame(3, {expansions: {moon: true}});
     fake = fakeCard();
   });
 

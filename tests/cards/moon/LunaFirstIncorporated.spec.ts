@@ -11,7 +11,7 @@ describe('LunaFirstIncorporated', () => {
   let card: LunaFirstIncorporated;
 
   beforeEach(() => {
-    [game, player, otherPlayer] = testGame(2, {moonExpansion: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {moon: true}});
     card = new LunaFirstIncorporated();
     card.play(player);
   });

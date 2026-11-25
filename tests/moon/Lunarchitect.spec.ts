@@ -10,7 +10,7 @@ describe('Lunarchitect', () => {
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
+    [/* game */, player, otherPlayer] = testGame(2, {expansions: {moon: true}});
   });
 
   it('Basic test', () => {

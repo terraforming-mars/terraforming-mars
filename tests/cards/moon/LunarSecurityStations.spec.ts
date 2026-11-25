@@ -19,7 +19,7 @@ describe('LunarSecurityStations', () => {
   let card: LunarSecurityStations;
 
   beforeEach(() => {
-    [game, player, opponent1, opponent2] = testGame(3, {moonExpansion: true});
+    [game, player, opponent1, opponent2] = testGame(3, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();
   });

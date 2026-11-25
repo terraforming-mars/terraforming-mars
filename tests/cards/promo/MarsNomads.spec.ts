@@ -75,7 +75,7 @@ describe('MarsNomads', () => {
     game.nomadSpace = space.id;
 
     const selectSpace = cast(card.action(player), SelectSpace);
-    expect(selectSpace.spaces.map((s) => s.id)).to.have.members(['19', '27']);
+    expect(selectSpace.spaces.map((s) => s.id)).to.have.members(['12', '18', '20', '26', '27']);
   });
 
   it('Nomads only moves to empty spaces', () => {
@@ -83,13 +83,13 @@ describe('MarsNomads', () => {
     const space = board.getAvailableSpacesOnLand(player)[12];
     game.nomadSpace = space.id;
 
-    const space19 = board.getSpaceOrThrow('19');
+    const space20 = board.getSpaceOrThrow('20');
 
-    expect(cast(card.action(player), SelectSpace).spaces).to.contain(space19);
+    expect(cast(card.action(player), SelectSpace).spaces).to.contain(space20);
 
-    game.simpleAddTile(player, space19, {tileType: TileType.GREENERY});
+    game.simpleAddTile(player, space20, {tileType: TileType.GREENERY});
 
-    expect(cast(card.action(player), SelectSpace).spaces).to.not.contain(space19);
+    expect(cast(card.action(player), SelectSpace).spaces).to.not.contain(space20);
   });
 
   it('Action does not gets adjacency bonus', () => {

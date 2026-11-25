@@ -980,7 +980,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      ceoExtension: true,
+      expansions: {ceo: true},
       ceosDraftVariant: true,
     });
 

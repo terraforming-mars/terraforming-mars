@@ -12,7 +12,7 @@ describe('Duncan', () => {
 
   beforeEach(() => {
     card = new Duncan();
-    [game, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
+    [game, player] = testGame(2, {expansions: {ceo: true, moon: true}});
     player.playedCards.push(card);
   });
 

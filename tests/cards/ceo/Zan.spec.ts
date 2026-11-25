@@ -16,7 +16,7 @@ describe('Zan', () => {
 
   beforeEach(() => {
     card = new Zan();
-    [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ceo: true, turmoil: true}});
 
     player.playedCards.push(card);
   });

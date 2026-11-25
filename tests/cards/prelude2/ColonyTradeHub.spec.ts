@@ -16,7 +16,7 @@ describe('ColonyTradeHub', () => {
 
   beforeEach(() => {
     card = new ColonyTradeHub();
-    [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true, colonies: true}});
     // Setup some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres()];
   });

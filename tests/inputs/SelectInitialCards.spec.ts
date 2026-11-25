@@ -69,7 +69,7 @@ describe('SelectInitialCards', () => {
   });
 
   it('Full', () => {
-    const [/* game */, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
+    const [/* game */, player] = testGame(1, {expansions: {ceo: true, prelude: true}});
     player.game.projectDeck.discardPile.length = 0; // Emptying the discard pile, which has 4 cards setting up the solo opponent.
     player.game.corporationDeck.discardPile.length = 0;
     player.dealtCorporationCards = corporationCardsFromJSON([CardName.INVENTRIX, CardName.HELION]);
@@ -98,7 +98,7 @@ describe('SelectInitialCards', () => {
   });
 
   it('A failed selection leaves the hands unchanged', () => {
-    const [/* game */, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
+    const [/* game */, player] = testGame(1, {expansions: {ceo: true, prelude: true}});
     player.dealtCorporationCards = corporationCardsFromJSON([CardName.INVENTRIX, CardName.HELION]);
     player.dealtProjectCards = cardsFromJSON([CardName.ANTS, CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
     player.dealtPreludeCards = preludesFromJSON([CardName.LOAN, CardName.BIOLAB, CardName.DONATION, CardName.SUPPLIER]);

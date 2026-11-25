@@ -390,7 +390,7 @@ describe('Merger', () => {
   });
 
   it('All corporation first actions count as a single action', () => {
-    const [game, player, player2] = testGame(2, {venusNextExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {venus: true}});
     const inventrix = new Inventrix(); // Draw 3 cards
     const ambient = new Ambient(); // Raise venus 2 steps
     player.playCorporationCard(inventrix);

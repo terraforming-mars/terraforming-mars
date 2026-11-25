@@ -16,7 +16,7 @@ describe('VenusShuttles', () => {
 
   beforeEach(() => {
     card = new VenusShuttles();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Should play, no cards', () => {

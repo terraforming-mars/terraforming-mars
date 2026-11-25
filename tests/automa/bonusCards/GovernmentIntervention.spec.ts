@@ -16,7 +16,7 @@ describe('GovernmentIntervention', () => {
     {generation: 2, venus: 0, advanced: false, expected: {calls: ['withoutTRorMcGain()', ADVANCE_FURTHEST, 'withoutTRGain()'], venusAfter: 2}},
   ] as const) {
     it('raises a Martian parameter on an even generation or with Venus complete, else Venus, for no TR or M€: ' + JSON.stringify(run), () => {
-      const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+      const [game, human, botPlayer] = testGame(2, {expansions: {venus: true}});
       const {marsBot, calls} = recordingMarsBot({
         game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false,
         advanceFurthestParameter: (cardName, allowCorpIntercept) => {

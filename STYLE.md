@@ -80,7 +80,7 @@
 
 ## Tests
 - One top-level `describe` per spec file. Nested describes are the exception, not the norm.
-- Build games with `testGame`: `const [game, player, player2] = testGame(2, {venusNextExtension: true});`
+- Build games with `testGame`: `const [game, player, player2] = testGame(2, {expansions: {venus: true}});`
 - Resolve deferred actions with `runAllActions(game)`, then take the next input with `player.popWaitingFor()`.
 - Narrow a player input with `cast(input, SelectSpace)` rather than `as`.
 - 100% test coverage is a troublesome pattern. For instance, if something wasn't logged and

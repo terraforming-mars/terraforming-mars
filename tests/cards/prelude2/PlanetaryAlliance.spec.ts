@@ -7,7 +7,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 describe('PlanetaryAlliance', () => {
   it('Should play', () => {
     const card = new PlanetaryAlliance();
-    const [/* game*/, player] = testGame(1, {venusNextExtension: true});
+    const [/* game*/, player] = testGame(1, {expansions: {venus: true}});
     card.play(player);
 
     expect(player.terraformRating).to.eq(16);

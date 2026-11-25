@@ -17,7 +17,7 @@ describe('AtmosphericEnhancers', () => {
 
   beforeEach(() => {
     card = new AtmosphericEnhancers();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('canPlay', () => {

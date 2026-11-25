@@ -25,7 +25,7 @@ describe('Atmoscoop', () => {
 
   beforeEach(() => {
     card = new Atmoscoop();
-    [game, player] = testGame(2, {venusNextExtension: true});
+    [game, player] = testGame(2, {expansions: {venus: true}});
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });

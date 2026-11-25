@@ -16,7 +16,7 @@ describe('LobbyistsVenus', () => {
     {temperature: -30, venus: 2, expected: {temperature: -30, venus: 2, destroyed: false, calls: [`advanceFurthestParameter(${BonusCardName.LOBBYISTS_VENUS})`]}},
   ] as const) {
     it('raises Venus 2 steps and is kept when 1 or 2 steps from a bonus, after the temperature branch: ' + JSON.stringify(run), () => {
-      const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+      const [game, human, botPlayer] = testGame(2, {expansions: {venus: true}});
       const {marsBot, calls} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false});
       setTemperature(game, run.temperature);
       setVenusScaleLevel(game, run.venus);
@@ -31,7 +31,7 @@ describe('LobbyistsVenus', () => {
   }
 
   it('raises Venus 1 step when a corp cancels the raise', () => {
-    const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+    const [game, human, botPlayer] = testGame(2, {expansions: {venus: true}});
     const {marsBot} = recordingMarsBot({
       game, player: botPlayer, humanPlayer: human, megacredits: 0,
       interceptsParameterRaise: (parameter) => parameter === GlobalParameter.VENUS,
@@ -44,7 +44,7 @@ describe('LobbyistsVenus', () => {
   });
 
   it('places no ocean next to 2 oceans', () => {
-    const [game, human, botPlayer] = testGame(2, {venusNextExtension: true});
+    const [game, human, botPlayer] = testGame(2, {expansions: {venus: true}});
     const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: 0, interceptsParameterRaise: () => false});
     for (const id of ['13', '06', '34', '44']) {
       game.simpleAddTile(human, game.board.getSpaceOrThrow(id as SpaceId), {tileType: TileType.OCEAN});

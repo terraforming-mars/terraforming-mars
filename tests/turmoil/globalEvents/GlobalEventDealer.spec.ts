@@ -7,8 +7,7 @@ import {LegacySerializedGlobalEventDealer} from '../../../src/server/turmoil/glo
 import {SponsoredProjects} from '../../../src/server/turmoil/globalEvents/SponsoredProjects';
 import {SuccessfulOrganisms} from '../../../src/server/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../../../src/server/turmoil/globalEvents/WarOnEarth';
-import {testGame} from '../../TestGame';
-import {GameOptions} from '../../../src/server/game/GameOptions';
+import {testGame, TestGameOptions} from '../../TestGame';
 import {SerializedDeck} from '@/server/cards/SerializedDeck';
 import {SeededRandom} from '@/common/utils/Random';
 import {toName} from '@/common/utils/utils';
@@ -58,12 +57,14 @@ describe('GlobalEventDealer', () => {
 
   it('getGlobalEventByName can retrieve all cards', () => {
     const [game] = testGame(1, {
-      preludeExtension: true,
-      venusNextExtension: true,
-      coloniesExtension: true,
-      turmoilExtension: true,
-      aresExtension: true,
-      communityCardsOption: true,
+      expansions: {
+        prelude: true,
+        venus: true,
+        colonies: true,
+        turmoil: true,
+        ares: true,
+        community: true,
+      },
       removeNegativeGlobalEventsOption: false,
     });
     const dealer = GlobalEventDealer.newInstance(game);
@@ -72,11 +73,8 @@ describe('GlobalEventDealer', () => {
     }
   });
 
-  function newDealer(options: Partial<GameOptions>) {
-    const [game] = testGame(1, {
-      turmoilExtension: true,
-      ...options,
-    });
+  function newDealer(options: Partial<TestGameOptions>) {
+    const [game] = testGame(1, {...options, expansions: {turmoil: true, ...options.expansions}});
     return GlobalEventDealer.newInstance(game);
   }
 
@@ -96,23 +94,23 @@ describe('GlobalEventDealer', () => {
 
   it('dealer filters venus events', () => {
     expect(deckHasCard(newDealer({}), GlobalEventName.VENUS_INFRASTRUCTURE)).is.false;
-    expect(deckHasCard(newDealer({venusNextExtension: true}), GlobalEventName.VENUS_INFRASTRUCTURE)).is.true;
+    expect(deckHasCard(newDealer({expansions: {venus: true}}), GlobalEventName.VENUS_INFRASTRUCTURE)).is.true;
   });
 
   it('dealer filters colonies events', () => {
     expect(deckHasCard(newDealer({}), GlobalEventName.JOVIAN_TAX_RIGHTS)).is.false;
-    expect(deckHasCard(newDealer({coloniesExtension: true}), GlobalEventName.JOVIAN_TAX_RIGHTS)).is.true;
+    expect(deckHasCard(newDealer({expansions: {colonies: true}}), GlobalEventName.JOVIAN_TAX_RIGHTS)).is.true;
   });
 
   it('dealer filters colonies + venus events', () => {
     expect(deckHasCard(newDealer({}), GlobalEventName.CLOUD_SOCIETIES)).is.false;
-    expect(deckHasCard(newDealer({coloniesExtension: true}), GlobalEventName.CLOUD_SOCIETIES)).is.false;
-    expect(deckHasCard(newDealer({venusNextExtension: true}), GlobalEventName.CLOUD_SOCIETIES)).is.false;
-    expect(deckHasCard(newDealer({coloniesExtension: true, venusNextExtension: true}), GlobalEventName.CLOUD_SOCIETIES)).is.true;
+    expect(deckHasCard(newDealer({expansions: {colonies: true}}), GlobalEventName.CLOUD_SOCIETIES)).is.false;
+    expect(deckHasCard(newDealer({expansions: {venus: true}}), GlobalEventName.CLOUD_SOCIETIES)).is.false;
+    expect(deckHasCard(newDealer({expansions: {colonies: true, venus: true}}), GlobalEventName.CLOUD_SOCIETIES)).is.true;
   });
 
   it('dealer filters pathfinders events', () => {
     expect(deckHasCard(newDealer({}), GlobalEventName.BALANCED_DEVELOPMENT)).is.false;
-    expect(deckHasCard(newDealer({pathfindersExpansion: true}), GlobalEventName.BALANCED_DEVELOPMENT)).is.true;
+    expect(deckHasCard(newDealer({expansions: {pathfinders: true}}), GlobalEventName.BALANCED_DEVELOPMENT)).is.true;
   });
 });

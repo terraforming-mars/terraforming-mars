@@ -7,7 +7,7 @@ import {fakeCard, testGame} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 import {CardName} from '../../src/common/cards/CardName';
 import {newCard, newProjectCard} from '../../src/server/createCard';
-import {GameOptions} from '../../src/server/game/GameOptions';
+import {TestGameOptions} from '../TestGame';
 import {Odyssey} from '../../src/server/cards/pathfinders/Odyssey';
 
 // Exposes rawCount available for testing.
@@ -92,13 +92,13 @@ describe('Tags', () => {
   // cardTagCount()
   // multipleCount
 
-  const tagsInGameRuns: ReadonlyArray<{options: Partial<GameOptions>, expected: number}> = [
+  const tagsInGameRuns: ReadonlyArray<{options: Partial<TestGameOptions>, expected: number}> = [
     {options: {}, expected: 10},
-    {options: {venusNextExtension: true}, expected: 11},
-    {options: {coloniesExtension: true}, expected: 10},
-    {options: {pathfindersExpansion: true}, expected: 11},
-    {options: {venusNextExtension: true, pathfindersExpansion: true}, expected: 12},
-    {options: {moonExpansion: true}, expected: 11},
+    {options: {expansions: {venus: true}}, expected: 11},
+    {options: {expansions: {colonies: true}}, expected: 10},
+    {options: {expansions: {pathfinders: true}}, expected: 11},
+    {options: {expansions: {venus: true, pathfinders: true}}, expected: 12},
+    {options: {expansions: {moon: true}}, expected: 11},
   ] as const;
   for (const run of tagsInGameRuns) {
     it('tagsInGame ' + JSON.stringify(run), () => {

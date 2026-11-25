@@ -16,7 +16,7 @@ describe('ImportedNutrients', () => {
 
   beforeEach(() => {
     card = new ImportedNutrients();
-    [game, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {expansions: {prelude: true}});
   });
 
   it('Can play without microbe cards', () => {

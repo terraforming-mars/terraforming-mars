@@ -18,7 +18,7 @@ describe('Ingrid', () => {
 
   beforeEach(() => {
     card = new Ingrid();
-    [game, player] = testGame(2, {preludeExtension: true});
+    [game, player] = testGame(2, {expansions: {prelude: true}});
     player.playedCards.push(card);
   });
 

@@ -515,7 +515,7 @@ describe('Player', () => {
   });
 
   it('Prelude action cycle', () => {
-    const [game, player1, player2] = testGame(2, {preludeExtension: true});
+    const [game, player1, player2] = testGame(2, {expansions: {prelude: true}});
 
     // None of these preludes require additional user input, so they're good for this test.
     const alliedBanks = new AlliedBanks();
@@ -572,7 +572,7 @@ describe('Player', () => {
   });
 
   it('Prelude fizzle', () => {
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     const alliedBanks = new AlliedBanks();
     const loan = new Loan();

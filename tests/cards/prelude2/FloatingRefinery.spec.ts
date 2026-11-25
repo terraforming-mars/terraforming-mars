@@ -27,7 +27,7 @@ describe('FloatingRefinery', () => {
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
-    [game, player] = testGame(2, {preludeExtension: true});
+    [game, player] = testGame(2, {expansions: {prelude: true}});
     player.playedCards.push(floater1, floater2, other);
   });
 

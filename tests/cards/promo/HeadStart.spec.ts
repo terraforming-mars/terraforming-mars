@@ -30,7 +30,7 @@ describe('HeadStart', () => {
   beforeEach(() => {
     headStart = new HeadStart();
     loan = new Loan();
-    [game, player, player2] = testGame(2, {preludeExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {prelude: true}});
   });
 
   function start(preludes: Array<IPreludeCard> = [headStart, loan]) {

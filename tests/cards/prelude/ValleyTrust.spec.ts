@@ -20,7 +20,7 @@ describe('ValleyTrust', () => {
 
   beforeEach(() => {
     card = new ValleyTrust();
-    [game, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {expansions: {prelude: true}});
   });
 
   it('Does not get card discount for other tags', () => {

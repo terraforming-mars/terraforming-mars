@@ -17,7 +17,7 @@ describe('Karen', () => {
 
   beforeEach(() => {
     card = new Karen();
-    [game, player] = testGame(2, {preludeExtension: true});
+    [game, player] = testGame(2, {expansions: {prelude: true}});
 
     // This ensures that preludes which cost MC are affordable.
     player.megaCredits = 20;

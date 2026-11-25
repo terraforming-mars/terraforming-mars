@@ -17,7 +17,7 @@ describe('AresSetup', () => {
   }
 
   it('4 player game', () => {
-    const [game] = testGame(4, {aresExtension: true, aresHazards: false});
+    const [game] = testGame(4, {expansions: {ares: true}, aresHazards: false});
     game.board = EmptyBoard.newInstance();
 
     // front-load the deck with cards of predetermined costs.

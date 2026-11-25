@@ -22,7 +22,7 @@ describe('MarketManipulation', () => {
   beforeEach(() => {
     card = new MarketManipulation();
     [game, player] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         ColonyName.GANYMEDE,
         ColonyName.LUNA,

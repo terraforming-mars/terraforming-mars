@@ -755,7 +755,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      preludeExtension: true,
+      expansions: {prelude: true},
       preludeDraftVariant: false,
     });
 
@@ -825,7 +825,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      preludeExtension: true,
+      expansions: {prelude: true},
       preludeDraftVariant: true,
     });
 

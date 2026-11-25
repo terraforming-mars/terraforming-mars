@@ -58,7 +58,7 @@ describe('Colony', () => {
 
   beforeEach(() => {
     [game, player, player2, player3, player4] = testGame(4, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         ColonyName.LUNA,
         ColonyName.PLUTO,

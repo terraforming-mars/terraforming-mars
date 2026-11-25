@@ -22,7 +22,7 @@ describe('MinorityRefuge', () => {
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
     [game, player] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         ColonyName.TRITON,
         ColonyName.CERES,

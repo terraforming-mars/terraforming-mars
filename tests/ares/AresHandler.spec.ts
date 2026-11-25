@@ -417,7 +417,7 @@ describe('Hazard tests', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}, aresHazards: true});
   });
 
   it('erosion appears after the third ocean', () => {

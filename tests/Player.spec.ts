@@ -671,7 +671,7 @@ describe('Player', () => {
   });
 
   it('Increasing venus sets globalParameterSteps', () => {
-    const [game, player, player2] = testGame(2, {venusNextExtension: true, solarPhaseOption: true});
+    const [game, player, player2] = testGame(2, {expansions: {venus: true}, solarPhaseOption: true});
 
     game.phase = Phase.ACTION;
     game.increaseVenusScaleLevel(player, 1);

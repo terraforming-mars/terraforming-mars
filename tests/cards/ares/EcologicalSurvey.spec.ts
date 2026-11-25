@@ -195,7 +195,7 @@ describe('EcologicalSurvey', () => {
   });
 
   it('Works during final greenery placement', () => {
-    const [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: false});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}, aresHazards: false});
 
     player.playedCards.push(card);
     // Set up end-game conditions

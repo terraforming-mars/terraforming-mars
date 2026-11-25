@@ -17,7 +17,7 @@ describe('ButterflyEffect', () => {
   beforeEach(() => {
     card = new ButterflyEffect();
     [game, player] = testGame(2, {
-      aresExtension: true,
+      expansions: {ares: true},
       aresHazards: true,
     });
   });

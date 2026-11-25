@@ -10,7 +10,7 @@ describe('SpacePortColony', () => {
 
   beforeEach(() => {
     card = new SpacePortColony();
-    [/* game */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
+    [/* game */, player] = testGame(2, {expansions: {colonies: true}, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {testGame} from '../TestGame';
+import {testGame, TestGameOptions} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {IGame} from '../../src/server/IGame';
 import {Space} from '../../src/server/boards/Space';
@@ -12,7 +12,6 @@ import {cast, toID} from '@/common/utils/utils';
 import {fakeCard, maxOutOceans, setTemperature} from '../TestingUtils';
 import {fakeMarsBot} from './FakeMarsBot';
 import {BoardName} from '@/common/boards/BoardName';
-import {GameOptions} from '@/server/game/GameOptions';
 import {Founder} from '@/server/awards/modular/Founder';
 import {Highlander} from '@/server/awards/modular/Highlander';
 import {Suburbian} from '@/server/awards/modular/Suburbian';
@@ -271,7 +270,7 @@ describe('MarsBotTilePlacer', () => {
    * Starts a game with a placer whose bot has the M€ in `bot`, and notes in `calls` the hex effects
    * it is asked for. The bot carries them out on the game.
    */
-  function startGame(options: Partial<GameOptions> | undefined, bot: BotOptions = {}, calls: Array<string> = []) {
+  function startGame(options: Partial<TestGameOptions> | undefined, bot: BotOptions = {}, calls: Array<string> = []) {
     [game, human, botPlayer] = testGame(2, options);
     // botPlayer is not the game's MarsBot here, so the board charges it like a human.
     botPlayer.megaCredits = 20;
@@ -500,21 +499,21 @@ describe('MarsBotTilePlacer', () => {
     {
       // 16 is MSL Curiosity. 25 has two icons and 40 has three.
       rule: 'MSL Curiosity: with 5 M€ and a colony to place it beats a space with two icons',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}},
       bot: {megacredits: 5},
       loser: '25',
       expected: '16',
     },
     {
       rule: 'MSL Curiosity: it does not beat a space with three icons',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}},
       bot: {megacredits: 5},
       loser: '16',
       expected: '40',
     },
     {
       rule: 'MSL Curiosity: with no colony left it counts as a space without rewards',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}},
       bot: {megacredits: 20, noColonyLeft: true},
       loser: '16',
       expected: '25',
@@ -543,7 +542,7 @@ describe('MarsBotTilePlacer', () => {
 
   for (const run of [
     {rule: 'South Pole', options: {boardName: BoardName.HELLAS}, hex: '61'},
-    {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true}, hex: '16'},
+    {rule: 'MSL Curiosity', options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}}, hex: '16'},
   ] as const) {
     it('offers MarsBot the hex that costs M€ even when it cannot pay, but not the human: ' + run.rule, () => {
       const [soloGame, soloHuman] = testGame(1, {...run.options, automa: true});
@@ -618,7 +617,7 @@ describe('MarsBotTilePlacer', () => {
     },
     {
       rule: 'MSL Curiosity: places a colony and costs 5 M€',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}},
       hex: '16',
       bot: {megacredits: 7},
       expected: {
@@ -628,7 +627,7 @@ describe('MarsBotTilePlacer', () => {
     },
     {
       rule: 'MSL Curiosity: costs nothing when no colony is placed',
-      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, coloniesExtension: true},
+      options: {boardName: BoardName.TERRA_CIMMERIA_NOVA, expansions: {colonies: true}},
       hex: '16',
       bot: {megacredits: 7, swallows: true},
       expected: {

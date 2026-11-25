@@ -142,7 +142,7 @@ describe('MarsBoard', () => {
   });
 
   it('getAvailableIsolatedSpaces ignores neutral player cubes', () => {
-    const [game, player] = testGame(2, {pathfindersExpansion: true, starWarsExpansion: true});
+    const [game, player] = testGame(2, {expansions: {pathfinders: true}});
     const board = game.board;
     const space = board.getSpaceOrThrow('15');
     const adjacent = board.getAdjacentSpaces(space)[0];

@@ -4,26 +4,18 @@ import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {Deck} from '../src/server/cards/Deck';
-import {Expansions} from '@/common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansions} from '@/common/cards/GameModule';
 
 /** Per-expansion flags that predate `GameOptions.expansions`. */
 export type LegacyGameOptions = {
-  /** @deprecated Use `expansions.corpera`. */
-  corporateEra: boolean;
   /** @deprecated Use `expansions.venus`. */
   venusNextExtension: boolean;
   /** @deprecated Use `expansions.colonies`. */
   coloniesExtension: boolean;
   /** @deprecated Use `expansions.prelude`. */
   preludeExtension: boolean;
-  /** @deprecated Use `expansions.prelude2`. */
-  prelude2Expansion: boolean;
   /** @deprecated Use `expansions.turmoil`. */
   turmoilExtension: boolean;
-  /** @deprecated Use `expansions.promo`. */
-  promoCardsOption: boolean;
-  /** @deprecated Use `expansions.community`. */
-  communityCardsOption: boolean;
   /** @deprecated Use `expansions.ares`. */
   aresExtension: boolean;
   /** @deprecated Use `expansions.moon`. */
@@ -36,8 +28,6 @@ export type LegacyGameOptions = {
   starWarsExpansion: boolean;
   /** @deprecated Use `expansions.underworld`. */
   underworldExpansion: boolean;
-  /** @deprecated Use `expansions.deltaProject`. */
-  deltaProjectExpansion: boolean;
 };
 
 export type TestGameOptions = Omit<GameOptions, 'expansions'> & LegacyGameOptions & {
@@ -85,21 +75,17 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   const copy: Partial<GameOptions> = {
     ...rest,
     expansions: {
-      corpera: rest.corporateEra ?? true,
+      ...DEFAULT_EXPANSIONS,
       venus: rest.venusNextExtension ?? false,
       colonies: rest.coloniesExtension ?? false,
       prelude: rest.preludeExtension ?? false,
-      prelude2: rest.prelude2Expansion ?? false,
       turmoil: rest.turmoilExtension ?? false,
-      promo: rest.promoCardsOption ?? false,
-      community: rest.communityCardsOption ?? false,
       ares: rest.aresExtension ?? false,
       moon: rest.moonExpansion ?? false,
       pathfinders: rest.pathfindersExpansion ?? false,
       ceo: rest.ceoExtension ?? false,
       starwars: rest.starWarsExpansion ?? false,
       underworld: rest.underworldExpansion ?? false,
-      deltaProject: rest.deltaProjectExpansion ?? false,
       ...expansions,
     },
   };

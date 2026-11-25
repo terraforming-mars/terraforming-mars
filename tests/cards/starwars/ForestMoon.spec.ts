@@ -17,7 +17,7 @@ describe('ForestMoon', () => {
 
   beforeEach(() => {
     card = new ForestMoon();
-    [game, player, player2, player3] = testGame(3, {starWarsExpansion: true});
+    [game, player, player2, player3] = testGame(3);
   });
 
   it('Can play', () => {

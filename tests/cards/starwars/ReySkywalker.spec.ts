@@ -11,7 +11,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('ReySkywalker', () => {
   it('Play', () => {
     const card = new ReySkywalker();
-    const [game, player] = testGame(2, {starWarsExpansion: true});
+    const [game, player] = testGame(2);
 
     maxOutOceans(player);
 
@@ -36,7 +36,7 @@ describe('ReySkywalker', () => {
 
   it('Cannot play on Hazard tiles', () => {
     const card = new ReySkywalker();
-    const [game, player] = testGame(2, {starWarsExpansion: true, aresExtension: true});
+    const [game, player] = testGame(2, {expansions: {ares: true}});
 
     player.megaCredits = 8; // Necessary for this test to be valid due to hazard costs.
 

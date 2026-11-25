@@ -164,7 +164,7 @@ describe('MarsBoard', () => {
   });
 
   it('A cube reserves its own space', () => {
-    const [game, player] = testGame(2, {pathfindersExpansion: true});
+    const [game, player] = testGame(2, {expansions: {pathfinders: true}});
     const board = game.board;
     const space = board.getSpaceOrThrow('15');
 

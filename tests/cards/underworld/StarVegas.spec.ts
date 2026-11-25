@@ -73,7 +73,7 @@ describe('StarVegas', () => {
 
   it('play - available spaces with Pathfinders', () => {
     const card = new StarVegas();
-    const [game, player/* , player2 */] = testGame(2, {pathfindersExpansion: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {pathfinders: true}});
 
     cast(card.play(player), undefined);
 

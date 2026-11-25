@@ -21,7 +21,7 @@ describe('Wetlands', () => {
 
   beforeEach(() => {
     card = new Wetlands();
-    [game, player, player2] = testGame( 2, {pathfindersExpansion: true});
+    [game, player, player2] = testGame( 2, {expansions: {pathfinders: true}});
     game.board = EmptyBoard.newInstance();
     game.board.getSpaceOrThrow('15').spaceType = SpaceType.OCEAN;
     game.board.getSpaceOrThrow('16').spaceType = SpaceType.OCEAN;

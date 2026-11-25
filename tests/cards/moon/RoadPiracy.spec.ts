@@ -152,7 +152,7 @@ describe('RoadPiracy', () => {
   });
 
   it('Road piracy works with Pathfinders bonuses', () => {
-    [game, player, player2, player3] = testGame(3, {pathfindersExpansion: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {pathfinders: true}});
 
     player2.steel = 0;
     player3.steel = 3;

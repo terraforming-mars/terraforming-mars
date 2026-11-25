@@ -64,9 +64,6 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   const players = createPlayers(count, idSuffix);
 
   const {expansions, ...rest} = customOptions ?? {};
-  // if (copy.aresExtension === true && copy.aresHazards === undefined) {
-  //   copy.aresHazards = false;
-  // }
 
   const copy: Partial<GameOptions> = {
     ...rest,
@@ -83,6 +80,10 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
       ...expansions,
     },
   };
+
+  if (expansions?.ares === true && copy.aresHazards === undefined) {
+    copy.aresHazards = false;
+  }
 
   const shuffle = Deck.shuffle;
   try {

@@ -36,7 +36,7 @@ describe('ReySkywalker', () => {
 
   it('Cannot play on Hazard tiles', () => {
     const card = new ReySkywalker();
-    const [game, player] = testGame(2, {expansions: {ares: true}});
+    const [game, player] = testGame(2, {expansions: {ares: true}, aresHazards: true});
 
     player.megaCredits = 8; // Necessary for this test to be valid due to hazard costs.
 

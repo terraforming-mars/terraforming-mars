@@ -218,5 +218,14 @@ describe('GameCards', () => {
     expect(names).to.have.members([CardName.FLOYD, CardName.HAL9000]);
     expect(names).to.have.length(2);
   });
+
+  it('keeps Delta Project out of the prelude deck', () => {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      expansions: {...DEFAULT_GAME_OPTIONS.expansions, prelude: true, deltaProject: true},
+    };
+    const names = new GameCards(gameOptions).getPreludeCards().map(toName);
+    expect(names).to.not.contain(CardName.DELTA_PROJECT);
+  });
 });
 

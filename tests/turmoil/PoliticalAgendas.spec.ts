@@ -7,6 +7,7 @@ import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {cast} from '@/common/utils/utils';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 describe('PoliticalAgendas', () => {
   let player1: TestPlayer;
@@ -28,7 +29,7 @@ describe('PoliticalAgendas', () => {
   deserialized.forEach((deserialize) => {
     const suffix = deserialize ? ', but deserialized' : '';
     it('Standard' + suffix, () => {
-      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}, politicalAgendasExtension: 'Standard'});
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -51,7 +52,7 @@ describe('PoliticalAgendas', () => {
       // For the neutral chairman to always pick the second item in the list.
       PoliticalAgendas.randomElement = (list) => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}, politicalAgendasExtension: 'Chairman'});
       let newPlayer2: IPlayer = player2;
       if (deserialize) {
         game = Game.deserialize(game.serialize());
@@ -89,7 +90,7 @@ describe('PoliticalAgendas', () => {
       // For the neutral chairperson to always pick the second item.
       PoliticalAgendas.randomElement = <T>(list: ReadonlyArray<T>): T => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Chairman'});
+      let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}, politicalAgendasExtension: 'Chairman'});
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -110,7 +111,7 @@ describe('PoliticalAgendas', () => {
   });
 
   it('Mars First serialization test', () => {
-    let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {turmoilExtension: true, politicalAgendasExtension: 'Standard'});
+    let game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}, politicalAgendasExtension: 'Standard'});
     let turmoil = game.turmoil!;
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     turmoil.rulingParty = marsFirst;

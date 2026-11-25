@@ -7,6 +7,7 @@ import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 describe('ConvertPlants', () => {
   let card: ConvertPlants;
@@ -16,7 +17,7 @@ describe('ConvertPlants', () => {
     card = new ConvertPlants();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid', {turmoilExtension: true});
+    Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}});
   });
 
   it('Can not act without plants', () => {

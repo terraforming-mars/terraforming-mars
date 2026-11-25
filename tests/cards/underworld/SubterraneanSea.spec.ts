@@ -58,7 +58,7 @@ describe('SubterraneanSea', () => {
     // so canAfford(card_cost + space_cost) failed with depleted MC, producing
     // SelectSpace([]) → InputError('No available spaces').
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true, boardName: BoardName.HELLAS});
+    const [game, player] = testGame(2, {expansions: {underworld: true}, boardName: BoardName.HELLAS});
 
     const hellasSpace = game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
     hellasSpace.excavator = player;

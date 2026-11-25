@@ -20,7 +20,7 @@ describe('AirScrappingStandardProjectVariant', () => {
 
   it('option not available for regular board', () => {
     // Building another game without the alt venus board.
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, altVenusBoard: false});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true}, altVenusBoard: false});
     const cards = player.getStandardProjectOption().cards;
     const names = cards.map(toName);
     expect(names).to.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT);

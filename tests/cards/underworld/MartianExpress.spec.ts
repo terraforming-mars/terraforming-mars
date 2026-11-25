@@ -80,7 +80,7 @@ describe('MartianExpress', () => {
   it('activates colonies', () => {
     const card = new MartianExpress();
     const [game, player] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         ColonyName.TRITON,
         ColonyName.CERES,

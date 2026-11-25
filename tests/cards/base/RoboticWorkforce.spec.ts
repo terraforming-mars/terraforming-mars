@@ -123,7 +123,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Capital (Ares expansion)', () => {
-    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
@@ -142,7 +142,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
-    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map

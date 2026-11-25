@@ -100,7 +100,7 @@ describe('HeadStart', () => {
   }
 
   it('Cannot pass, end turn, or undo during Head Start', () => {
-    [game, player, player2] = testGame(2, {preludeExtension: true, undoOption: true});
+    [game, player, player2] = testGame(2, {expansions: {prelude: true}, undoOption: true});
     player.heat = 16;
     start();
     playPrelude(headStart);

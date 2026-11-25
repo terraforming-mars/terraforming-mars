@@ -51,7 +51,7 @@ describe('ValleyTrust', () => {
   });
 
   it('Card works even without prelude expansion enabled', () => {
-    [/* game */, player] = testGame(1, {preludeExtension: false});
+    [/* game */, player] = testGame(1, {expansions: {prelude: false}});
     const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
 
     expect(selectCard.cards).has.length(3);

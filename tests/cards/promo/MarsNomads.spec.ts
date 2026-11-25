@@ -422,7 +422,7 @@ describe('MarsNomads', () => {
 
   describe('Compatible with Ares', () => {
     it('Hazards are selectable but grant nothing', () => {
-      const [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+      const [game, player] = testGame(2, {expansions: {ares: true}, aresHazards: true});
 
       const firstSpace = game.board.getSpaceOrThrow('05');
       const space = game.board.getSpaceOrThrow('04');

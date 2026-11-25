@@ -13,7 +13,7 @@ describe('Visionary', () => {
       {venus: true, expected: 4},
     ]) {
       const tracks = run.venus ? [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK] : THARSIS_MARSBOT_BOARD;
-      const [game] = testGame(1, {venusNextExtension: run.venus});
+      const [game] = testGame(1, {expansions: {venus: run.venus}});
       const bot = fakeMarsBot({tracks, game});
       setAllTracks(bot, 6);
       setTrack(bot, Tag.BUILDING, 1);

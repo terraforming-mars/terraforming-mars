@@ -14,7 +14,7 @@ describe('GreatDamAres', () => {
 
   beforeEach(() => {
     card = new GreatDamAres();
-    [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: false});
+    [/* game */, player] = testGame(2, {expansions: {ares: true}, aresHazards: false});
   });
 
   it('Requirements + Benefits', () => {

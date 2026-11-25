@@ -9,7 +9,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 describe('Purifier', () => {
   it('On hazard', () => {
     const purifier = new Purifier();
-    const [game, player] = testGame(3, {aresExtension: true, aresHazards: true});
+    const [game, player] = testGame(3, {expansions: {ares: true}, aresHazards: true});
     const hazards = game.board.getHazards();
     expect(hazards).has.length(3);
 
@@ -35,7 +35,7 @@ describe('Purifier', () => {
 
   it('Applies to Eris', () => {
     const purifier = new Purifier();
-    const [/* game */, player] = testGame(3, {aresExtension: true, aresHazards: true});
+    const [/* game */, player] = testGame(3, {expansions: {ares: true}, aresHazards: true});
 
     const eris = new Eris();
     const action = cast(eris.action(player), OrOptions);

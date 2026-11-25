@@ -174,7 +174,7 @@ describe('Game', () => {
   });
 
   it('Venus moves 1% per step above 30% on Amazonis Planitia', () => {
-    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    const [game, player] = testGame(2, {expansions: {venus: true}, boardName: BoardName.AMAZONIS_PLANITIA});
     setVenusScaleLevel(game, 28);
 
     expect(game.increaseVenusScaleLevel(player, 2)).eq(2);
@@ -188,7 +188,7 @@ describe('Game', () => {
   });
 
   it('Venus decreases 1% per step above 30% on Amazonis Planitia', () => {
-    const [game, player] = testGame(2, {venusNextExtension: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    const [game, player] = testGame(2, {expansions: {venus: true}, boardName: BoardName.AMAZONIS_PLANITIA});
     setVenusScaleLevel(game, 31);
 
     game.increaseVenusScaleLevel(player, -1);
@@ -311,7 +311,7 @@ describe('Game', () => {
   });
 
   it('Amazonis Planitia solo games with prelude take one more generation', () => {
-    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, preludeExtension: true});
+    const [game] = testGame(1, {boardName: BoardName.AMAZONIS_PLANITIA, expansions: {prelude: true}});
     expect(game.lastSoloGeneration()).eq(13);
   });
 

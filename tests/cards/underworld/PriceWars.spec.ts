@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('PriceWars', () => {
   it('canPlay', () => {
     const card = new PriceWars();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 1;
     expect(card.canPlay(player)).is.false;
@@ -19,7 +19,7 @@ describe('PriceWars', () => {
 
   it('Should play', () => {
     const card = new PriceWars();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
     expect(game.generation).eq(1);
 
@@ -64,7 +64,7 @@ describe('PriceWars', () => {
 
   it('Survives serialization', () => {
     const card = new PriceWars();
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
     game.generation = 3;
 
     const unplayed = serializeProjectCard(card);

@@ -17,7 +17,7 @@ describe('StemFieldSubsidies', () => {
 
   beforeEach(() => {
     card = new StemFieldSubsidies();
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
   });
 

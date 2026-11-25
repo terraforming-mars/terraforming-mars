@@ -9,7 +9,7 @@ import {NoctisCity} from '../../../src/server/cards/base/NoctisCity';
 describe('FamilyConnections', () => {
   it('play', () => {
     const card = new FamilyConnections();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 
@@ -18,7 +18,7 @@ describe('FamilyConnections', () => {
 
   it('several cards', () => {
     const card = new FamilyConnections();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     // Cards with City tag
     player.playedCards.push(new PhobosSpaceHaven());

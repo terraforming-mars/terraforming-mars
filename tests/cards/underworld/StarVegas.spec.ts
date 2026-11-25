@@ -24,7 +24,7 @@ describe('StarVegas', () => {
 
   it('play', () => {
     const card = new StarVegas();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     addCity(player);
     addCity(player);
     addCity(player2);

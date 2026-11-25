@@ -7,7 +7,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('CraterSurvey', () => {
   it('Should play', () => {
     const card = new CraterSurvey();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 

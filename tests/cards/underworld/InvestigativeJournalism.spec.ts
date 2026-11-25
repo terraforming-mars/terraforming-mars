@@ -39,7 +39,7 @@ describe('InvestigativeJournalism', () => {
   for (const run of canActRuns) {
     it('canAct ' + JSON.stringify(run), () => {
       const card = new InvestigativeJournalism();
-      const [/* game */, player, player2] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player, player2] = testGame(2, {expansions: {underworld: true}});
 
       player.megaCredits = run.megacredits;
       player.underworldData.corruption = run.corruptions[0];
@@ -59,7 +59,7 @@ describe('InvestigativeJournalism', () => {
   for (const run of actionRuns) {
     it('action ' + JSON.stringify(run), () => {
       const card = new InvestigativeJournalism();
-      const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+      const [game, player, player2, player3] = testGame(3, {expansions: {underworld: true}});
 
       player.megaCredits = 5;
       player.underworldData.corruption = run.corruptions[0];

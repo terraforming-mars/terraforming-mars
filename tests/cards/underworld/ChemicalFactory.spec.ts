@@ -14,7 +14,7 @@ describe('ChemicalFactory', () => {
 
   beforeEach(() => {
     card = new ChemicalFactory();
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
   });
 
   it('play', () => {

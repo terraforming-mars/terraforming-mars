@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('ArtesianAquifer', () => {
   it('play', () => {
     const card = new ArtesianAquifer();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const selectSpace = cast(card.play(player), SelectSpace);
     const space = selectSpace.spaces[0];

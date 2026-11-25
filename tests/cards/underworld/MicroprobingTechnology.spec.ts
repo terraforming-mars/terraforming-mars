@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('MicroprobingTechnology', () => {
   it('Should play', () => {
     const card = new MicroprobingTechnology();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.false;
     player.tagsForTest = {science: 1};

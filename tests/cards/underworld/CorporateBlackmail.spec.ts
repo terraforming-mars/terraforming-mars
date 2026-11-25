@@ -18,7 +18,7 @@ describe('CorporateBlackmail', () => {
 
   beforeEach(() => {
     card = new CorporateBlackmail();
-    [game, player, player2, player3, player4] = testGame(4, {underworldExpansion: true});
+    [game, player, player2, player3, player4] = testGame(4, {expansions: {underworld: true}});
   });
 
   for (const run of [

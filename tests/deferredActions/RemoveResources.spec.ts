@@ -82,7 +82,7 @@ describe('RemoveResources', () => {
 
   it('Underworld blocking', () => {
     let game: IGame;
-    [game, player, target] = testGame(3, {underworldExpansion: true});
+    [game, player, target] = testGame(3, {expansions: {underworld: true}});
     target.plants = 15;
     target.underworldData.corruption = 1;
     new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();

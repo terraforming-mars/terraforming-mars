@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('DeepwaterDome', () => {
   it('play', () => {
     const card = new DeepwaterDome();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 
@@ -27,7 +27,7 @@ describe('DeepwaterDome', () => {
   ] as const) {
     it('effect ' + JSON.stringify(run), () => {
       const card = new DeepwaterDome();
-      const [game, player, player2] = testGame(2, {underworldExpansion: true});
+      const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
       player.playedCards.push(card);
       // Arbitrary space number with room to place oceans.
       const space = game.board.getSpaceOrThrow('10');

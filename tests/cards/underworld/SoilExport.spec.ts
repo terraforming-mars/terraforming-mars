@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('SoilExport', () => {
   it('Should play', () => {
     const card = new SoilExport();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     const jupiterFloatingStation = new JupiterFloatingStation();
     player.playedCards.push(jupiterFloatingStation);
 

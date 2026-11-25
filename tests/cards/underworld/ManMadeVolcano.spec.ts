@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('ManMadeVolcano', () => {
   it('canPlay', () => {
     const card = new ManMadeVolcano();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.false;
 
@@ -30,7 +30,7 @@ describe('ManMadeVolcano', () => {
 
   it('play', () => {
     const card = new ManMadeVolcano();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = game.board.getAvailableSpacesOnLand(player);
     spaces[0].excavator = player;

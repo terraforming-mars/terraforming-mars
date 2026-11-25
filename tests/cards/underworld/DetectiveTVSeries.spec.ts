@@ -15,7 +15,7 @@ describe('DetectiveTVSeries', () => {
   for (const run of effectRuns) {
     it('effect ' + JSON.stringify(run), () => {
       const card = new DetectiveTVSeries();
-      const [game, player] = testGame(2, {underworldExpansion: true});
+      const [game, player] = testGame(2, {expansions: {underworld: true}});
 
       if (run.played) {
         player.playedCards.push(card);

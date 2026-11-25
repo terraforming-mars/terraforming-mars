@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('GeologistTeam', () => {
   it('action', () => {
     const card = new GeologistTeam();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     card.action(player);
     runAllActions(game);
@@ -18,7 +18,7 @@ describe('GeologistTeam', () => {
 
   it('Should play', () => {
     const card = new GeologistTeam();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
     player.playedCards.push(card);
 
@@ -39,7 +39,7 @@ describe('GeologistTeam', () => {
 
   it('Should gain TR when drawing ocean from pool (Mars fully identified)', () => {
     const card = new GeologistTeam();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
     player.setTerraformRating(20);
 

@@ -12,7 +12,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('InducedTremor', () => {
   it('cannot play', () => {
     const card = new InducedTremor();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     for (const space of game.board.spaces) {
       space.excavator = player2;
     }
@@ -21,13 +21,13 @@ describe('InducedTremor', () => {
 
   it('can play', () => {
     const card = new InducedTremor();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play, discard', () => {
     const card = new InducedTremor();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = UnderworldExpansion.identifiableSpaces(player);
     UnderworldExpansion.identify(game, spaces[0], player);
@@ -58,7 +58,7 @@ describe('InducedTremor', () => {
 
   it('Should play, do not discard', () => {
     const card = new InducedTremor();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = UnderworldExpansion.identifiableSpaces(player);
     UnderworldExpansion.identify(game, spaces[0], player);
@@ -79,7 +79,7 @@ describe('InducedTremor', () => {
 
   it('Should play, nothing to discard', () => {
     const card = new InducedTremor();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
     runAllActions(game);

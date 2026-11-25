@@ -11,7 +11,7 @@ import {cast} from '@/common/utils/utils';
 describe('UndergroundHabitat', () => {
   it('Should play', () => {
     const card = new UndergroundHabitat();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const birds = new Birds();
     player.playedCards.set(birds, new Penguins());

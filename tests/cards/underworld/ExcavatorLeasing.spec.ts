@@ -19,7 +19,7 @@ describe('ExcavatorLeasing', () => {
   let standardProject: ExcavateStandardProject;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {underworldExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     card = new ExcavatorLeasing();
     standardProject = new ExcavateStandardProject();
   });

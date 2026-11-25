@@ -10,7 +10,7 @@ import {cast} from '@/common/utils/utils';
 describe('UndergroundShelters', () => {
   it('Should play', () => {
     const card = new UndergroundShelters();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 
@@ -24,7 +24,7 @@ describe('UndergroundShelters', () => {
 
   it('canAct', () => {
     const card = new UndergroundShelters();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     expect(card.canAct(player)).to.be.false;
@@ -41,7 +41,7 @@ describe('UndergroundShelters', () => {
 
   it('action', () => {
     const card = new UndergroundShelters();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     for (let index = 0; index < 3; index++) {
@@ -61,7 +61,7 @@ describe('UndergroundShelters', () => {
 
   it('VPs', () => {
     const card = new UndergroundShelters();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     for (let index = 0; index < 3; index++) {
       player.underworldData.tokens.push({token: 'nothing', active: false, shelter: false});

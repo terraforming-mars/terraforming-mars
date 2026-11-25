@@ -107,7 +107,7 @@ describe('SolarStorm', () => {
   });
 
   it('Compatible with underworld', () => {
-    const [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player1, player2] = testGame(2, {expansions: {underworld: true}});
     const card = new SolarStorm();
 
     player2.plants = 3;
@@ -122,7 +122,7 @@ describe('SolarStorm', () => {
   });
 
   it('Compatible with underworld plant2pertemp bonus', () => {
-    const [game, player1] = testGame(1, {underworldExpansion: true});
+    const [game, player1] = testGame(1, {expansions: {underworld: true}});
     const card = new SolarStorm();
 
     player1.underworldData.activeBonus = 'plant2pertemp';

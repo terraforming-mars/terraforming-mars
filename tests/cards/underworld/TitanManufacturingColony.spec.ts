@@ -26,7 +26,7 @@ describe('TitanManufacturingColony', () => {
 
   it('canAct', () => {
     const card = new TitanManufacturingColony();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canAct(player)).is.false;
 
@@ -37,7 +37,7 @@ describe('TitanManufacturingColony', () => {
 
   it('action', () => {
     const card = new TitanManufacturingColony();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     card.resourceCount = 1;
 

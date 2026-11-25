@@ -21,7 +21,7 @@ describe('VolunteerMiningInitiative', () => {
   for (const run of runs) {
     it('play ' + run.cities, () => {
       const card = new VolunteerMiningInitiative();
-      const [game, player, player2] = testGame(2, {underworldExpansion: true});
+      const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
       for (let idx = 0; idx < run.cities; idx++) {
         addCity(player2);

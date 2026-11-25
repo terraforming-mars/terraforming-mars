@@ -73,7 +73,7 @@ describe('LavaTubeSettlement', () => {
   });
 
   it('Kingdom of Tauraro must place next to own excavation marker, if possible', () => {
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(new KingdomofTauraro());
     player.production.add(Resource.ENERGY, 1);
 
@@ -93,7 +93,7 @@ describe('LavaTubeSettlement', () => {
   });
 
   it('Kingdom of Tauraro may place on any volcanic space when none are next to own tiles', () => {
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(new KingdomofTauraro());
     player.production.add(Resource.ENERGY, 1);
 

@@ -12,7 +12,7 @@ describe('ServerSabotage', () => {
 
   beforeEach(() => {
     card = new ServerSabotage();
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('play', () => {

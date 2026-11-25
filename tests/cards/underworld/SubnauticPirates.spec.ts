@@ -18,7 +18,7 @@ describe('SubnauticPirates', () => {
 
   beforeEach(() => {
     card = new SubnauticPirates();
-    [game, player, player2, player3] = testGame(4, {underworldExpansion: true});
+    [game, player, player2, player3] = testGame(4, {expansions: {underworld: true}});
   });
 
   const canPlayRuns = [

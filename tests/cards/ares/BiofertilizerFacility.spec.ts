@@ -22,7 +22,7 @@ describe('BiofertilizerFacility', () => {
 
   beforeEach(() => {
     card = new BiofertilizerFacility();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });

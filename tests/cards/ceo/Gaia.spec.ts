@@ -21,7 +21,7 @@ describe('Gaia', () => {
 
   beforeEach(() => {
     card = new Gaia();
-    [game, player, player2, player3] = testGame(3, {aresExtension: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
   });

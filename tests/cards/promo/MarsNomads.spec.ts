@@ -31,7 +31,7 @@ describe('MarsNomads', () => {
 
   beforeEach(() => {
     card = new MarsNomads();
-    [game, player, player2] = testGame(2, {aresExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}});
     board = game.board;
   });
 

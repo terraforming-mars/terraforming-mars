@@ -17,7 +17,7 @@ describe('MagneticFieldGeneratorsAres', () => {
 
   beforeEach(() => {
     card = new MagneticFieldGeneratorsAres();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Cannot play without enough energy production', () => {

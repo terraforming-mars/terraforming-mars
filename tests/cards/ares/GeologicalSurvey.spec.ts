@@ -28,7 +28,7 @@ describe('GeologicalSurvey', () => {
 
   beforeEach(() => {
     card = new GeologicalSurvey();
-    [game, player, player2] = testGame(2, {aresExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
   });
 

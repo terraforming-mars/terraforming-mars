@@ -18,7 +18,7 @@ describe('Yvonne', () => {
 
   beforeEach(() => {
     card = new Yvonne();
-    [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true, colonies: true}});
 
     // Setup some colonies that can be built independently of cards
     const callisto = new Callisto(); // 3 Energy

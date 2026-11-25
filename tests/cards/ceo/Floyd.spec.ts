@@ -15,7 +15,7 @@ describe('Floyd', () => {
 
   beforeEach(() => {
     card = new Floyd();
-    [game, player] = testGame(2, {ceoExtension: true});
+    [game, player] = testGame(2, {expansions: {ceo: true}});
   });
 
   it('Cannot act without cards', () => {

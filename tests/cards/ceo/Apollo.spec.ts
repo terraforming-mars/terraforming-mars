@@ -16,7 +16,7 @@ describe('Apollo', () => {
 
   beforeEach(() => {
     card = new Apollo();
-    [game, player, player2] = testGame(4, {ceoExtension: true, moonExpansion: true});
+    [game, player, player2] = testGame(4, {expansions: {ceo: true, moon: true}});
     moonData = MoonExpansion.moonData(game);
   });
 

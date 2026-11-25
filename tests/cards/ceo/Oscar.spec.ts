@@ -17,7 +17,7 @@ describe('Oscar', () => {
 
   beforeEach(() => {
     card = new Oscar();
-    [game, player, player2] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true, turmoil: true}});
     player.playedCards.push(card);
     turmoil = Turmoil.getTurmoil(player.game);
   });

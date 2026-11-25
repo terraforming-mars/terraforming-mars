@@ -24,7 +24,7 @@ describe('Petra', () => {
 
   beforeEach(() => {
     card = new Petra();
-    [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ceo: true, turmoil: true}});
 
     turmoil = game.turmoil!;
     scientists = turmoil.getPartyByName(PartyName.SCIENTISTS)!;

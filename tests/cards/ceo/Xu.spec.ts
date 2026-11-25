@@ -17,7 +17,7 @@ describe('Xu', () => {
 
   beforeEach(() => {
     card = new Xu();
-    [game, player, player2] = testGame(2, {ceoExtension: true, venusNextExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true, venus: true}});
     player.playedCards.push(card);
     player.megaCredits = 0;
     player2.megaCredits = 0;

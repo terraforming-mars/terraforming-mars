@@ -54,7 +54,7 @@ describe('Jansson', () => {
   });
 
   it('Do not get bonuses from tiles on the Moon', () => {
-    const [moonGame, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
+    const [moonGame, player] = testGame(2, {expansions: {ceo: true, moon: true}});
     const moonData = MoonExpansion.moonData(moonGame);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     expect(player.steel).eq(0);

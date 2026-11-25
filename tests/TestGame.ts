@@ -22,10 +22,6 @@ export type LegacyGameOptions = {
   moonExpansion: boolean;
   /** @deprecated Use `expansions.pathfinders`. */
   pathfindersExpansion: boolean;
-  /** @deprecated Use `expansions.ceo`. */
-  ceoExtension: boolean;
-  /** @deprecated Use `expansions.starwars`. */
-  starWarsExpansion: boolean;
   /** @deprecated Use `expansions.underworld`. */
   underworldExpansion: boolean;
 };
@@ -83,8 +79,6 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
       ares: rest.aresExtension ?? false,
       moon: rest.moonExpansion ?? false,
       pathfinders: rest.pathfindersExpansion ?? false,
-      ceo: rest.ceoExtension ?? false,
-      starwars: rest.starWarsExpansion ?? false,
       underworld: rest.underworldExpansion ?? false,
       ...expansions,
     },

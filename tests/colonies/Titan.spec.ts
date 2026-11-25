@@ -20,7 +20,7 @@ describe('Titan', () => {
   beforeEach(() => {
     titan = new Titan();
     aerialMappers = new AerialMappers();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(titan);
   });
 

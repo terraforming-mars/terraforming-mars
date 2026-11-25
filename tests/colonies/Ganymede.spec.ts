@@ -13,7 +13,7 @@ describe('Ganymede', () => {
 
   beforeEach(() => {
     ganymede = new Ganymede();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(ganymede);
   });
 

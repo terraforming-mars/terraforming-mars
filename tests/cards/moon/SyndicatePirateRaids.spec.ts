@@ -12,7 +12,7 @@ describe('SyndicatePirateRaids', () => {
   let card: SyndicatePirateRaids;
 
   beforeEach(() => {
-    [game, player, otherPlayer] = testGame(2, {coloniesExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {colonies: true}});
     card = new SyndicatePirateRaids();
   });
 

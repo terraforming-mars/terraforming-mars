@@ -17,7 +17,7 @@ describe('HecateSpeditions', () => {
 
   beforeEach(() => {
     card = new HecateSpeditions();
-    [game, player, player2] = testGame(3, {coloniesExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {colonies: true}});
   });
 
   it('play', () => {

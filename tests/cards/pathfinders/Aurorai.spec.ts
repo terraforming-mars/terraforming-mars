@@ -73,7 +73,7 @@ describe('Aurorai', () => {
   });
 
   it('can use data for build colony standard project on Europa', () => {
-    [game, player] = testGame(1, {coloniesExtension: true});
+    [game, player] = testGame(1, {expansions: {colonies: true}});
     player.playedCards.push(card);
     game.colonies.push(new Europa());
 

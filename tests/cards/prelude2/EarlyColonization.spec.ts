@@ -15,7 +15,7 @@ describe('EarlyColonization', () => {
   let card: EarlyColonization;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {coloniesExtension: true});
+    [game, player] = testGame(1, {expansions: {colonies: true}});
     card = new EarlyColonization();
   });
 

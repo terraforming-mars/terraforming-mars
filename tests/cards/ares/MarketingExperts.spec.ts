@@ -15,7 +15,7 @@ describe('MarketingExperts', () => {
 
   beforeEach(() => {
     card = new MarketingExperts();
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
   });
 

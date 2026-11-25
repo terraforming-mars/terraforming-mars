@@ -20,7 +20,7 @@ describe('OceanCity', () => {
 
   beforeEach(() => {
     card = new OceanCity();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Can play', () => {

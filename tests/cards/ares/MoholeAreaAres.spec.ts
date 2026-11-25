@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('MoholeAreaAres', () => {
   it('Should play', () => {
     const card = new MoholeAreaAres();
-    const [game, player] = testGame(2, {aresExtension: true});
+    const [game, player] = testGame(2, {expansions: {ares: true}});
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);

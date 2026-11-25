@@ -21,7 +21,7 @@ describe('Caesar', () => {
 
   beforeEach(() => {
     card = new Caesar();
-    [game, player, player2] = testGame(2, {aresExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
     player.production.add(Resource.PLANTS, startingPlants);
     player2.production.add(Resource.PLANTS, startingPlants);

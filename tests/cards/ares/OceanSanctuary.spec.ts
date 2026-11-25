@@ -19,7 +19,7 @@ describe('OceanSanctuary', () => {
 
   beforeEach(() => {
     card = new OceanSanctuary();
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Can play', () => {

@@ -28,7 +28,7 @@ describe('EcologicalSurvey', () => {
 
   beforeEach(() => {
     card = new EcologicalSurvey();
-    [game, player, redPlayer] = testGame(2, {aresExtension: true});
+    [game, player, redPlayer] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
   });
 

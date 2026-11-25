@@ -18,7 +18,7 @@ describe('CapitalAres', () => {
 
   beforeEach(() => {
     card = new CapitalAres();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Should play', () => {

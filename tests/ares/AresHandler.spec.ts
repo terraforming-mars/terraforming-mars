@@ -31,7 +31,7 @@ describe('AresHandler', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
   });
 

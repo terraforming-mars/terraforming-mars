@@ -15,7 +15,7 @@ describe('Deepmining', () => {
 
   beforeEach(() => {
     card = new Deepmining();
-    [game, player, player2] = testGame(2, {underworldExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('Cannot play', () => {

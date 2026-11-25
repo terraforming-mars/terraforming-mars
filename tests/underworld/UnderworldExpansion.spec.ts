@@ -40,7 +40,7 @@ describe('UnderworldExpansion', () => {
   let microbeCard2: IProjectCard;
 
   beforeEach(() => {
-    [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    [game, player1, player2] = testGame(2, {expansions: {underworld: true}});
     underworldData = game.underworldData;
     dataCard1 = new Cryptocurrency();
     dataCard2 = new MartianCulture();

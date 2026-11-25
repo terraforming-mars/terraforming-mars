@@ -9,7 +9,7 @@ import {cast} from '@/common/utils/utils';
 describe('TunnelingSubcontractor', () => {
   it('Should play', () => {
     const card = new TunnelingSubcontractor();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 0;
 

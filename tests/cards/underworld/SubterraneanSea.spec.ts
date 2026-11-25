@@ -12,7 +12,7 @@ import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
 describe('SubterraneanSea', () => {
   it('canPlay', () => {
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.false;
 
@@ -37,7 +37,7 @@ describe('SubterraneanSea', () => {
 
   it('play', () => {
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = game.board.getAvailableSpacesOnLand(player);
     spaces[0].excavator = player;

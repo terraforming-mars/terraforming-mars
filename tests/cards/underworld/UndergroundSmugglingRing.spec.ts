@@ -9,7 +9,7 @@ import {cast} from '@/common/utils/utils';
 describe('UndergroundSmugglingRing', () => {
   it('canPlay', () => {
     const card = new UndergroundSmugglingRing();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.false;
 
@@ -20,7 +20,7 @@ describe('UndergroundSmugglingRing', () => {
 
   it('Should play', () => {
     const card = new UndergroundSmugglingRing();
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 0;
 

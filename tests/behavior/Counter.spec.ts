@@ -432,7 +432,7 @@ describe('Counter for Underworld', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(3, {underworldExpansion: true});
+    [game, player, player2] = testGame(3, {expansions: {underworld: true}});
     fake = fakeCard();
   });
 

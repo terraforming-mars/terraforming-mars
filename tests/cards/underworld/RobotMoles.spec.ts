@@ -8,14 +8,14 @@ import {cast} from '../../../src/common/utils/utils';
 describe('RobotMoles', () => {
   it('canPlay', () => {
     const card = new RobotMoles();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
     const card = new RobotMoles();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
     expect(player.steel).eq(2);

@@ -19,7 +19,7 @@ describe('AeronGenomics', () => {
 
   beforeEach(() => {
     card = new AeronGenomics();
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('Play', () => {

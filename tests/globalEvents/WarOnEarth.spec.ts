@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('WarOnEarth', () => {
   it('influence >= 4 prevents all TR loss (should not increase TR)', () => {
     const card = new WarOnEarth();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     // Give player 5 influence: chairman(+1) + partyLeader(+1) + extra delegate(+1) + bonus(+2)
@@ -26,7 +26,7 @@ describe('WarOnEarth', () => {
 
   it('resolve play', () => {
     const card = new WarOnEarth();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();

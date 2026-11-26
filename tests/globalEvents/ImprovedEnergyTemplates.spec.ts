@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('ImprovedEnergyTemplates', () => {
   it('resolve play', () => {
     const card = new ImprovedEnergyTemplates();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {power: 1};
     player2.tagsForTest = {power: 2};

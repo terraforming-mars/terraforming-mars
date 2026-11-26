@@ -17,7 +17,7 @@ describe('Unity', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each Venus, Earth and Jovian tag you have', () => {

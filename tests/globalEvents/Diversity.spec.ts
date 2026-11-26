@@ -10,7 +10,7 @@ describe('Diversity', () => {
   it('resolve play', () => {
     const card = new Diversity();
 
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     // player2 has 8 tags.

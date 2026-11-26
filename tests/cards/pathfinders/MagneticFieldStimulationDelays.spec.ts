@@ -11,7 +11,7 @@ describe('MagneticFieldStimulationDelays', () => {
 
   beforeEach(() => {
     card = new MagneticFieldStimulationDelays();
-    [game] = testGame(2, {turmoilExtension: true});
+    [game] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('resolve play', () => {

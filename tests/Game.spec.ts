@@ -1436,7 +1436,7 @@ describe('Game', () => {
   ] as const) {
     it('Amazonis Planitia at 16% Venus ' + JSON.stringify(run), () => {
       // 2 players to remove an early-game solo action in the deferred actions queue.
-      const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, venusNextExtension: true, coloniesExtension: run.colonies});
+      const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, expansions: {venus: true, colonies: run.colonies}});
       game.phase = run.phase;
       setVenusScaleLevel(game, 14);
 

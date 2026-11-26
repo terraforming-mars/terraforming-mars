@@ -703,7 +703,7 @@ describe('Player', () => {
     }
 
     it('kp03 ruling: 6-heat option replaces 8-heat option', () => {
-      const [game, player] = testGame(1, {turmoilExtension: true});
+      const [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.KELVINISTS, 'kp03');
       player.stock.add(Resource.HEAT, 10);
 
@@ -712,7 +712,7 @@ describe('Player', () => {
     });
 
     it('kp01 ruling: 8-heat option remains, 6-heat is not offered', () => {
-      const [game, player] = testGame(1, {turmoilExtension: true});
+      const [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.KELVINISTS, 'kp01');
       player.stock.add(Resource.HEAT, 10);
 

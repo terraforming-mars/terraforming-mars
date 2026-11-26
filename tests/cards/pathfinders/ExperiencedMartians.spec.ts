@@ -21,7 +21,7 @@ describe('ExperiencedMartians', () => {
 
   beforeEach(() => {
     card = new ExperiencedMartians();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true, pathfinders: true}});
     turmoil = game.turmoil!;
   });
 

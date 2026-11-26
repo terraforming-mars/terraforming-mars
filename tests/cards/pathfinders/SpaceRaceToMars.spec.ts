@@ -19,7 +19,7 @@ let spaces: ReadonlyArray<Space>;
 describe('SpaceRaceToMars', () => {
   beforeEach(() => {
     card = new SpaceRaceToMars();
-    [game, player, player2] = testGame(3, {turmoilExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     spaces = player.game.board.getAvailableSpacesOnLand(player);
@@ -83,7 +83,7 @@ describe('SpaceRaceToMars', () => {
   });
 
   it('Moon ordinary tiles do not count', () => {
-    [game, player, player2] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true, moon: true}});
 
     const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
     MoonExpansion.addRoadTile(player, space.id);
@@ -95,7 +95,7 @@ describe('SpaceRaceToMars', () => {
   });
 
   it('Moon special tiles count', () => {
-    [game, player, player2] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true, moon: true}});
 
     const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
     MoonExpansion.addTile(player, space.id, {tileType: TileType.LUNA_TRADE_STATION});

@@ -120,7 +120,7 @@ describe('SuitableInfrastructure', () => {
   });
 
   it('Works when playing initial preludes', () => {
-    const [game, player] = testGame(1, {preludeExtension: true, coloniesExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true, colonies: true}});
 
     game.phase = Phase.PRELUDES;
     const aridor = new Aridor();

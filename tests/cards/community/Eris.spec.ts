@@ -72,7 +72,7 @@ describe('Eris', () => {
   });
 
   it('Respects Reds', () => {
-    [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true, turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {ares: true, turmoil: true}, aresHazards: true});
 
     game.phase = Phase.ACTION;
     setRulingParty(game, PartyName.REDS);

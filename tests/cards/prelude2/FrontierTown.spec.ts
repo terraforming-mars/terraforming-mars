@@ -22,7 +22,7 @@ describe('FrontierTown', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new FrontierTown();
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
 
       setRulingParty(game, run.party);
       player.production.override({energy: run.energyProduction});
@@ -32,7 +32,7 @@ describe('FrontierTown', () => {
 
   it('play', () => {
     const card = new FrontierTown();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
 
     player.production.override({energy: 1});
 
@@ -50,7 +50,7 @@ describe('FrontierTown', () => {
 
   it('Does not apply to oceans ', () => {
     const card = new FrontierTown();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
 
     player.production.override({energy: 1});
 
@@ -83,7 +83,7 @@ describe('FrontierTown', () => {
   ]) {
     it('Manages triple placement costs ' + JSON.stringify(run), () => {
       const card = new FrontierTown();
-      const [game, player, player2] = testGame(2, {turmoilExtension: true, boardName: BoardName.HELLAS});
+      const [game, player, player2] = testGame(2, {expansions: {turmoil: true}, boardName: BoardName.HELLAS});
 
       const turmoil = Turmoil.getTurmoil(game);
       turmoil.sendDelegateToParty(player, PartyName.MARS, game, true);

@@ -48,7 +48,7 @@ describe('ThoriumRush', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}});
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;

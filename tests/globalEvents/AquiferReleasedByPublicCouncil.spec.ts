@@ -16,7 +16,7 @@ describe('AquiferReleasedByPublicCouncil', () => {
 
   beforeEach(() => {
     card = new AquiferReleasedByPublicCouncil();
-    [game, player, opponent] = testGame(2, {turmoilExtension: true});
+    [game, player, opponent] = testGame(2, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
   });
 
@@ -37,7 +37,7 @@ describe('AquiferReleasedByPublicCouncil', () => {
 
   it('Compatible with Whales', () => {
     const card = new AquiferReleasedByPublicCouncil();
-    const [game, player, opponent] = testGame(2, {turmoilExtension: true});
+    const [game, player, opponent] = testGame(2, {expansions: {turmoil: true}});
     const whales = new Whales();
     player.playedCards.push(whales);
 

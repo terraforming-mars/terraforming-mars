@@ -40,7 +40,7 @@ describe('Plantation', () => {
 
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
 
       // Card requirement
       player.tagsForTest = {science: 2};

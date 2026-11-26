@@ -141,7 +141,7 @@ describe('ServerModel', () => {
   });
 
   it('reports the sizes of the decks in the game', () => {
-    [game] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    [game] = testGame(2, {expansions: {prelude: true, turmoil: true}});
     game.preludeDeck.discardPile.push(...game.preludeDeck.drawPile.splice(0, 1));
 
     const model = Server.getGameModel(game).otherDeckSizes;

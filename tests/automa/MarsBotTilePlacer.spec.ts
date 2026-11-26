@@ -380,7 +380,7 @@ describe('MarsBotTilePlacer', () => {
     {
       // 28 has the delegate icon, 60 has no icons. Both are on the edge.
       rule: 'Vastitas Borealis: with Turmoil the delegate hex counts a reward icon',
-      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, expansions: {turmoil: true}},
       loser: '60',
       expected: '28',
     },
@@ -637,7 +637,7 @@ describe('MarsBotTilePlacer', () => {
     },
     {
       rule: 'Viking: gives 1 M€ for its delegate icon with Turmoil',
-      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true},
+      options: {boardName: BoardName.VASTITAS_BOREALIS_NOVA, expansions: {turmoil: true}},
       hex: '28',
       bot: {megacredits: 3},
       expected: {

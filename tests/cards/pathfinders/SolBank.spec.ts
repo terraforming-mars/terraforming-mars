@@ -27,7 +27,7 @@ describe('SolBank', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {coloniesExtension: true, turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {colonies: true, turmoil: true}});
     solBank = new SolBank();
     player.playCorporationCard(solBank);
     player.megaCredits = 100;

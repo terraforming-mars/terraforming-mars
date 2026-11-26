@@ -31,7 +31,7 @@ describe('AtmosphericEnhancers', () => {
   });
 
   it('canPlay, turmoil', () => {
-    const [turmoilGame, turmoilPlayer] = testGame(1, {venusNextExtension: true, turmoilExtension: true});
+    const [turmoilGame, turmoilPlayer] = testGame(1, {expansions: {venus: true, turmoil: true}});
     turmoilPlayer.megaCredits = 5;
 
     expect(card.canPlay(turmoilPlayer)).is.true;

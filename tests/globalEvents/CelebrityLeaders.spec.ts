@@ -9,7 +9,7 @@ import {ImportedHydrogen} from '../../src/server/cards/base/ImportedHydrogen';
 describe('CelebrityLeaders', () => {
   it('resolve play', () => {
     const card = new CelebrityLeaders();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.playedCards.push(new Virus());
     player2.playedCards.push(new IceAsteroid());

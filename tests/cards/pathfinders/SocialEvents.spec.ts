@@ -19,7 +19,7 @@ describe('SocialEvents', () => {
 
   beforeEach(() => {
     card = new SocialEvents();
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     turmoil = Turmoil.getTurmoil(game);
     turmoil.rulingParty = new Greens();
     game.phase = Phase.ACTION;

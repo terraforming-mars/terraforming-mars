@@ -19,7 +19,7 @@ describe('Scientists', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each science tag you have', () => {

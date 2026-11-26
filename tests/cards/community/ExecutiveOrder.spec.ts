@@ -16,7 +16,7 @@ describe('ExecutiveOrder', () => {
 
   beforeEach(() => {
     card = new ExecutiveOrder();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Should play', () => {

@@ -17,7 +17,7 @@ describe('Voltagon', () => {
 
   beforeEach(() => {
     card = new Voltagon();
-    [game, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {venus: true, underworld: true}});
   });
 
   it('play', () => {

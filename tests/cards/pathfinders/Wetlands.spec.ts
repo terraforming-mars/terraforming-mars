@@ -184,7 +184,7 @@ describe('Wetlands', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {turmoil: true}});
 
     // Card requirements
     player.plants = 4;

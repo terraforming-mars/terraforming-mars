@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('SeptumTribus', () => {
   it('Should play', () => {
     const card = new SeptumTribus();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     card.play(player);
 
     player.playedCards.push(card);

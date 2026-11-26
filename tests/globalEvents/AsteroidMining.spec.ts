@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('AsteroidMining (global event)', () => {
   it('resolve play', () => {
     const card = new AsteroidMining();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {jovian: 1};
     player2.tagsForTest = {jovian: 2};
@@ -24,7 +24,7 @@ describe('AsteroidMining (global event)', () => {
 
   it('counts Delta Project extra Jovian tags', () => {
     const card = new AsteroidMining();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     player.tagsForTest = {jovian: 1};
     player.tags.extraJovianTags = 1;
 

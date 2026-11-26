@@ -19,7 +19,7 @@ describe('DeclareCloneTag', () => {
   let tag: Tag;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true, venus: true}});
     card = new LobbyHalls();
   });
 
@@ -50,7 +50,7 @@ describe('DeclareCloneTag', () => {
   });
 
   it('clone tag with expansions', () => {
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true, pathfindersExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true, moon: true, pathfinders: true}});
 
     const action = new DeclareCloneTag(player, card).andThen((t) => tag = t);
 

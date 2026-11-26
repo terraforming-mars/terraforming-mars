@@ -78,7 +78,7 @@ describe('MoonRoadStandardProject', () => {
 
 
   it('can act when Reds are in power', () => {
-    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}});
     const moonData = MoonExpansion.moonData(game);
 
     // Card requirements

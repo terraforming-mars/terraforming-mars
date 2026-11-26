@@ -8,7 +8,7 @@ import {testGame} from '../TestingUtils';
 describe('JovianTaxRights', () => {
   it('resolve play', () => {
     const card = new JovianTaxRights();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     const colony1 = new Luna();
     const colony2 = new Triton();
@@ -32,7 +32,7 @@ describe('JovianTaxRights', () => {
 
   it('counts two colonies on the same tile', () => {
     const card = new JovianTaxRights();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const colony = new Luna();
     colony.colonies.push(player.id, player.id);
     game.colonies.push(colony);

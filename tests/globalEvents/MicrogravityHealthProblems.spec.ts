@@ -8,7 +8,7 @@ import {testGame} from '../TestingUtils';
 describe('MicrogravityHealthProblems', () => {
   it('resolve play', () => {
     const card = new MicrogravityHealthProblems();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     const colony1 = new Luna();
     const colony2 = new Triton();

@@ -13,7 +13,7 @@ describe('MudSlides', () => {
 
   beforeEach(() => {
     card = new MudSlides();
-    [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true, ares: true}});
   });
 
   it('resolve play', () => {
@@ -28,7 +28,7 @@ describe('MudSlides', () => {
   });
 
   it('resolve play with overplaced tiles', () => {
-    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}});
 
     // Find two adjacent ocean spaces
     function adjacentOceans(): {first: Space, second: Space} {

@@ -32,7 +32,7 @@ describe('Ironworks', () => {
   });
 
   it('acts appropriately when reds are in power and player has no money', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     setRulingParty(game, PartyName.REDS);
     player.energy = 4;
     player.megaCredits = 3;

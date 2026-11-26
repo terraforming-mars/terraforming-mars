@@ -58,7 +58,7 @@ describe('DarksideMiningSyndicate', () => {
 
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true, moon: true}});
       game.moonData!.miningRate = run.miningRate;
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
     });

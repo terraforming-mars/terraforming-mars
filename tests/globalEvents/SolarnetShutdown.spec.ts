@@ -10,7 +10,7 @@ import {AICentral} from '../../src/server/cards/base/AICentral';
 describe('SolarnetShutdown', () => {
   it('resolve play', () => {
     const card = new SolarnetShutdown();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.playedCards.push(new InventorsGuild(), new ColonizerTrainingCamp());
     player2.playedCards.push(new InventorsGuild(), new Tardigrades(), new AICentral());

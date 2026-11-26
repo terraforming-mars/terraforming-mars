@@ -15,7 +15,7 @@ describe('AirScrappingStandardProjectVariant', () => {
 
   beforeEach(() => {
     card = new AirScrappingStandardProjectVariant();
-    [game, player] = testGame(1, {venusNextExtension: true, altVenusBoard: true, turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true, turmoil: true}, altVenusBoard: true});
   });
 
   it('option not available for regular board', () => {

@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('Recruitment', () => {
   it('Should play', () => {
     const card = new Recruitment();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     game.turmoil!.parties.forEach((party) => {
       party.delegates.clear();

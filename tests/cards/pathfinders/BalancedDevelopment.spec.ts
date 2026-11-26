@@ -5,7 +5,7 @@ import {testGame} from '../../TestingUtils';
 describe('BalancedDevelopment', () => {
   it('resolve play', () => {
     const card = new BalancedDevelopment();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     turmoil.initGlobalEvent(game);

@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('ElectionSponsorship', () => {
   it('play', () => {
     const card = new ElectionSponsorship();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = Turmoil.getTurmoil(game);
 
     expect(player.underworldData.corruption).eq(0);
@@ -36,7 +36,7 @@ describe('ElectionSponsorship', () => {
 
   it('effect', () => {
     const card = new ElectionSponsorship();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = Turmoil.getTurmoil(game);
 
     card.play(player);

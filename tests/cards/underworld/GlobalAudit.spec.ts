@@ -40,7 +40,7 @@ describe('GlobalAudit', () => {
   ] as const) {
     it('Should play - reds' + JSON.stringify(run), () => {
       const card = new GlobalAudit();
-      const [game, player, player2] = testGame(2, {turmoilExtension: true});
+      const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
       setRulingParty(game, PartyName.REDS);
 
@@ -59,7 +59,7 @@ describe('GlobalAudit', () => {
 
   it('logs when a player gains less TR than entitled - reds, 3 MC', () => {
     const card = new GlobalAudit();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     setRulingParty(game, PartyName.REDS);
 
@@ -78,7 +78,7 @@ describe('GlobalAudit', () => {
 
   it('logs when a player gains less TR than entitled - reds, Helion with 2 heat + 2 MC', () => {
     const card = new GlobalAudit();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     setRulingParty(game, PartyName.REDS);
 

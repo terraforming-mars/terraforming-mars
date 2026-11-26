@@ -28,7 +28,7 @@ describe('ProtectedValley', () => {
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const card = new ProtectedValley();
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
 
       setOxygenLevel(game, run.oxygen);
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);

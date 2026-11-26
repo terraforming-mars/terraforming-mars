@@ -32,7 +32,7 @@ describe('RegolithEaters', () => {
 
   it('Cannot act with reds, 2MC', () => {
     const card = new RegolithEaters();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
 
     setRulingParty(game, PartyName.REDS);
 
@@ -47,7 +47,7 @@ describe('RegolithEaters', () => {
 
   it('Can act with reds, 3MC', () => {
     const card = new RegolithEaters();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
 
     setRulingParty(game, PartyName.REDS);
 

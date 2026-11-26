@@ -19,7 +19,7 @@ describe('Lobbyist', () => {
   let reds: IParty;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
     milestone = new Lobbyist();
     scientists = turmoil.getPartyByName(PartyName.SCIENTISTS)!;
@@ -63,7 +63,7 @@ describe('Lobbyist', () => {
   });
 
   it('Gives 0 score without Turmoil', () => {
-    const [/* game */, player] = testGame(1, {turmoilExtension: false});
+    const [/* game */, player] = testGame(1, {expansions: {turmoil: false}});
     expect(milestone.getScore(player)).to.eq(0);
   });
 

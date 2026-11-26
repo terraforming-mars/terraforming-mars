@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('SponsoringNation', () => {
   it('canPlay', () => {
     const card = new SponsoringNation();
-    const [/* game */, player] = testGame(1, {turmoilExtension: true});
+    const [/* game */, player] = testGame(1, {expansions: {turmoil: true}});
 
     player.tagsForTest = {earth: 3};
 
@@ -21,7 +21,7 @@ describe('SponsoringNation', () => {
 
   it('play', () => {
     const card = new SponsoringNation();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     expect(player.terraformRating).eq(14);
 

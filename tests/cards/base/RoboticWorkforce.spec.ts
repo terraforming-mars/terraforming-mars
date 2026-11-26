@@ -383,7 +383,7 @@ describe('RoboticWorkforce', () => {
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Create new players, set all productions to 2
-        [game, player, player2] = testGame(2, {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true, underworldExpansion: true});
+        [game, player, player2] = testGame(2, {expansions: {turmoil: true, ares: true, moon: true, underworld: true}, aresHazards: false});
 
         player.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
         player2.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});

@@ -7,7 +7,7 @@ import {testGame} from '../../TestGame';
 describe('VoteOfNoConfidence', () => {
   it('Should play', () => {
     const card = new VoteOfNoConfidence();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     expect(card.canPlay(player)).is.not.true;
 
@@ -26,7 +26,7 @@ describe('VoteOfNoConfidence', () => {
 
   it('Neutral Delegate returns to Reserve', () => {
     const card = new VoteOfNoConfidence();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     const neutralReserve = turmoil.delegateReserve.get('NEUTRAL');
     turmoil.chairman = 'NEUTRAL';
@@ -39,7 +39,7 @@ describe('VoteOfNoConfidence', () => {
 
   it('canPlay when Reds are in power', () => {
     const card = new VoteOfNoConfidence();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     // Card requirements

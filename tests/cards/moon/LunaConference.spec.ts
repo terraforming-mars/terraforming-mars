@@ -16,7 +16,7 @@ describe('LunaConference', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(2, {moonExpansion: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {moon: true, turmoil: true}});
     card = new LunaConference();
     moonData = MoonExpansion.moonData(game);
   });

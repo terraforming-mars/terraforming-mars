@@ -19,7 +19,7 @@ describe('TempestConsultancy', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    [game, player/* , otherPlayer */] = testGame(2, {turmoilExtension: true});
+    [game, player/* , otherPlayer */] = testGame(2, {expansions: {turmoil: true}});
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });

@@ -15,7 +15,7 @@ describe('LaggingRegulation', () => {
 
   beforeEach(() => {
     card = new LaggingRegulation();
-    [game, player1, player2, player3] = testGame(3, {turmoilExtension: true});
+    [game, player1, player2, player3] = testGame(3, {expansions: {turmoil: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 

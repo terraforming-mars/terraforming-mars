@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('CloudVortexOutpost', () => {
   it('play', () => {
     const card = new CloudVortexOutpost();
-    const [game, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {venus: true, underworld: true}});
 
     expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
@@ -24,7 +24,7 @@ describe('CloudVortexOutpost', () => {
   it('Can not move floater if it is empty', () => {
     const card = new CloudVortexOutpost();
     const floaterHost = new Dirigibles();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true, underworld: true}});
     card.play(player);
     player.playCard(floaterHost);
     card.resourceCount = 0;
@@ -33,14 +33,14 @@ describe('CloudVortexOutpost', () => {
 
   it('Can not move floater if there is no other floater card', () => {
     const card = new CloudVortexOutpost();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true, underworld: true}});
     card.play(player);
     expect(card.canAct(player)).is.false;
   });
 
   it('Move floater', () => {
     const card = new CloudVortexOutpost();
-    const [game, player] = testGame(1, {venusNextExtension: true, underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {venus: true, underworld: true}});
     const floaterHost = new Dirigibles();
 
     player.playedCards.push(floaterHost);

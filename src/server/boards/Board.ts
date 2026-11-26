@@ -2,7 +2,6 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
@@ -378,9 +377,7 @@ export abstract class Board {
     const space: Space = {
       id: serialized.id,
       spaceType: serialized.spaceType,
-      // TODO(kberg): Remove after 2026-12-01
-      // _TEMPERATURE_3MC was merged into TEMPERATURE_4MC.
-      bonus: serialized.bonus.map((b) => b === SpaceBonus._TEMPERATURE_3MC ? SpaceBonus.TEMPERATURE_4MC : b),
+      bonus: serialized.bonus,
       edge: serialized.edge ?? false,
       x: serialized.x,
       y: serialized.y,

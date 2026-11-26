@@ -8,6 +8,8 @@ import {BoardName} from '../../../src/common/boards/BoardName';
 import {assertPlaceGreenery, assertPlaceOcean} from '../../assertions';
 import {cast} from '../../../src/common/utils/utils';
 import {Phase} from '../../../src/common/Phase';
+import {TileType} from '@/common/TileType';
+import {CardName} from '@/common/cards/CardName';
 
 describe('PolderTechDutch', () => {
   it('Initial action', () => {
@@ -112,5 +114,23 @@ describe('PolderTechDutch', () => {
 
     expect(player.plants).eq(1);
     expect(player2.plants).eq(0);
+  });
+
+  it('Initial action - wins over Red City', () => {
+    const card = new PolderTechDutch();
+    const [game, player, player2] = testGame(2);
+    game.simpleAddTile(player2, game.board.getSpaceOrThrow('10'), {tileType: TileType.RED_CITY, card: CardName.RED_CITY});
+
+    card.initialAction(player);
+    runAllActions(game);
+
+    const oceanSpace = assertPlaceOcean(player, player.popWaitingFor());
+    expect(oceanSpace.id).eq('04');
+
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace.spaces.map((space) => space.id)).to.have.members(['03', '05', '09']);
   });
 });

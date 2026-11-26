@@ -37,7 +37,7 @@ import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Tag} from '../src/common/cards/Tag';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
-import {Spacefarer} from '../src/server/milestones/terraCimmeria/Spacefarer';
+import {Spacefarer} from '@/server/milestones/modular/Spacefarer';
 import {Suburbian} from '../src/server/awards/modular/Suburbian';
 import {SpaceName} from '../src/common/boards/SpaceName';
 import {SpaceType} from '../src/common/boards/SpaceType';
@@ -1118,16 +1118,16 @@ describe('Game', () => {
     });
 
     const serialized = game.serialize();
-    expect(serialized.milestones[0]).eq('T. Spacefarer');
-    expect(serialized.claimedMilestones[0].name).eq('T. Spacefarer');
+    expect(serialized.milestones[0]).eq('Spacefarer');
+    expect(serialized.claimedMilestones[0].name).eq('Spacefarer');
 
-    Reflect.set(serialized.milestones, 0, 'Spacefarer');
-    Reflect.set(serialized.claimedMilestones[0], 'name', 'Spacefarer');
+    Reflect.set(serialized.milestones, 0, 'Spacefarer4');
+    Reflect.set(serialized.claimedMilestones[0], 'name', 'Spacefarer4');
 
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones[0]).deep.eq(spacefarer);
     expect(deserialized.claimedMilestones).has.length(1);
-    expect(deserialized.claimedMilestones[0].milestone.name).eq('T. Spacefarer');
+    expect(deserialized.claimedMilestones[0].milestone.name).eq('Spacefarer');
     expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
   });
 

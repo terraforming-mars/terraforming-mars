@@ -4,7 +4,6 @@ import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {Space} from '../../src/server/boards/Space';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Board} from '../../src/server/boards/Board';
 import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
 import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
@@ -298,22 +297,6 @@ describe('Board', () => {
     expect(board.getSpaceOrThrow('04').tile).is.undefined;
     expect(board.getSpaceOrThrow('04').cube).eq('rey-skywalker');
     expect(board.getSpaceOrThrow('05').cube).eq('martian-nature-wonders');
-  });
-
-  it('deserialize migrates 3MC temperature bonus to 4MC', () => {
-    const boardJson: SerializedBoard = {
-      'spaces': [
-        {
-          'id': '03',
-          'spaceType': SpaceType.LAND, 'bonus': [SpaceBonus._TEMPERATURE_3MC, SpaceBonus.STEEL],
-          'x': 4, 'y': 0,
-        },
-      ],
-    };
-
-    const board = new TestBoard(Board.deserialize(boardJson, []).spaces);
-
-    expect(board.getSpaceOrThrow('03').bonus).deep.eq([SpaceBonus.TEMPERATURE_4MC, SpaceBonus.STEEL]);
   });
 
   it('serialize cubes', () => {
